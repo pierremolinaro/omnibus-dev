@@ -3,18 +3,18 @@
 #include "galgas2/C_galgas_CLI_Options.h"
 #include "utilities/C_PrologueEpilogue.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 #include "all-declarations-5.h"
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy::GALGAS_unifiedTypeMap_2D_proxy (void) :
 AC_GALGAS_uniqueMapProxy () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::constructor_null (LOCATION_ARGS) {
   GALGAS_unifiedTypeMap_2D_proxy result ;
@@ -22,7 +22,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::constructor_null 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (GALGAS_unifiedTypeMap & ioMap,
                                                              GALGAS_lstring inKey,
@@ -31,7 +31,7 @@ void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (GALGAS_unifiedTypeM
   outProxy.internalMakeProxy (ioMap, inKey COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxyFromString (GALGAS_unifiedTypeMap & ioMap,
                                                                        GALGAS_string inKey,
@@ -40,7 +40,7 @@ void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxyFromString (GALGAS_un
   outProxy.internalMakeProxyFromString (ioMap, inKey COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string GALGAS_unifiedTypeMap_2D_proxy::getter_llvmTypeName (C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) const {
@@ -53,7 +53,7 @@ GALGAS_string GALGAS_unifiedTypeMap_2D_proxy::getter_llvmTypeName (C_Compiler * 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_unifiedTypeMap_2D_proxy::getter_kind (C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) const {
@@ -66,7 +66,7 @@ GALGAS_typeKind GALGAS_unifiedTypeMap_2D_proxy::getter_kind (C_Compiler * inComp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_classMethodMap GALGAS_unifiedTypeMap_2D_proxy::getter_classMethodMap (C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) const {
@@ -79,7 +79,7 @@ GALGAS_classMethodMap GALGAS_unifiedTypeMap_2D_proxy::getter_classMethodMap (C_C
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_unifiedTypeMap_2D_proxy::getter_instantiable (C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) const {
@@ -92,7 +92,7 @@ GALGAS_bool GALGAS_unifiedTypeMap_2D_proxy::getter_instantiable (C_Compiler * in
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_unifiedTypeMap_2D_proxy::getter_copyable (C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) const {
@@ -105,7 +105,7 @@ GALGAS_bool GALGAS_unifiedTypeMap_2D_proxy::getter_copyable (C_Compiler * inComp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_unifiedTypeMap_2D_proxy::getter_equatable (C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const {
@@ -118,7 +118,7 @@ GALGAS_bool GALGAS_unifiedTypeMap_2D_proxy::getter_equatable (C_Compiler * inCom
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_unifiedTypeMap_2D_proxy::getter_comparable (C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) const {
@@ -131,7 +131,7 @@ GALGAS_bool GALGAS_unifiedTypeMap_2D_proxy::getter_comparable (C_Compiler * inCo
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::getter_enumerationType (C_Compiler * inCompiler
                                                                                        COMMA_LOCATION_ARGS) const {
@@ -144,7 +144,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::getter_enumeratio
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (const GALGAS_unifiedTypeMap & inMap,
                                                                                       const GALGAS_lstring & inKey,
@@ -156,23 +156,23 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::constructor_searc
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             @unifiedTypeMap-proxy type                                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy ("unifiedTypeMap-proxy",
                                                 NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_unifiedTypeMap_2D_proxy::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_unifiedTypeMap_2D_proxy::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -182,7 +182,7 @@ AC_GALGAS_root * GALGAS_unifiedTypeMap_2D_proxy::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::extractObject (const GALGAS_object & inObject,
                                                                               C_Compiler * inCompiler
@@ -199,7 +199,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::extractObject (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_controlRegisterBitSlice_unusedBits::cEnumAssociatedValues_controlRegisterBitSlice_unusedBits (const GALGAS_lbigint & inAssociatedValue0
                                                                                                                     COMMA_LOCATION_ARGS) :
@@ -207,7 +207,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_controlRegisterBitSlice_unusedBits::description (C_String & ioString,
                                                                             const int32_t inIndentation) const {
@@ -216,7 +216,7 @@ void cEnumAssociatedValues_controlRegisterBitSlice_unusedBits::description (C_St
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_controlRegisterBitSlice_unusedBits::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits * ptr = dynamic_cast<const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits *> (inOperand) ;
@@ -228,7 +228,7 @@ typeComparisonResult cEnumAssociatedValues_controlRegisterBitSlice_unusedBits::c
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_controlRegisterBitSlice_namedBit::cEnumAssociatedValues_controlRegisterBitSlice_namedBit (const GALGAS_lstring & inAssociatedValue0,
                                                                                                                 const GALGAS_lbigint & inAssociatedValue1
@@ -238,7 +238,7 @@ mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_controlRegisterBitSlice_namedBit::description (C_String & ioString,
                                                                           const int32_t inIndentation) const {
@@ -248,7 +248,7 @@ void cEnumAssociatedValues_controlRegisterBitSlice_namedBit::description (C_Stri
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_controlRegisterBitSlice_namedBit::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_controlRegisterBitSlice_namedBit * ptr = dynamic_cast<const cEnumAssociatedValues_controlRegisterBitSlice_namedBit *> (inOperand) ;
@@ -263,14 +263,14 @@ typeComparisonResult cEnumAssociatedValues_controlRegisterBitSlice_namedBit::com
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSlice::GALGAS_controlRegisterBitSlice (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::constructor_unusedBits (const GALGAS_lbigint & inAssociatedValue0
                                                                                        COMMA_LOCATION_ARGS) {
@@ -285,7 +285,7 @@ GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::constructor_unuse
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::constructor_namedBit (const GALGAS_lstring & inAssociatedValue0,
                                                                                      const GALGAS_lbigint & inAssociatedValue1
@@ -301,7 +301,7 @@ GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::constructor_named
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSlice::method_unusedBits (GALGAS_lbigint & outAssociatedValue0,
                                                         C_Compiler * inCompiler
@@ -317,7 +317,7 @@ void GALGAS_controlRegisterBitSlice::method_unusedBits (GALGAS_lbigint & outAsso
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSlice::method_namedBit (GALGAS_lstring & outAssociatedValue0,
                                                       GALGAS_lbigint & outAssociatedValue1,
@@ -336,7 +336,7 @@ void GALGAS_controlRegisterBitSlice::method_namedBit (GALGAS_lstring & outAssoci
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_controlRegisterBitSlice [3] = {
   "(not built)",
@@ -344,19 +344,19 @@ static const char * gEnumNameArrayFor_controlRegisterBitSlice [3] = {
   "namedBit"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_controlRegisterBitSlice::getter_isUnusedBits (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_unusedBits == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_controlRegisterBitSlice::getter_isNamedBit (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_namedBit == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSlice::description (C_String & ioString,
                                                   const int32_t inIndentation) const {
@@ -365,7 +365,7 @@ void GALGAS_controlRegisterBitSlice::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_controlRegisterBitSlice::objectCompare (const GALGAS_controlRegisterBitSlice & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -381,23 +381,23 @@ typeComparisonResult GALGAS_controlRegisterBitSlice::objectCompare (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            @controlRegisterBitSlice type                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterBitSlice ("controlRegisterBitSlice",
                                                 NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_controlRegisterBitSlice::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_controlRegisterBitSlice ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_controlRegisterBitSlice::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -407,7 +407,7 @@ AC_GALGAS_root * GALGAS_controlRegisterBitSlice::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::extractObject (const GALGAS_object & inObject,
                                                                               C_Compiler * inCompiler
@@ -424,7 +424,7 @@ GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::extractObject (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard::cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard (const GALGAS_allocaList & inAssociatedValue0,
                                                                                                                             const GALGAS_instructionListIR & inAssociatedValue1,
@@ -438,7 +438,7 @@ mAssociatedValue2 (inAssociatedValue2),
 mAssociatedValue3 (inAssociatedValue3) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard::description (C_String & ioString,
                                                                                 const int32_t inIndentation) const {
@@ -450,7 +450,7 @@ void cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard::description (
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * ptr = dynamic_cast<const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *> (inOperand) ;
@@ -471,14 +471,14 @@ typeComparisonResult cEnumAssociatedValues_guardKindGenerationIR_convenienceGuar
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardKindGenerationIR::GALGAS_guardKindGenerationIR (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardKindGenerationIR GALGAS_guardKindGenerationIR::constructor_baseGuard (UNUSED_LOCATION_ARGS) {
   GALGAS_guardKindGenerationIR result ;
@@ -486,7 +486,7 @@ GALGAS_guardKindGenerationIR GALGAS_guardKindGenerationIR::constructor_baseGuard
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardKindGenerationIR GALGAS_guardKindGenerationIR::constructor_convenienceGuard (const GALGAS_allocaList & inAssociatedValue0,
                                                                                          const GALGAS_instructionListIR & inAssociatedValue1,
@@ -504,7 +504,7 @@ GALGAS_guardKindGenerationIR GALGAS_guardKindGenerationIR::constructor_convenien
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardKindGenerationIR::method_convenienceGuard (GALGAS_allocaList & outAssociatedValue0,
                                                             GALGAS_instructionListIR & outAssociatedValue1,
@@ -529,7 +529,7 @@ void GALGAS_guardKindGenerationIR::method_convenienceGuard (GALGAS_allocaList & 
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_guardKindGenerationIR [3] = {
   "(not built)",
@@ -537,19 +537,19 @@ static const char * gEnumNameArrayFor_guardKindGenerationIR [3] = {
   "convenienceGuard"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_guardKindGenerationIR::getter_isBaseGuard (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_baseGuard == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_guardKindGenerationIR::getter_isConvenienceGuard (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_convenienceGuard == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardKindGenerationIR::description (C_String & ioString,
                                                 const int32_t inIndentation) const {
@@ -558,7 +558,7 @@ void GALGAS_guardKindGenerationIR::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_guardKindGenerationIR::objectCompare (const GALGAS_guardKindGenerationIR & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -574,23 +574,23 @@ typeComparisonResult GALGAS_guardKindGenerationIR::objectCompare (const GALGAS_g
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             @guardKindGenerationIR type                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_guardKindGenerationIR ("guardKindGenerationIR",
                                               NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_guardKindGenerationIR::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_guardKindGenerationIR ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_guardKindGenerationIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -600,7 +600,7 @@ AC_GALGAS_root * GALGAS_guardKindGenerationIR::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardKindGenerationIR GALGAS_guardKindGenerationIR::extractObject (const GALGAS_object & inObject,
                                                                           C_Compiler * inCompiler
@@ -617,7 +617,7 @@ GALGAS_guardKindGenerationIR GALGAS_guardKindGenerationIR::extractObject (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_guardedCommand_synchronization::cEnumAssociatedValues_guardedCommand_synchronization (const GALGAS_bool & inAssociatedValue0,
                                                                                                             const GALGAS_lstring & inAssociatedValue1,
@@ -631,7 +631,7 @@ mAssociatedValue2 (inAssociatedValue2),
 mAssociatedValue3 (inAssociatedValue3) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_guardedCommand_synchronization::description (C_String & ioString,
                                                                         const int32_t inIndentation) const {
@@ -643,7 +643,7 @@ void cEnumAssociatedValues_guardedCommand_synchronization::description (C_String
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_guardedCommand_synchronization::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_guardedCommand_synchronization * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommand_synchronization *> (inOperand) ;
@@ -664,7 +664,7 @@ typeComparisonResult cEnumAssociatedValues_guardedCommand_synchronization::compa
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_guardedCommand_boolean::cEnumAssociatedValues_guardedCommand_boolean (const GALGAS_bool & inAssociatedValue0,
                                                                                             const GALGAS_expressionAST & inAssociatedValue1,
@@ -676,7 +676,7 @@ mAssociatedValue1 (inAssociatedValue1),
 mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_guardedCommand_boolean::description (C_String & ioString,
                                                                 const int32_t inIndentation) const {
@@ -687,7 +687,7 @@ void cEnumAssociatedValues_guardedCommand_boolean::description (C_String & ioStr
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_guardedCommand_boolean::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_guardedCommand_boolean * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommand_boolean *> (inOperand) ;
@@ -705,7 +705,7 @@ typeComparisonResult cEnumAssociatedValues_guardedCommand_boolean::compare (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_guardedCommand_boolAndSync::cEnumAssociatedValues_guardedCommand_boolAndSync (const GALGAS_bool & inAssociatedValue0,
                                                                                                     const GALGAS_expressionAST & inAssociatedValue1,
@@ -723,7 +723,7 @@ mAssociatedValue4 (inAssociatedValue4),
 mAssociatedValue5 (inAssociatedValue5) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_guardedCommand_boolAndSync::description (C_String & ioString,
                                                                     const int32_t inIndentation) const {
@@ -737,7 +737,7 @@ void cEnumAssociatedValues_guardedCommand_boolAndSync::description (C_String & i
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_guardedCommand_boolAndSync::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_guardedCommand_boolAndSync * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommand_boolAndSync *> (inOperand) ;
@@ -764,14 +764,14 @@ typeComparisonResult cEnumAssociatedValues_guardedCommand_boolAndSync::compare (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommand::GALGAS_guardedCommand (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommand GALGAS_guardedCommand::constructor_synchronization (const GALGAS_bool & inAssociatedValue0,
                                                                           const GALGAS_lstring & inAssociatedValue1,
@@ -789,7 +789,7 @@ GALGAS_guardedCommand GALGAS_guardedCommand::constructor_synchronization (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommand GALGAS_guardedCommand::constructor_boolean (const GALGAS_bool & inAssociatedValue0,
                                                                   const GALGAS_expressionAST & inAssociatedValue1,
@@ -806,7 +806,7 @@ GALGAS_guardedCommand GALGAS_guardedCommand::constructor_boolean (const GALGAS_b
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommand GALGAS_guardedCommand::constructor_boolAndSync (const GALGAS_bool & inAssociatedValue0,
                                                                       const GALGAS_expressionAST & inAssociatedValue1,
@@ -826,7 +826,7 @@ GALGAS_guardedCommand GALGAS_guardedCommand::constructor_boolAndSync (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardedCommand::method_synchronization (GALGAS_bool & outAssociatedValue0,
                                                     GALGAS_lstring & outAssociatedValue1,
@@ -851,7 +851,7 @@ void GALGAS_guardedCommand::method_synchronization (GALGAS_bool & outAssociatedV
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardedCommand::method_boolean (GALGAS_bool & outAssociatedValue0,
                                             GALGAS_expressionAST & outAssociatedValue1,
@@ -873,7 +873,7 @@ void GALGAS_guardedCommand::method_boolean (GALGAS_bool & outAssociatedValue0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardedCommand::method_boolAndSync (GALGAS_bool & outAssociatedValue0,
                                                 GALGAS_expressionAST & outAssociatedValue1,
@@ -904,7 +904,7 @@ void GALGAS_guardedCommand::method_boolAndSync (GALGAS_bool & outAssociatedValue
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_guardedCommand [4] = {
   "(not built)",
@@ -913,25 +913,25 @@ static const char * gEnumNameArrayFor_guardedCommand [4] = {
   "boolAndSync"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_guardedCommand::getter_isSynchronization (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_synchronization == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_guardedCommand::getter_isBoolean (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_boolean == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_guardedCommand::getter_isBoolAndSync (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_boolAndSync == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardedCommand::description (C_String & ioString,
                                          const int32_t inIndentation) const {
@@ -940,7 +940,7 @@ void GALGAS_guardedCommand::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_guardedCommand::objectCompare (const GALGAS_guardedCommand & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -956,23 +956,23 @@ typeComparisonResult GALGAS_guardedCommand::objectCompare (const GALGAS_guardedC
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                @guardedCommand type                                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_guardedCommand ("guardedCommand",
                                        NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_guardedCommand::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_guardedCommand ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_guardedCommand::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -982,7 +982,7 @@ AC_GALGAS_root * GALGAS_guardedCommand::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommand GALGAS_guardedCommand::extractObject (const GALGAS_object & inObject,
                                                             C_Compiler * inCompiler
@@ -999,7 +999,7 @@ GALGAS_guardedCommand GALGAS_guardedCommand::extractObject (const GALGAS_object 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_guardedCommandIR_synchronization::cEnumAssociatedValues_guardedCommandIR_synchronization (const GALGAS_bool & inAssociatedValue0,
                                                                                                                 const GALGAS_string & inAssociatedValue1,
@@ -1015,7 +1015,7 @@ mAssociatedValue3 (inAssociatedValue3),
 mAssociatedValue4 (inAssociatedValue4) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_guardedCommandIR_synchronization::description (C_String & ioString,
                                                                           const int32_t inIndentation) const {
@@ -1028,7 +1028,7 @@ void cEnumAssociatedValues_guardedCommandIR_synchronization::description (C_Stri
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_guardedCommandIR_synchronization::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_guardedCommandIR_synchronization * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_synchronization *> (inOperand) ;
@@ -1052,7 +1052,7 @@ typeComparisonResult cEnumAssociatedValues_guardedCommandIR_synchronization::com
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_guardedCommandIR_booleanGuard::cEnumAssociatedValues_guardedCommandIR_booleanGuard (const GALGAS_bool & inAssociatedValue0,
                                                                                                           const GALGAS_instructionListIR & inAssociatedValue1,
@@ -1064,7 +1064,7 @@ mAssociatedValue1 (inAssociatedValue1),
 mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_guardedCommandIR_booleanGuard::description (C_String & ioString,
                                                                        const int32_t inIndentation) const {
@@ -1075,7 +1075,7 @@ void cEnumAssociatedValues_guardedCommandIR_booleanGuard::description (C_String 
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_guardedCommandIR_booleanGuard::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_guardedCommandIR_booleanGuard * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_booleanGuard *> (inOperand) ;
@@ -1093,7 +1093,7 @@ typeComparisonResult cEnumAssociatedValues_guardedCommandIR_booleanGuard::compar
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_guardedCommandIR_boolAndSync::cEnumAssociatedValues_guardedCommandIR_boolAndSync (const GALGAS_bool & inAssociatedValue0,
                                                                                                         const GALGAS_instructionListIR & inAssociatedValue1,
@@ -1113,7 +1113,7 @@ mAssociatedValue5 (inAssociatedValue5),
 mAssociatedValue6 (inAssociatedValue6) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_guardedCommandIR_boolAndSync::description (C_String & ioString,
                                                                       const int32_t inIndentation) const {
@@ -1128,7 +1128,7 @@ void cEnumAssociatedValues_guardedCommandIR_boolAndSync::description (C_String &
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_guardedCommandIR_boolAndSync::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_guardedCommandIR_boolAndSync * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_boolAndSync *> (inOperand) ;
@@ -1158,14 +1158,14 @@ typeComparisonResult cEnumAssociatedValues_guardedCommandIR_boolAndSync::compare
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommandIR::GALGAS_guardedCommandIR (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_synchronization (const GALGAS_bool & inAssociatedValue0,
                                                                               const GALGAS_string & inAssociatedValue1,
@@ -1184,7 +1184,7 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_synchronization (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_booleanGuard (const GALGAS_bool & inAssociatedValue0,
                                                                            const GALGAS_instructionListIR & inAssociatedValue1,
@@ -1201,7 +1201,7 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_booleanGuard (const
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_boolAndSync (const GALGAS_bool & inAssociatedValue0,
                                                                           const GALGAS_instructionListIR & inAssociatedValue1,
@@ -1222,7 +1222,7 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_boolAndSync (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardedCommandIR::method_synchronization (GALGAS_bool & outAssociatedValue0,
                                                       GALGAS_string & outAssociatedValue1,
@@ -1250,7 +1250,7 @@ void GALGAS_guardedCommandIR::method_synchronization (GALGAS_bool & outAssociate
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardedCommandIR::method_booleanGuard (GALGAS_bool & outAssociatedValue0,
                                                    GALGAS_instructionListIR & outAssociatedValue1,
@@ -1272,7 +1272,7 @@ void GALGAS_guardedCommandIR::method_booleanGuard (GALGAS_bool & outAssociatedVa
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedValue0,
                                                   GALGAS_instructionListIR & outAssociatedValue1,
@@ -1306,7 +1306,7 @@ void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedVal
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_guardedCommandIR [4] = {
   "(not built)",
@@ -1315,25 +1315,25 @@ static const char * gEnumNameArrayFor_guardedCommandIR [4] = {
   "boolAndSync"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_guardedCommandIR::getter_isSynchronization (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_synchronization == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_guardedCommandIR::getter_isBooleanGuard (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_booleanGuard == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_guardedCommandIR::getter_isBoolAndSync (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_boolAndSync == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardedCommandIR::description (C_String & ioString,
                                            const int32_t inIndentation) const {
@@ -1342,7 +1342,7 @@ void GALGAS_guardedCommandIR::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_guardedCommandIR::objectCompare (const GALGAS_guardedCommandIR & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -1358,23 +1358,23 @@ typeComparisonResult GALGAS_guardedCommandIR::objectCompare (const GALGAS_guarde
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               @guardedCommandIR type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_guardedCommandIR ("guardedCommandIR",
                                          NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_guardedCommandIR::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_guardedCommandIR ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_guardedCommandIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -1384,7 +1384,7 @@ AC_GALGAS_root * GALGAS_guardedCommandIR::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommandIR GALGAS_guardedCommandIR::extractObject (const GALGAS_object & inObject,
                                                                 C_Compiler * inCompiler
@@ -1401,7 +1401,7 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::extractObject (const GALGAS_obj
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_effectiveParameterPassingModeAST_input::cEnumAssociatedValues_effectiveParameterPassingModeAST_input (const GALGAS_lstring & inAssociatedValue0
                                                                                                                             COMMA_LOCATION_ARGS) :
@@ -1409,7 +1409,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_effectiveParameterPassingModeAST_input::description (C_String & ioString,
                                                                                 const int32_t inIndentation) const {
@@ -1418,7 +1418,7 @@ void cEnumAssociatedValues_effectiveParameterPassingModeAST_input::description (
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_effectiveParameterPassingModeAST_input::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_effectiveParameterPassingModeAST_input * ptr = dynamic_cast<const cEnumAssociatedValues_effectiveParameterPassingModeAST_input *> (inOperand) ;
@@ -1430,7 +1430,7 @@ typeComparisonResult cEnumAssociatedValues_effectiveParameterPassingModeAST_inpu
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType::cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType (const GALGAS_bool & inAssociatedValue0,
                                                                                                                                             const GALGAS_lstring & inAssociatedValue1,
@@ -1442,7 +1442,7 @@ mAssociatedValue1 (inAssociatedValue1),
 mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType::description (C_String & ioString,
                                                                                         const int32_t inIndentation) const {
@@ -1453,7 +1453,7 @@ void cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType::descr
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType * ptr = dynamic_cast<const cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType *> (inOperand) ;
@@ -1471,7 +1471,7 @@ typeComparisonResult cEnumAssociatedValues_effectiveParameterPassingModeAST_inpu
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_effectiveParameterPassingModeAST_output::cEnumAssociatedValues_effectiveParameterPassingModeAST_output (const GALGAS_expressionAST & inAssociatedValue0,
                                                                                                                               const GALGAS_location & inAssociatedValue1
@@ -1481,7 +1481,7 @@ mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_effectiveParameterPassingModeAST_output::description (C_String & ioString,
                                                                                  const int32_t inIndentation) const {
@@ -1491,7 +1491,7 @@ void cEnumAssociatedValues_effectiveParameterPassingModeAST_output::description 
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_effectiveParameterPassingModeAST_output::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_effectiveParameterPassingModeAST_output * ptr = dynamic_cast<const cEnumAssociatedValues_effectiveParameterPassingModeAST_output *> (inOperand) ;
@@ -1506,7 +1506,7 @@ typeComparisonResult cEnumAssociatedValues_effectiveParameterPassingModeAST_outp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput::cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput (const GALGAS_lstring & inAssociatedValue0
                                                                                                                                         COMMA_LOCATION_ARGS) :
@@ -1514,7 +1514,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput::description (C_String & ioString,
                                                                                       const int32_t inIndentation) const {
@@ -1523,7 +1523,7 @@ void cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput::descrip
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput * ptr = dynamic_cast<const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput *> (inOperand) ;
@@ -1535,7 +1535,7 @@ typeComparisonResult cEnumAssociatedValues_effectiveParameterPassingModeAST_outp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable::cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable (const GALGAS_lstring & inAssociatedValue0
                                                                                                                                                                 COMMA_LOCATION_ARGS) :
@@ -1543,7 +1543,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable::description (C_String & ioString,
                                                                                                   const int32_t inIndentation) const {
@@ -1552,7 +1552,7 @@ void cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVaria
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable * ptr = dynamic_cast<const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable *> (inOperand) ;
@@ -1564,14 +1564,14 @@ typeComparisonResult cEnumAssociatedValues_effectiveParameterPassingModeAST_outp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_effectiveParameterPassingModeAST::GALGAS_effectiveParameterPassingModeAST (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST::constructor_input (const GALGAS_lstring & inAssociatedValue0
                                                                                                     COMMA_LOCATION_ARGS) {
@@ -1586,7 +1586,7 @@ GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST::constructor_inputWithType (const GALGAS_bool & inAssociatedValue0,
                                                                                                             const GALGAS_lstring & inAssociatedValue1,
@@ -1603,7 +1603,7 @@ GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST::constructor_output (const GALGAS_expressionAST & inAssociatedValue0,
                                                                                                      const GALGAS_location & inAssociatedValue1
@@ -1619,7 +1619,7 @@ GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST::constructor_outputInput (const GALGAS_lstring & inAssociatedValue0
                                                                                                           COMMA_LOCATION_ARGS) {
@@ -1634,7 +1634,7 @@ GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST::constructor_outputInputSelfVariable (const GALGAS_lstring & inAssociatedValue0
                                                                                                                       COMMA_LOCATION_ARGS) {
@@ -1649,7 +1649,7 @@ GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_effectiveParameterPassingModeAST::method_input (GALGAS_lstring & outAssociatedValue0,
                                                             C_Compiler * inCompiler
@@ -1665,7 +1665,7 @@ void GALGAS_effectiveParameterPassingModeAST::method_input (GALGAS_lstring & out
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_effectiveParameterPassingModeAST::method_inputWithType (GALGAS_bool & outAssociatedValue0,
                                                                     GALGAS_lstring & outAssociatedValue1,
@@ -1687,7 +1687,7 @@ void GALGAS_effectiveParameterPassingModeAST::method_inputWithType (GALGAS_bool 
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_effectiveParameterPassingModeAST::method_output (GALGAS_expressionAST & outAssociatedValue0,
                                                              GALGAS_location & outAssociatedValue1,
@@ -1706,7 +1706,7 @@ void GALGAS_effectiveParameterPassingModeAST::method_output (GALGAS_expressionAS
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_effectiveParameterPassingModeAST::method_outputInput (GALGAS_lstring & outAssociatedValue0,
                                                                   C_Compiler * inCompiler
@@ -1722,7 +1722,7 @@ void GALGAS_effectiveParameterPassingModeAST::method_outputInput (GALGAS_lstring
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_effectiveParameterPassingModeAST::method_outputInputSelfVariable (GALGAS_lstring & outAssociatedValue0,
                                                                               C_Compiler * inCompiler
@@ -1738,7 +1738,7 @@ void GALGAS_effectiveParameterPassingModeAST::method_outputInputSelfVariable (GA
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_effectiveParameterPassingModeAST [6] = {
   "(not built)",
@@ -1749,37 +1749,37 @@ static const char * gEnumNameArrayFor_effectiveParameterPassingModeAST [6] = {
   "outputInputSelfVariable"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_effectiveParameterPassingModeAST::getter_isInput (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_input == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_effectiveParameterPassingModeAST::getter_isInputWithType (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_inputWithType == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_effectiveParameterPassingModeAST::getter_isOutput (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_output == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_effectiveParameterPassingModeAST::getter_isOutputInput (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_outputInput == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_effectiveParameterPassingModeAST::getter_isOutputInputSelfVariable (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_outputInputSelfVariable == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_effectiveParameterPassingModeAST::description (C_String & ioString,
                                                            const int32_t inIndentation) const {
@@ -1788,7 +1788,7 @@ void GALGAS_effectiveParameterPassingModeAST::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_effectiveParameterPassingModeAST::objectCompare (const GALGAS_effectiveParameterPassingModeAST & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -1804,23 +1804,23 @@ typeComparisonResult GALGAS_effectiveParameterPassingModeAST::objectCompare (con
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                       @effectiveParameterPassingModeAST type                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_effectiveParameterPassingModeAST ("effectiveParameterPassingModeAST",
                                                          NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_effectiveParameterPassingModeAST::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_effectiveParameterPassingModeAST ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_effectiveParameterPassingModeAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -1830,7 +1830,7 @@ AC_GALGAS_root * GALGAS_effectiveParameterPassingModeAST::clonedObject (void) co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST::extractObject (const GALGAS_object & inObject,
                                                                                                 C_Compiler * inCompiler
@@ -1847,7 +1847,7 @@ GALGAS_effectiveParameterPassingModeAST GALGAS_effectiveParameterPassingModeAST:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_objectInMemoryIR_register::cEnumAssociatedValues_objectInMemoryIR_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                                                                   const GALGAS_lstring & inAssociatedValue1,
@@ -1861,7 +1861,7 @@ mAssociatedValue2 (inAssociatedValue2),
 mAssociatedValue3 (inAssociatedValue3) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_objectInMemoryIR_register::description (C_String & ioString,
                                                                    const int32_t inIndentation) const {
@@ -1873,7 +1873,7 @@ void cEnumAssociatedValues_objectInMemoryIR_register::description (C_String & io
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_register::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_objectInMemoryIR_register * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_register *> (inOperand) ;
@@ -1894,7 +1894,7 @@ typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_register::compare (c
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_objectInMemoryIR_globalVariable::cEnumAssociatedValues_objectInMemoryIR_globalVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                                                                               const GALGAS_string & inAssociatedValue1,
@@ -1906,7 +1906,7 @@ mAssociatedValue1 (inAssociatedValue1),
 mAssociatedValue2 (inAssociatedValue2) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_objectInMemoryIR_globalVariable::description (C_String & ioString,
                                                                          const int32_t inIndentation) const {
@@ -1917,7 +1917,7 @@ void cEnumAssociatedValues_objectInMemoryIR_globalVariable::description (C_Strin
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_globalVariable::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_objectInMemoryIR_globalVariable * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_globalVariable *> (inOperand) ;
@@ -1935,7 +1935,7 @@ typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_globalVariable::comp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_objectInMemoryIR_localValue::cEnumAssociatedValues_objectInMemoryIR_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                                                                       const GALGAS_string & inAssociatedValue1
@@ -1945,7 +1945,7 @@ mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_objectInMemoryIR_localValue::description (C_String & ioString,
                                                                      const int32_t inIndentation) const {
@@ -1955,7 +1955,7 @@ void cEnumAssociatedValues_objectInMemoryIR_localValue::description (C_String & 
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_localValue::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_objectInMemoryIR_localValue * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_localValue *> (inOperand) ;
@@ -1970,7 +1970,7 @@ typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_localValue::compare 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_objectInMemoryIR_globalConstant::cEnumAssociatedValues_objectInMemoryIR_globalConstant (const GALGAS_operandIR & inAssociatedValue0,
                                                                                                               const GALGAS_string & inAssociatedValue1
@@ -1980,7 +1980,7 @@ mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_objectInMemoryIR_globalConstant::description (C_String & ioString,
                                                                          const int32_t inIndentation) const {
@@ -1990,7 +1990,7 @@ void cEnumAssociatedValues_objectInMemoryIR_globalConstant::description (C_Strin
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_globalConstant::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_objectInMemoryIR_globalConstant * ptr = dynamic_cast<const cEnumAssociatedValues_objectInMemoryIR_globalConstant *> (inOperand) ;
@@ -2005,14 +2005,14 @@ typeComparisonResult cEnumAssociatedValues_objectInMemoryIR_globalConstant::comp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectInMemoryIR::GALGAS_objectInMemoryIR (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                                        const GALGAS_lstring & inAssociatedValue1,
@@ -2030,7 +2030,7 @@ GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_register (const GAL
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_globalVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                                              const GALGAS_string & inAssociatedValue1,
@@ -2047,7 +2047,7 @@ GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_globalVariable (con
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_localValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                                          const GALGAS_string & inAssociatedValue1
@@ -2063,7 +2063,7 @@ GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_localValue (const G
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_globalConstant (const GALGAS_operandIR & inAssociatedValue0,
                                                                              const GALGAS_string & inAssociatedValue1
@@ -2079,7 +2079,7 @@ GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::constructor_globalConstant (con
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_objectInMemoryIR::method_register (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
                                                GALGAS_lstring & outAssociatedValue1,
@@ -2104,7 +2104,7 @@ void GALGAS_objectInMemoryIR::method_register (GALGAS_unifiedTypeMap_2D_proxy & 
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_objectInMemoryIR::method_globalVariable (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
                                                      GALGAS_string & outAssociatedValue1,
@@ -2126,7 +2126,7 @@ void GALGAS_objectInMemoryIR::method_globalVariable (GALGAS_unifiedTypeMap_2D_pr
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_objectInMemoryIR::method_localValue (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
                                                  GALGAS_string & outAssociatedValue1,
@@ -2145,7 +2145,7 @@ void GALGAS_objectInMemoryIR::method_localValue (GALGAS_unifiedTypeMap_2D_proxy 
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_objectInMemoryIR::method_globalConstant (GALGAS_operandIR & outAssociatedValue0,
                                                      GALGAS_string & outAssociatedValue1,
@@ -2164,7 +2164,7 @@ void GALGAS_objectInMemoryIR::method_globalConstant (GALGAS_operandIR & outAssoc
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_objectInMemoryIR [5] = {
   "(not built)",
@@ -2174,31 +2174,31 @@ static const char * gEnumNameArrayFor_objectInMemoryIR [5] = {
   "globalConstant"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_objectInMemoryIR::getter_isRegister (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_register == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_objectInMemoryIR::getter_isGlobalVariable (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalVariable == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_objectInMemoryIR::getter_isLocalValue (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_localValue == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_objectInMemoryIR::getter_isGlobalConstant (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_globalConstant == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_objectInMemoryIR::description (C_String & ioString,
                                            const int32_t inIndentation) const {
@@ -2207,7 +2207,7 @@ void GALGAS_objectInMemoryIR::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_objectInMemoryIR::objectCompare (const GALGAS_objectInMemoryIR & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -2223,23 +2223,23 @@ typeComparisonResult GALGAS_objectInMemoryIR::objectCompare (const GALGAS_object
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               @objectInMemoryIR type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_objectInMemoryIR ("objectInMemoryIR",
                                          NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_objectInMemoryIR::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_objectInMemoryIR ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_objectInMemoryIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -2249,7 +2249,7 @@ AC_GALGAS_root * GALGAS_objectInMemoryIR::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::extractObject (const GALGAS_object & inObject,
                                                                 C_Compiler * inCompiler
@@ -2266,7 +2266,7 @@ GALGAS_objectInMemoryIR GALGAS_objectInMemoryIR::extractObject (const GALGAS_obj
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_typeKind_enumeration::cEnumAssociatedValues_typeKind_enumeration (const GALGAS_enumConstantMap & inAssociatedValue0
                                                                                         COMMA_LOCATION_ARGS) :
@@ -2274,7 +2274,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_typeKind_enumeration::description (C_String & ioString,
                                                               const int32_t inIndentation) const {
@@ -2283,7 +2283,7 @@ void cEnumAssociatedValues_typeKind_enumeration::description (C_String & ioStrin
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_typeKind_enumeration::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_typeKind_enumeration * ptr = dynamic_cast<const cEnumAssociatedValues_typeKind_enumeration *> (inOperand) ;
@@ -2295,7 +2295,7 @@ typeComparisonResult cEnumAssociatedValues_typeKind_enumeration::compare (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_typeKind_structure::cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyMap & inAssociatedValue0,
                                                                                     const GALGAS_propertyList & inAssociatedValue1
@@ -2305,7 +2305,7 @@ mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_typeKind_structure::description (C_String & ioString,
                                                             const int32_t inIndentation) const {
@@ -2315,7 +2315,7 @@ void cEnumAssociatedValues_typeKind_structure::description (C_String & ioString,
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_typeKind_structure::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_typeKind_structure * ptr = dynamic_cast<const cEnumAssociatedValues_typeKind_structure *> (inOperand) ;
@@ -2330,7 +2330,7 @@ typeComparisonResult cEnumAssociatedValues_typeKind_structure::compare (const cE
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_typeKind_integer::cEnumAssociatedValues_typeKind_integer (const GALGAS_bigint & inAssociatedValue0,
                                                                                 const GALGAS_bigint & inAssociatedValue1,
@@ -2344,7 +2344,7 @@ mAssociatedValue2 (inAssociatedValue2),
 mAssociatedValue3 (inAssociatedValue3) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_typeKind_integer::description (C_String & ioString,
                                                           const int32_t inIndentation) const {
@@ -2356,7 +2356,7 @@ void cEnumAssociatedValues_typeKind_integer::description (C_String & ioString,
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_typeKind_integer::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_typeKind_integer * ptr = dynamic_cast<const cEnumAssociatedValues_typeKind_integer *> (inOperand) ;
@@ -2377,7 +2377,7 @@ typeComparisonResult cEnumAssociatedValues_typeKind_integer::compare (const cEnu
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_typeKind_opaque::cEnumAssociatedValues_typeKind_opaque (const GALGAS_bigint & inAssociatedValue0
                                                                               COMMA_LOCATION_ARGS) :
@@ -2385,7 +2385,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_typeKind_opaque::description (C_String & ioString,
                                                          const int32_t inIndentation) const {
@@ -2394,7 +2394,7 @@ void cEnumAssociatedValues_typeKind_opaque::description (C_String & ioString,
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_typeKind_opaque::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_typeKind_opaque * ptr = dynamic_cast<const cEnumAssociatedValues_typeKind_opaque *> (inOperand) ;
@@ -2406,7 +2406,7 @@ typeComparisonResult cEnumAssociatedValues_typeKind_opaque::compare (const cEnum
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_typeKind_arrayType::cEnumAssociatedValues_typeKind_arrayType (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                                                     const GALGAS_bigint & inAssociatedValue1
@@ -2416,7 +2416,7 @@ mAssociatedValue0 (inAssociatedValue0),
 mAssociatedValue1 (inAssociatedValue1) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_typeKind_arrayType::description (C_String & ioString,
                                                             const int32_t inIndentation) const {
@@ -2426,7 +2426,7 @@ void cEnumAssociatedValues_typeKind_arrayType::description (C_String & ioString,
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_typeKind_arrayType::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_typeKind_arrayType * ptr = dynamic_cast<const cEnumAssociatedValues_typeKind_arrayType *> (inOperand) ;
@@ -2441,14 +2441,14 @@ typeComparisonResult cEnumAssociatedValues_typeKind_arrayType::compare (const cE
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind::GALGAS_typeKind (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_typeKind::constructor_boolean (UNUSED_LOCATION_ARGS) {
   GALGAS_typeKind result ;
@@ -2456,7 +2456,7 @@ GALGAS_typeKind GALGAS_typeKind::constructor_boolean (UNUSED_LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_typeKind::constructor_boolset (UNUSED_LOCATION_ARGS) {
   GALGAS_typeKind result ;
@@ -2464,7 +2464,7 @@ GALGAS_typeKind GALGAS_typeKind::constructor_boolset (UNUSED_LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_typeKind::constructor_literalString (UNUSED_LOCATION_ARGS) {
   GALGAS_typeKind result ;
@@ -2472,7 +2472,7 @@ GALGAS_typeKind GALGAS_typeKind::constructor_literalString (UNUSED_LOCATION_ARGS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_typeKind::constructor_enumeration (const GALGAS_enumConstantMap & inAssociatedValue0
                                                           COMMA_LOCATION_ARGS) {
@@ -2487,7 +2487,7 @@ GALGAS_typeKind GALGAS_typeKind::constructor_enumeration (const GALGAS_enumConst
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_typeKind::constructor_structure (const GALGAS_propertyMap & inAssociatedValue0,
                                                         const GALGAS_propertyList & inAssociatedValue1
@@ -2503,7 +2503,7 @@ GALGAS_typeKind GALGAS_typeKind::constructor_structure (const GALGAS_propertyMap
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_typeKind::constructor_integer (const GALGAS_bigint & inAssociatedValue0,
                                                       const GALGAS_bigint & inAssociatedValue1,
@@ -2521,7 +2521,7 @@ GALGAS_typeKind GALGAS_typeKind::constructor_integer (const GALGAS_bigint & inAs
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_typeKind::constructor_staticInteger (UNUSED_LOCATION_ARGS) {
   GALGAS_typeKind result ;
@@ -2529,7 +2529,7 @@ GALGAS_typeKind GALGAS_typeKind::constructor_staticInteger (UNUSED_LOCATION_ARGS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_typeKind::constructor_opaque (const GALGAS_bigint & inAssociatedValue0
                                                      COMMA_LOCATION_ARGS) {
@@ -2544,7 +2544,7 @@ GALGAS_typeKind GALGAS_typeKind::constructor_opaque (const GALGAS_bigint & inAss
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_typeKind::constructor_arrayType (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                         const GALGAS_bigint & inAssociatedValue1
@@ -2560,7 +2560,7 @@ GALGAS_typeKind GALGAS_typeKind::constructor_arrayType (const GALGAS_unifiedType
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_typeKind::method_enumeration (GALGAS_enumConstantMap & outAssociatedValue0,
                                           C_Compiler * inCompiler
@@ -2576,7 +2576,7 @@ void GALGAS_typeKind::method_enumeration (GALGAS_enumConstantMap & outAssociated
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_typeKind::method_structure (GALGAS_propertyMap & outAssociatedValue0,
                                         GALGAS_propertyList & outAssociatedValue1,
@@ -2595,7 +2595,7 @@ void GALGAS_typeKind::method_structure (GALGAS_propertyMap & outAssociatedValue0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_typeKind::method_integer (GALGAS_bigint & outAssociatedValue0,
                                       GALGAS_bigint & outAssociatedValue1,
@@ -2620,7 +2620,7 @@ void GALGAS_typeKind::method_integer (GALGAS_bigint & outAssociatedValue0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_typeKind::method_opaque (GALGAS_bigint & outAssociatedValue0,
                                      C_Compiler * inCompiler
@@ -2636,7 +2636,7 @@ void GALGAS_typeKind::method_opaque (GALGAS_bigint & outAssociatedValue0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_typeKind::method_arrayType (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
                                         GALGAS_bigint & outAssociatedValue1,
@@ -2655,7 +2655,7 @@ void GALGAS_typeKind::method_arrayType (GALGAS_unifiedTypeMap_2D_proxy & outAsso
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_typeKind [10] = {
   "(not built)",
@@ -2670,61 +2670,61 @@ static const char * gEnumNameArrayFor_typeKind [10] = {
   "arrayType"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_typeKind::getter_isBoolean (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_boolean == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_typeKind::getter_isBoolset (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_boolset == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_typeKind::getter_isLiteralString (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_literalString == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_typeKind::getter_isEnumeration (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_enumeration == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_typeKind::getter_isStructure (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_structure == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_typeKind::getter_isInteger (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_integer == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_typeKind::getter_isStaticInteger (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_staticInteger == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_typeKind::getter_isOpaque (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_opaque == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_typeKind::getter_isArrayType (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_arrayType == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_typeKind::description (C_String & ioString,
                                    const int32_t inIndentation) const {
@@ -2733,7 +2733,7 @@ void GALGAS_typeKind::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_typeKind::objectCompare (const GALGAS_typeKind & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -2749,23 +2749,23 @@ typeComparisonResult GALGAS_typeKind::objectCompare (const GALGAS_typeKind & inO
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                   @typeKind type                                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_typeKind ("typeKind",
                                  NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_typeKind::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_typeKind ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_typeKind::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -2775,7 +2775,7 @@ AC_GALGAS_root * GALGAS_typeKind::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_typeKind GALGAS_typeKind::extractObject (const GALGAS_object & inObject,
                                                 C_Compiler * inCompiler
@@ -2792,7 +2792,7 @@ GALGAS_typeKind GALGAS_typeKind::extractObject (const GALGAS_object & inObject,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_getElementPtrIndexKind_absolute::cEnumAssociatedValues_getElementPtrIndexKind_absolute (const GALGAS_uint & inAssociatedValue0
                                                                                                               COMMA_LOCATION_ARGS) :
@@ -2800,7 +2800,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_getElementPtrIndexKind_absolute::description (C_String & ioString,
                                                                          const int32_t inIndentation) const {
@@ -2809,7 +2809,7 @@ void cEnumAssociatedValues_getElementPtrIndexKind_absolute::description (C_Strin
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_getElementPtrIndexKind_absolute::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_getElementPtrIndexKind_absolute * ptr = dynamic_cast<const cEnumAssociatedValues_getElementPtrIndexKind_absolute *> (inOperand) ;
@@ -2821,7 +2821,7 @@ typeComparisonResult cEnumAssociatedValues_getElementPtrIndexKind_absolute::comp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_getElementPtrIndexKind_indirect::cEnumAssociatedValues_getElementPtrIndexKind_indirect (const GALGAS_operandIR & inAssociatedValue0
                                                                                                               COMMA_LOCATION_ARGS) :
@@ -2829,7 +2829,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_getElementPtrIndexKind_indirect::description (C_String & ioString,
                                                                          const int32_t inIndentation) const {
@@ -2838,7 +2838,7 @@ void cEnumAssociatedValues_getElementPtrIndexKind_indirect::description (C_Strin
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_getElementPtrIndexKind_indirect::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_getElementPtrIndexKind_indirect * ptr = dynamic_cast<const cEnumAssociatedValues_getElementPtrIndexKind_indirect *> (inOperand) ;
@@ -2850,14 +2850,14 @@ typeComparisonResult cEnumAssociatedValues_getElementPtrIndexKind_indirect::comp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_getElementPtrIndexKind::GALGAS_getElementPtrIndexKind (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_getElementPtrIndexKind GALGAS_getElementPtrIndexKind::constructor_absolute (const GALGAS_uint & inAssociatedValue0
                                                                                    COMMA_LOCATION_ARGS) {
@@ -2872,7 +2872,7 @@ GALGAS_getElementPtrIndexKind GALGAS_getElementPtrIndexKind::constructor_absolut
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_getElementPtrIndexKind GALGAS_getElementPtrIndexKind::constructor_indirect (const GALGAS_operandIR & inAssociatedValue0
                                                                                    COMMA_LOCATION_ARGS) {
@@ -2887,7 +2887,7 @@ GALGAS_getElementPtrIndexKind GALGAS_getElementPtrIndexKind::constructor_indirec
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_getElementPtrIndexKind::method_absolute (GALGAS_uint & outAssociatedValue0,
                                                      C_Compiler * inCompiler
@@ -2903,7 +2903,7 @@ void GALGAS_getElementPtrIndexKind::method_absolute (GALGAS_uint & outAssociated
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_getElementPtrIndexKind::method_indirect (GALGAS_operandIR & outAssociatedValue0,
                                                      C_Compiler * inCompiler
@@ -2919,7 +2919,7 @@ void GALGAS_getElementPtrIndexKind::method_indirect (GALGAS_operandIR & outAssoc
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_getElementPtrIndexKind [3] = {
   "(not built)",
@@ -2927,19 +2927,19 @@ static const char * gEnumNameArrayFor_getElementPtrIndexKind [3] = {
   "indirect"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_getElementPtrIndexKind::getter_isAbsolute (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_absolute == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_getElementPtrIndexKind::getter_isIndirect (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_indirect == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_getElementPtrIndexKind::description (C_String & ioString,
                                                  const int32_t inIndentation) const {
@@ -2948,7 +2948,7 @@ void GALGAS_getElementPtrIndexKind::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_getElementPtrIndexKind::objectCompare (const GALGAS_getElementPtrIndexKind & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -2964,23 +2964,23 @@ typeComparisonResult GALGAS_getElementPtrIndexKind::objectCompare (const GALGAS_
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            @getElementPtrIndexKind type                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_getElementPtrIndexKind ("getElementPtrIndexKind",
                                                NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_getElementPtrIndexKind::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_getElementPtrIndexKind ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_getElementPtrIndexKind::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -2990,7 +2990,7 @@ AC_GALGAS_root * GALGAS_getElementPtrIndexKind::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_getElementPtrIndexKind GALGAS_getElementPtrIndexKind::extractObject (const GALGAS_object & inObject,
                                                                             C_Compiler * inCompiler
@@ -3007,7 +3007,7 @@ GALGAS_getElementPtrIndexKind GALGAS_getElementPtrIndexKind::extractObject (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_interruptionPanicCode_panicCode::cEnumAssociatedValues_interruptionPanicCode_panicCode (const GALGAS_lbigint & inAssociatedValue0
                                                                                                               COMMA_LOCATION_ARGS) :
@@ -3015,7 +3015,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_interruptionPanicCode_panicCode::description (C_String & ioString,
                                                                          const int32_t inIndentation) const {
@@ -3024,7 +3024,7 @@ void cEnumAssociatedValues_interruptionPanicCode_panicCode::description (C_Strin
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_interruptionPanicCode_panicCode::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_interruptionPanicCode_panicCode * ptr = dynamic_cast<const cEnumAssociatedValues_interruptionPanicCode_panicCode *> (inOperand) ;
@@ -3036,14 +3036,14 @@ typeComparisonResult cEnumAssociatedValues_interruptionPanicCode_panicCode::comp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionPanicCode::GALGAS_interruptionPanicCode (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::constructor_noPanicCode (UNUSED_LOCATION_ARGS) {
   GALGAS_interruptionPanicCode result ;
@@ -3051,7 +3051,7 @@ GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::constructor_noPanicCo
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::constructor_panicCode (const GALGAS_lbigint & inAssociatedValue0
                                                                                   COMMA_LOCATION_ARGS) {
@@ -3066,7 +3066,7 @@ GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::constructor_panicCode
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionPanicCode::method_panicCode (GALGAS_lbigint & outAssociatedValue0,
                                                      C_Compiler * inCompiler
@@ -3082,7 +3082,7 @@ void GALGAS_interruptionPanicCode::method_panicCode (GALGAS_lbigint & outAssocia
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_interruptionPanicCode [3] = {
   "(not built)",
@@ -3090,19 +3090,19 @@ static const char * gEnumNameArrayFor_interruptionPanicCode [3] = {
   "panicCode"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_interruptionPanicCode::getter_isNoPanicCode (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_noPanicCode == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_interruptionPanicCode::getter_isPanicCode (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_panicCode == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionPanicCode::description (C_String & ioString,
                                                 const int32_t inIndentation) const {
@@ -3111,7 +3111,7 @@ void GALGAS_interruptionPanicCode::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_interruptionPanicCode::objectCompare (const GALGAS_interruptionPanicCode & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -3127,23 +3127,23 @@ typeComparisonResult GALGAS_interruptionPanicCode::objectCompare (const GALGAS_i
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             @interruptionPanicCode type                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_interruptionPanicCode ("interruptionPanicCode",
                                               NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_interruptionPanicCode::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_interruptionPanicCode ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_interruptionPanicCode::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -3153,7 +3153,7 @@ AC_GALGAS_root * GALGAS_interruptionPanicCode::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::extractObject (const GALGAS_object & inObject,
                                                                           C_Compiler * inCompiler
@@ -3170,7 +3170,7 @@ GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::extractObject (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_guardKind_convenienceGuard::cEnumAssociatedValues_guardKind_convenienceGuard (const GALGAS_abstractCallInstructionAST & inAssociatedValue0
                                                                                                     COMMA_LOCATION_ARGS) :
@@ -3178,7 +3178,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_guardKind_convenienceGuard::description (C_String & ioString,
                                                                     const int32_t inIndentation) const {
@@ -3187,7 +3187,7 @@ void cEnumAssociatedValues_guardKind_convenienceGuard::description (C_String & i
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_guardKind_convenienceGuard::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_guardKind_convenienceGuard * ptr = dynamic_cast<const cEnumAssociatedValues_guardKind_convenienceGuard *> (inOperand) ;
@@ -3199,14 +3199,14 @@ typeComparisonResult cEnumAssociatedValues_guardKind_convenienceGuard::compare (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardKind::GALGAS_guardKind (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardKind GALGAS_guardKind::constructor_baseGuard (UNUSED_LOCATION_ARGS) {
   GALGAS_guardKind result ;
@@ -3214,7 +3214,7 @@ GALGAS_guardKind GALGAS_guardKind::constructor_baseGuard (UNUSED_LOCATION_ARGS) 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardKind GALGAS_guardKind::constructor_convenienceGuard (const GALGAS_abstractCallInstructionAST & inAssociatedValue0
                                                                  COMMA_LOCATION_ARGS) {
@@ -3229,7 +3229,7 @@ GALGAS_guardKind GALGAS_guardKind::constructor_convenienceGuard (const GALGAS_ab
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardKind::method_convenienceGuard (GALGAS_abstractCallInstructionAST & outAssociatedValue0,
                                                 C_Compiler * inCompiler
@@ -3245,7 +3245,7 @@ void GALGAS_guardKind::method_convenienceGuard (GALGAS_abstractCallInstructionAS
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_guardKind [3] = {
   "(not built)",
@@ -3253,19 +3253,19 @@ static const char * gEnumNameArrayFor_guardKind [3] = {
   "convenienceGuard"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_guardKind::getter_isBaseGuard (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_baseGuard == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_guardKind::getter_isConvenienceGuard (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_convenienceGuard == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_guardKind::description (C_String & ioString,
                                     const int32_t inIndentation) const {
@@ -3274,7 +3274,7 @@ void GALGAS_guardKind::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_guardKind::objectCompare (const GALGAS_guardKind & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -3290,23 +3290,23 @@ typeComparisonResult GALGAS_guardKind::objectCompare (const GALGAS_guardKind & i
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                   @guardKind type                                                   *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_guardKind ("guardKind",
                                   NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_guardKind::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_guardKind ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_guardKind::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -3316,7 +3316,7 @@ AC_GALGAS_root * GALGAS_guardKind::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardKind GALGAS_guardKind::extractObject (const GALGAS_object & inObject,
                                                   C_Compiler * inCompiler
@@ -3333,11 +3333,11 @@ GALGAS_guardKind GALGAS_guardKind::extractObject (const GALGAS_object & inObject
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                               Bool options                                                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ("plm_options",
                                          "doNotDetectRecursiveCalls",
@@ -3429,17 +3429,17 @@ C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile (
                                          "routine-invocation-graph",
                                          "Write routine invocation graph file") ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                               UInt options                                                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                              String options                                                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_StringCommandLineOption gOption_plm_5F_options_extractEmbeddedSampleFile ("plm_options",
                                          "extractEmbeddedSampleFile",
@@ -3462,11 +3462,11 @@ C_StringCommandLineOption gOption_plm_5F_options_useDirAsTargetDir ("plm_options
                                          "Use directory as target definition directory, instead of using embedded targets",
                                          "") ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                              String List options                                                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_StringListCommandLineOption gOption_plm_5F_options_pathList ("plm_options",
                                          "pathList",
@@ -3474,14 +3474,14 @@ C_StringListCommandLineOption gOption_plm_5F_options_pathList ("plm_options",
                                          "path",
                                          "Search pathes for source files") ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Routine 'enterBooleanOperators'                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enterBooleanOperators (GALGAS_lstring inArgument_inBooleanTypeName,
                                     GALGAS_semanticContext & ioArgument_ioContext,
@@ -3516,11 +3516,11 @@ void routine_enterBooleanOperators (GALGAS_lstring inArgument_inBooleanTypeName,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Routine 'enterEnumerationOperators'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enterEnumerationOperators (GALGAS_lstring inArgument_inEnumerationTypeName,
                                         GALGAS_semanticContext & ioArgument_ioContext,
@@ -3548,11 +3548,11 @@ void routine_enterEnumerationOperators (GALGAS_lstring inArgument_inEnumerationT
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Routine 'enterAliasPrefixOperator'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enterAliasPrefixOperator (GALGAS_prefixOperatorMap & ioArgument_ioInfixOperatorMap,
                                        const GALGAS_lstring constinArgument_inNewTypeName,
@@ -3569,11 +3569,11 @@ void routine_enterAliasPrefixOperator (GALGAS_prefixOperatorMap & ioArgument_ioI
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          Routine 'enterAliasInfixOperator'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enterAliasInfixOperator (GALGAS_infixOperatorMap & ioArgument_ioInfixOperatorMap,
                                       const GALGAS_lstring constinArgument_inNewNewInfixKey,
@@ -3628,11 +3628,11 @@ void routine_enterAliasInfixOperator (GALGAS_infixOperatorMap & ioArgument_ioInf
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Routine 'enter_integer_integer_operators'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enter_5F_integer_5F_integer_5F_operators (const GALGAS_lstring constinArgument_inIntegerTypeName,
                                                        const GALGAS_bool constinArgument_inIsSigned,
@@ -3803,11 +3803,11 @@ void routine_enter_5F_integer_5F_integer_5F_operators (const GALGAS_lstring cons
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Routine 'enter_integer_literal_operators'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enter_5F_integer_5F_literal_5F_operators (const GALGAS_lstring constinArgument_inIntegerTypeName,
                                                        const GALGAS_bool constinArgument_inIsSigned,
@@ -3969,11 +3969,11 @@ void routine_enter_5F_integer_5F_literal_5F_operators (const GALGAS_lstring cons
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Routine 'enter_literal_integer_operators'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enter_5F_literal_5F_integer_5F_operators (const GALGAS_lstring constinArgument_inIntegerTypeName,
                                                        const GALGAS_bool constinArgument_inIsSigned,
@@ -4135,11 +4135,11 @@ void routine_enter_5F_literal_5F_integer_5F_operators (const GALGAS_lstring cons
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                       Routine 'enterLiteralIntegerOperators'                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enterLiteralIntegerOperators (const GALGAS_lstring constinArgument_inIntegerTypeName,
                                            GALGAS_semanticContext & ioArgument_ioContext,
@@ -4220,11 +4220,11 @@ void routine_enterLiteralIntegerOperators (const GALGAS_lstring constinArgument_
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Routine 'enterControlRegistersInContext'                                       *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enterControlRegistersInContext (const GALGAS_controlRegisterDeclarationListAST constinArgument_inRegisterDeclarationListAST,
                                              GALGAS_semanticContext & ioArgument_ioContext,
@@ -4390,11 +4390,11 @@ void routine_enterControlRegistersInContext (const GALGAS_controlRegisterDeclara
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Routine 'controlRegistersSemanticAnalysis'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_controlRegistersSemanticAnalysis (const GALGAS_controlRegisterDeclarationListAST constinArgument_inRegisterDeclarationListAST,
                                                const GALGAS_semanticContext constinArgument_inContext,
@@ -4517,11 +4517,11 @@ void routine_controlRegistersSemanticAnalysis (const GALGAS_controlRegisterDecla
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Routine 'buildControlRegisterMapHTMLFile'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_buildControlRegisterMapHTMLFile (const GALGAS_controlRegisterMap constinArgument_inControlRegisterMap,
                                               const GALGAS_lstring constinArgument_inSourceFile,
@@ -4559,11 +4559,11 @@ void routine_buildControlRegisterMapHTMLFile (const GALGAS_controlRegisterMap co
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                 Filewrapper 'controlRegisterDumpGenerationTemplate'                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 //--- All files of '' directory
 
@@ -4588,11 +4588,11 @@ const cDirectoryWrapper gWrapperDirectory_0_controlRegisterDumpGenerationTemplat
 ) ;
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                          Filewrapper template 'controlRegisterDumpGenerationTemplate dump'                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dump (C_Compiler * inCompiler,
                                                                               const GALGAS_string & in_PROJECT_5F_NAME,
@@ -4747,11 +4747,11 @@ GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dump (C_
   return GALGAS_string (result) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          Function 'linkForControlRegister'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_linkForControlRegister (const GALGAS_string & constinArgument_inControlRegisterName,
                                                C_Compiler * inCompiler
@@ -4763,16 +4763,16 @@ GALGAS_string function_linkForControlRegister (const GALGAS_string & constinArgu
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_linkForControlRegister [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_linkForControlRegister (C_Compiler * inCompiler,
                                                                        const cObjectArray & inEffectiveParameterArray,
@@ -4786,7 +4786,7 @@ static GALGAS_object functionWithGenericHeader_linkForControlRegister (C_Compile
                                           COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_linkForControlRegister ("linkForControlRegister",
                                                                         functionWithGenericHeader_linkForControlRegister,
@@ -4794,11 +4794,11 @@ C_galgas_function_descriptor functionDescriptor_linkForControlRegister ("linkFor
                                                                         1,
                                                                         functionArgs_linkForControlRegister) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Function 'fieldIndexColumns'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_fieldIndexColumns (const GALGAS_uint & constinArgument_inBitCount,
                                           C_Compiler * inCompiler
@@ -4815,16 +4815,16 @@ GALGAS_string function_fieldIndexColumns (const GALGAS_uint & constinArgument_in
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_fieldIndexColumns [2] = {
   & kTypeDescriptor_GALGAS_uint,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_fieldIndexColumns (C_Compiler * inCompiler,
                                                                   const cObjectArray & inEffectiveParameterArray,
@@ -4838,7 +4838,7 @@ static GALGAS_object functionWithGenericHeader_fieldIndexColumns (C_Compiler * i
                                      COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_fieldIndexColumns ("fieldIndexColumns",
                                                                    functionWithGenericHeader_fieldIndexColumns,
@@ -4846,11 +4846,11 @@ C_galgas_function_descriptor functionDescriptor_fieldIndexColumns ("fieldIndexCo
                                                                    1,
                                                                    functionArgs_fieldIndexColumns) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Routine 'buildGlobalConstantMapHTMLFile'                                       *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_buildGlobalConstantMapHTMLFile (GALGAS_globalConstantMap inArgument_inGlobalConstantMap,
                                              const GALGAS_lstring constinArgument_inSourceFile,
@@ -4888,11 +4888,11 @@ void routine_buildGlobalConstantMapHTMLFile (GALGAS_globalConstantMap inArgument
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                    Filewrapper 'constantDumpGenerationTemplate'                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 //--- All files of '' directory
 
@@ -4917,11 +4917,11 @@ const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate (
 ) ;
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                             Filewrapper template 'constantDumpGenerationTemplate dump'                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (C_Compiler * inCompiler,
                                                                        const GALGAS_string & in_PROJECT_5F_NAME,
@@ -5041,11 +5041,11 @@ GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (C_Compile
   return GALGAS_string (result) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          Function 'linkForGlobalConstant'                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_linkForGlobalConstant (const GALGAS_string & constinArgument_inConstantName,
                                               C_Compiler * inCompiler
@@ -5057,16 +5057,16 @@ GALGAS_string function_linkForGlobalConstant (const GALGAS_string & constinArgum
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_linkForGlobalConstant [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_linkForGlobalConstant (C_Compiler * inCompiler,
                                                                       const cObjectArray & inEffectiveParameterArray,
@@ -5080,7 +5080,7 @@ static GALGAS_object functionWithGenericHeader_linkForGlobalConstant (C_Compiler
                                          COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_linkForGlobalConstant ("linkForGlobalConstant",
                                                                        functionWithGenericHeader_linkForGlobalConstant,
@@ -5088,11 +5088,11 @@ C_galgas_function_descriptor functionDescriptor_linkForGlobalConstant ("linkForG
                                                                        1,
                                                                        functionArgs_linkForGlobalConstant) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Once function 'panicModeName'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_panicModeName (C_Compiler * /* inCompiler */
                                                  COMMA_UNUSED_LOCATION_ARGS) {
@@ -5104,14 +5104,14 @@ static GALGAS_string onceFunction_panicModeName (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicModeName = false ;
 static GALGAS_string gOnceFunctionResult_panicModeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_panicModeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -5122,26 +5122,26 @@ GALGAS_string function_panicModeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_panicModeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicModeName (void) {
   gOnceFunctionResult_panicModeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicModeName (NULL,
                                                            releaseOnceFunctionResult_panicModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicModeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicModeName (C_Compiler * inCompiler,
                                                               const cObjectArray & /* inEffectiveParameterArray */,
@@ -5150,7 +5150,7 @@ static GALGAS_object functionWithGenericHeader_panicModeName (C_Compiler * inCom
   return function_panicModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicModeName ("panicModeName",
                                                                functionWithGenericHeader_panicModeName,
@@ -5158,11 +5158,11 @@ C_galgas_function_descriptor functionDescriptor_panicModeName ("panicModeName",
                                                                0,
                                                                functionArgs_panicModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Routine 'initSemanticAnalysis'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_initSemanticAnalysis (const GALGAS_semanticContext constinArgument_inContext,
                                    GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
@@ -5206,11 +5206,11 @@ void routine_initSemanticAnalysis (const GALGAS_semanticContext constinArgument_
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          Routine 'checkRequiredProcedures'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_checkRequiredProcedures (const GALGAS_ast constinArgument_inAST,
                                       const GALGAS_semanticContext constinArgument_inSemanticContext,
@@ -5288,11 +5288,11 @@ void routine_checkRequiredProcedures (const GALGAS_ast constinArgument_inAST,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Routine 'generateSectionDispatcher'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_generateSectionDispatcher (const GALGAS_string constinArgument_inCurrentDirectory,
                                         const GALGAS_string constinArgument_inTargetName,
@@ -5325,11 +5325,11 @@ void routine_generateSectionDispatcher (const GALGAS_string constinArgument_inCu
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Routine 'generateServiceDispatcher'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_generateServiceDispatcher (const GALGAS_string constinArgument_inCurrentDirectory,
                                         const GALGAS_string constinArgument_inTargetName,
@@ -5362,11 +5362,11 @@ void routine_generateServiceDispatcher (const GALGAS_string constinArgument_inCu
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Routine 'guardSemanticAnalysis'                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_guardSemanticAnalysis (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
                                     const GALGAS_lstring constinArgument_inRoutineName,
@@ -5445,11 +5445,11 @@ void routine_guardSemanticAnalysis (const GALGAS_unifiedTypeMap_2D_proxy constin
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Routine 'standaloneBaseGuardAnalyze'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_standaloneBaseGuardAnalyze (const GALGAS_lstring constinArgument_inRoutineName,
                                          const GALGAS_effectiveParameterListAST constinArgument_inEffectiveParameterList,
@@ -5493,11 +5493,11 @@ void routine_standaloneBaseGuardAnalyze (const GALGAS_lstring constinArgument_in
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Function 'getInfixOperatorMap'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator & constinArgument_inOp,
                                                       const GALGAS_semanticContext & constinArgument_inContext,
@@ -5670,9 +5670,9 @@ GALGAS_infixOperatorMap function_getInfixOperatorMap (const GALGAS_infixOperator
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_getInfixOperatorMap [5] = {
   & kTypeDescriptor_GALGAS_infixOperator,
@@ -5682,7 +5682,7 @@ static const C_galgas_type_descriptor * functionArgs_getInfixOperatorMap [5] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_getInfixOperatorMap (C_Compiler * inCompiler,
                                                                     const cObjectArray & inEffectiveParameterArray,
@@ -5708,7 +5708,7 @@ static GALGAS_object functionWithGenericHeader_getInfixOperatorMap (C_Compiler *
                                        COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_getInfixOperatorMap ("getInfixOperatorMap",
                                                                      functionWithGenericHeader_getInfixOperatorMap,
@@ -5716,11 +5716,11 @@ C_galgas_function_descriptor functionDescriptor_getInfixOperatorMap ("getInfixOp
                                                                      4,
                                                                      functionArgs_getInfixOperatorMap) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Routine 'analyzeVariableAccess'                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeVariableAccess (const GALGAS_accessList constinArgument_inAccessList,
                                     const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
@@ -5805,11 +5805,11 @@ void routine_analyzeVariableAccess (const GALGAS_accessList constinArgument_inAc
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Routine 'analyzeVariableWriteAccess'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeVariableWriteAccess (const GALGAS_accessList constinArgument_inAccessList,
                                          const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
@@ -5869,11 +5869,11 @@ void routine_analyzeVariableWriteAccess (const GALGAS_accessList constinArgument
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Routine 'analyzeVariableReadWriteAccess'                                       *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeVariableReadWriteAccess (const GALGAS_accessList constinArgument_inAccessList,
                                              const GALGAS_bool constinArgument_inRequiresCopy,
@@ -5934,11 +5934,11 @@ void routine_analyzeVariableReadWriteAccess (const GALGAS_accessList constinArgu
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             Routine 'analyzeSelfAccess'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeSelfAccess (const GALGAS_fieldList constinArgument_inFieldList,
                                 const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
@@ -6003,11 +6003,11 @@ void routine_analyzeSelfAccess (const GALGAS_fieldList constinArgument_inFieldLi
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Routine 'analyzeArrayElementAccess'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeArrayElementAccess (const GALGAS_arrayElementAccess constinArgument_inArrayElementAccess,
                                         GALGAS_unifiedTypeMap_2D_proxy & ioArgument_ioType,
@@ -6100,11 +6100,11 @@ void routine_analyzeArrayElementAccess (const GALGAS_arrayElementAccess constinA
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             Routine 'analyzeGuardCall'                                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeGuardCall (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
                                const GALGAS_lstring constinArgument_inReceiverName,
@@ -6171,11 +6171,11 @@ void routine_analyzeGuardCall (const GALGAS_unifiedTypeMap_2D_proxy constinArgum
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                       Routine 'analyzeStandaloneRoutineCall'                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeStandaloneRoutineCall (const GALGAS_lstring constinArgument_inRoutineName,
                                            const GALGAS_effectiveParameterListAST constinArgument_inEffectiveParameterList,
@@ -6210,11 +6210,11 @@ void routine_analyzeStandaloneRoutineCall (const GALGAS_lstring constinArgument_
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Routine 'analyzeRoutineCall'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeRoutineCall (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
                                  const GALGAS_bool constinArgument_inRoutineCanMutateProperties,
@@ -6319,11 +6319,11 @@ void routine_analyzeRoutineCall (const GALGAS_unifiedTypeMap_2D_proxy constinArg
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Routine 'analyzeEffectiveParameters'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
                                          const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
@@ -6596,11 +6596,11 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Function 'initialVariableMap'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_variableMap function_initialVariableMap (const GALGAS_string & constinArgument_inRoutineNameForInvocation,
                                                 const GALGAS_semanticContext & constinArgument_inContext,
@@ -6734,9 +6734,9 @@ GALGAS_variableMap function_initialVariableMap (const GALGAS_string & constinArg
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_initialVariableMap [7] = {
   & kTypeDescriptor_GALGAS_string,
@@ -6748,7 +6748,7 @@ static const C_galgas_type_descriptor * functionArgs_initialVariableMap [7] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_initialVariableMap (C_Compiler * inCompiler,
                                                                    const cObjectArray & inEffectiveParameterArray,
@@ -6782,7 +6782,7 @@ static GALGAS_object functionWithGenericHeader_initialVariableMap (C_Compiler * 
                                       COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_initialVariableMap ("initialVariableMap",
                                                                     functionWithGenericHeader_initialVariableMap,
@@ -6790,11 +6790,11 @@ C_galgas_function_descriptor functionDescriptor_initialVariableMap ("initialVari
                                                                     6,
                                                                     functionArgs_initialVariableMap) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Function 'variableMapWithConstants'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_variableMap function_variableMapWithConstants (const GALGAS_semanticContext & constinArgument_inContext,
                                                       C_Compiler * inCompiler
@@ -6813,16 +6813,16 @@ GALGAS_variableMap function_variableMapWithConstants (const GALGAS_semanticConte
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_variableMapWithConstants [2] = {
   & kTypeDescriptor_GALGAS_semanticContext,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_variableMapWithConstants (C_Compiler * inCompiler,
                                                                          const cObjectArray & inEffectiveParameterArray,
@@ -6836,7 +6836,7 @@ static GALGAS_object functionWithGenericHeader_variableMapWithConstants (C_Compi
                                             COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_variableMapWithConstants ("variableMapWithConstants",
                                                                           functionWithGenericHeader_variableMapWithConstants,
@@ -6844,11 +6844,11 @@ C_galgas_function_descriptor functionDescriptor_variableMapWithConstants ("varia
                                                                           1,
                                                                           functionArgs_variableMapWithConstants) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Routine 'getNewTempVariable'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_getNewTempVariable (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inType,
                                  GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
@@ -6861,11 +6861,11 @@ void routine_getNewTempVariable (const GALGAS_unifiedTypeMap_2D_proxy constinArg
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                    Routine 'getLocalNameOfNewTempObjectInMemory'                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_getLocalNameOfNewTempObjectInMemory (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inType,
                                                   GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
@@ -6878,11 +6878,11 @@ void routine_getLocalNameOfNewTempObjectInMemory (const GALGAS_unifiedTypeMap_2D
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Routine 'buildOrderedDeclarationList'                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_buildOrderedDeclarationList (const GALGAS_ast constinArgument_inAST,
                                           const GALGAS_string constinArgument_inSourceFile,
@@ -6979,11 +6979,11 @@ void routine_buildOrderedDeclarationList (const GALGAS_ast constinArgument_inAST
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                Function 'checkMode'                                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKindIR function_checkMode (const GALGAS_stringset & constinArgument_inRequiredModes,
                                          const GALGAS_stringset & constinArgument_inPossibleModes,
@@ -7119,9 +7119,9 @@ GALGAS_routineKindIR function_checkMode (const GALGAS_stringset & constinArgumen
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_checkMode [5] = {
   & kTypeDescriptor_GALGAS_stringset,
@@ -7131,7 +7131,7 @@ static const C_galgas_type_descriptor * functionArgs_checkMode [5] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_checkMode (C_Compiler * inCompiler,
                                                           const cObjectArray & inEffectiveParameterArray,
@@ -7157,7 +7157,7 @@ static GALGAS_object functionWithGenericHeader_checkMode (C_Compiler * inCompile
                              COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_checkMode ("checkMode",
                                                            functionWithGenericHeader_checkMode,
@@ -7165,11 +7165,11 @@ C_galgas_function_descriptor functionDescriptor_checkMode ("checkMode",
                                                            4,
                                                            functionArgs_checkMode) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                Function 'allModeMap'                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_modeMap function_allModeMap (C_Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
@@ -7204,15 +7204,15 @@ GALGAS_modeMap function_allModeMap (C_Compiler * inCompiler
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_allModeMap [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_allModeMap (C_Compiler * inCompiler,
                                                            const cObjectArray & /* inEffectiveParameterArray */,
@@ -7221,7 +7221,7 @@ static GALGAS_object functionWithGenericHeader_allModeMap (C_Compiler * inCompil
   return function_allModeMap (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_allModeMap ("allModeMap",
                                                             functionWithGenericHeader_allModeMap,
@@ -7229,11 +7229,11 @@ C_galgas_function_descriptor functionDescriptor_allModeMap ("allModeMap",
                                                             0,
                                                             functionArgs_allModeMap) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Routine 'buildSemanticContext'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgument_inDeclarationListAST,
                                    const GALGAS_lstring constinArgument_inSourceFile,
@@ -7305,11 +7305,11 @@ void routine_buildSemanticContext (const GALGAS_declarationListAST constinArgume
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Function 'solveInferredType'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy function_solveInferredType (const GALGAS_unifiedTypeMap_2D_proxy & constinArgument_inTargetType,
                                                            const GALGAS_unifiedTypeMap_2D_proxy & constinArgument_inSourceType,
@@ -7334,9 +7334,9 @@ GALGAS_unifiedTypeMap_2D_proxy function_solveInferredType (const GALGAS_unifiedT
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_solveInferredType [4] = {
   & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
@@ -7345,7 +7345,7 @@ static const C_galgas_type_descriptor * functionArgs_solveInferredType [4] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_solveInferredType (C_Compiler * inCompiler,
                                                                   const cObjectArray & inEffectiveParameterArray,
@@ -7367,7 +7367,7 @@ static GALGAS_object functionWithGenericHeader_solveInferredType (C_Compiler * i
                                      COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_solveInferredType ("solveInferredType",
                                                                    functionWithGenericHeader_solveInferredType,
@@ -7375,11 +7375,11 @@ C_galgas_function_descriptor functionDescriptor_solveInferredType ("solveInferre
                                                                    3,
                                                                    functionArgs_solveInferredType) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Function 'combineTypeNamesForInfixOperator'                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_combineTypeNamesForInfixOperator (const GALGAS_string & constinArgument_inLeftTypeName,
                                                           const GALGAS_string & constinArgument_inRightTypeName,
@@ -7392,9 +7392,9 @@ GALGAS_lstring function_combineTypeNamesForInfixOperator (const GALGAS_string & 
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_combineTypeNamesForInfixOperator [3] = {
   & kTypeDescriptor_GALGAS_string,
@@ -7402,7 +7402,7 @@ static const C_galgas_type_descriptor * functionArgs_combineTypeNamesForInfixOpe
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_combineTypeNamesForInfixOperator (C_Compiler * inCompiler,
                                                                                  const cObjectArray & inEffectiveParameterArray,
@@ -7420,7 +7420,7 @@ static GALGAS_object functionWithGenericHeader_combineTypeNamesForInfixOperator 
                                                     COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_combineTypeNamesForInfixOperator ("combineTypeNamesForInfixOperator",
                                                                                   functionWithGenericHeader_combineTypeNamesForInfixOperator,
@@ -7428,11 +7428,11 @@ C_galgas_function_descriptor functionDescriptor_combineTypeNamesForInfixOperator
                                                                                   2,
                                                                                   functionArgs_combineTypeNamesForInfixOperator) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                       Function 'checkAssignmentCompatibility'                                       *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIR function_checkAssignmentCompatibility (const GALGAS_operandIR & constinArgument_inSourceValue,
                                                         const GALGAS_unifiedTypeMap_2D_proxy & constinArgument_inTargetAnnotationType,
@@ -7491,9 +7491,9 @@ GALGAS_operandIR function_checkAssignmentCompatibility (const GALGAS_operandIR &
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_checkAssignmentCompatibility [5] = {
   & kTypeDescriptor_GALGAS_operandIR,
@@ -7503,7 +7503,7 @@ static const C_galgas_type_descriptor * functionArgs_checkAssignmentCompatibilit
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_checkAssignmentCompatibility (C_Compiler * inCompiler,
                                                                              const cObjectArray & inEffectiveParameterArray,
@@ -7529,7 +7529,7 @@ static GALGAS_object functionWithGenericHeader_checkAssignmentCompatibility (C_C
                                                 COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_checkAssignmentCompatibility ("checkAssignmentCompatibility",
                                                                               functionWithGenericHeader_checkAssignmentCompatibility,
@@ -7537,11 +7537,11 @@ C_galgas_function_descriptor functionDescriptor_checkAssignmentCompatibility ("c
                                                                               4,
                                                                               functionArgs_checkAssignmentCompatibility) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             Routine 'semanticAnalysis'                                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_semanticAnalysis (const GALGAS_string constinArgument_inSourceFile,
                                const GALGAS_ast constinArgument_inAST,
@@ -7649,11 +7649,11 @@ void routine_semanticAnalysis (const GALGAS_string constinArgument_inSourceFile,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Routine 'enterFormalArguments'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enterFormalArguments (const GALGAS_semanticContext constinArgument_inContext,
                                    const GALGAS_procFormalArgumentList constinArgument_inFormalArgumentPassingMode,
@@ -7697,11 +7697,11 @@ void routine_enterFormalArguments (const GALGAS_semanticContext constinArgument_
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          Routine 'routineSemanticAnalysis'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_routineSemanticAnalysis (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
                                       const GALGAS_routineKind constinArgument_inRoutineKind,
@@ -7842,11 +7842,11 @@ void routine_routineSemanticAnalysis (const GALGAS_unifiedTypeMap_2D_proxy const
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                Once function 'panicCodeForUnsignedAdditionOverflow'                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForUnsignedAdditionOverflow (C_Compiler * inCompiler
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
@@ -7858,14 +7858,14 @@ static GALGAS_bigint onceFunction_panicCodeForUnsignedAdditionOverflow (C_Compil
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForUnsignedAdditionOverflow = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForUnsignedAdditionOverflow ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForUnsignedAdditionOverflow (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -7876,26 +7876,26 @@ GALGAS_bigint function_panicCodeForUnsignedAdditionOverflow (class C_Compiler * 
   return gOnceFunctionResult_panicCodeForUnsignedAdditionOverflow ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForUnsignedAdditionOverflow (void) {
   gOnceFunctionResult_panicCodeForUnsignedAdditionOverflow.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedAdditionOverflow (NULL,
                                                                                   releaseOnceFunctionResult_panicCodeForUnsignedAdditionOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedAdditionOverflow [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedAdditionOverflow (C_Compiler * inCompiler,
                                                                                      const cObjectArray & /* inEffectiveParameterArray */,
@@ -7904,7 +7904,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedAdditionOverf
   return function_panicCodeForUnsignedAdditionOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedAdditionOverflow ("panicCodeForUnsignedAdditionOverflow",
                                                                                       functionWithGenericHeader_panicCodeForUnsignedAdditionOverflow,
@@ -7912,11 +7912,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedAdditionOver
                                                                                       0,
                                                                                       functionArgs_panicCodeForUnsignedAdditionOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                 Once function 'panicCodeForSignedAdditionOverflow'                                  *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForSignedAdditionOverflow (C_Compiler * inCompiler
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
@@ -7928,14 +7928,14 @@ static GALGAS_bigint onceFunction_panicCodeForSignedAdditionOverflow (C_Compiler
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForSignedAdditionOverflow = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForSignedAdditionOverflow ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForSignedAdditionOverflow (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -7946,26 +7946,26 @@ GALGAS_bigint function_panicCodeForSignedAdditionOverflow (class C_Compiler * in
   return gOnceFunctionResult_panicCodeForSignedAdditionOverflow ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForSignedAdditionOverflow (void) {
   gOnceFunctionResult_panicCodeForSignedAdditionOverflow.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedAdditionOverflow (NULL,
                                                                                 releaseOnceFunctionResult_panicCodeForSignedAdditionOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedAdditionOverflow [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForSignedAdditionOverflow (C_Compiler * inCompiler,
                                                                                    const cObjectArray & /* inEffectiveParameterArray */,
@@ -7974,7 +7974,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForSignedAdditionOverflo
   return function_panicCodeForSignedAdditionOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForSignedAdditionOverflow ("panicCodeForSignedAdditionOverflow",
                                                                                     functionWithGenericHeader_panicCodeForSignedAdditionOverflow,
@@ -7982,11 +7982,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForSignedAdditionOverfl
                                                                                     0,
                                                                                     functionArgs_panicCodeForSignedAdditionOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                Once function 'panicCodeForUnsignedSubtractOverflow'                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForUnsignedSubtractOverflow (C_Compiler * inCompiler
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
@@ -7998,14 +7998,14 @@ static GALGAS_bigint onceFunction_panicCodeForUnsignedSubtractOverflow (C_Compil
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForUnsignedSubtractOverflow = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForUnsignedSubtractOverflow ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForUnsignedSubtractOverflow (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8016,26 +8016,26 @@ GALGAS_bigint function_panicCodeForUnsignedSubtractOverflow (class C_Compiler * 
   return gOnceFunctionResult_panicCodeForUnsignedSubtractOverflow ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForUnsignedSubtractOverflow (void) {
   gOnceFunctionResult_panicCodeForUnsignedSubtractOverflow.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedSubtractOverflow (NULL,
                                                                                   releaseOnceFunctionResult_panicCodeForUnsignedSubtractOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedSubtractOverflow [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedSubtractOverflow (C_Compiler * inCompiler,
                                                                                      const cObjectArray & /* inEffectiveParameterArray */,
@@ -8044,7 +8044,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedSubtractOverf
   return function_panicCodeForUnsignedSubtractOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedSubtractOverflow ("panicCodeForUnsignedSubtractOverflow",
                                                                                       functionWithGenericHeader_panicCodeForUnsignedSubtractOverflow,
@@ -8052,11 +8052,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedSubtractOver
                                                                                       0,
                                                                                       functionArgs_panicCodeForUnsignedSubtractOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                 Once function 'panicCodeForSignedSubtractOverflow'                                  *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForSignedSubtractOverflow (C_Compiler * inCompiler
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
@@ -8068,14 +8068,14 @@ static GALGAS_bigint onceFunction_panicCodeForSignedSubtractOverflow (C_Compiler
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForSignedSubtractOverflow = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForSignedSubtractOverflow ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForSignedSubtractOverflow (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8086,26 +8086,26 @@ GALGAS_bigint function_panicCodeForSignedSubtractOverflow (class C_Compiler * in
   return gOnceFunctionResult_panicCodeForSignedSubtractOverflow ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForSignedSubtractOverflow (void) {
   gOnceFunctionResult_panicCodeForSignedSubtractOverflow.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedSubtractOverflow (NULL,
                                                                                 releaseOnceFunctionResult_panicCodeForSignedSubtractOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedSubtractOverflow [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForSignedSubtractOverflow (C_Compiler * inCompiler,
                                                                                    const cObjectArray & /* inEffectiveParameterArray */,
@@ -8114,7 +8114,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForSignedSubtractOverflo
   return function_panicCodeForSignedSubtractOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForSignedSubtractOverflow ("panicCodeForSignedSubtractOverflow",
                                                                                     functionWithGenericHeader_panicCodeForSignedSubtractOverflow,
@@ -8122,11 +8122,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForSignedSubtractOverfl
                                                                                     0,
                                                                                     functionArgs_panicCodeForSignedSubtractOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                             Once function 'panicCodeForUnsignedMultiplicationOverflow'                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForUnsignedMultiplicationOverflow (C_Compiler * inCompiler
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
@@ -8138,14 +8138,14 @@ static GALGAS_bigint onceFunction_panicCodeForUnsignedMultiplicationOverflow (C_
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForUnsignedMultiplicationOverflow = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForUnsignedMultiplicationOverflow (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8156,26 +8156,26 @@ GALGAS_bigint function_panicCodeForUnsignedMultiplicationOverflow (class C_Compi
   return gOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow (void) {
   gOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedMultiplicationOverflow (NULL,
                                                                                         releaseOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedMultiplicationOverflow [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedMultiplicationOverflow (C_Compiler * inCompiler,
                                                                                            const cObjectArray & /* inEffectiveParameterArray */,
@@ -8184,7 +8184,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedMultiplicatio
   return function_panicCodeForUnsignedMultiplicationOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedMultiplicationOverflow ("panicCodeForUnsignedMultiplicationOverflow",
                                                                                             functionWithGenericHeader_panicCodeForUnsignedMultiplicationOverflow,
@@ -8192,11 +8192,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedMultiplicati
                                                                                             0,
                                                                                             functionArgs_panicCodeForUnsignedMultiplicationOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                              Once function 'panicCodeForSignedMultiplicationOverflow'                               *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForSignedMultiplicationOverflow (C_Compiler * inCompiler
                                                                             COMMA_UNUSED_LOCATION_ARGS) {
@@ -8208,14 +8208,14 @@ static GALGAS_bigint onceFunction_panicCodeForSignedMultiplicationOverflow (C_Co
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForSignedMultiplicationOverflow = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForSignedMultiplicationOverflow ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForSignedMultiplicationOverflow (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8226,26 +8226,26 @@ GALGAS_bigint function_panicCodeForSignedMultiplicationOverflow (class C_Compile
   return gOnceFunctionResult_panicCodeForSignedMultiplicationOverflow ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForSignedMultiplicationOverflow (void) {
   gOnceFunctionResult_panicCodeForSignedMultiplicationOverflow.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedMultiplicationOverflow (NULL,
                                                                                       releaseOnceFunctionResult_panicCodeForSignedMultiplicationOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedMultiplicationOverflow [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForSignedMultiplicationOverflow (C_Compiler * inCompiler,
                                                                                          const cObjectArray & /* inEffectiveParameterArray */,
@@ -8254,7 +8254,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForSignedMultiplicationO
   return function_panicCodeForSignedMultiplicationOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForSignedMultiplicationOverflow ("panicCodeForSignedMultiplicationOverflow",
                                                                                           functionWithGenericHeader_panicCodeForSignedMultiplicationOverflow,
@@ -8262,11 +8262,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForSignedMultiplication
                                                                                           0,
                                                                                           functionArgs_panicCodeForSignedMultiplicationOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                 Once function 'panicCodeForUnsignedDivisionByZero'                                  *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForUnsignedDivisionByZero (C_Compiler * inCompiler
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
@@ -8278,14 +8278,14 @@ static GALGAS_bigint onceFunction_panicCodeForUnsignedDivisionByZero (C_Compiler
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForUnsignedDivisionByZero = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForUnsignedDivisionByZero ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForUnsignedDivisionByZero (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8296,26 +8296,26 @@ GALGAS_bigint function_panicCodeForUnsignedDivisionByZero (class C_Compiler * in
   return gOnceFunctionResult_panicCodeForUnsignedDivisionByZero ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForUnsignedDivisionByZero (void) {
   gOnceFunctionResult_panicCodeForUnsignedDivisionByZero.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedDivisionByZero (NULL,
                                                                                 releaseOnceFunctionResult_panicCodeForUnsignedDivisionByZero) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedDivisionByZero [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedDivisionByZero (C_Compiler * inCompiler,
                                                                                    const cObjectArray & /* inEffectiveParameterArray */,
@@ -8324,7 +8324,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedDivisionByZer
   return function_panicCodeForUnsignedDivisionByZero (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedDivisionByZero ("panicCodeForUnsignedDivisionByZero",
                                                                                     functionWithGenericHeader_panicCodeForUnsignedDivisionByZero,
@@ -8332,11 +8332,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedDivisionByZe
                                                                                     0,
                                                                                     functionArgs_panicCodeForUnsignedDivisionByZero) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                  Once function 'panicCodeForSignedDivisionByZero'                                   *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForSignedDivisionByZero (C_Compiler * inCompiler
                                                                     COMMA_UNUSED_LOCATION_ARGS) {
@@ -8348,14 +8348,14 @@ static GALGAS_bigint onceFunction_panicCodeForSignedDivisionByZero (C_Compiler *
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForSignedDivisionByZero = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForSignedDivisionByZero ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForSignedDivisionByZero (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8366,26 +8366,26 @@ GALGAS_bigint function_panicCodeForSignedDivisionByZero (class C_Compiler * inCo
   return gOnceFunctionResult_panicCodeForSignedDivisionByZero ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForSignedDivisionByZero (void) {
   gOnceFunctionResult_panicCodeForSignedDivisionByZero.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedDivisionByZero (NULL,
                                                                               releaseOnceFunctionResult_panicCodeForSignedDivisionByZero) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedDivisionByZero [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForSignedDivisionByZero (C_Compiler * inCompiler,
                                                                                  const cObjectArray & /* inEffectiveParameterArray */,
@@ -8394,7 +8394,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForSignedDivisionByZero 
   return function_panicCodeForSignedDivisionByZero (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForSignedDivisionByZero ("panicCodeForSignedDivisionByZero",
                                                                                   functionWithGenericHeader_panicCodeForSignedDivisionByZero,
@@ -8402,11 +8402,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForSignedDivisionByZero
                                                                                   0,
                                                                                   functionArgs_panicCodeForSignedDivisionByZero) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                 Once function 'panicCodeForUnsignedRemainderByZero'                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForUnsignedRemainderByZero (C_Compiler * inCompiler
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
@@ -8418,14 +8418,14 @@ static GALGAS_bigint onceFunction_panicCodeForUnsignedRemainderByZero (C_Compile
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForUnsignedRemainderByZero = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForUnsignedRemainderByZero ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForUnsignedRemainderByZero (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8436,26 +8436,26 @@ GALGAS_bigint function_panicCodeForUnsignedRemainderByZero (class C_Compiler * i
   return gOnceFunctionResult_panicCodeForUnsignedRemainderByZero ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForUnsignedRemainderByZero (void) {
   gOnceFunctionResult_panicCodeForUnsignedRemainderByZero.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedRemainderByZero (NULL,
                                                                                  releaseOnceFunctionResult_panicCodeForUnsignedRemainderByZero) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedRemainderByZero [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedRemainderByZero (C_Compiler * inCompiler,
                                                                                     const cObjectArray & /* inEffectiveParameterArray */,
@@ -8464,7 +8464,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedRemainderByZe
   return function_panicCodeForUnsignedRemainderByZero (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedRemainderByZero ("panicCodeForUnsignedRemainderByZero",
                                                                                      functionWithGenericHeader_panicCodeForUnsignedRemainderByZero,
@@ -8472,11 +8472,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedRemainderByZ
                                                                                      0,
                                                                                      functionArgs_panicCodeForUnsignedRemainderByZero) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                  Once function 'panicCodeForSignedRemainderByZero'                                  *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForSignedRemainderByZero (C_Compiler * inCompiler
                                                                      COMMA_UNUSED_LOCATION_ARGS) {
@@ -8488,14 +8488,14 @@ static GALGAS_bigint onceFunction_panicCodeForSignedRemainderByZero (C_Compiler 
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForSignedRemainderByZero = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForSignedRemainderByZero ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForSignedRemainderByZero (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8506,26 +8506,26 @@ GALGAS_bigint function_panicCodeForSignedRemainderByZero (class C_Compiler * inC
   return gOnceFunctionResult_panicCodeForSignedRemainderByZero ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForSignedRemainderByZero (void) {
   gOnceFunctionResult_panicCodeForSignedRemainderByZero.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedRemainderByZero (NULL,
                                                                                releaseOnceFunctionResult_panicCodeForSignedRemainderByZero) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedRemainderByZero [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForSignedRemainderByZero (C_Compiler * inCompiler,
                                                                                   const cObjectArray & /* inEffectiveParameterArray */,
@@ -8534,7 +8534,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForSignedRemainderByZero
   return function_panicCodeForSignedRemainderByZero (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForSignedRemainderByZero ("panicCodeForSignedRemainderByZero",
                                                                                    functionWithGenericHeader_panicCodeForSignedRemainderByZero,
@@ -8542,11 +8542,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForSignedRemainderByZer
                                                                                    0,
                                                                                    functionArgs_panicCodeForSignedRemainderByZero) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Once function 'panicCodeForConvertOverflow'                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForConvertOverflow (C_Compiler * inCompiler
                                                                COMMA_UNUSED_LOCATION_ARGS) {
@@ -8558,14 +8558,14 @@ static GALGAS_bigint onceFunction_panicCodeForConvertOverflow (C_Compiler * inCo
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForConvertOverflow = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForConvertOverflow ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForConvertOverflow (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8576,26 +8576,26 @@ GALGAS_bigint function_panicCodeForConvertOverflow (class C_Compiler * inCompile
   return gOnceFunctionResult_panicCodeForConvertOverflow ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForConvertOverflow (void) {
   gOnceFunctionResult_panicCodeForConvertOverflow.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForConvertOverflow (NULL,
                                                                          releaseOnceFunctionResult_panicCodeForConvertOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForConvertOverflow [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForConvertOverflow (C_Compiler * inCompiler,
                                                                             const cObjectArray & /* inEffectiveParameterArray */,
@@ -8604,7 +8604,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForConvertOverflow (C_Co
   return function_panicCodeForConvertOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForConvertOverflow ("panicCodeForConvertOverflow",
                                                                              functionWithGenericHeader_panicCodeForConvertOverflow,
@@ -8612,11 +8612,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForConvertOverflow ("pa
                                                                              0,
                                                                              functionArgs_panicCodeForConvertOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Once function 'panicCodeForArrayOverflow'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForArrayOverflow (C_Compiler * inCompiler
                                                              COMMA_UNUSED_LOCATION_ARGS) {
@@ -8628,14 +8628,14 @@ static GALGAS_bigint onceFunction_panicCodeForArrayOverflow (C_Compiler * inComp
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForArrayOverflow = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForArrayOverflow ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForArrayOverflow (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8646,26 +8646,26 @@ GALGAS_bigint function_panicCodeForArrayOverflow (class C_Compiler * inCompiler
   return gOnceFunctionResult_panicCodeForArrayOverflow ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForArrayOverflow (void) {
   gOnceFunctionResult_panicCodeForArrayOverflow.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForArrayOverflow (NULL,
                                                                        releaseOnceFunctionResult_panicCodeForArrayOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForArrayOverflow [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForArrayOverflow (C_Compiler * inCompiler,
                                                                           const cObjectArray & /* inEffectiveParameterArray */,
@@ -8674,7 +8674,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForArrayOverflow (C_Comp
   return function_panicCodeForArrayOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForArrayOverflow ("panicCodeForArrayOverflow",
                                                                            functionWithGenericHeader_panicCodeForArrayOverflow,
@@ -8682,11 +8682,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForArrayOverflow ("pani
                                                                            0,
                                                                            functionArgs_panicCodeForArrayOverflow) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                       Once function 'panicCodeForClosedSync'                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForClosedSync (C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
@@ -8698,14 +8698,14 @@ static GALGAS_bigint onceFunction_panicCodeForClosedSync (C_Compiler * inCompile
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForClosedSync = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForClosedSync ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForClosedSync (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8716,26 +8716,26 @@ GALGAS_bigint function_panicCodeForClosedSync (class C_Compiler * inCompiler
   return gOnceFunctionResult_panicCodeForClosedSync ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForClosedSync (void) {
   gOnceFunctionResult_panicCodeForClosedSync.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForClosedSync (NULL,
                                                                     releaseOnceFunctionResult_panicCodeForClosedSync) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForClosedSync [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForClosedSync (C_Compiler * inCompiler,
                                                                        const cObjectArray & /* inEffectiveParameterArray */,
@@ -8744,7 +8744,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForClosedSync (C_Compile
   return function_panicCodeForClosedSync (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForClosedSync ("panicCodeForClosedSync",
                                                                         functionWithGenericHeader_panicCodeForClosedSync,
@@ -8752,11 +8752,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForClosedSync ("panicCo
                                                                         0,
                                                                         functionArgs_panicCodeForClosedSync) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                   Once function 'panicCodeForNegativeArrayIndex'                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForNegativeArrayIndex (C_Compiler * inCompiler
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
@@ -8768,14 +8768,14 @@ static GALGAS_bigint onceFunction_panicCodeForNegativeArrayIndex (C_Compiler * i
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForNegativeArrayIndex = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForNegativeArrayIndex ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForNegativeArrayIndex (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8786,26 +8786,26 @@ GALGAS_bigint function_panicCodeForNegativeArrayIndex (class C_Compiler * inComp
   return gOnceFunctionResult_panicCodeForNegativeArrayIndex ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForNegativeArrayIndex (void) {
   gOnceFunctionResult_panicCodeForNegativeArrayIndex.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForNegativeArrayIndex (NULL,
                                                                             releaseOnceFunctionResult_panicCodeForNegativeArrayIndex) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForNegativeArrayIndex [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForNegativeArrayIndex (C_Compiler * inCompiler,
                                                                                const cObjectArray & /* inEffectiveParameterArray */,
@@ -8814,7 +8814,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForNegativeArrayIndex (C
   return function_panicCodeForNegativeArrayIndex (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForNegativeArrayIndex ("panicCodeForNegativeArrayIndex",
                                                                                 functionWithGenericHeader_panicCodeForNegativeArrayIndex,
@@ -8822,11 +8822,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForNegativeArrayIndex (
                                                                                 0,
                                                                                 functionArgs_panicCodeForNegativeArrayIndex) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                   Once function 'panicCodeForTooLargeArrayIndex'                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint onceFunction_panicCodeForTooLargeArrayIndex (C_Compiler * inCompiler
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
@@ -8838,14 +8838,14 @@ static GALGAS_bigint onceFunction_panicCodeForTooLargeArrayIndex (C_Compiler * i
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_panicCodeForTooLargeArrayIndex = false ;
 static GALGAS_bigint gOnceFunctionResult_panicCodeForTooLargeArrayIndex ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8856,26 +8856,26 @@ GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * inComp
   return gOnceFunctionResult_panicCodeForTooLargeArrayIndex ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_panicCodeForTooLargeArrayIndex (void) {
   gOnceFunctionResult_panicCodeForTooLargeArrayIndex.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForTooLargeArrayIndex (NULL,
                                                                             releaseOnceFunctionResult_panicCodeForTooLargeArrayIndex) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForTooLargeArrayIndex [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicCodeForTooLargeArrayIndex (C_Compiler * inCompiler,
                                                                                const cObjectArray & /* inEffectiveParameterArray */,
@@ -8884,7 +8884,7 @@ static GALGAS_object functionWithGenericHeader_panicCodeForTooLargeArrayIndex (C
   return function_panicCodeForTooLargeArrayIndex (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicCodeForTooLargeArrayIndex ("panicCodeForTooLargeArrayIndex",
                                                                                 functionWithGenericHeader_panicCodeForTooLargeArrayIndex,
@@ -8892,11 +8892,11 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForTooLargeArrayIndex (
                                                                                 0,
                                                                                 functionArgs_panicCodeForTooLargeArrayIndex) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Once function 'llvmAttributeFunction'                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_llvmAttributeFunction (C_Compiler * /* inCompiler */
                                                          COMMA_UNUSED_LOCATION_ARGS) {
@@ -8908,14 +8908,14 @@ static GALGAS_string onceFunction_llvmAttributeFunction (C_Compiler * /* inCompi
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_llvmAttributeFunction = false ;
 static GALGAS_string gOnceFunctionResult_llvmAttributeFunction ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmAttributeFunction (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8926,26 +8926,26 @@ GALGAS_string function_llvmAttributeFunction (class C_Compiler * inCompiler
   return gOnceFunctionResult_llvmAttributeFunction ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_llvmAttributeFunction (void) {
   gOnceFunctionResult_llvmAttributeFunction.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_llvmAttributeFunction (NULL,
                                                                    releaseOnceFunctionResult_llvmAttributeFunction) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmAttributeFunction [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmAttributeFunction (C_Compiler * inCompiler,
                                                                       const cObjectArray & /* inEffectiveParameterArray */,
@@ -8954,7 +8954,7 @@ static GALGAS_object functionWithGenericHeader_llvmAttributeFunction (C_Compiler
   return function_llvmAttributeFunction (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmAttributeFunction ("llvmAttributeFunction",
                                                                        functionWithGenericHeader_llvmAttributeFunction,
@@ -8962,11 +8962,11 @@ C_galgas_function_descriptor functionDescriptor_llvmAttributeFunction ("llvmAttr
                                                                        0,
                                                                        functionArgs_llvmAttributeFunction) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Once function 'bootModeName'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_bootModeName (C_Compiler * /* inCompiler */
                                                 COMMA_UNUSED_LOCATION_ARGS) {
@@ -8978,14 +8978,14 @@ static GALGAS_string onceFunction_bootModeName (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_bootModeName = false ;
 static GALGAS_string gOnceFunctionResult_bootModeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_bootModeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -8996,26 +8996,26 @@ GALGAS_string function_bootModeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_bootModeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_bootModeName (void) {
   gOnceFunctionResult_bootModeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_bootModeName (NULL,
                                                           releaseOnceFunctionResult_bootModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_bootModeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_bootModeName (C_Compiler * inCompiler,
                                                              const cObjectArray & /* inEffectiveParameterArray */,
@@ -9024,7 +9024,7 @@ static GALGAS_object functionWithGenericHeader_bootModeName (C_Compiler * inComp
   return function_bootModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_bootModeName ("bootModeName",
                                                               functionWithGenericHeader_bootModeName,
@@ -9032,11 +9032,11 @@ C_galgas_function_descriptor functionDescriptor_bootModeName ("bootModeName",
                                                               0,
                                                               functionArgs_bootModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Once function 'initModeName'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_initModeName (C_Compiler * /* inCompiler */
                                                 COMMA_UNUSED_LOCATION_ARGS) {
@@ -9048,14 +9048,14 @@ static GALGAS_string onceFunction_initModeName (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_initModeName = false ;
 static GALGAS_string gOnceFunctionResult_initModeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_initModeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -9066,26 +9066,26 @@ GALGAS_string function_initModeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_initModeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_initModeName (void) {
   gOnceFunctionResult_initModeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_initModeName (NULL,
                                                           releaseOnceFunctionResult_initModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_initModeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_initModeName (C_Compiler * inCompiler,
                                                              const cObjectArray & /* inEffectiveParameterArray */,
@@ -9094,7 +9094,7 @@ static GALGAS_object functionWithGenericHeader_initModeName (C_Compiler * inComp
   return function_initModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_initModeName ("initModeName",
                                                               functionWithGenericHeader_initModeName,
@@ -9102,11 +9102,11 @@ C_galgas_function_descriptor functionDescriptor_initModeName ("initModeName",
                                                               0,
                                                               functionArgs_initModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Once function 'sectionModeName'                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_sectionModeName (C_Compiler * /* inCompiler */
                                                    COMMA_UNUSED_LOCATION_ARGS) {
@@ -9118,14 +9118,14 @@ static GALGAS_string onceFunction_sectionModeName (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_sectionModeName = false ;
 static GALGAS_string gOnceFunctionResult_sectionModeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_sectionModeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -9136,26 +9136,26 @@ GALGAS_string function_sectionModeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_sectionModeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_sectionModeName (void) {
   gOnceFunctionResult_sectionModeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_sectionModeName (NULL,
                                                              releaseOnceFunctionResult_sectionModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_sectionModeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_sectionModeName (C_Compiler * inCompiler,
                                                                 const cObjectArray & /* inEffectiveParameterArray */,
@@ -9164,7 +9164,7 @@ static GALGAS_object functionWithGenericHeader_sectionModeName (C_Compiler * inC
   return function_sectionModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_sectionModeName ("sectionModeName",
                                                                  functionWithGenericHeader_sectionModeName,
@@ -9172,11 +9172,11 @@ C_galgas_function_descriptor functionDescriptor_sectionModeName ("sectionModeNam
                                                                  0,
                                                                  functionArgs_sectionModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Once function 'userModeName'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_userModeName (C_Compiler * /* inCompiler */
                                                 COMMA_UNUSED_LOCATION_ARGS) {
@@ -9188,14 +9188,14 @@ static GALGAS_string onceFunction_userModeName (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_userModeName = false ;
 static GALGAS_string gOnceFunctionResult_userModeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_userModeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -9206,26 +9206,26 @@ GALGAS_string function_userModeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_userModeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_userModeName (void) {
   gOnceFunctionResult_userModeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_userModeName (NULL,
                                                           releaseOnceFunctionResult_userModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_userModeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_userModeName (C_Compiler * inCompiler,
                                                              const cObjectArray & /* inEffectiveParameterArray */,
@@ -9234,7 +9234,7 @@ static GALGAS_object functionWithGenericHeader_userModeName (C_Compiler * inComp
   return function_userModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_userModeName ("userModeName",
                                                               functionWithGenericHeader_userModeName,
@@ -9242,11 +9242,11 @@ C_galgas_function_descriptor functionDescriptor_userModeName ("userModeName",
                                                               0,
                                                               functionArgs_userModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Once function 'kernelModeName'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_kernelModeName (C_Compiler * /* inCompiler */
                                                   COMMA_UNUSED_LOCATION_ARGS) {
@@ -9258,14 +9258,14 @@ static GALGAS_string onceFunction_kernelModeName (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_kernelModeName = false ;
 static GALGAS_string gOnceFunctionResult_kernelModeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_kernelModeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -9276,26 +9276,26 @@ GALGAS_string function_kernelModeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_kernelModeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_kernelModeName (void) {
   gOnceFunctionResult_kernelModeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_kernelModeName (NULL,
                                                             releaseOnceFunctionResult_kernelModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_kernelModeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_kernelModeName (C_Compiler * inCompiler,
                                                                const cObjectArray & /* inEffectiveParameterArray */,
@@ -9304,7 +9304,7 @@ static GALGAS_object functionWithGenericHeader_kernelModeName (C_Compiler * inCo
   return function_kernelModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_kernelModeName ("kernelModeName",
                                                                 functionWithGenericHeader_kernelModeName,
@@ -9312,11 +9312,11 @@ C_galgas_function_descriptor functionDescriptor_kernelModeName ("kernelModeName"
                                                                 0,
                                                                 functionArgs_kernelModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Once function 'serviceModeName'                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_serviceModeName (C_Compiler * /* inCompiler */
                                                    COMMA_UNUSED_LOCATION_ARGS) {
@@ -9328,14 +9328,14 @@ static GALGAS_string onceFunction_serviceModeName (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_serviceModeName = false ;
 static GALGAS_string gOnceFunctionResult_serviceModeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_serviceModeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -9346,26 +9346,26 @@ GALGAS_string function_serviceModeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_serviceModeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_serviceModeName (void) {
   gOnceFunctionResult_serviceModeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_serviceModeName (NULL,
                                                              releaseOnceFunctionResult_serviceModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_serviceModeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_serviceModeName (C_Compiler * inCompiler,
                                                                 const cObjectArray & /* inEffectiveParameterArray */,
@@ -9374,7 +9374,7 @@ static GALGAS_object functionWithGenericHeader_serviceModeName (C_Compiler * inC
   return function_serviceModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_serviceModeName ("serviceModeName",
                                                                  functionWithGenericHeader_serviceModeName,
@@ -9382,11 +9382,11 @@ C_galgas_function_descriptor functionDescriptor_serviceModeName ("serviceModeNam
                                                                  0,
                                                                  functionArgs_serviceModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Once function 'guardModeName'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_guardModeName (C_Compiler * /* inCompiler */
                                                  COMMA_UNUSED_LOCATION_ARGS) {
@@ -9398,14 +9398,14 @@ static GALGAS_string onceFunction_guardModeName (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_guardModeName = false ;
 static GALGAS_string gOnceFunctionResult_guardModeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_guardModeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -9416,26 +9416,26 @@ GALGAS_string function_guardModeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_guardModeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_guardModeName (void) {
   gOnceFunctionResult_guardModeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_guardModeName (NULL,
                                                            releaseOnceFunctionResult_guardModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_guardModeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_guardModeName (C_Compiler * inCompiler,
                                                               const cObjectArray & /* inEffectiveParameterArray */,
@@ -9444,7 +9444,7 @@ static GALGAS_object functionWithGenericHeader_guardModeName (C_Compiler * inCom
   return function_guardModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_guardModeName ("guardModeName",
                                                                functionWithGenericHeader_guardModeName,
@@ -9452,11 +9452,11 @@ C_galgas_function_descriptor functionDescriptor_guardModeName ("guardModeName",
                                                                0,
                                                                functionArgs_guardModeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Function 'procNameForInvocationGraph'                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_procNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_proxy inArgument_inReceiverType,
                                                     GALGAS_lstring inArgument_inName,
@@ -9475,9 +9475,9 @@ GALGAS_lstring function_procNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_pro
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_procNameForInvocationGraph [3] = {
   & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
@@ -9485,7 +9485,7 @@ static const C_galgas_type_descriptor * functionArgs_procNameForInvocationGraph 
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_procNameForInvocationGraph (C_Compiler * inCompiler,
                                                                            const cObjectArray & inEffectiveParameterArray,
@@ -9503,7 +9503,7 @@ static GALGAS_object functionWithGenericHeader_procNameForInvocationGraph (C_Com
                                               COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_procNameForInvocationGraph ("procNameForInvocationGraph",
                                                                             functionWithGenericHeader_procNameForInvocationGraph,
@@ -9511,11 +9511,11 @@ C_galgas_function_descriptor functionDescriptor_procNameForInvocationGraph ("pro
                                                                             2,
                                                                             functionArgs_procNameForInvocationGraph) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Function 'sectionNameForInvocationGraph'                                       *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_sectionNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_proxy inArgument_inReceiverType,
                                                        GALGAS_lstring inArgument_inName,
@@ -9534,9 +9534,9 @@ GALGAS_lstring function_sectionNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_sectionNameForInvocationGraph [3] = {
   & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
@@ -9544,7 +9544,7 @@ static const C_galgas_type_descriptor * functionArgs_sectionNameForInvocationGra
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_sectionNameForInvocationGraph (C_Compiler * inCompiler,
                                                                               const cObjectArray & inEffectiveParameterArray,
@@ -9562,7 +9562,7 @@ static GALGAS_object functionWithGenericHeader_sectionNameForInvocationGraph (C_
                                                  COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_sectionNameForInvocationGraph ("sectionNameForInvocationGraph",
                                                                                functionWithGenericHeader_sectionNameForInvocationGraph,
@@ -9570,11 +9570,11 @@ C_galgas_function_descriptor functionDescriptor_sectionNameForInvocationGraph ("
                                                                                2,
                                                                                functionArgs_sectionNameForInvocationGraph) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Function 'serviceNameForInvocationGraph'                                       *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_serviceNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_proxy inArgument_inReceiverType,
                                                        GALGAS_lstring inArgument_inName,
@@ -9593,9 +9593,9 @@ GALGAS_lstring function_serviceNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_serviceNameForInvocationGraph [3] = {
   & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
@@ -9603,7 +9603,7 @@ static const C_galgas_type_descriptor * functionArgs_serviceNameForInvocationGra
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_serviceNameForInvocationGraph (C_Compiler * inCompiler,
                                                                               const cObjectArray & inEffectiveParameterArray,
@@ -9621,7 +9621,7 @@ static GALGAS_object functionWithGenericHeader_serviceNameForInvocationGraph (C_
                                                  COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_serviceNameForInvocationGraph ("serviceNameForInvocationGraph",
                                                                                functionWithGenericHeader_serviceNameForInvocationGraph,
@@ -9629,11 +9629,11 @@ C_galgas_function_descriptor functionDescriptor_serviceNameForInvocationGraph ("
                                                                                2,
                                                                                functionArgs_serviceNameForInvocationGraph) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Function 'primitiveNameForInvocationGraph'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_primitiveNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_proxy inArgument_inReceiverType,
                                                          GALGAS_lstring inArgument_inName,
@@ -9652,9 +9652,9 @@ GALGAS_lstring function_primitiveNameForInvocationGraph (GALGAS_unifiedTypeMap_2
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_primitiveNameForInvocationGraph [3] = {
   & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
@@ -9662,7 +9662,7 @@ static const C_galgas_type_descriptor * functionArgs_primitiveNameForInvocationG
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_primitiveNameForInvocationGraph (C_Compiler * inCompiler,
                                                                                 const cObjectArray & inEffectiveParameterArray,
@@ -9680,7 +9680,7 @@ static GALGAS_object functionWithGenericHeader_primitiveNameForInvocationGraph (
                                                    COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_primitiveNameForInvocationGraph ("primitiveNameForInvocationGraph",
                                                                                  functionWithGenericHeader_primitiveNameForInvocationGraph,
@@ -9688,11 +9688,11 @@ C_galgas_function_descriptor functionDescriptor_primitiveNameForInvocationGraph 
                                                                                  2,
                                                                                  functionArgs_primitiveNameForInvocationGraph) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                       Function 'guardNameForInvocationGraph'                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_guardNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_proxy inArgument_inReceiverType,
                                                      GALGAS_lstring inArgument_inName,
@@ -9711,9 +9711,9 @@ GALGAS_lstring function_guardNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_pr
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_guardNameForInvocationGraph [3] = {
   & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
@@ -9721,7 +9721,7 @@ static const C_galgas_type_descriptor * functionArgs_guardNameForInvocationGraph
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_guardNameForInvocationGraph (C_Compiler * inCompiler,
                                                                             const cObjectArray & inEffectiveParameterArray,
@@ -9739,7 +9739,7 @@ static GALGAS_object functionWithGenericHeader_guardNameForInvocationGraph (C_Co
                                                COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_guardNameForInvocationGraph ("guardNameForInvocationGraph",
                                                                              functionWithGenericHeader_guardNameForInvocationGraph,
@@ -9747,11 +9747,11 @@ C_galgas_function_descriptor functionDescriptor_guardNameForInvocationGraph ("gu
                                                                              2,
                                                                              functionArgs_guardNameForInvocationGraph) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Function 'initNameForInvocationGraph'                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_initNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_proxy inArgument_inReceiverType,
                                                     GALGAS_lbigint inArgument_inPriority,
@@ -9770,9 +9770,9 @@ GALGAS_lstring function_initNameForInvocationGraph (GALGAS_unifiedTypeMap_2D_pro
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_initNameForInvocationGraph [3] = {
   & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
@@ -9780,7 +9780,7 @@ static const C_galgas_type_descriptor * functionArgs_initNameForInvocationGraph 
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_initNameForInvocationGraph (C_Compiler * inCompiler,
                                                                            const cObjectArray & inEffectiveParameterArray,
@@ -9798,7 +9798,7 @@ static GALGAS_object functionWithGenericHeader_initNameForInvocationGraph (C_Com
                                               COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_initNameForInvocationGraph ("initNameForInvocationGraph",
                                                                             functionWithGenericHeader_initNameForInvocationGraph,
@@ -9806,11 +9806,11 @@ C_galgas_function_descriptor functionDescriptor_initNameForInvocationGraph ("ini
                                                                             2,
                                                                             functionArgs_initNameForInvocationGraph) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                       Function 'panicNameForInvocationGraph'                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_panicNameForInvocationGraph (GALGAS_string inArgument_inName,
                                                      GALGAS_lbigint inArgument_inPriority,
@@ -9824,9 +9824,9 @@ GALGAS_lstring function_panicNameForInvocationGraph (GALGAS_string inArgument_in
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_panicNameForInvocationGraph [3] = {
   & kTypeDescriptor_GALGAS_string,
@@ -9834,7 +9834,7 @@ static const C_galgas_type_descriptor * functionArgs_panicNameForInvocationGraph
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_panicNameForInvocationGraph (C_Compiler * inCompiler,
                                                                             const cObjectArray & inEffectiveParameterArray,
@@ -9852,7 +9852,7 @@ static GALGAS_object functionWithGenericHeader_panicNameForInvocationGraph (C_Co
                                                COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_panicNameForInvocationGraph ("panicNameForInvocationGraph",
                                                                              functionWithGenericHeader_panicNameForInvocationGraph,
@@ -9860,11 +9860,11 @@ C_galgas_function_descriptor functionDescriptor_panicNameForInvocationGraph ("pa
                                                                              2,
                                                                              functionArgs_panicNameForInvocationGraph) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Function 'literalStringName'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_literalStringName (const GALGAS_uint & constinArgument_inIndex,
                                           C_Compiler * inCompiler
@@ -9876,16 +9876,16 @@ GALGAS_string function_literalStringName (const GALGAS_uint & constinArgument_in
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_literalStringName [2] = {
   & kTypeDescriptor_GALGAS_uint,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_literalStringName (C_Compiler * inCompiler,
                                                                   const cObjectArray & inEffectiveParameterArray,
@@ -9899,7 +9899,7 @@ static GALGAS_object functionWithGenericHeader_literalStringName (C_Compiler * i
                                      COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_literalStringName ("literalStringName",
                                                                    functionWithGenericHeader_literalStringName,
@@ -9907,11 +9907,11 @@ C_galgas_function_descriptor functionDescriptor_literalStringName ("literalStrin
                                                                    1,
                                                                    functionArgs_literalStringName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Function 'literalCharacterArrayName'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_literalCharacterArrayName (const GALGAS_uint & constinArgument_inIndex,
                                                   C_Compiler * inCompiler
@@ -9923,16 +9923,16 @@ GALGAS_string function_literalCharacterArrayName (const GALGAS_uint & constinArg
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_literalCharacterArrayName [2] = {
   & kTypeDescriptor_GALGAS_uint,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_literalCharacterArrayName (C_Compiler * inCompiler,
                                                                           const cObjectArray & inEffectiveParameterArray,
@@ -9946,7 +9946,7 @@ static GALGAS_object functionWithGenericHeader_literalCharacterArrayName (C_Comp
                                              COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_literalCharacterArrayName ("literalCharacterArrayName",
                                                                            functionWithGenericHeader_literalCharacterArrayName,
@@ -9954,11 +9954,11 @@ C_galgas_function_descriptor functionDescriptor_literalCharacterArrayName ("lite
                                                                            1,
                                                                            functionArgs_literalCharacterArrayName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Once function 'staticStringTypeName'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_staticStringTypeName (C_Compiler * /* inCompiler */
                                                         COMMA_UNUSED_LOCATION_ARGS) {
@@ -9970,14 +9970,14 @@ static GALGAS_string onceFunction_staticStringTypeName (C_Compiler * /* inCompil
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_staticStringTypeName = false ;
 static GALGAS_string gOnceFunctionResult_staticStringTypeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -9988,26 +9988,26 @@ GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_staticStringTypeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_staticStringTypeName (void) {
   gOnceFunctionResult_staticStringTypeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_staticStringTypeName (NULL,
                                                                   releaseOnceFunctionResult_staticStringTypeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_staticStringTypeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_staticStringTypeName (C_Compiler * inCompiler,
                                                                      const cObjectArray & /* inEffectiveParameterArray */,
@@ -10016,7 +10016,7 @@ static GALGAS_object functionWithGenericHeader_staticStringTypeName (C_Compiler 
   return function_staticStringTypeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_staticStringTypeName ("staticStringTypeName",
                                                                       functionWithGenericHeader_staticStringTypeName,
@@ -10024,11 +10024,11 @@ C_galgas_function_descriptor functionDescriptor_staticStringTypeName ("staticStr
                                                                       0,
                                                                       functionArgs_staticStringTypeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Once function 'boolTypeName'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_boolTypeName (C_Compiler * /* inCompiler */
                                                 COMMA_UNUSED_LOCATION_ARGS) {
@@ -10040,14 +10040,14 @@ static GALGAS_string onceFunction_boolTypeName (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_boolTypeName = false ;
 static GALGAS_string gOnceFunctionResult_boolTypeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -10058,26 +10058,26 @@ GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_boolTypeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_boolTypeName (void) {
   gOnceFunctionResult_boolTypeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_boolTypeName (NULL,
                                                           releaseOnceFunctionResult_boolTypeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_boolTypeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_boolTypeName (C_Compiler * inCompiler,
                                                              const cObjectArray & /* inEffectiveParameterArray */,
@@ -10086,7 +10086,7 @@ static GALGAS_object functionWithGenericHeader_boolTypeName (C_Compiler * inComp
   return function_boolTypeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_boolTypeName ("boolTypeName",
                                                               functionWithGenericHeader_boolTypeName,
@@ -10094,11 +10094,11 @@ C_galgas_function_descriptor functionDescriptor_boolTypeName ("boolTypeName",
                                                               0,
                                                               functionArgs_boolTypeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Once function 'staticIntegerTypeName'                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_staticIntegerTypeName (C_Compiler * /* inCompiler */
                                                          COMMA_UNUSED_LOCATION_ARGS) {
@@ -10110,14 +10110,14 @@ static GALGAS_string onceFunction_staticIntegerTypeName (C_Compiler * /* inCompi
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_staticIntegerTypeName = false ;
 static GALGAS_string gOnceFunctionResult_staticIntegerTypeName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -10128,26 +10128,26 @@ GALGAS_string function_staticIntegerTypeName (class C_Compiler * inCompiler
   return gOnceFunctionResult_staticIntegerTypeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_staticIntegerTypeName (void) {
   gOnceFunctionResult_staticIntegerTypeName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_staticIntegerTypeName (NULL,
                                                                    releaseOnceFunctionResult_staticIntegerTypeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_staticIntegerTypeName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_staticIntegerTypeName (C_Compiler * inCompiler,
                                                                       const cObjectArray & /* inEffectiveParameterArray */,
@@ -10156,7 +10156,7 @@ static GALGAS_object functionWithGenericHeader_staticIntegerTypeName (C_Compiler
   return function_staticIntegerTypeName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_staticIntegerTypeName ("staticIntegerTypeName",
                                                                        functionWithGenericHeader_staticIntegerTypeName,
@@ -10164,11 +10164,11 @@ C_galgas_function_descriptor functionDescriptor_staticIntegerTypeName ("staticIn
                                                                        0,
                                                                        functionArgs_staticIntegerTypeName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Once function 'functionResultVariableName'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_functionResultVariableName (C_Compiler * /* inCompiler */
                                                               COMMA_UNUSED_LOCATION_ARGS) {
@@ -10180,14 +10180,14 @@ static GALGAS_string onceFunction_functionResultVariableName (C_Compiler * /* in
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_functionResultVariableName = false ;
 static GALGAS_string gOnceFunctionResult_functionResultVariableName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_functionResultVariableName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -10198,26 +10198,26 @@ GALGAS_string function_functionResultVariableName (class C_Compiler * inCompiler
   return gOnceFunctionResult_functionResultVariableName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_functionResultVariableName (void) {
   gOnceFunctionResult_functionResultVariableName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_functionResultVariableName (NULL,
                                                                         releaseOnceFunctionResult_functionResultVariableName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_functionResultVariableName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_functionResultVariableName (C_Compiler * inCompiler,
                                                                            const cObjectArray & /* inEffectiveParameterArray */,
@@ -10226,7 +10226,7 @@ static GALGAS_object functionWithGenericHeader_functionResultVariableName (C_Com
   return function_functionResultVariableName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_functionResultVariableName ("functionResultVariableName",
                                                                             functionWithGenericHeader_functionResultVariableName,
@@ -10234,11 +10234,11 @@ C_galgas_function_descriptor functionDescriptor_functionResultVariableName ("fun
                                                                             0,
                                                                             functionArgs_functionResultVariableName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Function 'llvmNameForFunction'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForFunction (GALGAS_string inArgument_inName,
                                             C_Compiler * inCompiler
@@ -10250,16 +10250,16 @@ GALGAS_string function_llvmNameForFunction (GALGAS_string inArgument_inName,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForFunction [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForFunction (C_Compiler * inCompiler,
                                                                     const cObjectArray & inEffectiveParameterArray,
@@ -10273,7 +10273,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForFunction (C_Compiler *
                                        COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForFunction ("llvmNameForFunction",
                                                                      functionWithGenericHeader_llvmNameForFunction,
@@ -10281,11 +10281,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForFunction ("llvmNameFo
                                                                      1,
                                                                      functionArgs_llvmNameForFunction) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Function 'interruptNameForInvocationGraph'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_interruptNameForInvocationGraph (GALGAS_lstring inArgument_inName,
                                                          C_Compiler * inCompiler
@@ -10298,16 +10298,16 @@ GALGAS_lstring function_interruptNameForInvocationGraph (GALGAS_lstring inArgume
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_interruptNameForInvocationGraph [2] = {
   & kTypeDescriptor_GALGAS_lstring,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_interruptNameForInvocationGraph (C_Compiler * inCompiler,
                                                                                 const cObjectArray & inEffectiveParameterArray,
@@ -10321,7 +10321,7 @@ static GALGAS_object functionWithGenericHeader_interruptNameForInvocationGraph (
                                                    COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_interruptNameForInvocationGraph ("interruptNameForInvocationGraph",
                                                                                  functionWithGenericHeader_interruptNameForInvocationGraph,
@@ -10329,11 +10329,11 @@ C_galgas_function_descriptor functionDescriptor_interruptNameForInvocationGraph 
                                                                                  1,
                                                                                  functionArgs_interruptNameForInvocationGraph) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Function 'llvmNameForInterrupt'                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_llvmNameForInterrupt (GALGAS_lstring inArgument_inName,
                                               C_Compiler * inCompiler
@@ -10345,16 +10345,16 @@ GALGAS_lstring function_llvmNameForInterrupt (GALGAS_lstring inArgument_inName,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForInterrupt [2] = {
   & kTypeDescriptor_GALGAS_lstring,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForInterrupt (C_Compiler * inCompiler,
                                                                      const cObjectArray & inEffectiveParameterArray,
@@ -10368,7 +10368,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForInterrupt (C_Compiler 
                                         COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForInterrupt ("llvmNameForInterrupt",
                                                                       functionWithGenericHeader_llvmNameForInterrupt,
@@ -10376,11 +10376,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForInterrupt ("llvmNameF
                                                                       1,
                                                                       functionArgs_llvmNameForInterrupt) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                              Function 'llvmNameForISR'                                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForISR (GALGAS_string inArgument_inName,
                                        C_Compiler * inCompiler
@@ -10392,16 +10392,16 @@ GALGAS_string function_llvmNameForISR (GALGAS_string inArgument_inName,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForISR [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForISR (C_Compiler * inCompiler,
                                                                const cObjectArray & inEffectiveParameterArray,
@@ -10415,7 +10415,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForISR (C_Compiler * inCo
                                   COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForISR ("llvmNameForISR",
                                                                 functionWithGenericHeader_llvmNameForISR,
@@ -10423,11 +10423,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForISR ("llvmNameForISR"
                                                                 1,
                                                                 functionArgs_llvmNameForISR) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Function 'llvmNameForPrimitiveCall'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForPrimitiveCall (GALGAS_string inArgument_inName,
                                                  C_Compiler * inCompiler
@@ -10439,16 +10439,16 @@ GALGAS_string function_llvmNameForPrimitiveCall (GALGAS_string inArgument_inName
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForPrimitiveCall [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForPrimitiveCall (C_Compiler * inCompiler,
                                                                          const cObjectArray & inEffectiveParameterArray,
@@ -10462,7 +10462,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForPrimitiveCall (C_Compi
                                             COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForPrimitiveCall ("llvmNameForPrimitiveCall",
                                                                           functionWithGenericHeader_llvmNameForPrimitiveCall,
@@ -10470,11 +10470,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForPrimitiveCall ("llvmN
                                                                           1,
                                                                           functionArgs_llvmNameForPrimitiveCall) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                    Function 'llvmNameForPrimitiveImplementation'                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForPrimitiveImplementation (GALGAS_string inArgument_inName,
                                                            C_Compiler * inCompiler
@@ -10486,16 +10486,16 @@ GALGAS_string function_llvmNameForPrimitiveImplementation (GALGAS_string inArgum
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForPrimitiveImplementation [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForPrimitiveImplementation (C_Compiler * inCompiler,
                                                                                    const cObjectArray & inEffectiveParameterArray,
@@ -10509,7 +10509,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForPrimitiveImplementatio
                                                       COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForPrimitiveImplementation ("llvmNameForPrimitiveImplementation",
                                                                                     functionWithGenericHeader_llvmNameForPrimitiveImplementation,
@@ -10517,11 +10517,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForPrimitiveImplementati
                                                                                     1,
                                                                                     functionArgs_llvmNameForPrimitiveImplementation) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          Function 'llvmNameForServiceCall'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForServiceCall (GALGAS_string inArgument_inName,
                                                C_Compiler * inCompiler
@@ -10533,16 +10533,16 @@ GALGAS_string function_llvmNameForServiceCall (GALGAS_string inArgument_inName,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForServiceCall [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForServiceCall (C_Compiler * inCompiler,
                                                                        const cObjectArray & inEffectiveParameterArray,
@@ -10556,7 +10556,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForServiceCall (C_Compile
                                           COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForServiceCall ("llvmNameForServiceCall",
                                                                         functionWithGenericHeader_llvmNameForServiceCall,
@@ -10564,11 +10564,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForServiceCall ("llvmNam
                                                                         1,
                                                                         functionArgs_llvmNameForServiceCall) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Function 'llvmNameForServiceImplementation'                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForServiceImplementation (GALGAS_string inArgument_inName,
                                                          C_Compiler * inCompiler
@@ -10580,16 +10580,16 @@ GALGAS_string function_llvmNameForServiceImplementation (GALGAS_string inArgumen
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForServiceImplementation [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForServiceImplementation (C_Compiler * inCompiler,
                                                                                  const cObjectArray & inEffectiveParameterArray,
@@ -10603,7 +10603,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForServiceImplementation 
                                                     COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForServiceImplementation ("llvmNameForServiceImplementation",
                                                                                   functionWithGenericHeader_llvmNameForServiceImplementation,
@@ -10611,11 +10611,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForServiceImplementation
                                                                                   1,
                                                                                   functionArgs_llvmNameForServiceImplementation) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          Function 'llvmNameForSectionCall'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForSectionCall (GALGAS_string inArgument_inName,
                                                C_Compiler * inCompiler
@@ -10627,16 +10627,16 @@ GALGAS_string function_llvmNameForSectionCall (GALGAS_string inArgument_inName,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForSectionCall [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForSectionCall (C_Compiler * inCompiler,
                                                                        const cObjectArray & inEffectiveParameterArray,
@@ -10650,7 +10650,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForSectionCall (C_Compile
                                           COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForSectionCall ("llvmNameForSectionCall",
                                                                         functionWithGenericHeader_llvmNameForSectionCall,
@@ -10658,11 +10658,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForSectionCall ("llvmNam
                                                                         1,
                                                                         functionArgs_llvmNameForSectionCall) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Function 'llvmNameForSectionImplementation'                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForSectionImplementation (GALGAS_string inArgument_inName,
                                                          C_Compiler * inCompiler
@@ -10674,16 +10674,16 @@ GALGAS_string function_llvmNameForSectionImplementation (GALGAS_string inArgumen
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForSectionImplementation [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForSectionImplementation (C_Compiler * inCompiler,
                                                                                  const cObjectArray & inEffectiveParameterArray,
@@ -10697,7 +10697,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForSectionImplementation 
                                                     COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForSectionImplementation ("llvmNameForSectionImplementation",
                                                                                   functionWithGenericHeader_llvmNameForSectionImplementation,
@@ -10705,11 +10705,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForSectionImplementation
                                                                                   1,
                                                                                   functionArgs_llvmNameForSectionImplementation) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Once function 'acceptVariableName'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_acceptVariableName (C_Compiler * /* inCompiler */
                                                       COMMA_UNUSED_LOCATION_ARGS) {
@@ -10721,14 +10721,14 @@ static GALGAS_string onceFunction_acceptVariableName (C_Compiler * /* inCompiler
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_acceptVariableName = false ;
 static GALGAS_string gOnceFunctionResult_acceptVariableName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_acceptVariableName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -10739,26 +10739,26 @@ GALGAS_string function_acceptVariableName (class C_Compiler * inCompiler
   return gOnceFunctionResult_acceptVariableName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_acceptVariableName (void) {
   gOnceFunctionResult_acceptVariableName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_acceptVariableName (NULL,
                                                                 releaseOnceFunctionResult_acceptVariableName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_acceptVariableName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_acceptVariableName (C_Compiler * inCompiler,
                                                                    const cObjectArray & /* inEffectiveParameterArray */,
@@ -10767,7 +10767,7 @@ static GALGAS_object functionWithGenericHeader_acceptVariableName (C_Compiler * 
   return function_acceptVariableName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_acceptVariableName ("acceptVariableName",
                                                                     functionWithGenericHeader_acceptVariableName,
@@ -10775,11 +10775,11 @@ C_galgas_function_descriptor functionDescriptor_acceptVariableName ("acceptVaria
                                                                     0,
                                                                     functionArgs_acceptVariableName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Function 'llvmNameForGuardCall'                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForGuardCall (GALGAS_string inArgument_inName,
                                              C_Compiler * inCompiler
@@ -10791,16 +10791,16 @@ GALGAS_string function_llvmNameForGuardCall (GALGAS_string inArgument_inName,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForGuardCall [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForGuardCall (C_Compiler * inCompiler,
                                                                      const cObjectArray & inEffectiveParameterArray,
@@ -10814,7 +10814,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForGuardCall (C_Compiler 
                                         COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForGuardCall ("llvmNameForGuardCall",
                                                                       functionWithGenericHeader_llvmNameForGuardCall,
@@ -10822,11 +10822,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForGuardCall ("llvmNameF
                                                                       1,
                                                                       functionArgs_llvmNameForGuardCall) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Function 'llvmNameForGuardImplementation'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForGuardImplementation (GALGAS_string inArgument_inName,
                                                        C_Compiler * inCompiler
@@ -10838,16 +10838,16 @@ GALGAS_string function_llvmNameForGuardImplementation (GALGAS_string inArgument_
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForGuardImplementation [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForGuardImplementation (C_Compiler * inCompiler,
                                                                                const cObjectArray & inEffectiveParameterArray,
@@ -10861,7 +10861,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForGuardImplementation (C
                                                   COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForGuardImplementation ("llvmNameForGuardImplementation",
                                                                                 functionWithGenericHeader_llvmNameForGuardImplementation,
@@ -10869,11 +10869,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForGuardImplementation (
                                                                                 1,
                                                                                 functionArgs_llvmNameForGuardImplementation) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                   Once function 'waitForGuardChangeFunctionName'                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_waitForGuardChangeFunctionName (C_Compiler * /* inCompiler */
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
@@ -10885,14 +10885,14 @@ static GALGAS_string onceFunction_waitForGuardChangeFunctionName (C_Compiler * /
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_waitForGuardChangeFunctionName = false ;
 static GALGAS_string gOnceFunctionResult_waitForGuardChangeFunctionName ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -10903,26 +10903,26 @@ GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * inComp
   return gOnceFunctionResult_waitForGuardChangeFunctionName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_waitForGuardChangeFunctionName (void) {
   gOnceFunctionResult_waitForGuardChangeFunctionName.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_waitForGuardChangeFunctionName (NULL,
                                                                             releaseOnceFunctionResult_waitForGuardChangeFunctionName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_waitForGuardChangeFunctionName [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_waitForGuardChangeFunctionName (C_Compiler * inCompiler,
                                                                                const cObjectArray & /* inEffectiveParameterArray */,
@@ -10931,7 +10931,7 @@ static GALGAS_object functionWithGenericHeader_waitForGuardChangeFunctionName (C
   return function_waitForGuardChangeFunctionName (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_waitForGuardChangeFunctionName ("waitForGuardChangeFunctionName",
                                                                                 functionWithGenericHeader_waitForGuardChangeFunctionName,
@@ -10939,32 +10939,32 @@ C_galgas_function_descriptor functionDescriptor_waitForGuardChangeFunctionName (
                                                                                 0,
                                                                                 functionArgs_waitForGuardChangeFunctionName) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Function 'llvmNameForLocalVariable'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForLocalVariable (GALGAS_string inArgument_inName,
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("var.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 266)) ;
+  result_outName = GALGAS_string ("\"var.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 266)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 266)) ;
 //---
   return result_outName ;
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForLocalVariable [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForLocalVariable (C_Compiler * inCompiler,
                                                                          const cObjectArray & inEffectiveParameterArray,
@@ -10978,7 +10978,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForLocalVariable (C_Compi
                                             COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForLocalVariable ("llvmNameForLocalVariable",
                                                                           functionWithGenericHeader_llvmNameForLocalVariable,
@@ -10986,32 +10986,32 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForLocalVariable ("llvmN
                                                                           1,
                                                                           functionArgs_llvmNameForLocalVariable) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                        Function 'llvmNameForGlobalVariable'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForGlobalVariable (GALGAS_string inArgument_inName,
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("gvar.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 272)) ;
+  result_outName = GALGAS_string ("\"gvar.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 272)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 272)) ;
 //---
   return result_outName ;
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForGlobalVariable [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForGlobalVariable (C_Compiler * inCompiler,
                                                                           const cObjectArray & inEffectiveParameterArray,
@@ -11025,7 +11025,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForGlobalVariable (C_Comp
                                              COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForGlobalVariable ("llvmNameForGlobalVariable",
                                                                            functionWithGenericHeader_llvmNameForGlobalVariable,
@@ -11033,32 +11033,32 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForGlobalVariable ("llvm
                                                                            1,
                                                                            functionArgs_llvmNameForGlobalVariable) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Function 'llvmNameForRegister'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForRegister (GALGAS_string inArgument_inName,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("register.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 278)) ;
+  result_outName = GALGAS_string ("\"register.").add_operation (inArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 278)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 278)) ;
 //---
   return result_outName ;
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForRegister [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForRegister (C_Compiler * inCompiler,
                                                                     const cObjectArray & inEffectiveParameterArray,
@@ -11072,7 +11072,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForRegister (C_Compiler *
                                        COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForRegister ("llvmNameForRegister",
                                                                      functionWithGenericHeader_llvmNameForRegister,
@@ -11080,11 +11080,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForRegister ("llvmNameFo
                                                                      1,
                                                                      functionArgs_llvmNameForRegister) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          Once function 'mutatingAttribute'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_mutatingAttribute (C_Compiler * /* inCompiler */
                                                      COMMA_UNUSED_LOCATION_ARGS) {
@@ -11096,14 +11096,14 @@ static GALGAS_string onceFunction_mutatingAttribute (C_Compiler * /* inCompiler 
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_mutatingAttribute = false ;
 static GALGAS_string gOnceFunctionResult_mutatingAttribute ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_mutatingAttribute (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -11114,26 +11114,26 @@ GALGAS_string function_mutatingAttribute (class C_Compiler * inCompiler
   return gOnceFunctionResult_mutatingAttribute ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_mutatingAttribute (void) {
   gOnceFunctionResult_mutatingAttribute.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_mutatingAttribute (NULL,
                                                                releaseOnceFunctionResult_mutatingAttribute) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_mutatingAttribute [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_mutatingAttribute (C_Compiler * inCompiler,
                                                                   const cObjectArray & /* inEffectiveParameterArray */,
@@ -11142,7 +11142,7 @@ static GALGAS_object functionWithGenericHeader_mutatingAttribute (C_Compiler * i
   return function_mutatingAttribute (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_mutatingAttribute ("mutatingAttribute",
                                                                    functionWithGenericHeader_mutatingAttribute,
@@ -11150,11 +11150,11 @@ C_galgas_function_descriptor functionDescriptor_mutatingAttribute ("mutatingAttr
                                                                    0,
                                                                    functionArgs_mutatingAttribute) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Once function 'userAccessAttribute'                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_userAccessAttribute (C_Compiler * /* inCompiler */
                                                        COMMA_UNUSED_LOCATION_ARGS) {
@@ -11166,14 +11166,14 @@ static GALGAS_string onceFunction_userAccessAttribute (C_Compiler * /* inCompile
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_userAccessAttribute = false ;
 static GALGAS_string gOnceFunctionResult_userAccessAttribute ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_userAccessAttribute (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -11184,26 +11184,26 @@ GALGAS_string function_userAccessAttribute (class C_Compiler * inCompiler
   return gOnceFunctionResult_userAccessAttribute ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_userAccessAttribute (void) {
   gOnceFunctionResult_userAccessAttribute.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_userAccessAttribute (NULL,
                                                                  releaseOnceFunctionResult_userAccessAttribute) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_userAccessAttribute [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_userAccessAttribute (C_Compiler * inCompiler,
                                                                     const cObjectArray & /* inEffectiveParameterArray */,
@@ -11212,7 +11212,7 @@ static GALGAS_object functionWithGenericHeader_userAccessAttribute (C_Compiler *
   return function_userAccessAttribute (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_userAccessAttribute ("userAccessAttribute",
                                                                      functionWithGenericHeader_userAccessAttribute,

@@ -67,10 +67,10 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "xor"
 }
 
-rule 'a'->'z' | 'A'->'Z' {
+rule isUnicodeLetter {
   repeat
     enterCharacterIntoString (!?tokenString !*)
-  while 'a'->'z' | 'A'->'Z' | '_' | '0'->'9' :
+  while isUnicodeLetter | '_' | '0'->'9' :
   end
   send search tokenString in keyWordList default $identifier$
 }

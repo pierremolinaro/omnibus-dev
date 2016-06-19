@@ -3,14 +3,14 @@
 #include "galgas2/C_galgas_CLI_Options.h"
 #include "utilities/C_PrologueEpilogue.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 #include "all-declarations-1.h"
 
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_specific_5F_syntax::rule_plm_5F_specific_5F_syntax_declaration_i0_ (GALGAS_ast & ioArgument_ioAST,
                                                                                         C_Lexique_plm_5F_lexique * inCompiler) {
@@ -20,7 +20,7 @@ void cParser_plm_5F_specific_5F_syntax::rule_plm_5F_specific_5F_syntax_declarati
   ioArgument_ioAST.mAttribute_mTargetList.addAssign_operation (var_targetName_610  COMMA_SOURCE_FILE ("target-generation.galgas", 12)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_specific_5F_syntax::rule_plm_5F_specific_5F_syntax_declaration_i0_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_target) COMMA_SOURCE_FILE ("target-generation.galgas", 10)) ;
@@ -30,7 +30,7 @@ void cParser_plm_5F_specific_5F_syntax::rule_plm_5F_specific_5F_syntax_declarati
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i0_ (GALGAS_ast & ioArgument_ioAST,
                                                                                                             C_Lexique_plm_5F_lexique * inCompiler) {
@@ -92,7 +92,7 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   ioArgument_ioAST.mAttribute_mDeclarationList.addAssign_operation (GALGAS_configurationDeclarationAST::constructor_new (var_pointerSize_2027, var_panicCodeTypeName_2073, var_panicLineTypeName_2120, var_unsignedIntegerTypeName_2172, var_parameters_2422, var_interruptionConfigurationList_2662  COMMA_SOURCE_FILE ("configuration.galgas", 84))  COMMA_SOURCE_FILE ("configuration.galgas", 84)) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_declaration_i0_parse (C_Lexique_plm_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_configuration) COMMA_SOURCE_FILE ("configuration.galgas", 46)) ;
@@ -137,11 +137,11 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   inCompiler->resetTemplateString () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                             Class for element of '@interruptionConfigurationList' list                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_interruptionConfigurationList : public cCollectionElement {
   public : GALGAS_interruptionConfigurationList_2D_element mObject ;
@@ -164,7 +164,7 @@ class cCollectionElement_interruptionConfigurationList : public cCollectionEleme
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_interruptionConfigurationList::cCollectionElement_interruptionConfigurationList (const GALGAS_lstring & in_mInterruptName,
                                                                                                     const GALGAS_interruptionPanicCode & in_mInterruptionPanicCode
@@ -173,13 +173,13 @@ cCollectionElement (THERE),
 mObject (in_mInterruptName, in_mInterruptionPanicCode) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_interruptionConfigurationList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_interruptionConfigurationList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -187,7 +187,7 @@ cCollectionElement * cCollectionElement_interruptionConfigurationList::copy (voi
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_interruptionConfigurationList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -200,7 +200,7 @@ void cCollectionElement_interruptionConfigurationList::description (C_String & i
   mObject.mAttribute_mInterruptionPanicCode.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_interruptionConfigurationList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_interruptionConfigurationList * operand = (cCollectionElement_interruptionConfigurationList *) inOperand ;
@@ -208,13 +208,13 @@ typeComparisonResult cCollectionElement_interruptionConfigurationList::compare (
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList::GALGAS_interruptionConfigurationList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList::GALGAS_interruptionConfigurationList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -223,7 +223,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_interruptionConfigurationList result ;
@@ -231,7 +231,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::const
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                                       const GALGAS_interruptionPanicCode & inOperand1
@@ -246,7 +246,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::const
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                       const GALGAS_lstring & in_mInterruptName,
@@ -259,7 +259,7 @@ void GALGAS_interruptionConfigurationList::makeAttributesFromObjects (capCollect
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                                 const GALGAS_interruptionPanicCode & inOperand1
@@ -274,7 +274,7 @@ void GALGAS_interruptionConfigurationList::addAssign_operation (const GALGAS_lst
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                                  const GALGAS_interruptionPanicCode inOperand1,
@@ -291,7 +291,7 @@ void GALGAS_interruptionConfigurationList::setter_insertAtIndex (const GALGAS_ls
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                                  GALGAS_interruptionPanicCode & outOperand1,
@@ -313,7 +313,7 @@ void GALGAS_interruptionConfigurationList::setter_removeAtIndex (GALGAS_lstring 
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::setter_popFirst (GALGAS_lstring & outOperand0,
                                                             GALGAS_interruptionPanicCode & outOperand1,
@@ -332,7 +332,7 @@ void GALGAS_interruptionConfigurationList::setter_popFirst (GALGAS_lstring & out
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::setter_popLast (GALGAS_lstring & outOperand0,
                                                            GALGAS_interruptionPanicCode & outOperand1,
@@ -351,7 +351,7 @@ void GALGAS_interruptionConfigurationList::setter_popLast (GALGAS_lstring & outO
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::method_first (GALGAS_lstring & outOperand0,
                                                          GALGAS_interruptionPanicCode & outOperand1,
@@ -370,7 +370,7 @@ void GALGAS_interruptionConfigurationList::method_first (GALGAS_lstring & outOpe
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::method_last (GALGAS_lstring & outOperand0,
                                                         GALGAS_interruptionPanicCode & outOperand1,
@@ -389,7 +389,7 @@ void GALGAS_interruptionConfigurationList::method_last (GALGAS_lstring & outOper
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::add_operation (const GALGAS_interruptionConfigurationList & inOperand,
                                                                                           C_Compiler * /* inCompiler */
@@ -402,7 +402,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::add_o
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                                     C_Compiler * inCompiler
@@ -412,7 +412,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::gette
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                                     C_Compiler * inCompiler
@@ -422,7 +422,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::gette
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                                   C_Compiler * inCompiler
@@ -432,7 +432,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::gette
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_interruptionConfigurationList::plusAssign_operation (const GALGAS_interruptionConfigurationList inOperand,
                                                                  C_Compiler * /* inCompiler */
@@ -440,7 +440,7 @@ void GALGAS_interruptionConfigurationList::plusAssign_operation (const GALGAS_in
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_interruptionConfigurationList::getter_mInterruptNameAtIndex (const GALGAS_uint & inIndex,
                                                                                    C_Compiler * inCompiler
@@ -455,7 +455,7 @@ GALGAS_lstring GALGAS_interruptionConfigurationList::getter_mInterruptNameAtInde
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionPanicCode GALGAS_interruptionConfigurationList::getter_mInterruptionPanicCodeAtIndex (const GALGAS_uint & inIndex,
                                                                                                          C_Compiler * inCompiler
@@ -472,7 +472,7 @@ GALGAS_interruptionPanicCode GALGAS_interruptionConfigurationList::getter_mInter
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_interruptionConfigurationList::cEnumerator_interruptionConfigurationList (const GALGAS_interruptionConfigurationList & inEnumeratedObject,
                                                                                       const typeEnumerationOrder inOrder) :
@@ -480,7 +480,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList_2D_element cEnumerator_interruptionConfigurationList::current (LOCATION_ARGS) const {
   const cCollectionElement_interruptionConfigurationList * p = (const cCollectionElement_interruptionConfigurationList *) currentObjectPtr (THERE) ;
@@ -489,7 +489,7 @@ GALGAS_interruptionConfigurationList_2D_element cEnumerator_interruptionConfigur
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_interruptionConfigurationList::current_mInterruptName (LOCATION_ARGS) const {
   const cCollectionElement_interruptionConfigurationList * p = (const cCollectionElement_interruptionConfigurationList *) currentObjectPtr (THERE) ;
@@ -497,7 +497,7 @@ GALGAS_lstring cEnumerator_interruptionConfigurationList::current_mInterruptName
   return p->mObject.mAttribute_mInterruptName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionPanicCode cEnumerator_interruptionConfigurationList::current_mInterruptionPanicCode (LOCATION_ARGS) const {
   const cCollectionElement_interruptionConfigurationList * p = (const cCollectionElement_interruptionConfigurationList *) currentObjectPtr (THERE) ;
@@ -508,23 +508,23 @@ GALGAS_interruptionPanicCode cEnumerator_interruptionConfigurationList::current_
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         @interruptionConfigurationList type                                         *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_interruptionConfigurationList ("interruptionConfigurationList",
                                                       NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_interruptionConfigurationList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_interruptionConfigurationList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_interruptionConfigurationList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -534,7 +534,7 @@ AC_GALGAS_root * GALGAS_interruptionConfigurationList::clonedObject (void) const
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::extractObject (const GALGAS_object & inObject,
                                                                                           C_Compiler * inCompiler
@@ -551,7 +551,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::extra
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_enumConstantMap::cMapElement_enumConstantMap (const GALGAS_lstring & inKey,
                                                           const GALGAS_uint & in_mIndex
@@ -560,13 +560,13 @@ cMapElement (inKey COMMA_THERE),
 mAttribute_mIndex (in_mIndex) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_enumConstantMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mIndex.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_enumConstantMap::copy (void) {
   cMapElement * result = NULL ;
@@ -574,7 +574,7 @@ cMapElement * cMapElement_enumConstantMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_enumConstantMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -583,7 +583,7 @@ void cMapElement_enumConstantMap::description (C_String & ioString, const int32_
   mAttribute_mIndex.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_enumConstantMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_enumConstantMap * operand = (cMapElement_enumConstantMap *) inOperand ;
@@ -594,26 +594,26 @@ typeComparisonResult cMapElement_enumConstantMap::compare (const cCollectionElem
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumConstantMap::GALGAS_enumConstantMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumConstantMap::GALGAS_enumConstantMap (const GALGAS_enumConstantMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumConstantMap & GALGAS_enumConstantMap::operator = (const GALGAS_enumConstantMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumConstantMap GALGAS_enumConstantMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_enumConstantMap result ;
@@ -621,7 +621,7 @@ GALGAS_enumConstantMap GALGAS_enumConstantMap::constructor_emptyMap (LOCATION_AR
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumConstantMap GALGAS_enumConstantMap::constructor_mapWithMapToOverride (const GALGAS_enumConstantMap & inMapToOverride
                                                                                  COMMA_LOCATION_ARGS) {
@@ -630,7 +630,7 @@ GALGAS_enumConstantMap GALGAS_enumConstantMap::constructor_mapWithMapToOverride 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumConstantMap GALGAS_enumConstantMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const {
@@ -639,7 +639,7 @@ GALGAS_enumConstantMap GALGAS_enumConstantMap::getter_overriddenMap (C_Compiler 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_enumConstantMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                   const GALGAS_uint & inArgument0,
@@ -655,7 +655,7 @@ void GALGAS_enumConstantMap::addAssign_operation (const GALGAS_lstring & inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_enumConstantMap::setter_insertKey (GALGAS_lstring inKey,
                                                GALGAS_uint inArgument0,
@@ -671,11 +671,11 @@ void GALGAS_enumConstantMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_enumConstantMap_searchKey = "there is no '%K' constant" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_enumConstantMap::method_searchKey (GALGAS_lstring inKey,
                                                GALGAS_uint & outArgument0,
@@ -693,7 +693,7 @@ void GALGAS_enumConstantMap::method_searchKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_enumConstantMap::getter_mIndexForKey (const GALGAS_string & inKey,
                                                          C_Compiler * inCompiler
@@ -708,7 +708,7 @@ GALGAS_uint GALGAS_enumConstantMap::getter_mIndexForKey (const GALGAS_string & i
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_enumConstantMap::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
                                                      GALGAS_string inKey,
@@ -722,7 +722,7 @@ void GALGAS_enumConstantMap::setter_setMIndexForKey (GALGAS_uint inAttributeValu
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_enumConstantMap * GALGAS_enumConstantMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                          const GALGAS_string & inKey
@@ -732,7 +732,7 @@ cMapElement_enumConstantMap * GALGAS_enumConstantMap::readWriteAccessForWithInst
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_enumConstantMap::cEnumerator_enumConstantMap (const GALGAS_enumConstantMap & inEnumeratedObject,
                                                           const typeEnumerationOrder inOrder) :
@@ -740,7 +740,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumConstantMap_2D_element cEnumerator_enumConstantMap::current (LOCATION_ARGS) const {
   const cMapElement_enumConstantMap * p = (const cMapElement_enumConstantMap *) currentObjectPtr (THERE) ;
@@ -748,7 +748,7 @@ GALGAS_enumConstantMap_2D_element cEnumerator_enumConstantMap::current (LOCATION
   return GALGAS_enumConstantMap_2D_element (p->mAttribute_lkey, p->mAttribute_mIndex) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_enumConstantMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -756,7 +756,7 @@ GALGAS_lstring cEnumerator_enumConstantMap::current_lkey (LOCATION_ARGS) const {
   return p->mAttribute_lkey ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cEnumerator_enumConstantMap::current_mIndex (LOCATION_ARGS) const {
   const cMapElement_enumConstantMap * p = (const cMapElement_enumConstantMap *) currentObjectPtr (THERE) ;
@@ -766,23 +766,23 @@ GALGAS_uint cEnumerator_enumConstantMap::current_mIndex (LOCATION_ARGS) const {
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                @enumConstantMap type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_enumConstantMap ("enumConstantMap",
                                         NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_enumConstantMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_enumConstantMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_enumConstantMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -792,7 +792,7 @@ AC_GALGAS_root * GALGAS_enumConstantMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumConstantMap GALGAS_enumConstantMap::extractObject (const GALGAS_object & inObject,
                                                               C_Compiler * inCompiler
@@ -809,11 +809,11 @@ GALGAS_enumConstantMap GALGAS_enumConstantMap::extractObject (const GALGAS_objec
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                 Class for element of '@structureFieldListAST' list                                  *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_structureFieldListAST : public cCollectionElement {
   public : GALGAS_structureFieldListAST_2D_element mObject ;
@@ -838,7 +838,7 @@ class cCollectionElement_structureFieldListAST : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_structureFieldListAST::cCollectionElement_structureFieldListAST (const GALGAS_lstring & in_mFieldName,
                                                                                     const GALGAS_bool & in_mIsPublic,
@@ -849,13 +849,13 @@ cCollectionElement (THERE),
 mObject (in_mFieldName, in_mIsPublic, in_mFieldTypeName, in_mInitialisation) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_structureFieldListAST::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_structureFieldListAST::copy (void) {
   cCollectionElement * result = NULL ;
@@ -863,7 +863,7 @@ cCollectionElement * cCollectionElement_structureFieldListAST::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_structureFieldListAST::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -884,7 +884,7 @@ void cCollectionElement_structureFieldListAST::description (C_String & ioString,
   mObject.mAttribute_mInitialisation.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_structureFieldListAST::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_structureFieldListAST * operand = (cCollectionElement_structureFieldListAST *) inOperand ;
@@ -892,13 +892,13 @@ typeComparisonResult cCollectionElement_structureFieldListAST::compare (const cC
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureFieldListAST::GALGAS_structureFieldListAST (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureFieldListAST::GALGAS_structureFieldListAST (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -907,7 +907,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureFieldListAST GALGAS_structureFieldListAST::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_structureFieldListAST result ;
@@ -915,7 +915,7 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::constructor_emptyList
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureFieldListAST GALGAS_structureFieldListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                       const GALGAS_bool & inOperand1,
@@ -932,7 +932,7 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::constructor_listWithV
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureFieldListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                               const GALGAS_lstring & in_mFieldName,
@@ -949,7 +949,7 @@ void GALGAS_structureFieldListAST::makeAttributesFromObjects (capCollectionEleme
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureFieldListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                         const GALGAS_bool & inOperand1,
@@ -966,7 +966,7 @@ void GALGAS_structureFieldListAST::addAssign_operation (const GALGAS_lstring & i
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureFieldListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                          const GALGAS_bool inOperand1,
@@ -985,7 +985,7 @@ void GALGAS_structureFieldListAST::setter_insertAtIndex (const GALGAS_lstring in
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureFieldListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                          GALGAS_bool & outOperand1,
@@ -1013,7 +1013,7 @@ void GALGAS_structureFieldListAST::setter_removeAtIndex (GALGAS_lstring & outOpe
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureFieldListAST::setter_popFirst (GALGAS_lstring & outOperand0,
                                                     GALGAS_bool & outOperand1,
@@ -1038,7 +1038,7 @@ void GALGAS_structureFieldListAST::setter_popFirst (GALGAS_lstring & outOperand0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureFieldListAST::setter_popLast (GALGAS_lstring & outOperand0,
                                                    GALGAS_bool & outOperand1,
@@ -1063,7 +1063,7 @@ void GALGAS_structureFieldListAST::setter_popLast (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureFieldListAST::method_first (GALGAS_lstring & outOperand0,
                                                  GALGAS_bool & outOperand1,
@@ -1088,7 +1088,7 @@ void GALGAS_structureFieldListAST::method_first (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureFieldListAST::method_last (GALGAS_lstring & outOperand0,
                                                 GALGAS_bool & outOperand1,
@@ -1113,7 +1113,7 @@ void GALGAS_structureFieldListAST::method_last (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureFieldListAST GALGAS_structureFieldListAST::add_operation (const GALGAS_structureFieldListAST & inOperand,
                                                                           C_Compiler * /* inCompiler */
@@ -1126,7 +1126,7 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::add_operation (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureFieldListAST GALGAS_structureFieldListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                     C_Compiler * inCompiler
@@ -1136,7 +1136,7 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::getter_subListWithRan
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureFieldListAST GALGAS_structureFieldListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                     C_Compiler * inCompiler
@@ -1146,7 +1146,7 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::getter_subListFromInd
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureFieldListAST GALGAS_structureFieldListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                   C_Compiler * inCompiler
@@ -1156,7 +1156,7 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::getter_subListToIndex
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureFieldListAST::plusAssign_operation (const GALGAS_structureFieldListAST inOperand,
                                                          C_Compiler * /* inCompiler */
@@ -1164,7 +1164,7 @@ void GALGAS_structureFieldListAST::plusAssign_operation (const GALGAS_structureF
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_structureFieldListAST::getter_mFieldNameAtIndex (const GALGAS_uint & inIndex,
                                                                        C_Compiler * inCompiler
@@ -1179,7 +1179,7 @@ GALGAS_lstring GALGAS_structureFieldListAST::getter_mFieldNameAtIndex (const GAL
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_structureFieldListAST::getter_mIsPublicAtIndex (const GALGAS_uint & inIndex,
                                                                    C_Compiler * inCompiler
@@ -1194,7 +1194,7 @@ GALGAS_bool GALGAS_structureFieldListAST::getter_mIsPublicAtIndex (const GALGAS_
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_structureFieldListAST::getter_mFieldTypeNameAtIndex (const GALGAS_uint & inIndex,
                                                                            C_Compiler * inCompiler
@@ -1209,7 +1209,7 @@ GALGAS_lstring GALGAS_structureFieldListAST::getter_mFieldTypeNameAtIndex (const
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureVarInit GALGAS_structureFieldListAST::getter_mInitialisationAtIndex (const GALGAS_uint & inIndex,
                                                                                      C_Compiler * inCompiler
@@ -1226,7 +1226,7 @@ GALGAS_structureVarInit GALGAS_structureFieldListAST::getter_mInitialisationAtIn
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_structureFieldListAST::cEnumerator_structureFieldListAST (const GALGAS_structureFieldListAST & inEnumeratedObject,
                                                                       const typeEnumerationOrder inOrder) :
@@ -1234,7 +1234,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureFieldListAST_2D_element cEnumerator_structureFieldListAST::current (LOCATION_ARGS) const {
   const cCollectionElement_structureFieldListAST * p = (const cCollectionElement_structureFieldListAST *) currentObjectPtr (THERE) ;
@@ -1243,7 +1243,7 @@ GALGAS_structureFieldListAST_2D_element cEnumerator_structureFieldListAST::curre
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_structureFieldListAST::current_mFieldName (LOCATION_ARGS) const {
   const cCollectionElement_structureFieldListAST * p = (const cCollectionElement_structureFieldListAST *) currentObjectPtr (THERE) ;
@@ -1251,7 +1251,7 @@ GALGAS_lstring cEnumerator_structureFieldListAST::current_mFieldName (LOCATION_A
   return p->mObject.mAttribute_mFieldName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_structureFieldListAST::current_mIsPublic (LOCATION_ARGS) const {
   const cCollectionElement_structureFieldListAST * p = (const cCollectionElement_structureFieldListAST *) currentObjectPtr (THERE) ;
@@ -1259,7 +1259,7 @@ GALGAS_bool cEnumerator_structureFieldListAST::current_mIsPublic (LOCATION_ARGS)
   return p->mObject.mAttribute_mIsPublic ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_structureFieldListAST::current_mFieldTypeName (LOCATION_ARGS) const {
   const cCollectionElement_structureFieldListAST * p = (const cCollectionElement_structureFieldListAST *) currentObjectPtr (THERE) ;
@@ -1267,7 +1267,7 @@ GALGAS_lstring cEnumerator_structureFieldListAST::current_mFieldTypeName (LOCATI
   return p->mObject.mAttribute_mFieldTypeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureVarInit cEnumerator_structureFieldListAST::current_mInitialisation (LOCATION_ARGS) const {
   const cCollectionElement_structureFieldListAST * p = (const cCollectionElement_structureFieldListAST *) currentObjectPtr (THERE) ;
@@ -1278,23 +1278,23 @@ GALGAS_structureVarInit cEnumerator_structureFieldListAST::current_mInitialisati
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             @structureFieldListAST type                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_structureFieldListAST ("structureFieldListAST",
                                               NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_structureFieldListAST::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_structureFieldListAST ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_structureFieldListAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -1304,7 +1304,7 @@ AC_GALGAS_root * GALGAS_structureFieldListAST::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureFieldListAST GALGAS_structureFieldListAST::extractObject (const GALGAS_object & inObject,
                                                                           C_Compiler * inCompiler
@@ -1321,7 +1321,7 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::extractObject (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumAssociatedValues_structureVarInit_expression::cEnumAssociatedValues_structureVarInit_expression (const GALGAS_expressionAST & inAssociatedValue0
                                                                                                       COMMA_LOCATION_ARGS) :
@@ -1329,7 +1329,7 @@ cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cEnumAssociatedValues_structureVarInit_expression::description (C_String & ioString,
                                                                      const int32_t inIndentation) const {
@@ -1338,7 +1338,7 @@ void cEnumAssociatedValues_structureVarInit_expression::description (C_String & 
   ioString << ")" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cEnumAssociatedValues_structureVarInit_expression::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_structureVarInit_expression * ptr = dynamic_cast<const cEnumAssociatedValues_structureVarInit_expression *> (inOperand) ;
@@ -1350,14 +1350,14 @@ typeComparisonResult cEnumAssociatedValues_structureVarInit_expression::compare 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureVarInit::GALGAS_structureVarInit (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureVarInit GALGAS_structureVarInit::constructor_expression (const GALGAS_expressionAST & inAssociatedValue0
                                                                          COMMA_LOCATION_ARGS) {
@@ -1372,7 +1372,7 @@ GALGAS_structureVarInit GALGAS_structureVarInit::constructor_expression (const G
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureVarInit GALGAS_structureVarInit::constructor_noExpression (UNUSED_LOCATION_ARGS) {
   GALGAS_structureVarInit result ;
@@ -1380,7 +1380,7 @@ GALGAS_structureVarInit GALGAS_structureVarInit::constructor_noExpression (UNUSE
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureVarInit::method_expression (GALGAS_expressionAST & outAssociatedValue0,
                                                  C_Compiler * inCompiler
@@ -1396,7 +1396,7 @@ void GALGAS_structureVarInit::method_expression (GALGAS_expressionAST & outAssoc
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_structureVarInit [3] = {
   "(not built)",
@@ -1404,19 +1404,19 @@ static const char * gEnumNameArrayFor_structureVarInit [3] = {
   "noExpression"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_structureVarInit::getter_isExpression (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_expression == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_structureVarInit::getter_isNoExpression (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_noExpression == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structureVarInit::description (C_String & ioString,
                                            const int32_t inIndentation) const {
@@ -1425,7 +1425,7 @@ void GALGAS_structureVarInit::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_structureVarInit::objectCompare (const GALGAS_structureVarInit & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -1441,23 +1441,23 @@ typeComparisonResult GALGAS_structureVarInit::objectCompare (const GALGAS_struct
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               @structureVarInit type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_structureVarInit ("structureVarInit",
                                          NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_structureVarInit::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_structureVarInit ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_structureVarInit::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -1467,7 +1467,7 @@ AC_GALGAS_root * GALGAS_structureVarInit::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureVarInit GALGAS_structureVarInit::extractObject (const GALGAS_object & inObject,
                                                                 C_Compiler * inCompiler
@@ -1484,11 +1484,11 @@ GALGAS_structureVarInit GALGAS_structureVarInit::extractObject (const GALGAS_obj
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Class for element of '@propertyList' list                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_propertyList : public cCollectionElement {
   public : GALGAS_propertyList_2D_element mObject ;
@@ -1511,7 +1511,7 @@ class cCollectionElement_propertyList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_propertyList::cCollectionElement_propertyList (const GALGAS_string & in_mPropertyName,
                                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mType
@@ -1520,13 +1520,13 @@ cCollectionElement (THERE),
 mObject (in_mPropertyName, in_mType) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_propertyList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_propertyList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -1534,7 +1534,7 @@ cCollectionElement * cCollectionElement_propertyList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_propertyList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -1547,7 +1547,7 @@ void cCollectionElement_propertyList::description (C_String & ioString, const in
   mObject.mAttribute_mType.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_propertyList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_propertyList * operand = (cCollectionElement_propertyList *) inOperand ;
@@ -1555,13 +1555,13 @@ typeComparisonResult cCollectionElement_propertyList::compare (const cCollection
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList::GALGAS_propertyList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList::GALGAS_propertyList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -1570,7 +1570,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList GALGAS_propertyList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_propertyList result ;
@@ -1578,7 +1578,7 @@ GALGAS_propertyList GALGAS_propertyList::constructor_emptyList (LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList GALGAS_propertyList::constructor_listWithValue (const GALGAS_string & inOperand0,
                                                                     const GALGAS_unifiedTypeMap_2D_proxy & inOperand1
@@ -1593,7 +1593,7 @@ GALGAS_propertyList GALGAS_propertyList::constructor_listWithValue (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                      const GALGAS_string & in_mPropertyName,
@@ -1606,7 +1606,7 @@ void GALGAS_propertyList::makeAttributesFromObjects (capCollectionElement & outA
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyList::addAssign_operation (const GALGAS_string & inOperand0,
                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand1
@@ -1621,7 +1621,7 @@ void GALGAS_propertyList::addAssign_operation (const GALGAS_string & inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyList::setter_insertAtIndex (const GALGAS_string inOperand0,
                                                 const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
@@ -1638,7 +1638,7 @@ void GALGAS_propertyList::setter_insertAtIndex (const GALGAS_string inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyList::setter_removeAtIndex (GALGAS_string & outOperand0,
                                                 GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -1660,7 +1660,7 @@ void GALGAS_propertyList::setter_removeAtIndex (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyList::setter_popFirst (GALGAS_string & outOperand0,
                                            GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -1679,7 +1679,7 @@ void GALGAS_propertyList::setter_popFirst (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyList::setter_popLast (GALGAS_string & outOperand0,
                                           GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -1698,7 +1698,7 @@ void GALGAS_propertyList::setter_popLast (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyList::method_first (GALGAS_string & outOperand0,
                                         GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -1717,7 +1717,7 @@ void GALGAS_propertyList::method_first (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyList::method_last (GALGAS_string & outOperand0,
                                        GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -1736,7 +1736,7 @@ void GALGAS_propertyList::method_last (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList GALGAS_propertyList::add_operation (const GALGAS_propertyList & inOperand,
                                                         C_Compiler * /* inCompiler */
@@ -1749,7 +1749,7 @@ GALGAS_propertyList GALGAS_propertyList::add_operation (const GALGAS_propertyLis
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList GALGAS_propertyList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                   C_Compiler * inCompiler
@@ -1759,7 +1759,7 @@ GALGAS_propertyList GALGAS_propertyList::getter_subListWithRange (const GALGAS_r
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList GALGAS_propertyList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                   C_Compiler * inCompiler
@@ -1769,7 +1769,7 @@ GALGAS_propertyList GALGAS_propertyList::getter_subListFromIndex (const GALGAS_u
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList GALGAS_propertyList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                 C_Compiler * inCompiler
@@ -1779,7 +1779,7 @@ GALGAS_propertyList GALGAS_propertyList::getter_subListToIndex (const GALGAS_uin
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyList::plusAssign_operation (const GALGAS_propertyList inOperand,
                                                 C_Compiler * /* inCompiler */
@@ -1787,7 +1787,7 @@ void GALGAS_propertyList::plusAssign_operation (const GALGAS_propertyList inOper
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string GALGAS_propertyList::getter_mPropertyNameAtIndex (const GALGAS_uint & inIndex,
                                                                 C_Compiler * inCompiler
@@ -1802,7 +1802,7 @@ GALGAS_string GALGAS_propertyList::getter_mPropertyNameAtIndex (const GALGAS_uin
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_propertyList::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
                                                                          C_Compiler * inCompiler
@@ -1819,7 +1819,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_propertyList::getter_mTypeAtIndex (const G
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_propertyList::cEnumerator_propertyList (const GALGAS_propertyList & inEnumeratedObject,
                                                     const typeEnumerationOrder inOrder) :
@@ -1827,7 +1827,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList_2D_element cEnumerator_propertyList::current (LOCATION_ARGS) const {
   const cCollectionElement_propertyList * p = (const cCollectionElement_propertyList *) currentObjectPtr (THERE) ;
@@ -1836,7 +1836,7 @@ GALGAS_propertyList_2D_element cEnumerator_propertyList::current (LOCATION_ARGS)
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cEnumerator_propertyList::current_mPropertyName (LOCATION_ARGS) const {
   const cCollectionElement_propertyList * p = (const cCollectionElement_propertyList *) currentObjectPtr (THERE) ;
@@ -1844,7 +1844,7 @@ GALGAS_string cEnumerator_propertyList::current_mPropertyName (LOCATION_ARGS) co
   return p->mObject.mAttribute_mPropertyName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cEnumerator_propertyList::current_mType (LOCATION_ARGS) const {
   const cCollectionElement_propertyList * p = (const cCollectionElement_propertyList *) currentObjectPtr (THERE) ;
@@ -1855,23 +1855,23 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_propertyList::current_mType (LOCATION
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                 @propertyList type                                                  *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_propertyList ("propertyList",
                                      NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_propertyList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_propertyList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_propertyList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -1881,7 +1881,7 @@ AC_GALGAS_root * GALGAS_propertyList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList GALGAS_propertyList::extractObject (const GALGAS_object & inObject,
                                                         C_Compiler * inCompiler
@@ -1898,7 +1898,7 @@ GALGAS_propertyList GALGAS_propertyList::extractObject (const GALGAS_object & in
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_propertyMap::cMapElement_propertyMap (const GALGAS_lstring & inKey,
                                                   const GALGAS_bool & in_mIsPublic,
@@ -1911,13 +1911,13 @@ mAttribute_mTypeProxy (in_mTypeProxy),
 mAttribute_mIndex (in_mIndex) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_propertyMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mIsPublic.isValid () && mAttribute_mTypeProxy.isValid () && mAttribute_mIndex.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_propertyMap::copy (void) {
   cMapElement * result = NULL ;
@@ -1925,7 +1925,7 @@ cMapElement * cMapElement_propertyMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_propertyMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -1942,7 +1942,7 @@ void cMapElement_propertyMap::description (C_String & ioString, const int32_t in
   mAttribute_mIndex.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_propertyMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_propertyMap * operand = (cMapElement_propertyMap *) inOperand ;
@@ -1959,26 +1959,26 @@ typeComparisonResult cMapElement_propertyMap::compare (const cCollectionElement 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap::GALGAS_propertyMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap::GALGAS_propertyMap (const GALGAS_propertyMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap & GALGAS_propertyMap::operator = (const GALGAS_propertyMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap GALGAS_propertyMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_propertyMap result ;
@@ -1986,7 +1986,7 @@ GALGAS_propertyMap GALGAS_propertyMap::constructor_emptyMap (LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap GALGAS_propertyMap::constructor_mapWithMapToOverride (const GALGAS_propertyMap & inMapToOverride
                                                                          COMMA_LOCATION_ARGS) {
@@ -1995,7 +1995,7 @@ GALGAS_propertyMap GALGAS_propertyMap::constructor_mapWithMapToOverride (const G
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap GALGAS_propertyMap::getter_overriddenMap (C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) const {
@@ -2004,7 +2004,7 @@ GALGAS_propertyMap GALGAS_propertyMap::getter_overriddenMap (C_Compiler * inComp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyMap::addAssign_operation (const GALGAS_lstring & inKey,
                                               const GALGAS_bool & inArgument0,
@@ -2022,7 +2022,7 @@ void GALGAS_propertyMap::addAssign_operation (const GALGAS_lstring & inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyMap::setter_insertKey (GALGAS_lstring inKey,
                                            GALGAS_bool inArgument0,
@@ -2040,11 +2040,11 @@ void GALGAS_propertyMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_propertyMap_searchKey = "there is no '%K' property" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyMap::method_searchKey (GALGAS_lstring inKey,
                                            GALGAS_bool & outArgument0,
@@ -2068,7 +2068,7 @@ void GALGAS_propertyMap::method_searchKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_propertyMap::getter_mIsPublicForKey (const GALGAS_string & inKey,
                                                         C_Compiler * inCompiler
@@ -2083,7 +2083,7 @@ GALGAS_bool GALGAS_propertyMap::getter_mIsPublicForKey (const GALGAS_string & in
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_propertyMap::getter_mTypeProxyForKey (const GALGAS_string & inKey,
                                                                             C_Compiler * inCompiler
@@ -2098,7 +2098,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_propertyMap::getter_mTypeProxyForKey (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_propertyMap::getter_mIndexForKey (const GALGAS_string & inKey,
                                                      C_Compiler * inCompiler
@@ -2113,7 +2113,7 @@ GALGAS_uint GALGAS_propertyMap::getter_mIndexForKey (const GALGAS_string & inKey
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyMap::setter_setMIsPublicForKey (GALGAS_bool inAttributeValue,
                                                     GALGAS_string inKey,
@@ -2127,7 +2127,7 @@ void GALGAS_propertyMap::setter_setMIsPublicForKey (GALGAS_bool inAttributeValue
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyMap::setter_setMTypeProxyForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
                                                      GALGAS_string inKey,
@@ -2141,7 +2141,7 @@ void GALGAS_propertyMap::setter_setMTypeProxyForKey (GALGAS_unifiedTypeMap_2D_pr
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyMap::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
                                                  GALGAS_string inKey,
@@ -2155,7 +2155,7 @@ void GALGAS_propertyMap::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_propertyMap * GALGAS_propertyMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                  const GALGAS_string & inKey
@@ -2165,7 +2165,7 @@ cMapElement_propertyMap * GALGAS_propertyMap::readWriteAccessForWithInstruction 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_propertyMap::cEnumerator_propertyMap (const GALGAS_propertyMap & inEnumeratedObject,
                                                   const typeEnumerationOrder inOrder) :
@@ -2173,7 +2173,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap_2D_element cEnumerator_propertyMap::current (LOCATION_ARGS) const {
   const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) currentObjectPtr (THERE) ;
@@ -2181,7 +2181,7 @@ GALGAS_propertyMap_2D_element cEnumerator_propertyMap::current (LOCATION_ARGS) c
   return GALGAS_propertyMap_2D_element (p->mAttribute_lkey, p->mAttribute_mIsPublic, p->mAttribute_mTypeProxy, p->mAttribute_mIndex) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_propertyMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -2189,7 +2189,7 @@ GALGAS_lstring cEnumerator_propertyMap::current_lkey (LOCATION_ARGS) const {
   return p->mAttribute_lkey ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_propertyMap::current_mIsPublic (LOCATION_ARGS) const {
   const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) currentObjectPtr (THERE) ;
@@ -2197,7 +2197,7 @@ GALGAS_bool cEnumerator_propertyMap::current_mIsPublic (LOCATION_ARGS) const {
   return p->mAttribute_mIsPublic ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cEnumerator_propertyMap::current_mTypeProxy (LOCATION_ARGS) const {
   const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) currentObjectPtr (THERE) ;
@@ -2205,7 +2205,7 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_propertyMap::current_mTypeProxy (LOCA
   return p->mAttribute_mTypeProxy ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cEnumerator_propertyMap::current_mIndex (LOCATION_ARGS) const {
   const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) currentObjectPtr (THERE) ;
@@ -2215,23 +2215,23 @@ GALGAS_uint cEnumerator_propertyMap::current_mIndex (LOCATION_ARGS) const {
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                  @propertyMap type                                                  *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_propertyMap ("propertyMap",
                                     NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_propertyMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_propertyMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_propertyMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -2241,7 +2241,7 @@ AC_GALGAS_root * GALGAS_propertyMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap GALGAS_propertyMap::extractObject (const GALGAS_object & inObject,
                                                       C_Compiler * inCompiler
@@ -2258,11 +2258,11 @@ GALGAS_propertyMap GALGAS_propertyMap::extractObject (const GALGAS_object & inOb
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                  Class for element of '@constructorSignature' list                                  *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_constructorSignature : public cCollectionElement {
   public : GALGAS_constructorSignature_2D_element mObject ;
@@ -2286,7 +2286,7 @@ class cCollectionElement_constructorSignature : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_constructorSignature::cCollectionElement_constructorSignature (const GALGAS_string & in_mSelector,
                                                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
@@ -2296,13 +2296,13 @@ cCollectionElement (THERE),
 mObject (in_mSelector, in_mType, in_mFieldIndex) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_constructorSignature::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_constructorSignature::copy (void) {
   cCollectionElement * result = NULL ;
@@ -2310,7 +2310,7 @@ cCollectionElement * cCollectionElement_constructorSignature::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_constructorSignature::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -2327,7 +2327,7 @@ void cCollectionElement_constructorSignature::description (C_String & ioString, 
   mObject.mAttribute_mFieldIndex.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_constructorSignature::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_constructorSignature * operand = (cCollectionElement_constructorSignature *) inOperand ;
@@ -2335,13 +2335,13 @@ typeComparisonResult cCollectionElement_constructorSignature::compare (const cCo
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature::GALGAS_constructorSignature (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature::GALGAS_constructorSignature (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -2350,7 +2350,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature GALGAS_constructorSignature::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_constructorSignature result ;
@@ -2358,7 +2358,7 @@ GALGAS_constructorSignature GALGAS_constructorSignature::constructor_emptyList (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature GALGAS_constructorSignature::constructor_listWithValue (const GALGAS_string & inOperand0,
                                                                                     const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
@@ -2374,7 +2374,7 @@ GALGAS_constructorSignature GALGAS_constructorSignature::constructor_listWithVal
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constructorSignature::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                              const GALGAS_string & in_mSelector,
@@ -2389,7 +2389,7 @@ void GALGAS_constructorSignature::makeAttributesFromObjects (capCollectionElemen
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constructorSignature::addAssign_operation (const GALGAS_string & inOperand0,
                                                        const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
@@ -2405,7 +2405,7 @@ void GALGAS_constructorSignature::addAssign_operation (const GALGAS_string & inO
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constructorSignature::setter_insertAtIndex (const GALGAS_string inOperand0,
                                                         const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
@@ -2423,7 +2423,7 @@ void GALGAS_constructorSignature::setter_insertAtIndex (const GALGAS_string inOp
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constructorSignature::setter_removeAtIndex (GALGAS_string & outOperand0,
                                                         GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -2448,7 +2448,7 @@ void GALGAS_constructorSignature::setter_removeAtIndex (GALGAS_string & outOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constructorSignature::setter_popFirst (GALGAS_string & outOperand0,
                                                    GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -2470,7 +2470,7 @@ void GALGAS_constructorSignature::setter_popFirst (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constructorSignature::setter_popLast (GALGAS_string & outOperand0,
                                                   GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -2492,7 +2492,7 @@ void GALGAS_constructorSignature::setter_popLast (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constructorSignature::method_first (GALGAS_string & outOperand0,
                                                 GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -2514,7 +2514,7 @@ void GALGAS_constructorSignature::method_first (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constructorSignature::method_last (GALGAS_string & outOperand0,
                                                GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -2536,7 +2536,7 @@ void GALGAS_constructorSignature::method_last (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature GALGAS_constructorSignature::add_operation (const GALGAS_constructorSignature & inOperand,
                                                                         C_Compiler * /* inCompiler */
@@ -2549,7 +2549,7 @@ GALGAS_constructorSignature GALGAS_constructorSignature::add_operation (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature GALGAS_constructorSignature::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                   C_Compiler * inCompiler
@@ -2559,7 +2559,7 @@ GALGAS_constructorSignature GALGAS_constructorSignature::getter_subListWithRange
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature GALGAS_constructorSignature::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                   C_Compiler * inCompiler
@@ -2569,7 +2569,7 @@ GALGAS_constructorSignature GALGAS_constructorSignature::getter_subListFromIndex
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature GALGAS_constructorSignature::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                 C_Compiler * inCompiler
@@ -2579,7 +2579,7 @@ GALGAS_constructorSignature GALGAS_constructorSignature::getter_subListToIndex (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constructorSignature::plusAssign_operation (const GALGAS_constructorSignature inOperand,
                                                         C_Compiler * /* inCompiler */
@@ -2587,7 +2587,7 @@ void GALGAS_constructorSignature::plusAssign_operation (const GALGAS_constructor
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string GALGAS_constructorSignature::getter_mSelectorAtIndex (const GALGAS_uint & inIndex,
                                                                     C_Compiler * inCompiler
@@ -2602,7 +2602,7 @@ GALGAS_string GALGAS_constructorSignature::getter_mSelectorAtIndex (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_constructorSignature::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
                                                                                  C_Compiler * inCompiler
@@ -2617,7 +2617,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_constructorSignature::getter_mTypeAtIndex 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_constructorSignature::getter_mFieldIndexAtIndex (const GALGAS_uint & inIndex,
                                                                     C_Compiler * inCompiler
@@ -2634,7 +2634,7 @@ GALGAS_uint GALGAS_constructorSignature::getter_mFieldIndexAtIndex (const GALGAS
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_constructorSignature::cEnumerator_constructorSignature (const GALGAS_constructorSignature & inEnumeratedObject,
                                                                     const typeEnumerationOrder inOrder) :
@@ -2642,7 +2642,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature_2D_element cEnumerator_constructorSignature::current (LOCATION_ARGS) const {
   const cCollectionElement_constructorSignature * p = (const cCollectionElement_constructorSignature *) currentObjectPtr (THERE) ;
@@ -2651,7 +2651,7 @@ GALGAS_constructorSignature_2D_element cEnumerator_constructorSignature::current
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cEnumerator_constructorSignature::current_mSelector (LOCATION_ARGS) const {
   const cCollectionElement_constructorSignature * p = (const cCollectionElement_constructorSignature *) currentObjectPtr (THERE) ;
@@ -2659,7 +2659,7 @@ GALGAS_string cEnumerator_constructorSignature::current_mSelector (LOCATION_ARGS
   return p->mObject.mAttribute_mSelector ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cEnumerator_constructorSignature::current_mType (LOCATION_ARGS) const {
   const cCollectionElement_constructorSignature * p = (const cCollectionElement_constructorSignature *) currentObjectPtr (THERE) ;
@@ -2667,7 +2667,7 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_constructorSignature::current_mType (
   return p->mObject.mAttribute_mType ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cEnumerator_constructorSignature::current_mFieldIndex (LOCATION_ARGS) const {
   const cCollectionElement_constructorSignature * p = (const cCollectionElement_constructorSignature *) currentObjectPtr (THERE) ;
@@ -2678,23 +2678,23 @@ GALGAS_uint cEnumerator_constructorSignature::current_mFieldIndex (LOCATION_ARGS
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             @constructorSignature type                                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_constructorSignature ("constructorSignature",
                                              NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_constructorSignature::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_constructorSignature ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_constructorSignature::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -2704,7 +2704,7 @@ AC_GALGAS_root * GALGAS_constructorSignature::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature GALGAS_constructorSignature::extractObject (const GALGAS_object & inObject,
                                                                         C_Compiler * inCompiler
@@ -2721,11 +2721,11 @@ GALGAS_constructorSignature GALGAS_constructorSignature::extractObject (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                               Class for element of '@sortedOperandIRList' sorted list                               *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cSortedListElement_sortedOperandIRList : public cSortedListElement {
   public : GALGAS_sortedOperandIRList_2D_element mObject ;
@@ -2751,7 +2751,7 @@ class cSortedListElement_sortedOperandIRList : public cSortedListElement {
   public : virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cSortedListElement_sortedOperandIRList::cSortedListElement_sortedOperandIRList (const GALGAS_operandIR & in_mOperand,
                                                                                 const GALGAS_uint & in_mIndex
@@ -2760,13 +2760,13 @@ cSortedListElement (THERE),
 mObject (in_mOperand, in_mIndex) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cSortedListElement_sortedOperandIRList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cSortedListElement * cSortedListElement_sortedOperandIRList::copy (void) {
   cSortedListElement * result = NULL ;
@@ -2774,7 +2774,7 @@ cSortedListElement * cSortedListElement_sortedOperandIRList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cSortedListElement_sortedOperandIRList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -2787,7 +2787,7 @@ void cSortedListElement_sortedOperandIRList::description (C_String & ioString, c
   mObject.mAttribute_mIndex.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cSortedListElement_sortedOperandIRList::compare (const cCollectionElement * inOperand) const {
   cSortedListElement_sortedOperandIRList * operand = (cSortedListElement_sortedOperandIRList *) inOperand ;
@@ -2795,13 +2795,13 @@ typeComparisonResult cSortedListElement_sortedOperandIRList::compare (const cCol
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_sortedOperandIRList::GALGAS_sortedOperandIRList (void) :
 AC_GALGAS_sortedlist () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cSortedListElement_sortedOperandIRList::compareForSorting (const cSortedListElement * inOperand) const {
   typeComparisonResult result = kOperandEqual ;
@@ -2813,7 +2813,7 @@ typeComparisonResult cSortedListElement_sortedOperandIRList::compareForSorting (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::constructor_emptySortedList (LOCATION_ARGS) {
   GALGAS_sortedOperandIRList result ;
@@ -2821,7 +2821,7 @@ GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::constructor_emptySortedLi
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::constructor_sortedListWithValue (const GALGAS_operandIR & inOperand0,
                                                                                         const GALGAS_uint & inOperand1
@@ -2836,7 +2836,7 @@ GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::constructor_sortedListWit
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_sortedOperandIRList::addAssign_operation (const GALGAS_operandIR & inOperand0,
                                                       const GALGAS_uint & inOperand1
@@ -2851,7 +2851,7 @@ void GALGAS_sortedOperandIRList::addAssign_operation (const GALGAS_operandIR & i
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_sortedOperandIRList::plusAssign_operation (const GALGAS_sortedOperandIRList inOperand,
                                                        C_Compiler * /* inCompiler */
@@ -2861,7 +2861,7 @@ void GALGAS_sortedOperandIRList::plusAssign_operation (const GALGAS_sortedOperan
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_sortedOperandIRList::setter_popSmallest (GALGAS_operandIR & outOperand0,
                                                      GALGAS_uint & outOperand1,
@@ -2880,7 +2880,7 @@ void GALGAS_sortedOperandIRList::setter_popSmallest (GALGAS_operandIR & outOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_sortedOperandIRList::setter_popGreatest (GALGAS_operandIR & outOperand0,
                                                      GALGAS_uint & outOperand1,
@@ -2899,7 +2899,7 @@ void GALGAS_sortedOperandIRList::setter_popGreatest (GALGAS_operandIR & outOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_sortedOperandIRList::method_smallest (GALGAS_operandIR & outOperand0,
                                                   GALGAS_uint & outOperand1,
@@ -2918,7 +2918,7 @@ void GALGAS_sortedOperandIRList::method_smallest (GALGAS_operandIR & outOperand0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_sortedOperandIRList::method_greatest (GALGAS_operandIR & outOperand0,
                                                   GALGAS_uint & outOperand1,
@@ -2937,7 +2937,7 @@ void GALGAS_sortedOperandIRList::method_greatest (GALGAS_operandIR & outOperand0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_sortedOperandIRList::cEnumerator_sortedOperandIRList (const GALGAS_sortedOperandIRList & inEnumeratedObject,
                                                                   const typeEnumerationOrder inOrder) :
@@ -2945,7 +2945,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_sortedOperandIRList_2D_element cEnumerator_sortedOperandIRList::current (LOCATION_ARGS) const {
   const cSortedListElement_sortedOperandIRList * p = (const cSortedListElement_sortedOperandIRList *) currentObjectPtr (THERE) ;
@@ -2953,7 +2953,7 @@ GALGAS_sortedOperandIRList_2D_element cEnumerator_sortedOperandIRList::current (
   return p->mObject ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIR cEnumerator_sortedOperandIRList::current_mOperand (LOCATION_ARGS) const {
   const cSortedListElement_sortedOperandIRList * p = (const cSortedListElement_sortedOperandIRList *) currentObjectPtr (THERE) ;
@@ -2961,7 +2961,7 @@ GALGAS_operandIR cEnumerator_sortedOperandIRList::current_mOperand (LOCATION_ARG
   return p->mObject.mAttribute_mOperand ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cEnumerator_sortedOperandIRList::current_mIndex (LOCATION_ARGS) const {
   const cSortedListElement_sortedOperandIRList * p = (const cSortedListElement_sortedOperandIRList *) currentObjectPtr (THERE) ;
@@ -2971,23 +2971,23 @@ GALGAS_uint cEnumerator_sortedOperandIRList::current_mIndex (LOCATION_ARGS) cons
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                              @sortedOperandIRList type                                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_sortedOperandIRList ("sortedOperandIRList",
                                             NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_sortedOperandIRList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_sortedOperandIRList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_sortedOperandIRList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -2997,7 +2997,7 @@ AC_GALGAS_root * GALGAS_sortedOperandIRList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::extractObject (const GALGAS_object & inObject,
                                                                       C_Compiler * inCompiler
@@ -3014,11 +3014,11 @@ GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::extractObject (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                Class for element of '@controlRegisterNameList' list                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_controlRegisterNameList : public cCollectionElement {
   public : GALGAS_controlRegisterNameList_2D_element mObject ;
@@ -3042,7 +3042,7 @@ class cCollectionElement_controlRegisterNameList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_controlRegisterNameList::cCollectionElement_controlRegisterNameList (const GALGAS_lstring & in_mRegisterName,
                                                                                         const GALGAS_lstringlist & in_mAttributeList,
@@ -3052,13 +3052,13 @@ cCollectionElement (THERE),
 mObject (in_mRegisterName, in_mAttributeList, in_mRegisterAddress) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_controlRegisterNameList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_controlRegisterNameList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -3066,7 +3066,7 @@ cCollectionElement * cCollectionElement_controlRegisterNameList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_controlRegisterNameList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -3083,7 +3083,7 @@ void cCollectionElement_controlRegisterNameList::description (C_String & ioStrin
   mObject.mAttribute_mRegisterAddress.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_controlRegisterNameList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_controlRegisterNameList * operand = (cCollectionElement_controlRegisterNameList *) inOperand ;
@@ -3091,13 +3091,13 @@ typeComparisonResult cCollectionElement_controlRegisterNameList::compare (const 
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList::GALGAS_controlRegisterNameList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList::GALGAS_controlRegisterNameList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -3106,7 +3106,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_controlRegisterNameList result ;
@@ -3114,7 +3114,7 @@ GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::constructor_empty
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                           const GALGAS_lstringlist & inOperand1,
@@ -3130,7 +3130,7 @@ GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::constructor_listW
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterNameList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                 const GALGAS_lstring & in_mRegisterName,
@@ -3145,7 +3145,7 @@ void GALGAS_controlRegisterNameList::makeAttributesFromObjects (capCollectionEle
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterNameList::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                           const GALGAS_lstringlist & inOperand1,
@@ -3161,7 +3161,7 @@ void GALGAS_controlRegisterNameList::addAssign_operation (const GALGAS_lstring &
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterNameList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                            const GALGAS_lstringlist inOperand1,
@@ -3179,7 +3179,7 @@ void GALGAS_controlRegisterNameList::setter_insertAtIndex (const GALGAS_lstring 
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterNameList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                            GALGAS_lstringlist & outOperand1,
@@ -3204,7 +3204,7 @@ void GALGAS_controlRegisterNameList::setter_removeAtIndex (GALGAS_lstring & outO
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterNameList::setter_popFirst (GALGAS_lstring & outOperand0,
                                                       GALGAS_lstringlist & outOperand1,
@@ -3226,7 +3226,7 @@ void GALGAS_controlRegisterNameList::setter_popFirst (GALGAS_lstring & outOperan
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterNameList::setter_popLast (GALGAS_lstring & outOperand0,
                                                      GALGAS_lstringlist & outOperand1,
@@ -3248,7 +3248,7 @@ void GALGAS_controlRegisterNameList::setter_popLast (GALGAS_lstring & outOperand
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterNameList::method_first (GALGAS_lstring & outOperand0,
                                                    GALGAS_lstringlist & outOperand1,
@@ -3270,7 +3270,7 @@ void GALGAS_controlRegisterNameList::method_first (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterNameList::method_last (GALGAS_lstring & outOperand0,
                                                   GALGAS_lstringlist & outOperand1,
@@ -3292,7 +3292,7 @@ void GALGAS_controlRegisterNameList::method_last (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::add_operation (const GALGAS_controlRegisterNameList & inOperand,
                                                                               C_Compiler * /* inCompiler */
@@ -3305,7 +3305,7 @@ GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::add_operation (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                         C_Compiler * inCompiler
@@ -3315,7 +3315,7 @@ GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::getter_subListWit
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                         C_Compiler * inCompiler
@@ -3325,7 +3325,7 @@ GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::getter_subListFro
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                       C_Compiler * inCompiler
@@ -3335,7 +3335,7 @@ GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::getter_subListToI
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterNameList::plusAssign_operation (const GALGAS_controlRegisterNameList inOperand,
                                                            C_Compiler * /* inCompiler */
@@ -3343,7 +3343,7 @@ void GALGAS_controlRegisterNameList::plusAssign_operation (const GALGAS_controlR
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_controlRegisterNameList::getter_mRegisterNameAtIndex (const GALGAS_uint & inIndex,
                                                                             C_Compiler * inCompiler
@@ -3358,7 +3358,7 @@ GALGAS_lstring GALGAS_controlRegisterNameList::getter_mRegisterNameAtIndex (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstringlist GALGAS_controlRegisterNameList::getter_mAttributeListAtIndex (const GALGAS_uint & inIndex,
                                                                                  C_Compiler * inCompiler
@@ -3373,7 +3373,7 @@ GALGAS_lstringlist GALGAS_controlRegisterNameList::getter_mAttributeListAtIndex 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint GALGAS_controlRegisterNameList::getter_mRegisterAddressAtIndex (const GALGAS_uint & inIndex,
                                                                                C_Compiler * inCompiler
@@ -3390,7 +3390,7 @@ GALGAS_lbigint GALGAS_controlRegisterNameList::getter_mRegisterAddressAtIndex (c
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_controlRegisterNameList::cEnumerator_controlRegisterNameList (const GALGAS_controlRegisterNameList & inEnumeratedObject,
                                                                           const typeEnumerationOrder inOrder) :
@@ -3398,7 +3398,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList_2D_element cEnumerator_controlRegisterNameList::current (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterNameList * p = (const cCollectionElement_controlRegisterNameList *) currentObjectPtr (THERE) ;
@@ -3407,7 +3407,7 @@ GALGAS_controlRegisterNameList_2D_element cEnumerator_controlRegisterNameList::c
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_controlRegisterNameList::current_mRegisterName (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterNameList * p = (const cCollectionElement_controlRegisterNameList *) currentObjectPtr (THERE) ;
@@ -3415,7 +3415,7 @@ GALGAS_lstring cEnumerator_controlRegisterNameList::current_mRegisterName (LOCAT
   return p->mObject.mAttribute_mRegisterName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstringlist cEnumerator_controlRegisterNameList::current_mAttributeList (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterNameList * p = (const cCollectionElement_controlRegisterNameList *) currentObjectPtr (THERE) ;
@@ -3423,7 +3423,7 @@ GALGAS_lstringlist cEnumerator_controlRegisterNameList::current_mAttributeList (
   return p->mObject.mAttribute_mAttributeList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint cEnumerator_controlRegisterNameList::current_mRegisterAddress (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterNameList * p = (const cCollectionElement_controlRegisterNameList *) currentObjectPtr (THERE) ;
@@ -3434,23 +3434,23 @@ GALGAS_lbigint cEnumerator_controlRegisterNameList::current_mRegisterAddress (LO
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            @controlRegisterNameList type                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterNameList ("controlRegisterNameList",
                                                 NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_controlRegisterNameList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_controlRegisterNameList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_controlRegisterNameList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -3460,7 +3460,7 @@ AC_GALGAS_root * GALGAS_controlRegisterNameList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::extractObject (const GALGAS_object & inObject,
                                                                               C_Compiler * inCompiler
@@ -3477,11 +3477,11 @@ GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::extractObject (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                              Class for element of '@controlRegisterBitSliceList' list                               *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_controlRegisterBitSliceList : public cCollectionElement {
   public : GALGAS_controlRegisterBitSliceList_2D_element mObject ;
@@ -3503,7 +3503,7 @@ class cCollectionElement_controlRegisterBitSliceList : public cCollectionElement
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_controlRegisterBitSliceList::cCollectionElement_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
                                                                                                 COMMA_LOCATION_ARGS) :
@@ -3511,13 +3511,13 @@ cCollectionElement (THERE),
 mObject (in_mRegisterBitSlice) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_controlRegisterBitSliceList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_controlRegisterBitSliceList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -3525,7 +3525,7 @@ cCollectionElement * cCollectionElement_controlRegisterBitSliceList::copy (void)
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_controlRegisterBitSliceList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -3534,7 +3534,7 @@ void cCollectionElement_controlRegisterBitSliceList::description (C_String & ioS
   mObject.mAttribute_mRegisterBitSlice.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_controlRegisterBitSliceList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_controlRegisterBitSliceList * operand = (cCollectionElement_controlRegisterBitSliceList *) inOperand ;
@@ -3542,13 +3542,13 @@ typeComparisonResult cCollectionElement_controlRegisterBitSliceList::compare (co
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList::GALGAS_controlRegisterBitSliceList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList::GALGAS_controlRegisterBitSliceList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -3557,7 +3557,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_controlRegisterBitSliceList result ;
@@ -3565,7 +3565,7 @@ GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::construct
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::constructor_listWithValue (const GALGAS_controlRegisterBitSlice & inOperand0
                                                                                                   COMMA_LOCATION_ARGS) {
@@ -3579,7 +3579,7 @@ GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::construct
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                     const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
@@ -3590,7 +3590,7 @@ void GALGAS_controlRegisterBitSliceList::makeAttributesFromObjects (capCollectio
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceList::addAssign_operation (const GALGAS_controlRegisterBitSlice & inOperand0
                                                               COMMA_LOCATION_ARGS) {
@@ -3604,7 +3604,7 @@ void GALGAS_controlRegisterBitSliceList::addAssign_operation (const GALGAS_contr
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceList::setter_insertAtIndex (const GALGAS_controlRegisterBitSlice inOperand0,
                                                                const GALGAS_uint inInsertionIndex,
@@ -3620,7 +3620,7 @@ void GALGAS_controlRegisterBitSliceList::setter_insertAtIndex (const GALGAS_cont
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceList::setter_removeAtIndex (GALGAS_controlRegisterBitSlice & outOperand0,
                                                                const GALGAS_uint inRemoveIndex,
@@ -3639,7 +3639,7 @@ void GALGAS_controlRegisterBitSliceList::setter_removeAtIndex (GALGAS_controlReg
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceList::setter_popFirst (GALGAS_controlRegisterBitSlice & outOperand0,
                                                           C_Compiler * inCompiler
@@ -3655,7 +3655,7 @@ void GALGAS_controlRegisterBitSliceList::setter_popFirst (GALGAS_controlRegister
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceList::setter_popLast (GALGAS_controlRegisterBitSlice & outOperand0,
                                                          C_Compiler * inCompiler
@@ -3671,7 +3671,7 @@ void GALGAS_controlRegisterBitSliceList::setter_popLast (GALGAS_controlRegisterB
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceList::method_first (GALGAS_controlRegisterBitSlice & outOperand0,
                                                        C_Compiler * inCompiler
@@ -3687,7 +3687,7 @@ void GALGAS_controlRegisterBitSliceList::method_first (GALGAS_controlRegisterBit
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceList::method_last (GALGAS_controlRegisterBitSlice & outOperand0,
                                                       C_Compiler * inCompiler
@@ -3703,7 +3703,7 @@ void GALGAS_controlRegisterBitSliceList::method_last (GALGAS_controlRegisterBitS
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::add_operation (const GALGAS_controlRegisterBitSliceList & inOperand,
                                                                                       C_Compiler * /* inCompiler */
@@ -3716,7 +3716,7 @@ GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::add_opera
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                                 C_Compiler * inCompiler
@@ -3726,7 +3726,7 @@ GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_su
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                                 C_Compiler * inCompiler
@@ -3736,7 +3736,7 @@ GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_su
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                               C_Compiler * inCompiler
@@ -3746,7 +3746,7 @@ GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::getter_su
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceList::plusAssign_operation (const GALGAS_controlRegisterBitSliceList inOperand,
                                                                C_Compiler * /* inCompiler */
@@ -3754,7 +3754,7 @@ void GALGAS_controlRegisterBitSliceList::plusAssign_operation (const GALGAS_cont
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSliceList::getter_mRegisterBitSliceAtIndex (const GALGAS_uint & inIndex,
                                                                                                     C_Compiler * inCompiler
@@ -3771,7 +3771,7 @@ GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSliceList::getter_mRegis
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_controlRegisterBitSliceList::cEnumerator_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSliceList & inEnumeratedObject,
                                                                                   const typeEnumerationOrder inOrder) :
@@ -3779,7 +3779,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList_2D_element cEnumerator_controlRegisterBitSliceList::current (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterBitSliceList * p = (const cCollectionElement_controlRegisterBitSliceList *) currentObjectPtr (THERE) ;
@@ -3788,7 +3788,7 @@ GALGAS_controlRegisterBitSliceList_2D_element cEnumerator_controlRegisterBitSlic
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSlice cEnumerator_controlRegisterBitSliceList::current_mRegisterBitSlice (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterBitSliceList * p = (const cCollectionElement_controlRegisterBitSliceList *) currentObjectPtr (THERE) ;
@@ -3799,23 +3799,23 @@ GALGAS_controlRegisterBitSlice cEnumerator_controlRegisterBitSliceList::current_
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          @controlRegisterBitSliceList type                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterBitSliceList ("controlRegisterBitSliceList",
                                                     NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_controlRegisterBitSliceList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_controlRegisterBitSliceList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_controlRegisterBitSliceList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -3825,7 +3825,7 @@ AC_GALGAS_root * GALGAS_controlRegisterBitSliceList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::extractObject (const GALGAS_object & inObject,
                                                                                       C_Compiler * inCompiler
@@ -3842,11 +3842,11 @@ GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::extractOb
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                Class for element of '@controlRegisterFieldList' list                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_controlRegisterFieldList : public cCollectionElement {
   public : GALGAS_controlRegisterFieldList_2D_element mObject ;
@@ -3869,7 +3869,7 @@ class cCollectionElement_controlRegisterFieldList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_controlRegisterFieldList::cCollectionElement_controlRegisterFieldList (const GALGAS_uint & in_mFieldBitCount,
                                                                                           const GALGAS_string & in_mFieldName
@@ -3878,13 +3878,13 @@ cCollectionElement (THERE),
 mObject (in_mFieldBitCount, in_mFieldName) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_controlRegisterFieldList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_controlRegisterFieldList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -3892,7 +3892,7 @@ cCollectionElement * cCollectionElement_controlRegisterFieldList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_controlRegisterFieldList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -3905,7 +3905,7 @@ void cCollectionElement_controlRegisterFieldList::description (C_String & ioStri
   mObject.mAttribute_mFieldName.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_controlRegisterFieldList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_controlRegisterFieldList * operand = (cCollectionElement_controlRegisterFieldList *) inOperand ;
@@ -3913,13 +3913,13 @@ typeComparisonResult cCollectionElement_controlRegisterFieldList::compare (const
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList::GALGAS_controlRegisterFieldList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList::GALGAS_controlRegisterFieldList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -3928,7 +3928,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_controlRegisterFieldList result ;
@@ -3936,7 +3936,7 @@ GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::constructor_emp
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::constructor_listWithValue (const GALGAS_uint & inOperand0,
                                                                                             const GALGAS_string & inOperand1
@@ -3951,7 +3951,7 @@ GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::constructor_lis
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                  const GALGAS_uint & in_mFieldBitCount,
@@ -3964,7 +3964,7 @@ void GALGAS_controlRegisterFieldList::makeAttributesFromObjects (capCollectionEl
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldList::addAssign_operation (const GALGAS_uint & inOperand0,
                                                            const GALGAS_string & inOperand1
@@ -3979,7 +3979,7 @@ void GALGAS_controlRegisterFieldList::addAssign_operation (const GALGAS_uint & i
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldList::setter_insertAtIndex (const GALGAS_uint inOperand0,
                                                             const GALGAS_string inOperand1,
@@ -3996,7 +3996,7 @@ void GALGAS_controlRegisterFieldList::setter_insertAtIndex (const GALGAS_uint in
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldList::setter_removeAtIndex (GALGAS_uint & outOperand0,
                                                             GALGAS_string & outOperand1,
@@ -4018,7 +4018,7 @@ void GALGAS_controlRegisterFieldList::setter_removeAtIndex (GALGAS_uint & outOpe
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldList::setter_popFirst (GALGAS_uint & outOperand0,
                                                        GALGAS_string & outOperand1,
@@ -4037,7 +4037,7 @@ void GALGAS_controlRegisterFieldList::setter_popFirst (GALGAS_uint & outOperand0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldList::setter_popLast (GALGAS_uint & outOperand0,
                                                       GALGAS_string & outOperand1,
@@ -4056,7 +4056,7 @@ void GALGAS_controlRegisterFieldList::setter_popLast (GALGAS_uint & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldList::method_first (GALGAS_uint & outOperand0,
                                                     GALGAS_string & outOperand1,
@@ -4075,7 +4075,7 @@ void GALGAS_controlRegisterFieldList::method_first (GALGAS_uint & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldList::method_last (GALGAS_uint & outOperand0,
                                                    GALGAS_string & outOperand1,
@@ -4094,7 +4094,7 @@ void GALGAS_controlRegisterFieldList::method_last (GALGAS_uint & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::add_operation (const GALGAS_controlRegisterFieldList & inOperand,
                                                                                 C_Compiler * /* inCompiler */
@@ -4107,7 +4107,7 @@ GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::add_operation (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                           C_Compiler * inCompiler
@@ -4117,7 +4117,7 @@ GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::getter_subListW
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                           C_Compiler * inCompiler
@@ -4127,7 +4127,7 @@ GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::getter_subListF
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                         C_Compiler * inCompiler
@@ -4137,7 +4137,7 @@ GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::getter_subListT
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldList::plusAssign_operation (const GALGAS_controlRegisterFieldList inOperand,
                                                             C_Compiler * /* inCompiler */
@@ -4145,7 +4145,7 @@ void GALGAS_controlRegisterFieldList::plusAssign_operation (const GALGAS_control
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_controlRegisterFieldList::getter_mFieldBitCountAtIndex (const GALGAS_uint & inIndex,
                                                                            C_Compiler * inCompiler
@@ -4160,7 +4160,7 @@ GALGAS_uint GALGAS_controlRegisterFieldList::getter_mFieldBitCountAtIndex (const
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string GALGAS_controlRegisterFieldList::getter_mFieldNameAtIndex (const GALGAS_uint & inIndex,
                                                                          C_Compiler * inCompiler
@@ -4177,7 +4177,7 @@ GALGAS_string GALGAS_controlRegisterFieldList::getter_mFieldNameAtIndex (const G
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_controlRegisterFieldList::cEnumerator_controlRegisterFieldList (const GALGAS_controlRegisterFieldList & inEnumeratedObject,
                                                                             const typeEnumerationOrder inOrder) :
@@ -4185,7 +4185,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList_2D_element cEnumerator_controlRegisterFieldList::current (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterFieldList * p = (const cCollectionElement_controlRegisterFieldList *) currentObjectPtr (THERE) ;
@@ -4194,7 +4194,7 @@ GALGAS_controlRegisterFieldList_2D_element cEnumerator_controlRegisterFieldList:
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cEnumerator_controlRegisterFieldList::current_mFieldBitCount (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterFieldList * p = (const cCollectionElement_controlRegisterFieldList *) currentObjectPtr (THERE) ;
@@ -4202,7 +4202,7 @@ GALGAS_uint cEnumerator_controlRegisterFieldList::current_mFieldBitCount (LOCATI
   return p->mObject.mAttribute_mFieldBitCount ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cEnumerator_controlRegisterFieldList::current_mFieldName (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterFieldList * p = (const cCollectionElement_controlRegisterFieldList *) currentObjectPtr (THERE) ;
@@ -4213,23 +4213,23 @@ GALGAS_string cEnumerator_controlRegisterFieldList::current_mFieldName (LOCATION
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           @controlRegisterFieldList type                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterFieldList ("controlRegisterFieldList",
                                                  NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_controlRegisterFieldList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_controlRegisterFieldList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_controlRegisterFieldList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -4239,7 +4239,7 @@ AC_GALGAS_root * GALGAS_controlRegisterFieldList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::extractObject (const GALGAS_object & inObject,
                                                                                 C_Compiler * inCompiler
@@ -4256,7 +4256,7 @@ GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::extractObject (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_controlRegisterFieldMap::cMapElement_controlRegisterFieldMap (const GALGAS_lstring & inKey,
                                                                           const GALGAS_uint & in_mBitIndex,
@@ -4267,13 +4267,13 @@ mAttribute_mBitIndex (in_mBitIndex),
 mAttribute_mBitCount (in_mBitCount) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_controlRegisterFieldMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mBitIndex.isValid () && mAttribute_mBitCount.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_controlRegisterFieldMap::copy (void) {
   cMapElement * result = NULL ;
@@ -4281,7 +4281,7 @@ cMapElement * cMapElement_controlRegisterFieldMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_controlRegisterFieldMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -4294,7 +4294,7 @@ void cMapElement_controlRegisterFieldMap::description (C_String & ioString, cons
   mAttribute_mBitCount.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_controlRegisterFieldMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_controlRegisterFieldMap * operand = (cMapElement_controlRegisterFieldMap *) inOperand ;
@@ -4308,26 +4308,26 @@ typeComparisonResult cMapElement_controlRegisterFieldMap::compare (const cCollec
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap::GALGAS_controlRegisterFieldMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap::GALGAS_controlRegisterFieldMap (const GALGAS_controlRegisterFieldMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap & GALGAS_controlRegisterFieldMap::operator = (const GALGAS_controlRegisterFieldMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_controlRegisterFieldMap result ;
@@ -4335,7 +4335,7 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::constructor_empty
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::constructor_mapWithMapToOverride (const GALGAS_controlRegisterFieldMap & inMapToOverride
                                                                                                  COMMA_LOCATION_ARGS) {
@@ -4344,7 +4344,7 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::constructor_mapWi
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) const {
@@ -4353,7 +4353,7 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::getter_overridden
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                           const GALGAS_uint & inArgument0,
@@ -4370,7 +4370,7 @@ void GALGAS_controlRegisterFieldMap::addAssign_operation (const GALGAS_lstring &
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldMap::setter_insertKey (GALGAS_lstring inKey,
                                                        GALGAS_uint inArgument0,
@@ -4387,11 +4387,11 @@ void GALGAS_controlRegisterFieldMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_controlRegisterFieldMap_searchKey = "the '%K' register slice is not declared" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldMap::method_searchKey (GALGAS_lstring inKey,
                                                        GALGAS_uint & outArgument0,
@@ -4412,7 +4412,7 @@ void GALGAS_controlRegisterFieldMap::method_searchKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_controlRegisterFieldMap::getter_mBitIndexForKey (const GALGAS_string & inKey,
                                                                     C_Compiler * inCompiler
@@ -4427,7 +4427,7 @@ GALGAS_uint GALGAS_controlRegisterFieldMap::getter_mBitIndexForKey (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_controlRegisterFieldMap::getter_mBitCountForKey (const GALGAS_string & inKey,
                                                                     C_Compiler * inCompiler
@@ -4442,7 +4442,7 @@ GALGAS_uint GALGAS_controlRegisterFieldMap::getter_mBitCountForKey (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldMap::setter_setMBitIndexForKey (GALGAS_uint inAttributeValue,
                                                                 GALGAS_string inKey,
@@ -4456,7 +4456,7 @@ void GALGAS_controlRegisterFieldMap::setter_setMBitIndexForKey (GALGAS_uint inAt
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldMap::setter_setMBitCountForKey (GALGAS_uint inAttributeValue,
                                                                 GALGAS_string inKey,
@@ -4470,7 +4470,7 @@ void GALGAS_controlRegisterFieldMap::setter_setMBitCountForKey (GALGAS_uint inAt
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_controlRegisterFieldMap * GALGAS_controlRegisterFieldMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                                          const GALGAS_string & inKey
@@ -4480,7 +4480,7 @@ cMapElement_controlRegisterFieldMap * GALGAS_controlRegisterFieldMap::readWriteA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_controlRegisterFieldMap::cEnumerator_controlRegisterFieldMap (const GALGAS_controlRegisterFieldMap & inEnumeratedObject,
                                                                           const typeEnumerationOrder inOrder) :
@@ -4488,7 +4488,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap_2D_element cEnumerator_controlRegisterFieldMap::current (LOCATION_ARGS) const {
   const cMapElement_controlRegisterFieldMap * p = (const cMapElement_controlRegisterFieldMap *) currentObjectPtr (THERE) ;
@@ -4496,7 +4496,7 @@ GALGAS_controlRegisterFieldMap_2D_element cEnumerator_controlRegisterFieldMap::c
   return GALGAS_controlRegisterFieldMap_2D_element (p->mAttribute_lkey, p->mAttribute_mBitIndex, p->mAttribute_mBitCount) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_controlRegisterFieldMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -4504,7 +4504,7 @@ GALGAS_lstring cEnumerator_controlRegisterFieldMap::current_lkey (LOCATION_ARGS)
   return p->mAttribute_lkey ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cEnumerator_controlRegisterFieldMap::current_mBitIndex (LOCATION_ARGS) const {
   const cMapElement_controlRegisterFieldMap * p = (const cMapElement_controlRegisterFieldMap *) currentObjectPtr (THERE) ;
@@ -4512,7 +4512,7 @@ GALGAS_uint cEnumerator_controlRegisterFieldMap::current_mBitIndex (LOCATION_ARG
   return p->mAttribute_mBitIndex ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cEnumerator_controlRegisterFieldMap::current_mBitCount (LOCATION_ARGS) const {
   const cMapElement_controlRegisterFieldMap * p = (const cMapElement_controlRegisterFieldMap *) currentObjectPtr (THERE) ;
@@ -4522,23 +4522,23 @@ GALGAS_uint cEnumerator_controlRegisterFieldMap::current_mBitCount (LOCATION_ARG
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            @controlRegisterFieldMap type                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterFieldMap ("controlRegisterFieldMap",
                                                 NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_controlRegisterFieldMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_controlRegisterFieldMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_controlRegisterFieldMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -4548,7 +4548,7 @@ AC_GALGAS_root * GALGAS_controlRegisterFieldMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::extractObject (const GALGAS_object & inObject,
                                                                               C_Compiler * inCompiler
@@ -4565,7 +4565,7 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::extractObject (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_controlRegisterBitSliceAccessMap::cMapElement_controlRegisterBitSliceAccessMap (const GALGAS_lstring & inKey,
                                                                                             const GALGAS_llvmBinaryOperation & in_mAccessOperator,
@@ -4580,13 +4580,13 @@ mAttribute_mSubMap (in_mSubMap),
 mAttribute_mResultType (in_mResultType) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_controlRegisterBitSliceAccessMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mAccessOperator.isValid () && mAttribute_mAccessRightOperand.isValid () && mAttribute_mSubMap.isValid () && mAttribute_mResultType.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_controlRegisterBitSliceAccessMap::copy (void) {
   cMapElement * result = NULL ;
@@ -4594,7 +4594,7 @@ cMapElement * cMapElement_controlRegisterBitSliceAccessMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_controlRegisterBitSliceAccessMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -4615,7 +4615,7 @@ void cMapElement_controlRegisterBitSliceAccessMap::description (C_String & ioStr
   mAttribute_mResultType.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_controlRegisterBitSliceAccessMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_controlRegisterBitSliceAccessMap * operand = (cMapElement_controlRegisterBitSliceAccessMap *) inOperand ;
@@ -4635,26 +4635,26 @@ typeComparisonResult cMapElement_controlRegisterBitSliceAccessMap::compare (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap::GALGAS_controlRegisterBitSliceAccessMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap::GALGAS_controlRegisterBitSliceAccessMap (const GALGAS_controlRegisterBitSliceAccessMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap & GALGAS_controlRegisterBitSliceAccessMap::operator = (const GALGAS_controlRegisterBitSliceAccessMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_controlRegisterBitSliceAccessMap result ;
@@ -4662,7 +4662,7 @@ GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap::constructor_mapWithMapToOverride (const GALGAS_controlRegisterBitSliceAccessMap & inMapToOverride
                                                                                                                    COMMA_LOCATION_ARGS) {
@@ -4671,7 +4671,7 @@ GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                                                        COMMA_LOCATION_ARGS) const {
@@ -4680,7 +4680,7 @@ GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceAccessMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                                    const GALGAS_llvmBinaryOperation & inArgument0,
@@ -4699,7 +4699,7 @@ void GALGAS_controlRegisterBitSliceAccessMap::addAssign_operation (const GALGAS_
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceAccessMap::setter_insertKey (GALGAS_lstring inKey,
                                                                 GALGAS_llvmBinaryOperation inArgument0,
@@ -4718,11 +4718,11 @@ void GALGAS_controlRegisterBitSliceAccessMap::setter_insertKey (GALGAS_lstring i
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_controlRegisterBitSliceAccessMap_searchKey = "the '%K' register slice is not declared" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceAccessMap::method_searchKey (GALGAS_lstring inKey,
                                                                 GALGAS_llvmBinaryOperation & outArgument0,
@@ -4749,7 +4749,7 @@ void GALGAS_controlRegisterBitSliceAccessMap::method_searchKey (GALGAS_lstring i
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_controlRegisterBitSliceAccessMap::getter_mAccessOperatorForKey (const GALGAS_string & inKey,
                                                                                                   C_Compiler * inCompiler
@@ -4764,7 +4764,7 @@ GALGAS_llvmBinaryOperation GALGAS_controlRegisterBitSliceAccessMap::getter_mAcce
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint GALGAS_controlRegisterBitSliceAccessMap::getter_mAccessRightOperandForKey (const GALGAS_string & inKey,
                                                                                          C_Compiler * inCompiler
@@ -4779,7 +4779,7 @@ GALGAS_bigint GALGAS_controlRegisterBitSliceAccessMap::getter_mAccessRightOperan
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap::getter_mSubMapForKey (const GALGAS_string & inKey,
                                                                                                        C_Compiler * inCompiler
@@ -4794,7 +4794,7 @@ GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_controlRegisterBitSliceAccessMap::getter_mResultTypeForKey (const GALGAS_string & inKey,
                                                                                                   C_Compiler * inCompiler
@@ -4809,7 +4809,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_controlRegisterBitSliceAccessMap::getter_m
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceAccessMap::setter_setMAccessOperatorForKey (GALGAS_llvmBinaryOperation inAttributeValue,
                                                                                GALGAS_string inKey,
@@ -4823,7 +4823,7 @@ void GALGAS_controlRegisterBitSliceAccessMap::setter_setMAccessOperatorForKey (G
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceAccessMap::setter_setMAccessRightOperandForKey (GALGAS_bigint inAttributeValue,
                                                                                    GALGAS_string inKey,
@@ -4837,7 +4837,7 @@ void GALGAS_controlRegisterBitSliceAccessMap::setter_setMAccessRightOperandForKe
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceAccessMap::setter_setMSubMapForKey (GALGAS_controlRegisterBitSliceAccessMap inAttributeValue,
                                                                        GALGAS_string inKey,
@@ -4851,7 +4851,7 @@ void GALGAS_controlRegisterBitSliceAccessMap::setter_setMSubMapForKey (GALGAS_co
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceAccessMap::setter_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
                                                                            GALGAS_string inKey,
@@ -4865,7 +4865,7 @@ void GALGAS_controlRegisterBitSliceAccessMap::setter_setMResultTypeForKey (GALGA
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_controlRegisterBitSliceAccessMap * GALGAS_controlRegisterBitSliceAccessMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                                                            const GALGAS_string & inKey
@@ -4875,7 +4875,7 @@ cMapElement_controlRegisterBitSliceAccessMap * GALGAS_controlRegisterBitSliceAcc
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_controlRegisterBitSliceAccessMap::cEnumerator_controlRegisterBitSliceAccessMap (const GALGAS_controlRegisterBitSliceAccessMap & inEnumeratedObject,
                                                                                             const typeEnumerationOrder inOrder) :
@@ -4883,7 +4883,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap_2D_element cEnumerator_controlRegisterBitSliceAccessMap::current (LOCATION_ARGS) const {
   const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) currentObjectPtr (THERE) ;
@@ -4891,7 +4891,7 @@ GALGAS_controlRegisterBitSliceAccessMap_2D_element cEnumerator_controlRegisterBi
   return GALGAS_controlRegisterBitSliceAccessMap_2D_element (p->mAttribute_lkey, p->mAttribute_mAccessOperator, p->mAttribute_mAccessRightOperand, p->mAttribute_mSubMap, p->mAttribute_mResultType) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_controlRegisterBitSliceAccessMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -4899,7 +4899,7 @@ GALGAS_lstring cEnumerator_controlRegisterBitSliceAccessMap::current_lkey (LOCAT
   return p->mAttribute_lkey ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation cEnumerator_controlRegisterBitSliceAccessMap::current_mAccessOperator (LOCATION_ARGS) const {
   const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) currentObjectPtr (THERE) ;
@@ -4907,7 +4907,7 @@ GALGAS_llvmBinaryOperation cEnumerator_controlRegisterBitSliceAccessMap::current
   return p->mAttribute_mAccessOperator ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cEnumerator_controlRegisterBitSliceAccessMap::current_mAccessRightOperand (LOCATION_ARGS) const {
   const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) currentObjectPtr (THERE) ;
@@ -4915,7 +4915,7 @@ GALGAS_bigint cEnumerator_controlRegisterBitSliceAccessMap::current_mAccessRight
   return p->mAttribute_mAccessRightOperand ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap cEnumerator_controlRegisterBitSliceAccessMap::current_mSubMap (LOCATION_ARGS) const {
   const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) currentObjectPtr (THERE) ;
@@ -4923,7 +4923,7 @@ GALGAS_controlRegisterBitSliceAccessMap cEnumerator_controlRegisterBitSliceAcces
   return p->mAttribute_mSubMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cEnumerator_controlRegisterBitSliceAccessMap::current_mResultType (LOCATION_ARGS) const {
   const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) currentObjectPtr (THERE) ;
@@ -4933,23 +4933,23 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_controlRegisterBitSliceAccessMap::cur
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                       @controlRegisterBitSliceAccessMap type                                        *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterBitSliceAccessMap ("controlRegisterBitSliceAccessMap",
                                                          NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_controlRegisterBitSliceAccessMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_controlRegisterBitSliceAccessMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_controlRegisterBitSliceAccessMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -4959,7 +4959,7 @@ AC_GALGAS_root * GALGAS_controlRegisterBitSliceAccessMap::clonedObject (void) co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap::extractObject (const GALGAS_object & inObject,
                                                                                                 C_Compiler * inCompiler
@@ -4976,13 +4976,13 @@ GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap:
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation::GALGAS_llvmBinaryOperation (void) :
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_addNoOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -4990,7 +4990,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_addNoOVF (UNU
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_subNoOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -4998,7 +4998,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_subNoOVF (UNU
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_mulNoOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5006,7 +5006,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_mulNoOVF (UNU
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_udivNoOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5014,7 +5014,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_udivNoOVF (UN
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sdivNoOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5022,7 +5022,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sdivNoOVF (UN
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uremNoOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5030,7 +5030,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uremNoOVF (UN
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sremNoOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5038,7 +5038,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sremNoOVF (UN
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uaddOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5046,7 +5046,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uaddOVF (UNUS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_saddOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5054,7 +5054,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_saddOVF (UNUS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_usubOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5062,7 +5062,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_usubOVF (UNUS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ssubOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5070,7 +5070,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ssubOVF (UNUS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_umulOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5078,7 +5078,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_umulOVF (UNUS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_smulOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5086,7 +5086,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_smulOVF (UNUS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_udivOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5094,7 +5094,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_udivOVF (UNUS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sdivOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5102,7 +5102,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sdivOVF (UNUS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uremOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5110,7 +5110,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_uremOVF (UNUS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sremOVF (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5118,7 +5118,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_sremOVF (UNUS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_and (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5126,7 +5126,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_and (UNUSED_L
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ior (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5134,7 +5134,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ior (UNUSED_L
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_xor (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5142,7 +5142,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_xor (UNUSED_L
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_shl (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5150,7 +5150,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_shl (UNUSED_L
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ashr (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5158,7 +5158,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_ashr (UNUSED_
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_lshr (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5166,7 +5166,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_lshr (UNUSED_
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5174,7 +5174,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_eq (U
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ne (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5182,7 +5182,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ne (U
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ult (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5190,7 +5190,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ult (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ule (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5198,7 +5198,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ule (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ugt (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5206,7 +5206,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_ugt (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_uge (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5214,7 +5214,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_uge (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_slt (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5222,7 +5222,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_slt (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sle (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5230,7 +5230,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sle (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sgt (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5238,7 +5238,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sgt (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sge (UNUSED_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
@@ -5246,7 +5246,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::constructor_icmp_5F_sge (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_llvmBinaryOperation [34] = {
   "(not built)",
@@ -5285,205 +5285,205 @@ static const char * gEnumNameArrayFor_llvmBinaryOperation [34] = {
   "icmp_sge"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAddNoOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_addNoOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSubNoOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_subNoOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isMulNoOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_mulNoOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUdivNoOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_udivNoOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSdivNoOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_sdivNoOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUremNoOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_uremNoOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSremNoOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_sremNoOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUaddOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_uaddOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSaddOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_saddOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUsubOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_usubOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSsubOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_ssubOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUmulOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_umulOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSmulOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_smulOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUdivOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_udivOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSdivOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_sdivOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUremOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_uremOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSremOVF (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_sremOVF == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAnd (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_and == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIor (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_ior == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isXor (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_xor == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isShl (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_shl == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAshr (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_ashr == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isLshr (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_lshr == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_eq (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_eq == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ne (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ne == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ult (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ult == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ule (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ule == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ugt (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_ugt == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_uge (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_uge == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_slt (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_slt == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_sle (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sle == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_sgt (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sgt == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_sge (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_icmp_5F_sge == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_llvmBinaryOperation::description (C_String & ioString,
                                               const int32_t /* inIndentation */) const {
@@ -5491,7 +5491,7 @@ void GALGAS_llvmBinaryOperation::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_llvmBinaryOperation::objectCompare (const GALGAS_llvmBinaryOperation & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -5507,23 +5507,23 @@ typeComparisonResult GALGAS_llvmBinaryOperation::objectCompare (const GALGAS_llv
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                              @llvmBinaryOperation type                                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_llvmBinaryOperation ("llvmBinaryOperation",
                                             NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_llvmBinaryOperation::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_llvmBinaryOperation ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_llvmBinaryOperation::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -5533,7 +5533,7 @@ AC_GALGAS_root * GALGAS_llvmBinaryOperation::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::extractObject (const GALGAS_object & inObject,
                                                                       C_Compiler * inCompiler
@@ -5550,7 +5550,7 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::extractObject (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_controlRegisterMap::cMapElement_controlRegisterMap (const GALGAS_lstring & inKey,
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
@@ -5573,13 +5573,13 @@ mAttribute_mControlRegisterFieldList (in_mControlRegisterFieldList),
 mAttribute_mRegisterBitCount (in_mRegisterBitCount) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_controlRegisterMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mIsReadOnly.isValid () && mAttribute_mIsAccessibleInUserMode.isValid () && mAttribute_mRegisterFieldAccessMap.isValid () && mAttribute_mRegisterFieldMap.isValid () && mAttribute_mAddress.isValid () && mAttribute_mControlRegisterFieldList.isValid () && mAttribute_mRegisterBitCount.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_controlRegisterMap::copy (void) {
   cMapElement * result = NULL ;
@@ -5587,7 +5587,7 @@ cMapElement * cMapElement_controlRegisterMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_controlRegisterMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -5624,7 +5624,7 @@ void cMapElement_controlRegisterMap::description (C_String & ioString, const int
   mAttribute_mRegisterBitCount.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_controlRegisterMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_controlRegisterMap * operand = (cMapElement_controlRegisterMap *) inOperand ;
@@ -5656,26 +5656,26 @@ typeComparisonResult cMapElement_controlRegisterMap::compare (const cCollectionE
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterMap::GALGAS_controlRegisterMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterMap::GALGAS_controlRegisterMap (const GALGAS_controlRegisterMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterMap & GALGAS_controlRegisterMap::operator = (const GALGAS_controlRegisterMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterMap GALGAS_controlRegisterMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_controlRegisterMap result ;
@@ -5683,7 +5683,7 @@ GALGAS_controlRegisterMap GALGAS_controlRegisterMap::constructor_emptyMap (LOCAT
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterMap GALGAS_controlRegisterMap::constructor_mapWithMapToOverride (const GALGAS_controlRegisterMap & inMapToOverride
                                                                                        COMMA_LOCATION_ARGS) {
@@ -5692,7 +5692,7 @@ GALGAS_controlRegisterMap GALGAS_controlRegisterMap::constructor_mapWithMapToOve
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterMap GALGAS_controlRegisterMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) const {
@@ -5701,7 +5701,7 @@ GALGAS_controlRegisterMap GALGAS_controlRegisterMap::getter_overriddenMap (C_Com
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                      const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
@@ -5724,7 +5724,7 @@ void GALGAS_controlRegisterMap::addAssign_operation (const GALGAS_lstring & inKe
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::setter_insertKey (GALGAS_lstring inKey,
                                                   GALGAS_unifiedTypeMap_2D_proxy inArgument0,
@@ -5747,11 +5747,11 @@ void GALGAS_controlRegisterMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_controlRegisterMap_searchKey = "** internal error **" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::method_searchKey (GALGAS_lstring inKey,
                                                   GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
@@ -5790,7 +5790,7 @@ void GALGAS_controlRegisterMap::method_searchKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_controlRegisterMap::getter_mTypeForKey (const GALGAS_string & inKey,
                                                                               C_Compiler * inCompiler
@@ -5805,7 +5805,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_controlRegisterMap::getter_mTypeForKey (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_controlRegisterMap::getter_mIsReadOnlyForKey (const GALGAS_string & inKey,
                                                                  C_Compiler * inCompiler
@@ -5820,7 +5820,7 @@ GALGAS_bool GALGAS_controlRegisterMap::getter_mIsReadOnlyForKey (const GALGAS_st
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_controlRegisterMap::getter_mIsAccessibleInUserModeForKey (const GALGAS_string & inKey,
                                                                              C_Compiler * inCompiler
@@ -5835,7 +5835,7 @@ GALGAS_bool GALGAS_controlRegisterMap::getter_mIsAccessibleInUserModeForKey (con
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterMap::getter_mRegisterFieldAccessMapForKey (const GALGAS_string & inKey,
                                                                                                          C_Compiler * inCompiler
@@ -5850,7 +5850,7 @@ GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterMap::getter_mRegis
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap GALGAS_controlRegisterMap::getter_mRegisterFieldMapForKey (const GALGAS_string & inKey,
                                                                                           C_Compiler * inCompiler
@@ -5865,7 +5865,7 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterMap::getter_mRegisterFieldM
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint GALGAS_controlRegisterMap::getter_mAddressForKey (const GALGAS_string & inKey,
                                                                 C_Compiler * inCompiler
@@ -5880,7 +5880,7 @@ GALGAS_bigint GALGAS_controlRegisterMap::getter_mAddressForKey (const GALGAS_str
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList GALGAS_controlRegisterMap::getter_mControlRegisterFieldListForKey (const GALGAS_string & inKey,
                                                                                                    C_Compiler * inCompiler
@@ -5895,7 +5895,7 @@ GALGAS_controlRegisterFieldList GALGAS_controlRegisterMap::getter_mControlRegist
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_controlRegisterMap::getter_mRegisterBitCountForKey (const GALGAS_string & inKey,
                                                                        C_Compiler * inCompiler
@@ -5910,7 +5910,7 @@ GALGAS_uint GALGAS_controlRegisterMap::getter_mRegisterBitCountForKey (const GAL
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::setter_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
                                                        GALGAS_string inKey,
@@ -5924,7 +5924,7 @@ void GALGAS_controlRegisterMap::setter_setMTypeForKey (GALGAS_unifiedTypeMap_2D_
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::setter_setMIsReadOnlyForKey (GALGAS_bool inAttributeValue,
                                                              GALGAS_string inKey,
@@ -5938,7 +5938,7 @@ void GALGAS_controlRegisterMap::setter_setMIsReadOnlyForKey (GALGAS_bool inAttri
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::setter_setMIsAccessibleInUserModeForKey (GALGAS_bool inAttributeValue,
                                                                          GALGAS_string inKey,
@@ -5952,7 +5952,7 @@ void GALGAS_controlRegisterMap::setter_setMIsAccessibleInUserModeForKey (GALGAS_
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::setter_setMRegisterFieldAccessMapForKey (GALGAS_controlRegisterBitSliceAccessMap inAttributeValue,
                                                                          GALGAS_string inKey,
@@ -5966,7 +5966,7 @@ void GALGAS_controlRegisterMap::setter_setMRegisterFieldAccessMapForKey (GALGAS_
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::setter_setMRegisterFieldMapForKey (GALGAS_controlRegisterFieldMap inAttributeValue,
                                                                    GALGAS_string inKey,
@@ -5980,7 +5980,7 @@ void GALGAS_controlRegisterMap::setter_setMRegisterFieldMapForKey (GALGAS_contro
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::setter_setMAddressForKey (GALGAS_bigint inAttributeValue,
                                                           GALGAS_string inKey,
@@ -5994,7 +5994,7 @@ void GALGAS_controlRegisterMap::setter_setMAddressForKey (GALGAS_bigint inAttrib
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::setter_setMControlRegisterFieldListForKey (GALGAS_controlRegisterFieldList inAttributeValue,
                                                                            GALGAS_string inKey,
@@ -6008,7 +6008,7 @@ void GALGAS_controlRegisterMap::setter_setMControlRegisterFieldListForKey (GALGA
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap::setter_setMRegisterBitCountForKey (GALGAS_uint inAttributeValue,
                                                                    GALGAS_string inKey,
@@ -6022,7 +6022,7 @@ void GALGAS_controlRegisterMap::setter_setMRegisterBitCountForKey (GALGAS_uint i
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_controlRegisterMap * GALGAS_controlRegisterMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                                const GALGAS_string & inKey
@@ -6032,7 +6032,7 @@ cMapElement_controlRegisterMap * GALGAS_controlRegisterMap::readWriteAccessForWi
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_controlRegisterMap::cEnumerator_controlRegisterMap (const GALGAS_controlRegisterMap & inEnumeratedObject,
                                                                 const typeEnumerationOrder inOrder) :
@@ -6040,7 +6040,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterMap_2D_element cEnumerator_controlRegisterMap::current (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
@@ -6048,7 +6048,7 @@ GALGAS_controlRegisterMap_2D_element cEnumerator_controlRegisterMap::current (LO
   return GALGAS_controlRegisterMap_2D_element (p->mAttribute_lkey, p->mAttribute_mType, p->mAttribute_mIsReadOnly, p->mAttribute_mIsAccessibleInUserMode, p->mAttribute_mRegisterFieldAccessMap, p->mAttribute_mRegisterFieldMap, p->mAttribute_mAddress, p->mAttribute_mControlRegisterFieldList, p->mAttribute_mRegisterBitCount) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_controlRegisterMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -6056,7 +6056,7 @@ GALGAS_lstring cEnumerator_controlRegisterMap::current_lkey (LOCATION_ARGS) cons
   return p->mAttribute_lkey ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cEnumerator_controlRegisterMap::current_mType (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
@@ -6064,7 +6064,7 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_controlRegisterMap::current_mType (LO
   return p->mAttribute_mType ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_controlRegisterMap::current_mIsReadOnly (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
@@ -6072,7 +6072,7 @@ GALGAS_bool cEnumerator_controlRegisterMap::current_mIsReadOnly (LOCATION_ARGS) 
   return p->mAttribute_mIsReadOnly ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_controlRegisterMap::current_mIsAccessibleInUserMode (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
@@ -6080,7 +6080,7 @@ GALGAS_bool cEnumerator_controlRegisterMap::current_mIsAccessibleInUserMode (LOC
   return p->mAttribute_mIsAccessibleInUserMode ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceAccessMap cEnumerator_controlRegisterMap::current_mRegisterFieldAccessMap (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
@@ -6088,7 +6088,7 @@ GALGAS_controlRegisterBitSliceAccessMap cEnumerator_controlRegisterMap::current_
   return p->mAttribute_mRegisterFieldAccessMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap cEnumerator_controlRegisterMap::current_mRegisterFieldMap (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
@@ -6096,7 +6096,7 @@ GALGAS_controlRegisterFieldMap cEnumerator_controlRegisterMap::current_mRegister
   return p->mAttribute_mRegisterFieldMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cEnumerator_controlRegisterMap::current_mAddress (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
@@ -6104,7 +6104,7 @@ GALGAS_bigint cEnumerator_controlRegisterMap::current_mAddress (LOCATION_ARGS) c
   return p->mAttribute_mAddress ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList cEnumerator_controlRegisterMap::current_mControlRegisterFieldList (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
@@ -6112,7 +6112,7 @@ GALGAS_controlRegisterFieldList cEnumerator_controlRegisterMap::current_mControl
   return p->mAttribute_mControlRegisterFieldList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cEnumerator_controlRegisterMap::current_mRegisterBitCount (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
@@ -6122,23 +6122,23 @@ GALGAS_uint cEnumerator_controlRegisterMap::current_mRegisterBitCount (LOCATION_
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                              @controlRegisterMap type                                               *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterMap ("controlRegisterMap",
                                            NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_controlRegisterMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_controlRegisterMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_controlRegisterMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -6148,7 +6148,7 @@ AC_GALGAS_root * GALGAS_controlRegisterMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterMap GALGAS_controlRegisterMap::extractObject (const GALGAS_object & inObject,
                                                                     C_Compiler * inCompiler
@@ -6165,11 +6165,11 @@ GALGAS_controlRegisterMap GALGAS_controlRegisterMap::extractObject (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                   Class for element of '@allowedRoutineList' list                                   *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_allowedRoutineList : public cCollectionElement {
   public : GALGAS_allowedRoutineList_2D_element mObject ;
@@ -6194,7 +6194,7 @@ class cCollectionElement_allowedRoutineList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_allowedRoutineList::cCollectionElement_allowedRoutineList (const GALGAS_bool & in_mHasWriteAccess,
                                                                               const GALGAS_lstring & in_mReceiverTypeName,
@@ -6205,13 +6205,13 @@ cCollectionElement (THERE),
 mObject (in_mHasWriteAccess, in_mReceiverTypeName, in_mRoutineName, in_mRoutineKind) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_allowedRoutineList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_allowedRoutineList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -6219,7 +6219,7 @@ cCollectionElement * cCollectionElement_allowedRoutineList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_allowedRoutineList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -6240,7 +6240,7 @@ void cCollectionElement_allowedRoutineList::description (C_String & ioString, co
   mObject.mAttribute_mRoutineKind.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_allowedRoutineList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_allowedRoutineList * operand = (cCollectionElement_allowedRoutineList *) inOperand ;
@@ -6248,13 +6248,13 @@ typeComparisonResult cCollectionElement_allowedRoutineList::compare (const cColl
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineList::GALGAS_allowedRoutineList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineList::GALGAS_allowedRoutineList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -6263,7 +6263,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineList GALGAS_allowedRoutineList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_allowedRoutineList result ;
@@ -6271,7 +6271,7 @@ GALGAS_allowedRoutineList GALGAS_allowedRoutineList::constructor_emptyList (LOCA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineList GALGAS_allowedRoutineList::constructor_listWithValue (const GALGAS_bool & inOperand0,
                                                                                 const GALGAS_lstring & inOperand1,
@@ -6288,7 +6288,7 @@ GALGAS_allowedRoutineList GALGAS_allowedRoutineList::constructor_listWithValue (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                            const GALGAS_bool & in_mHasWriteAccess,
@@ -6305,7 +6305,7 @@ void GALGAS_allowedRoutineList::makeAttributesFromObjects (capCollectionElement 
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineList::addAssign_operation (const GALGAS_bool & inOperand0,
                                                      const GALGAS_lstring & inOperand1,
@@ -6322,7 +6322,7 @@ void GALGAS_allowedRoutineList::addAssign_operation (const GALGAS_bool & inOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineList::setter_insertAtIndex (const GALGAS_bool inOperand0,
                                                       const GALGAS_lstring inOperand1,
@@ -6341,7 +6341,7 @@ void GALGAS_allowedRoutineList::setter_insertAtIndex (const GALGAS_bool inOperan
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineList::setter_removeAtIndex (GALGAS_bool & outOperand0,
                                                       GALGAS_lstring & outOperand1,
@@ -6369,7 +6369,7 @@ void GALGAS_allowedRoutineList::setter_removeAtIndex (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineList::setter_popFirst (GALGAS_bool & outOperand0,
                                                  GALGAS_lstring & outOperand1,
@@ -6394,7 +6394,7 @@ void GALGAS_allowedRoutineList::setter_popFirst (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineList::setter_popLast (GALGAS_bool & outOperand0,
                                                 GALGAS_lstring & outOperand1,
@@ -6419,7 +6419,7 @@ void GALGAS_allowedRoutineList::setter_popLast (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineList::method_first (GALGAS_bool & outOperand0,
                                               GALGAS_lstring & outOperand1,
@@ -6444,7 +6444,7 @@ void GALGAS_allowedRoutineList::method_first (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineList::method_last (GALGAS_bool & outOperand0,
                                              GALGAS_lstring & outOperand1,
@@ -6469,7 +6469,7 @@ void GALGAS_allowedRoutineList::method_last (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineList GALGAS_allowedRoutineList::add_operation (const GALGAS_allowedRoutineList & inOperand,
                                                                     C_Compiler * /* inCompiler */
@@ -6482,7 +6482,7 @@ GALGAS_allowedRoutineList GALGAS_allowedRoutineList::add_operation (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineList GALGAS_allowedRoutineList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                               C_Compiler * inCompiler
@@ -6492,7 +6492,7 @@ GALGAS_allowedRoutineList GALGAS_allowedRoutineList::getter_subListWithRange (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineList GALGAS_allowedRoutineList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                               C_Compiler * inCompiler
@@ -6502,7 +6502,7 @@ GALGAS_allowedRoutineList GALGAS_allowedRoutineList::getter_subListFromIndex (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineList GALGAS_allowedRoutineList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                             C_Compiler * inCompiler
@@ -6512,7 +6512,7 @@ GALGAS_allowedRoutineList GALGAS_allowedRoutineList::getter_subListToIndex (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineList::plusAssign_operation (const GALGAS_allowedRoutineList inOperand,
                                                       C_Compiler * /* inCompiler */
@@ -6520,7 +6520,7 @@ void GALGAS_allowedRoutineList::plusAssign_operation (const GALGAS_allowedRoutin
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_allowedRoutineList::getter_mHasWriteAccessAtIndex (const GALGAS_uint & inIndex,
                                                                       C_Compiler * inCompiler
@@ -6535,7 +6535,7 @@ GALGAS_bool GALGAS_allowedRoutineList::getter_mHasWriteAccessAtIndex (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_allowedRoutineList::getter_mReceiverTypeNameAtIndex (const GALGAS_uint & inIndex,
                                                                            C_Compiler * inCompiler
@@ -6550,7 +6550,7 @@ GALGAS_lstring GALGAS_allowedRoutineList::getter_mReceiverTypeNameAtIndex (const
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_allowedRoutineList::getter_mRoutineNameAtIndex (const GALGAS_uint & inIndex,
                                                                       C_Compiler * inCompiler
@@ -6565,7 +6565,7 @@ GALGAS_lstring GALGAS_allowedRoutineList::getter_mRoutineNameAtIndex (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKind GALGAS_allowedRoutineList::getter_mRoutineKindAtIndex (const GALGAS_uint & inIndex,
                                                                           C_Compiler * inCompiler
@@ -6582,7 +6582,7 @@ GALGAS_routineKind GALGAS_allowedRoutineList::getter_mRoutineKindAtIndex (const 
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_allowedRoutineList::cEnumerator_allowedRoutineList (const GALGAS_allowedRoutineList & inEnumeratedObject,
                                                                 const typeEnumerationOrder inOrder) :
@@ -6590,7 +6590,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineList_2D_element cEnumerator_allowedRoutineList::current (LOCATION_ARGS) const {
   const cCollectionElement_allowedRoutineList * p = (const cCollectionElement_allowedRoutineList *) currentObjectPtr (THERE) ;
@@ -6599,7 +6599,7 @@ GALGAS_allowedRoutineList_2D_element cEnumerator_allowedRoutineList::current (LO
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_allowedRoutineList::current_mHasWriteAccess (LOCATION_ARGS) const {
   const cCollectionElement_allowedRoutineList * p = (const cCollectionElement_allowedRoutineList *) currentObjectPtr (THERE) ;
@@ -6607,7 +6607,7 @@ GALGAS_bool cEnumerator_allowedRoutineList::current_mHasWriteAccess (LOCATION_AR
   return p->mObject.mAttribute_mHasWriteAccess ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_allowedRoutineList::current_mReceiverTypeName (LOCATION_ARGS) const {
   const cCollectionElement_allowedRoutineList * p = (const cCollectionElement_allowedRoutineList *) currentObjectPtr (THERE) ;
@@ -6615,7 +6615,7 @@ GALGAS_lstring cEnumerator_allowedRoutineList::current_mReceiverTypeName (LOCATI
   return p->mObject.mAttribute_mReceiverTypeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_allowedRoutineList::current_mRoutineName (LOCATION_ARGS) const {
   const cCollectionElement_allowedRoutineList * p = (const cCollectionElement_allowedRoutineList *) currentObjectPtr (THERE) ;
@@ -6623,7 +6623,7 @@ GALGAS_lstring cEnumerator_allowedRoutineList::current_mRoutineName (LOCATION_AR
   return p->mObject.mAttribute_mRoutineName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKind cEnumerator_allowedRoutineList::current_mRoutineKind (LOCATION_ARGS) const {
   const cCollectionElement_allowedRoutineList * p = (const cCollectionElement_allowedRoutineList *) currentObjectPtr (THERE) ;
@@ -6634,23 +6634,23 @@ GALGAS_routineKind cEnumerator_allowedRoutineList::current_mRoutineKind (LOCATIO
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                              @allowedRoutineList type                                               *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_allowedRoutineList ("allowedRoutineList",
                                            NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_allowedRoutineList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_allowedRoutineList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_allowedRoutineList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -6660,7 +6660,7 @@ AC_GALGAS_root * GALGAS_allowedRoutineList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineList GALGAS_allowedRoutineList::extractObject (const GALGAS_object & inObject,
                                                                     C_Compiler * inCompiler
@@ -6677,13 +6677,13 @@ GALGAS_allowedRoutineList GALGAS_allowedRoutineList::extractObject (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKind::GALGAS_routineKind (void) :
 mEnum (kNotBuilt) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKind GALGAS_routineKind::constructor_function (UNUSED_LOCATION_ARGS) {
   GALGAS_routineKind result ;
@@ -6691,7 +6691,7 @@ GALGAS_routineKind GALGAS_routineKind::constructor_function (UNUSED_LOCATION_ARG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKind GALGAS_routineKind::constructor_section (UNUSED_LOCATION_ARGS) {
   GALGAS_routineKind result ;
@@ -6699,7 +6699,7 @@ GALGAS_routineKind GALGAS_routineKind::constructor_section (UNUSED_LOCATION_ARGS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKind GALGAS_routineKind::constructor_service (UNUSED_LOCATION_ARGS) {
   GALGAS_routineKind result ;
@@ -6707,7 +6707,7 @@ GALGAS_routineKind GALGAS_routineKind::constructor_service (UNUSED_LOCATION_ARGS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKind GALGAS_routineKind::constructor_primitive (UNUSED_LOCATION_ARGS) {
   GALGAS_routineKind result ;
@@ -6715,7 +6715,7 @@ GALGAS_routineKind GALGAS_routineKind::constructor_primitive (UNUSED_LOCATION_AR
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gEnumNameArrayFor_routineKind [5] = {
   "(not built)",
@@ -6725,31 +6725,31 @@ static const char * gEnumNameArrayFor_routineKind [5] = {
   "primitive"
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_routineKind::getter_isFunction (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_function == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_routineKind::getter_isSection (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_section == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_routineKind::getter_isService (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_service == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_routineKind::getter_isPrimitive (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_primitive == mEnum) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineKind::description (C_String & ioString,
                                       const int32_t /* inIndentation */) const {
@@ -6757,7 +6757,7 @@ void GALGAS_routineKind::description (C_String & ioString,
   ioString << ">" ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult GALGAS_routineKind::objectCompare (const GALGAS_routineKind & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
@@ -6773,23 +6773,23 @@ typeComparisonResult GALGAS_routineKind::objectCompare (const GALGAS_routineKind
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                  @routineKind type                                                  *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_routineKind ("routineKind",
                                     NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_routineKind::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_routineKind ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_routineKind::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -6799,7 +6799,7 @@ AC_GALGAS_root * GALGAS_routineKind::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKind GALGAS_routineKind::extractObject (const GALGAS_object & inObject,
                                                       C_Compiler * inCompiler
@@ -6816,11 +6816,11 @@ GALGAS_routineKind GALGAS_routineKind::extractObject (const GALGAS_object & inOb
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                    Class for element of '@allowedInitList' list                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_allowedInitList : public cCollectionElement {
   public : GALGAS_allowedInitList_2D_element mObject ;
@@ -6843,7 +6843,7 @@ class cCollectionElement_allowedInitList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_allowedInitList::cCollectionElement_allowedInitList (const GALGAS_bool & in_mHasWriteAccess,
                                                                         const GALGAS_lbigint & in_mInitPriority
@@ -6852,13 +6852,13 @@ cCollectionElement (THERE),
 mObject (in_mHasWriteAccess, in_mInitPriority) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_allowedInitList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_allowedInitList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -6866,7 +6866,7 @@ cCollectionElement * cCollectionElement_allowedInitList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_allowedInitList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -6879,7 +6879,7 @@ void cCollectionElement_allowedInitList::description (C_String & ioString, const
   mObject.mAttribute_mInitPriority.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_allowedInitList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_allowedInitList * operand = (cCollectionElement_allowedInitList *) inOperand ;
@@ -6887,13 +6887,13 @@ typeComparisonResult cCollectionElement_allowedInitList::compare (const cCollect
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList::GALGAS_allowedInitList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList::GALGAS_allowedInitList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -6902,7 +6902,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList GALGAS_allowedInitList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_allowedInitList result ;
@@ -6910,7 +6910,7 @@ GALGAS_allowedInitList GALGAS_allowedInitList::constructor_emptyList (LOCATION_A
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList GALGAS_allowedInitList::constructor_listWithValue (const GALGAS_bool & inOperand0,
                                                                           const GALGAS_lbigint & inOperand1
@@ -6925,7 +6925,7 @@ GALGAS_allowedInitList GALGAS_allowedInitList::constructor_listWithValue (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                         const GALGAS_bool & in_mHasWriteAccess,
@@ -6938,7 +6938,7 @@ void GALGAS_allowedInitList::makeAttributesFromObjects (capCollectionElement & o
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::addAssign_operation (const GALGAS_bool & inOperand0,
                                                   const GALGAS_lbigint & inOperand1
@@ -6953,7 +6953,7 @@ void GALGAS_allowedInitList::addAssign_operation (const GALGAS_bool & inOperand0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::setter_insertAtIndex (const GALGAS_bool inOperand0,
                                                    const GALGAS_lbigint inOperand1,
@@ -6970,7 +6970,7 @@ void GALGAS_allowedInitList::setter_insertAtIndex (const GALGAS_bool inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::setter_removeAtIndex (GALGAS_bool & outOperand0,
                                                    GALGAS_lbigint & outOperand1,
@@ -6992,7 +6992,7 @@ void GALGAS_allowedInitList::setter_removeAtIndex (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::setter_popFirst (GALGAS_bool & outOperand0,
                                               GALGAS_lbigint & outOperand1,
@@ -7011,7 +7011,7 @@ void GALGAS_allowedInitList::setter_popFirst (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::setter_popLast (GALGAS_bool & outOperand0,
                                              GALGAS_lbigint & outOperand1,
@@ -7030,7 +7030,7 @@ void GALGAS_allowedInitList::setter_popLast (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::method_first (GALGAS_bool & outOperand0,
                                            GALGAS_lbigint & outOperand1,
@@ -7049,7 +7049,7 @@ void GALGAS_allowedInitList::method_first (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::method_last (GALGAS_bool & outOperand0,
                                           GALGAS_lbigint & outOperand1,
@@ -7068,7 +7068,7 @@ void GALGAS_allowedInitList::method_last (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList GALGAS_allowedInitList::add_operation (const GALGAS_allowedInitList & inOperand,
                                                               C_Compiler * /* inCompiler */
@@ -7081,7 +7081,7 @@ GALGAS_allowedInitList GALGAS_allowedInitList::add_operation (const GALGAS_allow
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList GALGAS_allowedInitList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                         C_Compiler * inCompiler
@@ -7091,7 +7091,7 @@ GALGAS_allowedInitList GALGAS_allowedInitList::getter_subListWithRange (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList GALGAS_allowedInitList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                         C_Compiler * inCompiler
@@ -7101,7 +7101,7 @@ GALGAS_allowedInitList GALGAS_allowedInitList::getter_subListFromIndex (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList GALGAS_allowedInitList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                       C_Compiler * inCompiler
@@ -7111,7 +7111,7 @@ GALGAS_allowedInitList GALGAS_allowedInitList::getter_subListToIndex (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedInitList::plusAssign_operation (const GALGAS_allowedInitList inOperand,
                                                    C_Compiler * /* inCompiler */
@@ -7119,7 +7119,7 @@ void GALGAS_allowedInitList::plusAssign_operation (const GALGAS_allowedInitList 
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_allowedInitList::getter_mHasWriteAccessAtIndex (const GALGAS_uint & inIndex,
                                                                    C_Compiler * inCompiler
@@ -7134,7 +7134,7 @@ GALGAS_bool GALGAS_allowedInitList::getter_mHasWriteAccessAtIndex (const GALGAS_
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint GALGAS_allowedInitList::getter_mInitPriorityAtIndex (const GALGAS_uint & inIndex,
                                                                     C_Compiler * inCompiler
@@ -7151,7 +7151,7 @@ GALGAS_lbigint GALGAS_allowedInitList::getter_mInitPriorityAtIndex (const GALGAS
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_allowedInitList::cEnumerator_allowedInitList (const GALGAS_allowedInitList & inEnumeratedObject,
                                                           const typeEnumerationOrder inOrder) :
@@ -7159,7 +7159,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList_2D_element cEnumerator_allowedInitList::current (LOCATION_ARGS) const {
   const cCollectionElement_allowedInitList * p = (const cCollectionElement_allowedInitList *) currentObjectPtr (THERE) ;
@@ -7168,7 +7168,7 @@ GALGAS_allowedInitList_2D_element cEnumerator_allowedInitList::current (LOCATION
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_allowedInitList::current_mHasWriteAccess (LOCATION_ARGS) const {
   const cCollectionElement_allowedInitList * p = (const cCollectionElement_allowedInitList *) currentObjectPtr (THERE) ;
@@ -7176,7 +7176,7 @@ GALGAS_bool cEnumerator_allowedInitList::current_mHasWriteAccess (LOCATION_ARGS)
   return p->mObject.mAttribute_mHasWriteAccess ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint cEnumerator_allowedInitList::current_mInitPriority (LOCATION_ARGS) const {
   const cCollectionElement_allowedInitList * p = (const cCollectionElement_allowedInitList *) currentObjectPtr (THERE) ;
@@ -7187,23 +7187,23 @@ GALGAS_lbigint cEnumerator_allowedInitList::current_mInitPriority (LOCATION_ARGS
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                @allowedInitList type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_allowedInitList ("allowedInitList",
                                         NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_allowedInitList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_allowedInitList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_allowedInitList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -7213,7 +7213,7 @@ AC_GALGAS_root * GALGAS_allowedInitList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedInitList GALGAS_allowedInitList::extractObject (const GALGAS_object & inObject,
                                                               C_Compiler * inCompiler
@@ -7230,11 +7230,11 @@ GALGAS_allowedInitList GALGAS_allowedInitList::extractObject (const GALGAS_objec
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                    Class for element of '@allowedPanicList' list                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_allowedPanicList : public cCollectionElement {
   public : GALGAS_allowedPanicList_2D_element mObject ;
@@ -7258,7 +7258,7 @@ class cCollectionElement_allowedPanicList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_allowedPanicList::cCollectionElement_allowedPanicList (const GALGAS_bool & in_mHasWriteAccess,
                                                                           const GALGAS_lstring & in_mPanicName,
@@ -7268,13 +7268,13 @@ cCollectionElement (THERE),
 mObject (in_mHasWriteAccess, in_mPanicName, in_mPanicPriority) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_allowedPanicList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_allowedPanicList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -7282,7 +7282,7 @@ cCollectionElement * cCollectionElement_allowedPanicList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_allowedPanicList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -7299,7 +7299,7 @@ void cCollectionElement_allowedPanicList::description (C_String & ioString, cons
   mObject.mAttribute_mPanicPriority.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_allowedPanicList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_allowedPanicList * operand = (cCollectionElement_allowedPanicList *) inOperand ;
@@ -7307,13 +7307,13 @@ typeComparisonResult cCollectionElement_allowedPanicList::compare (const cCollec
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedPanicList::GALGAS_allowedPanicList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedPanicList::GALGAS_allowedPanicList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -7322,7 +7322,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedPanicList GALGAS_allowedPanicList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_allowedPanicList result ;
@@ -7330,7 +7330,7 @@ GALGAS_allowedPanicList GALGAS_allowedPanicList::constructor_emptyList (LOCATION
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedPanicList GALGAS_allowedPanicList::constructor_listWithValue (const GALGAS_bool & inOperand0,
                                                                             const GALGAS_lstring & inOperand1,
@@ -7346,7 +7346,7 @@ GALGAS_allowedPanicList GALGAS_allowedPanicList::constructor_listWithValue (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedPanicList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                          const GALGAS_bool & in_mHasWriteAccess,
@@ -7361,7 +7361,7 @@ void GALGAS_allowedPanicList::makeAttributesFromObjects (capCollectionElement & 
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedPanicList::addAssign_operation (const GALGAS_bool & inOperand0,
                                                    const GALGAS_lstring & inOperand1,
@@ -7377,7 +7377,7 @@ void GALGAS_allowedPanicList::addAssign_operation (const GALGAS_bool & inOperand
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedPanicList::setter_insertAtIndex (const GALGAS_bool inOperand0,
                                                     const GALGAS_lstring inOperand1,
@@ -7395,7 +7395,7 @@ void GALGAS_allowedPanicList::setter_insertAtIndex (const GALGAS_bool inOperand0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedPanicList::setter_removeAtIndex (GALGAS_bool & outOperand0,
                                                     GALGAS_lstring & outOperand1,
@@ -7420,7 +7420,7 @@ void GALGAS_allowedPanicList::setter_removeAtIndex (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedPanicList::setter_popFirst (GALGAS_bool & outOperand0,
                                                GALGAS_lstring & outOperand1,
@@ -7442,7 +7442,7 @@ void GALGAS_allowedPanicList::setter_popFirst (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedPanicList::setter_popLast (GALGAS_bool & outOperand0,
                                               GALGAS_lstring & outOperand1,
@@ -7464,7 +7464,7 @@ void GALGAS_allowedPanicList::setter_popLast (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedPanicList::method_first (GALGAS_bool & outOperand0,
                                             GALGAS_lstring & outOperand1,
@@ -7486,7 +7486,7 @@ void GALGAS_allowedPanicList::method_first (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedPanicList::method_last (GALGAS_bool & outOperand0,
                                            GALGAS_lstring & outOperand1,
@@ -7508,7 +7508,7 @@ void GALGAS_allowedPanicList::method_last (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedPanicList GALGAS_allowedPanicList::add_operation (const GALGAS_allowedPanicList & inOperand,
                                                                 C_Compiler * /* inCompiler */
@@ -7521,7 +7521,7 @@ GALGAS_allowedPanicList GALGAS_allowedPanicList::add_operation (const GALGAS_all
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedPanicList GALGAS_allowedPanicList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                           C_Compiler * inCompiler
@@ -7531,7 +7531,7 @@ GALGAS_allowedPanicList GALGAS_allowedPanicList::getter_subListWithRange (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedPanicList GALGAS_allowedPanicList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                           C_Compiler * inCompiler
@@ -7541,7 +7541,7 @@ GALGAS_allowedPanicList GALGAS_allowedPanicList::getter_subListFromIndex (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedPanicList GALGAS_allowedPanicList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                         C_Compiler * inCompiler
@@ -7551,7 +7551,7 @@ GALGAS_allowedPanicList GALGAS_allowedPanicList::getter_subListToIndex (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedPanicList::plusAssign_operation (const GALGAS_allowedPanicList inOperand,
                                                     C_Compiler * /* inCompiler */
@@ -7559,7 +7559,7 @@ void GALGAS_allowedPanicList::plusAssign_operation (const GALGAS_allowedPanicLis
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_allowedPanicList::getter_mHasWriteAccessAtIndex (const GALGAS_uint & inIndex,
                                                                     C_Compiler * inCompiler
@@ -7574,7 +7574,7 @@ GALGAS_bool GALGAS_allowedPanicList::getter_mHasWriteAccessAtIndex (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_allowedPanicList::getter_mPanicNameAtIndex (const GALGAS_uint & inIndex,
                                                                   C_Compiler * inCompiler
@@ -7589,7 +7589,7 @@ GALGAS_lstring GALGAS_allowedPanicList::getter_mPanicNameAtIndex (const GALGAS_u
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint GALGAS_allowedPanicList::getter_mPanicPriorityAtIndex (const GALGAS_uint & inIndex,
                                                                       C_Compiler * inCompiler
@@ -7606,7 +7606,7 @@ GALGAS_lbigint GALGAS_allowedPanicList::getter_mPanicPriorityAtIndex (const GALG
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_allowedPanicList::cEnumerator_allowedPanicList (const GALGAS_allowedPanicList & inEnumeratedObject,
                                                             const typeEnumerationOrder inOrder) :
@@ -7614,7 +7614,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedPanicList_2D_element cEnumerator_allowedPanicList::current (LOCATION_ARGS) const {
   const cCollectionElement_allowedPanicList * p = (const cCollectionElement_allowedPanicList *) currentObjectPtr (THERE) ;
@@ -7623,7 +7623,7 @@ GALGAS_allowedPanicList_2D_element cEnumerator_allowedPanicList::current (LOCATI
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_allowedPanicList::current_mHasWriteAccess (LOCATION_ARGS) const {
   const cCollectionElement_allowedPanicList * p = (const cCollectionElement_allowedPanicList *) currentObjectPtr (THERE) ;
@@ -7631,7 +7631,7 @@ GALGAS_bool cEnumerator_allowedPanicList::current_mHasWriteAccess (LOCATION_ARGS
   return p->mObject.mAttribute_mHasWriteAccess ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_allowedPanicList::current_mPanicName (LOCATION_ARGS) const {
   const cCollectionElement_allowedPanicList * p = (const cCollectionElement_allowedPanicList *) currentObjectPtr (THERE) ;
@@ -7639,7 +7639,7 @@ GALGAS_lstring cEnumerator_allowedPanicList::current_mPanicName (LOCATION_ARGS) 
   return p->mObject.mAttribute_mPanicName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint cEnumerator_allowedPanicList::current_mPanicPriority (LOCATION_ARGS) const {
   const cCollectionElement_allowedPanicList * p = (const cCollectionElement_allowedPanicList *) currentObjectPtr (THERE) ;
@@ -7650,23 +7650,23 @@ GALGAS_lbigint cEnumerator_allowedPanicList::current_mPanicPriority (LOCATION_AR
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               @allowedPanicList type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_allowedPanicList ("allowedPanicList",
                                          NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_allowedPanicList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_allowedPanicList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_allowedPanicList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -7676,7 +7676,7 @@ AC_GALGAS_root * GALGAS_allowedPanicList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedPanicList GALGAS_allowedPanicList::extractObject (const GALGAS_object & inObject,
                                                                 C_Compiler * inCompiler
@@ -7693,11 +7693,11 @@ GALGAS_allowedPanicList GALGAS_allowedPanicList::extractObject (const GALGAS_obj
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                    Class for element of '@allowedGuardList' list                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_allowedGuardList : public cCollectionElement {
   public : GALGAS_allowedGuardList_2D_element mObject ;
@@ -7720,7 +7720,7 @@ class cCollectionElement_allowedGuardList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_allowedGuardList::cCollectionElement_allowedGuardList (const GALGAS_lstring & in_mOptionalTypeName,
                                                                           const GALGAS_lstring & in_mGuardName
@@ -7729,13 +7729,13 @@ cCollectionElement (THERE),
 mObject (in_mOptionalTypeName, in_mGuardName) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_allowedGuardList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_allowedGuardList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -7743,7 +7743,7 @@ cCollectionElement * cCollectionElement_allowedGuardList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_allowedGuardList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -7756,7 +7756,7 @@ void cCollectionElement_allowedGuardList::description (C_String & ioString, cons
   mObject.mAttribute_mGuardName.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_allowedGuardList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_allowedGuardList * operand = (cCollectionElement_allowedGuardList *) inOperand ;
@@ -7764,13 +7764,13 @@ typeComparisonResult cCollectionElement_allowedGuardList::compare (const cCollec
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedGuardList::GALGAS_allowedGuardList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedGuardList::GALGAS_allowedGuardList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -7779,7 +7779,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedGuardList GALGAS_allowedGuardList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_allowedGuardList result ;
@@ -7787,7 +7787,7 @@ GALGAS_allowedGuardList GALGAS_allowedGuardList::constructor_emptyList (LOCATION
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedGuardList GALGAS_allowedGuardList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                             const GALGAS_lstring & inOperand1
@@ -7802,7 +7802,7 @@ GALGAS_allowedGuardList GALGAS_allowedGuardList::constructor_listWithValue (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedGuardList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                          const GALGAS_lstring & in_mOptionalTypeName,
@@ -7815,7 +7815,7 @@ void GALGAS_allowedGuardList::makeAttributesFromObjects (capCollectionElement & 
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedGuardList::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                    const GALGAS_lstring & inOperand1
@@ -7830,7 +7830,7 @@ void GALGAS_allowedGuardList::addAssign_operation (const GALGAS_lstring & inOper
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedGuardList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                     const GALGAS_lstring inOperand1,
@@ -7847,7 +7847,7 @@ void GALGAS_allowedGuardList::setter_insertAtIndex (const GALGAS_lstring inOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedGuardList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                     GALGAS_lstring & outOperand1,
@@ -7869,7 +7869,7 @@ void GALGAS_allowedGuardList::setter_removeAtIndex (GALGAS_lstring & outOperand0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedGuardList::setter_popFirst (GALGAS_lstring & outOperand0,
                                                GALGAS_lstring & outOperand1,
@@ -7888,7 +7888,7 @@ void GALGAS_allowedGuardList::setter_popFirst (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedGuardList::setter_popLast (GALGAS_lstring & outOperand0,
                                               GALGAS_lstring & outOperand1,
@@ -7907,7 +7907,7 @@ void GALGAS_allowedGuardList::setter_popLast (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedGuardList::method_first (GALGAS_lstring & outOperand0,
                                             GALGAS_lstring & outOperand1,
@@ -7926,7 +7926,7 @@ void GALGAS_allowedGuardList::method_first (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedGuardList::method_last (GALGAS_lstring & outOperand0,
                                            GALGAS_lstring & outOperand1,
@@ -7945,7 +7945,7 @@ void GALGAS_allowedGuardList::method_last (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedGuardList GALGAS_allowedGuardList::add_operation (const GALGAS_allowedGuardList & inOperand,
                                                                 C_Compiler * /* inCompiler */
@@ -7958,7 +7958,7 @@ GALGAS_allowedGuardList GALGAS_allowedGuardList::add_operation (const GALGAS_all
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedGuardList GALGAS_allowedGuardList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                           C_Compiler * inCompiler
@@ -7968,7 +7968,7 @@ GALGAS_allowedGuardList GALGAS_allowedGuardList::getter_subListWithRange (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedGuardList GALGAS_allowedGuardList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                           C_Compiler * inCompiler
@@ -7978,7 +7978,7 @@ GALGAS_allowedGuardList GALGAS_allowedGuardList::getter_subListFromIndex (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedGuardList GALGAS_allowedGuardList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                         C_Compiler * inCompiler
@@ -7988,7 +7988,7 @@ GALGAS_allowedGuardList GALGAS_allowedGuardList::getter_subListToIndex (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedGuardList::plusAssign_operation (const GALGAS_allowedGuardList inOperand,
                                                     C_Compiler * /* inCompiler */
@@ -7996,7 +7996,7 @@ void GALGAS_allowedGuardList::plusAssign_operation (const GALGAS_allowedGuardLis
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_allowedGuardList::getter_mOptionalTypeNameAtIndex (const GALGAS_uint & inIndex,
                                                                          C_Compiler * inCompiler
@@ -8011,7 +8011,7 @@ GALGAS_lstring GALGAS_allowedGuardList::getter_mOptionalTypeNameAtIndex (const G
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_allowedGuardList::getter_mGuardNameAtIndex (const GALGAS_uint & inIndex,
                                                                   C_Compiler * inCompiler
@@ -8028,7 +8028,7 @@ GALGAS_lstring GALGAS_allowedGuardList::getter_mGuardNameAtIndex (const GALGAS_u
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_allowedGuardList::cEnumerator_allowedGuardList (const GALGAS_allowedGuardList & inEnumeratedObject,
                                                             const typeEnumerationOrder inOrder) :
@@ -8036,7 +8036,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedGuardList_2D_element cEnumerator_allowedGuardList::current (LOCATION_ARGS) const {
   const cCollectionElement_allowedGuardList * p = (const cCollectionElement_allowedGuardList *) currentObjectPtr (THERE) ;
@@ -8045,7 +8045,7 @@ GALGAS_allowedGuardList_2D_element cEnumerator_allowedGuardList::current (LOCATI
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_allowedGuardList::current_mOptionalTypeName (LOCATION_ARGS) const {
   const cCollectionElement_allowedGuardList * p = (const cCollectionElement_allowedGuardList *) currentObjectPtr (THERE) ;
@@ -8053,7 +8053,7 @@ GALGAS_lstring cEnumerator_allowedGuardList::current_mOptionalTypeName (LOCATION
   return p->mObject.mAttribute_mOptionalTypeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_allowedGuardList::current_mGuardName (LOCATION_ARGS) const {
   const cCollectionElement_allowedGuardList * p = (const cCollectionElement_allowedGuardList *) currentObjectPtr (THERE) ;
@@ -8064,23 +8064,23 @@ GALGAS_lstring cEnumerator_allowedGuardList::current_mGuardName (LOCATION_ARGS) 
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               @allowedGuardList type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_allowedGuardList ("allowedGuardList",
                                          NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_allowedGuardList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_allowedGuardList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_allowedGuardList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -8090,7 +8090,7 @@ AC_GALGAS_root * GALGAS_allowedGuardList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedGuardList GALGAS_allowedGuardList::extractObject (const GALGAS_object & inObject,
                                                                 C_Compiler * inCompiler
@@ -8107,11 +8107,11 @@ GALGAS_allowedGuardList GALGAS_allowedGuardList::extractObject (const GALGAS_obj
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Class for element of '@allowedISRList' list                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_allowedISRList : public cCollectionElement {
   public : GALGAS_allowedISRList_2D_element mObject ;
@@ -8134,7 +8134,7 @@ class cCollectionElement_allowedISRList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_allowedISRList::cCollectionElement_allowedISRList (const GALGAS_bool & in_mHasWriteAccess,
                                                                       const GALGAS_lstring & in_mISRName
@@ -8143,13 +8143,13 @@ cCollectionElement (THERE),
 mObject (in_mHasWriteAccess, in_mISRName) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_allowedISRList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_allowedISRList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -8157,7 +8157,7 @@ cCollectionElement * cCollectionElement_allowedISRList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_allowedISRList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -8170,7 +8170,7 @@ void cCollectionElement_allowedISRList::description (C_String & ioString, const 
   mObject.mAttribute_mISRName.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_allowedISRList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_allowedISRList * operand = (cCollectionElement_allowedISRList *) inOperand ;
@@ -8178,13 +8178,13 @@ typeComparisonResult cCollectionElement_allowedISRList::compare (const cCollecti
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRList::GALGAS_allowedISRList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRList::GALGAS_allowedISRList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -8193,7 +8193,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRList GALGAS_allowedISRList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_allowedISRList result ;
@@ -8201,7 +8201,7 @@ GALGAS_allowedISRList GALGAS_allowedISRList::constructor_emptyList (LOCATION_ARG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRList GALGAS_allowedISRList::constructor_listWithValue (const GALGAS_bool & inOperand0,
                                                                         const GALGAS_lstring & inOperand1
@@ -8216,7 +8216,7 @@ GALGAS_allowedISRList GALGAS_allowedISRList::constructor_listWithValue (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                        const GALGAS_bool & in_mHasWriteAccess,
@@ -8229,7 +8229,7 @@ void GALGAS_allowedISRList::makeAttributesFromObjects (capCollectionElement & ou
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRList::addAssign_operation (const GALGAS_bool & inOperand0,
                                                  const GALGAS_lstring & inOperand1
@@ -8244,7 +8244,7 @@ void GALGAS_allowedISRList::addAssign_operation (const GALGAS_bool & inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRList::setter_insertAtIndex (const GALGAS_bool inOperand0,
                                                   const GALGAS_lstring inOperand1,
@@ -8261,7 +8261,7 @@ void GALGAS_allowedISRList::setter_insertAtIndex (const GALGAS_bool inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRList::setter_removeAtIndex (GALGAS_bool & outOperand0,
                                                   GALGAS_lstring & outOperand1,
@@ -8283,7 +8283,7 @@ void GALGAS_allowedISRList::setter_removeAtIndex (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRList::setter_popFirst (GALGAS_bool & outOperand0,
                                              GALGAS_lstring & outOperand1,
@@ -8302,7 +8302,7 @@ void GALGAS_allowedISRList::setter_popFirst (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRList::setter_popLast (GALGAS_bool & outOperand0,
                                             GALGAS_lstring & outOperand1,
@@ -8321,7 +8321,7 @@ void GALGAS_allowedISRList::setter_popLast (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRList::method_first (GALGAS_bool & outOperand0,
                                           GALGAS_lstring & outOperand1,
@@ -8340,7 +8340,7 @@ void GALGAS_allowedISRList::method_first (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRList::method_last (GALGAS_bool & outOperand0,
                                          GALGAS_lstring & outOperand1,
@@ -8359,7 +8359,7 @@ void GALGAS_allowedISRList::method_last (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRList GALGAS_allowedISRList::add_operation (const GALGAS_allowedISRList & inOperand,
                                                             C_Compiler * /* inCompiler */
@@ -8372,7 +8372,7 @@ GALGAS_allowedISRList GALGAS_allowedISRList::add_operation (const GALGAS_allowed
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRList GALGAS_allowedISRList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                       C_Compiler * inCompiler
@@ -8382,7 +8382,7 @@ GALGAS_allowedISRList GALGAS_allowedISRList::getter_subListWithRange (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRList GALGAS_allowedISRList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                       C_Compiler * inCompiler
@@ -8392,7 +8392,7 @@ GALGAS_allowedISRList GALGAS_allowedISRList::getter_subListFromIndex (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRList GALGAS_allowedISRList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                     C_Compiler * inCompiler
@@ -8402,7 +8402,7 @@ GALGAS_allowedISRList GALGAS_allowedISRList::getter_subListToIndex (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRList::plusAssign_operation (const GALGAS_allowedISRList inOperand,
                                                   C_Compiler * /* inCompiler */
@@ -8410,7 +8410,7 @@ void GALGAS_allowedISRList::plusAssign_operation (const GALGAS_allowedISRList in
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_allowedISRList::getter_mHasWriteAccessAtIndex (const GALGAS_uint & inIndex,
                                                                   C_Compiler * inCompiler
@@ -8425,7 +8425,7 @@ GALGAS_bool GALGAS_allowedISRList::getter_mHasWriteAccessAtIndex (const GALGAS_u
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_allowedISRList::getter_mISRNameAtIndex (const GALGAS_uint & inIndex,
                                                               C_Compiler * inCompiler
@@ -8442,7 +8442,7 @@ GALGAS_lstring GALGAS_allowedISRList::getter_mISRNameAtIndex (const GALGAS_uint 
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_allowedISRList::cEnumerator_allowedISRList (const GALGAS_allowedISRList & inEnumeratedObject,
                                                         const typeEnumerationOrder inOrder) :
@@ -8450,7 +8450,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRList_2D_element cEnumerator_allowedISRList::current (LOCATION_ARGS) const {
   const cCollectionElement_allowedISRList * p = (const cCollectionElement_allowedISRList *) currentObjectPtr (THERE) ;
@@ -8459,7 +8459,7 @@ GALGAS_allowedISRList_2D_element cEnumerator_allowedISRList::current (LOCATION_A
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_allowedISRList::current_mHasWriteAccess (LOCATION_ARGS) const {
   const cCollectionElement_allowedISRList * p = (const cCollectionElement_allowedISRList *) currentObjectPtr (THERE) ;
@@ -8467,7 +8467,7 @@ GALGAS_bool cEnumerator_allowedISRList::current_mHasWriteAccess (LOCATION_ARGS) 
   return p->mObject.mAttribute_mHasWriteAccess ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_allowedISRList::current_mISRName (LOCATION_ARGS) const {
   const cCollectionElement_allowedISRList * p = (const cCollectionElement_allowedISRList *) currentObjectPtr (THERE) ;
@@ -8478,23 +8478,23 @@ GALGAS_lstring cEnumerator_allowedISRList::current_mISRName (LOCATION_ARGS) cons
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                @allowedISRList type                                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_allowedISRList ("allowedISRList",
                                        NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_allowedISRList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_allowedISRList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_allowedISRList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -8504,7 +8504,7 @@ AC_GALGAS_root * GALGAS_allowedISRList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRList GALGAS_allowedISRList::extractObject (const GALGAS_object & inObject,
                                                             C_Compiler * inCompiler
@@ -8521,11 +8521,11 @@ GALGAS_allowedISRList GALGAS_allowedISRList::extractObject (const GALGAS_object 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                    Class for element of '@allowedTaskList' list                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_allowedTaskList : public cCollectionElement {
   public : GALGAS_allowedTaskList_2D_element mObject ;
@@ -8548,7 +8548,7 @@ class cCollectionElement_allowedTaskList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_allowedTaskList::cCollectionElement_allowedTaskList (const GALGAS_bool & in_mHasWriteAccess,
                                                                         const GALGAS_lstring & in_mTaskName
@@ -8557,13 +8557,13 @@ cCollectionElement (THERE),
 mObject (in_mHasWriteAccess, in_mTaskName) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_allowedTaskList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_allowedTaskList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -8571,7 +8571,7 @@ cCollectionElement * cCollectionElement_allowedTaskList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_allowedTaskList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -8584,7 +8584,7 @@ void cCollectionElement_allowedTaskList::description (C_String & ioString, const
   mObject.mAttribute_mTaskName.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_allowedTaskList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_allowedTaskList * operand = (cCollectionElement_allowedTaskList *) inOperand ;
@@ -8592,13 +8592,13 @@ typeComparisonResult cCollectionElement_allowedTaskList::compare (const cCollect
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskList::GALGAS_allowedTaskList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskList::GALGAS_allowedTaskList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -8607,7 +8607,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskList GALGAS_allowedTaskList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_allowedTaskList result ;
@@ -8615,7 +8615,7 @@ GALGAS_allowedTaskList GALGAS_allowedTaskList::constructor_emptyList (LOCATION_A
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskList GALGAS_allowedTaskList::constructor_listWithValue (const GALGAS_bool & inOperand0,
                                                                           const GALGAS_lstring & inOperand1
@@ -8630,7 +8630,7 @@ GALGAS_allowedTaskList GALGAS_allowedTaskList::constructor_listWithValue (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                         const GALGAS_bool & in_mHasWriteAccess,
@@ -8643,7 +8643,7 @@ void GALGAS_allowedTaskList::makeAttributesFromObjects (capCollectionElement & o
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskList::addAssign_operation (const GALGAS_bool & inOperand0,
                                                   const GALGAS_lstring & inOperand1
@@ -8658,7 +8658,7 @@ void GALGAS_allowedTaskList::addAssign_operation (const GALGAS_bool & inOperand0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskList::setter_insertAtIndex (const GALGAS_bool inOperand0,
                                                    const GALGAS_lstring inOperand1,
@@ -8675,7 +8675,7 @@ void GALGAS_allowedTaskList::setter_insertAtIndex (const GALGAS_bool inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskList::setter_removeAtIndex (GALGAS_bool & outOperand0,
                                                    GALGAS_lstring & outOperand1,
@@ -8697,7 +8697,7 @@ void GALGAS_allowedTaskList::setter_removeAtIndex (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskList::setter_popFirst (GALGAS_bool & outOperand0,
                                               GALGAS_lstring & outOperand1,
@@ -8716,7 +8716,7 @@ void GALGAS_allowedTaskList::setter_popFirst (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskList::setter_popLast (GALGAS_bool & outOperand0,
                                              GALGAS_lstring & outOperand1,
@@ -8735,7 +8735,7 @@ void GALGAS_allowedTaskList::setter_popLast (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskList::method_first (GALGAS_bool & outOperand0,
                                            GALGAS_lstring & outOperand1,
@@ -8754,7 +8754,7 @@ void GALGAS_allowedTaskList::method_first (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskList::method_last (GALGAS_bool & outOperand0,
                                           GALGAS_lstring & outOperand1,
@@ -8773,7 +8773,7 @@ void GALGAS_allowedTaskList::method_last (GALGAS_bool & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskList GALGAS_allowedTaskList::add_operation (const GALGAS_allowedTaskList & inOperand,
                                                               C_Compiler * /* inCompiler */
@@ -8786,7 +8786,7 @@ GALGAS_allowedTaskList GALGAS_allowedTaskList::add_operation (const GALGAS_allow
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskList GALGAS_allowedTaskList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                         C_Compiler * inCompiler
@@ -8796,7 +8796,7 @@ GALGAS_allowedTaskList GALGAS_allowedTaskList::getter_subListWithRange (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskList GALGAS_allowedTaskList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                         C_Compiler * inCompiler
@@ -8806,7 +8806,7 @@ GALGAS_allowedTaskList GALGAS_allowedTaskList::getter_subListFromIndex (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskList GALGAS_allowedTaskList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                       C_Compiler * inCompiler
@@ -8816,7 +8816,7 @@ GALGAS_allowedTaskList GALGAS_allowedTaskList::getter_subListToIndex (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskList::plusAssign_operation (const GALGAS_allowedTaskList inOperand,
                                                    C_Compiler * /* inCompiler */
@@ -8824,7 +8824,7 @@ void GALGAS_allowedTaskList::plusAssign_operation (const GALGAS_allowedTaskList 
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_allowedTaskList::getter_mHasWriteAccessAtIndex (const GALGAS_uint & inIndex,
                                                                    C_Compiler * inCompiler
@@ -8839,7 +8839,7 @@ GALGAS_bool GALGAS_allowedTaskList::getter_mHasWriteAccessAtIndex (const GALGAS_
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_allowedTaskList::getter_mTaskNameAtIndex (const GALGAS_uint & inIndex,
                                                                 C_Compiler * inCompiler
@@ -8856,7 +8856,7 @@ GALGAS_lstring GALGAS_allowedTaskList::getter_mTaskNameAtIndex (const GALGAS_uin
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_allowedTaskList::cEnumerator_allowedTaskList (const GALGAS_allowedTaskList & inEnumeratedObject,
                                                           const typeEnumerationOrder inOrder) :
@@ -8864,7 +8864,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskList_2D_element cEnumerator_allowedTaskList::current (LOCATION_ARGS) const {
   const cCollectionElement_allowedTaskList * p = (const cCollectionElement_allowedTaskList *) currentObjectPtr (THERE) ;
@@ -8873,7 +8873,7 @@ GALGAS_allowedTaskList_2D_element cEnumerator_allowedTaskList::current (LOCATION
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_allowedTaskList::current_mHasWriteAccess (LOCATION_ARGS) const {
   const cCollectionElement_allowedTaskList * p = (const cCollectionElement_allowedTaskList *) currentObjectPtr (THERE) ;
@@ -8881,7 +8881,7 @@ GALGAS_bool cEnumerator_allowedTaskList::current_mHasWriteAccess (LOCATION_ARGS)
   return p->mObject.mAttribute_mHasWriteAccess ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_allowedTaskList::current_mTaskName (LOCATION_ARGS) const {
   const cCollectionElement_allowedTaskList * p = (const cCollectionElement_allowedTaskList *) currentObjectPtr (THERE) ;
@@ -8892,23 +8892,23 @@ GALGAS_lstring cEnumerator_allowedTaskList::current_mTaskName (LOCATION_ARGS) co
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                @allowedTaskList type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_allowedTaskList ("allowedTaskList",
                                         NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_allowedTaskList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_allowedTaskList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_allowedTaskList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -8918,7 +8918,7 @@ AC_GALGAS_root * GALGAS_allowedTaskList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskList GALGAS_allowedTaskList::extractObject (const GALGAS_object & inObject,
                                                               C_Compiler * inCompiler
@@ -8935,7 +8935,7 @@ GALGAS_allowedTaskList GALGAS_allowedTaskList::extractObject (const GALGAS_objec
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_allowedRoutineMap::cMapElement_allowedRoutineMap (const GALGAS_lstring & inKey,
                                                               const GALGAS_bool & in_mHasWriteAccess
@@ -8944,13 +8944,13 @@ cMapElement (inKey COMMA_THERE),
 mAttribute_mHasWriteAccess (in_mHasWriteAccess) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_allowedRoutineMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mHasWriteAccess.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_allowedRoutineMap::copy (void) {
   cMapElement * result = NULL ;
@@ -8958,7 +8958,7 @@ cMapElement * cMapElement_allowedRoutineMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_allowedRoutineMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -8967,7 +8967,7 @@ void cMapElement_allowedRoutineMap::description (C_String & ioString, const int3
   mAttribute_mHasWriteAccess.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_allowedRoutineMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_allowedRoutineMap * operand = (cMapElement_allowedRoutineMap *) inOperand ;
@@ -8978,26 +8978,26 @@ typeComparisonResult cMapElement_allowedRoutineMap::compare (const cCollectionEl
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineMap::GALGAS_allowedRoutineMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineMap::GALGAS_allowedRoutineMap (const GALGAS_allowedRoutineMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineMap & GALGAS_allowedRoutineMap::operator = (const GALGAS_allowedRoutineMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineMap GALGAS_allowedRoutineMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_allowedRoutineMap result ;
@@ -9005,7 +9005,7 @@ GALGAS_allowedRoutineMap GALGAS_allowedRoutineMap::constructor_emptyMap (LOCATIO
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineMap GALGAS_allowedRoutineMap::constructor_mapWithMapToOverride (const GALGAS_allowedRoutineMap & inMapToOverride
                                                                                      COMMA_LOCATION_ARGS) {
@@ -9014,7 +9014,7 @@ GALGAS_allowedRoutineMap GALGAS_allowedRoutineMap::constructor_mapWithMapToOverr
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineMap GALGAS_allowedRoutineMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const {
@@ -9023,7 +9023,7 @@ GALGAS_allowedRoutineMap GALGAS_allowedRoutineMap::getter_overriddenMap (C_Compi
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                     const GALGAS_bool & inArgument0,
@@ -9039,7 +9039,7 @@ void GALGAS_allowedRoutineMap::addAssign_operation (const GALGAS_lstring & inKey
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineMap::setter_insertKey (GALGAS_lstring inKey,
                                                  GALGAS_bool inArgument0,
@@ -9055,11 +9055,11 @@ void GALGAS_allowedRoutineMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_allowedRoutineMap_searchKey = "there is no '%K' routine" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineMap::method_searchKey (GALGAS_lstring inKey,
                                                  GALGAS_bool & outArgument0,
@@ -9077,7 +9077,7 @@ void GALGAS_allowedRoutineMap::method_searchKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_allowedRoutineMap::getter_mHasWriteAccessForKey (const GALGAS_string & inKey,
                                                                     C_Compiler * inCompiler
@@ -9092,7 +9092,7 @@ GALGAS_bool GALGAS_allowedRoutineMap::getter_mHasWriteAccessForKey (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedRoutineMap::setter_setMHasWriteAccessForKey (GALGAS_bool inAttributeValue,
                                                                 GALGAS_string inKey,
@@ -9106,7 +9106,7 @@ void GALGAS_allowedRoutineMap::setter_setMHasWriteAccessForKey (GALGAS_bool inAt
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_allowedRoutineMap * GALGAS_allowedRoutineMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                              const GALGAS_string & inKey
@@ -9116,7 +9116,7 @@ cMapElement_allowedRoutineMap * GALGAS_allowedRoutineMap::readWriteAccessForWith
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_allowedRoutineMap::cEnumerator_allowedRoutineMap (const GALGAS_allowedRoutineMap & inEnumeratedObject,
                                                               const typeEnumerationOrder inOrder) :
@@ -9124,7 +9124,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineMap_2D_element cEnumerator_allowedRoutineMap::current (LOCATION_ARGS) const {
   const cMapElement_allowedRoutineMap * p = (const cMapElement_allowedRoutineMap *) currentObjectPtr (THERE) ;
@@ -9132,7 +9132,7 @@ GALGAS_allowedRoutineMap_2D_element cEnumerator_allowedRoutineMap::current (LOCA
   return GALGAS_allowedRoutineMap_2D_element (p->mAttribute_lkey, p->mAttribute_mHasWriteAccess) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_allowedRoutineMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -9140,7 +9140,7 @@ GALGAS_lstring cEnumerator_allowedRoutineMap::current_lkey (LOCATION_ARGS) const
   return p->mAttribute_lkey ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_allowedRoutineMap::current_mHasWriteAccess (LOCATION_ARGS) const {
   const cMapElement_allowedRoutineMap * p = (const cMapElement_allowedRoutineMap *) currentObjectPtr (THERE) ;
@@ -9150,23 +9150,23 @@ GALGAS_bool cEnumerator_allowedRoutineMap::current_mHasWriteAccess (LOCATION_ARG
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               @allowedRoutineMap type                                               *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_allowedRoutineMap ("allowedRoutineMap",
                                           NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_allowedRoutineMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_allowedRoutineMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_allowedRoutineMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -9176,7 +9176,7 @@ AC_GALGAS_root * GALGAS_allowedRoutineMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedRoutineMap GALGAS_allowedRoutineMap::extractObject (const GALGAS_object & inObject,
                                                                   C_Compiler * inCompiler
@@ -9193,7 +9193,7 @@ GALGAS_allowedRoutineMap GALGAS_allowedRoutineMap::extractObject (const GALGAS_o
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_allowedISRMap::cMapElement_allowedISRMap (const GALGAS_lstring & inKey,
                                                       const GALGAS_bool & in_mHasWriteAccess
@@ -9202,13 +9202,13 @@ cMapElement (inKey COMMA_THERE),
 mAttribute_mHasWriteAccess (in_mHasWriteAccess) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_allowedISRMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mHasWriteAccess.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_allowedISRMap::copy (void) {
   cMapElement * result = NULL ;
@@ -9216,7 +9216,7 @@ cMapElement * cMapElement_allowedISRMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_allowedISRMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -9225,7 +9225,7 @@ void cMapElement_allowedISRMap::description (C_String & ioString, const int32_t 
   mAttribute_mHasWriteAccess.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_allowedISRMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_allowedISRMap * operand = (cMapElement_allowedISRMap *) inOperand ;
@@ -9236,26 +9236,26 @@ typeComparisonResult cMapElement_allowedISRMap::compare (const cCollectionElemen
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRMap::GALGAS_allowedISRMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRMap::GALGAS_allowedISRMap (const GALGAS_allowedISRMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRMap & GALGAS_allowedISRMap::operator = (const GALGAS_allowedISRMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRMap GALGAS_allowedISRMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_allowedISRMap result ;
@@ -9263,7 +9263,7 @@ GALGAS_allowedISRMap GALGAS_allowedISRMap::constructor_emptyMap (LOCATION_ARGS) 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRMap GALGAS_allowedISRMap::constructor_mapWithMapToOverride (const GALGAS_allowedISRMap & inMapToOverride
                                                                              COMMA_LOCATION_ARGS) {
@@ -9272,7 +9272,7 @@ GALGAS_allowedISRMap GALGAS_allowedISRMap::constructor_mapWithMapToOverride (con
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRMap GALGAS_allowedISRMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) const {
@@ -9281,7 +9281,7 @@ GALGAS_allowedISRMap GALGAS_allowedISRMap::getter_overriddenMap (C_Compiler * in
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                 const GALGAS_bool & inArgument0,
@@ -9297,7 +9297,7 @@ void GALGAS_allowedISRMap::addAssign_operation (const GALGAS_lstring & inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRMap::setter_insertKey (GALGAS_lstring inKey,
                                              GALGAS_bool inArgument0,
@@ -9313,11 +9313,11 @@ void GALGAS_allowedISRMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_allowedISRMap_searchKey = "there is no '%K' routine" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRMap::method_searchKey (GALGAS_lstring inKey,
                                              GALGAS_bool & outArgument0,
@@ -9335,7 +9335,7 @@ void GALGAS_allowedISRMap::method_searchKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_allowedISRMap::getter_mHasWriteAccessForKey (const GALGAS_string & inKey,
                                                                 C_Compiler * inCompiler
@@ -9350,7 +9350,7 @@ GALGAS_bool GALGAS_allowedISRMap::getter_mHasWriteAccessForKey (const GALGAS_str
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedISRMap::setter_setMHasWriteAccessForKey (GALGAS_bool inAttributeValue,
                                                             GALGAS_string inKey,
@@ -9364,7 +9364,7 @@ void GALGAS_allowedISRMap::setter_setMHasWriteAccessForKey (GALGAS_bool inAttrib
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_allowedISRMap * GALGAS_allowedISRMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                      const GALGAS_string & inKey
@@ -9374,7 +9374,7 @@ cMapElement_allowedISRMap * GALGAS_allowedISRMap::readWriteAccessForWithInstruct
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_allowedISRMap::cEnumerator_allowedISRMap (const GALGAS_allowedISRMap & inEnumeratedObject,
                                                       const typeEnumerationOrder inOrder) :
@@ -9382,7 +9382,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRMap_2D_element cEnumerator_allowedISRMap::current (LOCATION_ARGS) const {
   const cMapElement_allowedISRMap * p = (const cMapElement_allowedISRMap *) currentObjectPtr (THERE) ;
@@ -9390,7 +9390,7 @@ GALGAS_allowedISRMap_2D_element cEnumerator_allowedISRMap::current (LOCATION_ARG
   return GALGAS_allowedISRMap_2D_element (p->mAttribute_lkey, p->mAttribute_mHasWriteAccess) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_allowedISRMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -9398,7 +9398,7 @@ GALGAS_lstring cEnumerator_allowedISRMap::current_lkey (LOCATION_ARGS) const {
   return p->mAttribute_lkey ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_allowedISRMap::current_mHasWriteAccess (LOCATION_ARGS) const {
   const cMapElement_allowedISRMap * p = (const cMapElement_allowedISRMap *) currentObjectPtr (THERE) ;
@@ -9408,23 +9408,23 @@ GALGAS_bool cEnumerator_allowedISRMap::current_mHasWriteAccess (LOCATION_ARGS) c
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                 @allowedISRMap type                                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_allowedISRMap ("allowedISRMap",
                                       NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_allowedISRMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_allowedISRMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_allowedISRMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -9434,7 +9434,7 @@ AC_GALGAS_root * GALGAS_allowedISRMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedISRMap GALGAS_allowedISRMap::extractObject (const GALGAS_object & inObject,
                                                           C_Compiler * inCompiler
@@ -9451,7 +9451,7 @@ GALGAS_allowedISRMap GALGAS_allowedISRMap::extractObject (const GALGAS_object & 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_allowedTaskMap::cMapElement_allowedTaskMap (const GALGAS_lstring & inKey,
                                                         const GALGAS_bool & in_mHasWriteAccess
@@ -9460,13 +9460,13 @@ cMapElement (inKey COMMA_THERE),
 mAttribute_mHasWriteAccess (in_mHasWriteAccess) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_allowedTaskMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mHasWriteAccess.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_allowedTaskMap::copy (void) {
   cMapElement * result = NULL ;
@@ -9474,7 +9474,7 @@ cMapElement * cMapElement_allowedTaskMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_allowedTaskMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -9483,7 +9483,7 @@ void cMapElement_allowedTaskMap::description (C_String & ioString, const int32_t
   mAttribute_mHasWriteAccess.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_allowedTaskMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_allowedTaskMap * operand = (cMapElement_allowedTaskMap *) inOperand ;
@@ -9494,26 +9494,26 @@ typeComparisonResult cMapElement_allowedTaskMap::compare (const cCollectionEleme
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskMap::GALGAS_allowedTaskMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskMap::GALGAS_allowedTaskMap (const GALGAS_allowedTaskMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskMap & GALGAS_allowedTaskMap::operator = (const GALGAS_allowedTaskMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskMap GALGAS_allowedTaskMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_allowedTaskMap result ;
@@ -9521,7 +9521,7 @@ GALGAS_allowedTaskMap GALGAS_allowedTaskMap::constructor_emptyMap (LOCATION_ARGS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskMap GALGAS_allowedTaskMap::constructor_mapWithMapToOverride (const GALGAS_allowedTaskMap & inMapToOverride
                                                                                COMMA_LOCATION_ARGS) {
@@ -9530,7 +9530,7 @@ GALGAS_allowedTaskMap GALGAS_allowedTaskMap::constructor_mapWithMapToOverride (c
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskMap GALGAS_allowedTaskMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) const {
@@ -9539,7 +9539,7 @@ GALGAS_allowedTaskMap GALGAS_allowedTaskMap::getter_overriddenMap (C_Compiler * 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                  const GALGAS_bool & inArgument0,
@@ -9555,7 +9555,7 @@ void GALGAS_allowedTaskMap::addAssign_operation (const GALGAS_lstring & inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskMap::setter_insertKey (GALGAS_lstring inKey,
                                               GALGAS_bool inArgument0,
@@ -9571,11 +9571,11 @@ void GALGAS_allowedTaskMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_allowedTaskMap_searchKey = "there is no '%K' task" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskMap::method_searchKey (GALGAS_lstring inKey,
                                               GALGAS_bool & outArgument0,
@@ -9593,7 +9593,7 @@ void GALGAS_allowedTaskMap::method_searchKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_allowedTaskMap::getter_mHasWriteAccessForKey (const GALGAS_string & inKey,
                                                                  C_Compiler * inCompiler
@@ -9608,7 +9608,7 @@ GALGAS_bool GALGAS_allowedTaskMap::getter_mHasWriteAccessForKey (const GALGAS_st
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allowedTaskMap::setter_setMHasWriteAccessForKey (GALGAS_bool inAttributeValue,
                                                              GALGAS_string inKey,
@@ -9622,7 +9622,7 @@ void GALGAS_allowedTaskMap::setter_setMHasWriteAccessForKey (GALGAS_bool inAttri
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_allowedTaskMap * GALGAS_allowedTaskMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                        const GALGAS_string & inKey
@@ -9632,7 +9632,7 @@ cMapElement_allowedTaskMap * GALGAS_allowedTaskMap::readWriteAccessForWithInstru
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_allowedTaskMap::cEnumerator_allowedTaskMap (const GALGAS_allowedTaskMap & inEnumeratedObject,
                                                         const typeEnumerationOrder inOrder) :
@@ -9640,7 +9640,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskMap_2D_element cEnumerator_allowedTaskMap::current (LOCATION_ARGS) const {
   const cMapElement_allowedTaskMap * p = (const cMapElement_allowedTaskMap *) currentObjectPtr (THERE) ;
@@ -9648,7 +9648,7 @@ GALGAS_allowedTaskMap_2D_element cEnumerator_allowedTaskMap::current (LOCATION_A
   return GALGAS_allowedTaskMap_2D_element (p->mAttribute_lkey, p->mAttribute_mHasWriteAccess) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_allowedTaskMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -9656,7 +9656,7 @@ GALGAS_lstring cEnumerator_allowedTaskMap::current_lkey (LOCATION_ARGS) const {
   return p->mAttribute_lkey ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cEnumerator_allowedTaskMap::current_mHasWriteAccess (LOCATION_ARGS) const {
   const cMapElement_allowedTaskMap * p = (const cMapElement_allowedTaskMap *) currentObjectPtr (THERE) ;
@@ -9666,23 +9666,23 @@ GALGAS_bool cEnumerator_allowedTaskMap::current_mHasWriteAccess (LOCATION_ARGS) 
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                @allowedTaskMap type                                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_allowedTaskMap ("allowedTaskMap",
                                        NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_allowedTaskMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_allowedTaskMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_allowedTaskMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -9692,7 +9692,7 @@ AC_GALGAS_root * GALGAS_allowedTaskMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allowedTaskMap GALGAS_allowedTaskMap::extractObject (const GALGAS_object & inObject,
                                                             C_Compiler * inCompiler
@@ -9709,20 +9709,20 @@ GALGAS_allowedTaskMap GALGAS_allowedTaskMap::extractObject (const GALGAS_object 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_moduleMap::cMapElement_moduleMap (const GALGAS_lstring & inKey
                                               COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_moduleMap::isValid (void) const {
   return mAttribute_lkey.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_moduleMap::copy (void) {
   cMapElement * result = NULL ;
@@ -9730,12 +9730,12 @@ cMapElement * cMapElement_moduleMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_moduleMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_moduleMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_moduleMap * operand = (cMapElement_moduleMap *) inOperand ;
@@ -9743,26 +9743,26 @@ typeComparisonResult cMapElement_moduleMap::compare (const cCollectionElement * 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap::GALGAS_moduleMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap::GALGAS_moduleMap (const GALGAS_moduleMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap & GALGAS_moduleMap::operator = (const GALGAS_moduleMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap GALGAS_moduleMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_moduleMap result ;
@@ -9770,7 +9770,7 @@ GALGAS_moduleMap GALGAS_moduleMap::constructor_emptyMap (LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap GALGAS_moduleMap::constructor_mapWithMapToOverride (const GALGAS_moduleMap & inMapToOverride
                                                                      COMMA_LOCATION_ARGS) {
@@ -9779,7 +9779,7 @@ GALGAS_moduleMap GALGAS_moduleMap::constructor_mapWithMapToOverride (const GALGA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap GALGAS_moduleMap::getter_overriddenMap (C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const {
@@ -9788,7 +9788,7 @@ GALGAS_moduleMap GALGAS_moduleMap::getter_overriddenMap (C_Compiler * inCompiler
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleMap::addAssign_operation (const GALGAS_lstring & inKey,
                                             C_Compiler * inCompiler
@@ -9803,7 +9803,7 @@ void GALGAS_moduleMap::addAssign_operation (const GALGAS_lstring & inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleMap::setter_insertKey (GALGAS_lstring inKey,
                                          C_Compiler * inCompiler
@@ -9818,7 +9818,7 @@ void GALGAS_moduleMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_moduleMap * GALGAS_moduleMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                              const GALGAS_string & inKey
@@ -9828,7 +9828,7 @@ cMapElement_moduleMap * GALGAS_moduleMap::readWriteAccessForWithInstruction (C_C
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_moduleMap::cEnumerator_moduleMap (const GALGAS_moduleMap & inEnumeratedObject,
                                               const typeEnumerationOrder inOrder) :
@@ -9836,7 +9836,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap_2D_element cEnumerator_moduleMap::current (LOCATION_ARGS) const {
   const cMapElement_moduleMap * p = (const cMapElement_moduleMap *) currentObjectPtr (THERE) ;
@@ -9844,7 +9844,7 @@ GALGAS_moduleMap_2D_element cEnumerator_moduleMap::current (LOCATION_ARGS) const
   return GALGAS_moduleMap_2D_element (p->mAttribute_lkey) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_moduleMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -9854,23 +9854,23 @@ GALGAS_lstring cEnumerator_moduleMap::current_lkey (LOCATION_ARGS) const {
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                   @moduleMap type                                                   *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_moduleMap ("moduleMap",
                                   NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_moduleMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_moduleMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_moduleMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -9880,7 +9880,7 @@ AC_GALGAS_root * GALGAS_moduleMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap GALGAS_moduleMap::extractObject (const GALGAS_object & inObject,
                                                   C_Compiler * inCompiler
@@ -9897,11 +9897,11 @@ GALGAS_moduleMap GALGAS_moduleMap::extractObject (const GALGAS_object & inObject
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Class for element of '@moduleListIR' list                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_moduleListIR : public cCollectionElement {
   public : GALGAS_moduleListIR_2D_element mObject ;
@@ -9925,7 +9925,7 @@ class cCollectionElement_moduleListIR : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_moduleListIR::cCollectionElement_moduleListIR (const GALGAS_string & in_mModuleName,
                                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
@@ -9935,13 +9935,13 @@ cCollectionElement (THERE),
 mObject (in_mModuleName, in_mType, in_mInitialValueList) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_moduleListIR::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_moduleListIR::copy (void) {
   cCollectionElement * result = NULL ;
@@ -9949,7 +9949,7 @@ cCollectionElement * cCollectionElement_moduleListIR::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_moduleListIR::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -9966,7 +9966,7 @@ void cCollectionElement_moduleListIR::description (C_String & ioString, const in
   mObject.mAttribute_mInitialValueList.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_moduleListIR::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_moduleListIR * operand = (cCollectionElement_moduleListIR *) inOperand ;
@@ -9974,13 +9974,13 @@ typeComparisonResult cCollectionElement_moduleListIR::compare (const cCollection
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR::GALGAS_moduleListIR (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR::GALGAS_moduleListIR (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -9989,7 +9989,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR GALGAS_moduleListIR::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_moduleListIR result ;
@@ -9997,7 +9997,7 @@ GALGAS_moduleListIR GALGAS_moduleListIR::constructor_emptyList (LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR GALGAS_moduleListIR::constructor_listWithValue (const GALGAS_string & inOperand0,
                                                                     const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
@@ -10013,7 +10013,7 @@ GALGAS_moduleListIR GALGAS_moduleListIR::constructor_listWithValue (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                      const GALGAS_string & in_mModuleName,
@@ -10028,7 +10028,7 @@ void GALGAS_moduleListIR::makeAttributesFromObjects (capCollectionElement & outA
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleListIR::addAssign_operation (const GALGAS_string & inOperand0,
                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
@@ -10044,7 +10044,7 @@ void GALGAS_moduleListIR::addAssign_operation (const GALGAS_string & inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleListIR::setter_insertAtIndex (const GALGAS_string inOperand0,
                                                 const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
@@ -10062,7 +10062,7 @@ void GALGAS_moduleListIR::setter_insertAtIndex (const GALGAS_string inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleListIR::setter_removeAtIndex (GALGAS_string & outOperand0,
                                                 GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -10087,7 +10087,7 @@ void GALGAS_moduleListIR::setter_removeAtIndex (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleListIR::setter_popFirst (GALGAS_string & outOperand0,
                                            GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -10109,7 +10109,7 @@ void GALGAS_moduleListIR::setter_popFirst (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleListIR::setter_popLast (GALGAS_string & outOperand0,
                                           GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -10131,7 +10131,7 @@ void GALGAS_moduleListIR::setter_popLast (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleListIR::method_first (GALGAS_string & outOperand0,
                                         GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -10153,7 +10153,7 @@ void GALGAS_moduleListIR::method_first (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleListIR::method_last (GALGAS_string & outOperand0,
                                        GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -10175,7 +10175,7 @@ void GALGAS_moduleListIR::method_last (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR GALGAS_moduleListIR::add_operation (const GALGAS_moduleListIR & inOperand,
                                                         C_Compiler * /* inCompiler */
@@ -10188,7 +10188,7 @@ GALGAS_moduleListIR GALGAS_moduleListIR::add_operation (const GALGAS_moduleListI
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR GALGAS_moduleListIR::getter_subListWithRange (const GALGAS_range & inRange,
                                                                   C_Compiler * inCompiler
@@ -10198,7 +10198,7 @@ GALGAS_moduleListIR GALGAS_moduleListIR::getter_subListWithRange (const GALGAS_r
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR GALGAS_moduleListIR::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                   C_Compiler * inCompiler
@@ -10208,7 +10208,7 @@ GALGAS_moduleListIR GALGAS_moduleListIR::getter_subListFromIndex (const GALGAS_u
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR GALGAS_moduleListIR::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                 C_Compiler * inCompiler
@@ -10218,7 +10218,7 @@ GALGAS_moduleListIR GALGAS_moduleListIR::getter_subListToIndex (const GALGAS_uin
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleListIR::plusAssign_operation (const GALGAS_moduleListIR inOperand,
                                                 C_Compiler * /* inCompiler */
@@ -10226,7 +10226,7 @@ void GALGAS_moduleListIR::plusAssign_operation (const GALGAS_moduleListIR inOper
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string GALGAS_moduleListIR::getter_mModuleNameAtIndex (const GALGAS_uint & inIndex,
                                                               C_Compiler * inCompiler
@@ -10241,7 +10241,7 @@ GALGAS_string GALGAS_moduleListIR::getter_mModuleNameAtIndex (const GALGAS_uint 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_moduleListIR::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
                                                                          C_Compiler * inCompiler
@@ -10256,7 +10256,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_moduleListIR::getter_mTypeAtIndex (const G
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList GALGAS_moduleListIR::getter_mInitialValueListAtIndex (const GALGAS_uint & inIndex,
                                                                            C_Compiler * inCompiler
@@ -10273,7 +10273,7 @@ GALGAS_operandIRList GALGAS_moduleListIR::getter_mInitialValueListAtIndex (const
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_moduleListIR::cEnumerator_moduleListIR (const GALGAS_moduleListIR & inEnumeratedObject,
                                                     const typeEnumerationOrder inOrder) :
@@ -10281,7 +10281,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR_2D_element cEnumerator_moduleListIR::current (LOCATION_ARGS) const {
   const cCollectionElement_moduleListIR * p = (const cCollectionElement_moduleListIR *) currentObjectPtr (THERE) ;
@@ -10290,7 +10290,7 @@ GALGAS_moduleListIR_2D_element cEnumerator_moduleListIR::current (LOCATION_ARGS)
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cEnumerator_moduleListIR::current_mModuleName (LOCATION_ARGS) const {
   const cCollectionElement_moduleListIR * p = (const cCollectionElement_moduleListIR *) currentObjectPtr (THERE) ;
@@ -10298,7 +10298,7 @@ GALGAS_string cEnumerator_moduleListIR::current_mModuleName (LOCATION_ARGS) cons
   return p->mObject.mAttribute_mModuleName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cEnumerator_moduleListIR::current_mType (LOCATION_ARGS) const {
   const cCollectionElement_moduleListIR * p = (const cCollectionElement_moduleListIR *) currentObjectPtr (THERE) ;
@@ -10306,7 +10306,7 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_moduleListIR::current_mType (LOCATION
   return p->mObject.mAttribute_mType ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList cEnumerator_moduleListIR::current_mInitialValueList (LOCATION_ARGS) const {
   const cCollectionElement_moduleListIR * p = (const cCollectionElement_moduleListIR *) currentObjectPtr (THERE) ;
@@ -10317,23 +10317,23 @@ GALGAS_operandIRList cEnumerator_moduleListIR::current_mInitialValueList (LOCATI
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                 @moduleListIR type                                                  *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_moduleListIR ("moduleListIR",
                                      NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_moduleListIR::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_moduleListIR ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_moduleListIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -10343,7 +10343,7 @@ AC_GALGAS_root * GALGAS_moduleListIR::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR GALGAS_moduleListIR::extractObject (const GALGAS_object & inObject,
                                                         C_Compiler * inCompiler
@@ -10360,11 +10360,11 @@ GALGAS_moduleListIR GALGAS_moduleListIR::extractObject (const GALGAS_object & in
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Class for element of '@operandIRList' list                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_operandIRList : public cCollectionElement {
   public : GALGAS_operandIRList_2D_element mObject ;
@@ -10386,7 +10386,7 @@ class cCollectionElement_operandIRList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_operandIRList::cCollectionElement_operandIRList (const GALGAS_operandIR & in_mOperand
                                                                     COMMA_LOCATION_ARGS) :
@@ -10394,13 +10394,13 @@ cCollectionElement (THERE),
 mObject (in_mOperand) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_operandIRList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_operandIRList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -10408,7 +10408,7 @@ cCollectionElement * cCollectionElement_operandIRList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_operandIRList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -10417,7 +10417,7 @@ void cCollectionElement_operandIRList::description (C_String & ioString, const i
   mObject.mAttribute_mOperand.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_operandIRList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_operandIRList * operand = (cCollectionElement_operandIRList *) inOperand ;
@@ -10425,13 +10425,13 @@ typeComparisonResult cCollectionElement_operandIRList::compare (const cCollectio
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList::GALGAS_operandIRList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList::GALGAS_operandIRList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -10440,7 +10440,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList GALGAS_operandIRList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_operandIRList result ;
@@ -10448,7 +10448,7 @@ GALGAS_operandIRList GALGAS_operandIRList::constructor_emptyList (LOCATION_ARGS)
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList GALGAS_operandIRList::constructor_listWithValue (const GALGAS_operandIR & inOperand0
                                                                       COMMA_LOCATION_ARGS) {
@@ -10462,7 +10462,7 @@ GALGAS_operandIRList GALGAS_operandIRList::constructor_listWithValue (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandIRList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                       const GALGAS_operandIR & in_mOperand
@@ -10473,7 +10473,7 @@ void GALGAS_operandIRList::makeAttributesFromObjects (capCollectionElement & out
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandIRList::addAssign_operation (const GALGAS_operandIR & inOperand0
                                                 COMMA_LOCATION_ARGS) {
@@ -10487,7 +10487,7 @@ void GALGAS_operandIRList::addAssign_operation (const GALGAS_operandIR & inOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandIRList::setter_insertAtIndex (const GALGAS_operandIR inOperand0,
                                                  const GALGAS_uint inInsertionIndex,
@@ -10503,7 +10503,7 @@ void GALGAS_operandIRList::setter_insertAtIndex (const GALGAS_operandIR inOperan
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandIRList::setter_removeAtIndex (GALGAS_operandIR & outOperand0,
                                                  const GALGAS_uint inRemoveIndex,
@@ -10522,7 +10522,7 @@ void GALGAS_operandIRList::setter_removeAtIndex (GALGAS_operandIR & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandIRList::setter_popFirst (GALGAS_operandIR & outOperand0,
                                             C_Compiler * inCompiler
@@ -10538,7 +10538,7 @@ void GALGAS_operandIRList::setter_popFirst (GALGAS_operandIR & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandIRList::setter_popLast (GALGAS_operandIR & outOperand0,
                                            C_Compiler * inCompiler
@@ -10554,7 +10554,7 @@ void GALGAS_operandIRList::setter_popLast (GALGAS_operandIR & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandIRList::method_first (GALGAS_operandIR & outOperand0,
                                          C_Compiler * inCompiler
@@ -10570,7 +10570,7 @@ void GALGAS_operandIRList::method_first (GALGAS_operandIR & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandIRList::method_last (GALGAS_operandIR & outOperand0,
                                         C_Compiler * inCompiler
@@ -10586,7 +10586,7 @@ void GALGAS_operandIRList::method_last (GALGAS_operandIR & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList GALGAS_operandIRList::add_operation (const GALGAS_operandIRList & inOperand,
                                                           C_Compiler * /* inCompiler */
@@ -10599,7 +10599,7 @@ GALGAS_operandIRList GALGAS_operandIRList::add_operation (const GALGAS_operandIR
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList GALGAS_operandIRList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                     C_Compiler * inCompiler
@@ -10609,7 +10609,7 @@ GALGAS_operandIRList GALGAS_operandIRList::getter_subListWithRange (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList GALGAS_operandIRList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                     C_Compiler * inCompiler
@@ -10619,7 +10619,7 @@ GALGAS_operandIRList GALGAS_operandIRList::getter_subListFromIndex (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList GALGAS_operandIRList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                   C_Compiler * inCompiler
@@ -10629,7 +10629,7 @@ GALGAS_operandIRList GALGAS_operandIRList::getter_subListToIndex (const GALGAS_u
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandIRList::plusAssign_operation (const GALGAS_operandIRList inOperand,
                                                  C_Compiler * /* inCompiler */
@@ -10637,7 +10637,7 @@ void GALGAS_operandIRList::plusAssign_operation (const GALGAS_operandIRList inOp
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIR GALGAS_operandIRList::getter_mOperandAtIndex (const GALGAS_uint & inIndex,
                                                                C_Compiler * inCompiler
@@ -10654,7 +10654,7 @@ GALGAS_operandIR GALGAS_operandIRList::getter_mOperandAtIndex (const GALGAS_uint
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_operandIRList::cEnumerator_operandIRList (const GALGAS_operandIRList & inEnumeratedObject,
                                                       const typeEnumerationOrder inOrder) :
@@ -10662,7 +10662,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList_2D_element cEnumerator_operandIRList::current (LOCATION_ARGS) const {
   const cCollectionElement_operandIRList * p = (const cCollectionElement_operandIRList *) currentObjectPtr (THERE) ;
@@ -10671,7 +10671,7 @@ GALGAS_operandIRList_2D_element cEnumerator_operandIRList::current (LOCATION_ARG
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIR cEnumerator_operandIRList::current_mOperand (LOCATION_ARGS) const {
   const cCollectionElement_operandIRList * p = (const cCollectionElement_operandIRList *) currentObjectPtr (THERE) ;
@@ -10682,23 +10682,23 @@ GALGAS_operandIR cEnumerator_operandIRList::current_mOperand (LOCATION_ARGS) con
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                 @operandIRList type                                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_operandIRList ("operandIRList",
                                       NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_operandIRList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_operandIRList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_operandIRList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -10708,7 +10708,7 @@ AC_GALGAS_root * GALGAS_operandIRList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_operandIRList GALGAS_operandIRList::extractObject (const GALGAS_object & inObject,
                                                           C_Compiler * inCompiler
@@ -10725,11 +10725,11 @@ GALGAS_operandIRList GALGAS_operandIRList::extractObject (const GALGAS_object & 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Class for element of '@taskVarListAST' list                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_taskVarListAST : public cCollectionElement {
   public : GALGAS_taskVarListAST_2D_element mObject ;
@@ -10753,7 +10753,7 @@ class cCollectionElement_taskVarListAST : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_taskVarListAST::cCollectionElement_taskVarListAST (const GALGAS_lstring & in_mVarName,
                                                                       const GALGAS_lstring & in_mVarTypeName,
@@ -10763,13 +10763,13 @@ cCollectionElement (THERE),
 mObject (in_mVarName, in_mVarTypeName, in_mVarInitExpression) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_taskVarListAST::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_taskVarListAST::copy (void) {
   cCollectionElement * result = NULL ;
@@ -10777,7 +10777,7 @@ cCollectionElement * cCollectionElement_taskVarListAST::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_taskVarListAST::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -10794,7 +10794,7 @@ void cCollectionElement_taskVarListAST::description (C_String & ioString, const 
   mObject.mAttribute_mVarInitExpression.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_taskVarListAST::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_taskVarListAST * operand = (cCollectionElement_taskVarListAST *) inOperand ;
@@ -10802,13 +10802,13 @@ typeComparisonResult cCollectionElement_taskVarListAST::compare (const cCollecti
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskVarListAST::GALGAS_taskVarListAST (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskVarListAST::GALGAS_taskVarListAST (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -10817,7 +10817,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskVarListAST GALGAS_taskVarListAST::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_taskVarListAST result ;
@@ -10825,7 +10825,7 @@ GALGAS_taskVarListAST GALGAS_taskVarListAST::constructor_emptyList (LOCATION_ARG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskVarListAST GALGAS_taskVarListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                         const GALGAS_lstring & inOperand1,
@@ -10841,7 +10841,7 @@ GALGAS_taskVarListAST GALGAS_taskVarListAST::constructor_listWithValue (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskVarListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                        const GALGAS_lstring & in_mVarName,
@@ -10856,7 +10856,7 @@ void GALGAS_taskVarListAST::makeAttributesFromObjects (capCollectionElement & ou
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskVarListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                  const GALGAS_lstring & inOperand1,
@@ -10872,7 +10872,7 @@ void GALGAS_taskVarListAST::addAssign_operation (const GALGAS_lstring & inOperan
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskVarListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                   const GALGAS_lstring inOperand1,
@@ -10890,7 +10890,7 @@ void GALGAS_taskVarListAST::setter_insertAtIndex (const GALGAS_lstring inOperand
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskVarListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                   GALGAS_lstring & outOperand1,
@@ -10915,7 +10915,7 @@ void GALGAS_taskVarListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskVarListAST::setter_popFirst (GALGAS_lstring & outOperand0,
                                              GALGAS_lstring & outOperand1,
@@ -10937,7 +10937,7 @@ void GALGAS_taskVarListAST::setter_popFirst (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskVarListAST::setter_popLast (GALGAS_lstring & outOperand0,
                                             GALGAS_lstring & outOperand1,
@@ -10959,7 +10959,7 @@ void GALGAS_taskVarListAST::setter_popLast (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskVarListAST::method_first (GALGAS_lstring & outOperand0,
                                           GALGAS_lstring & outOperand1,
@@ -10981,7 +10981,7 @@ void GALGAS_taskVarListAST::method_first (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskVarListAST::method_last (GALGAS_lstring & outOperand0,
                                          GALGAS_lstring & outOperand1,
@@ -11003,7 +11003,7 @@ void GALGAS_taskVarListAST::method_last (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskVarListAST GALGAS_taskVarListAST::add_operation (const GALGAS_taskVarListAST & inOperand,
                                                             C_Compiler * /* inCompiler */
@@ -11016,7 +11016,7 @@ GALGAS_taskVarListAST GALGAS_taskVarListAST::add_operation (const GALGAS_taskVar
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskVarListAST GALGAS_taskVarListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                       C_Compiler * inCompiler
@@ -11026,7 +11026,7 @@ GALGAS_taskVarListAST GALGAS_taskVarListAST::getter_subListWithRange (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskVarListAST GALGAS_taskVarListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                       C_Compiler * inCompiler
@@ -11036,7 +11036,7 @@ GALGAS_taskVarListAST GALGAS_taskVarListAST::getter_subListFromIndex (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskVarListAST GALGAS_taskVarListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                     C_Compiler * inCompiler
@@ -11046,7 +11046,7 @@ GALGAS_taskVarListAST GALGAS_taskVarListAST::getter_subListToIndex (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskVarListAST::plusAssign_operation (const GALGAS_taskVarListAST inOperand,
                                                   C_Compiler * /* inCompiler */
@@ -11054,7 +11054,7 @@ void GALGAS_taskVarListAST::plusAssign_operation (const GALGAS_taskVarListAST in
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_taskVarListAST::getter_mVarNameAtIndex (const GALGAS_uint & inIndex,
                                                               C_Compiler * inCompiler
@@ -11069,7 +11069,7 @@ GALGAS_lstring GALGAS_taskVarListAST::getter_mVarNameAtIndex (const GALGAS_uint 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_taskVarListAST::getter_mVarTypeNameAtIndex (const GALGAS_uint & inIndex,
                                                                   C_Compiler * inCompiler
@@ -11084,7 +11084,7 @@ GALGAS_lstring GALGAS_taskVarListAST::getter_mVarTypeNameAtIndex (const GALGAS_u
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_expressionAST GALGAS_taskVarListAST::getter_mVarInitExpressionAtIndex (const GALGAS_uint & inIndex,
                                                                               C_Compiler * inCompiler
@@ -11101,7 +11101,7 @@ GALGAS_expressionAST GALGAS_taskVarListAST::getter_mVarInitExpressionAtIndex (co
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_taskVarListAST::cEnumerator_taskVarListAST (const GALGAS_taskVarListAST & inEnumeratedObject,
                                                         const typeEnumerationOrder inOrder) :
@@ -11109,7 +11109,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskVarListAST_2D_element cEnumerator_taskVarListAST::current (LOCATION_ARGS) const {
   const cCollectionElement_taskVarListAST * p = (const cCollectionElement_taskVarListAST *) currentObjectPtr (THERE) ;
@@ -11118,7 +11118,7 @@ GALGAS_taskVarListAST_2D_element cEnumerator_taskVarListAST::current (LOCATION_A
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_taskVarListAST::current_mVarName (LOCATION_ARGS) const {
   const cCollectionElement_taskVarListAST * p = (const cCollectionElement_taskVarListAST *) currentObjectPtr (THERE) ;
@@ -11126,7 +11126,7 @@ GALGAS_lstring cEnumerator_taskVarListAST::current_mVarName (LOCATION_ARGS) cons
   return p->mObject.mAttribute_mVarName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_taskVarListAST::current_mVarTypeName (LOCATION_ARGS) const {
   const cCollectionElement_taskVarListAST * p = (const cCollectionElement_taskVarListAST *) currentObjectPtr (THERE) ;
@@ -11134,7 +11134,7 @@ GALGAS_lstring cEnumerator_taskVarListAST::current_mVarTypeName (LOCATION_ARGS) 
   return p->mObject.mAttribute_mVarTypeName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_expressionAST cEnumerator_taskVarListAST::current_mVarInitExpression (LOCATION_ARGS) const {
   const cCollectionElement_taskVarListAST * p = (const cCollectionElement_taskVarListAST *) currentObjectPtr (THERE) ;
@@ -11145,23 +11145,23 @@ GALGAS_expressionAST cEnumerator_taskVarListAST::current_mVarInitExpression (LOC
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                @taskVarListAST type                                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_taskVarListAST ("taskVarListAST",
                                        NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_taskVarListAST::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_taskVarListAST ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_taskVarListAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -11171,7 +11171,7 @@ AC_GALGAS_root * GALGAS_taskVarListAST::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskVarListAST GALGAS_taskVarListAST::extractObject (const GALGAS_object & inObject,
                                                             C_Compiler * inCompiler
@@ -11188,11 +11188,11 @@ GALGAS_taskVarListAST GALGAS_taskVarListAST::extractObject (const GALGAS_object 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                    Class for element of '@taskInitListAST' list                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_taskInitListAST : public cCollectionElement {
   public : GALGAS_taskInitListAST_2D_element mObject ;
@@ -11216,7 +11216,7 @@ class cCollectionElement_taskInitListAST : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_taskInitListAST::cCollectionElement_taskInitListAST (const GALGAS_lbigint & in_mTaskInitPriority,
                                                                         const GALGAS_instructionListAST & in_mTaskInitInstructionList,
@@ -11226,13 +11226,13 @@ cCollectionElement (THERE),
 mObject (in_mTaskInitPriority, in_mTaskInitInstructionList, in_mEndOfTaskInitDeclaration) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_taskInitListAST::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_taskInitListAST::copy (void) {
   cCollectionElement * result = NULL ;
@@ -11240,7 +11240,7 @@ cCollectionElement * cCollectionElement_taskInitListAST::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_taskInitListAST::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -11257,7 +11257,7 @@ void cCollectionElement_taskInitListAST::description (C_String & ioString, const
   mObject.mAttribute_mEndOfTaskInitDeclaration.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_taskInitListAST::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_taskInitListAST * operand = (cCollectionElement_taskInitListAST *) inOperand ;
@@ -11265,13 +11265,13 @@ typeComparisonResult cCollectionElement_taskInitListAST::compare (const cCollect
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST::GALGAS_taskInitListAST (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST::GALGAS_taskInitListAST (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -11280,7 +11280,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST GALGAS_taskInitListAST::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_taskInitListAST result ;
@@ -11288,7 +11288,7 @@ GALGAS_taskInitListAST GALGAS_taskInitListAST::constructor_emptyList (LOCATION_A
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST GALGAS_taskInitListAST::constructor_listWithValue (const GALGAS_lbigint & inOperand0,
                                                                           const GALGAS_instructionListAST & inOperand1,
@@ -11304,7 +11304,7 @@ GALGAS_taskInitListAST GALGAS_taskInitListAST::constructor_listWithValue (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                         const GALGAS_lbigint & in_mTaskInitPriority,
@@ -11319,7 +11319,7 @@ void GALGAS_taskInitListAST::makeAttributesFromObjects (capCollectionElement & o
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitListAST::addAssign_operation (const GALGAS_lbigint & inOperand0,
                                                   const GALGAS_instructionListAST & inOperand1,
@@ -11335,7 +11335,7 @@ void GALGAS_taskInitListAST::addAssign_operation (const GALGAS_lbigint & inOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitListAST::setter_insertAtIndex (const GALGAS_lbigint inOperand0,
                                                    const GALGAS_instructionListAST inOperand1,
@@ -11353,7 +11353,7 @@ void GALGAS_taskInitListAST::setter_insertAtIndex (const GALGAS_lbigint inOperan
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitListAST::setter_removeAtIndex (GALGAS_lbigint & outOperand0,
                                                    GALGAS_instructionListAST & outOperand1,
@@ -11378,7 +11378,7 @@ void GALGAS_taskInitListAST::setter_removeAtIndex (GALGAS_lbigint & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitListAST::setter_popFirst (GALGAS_lbigint & outOperand0,
                                               GALGAS_instructionListAST & outOperand1,
@@ -11400,7 +11400,7 @@ void GALGAS_taskInitListAST::setter_popFirst (GALGAS_lbigint & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitListAST::setter_popLast (GALGAS_lbigint & outOperand0,
                                              GALGAS_instructionListAST & outOperand1,
@@ -11422,7 +11422,7 @@ void GALGAS_taskInitListAST::setter_popLast (GALGAS_lbigint & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitListAST::method_first (GALGAS_lbigint & outOperand0,
                                            GALGAS_instructionListAST & outOperand1,
@@ -11444,7 +11444,7 @@ void GALGAS_taskInitListAST::method_first (GALGAS_lbigint & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitListAST::method_last (GALGAS_lbigint & outOperand0,
                                           GALGAS_instructionListAST & outOperand1,
@@ -11466,7 +11466,7 @@ void GALGAS_taskInitListAST::method_last (GALGAS_lbigint & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST GALGAS_taskInitListAST::add_operation (const GALGAS_taskInitListAST & inOperand,
                                                               C_Compiler * /* inCompiler */
@@ -11479,7 +11479,7 @@ GALGAS_taskInitListAST GALGAS_taskInitListAST::add_operation (const GALGAS_taskI
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST GALGAS_taskInitListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                         C_Compiler * inCompiler
@@ -11489,7 +11489,7 @@ GALGAS_taskInitListAST GALGAS_taskInitListAST::getter_subListWithRange (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST GALGAS_taskInitListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                         C_Compiler * inCompiler
@@ -11499,7 +11499,7 @@ GALGAS_taskInitListAST GALGAS_taskInitListAST::getter_subListFromIndex (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST GALGAS_taskInitListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                       C_Compiler * inCompiler
@@ -11509,7 +11509,7 @@ GALGAS_taskInitListAST GALGAS_taskInitListAST::getter_subListToIndex (const GALG
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitListAST::plusAssign_operation (const GALGAS_taskInitListAST inOperand,
                                                    C_Compiler * /* inCompiler */
@@ -11517,7 +11517,7 @@ void GALGAS_taskInitListAST::plusAssign_operation (const GALGAS_taskInitListAST 
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint GALGAS_taskInitListAST::getter_mTaskInitPriorityAtIndex (const GALGAS_uint & inIndex,
                                                                         C_Compiler * inCompiler
@@ -11532,7 +11532,7 @@ GALGAS_lbigint GALGAS_taskInitListAST::getter_mTaskInitPriorityAtIndex (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_taskInitListAST::getter_mTaskInitInstructionListAtIndex (const GALGAS_uint & inIndex,
                                                                                           C_Compiler * inCompiler
@@ -11547,7 +11547,7 @@ GALGAS_instructionListAST GALGAS_taskInitListAST::getter_mTaskInitInstructionLis
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_taskInitListAST::getter_mEndOfTaskInitDeclarationAtIndex (const GALGAS_uint & inIndex,
                                                                                  C_Compiler * inCompiler
@@ -11564,7 +11564,7 @@ GALGAS_location GALGAS_taskInitListAST::getter_mEndOfTaskInitDeclarationAtIndex 
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_taskInitListAST::cEnumerator_taskInitListAST (const GALGAS_taskInitListAST & inEnumeratedObject,
                                                           const typeEnumerationOrder inOrder) :
@@ -11572,7 +11572,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST_2D_element cEnumerator_taskInitListAST::current (LOCATION_ARGS) const {
   const cCollectionElement_taskInitListAST * p = (const cCollectionElement_taskInitListAST *) currentObjectPtr (THERE) ;
@@ -11581,7 +11581,7 @@ GALGAS_taskInitListAST_2D_element cEnumerator_taskInitListAST::current (LOCATION
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint cEnumerator_taskInitListAST::current_mTaskInitPriority (LOCATION_ARGS) const {
   const cCollectionElement_taskInitListAST * p = (const cCollectionElement_taskInitListAST *) currentObjectPtr (THERE) ;
@@ -11589,7 +11589,7 @@ GALGAS_lbigint cEnumerator_taskInitListAST::current_mTaskInitPriority (LOCATION_
   return p->mObject.mAttribute_mTaskInitPriority ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST cEnumerator_taskInitListAST::current_mTaskInitInstructionList (LOCATION_ARGS) const {
   const cCollectionElement_taskInitListAST * p = (const cCollectionElement_taskInitListAST *) currentObjectPtr (THERE) ;
@@ -11597,7 +11597,7 @@ GALGAS_instructionListAST cEnumerator_taskInitListAST::current_mTaskInitInstruct
   return p->mObject.mAttribute_mTaskInitInstructionList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cEnumerator_taskInitListAST::current_mEndOfTaskInitDeclaration (LOCATION_ARGS) const {
   const cCollectionElement_taskInitListAST * p = (const cCollectionElement_taskInitListAST *) currentObjectPtr (THERE) ;
@@ -11608,23 +11608,23 @@ GALGAS_location cEnumerator_taskInitListAST::current_mEndOfTaskInitDeclaration (
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                @taskInitListAST type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_taskInitListAST ("taskInitListAST",
                                         NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_taskInitListAST::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_taskInitListAST ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_taskInitListAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -11634,7 +11634,7 @@ AC_GALGAS_root * GALGAS_taskInitListAST::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST GALGAS_taskInitListAST::extractObject (const GALGAS_object & inObject,
                                                               C_Compiler * inCompiler
@@ -11651,11 +11651,11 @@ GALGAS_taskInitListAST GALGAS_taskInitListAST::extractObject (const GALGAS_objec
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                               Class for element of '@syncInstructionBranchList' list                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_syncInstructionBranchList : public cCollectionElement {
   public : GALGAS_syncInstructionBranchList_2D_element mObject ;
@@ -11679,7 +11679,7 @@ class cCollectionElement_syncInstructionBranchList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_syncInstructionBranchList::cCollectionElement_syncInstructionBranchList (const GALGAS_guardedCommand & in_mGuardedCommand,
                                                                                             const GALGAS_instructionListAST & in_mInstructionList,
@@ -11689,13 +11689,13 @@ cCollectionElement (THERE),
 mObject (in_mGuardedCommand, in_mInstructionList, in_mEndOfBranch) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_syncInstructionBranchList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_syncInstructionBranchList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -11703,7 +11703,7 @@ cCollectionElement * cCollectionElement_syncInstructionBranchList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_syncInstructionBranchList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -11720,7 +11720,7 @@ void cCollectionElement_syncInstructionBranchList::description (C_String & ioStr
   mObject.mAttribute_mEndOfBranch.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_syncInstructionBranchList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_syncInstructionBranchList * operand = (cCollectionElement_syncInstructionBranchList *) inOperand ;
@@ -11728,13 +11728,13 @@ typeComparisonResult cCollectionElement_syncInstructionBranchList::compare (cons
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_syncInstructionBranchList::GALGAS_syncInstructionBranchList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_syncInstructionBranchList::GALGAS_syncInstructionBranchList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -11743,7 +11743,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_syncInstructionBranchList result ;
@@ -11751,7 +11751,7 @@ GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::constructor_e
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::constructor_listWithValue (const GALGAS_guardedCommand & inOperand0,
                                                                                               const GALGAS_instructionListAST & inOperand1,
@@ -11767,7 +11767,7 @@ GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::constructor_l
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_syncInstructionBranchList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                   const GALGAS_guardedCommand & in_mGuardedCommand,
@@ -11782,7 +11782,7 @@ void GALGAS_syncInstructionBranchList::makeAttributesFromObjects (capCollectionE
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_syncInstructionBranchList::addAssign_operation (const GALGAS_guardedCommand & inOperand0,
                                                             const GALGAS_instructionListAST & inOperand1,
@@ -11798,7 +11798,7 @@ void GALGAS_syncInstructionBranchList::addAssign_operation (const GALGAS_guarded
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_syncInstructionBranchList::setter_insertAtIndex (const GALGAS_guardedCommand inOperand0,
                                                              const GALGAS_instructionListAST inOperand1,
@@ -11816,7 +11816,7 @@ void GALGAS_syncInstructionBranchList::setter_insertAtIndex (const GALGAS_guarde
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_syncInstructionBranchList::setter_removeAtIndex (GALGAS_guardedCommand & outOperand0,
                                                              GALGAS_instructionListAST & outOperand1,
@@ -11841,7 +11841,7 @@ void GALGAS_syncInstructionBranchList::setter_removeAtIndex (GALGAS_guardedComma
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_syncInstructionBranchList::setter_popFirst (GALGAS_guardedCommand & outOperand0,
                                                         GALGAS_instructionListAST & outOperand1,
@@ -11863,7 +11863,7 @@ void GALGAS_syncInstructionBranchList::setter_popFirst (GALGAS_guardedCommand & 
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_syncInstructionBranchList::setter_popLast (GALGAS_guardedCommand & outOperand0,
                                                        GALGAS_instructionListAST & outOperand1,
@@ -11885,7 +11885,7 @@ void GALGAS_syncInstructionBranchList::setter_popLast (GALGAS_guardedCommand & o
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_syncInstructionBranchList::method_first (GALGAS_guardedCommand & outOperand0,
                                                      GALGAS_instructionListAST & outOperand1,
@@ -11907,7 +11907,7 @@ void GALGAS_syncInstructionBranchList::method_first (GALGAS_guardedCommand & out
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_syncInstructionBranchList::method_last (GALGAS_guardedCommand & outOperand0,
                                                     GALGAS_instructionListAST & outOperand1,
@@ -11929,7 +11929,7 @@ void GALGAS_syncInstructionBranchList::method_last (GALGAS_guardedCommand & outO
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::add_operation (const GALGAS_syncInstructionBranchList & inOperand,
                                                                                   C_Compiler * /* inCompiler */
@@ -11942,7 +11942,7 @@ GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::add_operation
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                             C_Compiler * inCompiler
@@ -11952,7 +11952,7 @@ GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::getter_subLis
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                             C_Compiler * inCompiler
@@ -11962,7 +11962,7 @@ GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::getter_subLis
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                           C_Compiler * inCompiler
@@ -11972,7 +11972,7 @@ GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::getter_subLis
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_syncInstructionBranchList::plusAssign_operation (const GALGAS_syncInstructionBranchList inOperand,
                                                              C_Compiler * /* inCompiler */
@@ -11980,7 +11980,7 @@ void GALGAS_syncInstructionBranchList::plusAssign_operation (const GALGAS_syncIn
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommand GALGAS_syncInstructionBranchList::getter_mGuardedCommandAtIndex (const GALGAS_uint & inIndex,
                                                                                        C_Compiler * inCompiler
@@ -11995,7 +11995,7 @@ GALGAS_guardedCommand GALGAS_syncInstructionBranchList::getter_mGuardedCommandAt
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_syncInstructionBranchList::getter_mInstructionListAtIndex (const GALGAS_uint & inIndex,
                                                                                             C_Compiler * inCompiler
@@ -12010,7 +12010,7 @@ GALGAS_instructionListAST GALGAS_syncInstructionBranchList::getter_mInstructionL
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_syncInstructionBranchList::getter_mEndOfBranchAtIndex (const GALGAS_uint & inIndex,
                                                                               C_Compiler * inCompiler
@@ -12027,7 +12027,7 @@ GALGAS_location GALGAS_syncInstructionBranchList::getter_mEndOfBranchAtIndex (co
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_syncInstructionBranchList::cEnumerator_syncInstructionBranchList (const GALGAS_syncInstructionBranchList & inEnumeratedObject,
                                                                               const typeEnumerationOrder inOrder) :
@@ -12035,7 +12035,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_syncInstructionBranchList_2D_element cEnumerator_syncInstructionBranchList::current (LOCATION_ARGS) const {
   const cCollectionElement_syncInstructionBranchList * p = (const cCollectionElement_syncInstructionBranchList *) currentObjectPtr (THERE) ;
@@ -12044,7 +12044,7 @@ GALGAS_syncInstructionBranchList_2D_element cEnumerator_syncInstructionBranchLis
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardedCommand cEnumerator_syncInstructionBranchList::current_mGuardedCommand (LOCATION_ARGS) const {
   const cCollectionElement_syncInstructionBranchList * p = (const cCollectionElement_syncInstructionBranchList *) currentObjectPtr (THERE) ;
@@ -12052,7 +12052,7 @@ GALGAS_guardedCommand cEnumerator_syncInstructionBranchList::current_mGuardedCom
   return p->mObject.mAttribute_mGuardedCommand ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST cEnumerator_syncInstructionBranchList::current_mInstructionList (LOCATION_ARGS) const {
   const cCollectionElement_syncInstructionBranchList * p = (const cCollectionElement_syncInstructionBranchList *) currentObjectPtr (THERE) ;
@@ -12060,7 +12060,7 @@ GALGAS_instructionListAST cEnumerator_syncInstructionBranchList::current_mInstru
   return p->mObject.mAttribute_mInstructionList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cEnumerator_syncInstructionBranchList::current_mEndOfBranch (LOCATION_ARGS) const {
   const cCollectionElement_syncInstructionBranchList * p = (const cCollectionElement_syncInstructionBranchList *) currentObjectPtr (THERE) ;
@@ -12071,23 +12071,23 @@ GALGAS_location cEnumerator_syncInstructionBranchList::current_mEndOfBranch (LOC
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           @syncInstructionBranchList type                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_syncInstructionBranchList ("syncInstructionBranchList",
                                                   NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_syncInstructionBranchList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_syncInstructionBranchList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_syncInstructionBranchList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -12097,7 +12097,7 @@ AC_GALGAS_root * GALGAS_syncInstructionBranchList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::extractObject (const GALGAS_object & inObject,
                                                                                   C_Compiler * inCompiler
@@ -12114,11 +12114,11 @@ GALGAS_syncInstructionBranchList GALGAS_syncInstructionBranchList::extractObject
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                   Class for element of '@instructionListAST' list                                   *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_instructionListAST : public cCollectionElement {
   public : GALGAS_instructionListAST_2D_element mObject ;
@@ -12141,7 +12141,7 @@ class cCollectionElement_instructionListAST : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_instructionListAST::cCollectionElement_instructionListAST (const GALGAS_location & in_mInstructionLocation,
                                                                               const GALGAS_instructionAST & in_mInstruction
@@ -12150,13 +12150,13 @@ cCollectionElement (THERE),
 mObject (in_mInstructionLocation, in_mInstruction) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_instructionListAST::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_instructionListAST::copy (void) {
   cCollectionElement * result = NULL ;
@@ -12164,7 +12164,7 @@ cCollectionElement * cCollectionElement_instructionListAST::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_instructionListAST::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -12177,7 +12177,7 @@ void cCollectionElement_instructionListAST::description (C_String & ioString, co
   mObject.mAttribute_mInstruction.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_instructionListAST::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_instructionListAST * operand = (cCollectionElement_instructionListAST *) inOperand ;
@@ -12185,13 +12185,13 @@ typeComparisonResult cCollectionElement_instructionListAST::compare (const cColl
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST::GALGAS_instructionListAST (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST::GALGAS_instructionListAST (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -12200,7 +12200,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_instructionListAST::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_instructionListAST result ;
@@ -12208,7 +12208,7 @@ GALGAS_instructionListAST GALGAS_instructionListAST::constructor_emptyList (LOCA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_instructionListAST::constructor_listWithValue (const GALGAS_location & inOperand0,
                                                                                 const GALGAS_instructionAST & inOperand1
@@ -12223,7 +12223,7 @@ GALGAS_instructionListAST GALGAS_instructionListAST::constructor_listWithValue (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                            const GALGAS_location & in_mInstructionLocation,
@@ -12236,7 +12236,7 @@ void GALGAS_instructionListAST::makeAttributesFromObjects (capCollectionElement 
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListAST::addAssign_operation (const GALGAS_location & inOperand0,
                                                      const GALGAS_instructionAST & inOperand1
@@ -12251,7 +12251,7 @@ void GALGAS_instructionListAST::addAssign_operation (const GALGAS_location & inO
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListAST::setter_insertAtIndex (const GALGAS_location inOperand0,
                                                       const GALGAS_instructionAST inOperand1,
@@ -12268,7 +12268,7 @@ void GALGAS_instructionListAST::setter_insertAtIndex (const GALGAS_location inOp
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListAST::setter_removeAtIndex (GALGAS_location & outOperand0,
                                                       GALGAS_instructionAST & outOperand1,
@@ -12290,7 +12290,7 @@ void GALGAS_instructionListAST::setter_removeAtIndex (GALGAS_location & outOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListAST::setter_popFirst (GALGAS_location & outOperand0,
                                                  GALGAS_instructionAST & outOperand1,
@@ -12309,7 +12309,7 @@ void GALGAS_instructionListAST::setter_popFirst (GALGAS_location & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListAST::setter_popLast (GALGAS_location & outOperand0,
                                                 GALGAS_instructionAST & outOperand1,
@@ -12328,7 +12328,7 @@ void GALGAS_instructionListAST::setter_popLast (GALGAS_location & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListAST::method_first (GALGAS_location & outOperand0,
                                               GALGAS_instructionAST & outOperand1,
@@ -12347,7 +12347,7 @@ void GALGAS_instructionListAST::method_first (GALGAS_location & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListAST::method_last (GALGAS_location & outOperand0,
                                              GALGAS_instructionAST & outOperand1,
@@ -12366,7 +12366,7 @@ void GALGAS_instructionListAST::method_last (GALGAS_location & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_instructionListAST::add_operation (const GALGAS_instructionListAST & inOperand,
                                                                     C_Compiler * /* inCompiler */
@@ -12379,7 +12379,7 @@ GALGAS_instructionListAST GALGAS_instructionListAST::add_operation (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_instructionListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                               C_Compiler * inCompiler
@@ -12389,7 +12389,7 @@ GALGAS_instructionListAST GALGAS_instructionListAST::getter_subListWithRange (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_instructionListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                               C_Compiler * inCompiler
@@ -12399,7 +12399,7 @@ GALGAS_instructionListAST GALGAS_instructionListAST::getter_subListFromIndex (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_instructionListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                             C_Compiler * inCompiler
@@ -12409,7 +12409,7 @@ GALGAS_instructionListAST GALGAS_instructionListAST::getter_subListToIndex (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListAST::plusAssign_operation (const GALGAS_instructionListAST inOperand,
                                                       C_Compiler * /* inCompiler */
@@ -12417,7 +12417,7 @@ void GALGAS_instructionListAST::plusAssign_operation (const GALGAS_instructionLi
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_instructionListAST::getter_mInstructionLocationAtIndex (const GALGAS_uint & inIndex,
                                                                                C_Compiler * inCompiler
@@ -12432,7 +12432,7 @@ GALGAS_location GALGAS_instructionListAST::getter_mInstructionLocationAtIndex (c
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionAST GALGAS_instructionListAST::getter_mInstructionAtIndex (const GALGAS_uint & inIndex,
                                                                              C_Compiler * inCompiler
@@ -12449,7 +12449,7 @@ GALGAS_instructionAST GALGAS_instructionListAST::getter_mInstructionAtIndex (con
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_instructionListAST::cEnumerator_instructionListAST (const GALGAS_instructionListAST & inEnumeratedObject,
                                                                 const typeEnumerationOrder inOrder) :
@@ -12457,7 +12457,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST_2D_element cEnumerator_instructionListAST::current (LOCATION_ARGS) const {
   const cCollectionElement_instructionListAST * p = (const cCollectionElement_instructionListAST *) currentObjectPtr (THERE) ;
@@ -12466,7 +12466,7 @@ GALGAS_instructionListAST_2D_element cEnumerator_instructionListAST::current (LO
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cEnumerator_instructionListAST::current_mInstructionLocation (LOCATION_ARGS) const {
   const cCollectionElement_instructionListAST * p = (const cCollectionElement_instructionListAST *) currentObjectPtr (THERE) ;
@@ -12474,7 +12474,7 @@ GALGAS_location cEnumerator_instructionListAST::current_mInstructionLocation (LO
   return p->mObject.mAttribute_mInstructionLocation ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionAST cEnumerator_instructionListAST::current_mInstruction (LOCATION_ARGS) const {
   const cCollectionElement_instructionListAST * p = (const cCollectionElement_instructionListAST *) currentObjectPtr (THERE) ;
@@ -12485,23 +12485,23 @@ GALGAS_instructionAST cEnumerator_instructionListAST::current_mInstruction (LOCA
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                              @instructionListAST type                                               *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_instructionListAST ("instructionListAST",
                                            NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_instructionListAST::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_instructionListAST ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_instructionListAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -12511,7 +12511,7 @@ AC_GALGAS_root * GALGAS_instructionListAST::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_instructionListAST::extractObject (const GALGAS_object & inObject,
                                                                     C_Compiler * inCompiler
@@ -12528,11 +12528,11 @@ GALGAS_instructionListAST GALGAS_instructionListAST::extractObject (const GALGAS
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                              Class for element of '@taskInitSortedListAST' sorted list                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cSortedListElement_taskInitSortedListAST : public cSortedListElement {
   public : GALGAS_taskInitSortedListAST_2D_element mObject ;
@@ -12560,7 +12560,7 @@ class cSortedListElement_taskInitSortedListAST : public cSortedListElement {
   public : virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cSortedListElement_taskInitSortedListAST::cSortedListElement_taskInitSortedListAST (const GALGAS_lbigint & in_mTaskInitPriority,
                                                                                     const GALGAS_instructionListAST & in_mTaskInitInstructionList,
@@ -12571,13 +12571,13 @@ cSortedListElement (THERE),
 mObject (in_mTaskInitPriority, in_mTaskInitInstructionList, in_mEndOfTaskInitDeclaration, in_mPriority) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cSortedListElement_taskInitSortedListAST::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cSortedListElement * cSortedListElement_taskInitSortedListAST::copy (void) {
   cSortedListElement * result = NULL ;
@@ -12585,7 +12585,7 @@ cSortedListElement * cSortedListElement_taskInitSortedListAST::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cSortedListElement_taskInitSortedListAST::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -12606,7 +12606,7 @@ void cSortedListElement_taskInitSortedListAST::description (C_String & ioString,
   mObject.mAttribute_mPriority.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cSortedListElement_taskInitSortedListAST::compare (const cCollectionElement * inOperand) const {
   cSortedListElement_taskInitSortedListAST * operand = (cSortedListElement_taskInitSortedListAST *) inOperand ;
@@ -12614,13 +12614,13 @@ typeComparisonResult cSortedListElement_taskInitSortedListAST::compare (const cC
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitSortedListAST::GALGAS_taskInitSortedListAST (void) :
 AC_GALGAS_sortedlist () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cSortedListElement_taskInitSortedListAST::compareForSorting (const cSortedListElement * inOperand) const {
   typeComparisonResult result = kOperandEqual ;
@@ -12632,7 +12632,7 @@ typeComparisonResult cSortedListElement_taskInitSortedListAST::compareForSorting
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitSortedListAST GALGAS_taskInitSortedListAST::constructor_emptySortedList (LOCATION_ARGS) {
   GALGAS_taskInitSortedListAST result ;
@@ -12640,7 +12640,7 @@ GALGAS_taskInitSortedListAST GALGAS_taskInitSortedListAST::constructor_emptySort
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitSortedListAST GALGAS_taskInitSortedListAST::constructor_sortedListWithValue (const GALGAS_lbigint & inOperand0,
                                                                                             const GALGAS_instructionListAST & inOperand1,
@@ -12657,7 +12657,7 @@ GALGAS_taskInitSortedListAST GALGAS_taskInitSortedListAST::constructor_sortedLis
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitSortedListAST::addAssign_operation (const GALGAS_lbigint & inOperand0,
                                                         const GALGAS_instructionListAST & inOperand1,
@@ -12674,7 +12674,7 @@ void GALGAS_taskInitSortedListAST::addAssign_operation (const GALGAS_lbigint & i
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitSortedListAST::plusAssign_operation (const GALGAS_taskInitSortedListAST inOperand,
                                                          C_Compiler * /* inCompiler */
@@ -12684,7 +12684,7 @@ void GALGAS_taskInitSortedListAST::plusAssign_operation (const GALGAS_taskInitSo
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitSortedListAST::setter_popSmallest (GALGAS_lbigint & outOperand0,
                                                        GALGAS_instructionListAST & outOperand1,
@@ -12709,7 +12709,7 @@ void GALGAS_taskInitSortedListAST::setter_popSmallest (GALGAS_lbigint & outOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitSortedListAST::setter_popGreatest (GALGAS_lbigint & outOperand0,
                                                        GALGAS_instructionListAST & outOperand1,
@@ -12734,7 +12734,7 @@ void GALGAS_taskInitSortedListAST::setter_popGreatest (GALGAS_lbigint & outOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitSortedListAST::method_smallest (GALGAS_lbigint & outOperand0,
                                                     GALGAS_instructionListAST & outOperand1,
@@ -12759,7 +12759,7 @@ void GALGAS_taskInitSortedListAST::method_smallest (GALGAS_lbigint & outOperand0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitSortedListAST::method_greatest (GALGAS_lbigint & outOperand0,
                                                     GALGAS_instructionListAST & outOperand1,
@@ -12784,7 +12784,7 @@ void GALGAS_taskInitSortedListAST::method_greatest (GALGAS_lbigint & outOperand0
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_taskInitSortedListAST::cEnumerator_taskInitSortedListAST (const GALGAS_taskInitSortedListAST & inEnumeratedObject,
                                                                       const typeEnumerationOrder inOrder) :
@@ -12792,7 +12792,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitSortedListAST_2D_element cEnumerator_taskInitSortedListAST::current (LOCATION_ARGS) const {
   const cSortedListElement_taskInitSortedListAST * p = (const cSortedListElement_taskInitSortedListAST *) currentObjectPtr (THERE) ;
@@ -12800,7 +12800,7 @@ GALGAS_taskInitSortedListAST_2D_element cEnumerator_taskInitSortedListAST::curre
   return p->mObject ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint cEnumerator_taskInitSortedListAST::current_mTaskInitPriority (LOCATION_ARGS) const {
   const cSortedListElement_taskInitSortedListAST * p = (const cSortedListElement_taskInitSortedListAST *) currentObjectPtr (THERE) ;
@@ -12808,7 +12808,7 @@ GALGAS_lbigint cEnumerator_taskInitSortedListAST::current_mTaskInitPriority (LOC
   return p->mObject.mAttribute_mTaskInitPriority ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST cEnumerator_taskInitSortedListAST::current_mTaskInitInstructionList (LOCATION_ARGS) const {
   const cSortedListElement_taskInitSortedListAST * p = (const cSortedListElement_taskInitSortedListAST *) currentObjectPtr (THERE) ;
@@ -12816,7 +12816,7 @@ GALGAS_instructionListAST cEnumerator_taskInitSortedListAST::current_mTaskInitIn
   return p->mObject.mAttribute_mTaskInitInstructionList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cEnumerator_taskInitSortedListAST::current_mEndOfTaskInitDeclaration (LOCATION_ARGS) const {
   const cSortedListElement_taskInitSortedListAST * p = (const cSortedListElement_taskInitSortedListAST *) currentObjectPtr (THERE) ;
@@ -12824,7 +12824,7 @@ GALGAS_location cEnumerator_taskInitSortedListAST::current_mEndOfTaskInitDeclara
   return p->mObject.mAttribute_mEndOfTaskInitDeclaration ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cEnumerator_taskInitSortedListAST::current_mPriority (LOCATION_ARGS) const {
   const cSortedListElement_taskInitSortedListAST * p = (const cSortedListElement_taskInitSortedListAST *) currentObjectPtr (THERE) ;
@@ -12834,23 +12834,23 @@ GALGAS_bigint cEnumerator_taskInitSortedListAST::current_mPriority (LOCATION_ARG
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             @taskInitSortedListAST type                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_taskInitSortedListAST ("taskInitSortedListAST",
                                               NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_taskInitSortedListAST::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_taskInitSortedListAST ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_taskInitSortedListAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -12860,7 +12860,7 @@ AC_GALGAS_root * GALGAS_taskInitSortedListAST::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitSortedListAST GALGAS_taskInitSortedListAST::extractObject (const GALGAS_object & inObject,
                                                                           C_Compiler * inCompiler
@@ -12877,20 +12877,20 @@ GALGAS_taskInitSortedListAST GALGAS_taskInitSortedListAST::extractObject (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_taskProcedureMap::cMapElement_taskProcedureMap (const GALGAS_lstring & inKey
                                                             COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_taskProcedureMap::isValid (void) const {
   return mAttribute_lkey.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_taskProcedureMap::copy (void) {
   cMapElement * result = NULL ;
@@ -12898,12 +12898,12 @@ cMapElement * cMapElement_taskProcedureMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_taskProcedureMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_taskProcedureMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_taskProcedureMap * operand = (cMapElement_taskProcedureMap *) inOperand ;
@@ -12911,26 +12911,26 @@ typeComparisonResult cMapElement_taskProcedureMap::compare (const cCollectionEle
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap::GALGAS_taskProcedureMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap::GALGAS_taskProcedureMap (const GALGAS_taskProcedureMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap & GALGAS_taskProcedureMap::operator = (const GALGAS_taskProcedureMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap GALGAS_taskProcedureMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_taskProcedureMap result ;
@@ -12938,7 +12938,7 @@ GALGAS_taskProcedureMap GALGAS_taskProcedureMap::constructor_emptyMap (LOCATION_
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap GALGAS_taskProcedureMap::constructor_mapWithMapToOverride (const GALGAS_taskProcedureMap & inMapToOverride
                                                                                    COMMA_LOCATION_ARGS) {
@@ -12947,7 +12947,7 @@ GALGAS_taskProcedureMap GALGAS_taskProcedureMap::constructor_mapWithMapToOverrid
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap GALGAS_taskProcedureMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) const {
@@ -12956,7 +12956,7 @@ GALGAS_taskProcedureMap GALGAS_taskProcedureMap::getter_overriddenMap (C_Compile
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskProcedureMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                    C_Compiler * inCompiler
@@ -12971,7 +12971,7 @@ void GALGAS_taskProcedureMap::addAssign_operation (const GALGAS_lstring & inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskProcedureMap::setter_insertKey (GALGAS_lstring inKey,
                                                 C_Compiler * inCompiler
@@ -12986,11 +12986,11 @@ void GALGAS_taskProcedureMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_taskProcedureMap_searchKey = "there is no '%K' proc" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskProcedureMap::method_searchKey (GALGAS_lstring inKey,
                                                 C_Compiler * inCompiler
@@ -13005,7 +13005,7 @@ void GALGAS_taskProcedureMap::method_searchKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_taskProcedureMap * GALGAS_taskProcedureMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                            const GALGAS_string & inKey
@@ -13015,7 +13015,7 @@ cMapElement_taskProcedureMap * GALGAS_taskProcedureMap::readWriteAccessForWithIn
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_taskProcedureMap::cEnumerator_taskProcedureMap (const GALGAS_taskProcedureMap & inEnumeratedObject,
                                                             const typeEnumerationOrder inOrder) :
@@ -13023,7 +13023,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap_2D_element cEnumerator_taskProcedureMap::current (LOCATION_ARGS) const {
   const cMapElement_taskProcedureMap * p = (const cMapElement_taskProcedureMap *) currentObjectPtr (THERE) ;
@@ -13031,7 +13031,7 @@ GALGAS_taskProcedureMap_2D_element cEnumerator_taskProcedureMap::current (LOCATI
   return GALGAS_taskProcedureMap_2D_element (p->mAttribute_lkey) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_taskProcedureMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -13041,23 +13041,23 @@ GALGAS_lstring cEnumerator_taskProcedureMap::current_lkey (LOCATION_ARGS) const 
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               @taskProcedureMap type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_taskProcedureMap ("taskProcedureMap",
                                          NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_taskProcedureMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_taskProcedureMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_taskProcedureMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -13067,7 +13067,7 @@ AC_GALGAS_root * GALGAS_taskProcedureMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap GALGAS_taskProcedureMap::extractObject (const GALGAS_object & inObject,
                                                                 C_Compiler * inCompiler
@@ -13084,7 +13084,7 @@ GALGAS_taskProcedureMap GALGAS_taskProcedureMap::extractObject (const GALGAS_obj
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_taskMap::cMapElement_taskMap (const GALGAS_lstring & inKey,
                                           const GALGAS_taskProcedureMap & in_mTaskProcedureMap
@@ -13093,13 +13093,13 @@ cMapElement (inKey COMMA_THERE),
 mAttribute_mTaskProcedureMap (in_mTaskProcedureMap) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_taskMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mTaskProcedureMap.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_taskMap::copy (void) {
   cMapElement * result = NULL ;
@@ -13107,7 +13107,7 @@ cMapElement * cMapElement_taskMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_taskMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -13116,7 +13116,7 @@ void cMapElement_taskMap::description (C_String & ioString, const int32_t inInde
   mAttribute_mTaskProcedureMap.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_taskMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_taskMap * operand = (cMapElement_taskMap *) inOperand ;
@@ -13127,26 +13127,26 @@ typeComparisonResult cMapElement_taskMap::compare (const cCollectionElement * in
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMap::GALGAS_taskMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMap::GALGAS_taskMap (const GALGAS_taskMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMap & GALGAS_taskMap::operator = (const GALGAS_taskMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMap GALGAS_taskMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_taskMap result ;
@@ -13154,7 +13154,7 @@ GALGAS_taskMap GALGAS_taskMap::constructor_emptyMap (LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMap GALGAS_taskMap::constructor_mapWithMapToOverride (const GALGAS_taskMap & inMapToOverride
                                                                  COMMA_LOCATION_ARGS) {
@@ -13163,7 +13163,7 @@ GALGAS_taskMap GALGAS_taskMap::constructor_mapWithMapToOverride (const GALGAS_ta
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMap GALGAS_taskMap::getter_overriddenMap (C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const {
@@ -13172,7 +13172,7 @@ GALGAS_taskMap GALGAS_taskMap::getter_overriddenMap (C_Compiler * inCompiler
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMap::addAssign_operation (const GALGAS_lstring & inKey,
                                           const GALGAS_taskProcedureMap & inArgument0,
@@ -13188,7 +13188,7 @@ void GALGAS_taskMap::addAssign_operation (const GALGAS_lstring & inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMap::setter_insertKey (GALGAS_lstring inKey,
                                        GALGAS_taskProcedureMap inArgument0,
@@ -13204,11 +13204,11 @@ void GALGAS_taskMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_taskMap_searchKey = "there is no '%K' task" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMap::method_searchKey (GALGAS_lstring inKey,
                                        GALGAS_taskProcedureMap & outArgument0,
@@ -13226,7 +13226,7 @@ void GALGAS_taskMap::method_searchKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap GALGAS_taskMap::getter_mTaskProcedureMapForKey (const GALGAS_string & inKey,
                                                                         C_Compiler * inCompiler
@@ -13241,7 +13241,7 @@ GALGAS_taskProcedureMap GALGAS_taskMap::getter_mTaskProcedureMapForKey (const GA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMap::setter_setMTaskProcedureMapForKey (GALGAS_taskProcedureMap inAttributeValue,
                                                         GALGAS_string inKey,
@@ -13255,7 +13255,7 @@ void GALGAS_taskMap::setter_setMTaskProcedureMapForKey (GALGAS_taskProcedureMap 
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_taskMap * GALGAS_taskMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                          const GALGAS_string & inKey
@@ -13265,7 +13265,7 @@ cMapElement_taskMap * GALGAS_taskMap::readWriteAccessForWithInstruction (C_Compi
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_taskMap::cEnumerator_taskMap (const GALGAS_taskMap & inEnumeratedObject,
                                           const typeEnumerationOrder inOrder) :
@@ -13273,7 +13273,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMap_2D_element cEnumerator_taskMap::current (LOCATION_ARGS) const {
   const cMapElement_taskMap * p = (const cMapElement_taskMap *) currentObjectPtr (THERE) ;
@@ -13281,7 +13281,7 @@ GALGAS_taskMap_2D_element cEnumerator_taskMap::current (LOCATION_ARGS) const {
   return GALGAS_taskMap_2D_element (p->mAttribute_lkey, p->mAttribute_mTaskProcedureMap) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_taskMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -13289,7 +13289,7 @@ GALGAS_lstring cEnumerator_taskMap::current_lkey (LOCATION_ARGS) const {
   return p->mAttribute_lkey ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap cEnumerator_taskMap::current_mTaskProcedureMap (LOCATION_ARGS) const {
   const cMapElement_taskMap * p = (const cMapElement_taskMap *) currentObjectPtr (THERE) ;
@@ -13299,23 +13299,23 @@ GALGAS_taskProcedureMap cEnumerator_taskMap::current_mTaskProcedureMap (LOCATION
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                    @taskMap type                                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_taskMap ("taskMap",
                                 NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_taskMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_taskMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_taskMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -13325,7 +13325,7 @@ AC_GALGAS_root * GALGAS_taskMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMap GALGAS_taskMap::extractObject (const GALGAS_object & inObject,
                                               C_Compiler * inCompiler
@@ -13342,7 +13342,7 @@ GALGAS_taskMap GALGAS_taskMap::extractObject (const GALGAS_object & inObject,
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_taskMapIR::cMapElement_taskMapIR (const GALGAS_lstring & inKey,
                                               const GALGAS_unifiedTypeMap_2D_proxy & in_mTaskType,
@@ -13359,13 +13359,13 @@ mAttribute_mAllocaList (in_mAllocaList),
 mAttribute_mInitInstructionListIR (in_mInitInstructionListIR) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_taskMapIR::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mTaskType.isValid () && mAttribute_mPriority.isValid () && mAttribute_mStackSize.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInitInstructionListIR.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_taskMapIR::copy (void) {
   cMapElement * result = NULL ;
@@ -13373,7 +13373,7 @@ cMapElement * cMapElement_taskMapIR::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_taskMapIR::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -13398,7 +13398,7 @@ void cMapElement_taskMapIR::description (C_String & ioString, const int32_t inIn
   mAttribute_mInitInstructionListIR.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_taskMapIR::compare (const cCollectionElement * inOperand) const {
   cMapElement_taskMapIR * operand = (cMapElement_taskMapIR *) inOperand ;
@@ -13421,26 +13421,26 @@ typeComparisonResult cMapElement_taskMapIR::compare (const cCollectionElement * 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMapIR::GALGAS_taskMapIR (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMapIR::GALGAS_taskMapIR (const GALGAS_taskMapIR & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMapIR & GALGAS_taskMapIR::operator = (const GALGAS_taskMapIR & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMapIR GALGAS_taskMapIR::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_taskMapIR result ;
@@ -13448,7 +13448,7 @@ GALGAS_taskMapIR GALGAS_taskMapIR::constructor_emptyMap (LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMapIR GALGAS_taskMapIR::constructor_mapWithMapToOverride (const GALGAS_taskMapIR & inMapToOverride
                                                                      COMMA_LOCATION_ARGS) {
@@ -13457,7 +13457,7 @@ GALGAS_taskMapIR GALGAS_taskMapIR::constructor_mapWithMapToOverride (const GALGA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMapIR GALGAS_taskMapIR::getter_overriddenMap (C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const {
@@ -13466,7 +13466,7 @@ GALGAS_taskMapIR GALGAS_taskMapIR::getter_overriddenMap (C_Compiler * inCompiler
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::addAssign_operation (const GALGAS_lstring & inKey,
                                             const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
@@ -13486,7 +13486,7 @@ void GALGAS_taskMapIR::addAssign_operation (const GALGAS_lstring & inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::setter_insertKey (GALGAS_lstring inKey,
                                          GALGAS_unifiedTypeMap_2D_proxy inArgument0,
@@ -13506,11 +13506,11 @@ void GALGAS_taskMapIR::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_taskMapIR_searchKey = "** internal error **" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::method_searchKey (GALGAS_lstring inKey,
                                          GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
@@ -13540,7 +13540,7 @@ void GALGAS_taskMapIR::method_searchKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::setter_removeKey (GALGAS_lstring inKey,
                                          GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
@@ -13564,7 +13564,7 @@ void GALGAS_taskMapIR::setter_removeKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_taskMapIR::getter_mTaskTypeForKey (const GALGAS_string & inKey,
                                                                          C_Compiler * inCompiler
@@ -13579,7 +13579,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_taskMapIR::getter_mTaskTypeForKey (const G
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint GALGAS_taskMapIR::getter_mPriorityForKey (const GALGAS_string & inKey,
                                                         C_Compiler * inCompiler
@@ -13594,7 +13594,7 @@ GALGAS_bigint GALGAS_taskMapIR::getter_mPriorityForKey (const GALGAS_string & in
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint GALGAS_taskMapIR::getter_mStackSizeForKey (const GALGAS_string & inKey,
                                                          C_Compiler * inCompiler
@@ -13609,7 +13609,7 @@ GALGAS_bigint GALGAS_taskMapIR::getter_mStackSizeForKey (const GALGAS_string & i
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_taskMapIR::getter_mAllocaListForKey (const GALGAS_string & inKey,
                                                               C_Compiler * inCompiler
@@ -13624,7 +13624,7 @@ GALGAS_allocaList GALGAS_taskMapIR::getter_mAllocaListForKey (const GALGAS_strin
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_taskMapIR::getter_mInitInstructionListIRForKey (const GALGAS_string & inKey,
                                                                                 C_Compiler * inCompiler
@@ -13639,7 +13639,7 @@ GALGAS_instructionListIR GALGAS_taskMapIR::getter_mInitInstructionListIRForKey (
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::setter_setMTaskTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
                                                   GALGAS_string inKey,
@@ -13653,7 +13653,7 @@ void GALGAS_taskMapIR::setter_setMTaskTypeForKey (GALGAS_unifiedTypeMap_2D_proxy
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::setter_setMPriorityForKey (GALGAS_bigint inAttributeValue,
                                                   GALGAS_string inKey,
@@ -13667,7 +13667,7 @@ void GALGAS_taskMapIR::setter_setMPriorityForKey (GALGAS_bigint inAttributeValue
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::setter_setMStackSizeForKey (GALGAS_bigint inAttributeValue,
                                                    GALGAS_string inKey,
@@ -13681,7 +13681,7 @@ void GALGAS_taskMapIR::setter_setMStackSizeForKey (GALGAS_bigint inAttributeValu
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::setter_setMAllocaListForKey (GALGAS_allocaList inAttributeValue,
                                                     GALGAS_string inKey,
@@ -13695,7 +13695,7 @@ void GALGAS_taskMapIR::setter_setMAllocaListForKey (GALGAS_allocaList inAttribut
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR::setter_setMInitInstructionListIRForKey (GALGAS_instructionListIR inAttributeValue,
                                                                GALGAS_string inKey,
@@ -13709,7 +13709,7 @@ void GALGAS_taskMapIR::setter_setMInitInstructionListIRForKey (GALGAS_instructio
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_taskMapIR * GALGAS_taskMapIR::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                              const GALGAS_string & inKey
@@ -13719,7 +13719,7 @@ cMapElement_taskMapIR * GALGAS_taskMapIR::readWriteAccessForWithInstruction (C_C
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_taskMapIR::cEnumerator_taskMapIR (const GALGAS_taskMapIR & inEnumeratedObject,
                                               const typeEnumerationOrder inOrder) :
@@ -13727,7 +13727,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMapIR_2D_element cEnumerator_taskMapIR::current (LOCATION_ARGS) const {
   const cMapElement_taskMapIR * p = (const cMapElement_taskMapIR *) currentObjectPtr (THERE) ;
@@ -13735,7 +13735,7 @@ GALGAS_taskMapIR_2D_element cEnumerator_taskMapIR::current (LOCATION_ARGS) const
   return GALGAS_taskMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mTaskType, p->mAttribute_mPriority, p->mAttribute_mStackSize, p->mAttribute_mAllocaList, p->mAttribute_mInitInstructionListIR) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_taskMapIR::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -13743,7 +13743,7 @@ GALGAS_lstring cEnumerator_taskMapIR::current_lkey (LOCATION_ARGS) const {
   return p->mAttribute_lkey ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cEnumerator_taskMapIR::current_mTaskType (LOCATION_ARGS) const {
   const cMapElement_taskMapIR * p = (const cMapElement_taskMapIR *) currentObjectPtr (THERE) ;
@@ -13751,7 +13751,7 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_taskMapIR::current_mTaskType (LOCATIO
   return p->mAttribute_mTaskType ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cEnumerator_taskMapIR::current_mPriority (LOCATION_ARGS) const {
   const cMapElement_taskMapIR * p = (const cMapElement_taskMapIR *) currentObjectPtr (THERE) ;
@@ -13759,7 +13759,7 @@ GALGAS_bigint cEnumerator_taskMapIR::current_mPriority (LOCATION_ARGS) const {
   return p->mAttribute_mPriority ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cEnumerator_taskMapIR::current_mStackSize (LOCATION_ARGS) const {
   const cMapElement_taskMapIR * p = (const cMapElement_taskMapIR *) currentObjectPtr (THERE) ;
@@ -13767,7 +13767,7 @@ GALGAS_bigint cEnumerator_taskMapIR::current_mStackSize (LOCATION_ARGS) const {
   return p->mAttribute_mStackSize ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList cEnumerator_taskMapIR::current_mAllocaList (LOCATION_ARGS) const {
   const cMapElement_taskMapIR * p = (const cMapElement_taskMapIR *) currentObjectPtr (THERE) ;
@@ -13775,7 +13775,7 @@ GALGAS_allocaList cEnumerator_taskMapIR::current_mAllocaList (LOCATION_ARGS) con
   return p->mAttribute_mAllocaList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR cEnumerator_taskMapIR::current_mInitInstructionListIR (LOCATION_ARGS) const {
   const cMapElement_taskMapIR * p = (const cMapElement_taskMapIR *) currentObjectPtr (THERE) ;
@@ -13785,23 +13785,23 @@ GALGAS_instructionListIR cEnumerator_taskMapIR::current_mInitInstructionListIR (
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                   @taskMapIR type                                                   *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_taskMapIR ("taskMapIR",
                                   NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_taskMapIR::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_taskMapIR ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_taskMapIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -13811,7 +13811,7 @@ AC_GALGAS_root * GALGAS_taskMapIR::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMapIR GALGAS_taskMapIR::extractObject (const GALGAS_object & inObject,
                                                   C_Compiler * inCompiler
@@ -13828,11 +13828,11 @@ GALGAS_taskMapIR GALGAS_taskMapIR::extractObject (const GALGAS_object & inObject
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                       Class for element of '@allocaList' list                                       *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_allocaList : public cCollectionElement {
   public : GALGAS_allocaList_2D_element mObject ;
@@ -13855,7 +13855,7 @@ class cCollectionElement_allocaList : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_allocaList::cCollectionElement_allocaList (const GALGAS_string & in_mVarName,
                                                               const GALGAS_unifiedTypeMap_2D_proxy & in_mType
@@ -13864,13 +13864,13 @@ cCollectionElement (THERE),
 mObject (in_mVarName, in_mType) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_allocaList::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_allocaList::copy (void) {
   cCollectionElement * result = NULL ;
@@ -13878,7 +13878,7 @@ cCollectionElement * cCollectionElement_allocaList::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_allocaList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -13891,7 +13891,7 @@ void cCollectionElement_allocaList::description (C_String & ioString, const int3
   mObject.mAttribute_mType.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_allocaList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_allocaList * operand = (cCollectionElement_allocaList *) inOperand ;
@@ -13899,13 +13899,13 @@ typeComparisonResult cCollectionElement_allocaList::compare (const cCollectionEl
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList::GALGAS_allocaList (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList::GALGAS_allocaList (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -13914,7 +13914,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_allocaList::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_allocaList result ;
@@ -13922,7 +13922,7 @@ GALGAS_allocaList GALGAS_allocaList::constructor_emptyList (LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_allocaList::constructor_listWithValue (const GALGAS_string & inOperand0,
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand1
@@ -13937,7 +13937,7 @@ GALGAS_allocaList GALGAS_allocaList::constructor_listWithValue (const GALGAS_str
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allocaList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                    const GALGAS_string & in_mVarName,
@@ -13950,7 +13950,7 @@ void GALGAS_allocaList::makeAttributesFromObjects (capCollectionElement & outAtt
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allocaList::addAssign_operation (const GALGAS_string & inOperand0,
                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand1
@@ -13965,7 +13965,7 @@ void GALGAS_allocaList::addAssign_operation (const GALGAS_string & inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allocaList::setter_insertAtIndex (const GALGAS_string inOperand0,
                                               const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
@@ -13982,7 +13982,7 @@ void GALGAS_allocaList::setter_insertAtIndex (const GALGAS_string inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allocaList::setter_removeAtIndex (GALGAS_string & outOperand0,
                                               GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -14004,7 +14004,7 @@ void GALGAS_allocaList::setter_removeAtIndex (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allocaList::setter_popFirst (GALGAS_string & outOperand0,
                                          GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -14023,7 +14023,7 @@ void GALGAS_allocaList::setter_popFirst (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allocaList::setter_popLast (GALGAS_string & outOperand0,
                                         GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -14042,7 +14042,7 @@ void GALGAS_allocaList::setter_popLast (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allocaList::method_first (GALGAS_string & outOperand0,
                                       GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -14061,7 +14061,7 @@ void GALGAS_allocaList::method_first (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allocaList::method_last (GALGAS_string & outOperand0,
                                      GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
@@ -14080,7 +14080,7 @@ void GALGAS_allocaList::method_last (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_allocaList::add_operation (const GALGAS_allocaList & inOperand,
                                                     C_Compiler * /* inCompiler */
@@ -14093,7 +14093,7 @@ GALGAS_allocaList GALGAS_allocaList::add_operation (const GALGAS_allocaList & in
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_allocaList::getter_subListWithRange (const GALGAS_range & inRange,
                                                               C_Compiler * inCompiler
@@ -14103,7 +14103,7 @@ GALGAS_allocaList GALGAS_allocaList::getter_subListWithRange (const GALGAS_range
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_allocaList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                               C_Compiler * inCompiler
@@ -14113,7 +14113,7 @@ GALGAS_allocaList GALGAS_allocaList::getter_subListFromIndex (const GALGAS_uint 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_allocaList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                             C_Compiler * inCompiler
@@ -14123,7 +14123,7 @@ GALGAS_allocaList GALGAS_allocaList::getter_subListToIndex (const GALGAS_uint & 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_allocaList::plusAssign_operation (const GALGAS_allocaList inOperand,
                                               C_Compiler * /* inCompiler */
@@ -14131,7 +14131,7 @@ void GALGAS_allocaList::plusAssign_operation (const GALGAS_allocaList inOperand,
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string GALGAS_allocaList::getter_mVarNameAtIndex (const GALGAS_uint & inIndex,
                                                          C_Compiler * inCompiler
@@ -14146,7 +14146,7 @@ GALGAS_string GALGAS_allocaList::getter_mVarNameAtIndex (const GALGAS_uint & inI
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_allocaList::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
                                                                        C_Compiler * inCompiler
@@ -14163,7 +14163,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_allocaList::getter_mTypeAtIndex (const GAL
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_allocaList::cEnumerator_allocaList (const GALGAS_allocaList & inEnumeratedObject,
                                                 const typeEnumerationOrder inOrder) :
@@ -14171,7 +14171,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList_2D_element cEnumerator_allocaList::current (LOCATION_ARGS) const {
   const cCollectionElement_allocaList * p = (const cCollectionElement_allocaList *) currentObjectPtr (THERE) ;
@@ -14180,7 +14180,7 @@ GALGAS_allocaList_2D_element cEnumerator_allocaList::current (LOCATION_ARGS) con
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cEnumerator_allocaList::current_mVarName (LOCATION_ARGS) const {
   const cCollectionElement_allocaList * p = (const cCollectionElement_allocaList *) currentObjectPtr (THERE) ;
@@ -14188,7 +14188,7 @@ GALGAS_string cEnumerator_allocaList::current_mVarName (LOCATION_ARGS) const {
   return p->mObject.mAttribute_mVarName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cEnumerator_allocaList::current_mType (LOCATION_ARGS) const {
   const cCollectionElement_allocaList * p = (const cCollectionElement_allocaList *) currentObjectPtr (THERE) ;
@@ -14199,23 +14199,23 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_allocaList::current_mType (LOCATION_A
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                                  @allocaList type                                                   *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_allocaList ("allocaList",
                                    NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_allocaList::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_allocaList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_allocaList::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -14225,7 +14225,7 @@ AC_GALGAS_root * GALGAS_allocaList::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_allocaList::extractObject (const GALGAS_object & inObject,
                                                     C_Compiler * inCompiler
@@ -14242,11 +14242,11 @@ GALGAS_allocaList GALGAS_allocaList::extractObject (const GALGAS_object & inObje
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                   Class for element of '@instructionListIR' list                                    *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cCollectionElement_instructionListIR : public cCollectionElement {
   public : GALGAS_instructionListIR_2D_element mObject ;
@@ -14268,7 +14268,7 @@ class cCollectionElement_instructionListIR : public cCollectionElement {
   public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_instructionListIR::cCollectionElement_instructionListIR (const GALGAS_abstractInstructionIR & in_mInstructionGeneration
                                                                             COMMA_LOCATION_ARGS) :
@@ -14276,13 +14276,13 @@ cCollectionElement (THERE),
 mObject (in_mInstructionGeneration) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cCollectionElement_instructionListIR::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement * cCollectionElement_instructionListIR::copy (void) {
   cCollectionElement * result = NULL ;
@@ -14290,7 +14290,7 @@ cCollectionElement * cCollectionElement_instructionListIR::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cCollectionElement_instructionListIR::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -14299,7 +14299,7 @@ void cCollectionElement_instructionListIR::description (C_String & ioString, con
   mObject.mAttribute_mInstructionGeneration.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cCollectionElement_instructionListIR::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_instructionListIR * operand = (cCollectionElement_instructionListIR *) inOperand ;
@@ -14307,13 +14307,13 @@ typeComparisonResult cCollectionElement_instructionListIR::compare (const cColle
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR::GALGAS_instructionListIR (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR::GALGAS_instructionListIR (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
@@ -14322,7 +14322,7 @@ AC_GALGAS_list (inSharedListPtr) {
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_instructionListIR::constructor_emptyList (LOCATION_ARGS) {
   GALGAS_instructionListIR result ;
@@ -14330,7 +14330,7 @@ GALGAS_instructionListIR GALGAS_instructionListIR::constructor_emptyList (LOCATI
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_instructionListIR::constructor_listWithValue (const GALGAS_abstractInstructionIR & inOperand0
                                                                               COMMA_LOCATION_ARGS) {
@@ -14344,7 +14344,7 @@ GALGAS_instructionListIR GALGAS_instructionListIR::constructor_listWithValue (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                           const GALGAS_abstractInstructionIR & in_mInstructionGeneration
@@ -14355,7 +14355,7 @@ void GALGAS_instructionListIR::makeAttributesFromObjects (capCollectionElement &
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListIR::addAssign_operation (const GALGAS_abstractInstructionIR & inOperand0
                                                     COMMA_LOCATION_ARGS) {
@@ -14369,7 +14369,7 @@ void GALGAS_instructionListIR::addAssign_operation (const GALGAS_abstractInstruc
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListIR::setter_insertAtIndex (const GALGAS_abstractInstructionIR inOperand0,
                                                      const GALGAS_uint inInsertionIndex,
@@ -14385,7 +14385,7 @@ void GALGAS_instructionListIR::setter_insertAtIndex (const GALGAS_abstractInstru
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListIR::setter_removeAtIndex (GALGAS_abstractInstructionIR & outOperand0,
                                                      const GALGAS_uint inRemoveIndex,
@@ -14404,7 +14404,7 @@ void GALGAS_instructionListIR::setter_removeAtIndex (GALGAS_abstractInstructionI
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListIR::setter_popFirst (GALGAS_abstractInstructionIR & outOperand0,
                                                 C_Compiler * inCompiler
@@ -14420,7 +14420,7 @@ void GALGAS_instructionListIR::setter_popFirst (GALGAS_abstractInstructionIR & o
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListIR::setter_popLast (GALGAS_abstractInstructionIR & outOperand0,
                                                C_Compiler * inCompiler
@@ -14436,7 +14436,7 @@ void GALGAS_instructionListIR::setter_popLast (GALGAS_abstractInstructionIR & ou
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListIR::method_first (GALGAS_abstractInstructionIR & outOperand0,
                                              C_Compiler * inCompiler
@@ -14452,7 +14452,7 @@ void GALGAS_instructionListIR::method_first (GALGAS_abstractInstructionIR & outO
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListIR::method_last (GALGAS_abstractInstructionIR & outOperand0,
                                             C_Compiler * inCompiler
@@ -14468,7 +14468,7 @@ void GALGAS_instructionListIR::method_last (GALGAS_abstractInstructionIR & outOp
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_instructionListIR::add_operation (const GALGAS_instructionListIR & inOperand,
                                                                   C_Compiler * /* inCompiler */
@@ -14481,7 +14481,7 @@ GALGAS_instructionListIR GALGAS_instructionListIR::add_operation (const GALGAS_i
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_instructionListIR::getter_subListWithRange (const GALGAS_range & inRange,
                                                                             C_Compiler * inCompiler
@@ -14491,7 +14491,7 @@ GALGAS_instructionListIR GALGAS_instructionListIR::getter_subListWithRange (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_instructionListIR::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                             C_Compiler * inCompiler
@@ -14501,7 +14501,7 @@ GALGAS_instructionListIR GALGAS_instructionListIR::getter_subListFromIndex (cons
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_instructionListIR::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                           C_Compiler * inCompiler
@@ -14511,7 +14511,7 @@ GALGAS_instructionListIR GALGAS_instructionListIR::getter_subListToIndex (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_instructionListIR::plusAssign_operation (const GALGAS_instructionListIR inOperand,
                                                      C_Compiler * /* inCompiler */
@@ -14519,7 +14519,7 @@ void GALGAS_instructionListIR::plusAssign_operation (const GALGAS_instructionLis
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_abstractInstructionIR GALGAS_instructionListIR::getter_mInstructionGenerationAtIndex (const GALGAS_uint & inIndex,
                                                                                              C_Compiler * inCompiler
@@ -14536,7 +14536,7 @@ GALGAS_abstractInstructionIR GALGAS_instructionListIR::getter_mInstructionGenera
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_instructionListIR::cEnumerator_instructionListIR (const GALGAS_instructionListIR & inEnumeratedObject,
                                                               const typeEnumerationOrder inOrder) :
@@ -14544,7 +14544,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR_2D_element cEnumerator_instructionListIR::current (LOCATION_ARGS) const {
   const cCollectionElement_instructionListIR * p = (const cCollectionElement_instructionListIR *) currentObjectPtr (THERE) ;
@@ -14553,7 +14553,7 @@ GALGAS_instructionListIR_2D_element cEnumerator_instructionListIR::current (LOCA
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_abstractInstructionIR cEnumerator_instructionListIR::current_mInstructionGeneration (LOCATION_ARGS) const {
   const cCollectionElement_instructionListIR * p = (const cCollectionElement_instructionListIR *) currentObjectPtr (THERE) ;
@@ -14564,23 +14564,23 @@ GALGAS_abstractInstructionIR cEnumerator_instructionListIR::current_mInstruction
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               @instructionListIR type                                               *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_instructionListIR ("instructionListIR",
                                           NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_instructionListIR::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_instructionListIR ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_instructionListIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -14590,7 +14590,7 @@ AC_GALGAS_root * GALGAS_instructionListIR::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_instructionListIR::extractObject (const GALGAS_object & inObject,
                                                                   C_Compiler * inCompiler
@@ -14607,11 +14607,11 @@ GALGAS_instructionListIR GALGAS_instructionListIR::extractObject (const GALGAS_o
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                Class for element of '@taskSortedListIR' sorted list                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 class cSortedListElement_taskSortedListIR : public cSortedListElement {
   public : GALGAS_taskSortedListIR_2D_element mObject ;
@@ -14640,7 +14640,7 @@ class cSortedListElement_taskSortedListIR : public cSortedListElement {
   public : virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cSortedListElement_taskSortedListIR::cSortedListElement_taskSortedListIR (const GALGAS_string & in_mTaskName,
                                                                           const GALGAS_bigint & in_mPriority,
@@ -14652,13 +14652,13 @@ cSortedListElement (THERE),
 mObject (in_mTaskName, in_mPriority, in_mStackSize, in_mAllocaList, in_mInitInstructionListIR) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cSortedListElement_taskSortedListIR::isValid (void) const {
   return mObject.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cSortedListElement * cSortedListElement_taskSortedListIR::copy (void) {
   cSortedListElement * result = NULL ;
@@ -14666,7 +14666,7 @@ cSortedListElement * cSortedListElement_taskSortedListIR::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cSortedListElement_taskSortedListIR::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
@@ -14691,7 +14691,7 @@ void cSortedListElement_taskSortedListIR::description (C_String & ioString, cons
   mObject.mAttribute_mInitInstructionListIR.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cSortedListElement_taskSortedListIR::compare (const cCollectionElement * inOperand) const {
   cSortedListElement_taskSortedListIR * operand = (cSortedListElement_taskSortedListIR *) inOperand ;
@@ -14699,13 +14699,13 @@ typeComparisonResult cSortedListElement_taskSortedListIR::compare (const cCollec
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskSortedListIR::GALGAS_taskSortedListIR (void) :
 AC_GALGAS_sortedlist () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cSortedListElement_taskSortedListIR::compareForSorting (const cSortedListElement * inOperand) const {
   typeComparisonResult result = kOperandEqual ;
@@ -14717,7 +14717,7 @@ typeComparisonResult cSortedListElement_taskSortedListIR::compareForSorting (con
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskSortedListIR GALGAS_taskSortedListIR::constructor_emptySortedList (LOCATION_ARGS) {
   GALGAS_taskSortedListIR result ;
@@ -14725,7 +14725,7 @@ GALGAS_taskSortedListIR GALGAS_taskSortedListIR::constructor_emptySortedList (LO
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskSortedListIR GALGAS_taskSortedListIR::constructor_sortedListWithValue (const GALGAS_string & inOperand0,
                                                                                   const GALGAS_bigint & inOperand1,
@@ -14743,7 +14743,7 @@ GALGAS_taskSortedListIR GALGAS_taskSortedListIR::constructor_sortedListWithValue
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskSortedListIR::addAssign_operation (const GALGAS_string & inOperand0,
                                                    const GALGAS_bigint & inOperand1,
@@ -14761,7 +14761,7 @@ void GALGAS_taskSortedListIR::addAssign_operation (const GALGAS_string & inOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskSortedListIR::plusAssign_operation (const GALGAS_taskSortedListIR inOperand,
                                                     C_Compiler * /* inCompiler */
@@ -14771,7 +14771,7 @@ void GALGAS_taskSortedListIR::plusAssign_operation (const GALGAS_taskSortedListI
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskSortedListIR::setter_popSmallest (GALGAS_string & outOperand0,
                                                   GALGAS_bigint & outOperand1,
@@ -14799,7 +14799,7 @@ void GALGAS_taskSortedListIR::setter_popSmallest (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskSortedListIR::setter_popGreatest (GALGAS_string & outOperand0,
                                                   GALGAS_bigint & outOperand1,
@@ -14827,7 +14827,7 @@ void GALGAS_taskSortedListIR::setter_popGreatest (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskSortedListIR::method_smallest (GALGAS_string & outOperand0,
                                                GALGAS_bigint & outOperand1,
@@ -14855,7 +14855,7 @@ void GALGAS_taskSortedListIR::method_smallest (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskSortedListIR::method_greatest (GALGAS_string & outOperand0,
                                                GALGAS_bigint & outOperand1,
@@ -14883,7 +14883,7 @@ void GALGAS_taskSortedListIR::method_greatest (GALGAS_string & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_taskSortedListIR::cEnumerator_taskSortedListIR (const GALGAS_taskSortedListIR & inEnumeratedObject,
                                                             const typeEnumerationOrder inOrder) :
@@ -14891,7 +14891,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskSortedListIR_2D_element cEnumerator_taskSortedListIR::current (LOCATION_ARGS) const {
   const cSortedListElement_taskSortedListIR * p = (const cSortedListElement_taskSortedListIR *) currentObjectPtr (THERE) ;
@@ -14899,7 +14899,7 @@ GALGAS_taskSortedListIR_2D_element cEnumerator_taskSortedListIR::current (LOCATI
   return p->mObject ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cEnumerator_taskSortedListIR::current_mTaskName (LOCATION_ARGS) const {
   const cSortedListElement_taskSortedListIR * p = (const cSortedListElement_taskSortedListIR *) currentObjectPtr (THERE) ;
@@ -14907,7 +14907,7 @@ GALGAS_string cEnumerator_taskSortedListIR::current_mTaskName (LOCATION_ARGS) co
   return p->mObject.mAttribute_mTaskName ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cEnumerator_taskSortedListIR::current_mPriority (LOCATION_ARGS) const {
   const cSortedListElement_taskSortedListIR * p = (const cSortedListElement_taskSortedListIR *) currentObjectPtr (THERE) ;
@@ -14915,7 +14915,7 @@ GALGAS_bigint cEnumerator_taskSortedListIR::current_mPriority (LOCATION_ARGS) co
   return p->mObject.mAttribute_mPriority ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cEnumerator_taskSortedListIR::current_mStackSize (LOCATION_ARGS) const {
   const cSortedListElement_taskSortedListIR * p = (const cSortedListElement_taskSortedListIR *) currentObjectPtr (THERE) ;
@@ -14923,7 +14923,7 @@ GALGAS_bigint cEnumerator_taskSortedListIR::current_mStackSize (LOCATION_ARGS) c
   return p->mObject.mAttribute_mStackSize ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList cEnumerator_taskSortedListIR::current_mAllocaList (LOCATION_ARGS) const {
   const cSortedListElement_taskSortedListIR * p = (const cSortedListElement_taskSortedListIR *) currentObjectPtr (THERE) ;
@@ -14931,7 +14931,7 @@ GALGAS_allocaList cEnumerator_taskSortedListIR::current_mAllocaList (LOCATION_AR
   return p->mObject.mAttribute_mAllocaList ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR cEnumerator_taskSortedListIR::current_mInitInstructionListIR (LOCATION_ARGS) const {
   const cSortedListElement_taskSortedListIR * p = (const cSortedListElement_taskSortedListIR *) currentObjectPtr (THERE) ;
@@ -14941,23 +14941,23 @@ GALGAS_instructionListIR cEnumerator_taskSortedListIR::current_mInitInstructionL
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               @taskSortedListIR type                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_taskSortedListIR ("taskSortedListIR",
                                          NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_taskSortedListIR::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_taskSortedListIR ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_taskSortedListIR::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -14967,7 +14967,7 @@ AC_GALGAS_root * GALGAS_taskSortedListIR::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskSortedListIR GALGAS_taskSortedListIR::extractObject (const GALGAS_object & inObject,
                                                                 C_Compiler * inCompiler
@@ -14984,20 +14984,20 @@ GALGAS_taskSortedListIR GALGAS_taskSortedListIR::extractObject (const GALGAS_obj
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_panicRoutinePriorityMap::cMapElement_panicRoutinePriorityMap (const GALGAS_lstring & inKey
                                                                           COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_panicRoutinePriorityMap::isValid (void) const {
   return mAttribute_lkey.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_panicRoutinePriorityMap::copy (void) {
   cMapElement * result = NULL ;
@@ -15005,12 +15005,12 @@ cMapElement * cMapElement_panicRoutinePriorityMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_panicRoutinePriorityMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_panicRoutinePriorityMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_panicRoutinePriorityMap * operand = (cMapElement_panicRoutinePriorityMap *) inOperand ;
@@ -15018,26 +15018,26 @@ typeComparisonResult cMapElement_panicRoutinePriorityMap::compare (const cCollec
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap::GALGAS_panicRoutinePriorityMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap::GALGAS_panicRoutinePriorityMap (const GALGAS_panicRoutinePriorityMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap & GALGAS_panicRoutinePriorityMap::operator = (const GALGAS_panicRoutinePriorityMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_panicRoutinePriorityMap result ;
@@ -15045,7 +15045,7 @@ GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::constructor_empty
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::constructor_mapWithMapToOverride (const GALGAS_panicRoutinePriorityMap & inMapToOverride
                                                                                                  COMMA_LOCATION_ARGS) {
@@ -15054,7 +15054,7 @@ GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::constructor_mapWi
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) const {
@@ -15063,7 +15063,7 @@ GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::getter_overridden
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_panicRoutinePriorityMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                           C_Compiler * inCompiler
@@ -15078,7 +15078,7 @@ void GALGAS_panicRoutinePriorityMap::addAssign_operation (const GALGAS_lstring &
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_panicRoutinePriorityMap::setter_insertSetupKey (GALGAS_lstring inKey,
                                                             C_Compiler * inCompiler
@@ -15093,7 +15093,7 @@ void GALGAS_panicRoutinePriorityMap::setter_insertSetupKey (GALGAS_lstring inKey
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_panicRoutinePriorityMap::setter_insertLoopKey (GALGAS_lstring inKey,
                                                            C_Compiler * inCompiler
@@ -15108,11 +15108,11 @@ void GALGAS_panicRoutinePriorityMap::setter_insertLoopKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_panicRoutinePriorityMap_searchSetupKey = "there is no panic setup routine with priority %K" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_panicRoutinePriorityMap::method_searchSetupKey (GALGAS_lstring inKey,
                                                             C_Compiler * inCompiler
@@ -15127,11 +15127,11 @@ void GALGAS_panicRoutinePriorityMap::method_searchSetupKey (GALGAS_lstring inKey
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const char * kSearchErrorMessage_panicRoutinePriorityMap_searchLoopKey = "there is no panic loop routine with priority %K" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_panicRoutinePriorityMap::method_searchLoopKey (GALGAS_lstring inKey,
                                                            C_Compiler * inCompiler
@@ -15146,7 +15146,7 @@ void GALGAS_panicRoutinePriorityMap::method_searchLoopKey (GALGAS_lstring inKey,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_panicRoutinePriorityMap * GALGAS_panicRoutinePriorityMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                                          const GALGAS_string & inKey
@@ -15156,7 +15156,7 @@ cMapElement_panicRoutinePriorityMap * GALGAS_panicRoutinePriorityMap::readWriteA
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_panicRoutinePriorityMap::cEnumerator_panicRoutinePriorityMap (const GALGAS_panicRoutinePriorityMap & inEnumeratedObject,
                                                                           const typeEnumerationOrder inOrder) :
@@ -15164,7 +15164,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap_2D_element cEnumerator_panicRoutinePriorityMap::current (LOCATION_ARGS) const {
   const cMapElement_panicRoutinePriorityMap * p = (const cMapElement_panicRoutinePriorityMap *) currentObjectPtr (THERE) ;
@@ -15172,7 +15172,7 @@ GALGAS_panicRoutinePriorityMap_2D_element cEnumerator_panicRoutinePriorityMap::c
   return GALGAS_panicRoutinePriorityMap_2D_element (p->mAttribute_lkey) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_panicRoutinePriorityMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -15182,23 +15182,23 @@ GALGAS_lstring cEnumerator_panicRoutinePriorityMap::current_lkey (LOCATION_ARGS)
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            @panicRoutinePriorityMap type                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_panicRoutinePriorityMap ("panicRoutinePriorityMap",
                                                 NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_panicRoutinePriorityMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_panicRoutinePriorityMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_panicRoutinePriorityMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -15208,7 +15208,7 @@ AC_GALGAS_root * GALGAS_panicRoutinePriorityMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::extractObject (const GALGAS_object & inObject,
                                                                               C_Compiler * inCompiler
@@ -15225,20 +15225,20 @@ GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::extractObject (co
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_bootRoutinePriorityMap::cMapElement_bootRoutinePriorityMap (const GALGAS_lstring & inKey
                                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_bootRoutinePriorityMap::isValid (void) const {
   return mAttribute_lkey.isValid () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_bootRoutinePriorityMap::copy (void) {
   cMapElement * result = NULL ;
@@ -15246,12 +15246,12 @@ cMapElement * cMapElement_bootRoutinePriorityMap::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_bootRoutinePriorityMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 typeComparisonResult cMapElement_bootRoutinePriorityMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_bootRoutinePriorityMap * operand = (cMapElement_bootRoutinePriorityMap *) inOperand ;
@@ -15259,26 +15259,26 @@ typeComparisonResult cMapElement_bootRoutinePriorityMap::compare (const cCollect
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap::GALGAS_bootRoutinePriorityMap (void) :
 AC_GALGAS_map () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap::GALGAS_bootRoutinePriorityMap (const GALGAS_bootRoutinePriorityMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap & GALGAS_bootRoutinePriorityMap::operator = (const GALGAS_bootRoutinePriorityMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_bootRoutinePriorityMap result ;
@@ -15286,7 +15286,7 @@ GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::constructor_emptyMa
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::constructor_mapWithMapToOverride (const GALGAS_bootRoutinePriorityMap & inMapToOverride
                                                                                                COMMA_LOCATION_ARGS) {
@@ -15295,7 +15295,7 @@ GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::constructor_mapWith
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::getter_overriddenMap (C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) const {
@@ -15304,7 +15304,7 @@ GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::getter_overriddenMa
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_bootRoutinePriorityMap::addAssign_operation (const GALGAS_lstring & inKey,
                                                          C_Compiler * inCompiler
@@ -15319,7 +15319,7 @@ void GALGAS_bootRoutinePriorityMap::addAssign_operation (const GALGAS_lstring & 
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_bootRoutinePriorityMap::setter_insertKey (GALGAS_lstring inKey,
                                                       C_Compiler * inCompiler
@@ -15334,7 +15334,7 @@ void GALGAS_bootRoutinePriorityMap::setter_insertKey (GALGAS_lstring inKey,
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_bootRoutinePriorityMap * GALGAS_bootRoutinePriorityMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                                        const GALGAS_string & inKey
@@ -15344,7 +15344,7 @@ cMapElement_bootRoutinePriorityMap * GALGAS_bootRoutinePriorityMap::readWriteAcc
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 cEnumerator_bootRoutinePriorityMap::cEnumerator_bootRoutinePriorityMap (const GALGAS_bootRoutinePriorityMap & inEnumeratedObject,
                                                                         const typeEnumerationOrder inOrder) :
@@ -15352,7 +15352,7 @@ cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap_2D_element cEnumerator_bootRoutinePriorityMap::current (LOCATION_ARGS) const {
   const cMapElement_bootRoutinePriorityMap * p = (const cMapElement_bootRoutinePriorityMap *) currentObjectPtr (THERE) ;
@@ -15360,7 +15360,7 @@ GALGAS_bootRoutinePriorityMap_2D_element cEnumerator_bootRoutinePriorityMap::cur
   return GALGAS_bootRoutinePriorityMap_2D_element (p->mAttribute_lkey) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cEnumerator_bootRoutinePriorityMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
@@ -15370,23 +15370,23 @@ GALGAS_lstring cEnumerator_bootRoutinePriorityMap::current_lkey (LOCATION_ARGS) 
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            @bootRoutinePriorityMap type                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_bootRoutinePriorityMap ("bootRoutinePriorityMap",
                                                NULL) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor * GALGAS_bootRoutinePriorityMap::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS_bootRoutinePriorityMap ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 AC_GALGAS_root * GALGAS_bootRoutinePriorityMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
@@ -15396,7 +15396,7 @@ AC_GALGAS_root * GALGAS_bootRoutinePriorityMap::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::extractObject (const GALGAS_object & inObject,
                                                                             C_Compiler * inCompiler

@@ -3,16 +3,16 @@
 #include "galgas2/C_galgas_CLI_Options.h"
 #include "utilities/C_PrologueEpilogue.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 #include "all-declarations-6.h"
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Once function 'noWarningIfUnusedAttribute'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_noWarningIfUnusedAttribute (C_Compiler * /* inCompiler */
                                                               COMMA_UNUSED_LOCATION_ARGS) {
@@ -24,14 +24,14 @@ static GALGAS_string onceFunction_noWarningIfUnusedAttribute (C_Compiler * /* in
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_noWarningIfUnusedAttribute = false ;
 static GALGAS_string gOnceFunctionResult_noWarningIfUnusedAttribute ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_noWarningIfUnusedAttribute (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -42,26 +42,26 @@ GALGAS_string function_noWarningIfUnusedAttribute (class C_Compiler * inCompiler
   return gOnceFunctionResult_noWarningIfUnusedAttribute ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_noWarningIfUnusedAttribute (void) {
   gOnceFunctionResult_noWarningIfUnusedAttribute.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_noWarningIfUnusedAttribute (NULL,
                                                                         releaseOnceFunctionResult_noWarningIfUnusedAttribute) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_noWarningIfUnusedAttribute [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_noWarningIfUnusedAttribute (C_Compiler * inCompiler,
                                                                            const cObjectArray & /* inEffectiveParameterArray */,
@@ -70,7 +70,7 @@ static GALGAS_object functionWithGenericHeader_noWarningIfUnusedAttribute (C_Com
   return function_noWarningIfUnusedAttribute (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_noWarningIfUnusedAttribute ("noWarningIfUnusedAttribute",
                                                                             functionWithGenericHeader_noWarningIfUnusedAttribute,
@@ -78,11 +78,11 @@ C_galgas_function_descriptor functionDescriptor_noWarningIfUnusedAttribute ("noW
                                                                             0,
                                                                             functionArgs_noWarningIfUnusedAttribute) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Once function 'globalAttribute'                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_globalAttribute (C_Compiler * /* inCompiler */
                                                    COMMA_UNUSED_LOCATION_ARGS) {
@@ -94,14 +94,14 @@ static GALGAS_string onceFunction_globalAttribute (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_globalAttribute = false ;
 static GALGAS_string gOnceFunctionResult_globalAttribute ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_globalAttribute (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -112,26 +112,26 @@ GALGAS_string function_globalAttribute (class C_Compiler * inCompiler
   return gOnceFunctionResult_globalAttribute ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_globalAttribute (void) {
   gOnceFunctionResult_globalAttribute.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_globalAttribute (NULL,
                                                              releaseOnceFunctionResult_globalAttribute) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_globalAttribute [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_globalAttribute (C_Compiler * inCompiler,
                                                                 const cObjectArray & /* inEffectiveParameterArray */,
@@ -140,7 +140,7 @@ static GALGAS_object functionWithGenericHeader_globalAttribute (C_Compiler * inC
   return function_globalAttribute (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_globalAttribute ("globalAttribute",
                                                                  functionWithGenericHeader_globalAttribute,
@@ -148,11 +148,11 @@ C_galgas_function_descriptor functionDescriptor_globalAttribute ("globalAttribut
                                                                  0,
                                                                  functionArgs_globalAttribute) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Once function 'weakAttribute'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_weakAttribute (C_Compiler * /* inCompiler */
                                                  COMMA_UNUSED_LOCATION_ARGS) {
@@ -164,14 +164,14 @@ static GALGAS_string onceFunction_weakAttribute (C_Compiler * /* inCompiler */
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_weakAttribute = false ;
 static GALGAS_string gOnceFunctionResult_weakAttribute ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_weakAttribute (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -182,26 +182,26 @@ GALGAS_string function_weakAttribute (class C_Compiler * inCompiler
   return gOnceFunctionResult_weakAttribute ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_weakAttribute (void) {
   gOnceFunctionResult_weakAttribute.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_weakAttribute (NULL,
                                                            releaseOnceFunctionResult_weakAttribute) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_weakAttribute [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_weakAttribute (C_Compiler * inCompiler,
                                                               const cObjectArray & /* inEffectiveParameterArray */,
@@ -210,7 +210,7 @@ static GALGAS_object functionWithGenericHeader_weakAttribute (C_Compiler * inCom
   return function_weakAttribute (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_weakAttribute ("weakAttribute",
                                                                functionWithGenericHeader_weakAttribute,
@@ -218,27 +218,27 @@ C_galgas_function_descriptor functionDescriptor_weakAttribute ("weakAttribute",
                                                                0,
                                                                functionArgs_weakAttribute) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Function 'taskProcNameForInvocationGraph'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring function_taskProcNameForInvocationGraph (GALGAS_string inArgument_inTaskName,
                                                         GALGAS_lstring inArgument_inProcName,
                                                         C_Compiler * inCompiler
                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
-  GALGAS_string var_s_12443 = GALGAS_string ("taskproc ").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 318)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 318)).add_operation (inArgument_inProcName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 318)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 318)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s_12443, inArgument_inProcName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 319)) ;
+  GALGAS_string var_s_12470 = GALGAS_string ("taskproc ").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 318)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 318)).add_operation (inArgument_inProcName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 318)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 318)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s_12470, inArgument_inProcName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 319)) ;
 //---
   return result_outName ;
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_taskProcNameForInvocationGraph [3] = {
   & kTypeDescriptor_GALGAS_string,
@@ -246,7 +246,7 @@ static const C_galgas_type_descriptor * functionArgs_taskProcNameForInvocationGr
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_taskProcNameForInvocationGraph (C_Compiler * inCompiler,
                                                                                const cObjectArray & inEffectiveParameterArray,
@@ -264,7 +264,7 @@ static GALGAS_object functionWithGenericHeader_taskProcNameForInvocationGraph (C
                                                   COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_taskProcNameForInvocationGraph ("taskProcNameForInvocationGraph",
                                                                                 functionWithGenericHeader_taskProcNameForInvocationGraph,
@@ -272,11 +272,11 @@ C_galgas_function_descriptor functionDescriptor_taskProcNameForInvocationGraph (
                                                                                 2,
                                                                                 functionArgs_taskProcNameForInvocationGraph) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             Function 'stackNameForTask'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_stackNameForTask (const GALGAS_string & constinArgument_inTaskName,
                                          C_Compiler * inCompiler
@@ -288,16 +288,16 @@ GALGAS_string function_stackNameForTask (const GALGAS_string & constinArgument_i
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_stackNameForTask [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_stackNameForTask (C_Compiler * inCompiler,
                                                                  const cObjectArray & inEffectiveParameterArray,
@@ -311,7 +311,7 @@ static GALGAS_object functionWithGenericHeader_stackNameForTask (C_Compiler * in
                                     COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_stackNameForTask ("stackNameForTask",
                                                                   functionWithGenericHeader_stackNameForTask,
@@ -319,11 +319,11 @@ C_galgas_function_descriptor functionDescriptor_stackNameForTask ("stackNameForT
                                                                   1,
                                                                   functionArgs_stackNameForTask) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Function 'initNameForTaskType'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_initNameForTaskType (const GALGAS_string & constinArgument_inTaskTypeName,
                                             C_Compiler * inCompiler
@@ -335,16 +335,16 @@ GALGAS_string function_initNameForTaskType (const GALGAS_string & constinArgumen
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_initNameForTaskType [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_initNameForTaskType (C_Compiler * inCompiler,
                                                                     const cObjectArray & inEffectiveParameterArray,
@@ -358,7 +358,7 @@ static GALGAS_object functionWithGenericHeader_initNameForTaskType (C_Compiler *
                                        COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_initNameForTaskType ("initNameForTaskType",
                                                                      functionWithGenericHeader_initNameForTaskType,
@@ -366,11 +366,11 @@ C_galgas_function_descriptor functionDescriptor_initNameForTaskType ("initNameFo
                                                                      1,
                                                                      functionArgs_initNameForTaskType) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Function 'stackAddressForTask'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_stackAddressForTask (const GALGAS_string & constinArgument_inTaskName,
                                             C_Compiler * inCompiler
@@ -382,16 +382,16 @@ GALGAS_string function_stackAddressForTask (const GALGAS_string & constinArgumen
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_stackAddressForTask [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_stackAddressForTask (C_Compiler * inCompiler,
                                                                     const cObjectArray & inEffectiveParameterArray,
@@ -405,7 +405,7 @@ static GALGAS_object functionWithGenericHeader_stackAddressForTask (C_Compiler *
                                        COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_stackAddressForTask ("stackAddressForTask",
                                                                      functionWithGenericHeader_stackAddressForTask,
@@ -413,11 +413,11 @@ C_galgas_function_descriptor functionDescriptor_stackAddressForTask ("stackAddre
                                                                      1,
                                                                      functionArgs_stackAddressForTask) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          Function 'mainRoutineNameForTask'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_mainRoutineNameForTask (const GALGAS_string & constinArgument_inTaskName,
                                                C_Compiler * inCompiler
@@ -429,16 +429,16 @@ GALGAS_string function_mainRoutineNameForTask (const GALGAS_string & constinArgu
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_mainRoutineNameForTask [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_mainRoutineNameForTask (C_Compiler * inCompiler,
                                                                        const cObjectArray & inEffectiveParameterArray,
@@ -452,7 +452,7 @@ static GALGAS_object functionWithGenericHeader_mainRoutineNameForTask (C_Compile
                                           COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_mainRoutineNameForTask ("mainRoutineNameForTask",
                                                                         functionWithGenericHeader_mainRoutineNameForTask,
@@ -460,11 +460,11 @@ C_galgas_function_descriptor functionDescriptor_mainRoutineNameForTask ("mainRou
                                                                         1,
                                                                         functionArgs_mainRoutineNameForTask) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                         Function 'llvmNameForTaskVariable'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForTaskVariable (GALGAS_string inArgument_inTaskName,
                                                 GALGAS_string inArgument_inVarName,
@@ -477,9 +477,9 @@ GALGAS_string function_llvmNameForTaskVariable (GALGAS_string inArgument_inTaskN
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskVariable [3] = {
   & kTypeDescriptor_GALGAS_string,
@@ -487,7 +487,7 @@ static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskVariable [3]
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForTaskVariable (C_Compiler * inCompiler,
                                                                         const cObjectArray & inEffectiveParameterArray,
@@ -505,7 +505,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForTaskVariable (C_Compil
                                            COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForTaskVariable ("llvmNameForTaskVariable",
                                                                          functionWithGenericHeader_llvmNameForTaskVariable,
@@ -513,11 +513,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForTaskVariable ("llvmNa
                                                                          2,
                                                                          functionArgs_llvmNameForTaskVariable) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                     Once function 'llvmNameForTaskLoopFunction'                                     *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_llvmNameForTaskLoopFunction (C_Compiler * /* inCompiler */
                                                                COMMA_UNUSED_LOCATION_ARGS) {
@@ -529,14 +529,14 @@ static GALGAS_string onceFunction_llvmNameForTaskLoopFunction (C_Compiler * /* i
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_llvmNameForTaskLoopFunction = false ;
 static GALGAS_string gOnceFunctionResult_llvmNameForTaskLoopFunction ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForTaskLoopFunction (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -547,26 +547,26 @@ GALGAS_string function_llvmNameForTaskLoopFunction (class C_Compiler * inCompile
   return gOnceFunctionResult_llvmNameForTaskLoopFunction ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_llvmNameForTaskLoopFunction (void) {
   gOnceFunctionResult_llvmNameForTaskLoopFunction.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskLoopFunction (NULL,
                                                                          releaseOnceFunctionResult_llvmNameForTaskLoopFunction) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskLoopFunction [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForTaskLoopFunction (C_Compiler * inCompiler,
                                                                             const cObjectArray & /* inEffectiveParameterArray */,
@@ -575,7 +575,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForTaskLoopFunction (C_Co
   return function_llvmNameForTaskLoopFunction (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForTaskLoopFunction ("llvmNameForTaskLoopFunction",
                                                                              functionWithGenericHeader_llvmNameForTaskLoopFunction,
@@ -583,11 +583,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForTaskLoopFunction ("ll
                                                                              0,
                                                                              functionArgs_llvmNameForTaskLoopFunction) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                 Once function 'llvmNameForTaskSelfTerminateService'                                 *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_llvmNameForTaskSelfTerminateService (C_Compiler * /* inCompiler */
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
@@ -599,14 +599,14 @@ static GALGAS_string onceFunction_llvmNameForTaskSelfTerminateService (C_Compile
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_llvmNameForTaskSelfTerminateService = false ;
 static GALGAS_string gOnceFunctionResult_llvmNameForTaskSelfTerminateService ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmNameForTaskSelfTerminateService (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -617,26 +617,26 @@ GALGAS_string function_llvmNameForTaskSelfTerminateService (class C_Compiler * i
   return gOnceFunctionResult_llvmNameForTaskSelfTerminateService ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_llvmNameForTaskSelfTerminateService (void) {
   gOnceFunctionResult_llvmNameForTaskSelfTerminateService.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskSelfTerminateService (NULL,
                                                                                  releaseOnceFunctionResult_llvmNameForTaskSelfTerminateService) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskSelfTerminateService [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmNameForTaskSelfTerminateService (C_Compiler * inCompiler,
                                                                                     const cObjectArray & /* inEffectiveParameterArray */,
@@ -645,7 +645,7 @@ static GALGAS_object functionWithGenericHeader_llvmNameForTaskSelfTerminateServi
   return function_llvmNameForTaskSelfTerminateService (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmNameForTaskSelfTerminateService ("llvmNameForTaskSelfTerminateService",
                                                                                      functionWithGenericHeader_llvmNameForTaskSelfTerminateService,
@@ -653,11 +653,11 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForTaskSelfTerminateServ
                                                                                      0,
                                                                                      functionArgs_llvmNameForTaskSelfTerminateService) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             Routine 'codeOptimisation'                                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_codeOptimisation (GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                C_Compiler * inCompiler
@@ -771,11 +771,11 @@ void routine_codeOptimisation (GALGAS_intermediateCodeStruct & ioArgument_ioInte
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                      Routine 'suppressInaccessibleSubprograms'                                      *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_suppressInaccessibleSubprograms (GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                               GALGAS_accessibleEntities & outArgument_outAccessibleEntities,
@@ -865,11 +865,11 @@ void routine_suppressInaccessibleSubprograms (GALGAS_intermediateCodeStruct & io
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               Routine 'exploreProcs'                                                *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_exploreProcs (GALGAS_routineMapIR & ioArgument_ioAccessibleProcedureMap,
                            GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
@@ -899,11 +899,11 @@ void routine_exploreProcs (GALGAS_routineMapIR & ioArgument_ioAccessibleProcedur
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                               Routine 'exploreGuards'                                               *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_exploreGuards (GALGAS_guardMapIR & ioArgument_ioAccessibleGuardMap,
                             GALGAS_accessibleEntities & ioArgument_ioAccessibleEntities,
@@ -933,11 +933,11 @@ void routine_exploreGuards (GALGAS_guardMapIR & ioArgument_ioAccessibleGuardMap,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                          Once function 'llvmSeparatorLine'                                          *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_llvmSeparatorLine (C_Compiler * inCompiler
                                                      COMMA_UNUSED_LOCATION_ARGS) {
@@ -950,14 +950,14 @@ static GALGAS_string onceFunction_llvmSeparatorLine (C_Compiler * inCompiler
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_llvmSeparatorLine = false ;
 static GALGAS_string gOnceFunctionResult_llvmSeparatorLine ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmSeparatorLine (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -968,26 +968,26 @@ GALGAS_string function_llvmSeparatorLine (class C_Compiler * inCompiler
   return gOnceFunctionResult_llvmSeparatorLine ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_llvmSeparatorLine (void) {
   gOnceFunctionResult_llvmSeparatorLine.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_llvmSeparatorLine (NULL,
                                                                releaseOnceFunctionResult_llvmSeparatorLine) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmSeparatorLine [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmSeparatorLine (C_Compiler * inCompiler,
                                                                   const cObjectArray & /* inEffectiveParameterArray */,
@@ -996,7 +996,7 @@ static GALGAS_object functionWithGenericHeader_llvmSeparatorLine (C_Compiler * i
   return function_llvmSeparatorLine (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmSeparatorLine ("llvmSeparatorLine",
                                                                    functionWithGenericHeader_llvmSeparatorLine,
@@ -1004,11 +1004,11 @@ C_galgas_function_descriptor functionDescriptor_llvmSeparatorLine ("llvmSeparato
                                                                    0,
                                                                    functionArgs_llvmSeparatorLine) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             Function 'llvmTitleComment'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_llvmTitleComment (GALGAS_string inArgument_inTitle,
                                          C_Compiler * inCompiler
@@ -1022,16 +1022,16 @@ GALGAS_string function_llvmTitleComment (GALGAS_string inArgument_inTitle,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_llvmTitleComment [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_llvmTitleComment (C_Compiler * inCompiler,
                                                                  const cObjectArray & inEffectiveParameterArray,
@@ -1045,7 +1045,7 @@ static GALGAS_object functionWithGenericHeader_llvmTitleComment (C_Compiler * in
                                     COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_llvmTitleComment ("llvmTitleComment",
                                                                   functionWithGenericHeader_llvmTitleComment,
@@ -1053,11 +1053,11 @@ C_galgas_function_descriptor functionDescriptor_llvmTitleComment ("llvmTitleComm
                                                                   1,
                                                                   functionArgs_llvmTitleComment) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                           Once function 'asSeparatorLine'                                           *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_asSeparatorLine (C_Compiler * inCompiler
                                                    COMMA_UNUSED_LOCATION_ARGS) {
@@ -1070,14 +1070,14 @@ static GALGAS_string onceFunction_asSeparatorLine (C_Compiler * inCompiler
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function implementation                                                                                            *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static bool gOnceFunctionResultAvailable_asSeparatorLine = false ;
 static GALGAS_string gOnceFunctionResult_asSeparatorLine ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_asSeparatorLine (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
@@ -1088,26 +1088,26 @@ GALGAS_string function_asSeparatorLine (class C_Compiler * inCompiler
   return gOnceFunctionResult_asSeparatorLine ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static void releaseOnceFunctionResult_asSeparatorLine (void) {
   gOnceFunctionResult_asSeparatorLine.drop () ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gEpilogueForOnceFunction_asSeparatorLine (NULL,
                                                              releaseOnceFunctionResult_asSeparatorLine) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_asSeparatorLine [1] = {
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_asSeparatorLine (C_Compiler * inCompiler,
                                                                 const cObjectArray & /* inEffectiveParameterArray */,
@@ -1116,7 +1116,7 @@ static GALGAS_object functionWithGenericHeader_asSeparatorLine (C_Compiler * inC
   return function_asSeparatorLine (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_asSeparatorLine ("asSeparatorLine",
                                                                  functionWithGenericHeader_asSeparatorLine,
@@ -1124,11 +1124,11 @@ C_galgas_function_descriptor functionDescriptor_asSeparatorLine ("asSeparatorLin
                                                                  0,
                                                                  functionArgs_asSeparatorLine) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                              Function 'asTitleComment'                                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string function_asTitleComment (GALGAS_string inArgument_inTitle,
                                        C_Compiler * inCompiler
@@ -1142,16 +1142,16 @@ GALGAS_string function_asTitleComment (GALGAS_string inArgument_inTitle,
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static const C_galgas_type_descriptor * functionArgs_asTitleComment [2] = {
   & kTypeDescriptor_GALGAS_string,
   NULL
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_object functionWithGenericHeader_asTitleComment (C_Compiler * inCompiler,
                                                                const cObjectArray & inEffectiveParameterArray,
@@ -1165,7 +1165,7 @@ static GALGAS_object functionWithGenericHeader_asTitleComment (C_Compiler * inCo
                                   COMMA_THERE).getter_object (THERE) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 C_galgas_function_descriptor functionDescriptor_asTitleComment ("asTitleComment",
                                                                 functionWithGenericHeader_asTitleComment,
@@ -1173,11 +1173,11 @@ C_galgas_function_descriptor functionDescriptor_asTitleComment ("asTitleComment"
                                                                 1,
                                                                 functionArgs_asTitleComment) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                              Routine 'codeGeneration'                                               *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_codeGeneration (const GALGAS_string constinArgument_inCurrentDirectory,
                              const GALGAS_string constinArgument_inSourceFileName,
@@ -1211,11 +1211,11 @@ void routine_codeGeneration (const GALGAS_string constinArgument_inCurrentDirect
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             Routine 'generateCodeFiles'                                             *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_generateCodeFiles (const GALGAS_string constinArgument_inCurrentDirectory,
                                 const GALGAS_string constinArgument_inProductDirectory,
@@ -1539,11 +1539,11 @@ void routine_generateCodeFiles (const GALGAS_string constinArgument_inCurrentDir
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                             Routine 'declareLLVMTypes'                                              *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTypeMap,
                                GALGAS_string & ioArgument_ioLLVMcode,
@@ -1614,11 +1614,11 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
 //                                            Filewrapper 'targetTemplates'                                            *
 //                                                                                                                     *
-//----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------*
 
 //--- File '/LPC-L2294.plm-target'
 

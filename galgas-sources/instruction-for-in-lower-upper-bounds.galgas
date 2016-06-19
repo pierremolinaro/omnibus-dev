@@ -222,9 +222,9 @@ override method @forLowerUpperBoundInstructionIR llvmInstructionCode
   let loopLabel = "for." + [mLocation locationIndex] + ".loop"
   let endLabel  = "for." + [mLocation locationIndex] + ".end"
   let testResult = "%for." + [mLocation locationIndex] + ".test.result"
-  let loadedVarName = "%" + llvmNameForLocalVariable (!mVarName) + ".loaded"
-  let currentVarName = "%" + llvmNameForLocalVariable (!mVarName) + ".current"
-  let nextVarName = "%" + llvmNameForLocalVariable (!mVarName) + ".next"
+  let loadedVarName = "%" + llvmNameForLocalVariable (!mVarName + ".loaded")
+  let currentVarName = "%" + llvmNameForLocalVariable (!mVarName + ".current")
+  let nextVarName = "%" + llvmNameForLocalVariable (!mVarName + ".next")
 #--- Store LOW in x
   ioLLVMcode += "  store " + llvmType + " " + [mLowerExpressionResult.mValue llvmName] + ", " + llvmType + "* %" + llvmVarName + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"

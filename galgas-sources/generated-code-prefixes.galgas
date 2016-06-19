@@ -263,19 +263,19 @@ func %once waitForGuardChangeFunctionName -> @string outName {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForLocalVariable ?@string inName -> @string outName {
-  outName = "var." + inName
+  outName = "\"var." + inName + "\""
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGlobalVariable ?@string inName -> @string outName {
-  outName = "gvar." + inName
+  outName = "\"gvar." + inName + "\""
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForRegister ?name:@string inName -> @string outName {
-  outName = "register." + inName
+  outName = "\"register." + inName + "\""
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
