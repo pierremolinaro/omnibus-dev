@@ -316,9 +316,9 @@ override method @structureDeclaration enterInContext
     copyableAttribute = false
   end
 #---------------------------------------- Enter in type map
-  [!?ioContext.mTypeMap insertKey
+  [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
-    !llvmTypeName:"%$" + mStructureName
+    !llvmTypeName:"%" + ["$" + mStructureName assemblerRepresentation]
     !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
     !classMethodMap:{}
     !instantiable:true

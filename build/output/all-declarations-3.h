@@ -378,17 +378,17 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
 
 
 //--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_string constinArgument1,
-                                                   class GALGAS_typeKind constinArgument2,
-                                                   class GALGAS_classMethodMap constinArgument3,
-                                                   class GALGAS_bool constinArgument4,
-                                                   class GALGAS_bool constinArgument5,
-                                                   class GALGAS_bool constinArgument6,
-                                                   class GALGAS_bool constinArgument7,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument8,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void setter_insertType (class GALGAS_lstring constinArgument0,
+                                                    class GALGAS_string constinArgument1,
+                                                    class GALGAS_typeKind constinArgument2,
+                                                    class GALGAS_classMethodMap constinArgument3,
+                                                    class GALGAS_bool constinArgument4,
+                                                    class GALGAS_bool constinArgument5,
+                                                    class GALGAS_bool constinArgument6,
+                                                    class GALGAS_bool constinArgument7,
+                                                    class GALGAS_unifiedTypeMap_2D_proxy constinArgument8,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setClassMethodMapForKey (class GALGAS_classMethodMap constinArgument0,
                                                                  class GALGAS_string constinArgument1,

@@ -94,7 +94,7 @@ override method @typeAliasDeclaration enterInContext
     ?enumerationType:let enumerationType
   ]
 #--- Enter in type map
-  [!?ioContext.mTypeMap insertKey
+  [!?ioContext.mTypeMap insertType
     !lkey:mNewTypeName
     !llvmTypeName:llvmTypeMane
     !kind:kind

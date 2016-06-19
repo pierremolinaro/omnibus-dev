@@ -26,7 +26,7 @@ override method @storeVolatileIR llvmInstructionCode
 {
   let llvmType = [mTargetVarType llvmTypeName]
   ioLLVMcode += "  store volatile " + llvmType + " " + [mSourceValue.mValue llvmName] + ", " + llvmType
-         + "* inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
+         + " * inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

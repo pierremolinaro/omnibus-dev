@@ -724,7 +724,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "task T1 priority 1 stackSize 512 {\n"
+  "task T\xC3""\xA2""che priority 1 stackSize 512 {\n"
   "  var compteur $uint32 = 0\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
@@ -744,7 +744,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  529, // Text length
+  532, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -931,15 +931,16 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "  \n"
   "  init 256 {\n"
-  "    self.top += 2\n"
+  "    let \xCF""\x80"" = self.top + 2\n"
+  "    self.top += \xCF""\x80""\n"
   "  }\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s\xC3""\xA9""maphore.V ()\n"
   "    self.top += 250\n"
   "    leds.on (!LED_L1)\n"
-  "    let variableAccentu\xC3""\xA9""e = self.top\n"
-  "    time.waitUntilMS (!deadline:variableAccentu\xC3""\xA9""e)\n"
+  "    let constanteAccentu\xC3""\xA9""e = self.top\n"
+  "    time.waitUntilMS (!deadline:constanteAccentu\xC3""\xA9""e)\n"
   "    s\xC3""\xA9""maphore.V ()\n"
   "    self.top += 250\n"
   "    leds.off (!LED_L1)\n"
@@ -963,7 +964,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "04-semaphore.plm",
   "plm",
   true, // Text file
-  805, // Text length
+  832, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -1343,15 +1344,15 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "struct $rendezVousData {\n"
+  "struct $rendezVousData\xC3""\xA9"" {\n"
   "  var autoriserLecture  = $semaphore (!value:0)\n"
   "  var autoriserEcriture = $semaphore (!value:1)\n"
   "  var signalerDonneeLue = $semaphore (!value:0)\n"
-  "  var data $uint32 = 0\n"
+  "  var donn\xC3""\xA9""e $uint32 = 0\n"
   "\n"
   "  public func `user output @mutating @userAccess (\?data:inData $uint32) {\n"
   "    self.autoriserEcriture.P ()\n"
-  "    self.data = inData\n"
+  "    self.donn\xC3""\xA9""e = inData\n"
   "    self.autoriserLecture.V ()\n"
   "    self.signalerDonneeLue.P ()\n"
   "  }\n"
@@ -1364,7 +1365,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "//  }\n"
   "\n"
   "  public guard input (!data:outData $uint32) : self.autoriserLecture.P () {\n"
-  "    outData = self.data\n"
+  "    outData = self.donn\xC3""\xA9""e\n"
   "    self.signalerDonneeLue.V ()\n"
   "    self.autoriserEcriture.V ()\n"
   "  }\n"
@@ -1373,11 +1374,11 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var rdvs = $rendezVousData ()\n"
+  "var rdvs = $rendezVousData\xC3""\xA9"" ()\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "var rdvs2 = $rendezVousData ()\n"
+  "var rdvs2 = $rendezVousData\xC3""\xA9"" ()\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1436,7 +1437,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2303, // Text length
+  2312, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 

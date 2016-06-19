@@ -603,7 +603,7 @@ method @guardMapIR guardCodeGeneration
       let typeName = [guard.lkey.string stringByDeletingPathExtension]
       var first = typeName == ""
       if not first then
-        ioLLVMcode += "%" + typeName + "* %self"  
+        ioLLVMcode += "%" + [typeName assemblerRepresentation] + " * %self"  
       end
       for () in guard.mFormalArgumentListForGeneration do
         if first then first = false else ioLLVMcode += ", " end
@@ -611,9 +611,9 @@ method @guardMapIR guardCodeGeneration
         case input :
           ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
         case output :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
        case inputOutput :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
         end
       end
       ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
@@ -641,7 +641,7 @@ method @guardMapIR-element llvmCodeGeneration
   let receiverTypeName = [lkey.string stringByDeletingPathExtension]
   var first = true
   if receiverTypeName != "" then
-    ioLLVMcode += "%" + receiverTypeName + "* %self"
+    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"
     first = false
   end
   for () in mFormalArgumentListForGeneration do
@@ -654,9 +654,9 @@ method @guardMapIR-element llvmCodeGeneration
     case input :
       ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
     end
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
@@ -678,7 +678,7 @@ method @guardMapIR-element llvmCodeGeneration
     case input :
       let llvmType = [mFormalArgumentType llvmTypeName]
       ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", "
-         + llvmType + "* %" + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
+         + llvmType + " * %" + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
     case output, inputOutput :
     end
   end
@@ -710,11 +710,11 @@ method @guardMapIR-element llvmCodeGeneration
     for () in baseGuardEffectiveParameterList do
       switch mEffectiveParameterPassingMode
       case input:
-        ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+        ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
       case output:
         ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
       case outputInput:
-        ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+        ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
       end
     between
       ioLLVMcode += ", "

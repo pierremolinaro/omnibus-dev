@@ -2,15 +2,15 @@ target "teensy-3-1-tp"
 
 //-----------------------------------------------------------------------------*
 
-struct $rendezVousData {
+struct $rendezVousDataé {
   var autoriserLecture  = $semaphore (!value:0)
   var autoriserEcriture = $semaphore (!value:1)
   var signalerDonneeLue = $semaphore (!value:0)
-  var data $uint32 = 0
+  var donnée $uint32 = 0
 
   public func `user output @mutating @userAccess (?data:inData $uint32) {
     self.autoriserEcriture.P ()
-    self.data = inData
+    self.donnée = inData
     self.autoriserLecture.V ()
     self.signalerDonneeLue.P ()
   }
@@ -23,7 +23,7 @@ struct $rendezVousData {
 //  }
 
   public guard input (!data:outData $uint32) : self.autoriserLecture.P () {
-    outData = self.data
+    outData = self.donnée
     self.signalerDonneeLue.V ()
     self.autoriserEcriture.V ()
   }
@@ -32,11 +32,11 @@ struct $rendezVousData {
 
 //-----------------------------------------------------------------------------*
 
-var rdvs = $rendezVousData ()
+var rdvs = $rendezVousDataé ()
 
 //-----------------------------------------------------------------------------*
 
-var rdvs2 = $rendezVousData ()
+var rdvs2 = $rendezVousDataé ()
 
 //-----------------------------------------------------------------------------*
 

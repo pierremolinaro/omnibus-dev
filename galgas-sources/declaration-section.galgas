@@ -183,16 +183,16 @@ method @routineMapIR sectionCodeGeneration
       else
         ioLLVMcode += " " + [section.mReturnType llvmTypeName]
       end
-      ioLLVMcode += " @" + sectionCallName + " ("
+      ioLLVMcode += " @" + [sectionCallName assemblerRepresentation] + " ("
       for () in section.mFormalArgumentListForGeneration
       do
         switch mFormalArgumentKind
         case input :
           ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
         case output :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
        case inputOutput :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + "* %" + mFormalArgumentName
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
         end
       between
         ioLLVMcode += ", "

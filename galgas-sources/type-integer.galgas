@@ -69,7 +69,7 @@ override method @integerDeclaration enterInContext
     max = (1G << mSize) - 1G
   end
  #---
-  [!?ioContext.mTypeMap insertKey
+  [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
     !llvmTypeName:"i" + mSize
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}

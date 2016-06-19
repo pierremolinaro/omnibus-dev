@@ -127,7 +127,7 @@ override method @opaqueTypeDeclaration enterInContext
     error mSizeExpressionLocation : "array size expression is not static"
   else
     [sizeExpressionIR.mValue literalInteger ?value:let bitSize]
-    [!?ioContext.mTypeMap insertKey
+    [!?ioContext.mTypeMap insertType
       !lkey:mOpaqueTypeName
       !llvmTypeName:"i" + bitSize
       !kind:.opaque {!bitCount:bitSize}

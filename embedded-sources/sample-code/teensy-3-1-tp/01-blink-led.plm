@@ -2,7 +2,7 @@ target "teensy-3-1-tp"
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T1 priority 1 stackSize 512 {
+task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
   while time.waitUntilMS (!deadline:self.compteur) {

@@ -158,6 +158,8 @@ func %once staticIntegerTypeName -> @string outName {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Functions
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once functionResultVariableName -> @string outName {
   outName = "result"
@@ -166,7 +168,7 @@ func %once functionResultVariableName -> @string outName {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForFunction ?@string inName -> @string outName {
-  outName = "func." + inName
+  outName = ["func." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -195,13 +197,13 @@ func llvmNameForISR ?@string inName -> @string outName {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForPrimitiveCall ?@string inName -> @string outName {
-  outName = "primitive.call." + inName
+  outName = ["primitive.call." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForPrimitiveImplementation ?@string inName -> @string outName {
-  outName = "primitive.implementation." + inName
+  outName = ["primitive.implementation." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -209,13 +211,13 @@ func llvmNameForPrimitiveImplementation ?@string inName -> @string outName {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForServiceCall ?@string inName -> @string outName {
-  outName = "service.call." + inName
+  outName = ["service.call." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForServiceImplementation ?@string inName -> @string outName {
-  outName = "service.implementation." + inName
+  outName = ["service.implementation." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -223,13 +225,13 @@ func llvmNameForServiceImplementation ?@string inName -> @string outName {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForSectionCall ?@string inName -> @string outName {
-  outName = "section.call." + inName
+  outName = ["section.call." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForSectionImplementation ?@string inName -> @string outName {
-  outName = "section.implementation." + inName
+  outName = ["section.implementation." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -243,13 +245,13 @@ func %once acceptVariableName -> @string outName {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGuardCall ?@string inName -> @string outName {
-  outName = "guard.call." + inName
+  outName = ["guard.call." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGuardImplementation ?@string inName -> @string outName {
-  outName = "guard.implementation." + inName
+  outName = ["guard.implementation." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -263,19 +265,19 @@ func %once waitForGuardChangeFunctionName -> @string outName {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForLocalVariable ?@string inName -> @string outName {
-  outName = "\"var." + inName + "\""
+  outName = ["var." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGlobalVariable ?@string inName -> @string outName {
-  outName = "\"gvar." + inName + "\""
+  outName = ["gvar." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForRegister ?name:@string inName -> @string outName {
-  outName = "\"register." + inName + "\""
+  outName = ["register." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -322,31 +324,37 @@ func taskProcNameForInvocationGraph ?@string inTaskName ?@lstring inProcName -> 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func stackNameForTask ?let @string inTaskName -> @string outResult {
-  outResult = "@task.stack." + inTaskName
+  outResult = "@" + ["task.stack." + inTaskName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func initNameForTaskType ?let @string inTaskTypeName -> @string outResult {
-  outResult = "@task.init.$" + inTaskTypeName
+  outResult = "@" + ["task.init.$" + inTaskTypeName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func stackAddressForTask ?let @string inTaskName -> @string outResult {
-  outResult = "%task.stack.address." + inTaskName
+  outResult = "%" + ["task.stack.address." + inTaskName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func mainRoutineNameForTask ?let @string inTaskName -> @string outResult {
-  outResult = "@task.main." + inTaskName
+  outResult = "@" + ["task.main." + inTaskName assemblerRepresentation]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForTaskGlobalVar ?@string inTaskName -> @string outName {
+  outName = ["task.globalvar." + inTaskName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForTaskVariable ?@string inTaskName ?@string inVarName -> @string outName {
-  outName = "task.var." + inTaskName + "." + inVarName
+  outName = ["task.var." + inTaskName + "." + inVarName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

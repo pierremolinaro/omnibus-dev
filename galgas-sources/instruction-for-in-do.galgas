@@ -174,10 +174,10 @@ override method @forInstructionIR llvmInstructionCode
 #--- Loop  
   ioLLVMcode += loopLabel + ":\n"
   ioLLVMcode += "  store " + elementTypeName + " %" + currentVar + ", "
-  ioLLVMcode +=  elementTypeName + "* %" + llvmNameForLocalVariable (!mVarName) + "\n"
+  ioLLVMcode +=  elementTypeName + " * %" + llvmNameForLocalVariable (!mVarName) + "\n"
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  %" + ptrVar + ".next = getelementptr inbounds " + elementTypeName + ", "
-  ioLLVMcode += elementTypeName + "* %" + ptrVar + ", i32 1\n"
+  ioLLVMcode += elementTypeName + " * %" + ptrVar + ", i32 1\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
 
 #--- End
