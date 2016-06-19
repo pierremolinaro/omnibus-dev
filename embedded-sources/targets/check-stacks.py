@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -7,17 +7,22 @@ import sys, os, json
 
 #----------------------------------------------------------------------------------------------------------------------*
 
+def printUTF8 (s) :
+  print s.encode ('utf-8')
+
+#----------------------------------------------------------------------------------------------------------------------*
+
 def dictionaryFromJsonFile (file) :
   result = {}
   if not os.path.exists (os.path.abspath (file)):
-    print "Error: the '" + file + "' file does not exist"
+    printUTF8 (u"Error: the '" + file + u"' file does not exist")
     sys.exit (1)
   try:
     f = open (file, "r")
     result = json.loads (f.read ())
     f.close ()
   except:
-    print "Syntax error in '" + file + "' JSON file"
+    printUTF8 (u"Syntax error in '" + file + u"' JSON file")
     sys.exit (1)
   return result
 
@@ -27,11 +32,11 @@ def dictionaryFromJsonFile (file) :
 
 ok = True
 providedStacksJSONFile = sys.argv [1]
-# print "providedStacksJSONFile '" + providedStacksJSONFile + "'"
+# print u"providedStacksJSONFile '" + providedStacksJSONFile + u"'"
 stackAnalysisJSONFile = sys.argv [2]
-# print "stackAnalysisJSONFile '" + stackAnalysisJSONFile + "'"
+# print u"stackAnalysisJSONFile '" + stackAnalysisJSONFile + u"'"
 resultFile = sys.argv [3]
-# print "resultFile '" + resultFile + "'"
+# print u"resultFile '" + resultFile + u"'"
 resultContents = ""
 #--- Read JSON file
 requirementsDictionary = dictionaryFromJsonFile (providedStacksJSONFile)
@@ -43,88 +48,89 @@ systemStackSize = requirementsDictionary ["system-stack-size"]
 serviceStackRequirement = requirementsDictionary ["service-stack-needs"]
 sectionStackRequirement = requirementsDictionary ["section-stack-needs"]
 #--- Check task stacks
-resultContents += "*----------------------------------------------------------------*\n"
-resultContents += "*   CHECK TASK STACKS                                            *\n"
-resultContents += "*----------------------------------------------------------------*\n\n"
-resultContents += "  Interrupt stacked register size: " + str (savedRegisterInUserStackByteCount) + " bytes\n\n"
+resultContents += u"*----------------------------------------------------------------*\n"
+resultContents += u"*   CHECK TASK STACKS                                            *\n"
+resultContents += u"*----------------------------------------------------------------*\n\n"
+resultContents += u"  Interrupt stacked register size: " + str (savedRegisterInUserStackByteCount) + u" bytes\n\n"
 taskDictionary = requirementsDictionary ["tasks"]
 for taskName in taskDictionary :
-  availableStackSize = taskDictionary [taskName]
-  taskFunctionName = "task.main." + taskName
+  unicodeTaskName = unicode (taskName)
+  availableStackSize = taskDictionary [unicodeTaskName]
+  taskFunctionName = u"task.main." + unicodeTaskName
   if solvedFunctionDictionary.has_key (taskFunctionName) :
     stackRequirement = solvedFunctionDictionary [taskFunctionName] + savedRegisterInUserStackByteCount
-    resultContents += "  task '" + taskName + "', provided stack: "
-    resultContents += str (availableStackSize) + " bytes, required: " + str (stackRequirement) + "\n"
+    resultContents += u"  task '" + taskName + u"', provided stack: "
+    resultContents += str (availableStackSize) + u" bytes, required: " + str (stackRequirement) + u"\n"
     if stackRequirement > availableStackSize:
       ok = False
-      print "Error: insufficient stack size for '" + taskName + "' task"
-      resultContents += "Error: insufficient stack size for '" + taskName + "' task\n"
+      printUTF8 (u"Error: insufficient stack size for '" + unicodeTaskName + u"' task")
+      resultContents += u"Error: insufficient stack size for '" + unicodeTaskName + u"' task\n"
   else:
-    print "Error: " + taskName + ": unsolved '" + taskFunctionName + "', cannot compute"
-    resultContents += "Error: " + taskName + ": unsolved '" + taskFunctionName + "', cannot compute\n"
+    printUTF8 (u"Error: " + unicodeTaskName + u": unsolved '" + taskFunctionName + u"', cannot compute")
+    resultContents += u"Error: " + unicodeTaskName + u": unsolved '" + taskFunctionName + u"', cannot compute\n"
     ok = False
-resultContents += "\n"
+resultContents += u"\n"
 #--- Check services
-resultContents += "*----------------------------------------------------------------*\n"
-resultContents += "*   CHECK SERVICE STACK                                          *\n"
-resultContents += "*----------------------------------------------------------------*\n\n"
-resultContents += "  System stack: " + str (systemStackSize) + " bytes\n"
-resultContents += "  Service handler stack needs: " + str (serviceStackRequirement) + " bytes\n\n"
+resultContents += u"*----------------------------------------------------------------*\n"
+resultContents += u"*   CHECK SERVICE STACK                                          *\n"
+resultContents += u"*----------------------------------------------------------------*\n\n"
+resultContents += u"  System stack: " + str (systemStackSize) + u" bytes\n"
+resultContents += u"  Service handler stack needs: " + str (serviceStackRequirement) + u" bytes\n\n"
 for serviceName in requirementsDictionary ["services"]:
   if solvedFunctionDictionary.has_key (serviceName) :
     stackRequirement = solvedFunctionDictionary [serviceName] + serviceStackRequirement
-    resultContents += "  Service '" + serviceName + "', required stack: " + str (stackRequirement) + "\n"
+    resultContents += u"  Service '" + serviceName + u"', required stack: " + str (stackRequirement) + u"\n"
     if stackRequirement > systemStackSize:
       ok = False
-      print "Error: insufficient stack size for service '" + serviceName + "' task"
-      resultContents += "Error: insufficient stack size for service '" + serviceName + "' task\n"
+      printUTF8 (u"Error: insufficient stack size for service '" + serviceName + u"' task")
+      resultContents += u"Error: insufficient stack size for service '" + serviceName + u"' task\n"
   else:
-    print "Error: service " + serviceName + ": unsolved"
-    resultContents += "Error: service " + serviceName + ": unsolved\n"
+    printUTF8 (u"Error: service u" + serviceName + u": unsolved")
+    resultContents += u"Error: service " + serviceName + u": unsolved\n"
     ok = False
-resultContents += "\n"
+resultContents += u"\n"
 #--- Check sections
-resultContents += "*----------------------------------------------------------------*\n"
-resultContents += "*   CHECK SECTION STACK                                          *\n"
-resultContents += "*----------------------------------------------------------------*\n\n"
-resultContents += "  System stack: " + str (systemStackSize) + " bytes\n"
-resultContents += "  Section handler stack needs: " + str (sectionStackRequirement) + " bytes\n\n"
+resultContents += u"*----------------------------------------------------------------*\n"
+resultContents += u"*   CHECK SECTION STACK                                          *\n"
+resultContents += u"*----------------------------------------------------------------*\n\n"
+resultContents += u"  System stack: " + str (systemStackSize) + u" bytes\n"
+resultContents += u"  Section handler stack needs: " + str (sectionStackRequirement) + u" bytes\n\n"
 for sectionName in requirementsDictionary ["sections"]:
   if solvedFunctionDictionary.has_key (sectionName) :
     stackRequirement = solvedFunctionDictionary [sectionName] + sectionStackRequirement
-    resultContents += "  Section '" + sectionName + "', required stack: " + str (stackRequirement) + "\n"
+    resultContents += u"  Section '" + sectionName + u"', required stack: " + str (stackRequirement) + u"\n"
     if stackRequirement > systemStackSize:
       ok = False
-      print "Error: insufficient stack size for section '" + sectionName + "' task"
-      resultContents += "Error: insufficient stack size for section '" + sectionName + "' task\n"
+      printUTF8 (u"Error: insufficient stack size for section '" + sectionName + u"' task")
+      resultContents += u"Error: insufficient stack size for section '" + sectionName + u"' task\n"
   else:
-    print "Error: section " + sectionName + ": unsolved"
-    resultContents += "Error: section " + sectionName + ": unsolved\n"
+    printUTF8 (u"Error: section " + sectionName + u": unsolved")
+    resultContents += u"Error: section " + sectionName + u": unsolved\n"
     ok = False
-resultContents += "\n"
+resultContents += u"\n"
 #--- Check sections
-resultContents += "*----------------------------------------------------------------*\n"
-resultContents += "*   CHECK INTERRUPT SERVICE ROUTINE STACKS                       *\n"
-resultContents += "*----------------------------------------------------------------*\n\n"
-resultContents += "  System stack: " + str (systemStackSize) + " bytes\n"
-#resultContents += "  Section handler stack needs: " + str (sectionStackRequirement) + " bytes\n\n"
+resultContents += u"*----------------------------------------------------------------*\n"
+resultContents += u"*   CHECK INTERRUPT SERVICE ROUTINE STACKS                       *\n"
+resultContents += u"*----------------------------------------------------------------*\n\n"
+resultContents += u"  System stack: " + str (systemStackSize) + u" bytes\n"
+#resultContents += u"  Section handler stack needs: " + str (sectionStackRequirement) + u" bytes\n\n"
 for isr in requirementsDictionary ["isr"]:
   if solvedFunctionDictionary.has_key (isr) :
     stackRequirement = solvedFunctionDictionary [isr]
-    resultContents += "  ISR '" + isr + "', required stack: " + str (stackRequirement) + "\n"
+    resultContents += u"  ISR '" + isr + u"', required stack: " + str (stackRequirement) + u"\n"
     if stackRequirement > systemStackSize:
       ok = False
-      print "Error: insufficient stack size for isr '" + isr + "' task"
-      resultContents += "Error: insufficient stack size for isr '" + isr + "' task\n"
+      printUTF8 (u"Error: insufficient stack size for isr '" + isr + u"' task")
+      resultContents += u"Error: insufficient stack size for isr '" + isr + u"' task\n"
   else:
-    print "Error: isr " + isr + ": unsolved"
-    resultContents += "Error: isr " + isr + ": unsolved\n"
+    printUTF8 (u"Error: isr " + isr + u": unsolved")
+    resultContents += u"Error: isr " + isr + u": unsolved\n"
     ok = False
-resultContents += "\n"
+resultContents += u"\n"
 #--- Write result file
-resultContents += "*----------------------------------------------------------------*\n"
+resultContents += u"*----------------------------------------------------------------*\n"
 f = open (resultFile, 'w')
-f.write (resultContents)
+f.write (resultContents.encode ('utf-8'))
 f.close ()
 #--- return
 if not ok :

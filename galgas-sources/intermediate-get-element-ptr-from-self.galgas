@@ -42,14 +42,14 @@ override method @getElementPtrFromSelfIR llvmInstructionCode
 {
   let llvmType = [mSelfType llvmTypeName]
   ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + "* %self, i32 0"
+  ioLLVMcode += llvmType + ", " + llvmType + " * %self, i32 0"
   for (idx *) in mElementList do
     switch idx
     case absolute (index) : ioLLVMcode += ", i32 " + index
     case indirect (index) : ioLLVMcode += ", " + [index.mType llvmTypeName] + " " + [index.mValue llvmName]
     end
   end
-  ioLLVMcode += " ; azerty"
+  ioLLVMcode += " ;"
   for (* fieldName) in mElementList do
     ioLLVMcode += " " + fieldName
   end

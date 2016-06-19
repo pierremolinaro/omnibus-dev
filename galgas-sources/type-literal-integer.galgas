@@ -60,7 +60,7 @@ override method @literalIntegerDeclaration enterInContext
 {
   let integerTypeName = [staticIntegerTypeName () nowhere]
  #---
-  [!?ioContext.mTypeMap insertKey
+  [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
     !llvmTypeName:"<<literal integer>>"
     !kind:.staticInteger

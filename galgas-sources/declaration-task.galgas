@@ -182,9 +182,9 @@ method @taskList enterInContext
       ]
     end
   #--- Enter task variable map as structure type in type map
-    [!?ioContext.mTypeMap insertKey
+    [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName
-      !llvmTypeName:"%$" + task.mTaskName.string
+      !llvmTypeName:"%" + ["$" + task.mTaskName assemblerRepresentation]
       !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
       !classMethodMap:{}
       !instantiable:false
@@ -427,9 +427,9 @@ method @taskMapIR generateCode
 #--- Declare task variables
   ioLLVMcode += llvmTitleComment (!"Task variables")
   for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
-    ioLLVMcode += "@" + "task.var." + taskName
-    ioLLVMcode += " = internal global %$"
-    ioLLVMcode += taskTypeName + " "
+    ioLLVMcode += "@" + llvmNameForTaskGlobalVar (!taskName)
+    ioLLVMcode += " = internal global %"
+    ioLLVMcode += ["$" + taskTypeName assemblerRepresentation] + " "
     let initialString = [initValueList llvmName]
     if initialString == "" then
       ioLLVMcode += "zeroinitializer"
@@ -447,10 +447,11 @@ method @taskMapIR generateCode
 #--- Declare task stacks and main routine
   for task in orderedTaskList do
     ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
+    let assemblerTaskName = ["$" + task.mTaskName assemblerRepresentation]
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
     ioLLVMcode += "\n"
-    let effectiveParameter = "(%$" + task.mTaskName + "* @task.var." + task.mTaskName + ")"
-    let formalArgument = "(%$" + task.mTaskName + "* %self)"
+    let effectiveParameter = "(%" + assemblerTaskName + " * @" + llvmNameForTaskGlobalVar (!task.mTaskName) + ")"
+    let formalArgument = "(%" + assemblerTaskName + " * %self)"
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
     ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
@@ -464,16 +465,9 @@ method @taskMapIR generateCode
     ioLLVMcode += "\n"
     ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " ()" + llvmAttributeFunction () + "noreturn {\n"
     ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
-#    ioLLVMcode += "  br label %loop\n"
-#    ioLLVMcode += "loop:\n"
-#    ioLLVMcode += "  call void @" + llvmNameForFunction (!"$" + task.mTaskName + ".loop") + " " + effectiveParameter + "\n"
-#    ioLLVMcode += "  br label %loop\n"
     ioLLVMcode += "  call void @" + llvmNameForFunction (!"$" + task.mTaskName + "." + llvmNameForTaskLoopFunction ()) + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void @" + selfTerminateCallName + " ()\n"
     ioLLVMcode += "  unreachable\n"
-#    ioLLVMcode += "  br label %loop\n"
-#    ioLLVMcode += "loop:\n"
-#    ioLLVMcode += "  br label %loop\n"
     ioLLVMcode += "}\n\n"
   end
 #--- Start tasks

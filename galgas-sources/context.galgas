@@ -166,7 +166,7 @@ sharedmap @unifiedTypeMap %selectors {
   @bool comparable
   @unifiedTypeMap-proxy enumerationType # .null if type is not enumerable
 
-  insert insertKey error message "the '%K' type is already declared in %L"
+  insert insertType error message "the '%K' type is already declared in %L"
   search searchKey error message "there is no '%K' type"
 }
 

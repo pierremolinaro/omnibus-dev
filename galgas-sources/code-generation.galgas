@@ -300,12 +300,12 @@ private proc generateCodeFiles
     llvmCode += "  %" + llvmNameForLocalVariable (!"LINE") + " = alloca "
     llvmCode += generationContext.mPanicLineLLVMType + "\n"
     llvmCode += "  store " + generationContext.mPanicLineLLVMType + " %in.LINE, "
-    llvmCode += generationContext.mPanicLineLLVMType + "* %" + llvmNameForLocalVariable (!"LINE") + "\n"
+    llvmCode += generationContext.mPanicLineLLVMType + " * %" + llvmNameForLocalVariable (!"LINE") + "\n"
   #--- Second argument : code
     llvmCode += "  %" + llvmNameForLocalVariable (!"CODE")
     llvmCode += " = alloca " + generationContext.mPanicCodeLLVMType + "\n"
     llvmCode += "  store " + generationContext.mPanicCodeLLVMType + " %in.CODE, "
-    llvmCode += generationContext.mPanicCodeLLVMType + "* %" + llvmNameForLocalVariable (!"CODE") + "\n"
+    llvmCode += generationContext.mPanicCodeLLVMType + " * %" + llvmNameForLocalVariable (!"CODE") + "\n"
   #--- Third argument : file    
     llvmCode += "  %" + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
     llvmCode += "  store i8* %in.FILE, i8** %" + llvmNameForLocalVariable (!"FILE") + "\n"
@@ -486,7 +486,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     case enumeration (*) :
     case integer (* * * *) :
     case structure (* propertyList) :
-      ioLLVMcode += "%$" + lkey + " = type {"
+      ioLLVMcode += llvmTypeName + " = type {"
       for () in propertyList
         do ioLLVMcode += [mType llvmTypeName]
         between ioLLVMcode += ", "
@@ -496,7 +496,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     case staticInteger : 
     case opaque (*) :
     case arrayType (elementType arraySize) :
-      ioLLVMcode += "%$" + lkey + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
+      ioLLVMcode += llvmTypeName + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
     end
   end
   ioLLVMcode += "\n"

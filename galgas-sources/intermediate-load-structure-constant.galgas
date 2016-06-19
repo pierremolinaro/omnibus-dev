@@ -22,7 +22,7 @@ override method @loadStructureConstantIR llvmInstructionCode
 {
   let llvmType = [mTargetValue.mType llvmTypeName]
   ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load "
-  ioLLVMcode += llvmType + ", " + llvmType + "* @" + mTypeName + ".init\n"
+  ioLLVMcode += llvmType + ", " + llvmType + " * @" + mTypeName + ".init\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

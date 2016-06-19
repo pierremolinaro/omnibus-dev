@@ -326,8 +326,7 @@ void makeTaskReady (TaskList * ioWaitingList, bool * outFound) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void makeTasksReadyFrom (const unsigned inCurrentDate)
-asm ("!FUNC!.makeTasksReadyFrom") ;
+void makeTasksReadyFrom (const unsigned inCurrentDate) asm ("!FUNC!.makeTasksReadyFrom") ;
 
 void makeTasksReadyFrom (const unsigned inCurrentDate) {
   unsigned w = gDeadlineWaitingTaskList ;
@@ -412,7 +411,7 @@ void handleGuardedWaitUntil (const unsigned inDeadline) {
 
 bool waitForGuardChange (void) asm ("service.call.waitForGuardChange") ;
 
-bool kernel_waitForGuardChange (void) asm ("service.implementation.waitForGuardChange") ;
+bool kernel_waitForGuardChange (void) asm ("!SERVICEIMPLEMENTATION!waitForGuardChange") ;
 
 bool kernel_waitForGuardChange (void) {
   bool result = gRunningTaskControlBlock->mGuardState == GUARD_DID_CHANGE ;

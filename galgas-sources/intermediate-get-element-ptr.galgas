@@ -27,7 +27,7 @@ override method @getElementPtrIR llvmInstructionCode
 {
   let llvmType = [[mSource type] llvmTypeName]
   ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + "* " + [mSource llvmName] + ", i32 0"
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0"
   for (idx *) in mElementList do
     switch idx
     case absolute (index) : ioLLVMcode += ", i32 " + index

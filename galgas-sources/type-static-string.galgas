@@ -61,7 +61,7 @@ override method @literalStringDeclaration enterInContext
 {
   let uint8Type = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !["uint8" nowhere]}
 #--- Enter in type map
-  [!?ioContext.mTypeMap insertKey
+  [!?ioContext.mTypeMap insertType
     !lkey:mLiteralStringTypeName
     !llvmTypeName:"i8*"
     !kind:.literalString

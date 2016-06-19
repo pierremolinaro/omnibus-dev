@@ -629,17 +629,17 @@ GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_emptyMap (LOCATION_ARGS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_unifiedTypeMap::setter_insertKey (GALGAS_lstring inKey,
-                                              GALGAS_string inArgument0,
-                                              GALGAS_typeKind inArgument1,
-                                              GALGAS_classMethodMap inArgument2,
-                                              GALGAS_bool inArgument3,
-                                              GALGAS_bool inArgument4,
-                                              GALGAS_bool inArgument5,
-                                              GALGAS_bool inArgument6,
-                                              GALGAS_unifiedTypeMap_2D_proxy inArgument7,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
+void GALGAS_unifiedTypeMap::setter_insertType (GALGAS_lstring inKey,
+                                               GALGAS_string inArgument0,
+                                               GALGAS_typeKind inArgument1,
+                                               GALGAS_classMethodMap inArgument2,
+                                               GALGAS_bool inArgument3,
+                                               GALGAS_bool inArgument4,
+                                               GALGAS_bool inArgument5,
+                                               GALGAS_bool inArgument6,
+                                               GALGAS_unifiedTypeMap_2D_proxy inArgument7,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
   cMapElement_unifiedTypeMap * p = NULL ;
   macroMyNew (p, cMapElement_unifiedTypeMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7 COMMA_HERE)) ;
   capCollectionElement attributes ;

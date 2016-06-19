@@ -22,7 +22,7 @@ override method @loadLocalVariableIR llvmInstructionCode
 {
   let llvmType = [mTargetValue.mType llvmTypeName]
   ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load "
-  ioLLVMcode += llvmType + ", " + llvmType + "* %" + llvmNameForLocalVariable (!mVariableName) + "\n"
+  ioLLVMcode += llvmType + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mVariableName) + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

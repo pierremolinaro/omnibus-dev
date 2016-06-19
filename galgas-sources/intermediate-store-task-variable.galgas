@@ -26,7 +26,7 @@ override method @storeTaskVariableIR llvmInstructionCode
 {
   let llvmType = [mTargetVarType llvmTypeName]
   ioLLVMcode += "  store "
-  ioLLVMcode += llvmType + " " + [mSourceValue.mValue llvmName] + ", " + llvmType + "* @"
+  ioLLVMcode += llvmType + " " + [mSourceValue.mValue llvmName] + ", " + llvmType + " * @"
   ioLLVMcode += llvmNameForTaskVariable (!mTaskName !mVarName) + "\n"
 }
 

@@ -138,9 +138,9 @@ override method @typeArrayDeclaration enterInContext
     @classMethodMap classMethodMap = {}
     [!?classMethodMap insertKey !["size" nowhere] !sizeExpressionIR]
   #--- Enter in type map
-    [!?ioContext.mTypeMap insertKey
+    [!?ioContext.mTypeMap insertType
       !lkey:mArrayTypeName
-      !llvmTypeName:"%$" + mArrayTypeName
+      !llvmTypeName:"%" + ["$" + mArrayTypeName assemblerRepresentation]
       !kind:.arrayType {!elementType:elementType !size:arraySize}
       !classMethodMap:classMethodMap
       !instantiable:true

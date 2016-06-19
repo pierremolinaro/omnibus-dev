@@ -466,11 +466,11 @@ override method @syncInstructionIR llvmInstructionCode
       for () in effectiveParameterListIR do
         switch mEffectiveParameterPassingMode
         case input:
-          ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+          ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
         case output:
           ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
         case outputInput:
-          ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+          ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
         end
       between
         ioLLVMcode += ", "
@@ -501,11 +501,11 @@ override method @syncInstructionIR llvmInstructionCode
       for () in effectiveParameterList do
         switch mEffectiveParameterPassingMode
         case input:
-          ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+          ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
         case output:
           ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
         case outputInput:
-          ioLLVMcode += [mParameter.mType llvmTypeName] + "* " + [mParameter.mValue llvmName]
+          ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
         end
       between
         ioLLVMcode += ", "

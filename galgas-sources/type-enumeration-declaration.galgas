@@ -115,7 +115,7 @@ override method @enumerationDeclaration enterInContext
     [!?enumConstantMap insertKey !cst !idx]
     [!?classMethodMap insertKey !cst !.new{!selfType !.literalInteger {!value:[idx bigint]}}]
   end
-  [!?ioContext.mTypeMap insertKey
+  [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName
     !llvmTypeName:"i" + [[enumConstantMap count] - 1 significantBitCount]
     !kind:.enumeration {!constantMap:enumConstantMap}
