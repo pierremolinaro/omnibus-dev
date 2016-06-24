@@ -1364,7 +1364,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "//    self.autoriserEcriture.V ()\n"
   "//  }\n"
   "\n"
-  "  public guard input (!data:outData $uint32) : self.autoriserLecture.P () {\n"
+  "  public guard entr\xC3""\xA9""e (!data:outData $uint32) : self.autoriserLecture.P () {\n"
   "    outData = self.donn\xC3""\xA9""e\n"
   "    self.signalerDonneeLue.V ()\n"
   "    self.autoriserEcriture.V ()\n"
@@ -1403,7 +1403,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T1 priority 1 stackSize 1024 {\n"
   "\n"
-  "  while rdvs.input (\?data:let x) {\n"
+  "  while rdvs.entr\xC3""\xA9""e (\?data:let x) {\n"
   "    leds.toggle (!LED_L1)\n"
   "    s.P ()\n"
   "      lcd.goto (!line:0 !column:0)\n"
@@ -1417,7 +1417,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T2 priority 2 stackSize 1024 {\n"
   "  var deadline $uint32 = 0\n"
   "\n"
-  "  while rdvs2.input (\?data:let x) {\n"
+  "  while rdvs2.entr\xC3""\xA9""e (\?data:let x) {\n"
   "    leds.toggle (!LED_L2)\n"
   "    s.P ()\n"
   "      lcd.goto (!line:1 !column:0)\n"
@@ -1437,7 +1437,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2312, // Text length
+  2315, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 

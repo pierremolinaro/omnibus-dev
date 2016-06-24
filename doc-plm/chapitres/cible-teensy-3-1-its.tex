@@ -122,6 +122,7 @@ Le module \plm=time= regroupe des fonctions dédiées à la gestion du temps. Po
 
 \subsubsection{Fonction \texttt{oneMillisecondBusyWait}}
 
+
 \begin{PLM}
   public func `panic `init oneMillisecondBusyWait ()
 \end{PLM}
@@ -138,7 +139,7 @@ Cette fonction réalise une attente active jusqu'à la prochaine milli-seconde. 
   public func `panic `init busyWaitingDuringMS (?inDelay $uint32)
 \end{PLM}
 
-Cette fonction réalise une attente active en appelant \plm=inDelay= fois la fonction \plm=oneMillisecondBusyWait=. Elle n'est appelable que dans les modes \plm=`panic= et \plm=`init=. 
+Cette fonction effectue une attente active en appelant \plm=inDelay= fois la fonction \plm=oneMillisecondBusyWait=. Elle n'est appelable que dans les modes \plm=`panic= et \plm=`init=. 
 
 
 
@@ -152,18 +153,6 @@ Cette fonction réalise une attente active en appelant \plm=inDelay= fois la fon
 
 Cette fonction réalise une attente passive jusqu'à la date absolue \plm=inDate=. 
 
-
-
-
-
-
-\subsubsection{Primitive \texttt{waitDuringMS}}
-
-\begin{PLM}
-  public primitive waitDuringMS (?delay: inDelay $uint32)
-\end{PLM}
-
-Cette fonction réalise une attente passive pendant \plm=inDelay= milli-secondes. 
 
 
 
@@ -212,11 +201,13 @@ Les constantes suivantes sont de type \plm=$uint32= et sont dédiées aux leds :
 \end{PLM}
 
 Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire :
+
 \begin{PLM}[1]
   leds.off (!LED_L0)
 \end{PLM}
 
  Pour éteindre plusieurs leds, utiliser l'opérateur \plm=|= :
+ 
 \begin{PLM}[1]
   leds.off (!LED_L0 | LED_L4)
 \end{PLM}
@@ -230,11 +221,13 @@ Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire :
 \end{PLM}
 
 Cette routine allume un ensemble de leds. Pour allumer une led, écrire :
+
 \begin{PLM}[1]
   leds.on (!LED_L0)
 \end{PLM}
 
  Pour allumer plusieurs leds, utiliser l'opérateur \plm=|= :
+ 
 \begin{PLM}[1]
   leds.on (!LED_L0 | LED_L4)
 \end{PLM}
@@ -247,12 +240,16 @@ Cette routine allume un ensemble de leds. Pour allumer une led, écrire :
   public func `user `panic `service `kernel toggle (?inLeds $uint32) 
 \end{PLM}
 
-Cette routine complémente un ensemble de leds. Pour complémenter une led, écrire :
+Cette routine complémente un ensemble de leds.
+
+Pour complémenter une led, écrire :
+
 \begin{PLM}[1]
   leds.toggle (!LED_L0)
 \end{PLM}
 
- Pour complémenter plusieurs leds, utiliser l'opérateur \plm=|= :
+Pour complémenter plusieurs leds, utiliser l'opérateur \plm=|= :
+
 \begin{PLM}[1]
   leds.toggle (!LED_L0 | LED_L4)
 \end{PLM}
@@ -280,8 +277,8 @@ Cette fonction efface l'afficheur LCD, et place le curseur au début de la premi
 \subsubsection{Fonction \texttt{goto}}
 
 \begin{PLM}
-  public func `user goto (?line:inLine $uint2
-                          ?column:inColumn $uint8)
+public func `user goto (?line:inLine $uint2
+                        ?column:inColumn $uint8)
 \end{PLM}
 
 Cette fonction place le curseur à la colonne \plm=inColumn= de la ligne \plm=inLine=. L'afficheur possédant quatre lignes, l'argument \plm=inLine= est de type \plm=$uint2=.

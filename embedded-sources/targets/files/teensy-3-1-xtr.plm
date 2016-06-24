@@ -5,17 +5,17 @@
 type $taskList : ((32)) @instantiable
 
 //--- Block running task
-extern public func `kernel blockInList (?!list:ioWaitingList $taskList)
+extern public func `kernel blockInList (?!list:ioWaitingList $taskList) : "blockInList"
 
-extern public func `kernel blockOnDeadline (?deadline:inDeadline $uint32) 
+extern public func `kernel blockOnDeadline (?deadline:inDeadline $uint32) : "blockOnDeadline"
 
-extern public func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) 
+extern public func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) : "blockInListAndOnDeadline"
 
 //--- Make task Ready
 extern public func `kernel `service `guard
-makeTaskReady (?!list:ioWaitingList $taskList !found: outFound $bool)
+makeTaskReady (?!list:ioWaitingList $taskList !found: outFound $bool) : "makeTaskReady"
 
-extern public func `service makeTasksReadyFrom (?currentDate:inCurrentDate $uint32)
+extern public func `service makeTasksReadyFrom (?currentDate:inCurrentDate $uint32) : "makeTasksReadyFrom"
 
 //——————————————————————————————————————————————————————————————————————————————
 //   GUARD                                                                      
@@ -23,13 +23,13 @@ extern public func `service makeTasksReadyFrom (?currentDate:inCurrentDate $uint
 
 type $guardList : ((32)) @instantiable
 
-extern public func `guard handleGuardedCommand (?!guard:ioGuard $guardList)
+extern public func `guard handleGuardedCommand (?!guard:ioGuard $guardList) : "handleGuardedCommand"
 
-extern public func `guard handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32)
+extern public func `guard handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32) : "handleGuardedWaitUntil"
 
-extern public func `kernel `service guardDidChange (?!guard:ioGuard $guardList)
+extern public func `kernel `service guardDidChange (?!guard:ioGuard $guardList) : "guardDidChange"
 
-extern public func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
+extern public func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32) : "tickHandlerForGuardedWaitUntil"
 
 //——————————————————————————————————————————————————————————————————————————————
 //   INIT                                                                       

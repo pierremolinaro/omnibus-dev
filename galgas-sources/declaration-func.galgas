@@ -32,6 +32,16 @@ list @procFormalArgumentList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+getter @procFormalArgumentPassingMode formalPassingModeString -> @string outResult {
+  switch self
+  case input : outResult = "?"
+  case output : outResult = "!"
+  case inputOutput : outResult = "?!"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@string inSelector -> @string outResult {
   switch self
   case input : outResult = "!"
@@ -156,6 +166,126 @@ syntax extension common_syntax {
 
   #·····················································································································
 
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for () in self do
+    for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
+      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      [!?ioGraph noteNode !typeName]
+    end
+    [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ENTER IN CONTEXT                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @functionDeclarationListAST enterInContext 
+  ?selfTypeName:let @string inSelfTypeName
+  ?!context:@semanticContext ioContext
+{
+  for procedure in self do
+  #--- Signature
+    var mangledArguments = "("
+    @procedureSignature signature = {}
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mFunctionFormalArgumentList do
+      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+      signature += !formalArgumentPassingMode !selector.string !typeProxy
+      mangledArguments += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    end
+    mangledArguments += ")"
+  #--- Return type
+    let returnType = if procedure.mFunctionReturnTypeName.string == "" then
+      @unifiedTypeMap-proxy.null
+    else
+      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mFunctionReturnTypeName}
+    end
+  #--- Mode map
+    @modeMap procedureModeMap = {}
+    for () in procedure.mFunctionModeList do
+      [!?procedureModeMap insertKey !mValue] ;
+    end
+  #--- Attribute
+    var weakProcedure = false
+    var canMutateProperties = false
+    var canAccessProperties = false
+    for (attribute) in procedure.mFunctionAttributeList while not weakProcedure do
+      if attribute.string == weakAttribute () then
+        weakProcedure = true
+      end
+      if attribute.string == mutatingAttribute () then
+        canMutateProperties = true
+      end
+      if attribute.string == userAccessAttribute () then
+        canAccessProperties = true
+        if canAccessProperties && not [procedureModeMap hasKey !userModeName ()] then
+          error attribute : "useless @" + attribute + " attribute: function is never executed in `" + userModeName () + " mode"
+        end
+      end
+    end
+    if not [procedureModeMap hasKey !userModeName ()] then
+      canAccessProperties = true
+    end
+  #--- Enter in context
+    let lkey = @lstring.new {!inSelfTypeName + "." + procedure.mFunctionName !procedure.mFunctionName.location}
+    if [ioContext.mRoutineMapForContext hasKey !lkey.string] then
+      let weak = [ioContext.mRoutineMapForContext mWeakForKey !lkey.string]
+      if weakProcedure && not weak then
+        # redefined weak procedure is ignored
+      elsif weakProcedure && weak then
+        error procedure.mFunctionName : "this weak procedure overrides a weak procedure"
+      elsif (not weakProcedure) && weak then
+        [!?ioContext.mRoutineMapForContext removeKey !lkey ?10*] # Remove weak routine
+        [!?ioContext.mRoutineMapForContext insertKey # Insert routine
+          !lkey
+          !lkey.string
+          !procedure.mPublicFunction
+          !procedureModeMap
+          !signature
+          !.function
+          !weakProcedure
+          !returnType
+          !false # No appendFileAndLineArgumentForPanicLocation
+          !canMutateProperties
+          !canAccessProperties
+        ]
+      else # (not weakProcedure) && (not weak)
+        [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
+          !lkey
+          !lkey.string
+          !procedure.mPublicFunction
+          !procedureModeMap
+          !signature
+          !.function
+          !weakProcedure
+          !returnType
+          !false # No appendFileAndLineArgumentForPanicLocation
+          !canMutateProperties
+          !canAccessProperties
+        ]
+      end
+    else
+      [!?ioContext.mRoutineMapForContext insertKey
+        !lkey
+        !lkey.string
+        !procedure.mPublicFunction
+        !procedureModeMap
+        !signature
+        !.function
+        !weakProcedure
+        !returnType
+        !false # No appendFileAndLineArgumentForPanicLocation
+        !canMutateProperties
+        !canAccessProperties
+      ]
+    end
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

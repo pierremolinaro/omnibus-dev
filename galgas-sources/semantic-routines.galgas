@@ -164,9 +164,10 @@ proc routineSemanticAnalysis
     elsif inWeakFunction && weak then
       error routineMangledName : "this weak procedure overrides a weak procedure"
     elsif (not inWeakFunction) && weak then
-      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?10*] # Remove weak routine
+      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?11*] # Remove weak routine
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
         !routineMangledName
+        !routineMangledName.string
         !formalArguments
         !allocaList
         !instructionGenerationList
@@ -181,6 +182,7 @@ proc routineSemanticAnalysis
     else # (not weakProcedure) && (not weak)
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
         !routineMangledName
+        !routineMangledName.string
         !formalArguments
         !allocaList
         !instructionGenerationList
@@ -196,6 +198,7 @@ proc routineSemanticAnalysis
   else
     [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
       !routineMangledName
+      !routineMangledName.string
       !formalArguments
       !allocaList
       !instructionGenerationList

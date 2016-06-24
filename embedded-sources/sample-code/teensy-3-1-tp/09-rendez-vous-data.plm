@@ -22,7 +22,7 @@ struct $rendezVousDataé {
 //    self.autoriserEcriture.V ()
 //  }
 
-  public guard input (!data:outData $uint32) : self.autoriserLecture.P () {
+  public guard entrée (!data:outData $uint32) : self.autoriserLecture.P () {
     outData = self.donnée
     self.signalerDonneeLue.V ()
     self.autoriserEcriture.V ()
@@ -61,7 +61,7 @@ task T0 priority 0 stackSize 512 {
 
 task T1 priority 1 stackSize 1024 {
 
-  while rdvs.input (?data:let x) {
+  while rdvs.entrée (?data:let x) {
     leds.toggle (!LED_L1)
     s.P ()
       lcd.goto (!line:0 !column:0)
@@ -75,7 +75,7 @@ task T1 priority 1 stackSize 1024 {
 task T2 priority 2 stackSize 1024 {
   var deadline $uint32 = 0
 
-  while rdvs2.input (?data:let x) {
+  while rdvs2.entrée (?data:let x) {
     leds.toggle (!LED_L2)
     s.P ()
       lcd.goto (!line:1 !column:0)

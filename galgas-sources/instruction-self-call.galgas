@@ -77,6 +77,7 @@ override method @unifiedSelfCallInstructionAST analyze
   effectiveParameterListIR += !.outputInput ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
   [inContext.mRoutineMapForContext searchKey
     !routineMangledName
+    ?*
     ?let isPublic
     ?let modeMap
     ?let @procedureSignature formalSignature

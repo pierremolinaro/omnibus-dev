@@ -136,7 +136,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__28_,
    kToken__29_,
    kToken__3D__3D_,
-   kToken__21__3D_,
+   kToken__2260_,
    kToken__3C_,
    kToken__3C__3D_,
    kToken__3E_,
@@ -4449,6 +4449,7 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                   const class GALGAS_lstringlist & in_mProcedureModeList,
                                                   const class GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
                                                   const class GALGAS_lstring & in_mReturnTypeName,
+                                                  const class GALGAS_lstring & in_mLLVMName,
                                                   const class GALGAS_location & in_mEndOfProcLocation
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -4469,7 +4470,8 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                                                             const class GALGAS_lstringlist & inOperand1,
                                                                                             const class GALGAS_procFormalArgumentList & inOperand2,
                                                                                             const class GALGAS_lstring & inOperand3,
-                                                                                            const class GALGAS_location & inOperand4
+                                                                                            const class GALGAS_lstring & inOperand4,
+                                                                                            const class GALGAS_location & inOperand5
                                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -4482,7 +4484,8 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                       const class GALGAS_lstringlist & inOperand1,
                                                       const class GALGAS_procFormalArgumentList & inOperand2,
                                                       const class GALGAS_lstring & inOperand3,
-                                                      const class GALGAS_location & inOperand4
+                                                      const class GALGAS_lstring & inOperand4,
+                                                      const class GALGAS_location & inOperand5
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_externProcedureDeclarationListAST add_operation (const GALGAS_externProcedureDeclarationListAST & inOperand,
@@ -4495,8 +4498,9 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                        class GALGAS_lstringlist constinArgument1,
                                                        class GALGAS_procFormalArgumentList constinArgument2,
                                                        class GALGAS_lstring constinArgument3,
-                                                       class GALGAS_location constinArgument4,
-                                                       class GALGAS_uint constinArgument5,
+                                                       class GALGAS_lstring constinArgument4,
+                                                       class GALGAS_location constinArgument5,
+                                                       class GALGAS_uint constinArgument6,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -4504,7 +4508,8 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                   class GALGAS_lstringlist & outArgument1,
                                                   class GALGAS_procFormalArgumentList & outArgument2,
                                                   class GALGAS_lstring & outArgument3,
-                                                  class GALGAS_location & outArgument4,
+                                                  class GALGAS_lstring & outArgument4,
+                                                  class GALGAS_location & outArgument5,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -4512,7 +4517,8 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                  class GALGAS_lstringlist & outArgument1,
                                                  class GALGAS_procFormalArgumentList & outArgument2,
                                                  class GALGAS_lstring & outArgument3,
-                                                 class GALGAS_location & outArgument4,
+                                                 class GALGAS_lstring & outArgument4,
+                                                 class GALGAS_location & outArgument5,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -4520,8 +4526,9 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                        class GALGAS_lstringlist & outArgument1,
                                                        class GALGAS_procFormalArgumentList & outArgument2,
                                                        class GALGAS_lstring & outArgument3,
-                                                       class GALGAS_location & outArgument4,
-                                                       class GALGAS_uint constinArgument5,
+                                                       class GALGAS_lstring & outArgument4,
+                                                       class GALGAS_location & outArgument5,
+                                                       class GALGAS_uint constinArgument6,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -4531,7 +4538,8 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                class GALGAS_lstringlist & outArgument1,
                                                class GALGAS_procFormalArgumentList & outArgument2,
                                                class GALGAS_lstring & outArgument3,
-                                               class GALGAS_location & outArgument4,
+                                               class GALGAS_lstring & outArgument4,
+                                               class GALGAS_location & outArgument5,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
@@ -4539,7 +4547,8 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                               class GALGAS_lstringlist & outArgument1,
                                               class GALGAS_procFormalArgumentList & outArgument2,
                                               class GALGAS_lstring & outArgument3,
-                                              class GALGAS_location & outArgument4,
+                                              class GALGAS_lstring & outArgument4,
+                                              class GALGAS_location & outArgument5,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -4553,6 +4562,10 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mExternProcedureNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLLVMNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mProcFormalArgumentListAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                        C_Compiler * inCompiler
@@ -4600,6 +4613,7 @@ class cEnumerator_externProcedureDeclarationListAST : public cGenericAbstractEnu
   public : class GALGAS_lstringlist current_mProcedureModeList (LOCATION_ARGS) const ;
   public : class GALGAS_procFormalArgumentList current_mProcFormalArgumentList (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mReturnTypeName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mLLVMName (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfProcLocation (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_externProcedureDeclarationListAST_2D_element current (LOCATION_ARGS) const ;
@@ -4621,6 +4635,7 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
   public : GALGAS_lstringlist mAttribute_mProcedureModeList ;
   public : GALGAS_procFormalArgumentList mAttribute_mProcFormalArgumentList ;
   public : GALGAS_lstring mAttribute_mReturnTypeName ;
+  public : GALGAS_lstring mAttribute_mLLVMName ;
   public : GALGAS_location mAttribute_mEndOfProcLocation ;
 
 
@@ -4642,6 +4657,7 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
                                                                 const GALGAS_lstringlist & in_mProcedureModeList,
                                                                 const GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
                                                                 const GALGAS_lstring & in_mReturnTypeName,
+                                                                const GALGAS_lstring & in_mLLVMName,
                                                                 const GALGAS_location & in_mEndOfProcLocation) ;
 
 //-- Start of generic part --*
@@ -4659,7 +4675,8 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
                                                                                              const class GALGAS_lstringlist & inOperand1,
                                                                                              const class GALGAS_procFormalArgumentList & inOperand2,
                                                                                              const class GALGAS_lstring & inOperand3,
-                                                                                             const class GALGAS_location & inOperand4
+                                                                                             const class GALGAS_lstring & inOperand4,
+                                                                                             const class GALGAS_location & inOperand5
                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4677,6 +4694,8 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfProcLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mExternProcedureName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLLVMName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mProcFormalArgumentList (LOCATION_ARGS) const ;
 

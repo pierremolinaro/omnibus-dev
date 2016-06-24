@@ -303,6 +303,7 @@ method @globalVarDeclarationList-element enterInContext
     end
     [ioContext.mRoutineMapForContext searchKey
       !routineMangledName
+      ?*
       ?let unused isPublic
       ?let procedureModeMap
       ?7*

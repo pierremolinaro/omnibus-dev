@@ -1698,9 +1698,9 @@ void C_Lexique::appendCharacterToLatexFile (const utf32 inUnicodeCharacter) {
   case '%' : mLatexOutputString << "\\%" ; break ;
   case '#' : mLatexOutputString << "\\#" ; break ;
   case '$' : mLatexOutputString << "\\$" ; break ;
-  case '`' : mLatexOutputString << "\\`{}" ; break ;
+//  case '`' : mLatexOutputString << "\\`{}" ; break ;
   case ' ' : mLatexOutputString << "\\hspace*{.6em}" ; break ;
-  case '\n' : mLatexOutputString << " \\\\\n" ; break ;
+  case '\n' : mLatexOutputString << "\\newline\n" ; break ;
   case '{' : mLatexOutputString << "\\{" ; break ;
   case '}' : mLatexOutputString << "\\}" ; break ;
   case '_' : mLatexOutputString << "\\_" ; break ;
