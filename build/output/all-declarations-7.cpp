@@ -728,10 +728,10 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var compteur $uint32 = 0\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    leds.on (!LED_L0)\n"
+  "    leds.write (!on:LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    leds.off (!LED_L0)\n"
+  "    leds.write (!off:LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.printUnsigned (!time.millis ())\n"
@@ -744,7 +744,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  532, // Text length
+  544, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -758,10 +758,10 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    leds.on (!LED_L0)\n"
+  "    leds.write (!on:LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    leds.off (!LED_L0)\n"
+  "    leds.write (!off:LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.printUnsigned (!time.millis ())\n"
@@ -774,10 +774,10 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    leds.on (!LED_L1)\n"
+  "    leds.write (!on:LED_L1)\n"
   "    self.compteur +%= 499\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    leds.off (!LED_L1)\n"
+  "    leds.write (!off:LED_L1)\n"
   "    self.compteur +%= 499\n"
   "  }\n"
   "}\n"
@@ -788,10 +788,10 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    leds.on (!LED_L2)\n"
+  "    leds.write (!on:LED_L2)\n"
   "    self.compteur +%= 498\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    leds.off (!LED_L2)\n"
+  "    leds.write (!off:LED_L2)\n"
   "    self.compteur +%= 498\n"
   "  }\n"
   "}\n"
@@ -802,10 +802,10 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    leds.on (!LED_L3)\n"
+  "    leds.write (!on:LED_L3)\n"
   "    self.compteur +%= 497\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    leds.off (!LED_L3)\n"
+  "    leds.write (!off:LED_L3)\n"
   "    self.compteur +%= 497\n"
   "  }\n"
   "}\n"
@@ -816,10 +816,10 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    leds.on (!LED_L4)\n"
+  "    leds.write (!on:LED_L4)\n"
   "    self.compteur +%= 496\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    leds.off (!LED_L4)\n"
+  "    leds.write (!off:LED_L4)\n"
   "    self.compteur +%= 496\n"
   "  }\n"
   "}\n"
@@ -830,7 +830,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  1923, // Text length
+  1983, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -938,12 +938,12 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s\xC3""\xA9""maphore.V ()\n"
   "    self.top += 250\n"
-  "    leds.on (!LED_L1)\n"
+  "    leds.write (!on:LED_L1)\n"
   "    let constanteAccentu\xC3""\xA9""e = self.top\n"
   "    time.waitUntilMS (!deadline:constanteAccentu\xC3""\xA9""e)\n"
   "    s\xC3""\xA9""maphore.V ()\n"
   "    self.top += 250\n"
-  "    leds.off (!LED_L1)\n"
+  "    leds.write (!off:LED_L1)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -952,9 +952,9 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T2 priority 2 stackSize 512 {\n"
   "\n"
   "  while s\xC3""\xA9""maphore.P () {\n"
-  "    leds.on (!LED_L2)\n"
+  "    leds.write (!on:LED_L2)\n"
   "    s\xC3""\xA9""maphore.P ()\n"
-  "    leds.off (!LED_L2)\n"
+  "    leds.write (!off:LED_L2)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -964,7 +964,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "04-semaphore.plm",
   "plm",
   true, // Text file
-  832, // Text length
+  856, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -1016,11 +1016,11 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s.V ()\n"
   "    self.top += 300\n"
-  "    leds.on (!LED_L0)\n"
+  "    leds.write (!on:LED_L0)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s.V ()\n"
   "    self.top += 700\n"
-  "    leds.off (!LED_L0)\n"
+  "    leds.write (!off:LED_L0)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1032,10 +1032,10 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  while time.waitUntilMS (!deadline:0) { // no wait...\n"
   "    let r = s.P_until (!deadline:self.top)\n"
   "    if r {\n"
-  "      leds.toggle (!LED_L1)\n"
+  "      leds.write (!toggle:LED_L1)\n"
   "    }else{\n"
   "      self.top += 400\n"
-  "      leds.toggle (!LED_L4)\n"
+  "      leds.write (!toggle:LED_L4)\n"
   "    }\n"
   "  }\n"
   "}\n"
@@ -1046,7 +1046,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "05-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  1536, // Text length
+  1560, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1106,11 +1106,11 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
-  "    leds.on (!LED_L0)\n"
+  "    leds.write (!on:LED_L0)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
-  "    leds.off (!LED_L0)\n"
+  "    leds.write (!off:LED_L0)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1122,11 +1122,11 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
-  "    leds.on (!LED_L4)\n"
+  "    leds.write (!on:LED_L4)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
-  "    leds.off (!LED_L4)\n"
+  "    leds.write (!off:LED_L4)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1155,7 +1155,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "06-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2110, // Text length
+  2134, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1186,11 +1186,11 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
-  "    leds.on (!LED_L0)\n"
+  "    leds.write (!on:LED_L0)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
-  "    leds.off (!LED_L0)\n"
+  "    leds.write (!off:LED_L0)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1202,11 +1202,11 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
-  "    leds.on (!LED_L4)\n"
+  "    leds.write (!on:LED_L4)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
-  "    leds.off (!LED_L4)\n"
+  "    leds.write (!off:LED_L4)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1235,7 +1235,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "07-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  1526, // Text length
+  1550, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1309,11 +1309,11 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    rdvs.output ()\n"
   "    self.top += 250\n"
-  "    leds.on (!LED_L0)\n"
+  "    leds.write (!on:LED_L0)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    rdvs.output ()\n"
   "    self.top += 250\n"
-  "    leds.off (!LED_L0)\n"
+  "    leds.write (!off:LED_L0)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1322,9 +1322,9 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T1 priority 1 stackSize 512 {\n"
   "\n"
   "  while rdvs.input () {\n"
-  "    leds.on (!LED_L1)\n"
+  "    leds.write (!on:LED_L1)\n"
   "    rdvs.input ()\n"
-  "    leds.off (!LED_L1)\n"
+  "    leds.write (!off:LED_L1)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1334,7 +1334,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "08-rendez-vous.plm",
   "plm",
   true, // Text file
-  2466, // Text length
+  2490, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1393,7 +1393,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    rdvs.output (!data:self.n)\n"
   "    rdvs2.output (!data:self.n)\n"
-  "    leds.toggle (!LED_L0)\n"
+  "    leds.write (!toggle:LED_L0)\n"
   "    self.top += 500\n"
   "    self.n += 1\n"
   "  }\n"
@@ -1404,7 +1404,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T1 priority 1 stackSize 1024 {\n"
   "\n"
   "  while rdvs.entr\xC3""\xA9""e (\?data:let x) {\n"
-  "    leds.toggle (!LED_L1)\n"
+  "    leds.write (!toggle:LED_L1)\n"
   "    s.P ()\n"
   "      lcd.goto (!line:0 !column:0)\n"
   "      lcd.printUnsigned (!x)\n"
@@ -1418,7 +1418,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var deadline $uint32 = 0\n"
   "\n"
   "  while rdvs2.entr\xC3""\xA9""e (\?data:let x) {\n"
-  "    leds.toggle (!LED_L2)\n"
+  "    leds.write (!toggle:LED_L2)\n"
   "    s.P ()\n"
   "      lcd.goto (!line:1 !column:0)\n"
   "      lcd.printUnsigned (!x)\n"
@@ -1437,7 +1437,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2315, // Text length
+  2333, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -1494,10 +1494,10 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-tp
   "  \n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline +%= 250\n"
-  "    leds.on (!LED_L1) // Allumer la led\n"
+  "    leds.write (!on:LED_L1) // Allumer la led\n"
   "    time.waitUntilMS (!deadline:self.deadline)\n"
   "    self.deadline +%= 250\n"
-  "    leds.off (!LED_L1)  // \xC3""\x89""teindre la led\n"
+  "    leds.write (!off:LED_L1)  // \xC3""\x89""teindre la led\n"
   "    lcd.goto (!line:1 !column:0)\n"
   "    lcd.printSpaces (!10)\n"
   "    lcd.goto (!line:1 !column:0)\n"
@@ -1513,7 +1513,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "10-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  1365, // Text length
+  1377, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
@@ -1535,7 +1535,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp
   "\n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline +%= 1000\n"
-  "    leds.toggle (!LED_L1)\n"
+  "    leds.write (!toggle:LED_L1)\n"
   "    self.array [self.index] = 0\n"
   "    self.index +%= 1\n"
   "    if self.index == SIZE {\n"
@@ -1567,7 +1567,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  900, // Text length
+  906, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 

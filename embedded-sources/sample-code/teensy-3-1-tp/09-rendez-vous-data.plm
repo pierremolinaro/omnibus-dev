@@ -51,7 +51,7 @@ task T0 priority 0 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     rdvs.output (!data:self.n)
     rdvs2.output (!data:self.n)
-    leds.toggle (!LED_L0)
+    leds.write (!toggle:LED_L0)
     self.top += 500
     self.n += 1
   }
@@ -62,7 +62,7 @@ task T0 priority 0 stackSize 512 {
 task T1 priority 1 stackSize 1024 {
 
   while rdvs.entrée (?data:let x) {
-    leds.toggle (!LED_L1)
+    leds.write (!toggle:LED_L1)
     s.P ()
       lcd.goto (!line:0 !column:0)
       lcd.printUnsigned (!x)
@@ -76,7 +76,7 @@ task T2 priority 2 stackSize 1024 {
   var deadline $uint32 = 0
 
   while rdvs2.entrée (?data:let x) {
-    leds.toggle (!LED_L2)
+    leds.write (!toggle:LED_L2)
     s.P ()
       lcd.goto (!line:1 !column:0)
       lcd.printUnsigned (!x)
@@ -85,7 +85,7 @@ task T2 priority 2 stackSize 1024 {
   
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline += 200
-    leds.toggle  (!LED_L4)
+    leds.write (!toggle:LED_L4)
   }
 }
 

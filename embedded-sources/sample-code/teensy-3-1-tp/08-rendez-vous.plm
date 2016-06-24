@@ -66,11 +66,11 @@ task T0 priority 0 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     rdvs.output ()
     self.top += 250
-    leds.on (!LED_L0)
+    leds.write (!on:LED_L0)
     time.waitUntilMS (!deadline:self.top)
     rdvs.output ()
     self.top += 250
-    leds.off (!LED_L0)
+    leds.write (!off:LED_L0)
   }
 }
 
@@ -79,9 +79,9 @@ task T0 priority 0 stackSize 512 {
 task T1 priority 1 stackSize 512 {
 
   while rdvs.input () {
-    leds.on (!LED_L1)
+    leds.write (!on:LED_L1)
     rdvs.input ()
-    leds.off (!LED_L1)
+    leds.write (!off:LED_L1)
   }
 }
 
