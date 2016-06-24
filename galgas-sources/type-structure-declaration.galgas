@@ -336,7 +336,7 @@ override method @structureDeclaration enterRoutinesInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  [mFunctionDeclarationListAST enterInContext
+  [mFunctionDeclarationListAST enterFunctionInContext
     !selfTypeName:"$" + mStructureName.string
     !?context:ioContext
   ]

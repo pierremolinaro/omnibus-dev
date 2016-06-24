@@ -86,7 +86,7 @@ override method @unifiedSelfCallInstructionAST analyze
   effectiveParameterListIR += !.outputInput ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
   [inContext.mRoutineMapForContext searchKey
     !routineMangledName
-    ?let routineLLVMName
+    ?let routineNameForGeneration
     ?let isPublic
     ?let modeMap
     ?let @procedureSignature formalSignature
@@ -107,18 +107,7 @@ override method @unifiedSelfCallInstructionAST analyze
     error routineMangledName : "this routine is not public"
   end
 #--- Enter in invocation graph
-  @lstring routineNameForInvocationGraph
-  switch routineKind
-  case function :
-    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !methodName)
-  case section :
-    routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !methodName)
-  case service :
-    routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !methodName)
-  case primitive :
-    routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !methodName)
-  end
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
 #--- Check modes
   let routineKindIR = checkMode (
     !requiredModes:inRequiredModeSet
@@ -151,7 +140,8 @@ override method @unifiedSelfCallInstructionAST analyze
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !"" # Receiver is self
-    !routineLLVMName
+    !routineMangledName
+    !routineNameForGeneration
     !routineKindIR
     !effectiveParameterListIR
     !appendFileAndLineArgumentForPanicLocation

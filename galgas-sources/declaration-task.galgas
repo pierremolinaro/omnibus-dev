@@ -195,7 +195,7 @@ method @taskList enterInContext
     ]
     ioContext.mGlobalTaskVariableList += !task.mTaskName.string !task.mTaskName.string !.llvmStructureConstant{!values:initialValueList}
   #--- Task procedures
-    [task.mTaskProcList enterInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
+    [task.mTaskProcList enterFunctionInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
 #    @taskProcedureMap taskProcedureMap = {}
 #    for procedure in task.mTaskProcList do
 #      [!?taskProcedureMap insertKey !procedure.mFunctionName]

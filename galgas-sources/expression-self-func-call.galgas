@@ -153,18 +153,18 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
     error functionName : "this function is not public"
   end  
 #--- Enter in invocation graph
-  @lstring routineNameForInvocationGraph
-  switch routineKind
-  case function :
-    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !functionName)
-  case section :
-    routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !functionName)
-  case service :
-    routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !functionName)
-  case primitive :
-    routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !functionName)
-  end
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#  @lstring routineNameForInvocationGraph
+#  switch routineKind
+#  case function :
+#    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !functionName)
+#  case section :
+#    routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !functionName)
+#  case service :
+#    routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !functionName)
+#  case primitive :
+#    routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !functionName)
+#  end
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForGeneration]
 #--- Check modes
   let routineKindIR = checkMode (
     !requiredModes:inRequiredModeSet
@@ -199,6 +199,7 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
 #--- Code generation
   ioInstructionGenerationList += !@functionCallIR.new {
     !outResult
+    !routineMangledName
     !routineNameForGeneration
     !routineKindIR
     !effectiveParameterListIR
