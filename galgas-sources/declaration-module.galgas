@@ -58,20 +58,64 @@ syntax extension common_syntax {
     end
     $}$
   #--- Declare init list
-    @2lstringlist requiredByList = {}
+    @lstringlist requiredByList = {}
     for function in functionDeclarationListAST do
       if function.mPublicFunction then
-        requiredByList += !moduleTypeName !function.mFunctionName
+        var routineMangledName = @lstring.new {
+          !"$" + moduleTypeName + "." + function.mFunctionName
+          !function.mFunctionName.location
+        }
+        routineMangledName.string += "("
+        for (passingMode selector * *) in function.mFunctionFormalArgumentList do
+          routineMangledName.string += [passingMode formalPassingModeString]
+          routineMangledName.string += selector.string
+          routineMangledName.string += ":"
+        end
+        routineMangledName.string += ")"
+        requiredByList += !routineMangledName
       end
     end
     for service in serviceListAST do
-      requiredByList += !moduleTypeName !service.mServiceName
+      var routineMangledName = @lstring.new {
+        !"$" + moduleTypeName + "." + service.mServiceName
+        !service.mServiceName.location
+      }
+      routineMangledName.string += "("
+      for (passingMode selector * *) in service.mServiceFormalArgumentList do
+        routineMangledName.string += [passingMode formalPassingModeString]
+        routineMangledName.string += selector.string
+        routineMangledName.string += ":"
+      end
+      routineMangledName.string += ")"
+      requiredByList += !routineMangledName
     end
     for guard in guardListAST do
-      requiredByList += !moduleTypeName !guard.mGuardName
+      var routineMangledName = @lstring.new {
+        !"$" + moduleTypeName + "." + guard.mGuardName
+        !guard.mGuardName.location
+      }
+      routineMangledName.string += "("
+      for (passingMode selector * *) in guard.mGuardFormalArgumentList do
+        routineMangledName.string += [passingMode formalPassingModeString]
+        routineMangledName.string += selector.string
+        routineMangledName.string += ":"
+      end
+      routineMangledName.string += ")"
+      requiredByList += !routineMangledName
     end
     for primitive in primitiveListAST do
-      requiredByList += !moduleTypeName !primitive.mPrimitiveName
+      var routineMangledName = @lstring.new {
+        !"$" + moduleTypeName + "." + primitive.mPrimitiveName
+        !primitive.mPrimitiveName.location
+      }
+      routineMangledName.string += "("
+      for (passingMode selector * *) in primitive.mPrimitiveFormalArgumentList do
+        routineMangledName.string += [passingMode formalPassingModeString]
+        routineMangledName.string += selector.string
+        routineMangledName.string += ":"
+      end
+      routineMangledName.string += ")"
+      requiredByList += !routineMangledName
     end
     for init in initList do
       ioAST.mInitList +=

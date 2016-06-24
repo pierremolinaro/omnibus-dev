@@ -311,14 +311,7 @@ method @globalVarDeclarationList-element enterInContext
     for () in procedureModeMap do
       executionModes += !lkey.string
     end
-    @lstring routineNameForInvocationGraph
-    switch procedure.mRoutineKind
-    case function : routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !procedure.mRoutineName)
-    case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !procedure.mRoutineName)
-    case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !procedure.mRoutineName)
-    case primitive : routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !procedure.mRoutineName)
-    end
-    [!?allowedRoutineMap insertKey !routineNameForInvocationGraph !procedure.mHasWriteAccess]
+    [!?allowedRoutineMap insertKey !routineMangledName !procedure.mHasWriteAccess]
   end
 #--- Check allowed guards are defined
   @allowedGuardMap allowedGuardMap = {}
@@ -338,8 +331,8 @@ method @globalVarDeclarationList-element enterInContext
       ?*
     ]
     executionModes += !serviceModeName ()
-    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !guard.mGuardName)
-    [!?allowedGuardMap insertKey !routineNameForInvocationGraph]
+#    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !guard.mGuardName)
+    [!?allowedGuardMap insertKey !guardMangledName]
   end
 #--- Check allowed isr are defined
   @allowedISRMap allowedISRMap = {}

@@ -7,7 +7,7 @@ list @externProcedureDeclarationListAST {
   @lstringlist mProcedureModeList
   @procFormalArgumentList mProcFormalArgumentList
   @lstring mReturnTypeName
-  @lstring mLLVMName
+  @lstring mRoutineNameForGeneration
   @location mEndOfProcLocation
 }
 
@@ -74,13 +74,14 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
 {
 #--- Signature
   @procedureSignature signature = {}
-  var mangledArguments = "("
+  var routineMangledName = @lstring.new {!"." + mExternProcedureName !mExternProcedureName.location}
+  routineMangledName.string += "("
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
     signature += !formalArgumentPassingMode !selector.string !typeProxy
-    mangledArguments += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
-  mangledArguments += ")"
+  routineMangledName.string += ")"
 #--- Mode map
   @modeMap procedureModeMap = {}
   for () in mProcedureModeList do
@@ -93,9 +94,10 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
   else
     @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mReturnTypeName}
   end
+  let routineNameForGeneration = @lstring.new {!"." + mRoutineNameForGeneration !mExternProcedureName.location}
   [!?ioContext.mRoutineMapForContext insertKey
-    !@lstring.new {!"." + mExternProcedureName + mangledArguments !mExternProcedureName.location}
-    !@lstring.new {!"." + mLLVMName !mExternProcedureName.location}
+    !routineMangledName
+    !routineNameForGeneration
     !true # isPublic
     !procedureModeMap
     !signature
@@ -133,6 +135,15 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+#--- Routine mangled name
+  var routineMangledName = @lstring.new {!"." + mExternProcedureName !mExternProcedureName.location}
+  routineMangledName.string += "("
+  for (passingMode selector * *) in mProcFormalArgumentList do
+    routineMangledName.string += [passingMode formalPassingModeString]
+     routineMangledName.string += selector.string
+     routineMangledName.string += ":"
+  end
+  routineMangledName.string += ")"
 #--- Check modes
   @stringset procedureModeSet = {}
   for mode in mProcedureModeList do
@@ -141,7 +152,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineNameForInvocation:procNameForInvocationGraph (!.null !mExternProcedureName).string
+    !routineNameForInvocation:routineMangledName.string
     !context:inContext
     !userMode:[procedureModeSet hasKey !userModeName ()]
     !registerAccess:.readWriteAccess
@@ -159,11 +170,10 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
 #--- End of variableMap
   drop variableMap
 #--- Enter subprogram invocation graph
-  let procNameForInvocationGraph = procNameForInvocationGraph (!.null !mExternProcedureName)
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !procNameForInvocationGraph.string] then
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !procNameForInvocationGraph
-      !mExternProcedureName
+      !routineMangledName
+      !routineMangledName
     ]
   end
 #--- Return type
@@ -172,9 +182,10 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
   else
     @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName}
   end
-#---
+#--- Routine name for generation
+  let routineNameForGeneration = @lstring.new {!"." + mRoutineNameForGeneration !mRoutineNameForGeneration.location}
   [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
-    !mExternProcedureName
+    !routineNameForGeneration
     !formalArguments
     !returnType
   ]  
@@ -201,7 +212,7 @@ method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
-  let procName = llvmNameForFunction (!"." + lkey.string)
+  let procName = llvmNameForFunction (!lkey.string)
   ioLLVMcode += llvmTitleComment (!"extern procedure " + lkey)
   ioLLVMcode += "declare"
   if mReturnType == .null then

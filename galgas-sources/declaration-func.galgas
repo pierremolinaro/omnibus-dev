@@ -186,20 +186,24 @@ method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePre
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @functionDeclarationListAST enterInContext 
+method @functionDeclarationListAST enterFunctionInContext 
   ?selfTypeName:let @string inSelfTypeName
   ?!context:@semanticContext ioContext
 {
   for procedure in self do
   #--- Signature
-    var mangledArguments = "("
+    var routineMangledName = @lstring.new {
+      !inSelfTypeName + "." + procedure.mFunctionName
+      !procedure.mFunctionName.location
+    }
+    routineMangledName.string += "("
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mFunctionFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
-      mangledArguments += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+      routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
-    mangledArguments += ")"
+    routineMangledName.string += ")"
   #--- Return type
     let returnType = if procedure.mFunctionReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
@@ -233,10 +237,6 @@ method @functionDeclarationListAST enterInContext
       canAccessProperties = true
     end
   #--- Enter in context
-    let routineMangledName = @lstring.new {
-      !inSelfTypeName + "." + procedure.mFunctionName + mangledArguments
-      !procedure.mFunctionName.location
-    }
     if [ioContext.mRoutineMapForContext hasKey !routineMangledName.string] then
       let weak = [ioContext.mRoutineMapForContext mWeakForKey !routineMangledName.string]
       if weakProcedure && not weak then

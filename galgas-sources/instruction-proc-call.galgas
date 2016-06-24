@@ -195,6 +195,7 @@ private proc analyzeStandaloneRoutineCall
     !?instructionListIR:ioInstructionGenerationList
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
     ?routineKind:let @routineKindIR routineKindIR
+    ?routineMangledName:let @lstring routineMangledName
     ?routineNameForGeneration:let @lstring routineNameForGeneration
     ?returnType:let @unifiedTypeMap-proxy returnedType
     ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
@@ -205,6 +206,7 @@ private proc analyzeStandaloneRoutineCall
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !"" # No receiver
+    !routineMangledName
     !routineNameForGeneration
     !routineKindIR
     !effectiveParameterListIR
@@ -321,18 +323,18 @@ override method @remoteRoutineCallInstructionAST analyze
       ]
     end
   #--- Enter in invocation graph
-    @lstring routineNameForInvocationGraph
-    switch routineKind
-    case function :
-      routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !routineName)
-    case section :
-      routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !routineName)
-    case service :
-      routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !routineName)
-    case primitive :
-      routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !routineName)
-    end
-    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#    @lstring routineNameForInvocationGraph
+#    switch routineKind
+#    case function :
+#      routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !routineName)
+#    case section :
+#      routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !routineName)
+#    case service :
+#      routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !routineName)
+#    case primitive :
+#      routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !routineName)
+#    end
+    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForGeneration]
   #--- Check modes
     let routineKindIR = checkMode (
       !requiredModes:inRequiredModeSet
@@ -366,6 +368,7 @@ override method @remoteRoutineCallInstructionAST analyze
     let baseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
     ioInstructionGenerationList += !@procCallInstructionIR.new {
       !baseGlobalVariableName
+      !routineMangledName
       !routineNameForGeneration
       !routineKindIR
       !effectiveParameterListIR
@@ -394,6 +397,7 @@ proc analyzeRoutineCall
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !routineKind:@routineKindIR outRoutineKindIR
+  !routineMangledName:@lstring outRoutineMangledName
   !routineNameForGeneration:@lstring outRoutineNameForGeneration
   !returnType:@unifiedTypeMap-proxy outReturnedType
   !appendFileAndLineArgumentForPanicLocation:@bool outAppendFileAndLineArgumentForPanicLocation
@@ -401,7 +405,6 @@ proc analyzeRoutineCall
 #---
   outEffectiveParameterListIR = {}
   @unifiedTypeMap-proxy receiverType
-  @lstring routineMangledName
   if inReceiverName.string != "" then
     [!?ioVariableMap searchForMethodCall
       !lkey:inReceiverName
@@ -410,22 +413,22 @@ proc analyzeRoutineCall
       ?variableKind:@objectInMemoryIR variableKind
       ?2*
     ]
-    routineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
+    outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
     outEffectiveParameterListIR += !.outputInput ![variableKind address] #--- add "load self" as first argument
   else
-    routineMangledName = .new {!"." + inRoutineName !inRoutineName.location}
+    outRoutineMangledName = .new {!"." + inRoutineName !inRoutineName.location}
     receiverType = .null
   end
 #--- Build LLVM mangled name
-  routineMangledName.string += "("
+  outRoutineMangledName.string += "("
   for (passingMode selector) in inEffectiveParameterList do
-    routineMangledName.string += [passingMode matchingFormalArgument]
-    routineMangledName.string += selector.string
-    routineMangledName.string += ":"
+    outRoutineMangledName.string += [passingMode matchingFormalArgument]
+    outRoutineMangledName.string += selector.string
+    outRoutineMangledName.string += ":"
   end
-  routineMangledName.string += ")"
+  outRoutineMangledName.string += ")"
   [inContext.mRoutineMapForContext searchKey
-    !routineMangledName
+    !outRoutineMangledName
     ?outRoutineNameForGeneration
     ?let isPublic
     ?let modeMap
@@ -440,7 +443,7 @@ proc analyzeRoutineCall
 #--- Check accessibility
   if not isPublic then
     if inReceiverName.string == "" then # Standalone function
-      let @string declarationFile = [[inContext.mRoutineMapForContext locationForKey !routineMangledName.string] file]
+      let @string declarationFile = [[inContext.mRoutineMapForContext locationForKey !outRoutineMangledName.string] file]
       let invocationFile = [inRoutineName.location file]
       if invocationFile != declarationFile then
         error inRoutineName : "this routine is not public"
@@ -450,18 +453,18 @@ proc analyzeRoutineCall
     end  
   end  
 #--- Enter in invocation graph
-  @lstring routineNameForInvocationGraph
-  switch routineKind
-  case function :
-    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !inRoutineName)
-  case section :
-    routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !inRoutineName)
-  case service :
-    routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !inRoutineName)
-  case primitive :
-    routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !inRoutineName)
-  end
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#  @lstring routineNameForInvocationGraph
+#  switch routineKind
+#  case function :
+#    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !inRoutineName)
+#  case section :
+#    routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !inRoutineName)
+#  case service :
+#    routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !inRoutineName)
+#  case primitive :
+#    routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !inRoutineName)
+#  end
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outRoutineMangledName]
 #--- Check modes
   outRoutineKindIR = checkMode (
     !requiredModes:inRequiredModeSet
@@ -706,7 +709,8 @@ enum @routineKindIR {
 
 class @procCallInstructionIR : @abstractInstructionIR {
   @string mGlobalVariableName # Receiver name, "" if receiver is not a global variable
-  @lstring mProcName
+  @lstring mRoutineMangledName
+  @lstring mRoutineNameForGeneration
   @routineKindIR mKind
   @procCallEffectiveParameterListIR mParameters
   @bool mAppendFileAndLineArgumentForPanicLocation
@@ -721,13 +725,13 @@ override method @procCallInstructionIR llvmInstructionCode
 {
   ioLLVMcode += "  call void @"
   switch mKind 
-  case function : ioLLVMcode += llvmNameForFunction (!mProcName.string)
-  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mProcName.string)
-  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mProcName.string)
-  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mProcName.string)
-  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mProcName.string)
-  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mProcName.string)
-  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mProcName.string)
+  case function : ioLLVMcode += llvmNameForFunction (!mRoutineNameForGeneration.string)
+  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mRoutineNameForGeneration.string)
+  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mRoutineNameForGeneration.string)
+  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mRoutineNameForGeneration.string)
+  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mRoutineNameForGeneration.string)
+  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mRoutineNameForGeneration.string)
+  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mRoutineNameForGeneration.string)
   end
   var first = true
   ioLLVMcode += " ("
@@ -747,7 +751,7 @@ override method @procCallInstructionIR llvmInstructionCode
     end
   end
   if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
-    let sourceFileName = [[[mProcName.location file] lastPathComponent] stringByDeletingPathExtension]
+    let sourceFileName = [[[mRoutineNameForGeneration.location file] lastPathComponent] stringByDeletingPathExtension]
     [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
       !sourceFileName
       ?let staticStringIndex
@@ -755,7 +759,7 @@ override method @procCallInstructionIR llvmInstructionCode
     if not first then
       ioLLVMcode += ", "
     end
-    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mProcName.location line]
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mRoutineNameForGeneration.location line]
     let sourceFileNameSize = [sourceFileName length] + 1
     ioLLVMcode += ", i8* getelementptr inbounds ([" + sourceFileNameSize + " x i8], [" + sourceFileNameSize + " x i8]* @str.array." + staticStringIndex + ", i32 0, i32 0)"
   end
@@ -768,7 +772,7 @@ override method @procCallInstructionIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioAccessibleEntities.mRoutineSet += !mProcName.string
+  ioAccessibleEntities.mRoutineSet += !mRoutineMangledName.string
   if mGlobalVariableName != "" then
     ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName
   end

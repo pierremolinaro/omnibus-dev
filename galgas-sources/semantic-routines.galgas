@@ -94,16 +94,27 @@ proc routineSemanticAnalysis
     [inContext.mModeMap searchKey !mode.mValue]
     procedureModeSet += !mode.mValue.string
   end
-#--- Variable map
-  @lstring routineNameForInvocationGraph
-  switch inRoutineKind
-  case function : routineNameForInvocationGraph = procNameForInvocationGraph (!inSelfType !inRoutineName)
-  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!inSelfType !inRoutineName)
-  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!inSelfType !inRoutineName)
-  case primitive : routineNameForInvocationGraph = primitiveNameForInvocationGraph (!inSelfType !inRoutineName)
+#--- Mangled routine name
+  var routineMangledName = if inSelfType == .null then
+    @lstring.new {!"." + inRoutineName !inRoutineName.location}
+  else
+    @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
   end
+  routineMangledName.string += "("
+  for (formalArgumentPassingMode selector * *) in inRoutineFormalArgumentList do
+    routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  routineMangledName.string += ")"
+#--- Variable map
+#  @lstring routineNameForInvocationGraph
+#  switch inRoutineKind
+#  case function : routineNameForInvocationGraph = procNameForInvocationGraph (!inSelfType !inRoutineName)
+#  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!inSelfType !inRoutineName)
+#  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!inSelfType !inRoutineName)
+#  case primitive : routineNameForInvocationGraph = primitiveNameForInvocationGraph (!inSelfType !inRoutineName)
+#  end
   @variableMap variableMap = initialVariableMap (
-    !routineNameForInvocation:routineNameForInvocationGraph.string
+    !routineNameForInvocation:routineMangledName.string
     !context:inContext
     !userMode:[procedureModeSet hasKey !userModeName ()]
     !registerAccess:inRegisterAccessKind
@@ -119,10 +130,10 @@ proc routineSemanticAnalysis
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineNameForInvocationGraph
-      !inRoutineName
+      !routineMangledName
+      !routineMangledName
     ]
   end
 #--- Analyze instruction list
@@ -132,7 +143,7 @@ proc routineSemanticAnalysis
     !self:inSelfType
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !propertiesAreMutable:inRoutineCanMutateProperties
-    !routineNameForInvocationGraph:routineNameForInvocationGraph
+    !routineNameForInvocationGraph:routineMangledName
     !context:inContext
     !modes:procedureModeSet
     !allowPanic:not [procedureModeSet hasKey !panicModeName ()]
@@ -152,16 +163,6 @@ proc routineSemanticAnalysis
   else
     @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
   end
-  var routineMangledName = if inSelfType == .null then
-    @lstring.new {!"." + inRoutineName !inRoutineName.location}
-  else
-    @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
-  end
-  routineMangledName.string += "("
-  for (formalArgumentPassingMode selector * *) in inRoutineFormalArgumentList do
-    routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-  end
-  routineMangledName.string += ")"
   if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !routineMangledName.string] then
     let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !routineMangledName.string]
     if inWeakFunction && not weak then

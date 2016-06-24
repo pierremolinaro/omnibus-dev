@@ -927,7 +927,7 @@ class cCollectionElement_initListIR : public cCollectionElement {
 //--- Constructor
   public : cCollectionElement_initListIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
                                           const GALGAS_string & in_mGlobalVariable,
-                                          const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
+                                          const GALGAS_lstringlist & in_mInitRequiredByProcList,
                                           const GALGAS_bigint & in_mPriority,
                                           const GALGAS_allocaList & in_mAllocaList,
                                           const GALGAS_instructionListIR & in_mInstructionListIR
@@ -950,7 +950,7 @@ class cCollectionElement_initListIR : public cCollectionElement {
 
 cCollectionElement_initListIR::cCollectionElement_initListIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
                                                               const GALGAS_string & in_mGlobalVariable,
-                                                              const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
+                                                              const GALGAS_lstringlist & in_mInitRequiredByProcList,
                                                               const GALGAS_bigint & in_mPriority,
                                                               const GALGAS_allocaList & in_mAllocaList,
                                                               const GALGAS_instructionListIR & in_mInstructionListIR
@@ -1037,7 +1037,7 @@ GALGAS_initListIR GALGAS_initListIR::constructor_emptyList (LOCATION_ARGS) {
 
 GALGAS_initListIR GALGAS_initListIR::constructor_listWithValue (const GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                 const GALGAS_string & inOperand1,
-                                                                const GALGAS__32_lstringlist & inOperand2,
+                                                                const GALGAS_lstringlist & inOperand2,
                                                                 const GALGAS_bigint & inOperand3,
                                                                 const GALGAS_allocaList & inOperand4,
                                                                 const GALGAS_instructionListIR & inOperand5
@@ -1057,7 +1057,7 @@ GALGAS_initListIR GALGAS_initListIR::constructor_listWithValue (const GALGAS_uni
 void GALGAS_initListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
                                                    const GALGAS_string & in_mGlobalVariable,
-                                                   const GALGAS__32_lstringlist & in_mInitRequiredByProcList,
+                                                   const GALGAS_lstringlist & in_mInitRequiredByProcList,
                                                    const GALGAS_bigint & in_mPriority,
                                                    const GALGAS_allocaList & in_mAllocaList,
                                                    const GALGAS_instructionListIR & in_mInstructionListIR
@@ -1077,7 +1077,7 @@ void GALGAS_initListIR::makeAttributesFromObjects (capCollectionElement & outAtt
 
 void GALGAS_initListIR::addAssign_operation (const GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                              const GALGAS_string & inOperand1,
-                                             const GALGAS__32_lstringlist & inOperand2,
+                                             const GALGAS_lstringlist & inOperand2,
                                              const GALGAS_bigint & inOperand3,
                                              const GALGAS_allocaList & inOperand4,
                                              const GALGAS_instructionListIR & inOperand5
@@ -1096,7 +1096,7 @@ void GALGAS_initListIR::addAssign_operation (const GALGAS_unifiedTypeMap_2D_prox
 
 void GALGAS_initListIR::setter_insertAtIndex (const GALGAS_unifiedTypeMap_2D_proxy inOperand0,
                                               const GALGAS_string inOperand1,
-                                              const GALGAS__32_lstringlist inOperand2,
+                                              const GALGAS_lstringlist inOperand2,
                                               const GALGAS_bigint inOperand3,
                                               const GALGAS_allocaList inOperand4,
                                               const GALGAS_instructionListIR inOperand5,
@@ -1117,7 +1117,7 @@ void GALGAS_initListIR::setter_insertAtIndex (const GALGAS_unifiedTypeMap_2D_pro
 
 void GALGAS_initListIR::setter_removeAtIndex (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
                                               GALGAS_string & outOperand1,
-                                              GALGAS__32_lstringlist & outOperand2,
+                                              GALGAS_lstringlist & outOperand2,
                                               GALGAS_bigint & outOperand3,
                                               GALGAS_allocaList & outOperand4,
                                               GALGAS_instructionListIR & outOperand5,
@@ -1151,7 +1151,7 @@ void GALGAS_initListIR::setter_removeAtIndex (GALGAS_unifiedTypeMap_2D_proxy & o
 
 void GALGAS_initListIR::setter_popFirst (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
                                          GALGAS_string & outOperand1,
-                                         GALGAS__32_lstringlist & outOperand2,
+                                         GALGAS_lstringlist & outOperand2,
                                          GALGAS_bigint & outOperand3,
                                          GALGAS_allocaList & outOperand4,
                                          GALGAS_instructionListIR & outOperand5,
@@ -1182,7 +1182,7 @@ void GALGAS_initListIR::setter_popFirst (GALGAS_unifiedTypeMap_2D_proxy & outOpe
 
 void GALGAS_initListIR::setter_popLast (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
                                         GALGAS_string & outOperand1,
-                                        GALGAS__32_lstringlist & outOperand2,
+                                        GALGAS_lstringlist & outOperand2,
                                         GALGAS_bigint & outOperand3,
                                         GALGAS_allocaList & outOperand4,
                                         GALGAS_instructionListIR & outOperand5,
@@ -1213,7 +1213,7 @@ void GALGAS_initListIR::setter_popLast (GALGAS_unifiedTypeMap_2D_proxy & outOper
 
 void GALGAS_initListIR::method_first (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
                                       GALGAS_string & outOperand1,
-                                      GALGAS__32_lstringlist & outOperand2,
+                                      GALGAS_lstringlist & outOperand2,
                                       GALGAS_bigint & outOperand3,
                                       GALGAS_allocaList & outOperand4,
                                       GALGAS_instructionListIR & outOperand5,
@@ -1244,7 +1244,7 @@ void GALGAS_initListIR::method_first (GALGAS_unifiedTypeMap_2D_proxy & outOperan
 
 void GALGAS_initListIR::method_last (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
                                      GALGAS_string & outOperand1,
-                                     GALGAS__32_lstringlist & outOperand2,
+                                     GALGAS_lstringlist & outOperand2,
                                      GALGAS_bigint & outOperand3,
                                      GALGAS_allocaList & outOperand4,
                                      GALGAS_instructionListIR & outOperand5,
@@ -1354,12 +1354,12 @@ GALGAS_string GALGAS_initListIR::getter_mGlobalVariableAtIndex (const GALGAS_uin
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS__32_lstringlist GALGAS_initListIR::getter_mInitRequiredByProcListAtIndex (const GALGAS_uint & inIndex,
-                                                                                 C_Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) const {
+GALGAS_lstringlist GALGAS_initListIR::getter_mInitRequiredByProcListAtIndex (const GALGAS_uint & inIndex,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_initListIR * p = (cCollectionElement_initListIR *) attributes.ptr () ;
-  GALGAS__32_lstringlist result ;
+  GALGAS_lstringlist result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_initListIR) ;
     result = p->mObject.mAttribute_mInitRequiredByProcList ;
@@ -1449,7 +1449,7 @@ GALGAS_string cEnumerator_initListIR::current_mGlobalVariable (LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS__32_lstringlist cEnumerator_initListIR::current_mInitRequiredByProcList (LOCATION_ARGS) const {
+GALGAS_lstringlist cEnumerator_initListIR::current_mInitRequiredByProcList (LOCATION_ARGS) const {
   const cCollectionElement_initListIR * p = (const cCollectionElement_initListIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_initListIR) ;
   return p->mObject.mAttribute_mInitRequiredByProcList ;

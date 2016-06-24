@@ -97,14 +97,18 @@ method @guardDeclarationListAST enterInContext
 {
   for guard in self do
   #--- Signature
+    var guardMangledName = inReceiverTypeName + "." + guard.mGuardName
+    guardMangledName += "("
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in guard.mGuardFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
+      guardMangledName += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
+    guardMangledName += ")"
   #--- Enter in context
     [!?ioContext.mGuardMapForContext insertKey
-      !@lstring.new {!inReceiverTypeName + "." + guard.mGuardName !guard.mGuardName.location}
+      !@lstring.new {!guardMangledName !guard.mGuardName.location}
       !guard.mIsPublic
       !signature
     ]
@@ -162,17 +166,28 @@ proc guardSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+#--- Guard mangled name
+  var guardMangledName = if inSelfType == .null then
+    @lstring.new {!"." + inRoutineName !inRoutineName.location}
+  else
+    @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
+  end
+  guardMangledName.string += "("
+  for (formalArgumentPassingMode selector * *) in inRoutineFormalArgumentList do
+    guardMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  guardMangledName.string += ")"
 #--- Enter subprogram invocation graph
-  let routineNameForInvocationGraph = guardNameForInvocationGraph (!inSelfType !inRoutineName)
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+#  let routineNameForInvocationGraph = guardNameForInvocationGraph (!inSelfType !inRoutineName)
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !guardMangledName.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineNameForInvocationGraph
+      !guardMangledName
       !inRoutineName
     ]
   end
 #--- Variable map
   @variableMap variableMap = initialVariableMap (
-    !routineNameForInvocation:routineNameForInvocationGraph.string
+    !routineNameForInvocation:guardMangledName.string
     !context:inContext
     !userMode:false
     !registerAccess:.noAccess
@@ -210,7 +225,7 @@ proc guardSemanticAnalysis
       !self:inSelfType
       !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:true
-      !routineNameForInvocationGraph:routineNameForInvocationGraph
+      !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !modes:{!guardModeName ()}
       !allowPanic:true
@@ -232,7 +247,7 @@ proc guardSemanticAnalysis
     @instructionListIR baseGuardInstructionGenerationList = {}
     [baseGuardInstruction baseGuardAnalyze 
       !self:inSelfType
-      !routineNameForInvocationGraph:routineNameForInvocationGraph
+      !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !modes:{!userModeName ()} # Convenience guards instructions are executed in user mode
       !?alloca:allocaList
@@ -247,7 +262,7 @@ proc guardSemanticAnalysis
       !self:inSelfType
       !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:true
-      !routineNameForInvocationGraph:routineNameForInvocationGraph
+      !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !modes:{!userModeName ()} # Convenience guards instructions are executed in user mode
       !allowPanic:true
@@ -263,11 +278,11 @@ proc guardSemanticAnalysis
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
   drop variableMap
 #--- Code generation
-  let guardMangledName = if inSelfType == .null then
-    @lstring.new {!"." + inRoutineName !inRoutineName.location}
-  else
-    @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
-  end
+#  let guardMangledName = if inSelfType == .null then
+#    @lstring.new {!"." + inRoutineName !inRoutineName.location}
+#  else
+#    @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
+#  end
   [!?ioIntermediateCodeStruct.mGuardMapIR insertKey
     !guardMangledName
     !formalArguments
@@ -305,23 +320,30 @@ private proc standaloneBaseGuardAnalyze
   ?!variableMap:@variableMap ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  let routineMangledName = @lstring.new {!"." + inRoutineName !inRoutineName.location}
+#--- Guard mangled name
+  var guardMangledName = @lstring.new {!"." + inRoutineName !inRoutineName.location}
+  guardMangledName.string += "("
+  for (formalArgumentPassingMode selector) in inEffectiveParameterList do
+    guardMangledName.string += [formalArgumentPassingMode matchingFormalArgument] + selector + ":"
+  end
+  guardMangledName.string += ")"
+#  let routineMangledName = @lstring.new {!"." + inRoutineName !inRoutineName.location}
   [inContext.mGuardMapForContext searchKey
-    !routineMangledName
+    !guardMangledName
     ?let isPublic
     ?let @procedureSignature formalSignature
   ]
 #--- Check accessibility
   if not isPublic then
-    let @string declarationFile = [[inContext.mGuardMapForContext locationForKey !routineMangledName.string] file]
+    let @string declarationFile = [[inContext.mGuardMapForContext locationForKey !guardMangledName.string] file]
     let invocationFile = [inRoutineName.location file]
     if invocationFile != declarationFile then
       error inRoutineName : "this guard is not public"
     end
   end  
 #--- Enter in invocation graph
-  let routineNameForInvocationGraph = guardNameForInvocationGraph (!.null !inRoutineName)
-   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+ # let routineNameForInvocationGraph = guardNameForInvocationGraph (!.null !inRoutineName)
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !guardMangledName]
 #--- Analyze effective parameters
   @instructionListIR baseGuardInstructionGenerationList = {}
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
@@ -348,7 +370,7 @@ private proc standaloneBaseGuardAnalyze
   outConvenienceGuardGenerationIR = .convenienceGuard {
     !baseGuardAllocaList:baseGuardAllocaList
     !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-    !baseGuardMangledName:routineMangledName.string
+    !baseGuardMangledName:guardMangledName.string
     !baseGuardEffectiveParameterList:effectiveParameterListIR
   }
 }
@@ -410,7 +432,12 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
       !inSelfType
       !elementPtrList
     ]        
-    let routineMangledName = @lstring.new {!"$" + [currentType key] + "." + methodName !methodName.location}
+    var routineMangledName = @lstring.new {!"$" + [currentType key] + "." + methodName !methodName.location}
+    routineMangledName.string += "("
+    for (formalArgumentPassingMode selector) in mEffectiveParameterList do
+      routineMangledName.string += [formalArgumentPassingMode matchingFormalArgument] + selector + ":"
+    end
+    routineMangledName.string += ")"
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     effectiveParameterListIR += !.outputInput ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
     [inContext.mGuardMapForContext searchKey
@@ -423,8 +450,8 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
       error methodName : "this guard is not public"
     end
   #--- Enter in invocation graph
-    let routineNameForInvocationGraph = guardNameForInvocationGraph (!currentType !methodName)
-     [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#    let routineNameForInvocationGraph = guardNameForInvocationGraph (!currentType !methodName)
+     [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
   #--- Analyze effective parameters
     @allocaList baseGuardAllocaList = {}
     analyzeEffectiveParameters (
@@ -518,15 +545,20 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     effectiveParameterListIR += !.outputInput ![targetPtr address] #--- add "load receiver" as first argument
     @instructionListIR baseGuardInstructionGenerationList = {}
-    let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
+    var routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
+    routineMangledName.string += "("
+    for (formalArgumentPassingMode selector) in mEffectiveParameterList do
+      routineMangledName.string += [formalArgumentPassingMode matchingFormalArgument] + selector + ":"
+    end
+    routineMangledName.string += ")"
     [inContext.mGuardMapForContext searchKey
       !routineMangledName
       ?let unused isPublic
       ?let @procedureSignature formalSignature
     ]
   #--- Enter in invocation graph
-    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !routineName)
-    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineNameForInvocationGraph]
+#    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !routineName)
+    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
   #--- Analyze effective parameters
     @allocaList baseGuardAllocaList = {}
     analyzeEffectiveParameters (
