@@ -87,10 +87,13 @@ method @sectionDeclarationListAST enterInContext
   for section in self do
   #--- Signature
     @procedureSignature signature = {}
+    var mangledArguments = "("
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in section.mSectionFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
+      mangledArguments += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
+    mangledArguments += ")"
     let returnType = if section.mReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
     else
@@ -105,8 +108,8 @@ method @sectionDeclarationListAST enterInContext
     end
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
-      !@lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
-      !inReceiverTypeName + "." + section.mSectionName
+      !@lstring.new {!inReceiverTypeName + "." + section.mSectionName + mangledArguments !section.mSectionName.location}
+      !@lstring.new {!inReceiverTypeName + "." + section.mSectionName + mangledArguments !section.mSectionName.location}
       !section.mPublic
       !@modeMap {![userModeName () nowhere]}
       !signature
@@ -174,8 +177,8 @@ method @routineMapIR sectionCodeGeneration
 {
   for section in self do
     if section.mKind == .section then
-      let sectionCallName = llvmNameForSectionCall (!section.lkey.string)
-      let sectionImplementationName = llvmNameForSectionImplementation (!section.lkey.string)
+      let sectionCallName = llvmNameForSectionCall (!section.mRoutineNameForGeneration.string)
+      let sectionImplementationName = llvmNameForSectionImplementation (!section.mRoutineNameForGeneration.string)
       ioSectionList += !sectionCallName !sectionImplementationName
       ioLLVMcode += llvmTitleComment (!sectionCallName)
       ioLLVMcode += "declare"
@@ -184,7 +187,7 @@ method @routineMapIR sectionCodeGeneration
       else
         ioLLVMcode += " " + [section.mReturnType llvmTypeName]
       end
-      ioLLVMcode += " @" + [sectionCallName assemblerRepresentation] + " ("
+      ioLLVMcode += " @" + sectionCallName + " ("
       for () in section.mFormalArgumentListForGeneration
       do
         switch mFormalArgumentKind

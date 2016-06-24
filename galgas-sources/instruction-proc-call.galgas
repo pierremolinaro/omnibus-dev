@@ -12,6 +12,18 @@ enum @effectiveParameterPassingModeAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+getter @effectiveParameterPassingModeAST matchingFormalArgument -> @string outResult {
+  switch self 
+  case input (*) : outResult = "!"
+  case inputWithType (* * *) : outResult = "!"
+  case output (* *) : outResult = "?"
+  case outputInput (*) : outResult = "?!"
+  case outputInputSelfVariable (*) : outResult = "?!"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 list @effectiveParameterListAST {
   @effectiveParameterPassingModeAST mEffectiveParameterKind
   @lstring mSelector
@@ -183,7 +195,7 @@ private proc analyzeStandaloneRoutineCall
     !?instructionListIR:ioInstructionGenerationList
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
     ?routineKind:let @routineKindIR routineKindIR
-    ?routineMangledName:let @lstring routineMangledName
+    ?routineNameForGeneration:let @lstring routineNameForGeneration
     ?returnType:let @unifiedTypeMap-proxy returnedType
     ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
   )
@@ -193,7 +205,7 @@ private proc analyzeStandaloneRoutineCall
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !"" # No receiver
-    !routineMangledName
+    !routineNameForGeneration
     !routineKindIR
     !effectiveParameterListIR
     !appendFileAndLineArgumentForPanicLocation
@@ -258,14 +270,22 @@ override method @remoteRoutineCallInstructionAST analyze
     )
   #--- Extract base variable and access
     [accessList first ?let baseName ?*]
-  #--- Check target access
+  #--- routine mangled name
     let receiverType = [targetObjectPtr type]
+    var routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
+    routineMangledName.string += "("
+    for (passingMode selector) in mEffectiveParameterList do
+      routineMangledName.string += [passingMode matchingFormalArgument]
+      routineMangledName.string += selector.string
+      routineMangledName.string += ":"
+    end
+    routineMangledName.string += ")"
+  #--- Check target access
     @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-    let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
     effectiveParameterListIR += !.outputInput ![targetObjectPtr address] #--- add "load receiver" as first argument
     [inContext.mRoutineMapForContext searchKey
       !routineMangledName
-      ?*
+      ?let routineNameForGeneration
       ?let isPublic
       ?let modeMap
       ?let @procedureSignature formalSignature
@@ -346,7 +366,7 @@ override method @remoteRoutineCallInstructionAST analyze
     let baseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
     ioInstructionGenerationList += !@procCallInstructionIR.new {
       !baseGlobalVariableName
-      !routineMangledName
+      !routineNameForGeneration
       !routineKindIR
       !effectiveParameterListIR
       !appendFileAndLineArgumentForPanicLocation
@@ -374,12 +394,14 @@ proc analyzeRoutineCall
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !routineKind:@routineKindIR outRoutineKindIR
-  !routineMangledName:@lstring outRoutineMangledName
+  !routineNameForGeneration:@lstring outRoutineNameForGeneration
   !returnType:@unifiedTypeMap-proxy outReturnedType
   !appendFileAndLineArgumentForPanicLocation:@bool outAppendFileAndLineArgumentForPanicLocation
 {
+#---
   outEffectiveParameterListIR = {}
   @unifiedTypeMap-proxy receiverType
+  @lstring routineMangledName
   if inReceiverName.string != "" then
     [!?ioVariableMap searchForMethodCall
       !lkey:inReceiverName
@@ -388,15 +410,23 @@ proc analyzeRoutineCall
       ?variableKind:@objectInMemoryIR variableKind
       ?2*
     ]
-    outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
+    routineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
     outEffectiveParameterListIR += !.outputInput ![variableKind address] #--- add "load self" as first argument
   else
-    outRoutineMangledName = .new {!"." + inRoutineName !inRoutineName.location}
+    routineMangledName = .new {!"." + inRoutineName !inRoutineName.location}
     receiverType = .null
   end
+#--- Build LLVM mangled name
+  routineMangledName.string += "("
+  for (passingMode selector) in inEffectiveParameterList do
+    routineMangledName.string += [passingMode matchingFormalArgument]
+    routineMangledName.string += selector.string
+    routineMangledName.string += ":"
+  end
+  routineMangledName.string += ")"
   [inContext.mRoutineMapForContext searchKey
-    !outRoutineMangledName
-    ?*
+    !routineMangledName
+    ?outRoutineNameForGeneration
     ?let isPublic
     ?let modeMap
     ?let @procedureSignature formalSignature
@@ -410,7 +440,7 @@ proc analyzeRoutineCall
 #--- Check accessibility
   if not isPublic then
     if inReceiverName.string == "" then # Standalone function
-      let @string declarationFile = [[inContext.mRoutineMapForContext locationForKey !outRoutineMangledName.string] file]
+      let @string declarationFile = [[inContext.mRoutineMapForContext locationForKey !routineMangledName.string] file]
       let invocationFile = [inRoutineName.location file]
       if invocationFile != declarationFile then
         error inRoutineName : "this routine is not public"

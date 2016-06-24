@@ -2229,6 +2229,16 @@ class GALGAS_lstring function_serviceNameForInvocationGraph (class GALGAS_unifie
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//              Extension getter '@effectiveParameterPassingModeAST matchingFormalArgument' (as function)              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_matchingFormalArgument (const class GALGAS_effectiveParameterPassingModeAST & inObject,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                       Function 'checkAssignmentCompatibility'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3121,6 +3131,16 @@ void routine_routineSemanticAnalysis (const class GALGAS_unifiedTypeMap_2D_proxy
                                       class GALGAS_intermediateCodeStruct & ioArgument16,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//               Extension getter '@procFormalArgumentPassingMode formalPassingModeString' (as function)               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_formalPassingModeString (const class GALGAS_procFormalArgumentPassingMode & inObject,
+                                                             class C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

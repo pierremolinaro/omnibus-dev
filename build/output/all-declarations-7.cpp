@@ -5842,7 +5842,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_functionCallIR GALGAS_functionCallIR::constructor_new (const GALGAS_operandIR & inAttribute_mResult,
-                                                              const GALGAS_string & inAttribute_mFunctionName,
+                                                              const GALGAS_lstring & inAttribute_mFunctionName,
                                                               const GALGAS_routineKindIR & inAttribute_mKind,
                                                               const GALGAS_procCallEffectiveParameterListIR & inAttribute_mArgumentList,
                                                               const GALGAS_bool & inAttribute_mAppendFileAndLineArgumentForPanicLocation
@@ -5874,8 +5874,8 @@ GALGAS_operandIR cPtr_functionCallIR::getter_mResult (UNUSED_LOCATION_ARGS) cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_functionCallIR::getter_mFunctionName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
+GALGAS_lstring GALGAS_functionCallIR::getter_mFunctionName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
@@ -5886,7 +5886,7 @@ GALGAS_string GALGAS_functionCallIR::getter_mFunctionName (UNUSED_LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cPtr_functionCallIR::getter_mFunctionName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring cPtr_functionCallIR::getter_mFunctionName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mFunctionName ;
 }
 
@@ -5949,7 +5949,7 @@ GALGAS_bool cPtr_functionCallIR::getter_mAppendFileAndLineArgumentForPanicLocati
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_functionCallIR::cPtr_functionCallIR (const GALGAS_operandIR & in_mResult,
-                                          const GALGAS_string & in_mFunctionName,
+                                          const GALGAS_lstring & in_mFunctionName,
                                           const GALGAS_routineKindIR & in_mKind,
                                           const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList,
                                           const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation

@@ -115,13 +115,22 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?resultPtr:let @objectInMemoryIR propertyAddressLLVMvar
   )
+#--- Routine mangled name
   let receiverType = [propertyAddressLLVMvar type]
+  var routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + functionName !functionName.location}
+  routineMangledName.string += "("
+  for (passingMode selector) in mEffectiveParameterList do
+    routineMangledName.string += [passingMode matchingFormalArgument]
+    routineMangledName.string += selector.string
+    routineMangledName.string += ":"
+  end
+  routineMangledName.string += ")"
+#---
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-  let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + functionName !functionName.location}
   effectiveParameterListIR += !.outputInput !.new {!receiverType !.selfObject}
   [inContext.mRoutineMapForContext searchKey
     !routineMangledName
-    ?*
+    ?let routineNameForGeneration
     ?let isPublic
     ?let modeMap
     ?let @procedureSignature formalSignature
@@ -190,7 +199,7 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
 #--- Code generation
   ioInstructionGenerationList += !@functionCallIR.new {
     !outResult
-    !routineMangledName.string
+    !routineNameForGeneration
     !routineKindIR
     !effectiveParameterListIR
     !appendFileAndLineArgumentForPanicLocation

@@ -3585,7 +3585,7 @@ GALGAS_interruptMapIR GALGAS_interruptMapIR::extractObject (const GALGAS_object 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_routineMapIR::cMapElement_routineMapIR (const GALGAS_lstring & inKey,
-                                                    const GALGAS_string & in_mRoutineLLVMName,
+                                                    const GALGAS_lstring & in_mRoutineNameForGeneration,
                                                     const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
                                                     const GALGAS_allocaList & in_mAllocaList,
                                                     const GALGAS_instructionListIR & in_mInstructionGenerationList,
@@ -3598,7 +3598,7 @@ cMapElement_routineMapIR::cMapElement_routineMapIR (const GALGAS_lstring & inKey
                                                     const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
                                                     COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mAttribute_mRoutineLLVMName (in_mRoutineLLVMName),
+mAttribute_mRoutineNameForGeneration (in_mRoutineNameForGeneration),
 mAttribute_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
 mAttribute_mAllocaList (in_mAllocaList),
 mAttribute_mInstructionGenerationList (in_mInstructionGenerationList),
@@ -3614,14 +3614,14 @@ mAttribute_mAppendFileAndLineArgumentForPanicLocation (in_mAppendFileAndLineArgu
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_routineMapIR::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mRoutineLLVMName.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mIsRequired.isValid () && mAttribute_mWarnIfUnused.isValid () && mAttribute_mWeak.isValid () && mAttribute_mGlobal.isValid () && mAttribute_mKind.isValid () && mAttribute_mReturnType.isValid () && mAttribute_mAppendFileAndLineArgumentForPanicLocation.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mRoutineNameForGeneration.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mIsRequired.isValid () && mAttribute_mWarnIfUnused.isValid () && mAttribute_mWeak.isValid () && mAttribute_mGlobal.isValid () && mAttribute_mKind.isValid () && mAttribute_mReturnType.isValid () && mAttribute_mAppendFileAndLineArgumentForPanicLocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_routineMapIR::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_routineMapIR (mAttribute_lkey, mAttribute_mRoutineLLVMName, mAttribute_mFormalArgumentListForGeneration, mAttribute_mAllocaList, mAttribute_mInstructionGenerationList, mAttribute_mIsRequired, mAttribute_mWarnIfUnused, mAttribute_mWeak, mAttribute_mGlobal, mAttribute_mKind, mAttribute_mReturnType, mAttribute_mAppendFileAndLineArgumentForPanicLocation COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_routineMapIR (mAttribute_lkey, mAttribute_mRoutineNameForGeneration, mAttribute_mFormalArgumentListForGeneration, mAttribute_mAllocaList, mAttribute_mInstructionGenerationList, mAttribute_mIsRequired, mAttribute_mWarnIfUnused, mAttribute_mWeak, mAttribute_mGlobal, mAttribute_mKind, mAttribute_mReturnType, mAttribute_mAppendFileAndLineArgumentForPanicLocation COMMA_HERE)) ;
   return result ;
 }
 
@@ -3630,8 +3630,8 @@ cMapElement * cMapElement_routineMapIR::copy (void) {
 void cMapElement_routineMapIR::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mRoutineLLVMName" ":" ;
-  mAttribute_mRoutineLLVMName.description (ioString, inIndentation) ;
+  ioString << "mRoutineNameForGeneration" ":" ;
+  mAttribute_mRoutineNameForGeneration.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mFormalArgumentListForGeneration" ":" ;
@@ -3680,7 +3680,7 @@ typeComparisonResult cMapElement_routineMapIR::compare (const cCollectionElement
   cMapElement_routineMapIR * operand = (cMapElement_routineMapIR *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mRoutineLLVMName.objectCompare (operand->mAttribute_mRoutineLLVMName) ;
+    result = mAttribute_mRoutineNameForGeneration.objectCompare (operand->mAttribute_mRoutineNameForGeneration) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mFormalArgumentListForGeneration.objectCompare (operand->mAttribute_mFormalArgumentListForGeneration) ;
@@ -3763,7 +3763,7 @@ GALGAS_routineMapIR GALGAS_routineMapIR::getter_overriddenMap (C_Compiler * inCo
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineMapIR::addAssign_operation (const GALGAS_lstring & inKey,
-                                               const GALGAS_string & inArgument0,
+                                               const GALGAS_lstring & inArgument0,
                                                const GALGAS_procFormalArgumentListForGeneration & inArgument1,
                                                const GALGAS_allocaList & inArgument2,
                                                const GALGAS_instructionListIR & inArgument3,
@@ -3789,7 +3789,7 @@ void GALGAS_routineMapIR::addAssign_operation (const GALGAS_lstring & inKey,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineMapIR::setter_insertKey (GALGAS_lstring inKey,
-                                            GALGAS_string inArgument0,
+                                            GALGAS_lstring inArgument0,
                                             GALGAS_procFormalArgumentListForGeneration inArgument1,
                                             GALGAS_allocaList inArgument2,
                                             GALGAS_instructionListIR inArgument3,
@@ -3819,7 +3819,7 @@ const char * kSearchErrorMessage_routineMapIR_searchKey = "** internal error **"
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineMapIR::method_searchKey (GALGAS_lstring inKey,
-                                            GALGAS_string & outArgument0,
+                                            GALGAS_lstring & outArgument0,
                                             GALGAS_procFormalArgumentListForGeneration & outArgument1,
                                             GALGAS_allocaList & outArgument2,
                                             GALGAS_instructionListIR & outArgument3,
@@ -3850,7 +3850,7 @@ void GALGAS_routineMapIR::method_searchKey (GALGAS_lstring inKey,
     outArgument10.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_routineMapIR) ;
-    outArgument0 = p->mAttribute_mRoutineLLVMName ;
+    outArgument0 = p->mAttribute_mRoutineNameForGeneration ;
     outArgument1 = p->mAttribute_mFormalArgumentListForGeneration ;
     outArgument2 = p->mAttribute_mAllocaList ;
     outArgument3 = p->mAttribute_mInstructionGenerationList ;
@@ -3867,7 +3867,7 @@ void GALGAS_routineMapIR::method_searchKey (GALGAS_lstring inKey,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineMapIR::setter_removeKey (GALGAS_lstring inKey,
-                                            GALGAS_string & outArgument0,
+                                            GALGAS_lstring & outArgument0,
                                             GALGAS_procFormalArgumentListForGeneration & outArgument1,
                                             GALGAS_allocaList & outArgument2,
                                             GALGAS_instructionListIR & outArgument3,
@@ -3886,7 +3886,7 @@ void GALGAS_routineMapIR::setter_removeKey (GALGAS_lstring inKey,
   cMapElement_routineMapIR * p = (cMapElement_routineMapIR *) attributes.ptr () ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_routineMapIR) ;
-    outArgument0 = p->mAttribute_mRoutineLLVMName ;
+    outArgument0 = p->mAttribute_mRoutineNameForGeneration ;
     outArgument1 = p->mAttribute_mFormalArgumentListForGeneration ;
     outArgument2 = p->mAttribute_mAllocaList ;
     outArgument3 = p->mAttribute_mInstructionGenerationList ;
@@ -3902,15 +3902,15 @@ void GALGAS_routineMapIR::setter_removeKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_routineMapIR::getter_mRoutineLLVMNameForKey (const GALGAS_string & inKey,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_routineMapIR::getter_mRoutineNameForGenerationForKey (const GALGAS_string & inKey,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_routineMapIR * p = (const cMapElement_routineMapIR *) attributes ;
-  GALGAS_string result ;
+  GALGAS_lstring result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_routineMapIR) ;
-    result = p->mAttribute_mRoutineLLVMName ;
+    result = p->mAttribute_mRoutineNameForGeneration ;
   }
   return result ;
 }
@@ -4067,15 +4067,15 @@ GALGAS_bool GALGAS_routineMapIR::getter_mAppendFileAndLineArgumentForPanicLocati
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_routineMapIR::setter_setMRoutineLLVMNameForKey (GALGAS_string inAttributeValue,
-                                                            GALGAS_string inKey,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
+void GALGAS_routineMapIR::setter_setMRoutineNameForGenerationForKey (GALGAS_lstring inAttributeValue,
+                                                                     GALGAS_string inKey,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_routineMapIR * p = (cMapElement_routineMapIR *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_routineMapIR) ;
-    p->mAttribute_mRoutineLLVMName = inAttributeValue ;
+    p->mAttribute_mRoutineNameForGeneration = inAttributeValue ;
   }
 }
 
@@ -4242,7 +4242,7 @@ cGenericAbstractEnumerator () {
 GALGAS_routineMapIR_2D_element cEnumerator_routineMapIR::current (LOCATION_ARGS) const {
   const cMapElement_routineMapIR * p = (const cMapElement_routineMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapIR) ;
-  return GALGAS_routineMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mRoutineLLVMName, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mAllocaList, p->mAttribute_mInstructionGenerationList, p->mAttribute_mIsRequired, p->mAttribute_mWarnIfUnused, p->mAttribute_mWeak, p->mAttribute_mGlobal, p->mAttribute_mKind, p->mAttribute_mReturnType, p->mAttribute_mAppendFileAndLineArgumentForPanicLocation) ;
+  return GALGAS_routineMapIR_2D_element (p->mAttribute_lkey, p->mAttribute_mRoutineNameForGeneration, p->mAttribute_mFormalArgumentListForGeneration, p->mAttribute_mAllocaList, p->mAttribute_mInstructionGenerationList, p->mAttribute_mIsRequired, p->mAttribute_mWarnIfUnused, p->mAttribute_mWeak, p->mAttribute_mGlobal, p->mAttribute_mKind, p->mAttribute_mReturnType, p->mAttribute_mAppendFileAndLineArgumentForPanicLocation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4255,10 +4255,10 @@ GALGAS_lstring cEnumerator_routineMapIR::current_lkey (LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cEnumerator_routineMapIR::current_mRoutineLLVMName (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_routineMapIR::current_mRoutineNameForGeneration (LOCATION_ARGS) const {
   const cMapElement_routineMapIR * p = (const cMapElement_routineMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapIR) ;
-  return p->mAttribute_mRoutineLLVMName ;
+  return p->mAttribute_mRoutineNameForGeneration ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11326,7 +11326,7 @@ GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::extractOb
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_routineMapForContext::cMapElement_routineMapForContext (const GALGAS_lstring & inKey,
-                                                                    const GALGAS_string & in_mRoutineLLVMName,
+                                                                    const GALGAS_lstring & in_mRoutineLLVMName,
                                                                     const GALGAS_bool & in_mIsPublic,
                                                                     const GALGAS_modeMap & in_mModeMap,
                                                                     const GALGAS_procedureSignature & in_mSignature,
@@ -11495,7 +11495,7 @@ GALGAS_routineMapForContext GALGAS_routineMapForContext::getter_overriddenMap (C
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
-                                                       const GALGAS_string & inArgument0,
+                                                       const GALGAS_lstring & inArgument0,
                                                        const GALGAS_bool & inArgument1,
                                                        const GALGAS_modeMap & inArgument2,
                                                        const GALGAS_procedureSignature & inArgument3,
@@ -11520,7 +11520,7 @@ void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & in
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineMapForContext::setter_insertKey (GALGAS_lstring inKey,
-                                                    GALGAS_string inArgument0,
+                                                    GALGAS_lstring inArgument0,
                                                     GALGAS_bool inArgument1,
                                                     GALGAS_modeMap inArgument2,
                                                     GALGAS_procedureSignature inArgument3,
@@ -11549,7 +11549,7 @@ const char * kSearchErrorMessage_routineMapForContext_searchKey = "there is no '
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
-                                                    GALGAS_string & outArgument0,
+                                                    GALGAS_lstring & outArgument0,
                                                     GALGAS_bool & outArgument1,
                                                     GALGAS_modeMap & outArgument2,
                                                     GALGAS_procedureSignature & outArgument3,
@@ -11594,7 +11594,7 @@ void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineMapForContext::setter_removeKey (GALGAS_lstring inKey,
-                                                    GALGAS_string & outArgument0,
+                                                    GALGAS_lstring & outArgument0,
                                                     GALGAS_bool & outArgument1,
                                                     GALGAS_modeMap & outArgument2,
                                                     GALGAS_procedureSignature & outArgument3,
@@ -11627,12 +11627,12 @@ void GALGAS_routineMapForContext::setter_removeKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string GALGAS_routineMapForContext::getter_mRoutineLLVMNameForKey (const GALGAS_string & inKey,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_routineMapForContext::getter_mRoutineLLVMNameForKey (const GALGAS_string & inKey,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_string result ;
+  GALGAS_lstring result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_routineMapForContext) ;
     result = p->mAttribute_mRoutineLLVMName ;
@@ -11777,7 +11777,7 @@ GALGAS_bool GALGAS_routineMapForContext::getter_mCanMutatePropertiesForKey (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_routineMapForContext::setter_setMRoutineLLVMNameForKey (GALGAS_string inAttributeValue,
+void GALGAS_routineMapForContext::setter_setMRoutineLLVMNameForKey (GALGAS_lstring inAttributeValue,
                                                                     GALGAS_string inKey,
                                                                     C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) {
@@ -11951,7 +11951,7 @@ GALGAS_lstring cEnumerator_routineMapForContext::current_lkey (LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_string cEnumerator_routineMapForContext::current_mRoutineLLVMName (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_routineMapForContext::current_mRoutineLLVMName (LOCATION_ARGS) const {
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapForContext) ;
   return p->mAttribute_mRoutineLLVMName ;

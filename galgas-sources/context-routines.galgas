@@ -15,7 +15,7 @@ enum @routineKind {
 
 # Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
 map @routineMapForContext {
-  @string mRoutineLLVMName
+  @lstring mRoutineLLVMName
   @bool mIsPublic
   @modeMap mModeMap
   @procedureSignature mSignature

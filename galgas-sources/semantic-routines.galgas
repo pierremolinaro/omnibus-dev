@@ -152,11 +152,16 @@ proc routineSemanticAnalysis
   else
     @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
   end
-  let routineMangledName = if inSelfType == .null then
+  var routineMangledName = if inSelfType == .null then
     @lstring.new {!"." + inRoutineName !inRoutineName.location}
   else
     @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
   end
+  routineMangledName.string += "("
+  for (formalArgumentPassingMode selector * *) in inRoutineFormalArgumentList do
+    routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  routineMangledName.string += ")"
   if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !routineMangledName.string] then
     let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !routineMangledName.string]
     if inWeakFunction && not weak then
@@ -167,7 +172,7 @@ proc routineSemanticAnalysis
       [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?11*] # Remove weak routine
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
         !routineMangledName
-        !routineMangledName.string
+        !routineMangledName
         !formalArguments
         !allocaList
         !instructionGenerationList
@@ -182,7 +187,7 @@ proc routineSemanticAnalysis
     else # (not weakProcedure) && (not weak)
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
         !routineMangledName
-        !routineMangledName.string
+        !routineMangledName
         !formalArguments
         !allocaList
         !instructionGenerationList
@@ -198,7 +203,7 @@ proc routineSemanticAnalysis
   else
     [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
       !routineMangledName
-      !routineMangledName.string
+      !routineMangledName
       !formalArguments
       !allocaList
       !instructionGenerationList
@@ -245,10 +250,10 @@ method @routineMapIR-element llvmCodeGeneration
 {
   @string routineName
   switch mKind
-  case function : routineName = llvmNameForFunction (!lkey.string)
-  case section : routineName = llvmNameForSectionImplementation (!lkey.string)
-  case service : routineName = llvmNameForServiceImplementation (!lkey.string)
-  case primitive : routineName = llvmNameForPrimitiveImplementation (!lkey.string)
+  case function : routineName = llvmNameForFunction (!mRoutineNameForGeneration.string)
+  case section : routineName = llvmNameForSectionImplementation (!mRoutineNameForGeneration.string)
+  case service : routineName = llvmNameForServiceImplementation (!mRoutineNameForGeneration.string)
+  case primitive : routineName = llvmNameForPrimitiveImplementation (!mRoutineNameForGeneration.string)
   end
   ioLLVMcode += llvmTitleComment (!routineName)
   ioLLVMcode += "define"

@@ -123,7 +123,7 @@ override method @functionCallInExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
     ?routineKind:let @routineKindIR routineKind
-    ?routineMangledName:let @lstring functionMangledName
+    ?routineNameForGeneration: @lstring functionNameForGeneration
     ?returnType:let @unifiedTypeMap-proxy returnedType
     ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
   )
@@ -135,7 +135,7 @@ override method @functionCallInExpressionAST analyzeExpression
 #--- Code generation
   ioInstructionGenerationList += !@functionCallIR.new {
     !outResult
-    !functionMangledName.string
+    !functionNameForGeneration
     !routineKind
     !effectiveParameterListIR
     !appendFileAndLineArgumentForPanicLocation
@@ -146,7 +146,7 @@ override method @functionCallInExpressionAST analyzeExpression
 
 class @functionCallIR : @abstractInstructionIR {
   @operandIR mResult
-  @string mFunctionName
+  @lstring mFunctionName
   @routineKindIR mKind
   @procCallEffectiveParameterListIR mArgumentList
   @bool mAppendFileAndLineArgumentForPanicLocation
@@ -161,13 +161,13 @@ override method @functionCallIR llvmInstructionCode
 {
   ioLLVMcode += "  " + [mResult.mValue llvmName] + " = call " + [mResult.mType llvmTypeName] + " @"
   switch mKind 
-  case function : ioLLVMcode += llvmNameForFunction (!mFunctionName)
-  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mFunctionName)
-  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mFunctionName)
-  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mFunctionName)
-  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mFunctionName)
-  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionName)
-  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionName)
+  case function : ioLLVMcode += llvmNameForFunction (!mFunctionName.string)
+  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mFunctionName.string)
+  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mFunctionName.string)
+  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mFunctionName.string)
+  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mFunctionName.string)
+  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionName.string)
+  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionName.string)
   end
   ioLLVMcode += " ("
   for () in mArgumentList do
@@ -191,7 +191,7 @@ override method @functionCallIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
  {
-  ioAccessibleEntities.mRoutineSet += !mFunctionName
+  ioAccessibleEntities.mRoutineSet += !mFunctionName.string
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
