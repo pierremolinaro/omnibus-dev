@@ -44,11 +44,11 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s.V ()
     self.top += 300
-    leds.on (!LED_L0)
+    leds.write (!on:LED_L0)
     time.waitUntilMS (!deadline:self.top)
     s.V ()
     self.top += 700
-    leds.off (!LED_L0)
+    leds.write (!off:LED_L0)
   }
 }
 
@@ -60,10 +60,10 @@ task T2 priority 2 stackSize 512 {
   while time.waitUntilMS (!deadline:0) { // no wait...
     let r = s.P_until (!deadline:self.top)
     if r {
-      leds.toggle (!LED_L1)
+      leds.write (!toggle:LED_L1)
     }else{
       self.top += 400
-      leds.toggle (!LED_L4)
+      leds.write (!toggle:LED_L4)
     }
   }
 }

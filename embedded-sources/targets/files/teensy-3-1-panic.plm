@@ -16,9 +16,9 @@ panic func setup 0 {
 
 panic func loop 0 {
   time.busyWaitingDuringMS (!50)
-  leds.on (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
+  leds.write (!on:LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
   time.busyWaitingDuringMS (!50)
-  leds.off (!LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
+  leds.write (!off:LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
 }
 
 //——————————————————————————————————————————————————————————————————————————————

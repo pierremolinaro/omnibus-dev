@@ -6,10 +6,10 @@ task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
   while time.waitUntilMS (!deadline:self.compteur) {
-    leds.on (!LED_L0)
+    leds.write (!on:LED_L0)
     self.compteur +%= 500
     time.waitUntilMS (!deadline:self.compteur)
-    leds.off (!LED_L0)
+    leds.write (!off:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
     lcd.printUnsigned (!time.millis ())

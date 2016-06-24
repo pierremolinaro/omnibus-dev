@@ -14,7 +14,7 @@ task T priority 12 stackSize 512 {
 
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline +%= 1000
-    leds.toggle (!LED_L1)
+    leds.write (!toggle:LED_L1)
     self.array [self.index] = 0
     self.index +%= 1
     if self.index == SIZE {
