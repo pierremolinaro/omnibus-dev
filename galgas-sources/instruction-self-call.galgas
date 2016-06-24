@@ -72,12 +72,21 @@ override method @unifiedSelfCallInstructionAST analyze
     ?resultPtr:let @objectInMemoryIR propertyAddressLLVMvar
   )
   let receiverType = [propertyAddressLLVMvar type]
-  let routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + methodName !methodName.location}
+#--- Build routine mangled name
+  var routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + methodName !methodName.location}
+  routineMangledName.string += "("
+  for (passingMode selector) in mEffectiveParameterList do
+    routineMangledName.string += [passingMode matchingFormalArgument]
+    routineMangledName.string += selector.string
+    routineMangledName.string += ":"
+  end
+  routineMangledName.string += ")"
+#---
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   effectiveParameterListIR += !.outputInput ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
   [inContext.mRoutineMapForContext searchKey
     !routineMangledName
-    ?*
+    ?let routineLLVMName
     ?let isPublic
     ?let modeMap
     ?let @procedureSignature formalSignature
@@ -142,7 +151,7 @@ override method @unifiedSelfCallInstructionAST analyze
 #--- Code generation
   ioInstructionGenerationList += !@procCallInstructionIR.new {
     !"" # Receiver is self
-    !routineMangledName
+    !routineLLVMName
     !routineKindIR
     !effectiveParameterListIR
     !appendFileAndLineArgumentForPanicLocation

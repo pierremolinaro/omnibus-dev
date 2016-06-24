@@ -216,12 +216,6 @@ method @moduleListIR-element generateLLVM ?!@string ioLLVMcode {
     do ioLLVMcode += [value.mType llvmTypeName] + " " + [value.mValue llvmName]
     between ioLLVMcode += ", "  
   end
-#  let initialString = [mInitialValue llvmName]
-#  if initialString == "" then
-#    ioLLVMcode += "zeroinitializer"
-#  else
-#    ioLLVMcode += initialString
-#  end
   ioLLVMcode += "}\n"
 }
 

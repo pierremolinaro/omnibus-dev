@@ -1158,7 +1158,7 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_functionCallIR constructor_new (const class GALGAS_operandIR & inOperand0,
-                                                               const class GALGAS_string & inOperand1,
+                                                               const class GALGAS_lstring & inOperand1,
                                                                const class GALGAS_routineKindIR & inOperand2,
                                                                const class GALGAS_procCallEffectiveParameterListIR & inOperand3,
                                                                const class GALGAS_bool & inOperand4
@@ -1177,7 +1177,7 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procCallEffectiveParameterListIR getter_mArgumentList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mFunctionName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
 
@@ -1203,14 +1203,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_functionCallIR ;
 class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_operandIR mAttribute_mResult ;
-  public : GALGAS_string mAttribute_mFunctionName ;
+  public : GALGAS_lstring mAttribute_mFunctionName ;
   public : GALGAS_routineKindIR mAttribute_mKind ;
   public : GALGAS_procCallEffectiveParameterListIR mAttribute_mArgumentList ;
   public : GALGAS_bool mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
 
 //--- Constructor
   public : cPtr_functionCallIR (const GALGAS_operandIR & in_mResult,
-                                const GALGAS_string & in_mFunctionName,
+                                const GALGAS_lstring & in_mFunctionName,
                                 const GALGAS_routineKindIR & in_mKind,
                                 const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList,
                                 const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
@@ -1221,7 +1221,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mResult (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mFunctionName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_procCallEffectiveParameterListIR getter_mArgumentList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;

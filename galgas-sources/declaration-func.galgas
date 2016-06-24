@@ -233,18 +233,21 @@ method @functionDeclarationListAST enterInContext
       canAccessProperties = true
     end
   #--- Enter in context
-    let lkey = @lstring.new {!inSelfTypeName + "." + procedure.mFunctionName !procedure.mFunctionName.location}
-    if [ioContext.mRoutineMapForContext hasKey !lkey.string] then
-      let weak = [ioContext.mRoutineMapForContext mWeakForKey !lkey.string]
+    let routineMangledName = @lstring.new {
+      !inSelfTypeName + "." + procedure.mFunctionName + mangledArguments
+      !procedure.mFunctionName.location
+    }
+    if [ioContext.mRoutineMapForContext hasKey !routineMangledName.string] then
+      let weak = [ioContext.mRoutineMapForContext mWeakForKey !routineMangledName.string]
       if weakProcedure && not weak then
         # redefined weak procedure is ignored
       elsif weakProcedure && weak then
         error procedure.mFunctionName : "this weak procedure overrides a weak procedure"
       elsif (not weakProcedure) && weak then
-        [!?ioContext.mRoutineMapForContext removeKey !lkey ?10*] # Remove weak routine
+        [!?ioContext.mRoutineMapForContext removeKey !routineMangledName ?10*] # Remove weak routine
         [!?ioContext.mRoutineMapForContext insertKey # Insert routine
-          !lkey
-          !lkey.string
+          !routineMangledName
+          !routineMangledName
           !procedure.mPublicFunction
           !procedureModeMap
           !signature
@@ -257,8 +260,8 @@ method @functionDeclarationListAST enterInContext
         ]
       else # (not weakProcedure) && (not weak)
         [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
-          !lkey
-          !lkey.string
+          !routineMangledName
+          !routineMangledName
           !procedure.mPublicFunction
           !procedureModeMap
           !signature
@@ -272,8 +275,8 @@ method @functionDeclarationListAST enterInContext
       end
     else
       [!?ioContext.mRoutineMapForContext insertKey
-        !lkey
-        !lkey.string
+        !routineMangledName
+        !routineMangledName
         !procedure.mPublicFunction
         !procedureModeMap
         !signature

@@ -142,7 +142,7 @@ private proc suppressInaccessibleSubprograms
     if procedure.mIsRequired then
       [!?accessibleProcedureMap insertKey
         !procedure.lkey
-        !procedure.mRoutineLLVMName
+        !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
         !procedure.mAllocaList
         !procedure.mInstructionGenerationList
@@ -155,11 +155,11 @@ private proc suppressInaccessibleSubprograms
         !procedure.mAppendFileAndLineArgumentForPanicLocation
       ]        
       [procedure enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
-      outAccessibleEntities.mRoutineSet += !procedure.lkey.string
+      outAccessibleEntities.mRoutineSet += !procedure.mRoutineNameForGeneration.string
     else
       [!?nonExploredProcedureMap insertKey
         !procedure.lkey
-        !procedure.mRoutineLLVMName
+        !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
         !procedure.mAllocaList
         !procedure.mInstructionGenerationList
@@ -183,7 +183,7 @@ private proc suppressInaccessibleSubprograms
 #--- Tasks (setup and loop)
   for task in ioIntermediateCodeStruct.mTaskMapIR do
     [task.mInitInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
-    outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + "." + llvmNameForTaskLoopFunction ()
+    outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + "." + llvmNameForTaskLoopFunction () + "()"
   end
 #--- Panic clauses (if panic code is generated)
   if not [option plm_options.noPanicGeneration value] then
@@ -232,10 +232,10 @@ private proc exploreProcs
   let @routineMapIR exNonExploredProcedureMap = ioNonExploredProcedureMap
   ioNonExploredProcedureMap = {}
   for procedure in exNonExploredProcedureMap do
-    if [ioAccessibleEntities.mRoutineSet hasKey !procedure.lkey.string] then
+    if [ioAccessibleEntities.mRoutineSet hasKey !procedure.mRoutineNameForGeneration.string] then
      [!?ioAccessibleProcedureMap insertKey
         !procedure.lkey
-        !procedure.mRoutineLLVMName
+        !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
         !procedure.mAllocaList
         !procedure.mInstructionGenerationList
@@ -252,7 +252,7 @@ private proc exploreProcs
     else
       [!?ioNonExploredProcedureMap insertKey
         !procedure.lkey
-        !procedure.mRoutineLLVMName
+        !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
         !procedure.mAllocaList
         !procedure.mInstructionGenerationList
