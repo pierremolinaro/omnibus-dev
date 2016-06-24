@@ -7,6 +7,7 @@ list @externProcedureDeclarationListAST {
   @lstringlist mProcedureModeList
   @procFormalArgumentList mProcFormalArgumentList
   @lstring mReturnTypeName
+  @lstring mLLVMName
   @location mEndOfProcLocation
 }
 
@@ -33,7 +34,9 @@ syntax extension common_syntax {
       $->$
       $typeName$ ?returnTypeName
     end
-    ioAST.mExternProcList += !procName !requiredModeList !procFormalArgumentList !returnTypeName !.here
+    $:$
+    $literal_string$ ?let llvmName
+    ioAST.mExternProcList += !procName !requiredModeList !procFormalArgumentList !returnTypeName !llvmName !.here
   }
 
   #·····················································································································
@@ -89,6 +92,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
   end
   [!?ioContext.mRoutineMapForContext insertKey
     !@lstring.new {!"." + mExternProcedureName !mExternProcedureName.location}
+    !"." + mLLVMName
     !true # isPublic
     !procedureModeMap
     !signature

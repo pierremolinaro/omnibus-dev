@@ -4,7 +4,7 @@ DIR=`dirname $0` &&
 cd $DIR &&
 rm -f plm-couleur.pdf &&
 #--- First pass
-PDF_LATEX=`which pdflatex` &&
+PDF_LATEX=`which xelatex` &&
 MAKE_INDEX=`which makeindex` &&
 $PDF_LATEX --file-line-error --shell-escape '\newcommand\afficherDetailSchema{false}\input{doc-plm.tex}' &&
 touch ref.idx &&

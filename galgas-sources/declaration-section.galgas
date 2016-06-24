@@ -106,6 +106,7 @@ method @sectionDeclarationListAST enterInContext
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
+      !inReceiverTypeName + "." + section.mSectionName
       !section.mPublic
       !@modeMap {![userModeName () nowhere]}
       !signature

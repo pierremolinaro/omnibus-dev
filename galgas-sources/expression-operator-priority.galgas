@@ -145,7 +145,7 @@ syntax extension common_syntax {
         !rightExpression
       }
     or
-      $!=$
+      $≠$
       let operatorLocation = @location.here
       <expression_5> ?let rightExpression
       outExpression = @infixOperatorExpressionAST.new {

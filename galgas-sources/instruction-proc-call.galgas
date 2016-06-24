@@ -265,6 +265,7 @@ override method @remoteRoutineCallInstructionAST analyze
     effectiveParameterListIR += !.outputInput ![targetObjectPtr address] #--- add "load receiver" as first argument
     [inContext.mRoutineMapForContext searchKey
       !routineMangledName
+      ?*
       ?let isPublic
       ?let modeMap
       ?let @procedureSignature formalSignature
@@ -395,6 +396,7 @@ proc analyzeRoutineCall
   end
   [inContext.mRoutineMapForContext searchKey
     !outRoutineMangledName
+    ?*
     ?let isPublic
     ?let modeMap
     ?let @procedureSignature formalSignature

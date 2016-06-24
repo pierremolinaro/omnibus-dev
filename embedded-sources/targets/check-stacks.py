@@ -54,7 +54,7 @@ resultContents += u"*-----------------------------------------------------------
 resultContents += u"  Interrupt stacked register size: " + str (savedRegisterInUserStackByteCount) + u" bytes\n\n"
 taskDictionary = requirementsDictionary ["tasks"]
 for taskName in taskDictionary :
-  unicodeTaskName = unicode (taskName)
+  unicodeTaskName = (taskName)
   availableStackSize = taskDictionary [unicodeTaskName]
   taskFunctionName = u"task.main." + unicodeTaskName
   if solvedFunctionDictionary.has_key (taskFunctionName) :

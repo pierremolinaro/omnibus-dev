@@ -92,7 +92,7 @@ Pour accéder à la valeur d'un champ, on utilise la notation pointée en nomman
 \begin{PLM}
 let x $uint32 = ICSR.ISRPENDING // 0 ou 2**22
 \end{PLM}
-Ceci effectue simplement un masquage de façon à isoler le bit demandé. Aucun décalage n'est réalisé. Comme le bit \texttt{ISRPENDING} est le 22\up{e}, le résultat est $0$ ou $2^{22}$.
+Ceci effectue simplement un masquage de façon à isoler le bit demandé. Aucun décalage n'est réalisé. Comme le bit \texttt{ISRPENDING} est le $22^e$, le résultat est $0$ ou $2^{22}$.
 
 Si l'on veut obtenir un résultat justifié à droite, on utilise en plus l'accesseur \plm+.shifted+ :
 \begin{PLM}

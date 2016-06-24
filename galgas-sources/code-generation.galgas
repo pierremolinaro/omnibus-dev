@@ -393,9 +393,10 @@ private proc generateCodeFiles
   )
   let s1 = [cCode stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskMapIR count] string]]
   let s2 = [s1 stringByReplacingStringByString !"!GUARDCOUNT!" ![inIntermediateCodeStruct.mMaxBranchOfOnInstructions string]]
-  let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
+  let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
   let s4 = [s3 stringByReplacingStringByString !"!SERVICEIMPLEMENTATION!" !llvmNameForServiceImplementation (!"")]
-  [s4 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
+  let s5 = [s4 stringByReplacingStringByString !"!SERVICECALL!" !llvmNameForServiceCall (!"")]
+  [s5 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
 #----------------------------------------- Write JSON file with stack features
   var json = "{\n"
 #--- System stack size
@@ -407,7 +408,7 @@ private proc generateCodeFiles
 #--- Tasks
   json += "  \"tasks\" : {"
   for task in inIntermediateCodeStruct.mTaskMapIR
-    do json += "\n    \"" + task.lkey + "\" : " + task.mStackSize
+    do json += "\n    \"" + [task.lkey assemblerRepresentation] + "\" : " + task.mStackSize
     between json += ","
   end
   json += "\n"

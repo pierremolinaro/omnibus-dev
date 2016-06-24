@@ -5,17 +5,17 @@
 type $taskList : ((32)) @instantiable
 
 //--- Block running task
-extern func `kernel blockInList (?!list:ioWaitingList $taskList)
+extern func `kernel blockInList (?!list:ioWaitingList $taskList) : "blockInList"
 
-extern func `kernel blockOnDeadline (?deadline:inDeadline $uint32) 
+extern func `kernel blockOnDeadline (?deadline:inDeadline $uint32) : "blockOnDeadline"
 
-extern func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) 
+extern func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) : "blockInListAndOnDeadline"
 
 //--- Make task Ready
 extern func `kernel `service `guard
-makeTaskReady (?!list:ioWaitingList $taskList !found: outFound $bool)
+makeTaskReady (?!list:ioWaitingList $taskList !found: outFound $bool) : "makeTaskReady"
 
-extern func `service makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $uint32)
+extern func `service makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
 
 //——————————————————————————————————————————————————————————————————————————————
 //   GUARD                                                                      
@@ -23,13 +23,13 @@ extern func `service makeTasksReadyFromCurrentDate (?currentDate:inCurrentDate $
 
 type $guardList : ((32)) @instantiable
 
-extern func `guard handleGuardedCommand (?!guard:ioGuard $guardList)
+extern func `guard handleGuardedCommand (?!guard:ioGuard $guardList) : "handleGuardedCommand"
 
-extern func `guard handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32)
+extern func `guard handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32) : "handleGuardedWaitUntil"
 
-extern func `kernel `service guardDidChange (?!guard:ioGuard $guardList)
+extern func `kernel `service guardDidChange (?!guard:ioGuard $guardList) : "guardDidChange"
 
-extern func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
+extern func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32) : "tickHandlerForGuardedWaitUntil"
 
 //——————————————————————————————————————————————————————————————————————————————
 

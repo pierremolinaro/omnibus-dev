@@ -15,6 +15,7 @@ enum @routineKind {
 
 # Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
 map @routineMapForContext {
+  @string mRoutineLLVMName
   @bool mIsPublic
   @modeMap mModeMap
   @procedureSignature mSignature
@@ -46,18 +47,6 @@ map @guardMapForContext {
 #  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in self do
-    for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
-      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
-      [!?ioGraph noteNode !typeName]
-    end
-    [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 method @sectionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
     for (* * formalArgumentTypeName *) in mSectionFormalArgumentList do
@@ -76,104 +65,6 @@ list @procedureSignature {
   @procFormalArgumentPassingMode mFormalArgumentPassingMode
   @string mSelector
   @unifiedTypeMap-proxy mType
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @functionDeclarationListAST enterInContext 
-  ?selfTypeName:let @string inSelfTypeName
-  ?!context:@semanticContext ioContext
-{
-  for procedure in self do
-  #--- Signature
-    @procedureSignature signature = {}
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mFunctionFormalArgumentList do
-      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-      signature += !formalArgumentPassingMode !selector.string !typeProxy
-    end
-  #--- Return type
-    let returnType = if procedure.mFunctionReturnTypeName.string == "" then
-      @unifiedTypeMap-proxy.null
-    else
-      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mFunctionReturnTypeName}
-    end
-  #--- Mode map
-    @modeMap procedureModeMap = {}
-    for () in procedure.mFunctionModeList do
-      [!?procedureModeMap insertKey !mValue] ;
-    end
-  #--- Attribute
-    var weakProcedure = false
-    var canMutateProperties = false
-    var canAccessProperties = false
-    for (attribute) in procedure.mFunctionAttributeList while not weakProcedure do
-      if attribute.string == weakAttribute () then
-        weakProcedure = true
-      end
-      if attribute.string == mutatingAttribute () then
-        canMutateProperties = true
-      end
-      if attribute.string == userAccessAttribute () then
-        canAccessProperties = true
-        if canAccessProperties && not [procedureModeMap hasKey !userModeName ()] then
-          error attribute : "useless @" + attribute + " attribute: function is never executed in `" + userModeName () + " mode"
-        end
-      end
-    end
-    if not [procedureModeMap hasKey !userModeName ()] then
-      canAccessProperties = true
-    end
-  #--- Enter in context
-    let lkey = @lstring.new {!inSelfTypeName + "." + procedure.mFunctionName !procedure.mFunctionName.location}
-    if [ioContext.mRoutineMapForContext hasKey !lkey.string] then
-      let weak = [ioContext.mRoutineMapForContext mWeakForKey !lkey.string]
-      if weakProcedure && not weak then
-        # redefined weak procedure is ignored
-      elsif weakProcedure && weak then
-        error procedure.mFunctionName : "this weak procedure overrides a weak procedure"
-      elsif (not weakProcedure) && weak then
-        [!?ioContext.mRoutineMapForContext removeKey !lkey ?9*] # Remove weak routine
-        [!?ioContext.mRoutineMapForContext insertKey # Insert routine
-          !lkey
-          !procedure.mPublicFunction
-          !procedureModeMap
-          !signature
-          !.function
-          !weakProcedure
-          !returnType
-          !false # No appendFileAndLineArgumentForPanicLocation
-          !canMutateProperties
-          !canAccessProperties
-        ]
-      else # (not weakProcedure) && (not weak)
-        [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
-          !lkey
-          !procedure.mPublicFunction
-          !procedureModeMap
-          !signature
-          !.function
-          !weakProcedure
-          !returnType
-          !false # No appendFileAndLineArgumentForPanicLocation
-          !canMutateProperties
-          !canAccessProperties
-        ]
-      end
-    else
-      [!?ioContext.mRoutineMapForContext insertKey
-        !lkey
-        !procedure.mPublicFunction
-        !procedureModeMap
-        !signature
-        !.function
-        !weakProcedure
-        !returnType
-        !false # No appendFileAndLineArgumentForPanicLocation
-        !canMutateProperties
-        !canAccessProperties
-      ]
-    end
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -100,6 +100,7 @@ method @primitiveDeclarationListAST enterInContext
     end
     [!?ioContext.mRoutineMapForContext insertKey
       !@lstring.new {!inReceiverTypeName + "." + primitive.mPrimitiveName !primitive.mPrimitiveName.location}
+      !inReceiverTypeName + "." + primitive.mPrimitiveName
       !primitive.mPublic
       !modeMap
       !signature

@@ -1,6 +1,10 @@
+%!TEX TS-program = personallatex
 %!TEX encoding = UTF-8 Unicode
 
-\documentclass[a4paper,11pt,obeyspaces,openany]{book}
+% Le script utilisé pour compiler est :
+%       xelatex --file-line-error --shell-escape --synctex=1
+
+\documentclass[a4paper,10pt,obeyspaces,openany]{book}
 \usepackage{verbatim}
 % L'option 'openany' permet de démarrer un chapitre sur une page paire
 
@@ -34,27 +38,34 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
+%--------------------------- Pour compilation LaTex
+
 %--- Ce paquetage permet d'effectuer certaines césures, et ainsi d'éviter les messages "Overfull \hbox"
-\usepackage[T1]{fontenc}
+%\usepackage[T1]{fontenc}
 
 %--- Paquetage pour le codage des sources en UTF-8
-\usepackage[utf8]{inputenc}
+%\usepackage[utf8x]{inputenc}
 
-%--- Latex demande ce paquetage pour mieux afficher le caractère "°" et \textquotesingle "'"
-\usepackage{textcomp}
+%--- Paquetage pour imposer les réglages français
+%\usepackage[frenchb]{babel}
 
-%-----------------------------------------------------------------------------------------------------------------------*
-%                                                                                                                       *
-%   C H O I X    D E    L A    P O L I C E                                                                              *
-%                                                                                                                       *
-%-----------------------------------------------------------------------------------------------------------------------*
+%--- Polices
+%%\usepackage{fouriernc}
+%%\usepackage[scaled=0.875]{helvet}
 
-%\usepackage{lmodern} % for French
-%\usepackage{fouriernc}
-%\usepackage[scaled=0.875]{helvet}
+%\usepackage[scaled=0.85, default]{sourcecodepro}
+%\usepackage[scaled=1.0, default]{sourcesanspro}
 
-\usepackage[scaled=0.9,default]{sourcecodepro}
-\usepackage[default]{sourcesanspro}
+
+%--------------------------- Pour compilation XeLaTex
+% http://www.tuteurs.ens.fr/logiciels/latex/xetex.html
+\RequirePackage{etex}
+\usepackage{fontspec}
+\setmainfont{Verdana}[Ligatures=TeX]
+\setsansfont{Courier}[Ligatures=NoCommon]
+\setmonofont{Menlo}[Ligatures=NoCommon]
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -62,17 +73,16 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-%--- Paquetage pour imposer les réglages français
-%\usepackage[francais]{babel}
-\usepackage[frenchb]{babel}
+%--- Latex demande ce paquetage pour mieux afficher le caractère "°" et \textquotesingle "'"
+\usepackage{textcomp}
 
 %--- Contrôle de l'indentation et de la séparation des paragraphes
 \setlength{\parindent}{0pt} 
 %\setlength{\parskip}{1.2ex} % Reporté avant les chapitres
 
 %--- Ajouter une séparation à la fin des itemize
-\let\EndItemize\enditemize
-\def\enditemize{\EndItemize\vspace{1.2ex}}
+%\let\EndItemize\enditemize
+%\def\enditemize{\EndItemize\vspace{1.2ex}}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -133,7 +143,8 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
-\newcommand\ligne{\noindent\makebox[\linewidth]{\rule{\textwidth}{0.5pt}}}
+%\newcommand\ligne{\noindent\makebox[\linewidth]{\rule{\textwidth}{0.5pt}}}
+\newcommand\ligne{\hrulefill}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -177,6 +188,7 @@
 
 %--- Pour les hyperliens, et le contrôle de la génération PDF 
 \usepackage[pagebackref]{hyperref}
+\usepackage{bookmark} % see http://tex.stackexchange.com/questions/176113/problem-with-in-pdf-bookmark-under-xelatex
 
 \hypersetup{pdftitle      = {PLM}}
 \hypersetup{pdfauthor     = {Pierre Molinaro}}
@@ -217,36 +229,7 @@
   \hypersetup{citecolor  = black}
 }
 
-%---------------------------------------------------- Numéro de section
-% Par défaut, une section est affichée avec son numéro de chapitre : par exemple : 2.1 Titre
-% Les Éditions Ellipses précisent que le numéro de chapitre ne doit pas apparaître, ni dans le corps, ni dans l'en-tête
-% Voir http://help-csli.stanford.edu/tex/latex-sections.shtml
-% La solution suivante affecte aussi les sous-sections, ainsi que la table des matières.
-%\renewcommand\thesection {\arabic{section}}
-
-%---------------------------------------------------- Affichage des numéros de section
-% C'est à dire les numéros qui sont affichées pour \section, \subsection, ...
-% Par défaut, l'affichage se fait jusqu'au niveau 2 (\subsection)
-% Avec cette commande, on va jusqu'au niveau \subsubsection.
-\setcounter{secnumdepth}{3}
-
-%---------------------------------------------------- Définition de subsubsubsection
-% http://forum.mathematex.net/latex-f6/definir-un-subsubsubsection-t4031.html
-\makeatletter
-\newcounter{subsubsubsection}[subsubsection]
-\renewcommand\thesubsubsubsection{\thesubsubsection .\@alph\c@subsubsubsection}
-\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
-                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
-                                     {1.5ex \@plus .2ex}%
-                                     {\normalfont\normalsize\bfseries}}
-\newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
-\newcommand*{\subsubsubsectionmark}[1]{}
-\makeatother
-
-\makeatletter
-\def\toclevel@subsubsubsection{4}
-\makeatother
-
+%-----------------------------------------------------------------------------------------------------------------------*
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UN TABLEAU
 % La référence au tableau "nom-du-tableau" est définie par \labelTableau{nom-du-tableau}
 \newcommand\labelTableau[1]{\label{tab:#1}}
@@ -287,19 +270,19 @@
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UN CHAPITRE
 % Au lieu d'écrire \chapter{titre-chapitre}, on écrit \chapterLabel{titre-chapitre}{label-chapitre}
-\newcommand \chapterLabel[2]{\chapter{#1}\label{chapter:#2}}
+\newcommand\chapterLabel[2]{\chapter{#1}\label{chapter:#2}}
 
 
 % \refChapter{label-chapter} ---> "chapitre n"
-\newcommand \refChapter[1]{\hyperref[chapter:#1]{chapitre \ref*{chapter:#1}}}
+\newcommand\refChapter[1]{\hyperref[chapter:#1]{chapitre \ref*{chapter:#1}}}
 
-\newcommand \refChapterPage[1]{\hyperref[chapter:#1]{chapitre \ref*{chapter:#1} page \pageref{chapter:#1}}}
+\newcommand\refChapterPage[1]{\hyperref[chapter:#1]{chapitre \ref*{chapter:#1} page \pageref{chapter:#1}}}
 \newcommand\refChapterTitlePage[1]{\hyperref[chapter:#1]{chapitre « \emph{\nameref*{chapter:#1}} » page \pageref{chapter:#1}}}
 \newcommand\refChapterTitle[1]{\nameref{chapter:#1}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SECTION
 % Au lieu d'écrire \section{titre-section}, on écrit \sectionLabel{titre-section}{label-section}
-\newcommand \sectionLabel[2]{\section{#1}\label{sec:#2}}
+\newcommand\sectionLabel[2]{\section{#1}\label{sec:#2}}
 
 
 % \refSectionPage{label-section} ---> "section x.y page n"   où x.y est le n° de la section
@@ -309,7 +292,7 @@
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SUB-SECTION
 % Au lieu d'écrire \subsection{titre-section}, on écrit \subsectionLabel{titre-section}{label-section}
-\newcommand \subsectionLabel[2]{\subsection{#1}\label{subsec:#2}}
+\newcommand\subsectionLabel[2]{\subsection{#1}\label{subsec:#2}}
 
 
 % \refSubsectionPage{label-section} ---> "section x.y page n"   où x.y est le n° de la sub-section
@@ -319,7 +302,7 @@
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SUB-SUB-SECTION
 % Au lieu d'écrire \subsubsection{titre-section}, on écrit \subsubsectionLabel{titre-section}{label-section}
-\newcommand \subsubsectionLabel[2]{\subsubsection{#1}\label{subsubsec:#2}}
+\newcommand\subsubsectionLabel[2]{\subsubsection{#1}\label{subsubsec:#2}}
 
 
 % \refSubsectionPage{label-section} ---> "page n"   où n est la page de la sub-sub-section
@@ -329,7 +312,7 @@
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SUB-SUB-SUB-SECTION
 % Au lieu d'écrire \subsubsubsection{titre-section}, on écrit \subsubsubsectionLabel{titre-section}{label-section}
-%\newcommand \subsubsubsectionLabel[2]{\subsubsubsection{#1}\label{subsubsubsec:#2}}
+%\newcommand\subsubsubsectionLabel[2]{\subsubsubsection{#1}\label{subsubsubsec:#2}}
 
 
 % \refSubsubsubsectionPage{label-section} ---> "page n"   où n est la page de la sub-sub-section
@@ -337,7 +320,7 @@
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE ÉQUATION
 % Pour une équation, au lieu d'écrire \label{label-equation}, on écrit \labelEquation{label-equation}
-\newcommand \labelEquation[1]{\label{equ:#1}}
+\newcommand\labelEquation[1]{\label{equ:#1}}
 
 % \refEquationPage{label-equation} ---> "équation x.y page n" où x.y est le n° de l'équation
 \newcommand\refEquationPage[1]{\hyperref[equ:#1]{équation \ref*{equ:#1} page \pageref{equ:#1}}}
@@ -349,7 +332,7 @@
 % Pour latex, équation et systèmes (d'équation) sont numérotés grâce au même compteur ; on distingue les deux
 % pour les référencements soient différents
 % Pour un système, au lieu d'écrire \label{label-systeme}, on écrit \labelSystème{label-systeme}
-\newcommand \labelSysteme[1]{\label{syst:#1}}
+\newcommand\labelSysteme[1]{\label{syst:#1}}
 
 % \refSysteme{label-systeme} ---> "système x.y" où x.y est le n° du système
 \newcommand\refSysteme[1]{\hyperref[syst:#1]{système \ref*{syst:#1}}}
@@ -361,7 +344,7 @@
 \newcommand\refSystemePage[1]{\hyperref[syst:#1]{système \ref*{syst:#1} page \pageref{syst:#1}}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE NOTE DE BAS DE PAGE
-\newcommand \labelNote[1]{\label{footnote:#1}}
+\newcommand\labelNote[1]{\label{footnote:#1}}
 
 \newcommand\refNote[1]{\hyperref[footnote:#1]{$^{\ref*{footnote:#1}}$}}
 
@@ -376,11 +359,11 @@
 \usepackage{array}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
-\usepackage{arydshln} % Pour faire des séparateurs de ligne en pointillés (\hdashline)
-\renewcommand\dashlinedash{1pt}
-\renewcommand\dashlinegap{8pt}
-
-\renewcommand{\arraystretch}{1.2}
+%\usepackage{arydshln} % Pour faire des séparateurs de ligne en pointillés (\hdashline)
+%\renewcommand\dashlinedash{1pt}
+%\renewcommand\dashlinegap{8pt}
+%
+%\renewcommand{\arraystretch}{1.2}
 
 %--- Couleur de fond alternée des tableaux
 %\ifthenelse{\equal{\sortieEnCouleur}{true}}{
@@ -391,7 +374,7 @@
 
 %--- Ce paquetage permet d'utiliser les environnements wrapfigure et wraptable pour insérer les figures et
 % les tableaux dans le texte.
-\usepackage{wrapfig}
+%\usepackage{wrapfig}
 
 %--- Ce paquetage permet de changer le style des légendes des tableaux et des figures (voir caption-eng.pdf) :
 %  - l'étiquette est en italique gras
@@ -416,7 +399,7 @@
 
 %--- De même, la liste des figures sommaire est appelé "Table des figures"
 % La commande suivante impose le nom "Liste des figures"
-\addto\captionsfrench{\def\listfigurename{Liste des figures}}
+%\addto\captionsfrench{\def\listfigurename{Liste des figures}}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -556,10 +539,11 @@
   \@esphack
   \endgroup
   \immediate\write18{plm --mode=latex:plm temp.plm}
+  \setstretch{1.2}
   \ifthenelse{\equal{\ParametrePLM}{0}}{
-    {\singlespacing\begin{siderules}\ttfamily\input{temp.plm.tex}\end{siderules}}
+    {\begin{siderules}\ttfamily\input{temp.plm.tex}\end{siderules}}
   }{
-    {\singlespacing\begin{linenumbers}\resetlinenumber[\ParametrePLM]\ttfamily\input{temp.plm.tex}\end{linenumbers}}
+    {\begin{linenumbers}\resetlinenumber[\ParametrePLM]\ttfamily\input{temp.plm.tex}\end{linenumbers}}
   }
 }
 \makeatother
@@ -655,19 +639,33 @@
 \renewcommand{\headrulewidth}{0.5 pt}
 \renewcommand{\footrulewidth}{0 pt}
 
-\renewcommand{\chaptermark}[1]{\markboth{\bsc{\chaptername~\thechapter{}.} #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\bsc{\thesection{}.} #1}{}}
-
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
 %   T O C B I D I N D                                                                                                   *
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
+%-----------------------------------------------------------------------------------------------------------------------*
+%                                                                                                                       *
+%   C O N T R Ô L E    D E   L A   T A B L E   D E S   M A T I È R E S                                                  *
+%                                                                                                                       *
+%-----------------------------------------------------------------------------------------------------------------------*
+
+% http://tex.stackexchange.com/questions/50471/question-about-indent-lengths-in-toc
+\usepackage{tocloft}
+
+%--- Gérer de l'indentation dans la table des matières
+\cftsetindents{chapter}{0.0em}{2.0em}
+\cftsetindents{section}{2.0em}{3.5em}
+\cftsetindents{subsection}{5.5em}{4.5em}
+\cftsetindents{table}{0.0em}{3.0em}
+\cftsetindents{figure}{0.0em}{3.0em}
+
 %    Pour faire figurer la liste des tableaux (et la table des matières) dans la table des matières
 \usepackage{tocbibind}
-%--- Profondeur de la table des matières
-\setcounter{tocdepth}{3} % Faire apparaître jusqu'aux subsubsections
+
+%--- Profondeur de la table des matières jusqu'au niveau 2 (subsection)
+\setcounter{tocdepth}{2}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
