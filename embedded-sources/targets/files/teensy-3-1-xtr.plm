@@ -5,17 +5,23 @@
 type $taskList : ((32)) @instantiable
 
 //--- Block running task
-extern public func `kernel blockInList (?!list:ioWaitingList $taskList) : "blockInList"
+extern func `kernel
+block (?!inList:ioWaitingList $taskList) : "blockInList"
 
-extern public func `kernel blockOnDeadline (?deadline:inDeadline $uint32) : "blockOnDeadline"
+extern func `kernel
+block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
 
-extern public func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList ?deadline:inDeadline $uint32) : "blockInListAndOnDeadline"
+extern func `kernel
+block (?!inList:ioWaitingList $taskList
+       ?onDeadline:inDeadline $uint32) : "blockInListAndOnDeadline"
 
 //--- Make task Ready
-extern public func `kernel `service `guard
-makeTaskReady (?!list:ioWaitingList $taskList !found: outFound $bool) : "makeTaskReady"
+extern func `kernel `service `guard
+makeTaskReady (?!fromList:ioWaitingList $taskList
+               !found: outFound $bool) : "makeTaskReady"
 
-extern public func `service makeTasksReadyFrom (?currentDate:inCurrentDate $uint32) : "makeTasksReadyFrom"
+extern func `service
+makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
 
 //——————————————————————————————————————————————————————————————————————————————
 //   GUARD                                                                      
@@ -23,13 +29,17 @@ extern public func `service makeTasksReadyFrom (?currentDate:inCurrentDate $uint
 
 type $guardList : ((32)) @instantiable
 
-extern public func `guard handleGuardedCommand (?!guard:ioGuard $guardList) : "handleGuardedCommand"
+extern func `guard
+handle (?!guard:ioGuard $guardList) : "handleGuardedCommand"
 
-extern public func `guard handleGuardedWaitUntil (?deadline:inDeadlineMS $uint32) : "handleGuardedWaitUntil"
+extern func `guard
+handle (?guardedDeadline:inDeadlineMS $uint32) : "handleGuardedWaitUntil"
 
-extern public func `kernel `service guardDidChange (?!guard:ioGuard $guardList) : "guardDidChange"
+extern func `kernel `service
+notifyChange (?!forGuard:ioGuard $guardList) : "guardDidChange"
 
-extern public func `service tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32) : "tickHandlerForGuardedWaitUntil"
+extern func `service
+notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32) : "tickHandlerForGuardedWaitUntil"
 
 //——————————————————————————————————————————————————————————————————————————————
 //   INIT                                                                       
@@ -83,8 +93,8 @@ module time {
   isr systick @xtr {
     let now = self.mUptimeMS +% 1
     self.mUptimeMS = now
-    makeTasksReadyFrom (!currentDate:now)
-    tickHandlerForGuardedWaitUntil (!currentDate:now)
+    makeTasksReady (!fromCurrentDate:now)
+    notifyChangeForGuardedWaitUntil (!withCurrentDate:now)
     userTickHandler ()
   }
   
@@ -92,7 +102,7 @@ module time {
   
   public primitive waitUntilMS @noWarningIfUnused (?deadline: inDate $uint32) {
     if inDate > self.millis () {
-      blockOnDeadline (!deadline:inDate)
+      block (!onDeadline:inDate)
     }
   }
   
@@ -100,7 +110,7 @@ module time {
   
   public primitive waitDuringMS @noWarningIfUnused (?delay: inDelay $uint32) {
     if inDelay > 0 {
-      blockOnDeadline (!deadline:self.millis () +% inDelay)
+      block (!onDeadline:self.millis () +% inDelay)
     }
   }
   
@@ -109,7 +119,7 @@ module time {
   public guard waitUntilMS @noWarningIfUnused (?deadline:inDeadline $uint32) {
     accept = inDeadline <= self.millis ()
     if not accept {
-      handleGuardedWaitUntil (!deadline:inDeadline)
+      handle (!guardedDeadline:inDeadline)
     }
   }
   

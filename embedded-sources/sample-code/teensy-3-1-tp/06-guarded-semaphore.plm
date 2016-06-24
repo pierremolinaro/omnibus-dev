@@ -11,15 +11,15 @@ struct $monSemaphore {
     if self.value > 0 {
       self.value -= 1
     }else{
-      blockInList (!?list:self.list)
+      block (!?inList:self.list)
     }
   }
 
   public service V () {
-    makeTaskReady (!?list:self.list ?found:let found)
+    makeTaskReady (!?fromList:self.list ?found:let found)
     if not found {
       self.value += 1
-      guardDidChange (!?guard:self.guardList)
+      notifyChange (!?forGuard:self.guardList)
     }
   }
 
@@ -28,7 +28,7 @@ struct $monSemaphore {
     if accept {
       self.value -= 1
     }else{
-      handleGuardedCommand (!?guard:self.guardList)
+      handle (!?guard:self.guardList)
     }
   }
   

@@ -9,46 +9,46 @@ struct $rendezVous {
   var outputGuardList = $guardList ()
 
   public primitive input () {
-    makeTaskReady (!?list:self.outputWaitList ?found:let found)
+    makeTaskReady (!?fromList:self.outputWaitList ?found:let found)
     if not found {
-      guardDidChange (!?guard:self.outputGuardList)
-      blockInList (!?list:self.inputWaitList)
+      notifyChange (!?forGuard:self.outputGuardList)
+      block (!?inList:self.inputWaitList)
     }
   }
 
   public primitive output () {
-    makeTaskReady (!?list:self.inputWaitList ?found:let found)
+    makeTaskReady (!?fromList:self.inputWaitList ?found:let found)
     if not found {
-      guardDidChange (!?guard:self.inputGuardList)
-      blockInList (!?list:self.outputWaitList)
+      notifyChange (!?forGuard:self.inputGuardList)
+      block (!?inList:self.outputWaitList)
     }
   }
 
   public primitive inputUntil @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
-    makeTaskReady (!?list:self.outputWaitList ?found:result)
+    makeTaskReady (!?fromList:self.outputWaitList ?found:result)
     if (not result) and (inDeadline > time.millis ()) { 
-      blockInListAndOnDeadline (!?list:self.inputWaitList !deadline:inDeadline)
+      block (!?inList:self.inputWaitList !onDeadline:inDeadline)
     }
   }
 
   public primitive outputUntil @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
-    makeTaskReady (!?list:self.inputWaitList ?found:result)
+    makeTaskReady (!?fromList:self.inputWaitList ?found:result)
     if (not result) and (inDeadline > time.millis ()) { 
-      blockInListAndOnDeadline (!?list:self.outputWaitList !deadline:inDeadline)
+      block (!?inList:self.outputWaitList !onDeadline:inDeadline)
     }
   }
 
   public guard input @noWarningIfUnused () {
-    makeTaskReady (!?list:self.outputWaitList ?found:accept)
+    makeTaskReady (!?fromList:self.outputWaitList ?found:accept)
     if not accept {
-      handleGuardedCommand (!?guard:self.inputGuardList)
+      handle (!?guard:self.inputGuardList)
     }
   }
 
   guard output @noWarningIfUnused () {
-    makeTaskReady (!?list:self.inputWaitList ?found:accept)
+    makeTaskReady (!?fromList:self.inputWaitList ?found:accept)
     if not accept {
-      handleGuardedCommand (!?guard:self.outputGuardList)
+      handle (!?guard:self.outputGuardList)
     }
   }
 

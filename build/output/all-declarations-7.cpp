@@ -979,7 +979,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var list = $taskList ()\n"
   "\n"
   "  public service V () {\n"
-  "    makeTaskReady (!\?list:self.list \?found:let found)\n"
+  "    makeTaskReady (!\?fromList:self.list \?found:let found)\n"
   "    if not found {\n"
   "      self.value += 1\n"
   "    }\n"
@@ -990,7 +990,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    if result {\n"
   "      self.value -= 1\n"
   "    }else if inDeadline > time.millis () {\n"
-  "      blockInListAndOnDeadline (!\?list:self.list !deadline:inDeadline)\n"
+  "      block (!\?inList:self.list !onDeadline:inDeadline)\n"
   "    }\n"
   "  }\n"
   "\n"
@@ -1046,7 +1046,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "05-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  1560, // Text length
+  1549, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1065,15 +1065,15 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    if self.value > 0 {\n"
   "      self.value -= 1\n"
   "    }else{\n"
-  "      blockInList (!\?list:self.list)\n"
+  "      block (!\?inList:self.list)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  public service V () {\n"
-  "    makeTaskReady (!\?list:self.list \?found:let found)\n"
+  "    makeTaskReady (!\?fromList:self.list \?found:let found)\n"
   "    if not found {\n"
   "      self.value += 1\n"
-  "      guardDidChange (!\?guard:self.guardList)\n"
+  "      notifyChange (!\?forGuard:self.guardList)\n"
   "    }\n"
   "  }\n"
   "\n"
@@ -1082,7 +1082,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    if accept {\n"
   "      self.value -= 1\n"
   "    }else{\n"
-  "      handleGuardedCommand (!\?guard:self.guardList)\n"
+  "      handle (!\?guard:self.guardList)\n"
   "    }\n"
   "  }\n"
   "  \n"
@@ -1136,16 +1136,16 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var deadline $uint32 = 0\n"
   "  \n"
   "  while s0.PP () {\n"
-  "   leds.toggle  (!LED_L1)\n"
+  "   leds.write (!toggle:LED_L1)\n"
   "  }\n"
   "  \n"
   "  while s1.P () {\n"
-  "    leds.toggle  (!LED_L3)\n"
+  "    leds.write (!toggle:LED_L3)\n"
   "  }\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline += 200\n"
-  "    leds.toggle  (!LED_L2)\n"
+  "    leds.write (!toggle:LED_L2)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1155,7 +1155,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "06-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2134, // Text length
+  2136, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1216,16 +1216,16 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var deadline $uint32 = 0\n"
   "  \n"
   "  while s0.P () {\n"
-  "    leds.toggle  (!LED_L1)\n"
+  "    leds.write (!toggle:LED_L1)\n"
   "  }\n"
   "  \n"
   "  while PP () {\n"
-  "    leds.toggle  (!LED_L3)\n"
+  "    leds.write (!toggle:LED_L3)\n"
   "  }\n"
   "  \n"
   "  while convenienceWaitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline += 200\n"
-  "    leds.toggle  (!LED_L2)\n"
+  "    leds.write (!toggle:LED_L2)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1235,7 +1235,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "07-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  1550, // Text length
+  1565, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1252,46 +1252,46 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var outputGuardList = $guardList ()\n"
   "\n"
   "  public primitive input () {\n"
-  "    makeTaskReady (!\?list:self.outputWaitList \?found:let found)\n"
+  "    makeTaskReady (!\?fromList:self.outputWaitList \?found:let found)\n"
   "    if not found {\n"
-  "      guardDidChange (!\?guard:self.outputGuardList)\n"
-  "      blockInList (!\?list:self.inputWaitList)\n"
+  "      notifyChange (!\?forGuard:self.outputGuardList)\n"
+  "      block (!\?inList:self.inputWaitList)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  public primitive output () {\n"
-  "    makeTaskReady (!\?list:self.inputWaitList \?found:let found)\n"
+  "    makeTaskReady (!\?fromList:self.inputWaitList \?found:let found)\n"
   "    if not found {\n"
-  "      guardDidChange (!\?guard:self.inputGuardList)\n"
-  "      blockInList (!\?list:self.outputWaitList)\n"
+  "      notifyChange (!\?forGuard:self.inputGuardList)\n"
+  "      block (!\?inList:self.outputWaitList)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  public primitive inputUntil @noWarningIfUnused (\?deadline:inDeadline $uint32) -> $bool {\n"
-  "    makeTaskReady (!\?list:self.outputWaitList \?found:result)\n"
+  "    makeTaskReady (!\?fromList:self.outputWaitList \?found:result)\n"
   "    if (not result) and (inDeadline > time.millis ()) { \n"
-  "      blockInListAndOnDeadline (!\?list:self.inputWaitList !deadline:inDeadline)\n"
+  "      block (!\?inList:self.inputWaitList !onDeadline:inDeadline)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  public primitive outputUntil @noWarningIfUnused (\?deadline:inDeadline $uint32) -> $bool {\n"
-  "    makeTaskReady (!\?list:self.inputWaitList \?found:result)\n"
+  "    makeTaskReady (!\?fromList:self.inputWaitList \?found:result)\n"
   "    if (not result) and (inDeadline > time.millis ()) { \n"
-  "      blockInListAndOnDeadline (!\?list:self.outputWaitList !deadline:inDeadline)\n"
+  "      block (!\?inList:self.outputWaitList !onDeadline:inDeadline)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  public guard input @noWarningIfUnused () {\n"
-  "    makeTaskReady (!\?list:self.outputWaitList \?found:accept)\n"
+  "    makeTaskReady (!\?fromList:self.outputWaitList \?found:accept)\n"
   "    if not accept {\n"
-  "      handleGuardedCommand (!\?guard:self.inputGuardList)\n"
+  "      handle (!\?guard:self.inputGuardList)\n"
   "    }\n"
   "  }\n"
   "\n"
   "  guard output @noWarningIfUnused () {\n"
-  "    makeTaskReady (!\?list:self.inputWaitList \?found:accept)\n"
+  "    makeTaskReady (!\?fromList:self.inputWaitList \?found:accept)\n"
   "    if not accept {\n"
-  "      handleGuardedCommand (!\?guard:self.outputGuardList)\n"
+  "      handle (!\?guard:self.outputGuardList)\n"
   "    }\n"
   "  }\n"
   "\n"
@@ -1334,7 +1334,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "08-rendez-vous.plm",
   "plm",
   true, // Text file
-  2490, // Text length
+  2450, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1427,7 +1427,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  \n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline += 200\n"
-  "    leds.toggle  (!LED_L4)\n"
+  "    leds.write (!toggle:LED_L4)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1437,7 +1437,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2333, // Text length
+  2338, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 

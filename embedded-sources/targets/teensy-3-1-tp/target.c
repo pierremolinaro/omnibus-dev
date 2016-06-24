@@ -326,7 +326,7 @@ void makeTaskReady (TaskList * ioWaitingList, bool * outFound) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void makeTasksReadyFrom (const unsigned inCurrentDate) asm ("!FUNC!makeTasksReadyFrom") ;
+void makeTasksReadyFrom (const unsigned inCurrentDate) asm ("!FUNC!makeTasksReadyFromCurrentDate") ;
 
 void makeTasksReadyFrom (const unsigned inCurrentDate) {
   unsigned w = gDeadlineWaitingTaskList ;
