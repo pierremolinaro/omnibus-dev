@@ -9,10 +9,10 @@ struct $rendezVousDataé {
   var donnée $uint32 = 0
 
   public func `user output @mutating @userAccess (?data:inData $uint32) {
-    self.autoriserEcriture.P ()
+    self.autoriserEcriture.wait ()
     self.donnée = inData
-    self.autoriserLecture.V ()
-    self.signalerDonneeLue.P ()
+    self.autoriserLecture.signal ()
+    self.signalerDonneeLue.wait ()
   }
 
 //  public func `user input (!data:outData $uint32) {
@@ -22,10 +22,10 @@ struct $rendezVousDataé {
 //    self.autoriserEcriture.V ()
 //  }
 
-  public guard entrée (!data:outData $uint32) : self.autoriserLecture.P () {
+  public guard entrée (!data:outData $uint32) : self.autoriserLecture.wait () {
     outData = self.donnée
-    self.signalerDonneeLue.V ()
-    self.autoriserEcriture.V ()
+    self.signalerDonneeLue.signal ()
+    self.autoriserEcriture.signal ()
   }
 
 }
@@ -63,10 +63,10 @@ task T1 priority 1 stackSize 1024 {
 
   while rdvs.entrée (?data:let x) {
     leds.write (!toggle:LED_L1)
-    s.P ()
+    s.wait ()
       lcd.goto (!line:0 !column:0)
       lcd.printUnsigned (!x)
-    s.V ()
+    s.signal ()
   }
 }
 
@@ -77,10 +77,10 @@ task T2 priority 2 stackSize 1024 {
 
   while rdvs2.entrée (?data:let x) {
     leds.write (!toggle:LED_L2)
-    s.P ()
+    s.wait ()
       lcd.goto (!line:1 !column:0)
       lcd.printUnsigned (!x)
-    s.V ()
+    s.signal ()
   }
   
   while time.waitUntilMS (!deadline:self.deadline) {
