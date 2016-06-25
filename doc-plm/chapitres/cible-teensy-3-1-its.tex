@@ -356,8 +356,8 @@ Cette fonction efface l'afficheur LCD, et place le curseur au début de la premi
 \subsubsection{Fonction \texttt{gotoInPanicMode}}
 
 \begin{PLM}
-  public func `panic gotoInPanicMode (?line:inLine $uint2
-                                      ?column:inColumn $uint8)
+public func `panic gotoInPanicMode (?line:inLine $uint2
+                                    ?column:inColumn $uint8)
 \end{PLM}
 
 Cette fonction place le curseur à la colonne \plm=inColumn= de la ligne \plm=inLine=. L'afficheur possédant quatre lignes, l'argument \plm=inLine= est de type \plm=$uint2=. Appelable uniquement en mode \plm=`panic=.
@@ -368,7 +368,7 @@ Cette fonction place le curseur à la colonne \plm=inColumn= de la ligne \plm=in
 \subsubsection{Fonction \texttt{printSpacesInPanicMode}}
 
 \begin{PLM}
-  public func `panic printSpacesInPanicMode (?inCount $uint32)
+public func `panic printSpacesInPanicMode (?inCount $uint32)
 \end{PLM}
 
 Cette fonction écrit \plm=inCount= caractères espace à partir de la position du curseur. Appelable uniquement en mode \plm=`panic=.
@@ -380,7 +380,7 @@ Cette fonction écrit \plm=inCount= caractères espace à partir de la position 
 \subsubsection{Fonction \texttt{printUnsignedInPanicMode}}
 
 \begin{PLM}
-  public func `panic printUnsignedInPanicMode (?inValue $uint32)
+public func `panic printUnsignedInPanicMode (?inValue $uint32)
 \end{PLM}
 
 Cette fonction écrit la valeur de l'argument (un entier non signé sur 32 bits) \plm=inValue= à partir de la position du curseur. Appelable uniquement en mode \plm=`panic=.
@@ -777,6 +777,7 @@ isr PITChannel0 @xtr {
 \subsectionLabel{Routines d'interruption par défaut, panique activée}{itsTeensy31AvecExceptions}
 
 Quand la panique est activée, une routine par défaut est prédéfinie pour chaque interruption (sauf pour celles réservées par ARM et par PLM). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est l'opposé du numéro de l'interruption. Par exemple, pour l'interruption $84$ (\texttt{PITChannel0}), la routine prédéfinie est :
+
 \begin{PLM}[1]
 isr PITChannel0 {
   panic -84
@@ -803,6 +804,7 @@ L'interruption \texttt{SysTick} est particulière. Elle est programmé par la ro
 \end{itemize}
 
 Cette routine \plm+userSystickHandler+ est définie par :
+
 \begin{PLM}[1]
 public func `service userTickHandler @weak () {
 }

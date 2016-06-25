@@ -8,7 +8,7 @@ var s0 = $semaphore (!value:0)
 
 var s1 = $semaphore (!value:0)
 
-guard PP () : s1.P () {
+guard PP () : s1.wait () {
 }
 
 guard convenienceWaitUntilMS (?deadline:inDeadline $uint32)
@@ -21,11 +21,11 @@ task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.top) {
-    s0.V ()
+    s0.signal ()
     self.top += 250
     leds.write (!on:LED_L0)
     time.waitUntilMS (!deadline:self.top)
-    s0.V ()
+    s0.signal ()
     self.top += 250
     leds.write (!off:LED_L0)
   }
@@ -37,11 +37,11 @@ task T1 priority 1 stackSize 512 {
   var top $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.top) {
-    s1.V ()
+    s1.signal ()
     self.top += 249
     leds.write (!on:LED_L4)
     time.waitUntilMS (!deadline:self.top)
-    s1.V ()
+    s1.signal ()
     self.top += 249
     leds.write (!off:LED_L4)
   }
@@ -52,7 +52,7 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   
-  while s0.P () {
+  while s0.wait () {
     leds.write (!toggle:LED_L1)
   }
   
