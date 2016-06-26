@@ -936,12 +936,12 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  }\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.top) {\n"
-  "    s\xC3""\xA9""maphore.V ()\n"
+  "    s\xC3""\xA9""maphore.signal ()\n"
   "    self.top += 250\n"
   "    leds.write (!on:LED_L1)\n"
   "    let constanteAccentu\xC3""\xA9""e = self.top\n"
   "    time.waitUntilMS (!deadline:constanteAccentu\xC3""\xA9""e)\n"
-  "    s\xC3""\xA9""maphore.V ()\n"
+  "    s\xC3""\xA9""maphore.signal ()\n"
   "    self.top += 250\n"
   "    leds.write (!off:LED_L1)\n"
   "  }\n"
@@ -951,9 +951,9 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "task T2 priority 2 stackSize 512 {\n"
   "\n"
-  "  while s\xC3""\xA9""maphore.P () {\n"
+  "  while s\xC3""\xA9""maphore.wait () {\n"
   "    leds.write (!on:LED_L2)\n"
-  "    s\xC3""\xA9""maphore.P ()\n"
+  "    s\xC3""\xA9""maphore.wait ()\n"
   "    leds.write (!off:LED_L2)\n"
   "  }\n"
   "}\n"
@@ -964,7 +964,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "04-semaphore.plm",
   "plm",
   true, // Text file
-  856, // Text length
+  872, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -1171,7 +1171,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "var s1 = $semaphore (!value:0)\n"
   "\n"
-  "guard PP () : s1.P () {\n"
+  "guard PP () : s1.wait () {\n"
   "}\n"
   "\n"
   "guard convenienceWaitUntilMS (\?deadline:inDeadline $uint32)\n"
@@ -1184,11 +1184,11 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var top $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.top) {\n"
-  "    s0.V ()\n"
+  "    s0.signal ()\n"
   "    self.top += 250\n"
   "    leds.write (!on:LED_L0)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
-  "    s0.V ()\n"
+  "    s0.signal ()\n"
   "    self.top += 250\n"
   "    leds.write (!off:LED_L0)\n"
   "  }\n"
@@ -1200,11 +1200,11 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var top $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.top) {\n"
-  "    s1.V ()\n"
+  "    s1.signal ()\n"
   "    self.top += 249\n"
   "    leds.write (!on:LED_L4)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
-  "    s1.V ()\n"
+  "    s1.signal ()\n"
   "    self.top += 249\n"
   "    leds.write (!off:LED_L4)\n"
   "  }\n"
@@ -1215,7 +1215,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "task T2 priority 2 stackSize 512 {\n"
   "  var deadline $uint32 = 0\n"
   "  \n"
-  "  while s0.P () {\n"
+  "  while s0.wait () {\n"
   "    leds.write (!toggle:LED_L1)\n"
   "  }\n"
   "  \n"
@@ -1235,7 +1235,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "07-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  1565, // Text length
+  1591, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1351,10 +1351,10 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var donn\xC3""\xA9""e $uint32 = 0\n"
   "\n"
   "  public func `user output @mutating @userAccess (\?data:inData $uint32) {\n"
-  "    self.autoriserEcriture.P ()\n"
+  "    self.autoriserEcriture.wait ()\n"
   "    self.donn\xC3""\xA9""e = inData\n"
-  "    self.autoriserLecture.V ()\n"
-  "    self.signalerDonneeLue.P ()\n"
+  "    self.autoriserLecture.signal ()\n"
+  "    self.signalerDonneeLue.wait ()\n"
   "  }\n"
   "\n"
   "//  public func `user input (!data:outData $uint32) {\n"
@@ -1364,10 +1364,10 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "//    self.autoriserEcriture.V ()\n"
   "//  }\n"
   "\n"
-  "  public guard entr\xC3""\xA9""e (!data:outData $uint32) : self.autoriserLecture.P () {\n"
+  "  public guard entr\xC3""\xA9""e (!data:outData $uint32) : self.autoriserLecture.wait () {\n"
   "    outData = self.donn\xC3""\xA9""e\n"
-  "    self.signalerDonneeLue.V ()\n"
-  "    self.autoriserEcriture.V ()\n"
+  "    self.signalerDonneeLue.signal ()\n"
+  "    self.autoriserEcriture.signal ()\n"
   "  }\n"
   "\n"
   "}\n"
@@ -1405,10 +1405,10 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "  while rdvs.entr\xC3""\xA9""e (\?data:let x) {\n"
   "    leds.write (!toggle:LED_L1)\n"
-  "    s.P ()\n"
+  "    s.wait ()\n"
   "      lcd.goto (!line:0 !column:0)\n"
   "      lcd.printUnsigned (!x)\n"
-  "    s.V ()\n"
+  "    s.signal ()\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1419,10 +1419,10 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "\n"
   "  while rdvs2.entr\xC3""\xA9""e (\?data:let x) {\n"
   "    leds.write (!toggle:LED_L2)\n"
-  "    s.P ()\n"
+  "    s.wait ()\n"
   "      lcd.goto (!line:1 !column:0)\n"
   "      lcd.printUnsigned (!x)\n"
-  "    s.V ()\n"
+  "    s.signal ()\n"
   "  }\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
@@ -1437,7 +1437,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2338, // Text length
+  2378, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 

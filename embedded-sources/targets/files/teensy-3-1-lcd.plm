@@ -111,10 +111,10 @@ module lcd {
   //············································································
   
   func `init programLcd4BitDataBusOutput @noWarningIfUnused (?inValue $uint8) {
-    self.setD4 (!(inValue & 0x01) ≠ 0)
-    self.setD5 (!(inValue & 0x02) ≠ 0)
-    self.setD6 (!(inValue & 0x04) ≠ 0)
-    self.setD7 (!(inValue & 0x08) ≠ 0)
+    self.setD4 (!(inValue & 0x01) != 0)
+    self.setD5 (!(inValue & 0x02) != 0)
+    self.setD6 (!(inValue & 0x04) != 0)
+    self.setD7 (!(inValue & 0x08) != 0)
   }
   
   //············································································
@@ -195,10 +195,10 @@ module lcd {
   //············································································
   
   func `user programLcd4BitDataBusOutput_inUserMode @noWarningIfUnused (?inValue $uint8) {
-    self.setD4 (!(inValue & 0x01) ≠ 0)
-    self.setD5 (!(inValue & 0x02) ≠ 0)
-    self.setD6 (!(inValue & 0x04) ≠ 0)
-    self.setD7 (!(inValue & 0x08) ≠ 0)
+    self.setD4 (!(inValue & 0x01) != 0)
+    self.setD5 (!(inValue & 0x02) != 0)
+    self.setD6 (!(inValue & 0x04) != 0)
+    self.setD7 (!(inValue & 0x08) != 0)
   }
   
   //············································································
@@ -366,10 +366,10 @@ module lcd {
   //············································································
   
   func `panic programLcd4BitDataBusOutput_inPanicMode @noWarningIfUnused (?inValue $uint8) {
-    self.setD4 (!(inValue & 0x01) ≠ 0)
-    self.setD5 (!(inValue & 0x02) ≠ 0)
-    self.setD6 (!(inValue & 0x04) ≠ 0)
-    self.setD7 (!(inValue & 0x08) ≠ 0)
+    self.setD4 (!(inValue & 0x01) != 0)
+    self.setD5 (!(inValue & 0x02) != 0)
+    self.setD6 (!(inValue & 0x04) != 0)
+    self.setD7 (!(inValue & 0x08) != 0)
   }
   
   //············································································

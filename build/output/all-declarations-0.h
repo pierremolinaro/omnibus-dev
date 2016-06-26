@@ -136,7 +136,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__28_,
    kToken__29_,
    kToken__3D__3D_,
-   kToken__2260_,
+   kToken__21__3D_,
    kToken__3C_,
    kToken__3C__3D_,
    kToken__3E_,
