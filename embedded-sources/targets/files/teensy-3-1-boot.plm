@@ -15,7 +15,7 @@ boot 0 {
     RTC_CR = RTC_CR::SC16P | RTC_CR::SC4P | RTC_CR::OSCE
   }
 //--- Release I/O pins hold, if we woke up from VLLS mode
-  if PMC_REGSC.ACKISO ≠ 0 {
+  if PMC_REGSC.ACKISO != 0 {
     PMC_REGSC |= PMC_REGSC::ACKISO
   }
 // TODO: do this while the PLL is waiting to lock....
@@ -33,9 +33,9 @@ boot 0 {
 //--- Wait for crystal oscillator to begin
   do while MCG_S.OSCINIT0 == 0 {}
 //--- Wait for FLL to use oscillator
-  do while MCG_S.IREFST ≠ 0 {}
+  do while MCG_S.IREFST != 0 {}
 //--- Wait for MCGOUT to use oscillator
-  do while MCG_S.CLKST ≠ MCG_S::CLKST(2) {}
+  do while MCG_S.CLKST != MCG_S::CLKST(2) {}
 //--- Now we're in FBE mode
 //    Config PLL input for 16 MHz Crystal / 4 = 4 MHz
   MCG_C5 = MCG_C5::PRDIV0(3)
@@ -51,7 +51,7 @@ boot 0 {
 //--- Switch to PLL as clock source, FLL input = 16 MHz / 512
   MCG_C1 = MCG_C1::CLKS(0) | MCG_C1::FRDIV(4)
 //--- Wait for PLL clock to be used
-  do while MCG_S.CLKST ≠ MCG_S::CLKST(3) {}
+  do while MCG_S.CLKST != MCG_S::CLKST(3) {}
 }
 
 //-----------------------------------------------------------------------------*
