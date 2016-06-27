@@ -194,50 +194,50 @@ Cette fonction exprime l'attente passive en garde pendant \plm=inDelay= milli-se
 Les constantes suivantes sont de type \plm=$uint32= et sont dédiées aux leds : \plm=LED_L0=, \plm=LED_L1=, \plm=LED_L2=, \plm=LED_L3= et \plm=LED_L4=.
 
 
-\subsubsectionLabel{Fonction \texttt{off}}{routineLedOffTeensy31it}
+\subsubsectionLabel{Fonction \texttt{write(?off{}:)}}{routineLedOffTeensy31it}
 
 \begin{PLM}
-  public func `user `panic `service `kernel off (?inLeds $uint32) 
+  public func `user `panic `service `kernel write (?off:inLeds $uint32) 
 \end{PLM}
 
 Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire :
 
 \begin{PLM}[1]
-  leds.off (!LED_L0)
+  leds.write (!off:LED_L0)
 \end{PLM}
 
  Pour éteindre plusieurs leds, utiliser l'opérateur \plm=|= :
  
 \begin{PLM}[1]
-  leds.off (!LED_L0 | LED_L4)
+  leds.write (!off:LED_L0 | LED_L4)
 \end{PLM}
 
 
 
-\subsubsectionLabel{Fonction \texttt{on}}{routineLedOnTeensy31it}
+\subsubsectionLabel{Fonction \texttt{write(?on{}:)}}{routineLedOnTeensy31it}
 
 \begin{PLM}
-  public func `user `panic `service `kernel on (?inLeds $uint32) 
+  public func `user `panic `service `kernel write (?on:inLeds $uint32) 
 \end{PLM}
 
 Cette routine allume un ensemble de leds. Pour allumer une led, écrire :
 
 \begin{PLM}[1]
-  leds.on (!LED_L0)
+  leds.write (!on:LED_L0)
 \end{PLM}
 
  Pour allumer plusieurs leds, utiliser l'opérateur \plm=|= :
  
 \begin{PLM}[1]
-  leds.on (!LED_L0 | LED_L4)
+  leds.write (!on:LED_L0 | LED_L4)
 \end{PLM}
 
 
 
-\subsubsectionLabel{Fonction \texttt{toggle}}{routineLedToggleTeensy31it}
+\subsubsectionLabel{Fonction \texttt{write(?toggle{}:)}}{routineLedToggleTeensy31it}
 
 \begin{PLM}
-  public func `user `panic `service `kernel toggle (?inLeds $uint32) 
+  public func `user `panic `service `kernel write (?toggle:inLeds $uint32) 
 \end{PLM}
 
 Cette routine complémente un ensemble de leds.
@@ -245,13 +245,13 @@ Cette routine complémente un ensemble de leds.
 Pour complémenter une led, écrire :
 
 \begin{PLM}[1]
-  leds.toggle (!LED_L0)
+  leds.write (!toggle:LED_L0)
 \end{PLM}
 
 Pour complémenter plusieurs leds, utiliser l'opérateur \plm=|= :
 
 \begin{PLM}[1]
-  leds.toggle (!LED_L0 | LED_L4)
+  leds.write (!toggle:LED_L0 | LED_L4)
 \end{PLM}
 
 
@@ -431,46 +431,46 @@ La déclaration d'un sémaphore mentionne sa valeur initiale, qui est un entier 
 \end{PLM}
 
 
-\subsubsection{Service \texttt{V}}
+\subsubsection{Service \texttt{signal()}}
 
 \begin{PLM}
-  public service V ()
+  public service signal ()
 \end{PLM}
 
-Ce service effectue l'opération \texttt{V} sur le sémaphore sur lequel il s'applique. C'est un service, car il est appelable à partir d'une tâche, d'une primitive, et d'une routine d'interruption.
+Ce service effectue l'opération \texttt{signal} sur le sémaphore sur lequel il s'applique. C'est un service, car il est appelable à partir d'une tâche, d'une primitive, et d'une routine d'interruption.
 
 
 
-\subsubsection{Primitive \texttt{P}}
+\subsubsection{Primitive \texttt{wait()}}
 
 \begin{PLM}
-  public primitive P () 
+  public primitive wait () 
 \end{PLM}
 
-Cette primitive effectue l'opération \texttt{P} sur le sémaphore sur lequel il s'applique. C'est une primitive, car elle n'est pas appelable à partir d'une routine d'interruption.
+Cette primitive effectue l'opération \texttt{wait} sur le sémaphore sur lequel il s'applique. C'est une primitive, car elle n'est pas appelable à partir d'une routine d'interruption.
 
 
 
 
-\subsubsection{Primitive \texttt{P\_until}}
+\subsubsection{Primitive \texttt{wait(?untilDeadline{}:)}}
 
 \begin{PLM}
-  public primitive P_until (?deadline:inDeadline $uint32) -> $bool
+  public primitive wait (?untilDeadline:inDeadline $uint32) -> $bool
 \end{PLM}
 
-Cette primitive attend d'effectuer l'opération \texttt{P}, jusqu'à l'échéance \plm=inDeadline=. Elle renvoie \plm=true= si la primitive \texttt{P} a été effectuée, ou \plm=false= si l'échéance est arrivée.
+Cette primitive attend d'effectuer l'opération \texttt{wait}, jusqu'à l'échéance \plm=inDeadline=. Elle renvoie \plm=true= si la primitive \texttt{P} a été effectuée, ou \plm=false= si l'échéance est arrivée.
 
 
 
 
 
-\subsubsection{Garde \texttt{P}}
+\subsubsection{Garde \texttt{wait()}}
 
 \begin{PLM}
-  public guard P () {
+  public guard wait ()
 \end{PLM}
 
-Cette primitive exprime l'opération \texttt{P} en garde.
+Cette primitive exprime l'opération \texttt{wait} en garde.
 
 
 
@@ -497,10 +497,10 @@ Le type opaque \plm=$guardList= est utilisé pour maintenir la liste des tâches
 
 
 
-\subsubsection{Fonction \texttt{blockInList}}
+\subsubsection{Fonction \texttt{block(?!inList{}:)}}
 
 \begin{PLM}
-func `kernel blockInList (?!list:ioWaitingList $taskList)
+func `kernel block (?!inList:ioWaitingList $taskList)
 \end{PLM}
 
 Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= passée en argument. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
@@ -508,13 +508,13 @@ Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= pass�
 
 
 
-\subsubsection{Fonction \texttt{blockOnDeadline}}
+\subsubsection{Fonction \texttt{block(?onDeadline{}:)}}
 
 \begin{PLM}
-func `kernel blockOnDeadline (?deadline:inDeadline $uint32) 
+func `kernel block (?onDeadline:deadline $uint32) 
 \end{PLM}
 
-Cette fonction bloque la tâche en cours jusqu'à la date \plm=inDeadline=. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
+Cette fonction bloque la tâche en cours jusqu'à la date \plm=deadline=. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
 
 
 
@@ -522,14 +522,14 @@ Cette fonction bloque la tâche en cours jusqu'à la date \plm=inDeadline=. Elle
 
 
 
-\subsubsection{Fonction \texttt{blockInListAndOnDeadline}}
+\subsubsection{Fonction \texttt{block(?!inList{}:?onDeadline{}:)}}
 
 \begin{PLM}
-func `kernel blockInListAndOnDeadline (?!list:ioWaitingList $taskList
-                                       ?deadline:inDeadline $uint32) 
+func `kernel block (?!inList:waitingList $taskList 
+                    ?onDeadline:deadline $uint32) 
 \end{PLM}
 
-Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= jusqu'à la date \plm=inDeadline=. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
+Cette fonction bloque la tâche en cours dans la liste \plm=waitingList= jusqu'à la date \plm=deadline=. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
 
 
 
@@ -538,14 +538,14 @@ Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= jusqu
 
 
 
-\subsubsection{Fonction \texttt{makeTaskReady}}
+\subsubsection{Fonction \texttt{makeTaskReady(?!fromList{}:)}}
 
 \begin{PLM}
 func `kernel `service `guard
-makeTaskReady (?!list:ioWaitingList $taskList) -> $bool
+makeTaskReady (?!fromList:waitingList $taskList) -> $bool
 \end{PLM}
 
-Si la liste \plm=ioWaitingList= est vide, la fonction renvoie \plm=false=. Si la liste n'est pas vide, cette fonction retire de la liste la tâche de plus forte priorité, la rend prête, et la fonction renvoie \plm=true=.
+Si la liste \plm=waitingList= est vide, la fonction renvoie \plm=false=. Si la liste n'est pas vide, cette fonction retire de la liste la tâche de plus forte priorité, la rend prête, et la fonction renvoie \plm=true=.
 
 Cette fonction est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives, et en mode \plm=`service=, c'est-à-dire par les routines d'interruption.
 
@@ -558,11 +558,11 @@ Cette fonction est appelable en mode \plm=`kernel=, c'est-à-dire par les primit
 
 
 
-\subsubsection{Fonction \texttt{makeTasksReadyFrom}}
+\subsubsection{Fonction \texttt{makeTasksReady(?fromCurrentDate{}:)}}
 
 \begin{PLM}
 func `service
-makeTasksReadyFrom (?currentDate:inCurrentDate $uint32)
+makeTasksReady (?fromCurrentDate:currentDate $uint32)
 \end{PLM}
 
 Cette fonction rend prête toutes les tâches en attente d'échéance dont l'échéance est atteinte.
@@ -759,7 +759,7 @@ isr PITChannel0 {
 
 Une routine d'interruption s'exécute en mode \plm=`section=, c'est-à-dire que les routines de l'exécutif lui sont inaccessibles. 
 
-Si l'on veut appeler les routines de l'exécutif du mode \plm=`service=, on ajoute l'attribute \plm=@xtr= :
+Si l'on veut appeler les routines de l'exécutif du mode \plm=`service=, on ajoute l'attribut \plm=@xtr= :
 
 \begin{PLM}[1]
 isr PITChannel0 @xtr {
