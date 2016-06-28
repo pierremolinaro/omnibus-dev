@@ -74,7 +74,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
 {
 #--- Signature
   @procedureSignature signature = {}
-  var routineMangledName = @lstring.new {!"." + mExternProcedureName !mExternProcedureName.location}
+  var routineMangledName = mExternProcedureName
   routineMangledName.string += "("
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
@@ -94,10 +94,10 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
   else
     @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mReturnTypeName}
   end
-  let routineNameForGeneration = @lstring.new {!"." + mRoutineNameForGeneration !mExternProcedureName.location}
+ # let routineNameForGeneration = @lstring.new {!"." + mRoutineNameForGeneration !mExternProcedureName.location}
   [!?ioContext.mRoutineMapForContext insertKey
     !routineMangledName
-    !routineNameForGeneration
+    !mRoutineNameForGeneration
     !true # isPublic
     !procedureModeMap
     !signature
@@ -136,7 +136,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Routine mangled name
-  var routineMangledName = @lstring.new {!"." + mExternProcedureName !mExternProcedureName.location}
+  var routineMangledName = mExternProcedureName
   routineMangledName.string += "("
   for (passingMode selector * *) in mProcFormalArgumentList do
     routineMangledName.string += [passingMode formalPassingModeString]
@@ -183,9 +183,9 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName}
   end
 #--- Routine name for generation
-  let routineNameForGeneration = @lstring.new {!"." + mRoutineNameForGeneration !mRoutineNameForGeneration.location}
+#  let routineNameForGeneration = @lstring.new {!"." + mRoutineNameForGeneration !mRoutineNameForGeneration.location}
   [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
-    !routineNameForGeneration
+    !mRoutineNameForGeneration
     !formalArguments
     !returnType
   ]  

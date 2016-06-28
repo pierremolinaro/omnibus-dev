@@ -86,14 +86,19 @@ method @sectionDeclarationListAST enterInContext
 {
   for section in self do
   #--- Signature
+    var routineMangledName = if inReceiverTypeName == "" then
+      section.mSectionName
+    else
+      @lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
+    end
     @procedureSignature signature = {}
-    var mangledArguments = "("
+    routineMangledName.string += "("
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in section.mSectionFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
-      mangledArguments += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+      routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
-    mangledArguments += ")"
+    routineMangledName.string += ")"
     let returnType = if section.mReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
     else
@@ -108,8 +113,8 @@ method @sectionDeclarationListAST enterInContext
     end
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
-      !@lstring.new {!inReceiverTypeName + "." + section.mSectionName + mangledArguments !section.mSectionName.location}
-      !@lstring.new {!inReceiverTypeName + "." + section.mSectionName + mangledArguments !section.mSectionName.location}
+      !routineMangledName
+      !routineMangledName
       !section.mPublic
       !@modeMap {![userModeName () nowhere]}
       !signature

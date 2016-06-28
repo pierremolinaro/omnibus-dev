@@ -97,18 +97,23 @@ method @guardDeclarationListAST enterInContext
 {
   for guard in self do
   #--- Signature
-    var guardMangledName = inReceiverTypeName + "." + guard.mGuardName
-    guardMangledName += "("
+    var guardMangledName = if inReceiverTypeName == "" then
+      guard.mGuardName
+    else
+      @lstring.new {!inReceiverTypeName + "." + guard.mGuardName !guard.mGuardName.location}
+    end
+#    var guardMangledName = inReceiverTypeName + "." + guard.mGuardName
+    guardMangledName.string += "("
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in guard.mGuardFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
-      guardMangledName += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+      guardMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
-    guardMangledName += ")"
+    guardMangledName.string += ")"
   #--- Enter in context
     [!?ioContext.mGuardMapForContext insertKey
-      !@lstring.new {!guardMangledName !guard.mGuardName.location}
+      !guardMangledName
       !guard.mIsPublic
       !signature
     ]
@@ -168,7 +173,8 @@ proc guardSemanticAnalysis
 {
 #--- Guard mangled name
   var guardMangledName = if inSelfType == .null then
-    @lstring.new {!"." + inRoutineName !inRoutineName.location}
+    inRoutineName
+#    @lstring.new {!"." + inRoutineName !inRoutineName.location}
   else
     @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
   end
@@ -321,7 +327,8 @@ private proc standaloneBaseGuardAnalyze
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
 #--- Guard mangled name
-  var guardMangledName = @lstring.new {!"." + inRoutineName !inRoutineName.location}
+  var guardMangledName = inRoutineName
+#  var guardMangledName = @lstring.new {!"." + inRoutineName !inRoutineName.location}
   guardMangledName.string += "("
   for (formalArgumentPassingMode selector) in inEffectiveParameterList do
     guardMangledName.string += [formalArgumentPassingMode matchingFormalArgument] + selector + ":"

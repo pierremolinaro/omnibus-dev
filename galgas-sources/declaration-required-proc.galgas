@@ -40,8 +40,8 @@ proc checkRequiredProcedures
   ?endOfSourceFile:let @location inEndOfSourceFile
 {
   for requiredProc in inAST.mRequiredProcList do
-    let lkey = @lstring.new {!"." + requiredProc.mRequiredProcedureName !requiredProc.mRequiredProcedureName.location}
-    if not [inSemanticContext.mRoutineMapForContext hasKey !lkey.string] then
+#    let lkey = @lstring.new {!"." + requiredProc.mRequiredProcedureName !requiredProc.mRequiredProcedureName.location}
+    if not [inSemanticContext.mRoutineMapForContext hasKey !requiredProc.mRequiredProcedureName.string] then
       var s = "the '" + requiredProc.mRequiredProcedureName + "' should be defined as: proc"
       for (mode) in requiredProc.mProcedureModeList do
         s += " `" + mode
@@ -61,7 +61,7 @@ proc checkRequiredProcedures
       end
       error inEndOfSourceFile : s
     else
-      [inSemanticContext.mRoutineMapForContext searchKey !lkey ?2* ?let procModes ?7*]
+      [inSemanticContext.mRoutineMapForContext searchKey !requiredProc.mRequiredProcedureName ?2* ?let procModes ?7*]
       let actualProcModeSet = [procModes keySet]
       let requiredProcModeSet = @stringset.setWithLStringList{!requiredProc.mProcedureModeList}
       if actualProcModeSet != requiredProcModeSet then
@@ -69,7 +69,7 @@ proc checkRequiredProcedures
         for (mode) in requiredProcModeSet do
           s += " `" + mode
         end
-        error [inSemanticContext.mRoutineMapForContext locationForKey !lkey.string] : s
+        error [inSemanticContext.mRoutineMapForContext locationForKey !requiredProc.mRequiredProcedureName.string] : s
       end
     end
   end

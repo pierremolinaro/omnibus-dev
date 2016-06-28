@@ -85,14 +85,19 @@ method @serviceDeclarationListAST enterInContext
 {
   for service in self do
   #--- Signature
+    var routineMangledName = if inReceiverTypeName == "" then
+      service.mServiceName
+    else
+      @lstring.new {!inReceiverTypeName + "." + service.mServiceName !service.mServiceName.location}
+    end
     @procedureSignature signature = {}
-    var mangledArguments = "("
+    routineMangledName.string += "("
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in service.mServiceFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
-      mangledArguments += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+      routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
-    mangledArguments += ")"
+    routineMangledName.string += ")"
   #--- Mode map
     let @modeMap modeMap = {![userModeName () nowhere], ![serviceModeName () nowhere], ![kernelModeName () nowhere]}
   #--- Enter in context
@@ -102,8 +107,8 @@ method @serviceDeclarationListAST enterInContext
       @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !service.mReturnTypeName}
     end
     [!?ioContext.mRoutineMapForContext insertKey
-      !@lstring.new {!inReceiverTypeName + "." + service.mServiceName + mangledArguments !service.mServiceName.location}
-      !@lstring.new {!inReceiverTypeName + "." + service.mServiceName + mangledArguments !service.mServiceName.location}
+      !routineMangledName
+      !routineMangledName
       !service.mPublic
       !modeMap
       !signature

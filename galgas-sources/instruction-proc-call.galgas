@@ -416,7 +416,7 @@ proc analyzeRoutineCall
     outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
     outEffectiveParameterListIR += !.outputInput ![variableKind address] #--- add "load self" as first argument
   else
-    outRoutineMangledName = .new {!"." + inRoutineName !inRoutineName.location}
+    outRoutineMangledName = inRoutineName
     receiverType = .null
   end
 #--- Build LLVM mangled name
@@ -453,17 +453,6 @@ proc analyzeRoutineCall
     end  
   end  
 #--- Enter in invocation graph
-#  @lstring routineNameForInvocationGraph
-#  switch routineKind
-#  case function :
-#    routineNameForInvocationGraph = procNameForInvocationGraph (!receiverType !inRoutineName)
-#  case section :
-#    routineNameForInvocationGraph = sectionNameForInvocationGraph (!receiverType !inRoutineName)
-#  case service :
-#    routineNameForInvocationGraph = serviceNameForInvocationGraph (!receiverType !inRoutineName)
-#  case primitive :
-#    routineNameForInvocationGraph = primitiveNameForInvocationGraph (!receiverType !inRoutineName)
-#  end
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outRoutineMangledName]
 #--- Check modes
   outRoutineKindIR = checkMode (

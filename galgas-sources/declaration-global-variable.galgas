@@ -295,7 +295,8 @@ method @globalVarDeclarationList-element enterInContext
     @lstring routineMangledName
     @unifiedTypeMap-proxy receiverType
     if procedure.mReceiverTypeName.string == "" then
-      routineMangledName = .new {!"." + procedure.mRoutineName !procedure.mRoutineName.location}
+#      routineMangledName = .new {!"." + procedure.mRoutineName !procedure.mRoutineName.location}
+      routineMangledName = procedure.mRoutineName
       receiverType = .null
     else
       routineMangledName = .new {!"$" + procedure.mReceiverTypeName + "." + procedure.mRoutineName !procedure.mRoutineName.location}
@@ -319,7 +320,8 @@ method @globalVarDeclarationList-element enterInContext
     @lstring guardMangledName
     @unifiedTypeMap-proxy receiverType
     if guard.mOptionalTypeName.string == "" then
-      guardMangledName = .new {!"." + guard.mGuardName !guard.mGuardName.location}
+      guardMangledName = guard.mGuardName
+#      guardMangledName = .new {!"." + guard.mGuardName !guard.mGuardName.location}
       receiverType = .null
     else
       guardMangledName = .new {!"$" + guard.mOptionalTypeName + "." + guard.mGuardName !guard.mGuardName.location}
