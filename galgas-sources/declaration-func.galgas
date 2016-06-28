@@ -192,10 +192,11 @@ method @functionDeclarationListAST enterFunctionInContext
 {
   for procedure in self do
   #--- Signature
-    var routineMangledName = @lstring.new {
-      !inSelfTypeName + "." + procedure.mFunctionName
-      !procedure.mFunctionName.location
-    }
+    var routineMangledName = if inSelfTypeName == "" then
+      procedure.mFunctionName
+    else
+      @lstring.new {!inSelfTypeName + "." + procedure.mFunctionName !procedure.mFunctionName.location}
+    end
     routineMangledName.string += "("
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mFunctionFormalArgumentList do

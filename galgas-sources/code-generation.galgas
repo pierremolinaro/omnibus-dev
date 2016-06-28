@@ -393,7 +393,7 @@ private proc generateCodeFiles
   )
   let s1 = [cCode stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskMapIR count] string]]
   let s2 = [s1 stringByReplacingStringByString !"!GUARDCOUNT!" ![inIntermediateCodeStruct.mMaxBranchOfOnInstructions string]]
-  let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
+  let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   let s4 = [s3 stringByReplacingStringByString !"!SERVICEIMPLEMENTATION!" !llvmNameForServiceImplementation (!"")]
   let s5 = [s4 stringByReplacingStringByString !"!SERVICECALL!" !llvmNameForServiceCall (!"")]
   [s5 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]

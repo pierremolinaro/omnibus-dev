@@ -85,14 +85,19 @@ method @primitiveDeclarationListAST enterInContext
 {
   for primitive in self do
   #--- Signature
+    var routineMangledName = if inReceiverTypeName == "" then
+      primitive.mPrimitiveName
+    else
+      @lstring.new {!inReceiverTypeName + "." + primitive.mPrimitiveName !primitive.mPrimitiveName.location}
+    end
     @procedureSignature signature = {}
-    var mangledArguments = "("
+    routineMangledName.string += "("
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in primitive.mPrimitiveFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
-      mangledArguments += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+      routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
-    mangledArguments += ")"
+    routineMangledName.string += ")"
   #--- Mode map
     @modeMap modeMap = {![userModeName () nowhere], ![kernelModeName () nowhere]}
   #--- Enter in context
@@ -102,8 +107,8 @@ method @primitiveDeclarationListAST enterInContext
       @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !primitive.mReturnTypeName}
     end
     [!?ioContext.mRoutineMapForContext insertKey
-      !@lstring.new {!inReceiverTypeName + "." + primitive.mPrimitiveName + mangledArguments !primitive.mPrimitiveName.location}
-      !@lstring.new {!inReceiverTypeName + "." + primitive.mPrimitiveName + mangledArguments !primitive.mPrimitiveName.location}
+      !routineMangledName
+      !routineMangledName
       !primitive.mPublic
       !modeMap
       !signature

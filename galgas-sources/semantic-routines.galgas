@@ -96,7 +96,7 @@ proc routineSemanticAnalysis
   end
 #--- Mangled routine name
   var routineMangledName = if inSelfType == .null then
-    @lstring.new {!"." + inRoutineName !inRoutineName.location}
+    inRoutineName
   else
     @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
   end
@@ -106,13 +106,6 @@ proc routineSemanticAnalysis
   end
   routineMangledName.string += ")"
 #--- Variable map
-#  @lstring routineNameForInvocationGraph
-#  switch inRoutineKind
-#  case function : routineNameForInvocationGraph = procNameForInvocationGraph (!inSelfType !inRoutineName)
-#  case section : routineNameForInvocationGraph = sectionNameForInvocationGraph (!inSelfType !inRoutineName)
-#  case service : routineNameForInvocationGraph = serviceNameForInvocationGraph (!inSelfType !inRoutineName)
-#  case primitive : routineNameForInvocationGraph = primitiveNameForInvocationGraph (!inSelfType !inRoutineName)
-#  end
   @variableMap variableMap = initialVariableMap (
     !routineNameForInvocation:routineMangledName.string
     !context:inContext

@@ -70,7 +70,8 @@ proc semanticAnalysis
   outIntermediateCodeStruct.mStaticStringMap = inGlobalLiteralStringMap
   outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList
   for requiredProc in inAST.mRequiredProcList do
-    outIntermediateCodeStruct.mRequiredProcedureSet += !"." + requiredProc.mRequiredProcedureName.string
+#    outIntermediateCodeStruct.mRequiredProcedureSet += !"." + requiredProc.mRequiredProcedureName.string
+    outIntermediateCodeStruct.mRequiredProcedureSet += !requiredProc.mRequiredProcedureName.string
   end 
 #--- Global variables
   for globalVar in inAST.mGlobalVarDeclarationList do
