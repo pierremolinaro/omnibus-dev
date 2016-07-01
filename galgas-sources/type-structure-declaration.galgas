@@ -295,6 +295,7 @@ override method @structureDeclaration enterInContext
       constructorSignature += !mFieldName.string !fieldType !fieldIndex
     end
   end
+#--- Enter in constructor map
   [!?ioContext.mConstructorMap insertKey
     !mStructureName
     !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
@@ -320,7 +321,7 @@ override method @structureDeclaration enterInContext
     !lkey:mStructureName
     !llvmTypeName:"%" + ["$" + mStructureName assemblerRepresentation]
     !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
-    !classMethodMap:{}
+    !classConstantMap:{}
     !instantiable:true
     !copyable:copyableAttribute
     !equatable:false

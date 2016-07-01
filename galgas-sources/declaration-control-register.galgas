@@ -91,66 +91,6 @@ syntax extension common_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  PSEUDO REGISTER TYPE DECLARATION                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @pseudoRegisterTypeDeclaration : @abstractDeclaration {
-  @lstring mRegisterName
-}
-
-#·······················································································································
-
-override method @pseudoRegisterTypeDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
-
-#·······················································································································
-
-override method @pseudoRegisterTypeDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {}
-
-#·······················································································································
-
-override getter @pseudoRegisterTypeDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "control register as $" + mRegisterName
-}
-
-#·······················································································································
-
-override getter @pseudoRegisterTypeDeclaration location -> @location outLocation {
-  outLocation = mRegisterName.location
-}
-
-#·······················································································································
-
-override method @pseudoRegisterTypeDeclaration enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
-
-#·······················································································································
-
-override method @pseudoRegisterTypeDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
-
-#·······················································································································
-
-override method @pseudoRegisterTypeDeclaration addExtension
-  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
-  !@abstractDeclaration outNewDeclaration
-{
-  outNewDeclaration = self
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -200,10 +140,6 @@ method @controlRegisterDeclarationListAST noteTypesInPrecedenceGraph ?!@semantic
   for (registerNameList registerTypeName *) in self do
     let typeName = @lstring.new {!"$" + registerTypeName !registerTypeName.location}
     [!?ioGraph noteNode !typeName]
-    for register in registerNameList do
-      let registerNameAsTypeName = @lstring.new {!"$" + register.mRegisterName !register.mRegisterName.location}
-      [!?ioGraph addNode !registerNameAsTypeName !@pseudoRegisterTypeDeclaration.new {!register.mRegisterName}]
-    end
   end
 }
 
@@ -246,7 +182,7 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
   end
 #--- Build bit slice map
-  @classMethodMap classMethodMap = {}
+  @classConstantMap classConstantMap = {}
   @controlRegisterFieldMap registerFieldMap = {}
   @controlRegisterBitSliceAccessMap registerBitSliceMap = {}
   @controlRegisterFieldList controlRegisterFieldList = {} # Used for HTML file
@@ -260,7 +196,7 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
       case namedBit (@lstring name @lbigint count) :
         let bitCount = [count.bigint uint]
         if bitCount == 1 then
-          [!?classMethodMap insertKey !name !.new{!registerType !.literalInteger {!value:1G << shiftCount}}]
+          [!?classConstantMap insertKey !name !.new{!registerType !.literalInteger {!value:1G << shiftCount}}]
         end
         controlRegisterFieldList += !bitCount !name.string
         [!?registerFieldMap insertKey
@@ -297,17 +233,6 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
   end
 #---  
   for register in mRegisterNameList do
-    [!?ioContext.mTypeMap insertType
-      !lkey:register.mRegisterName
-      !llvmTypeName:"i" + registerBitCount
-      !kind:.opaque {!bitCount:[registerBitCount bigint]}
-      !classMethodMap:classMethodMap
-      !instantiable:false
-      !copyable:false
-      !equatable:false
-      !comparable:false
-      !enumerationType:.null # Not enumerable
-    ]
   #--- Analyze attributes
     var isReadOnly = false
     var isAccessibleInUserMode = false

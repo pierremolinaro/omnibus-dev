@@ -23,8 +23,8 @@ syntax extension common_syntax {
       $typeName$ ?optionalTypeName
     end
     $.$
-    $identifier$ ?let constructorName
-    outExpression = @typedConstantCall.new {!optionalTypeName !constructorName}
+    $identifier$ ?let constantName
+    outExpression = @typedConstantCall.new {!optionalTypeName !constantName}
   }
 
   #·····················································································································
@@ -83,8 +83,8 @@ override method @typedConstantCall analyzeExpression
   if inferredResultType == .null then
     error mConstructorName : "cannot infer type" : outResult
   else
-    let classMethodMap = [inferredResultType classMethodMap]
-    [classMethodMap searchKey !mConstructorName ?outResult]
+    let classConstantMap = [inferredResultType classConstantMap]
+    [classConstantMap searchKey !mConstructorName ?outResult]
   end
 }
 

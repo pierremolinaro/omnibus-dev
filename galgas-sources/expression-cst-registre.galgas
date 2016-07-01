@@ -10,10 +10,33 @@ class @registerIntegerExpInExpressionAST : @expressionAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @registerConstantExpressionAST : @expressionAST {
+  @lstring mRegisterName
+  @lstringlist mBooleanFieldNames
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <primary> !@expressionAST outExpression {
+    $typeName$ ?let registerNameAsTypeName
+    ${$
+    @lstringlist booleanFieldNames = {}
+    repeat
+      $identifier$ ?let registerFieldName
+      booleanFieldNames += !registerFieldName
+    while
+      $,$
+    end
+    $}$
+    outExpression = @registerConstantExpressionAST.new {!registerNameAsTypeName !booleanFieldNames}
+  }
 
   #·····················································································································
 
@@ -36,6 +59,15 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+override method @registerConstantExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring unused inConstantName
+  ?!@semanticTypePrecedenceGraph unused ioGraph
+{
+#  [!?ioGraph addEdge !inConstantName !mRegisterName]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 override method @registerIntegerExpInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
   ?!@semanticTypePrecedenceGraph unused ioGraph
@@ -51,7 +83,120 @@ override method @registerIntegerExpInExpressionAST noteExpressionTypesInPreceden
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @registerConstantExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool unused inGuard
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset unused inModeSet
+  ?allowPanic:let @bool unused inAllowPanic
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
+  ?!alloca:@allocaList unused ioAllocaList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+  !result:@operandIR outResult
+{
+#--- Search variable
+  [inContext.mControlRegisterMap searchKey
+    !mRegisterName
+    ?let type
+    ?*
+    ?*
+    ?let @controlRegisterBitSliceAccessMap unused registerBitSliceMap
+    ?let @controlRegisterFieldMap registerFieldMap
+    ?let @bigint unused registerAddress
+    ?2*
+  ]
+  @bigint value = 0G
+#--- Boolean fields
+  for (booleanFieldName) in mBooleanFieldNames do
+    [registerFieldMap searchKey
+      !booleanFieldName
+      ?let @uint fieldBitIndex
+      ?let @uint fieldBitCount
+    ]
+  #--- Check field
+    if fieldBitCount != 1 then
+      error booleanFieldName : "this field is not a boolean field"
+    end
+  #--- Build resulting value
+    value = value | (1G << fieldBitIndex)
+  end
+  outResult = .new {!type !.literalInteger {!value:value}}
+  
+#--- Analyze expression
+#  [mExpression analyzeExpression
+#    !self:inSelfType
+#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#    !inGuard:inGuard
+#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#    !optionalTargetType:inOptionalTargetType
+#    !context:inContext
+#    !modes:inModeSet
+#    !allowPanic:inAllowPanic
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioVariableMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    ?result:let @operandIR expressionResult
+#  ]
+#--- Check expression type
+#  switch [expressionResult.mType kind]
+#  case arrayType (* *) :
+#    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
+#  case opaque (*) :
+#    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
+#  case enumeration (*) :
+#    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
+#  case structure (* *) :
+#    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
+#  case boolset, boolean :
+#    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
+#  case literalString :
+#    error mExpressionLocation: "an unsigned integer expression is required here" : outResult
+#  case staticInteger :
+#    [expressionResult.mValue literalInteger ?value:let @bigint value]
+#    if value < 0G then
+#      error mExpressionLocation: "this integer expression should be positive" : outResult
+#    elsif value < (1G << fieldBitCount) then
+#      outResult = .new {!type !.literalInteger {!value:value << fieldBitIndex}}      
+#    else
+#      error mExpressionLocation: "expression too large (should be < " + (1G << fieldBitCount) : outResult
+#    end
+#  case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
+#    if not unsigned then
+#      error mExpressionLocation: "an unsigned integer expression is required here" : outResult
+#    else
+#      let assertGenerated = expressionBitCount > fieldBitCount
+#      if assertGenerated && [inModeSet hasKey !panicModeName ()] then
+#        error mExpressionLocation
+#          : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+#      end
+#      getNewTempVariable (!type !?ioTemporaries ?outResult)
+#      ioInstructionGenerationList += !@registerIntegerConstantInExpressionIR.new {
+#        !mExpressionLocation
+#        !expressionResult
+#        !(1L << fieldBitCount) - 1L
+#        !fieldBitIndex
+#        !outResult
+#        !not assertGenerated
+#      }
+#    end
+#  end
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerIntegerExpInExpressionAST analyzeExpression
