@@ -7673,31 +7673,31 @@ const char * gWrapperFileContent_30_targetTemplates = "//-----------------------
   "//--- Enable capacitors for crystal\n"
   "  OSC_CR = $OSC_CR {SC8P, SC2P}\n"
   "//--- Enable osc, 8-32 MHz range, low power mode\n"
-  "  MCG_C2 = MCG_C2::RANGE0(2) | $MCG_C2 {EREFS}\n"
+  "  MCG_C2 = $MCG_C2 {RANGE0:2, EREFS}\n"
   "//--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
-  "  MCG_C1 = MCG_C1::CLKS(2) | MCG_C1::FRDIV(4)\n"
+  "  MCG_C1 = $MCG_C1 {CLKS:2, FRDIV:4}\n"
   "//--- Wait for crystal oscillator to begin\n"
   "  do while MCG_S.OSCINIT0 == 0 {}\n"
   "//--- Wait for FLL to use oscillator\n"
   "  do while MCG_S.IREFST != 0 {}\n"
   "//--- Wait for MCGOUT to use oscillator\n"
-  "  do while MCG_S.CLKST != MCG_S::CLKST(2) {}\n"
+  "  do while MCG_S.CLKST != $MCG_S {CLKST:2} {}\n"
   "//--- Now we're in FBE mode\n"
   "//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
-  "  MCG_C5 = MCG_C5::PRDIV0(3)\n"
+  "  MCG_C5 = $MCG_C5 {PRDIV0:3}\n"
   "//--- Config PLL for 96 MHz output\n"
-  "  MCG_C6 = $MCG_C6 {PLLS} | MCG_C6::VDIV0(0)\n"
+  "  MCG_C6 = $MCG_C6 {PLLS, VDIV0:0}\n"
   "//--- Wait for PLL to start using xtal as its input\n"
   "  do while MCG_S.PLLST == 0 {}\n"
   "//--- Wait for PLL to lock\n"
   "  do while MCG_S.LOCK0 == 0 {}\n"
   "//--- Now we're in PBE mode\n"
   "//    Config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
-  "  SIM_CLKDIV1 = SIM_CLKDIV1::OUTDIV1(0) | SIM_CLKDIV1::OUTDIV2(1) | SIM_CLKDIV1::OUTDIV4(3)\n"
+  "  SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:3}\n"
   "//--- Switch to PLL as clock source, FLL input = 16 MHz / 512\n"
-  "  MCG_C1 = MCG_C1::CLKS(0) | MCG_C1::FRDIV(4)\n"
+  "  MCG_C1 = $MCG_C1 {CLKS:0, FRDIV:4}\n"
   "//--- Wait for PLL clock to be used\n"
-  "  do while MCG_S.CLKST != MCG_S::CLKST(3) {}\n"
+  "  do while MCG_S.CLKST != $MCG_S {CLKST:3} {}\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -7707,7 +7707,7 @@ const cRegularFileWrapper gWrapperFile_30_targetTemplates (
   "teensy-3-1-boot.plm",
   "plm",
   true, // Text file
-  2332, // Text length
+  2268, // Text length
   gWrapperFileContent_30_targetTemplates
 ) ;
 

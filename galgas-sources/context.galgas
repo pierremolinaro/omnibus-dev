@@ -172,6 +172,12 @@ sharedmap @unifiedTypeMap %selectors {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @operandList {
+  @operandIR mOperand
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 map @classConstantMap {
   @operandIR mValue
   insert insertKey error message "the '%K' class constant is already declared in %L"
