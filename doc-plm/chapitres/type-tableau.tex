@@ -165,17 +165,17 @@ var x = t [i] // Vérification à l'exécution que 0 <= i
 
 Dans une liste d'instructions devant être exécutée en mode panique, les instructions pouvant engendrer une panique sont interdites et leur présence entraîne une erreur de compilation.
 
-L'accès à un élément de tableau est donc accepté par le compilateur si \plm=expression_indice= :
+Ainsi l'accès à un élément de tableau est donc accepté par le compilateur si l'\plm=expression_indice= est :
 \begin{itemize}
-\item est une expression statique ;
-\item est une expression entière non signée, dont la valeur maximum est strictement inférieure à la taille du tableau.
+\item une expression statique ;
+\item ou une expression entière non signée, dont la valeur maximum est strictement inférieure à la taille du tableau.
 \end{itemize}
 
 
-L'accès à un élément de tableau est donc rejeté par le compilateur si \plm=expression_indice= :
+Donc l'accès à un élément de tableau est donc rejeté par le compilateur si l'\plm=expression_indice= est :
 \begin{itemize}
-\item est une expression entière signée ;
-\item est une expression entière non signée, dont la valeur maximum est supérieure ou égale à la taille du tableau.
+\item une expression entière signée ;
+\item ou une expression entière non signée, dont la valeur maximum est supérieure ou égale à la taille du tableau.
 \end{itemize}
 
 

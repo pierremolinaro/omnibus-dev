@@ -102,7 +102,6 @@ method @guardDeclarationListAST enterInContext
     else
       @lstring.new {!inReceiverTypeName + "." + guard.mGuardName !guard.mGuardName.location}
     end
-#    var guardMangledName = inReceiverTypeName + "." + guard.mGuardName
     guardMangledName.string += "("
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in guard.mGuardFormalArgumentList do

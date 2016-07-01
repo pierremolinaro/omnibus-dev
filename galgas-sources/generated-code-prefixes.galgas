@@ -5,7 +5,13 @@ func %once llvmAttributeFunction -> @string outResult {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  MODE NAMES                                                                                                           
+#!   Module
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once modulePrefixName -> @string outResult {
+  outResult = "module."
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Modes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -52,61 +58,6 @@ func %once guardModeName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! Names for invocation graph
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func procNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
-#  var s = "func"
-#  if inReceiverType != .null then
-#    s += " $" + [inReceiverType key]
-#  end
-#  s += " " + inName
-#  outName = .new {!s !inName.location}
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func sectionNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
-#  var s = "section"
-#  if inReceiverType != .null then
-#    s += " $" + [inReceiverType key]
-#  end
-#  s += " " + inName
-#  outName = .new {!s !inName.location}
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func serviceNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
-#  var s = "service"
-#  if inReceiverType != .null then
-#    s += " $" + [inReceiverType key]
-#  end
-#  s += " " + inName
-#  outName = .new {!s !inName.location}
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func primitiveNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
-#  var s = "primitive"
-#  if inReceiverType != .null then
-#    s += " $" + [inReceiverType key]
-#  end
-#  s += " " + inName
-#  outName = .new {!s !inName.location}
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func guardNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lstring inName -> @lstring outName {
-#  var s = "guard"
-#  if inReceiverType != .null then
-#    s += " $" + [inReceiverType key]
-#  end
-#  s += " " + inName
-#  outName = .new {!s !inName.location}
-#}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func initNameForInvocationGraph ?@unifiedTypeMap-proxy inReceiverType ?@lbigint inPriority -> @lstring outName {

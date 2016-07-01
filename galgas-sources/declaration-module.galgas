@@ -164,6 +164,7 @@ syntax extension common_syntax {
 
 override method @moduleDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  [!?ioGraph addNode !mModuleName !self]
+#  let moduleTypeName = @lstring.new {!modulePrefixName + mModuleName !mModuleName.location}
   let moduleTypeName = @lstring.new {!"$" + mModuleName + "$" !mModuleName.location}
  [!?ioGraph addEdge !mModuleName !moduleTypeName]
 }

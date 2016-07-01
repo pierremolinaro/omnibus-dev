@@ -13,19 +13,24 @@
 
 
 \section{Identificateurs}
-Un identificateur commence par une lettre (minuscule ou majuscule), qui est suivie par zéro, un ou plusieurs lettres (minuscules ou majuscules), chiffres décimaux, caractères \texttt{\_}.
+Un identificateur commence par une lettre Unicode, qui est suivie par zéro, un ou plusieurs lettres Unicode, chiffres décimaux, caractères «~\texttt{\_}~».
 
-La casse est significative pour les identificateurs.
+La casse est significative pour les identificateurs. Comme toute lettre Unicode est acceptée, les lettres accentuées, les lettres grecques, cyrilliques, ... sont autorisées :
 
+\begin{PLM}
+let entréeValidée $bool = true
+let α $uint4 = 2
+let постоянная $uint8 = 200
+\end{PLM}
 
 
 
 
 \section{Mots réservés}\index{Mots réservés}
 
-Certains identificateurs sont réservés (\refSubsectionPage{motsReservesLangage}) .
-
-\subsectionLabel{Mots réservés correspondants aux éléments du langage}{motsReservesLangage}
+%Certains identificateurs sont réservés (\refSubsectionPage{motsReservesLangage}) .
+%
+%\subsectionLabel{Mots réservés correspondants aux éléments du langage}{motsReservesLangage}
 
 Les mots réservés correspondant aux éléments du langage sont listés dans le \refTableau{motReservesLangage}.
 
@@ -58,17 +63,27 @@ Les mots réservés correspondant aux éléments du langage sont listés dans le
 
 \section{Constante entière}
 
-Vous pouvez écrire les constantes entières en décimal, en hexadécimal ou en binaire. 
+Vous pouvez écrire les constantes entières en décimal, en hexadécimal ou en binaire. Une constante entière de type \plm!$staticInt! ; ce type est décrit au \refChapterPage{chapitreTypeEntierStatique}. 
 
-\textbf{Décimal.} Une constante entière décimale commence par un chiffre décimal, et est suivie par zéro, un ou plusieurs chiffres décimaux, ou caractères « \texttt{\_} ».
+\textbf{Décimal.} Une constante entière décimale commence par un chiffre décimal, et est suivie par zéro, un ou plusieurs chiffres décimaux, ou caractères «~\texttt{\_}~».
 
-\textbf{Hexadécimal.} Un chiffre hexadécimal est soit un chiffre décimal, soit une lettre entre \texttt{a} et \texttt{f}, écrite indifféremment en minuscule ou en majuscule. Une constante hexadécimale commence par la séquence \texttt{0x} », et est suivie par un ou plusieurs chiffres hexadécimal, ou caractères « \texttt{\_} ».
+\textbf{Hexadécimal.} Un chiffre hexadécimal est soit un chiffre décimal, soit une lettre entre «~\texttt{a}~» et «~\texttt{f}~», écrite indifféremment en minuscule ou en majuscule. Une constante hexadécimale commence par la séquence «~\texttt{0x}~», et est suivie par un ou plusieurs chiffres hexadécimal, ou caractères « \texttt{\_} ».
 
-\textbf{Binaire.} Une constante entière binaire commence par la séquence \texttt{0b} suivie par un ou plusieurs chiffres binaires, \texttt{0} ou \texttt{1}, ou le caractère « \texttt{\_} ».
+\textbf{Binaire.} Une constante entière binaire commence par la séquence «~\texttt{0b}~» suivie par un ou plusieurs chiffres binaires, \texttt{0} ou \texttt{1}, ou caractères « \texttt{\_} ».
 
-Dans une constante entière, écrite en binaire, décimal ou en hexadécimal, le caractère \texttt{\_} peut servir de séparateur ; on peut ainsi écrire indifféremment : \plm!123!, \plm!1_23!, \plm!1_2_3!, \plm!1___23!, \dots
+Dans une constante entière, écrite en binaire, décimal ou en hexadécimal, le caractère «~\texttt{\_}~» peut servir de séparateur ; on peut ainsi écrire indifféremment : \plm!123!, \plm!1_23!, \plm!1_2_3!, \plm!1___23!, \dots
 
 Contrairement au C, un nombre qui commence par un zéro est un nombre écrit en décimal.
+
+Une constante entière n'est pas limitée en taille : vous pouvez écrire des constantes entières avec un nombre quelconque de chiffres :
+
+\begin{PLM}
+let a = 123_456_789_123_456_789_123_456_789_123_456_789_123_456_789
+\end{PLM}
+
+
+
+
 
 \section{Délimiteurs}
 

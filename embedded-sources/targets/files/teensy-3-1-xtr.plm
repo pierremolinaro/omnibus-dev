@@ -48,7 +48,7 @@ notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32) : "tick
 init 0 { // Configure Systick interrupt every ms
   SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
   SYST_CVR = 0
-  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::ENABLE | SYST_CSR::TICKINT
+  SYST_CSR = $SYST_CSR.CLKSOURCE | $SYST_CSR.ENABLE | $SYST_CSR.TICKINT
 //--- Led Teensy
   PORTC_PCR5 = (1 << 8)
   GPIOC_PDDR |= (1 << 5)

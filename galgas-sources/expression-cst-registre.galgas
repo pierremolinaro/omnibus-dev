@@ -27,6 +27,7 @@ syntax extension common_syntax {
   rule <primary> !@expressionAST outExpression {
     $identifier$ ?let registerName
     $::$
+    warning registerName : "Obsolete construction"
     $identifier$ ?let fieldName
     outExpression = @registerConstantInExpressionAST.new {!registerName !fieldName}
   }
