@@ -2,13 +2,6 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @registerConstantInExpressionAST : @expressionAST {
-  @lstring mRegisterName
-  @lstring mFieldName
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 class @registerIntegerExpInExpressionAST : @expressionAST {
   @lstring mRegisterName
   @lstring mFieldName
@@ -21,16 +14,6 @@ class @registerIntegerExpInExpressionAST : @expressionAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension common_syntax {
-
-  #·····················································································································
-
-  rule <primary> !@expressionAST outExpression {
-    $identifier$ ?let registerName
-    $::$
-    warning registerName : "Obsolete construction"
-    $identifier$ ?let fieldName
-    outExpression = @registerConstantInExpressionAST.new {!registerName !fieldName}
-  }
 
   #·····················································································································
 
@@ -53,15 +36,6 @@ syntax extension common_syntax {
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @registerConstantInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
-  ?!@semanticTypePrecedenceGraph unused ioGraph
-{
-#  [!?ioGraph addEdge !inConstantName !mRegisterName]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @registerIntegerExpInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
   ?!@semanticTypePrecedenceGraph unused ioGraph
@@ -73,54 +47,11 @@ override method @registerIntegerExpInExpressionAST addDependenceEdgeForStaticExp
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @registerConstantInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @registerIntegerExpInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @registerConstantInExpressionAST analyzeExpression
-  ?self:let @unifiedTypeMap-proxy unused inSelfType
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
-  ?inGuard:let @bool unused inGuard
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?modes:let @stringset unused inModeSet
-  ?allowPanic:let @bool unused inAllowPanic
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !result:@operandIR outResult
-{
-#--- Search variable
-  [inContext.mControlRegisterMap searchKey
-    !mRegisterName
-    ?let type
-    ?2*
-    ?let @controlRegisterBitSliceAccessMap unused registerBitSliceMap
-    ?let @controlRegisterFieldMap registerFieldMap
-    ?let @bigint unused registerAddress
-    ?2*
-  ]
-#--- Field
-  [registerFieldMap searchKey
-    !mFieldName
-    ?let @uint bitIndex
-    ?let @uint bitCount
-  ]
-#--- Generate code
-  outResult = .new {!type !.literalInteger {!value:((1G << bitCount) - 1G) << bitIndex}}
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerIntegerExpInExpressionAST analyzeExpression

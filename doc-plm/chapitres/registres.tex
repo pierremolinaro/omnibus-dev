@@ -121,30 +121,29 @@ Comme pour un champ booléen, l'accès à un champ entier s'effectue par la nota
 let x $uint32 = ICSR.VECTPENDING // (0 à 2**9-1) << 12
 \end{PLM}
 
-\plm+ICSR.VECTPENDING+ applique un masquage de la valeur de \plm+ICSR+ pour ne conserver que les bits correspondants au champ \plm+VECTPENDING+. Aucun décalage n'est effectué.
+\plm+ICSR.VECTPENDING+ applique un masquage de la valeur de \plm+ICSR+ pour ne conserver que les bits correspondants au champ \plm+VECTPENDING+. Aucun décalage n'est effectué, la valeur renvoyée est une valeur $x\centerdot 2^{12}$, où $x$ est compris en $0$ et $2^9-1$.
 
 
-Pour obtenir une valeur justifiée à droite, on ajoute l'accesseur \plm+.shifted+ :
+Pour obtenir une valeur justifiée à droite (la valeur renvoyée est alors comprise en $0$ et $2^9-1$), on ajoute l'accesseur \plm+.shifted+ :
 \begin{PLM}
 let x $uint32 = ICSR.VECTPENDING.shifted // Entre 0 et 2**9-1
 \end{PLM}
 
-La valeur renvoyée est alors comprise en $0$ et $2^9-1$.
 
 
 
 \subsection{Constantes associées aux champs booléens}
 
-Le délimiteur \plm+::+ permet de définir des constantes correspondant aux bits d'un registre. Par exemple, pour activer l'interruption \texttt{PendSV}, il faut mettre à $1$ le bit \texttt{PENDSVSET}. On écrit donc :
+À chaque champ booléen d'un registre est associée une constante. Par exemple, pour activer l'interruption \texttt{PendSV}, il faut mettre à $1$ le bit \texttt{PENDSVSET}. On écrit donc :
 \begin{PLM}
-ICSR = ICSR::PENDSVSET
+ICSR = $ICSR.PENDSVSET
 \end{PLM}
 
-La constante \plm+ICSR::PENDSVSET+ a le type du registre \plm+ICSR+, c'est-à-dire \plm+$uint32+.
+La constante \plm+$ICSR.PENDSVSET+ a le type du registre \plm+ICSR+, c'est-à-dire \plm+$uint32+, et pour valeur $2^{28}$, le bit \texttt{PENDSVSET} étant le $28^e$ bit du registre \plm+ICSR+.
 
 De façon analogue, si on voulait activer simultanément les interruptions \texttt{PendSV} et \texttt{SysTick}, il faut mettre à $1$ les bits \texttt{PENDSVSET} et \texttt{PENDSTSET}. On écrit donc :
 \begin{PLM}
-ICSR = ICSR::PENDSVSET | ICSR::PENDSTSET
+ICSR = $ICSR.PENDSVSET | $ICSR.PENDSTSET
 \end{PLM}
 
 
