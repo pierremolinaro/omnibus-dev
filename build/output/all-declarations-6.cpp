@@ -10,100 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Function 'stackAddressForTask'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_stackAddressForTask (const GALGAS_string & constinArgument_inTaskName,
-                                            C_Compiler * inCompiler
-                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("%").add_operation (GALGAS_string ("task.stack.address.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 339)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 339)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 339)) ;
-//---
-  return result_outResult ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_stackAddressForTask [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_stackAddressForTask (C_Compiler * inCompiler,
-                                                                    const cObjectArray & inEffectiveParameterArray,
-                                                                    const GALGAS_location & /* §§ inErrorLocation */
-                                                                    COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_stackAddressForTask (operand0,
-                                       inCompiler
-                                       COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_stackAddressForTask ("stackAddressForTask",
-                                                                     functionWithGenericHeader_stackAddressForTask,
-                                                                     & kTypeDescriptor_GALGAS_string,
-                                                                     1,
-                                                                     functionArgs_stackAddressForTask) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          Function 'mainRoutineNameForTask'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_mainRoutineNameForTask (const GALGAS_string & constinArgument_inTaskName,
-                                               C_Compiler * inCompiler
-                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("@").add_operation (GALGAS_string ("task.main.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 345)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 345)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 345)) ;
-//---
-  return result_outResult ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_mainRoutineNameForTask [2] = {
-  & kTypeDescriptor_GALGAS_string,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_mainRoutineNameForTask (C_Compiler * inCompiler,
-                                                                       const cObjectArray & inEffectiveParameterArray,
-                                                                       const GALGAS_location & /* §§ inErrorLocation */
-                                                                       COMMA_LOCATION_ARGS) {
-  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                               inCompiler
-                                                               COMMA_THERE) ;
-  return function_mainRoutineNameForTask (operand0,
-                                          inCompiler
-                                          COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_mainRoutineNameForTask ("mainRoutineNameForTask",
-                                                                        functionWithGenericHeader_mainRoutineNameForTask,
-                                                                        & kTypeDescriptor_GALGAS_string,
-                                                                        1,
-                                                                        functionArgs_mainRoutineNameForTask) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                         Function 'llvmNameForTaskGlobalVar'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -112,7 +18,7 @@ GALGAS_string function_llvmNameForTaskGlobalVar (GALGAS_string inArgument_inTask
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("task.globalvar.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 351)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 351)) ;
+  result_outName = GALGAS_string ("task.globalvar.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 302)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 302)) ;
 //---
   return result_outName ;
 }
@@ -160,7 +66,7 @@ GALGAS_string function_llvmNameForTaskVariable (GALGAS_string inArgument_inTaskN
                                                 C_Compiler * inCompiler
                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("task.var.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 357)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 357)).add_operation (inArgument_inVarName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 357)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 357)) ;
+  result_outName = GALGAS_string ("task.var.").add_operation (inArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 308)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 308)).add_operation (inArgument_inVarName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 308)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 308)) ;
 //---
   return result_outName ;
 }
@@ -7746,11 +7652,11 @@ const char * gWrapperFileContent_30_targetTemplates = "//-----------------------
   "//--- If the RTC oscillator isn't enabled, get it started early\n"
   "  if not RTC_CR.OSCE.bool {\n"
   "    RTC_SR = 0\n"
-  "    RTC_CR = RTC_CR::SC16P | RTC_CR::SC4P | RTC_CR::OSCE\n"
+  "    RTC_CR = $RTC_CR.SC16P | $RTC_CR.SC4P | $RTC_CR.OSCE\n"
   "  }\n"
   "//--- Release I/O pins hold, if we woke up from VLLS mode\n"
   "  if PMC_REGSC.ACKISO != 0 {\n"
-  "    PMC_REGSC |= PMC_REGSC::ACKISO\n"
+  "    PMC_REGSC |= $PMC_REGSC.ACKISO\n"
   "  }\n"
   "// TODO: do this while the PLL is waiting to lock....\n"
   "  VTOR = 0  // use vector table in flash\n"
@@ -7759,9 +7665,9 @@ const char * gWrapperFileContent_30_targetTemplates = "//-----------------------
   "//---------2- Initialisation de la PLL\n"
   "// start in FEI mode\n"
   "//--- Enable capacitors for crystal\n"
-  "  OSC_CR = OSC_CR::SC8P | OSC_CR::SC2P\n"
+  "  OSC_CR = $OSC_CR.SC8P | $OSC_CR.SC2P\n"
   "//--- Enable osc, 8-32 MHz range, low power mode\n"
-  "  MCG_C2 = MCG_C2::RANGE0(2) | MCG_C2::EREFS\n"
+  "  MCG_C2 = MCG_C2::RANGE0(2) | $MCG_C2.EREFS\n"
   "//--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
   "  MCG_C1 = MCG_C1::CLKS(2) | MCG_C1::FRDIV(4)\n"
   "//--- Wait for crystal oscillator to begin\n"
@@ -7774,7 +7680,7 @@ const char * gWrapperFileContent_30_targetTemplates = "//-----------------------
   "//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
   "  MCG_C5 = MCG_C5::PRDIV0(3)\n"
   "//--- Config PLL for 96 MHz output\n"
-  "  MCG_C6 = MCG_C6::PLLS | MCG_C6::VDIV0(0)\n"
+  "  MCG_C6 = $MCG_C6.PLLS | MCG_C6::VDIV0(0)\n"
   "//--- Wait for PLL to start using xtal as its input\n"
   "  do while MCG_S.PLLST == 0 {}\n"
   "//--- Wait for PLL to lock\n"
@@ -8502,7 +8408,7 @@ const char * gWrapperFileContent_34_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "init 0 { // Configure Systick interrupt every ms\n"
   "  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms\n"
   "  SYST_CVR = 0\n"
-  "  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::ENABLE | SYST_CSR::TICKINT\n"
+  "  SYST_CSR = $SYST_CSR.CLKSOURCE | $SYST_CSR.ENABLE | $SYST_CSR.TICKINT\n"
   "//--- Led Teensy\n"
   "  PORTC_PCR5 = (1 << 8)\n"
   "  GPIOC_PDDR |= (1 << 5)\n"

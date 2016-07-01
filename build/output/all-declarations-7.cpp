@@ -3433,6 +3433,163 @@ GALGAS_opaqueTypeDeclaration GALGAS_opaqueTypeDeclaration::extractObject (const 
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
+typeComparisonResult cPtr_pseudoRegisterTypeDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_pseudoRegisterTypeDeclaration * p = (const cPtr_pseudoRegisterTypeDeclaration *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_pseudoRegisterTypeDeclaration) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mRegisterName.objectCompare (p->mAttribute_mRegisterName) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_pseudoRegisterTypeDeclaration::objectCompare (const GALGAS_pseudoRegisterTypeDeclaration & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_pseudoRegisterTypeDeclaration::GALGAS_pseudoRegisterTypeDeclaration (void) :
+GALGAS_abstractDeclaration () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_pseudoRegisterTypeDeclaration GALGAS_pseudoRegisterTypeDeclaration::constructor_default (LOCATION_ARGS) {
+  return GALGAS_pseudoRegisterTypeDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE)
+                                                                COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_pseudoRegisterTypeDeclaration::GALGAS_pseudoRegisterTypeDeclaration (const cPtr_pseudoRegisterTypeDeclaration * inSourcePtr) :
+GALGAS_abstractDeclaration (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_pseudoRegisterTypeDeclaration) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_pseudoRegisterTypeDeclaration GALGAS_pseudoRegisterTypeDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mRegisterName
+                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_pseudoRegisterTypeDeclaration result ;
+  if (inAttribute_mRegisterName.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_pseudoRegisterTypeDeclaration (inAttribute_mRegisterName COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_pseudoRegisterTypeDeclaration::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_pseudoRegisterTypeDeclaration * p = (const cPtr_pseudoRegisterTypeDeclaration *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_pseudoRegisterTypeDeclaration) ;
+    result = p->mAttribute_mRegisterName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cPtr_pseudoRegisterTypeDeclaration::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mRegisterName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                               Pointer class for @pseudoRegisterTypeDeclaration class                                *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_pseudoRegisterTypeDeclaration::cPtr_pseudoRegisterTypeDeclaration (const GALGAS_lstring & in_mRegisterName
+                                                                        COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclaration (THERE),
+mAttribute_mRegisterName (in_mRegisterName) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_pseudoRegisterTypeDeclaration::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_pseudoRegisterTypeDeclaration ;
+}
+
+void cPtr_pseudoRegisterTypeDeclaration::description (C_String & ioString,
+                                                      const int32_t inIndentation) const {
+  ioString << "[@pseudoRegisterTypeDeclaration:" ;
+  mAttribute_mRegisterName.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_pseudoRegisterTypeDeclaration::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_pseudoRegisterTypeDeclaration (mAttribute_mRegisterName COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         @pseudoRegisterTypeDeclaration type                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_pseudoRegisterTypeDeclaration ("pseudoRegisterTypeDeclaration",
+                                                      & kTypeDescriptor_GALGAS_abstractDeclaration) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_pseudoRegisterTypeDeclaration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_pseudoRegisterTypeDeclaration ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_pseudoRegisterTypeDeclaration::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_pseudoRegisterTypeDeclaration (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_pseudoRegisterTypeDeclaration GALGAS_pseudoRegisterTypeDeclaration::extractObject (const GALGAS_object & inObject,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_pseudoRegisterTypeDeclaration result ;
+  const GALGAS_pseudoRegisterTypeDeclaration * p = (const GALGAS_pseudoRegisterTypeDeclaration *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_pseudoRegisterTypeDeclaration *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("pseudoRegisterTypeDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
 typeComparisonResult cPtr_structureDeclaration::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_structureDeclaration * p = (const cPtr_structureDeclaration *) inOperandPtr ;
@@ -15070,113 +15227,6 @@ GALGAS_varInExpressionAST GALGAS_varInExpressionAST::extractObject (const GALGAS
       result = *p ;
     }else{
       inCompiler->castError ("varInExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-
-typeComparisonResult GALGAS_infixOperatorDescription::objectCompare (const GALGAS_infixOperatorDescription & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorDescription::GALGAS_infixOperatorDescription (void) :
-AC_GALGAS_class () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorDescription::GALGAS_infixOperatorDescription (const cPtr_infixOperatorDescription * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_infixOperatorDescription) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation GALGAS_infixOperatorDescription::getter_mOperator (UNUSED_LOCATION_ARGS) const {
-  GALGAS_llvmBinaryOperation result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_infixOperatorDescription * p = (const cPtr_infixOperatorDescription *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_infixOperatorDescription) ;
-    result = p->mAttribute_mOperator ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_llvmBinaryOperation cPtr_infixOperatorDescription::getter_mOperator (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperator ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                  Pointer class for @infixOperatorDescription class                                  *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_infixOperatorDescription::cPtr_infixOperatorDescription (const GALGAS_llvmBinaryOperation & in_mOperator
-                                                              COMMA_LOCATION_ARGS) :
-acPtr_class (THERE),
-mAttribute_mOperator (in_mOperator) {
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @infixOperatorDescription type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_infixOperatorDescription ("infixOperatorDescription",
-                                                 NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_infixOperatorDescription::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_infixOperatorDescription ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_infixOperatorDescription::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_infixOperatorDescription (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_infixOperatorDescription GALGAS_infixOperatorDescription::extractObject (const GALGAS_object & inObject,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_infixOperatorDescription result ;
-  const GALGAS_infixOperatorDescription * p = (const GALGAS_infixOperatorDescription *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_infixOperatorDescription *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("infixOperatorDescription", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

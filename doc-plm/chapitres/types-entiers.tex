@@ -107,10 +107,10 @@ L'opérateur \plm+truncate+ ne peut pas apparaître dans une expression statique
 De plus, une erreur de compilation est déclenchée si l'opérateur \plm+truncate+ est utilisé alors qu'une conversion implicite est possible :
 \begin{PLM}
 let v $uint8 = ...
-let y =truncate v : $int16 // Erreur, conversion toujours possible
+let y = truncate v : $int16 // Erreur, conversion toujours possible
 \end{PLM}
 
-\section{Opérateurs infix de comparaison}
+\section{Opérateurs infixes de comparaison}
 
 Les valeurs entières sont comparables, les six opérateurs \plm+==+, \plm+!=+, \plm+>=+, \plm+>+, \plm+<=+ et \plm+<+ sont acceptés.
 
@@ -247,7 +247,7 @@ Les opérateurs infixes \plm=<<= et \plm=>>= réalisent respectivement le décal
 \index{\textbar=!Entier}
 \index{\^{}=!Entier}
 
-Les trois opérateurs \plm!&=!, \plm!|=! et \plm!^=! sont définis pour les entiers.
+Les opérateurs suivants sont définis pour les entiers.
 
 \plm!a &= b! est équivalent à \plm!a = a & b!.
 
@@ -255,5 +255,19 @@ Les trois opérateurs \plm!&=!, \plm!|=! et \plm!^=! sont définis pour les enti
 
 \plm!a ^= b! est équivalent à \plm!a = a ^ b!.
 
+\plm!a += b! est équivalent à \plm!a = a + b!.
+
+\plm!a +%= b! est équivalent à \plm!a = a +% b!.
+
+\plm!a -= b! est équivalent à \plm!a = a - b!.
+
+\plm!a -%= b! est équivalent à \plm!a = a -% b!.
+
+\plm!a *= b! est équivalent à \plm!a = a * b!.
+
+\plm!a *%= b! est équivalent à \plm!a = a *% b!.
+
 Les opérateurs infixes \plm!&=!, \plm!|=! et \plm!^=! sont décrits à la \refSectionPage{operateurBitABitEntier}.
+
+Les opérateurs infixes \plm!+!, \plm!+%!, \plm!-!, \plm!-%!, \plm!*! et \plm!*%! sont décrits à la \refSectionPage{operateursInfixArithmétiques}.
 

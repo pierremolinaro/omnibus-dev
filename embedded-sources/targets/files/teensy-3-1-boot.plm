@@ -12,11 +12,11 @@ boot 0 {
 //--- If the RTC oscillator isn't enabled, get it started early
   if not RTC_CR.OSCE.bool {
     RTC_SR = 0
-    RTC_CR = RTC_CR::SC16P | RTC_CR::SC4P | RTC_CR::OSCE
+    RTC_CR = $RTC_CR.SC16P | $RTC_CR.SC4P | $RTC_CR.OSCE
   }
 //--- Release I/O pins hold, if we woke up from VLLS mode
   if PMC_REGSC.ACKISO != 0 {
-    PMC_REGSC |= PMC_REGSC::ACKISO
+    PMC_REGSC |= $PMC_REGSC.ACKISO
   }
 // TODO: do this while the PLL is waiting to lock....
   VTOR = 0  // use vector table in flash
@@ -25,9 +25,9 @@ boot 0 {
 //---------2- Initialisation de la PLL
 // start in FEI mode
 //--- Enable capacitors for crystal
-  OSC_CR = OSC_CR::SC8P | OSC_CR::SC2P
+  OSC_CR = $OSC_CR.SC8P | $OSC_CR.SC2P
 //--- Enable osc, 8-32 MHz range, low power mode
-  MCG_C2 = MCG_C2::RANGE0(2) | MCG_C2::EREFS
+  MCG_C2 = MCG_C2::RANGE0(2) | $MCG_C2.EREFS
 //--- Switch to crystal as clock source, FLL input = 16 MHz / 512
   MCG_C1 = MCG_C1::CLKS(2) | MCG_C1::FRDIV(4)
 //--- Wait for crystal oscillator to begin
@@ -40,7 +40,7 @@ boot 0 {
 //    Config PLL input for 16 MHz Crystal / 4 = 4 MHz
   MCG_C5 = MCG_C5::PRDIV0(3)
 //--- Config PLL for 96 MHz output
-  MCG_C6 = MCG_C6::PLLS | MCG_C6::VDIV0(0)
+  MCG_C6 = $MCG_C6.PLLS | MCG_C6::VDIV0(0)
 //--- Wait for PLL to start using xtal as its input
   do while MCG_S.PLLST == 0 {}
 //--- Wait for PLL to lock
