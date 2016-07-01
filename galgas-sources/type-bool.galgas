@@ -65,7 +65,7 @@ override method @booleanDeclaration enterInContext
     !lkey:mBooleanTypeName
     !llvmTypeName:"i1"
     !kind:.boolean
-    !classMethodMap:{}
+    !classConstantMap:{}
     !instantiable:true
     !copyable:copyable
     !equatable:true

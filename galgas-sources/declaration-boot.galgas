@@ -109,6 +109,7 @@ method @bootList-element bootSemanticAnalysis
   drop variableMap
 #--- Code generation
   ioIntermediateCodeStruct.mBootList +=
+    !mPriority
     !mBootLocation
     !bootAllocaList
     !instructionGenerationList
@@ -120,6 +121,7 @@ method @bootList-element bootSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @bootListIR {
+  @bigint mBootIndex
   @location mInitLocation
   @allocaList mAllocaList
   @instructionListIR mInstructionListIR

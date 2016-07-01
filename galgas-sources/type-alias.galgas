@@ -86,7 +86,7 @@ override method @typeAliasDeclaration enterInContext
     !lkey:mAliasedTypeName
     ?llvmTypeName:let llvmTypeMane
     ?kind:let kind
-    ?classMethodMap:let typedConstantMap
+    ?classConstantMap:let classConstantMap
     ?instantiable:let instanciable
     ?copyable:let copyable
     ?equatable:let equatable
@@ -98,7 +98,7 @@ override method @typeAliasDeclaration enterInContext
     !lkey:mNewTypeName
     !llvmTypeName:llvmTypeMane
     !kind:kind
-    !classMethodMap:typedConstantMap
+    !classConstantMap:classConstantMap
     !instantiable:instanciable
     !copyable:copyable
     !equatable:equatable

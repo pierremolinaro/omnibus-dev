@@ -131,7 +131,7 @@ override method @opaqueTypeDeclaration enterInContext
       !lkey:mOpaqueTypeName
       !llvmTypeName:"i" + bitSize
       !kind:.opaque {!bitCount:bitSize}
-      !classMethodMap:{}
+      !classConstantMap:{}
       !instantiable:instantiable
       !copyable:copyable
       !equatable:false
@@ -139,7 +139,10 @@ override method @opaqueTypeDeclaration enterInContext
       !enumerationType:.null # Not enumerable
     ]
   #--- Constructor
-    [!?ioContext.mConstructorMap insertKey !mOpaqueTypeName !.simple {!value:0G}]
+    [!?ioContext.mConstructorMap insertKey
+      !mOpaqueTypeName
+      !.simple {!value:0G}
+    ]
   end
 }
 

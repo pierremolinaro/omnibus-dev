@@ -159,7 +159,7 @@ func checkMode
 sharedmap @unifiedTypeMap %selectors {
   @string llvmTypeName # For Example: i23, %$toto
   @typeKind kind
-  @classMethodMap classMethodMap
+  @classConstantMap classConstantMap
   @bool instantiable
   @bool copyable
   @bool equatable
@@ -172,10 +172,10 @@ sharedmap @unifiedTypeMap %selectors {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @classMethodMap {
+map @classConstantMap {
   @operandIR mValue
-  insert insertKey error message "the '%K' class method is already declared in %L"
-  search searchKey error message "there is no '%K' class method"
+  insert insertKey error message "the '%K' class constant is already declared in %L"
+  search searchKey error message "there is no '%K' class constant"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

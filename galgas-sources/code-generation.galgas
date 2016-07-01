@@ -196,18 +196,23 @@ private proc generateCodeFiles
     after llvmCode += "\n"
   end
 #----------------------------------------- Boot
-  llvmCode += llvmTitleComment (!"Boot")
+  llvmCode += llvmTitleComment (!"Boot routines")
   llvmCode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"
   for boot in inIntermediateCodeStruct.mBootList do
-    for (variable type) in boot.mAllocaList do
-      llvmCode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
-    end
-  end
-  for boot in inIntermediateCodeStruct.mBootList do
-    [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
+    llvmCode += "  call void @boot." + boot.mBootIndex + " ()\n"
   end
   llvmCode += "  ret void\n"
   llvmCode += "}\n\n"
+  for boot in inIntermediateCodeStruct.mBootList do
+    llvmCode += llvmSeparatorLine () + "\n"
+    llvmCode += "define internal void @boot." + boot.mBootIndex + " ()" + llvmAttributeFunction () + "{\n"
+    for (variable type) in boot.mAllocaList do
+      llvmCode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+    end
+    [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
+    llvmCode += "  ret void\n"
+    llvmCode += "}\n\n"
+  end
 #----------------------------------------- Init
   [inIntermediateCodeStruct.mInitList generateLLVMinitCode
     !?llvmCode

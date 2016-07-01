@@ -186,7 +186,7 @@ method @taskList enterInContext
       !lkey:task.mTaskName
       !llvmTypeName:"%" + ["$" + task.mTaskName assemblerRepresentation]
       !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
-      !classMethodMap:{}
+      !classConstantMap:{}
       !instantiable:false
       !copyable:false
       !equatable:false

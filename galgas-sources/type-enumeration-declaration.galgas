@@ -109,17 +109,17 @@ override method @enumerationDeclaration enterInContext
 #  end
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mEnumerationName ?let selfType]
   @enumConstantMap enumConstantMap = {}
-  @classMethodMap classMethodMap = {}
+  @classConstantMap classConstantMap = {}
   for (cst) in mCaseNameList do
     let idx = [enumConstantMap count]
     [!?enumConstantMap insertKey !cst !idx]
-    [!?classMethodMap insertKey !cst !.new{!selfType !.literalInteger {!value:[idx bigint]}}]
+    [!?classConstantMap insertKey !cst !.new{!selfType !.literalInteger {!value:[idx bigint]}}]
   end
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName
     !llvmTypeName:"i" + [[enumConstantMap count] - 1 significantBitCount]
     !kind:.enumeration {!constantMap:enumConstantMap}
-    !classMethodMap:classMethodMap
+    !classConstantMap:classConstantMap
     !instantiable:true
     !copyable:copyable
     !equatable:true
