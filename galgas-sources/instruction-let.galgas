@@ -90,7 +90,7 @@ override method @letInstructionWithAssignmentAST analyze
     ?result:let @operandIR expressionResult
   ]
 #--- Declare local constant
-  let result = checkAssignmentCompatibility (
+  var result = checkAssignmentCompatibility (
     !source:expressionResult
     !targetAnnotationType:targetType
     !errorLocation:mVarName.location
@@ -98,8 +98,10 @@ override method @letInstructionWithAssignmentAST analyze
   )
   drop targetType, expressionResult
 #---
-  if not [result.mType instantiable] then
-    error mVarName : "$" + [result.mType key] + " type is not instanciable"
+  if [result.mType key] == staticIntegerTypeName () then
+    error mVarName : "the $" + staticIntegerTypeName () + " type is not allowed for a local constant" : result
+  elsif not [result.mType instantiable] then
+    error mVarName : "$" + [result.mType key] + " type is not instanciable" : result
   end
 #--- Declare local constant
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
