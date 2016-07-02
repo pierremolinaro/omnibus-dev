@@ -64,7 +64,12 @@ override method @registerConstantExpressionAST addDependenceEdgeForStaticExpress
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGraph
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  for (* expression *) in mFieldValues do
+    [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -90,7 +95,7 @@ override method @registerConstantExpressionAST analyzeExpression
 #--- Search variable
   [inContext.mControlRegisterMap searchKey
     !mRegisterName
-    ?let type
+    ?let registerType
     ?*
     ?*
     ?let @controlRegisterBitSliceAccessMap unused registerBitSliceMap
@@ -162,22 +167,37 @@ override method @registerConstantExpressionAST analyzeExpression
       if not unsigned then
         error expressionLocation: "an unsigned integer expression is required here"
       else
-        let assertGenerated = expressionBitCount > fieldBitCount
-        if assertGenerated && [inModeSet hasKey !panicModeName ()] then
+        if (expressionBitCount > fieldBitCount) && not inAllowPanic then
           error expressionLocation
-            : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+            : "operations that can generate panic are not allowed here: the expression should be an $uint" + fieldBitCount
         end
+#        let assertGenerated = expressionBitCount > fieldBitCount
+#        if assertGenerated && [inModeSet hasKey !panicModeName ()] then
+#          error expressionLocation
+#            : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+#        end
       #--- Generate an upper bound check
-
-      #--- Perform an bit extend to register type
+        if (expressionBitCount > fieldBitCount) && inAllowPanic && not [option plm_options.noPanicGeneration value] then
+          [!?ioInstructionGenerationList appendUpperBoundCheck
+            !expressionResult
+            !1G << fieldBitCount
+            !panicCode:8
+            !expressionLocation
+          ]
+        end
+      #--- Perform an bit extend to register type or a trunc
         var partialResult = expressionResult
         if expressionBitCount < registerBitCount then
-          getNewTempVariable (!type !?ioTemporaries ?let extendedResult)
+          getNewTempVariable (!registerType !?ioTemporaries ?let extendedResult)
           [!?ioInstructionGenerationList appendExtend !extendedResult !partialResult]
           partialResult = extendedResult
+        elsif expressionBitCount > registerBitCount then
+          getNewTempVariable (!registerType !?ioTemporaries ?let truncatedResult)
+          [!?ioInstructionGenerationList appendTrunc !truncatedResult !partialResult]
+          partialResult = truncatedResult
         end
       #--- Perform left shift
-        getNewTempVariable (!type !?ioTemporaries ?let shiftedResult)
+        getNewTempVariable (!registerType !?ioTemporaries ?let shiftedResult)
         [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !partialResult !fieldBitIndex]
       #---- Accumulate 
         operandList += !shiftedResult
@@ -185,9 +205,9 @@ override method @registerConstantExpressionAST analyzeExpression
     end
   end
 #------------------------------------------------------ Result
-  outResult = .new {!type !.literalInteger {!value:accumulatedFieldStaticValues}}
+  outResult = .new {!registerType !.literalInteger {!value:accumulatedFieldStaticValues}}
   for (operand) in operandList do
-    getNewTempVariable (!type !?ioTemporaries ?let newResult)
+    getNewTempVariable (!registerType !?ioTemporaries ?let newResult)
     [!?ioInstructionGenerationList appendBinaryOperation
       !newResult.mValue
       !newResult.mType

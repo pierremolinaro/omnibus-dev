@@ -132,39 +132,24 @@ let x $uint32 = ICSR.VECTPENDING.shifted // Entre 0 et 2**9-1
 
 
 
-\subsection{Constantes associées aux champs booléens}
-
-À chaque champ booléen d'un registre est associée une constante. Par exemple, pour activer l'interruption \texttt{PendSV}, il faut mettre à $1$ le bit \texttt{PENDSVSET}. On écrit donc :
-\begin{PLM}
-ICSR = $ICSR.PENDSVSET
-\end{PLM}
-
-La constante \plm+$ICSR.PENDSVSET+ a le type du registre \plm+ICSR+, c'est-à-dire \plm+$uint32+, et pour valeur $2^{28}$, le bit \texttt{PENDSVSET} étant le $28^e$ bit du registre \plm+ICSR+.
-
-De façon analogue, si on voulait activer simultanément les interruptions \texttt{PendSV} et \texttt{SysTick}, il faut mettre à $1$ les bits \texttt{PENDSVSET} et \texttt{PENDSTSET}. On écrit donc :
-\begin{PLM}
-ICSR = $ICSR.PENDSVSET | $ICSR.PENDSTSET
-\end{PLM}
-
-
-
-
-
-
 \subsectionLabel{Expressions associées aux champs entiers}{constructionChampEntierRegistre}
 
-Le délimiteur \plm+::+ permet de simplifier la composition d'une valeur correspondant à un champ entier. Par exemple :
+Une construction particulière permet de définir facilement la valeur à affecter à un registre de contrôle. Prenons l'exemple du regitre \texttt{ISCR} (\refFigurePage{}{definitionICSR}), et supposons que l'on veuille …
+
+
+
+Par exemple :
 
 \begin{PLM}
-let y $uint32 = ICSR::VECTPENDING (x) // x : expression entière non signée
+let y $uint32 = $ICSR {VECTPENDING:x} // x : expression entière non signée
 \end{PLM}
 
 Le champ \texttt{VECTPENDING} est un champ de 9 bits, il peut donc accepter une valeur entière entre $0$ et $511$. L'expression \plm+x+ doit être de type entier non signé. Plusieurs cas sont à considérer :
 \begin{itemize}
-\item si \plm+x+ est une expression statique, alors le compilateur vérifie que sa valeur est comprise entre $0$ et $511$ (un message d'erreur de compilation est émis dans le cas contraire) ; l'expression \plm+ICSR::VECTPENDING (x)+ est alors aussi une expression statique ;
+\item si \plm+x+ est une expression statique, alors le compilateur vérifie que sa valeur est comprise entre $0$ et $511$ (un message d'erreur de compilation est émis dans le cas contraire) ; l'expression \plm+$ICSR {VECTPENDING:x}+ est alors aussi une expression statique ;
 \item si \plm+x+ est une expression non calculable statiquement :
   \begin{itemize}
-  \item si \plm+x+ est du type \plm+$uint8+, alors toute valeur de \plm+x+ est acceptable : le code engendré se borne à faire le décalage à gauche de la valeur de \plm+x+ ;
+  \item si \plm+x+ est du type \plm+$uint9+, alors toute valeur de \plm+x+ est acceptable : le code engendré se borne à faire le décalage à gauche de la valeur de \plm+x+ ;
   \item sinon, une assertion (code : voir \refTableauPage{tableauCodePanique}) est engendrée ; la valeur de \plm+x+ est ensuite masquée pour pallier un éventuel débordement, puis décalée. 
   \end{itemize}
 \end{itemize}
@@ -175,15 +160,34 @@ D'une manière générale, si \plm+x+ n'est pas calculable statiquement, le code
 
 
 
-\subsection{Masques associés aux champs entiers}
+\subsection{Constantes associées aux champs booléens}
 
-Le délimiteur \plm+::+ permet de simplifier la composition d'un masque correspondant à un champ entier. Par exemple :
-
+À chaque champ booléen d'un registre est associée une constante. Par exemple, pour activer l'interruption \texttt{PendSV}, il faut mettre à $1$ le bit \texttt{PENDSVSET}. On écrit donc :
 \begin{PLM}
-let y $uint32 = ICSR::VECTPENDING // y vaut 0x1F_F000
+ICSR = $ICSR {PENDSVSET}
 \end{PLM}
 
-Le champ \texttt{VECTPENDING} est un champ de 9 bits commençant au bit 12. La valeur du masque \plm+ICSR::VECTPENDING+ est donc $(2^9 - 1)^{12}$, soit \texttt{0x1F\_F000}.
+La constante \plm+$ICSR.PENDSVSET+ a le type du registre \plm+ICSR+, c'est-à-dire \plm+$uint32+, et pour valeur $2^{28}$, le bit \texttt{PENDSVSET} étant le $28^e$ bit du registre \plm+ICSR+.
+
+De façon analogue, si on voulait activer simultanément les interruptions \texttt{PendSV} et \texttt{SysTick}, il faut mettre à $1$ les bits \texttt{PENDSVSET} et \texttt{PENDSTSET}. On écrit donc :
+\begin{PLM}
+ICSR = $ICSR {PENDSVSET, PENDSTSET}
+\end{PLM}
+
+
+
+
+
+
+\subsection{Masques associés aux champs entiers}
+
+Par exemple :
+
+\begin{PLM}
+let y $uint32 = ICSR {VECTPENDING} // y vaut 0x1F_F000
+\end{PLM}
+
+Le champ \texttt{VECTPENDING} est un champ de 9 bits commençant au bit 12. La valeur du masque \plm+$ICSR {VECTPENDING}+ est donc $(2^9 - 1)^{12}$, soit \texttt{0x1F\_F000}.
 
 Les masques ainsi obtenus sont des expressions statiques.
 
