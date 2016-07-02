@@ -286,6 +286,7 @@
 
 
 % \refSectionPage{label-section} ---> "section x.y page n"   où x.y est le n° de la section
+\newcommand\refSection[1]{\hyperref[sec:#1]{section \ref*{sec:#1}}}
 \newcommand\refSectionPage[1]{\hyperref[sec:#1]{section \ref*{sec:#1} page \pageref{sec:#1}}}
 \newcommand\refSectionTitlePage[1]{\hyperref[sec:#1]{section « \emph{\nameref*{sec:#1}} » page \pageref{sec:#1}}}
 \newcommand\refSectionTitle[1]{\nameref{sec:#1}}
@@ -296,6 +297,7 @@
 
 
 % \refSubsectionPage{label-section} ---> "section x.y page n"   où x.y est le n° de la sub-section
+\newcommand\refSubsection[1]{\hyperref[subsec:#1]{section \ref*{subsec:#1}}}
 \newcommand\refSubsectionPage[1]{\hyperref[subsec:#1]{section \ref*{subsec:#1} page \pageref{subsec:#1}}}
 \newcommand\refSubsectionTitlePage[1]{\hyperref[subsec:#1]{section « \emph{\nameref*{subsec:#1}} » page \pageref{subsec:#1}}}
 \newcommand\refSubsectionTitle[1]{\nameref{subsec:#1}}
@@ -306,6 +308,7 @@
 
 
 % \refSubsectionPage{label-section} ---> "page n"   où n est la page de la sub-sub-section
+\newcommand\refSubsubsection[1]{\hyperref[subsubsec:#1]{section \ref*{subsubsec:#1}}}
 \newcommand\refSubsubsectionPage[1]{\hyperref[subsubsec:#1]{section \ref*{subsubsec:#1} page \pageref{subsubsec:#1}}}
 \newcommand\refSubsubsectionTitlePage[1]{\hyperref[subsubsec:#1]{section « \emph{\nameref*{subsubsec:#1}} » page \pageref{subsubsec:#1}}}
 \newcommand\refSubsubsectionTitle[1]{\nameref{subsubsec:#1}}
