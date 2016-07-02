@@ -135,6 +135,7 @@ On va explorer successivement le fichier \texttt{myTeensy.plm-target} puis le r√
 \subsectionLabel{Le fichier \texttt{myTeensy.plm-target}}{fichierTarget}
 
 Voici le contenu du fichier \texttt{myTeensy.plm-target} :
+
 \begin{PLM}[1]
 pointerSize 32
 
@@ -153,7 +154,7 @@ proc systickHandler `isr @weak () {
 init 0 { // Configure Systick interrupt every ms
   SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
   SYST_CVR = 0
-  SYST_CSR = SYST_CSR::CLKSOURCE | SYST_CSR::TICKINT | SYST_CSR::ENABLE
+  SYST_CSR = $SYST_CSR {CLKSOURCE, TICKINT, ENABLE}
 }
 \end{PLM}
 %\ligne\\

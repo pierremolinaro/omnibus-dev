@@ -1,36 +1,49 @@
 
-setter @instructionListIR appendShiftLeft
-  ?let @operandIR inResult
+setter @instructionListIR appendUpperBoundCheck
   ?let @operandIR inSource
-  ?let @uint inShiftAmount
+  ?let @bigint inUpperBoundPlusOne
+  ?panicCode:let @uint inPanicCode
+  ?let @location inLocation
 {
-  self += !@leftShiftIR.new {!inResult !inSource !inShiftAmount}
+  self += !@upperBoundCheckIR.new {!inSource !inUpperBoundPlusOne !inPanicCode !inLocation}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @leftShiftIR : @abstractInstructionIR {
-  @operandIR mResult
+class @upperBoundCheckIR : @abstractInstructionIR {
   @operandIR mSource
-  @uint mShiftAmount
+  @bigint mUpperBoundPlusOne
+  @uint mPanicCode
+  @location mLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @leftShiftIR llvmInstructionCode
+override method @upperBoundCheckIR llvmInstructionCode
   ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult.mValue llvmName] + " = "
-#  [[mSource.mType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
-#  ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
-  ioLLVMcode += "shl " + [mSource.mType  llvmTypeName] + " " + [mSource.mValue llvmName] + ", " + mShiftAmount + "\n"
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString 
+    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
+    ?let staticStringIndex
+  ]
+  let llvmType = [mSource.mType llvmTypeName]
+  let llvmSourceName = [mSource.mValue llvmName]
+  let llvmLabelName = [mSource.mValue name]
+  ioLLVMcode += "  " + llvmSourceName + ".isOk = icmp ult " + llvmType + " " + llvmSourceName + ", " + mUpperBoundPlusOne + "\n"
+  ioLLVMcode += "  br i1 " + llvmSourceName + ".isOk, label %" + llvmLabelName + ".ovf, label %" + llvmLabelName + ".ok\n\n"
+  ioLLVMcode += llvmLabelName + ".ovf:\n"
+  ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mPanicCode + ")\n"
+  ioLLVMcode += "  unreachable\n\n"
+  ioLLVMcode += llvmLabelName + ".ok:\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @leftShiftIR enterAccessibleEntities
+override method @upperBoundCheckIR enterAccessibleEntities
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

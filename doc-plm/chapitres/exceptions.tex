@@ -14,7 +14,7 @@
 \begin{tabular}{lll}
   \textbf{Numéros} & \textbf{Signification} & \textbf{Lien} \\
    7 & Échec de l'instruction \plm+assert+ & \refSectionPage{instructionAssert} \\
-   8 & Dépassement de la construction d'un champ entier d'un registre (\plm+registre::champ (...)+) & \refSubsectionPage{constructionChampEntierRegistre}\\
+   8 & Dépassement de la construction d'un champ entier d'un registre (\plm+$registre {champ:xx}+) & \refSubsectionPage{constructionChampEntierRegistre}\\
    9 & Dépassement de capacité d'une conversion entre entiers (\plm+convert+) & \refSectionPage{operateursInfixArithmétiques} \\
    10 & Dépassement de capacité de l'addition (\plm-+-) &  \refSectionPage{operateursInfixArithmétiques} \\
    13 & Dépassement de capacité de la soustraction (\plm+-+) & \refSectionPage{operateursInfixArithmétiques} \\
@@ -124,6 +124,6 @@ Les trois constantes \plm=CODE=, \plm=FILE= et \plm=LINE= permettent de signaler
 Pour redémarrer un processeur ARMv7 lors d'une panique, on peut écrire la routine de panique \texttt{setup} suivante :
 \begin{PLM}
 panic proc setup 255 {
-  AIRCR = AIRCR::VECTKEY(0x5FA) | AIRCR::SYSRESETREQ
+  AIRCR = $AIRCR {VECTKEY:0x5FA, SYSRESETREQ}
 }
 \end{PLM}
