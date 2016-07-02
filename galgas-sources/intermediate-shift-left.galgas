@@ -1,0 +1,40 @@
+
+setter @instructionListIR appendShiftLeft
+  ?let @operandIR inResult
+  ?let @operandIR inSource
+  ?let @uint inShiftAmount
+{
+  self += !@leftShiftIR.new {!inResult !inSource !inShiftAmount}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @leftShiftIR : @abstractInstructionIR {
+  @operandIR mResult
+  @operandIR mSource
+  @uint mShiftAmount
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @leftShiftIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  " + [mResult.mValue llvmName] + " = "
+  [[mSource.mType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
+  ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
+  ioLLVMcode += " " + [mSource.mType  llvmTypeName] + " " + [mSource.mValue llvmName] + " to " + [mResult.mType llvmTypeName] + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @leftShiftIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

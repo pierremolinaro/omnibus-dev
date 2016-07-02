@@ -15669,24 +15669,24 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i63_parse (C_Lexiqu
 void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i64_ (GALGAS_expressionAST & outArgument_outExpression,
                                                                    C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outExpression.drop () ; // Release 'out' argument
-  GALGAS_lstring var_registerNameAsTypeName_1387 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_registerNameAsTypeName_1377 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_typeName) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 28)) ;
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 29)) ;
-  GALGAS_lstringlist var_booleanFieldNames_1430 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("expression-cst-registre.galgas", 30)) ;
-  GALGAS_registerIntegerFieldListAST var_integerFieldValues_1487 = GALGAS_registerIntegerFieldListAST::constructor_emptyList (SOURCE_FILE ("expression-cst-registre.galgas", 31)) ;
+  GALGAS_lstringlist var_booleanFieldNames_1420 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("expression-cst-registre.galgas", 30)) ;
+  GALGAS_registerIntegerFieldListAST var_integerFieldValues_1477 = GALGAS_registerIntegerFieldListAST::constructor_emptyList (SOURCE_FILE ("expression-cst-registre.galgas", 31)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    GALGAS_lstring var_registerFieldName_1545 = inCompiler->synthetizedAttribute_tokenString () ;
+    GALGAS_lstring var_registerFieldName_1535 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 33)) ;
     switch (select_common_5F_syntax_64 (inCompiler)) {
     case 1: {
-      var_booleanFieldNames_1430.addAssign_operation (var_registerFieldName_1545  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 35)) ;
+      var_booleanFieldNames_1420.addAssign_operation (var_registerFieldName_1535  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 35)) ;
     } break ;
     case 2: {
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 37)) ;
-      GALGAS_expressionAST var_expression_1664 ;
-      nt_expression_ (var_expression_1664, inCompiler) ;
-      var_integerFieldValues_1487.addAssign_operation (var_registerFieldName_1545, var_expression_1664, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 39))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 39)) ;
+      GALGAS_expressionAST var_expression_1654 ;
+      nt_expression_ (var_expression_1654, inCompiler) ;
+      var_integerFieldValues_1477.addAssign_operation (var_registerFieldName_1535, var_expression_1654, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 39))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 39)) ;
     } break ;
     default:
       break ;
@@ -15701,7 +15701,7 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_primary_i64_ (GALGAS_expres
     }
   }
   inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 44)) ;
-  outArgument_outExpression = GALGAS_registerConstantExpressionAST::constructor_new (var_registerNameAsTypeName_1387, var_booleanFieldNames_1430, var_integerFieldValues_1487  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 45)) ;
+  outArgument_outExpression = GALGAS_registerConstantExpressionAST::constructor_new (var_registerNameAsTypeName_1377, var_booleanFieldNames_1420, var_integerFieldValues_1477  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 45)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

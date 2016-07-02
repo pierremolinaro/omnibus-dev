@@ -13640,10 +13640,10 @@ typeComparisonResult cPtr_registerConstantExpressionAST::dynamicObjectCompare (c
     result = mAttribute_mRegisterName.objectCompare (p->mAttribute_mRegisterName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mBooleanFieldNames.objectCompare (p->mAttribute_mBooleanFieldNames) ;
+    result = mAttribute_mMaskFieldNames.objectCompare (p->mAttribute_mMaskFieldNames) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mIntegerFieldValues.objectCompare (p->mAttribute_mIntegerFieldValues) ;
+    result = mAttribute_mFieldValues.objectCompare (p->mAttribute_mFieldValues) ;
   }
   return result ;
 }
@@ -13692,12 +13692,12 @@ GALGAS_expressionAST (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_registerConstantExpressionAST GALGAS_registerConstantExpressionAST::constructor_new (const GALGAS_lstring & inAttribute_mRegisterName,
-                                                                                            const GALGAS_lstringlist & inAttribute_mBooleanFieldNames,
-                                                                                            const GALGAS_registerIntegerFieldListAST & inAttribute_mIntegerFieldValues
+                                                                                            const GALGAS_lstringlist & inAttribute_mMaskFieldNames,
+                                                                                            const GALGAS_registerIntegerFieldListAST & inAttribute_mFieldValues
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_registerConstantExpressionAST result ;
-  if (inAttribute_mRegisterName.isValid () && inAttribute_mBooleanFieldNames.isValid () && inAttribute_mIntegerFieldValues.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_registerConstantExpressionAST (inAttribute_mRegisterName, inAttribute_mBooleanFieldNames, inAttribute_mIntegerFieldValues COMMA_THERE)) ;
+  if (inAttribute_mRegisterName.isValid () && inAttribute_mMaskFieldNames.isValid () && inAttribute_mFieldValues.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_registerConstantExpressionAST (inAttribute_mRegisterName, inAttribute_mMaskFieldNames, inAttribute_mFieldValues COMMA_THERE)) ;
   }
   return result ;
 }
@@ -13722,38 +13722,38 @@ GALGAS_lstring cPtr_registerConstantExpressionAST::getter_mRegisterName (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist GALGAS_registerConstantExpressionAST::getter_mBooleanFieldNames (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstringlist GALGAS_registerConstantExpressionAST::getter_mMaskFieldNames (UNUSED_LOCATION_ARGS) const {
   GALGAS_lstringlist result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerConstantExpressionAST * p = (const cPtr_registerConstantExpressionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_registerConstantExpressionAST) ;
-    result = p->mAttribute_mBooleanFieldNames ;
+    result = p->mAttribute_mMaskFieldNames ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist cPtr_registerConstantExpressionAST::getter_mBooleanFieldNames (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBooleanFieldNames ;
+GALGAS_lstringlist cPtr_registerConstantExpressionAST::getter_mMaskFieldNames (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mMaskFieldNames ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerIntegerFieldListAST GALGAS_registerConstantExpressionAST::getter_mIntegerFieldValues (UNUSED_LOCATION_ARGS) const {
+GALGAS_registerIntegerFieldListAST GALGAS_registerConstantExpressionAST::getter_mFieldValues (UNUSED_LOCATION_ARGS) const {
   GALGAS_registerIntegerFieldListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_registerConstantExpressionAST * p = (const cPtr_registerConstantExpressionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_registerConstantExpressionAST) ;
-    result = p->mAttribute_mIntegerFieldValues ;
+    result = p->mAttribute_mFieldValues ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_registerIntegerFieldListAST cPtr_registerConstantExpressionAST::getter_mIntegerFieldValues (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIntegerFieldValues ;
+GALGAS_registerIntegerFieldListAST cPtr_registerConstantExpressionAST::getter_mFieldValues (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mFieldValues ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13761,13 +13761,13 @@ GALGAS_registerIntegerFieldListAST cPtr_registerConstantExpressionAST::getter_mI
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_registerConstantExpressionAST::cPtr_registerConstantExpressionAST (const GALGAS_lstring & in_mRegisterName,
-                                                                        const GALGAS_lstringlist & in_mBooleanFieldNames,
-                                                                        const GALGAS_registerIntegerFieldListAST & in_mIntegerFieldValues
+                                                                        const GALGAS_lstringlist & in_mMaskFieldNames,
+                                                                        const GALGAS_registerIntegerFieldListAST & in_mFieldValues
                                                                         COMMA_LOCATION_ARGS) :
 cPtr_expressionAST (THERE),
 mAttribute_mRegisterName (in_mRegisterName),
-mAttribute_mBooleanFieldNames (in_mBooleanFieldNames),
-mAttribute_mIntegerFieldValues (in_mIntegerFieldValues) {
+mAttribute_mMaskFieldNames (in_mMaskFieldNames),
+mAttribute_mFieldValues (in_mFieldValues) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13781,9 +13781,9 @@ void cPtr_registerConstantExpressionAST::description (C_String & ioString,
   ioString << "[@registerConstantExpressionAST:" ;
   mAttribute_mRegisterName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mBooleanFieldNames.description (ioString, inIndentation+1) ;
+  mAttribute_mMaskFieldNames.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mIntegerFieldValues.description (ioString, inIndentation+1) ;
+  mAttribute_mFieldValues.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -13791,7 +13791,7 @@ void cPtr_registerConstantExpressionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_registerConstantExpressionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_registerConstantExpressionAST (mAttribute_mRegisterName, mAttribute_mBooleanFieldNames, mAttribute_mIntegerFieldValues COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_registerConstantExpressionAST (mAttribute_mRegisterName, mAttribute_mMaskFieldNames, mAttribute_mFieldValues COMMA_THERE)) ;
   return ptr ;
 }
 

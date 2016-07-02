@@ -12,8 +12,8 @@ list @registerIntegerFieldListAST {
 
 class @registerConstantExpressionAST : @expressionAST {
   @lstring mRegisterName
-  @lstringlist mBooleanFieldNames
-  @registerIntegerFieldListAST mIntegerFieldValues
+  @lstringlist mMaskFieldNames
+  @registerIntegerFieldListAST mFieldValues
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -99,25 +99,20 @@ override method @registerConstantExpressionAST analyzeExpression
     ?*
     ?let registerBitCount
   ]
-  @bigint value = 0G
-#------------------------------------------------------ Boolean fields
+#------------------------------------------------------ Fields masks
   @bigint accumulatedFieldStaticValues = 0G
-  for (booleanFieldName) in mBooleanFieldNames do
+  for (fieldName) in mMaskFieldNames do
     [registerFieldMap searchKey
-      !booleanFieldName
+      !fieldName
       ?let @uint fieldBitIndex
       ?let @uint fieldBitCount
     ]
-  #--- Check field
-    if fieldBitCount != 1 then
-      error booleanFieldName : "this field is not a boolean field"
-    end
-  #--- Build resulting value
-    accumulatedFieldStaticValues = accumulatedFieldStaticValues | (1G << fieldBitIndex)
+    let mask = (1G << fieldBitCount) - 1G
+    accumulatedFieldStaticValues = accumulatedFieldStaticValues | (mask << fieldBitIndex)
   end
 #------------------------------------------------------ Valuated fields
   @operandList operandList = {}
-  for (fieldName expression expressionLocation) in mIntegerFieldValues do
+  for (fieldName expression expressionLocation) in mFieldValues do
     [registerFieldMap searchKey
       !fieldName
       ?let @uint fieldBitIndex
@@ -172,8 +167,10 @@ override method @registerConstantExpressionAST analyzeExpression
           error expressionLocation
             : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
         end
-        var partialResult = expressionResult
+      #--- Generate an upper bound check
+
       #--- Perform an bit extend to register type
+        var partialResult = expressionResult
         if expressionBitCount < registerBitCount then
           getNewTempVariable (!type !?ioTemporaries ?let extendedResult)
           [!?ioInstructionGenerationList appendExtend !extendedResult !partialResult]

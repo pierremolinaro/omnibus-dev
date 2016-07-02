@@ -10711,9 +10711,9 @@ class GALGAS_registerConstantExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mBooleanFieldNames (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_registerIntegerFieldListAST getter_mFieldValues (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_registerIntegerFieldListAST getter_mIntegerFieldValues (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mMaskFieldNames (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
 
@@ -10888,13 +10888,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIntegerFiel
 class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
 //--- Attributes
   public : GALGAS_lstring mAttribute_mRegisterName ;
-  public : GALGAS_lstringlist mAttribute_mBooleanFieldNames ;
-  public : GALGAS_registerIntegerFieldListAST mAttribute_mIntegerFieldValues ;
+  public : GALGAS_lstringlist mAttribute_mMaskFieldNames ;
+  public : GALGAS_registerIntegerFieldListAST mAttribute_mFieldValues ;
 
 //--- Constructor
   public : cPtr_registerConstantExpressionAST (const GALGAS_lstring & in_mRegisterName,
-                                               const GALGAS_lstringlist & in_mBooleanFieldNames,
-                                               const GALGAS_registerIntegerFieldListAST & in_mIntegerFieldValues
+                                               const GALGAS_lstringlist & in_mMaskFieldNames,
+                                               const GALGAS_registerIntegerFieldListAST & in_mFieldValues
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -10902,8 +10902,8 @@ class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mBooleanFieldNames (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_registerIntegerFieldListAST getter_mIntegerFieldValues (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mMaskFieldNames (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_registerIntegerFieldListAST getter_mFieldValues (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
