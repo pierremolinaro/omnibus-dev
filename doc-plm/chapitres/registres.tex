@@ -13,8 +13,9 @@ Dans ce chapitre, nous allons décrire :
   \item comment déclarer un registre de contrôle, comment lui affecter une valeur, et le lire (\refSectionPage{simpleDeclarationRegistre}) ;
   \item comment déclarer les champs d'un registre de contrôle, et comment les utiliser (\refSectionPage{declarationRegistreEtChamps}) ;
   \item comment déclarer plusieurs registres de contrôle ayant la même composition de champs (\refSectionPage{declarationPlusieursRegistres}) ;
-  \item les attributs applicables aux registres de contrôles (\refSectionPage{attributRo} et \refSectionPage{attributUser}) ;
-  \item les restrictions d'usage des registres de contrôles (\refSectionPage{restrictionsUsageRegistres}).
+  \item comment déclarer et utiliser un tableau de registres de contrôle (\refSectionPage{declarationTableauRegistres}) ;
+  \item les attributs applicables aux registres de contrôle (\refSectionPage{attributRo} et \refSectionPage{attributUser}) ;
+  \item les restrictions d'usage des registres de contrôle (\refSectionPage{restrictionsUsageRegistres}).
 \end{itemize}
 
 À titre d'exemple, nous allons nous intéresser aux registres \texttt{PORTx\_PCRn} du micro-contrôleur \texttt{MK20DX256VLH7} qui équipe les cartes \emph{Teensy 3.x} (\refFigure{}{definitionPORTxPCRn}). La documentation de ce micro-contrôleur indique que l'un des registres de cette famille, \texttt{PORTA\_PCR0} est à l'adresse \texttt{0x4004\_9000}.
@@ -318,6 +319,102 @@ $uint32 {
 
 
 
+\sectionLabel{Déclaration d'un tableau de registres}{declarationTableauRegistres}
+
+Le micro-contrôleur \texttt{LPC2294} de NXP possède 4 modules CAN.
+
+\fbox{\begin{minipage}{1.0\textwidth}
+  La documentation du \texttt{LPC2294} numérote ces modules de $1$ à $4$. Dans ce document, ils sont numérotés de $0$ à $3$, ce qui s'avère beaucoup plus pratique à l'usage.
+\end{minipage}}
+
+Les registres de ces modules sont aux adresses :
+
+\texttt{0xE004\_4000 + (canal << 14) + register\_offset}
+
+où \texttt{canal} vaut $0$ pour le module 0, …, $3$ pour le module 3 ; \texttt{register\_offset} est une valeur propre à chaque type de registre. Par exemple, pour les registres \texttt{CANCMR}, l'offset est égal à 4. Les quatre registres \texttt{CANCMR} sont donc aux adresses :
+
+\texttt{CANCMR0} : \texttt{0xE004\_4000 + (0 << 14) + 4 = 0xE004\_4004}
+
+\texttt{CANCMR1} : \texttt{0xE004\_4000 + (1 << 14) + 4 = 0xE004\_8004}
+
+\texttt{CANCMR2} : \texttt{0xE004\_4000 + (2 << 14) + 4 = 0xE004\_C004}
+
+\texttt{CANCMR3} : \texttt{0xE004\_4000 + (3 << 14) + 4 = 0xE005\_0004}
+
+Il est possible de déclarer ces registres individuellement :
+
+\begin{PLM}
+register
+  CANCMR0 at 0xE004_4004
+  CANCMR1 at 0xE004_8004
+  CANCMR2 at 0xE004_C004
+  CANCMR3 at 0xE005_0004
+$uint32 {
+  STB3, STB2, STB1, SRR, CDO, RRB, AT, TR
+}
+\end{PLM}
+
+Mais on n'a pas de solution simple pour sélectionner un de ces registres en fonction du numéro de module. Si on veut écrire une valeur \plm=v= dans le registre désigné par la variable \plm=n= (dont la valeur est comprise entre $0$ et $3$), il faut écrire :
+
+\begin{PLM}
+if n == 0 {
+  CANCMR0 = v
+}else if n == 1 {
+  CANCMR1 = v
+}else if n == 2 {
+  CANCMR2 = v
+}else{
+  CANCMR3 = v
+}
+\end{PLM}
+
+On peut simplifier l'accès en déclarant les registres \texttt{CANCMR$n$} comme un tableau de registres de contrôle :
+
+\begin{PLM}
+register
+  CANCMR[4] at 0xE004_4004 : 1 << 14
+$uint32 {
+  STB3, STB2, STB1, SRR, CDO, RRB, AT, TR
+}
+\end{PLM}
+
+D'une manière générale, la déclaration d'un tableau de registres de contrôle est de la forme :
+\begin{PLM}
+register nom_registre [taille] at adresse_base : multiplicateur
+$type { ... }
+\end{PLM}
+
+La \plm=taille= doit toujours être égale à une puissance de $2$. L'adresse du registre d'indice $i$ est égale à \texttt{adresse\_base + $i$ * multiplicateur}. Ici :
+
+Adresse de \texttt{CANCMR[0]} : \texttt{0xE004\_4004 + 0 * (1 << 14) = 0xE004\_4004}
+
+Adresse de \texttt{CANCMR[1]} : \texttt{0xE004\_4004 + 1 * (1 << 14) = 0xE004\_8004}
+
+Adresse de \texttt{CANCMR[2]} : \texttt{0xE004\_4004 + 2 * (1 << 14) = 0xE004\_C004}
+
+Adresse de \texttt{CANCMR[3]} : \texttt{0xE004\_4004 + 3 * (1 << 14) = 0xE005\_0004}
+
+L'accès aux registres de contrôle s'effectue alors en utilisant la notation \plm=[...]= habituelle de l'accès à un élément de tableau. Par exemple, en reprenant l'exemple précédent, écrire une valeur \plm=v= dans le registre désigné par la variable \plm=n= (dont la valeur est comprise entre $0$ et $3$) s'exprime simplement par :
+
+\begin{PLM}
+CANCMR[n] = v
+\end{PLM}
+
+L'indice d'un tableau de registre peut-être une expression entière statique, ou une expression dynamique signée ou non signée. Les vérifications à la compilation et à l'exécution sont les même que pour l'accès à un élément de tableau (voir la \refSectionPage{AccesElementTableau}).
+
+En particulier, si l'indice est une expression de type non signée dont la valeur maximum est strictement inférieure à la taille du tableau, aucune vérification n'est faite à l'exécution, puisque l'indice sera toujours valide : 
+
+\begin{PLM}
+let n $uint2 = ...
+CANCMR[n] = v // Aucune vérification, indice toujours valide
+\end{PLM}
+
+
+
+
+
+
+
 \sectionLabel{Attribut \texttt{@ro}}{attributRo}\index{"@ro}
 La déclaration d'un registre accepte l'attribut \plm+@ro+, qui signifie qu'il est en lecture seule. Par exemple :
 \begin{PLM}
@@ -334,7 +431,7 @@ Toute tentative de faire figurer ce registre dans une construction qui provoque 
 \sectionLabel{Attribut \texttt{@user}}{attributUser}\index{"@user}
 La déclaration d'un registre accepte l'attribut \plm+@user+, qui signifie qu'il est accessible en mode \plm!`user!. Par défaut, un registre de contrôle n'est pas accessible en mode  \plm!`user!. Par exemple :
 \begin{PLM}
-register GPIOE_PSOR @user at 0x400FF104 $uint32
+register GPIOE_PSOR @user at 0x400F_F104 $uint32
 \end{PLM}
 
 

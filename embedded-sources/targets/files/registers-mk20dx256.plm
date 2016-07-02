@@ -168,7 +168,7 @@ register
   PORTE_PCR30  at 0x4004D078
   PORTE_PCR31  at 0x4004D07C
 $uint32 {
-  7, isf, 4, irqc[4], lk, 4, mux[3], 1, dse, ode, pfe, 1, sre, pe, ps
+  7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
 }
 
 let PORT_PCR_ISF  $uint32  = 0x01000000  // Interrupt Status Flag
