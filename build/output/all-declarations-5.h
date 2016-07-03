@@ -1056,17 +1056,6 @@ void extensionMethod_enterControlRegistersInContext (const class GALGAS_controlR
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Routine 'controlRegistersSemanticAnalysis'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_controlRegistersSemanticAnalysis (const class GALGAS_controlRegisterDeclarationListAST constinArgument0,
-                                               const class GALGAS_semanticContext constinArgument1,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                      Routine 'buildControlRegisterMapHTMLFile'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3520,5 +3509,25 @@ class GALGAS_string function_mainRoutineNameForTask (const class GALGAS_string &
 class GALGAS_string function_llvmNameForTaskGlobalVar (class GALGAS_string inArgument0,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Function 'llvmNameForTaskVariable'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForTaskVariable (class GALGAS_string inArgument0,
+                                                      class GALGAS_string inArgument1,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Function 'llvmNameForTaskLoopFunction'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForTaskLoopFunction (class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 #endif

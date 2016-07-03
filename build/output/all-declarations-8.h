@@ -746,4 +746,33 @@ void callExtensionMethod_functionSemanticAnalysis (const class cPtr_structureDec
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//             Extension method '@controlRegisterDeclarationListAST-element buildControlRegisterSliceMap'              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_buildControlRegisterSliceMap (const class GALGAS_controlRegisterDeclarationListAST_2D_element inObject,
+                                                   class GALGAS_semanticContext & io_ioContext,
+                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inRegisterType,
+                                                   const class GALGAS_uint constin_inRegisterBitCount,
+                                                   class GALGAS_controlRegisterFieldMap & out_outRegisterFieldMap,
+                                                   class GALGAS_controlRegisterBitSliceAccessMap & out_outRegisterBitSliceMap,
+                                                   class GALGAS_controlRegisterFieldList & out_outControlRegisterFieldList,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                  Extension method '@controlRegisterDeclarationListAST-element controlRegisterType'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_controlRegisterType (const class GALGAS_controlRegisterDeclarationListAST_2D_element inObject,
+                                          class GALGAS_semanticContext & io_ioContext,
+                                          class GALGAS_unifiedTypeMap_2D_proxy & out_outRegisterType,
+                                          class GALGAS_uint & out_outRegisterBitCount,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
 #endif

@@ -79,11 +79,6 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
-#--- Control registers
-  controlRegistersSemanticAnalysis (
-    !inAST.mControlRegisterDeclarationListAST
-    !context:inSemanticContext
-  )
 #---
   @semanticTemporariesStruct temporaries = .default
   for (declaration) in inAST.mDeclarationList do
