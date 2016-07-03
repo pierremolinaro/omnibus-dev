@@ -6,7 +6,6 @@
 
 struct @intermediateCodeStruct {
   @staticStringMap mStaticStringMap
-  @controlRegisterMapIR mControlRegisterMapIR
   @globalVariableMapIR mGlobalVariableMap
   @globalConstantMapIR mGlobalConstantMap
   @routineMapIR mRoutineMapIR
@@ -23,15 +22,6 @@ struct @intermediateCodeStruct {
   @uint mMaxBranchOfOnInstructions
   @targetParameters mTargetParameters
   @moduleListIR mModuleList
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @controlRegisterMapIR {
-  @string mRegisterTypeName
-  @bigint mRegisterAddress
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

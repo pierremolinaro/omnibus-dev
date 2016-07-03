@@ -2907,7 +2907,6 @@ GALGAS_operandIR extensionGetter_address (const GALGAS_objectInMemoryIR & inObje
 
 GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (void) :
 mAttribute_mStaticStringMap (),
-mAttribute_mControlRegisterMapIR (),
 mAttribute_mGlobalVariableMap (),
 mAttribute_mGlobalConstantMap (),
 mAttribute_mRoutineMapIR (),
@@ -2934,48 +2933,45 @@ GALGAS_intermediateCodeStruct::~ GALGAS_intermediateCodeStruct (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (const GALGAS_staticStringMap & inOperand0,
-                                                              const GALGAS_controlRegisterMapIR & inOperand1,
-                                                              const GALGAS_globalVariableMapIR & inOperand2,
-                                                              const GALGAS_globalConstantMapIR & inOperand3,
-                                                              const GALGAS_routineMapIR & inOperand4,
-                                                              const GALGAS_guardMapIR & inOperand5,
-                                                              const GALGAS_interruptMapIR & inOperand6,
-                                                              const GALGAS_externProcedureMapIR & inOperand7,
-                                                              const GALGAS_stringset & inOperand8,
-                                                              const GALGAS_bootListIR & inOperand9,
-                                                              const GALGAS_initListIR & inOperand10,
+                                                              const GALGAS_globalVariableMapIR & inOperand1,
+                                                              const GALGAS_globalConstantMapIR & inOperand2,
+                                                              const GALGAS_routineMapIR & inOperand3,
+                                                              const GALGAS_guardMapIR & inOperand4,
+                                                              const GALGAS_interruptMapIR & inOperand5,
+                                                              const GALGAS_externProcedureMapIR & inOperand6,
+                                                              const GALGAS_stringset & inOperand7,
+                                                              const GALGAS_bootListIR & inOperand8,
+                                                              const GALGAS_initListIR & inOperand9,
+                                                              const GALGAS_instructionListIR & inOperand10,
                                                               const GALGAS_instructionListIR & inOperand11,
-                                                              const GALGAS_instructionListIR & inOperand12,
-                                                              const GALGAS_taskMapIR & inOperand13,
-                                                              const GALGAS_globalTaskVariableList & inOperand14,
-                                                              const GALGAS_uint & inOperand15,
-                                                              const GALGAS_targetParameters & inOperand16,
-                                                              const GALGAS_moduleListIR & inOperand17) :
+                                                              const GALGAS_taskMapIR & inOperand12,
+                                                              const GALGAS_globalTaskVariableList & inOperand13,
+                                                              const GALGAS_uint & inOperand14,
+                                                              const GALGAS_targetParameters & inOperand15,
+                                                              const GALGAS_moduleListIR & inOperand16) :
 mAttribute_mStaticStringMap (inOperand0),
-mAttribute_mControlRegisterMapIR (inOperand1),
-mAttribute_mGlobalVariableMap (inOperand2),
-mAttribute_mGlobalConstantMap (inOperand3),
-mAttribute_mRoutineMapIR (inOperand4),
-mAttribute_mGuardMapIR (inOperand5),
-mAttribute_mInterruptMapIR (inOperand6),
-mAttribute_mExternProcedureMapIR (inOperand7),
-mAttribute_mRequiredProcedureSet (inOperand8),
-mAttribute_mBootList (inOperand9),
-mAttribute_mInitList (inOperand10),
-mAttribute_mPanicSetupInstructionListIR (inOperand11),
-mAttribute_mPanicLoopInstructionListIR (inOperand12),
-mAttribute_mTaskMapIR (inOperand13),
-mAttribute_mGlobalTaskVariableList (inOperand14),
-mAttribute_mMaxBranchOfOnInstructions (inOperand15),
-mAttribute_mTargetParameters (inOperand16),
-mAttribute_mModuleList (inOperand17) {
+mAttribute_mGlobalVariableMap (inOperand1),
+mAttribute_mGlobalConstantMap (inOperand2),
+mAttribute_mRoutineMapIR (inOperand3),
+mAttribute_mGuardMapIR (inOperand4),
+mAttribute_mInterruptMapIR (inOperand5),
+mAttribute_mExternProcedureMapIR (inOperand6),
+mAttribute_mRequiredProcedureSet (inOperand7),
+mAttribute_mBootList (inOperand8),
+mAttribute_mInitList (inOperand9),
+mAttribute_mPanicSetupInstructionListIR (inOperand10),
+mAttribute_mPanicLoopInstructionListIR (inOperand11),
+mAttribute_mTaskMapIR (inOperand12),
+mAttribute_mGlobalTaskVariableList (inOperand13),
+mAttribute_mMaxBranchOfOnInstructions (inOperand14),
+mAttribute_mTargetParameters (inOperand15),
+mAttribute_mModuleList (inOperand16) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_intermediateCodeStruct (GALGAS_staticStringMap::constructor_emptyMap (HERE),
-                                        GALGAS_controlRegisterMapIR::constructor_emptyMap (HERE),
                                         GALGAS_globalVariableMapIR::constructor_emptyMap (HERE),
                                         GALGAS_globalConstantMapIR::constructor_emptyMap (HERE),
                                         GALGAS_routineMapIR::constructor_emptyMap (HERE),
@@ -2997,27 +2993,26 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (const GALGAS_staticStringMap & inOperand0,
-                                                                              const GALGAS_controlRegisterMapIR & inOperand1,
-                                                                              const GALGAS_globalVariableMapIR & inOperand2,
-                                                                              const GALGAS_globalConstantMapIR & inOperand3,
-                                                                              const GALGAS_routineMapIR & inOperand4,
-                                                                              const GALGAS_guardMapIR & inOperand5,
-                                                                              const GALGAS_interruptMapIR & inOperand6,
-                                                                              const GALGAS_externProcedureMapIR & inOperand7,
-                                                                              const GALGAS_stringset & inOperand8,
-                                                                              const GALGAS_bootListIR & inOperand9,
-                                                                              const GALGAS_initListIR & inOperand10,
+                                                                              const GALGAS_globalVariableMapIR & inOperand1,
+                                                                              const GALGAS_globalConstantMapIR & inOperand2,
+                                                                              const GALGAS_routineMapIR & inOperand3,
+                                                                              const GALGAS_guardMapIR & inOperand4,
+                                                                              const GALGAS_interruptMapIR & inOperand5,
+                                                                              const GALGAS_externProcedureMapIR & inOperand6,
+                                                                              const GALGAS_stringset & inOperand7,
+                                                                              const GALGAS_bootListIR & inOperand8,
+                                                                              const GALGAS_initListIR & inOperand9,
+                                                                              const GALGAS_instructionListIR & inOperand10,
                                                                               const GALGAS_instructionListIR & inOperand11,
-                                                                              const GALGAS_instructionListIR & inOperand12,
-                                                                              const GALGAS_taskMapIR & inOperand13,
-                                                                              const GALGAS_globalTaskVariableList & inOperand14,
-                                                                              const GALGAS_uint & inOperand15,
-                                                                              const GALGAS_targetParameters & inOperand16,
-                                                                              const GALGAS_moduleListIR & inOperand17 
+                                                                              const GALGAS_taskMapIR & inOperand12,
+                                                                              const GALGAS_globalTaskVariableList & inOperand13,
+                                                                              const GALGAS_uint & inOperand14,
+                                                                              const GALGAS_targetParameters & inOperand15,
+                                                                              const GALGAS_moduleListIR & inOperand16 
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_intermediateCodeStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid ()) {
-    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid ()) {
+    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16) ;
   }
   return result ;
 }
@@ -3028,9 +3023,6 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mAttribute_mStaticStringMap.objectCompare (inOperand.mAttribute_mStaticStringMap) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mControlRegisterMapIR.objectCompare (inOperand.mAttribute_mControlRegisterMapIR) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mGlobalVariableMap.objectCompare (inOperand.mAttribute_mGlobalVariableMap) ;
@@ -3086,14 +3078,13 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_intermediateCodeStruct::isValid (void) const {
-  return mAttribute_mStaticStringMap.isValid () && mAttribute_mControlRegisterMapIR.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mRoutineMapIR.isValid () && mAttribute_mGuardMapIR.isValid () && mAttribute_mInterruptMapIR.isValid () && mAttribute_mExternProcedureMapIR.isValid () && mAttribute_mRequiredProcedureSet.isValid () && mAttribute_mBootList.isValid () && mAttribute_mInitList.isValid () && mAttribute_mPanicSetupInstructionListIR.isValid () && mAttribute_mPanicLoopInstructionListIR.isValid () && mAttribute_mTaskMapIR.isValid () && mAttribute_mGlobalTaskVariableList.isValid () && mAttribute_mMaxBranchOfOnInstructions.isValid () && mAttribute_mTargetParameters.isValid () && mAttribute_mModuleList.isValid () ;
+  return mAttribute_mStaticStringMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mRoutineMapIR.isValid () && mAttribute_mGuardMapIR.isValid () && mAttribute_mInterruptMapIR.isValid () && mAttribute_mExternProcedureMapIR.isValid () && mAttribute_mRequiredProcedureSet.isValid () && mAttribute_mBootList.isValid () && mAttribute_mInitList.isValid () && mAttribute_mPanicSetupInstructionListIR.isValid () && mAttribute_mPanicLoopInstructionListIR.isValid () && mAttribute_mTaskMapIR.isValid () && mAttribute_mGlobalTaskVariableList.isValid () && mAttribute_mMaxBranchOfOnInstructions.isValid () && mAttribute_mTargetParameters.isValid () && mAttribute_mModuleList.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_intermediateCodeStruct::drop (void) {
   mAttribute_mStaticStringMap.drop () ;
-  mAttribute_mControlRegisterMapIR.drop () ;
   mAttribute_mGlobalVariableMap.drop () ;
   mAttribute_mGlobalConstantMap.drop () ;
   mAttribute_mRoutineMapIR.drop () ;
@@ -3121,8 +3112,6 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
     ioString << " not built" ;
   }else{
     mAttribute_mStaticStringMap.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mControlRegisterMapIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mGlobalVariableMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -3163,12 +3152,6 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
 
 GALGAS_staticStringMap GALGAS_intermediateCodeStruct::getter_mStaticStringMap (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mStaticStringMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterMapIR GALGAS_intermediateCodeStruct::getter_mControlRegisterMapIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mControlRegisterMapIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13739,160 +13722,6 @@ GALGAS_allocaList_2D_element GALGAS_allocaList_2D_element::extractObject (const 
       result = *p ;
     }else{
       inCompiler->castError ("allocaList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterMapIR_2D_element::GALGAS_controlRegisterMapIR_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mRegisterTypeName (),
-mAttribute_mRegisterAddress () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterMapIR_2D_element::~ GALGAS_controlRegisterMapIR_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterMapIR_2D_element::GALGAS_controlRegisterMapIR_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                const GALGAS_string & inOperand1,
-                                                                                const GALGAS_bigint & inOperand2) :
-mAttribute_lkey (inOperand0),
-mAttribute_mRegisterTypeName (inOperand1),
-mAttribute_mRegisterAddress (inOperand2) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterMapIR_2D_element GALGAS_controlRegisterMapIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_controlRegisterMapIR_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                                 GALGAS_string::constructor_default (HERE),
-                                                 GALGAS_bigint::constructor_zero (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterMapIR_2D_element GALGAS_controlRegisterMapIR_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                const GALGAS_string & inOperand1,
-                                                                                                const GALGAS_bigint & inOperand2 
-                                                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_controlRegisterMapIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_controlRegisterMapIR_2D_element (inOperand0, inOperand1, inOperand2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_controlRegisterMapIR_2D_element::objectCompare (const GALGAS_controlRegisterMapIR_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRegisterTypeName.objectCompare (inOperand.mAttribute_mRegisterTypeName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mRegisterAddress.objectCompare (inOperand.mAttribute_mRegisterAddress) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_controlRegisterMapIR_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mRegisterTypeName.isValid () && mAttribute_mRegisterAddress.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterMapIR_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mRegisterTypeName.drop () ;
-  mAttribute_mRegisterAddress.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_controlRegisterMapIR_2D_element::description (C_String & ioString,
-                                                          const int32_t inIndentation) const {
-  ioString << "<struct @controlRegisterMapIR-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRegisterTypeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mRegisterAddress.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_controlRegisterMapIR_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_controlRegisterMapIR_2D_element::getter_mRegisterTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bigint GALGAS_controlRegisterMapIR_2D_element::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterAddress ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         @controlRegisterMapIR-element type                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_controlRegisterMapIR_2D_element ("controlRegisterMapIR-element",
-                                                        NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_controlRegisterMapIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterMapIR_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_controlRegisterMapIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_controlRegisterMapIR_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_controlRegisterMapIR_2D_element GALGAS_controlRegisterMapIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_controlRegisterMapIR_2D_element result ;
-  const GALGAS_controlRegisterMapIR_2D_element * p = (const GALGAS_controlRegisterMapIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterMapIR_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterMapIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
