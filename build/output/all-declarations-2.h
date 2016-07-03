@@ -4195,7 +4195,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
     kEnum_register,
     kEnum_globalVariable,
     kEnum_localValue,
-    kEnum_globalConstant
+    kEnum_constant
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -4222,9 +4222,9 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_objectInMemoryIR constructor_globalConstant (const class GALGAS_operandIR & inOperand0,
-                                                                            const class GALGAS_string & inOperand1
-                                                                            COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_objectInMemoryIR constructor_constant (const class GALGAS_operandIR & inOperand0,
+                                                                      const class GALGAS_string & inOperand1
+                                                                      COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectInMemoryIR constructor_globalVariable (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                             const class GALGAS_string & inOperand1,
@@ -4250,10 +4250,10 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_globalConstant (class GALGAS_operandIR & outArgument0,
-                                                        class GALGAS_string & outArgument1,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_constant (class GALGAS_operandIR & outArgument0,
+                                                  class GALGAS_string & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_globalVariable (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                         class GALGAS_string & outArgument1,
@@ -4276,7 +4276,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalConstant (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isConstant (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalVariable (LOCATION_ARGS) const ;
 

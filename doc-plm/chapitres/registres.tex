@@ -14,7 +14,7 @@ Dans ce chapitre, nous allons décrire :
   \item comment déclarer les champs d'un registre de contrôle, et comment les utiliser (\refSectionPage{declarationRegistreEtChamps}) ;
   \item comment déclarer plusieurs registres de contrôle ayant la même composition de champs (\refSectionPage{declarationPlusieursRegistres}) ;
   \item comment déclarer et utiliser un tableau de registres de contrôle (\refSectionPage{declarationTableauRegistres}) ;
-  \item les attributs applicables aux registres de contrôle (\refSectionPage{attributRo} et \refSectionPage{attributUser}) ;
+  \item les attributs applicables aux registres de contrôle (\refSectionPage{attributsRegistreControle}) ;
   \item les restrictions d'usage des registres de contrôle (\refSectionPage{restrictionsUsageRegistres}).
 \end{itemize}
 
@@ -415,7 +415,9 @@ CANCMR[n] = v // Aucune vérification, indice toujours valide
 
 
 
-\sectionLabel{Attribut \texttt{@ro}}{attributRo}\index{"@ro}
+\sectionLabel{Attributs d'un registre de contrôle}{attributsRegistreControle}
+
+\subsectionLabel{Attribut \texttt{@ro}}{attributRo}\index{"@ro}
 La déclaration d'un registre accepte l'attribut \plm+@ro+, qui signifie qu'il est en lecture seule. Par exemple :
 \begin{PLM}
 register SYST_CALIB @ro at 0xE000_E01C $uint32
@@ -428,7 +430,7 @@ Toute tentative de faire figurer ce registre dans une construction qui provoque 
 
 
 
-\sectionLabel{Attribut \texttt{@user}}{attributUser}\index{"@user}
+\subsectionLabel{Attribut \texttt{@user}}{attributUser}\index{"@user}
 La déclaration d'un registre accepte l'attribut \plm+@user+, qui signifie qu'il est accessible en mode \plm!`user!. Par défaut, un registre de contrôle n'est pas accessible en mode  \plm!`user!. Par exemple :
 \begin{PLM}
 register GPIOE_PSOR @user at 0x400F_F104 $uint32

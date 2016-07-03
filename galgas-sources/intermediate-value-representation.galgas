@@ -80,7 +80,7 @@ enum @objectInMemoryIR {
   case register (@unifiedTypeMap-proxy type @lstring name @bigint address @controlRegisterBitSliceAccessMap sliceMap)
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
   case localValue (@unifiedTypeMap-proxy type @string name)
-  case globalConstant (@operandIR value  @string name)
+  case constant (@operandIR value  @string name)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -93,7 +93,7 @@ getter @objectInMemoryIR llvmName -> @string outName {
     outName = "@" + llvmNameForGlobalVariable (!name)
   case localValue (* @string name) :
     outName = "%" + llvmNameForLocalVariable (!name)
-  case globalConstant (*  @string name) :
+  case constant (*  @string name) :
     outName = "%" + name
   end
 }
@@ -108,7 +108,7 @@ getter @objectInMemoryIR name -> @string outName {
     outName = name
   case localValue (* @string name) :
     outName = name
-  case globalConstant (*  @string name) :
+  case constant (*  @string name) :
     outName = name
   end
 }
@@ -123,7 +123,7 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
     outType = type
   case localValue (@unifiedTypeMap-proxy type *) :
     outType = type
-  case globalConstant (@operandIR value *) :
+  case constant (@operandIR value *) :
     outType = value.mType
   end
 }
@@ -138,7 +138,7 @@ getter @objectInMemoryIR address -> @operandIR outOperand {
     outOperand  = .new {!type !.llvmGlobalObject {!name:llvmNameForGlobalVariable (!name)}}
   case localValue (@unifiedTypeMap-proxy type @string name) :
     outOperand  = .new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name)}}
-  case globalConstant (* *) :
+  case constant (* *) :
     error .nowhere : "@objectInMemoryIR globalConstantaddress" : outOperand
   end
 }

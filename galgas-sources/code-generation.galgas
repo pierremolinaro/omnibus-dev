@@ -12,7 +12,7 @@ getter @objectInMemoryIR mangledName -> @string outResult {
     outResult = llvmNameForGlobalVariable (!name)
   case localValue (* @string name) :
     outResult = llvmNameForLocalVariable (!name)
-  case globalConstant (* @string name) :
+  case constant (* @string name) :
     outResult = llvmNameForGlobalVariable (!name)
   end
 }

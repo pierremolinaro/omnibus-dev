@@ -8346,11 +8346,11 @@ void extensionSetter_appendLoadFromMemory (GALGAS_instructionListIR & ioObject,
       }
     }
     break ;
-  case GALGAS_objectInMemoryIR::kEnum_globalConstant:
+  case GALGAS_objectInMemoryIR::kEnum_constant:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_globalConstant * extractPtr_981 = (const cEnumAssociatedValues_objectInMemoryIR_globalConstant *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_operandIR extractedValue_value = extractPtr_981->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_981->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectInMemoryIR_constant * extractPtr_975 = (const cEnumAssociatedValues_objectInMemoryIR_constant *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_operandIR extractedValue_value = extractPtr_975->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_975->mAssociatedValue1 ;
       outArgument_outResultingValue = extractedValue_value ;
     }
     break ;
@@ -8374,10 +8374,10 @@ void extensionSetter_appendStoreInMemory (GALGAS_instructionListIR & ioObject,
     break ;
   case GALGAS_objectInMemoryIR::kEnum_register:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_register * extractPtr_1417 = (const cEnumAssociatedValues_objectInMemoryIR_register *) (constinArgument_inTargetPtr.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1417->mAssociatedValue0 ;
-      const GALGAS_lstring extractedValue_registerName = extractPtr_1417->mAssociatedValue1 ;
-      const GALGAS_bigint extractedValue_address = extractPtr_1417->mAssociatedValue2 ;
+      const cEnumAssociatedValues_objectInMemoryIR_register * extractPtr_1411 = (const cEnumAssociatedValues_objectInMemoryIR_register *) (constinArgument_inTargetPtr.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1411->mAssociatedValue0 ;
+      const GALGAS_lstring extractedValue_registerName = extractPtr_1411->mAssociatedValue1 ;
+      const GALGAS_bigint extractedValue_address = extractPtr_1411->mAssociatedValue2 ;
       {
       extensionSetter_appendStoreVolatileRegister (ioObject, extractedValue_registerName.mAttribute_string, extractedValue_type, extractedValue_address, constinArgument_inValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 40)) ;
       }
@@ -8385,10 +8385,10 @@ void extensionSetter_appendStoreInMemory (GALGAS_instructionListIR & ioObject,
     break ;
   case GALGAS_objectInMemoryIR::kEnum_globalVariable:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_globalVariable * extractPtr_1581 = (const cEnumAssociatedValues_objectInMemoryIR_globalVariable *) (constinArgument_inTargetPtr.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1581->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_1581->mAssociatedValue1 ;
-      const GALGAS_bool extractedValue_isVolatile = extractPtr_1581->mAssociatedValue2 ;
+      const cEnumAssociatedValues_objectInMemoryIR_globalVariable * extractPtr_1575 = (const cEnumAssociatedValues_objectInMemoryIR_globalVariable *) (constinArgument_inTargetPtr.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1575->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_1575->mAssociatedValue1 ;
+      const GALGAS_bool extractedValue_isVolatile = extractPtr_1575->mAssociatedValue2 ;
       {
       extensionSetter_appendStoreGlobalVariable (ioObject, extractedValue_name, extractedValue_type, constinArgument_inValue, extractedValue_isVolatile, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 42)) ;
       }
@@ -8396,15 +8396,15 @@ void extensionSetter_appendStoreInMemory (GALGAS_instructionListIR & ioObject,
     break ;
   case GALGAS_objectInMemoryIR::kEnum_localValue:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_localValue * extractPtr_1702 = (const cEnumAssociatedValues_objectInMemoryIR_localValue *) (constinArgument_inTargetPtr.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1702->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_1702->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectInMemoryIR_localValue * extractPtr_1696 = (const cEnumAssociatedValues_objectInMemoryIR_localValue *) (constinArgument_inTargetPtr.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1696->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_1696->mAssociatedValue1 ;
       {
       extensionSetter_appendStoreLocalVariable (ioObject, extractedValue_name, extractedValue_type, constinArgument_inValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 44)) ;
       }
     }
     break ;
-  case GALGAS_objectInMemoryIR::kEnum_globalConstant:
+  case GALGAS_objectInMemoryIR::kEnum_constant:
     {
       inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-store.galgas", 46)), GALGAS_string ("<<@objectInMemoryIR storeInMemory globalConstant>>")  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 46)) ;
     }
@@ -8822,10 +8822,10 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_instructionListIR inO
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_1934 (temp_0, kEnumeration_up) ;
-  while (enumerator_1934.hasCurrentObject ()) {
-    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_1934.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 40)) ;
-    enumerator_1934.gotoNextObject () ;
+  cEnumerator_instructionListIR enumerator_1928 (temp_0, kEnumeration_up) ;
+  while (enumerator_1928.hasCurrentObject ()) {
+    callExtensionMethod_enterAccessibleEntities ((const cPtr_abstractInstructionIR *) enumerator_1928.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 40)) ;
+    enumerator_1928.gotoNextObject () ;
   }
 }
 
