@@ -1038,6 +1038,7 @@ class cPtr_literal_5F_literal_5F_integerInfixOperation : public cPtr_infixOperat
 
 void routine_enterControlRegistersInContext (const class GALGAS_controlRegisterDeclarationListAST constinArgument0,
                                              class GALGAS_semanticContext & ioArgument1,
+                                             class GALGAS_staticStringMap & ioArgument2,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -1049,6 +1050,7 @@ void routine_enterControlRegistersInContext (const class GALGAS_controlRegisterD
 
 void extensionMethod_enterControlRegistersInContext (const class GALGAS_controlRegisterDeclarationListAST_2D_element inObject,
                                                      class GALGAS_semanticContext & io_ioContext,
+                                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                      class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -1073,7 +1075,7 @@ void routine_controlRegistersSemanticAnalysis (const class GALGAS_controlRegiste
 class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_staticStringMap mAttribute_mStaticStringMap ;
-  public : GALGAS_controlRegisterMapIR mAttribute_mControlRegisterMap ;
+  public : GALGAS_controlRegisterMapIR mAttribute_mControlRegisterMapIR ;
   public : GALGAS_globalVariableMapIR mAttribute_mGlobalVariableMap ;
   public : GALGAS_globalConstantMapIR mAttribute_mGlobalConstantMap ;
   public : GALGAS_routineMapIR mAttribute_mRoutineMapIR ;
@@ -1107,7 +1109,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_intermediateCodeStruct (const GALGAS_staticStringMap & in_mStaticStringMap,
-                                          const GALGAS_controlRegisterMapIR & in_mControlRegisterMap,
+                                          const GALGAS_controlRegisterMapIR & in_mControlRegisterMapIR,
                                           const GALGAS_globalVariableMapIR & in_mGlobalVariableMap,
                                           const GALGAS_globalConstantMapIR & in_mGlobalConstantMap,
                                           const GALGAS_routineMapIR & in_mRoutineMapIR,
@@ -1170,7 +1172,7 @@ class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bootListIR getter_mBootList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterMapIR getter_mControlRegisterMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterMapIR getter_mControlRegisterMapIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_externProcedureMapIR getter_mExternProcedureMapIR (LOCATION_ARGS) const ;
 

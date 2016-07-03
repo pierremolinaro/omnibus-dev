@@ -3026,7 +3026,8 @@ class cCollectionElement_controlRegisterNameList : public cCollectionElement {
 //--- Constructor
   public : cCollectionElement_controlRegisterNameList (const GALGAS_lstring & in_mRegisterName,
                                                        const GALGAS_lstringlist & in_mAttributeList,
-                                                       const GALGAS_lbigint & in_mRegisterAddress
+                                                       const GALGAS_expressionAST & in_mRegisterAddress,
+                                                       const GALGAS_location & in_mRegisterAddressLocation
                                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -3046,10 +3047,11 @@ class cCollectionElement_controlRegisterNameList : public cCollectionElement {
 
 cCollectionElement_controlRegisterNameList::cCollectionElement_controlRegisterNameList (const GALGAS_lstring & in_mRegisterName,
                                                                                         const GALGAS_lstringlist & in_mAttributeList,
-                                                                                        const GALGAS_lbigint & in_mRegisterAddress
+                                                                                        const GALGAS_expressionAST & in_mRegisterAddress,
+                                                                                        const GALGAS_location & in_mRegisterAddressLocation
                                                                                         COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mRegisterName, in_mAttributeList, in_mRegisterAddress) {
+mObject (in_mRegisterName, in_mAttributeList, in_mRegisterAddress, in_mRegisterAddressLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3062,7 +3064,7 @@ bool cCollectionElement_controlRegisterNameList::isValid (void) const {
 
 cCollectionElement * cCollectionElement_controlRegisterNameList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_controlRegisterNameList (mObject.mAttribute_mRegisterName, mObject.mAttribute_mAttributeList, mObject.mAttribute_mRegisterAddress COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_controlRegisterNameList (mObject.mAttribute_mRegisterName, mObject.mAttribute_mAttributeList, mObject.mAttribute_mRegisterAddress, mObject.mAttribute_mRegisterAddressLocation COMMA_HERE)) ;
   return result ;
 }
 
@@ -3081,6 +3083,10 @@ void cCollectionElement_controlRegisterNameList::description (C_String & ioStrin
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mRegisterAddress" ":" ;
   mObject.mAttribute_mRegisterAddress.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mRegisterAddressLocation" ":" ;
+  mObject.mAttribute_mRegisterAddressLocation.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3118,13 +3124,14 @@ GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::constructor_empty
 
 GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                           const GALGAS_lstringlist & inOperand1,
-                                                                                          const GALGAS_lbigint & inOperand2
+                                                                                          const GALGAS_expressionAST & inOperand2,
+                                                                                          const GALGAS_location & inOperand3
                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterNameList result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_controlRegisterNameList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2 COMMA_THERE) ;
+    GALGAS_controlRegisterNameList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -3135,12 +3142,14 @@ GALGAS_controlRegisterNameList GALGAS_controlRegisterNameList::constructor_listW
 void GALGAS_controlRegisterNameList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                 const GALGAS_lstring & in_mRegisterName,
                                                                 const GALGAS_lstringlist & in_mAttributeList,
-                                                                const GALGAS_lbigint & in_mRegisterAddress
+                                                                const GALGAS_expressionAST & in_mRegisterAddress,
+                                                                const GALGAS_location & in_mRegisterAddressLocation
                                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterNameList * p = NULL ;
   macroMyNew (p, cCollectionElement_controlRegisterNameList (in_mRegisterName,
                                                              in_mAttributeList,
-                                                             in_mRegisterAddress COMMA_THERE)) ;
+                                                             in_mRegisterAddress,
+                                                             in_mRegisterAddressLocation COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
@@ -3149,11 +3158,12 @@ void GALGAS_controlRegisterNameList::makeAttributesFromObjects (capCollectionEle
 
 void GALGAS_controlRegisterNameList::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                           const GALGAS_lstringlist & inOperand1,
-                                                          const GALGAS_lbigint & inOperand2
+                                                          const GALGAS_expressionAST & inOperand2,
+                                                          const GALGAS_location & inOperand3
                                                           COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_controlRegisterNameList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_controlRegisterNameList (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3165,13 +3175,14 @@ void GALGAS_controlRegisterNameList::addAssign_operation (const GALGAS_lstring &
 
 void GALGAS_controlRegisterNameList::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                            const GALGAS_lstringlist inOperand1,
-                                                           const GALGAS_lbigint inOperand2,
+                                                           const GALGAS_expressionAST inOperand2,
+                                                           const GALGAS_location inOperand3,
                                                            const GALGAS_uint inInsertionIndex,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_controlRegisterNameList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_controlRegisterNameList (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3183,7 +3194,8 @@ void GALGAS_controlRegisterNameList::setter_insertAtIndex (const GALGAS_lstring 
 
 void GALGAS_controlRegisterNameList::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                            GALGAS_lstringlist & outOperand1,
-                                                           GALGAS_lbigint & outOperand2,
+                                                           GALGAS_expressionAST & outOperand2,
+                                                           GALGAS_location & outOperand3,
                                                            const GALGAS_uint inRemoveIndex,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
@@ -3195,11 +3207,13 @@ void GALGAS_controlRegisterNameList::setter_removeAtIndex (GALGAS_lstring & outO
       outOperand0.drop () ;
       outOperand1.drop () ;
       outOperand2.drop () ;
+      outOperand3.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
       outOperand0 = p->mObject.mAttribute_mRegisterName ;
       outOperand1 = p->mObject.mAttribute_mAttributeList ;
       outOperand2 = p->mObject.mAttribute_mRegisterAddress ;
+      outOperand3 = p->mObject.mAttribute_mRegisterAddressLocation ;
     }
   }
 }
@@ -3208,7 +3222,8 @@ void GALGAS_controlRegisterNameList::setter_removeAtIndex (GALGAS_lstring & outO
 
 void GALGAS_controlRegisterNameList::setter_popFirst (GALGAS_lstring & outOperand0,
                                                       GALGAS_lstringlist & outOperand1,
-                                                      GALGAS_lbigint & outOperand2,
+                                                      GALGAS_expressionAST & outOperand2,
+                                                      GALGAS_location & outOperand3,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -3218,11 +3233,13 @@ void GALGAS_controlRegisterNameList::setter_popFirst (GALGAS_lstring & outOperan
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
+    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterName ;
     outOperand1 = p->mObject.mAttribute_mAttributeList ;
     outOperand2 = p->mObject.mAttribute_mRegisterAddress ;
+    outOperand3 = p->mObject.mAttribute_mRegisterAddressLocation ;
   }
 }
 
@@ -3230,7 +3247,8 @@ void GALGAS_controlRegisterNameList::setter_popFirst (GALGAS_lstring & outOperan
 
 void GALGAS_controlRegisterNameList::setter_popLast (GALGAS_lstring & outOperand0,
                                                      GALGAS_lstringlist & outOperand1,
-                                                     GALGAS_lbigint & outOperand2,
+                                                     GALGAS_expressionAST & outOperand2,
+                                                     GALGAS_location & outOperand3,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -3240,11 +3258,13 @@ void GALGAS_controlRegisterNameList::setter_popLast (GALGAS_lstring & outOperand
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
+    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterName ;
     outOperand1 = p->mObject.mAttribute_mAttributeList ;
     outOperand2 = p->mObject.mAttribute_mRegisterAddress ;
+    outOperand3 = p->mObject.mAttribute_mRegisterAddressLocation ;
   }
 }
 
@@ -3252,7 +3272,8 @@ void GALGAS_controlRegisterNameList::setter_popLast (GALGAS_lstring & outOperand
 
 void GALGAS_controlRegisterNameList::method_first (GALGAS_lstring & outOperand0,
                                                    GALGAS_lstringlist & outOperand1,
-                                                   GALGAS_lbigint & outOperand2,
+                                                   GALGAS_expressionAST & outOperand2,
+                                                   GALGAS_location & outOperand3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -3262,11 +3283,13 @@ void GALGAS_controlRegisterNameList::method_first (GALGAS_lstring & outOperand0,
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
+    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterName ;
     outOperand1 = p->mObject.mAttribute_mAttributeList ;
     outOperand2 = p->mObject.mAttribute_mRegisterAddress ;
+    outOperand3 = p->mObject.mAttribute_mRegisterAddressLocation ;
   }
 }
 
@@ -3274,7 +3297,8 @@ void GALGAS_controlRegisterNameList::method_first (GALGAS_lstring & outOperand0,
 
 void GALGAS_controlRegisterNameList::method_last (GALGAS_lstring & outOperand0,
                                                   GALGAS_lstringlist & outOperand1,
-                                                  GALGAS_lbigint & outOperand2,
+                                                  GALGAS_expressionAST & outOperand2,
+                                                  GALGAS_location & outOperand3,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -3284,11 +3308,13 @@ void GALGAS_controlRegisterNameList::method_last (GALGAS_lstring & outOperand0,
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
+    outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     outOperand0 = p->mObject.mAttribute_mRegisterName ;
     outOperand1 = p->mObject.mAttribute_mAttributeList ;
     outOperand2 = p->mObject.mAttribute_mRegisterAddress ;
+    outOperand3 = p->mObject.mAttribute_mRegisterAddressLocation ;
   }
 }
 
@@ -3375,15 +3401,30 @@ GALGAS_lstringlist GALGAS_controlRegisterNameList::getter_mAttributeListAtIndex 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint GALGAS_controlRegisterNameList::getter_mRegisterAddressAtIndex (const GALGAS_uint & inIndex,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) const {
+GALGAS_expressionAST GALGAS_controlRegisterNameList::getter_mRegisterAddressAtIndex (const GALGAS_uint & inIndex,
+                                                                                     C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameList * p = (cCollectionElement_controlRegisterNameList *) attributes.ptr () ;
-  GALGAS_lbigint result ;
+  GALGAS_expressionAST result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
     result = p->mObject.mAttribute_mRegisterAddress ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location GALGAS_controlRegisterNameList::getter_mRegisterAddressLocationAtIndex (const GALGAS_uint & inIndex,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_controlRegisterNameList * p = (cCollectionElement_controlRegisterNameList *) attributes.ptr () ;
+  GALGAS_location result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
+    result = p->mObject.mAttribute_mRegisterAddressLocation ;
   }
   return result ;
 }
@@ -3425,10 +3466,18 @@ GALGAS_lstringlist cEnumerator_controlRegisterNameList::current_mAttributeList (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lbigint cEnumerator_controlRegisterNameList::current_mRegisterAddress (LOCATION_ARGS) const {
+GALGAS_expressionAST cEnumerator_controlRegisterNameList::current_mRegisterAddress (LOCATION_ARGS) const {
   const cCollectionElement_controlRegisterNameList * p = (const cCollectionElement_controlRegisterNameList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
   return p->mObject.mAttribute_mRegisterAddress ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location cEnumerator_controlRegisterNameList::current_mRegisterAddressLocation (LOCATION_ARGS) const {
+  const cCollectionElement_controlRegisterNameList * p = (const cCollectionElement_controlRegisterNameList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_controlRegisterNameList) ;
+  return p->mObject.mAttribute_mRegisterAddressLocation ;
 }
 
 
@@ -15220,194 +15269,6 @@ GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::extractObject (co
       result = *p ;
     }else{
       inCompiler->castError ("panicRoutinePriorityMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_bootRoutinePriorityMap::cMapElement_bootRoutinePriorityMap (const GALGAS_lstring & inKey
-                                                                        COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cMapElement_bootRoutinePriorityMap::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement * cMapElement_bootRoutinePriorityMap::copy (void) {
-  cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_bootRoutinePriorityMap (mAttribute_lkey COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cMapElement_bootRoutinePriorityMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cMapElement_bootRoutinePriorityMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_bootRoutinePriorityMap * operand = (cMapElement_bootRoutinePriorityMap *) inOperand ;
-  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap::GALGAS_bootRoutinePriorityMap (void) :
-AC_GALGAS_map () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap::GALGAS_bootRoutinePriorityMap (const GALGAS_bootRoutinePriorityMap & inSource) :
-AC_GALGAS_map (inSource) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap & GALGAS_bootRoutinePriorityMap::operator = (const GALGAS_bootRoutinePriorityMap & inSource) {
-  * ((AC_GALGAS_map *) this) = inSource ;
-  return * this ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_bootRoutinePriorityMap result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::constructor_mapWithMapToOverride (const GALGAS_bootRoutinePriorityMap & inMapToOverride
-                                                                                               COMMA_LOCATION_ARGS) {
-  GALGAS_bootRoutinePriorityMap result ;
-  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::getter_overriddenMap (C_Compiler * inCompiler
-                                                                                   COMMA_LOCATION_ARGS) const {
-  GALGAS_bootRoutinePriorityMap result ;
-  getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_bootRoutinePriorityMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
-  cMapElement_bootRoutinePriorityMap * p = NULL ;
-  macroMyNew (p, cMapElement_bootRoutinePriorityMap (inKey COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@bootRoutinePriorityMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_bootRoutinePriorityMap::setter_insertKey (GALGAS_lstring inKey,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  cMapElement_bootRoutinePriorityMap * p = NULL ;
-  macroMyNew (p, cMapElement_bootRoutinePriorityMap (inKey COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "a boot routine with priority %K has been already declared" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_bootRoutinePriorityMap * GALGAS_bootRoutinePriorityMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                       const GALGAS_string & inKey
-                                                                                                       COMMA_LOCATION_ARGS) {
-  cMapElement_bootRoutinePriorityMap * result = (cMapElement_bootRoutinePriorityMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_bootRoutinePriorityMap) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_bootRoutinePriorityMap::cEnumerator_bootRoutinePriorityMap (const GALGAS_bootRoutinePriorityMap & inEnumeratedObject,
-                                                                        const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator () {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap_2D_element cEnumerator_bootRoutinePriorityMap::current (LOCATION_ARGS) const {
-  const cMapElement_bootRoutinePriorityMap * p = (const cMapElement_bootRoutinePriorityMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_bootRoutinePriorityMap) ;
-  return GALGAS_bootRoutinePriorityMap_2D_element (p->mAttribute_lkey) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_bootRoutinePriorityMap::current_lkey (LOCATION_ARGS) const {
-  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement) ;
-  return p->mAttribute_lkey ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @bootRoutinePriorityMap type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_bootRoutinePriorityMap ("bootRoutinePriorityMap",
-                                               NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_bootRoutinePriorityMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_bootRoutinePriorityMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_bootRoutinePriorityMap::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_bootRoutinePriorityMap (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bootRoutinePriorityMap GALGAS_bootRoutinePriorityMap::extractObject (const GALGAS_object & inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_bootRoutinePriorityMap result ;
-  const GALGAS_bootRoutinePriorityMap * p = (const GALGAS_bootRoutinePriorityMap *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_bootRoutinePriorityMap *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("bootRoutinePriorityMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

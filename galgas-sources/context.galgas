@@ -350,8 +350,9 @@ proc buildSemanticContext
   )
 #--- Enter control registers in context
   enterControlRegistersInContext (
-   !inAST.mControlRegisterDeclarationListAST
-   !?context: outSemanticContext
+    !inAST.mControlRegisterDeclarationListAST
+    !?context: outSemanticContext
+    !?staticStringMap:ioGlobalLiteralStringMap
   )
   buildControlRegisterMapHTMLFile (
     !outSemanticContext.mControlRegisterMap
