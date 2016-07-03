@@ -1967,6 +1967,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sortedOperandIRList
 class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_mRegisterName ;
+  public : GALGAS_expressionAST mAttribute_mArraySizeExpression ;
+  public : GALGAS_location mAttribute_mArraySizeExpressionLocation ;
   public : GALGAS_lstringlist mAttribute_mAttributeList ;
   public : GALGAS_expressionAST mAttribute_mRegisterAddress ;
   public : GALGAS_location mAttribute_mRegisterAddressLocation ;
@@ -1984,6 +1986,8 @@ class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_controlRegisterNameList_2D_element (const GALGAS_lstring & in_mRegisterName,
+                                                      const GALGAS_expressionAST & in_mArraySizeExpression,
+                                                      const GALGAS_location & in_mArraySizeExpressionLocation,
                                                       const GALGAS_lstringlist & in_mAttributeList,
                                                       const GALGAS_expressionAST & in_mRegisterAddress,
                                                       const GALGAS_location & in_mRegisterAddressLocation) ;
@@ -2000,9 +2004,11 @@ class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_controlRegisterNameList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                   const class GALGAS_lstringlist & inOperand1,
-                                                                                   const class GALGAS_expressionAST & inOperand2,
-                                                                                   const class GALGAS_location & inOperand3
+                                                                                   const class GALGAS_expressionAST & inOperand1,
+                                                                                   const class GALGAS_location & inOperand2,
+                                                                                   const class GALGAS_lstringlist & inOperand3,
+                                                                                   const class GALGAS_expressionAST & inOperand4,
+                                                                                   const class GALGAS_location & inOperand5
                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2017,6 +2023,10 @@ class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mArraySizeExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mArraySizeExpressionLocation (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mRegisterAddress (LOCATION_ARGS) const ;

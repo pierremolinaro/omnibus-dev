@@ -4,26 +4,29 @@
 
 list @controlRegisterNameList {
   @lstring mRegisterName
+  @expressionAST mArraySizeExpression # 1 if not an array, otherwise of power of 2
+  @location mArraySizeExpressionLocation
   @lstringlist mAttributeList
   @expressionAST mRegisterAddress
   @location mRegisterAddressLocation
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 list @controlRegisterDeclarationListAST {
   @controlRegisterNameList mRegisterNameList
   @lstring mRegisterTypeName
   @controlRegisterBitSliceList mRegisterBitSliceList
+  @location mRegisterBitSliceListLocation
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 list @controlRegisterBitSliceList {
   @controlRegisterBitSlice mRegisterBitSlice
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 enum @controlRegisterBitSlice {
   case unusedBits (@lbigint count)
@@ -50,17 +53,34 @@ syntax extension common_syntax {
         attributeList += !attribute
       end
       select
+        let @expressionAST sizeExpression = @literalIntegerInExpressionAST.new {!.new {!1G !.here}}
+        let sizeExpressionLocation = @location.here
         $at$
         <expression> ?let registerAddress
-        registerDeclarationList += !registerName !attributeList !registerAddress !.here
+        registerDeclarationList +=
+          !registerName
+          !sizeExpression
+          !sizeExpressionLocation
+          !attributeList
+          !registerAddress 
+          !.here
       or
         $[$
         <expression> ?let sizeExpression
+        let sizeExpressionLocation = @location.here
         $]$
         $at$
         <expression> ?let baseAddressExpression
+        let baseAddressExpressionLocation = @location.here
         $:$
         <expression> ?let registerAddressMultiplicator
+        registerDeclarationList +=
+          !registerName
+          !sizeExpression
+          !sizeExpressionLocation
+          !attributeList
+          !baseAddressExpression 
+          !baseAddressExpressionLocation
       end
     while
     end
@@ -95,6 +115,7 @@ syntax extension common_syntax {
       !registerDeclarationList
       !registerTypeName
       !registerBitSliceList
+      !.here
   }
 
   #·····················································································································
@@ -148,7 +169,7 @@ map @controlRegisterMap {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (registerNameList registerTypeName *) in self do
+  for (registerNameList registerTypeName * *) in self do
     let typeName = @lstring.new {!"$" + registerTypeName !registerTypeName.location}
     [!?ioGraph noteNode !typeName]
   end
@@ -168,52 +189,63 @@ proc enterControlRegistersInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
+method @controlRegisterDeclarationListAST-element controlRegisterType
   ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  !type:@unifiedTypeMap-proxy outRegisterType
+  !bitCount:@uint outRegisterBitCount
 {
-  let registerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mRegisterTypeName}
-  @uint registerBitCount
-  switch [registerType kind]
+  outRegisterType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mRegisterTypeName}
+  switch [outRegisterType kind]
   case integer (*** bitCount):
-    registerBitCount = bitCount
+    outRegisterBitCount = bitCount
   case boolean :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" :registerBitCount
+    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case boolset :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case enumeration (*) :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case literalString :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case staticInteger :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case structure (**) :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case opaque (*) :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case arrayType (* *) :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : registerBitCount
+    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
+  ?!context:@semanticContext ioContext
+  ?type:let @unifiedTypeMap-proxy inRegisterType
+  ?bitCount:let @uint inRegisterBitCount
+  !@controlRegisterFieldMap outRegisterFieldMap
+  !@controlRegisterBitSliceAccessMap outRegisterBitSliceMap
+  !@controlRegisterFieldList outControlRegisterFieldList
+{
 #--- Build bit slice map
-  let @bigint maxRegisterAddress = (1G << ioContext.mPointerSize) - 1G
   @classConstantMap classConstantMap = {}
-  @controlRegisterFieldMap registerFieldMap = {}
-  @controlRegisterBitSliceAccessMap registerBitSliceMap = {}
-  @controlRegisterFieldList controlRegisterFieldList = {} # Used for HTML file
+  outRegisterFieldMap = {}
+  outRegisterBitSliceMap = {}
+  outControlRegisterFieldList = {} # Used for HTML file
   if [mRegisterBitSliceList length] > 0 then
     @uint shiftCount = 0
     for > () in mRegisterBitSliceList do
       switch mRegisterBitSlice
       case unusedBits (@lbigint count) :
         shiftCount = shiftCount + [count.bigint uint]
-        controlRegisterFieldList += ![count.bigint uint] ! "—"
+        outControlRegisterFieldList += ![count.bigint uint] ! "—"
       case namedBit (@lstring name @lbigint count) :
         let bitCount = [count.bigint uint]
         if bitCount == 1 then
-          [!?classConstantMap insertKey !name !.new{!registerType !.literalInteger {!value:1G << shiftCount}}]
+          [!?classConstantMap insertKey !name !.new{!inRegisterType !.literalInteger {!value:1G << shiftCount}}]
         end
-        controlRegisterFieldList += !bitCount !name.string
-        [!?registerFieldMap insertKey
+        outControlRegisterFieldList += !bitCount !name.string
+        [!?outRegisterFieldMap insertKey
           !name
           !shiftCount
           !bitCount
@@ -224,7 +256,7 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
           !.lshr
           ![shiftCount bigint]
           !{}
-          !registerType
+          !inRegisterType
         ]
         [!?registerSubMap insertKey
           !.new{!boolTypeName () !name.location}
@@ -234,18 +266,41 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
           !ioContext.mBooleanType
         ]
         let mask = ((1G << bitCount) - 1G) << shiftCount
-        [!?registerBitSliceMap insertKey
+        [!?outRegisterBitSliceMap insertKey
           !name
           !.and
           !mask
           !registerSubMap
-          !registerType
+          !inRegisterType
         ]
         shiftCount = shiftCount + bitCount
       end
     end
+  #--- Bit slice count is correct
+    if inRegisterBitCount != shiftCount then
+      error mRegisterBitSliceListLocation : "total bit slice count is " + shiftCount + " (should be " + inRegisterBitCount + ")"
+    end
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+{
+  [self controlRegisterType !?context:ioContext ?type:let registerType ?bitCount:let registerBitCount]
+#--- Build bit slice map
+  [self buildControlRegisterSliceMap
+    !?context:ioContext
+    !type:registerType
+    !bitCount:registerBitCount
+    ?let registerFieldMap
+    ?let registerBitSliceMap
+    ?let controlRegisterFieldList  # Used for HTML file
+  ]
 #---  
+  let @bigint maxRegisterAddress = (1G << ioContext.mPointerSize) - 1G
   for register in mRegisterNameList do
   #--- Analyze attributes
     var isReadOnly = false
@@ -264,7 +319,7 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
           isAccessibleInUserMode = true
         end
       else
-        error att : "only @ro attribute (read only) and @user (accessible un `user mode) are accepted here"
+        error att : "only @ro (read only) and @user (accessible in `user mode) attributes are accepted here"
       end
     end
   #--- Analyse register address expression
@@ -309,57 +364,6 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
       !controlRegisterFieldList
       !registerBitCount
     ]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc controlRegistersSemanticAnalysis
-  ?let @controlRegisterDeclarationListAST inRegisterDeclarationListAST
-  ?context:let @semanticContext inContext
-{
-  for (registerNameList registerTypeName registerBitSliceList) in inRegisterDeclarationListAST do
-  #--- Check type
-    let registerType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !registerTypeName}
-    switch [registerType kind]
-    case boolean : error registerTypeName : "a boolean type is not valid for a register"
-    case boolset : error registerTypeName : "a boolset type is not valid for a register"
-    case integer (* * @bool unsigned @uint size) :
-      if [registerBitSliceList length] > 0 then
-        if not unsigned then
-          error registerTypeName:"the register type should be unsigned in order to define bit slices"
-        end
-        @uint shiftCount = 0
-        for > () in registerBitSliceList do
-          switch mRegisterBitSlice
-          case unusedBits (@lbigint count) :
-            shiftCount = shiftCount + [count.bigint uint]
-          case namedBit (* @lbigint count) :
-            shiftCount = shiftCount + [count.bigint uint]
-          end
-        end
-        if size != shiftCount then
-          error registerTypeName : "total bit slice count is " + shiftCount + " (should be " + size + ")"
-        end
-      end
-    case literalString : error registerTypeName : "a literal string type is not valid for a register"
-    case structure (* *) : error registerTypeName : "a structure type is not valid for a register"
-    case enumeration (*) : error registerTypeName : "an enumeration type is not valid for a register"
-    case staticInteger : error registerTypeName : "a literal integer type is not valid for a register"
-    case opaque (*) : error registerTypeName : "an opaque type is not valid for a register"
-    case arrayType (* *) : error registerTypeName : "an array type is not valid for a register"
-    end
-  #--- Enter in control register map
-#    for () in registerNameList do
-#      [inContext.mControlRegisterMap searchKey !mRegisterName ?5* ?let address ?2*]
-#      [!?ioIntermediateCodeStruct.mControlRegisterMapIR insertKey
-#        !mRegisterName
-#        !registerTypeName.string
-#        !address
-#      ]
-#    end
   end
 }
 

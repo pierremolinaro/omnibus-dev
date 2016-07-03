@@ -394,6 +394,8 @@ Adresse de \texttt{CANCMR[2]} : \texttt{0xE004\_4004 + 2 * (1 << 14) = 0xE004\_C
 
 Adresse de \texttt{CANCMR[3]} : \texttt{0xE004\_4004 + 3 * (1 << 14) = 0xE005\_0004}
 
+Si vous voulez confirmer le calcul des adresses des registres de contrôle, utilisez l'option \OPTION{-{}-control-register-map} (\refSectionPage{optionsDebogage}) qui affiche le détail de la définition des registres de contrôle dans un fichier HTML.
+ 
 L'accès aux registres de contrôle s'effectue alors en utilisant la notation \plm=[...]= habituelle de l'accès à un élément de tableau. Par exemple, en reprenant l'exemple précédent, écrire une valeur \plm=v= dans le registre désigné par la variable \plm=n= (dont la valeur est comprise entre $0$ et $3$) s'exprime simplement par :
 
 \begin{PLM}
