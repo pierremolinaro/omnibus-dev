@@ -61,7 +61,6 @@ proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateC
   #--- Display
     if [option plm_options.optimization_displayDeadCodeElimination value] then
       var s = "Optimisation pass " + pass + "\n"
-      s += "  " + [ioIntermediateCodeStruct.mControlRegisterMapIR count] + " registers\n"
       s += "  " + [ioIntermediateCodeStruct.mStaticStringMap count] + " static strings\n"
       s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
       s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
@@ -75,16 +74,6 @@ proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateC
       ?@accessibleEntities accessibleEntities
       !?optimizing
     )
-  #--- Suppress unused registers
-    @controlRegisterMapIR usedRegisterMap = {}
-    for (@lstring lkey @string registerTypeName @bigint registerAddress) in ioIntermediateCodeStruct.mControlRegisterMapIR do
-      if [accessibleEntities.mAccessibleRegisterSet hasKey !lkey.string] then
-        [!?usedRegisterMap insertKey !lkey !registerTypeName !registerAddress]
-      else
-        optimizing = true
-      end
-    end
-    ioIntermediateCodeStruct.mControlRegisterMapIR = usedRegisterMap
   #--- Suppress global constant
     @globalConstantMapIR globalConstantMap = {}
     for constant in ioIntermediateCodeStruct.mGlobalConstantMap do

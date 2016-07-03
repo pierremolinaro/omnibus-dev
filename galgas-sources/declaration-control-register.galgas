@@ -319,7 +319,6 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
 proc controlRegistersSemanticAnalysis
   ?let @controlRegisterDeclarationListAST inRegisterDeclarationListAST
   ?context:let @semanticContext inContext
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for (registerNameList registerTypeName registerBitSliceList) in inRegisterDeclarationListAST do
   #--- Check type
@@ -353,14 +352,14 @@ proc controlRegistersSemanticAnalysis
     case arrayType (* *) : error registerTypeName : "an array type is not valid for a register"
     end
   #--- Enter in control register map
-    for () in registerNameList do
-      [inContext.mControlRegisterMap searchKey !mRegisterName ?5* ?let address ?2*]
-      [!?ioIntermediateCodeStruct.mControlRegisterMapIR insertKey
-        !mRegisterName
-        !registerTypeName.string
-        !address
-      ]
-    end
+#    for () in registerNameList do
+#      [inContext.mControlRegisterMap searchKey !mRegisterName ?5* ?let address ?2*]
+#      [!?ioIntermediateCodeStruct.mControlRegisterMapIR insertKey
+#        !mRegisterName
+#        !registerTypeName.string
+#        !address
+#      ]
+#    end
   end
 }
 
