@@ -171,11 +171,6 @@ override method @registerConstantExpressionAST analyzeExpression
           error expressionLocation
             : "operations that can generate panic are not allowed here: the expression should be an $uint" + fieldBitCount
         end
-#        let assertGenerated = expressionBitCount > fieldBitCount
-#        if assertGenerated && [inModeSet hasKey !panicModeName ()] then
-#          error expressionLocation
-#            : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
-#        end
       #--- Generate an upper bound check
         if (expressionBitCount > fieldBitCount) && inAllowPanic && not [option plm_options.noPanicGeneration value] then
           [!?ioInstructionGenerationList appendUpperBoundCheck

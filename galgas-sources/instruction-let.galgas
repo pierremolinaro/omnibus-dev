@@ -96,17 +96,22 @@ override method @letInstructionWithAssignmentAST analyze
     !errorLocation:mVarName.location
     !staticTypeAllowed:true
   )
-  drop targetType, expressionResult
+  drop targetType
 #---
-  if [result.mType key] == staticIntegerTypeName () then
-    error mVarName : "the $" + staticIntegerTypeName () + " type is not allowed for a local constant" : result
-  elsif not [result.mType instantiable] then
+  if not [result.mType instantiable] then
     error mVarName : "$" + [result.mType key] + " type is not instanciable" : result
   end
 #--- Declare local constant
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
-  let localConstant = @objectInMemoryIR.localValue {!type:result.mType !name:varLLVMName}
+  @objectInMemoryIR localConstant
+  if [result.mType key] == staticIntegerTypeName () then
+    localConstant = .constant {!value:expressionResult !name:varLLVMName}
+  else
+    localConstant = .localValue {!type:result.mType !name:varLLVMName}
+    ioAllocaList += !varLLVMName !result.mType
+    [!?ioInstructionGenerationList appendStoreInMemory !localConstant !result]
+  end
   [!?ioVariableMap insertConstant
     !lkey:mVarName
     !type:result.mType
@@ -115,9 +120,6 @@ override method @letInstructionWithAssignmentAST analyze
     !copyable:[result.mType copyable]
     !canBeUsedAsInputParameter:true
   ]
-#--- Generate code
-  ioAllocaList += !varLLVMName !result.mType
-  [!?ioInstructionGenerationList appendStoreInMemory !localConstant !result]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

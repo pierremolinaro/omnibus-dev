@@ -101,20 +101,20 @@ class cEnumAssociatedValues_objectInMemoryIR_localValue : public cEnumAssociated
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_objectInMemoryIR_globalConstant : public cEnumAssociatedValues {
+class cEnumAssociatedValues_objectInMemoryIR_constant : public cEnumAssociatedValues {
   public : const GALGAS_operandIR mAssociatedValue0 ;
   public : const GALGAS_string mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_globalConstant (const GALGAS_operandIR & inAssociatedValue0,
-                                                                  const GALGAS_string & inAssociatedValue1
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_objectInMemoryIR_constant (const GALGAS_operandIR & inAssociatedValue0,
+                                                            const GALGAS_string & inAssociatedValue1
+                                                            COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_globalConstant (void) {}
+  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_constant (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3514,5 +3514,15 @@ class GALGAS_string function_stackAddressForTask (const class GALGAS_string & co
 class GALGAS_string function_mainRoutineNameForTask (const class GALGAS_string & constinArgument0,
                                                      class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Function 'llvmNameForTaskGlobalVar'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForTaskGlobalVar (class GALGAS_string inArgument0,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 #endif
