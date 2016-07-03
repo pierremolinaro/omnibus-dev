@@ -5045,13 +5045,13 @@ void extensionMethod_noteTypesInPrecedenceGraph (const GALGAS_controlRegisterDec
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_controlRegisterDeclarationListAST temp_0 = inObject ;
-  cEnumerator_controlRegisterDeclarationListAST enumerator_5412 (temp_0, kEnumeration_up) ;
-  while (enumerator_5412.hasCurrentObject ()) {
-    GALGAS_lstring var_typeName_5432 = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_5412.current_mRegisterTypeName (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 141)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 141)), enumerator_5412.current_mRegisterTypeName (HERE).mAttribute_location  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 141)) ;
+  cEnumerator_controlRegisterDeclarationListAST enumerator_5686 (temp_0, kEnumeration_up) ;
+  while (enumerator_5686.hasCurrentObject ()) {
+    GALGAS_lstring var_typeName_5706 = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_5686.current_mRegisterTypeName (HERE).getter_string (SOURCE_FILE ("declaration-control-register.galgas", 152)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 152)), enumerator_5686.current_mRegisterTypeName (HERE).mAttribute_location  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 152)) ;
     {
-    ioArgument_ioGraph.setter_noteNode (var_typeName_5432 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 142)) ;
+    ioArgument_ioGraph.setter_noteNode (var_typeName_5706 COMMA_SOURCE_FILE ("declaration-control-register.galgas", 153)) ;
     }
-    enumerator_5412.gotoNextObject () ;
+    enumerator_5686.gotoNextObject () ;
   }
 }
 

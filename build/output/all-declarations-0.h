@@ -3570,7 +3570,8 @@ class GALGAS_controlRegisterNameList : public AC_GALGAS_list {
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_lstring & in_mRegisterName,
                                                   const class GALGAS_lstringlist & in_mAttributeList,
-                                                  const class GALGAS_lbigint & in_mRegisterAddress
+                                                  const class GALGAS_expressionAST & in_mRegisterAddress,
+                                                  const class GALGAS_location & in_mRegisterAddressLocation
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -3588,7 +3589,8 @@ class GALGAS_controlRegisterNameList : public AC_GALGAS_list {
 
   public : static class GALGAS_controlRegisterNameList constructor_listWithValue (const class GALGAS_lstring & inOperand0,
                                                                                   const class GALGAS_lstringlist & inOperand1,
-                                                                                  const class GALGAS_lbigint & inOperand2
+                                                                                  const class GALGAS_expressionAST & inOperand2,
+                                                                                  const class GALGAS_location & inOperand3
                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -3599,7 +3601,8 @@ class GALGAS_controlRegisterNameList : public AC_GALGAS_list {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_lstringlist & inOperand1,
-                                                      const class GALGAS_lbigint & inOperand2
+                                                      const class GALGAS_expressionAST & inOperand2,
+                                                      const class GALGAS_location & inOperand3
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_controlRegisterNameList add_operation (const GALGAS_controlRegisterNameList & inOperand,
@@ -3610,27 +3613,31 @@ class GALGAS_controlRegisterNameList : public AC_GALGAS_list {
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
                                                        class GALGAS_lstringlist constinArgument1,
-                                                       class GALGAS_lbigint constinArgument2,
-                                                       class GALGAS_uint constinArgument3,
+                                                       class GALGAS_expressionAST constinArgument2,
+                                                       class GALGAS_location constinArgument3,
+                                                       class GALGAS_uint constinArgument4,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
                                                   class GALGAS_lstringlist & outArgument1,
-                                                  class GALGAS_lbigint & outArgument2,
+                                                  class GALGAS_expressionAST & outArgument2,
+                                                  class GALGAS_location & outArgument3,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
                                                  class GALGAS_lstringlist & outArgument1,
-                                                 class GALGAS_lbigint & outArgument2,
+                                                 class GALGAS_expressionAST & outArgument2,
+                                                 class GALGAS_location & outArgument3,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
                                                        class GALGAS_lstringlist & outArgument1,
-                                                       class GALGAS_lbigint & outArgument2,
-                                                       class GALGAS_uint constinArgument3,
+                                                       class GALGAS_expressionAST & outArgument2,
+                                                       class GALGAS_location & outArgument3,
+                                                       class GALGAS_uint constinArgument4,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -3638,13 +3645,15 @@ class GALGAS_controlRegisterNameList : public AC_GALGAS_list {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
                                                class GALGAS_lstringlist & outArgument1,
-                                               class GALGAS_lbigint & outArgument2,
+                                               class GALGAS_expressionAST & outArgument2,
+                                               class GALGAS_location & outArgument3,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
                                               class GALGAS_lstringlist & outArgument1,
-                                              class GALGAS_lbigint & outArgument2,
+                                              class GALGAS_expressionAST & outArgument2,
+                                              class GALGAS_location & outArgument3,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -3655,9 +3664,13 @@ class GALGAS_controlRegisterNameList : public AC_GALGAS_list {
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mRegisterAddressAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                 C_Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mRegisterAddressAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mRegisterAddressLocationAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                               C_Compiler * inCompiler
@@ -3695,7 +3708,8 @@ class cEnumerator_controlRegisterNameList : public cGenericAbstractEnumerator {
 //--- Current element access
   public : class GALGAS_lstring current_mRegisterName (LOCATION_ARGS) const ;
   public : class GALGAS_lstringlist current_mAttributeList (LOCATION_ARGS) const ;
-  public : class GALGAS_lbigint current_mRegisterAddress (LOCATION_ARGS) const ;
+  public : class GALGAS_expressionAST current_mRegisterAddress (LOCATION_ARGS) const ;
+  public : class GALGAS_location current_mRegisterAddressLocation (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_controlRegisterNameList_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -8030,6 +8044,8 @@ class cParser_common_5F_syntax {
   protected : virtual int32_t select_common_5F_syntax_89 (C_Lexique_plm_5F_lexique *) = 0 ;
 
   protected : virtual int32_t select_common_5F_syntax_90 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_common_5F_syntax_91 (C_Lexique_plm_5F_lexique *) = 0 ;
 
 
 } ;

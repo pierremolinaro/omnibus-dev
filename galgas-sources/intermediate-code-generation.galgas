@@ -6,7 +6,7 @@
 
 struct @intermediateCodeStruct {
   @staticStringMap mStaticStringMap
-  @controlRegisterMapIR mControlRegisterMap
+  @controlRegisterMapIR mControlRegisterMapIR
   @globalVariableMapIR mGlobalVariableMap
   @globalConstantMapIR mGlobalConstantMap
   @routineMapIR mRoutineMapIR
