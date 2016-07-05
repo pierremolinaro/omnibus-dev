@@ -2,10 +2,20 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @controlRegisterKind {
+  case scalar
+  case registerArray (@expressionAST arraySize # a power of 2 >= 2
+                      @location arraySizeLocation
+                      @expressionAST arrayElementSize
+                      @location arrayElementSizeLocation)
+}  
+
+#·······················································································································
+
+
 list @controlRegisterNameList {
   @lstring mRegisterName
-  @expressionAST mArraySizeExpression # 1 if not an array, otherwise of power of 2
-  @location mArraySizeExpressionLocation
+  @controlRegisterKind mControlRegisterKind
   @lstringlist mAttributeList
   @expressionAST mRegisterAddress
   @location mRegisterAddressLocation
@@ -53,14 +63,11 @@ syntax extension common_syntax {
         attributeList += !attribute
       end
       select
-        let @expressionAST sizeExpression = @literalIntegerInExpressionAST.new {!.new {!1G !.here}}
-        let sizeExpressionLocation = @location.here
         $at$
         <expression> ?let registerAddress
         registerDeclarationList +=
           !registerName
-          !sizeExpression
-          !sizeExpressionLocation
+          !.scalar
           !attributeList
           !registerAddress 
           !.here
@@ -73,11 +80,16 @@ syntax extension common_syntax {
         <expression> ?let baseAddressExpression
         let baseAddressExpressionLocation = @location.here
         $:$
-        <expression> ?let registerAddressMultiplicator
+        <expression> ?let arrayElementSizeExpression
+        let arrayElementSizeExpressionLocation = @location.here
         registerDeclarationList +=
           !registerName
-          !sizeExpression
-          !sizeExpressionLocation
+          !.registerArray {
+             !arraySize:sizeExpression
+             !arraySizeLocation:sizeExpressionLocation
+             !arrayElementSize:arrayElementSizeExpression
+             !arrayElementSizeLocation:arrayElementSizeExpressionLocation
+           }
           !attributeList
           !baseAddressExpression 
           !baseAddressExpressionLocation
@@ -162,6 +174,8 @@ map @controlRegisterMap {
   @bigint mAddress
   @controlRegisterFieldList mControlRegisterFieldList # Used for HTML file
   @uint mRegisterBitCount
+  @uint mPowerOfTwoForArraySize # 0 if not an array
+  @uint mElementArraySize # 0 if not an array
   insert insertKey error message "the '%K' register has been already declared in %L"
   search searchKey error message "** internal error **"
 }
@@ -323,36 +337,72 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
       end
     end
   #--- Analyse register address expression
-    @semanticTemporariesStruct temporaries = .default
-    @instructionListIR instructionGenerationList = {}
-    @allocaList allocaList = {}
-    [register.mRegisterAddress analyzeExpression
-      !self:.null
-      !directAccessToPropertiesAllowed:false
-      !inGuard:false
-      !routineNameForInvocationGraph:["compiler" nowhere]
-      !optionalTargetType:.null
+    [register.mRegisterAddress analyzeStaticExpression
+      !errorLocation:register.mRegisterAddressLocation
       !context:ioContext
-      !modes:{}
-      !allowPanic:true
-      !?temporary:temporaries
       !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:*
-      !?alloca:allocaList
-      !?instructionListIR:instructionGenerationList
-      ?result:let @operandIR expressionResult
+      ?result:let @operandIR addressExpressionResult
     ]
     @bigint registerAddress
-    if ([allocaList length] > 0) || ([instructionGenerationList length] > 0) || not [expressionResult.mValue isStatic] then
-      error register.mRegisterAddressLocation : "control register address is not a static expression" : registerAddress
+    if not [addressExpressionResult.mValue isLiteralInteger] then
+      error register.mRegisterAddressLocation
+        : "control register address is not a static integer expression"
+        : registerAddress
     else
-      [expressionResult.mValue literalInteger ?value:registerAddress]
+      [addressExpressionResult.mValue literalInteger ?value:registerAddress]
    #--- Check address value
       if registerAddress > maxRegisterAddress then
         error register.mRegisterAddressLocation : "register address should be lower or equal to " + [maxRegisterAddress hexString]
       end
     end
-  #--- Enter in control register map
+    @uint powerOfTwoForArraySize
+    @uint elementArraySize
+    switch register.mControlRegisterKind
+    case scalar :
+      powerOfTwoForArraySize = 0
+      elementArraySize = 0
+    case registerArray (@expressionAST arraySizeExpression @location arraySizeLocation
+                        @expressionAST arrayElementSizeExpression @location arrayElementSizeLocation) :
+    #--- Analyse register array size expression
+      [arraySizeExpression analyzeStaticExpression
+        !errorLocation:arraySizeLocation
+        !context:ioContext
+        !?staticStringMap:ioGlobalLiteralStringMap
+        ?result:let @operandIR sizeExpressionResult
+      ]
+      if not [sizeExpressionResult.mValue isLiteralInteger] then
+        error arraySizeLocation : "control register address is not a static integer expression" : powerOfTwoForArraySize
+      else
+        [sizeExpressionResult.mValue literalInteger ?value:let arraySize]
+        if arraySize < 2G then
+          error arraySizeLocation
+            : "control register array size should be a static integer expression >= 2, equal to a power of 2"
+            : powerOfTwoForArraySize
+        else
+          powerOfTwoForArraySize = [arraySize - 1G bitCountForUnsignedRepresentation]
+          if arraySize != (1G << powerOfTwoForArraySize) then
+            error arraySizeLocation
+              : "control register array size should be a static integer expression >= 2, equal to a power of 2"
+              : powerOfTwoForArraySize
+          end
+        end
+      end
+    #--- Analyse element array size expression
+      [arrayElementSizeExpression analyzeStaticExpression
+        !errorLocation:arrayElementSizeLocation
+        !context:ioContext
+        !?staticStringMap:ioGlobalLiteralStringMap
+        ?result:let @operandIR elementArraySizeExpressionResult
+      ]
+      if not [elementArraySizeExpressionResult.mValue isLiteralInteger] then
+        error arrayElementSizeLocation
+          : "element size is not a static integer expression"
+          : elementArraySize
+      else
+        [elementArraySizeExpressionResult.mValue literalInteger ?value:let elementArraySizeAsBigInt]
+        elementArraySize = [elementArraySizeAsBigInt uint]
+      end
+    end
     [!?ioContext.mControlRegisterMap insertKey
       !register.mRegisterName
       !registerType
@@ -363,6 +413,8 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
       !registerAddress
       !controlRegisterFieldList
       !registerBitCount
+      !powerOfTwoForArraySize
+      !elementArraySize
     ]
   end
 }
@@ -389,7 +441,13 @@ proc buildControlRegisterMapHTMLFile
         currentFirstLetter = [type_lkey.string characterAtIndex !0]
         tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
       end
-      tableOfTypeString += linkForControlRegister (!type_lkey.string) + "<br>"
+      if type_mPowerOfTwoForArraySize == 0 then
+        tableOfTypeString += linkForControlRegister (!type_lkey.string) + "<br>"
+      else
+        for i in 0 ..< (1 << type_mPowerOfTwoForArraySize) do
+          tableOfTypeString += linkForControlRegister (!type_lkey.string + " [" + i + "]") + "<br/>"
+        end
+      end
     end
     let @string typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dump
       ![inSourceFile lastPathComponent]
@@ -427,6 +485,15 @@ func fieldIndexColumns ?let @uint inBitCount -> @string outResult {
   outResult = ""
   for > x in 0 ..< inBitCount do
     outResult += "<td class=\"fields\">" + x + "</td>"
+  end
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func arrayIndexListFor ?size:@uint inSize -> @uintlist outResult {
+  outResult = {}
+  for i in 0 ..< (1 << inSize) do
+    outResult += !i
   end
 }
 
