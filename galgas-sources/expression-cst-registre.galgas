@@ -103,6 +103,8 @@ override method @registerConstantExpressionAST analyzeExpression
     ?let @bigint unused registerAddress
     ?*
     ?let registerBitCount
+    ?let powerOfTwoForArraySize
+    ?let elementArraySize
   ]
 #------------------------------------------------------ Fields masks
   @bigint accumulatedFieldStaticValues = 0G

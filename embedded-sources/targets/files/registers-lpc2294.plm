@@ -281,7 +281,7 @@ register ADINTEN        at 0xE003_400C $uint32
 
 
 // CAN registers
-register CANCMR[4] at 0xE004_4004 : 1 << 14 $uint8 {
+register CANCMR [4] at 0xE004_4004 : 1 << 14 $uint8 {
   STB3, STB2, STB1, SRR, CDO, RRB, AT, TR
 }
 

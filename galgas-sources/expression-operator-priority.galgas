@@ -446,3 +446,32 @@ abstract method @expressionAST analyzeExpression
   !result:@operandIR outResult
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @expressionAST analyzeStaticExpression
+  ?errorLocation:let @location inErrorLocation
+  ?context:let @semanticContext inContext
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  !result:@operandIR outResult
+{
+  @instructionListIR instructionGenerationList = {}
+  @allocaList allocaList = {}
+  [self analyzeExpression
+    !self:.null
+    !directAccessToPropertiesAllowed:false
+    !inGuard:false
+    !routineNameForInvocationGraph:["compiler" nowhere]
+    !optionalTargetType:.null
+    !context:inContext
+    !modes:{}
+    !allowPanic:false
+    !?temporary:*
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:*
+    !?alloca:allocaList
+    !?instructionListIR:instructionGenerationList
+    ?result:outResult
+  ]
+  if ([allocaList length] > 0) || ([instructionGenerationList length] > 0) || not [outResult.mValue isStatic] then
+    error inErrorLocation : "this expression should be a static expression" : outResult
+  end
+}

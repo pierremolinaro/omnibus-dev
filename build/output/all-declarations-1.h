@@ -1967,8 +1967,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sortedOperandIRList
 class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_mRegisterName ;
-  public : GALGAS_expressionAST mAttribute_mArraySizeExpression ;
-  public : GALGAS_location mAttribute_mArraySizeExpressionLocation ;
+  public : GALGAS_controlRegisterKind mAttribute_mControlRegisterKind ;
   public : GALGAS_lstringlist mAttribute_mAttributeList ;
   public : GALGAS_expressionAST mAttribute_mRegisterAddress ;
   public : GALGAS_location mAttribute_mRegisterAddressLocation ;
@@ -1986,8 +1985,7 @@ class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_controlRegisterNameList_2D_element (const GALGAS_lstring & in_mRegisterName,
-                                                      const GALGAS_expressionAST & in_mArraySizeExpression,
-                                                      const GALGAS_location & in_mArraySizeExpressionLocation,
+                                                      const GALGAS_controlRegisterKind & in_mControlRegisterKind,
                                                       const GALGAS_lstringlist & in_mAttributeList,
                                                       const GALGAS_expressionAST & in_mRegisterAddress,
                                                       const GALGAS_location & in_mRegisterAddressLocation) ;
@@ -2004,11 +2002,10 @@ class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_controlRegisterNameList_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                   const class GALGAS_expressionAST & inOperand1,
-                                                                                   const class GALGAS_location & inOperand2,
-                                                                                   const class GALGAS_lstringlist & inOperand3,
-                                                                                   const class GALGAS_expressionAST & inOperand4,
-                                                                                   const class GALGAS_location & inOperand5
+                                                                                   const class GALGAS_controlRegisterKind & inOperand1,
+                                                                                   const class GALGAS_lstringlist & inOperand2,
+                                                                                   const class GALGAS_expressionAST & inOperand3,
+                                                                                   const class GALGAS_location & inOperand4
                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2023,11 +2020,9 @@ class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mArraySizeExpression (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mArraySizeExpressionLocation (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterKind getter_mControlRegisterKind (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mRegisterAddress (LOCATION_ARGS) const ;
 
@@ -3070,6 +3065,8 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
                                                       const class GALGAS_bigint & inOperand6,
                                                       const class GALGAS_controlRegisterFieldList & inOperand7,
                                                       const class GALGAS_uint & inOperand8,
+                                                      const class GALGAS_uint & inOperand9,
+                                                      const class GALGAS_uint & inOperand10,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -3083,6 +3080,8 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
                                                    class GALGAS_bigint constinArgument6,
                                                    class GALGAS_controlRegisterFieldList constinArgument7,
                                                    class GALGAS_uint constinArgument8,
+                                                   class GALGAS_uint constinArgument9,
+                                                   class GALGAS_uint constinArgument10,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -3096,6 +3095,11 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
                                                                             C_Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMElementArraySizeForKey (class GALGAS_uint constinArgument0,
+                                                                    class GALGAS_string constinArgument1,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
   public : VIRTUAL_IN_DEBUG void setter_setMIsAccessibleInUserModeForKey (class GALGAS_bool constinArgument0,
                                                                           class GALGAS_string constinArgument1,
                                                                           C_Compiler * inCompiler
@@ -3105,6 +3109,11 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
                                                               class GALGAS_string constinArgument1,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPowerOfTwoForArraySizeForKey (class GALGAS_uint constinArgument0,
+                                                                          class GALGAS_string constinArgument1,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMRegisterBitCountForKey (class GALGAS_uint constinArgument0,
                                                                     class GALGAS_string constinArgument1,
@@ -3137,6 +3146,8 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
                                                    class GALGAS_bigint & outArgument6,
                                                    class GALGAS_controlRegisterFieldList & outArgument7,
                                                    class GALGAS_uint & outArgument8,
+                                                   class GALGAS_uint & outArgument9,
+                                                   class GALGAS_uint & outArgument10,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -3151,6 +3162,10 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
                                                                                                           C_Compiler * inCompiler
                                                                                                           COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mElementArraySizeForKey (const class GALGAS_string & constinOperand0,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsAccessibleInUserModeForKey (const class GALGAS_string & constinOperand0,
                                                                                     C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
@@ -3158,6 +3173,10 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsReadOnlyForKey (const class GALGAS_string & constinOperand0,
                                                                         C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPowerOfTwoForArraySizeForKey (const class GALGAS_string & constinOperand0,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mRegisterBitCountForKey (const class GALGAS_string & constinOperand0,
                                                                               C_Compiler * inCompiler
@@ -3209,6 +3228,8 @@ class cEnumerator_controlRegisterMap : public cGenericAbstractEnumerator {
   public : class GALGAS_bigint current_mAddress (LOCATION_ARGS) const ;
   public : class GALGAS_controlRegisterFieldList current_mControlRegisterFieldList (LOCATION_ARGS) const ;
   public : class GALGAS_uint current_mRegisterBitCount (LOCATION_ARGS) const ;
+  public : class GALGAS_uint current_mPowerOfTwoForArraySize (LOCATION_ARGS) const ;
+  public : class GALGAS_uint current_mElementArraySize (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_controlRegisterMap_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -3233,6 +3254,8 @@ class cMapElement_controlRegisterMap : public cMapElement {
   public : GALGAS_bigint mAttribute_mAddress ;
   public : GALGAS_controlRegisterFieldList mAttribute_mControlRegisterFieldList ;
   public : GALGAS_uint mAttribute_mRegisterBitCount ;
+  public : GALGAS_uint mAttribute_mPowerOfTwoForArraySize ;
+  public : GALGAS_uint mAttribute_mElementArraySize ;
 
 //--- Constructor
   public : cMapElement_controlRegisterMap (const GALGAS_lstring & inKey,
@@ -3243,7 +3266,9 @@ class cMapElement_controlRegisterMap : public cMapElement {
                                            const GALGAS_controlRegisterFieldMap & in_mRegisterFieldMap,
                                            const GALGAS_bigint & in_mAddress,
                                            const GALGAS_controlRegisterFieldList & in_mControlRegisterFieldList,
-                                           const GALGAS_uint & in_mRegisterBitCount
+                                           const GALGAS_uint & in_mRegisterBitCount,
+                                           const GALGAS_uint & in_mPowerOfTwoForArraySize,
+                                           const GALGAS_uint & in_mElementArraySize
                                            COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -3276,6 +3301,8 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_bigint mAttribute_mAddress ;
   public : GALGAS_controlRegisterFieldList mAttribute_mControlRegisterFieldList ;
   public : GALGAS_uint mAttribute_mRegisterBitCount ;
+  public : GALGAS_uint mAttribute_mPowerOfTwoForArraySize ;
+  public : GALGAS_uint mAttribute_mElementArraySize ;
 
 
 //--------------------------------- Accessors
@@ -3300,7 +3327,9 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
                                                  const GALGAS_controlRegisterFieldMap & in_mRegisterFieldMap,
                                                  const GALGAS_bigint & in_mAddress,
                                                  const GALGAS_controlRegisterFieldList & in_mControlRegisterFieldList,
-                                                 const GALGAS_uint & in_mRegisterBitCount) ;
+                                                 const GALGAS_uint & in_mRegisterBitCount,
+                                                 const GALGAS_uint & in_mPowerOfTwoForArraySize,
+                                                 const GALGAS_uint & in_mElementArraySize) ;
 
 //-- Start of generic part --*
 
@@ -3321,7 +3350,9 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
                                                                               const class GALGAS_controlRegisterFieldMap & inOperand5,
                                                                               const class GALGAS_bigint & inOperand6,
                                                                               const class GALGAS_controlRegisterFieldList & inOperand7,
-                                                                              const class GALGAS_uint & inOperand8
+                                                                              const class GALGAS_uint & inOperand8,
+                                                                              const class GALGAS_uint & inOperand9,
+                                                                              const class GALGAS_uint & inOperand10
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -3342,9 +3373,13 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterFieldList getter_mControlRegisterFieldList (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mElementArraySize (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsAccessibleInUserMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsReadOnly (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPowerOfTwoForArraySize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mRegisterBitCount (LOCATION_ARGS) const ;
 
@@ -6814,200 +6849,5 @@ class GALGAS_taskSortedListIR_2D_element : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskSortedListIR_2D_element ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @panicRoutinePriorityMap map                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cMapElement_panicRoutinePriorityMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const char * kSearchErrorMessage_panicRoutinePriorityMap_searchSetupKey ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const char * kSearchErrorMessage_panicRoutinePriorityMap_searchLoopKey ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_panicRoutinePriorityMap : public AC_GALGAS_map {
-//--------------------------------- Default constructor
-  public : GALGAS_panicRoutinePriorityMap (void) ;
-
-//--------------------------------- Handle copy
-  public : GALGAS_panicRoutinePriorityMap (const GALGAS_panicRoutinePriorityMap & inSource) ;
-  public : GALGAS_panicRoutinePriorityMap & operator = (const GALGAS_panicRoutinePriorityMap & inSource) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_panicRoutinePriorityMap extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_panicRoutinePriorityMap constructor_emptyMap (LOCATION_ARGS) ;
-
-  public : static class GALGAS_panicRoutinePriorityMap constructor_mapWithMapToOverride (const class GALGAS_panicRoutinePriorityMap & inOperand0
-                                                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_insertLoopKey (class GALGAS_lstring constinArgument0,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_insertSetupKey (class GALGAS_lstring constinArgument0,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_searchLoopKey (class GALGAS_lstring constinArgument0,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_searchSetupKey (class GALGAS_lstring constinArgument0,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_panicRoutinePriorityMap getter_overriddenMap (C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-  public : VIRTUAL_IN_DEBUG cMapElement_panicRoutinePriorityMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                     const GALGAS_string & inKey
-                                                                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Friend
-
-  friend class cEnumerator_panicRoutinePriorityMap ;
- 
-} ; // End of GALGAS_panicRoutinePriorityMap class
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumerator_panicRoutinePriorityMap : public cGenericAbstractEnumerator {
-  public : cEnumerator_panicRoutinePriorityMap (const GALGAS_panicRoutinePriorityMap & inEnumeratedObject,
-                                                const typeEnumerationOrder inOrder) ;
-
-//--- Current element access
-  public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-//--- Current element access
-  public : class GALGAS_panicRoutinePriorityMap_2D_element current (LOCATION_ARGS) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicRoutinePriorityMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Class for element of '@panicRoutinePriorityMap' map                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cMapElement_panicRoutinePriorityMap : public cMapElement {
-//--- Map attributes
-
-//--- Constructor
-  public : cMapElement_panicRoutinePriorityMap (const GALGAS_lstring & inKey
-                                                COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cMapElement * copy (void) ;
-
-//--- Description
- public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     @panicRoutinePriorityMap_2D_element struct                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_panicRoutinePriorityMap_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_panicRoutinePriorityMap_2D_element constructor_default (LOCATION_ARGS) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_panicRoutinePriorityMap_2D_element (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_panicRoutinePriorityMap_2D_element (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_panicRoutinePriorityMap_2D_element (const GALGAS_lstring & in_lkey) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_panicRoutinePriorityMap_2D_element extractObject (const GALGAS_object & inObject,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_panicRoutinePriorityMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0
-                                                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_panicRoutinePriorityMap_2D_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_panicRoutinePriorityMap_2D_element class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicRoutinePriorityMap_2D_element ;
 
 #endif
