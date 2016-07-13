@@ -22,7 +22,7 @@ method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessi
   case globalVariable (* @string name *) :
     ioAccessibleEntities.mGlobalVariableSet += !name
   case localValue (* @string unused name) :
-  case constant (* @string name) :
+  case staticConstant (* @string name) :
     ioAccessibleEntities.mGlobalVariableSet += !name
   end
 }

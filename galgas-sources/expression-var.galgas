@@ -2,9 +2,22 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @varInExpressionElementAccess {
+  case fieldAccess (@lstring fieldName)
+  case arrayAccess (@expressionAST indexExpression @location endOfExp)
+}
+
+#·······················································································································
+
+list @varInExpressionElementAccessList {
+  @varInExpressionElementAccess mAccess
+}
+
+#·······················································································································
+
 class @varInExpressionAST : @expressionAST {
   @lstring mSourceVarName
-  @arrayElementAccess mArrayAccess
+  @varInExpressionElementAccessList mAccessList
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -17,17 +30,20 @@ syntax extension common_syntax {
   
   rule <primary> !@expressionAST outExpression {
     $identifier$ ?let sourceVarName
-    @arrayElementAccess arrayElementAccess
-    select
-      arrayElementAccess = .noAccess
-    or
+    @varInExpressionElementAccessList arrayElementAccessList = {}
+    repeat
+    while
+      $.$
+      $identifier$ ?let fieldName
+      arrayElementAccessList += !.fieldAccess {!fieldName:fieldName}
+    while
       $[$
       <expression> ?let indexExpression
       let @location endOfExp = .here
       $]$
-      arrayElementAccess = .access {!indexExpression:indexExpression !endOfExp:endOfExp}
+      arrayElementAccessList += !.arrayAccess {!indexExpression:indexExpression !endOfExp:endOfExp}
     end
-    outExpression = @varInExpressionAST.new {!sourceVarName !arrayElementAccess}
+    outExpression = @varInExpressionAST.new {!sourceVarName !arrayElementAccessList}
   }
 
   #·····················································································································
@@ -43,10 +59,12 @@ override method @varInExpressionAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addEdge !inConstantName !mSourceVarName]
-  switch mArrayAccess
-  case noAccess :
-  case access (@expressionAST indexExpression *) :
-    [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  for (access) in mAccessList do
+    switch access
+    case fieldAccess (*) :
+    case arrayAccess (@expressionAST indexExpression *) :
+      [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+    end
   end
 }
 
@@ -55,10 +73,12 @@ override method @varInExpressionAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  switch mArrayAccess
-  case noAccess :
-  case access (@expressionAST indexExpression *) :
-    [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  for (access) in mAccessList do
+    switch access
+    case fieldAccess (*) :
+    case arrayAccess (@expressionAST indexExpression *) :
+      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    end
   end
 }
 
@@ -91,6 +111,9 @@ override method @varInExpressionAST analyzeExpression
     ?copyable:let copyable
     ?canBeUsedAsInputParameter:*
   ]
+  if not copyable then
+    error mSourceVarName : "an $" + [type key] + " instance is not copyable"
+  end
   if not accessIsAllowed then
     error mSourceVarName : "routine has no access right on this variable"
   end
@@ -99,14 +122,133 @@ override method @varInExpressionAST analyzeExpression
     case register (****) : error mSourceVarName : "a control register cannot be read in guard boolean expression"
     case globalVariable (***) : error mSourceVarName : "a global variable cannot be read in guard boolean expression"
     case localValue (**) :
-    case constant (**) :
+    case staticConstant (**) :
     end
   end
+#--- Register, or other kind of variable
+  if [variableKind isRegister] then
+    [self analyzeExpression_register
+      !self: inSelfType
+      !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !modes: inModeSet
+      !allowPanic: inAllowPanic
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioVariableMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !variableKind:variableKind
+      !?type
+      ?result: outResult
+    ]
+  else
+    [self analyzeExpression_otherKind
+      !self: inSelfType
+      !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !optionalTargetType: inOptionalTargetType
+      !context: inContext
+      !modes: inModeSet
+      !allowPanic: inAllowPanic
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap: ioVariableMap
+      !?alloca: ioAllocaList
+      !?instructionListIR: ioInstructionGenerationList
+      !variableKind:variableKind
+      !?type
+      ?result: outResult
+    ]
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @varInExpressionAST analyzeExpression_register
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?variableKind:let @objectInMemoryIR inVariableKind
+  ?!@unifiedTypeMap-proxy ioType
+  !result:@operandIR outResult
+{
+#--- Load variable
+  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !inVariableKind ?outResult]
+#--- Solve inferred type
+  var expressionType = solveInferredType (
+    !targetType:inOptionalTargetType
+    !sourceType:ioType
+    !errorLocation:mSourceVarName.location
+  )
+#--- Field ?
+  [inVariableKind register ?type:* ?name:* ?address:* ?sliceMap:@controlRegisterBitSliceAccessMap registerBitSliceMap]
+  for (access) in mAccessList do
+    switch access
+    case fieldAccess (@lstring fieldName) :
+      [registerBitSliceMap searchKey
+        !fieldName
+        ?let @llvmBinaryOperation accessOperator
+        ?let @bigint accessRightOperand
+        ?let submap
+        ?let newResultType
+       ]
+    #--- Temp var
+      getNewTempVariable (!newResultType !?ioTemporaries ?let newResultingVariable)
+      [!?ioInstructionGenerationList appendBinaryOperation
+        !newResultingVariable.mValue
+        !outResult.mType
+        !mSourceVarName.location
+        !outResult.mValue
+        !accessOperator
+        !.literalInteger {!value:accessRightOperand}
+      ]
+      outResult = newResultingVariable 
+      registerBitSliceMap = submap
+    case arrayAccess (@expressionAST indexExpression *) :
+    end
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @varInExpressionAST analyzeExpression_otherKind
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  ?variableKind:let @objectInMemoryIR inVariableKind
+  ?!@unifiedTypeMap-proxy ioType
+  !result:@operandIR outResult
+{
 #--- Array element access ?
   @elementPtrList elementPtrList = {}
-  analyzeArrayElementAccess (
-    !mArrayAccess
-    !?type
+  analyzeVarInExpressionElementAccess (
+    !mAccessList
+    !?ioType
     !?elementPtrList
     !mSourceVarName.location
     !self:inSelfType
@@ -122,17 +264,14 @@ override method @varInExpressionAST analyzeExpression
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
   )
-  if not copyable then
-    error mSourceVarName : "an $" + [type key] + " instance is not copyable"
-  end
 #--- Load variable
   if [elementPtrList length] == 0 then
-    [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !variableKind ?outResult]
+    [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !inVariableKind ?outResult]
   else
-    getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let sourcePtr)
+    getLocalNameOfNewTempObjectInMemory (!ioType !?ioTemporaries ?let sourcePtr)
     [!?ioInstructionGenerationList appendGetElementPtr
       !sourcePtr
-      !variableKind
+      !inVariableKind
       !elementPtrList
     ]        
     [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !sourcePtr ?outResult]
@@ -140,9 +279,78 @@ override method @varInExpressionAST analyzeExpression
 #--- Solve inferred type
   var expressionType = solveInferredType (
     !targetType:inOptionalTargetType
-    !sourceType:type
+    !sourceType:ioType
     !errorLocation:mSourceVarName.location
   )
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc analyzeVarInExpressionElementAccess
+  ?let @varInExpressionElementAccessList inAccessList
+  ?!@unifiedTypeMap-proxy ioType
+  ?!@elementPtrList ioElementPtrList
+  ?let @location inErrorLocation
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  for (access) in inAccessList do
+    switch access
+    case fieldAccess (@lstring fieldName) :
+    case arrayAccess (indexExpression endOfExp) :
+      @bigint arraySize
+      if [[ioType kind] isArrayType] then
+        [[ioType kind] arrayType ?elementType:ioType ?size:arraySize]
+      else
+        error inErrorLocation : "this variable should be an array" : arraySize
+      end
+      [indexExpression analyzeExpression
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:inGuard
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:.null
+        !context:inContext
+        !modes:inModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+        ?result:let @operandIR indexResult
+      ]
+      if [indexResult.mValue isLiteralInteger] then
+        [indexResult.mValue literalInteger ?value:let @bigint indexValue]
+        if (indexValue < 0G) || (indexValue >= arraySize) then
+          error endOfExp : "static index should be positive and < " + arraySize : ioElementPtrList
+        else
+          ioElementPtrList += {!.absolute {!index:[indexValue uint]} !"[" + indexValue + "]"}
+        end
+      elsif [[indexResult.mType kind] isInteger] then
+        if not [option plm_options.noPanicGeneration value] then
+          [!?ioInstructionGenerationList testArrayIndex !indexResult !endOfExp !arraySize ?let generatePanicInstruction]
+          if generatePanicInstruction && not inAllowPanic then
+            error endOfExp : "index computation can generated panic" : ioElementPtrList
+          end
+        end
+        let name = [indexResult.mValue name]
+        ioElementPtrList += {!.indirect {!index:indexResult} !"[" + name + "]"}
+      else
+        error endOfExp : "index expression is not an integer" : ioElementPtrList
+      end
+    end
+  end
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

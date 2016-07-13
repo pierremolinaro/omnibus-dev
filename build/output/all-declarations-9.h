@@ -86,6 +86,112 @@ class GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infix
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                          Extension method '@varInExpressionAST analyzeExpression_register'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_varInExpressionAST_analyzeExpression_5F_register) (const class cPtr_varInExpressionAST * inObject,
+                                                                                           const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                                           const class GALGAS_bool constinArgument1,
+                                                                                           const class GALGAS_bool constinArgument2,
+                                                                                           const class GALGAS_lstring constinArgument3,
+                                                                                           const class GALGAS_unifiedTypeMap_2D_proxy constinArgument4,
+                                                                                           const class GALGAS_semanticContext constinArgument5,
+                                                                                           const class GALGAS_stringset constinArgument6,
+                                                                                           const class GALGAS_bool constinArgument7,
+                                                                                           class GALGAS_semanticTemporariesStruct & ioArgument8,
+                                                                                           class GALGAS_staticStringMap & ioArgument9,
+                                                                                           class GALGAS_variableMap & ioArgument10,
+                                                                                           class GALGAS_allocaList & ioArgument11,
+                                                                                           class GALGAS_instructionListIR & ioArgument12,
+                                                                                           const class GALGAS_objectInMemoryIR constinArgument13,
+                                                                                           class GALGAS_unifiedTypeMap_2D_proxy & ioArgument14,
+                                                                                           class GALGAS_operandIR & outArgument15,
+                                                                                           class C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_analyzeExpression_5F_register (const int32_t inClassIndex,
+                                                         extensionMethodSignature_varInExpressionAST_analyzeExpression_5F_register inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_analyzeExpression_5F_register (const class cPtr_varInExpressionAST * inObject,
+                                                        const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                                        const GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
+                                                        const GALGAS_bool constin_inGuard,
+                                                        const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                                        const GALGAS_unifiedTypeMap_2D_proxy constin_inOptionalTargetType,
+                                                        const GALGAS_semanticContext constin_inContext,
+                                                        const GALGAS_stringset constin_inModeSet,
+                                                        const GALGAS_bool constin_inAllowPanic,
+                                                        GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                        GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                        GALGAS_variableMap & io_ioVariableMap,
+                                                        GALGAS_allocaList & io_ioAllocaList,
+                                                        GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                        const GALGAS_objectInMemoryIR constin_inVariableKind,
+                                                        GALGAS_unifiedTypeMap_2D_proxy & io_ioType,
+                                                        GALGAS_operandIR & out_outResult,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Extension method '@varInExpressionAST analyzeExpression_otherKind'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_varInExpressionAST_analyzeExpression_5F_otherKind) (const class cPtr_varInExpressionAST * inObject,
+                                                                                            const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                                            const class GALGAS_bool constinArgument1,
+                                                                                            const class GALGAS_bool constinArgument2,
+                                                                                            const class GALGAS_lstring constinArgument3,
+                                                                                            const class GALGAS_unifiedTypeMap_2D_proxy constinArgument4,
+                                                                                            const class GALGAS_semanticContext constinArgument5,
+                                                                                            const class GALGAS_stringset constinArgument6,
+                                                                                            const class GALGAS_bool constinArgument7,
+                                                                                            class GALGAS_semanticTemporariesStruct & ioArgument8,
+                                                                                            class GALGAS_staticStringMap & ioArgument9,
+                                                                                            class GALGAS_variableMap & ioArgument10,
+                                                                                            class GALGAS_allocaList & ioArgument11,
+                                                                                            class GALGAS_instructionListIR & ioArgument12,
+                                                                                            const class GALGAS_objectInMemoryIR constinArgument13,
+                                                                                            class GALGAS_unifiedTypeMap_2D_proxy & ioArgument14,
+                                                                                            class GALGAS_operandIR & outArgument15,
+                                                                                            class C_Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_analyzeExpression_5F_otherKind (const int32_t inClassIndex,
+                                                          extensionMethodSignature_varInExpressionAST_analyzeExpression_5F_otherKind inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_analyzeExpression_5F_otherKind (const class cPtr_varInExpressionAST * inObject,
+                                                         const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                                         const GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
+                                                         const GALGAS_bool constin_inGuard,
+                                                         const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                                         const GALGAS_unifiedTypeMap_2D_proxy constin_inOptionalTargetType,
+                                                         const GALGAS_semanticContext constin_inContext,
+                                                         const GALGAS_stringset constin_inModeSet,
+                                                         const GALGAS_bool constin_inAllowPanic,
+                                                         GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                         GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                         GALGAS_variableMap & io_ioVariableMap,
+                                                         GALGAS_allocaList & io_ioAllocaList,
+                                                         GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                         const GALGAS_objectInMemoryIR constin_inVariableKind,
+                                                         GALGAS_unifiedTypeMap_2D_proxy & io_ioType,
+                                                         GALGAS_operandIR & out_outResult,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                         Extension method '@binaryOperationIR enterCodeForOverflowOperation'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

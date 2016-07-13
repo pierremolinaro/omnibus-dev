@@ -80,7 +80,7 @@ func initialVariableMap
       !lkey:constantName
       !type:constantValue.mType
       !readAccessAllowed:true
-      !variableKind:.constant {!value:constantValue !name:constantName.string}
+      !variableKind:.staticConstant {!value:constantValue !name:constantName.string}
       !copyable:true
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
     ]
@@ -148,7 +148,7 @@ func variableMapWithConstants
       !lkey:constantName
       !type:constantValue.mType
       !readAccessAllowed:true
-      !variableKind:.constant {!value:constantValue !name:constantName.string}
+      !variableKind:.staticConstant {!value:constantValue !name:constantName.string}
       !copyable:true
       !canBeUsedAsInputParameter:false
     ]
