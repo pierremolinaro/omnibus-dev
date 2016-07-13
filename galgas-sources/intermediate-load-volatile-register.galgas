@@ -1,17 +1,15 @@
 
 setter @instructionListIR appendLoadVolatileRegister
   ?let @operandIR inTargetValue
-  ?let @string inRegisterName
   ?let @bigint inAddress
 {
-  self += !@loadRegisterIR.new {!inTargetValue !inRegisterName !inAddress}
+  self += !@loadRegisterIR.new {!inTargetValue !inAddress}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadRegisterIR : @abstractInstructionIR {
   @operandIR mTargetValue
-  @string mRegisterName
   @bigint mRegisterAddress
 }
 
@@ -30,10 +28,9 @@ override method @loadRegisterIR llvmInstructionCode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @loadRegisterIR enterAccessibleEntities 
-  ?!@accessibleEntities ioAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioAccessibleEntities.mAccessibleRegisterSet += !mRegisterName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

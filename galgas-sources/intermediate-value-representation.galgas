@@ -77,21 +77,24 @@ getter @valueIR isStatic -> @bool outResult {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @objectInMemoryIR {
+  case registerAddress (@unifiedTypeMap-proxy type @string llvmName)
   case register (@unifiedTypeMap-proxy type
                  @lstring name
                  @bigint address
                  @controlRegisterBitSliceAccessMap sliceMap
                  @uint arraySize # 0 if not an array
                  @uint elementSize) # 0 if not an array
-  case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile)
+  case globalVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
   case localValue (@unifiedTypeMap-proxy type @string name)
-  case staticConstant (@operandIR value  @string name)
+  case staticConstant (@operandIR value @string name)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @objectInMemoryIR llvmName -> @string outName {
   switch self
+  case registerAddress (* @string llvmName) :
+    outName = llvmName
   case register (* @lstring name * * * *) :
     error name : "@objectInMemoryIR name" : outName
   case globalVariable (* @string name *) :
@@ -107,6 +110,8 @@ getter @objectInMemoryIR llvmName -> @string outName {
 
 getter @objectInMemoryIR name -> @string outName {
   switch self
+  case registerAddress (* @string llvmName) :
+    outName = llvmName
   case register (* @lstring name * * * *) :
     outName = name.string
   case globalVariable (* @string name *) :
@@ -122,6 +127,8 @@ getter @objectInMemoryIR name -> @string outName {
 
 getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
   switch self
+  case registerAddress (@unifiedTypeMap-proxy type *) :
+    outType = type
   case register (@unifiedTypeMap-proxy type * * * * *) :
     outType = type
   case globalVariable (@unifiedTypeMap-proxy type * *) :
@@ -137,6 +144,8 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
 
 getter @objectInMemoryIR address -> @operandIR outOperand {
   switch self
+  case registerAddress (* *) :
+    error .nowhere : "@objectInMemoryIR register address" : outOperand
   case register (* * * * * *) :
     error .nowhere : "@objectInMemoryIR register address" : outOperand
   case globalVariable (@unifiedTypeMap-proxy type @string name *) :

@@ -1,17 +1,17 @@
 
-setter @instructionListIR appendLoadVolatileRegisterWithSubscript
-  ?let @operandIR inTargetValue
+setter @instructionListIR appendLoadVolatileRegisterAddress
+  ?let @objectInMemoryIR inTargetValue
   ?let @operandIR inIndexResult
   ?let @bigint inAddress
   ?let @bigint inElementArraySize
 {
-  self += !@loadRegisterWithSubscriptIR.new {!inTargetValue !inIndexResult !inAddress !inElementArraySize}
+  self += !@loadRegisterAddressIR.new {!inTargetValue !inIndexResult !inAddress !inElementArraySize}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @loadRegisterWithSubscriptIR : @abstractInstructionIR {
-  @operandIR mTargetValue
+class @loadRegisterAddressIR : @abstractInstructionIR {
+  @objectInMemoryIR mTargetValue
   @operandIR mIndexResult
   @bigint mRegisterAddress
   @bigint mElementArraySize
@@ -19,15 +19,14 @@ class @loadRegisterWithSubscriptIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadRegisterWithSubscriptIR llvmInstructionCode
+override method @loadRegisterAddressIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
   let registerOffsetName = "%register.subscript." + ioGenerationAdds.mUniqueIndex
   let registerIndexName = "%register.index." + ioGenerationAdds.mUniqueIndex
-  let scriptedRegisterAddressValueName = "%register.address.value." + ioGenerationAdds.mUniqueIndex
-  let scriptedRegisterAddressName = "%register.address." + ioGenerationAdds.mUniqueIndex
+  let scriptedRegisterAddressValueName = "%register.address." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
 #--- Needs to perm an extend to i32 ?
   [[mIndexResult.mType kind] integer ?min:* ?max:* ?unsigned:* ?bitCount:let bitCount]
@@ -40,16 +39,14 @@ override method @loadRegisterWithSubscriptIR llvmInstructionCode
              + ", " + mElementArraySize + " ; " + [mElementArraySize hexString] + "\n"
   ioLLVMcode += "  " + scriptedRegisterAddressValueName + " = add i32 " + registerOffsetName
              + ", " + mRegisterAddress + " ; " + [mRegisterAddress hexString] + "\n"
-  let llvmType = [mTargetValue.mType llvmTypeName]
-  ioLLVMcode += "  " + scriptedRegisterAddressName + " = inttoptr i32 " + scriptedRegisterAddressValueName
+  let llvmType = [[mTargetValue type] llvmTypeName]
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = inttoptr i32 " + scriptedRegisterAddressValueName
              + " to " + llvmType + " *\n"
-  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
-             + " * " + scriptedRegisterAddressName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadRegisterWithSubscriptIR enterAccessibleEntities 
+override method @loadRegisterAddressIR enterAccessibleEntities 
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

@@ -11,6 +11,33 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                        Function 'noWarningIfUnusedAttribute'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_noWarningIfUnusedAttribute (class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             Function 'globalAttribute'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_globalAttribute (class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              Function 'weakAttribute'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_weakAttribute (class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      Function 'taskProcNameForInvocationGraph'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -129,7 +156,6 @@ void routine_suppressInaccessibleSubprograms (class GALGAS_intermediateCodeStruc
 
 class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_stringset mAttribute_mAccessibleRegisterSet ;
   public : GALGAS_stringset mAttribute_mRoutineSet ;
   public : GALGAS_stringset mAttribute_mGuardSet ;
   public : GALGAS_stringset mAttribute_mSectionSet ;
@@ -151,8 +177,7 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_accessibleEntities (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_accessibleEntities (const GALGAS_stringset & in_mAccessibleRegisterSet,
-                                      const GALGAS_stringset & in_mRoutineSet,
+  public : GALGAS_accessibleEntities (const GALGAS_stringset & in_mRoutineSet,
                                       const GALGAS_stringset & in_mGuardSet,
                                       const GALGAS_stringset & in_mSectionSet,
                                       const GALGAS_stringset & in_mGlobalVariableSet,
@@ -173,8 +198,7 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
                                                                    const class GALGAS_stringset & inOperand1,
                                                                    const class GALGAS_stringset & inOperand2,
                                                                    const class GALGAS_stringset & inOperand3,
-                                                                   const class GALGAS_stringset & inOperand4,
-                                                                   const class GALGAS_stringset & inOperand5
+                                                                   const class GALGAS_stringset & inOperand4
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -189,8 +213,6 @@ class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mAccessibleRegisterSet (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mGlobalVariableSet (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mGuardSet (LOCATION_ARGS) const ;

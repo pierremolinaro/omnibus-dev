@@ -17,9 +17,9 @@ override method @sourceLocationIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   if [mSourceLocation isNowhere] then
-    ioLLVMcode += "  ;---------\n"
+    ioLLVMcode += ";---------\n"
   else
-    ioLLVMcode += "  ;--------- " + [mSourceLocation line] + ":" + [[mSourceLocation file] lastPathComponent] + "\n"
+    ioLLVMcode += ";--------- " + [mSourceLocation line] + ":" + [[mSourceLocation file] lastPathComponent] + "\n"
   end
 }
 

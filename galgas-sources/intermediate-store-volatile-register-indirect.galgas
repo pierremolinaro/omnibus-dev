@@ -1,35 +1,35 @@
 
-setter @instructionListIR appendStoreVolatileRegister
+setter @instructionListIR appendStoreVolatileRegisterIndirect
   ?let @unifiedTypeMap-proxy inTargetVarType
-  ?let @bigint inAddress
+  ?let @string inLLVMName
   ?let @operandIR inSourceValue
 {
-  self += !@storeVolatileIR.new {!inTargetVarType !inAddress !inSourceValue}
+  self += !@storeVolatileIndirectIR.new {!inTargetVarType !inLLVMName !inSourceValue}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @storeVolatileIR : @abstractInstructionIR {
+class @storeVolatileIndirectIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetVarType
-  @bigint mAddress
+  @string mLLVMName
   @operandIR mSourceValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeVolatileIR llvmInstructionCode
+override method @storeVolatileIndirectIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [mTargetVarType llvmTypeName]
   ioLLVMcode += "  store volatile " + llvmType + " " + [mSourceValue.mValue llvmName] + ", " + llvmType
-             + " * inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
+             + " * " + mLLVMName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeVolatileIR enterAccessibleEntities 
+override method @storeVolatileIndirectIR enterAccessibleEntities 
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
