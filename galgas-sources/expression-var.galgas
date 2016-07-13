@@ -170,18 +170,18 @@ override method @varInExpressionAST analyzeExpression
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @varInExpressionAST analyzeExpression_register
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool unused inGuard
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?context:let @semanticContext unused inContext
+  ?modes:let @stringset unused inModeSet
+  ?allowPanic:let @bool unused inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
+  ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableKind:let @objectInMemoryIR inVariableKind
   ?!@unifiedTypeMap-proxy ioType
@@ -219,7 +219,7 @@ method @varInExpressionAST analyzeExpression_register
       ]
       outResult = newResultingVariable 
       registerBitSliceMap = submap
-    case arrayAccess (@expressionAST indexExpression *) :
+    case arrayAccess (@expressionAST unused indexExpression *) :
     end
   end
 }
@@ -306,7 +306,7 @@ proc analyzeVarInExpressionElementAccess
 {
   for (access) in inAccessList do
     switch access
-    case fieldAccess (@lstring fieldName) :
+    case fieldAccess (@lstring unused fieldName) :
     case arrayAccess (indexExpression endOfExp) :
       @bigint arraySize
       if [[ioType kind] isArrayType] then
