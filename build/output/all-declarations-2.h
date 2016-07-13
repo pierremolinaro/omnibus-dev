@@ -4625,6 +4625,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
+    kEnum_registerAddress,
     kEnum_register,
     kEnum_globalVariable,
     kEnum_localValue,
@@ -4672,6 +4673,10 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                                       const class GALGAS_uint & inOperand5
                                                                       COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_objectInMemoryIR constructor_registerAddress (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                                             const class GALGAS_string & inOperand1
+                                                                             COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_objectInMemoryIR constructor_staticConstant (const class GALGAS_operandIR & inOperand0,
                                                                             const class GALGAS_string & inOperand1
                                                                             COMMA_LOCATION_ARGS) ;
@@ -4705,6 +4710,11 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_registerAddress (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                         class GALGAS_string & outArgument1,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_staticConstant (class GALGAS_operandIR & outArgument0,
                                                         class GALGAS_string & outArgument1,
                                                         C_Compiler * inCompiler
@@ -4718,6 +4728,8 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegister (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegisterAddress (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticConstant (LOCATION_ARGS) const ;
 

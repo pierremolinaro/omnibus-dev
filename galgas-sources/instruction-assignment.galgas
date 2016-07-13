@@ -75,13 +75,6 @@ override method @varAssignmentInstructionAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?resultPtr:let @objectInMemoryIR targetObjectPtr
   )
-#  [!?ioVariableMap neutralAccess
-#    !lkey:mTargetVarName
-#    ?type:@unifiedTypeMap-proxy targetType
-#    ?1*
-#    ?variableKind:@objectInMemoryIR target
-#    ?4*
-#  ]
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
@@ -105,25 +98,6 @@ override method @varAssignmentInstructionAST analyze
     !errorLocation:mTargetErrorLocation
     !staticTypeAllowed:false
   )
-#--- Write local variable
-#  [!?ioVariableMap searchForWriteAccess
-#    !lkey:mTargetVarName
-#    ?1*
-#    ?readAccessAllowed:let accessIsAllowed
-#    ?1*
-#    ?copyable:let isCopyable
-#    ?2*
-#    ?isConstant:let isConstant
-#  ]
-#  if isConstant then
-#    error mTargetErrorLocation : "a constant cannot be modified"
-#  end
-#  if not accessIsAllowed then
-#    error mTargetErrorLocation : "routine has no access right on the this variable"
-#  end
-#  if not isCopyable then
-#    error mTargetErrorLocation : "an $" + [[targetObjectPtr type] key] + " instance is not copyable"
-#  end
   [!?ioInstructionGenerationList appendStoreInMemory !targetObjectPtr !result]
 }
 

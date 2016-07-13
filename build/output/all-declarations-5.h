@@ -41,6 +41,24 @@ class cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard : public cEnu
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
+class cEnumAssociatedValues_objectInMemoryIR_registerAddress : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectInMemoryIR_registerAddress (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                                   const GALGAS_string & inAssociatedValue1
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_registerAddress (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 class cEnumAssociatedValues_objectInMemoryIR_register : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
   public : const GALGAS_lstring mAssociatedValue1 ;
@@ -1953,6 +1971,43 @@ class GALGAS_unifiedTypeMap_2D_proxy extensionGetter_type (const class GALGAS_ob
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                        Routine 'analyzeRegisterWriteAccess'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_analyzeRegisterWriteAccess (const class GALGAS_accessList constinArgument0,
+                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
+                                         const class GALGAS_bool constinArgument2,
+                                         const class GALGAS_bool constinArgument3,
+                                         const class GALGAS_lstring constinArgument4,
+                                         const class GALGAS_semanticContext constinArgument5,
+                                         const class GALGAS_stringset constinArgument6,
+                                         const class GALGAS_bool constinArgument7,
+                                         class GALGAS_semanticTemporariesStruct & ioArgument8,
+                                         class GALGAS_staticStringMap & ioArgument9,
+                                         class GALGAS_variableMap & ioArgument10,
+                                         class GALGAS_allocaList & ioArgument11,
+                                         class GALGAS_instructionListIR & ioArgument12,
+                                         class GALGAS_objectInMemoryIR & outArgument13,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Extension setter '@instructionListIR appendLoadVolatileRegisterAddress'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendLoadVolatileRegisterAddress (class GALGAS_instructionListIR & ioObject,
+                                                        const class GALGAS_objectInMemoryIR constin_inTargetValue,
+                                                        const class GALGAS_operandIR constin_inIndexResult,
+                                                        const class GALGAS_bigint constin_inAddress,
+                                                        const class GALGAS_bigint constin_inElementArraySize,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      Routine 'analyzeVariableReadWriteAccess'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3460,32 +3515,5 @@ class GALGAS_string function_llvmNameForGlobalVariable (class GALGAS_string inAr
 class GALGAS_string function_llvmNameForRegister (class GALGAS_string inArgument0,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Function 'noWarningIfUnusedAttribute'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_noWarningIfUnusedAttribute (class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             Function 'globalAttribute'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_globalAttribute (class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              Function 'weakAttribute'                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_weakAttribute (class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
 
 #endif

@@ -119,6 +119,7 @@ override method @varInExpressionAST analyzeExpression
   end
   if inGuard then
     switch variableKind
+    case registerAddress (**) : error mSourceVarName : "a control register cannot be read in guard boolean expression"
     case register (******) : error mSourceVarName : "a control register cannot be read in guard boolean expression"
     case globalVariable (***) : error mSourceVarName : "a global variable cannot be read in guard boolean expression"
     case localValue (**) :
@@ -257,7 +258,6 @@ method @varInExpressionAST analyzeExpression_register
         getNewTempVariable (!registerType !?ioTemporaries ?outResult)
         [!?ioInstructionGenerationList appendLoadVolatileRegisterWithSubscript
           !outResult
-          !registerName
           !indexResult
           !registerAddress
           !elementArraySize

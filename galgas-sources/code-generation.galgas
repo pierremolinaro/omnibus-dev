@@ -6,6 +6,8 @@
 
 getter @objectInMemoryIR mangledName -> @string outResult {
   switch self
+  case registerAddress (* *) :
+    error .nowhere : "<<@objectInMemoryIR mangledName >>" : outResult
   case register (* @lstring name * * * *) :
     outResult = llvmNameForRegister (!name:name.string)
   case globalVariable (* @string name *) :

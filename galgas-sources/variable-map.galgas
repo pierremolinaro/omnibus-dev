@@ -22,7 +22,7 @@ func initialVariableMap
       !lkey:moduleName
       !type:moduleType
       !readAccessAllowed:false
-      !variableKind:.globalVariable {!type:moduleType !name:moduleName.string !isVolatile:false}
+      !variableKind:.globalVariable {!type:moduleType !name:moduleName.string !volatile:false}
       !copyable:false
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
     ]
@@ -133,7 +133,7 @@ func initialVariableMap
         !lkey:variable.lkey
         !type:variable.type
         !readAccessAllowed:allowedAccess
-        !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !isVolatile:[variable.executionModeSet count] > 1}
+        !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !volatile:[variable.executionModeSet count] > 1}
         !copyable:[variable.type copyable]
         !canBeUsedAsInputParameter:false
       ]
@@ -142,7 +142,7 @@ func initialVariableMap
         !lkey:variable.lkey
         !type:variable.type
         !readAccessAllowed:allowedAccess
-        !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !isVolatile:[variable.executionModeSet count] > 1}
+        !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !volatile:[variable.executionModeSet count] > 1}
         !copyable:[variable.type copyable]
         !canBeUsedAsInputParameter:false
       ]

@@ -558,7 +558,6 @@ void extensionSetter_appendShortCircuitAndOperation (class GALGAS_instructionLis
 
 void extensionSetter_appendLoadVolatileRegisterWithSubscript (class GALGAS_instructionListIR & ioObject,
                                                               const class GALGAS_operandIR constin_inTargetValue,
-                                                              const class GALGAS_string constin_inRegisterName,
                                                               const class GALGAS_operandIR constin_inIndexResult,
                                                               const class GALGAS_bigint constin_inAddress,
                                                               const class GALGAS_bigint constin_inElementArraySize,
@@ -573,7 +572,6 @@ void extensionSetter_appendLoadVolatileRegisterWithSubscript (class GALGAS_instr
 
 void extensionSetter_appendLoadVolatileRegister (class GALGAS_instructionListIR & ioObject,
                                                  const class GALGAS_operandIR constin_inTargetValue,
-                                                 const class GALGAS_string constin_inRegisterName,
                                                  const class GALGAS_bigint constin_inAddress,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
@@ -623,12 +621,24 @@ void extensionSetter_appendLoadTaskVariable (class GALGAS_instructionListIR & io
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendStoreVolatileRegister (class GALGAS_instructionListIR & ioObject,
-                                                  const class GALGAS_string constin_inRegisterName,
                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
                                                   const class GALGAS_bigint constin_inAddress,
                                                   const class GALGAS_operandIR constin_inSourceValue,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Extension setter '@instructionListIR appendStoreVolatileRegisterIndirect'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendStoreVolatileRegisterIndirect (class GALGAS_instructionListIR & ioObject,
+                                                          const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
+                                                          const class GALGAS_string constin_inLLVMName,
+                                                          const class GALGAS_operandIR constin_inSourceValue,
+                                                          class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

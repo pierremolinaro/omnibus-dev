@@ -709,13 +709,16 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "  var idx $uint3 = 5\n"
   "  globalVar = PIPO [idx].fields\n"
   "  var index $uint32 = 5\n"
-  "  globalVar = PIPO [index]\n"
-  "  IO1SET  = 1 << 23 // Led Off\n"
+  "  globalBit = PIPO [index].bit.bool\n"
+  "  PIPO [2] = globalVar\n"
+  "  PIPO [index] = globalVar\n"
+  "  IO1SET = 1 << 23 // Led Off\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
   "var globalVar $uint32 = 0\n"
+  "var globalBit $bool = false\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -737,7 +740,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-control-register-array.plm",
   "plm",
   true, // Text file
-  951, // Text length
+  1037, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -7324,15 +7327,240 @@ GALGAS_loadLocalVariableIR GALGAS_loadLocalVariableIR::extractObject (const GALG
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
+typeComparisonResult cPtr_loadRegisterAddressIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_loadRegisterAddressIR * p = (const cPtr_loadRegisterAddressIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_loadRegisterAddressIR) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mTargetValue.objectCompare (p->mAttribute_mTargetValue) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mIndexResult.objectCompare (p->mAttribute_mIndexResult) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mRegisterAddress.objectCompare (p->mAttribute_mRegisterAddress) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mElementArraySize.objectCompare (p->mAttribute_mElementArraySize) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_loadRegisterAddressIR::objectCompare (const GALGAS_loadRegisterAddressIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_loadRegisterAddressIR::GALGAS_loadRegisterAddressIR (void) :
+GALGAS_abstractInstructionIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_loadRegisterAddressIR::GALGAS_loadRegisterAddressIR (const cPtr_loadRegisterAddressIR * inSourcePtr) :
+GALGAS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_loadRegisterAddressIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_loadRegisterAddressIR GALGAS_loadRegisterAddressIR::constructor_new (const GALGAS_objectInMemoryIR & inAttribute_mTargetValue,
+                                                                            const GALGAS_operandIR & inAttribute_mIndexResult,
+                                                                            const GALGAS_bigint & inAttribute_mRegisterAddress,
+                                                                            const GALGAS_bigint & inAttribute_mElementArraySize
+                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_loadRegisterAddressIR result ;
+  if (inAttribute_mTargetValue.isValid () && inAttribute_mIndexResult.isValid () && inAttribute_mRegisterAddress.isValid () && inAttribute_mElementArraySize.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_loadRegisterAddressIR (inAttribute_mTargetValue, inAttribute_mIndexResult, inAttribute_mRegisterAddress, inAttribute_mElementArraySize COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectInMemoryIR GALGAS_loadRegisterAddressIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_objectInMemoryIR result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_loadRegisterAddressIR * p = (const cPtr_loadRegisterAddressIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_loadRegisterAddressIR) ;
+    result = p->mAttribute_mTargetValue ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectInMemoryIR cPtr_loadRegisterAddressIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTargetValue ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIR GALGAS_loadRegisterAddressIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_operandIR result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_loadRegisterAddressIR * p = (const cPtr_loadRegisterAddressIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_loadRegisterAddressIR) ;
+    result = p->mAttribute_mIndexResult ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIR cPtr_loadRegisterAddressIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIndexResult ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint GALGAS_loadRegisterAddressIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bigint result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_loadRegisterAddressIR * p = (const cPtr_loadRegisterAddressIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_loadRegisterAddressIR) ;
+    result = p->mAttribute_mRegisterAddress ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint cPtr_loadRegisterAddressIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mRegisterAddress ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint GALGAS_loadRegisterAddressIR::getter_mElementArraySize (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bigint result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_loadRegisterAddressIR * p = (const cPtr_loadRegisterAddressIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_loadRegisterAddressIR) ;
+    result = p->mAttribute_mElementArraySize ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint cPtr_loadRegisterAddressIR::getter_mElementArraySize (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mElementArraySize ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                   Pointer class for @loadRegisterAddressIR class                                    *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_loadRegisterAddressIR::cPtr_loadRegisterAddressIR (const GALGAS_objectInMemoryIR & in_mTargetValue,
+                                                        const GALGAS_operandIR & in_mIndexResult,
+                                                        const GALGAS_bigint & in_mRegisterAddress,
+                                                        const GALGAS_bigint & in_mElementArraySize
+                                                        COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (THERE),
+mAttribute_mTargetValue (in_mTargetValue),
+mAttribute_mIndexResult (in_mIndexResult),
+mAttribute_mRegisterAddress (in_mRegisterAddress),
+mAttribute_mElementArraySize (in_mElementArraySize) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_loadRegisterAddressIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_loadRegisterAddressIR ;
+}
+
+void cPtr_loadRegisterAddressIR::description (C_String & ioString,
+                                              const int32_t inIndentation) const {
+  ioString << "[@loadRegisterAddressIR:" ;
+  mAttribute_mTargetValue.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mIndexResult.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mRegisterAddress.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mElementArraySize.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_loadRegisterAddressIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_loadRegisterAddressIR (mAttribute_mTargetValue, mAttribute_mIndexResult, mAttribute_mRegisterAddress, mAttribute_mElementArraySize COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @loadRegisterAddressIR type                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_loadRegisterAddressIR ("loadRegisterAddressIR",
+                                              & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_loadRegisterAddressIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_loadRegisterAddressIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_loadRegisterAddressIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_loadRegisterAddressIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_loadRegisterAddressIR GALGAS_loadRegisterAddressIR::extractObject (const GALGAS_object & inObject,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_loadRegisterAddressIR result ;
+  const GALGAS_loadRegisterAddressIR * p = (const GALGAS_loadRegisterAddressIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_loadRegisterAddressIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("loadRegisterAddressIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
 typeComparisonResult cPtr_loadRegisterIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
   typeComparisonResult result = kOperandEqual ;
   const cPtr_loadRegisterIR * p = (const cPtr_loadRegisterIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_loadRegisterIR) ;
   if (kOperandEqual == result) {
     result = mAttribute_mTargetValue.objectCompare (p->mAttribute_mTargetValue) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mRegisterName.objectCompare (p->mAttribute_mRegisterName) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mRegisterAddress.objectCompare (p->mAttribute_mRegisterAddress) ;
@@ -7375,12 +7603,11 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_loadRegisterIR GALGAS_loadRegisterIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetValue,
-                                                              const GALGAS_string & inAttribute_mRegisterName,
                                                               const GALGAS_bigint & inAttribute_mRegisterAddress
                                                               COMMA_LOCATION_ARGS) {
   GALGAS_loadRegisterIR result ;
-  if (inAttribute_mTargetValue.isValid () && inAttribute_mRegisterName.isValid () && inAttribute_mRegisterAddress.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_loadRegisterIR (inAttribute_mTargetValue, inAttribute_mRegisterName, inAttribute_mRegisterAddress COMMA_THERE)) ;
+  if (inAttribute_mTargetValue.isValid () && inAttribute_mRegisterAddress.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_loadRegisterIR (inAttribute_mTargetValue, inAttribute_mRegisterAddress COMMA_THERE)) ;
   }
   return result ;
 }
@@ -7401,24 +7628,6 @@ GALGAS_operandIR GALGAS_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARG
 
 GALGAS_operandIR cPtr_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_loadRegisterIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_loadRegisterIR * p = (const cPtr_loadRegisterIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_loadRegisterIR) ;
-    result = p->mAttribute_mRegisterName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_loadRegisterIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7444,12 +7653,10 @@ GALGAS_bigint cPtr_loadRegisterIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_loadRegisterIR::cPtr_loadRegisterIR (const GALGAS_operandIR & in_mTargetValue,
-                                          const GALGAS_string & in_mRegisterName,
                                           const GALGAS_bigint & in_mRegisterAddress
                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTargetValue (in_mTargetValue),
-mAttribute_mRegisterName (in_mRegisterName),
 mAttribute_mRegisterAddress (in_mRegisterAddress) {
 }
 
@@ -7464,8 +7671,6 @@ void cPtr_loadRegisterIR::description (C_String & ioString,
   ioString << "[@loadRegisterIR:" ;
   mAttribute_mTargetValue.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mRegisterName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
   mAttribute_mRegisterAddress.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
@@ -7474,7 +7679,7 @@ void cPtr_loadRegisterIR::description (C_String & ioString,
 
 acPtr_class * cPtr_loadRegisterIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_loadRegisterIR (mAttribute_mTargetValue, mAttribute_mRegisterName, mAttribute_mRegisterAddress COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_loadRegisterIR (mAttribute_mTargetValue, mAttribute_mRegisterAddress COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -7534,9 +7739,6 @@ typeComparisonResult cPtr_loadRegisterWithSubscriptIR::dynamicObjectCompare (con
     result = mAttribute_mTargetValue.objectCompare (p->mAttribute_mTargetValue) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mRegisterName.objectCompare (p->mAttribute_mRegisterName) ;
-  }
-  if (kOperandEqual == result) {
     result = mAttribute_mIndexResult.objectCompare (p->mAttribute_mIndexResult) ;
   }
   if (kOperandEqual == result) {
@@ -7583,14 +7785,13 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_loadRegisterWithSubscriptIR GALGAS_loadRegisterWithSubscriptIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetValue,
-                                                                                        const GALGAS_string & inAttribute_mRegisterName,
                                                                                         const GALGAS_operandIR & inAttribute_mIndexResult,
                                                                                         const GALGAS_bigint & inAttribute_mRegisterAddress,
                                                                                         const GALGAS_bigint & inAttribute_mElementArraySize
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_loadRegisterWithSubscriptIR result ;
-  if (inAttribute_mTargetValue.isValid () && inAttribute_mRegisterName.isValid () && inAttribute_mIndexResult.isValid () && inAttribute_mRegisterAddress.isValid () && inAttribute_mElementArraySize.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_loadRegisterWithSubscriptIR (inAttribute_mTargetValue, inAttribute_mRegisterName, inAttribute_mIndexResult, inAttribute_mRegisterAddress, inAttribute_mElementArraySize COMMA_THERE)) ;
+  if (inAttribute_mTargetValue.isValid () && inAttribute_mIndexResult.isValid () && inAttribute_mRegisterAddress.isValid () && inAttribute_mElementArraySize.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_loadRegisterWithSubscriptIR (inAttribute_mTargetValue, inAttribute_mIndexResult, inAttribute_mRegisterAddress, inAttribute_mElementArraySize COMMA_THERE)) ;
   }
   return result ;
 }
@@ -7611,24 +7812,6 @@ GALGAS_operandIR GALGAS_loadRegisterWithSubscriptIR::getter_mTargetValue (UNUSED
 
 GALGAS_operandIR cPtr_loadRegisterWithSubscriptIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_loadRegisterWithSubscriptIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_loadRegisterWithSubscriptIR * p = (const cPtr_loadRegisterWithSubscriptIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_loadRegisterWithSubscriptIR) ;
-    result = p->mAttribute_mRegisterName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_loadRegisterWithSubscriptIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7690,14 +7873,12 @@ GALGAS_bigint cPtr_loadRegisterWithSubscriptIR::getter_mElementArraySize (UNUSED
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_loadRegisterWithSubscriptIR::cPtr_loadRegisterWithSubscriptIR (const GALGAS_operandIR & in_mTargetValue,
-                                                                    const GALGAS_string & in_mRegisterName,
                                                                     const GALGAS_operandIR & in_mIndexResult,
                                                                     const GALGAS_bigint & in_mRegisterAddress,
                                                                     const GALGAS_bigint & in_mElementArraySize
                                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTargetValue (in_mTargetValue),
-mAttribute_mRegisterName (in_mRegisterName),
 mAttribute_mIndexResult (in_mIndexResult),
 mAttribute_mRegisterAddress (in_mRegisterAddress),
 mAttribute_mElementArraySize (in_mElementArraySize) {
@@ -7714,8 +7895,6 @@ void cPtr_loadRegisterWithSubscriptIR::description (C_String & ioString,
   ioString << "[@loadRegisterWithSubscriptIR:" ;
   mAttribute_mTargetValue.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mRegisterName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
   mAttribute_mIndexResult.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mRegisterAddress.description (ioString, inIndentation+1) ;
@@ -7728,7 +7907,7 @@ void cPtr_loadRegisterWithSubscriptIR::description (C_String & ioString,
 
 acPtr_class * cPtr_loadRegisterWithSubscriptIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_loadRegisterWithSubscriptIR (mAttribute_mTargetValue, mAttribute_mRegisterName, mAttribute_mIndexResult, mAttribute_mRegisterAddress, mAttribute_mElementArraySize COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_loadRegisterWithSubscriptIR (mAttribute_mTargetValue, mAttribute_mIndexResult, mAttribute_mRegisterAddress, mAttribute_mElementArraySize COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -10107,9 +10286,6 @@ typeComparisonResult cPtr_storeVolatileIR::dynamicObjectCompare (const acPtr_cla
   const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_storeVolatileIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mRegisterName.objectCompare (p->mAttribute_mRegisterName) ;
-  }
-  if (kOperandEqual == result) {
     result = mAttribute_mTargetVarType.objectCompare (p->mAttribute_mTargetVarType) ;
   }
   if (kOperandEqual == result) {
@@ -10155,34 +10331,15 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_storeVolatileIR GALGAS_storeVolatileIR::constructor_new (const GALGAS_string & inAttribute_mRegisterName,
-                                                                const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
+GALGAS_storeVolatileIR GALGAS_storeVolatileIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
                                                                 const GALGAS_bigint & inAttribute_mAddress,
                                                                 const GALGAS_operandIR & inAttribute_mSourceValue
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_storeVolatileIR result ;
-  if (inAttribute_mRegisterName.isValid () && inAttribute_mTargetVarType.isValid () && inAttribute_mAddress.isValid () && inAttribute_mSourceValue.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_storeVolatileIR (inAttribute_mRegisterName, inAttribute_mTargetVarType, inAttribute_mAddress, inAttribute_mSourceValue COMMA_THERE)) ;
+  if (inAttribute_mTargetVarType.isValid () && inAttribute_mAddress.isValid () && inAttribute_mSourceValue.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_storeVolatileIR (inAttribute_mTargetVarType, inAttribute_mAddress, inAttribute_mSourceValue COMMA_THERE)) ;
   }
   return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_storeVolatileIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_storeVolatileIR) ;
-    result = p->mAttribute_mRegisterName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_storeVolatileIR::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10243,13 +10400,11 @@ GALGAS_operandIR cPtr_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS
 //                                      Pointer class for @storeVolatileIR class                                       *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_storeVolatileIR::cPtr_storeVolatileIR (const GALGAS_string & in_mRegisterName,
-                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
+cPtr_storeVolatileIR::cPtr_storeVolatileIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
                                             const GALGAS_bigint & in_mAddress,
                                             const GALGAS_operandIR & in_mSourceValue
                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mRegisterName (in_mRegisterName),
 mAttribute_mTargetVarType (in_mTargetVarType),
 mAttribute_mAddress (in_mAddress),
 mAttribute_mSourceValue (in_mSourceValue) {
@@ -10264,8 +10419,6 @@ const C_galgas_type_descriptor * cPtr_storeVolatileIR::classDescriptor (void) co
 void cPtr_storeVolatileIR::description (C_String & ioString,
                                         const int32_t inIndentation) const {
   ioString << "[@storeVolatileIR:" ;
-  mAttribute_mRegisterName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
   mAttribute_mTargetVarType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mAddress.description (ioString, inIndentation+1) ;
@@ -10278,7 +10431,7 @@ void cPtr_storeVolatileIR::description (C_String & ioString,
 
 acPtr_class * cPtr_storeVolatileIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_storeVolatileIR (mAttribute_mRegisterName, mAttribute_mTargetVarType, mAttribute_mAddress, mAttribute_mSourceValue COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_storeVolatileIR (mAttribute_mTargetVarType, mAttribute_mAddress, mAttribute_mSourceValue COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -10321,6 +10474,208 @@ GALGAS_storeVolatileIR GALGAS_storeVolatileIR::extractObject (const GALGAS_objec
       result = *p ;
     }else{
       inCompiler->castError ("storeVolatileIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_storeVolatileIndirectIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_storeVolatileIndirectIR * p = (const cPtr_storeVolatileIndirectIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_storeVolatileIndirectIR) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_mTargetVarType.objectCompare (p->mAttribute_mTargetVarType) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mLLVMName.objectCompare (p->mAttribute_mLLVMName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_mSourceValue.objectCompare (p->mAttribute_mSourceValue) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_storeVolatileIndirectIR::objectCompare (const GALGAS_storeVolatileIndirectIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_storeVolatileIndirectIR::GALGAS_storeVolatileIndirectIR (void) :
+GALGAS_abstractInstructionIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_storeVolatileIndirectIR::GALGAS_storeVolatileIndirectIR (const cPtr_storeVolatileIndirectIR * inSourcePtr) :
+GALGAS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_storeVolatileIndirectIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_storeVolatileIndirectIR GALGAS_storeVolatileIndirectIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
+                                                                                const GALGAS_string & inAttribute_mLLVMName,
+                                                                                const GALGAS_operandIR & inAttribute_mSourceValue
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_storeVolatileIndirectIR result ;
+  if (inAttribute_mTargetVarType.isValid () && inAttribute_mLLVMName.isValid () && inAttribute_mSourceValue.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_storeVolatileIndirectIR (inAttribute_mTargetVarType, inAttribute_mLLVMName, inAttribute_mSourceValue COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeVolatileIndirectIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_storeVolatileIndirectIR * p = (const cPtr_storeVolatileIndirectIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_storeVolatileIndirectIR) ;
+    result = p->mAttribute_mTargetVarType ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cPtr_storeVolatileIndirectIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mTargetVarType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_storeVolatileIndirectIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
+  GALGAS_string result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_storeVolatileIndirectIR * p = (const cPtr_storeVolatileIndirectIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_storeVolatileIndirectIR) ;
+    result = p->mAttribute_mLLVMName ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string cPtr_storeVolatileIndirectIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mLLVMName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIR GALGAS_storeVolatileIndirectIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_operandIR result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_storeVolatileIndirectIR * p = (const cPtr_storeVolatileIndirectIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_storeVolatileIndirectIR) ;
+    result = p->mAttribute_mSourceValue ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_operandIR cPtr_storeVolatileIndirectIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSourceValue ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                  Pointer class for @storeVolatileIndirectIR class                                   *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_storeVolatileIndirectIR::cPtr_storeVolatileIndirectIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
+                                                            const GALGAS_string & in_mLLVMName,
+                                                            const GALGAS_operandIR & in_mSourceValue
+                                                            COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (THERE),
+mAttribute_mTargetVarType (in_mTargetVarType),
+mAttribute_mLLVMName (in_mLLVMName),
+mAttribute_mSourceValue (in_mSourceValue) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_storeVolatileIndirectIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_storeVolatileIndirectIR ;
+}
+
+void cPtr_storeVolatileIndirectIR::description (C_String & ioString,
+                                                const int32_t inIndentation) const {
+  ioString << "[@storeVolatileIndirectIR:" ;
+  mAttribute_mTargetVarType.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mLLVMName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mAttribute_mSourceValue.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_storeVolatileIndirectIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_storeVolatileIndirectIR (mAttribute_mTargetVarType, mAttribute_mLLVMName, mAttribute_mSourceValue COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @storeVolatileIndirectIR type                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_storeVolatileIndirectIR ("storeVolatileIndirectIR",
+                                                & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_storeVolatileIndirectIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_storeVolatileIndirectIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_storeVolatileIndirectIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_storeVolatileIndirectIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_storeVolatileIndirectIR GALGAS_storeVolatileIndirectIR::extractObject (const GALGAS_object & inObject,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_storeVolatileIndirectIR result ;
+  const GALGAS_storeVolatileIndirectIR * p = (const GALGAS_storeVolatileIndirectIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_storeVolatileIndirectIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("storeVolatileIndirectIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -14952,374 +15307,6 @@ GALGAS_truncateExpressionAST GALGAS_truncateExpressionAST::extractObject (const 
       result = *p ;
     }else{
       inCompiler->castError ("truncateExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_typedConstantCall::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_typedConstantCall * p = (const cPtr_typedConstantCall *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_typedConstantCall) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mOptionalTypeName.objectCompare (p->mAttribute_mOptionalTypeName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mConstructorName.objectCompare (p->mAttribute_mConstructorName) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_typedConstantCall::objectCompare (const GALGAS_typedConstantCall & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_typedConstantCall::GALGAS_typedConstantCall (void) :
-GALGAS_expressionAST () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_typedConstantCall GALGAS_typedConstantCall::constructor_default (LOCATION_ARGS) {
-  return GALGAS_typedConstantCall::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                    GALGAS_lstring::constructor_default (HERE)
-                                                    COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_typedConstantCall::GALGAS_typedConstantCall (const cPtr_typedConstantCall * inSourcePtr) :
-GALGAS_expressionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_typedConstantCall) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_typedConstantCall GALGAS_typedConstantCall::constructor_new (const GALGAS_lstring & inAttribute_mOptionalTypeName,
-                                                                    const GALGAS_lstring & inAttribute_mConstructorName
-                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_typedConstantCall result ;
-  if (inAttribute_mOptionalTypeName.isValid () && inAttribute_mConstructorName.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_typedConstantCall (inAttribute_mOptionalTypeName, inAttribute_mConstructorName COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_typedConstantCall::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_typedConstantCall * p = (const cPtr_typedConstantCall *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_typedConstantCall) ;
-    result = p->mAttribute_mOptionalTypeName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_typedConstantCall::getter_mOptionalTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOptionalTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_typedConstantCall::getter_mConstructorName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_typedConstantCall * p = (const cPtr_typedConstantCall *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_typedConstantCall) ;
-    result = p->mAttribute_mConstructorName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_typedConstantCall::getter_mConstructorName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mConstructorName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                     Pointer class for @typedConstantCall class                                      *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_typedConstantCall::cPtr_typedConstantCall (const GALGAS_lstring & in_mOptionalTypeName,
-                                                const GALGAS_lstring & in_mConstructorName
-                                                COMMA_LOCATION_ARGS) :
-cPtr_expressionAST (THERE),
-mAttribute_mOptionalTypeName (in_mOptionalTypeName),
-mAttribute_mConstructorName (in_mConstructorName) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_typedConstantCall::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_typedConstantCall ;
-}
-
-void cPtr_typedConstantCall::description (C_String & ioString,
-                                          const int32_t inIndentation) const {
-  ioString << "[@typedConstantCall:" ;
-  mAttribute_mOptionalTypeName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mConstructorName.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_typedConstantCall::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_typedConstantCall (mAttribute_mOptionalTypeName, mAttribute_mConstructorName COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               @typedConstantCall type                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_typedConstantCall ("typedConstantCall",
-                                          & kTypeDescriptor_GALGAS_expressionAST) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_typedConstantCall::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_typedConstantCall ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_typedConstantCall::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_typedConstantCall (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_typedConstantCall GALGAS_typedConstantCall::extractObject (const GALGAS_object & inObject,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_typedConstantCall result ;
-  const GALGAS_typedConstantCall * p = (const GALGAS_typedConstantCall *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_typedConstantCall *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("typedConstantCall", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_varInExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_varInExpressionAST * p = (const cPtr_varInExpressionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_varInExpressionAST) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mSourceVarName.objectCompare (p->mAttribute_mSourceVarName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mAccessList.objectCompare (p->mAttribute_mAccessList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_varInExpressionAST::objectCompare (const GALGAS_varInExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInExpressionAST::GALGAS_varInExpressionAST (void) :
-GALGAS_expressionAST () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInExpressionAST GALGAS_varInExpressionAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_varInExpressionAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                     GALGAS_varInExpressionElementAccessList::constructor_emptyList (HERE)
-                                                     COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInExpressionAST::GALGAS_varInExpressionAST (const cPtr_varInExpressionAST * inSourcePtr) :
-GALGAS_expressionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_varInExpressionAST) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInExpressionAST GALGAS_varInExpressionAST::constructor_new (const GALGAS_lstring & inAttribute_mSourceVarName,
-                                                                      const GALGAS_varInExpressionElementAccessList & inAttribute_mAccessList
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_varInExpressionAST result ;
-  if (inAttribute_mSourceVarName.isValid () && inAttribute_mAccessList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_varInExpressionAST (inAttribute_mSourceVarName, inAttribute_mAccessList COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_varInExpressionAST::getter_mSourceVarName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_varInExpressionAST * p = (const cPtr_varInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_varInExpressionAST) ;
-    result = p->mAttribute_mSourceVarName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_varInExpressionAST::getter_mSourceVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceVarName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInExpressionElementAccessList GALGAS_varInExpressionAST::getter_mAccessList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_varInExpressionElementAccessList result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_varInExpressionAST * p = (const cPtr_varInExpressionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_varInExpressionAST) ;
-    result = p->mAttribute_mAccessList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInExpressionElementAccessList cPtr_varInExpressionAST::getter_mAccessList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAccessList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                     Pointer class for @varInExpressionAST class                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_varInExpressionAST::cPtr_varInExpressionAST (const GALGAS_lstring & in_mSourceVarName,
-                                                  const GALGAS_varInExpressionElementAccessList & in_mAccessList
-                                                  COMMA_LOCATION_ARGS) :
-cPtr_expressionAST (THERE),
-mAttribute_mSourceVarName (in_mSourceVarName),
-mAttribute_mAccessList (in_mAccessList) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_varInExpressionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_varInExpressionAST ;
-}
-
-void cPtr_varInExpressionAST::description (C_String & ioString,
-                                           const int32_t inIndentation) const {
-  ioString << "[@varInExpressionAST:" ;
-  mAttribute_mSourceVarName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mAccessList.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_varInExpressionAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_varInExpressionAST (mAttribute_mSourceVarName, mAttribute_mAccessList COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @varInExpressionAST type                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_varInExpressionAST ("varInExpressionAST",
-                                           & kTypeDescriptor_GALGAS_expressionAST) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_varInExpressionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_varInExpressionAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_varInExpressionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_varInExpressionAST (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_varInExpressionAST GALGAS_varInExpressionAST::extractObject (const GALGAS_object & inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_varInExpressionAST result ;
-  const GALGAS_varInExpressionAST * p = (const GALGAS_varInExpressionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_varInExpressionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("varInExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

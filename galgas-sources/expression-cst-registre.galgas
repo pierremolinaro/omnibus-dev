@@ -57,7 +57,6 @@ override method @registerConstantExpressionAST addDependenceEdgeForStaticExpress
   ?let @lstring unused inConstantName
   ?!@semanticTypePrecedenceGraph unused ioGraph
 {
-#  [!?ioGraph addEdge !inConstantName !mRegisterName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
