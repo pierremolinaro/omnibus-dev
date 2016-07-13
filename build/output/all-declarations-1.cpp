@@ -5852,7 +5852,7 @@ cMapElement_controlRegisterMap::cMapElement_controlRegisterMap (const GALGAS_lst
                                                                 const GALGAS_bigint & in_mAddress,
                                                                 const GALGAS_controlRegisterFieldList & in_mControlRegisterFieldList,
                                                                 const GALGAS_uint & in_mRegisterBitCount,
-                                                                const GALGAS_uint & in_mPowerOfTwoForArraySize,
+                                                                const GALGAS_uint & in_mArraySize,
                                                                 const GALGAS_uint & in_mElementArraySize
                                                                 COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
@@ -5864,21 +5864,21 @@ mAttribute_mRegisterFieldMap (in_mRegisterFieldMap),
 mAttribute_mAddress (in_mAddress),
 mAttribute_mControlRegisterFieldList (in_mControlRegisterFieldList),
 mAttribute_mRegisterBitCount (in_mRegisterBitCount),
-mAttribute_mPowerOfTwoForArraySize (in_mPowerOfTwoForArraySize),
+mAttribute_mArraySize (in_mArraySize),
 mAttribute_mElementArraySize (in_mElementArraySize) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_controlRegisterMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mIsReadOnly.isValid () && mAttribute_mIsAccessibleInUserMode.isValid () && mAttribute_mRegisterFieldAccessMap.isValid () && mAttribute_mRegisterFieldMap.isValid () && mAttribute_mAddress.isValid () && mAttribute_mControlRegisterFieldList.isValid () && mAttribute_mRegisterBitCount.isValid () && mAttribute_mPowerOfTwoForArraySize.isValid () && mAttribute_mElementArraySize.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mIsReadOnly.isValid () && mAttribute_mIsAccessibleInUserMode.isValid () && mAttribute_mRegisterFieldAccessMap.isValid () && mAttribute_mRegisterFieldMap.isValid () && mAttribute_mAddress.isValid () && mAttribute_mControlRegisterFieldList.isValid () && mAttribute_mRegisterBitCount.isValid () && mAttribute_mArraySize.isValid () && mAttribute_mElementArraySize.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_controlRegisterMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_controlRegisterMap (mAttribute_lkey, mAttribute_mType, mAttribute_mIsReadOnly, mAttribute_mIsAccessibleInUserMode, mAttribute_mRegisterFieldAccessMap, mAttribute_mRegisterFieldMap, mAttribute_mAddress, mAttribute_mControlRegisterFieldList, mAttribute_mRegisterBitCount, mAttribute_mPowerOfTwoForArraySize, mAttribute_mElementArraySize COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_controlRegisterMap (mAttribute_lkey, mAttribute_mType, mAttribute_mIsReadOnly, mAttribute_mIsAccessibleInUserMode, mAttribute_mRegisterFieldAccessMap, mAttribute_mRegisterFieldMap, mAttribute_mAddress, mAttribute_mControlRegisterFieldList, mAttribute_mRegisterBitCount, mAttribute_mArraySize, mAttribute_mElementArraySize COMMA_HERE)) ;
   return result ;
 }
 
@@ -5919,8 +5919,8 @@ void cMapElement_controlRegisterMap::description (C_String & ioString, const int
   mAttribute_mRegisterBitCount.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mPowerOfTwoForArraySize" ":" ;
-  mAttribute_mPowerOfTwoForArraySize.description (ioString, inIndentation) ;
+  ioString << "mArraySize" ":" ;
+  mAttribute_mArraySize.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mElementArraySize" ":" ;
@@ -5957,7 +5957,7 @@ typeComparisonResult cMapElement_controlRegisterMap::compare (const cCollectionE
     result = mAttribute_mRegisterBitCount.objectCompare (operand->mAttribute_mRegisterBitCount) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mPowerOfTwoForArraySize.objectCompare (operand->mAttribute_mPowerOfTwoForArraySize) ;
+    result = mAttribute_mArraySize.objectCompare (operand->mAttribute_mArraySize) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mElementArraySize.objectCompare (operand->mAttribute_mElementArraySize) ;
@@ -6104,7 +6104,7 @@ void GALGAS_controlRegisterMap::method_searchKey (GALGAS_lstring inKey,
     outArgument5 = p->mAttribute_mAddress ;
     outArgument6 = p->mAttribute_mControlRegisterFieldList ;
     outArgument7 = p->mAttribute_mRegisterBitCount ;
-    outArgument8 = p->mAttribute_mPowerOfTwoForArraySize ;
+    outArgument8 = p->mAttribute_mArraySize ;
     outArgument9 = p->mAttribute_mElementArraySize ;
   }
 }
@@ -6231,15 +6231,15 @@ GALGAS_uint GALGAS_controlRegisterMap::getter_mRegisterBitCountForKey (const GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_controlRegisterMap::getter_mPowerOfTwoForArraySizeForKey (const GALGAS_string & inKey,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const {
+GALGAS_uint GALGAS_controlRegisterMap::getter_mArraySizeForKey (const GALGAS_string & inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_uint result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
-    result = p->mAttribute_mPowerOfTwoForArraySize ;
+    result = p->mAttribute_mArraySize ;
   }
   return result ;
 }
@@ -6373,15 +6373,15 @@ void GALGAS_controlRegisterMap::setter_setMRegisterBitCountForKey (GALGAS_uint i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_controlRegisterMap::setter_setMPowerOfTwoForArraySizeForKey (GALGAS_uint inAttributeValue,
-                                                                         GALGAS_string inKey,
-                                                                         C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_controlRegisterMap::setter_setMArraySizeForKey (GALGAS_uint inAttributeValue,
+                                                            GALGAS_string inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
-    p->mAttribute_mPowerOfTwoForArraySize = inAttributeValue ;
+    p->mAttribute_mArraySize = inAttributeValue ;
   }
 }
 
@@ -6422,7 +6422,7 @@ cGenericAbstractEnumerator () {
 GALGAS_controlRegisterMap_2D_element cEnumerator_controlRegisterMap::current (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
-  return GALGAS_controlRegisterMap_2D_element (p->mAttribute_lkey, p->mAttribute_mType, p->mAttribute_mIsReadOnly, p->mAttribute_mIsAccessibleInUserMode, p->mAttribute_mRegisterFieldAccessMap, p->mAttribute_mRegisterFieldMap, p->mAttribute_mAddress, p->mAttribute_mControlRegisterFieldList, p->mAttribute_mRegisterBitCount, p->mAttribute_mPowerOfTwoForArraySize, p->mAttribute_mElementArraySize) ;
+  return GALGAS_controlRegisterMap_2D_element (p->mAttribute_lkey, p->mAttribute_mType, p->mAttribute_mIsReadOnly, p->mAttribute_mIsAccessibleInUserMode, p->mAttribute_mRegisterFieldAccessMap, p->mAttribute_mRegisterFieldMap, p->mAttribute_mAddress, p->mAttribute_mControlRegisterFieldList, p->mAttribute_mRegisterBitCount, p->mAttribute_mArraySize, p->mAttribute_mElementArraySize) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6499,10 +6499,10 @@ GALGAS_uint cEnumerator_controlRegisterMap::current_mRegisterBitCount (LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cEnumerator_controlRegisterMap::current_mPowerOfTwoForArraySize (LOCATION_ARGS) const {
+GALGAS_uint cEnumerator_controlRegisterMap::current_mArraySize (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
-  return p->mAttribute_mPowerOfTwoForArraySize ;
+  return p->mAttribute_mArraySize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

@@ -174,7 +174,7 @@ map @controlRegisterMap {
   @bigint mAddress
   @controlRegisterFieldList mControlRegisterFieldList # Used for HTML file
   @uint mRegisterBitCount
-  @uint mPowerOfTwoForArraySize # 0 if not an array
+  @uint mArraySize # 0 if not an array
   @uint mElementArraySize # 0 if not an array
   insert insertKey error message "the '%K' register has been already declared in %L"
   search searchKey error message "** internal error **"
@@ -355,11 +355,11 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
         error register.mRegisterAddressLocation : "register address should be lower or equal to " + [maxRegisterAddress hexString]
       end
     end
-    @uint powerOfTwoForArraySize
+    @bigint arraySize
     @uint elementArraySize
     switch register.mControlRegisterKind
     case scalar :
-      powerOfTwoForArraySize = 0
+      arraySize = 0G
       elementArraySize = 0
     case registerArray (@expressionAST arraySizeExpression @location arraySizeLocation
                         @expressionAST arrayElementSizeExpression @location arrayElementSizeLocation) :
@@ -371,19 +371,19 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
         ?result:let @operandIR sizeExpressionResult
       ]
       if not [sizeExpressionResult.mValue isLiteralInteger] then
-        error arraySizeLocation : "control register address is not a static integer expression" : powerOfTwoForArraySize
+        error arraySizeLocation : "control register address is not a static integer expression" : arraySize
       else
-        [sizeExpressionResult.mValue literalInteger ?value:let arraySize]
+        [sizeExpressionResult.mValue literalInteger ?value:arraySize]
         if arraySize < 2G then
           error arraySizeLocation
             : "control register array size should be a static integer expression >= 2, equal to a power of 2"
-            : powerOfTwoForArraySize
+            : arraySize
         else
-          powerOfTwoForArraySize = [arraySize - 1G bitCountForUnsignedRepresentation]
+          let powerOfTwoForArraySize = [arraySize - 1G bitCountForUnsignedRepresentation]
           if arraySize != (1G << powerOfTwoForArraySize) then
             error arraySizeLocation
               : "control register array size should be a static integer expression >= 2, equal to a power of 2"
-              : powerOfTwoForArraySize
+              : arraySize
           end
         end
       end
@@ -413,7 +413,7 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
       !registerAddress
       !controlRegisterFieldList
       !registerBitCount
-      !powerOfTwoForArraySize
+      ![arraySize uint]
       !elementArraySize
     ]
   end
@@ -441,10 +441,10 @@ proc buildControlRegisterMapHTMLFile
         currentFirstLetter = [type_lkey.string characterAtIndex !0]
         tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
       end
-      if type_mPowerOfTwoForArraySize == 0 then
+      if type_mArraySize == 0 then
         tableOfTypeString += linkForControlRegister (!type_lkey.string) + "<br>"
       else
-        for i in 0 ..< (1 << type_mPowerOfTwoForArraySize) do
+        for i in 0 ..< type_mArraySize do
           tableOfTypeString += linkForControlRegister (!type_lkey.string + " [" + i + "]") + "<br/>"
         end
       end
@@ -492,7 +492,7 @@ func fieldIndexColumns ?let @uint inBitCount -> @string outResult {
 
 func arrayIndexListFor ?size:@uint inSize -> @uintlist outResult {
   outResult = {}
-  for i in 0 ..< (1 << inSize) do
+  for i in 0 ..< inSize do
     outResult += !i
   end
 }

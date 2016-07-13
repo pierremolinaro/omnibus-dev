@@ -119,7 +119,7 @@ override method @varInExpressionAST analyzeExpression
   end
   if inGuard then
     switch variableKind
-    case register (****) : error mSourceVarName : "a control register cannot be read in guard boolean expression"
+    case register (******) : error mSourceVarName : "a control register cannot be read in guard boolean expression"
     case globalVariable (***) : error mSourceVarName : "a global variable cannot be read in guard boolean expression"
     case localValue (**) :
     case staticConstant (**) :
@@ -142,6 +142,7 @@ override method @varInExpressionAST analyzeExpression
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
       !variableKind:variableKind
+      !error:mSourceVarName.location
       !?type
       ?result: outResult
     ]
@@ -170,34 +171,110 @@ override method @varInExpressionAST analyzeExpression
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @varInExpressionAST analyzeExpression_register
-  ?self:let @unifiedTypeMap-proxy unused inSelfType
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
-  ?inGuard:let @bool unused inGuard
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?modes:let @stringset unused inModeSet
-  ?allowPanic:let @bool unused inAllowPanic
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableKind:let @objectInMemoryIR inVariableKind
+  ?error:let @location inErrorLocation
   ?!@unifiedTypeMap-proxy ioType
   !result:@operandIR outResult
 {
-#--- Load variable
-  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !inVariableKind ?outResult]
 #--- Solve inferred type
   var expressionType = solveInferredType (
     !targetType:inOptionalTargetType
     !sourceType:ioType
     !errorLocation:mSourceVarName.location
   )
-#--- Field ?
-  [inVariableKind register ?type:* ?name:* ?address:* ?sliceMap:@controlRegisterBitSliceAccessMap registerBitSliceMap]
-  for (access) in mAccessList do
+#--- Control register features
+  [inVariableKind register
+    ?type:let registerType
+    ?name:let registerName
+    ?address:let @bigint registerAddress
+    ?sliceMap:@controlRegisterBitSliceAccessMap registerBitSliceMap
+    ?arraySize:let @uint arraySize # 0 if not an array
+    ?elementSize:let @uint elementArraySize # 0 if not an array
+  ]
+#--- First element in access list is a subscript ?
+  var accessList = mAccessList
+  if ([accessList length] > 0) && [[accessList mAccessAtIndex!0] isArrayAccess] then
+    [!?accessList popFirst ?let firstAccess]
+    [firstAccess arrayAccess ?indexExpression:let indexExpression ?endOfExp:let endOfExp]
+    if arraySize == 0 then
+      error endOfExp : "control register is not an array and is not subscriptable" : outResult
+    else
+      [indexExpression analyzeExpression
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:inGuard
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:.null
+        !context:inContext
+        !modes:inModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+        ?result:let @operandIR indexResult
+      ]
+      if [indexResult.mValue isLiteralInteger] then # Static expression
+        [indexResult.mValue literalInteger ?value:let @bigint indexValue]
+        if (indexValue < 0G) || (indexValue >= arraySize) then
+          error endOfExp : "static index should be positive and < " + arraySize : outResult
+        else
+          let address = registerAddress + indexValue * elementArraySize
+          [!?ioInstructionGenerationList appendLoadFromMemory
+            !?ioTemporaries
+            !.register {
+              !type:registerType
+              !name:registerName
+              !address:address
+              !sliceMap:registerBitSliceMap
+              !arraySize:0
+              !elementSize:0
+            }
+            ?outResult
+          ]
+        end
+      elsif [[indexResult.mType kind] isInteger] then
+        if not [option plm_options.noPanicGeneration value] then
+          [!?ioInstructionGenerationList testArrayIndex !indexResult !endOfExp !arraySize ?let generatePanicInstruction]
+          if generatePanicInstruction && not inAllowPanic then
+            error endOfExp : "index computation can generated panic"
+          end
+        end
+        getNewTempVariable (!registerType !?ioTemporaries ?outResult)
+        [!?ioInstructionGenerationList appendLoadVolatileRegisterWithSubscript
+          !outResult
+          !registerName
+          !indexResult
+          !registerAddress
+          !elementArraySize
+        ]
+      else
+        error endOfExp : "index expression is not an integer" : outResult
+      end
+    end
+  else # First element is not a subscript
+    if arraySize > 0 then
+      error inErrorLocation : "control register is an array and requires subscript" : outResult
+    else
+      [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !inVariableKind ?outResult]
+    end
+  end
+#--- Analyze field accesses (subscripting is not allowed)
+  for (access) in accessList do
     switch access
     case fieldAccess (@lstring fieldName) :
       [registerBitSliceMap searchKey
@@ -219,7 +296,8 @@ method @varInExpressionAST analyzeExpression_register
       ]
       outResult = newResultingVariable 
       registerBitSliceMap = submap
-    case arrayAccess (@expressionAST unused indexExpression *) :
+    case arrayAccess (* @location endOfExp) :
+      error endOfExp : "control register is not subscriptable"
     end
   end
 }

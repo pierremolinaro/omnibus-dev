@@ -1,0 +1,46 @@
+target "LPC-L2294"
+
+//------------------------------------------------*
+
+register PIPO[8] at 0x4000_0000 : 0x40 $uint32 {
+  10, fields [4], 10, bit, 7
+}
+
+//------------------------------------------------*
+
+section ledOn () {
+  IO1CLR  = 1 << 23 // Led On
+}
+
+//------------------------------------------------*
+
+section ledOff () {
+  globalVar = PIPO [0]
+  globalVar = PIPO [7]
+  var idx $uint3 = 5
+  globalVar = PIPO [idx].fields
+  var index $uint32 = 5
+  globalBit = PIPO [index].bit.bool
+  IO1SET  = 1 << 23 // Led Off
+}
+
+//------------------------------------------------*
+
+var globalVar $uint32 = 0
+var globalBit $bool = false
+
+//------------------------------------------------*
+
+task T1 priority 1 stackSize 512 {
+  var compteur $uint32 = 0
+ 
+  while time.waitUntilMS (!deadline:self.compteur) {
+    ledOn ()
+    self.compteur +%= 500
+    time.waitUntilMS (!deadline:self.compteur)
+    ledOff ()
+    self.compteur +%= 500
+  }
+}
+
+//------------------------------------------------*

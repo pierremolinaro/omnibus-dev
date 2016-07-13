@@ -552,6 +552,21 @@ void extensionSetter_appendShortCircuitAndOperation (class GALGAS_instructionLis
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                    Extension setter '@instructionListIR appendLoadVolatileRegisterWithSubscript'                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendLoadVolatileRegisterWithSubscript (class GALGAS_instructionListIR & ioObject,
+                                                              const class GALGAS_operandIR constin_inTargetValue,
+                                                              const class GALGAS_string constin_inRegisterName,
+                                                              const class GALGAS_operandIR constin_inIndexResult,
+                                                              const class GALGAS_bigint constin_inAddress,
+                                                              const class GALGAS_bigint constin_inElementArraySize,
+                                                              class C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Extension setter '@instructionListIR appendLoadVolatileRegister'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
