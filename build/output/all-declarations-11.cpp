@@ -10,6 +10,86 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//        Overriding extension method '@selfVarAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph'         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_selfVarAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (const cPtr_instructionAST * inObject,
+                                                                                                   GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                                   C_Compiler * inCompiler
+                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_selfVarAssignmentInstructionAST * object = (const cPtr_selfVarAssignmentInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_selfVarAssignmentInstructionAST) ;
+  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 39)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_selfVarAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
+  enterExtensionMethod_noteInstructionTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_selfVarAssignmentInstructionAST.mSlotID,
+                                                              extensionMethod_selfVarAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_selfVarAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (defineExtensionMethod_selfVarAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Overriding extension method '@selfVarAssignmentInstructionAST analyze'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_selfVarAssignmentInstructionAST_analyze (const cPtr_instructionAST * inObject,
+                                                                     const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                                     const GALGAS_bool constinArgument_inRoutineCanMutateProperties,
+                                                                     const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
+                                                                     const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                                     const GALGAS_semanticContext constinArgument_inContext,
+                                                                     const GALGAS_stringset constinArgument_inModeSet,
+                                                                     const GALGAS_bool constinArgument_inAllowPanic,
+                                                                     GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                     GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                     GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                     GALGAS_allocaList & ioArgument_ioAllocaList,
+                                                                     GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_selfVarAssignmentInstructionAST * object = (const cPtr_selfVarAssignmentInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_selfVarAssignmentInstructionAST) ;
+  const enumGalgasBool test_0 = constinArgument_inDirectAccessToPropertiesAllowed.operator_not (SOURCE_FILE ("instruction-self-assignment.galgas", 60)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    inCompiler->emitSemanticError (object->mAttribute_mSelfLocation, GALGAS_string ("the current function should be declared @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 61)), inCompiler COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 61))  COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 61)) ;
+  }
+  const enumGalgasBool test_1 = constinArgument_inRoutineCanMutateProperties.operator_not (SOURCE_FILE ("instruction-self-assignment.galgas", 63)).boolEnum () ;
+  if (kBoolTrue == test_1) {
+    inCompiler->emitSemanticError (object->mAttribute_mSelfLocation, GALGAS_string ("the current function should be declared @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 64)), inCompiler COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 64))  COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 64)) ;
+  }
+  GALGAS_objectInMemoryIR var_resultPtr_4002 ;
+  {
+  routine_analyzeSelfAccess (object->mAttribute_mFieldList, constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-self-assignment.galgas", 72)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_resultPtr_4002, inCompiler  COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 66)) ;
+  }
+  GALGAS_operandIR var_sourceOperand_4560 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, extensionGetter_type (var_resultPtr_4002, inCompiler COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 88)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperand_4560, inCompiler COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 83)) ;
+  GALGAS_operandIR var_result_4577 = function_checkAssignmentCompatibility (var_sourceOperand_4560, extensionGetter_type (var_resultPtr_4002, inCompiler COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 101)), object->mAttribute_mSelfLocation, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 99)) ;
+  {
+  extensionSetter_appendStoreInMemory (ioArgument_ioInstructionGenerationList, var_resultPtr_4002, var_result_4577, inCompiler COMMA_SOURCE_FILE ("instruction-self-assignment.galgas", 105)) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_selfVarAssignmentInstructionAST_analyze (void) {
+  enterExtensionMethod_analyze (kTypeDescriptor_GALGAS_selfVarAssignmentInstructionAST.mSlotID,
+                                extensionMethod_selfVarAssignmentInstructionAST_analyze) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_selfVarAssignmentInstructionAST_analyze (defineExtensionMethod_selfVarAssignmentInstructionAST_analyze, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //              Overriding extension method '@assertInstructionAST noteInstructionTypesInPrecedenceGraph'              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1467,15 +1547,14 @@ static void extensionMethod_remoteRoutineCallInstructionAST_analyze (const cPtr_
   }
   const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_arrayElementAccess_9891.objectCompare (GALGAS_arrayElementAccess::constructor_noAccess (SOURCE_FILE ("instruction-proc-call.galgas", 235)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_location location_1 (var_routineName_9867.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_1, GALGAS_string ("array element access is not alowed here")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 236)) ;
+    inCompiler->emitSemanticError (var_routineName_9867.getter_location (SOURCE_FILE ("instruction-proc-call.galgas", 236)), GALGAS_string ("array element access is not alowed here")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 236)) ;
   }
-  const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, var_accessList_9812.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 238)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
-  if (kBoolTrue == test_2) {
+  const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_accessList_9812.getter_length (SOURCE_FILE ("instruction-proc-call.galgas", 238)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+  if (kBoolTrue == test_1) {
     {
     routine_analyzeStandaloneRoutineCall (var_routineName_9867, object->mAttribute_mEffectiveParameterList, constinArgument_inSelfType, constinArgument_inRoutineCanMutateProperties, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 239)) ;
     }
-  }else if (kBoolFalse == test_2) {
+  }else if (kBoolFalse == test_1) {
     GALGAS_objectInMemoryIR var_targetObjectPtr_11263 ;
     {
     routine_analyzeVariableAccess (var_accessList_9812, constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_targetObjectPtr_11263, inCompiler  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 257)) ;
@@ -1507,14 +1586,13 @@ static void extensionMethod_remoteRoutineCallInstructionAST_analyze (const cPtr_
     GALGAS_bool var_canAccessPropertiesInUserMode_12454 ;
     GALGAS_bool joker_12290 ; // Joker input parameter
     constinArgument_inContext.mAttribute_mRoutineMapForContext.method_searchKey (var_routineMangledName_11450, var_routineNameForGeneration_12160, var_isPublic_12180, var_modeMap_12199, var_formalSignature_12246, var_routineKind_12282, joker_12290, var_returnedType_12315, var_appendFileAndLineArgumentForPanicLocation_12368, var_canMutateProperties_12406, var_canAccessPropertiesInUserMode_12454, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 288)) ;
-    const enumGalgasBool test_3 = var_isPublic_12180.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 302)).boolEnum () ;
-    if (kBoolTrue == test_3) {
-      GALGAS_location location_4 (var_routineMangledName_11450.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_4, GALGAS_string ("this routine is not public")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 303)) ;
+    const enumGalgasBool test_2 = var_isPublic_12180.operator_not (SOURCE_FILE ("instruction-proc-call.galgas", 302)).boolEnum () ;
+    if (kBoolTrue == test_2) {
+      inCompiler->emitSemanticError (var_routineMangledName_11450.getter_location (SOURCE_FILE ("instruction-proc-call.galgas", 303)), GALGAS_string ("this routine is not public")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 303)) ;
     }
     GALGAS_objectInMemoryIR var_variableKind_12617 ;
-    const enumGalgasBool test_5 = var_canMutateProperties_12406.boolEnum () ;
-    if (kBoolTrue == test_5) {
+    const enumGalgasBool test_3 = var_canMutateProperties_12406.boolEnum () ;
+    if (kBoolTrue == test_3) {
       {
       GALGAS_unifiedTypeMap_2D_proxy joker_12725_1 ; // Joker input parameter
       GALGAS_bool joker_12755 ; // Joker input parameter
@@ -1522,7 +1600,7 @@ static void extensionMethod_remoteRoutineCallInstructionAST_analyze (const cPtr_
       GALGAS_bool joker_12821_1 ; // Joker input parameter
       ioArgument_ioVariableMap.setter_searchForMethodCall (var_baseName_11345, joker_12725_1, joker_12755, var_variableKind_12617, joker_12810, joker_12821_1, inCompiler COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 307)) ;
       }
-    }else if (kBoolFalse == test_5) {
+    }else if (kBoolFalse == test_3) {
       {
       GALGAS_unifiedTypeMap_2D_proxy joker_12924_1 ; // Joker input parameter
       GALGAS_bool joker_12954 ; // Joker input parameter
@@ -1538,19 +1616,18 @@ static void extensionMethod_remoteRoutineCallInstructionAST_analyze (const cPtr_
     {
     routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inRoutineCanMutateProperties, var_formalSignature_12246, object->mAttribute_mEffectiveParameterList, var_routineName_9867.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_11930, inCompiler  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 346)) ;
     }
-    const enumGalgasBool test_6 = GALGAS_bool (kIsNotEqual, var_returnedType_12315.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-proc-call.galgas", 364)))).boolEnum () ;
+    const enumGalgasBool test_4 = GALGAS_bool (kIsNotEqual, var_returnedType_12315.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-proc-call.galgas", 364)))).boolEnum () ;
+    if (kBoolTrue == test_4) {
+      inCompiler->emitSemanticError (var_routineName_9867.getter_location (SOURCE_FILE ("instruction-proc-call.galgas", 365)), GALGAS_string ("cannot be called in instruction: return value")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 365)) ;
+    }
+    GALGAS_string temp_5 ;
+    const enumGalgasBool test_6 = var_variableKind_12617.getter_isGlobalVariable (SOURCE_FILE ("instruction-proc-call.galgas", 368)).boolEnum () ;
     if (kBoolTrue == test_6) {
-      GALGAS_location location_7 (var_routineName_9867.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_7, GALGAS_string ("cannot be called in instruction: return value")  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 365)) ;
+      temp_5 = var_baseName_11345.mAttribute_string ;
+    }else if (kBoolFalse == test_6) {
+      temp_5 = GALGAS_string::makeEmptyString () ;
     }
-    GALGAS_string temp_8 ;
-    const enumGalgasBool test_9 = var_variableKind_12617.getter_isGlobalVariable (SOURCE_FILE ("instruction-proc-call.galgas", 368)).boolEnum () ;
-    if (kBoolTrue == test_9) {
-      temp_8 = var_baseName_11345.mAttribute_string ;
-    }else if (kBoolFalse == test_9) {
-      temp_8 = GALGAS_string::makeEmptyString () ;
-    }
-    GALGAS_string var_baseGlobalVariableName_14846 = temp_8 ;
+    GALGAS_string var_baseGlobalVariableName_14846 = temp_5 ;
     ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_procCallInstructionIR::constructor_new (var_baseGlobalVariableName_14846, var_routineMangledName_11450, var_routineNameForGeneration_12160, var_routineKindIR_13778, var_effectiveParameterListIR_11930, var_appendFileAndLineArgumentForPanicLocation_12368  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 369))  COMMA_SOURCE_FILE ("instruction-proc-call.galgas", 369)) ;
   }
 }
@@ -1746,8 +1823,7 @@ static void extensionMethod_unifiedSelfCallInstructionAST_analyze (const cPtr_in
   }
   const enumGalgasBool test_0 = var_arrayAccess_2713.getter_isAccess (SOURCE_FILE ("instruction-self-call.galgas", 53)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_location location_1 (var_methodName_2696.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_1, GALGAS_string ("array access not allowed here")  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 54)) ;
+    inCompiler->emitSemanticError (var_methodName_2696.getter_location (SOURCE_FILE ("instruction-self-call.galgas", 54)), GALGAS_string ("array access not allowed here")  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 54)) ;
   }
   GALGAS_objectInMemoryIR var_propertyAddressLLVMvar_3416 ;
   {
@@ -1777,32 +1853,29 @@ static void extensionMethod_unifiedSelfCallInstructionAST_analyze (const cPtr_in
   GALGAS_bool var_canAccessPropertiesInUserMode_4459 ;
   GALGAS_bool joker_4317 ; // Joker input parameter
   constinArgument_inContext.mAttribute_mRoutineMapForContext.method_searchKey (var_routineMangledName_3528, var_routineNameForGeneration_4197, var_isPublic_4215, var_modeMap_4232, var_formalSignature_4277, var_routineKind_4311, joker_4317, var_returnedType_4340, var_appendFileAndLineArgumentForPanicLocation_4391, var_canMutateProperties_4420, var_canAccessPropertiesInUserMode_4459, inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 87)) ;
-  GALGAS_bool test_2 = var_canAccessPropertiesInUserMode_4459 ;
-  if (kBoolTrue == test_2.boolEnum ()) {
-    test_2 = constinArgument_inDirectAccessToPropertiesAllowed.operator_not (SOURCE_FILE ("instruction-self-call.galgas", 100)) ;
+  GALGAS_bool test_1 = var_canAccessPropertiesInUserMode_4459 ;
+  if (kBoolTrue == test_1.boolEnum ()) {
+    test_1 = constinArgument_inDirectAccessToPropertiesAllowed.operator_not (SOURCE_FILE ("instruction-self-call.galgas", 100)) ;
   }
-  const enumGalgasBool test_3 = test_2.boolEnum () ;
-  if (kBoolTrue == test_3) {
-    GALGAS_location location_4 (var_methodName_2696.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_4, GALGAS_string ("the callee access properties, but current routine is not declared with @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 101)), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 101)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 101))  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 101)) ;
+  const enumGalgasBool test_2 = test_1.boolEnum () ;
+  if (kBoolTrue == test_2) {
+    inCompiler->emitSemanticError (var_methodName_2696.getter_location (SOURCE_FILE ("instruction-self-call.galgas", 101)), GALGAS_string ("the callee access properties, but current routine is not declared with @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 101)), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 101)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 101))  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 101)) ;
   }
-  GALGAS_bool test_5 = var_canMutateProperties_4420 ;
+  GALGAS_bool test_3 = var_canMutateProperties_4420 ;
+  if (kBoolTrue == test_3.boolEnum ()) {
+    test_3 = constinArgument_inRoutineCanMutateProperties.operator_not (SOURCE_FILE ("instruction-self-call.galgas", 103)) ;
+  }
+  const enumGalgasBool test_4 = test_3.boolEnum () ;
+  if (kBoolTrue == test_4) {
+    inCompiler->emitSemanticError (var_methodName_2696.getter_location (SOURCE_FILE ("instruction-self-call.galgas", 104)), GALGAS_string ("the callee mutates properties, but current routine is not declared with @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 104)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 104))  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 104)) ;
+  }
+  GALGAS_bool test_5 = GALGAS_bool (kIsStrictSup, var_fieldList_2644.getter_length (SOURCE_FILE ("instruction-self-call.galgas", 106)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue == test_5.boolEnum ()) {
-    test_5 = constinArgument_inRoutineCanMutateProperties.operator_not (SOURCE_FILE ("instruction-self-call.galgas", 103)) ;
+    test_5 = var_isPublic_4215.operator_not (SOURCE_FILE ("instruction-self-call.galgas", 106)) ;
   }
   const enumGalgasBool test_6 = test_5.boolEnum () ;
   if (kBoolTrue == test_6) {
-    GALGAS_location location_7 (var_methodName_2696.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_7, GALGAS_string ("the callee mutates properties, but current routine is not declared with @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 104)), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 104)).add_operation (GALGAS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("instruction-self-call.galgas", 104))  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 104)) ;
-  }
-  GALGAS_bool test_8 = GALGAS_bool (kIsStrictSup, var_fieldList_2644.getter_length (SOURCE_FILE ("instruction-self-call.galgas", 106)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
-  if (kBoolTrue == test_8.boolEnum ()) {
-    test_8 = var_isPublic_4215.operator_not (SOURCE_FILE ("instruction-self-call.galgas", 106)) ;
-  }
-  const enumGalgasBool test_9 = test_8.boolEnum () ;
-  if (kBoolTrue == test_9) {
-    GALGAS_location location_10 (var_routineMangledName_3528.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_10, GALGAS_string ("this routine is not public")  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 107)) ;
+    inCompiler->emitSemanticError (var_routineMangledName_3528.getter_location (SOURCE_FILE ("instruction-self-call.galgas", 107)), GALGAS_string ("this routine is not public")  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 107)) ;
   }
   {
   ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, var_routineMangledName_3528 COMMA_SOURCE_FILE ("instruction-self-call.galgas", 110)) ;
@@ -1811,10 +1884,9 @@ static void extensionMethod_unifiedSelfCallInstructionAST_analyze (const cPtr_in
   {
   routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inRoutineCanMutateProperties, var_formalSignature_4277, object->mAttribute_mEffectiveParameterList, var_methodName_2696.mAttribute_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_3968, inCompiler  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 119)) ;
   }
-  const enumGalgasBool test_11 = GALGAS_bool (kIsNotEqual, var_returnedType_4340.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-self-call.galgas", 137)))).boolEnum () ;
-  if (kBoolTrue == test_11) {
-    GALGAS_location location_12 (var_methodName_2696.getter_location (HERE)) ; // Implicit use of 'location' getter
-    inCompiler->emitSemanticError (location_12, GALGAS_string ("cannot be called in instruction: routine has a return value")  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 138)) ;
+  const enumGalgasBool test_7 = GALGAS_bool (kIsNotEqual, var_returnedType_4340.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-self-call.galgas", 137)))).boolEnum () ;
+  if (kBoolTrue == test_7) {
+    inCompiler->emitSemanticError (var_methodName_2696.getter_location (SOURCE_FILE ("instruction-self-call.galgas", 138)), GALGAS_string ("cannot be called in instruction: routine has a return value")  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 138)) ;
   }
   ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_procCallInstructionIR::constructor_new (GALGAS_string::makeEmptyString (), var_routineMangledName_3528, var_routineNameForGeneration_4197, var_routineKindIR_5189, var_effectiveParameterListIR_3968, var_appendFileAndLineArgumentForPanicLocation_4391  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 141))  COMMA_SOURCE_FILE ("instruction-self-call.galgas", 141)) ;
 }
@@ -2213,20 +2285,17 @@ static void extensionMethod_forLowerUpperBoundInstructionAST_analyze (const cPtr
     break ;
   case GALGAS_typeKind::kEnum_boolean:
     {
-      GALGAS_location location_0 (object->mAttribute_mTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_0, GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 90)) ;
+      inCompiler->emitSemanticError (object->mAttribute_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 90)), GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 90)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_arrayType:
     {
-      GALGAS_location location_1 (object->mAttribute_mTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_1, GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 92)) ;
+      inCompiler->emitSemanticError (object->mAttribute_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 92)), GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 92)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_boolset:
     {
-      GALGAS_location location_2 (object->mAttribute_mTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_2, GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 94)) ;
+      inCompiler->emitSemanticError (object->mAttribute_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 94)), GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 94)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_enumeration:
@@ -2235,26 +2304,22 @@ static void extensionMethod_forLowerUpperBoundInstructionAST_analyze (const cPtr
     break ;
   case GALGAS_typeKind::kEnum_literalString:
     {
-      GALGAS_location location_3 (object->mAttribute_mTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_3, GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 97)) ;
+      inCompiler->emitSemanticError (object->mAttribute_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 97)), GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 97)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_opaque:
     {
-      GALGAS_location location_4 (object->mAttribute_mTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_4, GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 99)) ;
+      inCompiler->emitSemanticError (object->mAttribute_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 99)), GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 99)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_staticInteger:
     {
-      GALGAS_location location_5 (object->mAttribute_mTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_5, GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 101)) ;
+      inCompiler->emitSemanticError (object->mAttribute_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 101)), GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 101)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_structure:
     {
-      GALGAS_location location_6 (object->mAttribute_mTypeName.getter_location (HERE)) ; // Implicit use of 'location' getter
-      inCompiler->emitSemanticError (location_6, GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 103)) ;
+      inCompiler->emitSemanticError (object->mAttribute_mTypeName.getter_location (SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 103)), GALGAS_string ("an integer type is required here")  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 103)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_integer:
