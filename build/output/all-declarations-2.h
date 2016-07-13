@@ -4667,7 +4667,9 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
   public : static class GALGAS_objectInMemoryIR constructor_register (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                       const class GALGAS_lstring & inOperand1,
                                                                       const class GALGAS_bigint & inOperand2,
-                                                                      const class GALGAS_controlRegisterBitSliceAccessMap & inOperand3
+                                                                      const class GALGAS_controlRegisterBitSliceAccessMap & inOperand3,
+                                                                      const class GALGAS_uint & inOperand4,
+                                                                      const class GALGAS_uint & inOperand5
                                                                       COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectInMemoryIR constructor_staticConstant (const class GALGAS_operandIR & inOperand0,
@@ -4698,6 +4700,8 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                   class GALGAS_lstring & outArgument1,
                                                   class GALGAS_bigint & outArgument2,
                                                   class GALGAS_controlRegisterBitSliceAccessMap & outArgument3,
+                                                  class GALGAS_uint & outArgument4,
+                                                  class GALGAS_uint & outArgument5,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 

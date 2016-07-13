@@ -17,7 +17,7 @@ struct @accessibleEntities {
 
 method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   switch self
-  case register (* @lstring name * *) :
+  case register (* @lstring name * * * *) :
     ioAccessibleEntities.mAccessibleRegisterSet += !name.string
   case globalVariable (* @string name *) :
     ioAccessibleEntities.mGlobalVariableSet += !name

@@ -35,7 +35,14 @@ func initialVariableMap
         !lkey:lkey
         !type:mType
         !readAccessAllowed:false
-        !variableKind:.register {!type:mType !name:lkey !address:mAddress !sliceMap:mRegisterFieldAccessMap}
+        !variableKind:.register {
+          !type:mType
+          !name:lkey
+          !address:mAddress 
+          !sliceMap:mRegisterFieldAccessMap
+          !arraySize: mArraySize # 0 if not an array
+          !elementSize: mElementArraySize # 0 if not an array
+        }
         !copyable:false
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
       ]
@@ -47,7 +54,14 @@ func initialVariableMap
           !lkey:lkey
           !type:mType
           !readAccessAllowed:true
-          !variableKind:.register {!type:mType !name:lkey !address:mAddress !sliceMap:mRegisterFieldAccessMap}
+          !variableKind:.register {
+            !type:mType
+            !name:lkey
+            !address:mAddress
+            !sliceMap:mRegisterFieldAccessMap
+            !arraySize: mArraySize # 0 if not an array
+            !elementSize: mElementArraySize # 0 if not an array
+          }
           !copyable:true
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
         ]
@@ -56,7 +70,14 @@ func initialVariableMap
           !lkey:lkey
           !type:mType
           !readAccessAllowed:true
-          !variableKind:.register {!type:mType !name:lkey !address:mAddress !sliceMap:mRegisterFieldAccessMap}
+          !variableKind:.register {
+            !type:mType
+            !name:lkey
+            !address:mAddress
+            !sliceMap:mRegisterFieldAccessMap
+            !arraySize: mArraySize # 0 if not an array
+            !elementSize: mElementArraySize # 0 if not an array
+          }
           !copyable:true
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
         ]
@@ -68,7 +89,14 @@ func initialVariableMap
         !lkey:lkey
         !type:mType
         !readAccessAllowed:true
-        !variableKind:.register {!type:mType !name:lkey !address:mAddress !sliceMap:mRegisterFieldAccessMap}
+        !variableKind:.register {
+          !type:mType
+          !name:lkey
+          !address:mAddress
+          !sliceMap:mRegisterFieldAccessMap
+          !arraySize: mArraySize # 0 if not an array
+          !elementSize: mElementArraySize # 0 if not an array
+        }
         !copyable:true
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
       ]

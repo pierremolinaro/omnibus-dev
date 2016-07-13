@@ -430,6 +430,7 @@ extern const char * gWrapperFileContent_8_embeddedSampleCode ;
 extern const char * gWrapperFileContent_9_embeddedSampleCode ;
 extern const char * gWrapperFileContent_10_embeddedSampleCode ;
 extern const char * gWrapperFileContent_11_embeddedSampleCode ;
+extern const char * gWrapperFileContent_12_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -448,6 +449,7 @@ extern const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode ;
 extern const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode ;
+extern const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1882,6 +1884,111 @@ class cPtr_loadRegisterIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mRegisterName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         @loadRegisterWithSubscriptIR class                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_loadRegisterWithSubscriptIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_loadRegisterWithSubscriptIR (void) ;
+
+//---
+  public : inline const class cPtr_loadRegisterWithSubscriptIR * ptr (void) const { return (const cPtr_loadRegisterWithSubscriptIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_loadRegisterWithSubscriptIR (const cPtr_loadRegisterWithSubscriptIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_loadRegisterWithSubscriptIR extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_loadRegisterWithSubscriptIR constructor_new (const class GALGAS_operandIR & inOperand0,
+                                                                            const class GALGAS_string & inOperand1,
+                                                                            const class GALGAS_operandIR & inOperand2,
+                                                                            const class GALGAS_bigint & inOperand3,
+                                                                            const class GALGAS_bigint & inOperand4
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_loadRegisterWithSubscriptIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mElementArraySize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_mIndexResult (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mRegisterName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_mTargetValue (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_loadRegisterWithSubscriptIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadRegisterWithSubscriptIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                Pointer class for @loadRegisterWithSubscriptIR class                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_loadRegisterWithSubscriptIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_operandIR mAttribute_mTargetValue ;
+  public : GALGAS_string mAttribute_mRegisterName ;
+  public : GALGAS_operandIR mAttribute_mIndexResult ;
+  public : GALGAS_bigint mAttribute_mRegisterAddress ;
+  public : GALGAS_bigint mAttribute_mElementArraySize ;
+
+//--- Constructor
+  public : cPtr_loadRegisterWithSubscriptIR (const GALGAS_operandIR & in_mTargetValue,
+                                             const GALGAS_string & in_mRegisterName,
+                                             const GALGAS_operandIR & in_mIndexResult,
+                                             const GALGAS_bigint & in_mRegisterAddress,
+                                             const GALGAS_bigint & in_mElementArraySize
+                                             COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mRegisterName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_operandIR getter_mIndexResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mElementArraySize (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

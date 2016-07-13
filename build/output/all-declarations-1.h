@@ -3090,6 +3090,11 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMArraySizeForKey (class GALGAS_uint constinArgument0,
+                                                             class GALGAS_string constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
   public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterFieldListForKey (class GALGAS_controlRegisterFieldList constinArgument0,
                                                                             class GALGAS_string constinArgument1,
                                                                             C_Compiler * inCompiler
@@ -3109,11 +3114,6 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
                                                               class GALGAS_string constinArgument1,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMPowerOfTwoForArraySizeForKey (class GALGAS_uint constinArgument0,
-                                                                          class GALGAS_string constinArgument1,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMRegisterBitCountForKey (class GALGAS_uint constinArgument0,
                                                                     class GALGAS_string constinArgument1,
@@ -3158,6 +3158,10 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mArraySizeForKey (const class GALGAS_string & constinOperand0,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterFieldList getter_mControlRegisterFieldListForKey (const class GALGAS_string & constinOperand0,
                                                                                                           C_Compiler * inCompiler
                                                                                                           COMMA_LOCATION_ARGS) const ;
@@ -3173,10 +3177,6 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsReadOnlyForKey (const class GALGAS_string & constinOperand0,
                                                                         C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPowerOfTwoForArraySizeForKey (const class GALGAS_string & constinOperand0,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mRegisterBitCountForKey (const class GALGAS_string & constinOperand0,
                                                                               C_Compiler * inCompiler
@@ -3228,7 +3228,7 @@ class cEnumerator_controlRegisterMap : public cGenericAbstractEnumerator {
   public : class GALGAS_bigint current_mAddress (LOCATION_ARGS) const ;
   public : class GALGAS_controlRegisterFieldList current_mControlRegisterFieldList (LOCATION_ARGS) const ;
   public : class GALGAS_uint current_mRegisterBitCount (LOCATION_ARGS) const ;
-  public : class GALGAS_uint current_mPowerOfTwoForArraySize (LOCATION_ARGS) const ;
+  public : class GALGAS_uint current_mArraySize (LOCATION_ARGS) const ;
   public : class GALGAS_uint current_mElementArraySize (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_controlRegisterMap_2D_element current (LOCATION_ARGS) const ;
@@ -3254,7 +3254,7 @@ class cMapElement_controlRegisterMap : public cMapElement {
   public : GALGAS_bigint mAttribute_mAddress ;
   public : GALGAS_controlRegisterFieldList mAttribute_mControlRegisterFieldList ;
   public : GALGAS_uint mAttribute_mRegisterBitCount ;
-  public : GALGAS_uint mAttribute_mPowerOfTwoForArraySize ;
+  public : GALGAS_uint mAttribute_mArraySize ;
   public : GALGAS_uint mAttribute_mElementArraySize ;
 
 //--- Constructor
@@ -3267,7 +3267,7 @@ class cMapElement_controlRegisterMap : public cMapElement {
                                            const GALGAS_bigint & in_mAddress,
                                            const GALGAS_controlRegisterFieldList & in_mControlRegisterFieldList,
                                            const GALGAS_uint & in_mRegisterBitCount,
-                                           const GALGAS_uint & in_mPowerOfTwoForArraySize,
+                                           const GALGAS_uint & in_mArraySize,
                                            const GALGAS_uint & in_mElementArraySize
                                            COMMA_LOCATION_ARGS) ;
 
@@ -3301,7 +3301,7 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
   public : GALGAS_bigint mAttribute_mAddress ;
   public : GALGAS_controlRegisterFieldList mAttribute_mControlRegisterFieldList ;
   public : GALGAS_uint mAttribute_mRegisterBitCount ;
-  public : GALGAS_uint mAttribute_mPowerOfTwoForArraySize ;
+  public : GALGAS_uint mAttribute_mArraySize ;
   public : GALGAS_uint mAttribute_mElementArraySize ;
 
 
@@ -3328,7 +3328,7 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
                                                  const GALGAS_bigint & in_mAddress,
                                                  const GALGAS_controlRegisterFieldList & in_mControlRegisterFieldList,
                                                  const GALGAS_uint & in_mRegisterBitCount,
-                                                 const GALGAS_uint & in_mPowerOfTwoForArraySize,
+                                                 const GALGAS_uint & in_mArraySize,
                                                  const GALGAS_uint & in_mElementArraySize) ;
 
 //-- Start of generic part --*
@@ -3371,6 +3371,8 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mAddress (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterFieldList getter_mControlRegisterFieldList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mElementArraySize (LOCATION_ARGS) const ;
@@ -3378,8 +3380,6 @@ class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsAccessibleInUserMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsReadOnly (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPowerOfTwoForArraySize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mRegisterBitCount (LOCATION_ARGS) const ;
 

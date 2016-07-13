@@ -46,12 +46,16 @@ class cEnumAssociatedValues_objectInMemoryIR_register : public cEnumAssociatedVa
   public : const GALGAS_lstring mAssociatedValue1 ;
   public : const GALGAS_bigint mAssociatedValue2 ;
   public : const GALGAS_controlRegisterBitSliceAccessMap mAssociatedValue3 ;
+  public : const GALGAS_uint mAssociatedValue4 ;
+  public : const GALGAS_uint mAssociatedValue5 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_objectInMemoryIR_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                             const GALGAS_lstring & inAssociatedValue1,
                                                             const GALGAS_bigint & inAssociatedValue2,
-                                                            const GALGAS_controlRegisterBitSliceAccessMap & inAssociatedValue3
+                                                            const GALGAS_controlRegisterBitSliceAccessMap & inAssociatedValue3,
+                                                            const GALGAS_uint & inAssociatedValue4,
+                                                            const GALGAS_uint & inAssociatedValue5
                                                             COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -3483,16 +3487,5 @@ class GALGAS_string function_globalAttribute (class C_Compiler * inCompiler
 
 class GALGAS_string function_weakAttribute (class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Function 'taskProcNameForInvocationGraph'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_taskProcNameForInvocationGraph (class GALGAS_string inArgument0,
-                                                              class GALGAS_lstring inArgument1,
-                                                              class C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
 
 #endif

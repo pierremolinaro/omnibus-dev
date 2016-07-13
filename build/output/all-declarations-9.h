@@ -105,8 +105,9 @@ typedef void (*extensionMethodSignature_varInExpressionAST_analyzeExpression_5F_
                                                                                            class GALGAS_allocaList & ioArgument11,
                                                                                            class GALGAS_instructionListIR & ioArgument12,
                                                                                            const class GALGAS_objectInMemoryIR constinArgument13,
-                                                                                           class GALGAS_unifiedTypeMap_2D_proxy & ioArgument14,
-                                                                                           class GALGAS_operandIR & outArgument15,
+                                                                                           const class GALGAS_location constinArgument14,
+                                                                                           class GALGAS_unifiedTypeMap_2D_proxy & ioArgument15,
+                                                                                           class GALGAS_operandIR & outArgument16,
                                                                                            class C_Compiler * inCompiler
                                                                                            COMMA_LOCATION_ARGS) ;
 
@@ -132,6 +133,7 @@ void callExtensionMethod_analyzeExpression_5F_register (const class cPtr_varInEx
                                                         GALGAS_allocaList & io_ioAllocaList,
                                                         GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                         const GALGAS_objectInMemoryIR constin_inVariableKind,
+                                                        const GALGAS_location constin_inErrorLocation,
                                                         GALGAS_unifiedTypeMap_2D_proxy & io_ioType,
                                                         GALGAS_operandIR & out_outResult,
                                                         C_Compiler * inCompiler

@@ -6,7 +6,7 @@
 
 getter @objectInMemoryIR mangledName -> @string outResult {
   switch self
-  case register (* @lstring name * *) :
+  case register (* @lstring name * * * *) :
     outResult = llvmNameForRegister (!name:name.string)
   case globalVariable (* @string name *) :
     outResult = llvmNameForGlobalVariable (!name)
