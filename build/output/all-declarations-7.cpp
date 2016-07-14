@@ -711,7 +711,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "  var index $uint32 = 5\n"
   "  globalBit = PIPO [index].bit.bool\n"
   "  PIPO [2] = globalVar\n"
-  "  PIPO [index] = globalVar\n"
+  "  PIPO [index] = $PIPO {fields:5, bit}\n"
   "  IO1SET = 1 << 23 // Led Off\n"
   "}\n"
   "\n"
@@ -740,7 +740,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-control-register-array.plm",
   "plm",
   true, // Text file
-  1037, // Text length
+  1049, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
