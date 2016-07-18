@@ -7,7 +7,7 @@ struct $semaphore {
 
   //············································································
   
-  public service signal @noWarningIfUnused () {
+  public service signal @noUnusedWarning() {
     makeTaskReady (!?fromList:self.list ?found:let found)
     if not found {
       self.value += 1
@@ -17,7 +17,7 @@ struct $semaphore {
 
   //············································································
 
-  public primitive wait @noWarningIfUnused () {
+  public primitive wait @noUnusedWarning() {
     if self.value > 0 {
       self.value -= 1
     }else{
@@ -27,7 +27,7 @@ struct $semaphore {
 
   //············································································
 
-  public primitive wait @noWarningIfUnused (?untilDeadline:inDeadline $uint32) -> $bool {
+  public primitive wait @noUnusedWarning (?untilDeadline:inDeadline $uint32) -> $bool {
     result = self.value > 0
     if result {
       self.value -= 1
@@ -38,7 +38,7 @@ struct $semaphore {
 
   //············································································
 
-  public guard wait @noWarningIfUnused () {
+  public guard wait @noUnusedWarning() {
     accept = self.value > 0
     if accept {
       self.value -= 1

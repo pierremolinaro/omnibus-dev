@@ -91,7 +91,7 @@ module time {
   
   //············································································
   
-  public func `service `kernel `user `guard millis @noWarningIfUnused @userAccess () -> $uint32 {
+  public func `service `kernel `user `guard millis @noUnusedWarning @userAccess () -> $uint32 {
     result = self.mUptimeMS
   }
   
@@ -108,7 +108,7 @@ module time {
   
   //············································································
   
-  public primitive waitUntilMS @noWarningIfUnused (?deadline: inDate $uint32) {
+  public primitive waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
     if inDate > self.millis () {
       block (!onDeadline:inDate)
     }
@@ -116,13 +116,13 @@ module time {
   
   //············································································
   
-  public func `user waitDuringMS @noWarningIfUnused @mutating @userAccess (?delay: inDelay $uint32) {
+  public func `user waitDuringMS @noUnusedWarning @mutating @userAccess (?delay: inDelay $uint32) {
     self.waitUntilMS (!deadline:self.millis () + inDelay)
   }
   
   //············································································
   
-  public guard waitUntilMS @noWarningIfUnused (?deadline:inDeadline $uint32) {
+  public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
     accept = inDeadline <= self.millis ()
     if not accept {
       handle (!guardedDeadline:inDeadline)

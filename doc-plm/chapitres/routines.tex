@@ -40,7 +40,7 @@ boot priorite {
 \end{PLM}
 Où \plm=priorite= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=boot= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=boot= n'ont pas la même priorité.
 
-Les routines \plm=boot= s'exécutent dans le mode \plm=`boot=.\index{\`{}boot}
+Les routines \plm=boot= s'exécutent dans le mode \plm=`boot=.\index{`boot}
 
 Comme les routines \plm=boot= s'exécutent avant que les variables globales soient initialisées, l'accès aux variables globales y est interdit. L'interdiction est mise en place de la façon suivante : il n'est pas possible d'associer une routine \plm=`boot= à une variable globale lors de sa déclaration (\refSectionPage{declarationVariableGlobale}).
 
@@ -64,7 +64,7 @@ init priorite {
 \end{PLM}
 Où \plm=priorite= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=init= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=init= n'ont pas la même priorité.
 
-Les routines \plm=init= s'exécutent dans le mode \plm=`init=.\index{\`{}init}
+Les routines \plm=init= s'exécutent dans le mode \plm=`init=.\index{`init}
 
 Comme les routines \plm=init= s'exécutent après l'initialisation des variables globales, l'accès aux variables globales y est autorisé, du moment que la variable globale cite le mode \plm=`init= dans sa déclaration (\refSectionPage{declarationVariableGlobale}).
 
@@ -149,13 +149,13 @@ proc setup `user () {
 Ceci définit la procédure \plm=setup=, sans argument, sans attribut, appelable uniquement en mode \plm=`user=.
 
 \begin{PLM}
-proc goto `user @noWarningIfUnused (
+proc goto `user @noUnusedWarning (
   ?line:inLine $uint32
   ?column:inColumn $uint8) {
 }
 \end{PLM}
 
-Ceci définit la procédure \plm=goto=, appelable uniquement en mode \plm=`user=, avec deux arguments formels en entrée. L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
+Ceci définit la procédure \plm=goto=, appelable uniquement en mode \plm=`user=, avec deux arguments formels en entrée. L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
 
 
 
@@ -170,9 +170,9 @@ Si la procédure est déclarée avec le mode \plm!`user!, seuls les registres de
 
 
 
-\subsectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributNoWarningIfUnused}\index{"@noWarningIfUnused}
+\subsectionLabel{Attribut \texttt{@noUnusedWarning}}{attributNoWarningIfUnused}\index{"@noUnusedWarning}
 
-L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
+L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
 
 
 
@@ -310,12 +310,12 @@ Contrairement à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}
 Par exemple :
 
 \begin{PLM}
-func maFonction `user @noWarningIfUnused () -> $uint32 {
+func maFonction `user @noUnusedWarning () -> $uint32 {
   result = 6
 }
 \end{PLM}
 
-Ceci définit la fonction \plm=maFonction=, sans argument, appelable uniquement en mode \plm=`user= ; l'attribut \plm=@noWarningIfUnused= signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
+Ceci définit la fonction \plm=maFonction=, sans argument, appelable uniquement en mode \plm=`user= ; l'attribut \plm=@noUnusedWarning= signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
 
 \begin{PLM}
 func autreFonction `user (?arg:a $uint27 ?b $uint27) -> $uint27 {
@@ -326,9 +326,9 @@ func autreFonction `user (?arg:a $uint27 ?b $uint27) -> $uint27 {
 Ceci définit la fonction \plm=autreFonction=, avec deux arguments, sans attribut, appelable uniquement en mode \plm=`user=.
 
 
-\subsectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributFonctionNoWarningIfUnused}\index{"@noWarningIfUnused}
+\subsectionLabel{Attribut \texttt{@noUnusedWarning}}{attributFonctionNoWarningIfUnused}\index{"@noUnusedWarning}
 
-L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
+L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
 
 
 
@@ -399,7 +399,7 @@ section nom @attribut1 @attribut2 (arguments_formels) {
 Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la section ;
-  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la section ; actuellement, seul l'attribut \plm!@noWarningIfUnused! est défini (\refSubsectionPage{attributNoWarningIfUnusedSection}).
+  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la section ; actuellement, seul l'attribut \plm!@noUnusedWarning! est défini (\refSubsectionPage{attributNoWarningIfUnusedSection}).
 \end{itemize}
 
 
@@ -420,9 +420,9 @@ Tous les registres de contrôle sont accessibles dans une section.
 
 
 
-\subsectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributNoWarningIfUnusedSection}\index{"@noWarningIfUnused}
+\subsectionLabel{Attribut \texttt{@noUnusedWarning}}{attributNoWarningIfUnusedSection}\index{"@noUnusedWarning}
 
-L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la section n'est pas utilisée.
+L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la section n'est pas utilisée.
 
 
 
@@ -472,7 +472,7 @@ Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la section ;
   \item \plm=`mode= est le mode logiciel, qui est soit \plm!`isr!, soit \plm!`kernel! ;
-  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés service ; actuellement, seul l'attribut \plm!@noWarningIfUnused! est défini (\refSubsectionPage{attributNoWarningIfUnusedService}).
+  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés service ; actuellement, seul l'attribut \plm!@noUnusedWarning! est défini (\refSubsectionPage{attributNoWarningIfUnusedService}).
 \end{itemize}
 
 
@@ -493,9 +493,9 @@ Tous les registres de contrôle sont accessibles dans un service.
 
 
 
-\subsectionLabel{Attribut \texttt{@noWarningIfUnused}}{attributNoWarningIfUnusedService}\index{"@noWarningIfUnused}
+\subsectionLabel{Attribut \texttt{@noUnusedWarning}}{attributNoWarningIfUnusedService}\index{"@noUnusedWarning}
 
-L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la section n'est pas utilisée.
+L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la section n'est pas utilisée.
 
 
 
@@ -507,7 +507,7 @@ L'attribut \plm+@noWarningIfUnused+ signifie qu'aucune alerte n'est émise si la
 
 \section{Routines utiles}
 
-Le compilateur élimine les routines qui ne sont jamais appelées, en calculant le graphe des appels. Les racines de ce graphe sont les procédures requises (\refSubsectionPage{procedureRequise}), les routines \plm=boot=, \plm=init= et \plm=panic=. Les procédures et fonctions inatteignables sont éliminées, sans message d'alerte pour les routines déclarées avec l'attribut \plm!@noWarningIfUnused!.
+Le compilateur élimine les routines qui ne sont jamais appelées, en calculant le graphe des appels. Les racines de ce graphe sont les procédures requises (\refSubsectionPage{procedureRequise}), les routines \plm=boot=, \plm=init= et \plm=panic=. Les procédures et fonctions inatteignables sont éliminées, sans message d'alerte pour les routines déclarées avec l'attribut \plm!@noUnusedWarning!.
 
 
 

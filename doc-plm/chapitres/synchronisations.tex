@@ -20,7 +20,7 @@ struct $semaphore {
   var list = $taskList ()
   var guardList = $guardList ()
 
-  public service V @noWarningIfUnused () {
+  public service V @noUnusedWarning () {
     makeTaskReady (!?list:self.list ?found:let found)
     if not found {
       self.value += 1
@@ -28,7 +28,7 @@ struct $semaphore {
     }
   }
 
-  public primitive P @noWarningIfUnused () {
+  public primitive P @noUnusedWarning () {
     if self.value > 0 {
       self.value -= 1
     }else{
@@ -36,7 +36,7 @@ struct $semaphore {
     }
   }
 
-  public primitive P_until @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
+  public primitive P_until @noUnusedWarning (?deadline:inDeadline $uint32) -> $bool {
     result = self.value > 0
     if result {
       self.value -= 1
@@ -45,7 +45,7 @@ struct $semaphore {
     }
   }
 
-  public guard P @noWarningIfUnused () {
+  public guard P @noUnusedWarning () {
     accept = self.value > 0
     if accept {
       self.value -= 1

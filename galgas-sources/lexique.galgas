@@ -18,7 +18,6 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "and",
   "assert",
   "at",
-#  "boolset",
   "boot",
   "case",
   "check",
@@ -315,14 +314,14 @@ rule '?' {
     select
     case 'a' -> 'z' | 'A' ->'Z' :
       repeat
-        enterCharacterIntoString ( !?tokenString !* )
+        enterCharacterIntoString (!?tokenString !* )
       while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
       end
       select
       case ':' :
         send $?!$
       default
-        resetString ( !?tokenString )
+        resetString (!?tokenString )
         rewind onlyExclamationInterrogationMark send $?!$
       end
     default
@@ -330,14 +329,14 @@ rule '?' {
     end
   case 'a' -> 'z' | 'A' ->'Z' :
     repeat
-      enterCharacterIntoString ( !?tokenString !* )
+      enterCharacterIntoString (!?tokenString !* )
     while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
     end
     select
     case ':' :
       send $?$
     default
-      resetString ( !?tokenString )
+      resetString (!?tokenString )
       rewind onlyInterrogationMark send $?$
     end
   default
@@ -353,14 +352,14 @@ rule '!' {
     select
     case 'a' -> 'z' | 'A' ->'Z' :
       repeat
-        enterCharacterIntoString ( !?tokenString !* )
+        enterCharacterIntoString (!?tokenString !* )
       while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
       end
       select
       case ':' :
         send $!?$
       default
-        resetString ( !?tokenString )
+        resetString (!?tokenString )
         rewind onlyInterrogationExclamationMark send $!?$
       end
     default
@@ -368,14 +367,14 @@ rule '!' {
     end
   case 'a' -> 'z' | 'A' ->'Z' :
     repeat
-      enterCharacterIntoString ( !?tokenString !* )
+      enterCharacterIntoString (!?tokenString !* )
     while 'a' -> 'z' | 'A' ->'Z' | '0' -> '9' | '_' :
     end
     select
     case ':' :
       send $!$
     default
-      resetString ( !?tokenString )
+      resetString (!?tokenString )
       rewind onlyExclamationMark send $!$
     end
   default

@@ -70,19 +70,19 @@ module time {
 
   //············································································
   
-  public func `panic `init oneMillisecondBusyWait @noWarningIfUnused () {
+  public func `panic `init oneMillisecondBusyWait @noUnusedWarning () {
     do while not SYST_CSR.COUNTFLAG.bool {}
   }
 
   //············································································
   
-  public func `service `kernel `user `guard millis @noWarningIfUnused @userAccess () -> $uint32 {
+  public func `service `kernel `user `guard millis @noUnusedWarning @userAccess () -> $uint32 {
     result = self.mUptimeMS
   }
   
   //············································································
   
-  public func `panic `init busyWaitingDuringMS @noWarningIfUnused (?inDelay $uint32) {
+  public func `panic `init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
     for delay $uint32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
     }
@@ -100,7 +100,7 @@ module time {
   
   //············································································
   
-  public primitive waitUntilMS @noWarningIfUnused (?deadline: inDate $uint32) {
+  public primitive waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
     if inDate > self.millis () {
       block (!onDeadline:inDate)
     }
@@ -108,7 +108,7 @@ module time {
   
   //············································································
   
-  public primitive waitDuringMS @noWarningIfUnused (?delay: inDelay $uint32) {
+  public primitive waitDuringMS @noUnusedWarning (?delay: inDelay $uint32) {
     if inDelay > 0 {
       block (!onDeadline:self.millis () +% inDelay)
     }
@@ -116,7 +116,7 @@ module time {
   
   //············································································
   
-  public guard waitUntilMS @noWarningIfUnused (?deadline:inDeadline $uint32) {
+  public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
     accept = inDeadline <= self.millis ()
     if not accept {
       handle (!guardedDeadline:inDeadline)
