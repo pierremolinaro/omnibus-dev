@@ -407,9 +407,9 @@ method @structureDeclaration functionSemanticAnalysis
     var mutating = false
     var accessProperties = false
     for (attribute) in function.mFunctionAttributeList do
-      if attribute.string == noWarningIfUnusedAttribute () then
+      if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
-          error attribute : "duplicated @" + noWarningIfUnusedAttribute () + " attribute"
+          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
         end
         warnIfUnused = false    
       elsif attribute.string == userAccessAttribute () then
@@ -423,7 +423,7 @@ method @structureDeclaration functionSemanticAnalysis
         end
         mutating = true    
       else
-        error attribute : "unknown attribute; available attributes are @" + noWarningIfUnusedAttribute ()
+        error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
           + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
       end
     end

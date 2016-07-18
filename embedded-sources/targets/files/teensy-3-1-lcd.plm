@@ -18,7 +18,7 @@ module lcd {
   
   //············································································
 
-  func `init configurePorts @noWarningIfUnused () {
+  func `init configurePorts @noUnusedWarning () {
   //--- D4 (PTB0) is a GPIO (input by default)
     PORTB_PCR0 = (1 << 8) ;
     GPIOB_PDDR |= (1 << 0) ; // Program D4 as output (PTB0)
@@ -41,34 +41,34 @@ module lcd {
   
   //············································································
   
-  func `init `panic `user  driveHighE @noWarningIfUnused () {
+  func `init `panic `user  driveHighE @noUnusedWarning () {
     GPIOB_PSOR = 1 << 1 ; // E is PTB1
   }
   
   //············································································
   
   
-  func `init `panic `user  driveLowE @noWarningIfUnused () {
+  func `init `panic `user  driveLowE @noUnusedWarning () {
     GPIOB_PCOR = 1 << 1 ; // E is PTB1
   }
   
   //············································································
   
   
-  func `init `panic `user  driveHighRS @noWarningIfUnused () {
+  func `init `panic `user  driveHighRS @noUnusedWarning () {
     GPIOB_PSOR = 1 << 3 ; // RS is PTB3
   }
   
   //············································································
   
   
-  func `init `panic `user  driveLowRS @noWarningIfUnused () {
+  func `init `panic `user  driveLowRS @noUnusedWarning () {
     GPIOB_PCOR = 1 << 3 ; // RS is PTB3
   }
   
   //············································································
   
-  func `init `panic `user setD4 @noWarningIfUnused (?inValue $bool) { // PTB0
+  func `init `panic `user setD4 @noUnusedWarning (?inValue $bool) { // PTB0
     if inValue {
       GPIOB_PSOR = 1 << 0 ;
     }else{
@@ -78,7 +78,7 @@ module lcd {
   
   //············································································
   
-  func `init `panic `user setD5 @noWarningIfUnused (?inValue $bool) { // PTC0
+  func `init `panic `user setD5 @noUnusedWarning (?inValue $bool) { // PTC0
     if inValue {
       GPIOC_PSOR = 1 << 0 ;
     }else{
@@ -88,7 +88,7 @@ module lcd {
   
   //············································································
   
-  func `init `panic `user setD6 @noWarningIfUnused (?inValue $bool) { // PTD1
+  func `init `panic `user setD6 @noUnusedWarning (?inValue $bool) { // PTD1
     if inValue {
       GPIOD_PSOR = 1 << 1 ;
     }else{
@@ -98,7 +98,7 @@ module lcd {
   
   //············································································
   
-  func `init `panic `user setD7 @noWarningIfUnused (?inValue $bool) { // PTB2
+  func `init `panic `user setD7 @noUnusedWarning (?inValue $bool) { // PTB2
     if inValue {
       GPIOB_PSOR = 1 << 2 ;
     }else{
@@ -110,7 +110,7 @@ module lcd {
   //   UTILITY ROUTINES                                                         
   //············································································
   
-  func `init programLcd4BitDataBusOutput @noWarningIfUnused (?inValue $uint8) {
+  func `init programLcd4BitDataBusOutput @noUnusedWarning (?inValue $uint8) {
     self.setD4 (!(inValue & 0x01) != 0)
     self.setD5 (!(inValue & 0x02) != 0)
     self.setD6 (!(inValue & 0x04) != 0)
@@ -119,7 +119,7 @@ module lcd {
   
   //············································································
   
-  func `init write4BitCommand @noWarningIfUnused (?inValue $uint8) {
+  func `init write4BitCommand @noUnusedWarning (?inValue $uint8) {
     time.busyWaitingDuringMS (!1) ;
     self.driveLowRS () ;
     self.programLcd4BitDataBusOutput (!inValue) ;
@@ -130,7 +130,7 @@ module lcd {
   
   //············································································
   
-  func `init write8bitCommand @noWarningIfUnused (?inCommand $uint8) {
+  func `init write8bitCommand @noUnusedWarning (?inCommand $uint8) {
     time.busyWaitingDuringMS (!1) ;
     self.driveLowRS () ;
     self.programLcd4BitDataBusOutput (!inCommand >> 4) ;
@@ -194,7 +194,7 @@ module lcd {
   //   PRINT ROUTINES IN USER MODE                                              
   //············································································
   
-  func `user programLcd4BitDataBusOutput_inUserMode @noWarningIfUnused (?inValue $uint8) {
+  func `user programLcd4BitDataBusOutput_inUserMode @noUnusedWarning (?inValue $uint8) {
     self.setD4 (!(inValue & 0x01) != 0)
     self.setD5 (!(inValue & 0x02) != 0)
     self.setD6 (!(inValue & 0x04) != 0)
@@ -203,7 +203,7 @@ module lcd {
   
   //············································································
   
-  func`user write8bitCommand_inUserMode @noWarningIfUnused (?inCommand $uint8) {
+  func`user write8bitCommand_inUserMode @noUnusedWarning (?inCommand $uint8) {
     time.waitDuringMS (!delay:1) ;
     self.driveLowRS () ;
     self.programLcd4BitDataBusOutput_inUserMode (!inCommand >> 4) ;
@@ -219,7 +219,7 @@ module lcd {
   
   //············································································
   
-  func`user writeData_inUserMode @noWarningIfUnused (?inData $uint8) {
+  func`user writeData_inUserMode @noUnusedWarning (?inData $uint8) {
     time.waitDuringMS (!delay:1) ;
     self.driveHighRS () ;
     self.programLcd4BitDataBusOutput_inUserMode (!inData >> 4) ;
@@ -235,7 +235,7 @@ module lcd {
   
   //············································································
   
-  public func `user clearScreen @noWarningIfUnused () {
+  public func `user clearScreen @noUnusedWarning () {
     self.write8bitCommand_inUserMode (!0x01)
   }
   
@@ -246,7 +246,7 @@ module lcd {
   // Line 2 : 20 -> 39
   // Line 3 : 84 -> 103
   
-  public func `user goto @noWarningIfUnused (?line:inLine $uint2 ?column:inColumn $uint8) {
+  public func `user goto @noUnusedWarning (?line:inLine $uint2 ?column:inColumn $uint8) {
     if inColumn < 20 {
       if inLine == 0 {
         self.write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
@@ -262,7 +262,7 @@ module lcd {
   
   //············································································
   
-  public func `user printSpaces @noWarningIfUnused (?inCount $uint32) {
+  public func `user printSpaces @noUnusedWarning (?inCount $uint32) {
     var count = inCount
     do while (count > 0) {
       self.writeData_inUserMode (!0x20)
@@ -272,7 +272,7 @@ module lcd {
   
   //············································································
   
-  public func `user printUnsigned @noWarningIfUnused (?inValue $uint32) {
+  public func `user printUnsigned @noUnusedWarning (?inValue $uint32) {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = false
@@ -293,7 +293,7 @@ module lcd {
   
   //············································································
   
-  public func `user printSigned @noWarningIfUnused (?inValue $int32) {
+  public func `user printSigned @noUnusedWarning (?inValue $int32) {
     if inValue >= 0 {
       self.printUnsigned (!truncate inValue : $uint32)
     }else{
@@ -304,7 +304,7 @@ module lcd {
   
   //············································································
   
-  public func `user printString @noWarningIfUnused (?inValue $staticString) {
+  public func `user printString @noUnusedWarning (?inValue $staticString) {
     for c in inValue {
       self.writeData_inUserMode (!c)
     }
@@ -365,7 +365,7 @@ module lcd {
   //   PANIC                                                                    
   //············································································
   
-  func `panic programLcd4BitDataBusOutput_inPanicMode @noWarningIfUnused (?inValue $uint8) {
+  func `panic programLcd4BitDataBusOutput_inPanicMode @noUnusedWarning (?inValue $uint8) {
     self.setD4 (!(inValue & 0x01) != 0)
     self.setD5 (!(inValue & 0x02) != 0)
     self.setD6 (!(inValue & 0x04) != 0)
@@ -374,7 +374,7 @@ module lcd {
   
   //············································································
   
-  func `panic writeDataInPanicMode @noWarningIfUnused (?inData $uint8) {
+  func `panic writeDataInPanicMode @noUnusedWarning (?inData $uint8) {
     time.oneMillisecondBusyWait () ;
     self.driveHighRS () ;
     self.programLcd4BitDataBusOutput_inPanicMode (!inData >> 4) ;
@@ -390,7 +390,7 @@ module lcd {
   
   //············································································
   
-  public func `panic printUnsignedInPanicMode @noWarningIfUnused (?inValue $uint32) {
+  public func `panic printUnsignedInPanicMode @noUnusedWarning (?inValue $uint32) {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = false
@@ -411,7 +411,7 @@ module lcd {
   
   //············································································
   
-  public func `panic printSignedInPanicMode @noWarningIfUnused (?inValue $int32) {
+  public func `panic printSignedInPanicMode @noUnusedWarning (?inValue $int32) {
     if inValue >= 0 {
       self.printUnsignedInPanicMode (!truncate inValue : $uint32)
     }else{
@@ -422,7 +422,7 @@ module lcd {
   
   //············································································
   
-  func `panic write8bitCommandInPanicMode @noWarningIfUnused (?inCommand $uint8) {
+  func `panic write8bitCommandInPanicMode @noUnusedWarning (?inCommand $uint8) {
     time.oneMillisecondBusyWait () ;
     self.driveLowRS () ;
     self.programLcd4BitDataBusOutput_inPanicMode (!inCommand >> 4) ;
@@ -438,7 +438,7 @@ module lcd {
   
   //············································································
   
-  public func `panic gotoInPanicMode @noWarningIfUnused (?line:inLine $uint32 ?column:inColumn $uint8) {
+  public func `panic gotoInPanicMode @noUnusedWarning (?line:inLine $uint32 ?column:inColumn $uint8) {
     if inColumn < 20 {
       if inLine == 0 {
         self.write8bitCommandInPanicMode (!0x80 +% 0 +% inColumn) ;
@@ -454,14 +454,14 @@ module lcd {
   
   //············································································
   
-  public func `panic clearScreenInPanicMode @noWarningIfUnused () {
+  public func `panic clearScreenInPanicMode @noUnusedWarning () {
     self.write8bitCommandInPanicMode (!0x01)
     time.busyWaitingDuringMS (!4)
   }
   
   //············································································
   
-  public func `panic printStringInPanicMode @noWarningIfUnused (?inString $staticString) {
+  public func `panic printStringInPanicMode @noUnusedWarning (?inString $staticString) {
     for c in inString {
       self.writeDataInPanicMode (!c)
     }

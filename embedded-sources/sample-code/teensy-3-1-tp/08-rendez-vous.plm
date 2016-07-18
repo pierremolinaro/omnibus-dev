@@ -24,28 +24,28 @@ struct $rendezVous {
     }
   }
 
-  public primitive inputUntil @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
+  public primitive inputUntil @noUnusedWarning (?deadline:inDeadline $uint32) -> $bool {
     makeTaskReady (!?fromList:self.outputWaitList ?found:result)
     if (not result) and (inDeadline > time.millis ()) { 
       block (!?inList:self.inputWaitList !onDeadline:inDeadline)
     }
   }
 
-  public primitive outputUntil @noWarningIfUnused (?deadline:inDeadline $uint32) -> $bool {
+  public primitive outputUntil @noUnusedWarning (?deadline:inDeadline $uint32) -> $bool {
     makeTaskReady (!?fromList:self.inputWaitList ?found:result)
     if (not result) and (inDeadline > time.millis ()) { 
       block (!?inList:self.outputWaitList !onDeadline:inDeadline)
     }
   }
 
-  public guard input @noWarningIfUnused () {
+  public guard input @noUnusedWarning () {
     makeTaskReady (!?fromList:self.outputWaitList ?found:accept)
     if not accept {
       handle (!?guard:self.inputGuardList)
     }
   }
 
-  guard output @noWarningIfUnused () {
+  guard output @noUnusedWarning () {
     makeTaskReady (!?fromList:self.inputWaitList ?found:accept)
     if not accept {
       handle (!?guard:self.outputGuardList)

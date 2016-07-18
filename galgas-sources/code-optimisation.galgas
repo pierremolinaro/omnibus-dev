@@ -102,13 +102,13 @@ proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateC
 #--- Warn on unused routines
   for () in initialProcedureMap do
     if (not [ioIntermediateCodeStruct.mRoutineMapIR hasKey !lkey.string]) && mWarnIfUnused then
-      warning lkey: "unused procedure; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
+      warning lkey: "unused procedure; use @" + noUnusedWarningAttribute () + " attribute for removing this warning"
     end
   end
 #--- Warn on unused guard
   for () in initialGuardMap do
     if (not [ioIntermediateCodeStruct.mGuardMapIR hasKey !lkey.string]) && mWarnIfUnused then
-      warning lkey: "unused guard; use @" + noWarningIfUnusedAttribute () + " attribute for removing this warning"
+      warning lkey: "unused guard; use @" + noUnusedWarningAttribute () + " attribute for removing this warning"
     end
   end
 }

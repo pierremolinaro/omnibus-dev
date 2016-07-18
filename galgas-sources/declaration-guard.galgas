@@ -132,13 +132,13 @@ method @guardDeclarationListAST guardSemanticAnalysis
   for guard in self do
     var warnIfUnused = true
     for (attribute) in guard.mGuardAttributeList do
-      if attribute.string == noWarningIfUnusedAttribute () then
+      if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
-          error attribute : "duplicate @" + noWarningIfUnusedAttribute () + " attribute"
+          error attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute"
         end
         warnIfUnused = false    
       else
-        error attribute : "unknown attribute; available attribute is @" + noWarningIfUnusedAttribute ()
+        error attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ()
       end
     end
     guardSemanticAnalysis (
@@ -402,7 +402,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
     @fieldList propertyList = mFieldList
     [!?propertyList popLast ?let @lstring methodName ?*]
     @elementPtrList elementPtrList = {}
-    @bool needsPublic = false
+    var needsPublic = false
     for (propertyName arrayAccess) in propertyList do
       switch [currentType kind]
       case opaque (*) :
@@ -456,8 +456,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
       error methodName : "this guard is not public"
     end
   #--- Enter in invocation graph
-#    let routineNameForInvocationGraph = guardNameForInvocationGraph (!currentType !methodName)
-     [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
   #--- Analyze effective parameters
     @allocaList baseGuardAllocaList = {}
     analyzeEffectiveParameters (
@@ -563,7 +562,6 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       ?let @procedureSignature formalSignature
     ]
   #--- Enter in invocation graph
-#    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !routineName)
     [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
   #--- Analyze effective parameters
     @allocaList baseGuardAllocaList = {}

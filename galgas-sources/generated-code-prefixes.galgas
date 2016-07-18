@@ -247,8 +247,8 @@ func %once userAccessAttribute -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once noWarningIfUnusedAttribute -> @string outResult {
-  outResult = "noWarningIfUnused"
+func %once noUnusedWarningAttribute -> @string outResult {
+  outResult = "noUnusedWarning"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

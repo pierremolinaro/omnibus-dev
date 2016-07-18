@@ -307,9 +307,9 @@ method @functionDeclarationListAST procedureSemanticAnalysis
     var globalProcedure = false
     var weakProcedure = false
     for (attribute) in procedure.mFunctionAttributeList do
-      if attribute.string == noWarningIfUnusedAttribute () then
+      if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
-          error attribute : "duplicated @" + noWarningIfUnusedAttribute () + " attribute"
+          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
         end
         warnIfUnused = false    
       elsif attribute.string == globalAttribute () then
@@ -324,7 +324,7 @@ method @functionDeclarationListAST procedureSemanticAnalysis
         weakProcedure = true    
       else
         error attribute : "unknown attribute; available attributes are @"
-          + noWarningIfUnusedAttribute () + ", @" + weakAttribute () + ", @" + globalAttribute ()
+          + noUnusedWarningAttribute () + ", @" + weakAttribute () + ", @" + globalAttribute ()
       end
     end
     routineSemanticAnalysis (

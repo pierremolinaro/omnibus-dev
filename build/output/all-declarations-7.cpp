@@ -1111,7 +1111,7 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var list = $taskList ()\n"
   "  var guardList = $guardList ()\n"
   "\n"
-  "  public primitive P @noWarningIfUnused () {\n"
+  "  public primitive P @noUnusedWarning () {\n"
   "    if self.value > 0 {\n"
   "      self.value -= 1\n"
   "    }else{\n"
@@ -1205,7 +1205,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "06-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2136, // Text length
+  2134, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1317,28 +1317,28 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\
   "    }\n"
   "  }\n"
   "\n"
-  "  public primitive inputUntil @noWarningIfUnused (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public primitive inputUntil @noUnusedWarning (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    makeTaskReady (!\?fromList:self.outputWaitList \?found:result)\n"
   "    if (not result) and (inDeadline > time.millis ()) { \n"
   "      block (!\?inList:self.inputWaitList !onDeadline:inDeadline)\n"
   "    }\n"
   "  }\n"
   "\n"
-  "  public primitive outputUntil @noWarningIfUnused (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public primitive outputUntil @noUnusedWarning (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    makeTaskReady (!\?fromList:self.inputWaitList \?found:result)\n"
   "    if (not result) and (inDeadline > time.millis ()) { \n"
   "      block (!\?inList:self.outputWaitList !onDeadline:inDeadline)\n"
   "    }\n"
   "  }\n"
   "\n"
-  "  public guard input @noWarningIfUnused () {\n"
+  "  public guard input @noUnusedWarning () {\n"
   "    makeTaskReady (!\?fromList:self.outputWaitList \?found:accept)\n"
   "    if not accept {\n"
   "      handle (!\?guard:self.inputGuardList)\n"
   "    }\n"
   "  }\n"
   "\n"
-  "  guard output @noWarningIfUnused () {\n"
+  "  guard output @noUnusedWarning () {\n"
   "    makeTaskReady (!\?fromList:self.inputWaitList \?found:accept)\n"
   "    if not accept {\n"
   "      handle (!\?guard:self.outputGuardList)\n"
@@ -1384,7 +1384,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "08-rendez-vous.plm",
   "plm",
   true, // Text file
-  2450, // Text length
+  2442, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
