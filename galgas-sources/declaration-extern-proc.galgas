@@ -183,7 +183,6 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName}
   end
 #--- Routine name for generation
-#  let routineNameForGeneration = @lstring.new {!"." + mRoutineNameForGeneration !mRoutineNameForGeneration.location}
   [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
     !mRoutineNameForGeneration
     !formalArguments

@@ -622,9 +622,7 @@ proc analyzeEffectiveParameters
           error name : "a boolean does not handle field access" : parameterList, ioEffectiveParameterListIR
         case staticInteger :
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
-        case boolset :
-          error name : "a boolset does not handle field access" : parameterList, ioEffectiveParameterListIR
-        case literalString :
+         case literalString :
           error name : "a literal string does not handle field access" : parameterList, ioEffectiveParameterListIR
         case enumeration (*) :
           error name : "an enumeration does not handle field access" : parameterList, ioEffectiveParameterListIR

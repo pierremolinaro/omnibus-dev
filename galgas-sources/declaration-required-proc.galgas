@@ -40,7 +40,6 @@ proc checkRequiredProcedures
   ?endOfSourceFile:let @location inEndOfSourceFile
 {
   for requiredProc in inAST.mRequiredProcList do
-#    let lkey = @lstring.new {!"." + requiredProc.mRequiredProcedureName !requiredProc.mRequiredProcedureName.location}
     if not [inSemanticContext.mRoutineMapForContext hasKey !requiredProc.mRequiredProcedureName.string] then
       var s = "the '" + requiredProc.mRequiredProcedureName + "' should be defined as: proc"
       for (mode) in requiredProc.mProcedureModeList do
