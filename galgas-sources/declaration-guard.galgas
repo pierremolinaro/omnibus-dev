@@ -411,8 +411,6 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
         error propertyName : "a boolean does not handle field access" : currentType
       case staticInteger :
         error propertyName : "an integer does not handle field access" : currentType
-      case boolset :
-        error propertyName : "a boolset does not handle field access" : currentType
       case literalString :
         error propertyName : "a literal string does not handle field access" : currentType
       case enumeration (*) :

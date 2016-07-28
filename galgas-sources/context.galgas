@@ -4,9 +4,23 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @typeKindNew {
+  case boolean
+  case literalString
+  case enumeration (@enumConstantMap constantMap)
+  case structure (@propertyMap propertyMap @propertyList propertyList)
+  case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
+  case staticInteger
+  case opaque (@bigint bitCount)
+  case arrayType (@unifiedTypeMap-proxy elementType @bigint size)
+  
+  case address (@typeKindNew type)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 enum @typeKind {
   case boolean
-  case boolset
   case literalString
   case enumeration (@enumConstantMap constantMap)
   case structure (@propertyMap propertyMap @propertyList propertyList)

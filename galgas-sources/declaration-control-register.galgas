@@ -214,8 +214,6 @@ method @controlRegisterDeclarationListAST-element controlRegisterType
     outRegisterBitCount = bitCount
   case boolean :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
-  case boolset :
-    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case enumeration (*) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case literalString :

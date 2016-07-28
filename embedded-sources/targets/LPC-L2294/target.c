@@ -258,9 +258,9 @@ static TaskList gDeadlineWaitingTaskList ;
 //  B L O C K I N G    R U N N I N G    T A S K                                                                        *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void blockInList (TaskList * ioWaitingList) asm ("!FUNC!blockInList") ;
+void block_in_list (TaskList * ioWaitingList) asm ("!FUNC!blockInList") ;
 
-void blockInList (TaskList * ioWaitingList) {
+void block_in_list (TaskList * ioWaitingList) {
   const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
 //--- Insert in tool list
   *ioWaitingList |= 1 << currentTaskIndex ;

@@ -1467,7 +1467,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_boolean,
-    kEnum_boolset,
     kEnum_literalString,
     kEnum_enumeration,
     kEnum_structure,
@@ -1506,8 +1505,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                                COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_boolean (LOCATION_ARGS) ;
-
-  public : static class GALGAS_typeKind constructor_boolset (LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_enumeration (const class GALGAS_enumConstantMap & inOperand0
                                                                  COMMA_LOCATION_ARGS) ;
@@ -1569,8 +1566,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolean (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolset (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isEnumeration (LOCATION_ARGS) const ;
 

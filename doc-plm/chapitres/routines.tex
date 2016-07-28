@@ -7,19 +7,28 @@
 
 \chapter{Routines}
 
-Le langage définit plusieurs natures de sous-programmes :
+Le langage définit plusieurs natures de routines :
 \begin{itemize}
-  \item les \emph{procédures}, dont l'appel est une instruction (\refSectionPage{defProcedure}) ;
-  \item les \emph{fonctions}, dont l'appel apparaît dans une expression (\refSectionPage{defFonction}) ;
+  \item les \emph{procédures}, dont l'appel est une instruction (\refSubsectionPage{declarationProcedure}) ;
+  \item les \emph{fonctions}, dont l'appel est une instruction ou apparaît dans une expression (\refSectionPage{defFonction}) ;
   \item les \emph{boot routines}, exécutées une fois avant l'initialisation des variables globales (\refSectionPage{bootRoutine}) ;
   \item les \emph{init routines}, exécutées une fois après l'initialisation des variables globales (\refSectionPage{initRoutine}) ;
   \item les \emph{routines de panique}, exécutées lors d'une panique (\refSectionPage{routinePanique}) ;
   \item les \emph{sections}, qui sont des procédures exécutées en mode privilégié (\refSectionPage{declarationSection}) ;
-  \item les \emph{services}, qui sont des primitives de l'exécutif (\refSectionPage{declarationService}).
+  \item les \emph{services}, qui sont des primitives non bloquantes de l'exécutif (\refSectionPage{declarationService}).
+  \item les \emph{primitives}, qui sont des primitives de l'exécutif (\refSectionPage{declarationPrimitive}).
+  \item les \emph{routines d'interruption}, qui sont des primitives de l'exécutif (\refSectionPage{declarationRoutineInterruption}).
 \end{itemize}
 
-Les \emph{routines}\index{Routine} se distinguent des \emph{procédures} et des \emph{fonctions} par le fait qu'elles n'ont pas d'arguments formels explicites, et qu'elles ne peuvent pas être appelées explicitement.
+%Les \emph{routines}\index{Routine} se distinguent des \emph{procédures} et des \emph{fonctions} par le fait qu'elles n'ont pas d'paramètres formels explicites, et qu'elles ne peuvent pas être appelées explicitement.
 
+Les \emph{sections}, \emph{services}, \emph{primitives} et  \emph{routines d'interruption} sont exécutées en mode privilégié. Elles se distinguent par leur accès aux primitives de l'exécutif :
+\begin{itemize}
+  \item une \emph{section} ne peut accéder à aucune primitive de l'exécutif ;
+  \item un \emph{service} ne peut accéder qu'aux primitives non bloquantes de l'exécutif ;
+  \item une \emph{primitive} peut accéder à toutes les primitives de l'exécutif ;
+  \item une \emph{routines d'interruption} peut être, suivant sa déclaration, une \emph{section} ou un \emph{service}.
+\end{itemize}
 
 
 
@@ -34,11 +43,11 @@ Les \emph{routines}\index{Routine} se distinguent des \emph{procédures} et des 
 
 Une routine \plm=boot= est exécutée une et une seule fois, lors du démarrage du micro-contrôleur, avant que les variables globales ne soient initialisées. Elle a la syntaxe suivante :
 \begin{PLM}
-boot priorite {
+boot priorité {
   liste_instructions
 }
 \end{PLM}
-Où \plm=priorite= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=boot= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=boot= n'ont pas la même priorité.
+Où \plm=priorité= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=boot= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=boot= n'ont pas la même priorité.
 
 Les routines \plm=boot= s'exécutent dans le mode \plm=`boot=.\index{`boot}
 
@@ -58,11 +67,11 @@ Par contre, l'accès aux registres de contrôle est autorisé dans une routine \
 
 Une routine \plm=init= est exécutée une et une seule fois, lors du démarrage du micro-contrôleur, après l'initialisation des variables globales. Elle a la syntaxe suivante :
 \begin{PLM}
-init priorite {
+init priorité {
   liste_instructions
 }
 \end{PLM}
-Où \plm=priorite= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=init= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=init= n'ont pas la même priorité.
+Où \plm=priorité= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=init= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=init= n'ont pas la même priorité.
 
 Les routines \plm=init= s'exécutent dans le mode \plm=`init=.\index{`init}
 
@@ -73,36 +82,42 @@ Comme les routines \plm=init= s'exécutent après l'initialisation des variables
 
 
 
-\sectionLabel{Arguments formels, paramètres effectifs, sélecteurs}{argumentFormel}
-\index{Argument formel}
-\index{Parametre effectif@Paramètre effectif}
+\sectionLabel{Paramètres formels, arguments effectifs, sélecteurs}{argumentFormel}
+\index{Parametre formel@Paramètre formel}
+\index{Argument effectif}
 \index{Selecteur@Sélecteur}
 
-Il existe trois natures d'arguments formels : \emph{entrée}, \emph{sortie} et \emph{entrée / sortie}, décrits dans le \refTableau{argumentsFormels}. Un sélecteur peut être \emph{anonyme} (par exemple \plm+?+ pour un paramètre formel en entrée), ou comporter un nom (le nom « \texttt{nom} » pour \plm+?nom:+).
+\subsection{Paramètres formels}
 
-Une procédure déclare zéro, un ou plusieurs arguments formels qui peuvent être en \emph{entrée}, en \emph{sortie} ou en \emph{entrée/sortie}. Une fonction déclare zéro, un ou plusieurs arguments formels en \emph{entrée}.
+Il existe trois natures de paramètres formels : \emph{entrée}, \emph{sortie} et \emph{entrée / sortie}, décrits dans le \refTableau{argumentsFormels}. Un sélecteur peut être \emph{anonyme} (par exemple \plm+?+ pour un paramètre formel en entrée), ou comporter un nom (le nom « \texttt{nom} » pour \plm+?nom:+).
 
-La syntaxe des différents arguments formels et de leur paramètre effectif est résumée dans le \refTableau{argumentsFormelsParametresEffectifs}. 
+Une procédure déclare zéro, un ou plusieurs paramètres formels qui peuvent être en \emph{entrée}, en \emph{sortie} ou en \emph{entrée/sortie}. Une fonction déclare zéro, un ou plusieurs paramètres formels en \emph{entrée}.
+
 
 \begin{table}[t]
   \centering
   \begin{tabular}{lp{6.5cm}l}
-    \textbf{Argument formel} & \textbf{Transfert d'information} & \textbf{Sélecteur} \\
+    \textbf{Paramètre formel} & \textbf{Transfert d'information} & \textbf{Sélecteur} \\
     Entrée & Lors de l'appel, de l'appelant vers l'appelé & \plm+?+ ou \plm+?selecteur:+\\
     Sortie & Lors du retour, de l'appelé vers l'appelant & \plm+!+ ou \plm+!selecteur:+\\
     Entrée / sortie & Lors de l'appel, de l'appelant vers l'appelé, et lors du retour, de l'appelé vers l'appelant & \plm+?!+ ou \plm+?!selecteur:+\\
   \end{tabular}
-  \caption{Arguments formels}
+  \caption{Paramètres formels}
   \labelTableau{argumentsFormels}
   \ligne
 \end{table}
 
 
 
+
+\subsection{Arguments effectifs}
+
+La syntaxe des différents paramètres formels et de leur argument effectif est résumée dans le \refTableau{argumentsFormelsParametresEffectifs}. 
+
 \begin{table}[t]
   \centering
   \begin{tabular}{llll}
-    \textbf{Argument formel} & \textbf{Sélecteur} & \textbf{Paramètre effectif} & \textbf{Sélecteur} \\
+    \textbf{Paramètre formel} & \textbf{Sélecteur} & \textbf{Argument effectif} & \textbf{Sélecteur} \\
     Entrée & \plm+?+         & Sortie & \plm+!expression+ \\
            & \plm+?selecteur:+ & & \plm+!selecteur:expression+ \\
     Sortie & \plm+!+         & Entrée & \plm+?variable+ \\
@@ -110,7 +125,7 @@ La syntaxe des différents arguments formels et de leur paramètre effectif est 
     Entrée/sortie & \plm+?!+         & Sortie/entrée & \plm+!?variable+ \\
            & \plm+?!selecteur:+ & & \plm+!?selecteur:variable+ \\
   \end{tabular}
-  \caption{Argument formel et paramètre effectif}
+  \caption{Paramètre formel et argument effectif}
   \labelTableau{argumentsFormelsParametresEffectifs}
   \ligne
 \end{table}
@@ -121,48 +136,110 @@ La syntaxe des différents arguments formels et de leur paramètre effectif est 
 
 
 
-\sectionLabel{Procédures}{defProcedure}
 
 
-\subsectionLabel{Déclaration d'une procédure}{declarationProcedure}\index{Procedure@Procédure}
+\subsection{Signature d'une routine}
 
-La déclaration d'une procédure est la suivante :
+En PLM, une routine est identifiée par son nom et la liste de ses sélecteurs. Il est donc possible de déclarer des routine de mêmes noms, du moment qu'elles se distinguent par le nombre, la nature et le nom des sélecteurs.
+
+[DES EXEMPLES POUR COMPLÉTER] 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Fonctions}{defFonction}
+
+Sous le terme \emph{fonction} sont en fait définies les \emph{procédures} et les « vraies » \emph{fonctions}. Une procédure est appelable dans une instruction et ne peut renvoyer des valeurs par ses paramètres formels de sortie et d'entrée/sortie ; une fonction est appelable dans une expression et renvoie une valeur.
+
+
+
+
+
+\subsectionLabel{Déclaration d'une « vraie » fonction}{declarationFonction}\index{Fonction}
+
+La déclaration d'une fonction est la suivante :
 \begin{PLM}
-proc nom `mode1 `mode2 @attribut1 @attribut2 (arguments_formels) {
+func `mode nom @attribut (arguments_formels) -> $type {
   liste_instructions
 }
 \end{PLM}
 Où :
 \begin{itemize}
-  \item \plm=nom= est le nom de la procédure ;
-  \item \plm=`mode1= \plm=`mode2= est la liste non vide de l'ensemble des modes associés à la procédure ;
-  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la procédure.
+  \item \plm=nom= est le nom de la fonction ;
+  \item \plm=`mode= est la liste non vide de l'ensemble des modes associés à la fonction ;
+  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction ;
+  \item \plm=arguments_formels= est la liste (éventuellement vide) des paramètres formels~;
+  \item \plm=@type= est le type de la valeur renvoyée.
 \end{itemize}
 
+Contrairement à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=@type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
 Par exemple :
 
 \begin{PLM}
-proc setup `user () {
+func `user maFonction @noUnusedWarning () -> $uint32 {
+  result = 6
 }
 \end{PLM}
 
-Ceci définit la procédure \plm=setup=, sans argument, sans attribut, appelable uniquement en mode \plm=`user=.
+Ceci définit la fonction \plm=maFonction=, sans argument, appelable uniquement en mode \plm=`user= ; l'attribut \plm=@noUnusedWarning= signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
 
 \begin{PLM}
-proc goto `user @noUnusedWarning (
-  ?line:inLine $uint32
-  ?column:inColumn $uint8) {
+func `user autreFonction (?arg:a $uint27 ?b $uint27) -> $uint27 {
+  result = a +% b
 }
 \end{PLM}
 
-Ceci définit la procédure \plm=goto=, appelable uniquement en mode \plm=`user=, avec deux arguments formels en entrée. L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
+Ceci définit la fonction \plm=autreFonction=, avec deux arguments, sans attribut, appelable uniquement en mode \plm=`user=.
 
 
 
 
-\subsectionLabel{Procédures et registres de contrôle}{procEtRegistresContrôles}
+\subsectionLabel{Déclaration d'une « procédure »}{declarationProcedure}\index{Procédure}
 
-Si la procédure est déclarée avec le mode \plm!`user!, seuls les registres de contrôle déclarés \plm!@user! sont accessibles. Sinon, tous les registres de contrôle sont accessibles.
+La déclaration d'une « procédure » est la suivante :
+\begin{PLM}
+func `mode nom @attribut (arguments_formels) {
+  liste_instructions
+}
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la fonction ;
+  \item \plm=`mode= est la liste non vide de l'ensemble des modes associés à la fonction ;
+  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction ;
+  \item \plm=arguments_formels= est la liste (éventuellement vide) des paramètres formels.
+\end{itemize}
+
+Aucun type de retour n'est mentionné, aussi aucune variable nommée \plm=result= n'est pré-définie. Une procédure est appelable dans une instruction.
 
 
 
@@ -170,15 +247,107 @@ Si la procédure est déclarée avec le mode \plm!`user!, seuls les registres de
 
 
 
-\subsectionLabel{Attribut \texttt{@noUnusedWarning}}{attributNoWarningIfUnused}\index{"@noUnusedWarning}
 
-L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la procédure n'est pas utilisée.
+
+
+\subsectionLabel{Fonctions requises}{procedureRequise}
+
+La déclaration \plm+required func+ permet de signifier au compilateur qu'une procédure doit être définie, soit par la cible, soit par le programme utilisateur.
+
+Cette déclaration est la suivante :
+\begin{PLM}
+required func `mode nom @attribut (arguments_formels) -> $type
+\end{PLM}
+
+ou :
+
+\begin{PLM}
+required func `mode nom @attribut (arguments_formels)
+\end{PLM}
+
+Elle consiste en la déclaration de l'en-tête d'une fonction, précédée par le mot réservé \plm+required+.
+
+
+
+
+
+
+
+\subsectionLabel{Fonctions externes}{defProcedureExterne}
+
+Une fonction externe est une procédure définie en C ou en assembleur et appelable en PLM.
+
+La déclaration d'une fonction externe est la suivante :
+
+\begin{PLM}
+extern func `mode nom (arguments_formels) -> $type : "nom-assembleur"
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la fonction externe ;
+  \item \plm=`mode= est la liste non vide de l'ensemble des modes associés à la fonction ;
+  \item \plm=@type= est le type de la valeur renvoyée ;
+  \item \plm="nom-assembleur"= est le nom qui sera engendré en assembleur, elle correspond à la directive \texttt{asm} de CLANG (et de GCC).
+\end{itemize}
+
+Si la fonction externe est en fait une \emph{procédure}, sa déclaration est la suivante :
+
+\begin{PLM}
+extern func `mode nom (arguments_formels) : "nom-assembleur"
+\end{PLM}
+
+\subsubsection{Exemple de fonction externe}
+
+Prenons l'exemple de cette fonction, qui implémente le blocage de la tâche appelante dans une primitive :
+
+\begin{PLM}
+extern func
+`kernel block (?!inList:ioWaitingList $taskList) : "blockInList"
+\end{PLM}
+
+La signature PLM de cette fonction est \plm=block(?!inList:)=.
+
+Elle est appelable en mode \plm=`kernel=, c'est-à-dire dans une primitive. Dans l'instruction d'appel engendré en assembleur, le nom utilisé sera \texttt{func.blockInList}. Le préfixe \texttt{func.} est automatiquement ajouté par le compilateur.
+
+Dans le code C qui implémente cette fonction, la déclaration du prototype est :
+
+\begin{SHELL}
+void block\_in\_list (TaskList * ioWaitingList) \\
+asm ("!FUNC!blockInList") ;
+\end{SHELL}
+
+Le nom \texttt{block\_in\_list} est interne au code C.
+
+Le type C \texttt{TaskList} correspond au type PLM \plm=$taskList= ; ces deux types sont définis indépendemment, c'est au programmeur de s'assurer qu'ils ont des tailles identiques (ici, 32 bits).
+
+Le mode de passage de l'argument est spécifié par le sélecteur \plm=?!inList:=, c'est le mode \emph{entrée/sortie}, qui correspond au passage d'un pointeur en C. C'est au programmeur de s'assurer que les mode de passage spécifiés en PLM et C correspondent.
+
+Enfin, le nom de la routine engendré en assembleur par le compilateur CLANG est spécifié par \texttt{asm("!FUNC!blockInList")}. Le nom « \texttt{blockInList} » doit être celui déclaré comme « \emph{nom-assembleur} » dans la déclaration PLM, et « \texttt{!FUNC!} » est remplacé par « \texttt{func.} » par le pré-processeur PLM.
+
+
+
+
+
+\subsectionLabel{Attribut \texttt{@noUnusedWarning}}{attributFonctionNoWarningIfUnused}\index{"@noUnusedWarning}
+
+L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
+
+
+
+\subsectionLabel{Attribut \texttt{@global}}{attributProcGlobale}\index{"@global}
+
+L'attribut \plm+@global+ signifie que la procédure sera visible par le code C et assembleur du projet. Ainsi une procédure écrite en PLM pourra être appelée à partir du code C et du code assembleur.
+
+
 
 
 
 \subsectionLabel{Attribut \texttt{@weak}}{attributWeak}\index{"@weak}
 
-L'attribut \plm+@weak+ signifie que la routine peut être redéfinie par une routine de même nom, avec les mêmes arguments formels, les mêmes modes. Les fichiers de définition de cible utilisent cette possibilité pour définir des routines par défaut.
+[À REVOIR??]
+
+
+L'attribut \plm+@weak+ signifie que la fonction peut être redéfinie par une fonction de même nom, avec les mêmes paramètres formels, les mêmes modes. Les fichiers de définition de cible utilisent cette possibilité pour définir des routines par défaut.
 
 %Par exemple, la cible \texttt{teensy-3-1-it} définit cette routine d'interruption (voir le deuxième exemple du tutorial, \refSectionPage{deuxiemeExemple}) :
 
@@ -195,141 +364,15 @@ proc systickHandler `isr () {
 }
 \end{PLM}
 
-Comme cette nouvelle routine a le même nom, les mêmes arguments formels et le même mode que la routine marquée \plm+@weak+, elle est utilisée à la place de celle-ci.
+Comme cette nouvelle routine a le même nom, les mêmes paramètres formels et le même mode que la routine marquée \plm+@weak+, elle est utilisée à la place de celle-ci.
 
 
 
 
 
+\subsectionLabel{Fonctions et registres de contrôle}{procEtRegistresContrôles}
 
-\subsectionLabel{Attribut \texttt{@global}}{attributProcGlobale}\index{"@global}
-
-L'attribut \plm+@global+ signifie que la procédure sera visible par le code C et assembleur du projet. Ainsi une procédure écrite en PLM pourra être appelée à partir du code C et du code assembleur.
-
-
-
-
-
-
-\subsectionLabel{Attribut \texttt{@nullWhenPanicDisabled}}{nullWhenPanicDisabled}\index{"@nullWhenPanicDisabled}
-
-L'attribut \plm+@nullWhenPanicDisabled+ signifie que la procédure est éliminée si le projet est compilé avec la panique désactivée (option \OPTION{-{}-no-panic-generation}, \refSectionPage{optionCodeEngendre}). Les références à cette routine sont alors remplacées par la valeur zéro.
-
-Cette option est à utiliser en toute connaissance de cause. Elle sert à éliminer les routines d'interruption qui ne sont pas utilisées dans un projet.
-
-Par exemple, une routine d'interruption par défaut est déclarée par la cible :
-
-\begin{PLM}
-proc svcHandler `isr @nullWhenPanicDisabled @weak () {
-  panic 11
-}
-\end{PLM}
-
-Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec la panique activée, alors l'occurrence de l'interruption déclenchera l'exception n°11.
-
-Si cette routine n'est pas redéfinie par une routine de même nom, et que le programme est compilé avec la panique désactivée, alors l'attribut \plm+@nullWhenPanicDisabled+ fera que la routine sera éliminée de la génération de code, et l'entrée correspondante de la table des interruptions sera mise à zéro. Cela permet de ne pas engendrer de code inutile dans cette situation.
-
- 
-
-
-
-
-
-\subsectionLabel{Procédures requises}{procedureRequise}
-
-La déclaration \plm+required proc+ permet de signifier au compilateur qu'une procédure doit être définie, soit par la cible, soit par le programme utilisateur.
-
-Cette déclaration est la suivante :
-\begin{PLM}
-required proc nom `mode @attribut (arguments_formels)
-\end{PLM}
-
-Elle consiste à la déclaration de l'en-tête d'une procédure (voir \refSubsectionPage{declarationProcedure}), précédée par le mot réservée \plm+required+.
-
-Par exemple, la cible \texttt{teensy-3-1-it} comporte ces deux déclarations :
-
-\begin{PLM}
-required proc setup `user ()
-required proc loop `user ()
-\end{PLM}
-
-Ceci impose au programme utilisateur de définir ces deux procédures.
-
-
-
-
-
-
-
-\subsectionLabel{Procédures externes}{defProcedureExterne}
-
-Une procédure externe est une procédure définie en C ou en assembleur et appelable en PLM.
-
-La déclaration d'une procédure externe est la suivante :
-\begin{PLM}
-extern proc nom `mode1 `mode2 (arguments_formels)
-\end{PLM}
-Où :
-\begin{itemize}
-  \item \plm=nom= est le nom de la procédure externe ;
-  \item \plm=`mode1= \plm=`mode2= est la liste non vide de l'ensemble des modes associés à la procédure.
-\end{itemize}
-
-
-
-
-
-
-
-
-
-
-
-
-
-\sectionLabel{Fonctions}{defFonction}
-
-\subsectionLabel{Déclaration d'une fonction}{declarationFonction}\index{Fonction}
-
-La déclaration d'une fonction est la suivante :
-\begin{PLM}
-func nom `mode @attribut (arguments_formels) -> $type {
-  liste_instructions
-}
-\end{PLM}
-Où :
-\begin{itemize}
-  \item \plm=nom= est le nom de la fonction ;
-  \item \plm=`mode= est la liste non vide de l'ensemble des modes associés à la procédure ;
-  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la procédure ;
-  \item \plm=arguments_formels= est la liste (éventuellement vide) des paramètres formels (uniquement en entrée) ;
-  \item \plm=@type= est le type de la valeur renvoyée.
-\end{itemize}
-
-Contrairement à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=@type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
-Par exemple :
-
-\begin{PLM}
-func maFonction `user @noUnusedWarning () -> $uint32 {
-  result = 6
-}
-\end{PLM}
-
-Ceci définit la fonction \plm=maFonction=, sans argument, appelable uniquement en mode \plm=`user= ; l'attribut \plm=@noUnusedWarning= signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
-
-\begin{PLM}
-func autreFonction `user (?arg:a $uint27 ?b $uint27) -> $uint27 {
-  result = a +% b
-}
-\end{PLM}
-
-Ceci définit la fonction \plm=autreFonction=, avec deux arguments, sans attribut, appelable uniquement en mode \plm=`user=.
-
-
-\subsectionLabel{Attribut \texttt{@noUnusedWarning}}{attributFonctionNoWarningIfUnused}\index{"@noUnusedWarning}
-
-L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la fonction n'est pas utilisée.
-
+Si la fonction est déclarée avec le mode \plm!`user!, seuls les registres de contrôle déclarés \plm!@user! sont accessibles. Sinon, tous les registres de contrôle sont accessibles.
 
 
 \subsectionLabel{Fonctions et variables globales}{fonctionEtVariableGlobale}
@@ -444,16 +487,9 @@ L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la s
 
 \sectionLabel{Services}{declarationService}\index{service}
 
-Un \emph{service} est une procédure qui définit une primitive de l'exécutif\footnote{Le processeur l'exécute en mode privilégié.}.
+Un \emph{service} est une fonction qui définit une primitive non bloquante de l'exécutif\footnote{Le processeur l'exécute en mode privilégié.}.
 
-Un service est appelable à partir des tâches, c'est-à-dire de routines dans le mode \plm!`user!.
-
-Un service déclare le mode logiciel dans lequel il s'exécute :
-\begin{itemize}
-  \item \plm!`isr!, il est aussi appelable à partir d'une routine d'interruption  ;
-  \item \plm!`kernel!, il n'est pas appelable à partir d'une routine d'interruption.
-\end{itemize}
-
+Un service est appelable à partir des tâches, de routines dans le mode \plm!`user!, d'autres services, ou de primitives.
 
 Techniquement, l'appel s'effectue à travers une instruction telle que \emph{Service Call} qui provoque un appel système et donc permet l'exécution avec le processeur en mode privilégié.
 
@@ -464,15 +500,14 @@ Techniquement, l'appel s'effectue à travers une instruction telle que \emph{Ser
 
 La déclaration d'une section est la suivante :
 \begin{PLM}
-service nom `mode @attribut1 @attribut2 (arguments_formels) {
+service nom @attribut (arguments_formels) {
   liste_instructions
 }
 \end{PLM}
 Où :
 \begin{itemize}
   \item \plm=nom= est le nom de la section ;
-  \item \plm=`mode= est le mode logiciel, qui est soit \plm!`isr!, soit \plm!`kernel! ;
-  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés service ; actuellement, seul l'attribut \plm!@noUnusedWarning! est défini (\refSubsectionPage{attributNoWarningIfUnusedService}).
+  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés service ; actuellement, seul l'attribut \plm!@noUnusedWarning! est défini (\refSubsectionPage{attributNoWarningIfUnusedService}).
 \end{itemize}
 
 
@@ -495,7 +530,35 @@ Tous les registres de contrôle sont accessibles dans un service.
 
 \subsectionLabel{Attribut \texttt{@noUnusedWarning}}{attributNoWarningIfUnusedService}\index{"@noUnusedWarning}
 
-L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la section n'est pas utilisée.
+L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si le service n'est pas utilisé.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Primitives}{declarationPrimitive}\index{Primitive}
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Routine d'interruption}{declarationRoutineInterruption}\index{Routine!Interruption}\index{Interruption!Routine}
+
 
 
 
@@ -507,7 +570,7 @@ L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la s
 
 \section{Routines utiles}
 
-Le compilateur élimine les routines qui ne sont jamais appelées, en calculant le graphe des appels. Les racines de ce graphe sont les procédures requises (\refSubsectionPage{procedureRequise}), les routines \plm=boot=, \plm=init= et \plm=panic=. Les procédures et fonctions inatteignables sont éliminées, sans message d'alerte pour les routines déclarées avec l'attribut \plm!@noUnusedWarning!.
+Le compilateur élimine les routines qui ne sont jamais appelées, en calculant le graphe des appels. Les racines de ce graphe sont les procédures requises (\refSubsectionPage{procedureRequise}), les routines \plm=boot=, \plm=init= et \plm=panic=. Les routines inatteignables sont éliminées, sans message d'alerte pour les routines déclarées avec l'attribut \plm!@noUnusedWarning!.
 
 
 
