@@ -158,6 +158,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
+    ?@namedObjectMap namedObjectMap
     ?@localVariableMap localVariableMap
   )
 #--- Analyse formal arguments

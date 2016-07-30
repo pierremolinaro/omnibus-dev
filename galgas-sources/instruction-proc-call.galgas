@@ -175,6 +175,7 @@ private proc analyzeStandaloneRoutineCall
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -193,6 +194,7 @@ private proc analyzeStandaloneRoutineCall
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?localVariableMap: ioLocalVariableMap
+    !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
@@ -230,6 +232,7 @@ override method @remoteRoutineCallInstructionAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -253,6 +256,7 @@ override method @remoteRoutineCallInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?localVariableMap: ioLocalVariableMap
+      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
     )
@@ -271,6 +275,7 @@ override method @remoteRoutineCallInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?localVariableMap: ioLocalVariableMap
+      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?resultPtr:let @objectInMemoryIR targetObjectPtr
@@ -363,6 +368,7 @@ override method @remoteRoutineCallInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?localVariableMap: ioLocalVariableMap
+      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       !?effectiveIR:effectiveParameterListIR
@@ -400,6 +406,7 @@ proc analyzeRoutineCall
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
@@ -484,6 +491,7 @@ proc analyzeRoutineCall
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?localVariableMap: ioLocalVariableMap
+    !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:outEffectiveParameterListIR
@@ -507,6 +515,7 @@ proc analyzeEffectiveParameters
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
@@ -584,6 +593,7 @@ proc analyzeEffectiveParameters
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?localVariableMap: ioLocalVariableMap
+        !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @operandIR expressionResult

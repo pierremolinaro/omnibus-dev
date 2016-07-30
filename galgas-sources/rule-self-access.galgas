@@ -95,6 +95,7 @@ proc analyzeSelfAccess
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !resultPtr:@objectInMemoryIR outResultPtr
@@ -127,6 +128,7 @@ proc analyzeSelfAccess
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?localVariableMap: ioLocalVariableMap
+        !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
       )
@@ -160,6 +162,7 @@ proc analyzeArrayElementAccess
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -185,6 +188,7 @@ proc analyzeArrayElementAccess
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?localVariableMap: ioLocalVariableMap
+      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:let @operandIR indexResult

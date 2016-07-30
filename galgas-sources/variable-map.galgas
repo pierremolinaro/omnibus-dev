@@ -4,6 +4,18 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+map @namedObjectMap {
+  @unifiedTypeMap-proxy type
+  @bool readAccessAllowed
+  @bool copyable
+  @bool canBeUsedAsInputParameter
+
+  insert insertKey error message "duplicated $%K (already declared at %L"
+  search searchKey error message "$%K does not exist"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 proc initialVariableMap
   ?routineNameForInvocation:let @string inRoutineNameForInvocation
   ?context:let @semanticContext inContext
@@ -12,10 +24,12 @@ proc initialVariableMap
   ?globalsAreConstant:@bool inGlobalsAreConstant
   ?returnTypeName:let @lstring inReturnTypeName
   !@variableMap outVariableMap
+  !@namedObjectMap outAddressableEntityMap
   !@localVariableMap outLocalVariableMap
 {
   outVariableMap = .emptyMap
   outLocalVariableMap = .emptyMap
+  outAddressableEntityMap = {}
 #------------------------------------------------------- Add modules
   for (moduleName) in inContext.mModuleMap do
     let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
@@ -171,10 +185,12 @@ proc initialVariableMap
 proc variableMapWithConstants
   ?context:let @semanticContext inContext
   !@variableMap outVariableMap
+  !@namedObjectMap outAddressableEntityMap
   !@localVariableMap outLocalVariableMap
 {
   outVariableMap = .emptyMap
   outLocalVariableMap = .emptyMap
+  outAddressableEntityMap = {}
 #--- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedConstant

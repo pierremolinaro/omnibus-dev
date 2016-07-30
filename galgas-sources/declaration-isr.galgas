@@ -95,6 +95,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !globalsAreConstant:false
       !returnTypeName:["" nowhere]
       ?@variableMap variableMap
+      ?@namedObjectMap namedObjectMap
       ?@localVariableMap localVariableMap
     )
   #--- Self type
@@ -118,6 +119,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
       !?localVariableMap: localVariableMap
+      !?namedObjectMap: namedObjectMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]

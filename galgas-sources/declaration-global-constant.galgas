@@ -102,6 +102,7 @@ override method @globalConstantDeclaration enterInContext
     !globalsAreConstant:true # Any value, there is no defined global variable at this stage
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
+    ?@namedObjectMap namedObjectMap
     ?@localVariableMap localVariableMap
   )
 #--- Get destination type
@@ -128,6 +129,7 @@ override method @globalConstantDeclaration enterInContext
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
     !?localVariableMap: localVariableMap
+    !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:let @operandIR expressionResult

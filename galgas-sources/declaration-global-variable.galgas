@@ -236,6 +236,7 @@ method @globalVarDeclarationList-element enterInContext
   variableMapWithConstants (
     !context:ioContext
     ?@variableMap variableMap
+    ?@namedObjectMap namedObjectMap
     ?@localVariableMap localVariableMap
   )
   [mSourceExpression analyzeExpression
@@ -251,6 +252,7 @@ method @globalVarDeclarationList-element enterInContext
      !?staticStringMap:ioGlobalLiteralStringMap
      !?variableMap:variableMap
      !?localVariableMap: localVariableMap
+     !?namedObjectMap: namedObjectMap
      !?alloca:allocaList
      !?instructionListIR:instructionGenerationList
      ?result:let @operandIR expressionResult
