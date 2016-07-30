@@ -12451,1092 +12451,980 @@ GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::extractObject (const GA
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        '@semanticTypePrecedenceGraph' graph                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_semanticTypePrecedenceGraph::GALGAS_semanticTypePrecedenceGraph (void) :
-AC_GALGAS_graph () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::constructor_emptyGraph (LOCATION_ARGS) {
-  GALGAS_semanticTypePrecedenceGraph result ;
-  result.makeNewEmptyGraph (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::setter_addNode (GALGAS_lstring inKey,
-                                                         GALGAS_abstractDeclaration inArgument_0,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  GALGAS_declarationListAST::makeAttributesFromObjects (attributes, inArgument_0 COMMA_THERE) ;
-  const char * kErrorMessage = "the '%K' symbol is already declared at %L" ;
-  internalAddNode (inKey, kErrorMessage, attributes, inCompiler COMMA_THERE) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::method_topologicalSort (GALGAS_declarationListAST & outSortedList,
-                                                                 GALGAS_lstringlist & outSortedKeyList,
-                                                                 GALGAS_declarationListAST & outUnsortedList,
-                                                                 GALGAS_lstringlist & outUnsortedKeyList,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
-  cSharedList * sortedList = NULL ;
-  cSharedList * unsortedList = NULL ;
-  internalTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
-  outSortedList = GALGAS_declarationListAST (sortedList) ;
-  outUnsortedList = GALGAS_declarationListAST (unsortedList) ;
-  GALGAS_declarationListAST::detachSharedList (sortedList) ;
-  GALGAS_declarationListAST::detachSharedList (unsortedList) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::method_depthFirstTopologicalSort (GALGAS_declarationListAST & outSortedList,
-                                                                           GALGAS_lstringlist & outSortedKeyList,
-                                                                           GALGAS_declarationListAST & outUnsortedList,
-                                                                           GALGAS_lstringlist & outUnsortedKeyList,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const {
-  cSharedList * sortedList = NULL ;
-  cSharedList * unsortedList = NULL ;
-  internalDepthFirstTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
-  outSortedList = GALGAS_declarationListAST (sortedList) ;
-  outUnsortedList = GALGAS_declarationListAST (unsortedList) ;
-  GALGAS_declarationListAST::detachSharedList (sortedList) ;
-  GALGAS_declarationListAST::detachSharedList (unsortedList) ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::getter_reversedGraph (LOCATION_ARGS) const {
-  GALGAS_semanticTypePrecedenceGraph result ;
-  result.reversedGraphFromGraph (*this COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::method_circularities (GALGAS_declarationListAST & outInfoList,
-                                                               GALGAS_lstringlist & outKeyList
-                                                               COMMA_LOCATION_ARGS) const {
-  cSharedList * infoList = NULL ;
-  internalFindCircularities (infoList, outKeyList COMMA_THERE) ;
-  outInfoList = GALGAS_declarationListAST (infoList) ;
-  GALGAS_declarationListAST::detachSharedList (infoList) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::method_nodesWithNoSuccessor (GALGAS_declarationListAST & outInfoList,
-                                                                      GALGAS_lstringlist & outKeyList
-                                                                      COMMA_LOCATION_ARGS) const {
-  cSharedList * infoList = NULL ;
-  internalNodesWithNoSuccessor (infoList, outKeyList COMMA_THERE) ;
-  outInfoList = GALGAS_declarationListAST (infoList) ;
-  GALGAS_declarationListAST::detachSharedList (infoList) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_semanticTypePrecedenceGraph::method_nodesWithNoPredecessor (GALGAS_declarationListAST & outInfoList,
-                                                                        GALGAS_lstringlist & outKeyList
-                                                                        COMMA_LOCATION_ARGS) const {
-  cSharedList * infoList = NULL ;
-  internalNodesWithNoPredecessor (infoList, outKeyList COMMA_THERE) ;
-  outInfoList = GALGAS_declarationListAST (infoList) ;
-  GALGAS_declarationListAST::detachSharedList (infoList) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::getter_subgraphFromNodes (const GALGAS_lstringlist & inStartKeyList,
-                                                                                                 const GALGAS_stringset & inKeysToExclude,
-                                                                                                 C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_semanticTypePrecedenceGraph result ;
-  subGraph (result, inStartKeyList, inKeysToExclude, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_semanticTypePrecedenceGraph::getter_accessibleNodesFromNodes (const GALGAS_lstringlist & inStartKeyList,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) const {
-  GALGAS_lstringlist result ;
-  GALGAS_semanticTypePrecedenceGraph resultingGraph ;
-  subGraph (resultingGraph,
-            inStartKeyList,
-            GALGAS_stringset::constructor_emptySet (HERE),
-            inCompiler
-            COMMA_THERE) ;
-  if (resultingGraph.isValid ()) {
-    result = resultingGraph.getter_lkeyList (THERE) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @semanticTypePrecedenceGraph type                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_semanticTypePrecedenceGraph ("semanticTypePrecedenceGraph",
-                                                    NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_semanticTypePrecedenceGraph::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_semanticTypePrecedenceGraph ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_semanticTypePrecedenceGraph::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_semanticTypePrecedenceGraph (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::extractObject (const GALGAS_object & inObject,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_semanticTypePrecedenceGraph result ;
-  const GALGAS_semanticTypePrecedenceGraph * p = (const GALGAS_semanticTypePrecedenceGraph *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_semanticTypePrecedenceGraph *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("semanticTypePrecedenceGraph", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_routineMapForContext::cMapElement_routineMapForContext (const GALGAS_lstring & inKey,
-                                                                    const GALGAS_lstring & in_mRoutineLLVMName,
-                                                                    const GALGAS_bool & in_mIsPublic,
-                                                                    const GALGAS_modeMap & in_mModeMap,
-                                                                    const GALGAS_procedureSignature & in_mSignature,
-                                                                    const GALGAS_routineKind & in_mRoutineKind,
-                                                                    const GALGAS_bool & in_mWeak,
-                                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType,
-                                                                    const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation,
-                                                                    const GALGAS_bool & in_mCanAccessProperties,
-                                                                    const GALGAS_bool & in_mCanMutateProperties
-                                                                    COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE),
-mAttribute_mRoutineLLVMName (in_mRoutineLLVMName),
-mAttribute_mIsPublic (in_mIsPublic),
-mAttribute_mModeMap (in_mModeMap),
-mAttribute_mSignature (in_mSignature),
-mAttribute_mRoutineKind (in_mRoutineKind),
-mAttribute_mWeak (in_mWeak),
-mAttribute_mReturnType (in_mReturnType),
-mAttribute_mAppendFileAndLineArgumentForPanicLocation (in_mAppendFileAndLineArgumentForPanicLocation),
-mAttribute_mCanAccessProperties (in_mCanAccessProperties),
-mAttribute_mCanMutateProperties (in_mCanMutateProperties) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cMapElement_routineMapForContext::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mRoutineLLVMName.isValid () && mAttribute_mIsPublic.isValid () && mAttribute_mModeMap.isValid () && mAttribute_mSignature.isValid () && mAttribute_mRoutineKind.isValid () && mAttribute_mWeak.isValid () && mAttribute_mReturnType.isValid () && mAttribute_mAppendFileAndLineArgumentForPanicLocation.isValid () && mAttribute_mCanAccessProperties.isValid () && mAttribute_mCanMutateProperties.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement * cMapElement_routineMapForContext::copy (void) {
-  cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_routineMapForContext (mAttribute_lkey, mAttribute_mRoutineLLVMName, mAttribute_mIsPublic, mAttribute_mModeMap, mAttribute_mSignature, mAttribute_mRoutineKind, mAttribute_mWeak, mAttribute_mReturnType, mAttribute_mAppendFileAndLineArgumentForPanicLocation, mAttribute_mCanAccessProperties, mAttribute_mCanMutateProperties COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cMapElement_routineMapForContext::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mRoutineLLVMName" ":" ;
-  mAttribute_mRoutineLLVMName.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mIsPublic" ":" ;
-  mAttribute_mIsPublic.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mModeMap" ":" ;
-  mAttribute_mModeMap.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mSignature" ":" ;
-  mAttribute_mSignature.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mRoutineKind" ":" ;
-  mAttribute_mRoutineKind.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mWeak" ":" ;
-  mAttribute_mWeak.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mReturnType" ":" ;
-  mAttribute_mReturnType.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mAppendFileAndLineArgumentForPanicLocation" ":" ;
-  mAttribute_mAppendFileAndLineArgumentForPanicLocation.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mCanAccessProperties" ":" ;
-  mAttribute_mCanAccessProperties.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mCanMutateProperties" ":" ;
-  mAttribute_mCanMutateProperties.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cMapElement_routineMapForContext::compare (const cCollectionElement * inOperand) const {
-  cMapElement_routineMapForContext * operand = (cMapElement_routineMapForContext *) inOperand ;
-  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_mRoutineLLVMName.objectCompare (operand->mAttribute_mRoutineLLVMName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mIsPublic.objectCompare (operand->mAttribute_mIsPublic) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mModeMap.objectCompare (operand->mAttribute_mModeMap) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mSignature.objectCompare (operand->mAttribute_mSignature) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mRoutineKind.objectCompare (operand->mAttribute_mRoutineKind) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mWeak.objectCompare (operand->mAttribute_mWeak) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mReturnType.objectCompare (operand->mAttribute_mReturnType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mAppendFileAndLineArgumentForPanicLocation.objectCompare (operand->mAttribute_mAppendFileAndLineArgumentForPanicLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mCanAccessProperties.objectCompare (operand->mAttribute_mCanAccessProperties) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mCanMutateProperties.objectCompare (operand->mAttribute_mCanMutateProperties) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineMapForContext::GALGAS_routineMapForContext (void) :
-AC_GALGAS_map () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineMapForContext::GALGAS_routineMapForContext (const GALGAS_routineMapForContext & inSource) :
-AC_GALGAS_map (inSource) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineMapForContext & GALGAS_routineMapForContext::operator = (const GALGAS_routineMapForContext & inSource) {
-  * ((AC_GALGAS_map *) this) = inSource ;
-  return * this ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineMapForContext GALGAS_routineMapForContext::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_routineMapForContext result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineMapForContext GALGAS_routineMapForContext::constructor_mapWithMapToOverride (const GALGAS_routineMapForContext & inMapToOverride
-                                                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_routineMapForContext result ;
-  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineMapForContext GALGAS_routineMapForContext::getter_overriddenMap (C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_routineMapForContext result ;
-  getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
-                                                       const GALGAS_lstring & inArgument0,
-                                                       const GALGAS_bool & inArgument1,
-                                                       const GALGAS_modeMap & inArgument2,
-                                                       const GALGAS_procedureSignature & inArgument3,
-                                                       const GALGAS_routineKind & inArgument4,
-                                                       const GALGAS_bool & inArgument5,
-                                                       const GALGAS_unifiedTypeMap_2D_proxy & inArgument6,
-                                                       const GALGAS_bool & inArgument7,
-                                                       const GALGAS_bool & inArgument8,
-                                                       const GALGAS_bool & inArgument9,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  cMapElement_routineMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8, inArgument9 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@routineMapForContext insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_insertKey (GALGAS_lstring inKey,
-                                                    GALGAS_lstring inArgument0,
-                                                    GALGAS_bool inArgument1,
-                                                    GALGAS_modeMap inArgument2,
-                                                    GALGAS_procedureSignature inArgument3,
-                                                    GALGAS_routineKind inArgument4,
-                                                    GALGAS_bool inArgument5,
-                                                    GALGAS_unifiedTypeMap_2D_proxy inArgument6,
-                                                    GALGAS_bool inArgument7,
-                                                    GALGAS_bool inArgument8,
-                                                    GALGAS_bool inArgument9,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
-  cMapElement_routineMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8, inArgument9 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%K' routine is already declared in %L" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const char * kSearchErrorMessage_routineMapForContext_searchKey = "there is no '%K' routine" ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
-                                                    GALGAS_lstring & outArgument0,
-                                                    GALGAS_bool & outArgument1,
-                                                    GALGAS_modeMap & outArgument2,
-                                                    GALGAS_procedureSignature & outArgument3,
-                                                    GALGAS_routineKind & outArgument4,
-                                                    GALGAS_bool & outArgument5,
-                                                    GALGAS_unifiedTypeMap_2D_proxy & outArgument6,
-                                                    GALGAS_bool & outArgument7,
-                                                    GALGAS_bool & outArgument8,
-                                                    GALGAS_bool & outArgument9,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) performSearch (inKey,
-                                                                                                           inCompiler,
-                                                                                                           kSearchErrorMessage_routineMapForContext_searchKey
-                                                                                                           COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-    outArgument1.drop () ;
-    outArgument2.drop () ;
-    outArgument3.drop () ;
-    outArgument4.drop () ;
-    outArgument5.drop () ;
-    outArgument6.drop () ;
-    outArgument7.drop () ;
-    outArgument8.drop () ;
-    outArgument9.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    outArgument0 = p->mAttribute_mRoutineLLVMName ;
-    outArgument1 = p->mAttribute_mIsPublic ;
-    outArgument2 = p->mAttribute_mModeMap ;
-    outArgument3 = p->mAttribute_mSignature ;
-    outArgument4 = p->mAttribute_mRoutineKind ;
-    outArgument5 = p->mAttribute_mWeak ;
-    outArgument6 = p->mAttribute_mReturnType ;
-    outArgument7 = p->mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
-    outArgument8 = p->mAttribute_mCanAccessProperties ;
-    outArgument9 = p->mAttribute_mCanMutateProperties ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_removeKey (GALGAS_lstring inKey,
-                                                    GALGAS_lstring & outArgument0,
-                                                    GALGAS_bool & outArgument1,
-                                                    GALGAS_modeMap & outArgument2,
-                                                    GALGAS_procedureSignature & outArgument3,
-                                                    GALGAS_routineKind & outArgument4,
-                                                    GALGAS_bool & outArgument5,
-                                                    GALGAS_unifiedTypeMap_2D_proxy & outArgument6,
-                                                    GALGAS_bool & outArgument7,
-                                                    GALGAS_bool & outArgument8,
-                                                    GALGAS_bool & outArgument9,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
-  const char * kRemoveErrorMessage = "there is no '%K' routine" ;
-  capCollectionElement attributes ;
-  performRemove (inKey, attributes, inCompiler, kRemoveErrorMessage COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes.ptr () ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    outArgument0 = p->mAttribute_mRoutineLLVMName ;
-    outArgument1 = p->mAttribute_mIsPublic ;
-    outArgument2 = p->mAttribute_mModeMap ;
-    outArgument3 = p->mAttribute_mSignature ;
-    outArgument4 = p->mAttribute_mRoutineKind ;
-    outArgument5 = p->mAttribute_mWeak ;
-    outArgument6 = p->mAttribute_mReturnType ;
-    outArgument7 = p->mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
-    outArgument8 = p->mAttribute_mCanAccessProperties ;
-    outArgument9 = p->mAttribute_mCanMutateProperties ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_routineMapForContext::getter_mRoutineLLVMNameForKey (const GALGAS_string & inKey,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_lstring result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mAttribute_mRoutineLLVMName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineMapForContext::getter_mIsPublicForKey (const GALGAS_string & inKey,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mAttribute_mIsPublic ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_modeMap GALGAS_routineMapForContext::getter_mModeMapForKey (const GALGAS_string & inKey,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_modeMap result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mAttribute_mModeMap ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature GALGAS_routineMapForContext::getter_mSignatureForKey (const GALGAS_string & inKey,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_procedureSignature result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mAttribute_mSignature ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineKind GALGAS_routineMapForContext::getter_mRoutineKindForKey (const GALGAS_string & inKey,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_routineKind result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mAttribute_mRoutineKind ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineMapForContext::getter_mWeakForKey (const GALGAS_string & inKey,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mAttribute_mWeak ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_routineMapForContext::getter_mReturnTypeForKey (const GALGAS_string & inKey,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mAttribute_mReturnType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineMapForContext::getter_mAppendFileAndLineArgumentForPanicLocationForKey (const GALGAS_string & inKey,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineMapForContext::getter_mCanAccessPropertiesForKey (const GALGAS_string & inKey,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mAttribute_mCanAccessProperties ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineMapForContext::getter_mCanMutatePropertiesForKey (const GALGAS_string & inKey,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mAttribute_mCanMutateProperties ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_setMRoutineLLVMNameForKey (GALGAS_lstring inAttributeValue,
-                                                                    GALGAS_string inKey,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mAttribute_mRoutineLLVMName = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_setMIsPublicForKey (GALGAS_bool inAttributeValue,
-                                                             GALGAS_string inKey,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mAttribute_mIsPublic = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_setMModeMapForKey (GALGAS_modeMap inAttributeValue,
-                                                            GALGAS_string inKey,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mAttribute_mModeMap = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_setMSignatureForKey (GALGAS_procedureSignature inAttributeValue,
-                                                              GALGAS_string inKey,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mAttribute_mSignature = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_setMRoutineKindForKey (GALGAS_routineKind inAttributeValue,
-                                                                GALGAS_string inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mAttribute_mRoutineKind = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_setMWeakForKey (GALGAS_bool inAttributeValue,
-                                                         GALGAS_string inKey,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mAttribute_mWeak = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_setMReturnTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                               GALGAS_string inKey,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mAttribute_mReturnType = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_setMAppendFileAndLineArgumentForPanicLocationForKey (GALGAS_bool inAttributeValue,
-                                                                                              GALGAS_string inKey,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mAttribute_mAppendFileAndLineArgumentForPanicLocation = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_setMCanAccessPropertiesForKey (GALGAS_bool inAttributeValue,
-                                                                        GALGAS_string inKey,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mAttribute_mCanAccessProperties = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineMapForContext::setter_setMCanMutatePropertiesForKey (GALGAS_bool inAttributeValue,
-                                                                        GALGAS_string inKey,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mAttribute_mCanMutateProperties = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_routineMapForContext * GALGAS_routineMapForContext::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                   const GALGAS_string & inKey
-                                                                                                   COMMA_LOCATION_ARGS) {
-  cMapElement_routineMapForContext * result = (cMapElement_routineMapForContext *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_routineMapForContext) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_routineMapForContext::cEnumerator_routineMapForContext (const GALGAS_routineMapForContext & inEnumeratedObject,
-                                                                    const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator () {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineMapForContext_2D_element cEnumerator_routineMapForContext::current (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return GALGAS_routineMapForContext_2D_element (p->mAttribute_lkey, p->mAttribute_mRoutineLLVMName, p->mAttribute_mIsPublic, p->mAttribute_mModeMap, p->mAttribute_mSignature, p->mAttribute_mRoutineKind, p->mAttribute_mWeak, p->mAttribute_mReturnType, p->mAttribute_mAppendFileAndLineArgumentForPanicLocation, p->mAttribute_mCanAccessProperties, p->mAttribute_mCanMutateProperties) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_routineMapForContext::current_lkey (LOCATION_ARGS) const {
-  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement) ;
-  return p->mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_routineMapForContext::current_mRoutineLLVMName (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mAttribute_mRoutineLLVMName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_routineMapForContext::current_mIsPublic (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mAttribute_mIsPublic ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_modeMap cEnumerator_routineMapForContext::current_mModeMap (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mAttribute_mModeMap ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature cEnumerator_routineMapForContext::current_mSignature (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mAttribute_mSignature ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineKind cEnumerator_routineMapForContext::current_mRoutineKind (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mAttribute_mRoutineKind ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_routineMapForContext::current_mWeak (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mAttribute_mWeak ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_routineMapForContext::current_mReturnType (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mAttribute_mReturnType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_routineMapForContext::current_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_routineMapForContext::current_mCanAccessProperties (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mAttribute_mCanAccessProperties ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_routineMapForContext::current_mCanMutateProperties (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mAttribute_mCanMutateProperties ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @routineMapForContext type                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_routineMapForContext ("routineMapForContext",
-                                             NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_routineMapForContext::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_routineMapForContext ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_routineMapForContext::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_routineMapForContext (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineMapForContext GALGAS_routineMapForContext::extractObject (const GALGAS_object & inObject,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_routineMapForContext result ;
-  const GALGAS_routineMapForContext * p = (const GALGAS_routineMapForContext *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_routineMapForContext *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("routineMapForContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cMapElement_modeMap::cMapElement_modeMap (const GALGAS_lstring & inKey
-                                          COMMA_LOCATION_ARGS) :
+cMapElement_localVariableMap::cMapElement_localVariableMap (const GALGAS_lstring & inKey
+                                                            COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cMapElement_modeMap::isValid (void) const {
+bool cMapElement_localVariableMap::isValid (void) const {
   return mAttribute_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement * cMapElement_modeMap::copy (void) {
+cMapElement * cMapElement_localVariableMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_modeMap (mAttribute_lkey COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_localVariableMap (mAttribute_lkey COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cMapElement_modeMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
+void cMapElement_localVariableMap::description (C_String & /* ioString */, const int32_t /* inIndentation */) const {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cMapElement_modeMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_modeMap * operand = (cMapElement_modeMap *) inOperand ;
+typeComparisonResult cMapElement_localVariableMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_localVariableMap * operand = (cMapElement_localVariableMap *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_modeMap::GALGAS_modeMap (void) :
-AC_GALGAS_map () {
+GALGAS_localVariableMap::GALGAS_localVariableMap (void) :
+AC_GALGAS_uniqueMap (kMapAutomatonNoIssue, "") {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_modeMap::GALGAS_modeMap (const GALGAS_modeMap & inSource) :
-AC_GALGAS_map (inSource) {
+GALGAS_localVariableMap::GALGAS_localVariableMap (const GALGAS_localVariableMap & inSource) :
+AC_GALGAS_uniqueMap (inSource) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_modeMap & GALGAS_modeMap::operator = (const GALGAS_modeMap & inSource) {
-  * ((AC_GALGAS_map *) this) = inSource ;
+GALGAS_localVariableMap & GALGAS_localVariableMap::operator = (const GALGAS_localVariableMap & inSource) {
+  * ((AC_GALGAS_uniqueMap *) this) = inSource ;
   return * this ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_modeMap GALGAS_modeMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_modeMap result ;
+GALGAS_localVariableMap GALGAS_localVariableMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_localVariableMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+//  Map automaton states                                                       *
+//---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_modeMap GALGAS_modeMap::constructor_mapWithMapToOverride (const GALGAS_modeMap & inMapToOverride
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  static const uint32_t kMapStateCount_localVariableMap = 20 ;
+#endif
+static const uint32_t kMapState_localVariableMap_constantInputFormalArgument = 13 ;
+static const uint32_t kMapState_localVariableMap_constantInputFormalArgumentDeclaredAsUnused = 15 ;
+static const uint32_t kMapState_localVariableMap_definedLocalVariable = 4 ;
+static const uint32_t kMapState_localVariableMap_definedOutputFormalArgument = 8 ;
+static const uint32_t kMapState_localVariableMap_droppedInputFormalArgument = 18 ;
+static const uint32_t kMapState_localVariableMap_droppedInputOutputFormalArgument = 11 ;
+static const uint32_t kMapState_localVariableMap_droppedLocalVariable = 6 ;
+static const uint32_t kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused = 19 ;
+static const uint32_t kMapState_localVariableMap_inputFormalParameter = 16 ;
+static const uint32_t kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused = 12 ;
+static const uint32_t kMapState_localVariableMap_localConstant = 1 ;
+static const uint32_t kMapState_localVariableMap_undefinedLocalConstant = 2 ;
+static const uint32_t kMapState_localVariableMap_undefinedLocalVariable = 3 ;
+static const uint32_t kMapState_localVariableMap_undefinedOutputFormalArgument = 7 ;
+static const uint32_t kMapState_localVariableMap_unusedInputOutputFormalArgument = 9 ;
+static const uint32_t kMapState_localVariableMap_usedConstantInputFormalArgument = 14 ;
+static const uint32_t kMapState_localVariableMap_usedInputFormalArgument = 17 ;
+static const uint32_t kMapState_localVariableMap_usedInputOutputFormalArgument = 10 ;
+static const uint32_t kMapState_localVariableMap_usedLocalConstant = 0 ;
+static const uint32_t kMapState_localVariableMap_usedLocalVariable = 5 ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Map automaton state names                                                  *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * kMapStateNames_localVariableMap [20] = {
+  "usedLocalConstant",
+  "localConstant",
+  "undefinedLocalConstant",
+  "undefinedLocalVariable",
+  "definedLocalVariable",
+  "usedLocalVariable",
+  "droppedLocalVariable",
+  "undefinedOutputFormalArgument",
+  "definedOutputFormalArgument",
+  "unusedInputOutputFormalArgument",
+  "usedInputOutputFormalArgument",
+  "droppedInputOutputFormalArgument",
+  "inputOutputFormalArgumentDeclaredAsUnused",
+  "constantInputFormalArgument",
+  "usedConstantInputFormalArgument",
+  "constantInputFormalArgumentDeclaredAsUnused",
+  "inputFormalParameter",
+  "usedInputFormalArgument",
+  "droppedInputFormalArgument",
+  "inputFormalArgumentDeclaredAsUnused"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Map automaton actions                                                    *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const uint32_t kMapActionCount_localVariableMap = 7 ;
+static const uint32_t kMapAction_localVariableMap_constMethodCall = 4 ;
+static const uint32_t kMapAction_localVariableMap_dropAccess = 3 ;
+static const uint32_t kMapAction_localVariableMap_methodCall = 5 ;
+static const uint32_t kMapAction_localVariableMap_neutralAccess = 6 ;
+static const uint32_t kMapAction_localVariableMap_readAccess = 0 ;
+static const uint32_t kMapAction_localVariableMap_readWriteAccess = 2 ;
+static const uint32_t kMapAction_localVariableMap_writeAccess = 1 ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Map automaton action names                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * kMapActionNames_localVariableMap [7] = {
+  "constMethodCall",
+  "dropAccess",
+  "methodCall",
+  "neutralAccess",
+  "readAccess",
+  "readWriteAccess",
+  "writeAccess"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Map automaton transitions                                                  *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const cMapAutomatonTransition kMapTransitions_localVariableMap [20 * 7] = {
+// State 'usedLocalConstant', index 0 
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonIssueError, "a constant cannot be written"}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonIssueError, "a constant cannot be dropped"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'localConstant', index 1 
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonIssueError, "a constant cannot be written"}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonIssueError, "a constant cannot be dropped"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_localConstant /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'undefinedLocalConstant', index 2 
+  {kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_localConstant /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapAutomatonIssueError, "the constant is undefined"}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapAutomatonIssueError, "a constant cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'undefinedLocalVariable', index 3 
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapAutomatonIssueError, "an undefined local variable cannot be read"}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapAutomatonIssueError, "an undefined local variable cannot be modified"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapAutomatonIssueWarning, "the local variable has no value"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapAutomatonIssueError, "an undefined local variable cannot be read"}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapAutomatonIssueError, "an undefined local variable cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'definedLocalVariable', index 4 
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonIssueWarning, "the local variable has been dropped without any read"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'usedLocalVariable', index 5 
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'droppedLocalVariable', index 6 
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonIssueError, "a dropped local variable cannot be read"}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonIssueError, "a dropped local variable cannot be read"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonIssueWarning, "the local variable is already dropped"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonIssueError, "the local variable is dropped"}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonIssueError, "the local variable is dropped"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'undefinedOutputFormalArgument', index 7 
+  {kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapAutomatonIssueError, "an undefined output formal parameter cannot be read"}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapAutomatonIssueError, "an undefined output formal parameter cannot be read"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapAutomatonIssueWarning, "the output formal parameter has no value"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapAutomatonIssueWarning, "the output formal parameter has no value"}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapAutomatonIssueWarning, "the output formal parameter has no value"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'definedOutputFormalArgument', index 8 
+  {kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'unusedInputOutputFormalArgument', index 9 
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'usedInputOutputFormalArgument', index 10 
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'droppedInputOutputFormalArgument', index 11 
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonIssueError, "a dropped input/output formal argument cannot be read"}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonIssueError, "a dropped input/output formal argument cannot be read"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonIssueWarning, "the input/output formal argument is already dropped"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonIssueError, "the input/output formal argument is dropped"}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonIssueError, "the input/output formal argument is dropped"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'inputOutputFormalArgumentDeclaredAsUnused', index 12 
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonIssueWarning, "the input/output formal parameter has been declared as unused"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'constantInputFormalArgument', index 13 
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be dropped"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_constantInputFormalArgument /* 13 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'usedConstantInputFormalArgument', index 14 
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be dropped"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'constantInputFormalArgumentDeclaredAsUnused', index 15 
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueWarning, "the constant input formal parameter is declared as unused"}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be written"}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be dropped"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueWarning, "the constant input formal parameter is declared as unused"}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonIssueError, "a constant input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_constantInputFormalArgumentDeclaredAsUnused /* 15 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'inputFormalParameter', index 16 
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'usedInputFormalArgument', index 17 
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonNoIssue, ""}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'droppedInputFormalArgument', index 18 
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonIssueError, "a dropped input formal parameter cannot be read"}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonIssueError, "a dropped input formal parameter cannot be modified"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonIssueWarning, "the input formal parameter is already dropped"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonIssueWarning, "the input formal parameter is dropped"}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonIssueError, "a dropped input formal parameter cannot be modified"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+// State 'inputFormalArgumentDeclaredAsUnused', index 19 
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'readAccess', (index 0)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'writeAccess', (index 1)
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'readWriteAccess', (index 2)
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'dropAccess', (index 3)
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'constMethodCall', (index 4)
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonIssueWarning, "the input formal parameter is declared as unused"}, // for action 'methodCall', (index 5)
+  {kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Map automaton final state issues                                           *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const cMapAutomatonFinalIssue kMapAutomatonFinalIssue_localVariableMap [20] = {
+  {kMapAutomatonNoIssue, ""},// state 'usedLocalConstant' (index 0)
+  {kMapAutomatonIssueWarning, "the '%K' constant value is unused"},// state 'localConstant' (index 1)
+  {kMapAutomatonIssueWarning, "the '%K' constant value is unused"},// state 'undefinedLocalConstant' (index 2)
+  {kMapAutomatonIssueWarning, "the '%K' local variable is unused"},// state 'undefinedLocalVariable' (index 3)
+  {kMapAutomatonNoIssue, ""},// state 'definedLocalVariable' (index 4)
+  {kMapAutomatonNoIssue, ""},// state 'usedLocalVariable' (index 5)
+  {kMapAutomatonNoIssue, ""},// state 'droppedLocalVariable' (index 6)
+  {kMapAutomatonIssueError, "the '%K' output formal parameter is undefined"},// state 'undefinedOutputFormalArgument' (index 7)
+  {kMapAutomatonNoIssue, ""},// state 'definedOutputFormalArgument' (index 8)
+  {kMapAutomatonIssueWarning, "the '%K' input/output formal parameter is unused"},// state 'unusedInputOutputFormalArgument' (index 9)
+  {kMapAutomatonNoIssue, ""},// state 'usedInputOutputFormalArgument' (index 10)
+  {kMapAutomatonIssueError, "the '%K' input/ouput formal argument should be valuated at the end of the routine"},// state 'droppedInputOutputFormalArgument' (index 11)
+  {kMapAutomatonNoIssue, ""},// state 'inputOutputFormalArgumentDeclaredAsUnused' (index 12)
+  {kMapAutomatonIssueWarning, "the constant '%K' input formal parameter is not used and is not declared as unused"},// state 'constantInputFormalArgument' (index 13)
+  {kMapAutomatonNoIssue, ""},// state 'usedConstantInputFormalArgument' (index 14)
+  {kMapAutomatonNoIssue, ""},// state 'constantInputFormalArgumentDeclaredAsUnused' (index 15)
+  {kMapAutomatonIssueWarning, "the '%K' input formal parameter is not used and is not declared as unused"},// state 'inputFormalParameter' (index 16)
+  {kMapAutomatonNoIssue, ""},// state 'usedInputFormalArgument' (index 17)
+  {kMapAutomatonNoIssue, ""},// state 'droppedInputFormalArgument' (index 18)
+  {kMapAutomatonNoIssue, ""},// state 'inputFormalArgumentDeclaredAsUnused' (index 19)
+} ;
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_closeBranch (GALGAS_location inErrorLocation,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  closeBranch (inErrorLocation,
+               kMapAutomatonFinalIssue_localVariableMap,
+               #ifndef DO_NOT_GENERATE_CHECKINGS
+                 kMapStateCount_localVariableMap,
+               #endif
+               inCompiler COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::method_checkAutomatonStates (GALGAS_location inErrorLocation,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const {
+  checkAutomatonStates (inErrorLocation, kMapAutomatonFinalIssue_localVariableMap, inCompiler COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                             map override 'selectBlock'                                              *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const cBranchOverrideTransformationDescriptor kBranchBehaviourForOverride_localVariableMap_selectBlock [28] = {
+  {kMapState_localVariableMap_localConstant /* 1 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
+  {kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapState_localVariableMap_localConstant /* 1 */, kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_constantInputFormalArgument /* 13 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_constantInputFormalArgumentDeclaredAsUnused /* 15 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonNoIssue, ""},
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverride_localVariableMap_selectBlock [40] = {
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapState_localVariableMap_localConstant /* 1 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_localConstant /* 1 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones let it undefined"},
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonIssueError, "this branch lets the '%K' variable undefined, while previous ones define it"},
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonIssueError, "this branch drops the '%K' variable, while previous ones let it defined"},
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonIssueError, "this branch lets the '%K' variable undefined, while previous defines let it"},
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonIssueError, "this branch drops the '%K' variable, while previous ones let it defined"},
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones drop it"},
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonIssueError, "this branch defines the '%K' variable, while previous ones drop it"},
+  {kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonIssueError, "this branch defines the '%K' output formal argument, while previous ones let it undefined"},
+  {kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonIssueError, "this branch lets the '%K' variable undefined, while previous ones define it"},
+  {kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapAutomatonIssueError, "this branch drops the '%K' input/output formal argument, while previous ones let it undefined"},
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonIssueError, "this branch drops the '%K' input/output formal argument, while previous ones let it defined"},
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapAutomatonIssueError, "this branch lets the '%K' input/output formal argument defined, while previous ones drop it"},
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonIssueError, "this branch lets the '%K' input/output formal argument defined, while previous ones drop it"},
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapAutomatonIssueError, "this branch lets the '%K' input formal argument defined, while previous ones drop it"},
+  {kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapAutomatonIssueError, "this branch drops the '%K' input formal argument defined, while previous ones let it defined"},
+  {kMapState_localVariableMap_constantInputFormalArgument /* 13 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_constantInputFormalArgument /* 13 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_constantInputFormalArgumentDeclaredAsUnused /* 15 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_constantInputFormalArgumentDeclaredAsUnused /* 15 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapAutomatonIssueError, "this branch drops the '%K' input formal argument, while previous let it defined"},
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonIssueError, "this branch drops the '%K' input formal argument, while previous ones let it defined"},
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonIssueError, "this branch drops the '%K' input formal argument, while previous ones let it defined"},
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonIssueError, "this branch defines the '%K' input formal argument, while previous ones let it dropped"},
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonNoIssue, ""},
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_openOverrideForSelectBlock (C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_modeMap result ;
-  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
-  return result ;
+  openOverride (kBranchBehaviourForOverride_localVariableMap_selectBlock, 28,
+                kBranchCombinationForOverride_localVariableMap_selectBlock, 40,
+                "selectBlock",
+                inCompiler
+                COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
+//                                             map override 'repeatBlock'                                              *
+//---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_modeMap GALGAS_modeMap::getter_overriddenMap (C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
-  GALGAS_modeMap result ;
-  getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
+static const cBranchOverrideTransformationDescriptor kBranchBehaviourForOverride_localVariableMap_repeatBlock [28] = {
+  {kMapState_localVariableMap_localConstant /* 1 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' variable"},
+  {kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapState_localVariableMap_localConstant /* 1 */, kMapState_localVariableMap_undefinedLocalConstant /* 2 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' variable"},
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' variable"},
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' variable"},
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' variable"},
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' variable"},
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' variable"},
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonIssueError, "the repeated branch should not define the dropped '%K' variable"},
+  {kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapAutomatonIssueError, "the repeated branch should not define the '%K' output formal argument"},
+  {kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapState_localVariableMap_undefinedOutputFormalArgument /* 7 */, kMapState_localVariableMap_definedOutputFormalArgument /* 8 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' output formal argument"},
+  {kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input/output formal argument"},
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input/output formal argument"},
+  {kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapAutomatonIssueError, "the repeated branch should define the '%K' input formal argument"},
+  {kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapState_localVariableMap_droppedInputOutputFormalArgument /* 11 */, kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input/output formal argument"},
+  {kMapState_localVariableMap_constantInputFormalArgument /* 13 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_constantInputFormalArgumentDeclaredAsUnused /* 15 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input formal argument"},
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input formal argument"},
+  {kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input formal argument"},
+  {kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapState_localVariableMap_droppedInputFormalArgument /* 18 */, kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapAutomatonIssueError, "the repeated branch should not drop the '%K' input formal argument"},
+} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_modeMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
-  cMapElement_modeMap * p = NULL ;
-  macroMyNew (p, cMapElement_modeMap (inKey COMMA_HERE)) ;
+static const cBranchOverrideCompatibilityDescriptor kBranchCombinationForOverride_localVariableMap_repeatBlock [18] = {
+  {kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapState_localVariableMap_localConstant /* 1 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_localConstant /* 1 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapState_localVariableMap_usedLocalConstant /* 0 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapState_localVariableMap_definedLocalVariable /* 4 */, kMapState_localVariableMap_usedLocalVariable /* 5 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapState_localVariableMap_undefinedLocalVariable /* 3 */, kMapState_localVariableMap_droppedLocalVariable /* 6 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_unusedInputOutputFormalArgument /* 9 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused /* 12 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapState_localVariableMap_usedInputOutputFormalArgument /* 10 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_constantInputFormalArgument /* 13 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_constantInputFormalArgument /* 13 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_constantInputFormalArgumentDeclaredAsUnused /* 15 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_constantInputFormalArgumentDeclaredAsUnused /* 15 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapState_localVariableMap_usedConstantInputFormalArgument /* 14 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_inputFormalParameter /* 16 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+  {kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused /* 19 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapState_localVariableMap_usedInputFormalArgument /* 17 */, kMapAutomatonNoIssue, ""},
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_openOverrideForRepeatBlock (C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
+  openOverride (kBranchBehaviourForOverride_localVariableMap_repeatBlock, 28,
+                kBranchCombinationForOverride_localVariableMap_repeatBlock, 18,
+                "repeatBlock",
+                inCompiler
+                COMMA_THERE) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_insertUndefinedVariable (GALGAS_lstring inKey,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@modeMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_undefinedLocalVariable,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_undefinedLocalVariable],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_modeMap::setter_insertKey (GALGAS_lstring inKey,
-                                       C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) {
-  cMapElement_modeMap * p = NULL ;
-  macroMyNew (p, cMapElement_modeMap (inKey COMMA_HERE)) ;
+void GALGAS_localVariableMap::setter_insertDefinedVariable (GALGAS_lstring inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%%%K' mode is already declared" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_definedLocalVariable,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_definedLocalVariable],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_modeMap_searchKey = "there is no '%%%K' mode" ;
+void GALGAS_localVariableMap::setter_insertUndefinedConstant (GALGAS_lstring inKey,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_undefinedLocalConstant,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_undefinedLocalConstant],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_modeMap::method_searchKey (GALGAS_lstring inKey,
-                                       C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const {
-  const cMapElement_modeMap * p = (const cMapElement_modeMap *) performSearch (inKey,
-                                                                                 inCompiler,
-                                                                                 kSearchErrorMessage_modeMap_searchKey
-                                                                                 COMMA_THERE) ;
+void GALGAS_localVariableMap::setter_insertConstant (GALGAS_lstring inKey,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_localConstant,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_localConstant],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_insertUsedConstant (GALGAS_lstring inKey,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_usedLocalConstant,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_usedLocalConstant],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_insertInputFormalArgument (GALGAS_lstring inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_inputFormalParameter,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_inputFormalParameter],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_insertInputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_inputFormalArgumentDeclaredAsUnused],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_insertConstantInputFormalArgument (GALGAS_lstring inKey,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_constantInputFormalArgument,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_constantInputFormalArgument],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_insertUsedConstantInputFormalArgument (GALGAS_lstring inKey,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_usedConstantInputFormalArgument,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_usedConstantInputFormalArgument],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_insertConstantInputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_constantInputFormalArgumentDeclaredAsUnused,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_constantInputFormalArgumentDeclaredAsUnused],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_insertOutputFormalArgument (GALGAS_lstring inKey,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_undefinedOutputFormalArgument,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_undefinedOutputFormalArgument],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_insertInputOutputFormalArgument (GALGAS_lstring inKey,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_unusedInputOutputFormalArgument,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_unusedInputOutputFormalArgument],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_insertInputOutputFormalArgumentDeclaredAsUnused (GALGAS_lstring inKey,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * p = NULL ;
+  macroMyNew (p, cMapElement_localVariableMap (inKey COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "redefinition of '%K' object (previous declaration was in %L)" ;
+  insertInSharedMap (attributes,
+                     inCompiler,
+                     kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused,
+                     kMapStateNames_localVariableMap [kMapState_localVariableMap_inputOutputFormalArgumentDeclaredAsUnused],
+                     kInsertErrorMessage
+                     COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_localVariableMap_searchForReadAccess = "the '%K' variable is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_searchForReadAccess (GALGAS_lstring inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  const cMapElement_localVariableMap * p = (const cMapElement_localVariableMap *) performSearch (inKey,
+                                                                                                   inCompiler,
+                                                                                                   kMapAction_localVariableMap_readAccess,
+                                                                                                   kMapTransitions_localVariableMap,
+                                                                                                   kMapActionCount_localVariableMap,
+                                                                                                   kMapStateNames_localVariableMap,
+                                                                                                   kMapActionNames_localVariableMap,
+                                                                                                   #ifndef DO_NOT_GENERATE_CHECKINGS
+                                                                                                     kMapStateCount_localVariableMap,
+                                                                                                   #endif
+                                                                                                   kSearchErrorMessage_localVariableMap_searchForReadAccess
+                                                                                                   COMMA_THERE) ;
   if (NULL == p) {
   }else{
-    macroValidSharedObject (p, cMapElement_modeMap) ;
+    macroValidSharedObject (p, cMapElement_localVariableMap) ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_modeMap * GALGAS_modeMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                         const GALGAS_string & inKey
-                                                                         COMMA_LOCATION_ARGS) {
-  cMapElement_modeMap * result = (cMapElement_modeMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_modeMap) ;
+const char * kSearchErrorMessage_localVariableMap_searchForWriteAccess = "the '%K' variable is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_searchForWriteAccess (GALGAS_lstring inKey,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) {
+  const cMapElement_localVariableMap * p = (const cMapElement_localVariableMap *) performSearch (inKey,
+                                                                                                   inCompiler,
+                                                                                                   kMapAction_localVariableMap_writeAccess,
+                                                                                                   kMapTransitions_localVariableMap,
+                                                                                                   kMapActionCount_localVariableMap,
+                                                                                                   kMapStateNames_localVariableMap,
+                                                                                                   kMapActionNames_localVariableMap,
+                                                                                                   #ifndef DO_NOT_GENERATE_CHECKINGS
+                                                                                                     kMapStateCount_localVariableMap,
+                                                                                                   #endif
+                                                                                                   kSearchErrorMessage_localVariableMap_searchForWriteAccess
+                                                                                                   COMMA_THERE) ;
+  if (NULL == p) {
+  }else{
+    macroValidSharedObject (p, cMapElement_localVariableMap) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_localVariableMap_searchForReadWriteAccess = "the '%K' variable is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_searchForReadWriteAccess (GALGAS_lstring inKey,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
+  const cMapElement_localVariableMap * p = (const cMapElement_localVariableMap *) performSearch (inKey,
+                                                                                                   inCompiler,
+                                                                                                   kMapAction_localVariableMap_readWriteAccess,
+                                                                                                   kMapTransitions_localVariableMap,
+                                                                                                   kMapActionCount_localVariableMap,
+                                                                                                   kMapStateNames_localVariableMap,
+                                                                                                   kMapActionNames_localVariableMap,
+                                                                                                   #ifndef DO_NOT_GENERATE_CHECKINGS
+                                                                                                     kMapStateCount_localVariableMap,
+                                                                                                   #endif
+                                                                                                   kSearchErrorMessage_localVariableMap_searchForReadWriteAccess
+                                                                                                   COMMA_THERE) ;
+  if (NULL == p) {
+  }else{
+    macroValidSharedObject (p, cMapElement_localVariableMap) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_localVariableMap_searchForDropAccess = "the '%K' variable is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_searchForDropAccess (GALGAS_lstring inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  const cMapElement_localVariableMap * p = (const cMapElement_localVariableMap *) performSearch (inKey,
+                                                                                                   inCompiler,
+                                                                                                   kMapAction_localVariableMap_dropAccess,
+                                                                                                   kMapTransitions_localVariableMap,
+                                                                                                   kMapActionCount_localVariableMap,
+                                                                                                   kMapStateNames_localVariableMap,
+                                                                                                   kMapActionNames_localVariableMap,
+                                                                                                   #ifndef DO_NOT_GENERATE_CHECKINGS
+                                                                                                     kMapStateCount_localVariableMap,
+                                                                                                   #endif
+                                                                                                   kSearchErrorMessage_localVariableMap_searchForDropAccess
+                                                                                                   COMMA_THERE) ;
+  if (NULL == p) {
+  }else{
+    macroValidSharedObject (p, cMapElement_localVariableMap) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_localVariableMap_searchForConstantMethodCall = "the '%K' object is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_searchForConstantMethodCall (GALGAS_lstring inKey,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  const cMapElement_localVariableMap * p = (const cMapElement_localVariableMap *) performSearch (inKey,
+                                                                                                   inCompiler,
+                                                                                                   kMapAction_localVariableMap_constMethodCall,
+                                                                                                   kMapTransitions_localVariableMap,
+                                                                                                   kMapActionCount_localVariableMap,
+                                                                                                   kMapStateNames_localVariableMap,
+                                                                                                   kMapActionNames_localVariableMap,
+                                                                                                   #ifndef DO_NOT_GENERATE_CHECKINGS
+                                                                                                     kMapStateCount_localVariableMap,
+                                                                                                   #endif
+                                                                                                   kSearchErrorMessage_localVariableMap_searchForConstantMethodCall
+                                                                                                   COMMA_THERE) ;
+  if (NULL == p) {
+  }else{
+    macroValidSharedObject (p, cMapElement_localVariableMap) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_localVariableMap_searchForMethodCall = "the '%K' object is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_searchForMethodCall (GALGAS_lstring inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  const cMapElement_localVariableMap * p = (const cMapElement_localVariableMap *) performSearch (inKey,
+                                                                                                   inCompiler,
+                                                                                                   kMapAction_localVariableMap_methodCall,
+                                                                                                   kMapTransitions_localVariableMap,
+                                                                                                   kMapActionCount_localVariableMap,
+                                                                                                   kMapStateNames_localVariableMap,
+                                                                                                   kMapActionNames_localVariableMap,
+                                                                                                   #ifndef DO_NOT_GENERATE_CHECKINGS
+                                                                                                     kMapStateCount_localVariableMap,
+                                                                                                   #endif
+                                                                                                   kSearchErrorMessage_localVariableMap_searchForMethodCall
+                                                                                                   COMMA_THERE) ;
+  if (NULL == p) {
+  }else{
+    macroValidSharedObject (p, cMapElement_localVariableMap) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_localVariableMap_neutralAccess = "the '%K' variable is not declared" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_localVariableMap::setter_neutralAccess (GALGAS_lstring inKey,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  const cMapElement_localVariableMap * p = (const cMapElement_localVariableMap *) performSearch (inKey,
+                                                                                                   inCompiler,
+                                                                                                   kMapAction_localVariableMap_neutralAccess,
+                                                                                                   kMapTransitions_localVariableMap,
+                                                                                                   kMapActionCount_localVariableMap,
+                                                                                                   kMapStateNames_localVariableMap,
+                                                                                                   kMapActionNames_localVariableMap,
+                                                                                                   #ifndef DO_NOT_GENERATE_CHECKINGS
+                                                                                                     kMapStateCount_localVariableMap,
+                                                                                                   #endif
+                                                                                                   kSearchErrorMessage_localVariableMap_neutralAccess
+                                                                                                   COMMA_THERE) ;
+  if (NULL == p) {
+  }else{
+    macroValidSharedObject (p, cMapElement_localVariableMap) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_localVariableMap * GALGAS_localVariableMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                           const GALGAS_string & inKey
+                                                                                           COMMA_LOCATION_ARGS) {
+  cMapElement_localVariableMap * result = (cMapElement_localVariableMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_localVariableMap) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_modeMap::cEnumerator_modeMap (const GALGAS_modeMap & inEnumeratedObject,
-                                          const typeEnumerationOrder inOrder) :
+cEnumerator_localVariableMap::cEnumerator_localVariableMap (const GALGAS_localVariableMap & inEnumeratedObject,
+                                                            const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_modeMap_2D_element cEnumerator_modeMap::current (LOCATION_ARGS) const {
-  const cMapElement_modeMap * p = (const cMapElement_modeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_modeMap) ;
-  return GALGAS_modeMap_2D_element (p->mAttribute_lkey) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cEnumerator_modeMap::current_lkey (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_localVariableMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
@@ -13546,505 +13434,42 @@ GALGAS_lstring cEnumerator_modeMap::current_lkey (LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                    @modeMap type                                                    *
+//                                               @localVariableMap type                                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_modeMap ("modeMap",
-                                NULL) ;
+kTypeDescriptor_GALGAS_localVariableMap ("localVariableMap",
+                                         NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_modeMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_modeMap ;
+const C_galgas_type_descriptor * GALGAS_localVariableMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_localVariableMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_modeMap::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_localVariableMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_modeMap (*this)) ;
+    macroMyNew (result, GALGAS_localVariableMap (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_modeMap GALGAS_modeMap::extractObject (const GALGAS_object & inObject,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  GALGAS_modeMap result ;
-  const GALGAS_modeMap * p = (const GALGAS_modeMap *) inObject.embeddedObject () ;
+GALGAS_localVariableMap GALGAS_localVariableMap::extractObject (const GALGAS_object & inObject,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_localVariableMap result ;
+  const GALGAS_localVariableMap * p = (const GALGAS_localVariableMap *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_modeMap *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_localVariableMap *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("modeMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Class for element of '@procedureSignature' list                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cCollectionElement_procedureSignature : public cCollectionElement {
-  public : GALGAS_procedureSignature_2D_element mObject ;
-
-//--- Constructor
-  public : cCollectionElement_procedureSignature (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
-                                                  const GALGAS_string & in_mSelector,
-                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mType
-                                                  COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
-
-//--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cCollectionElement_procedureSignature::cCollectionElement_procedureSignature (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
-                                                                              const GALGAS_string & in_mSelector,
-                                                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mType
-                                                                              COMMA_LOCATION_ARGS) :
-cCollectionElement (THERE),
-mObject (in_mFormalArgumentPassingMode, in_mSelector, in_mType) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cCollectionElement_procedureSignature::isValid (void) const {
-  return mObject.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cCollectionElement * cCollectionElement_procedureSignature::copy (void) {
-  cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_procedureSignature (mObject.mAttribute_mFormalArgumentPassingMode, mObject.mAttribute_mSelector, mObject.mAttribute_mType COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cCollectionElement_procedureSignature::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mFormalArgumentPassingMode" ":" ;
-  mObject.mAttribute_mFormalArgumentPassingMode.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mSelector" ":" ;
-  mObject.mAttribute_mSelector.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mType" ":" ;
-  mObject.mAttribute_mType.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cCollectionElement_procedureSignature::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_procedureSignature * operand = (cCollectionElement_procedureSignature *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_procedureSignature) ;
-  return mObject.objectCompare (operand->mObject) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature::GALGAS_procedureSignature (void) :
-AC_GALGAS_list () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature::GALGAS_procedureSignature (cSharedList * inSharedListPtr) :
-AC_GALGAS_list (inSharedListPtr) {
-  if (NULL == inSharedListPtr) {
-    createNewEmptyList (HERE) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature GALGAS_procedureSignature::constructor_emptyList (LOCATION_ARGS) {
-  GALGAS_procedureSignature result ;
-  result.createNewEmptyList (THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature GALGAS_procedureSignature::constructor_listWithValue (const GALGAS_procFormalArgumentPassingMode & inOperand0,
-                                                                                const GALGAS_string & inOperand1,
-                                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand2
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_procedureSignature result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result.createNewEmptyList (THERE) ;
-    capCollectionElement attributes ;
-    GALGAS_procedureSignature::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2 COMMA_THERE) ;
-    result.addObject (attributes) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureSignature::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                           const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
-                                                           const GALGAS_string & in_mSelector,
-                                                           const GALGAS_unifiedTypeMap_2D_proxy & in_mType
-                                                           COMMA_LOCATION_ARGS) {
-  cCollectionElement_procedureSignature * p = NULL ;
-  macroMyNew (p, cCollectionElement_procedureSignature (in_mFormalArgumentPassingMode,
-                                                        in_mSelector,
-                                                        in_mType COMMA_THERE)) ;
-  outAttributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureSignature::addAssign_operation (const GALGAS_procFormalArgumentPassingMode & inOperand0,
-                                                     const GALGAS_string & inOperand1,
-                                                     const GALGAS_unifiedTypeMap_2D_proxy & inOperand2
-                                                     COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_procedureSignature (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    addObject (attributes) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureSignature::setter_insertAtIndex (const GALGAS_procFormalArgumentPassingMode inOperand0,
-                                                      const GALGAS_string inOperand1,
-                                                      const GALGAS_unifiedTypeMap_2D_proxy inOperand2,
-                                                      const GALGAS_uint inInsertionIndex,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_procedureSignature (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    addObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureSignature::setter_removeAtIndex (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                      GALGAS_string & outOperand1,
-                                                      GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                      const GALGAS_uint inRemoveIndex,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  if (isValid () && inRemoveIndex.isValid ()) {
-    capCollectionElement attributes ;
-    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_procedureSignature * p = (cCollectionElement_procedureSignature *) attributes.ptr () ;
-    if (NULL == p) {
-      outOperand0.drop () ;
-      outOperand1.drop () ;
-      outOperand2.drop () ;
-    }else{
-      macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-      outOperand0 = p->mObject.mAttribute_mFormalArgumentPassingMode ;
-      outOperand1 = p->mObject.mAttribute_mSelector ;
-      outOperand2 = p->mObject.mAttribute_mType ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureSignature::setter_popFirst (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                 GALGAS_string & outOperand1,
-                                                 GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_procedureSignature * p = (cCollectionElement_procedureSignature *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-    outOperand0 = p->mObject.mAttribute_mFormalArgumentPassingMode ;
-    outOperand1 = p->mObject.mAttribute_mSelector ;
-    outOperand2 = p->mObject.mAttribute_mType ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureSignature::setter_popLast (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                                GALGAS_string & outOperand1,
-                                                GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_procedureSignature * p = (cCollectionElement_procedureSignature *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-    outOperand0 = p->mObject.mAttribute_mFormalArgumentPassingMode ;
-    outOperand1 = p->mObject.mAttribute_mSelector ;
-    outOperand2 = p->mObject.mAttribute_mType ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureSignature::method_first (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                              GALGAS_string & outOperand1,
-                                              GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_procedureSignature * p = (cCollectionElement_procedureSignature *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-    outOperand0 = p->mObject.mAttribute_mFormalArgumentPassingMode ;
-    outOperand1 = p->mObject.mAttribute_mSelector ;
-    outOperand2 = p->mObject.mAttribute_mType ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureSignature::method_last (GALGAS_procFormalArgumentPassingMode & outOperand0,
-                                             GALGAS_string & outOperand1,
-                                             GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_procedureSignature * p = (cCollectionElement_procedureSignature *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-    outOperand0 = p->mObject.mAttribute_mFormalArgumentPassingMode ;
-    outOperand1 = p->mObject.mAttribute_mSelector ;
-    outOperand2 = p->mObject.mAttribute_mType ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature GALGAS_procedureSignature::add_operation (const GALGAS_procedureSignature & inOperand,
-                                                                    C_Compiler * /* inCompiler */
-                                                                    COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_procedureSignature result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature GALGAS_procedureSignature::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) const {
-  GALGAS_procedureSignature result = GALGAS_procedureSignature::constructor_emptyList (THERE) ;
-  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature GALGAS_procedureSignature::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                              C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) const {
-  GALGAS_procedureSignature result = GALGAS_procedureSignature::constructor_emptyList (THERE) ;
-  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature GALGAS_procedureSignature::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) const {
-  GALGAS_procedureSignature result = GALGAS_procedureSignature::constructor_emptyList (THERE) ;
-  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_procedureSignature::plusAssign_operation (const GALGAS_procedureSignature inOperand,
-                                                      C_Compiler * /* inCompiler */
-                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  appendList (inOperand) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentPassingMode GALGAS_procedureSignature::getter_mFormalArgumentPassingModeAtIndex (const GALGAS_uint & inIndex,
-                                                                                                          C_Compiler * inCompiler
-                                                                                                          COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_procedureSignature * p = (cCollectionElement_procedureSignature *) attributes.ptr () ;
-  GALGAS_procFormalArgumentPassingMode result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-    result = p->mObject.mAttribute_mFormalArgumentPassingMode ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_procedureSignature::getter_mSelectorAtIndex (const GALGAS_uint & inIndex,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_procedureSignature * p = (cCollectionElement_procedureSignature *) attributes.ptr () ;
-  GALGAS_string result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-    result = p->mObject.mAttribute_mSelector ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_procedureSignature::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_procedureSignature * p = (cCollectionElement_procedureSignature *) attributes.ptr () ;
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-    result = p->mObject.mAttribute_mType ;
-  }
-  return result ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_procedureSignature::cEnumerator_procedureSignature (const GALGAS_procedureSignature & inEnumeratedObject,
-                                                                const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator () {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature_2D_element cEnumerator_procedureSignature::current (LOCATION_ARGS) const {
-  const cCollectionElement_procedureSignature * p = (const cCollectionElement_procedureSignature *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-  return p->mObject ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentPassingMode cEnumerator_procedureSignature::current_mFormalArgumentPassingMode (LOCATION_ARGS) const {
-  const cCollectionElement_procedureSignature * p = (const cCollectionElement_procedureSignature *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-  return p->mObject.mAttribute_mFormalArgumentPassingMode ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cEnumerator_procedureSignature::current_mSelector (LOCATION_ARGS) const {
-  const cCollectionElement_procedureSignature * p = (const cCollectionElement_procedureSignature *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-  return p->mObject.mAttribute_mSelector ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_procedureSignature::current_mType (LOCATION_ARGS) const {
-  const cCollectionElement_procedureSignature * p = (const cCollectionElement_procedureSignature *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_procedureSignature) ;
-  return p->mObject.mAttribute_mType ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              @procedureSignature type                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_procedureSignature ("procedureSignature",
-                                           NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_procedureSignature::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_procedureSignature ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_procedureSignature::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_procedureSignature (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procedureSignature GALGAS_procedureSignature::extractObject (const GALGAS_object & inObject,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_procedureSignature result ;
-  const GALGAS_procedureSignature * p = (const GALGAS_procedureSignature *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_procedureSignature *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("procedureSignature", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("localVariableMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

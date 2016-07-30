@@ -470,6 +470,18 @@
 \usepgflibrary{shapes.geometric}
 \usepgfmodule{plot}
 
+\usetikzlibrary{%
+  arrows,%
+  shapes.misc,% wg. rounded rectangle
+  shapes.arrows,%
+  chains,%
+  matrix,%
+  positioning,% wg. " of "
+  scopes,%
+  decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+  shadows%
+}
+
 %--- Contrôle de l'affichage des circuits électroniques
 \ifthenelse{\equal{\sortieEnCouleur}{true} \and \equal{\afficherDetailSchema}{true}}{
 
@@ -802,6 +814,7 @@
 \input{chapitres/taches.tex}
 \input{chapitres/synchronisations.tex}
 \input{chapitres/configuration-cible.tex}
+\input{chapitres/compilation-llvm.tex}
 
 
 

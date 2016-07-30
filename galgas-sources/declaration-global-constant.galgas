@@ -94,13 +94,15 @@ override method @globalConstantDeclaration enterInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
-  var variableMap = initialVariableMap (
+  initialVariableMap (
     !routineNameForInvocation:"compiler" # inRoutineNameForInvocation
     !context:ioContext
     !userMode:false
     !registerAccess:.readWriteAccess
     !globalsAreConstant:true # Any value, there is no defined global variable at this stage
     !returnTypeName:["" nowhere]
+    ?@variableMap variableMap
+    ?@localVariableMap localVariableMap
   )
 #--- Get destination type
   @unifiedTypeMap-proxy annotationType

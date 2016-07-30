@@ -1507,21 +1507,6 @@ class GALGAS_lstring function_initNameForInvocationGraph (class GALGAS_unifiedTy
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Function 'initialVariableMap'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_variableMap function_initialVariableMap (const class GALGAS_string & constinArgument0,
-                                                      const class GALGAS_semanticContext & constinArgument1,
-                                                      const class GALGAS_bool & constinArgument2,
-                                                      const class GALGAS_accessKind & constinArgument3,
-                                                      class GALGAS_bool inArgument4,
-                                                      const class GALGAS_lstring & constinArgument5,
-                                                      class C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                        Extension method '@instructionListAST analyzeRoutineInstructionList'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1544,13 +1529,20 @@ void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Extension method '@variableMap deinitTopLevelVariables'                               *
+//                                            Routine 'initialVariableMap'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_deinitTopLevelVariables (const class GALGAS_variableMap inObject,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
+void routine_initialVariableMap (const class GALGAS_string constinArgument0,
+                                 const class GALGAS_semanticContext constinArgument1,
+                                 const class GALGAS_bool constinArgument2,
+                                 const class GALGAS_accessKind constinArgument3,
+                                 class GALGAS_bool inArgument4,
+                                 const class GALGAS_lstring constinArgument5,
+                                 class GALGAS_variableMap & outArgument6,
+                                 class GALGAS_localVariableMap & outArgument7,
+                                 class C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2630,13 +2622,13 @@ class GALGAS_string function_functionResultVariableName (class C_Compiler * inCo
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Function 'variableMapWithConstants'                                         *
+//                                        Function 'variableMapWithConstantsEX'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_variableMap function_variableMapWithConstants (const class GALGAS_semanticContext & constinArgument0,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
+class GALGAS_variableMap function_variableMapWithConstantsEX (const class GALGAS_semanticContext & constinArgument0,
+                                                              class C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3723,5 +3715,15 @@ class GALGAS_string function_llvmNameForSectionCall (class GALGAS_string inArgum
 class GALGAS_string function_llvmNameForSectionImplementation (class GALGAS_string inArgument0,
                                                                class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Function 'llvmNameForGuardCall'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForGuardCall (class GALGAS_string inArgument0,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 #endif

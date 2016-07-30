@@ -233,7 +233,7 @@ method @globalVarDeclarationList-element enterInContext
   @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}
   @allocaList allocaList = {}
-  @variableMap variableMap = variableMapWithConstants (!context:ioContext)
+  @variableMap variableMap = variableMapWithConstantsEX (!context:ioContext)
   [mSourceExpression analyzeExpression
      !self:.null
      !directAccessToPropertiesAllowed:false

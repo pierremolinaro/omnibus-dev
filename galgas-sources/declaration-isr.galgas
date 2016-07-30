@@ -87,13 +87,15 @@ method @isrDeclarationListAST isrSemanticAnalysis
       ]
     end
   #--- Variable map
-    @variableMap variableMap = initialVariableMap (
+    initialVariableMap (
       !routineNameForInvocation:routineNameForInvocationGraph.string
       !context:inSemanticContext
       !userMode:false
       !registerAccess:.readWriteAccess
       !globalsAreConstant:false
       !returnTypeName:["" nowhere]
+      ?@variableMap variableMap
+      ?@localVariableMap localVariableMap
     )
   #--- Self type
     let selfType = if isr.mSelfTypeName.string == "" then
@@ -119,7 +121,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !?generatedCode:instructionGenerationList
     ]
   #--- End of variableMap
-    [variableMap deinitTopLevelVariables]
+#    [variableMap deinitTopLevelVariables]
     [variableMap checkAutomatonStates !isr.mEndOfISRDeclaration]
     drop variableMap
   #--- Code generation

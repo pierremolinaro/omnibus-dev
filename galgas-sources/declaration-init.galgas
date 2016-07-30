@@ -151,13 +151,15 @@ proc initSemanticAnalysis
     ]
   end
 #--- Variable map
-  @variableMap variableMap = initialVariableMap (
+  initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
     !userMode:false
     !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
+    ?@variableMap variableMap
+    ?@localVariableMap localVariableMap
   )
 #--- Analyze instruction list
   outInstructionGenerationList = {}
@@ -177,7 +179,7 @@ proc initSemanticAnalysis
     !?generatedCode:outInstructionGenerationList
   ]
 #--- End of variableMap
-  [variableMap deinitTopLevelVariables]
+#  [variableMap deinitTopLevelVariables]
   [variableMap checkAutomatonStates !inEndOfInitDeclaration]
   drop variableMap
 }

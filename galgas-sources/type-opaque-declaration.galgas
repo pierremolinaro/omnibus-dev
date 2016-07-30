@@ -106,7 +106,7 @@ override method @opaqueTypeDeclaration enterInContext
   @instructionListIR initInstructionGenerationList = {}
   @allocaList allocaList = {}
   @semanticTemporariesStruct temporaries = .default
-  var variableMap = variableMapWithConstants (!context:ioContext)
+  var variableMap = variableMapWithConstantsEX (!context:ioContext)
   [mSizeExpression analyzeExpression
     !self:.null
     !directAccessToPropertiesAllowed:false
