@@ -97,13 +97,15 @@ method @panicClauseListAST-element panicSemanticAnalysis
   end
   let routineNameForInvocationGraph = panicNameForInvocationGraph (!mPanicClauseName.string !mPriority)
 #--- Variable map
-  @variableMap variableMap = initialVariableMap (
+  initialVariableMap (
     !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
     !userMode:false
     !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
+    ?@variableMap variableMap
+    ?@localVariableMap localVariableMap
   )
 #--- Insert predefined input arguments
   let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
@@ -159,7 +161,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !?generatedCode:instructionGenerationList
   ]
 #--- End of variableMap
-  [variableMap deinitTopLevelVariables]
+#  [variableMap deinitTopLevelVariables]
   [variableMap checkAutomatonStates !mEndOfPanicInstructions]
   drop variableMap
 #--- Code generation

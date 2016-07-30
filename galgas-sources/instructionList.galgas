@@ -105,7 +105,7 @@ method @instructionListAST analyzeBranchInstructionList
     ]
   end
 #--- End branch
-  [ioVariableMap deinitTopLevelVariables]
+#  [ioVariableMap deinitTopLevelVariables]
   [!?ioVariableMap closeBranch !inEndOfInstructionList]
 }
 

@@ -94,7 +94,6 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
   else
     @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mReturnTypeName}
   end
- # let routineNameForGeneration = @lstring.new {!"." + mRoutineNameForGeneration !mExternProcedureName.location}
   [!?ioContext.mRoutineMapForContext insertKey
     !routineMangledName
     !mRoutineNameForGeneration
@@ -151,13 +150,15 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     procedureModeSet += !mode.mValue.string
   end
 #--- Variable map
-  @variableMap variableMap = initialVariableMap (
+  initialVariableMap (
     !routineNameForInvocation:routineMangledName.string
     !context:inContext
     !userMode:[procedureModeSet hasKey !userModeName ()]
     !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
+    ?@variableMap variableMap
+    ?@localVariableMap localVariableMap
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}

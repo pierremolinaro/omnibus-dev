@@ -106,13 +106,15 @@ proc routineSemanticAnalysis
   end
   routineMangledName.string += ")"
 #--- Variable map
-  @variableMap variableMap = initialVariableMap (
+  initialVariableMap (
     !routineNameForInvocation:routineMangledName.string
     !context:inContext
     !userMode:[procedureModeSet hasKey !userModeName ()]
     !registerAccess:inRegisterAccessKind
     !globalsAreConstant:false
     !returnTypeName:inReturnTypeName
+    ?@variableMap variableMap
+    ?@localVariableMap localVariableMap
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
@@ -147,7 +149,7 @@ proc routineSemanticAnalysis
     !?generatedCode:instructionGenerationList
   ]
 #--- End of variableMap
-  [variableMap deinitTopLevelVariables]
+#  [variableMap deinitTopLevelVariables]
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
   drop variableMap
 #--- Code generation

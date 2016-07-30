@@ -191,13 +191,15 @@ proc guardSemanticAnalysis
     ]
   end
 #--- Variable map
-  @variableMap variableMap = initialVariableMap (
+  initialVariableMap (
     !routineNameForInvocation:guardMangledName.string
     !context:inContext
     !userMode:false
     !registerAccess:.noAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
+    ?@variableMap variableMap
+    ?@localVariableMap localVariableMap
   )
   @procFormalArgumentListForGeneration formalArguments = {}
   @guardKindGenerationIR convenienceGuardGenerationIR
@@ -279,7 +281,7 @@ proc guardSemanticAnalysis
     ]
   end 
 #--- End of variableMap
-  [variableMap deinitTopLevelVariables]
+#  [variableMap deinitTopLevelVariables]
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
   drop variableMap
 #--- Code generation
