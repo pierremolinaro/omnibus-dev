@@ -108,6 +108,7 @@ override method @varOperatorAssignInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -125,6 +126,7 @@ override method @varOperatorAssignInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?resultPtr:let @objectInMemoryIR targetObjectPtr
@@ -153,6 +155,7 @@ override method @varOperatorAssignInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:@operandIR sourceValue

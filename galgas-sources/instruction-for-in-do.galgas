@@ -65,6 +65,7 @@ override method @forInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -81,6 +82,7 @@ override method @forInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:@operandIR iteratedExpressionResult
@@ -117,6 +119,7 @@ override method @forInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
   ]

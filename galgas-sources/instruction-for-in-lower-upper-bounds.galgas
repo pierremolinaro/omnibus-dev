@@ -80,6 +80,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -113,6 +114,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:@operandIR lowerBoundExpressionResult
@@ -129,6 +131,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:@operandIR upperBoundExpressionResult
@@ -173,6 +176,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       !?alloca:ioAllocaList
       !?instructionListIR:instructionGenerationList
     ]

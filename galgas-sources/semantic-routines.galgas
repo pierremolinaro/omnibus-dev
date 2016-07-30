@@ -145,6 +145,7 @@ proc routineSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
+    !?localVariableMap: localVariableMap
     !?alloca:allocaList
     !?generatedCode:instructionGenerationList
   ]

@@ -127,6 +127,7 @@ override method @globalConstantDeclaration enterInContext
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
+    !?localVariableMap: localVariableMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:let @operandIR expressionResult

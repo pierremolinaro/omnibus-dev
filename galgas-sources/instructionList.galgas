@@ -65,6 +65,7 @@ abstract method @instructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 
@@ -82,6 +83,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -100,6 +102,7 @@ method @instructionListAST analyzeBranchInstructionList
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
     ]
@@ -122,6 +125,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
 {
@@ -138,6 +142,7 @@ method @instructionListAST analyzeRoutineInstructionList
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
     ]

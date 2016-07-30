@@ -44,6 +44,7 @@ override method @unifiedSelfCallInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -67,6 +68,7 @@ override method @unifiedSelfCallInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?resultPtr:let @objectInMemoryIR propertyAddressLLVMvar
@@ -130,6 +132,7 @@ override method @unifiedSelfCallInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:effectiveParameterListIR

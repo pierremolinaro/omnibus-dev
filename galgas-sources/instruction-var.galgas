@@ -91,6 +91,7 @@ override method @varInstructionWithAssignmentAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -111,6 +112,7 @@ override method @varInstructionWithAssignmentAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:@operandIR expressionResult
@@ -160,6 +162,7 @@ override method @varInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
@@ -172,6 +175,7 @@ override method @varInstructionAST analyze
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
   let targetVar = @objectInMemoryIR.localValue {!type:targetType !name:varLLVMName}
+  [!?ioLocalVariableMap insertUndefinedVariable !mVarName]
   [!?ioVariableMap insertUndefinedVariable
     !lkey:mVarName
     !type:targetType

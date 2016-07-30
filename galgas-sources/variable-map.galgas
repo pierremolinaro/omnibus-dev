@@ -168,11 +168,13 @@ proc initialVariableMap
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func variableMapWithConstantsEX
+proc variableMapWithConstants
   ?context:let @semanticContext inContext
-  -> @variableMap outVariableMap
+  !@variableMap outVariableMap
+  !@localVariableMap outLocalVariableMap
 {
   outVariableMap = .emptyMap
+  outLocalVariableMap = .emptyMap
 #--- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedConstant
