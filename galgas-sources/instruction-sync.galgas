@@ -181,6 +181,7 @@ override method @syncInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -204,6 +205,7 @@ override method @syncInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?localVariableMap: ioLocalVariableMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
@@ -230,6 +232,7 @@ override method @syncInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?localVariableMap: ioLocalVariableMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?result:@operandIR sourceOperand
@@ -258,6 +261,7 @@ override method @syncInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?localVariableMap: ioLocalVariableMap
         !?alloca:ioAllocaList
         !?instructionListIR:boolExpInstructionGenerationList
         ?result:let @operandIR boolExpressionResult
@@ -280,6 +284,7 @@ override method @syncInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?localVariableMap: ioLocalVariableMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
@@ -309,6 +314,7 @@ override method @syncInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       !?alloca:ioAllocaList
       !?instructionListIR:branchInstructionGenerationList
     ]
@@ -336,6 +342,7 @@ proc analyzeGuardCall
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
@@ -398,6 +405,7 @@ proc analyzeGuardCall
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:outEffectiveParameterListIR

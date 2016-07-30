@@ -58,6 +58,7 @@ override method @literalStringInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
+  ?!localVariableMap:@localVariableMap unused ioLocalVariableMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@operandIR outResult

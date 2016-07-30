@@ -98,6 +98,7 @@ override method @varInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
@@ -140,6 +141,7 @@ override method @varInExpressionAST analyzeExpression
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioVariableMap
+      !?localVariableMap:ioLocalVariableMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
       !variableKind:variableKind
@@ -160,6 +162,7 @@ override method @varInExpressionAST analyzeExpression
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
       !variableKind:variableKind
@@ -183,6 +186,7 @@ method @varInExpressionAST analyzeExpression_register
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableKind:let @objectInMemoryIR inVariableKind
@@ -225,6 +229,7 @@ method @varInExpressionAST analyzeExpression_register
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?localVariableMap: ioLocalVariableMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @operandIR indexResult
@@ -316,6 +321,7 @@ method @varInExpressionAST analyzeExpression_otherKind
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableKind:let @objectInMemoryIR inVariableKind
@@ -339,6 +345,7 @@ method @varInExpressionAST analyzeExpression_otherKind
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
   )
@@ -379,6 +386,7 @@ proc analyzeVarInExpressionElementAccess
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -404,6 +412,7 @@ proc analyzeVarInExpressionElementAccess
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?localVariableMap: ioLocalVariableMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @operandIR indexResult

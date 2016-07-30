@@ -69,6 +69,7 @@ override method @typedConstantCall analyzeExpression
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
+  ?!localVariableMap:@localVariableMap unused ioLocalVariableMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@operandIR outResult

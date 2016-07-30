@@ -175,6 +175,7 @@ proc initSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
+    !?localVariableMap: localVariableMap
     !?alloca:outAllocaList
     !?generatedCode:outInstructionGenerationList
   ]

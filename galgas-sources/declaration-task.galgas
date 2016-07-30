@@ -223,7 +223,11 @@ method @taskVarListAST-element enterInContext
   @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}
   @allocaList allocaList = {}
-  @variableMap variableMap = variableMapWithConstantsEX (!context:ioContext)
+  variableMapWithConstants (
+    !context:ioContext
+    ?@variableMap variableMap
+    ?@localVariableMap localVariableMap
+  )
   [mVarInitExpression analyzeExpression
     !self:.null
     !directAccessToPropertiesAllowed:false
@@ -236,6 +240,7 @@ method @taskVarListAST-element enterInContext
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
+    !?localVariableMap: localVariableMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:let @operandIR expressionResult

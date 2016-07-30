@@ -239,6 +239,7 @@ proc guardSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
+      !?localVariableMap: localVariableMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]
@@ -262,6 +263,7 @@ proc guardSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
+      !?localVariableMap: localVariableMap
       ?convenienceGuardGenerationIR
     ]
   #--- Analyze instruction list
@@ -276,6 +278,7 @@ proc guardSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
+      !?localVariableMap: localVariableMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]
@@ -312,6 +315,7 @@ abstract method @abstractCallInstructionAST baseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -325,6 +329,7 @@ private proc standaloneBaseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
 #--- Guard mangled name
@@ -370,6 +375,7 @@ private proc standaloneBaseGuardAnalyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
     !?alloca:baseGuardAllocaList
     !?instructionListIR:baseGuardInstructionGenerationList
     !?effectiveIR:effectiveParameterListIR
@@ -395,6 +401,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   if inSelfType == .null then
@@ -473,6 +480,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList
       !?effectiveIR:effectiveParameterListIR
@@ -499,6 +507,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   @accessList accessList = mAccessList
@@ -516,6 +525,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       ?outConvenienceGuardGenerationIR
     )
   else
@@ -531,6 +541,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?resultPtr:let targetPtr
@@ -579,6 +590,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList
       !?effectiveIR:effectiveParameterListIR
