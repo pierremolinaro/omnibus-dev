@@ -2425,13 +2425,13 @@ class cEnumAssociatedValues_valueIR_literalString : public cEnumAssociatedValues
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                   @typeKind enum                                                    *
+//                                                  @typeKindEX enum                                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_typeKind : public AC_GALGAS_root {
+class GALGAS_typeKindEX : public AC_GALGAS_root {
 //--------------------------------- Default constructor
-  public : GALGAS_typeKind (void) ;
+  public : GALGAS_typeKindEX (void) ;
 
 //--------------------------------- Enumeration
   public : typedef enum {
@@ -2465,42 +2465,42 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_typeKind extractObject (const GALGAS_object & inObject,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_typeKindEX extractObject (const GALGAS_object & inObject,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_typeKind constructor_arrayType (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                               const class GALGAS_bigint & inOperand1
-                                                               COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_typeKind constructor_boolean (LOCATION_ARGS) ;
-
-  public : static class GALGAS_typeKind constructor_enumeration (const class GALGAS_enumConstantMap & inOperand0
+  public : static class GALGAS_typeKindEX constructor_arrayType (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                                 const class GALGAS_bigint & inOperand1
                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_typeKind constructor_integer (const class GALGAS_bigint & inOperand0,
-                                                             const class GALGAS_bigint & inOperand1,
-                                                             const class GALGAS_bool & inOperand2,
-                                                             const class GALGAS_uint & inOperand3
-                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_typeKindEX constructor_boolean (LOCATION_ARGS) ;
 
-  public : static class GALGAS_typeKind constructor_literalString (LOCATION_ARGS) ;
+  public : static class GALGAS_typeKindEX constructor_enumeration (const class GALGAS_enumConstantMap & inOperand0
+                                                                   COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_typeKind constructor_opaque (const class GALGAS_bigint & inOperand0
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_typeKind constructor_staticInteger (LOCATION_ARGS) ;
-
-  public : static class GALGAS_typeKind constructor_structure (const class GALGAS_propertyMap & inOperand0,
-                                                               const class GALGAS_propertyList & inOperand1
+  public : static class GALGAS_typeKindEX constructor_integer (const class GALGAS_bigint & inOperand0,
+                                                               const class GALGAS_bigint & inOperand1,
+                                                               const class GALGAS_bool & inOperand2,
+                                                               const class GALGAS_uint & inOperand3
                                                                COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_typeKindEX constructor_literalString (LOCATION_ARGS) ;
+
+  public : static class GALGAS_typeKindEX constructor_opaque (const class GALGAS_bigint & inOperand0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_typeKindEX constructor_staticInteger (LOCATION_ARGS) ;
+
+  public : static class GALGAS_typeKindEX constructor_structure (const class GALGAS_propertyMap & inOperand0,
+                                                                 const class GALGAS_propertyList & inOperand1
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
                                               const int32_t inIndentation) const ;
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_typeKind & inOperand) const ;
+  public : typeComparisonResult objectCompare (const GALGAS_typeKindEX & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2553,12 +2553,12 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_typeKind class
+} ; // End of GALGAS_typeKindEX class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeKind ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeKindEX ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2703,7 +2703,7 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertType (class GALGAS_lstring constinArgument0,
                                                     class GALGAS_string constinArgument1,
-                                                    class GALGAS_typeKind constinArgument2,
+                                                    class GALGAS_typeKindEX constinArgument2,
                                                     class GALGAS_classConstantMap constinArgument3,
                                                     class GALGAS_bool constinArgument4,
                                                     class GALGAS_bool constinArgument5,
@@ -2743,7 +2743,7 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setKindForKey (class GALGAS_typeKind constinArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_setKindForKey (class GALGAS_typeKindEX constinArgument0,
                                                        class GALGAS_string constinArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
@@ -2757,7 +2757,7 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_string & outArgument1,
-                                                   class GALGAS_typeKind & outArgument2,
+                                                   class GALGAS_typeKindEX & outArgument2,
                                                    class GALGAS_classConstantMap & outArgument3,
                                                    class GALGAS_bool & outArgument4,
                                                    class GALGAS_bool & outArgument5,
@@ -2794,9 +2794,9 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_typeKind getter_kindForKey (const class GALGAS_string & constinOperand0,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_typeKindEX getter_kindForKey (const class GALGAS_string & constinOperand0,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_llvmTypeNameForKey (const class GALGAS_string & constinOperand0,
                                                                            C_Compiler * inCompiler
@@ -2826,7 +2826,7 @@ class cEnumerator_unifiedTypeMap : public cGenericAbstractEnumerator {
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_string current_llvmTypeName (LOCATION_ARGS) const ;
-  public : class GALGAS_typeKind current_kind (LOCATION_ARGS) const ;
+  public : class GALGAS_typeKindEX current_kind (LOCATION_ARGS) const ;
   public : class GALGAS_classConstantMap current_classConstantMap (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_instantiable (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_copyable (LOCATION_ARGS) const ;
@@ -2848,7 +2848,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMap ;
 class cMapElement_unifiedTypeMap : public cMapElement {
 //--- Map attributes
   public : GALGAS_string mAttribute_llvmTypeName ;
-  public : GALGAS_typeKind mAttribute_kind ;
+  public : GALGAS_typeKindEX mAttribute_kind ;
   public : GALGAS_classConstantMap mAttribute_classConstantMap ;
   public : GALGAS_bool mAttribute_instantiable ;
   public : GALGAS_bool mAttribute_copyable ;
@@ -2859,7 +2859,7 @@ class cMapElement_unifiedTypeMap : public cMapElement {
 //--- Constructor
   public : cMapElement_unifiedTypeMap (const GALGAS_lstring & inKey,
                                        const GALGAS_string & in_llvmTypeName,
-                                       const GALGAS_typeKind & in_kind,
+                                       const GALGAS_typeKindEX & in_kind,
                                        const GALGAS_classConstantMap & in_classConstantMap,
                                        const GALGAS_bool & in_instantiable,
                                        const GALGAS_bool & in_copyable,

@@ -442,6 +442,7 @@ abstract method @expressionAST analyzeExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
@@ -469,6 +470,7 @@ method @expressionAST analyzeStaticExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:*
     !?localVariableMap:*
+    !?namedObjectMap:*
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:outResult

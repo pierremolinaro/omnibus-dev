@@ -81,6 +81,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -115,6 +116,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?localVariableMap: ioLocalVariableMap
+      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:@operandIR lowerBoundExpressionResult
@@ -132,6 +134,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?localVariableMap: ioLocalVariableMap
+      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:@operandIR upperBoundExpressionResult
@@ -177,6 +180,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?localVariableMap: ioLocalVariableMap
+      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:instructionGenerationList
     ]

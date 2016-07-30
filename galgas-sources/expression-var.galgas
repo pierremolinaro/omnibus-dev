@@ -99,6 +99,7 @@ override method @varInExpressionAST analyzeExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@operandIR outResult
@@ -142,6 +143,7 @@ override method @varInExpressionAST analyzeExpression
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioVariableMap
       !?localVariableMap:ioLocalVariableMap
+      !?namedObjectMap: ioNamedObjectMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
       !variableKind:variableKind
@@ -163,6 +165,7 @@ override method @varInExpressionAST analyzeExpression
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioVariableMap
       !?localVariableMap: ioLocalVariableMap
+      !?namedObjectMap: ioNamedObjectMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
       !variableKind:variableKind
@@ -187,6 +190,7 @@ method @varInExpressionAST analyzeExpression_register
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableKind:let @objectInMemoryIR inVariableKind
@@ -230,6 +234,7 @@ method @varInExpressionAST analyzeExpression_register
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?localVariableMap: ioLocalVariableMap
+        !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @operandIR indexResult
@@ -322,6 +327,7 @@ method @varInExpressionAST analyzeExpression_otherKind
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableKind:let @objectInMemoryIR inVariableKind
@@ -346,6 +352,7 @@ method @varInExpressionAST analyzeExpression_otherKind
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?localVariableMap: ioLocalVariableMap
+    !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
   )
@@ -387,6 +394,7 @@ proc analyzeVarInExpressionElementAccess
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -413,6 +421,7 @@ proc analyzeVarInExpressionElementAccess
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?localVariableMap: ioLocalVariableMap
+        !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @operandIR indexResult

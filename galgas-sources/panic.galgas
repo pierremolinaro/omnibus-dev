@@ -105,6 +105,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
+    ?@namedObjectMap namedObjectMap
     ?@localVariableMap localVariableMap
   )
 #--- Insert predefined input arguments
@@ -158,6 +159,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?localVariableMap: localVariableMap
+    !?namedObjectMap: namedObjectMap
     !?alloca:initAllocaList
     !?generatedCode:instructionGenerationList
   ]

@@ -265,6 +265,7 @@ override method @structureDeclaration enterInContext
         !?staticStringMap:*
         !?variableMap:*
         !?localVariableMap:*
+        !?namedObjectMap:*
         !?alloca:allocaList
         !?instructionListIR:initInstructionGenerationList
         ?result:@operandIR expressionIR

@@ -109,6 +109,7 @@ override method @opaqueTypeDeclaration enterInContext
   variableMapWithConstants (
     !context:ioContext
     ?@variableMap variableMap
+    ?@namedObjectMap namedObjectMap
     ?@localVariableMap localVariableMap
   )
   [mSizeExpression analyzeExpression
@@ -124,6 +125,7 @@ override method @opaqueTypeDeclaration enterInContext
     !?staticStringMap:*
     !?variableMap:variableMap
     !?localVariableMap: localVariableMap
+    !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
     ?result:@operandIR sizeExpressionIR

@@ -226,6 +226,7 @@ method @taskVarListAST-element enterInContext
   variableMapWithConstants (
     !context:ioContext
     ?@variableMap variableMap
+    ?@namedObjectMap namedObjectMap
     ?@localVariableMap localVariableMap
   )
   [mVarInitExpression analyzeExpression
@@ -241,6 +242,7 @@ method @taskVarListAST-element enterInContext
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
     !?localVariableMap: localVariableMap
+    !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:let @operandIR expressionResult

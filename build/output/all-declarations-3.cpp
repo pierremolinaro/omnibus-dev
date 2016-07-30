@@ -4144,7 +4144,7 @@ GALGAS_valueIR GALGAS_valueIR::extractObject (const GALGAS_object & inObject,
 
 cMapElement_unifiedTypeMap::cMapElement_unifiedTypeMap (const GALGAS_lstring & inKey,
                                                         const GALGAS_string & in_llvmTypeName,
-                                                        const GALGAS_typeKind & in_kind,
+                                                        const GALGAS_typeKindEX & in_kind,
                                                         const GALGAS_classConstantMap & in_classConstantMap,
                                                         const GALGAS_bool & in_instantiable,
                                                         const GALGAS_bool & in_copyable,
@@ -4307,7 +4307,7 @@ GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_emptyMap (LOCATION_ARGS
 
 void GALGAS_unifiedTypeMap::setter_insertType (GALGAS_lstring inKey,
                                                GALGAS_string inArgument0,
-                                               GALGAS_typeKind inArgument1,
+                                               GALGAS_typeKindEX inArgument1,
                                                GALGAS_classConstantMap inArgument2,
                                                GALGAS_bool inArgument3,
                                                GALGAS_bool inArgument4,
@@ -4338,7 +4338,7 @@ const char * kSearchErrorMessage_unifiedTypeMap_searchKey = "there is no '%K' ty
 
 void GALGAS_unifiedTypeMap::method_searchKey (GALGAS_lstring inKey,
                                               GALGAS_string & outArgument0,
-                                              GALGAS_typeKind & outArgument1,
+                                              GALGAS_typeKindEX & outArgument1,
                                               GALGAS_classConstantMap & outArgument2,
                                               GALGAS_bool & outArgument3,
                                               GALGAS_bool & outArgument4,
@@ -4390,12 +4390,12 @@ GALGAS_string GALGAS_unifiedTypeMap::getter_llvmTypeNameForKey (const GALGAS_str
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typeKind GALGAS_unifiedTypeMap::getter_kindForKey (const GALGAS_string & inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_typeKindEX GALGAS_unifiedTypeMap::getter_kindForKey (const GALGAS_string & inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_typeKind result ;
+  GALGAS_typeKindEX result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
     result = p->mAttribute_kind ;
@@ -4509,7 +4509,7 @@ void GALGAS_unifiedTypeMap::setter_setLlvmTypeNameForKey (GALGAS_string inAttrib
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_unifiedTypeMap::setter_setKindForKey (GALGAS_typeKind inAttributeValue,
+void GALGAS_unifiedTypeMap::setter_setKindForKey (GALGAS_typeKindEX inAttributeValue,
                                                   GALGAS_string inKey,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) {
@@ -4641,7 +4641,7 @@ GALGAS_string cEnumerator_unifiedTypeMap::current_llvmTypeName (LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_typeKind cEnumerator_unifiedTypeMap::current_kind (LOCATION_ARGS) const {
+GALGAS_typeKindEX cEnumerator_unifiedTypeMap::current_kind (LOCATION_ARGS) const {
   const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
   return p->mAttribute_kind ;

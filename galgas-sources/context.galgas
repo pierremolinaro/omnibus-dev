@@ -13,13 +13,11 @@ enum @typeKindNew {
   case staticInteger
   case opaque (@bigint bitCount)
   case arrayType (@unifiedTypeMap-proxy elementType @bigint size)
-  
-  case address (@typeKindNew type)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @typeKind {
+enum @typeKindEX {
   case boolean
   case literalString
   case enumeration (@enumConstantMap constantMap)
@@ -172,7 +170,7 @@ func checkMode
 
 sharedmap @unifiedTypeMap %selectors {
   @string llvmTypeName # For Example: i23, %$toto
-  @typeKind kind
+  @typeKindEX kind
   @classConstantMap classConstantMap
   @bool instantiable
   @bool copyable

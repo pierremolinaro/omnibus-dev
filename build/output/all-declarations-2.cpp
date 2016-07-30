@@ -10739,6 +10739,417 @@ GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingM
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+cMapElement_namedObjectMap::cMapElement_namedObjectMap (const GALGAS_lstring & inKey,
+                                                        const GALGAS_unifiedTypeMap_2D_proxy & in_type,
+                                                        const GALGAS_bool & in_readAccessAllowed,
+                                                        const GALGAS_bool & in_copyable,
+                                                        const GALGAS_bool & in_canBeUsedAsInputParameter
+                                                        COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mAttribute_type (in_type),
+mAttribute_readAccessAllowed (in_readAccessAllowed),
+mAttribute_copyable (in_copyable),
+mAttribute_canBeUsedAsInputParameter (in_canBeUsedAsInputParameter) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_namedObjectMap::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_type.isValid () && mAttribute_readAccessAllowed.isValid () && mAttribute_copyable.isValid () && mAttribute_canBeUsedAsInputParameter.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_namedObjectMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_namedObjectMap (mAttribute_lkey, mAttribute_type, mAttribute_readAccessAllowed, mAttribute_copyable, mAttribute_canBeUsedAsInputParameter COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_namedObjectMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "type" ":" ;
+  mAttribute_type.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "readAccessAllowed" ":" ;
+  mAttribute_readAccessAllowed.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "copyable" ":" ;
+  mAttribute_copyable.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "canBeUsedAsInputParameter" ":" ;
+  mAttribute_canBeUsedAsInputParameter.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_namedObjectMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_namedObjectMap * operand = (cMapElement_namedObjectMap *) inOperand ;
+  typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
+  if (kOperandEqual == result) {
+    result = mAttribute_type.objectCompare (operand->mAttribute_type) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_readAccessAllowed.objectCompare (operand->mAttribute_readAccessAllowed) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_copyable.objectCompare (operand->mAttribute_copyable) ;
+  }
+  if (kOperandEqual == result) {
+    result = mAttribute_canBeUsedAsInputParameter.objectCompare (operand->mAttribute_canBeUsedAsInputParameter) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap::GALGAS_namedObjectMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap::GALGAS_namedObjectMap (const GALGAS_namedObjectMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap & GALGAS_namedObjectMap::operator = (const GALGAS_namedObjectMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap GALGAS_namedObjectMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_namedObjectMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap GALGAS_namedObjectMap::constructor_mapWithMapToOverride (const GALGAS_namedObjectMap & inMapToOverride
+                                                                               COMMA_LOCATION_ARGS) {
+  GALGAS_namedObjectMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap GALGAS_namedObjectMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
+  GALGAS_namedObjectMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_namedObjectMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                 const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
+                                                 const GALGAS_bool & inArgument1,
+                                                 const GALGAS_bool & inArgument2,
+                                                 const GALGAS_bool & inArgument3,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_namedObjectMap * p = NULL ;
+  macroMyNew (p, cMapElement_namedObjectMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@namedObjectMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_namedObjectMap::setter_insertKey (GALGAS_lstring inKey,
+                                              GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                              GALGAS_bool inArgument1,
+                                              GALGAS_bool inArgument2,
+                                              GALGAS_bool inArgument3,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  cMapElement_namedObjectMap * p = NULL ;
+  macroMyNew (p, cMapElement_namedObjectMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "duplicated $%K (already declared at %L" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_namedObjectMap_searchKey = "$%K does not exist" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_namedObjectMap::method_searchKey (GALGAS_lstring inKey,
+                                              GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                              GALGAS_bool & outArgument1,
+                                              GALGAS_bool & outArgument2,
+                                              GALGAS_bool & outArgument3,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) performSearch (inKey,
+                                                                                               inCompiler,
+                                                                                               kSearchErrorMessage_namedObjectMap_searchKey
+                                                                                               COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+    outArgument2.drop () ;
+    outArgument3.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+    outArgument0 = p->mAttribute_type ;
+    outArgument1 = p->mAttribute_readAccessAllowed ;
+    outArgument2 = p->mAttribute_copyable ;
+    outArgument3 = p->mAttribute_canBeUsedAsInputParameter ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_namedObjectMap::getter_typeForKey (const GALGAS_string & inKey,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) attributes ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+    result = p->mAttribute_type ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_namedObjectMap::getter_readAccessAllowedForKey (const GALGAS_string & inKey,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+    result = p->mAttribute_readAccessAllowed ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_namedObjectMap::getter_copyableForKey (const GALGAS_string & inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+    result = p->mAttribute_copyable ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_namedObjectMap::getter_canBeUsedAsInputParameterForKey (const GALGAS_string & inKey,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+    result = p->mAttribute_canBeUsedAsInputParameter ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_namedObjectMap::setter_setTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                  GALGAS_string inKey,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_namedObjectMap * p = (cMapElement_namedObjectMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+    p->mAttribute_type = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_namedObjectMap::setter_setReadAccessAllowedForKey (GALGAS_bool inAttributeValue,
+                                                               GALGAS_string inKey,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_namedObjectMap * p = (cMapElement_namedObjectMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+    p->mAttribute_readAccessAllowed = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_namedObjectMap::setter_setCopyableForKey (GALGAS_bool inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_namedObjectMap * p = (cMapElement_namedObjectMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+    p->mAttribute_copyable = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_namedObjectMap::setter_setCanBeUsedAsInputParameterForKey (GALGAS_bool inAttributeValue,
+                                                                       GALGAS_string inKey,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_namedObjectMap * p = (cMapElement_namedObjectMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+    p->mAttribute_canBeUsedAsInputParameter = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_namedObjectMap * GALGAS_namedObjectMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                       const GALGAS_string & inKey
+                                                                                       COMMA_LOCATION_ARGS) {
+  cMapElement_namedObjectMap * result = (cMapElement_namedObjectMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_namedObjectMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_namedObjectMap::cEnumerator_namedObjectMap (const GALGAS_namedObjectMap & inEnumeratedObject,
+                                                        const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator () {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap_2D_element cEnumerator_namedObjectMap::current (LOCATION_ARGS) const {
+  const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+  return GALGAS_namedObjectMap_2D_element (p->mAttribute_lkey, p->mAttribute_type, p->mAttribute_readAccessAllowed, p->mAttribute_copyable, p->mAttribute_canBeUsedAsInputParameter) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_namedObjectMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_namedObjectMap::current_type (LOCATION_ARGS) const {
+  const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+  return p->mAttribute_type ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_namedObjectMap::current_readAccessAllowed (LOCATION_ARGS) const {
+  const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+  return p->mAttribute_readAccessAllowed ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_namedObjectMap::current_copyable (LOCATION_ARGS) const {
+  const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+  return p->mAttribute_copyable ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_namedObjectMap::current_canBeUsedAsInputParameter (LOCATION_ARGS) const {
+  const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_namedObjectMap) ;
+  return p->mAttribute_canBeUsedAsInputParameter ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @namedObjectMap type                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_namedObjectMap ("namedObjectMap",
+                                       NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_namedObjectMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_namedObjectMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_namedObjectMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_namedObjectMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap GALGAS_namedObjectMap::extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_namedObjectMap result ;
+  const GALGAS_namedObjectMap * p = (const GALGAS_namedObjectMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_namedObjectMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("namedObjectMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cMapElement_variableMap::cMapElement_variableMap (const GALGAS_lstring & inKey,
                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_type,
                                                   const GALGAS_bool & in_readAccessAllowed,

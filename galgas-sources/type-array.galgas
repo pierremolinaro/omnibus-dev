@@ -115,6 +115,7 @@ override method @typeArrayDeclaration enterInContext
   variableMapWithConstants (
     !context:ioContext
     ?@variableMap variableMap
+    ?@namedObjectMap namedObjectMap
     ?@localVariableMap localVariableMap
   )
   [mSizeExpression analyzeExpression
@@ -130,6 +131,7 @@ override method @typeArrayDeclaration enterInContext
     !?staticStringMap:*
     !?variableMap:variableMap
     !?localVariableMap: localVariableMap
+    !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
     ?result:@operandIR sizeExpressionIR

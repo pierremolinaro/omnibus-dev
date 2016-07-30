@@ -114,6 +114,7 @@ proc routineSemanticAnalysis
     !globalsAreConstant:false
     !returnTypeName:inReturnTypeName
     ?@variableMap variableMap
+    ?@namedObjectMap namedObjectMap
     ?@localVariableMap localVariableMap
   )
 #--- Analyse formal arguments
@@ -146,6 +147,7 @@ proc routineSemanticAnalysis
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?localVariableMap: localVariableMap
+    !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?generatedCode:instructionGenerationList
   ]

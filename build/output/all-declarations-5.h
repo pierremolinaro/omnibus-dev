@@ -159,8 +159,7 @@ class GALGAS_typeKindNew : public AC_GALGAS_root {
     kEnum_integer,
     kEnum_staticInteger,
     kEnum_opaque,
-    kEnum_arrayType,
-    kEnum_address
+    kEnum_arrayType
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -187,9 +186,6 @@ class GALGAS_typeKindNew : public AC_GALGAS_root {
                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_typeKindNew constructor_address (const class GALGAS_typeKindNew & inOperand0
-                                                                COMMA_LOCATION_ARGS) ;
-
   public : static class GALGAS_typeKindNew constructor_arrayType (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                   const class GALGAS_bigint & inOperand1
                                                                   COMMA_LOCATION_ARGS) ;
@@ -225,10 +221,6 @@ class GALGAS_typeKindNew : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_address (class GALGAS_typeKindNew & outArgument0,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG void method_arrayType (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                    class GALGAS_bigint & outArgument1,
                                                    C_Compiler * inCompiler
@@ -257,8 +249,6 @@ class GALGAS_typeKindNew : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAddress (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolean (LOCATION_ARGS) const ;
@@ -381,113 +371,97 @@ class cEnumAssociatedValues_typeKindNew_arrayType : public cEnumAssociatedValues
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         @typeKindEX enum, associated values                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_typeKindNew_address : public cEnumAssociatedValues {
-  public : const GALGAS_typeKindNew mAssociatedValue0 ;
+class cEnumAssociatedValues_typeKindEX_enumeration : public cEnumAssociatedValues {
+  public : const GALGAS_enumConstantMap mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKindNew_address (const GALGAS_typeKindNew & inAssociatedValue0
-                                                      COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_typeKindEX_enumeration (const GALGAS_enumConstantMap & inAssociatedValue0
+                                                         COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_typeKindNew_address (void) {}
+  public : virtual ~ cEnumAssociatedValues_typeKindEX_enumeration (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @typeKind enum, associated values                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_typeKind_enumeration : public cEnumAssociatedValues {
-  public : const GALGAS_enumConstantMap mAssociatedValue0 ;
+class cEnumAssociatedValues_typeKindEX_structure : public cEnumAssociatedValues {
+  public : const GALGAS_propertyMap mAssociatedValue0 ;
+  public : const GALGAS_propertyList mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_enumeration (const GALGAS_enumConstantMap & inAssociatedValue0
+  public : cEnumAssociatedValues_typeKindEX_structure (const GALGAS_propertyMap & inAssociatedValue0,
+                                                       const GALGAS_propertyList & inAssociatedValue1
                                                        COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_typeKind_enumeration (void) {}
+  public : virtual ~ cEnumAssociatedValues_typeKindEX_structure (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_typeKind_structure : public cEnumAssociatedValues {
-  public : const GALGAS_propertyMap mAssociatedValue0 ;
-  public : const GALGAS_propertyList mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyMap & inAssociatedValue0,
-                                                     const GALGAS_propertyList & inAssociatedValue1
-                                                     COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_typeKind_structure (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
+class cEnumAssociatedValues_typeKindEX_integer : public cEnumAssociatedValues {
   public : const GALGAS_bigint mAssociatedValue0 ;
   public : const GALGAS_bigint mAssociatedValue1 ;
   public : const GALGAS_bool mAssociatedValue2 ;
   public : const GALGAS_uint mAssociatedValue3 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_integer (const GALGAS_bigint & inAssociatedValue0,
-                                                   const GALGAS_bigint & inAssociatedValue1,
-                                                   const GALGAS_bool & inAssociatedValue2,
-                                                   const GALGAS_uint & inAssociatedValue3
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_typeKind_integer (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_typeKind_opaque : public cEnumAssociatedValues {
-  public : const GALGAS_bigint mAssociatedValue0 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_typeKind_opaque (const GALGAS_bigint & inAssociatedValue0
-                                                  COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_typeKind_opaque (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_typeKind_arrayType : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_bigint mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_typeKind_arrayType (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                     const GALGAS_bigint & inAssociatedValue1
+  public : cEnumAssociatedValues_typeKindEX_integer (const GALGAS_bigint & inAssociatedValue0,
+                                                     const GALGAS_bigint & inAssociatedValue1,
+                                                     const GALGAS_bool & inAssociatedValue2,
+                                                     const GALGAS_uint & inAssociatedValue3
                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_typeKind_arrayType (void) {}
+  public : virtual ~ cEnumAssociatedValues_typeKindEX_integer (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_typeKindEX_opaque : public cEnumAssociatedValues {
+  public : const GALGAS_bigint mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKindEX_opaque (const GALGAS_bigint & inAssociatedValue0
+                                                    COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKindEX_opaque (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_typeKindEX_arrayType : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_bigint mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKindEX_arrayType (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                       const GALGAS_bigint & inAssociatedValue1
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKindEX_arrayType (void) {}
 } ;
 
 
@@ -1523,6 +1497,7 @@ void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructi
                                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                     class GALGAS_variableMap & io_ioVariableMap,
                                                     class GALGAS_localVariableMap & io_ioLocalVariableMap,
+                                                    class GALGAS_namedObjectMap & io_ioNamedObjectMap,
                                                     class GALGAS_allocaList & io_ioAllocaList,
                                                     class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                     class C_Compiler * inCompiler
@@ -1541,7 +1516,8 @@ void routine_initialVariableMap (const class GALGAS_string constinArgument0,
                                  class GALGAS_bool inArgument4,
                                  const class GALGAS_lstring constinArgument5,
                                  class GALGAS_variableMap & outArgument6,
-                                 class GALGAS_localVariableMap & outArgument7,
+                                 class GALGAS_namedObjectMap & outArgument7,
+                                 class GALGAS_localVariableMap & outArgument8,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
@@ -1903,7 +1879,8 @@ typedef void (*extensionMethodSignature_abstractCallInstructionAST_baseGuardAnal
                                                                                       class GALGAS_staticStringMap & ioArgument7,
                                                                                       class GALGAS_variableMap & ioArgument8,
                                                                                       class GALGAS_localVariableMap & ioArgument9,
-                                                                                      class GALGAS_guardKindGenerationIR & outArgument10,
+                                                                                      class GALGAS_namedObjectMap & ioArgument10,
+                                                                                      class GALGAS_guardKindGenerationIR & outArgument11,
                                                                                       class C_Compiler * inCompiler
                                                                                       COMMA_LOCATION_ARGS) ;
 
@@ -1925,6 +1902,7 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_abstractCallInstruct
                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                            GALGAS_variableMap & io_ioVariableMap,
                                            GALGAS_localVariableMap & io_ioLocalVariableMap,
+                                           GALGAS_namedObjectMap & io_ioNamedObjectMap,
                                            GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
@@ -1957,7 +1935,8 @@ void routine_standaloneBaseGuardAnalyze (const class GALGAS_lstring constinArgum
                                          class GALGAS_staticStringMap & ioArgument6,
                                          class GALGAS_variableMap & ioArgument7,
                                          class GALGAS_localVariableMap & ioArgument8,
-                                         class GALGAS_guardKindGenerationIR & outArgument9,
+                                         class GALGAS_namedObjectMap & ioArgument9,
+                                         class GALGAS_guardKindGenerationIR & outArgument10,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -2000,9 +1979,10 @@ void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_pr
                                          class GALGAS_staticStringMap & ioArgument11,
                                          class GALGAS_variableMap & ioArgument12,
                                          class GALGAS_localVariableMap & ioArgument13,
-                                         class GALGAS_allocaList & ioArgument14,
-                                         class GALGAS_instructionListIR & ioArgument15,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument16,
+                                         class GALGAS_namedObjectMap & ioArgument14,
+                                         class GALGAS_allocaList & ioArgument15,
+                                         class GALGAS_instructionListIR & ioArgument16,
+                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument17,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -2040,8 +2020,9 @@ void routine_analyzeVarInExpressionElementAccess (const class GALGAS_varInExpres
                                                   class GALGAS_staticStringMap & ioArgument12,
                                                   class GALGAS_variableMap & ioArgument13,
                                                   class GALGAS_localVariableMap & ioArgument14,
-                                                  class GALGAS_allocaList & ioArgument15,
-                                                  class GALGAS_instructionListIR & ioArgument16,
+                                                  class GALGAS_namedObjectMap & ioArgument15,
+                                                  class GALGAS_allocaList & ioArgument16,
+                                                  class GALGAS_instructionListIR & ioArgument17,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -2074,9 +2055,10 @@ typedef void (*extensionMethodSignature_expressionAST_analyzeExpression) (const 
                                                                           class GALGAS_staticStringMap & ioArgument9,
                                                                           class GALGAS_variableMap & ioArgument10,
                                                                           class GALGAS_localVariableMap & ioArgument11,
-                                                                          class GALGAS_allocaList & ioArgument12,
-                                                                          class GALGAS_instructionListIR & ioArgument13,
-                                                                          class GALGAS_operandIR & outArgument14,
+                                                                          class GALGAS_namedObjectMap & ioArgument12,
+                                                                          class GALGAS_allocaList & ioArgument13,
+                                                                          class GALGAS_instructionListIR & ioArgument14,
+                                                                          class GALGAS_operandIR & outArgument15,
                                                                           class C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -2100,6 +2082,7 @@ void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inO
                                             GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                             GALGAS_variableMap & io_ioVariableMap,
                                             GALGAS_localVariableMap & io_ioLocalVariableMap,
+                                            GALGAS_namedObjectMap & io_ioNamedObjectMap,
                                             GALGAS_allocaList & io_ioAllocaList,
                                             GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                             GALGAS_operandIR & out_outResult,
@@ -2138,9 +2121,10 @@ void routine_analyzeVariableAccess (const class GALGAS_accessList constinArgumen
                                     class GALGAS_staticStringMap & ioArgument9,
                                     class GALGAS_variableMap & ioArgument10,
                                     class GALGAS_localVariableMap & ioArgument11,
-                                    class GALGAS_allocaList & ioArgument12,
-                                    class GALGAS_instructionListIR & ioArgument13,
-                                    class GALGAS_objectInMemoryIR & outArgument14,
+                                    class GALGAS_namedObjectMap & ioArgument12,
+                                    class GALGAS_allocaList & ioArgument13,
+                                    class GALGAS_instructionListIR & ioArgument14,
+                                    class GALGAS_objectInMemoryIR & outArgument15,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
@@ -2165,8 +2149,9 @@ void routine_analyzeArrayElementAccess (const class GALGAS_arrayElementAccess co
                                         class GALGAS_staticStringMap & ioArgument12,
                                         class GALGAS_variableMap & ioArgument13,
                                         class GALGAS_localVariableMap & ioArgument14,
-                                        class GALGAS_allocaList & ioArgument15,
-                                        class GALGAS_instructionListIR & ioArgument16,
+                                        class GALGAS_namedObjectMap & ioArgument15,
+                                        class GALGAS_allocaList & ioArgument16,
+                                        class GALGAS_instructionListIR & ioArgument17,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
@@ -2213,9 +2198,10 @@ void routine_analyzeVariableWriteAccess (const class GALGAS_accessList constinAr
                                          class GALGAS_staticStringMap & ioArgument9,
                                          class GALGAS_variableMap & ioArgument10,
                                          class GALGAS_localVariableMap & ioArgument11,
-                                         class GALGAS_allocaList & ioArgument12,
-                                         class GALGAS_instructionListIR & ioArgument13,
-                                         class GALGAS_objectInMemoryIR & outArgument14,
+                                         class GALGAS_namedObjectMap & ioArgument12,
+                                         class GALGAS_allocaList & ioArgument13,
+                                         class GALGAS_instructionListIR & ioArgument14,
+                                         class GALGAS_objectInMemoryIR & outArgument15,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -2247,9 +2233,10 @@ void routine_analyzeRegisterWriteAccess (const class GALGAS_accessList constinAr
                                          class GALGAS_staticStringMap & ioArgument9,
                                          class GALGAS_variableMap & ioArgument10,
                                          class GALGAS_localVariableMap & ioArgument11,
-                                         class GALGAS_allocaList & ioArgument12,
-                                         class GALGAS_instructionListIR & ioArgument13,
-                                         class GALGAS_objectInMemoryIR & outArgument14,
+                                         class GALGAS_namedObjectMap & ioArgument12,
+                                         class GALGAS_allocaList & ioArgument13,
+                                         class GALGAS_instructionListIR & ioArgument14,
+                                         class GALGAS_objectInMemoryIR & outArgument15,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -2286,10 +2273,11 @@ void routine_analyzeVariableReadWriteAccess (const class GALGAS_accessList const
                                              class GALGAS_staticStringMap & ioArgument10,
                                              class GALGAS_variableMap & ioArgument11,
                                              class GALGAS_localVariableMap & ioArgument12,
-                                             class GALGAS_allocaList & ioArgument13,
-                                             class GALGAS_instructionListIR & ioArgument14,
-                                             class GALGAS_objectInMemoryIR & outArgument15,
-                                             class GALGAS_string & outArgument16,
+                                             class GALGAS_namedObjectMap & ioArgument13,
+                                             class GALGAS_allocaList & ioArgument14,
+                                             class GALGAS_instructionListIR & ioArgument15,
+                                             class GALGAS_objectInMemoryIR & outArgument16,
+                                             class GALGAS_string & outArgument17,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -2312,9 +2300,10 @@ void routine_analyzeSelfAccess (const class GALGAS_fieldList constinArgument0,
                                 class GALGAS_staticStringMap & ioArgument10,
                                 class GALGAS_variableMap & ioArgument11,
                                 class GALGAS_localVariableMap & ioArgument12,
-                                class GALGAS_allocaList & ioArgument13,
-                                class GALGAS_instructionListIR & ioArgument14,
-                                class GALGAS_objectInMemoryIR & outArgument15,
+                                class GALGAS_namedObjectMap & ioArgument13,
+                                class GALGAS_allocaList & ioArgument14,
+                                class GALGAS_instructionListIR & ioArgument15,
+                                class GALGAS_objectInMemoryIR & outArgument16,
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
 
@@ -2349,10 +2338,11 @@ void routine_analyzeGuardCall (const class GALGAS_unifiedTypeMap_2D_proxy consti
                                class GALGAS_staticStringMap & ioArgument9,
                                class GALGAS_variableMap & ioArgument10,
                                class GALGAS_localVariableMap & ioArgument11,
-                               class GALGAS_allocaList & ioArgument12,
-                               class GALGAS_instructionListIR & ioArgument13,
-                               class GALGAS_procCallEffectiveParameterListIR & outArgument14,
-                               class GALGAS_lstring & outArgument15,
+                               class GALGAS_namedObjectMap & ioArgument12,
+                               class GALGAS_allocaList & ioArgument13,
+                               class GALGAS_instructionListIR & ioArgument14,
+                               class GALGAS_procCallEffectiveParameterListIR & outArgument15,
+                               class GALGAS_lstring & outArgument16,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -2385,8 +2375,9 @@ void routine_analyzeStandaloneRoutineCall (const class GALGAS_lstring constinArg
                                            class GALGAS_staticStringMap & ioArgument10,
                                            class GALGAS_variableMap & ioArgument11,
                                            class GALGAS_localVariableMap & ioArgument12,
-                                           class GALGAS_allocaList & ioArgument13,
-                                           class GALGAS_instructionListIR & ioArgument14,
+                                           class GALGAS_namedObjectMap & ioArgument13,
+                                           class GALGAS_allocaList & ioArgument14,
+                                           class GALGAS_instructionListIR & ioArgument15,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
@@ -2521,14 +2512,15 @@ void routine_analyzeRoutineCall (const class GALGAS_unifiedTypeMap_2D_proxy cons
                                  class GALGAS_staticStringMap & ioArgument11,
                                  class GALGAS_variableMap & ioArgument12,
                                  class GALGAS_localVariableMap & ioArgument13,
-                                 class GALGAS_allocaList & ioArgument14,
-                                 class GALGAS_instructionListIR & ioArgument15,
-                                 class GALGAS_procCallEffectiveParameterListIR & outArgument16,
-                                 class GALGAS_routineKindIR & outArgument17,
-                                 class GALGAS_lstring & outArgument18,
+                                 class GALGAS_namedObjectMap & ioArgument14,
+                                 class GALGAS_allocaList & ioArgument15,
+                                 class GALGAS_instructionListIR & ioArgument16,
+                                 class GALGAS_procCallEffectiveParameterListIR & outArgument17,
+                                 class GALGAS_routineKindIR & outArgument18,
                                  class GALGAS_lstring & outArgument19,
-                                 class GALGAS_unifiedTypeMap_2D_proxy & outArgument20,
-                                 class GALGAS_bool & outArgument21,
+                                 class GALGAS_lstring & outArgument20,
+                                 class GALGAS_unifiedTypeMap_2D_proxy & outArgument21,
+                                 class GALGAS_bool & outArgument22,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
@@ -2645,7 +2637,8 @@ class GALGAS_string function_functionResultVariableName (class C_Compiler * inCo
 
 void routine_variableMapWithConstants (const class GALGAS_semanticContext constinArgument0,
                                        class GALGAS_variableMap & outArgument1,
-                                       class GALGAS_localVariableMap & outArgument2,
+                                       class GALGAS_namedObjectMap & outArgument2,
+                                       class GALGAS_localVariableMap & outArgument3,
                                        class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 

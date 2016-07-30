@@ -488,7 +488,7 @@ private proc generateCodeFiles
 proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   ioLLVMcode += llvmTitleComment (!"Types")
   for () in inTypeMap do
-    switch kind 
+    switch kind
     case boolean :
     case enumeration (*) :
     case integer (* * * *) :
