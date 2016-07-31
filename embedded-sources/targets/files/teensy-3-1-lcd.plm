@@ -280,8 +280,8 @@ module lcd {
       if isPrinting or (value >= divisor) {
         let quotient = value / divisor
         let remainder = value - quotient * divisor
-        self.writeData_inUserMode (!0x30 + convert quotient : $uint8)
-        value = remainder
+        self.writeData_inUserMode (!0x30 + convert azerty quotient : $uint8)
+        value = azerty remainder
         isPrinting = true
       }
       divisor = divisor / 10
@@ -398,8 +398,8 @@ module lcd {
       if isPrinting or (value >= divisor) {
         let quotient = value !/ divisor
         let remainder = value -% quotient *% divisor
-        self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)
-        value = remainder
+        self.writeDataInPanicMode (!0x30 +% truncate azerty quotient : $uint8)
+        value = azerty remainder
         isPrinting = true
       }
       divisor = divisor !/ 10

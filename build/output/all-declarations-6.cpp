@@ -9276,8 +9276,8 @@ const char * gWrapperFileContent_31_targetTemplates = "\n"
   "      if isPrinting or (value >= divisor) {\n"
   "        let quotient = value / divisor\n"
   "        let remainder = value - quotient * divisor\n"
-  "        self.writeData_inUserMode (!0x30 + convert quotient : $uint8)\n"
-  "        value = remainder\n"
+  "        self.writeData_inUserMode (!0x30 + convert azerty quotient : $uint8)\n"
+  "        value = azerty remainder\n"
   "        isPrinting = true\n"
   "      }\n"
   "      divisor = divisor / 10\n"
@@ -9394,8 +9394,8 @@ const char * gWrapperFileContent_31_targetTemplates = "\n"
   "      if isPrinting or (value >= divisor) {\n"
   "        let quotient = value !/ divisor\n"
   "        let remainder = value -% quotient *% divisor\n"
-  "        self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)\n"
-  "        value = remainder\n"
+  "        self.writeDataInPanicMode (!0x30 +% truncate azerty quotient : $uint8)\n"
+  "        value = azerty remainder\n"
   "        isPrinting = true\n"
   "      }\n"
   "      divisor = divisor !/ 10\n"
@@ -9473,7 +9473,7 @@ const cRegularFileWrapper gWrapperFile_31_targetTemplates (
   "teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  16040, // Text length
+  16068, // Text length
   gWrapperFileContent_31_targetTemplates
 ) ;
 
