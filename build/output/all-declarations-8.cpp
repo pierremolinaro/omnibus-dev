@@ -8183,17 +8183,23 @@ void extensionMethod_analyzeBranchInstructionList (const GALGAS_instructionListA
   {
   ioArgument_ioVariableMap.setter_openBranch (inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 93)) ;
   }
+  {
+  ioArgument_ioLocalVariableMap.setter_openBranch (inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 94)) ;
+  }
   const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_4501 (temp_0, kEnumeration_up) ;
-  while (enumerator_4501.hasCurrentObject ()) {
+  cEnumerator_instructionListAST enumerator_4537 (temp_0, kEnumeration_up) ;
+  while (enumerator_4537.hasCurrentObject ()) {
     {
-    extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_4501.current_mInstructionLocation (HERE), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 95)) ;
+    extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_4537.current_mInstructionLocation (HERE), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 96)) ;
     }
-    callExtensionMethod_analyze ((const cPtr_instructionAST *) enumerator_4501.current_mInstruction (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineCanMutateProperties, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioLocalVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 96)) ;
-    enumerator_4501.gotoNextObject () ;
+    callExtensionMethod_analyze ((const cPtr_instructionAST *) enumerator_4537.current_mInstruction (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineCanMutateProperties, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioLocalVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 97)) ;
+    enumerator_4537.gotoNextObject () ;
   }
   {
-  ioArgument_ioVariableMap.setter_closeBranch (inArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 115)) ;
+  ioArgument_ioVariableMap.setter_closeBranch (inArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 116)) ;
+  }
+  {
+  ioArgument_ioLocalVariableMap.setter_closeBranch (inArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 117)) ;
   }
 }
 
@@ -8222,13 +8228,13 @@ void extensionMethod_analyzeRoutineInstructionList (const GALGAS_instructionList
                                                     C_Compiler * inCompiler
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_6272 (temp_0, kEnumeration_up) ;
-  while (enumerator_6272.hasCurrentObject ()) {
+  cEnumerator_instructionListAST enumerator_6369 (temp_0, kEnumeration_up) ;
+  while (enumerator_6369.hasCurrentObject ()) {
     {
-    extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_6272.current_mInstructionLocation (HERE), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 137)) ;
+    extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_6369.current_mInstructionLocation (HERE), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 139)) ;
     }
-    callExtensionMethod_analyze ((const cPtr_instructionAST *) enumerator_6272.current_mInstruction (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineCanMutateProperties, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioLocalVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 138)) ;
-    enumerator_6272.gotoNextObject () ;
+    callExtensionMethod_analyze ((const cPtr_instructionAST *) enumerator_6369.current_mInstruction (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineCanMutateProperties, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioLocalVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 140)) ;
+    enumerator_6369.gotoNextObject () ;
   }
 }
 
@@ -8246,10 +8252,10 @@ void extensionMethod_instructionListLLVMCode (const GALGAS_instructionListIR inO
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_7521 (temp_0, kEnumeration_up) ;
-  while (enumerator_7521.hasCurrentObject ()) {
-    callExtensionMethod_llvmInstructionCode ((const cPtr_abstractInstructionIR *) enumerator_7521.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 167)) ;
-    enumerator_7521.gotoNextObject () ;
+  cEnumerator_instructionListIR enumerator_7618 (temp_0, kEnumeration_up) ;
+  while (enumerator_7618.hasCurrentObject ()) {
+    callExtensionMethod_llvmInstructionCode ((const cPtr_abstractInstructionIR *) enumerator_7618.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 169)) ;
+    enumerator_7618.gotoNextObject () ;
   }
 }
 

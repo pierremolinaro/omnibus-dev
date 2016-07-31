@@ -189,6 +189,7 @@ override method @syncInstructionAST analyze
   @syncInstructionBranchListIR onInstructionBranchListIR = {}
   for (guardedCommand instructionList endOfBranch) in mBranchList do
     [!?ioVariableMap openOverrideForSelectBlock]
+    [!?ioLocalVariableMap openOverrideForSelectBlock]
   #--- Guard
     @guardedCommandIR guardedCommandIR
     switch guardedCommand
@@ -325,6 +326,7 @@ override method @syncInstructionAST analyze
       !?instructionListIR:branchInstructionGenerationList
     ]
     [!?ioVariableMap closeOverride !endOfBranch]
+    [!?ioLocalVariableMap closeOverride !endOfBranch]
   #---
     onInstructionBranchListIR +=
       !guardedCommandIR

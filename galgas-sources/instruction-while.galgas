@@ -115,6 +115,8 @@ override method @whileInstructionAST analyze
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [!?ioVariableMap openOverrideForRepeatBlock]
+  [!?ioLocalVariableMap openOverrideForRepeatBlock]
+  var namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
   [mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !propertiesAreMutable:inRoutineCanMutateProperties
@@ -128,11 +130,12 @@ override method @whileInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?localVariableMap: ioLocalVariableMap
-    !?namedObjectMap: ioNamedObjectMap
+    !?namedObjectMap: namedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_while_instruction]
+  [!?ioLocalVariableMap closeOverride !mEndOf_while_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@whileInstructionIR.new {
     ![mEndOf_test_expression locationIndex]

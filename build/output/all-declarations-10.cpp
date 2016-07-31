@@ -9533,8 +9533,8 @@ static void extensionMethod_primaryInExpressionAST_analyzeExpression (const cPtr
                                                                       const GALGAS_bool /* constinArgument_inAllowPanic */,
                                                                       GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
                                                                       GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
-                                                                      GALGAS_variableMap & /* ioArgument_ioVariableMap */,
-                                                                      GALGAS_localVariableMap & /* ioArgument_ioLocalVariableMap */,
+                                                                      GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                      GALGAS_localVariableMap & ioArgument_ioLocalVariableMap,
                                                                       GALGAS_namedObjectMap & ioArgument_ioNamedObjectMap,
                                                                       GALGAS_allocaList & /* ioArgument_ioAllocaList */,
                                                                       GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
@@ -9543,7 +9543,7 @@ static void extensionMethod_primaryInExpressionAST_analyzeExpression (const cPtr
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_primaryInExpressionAST * object = (const cPtr_primaryInExpressionAST *) inObject ;
   macroValidSharedObject (object, cPtr_primaryInExpressionAST) ;
-  GALGAS_objectInMemoryIR var_currentPointer_6800 ;
+  GALGAS_objectInMemoryIR var_currentPointer_6786 ;
   switch (object->mAttribute_mSelfAccess.enumValue ()) {
   case GALGAS_primaryInExpressionSelfAccessAST::kNotBuilt:
     break ;
@@ -9552,43 +9552,57 @@ static void extensionMethod_primaryInExpressionAST_analyzeExpression (const cPtr
       const enumGalgasBool test_0 = constinArgument_inGuard.boolEnum () ;
       if (kBoolTrue == test_0) {
         inCompiler->emitSemanticError (object->mAttribute_mObjectName.getter_location (SOURCE_FILE ("expression-primary.galgas", 162)), GALGAS_string ("in guard, only 'self' properties may be accessed")  COMMA_SOURCE_FILE ("expression-primary.galgas", 162)) ;
-        var_currentPointer_6800.drop () ; // Release error dropped variable
+        var_currentPointer_6786.drop () ; // Release error dropped variable
       }else if (kBoolFalse == test_0) {
-        ioArgument_ioNamedObjectMap.method_searchKey (object->mAttribute_mObjectName, var_currentPointer_6800, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 164)) ;
-        extensionMethod_checkReadable (var_currentPointer_6800, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 168)) ;
+        const enumGalgasBool test_1 = ioArgument_ioLocalVariableMap.getter_hasKey (object->mAttribute_mObjectName.getter_string (SOURCE_FILE ("expression-primary.galgas", 164)) COMMA_SOURCE_FILE ("expression-primary.galgas", 164)).boolEnum () ;
+        if (kBoolTrue == test_1) {
+          {
+          ioArgument_ioLocalVariableMap.setter_searchForReadAccess (object->mAttribute_mObjectName, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 165)) ;
+          }
+        }
+        {
+        GALGAS_unifiedTypeMap_2D_proxy joker_7144_5 ; // Joker input parameter
+        GALGAS_bool joker_7144_4 ; // Joker input parameter
+        GALGAS_objectInMemoryIR joker_7144_3 ; // Joker input parameter
+        GALGAS_bool joker_7144_2 ; // Joker input parameter
+        GALGAS_bool joker_7144_1 ; // Joker input parameter
+        ioArgument_ioVariableMap.setter_searchForReadAccess (object->mAttribute_mObjectName, joker_7144_5, joker_7144_4, joker_7144_3, joker_7144_2, joker_7144_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 167)) ;
+        }
+        ioArgument_ioNamedObjectMap.method_searchKey (object->mAttribute_mObjectName, var_currentPointer_6786, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 168)) ;
+        extensionMethod_checkReadable (var_currentPointer_6786, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 172)) ;
       }
     }
     break ;
   case GALGAS_primaryInExpressionSelfAccessAST::kEnum_selfAccess:
     {
-      const cEnumAssociatedValues_primaryInExpressionSelfAccessAST_selfAccess * extractPtr_7751 = (const cEnumAssociatedValues_primaryInExpressionSelfAccessAST_selfAccess *) (object->mAttribute_mSelfAccess.unsafePointer ()) ;
-      const GALGAS_location extractedValue_selfLocation = extractPtr_7751->mAssociatedValue0 ;
-      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-primary.galgas", 171)))).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        inCompiler->emitSemanticError (extractedValue_selfLocation, GALGAS_string ("'self' is not available in this context")  COMMA_SOURCE_FILE ("expression-primary.galgas", 172)) ;
-        var_currentPointer_6800.drop () ; // Release error dropped variable
-      }else if (kBoolFalse == test_1) {
-        const enumGalgasBool test_2 = constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 173)).getter_isStructure (SOURCE_FILE ("expression-primary.galgas", 173)).boolEnum () ;
-        if (kBoolTrue == test_2) {
-          GALGAS_namedObjectMap var_structureObjectMap_7393 ;
-          GALGAS_propertyMap joker_7395_2 ; // Joker input parameter
-          GALGAS_propertyList joker_7395_1 ; // Joker input parameter
-          constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 174)).method_structure (var_structureObjectMap_7393, joker_7395_2, joker_7395_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 174)) ;
-          GALGAS_objectInMemoryIR var_object_7475 ;
-          var_structureObjectMap_7393.method_searchKey (object->mAttribute_mObjectName, var_object_7475, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 175)) ;
+      const cEnumAssociatedValues_primaryInExpressionSelfAccessAST_selfAccess * extractPtr_7932 = (const cEnumAssociatedValues_primaryInExpressionSelfAccessAST_selfAccess *) (object->mAttribute_mSelfAccess.unsafePointer ()) ;
+      const GALGAS_location extractedValue_selfLocation = extractPtr_7932->mAssociatedValue0 ;
+      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-primary.galgas", 175)))).boolEnum () ;
+      if (kBoolTrue == test_2) {
+        inCompiler->emitSemanticError (extractedValue_selfLocation, GALGAS_string ("'self' is not available in this context")  COMMA_SOURCE_FILE ("expression-primary.galgas", 176)) ;
+        var_currentPointer_6786.drop () ; // Release error dropped variable
+      }else if (kBoolFalse == test_2) {
+        const enumGalgasBool test_3 = constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 177)).getter_isStructure (SOURCE_FILE ("expression-primary.galgas", 177)).boolEnum () ;
+        if (kBoolTrue == test_3) {
+          GALGAS_namedObjectMap var_structureObjectMap_7574 ;
+          GALGAS_propertyMap joker_7576_2 ; // Joker input parameter
+          GALGAS_propertyList joker_7576_1 ; // Joker input parameter
+          constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 178)).method_structure (var_structureObjectMap_7574, joker_7576_2, joker_7576_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 178)) ;
+          GALGAS_objectInMemoryIR var_object_7656 ;
+          var_structureObjectMap_7574.method_searchKey (object->mAttribute_mObjectName, var_object_7656, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 179)) ;
           {
-          routine_getNewTemporarySelfObjectPtr (constinArgument_inSelfType, var_object_7475, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_currentPointer_6800, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 179)) ;
+          routine_getNewTemporarySelfObjectPtr (constinArgument_inSelfType, var_object_7656, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_currentPointer_6786, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 183)) ;
           }
-        }else if (kBoolFalse == test_2) {
-          inCompiler->emitSemanticError (extractedValue_selfLocation, GALGAS_string ("'self' should be a structure instance")  COMMA_SOURCE_FILE ("expression-primary.galgas", 187)) ;
-          var_currentPointer_6800.drop () ; // Release error dropped variable
+        }else if (kBoolFalse == test_3) {
+          inCompiler->emitSemanticError (extractedValue_selfLocation, GALGAS_string ("'self' should be a structure instance")  COMMA_SOURCE_FILE ("expression-primary.galgas", 191)) ;
+          var_currentPointer_6786.drop () ; // Release error dropped variable
         }
       }
     }
     break ;
   }
   {
-  extensionSetter_appendLoadFromMemory (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, object->mAttribute_mObjectName.mAttribute_location, var_currentPointer_6800, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 217)) ;
+  extensionSetter_appendLoadFromMemory (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, object->mAttribute_mObjectName.mAttribute_location, var_currentPointer_6786, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 221)) ;
   }
 }
 

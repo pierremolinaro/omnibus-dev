@@ -100,6 +100,7 @@ override method @forInstructionAST analyze
   ioAllocaList += !enumeratedVarLLVMName !iteratedElementType
 #--- Analyze instruction list
   [!?ioVariableMap openOverrideForRepeatBlock]
+  [!?ioLocalVariableMap openOverrideForRepeatBlock]
   [!?ioVariableMap insertUsedConstant
     !lkey:mVarName
     !type:iteratedElementType
@@ -108,6 +109,7 @@ override method @forInstructionAST analyze
     !copyable:true
     !canBeUsedAsInputParameter:false
   ]
+  var namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
   @instructionListIR instructionGenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
@@ -122,11 +124,12 @@ override method @forInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?localVariableMap: ioLocalVariableMap
-    !?namedObjectMap: ioNamedObjectMap
+    !?namedObjectMap: namedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_do_instruction]
+  [!?ioLocalVariableMap closeOverride !mEndOf_do_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@forInstructionIR.new {
     !enumeratedVarLLVMName
