@@ -532,7 +532,7 @@ proc analyzeEffectiveParameters
       end
       let varLLVMName = name.string + "." + ioTemporaries.mTemporaryIndex
       ioTemporaries.mTemporaryIndex ++
-      let targetVar = @objectInMemoryIR.localVariable {!type:type !name:varLLVMName}
+      let targetVar = @objectInMemoryIR.localVariable {!type:type !name:varLLVMName !volatile:false}
       if constant then
         [!?ioVariableMap insertConstant
           !lkey:name

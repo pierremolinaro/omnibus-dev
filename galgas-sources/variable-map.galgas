@@ -20,7 +20,7 @@ proc getLocalNameOfNewTempObjectInMemory
   ?!@semanticTemporariesStruct ioTemporaries
   !@objectInMemoryIR outTempVariable
 {
-  outTempVariable = .localVariable {!type:inType !name:"temp." + ioTemporaries.mTemporaryIndex}
+  outTempVariable = .localVariable {!type:inType !name:"temp." + ioTemporaries.mTemporaryIndex !volatile:false}
   ioTemporaries.mTemporaryIndex ++
 }
 

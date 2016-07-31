@@ -133,7 +133,7 @@ override method @varInstructionWithAssignmentAST analyze
 #--- Declare local variable
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
-  let targetVar = @objectInMemoryIR.localVariable {!type:[result type] !name:varLLVMName}
+  let targetVar = @objectInMemoryIR.localVariable {!type:[result type] !name:varLLVMName !volatile:false}
   [!?ioVariableMap insertDefinedVariable
     !lkey:mVarName
     !type:[result type]
@@ -177,7 +177,7 @@ override method @varInstructionAST analyze
 #--- Declare local variable
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
-  let targetVar = @objectInMemoryIR.localVariable {!type:targetType !name:varLLVMName}
+  let targetVar = @objectInMemoryIR.localVariable {!type:targetType !name:varLLVMName !volatile:false}
   [!?ioLocalVariableMap insertUndefinedVariable !mVarName]
   [!?ioVariableMap insertUndefinedVariable
     !lkey:mVarName

@@ -4726,7 +4726,8 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                                             COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectInMemoryIR constructor_localVariable (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                           const class GALGAS_string & inOperand1
+                                                                           const class GALGAS_string & inOperand1,
+                                                                           const class GALGAS_bool & inOperand2
                                                                            COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectInMemoryIR constructor_property (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
@@ -4769,6 +4770,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_localVariable (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                        class GALGAS_string & outArgument1,
+                                                       class GALGAS_bool & outArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 

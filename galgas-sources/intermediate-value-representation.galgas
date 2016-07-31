@@ -13,7 +13,7 @@ enum @objectInMemoryIR {
                  @uint arraySize # 0 if not an array
                  @uint elementSize) # 0 if not an array
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
-  case localVariable (@unifiedTypeMap-proxy type @string name)
+  case localVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
   case staticConstant (@valueIR value @lstring name)
   case property (@unifiedTypeMap-proxy type @string name @uint index)
 }
@@ -28,7 +28,7 @@ method @objectInMemoryIR checkReadable {
       error name : "the control register cannot be read in current context"
     end
   case globalVariable (* * *) :
-  case localVariable (* *) :
+  case localVariable (* * *) :
   case staticConstant (* *) :
   case property (* * *) :
   end
@@ -44,7 +44,7 @@ method @objectInMemoryIR checkWriteable {
       error name : "the control register cannot be written in current context"
     end
   case globalVariable (* @string unused name *) :
-  case localVariable (* @string unused name) :
+  case localVariable (* @string unused name *) :
   case staticConstant (*  @lstring name) :
     error name : "a constante cannot be modified"
   case property (* * *) :
@@ -61,7 +61,7 @@ getter @objectInMemoryIR llvmName -> @string outName {
     error name : "@objectInMemoryIR name" : outName
   case globalVariable (* @string name *) :
     outName = "@" + llvmNameForGlobalVariable (!name)
-  case localVariable (* @string name) :
+  case localVariable (* @string name *) :
     outName = "%" + llvmNameForLocalVariable (!name)
   case staticConstant (*  @lstring name) :
     outName = "%" + name
@@ -80,7 +80,7 @@ getter @objectInMemoryIR name -> @string outName {
     outName = name.string
   case globalVariable (* @string name *) :
     outName = name
-  case localVariable (* @string name) :
+  case localVariable (* @string name *) :
     outName = name
   case staticConstant (*  @lstring name) :
     outName = name
@@ -99,7 +99,7 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
     outType = type
   case globalVariable (@unifiedTypeMap-proxy type * *) :
     outType = type
-  case localVariable (@unifiedTypeMap-proxy type *) :
+  case localVariable (@unifiedTypeMap-proxy type * *) :
     outType = type
   case staticConstant (@valueIR value *) :
     outType = [value type]
@@ -118,7 +118,7 @@ getter @objectInMemoryIR address -> @valueIR outOperand {
     error .nowhere : "@objectInMemoryIR register address" : outOperand
   case globalVariable (@unifiedTypeMap-proxy type @string name *) :
     outOperand  = .llvmGlobalObject {!type: type !name:llvmNameForGlobalVariable (!name)}
-  case localVariable (@unifiedTypeMap-proxy type @string name) :
+  case localVariable (@unifiedTypeMap-proxy type @string name *) :
     outOperand  = .llvmLocalObject {!type:type !name:llvmNameForLocalVariable (!name)}
   case staticConstant (* *) :
     error .nowhere : "@objectInMemoryIR globalConstantaddress" : outOperand
