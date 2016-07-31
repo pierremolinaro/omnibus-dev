@@ -2459,17 +2459,43 @@ void routine_getNewTempVariable (const class GALGAS_unifiedTypeMap_2D_proxy cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Routine 'getNewTemporarySelfObjectPtr'                                        *
+//                                       Routine 'handleSelfAccessInExpression'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_getNewTemporarySelfObjectPtr (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+void routine_handleSelfAccessInExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                            const class GALGAS_objectInMemoryIR constinArgument1,
                                            class GALGAS_semanticTemporariesStruct & ioArgument2,
                                            class GALGAS_instructionListIR & ioArgument3,
                                            class GALGAS_objectInMemoryIR & outArgument4,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Routine 'handleSubscriptInExpression'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleSubscriptInExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                          const class GALGAS_bool constinArgument1,
+                                          const class GALGAS_bool constinArgument2,
+                                          const class GALGAS_lstring constinArgument3,
+                                          const class GALGAS_semanticContext constinArgument4,
+                                          const class GALGAS_stringset constinArgument5,
+                                          const class GALGAS_bool constinArgument6,
+                                          class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                          class GALGAS_staticStringMap & ioArgument8,
+                                          class GALGAS_variableMap & ioArgument9,
+                                          class GALGAS_localVariableMap & ioArgument10,
+                                          class GALGAS_namedObjectMap & ioArgument11,
+                                          class GALGAS_allocaList & ioArgument12,
+                                          const class GALGAS_expressionAST constinArgument13,
+                                          const class GALGAS_location constinArgument14,
+                                          class GALGAS_instructionListIR & ioArgument15,
+                                          class GALGAS_objectInMemoryIR & ioArgument16,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3487,35 +3513,5 @@ class GALGAS_string function_literalCharacterArrayName (const class GALGAS_uint 
 
 class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'llvmNameForFunction'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForFunction (class GALGAS_string inArgument0,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Function 'interruptNameForInvocationGraph'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_interruptNameForInvocationGraph (class GALGAS_lstring inArgument0,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Function 'llvmNameForInterrupt'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_llvmNameForInterrupt (class GALGAS_lstring inArgument0,
-                                                    class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
 
 #endif
