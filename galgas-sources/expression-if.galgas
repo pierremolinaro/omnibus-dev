@@ -86,7 +86,7 @@ override method @ifExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Analyze if expression
   [mIfExpression analyzeExpression
@@ -105,7 +105,7 @@ override method @ifExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @valueIR ifExpressionResult
+    ?result:let @objectIR ifExpressionResult
   ]
 #--- Check "if" expression type is boolean
   if not [[ifExpressionResult kind] isBoolean] then
@@ -128,7 +128,7 @@ override method @ifExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @valueIR thenExpressionTempResult
+    ?result:let @objectIR thenExpressionTempResult
   ]
   let thenExpressionResult = checkAssignmentCompatibility (
     !source:thenExpressionTempResult
@@ -153,7 +153,7 @@ override method @ifExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @valueIR elseExpressionTempResult
+    ?result:let @objectIR elseExpressionTempResult
   ]
   let elseExpressionResult = checkAssignmentCompatibility (
     !source:elseExpressionTempResult

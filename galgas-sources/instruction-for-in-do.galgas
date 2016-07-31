@@ -87,7 +87,7 @@ override method @forInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@valueIR iteratedExpressionResult
+    ?result:@objectIR iteratedExpressionResult
   ]
 #--- Get iterated element type
   let @unifiedTypeMap-proxy iteratedElementType = [[iteratedExpressionResult type] enumerationType]
@@ -148,7 +148,7 @@ class @forInstructionIR : @abstractInstructionIR {
   @string mVarName
   @unifiedTypeMap-proxy mElementType
   @location mLocation
-  @valueIR mExpressionResult
+  @objectIR mExpressionResult
   @instructionListIR mInstructionList
 }
 

@@ -2,7 +2,7 @@
 setter @instructionListIR appendStoreVolatileRegister
   ?let @unifiedTypeMap-proxy inTargetVarType
   ?let @bigint inAddress
-  ?let @valueIR inSourceValue
+  ?let @objectIR inSourceValue
 {
   self += !@storeVolatileIR.new {!inTargetVarType !inAddress !inSourceValue}
 }
@@ -12,7 +12,7 @@ setter @instructionListIR appendStoreVolatileRegister
 class @storeVolatileIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mTargetVarType
   @bigint mAddress
-  @valueIR mSourceValue
+  @objectIR mSourceValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -76,7 +76,7 @@ override method @panicInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:unusedInstructionListIR
-    ?result:@valueIR result
+    ?result:@objectIR result
   ]
 #--- Expression type check
 #--- Expression is static ?

@@ -554,7 +554,7 @@ class GALGAS_ComputeRegisterAddressWithSubscriptIR : public GALGAS_abstractInstr
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_ComputeRegisterAddressWithSubscriptIR constructor_new (const class GALGAS_objectInMemoryIR & inOperand0,
-                                                                                      const class GALGAS_valueIR & inOperand1,
+                                                                                      const class GALGAS_objectIR & inOperand1,
                                                                                       const class GALGAS_bigint & inOperand2,
                                                                                       const class GALGAS_bigint & inOperand3
                                                                                       COMMA_LOCATION_ARGS) ;
@@ -570,7 +570,7 @@ class GALGAS_ComputeRegisterAddressWithSubscriptIR : public GALGAS_abstractInstr
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mElementArraySize (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mIndexResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mIndexResult (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
 
@@ -596,13 +596,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ComputeRegisterAddr
 class cPtr_ComputeRegisterAddressWithSubscriptIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectInMemoryIR mAttribute_mTarget ;
-  public : GALGAS_valueIR mAttribute_mIndexResult ;
+  public : GALGAS_objectIR mAttribute_mIndexResult ;
   public : GALGAS_bigint mAttribute_mRegisterAddress ;
   public : GALGAS_bigint mAttribute_mElementArraySize ;
 
 //--- Constructor
   public : cPtr_ComputeRegisterAddressWithSubscriptIR (const GALGAS_objectInMemoryIR & in_mTarget,
-                                                       const GALGAS_valueIR & in_mIndexResult,
+                                                       const GALGAS_objectIR & in_mIndexResult,
                                                        const GALGAS_bigint & in_mRegisterAddress,
                                                        const GALGAS_bigint & in_mElementArraySize
                                                        COMMA_LOCATION_ARGS) ;
@@ -612,7 +612,7 @@ class cPtr_ComputeRegisterAddressWithSubscriptIR : public cPtr_abstractInstructi
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectInMemoryIR getter_mTarget (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mIndexResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIndexResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mElementArraySize (LOCATION_ARGS) const ;
 //--- Description
@@ -654,7 +654,7 @@ class GALGAS_assertInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_assertInstructionIR constructor_new (const class GALGAS_location & inOperand0,
                                                                     const class GALGAS_instructionListIR & inOperand1,
-                                                                    const class GALGAS_valueIR & inOperand2
+                                                                    const class GALGAS_objectIR & inOperand2
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -668,7 +668,7 @@ class GALGAS_assertInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mAssertInstructionLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mExpressionValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mExpressionValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionList (LOCATION_ARGS) const ;
 
@@ -693,12 +693,12 @@ class cPtr_assertInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_location mAttribute_mAssertInstructionLocation ;
   public : GALGAS_instructionListIR mAttribute_mInstructionList ;
-  public : GALGAS_valueIR mAttribute_mExpressionValue ;
+  public : GALGAS_objectIR mAttribute_mExpressionValue ;
 
 //--- Constructor
   public : cPtr_assertInstructionIR (const GALGAS_location & in_mAssertInstructionLocation,
                                      const GALGAS_instructionListIR & in_mInstructionList,
-                                     const GALGAS_valueIR & in_mExpressionValue
+                                     const GALGAS_objectIR & in_mExpressionValue
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -707,7 +707,7 @@ class cPtr_assertInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mAssertInstructionLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mInstructionList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mExpressionValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mExpressionValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -745,11 +745,11 @@ class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_binaryOperationIR constructor_new (const class GALGAS_valueIR & inOperand0,
+  public : static class GALGAS_binaryOperationIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                   const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                  const class GALGAS_valueIR & inOperand2,
+                                                                  const class GALGAS_objectIR & inOperand2,
                                                                   const class GALGAS_llvmBinaryOperation & inOperand3,
-                                                                  const class GALGAS_valueIR & inOperand4,
+                                                                  const class GALGAS_objectIR & inOperand4,
                                                                   const class GALGAS_location & inOperand5
                                                                   COMMA_LOCATION_ARGS) ;
 
@@ -762,7 +762,7 @@ class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mLeft (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mLeft (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 
@@ -770,9 +770,9 @@ class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_llvmBinaryOperation getter_mOperation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mRight (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mRight (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -793,19 +793,19 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_binaryOperationIR ;
 
 class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTarget ;
+  public : GALGAS_objectIR mAttribute_mTarget ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mOperandType ;
-  public : GALGAS_valueIR mAttribute_mLeft ;
+  public : GALGAS_objectIR mAttribute_mLeft ;
   public : GALGAS_llvmBinaryOperation mAttribute_mOperation ;
-  public : GALGAS_valueIR mAttribute_mRight ;
+  public : GALGAS_objectIR mAttribute_mRight ;
   public : GALGAS_location mAttribute_mLocation ;
 
 //--- Constructor
-  public : cPtr_binaryOperationIR (const GALGAS_valueIR & in_mTarget,
+  public : cPtr_binaryOperationIR (const GALGAS_objectIR & in_mTarget,
                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mOperandType,
-                                   const GALGAS_valueIR & in_mLeft,
+                                   const GALGAS_objectIR & in_mLeft,
                                    const GALGAS_llvmBinaryOperation & in_mOperation,
-                                   const GALGAS_valueIR & in_mRight,
+                                   const GALGAS_objectIR & in_mRight,
                                    const GALGAS_location & in_mLocation
                                    COMMA_LOCATION_ARGS) ;
 
@@ -813,11 +813,11 @@ class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mOperandType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mLeft (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mLeft (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_llvmBinaryOperation getter_mOperation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mRight (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mRight (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -856,8 +856,8 @@ class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_convertInstructionIR constructor_new (const class GALGAS_valueIR & inOperand0,
-                                                                     const class GALGAS_valueIR & inOperand1,
+  public : static class GALGAS_convertInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                                     const class GALGAS_objectIR & inOperand1,
                                                                      const class GALGAS_location & inOperand2
                                                                      COMMA_LOCATION_ARGS) ;
 
@@ -872,9 +872,9 @@ class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mOperand (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -895,13 +895,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertInstructionI
 
 class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTarget ;
-  public : GALGAS_valueIR mAttribute_mOperand ;
+  public : GALGAS_objectIR mAttribute_mTarget ;
+  public : GALGAS_objectIR mAttribute_mOperand ;
   public : GALGAS_location mAttribute_mLocation ;
 
 //--- Constructor
-  public : cPtr_convertInstructionIR (const GALGAS_valueIR & in_mTarget,
-                                      const GALGAS_valueIR & in_mOperand,
+  public : cPtr_convertInstructionIR (const GALGAS_objectIR & in_mTarget,
+                                      const GALGAS_objectIR & in_mOperand,
                                       const GALGAS_location & in_mLocation
                                       COMMA_LOCATION_ARGS) ;
 
@@ -909,8 +909,8 @@ class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTarget (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -949,8 +949,8 @@ class GALGAS_extendIR : public GALGAS_abstractInstructionIR {
                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_extendIR constructor_new (const class GALGAS_valueIR & inOperand0,
-                                                         const class GALGAS_valueIR & inOperand1
+  public : static class GALGAS_extendIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                         const class GALGAS_objectIR & inOperand1
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -962,9 +962,9 @@ class GALGAS_extendIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -985,20 +985,20 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendIR ;
 
 class cPtr_extendIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mResult ;
-  public : GALGAS_valueIR mAttribute_mSource ;
+  public : GALGAS_objectIR mAttribute_mResult ;
+  public : GALGAS_objectIR mAttribute_mSource ;
 
 //--- Constructor
-  public : cPtr_extendIR (const GALGAS_valueIR & in_mResult,
-                          const GALGAS_valueIR & in_mSource
+  public : cPtr_extendIR (const GALGAS_objectIR & in_mResult,
+                          const GALGAS_objectIR & in_mSource
                           COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mResult (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -1039,7 +1039,7 @@ class GALGAS_forInstructionIR : public GALGAS_abstractInstructionIR {
   public : static class GALGAS_forInstructionIR constructor_new (const class GALGAS_string & inOperand0,
                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                                  const class GALGAS_location & inOperand2,
-                                                                 const class GALGAS_valueIR & inOperand3,
+                                                                 const class GALGAS_objectIR & inOperand3,
                                                                  const class GALGAS_instructionListIR & inOperand4
                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -1054,7 +1054,7 @@ class GALGAS_forInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mElementType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mExpressionResult (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionList (LOCATION_ARGS) const ;
 
@@ -1084,14 +1084,14 @@ class cPtr_forInstructionIR : public cPtr_abstractInstructionIR {
   public : GALGAS_string mAttribute_mVarName ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mElementType ;
   public : GALGAS_location mAttribute_mLocation ;
-  public : GALGAS_valueIR mAttribute_mExpressionResult ;
+  public : GALGAS_objectIR mAttribute_mExpressionResult ;
   public : GALGAS_instructionListIR mAttribute_mInstructionList ;
 
 //--- Constructor
   public : cPtr_forInstructionIR (const GALGAS_string & in_mVarName,
                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mElementType,
                                   const GALGAS_location & in_mLocation,
-                                  const GALGAS_valueIR & in_mExpressionResult,
+                                  const GALGAS_objectIR & in_mExpressionResult,
                                   const GALGAS_instructionListIR & in_mInstructionList
                                   COMMA_LOCATION_ARGS) ;
 
@@ -1102,7 +1102,7 @@ class cPtr_forInstructionIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mElementType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mExpressionResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mInstructionList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -1145,8 +1145,8 @@ class GALGAS_forLowerUpperBoundInstructionIR : public GALGAS_abstractInstruction
                                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                                                 const class GALGAS_bool & inOperand2,
                                                                                 const class GALGAS_location & inOperand3,
-                                                                                const class GALGAS_valueIR & inOperand4,
-                                                                                const class GALGAS_valueIR & inOperand5,
+                                                                                const class GALGAS_objectIR & inOperand4,
+                                                                                const class GALGAS_objectIR & inOperand5,
                                                                                 const class GALGAS_instructionListIR & inOperand6
                                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -1163,13 +1163,13 @@ class GALGAS_forLowerUpperBoundInstructionIR : public GALGAS_abstractInstruction
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mLowerExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mLowerExpressionResult (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mUnsigned (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mUpperExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mUpperExpressionResult (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mVarName (LOCATION_ARGS) const ;
 
@@ -1196,8 +1196,8 @@ class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
   public : GALGAS_bool mAttribute_mUnsigned ;
   public : GALGAS_location mAttribute_mLocation ;
-  public : GALGAS_valueIR mAttribute_mLowerExpressionResult ;
-  public : GALGAS_valueIR mAttribute_mUpperExpressionResult ;
+  public : GALGAS_objectIR mAttribute_mLowerExpressionResult ;
+  public : GALGAS_objectIR mAttribute_mUpperExpressionResult ;
   public : GALGAS_instructionListIR mAttribute_mInstructionList ;
 
 //--- Constructor
@@ -1205,8 +1205,8 @@ class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
                                                  const GALGAS_bool & in_mUnsigned,
                                                  const GALGAS_location & in_mLocation,
-                                                 const GALGAS_valueIR & in_mLowerExpressionResult,
-                                                 const GALGAS_valueIR & in_mUpperExpressionResult,
+                                                 const GALGAS_objectIR & in_mLowerExpressionResult,
+                                                 const GALGAS_objectIR & in_mUpperExpressionResult,
                                                  const GALGAS_instructionListIR & in_mInstructionList
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -1218,8 +1218,8 @@ class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mUnsigned (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mLowerExpressionResult (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mUpperExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mLowerExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mUpperExpressionResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mInstructionList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -1258,7 +1258,7 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_functionCallIR constructor_new (const class GALGAS_valueIR & inOperand0,
+  public : static class GALGAS_functionCallIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                const class GALGAS_lstring & inOperand1,
                                                                const class GALGAS_lstring & inOperand2,
                                                                const class GALGAS_routineKindIR & inOperand3,
@@ -1285,7 +1285,7 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1306,7 +1306,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_functionCallIR ;
 
 class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mResult ;
+  public : GALGAS_objectIR mAttribute_mResult ;
   public : GALGAS_lstring mAttribute_mFunctionMangledName ;
   public : GALGAS_lstring mAttribute_mFunctionNameForGeneration ;
   public : GALGAS_routineKindIR mAttribute_mKind ;
@@ -1314,7 +1314,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
   public : GALGAS_bool mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
 
 //--- Constructor
-  public : cPtr_functionCallIR (const GALGAS_valueIR & in_mResult,
+  public : cPtr_functionCallIR (const GALGAS_objectIR & in_mResult,
                                 const GALGAS_lstring & in_mFunctionMangledName,
                                 const GALGAS_lstring & in_mFunctionNameForGeneration,
                                 const GALGAS_routineKindIR & in_mKind,
@@ -1326,7 +1326,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionMangledName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionNameForGeneration (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
@@ -1555,7 +1555,7 @@ class GALGAS_ifInstructionIR : public GALGAS_abstractInstructionIR {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_ifInstructionIR constructor_new (const class GALGAS_valueIR & inOperand0,
+  public : static class GALGAS_ifInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                 const class GALGAS_location & inOperand1,
                                                                 const class GALGAS_instructionListIR & inOperand2,
                                                                 const class GALGAS_instructionListIR & inOperand3
@@ -1574,7 +1574,7 @@ class GALGAS_ifInstructionIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTestVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTestVariable (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mThenInstructionGenerationList (LOCATION_ARGS) const ;
 
@@ -1597,13 +1597,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifInstructionIR ;
 
 class cPtr_ifInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTestVariable ;
+  public : GALGAS_objectIR mAttribute_mTestVariable ;
   public : GALGAS_location mAttribute_mLocation ;
   public : GALGAS_instructionListIR mAttribute_mThenInstructionGenerationList ;
   public : GALGAS_instructionListIR mAttribute_mElseInstructionGenerationList ;
 
 //--- Constructor
-  public : cPtr_ifInstructionIR (const GALGAS_valueIR & in_mTestVariable,
+  public : cPtr_ifInstructionIR (const GALGAS_objectIR & in_mTestVariable,
                                  const GALGAS_location & in_mLocation,
                                  const GALGAS_instructionListIR & in_mThenInstructionGenerationList,
                                  const GALGAS_instructionListIR & in_mElseInstructionGenerationList
@@ -1613,7 +1613,7 @@ class cPtr_ifInstructionIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTestVariable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTestVariable (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mThenInstructionGenerationList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mElseInstructionGenerationList (LOCATION_ARGS) const ;
@@ -1654,8 +1654,8 @@ class GALGAS_leftShiftIR : public GALGAS_abstractInstructionIR {
                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_leftShiftIR constructor_new (const class GALGAS_valueIR & inOperand0,
-                                                            const class GALGAS_valueIR & inOperand1,
+  public : static class GALGAS_leftShiftIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                            const class GALGAS_objectIR & inOperand1,
                                                             const class GALGAS_uint & inOperand2
                                                             COMMA_LOCATION_ARGS) ;
 
@@ -1668,11 +1668,11 @@ class GALGAS_leftShiftIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mShiftAmount (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1693,13 +1693,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_leftShiftIR ;
 
 class cPtr_leftShiftIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mResult ;
-  public : GALGAS_valueIR mAttribute_mSource ;
+  public : GALGAS_objectIR mAttribute_mResult ;
+  public : GALGAS_objectIR mAttribute_mSource ;
   public : GALGAS_uint mAttribute_mShiftAmount ;
 
 //--- Constructor
-  public : cPtr_leftShiftIR (const GALGAS_valueIR & in_mResult,
-                             const GALGAS_valueIR & in_mSource,
+  public : cPtr_leftShiftIR (const GALGAS_objectIR & in_mResult,
+                             const GALGAS_objectIR & in_mSource,
                              const GALGAS_uint & in_mShiftAmount
                              COMMA_LOCATION_ARGS) ;
 
@@ -1707,8 +1707,8 @@ class cPtr_leftShiftIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mResult (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mShiftAmount (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -1747,7 +1747,7 @@ class GALGAS_loadGlobalVariableIR : public GALGAS_abstractInstructionIR {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_loadGlobalVariableIR constructor_new (const class GALGAS_valueIR & inOperand0,
+  public : static class GALGAS_loadGlobalVariableIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                      const class GALGAS_string & inOperand1,
                                                                      const class GALGAS_bool & inOperand2
                                                                      COMMA_LOCATION_ARGS) ;
@@ -1763,7 +1763,7 @@ class GALGAS_loadGlobalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsVolatile (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mVariableName (LOCATION_ARGS) const ;
 
@@ -1786,12 +1786,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadGlobalVariableI
 
 class cPtr_loadGlobalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTargetValue ;
+  public : GALGAS_objectIR mAttribute_mTargetValue ;
   public : GALGAS_string mAttribute_mVariableName ;
   public : GALGAS_bool mAttribute_mIsVolatile ;
 
 //--- Constructor
-  public : cPtr_loadGlobalVariableIR (const GALGAS_valueIR & in_mTargetValue,
+  public : cPtr_loadGlobalVariableIR (const GALGAS_objectIR & in_mTargetValue,
                                       const GALGAS_string & in_mVariableName,
                                       const GALGAS_bool & in_mIsVolatile
                                       COMMA_LOCATION_ARGS) ;
@@ -1800,7 +1800,7 @@ class cPtr_loadGlobalVariableIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mVariableName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsVolatile (LOCATION_ARGS) const ;
 //--- Description
@@ -1840,7 +1840,7 @@ class GALGAS_loadLocalVariableIR : public GALGAS_abstractInstructionIR {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_loadLocalVariableIR constructor_new (const class GALGAS_valueIR & inOperand0,
+  public : static class GALGAS_loadLocalVariableIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                     const class GALGAS_string & inOperand1,
                                                                     const class GALGAS_bool & inOperand2
                                                                     COMMA_LOCATION_ARGS) ;
@@ -1854,7 +1854,7 @@ class GALGAS_loadLocalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mVariableName (LOCATION_ARGS) const ;
 
@@ -1879,12 +1879,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadLocalVariableIR
 
 class cPtr_loadLocalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTargetValue ;
+  public : GALGAS_objectIR mAttribute_mTargetValue ;
   public : GALGAS_string mAttribute_mVariableName ;
   public : GALGAS_bool mAttribute_mVolatile ;
 
 //--- Constructor
-  public : cPtr_loadLocalVariableIR (const GALGAS_valueIR & in_mTargetValue,
+  public : cPtr_loadLocalVariableIR (const GALGAS_objectIR & in_mTargetValue,
                                      const GALGAS_string & in_mVariableName,
                                      const GALGAS_bool & in_mVolatile
                                      COMMA_LOCATION_ARGS) ;
@@ -1893,7 +1893,7 @@ class cPtr_loadLocalVariableIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mVariableName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mVolatile (LOCATION_ARGS) const ;
 //--- Description
@@ -1934,7 +1934,7 @@ class GALGAS_loadRegisterAddressIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_loadRegisterAddressIR constructor_new (const class GALGAS_objectInMemoryIR & inOperand0,
-                                                                      const class GALGAS_valueIR & inOperand1,
+                                                                      const class GALGAS_objectIR & inOperand1,
                                                                       const class GALGAS_bigint & inOperand2,
                                                                       const class GALGAS_bigint & inOperand3
                                                                       COMMA_LOCATION_ARGS) ;
@@ -1950,7 +1950,7 @@ class GALGAS_loadRegisterAddressIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mElementArraySize (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mIndexResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mIndexResult (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
 
@@ -1976,13 +1976,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadRegisterAddress
 class cPtr_loadRegisterAddressIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_objectInMemoryIR mAttribute_mTargetValue ;
-  public : GALGAS_valueIR mAttribute_mIndexResult ;
+  public : GALGAS_objectIR mAttribute_mIndexResult ;
   public : GALGAS_bigint mAttribute_mRegisterAddress ;
   public : GALGAS_bigint mAttribute_mElementArraySize ;
 
 //--- Constructor
   public : cPtr_loadRegisterAddressIR (const GALGAS_objectInMemoryIR & in_mTargetValue,
-                                       const GALGAS_valueIR & in_mIndexResult,
+                                       const GALGAS_objectIR & in_mIndexResult,
                                        const GALGAS_bigint & in_mRegisterAddress,
                                        const GALGAS_bigint & in_mElementArraySize
                                        COMMA_LOCATION_ARGS) ;
@@ -1992,7 +1992,7 @@ class cPtr_loadRegisterAddressIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectInMemoryIR getter_mTargetValue (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mIndexResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIndexResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mElementArraySize (LOCATION_ARGS) const ;
 //--- Description
@@ -2032,7 +2032,7 @@ class GALGAS_loadRegisterIR : public GALGAS_abstractInstructionIR {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_loadRegisterIR constructor_new (const class GALGAS_valueIR & inOperand0,
+  public : static class GALGAS_loadRegisterIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                const class GALGAS_bigint & inOperand1
                                                                COMMA_LOCATION_ARGS) ;
 
@@ -2047,7 +2047,7 @@ class GALGAS_loadRegisterIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2068,11 +2068,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadRegisterIR ;
 
 class cPtr_loadRegisterIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTargetValue ;
+  public : GALGAS_objectIR mAttribute_mTargetValue ;
   public : GALGAS_bigint mAttribute_mRegisterAddress ;
 
 //--- Constructor
-  public : cPtr_loadRegisterIR (const GALGAS_valueIR & in_mTargetValue,
+  public : cPtr_loadRegisterIR (const GALGAS_objectIR & in_mTargetValue,
                                 const GALGAS_bigint & in_mRegisterAddress
                                 COMMA_LOCATION_ARGS) ;
 
@@ -2080,7 +2080,7 @@ class cPtr_loadRegisterIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -2119,8 +2119,8 @@ class GALGAS_loadRegisterWithSubscriptIR : public GALGAS_abstractInstructionIR {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_loadRegisterWithSubscriptIR constructor_new (const class GALGAS_valueIR & inOperand0,
-                                                                            const class GALGAS_valueIR & inOperand1,
+  public : static class GALGAS_loadRegisterWithSubscriptIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                                            const class GALGAS_objectIR & inOperand1,
                                                                             const class GALGAS_bigint & inOperand2,
                                                                             const class GALGAS_bigint & inOperand3
                                                                             COMMA_LOCATION_ARGS) ;
@@ -2136,11 +2136,11 @@ class GALGAS_loadRegisterWithSubscriptIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mElementArraySize (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mIndexResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mIndexResult (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2161,14 +2161,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadRegisterWithSub
 
 class cPtr_loadRegisterWithSubscriptIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTargetValue ;
-  public : GALGAS_valueIR mAttribute_mIndexResult ;
+  public : GALGAS_objectIR mAttribute_mTargetValue ;
+  public : GALGAS_objectIR mAttribute_mIndexResult ;
   public : GALGAS_bigint mAttribute_mRegisterAddress ;
   public : GALGAS_bigint mAttribute_mElementArraySize ;
 
 //--- Constructor
-  public : cPtr_loadRegisterWithSubscriptIR (const GALGAS_valueIR & in_mTargetValue,
-                                             const GALGAS_valueIR & in_mIndexResult,
+  public : cPtr_loadRegisterWithSubscriptIR (const GALGAS_objectIR & in_mTargetValue,
+                                             const GALGAS_objectIR & in_mIndexResult,
                                              const GALGAS_bigint & in_mRegisterAddress,
                                              const GALGAS_bigint & in_mElementArraySize
                                              COMMA_LOCATION_ARGS) ;
@@ -2177,8 +2177,8 @@ class cPtr_loadRegisterWithSubscriptIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mIndexResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIndexResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mElementArraySize (LOCATION_ARGS) const ;
 //--- Description
@@ -2218,7 +2218,7 @@ class GALGAS_loadStructureConstantIR : public GALGAS_abstractInstructionIR {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_loadStructureConstantIR constructor_new (const class GALGAS_valueIR & inOperand0,
+  public : static class GALGAS_loadStructureConstantIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                         const class GALGAS_string & inOperand1
                                                                         COMMA_LOCATION_ARGS) ;
 
@@ -2231,7 +2231,7 @@ class GALGAS_loadStructureConstantIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mTypeName (LOCATION_ARGS) const ;
 
@@ -2254,11 +2254,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadStructureConsta
 
 class cPtr_loadStructureConstantIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTargetValue ;
+  public : GALGAS_objectIR mAttribute_mTargetValue ;
   public : GALGAS_string mAttribute_mTypeName ;
 
 //--- Constructor
-  public : cPtr_loadStructureConstantIR (const GALGAS_valueIR & in_mTargetValue,
+  public : cPtr_loadStructureConstantIR (const GALGAS_objectIR & in_mTargetValue,
                                          const GALGAS_string & in_mTypeName
                                          COMMA_LOCATION_ARGS) ;
 
@@ -2266,7 +2266,7 @@ class cPtr_loadStructureConstantIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mTypeName (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -2305,7 +2305,7 @@ class GALGAS_loadTaskVariableIR : public GALGAS_abstractInstructionIR {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_loadTaskVariableIR constructor_new (const class GALGAS_valueIR & inOperand0,
+  public : static class GALGAS_loadTaskVariableIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                    const class GALGAS_string & inOperand1,
                                                                    const class GALGAS_string & inOperand2
                                                                    COMMA_LOCATION_ARGS) ;
@@ -2319,7 +2319,7 @@ class GALGAS_loadTaskVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mTaskName (LOCATION_ARGS) const ;
 
@@ -2344,12 +2344,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadTaskVariableIR 
 
 class cPtr_loadTaskVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTargetValue ;
+  public : GALGAS_objectIR mAttribute_mTargetValue ;
   public : GALGAS_string mAttribute_mTaskName ;
   public : GALGAS_string mAttribute_mVarName ;
 
 //--- Constructor
-  public : cPtr_loadTaskVariableIR (const GALGAS_valueIR & in_mTargetValue,
+  public : cPtr_loadTaskVariableIR (const GALGAS_objectIR & in_mTargetValue,
                                     const GALGAS_string & in_mTaskName,
                                     const GALGAS_string & in_mVarName
                                     COMMA_LOCATION_ARGS) ;
@@ -2358,7 +2358,7 @@ class cPtr_loadTaskVariableIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mTaskName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mVarName (LOCATION_ARGS) const ;
 //--- Description
@@ -2572,10 +2572,10 @@ class GALGAS_selectInstructionIR : public GALGAS_abstractInstructionIR {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_selectInstructionIR constructor_new (const class GALGAS_valueIR & inOperand0,
-                                                                    const class GALGAS_valueIR & inOperand1,
-                                                                    const class GALGAS_valueIR & inOperand2,
-                                                                    const class GALGAS_valueIR & inOperand3
+  public : static class GALGAS_selectInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                                    const class GALGAS_objectIR & inOperand1,
+                                                                    const class GALGAS_objectIR & inOperand2,
+                                                                    const class GALGAS_objectIR & inOperand3
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2587,13 +2587,13 @@ class GALGAS_selectInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_m_5F_else_5F_variable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_m_5F_else_5F_variable (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_m_5F_if_5F_variable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_m_5F_if_5F_variable (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_m_5F_then_5F_variable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_m_5F_then_5F_variable (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2614,26 +2614,26 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_selectInstructionIR
 
 class cPtr_selectInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTargetValue ;
-  public : GALGAS_valueIR mAttribute_m_5F_if_5F_variable ;
-  public : GALGAS_valueIR mAttribute_m_5F_then_5F_variable ;
-  public : GALGAS_valueIR mAttribute_m_5F_else_5F_variable ;
+  public : GALGAS_objectIR mAttribute_mTargetValue ;
+  public : GALGAS_objectIR mAttribute_m_5F_if_5F_variable ;
+  public : GALGAS_objectIR mAttribute_m_5F_then_5F_variable ;
+  public : GALGAS_objectIR mAttribute_m_5F_else_5F_variable ;
 
 //--- Constructor
-  public : cPtr_selectInstructionIR (const GALGAS_valueIR & in_mTargetValue,
-                                     const GALGAS_valueIR & in_m_5F_if_5F_variable,
-                                     const GALGAS_valueIR & in_m_5F_then_5F_variable,
-                                     const GALGAS_valueIR & in_m_5F_else_5F_variable
+  public : cPtr_selectInstructionIR (const GALGAS_objectIR & in_mTargetValue,
+                                     const GALGAS_objectIR & in_m_5F_if_5F_variable,
+                                     const GALGAS_objectIR & in_m_5F_then_5F_variable,
+                                     const GALGAS_objectIR & in_m_5F_else_5F_variable
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTargetValue (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_m_5F_if_5F_variable (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_m_5F_then_5F_variable (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_m_5F_else_5F_variable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTargetValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_m_5F_if_5F_variable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_m_5F_then_5F_variable (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_m_5F_else_5F_variable (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2671,10 +2671,10 @@ class GALGAS_shortCircuitAndOperationIR : public GALGAS_abstractInstructionIR {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_shortCircuitAndOperationIR constructor_new (const class GALGAS_valueIR & inOperand0,
-                                                                           const class GALGAS_valueIR & inOperand1,
+  public : static class GALGAS_shortCircuitAndOperationIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                                           const class GALGAS_objectIR & inOperand1,
                                                                            const class GALGAS_instructionListIR & inOperand2,
-                                                                           const class GALGAS_valueIR & inOperand3,
+                                                                           const class GALGAS_objectIR & inOperand3,
                                                                            const class GALGAS_instructionListIR & inOperand4,
                                                                            const class GALGAS_location & inOperand5
                                                                            COMMA_LOCATION_ARGS) ;
@@ -2690,15 +2690,15 @@ class GALGAS_shortCircuitAndOperationIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mLeftInstructionList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mLeftOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mLeftOperand (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mRightInstructionList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mRightOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mRightOperand (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTargetOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTargetOperand (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -2719,18 +2719,18 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_shortCircuitAndOper
 
 class cPtr_shortCircuitAndOperationIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTargetOperand ;
-  public : GALGAS_valueIR mAttribute_mLeftOperand ;
+  public : GALGAS_objectIR mAttribute_mTargetOperand ;
+  public : GALGAS_objectIR mAttribute_mLeftOperand ;
   public : GALGAS_instructionListIR mAttribute_mLeftInstructionList ;
-  public : GALGAS_valueIR mAttribute_mRightOperand ;
+  public : GALGAS_objectIR mAttribute_mRightOperand ;
   public : GALGAS_instructionListIR mAttribute_mRightInstructionList ;
   public : GALGAS_location mAttribute_mLocation ;
 
 //--- Constructor
-  public : cPtr_shortCircuitAndOperationIR (const GALGAS_valueIR & in_mTargetOperand,
-                                            const GALGAS_valueIR & in_mLeftOperand,
+  public : cPtr_shortCircuitAndOperationIR (const GALGAS_objectIR & in_mTargetOperand,
+                                            const GALGAS_objectIR & in_mLeftOperand,
                                             const GALGAS_instructionListIR & in_mLeftInstructionList,
-                                            const GALGAS_valueIR & in_mRightOperand,
+                                            const GALGAS_objectIR & in_mRightOperand,
                                             const GALGAS_instructionListIR & in_mRightInstructionList,
                                             const GALGAS_location & in_mLocation
                                             COMMA_LOCATION_ARGS) ;
@@ -2739,10 +2739,10 @@ class cPtr_shortCircuitAndOperationIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTargetOperand (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mLeftOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTargetOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mLeftOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mLeftInstructionList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mRightOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mRightOperand (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mRightInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 //--- Description
@@ -2868,7 +2868,7 @@ class GALGAS_storeGlobalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_storeGlobalVariableIR constructor_new (const class GALGAS_string & inOperand0,
                                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                      const class GALGAS_valueIR & inOperand2,
+                                                                      const class GALGAS_objectIR & inOperand2,
                                                                       const class GALGAS_bool & inOperand3
                                                                       COMMA_LOCATION_ARGS) ;
 
@@ -2885,7 +2885,7 @@ class GALGAS_storeGlobalVariableIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsVolatile (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mTargetVarType (LOCATION_ARGS) const ;
 
@@ -2910,13 +2910,13 @@ class cPtr_storeGlobalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mAttribute_mGlobalVarName ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
-  public : GALGAS_valueIR mAttribute_mSourceValue ;
+  public : GALGAS_objectIR mAttribute_mSourceValue ;
   public : GALGAS_bool mAttribute_mIsVolatile ;
 
 //--- Constructor
   public : cPtr_storeGlobalVariableIR (const GALGAS_string & in_mGlobalVarName,
                                        const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                       const GALGAS_valueIR & in_mSourceValue,
+                                       const GALGAS_objectIR & in_mSourceValue,
                                        const GALGAS_bool & in_mIsVolatile
                                        COMMA_LOCATION_ARGS) ;
 
@@ -2926,7 +2926,7 @@ class cPtr_storeGlobalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mGlobalVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mTargetVarType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsVolatile (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
@@ -2967,7 +2967,7 @@ class GALGAS_storeLocalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_storeLocalVariableIR constructor_new (const class GALGAS_string & inOperand0,
                                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
-                                                                     const class GALGAS_valueIR & inOperand2
+                                                                     const class GALGAS_objectIR & inOperand2
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2981,7 +2981,7 @@ class GALGAS_storeLocalVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLocalVarName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mTargetVarType (LOCATION_ARGS) const ;
 
@@ -3006,12 +3006,12 @@ class cPtr_storeLocalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mAttribute_mLocalVarName ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
-  public : GALGAS_valueIR mAttribute_mSourceValue ;
+  public : GALGAS_objectIR mAttribute_mSourceValue ;
 
 //--- Constructor
   public : cPtr_storeLocalVariableIR (const GALGAS_string & in_mLocalVarName,
                                       const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                      const GALGAS_valueIR & in_mSourceValue
+                                      const GALGAS_objectIR & in_mSourceValue
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -3020,7 +3020,7 @@ class cPtr_storeLocalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLocalVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mTargetVarType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3061,7 +3061,7 @@ class GALGAS_storeTaskVariableIR : public GALGAS_abstractInstructionIR {
   public : static class GALGAS_storeTaskVariableIR constructor_new (const class GALGAS_string & inOperand0,
                                                                     const class GALGAS_string & inOperand1,
                                                                     const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
-                                                                    const class GALGAS_valueIR & inOperand3
+                                                                    const class GALGAS_objectIR & inOperand3
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3073,7 +3073,7 @@ class GALGAS_storeTaskVariableIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mTargetVarType (LOCATION_ARGS) const ;
 
@@ -3103,13 +3103,13 @@ class cPtr_storeTaskVariableIR : public cPtr_abstractInstructionIR {
   public : GALGAS_string mAttribute_mTaskName ;
   public : GALGAS_string mAttribute_mVarName ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
-  public : GALGAS_valueIR mAttribute_mSourceValue ;
+  public : GALGAS_objectIR mAttribute_mSourceValue ;
 
 //--- Constructor
   public : cPtr_storeTaskVariableIR (const GALGAS_string & in_mTaskName,
                                      const GALGAS_string & in_mVarName,
                                      const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                     const GALGAS_valueIR & in_mSourceValue
+                                     const GALGAS_objectIR & in_mSourceValue
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -3119,7 +3119,7 @@ class cPtr_storeTaskVariableIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mTaskName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mTargetVarType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3159,7 +3159,7 @@ class GALGAS_storeVolatileIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_storeVolatileIR constructor_new (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                 const class GALGAS_bigint & inOperand1,
-                                                                const class GALGAS_valueIR & inOperand2
+                                                                const class GALGAS_objectIR & inOperand2
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3173,7 +3173,7 @@ class GALGAS_storeVolatileIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mAddress (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mTargetVarType (LOCATION_ARGS) const ;
 
@@ -3198,12 +3198,12 @@ class cPtr_storeVolatileIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
   public : GALGAS_bigint mAttribute_mAddress ;
-  public : GALGAS_valueIR mAttribute_mSourceValue ;
+  public : GALGAS_objectIR mAttribute_mSourceValue ;
 
 //--- Constructor
   public : cPtr_storeVolatileIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
                                  const GALGAS_bigint & in_mAddress,
-                                 const GALGAS_valueIR & in_mSourceValue
+                                 const GALGAS_objectIR & in_mSourceValue
                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -3212,7 +3212,7 @@ class cPtr_storeVolatileIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mAddress (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3252,7 +3252,7 @@ class GALGAS_storeVolatileIndirectIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_storeVolatileIndirectIR constructor_new (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                         const class GALGAS_string & inOperand1,
-                                                                        const class GALGAS_valueIR & inOperand2
+                                                                        const class GALGAS_objectIR & inOperand2
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3266,7 +3266,7 @@ class GALGAS_storeVolatileIndirectIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mTargetVarType (LOCATION_ARGS) const ;
 
@@ -3291,12 +3291,12 @@ class cPtr_storeVolatileIndirectIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
   public : GALGAS_string mAttribute_mLLVMName ;
-  public : GALGAS_valueIR mAttribute_mSourceValue ;
+  public : GALGAS_objectIR mAttribute_mSourceValue ;
 
 //--- Constructor
   public : cPtr_storeVolatileIndirectIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
                                          const GALGAS_string & in_mLLVMName,
-                                         const GALGAS_valueIR & in_mSourceValue
+                                         const GALGAS_objectIR & in_mSourceValue
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -3305,7 +3305,7 @@ class cPtr_storeVolatileIndirectIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mTargetVarType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mLLVMName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mSourceValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSourceValue (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3433,7 +3433,7 @@ class GALGAS_testArrayIndexIR : public GALGAS_abstractInstructionIR {
                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_testArrayIndexIR constructor_new (const class GALGAS_valueIR & inOperand0,
+  public : static class GALGAS_testArrayIndexIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                  const class GALGAS_location & inOperand1,
                                                                  const class GALGAS_bigint & inOperand2
                                                                  COMMA_LOCATION_ARGS) ;
@@ -3449,7 +3449,7 @@ class GALGAS_testArrayIndexIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mErrorLocation (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mIndex (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mSize (LOCATION_ARGS) const ;
 
@@ -3472,12 +3472,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_testArrayIndexIR ;
 
 class cPtr_testArrayIndexIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mIndex ;
+  public : GALGAS_objectIR mAttribute_mIndex ;
   public : GALGAS_location mAttribute_mErrorLocation ;
   public : GALGAS_bigint mAttribute_mSize ;
 
 //--- Constructor
-  public : cPtr_testArrayIndexIR (const GALGAS_valueIR & in_mIndex,
+  public : cPtr_testArrayIndexIR (const GALGAS_objectIR & in_mIndex,
                                   const GALGAS_location & in_mErrorLocation,
                                   const GALGAS_bigint & in_mSize
                                   COMMA_LOCATION_ARGS) ;
@@ -3486,7 +3486,7 @@ class cPtr_testArrayIndexIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIndex (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mErrorLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mSize (LOCATION_ARGS) const ;
 //--- Description
@@ -3526,8 +3526,8 @@ class GALGAS_truncIR : public GALGAS_abstractInstructionIR {
                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_truncIR constructor_new (const class GALGAS_valueIR & inOperand0,
-                                                        const class GALGAS_valueIR & inOperand1
+  public : static class GALGAS_truncIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                        const class GALGAS_objectIR & inOperand1
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3539,9 +3539,9 @@ class GALGAS_truncIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -3562,20 +3562,20 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncIR ;
 
 class cPtr_truncIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mResult ;
-  public : GALGAS_valueIR mAttribute_mSource ;
+  public : GALGAS_objectIR mAttribute_mResult ;
+  public : GALGAS_objectIR mAttribute_mSource ;
 
 //--- Constructor
-  public : cPtr_truncIR (const GALGAS_valueIR & in_mResult,
-                         const GALGAS_valueIR & in_mSource
+  public : cPtr_truncIR (const GALGAS_objectIR & in_mResult,
+                         const GALGAS_objectIR & in_mSource
                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mResult (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3613,8 +3613,8 @@ class GALGAS_truncateInstructionIR : public GALGAS_abstractInstructionIR {
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_truncateInstructionIR constructor_new (const class GALGAS_valueIR & inOperand0,
-                                                                      const class GALGAS_valueIR & inOperand1
+  public : static class GALGAS_truncateInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                                      const class GALGAS_objectIR & inOperand1
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3626,9 +3626,9 @@ class GALGAS_truncateInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mOperand (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -3649,20 +3649,20 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncateInstruction
 
 class cPtr_truncateInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mTarget ;
-  public : GALGAS_valueIR mAttribute_mOperand ;
+  public : GALGAS_objectIR mAttribute_mTarget ;
+  public : GALGAS_objectIR mAttribute_mOperand ;
 
 //--- Constructor
-  public : cPtr_truncateInstructionIR (const GALGAS_valueIR & in_mTarget,
-                                       const GALGAS_valueIR & in_mOperand
+  public : cPtr_truncateInstructionIR (const GALGAS_objectIR & in_mTarget,
+                                       const GALGAS_objectIR & in_mOperand
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTarget (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mOperand (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mOperand (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3700,7 +3700,7 @@ class GALGAS_upperBoundCheckIR : public GALGAS_abstractInstructionIR {
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_upperBoundCheckIR constructor_new (const class GALGAS_valueIR & inOperand0,
+  public : static class GALGAS_upperBoundCheckIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                   const class GALGAS_bigint & inOperand1,
                                                                   const class GALGAS_uint & inOperand2,
                                                                   const class GALGAS_location & inOperand3
@@ -3719,7 +3719,7 @@ class GALGAS_upperBoundCheckIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPanicCode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mUpperBoundPlusOne (LOCATION_ARGS) const ;
 
@@ -3742,13 +3742,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_upperBoundCheckIR ;
 
 class cPtr_upperBoundCheckIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_valueIR mAttribute_mSource ;
+  public : GALGAS_objectIR mAttribute_mSource ;
   public : GALGAS_bigint mAttribute_mUpperBoundPlusOne ;
   public : GALGAS_uint mAttribute_mPanicCode ;
   public : GALGAS_location mAttribute_mLocation ;
 
 //--- Constructor
-  public : cPtr_upperBoundCheckIR (const GALGAS_valueIR & in_mSource,
+  public : cPtr_upperBoundCheckIR (const GALGAS_objectIR & in_mSource,
                                    const GALGAS_bigint & in_mUpperBoundPlusOne,
                                    const GALGAS_uint & in_mPanicCode,
                                    const GALGAS_location & in_mLocation
@@ -3758,7 +3758,7 @@ class cPtr_upperBoundCheckIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mSource (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mUpperBoundPlusOne (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mPanicCode (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
@@ -3801,7 +3801,7 @@ class GALGAS_whileInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_whileInstructionIR constructor_new (const class GALGAS_uint & inOperand0,
                                                                    const class GALGAS_instructionListIR & inOperand1,
-                                                                   const class GALGAS_valueIR & inOperand2,
+                                                                   const class GALGAS_objectIR & inOperand2,
                                                                    const class GALGAS_instructionListIR & inOperand3
                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -3818,7 +3818,7 @@ class GALGAS_whileInstructionIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mLabelIndex (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mTestExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTestExpression (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mTestInstructionGenerationList (LOCATION_ARGS) const ;
 
@@ -3843,13 +3843,13 @@ class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_uint mAttribute_mLabelIndex ;
   public : GALGAS_instructionListIR mAttribute_mTestInstructionGenerationList ;
-  public : GALGAS_valueIR mAttribute_mTestExpression ;
+  public : GALGAS_objectIR mAttribute_mTestExpression ;
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
 
 //--- Constructor
   public : cPtr_whileInstructionIR (const GALGAS_uint & in_mLabelIndex,
                                     const GALGAS_instructionListIR & in_mTestInstructionGenerationList,
-                                    const GALGAS_valueIR & in_mTestExpression,
+                                    const GALGAS_objectIR & in_mTestExpression,
                                     const GALGAS_instructionListIR & in_mInstructionGenerationList
                                     COMMA_LOCATION_ARGS) ;
 
@@ -3859,7 +3859,7 @@ class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mLabelIndex (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mTestInstructionGenerationList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_valueIR getter_mTestExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTestExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,

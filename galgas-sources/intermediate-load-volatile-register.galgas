@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadVolatileRegister
-  ?let @valueIR inTargetValue
+  ?let @objectIR inTargetValue
   ?let @bigint inAddress
 {
   self += !@loadRegisterIR.new {!inTargetValue !inAddress}
@@ -9,7 +9,7 @@ setter @instructionListIR appendLoadVolatileRegister
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadRegisterIR : @abstractInstructionIR {
-  @valueIR mTargetValue
+  @objectIR mTargetValue
   @bigint mRegisterAddress
 }
 

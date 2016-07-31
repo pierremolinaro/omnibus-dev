@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadTaskVariable
-  ?let @valueIR inTargetValue
+  ?let @objectIR inTargetValue
   ?let @string inTaskName
   ?let @string inVariableName
 {
@@ -10,7 +10,7 @@ setter @instructionListIR appendLoadTaskVariable
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadTaskVariableIR : @abstractInstructionIR {
-  @valueIR mTargetValue
+  @objectIR mTargetValue
   @string mTaskName
   @string mVarName
 }

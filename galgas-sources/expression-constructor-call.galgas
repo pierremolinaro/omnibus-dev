@@ -79,7 +79,7 @@ override method @constructorCall analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Analyze constructor source type
   @unifiedTypeMap-proxy resultType
@@ -129,7 +129,7 @@ override method @constructorCall analyzeExpression
             !?namedObjectMap: ioNamedObjectMap
             !?alloca:ioAllocaList
             !?instructionListIR:ioInstructionGenerationList
-            ?result:let @valueIR expressionResult
+            ?result:let @objectIR expressionResult
           ]
           let result = checkAssignmentCompatibility (
             !source:expressionResult

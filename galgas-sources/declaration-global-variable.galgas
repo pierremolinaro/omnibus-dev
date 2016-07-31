@@ -255,7 +255,7 @@ method @globalVarDeclarationList-element enterInContext
      !?namedObjectMap: namedObjectMap
      !?alloca:allocaList
      !?instructionListIR:instructionGenerationList
-     ?result:let @valueIR expressionResult
+     ?result:let @objectIR expressionResult
   ]
   if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
     error mVarName : "source expression cannot be statically computed"

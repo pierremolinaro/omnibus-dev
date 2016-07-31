@@ -75,7 +75,7 @@ override method @checkInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
-    ?result:@valueIR expressionResult
+    ?result:@objectIR expressionResult
   ]
 #--- Check inferred type
   if not [[expressionResult kind] isBoolean] then

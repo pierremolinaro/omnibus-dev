@@ -252,11 +252,11 @@ class @literal_literal_integerInfixOperation : @infixOperatorDescription {
 override method @literal_literal_integerInfixOperation generateInfixOperatorCode
   ?!@semanticTemporariesStruct unused ioTemporaries
   ?!@instructionListIR unused ioInstructionGenerationList
-  ?let @valueIR inLeftOperand
+  ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
-  ?let @valueIR inRightOperand
+  ?let @objectIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@valueIR outResult
+  !@objectIR outResult
 {
   [inLeftOperand  literalInteger ?1* ?value:let @bigint leftValue]
   [inRightOperand literalInteger ?1* ?value:let @bigint rightValue]

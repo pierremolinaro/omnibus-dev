@@ -33,11 +33,11 @@ void extensionMethod_checkBinaryOperationWith (const class GALGAS_infixOperatorM
 typedef void (*extensionMethodSignature_infixOperatorDescription_generateInfixOperatorCode) (const class cPtr_infixOperatorDescription * inObject,
                                                                                              class GALGAS_semanticTemporariesStruct & ioArgument0,
                                                                                              class GALGAS_instructionListIR & ioArgument1,
-                                                                                             const class GALGAS_valueIR constinArgument2,
+                                                                                             const class GALGAS_objectIR constinArgument2,
                                                                                              const class GALGAS_location constinArgument3,
-                                                                                             const class GALGAS_valueIR constinArgument4,
+                                                                                             const class GALGAS_objectIR constinArgument4,
                                                                                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument5,
-                                                                                             class GALGAS_valueIR & outArgument6,
+                                                                                             class GALGAS_objectIR & outArgument6,
                                                                                              class C_Compiler * inCompiler
                                                                                              COMMA_LOCATION_ARGS) ;
 
@@ -51,11 +51,11 @@ void enterExtensionMethod_generateInfixOperatorCode (const int32_t inClassIndex,
 void callExtensionMethod_generateInfixOperatorCode (const class cPtr_infixOperatorDescription * inObject,
                                                     GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                     GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                    const GALGAS_valueIR constin_inLeftOperand,
+                                                    const GALGAS_objectIR constin_inLeftOperand,
                                                     const GALGAS_location constin_inOperatorLocation,
-                                                    const GALGAS_valueIR constin_inRightOperand,
+                                                    const GALGAS_objectIR constin_inRightOperand,
                                                     const GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
-                                                    GALGAS_valueIR & out_outResultValue,
+                                                    GALGAS_objectIR & out_outResultValue,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -109,7 +109,7 @@ typedef void (*extensionMethodSignature_varInExpressionAST_analyzeExpression_5F_
                                                                                            const class GALGAS_objectInMemoryIR constinArgument15,
                                                                                            const class GALGAS_location constinArgument16,
                                                                                            class GALGAS_unifiedTypeMap_2D_proxy & ioArgument17,
-                                                                                           class GALGAS_valueIR & outArgument18,
+                                                                                           class GALGAS_objectIR & outArgument18,
                                                                                            class C_Compiler * inCompiler
                                                                                            COMMA_LOCATION_ARGS) ;
 
@@ -139,7 +139,7 @@ void callExtensionMethod_analyzeExpression_5F_register (const class cPtr_varInEx
                                                         const GALGAS_objectInMemoryIR constin_inVariableKind,
                                                         const GALGAS_location constin_inErrorLocation,
                                                         GALGAS_unifiedTypeMap_2D_proxy & io_ioType,
-                                                        GALGAS_valueIR & out_outResult,
+                                                        GALGAS_objectIR & out_outResult,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
@@ -167,7 +167,7 @@ typedef void (*extensionMethodSignature_varInExpressionAST_analyzeExpression_5F_
                                                                                             class GALGAS_instructionListIR & ioArgument14,
                                                                                             const class GALGAS_objectInMemoryIR constinArgument15,
                                                                                             class GALGAS_unifiedTypeMap_2D_proxy & ioArgument16,
-                                                                                            class GALGAS_valueIR & outArgument17,
+                                                                                            class GALGAS_objectIR & outArgument17,
                                                                                             class C_Compiler * inCompiler
                                                                                             COMMA_LOCATION_ARGS) ;
 
@@ -196,7 +196,7 @@ void callExtensionMethod_analyzeExpression_5F_otherKind (const class cPtr_varInE
                                                          GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                          const GALGAS_objectInMemoryIR constin_inVariableKind,
                                                          GALGAS_unifiedTypeMap_2D_proxy & io_ioType,
-                                                         GALGAS_valueIR & out_outResult,
+                                                         GALGAS_objectIR & out_outResult,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
 

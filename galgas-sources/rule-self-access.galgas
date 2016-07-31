@@ -191,7 +191,7 @@ proc analyzeArrayElementAccess
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
-      ?result:let @valueIR indexResult
+      ?result:let @objectIR indexResult
     ]
     if [indexResult isLiteralInteger] then
       [indexResult literalInteger ?1* ?value:let @bigint indexValue]

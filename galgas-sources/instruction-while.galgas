@@ -103,7 +103,7 @@ override method @whileInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:testInstructionGenerationList
-    ?result:@valueIR testValue
+    ?result:@objectIR testValue
   ]
 #--- Check inferred type
   if [testValue kind] != .boolean then
@@ -152,7 +152,7 @@ override method @whileInstructionAST analyze
 class @whileInstructionIR : @abstractInstructionIR {
   @uint mLabelIndex
   @instructionListIR mTestInstructionGenerationList
-  @valueIR mTestExpression
+  @objectIR mTestExpression
   @instructionListIR mInstructionGenerationList
 }
 

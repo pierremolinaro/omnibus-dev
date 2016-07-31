@@ -78,7 +78,7 @@ override method @assertInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
-    ?result:@valueIR expressionValue
+    ?result:@objectIR expressionValue
   ]
 #--- Check inferred type
   if not [[expressionValue kind] isBoolean] then
@@ -105,7 +105,7 @@ override method @assertInstructionAST analyze
 class @assertInstructionIR : @abstractInstructionIR {
   @location mAssertInstructionLocation
   @instructionListIR mInstructionList
-  @valueIR mExpressionValue
+  @objectIR mExpressionValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

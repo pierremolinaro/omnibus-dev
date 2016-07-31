@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadStructureConstant
-  ?let @valueIR inTargetValue
+  ?let @objectIR inTargetValue
   ?let @string inTypeName
 {
   self += !@loadStructureConstantIR.new {!inTargetValue !inTypeName}
@@ -9,7 +9,7 @@ setter @instructionListIR appendLoadStructureConstant
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadStructureConstantIR : @abstractInstructionIR {
-  @valueIR mTargetValue
+  @objectIR mTargetValue
   @string mTypeName
 }
 

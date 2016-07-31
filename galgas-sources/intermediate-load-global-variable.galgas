@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadGlobalVariable
-  ?let @valueIR inTargetValue
+  ?let @objectIR inTargetValue
   ?let @string inRegisterName
   ?volatile:@bool inIsVolatile
 {
@@ -10,7 +10,7 @@ setter @instructionListIR appendLoadGlobalVariable
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadGlobalVariableIR : @abstractInstructionIR {
-  @valueIR mTargetValue
+  @objectIR mTargetValue
   @string mVariableName
   @bool mIsVolatile
 }

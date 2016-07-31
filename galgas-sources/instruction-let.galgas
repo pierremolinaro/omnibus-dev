@@ -91,7 +91,7 @@ override method @letInstructionWithAssignmentAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @valueIR expressionResult
+    ?result:let @objectIR expressionResult
   ]
 #--- Declare local constant
   var result = checkAssignmentCompatibility (

@@ -29,7 +29,7 @@ struct @intermediateCodeStruct {
 map @globalVariableMapIR {
   @unifiedTypeMap-proxy mType
   @bool mGenerateVolatile
-  @valueIR mInitialValue
+  @objectIR mInitialValue
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }
@@ -38,7 +38,7 @@ map @globalVariableMapIR {
 
 map @globalConstantMapIR {
   @unifiedTypeMap-proxy mType
-  @valueIR mSourceExpression
+  @objectIR mSourceExpression
   insert insertKey error message "** internal error **"
   search searchKey error message "** internal error **"
 }

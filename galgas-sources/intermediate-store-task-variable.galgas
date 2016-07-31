@@ -3,7 +3,7 @@ setter @instructionListIR appendStoreTaskVariable
   ?let @string inTaskName
   ?let @string inVarName
   ?let @unifiedTypeMap-proxy inTargetVarType
-  ?let @valueIR inSourceValue
+  ?let @objectIR inSourceValue
 {
   self += !@storeTaskVariableIR.new {!inTaskName !inVarName !inTargetVarType !inSourceValue}
 }
@@ -14,7 +14,7 @@ class @storeTaskVariableIR : @abstractInstructionIR {
   @string mTaskName
   @string mVarName
   @unifiedTypeMap-proxy mTargetVarType
-  @valueIR mSourceValue
+  @objectIR mSourceValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

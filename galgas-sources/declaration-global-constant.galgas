@@ -132,7 +132,7 @@ override method @globalConstantDeclaration enterInContext
     !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
-    ?result:let @valueIR expressionResult
+    ?result:let @objectIR expressionResult
   ]
 #--- Check assignment compatibility
   let result = checkAssignmentCompatibility (

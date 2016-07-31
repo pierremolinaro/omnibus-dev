@@ -2,7 +2,7 @@
 
 enum @getElementPtrIndexKind {
   case absolute (@uint index)
-  case indirect (@valueIR index)
+  case indirect (@objectIR index)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

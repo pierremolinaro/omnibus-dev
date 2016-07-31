@@ -556,7 +556,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmLocalObjectValue {!type:type !name:llvmNameForLocalVariable (!varLLVMName)}
+        !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (!varLLVMName) !sliceMap:{}}
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
         !lkey:name
@@ -578,7 +578,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmLocalObjectValue {!type:type !name:llvmNameForLocalVariable (![variableKind name])}
+        !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (![variableKind name]) !sliceMap:{}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
@@ -596,7 +596,7 @@ proc analyzeEffectiveParameters
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
-        ?result:let @valueIR expressionResult
+        ?result:let @objectIR expressionResult
       ]
       let result = checkAssignmentCompatibility (
         !source:expressionResult
@@ -624,7 +624,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.outputInput
-        !.llvmLocalObjectValue {!type:type !name:llvmNameForLocalVariable (![variableKind llvmName])}
+        !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (![variableKind llvmName]) !sliceMap:{}}
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
@@ -659,7 +659,7 @@ proc analyzeEffectiveParameters
           parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
           ioEffectiveParameterListIR +=
             !.outputInput
-            !.llvmLocalObjectValue {!type:type !name:llvmNameForLocalVariable (![fieldAddress name])}
+            !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (![fieldAddress name]) !sliceMap:{}}
         end    
       end
     end
@@ -697,7 +697,7 @@ enum @procEffectiveParameterPassingModeIR {
 
 list @procCallEffectiveParameterListIR {
   @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
-  @valueIR mParameter
+  @objectIR mParameter
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

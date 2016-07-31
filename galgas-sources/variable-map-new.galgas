@@ -46,7 +46,7 @@ proc initialVariableMap
     for () in inContext.mControlRegisterMap do
       let objectInMemory = @objectInMemoryIR.register {
         !type:mType
-        !name:lkey
+        !plmName:lkey
         !readable:false
         !writable:false
         !address:mAddress 
@@ -69,7 +69,7 @@ proc initialVariableMap
       if inAcceptUserMode && not mIsAccessibleInUserMode then
         let objectInMemory = @objectInMemoryIR.register {
           !type:mType
-          !name:lkey
+          !plmName:lkey
           !readable:false
           !writable:false
           !address:mAddress 
@@ -89,7 +89,7 @@ proc initialVariableMap
       elsif mIsReadOnly || inGlobalsAreConstant then
         let objectInMemory = @objectInMemoryIR.register {
           !type:mType
-          !name:lkey
+          !plmName:lkey
           !readable:true
           !writable:false
           !address:mAddress 
@@ -112,7 +112,7 @@ proc initialVariableMap
     for () in inContext.mControlRegisterMap do
       let objectInMemory = @objectInMemoryIR.register {
         !type:mType
-        !name:lkey
+        !plmName:lkey
         !readable:true
         !writable:true
         !address:mAddress 

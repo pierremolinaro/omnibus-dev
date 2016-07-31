@@ -9,7 +9,7 @@ enum @typeKind {
   case literalString
   case enumeration (@enumConstantMap constantMap)
   case structure (@namedObjectMap objectMap @propertyMap propertyMap @propertyList propertyList)
-  case integer (@bigint min @bigint max @bool unsigned @uint bitCount @bitSliceAccessMap sliceMap)
+  case integer (@bigint min @bigint max @bool unsigned @uint bitCount @sliceMap sliceMap)
   case staticInteger
   case opaque (@bigint bitCount)
   case arrayType (@unifiedTypeMap-proxy elementType @bigint size)
@@ -55,7 +55,7 @@ setter @staticStringMap findOrAddStaticString ?@string inString !@uint outIndex 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalConstantMap {
-  @valueIR mValue
+  @objectIR mValue
   insert insertKey error message "the '%K' constant is already declared in %L"
   search searchKey error message "there is no '%K' constant"
 }
@@ -76,7 +76,7 @@ map @globalVariableMap %selectors {
   @allowedGuardMap allowedGuardMap
   @allowedISRMap allowedISRMap
   @allowedTaskMap allowedTaskMap
-  @valueIR initialValue
+  @objectIR initialValue
   @bool isConstant
   @bool allowedAccessToAll
 
@@ -172,13 +172,13 @@ sharedmap @unifiedTypeMap %selectors {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @operandList {
-  @valueIR mOperand
+  @objectIR mOperand
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @classConstantMap {
-  @valueIR mValue
+  @objectIR mValue
   insert insertKey error message "the '%K' class constant is already declared in %L"
   search searchKey error message "there is no '%K' class constant"
 }
@@ -192,7 +192,7 @@ list @typeList {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @operandIRList {
-  @valueIR mOperand
+  @objectIR mOperand
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -224,7 +224,7 @@ map @availableInterruptMap {
 list @globalTaskVariableList {
   @string mTaskName
   @string mTaskTypeName
-  @valueIR mInitialValue
+  @objectIR mInitialValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendUpperBoundCheck
-  ?let @valueIR inSource
+  ?let @objectIR inSource
   ?let @bigint inUpperBoundPlusOne
   ?panicCode:let @uint inPanicCode
   ?let @location inLocation
@@ -11,7 +11,7 @@ setter @instructionListIR appendUpperBoundCheck
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @upperBoundCheckIR : @abstractInstructionIR {
-  @valueIR mSource
+  @objectIR mSource
   @bigint mUpperBoundPlusOne
   @uint mPanicCode
   @location mLocation

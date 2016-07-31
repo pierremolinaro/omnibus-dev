@@ -300,7 +300,7 @@ proc analyzeRegisterWriteAccess
     ]
     [outResultPtr register
       ?1*
-      ?name:let @lstring registerName
+      ?plmName:let @lstring registerName
       ?readable:let readable
       ?writable:let writable
       ?address:let @bigint registerAddress
@@ -333,7 +333,7 @@ proc analyzeRegisterWriteAccess
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
-        ?result:let @valueIR indexResult
+        ?result:let @objectIR indexResult
       ]
       if [indexResult isLiteralInteger] then # Static expression
         [indexResult literalInteger ?1* ?value:let @bigint indexValue]
@@ -343,7 +343,7 @@ proc analyzeRegisterWriteAccess
           let address = registerAddress + indexValue * elementArraySize
           outResultPtr = .register {
             !type:type
-            !name: registerName
+            !plmName: registerName
             !readable:readable
             !writable:writable
             !address:address

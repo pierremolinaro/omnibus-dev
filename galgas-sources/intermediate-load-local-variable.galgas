@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadLocalVariable
-  ?let @valueIR inTargetValue
+  ?let @objectIR inTargetValue
   ?let @string inVariableName
   ?let @bool inVolatile
 {
@@ -10,7 +10,7 @@ setter @instructionListIR appendLoadLocalVariable
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadLocalVariableIR : @abstractInstructionIR {
-  @valueIR mTargetValue
+  @objectIR mTargetValue
   @string mVariableName
   @bool mVolatile
 }

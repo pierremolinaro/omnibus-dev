@@ -100,7 +100,7 @@ override method @selfVarAssignmentInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@valueIR sourceOperand
+    ?result:@objectIR sourceOperand
   ]
   let result = checkAssignmentCompatibility (
     !source:sourceOperand

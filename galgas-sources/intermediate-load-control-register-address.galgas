@@ -1,7 +1,7 @@
 
 setter @instructionListIR appendLoadVolatileRegisterAddress
   ?let @objectInMemoryIR inTargetValue
-  ?let @valueIR inIndexResult
+  ?let @objectIR inIndexResult
   ?let @bigint inAddress
   ?let @bigint inElementArraySize
 {
@@ -12,7 +12,7 @@ setter @instructionListIR appendLoadVolatileRegisterAddress
 
 class @loadRegisterAddressIR : @abstractInstructionIR {
   @objectInMemoryIR mTargetValue
-  @valueIR mIndexResult
+  @objectIR mIndexResult
   @bigint mRegisterAddress
   @bigint mElementArraySize
 }

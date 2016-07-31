@@ -267,11 +267,11 @@ class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
 override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @valueIR inLeftOperand
+  ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
-  ?let @valueIR inRightOperand
+  ?let @objectIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@valueIR outResult
+  !@objectIR outResult
 {
   if [inLeftOperand isLiteralInteger] && [inRightOperand isLiteralInteger] then
     [inLeftOperand  literalInteger ?1* ?value:let @bigint left]
@@ -429,11 +429,11 @@ class @integerObject_literal_infixOperator : @infixOperatorDescription {
 override method @integerObject_literal_infixOperator generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @valueIR inLeftOperand
+  ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
-  ?let @valueIR inRightOperand
+  ?let @objectIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@valueIR outResult
+  !@objectIR outResult
 {
 #--- Check right literal integer can be extented to left integer type, ans is not zero
   [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
@@ -465,11 +465,11 @@ class @integerObject_literal_divisionOperator : @infixOperatorDescription {
 override method @integerObject_literal_divisionOperator generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @valueIR inLeftOperand
+  ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
-  ?let @valueIR inRightOperand
+  ?let @objectIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@valueIR outResult
+  !@objectIR outResult
 {
 #--- Check right literal integer can be extented to left integer type
   [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
@@ -631,11 +631,11 @@ class @literal_integerObject_infixOperator : @infixOperatorDescription {
 override method @literal_integerObject_infixOperator generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @valueIR inLeftOperand
+  ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
-  ?let @valueIR inRightOperand
+  ?let @objectIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@valueIR outResult
+  !@objectIR outResult
 {
 #--- Check left literal integer can be extented to right integer type
   [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]

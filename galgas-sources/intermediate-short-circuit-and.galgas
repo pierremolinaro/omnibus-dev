@@ -1,10 +1,10 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendShortCircuitAndOperation
-  ?let @valueIR inTargetOperand
-  ?let @valueIR inLeftOperand
+  ?let @objectIR inTargetOperand
+  ?let @objectIR inLeftOperand
   ?let @instructionListIR inLeftInstructionList
-  ?let @valueIR inRightOperand
+  ?let @objectIR inRightOperand
   ?let @instructionListIR inRightInstructionList
   ?let @location inLocation
 {
@@ -21,10 +21,10 @@ setter @instructionListIR appendShortCircuitAndOperation
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @shortCircuitAndOperationIR : @abstractInstructionIR {
-  @valueIR mTargetOperand
-  @valueIR mLeftOperand
+  @objectIR mTargetOperand
+  @objectIR mLeftOperand
   @instructionListIR mLeftInstructionList
-  @valueIR mRightOperand
+  @objectIR mRightOperand
   @instructionListIR mRightInstructionList
   @location mLocation
 }

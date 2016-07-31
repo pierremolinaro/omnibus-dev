@@ -1,6 +1,6 @@
 
 setter @instructionListIR testArrayIndex
-  ?let @valueIR inIndex
+  ?let @objectIR inIndex
   ?let @location inErrorLocation
   ?let @bigint inSize
   !@bool outGeneratePanicInstruction
@@ -13,7 +13,7 @@ setter @instructionListIR testArrayIndex
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @testArrayIndexIR : @abstractInstructionIR {
-  @valueIR mIndex
+  @objectIR mIndex
   @location mErrorLocation
   @bigint mSize
 }
