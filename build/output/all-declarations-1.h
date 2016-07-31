@@ -1713,7 +1713,7 @@ class GALGAS_valueIR : public AC_GALGAS_root {
     kNotBuilt,
     kEnum_selfObject,
     kEnum_literalInteger,
-    kEnum_llvmLocalObject,
+    kEnum_llvmLocalObjectValue,
     kEnum_llvmGlobalObjectValue,
     kEnum_llvmStructureConstant,
     kEnum_literalString,
@@ -1757,9 +1757,9 @@ class GALGAS_valueIR : public AC_GALGAS_root {
                                                                           const class GALGAS_string & inOperand1
                                                                           COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_valueIR constructor_llvmLocalObject (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                    const class GALGAS_string & inOperand1
-                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_valueIR constructor_llvmLocalObjectValue (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                                         const class GALGAS_string & inOperand1
+                                                                         COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_valueIR constructor_llvmStructureConstant (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                           const class GALGAS_operandIRList & inOperand1
@@ -1796,10 +1796,10 @@ class GALGAS_valueIR : public AC_GALGAS_root {
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_llvmLocalObject (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                         class GALGAS_string & outArgument1,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_llvmLocalObjectValue (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                              class GALGAS_string & outArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_llvmStructureConstant (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                                class GALGAS_operandIRList & outArgument1,
@@ -1823,7 +1823,7 @@ class GALGAS_valueIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmGlobalObjectValue (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmLocalObject (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmLocalObjectValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmStructureConstant (LOCATION_ARGS) const ;
 
@@ -2005,20 +2005,20 @@ class cEnumAssociatedValues_valueIR_literalInteger : public cEnumAssociatedValue
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_valueIR_llvmLocalObject : public cEnumAssociatedValues {
+class cEnumAssociatedValues_valueIR_llvmLocalObjectValue : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
   public : const GALGAS_string mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_valueIR_llvmLocalObject (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                          const GALGAS_string & inAssociatedValue1
-                                                          COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_valueIR_llvmLocalObjectValue (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                               const GALGAS_string & inAssociatedValue1
+                                                               COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_valueIR_llvmLocalObject (void) {}
+  public : virtual ~ cEnumAssociatedValues_valueIR_llvmLocalObjectValue (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
