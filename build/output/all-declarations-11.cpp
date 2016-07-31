@@ -10,6 +10,71 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//       Overriding extension method '@abstractFunctionCallInExpressionAST addDependenceEdgeForStaticExpression'       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_abstractFunctionCallInExpressionAST_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
+                                                                                                      const GALGAS_lstring constinArgument_inConstantName,
+                                                                                                      GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                                      C_Compiler * inCompiler
+                                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_abstractFunctionCallInExpressionAST * object = (const cPtr_abstractFunctionCallInExpressionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_abstractFunctionCallInExpressionAST) ;
+  cEnumerator_effectiveParameterListAST enumerator_2667 (object->mAttribute_mEffectiveParameterList, kEnumeration_up) ;
+  while (enumerator_2667.hasCurrentObject ()) {
+    switch (enumerator_2667.current_mEffectiveParameterKind (HERE).enumValue ()) {
+    case GALGAS_effectiveParameterPassingModeAST::kNotBuilt:
+      break ;
+    case GALGAS_effectiveParameterPassingModeAST::kEnum_input:
+      {
+      }
+      break ;
+    case GALGAS_effectiveParameterPassingModeAST::kEnum_inputWithType:
+      {
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType * extractPtr_2892 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType *) (enumerator_2667.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_typeName = extractPtr_2892->mAssociatedValue1 ;
+        const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, extractedValue_typeName.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+        if (kBoolTrue == test_0) {
+          {
+          ioArgument_ioGraph.setter_noteNode (GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (extractedValue_typeName.getter_string (SOURCE_FILE ("expression-func-call.galgas", 57)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 57)), extractedValue_typeName.mAttribute_location  COMMA_SOURCE_FILE ("expression-func-call.galgas", 57)) COMMA_SOURCE_FILE ("expression-func-call.galgas", 57)) ;
+          }
+        }
+      }
+      break ;
+    case GALGAS_effectiveParameterPassingModeAST::kEnum_output:
+      {
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_output * extractPtr_3001 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_output *) (enumerator_2667.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_expression = extractPtr_3001->mAssociatedValue0 ;
+        callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) extractedValue_expression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 59)) ;
+      }
+      break ;
+    case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInput:
+      {
+      }
+      break ;
+    case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInputSelfVariable:
+      {
+      }
+      break ;
+    }
+    enumerator_2667.gotoNextObject () ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_abstractFunctionCallInExpressionAST_addDependenceEdgeForStaticExpression (void) {
+  enterExtensionMethod_addDependenceEdgeForStaticExpression (kTypeDescriptor_GALGAS_abstractFunctionCallInExpressionAST.mSlotID,
+                                                             extensionMethod_abstractFunctionCallInExpressionAST_addDependenceEdgeForStaticExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractFunctionCallInExpressionAST_addDependenceEdgeForStaticExpression (defineExtensionMethod_abstractFunctionCallInExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //       Overriding extension method '@abstractFunctionCallInExpressionAST noteExpressionTypesInPrecedenceGraph'       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1830,14 +1895,14 @@ static void extensionMethod_varOperatorAssignInstructionAST_analyze (const cPtr_
   GALGAS_infixOperatorDescription var_binaryOperator_8970 ;
   GALGAS_unifiedTypeMap_2D_proxy joker_8916 ; // Joker input parameter
   extensionMethod_checkBinaryOperationWith (var_operatorMap_6741, extensionGetter_type (var_targetObjectPtr_5143, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 226)), extensionGetter_type (var_sourceValue_6135, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 227)), object->mAttribute_mTargetErrorLocation, joker_8916, var_binaryOperator_8970, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 225)) ;
-  GALGAS_valueIR var_variableValue_9218 ;
+  GALGAS_valueIR var_variableValue_9256 ;
   {
-  extensionSetter_appendLoadFromMemory (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_targetObjectPtr_5143, var_variableValue_9218, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 236)) ;
+  extensionSetter_appendLoadFromMemory (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, object->mAttribute_mTargetErrorLocation, var_targetObjectPtr_5143, var_variableValue_9256, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 236)) ;
   }
-  GALGAS_valueIR var_newResultingValue_9605 ;
-  callExtensionMethod_generateInfixOperatorCode ((const cPtr_infixOperatorDescription *) var_binaryOperator_8970.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_variableValue_9218, object->mAttribute_mTargetErrorLocation, var_sourceValue_6135, extensionGetter_type (var_targetObjectPtr_5143, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 248)), var_newResultingValue_9605, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 242)) ;
+  GALGAS_valueIR var_newResultingValue_9646 ;
+  callExtensionMethod_generateInfixOperatorCode ((const cPtr_infixOperatorDescription *) var_binaryOperator_8970.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_variableValue_9256, object->mAttribute_mTargetErrorLocation, var_sourceValue_6135, extensionGetter_type (var_targetObjectPtr_5143, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 253)), var_newResultingValue_9646, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 247)) ;
   {
-  extensionSetter_appendStoreInMemory (ioArgument_ioInstructionGenerationList, var_targetObjectPtr_5143, var_newResultingValue_9605, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 251)) ;
+  extensionSetter_appendStoreInMemory (ioArgument_ioInstructionGenerationList, var_targetObjectPtr_5143, var_newResultingValue_9646, inCompiler COMMA_SOURCE_FILE ("instruction-operator-assign.galgas", 256)) ;
   }
 }
 
@@ -2048,14 +2113,14 @@ static void extensionMethod_selfVarOperatorAssignInstructionAST_analyze (const c
   GALGAS_infixOperatorDescription var_binaryOperator_7486 ;
   GALGAS_unifiedTypeMap_2D_proxy joker_7432 ; // Joker input parameter
   extensionMethod_checkBinaryOperationWith (var_operatorMap_5287, var_targetType_4407, extensionGetter_type (var_sourceValue_5083, inCompiler COMMA_SOURCE_FILE ("instruction-operator-self-assign.galgas", 161)), object->mAttribute_mOperatorLocation, joker_7432, var_binaryOperator_7486, inCompiler COMMA_SOURCE_FILE ("instruction-operator-self-assign.galgas", 159)) ;
-  GALGAS_valueIR var_targetVariableValue_7615 ;
+  GALGAS_valueIR var_targetVariableValue_7650 ;
   {
-  extensionSetter_appendLoadFromMemory (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_targetPtr_4386, var_targetVariableValue_7615, inCompiler COMMA_SOURCE_FILE ("instruction-operator-self-assign.galgas", 167)) ;
+  extensionSetter_appendLoadFromMemory (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, object->mAttribute_mOperatorLocation, var_targetPtr_4386, var_targetVariableValue_7650, inCompiler COMMA_SOURCE_FILE ("instruction-operator-self-assign.galgas", 167)) ;
   }
-  GALGAS_valueIR var_newResultingValue_7822 ;
-  callExtensionMethod_generateInfixOperatorCode ((const cPtr_infixOperatorDescription *) var_binaryOperator_7486.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_targetVariableValue_7615, object->mAttribute_mOperatorLocation, var_sourceValue_5083, var_targetType_4407, var_newResultingValue_7822, inCompiler COMMA_SOURCE_FILE ("instruction-operator-self-assign.galgas", 168)) ;
+  GALGAS_valueIR var_newResultingValue_7860 ;
+  callExtensionMethod_generateInfixOperatorCode ((const cPtr_infixOperatorDescription *) var_binaryOperator_7486.ptr (), ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_targetVariableValue_7650, object->mAttribute_mOperatorLocation, var_sourceValue_5083, var_targetType_4407, var_newResultingValue_7860, inCompiler COMMA_SOURCE_FILE ("instruction-operator-self-assign.galgas", 173)) ;
   {
-  extensionSetter_appendStoreInMemory (ioArgument_ioInstructionGenerationList, var_targetPtr_4386, var_newResultingValue_7822, inCompiler COMMA_SOURCE_FILE ("instruction-operator-self-assign.galgas", 177)) ;
+  extensionSetter_appendStoreInMemory (ioArgument_ioInstructionGenerationList, var_targetPtr_4386, var_newResultingValue_7860, inCompiler COMMA_SOURCE_FILE ("instruction-operator-self-assign.galgas", 182)) ;
   }
 }
 

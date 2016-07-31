@@ -8906,6 +8906,7 @@ void extensionSetter_appendStoreLocalVariable (GALGAS_instructionListIR & ioObje
 
 void extensionSetter_appendLoadFromMemory (GALGAS_instructionListIR & ioObject,
                                            GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                           const GALGAS_location constinArgument_inErrorLocation,
                                            const GALGAS_objectInMemoryIR constinArgument_inSource,
                                            GALGAS_valueIR & outArgument_outResultingValue,
                                            C_Compiler * inCompiler
@@ -8916,61 +8917,68 @@ void extensionSetter_appendLoadFromMemory (GALGAS_instructionListIR & ioObject,
     break ;
   case GALGAS_objectInMemoryIR::kEnum_registerAddress:
     {
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-store.galgas", 8)), GALGAS_string ("<<@instructionListIR appendLoadFromMemory>>")  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 8)) ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-store.galgas", 9)), GALGAS_string ("<<@instructionListIR appendLoadFromMemory>>")  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 9)) ;
       outArgument_outResultingValue.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_register:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_register * extractPtr_518 = (const cEnumAssociatedValues_objectInMemoryIR_register *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_518->mAssociatedValue0 ;
-      const GALGAS_bigint extractedValue_address = extractPtr_518->mAssociatedValue4 ;
-      {
-      routine_getNewTempVariable (extractedValue_type, ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 10)) ;
-      }
-      {
-      extensionSetter_appendLoadVolatileRegister (ioObject, outArgument_outResultingValue, extractedValue_address, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 11)) ;
+      const cEnumAssociatedValues_objectInMemoryIR_register * extractPtr_707 = (const cEnumAssociatedValues_objectInMemoryIR_register *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_707->mAssociatedValue0 ;
+      const GALGAS_bigint extractedValue_address = extractPtr_707->mAssociatedValue4 ;
+      const GALGAS_uint extractedValue_arraySize = extractPtr_707->mAssociatedValue6 ;
+      const enumGalgasBool test_0 = GALGAS_bool (kIsStrictSup, extractedValue_arraySize.objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+      if (kBoolTrue == test_0) {
+        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("register array requires subscripting")  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 12)) ;
+        outArgument_outResultingValue.drop () ; // Release error dropped variable
+      }else if (kBoolFalse == test_0) {
+        {
+        routine_getNewTempVariable (extractedValue_type, ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 14)) ;
+        }
+        {
+        extensionSetter_appendLoadVolatileRegister (ioObject, outArgument_outResultingValue, extractedValue_address, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 15)) ;
+        }
       }
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_globalVariable:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_globalVariable * extractPtr_774 = (const cEnumAssociatedValues_objectInMemoryIR_globalVariable *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_774->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_774->mAssociatedValue1 ;
-      const GALGAS_bool extractedValue_isVolatile = extractPtr_774->mAssociatedValue2 ;
+      const cEnumAssociatedValues_objectInMemoryIR_globalVariable * extractPtr_963 = (const cEnumAssociatedValues_objectInMemoryIR_globalVariable *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_963->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_963->mAssociatedValue1 ;
+      const GALGAS_bool extractedValue_isVolatile = extractPtr_963->mAssociatedValue2 ;
       {
-      routine_getNewTempVariable (extractedValue_type, ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 16)) ;
+      routine_getNewTempVariable (extractedValue_type, ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 21)) ;
       }
       {
-      extensionSetter_appendLoadGlobalVariable (ioObject, outArgument_outResultingValue, extractedValue_name, extractedValue_isVolatile, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 17)) ;
+      extensionSetter_appendLoadGlobalVariable (ioObject, outArgument_outResultingValue, extractedValue_name, extractedValue_isVolatile, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 22)) ;
       }
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_localVariable:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_localVariable * extractPtr_984 = (const cEnumAssociatedValues_objectInMemoryIR_localVariable *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_984->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_984->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectInMemoryIR_localVariable * extractPtr_1173 = (const cEnumAssociatedValues_objectInMemoryIR_localVariable *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1173->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_1173->mAssociatedValue1 ;
       {
-      routine_getNewTempVariable (extractedValue_type, ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 23)) ;
+      routine_getNewTempVariable (extractedValue_type, ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 28)) ;
       }
       {
-      extensionSetter_appendLoadLocalVariable (ioObject, outArgument_outResultingValue, extractedValue_name, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 24)) ;
+      extensionSetter_appendLoadLocalVariable (ioObject, outArgument_outResultingValue, extractedValue_name, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 29)) ;
       }
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_staticConstant:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_staticConstant * extractPtr_1076 = (const cEnumAssociatedValues_objectInMemoryIR_staticConstant *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_valueIR extractedValue_value = extractPtr_1076->mAssociatedValue0 ;
-      const GALGAS_lstring extractedValue_name = extractPtr_1076->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectInMemoryIR_staticConstant * extractPtr_1265 = (const cEnumAssociatedValues_objectInMemoryIR_staticConstant *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_valueIR extractedValue_value = extractPtr_1265->mAssociatedValue0 ;
+      const GALGAS_lstring extractedValue_name = extractPtr_1265->mAssociatedValue1 ;
       outArgument_outResultingValue = extractedValue_value ;
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_property:
     {
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-store.galgas", 32)), GALGAS_string ("<<@instructionListIR appendLoadFromMemory>>")  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 32)) ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-store.galgas", 37)), GALGAS_string ("<<@instructionListIR appendLoadFromMemory>>")  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 37)) ;
       outArgument_outResultingValue.drop () ; // Release error dropped variable
     }
     break ;
@@ -8994,53 +9002,53 @@ void extensionSetter_appendStoreInMemory (GALGAS_instructionListIR & ioObject,
     break ;
   case GALGAS_objectInMemoryIR::kEnum_registerAddress:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_registerAddress * extractPtr_1596 = (const cEnumAssociatedValues_objectInMemoryIR_registerAddress *) (constinArgument_inTargetPtr.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1596->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_llvmName = extractPtr_1596->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectInMemoryIR_registerAddress * extractPtr_1785 = (const cEnumAssociatedValues_objectInMemoryIR_registerAddress *) (constinArgument_inTargetPtr.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1785->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_llvmName = extractPtr_1785->mAssociatedValue1 ;
       {
-      extensionSetter_appendStoreVolatileRegisterIndirect (ioObject, extractedValue_type, extractedValue_llvmName, constinArgument_inValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 44)) ;
+      extensionSetter_appendStoreVolatileRegisterIndirect (ioObject, extractedValue_type, extractedValue_llvmName, constinArgument_inValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 49)) ;
       }
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_register:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_register * extractPtr_1736 = (const cEnumAssociatedValues_objectInMemoryIR_register *) (constinArgument_inTargetPtr.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1736->mAssociatedValue0 ;
-      const GALGAS_bigint extractedValue_address = extractPtr_1736->mAssociatedValue4 ;
+      const cEnumAssociatedValues_objectInMemoryIR_register * extractPtr_1925 = (const cEnumAssociatedValues_objectInMemoryIR_register *) (constinArgument_inTargetPtr.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1925->mAssociatedValue0 ;
+      const GALGAS_bigint extractedValue_address = extractPtr_1925->mAssociatedValue4 ;
       {
-      extensionSetter_appendStoreVolatileRegister (ioObject, extractedValue_type, extractedValue_address, constinArgument_inValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 46)) ;
+      extensionSetter_appendStoreVolatileRegister (ioObject, extractedValue_type, extractedValue_address, constinArgument_inValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 51)) ;
       }
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_globalVariable:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_globalVariable * extractPtr_1900 = (const cEnumAssociatedValues_objectInMemoryIR_globalVariable *) (constinArgument_inTargetPtr.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_1900->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_1900->mAssociatedValue1 ;
-      const GALGAS_bool extractedValue_isVolatile = extractPtr_1900->mAssociatedValue2 ;
+      const cEnumAssociatedValues_objectInMemoryIR_globalVariable * extractPtr_2089 = (const cEnumAssociatedValues_objectInMemoryIR_globalVariable *) (constinArgument_inTargetPtr.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_2089->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_2089->mAssociatedValue1 ;
+      const GALGAS_bool extractedValue_isVolatile = extractPtr_2089->mAssociatedValue2 ;
       {
-      extensionSetter_appendStoreGlobalVariable (ioObject, extractedValue_name, extractedValue_type, constinArgument_inValue, extractedValue_isVolatile, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 48)) ;
+      extensionSetter_appendStoreGlobalVariable (ioObject, extractedValue_name, extractedValue_type, constinArgument_inValue, extractedValue_isVolatile, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 53)) ;
       }
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_localVariable:
     {
-      const cEnumAssociatedValues_objectInMemoryIR_localVariable * extractPtr_2024 = (const cEnumAssociatedValues_objectInMemoryIR_localVariable *) (constinArgument_inTargetPtr.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_2024->mAssociatedValue0 ;
-      const GALGAS_string extractedValue_name = extractPtr_2024->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectInMemoryIR_localVariable * extractPtr_2213 = (const cEnumAssociatedValues_objectInMemoryIR_localVariable *) (constinArgument_inTargetPtr.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_2213->mAssociatedValue0 ;
+      const GALGAS_string extractedValue_name = extractPtr_2213->mAssociatedValue1 ;
       {
-      extensionSetter_appendStoreLocalVariable (ioObject, extractedValue_name, extractedValue_type, constinArgument_inValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 50)) ;
+      extensionSetter_appendStoreLocalVariable (ioObject, extractedValue_name, extractedValue_type, constinArgument_inValue, inCompiler COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 55)) ;
       }
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_staticConstant:
     {
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-store.galgas", 52)), GALGAS_string ("<<@objectInMemoryIR storeInMemory globalConstant>>")  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 52)) ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-store.galgas", 57)), GALGAS_string ("<<@objectInMemoryIR storeInMemory globalConstant>>")  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 57)) ;
     }
     break ;
   case GALGAS_objectInMemoryIR::kEnum_property:
     {
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-store.galgas", 54)), GALGAS_string ("<<@instructionListIR appendStoreInMemory>>")  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 54)) ;
+      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-load-store.galgas", 59)), GALGAS_string ("<<@instructionListIR appendStoreInMemory>>")  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 59)) ;
     }
     break ;
   }
@@ -12395,152 +12403,6 @@ GALGAS_moduleListIR_2D_element GALGAS_moduleListIR_2D_element::extractObject (co
       result = *p ;
     }else{
       inCompiler->castError ("moduleListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskVarListAST_2D_element::GALGAS_taskVarListAST_2D_element (void) :
-mAttribute_mVarName (),
-mAttribute_mVarTypeName (),
-mAttribute_mVarInitExpression () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskVarListAST_2D_element::~ GALGAS_taskVarListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskVarListAST_2D_element::GALGAS_taskVarListAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                    const GALGAS_lstring & inOperand1,
-                                                                    const GALGAS_expressionAST & inOperand2) :
-mAttribute_mVarName (inOperand0),
-mAttribute_mVarTypeName (inOperand1),
-mAttribute_mVarInitExpression (inOperand2) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskVarListAST_2D_element GALGAS_taskVarListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                    const GALGAS_lstring & inOperand1,
-                                                                                    const GALGAS_expressionAST & inOperand2 
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_taskVarListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_taskVarListAST_2D_element (inOperand0, inOperand1, inOperand2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_taskVarListAST_2D_element::objectCompare (const GALGAS_taskVarListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mVarName.objectCompare (inOperand.mAttribute_mVarName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mVarTypeName.objectCompare (inOperand.mAttribute_mVarTypeName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mVarInitExpression.objectCompare (inOperand.mAttribute_mVarInitExpression) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_taskVarListAST_2D_element::isValid (void) const {
-  return mAttribute_mVarName.isValid () && mAttribute_mVarTypeName.isValid () && mAttribute_mVarInitExpression.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_taskVarListAST_2D_element::drop (void) {
-  mAttribute_mVarName.drop () ;
-  mAttribute_mVarTypeName.drop () ;
-  mAttribute_mVarInitExpression.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_taskVarListAST_2D_element::description (C_String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString << "<struct @taskVarListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mVarName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mVarTypeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mVarInitExpression.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_taskVarListAST_2D_element::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVarName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_taskVarListAST_2D_element::getter_mVarTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVarTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_expressionAST GALGAS_taskVarListAST_2D_element::getter_mVarInitExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVarInitExpression ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @taskVarListAST-element type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_taskVarListAST_2D_element ("taskVarListAST-element",
-                                                  NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_taskVarListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_taskVarListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_taskVarListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_taskVarListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_taskVarListAST_2D_element GALGAS_taskVarListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_taskVarListAST_2D_element result ;
-  const GALGAS_taskVarListAST_2D_element * p = (const GALGAS_taskVarListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_taskVarListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("taskVarListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

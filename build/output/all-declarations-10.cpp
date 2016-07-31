@@ -10,6 +10,152 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_infixOperatorMap_2D_element::GALGAS_infixOperatorMap_2D_element (void) :
+mAttribute_lkey (),
+mAttribute_mResultType (),
+mAttribute_mOperation () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap_2D_element::~ GALGAS_infixOperatorMap_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap_2D_element::GALGAS_infixOperatorMap_2D_element (const GALGAS_lstring & inOperand0,
+                                                                        const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                        const GALGAS_infixOperatorDescription & inOperand2) :
+mAttribute_lkey (inOperand0),
+mAttribute_mResultType (inOperand1),
+mAttribute_mOperation (inOperand2) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap_2D_element GALGAS_infixOperatorMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                                        const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                                        const GALGAS_infixOperatorDescription & inOperand2 
+                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_infixOperatorMap_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+    result = GALGAS_infixOperatorMap_2D_element (inOperand0, inOperand1, inOperand2) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_infixOperatorMap_2D_element::objectCompare (const GALGAS_infixOperatorMap_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mResultType.objectCompare (inOperand.mAttribute_mResultType) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mOperation.objectCompare (inOperand.mAttribute_mOperation) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_infixOperatorMap_2D_element::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_mResultType.isValid () && mAttribute_mOperation.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorMap_2D_element::drop (void) {
+  mAttribute_lkey.drop () ;
+  mAttribute_mResultType.drop () ;
+  mAttribute_mOperation.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_infixOperatorMap_2D_element::description (C_String & ioString,
+                                                      const int32_t inIndentation) const {
+  ioString << "<struct @infixOperatorMap-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mResultType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mOperation.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_infixOperatorMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_infixOperatorMap_2D_element::getter_mResultType (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mResultType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorDescription GALGAS_infixOperatorMap_2D_element::getter_mOperation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mOperation ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @infixOperatorMap-element type                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_infixOperatorMap_2D_element ("infixOperatorMap-element",
+                                                    NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_infixOperatorMap_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_infixOperatorMap_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_infixOperatorMap_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_infixOperatorMap_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_infixOperatorMap_2D_element GALGAS_infixOperatorMap_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_infixOperatorMap_2D_element result ;
+  const GALGAS_infixOperatorMap_2D_element * p = (const GALGAS_infixOperatorMap_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_infixOperatorMap_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("infixOperatorMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_prefixOperatorMap_2D_element::GALGAS_prefixOperatorMap_2D_element (void) :
 mAttribute_lkey () {
 }
@@ -9442,7 +9588,7 @@ static void extensionMethod_primaryInExpressionAST_analyzeExpression (const cPtr
     break ;
   }
   {
-  extensionSetter_appendLoadFromMemory (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_currentPointer_6800, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 217)) ;
+  extensionSetter_appendLoadFromMemory (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, object->mAttribute_mObjectName.mAttribute_location, var_currentPointer_6800, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 217)) ;
   }
 }
 
@@ -9550,7 +9696,7 @@ static void extensionMethod_selfVarInExpressionAST_analyzeExpression (const cPtr
     inCompiler->emitSemanticError (object->mAttribute_mSelfLocation, GALGAS_string ("an $").add_operation (extensionGetter_type (var_resultPtr_4512, inCompiler COMMA_SOURCE_FILE ("expression-self-var.galgas", 91)).getter_key (inCompiler COMMA_SOURCE_FILE ("expression-self-var.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("expression-self-var.galgas", 91)).add_operation (GALGAS_string (" instance is not copyable"), inCompiler COMMA_SOURCE_FILE ("expression-self-var.galgas", 91))  COMMA_SOURCE_FILE ("expression-self-var.galgas", 91)) ;
   }
   {
-  extensionSetter_appendLoadFromMemory (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_resultPtr_4512, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-self-var.galgas", 93)) ;
+  extensionSetter_appendLoadFromMemory (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, object->mAttribute_mSelfLocation, var_resultPtr_4512, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-self-var.galgas", 93)) ;
   }
 }
 
@@ -9754,69 +9900,4 @@ static void defineExtensionMethod_varInExpressionAST_analyzeExpression (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_varInExpressionAST_analyzeExpression (defineExtensionMethod_varInExpressionAST_analyzeExpression, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//       Overriding extension method '@abstractFunctionCallInExpressionAST addDependenceEdgeForStaticExpression'       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_abstractFunctionCallInExpressionAST_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
-                                                                                                      const GALGAS_lstring constinArgument_inConstantName,
-                                                                                                      GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                                                      C_Compiler * inCompiler
-                                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_abstractFunctionCallInExpressionAST * object = (const cPtr_abstractFunctionCallInExpressionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_abstractFunctionCallInExpressionAST) ;
-  cEnumerator_effectiveParameterListAST enumerator_2667 (object->mAttribute_mEffectiveParameterList, kEnumeration_up) ;
-  while (enumerator_2667.hasCurrentObject ()) {
-    switch (enumerator_2667.current_mEffectiveParameterKind (HERE).enumValue ()) {
-    case GALGAS_effectiveParameterPassingModeAST::kNotBuilt:
-      break ;
-    case GALGAS_effectiveParameterPassingModeAST::kEnum_input:
-      {
-      }
-      break ;
-    case GALGAS_effectiveParameterPassingModeAST::kEnum_inputWithType:
-      {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType * extractPtr_2892 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType *) (enumerator_2667.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_typeName = extractPtr_2892->mAssociatedValue1 ;
-        const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, extractedValue_typeName.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
-        if (kBoolTrue == test_0) {
-          {
-          ioArgument_ioGraph.setter_noteNode (GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (extractedValue_typeName.getter_string (SOURCE_FILE ("expression-func-call.galgas", 57)), inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 57)), extractedValue_typeName.mAttribute_location  COMMA_SOURCE_FILE ("expression-func-call.galgas", 57)) COMMA_SOURCE_FILE ("expression-func-call.galgas", 57)) ;
-          }
-        }
-      }
-      break ;
-    case GALGAS_effectiveParameterPassingModeAST::kEnum_output:
-      {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_output * extractPtr_3001 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_output *) (enumerator_2667.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_expression = extractPtr_3001->mAssociatedValue0 ;
-        callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) extractedValue_expression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-func-call.galgas", 59)) ;
-      }
-      break ;
-    case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInput:
-      {
-      }
-      break ;
-    case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInputSelfVariable:
-      {
-      }
-      break ;
-    }
-    enumerator_2667.gotoNextObject () ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_abstractFunctionCallInExpressionAST_addDependenceEdgeForStaticExpression (void) {
-  enterExtensionMethod_addDependenceEdgeForStaticExpression (kTypeDescriptor_GALGAS_abstractFunctionCallInExpressionAST.mSlotID,
-                                                             extensionMethod_abstractFunctionCallInExpressionAST_addDependenceEdgeForStaticExpression) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_abstractFunctionCallInExpressionAST_addDependenceEdgeForStaticExpression (defineExtensionMethod_abstractFunctionCallInExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
 

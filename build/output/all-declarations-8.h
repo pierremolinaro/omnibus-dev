@@ -696,6 +696,7 @@ void extensionSetter_appendStoreLocalVariable (class GALGAS_instructionListIR & 
 
 void extensionSetter_appendLoadFromMemory (class GALGAS_instructionListIR & ioObject,
                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           const class GALGAS_location constin_inErrorLocation,
                                            const class GALGAS_objectInMemoryIR constin_inSource,
                                            class GALGAS_valueIR & out_outResultingValue,
                                            class C_Compiler * inCompiler

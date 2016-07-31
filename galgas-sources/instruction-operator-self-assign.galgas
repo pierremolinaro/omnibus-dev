@@ -164,7 +164,12 @@ override method @selfVarOperatorAssignInstructionAST analyze
     ?op:let @infixOperatorDescription binaryOperator
   ]
 #--- Generate code
-  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !targetPtr ?let targetVariableValue]
+  [!?ioInstructionGenerationList appendLoadFromMemory
+    !?ioTemporaries
+    !mOperatorLocation
+    !targetPtr
+    ?let targetVariableValue
+  ]
   [binaryOperator generateInfixOperatorCode
     !?ioTemporaries
     !?ioInstructionGenerationList
