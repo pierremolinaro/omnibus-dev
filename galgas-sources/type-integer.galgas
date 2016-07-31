@@ -72,7 +72,7 @@ override method @integerDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
     !llvmTypeName:"i" + mSize
-    !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
+    !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize !sliceMap:{}}
     !classConstantMap:{}
     !instantiable:true
     !copyable:true
@@ -437,7 +437,7 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
 {
 #--- Check right literal integer can be extented to left integer type, ans is not zero
   [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[inLeftOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+  [[inLeftOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?3*]
   if literalValue < min then
     error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
@@ -473,7 +473,7 @@ override method @integerObject_literal_divisionOperator generateInfixOperatorCod
 {
 #--- Check right literal integer can be extented to left integer type
   [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[inLeftOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+  [[inLeftOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?3*]
   if literalValue < min then
     error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
@@ -639,7 +639,7 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
 {
 #--- Check left literal integer can be extented to right integer type
   [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[inRightOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+  [[inRightOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?3*]
   if literalValue < min then
     error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then

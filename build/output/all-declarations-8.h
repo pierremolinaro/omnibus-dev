@@ -691,20 +691,6 @@ void extensionSetter_appendStoreLocalVariable (class GALGAS_instructionListIR & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Extension setter '@instructionListIR appendLoadFromMemory'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendLoadFromMemory (class GALGAS_instructionListIR & ioObject,
-                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           const class GALGAS_location constin_inErrorLocation,
-                                           const class GALGAS_objectInMemoryIR constin_inSource,
-                                           class GALGAS_valueIR & out_outResultingValue,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                              Extension setter '@instructionListIR appendStoreInMemory'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -817,10 +803,10 @@ void callExtensionMethod_functionSemanticAnalysis (const class cPtr_structureDec
 
 void extensionMethod_buildControlRegisterSliceMap (const class GALGAS_controlRegisterDeclarationListAST_2D_element inObject,
                                                    class GALGAS_semanticContext & io_ioContext,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inRegisterType,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & io_ioRegisterType,
                                                    const class GALGAS_uint constin_inRegisterBitCount,
                                                    class GALGAS_controlRegisterFieldMap & out_outRegisterFieldMap,
-                                                   class GALGAS_controlRegisterBitSliceAccessMap & out_outRegisterBitSliceMap,
+                                                   class GALGAS_bitSliceAccessMap & out_outRegisterBitSliceMap,
                                                    class GALGAS_controlRegisterFieldList & out_outControlRegisterFieldList,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;

@@ -29,7 +29,7 @@ override method @loadRegisterAddressIR llvmInstructionCode
   let scriptedRegisterAddressValueName = "%register.address." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
 #--- Needs to perm an extend to i32 ?
-  [[mIndexResult kind] integer ?min:* ?max:* ?unsigned:* ?bitCount:let bitCount]
+  [[mIndexResult kind] integer ?min:* ?max:* ?unsigned:* ?bitCount:let bitCount ?1*]
   if bitCount < 32 then
     ioLLVMcode += "  " + registerIndexName + " = zext " + [mIndexResult  llvmTypeName]
                + " " + [mIndexResult llvmName] + " to i32\n"

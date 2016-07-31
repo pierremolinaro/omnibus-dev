@@ -4740,7 +4740,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                                       const class GALGAS_bool & inOperand2,
                                                                       const class GALGAS_bool & inOperand3,
                                                                       const class GALGAS_bigint & inOperand4,
-                                                                      const class GALGAS_controlRegisterBitSliceAccessMap & inOperand5,
+                                                                      const class GALGAS_bitSliceAccessMap & inOperand5,
                                                                       const class GALGAS_uint & inOperand6,
                                                                       const class GALGAS_uint & inOperand7
                                                                       COMMA_LOCATION_ARGS) ;
@@ -4785,7 +4785,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                   class GALGAS_bool & outArgument2,
                                                   class GALGAS_bool & outArgument3,
                                                   class GALGAS_bigint & outArgument4,
-                                                  class GALGAS_controlRegisterBitSliceAccessMap & outArgument5,
+                                                  class GALGAS_bitSliceAccessMap & outArgument5,
                                                   class GALGAS_uint & outArgument6,
                                                   class GALGAS_uint & outArgument7,
                                                   C_Compiler * inCompiler

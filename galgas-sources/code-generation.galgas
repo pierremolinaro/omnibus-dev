@@ -493,7 +493,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     switch kind
     case boolean :
     case enumeration (*) :
-    case integer (* * * *) :
+    case integer (* * * * *) :
     case structure (* * propertyList) :
       ioLLVMcode += llvmTypeName + " = type {"
       for () in propertyList

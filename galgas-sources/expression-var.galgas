@@ -212,7 +212,7 @@ method @varInExpressionAST analyzeExpression_register
     ?readable:let readable
     ?writable:let writable
     ?address:let @bigint registerAddress
-    ?sliceMap:@controlRegisterBitSliceAccessMap registerBitSliceMap
+    ?sliceMap:@bitSliceAccessMap registerBitSliceMap
     ?arraySize:let @uint arraySize # 0 if not an array
     ?elementSize:let @uint elementArraySize # 0 if not an array
   ]
