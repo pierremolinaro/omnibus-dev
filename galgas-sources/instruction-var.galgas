@@ -117,11 +117,11 @@ override method @varInstructionWithAssignmentAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@operandIR expressionResult
+    ?result:@valueIR expressionResult
   ]
 #--- Check type compatibility
   if targetType == .null then
-    targetType = expressionResult.mType
+    targetType = [expressionResult type]
   end
   let result = checkAssignmentCompatibility (
     !source:expressionResult
@@ -133,20 +133,20 @@ override method @varInstructionWithAssignmentAST analyze
 #--- Declare local variable
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
-  let targetVar = @objectInMemoryIR.localVariable {!type:result.mType !name:varLLVMName}
+  let targetVar = @objectInMemoryIR.localVariable {!type:[result type] !name:varLLVMName}
   [!?ioVariableMap insertDefinedVariable
     !lkey:mVarName
-    !type:result.mType
+    !type:[result type]
     !readAccessAllowed:true
     !variableKind:targetVar
-    !copyable:[result.mType copyable]
+    !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
   ]
 #--- Code generation
-  ioAllocaList += !varLLVMName !result.mType
+  ioAllocaList += !varLLVMName ![result type]
   [!?ioInstructionGenerationList appendStoreLocalVariable
     !varLLVMName
-    !result.mType
+    ![result type]
     !result
   ]
 }

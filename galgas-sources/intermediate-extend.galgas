@@ -1,7 +1,7 @@
 
 setter @instructionListIR appendExtend
-  ?let @operandIR inResult
-  ?let @operandIR inSource
+  ?let @valueIR inResult
+  ?let @valueIR inSource
 {
   self += !@extendIR.new {!inResult !inSource}
 }
@@ -9,8 +9,8 @@ setter @instructionListIR appendExtend
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @extendIR : @abstractInstructionIR {
-  @operandIR mResult
-  @operandIR mSource
+  @valueIR mResult
+  @valueIR mSource
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -20,10 +20,10 @@ override method @extendIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult.mValue llvmName] + " = "
-  [[mSource.mType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
+  ioLLVMcode += "  " + [mResult llvmName] + " = "
+  [[mSource kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
   ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
-  ioLLVMcode += " " + [mSource.mType  llvmTypeName] + " " + [mSource.mValue llvmName] + " to " + [mResult.mType llvmTypeName] + "\n"
+  ioLLVMcode += " " + [mSource  llvmTypeName] + " " + [mSource llvmName] + " to " + [mResult llvmTypeName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

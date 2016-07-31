@@ -73,7 +73,7 @@ override method @typedConstantCall analyzeExpression
   ?!namedObjectMap:@namedObjectMap unused ioNamedObjectMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Analyze constructor source type
   @unifiedTypeMap-proxy inferredResultType

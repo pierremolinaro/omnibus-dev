@@ -91,7 +91,7 @@ override method @letInstructionWithAssignmentAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @operandIR expressionResult
+    ?result:let @valueIR expressionResult
   ]
 #--- Declare local constant
   var result = checkAssignmentCompatibility (
@@ -102,26 +102,26 @@ override method @letInstructionWithAssignmentAST analyze
   )
   drop targetType
 #---
-  if not [result.mType instantiable] then
-    error mVarName : "$" + [result.mType key] + " type is not instanciable" : result
+  if not [[result type] instantiable] then
+    error mVarName : "$" + [result key] + " type is not instanciable" : result
   end
 #--- Declare local constant
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
   @objectInMemoryIR localConstant
-  if [result.mType key] == staticIntegerTypeName () then
+  if [result key] == staticIntegerTypeName () then
     localConstant = .staticConstant {!value:expressionResult !name:varLLVMName}
   else
-    localConstant = .localVariable {!type:result.mType !name:varLLVMName}
-    ioAllocaList += !varLLVMName !result.mType
+    localConstant = .localVariable {!type:[result type] !name:varLLVMName}
+    ioAllocaList += !varLLVMName ![result type]
     [!?ioInstructionGenerationList appendStoreInMemory !localConstant !result]
   end
   [!?ioVariableMap insertConstant
     !lkey:mVarName
-    !type:result.mType
+    !type:[result type]
     !readAccessAllowed:true
     !variableKind:localConstant
-    !copyable:[result.mType copyable]
+    !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
   ]
 }

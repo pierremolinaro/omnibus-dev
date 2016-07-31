@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadGlobalVariable
-  ?let @operandIR inTargetValue
+  ?let @valueIR inTargetValue
   ?let @string inRegisterName
   ?volatile:@bool inIsVolatile
 {
@@ -10,7 +10,7 @@ setter @instructionListIR appendLoadGlobalVariable
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadGlobalVariableIR : @abstractInstructionIR {
-  @operandIR mTargetValue
+  @valueIR mTargetValue
   @string mVariableName
   @bool mIsVolatile
 }
@@ -22,8 +22,8 @@ override method @loadGlobalVariableIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetValue.mType llvmTypeName]
-  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load "
+  let llvmType = [mTargetValue llvmTypeName]
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
   if mIsVolatile then
     ioLLVMcode += "volatile "
   end

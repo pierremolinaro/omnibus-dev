@@ -79,7 +79,7 @@ override method @constructorCall analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Analyze constructor source type
   @unifiedTypeMap-proxy resultType
@@ -94,12 +94,12 @@ override method @constructorCall analyzeExpression
     [inContext.mConstructorMap searchKey ![[resultType key] nowhere] ?let initValue]
     switch initValue
     case zero :
-      outResult = .new {!resultType !.zero {!type: resultType}}
+      outResult = .zero {!type: resultType}
     case simple (value) :
       if [mParameterList length] != 0 then
         error mErrorLocation : "$" + [resultType key] + " constructor should have no parameter" : outResult
       else
-        outResult = .new {!resultType !.literalInteger {!value:value}}
+        outResult = .literalInteger {!type: resultType !value:value}
       end
     case structure (constructorSignature sortedOperandList) :
       var sortedOperandIRList = sortedOperandList
@@ -129,7 +129,7 @@ override method @constructorCall analyzeExpression
             !?namedObjectMap: ioNamedObjectMap
             !?alloca:ioAllocaList
             !?instructionListIR:ioInstructionGenerationList
-            ?result:let @operandIR expressionResult
+            ?result:let @valueIR expressionResult
           ]
           let result = checkAssignmentCompatibility (
             !source:expressionResult
@@ -143,7 +143,7 @@ override method @constructorCall analyzeExpression
         for (initialValue *) in sortedOperandIRList do
           initialValueList += !initialValue
         end
-        outResult = .new {!resultType !.llvmStructureConstant {!type: resultType !values:initialValueList}}
+        outResult = .llvmStructureConstant {!type: resultType !values:initialValueList}
       end
     end
   end

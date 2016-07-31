@@ -67,7 +67,7 @@ override method @truncateExpressionAST analyzeExpression
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowPanic:let @bool inAllowPanic
@@ -78,7 +78,7 @@ override method @truncateExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -86,7 +86,7 @@ override method @truncateExpressionAST analyzeExpression
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:inOptionalTargetType
+    !optionalTargetType:.null
     !context:inContext
     !modes:inModeSet
     !allowPanic:inAllowPanic
@@ -97,17 +97,17 @@ override method @truncateExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@operandIR expressionResult
+    ?result:@valueIR expressionResult
   ]
 #--- Analyze type
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
 #--- Check types
   if not [[resultType kind] isInteger] then
     error mTypeName : "this type is not an integer type" : outResult
-  elsif not [[expressionResult.mType kind] isInteger] then
+  elsif not [[expressionResult kind] isInteger] then
     error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-    [[expressionResult.mType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:let expSize]
+    [[expressionResult kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:let expSize]
     [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
@@ -120,7 +120,7 @@ override method @truncateExpressionAST analyzeExpression
         !expressionResult
       }
     else
-      outResult = .new {!resultType !expressionResult.mValue}
+      outResult = [expressionResult withType !resultType]
     end
   end
 }
@@ -132,8 +132,8 @@ override method @truncateExpressionAST analyzeExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @truncateInstructionIR : @abstractInstructionIR {
-  @operandIR mTarget
-  @operandIR mOperand
+  @valueIR mTarget
+  @valueIR mOperand
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -151,9 +151,9 @@ override method @truncateInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let operandType = [mOperand.mType llvmTypeName]
-  ioLLVMcode += "  " + [mTarget.mValue llvmName] + " = trunc " + operandType + " " + [mOperand.mValue llvmName]
-     + " to " + [mTarget.mType llvmTypeName] + "\n"
+  let operandType = [mOperand llvmTypeName]
+  ioLLVMcode += "  " + [mTarget llvmName] + " = trunc " + operandType + " " + [mOperand llvmName]
+     + " to " + [mTarget llvmTypeName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

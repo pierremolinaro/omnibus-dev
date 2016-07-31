@@ -63,7 +63,7 @@ override method @selfVarInExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
   if not inDirectAccessToPropertiesAllowed then
     error mSelfLocation : "for accessing properties, the function should be declared with @" + userAccessAttribute () + " attribute"

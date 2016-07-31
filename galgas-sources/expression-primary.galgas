@@ -1,0 +1,256 @@
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @primaryInExpressionSelfAccessAST {
+  case noSelfAccess
+  case selfAccess (@location selfLocation)
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @primaryInExpressionAccessAST {
+  case property (@lstring name)
+  case arrayAccess (@expressionAST index @location endOfIndex)
+  case funcCall (@effectiveParameterListAST arguments)
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @primaryInExpressionAccessListAST {
+  @primaryInExpressionAccessAST mAccess
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @primaryInExpressionAST : @expressionAST {
+  @primaryInExpressionSelfAccessAST mSelfAccess 
+  @lstring mObjectName
+  @primaryInExpressionAccessListAST mAccessList
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <primary> !@expressionAST outExpression {
+    $azerty$
+  #--- Self ?
+    @primaryInExpressionSelfAccessAST selfAccess
+    select
+      selfAccess = .noSelfAccess
+    or
+      $self$
+      selfAccess = .selfAccess {!selfLocation:.here}
+      $.$
+    end
+  #--- Object
+    $identifier$ ?let objectName
+  #--- Properties and access
+    @primaryInExpressionAccessListAST accessListAST = {}
+    repeat
+    while
+      $.$
+      $identifier$ ?let propertyName
+      accessListAST += !.property {!name:propertyName}
+    while
+      $[$
+      <expression> ?let expression
+      let endOfIndex = @location.here
+      $]$
+      accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+    while
+      <effective_parameters> ?let arguments
+      accessListAST += !.funcCall {!arguments:arguments}
+    end
+  #--- AST
+    outExpression = @primaryInExpressionAST.new {!selfAccess !objectName !accessListAST}
+  }
+
+  #·····················································································································
+
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
+  ?let @lstring inConstantName
+  ?!@semanticTypePrecedenceGraph ioGraph
+{
+  for (access) in mAccessList do
+    switch access
+    case property (@lstring unused name) :
+    case arrayAccess (@expressionAST indexExpression *) :
+      [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+    case funcCall (@effectiveParameterListAST arguments) :
+      for () in arguments do
+        switch mEffectiveParameterKind
+        case input (*):
+        case inputWithType (* @lstring typeName *) :
+          if typeName.string != "" then
+            [!?ioGraph noteNode !.new {!"$" + typeName !typeName.location}]
+          end
+        case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+        case outputInput (*) :
+        case outputInputSelfVariable (*) :
+        end 
+      end
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for (access) in mAccessList do
+    switch access
+    case property (@lstring unused name) :
+    case arrayAccess (@expressionAST indexExpression *) :
+      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case funcCall (@effectiveParameterListAST arguments) :
+      for () in arguments do
+        switch mEffectiveParameterKind
+        case input (*):
+        case inputWithType (* @lstring typeName *) :
+          if typeName.string != "" then
+            [!?ioGraph noteNode !.new {!"$" + typeName !typeName.location}]
+          end
+        case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+        case outputInput (*) :
+        case outputInputSelfVariable (*) :
+        end 
+      end
+    end
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @primaryInExpressionAST analyzeExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?context:let @semanticContext unused inContext
+  ?modes:let @stringset unused inModeSet
+  ?allowPanic:let @bool unused inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap unused ioVariableMap
+  ?!localVariableMap:@localVariableMap unused ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
+  ?!alloca:@allocaList unused ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@valueIR outResult
+{
+#--- object access, with ou without self
+  @objectInMemoryIR currentPointer
+  switch mSelfAccess
+  case noSelfAccess :
+    if inGuard then
+      error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer
+    else
+      [ioNamedObjectMap searchKey
+        !mObjectName
+        ?let @namedObject object
+        ?*
+      ]
+      getNewTemporaryObjectPtr (!object !?ioTemporaries ?currentPointer)
+    end
+  case selfAccess (@location selfLocation) :
+    if inSelfType == .null then
+      error selfLocation : "'self' is not available in this context" : currentPointer
+    elsif [[inSelfType kind] isStructure] then
+      [[inSelfType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+      [structureObjectMap searchKey
+        !mObjectName
+        ?let @namedObject object
+        ?let @uint index
+      ]
+      getNewTemporarySelfObjectPtr (
+        !inSelfType
+        !object
+        !mObjectName.string
+        !index
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+        ?currentPointer
+      )
+    else
+      error selfLocation : "'self' should be a structure instance" : currentPointer
+    end
+  end
+#--- Access list
+#  for (access) in mAccessList do
+#    switch access
+#    case property (@lstring propertyName) :
+#      if [[currentPointer.mType kind] isStructure] then
+#        [[currentPointer.mType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+#        [structureObjectMap searchKey
+#          !propertyName
+#          ?@namedObject object
+#          ?*
+#        ]
+#      else
+#        error propertyName : "the current object has no property" : currentPointer
+#      end
+#    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+#      if [[currentPointer.mType kind] isArrayType] then
+#        [[currentPointer.mType kind] arrayType ?elementType:@unifiedTypeMap-proxy elementType ?size:@bigint size]
+#      #  currentType = elementType
+#      else
+#        error endOfIndex : "the current object is not an array" : currentPointer
+#      end
+#    case funcCall (@effectiveParameterListAST arguments) :
+#
+#    end
+#  end
+
+#--- Load from memory  
+  [!?ioInstructionGenerationList appendLoadFromMemory
+    !?ioTemporaries
+    !currentPointer
+    ?outResult
+  ]  
+
+  
+#  if not inDirectAccessToPropertiesAllowed then
+#    error mSelfLocation : "for accessing properties, the function should be declared with @" + userAccessAttribute () + " attribute"
+#  end
+#  analyzeSelfAccess (
+#    !fieldList:mFieldList
+#    !self:inSelfType
+#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#    !inGuard:inGuard
+#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#    !optionalTargetType:.null
+#    !context:inContext
+#    !modes:inModeSet
+#    !allowPanic:inAllowPanic
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioVariableMap
+#    !?localVariableMap: ioLocalVariableMap
+#    !?namedObjectMap: ioNamedObjectMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    ?resultPtr:let @objectInMemoryIR resultPtr
+#  )
+#  if not [[resultPtr type] copyable] then
+#    error mSelfLocation : "an $" + [[resultPtr type] key] + " instance is not copyable"
+#  end
+#  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !resultPtr ?outResult]
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

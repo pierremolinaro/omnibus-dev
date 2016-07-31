@@ -2556,7 +2556,7 @@ GALGAS_staticStringMap GALGAS_staticStringMap::extractObject (const GALGAS_objec
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_globalConstantMap::cMapElement_globalConstantMap (const GALGAS_lstring & inKey,
-                                                              const GALGAS_operandIR & in_mValue
+                                                              const GALGAS_valueIR & in_mValue
                                                               COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mValue (in_mValue) {
@@ -2644,7 +2644,7 @@ GALGAS_globalConstantMap GALGAS_globalConstantMap::getter_overriddenMap (C_Compi
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_globalConstantMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                    const GALGAS_operandIR & inArgument0,
+                                                    const GALGAS_valueIR & inArgument0,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   cMapElement_globalConstantMap * p = NULL ;
@@ -2660,7 +2660,7 @@ void GALGAS_globalConstantMap::addAssign_operation (const GALGAS_lstring & inKey
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_globalConstantMap::setter_insertKey (GALGAS_lstring inKey,
-                                                 GALGAS_operandIR inArgument0,
+                                                 GALGAS_valueIR inArgument0,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
   cMapElement_globalConstantMap * p = NULL ;
@@ -2680,7 +2680,7 @@ const char * kSearchErrorMessage_globalConstantMap_searchKey = "there is no '%K'
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_globalConstantMap::method_searchKey (GALGAS_lstring inKey,
-                                                 GALGAS_operandIR & outArgument0,
+                                                 GALGAS_valueIR & outArgument0,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   const cMapElement_globalConstantMap * p = (const cMapElement_globalConstantMap *) performSearch (inKey,
@@ -2697,12 +2697,12 @@ void GALGAS_globalConstantMap::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_globalConstantMap::getter_mValueForKey (const GALGAS_string & inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
+GALGAS_valueIR GALGAS_globalConstantMap::getter_mValueForKey (const GALGAS_string & inKey,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_globalConstantMap * p = (const cMapElement_globalConstantMap *) attributes ;
-  GALGAS_operandIR result ;
+  GALGAS_valueIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_globalConstantMap) ;
     result = p->mAttribute_mValue ;
@@ -2712,7 +2712,7 @@ GALGAS_operandIR GALGAS_globalConstantMap::getter_mValueForKey (const GALGAS_str
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_globalConstantMap::setter_setMValueForKey (GALGAS_operandIR inAttributeValue,
+void GALGAS_globalConstantMap::setter_setMValueForKey (GALGAS_valueIR inAttributeValue,
                                                        GALGAS_string inKey,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
@@ -2760,7 +2760,7 @@ GALGAS_lstring cEnumerator_globalConstantMap::current_lkey (LOCATION_ARGS) const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cEnumerator_globalConstantMap::current_mValue (LOCATION_ARGS) const {
+GALGAS_valueIR cEnumerator_globalConstantMap::current_mValue (LOCATION_ARGS) const {
   const cMapElement_globalConstantMap * p = (const cMapElement_globalConstantMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_globalConstantMap) ;
   return p->mAttribute_mValue ;
@@ -4287,7 +4287,7 @@ GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::extractObject (const GALGAS_object 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_classConstantMap::cMapElement_classConstantMap (const GALGAS_lstring & inKey,
-                                                            const GALGAS_operandIR & in_mValue
+                                                            const GALGAS_valueIR & in_mValue
                                                             COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mValue (in_mValue) {
@@ -4375,7 +4375,7 @@ GALGAS_classConstantMap GALGAS_classConstantMap::getter_overriddenMap (C_Compile
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_classConstantMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                   const GALGAS_operandIR & inArgument0,
+                                                   const GALGAS_valueIR & inArgument0,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   cMapElement_classConstantMap * p = NULL ;
@@ -4391,7 +4391,7 @@ void GALGAS_classConstantMap::addAssign_operation (const GALGAS_lstring & inKey,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_classConstantMap::setter_insertKey (GALGAS_lstring inKey,
-                                                GALGAS_operandIR inArgument0,
+                                                GALGAS_valueIR inArgument0,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) {
   cMapElement_classConstantMap * p = NULL ;
@@ -4411,7 +4411,7 @@ const char * kSearchErrorMessage_classConstantMap_searchKey = "there is no '%K' 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_classConstantMap::method_searchKey (GALGAS_lstring inKey,
-                                                GALGAS_operandIR & outArgument0,
+                                                GALGAS_valueIR & outArgument0,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   const cMapElement_classConstantMap * p = (const cMapElement_classConstantMap *) performSearch (inKey,
@@ -4428,12 +4428,12 @@ void GALGAS_classConstantMap::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_classConstantMap::getter_mValueForKey (const GALGAS_string & inKey,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const {
+GALGAS_valueIR GALGAS_classConstantMap::getter_mValueForKey (const GALGAS_string & inKey,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_classConstantMap * p = (const cMapElement_classConstantMap *) attributes ;
-  GALGAS_operandIR result ;
+  GALGAS_valueIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_classConstantMap) ;
     result = p->mAttribute_mValue ;
@@ -4443,7 +4443,7 @@ GALGAS_operandIR GALGAS_classConstantMap::getter_mValueForKey (const GALGAS_stri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_classConstantMap::setter_setMValueForKey (GALGAS_operandIR inAttributeValue,
+void GALGAS_classConstantMap::setter_setMValueForKey (GALGAS_valueIR inAttributeValue,
                                                       GALGAS_string inKey,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
@@ -4491,7 +4491,7 @@ GALGAS_lstring cEnumerator_classConstantMap::current_lkey (LOCATION_ARGS) const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cEnumerator_classConstantMap::current_mValue (LOCATION_ARGS) const {
+GALGAS_valueIR cEnumerator_classConstantMap::current_mValue (LOCATION_ARGS) const {
   const cMapElement_classConstantMap * p = (const cMapElement_classConstantMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_classConstantMap) ;
   return p->mAttribute_mValue ;
@@ -4552,7 +4552,7 @@ class cCollectionElement_operandList : public cCollectionElement {
   public : GALGAS_operandList_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_operandList (const GALGAS_operandIR & in_mOperand
+  public : cCollectionElement_operandList (const GALGAS_valueIR & in_mOperand
                                            COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -4570,7 +4570,7 @@ class cCollectionElement_operandList : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_operandList::cCollectionElement_operandList (const GALGAS_operandIR & in_mOperand
+cCollectionElement_operandList::cCollectionElement_operandList (const GALGAS_valueIR & in_mOperand
                                                                 COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mOperand) {
@@ -4632,7 +4632,7 @@ GALGAS_operandList GALGAS_operandList::constructor_emptyList (LOCATION_ARGS) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandList GALGAS_operandList::constructor_listWithValue (const GALGAS_operandIR & inOperand0
+GALGAS_operandList GALGAS_operandList::constructor_listWithValue (const GALGAS_valueIR & inOperand0
                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_operandList result ;
   if (inOperand0.isValid ()) {
@@ -4647,7 +4647,7 @@ GALGAS_operandList GALGAS_operandList::constructor_listWithValue (const GALGAS_o
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandList::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                    const GALGAS_operandIR & in_mOperand
+                                                    const GALGAS_valueIR & in_mOperand
                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement_operandList * p = NULL ;
   macroMyNew (p, cCollectionElement_operandList (in_mOperand COMMA_THERE)) ;
@@ -4657,7 +4657,7 @@ void GALGAS_operandList::makeAttributesFromObjects (capCollectionElement & outAt
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandList::addAssign_operation (const GALGAS_operandIR & inOperand0
+void GALGAS_operandList::addAssign_operation (const GALGAS_valueIR & inOperand0
                                               COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid ()) {
     cCollectionElement * p = NULL ;
@@ -4671,7 +4671,7 @@ void GALGAS_operandList::addAssign_operation (const GALGAS_operandIR & inOperand
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandList::setter_insertAtIndex (const GALGAS_operandIR inOperand0,
+void GALGAS_operandList::setter_insertAtIndex (const GALGAS_valueIR inOperand0,
                                                const GALGAS_uint inInsertionIndex,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) {
@@ -4687,7 +4687,7 @@ void GALGAS_operandList::setter_insertAtIndex (const GALGAS_operandIR inOperand0
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandList::setter_removeAtIndex (GALGAS_operandIR & outOperand0,
+void GALGAS_operandList::setter_removeAtIndex (GALGAS_valueIR & outOperand0,
                                                const GALGAS_uint inRemoveIndex,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) {
@@ -4706,7 +4706,7 @@ void GALGAS_operandList::setter_removeAtIndex (GALGAS_operandIR & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandList::setter_popFirst (GALGAS_operandIR & outOperand0,
+void GALGAS_operandList::setter_popFirst (GALGAS_valueIR & outOperand0,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -4722,7 +4722,7 @@ void GALGAS_operandList::setter_popFirst (GALGAS_operandIR & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandList::setter_popLast (GALGAS_operandIR & outOperand0,
+void GALGAS_operandList::setter_popLast (GALGAS_valueIR & outOperand0,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -4738,7 +4738,7 @@ void GALGAS_operandList::setter_popLast (GALGAS_operandIR & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandList::method_first (GALGAS_operandIR & outOperand0,
+void GALGAS_operandList::method_first (GALGAS_valueIR & outOperand0,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -4754,7 +4754,7 @@ void GALGAS_operandList::method_first (GALGAS_operandIR & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandList::method_last (GALGAS_operandIR & outOperand0,
+void GALGAS_operandList::method_last (GALGAS_valueIR & outOperand0,
                                       C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -4821,12 +4821,12 @@ void GALGAS_operandList::plusAssign_operation (const GALGAS_operandList inOperan
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_operandList::getter_mOperandAtIndex (const GALGAS_uint & inIndex,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const {
+GALGAS_valueIR GALGAS_operandList::getter_mOperandAtIndex (const GALGAS_uint & inIndex,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_operandList * p = (cCollectionElement_operandList *) attributes.ptr () ;
-  GALGAS_operandIR result ;
+  GALGAS_valueIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_operandList) ;
     result = p->mObject.mAttribute_mOperand ;
@@ -4855,7 +4855,7 @@ GALGAS_operandList_2D_element cEnumerator_operandList::current (LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cEnumerator_operandList::current_mOperand (LOCATION_ARGS) const {
+GALGAS_valueIR cEnumerator_operandList::current_mOperand (LOCATION_ARGS) const {
   const cCollectionElement_operandList * p = (const cCollectionElement_operandList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_operandList) ;
   return p->mObject.mAttribute_mOperand ;

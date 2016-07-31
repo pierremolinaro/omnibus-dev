@@ -134,12 +134,12 @@ override method @typeArrayDeclaration enterInContext
     !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
-    ?result:@operandIR sizeExpressionIR
+    ?result:@valueIR sizeExpressionIR
   ]
-  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR.mValue isLiteralInteger] then
+  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
     error mSizeExpressionLocation : "array size expression is not static"
   else
-    [sizeExpressionIR.mValue literalInteger ?value:let arraySize]
+    [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
     let elementType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName}
   #--- Class method map : add "size" method
     @classConstantMap classConstantMap = {}

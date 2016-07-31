@@ -78,7 +78,7 @@ override method @convertExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -97,7 +97,7 @@ override method @convertExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@operandIR expressionResult
+    ?result:@valueIR expressionResult
   ]
 #--- 
   if not inAllowPanic then
@@ -108,10 +108,10 @@ override method @convertExpressionAST analyzeExpression
 #--- Check types
   if not [[resultType kind] isInteger] then
     error mTypeName : "this type is not an integer type" : outResult
-  elsif not [[expressionResult.mType kind] isInteger] then
+  elsif not [[expressionResult kind] isInteger] then
     error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-    [[expressionResult.mType kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
+    [[expressionResult kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:*]
     [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
@@ -140,8 +140,8 @@ override method @convertExpressionAST analyzeExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @convertInstructionIR : @abstractInstructionIR {
-  @operandIR mTarget
-  @operandIR mOperand
+  @valueIR mTarget
+  @valueIR mOperand
   @location mLocation
 }
 
@@ -170,19 +170,19 @@ override method @convertInstructionIR llvmInstructionCode
   let convertFailLabel  = "fail." + lbl
   let compareMinVar     = "cmp." + lbl + ".min"
   let compareMaxVar     = "cmp." + lbl + ".max"
-  [[mTarget.mType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
-  [[mOperand.mType kind] integer ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?bitCount:*]
-  let operandType = [mOperand.mType llvmTypeName]
+  [[mTarget kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+  [[mOperand kind] integer ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?bitCount:*]
+  let operandType = [mOperand llvmTypeName]
   if minTarget != minSource then
     ioLLVMcode += "  %" + compareMinVar + " = icmp "
     ioLLVMcode += if operandIsUnsigned then "uge" else "sge" end
-    ioLLVMcode += " " + operandType + " " + [mOperand.mValue llvmName] + ", " + minTarget + "\n"
+    ioLLVMcode += " " + operandType + " " + [mOperand llvmName] + ", " + minTarget + "\n"
     ioLLVMcode += "  br i1 %" + compareMinVar + ", label %" + convertMinOkLabel + ", label %" + convertFailLabel + "\n\n"
     ioLLVMcode += convertMinOkLabel + ":\n"
   end
   ioLLVMcode += "  %" + compareMaxVar + " = icmp "
   ioLLVMcode += if operandIsUnsigned then "ule" else "sle" end
-  ioLLVMcode += " " + operandType + " " + [mOperand.mValue llvmName] + ", " + maxTarget + "\n"
+  ioLLVMcode += " " + operandType + " " + [mOperand llvmName] + ", " + maxTarget + "\n"
   ioLLVMcode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
   ioLLVMcode += convertFailLabel + ":\n"
   ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
@@ -190,7 +190,7 @@ override method @convertInstructionIR llvmInstructionCode
   ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForConvertOverflow () + ") ; File '" + [[mLocation file] lastPathComponent] + "'\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += convertMaxOkLabel + ":\n"
-  ioLLVMcode += "  " + [mTarget.mValue llvmName] + " = trunc " + operandType + " " + [mOperand.mValue llvmName] + " to " + [mTarget.mType llvmTypeName] + "\n"
+  ioLLVMcode += "  " + [mTarget llvmName] + " = trunc " + operandType + " " + [mOperand llvmName] + " to " + [mTarget llvmTypeName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

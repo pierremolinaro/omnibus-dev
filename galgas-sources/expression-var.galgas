@@ -102,7 +102,7 @@ override method @varInExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Search variable, constant, register
   [!?ioVariableMap searchForReadAccess
@@ -196,7 +196,7 @@ method @varInExpressionAST analyzeExpression_register
   ?variableKind:let @objectInMemoryIR inVariableKind
   ?error:let @location inErrorLocation
   ?!@unifiedTypeMap-proxy ioType
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Solve inferred type
   var expressionType = solveInferredType (
@@ -237,10 +237,10 @@ method @varInExpressionAST analyzeExpression_register
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
-        ?result:let @operandIR indexResult
+        ?result:let @valueIR indexResult
       ]
-      if [indexResult.mValue isLiteralInteger] then # Static expression
-        [indexResult.mValue literalInteger ?value:let @bigint indexValue]
+      if [indexResult isLiteralInteger] then # Static expression
+        [indexResult literalInteger ?1* ?value:let @bigint indexValue]
         if (indexValue < 0G) || (indexValue >= arraySize) then
           error endOfExp : "static index should be positive and < " + arraySize : outResult
         else
@@ -258,7 +258,7 @@ method @varInExpressionAST analyzeExpression_register
             ?outResult
           ]
         end
-      elsif [[indexResult.mType kind] isInteger] then
+      elsif [[indexResult kind] isInteger] then
         if not [option plm_options.noPanicGeneration value] then
           [!?ioInstructionGenerationList testArrayIndex !indexResult !endOfExp !arraySize ?let generatePanicInstruction]
           if generatePanicInstruction && not inAllowPanic then
@@ -297,12 +297,12 @@ method @varInExpressionAST analyzeExpression_register
     #--- Temp var
       getNewTempVariable (!newResultType !?ioTemporaries ?let newResultingVariable)
       [!?ioInstructionGenerationList appendBinaryOperation
-        !newResultingVariable.mValue
-        !outResult.mType
+        !newResultingVariable
+        ![outResult type]
         !mSourceVarName.location
-        !outResult.mValue
+        !outResult
         !accessOperator
-        !.literalInteger {!value:accessRightOperand}
+        !.literalInteger {!type: inContext.mLiteralIntegerType !value:accessRightOperand}
       ]
       outResult = newResultingVariable 
       registerBitSliceMap = submap
@@ -332,7 +332,7 @@ method @varInExpressionAST analyzeExpression_otherKind
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableKind:let @objectInMemoryIR inVariableKind
   ?!@unifiedTypeMap-proxy ioType
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Array element access ?
   @elementPtrList elementPtrList = {}
@@ -424,23 +424,23 @@ proc analyzeVarInExpressionElementAccess
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
-        ?result:let @operandIR indexResult
+        ?result:let @valueIR indexResult
       ]
-      if [indexResult.mValue isLiteralInteger] then
-        [indexResult.mValue literalInteger ?value:let @bigint indexValue]
+      if [indexResult isLiteralInteger] then
+        [indexResult literalInteger ?1* ?value:let @bigint indexValue]
         if (indexValue < 0G) || (indexValue >= arraySize) then
           error endOfExp : "static index should be positive and < " + arraySize : ioElementPtrList
         else
           ioElementPtrList += {!.absolute {!index:[indexValue uint]} !"[" + indexValue + "]"}
         end
-      elsif [[indexResult.mType kind] isInteger] then
+      elsif [[indexResult kind] isInteger] then
         if not [option plm_options.noPanicGeneration value] then
           [!?ioInstructionGenerationList testArrayIndex !indexResult !endOfExp !arraySize ?let generatePanicInstruction]
           if generatePanicInstruction && not inAllowPanic then
             error endOfExp : "index computation can generated panic" : ioElementPtrList
           end
         end
-        let name = [indexResult.mValue name]
+        let name = [indexResult name]
         ioElementPtrList += {!.indirect {!index:indexResult} !"[" + name + "]"}
       else
         error endOfExp : "index expression is not an integer" : ioElementPtrList

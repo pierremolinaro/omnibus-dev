@@ -238,11 +238,11 @@ override method @syncInstructionAST analyze
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
-        ?result:@operandIR sourceOperand
+        ?result:@valueIR sourceOperand
       ]
-      if [sourceOperand.mType key] != boolTypeName () then
+      if [sourceOperand key] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
-      elsif [sourceOperand.mValue isStatic] then
+      elsif [sourceOperand isStatic] then
         warning endOfExpression : "guarded expression is static"
       end
       guardedCommandIR = .booleanGuard {
@@ -268,11 +268,11 @@ override method @syncInstructionAST analyze
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:boolExpInstructionGenerationList
-        ?result:let @operandIR boolExpressionResult
+        ?result:let @valueIR boolExpressionResult
       ]
-      if [boolExpressionResult.mType key] != boolTypeName () then
+      if [boolExpressionResult key] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
-      elsif [boolExpressionResult.mValue isStatic] then
+      elsif [boolExpressionResult isStatic] then
         warning endOfExpression : "guarded expression is static"
       end
      @instructionListIR guardInstructionGenerationList = {}
@@ -433,11 +433,11 @@ enum @guardedCommandIR {
 
   case booleanGuard (@bool isWhileCommand # if false, it is an "until" command
                      @instructionListIR instructionGenerationList
-                     @operandIR result)
+                     @valueIR result)
 
   case boolAndSync (@bool isWhileCommand # if false, it is an "until" command
                     @instructionListIR boolExpInstructionGenerationList
-                    @operandIR boolExpResult
+                    @valueIR boolExpResult
                     @string guardMangledName
                     @string globalVarName # "" if not global var
                     @instructionListIR guardInstructionGenerationList
@@ -488,33 +488,33 @@ override method @syncInstructionIR llvmInstructionCode
       for () in effectiveParameterListIR do
         switch mEffectiveParameterPassingMode
         case input:
-          ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
+          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
         case output:
-          ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
+          ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
         case outputInput:
-          ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
+          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
         end
       between
         ioLLVMcode += ", "
       end
       ioLLVMcode += ")\n"
-    case booleanGuard (isWhileCommand instructionGenerationList @operandIR result) :
+    case booleanGuard (isWhileCommand instructionGenerationList @valueIR result) :
       isWhileGuardedCommand = isWhileCommand
       [instructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let acceptedLabelName = startLabel + "." + idx + ".true"
       let rejectedLabelName = startLabel + "." + idx + ".false"
-      ioLLVMcode += "  br i1 " + [result.mValue llvmName] + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
+      ioLLVMcode += "  br i1 " + [result llvmName] + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
       ioLLVMcode += acceptedLabelName + ":\n"
       ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
       ioLLVMcode += "  br label %" + rejectedLabelName + "\n\n"
       ioLLVMcode += rejectedLabelName + ":\n"
-      ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + [result.mValue llvmName] + ", 0 ; assignment\n"
+      ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + [result llvmName] + ", 0 ; assignment\n"
     case boolAndSync (isWhileCommand expInstructionList expResult guardMangledName * guardInstructionList effectiveParameterList) :
       isWhileGuardedCommand = isWhileCommand
       [expInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let testOkLabelName = startLabel + "." + idx + ".boolexp.true"
       let testExitLabelName = startLabel + "." + idx + ".test.exit"
-      ioLLVMcode += "  br i1 " + [expResult.mValue llvmName] + ", label %" + testOkLabelName + ", label %" + testExitLabelName + "\n\n"
+      ioLLVMcode += "  br i1 " + [expResult llvmName] + ", label %" + testOkLabelName + ", label %" + testExitLabelName + "\n\n"
       ioLLVMcode += testOkLabelName + ":\n"
       [guardInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let guardAcceptationLabelName = startLabel + "." + idx + ".guard.acceptation"
@@ -523,11 +523,11 @@ override method @syncInstructionIR llvmInstructionCode
       for () in effectiveParameterList do
         switch mEffectiveParameterPassingMode
         case input:
-          ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
+          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
         case output:
-          ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
+          ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
         case outputInput:
-          ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
+          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
         end
       between
         ioLLVMcode += ", "

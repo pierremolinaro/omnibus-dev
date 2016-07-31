@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadStructureConstant
-  ?let @operandIR inTargetValue
+  ?let @valueIR inTargetValue
   ?let @string inTypeName
 {
   self += !@loadStructureConstantIR.new {!inTargetValue !inTypeName}
@@ -9,7 +9,7 @@ setter @instructionListIR appendLoadStructureConstant
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadStructureConstantIR : @abstractInstructionIR {
-  @operandIR mTargetValue
+  @valueIR mTargetValue
   @string mTypeName
 }
 
@@ -20,8 +20,8 @@ override method @loadStructureConstantIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetValue.mType llvmTypeName]
-  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load "
+  let llvmType = [mTargetValue llvmTypeName]
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
   ioLLVMcode += llvmType + ", " + llvmType + " * @" + mTypeName + ".init\n"
 }
 

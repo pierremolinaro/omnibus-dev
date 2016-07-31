@@ -4467,7 +4467,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_assertInstructionIR GALGAS_assertInstructionIR::constructor_new (const GALGAS_location & inAttribute_mAssertInstructionLocation,
                                                                         const GALGAS_instructionListIR & inAttribute_mInstructionList,
-                                                                        const GALGAS_operandIR & inAttribute_mExpressionValue
+                                                                        const GALGAS_valueIR & inAttribute_mExpressionValue
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_assertInstructionIR result ;
   if (inAttribute_mAssertInstructionLocation.isValid () && inAttribute_mInstructionList.isValid () && inAttribute_mExpressionValue.isValid ()) {
@@ -4514,8 +4514,8 @@ GALGAS_instructionListIR cPtr_assertInstructionIR::getter_mInstructionList (UNUS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_assertInstructionIR::getter_mExpressionValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_assertInstructionIR::getter_mExpressionValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_assertInstructionIR * p = (const cPtr_assertInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_assertInstructionIR) ;
@@ -4526,7 +4526,7 @@ GALGAS_operandIR GALGAS_assertInstructionIR::getter_mExpressionValue (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_assertInstructionIR::getter_mExpressionValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_assertInstructionIR::getter_mExpressionValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpressionValue ;
 }
 
@@ -4536,7 +4536,7 @@ GALGAS_operandIR cPtr_assertInstructionIR::getter_mExpressionValue (UNUSED_LOCAT
 
 cPtr_assertInstructionIR::cPtr_assertInstructionIR (const GALGAS_location & in_mAssertInstructionLocation,
                                                     const GALGAS_instructionListIR & in_mInstructionList,
-                                                    const GALGAS_operandIR & in_mExpressionValue
+                                                    const GALGAS_valueIR & in_mExpressionValue
                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mAssertInstructionLocation (in_mAssertInstructionLocation),
@@ -4947,8 +4947,8 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_convertInstructionIR GALGAS_convertInstructionIR::constructor_new (const GALGAS_operandIR & inAttribute_mTarget,
-                                                                          const GALGAS_operandIR & inAttribute_mOperand,
+GALGAS_convertInstructionIR GALGAS_convertInstructionIR::constructor_new (const GALGAS_valueIR & inAttribute_mTarget,
+                                                                          const GALGAS_valueIR & inAttribute_mOperand,
                                                                           const GALGAS_location & inAttribute_mLocation
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_convertInstructionIR result ;
@@ -4960,8 +4960,8 @@ GALGAS_convertInstructionIR GALGAS_convertInstructionIR::constructor_new (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_convertInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_convertInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_convertInstructionIR * p = (const cPtr_convertInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_convertInstructionIR) ;
@@ -4972,14 +4972,14 @@ GALGAS_operandIR GALGAS_convertInstructionIR::getter_mTarget (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_convertInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_convertInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_convertInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_convertInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_convertInstructionIR * p = (const cPtr_convertInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_convertInstructionIR) ;
@@ -4990,7 +4990,7 @@ GALGAS_operandIR GALGAS_convertInstructionIR::getter_mOperand (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_convertInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_convertInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperand ;
 }
 
@@ -5016,8 +5016,8 @@ GALGAS_location cPtr_convertInstructionIR::getter_mLocation (UNUSED_LOCATION_ARG
 //                                    Pointer class for @convertInstructionIR class                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_convertInstructionIR::cPtr_convertInstructionIR (const GALGAS_operandIR & in_mTarget,
-                                                      const GALGAS_operandIR & in_mOperand,
+cPtr_convertInstructionIR::cPtr_convertInstructionIR (const GALGAS_valueIR & in_mTarget,
+                                                      const GALGAS_valueIR & in_mOperand,
                                                       const GALGAS_location & in_mLocation
                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
@@ -5146,8 +5146,8 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_extendIR GALGAS_extendIR::constructor_new (const GALGAS_operandIR & inAttribute_mResult,
-                                                  const GALGAS_operandIR & inAttribute_mSource
+GALGAS_extendIR GALGAS_extendIR::constructor_new (const GALGAS_valueIR & inAttribute_mResult,
+                                                  const GALGAS_valueIR & inAttribute_mSource
                                                   COMMA_LOCATION_ARGS) {
   GALGAS_extendIR result ;
   if (inAttribute_mResult.isValid () && inAttribute_mSource.isValid ()) {
@@ -5158,8 +5158,8 @@ GALGAS_extendIR GALGAS_extendIR::constructor_new (const GALGAS_operandIR & inAtt
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_extendIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_extendIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_extendIR * p = (const cPtr_extendIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_extendIR) ;
@@ -5170,14 +5170,14 @@ GALGAS_operandIR GALGAS_extendIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_extendIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_extendIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_extendIR * p = (const cPtr_extendIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_extendIR) ;
@@ -5188,7 +5188,7 @@ GALGAS_operandIR GALGAS_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSource ;
 }
 
@@ -5196,8 +5196,8 @@ GALGAS_operandIR cPtr_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
 //                                          Pointer class for @extendIR class                                          *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_extendIR::cPtr_extendIR (const GALGAS_operandIR & in_mResult,
-                              const GALGAS_operandIR & in_mSource
+cPtr_extendIR::cPtr_extendIR (const GALGAS_valueIR & in_mResult,
+                              const GALGAS_valueIR & in_mSource
                               COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mResult (in_mResult),
@@ -5334,7 +5334,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 GALGAS_forInstructionIR GALGAS_forInstructionIR::constructor_new (const GALGAS_string & inAttribute_mVarName,
                                                                   const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mElementType,
                                                                   const GALGAS_location & inAttribute_mLocation,
-                                                                  const GALGAS_operandIR & inAttribute_mExpressionResult,
+                                                                  const GALGAS_valueIR & inAttribute_mExpressionResult,
                                                                   const GALGAS_instructionListIR & inAttribute_mInstructionList
                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_forInstructionIR result ;
@@ -5400,8 +5400,8 @@ GALGAS_location cPtr_forInstructionIR::getter_mLocation (UNUSED_LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_forInstructionIR::getter_mExpressionResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_forInstructionIR::getter_mExpressionResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionIR * p = (const cPtr_forInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forInstructionIR) ;
@@ -5412,7 +5412,7 @@ GALGAS_operandIR GALGAS_forInstructionIR::getter_mExpressionResult (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_forInstructionIR::getter_mExpressionResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_forInstructionIR::getter_mExpressionResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mExpressionResult ;
 }
 
@@ -5441,7 +5441,7 @@ GALGAS_instructionListIR cPtr_forInstructionIR::getter_mInstructionList (UNUSED_
 cPtr_forInstructionIR::cPtr_forInstructionIR (const GALGAS_string & in_mVarName,
                                               const GALGAS_unifiedTypeMap_2D_proxy & in_mElementType,
                                               const GALGAS_location & in_mLocation,
-                                              const GALGAS_operandIR & in_mExpressionResult,
+                                              const GALGAS_valueIR & in_mExpressionResult,
                                               const GALGAS_instructionListIR & in_mInstructionList
                                               COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
@@ -5595,8 +5595,8 @@ GALGAS_forLowerUpperBoundInstructionIR GALGAS_forLowerUpperBoundInstructionIR::c
                                                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mType,
                                                                                                 const GALGAS_bool & inAttribute_mUnsigned,
                                                                                                 const GALGAS_location & inAttribute_mLocation,
-                                                                                                const GALGAS_operandIR & inAttribute_mLowerExpressionResult,
-                                                                                                const GALGAS_operandIR & inAttribute_mUpperExpressionResult,
+                                                                                                const GALGAS_valueIR & inAttribute_mLowerExpressionResult,
+                                                                                                const GALGAS_valueIR & inAttribute_mUpperExpressionResult,
                                                                                                 const GALGAS_instructionListIR & inAttribute_mInstructionList
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_forLowerUpperBoundInstructionIR result ;
@@ -5680,8 +5680,8 @@ GALGAS_location cPtr_forLowerUpperBoundInstructionIR::getter_mLocation (UNUSED_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_forLowerUpperBoundInstructionIR::getter_mLowerExpressionResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_forLowerUpperBoundInstructionIR::getter_mLowerExpressionResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionIR * p = (const cPtr_forLowerUpperBoundInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionIR) ;
@@ -5692,14 +5692,14 @@ GALGAS_operandIR GALGAS_forLowerUpperBoundInstructionIR::getter_mLowerExpression
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_forLowerUpperBoundInstructionIR::getter_mLowerExpressionResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_forLowerUpperBoundInstructionIR::getter_mLowerExpressionResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLowerExpressionResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_forLowerUpperBoundInstructionIR::getter_mUpperExpressionResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_forLowerUpperBoundInstructionIR::getter_mUpperExpressionResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionIR * p = (const cPtr_forLowerUpperBoundInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionIR) ;
@@ -5710,7 +5710,7 @@ GALGAS_operandIR GALGAS_forLowerUpperBoundInstructionIR::getter_mUpperExpression
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_forLowerUpperBoundInstructionIR::getter_mUpperExpressionResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_forLowerUpperBoundInstructionIR::getter_mUpperExpressionResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mUpperExpressionResult ;
 }
 
@@ -5740,8 +5740,8 @@ cPtr_forLowerUpperBoundInstructionIR::cPtr_forLowerUpperBoundInstructionIR (cons
                                                                             const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
                                                                             const GALGAS_bool & in_mUnsigned,
                                                                             const GALGAS_location & in_mLocation,
-                                                                            const GALGAS_operandIR & in_mLowerExpressionResult,
-                                                                            const GALGAS_operandIR & in_mUpperExpressionResult,
+                                                                            const GALGAS_valueIR & in_mLowerExpressionResult,
+                                                                            const GALGAS_valueIR & in_mUpperExpressionResult,
                                                                             const GALGAS_instructionListIR & in_mInstructionList
                                                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
@@ -5894,7 +5894,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_functionCallIR GALGAS_functionCallIR::constructor_new (const GALGAS_operandIR & inAttribute_mResult,
+GALGAS_functionCallIR GALGAS_functionCallIR::constructor_new (const GALGAS_valueIR & inAttribute_mResult,
                                                               const GALGAS_lstring & inAttribute_mFunctionMangledName,
                                                               const GALGAS_lstring & inAttribute_mFunctionNameForGeneration,
                                                               const GALGAS_routineKindIR & inAttribute_mKind,
@@ -5910,8 +5910,8 @@ GALGAS_functionCallIR GALGAS_functionCallIR::constructor_new (const GALGAS_opera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_functionCallIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_functionCallIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
@@ -5922,7 +5922,7 @@ GALGAS_operandIR GALGAS_functionCallIR::getter_mResult (UNUSED_LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_functionCallIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_functionCallIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mResult ;
 }
 
@@ -6020,7 +6020,7 @@ GALGAS_bool cPtr_functionCallIR::getter_mAppendFileAndLineArgumentForPanicLocati
 //                                       Pointer class for @functionCallIR class                                       *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_functionCallIR::cPtr_functionCallIR (const GALGAS_operandIR & in_mResult,
+cPtr_functionCallIR::cPtr_functionCallIR (const GALGAS_valueIR & in_mResult,
                                           const GALGAS_lstring & in_mFunctionMangledName,
                                           const GALGAS_lstring & in_mFunctionNameForGeneration,
                                           const GALGAS_routineKindIR & in_mKind,
@@ -6572,7 +6572,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_ifInstructionIR GALGAS_ifInstructionIR::constructor_new (const GALGAS_operandIR & inAttribute_mTestVariable,
+GALGAS_ifInstructionIR GALGAS_ifInstructionIR::constructor_new (const GALGAS_valueIR & inAttribute_mTestVariable,
                                                                 const GALGAS_location & inAttribute_mLocation,
                                                                 const GALGAS_instructionListIR & inAttribute_mThenInstructionGenerationList,
                                                                 const GALGAS_instructionListIR & inAttribute_mElseInstructionGenerationList
@@ -6586,8 +6586,8 @@ GALGAS_ifInstructionIR GALGAS_ifInstructionIR::constructor_new (const GALGAS_ope
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_ifInstructionIR::getter_mTestVariable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_ifInstructionIR::getter_mTestVariable (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_ifInstructionIR * p = (const cPtr_ifInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_ifInstructionIR) ;
@@ -6598,7 +6598,7 @@ GALGAS_operandIR GALGAS_ifInstructionIR::getter_mTestVariable (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_ifInstructionIR::getter_mTestVariable (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_ifInstructionIR::getter_mTestVariable (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTestVariable ;
 }
 
@@ -6660,7 +6660,7 @@ GALGAS_instructionListIR cPtr_ifInstructionIR::getter_mElseInstructionGeneration
 //                                      Pointer class for @ifInstructionIR class                                       *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_ifInstructionIR::cPtr_ifInstructionIR (const GALGAS_operandIR & in_mTestVariable,
+cPtr_ifInstructionIR::cPtr_ifInstructionIR (const GALGAS_valueIR & in_mTestVariable,
                                             const GALGAS_location & in_mLocation,
                                             const GALGAS_instructionListIR & in_mThenInstructionGenerationList,
                                             const GALGAS_instructionListIR & in_mElseInstructionGenerationList
@@ -6797,8 +6797,8 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_leftShiftIR GALGAS_leftShiftIR::constructor_new (const GALGAS_operandIR & inAttribute_mResult,
-                                                        const GALGAS_operandIR & inAttribute_mSource,
+GALGAS_leftShiftIR GALGAS_leftShiftIR::constructor_new (const GALGAS_valueIR & inAttribute_mResult,
+                                                        const GALGAS_valueIR & inAttribute_mSource,
                                                         const GALGAS_uint & inAttribute_mShiftAmount
                                                         COMMA_LOCATION_ARGS) {
   GALGAS_leftShiftIR result ;
@@ -6810,8 +6810,8 @@ GALGAS_leftShiftIR GALGAS_leftShiftIR::constructor_new (const GALGAS_operandIR &
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_leftShiftIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_leftShiftIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_leftShiftIR * p = (const cPtr_leftShiftIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_leftShiftIR) ;
@@ -6822,14 +6822,14 @@ GALGAS_operandIR GALGAS_leftShiftIR::getter_mResult (UNUSED_LOCATION_ARGS) const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_leftShiftIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_leftShiftIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_leftShiftIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_leftShiftIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_leftShiftIR * p = (const cPtr_leftShiftIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_leftShiftIR) ;
@@ -6840,7 +6840,7 @@ GALGAS_operandIR GALGAS_leftShiftIR::getter_mSource (UNUSED_LOCATION_ARGS) const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_leftShiftIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_leftShiftIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSource ;
 }
 
@@ -6866,8 +6866,8 @@ GALGAS_uint cPtr_leftShiftIR::getter_mShiftAmount (UNUSED_LOCATION_ARGS) const {
 //                                        Pointer class for @leftShiftIR class                                         *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_leftShiftIR::cPtr_leftShiftIR (const GALGAS_operandIR & in_mResult,
-                                    const GALGAS_operandIR & in_mSource,
+cPtr_leftShiftIR::cPtr_leftShiftIR (const GALGAS_valueIR & in_mResult,
+                                    const GALGAS_valueIR & in_mSource,
                                     const GALGAS_uint & in_mShiftAmount
                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
@@ -6999,7 +6999,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_loadGlobalVariableIR GALGAS_loadGlobalVariableIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetValue,
+GALGAS_loadGlobalVariableIR GALGAS_loadGlobalVariableIR::constructor_new (const GALGAS_valueIR & inAttribute_mTargetValue,
                                                                           const GALGAS_string & inAttribute_mVariableName,
                                                                           const GALGAS_bool & inAttribute_mIsVolatile
                                                                           COMMA_LOCATION_ARGS) {
@@ -7012,8 +7012,8 @@ GALGAS_loadGlobalVariableIR GALGAS_loadGlobalVariableIR::constructor_new (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadGlobalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_loadGlobalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadGlobalVariableIR * p = (const cPtr_loadGlobalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadGlobalVariableIR) ;
@@ -7024,7 +7024,7 @@ GALGAS_operandIR GALGAS_loadGlobalVariableIR::getter_mTargetValue (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadGlobalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_loadGlobalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
@@ -7068,7 +7068,7 @@ GALGAS_bool cPtr_loadGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_ARGS)
 //                                    Pointer class for @loadGlobalVariableIR class                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_loadGlobalVariableIR::cPtr_loadGlobalVariableIR (const GALGAS_operandIR & in_mTargetValue,
+cPtr_loadGlobalVariableIR::cPtr_loadGlobalVariableIR (const GALGAS_valueIR & in_mTargetValue,
                                                       const GALGAS_string & in_mVariableName,
                                                       const GALGAS_bool & in_mIsVolatile
                                                       COMMA_LOCATION_ARGS) :
@@ -7198,7 +7198,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_loadLocalVariableIR GALGAS_loadLocalVariableIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetValue,
+GALGAS_loadLocalVariableIR GALGAS_loadLocalVariableIR::constructor_new (const GALGAS_valueIR & inAttribute_mTargetValue,
                                                                         const GALGAS_string & inAttribute_mVariableName
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_loadLocalVariableIR result ;
@@ -7210,8 +7210,8 @@ GALGAS_loadLocalVariableIR GALGAS_loadLocalVariableIR::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadLocalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_loadLocalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadLocalVariableIR * p = (const cPtr_loadLocalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadLocalVariableIR) ;
@@ -7222,7 +7222,7 @@ GALGAS_operandIR GALGAS_loadLocalVariableIR::getter_mTargetValue (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadLocalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_loadLocalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
@@ -7248,7 +7248,7 @@ GALGAS_string cPtr_loadLocalVariableIR::getter_mVariableName (UNUSED_LOCATION_AR
 //                                    Pointer class for @loadLocalVariableIR class                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_loadLocalVariableIR::cPtr_loadLocalVariableIR (const GALGAS_operandIR & in_mTargetValue,
+cPtr_loadLocalVariableIR::cPtr_loadLocalVariableIR (const GALGAS_valueIR & in_mTargetValue,
                                                     const GALGAS_string & in_mVariableName
                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
@@ -7381,7 +7381,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_loadRegisterAddressIR GALGAS_loadRegisterAddressIR::constructor_new (const GALGAS_objectInMemoryIR & inAttribute_mTargetValue,
-                                                                            const GALGAS_operandIR & inAttribute_mIndexResult,
+                                                                            const GALGAS_valueIR & inAttribute_mIndexResult,
                                                                             const GALGAS_bigint & inAttribute_mRegisterAddress,
                                                                             const GALGAS_bigint & inAttribute_mElementArraySize
                                                                             COMMA_LOCATION_ARGS) {
@@ -7412,8 +7412,8 @@ GALGAS_objectInMemoryIR cPtr_loadRegisterAddressIR::getter_mTargetValue (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadRegisterAddressIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_loadRegisterAddressIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadRegisterAddressIR * p = (const cPtr_loadRegisterAddressIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadRegisterAddressIR) ;
@@ -7424,7 +7424,7 @@ GALGAS_operandIR GALGAS_loadRegisterAddressIR::getter_mIndexResult (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadRegisterAddressIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_loadRegisterAddressIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIndexResult ;
 }
 
@@ -7469,7 +7469,7 @@ GALGAS_bigint cPtr_loadRegisterAddressIR::getter_mElementArraySize (UNUSED_LOCAT
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_loadRegisterAddressIR::cPtr_loadRegisterAddressIR (const GALGAS_objectInMemoryIR & in_mTargetValue,
-                                                        const GALGAS_operandIR & in_mIndexResult,
+                                                        const GALGAS_valueIR & in_mIndexResult,
                                                         const GALGAS_bigint & in_mRegisterAddress,
                                                         const GALGAS_bigint & in_mElementArraySize
                                                         COMMA_LOCATION_ARGS) :
@@ -7602,7 +7602,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_loadRegisterIR GALGAS_loadRegisterIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetValue,
+GALGAS_loadRegisterIR GALGAS_loadRegisterIR::constructor_new (const GALGAS_valueIR & inAttribute_mTargetValue,
                                                               const GALGAS_bigint & inAttribute_mRegisterAddress
                                                               COMMA_LOCATION_ARGS) {
   GALGAS_loadRegisterIR result ;
@@ -7614,8 +7614,8 @@ GALGAS_loadRegisterIR GALGAS_loadRegisterIR::constructor_new (const GALGAS_opera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadRegisterIR * p = (const cPtr_loadRegisterIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadRegisterIR) ;
@@ -7626,7 +7626,7 @@ GALGAS_operandIR GALGAS_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
@@ -7652,7 +7652,7 @@ GALGAS_bigint cPtr_loadRegisterIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS
 //                                       Pointer class for @loadRegisterIR class                                       *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_loadRegisterIR::cPtr_loadRegisterIR (const GALGAS_operandIR & in_mTargetValue,
+cPtr_loadRegisterIR::cPtr_loadRegisterIR (const GALGAS_valueIR & in_mTargetValue,
                                           const GALGAS_bigint & in_mRegisterAddress
                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
@@ -7784,8 +7784,8 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_loadRegisterWithSubscriptIR GALGAS_loadRegisterWithSubscriptIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetValue,
-                                                                                        const GALGAS_operandIR & inAttribute_mIndexResult,
+GALGAS_loadRegisterWithSubscriptIR GALGAS_loadRegisterWithSubscriptIR::constructor_new (const GALGAS_valueIR & inAttribute_mTargetValue,
+                                                                                        const GALGAS_valueIR & inAttribute_mIndexResult,
                                                                                         const GALGAS_bigint & inAttribute_mRegisterAddress,
                                                                                         const GALGAS_bigint & inAttribute_mElementArraySize
                                                                                         COMMA_LOCATION_ARGS) {
@@ -7798,8 +7798,8 @@ GALGAS_loadRegisterWithSubscriptIR GALGAS_loadRegisterWithSubscriptIR::construct
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadRegisterWithSubscriptIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_loadRegisterWithSubscriptIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadRegisterWithSubscriptIR * p = (const cPtr_loadRegisterWithSubscriptIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadRegisterWithSubscriptIR) ;
@@ -7810,14 +7810,14 @@ GALGAS_operandIR GALGAS_loadRegisterWithSubscriptIR::getter_mTargetValue (UNUSED
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadRegisterWithSubscriptIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_loadRegisterWithSubscriptIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadRegisterWithSubscriptIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_loadRegisterWithSubscriptIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadRegisterWithSubscriptIR * p = (const cPtr_loadRegisterWithSubscriptIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadRegisterWithSubscriptIR) ;
@@ -7828,7 +7828,7 @@ GALGAS_operandIR GALGAS_loadRegisterWithSubscriptIR::getter_mIndexResult (UNUSED
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadRegisterWithSubscriptIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_loadRegisterWithSubscriptIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIndexResult ;
 }
 
@@ -7872,8 +7872,8 @@ GALGAS_bigint cPtr_loadRegisterWithSubscriptIR::getter_mElementArraySize (UNUSED
 //                                Pointer class for @loadRegisterWithSubscriptIR class                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_loadRegisterWithSubscriptIR::cPtr_loadRegisterWithSubscriptIR (const GALGAS_operandIR & in_mTargetValue,
-                                                                    const GALGAS_operandIR & in_mIndexResult,
+cPtr_loadRegisterWithSubscriptIR::cPtr_loadRegisterWithSubscriptIR (const GALGAS_valueIR & in_mTargetValue,
+                                                                    const GALGAS_valueIR & in_mIndexResult,
                                                                     const GALGAS_bigint & in_mRegisterAddress,
                                                                     const GALGAS_bigint & in_mElementArraySize
                                                                     COMMA_LOCATION_ARGS) :
@@ -8006,7 +8006,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_loadStructureConstantIR GALGAS_loadStructureConstantIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetValue,
+GALGAS_loadStructureConstantIR GALGAS_loadStructureConstantIR::constructor_new (const GALGAS_valueIR & inAttribute_mTargetValue,
                                                                                 const GALGAS_string & inAttribute_mTypeName
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_loadStructureConstantIR result ;
@@ -8018,8 +8018,8 @@ GALGAS_loadStructureConstantIR GALGAS_loadStructureConstantIR::constructor_new (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadStructureConstantIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_loadStructureConstantIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadStructureConstantIR * p = (const cPtr_loadStructureConstantIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadStructureConstantIR) ;
@@ -8030,7 +8030,7 @@ GALGAS_operandIR GALGAS_loadStructureConstantIR::getter_mTargetValue (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadStructureConstantIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_loadStructureConstantIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
@@ -8056,7 +8056,7 @@ GALGAS_string cPtr_loadStructureConstantIR::getter_mTypeName (UNUSED_LOCATION_AR
 //                                  Pointer class for @loadStructureConstantIR class                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_loadStructureConstantIR::cPtr_loadStructureConstantIR (const GALGAS_operandIR & in_mTargetValue,
+cPtr_loadStructureConstantIR::cPtr_loadStructureConstantIR (const GALGAS_valueIR & in_mTargetValue,
                                                             const GALGAS_string & in_mTypeName
                                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
@@ -8185,7 +8185,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_loadTaskVariableIR GALGAS_loadTaskVariableIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetValue,
+GALGAS_loadTaskVariableIR GALGAS_loadTaskVariableIR::constructor_new (const GALGAS_valueIR & inAttribute_mTargetValue,
                                                                       const GALGAS_string & inAttribute_mTaskName,
                                                                       const GALGAS_string & inAttribute_mVarName
                                                                       COMMA_LOCATION_ARGS) {
@@ -8198,8 +8198,8 @@ GALGAS_loadTaskVariableIR GALGAS_loadTaskVariableIR::constructor_new (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_loadTaskVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_loadTaskVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_loadTaskVariableIR * p = (const cPtr_loadTaskVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadTaskVariableIR) ;
@@ -8210,7 +8210,7 @@ GALGAS_operandIR GALGAS_loadTaskVariableIR::getter_mTargetValue (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_loadTaskVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_loadTaskVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
@@ -8254,7 +8254,7 @@ GALGAS_string cPtr_loadTaskVariableIR::getter_mVarName (UNUSED_LOCATION_ARGS) co
 //                                     Pointer class for @loadTaskVariableIR class                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_loadTaskVariableIR::cPtr_loadTaskVariableIR (const GALGAS_operandIR & in_mTargetValue,
+cPtr_loadTaskVariableIR::cPtr_loadTaskVariableIR (const GALGAS_valueIR & in_mTargetValue,
                                                   const GALGAS_string & in_mTaskName,
                                                   const GALGAS_string & in_mVarName
                                                   COMMA_LOCATION_ARGS) :
@@ -9011,10 +9011,10 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_selectInstructionIR GALGAS_selectInstructionIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetValue,
-                                                                        const GALGAS_operandIR & inAttribute_m_5F_if_5F_variable,
-                                                                        const GALGAS_operandIR & inAttribute_m_5F_then_5F_variable,
-                                                                        const GALGAS_operandIR & inAttribute_m_5F_else_5F_variable
+GALGAS_selectInstructionIR GALGAS_selectInstructionIR::constructor_new (const GALGAS_valueIR & inAttribute_mTargetValue,
+                                                                        const GALGAS_valueIR & inAttribute_m_5F_if_5F_variable,
+                                                                        const GALGAS_valueIR & inAttribute_m_5F_then_5F_variable,
+                                                                        const GALGAS_valueIR & inAttribute_m_5F_else_5F_variable
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_selectInstructionIR result ;
   if (inAttribute_mTargetValue.isValid () && inAttribute_m_5F_if_5F_variable.isValid () && inAttribute_m_5F_then_5F_variable.isValid () && inAttribute_m_5F_else_5F_variable.isValid ()) {
@@ -9025,8 +9025,8 @@ GALGAS_selectInstructionIR GALGAS_selectInstructionIR::constructor_new (const GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_selectInstructionIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_selectInstructionIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_selectInstructionIR) ;
@@ -9037,14 +9037,14 @@ GALGAS_operandIR GALGAS_selectInstructionIR::getter_mTargetValue (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_selectInstructionIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_selectInstructionIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_selectInstructionIR::getter_m_5F_if_5F_variable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_selectInstructionIR::getter_m_5F_if_5F_variable (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_selectInstructionIR) ;
@@ -9055,14 +9055,14 @@ GALGAS_operandIR GALGAS_selectInstructionIR::getter_m_5F_if_5F_variable (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_selectInstructionIR::getter_m_5F_if_5F_variable (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_selectInstructionIR::getter_m_5F_if_5F_variable (UNUSED_LOCATION_ARGS) const {
   return mAttribute_m_5F_if_5F_variable ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_selectInstructionIR::getter_m_5F_then_5F_variable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_selectInstructionIR::getter_m_5F_then_5F_variable (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_selectInstructionIR) ;
@@ -9073,14 +9073,14 @@ GALGAS_operandIR GALGAS_selectInstructionIR::getter_m_5F_then_5F_variable (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_selectInstructionIR::getter_m_5F_then_5F_variable (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_selectInstructionIR::getter_m_5F_then_5F_variable (UNUSED_LOCATION_ARGS) const {
   return mAttribute_m_5F_then_5F_variable ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_selectInstructionIR::getter_m_5F_else_5F_variable (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_selectInstructionIR::getter_m_5F_else_5F_variable (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_selectInstructionIR) ;
@@ -9091,7 +9091,7 @@ GALGAS_operandIR GALGAS_selectInstructionIR::getter_m_5F_else_5F_variable (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_selectInstructionIR::getter_m_5F_else_5F_variable (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_selectInstructionIR::getter_m_5F_else_5F_variable (UNUSED_LOCATION_ARGS) const {
   return mAttribute_m_5F_else_5F_variable ;
 }
 
@@ -9099,10 +9099,10 @@ GALGAS_operandIR cPtr_selectInstructionIR::getter_m_5F_else_5F_variable (UNUSED_
 //                                    Pointer class for @selectInstructionIR class                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_selectInstructionIR::cPtr_selectInstructionIR (const GALGAS_operandIR & in_mTargetValue,
-                                                    const GALGAS_operandIR & in_m_5F_if_5F_variable,
-                                                    const GALGAS_operandIR & in_m_5F_then_5F_variable,
-                                                    const GALGAS_operandIR & in_m_5F_else_5F_variable
+cPtr_selectInstructionIR::cPtr_selectInstructionIR (const GALGAS_valueIR & in_mTargetValue,
+                                                    const GALGAS_valueIR & in_m_5F_if_5F_variable,
+                                                    const GALGAS_valueIR & in_m_5F_then_5F_variable,
+                                                    const GALGAS_valueIR & in_m_5F_else_5F_variable
                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTargetValue (in_mTargetValue),
@@ -9245,10 +9245,10 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR::constructor_new (const GALGAS_operandIR & inAttribute_mTargetOperand,
-                                                                                      const GALGAS_operandIR & inAttribute_mLeftOperand,
+GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR::constructor_new (const GALGAS_valueIR & inAttribute_mTargetOperand,
+                                                                                      const GALGAS_valueIR & inAttribute_mLeftOperand,
                                                                                       const GALGAS_instructionListIR & inAttribute_mLeftInstructionList,
-                                                                                      const GALGAS_operandIR & inAttribute_mRightOperand,
+                                                                                      const GALGAS_valueIR & inAttribute_mRightOperand,
                                                                                       const GALGAS_instructionListIR & inAttribute_mRightInstructionList,
                                                                                       const GALGAS_location & inAttribute_mLocation
                                                                                       COMMA_LOCATION_ARGS) {
@@ -9261,8 +9261,8 @@ GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR::constructor
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::getter_mTargetOperand (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_shortCircuitAndOperationIR::getter_mTargetOperand (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
@@ -9273,14 +9273,14 @@ GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::getter_mTargetOperand (UNUSE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_shortCircuitAndOperationIR::getter_mTargetOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_shortCircuitAndOperationIR::getter_mTargetOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTargetOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::getter_mLeftOperand (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_shortCircuitAndOperationIR::getter_mLeftOperand (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
@@ -9291,7 +9291,7 @@ GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::getter_mLeftOperand (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_shortCircuitAndOperationIR::getter_mLeftOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_shortCircuitAndOperationIR::getter_mLeftOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mLeftOperand ;
 }
 
@@ -9315,8 +9315,8 @@ GALGAS_instructionListIR cPtr_shortCircuitAndOperationIR::getter_mLeftInstructio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::getter_mRightOperand (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_shortCircuitAndOperationIR::getter_mRightOperand (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
@@ -9327,7 +9327,7 @@ GALGAS_operandIR GALGAS_shortCircuitAndOperationIR::getter_mRightOperand (UNUSED
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_shortCircuitAndOperationIR::getter_mRightOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_shortCircuitAndOperationIR::getter_mRightOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mRightOperand ;
 }
 
@@ -9371,10 +9371,10 @@ GALGAS_location cPtr_shortCircuitAndOperationIR::getter_mLocation (UNUSED_LOCATI
 //                                 Pointer class for @shortCircuitAndOperationIR class                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_shortCircuitAndOperationIR::cPtr_shortCircuitAndOperationIR (const GALGAS_operandIR & in_mTargetOperand,
-                                                                  const GALGAS_operandIR & in_mLeftOperand,
+cPtr_shortCircuitAndOperationIR::cPtr_shortCircuitAndOperationIR (const GALGAS_valueIR & in_mTargetOperand,
+                                                                  const GALGAS_valueIR & in_mLeftOperand,
                                                                   const GALGAS_instructionListIR & in_mLeftInstructionList,
-                                                                  const GALGAS_operandIR & in_mRightOperand,
+                                                                  const GALGAS_valueIR & in_mRightOperand,
                                                                   const GALGAS_instructionListIR & in_mRightInstructionList,
                                                                   const GALGAS_location & in_mLocation
                                                                   COMMA_LOCATION_ARGS) :
@@ -9678,7 +9678,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_storeGlobalVariableIR GALGAS_storeGlobalVariableIR::constructor_new (const GALGAS_string & inAttribute_mGlobalVarName,
                                                                             const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
-                                                                            const GALGAS_operandIR & inAttribute_mSourceValue,
+                                                                            const GALGAS_valueIR & inAttribute_mSourceValue,
                                                                             const GALGAS_bool & inAttribute_mIsVolatile
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_storeGlobalVariableIR result ;
@@ -9726,8 +9726,8 @@ GALGAS_unifiedTypeMap_2D_proxy cPtr_storeGlobalVariableIR::getter_mTargetVarType
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_storeGlobalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_storeGlobalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeGlobalVariableIR * p = (const cPtr_storeGlobalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeGlobalVariableIR) ;
@@ -9738,7 +9738,7 @@ GALGAS_operandIR GALGAS_storeGlobalVariableIR::getter_mSourceValue (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_storeGlobalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_storeGlobalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceValue ;
 }
 
@@ -9766,7 +9766,7 @@ GALGAS_bool cPtr_storeGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_ARGS
 
 cPtr_storeGlobalVariableIR::cPtr_storeGlobalVariableIR (const GALGAS_string & in_mGlobalVarName,
                                                         const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                                        const GALGAS_operandIR & in_mSourceValue,
+                                                        const GALGAS_valueIR & in_mSourceValue,
                                                         const GALGAS_bool & in_mIsVolatile
                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
@@ -9903,7 +9903,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_storeLocalVariableIR GALGAS_storeLocalVariableIR::constructor_new (const GALGAS_string & inAttribute_mLocalVarName,
                                                                           const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
-                                                                          const GALGAS_operandIR & inAttribute_mSourceValue
+                                                                          const GALGAS_valueIR & inAttribute_mSourceValue
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_storeLocalVariableIR result ;
   if (inAttribute_mLocalVarName.isValid () && inAttribute_mTargetVarType.isValid () && inAttribute_mSourceValue.isValid ()) {
@@ -9950,8 +9950,8 @@ GALGAS_unifiedTypeMap_2D_proxy cPtr_storeLocalVariableIR::getter_mTargetVarType 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeLocalVariableIR * p = (const cPtr_storeLocalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeLocalVariableIR) ;
@@ -9962,7 +9962,7 @@ GALGAS_operandIR GALGAS_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATI
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceValue ;
 }
 
@@ -9972,7 +9972,7 @@ GALGAS_operandIR cPtr_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATION
 
 cPtr_storeLocalVariableIR::cPtr_storeLocalVariableIR (const GALGAS_string & in_mLocalVarName,
                                                       const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                                      const GALGAS_operandIR & in_mSourceValue
+                                                      const GALGAS_valueIR & in_mSourceValue
                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mLocalVarName (in_mLocalVarName),
@@ -10109,7 +10109,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 GALGAS_storeTaskVariableIR GALGAS_storeTaskVariableIR::constructor_new (const GALGAS_string & inAttribute_mTaskName,
                                                                         const GALGAS_string & inAttribute_mVarName,
                                                                         const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
-                                                                        const GALGAS_operandIR & inAttribute_mSourceValue
+                                                                        const GALGAS_valueIR & inAttribute_mSourceValue
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_storeTaskVariableIR result ;
   if (inAttribute_mTaskName.isValid () && inAttribute_mVarName.isValid () && inAttribute_mTargetVarType.isValid () && inAttribute_mSourceValue.isValid ()) {
@@ -10174,8 +10174,8 @@ GALGAS_unifiedTypeMap_2D_proxy cPtr_storeTaskVariableIR::getter_mTargetVarType (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_storeTaskVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_storeTaskVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeTaskVariableIR * p = (const cPtr_storeTaskVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeTaskVariableIR) ;
@@ -10186,7 +10186,7 @@ GALGAS_operandIR GALGAS_storeTaskVariableIR::getter_mSourceValue (UNUSED_LOCATIO
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_storeTaskVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_storeTaskVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceValue ;
 }
 
@@ -10197,7 +10197,7 @@ GALGAS_operandIR cPtr_storeTaskVariableIR::getter_mSourceValue (UNUSED_LOCATION_
 cPtr_storeTaskVariableIR::cPtr_storeTaskVariableIR (const GALGAS_string & in_mTaskName,
                                                     const GALGAS_string & in_mVarName,
                                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
-                                                    const GALGAS_operandIR & in_mSourceValue
+                                                    const GALGAS_valueIR & in_mSourceValue
                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTaskName (in_mTaskName),
@@ -10333,7 +10333,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_storeVolatileIR GALGAS_storeVolatileIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
                                                                 const GALGAS_bigint & inAttribute_mAddress,
-                                                                const GALGAS_operandIR & inAttribute_mSourceValue
+                                                                const GALGAS_valueIR & inAttribute_mSourceValue
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_storeVolatileIR result ;
   if (inAttribute_mTargetVarType.isValid () && inAttribute_mAddress.isValid () && inAttribute_mSourceValue.isValid ()) {
@@ -10380,8 +10380,8 @@ GALGAS_bigint cPtr_storeVolatileIR::getter_mAddress (UNUSED_LOCATION_ARGS) const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeVolatileIR) ;
@@ -10392,7 +10392,7 @@ GALGAS_operandIR GALGAS_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceValue ;
 }
 
@@ -10402,7 +10402,7 @@ GALGAS_operandIR cPtr_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS
 
 cPtr_storeVolatileIR::cPtr_storeVolatileIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
                                             const GALGAS_bigint & in_mAddress,
-                                            const GALGAS_operandIR & in_mSourceValue
+                                            const GALGAS_valueIR & in_mSourceValue
                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTargetVarType (in_mTargetVarType),
@@ -10535,7 +10535,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_storeVolatileIndirectIR GALGAS_storeVolatileIndirectIR::constructor_new (const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mTargetVarType,
                                                                                 const GALGAS_string & inAttribute_mLLVMName,
-                                                                                const GALGAS_operandIR & inAttribute_mSourceValue
+                                                                                const GALGAS_valueIR & inAttribute_mSourceValue
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_storeVolatileIndirectIR result ;
   if (inAttribute_mTargetVarType.isValid () && inAttribute_mLLVMName.isValid () && inAttribute_mSourceValue.isValid ()) {
@@ -10582,8 +10582,8 @@ GALGAS_string cPtr_storeVolatileIndirectIR::getter_mLLVMName (UNUSED_LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_storeVolatileIndirectIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_storeVolatileIndirectIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_storeVolatileIndirectIR * p = (const cPtr_storeVolatileIndirectIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeVolatileIndirectIR) ;
@@ -10594,7 +10594,7 @@ GALGAS_operandIR GALGAS_storeVolatileIndirectIR::getter_mSourceValue (UNUSED_LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_storeVolatileIndirectIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_storeVolatileIndirectIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSourceValue ;
 }
 
@@ -10604,7 +10604,7 @@ GALGAS_operandIR cPtr_storeVolatileIndirectIR::getter_mSourceValue (UNUSED_LOCAT
 
 cPtr_storeVolatileIndirectIR::cPtr_storeVolatileIndirectIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
                                                             const GALGAS_string & in_mLLVMName,
-                                                            const GALGAS_operandIR & in_mSourceValue
+                                                            const GALGAS_valueIR & in_mSourceValue
                                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTargetVarType (in_mTargetVarType),
@@ -10919,7 +10919,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_testArrayIndexIR GALGAS_testArrayIndexIR::constructor_new (const GALGAS_operandIR & inAttribute_mIndex,
+GALGAS_testArrayIndexIR GALGAS_testArrayIndexIR::constructor_new (const GALGAS_valueIR & inAttribute_mIndex,
                                                                   const GALGAS_location & inAttribute_mErrorLocation,
                                                                   const GALGAS_bigint & inAttribute_mSize
                                                                   COMMA_LOCATION_ARGS) {
@@ -10932,8 +10932,8 @@ GALGAS_testArrayIndexIR GALGAS_testArrayIndexIR::constructor_new (const GALGAS_o
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_testArrayIndexIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_testArrayIndexIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_testArrayIndexIR * p = (const cPtr_testArrayIndexIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
@@ -10944,7 +10944,7 @@ GALGAS_operandIR GALGAS_testArrayIndexIR::getter_mIndex (UNUSED_LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_testArrayIndexIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_testArrayIndexIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mIndex ;
 }
 
@@ -10988,7 +10988,7 @@ GALGAS_bigint cPtr_testArrayIndexIR::getter_mSize (UNUSED_LOCATION_ARGS) const {
 //                                      Pointer class for @testArrayIndexIR class                                      *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_testArrayIndexIR::cPtr_testArrayIndexIR (const GALGAS_operandIR & in_mIndex,
+cPtr_testArrayIndexIR::cPtr_testArrayIndexIR (const GALGAS_valueIR & in_mIndex,
                                               const GALGAS_location & in_mErrorLocation,
                                               const GALGAS_bigint & in_mSize
                                               COMMA_LOCATION_ARGS) :
@@ -11118,8 +11118,8 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_truncIR GALGAS_truncIR::constructor_new (const GALGAS_operandIR & inAttribute_mResult,
-                                                const GALGAS_operandIR & inAttribute_mSource
+GALGAS_truncIR GALGAS_truncIR::constructor_new (const GALGAS_valueIR & inAttribute_mResult,
+                                                const GALGAS_valueIR & inAttribute_mSource
                                                 COMMA_LOCATION_ARGS) {
   GALGAS_truncIR result ;
   if (inAttribute_mResult.isValid () && inAttribute_mSource.isValid ()) {
@@ -11130,8 +11130,8 @@ GALGAS_truncIR GALGAS_truncIR::constructor_new (const GALGAS_operandIR & inAttri
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_truncIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_truncIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_truncIR * p = (const cPtr_truncIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_truncIR) ;
@@ -11142,14 +11142,14 @@ GALGAS_operandIR GALGAS_truncIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_truncIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_truncIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_truncIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_truncIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_truncIR * p = (const cPtr_truncIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_truncIR) ;
@@ -11160,7 +11160,7 @@ GALGAS_operandIR GALGAS_truncIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_truncIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_truncIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSource ;
 }
 
@@ -11168,8 +11168,8 @@ GALGAS_operandIR cPtr_truncIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
 //                                          Pointer class for @truncIR class                                           *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_truncIR::cPtr_truncIR (const GALGAS_operandIR & in_mResult,
-                            const GALGAS_operandIR & in_mSource
+cPtr_truncIR::cPtr_truncIR (const GALGAS_valueIR & in_mResult,
+                            const GALGAS_valueIR & in_mSource
                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mResult (in_mResult),
@@ -11294,8 +11294,8 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_truncateInstructionIR GALGAS_truncateInstructionIR::constructor_new (const GALGAS_operandIR & inAttribute_mTarget,
-                                                                            const GALGAS_operandIR & inAttribute_mOperand
+GALGAS_truncateInstructionIR GALGAS_truncateInstructionIR::constructor_new (const GALGAS_valueIR & inAttribute_mTarget,
+                                                                            const GALGAS_valueIR & inAttribute_mOperand
                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_truncateInstructionIR result ;
   if (inAttribute_mTarget.isValid () && inAttribute_mOperand.isValid ()) {
@@ -11306,8 +11306,8 @@ GALGAS_truncateInstructionIR GALGAS_truncateInstructionIR::constructor_new (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_truncateInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_truncateInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_truncateInstructionIR * p = (const cPtr_truncateInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_truncateInstructionIR) ;
@@ -11318,14 +11318,14 @@ GALGAS_operandIR GALGAS_truncateInstructionIR::getter_mTarget (UNUSED_LOCATION_A
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_truncateInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_truncateInstructionIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_truncateInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_truncateInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_truncateInstructionIR * p = (const cPtr_truncateInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_truncateInstructionIR) ;
@@ -11336,7 +11336,7 @@ GALGAS_operandIR GALGAS_truncateInstructionIR::getter_mOperand (UNUSED_LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_truncateInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_truncateInstructionIR::getter_mOperand (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mOperand ;
 }
 
@@ -11344,8 +11344,8 @@ GALGAS_operandIR cPtr_truncateInstructionIR::getter_mOperand (UNUSED_LOCATION_AR
 //                                   Pointer class for @truncateInstructionIR class                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_truncateInstructionIR::cPtr_truncateInstructionIR (const GALGAS_operandIR & in_mTarget,
-                                                        const GALGAS_operandIR & in_mOperand
+cPtr_truncateInstructionIR::cPtr_truncateInstructionIR (const GALGAS_valueIR & in_mTarget,
+                                                        const GALGAS_valueIR & in_mOperand
                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mTarget (in_mTarget),
@@ -11476,7 +11476,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_upperBoundCheckIR GALGAS_upperBoundCheckIR::constructor_new (const GALGAS_operandIR & inAttribute_mSource,
+GALGAS_upperBoundCheckIR GALGAS_upperBoundCheckIR::constructor_new (const GALGAS_valueIR & inAttribute_mSource,
                                                                     const GALGAS_bigint & inAttribute_mUpperBoundPlusOne,
                                                                     const GALGAS_uint & inAttribute_mPanicCode,
                                                                     const GALGAS_location & inAttribute_mLocation
@@ -11490,8 +11490,8 @@ GALGAS_upperBoundCheckIR GALGAS_upperBoundCheckIR::constructor_new (const GALGAS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_upperBoundCheckIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_upperBoundCheckIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
@@ -11502,7 +11502,7 @@ GALGAS_operandIR GALGAS_upperBoundCheckIR::getter_mSource (UNUSED_LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_upperBoundCheckIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_upperBoundCheckIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSource ;
 }
 
@@ -11564,7 +11564,7 @@ GALGAS_location cPtr_upperBoundCheckIR::getter_mLocation (UNUSED_LOCATION_ARGS) 
 //                                     Pointer class for @upperBoundCheckIR class                                      *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_upperBoundCheckIR::cPtr_upperBoundCheckIR (const GALGAS_operandIR & in_mSource,
+cPtr_upperBoundCheckIR::cPtr_upperBoundCheckIR (const GALGAS_valueIR & in_mSource,
                                                 const GALGAS_bigint & in_mUpperBoundPlusOne,
                                                 const GALGAS_uint & in_mPanicCode,
                                                 const GALGAS_location & in_mLocation
@@ -11706,7 +11706,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_whileInstructionIR GALGAS_whileInstructionIR::constructor_new (const GALGAS_uint & inAttribute_mLabelIndex,
                                                                       const GALGAS_instructionListIR & inAttribute_mTestInstructionGenerationList,
-                                                                      const GALGAS_operandIR & inAttribute_mTestExpression,
+                                                                      const GALGAS_valueIR & inAttribute_mTestExpression,
                                                                       const GALGAS_instructionListIR & inAttribute_mInstructionGenerationList
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_whileInstructionIR result ;
@@ -11754,8 +11754,8 @@ GALGAS_instructionListIR cPtr_whileInstructionIR::getter_mTestInstructionGenerat
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_whileInstructionIR::getter_mTestExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_operandIR result ;
+GALGAS_valueIR GALGAS_whileInstructionIR::getter_mTestExpression (UNUSED_LOCATION_ARGS) const {
+  GALGAS_valueIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_whileInstructionIR * p = (const cPtr_whileInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_whileInstructionIR) ;
@@ -11766,7 +11766,7 @@ GALGAS_operandIR GALGAS_whileInstructionIR::getter_mTestExpression (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cPtr_whileInstructionIR::getter_mTestExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_valueIR cPtr_whileInstructionIR::getter_mTestExpression (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mTestExpression ;
 }
 
@@ -11794,7 +11794,7 @@ GALGAS_instructionListIR cPtr_whileInstructionIR::getter_mInstructionGenerationL
 
 cPtr_whileInstructionIR::cPtr_whileInstructionIR (const GALGAS_uint & in_mLabelIndex,
                                                   const GALGAS_instructionListIR & in_mTestInstructionGenerationList,
-                                                  const GALGAS_operandIR & in_mTestExpression,
+                                                  const GALGAS_valueIR & in_mTestExpression,
                                                   const GALGAS_instructionListIR & in_mInstructionGenerationList
                                                   COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),

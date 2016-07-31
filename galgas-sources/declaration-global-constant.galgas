@@ -132,7 +132,7 @@ override method @globalConstantDeclaration enterInContext
     !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
-    ?result:let @operandIR expressionResult
+    ?result:let @valueIR expressionResult
   ]
 #--- Check assignment compatibility
   let result = checkAssignmentCompatibility (
@@ -142,7 +142,7 @@ override method @globalConstantDeclaration enterInContext
     !staticTypeAllowed:true
   )
   drop annotationType, expressionResult
-  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result.mValue isStatic] then
+  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
     error mConstantName : "source expression cannot be statically computed"
   end
 #--- Enter in context

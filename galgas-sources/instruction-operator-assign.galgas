@@ -161,7 +161,7 @@ override method @varOperatorAssignInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@operandIR sourceValue
+    ?result:@valueIR sourceValue
   ]
 #--- Write local variable
 #  [!?ioVariableMap searchForReadWriteAccess
@@ -224,7 +224,7 @@ override method @varOperatorAssignInstructionAST analyze
   end
   [operatorMap checkBinaryOperationWith
     !leftType:[targetObjectPtr type]
-    !rightType:sourceValue.mType
+    !rightType:[sourceValue type]
     !operatorLocation:mTargetErrorLocation
     ?resultType:*
     ?op:let @infixOperatorDescription binaryOperator
@@ -237,7 +237,7 @@ override method @varOperatorAssignInstructionAST analyze
 #  [targetVariableKind loadFromMemory
 #    !?temporary:ioTemporaries
 #    !?instructionListIR:ioInstructionGenerationList
-#    ?resultingValue:@operandIR variableValue
+#    ?resultingValue:@valueIR variableValue
 #  ]
   [binaryOperator generateInfixOperatorCode
     !?ioTemporaries

@@ -267,27 +267,27 @@ class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
 override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeftOperand
   ?let @location inOperatorLocation
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@operandIR outResult
+  !@valueIR outResult
 {
-  if [inLeftOperand.mValue isLiteralInteger] && [inRightOperand.mValue isLiteralInteger] then
-    [inLeftOperand.mValue  literalInteger ?value:let @bigint left]
-    [inRightOperand.mValue literalInteger ?value:let @bigint right]
+  if [inLeftOperand isLiteralInteger] && [inRightOperand isLiteralInteger] then
+    [inLeftOperand  literalInteger ?1* ?value:let @bigint left]
+    [inRightOperand literalInteger ?1* ?value:let @bigint right]
     let resultValue = [self performStaticOperation !left !right]
-    outResult = .new {!inResultType !.literalInteger {!value:resultValue}}
+    outResult = .literalInteger {!type: inResultType !value:resultValue}
   else
     getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
-      !outResult.mValue
-      !inLeftOperand.mType
+      !outResult
+      ![inLeftOperand type]
       !inOperatorLocation
-      !inLeftOperand.mValue
+      !inLeftOperand
       !mOperator
-      !inRightOperand.mValue
+      !inRightOperand
     ]
   end
 }
@@ -429,15 +429,15 @@ class @integerObject_literal_infixOperator : @infixOperatorDescription {
 override method @integerObject_literal_infixOperator generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeftOperand
   ?let @location inOperatorLocation
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@operandIR outResult
+  !@valueIR outResult
 {
 #--- Check right literal integer can be extented to left integer type, ans is not zero
-  [inRightOperand.mValue literalInteger ?value:let @bigint literalValue]
-  [[inLeftOperand.mType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+  [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
+  [[inLeftOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
   if literalValue < min then
     error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
@@ -445,12 +445,12 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
   else
     getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendBinaryOperation
-      !outResult.mValue
-      !inLeftOperand.mType
+      !outResult
+      ![inLeftOperand type]
       !inOperatorLocation
-      !inLeftOperand.mValue
+      !inLeftOperand
       !mOperator
-      !inRightOperand.mValue
+      !inRightOperand
     ]
   end
 }
@@ -465,15 +465,15 @@ class @integerObject_literal_divisionOperator : @infixOperatorDescription {
 override method @integerObject_literal_divisionOperator generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeftOperand
   ?let @location inOperatorLocation
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@operandIR outResult
+  !@valueIR outResult
 {
 #--- Check right literal integer can be extented to left integer type
-  [inRightOperand.mValue literalInteger ?value:let @bigint literalValue]
-  [[inLeftOperand.mType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+  [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
+  [[inLeftOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
   if literalValue < min then
     error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
@@ -483,12 +483,12 @@ override method @integerObject_literal_divisionOperator generateInfixOperatorCod
   else
     getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendBinaryOperation
-      !outResult.mValue
-      !inLeftOperand.mType
+      !outResult
+      ![inLeftOperand type]
       !inOperatorLocation
-      !inLeftOperand.mValue
+      !inLeftOperand
       !mOperator
-      !inRightOperand.mValue
+      !inRightOperand
     ]
   end
 }
@@ -631,15 +631,15 @@ class @literal_integerObject_infixOperator : @infixOperatorDescription {
 override method @literal_integerObject_infixOperator generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeftOperand
   ?let @location inOperatorLocation
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@operandIR outResult
+  !@valueIR outResult
 {
 #--- Check left literal integer can be extented to right integer type
-  [inLeftOperand.mValue literalInteger ?value:let @bigint literalValue]
-  [[inRightOperand.mType kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
+  [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]
+  [[inRightOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?unsigned:* ?bitCount:*]
   if literalValue < min then
     error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResult
   elsif literalValue > max then
@@ -647,12 +647,12 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
   else
     getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendBinaryOperation
-      !outResult.mValue
-      !inRightOperand.mType
+      !outResult
+      ![inRightOperand type]
       !inOperatorLocation
-      !inLeftOperand.mValue
+      !inLeftOperand
       !mOperator
-      !inRightOperand.mValue
+      !inRightOperand
     ]
   end
 }

@@ -80,7 +80,7 @@ override method @registerConstantExpressionAST analyzeExpression
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
   ?allowPanic:let @bool inAllowPanic
@@ -91,7 +91,7 @@ override method @registerConstantExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Search variable
   [inContext.mControlRegisterMap searchKey
@@ -132,7 +132,7 @@ override method @registerConstantExpressionAST analyzeExpression
       !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !inGuard:inGuard
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:inOptionalTargetType
+      !optionalTargetType:.null
       !context:inContext
       !modes:inModeSet
       !allowPanic:inAllowPanic
@@ -143,10 +143,10 @@ override method @registerConstantExpressionAST analyzeExpression
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
-      ?result:let @operandIR expressionResult
+      ?result:let @valueIR expressionResult
     ]
   #--- Check expression type
-    switch [expressionResult.mType kind]
+    switch [expressionResult kind]
     case arrayType (* *) :
       error expressionLocation: "an unsigned integer expression is required here"
     case opaque (*) :
@@ -160,7 +160,7 @@ override method @registerConstantExpressionAST analyzeExpression
     case literalString :
       error expressionLocation: "an unsigned integer expression is required here"
     case staticInteger :
-      [expressionResult.mValue literalInteger ?value:let @bigint value]
+      [expressionResult literalInteger ?1* ?value:let @bigint value]
       if value < 0G then
         error expressionLocation: "this integer expression should be positive"
       elsif value < (1G << fieldBitCount) then
@@ -205,16 +205,16 @@ override method @registerConstantExpressionAST analyzeExpression
     end
   end
 #------------------------------------------------------ Result
-  outResult = .new {!registerType !.literalInteger {!value:accumulatedFieldStaticValues}}
+  outResult = .literalInteger {!type: registerType!value:accumulatedFieldStaticValues}
   for (operand) in operandList do
     getNewTempVariable (!registerType !?ioTemporaries ?let newResult)
     [!?ioInstructionGenerationList appendBinaryOperation
-      !newResult.mValue
-      !newResult.mType
+      !newResult
+      ![newResult type]
       !.here
-      !outResult.mValue
+      !outResult
       !.ior
-      !operand.mValue
+      !operand
     ] 
     outResult = newResult
   end

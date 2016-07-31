@@ -103,13 +103,13 @@ override method @whileInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:testInstructionGenerationList
-    ?result:@operandIR testValue
+    ?result:@valueIR testValue
   ]
 #--- Check inferred type
-  if [testValue.mType kind] != .boolean then
-    error mEndOf_test_expression : "test expression type is '" + [testValue.mType key] + "', it should be boolean"
+  if [testValue kind] != .boolean then
+    error mEndOf_test_expression : "test expression type is '" + [testValue key] + "', it should be boolean"
   end
-  if [testValue.mValue isStatic] then
+  if [testValue isStatic] then
     error mEndOf_test_expression : "test expression type should not be static"
   end
 #--- Analyze instruction list
@@ -149,7 +149,7 @@ override method @whileInstructionAST analyze
 class @whileInstructionIR : @abstractInstructionIR {
   @uint mLabelIndex
   @instructionListIR mTestInstructionGenerationList
-  @operandIR mTestExpression
+  @valueIR mTestExpression
   @instructionListIR mInstructionGenerationList
 }
 
@@ -166,7 +166,7 @@ override method @whileInstructionIR llvmInstructionCode
   ioLLVMcode += "  br label %" + labelTest + "\n\n"
   ioLLVMcode += labelTest + ":\n"
   [mTestInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + [mTestExpression.mValue llvmName] + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
+  ioLLVMcode += "  br i1 " + [mTestExpression llvmName] + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
   ioLLVMcode += labelLoop + ":\n"
   [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + labelTest + "\n\n"

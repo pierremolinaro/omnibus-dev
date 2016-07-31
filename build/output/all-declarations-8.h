@@ -264,7 +264,7 @@ typedef void (*extensionMethodSignature_expressionAST_analyzeStaticExpression) (
                                                                                 const class GALGAS_location constinArgument0,
                                                                                 const class GALGAS_semanticContext constinArgument1,
                                                                                 class GALGAS_staticStringMap & ioArgument2,
-                                                                                class GALGAS_operandIR & outArgument3,
+                                                                                class GALGAS_valueIR & outArgument3,
                                                                                 class C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -279,7 +279,7 @@ void callExtensionMethod_analyzeStaticExpression (const class cPtr_expressionAST
                                                   const GALGAS_location constin_inErrorLocation,
                                                   const GALGAS_semanticContext constin_inContext,
                                                   GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                  GALGAS_operandIR & out_outResult,
+                                                  GALGAS_valueIR & out_outResult,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -495,8 +495,8 @@ void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_elem
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendExtend (class GALGAS_instructionListIR & ioObject,
-                                   const class GALGAS_operandIR constin_inResult,
-                                   const class GALGAS_operandIR constin_inSource,
+                                   const class GALGAS_valueIR constin_inResult,
+                                   const class GALGAS_valueIR constin_inSource,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -507,8 +507,8 @@ void extensionSetter_appendExtend (class GALGAS_instructionListIR & ioObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendTrunc (class GALGAS_instructionListIR & ioObject,
-                                  const class GALGAS_operandIR constin_inResult,
-                                  const class GALGAS_operandIR constin_inSource,
+                                  const class GALGAS_valueIR constin_inResult,
+                                  const class GALGAS_valueIR constin_inSource,
                                   class C_Compiler * inCompiler
                                   COMMA_LOCATION_ARGS) ;
 
@@ -519,8 +519,8 @@ void extensionSetter_appendTrunc (class GALGAS_instructionListIR & ioObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendShiftLeft (class GALGAS_instructionListIR & ioObject,
-                                      const class GALGAS_operandIR constin_inResult,
-                                      const class GALGAS_operandIR constin_inSource,
+                                      const class GALGAS_valueIR constin_inResult,
+                                      const class GALGAS_valueIR constin_inSource,
                                       const class GALGAS_uint constin_inShiftAmount,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
@@ -548,10 +548,10 @@ void extensionSetter_appendBinaryOperation (class GALGAS_instructionListIR & ioO
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendShortCircuitAndOperation (class GALGAS_instructionListIR & ioObject,
-                                                     const class GALGAS_operandIR constin_inTargetOperand,
-                                                     const class GALGAS_operandIR constin_inLeftOperand,
+                                                     const class GALGAS_valueIR constin_inTargetOperand,
+                                                     const class GALGAS_valueIR constin_inLeftOperand,
                                                      const class GALGAS_instructionListIR constin_inLeftInstructionList,
-                                                     const class GALGAS_operandIR constin_inRightOperand,
+                                                     const class GALGAS_valueIR constin_inRightOperand,
                                                      const class GALGAS_instructionListIR constin_inRightInstructionList,
                                                      const class GALGAS_location constin_inLocation,
                                                      class C_Compiler * inCompiler
@@ -564,8 +564,8 @@ void extensionSetter_appendShortCircuitAndOperation (class GALGAS_instructionLis
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendLoadVolatileRegisterWithSubscript (class GALGAS_instructionListIR & ioObject,
-                                                              const class GALGAS_operandIR constin_inTargetValue,
-                                                              const class GALGAS_operandIR constin_inIndexResult,
+                                                              const class GALGAS_valueIR constin_inTargetValue,
+                                                              const class GALGAS_valueIR constin_inIndexResult,
                                                               const class GALGAS_bigint constin_inAddress,
                                                               const class GALGAS_bigint constin_inElementArraySize,
                                                               class C_Compiler * inCompiler
@@ -578,7 +578,7 @@ void extensionSetter_appendLoadVolatileRegisterWithSubscript (class GALGAS_instr
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendLoadVolatileRegister (class GALGAS_instructionListIR & ioObject,
-                                                 const class GALGAS_operandIR constin_inTargetValue,
+                                                 const class GALGAS_valueIR constin_inTargetValue,
                                                  const class GALGAS_bigint constin_inAddress,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
@@ -590,7 +590,7 @@ void extensionSetter_appendLoadVolatileRegister (class GALGAS_instructionListIR 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendLoadGlobalVariable (class GALGAS_instructionListIR & ioObject,
-                                               const class GALGAS_operandIR constin_inTargetValue,
+                                               const class GALGAS_valueIR constin_inTargetValue,
                                                const class GALGAS_string constin_inRegisterName,
                                                class GALGAS_bool in_inIsVolatile,
                                                class C_Compiler * inCompiler
@@ -603,7 +603,7 @@ void extensionSetter_appendLoadGlobalVariable (class GALGAS_instructionListIR & 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendLoadLocalVariable (class GALGAS_instructionListIR & ioObject,
-                                              const class GALGAS_operandIR constin_inTargetValue,
+                                              const class GALGAS_valueIR constin_inTargetValue,
                                               const class GALGAS_string constin_inVariableName,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
@@ -615,7 +615,7 @@ void extensionSetter_appendLoadLocalVariable (class GALGAS_instructionListIR & i
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendLoadTaskVariable (class GALGAS_instructionListIR & ioObject,
-                                             const class GALGAS_operandIR constin_inTargetValue,
+                                             const class GALGAS_valueIR constin_inTargetValue,
                                              const class GALGAS_string constin_inTaskName,
                                              const class GALGAS_string constin_inVariableName,
                                              class C_Compiler * inCompiler
@@ -630,7 +630,7 @@ void extensionSetter_appendLoadTaskVariable (class GALGAS_instructionListIR & io
 void extensionSetter_appendStoreVolatileRegister (class GALGAS_instructionListIR & ioObject,
                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
                                                   const class GALGAS_bigint constin_inAddress,
-                                                  const class GALGAS_operandIR constin_inSourceValue,
+                                                  const class GALGAS_valueIR constin_inSourceValue,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -643,7 +643,7 @@ void extensionSetter_appendStoreVolatileRegister (class GALGAS_instructionListIR
 void extensionSetter_appendStoreVolatileRegisterIndirect (class GALGAS_instructionListIR & ioObject,
                                                           const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
                                                           const class GALGAS_string constin_inLLVMName,
-                                                          const class GALGAS_operandIR constin_inSourceValue,
+                                                          const class GALGAS_valueIR constin_inSourceValue,
                                                           class C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
@@ -656,7 +656,7 @@ void extensionSetter_appendStoreVolatileRegisterIndirect (class GALGAS_instructi
 void extensionSetter_appendStoreGlobalVariable (class GALGAS_instructionListIR & ioObject,
                                                 const class GALGAS_string constin_inGlobalVarName,
                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                                const class GALGAS_operandIR constin_inSourceValue,
+                                                const class GALGAS_valueIR constin_inSourceValue,
                                                 const class GALGAS_bool constin_inIsVolatile,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
@@ -671,7 +671,7 @@ void extensionSetter_appendStoreTaskVariable (class GALGAS_instructionListIR & i
                                               const class GALGAS_string constin_inTaskName,
                                               const class GALGAS_string constin_inVarName,
                                               const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                              const class GALGAS_operandIR constin_inSourceValue,
+                                              const class GALGAS_valueIR constin_inSourceValue,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
@@ -684,7 +684,7 @@ void extensionSetter_appendStoreTaskVariable (class GALGAS_instructionListIR & i
 void extensionSetter_appendStoreLocalVariable (class GALGAS_instructionListIR & ioObject,
                                                const class GALGAS_string constin_inLocalVarName,
                                                const class GALGAS_unifiedTypeMap_2D_proxy constin_inTargetVarType,
-                                               const class GALGAS_operandIR constin_inSourceValue,
+                                               const class GALGAS_valueIR constin_inSourceValue,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
@@ -697,7 +697,7 @@ void extensionSetter_appendStoreLocalVariable (class GALGAS_instructionListIR & 
 void extensionSetter_appendLoadFromMemory (class GALGAS_instructionListIR & ioObject,
                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            const class GALGAS_objectInMemoryIR constin_inSource,
-                                           class GALGAS_operandIR & out_outResultingValue,
+                                           class GALGAS_valueIR & out_outResultingValue,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
@@ -709,7 +709,7 @@ void extensionSetter_appendLoadFromMemory (class GALGAS_instructionListIR & ioOb
 
 void extensionSetter_appendStoreInMemory (class GALGAS_instructionListIR & ioObject,
                                           const class GALGAS_objectInMemoryIR constin_inTargetPtr,
-                                          const class GALGAS_operandIR constin_inValue,
+                                          const class GALGAS_valueIR constin_inValue,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
@@ -720,7 +720,7 @@ void extensionSetter_appendStoreInMemory (class GALGAS_instructionListIR & ioObj
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendLoadStructureConstant (class GALGAS_instructionListIR & ioObject,
-                                                  const class GALGAS_operandIR constin_inTargetValue,
+                                                  const class GALGAS_valueIR constin_inTargetValue,
                                                   const class GALGAS_string constin_inTypeName,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
@@ -732,10 +732,10 @@ void extensionSetter_appendLoadStructureConstant (class GALGAS_instructionListIR
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendSelectOperation (class GALGAS_instructionListIR & ioObject,
-                                            const class GALGAS_operandIR constin_inTargetValue,
-                                            const class GALGAS_operandIR constin_in_5F_if_5F_variable,
-                                            const class GALGAS_operandIR constin_in_5F_then_5F_variable,
-                                            const class GALGAS_operandIR constin_in_5F_else_5F_variable,
+                                            const class GALGAS_valueIR constin_inTargetValue,
+                                            const class GALGAS_valueIR constin_in_5F_if_5F_variable,
+                                            const class GALGAS_valueIR constin_in_5F_then_5F_variable,
+                                            const class GALGAS_valueIR constin_in_5F_else_5F_variable,
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
@@ -746,7 +746,7 @@ void extensionSetter_appendSelectOperation (class GALGAS_instructionListIR & ioO
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendUpperBoundCheck (class GALGAS_instructionListIR & ioObject,
-                                            const class GALGAS_operandIR constin_inSource,
+                                            const class GALGAS_valueIR constin_inSource,
                                             const class GALGAS_bigint constin_inUpperBoundPlusOne,
                                             const class GALGAS_uint constin_inPanicCode,
                                             const class GALGAS_location constin_inLocation,

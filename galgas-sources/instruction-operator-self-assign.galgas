@@ -107,7 +107,7 @@ override method @selfVarOperatorAssignInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@operandIR sourceValue
+    ?result:@valueIR sourceValue
   ]
 #--- Check operator is available for type
   let noPanicGeneration = [option plm_options.noPanicGeneration value]
@@ -158,7 +158,7 @@ override method @selfVarOperatorAssignInstructionAST analyze
   end
   [operatorMap checkBinaryOperationWith
     !leftType:targetType
-    !rightType:sourceValue.mType
+    !rightType:[sourceValue type]
     !operatorLocation:mOperatorLocation
     ?resultType:*
     ?op:let @infixOperatorDescription binaryOperator

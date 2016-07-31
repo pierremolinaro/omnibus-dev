@@ -1,9 +1,9 @@
 
 setter @instructionListIR appendSelectOperation
-  ?let @operandIR inTargetValue
-  ?let @operandIR in_if_variable
-  ?let @operandIR in_then_variable
-  ?let @operandIR in_else_variable
+  ?let @valueIR inTargetValue
+  ?let @valueIR in_if_variable
+  ?let @valueIR in_then_variable
+  ?let @valueIR in_else_variable
 {
   self += !@selectInstructionIR.new {!inTargetValue !in_if_variable !in_then_variable !in_else_variable}
 }
@@ -11,10 +11,10 @@ setter @instructionListIR appendSelectOperation
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @selectInstructionIR : @abstractInstructionIR {
-  @operandIR mTargetValue
-  @operandIR m_if_variable
-  @operandIR m_then_variable
-  @operandIR m_else_variable
+  @valueIR mTargetValue
+  @valueIR m_if_variable
+  @valueIR m_then_variable
+  @valueIR m_else_variable
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -24,10 +24,10 @@ override method @selectInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = select "
-  ioLLVMcode += [m_if_variable.mType llvmTypeName] + " " + [m_if_variable.mValue llvmName] + ", "
-  ioLLVMcode += [m_then_variable.mType llvmTypeName] + " " + [m_then_variable.mValue llvmName] + ", "
-  ioLLVMcode += [m_else_variable.mType llvmTypeName] + " " + [m_else_variable.mValue llvmName] + "\n"
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = select "
+  ioLLVMcode += [[m_if_variable type] llvmTypeName] + " " + [m_if_variable llvmName] + ", "
+  ioLLVMcode += [[m_then_variable type] llvmTypeName] + " " + [m_then_variable llvmName] + ", "
+  ioLLVMcode += [[m_else_variable type] llvmTypeName] + " " + [m_else_variable llvmName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

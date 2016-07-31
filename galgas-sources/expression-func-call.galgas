@@ -102,7 +102,7 @@ override method @functionCallInExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
   if inGuard then
     error mFunctionName : "a function cannot be called in guard expression"
@@ -151,7 +151,7 @@ override method @functionCallInExpressionAST analyzeExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @functionCallIR : @abstractInstructionIR {
-  @operandIR mResult
+  @valueIR mResult
   @lstring mFunctionMangledName
   @lstring mFunctionNameForGeneration
   @routineKindIR mKind
@@ -166,7 +166,7 @@ override method @functionCallIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult.mValue llvmName] + " = call " + [mResult.mType llvmTypeName] + " @"
+  ioLLVMcode += "  " + [mResult llvmName] + " = call " + [mResult llvmTypeName] + " @"
   switch mKind 
   case function : ioLLVMcode += llvmNameForFunction (!mFunctionNameForGeneration.string)
   case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mFunctionNameForGeneration.string)
@@ -180,11 +180,11 @@ override method @functionCallIR llvmInstructionCode
   for () in mArgumentList do
     switch mEffectiveParameterPassingMode
     case input:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
+      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
     case output:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
+      ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
     case outputInput:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
+      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
     end
   between
     ioLLVMcode += ", "

@@ -31,7 +31,7 @@ override method @getElementPtrIR llvmInstructionCode
   for (idx *) in mElementList do
     switch idx
     case absolute (index) : ioLLVMcode += ", i32 " + index
-    case indirect (index) : ioLLVMcode += ", " + [index.mType llvmTypeName] + " " + [index.mValue llvmName]
+    case indirect (index) : ioLLVMcode += ", " + [index llvmTypeName] + " " + [index llvmName]
     end
   end
   ioLLVMcode += " ;"

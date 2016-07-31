@@ -771,11 +771,11 @@ method @guardMapIR-element llvmCodeGeneration
     for () in baseGuardEffectiveParameterList do
       switch mEffectiveParameterPassingMode
       case input:
-        ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
+        ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
       case output:
-        ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
+        ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
       case outputInput:
-        ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
+        ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
       end
     between
       ioLLVMcode += ", "

@@ -127,7 +127,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #------------------- Analyze left expression
   [mLeftExpression analyzeExpression
@@ -146,7 +146,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @operandIR leftOperand
+    ?result:let @valueIR leftOperand
   ]
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
@@ -154,7 +154,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:leftOperand.mType
+    !optionalTargetType:[leftOperand type]
     !context:inContext
     !modes:inModeSet
     !allowPanic:inAllowPanic
@@ -165,14 +165,14 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @operandIR rightOperand
+    ?result:let @valueIR rightOperand
   ]
 #------------------- Get operator map
   let operatorMap = getInfixOperatorMap (!mOp !context:inContext !modes:inModeSet !mOperatorLocation)
 #------------------- Check operand types
   [operatorMap checkBinaryOperationWith
-    !leftType:leftOperand.mType
-    !rightType:rightOperand.mType
+    !leftType:[leftOperand type]
+    !rightType:[rightOperand type]
     !operatorLocation:mOperatorLocation
     ?resultType:let resultType
     ?op:let @infixOperatorDescription binaryOperator
@@ -300,7 +300,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Analyze left expression
   @instructionListIR leftInstructionGenerationList = {}
@@ -320,7 +320,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:leftInstructionGenerationList
-    ?result:let @operandIR leftOperand
+    ?result:let @valueIR leftOperand
   ]
 #--- Analyze right expression
   @instructionListIR rightInstructionGenerationList = {}
@@ -329,7 +329,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:leftOperand.mType
+    !optionalTargetType:[leftOperand type]
     !context:inContext
     !modes:inModeSet
     !allowPanic:inAllowPanic
@@ -340,14 +340,14 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:rightInstructionGenerationList
-    ?result:let @operandIR rightOperand
+    ?result:let @valueIR rightOperand
   ]
 #--- Check left type is boolean
-  if [leftOperand.mType kind] != .boolean then
+  if [leftOperand kind] != .boolean then
     error mOperatorLocation : "left operand should be boolean"
   end
 #--- Check right type is boolean
-  if [rightOperand.mType kind] != .boolean then
+  if [rightOperand kind] != .boolean then
     error mOperatorLocation : "left operand should be boolean"
   end
 #--- Result type : bool 
@@ -374,11 +374,11 @@ abstract class @infixOperatorDescription {
 abstract method @infixOperatorDescription generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeftOperand
   ?let @location inOperatorLocation
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@operandIR outResultValue
+  !@valueIR outResultValue
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
