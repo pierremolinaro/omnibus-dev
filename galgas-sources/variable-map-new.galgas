@@ -13,118 +13,6 @@ map @namedObjectMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc handleSelfAccessInExpression
-  ?let @unifiedTypeMap-proxy inSelfType
-  ?let @objectInMemoryIR inObject
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@instructionListIR ioInstructionGenerationList
-  !@objectInMemoryIR outObjectPtr
-{
-  if [inObject isProperty] then
-    [inObject property ?type:let type ?name:let name ?index:let index]
-    outObjectPtr = .localVariable {!type:type !name:"temp." + ioTemporaries.mTemporaryIndex}
-    ioTemporaries.mTemporaryIndex ++
-    [!?ioInstructionGenerationList appendGetElementPtrFromSelf
-      !outObjectPtr
-      !inSelfType
-      !{!.absolute {!index:index} !name}
-    ]
-  else
-    error .nowhere : "<<getNewTemporarySelfObjectPtr>>" : outObjectPtr
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc handleSubscriptInExpression
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
-  ?!alloca:@allocaList ioAllocaList
-
-  ?let @expressionAST inIndexExpression 
-  ?let @location inErrorLocation
-  ?!@instructionListIR ioInstructionGenerationList
-  ?!@objectInMemoryIR ioObjectPtr
-{
-  if [[[ioObjectPtr type] kind] isArrayType] then
-  #--- Analyze array type
-    [[[ioObjectPtr type] kind] arrayType ?elementType:let type ?size:let @bigint arraySize]
-  #--- Analyze index expression
-    [inIndexExpression analyzeExpression
-      !self:inSelfType
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-      !inGuard:inGuard
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:.null
-      !context:inContext
-      !modes:inModeSet
-      !allowPanic:inAllowPanic
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
-      !?namedObjectMap: ioNamedObjectMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      ?result:let @valueIR indexResult
-    ]
-    if [indexResult isLiteralInteger] then # Static expression
-      [indexResult literalInteger ?1* ?value:let @bigint indexValue]
-      if (indexValue < 0G) || (indexValue >= arraySize) then
-        error inErrorLocation : "static index should be positive and < " + arraySize : ioObjectPtr
-      else
-        let result = @objectInMemoryIR.localVariable {!type:type !name:"temp." + ioTemporaries.mTemporaryIndex}
-        ioTemporaries.mTemporaryIndex ++
-        [!?ioInstructionGenerationList appendGetElementPtr
-          !result
-          !ioObjectPtr
-          !{!.absolute {!index:[indexValue uint]} !"[" + indexValue + "]"}
-        ]
-        ioObjectPtr = result      
-#        ioElementPtrList += {!.absolute {!index:[indexValue uint]} !"[" + indexValue + "]"}
-      end
-    elsif [[indexResult kind] isInteger] then
-      if not [option plm_options.noPanicGeneration value] then
-        [!?ioInstructionGenerationList testArrayIndex
-          !indexResult
-          !inErrorLocation
-          !arraySize
-          ?let @bool generatePanicInstruction
-        ]
-        if generatePanicInstruction && not inAllowPanic then
-          error inErrorLocation : "index computation can generate panic" : ioObjectPtr
-        end
-      end
-        let result = @objectInMemoryIR.localVariable {!type:type !name:"temp." + ioTemporaries.mTemporaryIndex}
-        ioTemporaries.mTemporaryIndex ++
-        [!?ioInstructionGenerationList appendGetElementPtr
-          !result
-          !ioObjectPtr
-          !{!.indirect {!index:indexResult} !"[" + [indexResult name] + "]"}
-        ]
-        ioObjectPtr = result      
-#      let name = [indexResult name]
-#      ioElementPtrList += {!.indirect {!index:indexResult} !"[" + name + "]"}
-    else
-      error inErrorLocation : "index expression is not an integer" : ioObjectPtr
-    end
-  else
-    error inErrorLocation : "the receiver is not an array and does not accept subscripting" : ioObjectPtr
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc initialVariableMap
   ?routineNameForInvocation:let @string inRoutineNameForInvocation
   ?context:let @semanticContext inContext
@@ -302,7 +190,7 @@ proc initialVariableMap
       !lkey:resultVarName
       !type:resultType
       !readAccessAllowed:true
-      !variableKind:.localVariable {!type:resultType !name:resultVarName.string}
+      !variableKind:.localVariable {!type:resultType !name:resultVarName.string !volatile:false}
       !copyable:true
       !canBeUsedAsInputParameter:true
     ]

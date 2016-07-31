@@ -2,8 +2,9 @@
 setter @instructionListIR appendLoadLocalVariable
   ?let @valueIR inTargetValue
   ?let @string inVariableName
+  ?let @bool inVolatile
 {
-  self += !@loadLocalVariableIR.new {!inTargetValue !inVariableName}
+  self += !@loadLocalVariableIR.new {!inTargetValue !inVariableName !inVolatile}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -11,6 +12,7 @@ setter @instructionListIR appendLoadLocalVariable
 class @loadLocalVariableIR : @abstractInstructionIR {
   @valueIR mTargetValue
   @string mVariableName
+  @bool mVolatile
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -22,6 +24,9 @@ override method @loadLocalVariableIR llvmInstructionCode
 {
   let llvmType = [mTargetValue llvmTypeName]
   ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
+  if mVolatile then
+    ioLLVMcode += "volatile "
+  end
   ioLLVMcode += llvmType + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mVariableName) + "\n"
 }
 

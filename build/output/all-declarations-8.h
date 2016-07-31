@@ -605,6 +605,7 @@ void extensionSetter_appendLoadGlobalVariable (class GALGAS_instructionListIR & 
 void extensionSetter_appendLoadLocalVariable (class GALGAS_instructionListIR & ioObject,
                                               const class GALGAS_valueIR constin_inTargetValue,
                                               const class GALGAS_string constin_inVariableName,
+                                              const class GALGAS_bool constin_inVolatile,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
