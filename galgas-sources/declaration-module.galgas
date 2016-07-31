@@ -140,18 +140,6 @@ syntax extension common_syntax {
     }
   #--- Declare module
     ioAST.mDeclarationList += !@moduleDeclarationAST.new {!moduleName}
-
-#    ioAST.mGlobalVarDeclarationList +=
-#      !moduleTypeName
-#      !moduleName
-#      !@constructorCall.new {!moduleTypeName !{} !.here}
-#      !{} # allowedRoutineList
-#      !{} # allowedInitList
-#      !{} # allowedPanicList
-#      !{} # allowedGuardList
-#      !{} # allowedISRList
-#      !{} # allowedTaskList
-#      !true # mAllowedAccessToAll
   }
 
   #·····················································································································
@@ -164,7 +152,6 @@ syntax extension common_syntax {
 
 override method @moduleDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  [!?ioGraph addNode !mModuleName !self]
-#  let moduleTypeName = @lstring.new {!modulePrefixName + mModuleName !mModuleName.location}
   let moduleTypeName = @lstring.new {!"$" + mModuleName + "$" !mModuleName.location}
  [!?ioGraph addEdge !mModuleName !moduleTypeName]
 }
@@ -258,7 +245,7 @@ method @moduleListIR-element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += "@" + llvmNameForGlobalVariable (!mModuleName) + " = internal global "
   ioLLVMcode += [mType llvmTypeName] + " {"
   for (value) in mInitialValueList
-    do ioLLVMcode += [value.mType llvmTypeName] + " " + [value.mValue llvmName]
+    do ioLLVMcode += [value llvmTypeName] + " " + [value llvmName]
     between ioLLVMcode += ", "  
   end
   ioLLVMcode += "}\n"

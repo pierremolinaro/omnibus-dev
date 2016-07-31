@@ -1,10 +1,10 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendShortCircuitAndOperation
-  ?let @operandIR inTargetOperand
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inTargetOperand
+  ?let @valueIR inLeftOperand
   ?let @instructionListIR inLeftInstructionList
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @instructionListIR inRightInstructionList
   ?let @location inLocation
 {
@@ -21,10 +21,10 @@ setter @instructionListIR appendShortCircuitAndOperation
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @shortCircuitAndOperationIR : @abstractInstructionIR {
-  @operandIR mTargetOperand
-  @operandIR mLeftOperand
+  @valueIR mTargetOperand
+  @valueIR mLeftOperand
   @instructionListIR mLeftInstructionList
-  @operandIR mRightOperand
+  @valueIR mRightOperand
   @instructionListIR mRightInstructionList
   @location mLocation
 }
@@ -52,12 +52,12 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
   ioLLVMcode += startLabel + ":\n"
   [mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + [mLeftOperand.mValue llvmName] + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
+  ioLLVMcode += "  br i1 " + [mLeftOperand llvmName] + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
   ioLLVMcode += trueLabel + ":\n"
   [mRightInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + falseLabel + "\n\n"
   ioLLVMcode += falseLabel + ":\n"
-  ioLLVMcode += "  " + [mTargetOperand.mValue llvmName] + " = phi i1 [" + [mRightOperand.mValue llvmName] + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
+  ioLLVMcode += "  " + [mTargetOperand llvmName] + " = phi i1 [" + [mRightOperand llvmName] + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

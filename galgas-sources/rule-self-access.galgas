@@ -191,23 +191,23 @@ proc analyzeArrayElementAccess
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
-      ?result:let @operandIR indexResult
+      ?result:let @valueIR indexResult
     ]
-    if [indexResult.mValue isLiteralInteger] then
-      [indexResult.mValue literalInteger ?value:let @bigint indexValue]
+    if [indexResult isLiteralInteger] then
+      [indexResult literalInteger ?1* ?value:let @bigint indexValue]
       if (indexValue < 0G) || (indexValue >= arraySize) then
         error endOfExp : "static index should be positive and < " + arraySize : ioElementPtrList
       else
         ioElementPtrList += {!.absolute {!index:[indexValue uint]} !"[" + indexValue + "]"}
       end
-    elsif [[indexResult.mType kind] isInteger] then
+    elsif [[indexResult kind] isInteger] then
       if not [option plm_options.noPanicGeneration value] then
         [!?ioInstructionGenerationList testArrayIndex !indexResult !endOfExp !arraySize ?let generatePanicInstruction]
         if generatePanicInstruction && not inAllowPanic then
           error endOfExp : "index computation can generated panic" : ioElementPtrList
         end
       end
-      let name = [indexResult.mValue name]
+      let name = [indexResult name]
       ioElementPtrList += {!.indirect {!index:indexResult} !"[" + name + "]"}
     else
       error endOfExp : "index expression is not an integer" : ioElementPtrList

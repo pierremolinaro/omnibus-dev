@@ -1,7 +1,7 @@
 
 setter @instructionListIR appendShiftLeft
-  ?let @operandIR inResult
-  ?let @operandIR inSource
+  ?let @valueIR inResult
+  ?let @valueIR inSource
   ?let @uint inShiftAmount
 {
   self += !@leftShiftIR.new {!inResult !inSource !inShiftAmount}
@@ -10,8 +10,8 @@ setter @instructionListIR appendShiftLeft
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @leftShiftIR : @abstractInstructionIR {
-  @operandIR mResult
-  @operandIR mSource
+  @valueIR mResult
+  @valueIR mSource
   @uint mShiftAmount
 }
 
@@ -22,10 +22,10 @@ override method @leftShiftIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult.mValue llvmName] + " = "
+  ioLLVMcode += "  " + [mResult llvmName] + " = "
 #  [[mSource.mType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
 #  ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
-  ioLLVMcode += "shl " + [mSource.mType  llvmTypeName] + " " + [mSource.mValue llvmName] + ", " + mShiftAmount + "\n"
+  ioLLVMcode += "shl " + [mSource  llvmTypeName] + " " + [mSource llvmName] + ", " + mShiftAmount + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1,7 +1,7 @@
 setter @instructionListIR appendLoadFromMemory
   ?!@semanticTemporariesStruct ioTemporaries
   ?let @objectInMemoryIR inSource
-  !@operandIR outResultingValue
+  !@valueIR outResultingValue
 {
   switch inSource
   case registerAddress (* *) :
@@ -25,7 +25,7 @@ setter @instructionListIR appendLoadFromMemory
       !outResultingValue
       !name
     ]
-  case staticConstant (@operandIR value @string unused name) :
+  case staticConstant (@valueIR value @string unused name) :
     outResultingValue = value
   end
 }
@@ -34,7 +34,7 @@ setter @instructionListIR appendLoadFromMemory
 
 setter @instructionListIR appendStoreInMemory
   ?let @objectInMemoryIR inTargetPtr
-  ?let @operandIR inValue
+  ?let @valueIR inValue
 {
   switch inTargetPtr
   case registerAddress (@unifiedTypeMap-proxy type @string llvmName) :

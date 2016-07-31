@@ -2,7 +2,7 @@
 
 enum @getElementPtrIndexKind {
   case absolute (@uint index)
-  case indirect (@operandIR index)
+  case indirect (@valueIR index)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -46,7 +46,7 @@ override method @getElementPtrFromSelfIR llvmInstructionCode
   for (idx *) in mElementList do
     switch idx
     case absolute (index) : ioLLVMcode += ", i32 " + index
-    case indirect (index) : ioLLVMcode += ", " + [index.mType llvmTypeName] + " " + [index.mValue llvmName]
+    case indirect (index) : ioLLVMcode += ", " + [index llvmTypeName] + " " + [index llvmName]
     end
   end
   ioLLVMcode += " ;"

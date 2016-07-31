@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadTaskVariable
-  ?let @operandIR inTargetValue
+  ?let @valueIR inTargetValue
   ?let @string inTaskName
   ?let @string inVariableName
 {
@@ -10,7 +10,7 @@ setter @instructionListIR appendLoadTaskVariable
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadTaskVariableIR : @abstractInstructionIR {
-  @operandIR mTargetValue
+  @valueIR mTargetValue
   @string mTaskName
   @string mVarName
 }
@@ -22,8 +22,8 @@ override method @loadTaskVariableIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetValue.mType llvmTypeName]
-  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load "
+  let llvmType = [mTargetValue llvmTypeName]
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
   ioLLVMcode += llvmType + ", " + llvmType + " * @" + llvmNameForTaskVariable (!mTaskName !mVarName) + "\n"
 }
 

@@ -87,10 +87,10 @@ override method @forInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@operandIR iteratedExpressionResult
+    ?result:@valueIR iteratedExpressionResult
   ]
 #--- Get iterated element type
-  let @unifiedTypeMap-proxy iteratedElementType = [iteratedExpressionResult.mType enumerationType]
+  let @unifiedTypeMap-proxy iteratedElementType = [[iteratedExpressionResult type] enumerationType]
   if iteratedElementType == .null then
     error mEndOf_iteratedExpression_instruction : "this object is not enumerable"
   end
@@ -145,7 +145,7 @@ class @forInstructionIR : @abstractInstructionIR {
   @string mVarName
   @unifiedTypeMap-proxy mElementType
   @location mLocation
-  @operandIR mExpressionResult
+  @valueIR mExpressionResult
   @instructionListIR mInstructionList
 }
 
@@ -171,7 +171,7 @@ override method @forInstructionIR llvmInstructionCode
   
 #--- Test
   ioLLVMcode += testLabel + ":\n"
-  ioLLVMcode += "  %" + ptrVar + " = phi i8* [" + [mExpressionResult.mValue llvmName] + ", %"
+  ioLLVMcode += "  %" + ptrVar + " = phi i8* [" + [mExpressionResult llvmName] + ", %"
   ioLLVMcode += startLabel + "], [%" + ptrVar + ".next, %" + loopLabel + "]\n"
   ioLLVMcode += "  %" + currentVar + " = load i8, i8* %" + ptrVar + "\n"
   ioLLVMcode += "  %" + currentVar + ".nul = icmp eq i8 %" + currentVar + ", 0\n"

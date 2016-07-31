@@ -108,7 +108,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !inGuard:false
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:.null
+      !optionalTargetType:type
       !context:inContext
       !modes:inModeSet
       !allowPanic:inAllowPanic
@@ -119,14 +119,14 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
-      ?result:@operandIR lowerBoundExpressionResult
+      ?result:@valueIR lowerBoundExpressionResult
     ]
     [mUpperBoundExpression analyzeExpression
       !self:inSelfType
       !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !inGuard:false
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:.null
+      !optionalTargetType:type
       !context:inContext
       !modes:inModeSet
       !allowPanic:inAllowPanic
@@ -137,7 +137,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
-      ?result:@operandIR upperBoundExpressionResult
+      ?result:@valueIR upperBoundExpressionResult
     ]
   #--- Check expression types
     let lowerBound = checkAssignmentCompatibility (
@@ -207,8 +207,8 @@ class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
   @unifiedTypeMap-proxy mType
   @bool mUnsigned
   @location mLocation
-  @operandIR mLowerExpressionResult
-  @operandIR mUpperExpressionResult
+  @valueIR mLowerExpressionResult
+  @valueIR mUpperExpressionResult
   @instructionListIR mInstructionList
 }
 
@@ -232,14 +232,14 @@ override method @forLowerUpperBoundInstructionIR llvmInstructionCode
   let currentVarName = "%" + llvmNameForLocalVariable (!mVarName + ".current")
   let nextVarName = "%" + llvmNameForLocalVariable (!mVarName + ".next")
 #--- Store LOW in x
-  ioLLVMcode += "  store " + llvmType + " " + [mLowerExpressionResult.mValue llvmName] + ", " + llvmType + " * %" + llvmVarName + "\n"
+  ioLLVMcode += "  store " + llvmType + " " + [mLowerExpressionResult llvmName] + ", " + llvmType + " * %" + llvmVarName + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
 #--- Test
   ioLLVMcode += testLabel + ":\n"
   ioLLVMcode += "  " + loadedVarName + " = load " + llvmType + ", " + llvmType + " * %" + llvmVarName + "\n"
   ioLLVMcode += "  " + testResult + " = icmp "
   ioLLVMcode += if mUnsigned then "ult" else "slt" end
-  ioLLVMcode += " " + llvmType + " " + loadedVarName + ", " + [mUpperExpressionResult.mValue llvmName] + "\n"
+  ioLLVMcode += " " + llvmType + " " + loadedVarName + ", " + [mUpperExpressionResult llvmName] + "\n"
   ioLLVMcode += "  br i1 " + testResult + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 #--- Loop  
   ioLLVMcode += loopLabel + ":\n"

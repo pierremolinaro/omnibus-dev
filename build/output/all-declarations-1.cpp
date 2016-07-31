@@ -2731,7 +2731,7 @@ class cSortedListElement_sortedOperandIRList : public cSortedListElement {
   public : GALGAS_sortedOperandIRList_2D_element mObject ;
 
 //--- Constructor
-  public : cSortedListElement_sortedOperandIRList (const GALGAS_operandIR & in_mOperand,
+  public : cSortedListElement_sortedOperandIRList (const GALGAS_valueIR & in_mOperand,
                                                    const GALGAS_uint & in_mIndex
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -2753,7 +2753,7 @@ class cSortedListElement_sortedOperandIRList : public cSortedListElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cSortedListElement_sortedOperandIRList::cSortedListElement_sortedOperandIRList (const GALGAS_operandIR & in_mOperand,
+cSortedListElement_sortedOperandIRList::cSortedListElement_sortedOperandIRList (const GALGAS_valueIR & in_mOperand,
                                                                                 const GALGAS_uint & in_mIndex
                                                                                 COMMA_LOCATION_ARGS) :
 cSortedListElement (THERE),
@@ -2823,7 +2823,7 @@ GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::constructor_emptySortedLi
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::constructor_sortedListWithValue (const GALGAS_operandIR & inOperand0,
+GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::constructor_sortedListWithValue (const GALGAS_valueIR & inOperand0,
                                                                                         const GALGAS_uint & inOperand1
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_sortedOperandIRList result = constructor_emptySortedList (THERE) ;
@@ -2838,7 +2838,7 @@ GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::constructor_sortedListWit
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_sortedOperandIRList::addAssign_operation (const GALGAS_operandIR & inOperand0,
+void GALGAS_sortedOperandIRList::addAssign_operation (const GALGAS_valueIR & inOperand0,
                                                       const GALGAS_uint & inOperand1
                                                       COMMA_LOCATION_ARGS) {
   if (isValid ()) {
@@ -2863,7 +2863,7 @@ void GALGAS_sortedOperandIRList::plusAssign_operation (const GALGAS_sortedOperan
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_sortedOperandIRList::setter_popSmallest (GALGAS_operandIR & outOperand0,
+void GALGAS_sortedOperandIRList::setter_popSmallest (GALGAS_valueIR & outOperand0,
                                                      GALGAS_uint & outOperand1,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
@@ -2882,7 +2882,7 @@ void GALGAS_sortedOperandIRList::setter_popSmallest (GALGAS_operandIR & outOpera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_sortedOperandIRList::setter_popGreatest (GALGAS_operandIR & outOperand0,
+void GALGAS_sortedOperandIRList::setter_popGreatest (GALGAS_valueIR & outOperand0,
                                                      GALGAS_uint & outOperand1,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
@@ -2901,7 +2901,7 @@ void GALGAS_sortedOperandIRList::setter_popGreatest (GALGAS_operandIR & outOpera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_sortedOperandIRList::method_smallest (GALGAS_operandIR & outOperand0,
+void GALGAS_sortedOperandIRList::method_smallest (GALGAS_valueIR & outOperand0,
                                                   GALGAS_uint & outOperand1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
@@ -2920,7 +2920,7 @@ void GALGAS_sortedOperandIRList::method_smallest (GALGAS_operandIR & outOperand0
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_sortedOperandIRList::method_greatest (GALGAS_operandIR & outOperand0,
+void GALGAS_sortedOperandIRList::method_greatest (GALGAS_valueIR & outOperand0,
                                                   GALGAS_uint & outOperand1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
@@ -2955,7 +2955,7 @@ GALGAS_sortedOperandIRList_2D_element cEnumerator_sortedOperandIRList::current (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cEnumerator_sortedOperandIRList::current_mOperand (LOCATION_ARGS) const {
+GALGAS_valueIR cEnumerator_sortedOperandIRList::current_mOperand (LOCATION_ARGS) const {
   const cSortedListElement_sortedOperandIRList * p = (const cSortedListElement_sortedOperandIRList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cSortedListElement_sortedOperandIRList) ;
   return p->mObject.mAttribute_mOperand ;
@@ -10763,7 +10763,7 @@ class cCollectionElement_operandIRList : public cCollectionElement {
   public : GALGAS_operandIRList_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_operandIRList (const GALGAS_operandIR & in_mOperand
+  public : cCollectionElement_operandIRList (const GALGAS_valueIR & in_mOperand
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -10781,7 +10781,7 @@ class cCollectionElement_operandIRList : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_operandIRList::cCollectionElement_operandIRList (const GALGAS_operandIR & in_mOperand
+cCollectionElement_operandIRList::cCollectionElement_operandIRList (const GALGAS_valueIR & in_mOperand
                                                                     COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mOperand) {
@@ -10843,7 +10843,7 @@ GALGAS_operandIRList GALGAS_operandIRList::constructor_emptyList (LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIRList GALGAS_operandIRList::constructor_listWithValue (const GALGAS_operandIR & inOperand0
+GALGAS_operandIRList GALGAS_operandIRList::constructor_listWithValue (const GALGAS_valueIR & inOperand0
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_operandIRList result ;
   if (inOperand0.isValid ()) {
@@ -10858,7 +10858,7 @@ GALGAS_operandIRList GALGAS_operandIRList::constructor_listWithValue (const GALG
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_operandIRList::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                      const GALGAS_operandIR & in_mOperand
+                                                      const GALGAS_valueIR & in_mOperand
                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement_operandIRList * p = NULL ;
   macroMyNew (p, cCollectionElement_operandIRList (in_mOperand COMMA_THERE)) ;
@@ -10868,7 +10868,7 @@ void GALGAS_operandIRList::makeAttributesFromObjects (capCollectionElement & out
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandIRList::addAssign_operation (const GALGAS_operandIR & inOperand0
+void GALGAS_operandIRList::addAssign_operation (const GALGAS_valueIR & inOperand0
                                                 COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid ()) {
     cCollectionElement * p = NULL ;
@@ -10882,7 +10882,7 @@ void GALGAS_operandIRList::addAssign_operation (const GALGAS_operandIR & inOpera
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandIRList::setter_insertAtIndex (const GALGAS_operandIR inOperand0,
+void GALGAS_operandIRList::setter_insertAtIndex (const GALGAS_valueIR inOperand0,
                                                  const GALGAS_uint inInsertionIndex,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
@@ -10898,7 +10898,7 @@ void GALGAS_operandIRList::setter_insertAtIndex (const GALGAS_operandIR inOperan
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandIRList::setter_removeAtIndex (GALGAS_operandIR & outOperand0,
+void GALGAS_operandIRList::setter_removeAtIndex (GALGAS_valueIR & outOperand0,
                                                  const GALGAS_uint inRemoveIndex,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
@@ -10917,7 +10917,7 @@ void GALGAS_operandIRList::setter_removeAtIndex (GALGAS_operandIR & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandIRList::setter_popFirst (GALGAS_operandIR & outOperand0,
+void GALGAS_operandIRList::setter_popFirst (GALGAS_valueIR & outOperand0,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -10933,7 +10933,7 @@ void GALGAS_operandIRList::setter_popFirst (GALGAS_operandIR & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandIRList::setter_popLast (GALGAS_operandIR & outOperand0,
+void GALGAS_operandIRList::setter_popLast (GALGAS_valueIR & outOperand0,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -10949,7 +10949,7 @@ void GALGAS_operandIRList::setter_popLast (GALGAS_operandIR & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandIRList::method_first (GALGAS_operandIR & outOperand0,
+void GALGAS_operandIRList::method_first (GALGAS_valueIR & outOperand0,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -10965,7 +10965,7 @@ void GALGAS_operandIRList::method_first (GALGAS_operandIR & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_operandIRList::method_last (GALGAS_operandIR & outOperand0,
+void GALGAS_operandIRList::method_last (GALGAS_valueIR & outOperand0,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -11032,12 +11032,12 @@ void GALGAS_operandIRList::plusAssign_operation (const GALGAS_operandIRList inOp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR GALGAS_operandIRList::getter_mOperandAtIndex (const GALGAS_uint & inIndex,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const {
+GALGAS_valueIR GALGAS_operandIRList::getter_mOperandAtIndex (const GALGAS_uint & inIndex,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_operandIRList * p = (cCollectionElement_operandIRList *) attributes.ptr () ;
-  GALGAS_operandIR result ;
+  GALGAS_valueIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_operandIRList) ;
     result = p->mObject.mAttribute_mOperand ;
@@ -11066,7 +11066,7 @@ GALGAS_operandIRList_2D_element cEnumerator_operandIRList::current (LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_operandIR cEnumerator_operandIRList::current_mOperand (LOCATION_ARGS) const {
+GALGAS_valueIR cEnumerator_operandIRList::current_mOperand (LOCATION_ARGS) const {
   const cCollectionElement_operandIRList * p = (const cCollectionElement_operandIRList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_operandIRList) ;
   return p->mObject.mAttribute_mOperand ;

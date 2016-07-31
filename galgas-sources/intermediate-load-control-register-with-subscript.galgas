@@ -1,7 +1,7 @@
 
 setter @instructionListIR appendLoadVolatileRegisterWithSubscript
-  ?let @operandIR inTargetValue
-  ?let @operandIR inIndexResult
+  ?let @valueIR inTargetValue
+  ?let @valueIR inIndexResult
   ?let @bigint inAddress
   ?let @bigint inElementArraySize
 {
@@ -11,8 +11,8 @@ setter @instructionListIR appendLoadVolatileRegisterWithSubscript
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadRegisterWithSubscriptIR : @abstractInstructionIR {
-  @operandIR mTargetValue
-  @operandIR mIndexResult
+  @valueIR mTargetValue
+  @valueIR mIndexResult
   @bigint mRegisterAddress
   @bigint mElementArraySize
 }
@@ -30,20 +30,20 @@ override method @loadRegisterWithSubscriptIR llvmInstructionCode
   let scriptedRegisterAddressName = "%register.address." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
 #--- Needs to perm an extend to i32 ?
-  [[mIndexResult.mType kind] integer ?min:* ?max:* ?unsigned:* ?bitCount:let bitCount]
+  [[mIndexResult kind] integer ?min:* ?max:* ?unsigned:* ?bitCount:let bitCount]
   if bitCount < 32 then
-    ioLLVMcode += "  " + registerIndexName + " = zext " + [mIndexResult.mType  llvmTypeName]
-               + " " + [mIndexResult.mValue llvmName] + " to i32\n"
+    ioLLVMcode += "  " + registerIndexName + " = zext " + [mIndexResult  llvmTypeName]
+               + " " + [mIndexResult llvmName] + " to i32\n"
   end
   ioLLVMcode += "  " + registerOffsetName + " = mul i32 "
-             + if bitCount < 32 then registerIndexName else [mIndexResult.mValue llvmName] end
+             + if bitCount < 32 then registerIndexName else [mIndexResult llvmName] end
              + ", " + mElementArraySize + " ; " + [mElementArraySize hexString] + "\n"
   ioLLVMcode += "  " + scriptedRegisterAddressValueName + " = add i32 " + registerOffsetName
              + ", " + mRegisterAddress + " ; " + [mRegisterAddress hexString] + "\n"
-  let llvmType = [mTargetValue.mType llvmTypeName]
+  let llvmType = [mTargetValue llvmTypeName]
   ioLLVMcode += "  " + scriptedRegisterAddressName + " = inttoptr i32 " + scriptedRegisterAddressValueName
              + " to " + llvmType + " *\n"
-  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
              + " * " + scriptedRegisterAddressName + "\n"
 }
 

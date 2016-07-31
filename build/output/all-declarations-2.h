@@ -2590,7 +2590,7 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
 //--------------------------------- Element constructor used by listmap
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_procEffectiveParameterPassingModeIR & in_mEffectiveParameterPassingMode,
-                                                  const class GALGAS_operandIR & in_mParameter
+                                                  const class GALGAS_valueIR & in_mParameter
                                                   COMMA_LOCATION_ARGS) ;
 
 //-- Start of generic part --*
@@ -2607,7 +2607,7 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
   public : static class GALGAS_procCallEffectiveParameterListIR constructor_emptyList (LOCATION_ARGS) ;
 
   public : static class GALGAS_procCallEffectiveParameterListIR constructor_listWithValue (const class GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
-                                                                                           const class GALGAS_operandIR & inOperand1
+                                                                                           const class GALGAS_valueIR & inOperand1
                                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with expression)
@@ -2617,7 +2617,7 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
-                                                      const class GALGAS_operandIR & inOperand1
+                                                      const class GALGAS_valueIR & inOperand1
                                                       COMMA_LOCATION_ARGS) ;
 //--------------------------------- + operator
   public : VIRTUAL_IN_DEBUG GALGAS_procCallEffectiveParameterListIR add_operation (const GALGAS_procCallEffectiveParameterListIR & inOperand,
@@ -2627,23 +2627,23 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_procEffectiveParameterPassingModeIR constinArgument0,
-                                                       class GALGAS_operandIR constinArgument1,
+                                                       class GALGAS_valueIR constinArgument1,
                                                        class GALGAS_uint constinArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_procEffectiveParameterPassingModeIR & outArgument0,
-                                                  class GALGAS_operandIR & outArgument1,
+                                                  class GALGAS_valueIR & outArgument1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_procEffectiveParameterPassingModeIR & outArgument0,
-                                                 class GALGAS_operandIR & outArgument1,
+                                                 class GALGAS_valueIR & outArgument1,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_procEffectiveParameterPassingModeIR & outArgument0,
-                                                       class GALGAS_operandIR & outArgument1,
+                                                       class GALGAS_valueIR & outArgument1,
                                                        class GALGAS_uint constinArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
@@ -2651,12 +2651,12 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_procEffectiveParameterPassingModeIR & outArgument0,
-                                               class GALGAS_operandIR & outArgument1,
+                                               class GALGAS_valueIR & outArgument1,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_procEffectiveParameterPassingModeIR & outArgument0,
-                                              class GALGAS_operandIR & outArgument1,
+                                              class GALGAS_valueIR & outArgument1,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
 
@@ -2667,9 +2667,9 @@ class GALGAS_procCallEffectiveParameterListIR : public AC_GALGAS_list {
                                                                                                                            C_Compiler * inCompiler
                                                                                                                            COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_mParameterAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mParameterAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_procCallEffectiveParameterListIR getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                                    C_Compiler * inCompiler
@@ -2702,7 +2702,7 @@ class cEnumerator_procCallEffectiveParameterListIR : public cGenericAbstractEnum
 
 //--- Current element access
   public : class GALGAS_procEffectiveParameterPassingModeIR current_mEffectiveParameterPassingMode (LOCATION_ARGS) const ;
-  public : class GALGAS_operandIR current_mParameter (LOCATION_ARGS) const ;
+  public : class GALGAS_valueIR current_mParameter (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_procCallEffectiveParameterListIR_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -2792,7 +2792,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procEffectiveParame
 class GALGAS_procCallEffectiveParameterListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_procEffectiveParameterPassingModeIR mAttribute_mEffectiveParameterPassingMode ;
-  public : GALGAS_operandIR mAttribute_mParameter ;
+  public : GALGAS_valueIR mAttribute_mParameter ;
 
 
 //--------------------------------- Accessors
@@ -2807,7 +2807,7 @@ class GALGAS_procCallEffectiveParameterListIR_2D_element : public AC_GALGAS_root
 
 //--------------------------------- Native constructor
   public : GALGAS_procCallEffectiveParameterListIR_2D_element (const GALGAS_procEffectiveParameterPassingModeIR & in_mEffectiveParameterPassingMode,
-                                                               const GALGAS_operandIR & in_mParameter) ;
+                                                               const GALGAS_valueIR & in_mParameter) ;
 
 //-- Start of generic part --*
 
@@ -2821,7 +2821,7 @@ class GALGAS_procCallEffectiveParameterListIR_2D_element : public AC_GALGAS_root
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_procCallEffectiveParameterListIR_2D_element constructor_new (const class GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
-                                                                                            const class GALGAS_operandIR & inOperand1
+                                                                                            const class GALGAS_valueIR & inOperand1
                                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2838,7 +2838,7 @@ class GALGAS_procCallEffectiveParameterListIR_2D_element : public AC_GALGAS_root
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_procEffectiveParameterPassingModeIR getter_mEffectiveParameterPassingMode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_operandIR getter_mParameter (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_valueIR getter_mParameter (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -4235,7 +4235,7 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_guardedCommandIR constructor_boolAndSync (const class GALGAS_bool & inOperand0,
                                                                          const class GALGAS_instructionListIR & inOperand1,
-                                                                         const class GALGAS_operandIR & inOperand2,
+                                                                         const class GALGAS_valueIR & inOperand2,
                                                                          const class GALGAS_string & inOperand3,
                                                                          const class GALGAS_string & inOperand4,
                                                                          const class GALGAS_instructionListIR & inOperand5,
@@ -4244,7 +4244,7 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 
   public : static class GALGAS_guardedCommandIR constructor_booleanGuard (const class GALGAS_bool & inOperand0,
                                                                           const class GALGAS_instructionListIR & inOperand1,
-                                                                          const class GALGAS_operandIR & inOperand2
+                                                                          const class GALGAS_valueIR & inOperand2
                                                                           COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_guardedCommandIR constructor_synchronization (const class GALGAS_bool & inOperand0,
@@ -4265,7 +4265,7 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_boolAndSync (class GALGAS_bool & outArgument0,
                                                      class GALGAS_instructionListIR & outArgument1,
-                                                     class GALGAS_operandIR & outArgument2,
+                                                     class GALGAS_valueIR & outArgument2,
                                                      class GALGAS_string & outArgument3,
                                                      class GALGAS_string & outArgument4,
                                                      class GALGAS_instructionListIR & outArgument5,
@@ -4275,7 +4275,7 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_booleanGuard (class GALGAS_bool & outArgument0,
                                                       class GALGAS_instructionListIR & outArgument1,
-                                                      class GALGAS_operandIR & outArgument2,
+                                                      class GALGAS_valueIR & outArgument2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const ;
 
@@ -4340,12 +4340,12 @@ class cEnumAssociatedValues_guardedCommandIR_synchronization : public cEnumAssoc
 class cEnumAssociatedValues_guardedCommandIR_booleanGuard : public cEnumAssociatedValues {
   public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_instructionListIR mAssociatedValue1 ;
-  public : const GALGAS_operandIR mAssociatedValue2 ;
+  public : const GALGAS_valueIR mAssociatedValue2 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_guardedCommandIR_booleanGuard (const GALGAS_bool & inAssociatedValue0,
                                                                 const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                const GALGAS_operandIR & inAssociatedValue2
+                                                                const GALGAS_valueIR & inAssociatedValue2
                                                                 COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -4360,7 +4360,7 @@ class cEnumAssociatedValues_guardedCommandIR_booleanGuard : public cEnumAssociat
 class cEnumAssociatedValues_guardedCommandIR_boolAndSync : public cEnumAssociatedValues {
   public : const GALGAS_bool mAssociatedValue0 ;
   public : const GALGAS_instructionListIR mAssociatedValue1 ;
-  public : const GALGAS_operandIR mAssociatedValue2 ;
+  public : const GALGAS_valueIR mAssociatedValue2 ;
   public : const GALGAS_string mAssociatedValue3 ;
   public : const GALGAS_string mAssociatedValue4 ;
   public : const GALGAS_instructionListIR mAssociatedValue5 ;
@@ -4369,7 +4369,7 @@ class cEnumAssociatedValues_guardedCommandIR_boolAndSync : public cEnumAssociate
 //--- Constructor
   public : cEnumAssociatedValues_guardedCommandIR_boolAndSync (const GALGAS_bool & inAssociatedValue0,
                                                                const GALGAS_instructionListIR & inAssociatedValue1,
-                                                               const GALGAS_operandIR & inAssociatedValue2,
+                                                               const GALGAS_valueIR & inAssociatedValue2,
                                                                const GALGAS_string & inAssociatedValue3,
                                                                const GALGAS_string & inAssociatedValue4,
                                                                const GALGAS_instructionListIR & inAssociatedValue5,
@@ -4740,7 +4740,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                                              const class GALGAS_string & inOperand1
                                                                              COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_objectInMemoryIR constructor_staticConstant (const class GALGAS_operandIR & inOperand0,
+  public : static class GALGAS_objectInMemoryIR constructor_staticConstant (const class GALGAS_valueIR & inOperand0,
                                                                             const class GALGAS_string & inOperand1
                                                                             COMMA_LOCATION_ARGS) ;
 
@@ -4778,7 +4778,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_staticConstant (class GALGAS_operandIR & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_staticConstant (class GALGAS_valueIR & outArgument0,
                                                         class GALGAS_string & outArgument1,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) const ;

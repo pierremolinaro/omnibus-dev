@@ -252,34 +252,16 @@ class @literal_literal_integerInfixOperation : @infixOperatorDescription {
 override method @literal_literal_integerInfixOperation generateInfixOperatorCode
   ?!@semanticTemporariesStruct unused ioTemporaries
   ?!@instructionListIR unused ioInstructionGenerationList
-  ?let @operandIR inLeftOperand
+  ?let @valueIR inLeftOperand
   ?let @location unused inOperatorLocation
-  ?let @operandIR inRightOperand
+  ?let @valueIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@operandIR outResult
+  !@valueIR outResult
 {
-  [inLeftOperand.mValue  literalInteger ?value:let @bigint leftValue]
-  [inRightOperand.mValue literalInteger ?value:let @bigint rightValue]
+  [inLeftOperand  literalInteger ?1* ?value:let @bigint leftValue]
+  [inRightOperand literalInteger ?1* ?value:let @bigint rightValue]
   let result = [self performStaticOperation !leftValue !rightValue]
-#  switch mOperator 
-#  case equal : result = [leftValue == rightValue bigint]
-#  case nonEqual : result = [leftValue != rightValue bigint]
-#  case strictInf : result = [leftValue < rightValue bigint]
-#  case infEqual : result = [leftValue <= rightValue bigint]
-#  case strictSup : result = [leftValue > rightValue bigint]
-#  case supEqual : result = [leftValue >= rightValue bigint]
-#  case and : result = leftValue & rightValue
-#  case ior : result = leftValue | rightValue
-#  case xor : result = leftValue ^ rightValue
-#  case add : result = leftValue + rightValue
-#  case sub : result = leftValue - rightValue
-#  case mul : result = leftValue * rightValue
-#  case div : result = leftValue / rightValue
-#  case rem : result = leftValue mod rightValue
-#  case leftShift  : result = leftValue << [rightValue uint]
-#  case rightShift : result = leftValue >> [rightValue uint]
-#  end
-  outResult = .new {!inResultType !.literalInteger {!value:result}}
+  outResult = .literalInteger {!type: inResultType !value:result}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

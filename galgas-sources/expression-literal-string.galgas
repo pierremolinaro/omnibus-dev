@@ -62,11 +62,11 @@ override method @literalStringInExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap unused ioNamedObjectMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
   let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
   [!?ioGlobalLiteralStringMap findOrAddStaticString !mLiteralString.string ?let staticStringIndex]
-  outResult = .new {!type !.literalString {!size:[mLiteralString.string length] + 1 !index:staticStringIndex}}
+  outResult = .literalString {!type: type !size:[mLiteralString.string length] + 1 !index:staticStringIndex}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

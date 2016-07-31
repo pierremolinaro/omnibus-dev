@@ -252,13 +252,13 @@ method @taskVarListAST-element enterInContext
     !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
-    ?result:let @operandIR expressionResult
+    ?result:let @valueIR expressionResult
   ]
-  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult.mValue isStatic] then
+  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
     error mVarName : "source expression cannot be statically computed"
   end
 #--- Check variable type and expression type
-  if variableAnnotationType == .null && [[expressionResult.mType kind] isStaticInteger] then
+  if variableAnnotationType == .null && [[expressionResult kind] isStaticInteger] then
     error mVarName : "cannot infer type"
   end
   let result = checkAssignmentCompatibility (
@@ -269,17 +269,17 @@ method @taskVarListAST-element enterInContext
   )
   drop variableAnnotationType, expressionResult
 #--- Enter variable
-  if not [result.mType instantiable] then
-    error mVarName : "$" + [result.mType key] + " type is not instanciable"
+  if not [[result type] instantiable] then
+    error mVarName : "$" + [result key] + " type is not instanciable"
   end
-  [!?ioPropertyMap insertKey !mVarName !false !result.mType ![ioPropertyList length]]
+  [!?ioPropertyMap insertKey !mVarName !false ![result type] ![ioPropertyList length]]
   ioInitialValueList += !result
   [!?ioObjectMap insertKey
     !mVarName
-    !.new {!result.mType}
+    !.new {![result type]}
     ![ioPropertyList length]
   ]
-  ioPropertyList += !mVarName.string !result.mType
+  ioPropertyList += !mVarName.string ![result type]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

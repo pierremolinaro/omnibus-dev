@@ -255,13 +255,13 @@ method @globalVarDeclarationList-element enterInContext
      !?namedObjectMap: namedObjectMap
      !?alloca:allocaList
      !?instructionListIR:instructionGenerationList
-     ?result:let @operandIR expressionResult
+     ?result:let @valueIR expressionResult
   ]
-  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult.mValue isStatic] then
+  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
     error mVarName : "source expression cannot be statically computed"
   end
 #--- Check variable type and expression type
-  if variableAnnotationType == .null && [[expressionResult.mType kind] isStaticInteger] then
+  if variableAnnotationType == .null && [[expressionResult kind] isStaticInteger] then
     error mVarName : "cannot infer type"
   end
   let result = checkAssignmentCompatibility (
@@ -361,13 +361,13 @@ method @globalVarDeclarationList-element enterInContext
 #--- Enter variable in global variable map
   [!?ioContext.mGlobalVariableMap insertKey
     !lkey:mVarName
-    !type:result.mType
+    !type:[result type]
     !executionModeSet:executionModes
     !allowedRoutineMap:allowedRoutineMap
     !allowedGuardMap:allowedGuardMap
     !allowedISRMap:allowedISRMap
     !allowedTaskMap:allowedTaskMap
-    !initialValue:result.mValue
+    !initialValue:result
     !isConstant:false # Is not constant
     !allowedAccessToAll:mAllowedAccessToAll
   ]

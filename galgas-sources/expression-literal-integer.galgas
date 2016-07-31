@@ -62,9 +62,9 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap unused ioNamedObjectMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
-  outResult = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:mLiteralInteger.bigint}}
+  outResult = .literalInteger {!type: inContext.mLiteralIntegerType !value:mLiteralInteger.bigint}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

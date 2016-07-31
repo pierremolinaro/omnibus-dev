@@ -254,7 +254,7 @@ method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
       case namedBit (@lstring name @lbigint count) :
         let bitCount = [count.bigint uint]
         if bitCount == 1 then
-          [!?classConstantMap insertKey !name !.new{!inRegisterType !.literalInteger {!value:1G << shiftCount}}]
+          [!?classConstantMap insertKey !name !.literalInteger {!type: inRegisterType !value:1G << shiftCount}]
         end
         outControlRegisterFieldList += !bitCount !name.string
         [!?outRegisterFieldMap insertKey
@@ -339,15 +339,15 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
       !errorLocation:register.mRegisterAddressLocation
       !context:ioContext
       !?staticStringMap:ioGlobalLiteralStringMap
-      ?result:let @operandIR addressExpressionResult
+      ?result:let @valueIR addressExpressionResult
     ]
     @bigint registerAddress
-    if not [addressExpressionResult.mValue isLiteralInteger] then
+    if not [addressExpressionResult isLiteralInteger] then
       error register.mRegisterAddressLocation
         : "control register address is not a static integer expression"
         : registerAddress
     else
-      [addressExpressionResult.mValue literalInteger ?value:registerAddress]
+      [addressExpressionResult literalInteger ?1* ?value:registerAddress]
    #--- Check address value
       if registerAddress > maxRegisterAddress then
         error register.mRegisterAddressLocation : "register address should be lower or equal to " + [maxRegisterAddress hexString]
@@ -366,12 +366,12 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
         !errorLocation:arraySizeLocation
         !context:ioContext
         !?staticStringMap:ioGlobalLiteralStringMap
-        ?result:let @operandIR sizeExpressionResult
+        ?result:let @valueIR sizeExpressionResult
       ]
-      if not [sizeExpressionResult.mValue isLiteralInteger] then
+      if not [sizeExpressionResult isLiteralInteger] then
         error arraySizeLocation : "control register address is not a static integer expression" : arraySize
       else
-        [sizeExpressionResult.mValue literalInteger ?value:arraySize]
+        [sizeExpressionResult literalInteger ?1* ?value:arraySize]
         if arraySize < 2G then
           error arraySizeLocation
             : "control register array size should be a static integer expression >= 2, equal to a power of 2"
@@ -390,14 +390,14 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
         !errorLocation:arrayElementSizeLocation
         !context:ioContext
         !?staticStringMap:ioGlobalLiteralStringMap
-        ?result:let @operandIR elementArraySizeExpressionResult
+        ?result:let @valueIR elementArraySizeExpressionResult
       ]
-      if not [elementArraySizeExpressionResult.mValue isLiteralInteger] then
+      if not [elementArraySizeExpressionResult isLiteralInteger] then
         error arrayElementSizeLocation
           : "element size is not a static integer expression"
           : elementArraySize
       else
-        [elementArraySizeExpressionResult.mValue literalInteger ?value:let elementArraySizeAsBigInt]
+        [elementArraySizeExpressionResult literalInteger ?1* ?value:let elementArraySizeAsBigInt]
         elementArraySize = [elementArraySizeAsBigInt uint]
       end
     end

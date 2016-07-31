@@ -55,7 +55,7 @@ setter @staticStringMap findOrAddStaticString ?@string inString !@uint outIndex 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalConstantMap {
-  @operandIR mValue
+  @valueIR mValue
   insert insertKey error message "the '%K' constant is already declared in %L"
   search searchKey error message "there is no '%K' constant"
 }
@@ -172,13 +172,13 @@ sharedmap @unifiedTypeMap %selectors {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @operandList {
-  @operandIR mOperand
+  @valueIR mOperand
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @classConstantMap {
-  @operandIR mValue
+  @valueIR mValue
   insert insertKey error message "the '%K' class constant is already declared in %L"
   search searchKey error message "there is no '%K' class constant"
 }
@@ -192,7 +192,7 @@ list @typeList {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @operandIRList {
-  @operandIR mOperand
+  @valueIR mOperand
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

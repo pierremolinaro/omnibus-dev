@@ -51,7 +51,7 @@ override method @instanciationAST analyzeExpression
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Analyze constructor source type
   let expressionType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}

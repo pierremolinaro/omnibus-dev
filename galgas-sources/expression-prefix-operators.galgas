@@ -56,7 +56,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -75,17 +75,17 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @operandIR expressionResult
+    ?result:let @valueIR expressionResult
   ]
 #--- Check expression type accepts prefix operator
   @prefixOperatorMap prefixOperatorMap
   @llvmBinaryOperation binaryOperator
-  @operandIR leftOperand
+  @valueIR leftOperand
   switch mOp 
   case unsignedComplement :
     prefixOperatorMap = inContext.mUnsignedComplementOperatorMap
     binaryOperator = .xor
-    switch [expressionResult.mType kind]
+    switch [expressionResult kind]
     case arrayType (* *) : error .nowhere : "internal error" : leftOperand
     case opaque (*) : error .nowhere : "internal error" : leftOperand
     case boolean : error .nowhere : "internal error" : leftOperand
@@ -94,16 +94,16 @@ override method @prefixOperatorExpressionAST analyzeExpression
     case structure (* * *) :  error .nowhere : "internal error" : leftOperand
     case staticInteger :  error .nowhere : "internal error" : leftOperand
     case integer (* * * @uint bitCount) :
-      leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:(1G << bitCount) - 1G}}
+      leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:(1G << bitCount) - 1G}
     end
   case notOperator :
     prefixOperatorMap = inContext.mNotOperatorMap
     binaryOperator = .xor
-    leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:1G}}
+    leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:1G}
   case minusNoOvf :
     prefixOperatorMap = inContext.mUnaryMinusOperatorMap
     binaryOperator = .subNoOVF
-    leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
+    leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:0G}
   case minus :
     prefixOperatorMap = inContext.mUnaryMinusOperatorMap
     if [inModeSet hasKey !panicModeName ()] then
@@ -112,18 +112,18 @@ override method @prefixOperatorExpressionAST analyzeExpression
     end
     if [option plm_options.noPanicGeneration value] then
       binaryOperator = .subNoOVF
-      leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
+      leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:0G}
     else
       binaryOperator = .ssubOVF
-      leftOperand = .new {!inContext.mLiteralIntegerType !.literalInteger {!value:0G}}
+      leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:0G}
     end
   end
 #--- Check operator
-  [prefixOperatorMap searchKey !.new {![expressionResult.mType key] !mOperatorLocation}]
-  let resultType = expressionResult.mType
+  [prefixOperatorMap searchKey !.new {![expressionResult key] !mOperatorLocation}]
+  let resultType = [expressionResult type]
 #---
-  if [expressionResult.mValue isLiteralInteger] then
-    [expressionResult.mValue literalInteger ?value:let @bigint value]
+  if [expressionResult isLiteralInteger] then
+    [expressionResult literalInteger ?1* ?value:let @bigint value]
     @bigint result
     switch mOp 
     case minusNoOvf : result = - value
@@ -131,18 +131,18 @@ override method @prefixOperatorExpressionAST analyzeExpression
     case minus : result = - value
     case notOperator : result = 1G ^ value
     end
-    outResult = .new {!resultType !.literalInteger {!value:result}}
+    outResult = .literalInteger {!type:resultType !value:result}
   else
   #--- Temp var
     getNewTempVariable (!resultType !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
-      !outResult.mValue
-      !outResult.mType
+      !outResult
+      ![outResult type]
       !mOperatorLocation
-      !leftOperand.mValue
+      !leftOperand
       !binaryOperator
-      !expressionResult.mValue
+      !expressionResult
     ]      
   end
 }

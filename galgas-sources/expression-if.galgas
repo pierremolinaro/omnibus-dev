@@ -86,7 +86,7 @@ override method @ifExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
 #--- Analyze if expression
   [mIfExpression analyzeExpression
@@ -105,10 +105,10 @@ override method @ifExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @operandIR ifExpressionResult
+    ?result:let @valueIR ifExpressionResult
   ]
 #--- Check "if" expression type is boolean
-  if not [[ifExpressionResult.mType kind] isBoolean] then
+  if not [[ifExpressionResult kind] isBoolean] then
     error mIfExpressionEndLocation : "'if' expression should be boolean"
   end
 #--- Analyze 'then' expression
@@ -128,7 +128,7 @@ override method @ifExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @operandIR thenExpressionTempResult
+    ?result:let @valueIR thenExpressionTempResult
   ]
   let thenExpressionResult = checkAssignmentCompatibility (
     !source:thenExpressionTempResult
@@ -153,20 +153,20 @@ override method @ifExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @operandIR elseExpressionTempResult
+    ?result:let @valueIR elseExpressionTempResult
   ]
   let elseExpressionResult = checkAssignmentCompatibility (
     !source:elseExpressionTempResult
-    !targetAnnotationType:thenExpressionResult.mType
+    !targetAnnotationType:[thenExpressionResult type]
     !errorLocation:mElseExpressionEndLocation
     !staticTypeAllowed:false
   )
 #--- 'if' expression is static ?
-  if [ifExpressionResult.mValue isStatic] then # yes, perform 'if' statically
-    [ifExpressionResult.mValue literalInteger ?value:let value]
+  if [ifExpressionResult isStatic] then # yes, perform 'if' statically
+    [ifExpressionResult literalInteger ?1* ?value:let value]
     outResult = if value != 0G then thenExpressionResult else elseExpressionResult end
   else # No, generate 'select' LLVM instruction
-    getNewTempVariable (!elseExpressionResult.mType !?ioTemporaries ?outResult)
+    getNewTempVariable (![elseExpressionResult type] !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendSelectOperation
       !outResult
       !ifExpressionResult

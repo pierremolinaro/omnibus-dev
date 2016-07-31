@@ -69,9 +69,9 @@ override method @literalBooleanInExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap unused ioNamedObjectMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
-  outResult = .new {!inContext.mBooleanType !.literalInteger {!value:if mValue then 1G else 0G end}}
+  outResult = .literalInteger {!type: inContext.mBooleanType !value:if mValue then 1G else 0G end}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

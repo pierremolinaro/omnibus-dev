@@ -151,13 +151,13 @@ override method @ifInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @operandIR testResult
+    ?result:let @valueIR testResult
   ]
 #--- Check inferred type
-  if [testResult.mType kind] != .boolean then
-    error mTestExpressionEndLocation : "test expression type is '" + [testResult.mType key] + "', it should be boolean"
+  if [testResult kind] != .boolean then
+    error mTestExpressionEndLocation : "test expression type is '" + [testResult key] + "', it should be boolean"
   end
-  if [testResult.mValue isStatic] then
+  if [testResult isStatic] then
     error mTestExpressionEndLocation : "test expression type should not be static"
   end
   [!?ioVariableMap openOverrideForSelectBlock]
@@ -214,7 +214,7 @@ override method @ifInstructionAST analyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @ifInstructionIR : @abstractInstructionIR {
-  @operandIR mTestVariable
+  @valueIR mTestVariable
   @location mLocation
   @instructionListIR mThenInstructionGenerationList
   @instructionListIR mElseInstructionGenerationList
@@ -230,7 +230,7 @@ override method @ifInstructionIR llvmInstructionCode
   let labelTrue = "if." + [mLocation locationIndex] + ".true"
   let labelFalse = "if." + [mLocation locationIndex] + ".false"
   let labelEnd = "if." + [mLocation locationIndex] + ".end"
-  ioLLVMcode += "  br i1 " + [mTestVariable.mValue llvmName] + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
+  ioLLVMcode += "  br i1 " + [mTestVariable llvmName] + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
 #--- True branch
   ioLLVMcode += labelTrue + ":\n"
   [mThenInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]

@@ -4,60 +4,252 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc getNewTempVariable
-  ?let @unifiedTypeMap-proxy inType
-  ?!@semanticTemporariesStruct ioTemporaries
-  !@valueIR outTempVariable
-{
-  outTempVariable = .llvmLocalObject {!type: inType !name:"temp." + ioTemporaries.mTemporaryIndex}
-  ioTemporaries.mTemporaryIndex ++
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc getLocalNameOfNewTempObjectInMemory
-  ?let @unifiedTypeMap-proxy inType
-  ?!@semanticTemporariesStruct ioTemporaries
-  !@objectInMemoryIR outTempVariable
-{
-  outTempVariable = .localVariable {!type:inType !name:"temp." + ioTemporaries.mTemporaryIndex}
-  ioTemporaries.mTemporaryIndex ++
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-sharedmap @variableMap %selectors {
+struct @namedObject {
   @unifiedTypeMap-proxy type
-  @bool readAccessAllowed
-  @objectInMemoryIR variableKind
-  @bool copyable
-  @bool canBeUsedAsInputParameter
+#  @bool readAccessAllowed
+#  @bool copyable
+#  @bool canBeUsedAsInputParameter
+}
 
-#--- Handle shadow variable declaration
-  warning %shadow "declaration of '%K' variable shadows a variable declared in %L"
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#--- Inaccessible control register
-  state inaccessibleControlRegister {
-    neutralAccess   -> inaccessibleControlRegister
-    readAccess      -> inaccessibleControlRegister error "the control register is inaccessible"
-    writeAccess     -> inaccessibleControlRegister error "the control register is inaccessible"
-    readWriteAccess -> inaccessibleControlRegister error "the control register is inaccessible"
-    dropAccess      -> inaccessibleControlRegister error "the control register is inaccessible"
-    constMethodCall -> inaccessibleControlRegister error "the control register is inaccessible"
-    methodCall      -> inaccessibleControlRegister error "the control register is inaccessible"
-  }
+map @namedObjectMap {
+  @namedObject mObject
+  @uint mIndex
 
-#--- module
-  state module {
-    neutralAccess   -> module
-    readAccess      -> module error "a module cannot be read"
-    writeAccess     -> module error "a module cannot be written"
-    readWriteAccess -> module error "a module cannot be modified"
-    constMethodCall -> module
-    methodCall      -> module
-    dropAccess      -> module error "a module cannot be dropped"
-  }
+  insert insertKey error message "duplicated $%K (already declared at %L"
+  search searchKey error message "$%K does not exist"
+}
 
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc getNewTemporaryObjectPtr
+  ?let @namedObject inObject
+  ?!@semanticTemporariesStruct ioTemporaries
+  !@objectInMemoryIR outObjectPtr
+{
+  outObjectPtr = .localVariable {!type:inObject.type !name:"temp." + ioTemporaries.mTemporaryIndex}
+  ioTemporaries.mTemporaryIndex ++
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc getNewTemporarySelfObjectPtr
+  ?let @unifiedTypeMap-proxy inSelfType
+  ?let @namedObject inObject
+  ?let @string inPropertyName
+  ?let @uint inObjectIndex
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectInMemoryIR outObjectPtr
+{
+  outObjectPtr = .localVariable {!type:inObject.type !name:"temp." + ioTemporaries.mTemporaryIndex}
+  ioTemporaries.mTemporaryIndex ++
+  [!?ioInstructionGenerationList appendGetElementPtrFromSelf
+    !outObjectPtr
+    !inSelfType
+    !{!.absolute {!index:inObjectIndex} !inPropertyName}
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc initialVariableMap
+  ?routineNameForInvocation:let @string inRoutineNameForInvocation
+  ?context:let @semanticContext inContext
+  ?userMode:let @bool inAcceptUserMode
+  ?registerAccess:let @accessKind inRegisterAccessKind
+  ?globalsAreConstant:@bool inGlobalsAreConstant
+  ?returnTypeName:let @lstring inReturnTypeName
+  !@variableMap outVariableMap
+  !@namedObjectMap outObjectMap
+  !@localVariableMap outLocalVariableMap
+{
+  outVariableMap = .emptyMap
+  outLocalVariableMap = .emptyMap
+  outObjectMap = {}
+#------------------------------------------------------- Add modules
+  for (moduleName) in inContext.mModuleMap do
+    let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
+    let moduleType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
+    [!?outVariableMap insertModule
+      !lkey:moduleName
+      !type:moduleType
+      !readAccessAllowed:false
+      !variableKind:.globalVariable {!type:moduleType !name:moduleName.string !volatile:false}
+      !copyable:false
+      !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+    ]
+  end
+#------------------------------------------------------- Add registers
+  switch inRegisterAccessKind
+  case noAccess :
+    for () in inContext.mControlRegisterMap do
+      [!?outVariableMap insertInaccessibleControlRegister
+        !lkey:lkey
+        !type:mType
+        !readAccessAllowed:false
+        !variableKind:.register {
+          !type:mType
+          !name:lkey
+          !address:mAddress 
+          !sliceMap:mRegisterFieldAccessMap
+          !arraySize: mArraySize # 0 if not an array
+          !elementSize: mElementArraySize # 0 if not an array
+        }
+        !copyable:false
+        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+      ]
+    end
+  case readAccess :
+    for () in inContext.mControlRegisterMap do
+      if inAcceptUserMode && not mIsAccessibleInUserMode then
+        [!?outVariableMap insertInaccessibleControlRegister
+          !lkey:lkey
+          !type:mType
+          !readAccessAllowed:true
+          !variableKind:.register {
+            !type:mType
+            !name:lkey
+            !address:mAddress
+            !sliceMap:mRegisterFieldAccessMap
+            !arraySize: mArraySize # 0 if not an array
+            !elementSize: mElementArraySize # 0 if not an array
+          }
+          !copyable:true
+          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+        ]
+      elsif mIsReadOnly || inGlobalsAreConstant then
+        [!?outVariableMap insertUsedConstant
+          !lkey:lkey
+          !type:mType
+          !readAccessAllowed:true
+          !variableKind:.register {
+            !type:mType
+            !name:lkey
+            !address:mAddress
+            !sliceMap:mRegisterFieldAccessMap
+            !arraySize: mArraySize # 0 if not an array
+            !elementSize: mElementArraySize # 0 if not an array
+          }
+          !copyable:true
+          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+        ]
+      end
+    end
+  case readWriteAccess :
+    for () in inContext.mControlRegisterMap do
+      [!?outVariableMap insertDefinedVariable
+        !lkey:lkey
+        !type:mType
+        !readAccessAllowed:true
+        !variableKind:.register {
+          !type:mType
+          !name:lkey
+          !address:mAddress
+          !sliceMap:mRegisterFieldAccessMap
+          !arraySize: mArraySize # 0 if not an array
+          !elementSize: mElementArraySize # 0 if not an array
+        }
+        !copyable:true
+        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+      ]
+    end
+  end
+#------------------------------------------------------- Add global constants
+  for (constantName constantValue) in inContext.mGlobalConstantMap do
+    [!?outVariableMap insertUsedConstant
+      !lkey:constantName
+      !type:[constantValue type]
+      !readAccessAllowed:true
+      !variableKind:.staticConstant {!value:constantValue !name:constantName.string}
+      !copyable:true
+      !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+    ]
+    [!?outObjectMap insertKey
+      !constantName
+      !.new {![constantValue type]}
+      !0 # Unused 
+    ]
+  end
+#------------------------------------------------------- Add global variables
+  for variable in inContext.mGlobalVariableMap do
+    var writeAccess = variable.allowedAccessToAll
+    var allowedAccess = writeAccess
+    if not writeAccess then
+      allowedAccess = [variable.allowedRoutineMap hasKey !inRoutineNameForInvocation]
+      if allowedAccess then
+        writeAccess = [variable.allowedRoutineMap mHasWriteAccessForKey !inRoutineNameForInvocation]
+      else
+        allowedAccess = [variable.allowedISRMap hasKey !inRoutineNameForInvocation]
+        if allowedAccess then
+          writeAccess = [variable.allowedISRMap mHasWriteAccessForKey !inRoutineNameForInvocation]
+        end
+      end
+    end
+    if inGlobalsAreConstant || variable.isConstant || not writeAccess then
+      [!?outVariableMap insertUsedConstant
+        !lkey:variable.lkey
+        !type:variable.type
+        !readAccessAllowed:allowedAccess
+        !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !volatile:[variable.executionModeSet count] > 1}
+        !copyable:[variable.type copyable]
+        !canBeUsedAsInputParameter:false
+      ]
+    else
+      [!?outVariableMap insertDefinedVariable
+        !lkey:variable.lkey
+        !type:variable.type
+        !readAccessAllowed:allowedAccess
+        !variableKind:.globalVariable {!type:variable.type !name:variable.lkey.string !volatile:[variable.executionModeSet count] > 1}
+        !copyable:[variable.type copyable]
+        !canBeUsedAsInputParameter:false
+      ]
+    end
+  end
+#------------------------------------------------------- Add result variable ?
+  if inReturnTypeName.string != "" then
+    let resultVarName = @lstring.new {!functionResultVariableName () !inReturnTypeName.location}
+    [!?outLocalVariableMap insertOutputFormalArgument !resultVarName]
+    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
+    [!?outVariableMap insertOutputFormalArgument
+      !lkey:resultVarName
+      !type:resultType
+      !readAccessAllowed:true
+      !variableKind:.localVariable {!type:resultType !name:resultVarName.string}
+      !copyable:true
+      !canBeUsedAsInputParameter:true
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc variableMapWithConstants
+  ?context:let @semanticContext inContext
+  !@variableMap outVariableMap
+  !@namedObjectMap outAddressableEntityMap
+  !@localVariableMap outLocalVariableMap
+{
+  outVariableMap = .emptyMap
+  outLocalVariableMap = .emptyMap
+  outAddressableEntityMap = {}
+#--- Add global constants
+  for (constantName constantValue) in inContext.mGlobalConstantMap do
+    [!?outVariableMap insertUsedConstant
+      !lkey:constantName
+      !type:[constantValue type]
+      !readAccessAllowed:true
+      !variableKind:.staticConstant {!value:constantValue !name:constantName.string}
+      !copyable:true
+      !canBeUsedAsInputParameter:false
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+sharedmap @localVariableMap {
 #--- Used local constant
   state usedLocalConstant {
     neutralAccess   -> usedLocalConstant
@@ -270,12 +462,6 @@ sharedmap @variableMap %selectors {
   }
 
 #--- Insert methods 
-  insert insertInaccessibleControlRegister state inaccessibleControlRegister
-     error message "redefinition of '%K' object (previous declaration was in %L)"
-
-  insert insertModule state module
-    error message "redefinition of '%K' object (previous declaration was in %L)"
-
   insert insertUndefinedVariable state undefinedLocalVariable
     error message "redefinition of '%K' object (previous declaration was in %L)"
 
@@ -326,8 +512,6 @@ sharedmap @variableMap %selectors {
 
 #--- 'selectBlock' override definitions
   override selectBlock {
-#    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceDroppedAttributeInModifier
-#    currentInstanceDroppedAttributeInModifier:currentInstanceAttributeInModifier -> currentInstanceAttributeInModifier
     constantInputFormalArgument:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     constantInputFormalArgumentDeclaredAsUnused:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     definedLocalVariable:droppedLocalVariable -> droppedLocalVariable
@@ -357,8 +541,6 @@ sharedmap @variableMap %selectors {
     undefinedLocalConstant:localConstant -> undefinedLocalConstant error "this branch defines the '%K' variable, while previous ones let it undefined"
     undefinedLocalConstant:usedLocalConstant -> undefinedLocalConstant error "this branch defines the '%K' variable, while previous ones let it undefined"
   }{
-#    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceAttributeInModifier error "this branch drops the '%K' attribute, while previous ones let it defined"
-#    currentInstanceDroppedAttributeInModifier:currentInstanceAttributeInModifier -> currentInstanceAttributeInModifier error "this branch lets the '%K' attribute defined, while previous ones drop it"
     constantInputFormalArgument:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     constantInputFormalArgumentDeclaredAsUnused:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     definedLocalVariable:droppedLocalVariable -> definedLocalVariable error "this branch drops the '%K' variable, while previous ones let it defined"
@@ -395,8 +577,6 @@ sharedmap @variableMap %selectors {
   override repeatBlock {
     undefinedLocalConstant:localConstant -> undefinedLocalConstant error "the repeated branch should not define the '%K' variable"
     undefinedLocalConstant:usedLocalConstant -> undefinedLocalConstant error "the repeated branch should not define the '%K' variable"
-#    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceAttributeInModifier error "the repeated branch should not drop the '%K' attribute"
-#    currentInstanceDroppedAttributeInModifier:currentInstanceAttributeInModifier -> currentInstanceAttributeInModifier
     constantInputFormalArgument:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     constantInputFormalArgumentDeclaredAsUnused:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     definedLocalVariable:droppedLocalVariable -> definedLocalVariable error "the repeated branch should not drop the '%K' variable"
@@ -424,7 +604,6 @@ sharedmap @variableMap %selectors {
     undefinedLocalVariable:droppedLocalVariable -> droppedLocalVariable
     undefinedLocalVariable:usedLocalVariable -> undefinedLocalVariable error "the repeated branch should not define the '%K' variable"
   }{
-#    currentInstanceAttributeInModifier:currentInstanceDroppedAttributeInModifier -> currentInstanceAttributeInModifier
     constantInputFormalArgument:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     constantInputFormalArgumentDeclaredAsUnused:usedConstantInputFormalArgument -> usedConstantInputFormalArgument
     definedLocalVariable:usedLocalVariable -> usedLocalVariable

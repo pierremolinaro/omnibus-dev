@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendUpperBoundCheck
-  ?let @operandIR inSource
+  ?let @valueIR inSource
   ?let @bigint inUpperBoundPlusOne
   ?panicCode:let @uint inPanicCode
   ?let @location inLocation
@@ -11,7 +11,7 @@ setter @instructionListIR appendUpperBoundCheck
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @upperBoundCheckIR : @abstractInstructionIR {
-  @operandIR mSource
+  @valueIR mSource
   @bigint mUpperBoundPlusOne
   @uint mPanicCode
   @location mLocation
@@ -28,9 +28,9 @@ override method @upperBoundCheckIR llvmInstructionCode
     ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]
-  let llvmType = [mSource.mType llvmTypeName]
-  let llvmSourceName = [mSource.mValue llvmName]
-  let llvmLabelName = [mSource.mValue name]
+  let llvmType = [[mSource type] llvmTypeName]
+  let llvmSourceName = [mSource llvmName]
+  let llvmLabelName = [mSource name]
   ioLLVMcode += "  " + llvmSourceName + ".isOk = icmp ult " + llvmType + " " + llvmSourceName + ", " + mUpperBoundPlusOne + "\n"
   ioLLVMcode += "  br i1 " + llvmSourceName + ".isOk, label %" + llvmLabelName + ".ovf, label %" + llvmLabelName + ".ok\n\n"
   ioLLVMcode += llvmLabelName + ".ovf:\n"

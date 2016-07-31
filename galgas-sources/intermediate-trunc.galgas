@@ -1,7 +1,7 @@
 
 setter @instructionListIR appendTrunc
-  ?let @operandIR inResult
-  ?let @operandIR inSource
+  ?let @valueIR inResult
+  ?let @valueIR inSource
 {
   self += !@truncIR.new {!inResult !inSource}
 }
@@ -9,8 +9,8 @@ setter @instructionListIR appendTrunc
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @truncIR : @abstractInstructionIR {
-  @operandIR mResult
-  @operandIR mSource
+  @valueIR mResult
+  @valueIR mSource
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -20,8 +20,8 @@ override method @truncIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult.mValue llvmName] + " = trunc "
-  ioLLVMcode += [mSource.mType  llvmTypeName] + " " + [mSource.mValue llvmName] + " to " + [mResult.mType llvmTypeName] + "\n"
+  ioLLVMcode += "  " + [mResult llvmName] + " = trunc "
+  ioLLVMcode += [mSource  llvmTypeName] + " " + [mSource llvmName] + " to " + [mResult llvmTypeName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

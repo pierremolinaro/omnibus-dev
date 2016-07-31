@@ -556,7 +556,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.new{!type !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (!varLLVMName)}}
+        !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (!varLLVMName)}
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
         !lkey:name
@@ -578,7 +578,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.new{!type !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![variableKind name])}}
+        !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![variableKind name])}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
@@ -596,7 +596,7 @@ proc analyzeEffectiveParameters
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
-        ?result:let @operandIR expressionResult
+        ?result:let @valueIR expressionResult
       ]
       let result = checkAssignmentCompatibility (
         !source:expressionResult
@@ -624,7 +624,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.outputInput
-        !.new {!type !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![variableKind llvmName])}}
+        !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![variableKind llvmName])}
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
@@ -659,7 +659,7 @@ proc analyzeEffectiveParameters
           parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
           ioEffectiveParameterListIR +=
             !.outputInput
-            !.new {!type !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![fieldAddress name])}}
+            !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![fieldAddress name])}
         end    
       end
     end
@@ -697,7 +697,7 @@ enum @procEffectiveParameterPassingModeIR {
 
 list @procCallEffectiveParameterListIR {
   @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
-  @operandIR mParameter
+  @valueIR mParameter
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -750,11 +750,11 @@ override method @procCallInstructionIR llvmInstructionCode
     end
     switch mEffectiveParameterPassingMode
     case input:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
+      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
     case output:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + " " + [mParameter.mValue llvmName]
+      ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
     case outputInput:
-      ioLLVMcode += [mParameter.mType llvmTypeName] + " * " + [mParameter.mValue llvmName]
+      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
     end
   end
   if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then

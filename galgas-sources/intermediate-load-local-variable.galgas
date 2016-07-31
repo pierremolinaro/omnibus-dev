@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadLocalVariable
-  ?let @operandIR inTargetValue
+  ?let @valueIR inTargetValue
   ?let @string inVariableName
 {
   self += !@loadLocalVariableIR.new {!inTargetValue !inVariableName}
@@ -9,7 +9,7 @@ setter @instructionListIR appendLoadLocalVariable
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadLocalVariableIR : @abstractInstructionIR {
-  @operandIR mTargetValue
+  @valueIR mTargetValue
   @string mVariableName
 }
 
@@ -20,8 +20,8 @@ override method @loadLocalVariableIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetValue.mType llvmTypeName]
-  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load "
+  let llvmType = [mTargetValue llvmTypeName]
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
   ioLLVMcode += llvmType + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mVariableName) + "\n"
 }
 

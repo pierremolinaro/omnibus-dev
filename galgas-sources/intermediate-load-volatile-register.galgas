@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendLoadVolatileRegister
-  ?let @operandIR inTargetValue
+  ?let @valueIR inTargetValue
   ?let @bigint inAddress
 {
   self += !@loadRegisterIR.new {!inTargetValue !inAddress}
@@ -9,7 +9,7 @@ setter @instructionListIR appendLoadVolatileRegister
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadRegisterIR : @abstractInstructionIR {
-  @operandIR mTargetValue
+  @valueIR mTargetValue
   @bigint mRegisterAddress
 }
 
@@ -20,8 +20,8 @@ override method @loadRegisterIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetValue.mType llvmTypeName]
-  ioLLVMcode += "  " + [mTargetValue.mValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
+  let llvmType = [mTargetValue llvmTypeName]
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
          + " * inttoptr (i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
 }
 

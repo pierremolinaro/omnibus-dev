@@ -76,17 +76,17 @@ override method @panicInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:unusedInstructionListIR
-    ?result:@operandIR result
+    ?result:@valueIR result
   ]
 #--- Expression type check
 #--- Expression is static ?
   if ([unusedInstructionListIR length] > 0)
-     || not [result.mValue isLiteralInteger]
-     || ([result.mType key] != staticIntegerTypeName ()) then
+     || not [result isLiteralInteger]
+     || ([result key] != staticIntegerTypeName ()) then
     error mThrowLocation : "throw expression should be a literal integer"
   else
     [[inContext.mPanicCodeType kind] integer ?min:let min ?max:let max ?unsigned:* ?bitCount:*]
-    [result.mValue literalInteger ?value:let throwValue]
+    [result literalInteger ?1* ?value:let throwValue]
     if (throwValue < min) || (throwValue > max) then
       error mThrowLocation : "panic expression cannot be represented by an `" +[inContext.mPanicCodeType key]
     elsif not [option plm_options.noPanicGeneration value] then

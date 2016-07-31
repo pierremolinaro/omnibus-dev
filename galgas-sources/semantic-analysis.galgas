@@ -5,33 +5,32 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func checkAssignmentCompatibility
-  ?source:let @operandIR inSourceValue
+  ?source:let @valueIR inSourceValue
   ?targetAnnotationType:let @unifiedTypeMap-proxy inTargetAnnotationType
   ?errorLocation:let @location inErrorLocation
   ?staticTypeAllowed:let @bool inStaticTypeAllowed
-  -> @operandIR outResult
+  -> @valueIR outResult
 {
   if inTargetAnnotationType == .null then
     outResult = inSourceValue
-  elsif inTargetAnnotationType != inSourceValue.mType then
-    if [[inSourceValue.mType kind] isStaticInteger] && [[inTargetAnnotationType kind] isInteger] then
-      [inSourceValue.mValue literalInteger ?value:let value]
-      [[inTargetAnnotationType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
-      if (value < minTarget) || (maxTarget < value) then
-        error inErrorLocation : "literal integer too large" : outResult
-      else
-        outResult = .new {!inTargetAnnotationType !inSourceValue.mValue}
-      end
+  elsif inTargetAnnotationType == [inSourceValue type] then
+    outResult = inSourceValue
+  elsif [[[inSourceValue type] kind] isStaticInteger] && [[inTargetAnnotationType kind] isInteger] then
+    [inSourceValue literalInteger ?1* ?value:let value]
+    [[inTargetAnnotationType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:*]
+    if (value < minTarget) || (maxTarget < value) then
+      error inErrorLocation : "literal integer too large" : outResult
     else
-      error inErrorLocation
-      : "object of type $" + [inTargetAnnotationType key] + " cannot be assigned from expression of type $" + [inSourceValue.mType key]
-      :outResult
+      outResult = [inSourceValue withType !inTargetAnnotationType]
     end
   else
-    outResult = inSourceValue
+    error inErrorLocation
+    : "object of type $" + [inTargetAnnotationType key]
+      + " cannot be assigned from expression of type $" + [[inSourceValue type] key]
+    : outResult
   end
   if not inStaticTypeAllowed then
-    if [outResult.mType key] == staticIntegerTypeName () then
+    if [[outResult type] key] == staticIntegerTypeName () then
       error inErrorLocation : "the $" + staticIntegerTypeName () + " static type is not allowed here"
     end
   end

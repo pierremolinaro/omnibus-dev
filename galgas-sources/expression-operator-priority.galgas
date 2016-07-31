@@ -445,7 +445,7 @@ abstract method @expressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -453,7 +453,7 @@ method @expressionAST analyzeStaticExpression
   ?errorLocation:let @location inErrorLocation
   ?context:let @semanticContext inContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  !result:@operandIR outResult
+  !result:@valueIR outResult
 {
   @instructionListIR instructionGenerationList = {}
   @allocaList allocaList = {}
@@ -475,7 +475,7 @@ method @expressionAST analyzeStaticExpression
     !?instructionListIR:instructionGenerationList
     ?result:outResult
   ]
-  if ([allocaList length] > 0) || ([instructionGenerationList length] > 0) || not [outResult.mValue isStatic] then
+  if ([allocaList length] > 0) || ([instructionGenerationList length] > 0) || not [outResult isStatic] then
     error inErrorLocation : "this expression should be a static expression" : outResult
   end
 }
