@@ -6,6 +6,10 @@ register PIPO[8] at 0x4000_0000 : 0x40 $uint32 {
   10, fields [4], 10, bit, 7
 }
 
+register SINGLE_PIPO at 0x5000_0000 $uint32 {
+  10, fields [4], 10, bit, 7
+}
+
 //------------------------------------------------*
 
 section ledOn () {
@@ -15,6 +19,7 @@ section ledOn () {
 //------------------------------------------------*
 
 section ledOff () {
+  globalVar = azerty SINGLE_PIPO
   globalVar = PIPO [0]
   globalVar = PIPO [7]
   var idx $uint3 = 5

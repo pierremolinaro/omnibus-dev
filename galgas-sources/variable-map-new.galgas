@@ -67,18 +67,22 @@ proc initialVariableMap
   switch inRegisterAccessKind
   case noAccess :
     for () in inContext.mControlRegisterMap do
+      let objectInMemory = @objectInMemoryIR.register {
+        !type:mType
+        !name:lkey
+        !readable:false
+        !writable:false
+        !address:mAddress 
+        !sliceMap:mRegisterFieldAccessMap
+        !arraySize: mArraySize # 0 if not an array
+        !elementSize: mElementArraySize # 0 if not an array
+      }
+      [!?outObjectMap insertKey !lkey !objectInMemory]
       [!?outVariableMap insertInaccessibleControlRegister
         !lkey:lkey
         !type:mType
         !readAccessAllowed:false
-        !variableKind:.register {
-          !type:mType
-          !name:lkey
-          !address:mAddress 
-          !sliceMap:mRegisterFieldAccessMap
-          !arraySize: mArraySize # 0 if not an array
-          !elementSize: mElementArraySize # 0 if not an array
-        }
+        !variableKind:objectInMemory
         !copyable:false
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
       ]
@@ -86,34 +90,42 @@ proc initialVariableMap
   case readAccess :
     for () in inContext.mControlRegisterMap do
       if inAcceptUserMode && not mIsAccessibleInUserMode then
+        let objectInMemory = @objectInMemoryIR.register {
+          !type:mType
+          !name:lkey
+          !readable:false
+          !writable:false
+          !address:mAddress 
+          !sliceMap:mRegisterFieldAccessMap
+          !arraySize: mArraySize # 0 if not an array
+          !elementSize: mElementArraySize # 0 if not an array
+        }
+        [!?outObjectMap insertKey !lkey !objectInMemory]
         [!?outVariableMap insertInaccessibleControlRegister
           !lkey:lkey
           !type:mType
           !readAccessAllowed:true
-          !variableKind:.register {
-            !type:mType
-            !name:lkey
-            !address:mAddress
-            !sliceMap:mRegisterFieldAccessMap
-            !arraySize: mArraySize # 0 if not an array
-            !elementSize: mElementArraySize # 0 if not an array
-          }
+          !variableKind:objectInMemory
           !copyable:true
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
         ]
       elsif mIsReadOnly || inGlobalsAreConstant then
+        let objectInMemory = @objectInMemoryIR.register {
+          !type:mType
+          !name:lkey
+          !readable:true
+          !writable:false
+          !address:mAddress 
+          !sliceMap:mRegisterFieldAccessMap
+          !arraySize: mArraySize # 0 if not an array
+          !elementSize: mElementArraySize # 0 if not an array
+        }
+        [!?outObjectMap insertKey !lkey !objectInMemory]
         [!?outVariableMap insertUsedConstant
           !lkey:lkey
           !type:mType
           !readAccessAllowed:true
-          !variableKind:.register {
-            !type:mType
-            !name:lkey
-            !address:mAddress
-            !sliceMap:mRegisterFieldAccessMap
-            !arraySize: mArraySize # 0 if not an array
-            !elementSize: mElementArraySize # 0 if not an array
-          }
+          !variableKind:objectInMemory
           !copyable:true
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
         ]
@@ -121,18 +133,22 @@ proc initialVariableMap
     end
   case readWriteAccess :
     for () in inContext.mControlRegisterMap do
+      let objectInMemory = @objectInMemoryIR.register {
+        !type:mType
+        !name:lkey
+        !readable:true
+        !writable:true
+        !address:mAddress 
+        !sliceMap:mRegisterFieldAccessMap
+        !arraySize: mArraySize # 0 if not an array
+        !elementSize: mElementArraySize # 0 if not an array
+      }
+      [!?outObjectMap insertKey !lkey !objectInMemory]
       [!?outVariableMap insertDefinedVariable
         !lkey:lkey
         !type:mType
         !readAccessAllowed:true
-        !variableKind:.register {
-          !type:mType
-          !name:lkey
-          !address:mAddress
-          !sliceMap:mRegisterFieldAccessMap
-          !arraySize: mArraySize # 0 if not an array
-          !elementSize: mElementArraySize # 0 if not an array
-        }
+        !variableKind:objectInMemory
         !copyable:true
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
       ]
@@ -144,13 +160,13 @@ proc initialVariableMap
       !lkey:constantName
       !type:[constantValue type]
       !readAccessAllowed:true
-      !variableKind:.staticConstante {!value:constantValue !name:constantName.string}
+      !variableKind:.staticConstant {!value:constantValue !name:constantName}
       !copyable:true
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
     ]
     [!?outObjectMap insertKey
       !constantName
-      !.staticConstante {!value: constantValue !name: constantName}
+      !.staticConstant {!value: constantValue !name: constantName}
     ]
   end
 #------------------------------------------------------- Add global variables
@@ -221,7 +237,7 @@ proc variableMapWithConstants
       !lkey:constantName
       !type:[constantValue type]
       !readAccessAllowed:true
-      !variableKind:.staticConstante {!value:constantValue !name:constantName.string}
+      !variableKind:.staticConstant {!value:constantValue !name:constantName}
       !copyable:true
       !canBeUsedAsInputParameter:false
     ]

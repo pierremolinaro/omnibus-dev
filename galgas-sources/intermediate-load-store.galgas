@@ -6,7 +6,7 @@ setter @instructionListIR appendLoadFromMemory
   switch inSource
   case registerAddress (* *) :
     error .nowhere : "<<@instructionListIR appendLoadFromMemory>>" : outResultingValue
-  case register (@unifiedTypeMap-proxy type * @bigint address * * *) :
+  case register (@unifiedTypeMap-proxy type * * * @bigint address * * *) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?self appendLoadVolatileRegister
       !outResultingValue
@@ -25,7 +25,7 @@ setter @instructionListIR appendLoadFromMemory
       !outResultingValue
       !name
     ]
-  case staticConstante (@valueIR value @string unused name) :
+  case staticConstant (@valueIR value @lstring unused name) :
     outResultingValue = value
 
   case property (* * *) :
@@ -42,13 +42,13 @@ setter @instructionListIR appendStoreInMemory
   switch inTargetPtr
   case registerAddress (@unifiedTypeMap-proxy type @string llvmName) :
     [!?self appendStoreVolatileRegisterIndirect !type !llvmName !inValue]
-  case register (@unifiedTypeMap-proxy type * @bigint address * * *) :
+  case register (@unifiedTypeMap-proxy type * * * @bigint address * * *) :
     [!?self appendStoreVolatileRegister !type !address !inValue]
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
     [!?self appendStoreGlobalVariable !name !type !inValue !volatile:isVolatile]
   case localVariable (@unifiedTypeMap-proxy type @string name) :
     [!?self appendStoreLocalVariable !name !type !inValue]
-  case staticConstante (* *) :
+  case staticConstant (* *) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory globalConstant>>"
   case property (* * *) :
     error .nowhere : "<<@instructionListIR appendStoreInMemory>>"

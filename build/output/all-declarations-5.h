@@ -62,18 +62,22 @@ class cEnumAssociatedValues_objectInMemoryIR_registerAddress : public cEnumAssoc
 class cEnumAssociatedValues_objectInMemoryIR_register : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
   public : const GALGAS_lstring mAssociatedValue1 ;
-  public : const GALGAS_bigint mAssociatedValue2 ;
-  public : const GALGAS_controlRegisterBitSliceAccessMap mAssociatedValue3 ;
-  public : const GALGAS_uint mAssociatedValue4 ;
-  public : const GALGAS_uint mAssociatedValue5 ;
+  public : const GALGAS_bool mAssociatedValue2 ;
+  public : const GALGAS_bool mAssociatedValue3 ;
+  public : const GALGAS_bigint mAssociatedValue4 ;
+  public : const GALGAS_controlRegisterBitSliceAccessMap mAssociatedValue5 ;
+  public : const GALGAS_uint mAssociatedValue6 ;
+  public : const GALGAS_uint mAssociatedValue7 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_objectInMemoryIR_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
                                                             const GALGAS_lstring & inAssociatedValue1,
-                                                            const GALGAS_bigint & inAssociatedValue2,
-                                                            const GALGAS_controlRegisterBitSliceAccessMap & inAssociatedValue3,
-                                                            const GALGAS_uint & inAssociatedValue4,
-                                                            const GALGAS_uint & inAssociatedValue5
+                                                            const GALGAS_bool & inAssociatedValue2,
+                                                            const GALGAS_bool & inAssociatedValue3,
+                                                            const GALGAS_bigint & inAssociatedValue4,
+                                                            const GALGAS_controlRegisterBitSliceAccessMap & inAssociatedValue5,
+                                                            const GALGAS_uint & inAssociatedValue6,
+                                                            const GALGAS_uint & inAssociatedValue7
                                                             COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -123,20 +127,20 @@ class cEnumAssociatedValues_objectInMemoryIR_localVariable : public cEnumAssocia
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_objectInMemoryIR_staticConstante : public cEnumAssociatedValues {
+class cEnumAssociatedValues_objectInMemoryIR_staticConstant : public cEnumAssociatedValues {
   public : const GALGAS_valueIR mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
+  public : const GALGAS_lstring mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_staticConstante (const GALGAS_valueIR & inAssociatedValue0,
-                                                                   const GALGAS_string & inAssociatedValue1
-                                                                   COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_objectInMemoryIR_staticConstant (const GALGAS_valueIR & inAssociatedValue0,
+                                                                  const GALGAS_lstring & inAssociatedValue1
+                                                                  COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_staticConstante (void) {}
+  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_staticConstant (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3513,15 +3517,5 @@ class GALGAS_lstring function_interruptNameForInvocationGraph (class GALGAS_lstr
 class GALGAS_lstring function_llvmNameForInterrupt (class GALGAS_lstring inArgument0,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              Function 'llvmNameForISR'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForISR (class GALGAS_string inArgument0,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
 
 #endif

@@ -2,7 +2,7 @@
 
 boot 0 {
 //---------1- Inhiber le chien de garde
-  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1
+  WDOG_UNLOCK = azerty WDOG_UNLOCK_SEQ1
   WDOG_UNLOCK = WDOG_UNLOCK_SEQ2
   WDOG_STCTRLH = 0x0010
 //--- Enable clocks to always-used peripherals
