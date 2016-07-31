@@ -117,7 +117,7 @@ override method @varInstructionWithAssignmentAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@valueIR expressionResult
+    ?result:@objectIR expressionResult
   ]
 #--- Check type compatibility
   if targetType == .null then

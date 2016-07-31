@@ -239,7 +239,7 @@ override method @syncInstructionAST analyze
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
-        ?result:@valueIR sourceOperand
+        ?result:@objectIR sourceOperand
       ]
       if [sourceOperand key] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
@@ -269,7 +269,7 @@ override method @syncInstructionAST analyze
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:boolExpInstructionGenerationList
-        ?result:let @valueIR boolExpressionResult
+        ?result:let @objectIR boolExpressionResult
       ]
       if [boolExpressionResult key] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
@@ -435,11 +435,11 @@ enum @guardedCommandIR {
 
   case booleanGuard (@bool isWhileCommand # if false, it is an "until" command
                      @instructionListIR instructionGenerationList
-                     @valueIR result)
+                     @objectIR result)
 
   case boolAndSync (@bool isWhileCommand # if false, it is an "until" command
                     @instructionListIR boolExpInstructionGenerationList
-                    @valueIR boolExpResult
+                    @objectIR boolExpResult
                     @string guardMangledName
                     @string globalVarName # "" if not global var
                     @instructionListIR guardInstructionGenerationList
@@ -500,7 +500,7 @@ override method @syncInstructionIR llvmInstructionCode
         ioLLVMcode += ", "
       end
       ioLLVMcode += ")\n"
-    case booleanGuard (isWhileCommand instructionGenerationList @valueIR result) :
+    case booleanGuard (isWhileCommand instructionGenerationList @objectIR result) :
       isWhileGuardedCommand = isWhileCommand
       [instructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let acceptedLabelName = startLabel + "." + idx + ".true"

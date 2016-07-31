@@ -56,7 +56,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -75,12 +75,12 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @valueIR expressionResult
+    ?result:let @objectIR expressionResult
   ]
 #--- Check expression type accepts prefix operator
   @prefixOperatorMap prefixOperatorMap
   @llvmBinaryOperation binaryOperator
-  @valueIR leftOperand
+  @objectIR leftOperand
   switch mOp 
   case unsignedComplement :
     prefixOperatorMap = inContext.mUnsignedComplementOperatorMap

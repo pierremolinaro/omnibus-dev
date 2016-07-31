@@ -134,7 +134,7 @@ override method @typeArrayDeclaration enterInContext
     !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
-    ?result:@valueIR sizeExpressionIR
+    ?result:@objectIR sizeExpressionIR
   ]
   if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
     error mSizeExpressionLocation : "array size expression is not static"

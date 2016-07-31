@@ -252,7 +252,7 @@ method @taskVarListAST-element enterInContext
     !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
-    ?result:let @valueIR expressionResult
+    ?result:let @objectIR expressionResult
   ]
   if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
     error mVarName : "source expression cannot be statically computed"
@@ -261,7 +261,7 @@ method @taskVarListAST-element enterInContext
   if variableAnnotationType == .null && [[expressionResult kind] isStaticInteger] then
     error mVarName : "cannot infer type"
   end
-  let @valueIR result = checkAssignmentCompatibility (
+  let @objectIR result = checkAssignmentCompatibility (
     !source:expressionResult
     !targetAnnotationType:variableAnnotationType
     !errorLocation:mVarName.location

@@ -151,7 +151,7 @@ override method @ifInstructionAST analyze
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @valueIR testResult
+    ?result:let @objectIR testResult
   ]
 #--- Check inferred type
   if [testResult kind] != .boolean then
@@ -218,7 +218,7 @@ override method @ifInstructionAST analyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @ifInstructionIR : @abstractInstructionIR {
-  @valueIR mTestVariable
+  @objectIR mTestVariable
   @location mLocation
   @instructionListIR mThenInstructionGenerationList
   @instructionListIR mElseInstructionGenerationList

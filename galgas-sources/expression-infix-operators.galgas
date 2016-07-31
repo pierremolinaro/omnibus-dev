@@ -127,7 +127,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #------------------- Analyze left expression
   [mLeftExpression analyzeExpression
@@ -146,7 +146,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @valueIR leftOperand
+    ?result:let @objectIR leftOperand
   ]
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
@@ -165,7 +165,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @valueIR rightOperand
+    ?result:let @objectIR rightOperand
   ]
 #------------------- Get operator map
   let operatorMap = getInfixOperatorMap (!mOp !context:inContext !modes:inModeSet !mOperatorLocation)
@@ -300,7 +300,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Analyze left expression
   @instructionListIR leftInstructionGenerationList = {}
@@ -320,7 +320,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:leftInstructionGenerationList
-    ?result:let @valueIR leftOperand
+    ?result:let @objectIR leftOperand
   ]
 #--- Analyze right expression
   @instructionListIR rightInstructionGenerationList = {}
@@ -340,7 +340,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:rightInstructionGenerationList
-    ?result:let @valueIR rightOperand
+    ?result:let @objectIR rightOperand
   ]
 #--- Check left type is boolean
   if [leftOperand kind] != .boolean then
@@ -374,11 +374,11 @@ abstract class @infixOperatorDescription {
 abstract method @infixOperatorDescription generateInfixOperatorCode
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  ?let @valueIR inLeftOperand
+  ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
-  ?let @valueIR inRightOperand
+  ?let @objectIR inRightOperand
   ?let @unifiedTypeMap-proxy inResultType
-  !@valueIR outResultValue
+  !@objectIR outResultValue
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

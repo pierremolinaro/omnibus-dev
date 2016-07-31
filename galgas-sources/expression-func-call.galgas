@@ -102,7 +102,7 @@ override method @functionCallInExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
   if inGuard then
     error mFunctionName : "a function cannot be called in guard expression"
@@ -151,7 +151,7 @@ override method @functionCallInExpressionAST analyzeExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @functionCallIR : @abstractInstructionIR {
-  @valueIR mResult
+  @objectIR mResult
   @lstring mFunctionMangledName
   @lstring mFunctionNameForGeneration
   @routineKindIR mKind

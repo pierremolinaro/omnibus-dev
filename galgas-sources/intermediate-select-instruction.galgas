@@ -1,9 +1,9 @@
 
 setter @instructionListIR appendSelectOperation
-  ?let @valueIR inTargetValue
-  ?let @valueIR in_if_variable
-  ?let @valueIR in_then_variable
-  ?let @valueIR in_else_variable
+  ?let @objectIR inTargetValue
+  ?let @objectIR in_if_variable
+  ?let @objectIR in_then_variable
+  ?let @objectIR in_else_variable
 {
   self += !@selectInstructionIR.new {!inTargetValue !in_if_variable !in_then_variable !in_else_variable}
 }
@@ -11,10 +11,10 @@ setter @instructionListIR appendSelectOperation
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @selectInstructionIR : @abstractInstructionIR {
-  @valueIR mTargetValue
-  @valueIR m_if_variable
-  @valueIR m_then_variable
-  @valueIR m_else_variable
+  @objectIR mTargetValue
+  @objectIR m_if_variable
+  @objectIR m_then_variable
+  @objectIR m_else_variable
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

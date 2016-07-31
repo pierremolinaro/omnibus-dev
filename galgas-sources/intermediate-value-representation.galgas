@@ -5,16 +5,16 @@
 enum @objectInMemoryIR {
   case registerAddress (@unifiedTypeMap-proxy type @string llvmName)
   case register (@unifiedTypeMap-proxy type
-                 @lstring name
+                 @lstring plmName
                  @bool readable
                  @bool writable
                  @bigint address
-                 @bitSliceAccessMap sliceMap
+                 @sliceMap sliceMap
                  @uint arraySize # 0 if not an array
                  @uint elementSize) # 0 if not an array
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
   case localVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
-  case staticConstant (@valueIR value @lstring name)
+  case staticConstant (@objectIR value @lstring name)
   case property (@unifiedTypeMap-proxy type @string name @uint index)
 }
 
@@ -101,7 +101,7 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
     outType = type
   case localVariable (@unifiedTypeMap-proxy type * *) :
     outType = type
-  case staticConstant (@valueIR value *) :
+  case staticConstant (@objectIR value *) :
     outType = [value type]
   case property (* * *) :
     error .nowhere : "<<@objectInMemoryIR type>>" : outType
@@ -110,7 +110,7 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @objectInMemoryIR address -> @valueIR outOperand {
+getter @objectInMemoryIR address -> @objectIR outOperand {
   switch self
   case registerAddress (* *) :
     error .nowhere : "@objectInMemoryIR register address" : outOperand
@@ -119,7 +119,7 @@ getter @objectInMemoryIR address -> @valueIR outOperand {
   case globalVariable (@unifiedTypeMap-proxy type @string name *) :
     outOperand  = .llvmGlobalObjectValue {!type: type !llvmName:llvmNameForGlobalVariable (!name)}
   case localVariable (@unifiedTypeMap-proxy type @string name *) :
-    outOperand  = .llvmLocalObjectValue {!type:type !name:llvmNameForLocalVariable (!name)}
+    outOperand  = .llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (!name) !sliceMap:{}}
   case staticConstant (* *) :
     error .nowhere : "@objectInMemoryIR globalConstantaddress" : outOperand
   case property (* * *) :
@@ -128,14 +128,27 @@ getter @objectInMemoryIR address -> @valueIR outOperand {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! @valueIR
+#! @objectIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @valueIR {
+enum @objectIR {
+#--- Temporary ?
   case selfObject (@unifiedTypeMap-proxy type)
-  case literalInteger  (@unifiedTypeMap-proxy type @bigint value)
-  case llvmLocalObjectValue (@unifiedTypeMap-proxy type @string name)
   case llvmGlobalObjectValue (@unifiedTypeMap-proxy type @string llvmName)
+#--- References
+  case globalVariableReference (@unifiedTypeMap-proxy type @string plmName)
+  case localVariableReference (@unifiedTypeMap-proxy type @string plmName)
+  case registerReference (@unifiedTypeMap-proxy type
+                          @lstring plmName
+                          @bool readable
+                          @bool writable
+                          @bigint address
+                          @sliceMap sliceMap
+                          @uint arraySize # 0 if not an array
+                          @uint elementSize) # 0 if not an array
+#--- Values
+  case llvmTemporaryValue (@unifiedTypeMap-proxy type @string llvmName @sliceMap sliceMap)
+  case literalInteger  (@unifiedTypeMap-proxy type @bigint value)
   case llvmStructureConstant (@unifiedTypeMap-proxy type @operandIRList values)
   case literalString  (@unifiedTypeMap-proxy type @uint size @uint index)
   case zero (@unifiedTypeMap-proxy type)
@@ -143,12 +156,15 @@ enum @valueIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @valueIR llvmName -> @string outResult {
+getter @objectIR llvmName -> @string outResult {
   switch self
+  case globalVariableReference (**) : error .nowhere : "<<@objectIR llvmName>>" : outResult
+  case localVariableReference (**) : error .nowhere : "<<@objectIR llvmName>>" : outResult
+  case registerReference (********): error .nowhere : "<<@objectIR llvmName>>" : outResult
   case zero (*) : outResult = "zeroinitializer"
   case selfObject (*) : outResult = "%self"
   case literalInteger (* @bigint value) : outResult = [value string]
-  case llvmLocalObjectValue (* @string name) : outResult = "%" + name
+  case llvmTemporaryValue (* @string name *) : outResult = "%" + name
   case llvmGlobalObjectValue (* @string name) : outResult = "@" + name
   case llvmStructureConstant (* @operandIRList inValues) :
     outResult = "{"
@@ -166,12 +182,15 @@ getter @valueIR llvmName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @valueIR type -> @unifiedTypeMap-proxy outResult {
+getter @objectIR type -> @unifiedTypeMap-proxy outResult {
   switch self
+  case registerReference (type *******) : outResult = type
+  case globalVariableReference (type *) : outResult = type
+  case localVariableReference (type *) : outResult = type
   case zero (type) : outResult = type
   case selfObject (type) : outResult = type
   case literalInteger (type *) : outResult = type
-  case llvmLocalObjectValue (type *) : outResult = type
+  case llvmTemporaryValue (type * *) : outResult = type
   case llvmGlobalObjectValue (type *) : outResult = type
   case llvmStructureConstant (type *) : outResult = type
   case literalString  (type * *) : outResult = type
@@ -180,30 +199,45 @@ getter @valueIR type -> @unifiedTypeMap-proxy outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @valueIR llvmTypeName -> @string outResult {
+getter @objectIR llvmTypeName -> @string outResult {
   outResult = [[self type] llvmTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @valueIR key -> @string outResult {
+getter @objectIR key -> @string outResult {
   outResult = [[self type] key]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @valueIR kind -> @typeKind outResult {
+getter @objectIR kind -> @typeKind outResult {
   outResult = [[self type] kind]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @valueIR withType ?@unifiedTypeMap-proxy inType -> @valueIR outResult {
+getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
   switch self
+  case registerReference (* plmName readable writable address sliceMap arraySize elementSize) :
+    outResult = .registerReference {
+      !type: inType
+      !plmName: plmName
+      !readable: readable
+      !writable: writable
+      !address: address
+      !sliceMap: sliceMap
+      !arraySize: arraySize
+      !elementSize: elementSize
+    }
+  case localVariableReference (* name) :
+    outResult = .localVariableReference {!type: inType !plmName: name}
+  case globalVariableReference (* name) :
+    outResult = .globalVariableReference {!type: inType !plmName: name}
   case literalInteger (* @bigint value) :
     outResult = .literalInteger {!type: inType !value: value}
-  case llvmLocalObjectValue (* @string name) :
-    outResult = .llvmLocalObjectValue {!type: inType !name: name}
+  case llvmTemporaryValue (* @string llvmName sliceMap) :
+    outResult = .llvmTemporaryValue {!type: inType !llvmName:llvmName  !sliceMap:sliceMap}
   case zero (*) :
     outResult = .zero {!type: inType}
   case selfObject (*) :
@@ -219,12 +253,15 @@ getter @valueIR withType ?@unifiedTypeMap-proxy inType -> @valueIR outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @valueIR name -> @string outResult {
+getter @objectIR name -> @string outResult {
   switch self
+  case registerReference (* name ******) : outResult = name
+  case localVariableReference (* name) : outResult = name
+  case globalVariableReference (* name) : outResult = name
   case zero (*) : outResult = "zeroinitializer"
   case selfObject (*) : outResult = "self"
   case literalInteger (* @bigint value) : outResult = [value string]
-  case llvmLocalObjectValue (* @string name) : outResult = name
+  case llvmTemporaryValue (* @string name *) : outResult = name
   case llvmGlobalObjectValue (* @string name) : outResult = name
   case llvmStructureConstant (* *) : outResult = "{...}"
   case literalString  (* * @uint index) : outResult = literalStringName (!index)
@@ -233,12 +270,15 @@ getter @valueIR name -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @valueIR isStatic -> @bool outResult {
+getter @objectIR isStatic -> @bool outResult {
   switch self
+  case registerReference (* *******) : outResult = false
+  case localVariableReference (* *) : outResult = false
+  case globalVariableReference (* *) : outResult = false
   case zero (*) : outResult = true
   case selfObject (*) : outResult = false
   case literalInteger (* *) : outResult = true
-  case llvmLocalObjectValue (* *) : outResult = false
+  case llvmTemporaryValue (* * *) : outResult = false
   case llvmGlobalObjectValue (* *) : outResult = false
   case llvmStructureConstant (* *) : outResult = true
   case literalString  (* * *) : outResult = true

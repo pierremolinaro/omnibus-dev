@@ -78,7 +78,7 @@ override method @extendExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -97,7 +97,7 @@ override method @extendExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@valueIR expressionResult
+    ?result:@objectIR expressionResult
   ]
 #--- Analyze type
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}

@@ -1,7 +1,7 @@
 
 setter @instructionListIR appendComputeVolatileRegisterAddressWithSubscript
   ?let @objectInMemoryIR inTarget
-  ?let @valueIR inIndexResult
+  ?let @objectIR inIndexResult
   ?let @bigint inAddress
   ?let @bigint inElementArraySize
 {
@@ -12,7 +12,7 @@ setter @instructionListIR appendComputeVolatileRegisterAddressWithSubscript
 
 class @ComputeRegisterAddressWithSubscriptIR : @abstractInstructionIR {
   @objectInMemoryIR mTarget
-  @valueIR mIndexResult
+  @objectIR mIndexResult
   @bigint mRegisterAddress
   @bigint mElementArraySize
 }
@@ -56,8 +56,8 @@ override method @ComputeRegisterAddressWithSubscriptIR enterAccessibleEntities
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendLoadVolatileRegisterWithSubscript
-  ?let @valueIR inTargetValue
-  ?let @valueIR inIndexResult
+  ?let @objectIR inTargetValue
+  ?let @objectIR inIndexResult
   ?let @bigint inAddress
   ?let @bigint inElementArraySize
 {
@@ -67,8 +67,8 @@ setter @instructionListIR appendLoadVolatileRegisterWithSubscript
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @loadRegisterWithSubscriptIR : @abstractInstructionIR {
-  @valueIR mTargetValue
-  @valueIR mIndexResult
+  @objectIR mTargetValue
+  @objectIR mIndexResult
   @bigint mRegisterAddress
   @bigint mElementArraySize
 }

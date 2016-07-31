@@ -148,20 +148,19 @@ list @controlRegisterFieldList { # Used for displaying in HTML file
 map @controlRegisterFieldMap {
   @uint mBitIndex
   @uint mBitCount
-  insert insertKey error message "the '%K' register slice has been already declared"
-  search searchKey error message "the '%K' register slice is not declared"
+  insert insertKey error message "the '%K' slice has been already declared"
+  search searchKey error message "the '%K' slice is not declared"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @bitSliceAccessMap {
+map @sliceMap {
   @llvmBinaryOperation mAccessOperator
   @bigint mAccessRightOperand
-  @bitSliceAccessMap mSubMap
+  @sliceMap mSubMap
   @unifiedTypeMap-proxy mResultType
-#  @objectInMemoryIR mResultObject
-  insert insertKey error message "the '%K' register slice has been already declared"
-  search searchKey error message "the '%K' register slice is not declared"
+  insert insertKey error message "the '%K' slice has been already declared"
+  search searchKey error message "the '%K' slice is not declared"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -170,7 +169,7 @@ map @controlRegisterMap {
   @unifiedTypeMap-proxy mType
   @bool mIsReadOnly
   @bool mIsAccessibleInUserMode
-  @bitSliceAccessMap mRegisterFieldAccessMap
+  @sliceMap mRegisterFieldAccessMap
   @controlRegisterFieldMap mRegisterFieldMap
   @bigint mAddress
   @controlRegisterFieldList mControlRegisterFieldList # Used for HTML file
@@ -237,7 +236,7 @@ method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
   ?!type:@unifiedTypeMap-proxy ioRegisterType
   ?bitCount:let @uint inRegisterBitCount
   !@controlRegisterFieldMap outRegisterFieldMap
-  !@bitSliceAccessMap outRegisterBitSliceMap
+  !@sliceMap outRegisterBitSliceMap
   !@controlRegisterFieldList outControlRegisterFieldList
 {
 #--- Build bit slice map
@@ -263,7 +262,7 @@ method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
           !shiftCount
           !bitCount
         ]
-        @bitSliceAccessMap registerSubMap = {}
+        @sliceMap registerSubMap = {}
       #--- "shifted" property
         [!?registerSubMap insertKey
           !.new{!"shifted" !name.location}
@@ -344,7 +343,7 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
       !errorLocation:register.mRegisterAddressLocation
       !context:ioContext
       !?staticStringMap:ioGlobalLiteralStringMap
-      ?result:let @valueIR addressExpressionResult
+      ?result:let @objectIR addressExpressionResult
     ]
     @bigint registerAddress
     if not [addressExpressionResult isLiteralInteger] then
@@ -372,7 +371,7 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
         !errorLocation:arraySizeLocation
         !context:ioContext
         !?staticStringMap:ioGlobalLiteralStringMap
-        ?result:let @valueIR sizeExpressionResult
+        ?result:let @objectIR sizeExpressionResult
       ]
       if not [sizeExpressionResult isLiteralInteger] then
         error arraySizeLocation : "control register address is not a static integer expression" : arraySize
@@ -396,7 +395,7 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
         !errorLocation:arrayElementSizeLocation
         !context:ioContext
         !?staticStringMap:ioGlobalLiteralStringMap
-        ?result:let @valueIR elementArraySizeExpressionResult
+        ?result:let @objectIR elementArraySizeExpressionResult
       ]
       if not [elementArraySizeExpressionResult isLiteralInteger] then
         error arrayElementSizeLocation

@@ -221,7 +221,7 @@ list @constructorSignature {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sortedlist @sortedOperandIRList {
-  @valueIR mOperand
+  @objectIR mOperand
   @uint mIndex
 }{
   mIndex <
@@ -269,7 +269,7 @@ override method @structureDeclaration enterInContext
         !?namedObjectMap:*
         !?alloca:allocaList
         !?instructionListIR:initInstructionGenerationList
-        ?result:@valueIR expressionIR
+        ?result:@objectIR expressionIR
       ]
       if ([initInstructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionIR isStatic] then
         error mFieldName : "initialization expression cannot be computed statically"

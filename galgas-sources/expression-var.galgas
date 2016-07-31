@@ -102,7 +102,7 @@ override method @varInExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Search variable, constant, register
   [!?ioVariableMap searchForReadAccess
@@ -197,7 +197,7 @@ method @varInExpressionAST analyzeExpression_register
   ?variableKind:let @objectInMemoryIR inVariableKind
   ?error:let @location inErrorLocation
   ?!@unifiedTypeMap-proxy ioType
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Solve inferred type
   var expressionType = solveInferredType (
@@ -208,11 +208,11 @@ method @varInExpressionAST analyzeExpression_register
 #--- Control register features
   [inVariableKind register
     ?type:let registerType
-    ?name:let registerName
+    ?plmName:let registerName
     ?readable:let readable
     ?writable:let writable
     ?address:let @bigint registerAddress
-    ?sliceMap:@bitSliceAccessMap registerBitSliceMap
+    ?sliceMap:@sliceMap registerBitSliceMap
     ?arraySize:let @uint arraySize # 0 if not an array
     ?elementSize:let @uint elementArraySize # 0 if not an array
   ]
@@ -240,7 +240,7 @@ method @varInExpressionAST analyzeExpression_register
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
-        ?result:let @valueIR indexResult
+        ?result:let @objectIR indexResult
       ]
       if [indexResult isLiteralInteger] then # Static expression
         [indexResult literalInteger ?1* ?value:let @bigint indexValue]
@@ -253,7 +253,7 @@ method @varInExpressionAST analyzeExpression_register
             !.here
             !.register {
               !type:registerType
-              !name:registerName
+              !plmName:registerName
               !readable:readable
               !writable:writable
               !address:address
@@ -338,7 +338,7 @@ method @varInExpressionAST analyzeExpression_otherKind
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?variableKind:let @objectInMemoryIR inVariableKind
   ?!@unifiedTypeMap-proxy ioType
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Array element access ?
   @elementPtrList elementPtrList = {}
@@ -430,7 +430,7 @@ proc analyzeVarInExpressionElementAccess
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
-        ?result:let @valueIR indexResult
+        ?result:let @objectIR indexResult
       ]
       if [indexResult isLiteralInteger] then
         [indexResult literalInteger ?1* ?value:let @bigint indexValue]

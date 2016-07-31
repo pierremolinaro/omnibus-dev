@@ -91,7 +91,7 @@ override method @registerConstantExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Search variable
   [inContext.mControlRegisterMap searchKey
@@ -99,7 +99,7 @@ override method @registerConstantExpressionAST analyzeExpression
     ?let registerType
     ?*
     ?*
-    ?let @bitSliceAccessMap unused registerBitSliceMap
+    ?let @sliceMap unused registerBitSliceMap
     ?let @controlRegisterFieldMap registerFieldMap
     ?let @bigint unused registerAddress
     ?*
@@ -143,7 +143,7 @@ override method @registerConstantExpressionAST analyzeExpression
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
-      ?result:let @valueIR expressionResult
+      ?result:let @objectIR expressionResult
     ]
   #--- Check expression type
     switch [expressionResult kind]

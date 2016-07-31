@@ -87,7 +87,7 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Last field is method name, array access not allowed
   var fieldList = mFieldList
@@ -228,7 +228,7 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
 #  ?!variableMap:@variableMap ioVariableMap
 #  ?!alloca:@allocaList ioAllocaList
 #  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !result:@valueIR outResult
+#  !result:@objectIR outResult
 #{
 #  if inGuard then
 #    error mFunctionName : "a function cannot be called in guard expression"

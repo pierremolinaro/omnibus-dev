@@ -2,7 +2,7 @@
 setter @instructionListIR appendStoreGlobalVariable
   ?let @string inGlobalVarName
   ?let @unifiedTypeMap-proxy inTargetVarType
-  ?let @valueIR inSourceValue
+  ?let @objectIR inSourceValue
   ?volatile:let @bool inIsVolatile
 {
   self += !@storeGlobalVariableIR.new {!inGlobalVarName !inTargetVarType !inSourceValue !inIsVolatile}
@@ -13,7 +13,7 @@ setter @instructionListIR appendStoreGlobalVariable
 class @storeGlobalVariableIR : @abstractInstructionIR {
   @string mGlobalVarName
   @unifiedTypeMap-proxy mTargetVarType
-  @valueIR mSourceValue
+  @objectIR mSourceValue
   @bool mIsVolatile
 }
 

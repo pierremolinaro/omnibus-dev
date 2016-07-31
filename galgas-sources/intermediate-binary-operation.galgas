@@ -41,12 +41,12 @@ enum @llvmBinaryOperation {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendBinaryOperation
-  ?let @valueIR inTarget
+  ?let @objectIR inTarget
   ?let @unifiedTypeMap-proxy inOperandType
   ?let @location inLocation
-  ?let @valueIR inLeft
+  ?let @objectIR inLeft
   ?let @llvmBinaryOperation inOperation
-  ?let @valueIR inRight
+  ?let @objectIR inRight
 {
   self += !@binaryOperationIR.new {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
 }
@@ -54,11 +54,11 @@ setter @instructionListIR appendBinaryOperation
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @binaryOperationIR : @abstractInstructionIR {
-  @valueIR mTarget
+  @objectIR mTarget
   @unifiedTypeMap-proxy mOperandType
-  @valueIR mLeft
+  @objectIR mLeft
   @llvmBinaryOperation mOperation
-  @valueIR mRight
+  @objectIR mRight
   @location mLocation
 }
 

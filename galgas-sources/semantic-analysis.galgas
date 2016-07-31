@@ -5,11 +5,11 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func checkAssignmentCompatibility
-  ?source:let @valueIR inSourceValue
+  ?source:let @objectIR inSourceValue
   ?targetAnnotationType:let @unifiedTypeMap-proxy inTargetAnnotationType
   ?errorLocation:let @location inErrorLocation
   ?staticTypeAllowed:let @bool inStaticTypeAllowed
-  -> @valueIR outResult
+  -> @objectIR outResult
 {
   if inTargetAnnotationType == .null then
     outResult = inSourceValue

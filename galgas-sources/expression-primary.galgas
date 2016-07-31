@@ -152,7 +152,7 @@ override method @primaryInExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- object access, with ou without self
   @objectInMemoryIR currentPointer
@@ -433,7 +433,7 @@ private proc handleVariableSubscriptInExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @valueIR indexResult
+    ?result:let @objectIR indexResult
   ]
   if [indexResult isLiteralInteger] then # Static expression
     [indexResult literalInteger ?1* ?value:let @bigint indexValue]
@@ -505,11 +505,11 @@ private proc handleRegisterArraySubscriptInExpression
 {
   [ioObjectPtr register
     ?type:let registerType
-    ?name:let registerName
+    ?plmName:let registerName
     ?readable:let readable
     ?writable:let writable
     ?address:let @bigint registerAddress
-    ?sliceMap:@bitSliceAccessMap registerBitSliceMap
+    ?sliceMap:@sliceMap registerBitSliceMap
     ?arraySize:let @uint arraySize # 0 if not an array
     ?elementSize:let @uint elementArraySize # 0 if not an array
   ]
@@ -534,7 +534,7 @@ private proc handleRegisterArraySubscriptInExpression
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
-      ?result:let @valueIR indexResult
+      ?result:let @objectIR indexResult
     ]
   #--- Static expression ?
     if [indexResult isLiteralInteger] then # Static expression
@@ -544,7 +544,7 @@ private proc handleRegisterArraySubscriptInExpression
       else
         ioObjectPtr = .register {
           !type:registerType
-          !name:registerName
+          !plmName:registerName
           !readable:readable
           !writable:writable
           !address:registerAddress + indexValue * elementArraySize

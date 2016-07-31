@@ -1,7 +1,7 @@
 
 setter @instructionListIR appendExtend
-  ?let @valueIR inResult
-  ?let @valueIR inSource
+  ?let @objectIR inResult
+  ?let @objectIR inSource
 {
   self += !@extendIR.new {!inResult !inSource}
 }
@@ -9,8 +9,8 @@ setter @instructionListIR appendExtend
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @extendIR : @abstractInstructionIR {
-  @valueIR mResult
-  @valueIR mSource
+  @objectIR mResult
+  @objectIR mSource
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

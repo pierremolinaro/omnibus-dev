@@ -78,7 +78,7 @@ override method @convertExpressionAST analyzeExpression
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@valueIR outResult
+  !result:@objectIR outResult
 {
 #--- Analyze expression
   [mExpression analyzeExpression
@@ -97,7 +97,7 @@ override method @convertExpressionAST analyzeExpression
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@valueIR expressionResult
+    ?result:@objectIR expressionResult
   ]
 #--- 
   if not inAllowPanic then
@@ -140,8 +140,8 @@ override method @convertExpressionAST analyzeExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @convertInstructionIR : @abstractInstructionIR {
-  @valueIR mTarget
-  @valueIR mOperand
+  @objectIR mTarget
+  @objectIR mOperand
   @location mLocation
 }
 
