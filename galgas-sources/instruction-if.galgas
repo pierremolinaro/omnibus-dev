@@ -161,7 +161,9 @@ override method @ifInstructionAST analyze
     error mTestExpressionEndLocation : "test expression type should not be static"
   end
   [!?ioVariableMap openOverrideForSelectBlock]
+  [!?ioLocalVariableMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
+  var namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
   @instructionListIR thenInstructionGenerationList = {}
   [mThenInstructionList analyzeBranchInstructionList
     !self:inSelfType
@@ -176,12 +178,13 @@ override method @ifInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?localVariableMap: ioLocalVariableMap
-    !?namedObjectMap: ioNamedObjectMap
+    !?namedObjectMap: namedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:thenInstructionGenerationList
   ]
 #--- Analyze 'else' instruction list
   @instructionListIR elseInstructionGenerationList = {}
+  namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
   [mElseInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !propertiesAreMutable:inRoutineCanMutateProperties
@@ -195,11 +198,12 @@ override method @ifInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?localVariableMap: ioLocalVariableMap
-    !?namedObjectMap: ioNamedObjectMap
+    !?namedObjectMap: namedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:elseInstructionGenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_if_instruction]
+  [!?ioLocalVariableMap closeOverride !mEndOf_if_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@ifInstructionIR.new {
     !testResult

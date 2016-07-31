@@ -147,8 +147,8 @@ override method @primaryInExpressionAST analyzeExpression
   ?allowPanic:let @bool unused inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
-  ?!localVariableMap:@localVariableMap unused ioLocalVariableMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -161,6 +161,10 @@ override method @primaryInExpressionAST analyzeExpression
     if inGuard then
       error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer
     else
+      if [ioLocalVariableMap hasKey !mObjectName] then
+        [!?ioLocalVariableMap searchForReadAccess !mObjectName]
+      end
+      [!?ioVariableMap searchForReadAccess !lkey:mObjectName ?5*]
       [ioNamedObjectMap searchKey
         !mObjectName
         ?currentPointer

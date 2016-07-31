@@ -13,7 +13,7 @@ service emptyService () {
 //——————————————————————————————————————————————————————————————————————————————
 
 section getSysTick () -> $uint32 {
-  result = SYST_CVR
+  result = azerty SYST_CVR
 }
 
 //——————————————————————————————————————————————————————————————————————————————
@@ -29,11 +29,11 @@ task T priority 0 stackSize 512 {
   init 1 {
     var cumul $uint32 = 0
   //--- Compute getSysTick duration
-    for x $uint32 in 0 ..< ITERATIONS {
+    for x $uint32 in 0 ..< azerty ITERATIONS {
       time.waitDuringMS (!delay:1)
       let t0 = getSysTick ()
       let t1 = getSysTick ()
-      cumul += t0 - t1
+      cumul += azerty t0 - azerty t1
       lcd.printUnsigned (!t0 - t1)
       lcd.printSpaces (!1)
     }
@@ -45,7 +45,7 @@ task T priority 0 stackSize 512 {
       let t0 = getSysTick ()
       emptySection ()
       let t1 = getSysTick ()
-      lcd.printUnsigned (!t0 - t1 - systickDuration)
+      lcd.printUnsigned (!azerty t0 - azerty t1 - azerty systickDuration)
       lcd.printSpaces (!1)
     }
   //--- Compute emptyService duration

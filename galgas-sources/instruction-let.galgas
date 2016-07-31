@@ -124,6 +124,11 @@ override method @letInstructionWithAssignmentAST analyze
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
   ]
+  [!?ioNamedObjectMap insertKey
+    !mVarName
+    !localConstant
+  ]
+  [!?ioLocalVariableMap insertConstant !mVarName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

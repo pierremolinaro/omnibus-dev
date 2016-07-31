@@ -91,6 +91,7 @@ method @instructionListAST analyzeBranchInstructionList
 {
 #--- Begin branch
   [!?ioVariableMap openBranch]
+  [!?ioLocalVariableMap openBranch]
   for () in self do
     [!?ioInstructionGenerationList appendSourceLineComment !mInstructionLocation]
     [mInstruction analyze 
@@ -113,6 +114,7 @@ method @instructionListAST analyzeBranchInstructionList
 #--- End branch
 #  [ioVariableMap deinitTopLevelVariables]
   [!?ioVariableMap closeBranch !inEndOfInstructionList]
+  [!?ioLocalVariableMap closeBranch !inEndOfInstructionList]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
