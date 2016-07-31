@@ -142,6 +142,11 @@ override method @varInstructionWithAssignmentAST analyze
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
   ]
+  [!?ioLocalVariableMap insertDefinedVariable !mVarName]
+  [!?ioNamedObjectMap insertKey
+    !mVarName
+    !targetVar
+  ]
 #--- Code generation
   ioAllocaList += !varLLVMName ![result type]
   [!?ioInstructionGenerationList appendStoreLocalVariable

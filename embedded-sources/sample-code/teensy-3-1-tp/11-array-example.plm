@@ -4,6 +4,11 @@ let SIZE = 9
 
 type $A : $uint32 [SIZE]
 
+struct $B {
+  var a $uint32 = 0
+  var b $uint32 = 0
+}
+
 //------------------------------------------------*
 
 task T priority 12 stackSize 512 {
@@ -37,6 +42,10 @@ task T priority 12 stackSize 512 {
       a [i] += 9
       x = a [i]
     }
+    
+    var s = $B ()
+    var aa = azerty s.a
+    var bb = azerty s.b
   }
 }
 
