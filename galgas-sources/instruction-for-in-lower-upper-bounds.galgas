@@ -161,7 +161,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     [!?ioLocalVariableMap openOverrideForRepeatBlock]
     [!?ioLocalVariableMap insertUsedConstant !mVarName]
     var namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
-    [!?namedObjectMap insertKey !mVarName !.localVariable {!type:type !name:enumeratedVarLLVMName !volatile:false}]
+    [!?namedObjectMap insertKey !mVarName !.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}]
     [!?ioVariableMap insertUsedConstant
       !lkey:mVarName
       !type:type

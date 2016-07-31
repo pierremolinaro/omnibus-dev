@@ -5,7 +5,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @namedObjectMap {
-  @objectInMemoryIR mObject
+  @objectIR mObject
 
   insert insertKey error message "duplicated $%K (already declared at %L"
   search searchKey error message "$%K does not exist"
@@ -44,6 +44,17 @@ proc initialVariableMap
   switch inRegisterAccessKind
   case noAccess :
     for () in inContext.mControlRegisterMap do
+      let objectReference = @objectIR.registerReference {
+        !type:mType
+        !plmName:lkey
+        !readable:false
+        !writable:false
+        !address:mAddress 
+        !sliceMap:mRegisterFieldAccessMap
+        !arraySize: mArraySize # 0 if not an array
+        !elementSize: mElementArraySize # 0 if not an array
+      }
+      [!?outObjectMap insertKey !lkey !objectReference]
       let objectInMemory = @objectInMemoryIR.register {
         !type:mType
         !plmName:lkey
@@ -54,7 +65,6 @@ proc initialVariableMap
         !arraySize: mArraySize # 0 if not an array
         !elementSize: mElementArraySize # 0 if not an array
       }
-      [!?outObjectMap insertKey !lkey !objectInMemory]
       [!?outVariableMap insertInaccessibleControlRegister
         !lkey:lkey
         !type:mType
@@ -67,6 +77,17 @@ proc initialVariableMap
   case readAccess :
     for () in inContext.mControlRegisterMap do
       if inAcceptUserMode && not mIsAccessibleInUserMode then
+        let objectReference = @objectIR.registerReference {
+          !type:mType
+          !plmName:lkey
+          !readable:false
+          !writable:false
+          !address:mAddress 
+          !sliceMap:mRegisterFieldAccessMap
+          !arraySize: mArraySize # 0 if not an array
+          !elementSize: mElementArraySize # 0 if not an array
+        }
+        [!?outObjectMap insertKey !lkey !objectReference]
         let objectInMemory = @objectInMemoryIR.register {
           !type:mType
           !plmName:lkey
@@ -77,7 +98,6 @@ proc initialVariableMap
           !arraySize: mArraySize # 0 if not an array
           !elementSize: mElementArraySize # 0 if not an array
         }
-        [!?outObjectMap insertKey !lkey !objectInMemory]
         [!?outVariableMap insertInaccessibleControlRegister
           !lkey:lkey
           !type:mType
@@ -87,6 +107,17 @@ proc initialVariableMap
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
         ]
       elsif mIsReadOnly || inGlobalsAreConstant then
+        let objectReference = @objectIR.registerReference {
+          !type:mType
+          !plmName:lkey
+          !readable:true
+          !writable:false
+          !address:mAddress 
+          !sliceMap:mRegisterFieldAccessMap
+          !arraySize: mArraySize # 0 if not an array
+          !elementSize: mElementArraySize # 0 if not an array
+        }
+        [!?outObjectMap insertKey !lkey !objectReference]
         let objectInMemory = @objectInMemoryIR.register {
           !type:mType
           !plmName:lkey
@@ -97,7 +128,6 @@ proc initialVariableMap
           !arraySize: mArraySize # 0 if not an array
           !elementSize: mElementArraySize # 0 if not an array
         }
-        [!?outObjectMap insertKey !lkey !objectInMemory]
         [!?outVariableMap insertUsedConstant
           !lkey:lkey
           !type:mType
@@ -110,6 +140,17 @@ proc initialVariableMap
     end
   case readWriteAccess :
     for () in inContext.mControlRegisterMap do
+      let objectReference = @objectIR.registerReference {
+        !type:mType
+        !plmName:lkey
+        !readable:true
+        !writable:true
+        !address:mAddress 
+        !sliceMap:mRegisterFieldAccessMap
+        !arraySize: mArraySize # 0 if not an array
+        !elementSize: mElementArraySize # 0 if not an array
+      }
+      [!?outObjectMap insertKey !lkey !objectReference]
       let objectInMemory = @objectInMemoryIR.register {
         !type:mType
         !plmName:lkey
@@ -120,7 +161,6 @@ proc initialVariableMap
         !arraySize: mArraySize # 0 if not an array
         !elementSize: mElementArraySize # 0 if not an array
       }
-      [!?outObjectMap insertKey !lkey !objectInMemory]
       [!?outVariableMap insertDefinedVariable
         !lkey:lkey
         !type:mType
@@ -143,7 +183,7 @@ proc initialVariableMap
     ]
     [!?outObjectMap insertKey
       !constantName
-      !.staticConstant {!value: constantValue !name: constantName}
+      !constantValue
     ]
   end
 #------------------------------------------------------- Add global variables

@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendComputeVolatileRegisterAddressWithSubscript
-  ?let @objectInMemoryIR inTarget
+  ?let @objectIR inTarget
   ?let @objectIR inIndexResult
   ?let @bigint inAddress
   ?let @bigint inElementArraySize
@@ -11,7 +11,7 @@ setter @instructionListIR appendComputeVolatileRegisterAddressWithSubscript
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @ComputeRegisterAddressWithSubscriptIR : @abstractInstructionIR {
-  @objectInMemoryIR mTarget
+  @objectIR mTarget
   @objectIR mIndexResult
   @bigint mRegisterAddress
   @bigint mElementArraySize

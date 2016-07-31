@@ -20,22 +20,6 @@ enum @objectInMemoryIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @objectInMemoryIR checkReadable {
-  switch self
-  case registerAddress (* *) :
-  case register (* @lstring name @bool readable * * * * *) :
-    if not readable then
-      error name : "the control register cannot be read in current context"
-    end
-  case globalVariable (* * *) :
-  case localVariable (* * *) :
-  case staticConstant (* *) :
-  case property (* * *) :
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 method @objectInMemoryIR checkWriteable {
   switch self
   case registerAddress (* @string unused llvmName) :
@@ -138,6 +122,7 @@ enum @objectIR {
 #--- References
   case globalVariableReference (@unifiedTypeMap-proxy type @string plmName)
   case localVariableReference (@unifiedTypeMap-proxy type @string plmName)
+  case temporaryReference (@unifiedTypeMap-proxy type @string llvmName)
   case registerReference (@unifiedTypeMap-proxy type
                           @lstring plmName
                           @bool readable
@@ -158,6 +143,28 @@ enum @objectIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+method @objectIR checkReadable {
+  switch self
+  case selfObject (*) :
+  case llvmGlobalObjectValue (**) :
+  case globalVariableReference (**) :
+  case localVariableReference (**) :
+  case temporaryReference (**) :
+  case registerReference (* @lstring name @bool readable * * * * *) :
+    if not readable then
+      error name : "the control register cannot be read in current context"
+    end
+  case property (* * *) :
+  case llvmTemporaryValue (* * *) :
+  case llvmStructureConstant (* *) :
+  case literalInteger (* *) :
+  case literalString (* * *) :
+  case zero (*) :
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 getter @objectIR llvmName -> @string outResult {
   switch self
   case property (***) : error .nowhere : "<<@objectIR llvmName>>" : outResult
@@ -169,6 +176,7 @@ getter @objectIR llvmName -> @string outResult {
   case literalInteger (* @bigint value) : outResult = [value string]
   case llvmTemporaryValue (* @string name *) : outResult = "%" + name
   case llvmGlobalObjectValue (* @string name) : outResult = "@" + name
+  case temporaryReference (* @string llvmName) : outResult = "%" + llvmName
   case llvmStructureConstant (* @operandIRList inValues) :
     outResult = "{"
     for () in inValues
@@ -187,6 +195,7 @@ getter @objectIR llvmName -> @string outResult {
 
 getter @objectIR type -> @unifiedTypeMap-proxy outResult {
   switch self
+  case temporaryReference (@unifiedTypeMap-proxy type *) : outResult = type
   case property (type **) : outResult = type
   case registerReference (type *******) : outResult = type
   case globalVariableReference (type *) : outResult = type
@@ -223,6 +232,8 @@ getter @objectIR kind -> @typeKind outResult {
 
 getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
   switch self
+  case temporaryReference (* @string llvmName) :
+    outResult = .temporaryReference {!type:inType !llvmName:llvmName}
   case property (* plmName index) :
     outResult = .property {!type:inType !plmName:plmName !index:index}
   case registerReference (* plmName readable writable address sliceMap arraySize elementSize) :
@@ -261,6 +272,7 @@ getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
 
 getter @objectIR name -> @string outResult {
   switch self
+  case temporaryReference (* @string llvmName) : outResult = llvmName
   case property (* name *) : outResult = name
   case registerReference (* name ******) : outResult = name
   case localVariableReference (* name) : outResult = name
@@ -279,6 +291,7 @@ getter @objectIR name -> @string outResult {
 
 getter @objectIR isStatic -> @bool outResult {
   switch self
+  case temporaryReference (**) : outResult = false
   case property (***) : outResult = false
   case registerReference (* *******) : outResult = false
   case localVariableReference (* *) : outResult = false
