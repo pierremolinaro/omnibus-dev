@@ -143,9 +143,10 @@ override method @varInstructionWithAssignmentAST analyze
     !canBeUsedAsInputParameter:true
   ]
   [!?ioLocalVariableMap insertDefinedVariable !mVarName]
+  let targetObject = @objectIR.temporaryReference {!type:[result type] !llvmName:varLLVMName}
   [!?ioNamedObjectMap insertKey
     !mVarName
-    !targetVar
+    !targetObject
   ]
 #--- Code generation
   ioAllocaList += !varLLVMName ![result type]

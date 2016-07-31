@@ -155,7 +155,7 @@ override method @primaryInExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- object access, with ou without self
-  @objectInMemoryIR currentPointer
+  @objectIR currentPointer
   switch mSelfAccess
   case noSelfAccess :
     if inGuard then
@@ -233,16 +233,16 @@ override method @primaryInExpressionAST analyzeExpression
         !?ioInstructionGenerationList
         !?currentPointer
       )
-    case funcCall (@effectiveParameterListAST arguments) :
+    case funcCall (@effectiveParameterListAST unused arguments) :
 
     end
   end
 
 #--- Load from memory  
-  [!?ioInstructionGenerationList appendLoadFromMemory
+  [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
-    !mObjectName.location
     !currentPointer
+    !mObjectName.location
     ?outResult
   ]  
 
@@ -279,19 +279,20 @@ override method @primaryInExpressionAST analyzeExpression
 
 private proc handleSelfAccessInExpression
   ?let @unifiedTypeMap-proxy inSelfType
-  ?let @objectInMemoryIR inObject
+  ?let @objectIR inObject
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
-  !@objectInMemoryIR outObjectPtr
+  !@objectIR outObjectPtr
 {
   if [inObject isProperty] then
     [inObject property ?type:let type ?plmName:let name ?index:let index]
-    outObjectPtr = .localVariable {!type:type !name:"temp." + ioTemporaries.mTemporaryIndex !volatile:false}
+    outObjectPtr = .llvmTemporaryValue {!type:type !llvmName:"temp." + ioTemporaries.mTemporaryIndex !sliceMap:{}}
     ioTemporaries.mTemporaryIndex ++
-    [!?ioInstructionGenerationList appendGetElementPtrFromSelf
+    [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
       !outObjectPtr
       !inSelfType
-      !{!.absolute {!index:index} !name}
+      !name
+      !index
     ]
   else
     error .nowhere : "<<getNewTemporarySelfObjectPtr>>" : outObjectPtr
@@ -301,24 +302,24 @@ private proc handleSelfAccessInExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc handlePropertyAccessInExpression
-  ?!@objectInMemoryIR ioObject
+  ?!@objectIR ioObject
   ?let @location inErrorLocation
-  ?let @objectInMemoryIR inProperty
+  ?let @objectIR inProperty
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
 {
   if [inProperty isProperty] then
     [inProperty property ?type:let type ?plmName:let name ?index:let index]
-    let newObject = @objectInMemoryIR.localVariable {
+    let newObject = @objectIR.temporaryReference {
       !type:type
-      !name:"temp." + ioTemporaries.mTemporaryIndex
-      !volatile:false
+      !llvmName:"temp." + ioTemporaries.mTemporaryIndex
     }
     ioTemporaries.mTemporaryIndex ++
-    [!?ioInstructionGenerationList appendGetElementPtr
+    [!?ioInstructionGenerationList appendGetPropertyReference
       !newObject
       !ioObject
-      !{!.absolute {!index:index} !name}
+      !name
+      !index
     ]
     ioObject = newObject
   else
@@ -346,7 +347,7 @@ private proc handleSubscriptInExpression
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
   ?!@instructionListIR ioInstructionGenerationList
-  ?!@objectInMemoryIR ioObjectPtr
+  ?!@objectIR ioObjectPtr
 {
   if [[[ioObjectPtr type] kind] isArrayType] then
     handleVariableSubscriptInExpression (
@@ -368,7 +369,7 @@ private proc handleSubscriptInExpression
       !?ioInstructionGenerationList
       !?ioObjectPtr
    )
-  elsif [ioObjectPtr isRegister] then
+  elsif [ioObjectPtr isRegisterReference] then
     handleRegisterArraySubscriptInExpression (
       !self: inSelfType
       !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
@@ -412,7 +413,7 @@ private proc handleVariableSubscriptInExpression
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
   ?!@instructionListIR ioInstructionGenerationList
-  ?!@objectInMemoryIR ioObjectPtr
+  ?!@objectIR ioObjectPtr
 {
 #--- Analyze array type
   [[[ioObjectPtr type] kind] arrayType ?elementType:let type ?size:let @bigint arraySize]
@@ -440,16 +441,16 @@ private proc handleVariableSubscriptInExpression
     if (indexValue < 0G) || (indexValue >= arraySize) then
       error inErrorLocation : "static index should be positive and < " + arraySize : ioObjectPtr
     else
-      let result = @objectInMemoryIR.localVariable {
+      let result = @objectIR.temporaryReference {
         !type:type
-        !name:"temp." + ioTemporaries.mTemporaryIndex
-        !volatile:false
+        !llvmName:"temp." + ioTemporaries.mTemporaryIndex
       }
       ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetElementPtr
+      [!?ioInstructionGenerationList appendGetPropertyReference
         !result
         !ioObjectPtr
-        !{!.absolute {!index:[indexValue uint]} !"[" + indexValue + "]"}
+        !"[" + indexValue + "]"
+        ![indexValue uint]
       ]
       ioObjectPtr = result      
     end
@@ -465,16 +466,17 @@ private proc handleVariableSubscriptInExpression
         error inErrorLocation : "index computation can generate panic" : ioObjectPtr
       end
     end
-      let result = @objectInMemoryIR.localVariable {
+      let result = @objectIR.temporaryReference {
         !type:type
-        !name:"temp." + ioTemporaries.mTemporaryIndex
-        !volatile:false
+        !llvmName:"temp." + ioTemporaries.mTemporaryIndex
       }
       ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetElementPtr
+      [!?ioInstructionGenerationList appendGetPropertyReference
         !result
         !ioObjectPtr
-        !{!.indirect {!index:indexResult} !"[" + [indexResult name] + "]"}
+        !"[" + [indexResult name] + "]"
+        ![indexResult llvmName]
+#        !{!.indirect {!index:indexResult} !"[" + [indexResult name] + "]"}
       ]
       ioObjectPtr = result      
   else
@@ -501,9 +503,9 @@ private proc handleRegisterArraySubscriptInExpression
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
   ?!@instructionListIR ioInstructionGenerationList
-  ?!@objectInMemoryIR ioObjectPtr
+  ?!@objectIR ioObjectPtr
 {
-  [ioObjectPtr register
+  [ioObjectPtr registerReference
     ?type:let registerType
     ?plmName:let registerName
     ?readable:let readable
@@ -542,7 +544,7 @@ private proc handleRegisterArraySubscriptInExpression
       if (indexValue < 0G) || (indexValue >= arraySize) then
         error inErrorLocation : "static index should be positive and < " + arraySize : ioObjectPtr
       else
-        ioObjectPtr = .register {
+        ioObjectPtr = .registerReference {
           !type:registerType
           !plmName:registerName
           !readable:readable
@@ -566,10 +568,9 @@ private proc handleRegisterArraySubscriptInExpression
           error inErrorLocation : "index computation can generated panic"
         end
       end
-      let registerAddressObject = @objectInMemoryIR.localVariable {
+      let registerAddressObject = @objectIR.temporaryReference {
         !type:registerType
-        !name:"temp." + ioTemporaries.mTemporaryIndex
-        !volatile:true
+        !llvmName:"temp." + ioTemporaries.mTemporaryIndex
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendComputeVolatileRegisterAddressWithSubscript
@@ -592,7 +593,7 @@ private proc handlePropertyInExpression
   ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
+  ?context:let @semanticContext unused inContext
   ?modes:let @stringset unused inModeSet
   ?allowPanic:let @bool unused inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -603,12 +604,12 @@ private proc handlePropertyInExpression
   ?!alloca:@allocaList unused ioAllocaList
   ?let @lstring inPropertyName
   ?!@instructionListIR ioInstructionGenerationList
-  ?!@objectInMemoryIR ioObjectPtr
+  ?!@objectIR ioObjectPtr
 {
 #--- Structure
   if [[[ioObjectPtr type] kind] isStructure] then
     [[[ioObjectPtr type] kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
-    [structureObjectMap searchKey !inPropertyName ?@objectInMemoryIR property]
+    [structureObjectMap searchKey !inPropertyName ?@objectIR property]
     handlePropertyAccessInExpression (
       !?ioObjectPtr
       !inPropertyName.location
@@ -628,16 +629,16 @@ private proc handlePropertyInExpression
     if [sliceMap count] == 0 then
       error inPropertyName : "the current object has no property (empty slice map)" : ioObjectPtr
     else
-      [!?ioInstructionGenerationList appendLoadFromMemory
+      [!?ioInstructionGenerationList appendLoadFromReference
         !?ioTemporaries
-        !inPropertyName.location
         !ioObjectPtr
-        ?let loadedRegisterValue
+        !inPropertyName.location
+        ?let unused loadedRegisterValue
       ]
       [sliceMap searchKey
         !inPropertyName
-        ?let @llvmBinaryOperation accessOperator
-        ?let @bigint accessRightOperand
+        ?let @llvmBinaryOperation unused accessOperator
+        ?let @bigint unused accessRightOperand
         ?2*
  #       ?let resultObject
       ]

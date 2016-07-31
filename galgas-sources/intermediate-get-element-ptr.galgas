@@ -3,7 +3,7 @@ setter @instructionListIR appendGetPropertyReference
   ?let @objectIR inTarget
   ?let @objectIR inSource
   ?let @string inPLMname
-  ?let @uint inPropertyIndex
+  ?let @string inPropertyIndex
 {
   self += !@getPropertyReferenceIR.new {!inTarget !inSource !inPLMname !inPropertyIndex}
 }
@@ -14,7 +14,7 @@ class @getPropertyReferenceIR : @abstractInstructionIR {
   @objectIR mTarget
   @objectIR mSource
   @string mPLMname
-  @uint mPropertyIndex
+  @string mPropertyIndex
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

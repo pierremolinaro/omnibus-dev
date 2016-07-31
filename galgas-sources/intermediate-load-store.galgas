@@ -89,6 +89,13 @@ setter @instructionListIR appendLoadFromReference
       !name
       !false
     ]
+  case temporaryReference (@unifiedTypeMap-proxy type @string llvmName) :
+    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
+    [!?self appendLoadLocalVariable
+      !outResultingValue
+      !llvmName
+      !false
+    ]
   case registerReference (type * * * address * arraySize *) :
     if arraySize > 0 then
       error inErrorLocation : "register array requires subscripting" : outResultingValue

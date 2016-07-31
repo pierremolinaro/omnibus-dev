@@ -553,7 +553,7 @@ class GALGAS_ComputeRegisterAddressWithSubscriptIR : public GALGAS_abstractInstr
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_ComputeRegisterAddressWithSubscriptIR constructor_new (const class GALGAS_objectInMemoryIR & inOperand0,
+  public : static class GALGAS_ComputeRegisterAddressWithSubscriptIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                                       const class GALGAS_objectIR & inOperand1,
                                                                                       const class GALGAS_bigint & inOperand2,
                                                                                       const class GALGAS_bigint & inOperand3
@@ -574,7 +574,7 @@ class GALGAS_ComputeRegisterAddressWithSubscriptIR : public GALGAS_abstractInstr
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -595,13 +595,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ComputeRegisterAddr
 
 class cPtr_ComputeRegisterAddressWithSubscriptIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectInMemoryIR mAttribute_mTarget ;
+  public : GALGAS_objectIR mAttribute_mTarget ;
   public : GALGAS_objectIR mAttribute_mIndexResult ;
   public : GALGAS_bigint mAttribute_mRegisterAddress ;
   public : GALGAS_bigint mAttribute_mElementArraySize ;
 
 //--- Constructor
-  public : cPtr_ComputeRegisterAddressWithSubscriptIR (const GALGAS_objectInMemoryIR & in_mTarget,
+  public : cPtr_ComputeRegisterAddressWithSubscriptIR (const GALGAS_objectIR & in_mTarget,
                                                        const GALGAS_objectIR & in_mIndexResult,
                                                        const GALGAS_bigint & in_mRegisterAddress,
                                                        const GALGAS_bigint & in_mElementArraySize
@@ -611,7 +611,7 @@ class cPtr_ComputeRegisterAddressWithSubscriptIR : public cPtr_abstractInstructi
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_objectInMemoryIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIndexResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mRegisterAddress (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mElementArraySize (LOCATION_ARGS) const ;
@@ -1530,6 +1530,105 @@ class cPtr_getElementPtrIR : public cPtr_abstractInstructionIR {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                        @getPropertyReferenceFromSelfIR class                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_getPropertyReferenceFromSelfIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_getPropertyReferenceFromSelfIR (void) ;
+
+//---
+  public : inline const class cPtr_getPropertyReferenceFromSelfIR * ptr (void) const { return (const cPtr_getPropertyReferenceFromSelfIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_getPropertyReferenceFromSelfIR (const cPtr_getPropertyReferenceFromSelfIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_getPropertyReferenceFromSelfIR extractObject (const GALGAS_object & inObject,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_getPropertyReferenceFromSelfIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                                               const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                                               const class GALGAS_string & inOperand2,
+                                                                               const class GALGAS_uint & inOperand3
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_getPropertyReferenceFromSelfIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPropertyIndex (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPropertyName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mSelfType (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_getPropertyReferenceFromSelfIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getPropertyReferenceFromSelfIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Pointer class for @getPropertyReferenceFromSelfIR class                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_getPropertyReferenceFromSelfIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_objectIR mAttribute_mTarget ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mSelfType ;
+  public : GALGAS_string mAttribute_mPropertyName ;
+  public : GALGAS_uint mAttribute_mPropertyIndex ;
+
+//--- Constructor
+  public : cPtr_getPropertyReferenceFromSelfIR (const GALGAS_objectIR & in_mTarget,
+                                                const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
+                                                const GALGAS_string & in_mPropertyName,
+                                                const GALGAS_uint & in_mPropertyIndex
+                                                COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mSelfType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mPropertyName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mPropertyIndex (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            @getPropertyReferenceIR class                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1558,7 +1657,7 @@ class GALGAS_getPropertyReferenceIR : public GALGAS_abstractInstructionIR {
   public : static class GALGAS_getPropertyReferenceIR constructor_new (const class GALGAS_objectIR & inOperand0,
                                                                        const class GALGAS_objectIR & inOperand1,
                                                                        const class GALGAS_string & inOperand2,
-                                                                       const class GALGAS_uint & inOperand3
+                                                                       const class GALGAS_string & inOperand3
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1572,7 +1671,7 @@ class GALGAS_getPropertyReferenceIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPLMname (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPropertyIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPropertyIndex (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
 
@@ -1600,13 +1699,13 @@ class cPtr_getPropertyReferenceIR : public cPtr_abstractInstructionIR {
   public : GALGAS_objectIR mAttribute_mTarget ;
   public : GALGAS_objectIR mAttribute_mSource ;
   public : GALGAS_string mAttribute_mPLMname ;
-  public : GALGAS_uint mAttribute_mPropertyIndex ;
+  public : GALGAS_string mAttribute_mPropertyIndex ;
 
 //--- Constructor
   public : cPtr_getPropertyReferenceIR (const GALGAS_objectIR & in_mTarget,
                                         const GALGAS_objectIR & in_mSource,
                                         const GALGAS_string & in_mPLMname,
-                                        const GALGAS_uint & in_mPropertyIndex
+                                        const GALGAS_string & in_mPropertyIndex
                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -1616,7 +1715,7 @@ class cPtr_getPropertyReferenceIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSource (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mPLMname (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mPropertyIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mPropertyIndex (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

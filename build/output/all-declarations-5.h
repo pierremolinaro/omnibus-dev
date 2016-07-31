@@ -1825,25 +1825,26 @@ class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_i
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_handleSelfAccessInExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                           const class GALGAS_objectInMemoryIR constinArgument1,
+                                           const class GALGAS_objectIR constinArgument1,
                                            class GALGAS_semanticTemporariesStruct & ioArgument2,
                                            class GALGAS_instructionListIR & ioArgument3,
-                                           class GALGAS_objectInMemoryIR & outArgument4,
+                                           class GALGAS_objectIR & outArgument4,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                          Extension setter '@instructionListIR appendGetElementPtrFromSelf'                          *
+//                        Extension setter '@instructionListIR appendPropertyReferenceFromSelf'                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendGetElementPtrFromSelf (class GALGAS_instructionListIR & ioObject,
-                                                  const class GALGAS_objectInMemoryIR constin_inTarget,
-                                                  const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                                  const class GALGAS_elementPtrList constin_inElementList,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
+void extensionSetter_appendPropertyReferenceFromSelf (class GALGAS_instructionListIR & ioObject,
+                                                      const class GALGAS_objectIR constin_inTarget,
+                                                      const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                                      const class GALGAS_string constin_inPropertyName,
+                                                      const class GALGAS_uint constin_inPropertyIndex,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1851,9 +1852,9 @@ void extensionSetter_appendGetElementPtrFromSelf (class GALGAS_instructionListIR
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void routine_handlePropertyAccessInExpression (class GALGAS_objectInMemoryIR & ioArgument0,
+void routine_handlePropertyAccessInExpression (class GALGAS_objectIR & ioArgument0,
                                                const class GALGAS_location constinArgument1,
-                                               const class GALGAS_objectInMemoryIR constinArgument2,
+                                               const class GALGAS_objectIR constinArgument2,
                                                class GALGAS_semanticTemporariesStruct & ioArgument3,
                                                class GALGAS_instructionListIR & ioArgument4,
                                                class C_Compiler * inCompiler
@@ -1861,16 +1862,17 @@ void routine_handlePropertyAccessInExpression (class GALGAS_objectInMemoryIR & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                              Extension setter '@instructionListIR appendGetElementPtr'                              *
+//                          Extension setter '@instructionListIR appendGetPropertyReference'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendGetElementPtr (class GALGAS_instructionListIR & ioObject,
-                                          const class GALGAS_objectInMemoryIR constin_inTarget,
-                                          const class GALGAS_objectInMemoryIR constin_inSource,
-                                          const class GALGAS_elementPtrList constin_inElementList,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
+void extensionSetter_appendGetPropertyReference (class GALGAS_instructionListIR & ioObject,
+                                                 const class GALGAS_objectIR constin_inTarget,
+                                                 const class GALGAS_objectIR constin_inSource,
+                                                 const class GALGAS_string constin_inPLMname,
+                                                 const class GALGAS_string constin_inPropertyIndex,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1894,17 +1896,17 @@ void routine_handleSubscriptInExpression (const class GALGAS_unifiedTypeMap_2D_p
                                           const class GALGAS_expressionAST constinArgument13,
                                           const class GALGAS_location constinArgument14,
                                           class GALGAS_instructionListIR & ioArgument15,
-                                          class GALGAS_objectInMemoryIR & ioArgument16,
+                                          class GALGAS_objectIR & ioArgument16,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Extension getter '@objectInMemoryIR type' (as function)                               *
+//                                   Extension getter '@objectIR type' (as function)                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_unifiedTypeMap_2D_proxy extensionGetter_type (const class GALGAS_objectInMemoryIR & inObject,
+class GALGAS_unifiedTypeMap_2D_proxy extensionGetter_type (const class GALGAS_objectIR & inObject,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
@@ -1930,7 +1932,7 @@ void routine_handleRegisterArraySubscriptInExpression (const class GALGAS_unifie
                                                        const class GALGAS_expressionAST constinArgument13,
                                                        const class GALGAS_location constinArgument14,
                                                        class GALGAS_instructionListIR & ioArgument15,
-                                                       class GALGAS_objectInMemoryIR & ioArgument16,
+                                                       class GALGAS_objectIR & ioArgument16,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -1956,7 +1958,7 @@ void routine_handleVariableSubscriptInExpression (const class GALGAS_unifiedType
                                                   const class GALGAS_expressionAST constinArgument13,
                                                   const class GALGAS_location constinArgument14,
                                                   class GALGAS_instructionListIR & ioArgument15,
-                                                  class GALGAS_objectInMemoryIR & ioArgument16,
+                                                  class GALGAS_objectIR & ioArgument16,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -2054,7 +2056,7 @@ void extensionSetter_testArrayIndex (class GALGAS_instructionListIR & ioObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void extensionSetter_appendComputeVolatileRegisterAddressWithSubscript (class GALGAS_instructionListIR & ioObject,
-                                                                        const class GALGAS_objectInMemoryIR constin_inTarget,
+                                                                        const class GALGAS_objectIR constin_inTarget,
                                                                         const class GALGAS_objectIR constin_inIndexResult,
                                                                         const class GALGAS_bigint constin_inAddress,
                                                                         const class GALGAS_bigint constin_inElementArraySize,
@@ -2082,23 +2084,23 @@ void routine_handlePropertyInExpression (const class GALGAS_unifiedTypeMap_2D_pr
                                          class GALGAS_allocaList & ioArgument12,
                                          const class GALGAS_lstring constinArgument13,
                                          class GALGAS_instructionListIR & ioArgument14,
-                                         class GALGAS_objectInMemoryIR & ioArgument15,
+                                         class GALGAS_objectIR & ioArgument15,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Extension setter '@instructionListIR appendLoadFromMemory'                              *
+//                            Extension setter '@instructionListIR appendLoadFromReference'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_appendLoadFromMemory (class GALGAS_instructionListIR & ioObject,
-                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           const class GALGAS_location constin_inErrorLocation,
-                                           const class GALGAS_objectInMemoryIR constin_inSource,
-                                           class GALGAS_objectIR & out_outResultingValue,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
+void extensionSetter_appendLoadFromReference (class GALGAS_instructionListIR & ioObject,
+                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                              const class GALGAS_objectIR constin_inSource,
+                                              const class GALGAS_location constin_inErrorLocation,
+                                              class GALGAS_objectIR & out_outResultingValue,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2193,6 +2195,19 @@ void routine_getLocalNameOfNewTempObjectInMemory (const class GALGAS_unifiedType
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                              Extension setter '@instructionListIR appendGetElementPtr'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendGetElementPtr (class GALGAS_instructionListIR & ioObject,
+                                          const class GALGAS_objectInMemoryIR constin_inTarget,
+                                          const class GALGAS_objectInMemoryIR constin_inSource,
+                                          const class GALGAS_elementPtrList constin_inElementList,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                        Routine 'analyzeVariableWriteAccess'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2215,6 +2230,16 @@ void routine_analyzeVariableWriteAccess (const class GALGAS_accessList constinAr
                                          class GALGAS_objectInMemoryIR & outArgument15,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                               Extension getter '@objectInMemoryIR type' (as function)                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_unifiedTypeMap_2D_proxy extensionGetter_type (const class GALGAS_objectInMemoryIR & inObject,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2307,6 +2332,19 @@ void routine_analyzeSelfAccess (const class GALGAS_fieldList constinArgument0,
                                 class GALGAS_objectInMemoryIR & outArgument16,
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Extension setter '@instructionListIR appendGetElementPtrFromSelf'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendGetElementPtrFromSelf (class GALGAS_instructionListIR & ioObject,
+                                                  const class GALGAS_objectInMemoryIR constin_inTarget,
+                                                  const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                                  const class GALGAS_elementPtrList constin_inElementList,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2628,16 +2666,6 @@ void routine_getNewTempVariable (const class GALGAS_unifiedTypeMap_2D_proxy cons
 
 class GALGAS_string function_functionResultVariableName (class C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Extension getter '@objectIR type' (as function)                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_unifiedTypeMap_2D_proxy extensionGetter_type (const class GALGAS_objectIR & inObject,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

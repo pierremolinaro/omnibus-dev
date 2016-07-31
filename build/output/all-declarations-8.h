@@ -691,6 +691,20 @@ void extensionSetter_appendStoreLocalVariable (class GALGAS_instructionListIR & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                             Extension setter '@instructionListIR appendLoadFromMemory'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendLoadFromMemory (class GALGAS_instructionListIR & ioObject,
+                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           const class GALGAS_location constin_inErrorLocation,
+                                           const class GALGAS_objectInMemoryIR constin_inSource,
+                                           class GALGAS_objectIR & out_outResultingValue,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                              Extension setter '@instructionListIR appendStoreInMemory'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -700,34 +714,6 @@ void extensionSetter_appendStoreInMemory (class GALGAS_instructionListIR & ioObj
                                           const class GALGAS_objectIR constin_inValue,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Extension setter '@instructionListIR appendLoadFromReference'                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendLoadFromReference (class GALGAS_instructionListIR & ioObject,
-                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                              const class GALGAS_objectIR constin_inSource,
-                                              const class GALGAS_location constin_inErrorLocation,
-                                              class GALGAS_objectIR & out_outResultingValue,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Extension setter '@instructionListIR appendGetPropertyReference'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendGetPropertyReference (class GALGAS_instructionListIR & ioObject,
-                                                 const class GALGAS_objectIR constin_inTarget,
-                                                 const class GALGAS_objectIR constin_inSource,
-                                                 const class GALGAS_string constin_inPLMname,
-                                                 const class GALGAS_uint constin_inPropertyIndex,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -1715,6 +1715,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
     kEnum_llvmGlobalObjectValue,
     kEnum_globalVariableReference,
     kEnum_localVariableReference,
+    kEnum_temporaryReference,
     kEnum_registerReference,
     kEnum_property,
     kEnum_llvmTemporaryValue,
@@ -1796,6 +1797,10 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public : static class GALGAS_objectIR constructor_selfObject (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0
                                                                 COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_objectIR constructor_temporaryReference (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                                        const class GALGAS_string & inOperand1
+                                                                        COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_objectIR constructor_zero (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0
                                                           COMMA_LOCATION_ARGS) ;
 
@@ -1866,6 +1871,11 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_temporaryReference (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                            class GALGAS_string & outArgument1,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_zero (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const ;
@@ -1892,6 +1902,8 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegisterReference (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSelfObject (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isTemporaryReference (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isZero (LOCATION_ARGS) const ;
 
@@ -2500,6 +2512,24 @@ class cEnumAssociatedValues_objectIR_localVariableReference : public cEnumAssoci
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_objectIR_localVariableReference (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_objectIR_temporaryReference : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectIR_temporaryReference (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                              const GALGAS_string & inAssociatedValue1
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectIR_temporaryReference (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

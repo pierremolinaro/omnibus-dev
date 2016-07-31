@@ -126,7 +126,7 @@ override method @letInstructionWithAssignmentAST analyze
   ]
   [!?ioNamedObjectMap insertKey
     !mVarName
-    !localConstant
+    !expressionResult
   ]
   [!?ioLocalVariableMap insertConstant !mVarName]
 }

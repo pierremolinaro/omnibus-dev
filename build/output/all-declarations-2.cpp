@@ -12981,7 +12981,7 @@ GALGAS_variableMap_2D_proxy GALGAS_variableMap_2D_proxy::extractObject (const GA
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_namedObjectMap::cMapElement_namedObjectMap (const GALGAS_lstring & inKey,
-                                                        const GALGAS_objectInMemoryIR & in_mObject
+                                                        const GALGAS_objectIR & in_mObject
                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mObject (in_mObject) {
@@ -13069,7 +13069,7 @@ GALGAS_namedObjectMap GALGAS_namedObjectMap::getter_overriddenMap (C_Compiler * 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_namedObjectMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                 const GALGAS_objectInMemoryIR & inArgument0,
+                                                 const GALGAS_objectIR & inArgument0,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
   cMapElement_namedObjectMap * p = NULL ;
@@ -13085,7 +13085,7 @@ void GALGAS_namedObjectMap::addAssign_operation (const GALGAS_lstring & inKey,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_namedObjectMap::setter_insertKey (GALGAS_lstring inKey,
-                                              GALGAS_objectInMemoryIR inArgument0,
+                                              GALGAS_objectIR inArgument0,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
   cMapElement_namedObjectMap * p = NULL ;
@@ -13105,7 +13105,7 @@ const char * kSearchErrorMessage_namedObjectMap_searchKey = "$%K does not exist"
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_namedObjectMap::method_searchKey (GALGAS_lstring inKey,
-                                              GALGAS_objectInMemoryIR & outArgument0,
+                                              GALGAS_objectIR & outArgument0,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) performSearch (inKey,
@@ -13122,12 +13122,12 @@ void GALGAS_namedObjectMap::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR GALGAS_namedObjectMap::getter_mObjectForKey (const GALGAS_string & inKey,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) const {
+GALGAS_objectIR GALGAS_namedObjectMap::getter_mObjectForKey (const GALGAS_string & inKey,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) attributes ;
-  GALGAS_objectInMemoryIR result ;
+  GALGAS_objectIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_namedObjectMap) ;
     result = p->mAttribute_mObject ;
@@ -13137,7 +13137,7 @@ GALGAS_objectInMemoryIR GALGAS_namedObjectMap::getter_mObjectForKey (const GALGA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_namedObjectMap::setter_setMObjectForKey (GALGAS_objectInMemoryIR inAttributeValue,
+void GALGAS_namedObjectMap::setter_setMObjectForKey (GALGAS_objectIR inAttributeValue,
                                                      GALGAS_string inKey,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
@@ -13185,7 +13185,7 @@ GALGAS_lstring cEnumerator_namedObjectMap::current_lkey (LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR cEnumerator_namedObjectMap::current_mObject (LOCATION_ARGS) const {
+GALGAS_objectIR cEnumerator_namedObjectMap::current_mObject (LOCATION_ARGS) const {
   const cMapElement_namedObjectMap * p = (const cMapElement_namedObjectMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_namedObjectMap) ;
   return p->mAttribute_mObject ;

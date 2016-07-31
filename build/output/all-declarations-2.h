@@ -5361,17 +5361,17 @@ class GALGAS_namedObjectMap : public AC_GALGAS_map {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_objectInMemoryIR & inOperand1,
+                                                      const class GALGAS_objectIR & inOperand1,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_objectInMemoryIR constinArgument1,
+                                                   class GALGAS_objectIR constinArgument1,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMObjectForKey (class GALGAS_objectInMemoryIR constinArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_setMObjectForKey (class GALGAS_objectIR constinArgument0,
                                                           class GALGAS_string constinArgument1,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
@@ -5379,16 +5379,16 @@ class GALGAS_namedObjectMap : public AC_GALGAS_map {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_objectInMemoryIR & outArgument1,
+                                                   class GALGAS_objectIR & outArgument1,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR getter_mObjectForKey (const class GALGAS_string & constinOperand0,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mObjectForKey (const class GALGAS_string & constinOperand0,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_namedObjectMap getter_overriddenMap (C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
@@ -5416,7 +5416,7 @@ class cEnumerator_namedObjectMap : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-  public : class GALGAS_objectInMemoryIR current_mObject (LOCATION_ARGS) const ;
+  public : class GALGAS_objectIR current_mObject (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_namedObjectMap_2D_element current (LOCATION_ARGS) const ;
 } ;
@@ -5433,11 +5433,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_namedObjectMap ;
 
 class cMapElement_namedObjectMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_objectInMemoryIR mAttribute_mObject ;
+  public : GALGAS_objectIR mAttribute_mObject ;
 
 //--- Constructor
   public : cMapElement_namedObjectMap (const GALGAS_lstring & inKey,
-                                       const GALGAS_objectInMemoryIR & in_mObject
+                                       const GALGAS_objectIR & in_mObject
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -5462,7 +5462,7 @@ class cMapElement_namedObjectMap : public cMapElement {
 class GALGAS_namedObjectMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_objectInMemoryIR mAttribute_mObject ;
+  public : GALGAS_objectIR mAttribute_mObject ;
 
 
 //--------------------------------- Accessors
@@ -5477,7 +5477,7 @@ class GALGAS_namedObjectMap_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_namedObjectMap_2D_element (const GALGAS_lstring & in_lkey,
-                                             const GALGAS_objectInMemoryIR & in_mObject) ;
+                                             const GALGAS_objectIR & in_mObject) ;
 
 //-- Start of generic part --*
 
@@ -5491,7 +5491,7 @@ class GALGAS_namedObjectMap_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_namedObjectMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                          const class GALGAS_objectInMemoryIR & inOperand1
+                                                                          const class GALGAS_objectIR & inOperand1
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -5508,7 +5508,7 @@ class GALGAS_namedObjectMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR getter_mObject (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mObject (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
