@@ -286,7 +286,7 @@ private proc handleSelfAccessInExpression
 {
   if [inObject isProperty] then
     [inObject property ?type:let type ?plmName:let name ?index:let index]
-    outObjectPtr = .llvmTemporaryValue {!type:type !llvmName:"temp." + ioTemporaries.mTemporaryIndex !sliceMap:{}}
+    outObjectPtr = .temporaryReference {!type:type !llvmName:"temp." + ioTemporaries.mTemporaryIndex}
     ioTemporaries.mTemporaryIndex ++
     [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
       !outObjectPtr

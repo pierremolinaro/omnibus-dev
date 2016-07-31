@@ -20,23 +20,6 @@ enum @objectInMemoryIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @objectInMemoryIR checkWriteable {
-  switch self
-  case registerAddress (* @string unused llvmName) :
-  case register (* @lstring unused name * @bool writable * * * *) :
-    if not writable then
-      error name : "the control register cannot be written in current context"
-    end
-  case globalVariable (* @string unused name *) :
-  case localVariable (* @string unused name *) :
-  case staticConstant (*  @lstring name) :
-    error name : "a constante cannot be modified"
-  case property (* * *) :
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 getter @objectInMemoryIR llvmName -> @string outName {
   switch self
   case registerAddress (* @string llvmName) :
@@ -169,7 +152,7 @@ getter @objectIR llvmName -> @string outResult {
   switch self
   case property (***) : error .nowhere : "<<@objectIR llvmName>>" : outResult
   case globalVariableReference (**) : error .nowhere : "<<@objectIR llvmName>>" : outResult
-  case localVariableReference (**) : error .nowhere : "<<@objectIR llvmName>>" : outResult
+  case localVariableReference (* name) : outResult = "%" + llvmNameForLocalVariable (!name)
   case registerReference (********): error .nowhere : "<<@objectIR llvmName>>" : outResult
   case zero (*) : outResult = "zeroinitializer"
   case selfObject (*) : outResult = "%self"

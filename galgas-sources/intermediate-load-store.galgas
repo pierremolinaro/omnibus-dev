@@ -91,7 +91,7 @@ setter @instructionListIR appendLoadFromReference
     ]
   case temporaryReference (@unifiedTypeMap-proxy type @string llvmName) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?self appendLoadLocalVariable
+    [!?self appendLoadFromTemporaryReference
       !outResultingValue
       !llvmName
       !false
