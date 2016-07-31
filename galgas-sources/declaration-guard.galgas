@@ -216,7 +216,7 @@ proc guardSemanticAnalysis
       !lkey:resultVarName
       !type:resultType
       !readAccessAllowed:true
-      !variableKind:.localValue {!type:resultType !name:resultVarName.string}
+      !variableKind:.localVariable {!type:resultType !name:resultVarName.string}
       !copyable:true
       !canBeUsedAsInputParameter:true
     ]
@@ -436,7 +436,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
         error propertyName : "an array does not handle field access" : currentType
       case integer (* * * *) :
         error propertyName : "an integer does not handle field access" : currentType
-      case structure (@propertyMap unused propertyMap *) :
+      case structure (* @propertyMap unused propertyMap *) :
         [propertyMap searchKey !propertyName ?let public ?let propertyType ?let idx]
         elementPtrList += !.absolute {!index:idx} !propertyName.string
         currentType = propertyType

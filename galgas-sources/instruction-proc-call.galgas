@@ -532,7 +532,7 @@ proc analyzeEffectiveParameters
       end
       let varLLVMName = name.string + "." + ioTemporaries.mTemporaryIndex
       ioTemporaries.mTemporaryIndex ++
-      let targetVar = @objectInMemoryIR.localValue {!type:type !name:varLLVMName}
+      let targetVar = @objectInMemoryIR.localVariable {!type:type !name:varLLVMName}
       if constant then
         [!?ioVariableMap insertConstant
           !lkey:name
@@ -556,7 +556,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!varLLVMName)}}
+        !.new{!type !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (!varLLVMName)}}
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
         !lkey:name
@@ -578,7 +578,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.new{!type !.llvmLocalObject {!name:llvmNameForLocalVariable (![variableKind name])}}
+        !.new{!type !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![variableKind name])}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
@@ -624,7 +624,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.outputInput
-        !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (![variableKind llvmName])}}
+        !.new {!type !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![variableKind llvmName])}}
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
@@ -648,7 +648,7 @@ proc analyzeEffectiveParameters
           error name : "an enumeration does not handle field access" : parameterList, ioEffectiveParameterListIR
         case integer (* * * *) :
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
-        case structure (@propertyMap propertyMap *) :
+        case structure (* @propertyMap propertyMap *) :
           [propertyMap searchKey !name ?let unused public ?let type ?let idx]
           getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
           [!?ioInstructionGenerationList appendGetElementPtrFromSelf
@@ -659,7 +659,7 @@ proc analyzeEffectiveParameters
           parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
           ioEffectiveParameterListIR +=
             !.outputInput
-            !.new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (![fieldAddress name])}}
+            !.new {!type !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![fieldAddress name])}}
         end    
       end
     end

@@ -124,7 +124,7 @@ override method @varInExpressionAST analyzeExpression
     case registerAddress (**) : error mSourceVarName : "a control register cannot be read in guard boolean expression"
     case register (******) : error mSourceVarName : "a control register cannot be read in guard boolean expression"
     case globalVariable (***) : error mSourceVarName : "a global variable cannot be read in guard boolean expression"
-    case localValue (**) :
+    case localVariable (**) :
     case staticConstant (**) :
     end
   end

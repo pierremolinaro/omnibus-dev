@@ -19,7 +19,7 @@ setter @instructionListIR appendLoadFromMemory
       !name
       !volatile:isVolatile
     ]
-  case localValue (@unifiedTypeMap-proxy type @string name) :
+  case localVariable (@unifiedTypeMap-proxy type @string name) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?self appendLoadLocalVariable
       !outResultingValue
@@ -43,7 +43,7 @@ setter @instructionListIR appendStoreInMemory
     [!?self appendStoreVolatileRegister !type !address !inValue]
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
     [!?self appendStoreGlobalVariable !name !type !inValue !volatile:isVolatile]
-  case localValue (@unifiedTypeMap-proxy type @string name) :
+  case localVariable (@unifiedTypeMap-proxy type @string name) :
     [!?self appendStoreLocalVariable !name !type !inValue]
   case staticConstant (* *) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory globalConstant>>"

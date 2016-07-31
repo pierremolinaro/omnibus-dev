@@ -12,7 +12,7 @@ getter @objectInMemoryIR mangledName -> @string outResult {
     outResult = llvmNameForRegister (!name:name.string)
   case globalVariable (* @string name *) :
     outResult = llvmNameForGlobalVariable (!name)
-  case localValue (* @string name) :
+  case localVariable (* @string name) :
     outResult = llvmNameForLocalVariable (!name)
   case staticConstant (* @string name) :
     outResult = llvmNameForGlobalVariable (!name)
@@ -492,7 +492,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     case boolean :
     case enumeration (*) :
     case integer (* * * *) :
-    case structure (* propertyList) :
+    case structure (* * propertyList) :
       ioLLVMcode += llvmTypeName + " = type {"
       for () in propertyList
         do ioLLVMcode += [mType llvmTypeName]

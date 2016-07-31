@@ -128,7 +128,7 @@ proc analyzeVariableAccess
   var publicIsRequired = false
   for (fieldName arrayElementAccess) in accessList do
     if [[type kind] isStructure] then
-      [[type kind] structure ?propertyMap:let propertyMap ?propertyList:*]
+      [[type kind] structure ?1* ?propertyMap:let propertyMap ?propertyList:*]
       [propertyMap searchKey !fieldName ?let public ?type ?let index]
       if publicIsRequired && not public then
         error fieldName : "this field is not public"
