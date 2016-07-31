@@ -712,7 +712,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "  globalVar = azerty PIPO [0]\n"
   "  globalVar = azerty PIPO [7]\n"
   "  var idx $uint3 = 5\n"
-  "  globalVar = PIPO [idx]\n"
+  "  globalVar = azerty PIPO [idx]\n"
   "  globalVar = PIPO [idx].fields\n"
   "  var index $uint32 = 5\n"
   "  globalBit = PIPO [index].bit.bool\n"
@@ -746,7 +746,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-control-register-array.plm",
   "plm",
   true, // Text file
-  1199, // Text length
+  1206, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -1581,6 +1581,11 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1-tp
   "\n"
   "type $A : $uint32 [SIZE]\n"
   "\n"
+  "struct $B {\n"
+  "  var a $uint32 = 0\n"
+  "  var b $uint32 = 0\n"
+  "}\n"
+  "\n"
   "//------------------------------------------------*\n"
   "\n"
   "task T priority 12 stackSize 512 {\n"
@@ -1614,6 +1619,10 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1-tp
   "      a [i] += 9\n"
   "      x = a [i]\n"
   "    }\n"
+  "    \n"
+  "    var s = $B ()\n"
+  "    var aa = azerty s.a\n"
+  "    var bb = azerty s.b\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1623,7 +1632,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  920, // Text length
+  1046, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 

@@ -195,16 +195,24 @@ override method @primaryInExpressionAST analyzeExpression
   for (access) in mAccessList do
     switch access
     case property (@lstring propertyName) :
-#      if [[currentPointer.mType kind] isStructure] then
-#        [[currentPointer.mType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
-#        [structureObjectMap searchKey
-#          !propertyName
-#          ?@namedObject object
-#          ?*
-#        ]
-#      else
-#        error propertyName : "the current object has no property" : currentPointer
-#      end
+      handlePropertyInExpression (
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:inGuard
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !modes:inModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?localVariableMap: ioLocalVariableMap
+        !?namedObjectMap: ioNamedObjectMap
+        !?alloca:ioAllocaList
+        !propertyName
+        !?ioInstructionGenerationList
+        !?currentPointer
+      )
     case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
       handleSubscriptInExpression (
         !self:inSelfType
@@ -287,6 +295,34 @@ private proc handleSelfAccessInExpression
     ]
   else
     error .nowhere : "<<getNewTemporarySelfObjectPtr>>" : outObjectPtr
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc handlePropertyAccessInExpression
+  ?!@objectInMemoryIR ioObject
+  ?let @location inErrorLocation
+  ?let @objectInMemoryIR inProperty
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+{
+  if [inProperty isProperty] then
+    [inProperty property ?type:let type ?name:let name ?index:let index]
+    let newObject = @objectInMemoryIR.localVariable {
+      !type:type
+      !name:"temp." + ioTemporaries.mTemporaryIndex
+      !volatile:false
+    }
+    ioTemporaries.mTemporaryIndex ++
+    [!?ioInstructionGenerationList appendGetElementPtr
+      !newObject
+      !ioObject
+      !{!.absolute {!index:index} !name}
+    ]
+    ioObject = newObject
+  else
+    error inErrorLocation : "<<getNewTemporarySelfObjectPtr>>" : ioObject
   end
 }
 
@@ -546,6 +582,45 @@ private proc handleRegisterArraySubscriptInExpression
     else
       error inErrorLocation : "index expression is not an integer" : ioObjectPtr
     end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc handlePropertyInExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
+  ?!alloca:@allocaList ioAllocaList
+  ?let @lstring inPropertyName
+  ?!@instructionListIR ioInstructionGenerationList
+  ?!@objectInMemoryIR ioObjectPtr
+{
+#--- Structure
+  if [[[ioObjectPtr type] kind] isStructure] then
+    [[[ioObjectPtr type] kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+    [structureObjectMap searchKey
+      !inPropertyName
+      ?@objectInMemoryIR property
+    ]
+    handlePropertyAccessInExpression (
+      !?ioObjectPtr
+      !inPropertyName.location
+      !property
+      !?ioTemporaries
+      !?ioInstructionGenerationList
+    )
+  else
+    error inPropertyName : "the current object has no property" : ioObjectPtr
   end
 }
 

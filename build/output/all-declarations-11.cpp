@@ -10,6 +10,54 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//               Overriding extension method '@varInExpressionAST addDependenceEdgeForStaticExpression'                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_varInExpressionAST_addDependenceEdgeForStaticExpression (const cPtr_expressionAST * inObject,
+                                                                                     const GALGAS_lstring constinArgument_inConstantName,
+                                                                                     GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                     C_Compiler * inCompiler
+                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_varInExpressionAST * object = (const cPtr_varInExpressionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_varInExpressionAST) ;
+  {
+  ioArgument_ioGraph.setter_addEdge (constinArgument_inConstantName, object->mAttribute_mSourceVarName COMMA_SOURCE_FILE ("expression-var.galgas", 61)) ;
+  }
+  cEnumerator_varInExpressionElementAccessList enumerator_2795 (object->mAttribute_mAccessList, kEnumeration_up) ;
+  while (enumerator_2795.hasCurrentObject ()) {
+    switch (enumerator_2795.current_mAccess (HERE).enumValue ()) {
+    case GALGAS_varInExpressionElementAccess::kNotBuilt:
+      break ;
+    case GALGAS_varInExpressionElementAccess::kEnum_fieldAccess:
+      {
+      }
+      break ;
+    case GALGAS_varInExpressionElementAccess::kEnum_arrayAccess:
+      {
+        const cEnumAssociatedValues_varInExpressionElementAccess_arrayAccess * extractPtr_2988 = (const cEnumAssociatedValues_varInExpressionElementAccess_arrayAccess *) (enumerator_2795.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_2988->mAssociatedValue0 ;
+        callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) extractedValue_indexExpression.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("expression-var.galgas", 66)) ;
+      }
+      break ;
+    }
+    enumerator_2795.gotoNextObject () ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_varInExpressionAST_addDependenceEdgeForStaticExpression (void) {
+  enterExtensionMethod_addDependenceEdgeForStaticExpression (kTypeDescriptor_GALGAS_varInExpressionAST.mSlotID,
+                                                             extensionMethod_varInExpressionAST_addDependenceEdgeForStaticExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_varInExpressionAST_addDependenceEdgeForStaticExpression (defineExtensionMethod_varInExpressionAST_addDependenceEdgeForStaticExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //               Overriding extension method '@varInExpressionAST noteExpressionTypesInPrecedenceGraph'                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1161,9 +1209,15 @@ static void extensionMethod_varInstructionWithAssignmentAST_analyze (const cPtr_
   {
   ioArgument_ioVariableMap.setter_insertDefinedVariable (object->mAttribute_mVarName, extensionGetter_type (var_result_5419, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 139)), GALGAS_bool (true), var_targetVar_5777, extensionGetter_type (var_result_5419, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 142)).getter_copyable (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 142)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 137)) ;
   }
-  ioArgument_ioAllocaList.addAssign_operation (var_varLLVMName_5670, extensionGetter_type (var_result_5419, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 146))  COMMA_SOURCE_FILE ("instruction-var.galgas", 146)) ;
   {
-  extensionSetter_appendStoreLocalVariable (ioArgument_ioInstructionGenerationList, var_varLLVMName_5670, extensionGetter_type (var_result_5419, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 149)), var_result_5419, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 147)) ;
+  ioArgument_ioLocalVariableMap.setter_insertDefinedVariable (object->mAttribute_mVarName, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 145)) ;
+  }
+  {
+  ioArgument_ioNamedObjectMap.setter_insertKey (object->mAttribute_mVarName, var_targetVar_5777, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 146)) ;
+  }
+  ioArgument_ioAllocaList.addAssign_operation (var_varLLVMName_5670, extensionGetter_type (var_result_5419, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 151))  COMMA_SOURCE_FILE ("instruction-var.galgas", 151)) ;
+  {
+  extensionSetter_appendStoreLocalVariable (ioArgument_ioInstructionGenerationList, var_varLLVMName_5670, extensionGetter_type (var_result_5419, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 154)), var_result_5419, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 152)) ;
   }
 }
 
@@ -1203,21 +1257,21 @@ static void extensionMethod_varInstructionAST_analyze (const cPtr_instructionAST
                                                        COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_varInstructionAST * object = (const cPtr_varInstructionAST *) inObject ;
   macroValidSharedObject (object, cPtr_varInstructionAST) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_targetType_7285 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mTypeName, inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 172)) ;
-  const enumGalgasBool test_0 = var_targetType_7285.getter_instantiable (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 174)).operator_not (SOURCE_FILE ("instruction-var.galgas", 174)).boolEnum () ;
+  GALGAS_unifiedTypeMap_2D_proxy var_targetType_7407 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, object->mAttribute_mTypeName, inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 177)) ;
+  const enumGalgasBool test_0 = var_targetType_7407.getter_instantiable (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 179)).operator_not (SOURCE_FILE ("instruction-var.galgas", 179)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (object->mAttribute_mVarName.getter_location (SOURCE_FILE ("instruction-var.galgas", 175)), GALGAS_string ("$").add_operation (var_targetType_7285.getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 175)).add_operation (GALGAS_string (" type is not instanciable"), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 175))  COMMA_SOURCE_FILE ("instruction-var.galgas", 175)) ;
+    inCompiler->emitSemanticError (object->mAttribute_mVarName.getter_location (SOURCE_FILE ("instruction-var.galgas", 180)), GALGAS_string ("$").add_operation (var_targetType_7407.getter_key (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180)).add_operation (GALGAS_string (" type is not instanciable"), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180))  COMMA_SOURCE_FILE ("instruction-var.galgas", 180)) ;
   }
-  GALGAS_string var_varLLVMName_7502 = object->mAttribute_mVarName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 178)).add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("instruction-var.galgas", 178)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 178)) ;
-  ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 179)) ;
-  GALGAS_objectInMemoryIR var_targetVar_7609 = GALGAS_objectInMemoryIR::constructor_localVariable (var_targetType_7285, var_varLLVMName_7502, GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-var.galgas", 180)) ;
+  GALGAS_string var_varLLVMName_7624 = object->mAttribute_mVarName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 183)).add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("instruction-var.galgas", 183)), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 183)) ;
+  ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 184)) ;
+  GALGAS_objectInMemoryIR var_targetVar_7731 = GALGAS_objectInMemoryIR::constructor_localVariable (var_targetType_7407, var_varLLVMName_7624, GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-var.galgas", 185)) ;
   {
-  ioArgument_ioLocalVariableMap.setter_insertUndefinedVariable (object->mAttribute_mVarName, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 181)) ;
+  ioArgument_ioLocalVariableMap.setter_insertUndefinedVariable (object->mAttribute_mVarName, inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 186)) ;
   }
   {
-  ioArgument_ioVariableMap.setter_insertUndefinedVariable (object->mAttribute_mVarName, var_targetType_7285, GALGAS_bool (true), var_targetVar_7609, var_targetType_7285.getter_copyable (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 187)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 182)) ;
+  ioArgument_ioVariableMap.setter_insertUndefinedVariable (object->mAttribute_mVarName, var_targetType_7407, GALGAS_bool (true), var_targetVar_7731, var_targetType_7407.getter_copyable (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 192)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 187)) ;
   }
-  ioArgument_ioAllocaList.addAssign_operation (var_varLLVMName_7502, var_targetType_7285  COMMA_SOURCE_FILE ("instruction-var.galgas", 191)) ;
+  ioArgument_ioAllocaList.addAssign_operation (var_varLLVMName_7624, var_targetType_7407  COMMA_SOURCE_FILE ("instruction-var.galgas", 196)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
