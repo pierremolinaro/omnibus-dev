@@ -138,19 +138,19 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 
 override method @primaryInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?modes:let @stringset unused inModeSet
-  ?allowPanic:let @bool unused inAllowPanic
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
-  ?!alloca:@allocaList unused ioAllocaList
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@valueIR outResult
 {
@@ -180,7 +180,7 @@ override method @primaryInExpressionAST analyzeExpression
         !mObjectName
         ?let object
       ]
-      getNewTemporarySelfObjectPtr (
+      handleSelfAccessInExpression (
         !inSelfType
         !object
         !?ioTemporaries
@@ -192,9 +192,9 @@ override method @primaryInExpressionAST analyzeExpression
     end
   end
 #--- Access list
-#  for (access) in mAccessList do
-#    switch access
-#    case property (@lstring propertyName) :
+  for (access) in mAccessList do
+    switch access
+    case property (@lstring propertyName) :
 #      if [[currentPointer.mType kind] isStructure] then
 #        [[currentPointer.mType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
 #        [structureObjectMap searchKey
@@ -205,17 +205,30 @@ override method @primaryInExpressionAST analyzeExpression
 #      else
 #        error propertyName : "the current object has no property" : currentPointer
 #      end
-#    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-#      if [[currentPointer.mType kind] isArrayType] then
-#        [[currentPointer.mType kind] arrayType ?elementType:@unifiedTypeMap-proxy elementType ?size:@bigint size]
-#      #  currentType = elementType
-#      else
-#        error endOfIndex : "the current object is not an array" : currentPointer
-#      end
-#    case funcCall (@effectiveParameterListAST arguments) :
-#
-#    end
-#  end
+    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+      handleSubscriptInExpression (
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:inGuard
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !modes:inModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?localVariableMap: ioLocalVariableMap
+        !?namedObjectMap: ioNamedObjectMap
+        !?alloca:ioAllocaList
+        !indexExpression
+        !endOfIndex
+        !?ioInstructionGenerationList
+        !?currentPointer
+      )
+    case funcCall (@effectiveParameterListAST arguments) :
+
+    end
+  end
 
 #--- Load from memory  
   [!?ioInstructionGenerationList appendLoadFromMemory

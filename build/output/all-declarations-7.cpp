@@ -1602,7 +1602,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1-tp
   "    self.array2 = self.array \n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    for i $uint32 in 0 ..< $A.size {\n"
-  "      lcd.printUnsigned (!self.array2 [i])\n"
+  "      lcd.printUnsigned (!azerty self.array2 [i])\n"
   "      lcd.printSpaces (!1)\n"
   "    }\n"
   "    \n"
@@ -1622,7 +1622,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  906, // Text length
+  913, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
