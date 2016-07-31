@@ -172,12 +172,14 @@ method @taskList enterInContext
     @propertyList propertyList = {}
     @propertyMap propertyMap = {}
     @operandIRList initialValueList = {}
+    @namedObjectMap objectMap = {}
     for variable in task.mVarList do
       [variable enterInContext
         !?context:ioContext
         !?staticStringMap:ioGlobalLiteralStringMap
         !?propertyList
         !?propertyMap
+        !?objectMap
         !?initialValueList
       ]
     end
@@ -185,7 +187,7 @@ method @taskList enterInContext
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName
       !llvmTypeName:"%" + ["$" + task.mTaskName assemblerRepresentation]
-      !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
+      !kind:.structure {!objectMap: objectMap !propertyMap:propertyMap !propertyList:propertyList}
       !classConstantMap:{}
       !instantiable:false
       !copyable:false
@@ -193,7 +195,11 @@ method @taskList enterInContext
       !comparable:false
       !enumerationType:.null # Not enumerable
     ]
-    ioContext.mGlobalTaskVariableList += !task.mTaskName.string !task.mTaskName.string !.llvmStructureConstant{!values:initialValueList}
+    let taskType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !task.mTaskName}
+    ioContext.mGlobalTaskVariableList +=
+      !task.mTaskName.string 
+      !task.mTaskName.string
+      !.llvmStructureConstant{!type: taskType !values:initialValueList}
   #--- Task procedures
     [task.mTaskProcList enterFunctionInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
 #    @taskProcedureMap taskProcedureMap = {}
@@ -210,6 +216,7 @@ method @taskVarListAST-element enterInContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!@propertyList ioPropertyList
   ?!@propertyMap ioPropertyMap
+  ?!@namedObjectMap ioObjectMap
   ?!@operandIRList ioInitialValueList
 {
 #--- Get destination type
@@ -265,9 +272,14 @@ method @taskVarListAST-element enterInContext
   if not [result.mType instantiable] then
     error mVarName : "$" + [result.mType key] + " type is not instanciable"
   end
-  ioPropertyList += !mVarName.string !result.mType
-  [!?ioPropertyMap insertKey !mVarName !false !result.mType ![ioPropertyMap count]]
+  [!?ioPropertyMap insertKey !mVarName !false !result.mType ![ioPropertyList length]]
   ioInitialValueList += !result
+  [!?ioObjectMap insertKey
+    !mVarName
+    !.new {!result.mType}
+    ![ioPropertyList length]
+  ]
+  ioPropertyList += !mVarName.string !result.mType
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

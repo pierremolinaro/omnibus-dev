@@ -30,7 +30,7 @@ proc enterFormalArguments
         !lkey:formalArgumentName
         !type:typeProxy
         !readAccessAllowed:true
-        !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
+        !variableKind:.localVariable {!type:typeProxy !name:formalArgumentName.string}
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
@@ -40,7 +40,7 @@ proc enterFormalArguments
         !lkey:formalArgumentName
         !type:typeProxy
         !readAccessAllowed:true
-        !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
+        !variableKind:.localVariable {!type:typeProxy !name:formalArgumentName.string}
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
@@ -50,7 +50,7 @@ proc enterFormalArguments
         !lkey:formalArgumentName
         !type:typeProxy
         !readAccessAllowed:true
-        !variableKind:.localValue {!type:typeProxy !name:formalArgumentName.string}
+        !variableKind:.localVariable {!type:typeProxy !name:formalArgumentName.string}
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]

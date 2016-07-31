@@ -12,25 +12,25 @@ struct @operandIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @valueIR {
-  case selfObject 
+  case selfObject (@unifiedTypeMap-proxy type)
   case literalInteger  (@bigint value)
-  case llvmLocalObject (@string name)
-  case llvmGlobalObject (@string name)
-  case llvmStructureConstant (@operandIRList values)
+  case llvmLocalObject (@unifiedTypeMap-proxy type @string name)
+  case llvmGlobalObject (@unifiedTypeMap-proxy type @string name)
+  case llvmStructureConstant (@unifiedTypeMap-proxy type @operandIRList values)
   case literalString  (@uint size @uint index)
-  case zero
+  case zero (@unifiedTypeMap-proxy type)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @valueIR llvmName -> @string outResult {
   switch self
-  case zero : outResult = "zeroinitializer"
-  case selfObject : outResult = "%self"
+  case zero (*) : outResult = "zeroinitializer"
+  case selfObject (*) : outResult = "%self"
   case literalInteger (@bigint value) : outResult = [value string]
-  case llvmLocalObject (@string name) : outResult = "%" + name
-  case llvmGlobalObject (@string name) : outResult = "@" + name
-  case llvmStructureConstant (@operandIRList inValues) :
+  case llvmLocalObject (* @string name) : outResult = "%" + name
+  case llvmGlobalObject (* @string name) : outResult = "@" + name
+  case llvmStructureConstant (* @operandIRList inValues) :
     outResult = "{"
     for () in inValues
       do outResult += [mOperand.mType llvmTypeName] + " " + [mOperand.mValue llvmName]
@@ -46,14 +46,28 @@ getter @valueIR llvmName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+getter @valueIR type -> @unifiedTypeMap-proxy outResult {
+  switch self
+  case zero (type) : outResult = type
+  case selfObject (type) : outResult = type
+  case literalInteger (*) : error .nowhere : "<<@valueIR type>>" : outResult
+  case llvmLocalObject (type *) : outResult = type
+  case llvmGlobalObject (type *) : outResult = type
+  case llvmStructureConstant (type *) : outResult = type
+  case literalString  (* *) : error .nowhere : "<<@valueIR type>>" : outResult
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 getter @valueIR name -> @string outResult {
   switch self
-  case zero : outResult = "zeroinitializer"
-  case selfObject : outResult = "self"
+  case zero (*) : outResult = "zeroinitializer"
+  case selfObject (*) : outResult = "self"
   case literalInteger (@bigint value) : outResult = [value string]
-  case llvmLocalObject (@string name) : outResult = name
-  case llvmGlobalObject (@string name) : outResult = name
-  case llvmStructureConstant (*) : outResult = "{...}"
+  case llvmLocalObject (* @string name) : outResult = name
+  case llvmGlobalObject (* @string name) : outResult = name
+  case llvmStructureConstant (* *) : outResult = "{...}"
   case literalString  (* @uint index) : outResult = literalStringName (!index)
   end
 }
@@ -62,12 +76,12 @@ getter @valueIR name -> @string outResult {
 
 getter @valueIR isStatic -> @bool outResult {
   switch self
-  case zero : outResult = true
-  case selfObject : outResult = false
+  case zero (*) : outResult = true
+  case selfObject (*) : outResult = false
   case literalInteger (*) : outResult = true
-  case llvmLocalObject (*) : outResult = false
-  case llvmGlobalObject (*) : outResult = false
-  case llvmStructureConstant (*) : outResult = true
+  case llvmLocalObject (* *) : outResult = false
+  case llvmGlobalObject (* *) : outResult = false
+  case llvmStructureConstant (* *) : outResult = true
   case literalString  (* *) : outResult = true
   end
 }
@@ -85,7 +99,7 @@ enum @objectInMemoryIR {
                  @uint arraySize # 0 if not an array
                  @uint elementSize) # 0 if not an array
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
-  case localValue (@unifiedTypeMap-proxy type @string name)
+  case localVariable (@unifiedTypeMap-proxy type @string name)
   case staticConstant (@operandIR value @string name)
 }
 
@@ -99,7 +113,7 @@ getter @objectInMemoryIR llvmName -> @string outName {
     error name : "@objectInMemoryIR name" : outName
   case globalVariable (* @string name *) :
     outName = "@" + llvmNameForGlobalVariable (!name)
-  case localValue (* @string name) :
+  case localVariable (* @string name) :
     outName = "%" + llvmNameForLocalVariable (!name)
   case staticConstant (*  @string name) :
     outName = "%" + name
@@ -116,7 +130,7 @@ getter @objectInMemoryIR name -> @string outName {
     outName = name.string
   case globalVariable (* @string name *) :
     outName = name
-  case localValue (* @string name) :
+  case localVariable (* @string name) :
     outName = name
   case staticConstant (*  @string name) :
     outName = name
@@ -133,7 +147,7 @@ getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
     outType = type
   case globalVariable (@unifiedTypeMap-proxy type * *) :
     outType = type
-  case localValue (@unifiedTypeMap-proxy type *) :
+  case localVariable (@unifiedTypeMap-proxy type *) :
     outType = type
   case staticConstant (@operandIR value *) :
     outType = value.mType
@@ -149,9 +163,9 @@ getter @objectInMemoryIR address -> @operandIR outOperand {
   case register (* * * * * *) :
     error .nowhere : "@objectInMemoryIR register address" : outOperand
   case globalVariable (@unifiedTypeMap-proxy type @string name *) :
-    outOperand  = .new {!type !.llvmGlobalObject {!name:llvmNameForGlobalVariable (!name)}}
-  case localValue (@unifiedTypeMap-proxy type @string name) :
-    outOperand  = .new {!type !.llvmLocalObject {!name:llvmNameForLocalVariable (!name)}}
+    outOperand  = .new {!type !.llvmGlobalObject {!type: type !name:llvmNameForGlobalVariable (!name)}}
+  case localVariable (@unifiedTypeMap-proxy type @string name) :
+    outOperand  = .new {!type !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (!name)}}
   case staticConstant (* *) :
     error .nowhere : "@objectInMemoryIR globalConstantaddress" : outOperand
   end

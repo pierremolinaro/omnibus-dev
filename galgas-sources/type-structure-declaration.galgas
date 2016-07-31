@@ -237,6 +237,7 @@ override method @structureDeclaration enterInContext
 #---------------------------------------- Properties
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
+  @namedObjectMap objectMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   var canBeCopied = true
@@ -287,6 +288,11 @@ override method @structureDeclaration enterInContext
       end
       propertyList += !mFieldName.string !actualFieldType
       [!?propertyMap insertKey !mFieldName !mIsPublic !actualFieldType ![propertyMap count]]
+      [!?objectMap insertKey
+        !mFieldName
+        !.new {!actualFieldType}
+        ![propertyList length]
+      ]
       sortedOperandIRList += !@operandIR.new {!actualFieldType !expressionIR.mValue} !fieldIndex
     case noExpression :
       if not [fieldType instantiable] then
@@ -294,6 +300,11 @@ override method @structureDeclaration enterInContext
       end
       propertyList += !mFieldName.string !fieldType
       [!?propertyMap insertKey !mFieldName !mIsPublic !fieldType ![propertyMap count]]
+      [!?objectMap insertKey
+        !mFieldName
+        !.new {!fieldType}
+        ![propertyList length]
+      ]
       constructorSignature += !mFieldName.string !fieldType !fieldIndex
     end
   end
@@ -322,7 +333,7 @@ override method @structureDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
     !llvmTypeName:"%" + ["$" + mStructureName assemblerRepresentation]
-    !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
+    !kind:.structure {!objectMap: objectMap !propertyMap:propertyMap !propertyList:propertyList}
     !classConstantMap:{}
     !instantiable:true
     !copyable:copyableAttribute

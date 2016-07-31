@@ -94,7 +94,7 @@ override method @constructorCall analyzeExpression
     [inContext.mConstructorMap searchKey ![[resultType key] nowhere] ?let initValue]
     switch initValue
     case zero :
-      outResult = .new {!resultType !.zero}
+      outResult = .new {!resultType !.zero {!type: resultType}}
     case simple (value) :
       if [mParameterList length] != 0 then
         error mErrorLocation : "$" + [resultType key] + " constructor should have no parameter" : outResult
@@ -143,7 +143,7 @@ override method @constructorCall analyzeExpression
         for (initialValue *) in sortedOperandIRList do
           initialValueList += !initialValue
         end
-        outResult = .new {!resultType !.llvmStructureConstant {!values:initialValueList}}
+        outResult = .new {!resultType !.llvmStructureConstant {!type: resultType !values:initialValueList}}
       end
     end
   end

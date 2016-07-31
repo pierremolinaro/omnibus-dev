@@ -1049,8 +1049,8 @@ class GALGAS_unifiedTypeMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_instantiable (C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_typeKindEX getter_kind (C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_typeKind getter_kind (C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_llvmTypeName (C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const ;
@@ -1751,18 +1751,23 @@ class GALGAS_valueIR : public AC_GALGAS_root {
                                                                   const class GALGAS_uint & inOperand1
                                                                   COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_valueIR constructor_llvmGlobalObject (const class GALGAS_string & inOperand0
+  public : static class GALGAS_valueIR constructor_llvmGlobalObject (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                                     const class GALGAS_string & inOperand1
                                                                      COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_valueIR constructor_llvmLocalObject (const class GALGAS_string & inOperand0
+  public : static class GALGAS_valueIR constructor_llvmLocalObject (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                                    const class GALGAS_string & inOperand1
                                                                     COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_valueIR constructor_llvmStructureConstant (const class GALGAS_operandIRList & inOperand0
+  public : static class GALGAS_valueIR constructor_llvmStructureConstant (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                                          const class GALGAS_operandIRList & inOperand1
                                                                           COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_valueIR constructor_selfObject (LOCATION_ARGS) ;
+  public : static class GALGAS_valueIR constructor_selfObject (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0
+                                                               COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_valueIR constructor_zero (LOCATION_ARGS) ;
+  public : static class GALGAS_valueIR constructor_zero (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0
+                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -1782,17 +1787,28 @@ class GALGAS_valueIR : public AC_GALGAS_root {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_llvmGlobalObject (class GALGAS_string & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_llvmGlobalObject (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                          class GALGAS_string & outArgument1,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_llvmLocalObject (class GALGAS_string & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_llvmLocalObject (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                         class GALGAS_string & outArgument1,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_llvmStructureConstant (class GALGAS_operandIRList & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_llvmStructureConstant (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                               class GALGAS_operandIRList & outArgument1,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_selfObject (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_zero (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 

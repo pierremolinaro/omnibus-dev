@@ -104,7 +104,7 @@ override method @forInstructionAST analyze
     !lkey:mVarName
     !type:iteratedElementType
     !readAccessAllowed:true # Read access ok
-    !variableKind:.localValue {!type:iteratedElementType !name:enumeratedVarLLVMName}
+    !variableKind:.localVariable {!type:iteratedElementType !name:enumeratedVarLLVMName}
     !copyable:true
     !canBeUsedAsInputParameter:false
   ]

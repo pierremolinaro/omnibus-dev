@@ -99,7 +99,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     error mTypeName : "an integer type is required here"
   case staticInteger :
     error mTypeName : "an integer type is required here"
-  case structure (* *) :
+  case structure (* * *) :
     error mTypeName : "an integer type is required here"
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
   #--- Analyze expressions
@@ -162,7 +162,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !lkey:mVarName
       !type:type
       !readAccessAllowed:true # Read access ok
-      !variableKind:.localValue {!type:type !name:enumeratedVarLLVMName}
+      !variableKind:.localVariable {!type:type !name:enumeratedVarLLVMName}
       !copyable:true
       !canBeUsedAsInputParameter:false
     ]

@@ -131,7 +131,7 @@ override method @selfFunctionCallInExpressionAST analyzeExpression
   routineMangledName.string += ")"
 #---
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-  effectiveParameterListIR += !.outputInput !.new {!receiverType !.selfObject}
+  effectiveParameterListIR += !.outputInput !.new {!receiverType !.selfObject {!type:receiverType}}
   [inContext.mRoutineMapForContext searchKey
     !routineMangledName
     ?let routineNameForGeneration
