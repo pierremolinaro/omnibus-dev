@@ -778,7 +778,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  var compteur $uint32 = 0\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:azerty self.compteur) {\n"
-  "    leds.write (!on: LED_L0)\n"
+  "    leds.write (!on:azerty LED_L0)\n"
   "    self.compteur +%= 500\n"
   "    time.waitUntilMS (!deadline: azerty self.compteur)\n"
   "    leds.write (!off:LED_L0)\n"
@@ -794,7 +794,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  560, // Text length
+  566, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

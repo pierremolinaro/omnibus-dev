@@ -25,8 +25,11 @@ setter @instructionListIR appendLoadFromMemory
       !outResultingValue
       !name
     ]
-  case staticConstant (@valueIR value @string unused name) :
+  case staticConstante (@valueIR value @string unused name) :
     outResultingValue = value
+
+  case property (* * *) :
+    error .nowhere : "<<@instructionListIR appendLoadFromMemory>>" : outResultingValue
   end
 }
 
@@ -45,8 +48,10 @@ setter @instructionListIR appendStoreInMemory
     [!?self appendStoreGlobalVariable !name !type !inValue !volatile:isVolatile]
   case localVariable (@unifiedTypeMap-proxy type @string name) :
     [!?self appendStoreLocalVariable !name !type !inValue]
-  case staticConstant (* *) :
+  case staticConstante (* *) :
      error .nowhere : "<<@objectInMemoryIR storeInMemory globalConstant>>"
+  case property (* * *) :
+    error .nowhere : "<<@instructionListIR appendStoreInMemory>>"
   end
 }
 

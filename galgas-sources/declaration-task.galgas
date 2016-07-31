@@ -261,7 +261,7 @@ method @taskVarListAST-element enterInContext
   if variableAnnotationType == .null && [[expressionResult kind] isStaticInteger] then
     error mVarName : "cannot infer type"
   end
-  let result = checkAssignmentCompatibility (
+  let @valueIR result = checkAssignmentCompatibility (
     !source:expressionResult
     !targetAnnotationType:variableAnnotationType
     !errorLocation:mVarName.location
@@ -276,8 +276,7 @@ method @taskVarListAST-element enterInContext
   ioInitialValueList += !result
   [!?ioObjectMap insertKey
     !mVarName
-    !.new {![result type]}
-    ![ioPropertyList length]
+    !.property {!type:[result type] !name:mVarName !index:[ioPropertyList length]}
   ]
   ioPropertyList += !mVarName.string ![result type]
 }

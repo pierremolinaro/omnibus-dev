@@ -10,67 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Overriding extension method '@functionCallInExpressionAST analyzeExpression'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_functionCallInExpressionAST_analyzeExpression (const cPtr_expressionAST * inObject,
-                                                                           const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
-                                                                           const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
-                                                                           const GALGAS_bool constinArgument_inGuard,
-                                                                           const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
-                                                                           const GALGAS_unifiedTypeMap_2D_proxy /* constinArgument_inOptionalTargetType */,
-                                                                           const GALGAS_semanticContext constinArgument_inContext,
-                                                                           const GALGAS_stringset constinArgument_inRequiredModeSet,
-                                                                           const GALGAS_bool constinArgument_inAllowPanic,
-                                                                           GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                                           GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
-                                                                           GALGAS_variableMap & ioArgument_ioVariableMap,
-                                                                           GALGAS_localVariableMap & ioArgument_ioLocalVariableMap,
-                                                                           GALGAS_namedObjectMap & ioArgument_ioNamedObjectMap,
-                                                                           GALGAS_allocaList & ioArgument_ioAllocaList,
-                                                                           GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                                           GALGAS_valueIR & outArgument_outResult,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_functionCallInExpressionAST * object = (const cPtr_functionCallInExpressionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_functionCallInExpressionAST) ;
-  const enumGalgasBool test_0 = constinArgument_inGuard.boolEnum () ;
-  if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (object->mAttribute_mFunctionName.getter_location (SOURCE_FILE ("expression-func-call.galgas", 108)), GALGAS_string ("a function cannot be called in guard expression")  COMMA_SOURCE_FILE ("expression-func-call.galgas", 108)) ;
-  }
-  GALGAS_procCallEffectiveParameterListIR var_effectiveParameterListIR_6128 ;
-  GALGAS_routineKindIR var_routineKind_6176 ;
-  GALGAS_lstring var_functionMangledName_6233 ;
-  GALGAS_lstring var_functionNameForGeneration_6302 ;
-  GALGAS_unifiedTypeMap_2D_proxy var_returnedType_6357 ;
-  GALGAS_bool var_appendFileAndLineArgumentForPanicLocation_6450 ;
-  {
-  routine_analyzeRoutineCall (constinArgument_inSelfType, GALGAS_bool (false), constinArgument_inDirectAccessToPropertiesAllowed, object->mAttribute_mReceiverName, object->mAttribute_mFunctionName, object->mAttribute_mEffectiveParameterList, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioLocalVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_effectiveParameterListIR_6128, var_routineKind_6176, var_functionMangledName_6233, var_functionNameForGeneration_6302, var_returnedType_6357, var_appendFileAndLineArgumentForPanicLocation_6450, inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 110)) ;
-  }
-  const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, var_returnedType_6357.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-func-call.galgas", 135)))).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    inCompiler->emitSemanticError (object->mAttribute_mFunctionName.getter_location (SOURCE_FILE ("expression-func-call.galgas", 136)), GALGAS_string ("cannot be called in expression: no return value")  COMMA_SOURCE_FILE ("expression-func-call.galgas", 136)) ;
-  }
-  {
-  routine_getNewTempVariable (var_returnedType_6357, ioArgument_ioTemporaries, outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-func-call.galgas", 139)) ;
-  }
-  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_functionCallIR::constructor_new (outArgument_outResult, var_functionMangledName_6233, var_functionNameForGeneration_6302, var_routineKind_6176, var_effectiveParameterListIR_6128, var_appendFileAndLineArgumentForPanicLocation_6450  COMMA_SOURCE_FILE ("expression-func-call.galgas", 141))  COMMA_SOURCE_FILE ("expression-func-call.galgas", 141)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_functionCallInExpressionAST_analyzeExpression (void) {
-  enterExtensionMethod_analyzeExpression (kTypeDescriptor_GALGAS_functionCallInExpressionAST.mSlotID,
-                                          extensionMethod_functionCallInExpressionAST_analyzeExpression) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_functionCallInExpressionAST_analyzeExpression (defineExtensionMethod_functionCallInExpressionAST_analyzeExpression, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                          Overriding extension method '@functionCallIR llvmInstructionCode'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1039,7 +978,7 @@ static void extensionMethod_letInstructionWithAssignmentAST_analyze (const cPtr_
   GALGAS_objectInMemoryIR var_localConstant_4895 ;
   const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, extensionGetter_key (var_result_4405, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 112)).objectCompare (function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 112)))).boolEnum () ;
   if (kBoolTrue == test_3) {
-    var_localConstant_4895 = GALGAS_objectInMemoryIR::constructor_staticConstant (var_expressionResult_4360, var_varLLVMName_4770  COMMA_SOURCE_FILE ("instruction-let.galgas", 113)) ;
+    var_localConstant_4895 = GALGAS_objectInMemoryIR::constructor_staticConstante (var_expressionResult_4360, var_varLLVMName_4770  COMMA_SOURCE_FILE ("instruction-let.galgas", 113)) ;
   }else if (kBoolFalse == test_3) {
     var_localConstant_4895 = GALGAS_objectInMemoryIR::constructor_localVariable (extensionGetter_type (var_result_4405, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 115)), var_varLLVMName_4770  COMMA_SOURCE_FILE ("instruction-let.galgas", 115)) ;
     ioArgument_ioAllocaList.addAssign_operation (var_varLLVMName_4770, extensionGetter_type (var_result_4405, inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 116))  COMMA_SOURCE_FILE ("instruction-let.galgas", 116)) ;

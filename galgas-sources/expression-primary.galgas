@@ -163,10 +163,8 @@ override method @primaryInExpressionAST analyzeExpression
     else
       [ioNamedObjectMap searchKey
         !mObjectName
-        ?let @namedObject object
-        ?*
+        ?currentPointer
       ]
-      getNewTemporaryObjectPtr (!object !?ioTemporaries ?currentPointer)
     end
   case selfAccess (@location selfLocation) :
     if inSelfType == .null then
@@ -175,14 +173,11 @@ override method @primaryInExpressionAST analyzeExpression
       [[inSelfType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
       [structureObjectMap searchKey
         !mObjectName
-        ?let @namedObject object
-        ?let @uint index
+        ?let @objectInMemoryIR object
       ]
       getNewTemporarySelfObjectPtr (
         !inSelfType
         !object
-        !mObjectName.string
-        !index
         !?ioTemporaries
         !?ioInstructionGenerationList
         ?currentPointer

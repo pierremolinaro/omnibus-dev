@@ -4,18 +4,8 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct @namedObject {
-  @unifiedTypeMap-proxy type
-#  @bool readAccessAllowed
-#  @bool copyable
-#  @bool canBeUsedAsInputParameter
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 map @namedObjectMap {
-  @namedObject mObject
-  @uint mIndex
+  @objectInMemoryIR mObject
 
   insert insertKey error message "duplicated $%K (already declared at %L"
   search searchKey error message "$%K does not exist"
@@ -23,33 +13,25 @@ map @namedObjectMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc getNewTemporaryObjectPtr
-  ?let @namedObject inObject
-  ?!@semanticTemporariesStruct ioTemporaries
-  !@objectInMemoryIR outObjectPtr
-{
-  outObjectPtr = .localVariable {!type:inObject.type !name:"temp." + ioTemporaries.mTemporaryIndex}
-  ioTemporaries.mTemporaryIndex ++
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc getNewTemporarySelfObjectPtr
   ?let @unifiedTypeMap-proxy inSelfType
-  ?let @namedObject inObject
-  ?let @string inPropertyName
-  ?let @uint inObjectIndex
+  ?let @objectInMemoryIR inObject
   ?!@semanticTemporariesStruct ioTemporaries
   ?!@instructionListIR ioInstructionGenerationList
   !@objectInMemoryIR outObjectPtr
 {
-  outObjectPtr = .localVariable {!type:inObject.type !name:"temp." + ioTemporaries.mTemporaryIndex}
-  ioTemporaries.mTemporaryIndex ++
-  [!?ioInstructionGenerationList appendGetElementPtrFromSelf
-    !outObjectPtr
-    !inSelfType
-    !{!.absolute {!index:inObjectIndex} !inPropertyName}
-  ]
+  if [inObject isProperty] then
+    [inObject property ?type:let type ?name:let name ?index:let index]
+    outObjectPtr = .localVariable {!type:type !name:"temp." + ioTemporaries.mTemporaryIndex}
+    ioTemporaries.mTemporaryIndex ++
+    [!?ioInstructionGenerationList appendGetElementPtrFromSelf
+      !outObjectPtr
+      !inSelfType
+      !{!.absolute {!index:index} !name}
+    ]
+  else
+    error .nowhere : "<<getNewTemporarySelfObjectPtr>>" : outObjectPtr
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -162,14 +144,13 @@ proc initialVariableMap
       !lkey:constantName
       !type:[constantValue type]
       !readAccessAllowed:true
-      !variableKind:.staticConstant {!value:constantValue !name:constantName.string}
+      !variableKind:.staticConstante {!value:constantValue !name:constantName.string}
       !copyable:true
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
     ]
     [!?outObjectMap insertKey
       !constantName
-      !.new {![constantValue type]}
-      !0 # Unused 
+      !.staticConstante {!value: constantValue !name: constantName}
     ]
   end
 #------------------------------------------------------- Add global variables
@@ -240,7 +221,7 @@ proc variableMapWithConstants
       !lkey:constantName
       !type:[constantValue type]
       !readAccessAllowed:true
-      !variableKind:.staticConstant {!value:constantValue !name:constantName.string}
+      !variableKind:.staticConstante {!value:constantValue !name:constantName.string}
       !copyable:true
       !canBeUsedAsInputParameter:false
     ]
