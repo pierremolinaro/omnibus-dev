@@ -6,7 +6,7 @@ task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
   while time.waitUntilMS (!deadline:azerty self.compteur) {
-    leds.write (!on: LED_L0)
+    leds.write (!on:azerty LED_L0)
     self.compteur +%= 500
     time.waitUntilMS (!deadline: azerty self.compteur)
     leds.write (!off:LED_L0)

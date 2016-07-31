@@ -123,20 +123,40 @@ class cEnumAssociatedValues_objectInMemoryIR_localVariable : public cEnumAssocia
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_objectInMemoryIR_staticConstant : public cEnumAssociatedValues {
+class cEnumAssociatedValues_objectInMemoryIR_staticConstante : public cEnumAssociatedValues {
   public : const GALGAS_valueIR mAssociatedValue0 ;
   public : const GALGAS_string mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_staticConstant (const GALGAS_valueIR & inAssociatedValue0,
-                                                                  const GALGAS_string & inAssociatedValue1
-                                                                  COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_objectInMemoryIR_staticConstante (const GALGAS_valueIR & inAssociatedValue0,
+                                                                   const GALGAS_string & inAssociatedValue1
+                                                                   COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_staticConstant (void) {}
+  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_staticConstante (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_objectInMemoryIR_property : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+  public : const GALGAS_uint mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectInMemoryIR_property (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                            const GALGAS_string & inAssociatedValue1,
+                                                            const GALGAS_uint & inAssociatedValue2
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_property (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2435,29 +2455,15 @@ void routine_getNewTempVariable (const class GALGAS_unifiedTypeMap_2D_proxy cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                         Routine 'getNewTemporaryObjectPtr'                                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_getNewTemporaryObjectPtr (const class GALGAS_namedObject constinArgument0,
-                                       class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                       class GALGAS_objectInMemoryIR & outArgument2,
-                                       class C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                       Routine 'getNewTemporarySelfObjectPtr'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_getNewTemporarySelfObjectPtr (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                           const class GALGAS_namedObject constinArgument1,
-                                           const class GALGAS_string constinArgument2,
-                                           const class GALGAS_uint constinArgument3,
-                                           class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                           class GALGAS_instructionListIR & ioArgument5,
-                                           class GALGAS_objectInMemoryIR & outArgument6,
+                                           const class GALGAS_objectInMemoryIR constinArgument1,
+                                           class GALGAS_semanticTemporariesStruct & ioArgument2,
+                                           class GALGAS_instructionListIR & ioArgument3,
+                                           class GALGAS_objectInMemoryIR & outArgument4,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
@@ -3517,15 +3523,5 @@ class GALGAS_lstring function_llvmNameForInterrupt (class GALGAS_lstring inArgum
 class GALGAS_string function_llvmNameForISR (class GALGAS_string inArgument0,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Function 'llvmNameForPrimitiveCall'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForPrimitiveCall (class GALGAS_string inArgument0,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
 
 #endif

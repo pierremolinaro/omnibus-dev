@@ -290,8 +290,7 @@ override method @structureDeclaration enterInContext
       [!?propertyMap insertKey !mFieldName !mIsPublic !actualPropertyType !propertyIndex]
       [!?objectMap insertKey
         !mFieldName
-        !.new {!actualPropertyType}
-        !propertyIndex
+        !.property {!type:actualPropertyType !name:mFieldName !index:propertyIndex}
       ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     case noExpression :
@@ -302,8 +301,7 @@ override method @structureDeclaration enterInContext
       [!?propertyMap insertKey !mFieldName !mIsPublic !optionalPropertyType !propertyIndex]
       [!?objectMap insertKey
         !mFieldName
-        !.new {!optionalPropertyType}
-        !propertyIndex
+        !.property {!type:optionalPropertyType !name:mFieldName !index:propertyIndex}
       ]
       constructorSignature += !mFieldName.string !optionalPropertyType !propertyIndex
     end

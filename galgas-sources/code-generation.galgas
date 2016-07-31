@@ -14,8 +14,10 @@ getter @objectInMemoryIR mangledName -> @string outResult {
     outResult = llvmNameForGlobalVariable (!name)
   case localVariable (* @string name) :
     outResult = llvmNameForLocalVariable (!name)
-  case staticConstant (* @string name) :
+  case staticConstante (* @string name) :
     outResult = llvmNameForGlobalVariable (!name)
+  case property (* * *) :
+    error .nowhere : "<<@objectInMemoryIR mangledName>>" : outResult
   end
 }
 
