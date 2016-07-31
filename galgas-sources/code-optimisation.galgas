@@ -17,11 +17,11 @@ struct @accessibleEntities {
 method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
   switch self
   case registerAddress (* *) :
-  case register (* * * * * *) :
+  case register (* * * * * * * *) :
   case globalVariable (* @string name *) :
     ioAccessibleEntities.mGlobalVariableSet += !name
   case localVariable (* @string unused name) :
-  case staticConstante (* *) :
+  case staticConstant (* *) :
   case property (* * *) :
   end
 }

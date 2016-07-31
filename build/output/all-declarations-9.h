@@ -202,6 +202,26 @@ void callExtensionMethod_analyzeExpression_5F_otherKind (const class cPtr_varInE
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                 Extension method '@objectInMemoryIR checkReadable'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_checkReadable (const class GALGAS_objectInMemoryIR inObject,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Extension method '@objectInMemoryIR checkWriteable'                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_checkWriteable (const class GALGAS_objectInMemoryIR inObject,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                         Extension method '@binaryOperationIR enterCodeForOverflowOperation'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

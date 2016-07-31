@@ -110,7 +110,7 @@ override method @letInstructionWithAssignmentAST analyze
   ioTemporaries.mTemporaryIndex ++
   @objectInMemoryIR localConstant
   if [result key] == staticIntegerTypeName () then
-    localConstant = .staticConstante {!value:expressionResult !name:varLLVMName}
+    localConstant = .staticConstant {!value:expressionResult !name:.new {!varLLVMName !mVarName.location}}
   else
     localConstant = .localVariable {!type:[result type] !name:varLLVMName}
     ioAllocaList += !varLLVMName ![result type]

@@ -695,6 +695,10 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "  10, fields [4], 10, bit, 7\n"
   "}\n"
   "\n"
+  "register SINGLE_PIPO at 0x5000_0000 $uint32 {\n"
+  "  10, fields [4], 10, bit, 7\n"
+  "}\n"
+  "\n"
   "//------------------------------------------------*\n"
   "\n"
   "section ledOn () {\n"
@@ -704,6 +708,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "//------------------------------------------------*\n"
   "\n"
   "section ledOff () {\n"
+  "  globalVar = azerty SINGLE_PIPO\n"
   "  globalVar = PIPO [0]\n"
   "  globalVar = PIPO [7]\n"
   "  var idx $uint3 = 5\n"
@@ -740,7 +745,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-control-register-array.plm",
   "plm",
   true, // Text file
-  1049, // Text length
+  1160, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 

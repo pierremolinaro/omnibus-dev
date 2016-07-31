@@ -4692,7 +4692,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
     kEnum_register,
     kEnum_globalVariable,
     kEnum_localVariable,
-    kEnum_staticConstante,
+    kEnum_staticConstant,
     kEnum_property
   } enumeration ;
   
@@ -4736,19 +4736,21 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 
   public : static class GALGAS_objectInMemoryIR constructor_register (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                       const class GALGAS_lstring & inOperand1,
-                                                                      const class GALGAS_bigint & inOperand2,
-                                                                      const class GALGAS_controlRegisterBitSliceAccessMap & inOperand3,
-                                                                      const class GALGAS_uint & inOperand4,
-                                                                      const class GALGAS_uint & inOperand5
+                                                                      const class GALGAS_bool & inOperand2,
+                                                                      const class GALGAS_bool & inOperand3,
+                                                                      const class GALGAS_bigint & inOperand4,
+                                                                      const class GALGAS_controlRegisterBitSliceAccessMap & inOperand5,
+                                                                      const class GALGAS_uint & inOperand6,
+                                                                      const class GALGAS_uint & inOperand7
                                                                       COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectInMemoryIR constructor_registerAddress (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                              const class GALGAS_string & inOperand1
                                                                              COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_objectInMemoryIR constructor_staticConstante (const class GALGAS_valueIR & inOperand0,
-                                                                             const class GALGAS_string & inOperand1
-                                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_objectInMemoryIR constructor_staticConstant (const class GALGAS_valueIR & inOperand0,
+                                                                            const class GALGAS_lstring & inOperand1
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -4778,10 +4780,12 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                   class GALGAS_lstring & outArgument1,
-                                                  class GALGAS_bigint & outArgument2,
-                                                  class GALGAS_controlRegisterBitSliceAccessMap & outArgument3,
-                                                  class GALGAS_uint & outArgument4,
-                                                  class GALGAS_uint & outArgument5,
+                                                  class GALGAS_bool & outArgument2,
+                                                  class GALGAS_bool & outArgument3,
+                                                  class GALGAS_bigint & outArgument4,
+                                                  class GALGAS_controlRegisterBitSliceAccessMap & outArgument5,
+                                                  class GALGAS_uint & outArgument6,
+                                                  class GALGAS_uint & outArgument7,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -4790,10 +4794,10 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_staticConstante (class GALGAS_valueIR & outArgument0,
-                                                         class GALGAS_string & outArgument1,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_staticConstant (class GALGAS_valueIR & outArgument0,
+                                                        class GALGAS_lstring & outArgument1,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
@@ -4808,7 +4812,7 @@ class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegisterAddress (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticConstante (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticConstant (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

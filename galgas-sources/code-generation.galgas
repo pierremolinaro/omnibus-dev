@@ -8,13 +8,13 @@ getter @objectInMemoryIR mangledName -> @string outResult {
   switch self
   case registerAddress (* *) :
     error .nowhere : "<<@objectInMemoryIR mangledName >>" : outResult
-  case register (* @lstring name * * * *) :
+  case register (* @lstring name * * * * * *) :
     outResult = llvmNameForRegister (!name:name.string)
   case globalVariable (* @string name *) :
     outResult = llvmNameForGlobalVariable (!name)
   case localVariable (* @string name) :
     outResult = llvmNameForLocalVariable (!name)
-  case staticConstante (* @string name) :
+  case staticConstant (* @lstring name) :
     outResult = llvmNameForGlobalVariable (!name)
   case property (* * *) :
     error .nowhere : "<<@objectInMemoryIR mangledName>>" : outResult
