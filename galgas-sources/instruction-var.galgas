@@ -131,9 +131,9 @@ override method @varInstructionWithAssignmentAST analyze
   )
   drop expressionResult, targetType
 #--- Declare local variable
-  let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
+  let varName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
-  let targetVar = @objectInMemoryIR.localVariable {!type:[result type] !name:varLLVMName !volatile:false}
+  let targetVar = @objectInMemoryIR.localVariable {!type:[result type] !name:varName !volatile:false}
   [!?ioVariableMap insertDefinedVariable
     !lkey:mVarName
     !type:[result type]
@@ -143,15 +143,15 @@ override method @varInstructionWithAssignmentAST analyze
     !canBeUsedAsInputParameter:true
   ]
   [!?ioLocalVariableMap insertDefinedVariable !mVarName]
-  let targetObject = @objectIR.temporaryReference {!type:[result type] !llvmName:varLLVMName}
+  let targetObject = @objectIR.localVariableReference {!type:[result type] !plmName:varName}
   [!?ioNamedObjectMap insertKey
     !mVarName
     !targetObject
   ]
 #--- Code generation
-  ioAllocaList += !varLLVMName ![result type]
+  ioAllocaList += !varName ![result type]
   [!?ioInstructionGenerationList appendStoreLocalVariable
-    !varLLVMName
+    !varName
     ![result type]
     !result
   ]
