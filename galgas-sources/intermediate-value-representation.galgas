@@ -15,7 +15,7 @@ enum @objectInMemoryIR {
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
   case localVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
   case staticConstant (@objectIR value @lstring name)
-  case property (@unifiedTypeMap-proxy type @string name @uint index)
+  case property (@unifiedTypeMap-proxy type @string plmName @uint index)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -146,6 +146,8 @@ enum @objectIR {
                           @sliceMap sliceMap
                           @uint arraySize # 0 if not an array
                           @uint elementSize) # 0 if not an array
+#--- Structure property
+  case property (@unifiedTypeMap-proxy type @string plmName @uint index)
 #--- Values
   case llvmTemporaryValue (@unifiedTypeMap-proxy type @string llvmName @sliceMap sliceMap)
   case literalInteger  (@unifiedTypeMap-proxy type @bigint value)
@@ -158,6 +160,7 @@ enum @objectIR {
 
 getter @objectIR llvmName -> @string outResult {
   switch self
+  case property (***) : error .nowhere : "<<@objectIR llvmName>>" : outResult
   case globalVariableReference (**) : error .nowhere : "<<@objectIR llvmName>>" : outResult
   case localVariableReference (**) : error .nowhere : "<<@objectIR llvmName>>" : outResult
   case registerReference (********): error .nowhere : "<<@objectIR llvmName>>" : outResult
@@ -184,6 +187,7 @@ getter @objectIR llvmName -> @string outResult {
 
 getter @objectIR type -> @unifiedTypeMap-proxy outResult {
   switch self
+  case property (type **) : outResult = type
   case registerReference (type *******) : outResult = type
   case globalVariableReference (type *) : outResult = type
   case localVariableReference (type *) : outResult = type
@@ -219,6 +223,8 @@ getter @objectIR kind -> @typeKind outResult {
 
 getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
   switch self
+  case property (* plmName index) :
+    outResult = .property {!type:inType !plmName:plmName !index:index}
   case registerReference (* plmName readable writable address sliceMap arraySize elementSize) :
     outResult = .registerReference {
       !type: inType
@@ -255,6 +261,7 @@ getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
 
 getter @objectIR name -> @string outResult {
   switch self
+  case property (* name *) : outResult = name
   case registerReference (* name ******) : outResult = name
   case localVariableReference (* name) : outResult = name
   case globalVariableReference (* name) : outResult = name
@@ -272,6 +279,7 @@ getter @objectIR name -> @string outResult {
 
 getter @objectIR isStatic -> @bool outResult {
   switch self
+  case property (***) : outResult = false
   case registerReference (* *******) : outResult = false
   case localVariableReference (* *) : outResult = false
   case globalVariableReference (* *) : outResult = false

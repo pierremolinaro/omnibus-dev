@@ -285,7 +285,7 @@ private proc handleSelfAccessInExpression
   !@objectInMemoryIR outObjectPtr
 {
   if [inObject isProperty] then
-    [inObject property ?type:let type ?name:let name ?index:let index]
+    [inObject property ?type:let type ?plmName:let name ?index:let index]
     outObjectPtr = .localVariable {!type:type !name:"temp." + ioTemporaries.mTemporaryIndex !volatile:false}
     ioTemporaries.mTemporaryIndex ++
     [!?ioInstructionGenerationList appendGetElementPtrFromSelf
@@ -308,7 +308,7 @@ private proc handlePropertyAccessInExpression
   ?!@instructionListIR ioInstructionGenerationList
 {
   if [inProperty isProperty] then
-    [inProperty property ?type:let type ?name:let name ?index:let index]
+    [inProperty property ?type:let type ?plmName:let name ?index:let index]
     let newObject = @objectInMemoryIR.localVariable {
       !type:type
       !name:"temp." + ioTemporaries.mTemporaryIndex

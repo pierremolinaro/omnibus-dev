@@ -717,6 +717,20 @@ void extensionSetter_appendLoadFromReference (class GALGAS_instructionListIR & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                          Extension setter '@instructionListIR appendGetPropertyReference'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendGetPropertyReference (class GALGAS_instructionListIR & ioObject,
+                                                 const class GALGAS_objectIR constin_inTarget,
+                                                 const class GALGAS_objectIR constin_inSource,
+                                                 const class GALGAS_string constin_inPLMname,
+                                                 const class GALGAS_uint constin_inPropertyIndex,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Extension setter '@instructionListIR appendLoadStructureConstant'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

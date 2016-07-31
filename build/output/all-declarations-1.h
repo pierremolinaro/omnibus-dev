@@ -1716,6 +1716,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
     kEnum_globalVariableReference,
     kEnum_localVariableReference,
     kEnum_registerReference,
+    kEnum_property,
     kEnum_llvmTemporaryValue,
     kEnum_literalInteger,
     kEnum_llvmStructureConstant,
@@ -1776,6 +1777,11 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public : static class GALGAS_objectIR constructor_localVariableReference (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                             const class GALGAS_string & inOperand1
                                                                             COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_objectIR constructor_property (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+                                                              const class GALGAS_string & inOperand1,
+                                                              const class GALGAS_uint & inOperand2
+                                                              COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_registerReference (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                        const class GALGAS_lstring & inOperand1,
@@ -1839,6 +1845,12 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_property (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                  class GALGAS_string & outArgument1,
+                                                  class GALGAS_uint & outArgument2,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_registerReference (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                            class GALGAS_lstring & outArgument1,
                                                            class GALGAS_bool & outArgument2,
@@ -1874,6 +1886,8 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmTemporaryValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariableReference (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegisterReference (LOCATION_ARGS) const ;
 
@@ -2516,6 +2530,26 @@ class cEnumAssociatedValues_objectIR_registerReference : public cEnumAssociatedV
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_objectIR_registerReference (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_objectIR_property : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+  public : const GALGAS_uint mAssociatedValue2 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_objectIR_property (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+                                                    const GALGAS_string & inAssociatedValue1,
+                                                    const GALGAS_uint & inAssociatedValue2
+                                                    COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_objectIR_property (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

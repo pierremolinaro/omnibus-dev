@@ -1,4 +1,45 @@
 
+setter @instructionListIR appendGetPropertyReference
+  ?let @objectIR inTarget
+  ?let @objectIR inSource
+  ?let @string inPLMname
+  ?let @uint inPropertyIndex
+{
+  self += !@getPropertyReferenceIR.new {!inTarget !inSource !inPLMname !inPropertyIndex}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @getPropertyReferenceIR : @abstractInstructionIR {
+  @objectIR mTarget
+  @objectIR mSource
+  @string mPLMname
+  @uint mPropertyIndex
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @getPropertyReferenceIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [[mSource type] llvmTypeName]
+  ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mPropertyIndex
+  ioLLVMcode += " ; " + mPLMname + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @getPropertyReferenceIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 setter @instructionListIR appendGetElementPtr
   ?let @objectInMemoryIR inTarget
   ?let @objectInMemoryIR inSource
@@ -48,6 +89,5 @@ override method @getElementPtrIR enterAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
 }
-
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
