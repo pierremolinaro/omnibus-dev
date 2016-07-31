@@ -1,17 +1,22 @@
 setter @instructionListIR appendLoadFromMemory
   ?!@semanticTemporariesStruct ioTemporaries
+  ?let @location inErrorLocation
   ?let @objectInMemoryIR inSource
   !@valueIR outResultingValue
 {
   switch inSource
   case registerAddress (* *) :
     error .nowhere : "<<@instructionListIR appendLoadFromMemory>>" : outResultingValue
-  case register (@unifiedTypeMap-proxy type * * * @bigint address * * *) :
-    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-    [!?self appendLoadVolatileRegister
-      !outResultingValue
-      !address
-    ]
+  case register (@unifiedTypeMap-proxy type * * * @bigint address * @uint arraySize *) :
+    if arraySize > 0 then
+      error inErrorLocation : "register array requires subscripting" : outResultingValue
+    else
+      getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
+      [!?self appendLoadVolatileRegister
+        !outResultingValue
+        !address
+      ]
+    end
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?self appendLoadGlobalVariable

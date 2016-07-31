@@ -250,6 +250,7 @@ method @varInExpressionAST analyzeExpression_register
           let address = registerAddress + indexValue * elementArraySize
           [!?ioInstructionGenerationList appendLoadFromMemory
             !?ioTemporaries
+            !.here
             !.register {
               !type:registerType
               !name:registerName
@@ -285,7 +286,7 @@ method @varInExpressionAST analyzeExpression_register
     if arraySize > 0 then
       error inErrorLocation : "control register is an array and requires subscript" : outResult
     else
-      [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !inVariableKind ?outResult]
+      [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !.here !inVariableKind ?outResult]
     end
   end
 #--- Analyze field accesses (subscripting is not allowed)
@@ -363,7 +364,7 @@ method @varInExpressionAST analyzeExpression_otherKind
   )
 #--- Load variable
   if [elementPtrList length] == 0 then
-    [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !inVariableKind ?outResult]
+    [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !.here !inVariableKind ?outResult]
   else
     getLocalNameOfNewTempObjectInMemory (!ioType !?ioTemporaries ?let sourcePtr)
     [!?ioInstructionGenerationList appendGetElementPtr
@@ -371,7 +372,7 @@ method @varInExpressionAST analyzeExpression_otherKind
       !inVariableKind
       !elementPtrList
     ]        
-    [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !sourcePtr ?outResult]
+    [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !.here !sourcePtr ?outResult]
   end
 #--- Solve inferred type
   var expressionType = solveInferredType (

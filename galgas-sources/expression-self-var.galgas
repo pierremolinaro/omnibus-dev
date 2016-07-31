@@ -90,7 +90,7 @@ override method @selfVarInExpressionAST analyzeExpression
   if not [[resultPtr type] copyable] then
     error mSelfLocation : "an $" + [[resultPtr type] key] + " instance is not copyable"
   end
-  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !resultPtr ?outResult]
+  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !mSelfLocation !resultPtr ?outResult]
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

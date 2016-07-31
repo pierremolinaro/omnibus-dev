@@ -216,6 +216,7 @@ override method @primaryInExpressionAST analyzeExpression
 #--- Load from memory  
   [!?ioInstructionGenerationList appendLoadFromMemory
     !?ioTemporaries
+    !mObjectName.location
     !currentPointer
     ?outResult
   ]  

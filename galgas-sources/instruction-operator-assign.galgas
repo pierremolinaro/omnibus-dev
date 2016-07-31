@@ -233,7 +233,12 @@ override method @varOperatorAssignInstructionAST analyze
 #    error mTargetVarName : "an $" + [targetType key] + " instance is not copyable"
 #  end
 #--- Code generation
-  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !targetObjectPtr ?let variableValue]
+  [!?ioInstructionGenerationList appendLoadFromMemory
+    !?ioTemporaries
+    !mTargetErrorLocation
+    !targetObjectPtr
+    ?let variableValue
+  ]
 #  [targetVariableKind loadFromMemory
 #    !?temporary:ioTemporaries
 #    !?instructionListIR:ioInstructionGenerationList
