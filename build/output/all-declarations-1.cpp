@@ -4858,12 +4858,12 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::extractObject (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_controlRegisterBitSliceAccessMap::cMapElement_controlRegisterBitSliceAccessMap (const GALGAS_lstring & inKey,
-                                                                                            const GALGAS_llvmBinaryOperation & in_mAccessOperator,
-                                                                                            const GALGAS_bigint & in_mAccessRightOperand,
-                                                                                            const GALGAS_controlRegisterBitSliceAccessMap & in_mSubMap,
-                                                                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType
-                                                                                            COMMA_LOCATION_ARGS) :
+cMapElement_bitSliceAccessMap::cMapElement_bitSliceAccessMap (const GALGAS_lstring & inKey,
+                                                              const GALGAS_llvmBinaryOperation & in_mAccessOperator,
+                                                              const GALGAS_bigint & in_mAccessRightOperand,
+                                                              const GALGAS_bitSliceAccessMap & in_mSubMap,
+                                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mResultType
+                                                              COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mAccessOperator (in_mAccessOperator),
 mAttribute_mAccessRightOperand (in_mAccessRightOperand),
@@ -4873,21 +4873,21 @@ mAttribute_mResultType (in_mResultType) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cMapElement_controlRegisterBitSliceAccessMap::isValid (void) const {
+bool cMapElement_bitSliceAccessMap::isValid (void) const {
   return mAttribute_lkey.isValid () && mAttribute_mAccessOperator.isValid () && mAttribute_mAccessRightOperand.isValid () && mAttribute_mSubMap.isValid () && mAttribute_mResultType.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement * cMapElement_controlRegisterBitSliceAccessMap::copy (void) {
+cMapElement * cMapElement_bitSliceAccessMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_controlRegisterBitSliceAccessMap (mAttribute_lkey, mAttribute_mAccessOperator, mAttribute_mAccessRightOperand, mAttribute_mSubMap, mAttribute_mResultType COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_bitSliceAccessMap (mAttribute_lkey, mAttribute_mAccessOperator, mAttribute_mAccessRightOperand, mAttribute_mSubMap, mAttribute_mResultType COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cMapElement_controlRegisterBitSliceAccessMap::description (C_String & ioString, const int32_t inIndentation) const {
+void cMapElement_bitSliceAccessMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mAccessOperator" ":" ;
@@ -4908,8 +4908,8 @@ void cMapElement_controlRegisterBitSliceAccessMap::description (C_String & ioStr
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cMapElement_controlRegisterBitSliceAccessMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_controlRegisterBitSliceAccessMap * operand = (cMapElement_controlRegisterBitSliceAccessMap *) inOperand ;
+typeComparisonResult cMapElement_bitSliceAccessMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_bitSliceAccessMap * operand = (cMapElement_bitSliceAccessMap *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
   if (kOperandEqual == result) {
     result = mAttribute_mAccessOperator.objectCompare (operand->mAttribute_mAccessOperator) ;
@@ -4928,79 +4928,79 @@ typeComparisonResult cMapElement_controlRegisterBitSliceAccessMap::compare (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap::GALGAS_controlRegisterBitSliceAccessMap (void) :
+GALGAS_bitSliceAccessMap::GALGAS_bitSliceAccessMap (void) :
 AC_GALGAS_map () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap::GALGAS_controlRegisterBitSliceAccessMap (const GALGAS_controlRegisterBitSliceAccessMap & inSource) :
+GALGAS_bitSliceAccessMap::GALGAS_bitSliceAccessMap (const GALGAS_bitSliceAccessMap & inSource) :
 AC_GALGAS_map (inSource) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap & GALGAS_controlRegisterBitSliceAccessMap::operator = (const GALGAS_controlRegisterBitSliceAccessMap & inSource) {
+GALGAS_bitSliceAccessMap & GALGAS_bitSliceAccessMap::operator = (const GALGAS_bitSliceAccessMap & inSource) {
   * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap::constructor_emptyMap (LOCATION_ARGS) {
-  GALGAS_controlRegisterBitSliceAccessMap result ;
+GALGAS_bitSliceAccessMap GALGAS_bitSliceAccessMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_bitSliceAccessMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap::constructor_mapWithMapToOverride (const GALGAS_controlRegisterBitSliceAccessMap & inMapToOverride
-                                                                                                                   COMMA_LOCATION_ARGS) {
-  GALGAS_controlRegisterBitSliceAccessMap result ;
+GALGAS_bitSliceAccessMap GALGAS_bitSliceAccessMap::constructor_mapWithMapToOverride (const GALGAS_bitSliceAccessMap & inMapToOverride
+                                                                                     COMMA_LOCATION_ARGS) {
+  GALGAS_bitSliceAccessMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap::getter_overriddenMap (C_Compiler * inCompiler
-                                                                                                       COMMA_LOCATION_ARGS) const {
-  GALGAS_controlRegisterBitSliceAccessMap result ;
+GALGAS_bitSliceAccessMap GALGAS_bitSliceAccessMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  GALGAS_bitSliceAccessMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_controlRegisterBitSliceAccessMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                                   const GALGAS_llvmBinaryOperation & inArgument0,
-                                                                   const GALGAS_bigint & inArgument1,
-                                                                   const GALGAS_controlRegisterBitSliceAccessMap & inArgument2,
-                                                                   const GALGAS_unifiedTypeMap_2D_proxy & inArgument3,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterBitSliceAccessMap * p = NULL ;
-  macroMyNew (p, cMapElement_controlRegisterBitSliceAccessMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+void GALGAS_bitSliceAccessMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                    const GALGAS_llvmBinaryOperation & inArgument0,
+                                                    const GALGAS_bigint & inArgument1,
+                                                    const GALGAS_bitSliceAccessMap & inArgument2,
+                                                    const GALGAS_unifiedTypeMap_2D_proxy & inArgument3,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  cMapElement_bitSliceAccessMap * p = NULL ;
+  macroMyNew (p, cMapElement_bitSliceAccessMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@controlRegisterBitSliceAccessMap insert error: '%K' already in map" ;
+  const char * kInsertErrorMessage = "@bitSliceAccessMap insert error: '%K' already in map" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_controlRegisterBitSliceAccessMap::setter_insertKey (GALGAS_lstring inKey,
-                                                                GALGAS_llvmBinaryOperation inArgument0,
-                                                                GALGAS_bigint inArgument1,
-                                                                GALGAS_controlRegisterBitSliceAccessMap inArgument2,
-                                                                GALGAS_unifiedTypeMap_2D_proxy inArgument3,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterBitSliceAccessMap * p = NULL ;
-  macroMyNew (p, cMapElement_controlRegisterBitSliceAccessMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
+void GALGAS_bitSliceAccessMap::setter_insertKey (GALGAS_lstring inKey,
+                                                 GALGAS_llvmBinaryOperation inArgument0,
+                                                 GALGAS_bigint inArgument1,
+                                                 GALGAS_bitSliceAccessMap inArgument2,
+                                                 GALGAS_unifiedTypeMap_2D_proxy inArgument3,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_bitSliceAccessMap * p = NULL ;
+  macroMyNew (p, cMapElement_bitSliceAccessMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -5011,28 +5011,28 @@ void GALGAS_controlRegisterBitSliceAccessMap::setter_insertKey (GALGAS_lstring i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_controlRegisterBitSliceAccessMap_searchKey = "the '%K' register slice is not declared" ;
+const char * kSearchErrorMessage_bitSliceAccessMap_searchKey = "the '%K' register slice is not declared" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_controlRegisterBitSliceAccessMap::method_searchKey (GALGAS_lstring inKey,
-                                                                GALGAS_llvmBinaryOperation & outArgument0,
-                                                                GALGAS_bigint & outArgument1,
-                                                                GALGAS_controlRegisterBitSliceAccessMap & outArgument2,
-                                                                GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
-  const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) performSearch (inKey,
-                                                                                                                                   inCompiler,
-                                                                                                                                   kSearchErrorMessage_controlRegisterBitSliceAccessMap_searchKey
-                                                                                                                                   COMMA_THERE) ;
+void GALGAS_bitSliceAccessMap::method_searchKey (GALGAS_lstring inKey,
+                                                 GALGAS_llvmBinaryOperation & outArgument0,
+                                                 GALGAS_bigint & outArgument1,
+                                                 GALGAS_bitSliceAccessMap & outArgument2,
+                                                 GALGAS_unifiedTypeMap_2D_proxy & outArgument3,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
+  const cMapElement_bitSliceAccessMap * p = (const cMapElement_bitSliceAccessMap *) performSearch (inKey,
+                                                                                                     inCompiler,
+                                                                                                     kSearchErrorMessage_bitSliceAccessMap_searchKey
+                                                                                                     COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
     outArgument3.drop () ;
   }else{
-    macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+    macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
     outArgument0 = p->mAttribute_mAccessOperator ;
     outArgument1 = p->mAttribute_mAccessRightOperand ;
     outArgument2 = p->mAttribute_mSubMap ;
@@ -5042,14 +5042,14 @@ void GALGAS_controlRegisterBitSliceAccessMap::method_searchKey (GALGAS_lstring i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation GALGAS_controlRegisterBitSliceAccessMap::getter_mAccessOperatorForKey (const GALGAS_string & inKey,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) const {
+GALGAS_llvmBinaryOperation GALGAS_bitSliceAccessMap::getter_mAccessOperatorForKey (const GALGAS_string & inKey,
+                                                                                   C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) attributes ;
+  const cMapElement_bitSliceAccessMap * p = (const cMapElement_bitSliceAccessMap *) attributes ;
   GALGAS_llvmBinaryOperation result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+    macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
     result = p->mAttribute_mAccessOperator ;
   }
   return result ;
@@ -5057,14 +5057,14 @@ GALGAS_llvmBinaryOperation GALGAS_controlRegisterBitSliceAccessMap::getter_mAcce
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint GALGAS_controlRegisterBitSliceAccessMap::getter_mAccessRightOperandForKey (const GALGAS_string & inKey,
-                                                                                         C_Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_bitSliceAccessMap::getter_mAccessRightOperandForKey (const GALGAS_string & inKey,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) attributes ;
+  const cMapElement_bitSliceAccessMap * p = (const cMapElement_bitSliceAccessMap *) attributes ;
   GALGAS_bigint result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+    macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
     result = p->mAttribute_mAccessRightOperand ;
   }
   return result ;
@@ -5072,14 +5072,14 @@ GALGAS_bigint GALGAS_controlRegisterBitSliceAccessMap::getter_mAccessRightOperan
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap::getter_mSubMapForKey (const GALGAS_string & inKey,
-                                                                                                       C_Compiler * inCompiler
-                                                                                                       COMMA_LOCATION_ARGS) const {
+GALGAS_bitSliceAccessMap GALGAS_bitSliceAccessMap::getter_mSubMapForKey (const GALGAS_string & inKey,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) attributes ;
-  GALGAS_controlRegisterBitSliceAccessMap result ;
+  const cMapElement_bitSliceAccessMap * p = (const cMapElement_bitSliceAccessMap *) attributes ;
+  GALGAS_bitSliceAccessMap result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+    macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
     result = p->mAttribute_mSubMap ;
   }
   return result ;
@@ -5087,14 +5087,14 @@ GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap:
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_controlRegisterBitSliceAccessMap::getter_mResultTypeForKey (const GALGAS_string & inKey,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_bitSliceAccessMap::getter_mResultTypeForKey (const GALGAS_string & inKey,
+                                                                                   C_Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) attributes ;
+  const cMapElement_bitSliceAccessMap * p = (const cMapElement_bitSliceAccessMap *) attributes ;
   GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+    macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
     result = p->mAttribute_mResultType ;
   }
   return result ;
@@ -5102,89 +5102,89 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_controlRegisterBitSliceAccessMap::getter_m
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_controlRegisterBitSliceAccessMap::setter_setMAccessOperatorForKey (GALGAS_llvmBinaryOperation inAttributeValue,
-                                                                               GALGAS_string inKey,
-                                                                               C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) {
+void GALGAS_bitSliceAccessMap::setter_setMAccessOperatorForKey (GALGAS_llvmBinaryOperation inAttributeValue,
+                                                                GALGAS_string inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_controlRegisterBitSliceAccessMap * p = (cMapElement_controlRegisterBitSliceAccessMap *) attributes ;
+  cMapElement_bitSliceAccessMap * p = (cMapElement_bitSliceAccessMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+    macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
     p->mAttribute_mAccessOperator = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_controlRegisterBitSliceAccessMap::setter_setMAccessRightOperandForKey (GALGAS_bigint inAttributeValue,
-                                                                                   GALGAS_string inKey,
-                                                                                   C_Compiler * inCompiler
-                                                                                   COMMA_LOCATION_ARGS) {
+void GALGAS_bitSliceAccessMap::setter_setMAccessRightOperandForKey (GALGAS_bigint inAttributeValue,
+                                                                    GALGAS_string inKey,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_controlRegisterBitSliceAccessMap * p = (cMapElement_controlRegisterBitSliceAccessMap *) attributes ;
+  cMapElement_bitSliceAccessMap * p = (cMapElement_bitSliceAccessMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+    macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
     p->mAttribute_mAccessRightOperand = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_controlRegisterBitSliceAccessMap::setter_setMSubMapForKey (GALGAS_controlRegisterBitSliceAccessMap inAttributeValue,
-                                                                       GALGAS_string inKey,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_bitSliceAccessMap::setter_setMSubMapForKey (GALGAS_bitSliceAccessMap inAttributeValue,
+                                                        GALGAS_string inKey,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_controlRegisterBitSliceAccessMap * p = (cMapElement_controlRegisterBitSliceAccessMap *) attributes ;
+  cMapElement_bitSliceAccessMap * p = (cMapElement_bitSliceAccessMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+    macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
     p->mAttribute_mSubMap = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_controlRegisterBitSliceAccessMap::setter_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                                           GALGAS_string inKey,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) {
+void GALGAS_bitSliceAccessMap::setter_setMResultTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                            GALGAS_string inKey,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_controlRegisterBitSliceAccessMap * p = (cMapElement_controlRegisterBitSliceAccessMap *) attributes ;
+  cMapElement_bitSliceAccessMap * p = (cMapElement_bitSliceAccessMap *) attributes ;
   if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+    macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
     p->mAttribute_mResultType = inAttributeValue ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cMapElement_controlRegisterBitSliceAccessMap * GALGAS_controlRegisterBitSliceAccessMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                                                           const GALGAS_string & inKey
-                                                                                                                           COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterBitSliceAccessMap * result = (cMapElement_controlRegisterBitSliceAccessMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_controlRegisterBitSliceAccessMap) ;
+cMapElement_bitSliceAccessMap * GALGAS_bitSliceAccessMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                             const GALGAS_string & inKey
+                                                                                             COMMA_LOCATION_ARGS) {
+  cMapElement_bitSliceAccessMap * result = (cMapElement_bitSliceAccessMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_bitSliceAccessMap) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_controlRegisterBitSliceAccessMap::cEnumerator_controlRegisterBitSliceAccessMap (const GALGAS_controlRegisterBitSliceAccessMap & inEnumeratedObject,
-                                                                                            const typeEnumerationOrder inOrder) :
+cEnumerator_bitSliceAccessMap::cEnumerator_bitSliceAccessMap (const GALGAS_bitSliceAccessMap & inEnumeratedObject,
+                                                              const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap_2D_element cEnumerator_controlRegisterBitSliceAccessMap::current (LOCATION_ARGS) const {
-  const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
-  return GALGAS_controlRegisterBitSliceAccessMap_2D_element (p->mAttribute_lkey, p->mAttribute_mAccessOperator, p->mAttribute_mAccessRightOperand, p->mAttribute_mSubMap, p->mAttribute_mResultType) ;
+GALGAS_bitSliceAccessMap_2D_element cEnumerator_bitSliceAccessMap::current (LOCATION_ARGS) const {
+  const cMapElement_bitSliceAccessMap * p = (const cMapElement_bitSliceAccessMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
+  return GALGAS_bitSliceAccessMap_2D_element (p->mAttribute_lkey, p->mAttribute_mAccessOperator, p->mAttribute_mAccessRightOperand, p->mAttribute_mSubMap, p->mAttribute_mResultType) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_controlRegisterBitSliceAccessMap::current_lkey (LOCATION_ARGS) const {
+GALGAS_lstring cEnumerator_bitSliceAccessMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
@@ -5192,33 +5192,33 @@ GALGAS_lstring cEnumerator_controlRegisterBitSliceAccessMap::current_lkey (LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_llvmBinaryOperation cEnumerator_controlRegisterBitSliceAccessMap::current_mAccessOperator (LOCATION_ARGS) const {
-  const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+GALGAS_llvmBinaryOperation cEnumerator_bitSliceAccessMap::current_mAccessOperator (LOCATION_ARGS) const {
+  const cMapElement_bitSliceAccessMap * p = (const cMapElement_bitSliceAccessMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
   return p->mAttribute_mAccessOperator ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bigint cEnumerator_controlRegisterBitSliceAccessMap::current_mAccessRightOperand (LOCATION_ARGS) const {
-  const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+GALGAS_bigint cEnumerator_bitSliceAccessMap::current_mAccessRightOperand (LOCATION_ARGS) const {
+  const cMapElement_bitSliceAccessMap * p = (const cMapElement_bitSliceAccessMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
   return p->mAttribute_mAccessRightOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap cEnumerator_controlRegisterBitSliceAccessMap::current_mSubMap (LOCATION_ARGS) const {
-  const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+GALGAS_bitSliceAccessMap cEnumerator_bitSliceAccessMap::current_mSubMap (LOCATION_ARGS) const {
+  const cMapElement_bitSliceAccessMap * p = (const cMapElement_bitSliceAccessMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
   return p->mAttribute_mSubMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_controlRegisterBitSliceAccessMap::current_mResultType (LOCATION_ARGS) const {
-  const cMapElement_controlRegisterBitSliceAccessMap * p = (const cMapElement_controlRegisterBitSliceAccessMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_controlRegisterBitSliceAccessMap) ;
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_bitSliceAccessMap::current_mResultType (LOCATION_ARGS) const {
+  const cMapElement_bitSliceAccessMap * p = (const cMapElement_bitSliceAccessMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_bitSliceAccessMap) ;
   return p->mAttribute_mResultType ;
 }
 
@@ -5226,42 +5226,42 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_controlRegisterBitSliceAccessMap::cur
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       @controlRegisterBitSliceAccessMap type                                        *
+//                                               @bitSliceAccessMap type                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_controlRegisterBitSliceAccessMap ("controlRegisterBitSliceAccessMap",
-                                                         NULL) ;
+kTypeDescriptor_GALGAS_bitSliceAccessMap ("bitSliceAccessMap",
+                                          NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_controlRegisterBitSliceAccessMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterBitSliceAccessMap ;
+const C_galgas_type_descriptor * GALGAS_bitSliceAccessMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_bitSliceAccessMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_controlRegisterBitSliceAccessMap::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_bitSliceAccessMap::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_controlRegisterBitSliceAccessMap (*this)) ;
+    macroMyNew (result, GALGAS_bitSliceAccessMap (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterBitSliceAccessMap::extractObject (const GALGAS_object & inObject,
-                                                                                                C_Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_controlRegisterBitSliceAccessMap result ;
-  const GALGAS_controlRegisterBitSliceAccessMap * p = (const GALGAS_controlRegisterBitSliceAccessMap *) inObject.embeddedObject () ;
+GALGAS_bitSliceAccessMap GALGAS_bitSliceAccessMap::extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_bitSliceAccessMap result ;
+  const GALGAS_bitSliceAccessMap * p = (const GALGAS_bitSliceAccessMap *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterBitSliceAccessMap *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_bitSliceAccessMap *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("controlRegisterBitSliceAccessMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("bitSliceAccessMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -5847,7 +5847,7 @@ cMapElement_controlRegisterMap::cMapElement_controlRegisterMap (const GALGAS_lst
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
                                                                 const GALGAS_bool & in_mIsReadOnly,
                                                                 const GALGAS_bool & in_mIsAccessibleInUserMode,
-                                                                const GALGAS_controlRegisterBitSliceAccessMap & in_mRegisterFieldAccessMap,
+                                                                const GALGAS_bitSliceAccessMap & in_mRegisterFieldAccessMap,
                                                                 const GALGAS_controlRegisterFieldMap & in_mRegisterFieldMap,
                                                                 const GALGAS_bigint & in_mAddress,
                                                                 const GALGAS_controlRegisterFieldList & in_mControlRegisterFieldList,
@@ -6016,7 +6016,7 @@ void GALGAS_controlRegisterMap::addAssign_operation (const GALGAS_lstring & inKe
                                                      const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
                                                      const GALGAS_bool & inArgument1,
                                                      const GALGAS_bool & inArgument2,
-                                                     const GALGAS_controlRegisterBitSliceAccessMap & inArgument3,
+                                                     const GALGAS_bitSliceAccessMap & inArgument3,
                                                      const GALGAS_controlRegisterFieldMap & inArgument4,
                                                      const GALGAS_bigint & inArgument5,
                                                      const GALGAS_controlRegisterFieldList & inArgument6,
@@ -6041,7 +6041,7 @@ void GALGAS_controlRegisterMap::setter_insertKey (GALGAS_lstring inKey,
                                                   GALGAS_unifiedTypeMap_2D_proxy inArgument0,
                                                   GALGAS_bool inArgument1,
                                                   GALGAS_bool inArgument2,
-                                                  GALGAS_controlRegisterBitSliceAccessMap inArgument3,
+                                                  GALGAS_bitSliceAccessMap inArgument3,
                                                   GALGAS_controlRegisterFieldMap inArgument4,
                                                   GALGAS_bigint inArgument5,
                                                   GALGAS_controlRegisterFieldList inArgument6,
@@ -6070,7 +6070,7 @@ void GALGAS_controlRegisterMap::method_searchKey (GALGAS_lstring inKey,
                                                   GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                   GALGAS_bool & outArgument1,
                                                   GALGAS_bool & outArgument2,
-                                                  GALGAS_controlRegisterBitSliceAccessMap & outArgument3,
+                                                  GALGAS_bitSliceAccessMap & outArgument3,
                                                   GALGAS_controlRegisterFieldMap & outArgument4,
                                                   GALGAS_bigint & outArgument5,
                                                   GALGAS_controlRegisterFieldList & outArgument6,
@@ -6156,12 +6156,12 @@ GALGAS_bool GALGAS_controlRegisterMap::getter_mIsAccessibleInUserModeForKey (con
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap GALGAS_controlRegisterMap::getter_mRegisterFieldAccessMapForKey (const GALGAS_string & inKey,
-                                                                                                         C_Compiler * inCompiler
-                                                                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_bitSliceAccessMap GALGAS_controlRegisterMap::getter_mRegisterFieldAccessMapForKey (const GALGAS_string & inKey,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
-  GALGAS_controlRegisterBitSliceAccessMap result ;
+  GALGAS_bitSliceAccessMap result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mAttribute_mRegisterFieldAccessMap ;
@@ -6303,7 +6303,7 @@ void GALGAS_controlRegisterMap::setter_setMIsAccessibleInUserModeForKey (GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_controlRegisterMap::setter_setMRegisterFieldAccessMapForKey (GALGAS_controlRegisterBitSliceAccessMap inAttributeValue,
+void GALGAS_controlRegisterMap::setter_setMRegisterFieldAccessMapForKey (GALGAS_bitSliceAccessMap inAttributeValue,
                                                                          GALGAS_string inKey,
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) {
@@ -6459,7 +6459,7 @@ GALGAS_bool cEnumerator_controlRegisterMap::current_mIsAccessibleInUserMode (LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_controlRegisterBitSliceAccessMap cEnumerator_controlRegisterMap::current_mRegisterFieldAccessMap (LOCATION_ARGS) const {
+GALGAS_bitSliceAccessMap cEnumerator_controlRegisterMap::current_mRegisterFieldAccessMap (LOCATION_ARGS) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
   return p->mAttribute_mRegisterFieldAccessMap ;

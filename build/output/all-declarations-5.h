@@ -65,7 +65,7 @@ class cEnumAssociatedValues_objectInMemoryIR_register : public cEnumAssociatedVa
   public : const GALGAS_bool mAssociatedValue2 ;
   public : const GALGAS_bool mAssociatedValue3 ;
   public : const GALGAS_bigint mAssociatedValue4 ;
-  public : const GALGAS_controlRegisterBitSliceAccessMap mAssociatedValue5 ;
+  public : const GALGAS_bitSliceAccessMap mAssociatedValue5 ;
   public : const GALGAS_uint mAssociatedValue6 ;
   public : const GALGAS_uint mAssociatedValue7 ;
 
@@ -75,7 +75,7 @@ class cEnumAssociatedValues_objectInMemoryIR_register : public cEnumAssociatedVa
                                                             const GALGAS_bool & inAssociatedValue2,
                                                             const GALGAS_bool & inAssociatedValue3,
                                                             const GALGAS_bigint & inAssociatedValue4,
-                                                            const GALGAS_controlRegisterBitSliceAccessMap & inAssociatedValue5,
+                                                            const GALGAS_bitSliceAccessMap & inAssociatedValue5,
                                                             const GALGAS_uint & inAssociatedValue6,
                                                             const GALGAS_uint & inAssociatedValue7
                                                             COMMA_LOCATION_ARGS) ;
@@ -212,12 +212,14 @@ class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
   public : const GALGAS_bigint mAssociatedValue1 ;
   public : const GALGAS_bool mAssociatedValue2 ;
   public : const GALGAS_uint mAssociatedValue3 ;
+  public : const GALGAS_bitSliceAccessMap mAssociatedValue4 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_typeKind_integer (const GALGAS_bigint & inAssociatedValue0,
                                                    const GALGAS_bigint & inAssociatedValue1,
                                                    const GALGAS_bool & inAssociatedValue2,
-                                                   const GALGAS_uint & inAssociatedValue3
+                                                   const GALGAS_uint & inAssociatedValue3,
+                                                   const GALGAS_bitSliceAccessMap & inAssociatedValue4
                                                    COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -2086,6 +2088,20 @@ void routine_handlePropertyInExpression (const class GALGAS_unifiedTypeMap_2D_pr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                             Extension setter '@instructionListIR appendLoadFromMemory'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendLoadFromMemory (class GALGAS_instructionListIR & ioObject,
+                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           const class GALGAS_location constin_inErrorLocation,
+                                           const class GALGAS_objectInMemoryIR constin_inSource,
+                                           class GALGAS_valueIR & out_outResultingValue,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                    Routine 'analyzeVarInExpressionElementAccess'                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3580,16 +3596,5 @@ class GALGAS_string function_llvmAttributeFunction (class C_Compiler * inCompile
 
 class GALGAS_string function_modulePrefixName (class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Function 'panicNameForInvocationGraph'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_panicNameForInvocationGraph (class GALGAS_string inArgument0,
-                                                           class GALGAS_lbigint inArgument1,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
 
 #endif

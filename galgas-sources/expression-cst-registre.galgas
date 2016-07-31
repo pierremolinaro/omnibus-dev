@@ -99,7 +99,7 @@ override method @registerConstantExpressionAST analyzeExpression
     ?let registerType
     ?*
     ?*
-    ?let @controlRegisterBitSliceAccessMap unused registerBitSliceMap
+    ?let @bitSliceAccessMap unused registerBitSliceMap
     ?let @controlRegisterFieldMap registerFieldMap
     ?let @bigint unused registerAddress
     ?*
@@ -168,7 +168,7 @@ override method @registerConstantExpressionAST analyzeExpression
       else
         error expressionLocation: "expression too large (should be < " + (1G << fieldBitCount)
       end
-    case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
+    case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount *) :
       if not unsigned then
         error expressionLocation: "an unsigned integer expression is required here"
       else

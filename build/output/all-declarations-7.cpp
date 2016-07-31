@@ -709,6 +709,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "\n"
   "section ledOff () {\n"
   "  globalVar = azerty SINGLE_PIPO\n"
+  "  globalVar = azerty SINGLE_PIPO.fields\n"
   "  globalVar = azerty PIPO [0]\n"
   "  globalVar = azerty PIPO [7]\n"
   "  var idx $uint3 = 5\n"
@@ -746,7 +747,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-control-register-array.plm",
   "plm",
   true, // Text file
-  1206, // Text length
+  1246, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 

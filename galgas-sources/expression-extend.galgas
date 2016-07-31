@@ -107,8 +107,8 @@ override method @extendExpressionAST analyzeExpression
   elsif not [[expressionResult kind] isInteger] then
     error mEndOfExpression : "expression type is not an integer type" : outResult
   else
-    [[expressionResult kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize]
-    [[resultType kind] integer ?min:* ?max:* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize]
+    [[expressionResult kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize ?1*]
+    [[resultType kind] integer ?min:* ?max:* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize ?1*]
     if sourceIsUnsigned && targetIsUnsigned then # unsigned -> unsigned
       if sourceSize > targetSize then
         error mTypeName: "cannot extend, use convert or trunc"

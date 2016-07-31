@@ -9,7 +9,7 @@ enum @objectInMemoryIR {
                  @bool readable
                  @bool writable
                  @bigint address
-                 @controlRegisterBitSliceAccessMap sliceMap
+                 @bitSliceAccessMap sliceMap
                  @uint arraySize # 0 if not an array
                  @uint elementSize) # 0 if not an array
   case globalVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
@@ -117,7 +117,7 @@ getter @objectInMemoryIR address -> @valueIR outOperand {
   case register ( * ** * * * * *) :
     error .nowhere : "@objectInMemoryIR register address" : outOperand
   case globalVariable (@unifiedTypeMap-proxy type @string name *) :
-    outOperand  = .llvmGlobalObject {!type: type !name:llvmNameForGlobalVariable (!name)}
+    outOperand  = .llvmGlobalObjectValue {!type: type !name:llvmNameForGlobalVariable (!name)}
   case localVariable (@unifiedTypeMap-proxy type @string name *) :
     outOperand  = .llvmLocalObject {!type:type !name:llvmNameForLocalVariable (!name)}
   case staticConstant (* *) :
@@ -135,7 +135,7 @@ enum @valueIR {
   case selfObject (@unifiedTypeMap-proxy type)
   case literalInteger  (@unifiedTypeMap-proxy type @bigint value)
   case llvmLocalObject (@unifiedTypeMap-proxy type @string name)
-  case llvmGlobalObject (@unifiedTypeMap-proxy type @string name)
+  case llvmGlobalObjectValue (@unifiedTypeMap-proxy type @string name)
   case llvmStructureConstant (@unifiedTypeMap-proxy type @operandIRList values)
   case literalString  (@unifiedTypeMap-proxy type @uint size @uint index)
   case zero (@unifiedTypeMap-proxy type)
@@ -149,7 +149,7 @@ getter @valueIR llvmName -> @string outResult {
   case selfObject (*) : outResult = "%self"
   case literalInteger (* @bigint value) : outResult = [value string]
   case llvmLocalObject (* @string name) : outResult = "%" + name
-  case llvmGlobalObject (* @string name) : outResult = "@" + name
+  case llvmGlobalObjectValue (* @string name) : outResult = "@" + name
   case llvmStructureConstant (* @operandIRList inValues) :
     outResult = "{"
     for () in inValues
@@ -172,7 +172,7 @@ getter @valueIR type -> @unifiedTypeMap-proxy outResult {
   case selfObject (type) : outResult = type
   case literalInteger (type *) : outResult = type
   case llvmLocalObject (type *) : outResult = type
-  case llvmGlobalObject (type *) : outResult = type
+  case llvmGlobalObjectValue (type *) : outResult = type
   case llvmStructureConstant (type *) : outResult = type
   case literalString  (type * *) : outResult = type
   end
@@ -208,8 +208,8 @@ getter @valueIR withType ?@unifiedTypeMap-proxy inType -> @valueIR outResult {
     outResult = .zero {!type: inType}
   case selfObject (*) :
     outResult = .selfObject {!type: inType}
-  case llvmGlobalObject (* @string name) :
-    outResult = .llvmGlobalObject {!type: inType !name: name}
+  case llvmGlobalObjectValue (* @string name) :
+    outResult = .llvmGlobalObjectValue {!type: inType !name: name}
   case llvmStructureConstant (* @operandIRList values) :
     outResult = .llvmStructureConstant {!type: inType !values: values}
   case literalString  (* @uint size @uint index) :
@@ -225,7 +225,7 @@ getter @valueIR name -> @string outResult {
   case selfObject (*) : outResult = "self"
   case literalInteger (* @bigint value) : outResult = [value string]
   case llvmLocalObject (* @string name) : outResult = name
-  case llvmGlobalObject (* @string name) : outResult = name
+  case llvmGlobalObjectValue (* @string name) : outResult = name
   case llvmStructureConstant (* *) : outResult = "{...}"
   case literalString  (* * @uint index) : outResult = literalStringName (!index)
   end
@@ -239,7 +239,7 @@ getter @valueIR isStatic -> @bool outResult {
   case selfObject (*) : outResult = false
   case literalInteger (* *) : outResult = true
   case llvmLocalObject (* *) : outResult = false
-  case llvmGlobalObject (* *) : outResult = false
+  case llvmGlobalObjectValue (* *) : outResult = false
   case llvmStructureConstant (* *) : outResult = true
   case literalString  (* * *) : outResult = true
   end

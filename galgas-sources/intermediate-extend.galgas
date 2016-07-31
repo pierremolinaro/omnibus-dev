@@ -21,7 +21,7 @@ override method @extendIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "  " + [mResult llvmName] + " = "
-  [[mSource kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
+  [[mSource kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?2*]
   ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
   ioLLVMcode += " " + [mSource  llvmTypeName] + " " + [mSource llvmName] + " to " + [mResult llvmTypeName] + "\n"
 }

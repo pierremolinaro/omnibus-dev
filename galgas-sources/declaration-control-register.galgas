@@ -154,11 +154,12 @@ map @controlRegisterFieldMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @controlRegisterBitSliceAccessMap {
+map @bitSliceAccessMap {
   @llvmBinaryOperation mAccessOperator
   @bigint mAccessRightOperand
-  @controlRegisterBitSliceAccessMap mSubMap
+  @bitSliceAccessMap mSubMap
   @unifiedTypeMap-proxy mResultType
+#  @objectInMemoryIR mResultObject
   insert insertKey error message "the '%K' register slice has been already declared"
   search searchKey error message "the '%K' register slice is not declared"
 }
@@ -169,7 +170,7 @@ map @controlRegisterMap {
   @unifiedTypeMap-proxy mType
   @bool mIsReadOnly
   @bool mIsAccessibleInUserMode
-  @controlRegisterBitSliceAccessMap mRegisterFieldAccessMap
+  @bitSliceAccessMap mRegisterFieldAccessMap
   @controlRegisterFieldMap mRegisterFieldMap
   @bigint mAddress
   @controlRegisterFieldList mControlRegisterFieldList # Used for HTML file
@@ -210,7 +211,7 @@ method @controlRegisterDeclarationListAST-element controlRegisterType
 {
   outRegisterType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mRegisterTypeName}
   switch [outRegisterType kind]
-  case integer (*** bitCount):
+  case integer (*** bitCount *):
     outRegisterBitCount = bitCount
   case boolean :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
@@ -233,10 +234,10 @@ method @controlRegisterDeclarationListAST-element controlRegisterType
 
 method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
   ?!context:@semanticContext ioContext
-  ?type:let @unifiedTypeMap-proxy inRegisterType
+  ?!type:@unifiedTypeMap-proxy ioRegisterType
   ?bitCount:let @uint inRegisterBitCount
   !@controlRegisterFieldMap outRegisterFieldMap
-  !@controlRegisterBitSliceAccessMap outRegisterBitSliceMap
+  !@bitSliceAccessMap outRegisterBitSliceMap
   !@controlRegisterFieldList outControlRegisterFieldList
 {
 #--- Build bit slice map
@@ -254,7 +255,7 @@ method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
       case namedBit (@lstring name @lbigint count) :
         let bitCount = [count.bigint uint]
         if bitCount == 1 then
-          [!?classConstantMap insertKey !name !.literalInteger {!type: inRegisterType !value:1G << shiftCount}]
+          [!?classConstantMap insertKey !name !.literalInteger {!type:ioRegisterType !value:1G << shiftCount}]
         end
         outControlRegisterFieldList += !bitCount !name.string
         [!?outRegisterFieldMap insertKey
@@ -262,14 +263,16 @@ method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
           !shiftCount
           !bitCount
         ]
-        @controlRegisterBitSliceAccessMap registerSubMap = {}
+        @bitSliceAccessMap registerSubMap = {}
+      #--- "shifted" property
         [!?registerSubMap insertKey
           !.new{!"shifted" !name.location}
           !.lshr
           ![shiftCount bigint]
           !{}
-          !inRegisterType
+          !ioRegisterType
         ]
+      #--- "bool" property
         [!?registerSubMap insertKey
           !.new{!boolTypeName () !name.location}
           !.icmp_ne
@@ -277,20 +280,22 @@ method @controlRegisterDeclarationListAST-element buildControlRegisterSliceMap
           !{}
           !ioContext.mBooleanType
         ]
+      #--- property name
         let mask = ((1G << bitCount) - 1G) << shiftCount
         [!?outRegisterBitSliceMap insertKey
           !name
           !.and
           !mask
           !registerSubMap
-          !inRegisterType
+          !ioRegisterType
         ]
         shiftCount = shiftCount + bitCount
       end
     end
   #--- Bit slice count is correct
     if inRegisterBitCount != shiftCount then
-      error mRegisterBitSliceListLocation : "total bit slice count is " + shiftCount + " (should be " + inRegisterBitCount + ")"
+      error mRegisterBitSliceListLocation
+       : "total bit slice count is " + shiftCount + " (should be " + inRegisterBitCount + ")"
     end
   end
 }
@@ -301,11 +306,11 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
   ?!context:@semanticContext ioContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
-  [self controlRegisterType !?context:ioContext ?type:let registerType ?bitCount:let registerBitCount]
+  [self controlRegisterType !?context:ioContext ?type:var registerType ?bitCount:let registerBitCount]
 #--- Build bit slice map
   [self buildControlRegisterSliceMap
     !?context:ioContext
-    !type:registerType
+    !?type:registerType
     !bitCount:registerBitCount
     ?let registerFieldMap
     ?let registerBitSliceMap
@@ -350,7 +355,8 @@ method @controlRegisterDeclarationListAST-element enterControlRegistersInContext
       [addressExpressionResult literalInteger ?1* ?value:registerAddress]
    #--- Check address value
       if registerAddress > maxRegisterAddress then
-        error register.mRegisterAddressLocation : "register address should be lower or equal to " + [maxRegisterAddress hexString]
+        error register.mRegisterAddressLocation
+         : "register address should be lower or equal to " + [maxRegisterAddress hexString]
       end
     end
     @bigint arraySize
