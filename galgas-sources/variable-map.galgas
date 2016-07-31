@@ -9,7 +9,7 @@ proc getNewTempVariable
   ?!@semanticTemporariesStruct ioTemporaries
   !@valueIR outTempVariable
 {
-  outTempVariable = .llvmLocalObject {!type: inType !name:"temp." + ioTemporaries.mTemporaryIndex}
+  outTempVariable = .llvmLocalObjectValue {!type: inType !name:"temp." + ioTemporaries.mTemporaryIndex}
   ioTemporaries.mTemporaryIndex ++
 }
 

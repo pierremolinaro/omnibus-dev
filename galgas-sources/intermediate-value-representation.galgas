@@ -117,9 +117,9 @@ getter @objectInMemoryIR address -> @valueIR outOperand {
   case register ( * ** * * * * *) :
     error .nowhere : "@objectInMemoryIR register address" : outOperand
   case globalVariable (@unifiedTypeMap-proxy type @string name *) :
-    outOperand  = .llvmGlobalObjectValue {!type: type !name:llvmNameForGlobalVariable (!name)}
+    outOperand  = .llvmGlobalObjectValue {!type: type !llvmName:llvmNameForGlobalVariable (!name)}
   case localVariable (@unifiedTypeMap-proxy type @string name *) :
-    outOperand  = .llvmLocalObject {!type:type !name:llvmNameForLocalVariable (!name)}
+    outOperand  = .llvmLocalObjectValue {!type:type !name:llvmNameForLocalVariable (!name)}
   case staticConstant (* *) :
     error .nowhere : "@objectInMemoryIR globalConstantaddress" : outOperand
   case property (* * *) :
@@ -134,8 +134,8 @@ getter @objectInMemoryIR address -> @valueIR outOperand {
 enum @valueIR {
   case selfObject (@unifiedTypeMap-proxy type)
   case literalInteger  (@unifiedTypeMap-proxy type @bigint value)
-  case llvmLocalObject (@unifiedTypeMap-proxy type @string name)
-  case llvmGlobalObjectValue (@unifiedTypeMap-proxy type @string name)
+  case llvmLocalObjectValue (@unifiedTypeMap-proxy type @string name)
+  case llvmGlobalObjectValue (@unifiedTypeMap-proxy type @string llvmName)
   case llvmStructureConstant (@unifiedTypeMap-proxy type @operandIRList values)
   case literalString  (@unifiedTypeMap-proxy type @uint size @uint index)
   case zero (@unifiedTypeMap-proxy type)
@@ -148,7 +148,7 @@ getter @valueIR llvmName -> @string outResult {
   case zero (*) : outResult = "zeroinitializer"
   case selfObject (*) : outResult = "%self"
   case literalInteger (* @bigint value) : outResult = [value string]
-  case llvmLocalObject (* @string name) : outResult = "%" + name
+  case llvmLocalObjectValue (* @string name) : outResult = "%" + name
   case llvmGlobalObjectValue (* @string name) : outResult = "@" + name
   case llvmStructureConstant (* @operandIRList inValues) :
     outResult = "{"
@@ -171,7 +171,7 @@ getter @valueIR type -> @unifiedTypeMap-proxy outResult {
   case zero (type) : outResult = type
   case selfObject (type) : outResult = type
   case literalInteger (type *) : outResult = type
-  case llvmLocalObject (type *) : outResult = type
+  case llvmLocalObjectValue (type *) : outResult = type
   case llvmGlobalObjectValue (type *) : outResult = type
   case llvmStructureConstant (type *) : outResult = type
   case literalString  (type * *) : outResult = type
@@ -202,14 +202,14 @@ getter @valueIR withType ?@unifiedTypeMap-proxy inType -> @valueIR outResult {
   switch self
   case literalInteger (* @bigint value) :
     outResult = .literalInteger {!type: inType !value: value}
-  case llvmLocalObject (* @string name) :
-    outResult = .llvmLocalObject {!type: inType !name: name}
+  case llvmLocalObjectValue (* @string name) :
+    outResult = .llvmLocalObjectValue {!type: inType !name: name}
   case zero (*) :
     outResult = .zero {!type: inType}
   case selfObject (*) :
     outResult = .selfObject {!type: inType}
-  case llvmGlobalObjectValue (* @string name) :
-    outResult = .llvmGlobalObjectValue {!type: inType !name: name}
+  case llvmGlobalObjectValue (* @string llvmName) :
+    outResult = .llvmGlobalObjectValue {!type: inType !llvmName: llvmName}
   case llvmStructureConstant (* @operandIRList values) :
     outResult = .llvmStructureConstant {!type: inType !values: values}
   case literalString  (* @uint size @uint index) :
@@ -224,7 +224,7 @@ getter @valueIR name -> @string outResult {
   case zero (*) : outResult = "zeroinitializer"
   case selfObject (*) : outResult = "self"
   case literalInteger (* @bigint value) : outResult = [value string]
-  case llvmLocalObject (* @string name) : outResult = name
+  case llvmLocalObjectValue (* @string name) : outResult = name
   case llvmGlobalObjectValue (* @string name) : outResult = name
   case llvmStructureConstant (* *) : outResult = "{...}"
   case literalString  (* * @uint index) : outResult = literalStringName (!index)
@@ -238,7 +238,7 @@ getter @valueIR isStatic -> @bool outResult {
   case zero (*) : outResult = true
   case selfObject (*) : outResult = false
   case literalInteger (* *) : outResult = true
-  case llvmLocalObject (* *) : outResult = false
+  case llvmLocalObjectValue (* *) : outResult = false
   case llvmGlobalObjectValue (* *) : outResult = false
   case llvmStructureConstant (* *) : outResult = true
   case literalString  (* * *) : outResult = true

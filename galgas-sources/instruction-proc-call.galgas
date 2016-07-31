@@ -556,7 +556,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (!varLLVMName)}
+        !.llvmLocalObjectValue {!type:type !name:llvmNameForLocalVariable (!varLLVMName)}
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
         !lkey:name
@@ -578,7 +578,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![variableKind name])}
+        !.llvmLocalObjectValue {!type:type !name:llvmNameForLocalVariable (![variableKind name])}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
@@ -624,7 +624,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.outputInput
-        !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![variableKind llvmName])}
+        !.llvmLocalObjectValue {!type:type !name:llvmNameForLocalVariable (![variableKind llvmName])}
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
@@ -659,7 +659,7 @@ proc analyzeEffectiveParameters
           parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
           ioEffectiveParameterListIR +=
             !.outputInput
-            !.llvmLocalObject {!type:type !name:llvmNameForLocalVariable (![fieldAddress name])}
+            !.llvmLocalObjectValue {!type:type !name:llvmNameForLocalVariable (![fieldAddress name])}
         end    
       end
     end
