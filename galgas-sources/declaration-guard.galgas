@@ -215,7 +215,7 @@ proc guardSemanticAnalysis
       !lkey:resultVarName
       !type:resultType
       !readAccessAllowed:true
-      !variableKind:.localVariable {!type:resultType !name:resultVarName.string !volatile:false}
+      !variableKin:.localVariable {!type:resultType !name:resultVarName.string !volatile:false}
       !objectIR:.localVariableReference {!type:resultType !plmName:resultVarName.string}
       !copyable:true
       !canBeUsedAsInputParameter:true
@@ -561,7 +561,7 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       !lkey:baseName
       ?1*
       ?readAccessAllowed:*
-      ?variableKind:*
+      ?variableKin:*
       ?objectIR:*
       ?copyable:*
       ?1*

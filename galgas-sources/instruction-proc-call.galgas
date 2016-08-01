@@ -308,14 +308,14 @@ override method @remoteRoutineCallInstructionAST analyze
     if not isPublic then
       error routineMangledName : "this routine is not public"
     end
-    @objectInMemoryIR variableKind
+    @objectIR objectIR
     if canMutateProperties then
       [!?ioVariableMap searchForMethodCall
         !lkey:baseName
         ?1*
         ?readAccessAllowed:*
-        ?variableKind:variableKind
-        ?objectIR:let unused objectIR
+        ?variableKin:*
+        ?objectIR:objectIR
         ?copyable:*
         ?1*
       ]
@@ -324,8 +324,8 @@ override method @remoteRoutineCallInstructionAST analyze
         !lkey:baseName
         ?1*
         ?readAccessAllowed:*
-        ?variableKind:variableKind
-        ?objectIR:let unused objectIR
+        ?variableKin:*
+        ?objectIR:objectIR
         ?copyable:*
         ?1*
       ]
@@ -363,7 +363,7 @@ override method @remoteRoutineCallInstructionAST analyze
       error routineName : "cannot be called in instruction: return value"
     end
   #--- Code generation
-    let baseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
+    let baseGlobalVariableName = if [objectIR isGlobalVariable] then baseName.string else "" end
     ioInstructionGenerationList += !@procCallInstructionIR.new {
       !baseGlobalVariableName
       !routineMangledName
@@ -409,12 +409,12 @@ proc analyzeRoutineCall
       !lkey:inReceiverName
       ?type:receiverType
       ?1*
-      ?variableKind:@objectInMemoryIR variableKind
-      ?objectIR: let unused objectIR
+      ?variableKin:*
+      ?objectIR:let objectIR
       ?2*
     ]
     outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
-    outEffectiveParameterListIR += !.outputInput ![variableKind address] #--- add "load self" as first argument
+    outEffectiveParameterListIR += !.outputInput !objectIR
   else
     outRoutineMangledName = inRoutineName
     receiverType = .null
@@ -523,7 +523,7 @@ proc analyzeEffectiveParameters
           !lkey:name
           !type:type
           !readAccessAllowed:true
-          !variableKind:targetVar
+          !variableKin:targetVar
           !objectIR:.localVariableReference {!type:type !plmName:varLLVMName}
           !copyable:true
           !canBeUsedAsInputParameter:true
@@ -533,7 +533,7 @@ proc analyzeEffectiveParameters
           !lkey:name
           !type:type
           !readAccessAllowed:true
-          !variableKind:targetVar
+          !variableKin:targetVar
           !objectIR:.localVariableReference {!type:type !plmName:varLLVMName}
           !copyable:true
           !canBeUsedAsInputParameter:true
@@ -549,8 +549,8 @@ proc analyzeEffectiveParameters
         !lkey:name
         ?type:let type
         ?readAccessAllowed:let accessIsAllowed
-        ?variableKind:let variableKind
-        ?objectIR:let unused objectIR
+        ?variableKin:*
+        ?objectIR:let objectIR
         ?copyable:let isCopyable                                                 
         ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
       ]
@@ -566,7 +566,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (![variableKind name]) !sliceMap:{}}
+        !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (![objectIR name]) !sliceMap:{}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
@@ -598,7 +598,7 @@ proc analyzeEffectiveParameters
         !lkey:name
         ?type:let type
         ?readAccessAllowed:let accessIsAllowed
-        ?variableKind:let variableKind
+        ?variableKin:*
         ?objectIR:let unused objectIR
         ?1*
         ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
@@ -612,7 +612,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.outputInput
-        !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (![variableKind llvmName]) !sliceMap:{}}
+        !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (![objectIR llvmName]) !sliceMap:{}}
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR

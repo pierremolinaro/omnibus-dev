@@ -82,6 +82,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
+  [!?ioGraph addEdge !inConstantName !mObjectName]
   for (access) in mAccessList do
     switch access
     case property (@lstring unused name) :
@@ -158,11 +159,11 @@ override method @primaryInExpressionAST analyzeExpression
   case noSelfAccess :
     if inGuard then
       error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer
-    elsif [ioNamedObjectMap hasKey !mObjectName] then
-      [!?ioVariableMap searchForReadAccess !lkey:mObjectName ?6*]
-      [ioNamedObjectMap searchKey
-        !mObjectName
-        ?currentPointer
+    elsif [ioVariableMap hasKey !mObjectName] then
+      [!?ioVariableMap searchForReadAccess !lkey:mObjectName
+        ?3*
+        ?objectIR:currentPointer
+        ?2*
       ]
       [currentPointer checkReadable]
     else # Stand alone function call ?

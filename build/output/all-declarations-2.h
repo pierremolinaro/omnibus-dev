@@ -5080,10 +5080,10 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setVariableKindForKey (class GALGAS_objectInMemoryIR constinArgument0,
-                                                               class GALGAS_string constinArgument1,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void setter_setVariableKinForKey (class GALGAS_objectInMemoryIR constinArgument0,
+                                                              class GALGAS_string constinArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -5114,9 +5114,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                                     C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR getter_variableKindForKey (const class GALGAS_string & constinOperand0,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR getter_variableKinForKey (const class GALGAS_string & constinOperand0,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -5143,7 +5143,7 @@ class cEnumerator_variableMap : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_unifiedTypeMap_2D_proxy current_type (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_readAccessAllowed (LOCATION_ARGS) const ;
-  public : class GALGAS_objectInMemoryIR current_variableKind (LOCATION_ARGS) const ;
+  public : class GALGAS_objectInMemoryIR current_variableKin (LOCATION_ARGS) const ;
   public : class GALGAS_objectIR current_objectIR (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_copyable (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_canBeUsedAsInputParameter (LOCATION_ARGS) const ;
@@ -5163,7 +5163,7 @@ class cMapElement_variableMap : public cMapElement {
 //--- Map attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_type ;
   public : GALGAS_bool mAttribute_readAccessAllowed ;
-  public : GALGAS_objectInMemoryIR mAttribute_variableKind ;
+  public : GALGAS_objectInMemoryIR mAttribute_variableKin ;
   public : GALGAS_objectIR mAttribute_objectIR ;
   public : GALGAS_bool mAttribute_copyable ;
   public : GALGAS_bool mAttribute_canBeUsedAsInputParameter ;
@@ -5172,7 +5172,7 @@ class cMapElement_variableMap : public cMapElement {
   public : cMapElement_variableMap (const GALGAS_lstring & inKey,
                                     const GALGAS_unifiedTypeMap_2D_proxy & in_type,
                                     const GALGAS_bool & in_readAccessAllowed,
-                                    const GALGAS_objectInMemoryIR & in_variableKind,
+                                    const GALGAS_objectInMemoryIR & in_variableKin,
                                     const GALGAS_objectIR & in_objectIR,
                                     const GALGAS_bool & in_copyable,
                                     const GALGAS_bool & in_canBeUsedAsInputParameter
@@ -5281,8 +5281,8 @@ class GALGAS_variableMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_type (C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR getter_variableKind (C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectInMemoryIR getter_variableKin (C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

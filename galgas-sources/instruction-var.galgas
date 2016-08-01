@@ -136,7 +136,7 @@ override method @varInstructionWithAssignmentAST analyze
     !lkey:mVarName
     !type:[result type]
     !readAccessAllowed:true
-    !variableKind:targetVar
+    !variableKin:targetVar
     !objectIR:.localVariableReference {!type:[result type] !plmName:varName}
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
@@ -185,7 +185,7 @@ override method @varInstructionAST analyze
     !lkey:mVarName
     !type:targetType
     !readAccessAllowed:true
-    !variableKind:targetVar
+    !variableKin:targetVar
     !objectIR:.localVariableReference {!type:targetType !plmName:varLLVMName}
     !copyable:[targetType copyable]
     !canBeUsedAsInputParameter:true

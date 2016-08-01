@@ -98,7 +98,7 @@ proc analyzeVariableAccess
     !lkey:baseName
     ?type:@unifiedTypeMap-proxy type
     ?1*
-    ?variableKind:let @objectInMemoryIR sourcePtr
+    ?variableKin:let @objectInMemoryIR sourcePtr
     ?objectIR:let unused objectIR
     ?2*
   ]
@@ -199,7 +199,7 @@ proc analyzeVariableWriteAccess
       !lkey:baseName
       ?1*
       ?readAccessAllowed:accessIsAllowed
-      ?variableKind:variableKind
+      ?variableKin:variableKind
       ?objectIR:let unused objectIR
       ?copyable:isCopyable
       ?1*
@@ -209,7 +209,7 @@ proc analyzeVariableWriteAccess
       !lkey:baseName
       ?1*
       ?readAccessAllowed:accessIsAllowed
-      ?variableKind:variableKind
+      ?variableKin:variableKind
       ?objectIR:let unused objectIR
       ?copyable:isCopyable
       ?1*
@@ -290,7 +290,7 @@ proc analyzeRegisterWriteAccess
       !lkey:baseName
       ?type:let @unifiedTypeMap-proxy unused type
       ?readAccessAllowed:let unused accessIsAllowed
-      ?variableKind:outResultPtr
+      ?variableKin:outResultPtr
       ?objectIR:let unused objectIR
       ?copyable:let unused isCopyable
       ?1*
@@ -415,12 +415,12 @@ proc analyzeVariableReadWriteAccess
     !lkey:baseName
     ?1*
     ?readAccessAllowed:let accessIsAllowed
-    ?variableKind:let @objectInMemoryIR variableKind
-    ?objectIR:let unused objectIR
+    ?variableKin:*
+    ?objectIR:let objectIR
     ?copyable:let isCopyable
     ?1*
   ]
-  outBaseGlobalVariableName = if [variableKind isGlobalVariable] then baseName.string else "" end
+  outBaseGlobalVariableName = if [objectIR isGlobalVariable] then baseName.string else "" end
   if not accessIsAllowed then
     error baseName : "routine has no access right on the this variable"
   end
