@@ -151,14 +151,14 @@ method @objectIR checkReadable {
 getter @objectIR llvmName -> @string outResult {
   switch self
   case property (***) : error .nowhere : "<<@objectIR llvmName>>" : outResult
-  case globalVariableReference (**) : error .nowhere : "<<@objectIR llvmName>>" : outResult
-  case localVariableReference (* name) : outResult = "%" + llvmNameForLocalVariable (!name)
+  case globalVariableReference (* plmName) : outResult = "@" + llvmNameForGlobalVariable (!plmName)
+  case localVariableReference (* plmName) : outResult = "%" + llvmNameForLocalVariable (!plmName)
   case registerReference (********): error .nowhere : "<<@objectIR llvmName>>" : outResult
   case zero (*) : outResult = "zeroinitializer"
   case selfObject (*) : outResult = "%self"
   case literalInteger (* @bigint value) : outResult = [value string]
-  case llvmTemporaryValue (* @string name *) : outResult = "%" + name
-  case llvmGlobalObjectValue (* @string name) : outResult = "@" + name
+  case llvmTemporaryValue (* @string llvmName *) : outResult = "%" + llvmName
+  case llvmGlobalObjectValue (* @string llvmName) : outResult = "@" + llvmName
   case temporaryReference (* @string llvmName) : outResult = "%" + llvmName
   case llvmStructureConstant (* @operandIRList inValues) :
     outResult = "{"
