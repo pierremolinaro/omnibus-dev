@@ -2,6 +2,12 @@ target "teensy-3-1-tp"
 
 //——————————————————————————————————————————————————————————————————————————————
 
+func `user f () -> $uint32 {
+  result = 32
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+
 task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
@@ -12,7 +18,8 @@ task Tâche priority 1 stackSize 512 {
     leds.write (!off:LED_L0)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
-    lcd.printUnsigned (!time.millis ())
+    lcd.printUnsigned (!azerty time.millis ())
+    let x = azerty f ()
   }
 }
 

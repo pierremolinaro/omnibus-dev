@@ -28,13 +28,15 @@ enum @objectIR {
   case zero (@unifiedTypeMap-proxy type)
 #--- Function
   case possibleFunction (@objectIR receiver @lstring functionName)
+  case null
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @objectIR checkReadable {
   switch self
-  case possibleFunction (* *) : error .nowhere : "<<@objectIR checkReadable>>"
+  case null : error .nowhere : "<<@objectIR checkReadable null>>"
+  case possibleFunction (* *) : error .nowhere : "<<@objectIR checkReadable possibleFunction>>"
   case selfObject (*) :
   case llvmGlobalObjectValue (**) :
   case globalVariableReference (**) :
@@ -57,6 +59,7 @@ method @objectIR checkReadable {
 
 getter @objectIR llvmName -> @string outResult {
   switch self
+  case null : error .nowhere : "<<@objectIR llvmName null>>" : outResult
   case possibleFunction (**) :
     error .nowhere : "<<@objectIR llvmName possibleFunction>>" : outResult
   case property (***) : error .nowhere : "<<@objectIR llvmName>>" : outResult
@@ -87,6 +90,7 @@ getter @objectIR llvmName -> @string outResult {
 
 getter @objectIR sliceMap ?let @location inErrorLocation -> @sliceMap outResult {
   switch self
+  case null : error .nowhere : "<<@objectIR sliceMap null>>" : outResult
   case possibleFunction (**) :
     error .nowhere : "<<@objectIR sliceMap possibleFunction>>" : outResult
   case property (***) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
@@ -108,6 +112,7 @@ getter @objectIR sliceMap ?let @location inErrorLocation -> @sliceMap outResult 
 
 getter @objectIR type -> @unifiedTypeMap-proxy outResult {
   switch self
+  case null : outResult = .null
   case possibleFunction (**) :
     error .nowhere : "<<@objectIR type possibleFunction>>" : outResult
   case temporaryReference (@unifiedTypeMap-proxy type *) : outResult = type
@@ -147,6 +152,7 @@ getter @objectIR kind -> @typeKind outResult {
 
 getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
   switch self
+  case null : error .nowhere : "<<@objectIR withType null>>" : outResult
   case possibleFunction (**) :
     error .nowhere : "<<@objectIR withType possibleFunction>>" : outResult
   case temporaryReference (* @string llvmName) :
@@ -189,6 +195,7 @@ getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
 
 getter @objectIR name -> @string outResult {
   switch self
+  case null : error .nowhere : "<<@objectIR name null>>" : outResult
   case possibleFunction (**) :
     error .nowhere : "<<@objectIR name possibleFunction>>" : outResult
   case temporaryReference (* @string llvmName) : outResult = llvmName
@@ -210,6 +217,7 @@ getter @objectIR name -> @string outResult {
 
 getter @objectIR isStatic -> @bool outResult {
   switch self
+  case null : error .nowhere : "<<@objectIR isStatic null>>" : outResult
   case possibleFunction (**) : outResult = false
   case temporaryReference (**) : outResult = false
   case property (***) : outResult = false

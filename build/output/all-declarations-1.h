@@ -1723,7 +1723,8 @@ class GALGAS_objectIR : public AC_GALGAS_root {
     kEnum_llvmStructureConstant,
     kEnum_literalString,
     kEnum_zero,
-    kEnum_possibleFunction
+    kEnum_possibleFunction,
+    kEnum_null
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -1779,6 +1780,8 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public : static class GALGAS_objectIR constructor_localVariableReference (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                             const class GALGAS_string & inOperand1
                                                                             COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_objectIR constructor_null (LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_possibleFunction (const class GALGAS_objectIR & inOperand0,
                                                                       const class GALGAS_lstring & inOperand1
@@ -1906,6 +1909,8 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmTemporaryValue (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariableReference (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNull (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPossibleFunction (LOCATION_ARGS) const ;
 

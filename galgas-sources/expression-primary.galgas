@@ -160,7 +160,7 @@ override method @primaryInExpressionAST analyzeExpression
   case noSelfAccess :
     if inGuard then
       error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer
-    else
+    elsif [ioNamedObjectMap hasKey !mObjectName] then
       if [ioLocalVariableMap hasKey !mObjectName] then
         [!?ioLocalVariableMap searchForReadAccess !mObjectName]
       end
@@ -170,6 +170,8 @@ override method @primaryInExpressionAST analyzeExpression
         ?currentPointer
       ]
       [currentPointer checkReadable]
+    else # Stand alone function call ?
+      currentPointer = .possibleFunction {!receiver:.null !functionName:mObjectName}
     end
   case selfAccess (@location selfLocation) :
     if inSelfType == .null then
