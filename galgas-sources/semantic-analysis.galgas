@@ -192,3 +192,56 @@ proc semanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @functionCallIR : @abstractInstructionIR {
+  @objectIR mResult
+  @lstring mFunctionMangledName
+  @lstring mFunctionNameForGeneration
+  @routineKindIR mKind
+  @procCallEffectiveParameterListIR mArgumentList
+  @bool mAppendFileAndLineArgumentForPanicLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @functionCallIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  " + [mResult llvmName] + " = call " + [mResult llvmTypeName] + " @"
+  switch mKind 
+  case function : ioLLVMcode += llvmNameForFunction (!mFunctionNameForGeneration.string)
+  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mFunctionNameForGeneration.string)
+  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mFunctionNameForGeneration.string)
+  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mFunctionNameForGeneration.string)
+  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mFunctionNameForGeneration.string)
+  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionNameForGeneration.string)
+  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionNameForGeneration.string)
+  end
+  ioLLVMcode += " ("
+  for () in mArgumentList do
+    switch mEffectiveParameterPassingMode
+    case input:
+      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+    case output:
+      ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
+    case outputInput:
+      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+    end
+  between
+    ioLLVMcode += ", "
+  end
+  ioLLVMcode += ")\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @functionCallIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+ {
+  ioAccessibleEntities.mRoutineSet += !mFunctionMangledName.string
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

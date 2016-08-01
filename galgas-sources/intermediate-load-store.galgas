@@ -72,8 +72,8 @@ setter @instructionListIR appendLoadFromReference
   switch inSource
   case null :
     error .nowhere : "<<@instructionListIR appendLoadFromReference null>>" : outResultingValue
-  case possibleFunction (**) :
-    error .nowhere : "<<@instructionListIR appendLoadFromReference possibleFunction>>" : outResultingValue
+  case possibleFunction (* functionName) :
+    error functionName : "<<@instructionListIR appendLoadFromReference possibleFunction>>" : outResultingValue
   case selfObject (*) :
     outResultingValue = inSource
   case llvmGlobalObjectValue (**) :
@@ -93,12 +93,12 @@ setter @instructionListIR appendLoadFromReference
       !name
       !false
     ]
-  case temporaryReference (@unifiedTypeMap-proxy type @string llvmName) :
+  case temporaryReference (@unifiedTypeMap-proxy type @string llvmName * volatile) :
     getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromTemporaryReference
       !outResultingValue
       !llvmName
-      !false
+      !volatile
     ]
   case registerReference (type * * * address * arraySize *) :
     if arraySize > 0 then

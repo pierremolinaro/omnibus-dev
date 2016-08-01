@@ -71,12 +71,14 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-literal-integer.galgas"
   "galgas-sources/expression-literal-string.galgas"
   "galgas-sources/expression-true-false.galgas"
-  "galgas-sources/expression-primary.galgas"
-  "galgas-sources/expression-self-var.galgas"
-  "galgas-sources/expression-var.galgas"
-  "galgas-sources/expression-func-call.galgas"
-  "galgas-sources/expression-self-func-call.galgas"
   "galgas-sources/expression-cst-registre.galgas"
+
+#  "galgas-sources/expression-self-var.galgas"
+#  "galgas-sources/expression-var.galgas"
+#  "galgas-sources/expression-func-call.galgas"
+#  "galgas-sources/expression-self-func-call.galgas"
+
+  "galgas-sources/expression-primary.galgas"
 
 #--- Instructions
   "galgas-sources/rule-access.galgas"

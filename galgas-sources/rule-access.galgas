@@ -198,6 +198,9 @@ proc analyzeVariableWriteAccess
   @bool isCopyable
   @objectInMemoryIR variableKind
   if ([inAccessList length] == 1) && (baseElementArrayAccess == .noAccess) then
+    if [ioLocalVariableMap hasKey !baseName] then
+      [!?ioLocalVariableMap searchForWriteAccess !baseName]
+    end
     [!?ioVariableMap searchForWriteAccess
       !lkey:baseName
       ?1*
@@ -207,6 +210,9 @@ proc analyzeVariableWriteAccess
       ?1*
     ]
   else
+    if [ioLocalVariableMap hasKey !baseName] then
+      [!?ioLocalVariableMap searchForReadWriteAccess !baseName]
+    end
     [!?ioVariableMap searchForReadWriteAccess
       !lkey:baseName
       ?1*

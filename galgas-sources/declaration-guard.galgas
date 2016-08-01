@@ -208,10 +208,11 @@ proc guardSemanticAnalysis
   @instructionListIR instructionGenerationList = {}
   switch inGuardKind
   case baseGuard :
-  #--- Add 'accepted" output variable
+  #--- Add 'accept" output variable
     let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
     let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
     allocaList += !resultVarName.string !resultType
+    [!?localVariableMap insertOutputFormalArgument !resultVarName]
     [!?variableMap insertOutputFormalArgument
       !lkey:resultVarName
       !type:resultType
@@ -220,6 +221,11 @@ proc guardSemanticAnalysis
       !copyable:true
       !canBeUsedAsInputParameter:true
     ]
+    let resultVariable = @objectIR.localVariableReference {
+      !type:resultType
+      !plmName:resultVarName
+    }
+    [!?namedObjectMap insertKey !resultVarName !resultVariable]
   #--- Analyse formal arguments
     enterFormalArguments (
       !context:inContext

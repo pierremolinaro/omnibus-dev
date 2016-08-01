@@ -533,8 +533,10 @@ proc analyzeEffectiveParameters
       end
       let varLLVMName = name.string + "." + ioTemporaries.mTemporaryIndex
       ioTemporaries.mTemporaryIndex ++
+      [!?ioNamedObjectMap insertKey !name !.localVariableReference {!type:type !plmName:varLLVMName}]
       let targetVar = @objectInMemoryIR.localVariable {!type:type !name:varLLVMName !volatile:false}
       if constant then
+        [!?ioLocalVariableMap insertConstant !name]
         [!?ioVariableMap insertConstant
           !lkey:name
           !type:type
@@ -544,6 +546,7 @@ proc analyzeEffectiveParameters
           !canBeUsedAsInputParameter:true
         ]
       else
+        [!?ioLocalVariableMap insertDefinedVariable !name]
         [!?ioVariableMap insertDefinedVariable
           !lkey:name
           !type:type
@@ -559,6 +562,7 @@ proc analyzeEffectiveParameters
         !.input
         !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (!varLLVMName) !sliceMap:{}}
     case input (@lstring name) :
+      [!?ioLocalVariableMap searchForWriteAccess !name]
       [!?ioVariableMap searchForWriteAccess
         !lkey:name
         ?type:let type
@@ -608,7 +612,8 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
       ioEffectiveParameterListIR += !.output !result
     case outputInput (@lstring name) :
-     [!?ioVariableMap searchForReadWriteAccess
+      [!?ioLocalVariableMap searchForReadWriteAccess !name]
+      [!?ioVariableMap searchForReadWriteAccess
         !lkey:name
         ?type:let type
         ?readAccessAllowed:let accessIsAllowed
