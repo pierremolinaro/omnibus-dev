@@ -212,14 +212,12 @@ class cEnumAssociatedValues_typeKind_integer : public cEnumAssociatedValues {
   public : const GALGAS_bigint mAssociatedValue1 ;
   public : const GALGAS_bool mAssociatedValue2 ;
   public : const GALGAS_uint mAssociatedValue3 ;
-  public : const GALGAS_sliceMap mAssociatedValue4 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_typeKind_integer (const GALGAS_bigint & inAssociatedValue0,
                                                    const GALGAS_bigint & inAssociatedValue1,
                                                    const GALGAS_bool & inAssociatedValue2,
-                                                   const GALGAS_uint & inAssociatedValue3,
-                                                   const GALGAS_sliceMap & inAssociatedValue4
+                                                   const GALGAS_uint & inAssociatedValue3
                                                    COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -2087,6 +2085,33 @@ void routine_handlePropertyInExpression (const class GALGAS_unifiedTypeMap_2D_pr
                                          class GALGAS_objectIR & ioArgument15,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Extension getter '@objectIR sliceMap' (as function)                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_sliceMap extensionGetter_sliceMap (const class GALGAS_objectIR & inObject,
+                                                const class GALGAS_location & constinArgument0,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Extension setter '@instructionListIR appendBinaryOperation'                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendBinaryOperation (class GALGAS_instructionListIR & ioObject,
+                                            const class GALGAS_objectIR constin_inTarget,
+                                            const class GALGAS_unifiedTypeMap_2D_proxy constin_inOperandType,
+                                            const class GALGAS_location constin_inLocation,
+                                            const class GALGAS_objectIR constin_inLeft,
+                                            const class GALGAS_llvmBinaryOperation constin_inOperation,
+                                            const class GALGAS_objectIR constin_inRight,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

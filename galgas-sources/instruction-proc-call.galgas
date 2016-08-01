@@ -646,7 +646,7 @@ proc analyzeEffectiveParameters
           error name : "a literal string does not handle field access" : parameterList, ioEffectiveParameterListIR
         case enumeration (*) :
           error name : "an enumeration does not handle field access" : parameterList, ioEffectiveParameterListIR
-        case integer (* * * * *) :
+        case integer (* * * *) :
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
         case structure (* @propertyMap propertyMap *) :
           [propertyMap searchKey !name ?let unused public ?let type ?let idx]

@@ -20,7 +20,10 @@ section ledOn () {
 
 section ledOff () {
   globalVar = azerty SINGLE_PIPO
-  globalVar = SINGLE_PIPO.fields
+  globalVar = azerty SINGLE_PIPO.fields
+  globalVar = azerty SINGLE_PIPO.fields.shifted
+  globalVar = azerty SINGLE_PIPO.bit
+  globalBit = azerty SINGLE_PIPO.bit.bool
   globalVar = azerty PIPO [0]
   globalVar = azerty PIPO [7]
   var idx $uint3 = 5

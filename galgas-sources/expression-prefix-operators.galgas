@@ -93,7 +93,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     case enumeration (*) :  error .nowhere : "internal error" : leftOperand
     case structure (* * *) :  error .nowhere : "internal error" : leftOperand
     case staticInteger :  error .nowhere : "internal error" : leftOperand
-    case integer (* * * @uint bitCount *) :
+    case integer (* * * @uint bitCount) :
       leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:(1G << bitCount) - 1G}
     end
   case notOperator :
