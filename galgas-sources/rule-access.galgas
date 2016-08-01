@@ -99,6 +99,7 @@ proc analyzeVariableAccess
     ?type:@unifiedTypeMap-proxy type
     ?1*
     ?variableKind:let @objectInMemoryIR sourcePtr
+    ?objectIR:let unused objectIR
     ?2*
   ]
 #--- Handle array access
@@ -199,6 +200,7 @@ proc analyzeVariableWriteAccess
       ?1*
       ?readAccessAllowed:accessIsAllowed
       ?variableKind:variableKind
+      ?objectIR:let unused objectIR
       ?copyable:isCopyable
       ?1*
     ]
@@ -208,6 +210,7 @@ proc analyzeVariableWriteAccess
       ?1*
       ?readAccessAllowed:accessIsAllowed
       ?variableKind:variableKind
+      ?objectIR:let unused objectIR
       ?copyable:isCopyable
       ?1*
     ]
@@ -288,6 +291,7 @@ proc analyzeRegisterWriteAccess
       ?type:let @unifiedTypeMap-proxy unused type
       ?readAccessAllowed:let unused accessIsAllowed
       ?variableKind:outResultPtr
+      ?objectIR:let unused objectIR
       ?copyable:let unused isCopyable
       ?1*
     ]
@@ -412,6 +416,7 @@ proc analyzeVariableReadWriteAccess
     ?1*
     ?readAccessAllowed:let accessIsAllowed
     ?variableKind:let @objectInMemoryIR variableKind
+    ?objectIR:let unused objectIR
     ?copyable:let isCopyable
     ?1*
   ]

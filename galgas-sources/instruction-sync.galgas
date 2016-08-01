@@ -356,6 +356,7 @@ proc analyzeGuardCall
       ?type:receiverType
       ?1*
       ?variableKind:@objectInMemoryIR variableKind
+      ?objectIR: let unused objectIR
       ?2*
     ]
     outGuardMangledName = .new {!"$" + [receiverType key] + "." + inGuardName !inGuardName.location}

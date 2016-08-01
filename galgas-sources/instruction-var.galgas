@@ -137,6 +137,7 @@ override method @varInstructionWithAssignmentAST analyze
     !type:[result type]
     !readAccessAllowed:true
     !variableKind:targetVar
+    !objectIR:.localVariableReference {!type:[result type] !plmName:varName}
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
   ]
@@ -185,6 +186,7 @@ override method @varInstructionAST analyze
     !type:targetType
     !readAccessAllowed:true
     !variableKind:targetVar
+    !objectIR:.localVariableReference {!type:targetType !plmName:varLLVMName}
     !copyable:[targetType copyable]
     !canBeUsedAsInputParameter:true
   ]
