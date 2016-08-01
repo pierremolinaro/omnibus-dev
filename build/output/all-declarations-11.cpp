@@ -297,19 +297,19 @@ static void extensionMethod_primaryInExpressionAST_analyzeExpression (const cPtr
       break ;
     case GALGAS_primaryInExpressionAccessAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess * extractPtr_9597 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess *) (enumerator_8227.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_9597->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfIndex = extractPtr_9597->mAssociatedValue1 ;
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess * extractPtr_9610 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess *) (enumerator_8227.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_9610->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfIndex = extractPtr_9610->mAssociatedValue1 ;
         {
-        routine_handleSubscriptInExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfIndex, ioArgument_ioInstructionGenerationList, var_currentPointer_6790, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 218)) ;
+        routine_handleSubscriptInAssignmentAndExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfIndex, ioArgument_ioInstructionGenerationList, var_currentPointer_6790, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 218)) ;
         }
       }
       break ;
     case GALGAS_primaryInExpressionAccessAST::kEnum_funcCall:
       {
-        const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall * extractPtr_10306 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall *) (enumerator_8227.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_effectiveParameterListAST extractedValue_arguments = extractPtr_10306->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_errorLocation = extractPtr_10306->mAssociatedValue1 ;
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall * extractPtr_10319 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall *) (enumerator_8227.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_effectiveParameterListAST extractedValue_arguments = extractPtr_10319->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_errorLocation = extractPtr_10319->mAssociatedValue1 ;
         {
         routine_handleFunctionCallInExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, extractedValue_arguments, extractedValue_errorLocation, ioArgument_ioInstructionGenerationList, var_currentPointer_6790, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 237)) ;
         }
@@ -546,21 +546,22 @@ static void extensionMethod_varAssignmentInstructionAST_analyze (const cPtr_inst
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_6056 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_5722.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_6056->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfExpression = extractPtr_6056->mAssociatedValue1 ;
-        inCompiler->emitSemanticError (extractedValue_endOfExpression, GALGAS_string ("NOT HANDLED YET")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 155)) ;
-        var_currentObject_4807.drop () ; // Release error dropped variable
+        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_6633 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_5722.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_6633->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfExpression = extractPtr_6633->mAssociatedValue1 ;
+        {
+        routine_handleSubscriptInAssignmentAndExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfExpression, ioArgument_ioInstructionGenerationList, var_currentObject_4807, inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 155)) ;
+        }
       }
       break ;
     }
     enumerator_5722.gotoNextObject () ;
   }
-  GALGAS_objectIR var_sourceOperand_6697 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, extensionGetter_type (var_currentObject_4807, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 164)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperand_6697, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 159)) ;
-  GALGAS_objectIR var_result_6714 = function_checkAssignmentCompatibility (var_sourceOperand_6697, extensionGetter_type (var_currentObject_4807, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 178)), object->mAttribute_mIdentifier.getter_location (SOURCE_FILE ("instruction-assignment.galgas", 179)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 176)) ;
+  GALGAS_objectIR var_sourceOperand_7274 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, extensionGetter_type (var_currentObject_4807, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 181)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperand_7274, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 176)) ;
+  GALGAS_objectIR var_result_7291 = function_checkAssignmentCompatibility (var_sourceOperand_7274, extensionGetter_type (var_currentObject_4807, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 195)), object->mAttribute_mIdentifier.getter_location (SOURCE_FILE ("instruction-assignment.galgas", 196)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 193)) ;
   {
-  extensionSetter_appendStoreFromReference (ioArgument_ioInstructionGenerationList, var_currentObject_4807, object->mAttribute_mIdentifier.mAttribute_location, var_result_6714, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 182)) ;
+  extensionSetter_appendStoreFromReference (ioArgument_ioInstructionGenerationList, var_currentObject_4807, object->mAttribute_mIdentifier.mAttribute_location, var_result_7291, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 199)) ;
   }
 }
 
