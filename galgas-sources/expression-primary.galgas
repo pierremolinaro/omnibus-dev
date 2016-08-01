@@ -215,7 +215,7 @@ override method @primaryInExpressionAST analyzeExpression
         !?currentPointer
       )
     case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-      handleSubscriptInExpression (
+      handleSubscriptInAssignmentAndExpression (
         !self:inSelfType
         !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
         !inGuard:inGuard
@@ -325,7 +325,7 @@ private proc handlePropertyAccessInExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc handleSubscriptInExpression
+proc handleSubscriptInAssignmentAndExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
@@ -345,7 +345,7 @@ private proc handleSubscriptInExpression
   ?!@objectIR ioObjectPtr
 {
   if [[[ioObjectPtr type] kind] isArrayType] then
-    handleVariableSubscriptInExpression (
+    handleSubscriptArrayInAssignmentAndExpression (
       !self: inSelfType
       !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
       !inGuard: inGuard
@@ -389,7 +389,7 @@ private proc handleSubscriptInExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc handleVariableSubscriptInExpression
+private proc handleSubscriptArrayInAssignmentAndExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard

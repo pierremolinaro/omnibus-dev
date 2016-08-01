@@ -152,7 +152,24 @@ override method @varAssignmentInstructionAST analyze
         !?ioInstructionGenerationList
       )
     case arrayAccess (indexExpression endOfExpression) :
-      error endOfExpression : "NOT HANDLED YET" : currentObject
+      handleSubscriptInAssignmentAndExpression (
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:false
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !modes:inModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?namedObjectMap: ioNamedObjectMap
+        !?alloca:ioAllocaList
+        !indexExpression
+        !endOfExpression
+        !?ioInstructionGenerationList
+        !?currentObject
+      )
     end
   end
 #--- Analyze source expression
