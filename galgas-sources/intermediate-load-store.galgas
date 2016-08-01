@@ -70,6 +70,8 @@ setter @instructionListIR appendLoadFromReference
   !@objectIR outResultingValue
 {
   switch inSource
+  case null :
+    error .nowhere : "<<@instructionListIR appendLoadFromReference null>>" : outResultingValue
   case possibleFunction (**) :
     error .nowhere : "<<@instructionListIR appendLoadFromReference possibleFunction>>" : outResultingValue
   case selfObject (*) :
