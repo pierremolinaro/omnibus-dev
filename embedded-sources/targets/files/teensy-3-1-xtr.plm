@@ -119,7 +119,7 @@ module time {
   public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
     accept = (azerty inDeadline) <= self.millis ()
     if not accept {
-      handle (!guardedDeadline:inDeadline)
+      handle (!guardedDeadline:azerty inDeadline)
     }
   }
   
