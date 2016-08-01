@@ -97,6 +97,9 @@ project (1:0:0) -> "plm" {
 
   "galgas-sources/instruction-assignment-EX.galgas"
 
+#--- Instruction and expression helpers
+  "galgas-sources/subscript-in-assignment-and-expression.galgas"
+
 #--- Compilation phases
   "galgas-sources/variable-map.galgas"
   "galgas-sources/variable-map-new.galgas"
