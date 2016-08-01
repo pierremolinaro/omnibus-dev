@@ -118,7 +118,7 @@ override method @letInstructionWithAssignmentAST analyze
     !lkey:mVarName
     !type:[result type]
     !readAccessAllowed:true
-    !variableKind:localConstant
+    !variableKin:localConstant
     !objectIR:expressionResult
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true

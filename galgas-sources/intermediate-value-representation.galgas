@@ -57,6 +57,12 @@ method @objectIR checkReadable {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+getter @objectIR isGlobalVariable -> @bool outResult {
+  outResult = [self isGlobalVariableReference]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 getter @objectIR llvmName -> @string outResult {
   switch self
   case null : error .nowhere : "<<@objectIR llvmName null>>" : outResult

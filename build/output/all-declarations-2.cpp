@@ -10905,7 +10905,7 @@ GALGAS_routineKindIR GALGAS_routineKindIR::extractObject (const GALGAS_object & 
 cMapElement_variableMap::cMapElement_variableMap (const GALGAS_lstring & inKey,
                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_type,
                                                   const GALGAS_bool & in_readAccessAllowed,
-                                                  const GALGAS_objectInMemoryIR & in_variableKind,
+                                                  const GALGAS_objectInMemoryIR & in_variableKin,
                                                   const GALGAS_objectIR & in_objectIR,
                                                   const GALGAS_bool & in_copyable,
                                                   const GALGAS_bool & in_canBeUsedAsInputParameter
@@ -10913,7 +10913,7 @@ cMapElement_variableMap::cMapElement_variableMap (const GALGAS_lstring & inKey,
 cMapElement (inKey COMMA_THERE),
 mAttribute_type (in_type),
 mAttribute_readAccessAllowed (in_readAccessAllowed),
-mAttribute_variableKind (in_variableKind),
+mAttribute_variableKin (in_variableKin),
 mAttribute_objectIR (in_objectIR),
 mAttribute_copyable (in_copyable),
 mAttribute_canBeUsedAsInputParameter (in_canBeUsedAsInputParameter) {
@@ -10922,14 +10922,14 @@ mAttribute_canBeUsedAsInputParameter (in_canBeUsedAsInputParameter) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_variableMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_type.isValid () && mAttribute_readAccessAllowed.isValid () && mAttribute_variableKind.isValid () && mAttribute_objectIR.isValid () && mAttribute_copyable.isValid () && mAttribute_canBeUsedAsInputParameter.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_type.isValid () && mAttribute_readAccessAllowed.isValid () && mAttribute_variableKin.isValid () && mAttribute_objectIR.isValid () && mAttribute_copyable.isValid () && mAttribute_canBeUsedAsInputParameter.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_variableMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_variableMap (mAttribute_lkey, mAttribute_type, mAttribute_readAccessAllowed, mAttribute_variableKind, mAttribute_objectIR, mAttribute_copyable, mAttribute_canBeUsedAsInputParameter COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_variableMap (mAttribute_lkey, mAttribute_type, mAttribute_readAccessAllowed, mAttribute_variableKin, mAttribute_objectIR, mAttribute_copyable, mAttribute_canBeUsedAsInputParameter COMMA_HERE)) ;
   return result ;
 }
 
@@ -10946,8 +10946,8 @@ void cMapElement_variableMap::description (C_String & ioString, const int32_t in
   mAttribute_readAccessAllowed.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "variableKind" ":" ;
-  mAttribute_variableKind.description (ioString, inIndentation) ;
+  ioString << "variableKin" ":" ;
+  mAttribute_variableKin.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "objectIR" ":" ;
@@ -10974,7 +10974,7 @@ typeComparisonResult cMapElement_variableMap::compare (const cCollectionElement 
     result = mAttribute_readAccessAllowed.objectCompare (operand->mAttribute_readAccessAllowed) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_variableKind.objectCompare (operand->mAttribute_variableKind) ;
+    result = mAttribute_variableKin.objectCompare (operand->mAttribute_variableKin) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_objectIR.objectCompare (operand->mAttribute_objectIR) ;
@@ -11907,7 +11907,7 @@ void GALGAS_variableMap::setter_searchForReadAccess (GALGAS_lstring inKey,
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
     outArgument1 = p->mAttribute_readAccessAllowed ;
-    outArgument2 = p->mAttribute_variableKind ;
+    outArgument2 = p->mAttribute_variableKin ;
     outArgument3 = p->mAttribute_objectIR ;
     outArgument4 = p->mAttribute_copyable ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
@@ -11952,7 +11952,7 @@ void GALGAS_variableMap::setter_searchForWriteAccess (GALGAS_lstring inKey,
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
     outArgument1 = p->mAttribute_readAccessAllowed ;
-    outArgument2 = p->mAttribute_variableKind ;
+    outArgument2 = p->mAttribute_variableKin ;
     outArgument3 = p->mAttribute_objectIR ;
     outArgument4 = p->mAttribute_copyable ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
@@ -11997,7 +11997,7 @@ void GALGAS_variableMap::setter_searchForReadWriteAccess (GALGAS_lstring inKey,
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
     outArgument1 = p->mAttribute_readAccessAllowed ;
-    outArgument2 = p->mAttribute_variableKind ;
+    outArgument2 = p->mAttribute_variableKin ;
     outArgument3 = p->mAttribute_objectIR ;
     outArgument4 = p->mAttribute_copyable ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
@@ -12042,7 +12042,7 @@ void GALGAS_variableMap::setter_searchForDropAccess (GALGAS_lstring inKey,
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
     outArgument1 = p->mAttribute_readAccessAllowed ;
-    outArgument2 = p->mAttribute_variableKind ;
+    outArgument2 = p->mAttribute_variableKin ;
     outArgument3 = p->mAttribute_objectIR ;
     outArgument4 = p->mAttribute_copyable ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
@@ -12087,7 +12087,7 @@ void GALGAS_variableMap::setter_searchForConstantMethodCall (GALGAS_lstring inKe
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
     outArgument1 = p->mAttribute_readAccessAllowed ;
-    outArgument2 = p->mAttribute_variableKind ;
+    outArgument2 = p->mAttribute_variableKin ;
     outArgument3 = p->mAttribute_objectIR ;
     outArgument4 = p->mAttribute_copyable ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
@@ -12132,7 +12132,7 @@ void GALGAS_variableMap::setter_searchForMethodCall (GALGAS_lstring inKey,
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
     outArgument1 = p->mAttribute_readAccessAllowed ;
-    outArgument2 = p->mAttribute_variableKind ;
+    outArgument2 = p->mAttribute_variableKin ;
     outArgument3 = p->mAttribute_objectIR ;
     outArgument4 = p->mAttribute_copyable ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
@@ -12177,7 +12177,7 @@ void GALGAS_variableMap::setter_neutralAccess (GALGAS_lstring inKey,
     macroValidSharedObject (p, cMapElement_variableMap) ;
     outArgument0 = p->mAttribute_type ;
     outArgument1 = p->mAttribute_readAccessAllowed ;
-    outArgument2 = p->mAttribute_variableKind ;
+    outArgument2 = p->mAttribute_variableKin ;
     outArgument3 = p->mAttribute_objectIR ;
     outArgument4 = p->mAttribute_copyable ;
     outArgument5 = p->mAttribute_canBeUsedAsInputParameter ;
@@ -12216,15 +12216,15 @@ GALGAS_bool GALGAS_variableMap::getter_readAccessAllowedForKey (const GALGAS_str
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR GALGAS_variableMap::getter_variableKindForKey (const GALGAS_string & inKey,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR GALGAS_variableMap::getter_variableKinForKey (const GALGAS_string & inKey,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) attributes ;
   GALGAS_objectInMemoryIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_variableMap) ;
-    result = p->mAttribute_variableKind ;
+    result = p->mAttribute_variableKin ;
   }
   return result ;
 }
@@ -12304,15 +12304,15 @@ void GALGAS_variableMap::setter_setReadAccessAllowedForKey (GALGAS_bool inAttrib
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_variableMap::setter_setVariableKindForKey (GALGAS_objectInMemoryIR inAttributeValue,
-                                                       GALGAS_string inKey,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
+void GALGAS_variableMap::setter_setVariableKinForKey (GALGAS_objectInMemoryIR inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_variableMap * p = (cMapElement_variableMap *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_variableMap) ;
-    p->mAttribute_variableKind = inAttributeValue ;
+    p->mAttribute_variableKin = inAttributeValue ;
   }
 }
 
@@ -12402,10 +12402,10 @@ GALGAS_bool cEnumerator_variableMap::current_readAccessAllowed (LOCATION_ARGS) c
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR cEnumerator_variableMap::current_variableKind (LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR cEnumerator_variableMap::current_variableKin (LOCATION_ARGS) const {
   const cMapElement_variableMap * p = (const cMapElement_variableMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_variableMap) ;
-  return p->mAttribute_variableKind ;
+  return p->mAttribute_variableKin ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12537,13 +12537,13 @@ GALGAS_bool GALGAS_variableMap_2D_proxy::getter_readAccessAllowed (C_Compiler * 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectInMemoryIR GALGAS_variableMap_2D_proxy::getter_variableKind (C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
+GALGAS_objectInMemoryIR GALGAS_variableMap_2D_proxy::getter_variableKin (C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
   GALGAS_objectInMemoryIR result ;
-  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "variableKind" COMMA_THERE) ;
+  const cMapElement_variableMap * p = (const cMapElement_variableMap *) getAttributeListPointer (inCompiler, "variableKin" COMMA_THERE) ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_variableMap) ;
-    result = p->mAttribute_variableKind;
+    result = p->mAttribute_variableKin;
   }
   return result ;
 }
