@@ -119,6 +119,7 @@ override method @letInstructionWithAssignmentAST analyze
     !type:[result type]
     !readAccessAllowed:true
     !variableKind:localConstant
+    !objectIR:expressionResult
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
   ]

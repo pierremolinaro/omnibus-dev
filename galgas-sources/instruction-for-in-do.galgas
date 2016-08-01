@@ -103,6 +103,7 @@ override method @forInstructionAST analyze
     !type:iteratedElementType
     !readAccessAllowed:true # Read access ok
     !variableKind:.localVariable {!type:iteratedElementType !name:enumeratedVarLLVMName !volatile:false}
+    !objectIR:.localVariableReference {!type:iteratedElementType !plmName:enumeratedVarLLVMName}
     !copyable:true
     !canBeUsedAsInputParameter:false
   ]

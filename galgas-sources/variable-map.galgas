@@ -30,6 +30,7 @@ sharedmap @variableMap %selectors {
   @unifiedTypeMap-proxy type
   @bool readAccessAllowed
   @objectInMemoryIR variableKind
+  @objectIR objectIR
   @bool copyable
   @bool canBeUsedAsInputParameter
 

@@ -4833,8 +4833,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                         class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                         class GALGAS_bool constinArgument2,
                                                         class GALGAS_objectInMemoryIR constinArgument3,
-                                                        class GALGAS_bool constinArgument4,
+                                                        class GALGAS_objectIR constinArgument4,
                                                         class GALGAS_bool constinArgument5,
+                                                        class GALGAS_bool constinArgument6,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
@@ -4842,8 +4843,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                            class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                            class GALGAS_bool constinArgument2,
                                                                            class GALGAS_objectInMemoryIR constinArgument3,
-                                                                           class GALGAS_bool constinArgument4,
+                                                                           class GALGAS_objectIR constinArgument4,
                                                                            class GALGAS_bool constinArgument5,
+                                                                           class GALGAS_bool constinArgument6,
                                                                            C_Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) ;
 
@@ -4851,8 +4853,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                                            class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                                            class GALGAS_bool constinArgument2,
                                                                                            class GALGAS_objectInMemoryIR constinArgument3,
-                                                                                           class GALGAS_bool constinArgument4,
+                                                                                           class GALGAS_objectIR constinArgument4,
                                                                                            class GALGAS_bool constinArgument5,
+                                                                                           class GALGAS_bool constinArgument6,
                                                                                            C_Compiler * inCompiler
                                                                                            COMMA_LOCATION_ARGS) ;
 
@@ -4860,8 +4863,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                class GALGAS_bool constinArgument2,
                                                                class GALGAS_objectInMemoryIR constinArgument3,
-                                                               class GALGAS_bool constinArgument4,
+                                                               class GALGAS_objectIR constinArgument4,
                                                                class GALGAS_bool constinArgument5,
+                                                               class GALGAS_bool constinArgument6,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
@@ -4869,8 +4873,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                            class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                            class GALGAS_bool constinArgument2,
                                                                            class GALGAS_objectInMemoryIR constinArgument3,
-                                                                           class GALGAS_bool constinArgument4,
+                                                                           class GALGAS_objectIR constinArgument4,
                                                                            class GALGAS_bool constinArgument5,
+                                                                           class GALGAS_bool constinArgument6,
                                                                            C_Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) ;
 
@@ -4878,8 +4883,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                    class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                    class GALGAS_bool constinArgument2,
                                                                    class GALGAS_objectInMemoryIR constinArgument3,
-                                                                   class GALGAS_bool constinArgument4,
+                                                                   class GALGAS_objectIR constinArgument4,
                                                                    class GALGAS_bool constinArgument5,
+                                                                   class GALGAS_bool constinArgument6,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -4887,8 +4893,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                                    class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                                    class GALGAS_bool constinArgument2,
                                                                                    class GALGAS_objectInMemoryIR constinArgument3,
-                                                                                   class GALGAS_bool constinArgument4,
+                                                                                   class GALGAS_objectIR constinArgument4,
                                                                                    class GALGAS_bool constinArgument5,
+                                                                                   class GALGAS_bool constinArgument6,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) ;
 
@@ -4896,8 +4903,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                          class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                          class GALGAS_bool constinArgument2,
                                                                          class GALGAS_objectInMemoryIR constinArgument3,
-                                                                         class GALGAS_bool constinArgument4,
+                                                                         class GALGAS_objectIR constinArgument4,
                                                                          class GALGAS_bool constinArgument5,
+                                                                         class GALGAS_bool constinArgument6,
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -4905,8 +4913,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                                          class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                                          class GALGAS_bool constinArgument2,
                                                                                          class GALGAS_objectInMemoryIR constinArgument3,
-                                                                                         class GALGAS_bool constinArgument4,
+                                                                                         class GALGAS_objectIR constinArgument4,
                                                                                          class GALGAS_bool constinArgument5,
+                                                                                         class GALGAS_bool constinArgument6,
                                                                                          C_Compiler * inCompiler
                                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -4914,8 +4923,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                       class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                       class GALGAS_bool constinArgument2,
                                                       class GALGAS_objectInMemoryIR constinArgument3,
-                                                      class GALGAS_bool constinArgument4,
+                                                      class GALGAS_objectIR constinArgument4,
                                                       class GALGAS_bool constinArgument5,
+                                                      class GALGAS_bool constinArgument6,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -4923,8 +4933,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                     class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                     class GALGAS_bool constinArgument2,
                                                                     class GALGAS_objectInMemoryIR constinArgument3,
-                                                                    class GALGAS_bool constinArgument4,
+                                                                    class GALGAS_objectIR constinArgument4,
                                                                     class GALGAS_bool constinArgument5,
+                                                                    class GALGAS_bool constinArgument6,
                                                                     C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
 
@@ -4932,8 +4943,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                  class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                  class GALGAS_bool constinArgument2,
                                                                  class GALGAS_objectInMemoryIR constinArgument3,
-                                                                 class GALGAS_bool constinArgument4,
+                                                                 class GALGAS_objectIR constinArgument4,
                                                                  class GALGAS_bool constinArgument5,
+                                                                 class GALGAS_bool constinArgument6,
                                                                  C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -4941,8 +4953,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                  class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                  class GALGAS_bool constinArgument2,
                                                                  class GALGAS_objectInMemoryIR constinArgument3,
-                                                                 class GALGAS_bool constinArgument4,
+                                                                 class GALGAS_objectIR constinArgument4,
                                                                  class GALGAS_bool constinArgument5,
+                                                                 class GALGAS_bool constinArgument6,
                                                                  C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -4950,8 +4963,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                             class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                             class GALGAS_bool constinArgument2,
                                                             class GALGAS_objectInMemoryIR constinArgument3,
-                                                            class GALGAS_bool constinArgument4,
+                                                            class GALGAS_objectIR constinArgument4,
                                                             class GALGAS_bool constinArgument5,
+                                                            class GALGAS_bool constinArgument6,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
@@ -4959,8 +4973,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                                class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
                                                                                class GALGAS_bool constinArgument2,
                                                                                class GALGAS_objectInMemoryIR constinArgument3,
-                                                                               class GALGAS_bool constinArgument4,
+                                                                               class GALGAS_objectIR constinArgument4,
                                                                                class GALGAS_bool constinArgument5,
+                                                                               class GALGAS_bool constinArgument6,
                                                                                C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) ;
 
@@ -4968,8 +4983,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                        class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
                                                        class GALGAS_bool & outArgument2,
                                                        class GALGAS_objectInMemoryIR & outArgument3,
-                                                       class GALGAS_bool & outArgument4,
+                                                       class GALGAS_objectIR & outArgument4,
                                                        class GALGAS_bool & outArgument5,
+                                                       class GALGAS_bool & outArgument6,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -4983,8 +4999,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                      class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
                                                                      class GALGAS_bool & outArgument2,
                                                                      class GALGAS_objectInMemoryIR & outArgument3,
-                                                                     class GALGAS_bool & outArgument4,
+                                                                     class GALGAS_objectIR & outArgument4,
                                                                      class GALGAS_bool & outArgument5,
+                                                                     class GALGAS_bool & outArgument6,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
 
@@ -4992,8 +5009,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                              class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
                                                              class GALGAS_bool & outArgument2,
                                                              class GALGAS_objectInMemoryIR & outArgument3,
-                                                             class GALGAS_bool & outArgument4,
+                                                             class GALGAS_objectIR & outArgument4,
                                                              class GALGAS_bool & outArgument5,
+                                                             class GALGAS_bool & outArgument6,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
@@ -5001,8 +5019,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                              class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
                                                              class GALGAS_bool & outArgument2,
                                                              class GALGAS_objectInMemoryIR & outArgument3,
-                                                             class GALGAS_bool & outArgument4,
+                                                             class GALGAS_objectIR & outArgument4,
                                                              class GALGAS_bool & outArgument5,
+                                                             class GALGAS_bool & outArgument6,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
@@ -5010,8 +5029,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                              class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
                                                              class GALGAS_bool & outArgument2,
                                                              class GALGAS_objectInMemoryIR & outArgument3,
-                                                             class GALGAS_bool & outArgument4,
+                                                             class GALGAS_objectIR & outArgument4,
                                                              class GALGAS_bool & outArgument5,
+                                                             class GALGAS_bool & outArgument6,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
@@ -5019,8 +5039,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
                                                                   class GALGAS_bool & outArgument2,
                                                                   class GALGAS_objectInMemoryIR & outArgument3,
-                                                                  class GALGAS_bool & outArgument4,
+                                                                  class GALGAS_objectIR & outArgument4,
                                                                   class GALGAS_bool & outArgument5,
+                                                                  class GALGAS_bool & outArgument6,
                                                                   C_Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
 
@@ -5028,8 +5049,9 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                               class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
                                                               class GALGAS_bool & outArgument2,
                                                               class GALGAS_objectInMemoryIR & outArgument3,
-                                                              class GALGAS_bool & outArgument4,
+                                                              class GALGAS_objectIR & outArgument4,
                                                               class GALGAS_bool & outArgument5,
+                                                              class GALGAS_bool & outArgument6,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
@@ -5039,6 +5061,11 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
                                                                             COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setCopyableForKey (class GALGAS_bool constinArgument0,
+                                                           class GALGAS_string constinArgument1,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setObjectIRForKey (class GALGAS_objectIR constinArgument0,
                                                            class GALGAS_string constinArgument1,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
@@ -5074,6 +5101,10 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_copyableForKey (const class GALGAS_string & constinOperand0,
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_objectIRForKey (const class GALGAS_string & constinOperand0,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_readAccessAllowedForKey (const class GALGAS_string & constinOperand0,
                                                                               C_Compiler * inCompiler
@@ -5113,6 +5144,7 @@ class cEnumerator_variableMap : public cGenericAbstractEnumerator {
   public : class GALGAS_unifiedTypeMap_2D_proxy current_type (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_readAccessAllowed (LOCATION_ARGS) const ;
   public : class GALGAS_objectInMemoryIR current_variableKind (LOCATION_ARGS) const ;
+  public : class GALGAS_objectIR current_objectIR (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_copyable (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_canBeUsedAsInputParameter (LOCATION_ARGS) const ;
 } ;
@@ -5132,6 +5164,7 @@ class cMapElement_variableMap : public cMapElement {
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_type ;
   public : GALGAS_bool mAttribute_readAccessAllowed ;
   public : GALGAS_objectInMemoryIR mAttribute_variableKind ;
+  public : GALGAS_objectIR mAttribute_objectIR ;
   public : GALGAS_bool mAttribute_copyable ;
   public : GALGAS_bool mAttribute_canBeUsedAsInputParameter ;
 
@@ -5140,6 +5173,7 @@ class cMapElement_variableMap : public cMapElement {
                                     const GALGAS_unifiedTypeMap_2D_proxy & in_type,
                                     const GALGAS_bool & in_readAccessAllowed,
                                     const GALGAS_objectInMemoryIR & in_variableKind,
+                                    const GALGAS_objectIR & in_objectIR,
                                     const GALGAS_bool & in_copyable,
                                     const GALGAS_bool & in_canBeUsedAsInputParameter
                                     COMMA_LOCATION_ARGS) ;
@@ -5237,6 +5271,9 @@ class GALGAS_variableMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_copyable (C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_objectIR (C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_readAccessAllowed (C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const ;
@@ -6268,78 +6305,5 @@ class GALGAS_modeMap_2D_element : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_modeMap_2D_element ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @procedureSignature_2D_element struct                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_procedureSignature_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
-  public : GALGAS_procFormalArgumentPassingMode mAttribute_mFormalArgumentPassingMode ;
-  public : GALGAS_string mAttribute_mSelector ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
-
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_procedureSignature_2D_element (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_procedureSignature_2D_element (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_procedureSignature_2D_element (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
-                                                 const GALGAS_string & in_mSelector,
-                                                 const GALGAS_unifiedTypeMap_2D_proxy & in_mType) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_procedureSignature_2D_element extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_procedureSignature_2D_element constructor_new (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
-                                                                              const class GALGAS_string & inOperand1,
-                                                                              const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2
-                                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_procedureSignature_2D_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentPassingMode getter_mFormalArgumentPassingMode (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSelector (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mType (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_procedureSignature_2D_element class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procedureSignature_2D_element ;
 
 #endif

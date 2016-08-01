@@ -37,6 +37,7 @@ proc enterFormalArguments
         !type:typeProxy
         !readAccessAllowed:true
         !variableKind:.localVariable {!type:typeProxy !name:formalArgumentName.string !volatile:false}
+        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName.string}
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
@@ -46,6 +47,7 @@ proc enterFormalArguments
         !type:typeProxy
         !readAccessAllowed:true
         !variableKind:.localVariable {!type:typeProxy !name:formalArgumentName.string !volatile:false}
+        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName.string}
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
@@ -55,6 +57,7 @@ proc enterFormalArguments
         !type:typeProxy
         !readAccessAllowed:true
         !variableKind:.localVariable {!type:typeProxy !name:formalArgumentName.string !volatile:false}
+        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName.string}
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]

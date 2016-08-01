@@ -159,7 +159,7 @@ override method @primaryInExpressionAST analyzeExpression
     if inGuard then
       error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer
     elsif [ioNamedObjectMap hasKey !mObjectName] then
-      [!?ioVariableMap searchForReadAccess !lkey:mObjectName ?5*]
+      [!?ioVariableMap searchForReadAccess !lkey:mObjectName ?6*]
       [ioNamedObjectMap searchKey
         !mObjectName
         ?currentPointer

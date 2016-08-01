@@ -104,7 +104,6 @@ override method @globalConstantDeclaration enterInContext
     ?@variableMap variableMap
     ?@namedObjectMap namedObjectMap
   )
-  log mConstantName
 #--- Get destination type
   @unifiedTypeMap-proxy annotationType
   if mConstantTypeName.string == "" then
