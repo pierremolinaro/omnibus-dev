@@ -7235,6 +7235,7 @@ class cParser_common_5F_syntax {
   protected : virtual void nt_declaration_5F_type_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_effective_5F_parameters_ (class GALGAS_effectiveParameterListAST & outArgument0,
+                                                        class GALGAS_location & outArgument1,
                                                         class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_effective_5F_parameters_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
@@ -7866,6 +7867,7 @@ class cParser_common_5F_syntax {
   protected : void rule_common_5F_syntax_routine_5F_call_i84_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_common_5F_syntax_effective_5F_parameters_i85_ (GALGAS_effectiveParameterListAST & outArgument0,
+                                                                       GALGAS_location & outArgument1,
                                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_common_5F_syntax_effective_5F_parameters_i85_parse (C_Lexique_plm_5F_lexique * inLexique) ;
@@ -14198,7 +14200,8 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
                                                                                      const class GALGAS_location & inOperand1
                                                                                      COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_primaryInExpressionAccessAST constructor_funcCall (const class GALGAS_effectiveParameterListAST & inOperand0
+  public : static class GALGAS_primaryInExpressionAccessAST constructor_funcCall (const class GALGAS_effectiveParameterListAST & inOperand0,
+                                                                                  const class GALGAS_location & inOperand1
                                                                                   COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_primaryInExpressionAccessAST constructor_property (const class GALGAS_lstring & inOperand0
@@ -14219,6 +14222,7 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
                                                      COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_funcCall (class GALGAS_effectiveParameterListAST & outArgument0,
+                                                  class GALGAS_location & outArgument1,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -14288,9 +14292,11 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess : public cE
 
 class cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall : public cEnumAssociatedValues {
   public : const GALGAS_effectiveParameterListAST mAssociatedValue0 ;
+  public : const GALGAS_location mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall (const GALGAS_effectiveParameterListAST & inAssociatedValue0
+  public : cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall (const GALGAS_effectiveParameterListAST & inAssociatedValue0,
+                                                                        const GALGAS_location & inAssociatedValue1
                                                                         COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

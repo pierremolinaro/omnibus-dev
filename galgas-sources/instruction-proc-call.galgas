@@ -58,7 +58,7 @@ syntax extension common_syntax {
 
   rule <routine_call> !@location outInstructionLocation !@abstractCallInstructionAST outInstruction {
     <access> ?outInstructionLocation ?let @accessList accessList
-    <effective_parameters> ?let effectiveParameterList
+    <effective_parameters> ?let effectiveParameterList ?*
     outInstruction = @remoteRoutineCallInstructionAST.new {
       !effectiveParameterList
       !accessList
@@ -67,7 +67,7 @@ syntax extension common_syntax {
 
   #·····················································································································
 
-  rule <effective_parameters> !@effectiveParameterListAST outEffectiveParameterList {
+  rule <effective_parameters> !@effectiveParameterListAST outEffectiveParameterList !@location outEndOfArgs {
     outEffectiveParameterList = {}
     $($
     repeat
@@ -108,6 +108,7 @@ syntax extension common_syntax {
       end
       outEffectiveParameterList += !.inputWithType{!constant:constant !typeName:typeName !name:effectiveParameterName} !selector
     end
+    outEndOfArgs = .here
     $)$
   }
 

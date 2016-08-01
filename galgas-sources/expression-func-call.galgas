@@ -23,7 +23,7 @@ syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
     $identifier$ ?let functionName
-    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
+    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList ?*
     outExpression = @functionCallInExpressionAST.new {!functionName !effectiveParameterList !["" here]}
   }
 
@@ -33,7 +33,7 @@ syntax extension common_syntax {
     $identifier$ ?let receiverName
     $.$
     $identifier$ ?let functionName
-    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
+    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList ?*
     outExpression = @functionCallInExpressionAST.new {!functionName !effectiveParameterList !receiverName}
   }
 

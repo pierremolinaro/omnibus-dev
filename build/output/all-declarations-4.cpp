@@ -17983,10 +17983,11 @@ void cGrammar_plm_5F_target_5F_grammar::nt_effective_5F_parameters_parse (C_Lexi
 }
 
 void cGrammar_plm_5F_target_5F_grammar::nt_effective_5F_parameters_ (GALGAS_effectiveParameterListAST &  parameter_1,
+                                GALGAS_location &  parameter_2,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 85 :
-      rule_common_5F_syntax_effective_5F_parameters_i85_(parameter_1, inLexique) ;
+      rule_common_5F_syntax_effective_5F_parameters_i85_(parameter_1, parameter_2, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;

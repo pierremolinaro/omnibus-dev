@@ -12,7 +12,7 @@ enum @primaryInExpressionSelfAccessAST {
 enum @primaryInExpressionAccessAST {
   case property (@lstring name)
   case arrayAccess (@expressionAST index @location endOfIndex)
-  case funcCall (@effectiveParameterListAST arguments)
+  case funcCall (@effectiveParameterListAST arguments @location endOfArguments)
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -64,8 +64,8 @@ syntax extension common_syntax {
       $]$
       accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
     while
-      <effective_parameters> ?let arguments
-      accessListAST += !.funcCall {!arguments:arguments}
+      <effective_parameters> ?let arguments ?let endOfArguments
+      accessListAST += !.funcCall {!arguments:arguments !endOfArguments:endOfArguments}
     end
   #--- AST
     outExpression = @primaryInExpressionAST.new {!selfAccess !objectName !accessListAST}
@@ -88,7 +88,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
     case property (@lstring unused name) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-    case funcCall (@effectiveParameterListAST arguments) :
+    case funcCall (@effectiveParameterListAST arguments *) :
       for () in arguments do
         switch mEffectiveParameterKind
         case input (*):
@@ -115,7 +115,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
     case property (@lstring unused name) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-    case funcCall (@effectiveParameterListAST arguments) :
+    case funcCall (@effectiveParameterListAST arguments *) :
       for () in arguments do
         switch mEffectiveParameterKind
         case input (*):
@@ -233,8 +233,26 @@ override method @primaryInExpressionAST analyzeExpression
         !?ioInstructionGenerationList
         !?currentPointer
       )
-    case funcCall (@effectiveParameterListAST arguments) :
-
+    case funcCall (@effectiveParameterListAST arguments @location errorLocation) :
+      handleFunctionCallInExpression (
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:inGuard
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !modes:inModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?localVariableMap: ioLocalVariableMap
+        !?namedObjectMap: ioNamedObjectMap
+        !?alloca:ioAllocaList
+        !arguments
+        !errorLocation
+        !?ioInstructionGenerationList
+        !?currentPointer
+      )
     end
   end
 
@@ -245,34 +263,6 @@ override method @primaryInExpressionAST analyzeExpression
     !mObjectName.location
     ?outResult
   ]  
-
-  
-#  if not inDirectAccessToPropertiesAllowed then
-#    error mSelfLocation : "for accessing properties, the function should be declared with @" + userAccessAttribute () + " attribute"
-#  end
-#  analyzeSelfAccess (
-#    !fieldList:mFieldList
-#    !self:inSelfType
-#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#    !inGuard:inGuard
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !optionalTargetType:.null
-#    !context:inContext
-#    !modes:inModeSet
-#    !allowPanic:inAllowPanic
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
-#    !?localVariableMap: ioLocalVariableMap
-#    !?namedObjectMap: ioNamedObjectMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?resultPtr:let @objectInMemoryIR resultPtr
-#  )
-#  if not [[resultPtr type] copyable] then
-#    error mSelfLocation : "an $" + [[resultPtr type] key] + " instance is not copyable"
-#  end
-#  [!?ioInstructionGenerationList appendLoadFromMemory !?ioTemporaries !resultPtr ?outResult]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -609,14 +599,18 @@ private proc handlePropertyInExpression
 #--- Structure
   if [[[ioObjectPtr type] kind] isStructure] then
     [[[ioObjectPtr type] kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
-    [structureObjectMap searchKey !inPropertyName ?@objectIR property]
-    handlePropertyAccessInExpression (
-      !?ioObjectPtr
-      !inPropertyName.location
-      !property
-      !?ioTemporaries
-      !?ioInstructionGenerationList
-    )
+    if [structureObjectMap hasKey !inPropertyName] then
+      [structureObjectMap searchKey !inPropertyName ?@objectIR property]
+      handlePropertyAccessInExpression (
+        !?ioObjectPtr
+        !inPropertyName.location
+        !property
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+      )
+    else # Function call ?
+      ioObjectPtr = .possibleFunction {!receiver:ioObjectPtr !functionName:inPropertyName}
+    end
 #--- Integer slice
   elsif [[[ioObjectPtr type] kind] isInteger] then
     let sliceMap = [ioObjectPtr sliceMap !inPropertyName.location]
@@ -651,6 +645,180 @@ private proc handlePropertyInExpression
   else
     error inPropertyName : "the current object has no property" : ioObjectPtr
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc handleFunctionCallInExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
+  ?!alloca:@allocaList ioAllocaList
+  ?let @effectiveParameterListAST inArguments 
+  ?let @location inErrorLocation
+  ?!@instructionListIR ioInstructionGenerationList
+  ?!@objectIR ioObjectPtr
+{
+  if not [ioObjectPtr isPossibleFunction] then
+    error inErrorLocation : "object is not a function" : ioObjectPtr
+  elsif inGuard then
+    [ioObjectPtr possibleFunction ?1* ?functionName:let functionName]
+    error functionName : "a function cannot be called in guard expression" : ioObjectPtr
+  else
+    [ioObjectPtr possibleFunction ?receiver:let receiver ?functionName:let functionName]
+    analyzeFunctionCallInExpression (
+      !self:inSelfType
+      !propertiesAreMutable:false
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+      !receiver:receiver
+      !routineName:functionName
+      !effective:inArguments
+      !callerForInvocationGraph:inCallerNameForInvocationGraph
+      !context:inContext
+      !requiredModeSet:inModeSet
+      !allowPanic:inAllowPanic
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?localVariableMap: ioLocalVariableMap
+      !?namedObjectMap: ioNamedObjectMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
+      ?routineKind:let @routineKindIR routineKind
+      ?routineMangledName:let @lstring functionMangledName
+      ?routineNameForGeneration:let @lstring functionNameForGeneration
+      ?returnType:let @unifiedTypeMap-proxy returnedType
+      ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
+    )
+    if returnedType == .null then
+      error functionName : "the function cannot be called in expression: no return value"
+    end
+  #--- New LLVM variable for function call result
+    getNewTempVariable (!returnedType !?ioTemporaries ?let functionResult)
+  #--- Code generation
+    ioInstructionGenerationList += !@functionCallIR.new {
+      !functionResult
+      !functionMangledName
+      !functionNameForGeneration
+      !routineKind
+      !effectiveParameterListIR
+      !appendFileAndLineArgumentForPanicLocation
+    }
+  #---
+    ioObjectPtr = functionResult
+  end
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc analyzeFunctionCallInExpression
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?receiver:let @objectIR inReceiver
+  ?routineName:let @lstring inRoutineName
+  ?effective:let @effectiveParameterListAST inEffectiveParameterList
+  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?requiredModeSet:let @stringset inRequiredModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!localVariableMap:@localVariableMap ioLocalVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
+  !routineKind:@routineKindIR outRoutineKindIR
+  !routineMangledName:@lstring outRoutineMangledName
+  !routineNameForGeneration:@lstring outRoutineNameForGeneration
+  !returnType:@unifiedTypeMap-proxy outReturnedType
+  !appendFileAndLineArgumentForPanicLocation:@bool outAppendFileAndLineArgumentForPanicLocation
+{
+#---
+  outEffectiveParameterListIR = {}
+#--- Add receiver as first argument
+  let receiverType = [inReceiver type]
+  if receiverType != .null then
+    outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
+    outEffectiveParameterListIR += !.outputInput !inReceiver
+  else
+    outRoutineMangledName = inRoutineName
+  end
+#--- Build LLVM mangled name
+  outRoutineMangledName.string += "("
+  for (passingMode selector) in inEffectiveParameterList do
+    outRoutineMangledName.string += [passingMode matchingFormalArgument]
+    outRoutineMangledName.string += selector.string
+    outRoutineMangledName.string += ":"
+  end
+  outRoutineMangledName.string += ")"
+  [inContext.mRoutineMapForContext searchKey
+    !outRoutineMangledName
+    ?outRoutineNameForGeneration
+    ?let isPublic
+    ?let modeMap
+    ?let @procedureSignature formalSignature
+    ?let @routineKind routineKind
+    ?*
+    ?outReturnedType
+    ?outAppendFileAndLineArgumentForPanicLocation
+    ?let unused canMutateProperties
+    ?let unused canAccessPropertiesInUserMode
+  ]
+#--- Check accessibility
+  if not isPublic then
+    if receiverType == .null then # Standalone function
+      let @string declarationFile = [[inContext.mRoutineMapForContext locationForKey !outRoutineMangledName.string] file]
+      let invocationFile = [inRoutineName.location file]
+      if invocationFile != declarationFile then
+        error inRoutineName : "this routine is not public"
+      end
+    else
+      error inRoutineName : "this routine is not public"
+    end  
+  end  
+#--- Enter in invocation graph
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outRoutineMangledName]
+#--- Check modes
+  outRoutineKindIR = checkMode (
+    !requiredModes:inRequiredModeSet
+    !possibleModes:[modeMap keySet]
+    !kind:routineKind
+    !error:inRoutineName.location
+  )
+#--- Analyze effective parameters
+  analyzeEffectiveParameters (
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !propertiesAreMutable:inRoutineCanMutateProperties
+    !formal:formalSignature
+    !effective:inEffectiveParameterList
+    !errorLocation:inRoutineName.location
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !requiredModeSet:inRequiredModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?localVariableMap: ioLocalVariableMap
+    !?namedObjectMap: ioNamedObjectMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    !?effectiveIR:outEffectiveParameterListIR
+  )
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
