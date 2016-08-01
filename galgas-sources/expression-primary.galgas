@@ -38,7 +38,6 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <primary> !@expressionAST outExpression {
-    $azerty$
   #--- Self ?
     @primaryInExpressionSelfAccessAST selfAccess
     select
@@ -178,17 +177,21 @@ override method @primaryInExpressionAST analyzeExpression
       error selfLocation : "'self' is not available in this context" : currentPointer
     elsif [[inSelfType kind] isStructure] then
       [[inSelfType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
-      [structureObjectMap searchKey
-        !mObjectName
-        ?let object
-      ]
-      handleSelfAccessInExpression (
-        !inSelfType
-        !object
-        !?ioTemporaries
-        !?ioInstructionGenerationList
-        ?currentPointer
-      )
+      if [structureObjectMap hasKey !mObjectName] then
+        [structureObjectMap searchKey
+          !mObjectName
+          ?let object
+        ]
+        handleSelfAccessInExpression (
+          !inSelfType
+          !object
+          !?ioTemporaries
+          !?ioInstructionGenerationList
+          ?currentPointer
+        )
+      else # Function call ?
+        currentPointer = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mObjectName}
+      end
     else
       error selfLocation : "'self' should be a structure instance" : currentPointer
     end
@@ -278,7 +281,12 @@ private proc handleSelfAccessInExpression
 {
   if [inObject isProperty] then
     [inObject property ?type:let type ?plmName:let name ?index:let index]
-    outObjectPtr = .temporaryReference {!type:type !llvmName:"temp." + ioTemporaries.mTemporaryIndex}
+    outObjectPtr = .temporaryReference {
+      !type:type
+      !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+      !sliceMap:{}
+      !volatile:false
+    }
     ioTemporaries.mTemporaryIndex ++
     [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
       !outObjectPtr
@@ -305,6 +313,8 @@ private proc handlePropertyAccessInExpression
     let newObject = @objectIR.temporaryReference {
       !type:type
       !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+      !sliceMap:{}
+      !volatile:false
     }
     ioTemporaries.mTemporaryIndex ++
     [!?ioInstructionGenerationList appendGetPropertyReference
@@ -436,6 +446,8 @@ private proc handleVariableSubscriptInExpression
       let result = @objectIR.temporaryReference {
         !type:type
         !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+        !sliceMap:{}
+        !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -461,6 +473,8 @@ private proc handleVariableSubscriptInExpression
       let result = @objectIR.temporaryReference {
         !type:type
         !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+        !sliceMap:{}
+        !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendGetPropertyReference
@@ -468,7 +482,6 @@ private proc handleVariableSubscriptInExpression
         !ioObjectPtr
         !"[" + [indexResult name] + "]"
         ![indexResult llvmName]
-#        !{!.indirect {!index:indexResult} !"[" + [indexResult name] + "]"}
       ]
       ioObjectPtr = result      
   else
@@ -563,6 +576,8 @@ private proc handleRegisterArraySubscriptInExpression
       let registerAddressObject = @objectIR.temporaryReference {
         !type:registerType
         !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+        !sliceMap:registerBitSliceMap
+        !volatile:true
       }
       ioTemporaries.mTemporaryIndex ++
       [!?ioInstructionGenerationList appendComputeVolatileRegisterAddressWithSubscript

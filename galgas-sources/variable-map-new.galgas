@@ -189,10 +189,7 @@ proc initialVariableMap
       !copyable:true
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
     ]
-    [!?outObjectMap insertKey
-      !constantName
-      !constantValue
-    ]
+    [!?outObjectMap insertKey !constantName !constantValue]
   end
 #------------------------------------------------------- Add global variables
   for variable in inContext.mGlobalVariableMap do
@@ -210,6 +207,11 @@ proc initialVariableMap
       end
     end
     if inGlobalsAreConstant || variable.isConstant || not writeAccess then
+      let resultVariable = @objectIR.globalVariableReference {
+        !type:variable.type
+        !plmName:variable.lkey
+      }
+      [!?outObjectMap insertKey !variable.lkey !resultVariable]
       [!?outVariableMap insertUsedConstant
         !lkey:variable.lkey
         !type:variable.type
@@ -219,6 +221,11 @@ proc initialVariableMap
         !canBeUsedAsInputParameter:false
       ]
     else
+      let resultVariable = @objectIR.globalVariableReference {
+        !type:variable.type
+        !plmName:variable.lkey
+      }
+      [!?outObjectMap insertKey !variable.lkey !resultVariable]
       [!?outVariableMap insertDefinedVariable
         !lkey:variable.lkey
         !type:variable.type
@@ -242,6 +249,11 @@ proc initialVariableMap
       !copyable:true
       !canBeUsedAsInputParameter:true
     ]
+    let resultVariable = @objectIR.localVariableReference {
+      !type:resultType
+      !plmName:inReturnTypeName
+    }
+    [!?outObjectMap insertKey !resultVarName !resultVariable]
   end
 }
 
@@ -250,12 +262,12 @@ proc initialVariableMap
 proc variableMapWithConstants
   ?context:let @semanticContext inContext
   !@variableMap outVariableMap
-  !@namedObjectMap outAddressableEntityMap
+  !@namedObjectMap outObjectMap
   !@localVariableMap outLocalVariableMap
 {
   outVariableMap = .emptyMap
   outLocalVariableMap = .emptyMap
-  outAddressableEntityMap = {}
+  outObjectMap = {}
 #--- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedConstant
@@ -266,6 +278,7 @@ proc variableMapWithConstants
       !copyable:true
       !canBeUsedAsInputParameter:false
     ]
+    [!?outObjectMap insertKey !constantName !constantValue]
   end
 }
 

@@ -2325,33 +2325,6 @@ class GALGAS_routineKindIR function_checkMode (const class GALGAS_stringset & co
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                    Routine 'analyzeVarInExpressionElementAccess'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeVarInExpressionElementAccess (const class GALGAS_varInExpressionElementAccessList constinArgument0,
-                                                  class GALGAS_unifiedTypeMap_2D_proxy & ioArgument1,
-                                                  class GALGAS_elementPtrList & ioArgument2,
-                                                  const class GALGAS_location constinArgument3,
-                                                  const class GALGAS_unifiedTypeMap_2D_proxy constinArgument4,
-                                                  const class GALGAS_bool constinArgument5,
-                                                  const class GALGAS_bool constinArgument6,
-                                                  const class GALGAS_lstring constinArgument7,
-                                                  const class GALGAS_semanticContext constinArgument8,
-                                                  const class GALGAS_stringset constinArgument9,
-                                                  const class GALGAS_bool constinArgument10,
-                                                  class GALGAS_semanticTemporariesStruct & ioArgument11,
-                                                  class GALGAS_staticStringMap & ioArgument12,
-                                                  class GALGAS_variableMap & ioArgument13,
-                                                  class GALGAS_localVariableMap & ioArgument14,
-                                                  class GALGAS_namedObjectMap & ioArgument15,
-                                                  class GALGAS_allocaList & ioArgument16,
-                                                  class GALGAS_instructionListIR & ioArgument17,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                           Routine 'analyzeVariableAccess'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3793,5 +3766,32 @@ class GALGAS_bigint function_panicCodeForClosedSync (class C_Compiler * inCompil
 
 class GALGAS_bigint function_panicCodeForNegativeArrayIndex (class C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Function 'panicCodeForTooLargeArrayIndex'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'llvmAttributeFunction'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmAttributeFunction (class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             Function 'modulePrefixName'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_modulePrefixName (class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 #endif

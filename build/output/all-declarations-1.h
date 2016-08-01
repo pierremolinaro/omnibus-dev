@@ -1806,7 +1806,9 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                                 COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_temporaryReference (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                        const class GALGAS_string & inOperand1
+                                                                        const class GALGAS_string & inOperand1,
+                                                                        const class GALGAS_sliceMap & inOperand2,
+                                                                        const class GALGAS_bool & inOperand3
                                                                         COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_zero (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0
@@ -1886,6 +1888,8 @@ class GALGAS_objectIR : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG void method_temporaryReference (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
                                                             class GALGAS_string & outArgument1,
+                                                            class GALGAS_sliceMap & outArgument2,
+                                                            class GALGAS_bool & outArgument3,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) const ;
 
@@ -2536,10 +2540,14 @@ class cEnumAssociatedValues_objectIR_localVariableReference : public cEnumAssoci
 class cEnumAssociatedValues_objectIR_temporaryReference : public cEnumAssociatedValues {
   public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
   public : const GALGAS_string mAssociatedValue1 ;
+  public : const GALGAS_sliceMap mAssociatedValue2 ;
+  public : const GALGAS_bool mAssociatedValue3 ;
 
 //--- Constructor
   public : cEnumAssociatedValues_objectIR_temporaryReference (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                              const GALGAS_string & inAssociatedValue1
+                                                              const GALGAS_string & inAssociatedValue1,
+                                                              const GALGAS_sliceMap & inAssociatedValue2,
+                                                              const GALGAS_bool & inAssociatedValue3
                                                               COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

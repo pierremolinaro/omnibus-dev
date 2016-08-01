@@ -19,15 +19,15 @@ section ledOn () {
 //------------------------------------------------*
 
 section ledOff () {
-  globalVar = azerty SINGLE_PIPO
-  globalVar = azerty SINGLE_PIPO.fields
-  globalVar = azerty SINGLE_PIPO.fields.shifted
-  globalVar = azerty SINGLE_PIPO.bit
-  globalBit = azerty SINGLE_PIPO.bit.bool
-  globalVar = azerty PIPO [0]
-  globalVar = azerty PIPO [7]
+  globalVar = SINGLE_PIPO
+  globalVar = SINGLE_PIPO.fields
+  globalVar = SINGLE_PIPO.fields.shifted
+  globalVar = SINGLE_PIPO.bit
+  globalBit = SINGLE_PIPO.bit.bool
+  globalVar = PIPO [0]
+  globalVar = PIPO [7]
   var idx $uint3 = 5
-  globalVar = azerty PIPO [idx]
+  globalVar = PIPO [idx]
   globalVar = PIPO [idx].fields
   var index $uint32 = 5
   globalBit = PIPO [index].bit.bool
@@ -52,7 +52,7 @@ task T1 priority 1 stackSize 512 {
     time.waitUntilMS (!deadline:self.compteur)
     ledOff ()
     self.compteur +%= 500
-    let v = azerty time.millis ()
+  //  let v = time.millis ()
   }
 }
 
