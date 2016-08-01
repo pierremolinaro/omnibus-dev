@@ -502,8 +502,8 @@ static void extensionMethod_primaryInExpressionAST_analyzeExpression (const cPtr
       break ;
     case GALGAS_primaryInExpressionAccessAST::kEnum_funcCall:
       {
-        const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall * extractPtr_9459 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall *) (enumerator_7929.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_effectiveParameterListAST extractedValue_arguments = extractPtr_9459->mAssociatedValue0 ;
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall * extractPtr_9452 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall *) (enumerator_7929.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_effectiveParameterListAST extractedValue_arguments = extractPtr_9452->mAssociatedValue0 ;
       }
       break ;
     }

@@ -233,7 +233,7 @@ override method @primaryInExpressionAST analyzeExpression
         !?ioInstructionGenerationList
         !?currentPointer
       )
-    case funcCall (@effectiveParameterListAST unused arguments) :
+    case funcCall (@effectiveParameterListAST arguments) :
 
     end
   end

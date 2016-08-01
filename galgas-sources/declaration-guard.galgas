@@ -225,6 +225,8 @@ proc guardSemanticAnalysis
       !context:inContext
       !inRoutineFormalArgumentList
       !?variableMap
+      !?namedObjectMap
+      !?localVariableMap
       !?formalArguments
     )
     convenienceGuardGenerationIR = .baseGuard
@@ -251,6 +253,8 @@ proc guardSemanticAnalysis
       !context:inContext
       !inRoutineFormalArgumentList
       !?variableMap
+      !?namedObjectMap
+      !?localVariableMap
       !?formalArguments
     )
   #--- Analyze base guard
@@ -672,9 +676,9 @@ method @guardMapIR guardCodeGeneration
         case input :
           ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
         case output :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
        case inputOutput :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
+          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
         end
       end
       ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
@@ -715,9 +719,9 @@ method @guardMapIR-element llvmCodeGeneration
     case input :
       ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"

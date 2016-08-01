@@ -167,6 +167,8 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !context:inContext
     !mProcFormalArgumentList
     !?variableMap
+    !?namedObjectMap
+    !?localVariableMap
     !?formalArguments
   )
 #--- End of variableMap
@@ -228,9 +230,9 @@ method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMco
     case input :
       ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   between
     ioLLVMcode += ", "
