@@ -13,13 +13,13 @@ register SINGLE_PIPO at 0x5000_0000 $uint32 {
 //------------------------------------------------*
 
 section ledOn () {
-  IO1CLR  = 1 << 23 // Led On
+  azerty IO1CLR  = 1 << 23 // Led On
 }
 
 //------------------------------------------------*
 
 section ledOff () {
-  globalVar = SINGLE_PIPO
+  azerty globalVar = SINGLE_PIPO
   globalVar = SINGLE_PIPO.fields
   globalVar = SINGLE_PIPO.fields.shifted
   globalVar = SINGLE_PIPO.bit
@@ -51,8 +51,9 @@ task T1 priority 1 stackSize 512 {
     self.compteur +%= 500
     time.waitUntilMS (!deadline:self.compteur)
     ledOff ()
-    self.compteur +%= 500
-  //  let v = time.millis ()
+    let x = self.compteur +% 500
+    azerty self.compteur = x
+//    self.compteur +%= 500
   }
 }
 
