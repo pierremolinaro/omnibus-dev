@@ -63,6 +63,7 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
 
 //----------- '' label
   public : virtual void nt_effective_5F_parameters_ (GALGAS_effectiveParameterListAST & outArgument0,
+                                                     GALGAS_location & outArgument1,
                                                      C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'expression' non terminal

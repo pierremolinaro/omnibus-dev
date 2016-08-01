@@ -18,7 +18,7 @@ syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
     <self_access> ?let selfLocation ?var fieldList
-    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList
+    <effective_parameters> ?let @effectiveParameterListAST effectiveParameterList ?*
     outExpression = @selfFunctionCallInExpressionAST.new {!selfLocation !fieldList !effectiveParameterList}
   }
 

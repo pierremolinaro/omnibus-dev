@@ -62,7 +62,7 @@ syntax extension common_syntax {
         end
         $identifier$ ?let name
         select
-          <effective_parameters> ?let effectiveParameterList
+          <effective_parameters> ?let effectiveParameterList ?*
           outGuardedCommand = .boolAndSync {
             !isWhileCommand:isWhileCommand
             !expression:expression
@@ -74,7 +74,7 @@ syntax extension common_syntax {
         or
           $.$
           $identifier$ ?let guardName
-          <effective_parameters> ?let effectiveParameterList
+          <effective_parameters> ?let effectiveParameterList ?*
           outGuardedCommand = .boolAndSync {
             !isWhileCommand:isWhileCommand
             !expression:expression
@@ -96,7 +96,7 @@ syntax extension common_syntax {
       end
       $identifier$ ?let name
       select
-        <effective_parameters> ?let effectiveParameterList
+        <effective_parameters> ?let effectiveParameterList ?*
         outGuardedCommand = .synchronization {
           !isWhileCommand:isWhileCommand
           !optionalReceiverName:["" here]
@@ -106,7 +106,7 @@ syntax extension common_syntax {
       or
         $.$
         $identifier$ ?let guardName
-        <effective_parameters> ?let effectiveParameterList
+        <effective_parameters> ?let effectiveParameterList ?*
         outGuardedCommand = .synchronization {
           !isWhileCommand:isWhileCommand
           !optionalReceiverName:name
