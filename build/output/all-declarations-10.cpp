@@ -10,6 +10,250 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_accessInAssignmentListAST_2D_element::GALGAS_accessInAssignmentListAST_2D_element (void) :
+mAttribute_mAccess () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessInAssignmentListAST_2D_element::~ GALGAS_accessInAssignmentListAST_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessInAssignmentListAST_2D_element::GALGAS_accessInAssignmentListAST_2D_element (const GALGAS_accessInAssignmentAST & inOperand0) :
+mAttribute_mAccess (inOperand0) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessInAssignmentListAST_2D_element GALGAS_accessInAssignmentListAST_2D_element::constructor_new (const GALGAS_accessInAssignmentAST & inOperand0 
+                                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_accessInAssignmentListAST_2D_element result ;
+  if (inOperand0.isValid ()) {
+    result = GALGAS_accessInAssignmentListAST_2D_element (inOperand0) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_accessInAssignmentListAST_2D_element::objectCompare (const GALGAS_accessInAssignmentListAST_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAttribute_mAccess.objectCompare (inOperand.mAttribute_mAccess) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_accessInAssignmentListAST_2D_element::isValid (void) const {
+  return mAttribute_mAccess.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_accessInAssignmentListAST_2D_element::drop (void) {
+  mAttribute_mAccess.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_accessInAssignmentListAST_2D_element::description (C_String & ioString,
+                                                               const int32_t inIndentation) const {
+  ioString << "<struct @accessInAssignmentListAST-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mAttribute_mAccess.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessInAssignmentAST GALGAS_accessInAssignmentListAST_2D_element::getter_mAccess (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAccess ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       @accessInAssignmentListAST-element type                                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_accessInAssignmentListAST_2D_element ("accessInAssignmentListAST-element",
+                                                             NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_accessInAssignmentListAST_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_accessInAssignmentListAST_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_accessInAssignmentListAST_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_accessInAssignmentListAST_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_accessInAssignmentListAST_2D_element GALGAS_accessInAssignmentListAST_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                        C_Compiler * inCompiler
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_accessInAssignmentListAST_2D_element result ;
+  const GALGAS_accessInAssignmentListAST_2D_element * p = (const GALGAS_accessInAssignmentListAST_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_accessInAssignmentListAST_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("accessInAssignmentListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap_2D_element::GALGAS_namedObjectMap_2D_element (void) :
+mAttribute_lkey (),
+mAttribute_mObject () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap_2D_element::~ GALGAS_namedObjectMap_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap_2D_element::GALGAS_namedObjectMap_2D_element (const GALGAS_lstring & inOperand0,
+                                                                    const GALGAS_objectIR & inOperand1) :
+mAttribute_lkey (inOperand0),
+mAttribute_mObject (inOperand1) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap_2D_element GALGAS_namedObjectMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                                    const GALGAS_objectIR & inOperand1 
+                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_namedObjectMap_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid ()) {
+    result = GALGAS_namedObjectMap_2D_element (inOperand0, inOperand1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_namedObjectMap_2D_element::objectCompare (const GALGAS_namedObjectMap_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mObject.objectCompare (inOperand.mAttribute_mObject) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_namedObjectMap_2D_element::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_mObject.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_namedObjectMap_2D_element::drop (void) {
+  mAttribute_lkey.drop () ;
+  mAttribute_mObject.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_namedObjectMap_2D_element::description (C_String & ioString,
+                                                    const int32_t inIndentation) const {
+  ioString << "<struct @namedObjectMap-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mObject.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_namedObjectMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_namedObjectMap_2D_element::getter_mObject (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mObject ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            @namedObjectMap-element type                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_namedObjectMap_2D_element ("namedObjectMap-element",
+                                                  NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_namedObjectMap_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_namedObjectMap_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_namedObjectMap_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_namedObjectMap_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_namedObjectMap_2D_element GALGAS_namedObjectMap_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_namedObjectMap_2D_element result ;
+  const GALGAS_namedObjectMap_2D_element * p = (const GALGAS_namedObjectMap_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_namedObjectMap_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("namedObjectMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_routineMapForContext_2D_element::GALGAS_routineMapForContext_2D_element (void) :
 mAttribute_lkey (),
 mAttribute_mRoutineLLVMName (),
@@ -9941,207 +10185,4 @@ static void defineExtensionMethod_registerConstantExpressionAST_noteExpressionTy
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_registerConstantExpressionAST_noteExpressionTypesInPrecedenceGraph (defineExtensionMethod_registerConstantExpressionAST_noteExpressionTypesInPrecedenceGraph, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                   Overriding extension method '@registerConstantExpressionAST analyzeExpression'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_registerConstantExpressionAST_analyzeExpression (const cPtr_expressionAST * inObject,
-                                                                             const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
-                                                                             const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
-                                                                             const GALGAS_bool constinArgument_inGuard,
-                                                                             const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
-                                                                             const GALGAS_unifiedTypeMap_2D_proxy /* constinArgument_inOptionalTargetType */,
-                                                                             const GALGAS_semanticContext constinArgument_inContext,
-                                                                             const GALGAS_stringset constinArgument_inModeSet,
-                                                                             const GALGAS_bool constinArgument_inAllowPanic,
-                                                                             GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                                             GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
-                                                                             GALGAS_variableMap & ioArgument_ioVariableMap,
-                                                                             GALGAS_namedObjectMap & ioArgument_ioNamedObjectMap,
-                                                                             GALGAS_allocaList & ioArgument_ioAllocaList,
-                                                                             GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                                             GALGAS_objectIR & outArgument_outResult,
-                                                                             C_Compiler * inCompiler
-                                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_registerConstantExpressionAST * object = (const cPtr_registerConstantExpressionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_registerConstantExpressionAST) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_registerType_4465 ;
-  GALGAS_sliceMap var_registerBitSliceMap_4525 ;
-  GALGAS_controlRegisterFieldMap var_registerFieldMap_4576 ;
-  GALGAS_bigint var_registerAddress_4616 ;
-  GALGAS_uint var_registerBitCount_4649 ;
-  GALGAS_uint var_powerOfTwoForArraySize_4688 ;
-  GALGAS_uint var_elementArraySize_4721 ;
-  GALGAS_bool joker_4471 ; // Joker input parameter
-  GALGAS_bool joker_4478 ; // Joker input parameter
-  GALGAS_controlRegisterFieldList joker_4622 ; // Joker input parameter
-  constinArgument_inContext.mAttribute_mControlRegisterMap.method_searchKey (object->mAttribute_mRegisterName, var_registerType_4465, joker_4471, joker_4478, var_registerBitSliceMap_4525, var_registerFieldMap_4576, var_registerAddress_4616, joker_4622, var_registerBitCount_4649, var_powerOfTwoForArraySize_4688, var_elementArraySize_4721, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 96)) ;
-  GALGAS_bigint var_accumulatedFieldStaticValues_4833 = GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 110)) ;
-  cEnumerator_lstringlist enumerator_4875 (object->mAttribute_mMaskFieldNames, kEnumeration_up) ;
-  while (enumerator_4875.hasCurrentObject ()) {
-    GALGAS_uint var_fieldBitIndex_4958 ;
-    GALGAS_uint var_fieldBitCount_4989 ;
-    var_registerFieldMap_4576.method_searchKey (enumerator_4875.current_mValue (HERE), var_fieldBitIndex_4958, var_fieldBitCount_4989, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 112)) ;
-    GALGAS_bigint var_mask_5008 = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 117)).left_shift_operation (var_fieldBitCount_4989 COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 117)).substract_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 117)) ;
-    var_accumulatedFieldStaticValues_4833 = var_accumulatedFieldStaticValues_4833.operator_or (var_mask_5008.left_shift_operation (var_fieldBitIndex_4958 COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 118)) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 118)) ;
-    enumerator_4875.gotoNextObject () ;
-  }
-  GALGAS_operandList var_operandList_5232 = GALGAS_operandList::constructor_emptyList (SOURCE_FILE ("expression-cst-registre.galgas", 121)) ;
-  cEnumerator_registerIntegerFieldListAST enumerator_5301 (object->mAttribute_mFieldValues, kEnumeration_up) ;
-  while (enumerator_5301.hasCurrentObject ()) {
-    GALGAS_uint var_fieldBitIndex_5384 ;
-    GALGAS_uint var_fieldBitCount_5415 ;
-    var_registerFieldMap_4576.method_searchKey (enumerator_5301.current_mFieldName (HERE), var_fieldBitIndex_5384, var_fieldBitCount_5415, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 123)) ;
-    GALGAS_objectIR var_expressionResult_6062 ;
-    callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) enumerator_5301.current_mExpression (HERE).ptr (), constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-cst-registre.galgas", 134)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult_6062, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 129)) ;
-    switch (extensionGetter_kind (var_expressionResult_6062, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 147)).enumValue ()) {
-    case GALGAS_typeKind::kNotBuilt:
-      break ;
-    case GALGAS_typeKind::kEnum_arrayType:
-      {
-        inCompiler->emitSemanticError (enumerator_5301.current_mExpressionLocation (HERE), GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 149)) ;
-      }
-      break ;
-    case GALGAS_typeKind::kEnum_opaque:
-      {
-        inCompiler->emitSemanticError (enumerator_5301.current_mExpressionLocation (HERE), GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 151)) ;
-      }
-      break ;
-    case GALGAS_typeKind::kEnum_enumeration:
-      {
-        inCompiler->emitSemanticError (enumerator_5301.current_mExpressionLocation (HERE), GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 153)) ;
-      }
-      break ;
-    case GALGAS_typeKind::kEnum_structure:
-      {
-        inCompiler->emitSemanticError (enumerator_5301.current_mExpressionLocation (HERE), GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 155)) ;
-      }
-      break ;
-    case GALGAS_typeKind::kEnum_boolean:
-      {
-        inCompiler->emitSemanticError (enumerator_5301.current_mExpressionLocation (HERE), GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 157)) ;
-      }
-      break ;
-    case GALGAS_typeKind::kEnum_literalString:
-      {
-        inCompiler->emitSemanticError (enumerator_5301.current_mExpressionLocation (HERE), GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 159)) ;
-      }
-      break ;
-    case GALGAS_typeKind::kEnum_staticInteger:
-      {
-        GALGAS_bigint var_value_6866 ;
-        GALGAS_unifiedTypeMap_2D_proxy joker_6839_1 ; // Joker input parameter
-        var_expressionResult_6062.method_literalInteger (joker_6839_1, var_value_6866, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 161)) ;
-        const enumGalgasBool test_0 = GALGAS_bool (kIsStrictInf, var_value_6866.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 162)))).boolEnum () ;
-        if (kBoolTrue == test_0) {
-          inCompiler->emitSemanticError (enumerator_5301.current_mExpressionLocation (HERE), GALGAS_string ("this integer expression should be positive")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 163)) ;
-        }else if (kBoolFalse == test_0) {
-          const enumGalgasBool test_1 = GALGAS_bool (kIsStrictInf, var_value_6866.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 164)).left_shift_operation (var_fieldBitCount_5415 COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 164)))).boolEnum () ;
-          if (kBoolTrue == test_1) {
-            var_accumulatedFieldStaticValues_4833 = var_accumulatedFieldStaticValues_4833.operator_or (var_value_6866.left_shift_operation (var_fieldBitIndex_5384 COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 165)) COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 165)) ;
-          }else if (kBoolFalse == test_1) {
-            inCompiler->emitSemanticError (enumerator_5301.current_mExpressionLocation (HERE), GALGAS_string ("expression too large (should be < ").add_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 167)).left_shift_operation (var_fieldBitCount_5415 COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 167)).getter_string (SOURCE_FILE ("expression-cst-registre.galgas", 167)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 167))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 167)) ;
-          }
-        }
-      }
-      break ;
-    case GALGAS_typeKind::kEnum_integer:
-      {
-        const cEnumAssociatedValues_typeKind_integer * extractPtr_8990 = (const cEnumAssociatedValues_typeKind_integer *) (extensionGetter_kind (var_expressionResult_6062, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 147)).unsafePointer ()) ;
-        const GALGAS_bigint extractedValue_min = extractPtr_8990->mAssociatedValue0 ;
-        const GALGAS_bigint extractedValue_max = extractPtr_8990->mAssociatedValue1 ;
-        const GALGAS_bool extractedValue_unsigned = extractPtr_8990->mAssociatedValue2 ;
-        const GALGAS_uint extractedValue_expressionBitCount = extractPtr_8990->mAssociatedValue3 ;
-        const enumGalgasBool test_2 = extractedValue_unsigned.operator_not (SOURCE_FILE ("expression-cst-registre.galgas", 170)).boolEnum () ;
-        if (kBoolTrue == test_2) {
-          inCompiler->emitSemanticError (enumerator_5301.current_mExpressionLocation (HERE), GALGAS_string ("an unsigned integer expression is required here")  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 171)) ;
-        }else if (kBoolFalse == test_2) {
-          GALGAS_bool test_3 = GALGAS_bool (kIsStrictSup, extractedValue_expressionBitCount.objectCompare (var_fieldBitCount_5415)) ;
-          if (kBoolTrue == test_3.boolEnum ()) {
-            test_3 = constinArgument_inAllowPanic.operator_not (SOURCE_FILE ("expression-cst-registre.galgas", 173)) ;
-          }
-          const enumGalgasBool test_4 = test_3.boolEnum () ;
-          if (kBoolTrue == test_4) {
-            inCompiler->emitSemanticError (enumerator_5301.current_mExpressionLocation (HERE), GALGAS_string ("operations that can generate panic are not allowed here: the expression should be an $uint").add_operation (var_fieldBitCount_5415.getter_string (SOURCE_FILE ("expression-cst-registre.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 175))  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 174)) ;
-          }
-          GALGAS_bool test_5 = GALGAS_bool (kIsStrictSup, extractedValue_expressionBitCount.objectCompare (var_fieldBitCount_5415)) ;
-          if (kBoolTrue == test_5.boolEnum ()) {
-            test_5 = constinArgument_inAllowPanic ;
-          }
-          GALGAS_bool test_6 = test_5 ;
-          if (kBoolTrue == test_6.boolEnum ()) {
-            test_6 = GALGAS_bool (gOption_plm_5F_options_noPanicGeneration.getter_value ()).operator_not (SOURCE_FILE ("expression-cst-registre.galgas", 178)) ;
-          }
-          const enumGalgasBool test_7 = test_6.boolEnum () ;
-          if (kBoolTrue == test_7) {
-            {
-            extensionSetter_appendUpperBoundCheck (ioArgument_ioInstructionGenerationList, var_expressionResult_6062, GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 181)).left_shift_operation (var_fieldBitCount_5415 COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 181)), GALGAS_uint ((uint32_t) 8U), enumerator_5301.current_mExpressionLocation (HERE), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 179)) ;
-            }
-          }
-          GALGAS_objectIR var_partialResult_8149 = var_expressionResult_6062 ;
-          const enumGalgasBool test_8 = GALGAS_bool (kIsStrictInf, extractedValue_expressionBitCount.objectCompare (var_registerBitCount_4649)).boolEnum () ;
-          if (kBoolTrue == test_8) {
-            GALGAS_objectIR var_extendedResult_8302 ;
-            {
-            routine_getNewTempVariable (var_registerType_4465, ioArgument_ioTemporaries, var_extendedResult_8302, inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 189)) ;
-            }
-            {
-            extensionSetter_appendExtend (ioArgument_ioInstructionGenerationList, var_extendedResult_8302, var_partialResult_8149, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 190)) ;
-            }
-            var_partialResult_8149 = var_extendedResult_8302 ;
-          }else if (kBoolFalse == test_8) {
-            const enumGalgasBool test_9 = GALGAS_bool (kIsStrictSup, extractedValue_expressionBitCount.objectCompare (var_registerBitCount_4649)).boolEnum () ;
-            if (kBoolTrue == test_9) {
-              GALGAS_objectIR var_truncatedResult_8568 ;
-              {
-              routine_getNewTempVariable (var_registerType_4465, ioArgument_ioTemporaries, var_truncatedResult_8568, inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 193)) ;
-              }
-              {
-              extensionSetter_appendTrunc (ioArgument_ioInstructionGenerationList, var_truncatedResult_8568, var_partialResult_8149, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 194)) ;
-              }
-              var_partialResult_8149 = var_truncatedResult_8568 ;
-            }
-          }
-          GALGAS_objectIR var_shiftedResult_8816 ;
-          {
-          routine_getNewTempVariable (var_registerType_4465, ioArgument_ioTemporaries, var_shiftedResult_8816, inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 198)) ;
-          }
-          {
-          extensionSetter_appendShiftLeft (ioArgument_ioInstructionGenerationList, var_shiftedResult_8816, var_partialResult_8149, var_fieldBitIndex_5384, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 199)) ;
-          }
-          var_operandList_5232.addAssign_operation (var_shiftedResult_8816  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 201)) ;
-        }
-      }
-      break ;
-    }
-    enumerator_5301.gotoNextObject () ;
-  }
-  outArgument_outResult = GALGAS_objectIR::constructor_literalInteger (var_registerType_4465, var_accumulatedFieldStaticValues_4833  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 206)) ;
-  cEnumerator_operandList enumerator_9185 (var_operandList_5232, kEnumeration_up) ;
-  while (enumerator_9185.hasCurrentObject ()) {
-    GALGAS_objectIR var_newResult_9257 ;
-    {
-    routine_getNewTempVariable (var_registerType_4465, ioArgument_ioTemporaries, var_newResult_9257, inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 208)) ;
-    }
-    {
-    extensionSetter_appendBinaryOperation (ioArgument_ioInstructionGenerationList, var_newResult_9257, extensionGetter_type (var_newResult_9257, inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 211)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 212)), outArgument_outResult, GALGAS_llvmBinaryOperation::constructor_ior (SOURCE_FILE ("expression-cst-registre.galgas", 214)), enumerator_9185.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("expression-cst-registre.galgas", 209)) ;
-    }
-    outArgument_outResult = var_newResult_9257 ;
-    enumerator_9185.gotoNextObject () ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_registerConstantExpressionAST_analyzeExpression (void) {
-  enterExtensionMethod_analyzeExpression (kTypeDescriptor_GALGAS_registerConstantExpressionAST.mSlotID,
-                                          extensionMethod_registerConstantExpressionAST_analyzeExpression) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_registerConstantExpressionAST_analyzeExpression (defineExtensionMethod_registerConstantExpressionAST_analyzeExpression, NULL) ;
 

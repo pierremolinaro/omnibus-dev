@@ -1,0 +1,234 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @assignmentSelfAccessAST {
+  case noSelfAccess
+  case selfAccess (@location selfLocation)
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @accessInAssignmentAST {
+  case property (@lstring name)
+  case arrayAccess (@expressionAST index @location endOfIndex)
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @accessInAssignmentListAST {
+  @accessInAssignmentAST mAccess
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+struct @assignmentTargetAST {
+  @assignmentSelfAccessAST mSelfAccess
+  @lstring mIdentifier
+  @accessInAssignmentListAST mAccessList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <assignment_target> !@assignmentTargetAST outAssignmentTargetAST {
+    $azerty$
+  #--- Self ?
+   @assignmentSelfAccessAST selfAccess
+   select
+      selfAccess = .noSelfAccess
+    or
+      $self$
+      selfAccess = .selfAccess {!selfLocation:.here}
+      $.$
+    end
+  #--- Object
+    $identifier$ ?let identifier
+  #--- Properties and subscript
+    @accessInAssignmentListAST accessListAST = {}
+    repeat
+    while
+      $.$
+      $identifier$ ?let propertyName
+      accessListAST += !.property {!name:propertyName}
+    while
+      $[$
+      <expression> ?let expression
+      let endOfIndex = @location.here
+      $]$
+      accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+    end
+  #---
+    outAssignmentTargetAST = .new {!selfAccess !identifier !accessListAST}
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @assignmentTargetAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  for (access) in mAccessList do
+    switch access
+    case property (*) :
+    case arrayAccess (@expressionAST indexExpression *) :
+      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @assignmentTargetAST analyzeAssignmentTarget
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !@objectIR outCurrentObject
+{
+#--- object access, with ou without self
+  switch mSelfAccess
+  case noSelfAccess :
+    [!?ioVariableMap searchForWriteAccess !lkey:mIdentifier
+      ?3*
+      ?objectIR:outCurrentObject
+      ?2*
+    ]
+    [outCurrentObject checkReadable]
+  case selfAccess (@location selfLocation) :
+    if inSelfType == .null then
+      error selfLocation : "'self' is not available in this context" : outCurrentObject
+    elsif [[inSelfType kind] isStructure] then
+      [[inSelfType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+      [structureObjectMap searchKey
+        !mIdentifier
+        ?let object
+      ]
+      handleSelfAccessInAssignment (
+        !inSelfType
+        !object
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+        ?outCurrentObject
+      )
+    else
+      error selfLocation : "'self' should be a structure instance" : outCurrentObject
+    end
+  end
+#--- Analyze properties, subscripts
+  for (access) in mAccessList do
+    switch access
+    case property (propertyName) :
+      handlePropertyAccessInAssignment (
+        !?outCurrentObject
+        !propertyName
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+      )
+    case arrayAccess (indexExpression endOfExpression) :
+      handleSubscriptInAssignmentAndExpression (
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:false
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !modes:inModeSet
+        !allowPanic:inAllowPanic
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?namedObjectMap: ioNamedObjectMap
+        !?alloca:ioAllocaList
+        !indexExpression
+        !endOfExpression
+        !?ioInstructionGenerationList
+        !?outCurrentObject
+      )
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc handleSelfAccessInAssignment
+  ?let @unifiedTypeMap-proxy inSelfType
+  ?let @objectIR inObject
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  !@objectIR outObjectPtr
+{
+  if [inObject isProperty] then
+    [inObject property ?type:let type ?plmName:let name ?index:let index]
+    outObjectPtr = .temporaryReference {
+      !type:type
+      !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+      !sliceMap:{}
+      !volatile:false
+    }
+    ioTemporaries.mTemporaryIndex ++
+    [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
+      !outObjectPtr
+      !inSelfType
+      !name
+      !index
+    ]
+  else
+    error .nowhere : "<<getNewTemporarySelfObjectPtr>>" : outObjectPtr
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc handlePropertyAccessInAssignment
+  ?!@objectIR ioObject
+  ?let @lstring inPropertyName
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+{
+  if [[[ioObject type] kind] isStructure] then
+    [[[ioObject type] kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+    [structureObjectMap searchKey !inPropertyName ?@objectIR property]
+    if [property isProperty] then
+      [property property ?type:let type ?plmName:let name ?index:let index]
+      let newObject = @objectIR.temporaryReference {
+        !type:type
+        !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+        !sliceMap:{}
+        !volatile:false
+      }
+      ioTemporaries.mTemporaryIndex ++
+      [!?ioInstructionGenerationList appendGetPropertyReference
+        !newObject
+        !ioObject
+        !name
+        !index
+      ]
+      ioObject = newObject
+    else
+      error inPropertyName : "<<getNewTemporarySelfObjectPtr>>" : ioObject
+    end
+  else
+    error inPropertyName : "the current object has no property" : ioObject
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

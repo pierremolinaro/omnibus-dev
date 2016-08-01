@@ -2442,33 +2442,6 @@ class GALGAS_string extensionGetter_name (const class GALGAS_objectIR & inObject
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Routine 'handleSelfAccessInAssignment'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleSelfAccessInAssignment (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                           const class GALGAS_objectIR constinArgument1,
-                                           class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                           class GALGAS_instructionListIR & ioArgument3,
-                                           class GALGAS_objectIR & outArgument4,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Routine 'handlePropertyAccessInAssignment'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handlePropertyAccessInAssignment (class GALGAS_objectIR & ioArgument0,
-                                               const class GALGAS_lstring constinArgument1,
-                                               class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                               class GALGAS_instructionListIR & ioArgument3,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                             Routine 'analyzeGuardCall'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2819,6 +2792,33 @@ void extensionSetter_appendComputeVolatileRegisterAddressWithSubscript (class GA
                                                                         const class GALGAS_bigint constin_inElementArraySize,
                                                                         class C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Routine 'handleSelfAccessInAssignment'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleSelfAccessInAssignment (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                           const class GALGAS_objectIR constinArgument1,
+                                           class GALGAS_semanticTemporariesStruct & ioArgument2,
+                                           class GALGAS_instructionListIR & ioArgument3,
+                                           class GALGAS_objectIR & outArgument4,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Routine 'handlePropertyAccessInAssignment'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handlePropertyAccessInAssignment (class GALGAS_objectIR & ioArgument0,
+                                               const class GALGAS_lstring constinArgument1,
+                                               class GALGAS_semanticTemporariesStruct & ioArgument2,
+                                               class GALGAS_instructionListIR & ioArgument3,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -4418,13 +4418,7 @@ typeComparisonResult cPtr_varAssignmentInstructionAST::dynamicObjectCompare (con
   const cPtr_varAssignmentInstructionAST * p = (const cPtr_varAssignmentInstructionAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_varAssignmentInstructionAST) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mSelfAccess.objectCompare (p->mAttribute_mSelfAccess) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mIdentifier.objectCompare (p->mAttribute_mIdentifier) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mAccessList.objectCompare (p->mAttribute_mAccessList) ;
+    result = mAttribute_mAssignmentTargetAST.objectCompare (p->mAttribute_mAssignmentTargetAST) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mSourceExpression.objectCompare (p->mAttribute_mSourceExpression) ;
@@ -4466,70 +4460,32 @@ GALGAS_instructionAST (inSourcePtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_varAssignmentInstructionAST GALGAS_varAssignmentInstructionAST::constructor_new (const GALGAS_assignmentSelfAccessAST & inAttribute_mSelfAccess,
-                                                                                        const GALGAS_lstring & inAttribute_mIdentifier,
-                                                                                        const GALGAS_accessInAssignmentListAST & inAttribute_mAccessList,
+GALGAS_varAssignmentInstructionAST GALGAS_varAssignmentInstructionAST::constructor_new (const GALGAS_assignmentTargetAST & inAttribute_mAssignmentTargetAST,
                                                                                         const GALGAS_expressionAST & inAttribute_mSourceExpression
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_varAssignmentInstructionAST result ;
-  if (inAttribute_mSelfAccess.isValid () && inAttribute_mIdentifier.isValid () && inAttribute_mAccessList.isValid () && inAttribute_mSourceExpression.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_varAssignmentInstructionAST (inAttribute_mSelfAccess, inAttribute_mIdentifier, inAttribute_mAccessList, inAttribute_mSourceExpression COMMA_THERE)) ;
+  if (inAttribute_mAssignmentTargetAST.isValid () && inAttribute_mSourceExpression.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_varAssignmentInstructionAST (inAttribute_mAssignmentTargetAST, inAttribute_mSourceExpression COMMA_THERE)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_assignmentSelfAccessAST GALGAS_varAssignmentInstructionAST::getter_mSelfAccess (UNUSED_LOCATION_ARGS) const {
-  GALGAS_assignmentSelfAccessAST result ;
+GALGAS_assignmentTargetAST GALGAS_varAssignmentInstructionAST::getter_mAssignmentTargetAST (UNUSED_LOCATION_ARGS) const {
+  GALGAS_assignmentTargetAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_varAssignmentInstructionAST * p = (const cPtr_varAssignmentInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_varAssignmentInstructionAST) ;
-    result = p->mAttribute_mSelfAccess ;
+    result = p->mAttribute_mAssignmentTargetAST ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_assignmentSelfAccessAST cPtr_varAssignmentInstructionAST::getter_mSelfAccess (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSelfAccess ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_varAssignmentInstructionAST::getter_mIdentifier (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_varAssignmentInstructionAST * p = (const cPtr_varAssignmentInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_varAssignmentInstructionAST) ;
-    result = p->mAttribute_mIdentifier ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_varAssignmentInstructionAST::getter_mIdentifier (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIdentifier ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_accessInAssignmentListAST GALGAS_varAssignmentInstructionAST::getter_mAccessList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_accessInAssignmentListAST result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_varAssignmentInstructionAST * p = (const cPtr_varAssignmentInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_varAssignmentInstructionAST) ;
-    result = p->mAttribute_mAccessList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_accessInAssignmentListAST cPtr_varAssignmentInstructionAST::getter_mAccessList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAccessList ;
+GALGAS_assignmentTargetAST cPtr_varAssignmentInstructionAST::getter_mAssignmentTargetAST (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAssignmentTargetAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4554,15 +4510,11 @@ GALGAS_expressionAST cPtr_varAssignmentInstructionAST::getter_mSourceExpression 
 //                                Pointer class for @varAssignmentInstructionAST class                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 
-cPtr_varAssignmentInstructionAST::cPtr_varAssignmentInstructionAST (const GALGAS_assignmentSelfAccessAST & in_mSelfAccess,
-                                                                    const GALGAS_lstring & in_mIdentifier,
-                                                                    const GALGAS_accessInAssignmentListAST & in_mAccessList,
+cPtr_varAssignmentInstructionAST::cPtr_varAssignmentInstructionAST (const GALGAS_assignmentTargetAST & in_mAssignmentTargetAST,
                                                                     const GALGAS_expressionAST & in_mSourceExpression
                                                                     COMMA_LOCATION_ARGS) :
 cPtr_instructionAST (THERE),
-mAttribute_mSelfAccess (in_mSelfAccess),
-mAttribute_mIdentifier (in_mIdentifier),
-mAttribute_mAccessList (in_mAccessList),
+mAttribute_mAssignmentTargetAST (in_mAssignmentTargetAST),
 mAttribute_mSourceExpression (in_mSourceExpression) {
 }
 
@@ -4575,11 +4527,7 @@ const C_galgas_type_descriptor * cPtr_varAssignmentInstructionAST::classDescript
 void cPtr_varAssignmentInstructionAST::description (C_String & ioString,
                                                     const int32_t inIndentation) const {
   ioString << "[@varAssignmentInstructionAST:" ;
-  mAttribute_mSelfAccess.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mIdentifier.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mAccessList.description (ioString, inIndentation+1) ;
+  mAttribute_mAssignmentTargetAST.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mSourceExpression.description (ioString, inIndentation+1) ;
   ioString << "]" ;
@@ -4589,7 +4537,7 @@ void cPtr_varAssignmentInstructionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_varAssignmentInstructionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_varAssignmentInstructionAST (mAttribute_mSelfAccess, mAttribute_mIdentifier, mAttribute_mAccessList, mAttribute_mSourceExpression COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_varAssignmentInstructionAST (mAttribute_mAssignmentTargetAST, mAttribute_mSourceExpression COMMA_THERE)) ;
   return ptr ;
 }
 
