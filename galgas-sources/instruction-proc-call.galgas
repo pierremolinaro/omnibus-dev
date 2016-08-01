@@ -50,8 +50,8 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-     <routine_call> ?let instructionLocation ?let @abstractCallInstructionAST call_instruction
-     ioInstructionList += !instructionLocation !call_instruction
+    <routine_call> ?let instructionLocation ?let @abstractCallInstructionAST call_instruction
+    ioInstructionList += !instructionLocation !call_instruction
   }
 
   #·····················································································································
