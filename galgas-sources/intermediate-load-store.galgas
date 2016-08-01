@@ -63,6 +63,53 @@ setter @instructionListIR appendStoreInMemory
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+setter @instructionListIR appendStoreFromReference
+  ?let @objectIR inTargetReference
+  ?let @location inErrorLocation
+  ?let @objectIR inValue
+{
+  switch inTargetReference
+#--- Temporary ?
+  case selfObject (*) :
+    error .nowhere : "<<@instructionListIR appendStoreFromReference selfObject>>"
+  case llvmGlobalObjectValue (**) :
+    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue selfObject>>"
+#--- References
+  case globalVariableReference (@unifiedTypeMap-proxy type @string plmName) :
+    [!?self appendStoreGlobalVariable !plmName !type !inValue !volatile:false]
+  case localVariableReference (@unifiedTypeMap-proxy type @string plmName) :
+    [!?self appendStoreLocalVariable !plmName !type !inValue]
+  case temporaryReference (@unifiedTypeMap-proxy type @string llvmName @sliceMap sliceMap @bool volatile) :
+    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue temporaryReference>>"
+#    [!?self appendStoreTemporaryReference !plmName !type !inValue]
+  case registerReference (type * * * address * arraySize *) :
+    if arraySize > 0 then
+      error inErrorLocation : "register array requires subscripting"
+    end
+    [!?self appendStoreVolatileRegister !type !address !inValue]
+#--- Structure property
+  case property (* * *) :
+    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue property>>"
+#--- Values
+  case llvmTemporaryValue (* * *) :
+    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue llvmTemporaryValue>>"
+  case literalInteger  (* *) :
+    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue literalInteger>>"
+  case llvmStructureConstant (* *) :
+    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue llvmStructureConstant>>"
+  case literalString  (* * *) :
+    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue literalString>>"
+  case zero (*) :
+    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue zero>>"
+  case possibleFunction (* *) :
+    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue possibleFunction>>"
+  case null :
+    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue null>>"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 setter @instructionListIR appendLoadFromReference
   ?!@semanticTemporariesStruct ioTemporaries
   ?let @objectIR inSource
@@ -131,41 +178,6 @@ setter @instructionListIR appendLoadFromReference
   case zero (*) :
     outResultingValue = inSource
   end
-  
-  
-  
-#  case registerAddress (* *) :
-#    error .nowhere : "<<@instructionListIR appendLoadFromMemory>>" : outResultingValue
-#  case register (@unifiedTypeMap-proxy type * * * @bigint address * @uint arraySize *) :
-#    if arraySize > 0 then
-#      error inErrorLocation : "register array requires subscripting" : outResultingValue
-#    else
-#      getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-#      [!?self appendLoadVolatileRegister
-#        !outResultingValue
-#        !address
-#      ]
-#    end
-#  case globalVariable (@unifiedTypeMap-proxy type @string name @bool isVolatile) :
-#    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-#    [!?self appendLoadGlobalVariable
-#      !outResultingValue
-#      !name
-#      !volatile:isVolatile
-#    ]
-#  case localVariable (@unifiedTypeMap-proxy type @string name @bool volatile) :
-#    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
-#    [!?self appendLoadLocalVariable
-#      !outResultingValue
-#      !name
-#      !volatile
-#    ]
-#  case staticConstant (@objectIR value @lstring unused name) :
-#    outResultingValue = value
-#
-#  case property (* * *) :
-#    error .nowhere : "<<@instructionListIR appendLoadFromMemory>>" : outResultingValue
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

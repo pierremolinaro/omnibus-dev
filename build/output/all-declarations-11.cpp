@@ -10,6 +10,360 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                       Overriding extension method '@primaryInExpressionAST analyzeExpression'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_primaryInExpressionAST_analyzeExpression (const cPtr_expressionAST * inObject,
+                                                                      const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                                      const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
+                                                                      const GALGAS_bool constinArgument_inGuard,
+                                                                      const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                                      const GALGAS_unifiedTypeMap_2D_proxy /* constinArgument_inOptionalTargetType */,
+                                                                      const GALGAS_semanticContext constinArgument_inContext,
+                                                                      const GALGAS_stringset constinArgument_inModeSet,
+                                                                      const GALGAS_bool constinArgument_inAllowPanic,
+                                                                      GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                      GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                      GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                      GALGAS_namedObjectMap & ioArgument_ioNamedObjectMap,
+                                                                      GALGAS_allocaList & ioArgument_ioAllocaList,
+                                                                      GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                      GALGAS_objectIR & outArgument_outResult,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_primaryInExpressionAST * object = (const cPtr_primaryInExpressionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_primaryInExpressionAST) ;
+  GALGAS_objectIR var_currentPointer_6790 ;
+  switch (object->mAttribute_mSelfAccess.enumValue ()) {
+  case GALGAS_primaryInExpressionSelfAccessAST::kNotBuilt:
+    break ;
+  case GALGAS_primaryInExpressionSelfAccessAST::kEnum_noSelfAccess:
+    {
+      const enumGalgasBool test_0 = constinArgument_inGuard.boolEnum () ;
+      if (kBoolTrue == test_0) {
+        inCompiler->emitSemanticError (object->mAttribute_mObjectName.getter_location (SOURCE_FILE ("expression-primary.galgas", 161)), GALGAS_string ("in guard, only 'self' properties may be accessed")  COMMA_SOURCE_FILE ("expression-primary.galgas", 161)) ;
+        var_currentPointer_6790.drop () ; // Release error dropped variable
+      }else if (kBoolFalse == test_0) {
+        const enumGalgasBool test_1 = ioArgument_ioVariableMap.getter_hasKey (object->mAttribute_mObjectName.getter_string (SOURCE_FILE ("expression-primary.galgas", 162)) COMMA_SOURCE_FILE ("expression-primary.galgas", 162)).boolEnum () ;
+        if (kBoolTrue == test_1) {
+          {
+          GALGAS_unifiedTypeMap_2D_proxy joker_7069_3 ; // Joker input parameter
+          GALGAS_bool joker_7069_2 ; // Joker input parameter
+          GALGAS_objectInMemoryIR joker_7069_1 ; // Joker input parameter
+          GALGAS_bool joker_7114_2 ; // Joker input parameter
+          GALGAS_bool joker_7114_1 ; // Joker input parameter
+          ioArgument_ioVariableMap.setter_searchForReadAccess (object->mAttribute_mObjectName, joker_7069_3, joker_7069_2, joker_7069_1, var_currentPointer_6790, joker_7114_2, joker_7114_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 163)) ;
+          }
+          extensionMethod_checkReadable (var_currentPointer_6790, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 168)) ;
+        }else if (kBoolFalse == test_1) {
+          var_currentPointer_6790 = GALGAS_objectIR::constructor_possibleFunction (GALGAS_objectIR::constructor_null (SOURCE_FILE ("expression-primary.galgas", 170)), object->mAttribute_mObjectName  COMMA_SOURCE_FILE ("expression-primary.galgas", 170)) ;
+        }
+      }
+    }
+    break ;
+  case GALGAS_primaryInExpressionSelfAccessAST::kEnum_selfAccess:
+    {
+      const cEnumAssociatedValues_primaryInExpressionSelfAccessAST_selfAccess * extractPtr_8174 = (const cEnumAssociatedValues_primaryInExpressionSelfAccessAST_selfAccess *) (object->mAttribute_mSelfAccess.unsafePointer ()) ;
+      const GALGAS_location extractedValue_selfLocation = extractPtr_8174->mAssociatedValue0 ;
+      const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-primary.galgas", 173)))).boolEnum () ;
+      if (kBoolTrue == test_2) {
+        inCompiler->emitSemanticError (extractedValue_selfLocation, GALGAS_string ("'self' is not available in this context")  COMMA_SOURCE_FILE ("expression-primary.galgas", 174)) ;
+        var_currentPointer_6790.drop () ; // Release error dropped variable
+      }else if (kBoolFalse == test_2) {
+        const enumGalgasBool test_3 = constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 175)).getter_isStructure (SOURCE_FILE ("expression-primary.galgas", 175)).boolEnum () ;
+        if (kBoolTrue == test_3) {
+          GALGAS_namedObjectMap var_structureObjectMap_7588 ;
+          GALGAS_propertyMap joker_7590_2 ; // Joker input parameter
+          GALGAS_propertyList joker_7590_1 ; // Joker input parameter
+          constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 176)).method_structure (var_structureObjectMap_7588, joker_7590_2, joker_7590_1, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 176)) ;
+          const enumGalgasBool test_4 = var_structureObjectMap_7588.getter_hasKey (object->mAttribute_mObjectName.getter_string (SOURCE_FILE ("expression-primary.galgas", 177)) COMMA_SOURCE_FILE ("expression-primary.galgas", 177)).boolEnum () ;
+          if (kBoolTrue == test_4) {
+            GALGAS_objectIR var_object_7731 ;
+            var_structureObjectMap_7588.method_searchKey (object->mAttribute_mObjectName, var_object_7731, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 178)) ;
+            {
+            routine_handleSelfAccessInExpression (constinArgument_inSelfType, var_object_7731, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, var_currentPointer_6790, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 182)) ;
+            }
+          }else if (kBoolFalse == test_4) {
+            var_currentPointer_6790 = GALGAS_objectIR::constructor_possibleFunction (GALGAS_objectIR::constructor_selfObject (constinArgument_inSelfType  COMMA_SOURCE_FILE ("expression-primary.galgas", 190)), object->mAttribute_mObjectName  COMMA_SOURCE_FILE ("expression-primary.galgas", 190)) ;
+          }
+        }else if (kBoolFalse == test_3) {
+          inCompiler->emitSemanticError (extractedValue_selfLocation, GALGAS_string ("'self' should be a structure instance")  COMMA_SOURCE_FILE ("expression-primary.galgas", 193)) ;
+          var_currentPointer_6790.drop () ; // Release error dropped variable
+        }
+      }
+    }
+    break ;
+  }
+  cEnumerator_primaryInExpressionAccessListAST enumerator_8227 (object->mAttribute_mAccessList, kEnumeration_up) ;
+  while (enumerator_8227.hasCurrentObject ()) {
+    switch (enumerator_8227.current_mAccess (HERE).enumValue ()) {
+    case GALGAS_primaryInExpressionAccessAST::kNotBuilt:
+      break ;
+    case GALGAS_primaryInExpressionAccessAST::kEnum_property:
+      {
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_property * extractPtr_8894 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_property *) (enumerator_8227.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_propertyName = extractPtr_8894->mAssociatedValue0 ;
+        {
+        routine_handlePropertyInExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, extractedValue_propertyName, ioArgument_ioInstructionGenerationList, var_currentPointer_6790, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 200)) ;
+        }
+      }
+      break ;
+    case GALGAS_primaryInExpressionAccessAST::kEnum_arrayAccess:
+      {
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess * extractPtr_9597 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess *) (enumerator_8227.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_9597->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfIndex = extractPtr_9597->mAssociatedValue1 ;
+        {
+        routine_handleSubscriptInExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfIndex, ioArgument_ioInstructionGenerationList, var_currentPointer_6790, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 218)) ;
+        }
+      }
+      break ;
+    case GALGAS_primaryInExpressionAccessAST::kEnum_funcCall:
+      {
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall * extractPtr_10306 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall *) (enumerator_8227.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_effectiveParameterListAST extractedValue_arguments = extractPtr_10306->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_errorLocation = extractPtr_10306->mAssociatedValue1 ;
+        {
+        routine_handleFunctionCallInExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inGuard, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, extractedValue_arguments, extractedValue_errorLocation, ioArgument_ioInstructionGenerationList, var_currentPointer_6790, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 237)) ;
+        }
+      }
+      break ;
+    }
+    enumerator_8227.gotoNextObject () ;
+  }
+  {
+  extensionSetter_appendLoadFromReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_currentPointer_6790, object->mAttribute_mObjectName.mAttribute_location, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 259)) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_primaryInExpressionAST_analyzeExpression (void) {
+  enterExtensionMethod_analyzeExpression (kTypeDescriptor_GALGAS_primaryInExpressionAST.mSlotID,
+                                          extensionMethod_primaryInExpressionAST_analyzeExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_primaryInExpressionAST_analyzeExpression (defineExtensionMethod_primaryInExpressionAST_analyzeExpression, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//              Overriding extension method '@checkInstructionAST noteInstructionTypesInPrecedenceGraph'               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_checkInstructionAST_noteInstructionTypesInPrecedenceGraph (const cPtr_instructionAST * inObject,
+                                                                                       GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_checkInstructionAST * object = (const cPtr_checkInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_checkInstructionAST) ;
+  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 37)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_checkInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
+  enterExtensionMethod_noteInstructionTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_checkInstructionAST.mSlotID,
+                                                              extensionMethod_checkInstructionAST_noteInstructionTypesInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_checkInstructionAST_noteInstructionTypesInPrecedenceGraph (defineExtensionMethod_checkInstructionAST_noteInstructionTypesInPrecedenceGraph, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Overriding extension method '@checkInstructionAST analyze'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_checkInstructionAST_analyze (const cPtr_instructionAST * inObject,
+                                                         const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                         const GALGAS_bool /* constinArgument_inRoutineCanMutateProperties */,
+                                                         const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
+                                                         const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                         const GALGAS_semanticContext constinArgument_inContext,
+                                                         const GALGAS_stringset constinArgument_inModeSet,
+                                                         const GALGAS_bool constinArgument_inAllowPanic,
+                                                         GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                         GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                         GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                         GALGAS_namedObjectMap & ioArgument_ioNamedObjectMap,
+                                                         GALGAS_allocaList & ioArgument_ioAllocaList,
+                                                         GALGAS_instructionListIR & /* ioArgument_ioInstructionGenerationList */,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_checkInstructionAST * object = (const cPtr_checkInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_checkInstructionAST) ;
+  GALGAS_instructionListIR var_instructionGenerationList_3140 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("directive-check.galgas", 60)) ;
+  GALGAS_objectIR var_expressionResult_3721 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mExpression.ptr (), constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("directive-check.galgas", 66)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, var_instructionGenerationList_3140, var_expressionResult_3721, inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 61)) ;
+  const enumGalgasBool test_0 = extensionGetter_kind (var_expressionResult_3721, inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 79)).getter_isBoolean (SOURCE_FILE ("directive-check.galgas", 79)).operator_not (SOURCE_FILE ("directive-check.galgas", 79)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    inCompiler->emitSemanticError (object->mAttribute_mCheckInstructionLocation, GALGAS_string ("expression is not boolean")  COMMA_SOURCE_FILE ("directive-check.galgas", 80)) ;
+  }
+  const enumGalgasBool test_1 = extensionGetter_isStatic (var_expressionResult_3721, inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 83)).operator_not (SOURCE_FILE ("directive-check.galgas", 83)).boolEnum () ;
+  if (kBoolTrue == test_1) {
+    inCompiler->emitSemanticError (object->mAttribute_mCheckInstructionLocation, GALGAS_string ("expression is not static: use assert instruction")  COMMA_SOURCE_FILE ("directive-check.galgas", 84)) ;
+  }else if (kBoolFalse == test_1) {
+    GALGAS_bigint var_value_4114 ;
+    GALGAS_unifiedTypeMap_2D_proxy joker_4091_1 ; // Joker input parameter
+    var_expressionResult_3721.method_literalInteger (joker_4091_1, var_value_4114, inCompiler COMMA_SOURCE_FILE ("directive-check.galgas", 86)) ;
+    const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, var_value_4114.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("directive-check.galgas", 87)))).boolEnum () ;
+    if (kBoolTrue == test_2) {
+      inCompiler->emitSemanticError (object->mAttribute_mCheckInstructionLocation, GALGAS_string ("check expression value is false")  COMMA_SOURCE_FILE ("directive-check.galgas", 88)) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_checkInstructionAST_analyze (void) {
+  enterExtensionMethod_analyze (kTypeDescriptor_GALGAS_checkInstructionAST.mSlotID,
+                                extensionMethod_checkInstructionAST_analyze) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_checkInstructionAST_analyze (defineExtensionMethod_checkInstructionAST_analyze, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//          Overriding extension method '@varAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph'           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (const cPtr_instructionAST * inObject,
+                                                                                               GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                               C_Compiler * inCompiler
+                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_varAssignmentInstructionAST * object = (const cPtr_varAssignmentInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_varAssignmentInstructionAST) ;
+  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 85)) ;
+  cEnumerator_accessInAssignmentListAST enumerator_3429 (object->mAttribute_mAccessList, kEnumeration_up) ;
+  while (enumerator_3429.hasCurrentObject ()) {
+    switch (enumerator_3429.current_mAccess (HERE).enumValue ()) {
+    case GALGAS_accessInAssignmentAST::kNotBuilt:
+      break ;
+    case GALGAS_accessInAssignmentAST::kEnum_property:
+      {
+      }
+      break ;
+    case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
+      {
+        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_3603 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_3429.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_3603->mAssociatedValue0 ;
+        callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) extractedValue_indexExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 90)) ;
+      }
+      break ;
+    }
+    enumerator_3429.gotoNextObject () ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
+  enterExtensionMethod_noteInstructionTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_varAssignmentInstructionAST.mSlotID,
+                                                              extensionMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (defineExtensionMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                         Overriding extension method '@varAssignmentInstructionAST analyze'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_varAssignmentInstructionAST_analyze (const cPtr_instructionAST * inObject,
+                                                                 const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                                 const GALGAS_bool /* constinArgument_inRoutineCanMutateProperties */,
+                                                                 const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
+                                                                 const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                                 const GALGAS_semanticContext constinArgument_inContext,
+                                                                 const GALGAS_stringset constinArgument_inModeSet,
+                                                                 const GALGAS_bool constinArgument_inAllowPanic,
+                                                                 GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                 GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                 GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                 GALGAS_namedObjectMap & ioArgument_ioNamedObjectMap,
+                                                                 GALGAS_allocaList & ioArgument_ioAllocaList,
+                                                                 GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_varAssignmentInstructionAST * object = (const cPtr_varAssignmentInstructionAST *) inObject ;
+  macroValidSharedObject (object, cPtr_varAssignmentInstructionAST) ;
+  GALGAS_objectIR var_currentObject_4807 ;
+  switch (object->mAttribute_mSelfAccess.enumValue ()) {
+  case GALGAS_assignmentSelfAccessAST::kNotBuilt:
+    break ;
+  case GALGAS_assignmentSelfAccessAST::kEnum_noSelfAccess:
+    {
+      {
+      GALGAS_unifiedTypeMap_2D_proxy joker_4918_3 ; // Joker input parameter
+      GALGAS_bool joker_4918_2 ; // Joker input parameter
+      GALGAS_objectInMemoryIR joker_4918_1 ; // Joker input parameter
+      GALGAS_bool joker_4958_2 ; // Joker input parameter
+      GALGAS_bool joker_4958_1 ; // Joker input parameter
+      ioArgument_ioVariableMap.setter_searchForWriteAccess (object->mAttribute_mIdentifier, joker_4918_3, joker_4918_2, joker_4918_1, var_currentObject_4807, joker_4958_2, joker_4958_1, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 118)) ;
+      }
+      extensionMethod_checkReadable (var_currentObject_4807, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 123)) ;
+    }
+    break ;
+  case GALGAS_assignmentSelfAccessAST::kEnum_selfAccess:
+    {
+      const cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess * extractPtr_5732 = (const cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess *) (object->mAttribute_mSelfAccess.unsafePointer ()) ;
+      const GALGAS_location extractedValue_selfLocation = extractPtr_5732->mAssociatedValue0 ;
+      const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-assignment.galgas", 125)))).boolEnum () ;
+      if (kBoolTrue == test_0) {
+        inCompiler->emitSemanticError (extractedValue_selfLocation, GALGAS_string ("'self' is not available in this context")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 126)) ;
+        var_currentObject_4807.drop () ; // Release error dropped variable
+      }else if (kBoolFalse == test_0) {
+        const enumGalgasBool test_1 = constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 127)).getter_isStructure (SOURCE_FILE ("instruction-assignment.galgas", 127)).boolEnum () ;
+        if (kBoolTrue == test_1) {
+          GALGAS_namedObjectMap var_structureObjectMap_5294 ;
+          GALGAS_propertyMap joker_5296_2 ; // Joker input parameter
+          GALGAS_propertyList joker_5296_1 ; // Joker input parameter
+          constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 128)).method_structure (var_structureObjectMap_5294, joker_5296_2, joker_5296_1, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 128)) ;
+          GALGAS_objectIR var_object_5376 ;
+          var_structureObjectMap_5294.method_searchKey (object->mAttribute_mIdentifier, var_object_5376, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 129)) ;
+          inCompiler->emitSemanticError (object->mAttribute_mIdentifier.getter_location (SOURCE_FILE ("instruction-assignment.galgas", 133)), GALGAS_string ("NOT HANDLED YET")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 133)) ;
+          var_currentObject_4807.drop () ; // Release error dropped variable
+        }else if (kBoolFalse == test_1) {
+          inCompiler->emitSemanticError (extractedValue_selfLocation, GALGAS_string ("'self' should be a structure instance")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 142)) ;
+          var_currentObject_4807.drop () ; // Release error dropped variable
+        }
+      }
+    }
+    break ;
+  }
+  GALGAS_objectIR var_sourceOperand_6365 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, extensionGetter_type (var_currentObject_4807, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 151)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperand_6365, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 146)) ;
+  GALGAS_objectIR var_result_6382 = function_checkAssignmentCompatibility (var_sourceOperand_6365, extensionGetter_type (var_currentObject_4807, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 165)), object->mAttribute_mIdentifier.getter_location (SOURCE_FILE ("instruction-assignment.galgas", 166)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 163)) ;
+  {
+  extensionSetter_appendStoreFromReference (ioArgument_ioInstructionGenerationList, var_currentObject_4807, object->mAttribute_mIdentifier.mAttribute_location, var_result_6382, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 169)) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_varAssignmentInstructionAST_analyze (void) {
+  enterExtensionMethod_analyze (kTypeDescriptor_GALGAS_varAssignmentInstructionAST.mSlotID,
+                                extensionMethod_varAssignmentInstructionAST_analyze) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_varAssignmentInstructionAST_analyze (defineExtensionMethod_varAssignmentInstructionAST_analyze, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //        Overriding extension method '@varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph'         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -289,79 +643,6 @@ static void defineExtensionMethod_letInstructionWithAssignmentAST_analyze (void)
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_letInstructionWithAssignmentAST_analyze (defineExtensionMethod_letInstructionWithAssignmentAST_analyze, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//          Overriding extension method '@varAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph'           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (const cPtr_instructionAST * inObject,
-                                                                                               GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                                               C_Compiler * inCompiler
-                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_varAssignmentInstructionAST * object = (const cPtr_varAssignmentInstructionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_varAssignmentInstructionAST) ;
-  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 40)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (void) {
-  enterExtensionMethod_noteInstructionTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_varAssignmentInstructionAST.mSlotID,
-                                                              extensionMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph (defineExtensionMethod_varAssignmentInstructionAST_noteInstructionTypesInPrecedenceGraph, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Overriding extension method '@varAssignmentInstructionAST analyze'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_varAssignmentInstructionAST_analyze (const cPtr_instructionAST * inObject,
-                                                                 const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
-                                                                 const GALGAS_bool /* constinArgument_inRoutineCanMutateProperties */,
-                                                                 const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
-                                                                 const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
-                                                                 const GALGAS_semanticContext constinArgument_inContext,
-                                                                 const GALGAS_stringset constinArgument_inModeSet,
-                                                                 const GALGAS_bool constinArgument_inAllowPanic,
-                                                                 GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                                 GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
-                                                                 GALGAS_variableMap & ioArgument_ioVariableMap,
-                                                                 GALGAS_namedObjectMap & ioArgument_ioNamedObjectMap,
-                                                                 GALGAS_allocaList & ioArgument_ioAllocaList,
-                                                                 GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_varAssignmentInstructionAST * object = (const cPtr_varAssignmentInstructionAST *) inObject ;
-  macroValidSharedObject (object, cPtr_varAssignmentInstructionAST) ;
-  GALGAS_objectInMemoryIR var_targetObjectPtr_3863 ;
-  {
-  routine_analyzeVariableWriteAccess (object->mAttribute_mAccessList, constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_targetObjectPtr_3863, inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 63)) ;
-  }
-  GALGAS_objectIR var_sourceOperand_4496 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, extensionGetter_type (var_targetObjectPtr_3863, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 86)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperand_4496, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 81)) ;
-  GALGAS_objectIR var_result_4513 = function_checkAssignmentCompatibility (var_sourceOperand_4496, extensionGetter_type (var_targetObjectPtr_3863, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 100)), object->mAttribute_mTargetErrorLocation, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 98)) ;
-  {
-  extensionSetter_appendStoreInMemory (ioArgument_ioInstructionGenerationList, var_targetObjectPtr_3863, var_result_4513, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 104)) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_varAssignmentInstructionAST_analyze (void) {
-  enterExtensionMethod_analyze (kTypeDescriptor_GALGAS_varAssignmentInstructionAST.mSlotID,
-                                extensionMethod_varAssignmentInstructionAST_analyze) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_varAssignmentInstructionAST_analyze (defineExtensionMethod_varAssignmentInstructionAST_analyze, NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2826,6 +3107,79 @@ static void defineExtensionMethod_forLowerUpperBoundInstructionIR_enterAccessibl
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_forLowerUpperBoundInstructionIR_enterAccessibleEntities (defineExtensionMethod_forLowerUpperBoundInstructionIR_enterAccessibleEntities, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//         Overriding extension method '@varAssignmentInstructionAST_EX noteInstructionTypesInPrecedenceGraph'         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_varAssignmentInstructionAST_5F_EX_noteInstructionTypesInPrecedenceGraph (const cPtr_instructionAST * inObject,
+                                                                                                     GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                                                                     C_Compiler * inCompiler
+                                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_varAssignmentInstructionAST_5F_EX * object = (const cPtr_varAssignmentInstructionAST_5F_EX *) inObject ;
+  macroValidSharedObject (object, cPtr_varAssignmentInstructionAST_5F_EX) ;
+  callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-EX.galgas", 40)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_varAssignmentInstructionAST_5F_EX_noteInstructionTypesInPrecedenceGraph (void) {
+  enterExtensionMethod_noteInstructionTypesInPrecedenceGraph (kTypeDescriptor_GALGAS_varAssignmentInstructionAST_5F_EX.mSlotID,
+                                                              extensionMethod_varAssignmentInstructionAST_5F_EX_noteInstructionTypesInPrecedenceGraph) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_varAssignmentInstructionAST_5F_EX_noteInstructionTypesInPrecedenceGraph (defineExtensionMethod_varAssignmentInstructionAST_5F_EX_noteInstructionTypesInPrecedenceGraph, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Overriding extension method '@varAssignmentInstructionAST_EX analyze'                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_varAssignmentInstructionAST_5F_EX_analyze (const cPtr_instructionAST * inObject,
+                                                                       const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                                                       const GALGAS_bool /* constinArgument_inRoutineCanMutateProperties */,
+                                                                       const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
+                                                                       const GALGAS_lstring constinArgument_inCallerNameForInvocationGraph,
+                                                                       const GALGAS_semanticContext constinArgument_inContext,
+                                                                       const GALGAS_stringset constinArgument_inModeSet,
+                                                                       const GALGAS_bool constinArgument_inAllowPanic,
+                                                                       GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                                       GALGAS_staticStringMap & ioArgument_ioGlobalLiteralStringMap,
+                                                                       GALGAS_variableMap & ioArgument_ioVariableMap,
+                                                                       GALGAS_namedObjectMap & ioArgument_ioNamedObjectMap,
+                                                                       GALGAS_allocaList & ioArgument_ioAllocaList,
+                                                                       GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_varAssignmentInstructionAST_5F_EX * object = (const cPtr_varAssignmentInstructionAST_5F_EX *) inObject ;
+  macroValidSharedObject (object, cPtr_varAssignmentInstructionAST_5F_EX) ;
+  GALGAS_objectInMemoryIR var_targetObjectPtr_3875 ;
+  {
+  routine_analyzeVariableWriteAccess (object->mAttribute_mAccessList, constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_targetObjectPtr_3875, inCompiler  COMMA_SOURCE_FILE ("instruction-assignment-EX.galgas", 63)) ;
+  }
+  GALGAS_objectIR var_sourceOperand_4508 ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, extensionGetter_type (var_targetObjectPtr_3875, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-EX.galgas", 86)), constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperand_4508, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-EX.galgas", 81)) ;
+  GALGAS_objectIR var_result_4525 = function_checkAssignmentCompatibility (var_sourceOperand_4508, extensionGetter_type (var_targetObjectPtr_3875, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-EX.galgas", 100)), object->mAttribute_mTargetErrorLocation, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-assignment-EX.galgas", 98)) ;
+  {
+  extensionSetter_appendStoreInMemory (ioArgument_ioInstructionGenerationList, var_targetObjectPtr_3875, var_result_4525, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-EX.galgas", 104)) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_varAssignmentInstructionAST_5F_EX_analyze (void) {
+  enterExtensionMethod_analyze (kTypeDescriptor_GALGAS_varAssignmentInstructionAST_5F_EX.mSlotID,
+                                extensionMethod_varAssignmentInstructionAST_5F_EX_analyze) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_varAssignmentInstructionAST_5F_EX_analyze (defineExtensionMethod_varAssignmentInstructionAST_5F_EX_analyze, NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
