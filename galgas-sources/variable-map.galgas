@@ -50,7 +50,7 @@ sharedmap @variableMap %selectors {
 #--- module
   state module {
     neutralAccess   -> module
-    readAccess      -> module error "a module cannot be read"
+    readAccess      -> module
     writeAccess     -> module error "a module cannot be written"
     readWriteAccess -> module error "a module cannot be modified"
     constMethodCall -> module

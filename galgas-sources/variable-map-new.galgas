@@ -7,8 +7,8 @@
 map @namedObjectMap {
   @objectIR mObject
 
-  insert insertKey error message "duplicated $%K (already declared at %L"
-  search searchKey error message "$%K does not exist"
+  insert insertKey error message "duplicated %K (already declared at %L)"
+  search searchKey error message "%K does not exist"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -38,6 +38,14 @@ proc initialVariableMap
       !variableKind:.globalVariable {!type:moduleType !name:moduleName.string !volatile:false}
       !copyable:false
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+    ]
+    let moduleAsVariable = @objectIR.globalVariableReference {
+      !type:moduleType
+      !plmName:moduleName
+    }
+    [!?outObjectMap insertKey
+      !moduleName
+      !moduleAsVariable
     ]
   end
 #------------------------------------------------------- Add registers

@@ -1,100 +1,4 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! @objectInMemoryIR
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-enum @objectInMemoryIR {
-  case registerAddress (@unifiedTypeMap-proxy type @string llvmName)
-  case register (@unifiedTypeMap-proxy type
-                 @lstring plmName
-                 @bool readable
-                 @bool writable
-                 @bigint address
-                 @sliceMap sliceMap
-                 @uint arraySize # 0 if not an array
-                 @uint elementSize) # 0 if not an array
-  case globalVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
-  case localVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
-  case staticConstant (@objectIR value @lstring name)
-  case property (@unifiedTypeMap-proxy type @string plmName @uint index)
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-getter @objectInMemoryIR llvmName -> @string outName {
-  switch self
-  case registerAddress (* @string llvmName) :
-    outName = llvmName
-  case register (* @lstring name * * * * * *) :
-    error name : "@objectInMemoryIR name" : outName
-  case globalVariable (* @string name *) :
-    outName = "@" + llvmNameForGlobalVariable (!name)
-  case localVariable (* @string name *) :
-    outName = "%" + llvmNameForLocalVariable (!name)
-  case staticConstant (*  @lstring name) :
-    outName = "%" + name
-  case property (* * *) :
-    error .nowhere : "<<@objectInMemoryIR llvmName>>" : outName
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-getter @objectInMemoryIR name -> @string outName {
-  switch self
-  case registerAddress (* @string llvmName) :
-    outName = llvmName
-  case register (* @lstring name * * * * * *) :
-    outName = name.string
-  case globalVariable (* @string name *) :
-    outName = name
-  case localVariable (* @string name *) :
-    outName = name
-  case staticConstant (*  @lstring name) :
-    outName = name
-  case property (* * *) :
-    error .nowhere : "<<@objectInMemoryIR name>>" : outName
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
-  switch self
-  case registerAddress (@unifiedTypeMap-proxy type *) :
-    outType = type
-  case register (@unifiedTypeMap-proxy type * * * * * * *) :
-    outType = type
-  case globalVariable (@unifiedTypeMap-proxy type * *) :
-    outType = type
-  case localVariable (@unifiedTypeMap-proxy type * *) :
-    outType = type
-  case staticConstant (@objectIR value *) :
-    outType = [value type]
-  case property (* * *) :
-    error .nowhere : "<<@objectInMemoryIR type>>" : outType
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-getter @objectInMemoryIR address -> @objectIR outOperand {
-  switch self
-  case registerAddress (* *) :
-    error .nowhere : "@objectInMemoryIR register address" : outOperand
-  case register ( * ** * * * * *) :
-    error .nowhere : "@objectInMemoryIR register address" : outOperand
-  case globalVariable (@unifiedTypeMap-proxy type @string name *) :
-    outOperand  = .llvmGlobalObjectValue {!type: type !llvmName:llvmNameForGlobalVariable (!name)}
-  case localVariable (@unifiedTypeMap-proxy type @string name *) :
-    outOperand  = .llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (!name) !sliceMap:{}}
-  case staticConstant (* *) :
-    error .nowhere : "@objectInMemoryIR globalConstantaddress" : outOperand
-  case property (* * *) :
-    error .nowhere : "<<@objectInMemoryIR address>>" : outOperand
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @objectIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -305,6 +209,102 @@ getter @objectIR isStatic -> @bool outResult {
   case llvmGlobalObjectValue (* *) : outResult = false
   case llvmStructureConstant (* *) : outResult = true
   case literalString  (* * *) : outResult = true
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! @objectInMemoryIR
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @objectInMemoryIR {
+  case registerAddress (@unifiedTypeMap-proxy type @string llvmName)
+  case register (@unifiedTypeMap-proxy type
+                 @lstring plmName
+                 @bool readable
+                 @bool writable
+                 @bigint address
+                 @sliceMap sliceMap
+                 @uint arraySize # 0 if not an array
+                 @uint elementSize) # 0 if not an array
+  case globalVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
+  case localVariable (@unifiedTypeMap-proxy type @string name @bool volatile)
+  case staticConstant (@objectIR value @lstring name)
+  case property (@unifiedTypeMap-proxy type @string plmName @uint index)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @objectInMemoryIR llvmName -> @string outName {
+  switch self
+  case registerAddress (* @string llvmName) :
+    outName = llvmName
+  case register (* @lstring name * * * * * *) :
+    error name : "@objectInMemoryIR name" : outName
+  case globalVariable (* @string name *) :
+    outName = "@" + llvmNameForGlobalVariable (!name)
+  case localVariable (* @string name *) :
+    outName = "%" + llvmNameForLocalVariable (!name)
+  case staticConstant (*  @lstring name) :
+    outName = "%" + name
+  case property (* * *) :
+    error .nowhere : "<<@objectInMemoryIR llvmName>>" : outName
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @objectInMemoryIR name -> @string outName {
+  switch self
+  case registerAddress (* @string llvmName) :
+    outName = llvmName
+  case register (* @lstring name * * * * * *) :
+    outName = name.string
+  case globalVariable (* @string name *) :
+    outName = name
+  case localVariable (* @string name *) :
+    outName = name
+  case staticConstant (*  @lstring name) :
+    outName = name
+  case property (* * *) :
+    error .nowhere : "<<@objectInMemoryIR name>>" : outName
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @objectInMemoryIR type -> @unifiedTypeMap-proxy outType {
+  switch self
+  case registerAddress (@unifiedTypeMap-proxy type *) :
+    outType = type
+  case register (@unifiedTypeMap-proxy type * * * * * * *) :
+    outType = type
+  case globalVariable (@unifiedTypeMap-proxy type * *) :
+    outType = type
+  case localVariable (@unifiedTypeMap-proxy type * *) :
+    outType = type
+  case staticConstant (@objectIR value *) :
+    outType = [value type]
+  case property (* * *) :
+    error .nowhere : "<<@objectInMemoryIR type>>" : outType
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @objectInMemoryIR address -> @objectIR outOperand {
+  switch self
+  case registerAddress (* *) :
+    error .nowhere : "@objectInMemoryIR register address" : outOperand
+  case register ( * ** * * * * *) :
+    error .nowhere : "@objectInMemoryIR register address" : outOperand
+  case globalVariable (@unifiedTypeMap-proxy type @string name *) :
+    outOperand  = .llvmGlobalObjectValue {!type: type !llvmName:llvmNameForGlobalVariable (!name)}
+  case localVariable (@unifiedTypeMap-proxy type @string name *) :
+    outOperand  = .llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (!name) !sliceMap:{}}
+  case staticConstant (* *) :
+    error .nowhere : "@objectInMemoryIR globalConstantaddress" : outOperand
+  case property (* * *) :
+    error .nowhere : "<<@objectInMemoryIR address>>" : outOperand
   end
 }
 

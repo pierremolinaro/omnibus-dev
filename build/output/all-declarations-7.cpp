@@ -741,6 +741,7 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
   "    ledOff ()\n"
   "    self.compteur +%= 500\n"
+  "    let v = azerty time.millis ()\n"
   "  }\n"
   "}\n"
   "\n"
@@ -750,7 +751,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-control-register-array.plm",
   "plm",
   true, // Text file
-  1373, // Text length
+  1407, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 

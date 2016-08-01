@@ -11471,7 +11471,7 @@ static const cMapAutomatonTransition kMapTransitions_variableMap [22 * 7] = {
   {kMapState_variableMap_inaccessibleControlRegister /* 0 */, kMapAutomatonIssueError, "the control register is inaccessible"}, // for action 'methodCall', (index 5)
   {kMapState_variableMap_inaccessibleControlRegister /* 0 */, kMapAutomatonNoIssue, ""}, // for action 'neutralAccess', (index 6)
 // State 'module', index 1 
-  {kMapState_variableMap_module /* 1 */, kMapAutomatonIssueError, "a module cannot be read"}, // for action 'readAccess', (index 0)
+  {kMapState_variableMap_module /* 1 */, kMapAutomatonNoIssue, ""}, // for action 'readAccess', (index 0)
   {kMapState_variableMap_module /* 1 */, kMapAutomatonIssueError, "a module cannot be written"}, // for action 'writeAccess', (index 1)
   {kMapState_variableMap_module /* 1 */, kMapAutomatonIssueError, "a module cannot be modified"}, // for action 'readWriteAccess', (index 2)
   {kMapState_variableMap_module /* 1 */, kMapAutomatonIssueError, "a module cannot be dropped"}, // for action 'dropAccess', (index 3)
@@ -13093,14 +13093,14 @@ void GALGAS_namedObjectMap::setter_insertKey (GALGAS_lstring inKey,
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "duplicated $%K (already declared at %L" ;
+  const char * kInsertErrorMessage = "duplicated %K (already declared at %L)" ;
   const char * kShadowErrorMessage = "" ;
   performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const char * kSearchErrorMessage_namedObjectMap_searchKey = "$%K does not exist" ;
+const char * kSearchErrorMessage_namedObjectMap_searchKey = "%K does not exist" ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
