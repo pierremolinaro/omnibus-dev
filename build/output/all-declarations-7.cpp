@@ -1598,6 +1598,9 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1-tp
   "  var a $uint32 = 0\n"
   "  var b $uint32 = 0\n"
   "}\n"
+  "struct $C {\n"
+  "  var c = $B ()\n"
+  "}\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -1634,8 +1637,11 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1-tp
   "    }\n"
   "    \n"
   "    var s = $B ()\n"
-  "//    var aa = s.a\n"
-  "//    var bb = s.b\n"
+  "    var aa = s.a\n"
+  "    var bb = s.b\n"
+  "    azerty s.a = aa\n"
+  "    var s2 = $C ()\n"
+  "    azerty s2.c.a = aa\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1645,7 +1651,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  1022, // Text length
+  1110, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
