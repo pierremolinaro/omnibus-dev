@@ -593,7 +593,7 @@ private proc handlePropertyInExpression
   ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-  ?context:let @semanticContext unused inContext
+  ?context:let @semanticContext inContext
   ?modes:let @stringset unused inModeSet
   ?allowPanic:let @bool unused inAllowPanic
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -619,40 +619,35 @@ private proc handlePropertyInExpression
     )
 #--- Integer slice
   elsif [[[ioObjectPtr type] kind] isInteger] then
-    [[[ioObjectPtr type] kind] integer
-      ?min:let unused min
-      ?max:let unused max
-      ?unsigned:let unused unsigned
-      ?bitCount:let unused bitCount
-      ?sliceMap:let sliceMap
+    let sliceMap = [ioObjectPtr sliceMap !inPropertyName.location]
+    [!?ioInstructionGenerationList appendLoadFromReference
+      !?ioTemporaries
+      !ioObjectPtr
+      !inPropertyName.location
+      ?let unused loadedRegisterValue
     ]
-    if [sliceMap count] == 0 then
-      error inPropertyName : "the current object has no property (empty slice map)" : ioObjectPtr
-    else
-      [!?ioInstructionGenerationList appendLoadFromReference
-        !?ioTemporaries
-        !ioObjectPtr
-        !inPropertyName.location
-        ?let unused loadedRegisterValue
-      ]
-      [sliceMap searchKey
-        !inPropertyName
-        ?let @llvmBinaryOperation unused accessOperator
-        ?let @bigint unused accessRightOperand
-        ?2*
- #       ?let resultObject
-      ]
-#      [!?ioInstructionGenerationList appendBinaryOperation
-#        !resultObject
-#        ![ioObjectPtr type]
-#        !inPropertyName.location
-#        !loadedRegisterValue
-#        !accessOperator
-#        !.literalInteger {!type: inContext.mLiteralIntegerType !value:accessRightOperand}
-#      ]
-#      ioObjectPtr = resultObject 
-      error inPropertyName : "INTEGER ACCESS" : ioObjectPtr
-    end
+    [sliceMap searchKey
+      !inPropertyName
+      ?let @llvmBinaryOperation accessOperator
+      ?let @bigint accessRightOperand
+      ?let @sliceMap resultSliceMap
+      ?let @unifiedTypeMap-proxy resultType
+    ]
+    let resultObject = @objectIR.llvmTemporaryValue {
+      !type:resultType
+      !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+      !sliceMap:resultSliceMap
+    }
+    ioTemporaries.mTemporaryIndex ++
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !resultObject
+      ![ioObjectPtr type]
+      !inPropertyName.location
+      !loadedRegisterValue
+      !accessOperator
+      !.literalInteger {!type: inContext.mLiteralIntegerType !value:accessRightOperand}
+    ]
+    ioObjectPtr = resultObject 
   else
     error inPropertyName : "the current object has no property" : ioObjectPtr
   end

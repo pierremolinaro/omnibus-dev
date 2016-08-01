@@ -210,7 +210,7 @@ method @controlRegisterDeclarationListAST-element controlRegisterType
 {
   outRegisterType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mRegisterTypeName}
   switch [outRegisterType kind]
-  case integer (*** bitCount *):
+  case integer (*** bitCount):
     outRegisterBitCount = bitCount
   case boolean :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount

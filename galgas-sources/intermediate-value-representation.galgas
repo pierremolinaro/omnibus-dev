@@ -176,6 +176,25 @@ getter @objectIR llvmName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+getter @objectIR sliceMap ?let @location inErrorLocation -> @sliceMap outResult {
+  switch self
+  case property (***) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
+  case globalVariableReference (**) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
+  case localVariableReference (* *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
+  case registerReference (***** sliceMap **): outResult = sliceMap
+  case zero (*) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
+  case selfObject (*) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
+  case literalInteger (* *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
+  case llvmTemporaryValue (* * sliceMap) : outResult = sliceMap
+  case llvmGlobalObjectValue (* *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
+  case temporaryReference (* *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
+  case llvmStructureConstant (* *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
+  case literalString  (* * *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 getter @objectIR type -> @unifiedTypeMap-proxy outResult {
   switch self
   case temporaryReference (@unifiedTypeMap-proxy type *) : outResult = type

@@ -2396,8 +2396,7 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : static class GALGAS_typeKind constructor_integer (const class GALGAS_bigint & inOperand0,
                                                              const class GALGAS_bigint & inOperand1,
                                                              const class GALGAS_bool & inOperand2,
-                                                             const class GALGAS_uint & inOperand3,
-                                                             const class GALGAS_sliceMap & inOperand4
+                                                             const class GALGAS_uint & inOperand3
                                                              COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_literalString (LOCATION_ARGS) ;
@@ -2434,7 +2433,6 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                  class GALGAS_bigint & outArgument1,
                                                  class GALGAS_bool & outArgument2,
                                                  class GALGAS_uint & outArgument3,
-                                                 class GALGAS_sliceMap & outArgument4,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const ;
 

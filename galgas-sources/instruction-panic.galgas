@@ -85,7 +85,7 @@ override method @panicInstructionAST analyze
      || ([result key] != staticIntegerTypeName ()) then
     error mThrowLocation : "throw expression should be a literal integer"
   else
-    [[inContext.mPanicCodeType kind] integer ?min:let min ?max:let max ?unsigned:* ?2*]
+    [[inContext.mPanicCodeType kind] integer ?min:let min ?max:let max ?unsigned:* ?1*]
     [result literalInteger ?1* ?value:let throwValue]
     if (throwValue < min) || (throwValue > max) then
       error mThrowLocation : "panic expression cannot be represented by an `" +[inContext.mPanicCodeType key]

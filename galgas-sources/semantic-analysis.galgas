@@ -17,7 +17,7 @@ func checkAssignmentCompatibility
     outResult = inSourceValue
   elsif [[[inSourceValue type] kind] isStaticInteger] && [[inTargetAnnotationType kind] isInteger] then
     [inSourceValue literalInteger ?1* ?value:let value]
-    [[inTargetAnnotationType kind] integer ?min:let minTarget ?max:let maxTarget ?3*]
+    [[inTargetAnnotationType kind] integer ?min:let minTarget ?max:let maxTarget ?2*]
     if (value < minTarget) || (maxTarget < value) then
       error inErrorLocation : "literal integer too large" : outResult
     else

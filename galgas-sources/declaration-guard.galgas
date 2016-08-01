@@ -434,7 +434,7 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
         error propertyName : "an enumeration does not handle field access" : currentType
       case arrayType (* *) :
         error propertyName : "an array does not handle field access" : currentType
-      case integer (* * * * *) :
+      case integer (* * * *) :
         error propertyName : "an integer does not handle field access" : currentType
       case structure (* @propertyMap unused propertyMap *) :
         [propertyMap searchKey !propertyName ?let public ?let propertyType ?let idx]
