@@ -21,9 +21,6 @@ project (1:0:0) -> "plm" {
 #--- Pointer
   "galgas-sources/configuration.galgas"
 
-#--- Boolset
-#  "galgas-sources/boolset-type.galgas"
-
 #--- Type declarations
   "galgas-sources/declaration-type.galgas"
   "galgas-sources/type-array.galgas"

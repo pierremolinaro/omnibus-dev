@@ -20,12 +20,20 @@ proc enterFormalArguments
   ?context:let @semanticContext inContext
   ?let @procFormalArgumentList inFormalArgumentPassingMode
   ?!@variableMap ioVariableMap
+  ?!@namedObjectMap ioNamedObjectMap
+  ?!@localVariableMap ioLocalVariableMap
   ?!@procFormalArgumentListForGeneration ioFormalArguments
 {
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
+    [!?ioNamedObjectMap insertKey
+      !formalArgumentName
+      !.localVariableReference {!type:typeProxy !plmName:formalArgumentName.string}
+    ]
+    ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     switch argumentKind
     case input :
+      [!?ioLocalVariableMap insertConstantInputFormalArgument !formalArgumentName]
       [!?ioVariableMap insertConstantInputFormalArgument
         !lkey:formalArgumentName
         !type:typeProxy
@@ -34,8 +42,8 @@ proc enterFormalArguments
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
-      ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     case inputOutput :
+      [!?ioLocalVariableMap insertInputOutputFormalArgument !formalArgumentName]
       [!?ioVariableMap insertInputOutputFormalArgument
         !lkey:formalArgumentName
         !type:typeProxy
@@ -44,8 +52,8 @@ proc enterFormalArguments
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
-      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     case output :
+      [!?ioLocalVariableMap insertOutputFormalArgument !formalArgumentName]
       [!?ioVariableMap insertOutputFormalArgument
         !lkey:formalArgumentName
         !type:typeProxy
@@ -54,7 +62,6 @@ proc enterFormalArguments
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
-      ioFormalArguments += !argumentKind !typeProxy !llvmNameForLocalVariable (!formalArgumentName.string)
     end
   end
 }
@@ -123,6 +130,8 @@ proc routineSemanticAnalysis
     !context:inContext
     !inRoutineFormalArgumentList
     !?variableMap
+    !?namedObjectMap
+    !?localVariableMap
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
@@ -281,9 +290,9 @@ method @routineMapIR-element llvmCodeGeneration
     case input :
       ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + mFormalArgumentName
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   end
   if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
