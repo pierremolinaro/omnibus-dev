@@ -96,7 +96,6 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !returnTypeName:["" nowhere]
       ?@variableMap variableMap
       ?@namedObjectMap namedObjectMap
-      ?@localVariableMap localVariableMap
     )
   #--- Self type
     let selfType = if isr.mSelfTypeName.string == "" then
@@ -118,7 +117,6 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
-      !?localVariableMap: localVariableMap
       !?namedObjectMap: namedObjectMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList

@@ -237,7 +237,6 @@ method @globalVarDeclarationList-element enterInContext
     !context:ioContext
     ?@variableMap variableMap
     ?@namedObjectMap namedObjectMap
-    ?@localVariableMap localVariableMap
   )
   [mSourceExpression analyzeExpression
      !self:.null
@@ -251,7 +250,6 @@ method @globalVarDeclarationList-element enterInContext
      !?temporary:temporaries
      !?staticStringMap:ioGlobalLiteralStringMap
      !?variableMap:variableMap
-     !?localVariableMap: localVariableMap
      !?namedObjectMap: namedObjectMap
      !?alloca:allocaList
      !?instructionListIR:instructionGenerationList

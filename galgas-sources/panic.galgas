@@ -106,7 +106,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
     ?@namedObjectMap namedObjectMap
-    ?@localVariableMap localVariableMap
   )
 #--- Insert predefined input arguments
   let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
@@ -158,7 +157,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
-    !?localVariableMap: localVariableMap
     !?namedObjectMap: namedObjectMap
     !?alloca:initAllocaList
     !?generatedCode:instructionGenerationList

@@ -52,7 +52,6 @@ override method @checkInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
@@ -71,7 +70,6 @@ override method @checkInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList

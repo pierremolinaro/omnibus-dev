@@ -147,7 +147,6 @@ override method @primaryInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -160,9 +159,6 @@ override method @primaryInExpressionAST analyzeExpression
     if inGuard then
       error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer
     elsif [ioNamedObjectMap hasKey !mObjectName] then
-      if [ioLocalVariableMap hasKey !mObjectName] then
-        [!?ioLocalVariableMap searchForReadAccess !mObjectName]
-      end
       [!?ioVariableMap searchForReadAccess !lkey:mObjectName ?5*]
       [ioNamedObjectMap searchKey
         !mObjectName
@@ -211,7 +207,6 @@ override method @primaryInExpressionAST analyzeExpression
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?localVariableMap: ioLocalVariableMap
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !propertyName
@@ -230,7 +225,6 @@ override method @primaryInExpressionAST analyzeExpression
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?localVariableMap: ioLocalVariableMap
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !indexExpression
@@ -250,7 +244,6 @@ override method @primaryInExpressionAST analyzeExpression
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?localVariableMap: ioLocalVariableMap
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !arguments
@@ -342,7 +335,6 @@ private proc handleSubscriptInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
 
@@ -363,7 +355,6 @@ private proc handleSubscriptInExpression
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca: ioAllocaList
       !inIndexExpression 
@@ -383,7 +374,6 @@ private proc handleSubscriptInExpression
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca: ioAllocaList
       !inIndexExpression 
@@ -409,7 +399,6 @@ private proc handleVariableSubscriptInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
@@ -432,7 +421,6 @@ private proc handleVariableSubscriptInExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
@@ -502,7 +490,6 @@ private proc handleRegisterArraySubscriptInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
@@ -537,7 +524,6 @@ private proc handleRegisterArraySubscriptInExpression
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -606,7 +592,6 @@ private proc handlePropertyInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
-  ?!localVariableMap:@localVariableMap unused ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap unused ioNamedObjectMap
   ?!alloca:@allocaList unused ioAllocaList
   ?let @lstring inPropertyName
@@ -677,7 +662,6 @@ private proc handleFunctionCallInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?let @effectiveParameterListAST inArguments 
@@ -706,7 +690,6 @@ private proc handleFunctionCallInExpression
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -752,7 +735,6 @@ private proc analyzeFunctionCallInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -830,7 +812,6 @@ private proc analyzeFunctionCallInExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList

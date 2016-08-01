@@ -160,7 +160,6 @@ proc initSemanticAnalysis
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
     ?@namedObjectMap namedObjectMap
-    ?@localVariableMap localVariableMap
   )
 #--- Analyze instruction list
   outInstructionGenerationList = {}
@@ -176,7 +175,6 @@ proc initSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
-    !?localVariableMap: localVariableMap
     !?namedObjectMap: namedObjectMap
     !?alloca:outAllocaList
     !?generatedCode:outInstructionGenerationList

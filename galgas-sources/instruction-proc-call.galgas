@@ -175,7 +175,6 @@ private proc analyzeStandaloneRoutineCall
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -194,7 +193,6 @@ private proc analyzeStandaloneRoutineCall
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
@@ -232,7 +230,6 @@ override method @remoteRoutineCallInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -256,7 +253,6 @@ override method @remoteRoutineCallInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -275,7 +271,6 @@ override method @remoteRoutineCallInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -368,7 +363,6 @@ override method @remoteRoutineCallInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -406,7 +400,6 @@ proc analyzeRoutineCall
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -491,7 +484,6 @@ proc analyzeRoutineCall
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
@@ -515,7 +507,6 @@ proc analyzeEffectiveParameters
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -536,7 +527,6 @@ proc analyzeEffectiveParameters
       [!?ioNamedObjectMap insertKey !name !.localVariableReference {!type:type !plmName:varLLVMName}]
       let targetVar = @objectInMemoryIR.localVariable {!type:type !name:varLLVMName !volatile:false}
       if constant then
-        [!?ioLocalVariableMap insertConstant !name]
         [!?ioVariableMap insertConstant
           !lkey:name
           !type:type
@@ -546,7 +536,6 @@ proc analyzeEffectiveParameters
           !canBeUsedAsInputParameter:true
         ]
       else
-        [!?ioLocalVariableMap insertDefinedVariable !name]
         [!?ioVariableMap insertDefinedVariable
           !lkey:name
           !type:type
@@ -562,7 +551,6 @@ proc analyzeEffectiveParameters
         !.input
         !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (!varLLVMName) !sliceMap:{}}
     case input (@lstring name) :
-      [!?ioLocalVariableMap searchForWriteAccess !name]
       [!?ioVariableMap searchForWriteAccess
         !lkey:name
         ?type:let type
@@ -597,7 +585,6 @@ proc analyzeEffectiveParameters
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?localVariableMap: ioLocalVariableMap
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
@@ -612,7 +599,6 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
       ioEffectiveParameterListIR += !.output !result
     case outputInput (@lstring name) :
-      [!?ioLocalVariableMap searchForReadWriteAccess !name]
       [!?ioVariableMap searchForReadWriteAccess
         !lkey:name
         ?type:let type

@@ -116,7 +116,6 @@ override method @typeArrayDeclaration enterInContext
     !context:ioContext
     ?@variableMap variableMap
     ?@namedObjectMap namedObjectMap
-    ?@localVariableMap localVariableMap
   )
   [mSizeExpression analyzeExpression
     !self:.null
@@ -130,7 +129,6 @@ override method @typeArrayDeclaration enterInContext
     !?temporary:temporaries
     !?staticStringMap:*
     !?variableMap:variableMap
-    !?localVariableMap: localVariableMap
     !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList

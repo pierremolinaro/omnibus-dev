@@ -85,7 +85,6 @@ proc analyzeVariableAccess
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -119,7 +118,6 @@ proc analyzeVariableAccess
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
@@ -150,7 +148,6 @@ proc analyzeVariableAccess
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?localVariableMap: ioLocalVariableMap
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
@@ -185,7 +182,6 @@ proc analyzeVariableWriteAccess
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -198,9 +194,6 @@ proc analyzeVariableWriteAccess
   @bool isCopyable
   @objectInMemoryIR variableKind
   if ([inAccessList length] == 1) && (baseElementArrayAccess == .noAccess) then
-    if [ioLocalVariableMap hasKey !baseName] then
-      [!?ioLocalVariableMap searchForWriteAccess !baseName]
-    end
     [!?ioVariableMap searchForWriteAccess
       !lkey:baseName
       ?1*
@@ -210,9 +203,6 @@ proc analyzeVariableWriteAccess
       ?1*
     ]
   else
-    if [ioLocalVariableMap hasKey !baseName] then
-      [!?ioLocalVariableMap searchForReadWriteAccess !baseName]
-    end
     [!?ioVariableMap searchForReadWriteAccess
       !lkey:baseName
       ?1*
@@ -239,7 +229,6 @@ proc analyzeVariableWriteAccess
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -259,7 +248,6 @@ proc analyzeVariableWriteAccess
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -286,7 +274,6 @@ proc analyzeRegisterWriteAccess
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -335,7 +322,6 @@ proc analyzeRegisterWriteAccess
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?localVariableMap: ioLocalVariableMap
         !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
@@ -395,7 +381,6 @@ proc analyzeVariableReadWriteAccess
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -414,7 +399,6 @@ proc analyzeVariableReadWriteAccess
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList

@@ -1313,7 +1313,6 @@ void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructi
                                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                     class GALGAS_variableMap & io_ioVariableMap,
-                                                    class GALGAS_localVariableMap & io_ioLocalVariableMap,
                                                     class GALGAS_namedObjectMap & io_ioNamedObjectMap,
                                                     class GALGAS_allocaList & io_ioAllocaList,
                                                     class GALGAS_instructionListIR & io_ioInstructionGenerationList,
@@ -1334,7 +1333,6 @@ void routine_initialVariableMap (const class GALGAS_string constinArgument0,
                                  const class GALGAS_lstring constinArgument5,
                                  class GALGAS_variableMap & outArgument6,
                                  class GALGAS_namedObjectMap & outArgument7,
-                                 class GALGAS_localVariableMap & outArgument8,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
@@ -1695,9 +1693,8 @@ typedef void (*extensionMethodSignature_abstractCallInstructionAST_baseGuardAnal
                                                                                       class GALGAS_semanticTemporariesStruct & ioArgument6,
                                                                                       class GALGAS_staticStringMap & ioArgument7,
                                                                                       class GALGAS_variableMap & ioArgument8,
-                                                                                      class GALGAS_localVariableMap & ioArgument9,
-                                                                                      class GALGAS_namedObjectMap & ioArgument10,
-                                                                                      class GALGAS_guardKindGenerationIR & outArgument11,
+                                                                                      class GALGAS_namedObjectMap & ioArgument9,
+                                                                                      class GALGAS_guardKindGenerationIR & outArgument10,
                                                                                       class C_Compiler * inCompiler
                                                                                       COMMA_LOCATION_ARGS) ;
 
@@ -1718,7 +1715,6 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_abstractCallInstruct
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                            GALGAS_variableMap & io_ioVariableMap,
-                                           GALGAS_localVariableMap & io_ioLocalVariableMap,
                                            GALGAS_namedObjectMap & io_ioNamedObjectMap,
                                            GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
                                            C_Compiler * inCompiler
@@ -1734,8 +1730,7 @@ void routine_enterFormalArguments (const class GALGAS_semanticContext constinArg
                                    const class GALGAS_procFormalArgumentList constinArgument1,
                                    class GALGAS_variableMap & ioArgument2,
                                    class GALGAS_namedObjectMap & ioArgument3,
-                                   class GALGAS_localVariableMap & ioArgument4,
-                                   class GALGAS_procFormalArgumentListForGeneration & ioArgument5,
+                                   class GALGAS_procFormalArgumentListForGeneration & ioArgument4,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -1753,9 +1748,8 @@ void routine_standaloneBaseGuardAnalyze (const class GALGAS_lstring constinArgum
                                          class GALGAS_semanticTemporariesStruct & ioArgument5,
                                          class GALGAS_staticStringMap & ioArgument6,
                                          class GALGAS_variableMap & ioArgument7,
-                                         class GALGAS_localVariableMap & ioArgument8,
-                                         class GALGAS_namedObjectMap & ioArgument9,
-                                         class GALGAS_guardKindGenerationIR & outArgument10,
+                                         class GALGAS_namedObjectMap & ioArgument8,
+                                         class GALGAS_guardKindGenerationIR & outArgument9,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -1797,11 +1791,10 @@ void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_pr
                                          class GALGAS_semanticTemporariesStruct & ioArgument10,
                                          class GALGAS_staticStringMap & ioArgument11,
                                          class GALGAS_variableMap & ioArgument12,
-                                         class GALGAS_localVariableMap & ioArgument13,
-                                         class GALGAS_namedObjectMap & ioArgument14,
-                                         class GALGAS_allocaList & ioArgument15,
-                                         class GALGAS_instructionListIR & ioArgument16,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument17,
+                                         class GALGAS_namedObjectMap & ioArgument13,
+                                         class GALGAS_allocaList & ioArgument14,
+                                         class GALGAS_instructionListIR & ioArgument15,
+                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument16,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -1890,13 +1883,12 @@ void routine_handleSubscriptInExpression (const class GALGAS_unifiedTypeMap_2D_p
                                           class GALGAS_semanticTemporariesStruct & ioArgument7,
                                           class GALGAS_staticStringMap & ioArgument8,
                                           class GALGAS_variableMap & ioArgument9,
-                                          class GALGAS_localVariableMap & ioArgument10,
-                                          class GALGAS_namedObjectMap & ioArgument11,
-                                          class GALGAS_allocaList & ioArgument12,
-                                          const class GALGAS_expressionAST constinArgument13,
-                                          const class GALGAS_location constinArgument14,
-                                          class GALGAS_instructionListIR & ioArgument15,
-                                          class GALGAS_objectIR & ioArgument16,
+                                          class GALGAS_namedObjectMap & ioArgument10,
+                                          class GALGAS_allocaList & ioArgument11,
+                                          const class GALGAS_expressionAST constinArgument12,
+                                          const class GALGAS_location constinArgument13,
+                                          class GALGAS_instructionListIR & ioArgument14,
+                                          class GALGAS_objectIR & ioArgument15,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
@@ -1926,13 +1918,12 @@ void routine_handleRegisterArraySubscriptInExpression (const class GALGAS_unifie
                                                        class GALGAS_semanticTemporariesStruct & ioArgument7,
                                                        class GALGAS_staticStringMap & ioArgument8,
                                                        class GALGAS_variableMap & ioArgument9,
-                                                       class GALGAS_localVariableMap & ioArgument10,
-                                                       class GALGAS_namedObjectMap & ioArgument11,
-                                                       class GALGAS_allocaList & ioArgument12,
-                                                       const class GALGAS_expressionAST constinArgument13,
-                                                       const class GALGAS_location constinArgument14,
-                                                       class GALGAS_instructionListIR & ioArgument15,
-                                                       class GALGAS_objectIR & ioArgument16,
+                                                       class GALGAS_namedObjectMap & ioArgument10,
+                                                       class GALGAS_allocaList & ioArgument11,
+                                                       const class GALGAS_expressionAST constinArgument12,
+                                                       const class GALGAS_location constinArgument13,
+                                                       class GALGAS_instructionListIR & ioArgument14,
+                                                       class GALGAS_objectIR & ioArgument15,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -1952,13 +1943,12 @@ void routine_handleVariableSubscriptInExpression (const class GALGAS_unifiedType
                                                   class GALGAS_semanticTemporariesStruct & ioArgument7,
                                                   class GALGAS_staticStringMap & ioArgument8,
                                                   class GALGAS_variableMap & ioArgument9,
-                                                  class GALGAS_localVariableMap & ioArgument10,
-                                                  class GALGAS_namedObjectMap & ioArgument11,
-                                                  class GALGAS_allocaList & ioArgument12,
-                                                  const class GALGAS_expressionAST constinArgument13,
-                                                  const class GALGAS_location constinArgument14,
-                                                  class GALGAS_instructionListIR & ioArgument15,
-                                                  class GALGAS_objectIR & ioArgument16,
+                                                  class GALGAS_namedObjectMap & ioArgument10,
+                                                  class GALGAS_allocaList & ioArgument11,
+                                                  const class GALGAS_expressionAST constinArgument12,
+                                                  const class GALGAS_location constinArgument13,
+                                                  class GALGAS_instructionListIR & ioArgument14,
+                                                  class GALGAS_objectIR & ioArgument15,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -2000,11 +1990,10 @@ typedef void (*extensionMethodSignature_expressionAST_analyzeExpression) (const 
                                                                           class GALGAS_semanticTemporariesStruct & ioArgument8,
                                                                           class GALGAS_staticStringMap & ioArgument9,
                                                                           class GALGAS_variableMap & ioArgument10,
-                                                                          class GALGAS_localVariableMap & ioArgument11,
-                                                                          class GALGAS_namedObjectMap & ioArgument12,
-                                                                          class GALGAS_allocaList & ioArgument13,
-                                                                          class GALGAS_instructionListIR & ioArgument14,
-                                                                          class GALGAS_objectIR & outArgument15,
+                                                                          class GALGAS_namedObjectMap & ioArgument11,
+                                                                          class GALGAS_allocaList & ioArgument12,
+                                                                          class GALGAS_instructionListIR & ioArgument13,
+                                                                          class GALGAS_objectIR & outArgument14,
                                                                           class C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -2027,7 +2016,6 @@ void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inO
                                             GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                             GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                             GALGAS_variableMap & io_ioVariableMap,
-                                            GALGAS_localVariableMap & io_ioLocalVariableMap,
                                             GALGAS_namedObjectMap & io_ioNamedObjectMap,
                                             GALGAS_allocaList & io_ioAllocaList,
                                             GALGAS_instructionListIR & io_ioInstructionGenerationList,
@@ -2079,12 +2067,11 @@ void routine_handlePropertyInExpression (const class GALGAS_unifiedTypeMap_2D_pr
                                          class GALGAS_semanticTemporariesStruct & ioArgument7,
                                          class GALGAS_staticStringMap & ioArgument8,
                                          class GALGAS_variableMap & ioArgument9,
-                                         class GALGAS_localVariableMap & ioArgument10,
-                                         class GALGAS_namedObjectMap & ioArgument11,
-                                         class GALGAS_allocaList & ioArgument12,
-                                         const class GALGAS_lstring constinArgument13,
-                                         class GALGAS_instructionListIR & ioArgument14,
-                                         class GALGAS_objectIR & ioArgument15,
+                                         class GALGAS_namedObjectMap & ioArgument10,
+                                         class GALGAS_allocaList & ioArgument11,
+                                         const class GALGAS_lstring constinArgument12,
+                                         class GALGAS_instructionListIR & ioArgument13,
+                                         class GALGAS_objectIR & ioArgument14,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -2145,13 +2132,12 @@ void routine_handleFunctionCallInExpression (const class GALGAS_unifiedTypeMap_2
                                              class GALGAS_semanticTemporariesStruct & ioArgument7,
                                              class GALGAS_staticStringMap & ioArgument8,
                                              class GALGAS_variableMap & ioArgument9,
-                                             class GALGAS_localVariableMap & ioArgument10,
-                                             class GALGAS_namedObjectMap & ioArgument11,
-                                             class GALGAS_allocaList & ioArgument12,
-                                             const class GALGAS_effectiveParameterListAST constinArgument13,
-                                             const class GALGAS_location constinArgument14,
-                                             class GALGAS_instructionListIR & ioArgument15,
-                                             class GALGAS_objectIR & ioArgument16,
+                                             class GALGAS_namedObjectMap & ioArgument10,
+                                             class GALGAS_allocaList & ioArgument11,
+                                             const class GALGAS_effectiveParameterListAST constinArgument12,
+                                             const class GALGAS_location constinArgument13,
+                                             class GALGAS_instructionListIR & ioArgument14,
+                                             class GALGAS_objectIR & ioArgument15,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -2285,16 +2271,15 @@ void routine_analyzeFunctionCallInExpression (const class GALGAS_unifiedTypeMap_
                                               class GALGAS_semanticTemporariesStruct & ioArgument10,
                                               class GALGAS_staticStringMap & ioArgument11,
                                               class GALGAS_variableMap & ioArgument12,
-                                              class GALGAS_localVariableMap & ioArgument13,
-                                              class GALGAS_namedObjectMap & ioArgument14,
-                                              class GALGAS_allocaList & ioArgument15,
-                                              class GALGAS_instructionListIR & ioArgument16,
-                                              class GALGAS_procCallEffectiveParameterListIR & outArgument17,
-                                              class GALGAS_routineKindIR & outArgument18,
+                                              class GALGAS_namedObjectMap & ioArgument13,
+                                              class GALGAS_allocaList & ioArgument14,
+                                              class GALGAS_instructionListIR & ioArgument15,
+                                              class GALGAS_procCallEffectiveParameterListIR & outArgument16,
+                                              class GALGAS_routineKindIR & outArgument17,
+                                              class GALGAS_lstring & outArgument18,
                                               class GALGAS_lstring & outArgument19,
-                                              class GALGAS_lstring & outArgument20,
-                                              class GALGAS_unifiedTypeMap_2D_proxy & outArgument21,
-                                              class GALGAS_bool & outArgument22,
+                                              class GALGAS_unifiedTypeMap_2D_proxy & outArgument20,
+                                              class GALGAS_bool & outArgument21,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
@@ -2340,11 +2325,10 @@ void routine_analyzeVariableAccess (const class GALGAS_accessList constinArgumen
                                     class GALGAS_semanticTemporariesStruct & ioArgument8,
                                     class GALGAS_staticStringMap & ioArgument9,
                                     class GALGAS_variableMap & ioArgument10,
-                                    class GALGAS_localVariableMap & ioArgument11,
-                                    class GALGAS_namedObjectMap & ioArgument12,
-                                    class GALGAS_allocaList & ioArgument13,
-                                    class GALGAS_instructionListIR & ioArgument14,
-                                    class GALGAS_objectInMemoryIR & outArgument15,
+                                    class GALGAS_namedObjectMap & ioArgument11,
+                                    class GALGAS_allocaList & ioArgument12,
+                                    class GALGAS_instructionListIR & ioArgument13,
+                                    class GALGAS_objectInMemoryIR & outArgument14,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
@@ -2368,10 +2352,9 @@ void routine_analyzeArrayElementAccess (const class GALGAS_arrayElementAccess co
                                         class GALGAS_semanticTemporariesStruct & ioArgument11,
                                         class GALGAS_staticStringMap & ioArgument12,
                                         class GALGAS_variableMap & ioArgument13,
-                                        class GALGAS_localVariableMap & ioArgument14,
-                                        class GALGAS_namedObjectMap & ioArgument15,
-                                        class GALGAS_allocaList & ioArgument16,
-                                        class GALGAS_instructionListIR & ioArgument17,
+                                        class GALGAS_namedObjectMap & ioArgument14,
+                                        class GALGAS_allocaList & ioArgument15,
+                                        class GALGAS_instructionListIR & ioArgument16,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
@@ -2417,11 +2400,10 @@ void routine_analyzeVariableWriteAccess (const class GALGAS_accessList constinAr
                                          class GALGAS_semanticTemporariesStruct & ioArgument8,
                                          class GALGAS_staticStringMap & ioArgument9,
                                          class GALGAS_variableMap & ioArgument10,
-                                         class GALGAS_localVariableMap & ioArgument11,
-                                         class GALGAS_namedObjectMap & ioArgument12,
-                                         class GALGAS_allocaList & ioArgument13,
-                                         class GALGAS_instructionListIR & ioArgument14,
-                                         class GALGAS_objectInMemoryIR & outArgument15,
+                                         class GALGAS_namedObjectMap & ioArgument11,
+                                         class GALGAS_allocaList & ioArgument12,
+                                         class GALGAS_instructionListIR & ioArgument13,
+                                         class GALGAS_objectInMemoryIR & outArgument14,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -2452,11 +2434,10 @@ void routine_analyzeRegisterWriteAccess (const class GALGAS_accessList constinAr
                                          class GALGAS_semanticTemporariesStruct & ioArgument8,
                                          class GALGAS_staticStringMap & ioArgument9,
                                          class GALGAS_variableMap & ioArgument10,
-                                         class GALGAS_localVariableMap & ioArgument11,
-                                         class GALGAS_namedObjectMap & ioArgument12,
-                                         class GALGAS_allocaList & ioArgument13,
-                                         class GALGAS_instructionListIR & ioArgument14,
-                                         class GALGAS_objectInMemoryIR & outArgument15,
+                                         class GALGAS_namedObjectMap & ioArgument11,
+                                         class GALGAS_allocaList & ioArgument12,
+                                         class GALGAS_instructionListIR & ioArgument13,
+                                         class GALGAS_objectInMemoryIR & outArgument14,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -2492,12 +2473,11 @@ void routine_analyzeVariableReadWriteAccess (const class GALGAS_accessList const
                                              class GALGAS_semanticTemporariesStruct & ioArgument9,
                                              class GALGAS_staticStringMap & ioArgument10,
                                              class GALGAS_variableMap & ioArgument11,
-                                             class GALGAS_localVariableMap & ioArgument12,
-                                             class GALGAS_namedObjectMap & ioArgument13,
-                                             class GALGAS_allocaList & ioArgument14,
-                                             class GALGAS_instructionListIR & ioArgument15,
-                                             class GALGAS_objectInMemoryIR & outArgument16,
-                                             class GALGAS_string & outArgument17,
+                                             class GALGAS_namedObjectMap & ioArgument12,
+                                             class GALGAS_allocaList & ioArgument13,
+                                             class GALGAS_instructionListIR & ioArgument14,
+                                             class GALGAS_objectInMemoryIR & outArgument15,
+                                             class GALGAS_string & outArgument16,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -2519,11 +2499,10 @@ void routine_analyzeSelfAccess (const class GALGAS_fieldList constinArgument0,
                                 class GALGAS_semanticTemporariesStruct & ioArgument9,
                                 class GALGAS_staticStringMap & ioArgument10,
                                 class GALGAS_variableMap & ioArgument11,
-                                class GALGAS_localVariableMap & ioArgument12,
-                                class GALGAS_namedObjectMap & ioArgument13,
-                                class GALGAS_allocaList & ioArgument14,
-                                class GALGAS_instructionListIR & ioArgument15,
-                                class GALGAS_objectInMemoryIR & outArgument16,
+                                class GALGAS_namedObjectMap & ioArgument12,
+                                class GALGAS_allocaList & ioArgument13,
+                                class GALGAS_instructionListIR & ioArgument14,
+                                class GALGAS_objectInMemoryIR & outArgument15,
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
 
@@ -2557,12 +2536,11 @@ void routine_analyzeGuardCall (const class GALGAS_unifiedTypeMap_2D_proxy consti
                                class GALGAS_semanticTemporariesStruct & ioArgument8,
                                class GALGAS_staticStringMap & ioArgument9,
                                class GALGAS_variableMap & ioArgument10,
-                               class GALGAS_localVariableMap & ioArgument11,
-                               class GALGAS_namedObjectMap & ioArgument12,
-                               class GALGAS_allocaList & ioArgument13,
-                               class GALGAS_instructionListIR & ioArgument14,
-                               class GALGAS_procCallEffectiveParameterListIR & outArgument15,
-                               class GALGAS_lstring & outArgument16,
+                               class GALGAS_namedObjectMap & ioArgument11,
+                               class GALGAS_allocaList & ioArgument12,
+                               class GALGAS_instructionListIR & ioArgument13,
+                               class GALGAS_procCallEffectiveParameterListIR & outArgument14,
+                               class GALGAS_lstring & outArgument15,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 
@@ -2594,10 +2572,9 @@ void routine_analyzeStandaloneRoutineCall (const class GALGAS_lstring constinArg
                                            class GALGAS_semanticTemporariesStruct & ioArgument9,
                                            class GALGAS_staticStringMap & ioArgument10,
                                            class GALGAS_variableMap & ioArgument11,
-                                           class GALGAS_localVariableMap & ioArgument12,
-                                           class GALGAS_namedObjectMap & ioArgument13,
-                                           class GALGAS_allocaList & ioArgument14,
-                                           class GALGAS_instructionListIR & ioArgument15,
+                                           class GALGAS_namedObjectMap & ioArgument12,
+                                           class GALGAS_allocaList & ioArgument13,
+                                           class GALGAS_instructionListIR & ioArgument14,
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
@@ -2731,16 +2708,15 @@ void routine_analyzeRoutineCall (const class GALGAS_unifiedTypeMap_2D_proxy cons
                                  class GALGAS_semanticTemporariesStruct & ioArgument10,
                                  class GALGAS_staticStringMap & ioArgument11,
                                  class GALGAS_variableMap & ioArgument12,
-                                 class GALGAS_localVariableMap & ioArgument13,
-                                 class GALGAS_namedObjectMap & ioArgument14,
-                                 class GALGAS_allocaList & ioArgument15,
-                                 class GALGAS_instructionListIR & ioArgument16,
-                                 class GALGAS_procCallEffectiveParameterListIR & outArgument17,
-                                 class GALGAS_routineKindIR & outArgument18,
+                                 class GALGAS_namedObjectMap & ioArgument13,
+                                 class GALGAS_allocaList & ioArgument14,
+                                 class GALGAS_instructionListIR & ioArgument15,
+                                 class GALGAS_procCallEffectiveParameterListIR & outArgument16,
+                                 class GALGAS_routineKindIR & outArgument17,
+                                 class GALGAS_lstring & outArgument18,
                                  class GALGAS_lstring & outArgument19,
-                                 class GALGAS_lstring & outArgument20,
-                                 class GALGAS_unifiedTypeMap_2D_proxy & outArgument21,
-                                 class GALGAS_bool & outArgument22,
+                                 class GALGAS_unifiedTypeMap_2D_proxy & outArgument20,
+                                 class GALGAS_bool & outArgument21,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
@@ -2845,7 +2821,6 @@ class GALGAS_string function_functionResultVariableName (class C_Compiler * inCo
 void routine_variableMapWithConstants (const class GALGAS_semanticContext constinArgument0,
                                        class GALGAS_variableMap & outArgument1,
                                        class GALGAS_namedObjectMap & outArgument2,
-                                       class GALGAS_localVariableMap & outArgument3,
                                        class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 

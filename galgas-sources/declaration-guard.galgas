@@ -200,7 +200,6 @@ proc guardSemanticAnalysis
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
     ?@namedObjectMap namedObjectMap
-    ?@localVariableMap localVariableMap
   )
   @procFormalArgumentListForGeneration formalArguments = {}
   @guardKindGenerationIR convenienceGuardGenerationIR
@@ -212,7 +211,6 @@ proc guardSemanticAnalysis
     let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
     let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
     allocaList += !resultVarName.string !resultType
-    [!?localVariableMap insertOutputFormalArgument !resultVarName]
     [!?variableMap insertOutputFormalArgument
       !lkey:resultVarName
       !type:resultType
@@ -232,7 +230,6 @@ proc guardSemanticAnalysis
       !inRoutineFormalArgumentList
       !?variableMap
       !?namedObjectMap
-      !?localVariableMap
       !?formalArguments
     )
     convenienceGuardGenerationIR = .baseGuard
@@ -248,7 +245,6 @@ proc guardSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
-      !?localVariableMap: localVariableMap
       !?namedObjectMap: namedObjectMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
@@ -260,7 +256,6 @@ proc guardSemanticAnalysis
       !inRoutineFormalArgumentList
       !?variableMap
       !?namedObjectMap
-      !?localVariableMap
       !?formalArguments
     )
   #--- Analyze base guard
@@ -275,7 +270,6 @@ proc guardSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
-      !?localVariableMap: localVariableMap
       !?namedObjectMap: namedObjectMap
       ?convenienceGuardGenerationIR
     ]
@@ -291,7 +285,6 @@ proc guardSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
-      !?localVariableMap: localVariableMap
       !?namedObjectMap: namedObjectMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
@@ -329,7 +322,6 @@ abstract method @abstractCallInstructionAST baseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 
@@ -344,7 +336,6 @@ private proc standaloneBaseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
@@ -391,7 +382,6 @@ private proc standaloneBaseGuardAnalyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:baseGuardAllocaList
     !?instructionListIR:baseGuardInstructionGenerationList
@@ -418,7 +408,6 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
@@ -498,7 +487,6 @@ override method @unifiedSelfCallInstructionAST baseGuardAnalyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList
@@ -526,7 +514,6 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
@@ -545,7 +532,6 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       ?outConvenienceGuardGenerationIR
     )
@@ -562,7 +548,6 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -612,7 +597,6 @@ override method @remoteRoutineCallInstructionAST baseGuardAnalyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList

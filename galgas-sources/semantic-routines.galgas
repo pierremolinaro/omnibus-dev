@@ -21,7 +21,6 @@ proc enterFormalArguments
   ?let @procFormalArgumentList inFormalArgumentPassingMode
   ?!@variableMap ioVariableMap
   ?!@namedObjectMap ioNamedObjectMap
-  ?!@localVariableMap ioLocalVariableMap
   ?!@procFormalArgumentListForGeneration ioFormalArguments
 {
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
@@ -33,7 +32,6 @@ proc enterFormalArguments
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     switch argumentKind
     case input :
-      [!?ioLocalVariableMap insertConstantInputFormalArgument !formalArgumentName]
       [!?ioVariableMap insertConstantInputFormalArgument
         !lkey:formalArgumentName
         !type:typeProxy
@@ -43,7 +41,6 @@ proc enterFormalArguments
         !canBeUsedAsInputParameter:true
       ]
     case inputOutput :
-      [!?ioLocalVariableMap insertInputOutputFormalArgument !formalArgumentName]
       [!?ioVariableMap insertInputOutputFormalArgument
         !lkey:formalArgumentName
         !type:typeProxy
@@ -53,7 +50,6 @@ proc enterFormalArguments
         !canBeUsedAsInputParameter:true
       ]
     case output :
-      [!?ioLocalVariableMap insertOutputFormalArgument !formalArgumentName]
       [!?ioVariableMap insertOutputFormalArgument
         !lkey:formalArgumentName
         !type:typeProxy
@@ -122,7 +118,6 @@ proc routineSemanticAnalysis
     !returnTypeName:inReturnTypeName
     ?@variableMap variableMap
     ?@namedObjectMap namedObjectMap
-    ?@localVariableMap localVariableMap
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
@@ -131,7 +126,6 @@ proc routineSemanticAnalysis
     !inRoutineFormalArgumentList
     !?variableMap
     !?namedObjectMap
-    !?localVariableMap
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
@@ -155,7 +149,6 @@ proc routineSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
-    !?localVariableMap: localVariableMap
     !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?generatedCode:instructionGenerationList
