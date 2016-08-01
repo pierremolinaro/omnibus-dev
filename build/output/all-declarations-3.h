@@ -4637,14 +4637,6 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
                                  const GALGAS_string inArgument2,
                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'op_assign' non terminal
-//--- 'parse' label
-  public : virtual void nt_op_5F_assign_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_op_5F_assign_ (GALGAS_operatorAssignKind & outArgument0,
-                                          C_Lexique_plm_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'primary' non terminal
 //--- 'parse' label
   public : virtual void nt_primary_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -4948,8 +4940,6 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
   public : virtual int32_t select_common_5F_syntax_92 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_common_5F_syntax_93 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_common_5F_syntax_94 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

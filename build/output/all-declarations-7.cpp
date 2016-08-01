@@ -652,13 +652,13 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "//------------------------------------------------*\n"
   "\n"
   "section ledOn () {\n"
-  "  IO1CLR  = 1 << 23 // Led On\n"
+  "  zzz IO1CLR  = 1 << 23 // Led On\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
   "section ledOff () {\n"
-  "  IO1SET  = 1 << 23 // Led Off\n"
+  "  zzz IO1SET  = 1 << 23 // Led Off\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -668,10 +668,10 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
   "    ledOn ()\n"
-  "    self.compteur +%= 500\n"
-  "    time.waitUntilMS (!deadline:self.compteur)\n"
+  "    zzz self.compteur +%= 500\n"
+  "    time. waitUntilMS (!deadline:self.compteur)\n"
   "    ledOff ()\n"
-  "    self.compteur +%= 500\n"
+  "    zzz self.compteur +%= 500\n"
   "  }\n"
   "}\n"
   "\n"
@@ -681,7 +681,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  586, // Text length
+  603, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
@@ -797,7 +797,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\
   "  \n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
   "    leds.write (!on:LED_L0)\n"
-  "    self.compteur +%= 500\n"
+  "    azerty self.compteur +%= 500\n"
   "    time.waitUntilMS (!deadline: self.compteur)\n"
   "    leds.write (!off:LED_L0)\n"
   "    self.compteur +%= 500\n"
@@ -813,7 +813,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  697, // Text length
+  704, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

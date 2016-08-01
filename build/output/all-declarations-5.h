@@ -2442,31 +2442,6 @@ class GALGAS_string extensionGetter_name (const class GALGAS_objectIR & inObject
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             Routine 'analyzeGuardCall'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeGuardCall (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                               const class GALGAS_lstring constinArgument1,
-                               const class GALGAS_lstring constinArgument2,
-                               const class GALGAS_effectiveParameterListAST constinArgument3,
-                               const class GALGAS_lstring constinArgument4,
-                               const class GALGAS_semanticContext constinArgument5,
-                               const class GALGAS_stringset constinArgument6,
-                               const class GALGAS_bool constinArgument7,
-                               class GALGAS_semanticTemporariesStruct & ioArgument8,
-                               class GALGAS_staticStringMap & ioArgument9,
-                               class GALGAS_variableMap & ioArgument10,
-                               class GALGAS_namedObjectMap & ioArgument11,
-                               class GALGAS_allocaList & ioArgument12,
-                               class GALGAS_instructionListIR & ioArgument13,
-                               class GALGAS_procCallEffectiveParameterListIR & outArgument14,
-                               class GALGAS_lstring & outArgument15,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                       Routine 'analyzeStandaloneRoutineCall'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2703,6 +2678,31 @@ class GALGAS_string extensionGetter_requiredActualPassingModeForSelector (const 
                                                                           class GALGAS_string inArgument0,
                                                                           class C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             Routine 'analyzeGuardCall'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_analyzeGuardCall (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                               const class GALGAS_lstring constinArgument1,
+                               const class GALGAS_lstring constinArgument2,
+                               const class GALGAS_effectiveParameterListAST constinArgument3,
+                               const class GALGAS_lstring constinArgument4,
+                               const class GALGAS_semanticContext constinArgument5,
+                               const class GALGAS_stringset constinArgument6,
+                               const class GALGAS_bool constinArgument7,
+                               class GALGAS_semanticTemporariesStruct & ioArgument8,
+                               class GALGAS_staticStringMap & ioArgument9,
+                               class GALGAS_variableMap & ioArgument10,
+                               class GALGAS_namedObjectMap & ioArgument11,
+                               class GALGAS_allocaList & ioArgument12,
+                               class GALGAS_instructionListIR & ioArgument13,
+                               class GALGAS_procCallEffectiveParameterListIR & outArgument14,
+                               class GALGAS_lstring & outArgument15,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

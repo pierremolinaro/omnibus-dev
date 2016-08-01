@@ -37,7 +37,7 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <assignment_target> !@assignmentTargetAST outAssignmentTargetAST {
-    $azerty$
+    $zzz$
   #--- Self ?
    @assignmentSelfAccessAST selfAccess
    select
