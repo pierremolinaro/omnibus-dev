@@ -8513,20 +8513,63 @@ void routine_handleSelfAccessInAssignment (const GALGAS_unifiedTypeMap_2D_proxy 
                                            C_Compiler * inCompiler
                                            COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outObjectPtr.drop () ; // Release 'out' argument
-  const enumGalgasBool test_0 = constinArgument_inObject.getter_isProperty (SOURCE_FILE ("instruction-assignment.galgas", 180)).boolEnum () ;
+  const enumGalgasBool test_0 = constinArgument_inObject.getter_isProperty (SOURCE_FILE ("instruction-assignment.galgas", 194)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_unifiedTypeMap_2D_proxy var_type_7001 ;
-    GALGAS_string var_name_7019 ;
-    GALGAS_uint var_index_7036 ;
-    constinArgument_inObject.method_property (var_type_7001, var_name_7019, var_index_7036, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 181)) ;
-    outArgument_outObjectPtr = GALGAS_objectIR::constructor_temporaryReference (var_type_7001, GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("instruction-assignment.galgas", 184)), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 184)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("instruction-assignment.galgas", 185)), GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 182)) ;
-    ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 188)) ;
+    GALGAS_unifiedTypeMap_2D_proxy var_type_7415 ;
+    GALGAS_string var_name_7433 ;
+    GALGAS_uint var_index_7450 ;
+    constinArgument_inObject.method_property (var_type_7415, var_name_7433, var_index_7450, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 195)) ;
+    outArgument_outObjectPtr = GALGAS_objectIR::constructor_temporaryReference (var_type_7415, GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("instruction-assignment.galgas", 198)), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 198)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("instruction-assignment.galgas", 199)), GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 196)) ;
+    ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 202)) ;
     {
-    extensionSetter_appendPropertyReferenceFromSelf (ioArgument_ioInstructionGenerationList, outArgument_outObjectPtr, constinArgument_inSelfType, var_name_7019, var_index_7036, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 189)) ;
+    extensionSetter_appendPropertyReferenceFromSelf (ioArgument_ioInstructionGenerationList, outArgument_outObjectPtr, constinArgument_inSelfType, var_name_7433, var_index_7450, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 203)) ;
     }
   }else if (kBoolFalse == test_0) {
-    inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 196)), GALGAS_string ("<<getNewTemporarySelfObjectPtr>>")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 196)) ;
+    inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 210)), GALGAS_string ("<<getNewTemporarySelfObjectPtr>>")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 210)) ;
     outArgument_outObjectPtr.drop () ; // Release error dropped variable
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Routine 'handlePropertyAccessInAssignment'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handlePropertyAccessInAssignment (GALGAS_objectIR & ioArgument_ioObject,
+                                               const GALGAS_lstring constinArgument_inPropertyName,
+                                               GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                               GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                               C_Compiler * inCompiler
+                                               COMMA_UNUSED_LOCATION_ARGS) {
+  const enumGalgasBool test_0 = extensionGetter_type (ioArgument_ioObject, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 222)).getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 222)).getter_isStructure (SOURCE_FILE ("instruction-assignment.galgas", 222)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_namedObjectMap var_structureObjectMap_8327 ;
+    GALGAS_propertyMap joker_8329_2 ; // Joker input parameter
+    GALGAS_propertyList joker_8329_1 ; // Joker input parameter
+    extensionGetter_type (ioArgument_ioObject, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 223)).getter_kind (inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 223)).method_structure (var_structureObjectMap_8327, joker_8329_2, joker_8329_1, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 223)) ;
+    GALGAS_objectIR var_property_8402 ;
+    var_structureObjectMap_8327.method_searchKey (constinArgument_inPropertyName, var_property_8402, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 224)) ;
+    const enumGalgasBool test_1 = var_property_8402.getter_isProperty (SOURCE_FILE ("instruction-assignment.galgas", 225)).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      GALGAS_unifiedTypeMap_2D_proxy var_type_8477 ;
+      GALGAS_string var_name_8495 ;
+      GALGAS_uint var_index_8512 ;
+      var_property_8402.method_property (var_type_8477, var_name_8495, var_index_8512, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 226)) ;
+      GALGAS_objectIR var_newObject_8533 = GALGAS_objectIR::constructor_temporaryReference (var_type_8477, GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("instruction-assignment.galgas", 229)), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 229)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("instruction-assignment.galgas", 230)), GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 227)) ;
+      ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 233)) ;
+      {
+      extensionSetter_appendGetPropertyReference (ioArgument_ioInstructionGenerationList, var_newObject_8533, ioArgument_ioObject, var_name_8495, var_index_8512.getter_string (SOURCE_FILE ("instruction-assignment.galgas", 238)), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 234)) ;
+      }
+      ioArgument_ioObject = var_newObject_8533 ;
+    }else if (kBoolFalse == test_1) {
+      inCompiler->emitSemanticError (constinArgument_inPropertyName.getter_location (SOURCE_FILE ("instruction-assignment.galgas", 242)), GALGAS_string ("<<getNewTemporarySelfObjectPtr>>")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 242)) ;
+      ioArgument_ioObject.drop () ; // Release error dropped variable
+    }
+  }else if (kBoolFalse == test_0) {
+    inCompiler->emitSemanticError (constinArgument_inPropertyName.getter_location (SOURCE_FILE ("instruction-assignment.galgas", 245)), GALGAS_string ("the current object has no property")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 245)) ;
+    ioArgument_ioObject.drop () ; // Release error dropped variable
   }
 }
 
@@ -11169,74 +11212,4 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForNegativeArrayIndex (
                                                                                 & kTypeDescriptor_GALGAS_bigint,
                                                                                 0,
                                                                                 functionArgs_panicCodeForNegativeArrayIndex) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                   Once function 'panicCodeForTooLargeArrayIndex'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_bigint onceFunction_panicCodeForTooLargeArrayIndex (C_Compiler * inCompiler
-                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint result_outResult ; // Returned variable
-  result_outResult = GALGAS_bigint ("15", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 39)) ;
-//---
-  return result_outResult ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function implementation                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static bool gOnceFunctionResultAvailable_panicCodeForTooLargeArrayIndex = false ;
-static GALGAS_bigint gOnceFunctionResult_panicCodeForTooLargeArrayIndex ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * inCompiler
-              COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_panicCodeForTooLargeArrayIndex) {
-    gOnceFunctionResult_panicCodeForTooLargeArrayIndex = onceFunction_panicCodeForTooLargeArrayIndex (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_panicCodeForTooLargeArrayIndex = true ;
-  }
-  return gOnceFunctionResult_panicCodeForTooLargeArrayIndex ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void releaseOnceFunctionResult_panicCodeForTooLargeArrayIndex (void) {
-  gOnceFunctionResult_panicCodeForTooLargeArrayIndex.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForTooLargeArrayIndex (NULL,
-                                                                            releaseOnceFunctionResult_panicCodeForTooLargeArrayIndex) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_panicCodeForTooLargeArrayIndex [1] = {
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_panicCodeForTooLargeArrayIndex (C_Compiler * inCompiler,
-                                                                               const cObjectArray & /* inEffectiveParameterArray */,
-                                                                               const GALGAS_location & /* inErrorLocation */
-                                                                               COMMA_LOCATION_ARGS) {
-  return function_panicCodeForTooLargeArrayIndex (inCompiler COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_panicCodeForTooLargeArrayIndex ("panicCodeForTooLargeArrayIndex",
-                                                                                functionWithGenericHeader_panicCodeForTooLargeArrayIndex,
-                                                                                & kTypeDescriptor_GALGAS_bigint,
-                                                                                0,
-                                                                                functionArgs_panicCodeForTooLargeArrayIndex) ;
 

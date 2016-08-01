@@ -8,6 +8,9 @@ struct $B {
   var a $uint32 = 0
   var b $uint32 = 0
 }
+struct $C {
+  var c = $B ()
+}
 
 //------------------------------------------------*
 
@@ -44,8 +47,11 @@ task T priority 12 stackSize 512 {
     }
     
     var s = $B ()
-//    var aa = s.a
-//    var bb = s.b
+    var aa = s.a
+    var bb = s.b
+    azerty s.a = aa
+    var s2 = $C ()
+    azerty s2.c.a = aa
   }
 }
 

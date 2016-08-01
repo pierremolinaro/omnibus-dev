@@ -141,6 +141,20 @@ override method @varAssignmentInstructionAST analyze
       error selfLocation : "'self' should be a structure instance" : currentObject
     end
   end
+#--- Analyze properties, subscripts
+  for (access) in mAccessList do
+    switch access
+    case property (propertyName) :
+      handlePropertyAccessInAssignment (
+        !?currentObject
+        !propertyName
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+      )
+    case arrayAccess (indexExpression endOfExpression) :
+      error endOfExpression : "NOT HANDLED YET" : currentObject
+    end
+  end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
@@ -194,6 +208,41 @@ private proc handleSelfAccessInAssignment
     ]
   else
     error .nowhere : "<<getNewTemporarySelfObjectPtr>>" : outObjectPtr
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+private proc handlePropertyAccessInAssignment
+  ?!@objectIR ioObject
+  ?let @lstring inPropertyName
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+{
+  if [[[ioObject type] kind] isStructure] then
+    [[[ioObject type] kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+    [structureObjectMap searchKey !inPropertyName ?@objectIR property]
+    if [property isProperty] then
+      [property property ?type:let type ?plmName:let name ?index:let index]
+      let newObject = @objectIR.temporaryReference {
+        !type:type
+        !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+        !sliceMap:{}
+        !volatile:false
+      }
+      ioTemporaries.mTemporaryIndex ++
+      [!?ioInstructionGenerationList appendGetPropertyReference
+        !newObject
+        !ioObject
+        !name
+        !index
+      ]
+      ioObject = newObject
+    else
+      error inPropertyName : "<<getNewTemporarySelfObjectPtr>>" : ioObject
+    end
+  else
+    error inPropertyName : "the current object has no property" : ioObject
   end
 }
 
