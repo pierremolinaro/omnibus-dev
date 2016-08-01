@@ -79,8 +79,9 @@ setter @instructionListIR appendStoreFromReference
     [!?self appendStoreGlobalVariable !plmName !type !inValue !volatile:false]
   case localVariableReference (@unifiedTypeMap-proxy type @string plmName) :
     [!?self appendStoreLocalVariable !plmName !type !inValue]
-  case temporaryReference (@unifiedTypeMap-proxy type @string llvmName @sliceMap sliceMap @bool volatile) :
-    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue temporaryReference>>"
+  case temporaryReference (@unifiedTypeMap-proxy type @string llvmName * @bool volatile) :
+    [!?self appendStoreTemporaryReference !type !llvmName !inValue !volatile:volatile]
+#    error .nowhere : "<<@instructionListIR llvmGlobalObjectValue temporaryReference>>"
 #    [!?self appendStoreTemporaryReference !plmName !type !inValue]
   case registerReference (type * * * address * arraySize *) :
     if arraySize > 0 then

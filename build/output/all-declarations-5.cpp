@@ -8501,6 +8501,38 @@ void routine_analyzeArrayElementAccess (const GALGAS_arrayElementAccess constinA
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                       Routine 'handleSelfAccessInAssignment'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleSelfAccessInAssignment (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                           const GALGAS_objectIR constinArgument_inObject,
+                                           GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                           GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                           GALGAS_objectIR & outArgument_outObjectPtr,
+                                           C_Compiler * inCompiler
+                                           COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outObjectPtr.drop () ; // Release 'out' argument
+  const enumGalgasBool test_0 = constinArgument_inObject.getter_isProperty (SOURCE_FILE ("instruction-assignment.galgas", 180)).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    GALGAS_unifiedTypeMap_2D_proxy var_type_7001 ;
+    GALGAS_string var_name_7019 ;
+    GALGAS_uint var_index_7036 ;
+    constinArgument_inObject.method_property (var_type_7001, var_name_7019, var_index_7036, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 181)) ;
+    outArgument_outObjectPtr = GALGAS_objectIR::constructor_temporaryReference (var_type_7001, GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("instruction-assignment.galgas", 184)), inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 184)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("instruction-assignment.galgas", 185)), GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 182)) ;
+    ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 188)) ;
+    {
+    extensionSetter_appendPropertyReferenceFromSelf (ioArgument_ioInstructionGenerationList, outArgument_outObjectPtr, constinArgument_inSelfType, var_name_7019, var_index_7036, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 189)) ;
+    }
+  }else if (kBoolFalse == test_0) {
+    inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("instruction-assignment.galgas", 196)), GALGAS_string ("<<getNewTemporarySelfObjectPtr>>")  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 196)) ;
+    outArgument_outObjectPtr.drop () ; // Release error dropped variable
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             Routine 'analyzeGuardCall'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

@@ -11,6 +11,19 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                  Extension method '@controlRegisterDeclarationListAST-element controlRegisterType'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_controlRegisterType (const class GALGAS_controlRegisterDeclarationListAST_2D_element inObject,
+                                          class GALGAS_semanticContext & io_ioContext,
+                                          class GALGAS_unifiedTypeMap_2D_proxy & out_outRegisterType,
+                                          class GALGAS_uint & out_outRegisterBitCount,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                            Extension method '@infixOperatorMap checkBinaryOperationWith'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
