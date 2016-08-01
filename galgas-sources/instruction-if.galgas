@@ -129,7 +129,6 @@ override method @ifInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -147,7 +146,6 @@ override method @ifInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
@@ -161,7 +159,6 @@ override method @ifInstructionAST analyze
     error mTestExpressionEndLocation : "test expression type should not be static"
   end
   [!?ioVariableMap openOverrideForSelectBlock]
-  [!?ioLocalVariableMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
   var namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
   @instructionListIR thenInstructionGenerationList = {}
@@ -177,7 +174,6 @@ override method @ifInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: namedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:thenInstructionGenerationList
@@ -197,13 +193,11 @@ override method @ifInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: namedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:elseInstructionGenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_if_instruction]
-  [!?ioLocalVariableMap closeOverride !mEndOf_if_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@ifInstructionIR.new {
     !testResult

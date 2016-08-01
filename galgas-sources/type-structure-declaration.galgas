@@ -265,7 +265,6 @@ override method @structureDeclaration enterInContext
         !?temporary:temporaries
         !?staticStringMap:*
         !?variableMap:*
-        !?localVariableMap:*
         !?namedObjectMap:*
         !?alloca:allocaList
         !?instructionListIR:initInstructionGenerationList

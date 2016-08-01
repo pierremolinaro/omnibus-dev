@@ -103,7 +103,6 @@ override method @globalConstantDeclaration enterInContext
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
     ?@namedObjectMap namedObjectMap
-    ?@localVariableMap localVariableMap
   )
   log mConstantName
 #--- Get destination type
@@ -129,7 +128,6 @@ override method @globalConstantDeclaration enterInContext
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
-    !?localVariableMap: localVariableMap
     !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList

@@ -234,7 +234,6 @@ method @taskVarListAST-element enterInContext
     !context:ioContext
     ?@variableMap variableMap
     ?@namedObjectMap namedObjectMap
-    ?@localVariableMap localVariableMap
   )
   [mVarInitExpression analyzeExpression
     !self:.null
@@ -248,7 +247,6 @@ method @taskVarListAST-element enterInContext
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
-    !?localVariableMap: localVariableMap
     !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList

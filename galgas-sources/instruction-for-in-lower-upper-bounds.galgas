@@ -80,7 +80,6 @@ override method @forLowerUpperBoundInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -115,7 +114,6 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -133,7 +131,6 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -158,8 +155,6 @@ override method @forLowerUpperBoundInstructionAST analyze
     ioAllocaList += !enumeratedVarLLVMName !type
   #--- Analyze instruction list
     [!?ioVariableMap openOverrideForRepeatBlock]
-    [!?ioLocalVariableMap openOverrideForRepeatBlock]
-    [!?ioLocalVariableMap insertUsedConstant !mVarName]
     var namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
     [!?namedObjectMap insertKey !mVarName !.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}]
     [!?ioVariableMap insertUsedConstant
@@ -183,13 +178,11 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: namedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:instructionGenerationList
     ]
     [!?ioVariableMap closeOverride !mEndOf_do_instruction]
-    [!?ioLocalVariableMap closeOverride !mEndOf_do_instruction]
   #--- Code generation
     ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR.new {
       !enumeratedVarLLVMName

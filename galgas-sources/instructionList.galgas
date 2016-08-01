@@ -65,7 +65,6 @@ abstract method @instructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -84,14 +83,12 @@ method @instructionListAST analyzeBranchInstructionList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Begin branch
   [!?ioVariableMap openBranch]
-  [!?ioLocalVariableMap openBranch]
   for () in self do
     [!?ioInstructionGenerationList appendSourceLineComment !mInstructionLocation]
     [mInstruction analyze 
@@ -105,7 +102,6 @@ method @instructionListAST analyzeBranchInstructionList
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
@@ -114,7 +110,6 @@ method @instructionListAST analyzeBranchInstructionList
 #--- End branch
 #  [ioVariableMap deinitTopLevelVariables]
   [!?ioVariableMap closeBranch !inEndOfInstructionList]
-  [!?ioLocalVariableMap closeBranch !inEndOfInstructionList]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -130,7 +125,6 @@ method @instructionListAST analyzeRoutineInstructionList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
@@ -148,7 +142,6 @@ method @instructionListAST analyzeRoutineInstructionList
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?localVariableMap: ioLocalVariableMap
       !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList

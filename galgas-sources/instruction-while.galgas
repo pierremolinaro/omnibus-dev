@@ -80,7 +80,6 @@ override method @whileInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -99,7 +98,6 @@ override method @whileInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:testInstructionGenerationList
@@ -115,7 +113,6 @@ override method @whileInstructionAST analyze
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [!?ioVariableMap openOverrideForRepeatBlock]
-  [!?ioLocalVariableMap openOverrideForRepeatBlock]
   var namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
   [mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
@@ -129,13 +126,11 @@ override method @whileInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: namedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_while_instruction]
-  [!?ioLocalVariableMap closeOverride !mEndOf_while_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@whileInstructionIR.new {
     ![mEndOf_test_expression locationIndex]

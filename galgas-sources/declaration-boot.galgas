@@ -87,7 +87,6 @@ method @bootList-element bootSemanticAnalysis
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
     ?@namedObjectMap namedObjectMap
-    ?@localVariableMap localVariableMap
   )
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
@@ -103,7 +102,6 @@ method @bootList-element bootSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
-    !?localVariableMap: localVariableMap
     !?namedObjectMap: namedObjectMap
     !?alloca:bootAllocaList
     !?generatedCode:instructionGenerationList

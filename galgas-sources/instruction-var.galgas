@@ -91,7 +91,6 @@ override method @varInstructionWithAssignmentAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -113,7 +112,6 @@ override method @varInstructionWithAssignmentAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?localVariableMap: ioLocalVariableMap
     !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
@@ -142,7 +140,6 @@ override method @varInstructionWithAssignmentAST analyze
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
   ]
-  [!?ioLocalVariableMap insertDefinedVariable !mVarName]
   let targetObject = @objectIR.localVariableReference {!type:[result type] !plmName:varName}
   [!?ioNamedObjectMap insertKey
     !mVarName
@@ -170,7 +167,6 @@ override method @varInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!localVariableMap:@localVariableMap ioLocalVariableMap
   ?!namedObjectMap:@namedObjectMap unused ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
@@ -184,7 +180,6 @@ override method @varInstructionAST analyze
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
   let targetVar = @objectInMemoryIR.localVariable {!type:targetType !name:varLLVMName !volatile:false}
-  [!?ioLocalVariableMap insertUndefinedVariable !mVarName]
   [!?ioVariableMap insertUndefinedVariable
     !lkey:mVarName
     !type:targetType
