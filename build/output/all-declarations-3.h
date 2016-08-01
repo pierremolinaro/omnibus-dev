@@ -4413,6 +4413,14 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
                                     GALGAS_accessList & outArgument1,
                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'assignment_target' non terminal
+//--- 'parse' label
+  public : virtual void nt_assignment_5F_target_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_assignment_5F_target_ (GALGAS_assignmentTargetAST & outArgument0,
+                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'declaration' non terminal
 //--- 'parse' label
   public : virtual void nt_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
