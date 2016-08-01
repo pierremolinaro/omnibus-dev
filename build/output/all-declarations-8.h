@@ -711,6 +711,19 @@ void extensionSetter_appendStoreInMemory (class GALGAS_instructionListIR & ioObj
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                           Extension setter '@instructionListIR appendStoreFromReference'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendStoreFromReference (class GALGAS_instructionListIR & ioObject,
+                                               const class GALGAS_objectIR constin_inTargetReference,
+                                               const class GALGAS_location constin_inErrorLocation,
+                                               const class GALGAS_objectIR constin_inValue,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Extension setter '@instructionListIR appendLoadStructureConstant'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

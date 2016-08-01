@@ -2,9 +2,30 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @assignmentSelfAccessAST {
+  case noSelfAccess
+  case selfAccess (@location selfLocation)
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @accessInAssignmentAST {
+  case property (@lstring name)
+  case arrayAccess (@expressionAST index @location endOfIndex)
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @accessInAssignmentListAST {
+  @accessInAssignmentAST mAccess
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 class @varAssignmentInstructionAST : @instructionAST {
-  @accessList mAccessList
-  @location mTargetErrorLocation
+  @assignmentSelfAccessAST mSelfAccess
+  @lstring mIdentifier
+  @accessInAssignmentListAST mAccessList
   @expressionAST mSourceExpression
 }
 
@@ -17,15 +38,39 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
-    <access> ?let instructionLocation ?let @accessList accessList
-    let targetErrorLocation = @location.here
+    $azerty$
+  #--- Self ?
+    @assignmentSelfAccessAST selfAccess
+    select
+      selfAccess = .noSelfAccess
+    or
+      $self$
+      selfAccess = .selfAccess {!selfLocation:.here}
+      $.$
+    end
+  #--- Object
+    $identifier$ ?let objectName
+  #--- Properties and subscript
+    @accessInAssignmentListAST accessListAST = {}
+    repeat
+    while
+      $.$
+      $identifier$ ?let propertyName
+      accessListAST += !.property {!name:propertyName}
+    while
+      $[$
+      <expression> ?let expression
+      let endOfIndex = @location.here
+      $]$
+      accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+    end
+  #--- Source expression
     $=$
-    <expression> ?let @expressionAST expression
-    ioInstructionList += !instructionLocation !@varAssignmentInstructionAST.new {
-      !accessList
-      !targetErrorLocation
-      !expression
-    }
+    <expression> ?let sourceExpression
+  #--- AST
+    ioInstructionList +=
+      !objectName.location
+      !@varAssignmentInstructionAST.new {!selfAccess !objectName !accessListAST !sourceExpression}
   }
 
   #·····················································································································
@@ -38,6 +83,13 @@ syntax extension common_syntax {
 
 override method @varAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  for (access) in mAccessList do
+    switch access
+    case property (*) :
+    case arrayAccess (@expressionAST indexExpression *) :
+      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    end
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -59,31 +111,44 @@ override method @varAssignmentInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Get target type
-  analyzeVariableWriteAccess (
-    !fieldList:mAccessList
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?namedObjectMap: ioNamedObjectMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?resultPtr:let @objectInMemoryIR targetObjectPtr
-  )
+#--- object access, with ou without self
+  @objectIR currentObject
+  switch mSelfAccess
+  case noSelfAccess :
+    [!?ioVariableMap searchForWriteAccess !lkey:mIdentifier
+      ?3*
+      ?objectIR:currentObject
+      ?2*
+    ]
+    [currentObject checkReadable]
+  case selfAccess (@location selfLocation) :
+    if inSelfType == .null then
+      error selfLocation : "'self' is not available in this context" : currentObject
+    elsif [[inSelfType kind] isStructure] then
+      [[inSelfType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+      [structureObjectMap searchKey
+        !mIdentifier
+        ?let object
+      ]
+      error mIdentifier : "NOT HANDLED YET" : currentObject
+#        handleSelfAccessInExpression (
+#          !inSelfType
+#          !object
+#          !?ioTemporaries
+#          !?ioInstructionGenerationList
+#          ?currentPointer
+#        )
+    else
+      error selfLocation : "'self' should be a structure instance" : currentObject
+    end
+  end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:[targetObjectPtr type]
+    !optionalTargetType:[currentObject type]
     !context:inContext
     !modes:inModeSet
     !allowPanic:inAllowPanic
@@ -97,11 +162,11 @@ override method @varAssignmentInstructionAST analyze
   ]
   let result = checkAssignmentCompatibility (
     !source:sourceOperand
-    !targetAnnotationType:[targetObjectPtr type]
-    !errorLocation:mTargetErrorLocation
+    !targetAnnotationType:[currentObject type]
+    !errorLocation:mIdentifier
     !staticTypeAllowed:false
   )
-  [!?ioInstructionGenerationList appendStoreInMemory !targetObjectPtr !result]
+  [!?ioInstructionGenerationList appendStoreFromReference !currentObject !mIdentifier.location !result]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
