@@ -789,15 +789,15 @@ proc analyzeEffectiveParameters
         case integer (* * * *) :
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
         case structure (* @propertyMap propertyMap *) :
-          [propertyMap searchKey !name ?let unused public ?let type ?let idx]
-          getNewTempVariable (!type !name !?ioTemporaries ?let fieldObjectReference)
+          [propertyMap searchKey !name ?let unused public ?let propertyObject ?let idx]
+          getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
           [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
             !fieldObjectReference
             !inSelfType
             !name
             !idx
           ]        
-          parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
+          parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![propertyObject type]
           ioEffectiveParameterListIR +=
             !.outputInput
             !fieldObjectReference

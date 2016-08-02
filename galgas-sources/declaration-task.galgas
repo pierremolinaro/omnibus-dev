@@ -269,7 +269,12 @@ method @taskVarListAST-element enterInContext
   if not [[result type] instantiable] then
     error mVarName : "$" + [result key] + " type is not instanciable"
   end
-  [!?ioPropertyMap insertKey !mVarName !false ![result type] ![ioPropertyList length]]
+  [!?ioPropertyMap insertKey
+    !mVarName
+    !false
+    !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
+    ![ioPropertyList length]
+  ]
   ioInitialValueList += !result
   [!?ioObjectMap insertKey
     !mVarName

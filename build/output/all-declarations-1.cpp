@@ -1902,26 +1902,26 @@ GALGAS_propertyList GALGAS_propertyList::extractObject (const GALGAS_object & in
 
 cMapElement_propertyMap::cMapElement_propertyMap (const GALGAS_lstring & inKey,
                                                   const GALGAS_bool & in_mIsPublic,
-                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy,
+                                                  const GALGAS_objectIR & in_mPropertyObject,
                                                   const GALGAS_uint & in_mIndex
                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mAttribute_mIsPublic (in_mIsPublic),
-mAttribute_mTypeProxy (in_mTypeProxy),
+mAttribute_mPropertyObject (in_mPropertyObject),
 mAttribute_mIndex (in_mIndex) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_propertyMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mIsPublic.isValid () && mAttribute_mTypeProxy.isValid () && mAttribute_mIndex.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mIsPublic.isValid () && mAttribute_mPropertyObject.isValid () && mAttribute_mIndex.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_propertyMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_propertyMap (mAttribute_lkey, mAttribute_mIsPublic, mAttribute_mTypeProxy, mAttribute_mIndex COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_propertyMap (mAttribute_lkey, mAttribute_mIsPublic, mAttribute_mPropertyObject, mAttribute_mIndex COMMA_HERE)) ;
   return result ;
 }
 
@@ -1934,8 +1934,8 @@ void cMapElement_propertyMap::description (C_String & ioString, const int32_t in
   mAttribute_mIsPublic.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mTypeProxy" ":" ;
-  mAttribute_mTypeProxy.description (ioString, inIndentation) ;
+  ioString << "mPropertyObject" ":" ;
+  mAttribute_mPropertyObject.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mIndex" ":" ;
@@ -1951,7 +1951,7 @@ typeComparisonResult cMapElement_propertyMap::compare (const cCollectionElement 
     result = mAttribute_mIsPublic.objectCompare (operand->mAttribute_mIsPublic) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mTypeProxy.objectCompare (operand->mAttribute_mTypeProxy) ;
+    result = mAttribute_mPropertyObject.objectCompare (operand->mAttribute_mPropertyObject) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mIndex.objectCompare (operand->mAttribute_mIndex) ;
@@ -2008,7 +2008,7 @@ GALGAS_propertyMap GALGAS_propertyMap::getter_overriddenMap (C_Compiler * inComp
 
 void GALGAS_propertyMap::addAssign_operation (const GALGAS_lstring & inKey,
                                               const GALGAS_bool & inArgument0,
-                                              const GALGAS_unifiedTypeMap_2D_proxy & inArgument1,
+                                              const GALGAS_objectIR & inArgument1,
                                               const GALGAS_uint & inArgument2,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
@@ -2026,7 +2026,7 @@ void GALGAS_propertyMap::addAssign_operation (const GALGAS_lstring & inKey,
 
 void GALGAS_propertyMap::setter_insertKey (GALGAS_lstring inKey,
                                            GALGAS_bool inArgument0,
-                                           GALGAS_unifiedTypeMap_2D_proxy inArgument1,
+                                           GALGAS_objectIR inArgument1,
                                            GALGAS_uint inArgument2,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
@@ -2048,7 +2048,7 @@ const char * kSearchErrorMessage_propertyMap_searchKey = "there is no '%K' prope
 
 void GALGAS_propertyMap::method_searchKey (GALGAS_lstring inKey,
                                            GALGAS_bool & outArgument0,
-                                           GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
+                                           GALGAS_objectIR & outArgument1,
                                            GALGAS_uint & outArgument2,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) const {
@@ -2063,7 +2063,7 @@ void GALGAS_propertyMap::method_searchKey (GALGAS_lstring inKey,
   }else{
     macroValidSharedObject (p, cMapElement_propertyMap) ;
     outArgument0 = p->mAttribute_mIsPublic ;
-    outArgument1 = p->mAttribute_mTypeProxy ;
+    outArgument1 = p->mAttribute_mPropertyObject ;
     outArgument2 = p->mAttribute_mIndex ;
   }
 }
@@ -2085,15 +2085,15 @@ GALGAS_bool GALGAS_propertyMap::getter_mIsPublicForKey (const GALGAS_string & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_propertyMap::getter_mTypeProxyForKey (const GALGAS_string & inKey,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) const {
+GALGAS_objectIR GALGAS_propertyMap::getter_mPropertyObjectForKey (const GALGAS_string & inKey,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) attributes ;
-  GALGAS_unifiedTypeMap_2D_proxy result ;
+  GALGAS_objectIR result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_propertyMap) ;
-    result = p->mAttribute_mTypeProxy ;
+    result = p->mAttribute_mPropertyObject ;
   }
   return result ;
 }
@@ -2129,15 +2129,15 @@ void GALGAS_propertyMap::setter_setMIsPublicForKey (GALGAS_bool inAttributeValue
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyMap::setter_setMTypeProxyForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
-                                                     GALGAS_string inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_propertyMap::setter_setMPropertyObjectForKey (GALGAS_objectIR inAttributeValue,
+                                                          GALGAS_string inKey,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
   cMapElement_propertyMap * p = (cMapElement_propertyMap *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_propertyMap) ;
-    p->mAttribute_mTypeProxy = inAttributeValue ;
+    p->mAttribute_mPropertyObject = inAttributeValue ;
   }
 }
 
@@ -2178,7 +2178,7 @@ cGenericAbstractEnumerator () {
 GALGAS_propertyMap_2D_element cEnumerator_propertyMap::current (LOCATION_ARGS) const {
   const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_propertyMap) ;
-  return GALGAS_propertyMap_2D_element (p->mAttribute_lkey, p->mAttribute_mIsPublic, p->mAttribute_mTypeProxy, p->mAttribute_mIndex) ;
+  return GALGAS_propertyMap_2D_element (p->mAttribute_lkey, p->mAttribute_mIsPublic, p->mAttribute_mPropertyObject, p->mAttribute_mIndex) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2199,10 +2199,10 @@ GALGAS_bool cEnumerator_propertyMap::current_mIsPublic (LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_propertyMap::current_mTypeProxy (LOCATION_ARGS) const {
+GALGAS_objectIR cEnumerator_propertyMap::current_mPropertyObject (LOCATION_ARGS) const {
   const cMapElement_propertyMap * p = (const cMapElement_propertyMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_propertyMap) ;
-  return p->mAttribute_mTypeProxy ;
+  return p->mAttribute_mPropertyObject ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
