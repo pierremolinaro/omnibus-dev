@@ -33,7 +33,6 @@ proc initialVariableMap
       !lkey:moduleName
       !type:moduleType
       !readAccessAllowed:false
-      !variableKin:.globalVariable {!type:moduleType !name:moduleName.string !volatile:false}
       !objectIR:.globalVariableReference {!type:moduleType !plmName:moduleName.string}
       !copyable:false
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
@@ -76,7 +75,6 @@ proc initialVariableMap
         !lkey:lkey
         !type:mType
         !readAccessAllowed:false
-        !variableKin:objectInMemory
         !objectIR:objectReference
         !copyable:false
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
@@ -110,7 +108,6 @@ proc initialVariableMap
           !lkey:lkey
           !type:mType
           !readAccessAllowed:true
-          !variableKin:objectInMemory
           !objectIR:objectReference
           !copyable:true
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
@@ -141,7 +138,6 @@ proc initialVariableMap
           !lkey:lkey
           !type:mType
           !readAccessAllowed:true
-          !variableKin:objectInMemory
           !objectIR:objectReference
           !copyable:true
           !canBeUsedAsInputParameter:false # Cannot be used as input parameter
@@ -175,7 +171,6 @@ proc initialVariableMap
         !lkey:lkey
         !type:mType
         !readAccessAllowed:true
-        !variableKin:objectInMemory
         !objectIR:objectReference
         !copyable:true
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
@@ -188,7 +183,6 @@ proc initialVariableMap
       !lkey:constantName
       !type:[constantValue type]
       !readAccessAllowed:true
-      !variableKin:.staticConstant {!value:constantValue !name:constantName}
       !objectIR:constantValue
       !copyable:true
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
@@ -220,7 +214,6 @@ proc initialVariableMap
         !lkey:variable.lkey
         !type:variable.type
         !readAccessAllowed:allowedAccess
-        !variableKin:.globalVariable {!type:variable.type !name:variable.lkey.string !volatile:[variable.executionModeSet count] > 1}
         !objectIR:.globalVariableReference {!type:variable.type !plmName:variable.lkey.string}
         !copyable:[variable.type copyable]
         !canBeUsedAsInputParameter:false
@@ -235,7 +228,6 @@ proc initialVariableMap
         !lkey:variable.lkey
         !type:variable.type
         !readAccessAllowed:allowedAccess
-        !variableKin:.globalVariable {!type:variable.type !name:variable.lkey.string !volatile:[variable.executionModeSet count] > 1}
         !objectIR:.globalVariableReference {!type:variable.type !plmName:variable.lkey.string}
         !copyable:[variable.type copyable]
         !canBeUsedAsInputParameter:false
@@ -250,7 +242,6 @@ proc initialVariableMap
       !lkey:resultVarName
       !type:resultType
       !readAccessAllowed:true
-      !variableKin:.localVariable {!type:resultType !name:resultVarName.string !volatile:false}
       !objectIR:.localVariableReference {!type:resultType !plmName:resultVarName.string}
       !copyable:true
       !canBeUsedAsInputParameter:true
@@ -278,7 +269,6 @@ proc variableMapWithConstants
       !lkey:constantName
       !type:[constantValue type]
       !readAccessAllowed:true
-      !variableKin:.staticConstant {!value:constantValue !name:constantName}
       !objectIR:constantValue
       !copyable:true
       !canBeUsedAsInputParameter:false

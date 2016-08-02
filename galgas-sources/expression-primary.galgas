@@ -237,7 +237,7 @@ override method @primaryInExpressionAST analyzeExpression
       error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer
     elsif [ioVariableMap hasKey !mObjectName] then
       [!?ioVariableMap searchForReadAccess !lkey:mObjectName
-        ?3*
+        ?2*
         ?objectIR:currentPointer
         ?2*
       ]
@@ -673,13 +673,11 @@ proc analyzeEffectiveParameters
       let varLLVMName = name.string + "." + ioTemporaries.mTemporaryIndex
       ioTemporaries.mTemporaryIndex ++
       [!?ioNamedObjectMap insertKey !name !.localVariableReference {!type:type !plmName:varLLVMName}]
-      let targetVar = @objectInMemoryIR.localVariable {!type:type !name:varLLVMName !volatile:false}
       if constant then
         [!?ioVariableMap insertConstant
           !lkey:name
           !type:type
           !readAccessAllowed:true
-          !variableKin:targetVar
           !objectIR:.localVariableReference {!type:type !plmName:varLLVMName}
           !copyable:true
           !canBeUsedAsInputParameter:true
@@ -689,7 +687,6 @@ proc analyzeEffectiveParameters
           !lkey:name
           !type:type
           !readAccessAllowed:true
-          !variableKin:targetVar
           !objectIR:.localVariableReference {!type:type !plmName:varLLVMName}
           !copyable:true
           !canBeUsedAsInputParameter:true
@@ -705,7 +702,6 @@ proc analyzeEffectiveParameters
         !lkey:name
         ?type:let type
         ?readAccessAllowed:let accessIsAllowed
-        ?variableKin:*
         ?objectIR:let objectIR
         ?copyable:let isCopyable                                                 
         ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
@@ -754,7 +750,6 @@ proc analyzeEffectiveParameters
         !lkey:name
         ?type:let type
         ?readAccessAllowed:let accessIsAllowed
-        ?variableKin:*
         ?objectIR:let unused objectIR
         ?1*
         ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter

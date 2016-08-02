@@ -355,7 +355,6 @@ proc analyzeGuardCall
       !lkey:inReceiverName
       ?type:receiverType
       ?1*
-      ?variableKin:*
       ?objectIR:let objectIR
       ?2*
     ]

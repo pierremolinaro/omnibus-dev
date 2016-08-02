@@ -109,7 +109,7 @@ method @assignmentTargetAST analyzeAssignmentTarget
   switch mSelfAccess
   case noSelfAccess :
     [!?ioVariableMap searchForWriteAccess !lkey:mIdentifier
-      ?3*
+      ?2*
       ?objectIR:outCurrentObject
       ?2*
     ]
