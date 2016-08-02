@@ -20,15 +20,11 @@ proc enterFormalArguments
   ?context:let @semanticContext inContext
   ?let @procFormalArgumentList inFormalArgumentPassingMode
   ?!@variableMap ioVariableMap
-  ?!@namedObjectMap ioNamedObjectMap
+  ?!@namedObjectMap unused ioNamedObjectMap
   ?!@procFormalArgumentListForGeneration ioFormalArguments
 {
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
-    [!?ioNamedObjectMap insertKey
-      !formalArgumentName
-      !.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
-    ]
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     switch argumentKind
     case input :
@@ -149,7 +145,6 @@ proc routineSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
-    !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?generatedCode:instructionGenerationList
   ]

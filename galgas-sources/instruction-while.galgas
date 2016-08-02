@@ -80,7 +80,6 @@ override method @whileInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -98,7 +97,6 @@ override method @whileInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:testInstructionGenerationList
     ?result:@objectIR testValue
@@ -113,7 +111,6 @@ override method @whileInstructionAST analyze
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [!?ioVariableMap openOverrideForRepeatBlock]
-  var namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
   [mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !propertiesAreMutable:inRoutineCanMutateProperties
@@ -126,7 +123,6 @@ override method @whileInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?namedObjectMap: namedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
   ]

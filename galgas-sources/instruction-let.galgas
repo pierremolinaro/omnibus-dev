@@ -65,7 +65,6 @@ override method @letInstructionWithAssignmentAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -86,7 +85,6 @@ override method @letInstructionWithAssignmentAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR expressionResult
@@ -118,10 +116,6 @@ override method @letInstructionWithAssignmentAST analyze
     !objectIR:expressionResult
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
-  ]
-  [!?ioNamedObjectMap insertKey
-    !mVarName
-    !expressionResult
   ]
 }
 

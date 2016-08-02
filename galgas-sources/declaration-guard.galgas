@@ -243,7 +243,6 @@ proc guardSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
-      !?namedObjectMap: namedObjectMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]
@@ -267,7 +266,6 @@ proc guardSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
-      !?namedObjectMap: namedObjectMap
       ?convenienceGuardGenerationIR
     ]
   #--- Analyze instruction list
@@ -282,7 +280,6 @@ proc guardSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
-      !?namedObjectMap: namedObjectMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]
@@ -304,21 +301,6 @@ proc guardSemanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#abstract method @callInstructionAST baseGuardAnalyze
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?modes:let @stringset inModeSet
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@variableMap ioVariableMap
-#  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
-#  !@guardKindGenerationIR outConvenienceGuardGenerationIR
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 private proc standaloneBaseGuardAnalyze
   ?routineName:let @lstring inRoutineName
   ?effectiveParameters:let @effectiveParameterListAST inEffectiveParameterList
@@ -328,7 +310,6 @@ private proc standaloneBaseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
 #--- Guard mangled name
@@ -371,7 +352,6 @@ private proc standaloneBaseGuardAnalyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?namedObjectMap: ioNamedObjectMap
     !?alloca:baseGuardAllocaList
     !?instructionListIR:baseGuardInstructionGenerationList
     !?effectiveIR:effectiveParameterListIR
@@ -397,7 +377,6 @@ method @callInstructionAST baseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   @allocaList baseGuardAllocaList = {}
@@ -414,7 +393,6 @@ method @callInstructionAST baseGuardAnalyze
     !?temporary: ioTemporaries
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap: ioVariableMap
-    !?namedObjectMap: ioNamedObjectMap
     !?alloca: baseGuardAllocaList
     !?instructionListIR: baseGuardInstructionGenerationList
     ?@objectIR currentObject
@@ -439,7 +417,6 @@ method @callInstructionAST baseGuardAnalyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?namedObjectMap: ioNamedObjectMap
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList
       ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR

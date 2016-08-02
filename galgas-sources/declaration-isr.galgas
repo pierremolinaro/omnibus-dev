@@ -117,7 +117,6 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
-      !?namedObjectMap: namedObjectMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]

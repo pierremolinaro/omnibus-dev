@@ -441,7 +441,6 @@ abstract method @expressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
@@ -468,7 +467,6 @@ method @expressionAST analyzeStaticExpression
     !?temporary:*
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:*
-    !?namedObjectMap:*
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:outResult

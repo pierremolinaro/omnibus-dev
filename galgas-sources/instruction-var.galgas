@@ -91,7 +91,6 @@ override method @varInstructionWithAssignmentAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -112,7 +111,6 @@ override method @varInstructionWithAssignmentAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR expressionResult
@@ -139,11 +137,6 @@ override method @varInstructionWithAssignmentAST analyze
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
   ]
-  let targetObject = @objectIR.localVariableReference {!type:[result type] !plmName:varName}
-  [!?ioNamedObjectMap insertKey
-    !mVarName
-    !targetObject
-  ]
 #--- Code generation
   ioAllocaList += !varName ![result type]
   [!?ioInstructionGenerationList appendStoreLocalVariable
@@ -166,7 +159,6 @@ override method @varInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap unused ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {

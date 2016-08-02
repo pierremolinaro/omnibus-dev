@@ -113,7 +113,6 @@ void extensionMethod_analyzeAssignmentTarget (const class GALGAS_assignmentTarge
                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                               class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                               class GALGAS_variableMap & io_ioVariableMap,
-                                              class GALGAS_namedObjectMap & io_ioNamedObjectMap,
                                               class GALGAS_allocaList & io_ioAllocaList,
                                               class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                               class GALGAS_objectIR & out_outCurrentObject,

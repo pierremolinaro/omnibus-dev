@@ -250,7 +250,6 @@ method @globalVarDeclarationList-element enterInContext
      !?temporary:temporaries
      !?staticStringMap:ioGlobalLiteralStringMap
      !?variableMap:variableMap
-     !?namedObjectMap: namedObjectMap
      !?alloca:allocaList
      !?instructionListIR:instructionGenerationList
      ?result:let @objectIR expressionResult

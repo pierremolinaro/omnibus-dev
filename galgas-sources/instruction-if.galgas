@@ -129,7 +129,6 @@ override method @ifInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -146,7 +145,6 @@ override method @ifInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR testResult
@@ -160,7 +158,6 @@ override method @ifInstructionAST analyze
   end
   [!?ioVariableMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
-  var namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
   @instructionListIR thenInstructionGenerationList = {}
   [mThenInstructionList analyzeBranchInstructionList
     !self:inSelfType
@@ -174,13 +171,11 @@ override method @ifInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?namedObjectMap: namedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:thenInstructionGenerationList
   ]
 #--- Analyze 'else' instruction list
   @instructionListIR elseInstructionGenerationList = {}
-  namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
   [mElseInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !propertiesAreMutable:inRoutineCanMutateProperties
@@ -193,7 +188,6 @@ override method @ifInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?namedObjectMap: namedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:elseInstructionGenerationList
   ]
