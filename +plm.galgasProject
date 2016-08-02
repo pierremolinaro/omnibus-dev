@@ -75,10 +75,10 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-primary.galgas"
 
 #--- Instructions
-  "galgas-sources/rule-access.galgas"
-  "galgas-sources/rule-self-access.galgas"
-  "galgas-sources/instruction-proc-call.galgas"
-  "galgas-sources/instruction-self-call.galgas"
+#  "galgas-sources/rule-access.galgas"
+#  "galgas-sources/rule-self-access.galgas"
+#  "galgas-sources/instruction-proc-call.galgas"
+#  "galgas-sources/instruction-self-call.galgas"
 
   "galgas-sources/instruction-procedure-call.galgas"
 
