@@ -106,11 +106,8 @@ override method @letInstructionWithAssignmentAST analyze
 #--- Declare local constant
   let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
   ioTemporaries.mTemporaryIndex ++
-  @objectInMemoryIR localConstant
-  if [result key] == staticIntegerTypeName () then
-    localConstant = .staticConstant {!value:expressionResult !name:.new {!varLLVMName !mVarName.location}}
-  else
-    localConstant = .localVariable {!type:[result type] !name:varLLVMName !volatile:false}
+  if [result key] != staticIntegerTypeName () then
+    let localConstant = @objectInMemoryIR.localVariable {!type:[result type] !name:varLLVMName !volatile:false}
     ioAllocaList += !varLLVMName ![result type]
     [!?ioInstructionGenerationList appendStoreInMemory !localConstant !result]
   end
@@ -118,7 +115,6 @@ override method @letInstructionWithAssignmentAST analyze
     !lkey:mVarName
     !type:[result type]
     !readAccessAllowed:true
-    !variableKin:localConstant
     !objectIR:expressionResult
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true

@@ -29,7 +29,6 @@ proc getLocalNameOfNewTempObjectInMemory
 sharedmap @variableMap %selectors {
   @unifiedTypeMap-proxy type
   @bool readAccessAllowed
-  @objectInMemoryIR variableKin
   @objectIR objectIR
   @bool copyable
   @bool canBeUsedAsInputParameter

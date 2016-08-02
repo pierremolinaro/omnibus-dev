@@ -161,7 +161,6 @@ override method @forLowerUpperBoundInstructionAST analyze
       !lkey:mVarName
       !type:type
       !readAccessAllowed:true # Read access ok
-      !variableKin:.localVariable {!type:type !name:enumeratedVarLLVMName !volatile:false}
       !objectIR:.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}
       !copyable:true
       !canBeUsedAsInputParameter:false

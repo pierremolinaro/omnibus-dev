@@ -216,7 +216,6 @@ proc guardSemanticAnalysis
       !lkey:resultVarName
       !type:resultType
       !readAccessAllowed:true
-      !variableKin:.localVariable {!type:resultType !name:resultVarName.string !volatile:false}
       !objectIR:.localVariableReference {!type:resultType !plmName:resultVarName.string}
       !copyable:true
       !canBeUsedAsInputParameter:true

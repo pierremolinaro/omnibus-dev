@@ -114,7 +114,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !lkey:codeArg
     !type:inContext.mPanicCodeType
     !readAccessAllowed:true
-    !variableKin:.localVariable {!type:inContext.mPanicCodeType !name:codeArg.string !volatile:false}
     !objectIR:.localVariableReference {!type:inContext.mPanicCodeType !plmName:codeArg.string}
     !copyable:[inContext.mPanicCodeType copyable]
     !canBeUsedAsInputParameter:false
@@ -124,7 +123,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !lkey:fileArg
     !type:StaticStringType
     !readAccessAllowed:true
-    !variableKin:.localVariable {!type:StaticStringType !name:fileArg.string !volatile:false}
     !objectIR:.localVariableReference {!type:StaticStringType !plmName:fileArg.string}
     !copyable:[StaticStringType copyable]
     !canBeUsedAsInputParameter:false
@@ -134,7 +132,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !lkey:lineArg
     !type:inContext.mPanicLineType
     !readAccessAllowed:true
-    !variableKin:.localVariable {!type:inContext.mPanicLineType !name:lineArg.string !volatile:false}
     !objectIR:.localVariableReference {!type:inContext.mPanicLineType !plmName:lineArg.string}
     !copyable:[inContext.mPanicLineType copyable]
     !canBeUsedAsInputParameter:false
