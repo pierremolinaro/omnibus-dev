@@ -132,46 +132,6 @@ class GALGAS_bool extensionGetter_isGlobalVariable (const class GALGAS_objectIR 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Extension getter '@objectInMemoryIR llvmName' (as function)                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_llvmName (const class GALGAS_objectInMemoryIR & inObject,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               Extension getter '@objectInMemoryIR name' (as function)                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_name (const class GALGAS_objectInMemoryIR & inObject,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               Extension getter '@objectInMemoryIR type' (as function)                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_unifiedTypeMap_2D_proxy extensionGetter_type (const class GALGAS_objectInMemoryIR & inObject,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                             Extension getter '@objectInMemoryIR address' (as function)                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_objectIR extensionGetter_address (const class GALGAS_objectInMemoryIR & inObject,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                         Extension method '@binaryOperationIR enterCodeForOverflowOperation'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -231,26 +191,5 @@ void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const class c
                                                                    GALGAS_generationAdds & io_ioGenerationAdds,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                            Extension method '@objectInMemoryIR enterAccessibleEntities'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_enterAccessibleEntities (const class GALGAS_objectInMemoryIR inObject,
-                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Extension getter '@objectInMemoryIR mangledName' (as function)                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_mangledName (const class GALGAS_objectInMemoryIR & inObject,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
 
 #endif
