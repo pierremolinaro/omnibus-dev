@@ -2308,7 +2308,6 @@ class GALGAS_string function_functionResultVariableName (class C_Compiler * inCo
 
 void routine_variableMapWithConstants (const class GALGAS_semanticContext constinArgument0,
                                        class GALGAS_variableMap & outArgument1,
-                                       class GALGAS_namedObjectMap & outArgument2,
                                        class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 

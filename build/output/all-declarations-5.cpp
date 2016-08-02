@@ -7400,22 +7400,16 @@ void routine_initialVariableMap (const GALGAS_string constinArgument_inRoutineNa
 
 void routine_variableMapWithConstants (const GALGAS_semanticContext constinArgument_inContext,
                                        GALGAS_variableMap & outArgument_outVariableMap,
-                                       GALGAS_namedObjectMap & outArgument_outObjectMap,
                                        C_Compiler * inCompiler
                                        COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outVariableMap.drop () ; // Release 'out' argument
-  outArgument_outObjectMap.drop () ; // Release 'out' argument
-  outArgument_outVariableMap = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 194)) ;
-  outArgument_outObjectMap = GALGAS_namedObjectMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 195)) ;
-  cEnumerator_globalConstantMap enumerator_7671 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
-  while (enumerator_7671.hasCurrentObject ()) {
+  outArgument_outVariableMap = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 193)) ;
+  cEnumerator_globalConstantMap enumerator_7619 (constinArgument_inContext.mAttribute_mGlobalConstantMap, kEnumeration_up) ;
+  while (enumerator_7619.hasCurrentObject ()) {
     {
-    outArgument_outVariableMap.setter_insertUsedConstant (enumerator_7671.current_lkey (HERE), extensionGetter_type (enumerator_7671.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 200)), GALGAS_bool (true), enumerator_7671.current_mValue (HERE), GALGAS_bool (true), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 198)) ;
+    outArgument_outVariableMap.setter_insertUsedConstant (enumerator_7619.current_lkey (HERE), extensionGetter_type (enumerator_7619.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 198)), GALGAS_bool (true), enumerator_7619.current_mValue (HERE), GALGAS_bool (true), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 196)) ;
     }
-    {
-    outArgument_outObjectMap.setter_insertKey (enumerator_7671.current_lkey (HERE), enumerator_7671.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 206)) ;
-    }
-    enumerator_7671.gotoNextObject () ;
+    enumerator_7619.gotoNextObject () ;
   }
 }
 
@@ -7433,8 +7427,8 @@ void routine_getNewTempVariable (const GALGAS_unifiedTypeMap_2D_proxy constinArg
                                  C_Compiler * inCompiler
                                  COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outTempVariable.drop () ; // Release 'out' argument
-  outArgument_outTempVariable = GALGAS_objectIR::constructor_llvmTemporaryValue (constinArgument_inType, GALGAS_lstring::constructor_new (GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("variable-map.galgas", 220)), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 220)), inArgument_inErrorLocation  COMMA_SOURCE_FILE ("variable-map.galgas", 220)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 221))  COMMA_SOURCE_FILE ("variable-map.galgas", 218)) ;
-  ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("variable-map.galgas", 223)) ;
+  outArgument_outTempVariable = GALGAS_objectIR::constructor_llvmTemporaryValue (constinArgument_inType, GALGAS_lstring::constructor_new (GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("variable-map.galgas", 217)), inCompiler COMMA_SOURCE_FILE ("variable-map.galgas", 217)), inArgument_inErrorLocation  COMMA_SOURCE_FILE ("variable-map.galgas", 217)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("variable-map.galgas", 218))  COMMA_SOURCE_FILE ("variable-map.galgas", 215)) ;
+  ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("variable-map.galgas", 220)) ;
 }
 
 

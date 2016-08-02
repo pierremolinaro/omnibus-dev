@@ -109,7 +109,6 @@ override method @opaqueTypeDeclaration enterInContext
   variableMapWithConstants (
     !context:ioContext
     ?@variableMap variableMap
-    ?@namedObjectMap namedObjectMap
   )
   [mSizeExpression analyzeExpression
     !self:.null
