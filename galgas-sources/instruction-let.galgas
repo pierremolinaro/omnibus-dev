@@ -104,12 +104,12 @@ override method @letInstructionWithAssignmentAST analyze
     error mVarName : "$" + [result key] + " type is not instanciable" : result
   end
 #--- Declare local constant
-  let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
+  let varPLMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
   if [result key] != staticIntegerTypeName () then
-    let localConstant = @objectInMemoryIR.localVariable {!type:[result type] !name:varLLVMName !volatile:false}
-    ioAllocaList += !varLLVMName ![result type]
-    [!?ioInstructionGenerationList appendStoreInMemory !localConstant !result]
+    ioAllocaList += !varPLMName ![result type]
+    let localConstant = @objectIR.localVariableReference {!type:[result type] !plmName:varPLMName}
+    [!?ioInstructionGenerationList appendStoreFromReference !result !mVarName !localConstant]
   end
   [!?ioVariableMap insertConstant
     !lkey:mVarName

@@ -96,7 +96,6 @@ project (1:0:0) -> "plm" {
 
 #--- Compilation phases
   "galgas-sources/variable-map.galgas"
-  "galgas-sources/variable-map-new.galgas"
   "galgas-sources/ordered-declaration-list.galgas"
   "galgas-sources/context-routines.galgas"
   "galgas-sources/context.galgas"

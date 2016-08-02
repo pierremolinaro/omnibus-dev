@@ -150,7 +150,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !staticTypeAllowed:false
     )
   #---
-    let enumeratedVarLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
+    let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
     ioTemporaries.mTemporaryIndex ++
     ioAllocaList += !enumeratedVarLLVMName !type
   #--- Analyze instruction list

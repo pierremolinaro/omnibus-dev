@@ -129,7 +129,7 @@ override method @varInstructionWithAssignmentAST analyze
   )
   drop expressionResult, targetType
 #--- Declare local variable
-  let varName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
+  let varName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
   [!?ioVariableMap insertDefinedVariable
     !lkey:mVarName
@@ -176,7 +176,7 @@ override method @varInstructionAST analyze
     error mVarName : "$" + [targetType key] + " type is not instanciable"
   end
 #--- Declare local variable
-  let varLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
+  let varLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
   [!?ioVariableMap insertUndefinedVariable
     !lkey:mVarName

@@ -5,11 +5,11 @@
 enum @objectIR {
 #--- Temporary ?
   case selfObject (@unifiedTypeMap-proxy type)
-  case llvmGlobalObjectValue (@unifiedTypeMap-proxy type @string llvmName)
+  case llvmGlobalObjectValue (@unifiedTypeMap-proxy type @lstring llvmName)
 #--- References
-  case globalVariableReference (@unifiedTypeMap-proxy type @string plmName)
-  case localVariableReference (@unifiedTypeMap-proxy type @string plmName)
-  case temporaryReference (@unifiedTypeMap-proxy type @string llvmName @sliceMap sliceMap @bool volatile)
+  case globalVariableReference (@unifiedTypeMap-proxy type @lstring plmName)
+  case localVariableReference (@unifiedTypeMap-proxy type @lstring plmName)
+  case temporaryReference (@unifiedTypeMap-proxy type @lstring llvmName @sliceMap sliceMap @bool volatile)
   case registerReference (@unifiedTypeMap-proxy type
                           @lstring plmName
                           @bool readable
@@ -19,9 +19,9 @@ enum @objectIR {
                           @uint arraySize # 0 if not an array
                           @uint elementSize) # 0 if not an array
 #--- Structure property
-  case property (@unifiedTypeMap-proxy type @string plmName @uint index)
+  case property (@unifiedTypeMap-proxy type @lstring plmName @uint index)
 #--- Values
-  case llvmTemporaryValue (@unifiedTypeMap-proxy type @string llvmName @sliceMap sliceMap)
+  case llvmTemporaryValue (@unifiedTypeMap-proxy type @lstring llvmName @sliceMap sliceMap)
   case literalInteger  (@unifiedTypeMap-proxy type @bigint value)
   case llvmStructureConstant (@unifiedTypeMap-proxy type @operandIRList values)
   case literalString  (@unifiedTypeMap-proxy type @uint size @uint index)
@@ -33,27 +33,38 @@ enum @objectIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @objectIR checkReadable {
-#  switch self
-#  case null : error .nowhere : "<<@objectIR checkReadable null>>"
-#  case possibleFunction (* *) : error .nowhere : "<<@objectIR checkReadable possibleFunction>>"
-#  case selfObject (*) :
-#  case llvmGlobalObjectValue (**) :
-#  case globalVariableReference (**) :
-#  case localVariableReference (**) :
-#  case temporaryReference (****) :
-#  case registerReference (* @lstring name @bool readable * * * * *) :
-#    if not readable then
-#      error name : "the control register cannot be read in current context"
-#    end
-#  case property (* * *) :
-#  case llvmTemporaryValue (* * *) :
-#  case llvmStructureConstant (* *) :
-#  case literalInteger (* *) :
-#  case literalString (* * *) :
-#  case zero (*) :
-#  end
-#}
+getter @objectIR location -> @location outResult {
+  switch self
+  case null :
+    error .nowhere : "<<@objectIR location null>>" : outResult
+  case possibleFunction (* functionName) :
+    outResult = functionName
+  case property (* plmName *) :
+    outResult = plmName
+  case globalVariableReference (* plmName) :
+    outResult = plmName
+  case localVariableReference (* plmName) :
+    outResult = plmName
+  case registerReference (* plmName ******):
+    outResult = plmName
+  case zero (*) :
+    error .nowhere : "<<@objectIR location zero>>" : outResult
+  case selfObject (*) :
+    error .nowhere : "<<@objectIR location selfObject>>" : outResult
+  case literalInteger (* *) :
+    error .nowhere : "<<@objectIR location literalInteger>>" : outResult
+  case llvmTemporaryValue (* llvmName *) :
+    outResult = llvmName
+  case llvmGlobalObjectValue (* llvmName) :
+    outResult = llvmName
+  case temporaryReference (* llvmName * *) :
+    outResult = llvmName
+  case llvmStructureConstant (* *) :
+    error .nowhere : "<<@objectIR location llvmStructureConstant>>" : outResult
+  case literalString  (* * *) :
+    error .nowhere : "<<@objectIR location literalString>>" : outResult
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -65,19 +76,19 @@ getter @objectIR isGlobalVariable -> @bool outResult {
 
 getter @objectIR llvmName -> @string outResult {
   switch self
-  case null : error .nowhere : "<<@objectIR llvmName null>>" : outResult
+  case null : error [self location] : "<<@objectIR llvmName null>>" : outResult
   case possibleFunction (**) :
-    error .nowhere : "<<@objectIR llvmName possibleFunction>>" : outResult
-  case property (***) : error .nowhere : "<<@objectIR llvmName>>" : outResult
+    error [self location] : "<<@objectIR llvmName possibleFunction>>" : outResult
+  case property (***) : error [self location] : "<<@objectIR llvmName>>" : outResult
   case globalVariableReference (* plmName) : outResult = "@" + llvmNameForGlobalVariable (!plmName)
   case localVariableReference (* plmName) : outResult = "%" + llvmNameForLocalVariable (!plmName)
-  case registerReference (********): error .nowhere : "<<@objectIR llvmName>>" : outResult
+  case registerReference (********): error [self location] : "<<@objectIR llvmName>>" : outResult
   case zero (*) : outResult = "zeroinitializer"
   case selfObject (*) : outResult = "%self"
   case literalInteger (* @bigint value) : outResult = [value string]
-  case llvmTemporaryValue (* @string llvmName *) : outResult = "%" + llvmName
-  case llvmGlobalObjectValue (* @string llvmName) : outResult = "@" + llvmName
-  case temporaryReference (* @string llvmName * *) : outResult = "%" + llvmName
+  case llvmTemporaryValue (* llvmName *) : outResult = "%" + llvmName
+  case llvmGlobalObjectValue (* llvmName) : outResult = "@" + llvmName
+  case temporaryReference (* llvmName * *) : outResult = "%" + llvmName
   case llvmStructureConstant (* @operandIRList inValues) :
     outResult = "{"
     for () in inValues
@@ -96,9 +107,9 @@ getter @objectIR llvmName -> @string outResult {
 
 getter @objectIR sliceMap ?let @location inErrorLocation -> @sliceMap outResult {
   switch self
-  case null : error .nowhere : "<<@objectIR sliceMap null>>" : outResult
+  case null : error [self location] : "<<@objectIR sliceMap null>>" : outResult
   case possibleFunction (**) :
-    error .nowhere : "<<@objectIR sliceMap possibleFunction>>" : outResult
+    error [self location] : "<<@objectIR sliceMap possibleFunction>>" : outResult
   case property (***) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
   case globalVariableReference (**) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
   case localVariableReference (* *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
@@ -120,7 +131,7 @@ getter @objectIR type -> @unifiedTypeMap-proxy outResult {
   switch self
   case null : outResult = .null
   case possibleFunction (**) :
-    error .nowhere : "<<@objectIR type possibleFunction>>" : outResult
+    error [self location] : "<<@objectIR type possibleFunction>>" : outResult
   case temporaryReference (@unifiedTypeMap-proxy type * * *) : outResult = type
   case property (type **) : outResult = type
   case registerReference (type *******) : outResult = type
@@ -158,9 +169,9 @@ getter @objectIR kind -> @typeKind outResult {
 
 getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
   switch self
-  case null : error .nowhere : "<<@objectIR withType null>>" : outResult
+  case null : error [self location] : "<<@objectIR withType null>>" : outResult
   case possibleFunction (**) :
-    error .nowhere : "<<@objectIR withType possibleFunction>>" : outResult
+    error [self location] : "<<@objectIR withType possibleFunction>>" : outResult
   case temporaryReference (* llvmName sliceMap volatile) :
     outResult = .temporaryReference {!type:inType !llvmName:llvmName !sliceMap:sliceMap !volatile:volatile}
   case property (* plmName index) :
@@ -182,13 +193,13 @@ getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
     outResult = .globalVariableReference {!type: inType !plmName: name}
   case literalInteger (* @bigint value) :
     outResult = .literalInteger {!type: inType !value: value}
-  case llvmTemporaryValue (* @string llvmName sliceMap) :
+  case llvmTemporaryValue (* llvmName sliceMap) :
     outResult = .llvmTemporaryValue {!type: inType !llvmName:llvmName  !sliceMap:sliceMap}
   case zero (*) :
     outResult = .zero {!type: inType}
   case selfObject (*) :
     outResult = .selfObject {!type: inType}
-  case llvmGlobalObjectValue (* @string llvmName) :
+  case llvmGlobalObjectValue (* @lstring llvmName) :
     outResult = .llvmGlobalObjectValue {!type: inType !llvmName: llvmName}
   case llvmStructureConstant (* @operandIRList values) :
     outResult = .llvmStructureConstant {!type: inType !values: values}
@@ -201,10 +212,10 @@ getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
 
 getter @objectIR name -> @string outResult {
   switch self
-  case null : error .nowhere : "<<@objectIR name null>>" : outResult
+  case null : error [self location] : "<<@objectIR name null>>" : outResult
   case possibleFunction (**) :
-    error .nowhere : "<<@objectIR name possibleFunction>>" : outResult
-  case temporaryReference (* @string llvmName **) : outResult = llvmName
+    error [self location] : "<<@objectIR name possibleFunction>>" : outResult
+  case temporaryReference (* llvmName **) : outResult = llvmName
   case property (* name *) : outResult = name
   case registerReference (* name ******) : outResult = name
   case localVariableReference (* name) : outResult = name
@@ -212,8 +223,8 @@ getter @objectIR name -> @string outResult {
   case zero (*) : outResult = "zeroinitializer"
   case selfObject (*) : outResult = "self"
   case literalInteger (* @bigint value) : outResult = [value string]
-  case llvmTemporaryValue (* @string name *) : outResult = name
-  case llvmGlobalObjectValue (* @string name) : outResult = name
+  case llvmTemporaryValue (* name *) : outResult = name
+  case llvmGlobalObjectValue (* @lstring name) : outResult = name
   case llvmStructureConstant (* *) : outResult = "{...}"
   case literalString  (* * @uint index) : outResult = literalStringName (!index)
   end
@@ -223,7 +234,7 @@ getter @objectIR name -> @string outResult {
 
 getter @objectIR isStatic -> @bool outResult {
   switch self
-  case null : error .nowhere : "<<@objectIR isStatic null>>" : outResult
+  case null : error [self location] : "<<@objectIR isStatic null>>" : outResult
   case possibleFunction (**) : outResult = false
   case temporaryReference (****) : outResult = false
   case property (***) : outResult = false
@@ -326,9 +337,9 @@ getter @objectInMemoryIR address -> @objectIR outOperand {
   case register ( * ** * * * * *) :
     error .nowhere : "@objectInMemoryIR register address" : outOperand
   case globalVariable (@unifiedTypeMap-proxy type @string name *) :
-    outOperand  = .llvmGlobalObjectValue {!type: type !llvmName:llvmNameForGlobalVariable (!name)}
+    outOperand  = .llvmGlobalObjectValue {!type: type !llvmName:[llvmNameForGlobalVariable (!name) nowhere]}
   case localVariable (@unifiedTypeMap-proxy type @string name *) :
-    outOperand  = .llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (!name) !sliceMap:{}}
+    outOperand  = .llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!name) !.nowhere} !sliceMap:{}}
   case staticConstant (* *) :
     error .nowhere : "@objectInMemoryIR globalConstantaddress" : outOperand
   case property (* * *) :

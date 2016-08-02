@@ -198,7 +198,7 @@ private proc handleSelfAccessInAssignment
     [inObject property ?type:let type ?plmName:let name ?index:let index]
     outObjectPtr = .temporaryReference {
       !type:type
-      !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !name}
       !sliceMap:{}
       !volatile:false
     }
@@ -230,7 +230,7 @@ private proc handlePropertyAccessInAssignment
         [property property ?type:let type ?plmName:let name ?index:let index]
         let newObject = @objectIR.temporaryReference {
           !type:type
-          !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
           !sliceMap:{}
           !volatile:false
         }
