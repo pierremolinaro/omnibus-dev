@@ -233,7 +233,6 @@ method @taskVarListAST-element enterInContext
   variableMapWithConstants (
     !context:ioContext
     ?@variableMap variableMap
-    ?@namedObjectMap namedObjectMap
   )
   [mVarInitExpression analyzeExpression
     !self:.null

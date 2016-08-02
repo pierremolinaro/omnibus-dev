@@ -236,7 +236,6 @@ method @globalVarDeclarationList-element enterInContext
   variableMapWithConstants (
     !context:ioContext
     ?@variableMap variableMap
-    ?@namedObjectMap namedObjectMap
   )
   [mSourceExpression analyzeExpression
      !self:.null

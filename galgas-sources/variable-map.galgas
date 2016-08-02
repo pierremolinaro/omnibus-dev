@@ -189,10 +189,8 @@ proc initialVariableMap
 proc variableMapWithConstants
   ?context:let @semanticContext inContext
   !@variableMap outVariableMap
-  !@namedObjectMap outObjectMap
 {
   outVariableMap = .emptyMap
-  outObjectMap = {}
 #--- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedConstant
@@ -203,7 +201,6 @@ proc variableMapWithConstants
       !copyable:true
       !canBeUsedAsInputParameter:false
     ]
-    [!?outObjectMap insertKey !constantName !constantValue]
   end
 }
 
