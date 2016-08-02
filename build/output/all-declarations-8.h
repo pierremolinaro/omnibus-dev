@@ -295,52 +295,6 @@ class GALGAS_bool extensionGetter_isStatic (const class GALGAS_objectIR & inObje
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                         Extension method '@accessList addDependenceEdgeForStaticExpression'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_addDependenceEdgeForStaticExpression (const class GALGAS_accessList inObject,
-                                                           const class GALGAS_lstring constin_inConstantName,
-                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Extension method '@accessList noteExpressionTypesInPrecedenceGraph'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_noteExpressionTypesInPrecedenceGraph (const class GALGAS_accessList inObject,
-                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Extension method '@fieldList addDependenceEdgeForStaticExpression'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_addDependenceEdgeForStaticExpression (const class GALGAS_fieldList inObject,
-                                                           const class GALGAS_lstring constin_inConstantName,
-                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Extension method '@fieldList noteExpressionTypesInPrecedenceGraph'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_noteExpressionTypesInPrecedenceGraph (const class GALGAS_fieldList inObject,
-                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                           class C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                  Abstract extension method '@instructionAST noteInstructionTypesInPrecedenceGraph'                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -554,6 +508,20 @@ void extensionSetter_appendLoadVolatileRegisterWithSubscript (class GALGAS_instr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                       Extension setter '@instructionListIR appendLoadVolatileRegisterAddress'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendLoadVolatileRegisterAddress (class GALGAS_instructionListIR & ioObject,
+                                                        const class GALGAS_objectInMemoryIR constin_inTargetValue,
+                                                        const class GALGAS_objectIR constin_inIndexResult,
+                                                        const class GALGAS_bigint constin_inAddress,
+                                                        const class GALGAS_bigint constin_inElementArraySize,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Extension setter '@instructionListIR appendLoadVolatileRegister'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -747,6 +715,19 @@ void extensionSetter_appendLoadStructureConstant (class GALGAS_instructionListIR
                                                   const class GALGAS_string constin_inTypeName,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Extension setter '@instructionListIR appendGetElementPtr'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendGetElementPtr (class GALGAS_instructionListIR & ioObject,
+                                          const class GALGAS_objectInMemoryIR constin_inTarget,
+                                          const class GALGAS_objectInMemoryIR constin_inSource,
+                                          const class GALGAS_elementPtrList constin_inElementList,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
