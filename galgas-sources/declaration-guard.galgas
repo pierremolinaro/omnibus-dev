@@ -197,7 +197,6 @@ proc guardSemanticAnalysis
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
-    ?@namedObjectMap namedObjectMap
   )
   @procFormalArgumentListForGeneration formalArguments = {}
   @guardKindGenerationIR convenienceGuardGenerationIR
@@ -217,17 +216,11 @@ proc guardSemanticAnalysis
       !copyable:true
       !canBeUsedAsInputParameter:true
     ]
-    let resultVariable = @objectIR.localVariableReference {
-      !type:resultType
-      !plmName:resultVarName
-    }
-    [!?namedObjectMap insertKey !resultVarName !resultVariable]
   #--- Analyse formal arguments
     enterFormalArguments (
       !context:inContext
       !inRoutineFormalArgumentList
       !?variableMap
-      !?namedObjectMap
       !?formalArguments
     )
     convenienceGuardGenerationIR = .baseGuard
@@ -252,7 +245,6 @@ proc guardSemanticAnalysis
       !context:inContext
       !inRoutineFormalArgumentList
       !?variableMap
-      !?namedObjectMap
       !?formalArguments
     )
   #--- Analyze base guard

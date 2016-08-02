@@ -95,7 +95,6 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !globalsAreConstant:false
       !returnTypeName:["" nowhere]
       ?@variableMap variableMap
-      ?@namedObjectMap namedObjectMap
     )
   #--- Self type
     let selfType = if isr.mSelfTypeName.string == "" then

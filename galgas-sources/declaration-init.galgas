@@ -159,7 +159,6 @@ proc initSemanticAnalysis
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
-    ?@namedObjectMap namedObjectMap
   )
 #--- Analyze instruction list
   outInstructionGenerationList = {}

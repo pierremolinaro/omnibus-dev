@@ -20,7 +20,6 @@ proc enterFormalArguments
   ?context:let @semanticContext inContext
   ?let @procFormalArgumentList inFormalArgumentPassingMode
   ?!@variableMap ioVariableMap
-  ?!@namedObjectMap unused ioNamedObjectMap
   ?!@procFormalArgumentListForGeneration ioFormalArguments
 {
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
@@ -113,7 +112,6 @@ proc routineSemanticAnalysis
     !globalsAreConstant:false
     !returnTypeName:inReturnTypeName
     ?@variableMap variableMap
-    ?@namedObjectMap namedObjectMap
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
@@ -121,7 +119,6 @@ proc routineSemanticAnalysis
     !context:inContext
     !inRoutineFormalArgumentList
     !?variableMap
-    !?namedObjectMap
     !?formalArguments
   )
 #--- Enter subprogram invocation graph

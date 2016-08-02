@@ -1199,7 +1199,6 @@ void routine_initialVariableMap (const class GALGAS_string constinArgument0,
                                  class GALGAS_bool inArgument4,
                                  const class GALGAS_lstring constinArgument5,
                                  class GALGAS_variableMap & outArgument6,
-                                 class GALGAS_namedObjectMap & outArgument7,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
@@ -1590,8 +1589,7 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
 void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
                                    const class GALGAS_procFormalArgumentList constinArgument1,
                                    class GALGAS_variableMap & ioArgument2,
-                                   class GALGAS_namedObjectMap & ioArgument3,
-                                   class GALGAS_procFormalArgumentListForGeneration & ioArgument4,
+                                   class GALGAS_procFormalArgumentListForGeneration & ioArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -3427,5 +3425,15 @@ class GALGAS_string function_llvmNameForGuardImplementation (class GALGAS_string
 
 class GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Function 'llvmNameForGlobalVariable'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForGlobalVariable (class GALGAS_string inArgument0,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
 
 #endif
