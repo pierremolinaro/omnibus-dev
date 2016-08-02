@@ -13,13 +13,13 @@ register SINGLE_PIPO at 0x5000_0000 $uint32 {
 //------------------------------------------------*
 
 section ledOn () {
-  azerty IO1CLR  = 1 << 23 // Led On
+  IO1CLR  = 1 << 23 // Led On
 }
 
 //------------------------------------------------*
 
 section ledOff () {
-  azerty globalVar = SINGLE_PIPO
+  globalVar = SINGLE_PIPO
   globalVar = SINGLE_PIPO.fields
   globalVar = SINGLE_PIPO.fields.shifted
   globalVar = SINGLE_PIPO.bit
@@ -31,9 +31,9 @@ section ledOff () {
   globalVar = PIPO [idx].fields
   var index $uint32 = 5
   globalBit = PIPO [index].bit.bool
-  azerty PIPO [2] = globalVar
-  azerty PIPO [index] = $PIPO {fields:5, bit}
-  azerty IO1SET = 1 << 23 // Led Off
+  PIPO [2] = globalVar
+  PIPO [index] = $PIPO {fields:5, bit}
+  IO1SET = 1 << 23 // Led Off
 }
 
 //------------------------------------------------*
@@ -52,7 +52,7 @@ task T1 priority 1 stackSize 512 {
     time.waitUntilMS (!deadline:self.compteur)
     ledOff ()
     let x = self.compteur +% 500
-    azerty self.compteur = x
+    self.compteur = x
 //    self.compteur +%= 500
   }
 }
