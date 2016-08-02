@@ -126,7 +126,7 @@ override method @extendExpressionAST analyzeExpression
         error mTypeName: "same size: useless extend operation"
       end
     end
-    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    getNewTempVariable (!resultType !mTypeName !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendExtend
       !outResult
       !expressionResult

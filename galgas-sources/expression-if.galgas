@@ -162,7 +162,7 @@ override method @ifExpressionAST analyzeExpression
     [ifExpressionResult literalInteger ?1* ?value:let value]
     outResult = if value != 0G then thenExpressionResult else elseExpressionResult end
   else # No, generate 'select' LLVM instruction
-    getNewTempVariable (![elseExpressionResult type] !?ioTemporaries ?outResult)
+    getNewTempVariable (![elseExpressionResult type] !mIfExpressionEndLocation !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendSelectOperation
       !outResult
       !ifExpressionResult
