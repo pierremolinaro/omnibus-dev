@@ -4613,7 +4613,7 @@ GALGAS_propertyList_2D_element GALGAS_propertyList_2D_element::extractObject (co
 GALGAS_propertyMap_2D_element::GALGAS_propertyMap_2D_element (void) :
 mAttribute_lkey (),
 mAttribute_mIsPublic (),
-mAttribute_mTypeProxy (),
+mAttribute_mPropertyObject (),
 mAttribute_mIndex () {
 }
 
@@ -4626,28 +4626,19 @@ GALGAS_propertyMap_2D_element::~ GALGAS_propertyMap_2D_element (void) {
 
 GALGAS_propertyMap_2D_element::GALGAS_propertyMap_2D_element (const GALGAS_lstring & inOperand0,
                                                               const GALGAS_bool & inOperand1,
-                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                              const GALGAS_objectIR & inOperand2,
                                                               const GALGAS_uint & inOperand3) :
 mAttribute_lkey (inOperand0),
 mAttribute_mIsPublic (inOperand1),
-mAttribute_mTypeProxy (inOperand2),
+mAttribute_mPropertyObject (inOperand2),
 mAttribute_mIndex (inOperand3) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_propertyMap_2D_element GALGAS_propertyMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_propertyMap_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                        GALGAS_bool::constructor_default (HERE),
-                                        GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
-                                        GALGAS_uint::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap_2D_element GALGAS_propertyMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                               const GALGAS_bool & inOperand1,
-                                                                              const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                              const GALGAS_objectIR & inOperand2,
                                                                               const GALGAS_uint & inOperand3 
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_propertyMap_2D_element result ;
@@ -4668,7 +4659,7 @@ typeComparisonResult GALGAS_propertyMap_2D_element::objectCompare (const GALGAS_
     result = mAttribute_mIsPublic.objectCompare (inOperand.mAttribute_mIsPublic) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mTypeProxy.objectCompare (inOperand.mAttribute_mTypeProxy) ;
+    result = mAttribute_mPropertyObject.objectCompare (inOperand.mAttribute_mPropertyObject) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mIndex.objectCompare (inOperand.mAttribute_mIndex) ;
@@ -4679,7 +4670,7 @@ typeComparisonResult GALGAS_propertyMap_2D_element::objectCompare (const GALGAS_
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_propertyMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mIsPublic.isValid () && mAttribute_mTypeProxy.isValid () && mAttribute_mIndex.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mIsPublic.isValid () && mAttribute_mPropertyObject.isValid () && mAttribute_mIndex.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4687,7 +4678,7 @@ bool GALGAS_propertyMap_2D_element::isValid (void) const {
 void GALGAS_propertyMap_2D_element::drop (void) {
   mAttribute_lkey.drop () ;
   mAttribute_mIsPublic.drop () ;
-  mAttribute_mTypeProxy.drop () ;
+  mAttribute_mPropertyObject.drop () ;
   mAttribute_mIndex.drop () ;
 }
 
@@ -4703,7 +4694,7 @@ void GALGAS_propertyMap_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mAttribute_mIsPublic.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mTypeProxy.description (ioString, inIndentation+1) ;
+    mAttribute_mPropertyObject.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mIndex.description (ioString, inIndentation+1) ;
   }
@@ -4724,8 +4715,8 @@ GALGAS_bool GALGAS_propertyMap_2D_element::getter_mIsPublic (UNUSED_LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_propertyMap_2D_element::getter_mTypeProxy (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeProxy ;
+GALGAS_objectIR GALGAS_propertyMap_2D_element::getter_mPropertyObject (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mPropertyObject ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

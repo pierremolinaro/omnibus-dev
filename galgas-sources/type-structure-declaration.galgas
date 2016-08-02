@@ -204,7 +204,7 @@ list @propertyList {
 
 map @propertyMap {
   @bool mIsPublic
-  @unifiedTypeMap-proxy mTypeProxy
+  @objectIR mPropertyObject
   @uint mIndex
   insert insertKey error message "the '%K' property is already declared"
   search searchKey error message "there is no '%K' property"
@@ -285,7 +285,11 @@ override method @structureDeclaration enterInContext
         canBeCopied = false
       end
       propertyList += !mFieldName.string !actualPropertyType
-      [!?propertyMap insertKey !mFieldName !mIsPublic !actualPropertyType !propertyIndex]
+      [!?propertyMap insertKey
+        !mFieldName !mIsPublic
+        !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
+        !propertyIndex
+      ]
       [!?objectMap insertKey
         !mFieldName
         !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
@@ -296,7 +300,12 @@ override method @structureDeclaration enterInContext
         error mFieldName : "$" + [optionalPropertyType key] + " type is not instanciable"
       end
       propertyList += !mFieldName.string !optionalPropertyType
-      [!?propertyMap insertKey !mFieldName !mIsPublic !optionalPropertyType !propertyIndex]
+      [!?propertyMap insertKey
+        !mFieldName
+        !mIsPublic
+        !.property {!type:optionalPropertyType !plmName:mFieldName !index:propertyIndex}
+        !propertyIndex
+      ]
       [!?objectMap insertKey
         !mFieldName
         !.property {!type:optionalPropertyType !plmName:mFieldName !index:propertyIndex}
