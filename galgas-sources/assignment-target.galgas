@@ -135,11 +135,13 @@ method @assignmentTargetAST analyzeAssignmentTarget
     if inSelfType == .null then
       error selfLocation : "'self' is not available in this context" : outCurrentObject
     elsif [[inSelfType kind] isStructure] then
-      [[inSelfType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+      [[inSelfType kind] structure ?propertyMap:let structureObjectMap ?1*]
       if [structureObjectMap hasKey !mIdentifier] then
         [structureObjectMap searchKey
           !mIdentifier
+          ?*
           ?let object
+          ?*
         ]
         handleSelfAccessInAssignment (
           !inSelfType
@@ -225,9 +227,9 @@ private proc handlePropertyAccessInAssignment
   ?!@instructionListIR ioInstructionGenerationList
 {
   if [[[ioObject type] kind] isStructure] then
-    [[[ioObject type] kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+    [[[ioObject type] kind] structure ?propertyMap:let structureObjectMap ?1*]
     if [structureObjectMap hasKey !inPropertyName] then
-      [structureObjectMap searchKey !inPropertyName ?@objectIR property]
+      [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property ?*]
       if [property isProperty] then
         [property property ?type:let type ?plmName:let name ?index:let index]
         let newObject = @objectIR.temporaryReference {

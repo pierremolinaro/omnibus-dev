@@ -251,11 +251,13 @@ override method @primaryInExpressionAST analyzeExpression
     if inSelfType == .null then
       error selfLocation : "'self' is not available in this context" : currentPointer
     elsif [[inSelfType kind] isStructure] then
-      [[inSelfType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+      [[inSelfType kind] structure ?propertyMap:let structureObjectMap ?1*]
       if [structureObjectMap hasKey !mObjectName] then
         [structureObjectMap searchKey
           !mObjectName
+          ?*
           ?let object
+          ?*
         ]
         handleSelfAccessInExpression (
           !inSelfType
@@ -424,9 +426,9 @@ private proc handlePropertyInExpression
 {
 #--- Structure
   if [[[ioObjectPtr type] kind] isStructure] then
-    [[[ioObjectPtr type] kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
+    [[[ioObjectPtr type] kind] structure ?propertyMap:let structureObjectMap ?1*]
     if [structureObjectMap hasKey !inPropertyName] then
-      [structureObjectMap searchKey !inPropertyName ?@objectIR property]
+      [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property ?*]
       handlePropertyAccessInExpression (
         !?ioObjectPtr
         !inPropertyName.location
@@ -788,7 +790,7 @@ proc analyzeEffectiveParameters
           error name : "an enumeration does not handle field access" : parameterList, ioEffectiveParameterListIR
         case integer (* * * *) :
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
-        case structure (* @propertyMap propertyMap *) :
+        case structure (@propertyMap propertyMap *) :
           [propertyMap searchKey !name ?let unused public ?let propertyObject ?let idx]
           getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
           [!?ioInstructionGenerationList appendPropertyReferenceFromSelf

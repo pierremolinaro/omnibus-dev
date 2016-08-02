@@ -58,14 +58,12 @@ class cEnumAssociatedValues_typeKind_enumeration : public cEnumAssociatedValues 
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_typeKind_structure : public cEnumAssociatedValues {
-  public : const GALGAS_namedObjectMap mAssociatedValue0 ;
-  public : const GALGAS_propertyMap mAssociatedValue1 ;
-  public : const GALGAS_propertyList mAssociatedValue2 ;
+  public : const GALGAS_propertyMap mAssociatedValue0 ;
+  public : const GALGAS_propertyList mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_namedObjectMap & inAssociatedValue0,
-                                                     const GALGAS_propertyMap & inAssociatedValue1,
-                                                     const GALGAS_propertyList & inAssociatedValue2
+  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyMap & inAssociatedValue0,
+                                                     const GALGAS_propertyList & inAssociatedValue1
                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

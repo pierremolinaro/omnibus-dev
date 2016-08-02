@@ -338,7 +338,7 @@ override method @structureDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
     !llvmTypeName:"%" + ["$" + mStructureName assemblerRepresentation]
-    !kind:.structure {!objectMap: objectMap !propertyMap:propertyMap !propertyList:propertyList}
+    !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
     !classConstantMap:{}
     !instantiable:true
     !copyable:copyableAttribute

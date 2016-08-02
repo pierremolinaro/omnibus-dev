@@ -1436,9 +1436,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 
   public : static class GALGAS_typeKind constructor_staticInteger (LOCATION_ARGS) ;
 
-  public : static class GALGAS_typeKind constructor_structure (const class GALGAS_namedObjectMap & inOperand0,
-                                                               const class GALGAS_propertyMap & inOperand1,
-                                                               const class GALGAS_propertyList & inOperand2
+  public : static class GALGAS_typeKind constructor_structure (const class GALGAS_propertyMap & inOperand0,
+                                                               const class GALGAS_propertyList & inOperand1
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1470,9 +1469,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_namedObjectMap & outArgument0,
-                                                   class GALGAS_propertyMap & outArgument1,
-                                                   class GALGAS_propertyList & outArgument2,
+  public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_propertyMap & outArgument0,
+                                                   class GALGAS_propertyList & outArgument1,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
