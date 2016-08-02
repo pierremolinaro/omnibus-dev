@@ -129,7 +129,6 @@ override method @typeArrayDeclaration enterInContext
     !?temporary:temporaries
     !?staticStringMap:*
     !?variableMap:variableMap
-    !?namedObjectMap: namedObjectMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
     ?result:@objectIR sizeExpressionIR

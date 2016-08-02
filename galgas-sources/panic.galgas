@@ -157,7 +157,6 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
-    !?namedObjectMap: namedObjectMap
     !?alloca:initAllocaList
     !?generatedCode:instructionGenerationList
   ]

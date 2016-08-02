@@ -102,7 +102,6 @@ method @bootList-element bootSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
-    !?namedObjectMap: namedObjectMap
     !?alloca:bootAllocaList
     !?generatedCode:instructionGenerationList
   ]

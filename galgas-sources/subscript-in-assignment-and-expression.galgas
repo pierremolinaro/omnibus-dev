@@ -11,7 +11,6 @@ proc handleSubscriptInAssignmentAndExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
 
   ?let @expressionAST inIndexExpression 
@@ -31,7 +30,6 @@ proc handleSubscriptInAssignmentAndExpression
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioVariableMap
-      !?namedObjectMap: ioNamedObjectMap
       !?alloca: ioAllocaList
       !inIndexExpression 
       !inErrorLocation
@@ -50,7 +48,6 @@ proc handleSubscriptInAssignmentAndExpression
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioVariableMap
-      !?namedObjectMap: ioNamedObjectMap
       !?alloca: ioAllocaList
       !inIndexExpression 
       !inErrorLocation
@@ -75,7 +72,6 @@ private proc handleSubscriptArrayInAssignmentAndExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
@@ -97,7 +93,6 @@ private proc handleSubscriptArrayInAssignmentAndExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR indexResult
@@ -166,7 +161,6 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
@@ -200,7 +194,6 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:let @objectIR indexResult

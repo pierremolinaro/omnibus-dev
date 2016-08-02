@@ -224,7 +224,6 @@ override method @primaryInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
@@ -287,7 +286,6 @@ override method @primaryInExpressionAST analyzeExpression
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !propertyName
         !?ioInstructionGenerationList
@@ -305,7 +303,6 @@ override method @primaryInExpressionAST analyzeExpression
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !indexExpression
         !endOfIndex
@@ -326,7 +323,6 @@ override method @primaryInExpressionAST analyzeExpression
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !arguments
         !errorLocation
@@ -421,7 +417,6 @@ private proc handlePropertyInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
-  ?!namedObjectMap:@namedObjectMap unused ioNamedObjectMap
   ?!alloca:@allocaList unused ioAllocaList
   ?let @lstring inPropertyName
   ?!@instructionListIR ioInstructionGenerationList
@@ -493,7 +488,6 @@ proc handleFunctionCallInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?let @effectiveParameterListAST inArguments 
   ?let @location inErrorLocation
@@ -522,7 +516,6 @@ proc handleFunctionCallInExpression
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
@@ -565,7 +558,6 @@ proc analyzeFunctionCallInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
@@ -642,7 +634,6 @@ proc analyzeFunctionCallInExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
-    !?namedObjectMap: ioNamedObjectMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:outEffectiveParameterListIR
@@ -665,7 +656,6 @@ proc analyzeEffectiveParameters
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
@@ -682,7 +672,6 @@ proc analyzeEffectiveParameters
       end
       let varLLVMName = @lstring.new {!name.string + "." + ioTemporaries.mTemporaryIndex !name}
       ioTemporaries.mTemporaryIndex ++
-      [!?ioNamedObjectMap insertKey !name !.localVariableReference {!type:type !plmName:varLLVMName}]
       if constant then
         [!?ioVariableMap insertConstant
           !lkey:name
@@ -742,7 +731,6 @@ proc analyzeEffectiveParameters
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @objectIR expressionResult

@@ -80,7 +80,6 @@ override method @forLowerUpperBoundInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -114,7 +113,6 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:@objectIR lowerBoundExpressionResult
@@ -131,7 +129,6 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?namedObjectMap: ioNamedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:@objectIR upperBoundExpressionResult
@@ -155,8 +152,6 @@ override method @forLowerUpperBoundInstructionAST analyze
     ioAllocaList += !enumeratedVarLLVMName !type
   #--- Analyze instruction list
     [!?ioVariableMap openOverrideForRepeatBlock]
-    var namedObjectMap = @namedObjectMap.mapWithMapToOverride {!ioNamedObjectMap}
-    [!?namedObjectMap insertKey !mVarName !.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}]
     [!?ioVariableMap insertUsedConstant
       !lkey:mVarName
       !type:type
@@ -178,7 +173,6 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
-      !?namedObjectMap: namedObjectMap
       !?alloca:ioAllocaList
       !?instructionListIR:instructionGenerationList
     ]

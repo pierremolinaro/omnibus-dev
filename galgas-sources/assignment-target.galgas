@@ -108,7 +108,6 @@ method @assignmentTargetAST analyzeAssignmentTarget
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
-  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !@objectIR outCurrentObject
@@ -178,7 +177,6 @@ method @assignmentTargetAST analyzeAssignmentTarget
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?namedObjectMap: ioNamedObjectMap
         !?alloca:ioAllocaList
         !indexExpression
         !endOfExpression

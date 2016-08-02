@@ -333,9 +333,8 @@ typedef void (*extensionMethodSignature_instructionAST_analyze) (const class cPt
                                                                  class GALGAS_semanticTemporariesStruct & ioArgument7,
                                                                  class GALGAS_staticStringMap & ioArgument8,
                                                                  class GALGAS_variableMap & ioArgument9,
-                                                                 class GALGAS_namedObjectMap & ioArgument10,
-                                                                 class GALGAS_allocaList & ioArgument11,
-                                                                 class GALGAS_instructionListIR & ioArgument12,
+                                                                 class GALGAS_allocaList & ioArgument10,
+                                                                 class GALGAS_instructionListIR & ioArgument11,
                                                                  class C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -357,7 +356,6 @@ void callExtensionMethod_analyze (const class cPtr_instructionAST * inObject,
                                   GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                   GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                   GALGAS_variableMap & io_ioVariableMap,
-                                  GALGAS_namedObjectMap & io_ioNamedObjectMap,
                                   GALGAS_allocaList & io_ioAllocaList,
                                   GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                   C_Compiler * inCompiler
@@ -381,7 +379,6 @@ void extensionMethod_analyzeBranchInstructionList (const class GALGAS_instructio
                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                    class GALGAS_variableMap & io_ioVariableMap,
-                                                   class GALGAS_namedObjectMap & io_ioNamedObjectMap,
                                                    class GALGAS_allocaList & io_ioAllocaList,
                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                    class C_Compiler * inCompiler
