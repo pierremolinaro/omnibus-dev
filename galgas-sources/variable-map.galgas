@@ -4,15 +4,6 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @namedObjectMap {
-  @objectIR mObject
-
-  insert insertKey error message "duplicated %K (already declared at %L)"
-  search searchKey error message "%K does not exist"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc initialVariableMap
   ?routineNameForInvocation:let @string inRoutineNameForInvocation
   ?context:let @semanticContext inContext
