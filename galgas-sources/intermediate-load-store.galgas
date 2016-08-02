@@ -9,8 +9,6 @@ setter @instructionListIR appendStoreFromReference
 #--- Temporary ?
   case selfObject (*) :
     error [inTargetReference location] : "<<@instructionListIR appendStoreFromReference selfObject>>"
-#  case llvmGlobalObjectValue (**) :
-#    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue selfObject>>"
 #--- References
   case globalVariableReference (@unifiedTypeMap-proxy type @lstring plmName) :
     [!?self appendStoreGlobalVariable !plmName !type !inValue !volatile:false]
