@@ -491,6 +491,14 @@ mEnum (kNotBuilt) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_objectIR GALGAS_objectIR::constructor_null (UNUSED_LOCATION_ARGS) {
+  GALGAS_objectIR result ;
+  result.mEnum = kEnum_null ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_objectIR GALGAS_objectIR::constructor_selfObject (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0
                                                          COMMA_LOCATION_ARGS) {
   GALGAS_objectIR result ;
@@ -687,14 +695,6 @@ GALGAS_objectIR GALGAS_objectIR::constructor_possibleFunction (const GALGAS_obje
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_objectIR::constructor_null (UNUSED_LOCATION_ARGS) {
-  GALGAS_objectIR result ;
-  result.mEnum = kEnum_null ;
   return result ;
 }
 
@@ -957,6 +957,7 @@ void GALGAS_objectIR::method_possibleFunction (GALGAS_objectIR & outAssociatedVa
 
 static const char * gEnumNameArrayFor_objectIR [14] = {
   "(not built)",
+  "null",
   "selfObject",
   "globalVariableReference",
   "localVariableReference",
@@ -968,9 +969,14 @@ static const char * gEnumNameArrayFor_objectIR [14] = {
   "llvmStructureConstant",
   "literalString",
   "zero",
-  "possibleFunction",
-  "null"
+  "possibleFunction"
 } ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_objectIR::getter_isNull (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_null == mEnum) ;
+}
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -1042,12 +1048,6 @@ GALGAS_bool GALGAS_objectIR::getter_isZero (UNUSED_LOCATION_ARGS) const {
 
 GALGAS_bool GALGAS_objectIR::getter_isPossibleFunction (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_possibleFunction == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_objectIR::getter_isNull (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_null == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

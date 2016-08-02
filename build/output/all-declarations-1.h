@@ -1280,6 +1280,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
+    kEnum_null,
     kEnum_selfObject,
     kEnum_globalVariableReference,
     kEnum_localVariableReference,
@@ -1291,8 +1292,7 @@ class GALGAS_objectIR : public AC_GALGAS_root {
     kEnum_llvmStructureConstant,
     kEnum_literalString,
     kEnum_zero,
-    kEnum_possibleFunction,
-    kEnum_null
+    kEnum_possibleFunction
   } enumeration ;
   
 //--------------------------------- Private data member

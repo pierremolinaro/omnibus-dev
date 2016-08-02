@@ -1,42 +1,41 @@
 
-setter @instructionListIR appendStoreTaskVariable
-  ?let @string inTaskName
-  ?let @string inVarName
-  ?let @unifiedTypeMap-proxy inTargetVarType
-  ?let @objectIR inSourceValue
+setter @instructionListIR appendLoadFromTemporaryReference
+  ?let @objectIR inTargetValue
+  ?let @string inLLVMName
+  ?let @bool inVolatile
 {
-  self += !@storeTaskVariableIR.new {!inTaskName !inVarName !inTargetVarType !inSourceValue}
+  self += !@loadFromTemporaryReferenceIR.new {!inTargetValue !inLLVMName !inVolatile}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @storeTaskVariableIR : @abstractInstructionIR {
-  @string mTaskName
-  @string mVarName
-  @unifiedTypeMap-proxy mTargetVarType
-  @objectIR mSourceValue
+class @loadFromTemporaryReferenceIR : @abstractInstructionIR {
+  @objectIR mTargetValue
+  @string mLLVMName
+  @bool mVolatile
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeTaskVariableIR llvmInstructionCode
+override method @loadFromTemporaryReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetVarType llvmTypeName]
-  ioLLVMcode += "  store "
-  ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * @"
-  ioLLVMcode += llvmNameForTaskVariable (!mTaskName !mVarName) + "\n"
+  let llvmType = [mTargetValue llvmTypeName]
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
+  if mVolatile then
+    ioLLVMcode += "volatile "
+  end
+  ioLLVMcode += llvmType + ", " + llvmType + " * %" + mLLVMName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeTaskVariableIR enterAccessibleEntities 
-  ?!@accessibleEntities ioAccessibleEntities
+override method @loadFromTemporaryReferenceIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioAccessibleEntities.mTaskVariableSet += !mTaskName + "." + mVarName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

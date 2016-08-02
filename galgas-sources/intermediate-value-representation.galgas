@@ -3,6 +3,8 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @objectIR {
+#--- No object
+  case null
 #--- References
   case selfObject (@unifiedTypeMap-proxy type)
   case globalVariableReference (@unifiedTypeMap-proxy type @lstring plmName)
@@ -26,7 +28,6 @@ enum @objectIR {
   case zero (@unifiedTypeMap-proxy type)
 #--- Function
   case possibleFunction (@objectIR receiver @lstring functionName)
-  case null
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
