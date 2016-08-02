@@ -14,20 +14,6 @@ struct @accessibleEntities {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @objectInMemoryIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-  switch self
-  case registerAddress (* *) :
-  case register (* * * * * * * *) :
-  case globalVariable (* @string name *) :
-    ioAccessibleEntities.mGlobalVariableSet += !name
-  case localVariable (* * *) :
-  case staticConstant (* *) :
-  case property (* * *) :
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 abstract method @abstractInstructionIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint ioMaxBranchOfOnInstructions

@@ -131,288 +131,6 @@ class cEnumAssociatedValues_typeKind_arrayType : public cEnumAssociatedValues {
   public : virtual ~ cEnumAssociatedValues_typeKind_arrayType (void) {}
 } ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               @objectInMemoryIR enum                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_objectInMemoryIR : public AC_GALGAS_root {
-//--------------------------------- Default constructor
-  public : GALGAS_objectInMemoryIR (void) ;
-
-//--------------------------------- Enumeration
-  public : typedef enum {
-    kNotBuilt,
-    kEnum_registerAddress,
-    kEnum_register,
-    kEnum_globalVariable,
-    kEnum_localVariable,
-    kEnum_staticConstant,
-    kEnum_property
-  } enumeration ;
-  
-//--------------------------------- Private data member
-  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
-
-  private : enumeration mEnum ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
-  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
-  public : inline enumeration enumValue (void) const { return mEnum ; }
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_objectInMemoryIR extractObject (const GALGAS_object & inObject,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_objectInMemoryIR constructor_globalVariable (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                            const class GALGAS_string & inOperand1,
-                                                                            const class GALGAS_bool & inOperand2
-                                                                            COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_objectInMemoryIR constructor_localVariable (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                           const class GALGAS_string & inOperand1,
-                                                                           const class GALGAS_bool & inOperand2
-                                                                           COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_objectInMemoryIR constructor_property (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                      const class GALGAS_string & inOperand1,
-                                                                      const class GALGAS_uint & inOperand2
-                                                                      COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_objectInMemoryIR constructor_register (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                      const class GALGAS_lstring & inOperand1,
-                                                                      const class GALGAS_bool & inOperand2,
-                                                                      const class GALGAS_bool & inOperand3,
-                                                                      const class GALGAS_bigint & inOperand4,
-                                                                      const class GALGAS_sliceMap & inOperand5,
-                                                                      const class GALGAS_uint & inOperand6,
-                                                                      const class GALGAS_uint & inOperand7
-                                                                      COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_objectInMemoryIR constructor_registerAddress (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                                             const class GALGAS_string & inOperand1
-                                                                             COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_objectInMemoryIR constructor_staticConstant (const class GALGAS_objectIR & inOperand0,
-                                                                            const class GALGAS_lstring & inOperand1
-                                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_objectInMemoryIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_globalVariable (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                        class GALGAS_string & outArgument1,
-                                                        class GALGAS_bool & outArgument2,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_localVariable (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                       class GALGAS_string & outArgument1,
-                                                       class GALGAS_bool & outArgument2,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_property (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                  class GALGAS_string & outArgument1,
-                                                  class GALGAS_uint & outArgument2,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_register (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                  class GALGAS_lstring & outArgument1,
-                                                  class GALGAS_bool & outArgument2,
-                                                  class GALGAS_bool & outArgument3,
-                                                  class GALGAS_bigint & outArgument4,
-                                                  class GALGAS_sliceMap & outArgument5,
-                                                  class GALGAS_uint & outArgument6,
-                                                  class GALGAS_uint & outArgument7,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_registerAddress (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                         class GALGAS_string & outArgument1,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG void method_staticConstant (class GALGAS_objectIR & outArgument0,
-                                                        class GALGAS_lstring & outArgument1,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegister (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegisterAddress (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticConstant (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_objectInMemoryIR class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectInMemoryIR ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      @objectInMemoryIR enum, associated values                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectInMemoryIR_registerAddress : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_registerAddress (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                   const GALGAS_string & inAssociatedValue1
-                                                                   COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_registerAddress (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectInMemoryIR_register : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_lstring mAssociatedValue1 ;
-  public : const GALGAS_bool mAssociatedValue2 ;
-  public : const GALGAS_bool mAssociatedValue3 ;
-  public : const GALGAS_bigint mAssociatedValue4 ;
-  public : const GALGAS_sliceMap mAssociatedValue5 ;
-  public : const GALGAS_uint mAssociatedValue6 ;
-  public : const GALGAS_uint mAssociatedValue7 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_register (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                            const GALGAS_lstring & inAssociatedValue1,
-                                                            const GALGAS_bool & inAssociatedValue2,
-                                                            const GALGAS_bool & inAssociatedValue3,
-                                                            const GALGAS_bigint & inAssociatedValue4,
-                                                            const GALGAS_sliceMap & inAssociatedValue5,
-                                                            const GALGAS_uint & inAssociatedValue6,
-                                                            const GALGAS_uint & inAssociatedValue7
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_register (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectInMemoryIR_globalVariable : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
-  public : const GALGAS_bool mAssociatedValue2 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_globalVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                  const GALGAS_string & inAssociatedValue1,
-                                                                  const GALGAS_bool & inAssociatedValue2
-                                                                  COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_globalVariable (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectInMemoryIR_localVariable : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
-  public : const GALGAS_bool mAssociatedValue2 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_localVariable (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                                 const GALGAS_string & inAssociatedValue1,
-                                                                 const GALGAS_bool & inAssociatedValue2
-                                                                 COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_localVariable (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectInMemoryIR_staticConstant : public cEnumAssociatedValues {
-  public : const GALGAS_objectIR mAssociatedValue0 ;
-  public : const GALGAS_lstring mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_staticConstant (const GALGAS_objectIR & inAssociatedValue0,
-                                                                  const GALGAS_lstring & inAssociatedValue1
-                                                                  COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_staticConstant (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_objectInMemoryIR_property : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_string mAssociatedValue1 ;
-  public : const GALGAS_uint mAssociatedValue2 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_objectInMemoryIR_property (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                            const GALGAS_string & inAssociatedValue1,
-                                                            const GALGAS_uint & inAssociatedValue2
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_objectInMemoryIR_property (void) {}
-} ;
-
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3622,5 +3340,95 @@ class GALGAS_lstring function_interruptNameForInvocationGraph (class GALGAS_lstr
 class GALGAS_lstring function_llvmNameForInterrupt (class GALGAS_lstring inArgument0,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              Function 'llvmNameForISR'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForISR (class GALGAS_string inArgument0,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Function 'llvmNameForPrimitiveCall'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForPrimitiveCall (class GALGAS_string inArgument0,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Function 'llvmNameForPrimitiveImplementation'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForPrimitiveImplementation (class GALGAS_string inArgument0,
+                                                                 class C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'llvmNameForServiceCall'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForServiceCall (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'llvmNameForServiceImplementation'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForServiceImplementation (class GALGAS_string inArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'llvmNameForSectionCall'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSectionCall (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'llvmNameForSectionImplementation'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSectionImplementation (class GALGAS_string inArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Function 'llvmNameForGuardCall'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForGuardCall (class GALGAS_string inArgument0,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Function 'llvmNameForGuardImplementation'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForGuardImplementation (class GALGAS_string inArgument0,
+                                                             class C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 #endif
