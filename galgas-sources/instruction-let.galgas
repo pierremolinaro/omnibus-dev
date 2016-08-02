@@ -109,7 +109,7 @@ override method @letInstructionWithAssignmentAST analyze
   if [result key] != staticIntegerTypeName () then
     ioAllocaList += !varPLMName ![result type]
     let localConstant = @objectIR.localVariableReference {!type:[result type] !plmName:varPLMName}
-    [!?ioInstructionGenerationList appendStoreFromReference !result !mVarName !localConstant]
+    [!?ioInstructionGenerationList appendStoreFromReference !localConstant !mVarName !result]
   end
   [!?ioVariableMap insertConstant
     !lkey:mVarName

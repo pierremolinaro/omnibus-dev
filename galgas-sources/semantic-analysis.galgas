@@ -209,7 +209,13 @@ override method @functionCallIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult llvmName] + " = call " + [mResult llvmTypeName] + " @"
+  ioLLVMcode += "  "
+  if [mResult type] == .null then
+    ioLLVMcode += "call void"
+  else
+    ioLLVMcode += [mResult llvmName] + " = call " + [mResult llvmTypeName]
+  end
+  ioLLVMcode += " @"
   switch mKind 
   case function : ioLLVMcode += llvmNameForFunction (!mFunctionNameForGeneration.string)
   case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mFunctionNameForGeneration.string)
