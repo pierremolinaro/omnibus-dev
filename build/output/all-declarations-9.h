@@ -103,6 +103,7 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_a
 
 void extensionMethod_analyzeAssignmentTarget (const class GALGAS_assignmentTargetAST inObject,
                                               const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                              const class GALGAS_targetAccessKind constin_inSelfAccessKind,
                                               const class GALGAS_bool constin_inRoutineCanMutateProperties,
                                               const class GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
                                               const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
@@ -118,16 +119,6 @@ void extensionMethod_analyzeAssignmentTarget (const class GALGAS_assignmentTarge
                                               class GALGAS_objectIR & out_outCurrentObject,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Extension method '@objectIR checkReadable'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_checkReadable (const class GALGAS_objectIR inObject,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

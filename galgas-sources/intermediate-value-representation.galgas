@@ -33,27 +33,27 @@ enum @objectIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @objectIR checkReadable {
-  switch self
-  case null : error .nowhere : "<<@objectIR checkReadable null>>"
-  case possibleFunction (* *) : error .nowhere : "<<@objectIR checkReadable possibleFunction>>"
-  case selfObject (*) :
-  case llvmGlobalObjectValue (**) :
-  case globalVariableReference (**) :
-  case localVariableReference (**) :
-  case temporaryReference (****) :
-  case registerReference (* @lstring name @bool readable * * * * *) :
-    if not readable then
-      error name : "the control register cannot be read in current context"
-    end
-  case property (* * *) :
-  case llvmTemporaryValue (* * *) :
-  case llvmStructureConstant (* *) :
-  case literalInteger (* *) :
-  case literalString (* * *) :
-  case zero (*) :
-  end
-}
+#method @objectIR checkReadable {
+#  switch self
+#  case null : error .nowhere : "<<@objectIR checkReadable null>>"
+#  case possibleFunction (* *) : error .nowhere : "<<@objectIR checkReadable possibleFunction>>"
+#  case selfObject (*) :
+#  case llvmGlobalObjectValue (**) :
+#  case globalVariableReference (**) :
+#  case localVariableReference (**) :
+#  case temporaryReference (****) :
+#  case registerReference (* @lstring name @bool readable * * * * *) :
+#    if not readable then
+#      error name : "the control register cannot be read in current context"
+#    end
+#  case property (* * *) :
+#  case llvmTemporaryValue (* * *) :
+#  case llvmStructureConstant (* *) :
+#  case literalInteger (* *) :
+#  case literalString (* * *) :
+#  case zero (*) :
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

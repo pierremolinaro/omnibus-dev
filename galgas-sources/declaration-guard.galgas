@@ -520,6 +520,7 @@ method @callInstructionAST baseGuardAnalyze
 {
   [mAssignmentTargetAST analyzeAssignmentTarget
     !self: inSelfType
+    !targetAccessKind:.readWrite
     !propertiesAreMutable: false
     !directAccessToPropertiesAllowed: false
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -559,11 +560,11 @@ method @callInstructionAST baseGuardAnalyze
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList
       ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
-      ?routineKind:let @routineKindIR routineKind
+      ?routineKind:let @routineKindIR unused routineKind
       ?routineMangledName:let @lstring functionMangledName
-      ?routineNameForGeneration:let @lstring functionNameForGeneration
+      ?routineNameForGeneration:let @lstring unused functionNameForGeneration
       ?returnType:let @unifiedTypeMap-proxy returnedType
-      ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
+      ?appendFileAndLineArgumentForPanicLocation:let unused appendFileAndLineArgumentForPanicLocation
     )
     if returnedType == .null then
       error functionName : "the function cannot be called in expression: no return value"

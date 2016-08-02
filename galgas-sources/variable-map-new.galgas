@@ -61,16 +61,6 @@ proc initialVariableMap
         !elementSize: mElementArraySize # 0 if not an array
       }
       [!?outObjectMap insertKey !lkey !objectReference]
-      let objectInMemory = @objectInMemoryIR.register {
-        !type:mType
-        !plmName:lkey
-        !readable:false
-        !writable:false
-        !address:mAddress 
-        !sliceMap:mRegisterFieldAccessMap
-        !arraySize: mArraySize # 0 if not an array
-        !elementSize: mElementArraySize # 0 if not an array
-      }
       [!?outVariableMap insertInaccessibleControlRegister
         !lkey:lkey
         !type:mType
@@ -94,16 +84,6 @@ proc initialVariableMap
           !elementSize: mElementArraySize # 0 if not an array
         }
         [!?outObjectMap insertKey !lkey !objectReference]
-        let objectInMemory = @objectInMemoryIR.register {
-          !type:mType
-          !plmName:lkey
-          !readable:false
-          !writable:false
-          !address:mAddress 
-          !sliceMap:mRegisterFieldAccessMap
-          !arraySize: mArraySize # 0 if not an array
-          !elementSize: mElementArraySize # 0 if not an array
-        }
         [!?outVariableMap insertInaccessibleControlRegister
           !lkey:lkey
           !type:mType
@@ -124,16 +104,6 @@ proc initialVariableMap
           !elementSize: mElementArraySize # 0 if not an array
         }
         [!?outObjectMap insertKey !lkey !objectReference]
-        let objectInMemory = @objectInMemoryIR.register {
-          !type:mType
-          !plmName:lkey
-          !readable:true
-          !writable:false
-          !address:mAddress 
-          !sliceMap:mRegisterFieldAccessMap
-          !arraySize: mArraySize # 0 if not an array
-          !elementSize: mElementArraySize # 0 if not an array
-        }
         [!?outVariableMap insertUsedConstant
           !lkey:lkey
           !type:mType
@@ -157,16 +127,6 @@ proc initialVariableMap
         !elementSize: mElementArraySize # 0 if not an array
       }
       [!?outObjectMap insertKey !lkey !objectReference]
-      let objectInMemory = @objectInMemoryIR.register {
-        !type:mType
-        !plmName:lkey
-        !readable:true
-        !writable:true
-        !address:mAddress 
-        !sliceMap:mRegisterFieldAccessMap
-        !arraySize: mArraySize # 0 if not an array
-        !elementSize: mElementArraySize # 0 if not an array
-      }
       [!?outVariableMap insertDefinedVariable
         !lkey:lkey
         !type:mType
