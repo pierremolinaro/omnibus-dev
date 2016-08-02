@@ -50,7 +50,6 @@ syntax extension common_syntax {
     or
       $:$
       <procedure_call> ?let instruction
-#      <routine_call> ?let unused instructionLocation ?let @abstractCallInstructionAST instruction
       guardKind = .convenienceGuard {!base:instruction}
     end
     ${$
@@ -174,7 +173,6 @@ proc guardSemanticAnalysis
 #--- Guard mangled name
   var guardMangledName = if inSelfType == .null then
     inRoutineName
-#    @lstring.new {!"." + inRoutineName !inRoutineName.location}
   else
     @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
   end
@@ -184,7 +182,6 @@ proc guardSemanticAnalysis
   end
   guardMangledName.string += ")"
 #--- Enter subprogram invocation graph
-#  let routineNameForInvocationGraph = guardNameForInvocationGraph (!inSelfType !inRoutineName)
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !guardMangledName.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
       !guardMangledName
@@ -260,14 +257,13 @@ proc guardSemanticAnalysis
       !?formalArguments
     )
   #--- Analyze base guard
-    @instructionListIR baseGuardInstructionGenerationList = {}
     [baseGuardInstruction baseGuardAnalyze 
       !self:inSelfType
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
       !modes:{!userModeName ()} # Convenience guards instructions are executed in user mode
-      !?alloca:allocaList
-      !?instructionListIR:instructionGenerationList
+#      !?alloca:allocaList
+#      !?instructionListIR:instructionGenerationList
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
@@ -296,11 +292,6 @@ proc guardSemanticAnalysis
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
   drop variableMap
 #--- Code generation
-#  let guardMangledName = if inSelfType == .null then
-#    @lstring.new {!"." + inRoutineName !inRoutineName.location}
-#  else
-#    @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
-#  end
   [!?ioIntermediateCodeStruct.mGuardMapIR insertKey
     !guardMangledName
     !formalArguments
@@ -342,13 +333,11 @@ private proc standaloneBaseGuardAnalyze
 {
 #--- Guard mangled name
   var guardMangledName = inRoutineName
-#  var guardMangledName = @lstring.new {!"." + inRoutineName !inRoutineName.location}
   guardMangledName.string += "("
   for (formalArgumentPassingMode selector) in inEffectiveParameterList do
     guardMangledName.string += [formalArgumentPassingMode matchingFormalArgument] + selector + ":"
   end
   guardMangledName.string += ")"
-#  let routineMangledName = @lstring.new {!"." + inRoutineName !inRoutineName.location}
   [inContext.mGuardMapForContext searchKey
     !guardMangledName
     ?let isPublic
@@ -363,7 +352,6 @@ private proc standaloneBaseGuardAnalyze
     end
   end  
 #--- Enter in invocation graph
- # let routineNameForInvocationGraph = guardNameForInvocationGraph (!.null !inRoutineName)
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !guardMangledName]
 #--- Analyze effective parameters
   @instructionListIR baseGuardInstructionGenerationList = {}
@@ -399,125 +387,21 @@ private proc standaloneBaseGuardAnalyze
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @unifiedSelfCallInstructionAST baseGuardAnalyze
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?modes:let @stringset unused inModeSet
-#  ?!alloca:@allocaList unused ioAllocaList
-#  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@variableMap ioVariableMap
-#  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
-#  !@guardKindGenerationIR outConvenienceGuardGenerationIR
-#{
-#  if inSelfType == .null then
-#    error mSelfLocation : "'self' is not available in this context" : outConvenienceGuardGenerationIR
-#  else
-#    @unifiedTypeMap-proxy currentType = inSelfType
-#    @fieldList propertyList = mFieldList
-#    [!?propertyList popLast ?let @lstring methodName ?*]
-#    @elementPtrList elementPtrList = {}
-#    var needsPublic = false
-#    for (propertyName arrayAccess) in propertyList do
-#      switch [currentType kind]
-#      case opaque (*) :
-#        error propertyName : "an opaque type does not handle field access" : currentType
-#      case boolean :
-#        error propertyName : "a boolean does not handle field access" : currentType
-#      case staticInteger :
-#        error propertyName : "an integer does not handle field access" : currentType
-#      case literalString :
-#        error propertyName : "a literal string does not handle field access" : currentType
-#      case enumeration (*) :
-#        error propertyName : "an enumeration does not handle field access" : currentType
-#      case arrayType (* *) :
-#        error propertyName : "an array does not handle field access" : currentType
-#      case integer (* * * *) :
-#        error propertyName : "an integer does not handle field access" : currentType
-#      case structure (* @propertyMap unused propertyMap *) :
-#        [propertyMap searchKey !propertyName ?let public ?let propertyType ?let idx]
-#        elementPtrList += !.absolute {!index:idx} !propertyName.string
-#        currentType = propertyType
-#        if needsPublic && not public then
-#          error propertyName : "this property is not public" : currentType
-#        end
-#        needsPublic = true
-#      end
-#    end
-#    getLocalNameOfNewTempObjectInMemory (!currentType !?ioTemporaries ?let propertyAddressLLVMvar)
-#    @instructionListIR baseGuardInstructionGenerationList = {}
-#    [!?baseGuardInstructionGenerationList appendGetElementPtrFromSelf
-#      !propertyAddressLLVMvar
-#      !inSelfType
-#      !elementPtrList
-#    ]        
-#    var routineMangledName = @lstring.new {!"$" + [currentType key] + "." + methodName !methodName.location}
-#    routineMangledName.string += "("
-#    for (formalArgumentPassingMode selector) in mEffectiveParameterList do
-#      routineMangledName.string += [formalArgumentPassingMode matchingFormalArgument] + selector + ":"
-#    end
-#    routineMangledName.string += ")"
-#    @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-#    effectiveParameterListIR += !.outputInput ![propertyAddressLLVMvar address] #--- add "load receiver" as first argument
-#    [inContext.mGuardMapForContext searchKey
-#      !routineMangledName
-#      ?let isPublic
-#      ?let @procedureSignature formalSignature
-#    ]
-#  #--- Accessibility
-#    if needsPublic && not isPublic then
-#      error methodName : "this guard is not public"
-#    end
-#  #--- Enter in invocation graph
-#    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-#  #--- Analyze effective parameters
-#    @allocaList baseGuardAllocaList = {}
-#    analyzeEffectiveParameters (
-#      !self:inSelfType
-#      !directAccessToPropertiesAllowed:true
-#      !propertiesAreMutable:true
-#      !formal:formalSignature
-#      !effective:mEffectiveParameterList
-#      !errorLocation:methodName.location
-#      !callerForInvocationGraph:inCallerNameForInvocationGraph
-#      !context:inContext
-#      !requiredModeSet:{!serviceModeName ()}
-#      !allowPanic:true
-#      !?temporary:ioTemporaries
-#      !?staticStringMap:ioGlobalLiteralStringMap
-#      !?variableMap:ioVariableMap
-#      !?namedObjectMap: ioNamedObjectMap
-#      !?alloca:baseGuardAllocaList
-#      !?instructionListIR:baseGuardInstructionGenerationList
-#      !?effectiveIR:effectiveParameterListIR
-#    )
-#  #--- Code generation
-#    outConvenienceGuardGenerationIR = .convenienceGuard {
-#      !baseGuardAllocaList:baseGuardAllocaList
-#      !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-#      !baseGuardMangledName:routineMangledName.string
-#      !baseGuardEffectiveParameterList:effectiveParameterListIR
-#    }
-#  end
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 method @callInstructionAST baseGuardAnalyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?modes:let @stringset inModeSet
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
+  @allocaList baseGuardAllocaList = {}
+  @instructionListIR baseGuardInstructionGenerationList = {}
   [mAssignmentTargetAST analyzeAssignmentTarget
     !self: inSelfType
     !targetAccessKind:.readWrite
@@ -531,8 +415,8 @@ method @callInstructionAST baseGuardAnalyze
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap: ioVariableMap
     !?namedObjectMap: ioNamedObjectMap
-    !?alloca: ioAllocaList
-    !?instructionListIR: ioInstructionGenerationList
+    !?alloca: baseGuardAllocaList
+    !?instructionListIR: baseGuardInstructionGenerationList
     ?@objectIR currentObject
     ?globalVariableReceiverName: let unused globalVariableReceiverName
   ]
@@ -541,8 +425,6 @@ method @callInstructionAST baseGuardAnalyze
     error .nowhere : "object is not a function" : outConvenienceGuardGenerationIR
   else
     [currentObject possibleFunction ?receiver:let receiver ?functionName:let functionName]
-    @allocaList baseGuardAllocaList = {}
-    @instructionListIR baseGuardInstructionGenerationList = {}
     analyzeFunctionCallInExpression (
       !self:inSelfType
       !propertiesAreMutable:false
@@ -577,112 +459,7 @@ method @callInstructionAST baseGuardAnalyze
       !baseGuardMangledName:functionMangledName.string
       !baseGuardEffectiveParameterList:effectiveParameterListIR
     }
-#    ioInstructionGenerationList += !@functionCallIR.new {
-#      !functionResult
-#      !functionMangledName
-#      !functionNameForGeneration
-#      !routineKind
-#      !effectiveParameterListIR
-#      !appendFileAndLineArgumentForPanicLocation
-#    }
-  #---
-#    ioObjectPtr = functionResult
   end
-
-#  @accessList accessList = mAccessList
-#  [!?accessList popLast ?let routineName ?let arrayElementAccess]
-#  if arrayElementAccess != .noAccess then
-#    error routineName : "array element access is not alowed here"
-#  end
-#  if [accessList length] == 0 then
-#    standaloneBaseGuardAnalyze (
-#      !routineName:routineName
-#      !effectiveParameters:mEffectiveParameterList
-#      !self:inSelfType
-#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#      !context: inContext
-#      !?temporary:ioTemporaries
-#      !?staticStringMap:ioGlobalLiteralStringMap
-#      !?variableMap:ioVariableMap
-#      !?namedObjectMap: ioNamedObjectMap
-#      ?outConvenienceGuardGenerationIR
-#    )
-#  else
-#    analyzeVariableAccess (
-#      !fieldList:accessList
-#      !self:inSelfType
-#      !directAccessToPropertiesAllowed:true
-#      !inGuard:false
-#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#      !context:inContext
-#      !modes:inModeSet
-#      !allowPanic:true
-#      !?temporary:ioTemporaries
-#      !?staticStringMap:ioGlobalLiteralStringMap
-#      !?variableMap:ioVariableMap
-#      !?namedObjectMap: ioNamedObjectMap
-#      !?alloca:ioAllocaList
-#      !?instructionListIR:ioInstructionGenerationList
-#      ?resultPtr:let targetPtr
-#    )
-#  #--- Extract base variable and access
-#    [accessList first ?let baseName ?*]
-#  #--- Check target access
-#    [!?ioVariableMap searchForMethodCall
-#      !lkey:baseName
-#      ?1*
-#      ?readAccessAllowed:*
-#      ?variableKin:*
-#      ?objectIR:*
-#      ?copyable:*
-#      ?1*
-#    ]
-#    let receiverType = [targetPtr type]
-#    @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-#    effectiveParameterListIR += !.outputInput ![targetPtr address] #--- add "load receiver" as first argument
-#    @instructionListIR baseGuardInstructionGenerationList = {}
-#    var routineMangledName = @lstring.new {!"$" + [receiverType key] + "." + routineName !routineName.location}
-#    routineMangledName.string += "("
-#    for (formalArgumentPassingMode selector) in mEffectiveParameterList do
-#      routineMangledName.string += [formalArgumentPassingMode matchingFormalArgument] + selector + ":"
-#    end
-#    routineMangledName.string += ")"
-#    [inContext.mGuardMapForContext searchKey
-#      !routineMangledName
-#      ?let unused isPublic
-#      ?let @procedureSignature formalSignature
-#    ]
-#  #--- Enter in invocation graph
-#    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-#  #--- Analyze effective parameters
-#    @allocaList baseGuardAllocaList = {}
-#    analyzeEffectiveParameters (
-#      !self:inSelfType
-#      !directAccessToPropertiesAllowed:true
-#      !propertiesAreMutable:true
-#      !formal:formalSignature
-#      !effective:mEffectiveParameterList
-#      !errorLocation:routineName.location
-#      !callerForInvocationGraph:inCallerNameForInvocationGraph
-#      !context:inContext
-#      !requiredModeSet:{!guardModeName ()}
-#      !allowPanic:true
-#      !?temporary:ioTemporaries
-#      !?staticStringMap:ioGlobalLiteralStringMap
-#      !?variableMap:ioVariableMap
-#      !?namedObjectMap: ioNamedObjectMap
-#      !?alloca:baseGuardAllocaList
-#      !?instructionListIR:baseGuardInstructionGenerationList
-#      !?effectiveIR:effectiveParameterListIR
-#    )
-#  #--- Code generation
-#    outConvenienceGuardGenerationIR = .convenienceGuard {
-#      !baseGuardAllocaList:baseGuardAllocaList
-#      !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-#      !baseGuardMangledName:routineMangledName.string
-#      !baseGuardEffectiveParameterList:effectiveParameterListIR
-#    }
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

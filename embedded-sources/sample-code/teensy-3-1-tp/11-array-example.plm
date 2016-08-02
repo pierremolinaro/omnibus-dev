@@ -49,9 +49,9 @@ task T priority 12 stackSize 512 {
     var s = $B ()
     var aa = s.a
     var bb = s.b
-    azerty s.a = aa
+    s.a = aa
     var s2 = $C ()
-    azerty s2.c.a = aa
+    s2.c.a = aa
   }
 }
 
