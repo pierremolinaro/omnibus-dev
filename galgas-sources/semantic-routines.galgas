@@ -27,7 +27,7 @@ proc enterFormalArguments
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
     [!?ioNamedObjectMap insertKey
       !formalArgumentName
-      !.localVariableReference {!type:typeProxy !plmName:formalArgumentName.string}
+      !.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
     ]
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     switch argumentKind
@@ -36,7 +36,7 @@ proc enterFormalArguments
         !lkey:formalArgumentName
         !type:typeProxy
         !readAccessAllowed:true
-        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName.string}
+        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
@@ -45,7 +45,7 @@ proc enterFormalArguments
         !lkey:formalArgumentName
         !type:typeProxy
         !readAccessAllowed:true
-        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName.string}
+        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
@@ -54,7 +54,7 @@ proc enterFormalArguments
         !lkey:formalArgumentName
         !type:typeProxy
         !readAccessAllowed:true
-        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName.string}
+        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]

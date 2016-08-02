@@ -357,7 +357,7 @@ private proc handleSelfAccessInExpression
     [inObject property ?type:let type ?plmName:let name ?index:let index]
     outObjectPtr = .temporaryReference {
       !type:type
-      !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !name}
       !sliceMap:{}
       !volatile:false
     }
@@ -386,7 +386,7 @@ private proc handlePropertyAccessInExpression
     [inProperty property ?type:let type ?plmName:let name ?index:let index]
     let newObject = @objectIR.temporaryReference {
       !type:type
-      !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !name}
       !sliceMap:{}
       !volatile:false
     }
@@ -455,7 +455,7 @@ private proc handlePropertyInExpression
     ]
     let resultObject = @objectIR.llvmTemporaryValue {
       !type:resultType
-      !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
       !sliceMap:resultSliceMap
     }
     ioTemporaries.mTemporaryIndex ++
@@ -673,7 +673,7 @@ proc analyzeEffectiveParameters
       else
         @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName}
       end
-      let varLLVMName = name.string + "." + ioTemporaries.mTemporaryIndex
+      let varLLVMName = @lstring.new {!name.string + "." + ioTemporaries.mTemporaryIndex !name}
       ioTemporaries.mTemporaryIndex ++
       [!?ioNamedObjectMap insertKey !name !.localVariableReference {!type:type !plmName:varLLVMName}]
       if constant then
@@ -699,7 +699,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (!varLLVMName) !sliceMap:{}}
+        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!varLLVMName) !varLLVMName} !sliceMap:{}}
     case input (@lstring name) :
       [!?ioVariableMap searchForWriteAccess
         !lkey:name
@@ -721,7 +721,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (![objectIR name]) !sliceMap:{}}
+        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (![objectIR name]) ![objectIR location]} !sliceMap:{}}
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
@@ -766,7 +766,7 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.outputInput
-        !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (![objectIR llvmName]) !sliceMap:{}}
+        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (![objectIR llvmName]) ![objectIR location]} !sliceMap:{}}
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
@@ -792,16 +792,23 @@ proc analyzeEffectiveParameters
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
         case structure (* @propertyMap propertyMap *) :
           [propertyMap searchKey !name ?let unused public ?let type ?let idx]
-          getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
-          [!?ioInstructionGenerationList appendGetElementPtrFromSelf
-            !fieldAddress
+          getNewTempVariable (!type !?ioTemporaries ?let fieldObjectReference)
+          [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
+            !fieldObjectReference
             !inSelfType
-            !{!.absolute {!index:idx} !name.string}
+            !name
+            !idx
           ]        
+#         getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
+#          [!?ioInstructionGenerationList appendGetElementPtrFromSelf
+#            !fieldAddress
+#            !inSelfType
+#            !{!.absolute {!index:idx} !name.string}
+#          ]        
           parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
           ioEffectiveParameterListIR +=
             !.outputInput
-            !.llvmTemporaryValue {!type:type !llvmName:llvmNameForLocalVariable (![fieldAddress name]) !sliceMap:{}}
+            !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!name) !name} !sliceMap:{}}
         end    
       end
     end

@@ -508,20 +508,6 @@ void extensionSetter_appendLoadVolatileRegisterWithSubscript (class GALGAS_instr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Extension setter '@instructionListIR appendLoadVolatileRegisterAddress'                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendLoadVolatileRegisterAddress (class GALGAS_instructionListIR & ioObject,
-                                                        const class GALGAS_objectInMemoryIR constin_inTargetValue,
-                                                        const class GALGAS_objectIR constin_inIndexResult,
-                                                        const class GALGAS_bigint constin_inAddress,
-                                                        const class GALGAS_bigint constin_inElementArraySize,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                          Extension setter '@instructionListIR appendLoadVolatileRegister'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -667,32 +653,6 @@ void extensionSetter_appendStoreTemporaryReference (class GALGAS_instructionList
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             Extension setter '@instructionListIR appendLoadFromMemory'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendLoadFromMemory (class GALGAS_instructionListIR & ioObject,
-                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           const class GALGAS_location constin_inErrorLocation,
-                                           const class GALGAS_objectInMemoryIR constin_inSource,
-                                           class GALGAS_objectIR & out_outResultingValue,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Extension setter '@instructionListIR appendStoreInMemory'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendStoreInMemory (class GALGAS_instructionListIR & ioObject,
-                                          const class GALGAS_objectInMemoryIR constin_inTargetPtr,
-                                          const class GALGAS_objectIR constin_inValue,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                           Extension setter '@instructionListIR appendStoreFromReference'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -715,19 +675,6 @@ void extensionSetter_appendLoadStructureConstant (class GALGAS_instructionListIR
                                                   const class GALGAS_string constin_inTypeName,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                              Extension setter '@instructionListIR appendGetElementPtr'                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendGetElementPtr (class GALGAS_instructionListIR & ioObject,
-                                          const class GALGAS_objectInMemoryIR constin_inTarget,
-                                          const class GALGAS_objectInMemoryIR constin_inSource,
-                                          const class GALGAS_elementPtrList constin_inElementList,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

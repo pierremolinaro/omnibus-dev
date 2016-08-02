@@ -2342,21 +2342,21 @@ class GALGAS_string extensionGetter_passingModeForActualSelector (const class GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                 Extension getter '@objectIR location' (as function)                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_location extensionGetter_location (const class GALGAS_objectIR & inObject,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                   Extension getter '@objectIR name' (as function)                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_string extensionGetter_name (const class GALGAS_objectIR & inObject,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                               Extension getter '@objectInMemoryIR name' (as function)                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_name (const class GALGAS_objectInMemoryIR & inObject,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
@@ -2421,31 +2421,6 @@ void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inO
                                             GALGAS_objectIR & out_outResult,
                                             C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Routine 'getLocalNameOfNewTempObjectInMemory'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_getLocalNameOfNewTempObjectInMemory (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                  class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                                  class GALGAS_objectInMemoryIR & outArgument2,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                          Extension setter '@instructionListIR appendGetElementPtrFromSelf'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_appendGetElementPtrFromSelf (class GALGAS_instructionListIR & ioObject,
-                                                  const class GALGAS_objectInMemoryIR constin_inTarget,
-                                                  const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                                  const class GALGAS_elementPtrList constin_inElementList,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3617,5 +3592,35 @@ class GALGAS_string function_literalCharacterArrayName (const class GALGAS_uint 
 
 class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Function 'llvmNameForFunction'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForFunction (class GALGAS_string inArgument0,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'interruptNameForInvocationGraph'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_interruptNameForInvocationGraph (class GALGAS_lstring inArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Function 'llvmNameForInterrupt'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_llvmNameForInterrupt (class GALGAS_lstring inArgument0,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 #endif

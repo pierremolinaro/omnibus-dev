@@ -93,7 +93,7 @@ override method @forInstructionAST analyze
     error mEndOf_iteratedExpression_instruction : "this object is not enumerable"
   end
 #---
-  let enumeratedVarLLVMName = mVarName.string + "." + ioTemporaries.mTemporaryIndex
+  let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
   ioAllocaList += !enumeratedVarLLVMName !iteratedElementType
 #--- Analyze instruction list

@@ -142,6 +142,16 @@ class GALGAS_string extensionGetter_llvmName (const class GALGAS_objectInMemoryI
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                               Extension getter '@objectInMemoryIR name' (as function)                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_name (const class GALGAS_objectInMemoryIR & inObject,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                               Extension getter '@objectInMemoryIR type' (as function)                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
