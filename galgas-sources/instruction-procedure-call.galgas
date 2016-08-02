@@ -1,0 +1,258 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#enum @effectiveParameterPassingModeAST {
+#  case input (@lstring name)
+#  case inputWithType (@bool constant @lstring typeName @lstring name)
+#  case output (@expressionAST exp @location endOfExp)
+#  case outputInput (@lstring name)
+#  case outputInputSelfVariable (@lstring name)
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @callInstructionAST : @instructionAST {
+  @assignmentTargetAST mAssignmentTargetAST
+  @effectiveParameterListAST mArguments
+  @location mEndOfArguments
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension common_syntax {
+
+  #·····················································································································
+
+  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+    <procedure_call> ?let routineCallInstruction
+    ioInstructionList += ![routineCallInstruction mEndOfArguments] !routineCallInstruction
+  }
+
+  #·····················································································································
+
+  rule <procedure_call> !@callInstructionAST outInstruction {
+    <assignment_target> ?let assignmentTargetAST
+    <effective_parameters> ?let arguments ?let endOfArguments
+    outInstruction = @callInstructionAST.new {!assignmentTargetAST !arguments !endOfArguments}
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  NOTE TYPES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @callInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
+  for () in mArguments do
+    switch mEffectiveParameterKind
+    case input (*):
+    case inputWithType (* @lstring typeName *) :
+      if typeName.string != "" then
+        [!?ioGraph noteNode !.new {!"$" + typeName !typeName.location}]
+      end
+    case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case outputInput (*) :
+    case outputInputSelfVariable (*) :
+    end 
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTICS                                                                                                            
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @effectiveParameterPassingModeAST passingModeForActualSelector ?@lstring inSelector -> @string outResult {
+  switch self
+  case input (*) : outResult = "?"
+  case inputWithType (* * *) : outResult = "?"
+  case output (* *) : outResult = "!"
+  case outputInput (*) : outResult = "!?"
+  case outputInputSelfVariable (*) : outResult = "!?"
+  end
+  if inSelector.string != "" then
+    outResult += inSelector.string + ":"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @procEffectiveParameterList {
+  @effectiveParameterPassingModeAST mEffectiveParameterPassingMode
+  @lstring mSelector
+  @unifiedTypeMap-proxy mParameterType
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @callInstructionAST analyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?modes:let @stringset inModeSet
+  ?allowPanic:let @bool inAllowPanic
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@variableMap ioVariableMap
+  ?!namedObjectMap:@namedObjectMap ioNamedObjectMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  [mAssignmentTargetAST analyzeAssignmentTarget
+    !self: inSelfType
+    !targetAccessKind:.readWrite
+    !propertiesAreMutable: inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
+    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+    !context: inContext
+    !modes: inModeSet
+    !allowPanic: inAllowPanic
+    !?temporary: ioTemporaries
+    !?staticStringMap: ioGlobalLiteralStringMap
+    !?variableMap: ioVariableMap
+    !?namedObjectMap: ioNamedObjectMap
+    !?alloca: ioAllocaList
+    !?instructionListIR: ioInstructionGenerationList
+    ?@objectIR currentObject
+  ]
+#--- Analyze procedure call arguments
+  handleFunctionCallInExpression (
+    !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !modes:inModeSet
+    !allowPanic:inAllowPanic
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?namedObjectMap: ioNamedObjectMap
+    !?alloca:ioAllocaList
+    !mArguments
+    !mEndOfArguments
+    !?ioInstructionGenerationList
+    !?currentObject
+    ?let returnedType
+  )
+  if returnedType != .null then
+    error mEndOfArguments : "the function cannot be called in instruction: lost return value"
+  end
+#--- Generate IR
+#  if returnedType != .null then
+#    error routineName : "cannot be called in instruction: return value"
+#  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @procEffectiveParameterPassingModeIR {
+  case input
+  case output
+  case outputInput
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @procCallEffectiveParameterListIR {
+  @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
+  @objectIR mParameter
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @routineKindIR {
+  case function
+  case primitiveInProcessorUserMode
+  case sectionInProcessorUserMode
+  case serviceInProcessorUserMode
+  case primitiveInProcessorPrivilegedMode
+  case sectionInProcessorPrivilegedMode
+  case serviceInProcessorPrivilegedMode
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @procCallInstructionIR : @abstractInstructionIR {
+  @string mGlobalVariableName # Receiver name, "" if receiver is not a global variable
+  @lstring mRoutineMangledName
+  @lstring mRoutineNameForGeneration
+  @routineKindIR mKind
+  @procCallEffectiveParameterListIR mParameters
+  @bool mAppendFileAndLineArgumentForPanicLocation
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @procCallInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  ioLLVMcode += "  call void @"
+  switch mKind 
+  case function : ioLLVMcode += llvmNameForFunction (!mRoutineNameForGeneration.string)
+  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mRoutineNameForGeneration.string)
+  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mRoutineNameForGeneration.string)
+  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mRoutineNameForGeneration.string)
+  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mRoutineNameForGeneration.string)
+  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mRoutineNameForGeneration.string)
+  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mRoutineNameForGeneration.string)
+  end
+  var first = true
+  ioLLVMcode += " ("
+  for () in mParameters do
+    if first then
+      first = false
+    else
+      ioLLVMcode += ", "
+    end
+    switch mEffectiveParameterPassingMode
+    case input:
+      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+    case output:
+      ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
+    case outputInput:
+      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+    end
+  end
+  if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
+    let sourceFileName = [[[mRoutineNameForGeneration.location file] lastPathComponent] stringByDeletingPathExtension]
+    [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+      !sourceFileName
+      ?let staticStringIndex
+    ]
+    if not first then
+      ioLLVMcode += ", "
+    end
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mRoutineNameForGeneration.location line]
+    let sourceFileNameSize = [sourceFileName length] + 1
+    ioLLVMcode += ", i8* getelementptr inbounds ([" + sourceFileNameSize + " x i8], [" + sourceFileNameSize + " x i8]* @str.array." + staticStringIndex + ", i32 0, i32 0)"
+  end
+  ioLLVMcode += ")\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @procCallInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+  ioAccessibleEntities.mRoutineSet += !mRoutineMangledName.string
+  if mGlobalVariableName != "" then
+    ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

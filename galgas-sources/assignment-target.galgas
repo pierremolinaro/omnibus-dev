@@ -89,8 +89,16 @@ method @assignmentTargetAST noteInstructionTypesInPrecedenceGraph ?!@semanticTyp
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @targetAccessKind {
+  case read
+  case write
+  case readWrite
+}
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 method @assignmentTargetAST analyzeAssignmentTarget
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?targetAccessKind:let @targetAccessKind inSelfAccessKind
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -108,28 +116,38 @@ method @assignmentTargetAST analyzeAssignmentTarget
 #--- object access, with ou without self
   switch mSelfAccess
   case noSelfAccess :
-    [!?ioVariableMap searchForWriteAccess !lkey:mIdentifier
-      ?2*
-      ?objectIR:outCurrentObject
-      ?2*
-    ]
-    [outCurrentObject checkReadable]
+    if [ioVariableMap hasKey !mIdentifier] then
+      switch inSelfAccessKind
+      case read :
+        [!?ioVariableMap searchForReadAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
+      case write :
+        [!?ioVariableMap searchForWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
+      case readWrite :
+        [!?ioVariableMap searchForReadWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
+      end
+    else # Stand alone function call ?
+      outCurrentObject = .possibleFunction {!receiver:.null !functionName:mIdentifier}
+    end
   case selfAccess (@location selfLocation) :
     if inSelfType == .null then
       error selfLocation : "'self' is not available in this context" : outCurrentObject
     elsif [[inSelfType kind] isStructure] then
       [[inSelfType kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
-      [structureObjectMap searchKey
-        !mIdentifier
-        ?let object
-      ]
-      handleSelfAccessInAssignment (
-        !inSelfType
-        !object
-        !?ioTemporaries
-        !?ioInstructionGenerationList
-        ?outCurrentObject
-      )
+      if [structureObjectMap hasKey !mIdentifier] then
+        [structureObjectMap searchKey
+          !mIdentifier
+          ?let object
+        ]
+        handleSelfAccessInAssignment (
+          !inSelfType
+          !object
+          !?ioTemporaries
+          !?ioInstructionGenerationList
+          ?outCurrentObject
+        )
+      else # Function call ?
+        outCurrentObject = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mIdentifier}
+      end
     else
       error selfLocation : "'self' should be a structure instance" : outCurrentObject
     end
@@ -206,25 +224,29 @@ private proc handlePropertyAccessInAssignment
 {
   if [[[ioObject type] kind] isStructure] then
     [[[ioObject type] kind] structure ?objectMap:let @namedObjectMap structureObjectMap ?2*]
-    [structureObjectMap searchKey !inPropertyName ?@objectIR property]
-    if [property isProperty] then
-      [property property ?type:let type ?plmName:let name ?index:let index]
-      let newObject = @objectIR.temporaryReference {
-        !type:type
-        !llvmName:"temp." + ioTemporaries.mTemporaryIndex
-        !sliceMap:{}
-        !volatile:false
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference
-        !newObject
-        !ioObject
-        !name
-        !index
-      ]
-      ioObject = newObject
+    if [structureObjectMap hasKey !inPropertyName] then
+      [structureObjectMap searchKey !inPropertyName ?@objectIR property]
+      if [property isProperty] then
+        [property property ?type:let type ?plmName:let name ?index:let index]
+        let newObject = @objectIR.temporaryReference {
+          !type:type
+          !llvmName:"temp." + ioTemporaries.mTemporaryIndex
+          !sliceMap:{}
+          !volatile:false
+        }
+        ioTemporaries.mTemporaryIndex ++
+        [!?ioInstructionGenerationList appendGetPropertyReference
+          !newObject
+          !ioObject
+          !name
+          !index
+        ]
+        ioObject = newObject
+      else
+        error inPropertyName : "<<getNewTemporarySelfObjectPtr>>" : ioObject
+      end
     else
-      error inPropertyName : "<<getNewTemporarySelfObjectPtr>>" : ioObject
+      ioObject = .possibleFunction {!receiver:ioObject !functionName:inPropertyName}
     end
   else
     error inPropertyName : "the current object has no property" : ioObject

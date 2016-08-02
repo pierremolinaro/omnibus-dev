@@ -52,7 +52,7 @@ sharedmap @variableMap %selectors {
     neutralAccess   -> module
     readAccess      -> module
     writeAccess     -> module error "a module cannot be written"
-    readWriteAccess -> module error "a module cannot be modified"
+    readWriteAccess -> module
     constMethodCall -> module
     methodCall      -> module
     dropAccess      -> module error "a module cannot be dropped"

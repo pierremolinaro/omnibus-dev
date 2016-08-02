@@ -3,13 +3,13 @@ target "LPC-L2294"
 //------------------------------------------------*
 
 section ledOn () {
-  zzz IO1CLR  = 1 << 23 // Led On
+  IO1CLR  = 1 << 23 // Led On
 }
 
 //------------------------------------------------*
 
 section ledOff () {
-  zzz IO1SET  = 1 << 23 // Led Off
+  IO1SET  = 1 << 23 // Led Off
 }
 
 //------------------------------------------------*
@@ -19,10 +19,10 @@ task T1 priority 1 stackSize 512 {
 
   while time.waitUntilMS (!deadline:self.compteur) {
     ledOn ()
-    zzz self.compteur +%= 500
-    time. waitUntilMS (!deadline:self.compteur)
+    self.compteur +%= 500
+    time.waitUntilMS (!deadline:self.compteur)
     ledOff ()
-    zzz self.compteur +%= 500
+    self.compteur +%= 500
   }
 }
 

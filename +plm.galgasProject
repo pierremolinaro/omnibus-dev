@@ -75,13 +75,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/expression-primary.galgas"
 
 #--- Instructions
-#  "galgas-sources/rule-access.galgas"
-#  "galgas-sources/rule-self-access.galgas"
-#  "galgas-sources/instruction-proc-call.galgas"
-#  "galgas-sources/instruction-self-call.galgas"
-
-  "galgas-sources/instruction-procedure-call.galgas"
-
   "galgas-sources/instructionList.galgas"
   "galgas-sources/directive-check.galgas"
   "galgas-sources/instruction-assignment.galgas"
@@ -95,6 +88,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/instruction-while.galgas"
   "galgas-sources/instruction-for-in-do.galgas"
   "galgas-sources/instruction-for-in-lower-upper-bounds.galgas"
+  "galgas-sources/instruction-procedure-call.galgas"
 
 #--- Instruction and expression helpers
   "galgas-sources/subscript-in-assignment-and-expression.galgas"

@@ -114,6 +114,7 @@ override method @varOperatorAssignInstructionAST analyze
 #---
   [mAssignmentTargetAST analyzeAssignmentTarget
     !self: inSelfType
+    !targetAccessKind:.write
     !propertiesAreMutable: inRoutineCanMutateProperties
     !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
@@ -128,6 +129,9 @@ override method @varOperatorAssignInstructionAST analyze
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR targetObject
   ]
+  if [targetObject isPossibleFunction] then
+    error mAssignmentTargetAST.mIdentifier : "invalid assignment target" : targetObject
+  end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
     !self:inSelfType

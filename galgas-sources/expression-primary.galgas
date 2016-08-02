@@ -241,7 +241,6 @@ override method @primaryInExpressionAST analyzeExpression
         ?objectIR:currentPointer
         ?2*
       ]
-      [currentPointer checkReadable]
     else # Stand alone function call ?
       currentPointer = .possibleFunction {!receiver:.null !functionName:mObjectName}
     end
@@ -312,6 +311,7 @@ override method @primaryInExpressionAST analyzeExpression
     case funcCall (@effectiveParameterListAST arguments @location errorLocation) :
       handleFunctionCallInExpression (
         !self:inSelfType
+        !propertiesAreMutable:false
         !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
         !inGuard:inGuard
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -327,7 +327,11 @@ override method @primaryInExpressionAST analyzeExpression
         !errorLocation
         !?ioInstructionGenerationList
         !?currentPointer
+        ?let returnedType
       )
+      if returnedType == .null then
+        error errorLocation : "the function cannot be called in expression: no return value"
+      end
     end
   end
 
@@ -473,6 +477,7 @@ private proc handlePropertyInExpression
 
 proc handleFunctionCallInExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -488,17 +493,18 @@ proc handleFunctionCallInExpression
   ?let @location inErrorLocation
   ?!@instructionListIR ioInstructionGenerationList
   ?!@objectIR ioObjectPtr
+  !@unifiedTypeMap-proxy outReturnedType
 {
   if not [ioObjectPtr isPossibleFunction] then
-    error inErrorLocation : "object is not a function" : ioObjectPtr
+    error inErrorLocation : "object is not a function" : ioObjectPtr, outReturnedType
   elsif inGuard then
     [ioObjectPtr possibleFunction ?1* ?functionName:let functionName]
-    error functionName : "a function cannot be called in guard expression" : ioObjectPtr
+    error functionName : "a function cannot be called in guard expression" : ioObjectPtr, outReturnedType
   else
     [ioObjectPtr possibleFunction ?receiver:let receiver ?functionName:let functionName]
     analyzeFunctionCallInExpression (
       !self:inSelfType
-      !propertiesAreMutable:false
+      !propertiesAreMutable:inRoutineCanMutateProperties
       !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !receiver:receiver
       !routineName:functionName
@@ -517,14 +523,11 @@ proc handleFunctionCallInExpression
       ?routineKind:let @routineKindIR routineKind
       ?routineMangledName:let @lstring functionMangledName
       ?routineNameForGeneration:let @lstring functionNameForGeneration
-      ?returnType:let @unifiedTypeMap-proxy returnedType
+      ?returnType:outReturnedType
       ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
     )
-    if returnedType == .null then
-      error functionName : "the function cannot be called in expression: no return value"
-    end
   #--- New LLVM variable for function call result
-    getNewTempVariable (!returnedType !?ioTemporaries ?let functionResult)
+    getNewTempVariable (!outReturnedType !?ioTemporaries ?let functionResult)
   #--- Code generation
     ioInstructionGenerationList += !@functionCallIR.new {
       !functionResult
