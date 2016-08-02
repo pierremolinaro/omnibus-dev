@@ -279,7 +279,7 @@ override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
     let resultValue = [self performStaticOperation !left !right]
     outResult = .literalInteger {!type: inResultType !value:resultValue}
   else
-    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
+    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult
@@ -443,7 +443,7 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
   elsif literalValue > max then
     error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResult
   else
-    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
+    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult
       ![inLeftOperand type]
@@ -481,7 +481,7 @@ override method @integerObject_literal_divisionOperator generateInfixOperatorCod
   elsif literalValue == 0G then
     error inOperatorLocation : "division by zero" : outResult
   else
-    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
+    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult
       ![inLeftOperand type]
@@ -645,7 +645,7 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
   elsif literalValue > max then
     error inOperatorLocation : "literal left integer expression too large (should be <= " + max + ")" : outResult
   else
-    getNewTempVariable (!inResultType !?ioTemporaries ?outResult)
+    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
     [!?ioInstructionGenerationList appendBinaryOperation
       !outResult
       ![inRightOperand type]

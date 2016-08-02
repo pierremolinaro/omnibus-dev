@@ -345,7 +345,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     error mOperatorLocation : "left operand should be boolean"
   end
 #--- Result type : bool 
-  getNewTempVariable (!inContext.mBooleanType !?ioTemporaries ?outResult)
+  getNewTempVariable (!inContext.mBooleanType !mOperatorLocation !?ioTemporaries ?outResult)
 #--- Generate code
   [!?ioInstructionGenerationList appendShortCircuitAndOperation
     !outResult

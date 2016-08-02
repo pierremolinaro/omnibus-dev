@@ -9,8 +9,8 @@ setter @instructionListIR appendStoreFromReference
 #--- Temporary ?
   case selfObject (*) :
     error [inTargetReference location] : "<<@instructionListIR appendStoreFromReference selfObject>>"
-  case llvmGlobalObjectValue (**) :
-    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue selfObject>>"
+#  case llvmGlobalObjectValue (**) :
+#    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue selfObject>>"
 #--- References
   case globalVariableReference (@unifiedTypeMap-proxy type @lstring plmName) :
     [!?self appendStoreGlobalVariable !plmName !type !inValue !volatile:false]
@@ -27,8 +27,8 @@ setter @instructionListIR appendStoreFromReference
   case property (* * *) :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue property>>"
 #--- Values
-  case llvmTemporaryValue (* * *) :
-    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue llvmTemporaryValue>>"
+  case llvmTemporaryValue (* llvmName *) :
+    error llvmName : "<<@instructionListIR llvmGlobalObjectValue llvmTemporaryValue>>"
   case literalInteger  (* *) :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue literalInteger>>"
   case llvmStructureConstant (* *) :
@@ -59,35 +59,33 @@ setter @instructionListIR appendLoadFromReference
     error functionName : "<<@instructionListIR appendLoadFromReference possibleFunction>>" : outResultingValue
   case selfObject (*) :
     outResultingValue = inSource
-  case llvmGlobalObjectValue (**) :
-    outResultingValue = inSource
 #--- References
   case globalVariableReference (@unifiedTypeMap-proxy type @lstring name) :
-    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
     [!?self appendLoadGlobalVariable
       !outResultingValue
       !name
       !volatile:false
     ]
   case localVariableReference (@unifiedTypeMap-proxy type name) :
-    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
     [!?self appendLoadLocalVariable
       !outResultingValue
       !name
       !false
     ]
   case temporaryReference (@unifiedTypeMap-proxy type llvmName * volatile) :
-    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !llvmName !?ioTemporaries ?outResultingValue)
     [!?self appendLoadFromTemporaryReference
       !outResultingValue
       !llvmName
       !volatile
     ]
-  case registerReference (type * * * address * arraySize *) :
+  case registerReference (type registerName * * address * arraySize *) :
     if arraySize > 0 then
       error inErrorLocation : "register array requires subscripting" : outResultingValue
     else
-      getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
+      getNewTempVariable (!type !registerName !?ioTemporaries ?outResultingValue)
       [!?self appendLoadVolatileRegister
         !outResultingValue
         !address
@@ -95,7 +93,7 @@ setter @instructionListIR appendLoadFromReference
     end
 #--- Structure property
   case property (type plmName index) :
-    getNewTempVariable (!type !?ioTemporaries ?outResultingValue)
+    getNewTempVariable (!type !plmName !?ioTemporaries ?outResultingValue)
     [!?self appendGetPropertyReference
       !outResultingValue
       !inSource

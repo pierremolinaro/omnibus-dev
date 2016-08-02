@@ -527,7 +527,7 @@ proc handleFunctionCallInExpression
       ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
     )
   #--- New LLVM variable for function call result
-    getNewTempVariable (!outReturnedType !?ioTemporaries ?let functionResult)
+    getNewTempVariable (!outReturnedType !functionMangledName !?ioTemporaries ?let functionResult)
   #--- Code generation
     ioInstructionGenerationList += !@functionCallIR.new {
       !functionResult
@@ -792,7 +792,7 @@ proc analyzeEffectiveParameters
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
         case structure (* @propertyMap propertyMap *) :
           [propertyMap searchKey !name ?let unused public ?let type ?let idx]
-          getNewTempVariable (!type !?ioTemporaries ?let fieldObjectReference)
+          getNewTempVariable (!type !name !?ioTemporaries ?let fieldObjectReference)
           [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
             !fieldObjectReference
             !inSelfType

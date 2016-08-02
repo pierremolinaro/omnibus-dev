@@ -115,7 +115,7 @@ override method @convertExpressionAST analyzeExpression
     if alwaysPossible then
       error mTypeName:"useless explicit conversion"
     end
-    getNewTempVariable (!resultType !?ioTemporaries ?outResult)
+    getNewTempVariable (!resultType !mEndOfExpression !?ioTemporaries ?outResult)
     if [option plm_options.noPanicGeneration value] then
       ioInstructionGenerationList += !@truncateInstructionIR.new {
         !outResult

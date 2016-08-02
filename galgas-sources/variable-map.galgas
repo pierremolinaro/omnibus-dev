@@ -241,12 +241,13 @@ proc variableMapWithConstants
 
 proc getNewTempVariable
   ?let @unifiedTypeMap-proxy inType
+  ?@location inErrorLocation
   ?!@semanticTemporariesStruct ioTemporaries
   !@objectIR outTempVariable
 {
   outTempVariable = .llvmTemporaryValue {
     !type: inType
-    !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !.nowhere}
+    !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
     !sliceMap:{}
   }
   ioTemporaries.mTemporaryIndex ++

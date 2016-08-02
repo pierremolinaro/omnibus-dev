@@ -1988,8 +1988,9 @@ void routine_analyzeFunctionCallInExpression (const class GALGAS_unifiedTypeMap_
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_getNewTempVariable (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                 class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                 class GALGAS_objectIR & outArgument2,
+                                 class GALGAS_location inArgument1,
+                                 class GALGAS_semanticTemporariesStruct & ioArgument2,
+                                 class GALGAS_objectIR & outArgument3,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
@@ -3429,6 +3430,15 @@ class GALGAS_string function_llvmNameForGuardCall (class GALGAS_string inArgumen
 
 class GALGAS_string function_llvmNameForGuardImplementation (class GALGAS_string inArgument0,
                                                              class C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      Function 'waitForGuardChangeFunctionName'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_waitForGuardChangeFunctionName (class C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
 #endif

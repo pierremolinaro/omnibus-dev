@@ -3,10 +3,8 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @objectIR {
-#--- Temporary ?
-  case selfObject (@unifiedTypeMap-proxy type)
-  case llvmGlobalObjectValue (@unifiedTypeMap-proxy type @lstring llvmName)
 #--- References
+  case selfObject (@unifiedTypeMap-proxy type)
   case globalVariableReference (@unifiedTypeMap-proxy type @lstring plmName)
   case localVariableReference (@unifiedTypeMap-proxy type @lstring plmName)
   case temporaryReference (@unifiedTypeMap-proxy type @lstring llvmName @sliceMap sliceMap @bool volatile)
@@ -55,8 +53,6 @@ getter @objectIR location -> @location outResult {
     error .nowhere : "<<@objectIR location literalInteger>>" : outResult
   case llvmTemporaryValue (* llvmName *) :
     outResult = llvmName
-  case llvmGlobalObjectValue (* llvmName) :
-    outResult = llvmName
   case temporaryReference (* llvmName * *) :
     outResult = llvmName
   case llvmStructureConstant (* *) :
@@ -87,7 +83,6 @@ getter @objectIR llvmName -> @string outResult {
   case selfObject (*) : outResult = "%self"
   case literalInteger (* @bigint value) : outResult = [value string]
   case llvmTemporaryValue (* llvmName *) : outResult = "%" + llvmName
-  case llvmGlobalObjectValue (* llvmName) : outResult = "@" + llvmName
   case temporaryReference (* llvmName * *) : outResult = "%" + llvmName
   case llvmStructureConstant (* @operandIRList inValues) :
     outResult = "{"
@@ -118,7 +113,6 @@ getter @objectIR sliceMap ?let @location inErrorLocation -> @sliceMap outResult 
   case selfObject (*) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
   case literalInteger (* *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
   case llvmTemporaryValue (* * sliceMap) : outResult = sliceMap
-  case llvmGlobalObjectValue (* *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
   case temporaryReference (* * sliceMap *) : outResult = sliceMap
   case llvmStructureConstant (* *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
   case literalString  (* * *) : error inErrorLocation : "<<@objectIR sliceMap>>" : outResult
@@ -141,7 +135,6 @@ getter @objectIR type -> @unifiedTypeMap-proxy outResult {
   case selfObject (type) : outResult = type
   case literalInteger (type *) : outResult = type
   case llvmTemporaryValue (type * *) : outResult = type
-  case llvmGlobalObjectValue (type *) : outResult = type
   case llvmStructureConstant (type *) : outResult = type
   case literalString  (type * *) : outResult = type
   end
@@ -199,8 +192,6 @@ getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
     outResult = .zero {!type: inType}
   case selfObject (*) :
     outResult = .selfObject {!type: inType}
-  case llvmGlobalObjectValue (* @lstring llvmName) :
-    outResult = .llvmGlobalObjectValue {!type: inType !llvmName: llvmName}
   case llvmStructureConstant (* @operandIRList values) :
     outResult = .llvmStructureConstant {!type: inType !values: values}
   case literalString  (* @uint size @uint index) :
@@ -224,7 +215,6 @@ getter @objectIR name -> @string outResult {
   case selfObject (*) : outResult = "self"
   case literalInteger (* @bigint value) : outResult = [value string]
   case llvmTemporaryValue (* name *) : outResult = name
-  case llvmGlobalObjectValue (* @lstring name) : outResult = name
   case llvmStructureConstant (* *) : outResult = "{...}"
   case literalString  (* * @uint index) : outResult = literalStringName (!index)
   end
@@ -245,7 +235,6 @@ getter @objectIR isStatic -> @bool outResult {
   case selfObject (*) : outResult = false
   case literalInteger (* *) : outResult = true
   case llvmTemporaryValue (* * *) : outResult = false
-  case llvmGlobalObjectValue (* *) : outResult = false
   case llvmStructureConstant (* *) : outResult = true
   case literalString  (* * *) : outResult = true
   end
