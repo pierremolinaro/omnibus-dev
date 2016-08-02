@@ -74,6 +74,7 @@ override method @varAssignmentInstructionAST analyze
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR currentObject
+    ?globalVariableReceiverName:let unused globalVariableReceiverName
   ]
   if [currentObject isPossibleFunction] then
     error mAssignmentTargetAST.mIdentifier : "invalid assignment target" : currentObject

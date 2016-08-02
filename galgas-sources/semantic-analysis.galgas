@@ -194,6 +194,7 @@ proc semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @functionCallIR : @abstractInstructionIR {
+  @string mGlobalVariableName
   @objectIR mResult
   @lstring mFunctionMangledName
   @lstring mFunctionNameForGeneration
@@ -247,6 +248,9 @@ override method @functionCallIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
  {
+  if mGlobalVariableName != "" then
+    ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName
+  end
   ioAccessibleEntities.mRoutineSet += !mFunctionMangledName.string
 }
 

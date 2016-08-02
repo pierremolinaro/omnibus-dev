@@ -534,6 +534,7 @@ method @callInstructionAST baseGuardAnalyze
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR currentObject
+    ?globalVariableReceiverName: let unused globalVariableReceiverName
   ]
 #--- Analyze arguments
   if not [currentObject isPossibleFunction] then
@@ -566,11 +567,9 @@ method @callInstructionAST baseGuardAnalyze
       ?returnType:let @unifiedTypeMap-proxy returnedType
       ?appendFileAndLineArgumentForPanicLocation:let unused appendFileAndLineArgumentForPanicLocation
     )
-    if returnedType == .null then
-      error functionName : "the function cannot be called in expression: no return value"
+    if returnedType != .null then
+      error functionName : "<< internal guard error >>"
     end
-  #--- New LLVM variable for function call result
-#    getNewTempVariable (!returnedType !?ioTemporaries ?let functionResult)
   #--- Code generation
     outConvenienceGuardGenerationIR = .convenienceGuard {
       !baseGuardAllocaList:baseGuardAllocaList

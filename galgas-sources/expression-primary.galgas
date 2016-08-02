@@ -231,20 +231,24 @@ override method @primaryInExpressionAST analyzeExpression
 {
 #--- object access, with ou without self
   @objectIR currentPointer
+  @string globalVariableReceiverName
   switch mSelfAccess
   case noSelfAccess :
     if inGuard then
-      error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer
+      error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer, globalVariableReceiverName
     elsif [ioVariableMap hasKey !mObjectName] then
       [!?ioVariableMap searchForReadAccess !lkey:mObjectName
         ?2*
         ?objectIR:currentPointer
         ?2*
       ]
+      globalVariableReceiverName = if [currentPointer isGlobalVariableReference] then mObjectName.string else "" end
     else # Stand alone function call ?
       currentPointer = .possibleFunction {!receiver:.null !functionName:mObjectName}
+      globalVariableReceiverName = ""
     end
   case selfAccess (@location selfLocation) :
+    globalVariableReceiverName = ""
     if inSelfType == .null then
       error selfLocation : "'self' is not available in this context" : currentPointer
     elsif [[inSelfType kind] isStructure] then
@@ -311,6 +315,7 @@ override method @primaryInExpressionAST analyzeExpression
     case funcCall (@effectiveParameterListAST arguments @location errorLocation) :
       handleFunctionCallInExpression (
         !self:inSelfType
+        !globalVariableReceiverName:globalVariableReceiverName
         !propertiesAreMutable:false
         !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
         !inGuard:inGuard
@@ -477,6 +482,7 @@ private proc handlePropertyInExpression
 
 proc handleFunctionCallInExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?globalVariableReceiverName:let @string inGlobalVariableReceiverName
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
@@ -530,6 +536,7 @@ proc handleFunctionCallInExpression
     getNewTempVariable (!outReturnedType !functionMangledName !?ioTemporaries ?let functionResult)
   #--- Code generation
     ioInstructionGenerationList += !@functionCallIR.new {
+      !inGlobalVariableReceiverName
       !functionResult
       !functionMangledName
       !functionNameForGeneration
@@ -607,7 +614,7 @@ proc analyzeFunctionCallInExpression
       if invocationFile != declarationFile then
         error inRoutineName : "this routine is not public"
       end
-    else
+    elsif receiverType != inSelfType then
       error inRoutineName : "this routine is not public"
     end  
   end  
@@ -753,7 +760,7 @@ proc analyzeEffectiveParameters
         !lkey:name
         ?type:let type
         ?readAccessAllowed:let accessIsAllowed
-        ?objectIR:let unused objectIR
+        ?objectIR:let objectIR
         ?1*
         ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
       ]
@@ -764,9 +771,12 @@ proc analyzeEffectiveParameters
         error name : "routine has no access right on the this variable"
       end
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
-      ioEffectiveParameterListIR +=
-        !.outputInput
-        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (![objectIR llvmName]) ![objectIR location]} !sliceMap:{}}
+      let argumentIR = @objectIR.llvmTemporaryValue {
+        !type:type
+        !llvmName:.new {!llvmNameForLocalVariable (![objectIR llvmName]) ![objectIR location]}
+        !sliceMap:{}
+      }
+      ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :
       if inSelfType == .null then
         error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
@@ -799,16 +809,10 @@ proc analyzeEffectiveParameters
             !name
             !idx
           ]        
-#         getLocalNameOfNewTempObjectInMemory (!type !?ioTemporaries ?let fieldAddress)
-#          [!?ioInstructionGenerationList appendGetElementPtrFromSelf
-#            !fieldAddress
-#            !inSelfType
-#            !{!.absolute {!index:idx} !name.string}
-#          ]        
           parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
           ioEffectiveParameterListIR +=
             !.outputInput
-            !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!name) !name} !sliceMap:{}}
+            !fieldObjectReference
         end    
       end
     end

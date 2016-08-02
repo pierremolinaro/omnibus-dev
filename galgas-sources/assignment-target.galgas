@@ -112,6 +112,7 @@ method @assignmentTargetAST analyzeAssignmentTarget
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !@objectIR outCurrentObject
+  !globalVariableReceiverName:@string outGlobalVariableReceiverName
 {
 #--- object access, with ou without self
   switch mSelfAccess
@@ -125,10 +126,13 @@ method @assignmentTargetAST analyzeAssignmentTarget
       case readWrite :
         [!?ioVariableMap searchForReadWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
       end
+      outGlobalVariableReceiverName = if [outCurrentObject isGlobalVariableReference] then mIdentifier.string else "" end
     else # Stand alone function call ?
       outCurrentObject = .possibleFunction {!receiver:.null !functionName:mIdentifier}
+      outGlobalVariableReceiverName = ""
     end
   case selfAccess (@location selfLocation) :
+    outGlobalVariableReceiverName = "" # Receiver is not a global variable
     if inSelfType == .null then
       error selfLocation : "'self' is not available in this context" : outCurrentObject
     elsif [[inSelfType kind] isStructure] then
@@ -149,7 +153,7 @@ method @assignmentTargetAST analyzeAssignmentTarget
         outCurrentObject = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mIdentifier}
       end
     else
-      error selfLocation : "'self' should be a structure instance" : outCurrentObject
+      error selfLocation : "'self' should be a structure instance" : outCurrentObject, outGlobalVariableReceiverName
     end
   end
 #--- Analyze properties, subscripts

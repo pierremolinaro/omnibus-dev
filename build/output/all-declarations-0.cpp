@@ -16857,9 +16857,9 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i77_parse (C_Le
 void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i78_ (GALGAS_instructionListAST & ioArgument_ioInstructionList,
                                                                        GALGAS_labelMap & /* ioArgument_ioLabelMap */,
                                                                        C_Lexique_plm_5F_lexique * inCompiler) {
-  GALGAS_callInstructionAST var_routineCallInstruction_1593 ;
-  nt_procedure_5F_call_ (var_routineCallInstruction_1593, inCompiler) ;
-  ioArgument_ioInstructionList.addAssign_operation (var_routineCallInstruction_1593.getter_mEndOfArguments (SOURCE_FILE ("instruction-procedure-call.galgas", 31)), var_routineCallInstruction_1593  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 31)) ;
+  GALGAS_callInstructionAST var_routineCallInstruction_1185 ;
+  nt_procedure_5F_call_ (var_routineCallInstruction_1185, inCompiler) ;
+  ioArgument_ioInstructionList.addAssign_operation (var_routineCallInstruction_1185.getter_mEndOfArguments (SOURCE_FILE ("instruction-procedure-call.galgas", 21)), var_routineCallInstruction_1185  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 21)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -16874,12 +16874,12 @@ void cParser_common_5F_syntax::rule_common_5F_syntax_instruction_i78_parse (C_Le
 void cParser_common_5F_syntax::rule_common_5F_syntax_procedure_5F_call_i79_ (GALGAS_callInstructionAST & outArgument_outInstruction,
                                                                              C_Lexique_plm_5F_lexique * inCompiler) {
   outArgument_outInstruction.drop () ; // Release 'out' argument
-  GALGAS_assignmentTargetAST var_assignmentTargetAST_1922 ;
-  nt_assignment_5F_target_ (var_assignmentTargetAST_1922, inCompiler) ;
-  GALGAS_effectiveParameterListAST var_arguments_1964 ;
-  GALGAS_location var_endOfArguments_1984 ;
-  nt_effective_5F_parameters_ (var_arguments_1964, var_endOfArguments_1984, inCompiler) ;
-  outArgument_outInstruction = GALGAS_callInstructionAST::constructor_new (var_assignmentTargetAST_1922, var_arguments_1964, var_endOfArguments_1984  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 39)) ;
+  GALGAS_assignmentTargetAST var_assignmentTargetAST_1514 ;
+  nt_assignment_5F_target_ (var_assignmentTargetAST_1514, inCompiler) ;
+  GALGAS_effectiveParameterListAST var_arguments_1556 ;
+  GALGAS_location var_endOfArguments_1576 ;
+  nt_effective_5F_parameters_ (var_arguments_1556, var_endOfArguments_1576, inCompiler) ;
+  outArgument_outInstruction = GALGAS_callInstructionAST::constructor_new (var_assignmentTargetAST_1514, var_arguments_1556, var_endOfArguments_1576  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 29)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

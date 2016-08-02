@@ -2,16 +2,6 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#enum @effectiveParameterPassingModeAST {
-#  case input (@lstring name)
-#  case inputWithType (@bool constant @lstring typeName @lstring name)
-#  case output (@expressionAST exp @location endOfExp)
-#  case outputInput (@lstring name)
-#  case outputInputSelfVariable (@lstring name)
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 class @callInstructionAST : @instructionAST {
   @assignmentTargetAST mAssignmentTargetAST
   @effectiveParameterListAST mArguments
@@ -121,10 +111,12 @@ override method @callInstructionAST analyze
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR currentObject
+    ?globalVariableReceiverName:let globalVariableReceiverName
   ]
 #--- Analyze procedure call arguments
   handleFunctionCallInExpression (
     !self:inSelfType
+    !globalVariableReceiverName:globalVariableReceiverName
     !propertiesAreMutable:inRoutineCanMutateProperties
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
@@ -179,79 +171,6 @@ enum @routineKindIR {
   case primitiveInProcessorPrivilegedMode
   case sectionInProcessorPrivilegedMode
   case serviceInProcessorPrivilegedMode
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @procCallInstructionIR : @abstractInstructionIR {
-  @string mGlobalVariableName # Receiver name, "" if receiver is not a global variable
-  @lstring mRoutineMangledName
-  @lstring mRoutineNameForGeneration
-  @routineKindIR mKind
-  @procCallEffectiveParameterListIR mParameters
-  @bool mAppendFileAndLineArgumentForPanicLocation
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @procCallInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  ioLLVMcode += "  call void @"
-  switch mKind 
-  case function : ioLLVMcode += llvmNameForFunction (!mRoutineNameForGeneration.string)
-  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mRoutineNameForGeneration.string)
-  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mRoutineNameForGeneration.string)
-  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mRoutineNameForGeneration.string)
-  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mRoutineNameForGeneration.string)
-  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mRoutineNameForGeneration.string)
-  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mRoutineNameForGeneration.string)
-  end
-  var first = true
-  ioLLVMcode += " ("
-  for () in mParameters do
-    if first then
-      first = false
-    else
-      ioLLVMcode += ", "
-    end
-    switch mEffectiveParameterPassingMode
-    case input:
-      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
-    case output:
-      ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
-    case outputInput:
-      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
-    end
-  end
-  if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
-    let sourceFileName = [[[mRoutineNameForGeneration.location file] lastPathComponent] stringByDeletingPathExtension]
-    [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
-      !sourceFileName
-      ?let staticStringIndex
-    ]
-    if not first then
-      ioLLVMcode += ", "
-    end
-    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mRoutineNameForGeneration.location line]
-    let sourceFileNameSize = [sourceFileName length] + 1
-    ioLLVMcode += ", i8* getelementptr inbounds ([" + sourceFileNameSize + " x i8], [" + sourceFileNameSize + " x i8]* @str.array." + staticStringIndex + ", i32 0, i32 0)"
-  end
-  ioLLVMcode += ")\n"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @procCallInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-  ioAccessibleEntities.mRoutineSet += !mRoutineMangledName.string
-  if mGlobalVariableName != "" then
-    ioAccessibleEntities.mGlobalVariableSet += !mGlobalVariableName
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

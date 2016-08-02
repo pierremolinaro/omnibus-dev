@@ -117,6 +117,7 @@ void extensionMethod_analyzeAssignmentTarget (const class GALGAS_assignmentTarge
                                               class GALGAS_allocaList & io_ioAllocaList,
                                               class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                               class GALGAS_objectIR & out_outCurrentObject,
+                                              class GALGAS_string & out_outGlobalVariableReceiverName,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
