@@ -2505,9 +2505,9 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const GALGAS_assignm
                                                             GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
                                                             C_Compiler * inCompiler
                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_accessInAssignmentListAST enumerator_3107 (inObject.mAttribute_mAccessList, kEnumeration_up) ;
-  while (enumerator_3107.hasCurrentObject ()) {
-    switch (enumerator_3107.current_mAccess (HERE).enumValue ()) {
+  cEnumerator_accessInAssignmentListAST enumerator_3109 (inObject.mAttribute_mAccessList, kEnumeration_up) ;
+  while (enumerator_3109.hasCurrentObject ()) {
+    switch (enumerator_3109.current_mAccess (HERE).enumValue ()) {
     case GALGAS_accessInAssignmentAST::kNotBuilt:
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_property:
@@ -2516,13 +2516,13 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const GALGAS_assignm
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_3281 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_3107.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_3281->mAssociatedValue0 ;
+        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_3283 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_3109.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_3283->mAssociatedValue0 ;
         callExtensionMethod_noteExpressionTypesInPrecedenceGraph ((const cPtr_expressionAST *) extractedValue_indexExpression.ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 83)) ;
       }
       break ;
     }
-    enumerator_3107.gotoNextObject () ;
+    enumerator_3109.gotoNextObject () ;
   }
 }
 
@@ -2557,20 +2557,20 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
   case GALGAS_assignmentSelfAccessAST::kEnum_noSelfAccess:
     {
       {
-      GALGAS_unifiedTypeMap_2D_proxy joker_4599_3 ; // Joker input parameter
-      GALGAS_bool joker_4599_2 ; // Joker input parameter
-      GALGAS_objectInMemoryIR joker_4599_1 ; // Joker input parameter
-      GALGAS_bool joker_4642_2 ; // Joker input parameter
-      GALGAS_bool joker_4642_1 ; // Joker input parameter
-      ioArgument_ioVariableMap.setter_searchForWriteAccess (inObject.mAttribute_mIdentifier, joker_4599_3, joker_4599_2, joker_4599_1, outArgument_outCurrentObject, joker_4642_2, joker_4642_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 111)) ;
+      GALGAS_unifiedTypeMap_2D_proxy joker_4601_3 ; // Joker input parameter
+      GALGAS_bool joker_4601_2 ; // Joker input parameter
+      GALGAS_objectInMemoryIR joker_4601_1 ; // Joker input parameter
+      GALGAS_bool joker_4644_2 ; // Joker input parameter
+      GALGAS_bool joker_4644_1 ; // Joker input parameter
+      ioArgument_ioVariableMap.setter_searchForWriteAccess (inObject.mAttribute_mIdentifier, joker_4601_3, joker_4601_2, joker_4601_1, outArgument_outCurrentObject, joker_4644_2, joker_4644_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 111)) ;
       }
       extensionMethod_checkReadable (outArgument_outCurrentObject, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 116)) ;
     }
     break ;
   case GALGAS_assignmentSelfAccessAST::kEnum_selfAccess:
     {
-      const cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess * extractPtr_5346 = (const cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess *) (inObject.mAttribute_mSelfAccess.unsafePointer ()) ;
-      const GALGAS_location extractedValue_selfLocation = extractPtr_5346->mAssociatedValue0 ;
+      const cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess * extractPtr_5348 = (const cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess *) (inObject.mAttribute_mSelfAccess.unsafePointer ()) ;
+      const GALGAS_location extractedValue_selfLocation = extractPtr_5348->mAssociatedValue0 ;
       const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("assignment-target.galgas", 118)))).boolEnum () ;
       if (kBoolTrue == test_0) {
         inCompiler->emitSemanticError (extractedValue_selfLocation, GALGAS_string ("'self' is not available in this context")  COMMA_SOURCE_FILE ("assignment-target.galgas", 119)) ;
@@ -2578,14 +2578,14 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
       }else if (kBoolFalse == test_0) {
         const enumGalgasBool test_1 = constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 120)).getter_isStructure (SOURCE_FILE ("assignment-target.galgas", 120)).boolEnum () ;
         if (kBoolTrue == test_1) {
-          GALGAS_namedObjectMap var_structureObjectMap_4984 ;
-          GALGAS_propertyMap joker_4986_2 ; // Joker input parameter
-          GALGAS_propertyList joker_4986_1 ; // Joker input parameter
-          constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 121)).method_structure (var_structureObjectMap_4984, joker_4986_2, joker_4986_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 121)) ;
-          GALGAS_objectIR var_object_5066 ;
-          var_structureObjectMap_4984.method_searchKey (inObject.mAttribute_mIdentifier, var_object_5066, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 122)) ;
+          GALGAS_namedObjectMap var_structureObjectMap_4986 ;
+          GALGAS_propertyMap joker_4988_2 ; // Joker input parameter
+          GALGAS_propertyList joker_4988_1 ; // Joker input parameter
+          constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 121)).method_structure (var_structureObjectMap_4986, joker_4988_2, joker_4988_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 121)) ;
+          GALGAS_objectIR var_object_5068 ;
+          var_structureObjectMap_4986.method_searchKey (inObject.mAttribute_mIdentifier, var_object_5068, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 122)) ;
           {
-          routine_handleSelfAccessInAssignment (constinArgument_inSelfType, var_object_5066, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outCurrentObject, inCompiler  COMMA_SOURCE_FILE ("assignment-target.galgas", 126)) ;
+          routine_handleSelfAccessInAssignment (constinArgument_inSelfType, var_object_5068, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outCurrentObject, inCompiler  COMMA_SOURCE_FILE ("assignment-target.galgas", 126)) ;
           }
         }else if (kBoolFalse == test_1) {
           inCompiler->emitSemanticError (extractedValue_selfLocation, GALGAS_string ("'self' should be a structure instance")  COMMA_SOURCE_FILE ("assignment-target.galgas", 134)) ;
@@ -2595,15 +2595,15 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
     }
     break ;
   }
-  cEnumerator_accessInAssignmentListAST enumerator_5418 (inObject.mAttribute_mAccessList, kEnumeration_up) ;
-  while (enumerator_5418.hasCurrentObject ()) {
-    switch (enumerator_5418.current_mAccess (HERE).enumValue ()) {
+  cEnumerator_accessInAssignmentListAST enumerator_5420 (inObject.mAttribute_mAccessList, kEnumeration_up) ;
+  while (enumerator_5420.hasCurrentObject ()) {
+    switch (enumerator_5420.current_mAccess (HERE).enumValue ()) {
     case GALGAS_accessInAssignmentAST::kNotBuilt:
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_property:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_5634 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_5418.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_propertyName = extractPtr_5634->mAssociatedValue0 ;
+        const cEnumAssociatedValues_accessInAssignmentAST_property * extractPtr_5636 = (const cEnumAssociatedValues_accessInAssignmentAST_property *) (enumerator_5420.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_propertyName = extractPtr_5636->mAssociatedValue0 ;
         {
         routine_handlePropertyAccessInAssignment (outArgument_outCurrentObject, extractedValue_propertyName, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("assignment-target.galgas", 141)) ;
         }
@@ -2611,16 +2611,16 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
       break ;
     case GALGAS_accessInAssignmentAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_6335 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_5418.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_6335->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfExpression = extractPtr_6335->mAssociatedValue1 ;
+        const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess * extractPtr_6337 = (const cEnumAssociatedValues_accessInAssignmentAST_arrayAccess *) (enumerator_5420.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_6337->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfExpression = extractPtr_6337->mAssociatedValue1 ;
         {
         routine_handleSubscriptInAssignmentAndExpression (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inModeSet, constinArgument_inAllowPanic, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioNamedObjectMap, ioArgument_ioAllocaList, extractedValue_indexExpression, extractedValue_endOfExpression, ioArgument_ioInstructionGenerationList, outArgument_outCurrentObject, inCompiler  COMMA_SOURCE_FILE ("assignment-target.galgas", 148)) ;
         }
       }
       break ;
     }
-    enumerator_5418.gotoNextObject () ;
+    enumerator_5420.gotoNextObject () ;
   }
 }
 
