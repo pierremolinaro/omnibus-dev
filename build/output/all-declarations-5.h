@@ -1819,23 +1819,24 @@ void extensionSetter_appendLoadFromReference (class GALGAS_instructionListIR & i
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_handleFunctionCallInExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                             const class GALGAS_bool constinArgument1,
+                                             const class GALGAS_string constinArgument1,
                                              const class GALGAS_bool constinArgument2,
                                              const class GALGAS_bool constinArgument3,
-                                             const class GALGAS_lstring constinArgument4,
-                                             const class GALGAS_semanticContext constinArgument5,
-                                             const class GALGAS_stringset constinArgument6,
-                                             const class GALGAS_bool constinArgument7,
-                                             class GALGAS_semanticTemporariesStruct & ioArgument8,
-                                             class GALGAS_staticStringMap & ioArgument9,
-                                             class GALGAS_variableMap & ioArgument10,
-                                             class GALGAS_namedObjectMap & ioArgument11,
-                                             class GALGAS_allocaList & ioArgument12,
-                                             const class GALGAS_effectiveParameterListAST constinArgument13,
-                                             const class GALGAS_location constinArgument14,
-                                             class GALGAS_instructionListIR & ioArgument15,
-                                             class GALGAS_objectIR & ioArgument16,
-                                             class GALGAS_unifiedTypeMap_2D_proxy & outArgument17,
+                                             const class GALGAS_bool constinArgument4,
+                                             const class GALGAS_lstring constinArgument5,
+                                             const class GALGAS_semanticContext constinArgument6,
+                                             const class GALGAS_stringset constinArgument7,
+                                             const class GALGAS_bool constinArgument8,
+                                             class GALGAS_semanticTemporariesStruct & ioArgument9,
+                                             class GALGAS_staticStringMap & ioArgument10,
+                                             class GALGAS_variableMap & ioArgument11,
+                                             class GALGAS_namedObjectMap & ioArgument12,
+                                             class GALGAS_allocaList & ioArgument13,
+                                             const class GALGAS_effectiveParameterListAST constinArgument14,
+                                             const class GALGAS_location constinArgument15,
+                                             class GALGAS_instructionListIR & ioArgument16,
+                                             class GALGAS_objectIR & ioArgument17,
+                                             class GALGAS_unifiedTypeMap_2D_proxy & outArgument18,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -1866,12 +1867,13 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_functionCallIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                               const class GALGAS_lstring & inOperand1,
+  public : static class GALGAS_functionCallIR constructor_new (const class GALGAS_string & inOperand0,
+                                                               const class GALGAS_objectIR & inOperand1,
                                                                const class GALGAS_lstring & inOperand2,
-                                                               const class GALGAS_routineKindIR & inOperand3,
-                                                               const class GALGAS_procCallEffectiveParameterListIR & inOperand4,
-                                                               const class GALGAS_bool & inOperand5
+                                                               const class GALGAS_lstring & inOperand3,
+                                                               const class GALGAS_routineKindIR & inOperand4,
+                                                               const class GALGAS_procCallEffectiveParameterListIR & inOperand5,
+                                                               const class GALGAS_bool & inOperand6
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1890,6 +1892,8 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionMangledName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionNameForGeneration (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVariableName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
 
@@ -1914,6 +1918,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_functionCallIR ;
 
 class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
 //--- Attributes
+  public : GALGAS_string mAttribute_mGlobalVariableName ;
   public : GALGAS_objectIR mAttribute_mResult ;
   public : GALGAS_lstring mAttribute_mFunctionMangledName ;
   public : GALGAS_lstring mAttribute_mFunctionNameForGeneration ;
@@ -1922,7 +1927,8 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
   public : GALGAS_bool mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
 
 //--- Constructor
-  public : cPtr_functionCallIR (const GALGAS_objectIR & in_mResult,
+  public : cPtr_functionCallIR (const GALGAS_string & in_mGlobalVariableName,
+                                const GALGAS_objectIR & in_mResult,
                                 const GALGAS_lstring & in_mFunctionMangledName,
                                 const GALGAS_lstring & in_mFunctionNameForGeneration,
                                 const GALGAS_routineKindIR & in_mKind,
@@ -1934,6 +1940,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mGlobalVariableName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionMangledName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionNameForGeneration (LOCATION_ARGS) const ;
