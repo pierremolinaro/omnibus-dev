@@ -1679,33 +1679,33 @@ class GALGAS_string function_userModeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Abstract extension method '@abstractCallInstructionAST baseGuardAnalyze'                       *
+//                               Extension method '@callInstructionAST baseGuardAnalyze'                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (*extensionMethodSignature_abstractCallInstructionAST_baseGuardAnalyze) (const class cPtr_abstractCallInstructionAST * inObject,
-                                                                                      const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                                                      const class GALGAS_lstring constinArgument1,
-                                                                                      const class GALGAS_semanticContext constinArgument2,
-                                                                                      const class GALGAS_stringset constinArgument3,
-                                                                                      class GALGAS_allocaList & ioArgument4,
-                                                                                      class GALGAS_instructionListIR & ioArgument5,
-                                                                                      class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                                                      class GALGAS_staticStringMap & ioArgument7,
-                                                                                      class GALGAS_variableMap & ioArgument8,
-                                                                                      class GALGAS_namedObjectMap & ioArgument9,
-                                                                                      class GALGAS_guardKindGenerationIR & outArgument10,
-                                                                                      class C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (const class cPtr_callInstructionAST * inObject,
+                                                                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                              const class GALGAS_lstring constinArgument1,
+                                                                              const class GALGAS_semanticContext constinArgument2,
+                                                                              const class GALGAS_stringset constinArgument3,
+                                                                              class GALGAS_allocaList & ioArgument4,
+                                                                              class GALGAS_instructionListIR & ioArgument5,
+                                                                              class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                                                              class GALGAS_staticStringMap & ioArgument7,
+                                                                              class GALGAS_variableMap & ioArgument8,
+                                                                              class GALGAS_namedObjectMap & ioArgument9,
+                                                                              class GALGAS_guardKindGenerationIR & outArgument10,
+                                                                              class C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void enterExtensionMethod_baseGuardAnalyze (const int32_t inClassIndex,
-                                            extensionMethodSignature_abstractCallInstructionAST_baseGuardAnalyze inMethod) ;
+                                            extensionMethodSignature_callInstructionAST_baseGuardAnalyze inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void callExtensionMethod_baseGuardAnalyze (const class cPtr_abstractCallInstructionAST * inObject,
+void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST * inObject,
                                            const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
                                            const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                            const GALGAS_semanticContext constin_inContext,

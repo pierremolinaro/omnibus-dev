@@ -395,7 +395,7 @@ private proc handlePropertyInExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc handleFunctionCallInExpression
+proc handleFunctionCallInExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
@@ -465,7 +465,7 @@ private proc handleFunctionCallInExpression
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc analyzeFunctionCallInExpression
+proc analyzeFunctionCallInExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
