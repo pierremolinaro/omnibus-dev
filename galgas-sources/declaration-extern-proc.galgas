@@ -158,7 +158,6 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
-    ?@namedObjectMap namedObjectMap
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
@@ -166,7 +165,6 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !context:inContext
     !mProcFormalArgumentList
     !?variableMap
-    !?namedObjectMap
     !?formalArguments
   )
 #--- End of variableMap

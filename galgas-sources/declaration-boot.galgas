@@ -86,7 +86,6 @@ method @bootList-element bootSemanticAnalysis
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
-    ?@namedObjectMap namedObjectMap
   )
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}

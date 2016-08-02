@@ -21,10 +21,8 @@ proc initialVariableMap
   ?globalsAreConstant:@bool inGlobalsAreConstant
   ?returnTypeName:let @lstring inReturnTypeName
   !@variableMap outVariableMap
-  !@namedObjectMap outObjectMap
 {
   outVariableMap = .emptyMap
-  outObjectMap = {}
 #------------------------------------------------------- Add modules
   for (moduleName) in inContext.mModuleMap do
     let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
@@ -36,14 +34,6 @@ proc initialVariableMap
       !objectIR:.globalVariableReference {!type:moduleType !plmName:moduleName}
       !copyable:false
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-    ]
-    let moduleAsVariable = @objectIR.globalVariableReference {
-      !type:moduleType
-      !plmName:moduleName
-    }
-    [!?outObjectMap insertKey
-      !moduleName
-      !moduleAsVariable
     ]
   end
 #------------------------------------------------------- Add registers
@@ -60,7 +50,6 @@ proc initialVariableMap
         !arraySize: mArraySize # 0 if not an array
         !elementSize: mElementArraySize # 0 if not an array
       }
-      [!?outObjectMap insertKey !lkey !objectReference]
       [!?outVariableMap insertInaccessibleControlRegister
         !lkey:lkey
         !type:mType
@@ -83,7 +72,6 @@ proc initialVariableMap
           !arraySize: mArraySize # 0 if not an array
           !elementSize: mElementArraySize # 0 if not an array
         }
-        [!?outObjectMap insertKey !lkey !objectReference]
         [!?outVariableMap insertInaccessibleControlRegister
           !lkey:lkey
           !type:mType
@@ -103,7 +91,6 @@ proc initialVariableMap
           !arraySize: mArraySize # 0 if not an array
           !elementSize: mElementArraySize # 0 if not an array
         }
-        [!?outObjectMap insertKey !lkey !objectReference]
         [!?outVariableMap insertUsedConstant
           !lkey:lkey
           !type:mType
@@ -126,7 +113,6 @@ proc initialVariableMap
         !arraySize: mArraySize # 0 if not an array
         !elementSize: mElementArraySize # 0 if not an array
       }
-      [!?outObjectMap insertKey !lkey !objectReference]
       [!?outVariableMap insertDefinedVariable
         !lkey:lkey
         !type:mType
@@ -147,7 +133,6 @@ proc initialVariableMap
       !copyable:true
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
     ]
-    [!?outObjectMap insertKey !constantName !constantValue]
   end
 #------------------------------------------------------- Add global variables
   for variable in inContext.mGlobalVariableMap do
@@ -165,11 +150,6 @@ proc initialVariableMap
       end
     end
     if inGlobalsAreConstant || variable.isConstant || not writeAccess then
-      let resultVariable = @objectIR.globalVariableReference {
-        !type:variable.type
-        !plmName:variable.lkey
-      }
-      [!?outObjectMap insertKey !variable.lkey !resultVariable]
       [!?outVariableMap insertUsedConstant
         !lkey:variable.lkey
         !type:variable.type
@@ -179,11 +159,6 @@ proc initialVariableMap
         !canBeUsedAsInputParameter:false
       ]
     else
-      let resultVariable = @objectIR.globalVariableReference {
-        !type:variable.type
-        !plmName:variable.lkey
-      }
-      [!?outObjectMap insertKey !variable.lkey !resultVariable]
       [!?outVariableMap insertDefinedVariable
         !lkey:variable.lkey
         !type:variable.type
@@ -206,11 +181,6 @@ proc initialVariableMap
       !copyable:true
       !canBeUsedAsInputParameter:true
     ]
-    let resultVariable = @objectIR.localVariableReference {
-      !type:resultType
-      !plmName:inReturnTypeName
-    }
-    [!?outObjectMap insertKey !resultVarName !resultVariable]
   end
 }
 
