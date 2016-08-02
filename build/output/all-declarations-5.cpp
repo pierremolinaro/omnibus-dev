@@ -8985,14 +8985,14 @@ void routine_handleSelfAccessInAssignment (const GALGAS_unifiedTypeMap_2D_proxy 
   outArgument_outObjectPtr.drop () ; // Release 'out' argument
   const enumGalgasBool test_0 = constinArgument_inObject.getter_isProperty (SOURCE_FILE ("assignment-target.galgas", 179)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_unifiedTypeMap_2D_proxy var_type_6776 ;
-    GALGAS_string var_name_6794 ;
-    GALGAS_uint var_index_6811 ;
-    constinArgument_inObject.method_property (var_type_6776, var_name_6794, var_index_6811, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 180)) ;
-    outArgument_outObjectPtr = GALGAS_objectIR::constructor_temporaryReference (var_type_6776, GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("assignment-target.galgas", 183)), inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 183)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("assignment-target.galgas", 184)), GALGAS_bool (false)  COMMA_SOURCE_FILE ("assignment-target.galgas", 181)) ;
+    GALGAS_unifiedTypeMap_2D_proxy var_type_6778 ;
+    GALGAS_string var_name_6796 ;
+    GALGAS_uint var_index_6813 ;
+    constinArgument_inObject.method_property (var_type_6778, var_name_6796, var_index_6813, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 180)) ;
+    outArgument_outObjectPtr = GALGAS_objectIR::constructor_temporaryReference (var_type_6778, GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("assignment-target.galgas", 183)), inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 183)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("assignment-target.galgas", 184)), GALGAS_bool (false)  COMMA_SOURCE_FILE ("assignment-target.galgas", 181)) ;
     ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("assignment-target.galgas", 187)) ;
     {
-    extensionSetter_appendPropertyReferenceFromSelf (ioArgument_ioInstructionGenerationList, outArgument_outObjectPtr, constinArgument_inSelfType, var_name_6794, var_index_6811, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 188)) ;
+    extensionSetter_appendPropertyReferenceFromSelf (ioArgument_ioInstructionGenerationList, outArgument_outObjectPtr, constinArgument_inSelfType, var_name_6796, var_index_6813, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 188)) ;
     }
   }else if (kBoolFalse == test_0) {
     inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("assignment-target.galgas", 195)), GALGAS_string ("<<getNewTemporarySelfObjectPtr>>")  COMMA_SOURCE_FILE ("assignment-target.galgas", 195)) ;
@@ -9015,24 +9015,24 @@ void routine_handlePropertyAccessInAssignment (GALGAS_objectIR & ioArgument_ioOb
                                                COMMA_UNUSED_LOCATION_ARGS) {
   const enumGalgasBool test_0 = extensionGetter_type (ioArgument_ioObject, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 207)).getter_kind (inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 207)).getter_isStructure (SOURCE_FILE ("assignment-target.galgas", 207)).boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_namedObjectMap var_structureObjectMap_7688 ;
-    GALGAS_propertyMap joker_7690_2 ; // Joker input parameter
-    GALGAS_propertyList joker_7690_1 ; // Joker input parameter
-    extensionGetter_type (ioArgument_ioObject, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 208)).getter_kind (inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 208)).method_structure (var_structureObjectMap_7688, joker_7690_2, joker_7690_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 208)) ;
-    GALGAS_objectIR var_property_7763 ;
-    var_structureObjectMap_7688.method_searchKey (constinArgument_inPropertyName, var_property_7763, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 209)) ;
-    const enumGalgasBool test_1 = var_property_7763.getter_isProperty (SOURCE_FILE ("assignment-target.galgas", 210)).boolEnum () ;
+    GALGAS_namedObjectMap var_structureObjectMap_7690 ;
+    GALGAS_propertyMap joker_7692_2 ; // Joker input parameter
+    GALGAS_propertyList joker_7692_1 ; // Joker input parameter
+    extensionGetter_type (ioArgument_ioObject, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 208)).getter_kind (inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 208)).method_structure (var_structureObjectMap_7690, joker_7692_2, joker_7692_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 208)) ;
+    GALGAS_objectIR var_property_7765 ;
+    var_structureObjectMap_7690.method_searchKey (constinArgument_inPropertyName, var_property_7765, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 209)) ;
+    const enumGalgasBool test_1 = var_property_7765.getter_isProperty (SOURCE_FILE ("assignment-target.galgas", 210)).boolEnum () ;
     if (kBoolTrue == test_1) {
-      GALGAS_unifiedTypeMap_2D_proxy var_type_7838 ;
-      GALGAS_string var_name_7856 ;
-      GALGAS_uint var_index_7873 ;
-      var_property_7763.method_property (var_type_7838, var_name_7856, var_index_7873, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 211)) ;
-      GALGAS_objectIR var_newObject_7894 = GALGAS_objectIR::constructor_temporaryReference (var_type_7838, GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("assignment-target.galgas", 214)), inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 214)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("assignment-target.galgas", 215)), GALGAS_bool (false)  COMMA_SOURCE_FILE ("assignment-target.galgas", 212)) ;
+      GALGAS_unifiedTypeMap_2D_proxy var_type_7840 ;
+      GALGAS_string var_name_7858 ;
+      GALGAS_uint var_index_7875 ;
+      var_property_7765.method_property (var_type_7840, var_name_7858, var_index_7875, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 211)) ;
+      GALGAS_objectIR var_newObject_7896 = GALGAS_objectIR::constructor_temporaryReference (var_type_7840, GALGAS_string ("temp.").add_operation (ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.getter_string (SOURCE_FILE ("assignment-target.galgas", 214)), inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 214)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("assignment-target.galgas", 215)), GALGAS_bool (false)  COMMA_SOURCE_FILE ("assignment-target.galgas", 212)) ;
       ioArgument_ioTemporaries.mAttribute_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("assignment-target.galgas", 218)) ;
       {
-      extensionSetter_appendGetPropertyReference (ioArgument_ioInstructionGenerationList, var_newObject_7894, ioArgument_ioObject, var_name_7856, var_index_7873.getter_string (SOURCE_FILE ("assignment-target.galgas", 223)), inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 219)) ;
+      extensionSetter_appendGetPropertyReference (ioArgument_ioInstructionGenerationList, var_newObject_7896, ioArgument_ioObject, var_name_7858, var_index_7875.getter_string (SOURCE_FILE ("assignment-target.galgas", 223)), inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 219)) ;
       }
-      ioArgument_ioObject = var_newObject_7894 ;
+      ioArgument_ioObject = var_newObject_7896 ;
     }else if (kBoolFalse == test_1) {
       inCompiler->emitSemanticError (constinArgument_inPropertyName.getter_location (SOURCE_FILE ("assignment-target.galgas", 227)), GALGAS_string ("<<getNewTemporarySelfObjectPtr>>")  COMMA_SOURCE_FILE ("assignment-target.galgas", 227)) ;
       ioArgument_ioObject.drop () ; // Release error dropped variable

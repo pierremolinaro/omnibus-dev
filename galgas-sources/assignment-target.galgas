@@ -39,8 +39,8 @@ syntax extension common_syntax {
   rule <assignment_target> !@assignmentTargetAST outAssignmentTargetAST {
     $zzz$
   #--- Self ?
-   @assignmentSelfAccessAST selfAccess
-   select
+    @assignmentSelfAccessAST selfAccess
+    select
       selfAccess = .noSelfAccess
     or
       $self$
