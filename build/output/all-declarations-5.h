@@ -1558,13 +1558,11 @@ typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (co
                                                                               const class GALGAS_lstring constinArgument1,
                                                                               const class GALGAS_semanticContext constinArgument2,
                                                                               const class GALGAS_stringset constinArgument3,
-                                                                              class GALGAS_allocaList & ioArgument4,
-                                                                              class GALGAS_instructionListIR & ioArgument5,
-                                                                              class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                                              class GALGAS_staticStringMap & ioArgument7,
-                                                                              class GALGAS_variableMap & ioArgument8,
-                                                                              class GALGAS_namedObjectMap & ioArgument9,
-                                                                              class GALGAS_guardKindGenerationIR & outArgument10,
+                                                                              class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                                                              class GALGAS_staticStringMap & ioArgument5,
+                                                                              class GALGAS_variableMap & ioArgument6,
+                                                                              class GALGAS_namedObjectMap & ioArgument7,
+                                                                              class GALGAS_guardKindGenerationIR & outArgument8,
                                                                               class C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
 
@@ -1580,8 +1578,6 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
                                            const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                            const GALGAS_semanticContext constin_inContext,
                                            const GALGAS_stringset constin_inModeSet,
-                                           GALGAS_allocaList & io_ioAllocaList,
-                                           GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                            GALGAS_variableMap & io_ioVariableMap,

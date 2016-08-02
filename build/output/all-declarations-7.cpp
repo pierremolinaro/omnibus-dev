@@ -1639,9 +1639,9 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1-tp
   "    var s = $B ()\n"
   "    var aa = s.a\n"
   "    var bb = s.b\n"
-  "    azerty s.a = aa\n"
+  "    s.a = aa\n"
   "    var s2 = $C ()\n"
-  "    azerty s2.c.a = aa\n"
+  "    s2.c.a = aa\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1651,7 +1651,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  1110, // Text length
+  1096, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
