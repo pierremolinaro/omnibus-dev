@@ -172,14 +172,12 @@ method @taskList enterInContext
     @propertyList propertyList = {}
     @propertyMap propertyMap = {}
     @operandIRList initialValueList = {}
-    @namedObjectMap objectMap = {}
     for variable in task.mVarList do
       [variable enterInContext
         !?context:ioContext
         !?staticStringMap:ioGlobalLiteralStringMap
         !?propertyList
         !?propertyMap
-        !?objectMap
         !?initialValueList
       ]
     end
@@ -216,7 +214,6 @@ method @taskVarListAST-element enterInContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!@propertyList ioPropertyList
   ?!@propertyMap ioPropertyMap
-  ?!@namedObjectMap ioObjectMap
   ?!@operandIRList ioInitialValueList
 {
 #--- Get destination type
@@ -275,10 +272,6 @@ method @taskVarListAST-element enterInContext
     ![ioPropertyList length]
   ]
   ioInitialValueList += !result
-  [!?ioObjectMap insertKey
-    !mVarName
-    !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
-  ]
   ioPropertyList += !mVarName.string ![result type]
 }
 

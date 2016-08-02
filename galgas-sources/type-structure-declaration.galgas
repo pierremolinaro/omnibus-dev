@@ -237,7 +237,6 @@ override method @structureDeclaration enterInContext
 #---------------------------------------- Properties
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
-  @namedObjectMap objectMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   var canBeCopied = true
@@ -290,10 +289,6 @@ override method @structureDeclaration enterInContext
         !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
         !propertyIndex
       ]
-      [!?objectMap insertKey
-        !mFieldName
-        !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
-      ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     case noExpression :
       if not [optionalPropertyType instantiable] then
@@ -305,10 +300,6 @@ override method @structureDeclaration enterInContext
         !mIsPublic
         !.property {!type:optionalPropertyType !plmName:mFieldName !index:propertyIndex}
         !propertyIndex
-      ]
-      [!?objectMap insertKey
-        !mFieldName
-        !.property {!type:optionalPropertyType !plmName:mFieldName !index:propertyIndex}
       ]
       constructorSignature += !mFieldName.string !optionalPropertyType !propertyIndex
     end
