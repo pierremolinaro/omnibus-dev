@@ -239,6 +239,14 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_common_5F_syntax,
                                  const GALGAS_string inArgument2,
                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'module_variable' non terminal
+//--- 'parse' label
+  public : virtual void nt_module_5F_variable_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_module_5F_variable_ (GALGAS_structureFieldListAST & ioArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'primary' non terminal
 //--- 'parse' label
   public : virtual void nt_primary_parse (C_Lexique_plm_5F_lexique * inCompiler) ;

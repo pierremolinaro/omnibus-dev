@@ -113,19 +113,11 @@
   NSData * data = [df valueForKey:GGS_editor_background_color] ;
   // NSLog (@"DATA %@", data) ;
   NSColor * color = [NSUnarchiver unarchiveObjectWithData:data] ;
-  NSColor * rgbColor = [color colorUsingColorSpace:[NSColorSpace genericRGBColorSpace]] ;
-  CGFloat red ;
-  CGFloat green ;
-  CGFloat blue ;
-  CGFloat alpha ;
-  [rgbColor getRed: &red green: &green blue: &blue alpha: &alpha] ;
-  NSColor * newCursorColor = [NSColor
-    colorWithRed: 1.0 - red
-    green: 1.0 - green
-    blue: 1.0 - blue
-    alpha: alpha
-  ] ;
-  self.insertionPointColor = newCursorColor ;
+  if ([color brightnessComponent] > 0.5) {
+    self.insertionPointColor = [color blendedColorWithFraction:0.5 ofColor:[NSColor blackColor]] ;
+  }else{
+    self.insertionPointColor = [color blendedColorWithFraction:0.5 ofColor:[NSColor whiteColor]] ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
