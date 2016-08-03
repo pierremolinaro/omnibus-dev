@@ -14,6 +14,22 @@ syntax extension common_syntax {
 
   #·····················································································································
 
+  rule <module_variable> ?!@structureFieldListAST ioPropertyList {
+    $var$
+    $identifier$ ?let fieldName
+    @lstring typeName
+    select
+      $typeName$ ?typeName
+    or
+      typeName = ["" nowhere]
+    end
+    $=$
+    <expression> ?let initExpression
+    ioPropertyList += !fieldName !false !typeName !.expression{!initExpression:initExpression}
+  }
+  
+  #·····················································································································
+
   rule <declaration> ?!@ast ioAST {
     $module$
     $identifier$ ?let moduleName
@@ -32,17 +48,7 @@ syntax extension common_syntax {
     while
       <isr> !?ioAST.mISRDeclarationListAST !moduleTypeName !moduleName.string
     while
-      $var$
-      $identifier$ ?let fieldName
-      @lstring typeName
-      select
-        $typeName$ ?typeName
-      or
-        typeName = ["" nowhere]
-      end
-      $=$
-      <expression> ?let initExpression
-      fieldList += !fieldName !false !typeName !.expression{!initExpression:initExpression}
+      <module_variable> !?fieldList
     while
       <procedure> !?functionDeclarationListAST
     while
