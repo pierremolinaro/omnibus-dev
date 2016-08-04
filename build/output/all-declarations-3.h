@@ -3683,8 +3683,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeMapIR_2D_elemen
 //  GRAMMAR plm_grammar
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
-                                public cParser_plm_5F_specific_5F_syntax {
+class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //------------------------------------- 'assignment_operator' non terminal
 //--- 'parse' label
   public : virtual void nt_assignment_5F_operator_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -3881,6 +3880,14 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
                                                const GALGAS_lstring inArgument2,
                                                C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'import_file' non terminal
+//--- 'parse' label
+  public : virtual void nt_import_5F_file_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_import_5F_file_ (GALGAS_lstringlist & ioArgument0,
+                                            C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'instruction' non terminal
 //--- 'parse' label
   public : virtual void nt_instruction_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -4023,185 +4030,185 @@ class cGrammar_plm_5F_grammar : public cParser_common_5F_syntax,
   public : static void performOnlySyntaxAnalysis (C_Compiler * inCompiler,
                                                   const C_String & inSourceFilePath) ;
 
-  public : virtual int32_t select_common_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_1 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_1 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_2 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_2 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_3 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_3 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_4 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_4 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_5 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_5 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_6 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_6 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_7 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_7 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_8 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_8 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_9 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_9 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_10 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_10 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_11 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_11 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_12 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_12 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_13 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_13 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_14 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_14 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_15 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_15 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_16 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_16 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_17 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_17 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_18 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_18 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_19 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_19 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_20 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_20 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_21 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_21 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_22 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_22 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_23 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_23 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_24 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_24 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_25 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_25 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_26 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_26 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_27 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_27 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_28 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_28 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_29 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_29 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_30 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_30 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_31 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_31 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_32 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_32 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_33 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_33 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_34 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_34 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_35 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_35 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_36 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_36 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_37 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_37 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_38 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_38 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_39 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_39 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_40 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_40 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_41 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_41 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_42 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_42 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_43 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_43 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_44 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_44 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_45 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_45 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_46 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_46 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_47 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_47 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_48 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_48 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_49 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_49 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_50 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_50 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_51 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_51 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_52 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_52 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_53 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_53 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_54 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_54 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_55 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_55 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_56 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_56 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_57 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_57 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_58 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_58 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_59 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_59 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_60 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_60 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_61 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_61 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_62 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_62 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_63 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_63 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_64 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_64 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_65 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_65 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_66 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_66 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_67 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_67 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_68 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_68 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_69 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_69 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_70 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_70 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_71 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_71 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_72 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_72 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_73 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_73 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_74 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_74 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_75 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_75 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_76 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_76 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_77 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_77 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_78 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_78 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_79 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_79 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_80 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_80 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_81 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_81 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_82 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_82 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_83 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_83 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_84 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_84 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_85 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_85 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_86 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_86 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_87 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_87 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_88 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_88 (C_Lexique_plm_5F_lexique *) ;
 
-  public : virtual int32_t select_common_5F_syntax_89 (C_Lexique_plm_5F_lexique *) ;
+  public : virtual int32_t select_plm_5F_syntax_89 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

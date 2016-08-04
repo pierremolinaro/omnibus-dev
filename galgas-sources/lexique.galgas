@@ -132,7 +132,7 @@ rule '$' {
 
 style modeStyle -> "Modes"
 
-$modeName$ ! tokenString  style modeStyle error message "a mode `..."
+$`mode$ ! tokenString  style modeStyle error message "a mode `..."
 
 message modeError : "in a mode name, a letter or a digit should follow the '`' character"
 
@@ -146,7 +146,7 @@ rule '`' {
   default
     error modeError
   end
-  send $modeName$ 
+  send $`mode$ 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -228,7 +228,7 @@ rule '0'->'9' {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 style stringStyle -> "Literal Strings"
-$literal_string$ ! tokenString style stringStyle %nonAtomicSelection error message "a literal character string \"...\""
+$"string"$ ! tokenString style stringStyle %nonAtomicSelection error message "a literal character string \"...\""
 
 message incorrectStringEnd : "string does not end with '\"'"
 
@@ -239,7 +239,7 @@ rule '"' {
   end
   select
   case '"' :
-    send $literal_string$
+    send $"string"$
   default
     error incorrectStringEnd
   end

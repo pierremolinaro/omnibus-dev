@@ -10,12 +10,12 @@ class @literalStringInExpressionAST : @expressionAST {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension common_syntax {
+syntax extension plm_syntax {
 
   #·····················································································································
 
   rule <primary> !@expressionAST outExpression {
-    $literal_string$ ?let @lstring stringLiteral
+    $"string"$ ?let @lstring stringLiteral
     outExpression = @literalStringInExpressionAST.new {!stringLiteral}
   }
 
