@@ -50,26 +50,27 @@ Ce chapitre liste l'ensemble des règles de production de ces deux grammaires.
   every join/.style={rounded corners}
 }
 
-\newcommand\nonTerminalSection[2]{\subsection{Non terminal \texttt{\it#1}}\label{nt:#2}}
 \newcommand\ruleSubsection[3]{} % \subsection{Component \texttt{#1}, in file \texttt{#2}, line #3}}
 \newcommand\ruleMatrixColumnSeparation{2mm}
 \newcommand\ruleMatrixRowSeparation{1.5mm}
-\newcommand\nonTerminalSymbol[2]{\hyperref[nt:#2]{#1}}
-\newcommand\startSymbol[2]{L'axiome de la grammaire est \hyperref[nt:#2]{#1}.}
-
-\newcommand\nonTerminalSummaryStart{Voici la liste alphabétique des non terminaux: }
-\newcommand\nonTerminalSummary[2]{\hyperref[nt:#2]{#1}}
 \newcommand\nonTerminalSummarySeparator{, }
 \newcommand\nonTerminalSummaryEnd{.\\}
+\newcommand\nonTerminalSummaryStart{Voici la liste alphabétique des non terminaux: }
+
+\newcommand\nonTerminalSection[2]{\subsection{Non terminal \texttt{\it#1}}\label{nt:#2}}
+\newcommand\nonTerminalSummary[2]{\hyperref[nt:#2]{#1}}
+\newcommand\nonTerminalSymbol[2]{\hyperref[nt:#2]{#1}}
+\newcommand\startSymbol[2]{L'axiome de la grammaire est \hyperref[nt:#2]{#1}.}
 
 \sectionLabel{Grammaire du langage \texttt{PLM}}{grammairePLM}
 
 \input{grammaire/plm_grammar.tex}
 
 
-\renewcommand\startSymbol[2]{L'axiome de la grammaire est \hyperref[nt1:#2]{#1}.}
 \renewcommand\nonTerminalSection[2]{\subsection{Non terminal \texttt{\it#1}}\label{nt1:#2}}
 \renewcommand\nonTerminalSummary[2]{\hyperref[nt1:#2]{#1}}
+\renewcommand\nonTerminalSymbol[2]{\hyperref[nt1:#2]{#1}}
+\renewcommand\startSymbol[2]{L'axiome de la grammaire est \hyperref[nt1:#2]{#1}.}
 
 \sectionLabel{Grammaire du langage de description de cible}{grammaireCible}
 

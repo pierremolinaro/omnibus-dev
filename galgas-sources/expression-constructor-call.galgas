@@ -19,7 +19,7 @@ class @constructorCall : @expressionAST {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension common_syntax {
+syntax extension plm_syntax {
 
   rule <primary> !@expressionAST outExpression {
     $\$type$ ?let typeName

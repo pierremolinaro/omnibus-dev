@@ -15,7 +15,7 @@ list @externProcedureDeclarationListAST {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension common_syntax {
+syntax extension plm_syntax {
 
   #·····················································································································
 
@@ -35,7 +35,7 @@ syntax extension common_syntax {
       $\$type$ ?returnTypeName
     end
     $:$
-    $literal_string$ ?let llvmName
+    $"string"$ ?let llvmName
     ioAST.mExternProcList += !procName !requiredModeList !procFormalArgumentList !returnTypeName !llvmName !.here
   }
 

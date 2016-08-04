@@ -63,7 +63,7 @@ map @labelMap {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension common_syntax {
+syntax extension plm_syntax {
 
   #·····················································································································
 
@@ -113,7 +113,7 @@ syntax extension common_syntax {
     $func$
     outProcModeList = {}
     repeat
-      $modeName$ ?let procMode
+      $`mode$ ?let procMode
       outProcModeList += !procMode
     while
     end

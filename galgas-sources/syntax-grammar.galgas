@@ -2,7 +2,31 @@
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax common_syntax (plm_lexique) {
+syntax plm_syntax (plm_lexique) {
+
+  rule <procedure> ?!@functionDeclarationListAST ioProcListAST
+
+  rule <section> ?!@sectionDeclarationListAST ioSectionListAST
+
+  rule <service> ?!@serviceDeclarationListAST ioServiceListAST
+
+  rule <primitive> ?!@primitiveDeclarationListAST ioPrimitiveListAST
+
+  rule <isr> ?!@isrDeclarationListAST ioISRListAST ?let @lstring inSelfTypeName ?let @string inGlobalVarName
+
+  #·····················································································································
+
+  rule <import_file> ?!@lstringlist ioImportedFileList {
+    $import$
+    $"string"$ ?let importedFile
+    ioImportedFileList += !importedFile
+    if [importedFile.string pathExtension] != "plm" then
+      error importedFile : "the pah extension should be .plm"
+    end
+  }
+
+
+  #·····················································································································
 
   rule <start_symbol>
     ?!@ast ioAst
@@ -24,24 +48,10 @@ syntax common_syntax (plm_lexique) {
     while
       <isr> !?ioAst.mISRDeclarationListAST !["" nowhere] !""
     while
-      $import$
-      $literal_string$ ?let importedFile
-      outImportedFileList += !importedFile
-      if [importedFile.string pathExtension] != "plm" then
-        error importedFile : "the pah extension should be .plm"
-      end
+      <import_file> !?outImportedFileList
     end
     outEndOfSourceFile = .here
   }
-
-  #·····················································································································
-  
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-syntax plm_specific_syntax (plm_lexique) {
-
 
 }
 
@@ -49,6 +59,34 @@ syntax plm_specific_syntax (plm_lexique) {
 
 syntax plm_target_specific_syntax (plm_lexique) {
 
+  rule <configuration> ?!@ast ioAST
+
+  #·····················································································································
+
+  rule <import_file> ?!@lstringlist ioImportedFileList {
+    $import$
+    $"string"$ ?let importedFile
+    ioImportedFileList += !importedFile
+    if [importedFile.string pathExtension] != "plm" then
+      error importedFile : "the pah extension should be .plm"
+    end
+  }
+
+  #·····················································································································
+
+  rule <configuration_start_symbol>
+    ?!@ast ioAst
+    !importClauseList:@lstringlist outImportedFileList
+    !endOfSourceFile:@location outEndOfSourceFile
+  {
+    <configuration> !?ioAst
+    outImportedFileList = {}
+    repeat
+    while
+      <import_file> !?outImportedFileList
+    end
+    outEndOfSourceFile = .here
+  }
 
 }
 
@@ -57,8 +95,7 @@ syntax plm_target_specific_syntax (plm_lexique) {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 grammar plm_grammar "SLR" {
-  syntax common_syntax
-  syntax plm_specific_syntax
+  syntax plm_syntax
   <start_symbol>
     ?!@ast outAst
     !importClauseList:@lstringlist outImportedFileList
@@ -68,9 +105,8 @@ grammar plm_grammar "SLR" {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 grammar plm_target_grammar "SLR" {
-  syntax common_syntax
   syntax plm_target_specific_syntax
-  <start_symbol>
+  <configuration_start_symbol>
     ?!@ast outAst
     !importClauseList:@lstringlist outImportedFileList
     !endOfSourceFile:@location outEndOfSourceFile

@@ -17,7 +17,7 @@ override getter @typeAliasDeclaration location -> @location outLocation {
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-syntax extension common_syntax {
+syntax extension plm_syntax {
 
   #·····················································································································
 
