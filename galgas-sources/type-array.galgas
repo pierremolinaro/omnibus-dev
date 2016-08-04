@@ -24,7 +24,7 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclaration outDeclaration {
-    $typeName$ ?let elementTypeName
+    $\$type$ ?let elementTypeName
     $[$
     <expression> ?let sizeExpression
     let sizeExpressionLocation = @location.here

@@ -2,7 +2,7 @@
 set -x
 DIR=`dirname $0` &&
 cd $DIR &&
-rm -f plm-couleur.pdf &&
+rm -f doc-plm.pdf &&
 #--- First pass
 PDF_LATEX=`which xelatex` &&
 MAKE_INDEX=`which makeindex` &&

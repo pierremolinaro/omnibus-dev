@@ -8,7 +8,7 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $type$
-    $typeName$ ?let newTypeName
+    $\$type$ ?let newTypeName
     $:$
     <declaration_type> !newTypeName ?let declaration
     ioAST.mDeclarationList += !declaration

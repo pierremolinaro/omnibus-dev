@@ -27,7 +27,7 @@ syntax extension common_syntax {
     select
       ifLabel = .new {!"" !.here}
     or
-      $attribute$ ?ifLabel
+      $@attribute$ ?ifLabel
       [!?ioLabelMap insertKey !ifLabel]
     end
     <if_instruction> ?let ifInstruction !?ioLabelMap !ifLabel
@@ -36,7 +36,7 @@ syntax extension common_syntax {
     select
       endLabel = .new {!"" !.here}
     or
-      $attribute$ ?endLabel
+      $@attribute$ ?endLabel
     end
     if ifLabel.string != endLabel.string then
       error endLabel : "'end' label does not match 'if' label, it should be "
@@ -63,7 +63,7 @@ syntax extension common_syntax {
       select
         elsifLabel = .new {!"" !.here}
       or
-        $attribute$ ?elsifLabel
+        $@attribute$ ?elsifLabel
       end
       if ifLabel.string != elsifLabel.string then
         error elsifLabel : "'else' label does not match 'if' label, it should be "
@@ -79,7 +79,7 @@ syntax extension common_syntax {
       select
         elsifIfLabel = .new {!"" !.here}
       or
-        $attribute$ ?elsifIfLabel
+        $@attribute$ ?elsifIfLabel
       end
       if ifLabel.string != elsifIfLabel.string then
         error elsifIfLabel : "'elsif' label does not match 'if' label, it should be "

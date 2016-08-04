@@ -33,7 +33,7 @@ syntax extension common_syntax {
     @lstringlist attributeList = {}
     repeat
     while
-      $attribute$ ?let attribute
+      $@attribute$ ?let attribute
       attributeList += !attribute
     end
     <procedure_formal_arguments> ?formalArguments:let primitiveFormalArgumentList
@@ -42,7 +42,7 @@ syntax extension common_syntax {
       returnTypeName = ["" here]
     or
       $->$
-      $typeName$ ?returnTypeName
+      $\$type$ ?returnTypeName
     end
     ${$
     <instructionList> ?let instructionList !?*

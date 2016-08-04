@@ -33,7 +33,7 @@ syntax extension common_syntax {
     @lstringlist attributeList = {}
     repeat
     while
-      $attribute$ ?let attribute
+      $@attribute$ ?let attribute
       attributeList += !attribute
     end
     outDeclaration = @opaqueTypeDeclaration.new {!inNewTypeName !attributeList !sizeExpression !sizeExpressionLocation}

@@ -22,7 +22,7 @@ syntax extension common_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $extension$
-    $typeName$ ?let typeName
+    $\$type$ ?let typeName
     ${$
     @functionDeclarationListAST procedureDeclarationListAST = {}
     @structureFieldListAST fieldList = {}
@@ -41,7 +41,7 @@ syntax extension common_syntax {
       end
       $var$
       $identifier$ ?let fieldName
-      $typeName$ ?let typeName
+      $\$type$ ?let typeName
       $=$
       <expression> ?let initExpression
       fieldList += !fieldName !public !typeName !.expression{!initExpression:initExpression}

@@ -32,7 +32,7 @@ syntax extension common_syntax {
       returnTypeName = ["" here]
     or
       $->$
-      $typeName$ ?returnTypeName
+      $\$type$ ?returnTypeName
     end
     $:$
     $literal_string$ ?let llvmName

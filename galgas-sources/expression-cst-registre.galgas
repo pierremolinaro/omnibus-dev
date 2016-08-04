@@ -25,7 +25,7 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <primary> !@expressionAST outExpression {
-    $typeName$ ?let registerNameAsTypeName
+    $\$type$ ?let registerNameAsTypeName
     ${$
     @lstringlist booleanFieldNames = {}
     @registerIntegerFieldListAST integerFieldValues = {}

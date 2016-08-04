@@ -22,7 +22,7 @@ syntax extension common_syntax {
   #·····················································································································
 
   rule <declaration_type> ?let @lstring inNewTypeName !@abstractDeclaration outDeclaration {
-    $typeName$ ?let aliasedTypeName
+    $\$type$ ?let aliasedTypeName
     outDeclaration = @typeAliasDeclaration.new {
       !inNewTypeName
       !aliasedTypeName

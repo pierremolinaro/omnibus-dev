@@ -79,7 +79,7 @@ syntax extension common_syntax {
       returnTypeName = ["" here]
     or
       $->$
-      $typeName$ ?returnTypeName
+      $\$type$ ?returnTypeName
     end
     ${$
     <instructionList> ?let instructionList !?*
@@ -121,7 +121,7 @@ syntax extension common_syntax {
     outAttributeList = {}
     repeat
     while
-      $attribute$ ?let attribute
+      $@attribute$ ?let attribute
       outAttributeList += !attribute
     end
     <procedure_formal_arguments> ?formalArguments:outProcFormalArgumentList
@@ -136,7 +136,7 @@ syntax extension common_syntax {
     while
       $!$ ?let selector
       $identifier$ ?let formalArgumentName
-      $typeName$ ?let formalArgumentTypeName
+      $\$type$ ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.output
         !selector
@@ -145,7 +145,7 @@ syntax extension common_syntax {
     while
       $?!$ ?let selector
       $identifier$ ?let formalArgumentName
-      $typeName$ ?let formalArgumentTypeName
+      $\$type$ ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.inputOutput
         !selector
@@ -154,7 +154,7 @@ syntax extension common_syntax {
     while
       $?$ ?let selector
       $identifier$ ?let formalArgumentName
-      $typeName$ ?let formalArgumentTypeName
+      $\$type$ ?let formalArgumentTypeName
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.input
         !selector

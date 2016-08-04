@@ -24,7 +24,7 @@ syntax extension common_syntax {
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
     $for$
     $identifier$ ?let varName
-    $typeName$ ?let typeName
+    $\$type$ ?let typeName
     $in$
     <expression> ?let @expressionAST lowerBoundExpression
     let endOf_lowerBoundExpression_instruction = @location.here

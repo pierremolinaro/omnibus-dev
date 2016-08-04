@@ -127,7 +127,7 @@ syntax extension common_syntax {
     select
       startLabel = .new {!"" !.here}
     or
-      $attribute$ ?startLabel
+      $@attribute$ ?startLabel
       [!?ioLabelMap insertKey !startLabel]
     end
     @syncInstructionBranchList onInstructionBranchList = {}
@@ -144,7 +144,7 @@ syntax extension common_syntax {
     select
       endLabel = .new {!"" !.here}
     or
-      $attribute$ ?endLabel
+      $@attribute$ ?endLabel
     end
     if startLabel.string != endLabel.string then
       error endLabel : "'end' label does not match 'on' label, it should be "
