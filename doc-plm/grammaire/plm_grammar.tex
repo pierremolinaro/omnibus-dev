@@ -1034,40 +1034,30 @@
 
 \nonTerminalSection{if\_instruction}{34}
 
-\ruleSubsection{plm\_syntax}{instruction-if}{49}
+\ruleSubsection{plm\_syntax}{instruction-if}{31}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & & & & & & & \node (p4-10) [terminal] {@attribute}; & \\
-    & & & & & & & \node (p3-7) [terminal] {else}; & \node (p3-8) [terminal] {if}; & \node (p3-9) [point] {}; & \node (p3-10) [point] {}; & \node (p3-11) [point] {}; & \node (p3-12) [nonterminal] {\nonTerminalSymbol{if\_instruction}{34}}; & \\
-    & & & & & & & & & & \node (p2-10) [terminal] {@attribute}; & \\
-    & & & & & & & \node (p1-7) [terminal] {else}; & \node (p1-8) [terminal] {\{}; & \node (p1-9) [point] {}; & \node (p1-10) [point] {}; & \node (p1-11) [point] {}; & \node (p1-12) [nonterminal] {\nonTerminalSymbol{instructionList}{31}}; & \node (p1-13) [terminal] {\}}; & \\
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [nonterminal] {\nonTerminalSymbol{expression}{16}}; & \node (p0-3) [terminal] {\{}; & \node (p0-4) [nonterminal] {\nonTerminalSymbol{instructionList}{31}}; & \node (p0-5) [terminal] {\}}; & \node (p0-6) [point] {}; & \node (p0-7) [point] {}; & & & & & & & \node (p0-14) [point] {}; & \node (p0-15) [lastPoint] {}; & \\
+    & & & & & & & & \node (p2-8) [terminal] {else}; & \node (p2-9) [nonterminal] {\nonTerminalSymbol{if\_instruction}{34}}; & \\
+    & & & & & & & & \node (p1-8) [terminal] {else}; & \node (p1-9) [terminal] {\{}; & \node (p1-10) [nonterminal] {\nonTerminalSymbol{instructionList}{31}}; & \node (p1-11) [terminal] {\}}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {if}; & \node (p0-3) [nonterminal] {\nonTerminalSymbol{expression}{16}}; & \node (p0-4) [terminal] {\{}; & \node (p0-5) [nonterminal] {\nonTerminalSymbol{instructionList}{31}}; & \node (p0-6) [terminal] {\}}; & \node (p0-7) [point] {}; & \node (p0-8) [point] {}; & & & & \node (p0-12) [point] {}; & \node (p0-13) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-3) ;
   \draw[->] (p0-3) -- (p0-4) ;
   \draw[->] (p0-4) -- (p0-5) ;
-  \draw (p0-5) -- (p0-7) ;
-  \draw[->] (p0-6) |- (p1-7) ;
-  \draw[->] (p1-7) -- (p1-8) ;
-  \draw (p1-8) -- (p1-10) ;
-  \draw[->] (p1-9) |- (p2-10) ;
-  \draw (p1-10) -- (p1-11) ;
-  \draw[->] (p2-10) -| (p1-11) ;
-  \draw[->] (p1-11) -- (p1-12) ;
-  \draw[->] (p1-12) -- (p1-13) ;
-  \draw[->] (p0-6) |- (p3-7) ;
-  \draw[->] (p3-7) -- (p3-8) ;
-  \draw (p3-8) -- (p3-10) ;
-  \draw[->] (p3-9) |- (p4-10) ;
-  \draw (p3-10) -- (p3-11) ;
-  \draw[->] (p4-10) -| (p3-11) ;
-  \draw[->] (p3-11) -- (p3-12) ;
-  \draw (p0-7) -- (p0-14) ;
-  \draw[->] (p1-13) -| (p0-14) ;
-  \draw[->] (p3-12) -| (p0-14) ;
-  \draw[->] (p0-14) -- (p0-15) ;
+  \draw[->] (p0-5) -- (p0-6) ;
+  \draw (p0-6) -- (p0-8) ;
+  \draw[->] (p0-7) |- (p1-8) ;
+  \draw[->] (p1-8) -- (p1-9) ;
+  \draw[->] (p1-9) -- (p1-10) ;
+  \draw[->] (p1-10) -- (p1-11) ;
+  \draw[->] (p0-7) |- (p2-8) ;
+  \draw[->] (p2-8) -- (p2-9) ;
+  \draw (p0-8) -- (p0-12) ;
+  \draw[->] (p1-11) -| (p0-12) ;
+  \draw[->] (p2-9) -| (p0-12) ;
+  \draw[->] (p0-12) -- (p0-13) ;
 \end{tikzpicture}
 
 \nonTerminalSection{import\_file}{5}
@@ -1194,72 +1184,45 @@
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & \node (p1-4) [terminal] {@attribute}; & & & & \node (p1-8) [terminal] {@attribute}; & \\
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {if}; & \node (p0-3) [point] {}; & \node (p0-4) [point] {}; & \node (p0-5) [point] {}; & \node (p0-6) [nonterminal] {\nonTerminalSymbol{if\_instruction}{34}}; & \node (p0-7) [point] {}; & \node (p0-8) [point] {}; & \node (p0-9) [point] {}; & \node (p0-10) [lastPoint] {}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [nonterminal] {\nonTerminalSymbol{if\_instruction}{34}}; & \node (p0-3) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
-  \draw (p0-2) -- (p0-4) ;
-  \draw[->] (p0-3) |- (p1-4) ;
-  \draw (p0-4) -- (p0-5) ;
-  \draw[->] (p1-4) -| (p0-5) ;
-  \draw[->] (p0-5) -- (p0-6) ;
-  \draw (p0-6) -- (p0-8) ;
-  \draw[->] (p0-7) |- (p1-8) ;
-  \draw (p0-8) -- (p0-9) ;
-  \draw[->] (p1-8) -| (p0-9) ;
-  \draw[->] (p0-9) -- (p0-10) ;
+  \draw[->] (p0-2) -- (p0-3) ;
 \end{tikzpicture}
 
 \ruleSubsection{plm\_syntax}{instruction-sync}{122}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & & & & & & & & & & \node (p2-13) [point] {}; & \\
-    & & & & & \node (p1-5) [terminal] {@attribute}; & & & & & & & \node (p1-12) [point] {}; & & & & \node (p1-16) [terminal] {@attribute}; & \\
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {sync}; & \node (p0-3) [terminal] {\{}; & \node (p0-4) [point] {}; & \node (p0-5) [point] {}; & \node (p0-6) [point] {}; & \node (p0-7) [point] {}; & \node (p0-8) [nonterminal] {\nonTerminalSymbol{guarded\_command}{35}}; & \node (p0-9) [terminal] {:}; & \node (p0-10) [nonterminal] {\nonTerminalSymbol{instructionList}{31}}; & \node (p0-11) [point] {}; & & & \node (p0-14) [terminal] {\}}; & \node (p0-15) [point] {}; & \node (p0-16) [point] {}; & \node (p0-17) [point] {}; & \node (p0-18) [lastPoint] {}; & \\
+    & & & & & & & & & & \node (p2-10) [point] {}; & \\
+    & & & & & & & & & \node (p1-9) [point] {}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {sync}; & \node (p0-3) [terminal] {\{}; & \node (p0-4) [point] {}; & \node (p0-5) [nonterminal] {\nonTerminalSymbol{guarded\_command}{35}}; & \node (p0-6) [terminal] {:}; & \node (p0-7) [nonterminal] {\nonTerminalSymbol{instructionList}{31}}; & \node (p0-8) [point] {}; & & & \node (p0-11) [terminal] {\}}; & \node (p0-12) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-3) ;
-  \draw (p0-3) -- (p0-5) ;
-  \draw[->] (p0-4) |- (p1-5) ;
-  \draw (p0-5) -- (p0-6) ;
-  \draw[->] (p1-5) -| (p0-6) ;
-  \draw[->] (p0-6) -- (p0-8) ;
-  \draw[->] (p0-8) -- (p0-9) ;
-  \draw[->] (p0-9) -- (p0-10) ;
-  \draw (p0-11) |- (p1-12) ;
-  \draw[->] (p2-13) -| (p0-7) ;
-  \draw[->] (p1-12) -| (p2-13) ;
-  \draw[->] (p0-10) -- (p0-14) ;
-  \draw (p0-14) -- (p0-16) ;
-  \draw[->] (p0-15) |- (p1-16) ;
-  \draw (p0-16) -- (p0-17) ;
-  \draw[->] (p1-16) -| (p0-17) ;
-  \draw[->] (p0-17) -- (p0-18) ;
+  \draw[->] (p0-3) -- (p0-5) ;
+  \draw[->] (p0-5) -- (p0-6) ;
+  \draw[->] (p0-6) -- (p0-7) ;
+  \draw (p0-8) |- (p1-9) ;
+  \draw[->] (p2-10) -| (p0-4) ;
+  \draw[->] (p1-9) -| (p2-10) ;
+  \draw[->] (p0-7) -- (p0-11) ;
+  \draw[->] (p0-11) -- (p0-12) ;
 \end{tikzpicture}
 
 \ruleSubsection{plm\_syntax}{instruction-while}{20}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & & \node (p1-5) [terminal] {@attribute}; & & & & & & & \node (p1-12) [terminal] {@attribute}; & \\
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {do}; & \node (p0-3) [terminal] {while}; & \node (p0-4) [point] {}; & \node (p0-5) [point] {}; & \node (p0-6) [point] {}; & \node (p0-7) [nonterminal] {\nonTerminalSymbol{expression}{16}}; & \node (p0-8) [terminal] {\{}; & \node (p0-9) [nonterminal] {\nonTerminalSymbol{instructionList}{31}}; & \node (p0-10) [terminal] {\}}; & \node (p0-11) [point] {}; & \node (p0-12) [point] {}; & \node (p0-13) [point] {}; & \node (p0-14) [lastPoint] {}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {do}; & \node (p0-3) [terminal] {while}; & \node (p0-4) [nonterminal] {\nonTerminalSymbol{expression}{16}}; & \node (p0-5) [terminal] {\{}; & \node (p0-6) [nonterminal] {\nonTerminalSymbol{instructionList}{31}}; & \node (p0-7) [terminal] {\}}; & \node (p0-8) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-3) ;
-  \draw (p0-3) -- (p0-5) ;
-  \draw[->] (p0-4) |- (p1-5) ;
-  \draw (p0-5) -- (p0-6) ;
-  \draw[->] (p1-5) -| (p0-6) ;
+  \draw[->] (p0-3) -- (p0-4) ;
+  \draw[->] (p0-4) -- (p0-5) ;
+  \draw[->] (p0-5) -- (p0-6) ;
   \draw[->] (p0-6) -- (p0-7) ;
   \draw[->] (p0-7) -- (p0-8) ;
-  \draw[->] (p0-8) -- (p0-9) ;
-  \draw[->] (p0-9) -- (p0-10) ;
-  \draw (p0-10) -- (p0-12) ;
-  \draw[->] (p0-11) |- (p1-12) ;
-  \draw (p0-12) -- (p0-13) ;
-  \draw[->] (p1-12) -| (p0-13) ;
-  \draw[->] (p0-13) -- (p0-14) ;
 \end{tikzpicture}
 
 \ruleSubsection{plm\_syntax}{instruction-for-in-do}{21}
@@ -1646,7 +1609,7 @@
 
 \nonTerminalSection{procedure}{0}
 
-\ruleSubsection{plm\_syntax}{declaration-func}{70}
+\ruleSubsection{plm\_syntax}{declaration-func}{64}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -1680,7 +1643,7 @@
 
 \nonTerminalSection{procedure\_formal\_arguments}{14}
 
-\ruleSubsection{plm\_syntax}{declaration-func}{132}
+\ruleSubsection{plm\_syntax}{declaration-func}{126}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
@@ -1711,7 +1674,7 @@
 
 \nonTerminalSection{procedure\_header}{13}
 
-\ruleSubsection{plm\_syntax}{declaration-func}{100}
+\ruleSubsection{plm\_syntax}{declaration-func}{94}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {

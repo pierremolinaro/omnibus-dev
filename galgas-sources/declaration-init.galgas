@@ -32,7 +32,7 @@ syntax extension plm_syntax {
     $init$
     $integer$ ?let @lbigint priority
     ${$
-    <instructionList> ?let instructionList !?*
+    <instructionList> ?let instructionList
     let endOfInit = @location.here
     $}$
     ioInitList +=

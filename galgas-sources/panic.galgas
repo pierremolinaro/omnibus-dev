@@ -26,8 +26,7 @@ syntax extension plm_syntax {
     $identifier$ ?let panicClauseName
     $integer$ ?let priority
     ${$
-    @labelMap labelMap = {}
-    <instructionList> ?let instructionList !?labelMap
+    <instructionList> ?let instructionList
     let endOfInstructionList = @location.here
     $}$
     ioAST.mPanicClauses +=

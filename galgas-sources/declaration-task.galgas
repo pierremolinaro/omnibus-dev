@@ -85,7 +85,7 @@ syntax extension plm_syntax {
         $\$type$ ?returnTypeName
       end
       ${$
-      <instructionList> ?let instructionList !?*
+      <instructionList> ?let instructionList
       let endOfProc = @location.here
       $}$
       taskProcList += !{} !false !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
@@ -93,14 +93,14 @@ syntax extension plm_syntax {
       $init$
       $integer$ ?let @lbigint priority
       ${$
-      <instructionList> ?let instructionList !?*
+      <instructionList> ?let instructionList
       let endOfInit = @location.here
       $}$
       taskInitListAST += !priority !instructionList !endOfInit
     while
       <guarded_command> ?let @guardedCommand guardedCommand
       ${$
-      <instructionList> ?let instructionList !?*
+      <instructionList> ?let instructionList
       let endOfInstructions = @location.here
       $}$
       branchList += !guardedCommand !instructionList !endOfInstructions

@@ -15,7 +15,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+  rule <instruction> ?!@instructionListAST ioInstructionList {
     $panic$
     let loc = @location.here
     <expression> ?let @expressionAST codeExpression

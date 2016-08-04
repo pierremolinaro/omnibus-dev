@@ -24,8 +24,7 @@ syntax extension plm_syntax {
     $boot$
     $integer$ ?let @lbigint priority
     ${$
-    @labelMap labelMap = {}
-    <instructionList> ?let instructionList !?labelMap
+    <instructionList> ?let instructionList
     let endOfInit = @location.here
     $}$
     ioAST.mBootList +=

@@ -21,7 +21,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
+  rule <instruction> ?!@instructionListAST ioInstructionList {
     $for$
     $identifier$ ?let varName
     $\$type$ ?let typeName
@@ -32,7 +32,7 @@ syntax extension plm_syntax {
     <expression> ?let @expressionAST upperBoundExpression
     let endOf_upperBoundExpression_instruction = @location.here
     ${$
-    <instructionList> ?let instructionList !?ioLabelMap
+    <instructionList> ?let instructionList
     let endOfInstruction = @location.here
     $}$
     ioInstructionList += !varName.location !@forLowerUpperBoundInstructionAST.new {

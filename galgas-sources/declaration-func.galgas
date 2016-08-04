@@ -54,12 +54,6 @@ getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@str
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @labelMap {
-  insert insertKey error message "the '%K' label is already declared"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -82,7 +76,7 @@ syntax extension plm_syntax {
       $\$type$ ?returnTypeName
     end
     ${$
-    <instructionList> ?let instructionList !?*
+    <instructionList> ?let instructionList
     $}$
     ioProcListAST +=
       !procModeList
