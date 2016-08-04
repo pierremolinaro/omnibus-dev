@@ -23,7 +23,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+  rule <instruction> ?!@instructionListAST ioInstructionList {
     $var$
     $identifier$ ?let varName
     @lstring optionalTypeName
@@ -43,7 +43,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+  rule <instruction> ?!@instructionListAST ioInstructionList {
     $var$
     $identifier$ ?let varName
     $\$type$ ?let typeName

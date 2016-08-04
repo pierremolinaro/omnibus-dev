@@ -67,7 +67,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+  rule <instruction> ?!@instructionListAST ioInstructionList {
     <assignment_target> ?let @assignmentTargetAST assignmentTargetAST
     let instructionLocation = @location.here
     <assignment_operator> ?let @operatorAssignmentKind operatorAssign

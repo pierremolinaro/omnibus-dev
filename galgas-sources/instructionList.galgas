@@ -20,11 +20,11 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instructionList> !@instructionListAST outInstructionList ?!@labelMap ioLabelMap {
+  rule <instructionList> !@instructionListAST outInstructionList {
     outInstructionList = {}
     repeat
     while
-      <instruction> !?outInstructionList !?ioLabelMap
+      <instruction> !?outInstructionList
     while
       $;$
     end

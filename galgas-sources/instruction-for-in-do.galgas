@@ -18,14 +18,14 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
+  rule <instruction> ?!@instructionListAST ioInstructionList {
     $for$
     $identifier$ ?let varName
     $in$
     <expression> ?let @expressionAST expression
     let endOf_iteratedExpression_instruction = @location.here
     ${$
-    <instructionList> ?let instructionList !?ioLabelMap
+    <instructionList> ?let instructionList
     let endOfInstruction = @location.here
     $}$
     ioInstructionList += !varName.location !@forInstructionAST.new {

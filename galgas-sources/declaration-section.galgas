@@ -45,8 +45,7 @@ syntax extension plm_syntax {
       $\$type$ ?returnTypeName
     end
     ${$
-    @labelMap labelMap = {}
-    <instructionList> ?let instructionList !?labelMap
+    <instructionList> ?let instructionList
     $}$
     ioSectionListAST +=
       !sectionName

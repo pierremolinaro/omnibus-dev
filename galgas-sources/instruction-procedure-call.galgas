@@ -16,7 +16,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
+  rule <instruction> ?!@instructionListAST ioInstructionList {
     <procedure_call> ?let routineCallInstruction
     ioInstructionList += ![routineCallInstruction mEndOfArguments] !routineCallInstruction
   }

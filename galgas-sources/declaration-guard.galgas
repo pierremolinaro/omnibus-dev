@@ -53,7 +53,7 @@ syntax extension plm_syntax {
       guardKind = .convenienceGuard {!base:instruction}
     end
     ${$
-    <instructionList> ?let instructionList !?*
+    <instructionList> ?let instructionList
     $}$
     ioGuardListAST +=
       !guardName

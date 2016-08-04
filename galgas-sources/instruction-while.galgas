@@ -17,33 +17,16 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
+  rule <instruction> ?!@instructionListAST ioInstructionList  {
     $do$
     let instructionLocation = @location.here
     $while$
-    @lstring whileLabel
-    select
-      whileLabel = .new {!"" !.here}
-    or
-      $@attribute$ ?whileLabel
-      [!?ioLabelMap insertKey !whileLabel]
-    end
     <expression> ?let @expressionAST testExpression
     let testExpressionEndLocation = @location.here
     ${$
-    <instructionList> ?let instructionList  !?ioLabelMap
+    <instructionList> ?let instructionList
     let endOfInstruction = @location.here
     $}$
-    @lstring endLabel
-    select
-      endLabel = .new {!"" !.here}
-    or
-      $@attribute$ ?endLabel
-    end
-    if whileLabel.string != endLabel.string then
-      error endLabel : "'end' label does not match 'while' label, it should be "
-         + (if whileLabel.string != "" then "@" + whileLabel.string else "empty" end)
-    end 
     ioInstructionList += !instructionLocation !@whileInstructionAST.new {
       !testExpression
       !testExpressionEndLocation

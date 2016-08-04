@@ -29,8 +29,7 @@ syntax extension plm_syntax {
       attributeList += !attribute
     end
     ${$
-    @labelMap labelMap = {}
-    <instructionList> ?let instructionList !?labelMap
+    <instructionList> ?let instructionList
     $}$
     ioISRListAST +=
       !sectionName

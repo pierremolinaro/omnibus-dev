@@ -45,7 +45,7 @@ syntax extension plm_syntax {
       $\$type$ ?returnTypeName
     end
     ${$
-    <instructionList> ?let instructionList !?*
+    <instructionList> ?let instructionList
     $}$
     ioPrimitiveListAST +=
       !primitiveName

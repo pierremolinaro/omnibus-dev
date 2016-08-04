@@ -119,37 +119,20 @@ syntax extension plm_syntax {
   
  #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap ioLabelMap {
+  rule <instruction> ?!@instructionListAST ioInstructionList {
     $sync$
-    ${$
     let startLocation = @location.here
-    @lstring startLabel
-    select
-      startLabel = .new {!"" !.here}
-    or
-      $@attribute$ ?startLabel
-      [!?ioLabelMap insertKey !startLabel]
-    end
+    ${$
     @syncInstructionBranchList onInstructionBranchList = {}
     repeat
       <guarded_command> ?let @guardedCommand guardedCommand
       $:$
-      <instructionList> ?let instructionList !?ioLabelMap
+      <instructionList> ?let instructionList
       onInstructionBranchList += !guardedCommand !instructionList !.here
     while
     end
     ioInstructionList += !startLocation !@syncInstructionAST.new {!startLocation !onInstructionBranchList !.here}
     $}$
-    @lstring endLabel
-    select
-      endLabel = .new {!"" !.here}
-    or
-      $@attribute$ ?endLabel
-    end
-    if startLabel.string != endLabel.string then
-      error endLabel : "'end' label does not match 'on' label, it should be "
-         + (if startLabel.string != "" then "@" + startLabel.string else "empty" end)
-    end 
   }
   
   #·····················································································································
