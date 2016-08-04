@@ -138,7 +138,7 @@ syntax extension common_syntax {
       select
         typeName = ["" nowhere]
       or
-        $typeName$ ?typeName
+        $\$type$ ?typeName
       end
       outEffectiveParameterList += !.inputWithType{!constant:constant !typeName:typeName !name:effectiveParameterName} !selector
     end

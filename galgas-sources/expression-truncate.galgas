@@ -21,7 +21,7 @@ syntax extension common_syntax {
     <expression> ?outExpression
     let endOfExpression = @location.here
     $:$
-    $typeName$ ?let typeIdentifier
+    $\$type$ ?let typeIdentifier
     outExpression = @truncateExpressionAST.new {
       !outExpression
       !typeIdentifier

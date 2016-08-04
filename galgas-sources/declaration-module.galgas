@@ -19,7 +19,7 @@ syntax extension common_syntax {
     $identifier$ ?let fieldName
     @lstring typeName
     select
-      $typeName$ ?typeName
+      $\$type$ ?typeName
     or
       typeName = ["" nowhere]
     end

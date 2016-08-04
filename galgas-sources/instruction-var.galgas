@@ -30,7 +30,7 @@ syntax extension common_syntax {
     select
       optionalTypeName = ["" nowhere]
     or
-      $typeName$ ?optionalTypeName
+      $\$type$ ?optionalTypeName
     end
     $=$
     <expression> ?let @expressionAST expression
@@ -46,7 +46,7 @@ syntax extension common_syntax {
   rule <instruction> ?!@instructionListAST ioInstructionList ?!@labelMap unused ioLabelMap {
     $var$
     $identifier$ ?let varName
-    $typeName$ ?let typeName
+    $\$type$ ?let typeName
     ioInstructionList += !varName.location !@varInstructionAST.new {
       !varName
       !typeName

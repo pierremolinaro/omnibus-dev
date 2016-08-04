@@ -3,7 +3,7 @@
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-import sys, os, subprocess
+import sys, os, subprocess, shutil
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -14,6 +14,17 @@ os.chdir (scriptDir)
 returnCode = subprocess.call (["python", "build.py"], cwd=scriptDir + "/../makefile-macosx")
 if returnCode != 0 :
   sys.exit (returnCode)
+#----------------------------------------------------------------- Get production rules in tex file 
+returnCode = subprocess.call ([
+  "galgas",
+  "--output-grammar-rule-list-in-tex-files",
+  scriptDir + "/../+plm.galgasProject"
+])
+if returnCode != 0 :
+  sys.exit (returnCode)
+#--- Copy result files
+shutil.copy2 (scriptDir + "/../build/tex/plm_grammar.tex", scriptDir + "/grammaire/plm_grammar.tex")
+shutil.copy2 (scriptDir + "/../build/tex/plm_target_grammar.tex", scriptDir + "/grammaire/plm_target_grammar.tex")
 #----------------------------------------------------------------- Get keyword list 
 returnCode = subprocess.call ([
   scriptDir + "/../makefile-macosx/plm",

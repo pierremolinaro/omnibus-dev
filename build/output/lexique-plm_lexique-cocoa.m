@@ -179,7 +179,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       }else{
         scanningOk = NO ;
       }
-      mTokenCode = plm_lexique_1_attribute ;
+      mTokenCode = plm_lexique_1__40_attribute ;
     }else if (scanningOk && ([self testForInputChar:36])) {
       if (scanningOk && ([self testForCharWithFunction:isUnicodeLetter])) {
         do {
@@ -193,7 +193,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
       }else{
         scanningOk = NO ;
       }
-      mTokenCode = plm_lexique_1_typeName ;
+      mTokenCode = plm_lexique_1__24_type ;
     }else if (scanningOk && ([self testForInputChar:96])) {
       if (scanningOk && ([self testForCharWithFunction:isUnicodeLetter] || [self testForInputFromChar:48 toChar:57])) {
         do {
@@ -526,8 +526,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 - (NSUInteger) styleIndexForTerminal: (NSInteger) inTerminal {
   static const NSUInteger kTerminalSymbolStyles [109] = {0,
     0 /* plm_lexique_1_identifier */,
-    2 /* plm_lexique_1_attribute */,
-    3 /* plm_lexique_1_typeName */,
+    2 /* plm_lexique_1__40_attribute */,
+    3 /* plm_lexique_1__24_type */,
     4 /* plm_lexique_1_modeName */,
     5 /* plm_lexique_1_integer */,
     6 /* plm_lexique_1_literal_5F_string */,
@@ -646,8 +646,8 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 - (BOOL) atomicSelectionForToken: (NSUInteger) inTokenIndex {
   static const BOOL kTerminalAtomicSelection [109] = {NO,
     YES /* plm_lexique_1_identifier */,
-    YES /* plm_lexique_1_attribute */,
-    YES /* plm_lexique_1_typeName */,
+    YES /* plm_lexique_1__40_attribute */,
+    YES /* plm_lexique_1__24_type */,
     YES /* plm_lexique_1_modeName */,
     YES /* plm_lexique_1_integer */,
     NO /* plm_lexique_1_literal_5F_string */,

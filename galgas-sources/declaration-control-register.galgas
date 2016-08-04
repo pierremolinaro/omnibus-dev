@@ -59,7 +59,7 @@ syntax extension common_syntax {
       @lstringlist attributeList = {}
       repeat
       while
-        $attribute$ ?let attribute
+        $@attribute$ ?let attribute
         attributeList += !attribute
       end
       select
@@ -96,7 +96,7 @@ syntax extension common_syntax {
       end
     while
     end
-    $typeName$ ?let registerTypeName
+    $\$type$ ?let registerTypeName
     @controlRegisterBitSliceList registerBitSliceList = {}
     select
     or

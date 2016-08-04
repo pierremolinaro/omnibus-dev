@@ -15,7 +15,6 @@ style keywordsStyle -> "Keywords"
 $identifier$ ! tokenString error message "an identifier"
 
 list keyWordList style keywordsStyle error message "the '%K' keyword" {
-#"zzz",
   "and",
   "assert",
   "at",
@@ -83,7 +82,7 @@ rule isUnicodeLetter {
 
 style attributeStyle -> "Attributes"
 
-$attribute$ ! tokenString  style attributeStyle error message "an attribute @..."
+$@attribute$ ! tokenString  style attributeStyle error message "an attribute @..."
 
 message attributeError : "in an attribute name, a letter, a digit or a dot should follow the '@' character"
 
@@ -97,7 +96,7 @@ rule '@' {
   default
     error attributeError
   end
-  send $attribute$ 
+  send $@attribute$ 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -108,7 +107,7 @@ rule '@' {
 
 style typeStyle -> "Types"
 
-$typeName$ ! tokenString  style typeStyle error message "a type $..."
+$\$type$ ! tokenString  style typeStyle error message "a type $..."
 
 message typeError : "in a type name, a letter or a digit should follow the '$' character"
 
@@ -122,7 +121,7 @@ rule '$' {
   default
     error typeError
   end
-  send $typeName$ 
+  send $\$type$ 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

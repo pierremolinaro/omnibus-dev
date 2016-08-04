@@ -20,7 +20,7 @@ syntax extension common_syntax {
     select
       optionalTypeName = .new {!"" !.here}
     or
-      $typeName$ ?optionalTypeName
+      $\$type$ ?optionalTypeName
     end
     $.$
     $identifier$ ?let constantName

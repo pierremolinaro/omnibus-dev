@@ -7,6 +7,15 @@
 
 \chapter{Grammaire}
 
+Le langage PLM définit deux grammaires :
+\begin{itemize}
+\item la grammaire des sources des programmes PLM (\refSectionPage{grammairePLM}) ;
+\item la grammaire de description d'un cible (\refSectionPage{grammaireCible}).
+\end{itemize}
+
+Ce chapitre liste l'ensemble des règles de production de ces deux grammaires.
+
+
 {
 
 \tikzset{
@@ -41,7 +50,7 @@
   every join/.style={rounded corners}
 }
 
-\newcommand\nonTerminalSection[2]{\section{Non terminal \texttt{\it#1}}\label{nt:#2}}
+\newcommand\nonTerminalSection[2]{\subsection{Non terminal \texttt{\it#1}}\label{nt:#2}}
 \newcommand\ruleSubsection[3]{} % \subsection{Component \texttt{#1}, in file \texttt{#2}, line #3}}
 \newcommand\ruleMatrixColumnSeparation{2mm}
 \newcommand\ruleMatrixRowSeparation{1.5mm}
@@ -53,6 +62,16 @@
 \newcommand\nonTerminalSummarySeparator{, }
 \newcommand\nonTerminalSummaryEnd{.\\}
 
+\sectionLabel{Grammaire du langage \texttt{PLM}}{grammairePLM}
+
 \input{grammaire/plm_grammar.tex}
 
+
+\renewcommand\startSymbol[2]{L'axiome de la grammaire est \hyperref[nt1:#2]{#1}.}
+\renewcommand\nonTerminalSection[2]{\subsection{Non terminal \texttt{\it#1}}\label{nt1:#2}}
+\renewcommand\nonTerminalSummary[2]{\hyperref[nt1:#2]{#1}}
+
+\sectionLabel{Grammaire du langage de description de cible}{grammaireCible}
+
+\input{grammaire/plm_target_grammar.tex}
 }

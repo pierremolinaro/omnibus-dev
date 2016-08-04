@@ -81,7 +81,7 @@ syntax extension common_syntax {
     select
       typeName = ["" nowhere]
     or
-      $typeName$ ?typeName
+      $\$type$ ?typeName
     end
     $=$
     <expression> ?let @expressionAST expression
@@ -99,7 +99,7 @@ syntax extension common_syntax {
         select
           hasWriteAccess = false
         or
-          $attribute$ ?let attribute
+          $@attribute$ ?let attribute
           if attribute.string != "rw" then
             error attribute: "attribute should be @rw"
           end
@@ -111,7 +111,7 @@ syntax extension common_syntax {
           select
             typeName = ["" nowhere]
           or
-            $typeName$ ?typeName
+            $\$type$ ?typeName
             $.$
           end
           $identifier$ ?let sectionName
@@ -122,7 +122,7 @@ syntax extension common_syntax {
           select
             typeName = ["" nowhere]
           or
-            $typeName$ ?typeName
+            $\$type$ ?typeName
             $.$
           end
           $identifier$ ?let sectionName
@@ -133,7 +133,7 @@ syntax extension common_syntax {
           allowedRoutineList += !hasWriteAccess !["" nowhere] !procName !.function
         or
           $func$
-          $typeName$ ?let typeName
+          $\$type$ ?let typeName
           $.$
           $identifier$ ?let procName
           allowedRoutineList += !hasWriteAccess !typeName !procName !.function

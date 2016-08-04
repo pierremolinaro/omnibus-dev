@@ -68,7 +68,7 @@ syntax extension common_syntax {
       select
         typeName = ["" nowhere]
       or
-        $typeName$ ?typeName
+        $\$type$ ?typeName
       end
       $=$
       <expression> ?let initExpression
@@ -82,7 +82,7 @@ syntax extension common_syntax {
         returnTypeName = ["" here]
       or
         $->$
-        $typeName$ ?returnTypeName
+        $\$type$ ?returnTypeName
       end
       ${$
       <instructionList> ?let instructionList !?*

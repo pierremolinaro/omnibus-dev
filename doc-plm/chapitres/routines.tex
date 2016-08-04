@@ -36,7 +36,6 @@ Les \emph{sections}, \emph{services}, \emph{primitives} et  \emph{routines d'int
 
 
 
-
 \sectionLabel{\texttt{boot} routines}{bootRoutine}
 \index{boot@\plm=boot=!Routine}
 \index{Routine!boot@\plm=boot=}
@@ -178,7 +177,11 @@ En PLM, une routine est identifiée par son nom et la liste de ses sélecteurs. 
 
 \sectionLabel{Fonctions}{defFonction}
 
-Sous le terme \emph{fonction} sont en fait définies les \emph{procédures} et les « vraies » \emph{fonctions}. Une procédure est appelable dans une instruction et ne peut renvoyer des valeurs par ses paramètres formels de sortie et d'entrée/sortie ; une fonction est appelable dans une expression et renvoie une valeur.
+Sous le terme \emph{fonction} sont en fait définies les \emph{procédures} et les « vraies » \emph{fonctions}.
+
+Une procédure est appelable dans une instruction et ne peut renvoyer des valeurs que par ses paramètres formels de sortie et d'entrée/sortie.
+
+Une fonction est appelable dans une expression et renvoie une valeur.
 
 
 
@@ -201,7 +204,7 @@ Où :
   \item \plm=@type= est le type de la valeur renvoyée.
 \end{itemize}
 
-Contrairement à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=@type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
+Contrairement à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=$type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
 Par exemple :
 
 \begin{PLM}

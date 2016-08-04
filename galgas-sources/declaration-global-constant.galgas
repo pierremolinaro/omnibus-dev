@@ -29,7 +29,7 @@ syntax extension common_syntax {
     select
       typeName = ["" nowhere]
     or
-      $typeName$ ?typeName
+      $\$type$ ?typeName
     end
     $=$
     <expression> ?let @expressionAST expression

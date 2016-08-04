@@ -22,7 +22,7 @@ class @constructorCall : @expressionAST {
 syntax extension common_syntax {
 
   rule <primary> !@expressionAST outExpression {
-    $typeName$ ?let typeName
+    $\$type$ ?let typeName
     $($
     @functionCallEffectiveParameterList parameterList = {}
     repeat

@@ -25,7 +25,7 @@ syntax extension common_syntax {
     select
       whileLabel = .new {!"" !.here}
     or
-      $attribute$ ?whileLabel
+      $@attribute$ ?whileLabel
       [!?ioLabelMap insertKey !whileLabel]
     end
     <expression> ?let @expressionAST testExpression
@@ -38,7 +38,7 @@ syntax extension common_syntax {
     select
       endLabel = .new {!"" !.here}
     or
-      $attribute$ ?endLabel
+      $@attribute$ ?endLabel
     end
     if whileLabel.string != endLabel.string then
       error endLabel : "'end' label does not match 'while' label, it should be "

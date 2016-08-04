@@ -46,11 +46,11 @@ syntax extension plm_target_specific_syntax {
     $configuration$
     $integer$ ?let pointerSize
     $:$
-    $typeName$ ?let panicCodeTypeName 
+    $\$type$ ?let panicCodeTypeName 
     $:$
-    $typeName$ ?let panicLineTypeName
+    $\$type$ ?let panicLineTypeName
     $:$
-    $typeName$ ?let unsignedIntegerTypeName
+    $\$type$ ?let unsignedIntegerTypeName
     $:$
     $integer$ ?let systemStackSize
     $:$
