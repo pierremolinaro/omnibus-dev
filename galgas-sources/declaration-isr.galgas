@@ -68,9 +68,9 @@ method @isrDeclarationListAST isrSemanticAnalysis
     var xtrAttribute = false
     for (attribute) in isr.mISRAttributeList do
       if attribute.string != "xtr" then
-        error attribute : "only @xtr attribute is allowed here"
+        error attribute : "only @xtr attribute is allowed here" fixit { remove }
       elsif xtrAttribute then
-        error attribute : "duplicate @xtr attribute"
+        error attribute : "duplicate @xtr attribute" fixit { remove }
       else
         xtrAttribute = true
       end

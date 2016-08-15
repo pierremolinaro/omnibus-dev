@@ -14,7 +14,7 @@ abstract method @abstractDeclaration enterInPrecedenceGraph ?!@semanticTypePrece
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract getter @abstractDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation
+abstract getter @abstractDeclaration keyRepresentationForErrorSignaling -> @string
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

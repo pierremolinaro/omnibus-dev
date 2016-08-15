@@ -1662,68 +1662,6 @@ void routine_enterFormalArguments (const class GALGAS_semanticContext constinArg
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Routine 'standaloneBaseGuardAnalyze'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_standaloneBaseGuardAnalyze (const class GALGAS_lstring constinArgument0,
-                                         const class GALGAS_effectiveParameterListAST constinArgument1,
-                                         const class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
-                                         const class GALGAS_lstring constinArgument3,
-                                         const class GALGAS_semanticContext constinArgument4,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                         class GALGAS_staticStringMap & ioArgument6,
-                                         class GALGAS_variableMap & ioArgument7,
-                                         class GALGAS_guardKindGenerationIR & outArgument8,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             Function 'serviceModeName'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_serviceModeName (class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//              Extension getter '@effectiveParameterPassingModeAST matchingFormalArgument' (as function)              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_matchingFormalArgument (const class GALGAS_effectiveParameterPassingModeAST & inObject,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Routine 'analyzeEffectiveParameters'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                         const class GALGAS_bool constinArgument1,
-                                         const class GALGAS_bool constinArgument2,
-                                         const class GALGAS_procedureSignature constinArgument3,
-                                         const class GALGAS_effectiveParameterListAST constinArgument4,
-                                         const class GALGAS_location constinArgument5,
-                                         const class GALGAS_lstring constinArgument6,
-                                         const class GALGAS_semanticContext constinArgument7,
-                                         const class GALGAS_stringset constinArgument8,
-                                         const class GALGAS_bool constinArgument9,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument10,
-                                         class GALGAS_staticStringMap & ioArgument11,
-                                         class GALGAS_variableMap & ioArgument12,
-                                         class GALGAS_allocaList & ioArgument13,
-                                         class GALGAS_instructionListIR & ioArgument14,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument15,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                           Function 'getInfixOperatorMap'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2064,6 +2002,41 @@ class GALGAS_routineKindIR function_checkMode (const class GALGAS_stringset & co
                                                const class GALGAS_location & constinArgument3,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//              Extension getter '@effectiveParameterPassingModeAST matchingFormalArgument' (as function)              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_matchingFormalArgument (const class GALGAS_effectiveParameterPassingModeAST & inObject,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Routine 'analyzeEffectiveParameters'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                         const class GALGAS_bool constinArgument1,
+                                         const class GALGAS_bool constinArgument2,
+                                         const class GALGAS_procedureSignature constinArgument3,
+                                         const class GALGAS_effectiveParameterListAST constinArgument4,
+                                         const class GALGAS_location constinArgument5,
+                                         const class GALGAS_lstring constinArgument6,
+                                         const class GALGAS_semanticContext constinArgument7,
+                                         const class GALGAS_stringset constinArgument8,
+                                         const class GALGAS_bool constinArgument9,
+                                         class GALGAS_semanticTemporariesStruct & ioArgument10,
+                                         class GALGAS_staticStringMap & ioArgument11,
+                                         class GALGAS_variableMap & ioArgument12,
+                                         class GALGAS_allocaList & ioArgument13,
+                                         class GALGAS_instructionListIR & ioArgument14,
+                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument15,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2689,6 +2662,15 @@ class GALGAS_string function_kernelModeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             Function 'serviceModeName'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_serviceModeName (class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                                Function 'allModeMap'                                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2918,18 +2900,6 @@ void extensionMethod_enterInContext (const class GALGAS_taskList inObject,
                                      class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            Function 'solveInferredType'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_unifiedTypeMap_2D_proxy function_solveInferredType (const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument0,
-                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument1,
-                                                                 const class GALGAS_location & constinArgument2,
-                                                                 class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3271,15 +3241,6 @@ class GALGAS_bigint function_panicCodeForConvertOverflow (class C_Compiler * inC
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Function 'panicCodeForArrayOverflow'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bigint function_panicCodeForArrayOverflow (class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                          Function 'panicCodeForClosedSync'                                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3313,15 +3274,6 @@ class GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * 
 
 class GALGAS_string function_llvmAttributeFunction (class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             Function 'modulePrefixName'                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_modulePrefixName (class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3432,5 +3384,45 @@ class GALGAS_string function_llvmNameForPrimitiveImplementation (class GALGAS_st
 class GALGAS_string function_llvmNameForServiceCall (class GALGAS_string inArgument0,
                                                      class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'llvmNameForServiceImplementation'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForServiceImplementation (class GALGAS_string inArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'llvmNameForSectionCall'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSectionCall (class GALGAS_string inArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'llvmNameForSectionImplementation'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSectionImplementation (class GALGAS_string inArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Function 'llvmNameForGuardCall'                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForGuardCall (class GALGAS_string inArgument0,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 #endif

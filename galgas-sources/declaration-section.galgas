@@ -142,11 +142,11 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
     for (attribute) in section.mSectionAttributeList do
       if attribute.string == mutatingAttribute () then
         if mutating then
-          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
+          error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
         end
         mutating = true    
       else
-        error attribute : "unknown attribute; available attribute is @" + mutatingAttribute ()
+        error attribute : "unknown attribute; available attribute is @" + mutatingAttribute () fixit { remove }
       end
     end
     routineSemanticAnalysis (

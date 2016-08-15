@@ -17,7 +17,7 @@ if returnCode != 0 :
 #----------------------------------------------------------------- Get production rules in tex file 
 returnCode = subprocess.call ([
   "galgas",
-  "--output-grammar-rule-list-in-tex-files",
+  "--emit-syntax-diagrams",
   scriptDir + "/../+plm.galgasProject"
 ])
 if returnCode != 0 :

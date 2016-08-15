@@ -228,24 +228,6 @@ private proc copyFileWithSubstitutions
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc copyTextFile
-  ?currentDir:let @string inCurrentDirectory
-  ?from:let @string inSourceFileNamePath
-  ?to:let @string inDestinationAbsoluteFilePath
-{
-  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
-    let fw = [filewrapper targetTemplates]
-    let s = [fw textFileContentsAtPath !inSourceFileNamePath]
-    [s writeToFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
-  else
-    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-    let s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
-    [s writeToFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func getTargetTextFile
   ?currentDir:let @string inCurrentDirectory
   ?from:let @string inTargetFile

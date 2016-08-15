@@ -7,7 +7,7 @@ abstract class @abstractDeclaration {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract getter @abstractDeclaration location -> @location outLocation
+abstract getter @abstractDeclaration location -> @location
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

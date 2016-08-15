@@ -456,44 +456,6 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @integerObject_literal_divisionOperator : @infixOperatorDescription {
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @integerObject_literal_divisionOperator generateInfixOperatorCode
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@instructionListIR ioInstructionGenerationList
-  ?let @objectIR inLeftOperand
-  ?let @location inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @unifiedTypeMap-proxy inResultType
-  !@objectIR outResult
-{
-#--- Check right literal integer can be extented to left integer type
-  [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
-  [[inLeftOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?2*]
-  if literalValue < min then
-    error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
-  elsif literalValue > max then
-    error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResult
-  elsif literalValue == 0G then
-    error inOperatorLocation : "division by zero" : outResult
-  else
-    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
-    [!?ioInstructionGenerationList appendBinaryOperation
-      !outResult
-      ![inLeftOperand type]
-      !inOperatorLocation
-      !inLeftOperand
-      !mOperator
-      !inRightOperand
-    ]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  INFIX OPERATION BETWEEN A LITERAL INTEGER AND AN INTEGER                                                             
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! literal integer <-> object
