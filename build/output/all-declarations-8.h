@@ -11,42 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                    Extension method '@assignmentTargetAST noteInstructionTypesInPrecedenceGraph'                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_assignmentTargetAST inObject,
-                                                            class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                           Extension method '@assignmentTargetAST analyzeAssignmentTarget'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionMethod_analyzeAssignmentTarget (const class GALGAS_assignmentTargetAST inObject,
-                                              const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                              const class GALGAS_targetAccessKind constin_inSelfAccessKind,
-                                              const class GALGAS_bool constin_inRoutineCanMutateProperties,
-                                              const class GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
-                                              const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
-                                              const class GALGAS_semanticContext constin_inContext,
-                                              const class GALGAS_stringset constin_inModeSet,
-                                              const class GALGAS_bool constin_inAllowPanic,
-                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                              class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                              class GALGAS_variableMap & io_ioVariableMap,
-                                              class GALGAS_allocaList & io_ioAllocaList,
-                                              class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                              class GALGAS_objectIR & out_outCurrentObject,
-                                              class GALGAS_string & out_outGlobalVariableReceiverName,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                             Extension getter '@objectIR isGlobalVariable' (as function)                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

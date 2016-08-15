@@ -185,12 +185,6 @@ map @classConstantMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @typeList {
-  @unifiedTypeMap-proxy mActualType
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 list @operandIRList {
   @objectIR mOperand
 }
@@ -391,25 +385,6 @@ proc buildSemanticContext
         !?staticStringMap:ioGlobalLiteralStringMap
       ]
     end
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func solveInferredType
-  ?targetType:let @unifiedTypeMap-proxy inTargetType
-  ?sourceType:let @unifiedTypeMap-proxy inSourceType
-  ?errorLocation:let @location inErrorLocation
-  -> @unifiedTypeMap-proxy outType
-{
-  if inSourceType == .null then
-    if inTargetType == .null then
-      error inErrorLocation : "Cannot infer type" : outType
-    else
-      outType = inTargetType
-    end
-  else
-    outType = inSourceType
   end
 }
 

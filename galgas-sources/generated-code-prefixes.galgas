@@ -5,14 +5,6 @@ func %once llvmAttributeFunction -> @string outResult {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#!   Module
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func %once modulePrefixName -> @string outResult {
-  outResult = "module."
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Modes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -226,12 +218,6 @@ func llvmNameForGlobalVariable ?@string inName -> @string outName {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForRegister ?name:@string inName -> @string outName {
-  outName = ["register." + inName assemblerRepresentation]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Attributes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -267,13 +253,6 @@ func %once weakAttribute -> @string outResult {
 #! Tasks
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func taskProcNameForInvocationGraph ?@string inTaskName ?@lstring inProcName -> @lstring outName {
-  let s = "taskproc " + inTaskName + " " + inProcName
-  outName = .new {!s !inProcName.location}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func stackNameForTask ?let @string inTaskName -> @string outResult {
   outResult = "@" + ["task.stack." + inTaskName assemblerRepresentation]
 }
@@ -300,12 +279,6 @@ func mainRoutineNameForTask ?let @string inTaskName -> @string outResult {
 
 func llvmNameForTaskGlobalVar ?@string inTaskName -> @string outName {
   outName = ["task.globalvar." + inTaskName assemblerRepresentation]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func llvmNameForTaskVariable ?@string inTaskName ?@string inVarName -> @string outName {
-  outName = ["task.var." + inTaskName + "." + inVarName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

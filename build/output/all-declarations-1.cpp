@@ -20,7 +20,8 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   ioArgument_ioImportedFileList.addAssign_operation (var_importedFile_2328  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 69)) ;
   const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_importedFile_2328.mAttribute_string.getter_pathExtension (SOURCE_FILE ("syntax-grammar.galgas", 70)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    inCompiler->emitSemanticError (var_importedFile_2328.getter_location (SOURCE_FILE ("syntax-grammar.galgas", 71)), GALGAS_string ("the pah extension should be .plm")  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 71)) ;
+    TC_Array <C_FixItDescription> fixItArray1 ;
+    inCompiler->emitSemanticError (var_importedFile_2328.getter_location (SOURCE_FILE ("syntax-grammar.galgas", 71)), GALGAS_string ("the pah extension should be .plm"), fixItArray1  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 71)) ;
   }
 }
 

@@ -45,19 +45,6 @@ map @globalConstantMapIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @abstractTypeIR {
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @typeMapIR {
-  @abstractTypeIR mType
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 map @routineMapIR {
   @lstring mRoutineNameForGeneration
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration

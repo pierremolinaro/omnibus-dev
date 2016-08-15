@@ -137,11 +137,11 @@ method @primitiveDeclarationListAST primitiveSemanticAnalysis
     for (attribute) in primitive.mPrimitiveNameAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
-          error attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute"
+          error attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute"  fixit { remove }
         end
         warnIfUnused = false    
       else
-        error attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ()
+        error attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ()  fixit { remove }
       end
     end
     routineSemanticAnalysis (
