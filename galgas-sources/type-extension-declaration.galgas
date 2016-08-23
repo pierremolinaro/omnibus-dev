@@ -5,7 +5,7 @@
 list @extensionDeclarationListAST {
   @lstring mTypeName
   @functionDeclarationListAST mProcedureDeclarationListAST
-  @structureFieldListAST mFieldList
+  @structurePropertyListAST mPropertyList
   @serviceDeclarationListAST mServiceListAST
   @sectionDeclarationListAST mSectionListAST
   @primitiveDeclarationListAST mPrimitiveListAST
@@ -25,26 +25,14 @@ syntax extension plm_syntax {
     $\$type$ ?let typeName
     ${$
     @functionDeclarationListAST procedureDeclarationListAST = {}
-    @structureFieldListAST fieldList = {}
+    @structurePropertyListAST propertyList = {}
     @serviceDeclarationListAST serviceListAST = {}
     @sectionDeclarationListAST sectionListAST = {}
     @primitiveDeclarationListAST primitiveListAST = {}
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
-      @bool public
-      select
-        public = false
-      or
-        $public$
-        public = true
-      end
-      $var$
-      $identifier$ ?let fieldName
-      $\$type$ ?let typeName
-      $=$
-      <expression> ?let initExpression
-      fieldList += !fieldName !public !typeName !.expression{!initExpression:initExpression}
+      <property_in_extension> !?propertyList
     while
       <procedure> !?procedureDeclarationListAST
     while
@@ -62,11 +50,29 @@ syntax extension plm_syntax {
     ioAST.mExtensionDeclarationListAST +=
       !typeName
       !procedureDeclarationListAST
-      !fieldList
+      !propertyList
       !serviceListAST
       !sectionListAST
       !primitiveListAST
       !guardListAST
+  }
+
+  #·····················································································································
+
+  rule <property_in_extension> ?!@structurePropertyListAST ioPropertyList {
+    @bool public
+    select
+      public = false
+    or
+      $public$
+      public = true
+    end
+    $var$
+    $identifier$ ?let fieldName
+    $\$type$ ?let typeName
+    $=$
+    <expression> ?let initExpression
+    ioPropertyList += !fieldName !public !typeName !.expression{!initExpression:initExpression}
   }
 
   #·····················································································································

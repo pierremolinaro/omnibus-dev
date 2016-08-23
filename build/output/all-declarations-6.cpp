@@ -3565,7 +3565,7 @@ GALGAS_abstractDeclaration () {
 GALGAS_structureDeclaration GALGAS_structureDeclaration::constructor_default (LOCATION_ARGS) {
   return GALGAS_structureDeclaration::constructor_new (GALGAS_lstring::constructor_default (HERE),
                                                        GALGAS_lstringlist::constructor_emptyList (HERE),
-                                                       GALGAS_structureFieldListAST::constructor_emptyList (HERE),
+                                                       GALGAS_structurePropertyListAST::constructor_emptyList (HERE),
                                                        GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
                                                        GALGAS_serviceDeclarationListAST::constructor_emptyList (HERE),
                                                        GALGAS_sectionDeclarationListAST::constructor_emptyList (HERE),
@@ -3585,7 +3585,7 @@ GALGAS_abstractDeclaration (inSourcePtr) {
 
 GALGAS_structureDeclaration GALGAS_structureDeclaration::constructor_new (const GALGAS_lstring & inAttribute_mStructureName,
                                                                           const GALGAS_lstringlist & inAttribute_mAttributeListAST,
-                                                                          const GALGAS_structureFieldListAST & inAttribute_mStructureFieldListAST,
+                                                                          const GALGAS_structurePropertyListAST & inAttribute_mStructureFieldListAST,
                                                                           const GALGAS_functionDeclarationListAST & inAttribute_mFunctionDeclarationListAST,
                                                                           const GALGAS_serviceDeclarationListAST & inAttribute_mServiceListAST,
                                                                           const GALGAS_sectionDeclarationListAST & inAttribute_mSectionListAST,
@@ -3637,8 +3637,8 @@ GALGAS_lstringlist cPtr_structureDeclaration::getter_mAttributeListAST (UNUSED_L
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST GALGAS_structureDeclaration::getter_mStructureFieldListAST (UNUSED_LOCATION_ARGS) const {
-  GALGAS_structureFieldListAST result ;
+GALGAS_structurePropertyListAST GALGAS_structureDeclaration::getter_mStructureFieldListAST (UNUSED_LOCATION_ARGS) const {
+  GALGAS_structurePropertyListAST result ;
   if (NULL != mObjectPtr) {
     const cPtr_structureDeclaration * p = (const cPtr_structureDeclaration *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_structureDeclaration) ;
@@ -3649,7 +3649,7 @@ GALGAS_structureFieldListAST GALGAS_structureDeclaration::getter_mStructureField
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST cPtr_structureDeclaration::getter_mStructureFieldListAST (UNUSED_LOCATION_ARGS) const {
+GALGAS_structurePropertyListAST cPtr_structureDeclaration::getter_mStructureFieldListAST (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mStructureFieldListAST ;
 }
 
@@ -3749,7 +3749,7 @@ GALGAS_guardDeclarationListAST cPtr_structureDeclaration::getter_mGuardListAST (
 
 cPtr_structureDeclaration::cPtr_structureDeclaration (const GALGAS_lstring & in_mStructureName,
                                                       const GALGAS_lstringlist & in_mAttributeListAST,
-                                                      const GALGAS_structureFieldListAST & in_mStructureFieldListAST,
+                                                      const GALGAS_structurePropertyListAST & in_mStructureFieldListAST,
                                                       const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
                                                       const GALGAS_serviceDeclarationListAST & in_mServiceListAST,
                                                       const GALGAS_sectionDeclarationListAST & in_mSectionListAST,

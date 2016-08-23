@@ -14,7 +14,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <module_variable> ?!@structureFieldListAST ioPropertyList {
+  rule <module_variable> ?!@structurePropertyListAST ioPropertyList {
     $var$
     $identifier$ ?let fieldName
     @lstring typeName
@@ -36,7 +36,7 @@ syntax extension plm_syntax {
     let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
     ${$
     @functionDeclarationListAST functionDeclarationListAST = {}
-    @structureFieldListAST fieldList = {}
+    @structurePropertyListAST fieldList = {}
     @serviceDeclarationListAST serviceListAST = {}
     @primitiveDeclarationListAST primitiveListAST = {}
     @guardDeclarationListAST guardListAST = {}

@@ -856,19 +856,19 @@ GALGAS_enumConstantMap GALGAS_enumConstantMap::extractObject (const GALGAS_objec
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Class for element of '@structureFieldListAST' list                                  *
+//                                Class for element of '@structurePropertyListAST' list                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cCollectionElement_structureFieldListAST : public cCollectionElement {
-  public : GALGAS_structureFieldListAST_2D_element mObject ;
+class cCollectionElement_structurePropertyListAST : public cCollectionElement {
+  public : GALGAS_structurePropertyListAST_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_structureFieldListAST (const GALGAS_lstring & in_mFieldName,
-                                                     const GALGAS_bool & in_mIsPublic,
-                                                     const GALGAS_lstring & in_mFieldTypeName,
-                                                     const GALGAS_structureVarInit & in_mInitialisation
-                                                     COMMA_LOCATION_ARGS) ;
+  public : cCollectionElement_structurePropertyListAST (const GALGAS_lstring & in_mFieldName,
+                                                        const GALGAS_bool & in_mIsPublic,
+                                                        const GALGAS_lstring & in_mFieldTypeName,
+                                                        const GALGAS_structureVarInit & in_mInitialisation
+                                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -885,32 +885,32 @@ class cCollectionElement_structureFieldListAST : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_structureFieldListAST::cCollectionElement_structureFieldListAST (const GALGAS_lstring & in_mFieldName,
-                                                                                    const GALGAS_bool & in_mIsPublic,
-                                                                                    const GALGAS_lstring & in_mFieldTypeName,
-                                                                                    const GALGAS_structureVarInit & in_mInitialisation
-                                                                                    COMMA_LOCATION_ARGS) :
+cCollectionElement_structurePropertyListAST::cCollectionElement_structurePropertyListAST (const GALGAS_lstring & in_mFieldName,
+                                                                                          const GALGAS_bool & in_mIsPublic,
+                                                                                          const GALGAS_lstring & in_mFieldTypeName,
+                                                                                          const GALGAS_structureVarInit & in_mInitialisation
+                                                                                          COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mFieldName, in_mIsPublic, in_mFieldTypeName, in_mInitialisation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cCollectionElement_structureFieldListAST::isValid (void) const {
+bool cCollectionElement_structurePropertyListAST::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement * cCollectionElement_structureFieldListAST::copy (void) {
+cCollectionElement * cCollectionElement_structurePropertyListAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_structureFieldListAST (mObject.mAttribute_mFieldName, mObject.mAttribute_mIsPublic, mObject.mAttribute_mFieldTypeName, mObject.mAttribute_mInitialisation COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_structurePropertyListAST (mObject.mAttribute_mFieldName, mObject.mAttribute_mIsPublic, mObject.mAttribute_mFieldTypeName, mObject.mAttribute_mInitialisation COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cCollectionElement_structureFieldListAST::description (C_String & ioString, const int32_t inIndentation) const {
+void cCollectionElement_structurePropertyListAST::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mFieldName" ":" ;
@@ -931,21 +931,21 @@ void cCollectionElement_structureFieldListAST::description (C_String & ioString,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cCollectionElement_structureFieldListAST::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_structureFieldListAST * operand = (cCollectionElement_structureFieldListAST *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_structureFieldListAST) ;
+typeComparisonResult cCollectionElement_structurePropertyListAST::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_structurePropertyListAST * operand = (cCollectionElement_structurePropertyListAST *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_structurePropertyListAST) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST::GALGAS_structureFieldListAST (void) :
+GALGAS_structurePropertyListAST::GALGAS_structurePropertyListAST (void) :
 AC_GALGAS_list () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST::GALGAS_structureFieldListAST (cSharedList * inSharedListPtr) :
+GALGAS_structurePropertyListAST::GALGAS_structurePropertyListAST (cSharedList * inSharedListPtr) :
 AC_GALGAS_list (inSharedListPtr) {
   if (NULL == inSharedListPtr) {
     createNewEmptyList (HERE) ;
@@ -954,24 +954,24 @@ AC_GALGAS_list (inSharedListPtr) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST GALGAS_structureFieldListAST::constructor_emptyList (LOCATION_ARGS) {
-  GALGAS_structureFieldListAST result ;
+GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::constructor_emptyList (LOCATION_ARGS) {
+  GALGAS_structurePropertyListAST result ;
   result.createNewEmptyList (THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST GALGAS_structureFieldListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                                      const GALGAS_bool & inOperand1,
-                                                                                      const GALGAS_lstring & inOperand2,
-                                                                                      const GALGAS_structureVarInit & inOperand3
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_structureFieldListAST result ;
+GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
+                                                                                            const GALGAS_bool & inOperand1,
+                                                                                            const GALGAS_lstring & inOperand2,
+                                                                                            const GALGAS_structureVarInit & inOperand3
+                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_structurePropertyListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_structureFieldListAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE) ;
+    GALGAS_structurePropertyListAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -979,31 +979,31 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::constructor_listWithV
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                              const GALGAS_lstring & in_mFieldName,
-                                                              const GALGAS_bool & in_mIsPublic,
-                                                              const GALGAS_lstring & in_mFieldTypeName,
-                                                              const GALGAS_structureVarInit & in_mInitialisation
-                                                              COMMA_LOCATION_ARGS) {
-  cCollectionElement_structureFieldListAST * p = NULL ;
-  macroMyNew (p, cCollectionElement_structureFieldListAST (in_mFieldName,
-                                                           in_mIsPublic,
-                                                           in_mFieldTypeName,
-                                                           in_mInitialisation COMMA_THERE)) ;
+void GALGAS_structurePropertyListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                                 const GALGAS_lstring & in_mFieldName,
+                                                                 const GALGAS_bool & in_mIsPublic,
+                                                                 const GALGAS_lstring & in_mFieldTypeName,
+                                                                 const GALGAS_structureVarInit & in_mInitialisation
+                                                                 COMMA_LOCATION_ARGS) {
+  cCollectionElement_structurePropertyListAST * p = NULL ;
+  macroMyNew (p, cCollectionElement_structurePropertyListAST (in_mFieldName,
+                                                              in_mIsPublic,
+                                                              in_mFieldTypeName,
+                                                              in_mInitialisation COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
-                                                        const GALGAS_bool & inOperand1,
-                                                        const GALGAS_lstring & inOperand2,
-                                                        const GALGAS_structureVarInit & inOperand3
-                                                        COMMA_LOCATION_ARGS) {
+void GALGAS_structurePropertyListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
+                                                           const GALGAS_bool & inOperand1,
+                                                           const GALGAS_lstring & inOperand2,
+                                                           const GALGAS_structureVarInit & inOperand3
+                                                           COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_structureFieldListAST (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_structurePropertyListAST (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -1013,16 +1013,16 @@ void GALGAS_structureFieldListAST::addAssign_operation (const GALGAS_lstring & i
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                         const GALGAS_bool inOperand1,
-                                                         const GALGAS_lstring inOperand2,
-                                                         const GALGAS_structureVarInit inOperand3,
-                                                         const GALGAS_uint inInsertionIndex,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_structurePropertyListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
+                                                            const GALGAS_bool inOperand1,
+                                                            const GALGAS_lstring inOperand2,
+                                                            const GALGAS_structureVarInit inOperand3,
+                                                            const GALGAS_uint inInsertionIndex,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_structureFieldListAST (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_structurePropertyListAST (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -1032,24 +1032,24 @@ void GALGAS_structureFieldListAST::setter_insertAtIndex (const GALGAS_lstring in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                         GALGAS_bool & outOperand1,
-                                                         GALGAS_lstring & outOperand2,
-                                                         GALGAS_structureVarInit & outOperand3,
-                                                         const GALGAS_uint inRemoveIndex,
-                                                         C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_structurePropertyListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
+                                                            GALGAS_bool & outOperand1,
+                                                            GALGAS_lstring & outOperand2,
+                                                            GALGAS_structureVarInit & outOperand3,
+                                                            const GALGAS_uint inRemoveIndex,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
+    cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
     if (NULL == p) {
       outOperand0.drop () ;
       outOperand1.drop () ;
       outOperand2.drop () ;
       outOperand3.drop () ;
     }else{
-      macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+      macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
       outOperand0 = p->mObject.mAttribute_mFieldName ;
       outOperand1 = p->mObject.mAttribute_mIsPublic ;
       outOperand2 = p->mObject.mAttribute_mFieldTypeName ;
@@ -1060,22 +1060,72 @@ void GALGAS_structureFieldListAST::setter_removeAtIndex (GALGAS_lstring & outOpe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::setter_popFirst (GALGAS_lstring & outOperand0,
+void GALGAS_structurePropertyListAST::setter_popFirst (GALGAS_lstring & outOperand0,
+                                                       GALGAS_bool & outOperand1,
+                                                       GALGAS_lstring & outOperand2,
+                                                       GALGAS_structureVarInit & outOperand3,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
+    outOperand0 = p->mObject.mAttribute_mFieldName ;
+    outOperand1 = p->mObject.mAttribute_mIsPublic ;
+    outOperand2 = p->mObject.mAttribute_mFieldTypeName ;
+    outOperand3 = p->mObject.mAttribute_mInitialisation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_structurePropertyListAST::setter_popLast (GALGAS_lstring & outOperand0,
+                                                      GALGAS_bool & outOperand1,
+                                                      GALGAS_lstring & outOperand2,
+                                                      GALGAS_structureVarInit & outOperand3,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
+  if (NULL == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
+    outOperand0 = p->mObject.mAttribute_mFieldName ;
+    outOperand1 = p->mObject.mAttribute_mIsPublic ;
+    outOperand2 = p->mObject.mAttribute_mFieldTypeName ;
+    outOperand3 = p->mObject.mAttribute_mInitialisation ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_structurePropertyListAST::method_first (GALGAS_lstring & outOperand0,
                                                     GALGAS_bool & outOperand1,
                                                     GALGAS_lstring & outOperand2,
                                                     GALGAS_structureVarInit & outOperand3,
                                                     C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+                                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
-  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
     outOperand3.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+    macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     outOperand0 = p->mObject.mAttribute_mFieldName ;
     outOperand1 = p->mObject.mAttribute_mIsPublic ;
     outOperand2 = p->mObject.mAttribute_mFieldTypeName ;
@@ -1085,72 +1135,22 @@ void GALGAS_structureFieldListAST::setter_popFirst (GALGAS_lstring & outOperand0
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::setter_popLast (GALGAS_lstring & outOperand0,
+void GALGAS_structurePropertyListAST::method_last (GALGAS_lstring & outOperand0,
                                                    GALGAS_bool & outOperand1,
                                                    GALGAS_lstring & outOperand2,
                                                    GALGAS_structureVarInit & outOperand3,
                                                    C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-    outOperand3.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
-    outOperand0 = p->mObject.mAttribute_mFieldName ;
-    outOperand1 = p->mObject.mAttribute_mIsPublic ;
-    outOperand2 = p->mObject.mAttribute_mFieldTypeName ;
-    outOperand3 = p->mObject.mAttribute_mInitialisation ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_structureFieldListAST::method_first (GALGAS_lstring & outOperand0,
-                                                 GALGAS_bool & outOperand1,
-                                                 GALGAS_lstring & outOperand2,
-                                                 GALGAS_structureVarInit & outOperand3,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-    outOperand2.drop () ;
-    outOperand3.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
-    outOperand0 = p->mObject.mAttribute_mFieldName ;
-    outOperand1 = p->mObject.mAttribute_mIsPublic ;
-    outOperand2 = p->mObject.mAttribute_mFieldTypeName ;
-    outOperand3 = p->mObject.mAttribute_mInitialisation ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_structureFieldListAST::method_last (GALGAS_lstring & outOperand0,
-                                                GALGAS_bool & outOperand1,
-                                                GALGAS_lstring & outOperand2,
-                                                GALGAS_structureVarInit & outOperand3,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const {
+                                                   COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
+  cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
     outOperand3.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+    macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     outOperand0 = p->mObject.mAttribute_mFieldName ;
     outOperand1 = p->mObject.mAttribute_mIsPublic ;
     outOperand2 = p->mObject.mAttribute_mFieldTypeName ;
@@ -1160,10 +1160,10 @@ void GALGAS_structureFieldListAST::method_last (GALGAS_lstring & outOperand0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST GALGAS_structureFieldListAST::add_operation (const GALGAS_structureFieldListAST & inOperand,
-                                                                          C_Compiler * /* inCompiler */
-                                                                          COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_structureFieldListAST result ;
+GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::add_operation (const GALGAS_structurePropertyListAST & inOperand,
+                                                                                C_Compiler * /* inCompiler */
+                                                                                COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_structurePropertyListAST result ;
   if (isValid () && inOperand.isValid ()) {
     result = *this ;
     result.appendList (inOperand) ;
@@ -1173,52 +1173,52 @@ GALGAS_structureFieldListAST GALGAS_structureFieldListAST::add_operation (const 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST GALGAS_structureFieldListAST::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const {
-  GALGAS_structureFieldListAST result = GALGAS_structureFieldListAST::constructor_emptyList (THERE) ;
+GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::getter_subListWithRange (const GALGAS_range & inRange,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const {
+  GALGAS_structurePropertyListAST result = GALGAS_structurePropertyListAST::constructor_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST GALGAS_structureFieldListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const {
-  GALGAS_structureFieldListAST result = GALGAS_structureFieldListAST::constructor_emptyList (THERE) ;
+GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const {
+  GALGAS_structurePropertyListAST result = GALGAS_structurePropertyListAST::constructor_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST GALGAS_structureFieldListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
-  GALGAS_structureFieldListAST result = GALGAS_structureFieldListAST::constructor_emptyList (THERE) ;
+GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) const {
+  GALGAS_structurePropertyListAST result = GALGAS_structurePropertyListAST::constructor_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureFieldListAST::plusAssign_operation (const GALGAS_structureFieldListAST inOperand,
-                                                         C_Compiler * /* inCompiler */
-                                                         COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_structurePropertyListAST::plusAssign_operation (const GALGAS_structurePropertyListAST inOperand,
+                                                            C_Compiler * /* inCompiler */
+                                                            COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_structureFieldListAST::getter_mFieldNameAtIndex (const GALGAS_uint & inIndex,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_structurePropertyListAST::getter_mFieldNameAtIndex (const GALGAS_uint & inIndex,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
+  cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   GALGAS_lstring result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+    macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     result = p->mObject.mAttribute_mFieldName ;
   }
   return result ;
@@ -1226,14 +1226,14 @@ GALGAS_lstring GALGAS_structureFieldListAST::getter_mFieldNameAtIndex (const GAL
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_structureFieldListAST::getter_mIsPublicAtIndex (const GALGAS_uint & inIndex,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_structurePropertyListAST::getter_mIsPublicAtIndex (const GALGAS_uint & inIndex,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
+  cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   GALGAS_bool result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+    macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     result = p->mObject.mAttribute_mIsPublic ;
   }
   return result ;
@@ -1241,14 +1241,14 @@ GALGAS_bool GALGAS_structureFieldListAST::getter_mIsPublicAtIndex (const GALGAS_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_structureFieldListAST::getter_mFieldTypeNameAtIndex (const GALGAS_uint & inIndex,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_structurePropertyListAST::getter_mFieldTypeNameAtIndex (const GALGAS_uint & inIndex,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
+  cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   GALGAS_lstring result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+    macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     result = p->mObject.mAttribute_mFieldTypeName ;
   }
   return result ;
@@ -1256,14 +1256,14 @@ GALGAS_lstring GALGAS_structureFieldListAST::getter_mFieldTypeNameAtIndex (const
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit GALGAS_structureFieldListAST::getter_mInitialisationAtIndex (const GALGAS_uint & inIndex,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) const {
+GALGAS_structureVarInit GALGAS_structurePropertyListAST::getter_mInitialisationAtIndex (const GALGAS_uint & inIndex,
+                                                                                        C_Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_structureFieldListAST * p = (cCollectionElement_structureFieldListAST *) attributes.ptr () ;
+  cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   GALGAS_structureVarInit result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+    macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     result = p->mObject.mAttribute_mInitialisation ;
   }
   return result ;
@@ -1273,50 +1273,50 @@ GALGAS_structureVarInit GALGAS_structureFieldListAST::getter_mInitialisationAtIn
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_structureFieldListAST::cEnumerator_structureFieldListAST (const GALGAS_structureFieldListAST & inEnumeratedObject,
-                                                                      const typeEnumerationOrder inOrder) :
+cEnumerator_structurePropertyListAST::cEnumerator_structurePropertyListAST (const GALGAS_structurePropertyListAST & inEnumeratedObject,
+                                                                            const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator () {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray, inOrder) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST_2D_element cEnumerator_structureFieldListAST::current (LOCATION_ARGS) const {
-  const cCollectionElement_structureFieldListAST * p = (const cCollectionElement_structureFieldListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+GALGAS_structurePropertyListAST_2D_element cEnumerator_structurePropertyListAST::current (LOCATION_ARGS) const {
+  const cCollectionElement_structurePropertyListAST * p = (const cCollectionElement_structurePropertyListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
   return p->mObject ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_structureFieldListAST::current_mFieldName (LOCATION_ARGS) const {
-  const cCollectionElement_structureFieldListAST * p = (const cCollectionElement_structureFieldListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+GALGAS_lstring cEnumerator_structurePropertyListAST::current_mFieldName (LOCATION_ARGS) const {
+  const cCollectionElement_structurePropertyListAST * p = (const cCollectionElement_structurePropertyListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
   return p->mObject.mAttribute_mFieldName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool cEnumerator_structureFieldListAST::current_mIsPublic (LOCATION_ARGS) const {
-  const cCollectionElement_structureFieldListAST * p = (const cCollectionElement_structureFieldListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+GALGAS_bool cEnumerator_structurePropertyListAST::current_mIsPublic (LOCATION_ARGS) const {
+  const cCollectionElement_structurePropertyListAST * p = (const cCollectionElement_structurePropertyListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
   return p->mObject.mAttribute_mIsPublic ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring cEnumerator_structureFieldListAST::current_mFieldTypeName (LOCATION_ARGS) const {
-  const cCollectionElement_structureFieldListAST * p = (const cCollectionElement_structureFieldListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+GALGAS_lstring cEnumerator_structurePropertyListAST::current_mFieldTypeName (LOCATION_ARGS) const {
+  const cCollectionElement_structurePropertyListAST * p = (const cCollectionElement_structurePropertyListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
   return p->mObject.mAttribute_mFieldTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit cEnumerator_structureFieldListAST::current_mInitialisation (LOCATION_ARGS) const {
-  const cCollectionElement_structureFieldListAST * p = (const cCollectionElement_structureFieldListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_structureFieldListAST) ;
+GALGAS_structureVarInit cEnumerator_structurePropertyListAST::current_mInitialisation (LOCATION_ARGS) const {
+  const cCollectionElement_structurePropertyListAST * p = (const cCollectionElement_structurePropertyListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
   return p->mObject.mAttribute_mInitialisation ;
 }
 
@@ -1325,42 +1325,42 @@ GALGAS_structureVarInit cEnumerator_structureFieldListAST::current_mInitialisati
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             @structureFieldListAST type                                             *
+//                                           @structurePropertyListAST type                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_structureFieldListAST ("structureFieldListAST",
-                                              NULL) ;
+kTypeDescriptor_GALGAS_structurePropertyListAST ("structurePropertyListAST",
+                                                 NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_structureFieldListAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_structureFieldListAST ;
+const C_galgas_type_descriptor * GALGAS_structurePropertyListAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_structurePropertyListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_structureFieldListAST::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_structurePropertyListAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_structureFieldListAST (*this)) ;
+    macroMyNew (result, GALGAS_structurePropertyListAST (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureFieldListAST GALGAS_structureFieldListAST::extractObject (const GALGAS_object & inObject,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_structureFieldListAST result ;
-  const GALGAS_structureFieldListAST * p = (const GALGAS_structureFieldListAST *) inObject.embeddedObject () ;
+GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::extractObject (const GALGAS_object & inObject,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_structurePropertyListAST result ;
+  const GALGAS_structurePropertyListAST * p = (const GALGAS_structurePropertyListAST *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_structureFieldListAST *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_structurePropertyListAST *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("structureFieldListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("structurePropertyListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
