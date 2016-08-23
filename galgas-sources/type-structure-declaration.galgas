@@ -5,7 +5,7 @@
 class @structureDeclaration : @abstractDeclaration {
   @lstring mStructureName
   @lstringlist mAttributeListAST
-  @structureFieldListAST mStructureFieldListAST
+  @structurePropertyListAST mStructureFieldListAST
   @functionDeclarationListAST mFunctionDeclarationListAST
   @serviceDeclarationListAST mServiceListAST
   @sectionDeclarationListAST mSectionListAST
@@ -28,7 +28,7 @@ enum @structureVarInit {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @structureFieldListAST {
+list @structurePropertyListAST {
   @lstring mFieldName
   @bool mIsPublic
   @lstring mFieldTypeName
@@ -43,7 +43,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_struct_var> ?!@structureFieldListAST ioFieldListAST {
+  rule <declaration_struct_var> ?!@structurePropertyListAST ioFieldListAST {
     @bool public
     select
       public = false
@@ -82,7 +82,7 @@ syntax extension plm_syntax {
     end 
     ${$
     @functionDeclarationListAST procedureDeclarationListAST = {}
-    @structureFieldListAST fieldList = {}
+    @structurePropertyListAST fieldList = {}
     @serviceDeclarationListAST serviceListAST = {}
     @sectionDeclarationListAST sectionListAST = {}
     @primitiveDeclarationListAST primitiveListAST = {}

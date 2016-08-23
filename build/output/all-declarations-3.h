@@ -3287,7 +3287,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_declaration_5F_struct_5F_var_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_declaration_5F_struct_5F_var_ (GALGAS_structureFieldListAST & ioArgument0,
+  public : virtual void nt_declaration_5F_struct_5F_var_ (GALGAS_structurePropertyListAST & ioArgument0,
                                                           C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'declaration_type' non terminal
@@ -3412,13 +3412,18 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F__39__ (GALGAS_expressionAST & outArgument0,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'global_variable_declaration' non terminal
+//------------------------------------- 'global_var_allowed_routine' non terminal
 //--- 'parse' label
-  public : virtual void nt_global_5F_variable_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_global_5F_var_5F_allowed_5F_routine_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_global_5F_variable_5F_declaration_ (GALGAS_globalVarDeclarationList & ioArgument0,
-                                                               C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_global_5F_var_5F_allowed_5F_routine_ (GALGAS_allowedRoutineList & ioArgument0,
+                                                                 GALGAS_allowedInitList & ioArgument1,
+                                                                 GALGAS_allowedPanicList & ioArgument2,
+                                                                 GALGAS_allowedGuardList & ioArgument3,
+                                                                 GALGAS_allowedISRList & ioArgument4,
+                                                                 GALGAS_allowedTaskList & ioArgument5,
+                                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'guard' non terminal
 //--- 'parse' label
@@ -3483,7 +3488,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_module_5F_variable_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_module_5F_variable_ (GALGAS_structureFieldListAST & ioArgument0,
+  public : virtual void nt_module_5F_variable_ (GALGAS_structurePropertyListAST & ioArgument0,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'primary' non terminal
@@ -3537,6 +3542,14 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                                  GALGAS_lstringlist & outArgument3,
                                                  GALGAS_procFormalArgumentList & outArgument4,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'property_in_extension' non terminal
+//--- 'parse' label
+  public : virtual void nt_property_5F_in_5F_extension_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_property_5F_in_5F_extension_ (GALGAS_structurePropertyListAST & ioArgument0,
+                                                         C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'section' non terminal
 //--- 'parse' label
