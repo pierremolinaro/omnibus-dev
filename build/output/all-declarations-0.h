@@ -219,6 +219,96 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             @abstractDeclaration class                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_abstractDeclaration : public AC_GALGAS_class {
+//--- Constructor
+  public : GALGAS_abstractDeclaration (void) ;
+
+//---
+  public : inline const class cPtr_abstractDeclaration * ptr (void) const { return (const cPtr_abstractDeclaration *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_abstractDeclaration (const cPtr_abstractDeclaration * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_abstractDeclaration extractObject (const GALGAS_object & inObject,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_abstractDeclaration & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_abstractDeclaration class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractDeclaration ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Pointer class for @abstractDeclaration class                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_abstractDeclaration : public acPtr_class {
+//--- Attributes
+
+//--- Constructor
+  public : cPtr_abstractDeclaration (LOCATION_ARGS) ;
+
+//--- Attribute accessors
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const = 0 ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const = 0 ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const = 0 ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Abstract extension getter '@abstractDeclaration location'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef class GALGAS_location (*enterExtensionGetter_abstractDeclaration_location) (const class cPtr_abstractDeclaration * inObject,
+                                                                                    class C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionGetter_location (const int32_t inClassIndex,
+                                    enterExtensionGetter_abstractDeclaration_location inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_location callExtensionGetter_location (const class cPtr_abstractDeclaration * inObject,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                              @declarationListAST list                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -339,75 +429,6 @@ class cEnumerator_declarationListAST : public cGenericAbstractEnumerator {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_declarationListAST ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @abstractDeclaration class                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_abstractDeclaration : public AC_GALGAS_class {
-//--- Constructor
-  public : GALGAS_abstractDeclaration (void) ;
-
-//---
-  public : inline const class cPtr_abstractDeclaration * ptr (void) const { return (const cPtr_abstractDeclaration *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_abstractDeclaration (const cPtr_abstractDeclaration * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_abstractDeclaration extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_abstractDeclaration & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_abstractDeclaration class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractDeclaration ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Pointer class for @abstractDeclaration class                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_abstractDeclaration : public acPtr_class {
-//--- Attributes
-
-//--- Constructor
-  public : cPtr_abstractDeclaration (LOCATION_ARGS) ;
-
-//--- Attribute accessors
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const = 0 ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const = 0 ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const = 0 ;
-
-} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

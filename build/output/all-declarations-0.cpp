@@ -2502,7 +2502,7 @@ bool C_Lexique_plm_5F_lexique::parseLexicalToken (void) {
       advance () ; // ... go throught unknown character
     }
   }
-  if ((UNICODE_VALUE (mCurrentChar) == '\0') && (token.mTemplateStringBeforeToken.length () > 0)) {
+  if (UNICODE_VALUE (mCurrentChar) == '\0') { // && (token.mTemplateStringBeforeToken.length () > 0)) {
     token.mTokenCode = 0 ;
     enterToken (token) ;
   }
@@ -2946,6 +2946,153 @@ C_String C_Lexique_plm_5F_lexique::styleNameForIndex (const uint32_t inStyleInde
       "selectorStyle"
     } ;
     result = kStyleArray [inStyleIndex] ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+
+typeComparisonResult GALGAS_abstractDeclaration::objectCompare (const GALGAS_abstractDeclaration & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_abstractDeclaration::GALGAS_abstractDeclaration (void) :
+AC_GALGAS_class () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_abstractDeclaration::GALGAS_abstractDeclaration (const cPtr_abstractDeclaration * inSourcePtr) :
+AC_GALGAS_class (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_abstractDeclaration) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                    Pointer class for @abstractDeclaration class                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_abstractDeclaration::cPtr_abstractDeclaration (LOCATION_ARGS) :
+acPtr_class (THERE) {
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @abstractDeclaration type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_abstractDeclaration ("abstractDeclaration",
+                                            NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_abstractDeclaration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_abstractDeclaration ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_abstractDeclaration::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_abstractDeclaration (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_abstractDeclaration GALGAS_abstractDeclaration::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_abstractDeclaration result ;
+  const GALGAS_abstractDeclaration * p = (const GALGAS_abstractDeclaration *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_abstractDeclaration *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("abstractDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Abstract extension getter '@abstractDeclaration location'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <enterExtensionGetter_abstractDeclaration_location> gExtensionGetterTable_abstractDeclaration_location ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionGetter_location (const int32_t inClassIndex,
+                                    enterExtensionGetter_abstractDeclaration_location inGetter) {
+  gExtensionGetterTable_abstractDeclaration_location.forceObjectAtIndex (inClassIndex, inGetter, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeExtensionGetter_abstractDeclaration_location (void) {
+  gExtensionGetterTable_abstractDeclaration_location.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gGetter_abstractDeclaration_location (NULL,
+                                                         freeExtensionGetter_abstractDeclaration_location) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_location callExtensionGetter_location (const cPtr_abstractDeclaration * inObject,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  GALGAS_location result ;
+//--- Find Reader
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    enterExtensionGetter_abstractDeclaration_location f = NULL ;
+    if (classIndex < gExtensionGetterTable_abstractDeclaration_location.count ()) {
+      f = gExtensionGetterTable_abstractDeclaration_location (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+       const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+       while ((NULL == f) && (NULL != p)) {
+         if (p->mSlotID < gExtensionGetterTable_abstractDeclaration_location.count ()) {
+           f = gExtensionGetterTable_abstractDeclaration_location (p->mSlotID COMMA_HERE) ;
+         }
+         p = p->mSuperclassDescriptor ;
+       }
+       gExtensionGetterTable_abstractDeclaration_location.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY READER CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      result = f (inObject, inCompiler COMMA_THERE) ;
+    }
   }
   return result ;
 }
