@@ -453,27 +453,26 @@ Un registre ne peut pas :
   \item apparaître comme paramètre effectif en sortie/entrée d'une procédure.
 \end{itemize}
 
-Prenons un exemple ; la procédure \texttt{uneProcedure} présente un argument formel en sortie, et on suppose que \texttt{REGISTRE} est un registre de type \plm!$uint32! :
+Prenons un exemple ; la procédure \plm=uneProcedure= présente un argument formel en sortie, et on suppose que \texttt{REGISTRE} est un registre de type \plm!$uint32! :
 \begin{PLM}
-func uneProcedure `user (!outValue $uint32) {
+func `user uneProcedure (!outValue $uint32) {
   outValue = 5
 }
 \end{PLM}
 
-L'écriture suivante est correcte (écriture du registre) :
+
+
+L'écriture suivante est rejetée par le compilateur (passage d'un registre comme paramètre effectif en entrée) :
 \begin{PLM}
-func autreProcedure `user () {
-  REGISTRE = 10 // Ok
+func `user autreProcedure () {
+  uneProcedure (?REGISTRE) // Erreur
 }
 \end{PLM}
 
-
-Par contre, l'écriture suivante est rejetée par le compilateur (passage d'un registre comme paramètre effectif en entrée) :
+Par contre, l'écriture suivante est correcte (écriture du registre) :
 \begin{PLM}
-func autreProcedure `user () {
-  uneProcedure (?REGISTRE) // Erreur, registre comme paramètre
-                           // effectif en entrée
+func `user autreProcedure () {
+  REGISTRE = 5 // Ok
 }
 \end{PLM}
-
 
