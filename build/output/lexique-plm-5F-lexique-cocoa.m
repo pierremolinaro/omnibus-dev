@@ -3,7 +3,7 @@
 
 //--- END OF USER ZONE 1
 
-#import "lexique-plm_lexique-cocoa.h"
+#import "lexique-plm-5F-lexique-cocoa.h"
 #import "PMDebug.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
