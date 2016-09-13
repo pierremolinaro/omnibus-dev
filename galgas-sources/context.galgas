@@ -318,8 +318,6 @@ proc buildSemanticContext
   outSemanticContext = .default
 #--- Add predefined modes
   outSemanticContext.mModeMap = allModeMap ()
-#--- Enter modules
-#  enterModulesInContext (!moduleList:inAST.mModuleDeclarationList !?context:outSemanticContext)
 #--- Enter init routines
   for initRoutine in inAST.mInitList do
     [initRoutine enterInContext !?context:outSemanticContext]
