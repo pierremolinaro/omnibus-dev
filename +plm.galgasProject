@@ -137,6 +137,7 @@ project (1:0:0) -> "plm" {
 
 #--- Target
   "galgas-sources/target-generation.galgas"
+  "galgas-sources/declaration-check-target.galgas"
 
 #--- Program
   "galgas-sources/program.galgas"

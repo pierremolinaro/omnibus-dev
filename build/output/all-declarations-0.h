@@ -8177,6 +8177,11 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_declaration_i85_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
+  protected : void rule_plm_5F_syntax_declaration_i86_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i86_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
 
 
 //--- Select methods
@@ -13899,6 +13904,7 @@ class GALGAS_ast : public AC_GALGAS_root {
   public : GALGAS_initList mAttribute_mInitList ;
   public : GALGAS_panicClauseListAST mAttribute_mPanicClauses ;
   public : GALGAS_taskList mAttribute_mTaskList ;
+  public : GALGAS_lstringlist mAttribute_mCheckTargetList ;
 
 
 //--------------------------------- Accessors
@@ -13931,7 +13937,8 @@ class GALGAS_ast : public AC_GALGAS_root {
                        const GALGAS_bootList & in_mBootList,
                        const GALGAS_initList & in_mInitList,
                        const GALGAS_panicClauseListAST & in_mPanicClauses,
-                       const GALGAS_taskList & in_mTaskList) ;
+                       const GALGAS_taskList & in_mTaskList,
+                       const GALGAS_lstringlist & in_mCheckTargetList) ;
 
 //-- Start of generic part --*
 
@@ -13960,7 +13967,8 @@ class GALGAS_ast : public AC_GALGAS_root {
                                                     const class GALGAS_bootList & inOperand13,
                                                     const class GALGAS_initList & inOperand14,
                                                     const class GALGAS_panicClauseListAST & inOperand15,
-                                                    const class GALGAS_taskList & inOperand16
+                                                    const class GALGAS_taskList & inOperand16,
+                                                    const class GALGAS_lstringlist & inOperand17
                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -13976,6 +13984,8 @@ class GALGAS_ast : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_bootList getter_mBootList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mCheckTargetList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_controlRegisterDeclarationListAST getter_mControlRegisterDeclarationListAST (LOCATION_ARGS) const ;
 

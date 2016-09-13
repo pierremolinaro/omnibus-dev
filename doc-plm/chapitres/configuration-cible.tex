@@ -66,8 +66,9 @@ Pour se convaincre que la cible nommée dans le fichier est bien celle située d
 \end{itemize}
 
 Commençons par le fichier \texttt{01-blinkled.plm}. Sa première ligne est :
+
 \begin{PLM}[1]
-target "teensy-3-1-it"
+target "teensy-3-1"
 \end{PLM}
 
 Cette ligne signifie que la cible s'appelle \texttt{teensy-3-1-it}. Nous allons la renommer en \texttt{myTeensy}. La première ligne du fichier \texttt{01-blinkled.plm} devient donc :
@@ -190,5 +191,30 @@ Texte à définir…
 
 
 
+\sectionLabel{La directive \texttt{check target}}{directiveCheckTarget}\index{check target}
 
+La directive \plm=check target= permet de vérifier l'identité de la cible. Elle est utile pour spécifier qu'un fichier est spécifique à une cible. À la compilation, toute directive \plm=check target= incorrecte entraîne une erreur.
+
+Par exemple, compiler pour la cible \plm+"teensy-3-1"+ est spécifié par :
+
+\begin{PLM}
+target "teensy-3-1"
+\end{PLM}
+
+Si la définition du projet implique d'importer le fichier \plm+"monFichier.plm"+ :
+
+\begin{PLM}
+target "teensy-3-1"
+import "monFichier.plm"
+\end{PLM}
+
+Si le contenu de ce fichier commence par :
+\begin{PLM}
+check target "lpc2294"
+\end{PLM}
+
+Alors une erreur de compilation apparaît. La directive \plm=check target= doit être :
+\begin{PLM}
+check target "teensy-3-1"
+\end{PLM}
 
