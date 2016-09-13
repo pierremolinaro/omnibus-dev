@@ -2,14 +2,24 @@ target "teensy-3-1-tp"
 
 //——————————————————————————————————————————————————————————————————————————————
 
+init 1000 {
+  digitalMode (!port:.D3 !mode:.OUTPUT)
+  digitalMode (!port:.D4 !mode:.OUTPUT)
+  digitalMode (!port:.D5 !mode:.OUTPUT)
+  digitalMode (!port:.D6 !mode:.OUTPUT)
+  digitalMode (!port:.D7 !mode:.OUTPUT)
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+
 task T1 priority 1 stackSize 512 {
   var compteur $uint32 = 0
-
+  
   while time.waitUntilMS (!deadline:self.compteur) {
-    leds.write (!on:LED_L0)
+    write (!port:.D3 !true)
     self.compteur +%= 500
     time.waitUntilMS (!deadline:self.compteur)
-    leds.write (!off:LED_L0)
+    write (!port:.D3 !false)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
     lcd.printUnsigned (!time.millis ())
@@ -22,10 +32,10 @@ task T2 priority 2 stackSize 512 {
   var compteur $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.compteur) {
-    leds.write (!on:LED_L1)
+    write (!port:.D4 !true)
     self.compteur +%= 499
     time.waitUntilMS (!deadline:self.compteur)
-    leds.write (!off:LED_L1)
+    write (!port:.D4 !false)
     self.compteur +%= 499
   }
 }
@@ -36,10 +46,10 @@ task T3 priority 3 stackSize 512 {
   var compteur $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.compteur) {
-    leds.write (!on:LED_L2)
+    write (!port:.D5 !true)
     self.compteur +%= 498
     time.waitUntilMS (!deadline:self.compteur)
-    leds.write (!off:LED_L2)
+    write (!port:.D5 !false)
     self.compteur +%= 498
   }
 }
@@ -50,10 +60,10 @@ task T4 priority 4 stackSize 512 {
   var compteur $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.compteur) {
-    leds.write (!on:LED_L3)
+    write (!port:.D6 !true)
     self.compteur +%= 497
     time.waitUntilMS (!deadline:self.compteur)
-    leds.write (!off:LED_L3)
+    write (!port:.D6 !false)
     self.compteur +%= 497
   }
 }
@@ -64,10 +74,10 @@ task T5 priority 5 stackSize 512 {
   var compteur $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.compteur) {
-    leds.write (!on:LED_L4)
+    write (!port:.D7 !true)
     self.compteur +%= 496
     time.waitUntilMS (!deadline:self.compteur)
-    leds.write (!off:LED_L4)
+    write (!port:.D7 !false)
     self.compteur +%= 496
   }
 }

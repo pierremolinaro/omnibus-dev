@@ -2,6 +2,24 @@ target "teensy-3-1-tp"
 
 //-----------------------------------------------------------------------------*
 
+let LED_L0 = $digitalPort.D3
+let LED_L1 = $digitalPort.D4
+let LED_L2 = $digitalPort.D5
+let LED_L3 = $digitalPort.D6
+let LED_L4 = $digitalPort.D7
+
+//-----------------------------------------------------------------------------*
+
+init 1000 {
+  digitalMode (!port:LED_L0 !mode:.OUTPUT)
+  digitalMode (!port:LED_L1 !mode:.OUTPUT)
+  digitalMode (!port:LED_L2 !mode:.OUTPUT)
+  digitalMode (!port:LED_L3 !mode:.OUTPUT)
+  digitalMode (!port:LED_L4 !mode:.OUTPUT)
+}
+
+//-----------------------------------------------------------------------------*
+
 var s0 = $semaphore (!value:0)
 
 //-----------------------------------------------------------------------------*
@@ -23,11 +41,11 @@ task T0 priority 0 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s0.signal ()
     self.top += 250
-    leds.write (!on:LED_L0)
+    write (!port:LED_L0 !true)
     time.waitUntilMS (!deadline:self.top)
     s0.signal ()
     self.top += 250
-    leds.write (!off:LED_L0)
+    write (!port:LED_L0 !false)
   }
 }
 
@@ -39,11 +57,11 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s1.signal ()
     self.top += 249
-    leds.write (!on:LED_L4)
+    write (!port:LED_L4 !true)
     time.waitUntilMS (!deadline:self.top)
     s1.signal ()
     self.top += 249
-    leds.write (!off:LED_L4)
+    write (!port:LED_L4 !false)
   }
 }
 
@@ -53,16 +71,16 @@ task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   
   while s0.wait () {
-    leds.write (!toggle:LED_L1)
+    toggle (!port:LED_L1)
   }
   
   while PP () {
-    leds.write (!toggle:LED_L3)
+    toggle (!port:LED_L3)
   }
   
   while convenienceWaitUntilMS (!deadline:self.deadline) {
     self.deadline += 200
-    leds.write (!toggle:LED_L2)
+    toggle (!port:LED_L2)
   }
 }
 

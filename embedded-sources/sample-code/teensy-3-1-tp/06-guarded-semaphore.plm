@@ -2,6 +2,16 @@ target "teensy-3-1-tp"
 
 //-----------------------------------------------------------------------------*
 
+init 1000 {
+  digitalMode (!port:.D3 !mode:.OUTPUT)
+  digitalMode (!port:.D4 !mode:.OUTPUT)
+  digitalMode (!port:.D5 !mode:.OUTPUT)
+  digitalMode (!port:.D6 !mode:.OUTPUT)
+  digitalMode (!port:.D7 !mode:.OUTPUT)
+}
+
+//-----------------------------------------------------------------------------*
+
 struct $monSemaphore {
   var value $uint32
   var list = $taskList ()
@@ -52,11 +62,11 @@ task T0 priority 0 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s0.V ()
     self.top += 250
-    leds.write (!on:LED_L0)
+    write (!port:.D3 !true)
     time.waitUntilMS (!deadline:self.top)
     s0.V ()
     self.top += 250
-    leds.write (!off:LED_L0)
+    write (!port:.D3 !false)
   }
 }
 
@@ -68,11 +78,11 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s1.V ()
     self.top += 249
-    leds.write (!on:LED_L4)
+    write (!port:.D7 !true)
     time.waitUntilMS (!deadline:self.top)
     s1.V ()
     self.top += 249
-    leds.write (!off:LED_L4)
+    write (!port:.D7 !false)
   }
 }
 
@@ -82,16 +92,16 @@ task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   
   while s0.PP () {
-   leds.write (!toggle:LED_L1)
+    toggle (!port:.D4)
   }
   
   while s1.P () {
-    leds.write (!toggle:LED_L3)
+    toggle (!port:.D6)
   }
   
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline += 200
-    leds.write (!toggle:LED_L2)
+    toggle (!port:.D5)
   }
 }
 

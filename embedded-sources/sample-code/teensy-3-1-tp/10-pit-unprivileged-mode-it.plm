@@ -1,5 +1,15 @@
 target "teensy-3-1-tp"
 
+//-----------------------------------------------------------------------------*
+
+let LED_L1 = $digitalPort.D4
+
+//-----------------------------------------------------------------------------*
+
+init 1000 {
+  digitalMode (!port:LED_L1 !mode:.OUTPUT)
+}
+
 //------------------------------------------------*
 
 init 100_000 {
@@ -49,10 +59,10 @@ task T priority 12 stackSize 512 {
   
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline +%= 250
-    leds.write (!on:LED_L1) // Allumer la led
+    write (!port:LED_L1 !true) // Allumer la led
     time.waitUntilMS (!deadline:self.deadline)
     self.deadline +%= 250
-    leds.write (!off:LED_L1)  // Éteindre la led
+    write (!port:LED_L1 !false)  // Éteindre la led
     lcd.goto (!line:1 !column:0)
     lcd.printSpaces (!10)
     lcd.goto (!line:1 !column:0)

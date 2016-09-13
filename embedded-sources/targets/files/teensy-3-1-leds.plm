@@ -22,7 +22,7 @@ module leds {
 
   init 100 { // requiredBy ledOn, ledToggle, ledOff {
   //--- Led L0 : PTA12
-    PORTA_PCR12 = (1 << 8)
+    PORTA_PCR12 = $PORTA_PCR12 {MUX:1} // (1 << 8)
     GPIOA_PDDR |= (1 << 12)
   //--- Led L1 : PTA13
     PORTA_PCR13 = (1 << 8)

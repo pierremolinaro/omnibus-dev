@@ -4,6 +4,13 @@ target "teensy-3-1-tp"
 
 var sémaphore = $semaphore (!value:0)
 
+//——————————————————————————————————————————————————————————————————————————————
+
+init 1000 {
+  digitalMode (!port:.D4 !mode:.OUTPUT)
+  digitalMode (!port:.D5 !mode:.OUTPUT)
+}
+
 //------------------------------------------------*
 
 task T1 priority 1 stackSize 512 {
@@ -21,12 +28,12 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     sémaphore.signal ()
     self.top += 250
-    leds.write (!on:LED_L1)
+    write (!port:.D4 !true)
     let constanteAccentuée = self.top
     time.waitUntilMS (!deadline:constanteAccentuée)
     sémaphore.signal ()
     self.top += 250
-    leds.write (!off:LED_L1)
+    write (!port:.D4 !false)
   }
 }
 
@@ -35,9 +42,9 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
 
   while sémaphore.wait () {
-    leds.write (!on:LED_L2)
+    write (!port:.D5 !true)
     sémaphore.wait ()
-    leds.write (!off:LED_L2)
+    write (!port:.D5 !false)
   }
 }
 

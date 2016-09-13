@@ -16868,16 +16868,17 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i83_ (GALGAS_instruct
       var_caseIdentifiers_1630.addAssign_operation (var_caseIdf_1682  COMMA_SOURCE_FILE ("instruction-switch.galgas", 39)) ;
       switch (select_plm_5F_syntax_81 (inCompiler)) {
       case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2C_) COMMA_SOURCE_FILE ("instruction-switch.galgas", 41)) ;
       } break ;
       default:
         repeatFlag_1 = false ;
         break ;
       }
     }
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-switch.galgas", 42)) ;
-    GALGAS_instructionListAST var_instructionList_1795 ;
-    nt_instructionList_ (var_instructionList_1795, inCompiler) ;
-    var_switchCaseList_1566.addAssign_operation (var_caseIdentifiers_1630, var_instructionList_1795  COMMA_SOURCE_FILE ("instruction-switch.galgas", 44)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-switch.galgas", 43)) ;
+    GALGAS_instructionListAST var_instructionList_1807 ;
+    nt_instructionList_ (var_instructionList_1807, inCompiler) ;
+    var_switchCaseList_1566.addAssign_operation (var_caseIdentifiers_1630, var_instructionList_1807  COMMA_SOURCE_FILE ("instruction-switch.galgas", 45)) ;
     switch (select_plm_5F_syntax_80 (inCompiler)) {
     case 2: {
     } break ;
@@ -16886,9 +16887,9 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i83_ (GALGAS_instruct
       break ;
     }
   }
-  GALGAS_location var_endOfInstruction_1896 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-switch.galgas", 47)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("instruction-switch.galgas", 48)) ;
-  ioArgument_ioInstructionList.addAssign_operation (var_instructionLocation_1399, GALGAS_switchInstructionAST::constructor_new (var_switchExpression_1470, var_switchExpressionEndLocation_1506, var_switchCaseList_1566, var_endOfInstruction_1896  COMMA_SOURCE_FILE ("instruction-switch.galgas", 49))  COMMA_SOURCE_FILE ("instruction-switch.galgas", 49)) ;
+  GALGAS_location var_endOfInstruction_1908 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-switch.galgas", 48)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("instruction-switch.galgas", 49)) ;
+  ioArgument_ioInstructionList.addAssign_operation (var_instructionLocation_1399, GALGAS_switchInstructionAST::constructor_new (var_switchExpression_1470, var_switchExpressionEndLocation_1506, var_switchCaseList_1566, var_endOfInstruction_1908  COMMA_SOURCE_FILE ("instruction-switch.galgas", 50))  COMMA_SOURCE_FILE ("instruction-switch.galgas", 50)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -16905,13 +16906,14 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i83_parse (C_Lexique_
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("instruction-switch.galgas", 38)) ;
       switch (select_plm_5F_syntax_81 (inCompiler)) {
       case 2: {
+        inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__2C_) COMMA_SOURCE_FILE ("instruction-switch.galgas", 41)) ;
       } break ;
       default:
         repeatFlag_1 = false ;
         break ;
       }
     }
-    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-switch.galgas", 42)) ;
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__3A_) COMMA_SOURCE_FILE ("instruction-switch.galgas", 43)) ;
     nt_instructionList_parse (inCompiler) ;
     switch (select_plm_5F_syntax_80 (inCompiler)) {
     case 2: {
@@ -16921,7 +16923,7 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i83_parse (C_Lexique_
       break ;
     }
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("instruction-switch.galgas", 48)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("instruction-switch.galgas", 49)) ;
   inCompiler->resetTemplateString () ;
 }
 
