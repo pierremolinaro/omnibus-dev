@@ -38,6 +38,7 @@ syntax extension plm_syntax {
         $identifier$ ?let caseIdf
         caseIdentifiers += !caseIdf
       while
+        $,$
       end
       $:$
       <instructionList> ?let instructionList
@@ -195,16 +196,14 @@ override method @switchInstructionIR llvmInstructionCode
 #--- Generate switch instruction
   let labelOtherwise = "switch." + mLabelIndex + ".otherwise"
   ioLLVMcode += "  switch " + [mSwitchExpression llvmTypeName] + " " + [mSwitchExpression llvmName]
-  ioLLVMcode += ", label %" + labelOtherwise + " ["
+  ioLLVMcode += ", label %" + labelOtherwise + " [\n"
   for (caseIdentifierIndexes *) in mCaseGenerationList do (branchIdx)
     for (caseIdfIndex) in caseIdentifierIndexes do
-      ioLLVMcode += [mSwitchExpression llvmTypeName] + " " + caseIdfIndex
-      ioLLVMcode += ", label %switch." + mLabelIndex + ".branch." + branchIdx
+      ioLLVMcode += "    " + [mSwitchExpression llvmTypeName] + " " + caseIdfIndex
+      ioLLVMcode += ", label %switch." + mLabelIndex + ".branch." + branchIdx + "\n"
     end
-  between
-    ioLLVMcode += " "
   end
-  ioLLVMcode += "]\n\n"
+  ioLLVMcode += "  ]\n\n"
 #--- Generate branches
   for (* instructionList) in mCaseGenerationList do (branchIdx)
     ioLLVMcode += "switch." + mLabelIndex + ".branch." + branchIdx + ":\n"

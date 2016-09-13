@@ -1,0 +1,527 @@
+//——————————————————————————————————————————————————————————————————————————————
+  
+enum $digitalPort {
+  case D0  // PTB16
+  case D1  // PTB17
+  case D2  // PTD0
+  case D3  // PTA12
+  case D4  // PTA13
+  case D5  // PTD7
+  case D6  // PTD4
+  case D7  // PTD2
+  case D8  // PTD3
+  case D9  // PTC3
+  case D10 // PTC4
+  case D11 // PTC6
+  case D12 // PTC7
+  // D13 réservée
+  case D14 // PTD1
+  case D15 // PTC0
+  case D16 // PTB0
+  case D17 // PTB1
+  case D18 // PTB3
+  case D19 // PTB2
+  case D20 // PTD5
+  case D21 // PTD6
+  case D22 // PTC1
+  case D23 // PTC2
+}
+
+//··············································································
+
+enum $digitalMode {
+  case OUTPUT
+  case INPUT
+  case INPUT_PULLUP
+}
+
+//··············································································
+
+public func `init `panic `service `kernel
+digitalMode @noUnusedWarning (?port:port $digitalPort
+                              ?mode:mode $digitalMode) {
+  switch port {
+  case D0 : // PTB16
+    switch mode {
+    case OUTPUT :
+      PORTB_PCR16 = $PORTB_PCR16 {MUX:1}
+      GPIOB_PDDR |= (1 << 16)
+    case INPUT :
+      PORTB_PCR16 = $PORTB_PCR16 {MUX:1}
+      GPIOB_PDDR &= (1 << 16)
+    case INPUT_PULLUP :
+      PORTB_PCR16 = $PORTB_PCR16 {MUX:1, PE, PS}
+      GPIOB_PDDR &= (1 << 16)
+    }
+  case D1 : // PTB17
+    switch mode {
+    case OUTPUT :
+      PORTB_PCR17 = $PORTB_PCR17 {MUX:1}
+      GPIOB_PDDR |= (1 << 17)
+    case INPUT :
+      PORTB_PCR17 = $PORTB_PCR17 {MUX:1}
+      GPIOB_PDDR &= (1 << 17)
+    case INPUT_PULLUP :
+      PORTB_PCR17 = $PORTB_PCR17 {MUX:1, PE, PS}
+      GPIOB_PDDR &= (1 << 17)
+    }
+  case D2 : // PTD0
+    switch mode {
+    case OUTPUT :
+      PORTD_PCR0 = $PORTD_PCR0 {MUX:1}
+      GPIOD_PDDR |= (1 << 0)
+    case INPUT :
+      PORTD_PCR0 = $PORTD_PCR0 {MUX:1}
+      GPIOD_PDDR &= (1 << 0)
+    case INPUT_PULLUP :
+      PORTD_PCR0 = $PORTD_PCR0 {MUX:1, PE, PS}
+      GPIOD_PDDR &= (1 << 0)
+    }
+  case D3 : // PTA12
+    switch mode {
+    case OUTPUT :
+      PORTA_PCR12 = $PORTA_PCR12 {MUX:1}
+      GPIOA_PDDR |= (1 << 12)
+    case INPUT :
+      PORTA_PCR12 = $PORTA_PCR12 {MUX:1}
+      GPIOA_PDDR &= (1 << 12)
+    case INPUT_PULLUP :
+      PORTA_PCR12 = $PORTA_PCR12 {MUX:1, PE, PS}
+      GPIOA_PDDR &= (1 << 12)
+    }
+  case D4 : // PTA13
+    switch mode {
+    case OUTPUT :
+      PORTA_PCR13 = $PORTA_PCR13 {MUX:1}
+      GPIOA_PDDR |= (1 << 13)
+    case INPUT :
+      PORTA_PCR13 = $PORTA_PCR13 {MUX:1}
+      GPIOA_PDDR &= (1 << 13)
+    case INPUT_PULLUP :
+      PORTA_PCR13 = $PORTA_PCR13 {MUX:1, PE, PS}
+      GPIOA_PDDR &= (1 << 13)
+    }
+  case D5 : // PTD7
+    switch mode {
+    case OUTPUT :
+      PORTD_PCR7 = $PORTD_PCR7 {MUX:1}
+      GPIOD_PDDR |= (1 << 7)
+    case INPUT :
+      PORTD_PCR7 = $PORTD_PCR7 {MUX:1}
+      GPIOD_PDDR &= (1 << 7)
+    case INPUT_PULLUP :
+      PORTD_PCR7 = $PORTD_PCR7 {MUX:1, PE, PS}
+      GPIOD_PDDR &= (1 << 7)
+    }
+  case D6 : // PTD4
+    switch mode {
+    case OUTPUT :
+      PORTD_PCR4 = $PORTD_PCR4 {MUX:1}
+      GPIOD_PDDR |= (1 << 4)
+    case INPUT :
+      PORTD_PCR4 = $PORTD_PCR4 {MUX:1}
+      GPIOD_PDDR &= (1 << 4)
+    case INPUT_PULLUP :
+      PORTD_PCR4 = $PORTD_PCR4 {MUX:1, PE, PS}
+      GPIOD_PDDR &= (1 << 4)
+    }
+  case D7 : // PTD2
+    switch mode {
+    case OUTPUT :
+      PORTD_PCR2 = $PORTD_PCR2 {MUX:1}
+      GPIOD_PDDR |= (1 << 2)
+    case INPUT :
+      PORTD_PCR2 = $PORTD_PCR2 {MUX:1}
+      GPIOD_PDDR &= (1 << 2)
+    case INPUT_PULLUP :
+      PORTD_PCR2 = $PORTD_PCR2 {MUX:1, PE, PS}
+      GPIOD_PDDR &= (1 << 2)
+    }
+  case D8 : // PTD3
+    switch mode {
+    case OUTPUT :
+      PORTD_PCR3 = $PORTD_PCR3 {MUX:1}
+      GPIOD_PDDR |= (1 << 3)
+    case INPUT :
+      PORTD_PCR3 = $PORTD_PCR3 {MUX:1}
+      GPIOD_PDDR &= (1 << 3)
+    case INPUT_PULLUP :
+      PORTD_PCR3 = $PORTD_PCR3 {MUX:1, PE, PS}
+      GPIOD_PDDR &= (1 << 3)
+    }
+  case D9  : // PTC3
+    switch mode {
+    case OUTPUT :
+      PORTC_PCR3 = $PORTC_PCR3 {MUX:1}
+      GPIOC_PDDR |= (1 << 3)
+    case INPUT :
+      PORTC_PCR3 = $PORTC_PCR3 {MUX:1}
+      GPIOC_PDDR &= (1 << 3)
+    case INPUT_PULLUP :
+      PORTC_PCR3 = $PORTC_PCR3 {MUX:1, PE, PS}
+      GPIOC_PDDR &= (1 << 3)
+    }
+  case D10 : // PTC4
+    switch mode {
+    case OUTPUT :
+      PORTC_PCR4 = $PORTC_PCR4 {MUX:1}
+      GPIOC_PDDR |= (1 << 4)
+    case INPUT :
+      PORTC_PCR4 = $PORTC_PCR4 {MUX:1}
+      GPIOC_PDDR &= (1 << 4)
+    case INPUT_PULLUP :
+      PORTC_PCR4 = $PORTC_PCR4 {MUX:1, PE, PS}
+      GPIOC_PDDR &= (1 << 4)
+    }
+  case D11 : // PTC6
+    switch mode {
+    case OUTPUT :
+      PORTC_PCR6 = $PORTC_PCR6 {MUX:1}
+      GPIOC_PDDR |= (1 << 6)
+    case INPUT :
+      PORTC_PCR6 = $PORTC_PCR6 {MUX:1}
+      GPIOC_PDDR &= (1 << 6)
+    case INPUT_PULLUP :
+      PORTC_PCR6 = $PORTC_PCR6 {MUX:1, PE, PS}
+      GPIOC_PDDR &= (1 << 6)
+    }
+  case D12 : // PTC7
+    switch mode {
+    case OUTPUT :
+      PORTC_PCR7 = $PORTC_PCR7 {MUX:1}
+      GPIOC_PDDR |= (1 << 7)
+    case INPUT :
+      PORTC_PCR7 = $PORTC_PCR7 {MUX:1}
+      GPIOC_PDDR &= (1 << 7)
+    case INPUT_PULLUP :
+      PORTC_PCR7 = $PORTC_PCR7 {MUX:1, PE, PS}
+      GPIOC_PDDR &= (1 << 7)
+    }
+  // D13 réservée
+  case D14 : // PTD1
+    switch mode {
+    case OUTPUT :
+      PORTD_PCR1 = $PORTD_PCR1 {MUX:1}
+      GPIOD_PDDR |= (1 << 1)
+    case INPUT :
+      PORTD_PCR1 = $PORTD_PCR1 {MUX:1}
+      GPIOD_PDDR &= (1 << 1)
+    case INPUT_PULLUP :
+      PORTD_PCR1 = $PORTD_PCR1 {MUX:1, PE, PS}
+      GPIOD_PDDR &= (1 << 1)
+    }
+  case D15 : // PTC0
+    switch mode {
+    case OUTPUT :
+      PORTC_PCR0 = $PORTC_PCR0 {MUX:1}
+      GPIOC_PDDR |= (1 << 0)
+    case INPUT :
+      PORTC_PCR0 = $PORTC_PCR0 {MUX:1}
+      GPIOC_PDDR &= (1 << 0)
+    case INPUT_PULLUP :
+      PORTC_PCR0 = $PORTC_PCR0 {MUX:1, PE, PS}
+      GPIOC_PDDR &= (1 << 0)
+    }
+  case D16 : // PTB0
+    switch mode {
+    case OUTPUT :
+      PORTB_PCR0 = $PORTB_PCR0 {MUX:1}
+      GPIOB_PDDR |= (1 << 0)
+    case INPUT :
+      PORTB_PCR0 = $PORTB_PCR0 {MUX:1}
+      GPIOB_PDDR &= (1 << 0)
+    case INPUT_PULLUP :
+      PORTB_PCR0 = $PORTB_PCR0 {MUX:1, PE, PS}
+      GPIOB_PDDR &= (1 << 0)
+    }
+  case D17 : // PTB1
+    switch mode {
+    case OUTPUT :
+      PORTB_PCR1 = $PORTB_PCR1 {MUX:1}
+      GPIOB_PDDR |= (1 << 1)
+    case INPUT :
+      PORTB_PCR1 = $PORTB_PCR1 {MUX:1}
+      GPIOB_PDDR &= (1 << 1)
+    case INPUT_PULLUP :
+      PORTB_PCR1 = $PORTB_PCR1 {MUX:1, PE, PS}
+      GPIOB_PDDR &= (1 << 1)
+    }
+  case D18 : // PTB3
+    switch mode {
+    case OUTPUT :
+      PORTB_PCR3 = $PORTB_PCR3 {MUX:1}
+      GPIOB_PDDR |= (1 << 3)
+    case INPUT :
+      PORTB_PCR3 = $PORTB_PCR3 {MUX:1}
+      GPIOB_PDDR &= (1 << 3)
+    case INPUT_PULLUP :
+      PORTB_PCR3 = $PORTB_PCR3 {MUX:1, PE, PS}
+      GPIOB_PDDR &= (1 << 3)
+    }
+  case D19 : // PTB2
+    switch mode {
+    case OUTPUT :
+      PORTB_PCR2 = $PORTB_PCR2 {MUX:1}
+      GPIOB_PDDR |= (1 << 2)
+    case INPUT :
+      PORTB_PCR2 = $PORTB_PCR2 {MUX:1}
+      GPIOB_PDDR &= (1 << 2)
+    case INPUT_PULLUP :
+      PORTB_PCR2 = $PORTB_PCR2 {MUX:1, PE, PS}
+      GPIOB_PDDR &= (1 << 2)
+    }
+  case D20 : // PTD5
+    switch mode {
+    case OUTPUT :
+      PORTD_PCR5 = $PORTD_PCR5 {MUX:1}
+      GPIOD_PDDR |= (1 << 5)
+    case INPUT :
+      PORTD_PCR5 = $PORTD_PCR5 {MUX:1}
+      GPIOD_PDDR &= (1 << 5)
+    case INPUT_PULLUP :
+      PORTD_PCR5 = $PORTD_PCR5 {MUX:1, PE, PS}
+      GPIOD_PDDR &= (1 << 5)
+    }
+  case D21 : // PTD6
+    switch mode {
+    case OUTPUT :
+      PORTD_PCR6 = $PORTD_PCR6 {MUX:1}
+      GPIOD_PDDR |= (1 << 6)
+    case INPUT :
+      PORTD_PCR6 = $PORTD_PCR6 {MUX:1}
+      GPIOD_PDDR &= (1 << 6)
+    case INPUT_PULLUP :
+      PORTD_PCR6 = $PORTD_PCR6 {MUX:1, PE, PS}
+      GPIOD_PDDR &= (1 << 6)
+    }
+  case D22 : // PTC1
+    switch mode {
+    case OUTPUT :
+      PORTC_PCR1 = $PORTC_PCR1 {MUX:1}
+      GPIOC_PDDR |= (1 << 1)
+    case INPUT :
+      PORTC_PCR1 = $PORTC_PCR1 {MUX:1}
+      GPIOC_PDDR &= (1 << 1)
+    case INPUT_PULLUP :
+      PORTC_PCR1 = $PORTC_PCR1 {MUX:1, PE, PS}
+      GPIOC_PDDR &= (1 << 1)
+    }
+  case D23 : // PTC2
+    switch mode {
+    case OUTPUT :
+      PORTC_PCR2 = $PORTC_PCR2 {MUX:1}
+      GPIOC_PDDR |= (1 << 2)
+    case INPUT :
+      PORTC_PCR2 = $PORTC_PCR2 {MUX:1}
+      GPIOC_PDDR &= (1 << 2)
+    case INPUT_PULLUP :
+      PORTC_PCR2 = $PORTC_PCR2 {MUX:1, PE, PS}
+      GPIOC_PDDR &= (1 << 2)
+    }
+  }
+}
+
+//··············································································
+
+public func `user `panic `service `kernel
+write @noUnusedWarning (?port:port $digitalPort
+                        ?value $bool) {
+  switch port {
+  case D0 : // PTB16
+    if value {
+      GPIOB_PSOR = 1 << 16 ;
+    }else{
+      GPIOB_PCOR = 1 << 16 ;
+    }
+  case D1 : // PTB17
+    if value {
+      GPIOB_PSOR = 1 << 17 ;
+    }else{
+      GPIOB_PCOR = 1 << 17 ;
+    }
+  case D2 : // PTD0
+    if value {
+      GPIOD_PSOR = 1 << 0 ;
+    }else{
+      GPIOD_PCOR = 1 << 0 ;
+    }
+  case D3 : // PTA12
+    if value {
+      GPIOA_PSOR = 1 << 12 ;
+    }else{
+      GPIOA_PCOR = 1 << 12 ;
+    }
+  case D4 : // PTA13
+    if value {
+      GPIOA_PSOR = 1 << 13 ;
+    }else{
+      GPIOA_PCOR = 1 << 13 ;
+    }
+  case D5 : // PTD7
+    if value {
+      GPIOD_PSOR = 1 << 7 ;
+    }else{
+      GPIOD_PCOR = 1 << 7 ;
+    }
+  case D6 : // PTD4
+    if value {
+      GPIOD_PSOR = 1 << 4 ;
+    }else{
+      GPIOD_PCOR = 1 << 4 ;
+    }
+  case D7 : // PTD2
+    if value {
+      GPIOD_PSOR = 1 << 2 ;
+    }else{
+      GPIOD_PCOR = 1 << 2 ;
+    }
+  case D8 : // PTD3
+    if value {
+      GPIOD_PSOR = 1 << 3 ;
+    }else{
+      GPIOD_PCOR = 1 << 3 ;
+    }
+  case D9  : // PTC3
+    if value {
+      GPIOC_PSOR = 1 << 3 ;
+    }else{
+      GPIOC_PCOR = 1 << 3 ;
+    }
+  case D10 : // PTC4
+    if value {
+      GPIOC_PSOR = 1 << 4 ;
+    }else{
+      GPIOC_PCOR = 1 << 4 ;
+    }
+  case D11 : // PTC6
+    if value {
+      GPIOC_PSOR = 1 << 6 ;
+    }else{
+      GPIOC_PCOR = 1 << 6 ;
+    }
+  case D12 : // PTC7
+    if value {
+      GPIOC_PSOR = 1 << 7 ;
+    }else{
+      GPIOC_PCOR = 1 << 7 ;
+    }
+  // D13 réservée
+  case D14 : // PTD1
+    if value {
+      GPIOD_PSOR = 1 << 1 ;
+    }else{
+      GPIOD_PCOR = 1 << 1 ;
+    }
+  case D15 : // PTC0
+    if value {
+      GPIOC_PSOR = 1 << 0 ;
+    }else{
+      GPIOC_PCOR = 1 << 0 ;
+    }
+  case D16 : // PTB0
+    if value {
+      GPIOB_PSOR = 1 << 0 ;
+    }else{
+      GPIOB_PCOR = 1 << 0 ;
+    }
+  case D17 : // PTB1
+    if value {
+      GPIOB_PSOR = 1 << 1 ;
+    }else{
+      GPIOB_PCOR = 1 << 1 ;
+    }
+  case D18 : // PTB3
+    if value {
+      GPIOB_PSOR = 1 << 3 ;
+    }else{
+      GPIOB_PCOR = 1 << 3 ;
+    }
+  case D19 : // PTB2
+    if value {
+      GPIOB_PSOR = 1 << 2 ;
+    }else{
+      GPIOB_PCOR = 1 << 2 ;
+    }
+  case D20 : // PTD5
+    if value {
+      GPIOD_PSOR = 1 << 5 ;
+    }else{
+      GPIOD_PCOR = 1 << 5 ;
+    }
+  case D21 : // PTD6
+    if value {
+      GPIOD_PSOR = 1 << 6 ;
+    }else{
+      GPIOD_PCOR = 1 << 6 ;
+    }
+  case D22 : // PTC1
+    if value {
+      GPIOC_PSOR = 1 << 1 ;
+    }else{
+      GPIOC_PCOR = 1 << 1 ;
+    }
+  case D23 : // PTC2
+    if value {
+      GPIOC_PSOR = 1 << 2 ;
+    }else{
+      GPIOC_PCOR = 1 << 2 ;
+    }
+  }
+}
+
+//··············································································
+
+public func `user `panic `service `kernel
+toggle @noUnusedWarning (?port:port $digitalPort) {
+  switch port {
+  case D0 : // PTB16
+    GPIOB_PTOR = 1 << 16 ;
+  case D1 : // PTB17
+    GPIOB_PTOR = 1 << 17 ;
+  case D2 : // PTD0
+    GPIOD_PTOR = 1 << 0 ;
+  case D3 : // PTA12
+    GPIOA_PTOR = 1 << 12 ;
+  case D4 : // PTA13
+    GPIOA_PTOR = 1 << 13 ;
+  case D5 : // PTD7
+    GPIOD_PTOR = 1 << 7 ;
+  case D6 : // PTD4
+    GPIOD_PTOR = 1 << 4 ;
+  case D7 : // PTD2
+    GPIOD_PTOR = 1 << 2 ;
+  case D8 : // PTD3
+    GPIOD_PTOR = 1 << 3 ;
+  case D9  : // PTC3
+    GPIOC_PTOR = 1 << 3 ;
+  case D10 : // PTC4
+    GPIOC_PTOR = 1 << 4 ;
+  case D11 : // PTC6
+    GPIOC_PTOR = 1 << 6 ;
+  case D12 : // PTC7
+    GPIOC_PTOR = 1 << 7 ;
+  // D13 réservée
+  case D14 : // PTD1
+    GPIOD_PTOR = 1 << 1 ;
+  case D15 : // PTC0
+    GPIOC_PTOR = 1 << 0 ;
+  case D16 : // PTB0
+    GPIOB_PTOR = 1 << 0 ;
+  case D17 : // PTB1
+    GPIOB_PTOR = 1 << 1 ;
+  case D18 : // PTB3
+    GPIOB_PTOR = 1 << 3 ;
+  case D19 : // PTB2
+    GPIOB_PTOR = 1 << 2 ;
+  case D20 : // PTD5
+    GPIOD_PTOR = 1 << 5 ;
+  case D21 : // PTD6
+    GPIOD_PTOR = 1 << 6 ;
+  case D22 : // PTC1
+    GPIOC_PTOR = 1 << 1 ;
+  case D23 : // PTC2
+    GPIOC_PTOR = 1 << 2 ;
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————

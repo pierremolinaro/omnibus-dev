@@ -1,5 +1,17 @@
 target "teensy-3-1-tp"
 
+//-----------------------------------------------------------------------------*
+
+let LED_L1 = $digitalPort.D4
+
+//-----------------------------------------------------------------------------*
+
+init 1000 {
+  digitalMode (!port:LED_L1 !mode:.OUTPUT)
+}
+
+//-----------------------------------------------------------------------------*
+
 let SIZE = 9
 
 type $A : $uint32 [SIZE]
@@ -22,7 +34,7 @@ task T priority 12 stackSize 512 {
 
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline +%= 1000
-    leds.write (!toggle:LED_L1)
+    toggle (!port:LED_L1)
     self.array [self.index] = 0
     self.index +%= 1
     if self.index == SIZE {

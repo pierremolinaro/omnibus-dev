@@ -2,6 +2,24 @@ target "teensy-3-1-tp"
 
 //-----------------------------------------------------------------------------*
 
+let LED_L0 = $digitalPort.D3
+let LED_L1 = $digitalPort.D4
+let LED_L2 = $digitalPort.D5
+let LED_L3 = $digitalPort.D6
+let LED_L4 = $digitalPort.D7
+
+//-----------------------------------------------------------------------------*
+
+init 1000 {
+  digitalMode (!port:LED_L0 !mode:.OUTPUT)
+  digitalMode (!port:LED_L1 !mode:.OUTPUT)
+  digitalMode (!port:LED_L2 !mode:.OUTPUT)
+  digitalMode (!port:LED_L3 !mode:.OUTPUT)
+  digitalMode (!port:LED_L4 !mode:.OUTPUT)
+}
+
+//-----------------------------------------------------------------------------*
+
 struct $rendezVous {
   var inputWaitList = $taskList ()
   var outputWaitList = $taskList ()
@@ -66,11 +84,11 @@ task T0 priority 0 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     rdvs.output ()
     self.top += 250
-    leds.write (!on:LED_L0)
+    write (!port:LED_L0 !true)
     time.waitUntilMS (!deadline:self.top)
     rdvs.output ()
     self.top += 250
-    leds.write (!off:LED_L0)
+    write (!port:LED_L0 !false)
   }
 }
 
@@ -79,9 +97,9 @@ task T0 priority 0 stackSize 512 {
 task T1 priority 1 stackSize 512 {
 
   while rdvs.input () {
-    leds.write (!on:LED_L1)
+    write (!port:LED_L1 !true)
     rdvs.input ()
-    leds.write (!off:LED_L1)
+    write (!port:LED_L1 !false)
   }
 }
 

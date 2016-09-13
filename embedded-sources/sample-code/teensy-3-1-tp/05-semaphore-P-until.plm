@@ -1,5 +1,10 @@
 target "teensy-3-1-tp"
 
+init 1000 {
+  digitalMode (!port:.D3 !mode:.OUTPUT)
+  digitalMode (!port:.D4 !mode:.OUTPUT)
+}
+
 //-----------------------------------------------------------------------------*
 
 struct $monSemaphore {
@@ -44,11 +49,11 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s.V ()
     self.top += 300
-    leds.write (!on:LED_L0)
+    write (!port:.D3 !true)
     time.waitUntilMS (!deadline:self.top)
     s.V ()
     self.top += 700
-    leds.write (!off:LED_L0)
+    write (!port:.D3 !false)
   }
 }
 
@@ -60,10 +65,10 @@ task T2 priority 2 stackSize 512 {
   while time.waitUntilMS (!deadline:0) { // no wait...
     let r = s.P_until (!deadline:self.top)
     if r {
-      leds.write (!toggle:LED_L1)
+      toggle (!port:.D4)
     }else{
       self.top += 400
-      leds.write (!toggle:LED_L4)
+      toggle (!port:.D4)
     }
   }
 }

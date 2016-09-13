@@ -2,6 +2,22 @@ target "teensy-3-1-tp"
 
 //-----------------------------------------------------------------------------*
 
+let LED_L0 = $digitalPort.D3
+let LED_L1 = $digitalPort.D4
+let LED_L2 = $digitalPort.D5
+let LED_L4 = $digitalPort.D7
+
+//-----------------------------------------------------------------------------*
+
+init 1000 {
+  digitalMode (!port:LED_L0 !mode:.OUTPUT)
+  digitalMode (!port:LED_L1 !mode:.OUTPUT)
+  digitalMode (!port:LED_L2 !mode:.OUTPUT)
+  digitalMode (!port:LED_L4 !mode:.OUTPUT)
+}
+
+//-----------------------------------------------------------------------------*
+
 struct $rendezVousDataé {
   var autoriserLecture  = $semaphore (!value:0)
   var autoriserEcriture = $semaphore (!value:1)
@@ -51,7 +67,7 @@ task T0 priority 0 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     rdvs.output (!data:self.n)
     rdvs2.output (!data:self.n)
-    leds.write (!toggle:LED_L0)
+    toggle (!port:LED_L0)
     self.top += 500
     self.n += 1
   }
@@ -62,7 +78,7 @@ task T0 priority 0 stackSize 512 {
 task T1 priority 1 stackSize 1024 {
 
   while rdvs.entrée (?data:let x) {
-    leds.write (!toggle:LED_L1)
+    toggle (!port:LED_L1)
     s.wait ()
       lcd.goto (!line:0 !column:0)
       lcd.printUnsigned (!x)
@@ -76,7 +92,7 @@ task T2 priority 2 stackSize 1024 {
   var deadline $uint32 = 0
 
   while rdvs2.entrée (?data:let x) {
-    leds.write (!toggle:LED_L2)
+    toggle (!port:LED_L2)
     s.wait ()
       lcd.goto (!line:1 !column:0)
       lcd.printUnsigned (!x)
@@ -85,7 +101,7 @@ task T2 priority 2 stackSize 1024 {
   
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline += 200
-    leds.write (!toggle:LED_L4)
+    toggle (!port:LED_L4)
   }
 }
 

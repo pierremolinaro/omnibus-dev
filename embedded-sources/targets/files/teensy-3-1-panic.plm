@@ -1,6 +1,11 @@
 //——————————————————————————————————————————————————————————————————————————————
 
 panic func setup 0 {
+  digitalMode (!port:.D3 !mode:.OUTPUT)
+  digitalMode (!port:.D4 !mode:.OUTPUT)
+  digitalMode (!port:.D5 !mode:.OUTPUT)
+  digitalMode (!port:.D6 !mode:.OUTPUT)
+  digitalMode (!port:.D7 !mode:.OUTPUT)
   lcd.clearScreenInPanicMode ()
   lcd.gotoInPanicMode (!line:0 !column:0)
   lcd.printStringInPanicMode (!FILE)
@@ -16,9 +21,11 @@ panic func setup 0 {
 
 panic func loop 0 {
   time.busyWaitingDuringMS (!50)
-  leds.write (!on:LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
-  time.busyWaitingDuringMS (!50)
-  leds.write (!off:LED_L0 | LED_L1 | LED_L2 | LED_L3 | LED_L4)
+  toggle (!port:.D3)
+  toggle (!port:.D4)
+  toggle (!port:.D5)
+  toggle (!port:.D6)
+  toggle (!port:.D7)
 }
 
 //——————————————————————————————————————————————————————————————————————————————
