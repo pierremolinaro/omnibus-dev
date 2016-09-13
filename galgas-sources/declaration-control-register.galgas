@@ -493,7 +493,7 @@ func fieldIndexColumns ?let @uint inBitCount -> @string outResult {
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func arrayIndexListFor ?size:@uint inSize -> @uintlist outResult {
+func arrayIndexListFor ?size:let @uint inSize -> @uintlist outResult {
   outResult = {}
   for i in 0 ..< inSize do
     outResult += !i

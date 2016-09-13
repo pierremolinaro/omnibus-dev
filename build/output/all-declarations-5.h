@@ -617,8 +617,8 @@ void extensionMethod_panicSemanticAnalysis (const class GALGAS_panicClauseListAS
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_lstring function_panicNameForInvocationGraph (class GALGAS_string inArgument0,
-                                                           class GALGAS_lbigint inArgument1,
+class GALGAS_lstring function_panicNameForInvocationGraph (const class GALGAS_string & constinArgument0,
+                                                           const class GALGAS_lbigint & constinArgument1,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
@@ -738,7 +738,7 @@ void extensionMethod_sectionCodeGeneration (const class GALGAS_routineMapIR inOb
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForSectionCall (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForSectionCall (const class GALGAS_string & constinArgument0,
                                                      class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -748,7 +748,7 @@ class GALGAS_string function_llvmNameForSectionCall (class GALGAS_string inArgum
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForSectionImplementation (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForSectionImplementation (const class GALGAS_string & constinArgument0,
                                                                class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
@@ -1012,8 +1012,8 @@ void callExtensionMethod_generateInfixOperatorCode (const class cPtr_infixOperat
 //---------------------------------------------------------------------------------------------------------------------*
 
 typedef class GALGAS_bigint (*enterExtensionGetter_infixOperatorDescription_performStaticOperation) (const class cPtr_infixOperatorDescription * inObject,
-                                                                                                     const class GALGAS_bigint & constinArgument0,
-                                                                                                     const class GALGAS_bigint & constinArgument1,
+                                                                                                     const class GALGAS_bigint constinArgument0,
+                                                                                                     const class GALGAS_bigint constinArgument1,
                                                                                                      C_Compiler * inCompiler
                                                                                                      COMMA_LOCATION_ARGS) ;
 
@@ -1025,8 +1025,8 @@ void enterExtensionGetter_performStaticOperation (const int32_t inClassIndex,
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infixOperatorDescription * inObject,
-                                                                const GALGAS_bigint & constin_inLeft,
-                                                                const GALGAS_bigint & constin_inRight,
+                                                                const GALGAS_bigint constin_inLeft,
+                                                                const GALGAS_bigint constin_inRight,
                                                                 class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 

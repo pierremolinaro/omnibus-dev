@@ -42,8 +42,6 @@ class cTokenFor_plm_5F_lexique : public cToken {
 class C_Lexique_plm_5F_lexique : public C_Lexique {
 //--- Constructors
   public : C_Lexique_plm_5F_lexique (C_Compiler * inCallerCompiler,
-                       const C_String & inDependencyFileExtension,
-                       const C_String & inDependencyFilePath,
                        const C_String & inSourceFileName
                        COMMA_LOCATION_ARGS) ;
 
@@ -115,6 +113,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_service,
    kToken_struct,
    kToken_stackSize,
+   kToken_switch,
    kToken_sync,
    kToken_target,
    kToken_task,
@@ -204,7 +203,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 108 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 109 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -8163,15 +8162,20 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_procedure_5F_call_i82_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_assignment_5F_target_i83_ (GALGAS_assignmentTargetAST & outArgument0,
-                                                                 C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_assignment_5F_target_i83_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i84_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_instruction_i83_ (GALGAS_instructionListAST & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i84_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i83_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_assignment_5F_target_i84_ (GALGAS_assignmentTargetAST & outArgument0,
+                                                                 C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_assignment_5F_target_i84_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i85_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i85_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 
@@ -8339,6 +8343,10 @@ class cParser_plm_5F_syntax {
   protected : virtual int32_t select_plm_5F_syntax_80 (C_Lexique_plm_5F_lexique *) = 0 ;
 
   protected : virtual int32_t select_plm_5F_syntax_81 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_82 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_83 (C_Lexique_plm_5F_lexique *) = 0 ;
 
 
 } ;
@@ -11395,6 +11403,242 @@ class cPtr_structureDeclaration : public cPtr_abstractDeclaration {
   public : VIRTUAL_IN_DEBUG GALGAS_sectionDeclarationListAST getter_mSectionListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_primitiveDeclarationListAST getter_mPrimitiveListAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardDeclarationListAST getter_mGuardListAST (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @switchInstructionAST class                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_switchInstructionAST : public GALGAS_instructionAST {
+//--- Constructor
+  public : GALGAS_switchInstructionAST (void) ;
+
+//---
+  public : inline const class cPtr_switchInstructionAST * ptr (void) const { return (const cPtr_switchInstructionAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_switchInstructionAST (const cPtr_switchInstructionAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_switchInstructionAST extractObject (const GALGAS_object & inObject,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_switchInstructionAST constructor_new (const class GALGAS_expressionAST & inOperand0,
+                                                                     const class GALGAS_location & inOperand1,
+                                                                     const class GALGAS_switchCaseList & inOperand2,
+                                                                     const class GALGAS_location & inOperand3
+                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_switchInstructionAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_test_5F_expression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_while_5F_instruction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_switchCaseList getter_mSwitchCaseList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSwitchExpression (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_switchInstructionAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchInstructionAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                @switchCaseList list                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_switchCaseList : public AC_GALGAS_list {
+//--------------------------------- Default constructor
+  public : GALGAS_switchCaseList (void) ;
+
+//--------------------------------- List constructor used by listmap
+  public : GALGAS_switchCaseList (cSharedList * inSharedListPtr) ;
+
+//--------------------------------- Element constructor used by listmap
+  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                  const class GALGAS_lstringlist & in_mCaseIdentifiers,
+                                                  const class GALGAS_instructionListAST & in_mCaseInstructionList
+                                                  COMMA_LOCATION_ARGS) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_switchCaseList extractObject (const GALGAS_object & inObject,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_switchCaseList constructor_emptyList (LOCATION_ARGS) ;
+
+  public : static class GALGAS_switchCaseList constructor_listWithValue (const class GALGAS_lstringlist & inOperand0,
+                                                                         const class GALGAS_instructionListAST & inOperand1
+                                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_switchCaseList inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstringlist & inOperand0,
+                                                      const class GALGAS_instructionListAST & inOperand1
+                                                      COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public : VIRTUAL_IN_DEBUG GALGAS_switchCaseList add_operation (const GALGAS_switchCaseList & inOperand,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstringlist constinArgument0,
+                                                       class GALGAS_instructionListAST constinArgument1,
+                                                       class GALGAS_uint constinArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstringlist & outArgument0,
+                                                  class GALGAS_instructionListAST & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstringlist & outArgument0,
+                                                 class GALGAS_instructionListAST & outArgument1,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstringlist & outArgument0,
+                                                       class GALGAS_instructionListAST & outArgument1,
+                                                       class GALGAS_uint constinArgument2,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstringlist & outArgument0,
+                                               class GALGAS_instructionListAST & outArgument1,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstringlist & outArgument0,
+                                              class GALGAS_instructionListAST & outArgument1,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mCaseIdentifiersAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                     C_Compiler * inCompiler
+                                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mCaseInstructionListAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_switchCaseList getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_switchCaseList getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_switchCaseList getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_switchCaseList ;
+ 
+} ; // End of GALGAS_switchCaseList class
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Enumerator declaration                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumerator_switchCaseList : public cGenericAbstractEnumerator {
+  public : cEnumerator_switchCaseList (const GALGAS_switchCaseList & inEnumeratedObject,
+                                       const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_lstringlist current_mCaseIdentifiers (LOCATION_ARGS) const ;
+  public : class GALGAS_instructionListAST current_mCaseInstructionList (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_switchCaseList_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchCaseList ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Pointer class for @switchInstructionAST class                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_switchInstructionAST : public cPtr_instructionAST {
+//--- Attributes
+  public : GALGAS_expressionAST mAttribute_mSwitchExpression ;
+  public : GALGAS_location mAttribute_mEndOf_5F_test_5F_expression ;
+  public : GALGAS_switchCaseList mAttribute_mSwitchCaseList ;
+  public : GALGAS_location mAttribute_mEndOf_5F_while_5F_instruction ;
+
+//--- Constructor
+  public : cPtr_switchInstructionAST (const GALGAS_expressionAST & in_mSwitchExpression,
+                                      const GALGAS_location & in_mEndOf_5F_test_5F_expression,
+                                      const GALGAS_switchCaseList & in_mSwitchCaseList,
+                                      const GALGAS_location & in_mEndOf_5F_while_5F_instruction
+                                      COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSwitchExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_test_5F_expression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_switchCaseList getter_mSwitchCaseList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_while_5F_instruction (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

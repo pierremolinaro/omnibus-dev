@@ -378,7 +378,7 @@ class GALGAS_string function_llvmAttributeFunction (class C_Compiler * inCompile
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForFunction (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForFunction (const class GALGAS_string & constinArgument0,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -388,7 +388,7 @@ class GALGAS_string function_llvmNameForFunction (class GALGAS_string inArgument
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForLocalVariable (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForLocalVariable (const class GALGAS_string & constinArgument0,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -398,7 +398,7 @@ class GALGAS_string function_llvmNameForLocalVariable (class GALGAS_string inArg
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForServiceCall (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForServiceCall (const class GALGAS_string & constinArgument0,
                                                      class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -408,7 +408,7 @@ class GALGAS_string function_llvmNameForServiceCall (class GALGAS_string inArgum
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForServiceImplementation (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForServiceImplementation (const class GALGAS_string & constinArgument0,
                                                                class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
@@ -418,7 +418,7 @@ class GALGAS_string function_llvmNameForServiceImplementation (class GALGAS_stri
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForTaskGlobalVar (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForTaskGlobalVar (const class GALGAS_string & constinArgument0,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -455,7 +455,7 @@ class GALGAS_string function_llvmSeparatorLine (class C_Compiler * inCompiler
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmTitleComment (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmTitleComment (const class GALGAS_string & constinArgument0,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
@@ -1272,7 +1272,7 @@ void extensionMethod_generateLLVMinitCode (const class GALGAS_initListIR inObjec
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForGlobalVariable (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForGlobalVariable (const class GALGAS_string & constinArgument0,
                                                         class C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
@@ -1560,7 +1560,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentL
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_string extensionGetter_requiredActualPassingModeForSelector (const class GALGAS_procFormalArgumentPassingMode & inObject,
-                                                                          class GALGAS_string inArgument0,
+                                                                          const class GALGAS_string & constinArgument0,
                                                                           class C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -2254,7 +2254,7 @@ void extensionMethod_isrSemanticAnalysis (const class GALGAS_isrDeclarationListA
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_lstring function_interruptNameForInvocationGraph (class GALGAS_lstring inArgument0,
+class GALGAS_lstring function_interruptNameForInvocationGraph (const class GALGAS_lstring & constinArgument0,
                                                                class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
@@ -2893,7 +2893,7 @@ void extensionMethod_interruptCodeGeneration (const class GALGAS_interruptMapIR 
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForISR (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForISR (const class GALGAS_string & constinArgument0,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -2903,7 +2903,7 @@ class GALGAS_string function_llvmNameForISR (class GALGAS_string inArgument0,
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_lstring function_llvmNameForInterrupt (class GALGAS_lstring inArgument0,
+class GALGAS_lstring function_llvmNameForInterrupt (const class GALGAS_lstring & constinArgument0,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -3240,7 +3240,7 @@ void extensionMethod_primitiveCodeGeneration (const class GALGAS_routineMapIR in
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForPrimitiveCall (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForPrimitiveCall (const class GALGAS_string & constinArgument0,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -3250,7 +3250,7 @@ class GALGAS_string function_llvmNameForPrimitiveCall (class GALGAS_string inArg
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForPrimitiveImplementation (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForPrimitiveImplementation (const class GALGAS_string & constinArgument0,
                                                                  class C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -3870,7 +3870,7 @@ class cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard : public cEnu
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForGuardCall (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForGuardCall (const class GALGAS_string & constinArgument0,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -3880,7 +3880,7 @@ class GALGAS_string function_llvmNameForGuardCall (class GALGAS_string inArgumen
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForGuardImplementation (class GALGAS_string inArgument0,
+class GALGAS_string function_llvmNameForGuardImplementation (const class GALGAS_string & constinArgument0,
                                                              class C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 

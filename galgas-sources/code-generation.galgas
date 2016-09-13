@@ -46,7 +46,7 @@ func %once llvmSeparatorLine -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmTitleComment ?@string inTitle -> @string outTitle {
+func llvmTitleComment ?let @string inTitle -> @string outTitle {
   outTitle  = llvmSeparatorLine ()
   outTitle += ";    " + [inTitle stringByRightPadding !114!' '] + "*\n"
   outTitle += llvmSeparatorLine () + "\n"
@@ -61,7 +61,7 @@ func %once asSeparatorLine -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func asTitleComment ?@string inTitle -> @string outTitle {
+func asTitleComment ?let @string inTitle -> @string outTitle {
   outTitle  = asSeparatorLine ()
   outTitle += "@    " + [inTitle stringByRightPadding !114!' '] + "*\n"
   outTitle += asSeparatorLine () + "\n"

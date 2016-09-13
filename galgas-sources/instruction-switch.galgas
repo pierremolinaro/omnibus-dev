@@ -2,10 +2,18 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @callInstructionAST : @instructionAST {
-  @assignmentTargetAST mAssignmentTargetAST
-  @effectiveParameterListAST mArguments
-  @location mEndOfArguments
+list @switchCaseList {
+  @lstringlist mCaseIdentifiers
+  @instructionListAST mCaseInstructionList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @switchInstructionAST : @instructionAST {
+  @expressionAST mSwitchExpression
+  @location mEndOf_test_expression
+  @switchCaseList mSwitchCaseList
+  @location mEndOf_while_instruction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -16,19 +24,36 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <instruction> ?!@instructionListAST ioInstructionList {
-    <procedure_call> ?let routineCallInstruction
-    ioInstructionList += ![routineCallInstruction mEndOfArguments] !routineCallInstruction
+  rule <instruction> ?!@instructionListAST ioInstructionList  {
+    $switch$
+    let instructionLocation = @location.here
+    <expression> ?let @expressionAST switchExpression
+    let switchExpressionEndLocation = @location.here
+    ${$
+    @switchCaseList switchCaseList = {}
+    repeat
+      $case$
+      @lstringlist caseIdentifiers = {}
+      repeat
+        $identifier$ ?let caseIdf
+        caseIdentifiers += !caseIdf
+      while
+      end
+      $:$
+      <instructionList> ?let instructionList
+      switchCaseList += !caseIdentifiers !instructionList
+    while
+    end
+    let endOfInstruction = @location.here
+    $}$
+    ioInstructionList += !instructionLocation !@switchInstructionAST.new {
+      !switchExpression
+      !switchExpressionEndLocation
+      !switchCaseList
+      !endOfInstruction
+    }
   }
-
-  #·····················································································································
-
-  rule <procedure_call> !@callInstructionAST outInstruction {
-    <assignment_target> ?let assignmentTargetAST
-    <effective_parameters> ?let arguments ?let endOfArguments
-    outInstruction = @callInstructionAST.new {!assignmentTargetAST !arguments !endOfArguments}
-  }
-
+  
   #·····················································································································
 
 }
@@ -37,19 +62,10 @@ syntax extension plm_syntax {
 #  NOTE TYPES                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @callInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mAssignmentTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
-  for () in mArguments do
-    switch mEffectiveParameterKind
-    case input (*):
-    case inputWithType (* @lstring typeName *) :
-      if typeName.string != "" then
-        [!?ioGraph noteNode !.new {!"$" + typeName !typeName.location}]
-      end
-    case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-    case outputInput (*) :
-    case outputInputSelfVariable (*) :
-    end 
+override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+  [mSwitchExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  for (* instructionList) in mSwitchCaseList do
+    [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
@@ -57,30 +73,7 @@ override method @callInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @effectiveParameterPassingModeAST passingModeForActualSelector ?let @lstring inSelector -> @string outResult {
-  switch self
-  case input (*) : outResult = "?"
-  case inputWithType (* * *) : outResult = "?"
-  case output (* *) : outResult = "!"
-  case outputInput (*) : outResult = "!?"
-  case outputInputSelfVariable (*) : outResult = "!?"
-  end
-  if inSelector.string != "" then
-    outResult += inSelector.string + ":"
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @procEffectiveParameterList {
-  @effectiveParameterPassingModeAST mEffectiveParameterPassingMode
-  @lstring mSelector
-  @unifiedTypeMap-proxy mParameterType
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @callInstructionAST analyze
+override method @switchInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
@@ -94,31 +87,14 @@ override method @callInstructionAST analyze
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  [mAssignmentTargetAST analyzeAssignmentTarget
-    !self: inSelfType
-    !targetAccessKind:.readWrite
-    !propertiesAreMutable: inRoutineCanMutateProperties
-    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
-    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-    !context: inContext
-    !modes: inModeSet
-    !allowPanic: inAllowPanic
-    !?temporary: ioTemporaries
-    !?staticStringMap: ioGlobalLiteralStringMap
-    !?variableMap: ioVariableMap
-    !?alloca: ioAllocaList
-    !?instructionListIR: ioInstructionGenerationList
-    ?@objectIR currentObject
-    ?globalVariableReceiverName:let globalVariableReceiverName
-  ]
-#--- Analyze procedure call arguments
-  handleFunctionCallInExpression (
+#--- Analyze test expression
+  @instructionListIR switchExpressionGenerationList = {}
+  [mSwitchExpression analyzeExpression
     !self:inSelfType
-    !globalVariableReceiverName:globalVariableReceiverName
-    !propertiesAreMutable:inRoutineCanMutateProperties
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.null
     !context:inContext
     !modes:inModeSet
     !allowPanic:inAllowPanic
@@ -126,49 +102,129 @@ override method @callInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
-    !mArguments
-    !mEndOfArguments
-    !?ioInstructionGenerationList
-    !?currentObject
-    ?let returnedType
-  )
-  if returnedType != .null then
-    error mEndOfArguments : "the function cannot be called in instruction: lost return value"
+    !?instructionListIR:switchExpressionGenerationList
+    ?result:@objectIR switchValueIR
+  ]
+#--- Check inferred type
+  @enumConstantMap enumConstantMap
+  if [[switchValueIR kind] isEnumeration] then
+    [[switchValueIR kind] enumeration ?constantMap:enumConstantMap]
+  else
+    error mEndOf_test_expression
+      : "test expression type is '" + [switchValueIR key] + "', it should be boolean"
+      : enumConstantMap
   end
-#--- Generate IR
-#  if returnedType != .null then
-#    error routineName : "cannot be called in instruction: return value"
-#  end
+  if [switchValueIR isStatic] then
+    error mEndOf_test_expression : "test expression type should not be static"
+  end
+#--- Analyse case list
+  @stringset usedEnumerationValues = {}
+  @switchCaseListIR switchCaseListIR = {}
+  for (caseIdentifiers instructionList) in mSwitchCaseList do
+    @uintlist caseIdentifierIndexList = {}
+    for (caseIdf) in caseIdentifiers do
+      [enumConstantMap searchKey !caseIdf ?let @uint constantIdx]
+      caseIdentifierIndexList += !constantIdx
+      if [usedEnumerationValues hasKey !caseIdf] then
+        error caseIdf : "duplicated enumeration constant" fixit { remove }
+      end
+      usedEnumerationValues += !caseIdf
+    end
+    @instructionListIR instructionGenerationList = {}
+    [!?ioVariableMap openOverrideForRepeatBlock]
+    [instructionList analyzeBranchInstructionList
+      !self:inSelfType
+      !propertiesAreMutable:inRoutineCanMutateProperties
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !endOfInstructionList:mEndOf_while_instruction
+      !context:inContext
+      !modes:inModeSet
+      !allowPanic:inAllowPanic
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioVariableMap
+      !?alloca:ioAllocaList
+      !?instructionListIR:instructionGenerationList
+    ]
+    [!?ioVariableMap closeOverride !mEndOf_while_instruction]
+    switchCaseListIR += !caseIdentifierIndexList !instructionGenerationList
+  end  
+#--- Check all enumeration values are named in switch instructions
+  for (lkey *) in enumConstantMap do
+    if not [usedEnumerationValues hasKey !lkey] then
+      error mEndOf_test_expression : "missing '" + lkey + "' enumeration constant"
+    end  
+  end 
+#--- Code generation
+  ioInstructionGenerationList += !@switchInstructionIR.new {
+    ![mEndOf_test_expression locationIndex]
+    !switchExpressionGenerationList
+    !switchValueIR
+    !switchCaseListIR
+  }
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @procEffectiveParameterPassingModeIR {
-  case input
-  case output
-  case outputInput
+list @switchCaseListIR {
+  @uintlist mCaseIdentifierIndexes
+  @instructionListIR mCaseInstructionList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @procCallEffectiveParameterListIR {
-  @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
-  @objectIR mParameter
+class @switchInstructionIR : @abstractInstructionIR {
+  @uint mLabelIndex
+  @instructionListIR mSwitchExpressionGenerationList
+  @objectIR mSwitchExpression
+  @switchCaseListIR mCaseGenerationList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @routineKindIR {
-  case function
-  case primitiveInProcessorUserMode
-  case sectionInProcessorUserMode
-  case serviceInProcessorUserMode
-  case primitiveInProcessorPrivilegedMode
-  case sectionInProcessorPrivilegedMode
-  case serviceInProcessorPrivilegedMode
+override method @switchInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+#--- Generate instructions that compute switch expression
+  [mSwitchExpressionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#--- Generate switch instruction
+  let labelOtherwise = "switch." + mLabelIndex + ".otherwise"
+  ioLLVMcode += "  switch " + [mSwitchExpression llvmTypeName] + " " + [mSwitchExpression llvmName]
+  ioLLVMcode += ", label %" + labelOtherwise + " ["
+  for (caseIdentifierIndexes *) in mCaseGenerationList do (branchIdx)
+    for (caseIdfIndex) in caseIdentifierIndexes do
+      ioLLVMcode += [mSwitchExpression llvmTypeName] + " " + caseIdfIndex
+      ioLLVMcode += ", label %switch." + mLabelIndex + ".branch." + branchIdx
+    end
+  between
+    ioLLVMcode += " "
+  end
+  ioLLVMcode += "]\n\n"
+#--- Generate branches
+  for (* instructionList) in mCaseGenerationList do (branchIdx)
+    ioLLVMcode += "switch." + mLabelIndex + ".branch." + branchIdx + ":\n"
+    [instructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    ioLLVMcode += "  br label %" + labelOtherwise + "\n\n"
+  end
+#--- Otherwise label
+  ioLLVMcode += labelOtherwise + ":\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+override method @switchInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  [mSwitchExpressionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  for (* instructionList) in mCaseGenerationList do
+    [instructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

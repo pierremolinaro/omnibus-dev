@@ -161,7 +161,7 @@ getter @objectIR kind -> @typeKind outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @objectIR withType ?@unifiedTypeMap-proxy inType -> @objectIR outResult {
+getter @objectIR withType ?let @unifiedTypeMap-proxy inType -> @objectIR outResult {
   switch self
   case null : error [self location] : "<<@objectIR withType null>>" : outResult
   case possibleFunction (**) :
