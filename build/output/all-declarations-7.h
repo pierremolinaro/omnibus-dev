@@ -117,8 +117,8 @@ class GALGAS_objectIR function_checkAssignmentCompatibility (const class GALGAS_
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_lstring function_initNameForInvocationGraph (class GALGAS_unifiedTypeMap_2D_proxy inArgument0,
-                                                          class GALGAS_lbigint inArgument1,
+class GALGAS_lstring function_initNameForInvocationGraph (const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument0,
+                                                          const class GALGAS_lbigint & constinArgument1,
                                                           class C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
@@ -448,7 +448,7 @@ class GALGAS_string function_linkForControlRegister (const class GALGAS_string &
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_uintlist function_arrayIndexListFor (class GALGAS_uint inArgument0,
+class GALGAS_uintlist function_arrayIndexListFor (const class GALGAS_uint & constinArgument0,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -548,18 +548,5 @@ class GALGAS_string function_getTargetTextFile (const class GALGAS_string & cons
                                                 const class GALGAS_string & constinArgument1,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Routine 'generateServiceDispatcher'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_generateServiceDispatcher (const class GALGAS_string constinArgument0,
-                                        const class GALGAS_string constinArgument1,
-                                        class GALGAS_string & ioArgument2,
-                                        const class GALGAS__32_stringlist constinArgument3,
-                                        class C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
 
 #endif

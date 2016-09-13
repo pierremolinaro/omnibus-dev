@@ -42,7 +42,7 @@ getter @procFormalArgumentPassingMode formalPassingModeString -> @string outResu
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?@string inSelector -> @string outResult {
+getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let @string inSelector -> @string outResult {
   switch self
   case input : outResult = "!"
   case output : outResult = "?"

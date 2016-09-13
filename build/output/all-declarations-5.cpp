@@ -338,8 +338,8 @@ void cGrammar_plm_5F_target_5F_grammar::performIndexing (C_Compiler * /* inCompi
 void cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (C_Compiler * inCompiler,
              const C_String & inSourceFilePath) {
   C_Lexique_plm_5F_lexique * scanner = NULL ;
-  macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, "", "", inSourceFilePath COMMA_HERE)) ;
-  if (scanner->sourceText () != NULL) {
+  macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, inSourceFilePath COMMA_HERE)) ;
+  if (scanner->sourceText ().isValid ()) {
     scanner->performLexicalAnalysis () ;
   }
   macroDetachSharedObject (scanner) ;
@@ -348,8 +348,8 @@ void cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (C_Compiler *
 void cGrammar_plm_5F_target_5F_grammar::performOnlySyntaxAnalysis (C_Compiler * inCompiler,
              const C_String & inSourceFilePath) {
   C_Lexique_plm_5F_lexique * scanner = NULL ;
-  macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, "", "", inSourceFilePath COMMA_HERE)) ;
-  if (scanner->sourceText () != NULL) {
+  macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, inSourceFilePath COMMA_HERE)) ;
+  if (scanner->sourceText ().isValid ()) {
     scanner->performBottomUpParsing (gActionTable_plm_target_grammar, gNonTerminalNames_plm_target_grammar,
                                      gActionTableIndex_plm_target_grammar, gSuccessorTable_plm_target_grammar,
                                      gProductionsTable_plm_target_grammar) ;
@@ -377,8 +377,8 @@ void cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (C_Compiler *
     }
     if (C_FileManager::fileExistsAtPath (filePath)) {
       C_Lexique_plm_5F_lexique * scanner = NULL ;
-      macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, "", "", filePath COMMA_HERE)) ;
-      if (scanner->sourceText () != NULL) {
+      macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, filePath COMMA_HERE)) ;
+      if (scanner->sourceText ().isValid ()) {
         const bool ok = scanner->performBottomUpParsing (gActionTable_plm_target_grammar, gNonTerminalNames_plm_target_grammar,
                                                          gActionTableIndex_plm_target_grammar, gSuccessorTable_plm_target_grammar,
                                                          gProductionsTable_plm_target_grammar) ;
@@ -416,7 +416,7 @@ void cGrammar_plm_5F_target_5F_grammar::_performSourceStringParsing_ (C_Compiler
     const C_String nameString = inNameString.stringValue () ;
     C_Lexique_plm_5F_lexique * scanner = NULL ;
     macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, sourceString, nameString COMMA_HERE)) ;
-    if (scanner->sourceText () != NULL) {
+    if (scanner->sourceText ().isValid ()) {
       const bool ok = scanner->performBottomUpParsing (gActionTable_plm_target_grammar, gNonTerminalNames_plm_target_grammar,
                                                        gActionTableIndex_plm_target_grammar, gSuccessorTable_plm_target_grammar,
                                                        gProductionsTable_plm_target_grammar) ;
@@ -9310,8 +9310,8 @@ void enterExtensionGetter_performStaticOperation (const int32_t inClassIndex,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infixOperatorDescription * inObject,
-                                                          const GALGAS_bigint & in_inLeft,
-                                                          const GALGAS_bigint & in_inRight,
+                                                          const GALGAS_bigint in_inLeft,
+                                                          const GALGAS_bigint in_inRight,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   GALGAS_bigint result ;
@@ -9346,8 +9346,8 @@ GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infixOperat
 //---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_bigint extensionGetter_infixOperatorDescription_performStaticOperation (const cPtr_infixOperatorDescription * inObject,
-                                                                                      const GALGAS_bigint & constinArgument_inLeft,
-                                                                                      const GALGAS_bigint & constinArgument_inRight,
+                                                                                      const GALGAS_bigint constinArgument_inLeft,
+                                                                                      const GALGAS_bigint constinArgument_inRight,
                                                                                       C_Compiler * inCompiler
                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_bigint result_outResult ; // Returned variable

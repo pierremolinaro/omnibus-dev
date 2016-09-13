@@ -96,7 +96,7 @@ map @modeMap {
 func checkMode
   ?requiredModes:let @stringset inRequiredModes
   ?possibleModes:let @stringset inPossibleModes
-  ?kind:@routineKind inRoutineKind
+  ?kind:let @routineKind inRoutineKind
   ?error:let @location inErrorLocation
   -> @routineKindIR outResult
 {
