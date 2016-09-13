@@ -767,9 +767,9 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   gWrapperAllDirectories_embeddedSampleCode_1
 ) ;
 
-//--- File 'teensy-3-1-tp/01-blink-led.plm'
+//--- File 'teensy-3-1/01-blink-led.plm'
 
-const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -799,13 +799,13 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  682, // Text length
+  679, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/02-blink-leds.plm'
+//--- File 'teensy-3-1/02-blink-leds.plm'
 
-const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -895,13 +895,13 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  2282, // Text length
+  2279, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/03-section-service-duration.plm'
+//--- File 'teensy-3-1/03-section-service-duration.plm'
 
-const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
@@ -974,13 +974,13 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "03-section-service-duration.plm",
   "plm",
   true, // Text file
-  1817, // Text length
+  1814, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/04-semaphore.plm'
+//--- File 'teensy-3-1/04-semaphore.plm'
 
-const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
@@ -1036,13 +1036,13 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "04-semaphore.plm",
   "plm",
   true, // Text file
-  1049, // Text length
+  1046, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/05-semaphore-P-until.plm'
+//--- File 'teensy-3-1/05-semaphore-P-until.plm'
 
-const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "init 1000 {\n"
   "  digitalMode (!port:.D3 !mode:.OUTPUT)\n"
@@ -1123,13 +1123,13 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "05-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  1626, // Text length
+  1623, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/06-guarded-semaphore.plm'
+//--- File 'teensy-3-1/06-guarded-semaphore.plm'
 
-const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1242,13 +1242,13 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "06-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2405, // Text length
+  2402, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/07-guarded-semaphore2.plm'
+//--- File 'teensy-3-1/07-guarded-semaphore2.plm'
 
-const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1340,13 +1340,13 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "07-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  2125, // Text length
+  2122, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/08-rendez-vous.plm'
+//--- File 'teensy-3-1/08-rendez-vous.plm'
 
-const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1457,13 +1457,13 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "08-rendez-vous.plm",
   "plm",
   true, // Text file
-  2994, // Text length
+  2991, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/09-rendez-vous-data.plm'
+//--- File 'teensy-3-1/09-rendez-vous-data.plm'
 
-const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1576,13 +1576,13 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "09-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  2822, // Text length
+  2819, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/10-pit-unprivileged-mode-it.plm'
+//--- File 'teensy-3-1/10-pit-unprivileged-mode-it.plm'
 
-const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1662,13 +1662,13 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "10-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  1635, // Text length
+  1632, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1-tp/11-array-example.plm'
+//--- File 'teensy-3-1/11-array-example.plm'
 
-const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1-tp\"\n"
+const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -1743,11 +1743,11 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-array-example.plm",
   "plm",
   true, // Text file
-  1424, // Text length
+  1421, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
-//--- All files of 'teensy-3-1-tp' directory
+//--- All files of 'teensy-3-1' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [12] = {
   & gWrapperFile_2_embeddedSampleCode,
@@ -1764,16 +1764,16 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [12] = 
   NULL
 } ;
 
-//--- All sub-directories of 'teensy-3-1-tp' directory
+//--- All sub-directories of 'teensy-3-1' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_2 [1] = {
   NULL
 } ;
 
-//--- Directory 'teensy-3-1-tp'
+//--- Directory 'teensy-3-1'
 
 const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode (
-  "teensy-3-1-tp",
+  "teensy-3-1",
   11,
   gWrapperAllFiles_embeddedSampleCode_2,
   0,
