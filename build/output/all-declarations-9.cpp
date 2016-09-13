@@ -6866,7 +6866,7 @@ const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   gWrapperFileContent_3_targetTemplates
 ) ;
 
-//--- File '/teensy-3-1-tp.plm-target'
+//--- File '/teensy-3-1.plm-target'
 
 const char * gWrapperFileContent_4_targetTemplates = "\n"
   "configuration\n"
@@ -6967,7 +6967,7 @@ const char * gWrapperFileContent_4_targetTemplates = "\n"
   "import \"files/semaphore.plm\"\n" ;
 
 const cRegularFileWrapper gWrapperFile_4_targetTemplates (
-  "teensy-3-1-tp.plm-target",
+  "teensy-3-1.plm-target",
   "plm-target",
   true, // Text file
   2277, // Text length
@@ -12605,7 +12605,7 @@ const char * gWrapperFileContent_32_targetTemplates = "\n"
   "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
-  "  //   LCD INIT                                                                  *\n"
+  "  //   LCD INIT                                                                 \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
   "  init 10 {\n"
@@ -12772,54 +12772,42 @@ const char * gWrapperFileContent_32_targetTemplates = "\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  //void printSigned (const int32_t inValue) {\n"
-  "  //  if (inValue < 0) {\n"
-  "  //    printChar ('-') ;\n"
-  "  //    printUnsigned (($uint32_t) -inValue) ;\n"
-  "  //  }else{\n"
-  "  //    printUnsigned (($uint32_t) inValue) ;\n"
-  "  //  }\n"
-  "  //}\n"
+  "  public func `user printHex1 @noUnusedWarning (\?inValue $uint32) {\n"
+  "    let v = truncate inValue & 0xF : $uint8\n"
+  "    if v < 10 {\n"
+  "      self.writeData_inUserMode (!v + 0x30)\n"
+  "    }else{\n"
+  "      self.writeData_inUserMode (!v + 0x41 - 10)\n"
+  "    }\n"
+  "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  //void printHex1 (const $uint32_t inValue) {\n"
-  "  //  const $uint32_t v = inValue & 0xF ;\n"
-  "  //  if (v < 10) {\n"
-  "  //    printChar ('0' + v) ;\n"
-  "  //  }else{\n"
-  "  //    printChar ('A' + v - 10) ;\n"
-  "  //  }  \n"
-  "  //}\n"
+  "  public func `user printHex2 @noUnusedWarning (\?inValue $uint32) {\n"
+  "    self.printHex1 (!inValue >> 4)\n"
+  "    self.printHex1 (!inValue)\n"
+  "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  //void printHex2 (const $uint32_t inValue) {\n"
-  "  //  printHex1 (inValue >> 4) ;\n"
-  "  //  printHex1 (inValue) ;\n"
-  "  //}\n"
+  "  public func `user printHex4 @noUnusedWarning (\?inValue $uint32) {\n"
+  "    self.printHex2 (!inValue >> 8)\n"
+  "    self.printHex2 (!inValue)\n"
+  "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  //void printHex4 (const $uint32_t inValue) {\n"
-  "  //  printHex2 (inValue >> 8) ;\n"
-  "  //  printHex2 (inValue) ;\n"
-  "  //}\n"
+  "  public func `user printHex8 @noUnusedWarning (\?inValue $uint32) {\n"
+  "    self.printHex4 (!inValue >> 16)\n"
+  "    self.printHex4 (!inValue)\n"
+  "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
-  "  \n"
-  "  //void printHex8 (const $uint32_t inValue) {\n"
-  "  //  printHex4 (inValue >> 16) ;\n"
-  "  //  printHex4 (inValue) ;\n"
-  "  //}\n"
-  "  \n"
-  "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
-  "  \n"
-  "  //void printHex16 (const $uint64_t inValue) {\n"
-  "  //  printHex8 (($uint32_t) (inValue >> 32)) ;\n"
-  "  //  printHex8 (($uint32_t) inValue) ;\n"
-  "  //}\n"
+  "  public func `user printHex16 @noUnusedWarning (\?inValue $uint64) {\n"
+  "    self.printHex8 (!truncate inValue >> 32 : $uint32)\n"
+  "    self.printHex8 (!truncate inValue : $uint32)\n"
+  "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  //   PANIC                                                                    \n"
@@ -12937,7 +12925,7 @@ const cRegularFileWrapper gWrapperFile_32_targetTemplates (
   "teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  16040, // Text length
+  15873, // Text length
   gWrapperFileContent_32_targetTemplates
 ) ;
 
@@ -13288,7 +13276,7 @@ const cDirectoryWrapper gWrapperDirectory_2_targetTemplates (
   gWrapperAllDirectories_targetTemplates_2
 ) ;
 
-//--- File 'teensy-3-1-tp/build-verbose.py'
+//--- File 'teensy-3-1/build-verbose.py'
 
 const char * gWrapperFileContent_36_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -13332,7 +13320,7 @@ const cRegularFileWrapper gWrapperFile_36_targetTemplates (
   gWrapperFileContent_36_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/build.py'
+//--- File 'teensy-3-1/build.py'
 
 const char * gWrapperFileContent_37_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -13564,7 +13552,7 @@ const cRegularFileWrapper gWrapperFile_37_targetTemplates (
   gWrapperFileContent_37_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/clean.py'
+//--- File 'teensy-3-1/clean.py'
 
 const char * gWrapperFileContent_38_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -13611,7 +13599,7 @@ const cRegularFileWrapper gWrapperFile_38_targetTemplates (
   gWrapperFileContent_38_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/linker.ld'
+//--- File 'teensy-3-1/linker.ld'
 
 const char * gWrapperFileContent_39_targetTemplates = "/*----------------------------------------------------------------------------*/\n"
   "/*                                                                            */\n"
@@ -13764,7 +13752,7 @@ const cRegularFileWrapper gWrapperFile_39_targetTemplates (
   gWrapperFileContent_39_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/objdump.py'
+//--- File 'teensy-3-1/objdump.py'
 
 const char * gWrapperFileContent_40_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -13808,7 +13796,7 @@ const cRegularFileWrapper gWrapperFile_40_targetTemplates (
   gWrapperFileContent_40_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/objsize.py'
+//--- File 'teensy-3-1/objsize.py'
 
 const char * gWrapperFileContent_41_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -13852,7 +13840,7 @@ const cRegularFileWrapper gWrapperFile_41_targetTemplates (
   gWrapperFileContent_41_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/run.py'
+//--- File 'teensy-3-1/run.py'
 
 const char * gWrapperFileContent_42_targetTemplates = "#! /usr/bin/env python\n"
   "# -*- coding: UTF-8 -*-\n"
@@ -13884,7 +13872,7 @@ const cRegularFileWrapper gWrapperFile_42_targetTemplates (
   gWrapperFileContent_42_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/section-dispatcher-entry.s'
+//--- File 'teensy-3-1/section-dispatcher-entry.s'
 
 const char * gWrapperFileContent_43_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
 
@@ -13896,7 +13884,7 @@ const cRegularFileWrapper gWrapperFile_43_targetTemplates (
   gWrapperFileContent_43_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/section-dispatcher-header.s'
+//--- File 'teensy-3-1/section-dispatcher-header.s'
 
 const char * gWrapperFileContent_44_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
@@ -13914,7 +13902,7 @@ const cRegularFileWrapper gWrapperFile_44_targetTemplates (
   gWrapperFileContent_44_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/section-entry.s'
+//--- File 'teensy-3-1/section-entry.s'
 
 const char * gWrapperFileContent_45_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Section !ENTRY!\n"
@@ -13949,7 +13937,7 @@ const cRegularFileWrapper gWrapperFile_45_targetTemplates (
   gWrapperFileContent_45_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/service-dispatcher-entry.s'
+//--- File 'teensy-3-1/service-dispatcher-entry.s'
 
 const char * gWrapperFileContent_46_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
 
@@ -13961,7 +13949,7 @@ const cRegularFileWrapper gWrapperFile_46_targetTemplates (
   gWrapperFileContent_46_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/service-dispatcher-header.s'
+//--- File 'teensy-3-1/service-dispatcher-header.s'
 
 const char * gWrapperFileContent_47_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
@@ -13982,7 +13970,7 @@ const cRegularFileWrapper gWrapperFile_47_targetTemplates (
   gWrapperFileContent_47_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/service-entry.s'
+//--- File 'teensy-3-1/service-entry.s'
 
 const char * gWrapperFileContent_48_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
@@ -14014,7 +14002,7 @@ const cRegularFileWrapper gWrapperFile_48_targetTemplates (
   gWrapperFileContent_48_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/target-panic.ll'
+//--- File 'teensy-3-1/target-panic.ll'
 
 const char * gWrapperFileContent_49_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -14035,7 +14023,7 @@ const cRegularFileWrapper gWrapperFile_49_targetTemplates (
   gWrapperFileContent_49_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/target.c'
+//--- File 'teensy-3-1/target.c'
 
 const char * gWrapperFileContent_50_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -14523,7 +14511,7 @@ const cRegularFileWrapper gWrapperFile_50_targetTemplates (
   gWrapperFileContent_50_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/target.ll'
+//--- File 'teensy-3-1/target.ll'
 
 const char * gWrapperFileContent_51_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"thumbv7em-none--eabi\"\n"
@@ -14642,7 +14630,7 @@ const cRegularFileWrapper gWrapperFile_51_targetTemplates (
   gWrapperFileContent_51_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/target.s'
+//--- File 'teensy-3-1/target.s'
 
 const char * gWrapperFileContent_52_targetTemplates = "\t.syntax unified\n"
   "\t.cpu cortex-m4\n"
@@ -15047,7 +15035,7 @@ const cRegularFileWrapper gWrapperFile_52_targetTemplates (
   gWrapperFileContent_52_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/undefined-interrupt.s'
+//--- File 'teensy-3-1/undefined-interrupt.s'
 
 const char * gWrapperFileContent_53_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Undefined interrupt !ISR!\n"
@@ -15064,7 +15052,7 @@ const cRegularFileWrapper gWrapperFile_53_targetTemplates (
   gWrapperFileContent_53_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1-tp/xtr-interrupt-handler.s'
+//--- File 'teensy-3-1/xtr-interrupt-handler.s'
 
 const char * gWrapperFileContent_54_targetTemplates = "\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
@@ -15114,7 +15102,7 @@ const cRegularFileWrapper gWrapperFile_54_targetTemplates (
   gWrapperFileContent_54_targetTemplates
 ) ;
 
-//--- All files of 'teensy-3-1-tp' directory
+//--- All files of 'teensy-3-1' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [20] = {
   & gWrapperFile_36_targetTemplates,
@@ -15139,16 +15127,16 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [20] = {
   NULL
 } ;
 
-//--- All sub-directories of 'teensy-3-1-tp' directory
+//--- All sub-directories of 'teensy-3-1' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_3 [1] = {
   NULL
 } ;
 
-//--- Directory 'teensy-3-1-tp'
+//--- Directory 'teensy-3-1'
 
 const cDirectoryWrapper gWrapperDirectory_3_targetTemplates (
-  "teensy-3-1-tp",
+  "teensy-3-1",
   19,
   gWrapperAllFiles_targetTemplates_3,
   0,
