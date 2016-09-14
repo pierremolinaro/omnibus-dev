@@ -781,10 +781,12 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
 
 const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
+  "let LED_L0 = $digitalPort.D3\n"
+  "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:.D3 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -793,10 +795,10 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    write (!port:.D3 !true)\n"
+  "    write (!port:LED_L0 !true)\n"
   "    self.compteur +%= 500\n"
   "    time.waitUntilMS (!deadline: self.compteur)\n"
-  "    write (!port:.D3 !false)\n"
+  "    write (!port:LED_L0 !false)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.printUnsigned (!time.millis ())\n"
@@ -809,7 +811,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  679, // Text length
+  718, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -817,14 +819,20 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
 
 const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
+  "let LED_L0 = $digitalPort.D3\n"
+  "let LED_L1 = $digitalPort.D4\n"
+  "let LED_L2 = $digitalPort.D5\n"
+  "let LED_L3 = $digitalPort.D6\n"
+  "let LED_L4 = $digitalPort.D7\n"
+  "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:.D3 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D4 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D5 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D6 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D7 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L3 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L4 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -833,10 +841,10 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    write (!port:.D3 !true)\n"
+  "    write (!port:LED_L0 !true)\n"
   "    self.compteur +%= 500\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    write (!port:.D3 !false)\n"
+  "    write (!port:LED_L0 !false)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.printUnsigned (!time.millis ())\n"
@@ -849,10 +857,10 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    write (!port:.D4 !true)\n"
+  "    write (!port:LED_L1 !true)\n"
   "    self.compteur +%= 499\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    write (!port:.D4 !false)\n"
+  "    write (!port:LED_L1 !false)\n"
   "    self.compteur +%= 499\n"
   "  }\n"
   "}\n"
@@ -863,10 +871,10 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    write (!port:.D5 !true)\n"
+  "    write (!port:LED_L2 !true)\n"
   "    self.compteur +%= 498\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    write (!port:.D5 !false)\n"
+  "    write (!port:LED_L2 !false)\n"
   "    self.compteur +%= 498\n"
   "  }\n"
   "}\n"
@@ -877,10 +885,10 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    write (!port:.D6 !true)\n"
+  "    write (!port:LED_L3 !true)\n"
   "    self.compteur +%= 497\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    write (!port:.D6 !false)\n"
+  "    write (!port:LED_L3 !false)\n"
   "    self.compteur +%= 497\n"
   "  }\n"
   "}\n"
@@ -891,10 +899,10 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    write (!port:.D7 !true)\n"
+  "    write (!port:LED_L4 !true)\n"
   "    self.compteur +%= 496\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    write (!port:.D7 !false)\n"
+  "    write (!port:LED_L4 !false)\n"
   "    self.compteur +%= 496\n"
   "  }\n"
   "}\n"
@@ -905,7 +913,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  2279, // Text length
+  2470, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -992,6 +1000,9 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
 
 const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
+  "let LED_L1 = $digitalPort.D4\n"
+  "let LED_L2 = $digitalPort.D5\n"
+  "\n"
   "//------------------------------------------------*\n"
   "\n"
   "var s\xC3""\xA9""maphore = $semaphore (!value:0)\n"
@@ -999,8 +1010,8 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:.D4 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D5 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L2 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -1020,12 +1031,12 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s\xC3""\xA9""maphore.signal ()\n"
   "    self.top += 250\n"
-  "    write (!port:.D4 !true)\n"
+  "    write (!port:LED_L1 !true)\n"
   "    let constanteAccentu\xC3""\xA9""e = self.top\n"
   "    time.waitUntilMS (!deadline:constanteAccentu\xC3""\xA9""e)\n"
   "    s\xC3""\xA9""maphore.signal ()\n"
   "    self.top += 250\n"
-  "    write (!port:.D4 !false)\n"
+  "    write (!port:LED_L1 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1034,9 +1045,9 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1\"\n
   "task T2 priority 2 stackSize 512 {\n"
   "\n"
   "  while s\xC3""\xA9""maphore.wait () {\n"
-  "    write (!port:.D5 !true)\n"
+  "    write (!port:LED_L2 !true)\n"
   "    s\xC3""\xA9""maphore.wait ()\n"
-  "    write (!port:.D5 !false)\n"
+  "    write (!port:LED_L2 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1046,7 +1057,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "04-semaphore.plm",
   "plm",
   true, // Text file
-  1046, // Text length
+  1123, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1054,9 +1065,12 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
 
 const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
+  "let LED_L0 = $digitalPort.D3\n"
+  "let LED_L1 = $digitalPort.D4\n"
+  "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:.D3 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D4 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1103,11 +1117,11 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s.V ()\n"
   "    self.top += 300\n"
-  "    write (!port:.D3 !true)\n"
+  "    write (!port:LED_L0 !true)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s.V ()\n"
   "    self.top += 700\n"
-  "    write (!port:.D3 !false)\n"
+  "    write (!port:LED_L0 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1119,10 +1133,10 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:0) { // no wait...\n"
   "    let r = s.P_until (!deadline:self.top)\n"
   "    if r {\n"
-  "      toggle (!port:.D4)\n"
+  "      toggle (!port:LED_L1)\n"
   "    }else{\n"
   "      self.top += 400\n"
-  "      toggle (!port:.D4)\n"
+  "      toggle (!port:LED_L1)\n"
   "    }\n"
   "  }\n"
   "}\n"
@@ -1133,7 +1147,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "05-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  1623, // Text length
+  1700, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1141,14 +1155,20 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
 
 const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
+  "let LED_L0 = $digitalPort.D3\n"
+  "let LED_L1 = $digitalPort.D4\n"
+  "let LED_L2 = $digitalPort.D5\n"
+  "let LED_L3 = $digitalPort.D6\n"
+  "let LED_L4 = $digitalPort.D7\n"
+  "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:.D3 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D4 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D5 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D6 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D7 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L3 !mode:.OUTPUT)\n"
+  "  digitalMode (!port:LED_L4 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1203,11 +1223,11 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
-  "    write (!port:.D3 !true)\n"
+  "    write (!port:LED_L0 !true)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
-  "    write (!port:.D3 !false)\n"
+  "    write (!port:LED_L0 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1219,11 +1239,11 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
-  "    write (!port:.D7 !true)\n"
+  "    write (!port:LED_L4 !true)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
-  "    write (!port:.D7 !false)\n"
+  "    write (!port:LED_L4 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1233,16 +1253,16 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var deadline $uint32 = 0\n"
   "  \n"
   "  while s0.PP () {\n"
-  "    toggle (!port:.D4)\n"
+  "    toggle (!port:LED_L1)\n"
   "  }\n"
   "  \n"
   "  while s1.P () {\n"
-  "    toggle (!port:.D6)\n"
+  "    toggle (!port:LED_L3)\n"
   "  }\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline += 200\n"
-  "    toggle (!port:.D5)\n"
+  "    toggle (!port:LED_L2)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1252,7 +1272,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "06-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  2402, // Text length
+  2584, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
