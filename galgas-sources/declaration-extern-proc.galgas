@@ -98,6 +98,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
     !routineMangledName
     !mRoutineNameForGeneration
     !true # isPublic
+    !false # Global
     !procedureModeMap
     !signature
     !.function

@@ -212,11 +212,15 @@ method @functionDeclarationListAST enterFunctionInContext
     end
   #--- Attribute
     var weakProcedure = false
+    var globalProcedure = false
     var canMutateProperties = false
     var canAccessProperties = false
     for (attribute) in procedure.mFunctionAttributeList while not weakProcedure do
       if attribute.string == weakAttribute () then
         weakProcedure = true
+      end
+      if attribute.string == globalAttribute () then
+        globalProcedure = true
       end
       if attribute.string == mutatingAttribute () then
         canMutateProperties = true
@@ -239,11 +243,12 @@ method @functionDeclarationListAST enterFunctionInContext
       elsif weakProcedure && weak then
         error procedure.mFunctionName : "this weak procedure overrides a weak procedure"
       elsif (not weakProcedure) && weak then
-        [!?ioContext.mRoutineMapForContext removeKey !routineMangledName ?10*] # Remove weak routine
+        [!?ioContext.mRoutineMapForContext removeKey !routineMangledName ?11*] # Remove weak routine
         [!?ioContext.mRoutineMapForContext insertKey # Insert routine
           !routineMangledName
           !routineMangledName
           !procedure.mPublicFunction
+          !globalProcedure
           !procedureModeMap
           !signature
           !.function
@@ -258,6 +263,7 @@ method @functionDeclarationListAST enterFunctionInContext
           !routineMangledName
           !routineMangledName
           !procedure.mPublicFunction
+          !globalProcedure
           !procedureModeMap
           !signature
           !.function
@@ -273,6 +279,7 @@ method @functionDeclarationListAST enterFunctionInContext
         !routineMangledName
         !routineMangledName
         !procedure.mPublicFunction
+        !globalProcedure
         !procedureModeMap
         !signature
         !.function

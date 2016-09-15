@@ -110,6 +110,7 @@ method @primitiveDeclarationListAST enterInContext
       !routineMangledName
       !routineMangledName
       !primitive.mPublic
+      !false
       !modeMap
       !signature
       !.primitive

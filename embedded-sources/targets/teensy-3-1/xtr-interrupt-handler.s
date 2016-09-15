@@ -21,7 +21,10 @@
 	.save	{r4, r5, lr}
   push  {r4, r5, lr}
 @----------------------------------------- Activity led On (macro that uses only R4 and R5)
-  ACTIVITY_LED_ON
+@	.save	{r0, r1, r2, r3}
+  push  {r0, r1, r2, r3}
+  bl func.activityLedOn_28__29_  @ Defined in PLM source
+  pop  {r0, r1, r2, r3}
 @----------------------------------------- R4 <- running task context
   ldr   r4, =gRunningTaskControlBlock
   ldr   r4, [r4]

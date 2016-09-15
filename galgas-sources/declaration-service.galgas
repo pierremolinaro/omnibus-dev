@@ -110,6 +110,7 @@ method @serviceDeclarationListAST enterInContext
       !routineMangledName
       !routineMangledName
       !service.mPublic
+      !false
       !modeMap
       !signature
       !.service

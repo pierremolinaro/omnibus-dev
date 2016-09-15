@@ -17,6 +17,7 @@ enum @routineKind {
 map @routineMapForContext {
   @lstring mRoutineLLVMName
   @bool mIsPublic
+  @bool mGlobal
   @modeMap mModeMap
   @procedureSignature mSignature
   @routineKind mRoutineKind
