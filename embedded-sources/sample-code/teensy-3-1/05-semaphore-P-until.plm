@@ -1,5 +1,23 @@
 target "teensy-3-1"
 
+//——————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                               
+//——————————————————————————————————————————————————————————————————————————————
+
+func `service activityLedOn @global () {
+  write (!port:.D13 !true)
+}
+
+func `service activityLedOff @global () {
+  write (!port:.D13 !false)
+}
+
+//-----------------------------------------------------------------------------*
+
+init 100 {
+  digitalMode (!port:.D13 !mode:.OUTPUT)
+}
+
 let LED_L0 = $digitalPort.D3
 let LED_L1 = $digitalPort.D4
 

@@ -1472,6 +1472,7 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
   public : GALGAS_lstring mAttribute_lkey ;
   public : GALGAS_lstring mAttribute_mRoutineLLVMName ;
   public : GALGAS_bool mAttribute_mIsPublic ;
+  public : GALGAS_bool mAttribute_mGlobal ;
   public : GALGAS_modeMap mAttribute_mModeMap ;
   public : GALGAS_procedureSignature mAttribute_mSignature ;
   public : GALGAS_routineKind mAttribute_mRoutineKind ;
@@ -1496,6 +1497,7 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
   public : GALGAS_routineMapForContext_2D_element (const GALGAS_lstring & in_lkey,
                                                    const GALGAS_lstring & in_mRoutineLLVMName,
                                                    const GALGAS_bool & in_mIsPublic,
+                                                   const GALGAS_bool & in_mGlobal,
                                                    const GALGAS_modeMap & in_mModeMap,
                                                    const GALGAS_procedureSignature & in_mSignature,
                                                    const GALGAS_routineKind & in_mRoutineKind,
@@ -1519,14 +1521,15 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
   public : static class GALGAS_routineMapForContext_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                 const class GALGAS_lstring & inOperand1,
                                                                                 const class GALGAS_bool & inOperand2,
-                                                                                const class GALGAS_modeMap & inOperand3,
-                                                                                const class GALGAS_procedureSignature & inOperand4,
-                                                                                const class GALGAS_routineKind & inOperand5,
-                                                                                const class GALGAS_bool & inOperand6,
-                                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand7,
-                                                                                const class GALGAS_bool & inOperand8,
+                                                                                const class GALGAS_bool & inOperand3,
+                                                                                const class GALGAS_modeMap & inOperand4,
+                                                                                const class GALGAS_procedureSignature & inOperand5,
+                                                                                const class GALGAS_routineKind & inOperand6,
+                                                                                const class GALGAS_bool & inOperand7,
+                                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand8,
                                                                                 const class GALGAS_bool & inOperand9,
-                                                                                const class GALGAS_bool & inOperand10
+                                                                                const class GALGAS_bool & inOperand10,
+                                                                                const class GALGAS_bool & inOperand11
                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1548,6 +1551,8 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mCanAccessProperties (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mCanMutateProperties (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mGlobal (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
 
@@ -5574,91 +5579,5 @@ class cPtr_sourceLocationIR : public cPtr_abstractInstructionIR {
   public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @accessibleEntities struct                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_accessibleEntities : public AC_GALGAS_root {
-//--------------------------------- Public data members
-  public : GALGAS_stringset mAttribute_mRoutineSet ;
-  public : GALGAS_stringset mAttribute_mGuardSet ;
-  public : GALGAS_stringset mAttribute_mSectionSet ;
-  public : GALGAS_stringset mAttribute_mGlobalVariableSet ;
-  public : GALGAS_stringset mAttribute_mTaskVariableSet ;
-
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_accessibleEntities constructor_default (LOCATION_ARGS) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_accessibleEntities (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_accessibleEntities (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_accessibleEntities (const GALGAS_stringset & in_mRoutineSet,
-                                      const GALGAS_stringset & in_mGuardSet,
-                                      const GALGAS_stringset & in_mSectionSet,
-                                      const GALGAS_stringset & in_mGlobalVariableSet,
-                                      const GALGAS_stringset & in_mTaskVariableSet) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_accessibleEntities extractObject (const GALGAS_object & inObject,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_accessibleEntities constructor_new (const class GALGAS_stringset & inOperand0,
-                                                                   const class GALGAS_stringset & inOperand1,
-                                                                   const class GALGAS_stringset & inOperand2,
-                                                                   const class GALGAS_stringset & inOperand3,
-                                                                   const class GALGAS_stringset & inOperand4
-                                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_accessibleEntities & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mGlobalVariableSet (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mGuardSet (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mRoutineSet (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mSectionSet (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_stringset getter_mTaskVariableSet (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_accessibleEntities class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessibleEntities ;
 
 #endif

@@ -8636,14 +8636,15 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_lstring & inOperand1,
                                                       const class GALGAS_bool & inOperand2,
-                                                      const class GALGAS_modeMap & inOperand3,
-                                                      const class GALGAS_procedureSignature & inOperand4,
-                                                      const class GALGAS_routineKind & inOperand5,
-                                                      const class GALGAS_bool & inOperand6,
-                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand7,
-                                                      const class GALGAS_bool & inOperand8,
+                                                      const class GALGAS_bool & inOperand3,
+                                                      const class GALGAS_modeMap & inOperand4,
+                                                      const class GALGAS_procedureSignature & inOperand5,
+                                                      const class GALGAS_routineKind & inOperand6,
+                                                      const class GALGAS_bool & inOperand7,
+                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand8,
                                                       const class GALGAS_bool & inOperand9,
                                                       const class GALGAS_bool & inOperand10,
+                                                      const class GALGAS_bool & inOperand11,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -8651,28 +8652,30 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_lstring constinArgument1,
                                                    class GALGAS_bool constinArgument2,
-                                                   class GALGAS_modeMap constinArgument3,
-                                                   class GALGAS_procedureSignature constinArgument4,
-                                                   class GALGAS_routineKind constinArgument5,
-                                                   class GALGAS_bool constinArgument6,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
-                                                   class GALGAS_bool constinArgument8,
+                                                   class GALGAS_bool constinArgument3,
+                                                   class GALGAS_modeMap constinArgument4,
+                                                   class GALGAS_procedureSignature constinArgument5,
+                                                   class GALGAS_routineKind constinArgument6,
+                                                   class GALGAS_bool constinArgument7,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument8,
                                                    class GALGAS_bool constinArgument9,
                                                    class GALGAS_bool constinArgument10,
+                                                   class GALGAS_bool constinArgument11,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_lstring & outArgument1,
                                                    class GALGAS_bool & outArgument2,
-                                                   class GALGAS_modeMap & outArgument3,
-                                                   class GALGAS_procedureSignature & outArgument4,
-                                                   class GALGAS_routineKind & outArgument5,
-                                                   class GALGAS_bool & outArgument6,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument7,
-                                                   class GALGAS_bool & outArgument8,
+                                                   class GALGAS_bool & outArgument3,
+                                                   class GALGAS_modeMap & outArgument4,
+                                                   class GALGAS_procedureSignature & outArgument5,
+                                                   class GALGAS_routineKind & outArgument6,
+                                                   class GALGAS_bool & outArgument7,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument8,
                                                    class GALGAS_bool & outArgument9,
                                                    class GALGAS_bool & outArgument10,
+                                                   class GALGAS_bool & outArgument11,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -8690,6 +8693,11 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                                        class GALGAS_string constinArgument1,
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGlobalForKey (class GALGAS_bool constinArgument0,
+                                                          class GALGAS_string constinArgument1,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMIsPublicForKey (class GALGAS_bool constinArgument0,
                                                             class GALGAS_string constinArgument1,
@@ -8731,14 +8739,15 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_lstring & outArgument1,
                                                    class GALGAS_bool & outArgument2,
-                                                   class GALGAS_modeMap & outArgument3,
-                                                   class GALGAS_procedureSignature & outArgument4,
-                                                   class GALGAS_routineKind & outArgument5,
-                                                   class GALGAS_bool & outArgument6,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument7,
-                                                   class GALGAS_bool & outArgument8,
+                                                   class GALGAS_bool & outArgument3,
+                                                   class GALGAS_modeMap & outArgument4,
+                                                   class GALGAS_procedureSignature & outArgument5,
+                                                   class GALGAS_routineKind & outArgument6,
+                                                   class GALGAS_bool & outArgument7,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument8,
                                                    class GALGAS_bool & outArgument9,
                                                    class GALGAS_bool & outArgument10,
+                                                   class GALGAS_bool & outArgument11,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -8756,6 +8765,10 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mCanMutatePropertiesForKey (const class GALGAS_string & constinOperand0,
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mGlobalForKey (const class GALGAS_string & constinOperand0,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublicForKey (const class GALGAS_string & constinOperand0,
                                                                       C_Compiler * inCompiler
@@ -8813,6 +8826,7 @@ class cEnumerator_routineMapForContext : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mRoutineLLVMName (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mIsPublic (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mGlobal (LOCATION_ARGS) const ;
   public : class GALGAS_modeMap current_mModeMap (LOCATION_ARGS) const ;
   public : class GALGAS_procedureSignature current_mSignature (LOCATION_ARGS) const ;
   public : class GALGAS_routineKind current_mRoutineKind (LOCATION_ARGS) const ;

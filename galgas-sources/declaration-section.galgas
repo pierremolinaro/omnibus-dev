@@ -115,6 +115,7 @@ method @sectionDeclarationListAST enterInContext
       !routineMangledName
       !routineMangledName
       !section.mPublic
+      !false
       !@modeMap {![userModeName () nowhere]}
       !signature
       !.section

@@ -1798,6 +1798,7 @@ class cMapElement_routineMapForContext : public cMapElement {
 //--- Map attributes
   public : GALGAS_lstring mAttribute_mRoutineLLVMName ;
   public : GALGAS_bool mAttribute_mIsPublic ;
+  public : GALGAS_bool mAttribute_mGlobal ;
   public : GALGAS_modeMap mAttribute_mModeMap ;
   public : GALGAS_procedureSignature mAttribute_mSignature ;
   public : GALGAS_routineKind mAttribute_mRoutineKind ;
@@ -1811,6 +1812,7 @@ class cMapElement_routineMapForContext : public cMapElement {
   public : cMapElement_routineMapForContext (const GALGAS_lstring & inKey,
                                              const GALGAS_lstring & in_mRoutineLLVMName,
                                              const GALGAS_bool & in_mIsPublic,
+                                             const GALGAS_bool & in_mGlobal,
                                              const GALGAS_modeMap & in_mModeMap,
                                              const GALGAS_procedureSignature & in_mSignature,
                                              const GALGAS_routineKind & in_mRoutineKind,
@@ -1919,15 +1921,6 @@ class GALGAS_accessKind : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessKind ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             Function 'globalAttribute'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_globalAttribute (class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

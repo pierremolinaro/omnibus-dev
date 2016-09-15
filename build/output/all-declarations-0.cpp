@@ -6183,6 +6183,7 @@ class cCollectionElement_requiredProcedureDeclarationListAST : public cCollectio
 //--- Constructor
   public : cCollectionElement_requiredProcedureDeclarationListAST (const GALGAS_lstring & in_mRequiredProcedureName,
                                                                    const GALGAS_lstringlist & in_mProcedureModeList,
+                                                                   const GALGAS_bool & in_mIsGlobal,
                                                                    const GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
                                                                    const GALGAS_location & in_mEndOfProcLocation
                                                                    COMMA_LOCATION_ARGS) ;
@@ -6204,11 +6205,12 @@ class cCollectionElement_requiredProcedureDeclarationListAST : public cCollectio
 
 cCollectionElement_requiredProcedureDeclarationListAST::cCollectionElement_requiredProcedureDeclarationListAST (const GALGAS_lstring & in_mRequiredProcedureName,
                                                                                                                 const GALGAS_lstringlist & in_mProcedureModeList,
+                                                                                                                const GALGAS_bool & in_mIsGlobal,
                                                                                                                 const GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
                                                                                                                 const GALGAS_location & in_mEndOfProcLocation
                                                                                                                 COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mRequiredProcedureName, in_mProcedureModeList, in_mProcFormalArgumentList, in_mEndOfProcLocation) {
+mObject (in_mRequiredProcedureName, in_mProcedureModeList, in_mIsGlobal, in_mProcFormalArgumentList, in_mEndOfProcLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6221,7 +6223,7 @@ bool cCollectionElement_requiredProcedureDeclarationListAST::isValid (void) cons
 
 cCollectionElement * cCollectionElement_requiredProcedureDeclarationListAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_requiredProcedureDeclarationListAST (mObject.mAttribute_mRequiredProcedureName, mObject.mAttribute_mProcedureModeList, mObject.mAttribute_mProcFormalArgumentList, mObject.mAttribute_mEndOfProcLocation COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_requiredProcedureDeclarationListAST (mObject.mAttribute_mRequiredProcedureName, mObject.mAttribute_mProcedureModeList, mObject.mAttribute_mIsGlobal, mObject.mAttribute_mProcFormalArgumentList, mObject.mAttribute_mEndOfProcLocation COMMA_HERE)) ;
   return result ;
 }
 
@@ -6236,6 +6238,10 @@ void cCollectionElement_requiredProcedureDeclarationListAST::description (C_Stri
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mProcedureModeList" ":" ;
   mObject.mAttribute_mProcedureModeList.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mIsGlobal" ":" ;
+  mObject.mAttribute_mIsGlobal.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mProcFormalArgumentList" ":" ;
@@ -6281,14 +6287,15 @@ GALGAS_requiredProcedureDeclarationListAST GALGAS_requiredProcedureDeclarationLi
 
 GALGAS_requiredProcedureDeclarationListAST GALGAS_requiredProcedureDeclarationListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                                                   const GALGAS_lstringlist & inOperand1,
-                                                                                                                  const GALGAS_procFormalArgumentList & inOperand2,
-                                                                                                                  const GALGAS_location & inOperand3
+                                                                                                                  const GALGAS_bool & inOperand2,
+                                                                                                                  const GALGAS_procFormalArgumentList & inOperand3,
+                                                                                                                  const GALGAS_location & inOperand4
                                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_requiredProcedureDeclarationListAST result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
     result.createNewEmptyList (THERE) ;
     capCollectionElement attributes ;
-    GALGAS_requiredProcedureDeclarationListAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE) ;
+    GALGAS_requiredProcedureDeclarationListAST::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE) ;
     result.addObject (attributes) ;
   }
   return result ;
@@ -6299,12 +6306,14 @@ GALGAS_requiredProcedureDeclarationListAST GALGAS_requiredProcedureDeclarationLi
 void GALGAS_requiredProcedureDeclarationListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                             const GALGAS_lstring & in_mRequiredProcedureName,
                                                                             const GALGAS_lstringlist & in_mProcedureModeList,
+                                                                            const GALGAS_bool & in_mIsGlobal,
                                                                             const GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
                                                                             const GALGAS_location & in_mEndOfProcLocation
                                                                             COMMA_LOCATION_ARGS) {
   cCollectionElement_requiredProcedureDeclarationListAST * p = NULL ;
   macroMyNew (p, cCollectionElement_requiredProcedureDeclarationListAST (in_mRequiredProcedureName,
                                                                          in_mProcedureModeList,
+                                                                         in_mIsGlobal,
                                                                          in_mProcFormalArgumentList,
                                                                          in_mEndOfProcLocation COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
@@ -6315,12 +6324,13 @@ void GALGAS_requiredProcedureDeclarationListAST::makeAttributesFromObjects (capC
 
 void GALGAS_requiredProcedureDeclarationListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                                       const GALGAS_lstringlist & inOperand1,
-                                                                      const GALGAS_procFormalArgumentList & inOperand2,
-                                                                      const GALGAS_location & inOperand3
+                                                                      const GALGAS_bool & inOperand2,
+                                                                      const GALGAS_procFormalArgumentList & inOperand3,
+                                                                      const GALGAS_location & inOperand4
                                                                       COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_requiredProcedureDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_requiredProcedureDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -6332,14 +6342,15 @@ void GALGAS_requiredProcedureDeclarationListAST::addAssign_operation (const GALG
 
 void GALGAS_requiredProcedureDeclarationListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                                        const GALGAS_lstringlist inOperand1,
-                                                                       const GALGAS_procFormalArgumentList inOperand2,
-                                                                       const GALGAS_location inOperand3,
+                                                                       const GALGAS_bool inOperand2,
+                                                                       const GALGAS_procFormalArgumentList inOperand3,
+                                                                       const GALGAS_location inOperand4,
                                                                        const GALGAS_uint inInsertionIndex,
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_requiredProcedureDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_requiredProcedureDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -6351,8 +6362,9 @@ void GALGAS_requiredProcedureDeclarationListAST::setter_insertAtIndex (const GAL
 
 void GALGAS_requiredProcedureDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                                        GALGAS_lstringlist & outOperand1,
-                                                                       GALGAS_procFormalArgumentList & outOperand2,
-                                                                       GALGAS_location & outOperand3,
+                                                                       GALGAS_bool & outOperand2,
+                                                                       GALGAS_procFormalArgumentList & outOperand3,
+                                                                       GALGAS_location & outOperand4,
                                                                        const GALGAS_uint inRemoveIndex,
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) {
@@ -6365,12 +6377,14 @@ void GALGAS_requiredProcedureDeclarationListAST::setter_removeAtIndex (GALGAS_ls
       outOperand1.drop () ;
       outOperand2.drop () ;
       outOperand3.drop () ;
+      outOperand4.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_requiredProcedureDeclarationListAST) ;
       outOperand0 = p->mObject.mAttribute_mRequiredProcedureName ;
       outOperand1 = p->mObject.mAttribute_mProcedureModeList ;
-      outOperand2 = p->mObject.mAttribute_mProcFormalArgumentList ;
-      outOperand3 = p->mObject.mAttribute_mEndOfProcLocation ;
+      outOperand2 = p->mObject.mAttribute_mIsGlobal ;
+      outOperand3 = p->mObject.mAttribute_mProcFormalArgumentList ;
+      outOperand4 = p->mObject.mAttribute_mEndOfProcLocation ;
     }
   }
 }
@@ -6379,8 +6393,9 @@ void GALGAS_requiredProcedureDeclarationListAST::setter_removeAtIndex (GALGAS_ls
 
 void GALGAS_requiredProcedureDeclarationListAST::setter_popFirst (GALGAS_lstring & outOperand0,
                                                                   GALGAS_lstringlist & outOperand1,
-                                                                  GALGAS_procFormalArgumentList & outOperand2,
-                                                                  GALGAS_location & outOperand3,
+                                                                  GALGAS_bool & outOperand2,
+                                                                  GALGAS_procFormalArgumentList & outOperand3,
+                                                                  GALGAS_location & outOperand4,
                                                                   C_Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -6391,12 +6406,14 @@ void GALGAS_requiredProcedureDeclarationListAST::setter_popFirst (GALGAS_lstring
     outOperand1.drop () ;
     outOperand2.drop () ;
     outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_requiredProcedureDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mRequiredProcedureName ;
     outOperand1 = p->mObject.mAttribute_mProcedureModeList ;
-    outOperand2 = p->mObject.mAttribute_mProcFormalArgumentList ;
-    outOperand3 = p->mObject.mAttribute_mEndOfProcLocation ;
+    outOperand2 = p->mObject.mAttribute_mIsGlobal ;
+    outOperand3 = p->mObject.mAttribute_mProcFormalArgumentList ;
+    outOperand4 = p->mObject.mAttribute_mEndOfProcLocation ;
   }
 }
 
@@ -6404,8 +6421,9 @@ void GALGAS_requiredProcedureDeclarationListAST::setter_popFirst (GALGAS_lstring
 
 void GALGAS_requiredProcedureDeclarationListAST::setter_popLast (GALGAS_lstring & outOperand0,
                                                                  GALGAS_lstringlist & outOperand1,
-                                                                 GALGAS_procFormalArgumentList & outOperand2,
-                                                                 GALGAS_location & outOperand3,
+                                                                 GALGAS_bool & outOperand2,
+                                                                 GALGAS_procFormalArgumentList & outOperand3,
+                                                                 GALGAS_location & outOperand4,
                                                                  C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -6416,12 +6434,14 @@ void GALGAS_requiredProcedureDeclarationListAST::setter_popLast (GALGAS_lstring 
     outOperand1.drop () ;
     outOperand2.drop () ;
     outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_requiredProcedureDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mRequiredProcedureName ;
     outOperand1 = p->mObject.mAttribute_mProcedureModeList ;
-    outOperand2 = p->mObject.mAttribute_mProcFormalArgumentList ;
-    outOperand3 = p->mObject.mAttribute_mEndOfProcLocation ;
+    outOperand2 = p->mObject.mAttribute_mIsGlobal ;
+    outOperand3 = p->mObject.mAttribute_mProcFormalArgumentList ;
+    outOperand4 = p->mObject.mAttribute_mEndOfProcLocation ;
   }
 }
 
@@ -6429,8 +6449,9 @@ void GALGAS_requiredProcedureDeclarationListAST::setter_popLast (GALGAS_lstring 
 
 void GALGAS_requiredProcedureDeclarationListAST::method_first (GALGAS_lstring & outOperand0,
                                                                GALGAS_lstringlist & outOperand1,
-                                                               GALGAS_procFormalArgumentList & outOperand2,
-                                                               GALGAS_location & outOperand3,
+                                                               GALGAS_bool & outOperand2,
+                                                               GALGAS_procFormalArgumentList & outOperand3,
+                                                               GALGAS_location & outOperand4,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -6441,12 +6462,14 @@ void GALGAS_requiredProcedureDeclarationListAST::method_first (GALGAS_lstring & 
     outOperand1.drop () ;
     outOperand2.drop () ;
     outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_requiredProcedureDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mRequiredProcedureName ;
     outOperand1 = p->mObject.mAttribute_mProcedureModeList ;
-    outOperand2 = p->mObject.mAttribute_mProcFormalArgumentList ;
-    outOperand3 = p->mObject.mAttribute_mEndOfProcLocation ;
+    outOperand2 = p->mObject.mAttribute_mIsGlobal ;
+    outOperand3 = p->mObject.mAttribute_mProcFormalArgumentList ;
+    outOperand4 = p->mObject.mAttribute_mEndOfProcLocation ;
   }
 }
 
@@ -6454,8 +6477,9 @@ void GALGAS_requiredProcedureDeclarationListAST::method_first (GALGAS_lstring & 
 
 void GALGAS_requiredProcedureDeclarationListAST::method_last (GALGAS_lstring & outOperand0,
                                                               GALGAS_lstringlist & outOperand1,
-                                                              GALGAS_procFormalArgumentList & outOperand2,
-                                                              GALGAS_location & outOperand3,
+                                                              GALGAS_bool & outOperand2,
+                                                              GALGAS_procFormalArgumentList & outOperand3,
+                                                              GALGAS_location & outOperand4,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -6466,12 +6490,14 @@ void GALGAS_requiredProcedureDeclarationListAST::method_last (GALGAS_lstring & o
     outOperand1.drop () ;
     outOperand2.drop () ;
     outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_requiredProcedureDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mRequiredProcedureName ;
     outOperand1 = p->mObject.mAttribute_mProcedureModeList ;
-    outOperand2 = p->mObject.mAttribute_mProcFormalArgumentList ;
-    outOperand3 = p->mObject.mAttribute_mEndOfProcLocation ;
+    outOperand2 = p->mObject.mAttribute_mIsGlobal ;
+    outOperand3 = p->mObject.mAttribute_mProcFormalArgumentList ;
+    outOperand4 = p->mObject.mAttribute_mEndOfProcLocation ;
   }
 }
 
@@ -6558,6 +6584,21 @@ GALGAS_lstringlist GALGAS_requiredProcedureDeclarationListAST::getter_mProcedure
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bool GALGAS_requiredProcedureDeclarationListAST::getter_mIsGlobalAtIndex (const GALGAS_uint & inIndex,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_requiredProcedureDeclarationListAST * p = (cCollectionElement_requiredProcedureDeclarationListAST *) attributes.ptr () ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_requiredProcedureDeclarationListAST) ;
+    result = p->mObject.mAttribute_mIsGlobal ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_procFormalArgumentList GALGAS_requiredProcedureDeclarationListAST::getter_mProcFormalArgumentListAtIndex (const GALGAS_uint & inIndex,
                                                                                                                  C_Compiler * inCompiler
                                                                                                                  COMMA_LOCATION_ARGS) const {
@@ -6619,6 +6660,14 @@ GALGAS_lstringlist cEnumerator_requiredProcedureDeclarationListAST::current_mPro
   const cCollectionElement_requiredProcedureDeclarationListAST * p = (const cCollectionElement_requiredProcedureDeclarationListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_requiredProcedureDeclarationListAST) ;
   return p->mObject.mAttribute_mProcedureModeList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_requiredProcedureDeclarationListAST::current_mIsGlobal (LOCATION_ARGS) const {
+  const cCollectionElement_requiredProcedureDeclarationListAST * p = (const cCollectionElement_requiredProcedureDeclarationListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_requiredProcedureDeclarationListAST) ;
+  return p->mObject.mAttribute_mIsGlobal ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14266,20 +14315,49 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i25_ (GALGAS_ast & ioArgument_ioAST,
                                                                  C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_required) COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 21)) ;
-  GALGAS_bool var_public_1181 ;
-  GALGAS_lstringlist var_requiredModeList_1219 ;
-  GALGAS_lstring var_procName_1244 ;
-  GALGAS_lstringlist var_attributeList_1287 ;
-  GALGAS_procFormalArgumentList var_procFormalArgumentList_1337 ;
-  nt_procedure_5F_header_ (var_public_1181, var_requiredModeList_1219, var_procName_1244, var_attributeList_1287, var_procFormalArgumentList_1337, inCompiler) ;
-  ioArgument_ioAST.mAttribute_mRequiredProcList.addAssign_operation (var_procName_1244, var_requiredModeList_1219, var_procFormalArgumentList_1337, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 28))  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 28)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_required) COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 22)) ;
+  GALGAS_bool var_public_1199 ;
+  GALGAS_lstringlist var_requiredModeList_1237 ;
+  GALGAS_lstring var_procName_1262 ;
+  GALGAS_lstringlist var_attributeList_1298 ;
+  GALGAS_procFormalArgumentList var_procFormalArgumentList_1348 ;
+  nt_procedure_5F_header_ (var_public_1199, var_requiredModeList_1237, var_procName_1262, var_attributeList_1298, var_procFormalArgumentList_1348, inCompiler) ;
+  GALGAS_string var_funcMangledName_1372 = var_procName_1262.mAttribute_string.add_operation (GALGAS_string ("("), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 29)) ;
+  cEnumerator_procFormalArgumentList enumerator_1457 (var_procFormalArgumentList_1348, kEnumeration_up) ;
+  while (enumerator_1457.hasCurrentObject ()) {
+    var_funcMangledName_1372.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_1457.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 31)), inCompiler  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 31)) ;
+    var_funcMangledName_1372.plusAssign_operation(enumerator_1457.current_mSelector (HERE).getter_string (SOURCE_FILE ("declaration-required-proc.galgas", 32)), inCompiler  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 32)) ;
+    var_funcMangledName_1372.plusAssign_operation(GALGAS_string (":"), inCompiler  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 33)) ;
+    enumerator_1457.gotoNextObject () ;
+  }
+  var_funcMangledName_1372.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 35)) ;
+  GALGAS_bool var_isGlobal_1638 = GALGAS_bool (false) ;
+  cEnumerator_lstringlist enumerator_1683 (var_attributeList_1298, kEnumeration_up) ;
+  while (enumerator_1683.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, enumerator_1683.current_mValue (HERE).mAttribute_string.objectCompare (function_globalAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 38)))).boolEnum () ;
+    if (kBoolTrue == test_0) {
+      TC_Array <C_FixItDescription> fixItArray1 ;
+      appendFixItActions (fixItArray1, kFixItReplace, GALGAS_string ("@").add_operation (function_globalAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 39)), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 39))) ;
+      inCompiler->emitSemanticError (enumerator_1683.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 39)), GALGAS_string ("invalid attribute"), fixItArray1  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 39)) ;
+    }else if (kBoolFalse == test_0) {
+      const enumGalgasBool test_2 = var_isGlobal_1638.boolEnum () ;
+      if (kBoolTrue == test_2) {
+        TC_Array <C_FixItDescription> fixItArray3 ;
+        fixItArray3.addObject (C_FixItDescription (kFixItRemove, "")) ;
+        inCompiler->emitSemanticError (enumerator_1683.current_mValue (HERE).getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 41)), GALGAS_string ("duplicated attribute"), fixItArray3  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 41)) ;
+      }else if (kBoolFalse == test_2) {
+        var_isGlobal_1638 = GALGAS_bool (true) ;
+      }
+    }
+    enumerator_1683.gotoNextObject () ;
+  }
+  ioArgument_ioAST.mAttribute_mRequiredProcList.addAssign_operation (GALGAS_lstring::constructor_new (var_funcMangledName_1372, var_procName_1262.mAttribute_location  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 47)), var_requiredModeList_1237, var_isGlobal_1638, var_procFormalArgumentList_1348, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 51))  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 46)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_declaration_i25_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_required) COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 21)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_required) COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 22)) ;
   nt_procedure_5F_header_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }

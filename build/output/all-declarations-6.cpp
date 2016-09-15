@@ -13789,6 +13789,7 @@ GALGAS_procFormalArgumentList_2D_element GALGAS_procFormalArgumentList_2D_elemen
 GALGAS_requiredProcedureDeclarationListAST_2D_element::GALGAS_requiredProcedureDeclarationListAST_2D_element (void) :
 mAttribute_mRequiredProcedureName (),
 mAttribute_mProcedureModeList (),
+mAttribute_mIsGlobal (),
 mAttribute_mProcFormalArgumentList (),
 mAttribute_mEndOfProcLocation () {
 }
@@ -13802,12 +13803,14 @@ GALGAS_requiredProcedureDeclarationListAST_2D_element::~ GALGAS_requiredProcedur
 
 GALGAS_requiredProcedureDeclarationListAST_2D_element::GALGAS_requiredProcedureDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
                                                                                                               const GALGAS_lstringlist & inOperand1,
-                                                                                                              const GALGAS_procFormalArgumentList & inOperand2,
-                                                                                                              const GALGAS_location & inOperand3) :
+                                                                                                              const GALGAS_bool & inOperand2,
+                                                                                                              const GALGAS_procFormalArgumentList & inOperand3,
+                                                                                                              const GALGAS_location & inOperand4) :
 mAttribute_mRequiredProcedureName (inOperand0),
 mAttribute_mProcedureModeList (inOperand1),
-mAttribute_mProcFormalArgumentList (inOperand2),
-mAttribute_mEndOfProcLocation (inOperand3) {
+mAttribute_mIsGlobal (inOperand2),
+mAttribute_mProcFormalArgumentList (inOperand3),
+mAttribute_mEndOfProcLocation (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13815,6 +13818,7 @@ mAttribute_mEndOfProcLocation (inOperand3) {
 GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDeclarationListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_requiredProcedureDeclarationListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
                                                                 GALGAS_lstringlist::constructor_emptyList (HERE),
+                                                                GALGAS_bool::constructor_default (HERE),
                                                                 GALGAS_procFormalArgumentList::constructor_emptyList (HERE),
                                                                 GALGAS_location::constructor_nowhere (HERE)) ;
 }
@@ -13823,12 +13827,13 @@ GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDe
 
 GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                                               const GALGAS_lstringlist & inOperand1,
-                                                                                                                              const GALGAS_procFormalArgumentList & inOperand2,
-                                                                                                                              const GALGAS_location & inOperand3 
+                                                                                                                              const GALGAS_bool & inOperand2,
+                                                                                                                              const GALGAS_procFormalArgumentList & inOperand3,
+                                                                                                                              const GALGAS_location & inOperand4 
                                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_requiredProcedureDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-    result = GALGAS_requiredProcedureDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_requiredProcedureDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
   }
   return result ;
 }
@@ -13844,6 +13849,9 @@ typeComparisonResult GALGAS_requiredProcedureDeclarationListAST_2D_element::obje
     result = mAttribute_mProcedureModeList.objectCompare (inOperand.mAttribute_mProcedureModeList) ;
   }
   if (result == kOperandEqual) {
+    result = mAttribute_mIsGlobal.objectCompare (inOperand.mAttribute_mIsGlobal) ;
+  }
+  if (result == kOperandEqual) {
     result = mAttribute_mProcFormalArgumentList.objectCompare (inOperand.mAttribute_mProcFormalArgumentList) ;
   }
   if (result == kOperandEqual) {
@@ -13855,7 +13863,7 @@ typeComparisonResult GALGAS_requiredProcedureDeclarationListAST_2D_element::obje
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_requiredProcedureDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mRequiredProcedureName.isValid () && mAttribute_mProcedureModeList.isValid () && mAttribute_mProcFormalArgumentList.isValid () && mAttribute_mEndOfProcLocation.isValid () ;
+  return mAttribute_mRequiredProcedureName.isValid () && mAttribute_mProcedureModeList.isValid () && mAttribute_mIsGlobal.isValid () && mAttribute_mProcFormalArgumentList.isValid () && mAttribute_mEndOfProcLocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13863,6 +13871,7 @@ bool GALGAS_requiredProcedureDeclarationListAST_2D_element::isValid (void) const
 void GALGAS_requiredProcedureDeclarationListAST_2D_element::drop (void) {
   mAttribute_mRequiredProcedureName.drop () ;
   mAttribute_mProcedureModeList.drop () ;
+  mAttribute_mIsGlobal.drop () ;
   mAttribute_mProcFormalArgumentList.drop () ;
   mAttribute_mEndOfProcLocation.drop () ;
 }
@@ -13878,6 +13887,8 @@ void GALGAS_requiredProcedureDeclarationListAST_2D_element::description (C_Strin
     mAttribute_mRequiredProcedureName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mProcedureModeList.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mIsGlobal.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mProcFormalArgumentList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -13896,6 +13907,12 @@ GALGAS_lstring GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mRe
 
 GALGAS_lstringlist GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mProcedureModeList (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mProcedureModeList ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mIsGlobal (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIsGlobal ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
