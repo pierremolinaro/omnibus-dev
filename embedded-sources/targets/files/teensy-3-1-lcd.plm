@@ -24,22 +24,22 @@ module lcd {
 
   func `init configurePorts @noUnusedWarning () {
   //--- D4 (PTB0) is a GPIO (input by default)
-    PORTB_PCR0 = (1 << 8) ;
+    PORTB_PCR [0] = (1 << 8) ;
     GPIOB_PDDR |= (1 << 0) ; // Program D4 as output (PTB0)
   //--- D5 (PTC0) is a GPIO (input by default)
-    PORTC_PCR0 = (1 << 8) ;
+    PORTC_PCR [0] = (1 << 8) ;
     GPIOC_PDDR |= (1 << 0) ; // Program D5 as output (PTC0)
   //--- D6 (PTD1) is a GPIO (input by default)
-    PORTD_PCR1 = (1 << 8) ;
+    PORTD_PCR [1] = (1 << 8) ;
     GPIOD_PDDR |= (1 << 1) ; // Program D6 as output (PTD1)
   //--- D7 (PTB2) is a GPIO (input by default)
-    PORTB_PCR2 = (1 << 8) ;
+    PORTB_PCR [2] = (1 << 8) ;
     GPIOB_PDDR |= (1 << 2) ; // Program D7 as output (PTB2)
   //--- RS (PTB3) is an output
-    PORTB_PCR3 = (1 << 8) ;
+    PORTB_PCR [3] = (1 << 8) ;
     GPIOB_PDDR |= (1 << 3) ;
   //--- E (PTB1) is an output
-    PORTB_PCR1 = (1 << 8) ;
+    PORTB_PCR [1] = (1 << 8) ;
     GPIOB_PDDR |= (1 << 1) ;
   }
   

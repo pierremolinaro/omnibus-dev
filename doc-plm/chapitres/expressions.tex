@@ -11,25 +11,53 @@
 \begin{table}[ht]
 \centering
 \begin{tabular}{llll}
-  \textbf{Priorité} & \textbf{Opérateur} & \textbf{Commentaire} & \textbf{Lien} \\
-   0 & \plm+-+, \plm+-%+ & \emph{moins} unaire & \\
-   0 & \plm+~+, \plm+not+ & \emph{non} binaire et \emph{non} logique & \\
-   1 & \plm=convert= & Conversion &\\
-   2 & \plm+*+, \plm+*%+, \plm+/+, \plm+!/+, \plm-%-, \plm-!%- & Multiplication, division, modulo & \\
-   3 & \plm-+-, \plm-+%-, \plm+-+, \plm+-%+ & Addition, soustraction & \\
-   4 & \plm+<<+, \plm+>>+ & Décalage à gauche et à droite & \\
-   5 & \plm+<=+, \plm+<+, \plm+>=+, \plm+>+ & Comparaison & \\
-   6 & \plm+==+, \plm+!=+ & Test d'égalité, d'inégalité & \\
-   7 & \plm+&+ & \emph{et} binaire & \\
-   8 & \plm+^+ & \emph{ou exclusif} binaire & \\
-   9 & \plm+|+ & \emph{ou} binaire & \\
-   10 & \plm+and+ & \emph{et} logique & \\
-   11 & \plm+xor+ & \emph{ou exclusif} logique & \\
-   12 & \plm+or+ & \emph{ou} logique & \\
+  \textbf{Priorité} & \textbf{Opérateur} & \textbf{Commentaire}\\
+   0 & \plm+-+, \plm+-%+ & \emph{moins} unaire \\
+   0 & \plm+~+, \plm+not+ & \emph{complémentation} binaire et \emph{non} logique \\
+   1 & \plm=convert= & Conversion \\
+   2 & \plm+*+, \plm+*%+, \plm+/+, \plm+!/+, \plm-%-, \plm-!%- & Multiplication, division, modulo \\
+   3 & \plm-+-, \plm-+%-, \plm+-+, \plm+-%+ & Addition, soustraction \\
+   4 & \plm+<<+, \plm+>>+ & Décalage à gauche et à droite \\
+   5 & \plm+<=+, \plm+<+, \plm+>=+, \plm+>+ & Comparaison \\
+   6 & \plm+==+, \plm+!=+ & Test d'égalité, d'inégalité \\
+   7 & \plm+&+ & \emph{et} binaire \\
+   8 & \plm+^+ & \emph{ou exclusif} binaire \\
+   9 & \plm+|+ & \emph{ou} binaire \\
+   10 & \plm+and+ & \emph{et} logique \\
+   11 & \plm+xor+ & \emph{ou exclusif} logique \\
+   12 & \plm+or+ & \emph{ou} logique \\
 \end{tabular}
 \caption{Priorité des opérateurs}\index{Operateur@Opérateur!Priorite@Priorité}
 \labelTableau{tableauPrioriteOperateurs}
 \end{table}
+
+
+
+\section{Opérateur $\sim$}
+
+L'opérateur $\sim$ renvoie la complémentation bit-à-bit d'un entier non signé. Une erreur de compilation est déclenchée si l'opérateur est appliqué à un entier signé~:
+\begin{PLM}
+let x $int8 = 3
+let y = ~ x // Erreur, x est signé
+\end{PLM}
+
+Le nombre de bits complémentés dépend du nombre de bits du type entier non signé~:
+\begin{PLM}
+let x $uint8 = 1
+let y = ~ x // y est égal à 0xFE
+let z $uint16 = 1
+let t = ~ z // t est égal à 0xFFFE
+\end{PLM}
+
+L'opérateur $\sim$ ne peut s'appliquer à une constante entière statique uniquement si le type du résultat peut être inféré, et que ce type est un entier non signé~:
+\begin{PLM}
+let x = ~ 1 // Erreur, le type du résultat ne peut pas être inféré
+let y $int8 = ~ 1 // Erreur, le type inféré est signé
+let z $uint8 = ~ 1 // Ok, z = 0xFE
+let t $uint16 = ~ 1 // Ok, z = 0xFFFE
+\end{PLM}
+
+
 
 
 
