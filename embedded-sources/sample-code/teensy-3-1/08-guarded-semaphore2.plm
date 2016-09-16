@@ -5,11 +5,11 @@ target "teensy-3-1"
 //——————————————————————————————————————————————————————————————————————————————
 
 func `service activityLedOn @global () {
-  write (!port:.D13 !true)
+  digitalWrite (!port:.D13 !true)
 }
 
 func `service activityLedOff @global () {
-  write (!port:.D13 !false)
+  digitalWrite (!port:.D13 !false)
 }
 
 //-----------------------------------------------------------------------------*
@@ -38,61 +38,18 @@ init 1000 {
 
 //-----------------------------------------------------------------------------*
 
-struct $rendezVous {
-  var inputWaitList = $taskList ()
-  var outputWaitList = $taskList ()
-  var inputGuardList = $guardList ()
-  var outputGuardList = $guardList ()
-
-  public primitive input () {
-    makeTaskReady (!?fromList:self.outputWaitList ?found:let found)
-    if not found {
-      notifyChange (!?forGuard:self.outputGuardList)
-      block (!?inList:self.inputWaitList)
-    }
-  }
-
-  public primitive output () {
-    makeTaskReady (!?fromList:self.inputWaitList ?found:let found)
-    if not found {
-      notifyChange (!?forGuard:self.inputGuardList)
-      block (!?inList:self.outputWaitList)
-    }
-  }
-
-  public primitive inputUntil @noUnusedWarning (?deadline:inDeadline $uint32) -> $bool {
-    makeTaskReady (!?fromList:self.outputWaitList ?found:result)
-    if (not result) and (inDeadline > time.millis ()) { 
-      block (!?inList:self.inputWaitList !onDeadline:inDeadline)
-    }
-  }
-
-  public primitive outputUntil @noUnusedWarning (?deadline:inDeadline $uint32) -> $bool {
-    makeTaskReady (!?fromList:self.inputWaitList ?found:result)
-    if (not result) and (inDeadline > time.millis ()) { 
-      block (!?inList:self.outputWaitList !onDeadline:inDeadline)
-    }
-  }
-
-  public guard input @noUnusedWarning () {
-    makeTaskReady (!?fromList:self.outputWaitList ?found:accept)
-    if not accept {
-      handle (!?guard:self.inputGuardList)
-    }
-  }
-
-  guard output @noUnusedWarning () {
-    makeTaskReady (!?fromList:self.inputWaitList ?found:accept)
-    if not accept {
-      handle (!?guard:self.outputGuardList)
-    }
-  }
-
-}
+var s0 = $semaphore (!value:0)
 
 //-----------------------------------------------------------------------------*
 
-var rdvs = $rendezVous ()
+var s1 = $semaphore (!value:0)
+
+guard PP () : s1.wait () {
+}
+
+guard convenienceWaitUntilMS (?deadline:inDeadline $uint32)
+: time.waitUntilMS (!deadline:inDeadline) {
+}
 
 //-----------------------------------------------------------------------------*
 
@@ -100,24 +57,48 @@ task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
 
   while time.waitUntilMS (!deadline:self.top) {
-    rdvs.output ()
+    s0.signal ()
     self.top += 250
-    write (!port:LED_L0 !true)
+    digitalWrite (!port:LED_L0 !true)
     time.waitUntilMS (!deadline:self.top)
-    rdvs.output ()
+    s0.signal ()
     self.top += 250
-    write (!port:LED_L0 !false)
+    digitalWrite (!port:LED_L0 !false)
   }
 }
 
 //-----------------------------------------------------------------------------*
 
 task T1 priority 1 stackSize 512 {
+  var top $uint32 = 0
 
-  while rdvs.input () {
-    write (!port:LED_L1 !true)
-    rdvs.input ()
-    write (!port:LED_L1 !false)
+  while time.waitUntilMS (!deadline:self.top) {
+    s1.signal ()
+    self.top += 249
+    digitalWrite (!port:LED_L4 !true)
+    time.waitUntilMS (!deadline:self.top)
+    s1.signal ()
+    self.top += 249
+    digitalWrite (!port:LED_L4 !false)
+  }
+}
+
+//-----------------------------------------------------------------------------*
+
+task T2 priority 2 stackSize 512 {
+  var deadline $uint32 = 0
+  
+  while s0.wait () {
+    toggle (!port:LED_L1)
+  }
+  
+  while PP () {
+    toggle (!port:LED_L3)
+  }
+  
+  while convenienceWaitUntilMS (!deadline:self.deadline) {
+    self.deadline += 200
+    toggle (!port:LED_L2)
   }
 }
 

@@ -5,11 +5,11 @@ target "teensy-3-1"
 //——————————————————————————————————————————————————————————————————————————————
 
 func `service activityLedOn @global () {
-  write (!port:.D13 !true)
+  digitalWrite (!port:.D13 !true)
 }
 
 func `service activityLedOff @global () {
-  write (!port:.D13 !false)
+  digitalWrite (!port:.D13 !false)
 }
 
 //-----------------------------------------------------------------------------*
@@ -77,10 +77,10 @@ task T priority 12 stackSize 512 {
   
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline +%= 250
-    write (!port:LED_L1 !true) // Allumer la led
+    digitalWrite (!port:LED_L1 !true) // Allumer la led
     time.waitUntilMS (!deadline:self.deadline)
     self.deadline +%= 250
-    write (!port:LED_L1 !false)  // Éteindre la led
+    digitalWrite (!port:LED_L1 !false)  // Éteindre la led
     lcd.goto (!line:1 !column:0)
     lcd.printSpaces (!10)
     lcd.goto (!line:1 !column:0)

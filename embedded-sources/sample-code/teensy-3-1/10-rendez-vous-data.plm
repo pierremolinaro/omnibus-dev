@@ -5,11 +5,11 @@ target "teensy-3-1"
 //——————————————————————————————————————————————————————————————————————————————
 
 func `service activityLedOn @global () {
-  write (!port:.D13 !true)
+  digitalWrite (!port:.D13 !true)
 }
 
 func `service activityLedOff @global () {
-  write (!port:.D13 !false)
+  digitalWrite (!port:.D13 !false)
 }
 
 //-----------------------------------------------------------------------------*
@@ -23,7 +23,6 @@ init 100 {
 let LED_L0 = $digitalPort.D3
 let LED_L1 = $digitalPort.D4
 let LED_L2 = $digitalPort.D5
-let LED_L3 = $digitalPort.D6
 let LED_L4 = $digitalPort.D7
 
 //-----------------------------------------------------------------------------*
@@ -32,73 +31,95 @@ init 1000 {
   digitalMode (!port:LED_L0 !mode:.OUTPUT)
   digitalMode (!port:LED_L1 !mode:.OUTPUT)
   digitalMode (!port:LED_L2 !mode:.OUTPUT)
-  digitalMode (!port:LED_L3 !mode:.OUTPUT)
   digitalMode (!port:LED_L4 !mode:.OUTPUT)
 }
 
 //-----------------------------------------------------------------------------*
 
-var s0 = $semaphore (!value:0)
+struct $rendezVousDataé {
+  var autoriserLecture  = $semaphore (!value:0)
+  var autoriserEcriture = $semaphore (!value:1)
+  var signalerDonneeLue = $semaphore (!value:0)
+  var donnée $uint32 = 0
+
+  public func `user output @mutating @userAccess (?data:inData $uint32) {
+    self.autoriserEcriture.wait ()
+    self.donnée = inData
+    self.autoriserLecture.signal ()
+    self.signalerDonneeLue.wait ()
+  }
+
+//  public func `user input (!data:outData $uint32) {
+//    self.autoriserLecture.P ()
+//    outData = self.data
+//    self.signalerDonneeLue.V ()
+//    self.autoriserEcriture.V ()
+//  }
+
+  public guard entrée (!data:outData $uint32) : self.autoriserLecture.wait () {
+    outData = self.donnée
+    self.signalerDonneeLue.signal ()
+    self.autoriserEcriture.signal ()
+  }
+
+}
 
 //-----------------------------------------------------------------------------*
 
-var s1 = $semaphore (!value:0)
+var rdvs = $rendezVousDataé ()
 
-guard PP () : s1.wait () {
-}
+//-----------------------------------------------------------------------------*
 
-guard convenienceWaitUntilMS (?deadline:inDeadline $uint32)
-: time.waitUntilMS (!deadline:inDeadline) {
-}
+var rdvs2 = $rendezVousDataé ()
+
+//-----------------------------------------------------------------------------*
+
+var s = $semaphore (!value:1)
 
 //-----------------------------------------------------------------------------*
 
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
+  var n $uint32 = 1
 
   while time.waitUntilMS (!deadline:self.top) {
-    s0.signal ()
-    self.top += 250
-    write (!port:LED_L0 !true)
-    time.waitUntilMS (!deadline:self.top)
-    s0.signal ()
-    self.top += 250
-    write (!port:LED_L0 !false)
+    rdvs.output (!data:self.n)
+    rdvs2.output (!data:self.n)
+    toggle (!port:LED_L0)
+    self.top += 500
+    self.n += 1
   }
 }
 
 //-----------------------------------------------------------------------------*
 
-task T1 priority 1 stackSize 512 {
-  var top $uint32 = 0
+task T1 priority 1 stackSize 1024 {
 
-  while time.waitUntilMS (!deadline:self.top) {
-    s1.signal ()
-    self.top += 249
-    write (!port:LED_L4 !true)
-    time.waitUntilMS (!deadline:self.top)
-    s1.signal ()
-    self.top += 249
-    write (!port:LED_L4 !false)
-  }
-}
-
-//-----------------------------------------------------------------------------*
-
-task T2 priority 2 stackSize 512 {
-  var deadline $uint32 = 0
-  
-  while s0.wait () {
+  while rdvs.entrée (?data:let x) {
     toggle (!port:LED_L1)
+    s.wait ()
+      lcd.goto (!line:0 !column:0)
+      lcd.printUnsigned (!x)
+    s.signal ()
   }
-  
-  while PP () {
-    toggle (!port:LED_L3)
-  }
-  
-  while convenienceWaitUntilMS (!deadline:self.deadline) {
-    self.deadline += 200
+}
+
+//-----------------------------------------------------------------------------*
+
+task T2 priority 2 stackSize 1024 {
+  var deadline $uint32 = 0
+
+  while rdvs2.entrée (?data:let x) {
     toggle (!port:LED_L2)
+    s.wait ()
+      lcd.goto (!line:1 !column:0)
+      lcd.printUnsigned (!x)
+    s.signal ()
+  }
+  
+  while time.waitUntilMS (!deadline:self.deadline) {
+    self.deadline += 200
+    toggle (!port:LED_L4)
   }
 }
 

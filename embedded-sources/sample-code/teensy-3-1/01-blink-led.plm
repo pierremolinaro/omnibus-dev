@@ -5,11 +5,11 @@ target "teensy-3-1"
 //——————————————————————————————————————————————————————————————————————————————
 
 func `service activityLedOn @global () {
-  write (!port:.D13 !true)
+  digitalWrite (!port:.D13 !true)
 }
 
 func `service activityLedOff @global () {
-  write (!port:.D13 !false)
+  digitalWrite (!port:.D13 !false)
 }
 
 
@@ -28,10 +28,10 @@ task Tâche priority 1 stackSize 512 {
   var compteur $uint32 = 0
   
   while time.waitUntilMS (!deadline:self.compteur) {
-    write (!port:LED_L0 !true)
+    digitalWrite (!port:LED_L0 !true)
     self.compteur +%= 500
     time.waitUntilMS (!deadline: self.compteur)
-    write (!port:LED_L0 !false)
+    digitalWrite (!port:LED_L0 !false)
     self.compteur +%= 500
     lcd.goto (!line:0 !column:0)
     lcd.printUnsigned (!time.millis ())
