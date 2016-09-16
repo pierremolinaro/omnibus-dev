@@ -82,14 +82,26 @@ override method @prefixOperatorExpressionAST analyzeExpression
     prefixOperatorMap = inContext.mUnsignedComplementOperatorMap
     binaryOperator = .xor
     switch [expressionResult kind]
-    case arrayType (* *) : error .nowhere : "internal error" : leftOperand
-    case opaque (*) : error .nowhere : "internal error" : leftOperand
-    case boolean : error .nowhere : "internal error" : leftOperand
-    case literalString : error .nowhere : "internal error" : leftOperand
-    case enumeration (*) :  error .nowhere : "internal error" : leftOperand
-    case structure (* *) :  error .nowhere : "internal error" : leftOperand
-    case staticInteger :  error .nowhere : "internal error" : leftOperand
-    case integer (* * * @uint bitCount) :
+    case arrayType (* *) : error mOperatorLocation : "internal error" : leftOperand
+    case opaque (*) : error mOperatorLocation : "internal error" : leftOperand
+    case boolean : error mOperatorLocation : "internal error" : leftOperand
+    case literalString : error mOperatorLocation : "internal error" : leftOperand
+    case enumeration (*) :  error mOperatorLocation : "internal error" : leftOperand
+    case structure (* *) : error mOperatorLocation : "internal error" : leftOperand
+    case staticInteger : # error mOperatorLocation : "internal error" : leftOperand
+      if inOptionalTargetType == .null then
+        error mOperatorLocation : "the ~ operator cannot be applied to static int, without inferred type" : leftOperand
+      elsif [[inOptionalTargetType kind] isInteger] then
+        [[inOptionalTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?2*]
+        if minTarget < 0G then
+          error mOperatorLocation : "the ~ operator cannot be applied to an inferred signed integer type" : leftOperand
+        else
+          leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:maxTarget}
+        end
+      else
+        error mOperatorLocation : "for the ~ operator, the inferred type should be an unsigned integer" : leftOperand
+      end
+   case integer (* * * @uint bitCount) :
       leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:(1G << bitCount) - 1G}
     end
   case notOperator :
@@ -122,10 +134,25 @@ override method @prefixOperatorExpressionAST analyzeExpression
     [expressionResult literalInteger ?1* ?value:let @bigint value]
     @bigint result
     switch mOp 
-    case minusNoOvf : result = - value
-    case unsignedComplement : error mOperatorLocation : "internal error" : result
-    case minus : result = - value
-    case notOperator : result = 1G ^ value
+    case minusNoOvf :
+      result = - value
+    case unsignedComplement :
+      if inOptionalTargetType == .null then
+        error mOperatorLocation : "the ~ operator cannot be applied to static int, without inferred type" : result
+      elsif [[inOptionalTargetType kind] isInteger] then
+        [[inOptionalTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?2*]
+        if minTarget < 0G then
+          error mOperatorLocation : "the ~ operator cannot be applied to an inferred signed integer type" : result
+        else
+          result = value ^ maxTarget
+        end
+      else
+        error mOperatorLocation : "for the ~ operator, the inferred type should be an unsigned integer" : result
+      end
+    case minus :
+      result = - value
+    case notOperator :
+      result = 1G ^ value
     end
     outResult = .literalInteger {!type:resultType !value:result}
   else

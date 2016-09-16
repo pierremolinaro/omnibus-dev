@@ -5,77 +5,59 @@ target "teensy-3-1"
 //——————————————————————————————————————————————————————————————————————————————
 
 func `service activityLedOn @global () {
-  write (!port:.D13 !true)
+  digitalWrite (!port:.D13 !true)
 }
 
 func `service activityLedOff @global () {
-  write (!port:.D13 !false)
+  digitalWrite (!port:.D13 !false)
 }
+
+//——————————————————————————————————————————————————————————————————————————————
+
+let LED_L0 = $digitalPort.D3
+let LED_L1 = $digitalPort.D4
+let LED_L2 = $digitalPort.D5
+let LED_L3 = $digitalPort.D6
+let LED_L4 = $digitalPort.D7
+
+//——————————————————————————————————————————————————————————————————————————————
+
+let PUSH_P0 = $digitalPort.D8
+let PUSH_P1 = $digitalPort.D9
+let PUSH_P2 = $digitalPort.D10
+let PUSH_P3 = $digitalPort.D11
+let PUSH_P4 = $digitalPort.D12
 
 //——————————————————————————————————————————————————————————————————————————————
 
 init 1000 {
+  digitalMode (!port:LED_L0 !mode:.OUTPUT)
+  digitalMode (!port:LED_L1 !mode:.OUTPUT)
+  digitalMode (!port:LED_L2 !mode:.OUTPUT)
+  digitalMode (!port:LED_L3 !mode:.OUTPUT)
+  digitalMode (!port:LED_L4 !mode:.OUTPUT)
   digitalMode (!port:.D13 !mode:.OUTPUT)
+  digitalMode (!port:PUSH_P0 !mode:.INPUT_PULLUP)
+  digitalMode (!port:PUSH_P1 !mode:.INPUT_PULLUP)
+  digitalMode (!port:PUSH_P2 !mode:.INPUT_PULLUP)
+  digitalMode (!port:PUSH_P3 !mode:.INPUT_PULLUP)
+  digitalMode (!port:PUSH_P4 !mode:.INPUT_PULLUP)
 }
 
-//——————————————————————————————————————————————————————————————————————————————
-
-section emptySection () {
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
-service emptyService () {
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
-section getSysTick () -> $uint32 {
-  result = SYST_CVR
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
-let ITERATIONS = 7
-
-//——————————————————————————————————————————————————————————————————————————————
+///——————————————————————————————————————————————————————————————————————————————
 
 task T priority 0 stackSize 512 {
+  var compteur $uint32 = 0
 
   //············································································
-
-  init 1 {
-    var cumul $uint32 = 0
-  //--- Compute getSysTick duration
-    for x $uint32 in 0 ..< ITERATIONS {
-      time.waitDuringMS (!delay:1)
-      let t0 = getSysTick ()
-      let t1 = getSysTick ()
-      cumul += t0 - t1
-      lcd.printUnsigned (!t0 - t1)
-      lcd.printSpaces (!1)
-    }
-    let systickDuration = cumul / ITERATIONS
-  //--- Compute emptySection duration
-    lcd.goto (!line:1 !column:0)
-    for y $uint32 in 0 ..< ITERATIONS {
-      time.waitDuringMS (!delay:1)
-      let t0 = getSysTick ()
-      emptySection ()
-      let t1 = getSysTick ()
-      lcd.printUnsigned (!t0 - t1 - systickDuration)
-      lcd.printSpaces (!1)
-    }
-  //--- Compute emptyService duration
-    lcd.goto (!line:2 !column:0)
-    for z $uint32 in 0 ..< 4 {
-      time.waitDuringMS (!delay:1)
-      let t0 = getSysTick ()
-      emptyService ()
-      let t1 = getSysTick ()
-      lcd.printUnsigned (!t0 - t1 - systickDuration)
-      lcd.printSpaces (!1)
-   }
+  
+  while time.waitUntilMS (!deadline:self.compteur) {
+    self.compteur +%= 50
+    digitalWrite (!port:LED_L0 !not digitalRead (!port:PUSH_P0))
+    digitalWrite (!port:LED_L1 !not digitalRead (!port:PUSH_P1))
+    digitalWrite (!port:LED_L2 !not digitalRead (!port:PUSH_P2))
+    digitalWrite (!port:LED_L3 !not digitalRead (!port:PUSH_P3))
+    digitalWrite (!port:LED_L4 !not digitalRead (!port:PUSH_P4))
   }
   
 

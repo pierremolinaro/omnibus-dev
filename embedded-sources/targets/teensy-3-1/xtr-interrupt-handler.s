@@ -1,7 +1,7 @@
 
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
-@                 S Y S T I C K    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                            *
+@                 I N T E R R U P T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                        *
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
@@ -18,13 +18,12 @@
 !ISR!:
 	.fnstart
 @----------------------------------------- Save preserved registers
-	.save	{r4, r5, lr}
+	.save	{r0, r1, r2, r3, r4, r5, lr}
   push  {r4, r5, lr}
-@----------------------------------------- Activity led On (macro that uses only R4 and R5)
-@	.save	{r0, r1, r2, r3}
+@----------------------------------------- Activity led On
   push  {r0, r1, r2, r3}
-  bl func.activityLedOn_28__29_  @ Defined in PLM source
-  pop  {r0, r1, r2, r3}
+  bl    func.activityLedOn_28__29_   @ Defined in PLM source
+  pop   {r0, r1, r2, r3}
 @----------------------------------------- R4 <- running task context
   ldr   r4, =gRunningTaskControlBlock
   ldr   r4, [r4]

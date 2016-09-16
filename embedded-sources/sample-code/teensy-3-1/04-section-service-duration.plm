@@ -14,93 +14,73 @@ func `service activityLedOff @global () {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-let LED_L0 = $digitalPort.D3
-let LED_L1 = $digitalPort.D4
-let LED_L2 = $digitalPort.D5
-let LED_L3 = $digitalPort.D6
-let LED_L4 = $digitalPort.D7
-
-//——————————————————————————————————————————————————————————————————————————————
-
 init 1000 {
-  digitalMode (!port:LED_L0 !mode:.OUTPUT)
-  digitalMode (!port:LED_L1 !mode:.OUTPUT)
-  digitalMode (!port:LED_L2 !mode:.OUTPUT)
-  digitalMode (!port:LED_L3 !mode:.OUTPUT)
-  digitalMode (!port:LED_L4 !mode:.OUTPUT)
   digitalMode (!port:.D13 !mode:.OUTPUT)
 }
 
 //——————————————————————————————————————————————————————————————————————————————
 
-task T1 priority 1 stackSize 512 {
-  var compteur $uint32 = 0
+section emptySection () {
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+
+service emptyService () {
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+
+section getSysTick () -> $uint32 {
+  result = SYST_CVR
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+
+let ITERATIONS = 7
+
+//——————————————————————————————————————————————————————————————————————————————
+
+task T priority 0 stackSize 512 {
+
+  //············································································
+
+  init 1 {
+    var cumul $uint32 = 0
+  //--- Compute getSysTick duration
+    for x $uint32 in 0 ..< ITERATIONS {
+      time.waitDuringMS (!delay:1)
+      let t0 = getSysTick ()
+      let t1 = getSysTick ()
+      cumul += t0 - t1
+      lcd.printUnsigned (!t0 - t1)
+      lcd.printSpaces (!1)
+    }
+    let systickDuration = cumul / ITERATIONS
+  //--- Compute emptySection duration
+    lcd.goto (!line:1 !column:0)
+    for y $uint32 in 0 ..< ITERATIONS {
+      time.waitDuringMS (!delay:1)
+      let t0 = getSysTick ()
+      emptySection ()
+      let t1 = getSysTick ()
+      lcd.printUnsigned (!t0 - t1 - systickDuration)
+      lcd.printSpaces (!1)
+    }
+  //--- Compute emptyService duration
+    lcd.goto (!line:2 !column:0)
+    for z $uint32 in 0 ..< 4 {
+      time.waitDuringMS (!delay:1)
+      let t0 = getSysTick ()
+      emptyService ()
+      let t1 = getSysTick ()
+      lcd.printUnsigned (!t0 - t1 - systickDuration)
+      lcd.printSpaces (!1)
+   }
+  }
   
-  while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L0 !true)
-    self.compteur +%= 500
-    time.waitUntilMS (!deadline:self.compteur)
-    digitalWrite (!port:LED_L0 !false)
-    self.compteur +%= 500
-    lcd.goto (!line:0 !column:0)
-    lcd.printUnsigned (!time.millis ())
-  }
-}
 
-//——————————————————————————————————————————————————————————————————————————————
+  //············································································
 
-task T2 priority 2 stackSize 512 {
-  var compteur $uint32 = 0
-
-  while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L1 !true)
-    self.compteur +%= 499
-    time.waitUntilMS (!deadline:self.compteur)
-    digitalWrite (!port:LED_L1 !false)
-    self.compteur +%= 499
-  }
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
-task T3 priority 3 stackSize 512 {
-  var compteur $uint32 = 0
-
-  while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L2 !true)
-    self.compteur +%= 498
-    time.waitUntilMS (!deadline:self.compteur)
-    digitalWrite (!port:LED_L2 !false)
-    self.compteur +%= 498
-  }
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
-task T4 priority 4 stackSize 512 {
-  var compteur $uint32 = 0
-
-  while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L3 !true)
-    self.compteur +%= 497
-    time.waitUntilMS (!deadline:self.compteur)
-    digitalWrite (!port:LED_L3 !false)
-    self.compteur +%= 497
-  }
-}
-
-//——————————————————————————————————————————————————————————————————————————————
-
-task T5 priority 5 stackSize 512 {
-  var compteur $uint32 = 0
-
-  while time.waitUntilMS (!deadline:self.compteur) {
-    digitalWrite (!port:LED_L4 !true)
-    self.compteur +%= 496
-    time.waitUntilMS (!deadline:self.compteur)
-    digitalWrite (!port:LED_L4 !false)
-    self.compteur +%= 496
-  }
 }
 
 //——————————————————————————————————————————————————————————————————————————————

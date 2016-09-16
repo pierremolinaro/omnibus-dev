@@ -5,11 +5,11 @@ target "teensy-3-1"
 //——————————————————————————————————————————————————————————————————————————————
 
 func `service activityLedOn @global () {
-  write (!port:.D13 !true)
+  digitalWrite (!port:.D13 !true)
 }
 
 func `service activityLedOff @global () {
-  write (!port:.D13 !false)
+  digitalWrite (!port:.D13 !false)
 }
 
 //-----------------------------------------------------------------------------*
@@ -18,11 +18,10 @@ init 100 {
   digitalMode (!port:.D13 !mode:.OUTPUT)
 }
 
-//-----------------------------------------------------------------------------*
-
 let LED_L0 = $digitalPort.D3
 let LED_L1 = $digitalPort.D4
 let LED_L2 = $digitalPort.D5
+let LED_L3 = $digitalPort.D6
 let LED_L4 = $digitalPort.D7
 
 //-----------------------------------------------------------------------------*
@@ -31,95 +30,102 @@ init 1000 {
   digitalMode (!port:LED_L0 !mode:.OUTPUT)
   digitalMode (!port:LED_L1 !mode:.OUTPUT)
   digitalMode (!port:LED_L2 !mode:.OUTPUT)
+  digitalMode (!port:LED_L3 !mode:.OUTPUT)
   digitalMode (!port:LED_L4 !mode:.OUTPUT)
 }
 
 //-----------------------------------------------------------------------------*
 
-struct $rendezVousDataé {
-  var autoriserLecture  = $semaphore (!value:0)
-  var autoriserEcriture = $semaphore (!value:1)
-  var signalerDonneeLue = $semaphore (!value:0)
-  var donnée $uint32 = 0
+struct $monSemaphore {
+  var value $uint32
+  var list = $taskList ()
+  var guardList = $guardList ()
 
-  public func `user output @mutating @userAccess (?data:inData $uint32) {
-    self.autoriserEcriture.wait ()
-    self.donnée = inData
-    self.autoriserLecture.signal ()
-    self.signalerDonneeLue.wait ()
+  public primitive P @noUnusedWarning () {
+    if self.value > 0 {
+      self.value -= 1
+    }else{
+      block (!?inList:self.list)
+    }
   }
 
-//  public func `user input (!data:outData $uint32) {
-//    self.autoriserLecture.P ()
-//    outData = self.data
-//    self.signalerDonneeLue.V ()
-//    self.autoriserEcriture.V ()
-//  }
-
-  public guard entrée (!data:outData $uint32) : self.autoriserLecture.wait () {
-    outData = self.donnée
-    self.signalerDonneeLue.signal ()
-    self.autoriserEcriture.signal ()
+  public service V () {
+    makeTaskReady (!?fromList:self.list ?found:let found)
+    if not found {
+      self.value += 1
+      notifyChange (!?forGuard:self.guardList)
+    }
   }
 
+  public guard P () {
+    accept = self.value > 0
+    if accept {
+      self.value -= 1
+    }else{
+      handle (!?guard:self.guardList)
+    }
+  }
+  
+  public guard PP () : self.P () {
+  }
 }
 
 //-----------------------------------------------------------------------------*
 
-var rdvs = $rendezVousDataé ()
+var s0 = $monSemaphore (!value:0)
 
 //-----------------------------------------------------------------------------*
 
-var rdvs2 = $rendezVousDataé ()
-
-//-----------------------------------------------------------------------------*
-
-var s = $semaphore (!value:1)
+var s1 = $monSemaphore (!value:0)
 
 //-----------------------------------------------------------------------------*
 
 task T0 priority 0 stackSize 512 {
   var top $uint32 = 0
-  var n $uint32 = 1
 
   while time.waitUntilMS (!deadline:self.top) {
-    rdvs.output (!data:self.n)
-    rdvs2.output (!data:self.n)
-    toggle (!port:LED_L0)
-    self.top += 500
-    self.n += 1
+    s0.V ()
+    self.top += 250
+    digitalWrite (!port:LED_L0 !true)
+    time.waitUntilMS (!deadline:self.top)
+    s0.V ()
+    self.top += 250
+    digitalWrite (!port:LED_L0 !false)
   }
 }
 
 //-----------------------------------------------------------------------------*
 
-task T1 priority 1 stackSize 1024 {
+task T1 priority 1 stackSize 512 {
+  var top $uint32 = 0
 
-  while rdvs.entrée (?data:let x) {
-    toggle (!port:LED_L1)
-    s.wait ()
-      lcd.goto (!line:0 !column:0)
-      lcd.printUnsigned (!x)
-    s.signal ()
+  while time.waitUntilMS (!deadline:self.top) {
+    s1.V ()
+    self.top += 249
+    digitalWrite (!port:LED_L4 !true)
+    time.waitUntilMS (!deadline:self.top)
+    s1.V ()
+    self.top += 249
+    digitalWrite (!port:LED_L4 !false)
   }
 }
 
 //-----------------------------------------------------------------------------*
 
-task T2 priority 2 stackSize 1024 {
+task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
-
-  while rdvs2.entrée (?data:let x) {
-    toggle (!port:LED_L2)
-    s.wait ()
-      lcd.goto (!line:1 !column:0)
-      lcd.printUnsigned (!x)
-    s.signal ()
+  
+  while s0.PP () {
+    toggle (!port:LED_L1)
+  }
+  
+  while s1.P () {
+    toggle (!port:LED_L3)
   }
   
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline += 200
-    toggle (!port:LED_L4)
+    toggle (!port:LED_L2)
   }
 }
 

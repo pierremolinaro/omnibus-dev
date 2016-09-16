@@ -119,6 +119,7 @@ override method @switchInstructionAST analyze
     error mEndOf_test_expression : "test expression type should not be static"
   end
 #--- Analyse case list
+  [!?ioVariableMap openOverrideForSelectBlock]
   @stringset usedEnumerationValues = {}
   @switchCaseListIR switchCaseListIR = {}
   for (caseIdentifiers instructionList) in mSwitchCaseList do
@@ -132,7 +133,6 @@ override method @switchInstructionAST analyze
       usedEnumerationValues += !caseIdf
     end
     @instructionListIR instructionGenerationList = {}
-    [!?ioVariableMap openOverrideForRepeatBlock]
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
       !propertiesAreMutable:inRoutineCanMutateProperties
@@ -148,9 +148,9 @@ override method @switchInstructionAST analyze
       !?alloca:ioAllocaList
       !?instructionListIR:instructionGenerationList
     ]
-    [!?ioVariableMap closeOverride !mEndOf_while_instruction]
     switchCaseListIR += !caseIdentifierIndexList !instructionGenerationList
   end  
+  [!?ioVariableMap closeOverride !mEndOf_while_instruction]
 #--- Check all enumeration values are named in switch instructions
   for (lkey *) in enumConstantMap do
     if not [usedEnumerationValues hasKey !lkey] then
