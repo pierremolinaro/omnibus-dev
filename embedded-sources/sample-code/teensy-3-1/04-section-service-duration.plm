@@ -44,7 +44,7 @@ task T priority 0 stackSize 512 {
 
   //············································································
 
-  init 1 {
+  setup 1 {
     var cumul $uint32 = 0
   //--- Compute getSysTick duration
     for x $uint32 in 0 ..< ITERATIONS {
