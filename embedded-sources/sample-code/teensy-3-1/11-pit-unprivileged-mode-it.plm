@@ -68,7 +68,7 @@ isr PITChannel0 {
 task T priority 12 stackSize 512 {
   var deadline $uint32 = 0
 
-  init 0 {
+  setup 0 {
     setupPIT ()
   }
   
