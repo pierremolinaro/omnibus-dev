@@ -3,11 +3,10 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sortedlist @panicClauseListAST {
-  @lstring mPanicClauseName
+  @bool mIsSetup # true: setup, false: loop
   @instructionListAST mPanicInstructionList
   @location mEndOfPanicInstructions
   @lbigint mPriority
-  @location mLocationPriority
 }{
   mPriority <
 }
@@ -22,19 +21,34 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $panic$
-    $func$
-    $identifier$ ?let panicClauseName
+    $setup$
     $integer$ ?let priority
     ${$
     <instructionList> ?let instructionList
     let endOfInstructionList = @location.here
     $}$
     ioAST.mPanicClauses +=
-      !panicClauseName
+      !true
       !instructionList
       !endOfInstructionList
       !priority
-      !priority.location
+  }
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $panic$
+    $loop$
+    $integer$ ?let priority
+    ${$
+    <instructionList> ?let instructionList
+    let endOfInstructionList = @location.here
+    $}$
+    ioAST.mPanicClauses +=
+      !false
+      !instructionList
+      !endOfInstructionList
+      !priority
   }
 
   #·····················································································································
@@ -58,12 +72,10 @@ method @panicClauseListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceG
 method @panicClauseListAST-element enterInContext
   ?!context:@semanticContext ioContext
 {
-  if mPanicClauseName.string == "setup" then
-    [!?ioContext.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
-  elsif mPanicClauseName.string == "loop" then
-    [!?ioContext.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
+  if mIsSetup then
+    [!?ioContext.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]
   else
-    error mPanicClauseName : "panic routine name should be \"setup\" or \"loop\""
+    [!?ioContext.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mPriority.location}]
   end
 }
 
@@ -91,10 +103,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  if not [inContext.mModeMap hasKey !panicModeName ()] then
-    error mPanicClauseName : "the `" + panicModeName () + " mode should be defined in order to use a panic clause"
-  end
-  let routineNameForInvocationGraph = panicNameForInvocationGraph (!mPanicClauseName.string !mPriority)
+  let routineNameForInvocationGraph = panicNameForInvocationGraph (!if mIsSetup then "setup" else "loop" end !mPriority)
 #--- Variable map
   initialVariableMap (
 #    !routineNameForInvocation:routineNameForInvocationGraph.string
@@ -107,7 +116,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
   )
 #--- Insert predefined input arguments
   let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
-  let codeArg = @lstring.new {!"CODE" !mPanicClauseName.location}
+  let codeArg = @lstring.new {!"CODE" !mPriority.location}
   [!?variableMap insertUsedConstantInputFormalArgument
     !lkey:codeArg
     !type:inContext.mPanicCodeType
@@ -116,7 +125,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !copyable:[inContext.mPanicCodeType copyable]
     !canBeUsedAsInputParameter:false
   ]
-  let fileArg = @lstring.new {!"FILE" !mPanicClauseName.location}
+  let fileArg = @lstring.new {!"FILE" !mPriority.location}
   [!?variableMap insertUsedConstantInputFormalArgument
     !lkey:fileArg
     !type:StaticStringType
@@ -125,7 +134,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !copyable:[StaticStringType copyable]
     !canBeUsedAsInputParameter:false
   ]
-  let lineArg = @lstring.new {!"LINE" !mPanicClauseName.location}
+  let lineArg = @lstring.new {!"LINE" !mPriority.location}
   [!?variableMap insertUsedConstantInputFormalArgument
     !lkey:lineArg
     !type:inContext.mPanicLineType
@@ -163,14 +172,12 @@ method @panicClauseListAST-element panicSemanticAnalysis
   [variableMap checkAutomatonStates !mEndOfPanicInstructions]
   drop variableMap
 #--- Code generation
-  if mPanicClauseName.string == "setup" then
-    [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mLocationPriority}]
+  if mIsSetup then
+    [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]
     ioIntermediateCodeStruct.mPanicSetupInstructionListIR += instructionGenerationList
-  elsif mPanicClauseName.string == "loop" then
-    [!?ioTemporaries.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mLocationPriority}]
-    ioIntermediateCodeStruct.mPanicLoopInstructionListIR += instructionGenerationList
   else
-    error mPanicClauseName : "panic routine name should be \"setup\" or \"loop\""
+    [!?ioTemporaries.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mPriority.location}]
+    ioIntermediateCodeStruct.mPanicLoopInstructionListIR += instructionGenerationList
   end
 }
 

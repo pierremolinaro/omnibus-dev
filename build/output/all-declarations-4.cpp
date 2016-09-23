@@ -6242,11 +6242,10 @@ GALGAS_taskList_2D_element GALGAS_taskList_2D_element::extractObject (const GALG
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicClauseListAST_2D_element::GALGAS_panicClauseListAST_2D_element (void) :
-mAttribute_mPanicClauseName (),
+mAttribute_mIsSetup (),
 mAttribute_mPanicInstructionList (),
 mAttribute_mEndOfPanicInstructions (),
-mAttribute_mPriority (),
-mAttribute_mLocationPriority () {
+mAttribute_mPriority () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6256,39 +6255,35 @@ GALGAS_panicClauseListAST_2D_element::~ GALGAS_panicClauseListAST_2D_element (vo
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_panicClauseListAST_2D_element::GALGAS_panicClauseListAST_2D_element (const GALGAS_lstring & inOperand0,
+GALGAS_panicClauseListAST_2D_element::GALGAS_panicClauseListAST_2D_element (const GALGAS_bool & inOperand0,
                                                                             const GALGAS_instructionListAST & inOperand1,
                                                                             const GALGAS_location & inOperand2,
-                                                                            const GALGAS_lbigint & inOperand3,
-                                                                            const GALGAS_location & inOperand4) :
-mAttribute_mPanicClauseName (inOperand0),
+                                                                            const GALGAS_lbigint & inOperand3) :
+mAttribute_mIsSetup (inOperand0),
 mAttribute_mPanicInstructionList (inOperand1),
 mAttribute_mEndOfPanicInstructions (inOperand2),
-mAttribute_mPriority (inOperand3),
-mAttribute_mLocationPriority (inOperand4) {
+mAttribute_mPriority (inOperand3) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicClauseListAST_2D_element GALGAS_panicClauseListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_panicClauseListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
+  return GALGAS_panicClauseListAST_2D_element (GALGAS_bool::constructor_default (HERE),
                                                GALGAS_instructionListAST::constructor_emptyList (HERE),
                                                GALGAS_location::constructor_nowhere (HERE),
-                                               GALGAS_lbigint::constructor_default (HERE),
-                                               GALGAS_location::constructor_nowhere (HERE)) ;
+                                               GALGAS_lbigint::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_panicClauseListAST_2D_element GALGAS_panicClauseListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+GALGAS_panicClauseListAST_2D_element GALGAS_panicClauseListAST_2D_element::constructor_new (const GALGAS_bool & inOperand0,
                                                                                             const GALGAS_instructionListAST & inOperand1,
                                                                                             const GALGAS_location & inOperand2,
-                                                                                            const GALGAS_lbigint & inOperand3,
-                                                                                            const GALGAS_location & inOperand4 
+                                                                                            const GALGAS_lbigint & inOperand3 
                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_panicClauseListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_panicClauseListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
+    result = GALGAS_panicClauseListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3) ;
   }
   return result ;
 }
@@ -6298,7 +6293,7 @@ GALGAS_panicClauseListAST_2D_element GALGAS_panicClauseListAST_2D_element::const
 typeComparisonResult GALGAS_panicClauseListAST_2D_element::objectCompare (const GALGAS_panicClauseListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mPanicClauseName.objectCompare (inOperand.mAttribute_mPanicClauseName) ;
+    result = mAttribute_mIsSetup.objectCompare (inOperand.mAttribute_mIsSetup) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mPanicInstructionList.objectCompare (inOperand.mAttribute_mPanicInstructionList) ;
@@ -6309,26 +6304,22 @@ typeComparisonResult GALGAS_panicClauseListAST_2D_element::objectCompare (const 
   if (result == kOperandEqual) {
     result = mAttribute_mPriority.objectCompare (inOperand.mAttribute_mPriority) ;
   }
-  if (result == kOperandEqual) {
-    result = mAttribute_mLocationPriority.objectCompare (inOperand.mAttribute_mLocationPriority) ;
-  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_panicClauseListAST_2D_element::isValid (void) const {
-  return mAttribute_mPanicClauseName.isValid () && mAttribute_mPanicInstructionList.isValid () && mAttribute_mEndOfPanicInstructions.isValid () && mAttribute_mPriority.isValid () && mAttribute_mLocationPriority.isValid () ;
+  return mAttribute_mIsSetup.isValid () && mAttribute_mPanicInstructionList.isValid () && mAttribute_mEndOfPanicInstructions.isValid () && mAttribute_mPriority.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_panicClauseListAST_2D_element::drop (void) {
-  mAttribute_mPanicClauseName.drop () ;
+  mAttribute_mIsSetup.drop () ;
   mAttribute_mPanicInstructionList.drop () ;
   mAttribute_mEndOfPanicInstructions.drop () ;
   mAttribute_mPriority.drop () ;
-  mAttribute_mLocationPriority.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6339,23 +6330,21 @@ void GALGAS_panicClauseListAST_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mPanicClauseName.description (ioString, inIndentation+1) ;
+    mAttribute_mIsSetup.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mPanicInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mEndOfPanicInstructions.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mPriority.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mLocationPriority.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_panicClauseListAST_2D_element::getter_mPanicClauseName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPanicClauseName ;
+GALGAS_bool GALGAS_panicClauseListAST_2D_element::getter_mIsSetup (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIsSetup ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6374,12 +6363,6 @@ GALGAS_location GALGAS_panicClauseListAST_2D_element::getter_mEndOfPanicInstruct
 
 GALGAS_lbigint GALGAS_panicClauseListAST_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPriority ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_panicClauseListAST_2D_element::getter_mLocationPriority (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLocationPriority ;
 }
 
 
@@ -6439,58 +6422,54 @@ void extensionMethod_panicSemanticAnalysis (const GALGAS_panicClauseListAST_2D_e
                                             GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
-  const enumGalgasBool test_0 = constinArgument_inContext.mAttribute_mModeMap.getter_hasKey (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 94)) COMMA_SOURCE_FILE ("panic.galgas", 94)).operator_not (SOURCE_FILE ("panic.galgas", 94)).boolEnum () ;
-  if (kBoolTrue == test_0) {
-    TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (inObject.mAttribute_mPanicClauseName.getter_location (SOURCE_FILE ("panic.galgas", 95)), GALGAS_string ("the `").add_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 95)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 95)).add_operation (GALGAS_string (" mode should be defined in order to use a panic clause"), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 95)), fixItArray1  COMMA_SOURCE_FILE ("panic.galgas", 95)) ;
+  GALGAS_string temp_0 ;
+  const enumGalgasBool test_1 = inObject.mAttribute_mIsSetup.boolEnum () ;
+  if (kBoolTrue == test_1) {
+    temp_0 = GALGAS_string ("setup") ;
+  }else if (kBoolFalse == test_1) {
+    temp_0 = GALGAS_string ("loop") ;
   }
-  GALGAS_lstring var_routineNameForInvocationGraph_4564 = function_panicNameForInvocationGraph (inObject.mAttribute_mPanicClauseName.mAttribute_string, inObject.mAttribute_mPriority, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 97)) ;
-  GALGAS_variableMap var_variableMap_4914 ;
+  GALGAS_lstring var_routineNameForInvocationGraph_4569 = function_panicNameForInvocationGraph (temp_0, inObject.mAttribute_mPriority, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 106)) ;
+  GALGAS_variableMap var_variableMap_4936 ;
   {
-  routine_initialVariableMap (constinArgument_inContext, GALGAS_bool (false), GALGAS_accessKind::constructor_readWriteAccess (SOURCE_FILE ("panic.galgas", 103)), GALGAS_bool (false), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("panic.galgas", 105)), var_variableMap_4914, inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 99)) ;
+  routine_initialVariableMap (constinArgument_inContext, GALGAS_bool (false), GALGAS_accessKind::constructor_readWriteAccess (SOURCE_FILE ("panic.galgas", 112)), GALGAS_bool (false), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("panic.galgas", 114)), var_variableMap_4936, inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 108)) ;
   }
-  GALGAS_unifiedTypeMap_2D_proxy var_StaticStringType_4980 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, function_staticStringTypeName (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 109)).getter_nowhere (SOURCE_FILE ("panic.galgas", 109)), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 109)) ;
-  GALGAS_lstring var_codeArg_5085 = GALGAS_lstring::constructor_new (GALGAS_string ("CODE"), inObject.mAttribute_mPanicClauseName.mAttribute_location  COMMA_SOURCE_FILE ("panic.galgas", 110)) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_StaticStringType_5002 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, function_staticStringTypeName (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 118)).getter_nowhere (SOURCE_FILE ("panic.galgas", 118)), inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 118)) ;
+  GALGAS_lstring var_codeArg_5107 = GALGAS_lstring::constructor_new (GALGAS_string ("CODE"), inObject.mAttribute_mPriority.mAttribute_location  COMMA_SOURCE_FILE ("panic.galgas", 119)) ;
   {
-  var_variableMap_4914.setter_insertUsedConstantInputFormalArgument (var_codeArg_5085, constinArgument_inContext.mAttribute_mPanicCodeType, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (constinArgument_inContext.mAttribute_mPanicCodeType, var_codeArg_5085  COMMA_SOURCE_FILE ("panic.galgas", 115)), constinArgument_inContext.mAttribute_mPanicCodeType.getter_copyable (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 116)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 111)) ;
+  var_variableMap_4936.setter_insertUsedConstantInputFormalArgument (var_codeArg_5107, constinArgument_inContext.mAttribute_mPanicCodeType, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (constinArgument_inContext.mAttribute_mPanicCodeType, var_codeArg_5107  COMMA_SOURCE_FILE ("panic.galgas", 124)), constinArgument_inContext.mAttribute_mPanicCodeType.getter_copyable (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 125)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 120)) ;
   }
-  GALGAS_lstring var_fileArg_5466 = GALGAS_lstring::constructor_new (GALGAS_string ("FILE"), inObject.mAttribute_mPanicClauseName.mAttribute_location  COMMA_SOURCE_FILE ("panic.galgas", 119)) ;
+  GALGAS_lstring var_fileArg_5481 = GALGAS_lstring::constructor_new (GALGAS_string ("FILE"), inObject.mAttribute_mPriority.mAttribute_location  COMMA_SOURCE_FILE ("panic.galgas", 128)) ;
   {
-  var_variableMap_4914.setter_insertUsedConstantInputFormalArgument (var_fileArg_5466, var_StaticStringType_4980, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_StaticStringType_4980, var_fileArg_5466  COMMA_SOURCE_FILE ("panic.galgas", 124)), var_StaticStringType_4980.getter_copyable (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 125)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 120)) ;
+  var_variableMap_4936.setter_insertUsedConstantInputFormalArgument (var_fileArg_5481, var_StaticStringType_5002, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_StaticStringType_5002, var_fileArg_5481  COMMA_SOURCE_FILE ("panic.galgas", 133)), var_StaticStringType_5002.getter_copyable (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 134)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 129)) ;
   }
-  GALGAS_lstring var_lineArg_5823 = GALGAS_lstring::constructor_new (GALGAS_string ("LINE"), inObject.mAttribute_mPanicClauseName.mAttribute_location  COMMA_SOURCE_FILE ("panic.galgas", 128)) ;
+  GALGAS_lstring var_lineArg_5831 = GALGAS_lstring::constructor_new (GALGAS_string ("LINE"), inObject.mAttribute_mPriority.mAttribute_location  COMMA_SOURCE_FILE ("panic.galgas", 137)) ;
   {
-  var_variableMap_4914.setter_insertUsedConstantInputFormalArgument (var_lineArg_5823, constinArgument_inContext.mAttribute_mPanicLineType, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (constinArgument_inContext.mAttribute_mPanicLineType, var_lineArg_5823  COMMA_SOURCE_FILE ("panic.galgas", 133)), constinArgument_inContext.mAttribute_mPanicLineType.getter_copyable (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 134)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 129)) ;
+  var_variableMap_4936.setter_insertUsedConstantInputFormalArgument (var_lineArg_5831, constinArgument_inContext.mAttribute_mPanicLineType, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (constinArgument_inContext.mAttribute_mPanicLineType, var_lineArg_5831  COMMA_SOURCE_FILE ("panic.galgas", 142)), constinArgument_inContext.mAttribute_mPanicLineType.getter_copyable (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 143)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 138)) ;
   }
-  const enumGalgasBool test_2 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineNameForInvocationGraph_4564.mAttribute_string COMMA_SOURCE_FILE ("panic.galgas", 138)).operator_not (SOURCE_FILE ("panic.galgas", 138)).boolEnum () ;
+  const enumGalgasBool test_2 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineNameForInvocationGraph_4569.mAttribute_string COMMA_SOURCE_FILE ("panic.galgas", 147)).operator_not (SOURCE_FILE ("panic.galgas", 147)).boolEnum () ;
   if (kBoolTrue == test_2) {
     {
-    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_4564, var_routineNameForInvocationGraph_4564, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 139)) ;
+    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_routineNameForInvocationGraph_4569, var_routineNameForInvocationGraph_4569, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 148)) ;
     }
   }
-  GALGAS_instructionListIR var_instructionGenerationList_6523 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("panic.galgas", 145)) ;
-  GALGAS_allocaList var_initAllocaList_6557 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("panic.galgas", 146)) ;
-  GALGAS_stringset temp_3 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("panic.galgas", 153)) ;
-  temp_3.addAssign_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 153))  COMMA_SOURCE_FILE ("panic.galgas", 153)) ;
-  extensionMethod_analyzeRoutineInstructionList (inObject.mAttribute_mPanicInstructionList, GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("panic.galgas", 148)), GALGAS_bool (false), GALGAS_bool (false), var_routineNameForInvocationGraph_4564, constinArgument_inContext, temp_3, GALGAS_bool (false), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap_4914, var_initAllocaList_6557, var_instructionGenerationList_6523, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 147)) ;
-  var_variableMap_4914.method_checkAutomatonStates (inObject.mAttribute_mEndOfPanicInstructions, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 163)) ;
-  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, inObject.mAttribute_mPanicClauseName.mAttribute_string.objectCompare (GALGAS_string ("setup"))).boolEnum () ;
+  GALGAS_instructionListIR var_instructionGenerationList_6524 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("panic.galgas", 154)) ;
+  GALGAS_allocaList var_initAllocaList_6558 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("panic.galgas", 155)) ;
+  GALGAS_stringset temp_3 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("panic.galgas", 162)) ;
+  temp_3.addAssign_operation (function_panicModeName (inCompiler COMMA_SOURCE_FILE ("panic.galgas", 162))  COMMA_SOURCE_FILE ("panic.galgas", 162)) ;
+  extensionMethod_analyzeRoutineInstructionList (inObject.mAttribute_mPanicInstructionList, GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("panic.galgas", 157)), GALGAS_bool (false), GALGAS_bool (false), var_routineNameForInvocationGraph_4569, constinArgument_inContext, temp_3, GALGAS_bool (false), ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap_4936, var_initAllocaList_6558, var_instructionGenerationList_6524, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 156)) ;
+  var_variableMap_4936.method_checkAutomatonStates (inObject.mAttribute_mEndOfPanicInstructions, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 172)) ;
+  const enumGalgasBool test_4 = inObject.mAttribute_mIsSetup.boolEnum () ;
   if (kBoolTrue == test_4) {
     {
-    ioArgument_ioTemporaries.mAttribute_mPanicSetupRoutinePriorityMap.setter_insertSetupKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("panic.galgas", 167)), inObject.mAttribute_mLocationPriority  COMMA_SOURCE_FILE ("panic.galgas", 167)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 167)) ;
+    ioArgument_ioTemporaries.mAttribute_mPanicSetupRoutinePriorityMap.setter_insertSetupKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("panic.galgas", 176)), inObject.mAttribute_mPriority.mAttribute_location  COMMA_SOURCE_FILE ("panic.galgas", 176)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 176)) ;
     }
-    ioArgument_ioIntermediateCodeStruct.mAttribute_mPanicSetupInstructionListIR.plusAssign_operation(var_instructionGenerationList_6523, inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 168)) ;
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mPanicSetupInstructionListIR.plusAssign_operation(var_instructionGenerationList_6524, inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 177)) ;
   }else if (kBoolFalse == test_4) {
-    const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, inObject.mAttribute_mPanicClauseName.mAttribute_string.objectCompare (GALGAS_string ("loop"))).boolEnum () ;
-    if (kBoolTrue == test_5) {
-      {
-      ioArgument_ioTemporaries.mAttribute_mPanicLoopRoutinePriorityMap.setter_insertLoopKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("panic.galgas", 170)), inObject.mAttribute_mLocationPriority  COMMA_SOURCE_FILE ("panic.galgas", 170)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 170)) ;
-      }
-      ioArgument_ioIntermediateCodeStruct.mAttribute_mPanicLoopInstructionListIR.plusAssign_operation(var_instructionGenerationList_6523, inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 171)) ;
-    }else if (kBoolFalse == test_5) {
-      TC_Array <C_FixItDescription> fixItArray6 ;
-      inCompiler->emitSemanticError (inObject.mAttribute_mPanicClauseName.getter_location (SOURCE_FILE ("panic.galgas", 173)), GALGAS_string ("panic routine name should be \"setup\" or \"loop\""), fixItArray6  COMMA_SOURCE_FILE ("panic.galgas", 173)) ;
+    {
+    ioArgument_ioTemporaries.mAttribute_mPanicLoopRoutinePriorityMap.setter_insertLoopKey (GALGAS_lstring::constructor_new (inObject.mAttribute_mPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("panic.galgas", 179)), inObject.mAttribute_mPriority.mAttribute_location  COMMA_SOURCE_FILE ("panic.galgas", 179)), inCompiler COMMA_SOURCE_FILE ("panic.galgas", 179)) ;
     }
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mPanicLoopInstructionListIR.plusAssign_operation(var_instructionGenerationList_6524, inCompiler  COMMA_SOURCE_FILE ("panic.galgas", 180)) ;
   }
 }
 
@@ -14491,4 +14470,56 @@ GALGAS_forLowerUpperBoundInstructionIR GALGAS_forLowerUpperBoundInstructionIR::e
   }
   return result ;
 }
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                  Extension Getter '@effectiveParameterPassingModeAST passingModeForActualSelector'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string extensionGetter_passingModeForActualSelector (const GALGAS_effectiveParameterPassingModeAST & inObject,
+                                                            const GALGAS_lstring & constinArgument_inSelector,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  const GALGAS_effectiveParameterPassingModeAST temp_0 = inObject ;
+  switch (temp_0.enumValue ()) {
+  case GALGAS_effectiveParameterPassingModeAST::kNotBuilt:
+    break ;
+  case GALGAS_effectiveParameterPassingModeAST::kEnum_input:
+    {
+      result_outResult = GALGAS_string ("\?") ;
+    }
+    break ;
+  case GALGAS_effectiveParameterPassingModeAST::kEnum_inputWithType:
+    {
+      result_outResult = GALGAS_string ("\?") ;
+    }
+    break ;
+  case GALGAS_effectiveParameterPassingModeAST::kEnum_output:
+    {
+      result_outResult = GALGAS_string ("!") ;
+    }
+    break ;
+  case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInput:
+    {
+      result_outResult = GALGAS_string ("!\?") ;
+    }
+    break ;
+  case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInputSelfVariable:
+    {
+      result_outResult = GALGAS_string ("!\?") ;
+    }
+    break ;
+  }
+  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, constinArgument_inSelector.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_1) {
+    result_outResult.plusAssign_operation(constinArgument_inSelector.mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 69)), inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 69)) ;
+  }
+//---
+  return result_outResult ;
+}
+
+
+
 

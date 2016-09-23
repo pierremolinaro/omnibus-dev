@@ -10,53 +10,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        Function 'literalCharacterArrayName'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string function_literalCharacterArrayName (const GALGAS_uint & constinArgument_inIndex,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("@str.array.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 82)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 82)) ;
-//---
-  return result_outName ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//  Function introspection                                                                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const C_galgas_type_descriptor * functionArgs_literalCharacterArrayName [2] = {
-  & kTypeDescriptor_GALGAS_uint,
-  NULL
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_object functionWithGenericHeader_literalCharacterArrayName (C_Compiler * inCompiler,
-                                                                          const cObjectArray & inEffectiveParameterArray,
-                                                                          const GALGAS_location & /* inErrorLocation */
-                                                                          COMMA_LOCATION_ARGS) {
-  const GALGAS_uint operand0 = GALGAS_uint::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                           inCompiler
-                                                           COMMA_THERE) ;
-  return function_literalCharacterArrayName (operand0,
-                                             inCompiler
-                                             COMMA_THERE).getter_object (THERE) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_galgas_function_descriptor functionDescriptor_literalCharacterArrayName ("literalCharacterArrayName",
-                                                                           functionWithGenericHeader_literalCharacterArrayName,
-                                                                           & kTypeDescriptor_GALGAS_string,
-                                                                           1,
-                                                                           functionArgs_literalCharacterArrayName) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                        Once function 'staticStringTypeName'                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10526,27 +10479,27 @@ const char * gWrapperFileContent_30_targetTemplates = "\n"
   "//--- Switch to crystal as clock source, FLL input = 16 MHz / 512\n"
   "  MCG_C1 = $MCG_C1 {CLKS:2, FRDIV:4}\n"
   "//--- Wait for crystal oscillator to begin\n"
-  "  do while MCG_S.OSCINIT0 == 0 {}\n"
+  "  loop while MCG_S.OSCINIT0 == 0 {}\n"
   "//--- Wait for FLL to use oscillator\n"
-  "  do while MCG_S.IREFST != 0 {}\n"
+  "  loop while MCG_S.IREFST != 0 {}\n"
   "//--- Wait for MCGOUT to use oscillator\n"
-  "  do while MCG_S.CLKST != $MCG_S {CLKST:2} {}\n"
+  "  loop while MCG_S.CLKST != $MCG_S {CLKST:2} {}\n"
   "//--- Now we're in FBE mode\n"
   "//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz\n"
   "  MCG_C5 = $MCG_C5 {PRDIV0:3}\n"
   "//--- Config PLL for 96 MHz output\n"
   "  MCG_C6 = $MCG_C6 {PLLS, VDIV0:0}\n"
   "//--- Wait for PLL to start using xtal as its input\n"
-  "  do while MCG_S.PLLST == 0 {}\n"
+  "  loop while MCG_S.PLLST == 0 {}\n"
   "//--- Wait for PLL to lock\n"
-  "  do while MCG_S.LOCK0 == 0 {}\n"
+  "  loop while MCG_S.LOCK0 == 0 {}\n"
   "//--- Now we're in PBE mode\n"
   "//    Config divisors: 96 MHz core, 48 MHz bus, 24 MHz flash\n"
   "  SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:3}\n"
   "//--- Switch to PLL as clock source, FLL input = 16 MHz / 512\n"
   "  MCG_C1 = $MCG_C1 {CLKS:0, FRDIV:4}\n"
   "//--- Wait for PLL clock to be used\n"
-  "  do while MCG_S.CLKST != $MCG_S {CLKST:3} {}\n"
+  "  loop while MCG_S.CLKST != $MCG_S {CLKST:3} {}\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -10556,7 +10509,7 @@ const cRegularFileWrapper gWrapperFile_30_targetTemplates (
   "teensy-3-1-boot.plm",
   "plm",
   true, // Text file
-  2296, // Text length
+  2308, // Text length
   gWrapperFileContent_30_targetTemplates
 ) ;
 
@@ -11447,7 +11400,7 @@ const char * gWrapperFileContent_32_targetTemplates = "\n"
   "  \n"
   "  public func `user printSpaces @noUnusedWarning (\?inCount $uint32) {\n"
   "    var count = inCount\n"
-  "    do while (count > 0) {\n"
+  "    loop while (count > 0) {\n"
   "      self.writeData_inUserMode (!0x20)\n"
   "      count -= 1\n"
   "    }\n"
@@ -11459,7 +11412,7 @@ const char * gWrapperFileContent_32_targetTemplates = "\n"
   "    var divisor $uint32 = 1_000_000_000\n"
   "    var value = inValue\n"
   "    var isPrinting = false\n"
-  "    do while divisor > 0 {\n"
+  "    loop while divisor > 0 {\n"
   "      if isPrinting or (value >= divisor) {\n"
   "        let quotient = value / divisor\n"
   "        let remainder = value - quotient * divisor\n"
@@ -11565,7 +11518,7 @@ const char * gWrapperFileContent_32_targetTemplates = "\n"
   "    var divisor $uint32 = 1_000_000_000\n"
   "    var value = inValue\n"
   "    var isPrinting = false\n"
-  "    do while divisor > 0 {\n"
+  "    loop while divisor > 0 {\n"
   "      if isPrinting or (value >= divisor) {\n"
   "        let quotient = value !/ divisor\n"
   "        let remainder = value -% quotient *% divisor\n"
@@ -11648,7 +11601,7 @@ const cRegularFileWrapper gWrapperFile_32_targetTemplates (
   "teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  16000, // Text length
+  16006, // Text length
   gWrapperFileContent_32_targetTemplates
 ) ;
 
@@ -11789,7 +11742,7 @@ const char * gWrapperFileContent_34_targetTemplates = "\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "panic func setup 0 {\n"
+  "panic setup 0 {\n"
   "  digitalMode (!port:.D3 !mode:.OUTPUT)\n"
   "  digitalMode (!port:.D4 !mode:.OUTPUT)\n"
   "  digitalMode (!port:.D5 !mode:.OUTPUT)\n"
@@ -11808,7 +11761,7 @@ const char * gWrapperFileContent_34_targetTemplates = "\n"
   "\n"
   "//\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "panic func loop 0 {\n"
+  "panic loop 0 {\n"
   "  time.busyWaitingDuringMS (!50)\n"
   "  toggle (!port:.D3)\n"
   "  toggle (!port:.D4)\n"
@@ -11824,7 +11777,7 @@ const cRegularFileWrapper gWrapperFile_34_targetTemplates (
   "teensy-3-1-panic.plm",
   "plm",
   true, // Text file
-  1010, // Text length
+  1000, // Text length
   gWrapperFileContent_34_targetTemplates
 ) ;
 
@@ -11912,7 +11865,7 @@ const char * gWrapperFileContent_35_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
   "  public func `panic `init oneMillisecondBusyWait @noUnusedWarning () {\n"
-  "    do while not SYST_CSR.COUNTFLAG.bool {}\n"
+  "    loop while not SYST_CSR.COUNTFLAG.bool {}\n"
   "  }\n"
   "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
@@ -11979,7 +11932,7 @@ const cRegularFileWrapper gWrapperFile_35_targetTemplates (
   "teensy-3-1-xtr.plm",
   "plm",
   true, // Text file
-  4959, // Text length
+  4961, // Text length
   gWrapperFileContent_35_targetTemplates
 ) ;
 

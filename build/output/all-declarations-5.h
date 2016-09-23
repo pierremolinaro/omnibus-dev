@@ -11,17 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//           Extension getter '@effectiveParameterPassingModeAST passingModeForActualSelector' (as function)           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_passingModeForActualSelector (const class GALGAS_effectiveParameterPassingModeAST & inObject,
-                                                                  const class GALGAS_lstring & constinArgument0,
-                                                                  class C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                             @switchInstructionIR class                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

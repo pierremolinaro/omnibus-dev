@@ -80,7 +80,7 @@ module time {
   //············································································
   
   public func `panic `init oneMillisecondBusyWait @noUnusedWarning () {
-    do while not SYST_CSR.COUNTFLAG.bool {}
+    loop while not SYST_CSR.COUNTFLAG.bool {}
   }
 
   //············································································

@@ -9,58 +9,6 @@
 
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                  Extension Getter '@effectiveParameterPassingModeAST passingModeForActualSelector'                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string extensionGetter_passingModeForActualSelector (const GALGAS_effectiveParameterPassingModeAST & inObject,
-                                                            const GALGAS_lstring & constinArgument_inSelector,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  const GALGAS_effectiveParameterPassingModeAST temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GALGAS_effectiveParameterPassingModeAST::kNotBuilt:
-    break ;
-  case GALGAS_effectiveParameterPassingModeAST::kEnum_input:
-    {
-      result_outResult = GALGAS_string ("\?") ;
-    }
-    break ;
-  case GALGAS_effectiveParameterPassingModeAST::kEnum_inputWithType:
-    {
-      result_outResult = GALGAS_string ("\?") ;
-    }
-    break ;
-  case GALGAS_effectiveParameterPassingModeAST::kEnum_output:
-    {
-      result_outResult = GALGAS_string ("!") ;
-    }
-    break ;
-  case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInput:
-    {
-      result_outResult = GALGAS_string ("!\?") ;
-    }
-    break ;
-  case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInputSelfVariable:
-    {
-      result_outResult = GALGAS_string ("!\?") ;
-    }
-    break ;
-  }
-  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, constinArgument_inSelector.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
-  if (kBoolTrue == test_1) {
-    result_outResult.plusAssign_operation(constinArgument_inSelector.mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 69)), inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 69)) ;
-  }
-//---
-  return result_outResult ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
 //   Object comparison                                                                                                 *
 //---------------------------------------------------------------------------------------------------------------------*
 

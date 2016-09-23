@@ -18,7 +18,7 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList  {
-    $do$
+    $loop$
     let instructionLocation = @location.here
     $while$
     <expression> ?let @expressionAST testExpression
