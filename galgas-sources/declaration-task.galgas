@@ -90,6 +90,7 @@ syntax extension plm_syntax {
       $}$
       taskProcList += !{} !false !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
     while
+#      $setup$
       $init$
       $integer$ ?let @lbigint priority
       ${$

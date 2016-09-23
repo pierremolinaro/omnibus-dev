@@ -3,7 +3,7 @@ check target "teensy-3-1"
 
 //——————————————————————————————————————————————————————————————————————————————
 
-panic func setup 0 {
+panic setup 0 {
   digitalMode (!port:.D3 !mode:.OUTPUT)
   digitalMode (!port:.D4 !mode:.OUTPUT)
   digitalMode (!port:.D5 !mode:.OUTPUT)
@@ -22,7 +22,7 @@ panic func setup 0 {
 
 //··············································································
 
-panic func loop 0 {
+panic loop 0 {
   time.busyWaitingDuringMS (!50)
   toggle (!port:.D3)
   toggle (!port:.D4)
