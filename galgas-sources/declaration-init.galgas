@@ -152,7 +152,7 @@ proc initSemanticAnalysis
   end
 #--- Variable map
   initialVariableMap (
-    !routineNameForInvocation:routineNameForInvocationGraph.string
+#    !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
     !userMode:false
     !registerAccess:.readWriteAccess

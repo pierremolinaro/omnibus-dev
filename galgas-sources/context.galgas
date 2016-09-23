@@ -72,10 +72,10 @@ map @allowedGuardMap {
 map @globalVariableMap %selectors {
   @unifiedTypeMap-proxy type
   @stringset executionModeSet
-  @allowedRoutineMap allowedRoutineMap
+#  @allowedRoutineMap allowedRoutineMap
   @allowedGuardMap allowedGuardMap
-  @allowedISRMap allowedISRMap
-  @allowedTaskMap allowedTaskMap
+#  @allowedISRMap allowedISRMap
+#  @allowedTaskMap allowedTaskMap
   @objectIR initialValue
   @bool isConstant
   @bool allowedAccessToAll
@@ -116,7 +116,12 @@ func checkMode
     requiredModeListString += " `" + m
   end
   let runInProcessorUserMode = [inRequiredModes hasKey !userModeName ()]
-  let runInProcessorPrivilegedMode = [inRequiredModes hasKey !serviceModeName ()] || [inRequiredModes hasKey !kernelModeName ()]
+  let runInProcessorPrivilegedMode =
+#    [inRequiredModes hasKey !sectionModeName ()]
+#    ||
+    [inRequiredModes hasKey !serviceModeName ()]
+    ||
+    [inRequiredModes hasKey !primitiveModeName ()]
   switch inRoutineKind
   case function :
     outResult = .function
@@ -299,7 +304,7 @@ func allModeMap -> @modeMap outModeMap {
   [!?outModeMap insertKey ![initModeName () nowhere]]
   [!?outModeMap insertKey ![panicModeName () nowhere]]
   [!?outModeMap insertKey ![sectionModeName () nowhere]]
-  [!?outModeMap insertKey ![kernelModeName () nowhere]]
+  [!?outModeMap insertKey ![primitiveModeName () nowhere]]
   [!?outModeMap insertKey ![serviceModeName () nowhere]]
   [!?outModeMap insertKey ![userModeName () nowhere]]
   [!?outModeMap insertKey ![guardModeName () nowhere]]

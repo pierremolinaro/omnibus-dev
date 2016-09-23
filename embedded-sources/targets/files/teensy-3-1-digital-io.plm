@@ -41,7 +41,7 @@ enum $digitalMode {
 
 //··············································································
 
-public func `init `panic `service `kernel
+public func `init `panic `service `primitive
 digitalMode @noUnusedWarning (?port:port $digitalPort
                               ?mode:mode $digitalMode) {
   switch port {
@@ -338,7 +338,7 @@ digitalMode @noUnusedWarning (?port:port $digitalPort
 
 //··············································································
 
-public func `user `panic `service `kernel
+public func `user `panic `service `primitive
 digitalWrite @noUnusedWarning (?port:port $digitalPort
                                ?value $bool) {
   switch port {
@@ -491,7 +491,7 @@ digitalWrite @noUnusedWarning (?port:port $digitalPort
 
 //··············································································
 
-public func `user `panic `service `kernel
+public func `user `panic `service `primitive
 toggle @noUnusedWarning (?port:port $digitalPort) {
   switch port {
   case D0 : // PTB16
@@ -547,7 +547,7 @@ toggle @noUnusedWarning (?port:port $digitalPort) {
 
 //··············································································
 
-public func `user `panic `service `kernel
+public func `user `panic `service `primitive
 digitalRead @noUnusedWarning (?port:port $digitalPort) -> $bool {
   switch port {
   case D0 : // PTB16

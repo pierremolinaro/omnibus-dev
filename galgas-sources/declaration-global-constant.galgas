@@ -95,7 +95,7 @@ override method @globalConstantDeclaration enterInContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
   initialVariableMap (
-    !routineNameForInvocation:"compiler" # inRoutineNameForInvocation
+#    !routineNameForInvocation:"compiler" # inRoutineNameForInvocation
     !context:ioContext
     !userMode:false
     !registerAccess:.readWriteAccess

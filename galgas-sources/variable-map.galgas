@@ -5,7 +5,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc initialVariableMap
-  ?routineNameForInvocation:let @string inRoutineNameForInvocation
+#  ?routineNameForInvocation:let @string inRoutineNameForInvocation
   ?context:let @semanticContext inContext
   ?userMode:let @bool inAcceptUserMode
   ?registerAccess:let @accessKind inRegisterAccessKind
@@ -150,17 +150,17 @@ proc initialVariableMap
   for variable in inContext.mGlobalVariableMap do
     var writeAccess = variable.allowedAccessToAll
     var allowedAccess = writeAccess
-    if not writeAccess then
-      allowedAccess = [variable.allowedRoutineMap hasKey !inRoutineNameForInvocation]
-      if allowedAccess then
-        writeAccess = [variable.allowedRoutineMap mHasWriteAccessForKey !inRoutineNameForInvocation]
-      else
-        allowedAccess = [variable.allowedISRMap hasKey !inRoutineNameForInvocation]
-        if allowedAccess then
-          writeAccess = [variable.allowedISRMap mHasWriteAccessForKey !inRoutineNameForInvocation]
-        end
-      end
-    end
+#    if not writeAccess then
+#      allowedAccess = [variable.allowedRoutineMap hasKey !inRoutineNameForInvocation]
+#      if allowedAccess then
+#        writeAccess = [variable.allowedRoutineMap mHasWriteAccessForKey !inRoutineNameForInvocation]
+#      else
+#        allowedAccess = [variable.allowedISRMap hasKey !inRoutineNameForInvocation]
+#        if allowedAccess then
+#          writeAccess = [variable.allowedISRMap mHasWriteAccessForKey !inRoutineNameForInvocation]
+#        end
+#      end
+#    end
     if inGlobalsAreConstant || variable.isConstant || not writeAccess then
       [!?outVariableMap insertUsedConstant
         !lkey:variable.lkey

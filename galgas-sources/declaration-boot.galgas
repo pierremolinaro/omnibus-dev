@@ -78,7 +78,7 @@ method @bootList-element bootSemanticAnalysis
   end
 #--- Variable map
   initialVariableMap (
-    !routineNameForInvocation:routineNameForInvocationGraph.string
+#    !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
     !userMode:false
     !registerAccess:.readWriteAccess

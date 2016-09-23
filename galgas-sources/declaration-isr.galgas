@@ -87,7 +87,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
     end
   #--- Variable map
     initialVariableMap (
-      !routineNameForInvocation:routineNameForInvocationGraph.string
+#      !routineNameForInvocation:routineNameForInvocationGraph.string
       !context:inSemanticContext
       !userMode:false
       !registerAccess:.readWriteAccess
