@@ -2,48 +2,48 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @allowedRoutineList {
-  @bool mHasWriteAccess
-  @lstring mReceiverTypeName
-  @lstring mRoutineName
-  @routineKind mRoutineKind
-}
+#list @allowedRoutineList {
+#  @bool mHasWriteAccess
+#  @lstring mReceiverTypeName
+#  @lstring mRoutineName
+#  @routineKind mRoutineKind
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @allowedInitList {
-  @bool mHasWriteAccess
-  @lbigint mInitPriority
-}
+#list @allowedInitList {
+#  @bool mHasWriteAccess
+#  @lbigint mInitPriority
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @allowedPanicList {
-  @bool mHasWriteAccess
-  @lstring mPanicName
-  @lbigint mPanicPriority
-}
+#list @allowedPanicList {
+#  @bool mHasWriteAccess
+#  @lstring mPanicName
+#  @lbigint mPanicPriority
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @allowedGuardList {
-  @lstring mOptionalTypeName
-  @lstring mGuardName
-}
+#list @allowedGuardList {
+#  @lstring mOptionalTypeName
+#  @lstring mGuardName
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @allowedISRList {
-  @bool mHasWriteAccess
-  @lstring mISRName
-}
+#list @allowedISRList {
+#  @bool mHasWriteAccess
+#  @lstring mISRName
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @allowedTaskList {
-  @bool mHasWriteAccess
-  @lstring mTaskName
-}
+#list @allowedTaskList {
+#  @bool mHasWriteAccess
+#  @lstring mTaskName
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -51,12 +51,12 @@ list @globalVarDeclarationList {
   @lstring mTypeName # Empty string if no type annotation
   @lstring mVarName
   @expressionAST mSourceExpression
-  @allowedRoutineList mAllowedProcList
-  @allowedInitList mAllowedInitList
-  @allowedPanicList mAllowedPanicList
-  @allowedGuardList mAllowedGuardList
-  @allowedISRList mAllowedISRList
-  @allowedTaskList mAllowedTaskList
+#  @allowedRoutineList mAllowedProcList
+#  @allowedInitList mAllowedInitList
+#  @allowedPanicList mAllowedPanicList
+#  @allowedGuardList mAllowedGuardList
+#  @allowedISRList mAllowedISRList
+#  @allowedTaskList mAllowedTaskList
   @bool mAllowedAccessToAll
 }
 
@@ -79,163 +79,112 @@ syntax extension plm_syntax {
     end
     $=$
     <expression> ?let @expressionAST expression
-    @allowedRoutineList allowedRoutineList = {}
-    @allowedInitList allowedInitList = {}
-    @allowedPanicList allowedPanicList = {}
-    @allowedGuardList allowedGuardList = {}
-    @allowedISRList allowedISRList = {}
-    @allowedTaskList allowedTaskList = {}
-    select
-    or
-    ${$
-      repeat
-        <global_var_allowed_routine>
-          !?allowedRoutineList
-          !?allowedInitList
-          !?allowedPanicList
-          !?allowedGuardList
-          !?allowedISRList
-          !?allowedTaskList 
-#        select
-#          $guard$
-#          @lstring typeName
-#          select
-#            typeName = ["" nowhere]
-#          or
-#            $\$type$ ?typeName
-#            $.$
-#          end
-#          $identifier$ ?let sectionName
-#          allowedGuardList += !typeName !sectionName
-#        or
-#          $section$
-#          @lstring typeName
-#          select
-#            typeName = ["" nowhere]
-#          or
-#            $\$type$ ?typeName
-#            $.$
-#          end
-#          $identifier$ ?let sectionName
-#          allowedRoutineList += !hasWriteAccess !typeName !sectionName !.section
-#        or
-#          $func$
-#          $identifier$ ?let procName
-#          allowedRoutineList += !hasWriteAccess !["" nowhere] !procName !.function
-#        or
-#          $func$
-#          $\$type$ ?let typeName
-#          $.$
-#          $identifier$ ?let procName
-#          allowedRoutineList += !hasWriteAccess !typeName !procName !.function
-#        or
-#          $init$
-#          $integer$ ?let @lbigint priority
-#          allowedInitList += !hasWriteAccess !priority
-#        or
-#          $isr$
-#          $identifier$ ?let isrName
-#          allowedISRList += !hasWriteAccess !isrName
-#        or
-#          $task$
-#          $identifier$ ?let isrName
-#          allowedTaskList += !hasWriteAccess !isrName
-#        or
-#          $panic$
-#          $func$
-#          $identifier$ ?let panicName
-#          $integer$ ?let @lbigint priority
-#          allowedPanicList += !hasWriteAccess !panicName !priority
-#        end
-      while
-      end
-      $}$
-    end
+#    @allowedRoutineList allowedRoutineList = {}
+#    @allowedInitList allowedInitList = {}
+#    @allowedPanicList allowedPanicList = {}
+#    @allowedGuardList allowedGuardList = {}
+#    @allowedISRList allowedISRList = {}
+#    @allowedTaskList allowedTaskList = {}
+#    select
+#    or
+#    ${$
+#      repeat
+#        <global_var_allowed_routine>
+#          !?allowedRoutineList
+#          !?allowedInitList
+#          !?allowedPanicList
+#          !?allowedGuardList
+#          !?allowedISRList
+#          !?allowedTaskList 
+#      while
+#      end
+#      $}$
+#    end
     ioAST.mGlobalVarDeclarationList +=
       !typeName
       !varName
       !expression
-      !allowedRoutineList
-      !allowedInitList
-      !allowedPanicList
-      !allowedGuardList
-      !allowedISRList
-      !allowedTaskList
+#      !allowedRoutineList
+#      !allowedInitList
+#      !allowedPanicList
+#      !allowedGuardList
+#      !allowedISRList
+#      !allowedTaskList
       !true # mAllowedAccessToAll
   }
 
   #·····················································································································
 
-  rule <global_var_allowed_routine>
-    ?!@allowedRoutineList allowedRoutineList
-    ?!@allowedInitList allowedInitList
-    ?!@allowedPanicList allowedPanicList
-    ?!@allowedGuardList allowedGuardList
-    ?!@allowedISRList allowedISRList
-    ?!@allowedTaskList allowedTaskList 
-  {
-    @bool hasWriteAccess
-    select
-      hasWriteAccess = false
-    or
-      $@attribute$ ?let attribute
-      if attribute.string != "rw" then
-        error attribute: "attribute should be @rw"
-      end
-      hasWriteAccess = true
-    end
-    select
-      $guard$
-      @lstring typeName
-      select
-        typeName = ["" nowhere]
-      or
-        $\$type$ ?typeName
-        $.$
-      end
-      $identifier$ ?let sectionName
-      allowedGuardList += !typeName !sectionName
-    or
-      $section$
-      @lstring typeName
-      select
-        typeName = ["" nowhere]
-      or
-        $\$type$ ?typeName
-        $.$
-      end
-      $identifier$ ?let sectionName
-      allowedRoutineList += !hasWriteAccess !typeName !sectionName !.section
-    or
-      $func$
-      $identifier$ ?let procName
-      allowedRoutineList += !hasWriteAccess !["" nowhere] !procName !.function
-    or
-      $func$
-      $\$type$ ?let typeName
-      $.$
-      $identifier$ ?let procName
-      allowedRoutineList += !hasWriteAccess !typeName !procName !.function
-    or
-      $init$
-      $integer$ ?let @lbigint priority
-      allowedInitList += !hasWriteAccess !priority
-    or
-      $isr$
-      $identifier$ ?let isrName
-      allowedISRList += !hasWriteAccess !isrName
-    or
-      $task$
-      $identifier$ ?let isrName
-      allowedTaskList += !hasWriteAccess !isrName
-    or
-      $panic$
-      $func$
-      $identifier$ ?let panicName
-      $integer$ ?let @lbigint priority
-      allowedPanicList += !hasWriteAccess !panicName !priority
-    end
-  }
+#  rule <global_var_allowed_routine>
+#    ?!@allowedRoutineList allowedRoutineList
+#    ?!@allowedInitList allowedInitList
+#    ?!@allowedPanicList allowedPanicList
+#    ?!@allowedGuardList allowedGuardList
+#    ?!@allowedISRList allowedISRList
+#    ?!@allowedTaskList allowedTaskList 
+#  {
+#    @bool hasWriteAccess
+#    select
+#      hasWriteAccess = false
+#    or
+#      $@attribute$ ?let attribute
+#      if attribute.string != "rw" then
+#        error attribute: "attribute should be @rw"
+#      end
+#      hasWriteAccess = true
+#    end
+#    select
+#      $guard$
+#      @lstring typeName
+#      select
+#        typeName = ["" nowhere]
+#      or
+#        $\$type$ ?typeName
+#        $.$
+#      end
+#      $identifier$ ?let sectionName
+#      allowedGuardList += !typeName !sectionName
+#    or
+#      $section$
+#      @lstring typeName
+#      select
+#        typeName = ["" nowhere]
+#      or
+#        $\$type$ ?typeName
+#        $.$
+#      end
+#      $identifier$ ?let sectionName
+#      allowedRoutineList += !hasWriteAccess !typeName !sectionName !.section
+#    or
+#      $func$
+#      $identifier$ ?let procName
+#      allowedRoutineList += !hasWriteAccess !["" nowhere] !procName !.function
+#    or
+#      $func$
+#      $\$type$ ?let typeName
+#      $.$
+#      $identifier$ ?let procName
+#      allowedRoutineList += !hasWriteAccess !typeName !procName !.function
+#    or
+#      $init$
+#      $integer$ ?let @lbigint priority
+#      allowedInitList += !hasWriteAccess !priority
+#    or
+#      $isr$
+#      $identifier$ ?let isrName
+#      allowedISRList += !hasWriteAccess !isrName
+#    or
+#      $task$
+#      $identifier$ ?let isrName
+#      allowedTaskList += !hasWriteAccess !isrName
+#    or
+#      $panic$
+#      $func$
+#      $identifier$ ?let panicName
+#      $integer$ ?let @lbigint priority
+#      allowedPanicList += !hasWriteAccess !panicName !priority
+#    end
+#  }
 
   #·····················································································································
 
@@ -246,7 +195,7 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (globalVariableTypeName 9*) in self do
+  for (globalVariableTypeName 3*) in self do
     if globalVariableTypeName.string != "" then
       let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
       [!?ioGraph noteNode !typeName]
@@ -258,27 +207,27 @@ method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrece
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @allowedRoutineMap {
-  @bool mHasWriteAccess
-  insert insertKey error message "the '%K' routine is already declared in %L"
-  search searchKey error message "there is no '%K' routine"
-}
+#map @allowedRoutineMap {
+#  @bool mHasWriteAccess
+#  insert insertKey error message "the '%K' routine is already declared in %L"
+#  search searchKey error message "there is no '%K' routine"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @allowedISRMap {
-  @bool mHasWriteAccess
-  insert insertKey error message "the '%K' routine is already declared in %L"
-  search searchKey error message "there is no '%K' routine"
-}
+#map @allowedISRMap {
+#  @bool mHasWriteAccess
+#  insert insertKey error message "the '%K' routine is already declared in %L"
+#  search searchKey error message "there is no '%K' routine"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @allowedTaskMap {
-  @bool mHasWriteAccess
-  insert insertKey error message "the '%K' task is already declared in %L"
-  search searchKey error message "there is no '%K' task"
-}
+#map @allowedTaskMap {
+#  @bool mHasWriteAccess
+#  insert insertKey error message "the '%K' task is already declared in %L"
+#  search searchKey error message "there is no '%K' task"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -332,102 +281,102 @@ method @globalVarDeclarationList-element enterInContext
   )
   @stringset executionModes = {}
 #--- Check allowed init routines are defined
-  @allowedRoutineMap allowedRoutineMap = {}
-  for () in mAllowedInitList do
-    [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
-    [!?allowedRoutineMap insertKey !initNameForInvocationGraph (!.null !mInitPriority) !mHasWriteAccess]
-  end
+#  @allowedRoutineMap allowedRoutineMap = {}
+#  for () in mAllowedInitList do
+#    [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
+#    [!?allowedRoutineMap insertKey !initNameForInvocationGraph (!.null !mInitPriority) !mHasWriteAccess]
+#  end
 #--- Check allowed panic routines are defined
-  for () in mAllowedPanicList do
-    if mPanicName.string == "setup" then
-      [ioContext.mPanicSetupRoutinePriorityMap searchSetupKey
-        !.new{![mPanicPriority.bigint string]
-        !mPanicPriority.location}
-      ]
-    elsif mPanicName.string == "loop" then
-      [ioContext.mPanicLoopRoutinePriorityMap searchLoopKey
-        !.new{![mPanicPriority.bigint string]
-        !mPanicPriority.location}
-      ]
-    else
-      error mPanicName : "panic routine name should be \"setup\" or \"loop\""
-    end
-    [!?allowedRoutineMap insertKey
-      !panicNameForInvocationGraph (!mPanicName.string !mPanicPriority)
-      !mHasWriteAccess
-    ]
-  end
+#  for () in mAllowedPanicList do
+#    if mPanicName.string == "setup" then
+#      [ioContext.mPanicSetupRoutinePriorityMap searchSetupKey
+#        !.new{![mPanicPriority.bigint string]
+#        !mPanicPriority.location}
+#      ]
+#    elsif mPanicName.string == "loop" then
+#      [ioContext.mPanicLoopRoutinePriorityMap searchLoopKey
+#        !.new{![mPanicPriority.bigint string]
+#        !mPanicPriority.location}
+#      ]
+#    else
+#      error mPanicName : "panic routine name should be \"setup\" or \"loop\""
+#    end
+#    [!?allowedRoutineMap insertKey
+#      !panicNameForInvocationGraph (!mPanicName.string !mPanicPriority)
+#      !mHasWriteAccess
+#    ]
+#  end
 #--- Check allowed routines (procedures, sections, services) are defined
-  for procedure in mAllowedProcList do
-    @lstring routineMangledName
-    @unifiedTypeMap-proxy receiverType
-    if procedure.mReceiverTypeName.string == "" then
-#      routineMangledName = .new {!"." + procedure.mRoutineName !procedure.mRoutineName.location}
-      routineMangledName = procedure.mRoutineName
-      receiverType = .null
-    else
-      routineMangledName = .new {!"$" + procedure.mReceiverTypeName + "." + procedure.mRoutineName !procedure.mRoutineName.location}
-      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mReceiverTypeName}
-    end
-    [ioContext.mRoutineMapForContext searchKey
-      !routineMangledName
-      ?*
-      ?let unused isPublic
-      ?*
-      ?let procedureModeMap
-      ?7*
-    ]
-    for () in procedureModeMap do
-      executionModes += !lkey.string
-    end
-    [!?allowedRoutineMap insertKey !routineMangledName !procedure.mHasWriteAccess]
-  end
-#--- Check allowed guards are defined
+#  for procedure in mAllowedProcList do
+#    @lstring routineMangledName
+#    @unifiedTypeMap-proxy receiverType
+#    if procedure.mReceiverTypeName.string == "" then
+##      routineMangledName = .new {!"." + procedure.mRoutineName !procedure.mRoutineName.location}
+#      routineMangledName = procedure.mRoutineName
+#      receiverType = .null
+#    else
+#      routineMangledName = .new {!"$" + procedure.mReceiverTypeName + "." + procedure.mRoutineName !procedure.mRoutineName.location}
+#      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mReceiverTypeName}
+#    end
+#    [ioContext.mRoutineMapForContext searchKey
+#      !routineMangledName
+#      ?*
+#      ?let unused isPublic
+#      ?*
+#      ?let procedureModeMap
+#      ?7*
+#    ]
+#    for () in procedureModeMap do
+#      executionModes += !lkey.string
+#    end
+#    [!?allowedRoutineMap insertKey !routineMangledName !procedure.mHasWriteAccess]
+#  end
+##--- Check allowed guards are defined
   @allowedGuardMap allowedGuardMap = {}
-  for guard in mAllowedGuardList do
-    @lstring guardMangledName
-    @unifiedTypeMap-proxy receiverType
-    if guard.mOptionalTypeName.string == "" then
-      guardMangledName = guard.mGuardName
-#      guardMangledName = .new {!"." + guard.mGuardName !guard.mGuardName.location}
-      receiverType = .null
-    else
-      guardMangledName = .new {!"$" + guard.mOptionalTypeName + "." + guard.mGuardName !guard.mGuardName.location}
-      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !guard.mOptionalTypeName}
-    end
-    [ioContext.mGuardMapForContext searchKey
-      !guardMangledName
-      ?let unused isPublic
-      ?*
-    ]
-    executionModes += !serviceModeName ()
-#    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !guard.mGuardName)
-    [!?allowedGuardMap insertKey !guardMangledName]
-  end
+#  for guard in mAllowedGuardList do
+#    @lstring guardMangledName
+#    @unifiedTypeMap-proxy receiverType
+#    if guard.mOptionalTypeName.string == "" then
+#      guardMangledName = guard.mGuardName
+##      guardMangledName = .new {!"." + guard.mGuardName !guard.mGuardName.location}
+#      receiverType = .null
+#    else
+#      guardMangledName = .new {!"$" + guard.mOptionalTypeName + "." + guard.mGuardName !guard.mGuardName.location}
+#      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !guard.mOptionalTypeName}
+#    end
+#    [ioContext.mGuardMapForContext searchKey
+#      !guardMangledName
+#      ?let unused isPublic
+#      ?*
+#    ]
+#    executionModes += !serviceModeName ()
+##    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !guard.mGuardName)
+#    [!?allowedGuardMap insertKey !guardMangledName]
+#  end
 #--- Check allowed isr are defined
-  @allowedISRMap allowedISRMap = {}
-  for isr in mAllowedISRList do
-    let name = interruptNameForInvocationGraph (!isr.mISRName)
-    [!?allowedISRMap insertKey !name !isr.mHasWriteAccess]
-    if not [ioContext.mDefinedInterruptSet hasKey !isr.mISRName.string] then
-      error isr.mISRName : "this isr is not defined"
-    end
-  end
+#  @allowedISRMap allowedISRMap = {}
+#  for isr in mAllowedISRList do
+#    let name = interruptNameForInvocationGraph (!isr.mISRName)
+#    [!?allowedISRMap insertKey !name !isr.mHasWriteAccess]
+#    if not [ioContext.mDefinedInterruptSet hasKey !isr.mISRName.string] then
+#      error isr.mISRName : "this isr is not defined"
+#    end
+#  end
 #--- Check allowed tasks are defined
-  @allowedTaskMap allowedTaskMap = {}
-  for task in mAllowedTaskList do
-    [ioContext.mTaskMap searchKey !task.mTaskName ?*]
-    [!?allowedTaskMap insertKey !task.mTaskName !task.mHasWriteAccess]
-  end
+#  @allowedTaskMap allowedTaskMap = {}
+#  for task in mAllowedTaskList do
+#    [ioContext.mTaskMap searchKey !task.mTaskName ?*]
+#    [!?allowedTaskMap insertKey !task.mTaskName !task.mHasWriteAccess]
+#  end
 #--- Enter variable in global variable map
   [!?ioContext.mGlobalVariableMap insertKey
     !lkey:mVarName
     !type:[result type]
     !executionModeSet:executionModes
-    !allowedRoutineMap:allowedRoutineMap
+#    !allowedRoutineMap:allowedRoutineMap
     !allowedGuardMap:allowedGuardMap
-    !allowedISRMap:allowedISRMap
-    !allowedTaskMap:allowedTaskMap
+#    !allowedISRMap:allowedISRMap
+#    !allowedTaskMap:allowedTaskMap
     !initialValue:result
     !isConstant:false # Is not constant
     !allowedAccessToAll:mAllowedAccessToAll
@@ -447,10 +396,10 @@ method @globalVarDeclarationList-element semanticAnalysis
     !lkey:mVarName
     ?type:let inferredType
     ?executionModeSet:let executionModeSet
-    ?allowedRoutineMap:let unused allowedProcedureMap
+#    ?allowedRoutineMap:let unused allowedProcedureMap
     ?allowedGuardMap:let unused allowedGuardMap
-    ?allowedISRMap:let unused allowedISRMap
-    ?allowedTaskMap:let unused allowedTaskMap 
+#    ?allowedISRMap:let unused allowedISRMap
+#    ?allowedTaskMap:let unused allowedTaskMap 
     ?initialValue:let expressionGeneratedCode
     ?isConstant:let unused isConstant
     ?allowedAccessToAll:*

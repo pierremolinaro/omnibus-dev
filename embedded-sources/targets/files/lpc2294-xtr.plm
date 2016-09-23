@@ -5,15 +5,15 @@
 type $taskList : ((32)) @instantiable
 
 //--- Block running task
-extern func `kernel block (?!inList:ioWaitingList $taskList) : "blockInList"
+extern func `primitive block (?!inList:ioWaitingList $taskList) : "blockInList"
 
-extern func `kernel block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
+extern func `primitive block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
 
-extern func `kernel block (?!inList:ioWaitingList $taskList
+extern func `primitive block (?!inList:ioWaitingList $taskList
                            ?onDeadline:inDeadline $uint32) : "blockInListAndOnDeadline"
 
 //--- Make task Ready
-extern func `kernel `service `guard
+extern func `primitive `service `guard
 makeTaskReady (?!fromList:ioWaitingList $taskList
                !found: outFound $bool) : "makeTaskReady"
 
@@ -29,7 +29,7 @@ extern func `guard handle (?!guard:ioGuard $guardList) : "handleGuardedCommand"
 
 extern func `guard handle (?guardedDeadline:inDeadlineMS $uint32) : "handleGuardedWaitUntil"
 
-extern func `kernel `service notifyChange (?!forGuard:ioGuard $guardList) : "guardDidChange"
+extern func `primitive `service notifyChange (?!forGuard:ioGuard $guardList) : "guardDidChange"
 
 extern func `service notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32) : "tickHandlerForGuardedWaitUntil"
 
@@ -91,7 +91,7 @@ module time {
   
   //············································································
   
-  public func `service `kernel `user `guard millis @noUnusedWarning @userAccess () -> $uint32 {
+  public func `service `primitive `user `guard millis @noUnusedWarning @userAccess () -> $uint32 {
     result = self.mUptimeMS
   }
   

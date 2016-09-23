@@ -32,8 +32,8 @@ func %once userModeName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once kernelModeName -> @string outResult {
-  outResult = "kernel"
+func %once primitiveModeName -> @string outResult {
+  outResult = "primitive"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -105,7 +105,7 @@ proc routineSemanticAnalysis
   routineMangledName.string += ")"
 #--- Variable map
   initialVariableMap (
-    !routineNameForInvocation:routineMangledName.string
+#    !routineNameForInvocation:routineMangledName.string
     !context:inContext
     !userMode:[procedureModeSet hasKey !userModeName ()]
     !registerAccess:inRegisterAccessKind

@@ -40,7 +40,7 @@ module leds {
 
   //············································································
   
-  public func `user `panic `service `kernel write @noUnusedWarning (?on:inLeds $uint32) {
+  public func `user `panic `service `primitive write @noUnusedWarning (?on:inLeds $uint32) {
   //--- Led L0
     if ((inLeds & LED_L0) != 0) {
       GPIOA_PSOR = 1 << 12 ;
@@ -65,7 +65,7 @@ module leds {
   
   //············································································
   
-  public func `user `panic `service `kernel write @noUnusedWarning (?off:inLeds $uint32) {
+  public func `user `panic `service `primitive write @noUnusedWarning (?off:inLeds $uint32) {
   //--- Led L0
     if ((inLeds & LED_L0) != 0) {
       GPIOA_PCOR = 1 << 12 ;
@@ -90,7 +90,7 @@ module leds {
   
   //············································································
   
-  public func `user `panic `service `kernel write @noUnusedWarning (?toggle:inLeds $uint32) {
+  public func `user `panic `service `primitive write @noUnusedWarning (?toggle:inLeds $uint32) {
   //--- Led L0
     if ((inLeds & LED_L0) != 0) {
       GPIOA_PTOR = 1 << 12 ;

@@ -52,10 +52,7 @@ section getPITValue (!outValue $uint32) {
 
 //------------------------------------------------*
 
-var gPITValue $uint32 = 0 {
-  @rw isr PITChannel0
-//  section getPITValue
-}
+var gPITValue $uint32 = 0
 
 //------------------------------------------------*
 

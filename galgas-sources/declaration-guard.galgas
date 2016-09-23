@@ -190,7 +190,7 @@ proc guardSemanticAnalysis
   end
 #--- Variable map
   initialVariableMap (
-    !routineNameForInvocation:guardMangledName.string
+#    !routineNameForInvocation:guardMangledName.string
     !context:inContext
     !userMode:false
     !registerAccess:.noAccess

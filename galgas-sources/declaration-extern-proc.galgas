@@ -152,7 +152,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
   end
 #--- Variable map
   initialVariableMap (
-    !routineNameForInvocation:routineMangledName.string
+#    !routineNameForInvocation:routineMangledName.string
     !context:inContext
     !userMode:[procedureModeSet hasKey !userModeName ()]
     !registerAccess:.readWriteAccess
