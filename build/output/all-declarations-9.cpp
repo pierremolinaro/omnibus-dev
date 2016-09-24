@@ -837,11 +837,11 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func `service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func `service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -870,10 +870,10 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    digitalWrite (!port:LED_L0 !true)\n"
+  "    userDigitalWrite (!port:LED_L0 !true)\n"
   "    self.compteur +%= 500\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    digitalWrite (!port:LED_L0 !false)\n"
+  "    userDigitalWrite (!port:LED_L0 !false)\n"
   "    self.compteur +%= 500\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.printUnsigned (!time.millis ())\n"
@@ -886,10 +886,10 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    digitalWrite (!port:LED_L1 !true)\n"
+  "    userDigitalWrite (!port:LED_L1 !true)\n"
   "    self.compteur +%= 499\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    digitalWrite (!port:LED_L1 !false)\n"
+  "    userDigitalWrite (!port:LED_L1 !false)\n"
   "    self.compteur +%= 499\n"
   "  }\n"
   "}\n"
@@ -900,10 +900,10 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    digitalWrite (!port:LED_L2 !true)\n"
+  "    userDigitalWrite (!port:LED_L2 !true)\n"
   "    self.compteur +%= 498\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    digitalWrite (!port:LED_L2 !false)\n"
+  "    userDigitalWrite (!port:LED_L2 !false)\n"
   "    self.compteur +%= 498\n"
   "  }\n"
   "}\n"
@@ -914,10 +914,10 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    digitalWrite (!port:LED_L3 !true)\n"
+  "    userDigitalWrite (!port:LED_L3 !true)\n"
   "    self.compteur +%= 497\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    digitalWrite (!port:LED_L3 !false)\n"
+  "    userDigitalWrite (!port:LED_L3 !false)\n"
   "    self.compteur +%= 497\n"
   "  }\n"
   "}\n"
@@ -928,10 +928,10 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var compteur $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
-  "    digitalWrite (!port:LED_L4 !true)\n"
+  "    userDigitalWrite (!port:LED_L4 !true)\n"
   "    self.compteur +%= 496\n"
   "    time.waitUntilMS (!deadline:self.compteur)\n"
-  "    digitalWrite (!port:LED_L4 !false)\n"
+  "    userDigitalWrite (!port:LED_L4 !false)\n"
   "    self.compteur +%= 496\n"
   "  }\n"
   "}\n"
@@ -942,7 +942,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3065, // Text length
+  3097, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -954,11 +954,11 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func `service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func `service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -1003,11 +1003,11 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  \n"
   "  while time.waitUntilMS (!deadline:self.compteur) {\n"
   "    self.compteur +%= 50\n"
-  "    digitalWrite (!port:LED_L0 !not digitalRead (!port:PUSH_P0))\n"
-  "    digitalWrite (!port:LED_L1 !not digitalRead (!port:PUSH_P1))\n"
-  "    digitalWrite (!port:LED_L2 !not digitalRead (!port:PUSH_P2))\n"
-  "    digitalWrite (!port:LED_L3 !not digitalRead (!port:PUSH_P3))\n"
-  "    digitalWrite (!port:LED_L4 !not digitalRead (!port:PUSH_P4))\n"
+  "    userDigitalWrite (!port:LED_L0 !not userDigitalRead (!port:PUSH_P0))\n"
+  "    userDigitalWrite (!port:LED_L1 !not userDigitalRead (!port:PUSH_P1))\n"
+  "    userDigitalWrite (!port:LED_L2 !not userDigitalRead (!port:PUSH_P2))\n"
+  "    userDigitalWrite (!port:LED_L3 !not userDigitalRead (!port:PUSH_P3))\n"
+  "    userDigitalWrite (!port:LED_L4 !not userDigitalRead (!port:PUSH_P4))\n"
   "  }\n"
   "  \n"
   "\n"
@@ -1021,7 +1021,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "03-push-buttons.plm",
   "plm",
   true, // Text file
-  2296, // Text length
+  2328, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -1033,11 +1033,11 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func `service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func `service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -1118,7 +1118,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  2355, // Text length
+  2347, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1130,11 +1130,11 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func `service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func `service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -1175,12 +1175,12 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s\xC3""\xA9""maphore.signal ()\n"
   "    self.top += 250\n"
-  "    digitalWrite (!port:LED_L1 !true)\n"
+  "    userDigitalWrite (!port:LED_L1 !true)\n"
   "    let constanteAccentu\xC3""\xA9""e = self.top\n"
   "    time.waitUntilMS (!deadline:constanteAccentu\xC3""\xA9""e)\n"
   "    s\xC3""\xA9""maphore.signal ()\n"
   "    self.top += 250\n"
-  "    digitalWrite (!port:LED_L1 !false)\n"
+  "    userDigitalWrite (!port:LED_L1 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1189,9 +1189,9 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1\"\n
   "task T2 priority 2 stackSize 512 {\n"
   "\n"
   "  while s\xC3""\xA9""maphore.wait () {\n"
-  "    digitalWrite (!port:LED_L2 !true)\n"
+  "    userDigitalWrite (!port:LED_L2 !true)\n"
   "    s\xC3""\xA9""maphore.wait ()\n"
-  "    digitalWrite (!port:LED_L2 !false)\n"
+  "    userDigitalWrite (!port:LED_L2 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1201,7 +1201,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "05-semaphore.plm",
   "plm",
   true, // Text file
-  1692, // Text length
+  1700, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1213,11 +1213,11 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -1279,11 +1279,11 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s.V ()\n"
   "    self.top += 300\n"
-  "    digitalWrite (!port:LED_L0 !true)\n"
+  "    userDigitalWrite (!port:LED_L0 !true)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s.V ()\n"
   "    self.top += 700\n"
-  "    digitalWrite (!port:LED_L0 !false)\n"
+  "    userDigitalWrite (!port:LED_L0 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1295,10 +1295,10 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:0) { // no wait...\n"
   "    let r = s.P_until (!deadline:self.top)\n"
   "    if r {\n"
-  "      toggle (!port:LED_L1)\n"
+  "      userToggle (!port:LED_L1)\n"
   "    }else{\n"
   "      self.top += 400\n"
-  "      toggle (!port:LED_L1)\n"
+  "      userToggle (!port:LED_L1)\n"
   "    }\n"
   "  }\n"
   "}\n"
@@ -1309,7 +1309,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "06-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  2253, // Text length
+  2263, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1321,11 +1321,11 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func `service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func `service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -1403,11 +1403,11 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
-  "    digitalWrite (!port:LED_L0 !true)\n"
+  "    userDigitalWrite (!port:LED_L0 !true)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s0.V ()\n"
   "    self.top += 250\n"
-  "    digitalWrite (!port:LED_L0 !false)\n"
+  "    userDigitalWrite (!port:LED_L0 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1419,11 +1419,11 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
-  "    digitalWrite (!port:LED_L4 !true)\n"
+  "    userDigitalWrite (!port:LED_L4 !true)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s1.V ()\n"
   "    self.top += 249\n"
-  "    digitalWrite (!port:LED_L4 !false)\n"
+  "    userDigitalWrite (!port:LED_L4 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1433,16 +1433,16 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var deadline $uint32 = 0\n"
   "  \n"
   "  while s0.PP () {\n"
-  "    toggle (!port:LED_L1)\n"
+  "    userToggle (!port:LED_L1)\n"
   "  }\n"
   "  \n"
   "  while s1.P () {\n"
-  "    toggle (!port:LED_L3)\n"
+  "    userToggle (!port:LED_L3)\n"
   "  }\n"
   "  \n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline += 200\n"
-  "    toggle (!port:LED_L2)\n"
+  "    userToggle (!port:LED_L2)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1452,7 +1452,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "07-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  3151, // Text length
+  3171, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1464,11 +1464,11 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func `service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func `service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -1519,11 +1519,11 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s0.signal ()\n"
   "    self.top += 250\n"
-  "    digitalWrite (!port:LED_L0 !true)\n"
+  "    userDigitalWrite (!port:LED_L0 !true)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s0.signal ()\n"
   "    self.top += 250\n"
-  "    digitalWrite (!port:LED_L0 !false)\n"
+  "    userDigitalWrite (!port:LED_L0 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1535,11 +1535,11 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    s1.signal ()\n"
   "    self.top += 249\n"
-  "    digitalWrite (!port:LED_L4 !true)\n"
+  "    userDigitalWrite (!port:LED_L4 !true)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    s1.signal ()\n"
   "    self.top += 249\n"
-  "    digitalWrite (!port:LED_L4 !false)\n"
+  "    userDigitalWrite (!port:LED_L4 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1549,16 +1549,16 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var deadline $uint32 = 0\n"
   "  \n"
   "  while s0.wait () {\n"
-  "    toggle (!port:LED_L1)\n"
+  "    userToggle (!port:LED_L1)\n"
   "  }\n"
   "  \n"
   "  while PP () {\n"
-  "    toggle (!port:LED_L3)\n"
+  "    userToggle (!port:LED_L3)\n"
   "  }\n"
   "  \n"
   "  while convenienceWaitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline += 200\n"
-  "    toggle (!port:LED_L2)\n"
+  "    userToggle (!port:LED_L2)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1568,7 +1568,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "08-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  2689, // Text length
+  2709, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -1580,11 +1580,11 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1\"\
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func `service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func `service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -1678,11 +1678,11 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1\"\
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    rdvs.output ()\n"
   "    self.top += 250\n"
-  "    digitalWrite (!port:LED_L0 !true)\n"
+  "    userDigitalWrite (!port:LED_L0 !true)\n"
   "    time.waitUntilMS (!deadline:self.top)\n"
   "    rdvs.output ()\n"
   "    self.top += 250\n"
-  "    digitalWrite (!port:LED_L0 !false)\n"
+  "    userDigitalWrite (!port:LED_L0 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1691,9 +1691,9 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1\"\
   "task T1 priority 1 stackSize 512 {\n"
   "\n"
   "  while rdvs.input () {\n"
-  "    digitalWrite (!port:LED_L1 !true)\n"
+  "    userDigitalWrite (!port:LED_L1 !true)\n"
   "    rdvs.input ()\n"
-  "    digitalWrite (!port:LED_L1 !false)\n"
+  "    userDigitalWrite (!port:LED_L1 !false)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1703,7 +1703,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "09-rendez-vous.plm",
   "plm",
   true, // Text file
-  3558, // Text length
+  3566, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
@@ -1715,11 +1715,11 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1\"\
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func `service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func `service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -1753,7 +1753,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1\"\
   "  var signalerDonneeLue = $semaphore (!value:0)\n"
   "  var donn\xC3""\xA9""e $uint32 = 0\n"
   "\n"
-  "  public func `user output @mutating @userAccess (\?data:inData $uint32) {\n"
+  "  public func output @mutating @userAccess (\?data:inData $uint32) {\n"
   "    self.autoriserEcriture.wait ()\n"
   "    self.donn\xC3""\xA9""e = inData\n"
   "    self.autoriserLecture.signal ()\n"
@@ -1796,7 +1796,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1\"\
   "  while time.waitUntilMS (!deadline:self.top) {\n"
   "    rdvs.output (!data:self.n)\n"
   "    rdvs2.output (!data:self.n)\n"
-  "    toggle (!port:LED_L0)\n"
+  "    userToggle (!port:LED_L0)\n"
   "    self.top += 500\n"
   "    self.n += 1\n"
   "  }\n"
@@ -1807,7 +1807,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1\"\
   "task T1 priority 1 stackSize 1024 {\n"
   "\n"
   "  while rdvs.entr\xC3""\xA9""e (\?data:let x) {\n"
-  "    toggle (!port:LED_L1)\n"
+  "    userToggle (!port:LED_L1)\n"
   "    s.wait ()\n"
   "      lcd.goto (!line:0 !column:0)\n"
   "      lcd.printUnsigned (!x)\n"
@@ -1821,7 +1821,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1\"\
   "  var deadline $uint32 = 0\n"
   "\n"
   "  while rdvs2.entr\xC3""\xA9""e (\?data:let x) {\n"
-  "    toggle (!port:LED_L2)\n"
+  "    userToggle (!port:LED_L2)\n"
   "    s.wait ()\n"
   "      lcd.goto (!line:1 !column:0)\n"
   "      lcd.printUnsigned (!x)\n"
@@ -1830,7 +1830,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1\"\
   "  \n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline += 200\n"
-  "    toggle (!port:LED_L4)\n"
+  "    userToggle (!port:LED_L4)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -1840,7 +1840,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "10-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  3358, // Text length
+  3360, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
@@ -1852,11 +1852,11 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1\"\
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func `service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func `service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -1922,10 +1922,10 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1\"\
   "  \n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline +%= 250\n"
-  "    digitalWrite (!port:LED_L1 !true) // Allumer la led\n"
+  "    userDigitalWrite (!port:LED_L1 !true) // Allumer la led\n"
   "    time.waitUntilMS (!deadline:self.deadline)\n"
   "    self.deadline +%= 250\n"
-  "    digitalWrite (!port:LED_L1 !false)  // \xC3""\x89""teindre la led\n"
+  "    userDigitalWrite (!port:LED_L1 !false)  // \xC3""\x89""teindre la led\n"
   "    lcd.goto (!line:1 !column:0)\n"
   "    lcd.printSpaces (!10)\n"
   "    lcd.goto (!line:1 !column:0)\n"
@@ -1953,11 +1953,11 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1\"\
   "//   ACTIVITY LED                                                               \n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "func `service activityLedOn @global () {\n"
+  "func safe activityLedOn @global () {\n"
   "  digitalWrite (!port:.D13 !true)\n"
   "}\n"
   "\n"
-  "func `service activityLedOff @global () {\n"
+  "func safe activityLedOff @global () {\n"
   "  digitalWrite (!port:.D13 !false)\n"
   "}\n"
   "\n"
@@ -2001,7 +2001,7 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1\"\
   "\n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline +%= 1000\n"
-  "    toggle (!port:LED_L1)\n"
+  "    userToggle (!port:LED_L1)\n"
   "    self.array [self.index] = 0\n"
   "    self.index +%= 1\n"
   "    if self.index == SIZE {\n"
@@ -2040,7 +2040,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  1960, // Text length
+  1956, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 

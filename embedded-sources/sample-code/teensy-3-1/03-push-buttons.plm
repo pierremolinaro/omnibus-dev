@@ -4,11 +4,11 @@ target "teensy-3-1"
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
 
-func `service activityLedOn @global () {
+func safe activityLedOn @global () {
   digitalWrite (!port:.D13 !true)
 }
 
-func `service activityLedOff @global () {
+func safe activityLedOff @global () {
   digitalWrite (!port:.D13 !false)
 }
 
@@ -53,11 +53,11 @@ task T priority 0 stackSize 512 {
   
   while time.waitUntilMS (!deadline:self.compteur) {
     self.compteur +%= 50
-    digitalWrite (!port:LED_L0 !not digitalRead (!port:PUSH_P0))
-    digitalWrite (!port:LED_L1 !not digitalRead (!port:PUSH_P1))
-    digitalWrite (!port:LED_L2 !not digitalRead (!port:PUSH_P2))
-    digitalWrite (!port:LED_L3 !not digitalRead (!port:PUSH_P3))
-    digitalWrite (!port:LED_L4 !not digitalRead (!port:PUSH_P4))
+    userDigitalWrite (!port:LED_L0 !not userDigitalRead (!port:PUSH_P0))
+    userDigitalWrite (!port:LED_L1 !not userDigitalRead (!port:PUSH_P1))
+    userDigitalWrite (!port:LED_L2 !not userDigitalRead (!port:PUSH_P2))
+    userDigitalWrite (!port:LED_L3 !not userDigitalRead (!port:PUSH_P3))
+    userDigitalWrite (!port:LED_L4 !not userDigitalRead (!port:PUSH_P4))
   }
   
 

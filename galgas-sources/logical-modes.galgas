@@ -73,7 +73,7 @@ func checkMode
   case service :
     if inCallerMode == .userMode then
       outResult = .serviceFromProcessorUserMode
-    elsif inCallerMode == .primitiveMode then
+    elsif (inCallerMode == .primitiveMode) || (inCallerMode == .guardMode) then
       outResult = .serviceFromProcessorPrivilegedMode
     else
       error inErrorLocation : "a service cannot be called from " + inCallerMode + " mode" : outResult
@@ -90,7 +90,7 @@ func checkMode
       case primitiveMode :
         ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode)
       case guardMode :
-        ok = (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode)
+        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode)
       case panicMode, initMode :
         ok = inCalleeMode == .safeMode
       case bootMode :

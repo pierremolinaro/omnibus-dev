@@ -198,7 +198,7 @@ module lcd {
   //   PRINT ROUTINES IN USER MODE                                              
   //············································································
     
-  section writeFirstNibbleOf8bitCommand (?inValue $uint8) {
+  section writeFirstNibbleOf8bitCommand @noUnusedWarning (?inValue $uint8) {
     self.driveLowRS () ;
     self.programLcd4BitDataBusOutput (!inValue)
     self.driveHighE () ;
@@ -206,7 +206,7 @@ module lcd {
  
   //············································································
     
-  section writeFirstNibbleOf8bitData (?inValue $uint8) {
+  section writeFirstNibbleOf8bitData @noUnusedWarning (?inValue $uint8) {
     self.driveHighRS () ;
     self.programLcd4BitDataBusOutput (!inValue)
     self.driveHighE () ;
@@ -214,14 +214,14 @@ module lcd {
  
    //············································································
  
-  section writeSecondNibble (?inValue $uint8) {
+  section writeSecondNibble @noUnusedWarning (?inValue $uint8) {
     self.programLcd4BitDataBusOutput (!inValue)
     self.driveHighE () ;
   }
   
   //············································································
 
-  section driveLowE_inUserMode () {
+  section driveLowE_inUserMode @noUnusedWarning () {
     self.driveLowE () ;
   }
   
