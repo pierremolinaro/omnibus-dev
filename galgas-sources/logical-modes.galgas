@@ -62,11 +62,6 @@ func checkMode
     else
       outResult = .safeFromProcessorPrivilegedMode
     end
-#    elsif (inCallerMode == .primitiveMode) || (inCallerMode == .serviceMode) || (inCallerMode == .sectionMode) || (inCallerMode == .safeMode) then
-#      outResult = .safeFromProcessorPrivilegedMode
-#    else
-#      error inErrorLocation : "a safe cannot be called from " + inCallerMode + " mode" : outResult
-#    end
   case section :
     if inCallerMode == .userMode then
       outResult = .sectionFromProcessorUserMode

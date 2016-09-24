@@ -2837,7 +2837,7 @@ void extensionMethod_enterInContext (const GALGAS_globalVarDeclarationList_2D_el
   routine_variableMapWithConstants (ioArgument_ioContext, var_variableMap_8457, inCompiler  COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 249)) ;
   }
   GALGAS_objectIR var_expressionResult_8959 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) inObject.mAttribute_mSourceExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-global-variable.galgas", 254)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-global-variable.galgas", 257)), var_variableAnnotationType_8035, ioArgument_ioContext, GALGAS_mode::constructor_initMode (SOURCE_FILE ("declaration-global-variable.galgas", 260)), var_temporaries_8282, ioArgument_ioGlobalLiteralStringMap, var_variableMap_8457, var_allocaList_8370, var_instructionGenerationList_8340, var_expressionResult_8959, inCompiler COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 253)) ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) inObject.mAttribute_mSourceExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-global-variable.galgas", 254)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-global-variable.galgas", 257)), var_variableAnnotationType_8035, ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-global-variable.galgas", 260)), var_temporaries_8282, ioArgument_ioGlobalLiteralStringMap, var_variableMap_8457, var_allocaList_8370, var_instructionGenerationList_8340, var_expressionResult_8959, inCompiler COMMA_SOURCE_FILE ("declaration-global-variable.galgas", 253)) ;
   GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList_8340.getter_length (SOURCE_FILE ("declaration-global-variable.galgas", 268)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_1.boolEnum ()) {
     test_1 = GALGAS_bool (kIsStrictSup, var_allocaList_8370.getter_length (SOURCE_FILE ("declaration-global-variable.galgas", 268)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
@@ -2945,7 +2945,7 @@ void extensionMethod_enterInContext (const GALGAS_taskVarListAST_2D_element inOb
   routine_variableMapWithConstants (ioArgument_ioContext, var_variableMap_8405, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 230)) ;
   }
   GALGAS_objectIR var_expressionResult_8895 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) inObject.mAttribute_mVarInitExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-task.galgas", 235)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-task.galgas", 238)), var_variableAnnotationType_7977, ioArgument_ioContext, GALGAS_mode::constructor_initMode (SOURCE_FILE ("declaration-task.galgas", 241)), var_temporaries_8230, ioArgument_ioGlobalLiteralStringMap, var_variableMap_8405, var_allocaList_8318, var_instructionGenerationList_8288, var_expressionResult_8895, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 234)) ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) inObject.mAttribute_mVarInitExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-task.galgas", 235)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-task.galgas", 238)), var_variableAnnotationType_7977, ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-task.galgas", 241)), var_temporaries_8230, ioArgument_ioGlobalLiteralStringMap, var_variableMap_8405, var_allocaList_8318, var_instructionGenerationList_8288, var_expressionResult_8895, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 234)) ;
   GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList_8288.getter_length (SOURCE_FILE ("declaration-task.galgas", 249)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_1.boolEnum ()) {
     test_1 = GALGAS_bool (kIsStrictSup, var_allocaList_8318.getter_length (SOURCE_FILE ("declaration-task.galgas", 249)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
@@ -5244,7 +5244,7 @@ static void extensionMethod_typeArrayDeclaration_enterInContext (const cPtr_abst
   }
   GALGAS_staticStringMap joker_5624 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-array.galgas", 128)) ;
   GALGAS_objectIR var_sizeExpressionIR_5772 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSizeExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 120)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mAttribute_mArrayTypeName.mAttribute_string.add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 123)), object->mAttribute_mArrayTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-array.galgas", 123)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 124)), ioArgument_ioContext, GALGAS_mode::constructor_initMode (SOURCE_FILE ("type-array.galgas", 126)), var_temporaries_5188, joker_5624, var_variableMap_5281, var_allocaList_5142, var_initInstructionGenerationList_5112, var_sizeExpressionIR_5772, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 119)) ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSizeExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 120)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mAttribute_mArrayTypeName.mAttribute_string.add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 123)), object->mAttribute_mArrayTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-array.galgas", 123)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-array.galgas", 124)), ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("type-array.galgas", 126)), var_temporaries_5188, joker_5624, var_variableMap_5281, var_allocaList_5142, var_initInstructionGenerationList_5112, var_sizeExpressionIR_5772, inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 119)) ;
   GALGAS_bool test_4 = GALGAS_bool (kIsStrictSup, var_allocaList_5142.getter_length (SOURCE_FILE ("type-array.galgas", 134)).add_operation (var_initInstructionGenerationList_5112.getter_length (SOURCE_FILE ("type-array.galgas", 134)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 134)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_4.boolEnum ()) {
     test_4 = var_sizeExpressionIR_5772.getter_isLiteralInteger (SOURCE_FILE ("type-array.galgas", 134)).operator_not (SOURCE_FILE ("type-array.galgas", 134)) ;
@@ -6034,7 +6034,7 @@ static void extensionMethod_structureDeclaration_enterInContext (const cPtr_abst
         GALGAS_staticStringMap joker_10566 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-structure-declaration.galgas", 271)) ;
         GALGAS_variableMap joker_10590 = GALGAS_variableMap::constructor_emptyMap (SOURCE_FILE ("type-structure-declaration.galgas", 272)) ;
         GALGAS_objectIR var_expressionIR_10716 ;
-        callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_initExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-structure-declaration.galgas", 263)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mAttribute_mStructureName.mAttribute_string.add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 266)), object->mAttribute_mStructureName.mAttribute_location  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 266)), var_optionalPropertyType_9822, ioArgument_ioContext, GALGAS_mode::constructor_initMode (SOURCE_FILE ("type-structure-declaration.galgas", 269)), var_temporaries_10096, joker_10566, joker_10590, var_allocaList_10048, var_initInstructionGenerationList_10016, var_expressionIR_10716, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 262)) ;
+        callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_initExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-structure-declaration.galgas", 263)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mAttribute_mStructureName.mAttribute_string.add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 266)), object->mAttribute_mStructureName.mAttribute_location  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 266)), var_optionalPropertyType_9822, ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("type-structure-declaration.galgas", 269)), var_temporaries_10096, joker_10566, joker_10590, var_allocaList_10048, var_initInstructionGenerationList_10016, var_expressionIR_10716, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 262)) ;
         GALGAS_bool test_2 = GALGAS_bool (kIsStrictSup, var_initInstructionGenerationList_10016.getter_length (SOURCE_FILE ("type-structure-declaration.galgas", 277)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
         if (kBoolTrue != test_2.boolEnum ()) {
           test_2 = GALGAS_bool (kIsStrictSup, var_allocaList_10048.getter_length (SOURCE_FILE ("type-structure-declaration.galgas", 277)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
@@ -8169,7 +8169,7 @@ static void extensionMethod_opaqueTypeDeclaration_enterInContext (const cPtr_abs
   }
   GALGAS_staticStringMap joker_5230 = GALGAS_staticStringMap::constructor_emptyMap (SOURCE_FILE ("type-opaque-declaration.galgas", 122)) ;
   GALGAS_objectIR var_sizeExpressionIR_5378 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSizeExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-opaque-declaration.galgas", 114)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mAttribute_mOpaqueTypeName.mAttribute_string.add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)), object->mAttribute_mOpaqueTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-opaque-declaration.galgas", 118)), ioArgument_ioContext, GALGAS_mode::constructor_initMode (SOURCE_FILE ("type-opaque-declaration.galgas", 120)), var_temporaries_4792, joker_5230, var_variableMap_4885, var_allocaList_4746, var_initInstructionGenerationList_4716, var_sizeExpressionIR_5378, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 113)) ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSizeExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-opaque-declaration.galgas", 114)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_lstring::constructor_new (object->mAttribute_mOpaqueTypeName.mAttribute_string.add_operation (GALGAS_string (" init"), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)), object->mAttribute_mOpaqueTypeName.mAttribute_location  COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 117)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("type-opaque-declaration.galgas", 118)), ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("type-opaque-declaration.galgas", 120)), var_temporaries_4792, joker_5230, var_variableMap_4885, var_allocaList_4746, var_initInstructionGenerationList_4716, var_sizeExpressionIR_5378, inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 113)) ;
   GALGAS_bool test_7 = GALGAS_bool (kIsStrictSup, var_allocaList_4746.getter_length (SOURCE_FILE ("type-opaque-declaration.galgas", 128)).add_operation (var_initInstructionGenerationList_4716.getter_length (SOURCE_FILE ("type-opaque-declaration.galgas", 128)), inCompiler COMMA_SOURCE_FILE ("type-opaque-declaration.galgas", 128)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_7.boolEnum ()) {
     test_7 = var_sizeExpressionIR_5378.getter_isLiteralInteger (SOURCE_FILE ("type-opaque-declaration.galgas", 128)).operator_not (SOURCE_FILE ("type-opaque-declaration.galgas", 128)) ;
@@ -8849,7 +8849,7 @@ static void extensionMethod_globalConstantDeclaration_enterInContext (const cPtr
   GALGAS_instructionListIR var_instructionGenerationList_5103 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-global-constant.galgas", 115)) ;
   GALGAS_allocaList var_allocaList_5133 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-global-constant.galgas", 116)) ;
   GALGAS_objectIR var_expressionResult_5615 ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-global-constant.galgas", 118)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-global-constant.galgas", 121)), var_annotationType_4798, ioArgument_ioContext, GALGAS_mode::constructor_initMode (SOURCE_FILE ("declaration-global-constant.galgas", 124)), var_temporaries_5045, ioArgument_ioGlobalLiteralStringMap, var_variableMap_4729, var_allocaList_5133, var_instructionGenerationList_5103, var_expressionResult_5615, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 117)) ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) object->mAttribute_mSourceExpression.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-global-constant.galgas", 118)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-global-constant.galgas", 121)), var_annotationType_4798, ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-global-constant.galgas", 124)), var_temporaries_5045, ioArgument_ioGlobalLiteralStringMap, var_variableMap_4729, var_allocaList_5133, var_instructionGenerationList_5103, var_expressionResult_5615, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 117)) ;
   GALGAS_objectIR var_result_5668 = function_checkAssignmentCompatibility (var_expressionResult_5615, var_annotationType_4798, object->mAttribute_mConstantName.mAttribute_location, GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 133)) ;
   GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList_5103.getter_length (SOURCE_FILE ("declaration-global-constant.galgas", 140)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_1.boolEnum ()) {
@@ -9415,20 +9415,20 @@ GALGAS_calleeKindIR function_checkMode (const GALGAS_mode & constinArgument_inCa
     break ;
   case GALGAS_routineKind::kEnum_section:
     {
-      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 71)))).boolEnum () ;
+      const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 66)))).boolEnum () ;
       if (kBoolTrue == test_1) {
-        result_outResult = GALGAS_calleeKindIR::constructor_sectionFromProcessorUserMode (SOURCE_FILE ("logical-modes.galgas", 72)) ;
+        result_outResult = GALGAS_calleeKindIR::constructor_sectionFromProcessorUserMode (SOURCE_FILE ("logical-modes.galgas", 67)) ;
       }else if (kBoolFalse == test_1) {
-        GALGAS_bool test_2 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 73)))) ;
+        GALGAS_bool test_2 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 68)))) ;
         if (kBoolTrue != test_2.boolEnum ()) {
-          test_2 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 73)))) ;
+          test_2 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 68)))) ;
         }
         const enumGalgasBool test_3 = test_2.boolEnum () ;
         if (kBoolTrue == test_3) {
-          result_outResult = GALGAS_calleeKindIR::constructor_sectionFromProcessorPrivilegedMode (SOURCE_FILE ("logical-modes.galgas", 74)) ;
+          result_outResult = GALGAS_calleeKindIR::constructor_sectionFromProcessorPrivilegedMode (SOURCE_FILE ("logical-modes.galgas", 69)) ;
         }else if (kBoolFalse == test_3) {
           TC_Array <C_FixItDescription> fixItArray4 ;
-          inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a section cannot be called from ").add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 76)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 76)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 76)), fixItArray4  COMMA_SOURCE_FILE ("logical-modes.galgas", 76)) ;
+          inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a section cannot be called from ").add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 71)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 71)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 71)), fixItArray4  COMMA_SOURCE_FILE ("logical-modes.galgas", 71)) ;
           result_outResult.drop () ; // Release error dropped variable
         }
       }
@@ -9436,32 +9436,32 @@ GALGAS_calleeKindIR function_checkMode (const GALGAS_mode & constinArgument_inCa
     break ;
   case GALGAS_routineKind::kEnum_primitive:
     {
-      const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 79)))).boolEnum () ;
+      const enumGalgasBool test_5 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 74)))).boolEnum () ;
       if (kBoolTrue == test_5) {
-        result_outResult = GALGAS_calleeKindIR::constructor_primitiveFromProcessorUserMode (SOURCE_FILE ("logical-modes.galgas", 80)) ;
+        result_outResult = GALGAS_calleeKindIR::constructor_primitiveFromProcessorUserMode (SOURCE_FILE ("logical-modes.galgas", 75)) ;
       }else if (kBoolFalse == test_5) {
         TC_Array <C_FixItDescription> fixItArray6 ;
-        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a primitive cannot be called from ").add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 82)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 82)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 82)), fixItArray6  COMMA_SOURCE_FILE ("logical-modes.galgas", 82)) ;
+        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a primitive cannot be called from ").add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 77)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 77)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 77)), fixItArray6  COMMA_SOURCE_FILE ("logical-modes.galgas", 77)) ;
         result_outResult.drop () ; // Release error dropped variable
       }
     }
     break ;
   case GALGAS_routineKind::kEnum_service:
     {
-      const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 85)))).boolEnum () ;
+      const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_userMode (SOURCE_FILE ("logical-modes.galgas", 80)))).boolEnum () ;
       if (kBoolTrue == test_7) {
-        result_outResult = GALGAS_calleeKindIR::constructor_serviceFromProcessorUserMode (SOURCE_FILE ("logical-modes.galgas", 86)) ;
+        result_outResult = GALGAS_calleeKindIR::constructor_serviceFromProcessorUserMode (SOURCE_FILE ("logical-modes.galgas", 81)) ;
       }else if (kBoolFalse == test_7) {
-        GALGAS_bool test_8 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 87)))) ;
+        GALGAS_bool test_8 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 82)))) ;
         if (kBoolTrue != test_8.boolEnum ()) {
-          test_8 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 87)))) ;
+          test_8 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 82)))) ;
         }
         const enumGalgasBool test_9 = test_8.boolEnum () ;
         if (kBoolTrue == test_9) {
-          result_outResult = GALGAS_calleeKindIR::constructor_serviceFromProcessorPrivilegedMode (SOURCE_FILE ("logical-modes.galgas", 88)) ;
+          result_outResult = GALGAS_calleeKindIR::constructor_serviceFromProcessorPrivilegedMode (SOURCE_FILE ("logical-modes.galgas", 83)) ;
         }else if (kBoolFalse == test_9) {
           TC_Array <C_FixItDescription> fixItArray10 ;
-          inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a service cannot be called from ").add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 90)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 90)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 90)), fixItArray10  COMMA_SOURCE_FILE ("logical-modes.galgas", 90)) ;
+          inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a service cannot be called from ").add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 85)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 85)), fixItArray10  COMMA_SOURCE_FILE ("logical-modes.galgas", 85)) ;
           result_outResult.drop () ; // Release error dropped variable
         }
       }
@@ -9469,8 +9469,8 @@ GALGAS_calleeKindIR function_checkMode (const GALGAS_mode & constinArgument_inCa
     break ;
   case GALGAS_routineKind::kEnum_function:
     {
-      GALGAS_bool var_ok_3339 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (constinArgument_inCalleeMode)) ;
-      const enumGalgasBool test_11 = var_ok_3339.operator_not (SOURCE_FILE ("logical-modes.galgas", 94)).boolEnum () ;
+      GALGAS_bool var_ok_3020 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (constinArgument_inCalleeMode)) ;
+      const enumGalgasBool test_11 = var_ok_3020.operator_not (SOURCE_FILE ("logical-modes.galgas", 89)).boolEnum () ;
       if (kBoolTrue == test_11) {
         switch (constinArgument_inCallerMode.enumValue ()) {
         case GALGAS_mode::kNotBuilt:
@@ -9481,48 +9481,48 @@ GALGAS_calleeKindIR function_checkMode (const GALGAS_mode & constinArgument_inCa
           break ;
         case GALGAS_mode::kEnum_sectionMode:
           {
-            var_ok_3339 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 98)))) ;
+            var_ok_3020 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 93)))) ;
           }
           break ;
         case GALGAS_mode::kEnum_serviceMode:
           {
-            GALGAS_bool test_12 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 100)))) ;
+            GALGAS_bool test_12 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 95)))) ;
             if (kBoolTrue != test_12.boolEnum ()) {
-              test_12 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 100)))) ;
+              test_12 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 95)))) ;
             }
-            var_ok_3339 = test_12 ;
+            var_ok_3020 = test_12 ;
           }
           break ;
         case GALGAS_mode::kEnum_primitiveMode:
           {
-            GALGAS_bool test_13 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 102)))) ;
+            GALGAS_bool test_13 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 97)))) ;
             if (kBoolTrue != test_13.boolEnum ()) {
-              test_13 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 102)))) ;
+              test_13 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 97)))) ;
             }
             GALGAS_bool test_14 = test_13 ;
             if (kBoolTrue != test_14.boolEnum ()) {
-              test_14 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 102)))) ;
+              test_14 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 97)))) ;
             }
-            var_ok_3339 = test_14 ;
+            var_ok_3020 = test_14 ;
           }
           break ;
         case GALGAS_mode::kEnum_guardMode:
           {
-            GALGAS_bool test_15 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 104)))) ;
+            GALGAS_bool test_15 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 99)))) ;
             if (kBoolTrue != test_15.boolEnum ()) {
-              test_15 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 104)))) ;
+              test_15 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 99)))) ;
             }
             GALGAS_bool test_16 = test_15 ;
             if (kBoolTrue != test_16.boolEnum ()) {
-              test_16 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 104)))) ;
+              test_16 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 99)))) ;
             }
-            var_ok_3339 = test_16 ;
+            var_ok_3020 = test_16 ;
           }
           break ;
         case GALGAS_mode::kEnum_panicMode:
         case GALGAS_mode::kEnum_initMode:
           {
-            var_ok_3339 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 106)))) ;
+            var_ok_3020 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 101)))) ;
           }
           break ;
         case GALGAS_mode::kEnum_bootMode:
@@ -9535,12 +9535,12 @@ GALGAS_calleeKindIR function_checkMode (const GALGAS_mode & constinArgument_inCa
           break ;
         }
       }
-      const enumGalgasBool test_17 = var_ok_3339.operator_not (SOURCE_FILE ("logical-modes.galgas", 111)).boolEnum () ;
+      const enumGalgasBool test_17 = var_ok_3020.operator_not (SOURCE_FILE ("logical-modes.galgas", 106)).boolEnum () ;
       if (kBoolTrue == test_17) {
         TC_Array <C_FixItDescription> fixItArray18 ;
-        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a func ").add_operation (extensionGetter_string (constinArgument_inCalleeMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 113)).add_operation (GALGAS_string (" cannot be called from "), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 113)).add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 113)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 113)), fixItArray18  COMMA_SOURCE_FILE ("logical-modes.galgas", 112)) ;
+        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a func ").add_operation (extensionGetter_string (constinArgument_inCalleeMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 108)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 108)).add_operation (GALGAS_string (" cannot be called from "), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 108)).add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 108)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 108)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 108)), fixItArray18  COMMA_SOURCE_FILE ("logical-modes.galgas", 107)) ;
       }
-      result_outResult = GALGAS_calleeKindIR::constructor_function (SOURCE_FILE ("logical-modes.galgas", 115)) ;
+      result_outResult = GALGAS_calleeKindIR::constructor_function (SOURCE_FILE ("logical-modes.galgas", 110)) ;
     }
     break ;
   }
