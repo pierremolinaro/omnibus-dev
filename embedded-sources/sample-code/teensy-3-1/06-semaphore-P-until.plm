@@ -4,11 +4,11 @@ target "teensy-3-1"
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
 
-func service activityLedOn @global () {
+func safe activityLedOn @global () {
   digitalWrite (!port:.D13 !true)
 }
 
-func service activityLedOff @global () {
+func safe activityLedOff @global () {
   digitalWrite (!port:.D13 !false)
 }
 
@@ -70,11 +70,11 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s.V ()
     self.top += 300
-    digitalWrite (!port:LED_L0 !true)
+    userDigitalWrite (!port:LED_L0 !true)
     time.waitUntilMS (!deadline:self.top)
     s.V ()
     self.top += 700
-    digitalWrite (!port:LED_L0 !false)
+    userDigitalWrite (!port:LED_L0 !false)
   }
 }
 
@@ -86,10 +86,10 @@ task T2 priority 2 stackSize 512 {
   while time.waitUntilMS (!deadline:0) { // no wait...
     let r = s.P_until (!deadline:self.top)
     if r {
-      toggle (!port:LED_L1)
+      userToggle (!port:LED_L1)
     }else{
       self.top += 400
-      toggle (!port:LED_L1)
+      userToggle (!port:LED_L1)
     }
   }
 }

@@ -4,11 +4,11 @@ target "teensy-3-1"
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
 
-func `service activityLedOn @global () {
+func safe activityLedOn @global () {
   digitalWrite (!port:.D13 !true)
 }
 
-func `service activityLedOff @global () {
+func safe activityLedOff @global () {
   digitalWrite (!port:.D13 !false)
 }
 
@@ -59,11 +59,11 @@ task T0 priority 0 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s0.signal ()
     self.top += 250
-    digitalWrite (!port:LED_L0 !true)
+    userDigitalWrite (!port:LED_L0 !true)
     time.waitUntilMS (!deadline:self.top)
     s0.signal ()
     self.top += 250
-    digitalWrite (!port:LED_L0 !false)
+    userDigitalWrite (!port:LED_L0 !false)
   }
 }
 
@@ -75,11 +75,11 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s1.signal ()
     self.top += 249
-    digitalWrite (!port:LED_L4 !true)
+    userDigitalWrite (!port:LED_L4 !true)
     time.waitUntilMS (!deadline:self.top)
     s1.signal ()
     self.top += 249
-    digitalWrite (!port:LED_L4 !false)
+    userDigitalWrite (!port:LED_L4 !false)
   }
 }
 
@@ -89,16 +89,16 @@ task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   
   while s0.wait () {
-    toggle (!port:LED_L1)
+    userToggle (!port:LED_L1)
   }
   
   while PP () {
-    toggle (!port:LED_L3)
+    userToggle (!port:LED_L3)
   }
   
   while convenienceWaitUntilMS (!deadline:self.deadline) {
     self.deadline += 200
-    toggle (!port:LED_L2)
+    userToggle (!port:LED_L2)
   }
 }
 

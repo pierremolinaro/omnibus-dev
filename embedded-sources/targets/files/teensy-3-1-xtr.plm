@@ -95,7 +95,7 @@ module time {
     result = self.mUptimeMS
   }
   
-  public section millis () -> $uint32 {
+  public section millis @noUnusedWarning () -> $uint32 {
     result = self.kernelMillis ()
   }
   

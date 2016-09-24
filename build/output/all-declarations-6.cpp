@@ -9280,12 +9280,16 @@ GALGAS_calleeKindIR function_checkMode (const GALGAS_mode & constinArgument_inCa
       if (kBoolTrue == test_6) {
         result_outResult = GALGAS_calleeKindIR::constructor_serviceFromProcessorUserMode (SOURCE_FILE ("logical-modes.galgas", 75)) ;
       }else if (kBoolFalse == test_6) {
-        const enumGalgasBool test_7 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 76)))).boolEnum () ;
-        if (kBoolTrue == test_7) {
+        GALGAS_bool test_7 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 76)))) ;
+        if (kBoolTrue != test_7.boolEnum ()) {
+          test_7 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (GALGAS_mode::constructor_guardMode (SOURCE_FILE ("logical-modes.galgas", 76)))) ;
+        }
+        const enumGalgasBool test_8 = test_7.boolEnum () ;
+        if (kBoolTrue == test_8) {
           result_outResult = GALGAS_calleeKindIR::constructor_serviceFromProcessorPrivilegedMode (SOURCE_FILE ("logical-modes.galgas", 77)) ;
-        }else if (kBoolFalse == test_7) {
-          TC_Array <C_FixItDescription> fixItArray8 ;
-          inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a service cannot be called from ").add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 79)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 79)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 79)), fixItArray8  COMMA_SOURCE_FILE ("logical-modes.galgas", 79)) ;
+        }else if (kBoolFalse == test_8) {
+          TC_Array <C_FixItDescription> fixItArray9 ;
+          inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a service cannot be called from ").add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 79)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 79)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 79)), fixItArray9  COMMA_SOURCE_FILE ("logical-modes.galgas", 79)) ;
           result_outResult.drop () ; // Release error dropped variable
         }
       }
@@ -9293,9 +9297,9 @@ GALGAS_calleeKindIR function_checkMode (const GALGAS_mode & constinArgument_inCa
     break ;
   case GALGAS_routineKind::kEnum_function:
     {
-      GALGAS_bool var_ok_2821 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (constinArgument_inCalleeMode)) ;
-      const enumGalgasBool test_9 = var_ok_2821.operator_not (SOURCE_FILE ("logical-modes.galgas", 83)).boolEnum () ;
-      if (kBoolTrue == test_9) {
+      GALGAS_bool var_ok_2855 = GALGAS_bool (kIsEqual, constinArgument_inCallerMode.objectCompare (constinArgument_inCalleeMode)) ;
+      const enumGalgasBool test_10 = var_ok_2855.operator_not (SOURCE_FILE ("logical-modes.galgas", 83)).boolEnum () ;
+      if (kBoolTrue == test_10) {
         switch (constinArgument_inCallerMode.enumValue ()) {
         case GALGAS_mode::kNotBuilt:
           break ;
@@ -9305,44 +9309,48 @@ GALGAS_calleeKindIR function_checkMode (const GALGAS_mode & constinArgument_inCa
           break ;
         case GALGAS_mode::kEnum_sectionMode:
           {
-            var_ok_2821 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 87)))) ;
+            var_ok_2855 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 87)))) ;
           }
           break ;
         case GALGAS_mode::kEnum_serviceMode:
           {
-            GALGAS_bool test_10 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 89)))) ;
-            if (kBoolTrue != test_10.boolEnum ()) {
-              test_10 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 89)))) ;
+            GALGAS_bool test_11 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 89)))) ;
+            if (kBoolTrue != test_11.boolEnum ()) {
+              test_11 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 89)))) ;
             }
-            var_ok_2821 = test_10 ;
+            var_ok_2855 = test_11 ;
           }
           break ;
         case GALGAS_mode::kEnum_primitiveMode:
           {
-            GALGAS_bool test_11 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 91)))) ;
-            if (kBoolTrue != test_11.boolEnum ()) {
-              test_11 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 91)))) ;
-            }
-            GALGAS_bool test_12 = test_11 ;
+            GALGAS_bool test_12 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 91)))) ;
             if (kBoolTrue != test_12.boolEnum ()) {
-              test_12 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 91)))) ;
+              test_12 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 91)))) ;
             }
-            var_ok_2821 = test_12 ;
+            GALGAS_bool test_13 = test_12 ;
+            if (kBoolTrue != test_13.boolEnum ()) {
+              test_13 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 91)))) ;
+            }
+            var_ok_2855 = test_13 ;
           }
           break ;
         case GALGAS_mode::kEnum_guardMode:
           {
-            GALGAS_bool test_13 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 93)))) ;
-            if (kBoolTrue != test_13.boolEnum ()) {
-              test_13 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 93)))) ;
+            GALGAS_bool test_14 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("logical-modes.galgas", 93)))) ;
+            if (kBoolTrue != test_14.boolEnum ()) {
+              test_14 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("logical-modes.galgas", 93)))) ;
             }
-            var_ok_2821 = test_13 ;
+            GALGAS_bool test_15 = test_14 ;
+            if (kBoolTrue != test_15.boolEnum ()) {
+              test_15 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 93)))) ;
+            }
+            var_ok_2855 = test_15 ;
           }
           break ;
         case GALGAS_mode::kEnum_panicMode:
         case GALGAS_mode::kEnum_initMode:
           {
-            var_ok_2821 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 95)))) ;
+            var_ok_2855 = GALGAS_bool (kIsEqual, constinArgument_inCalleeMode.objectCompare (GALGAS_mode::constructor_safeMode (SOURCE_FILE ("logical-modes.galgas", 95)))) ;
           }
           break ;
         case GALGAS_mode::kEnum_bootMode:
@@ -9355,10 +9363,10 @@ GALGAS_calleeKindIR function_checkMode (const GALGAS_mode & constinArgument_inCa
           break ;
         }
       }
-      const enumGalgasBool test_14 = var_ok_2821.operator_not (SOURCE_FILE ("logical-modes.galgas", 100)).boolEnum () ;
-      if (kBoolTrue == test_14) {
-        TC_Array <C_FixItDescription> fixItArray15 ;
-        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a func ").add_operation (extensionGetter_string (constinArgument_inCalleeMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)).add_operation (GALGAS_string (" cannot be called from "), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)).add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)), fixItArray15  COMMA_SOURCE_FILE ("logical-modes.galgas", 101)) ;
+      const enumGalgasBool test_16 = var_ok_2855.operator_not (SOURCE_FILE ("logical-modes.galgas", 100)).boolEnum () ;
+      if (kBoolTrue == test_16) {
+        TC_Array <C_FixItDescription> fixItArray17 ;
+        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("a func ").add_operation (extensionGetter_string (constinArgument_inCalleeMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)).add_operation (GALGAS_string (" cannot be called from "), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)).add_operation (extensionGetter_string (constinArgument_inCallerMode, inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)).add_operation (GALGAS_string (" mode"), inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 102)), fixItArray17  COMMA_SOURCE_FILE ("logical-modes.galgas", 101)) ;
       }
       result_outResult = GALGAS_calleeKindIR::constructor_function (SOURCE_FILE ("logical-modes.galgas", 104)) ;
     }

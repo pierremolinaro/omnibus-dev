@@ -4,11 +4,11 @@ target "teensy-3-1"
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
 
-func `service activityLedOn @global () {
+func safe activityLedOn @global () {
   digitalWrite (!port:.D13 !true)
 }
 
-func `service activityLedOff @global () {
+func safe activityLedOff @global () {
   digitalWrite (!port:.D13 !false)
 }
 
@@ -49,12 +49,12 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     sémaphore.signal ()
     self.top += 250
-    digitalWrite (!port:LED_L1 !true)
+    userDigitalWrite (!port:LED_L1 !true)
     let constanteAccentuée = self.top
     time.waitUntilMS (!deadline:constanteAccentuée)
     sémaphore.signal ()
     self.top += 250
-    digitalWrite (!port:LED_L1 !false)
+    userDigitalWrite (!port:LED_L1 !false)
   }
 }
 
@@ -63,9 +63,9 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
 
   while sémaphore.wait () {
-    digitalWrite (!port:LED_L2 !true)
+    userDigitalWrite (!port:LED_L2 !true)
     sémaphore.wait ()
-    digitalWrite (!port:LED_L2 !false)
+    userDigitalWrite (!port:LED_L2 !false)
   }
 }
 

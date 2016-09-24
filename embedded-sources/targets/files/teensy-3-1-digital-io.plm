@@ -560,6 +560,12 @@ toggle @noUnusedWarning (?port:port $digitalPort) {
 
 //··············································································
 
+public section userDigitalRead @noUnusedWarning (?port:port $digitalPort) -> $bool {
+  result = digitalRead (!port:port)
+}
+
+//··············································································
+
 public func safe
 digitalRead @noUnusedWarning (?port:port $digitalPort) -> $bool {
   switch port {
