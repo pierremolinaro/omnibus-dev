@@ -183,8 +183,20 @@ private proc suppressInaccessibleSubprograms
     + [ioIntermediateCodeStruct.mGuardMapIR count]
   loop (bound + 1) while continues do
     continues = false
-    exploreProcs (!?accessibleProcedureMap !?outAccessibleEntities !?nonExploredProcedureMap !?continues !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions)
-    exploreGuards (!?accessibleGuardMap !?outAccessibleEntities !?nonExploredGuardMap !?continues !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions)
+    exploreProcs (
+      !?accessibleProcedureMap
+      !?outAccessibleEntities
+      !?nonExploredProcedureMap
+      !?continues
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    )
+    exploreGuards (
+      !?accessibleGuardMap
+      !?outAccessibleEntities
+      !?nonExploredGuardMap
+      !?continues
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    )
   end
   if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
     ioIntermediateCodeStruct.mRoutineMapIR = accessibleProcedureMap
@@ -283,4 +295,3 @@ private proc exploreGuards
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-

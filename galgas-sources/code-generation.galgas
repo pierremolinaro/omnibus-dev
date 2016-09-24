@@ -232,6 +232,11 @@ private proc generateCodeFiles
     !?llvmCode
     !?sectionList
   ]
+#----------------------------------------- Safes
+  [inIntermediateCodeStruct.mRoutineMapIR safeCodeGeneration
+    !?llvmCode
+    !?sectionList
+  ]
 #----------------------------------------- Services
   [inIntermediateCodeStruct.mRoutineMapIR serviceCodeGeneration
     !?llvmCode
@@ -258,8 +263,8 @@ private proc generateCodeFiles
     !?asCode
     !serviceList
   )
-#----------------------------------------- Section dispatcher
-  generateSectionDispatcher (
+#----------------------------------------- Section, safe dispatcher
+  generateSectionAndSafeDispatcher (
     !inCurrentDirectory
     !inTargetName.string
     !?asCode

@@ -40,7 +40,9 @@ syntax plm_syntax (plm_lexique) {
     while
       <function> !?ioAst.mProcedureListAST
     while
-      <section> !?ioAst.mSectionListAST
+      <section> !?ioAst.mStandAloneSectionListAST
+    while
+      <safe> !?ioAst.mStandAloneSafeListAST
     while
       <service> !?ioAst.mServiceListAST
     while

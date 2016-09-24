@@ -74,10 +74,10 @@ task T priority 12 stackSize 512 {
   
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline +%= 250
-    userDigitalWrite (!port:LED_L1 !true) // Allumer la led
+    digitalWrite (!port:LED_L1 !true) // Allumer la led
     time.waitUntilMS (!deadline:self.deadline)
     self.deadline +%= 250
-    userDigitalWrite (!port:LED_L1 !false)  // Éteindre la led
+    digitalWrite (!port:LED_L1 !false)  // Éteindre la led
     lcd.goto (!line:1 !column:0)
     lcd.printSpaces (!10)
     lcd.goto (!line:1 !column:0)

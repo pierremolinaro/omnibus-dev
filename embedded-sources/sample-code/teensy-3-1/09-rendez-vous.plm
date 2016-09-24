@@ -102,11 +102,11 @@ task T0 priority 0 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     rdvs.output ()
     self.top += 250
-    userDigitalWrite (!port:LED_L0 !true)
+    digitalWrite (!port:LED_L0 !true)
     time.waitUntilMS (!deadline:self.top)
     rdvs.output ()
     self.top += 250
-    userDigitalWrite (!port:LED_L0 !false)
+    digitalWrite (!port:LED_L0 !false)
   }
 }
 
@@ -115,9 +115,9 @@ task T0 priority 0 stackSize 512 {
 task T1 priority 1 stackSize 512 {
 
   while rdvs.input () {
-    userDigitalWrite (!port:LED_L1 !true)
+    digitalWrite (!port:LED_L1 !true)
     rdvs.input ()
-    userDigitalWrite (!port:LED_L1 !false)
+    digitalWrite (!port:LED_L1 !false)
   }
 }
 

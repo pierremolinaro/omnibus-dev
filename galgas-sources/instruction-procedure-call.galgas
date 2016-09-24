@@ -160,10 +160,12 @@ list @procCallEffectiveParameterListIR {
 enum @calleeKindIR {
   case function
   case primitiveFromProcessorUserMode
+  case safeFromProcessorUserMode
   case sectionFromProcessorUserMode
   case serviceFromProcessorUserMode
   case primitiveFromProcessorPrivilegedMode
   case sectionFromProcessorPrivilegedMode
+  case safeFromProcessorPrivilegedMode
   case serviceFromProcessorPrivilegedMode
 }
 

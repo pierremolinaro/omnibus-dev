@@ -41,6 +41,7 @@ syntax extension plm_syntax {
     @primitiveDeclarationListAST primitiveListAST = {}
     @guardDeclarationListAST guardListAST = {}
     @sectionDeclarationListAST sectionListAST = {}
+    @safeDeclarationListAST safeListAST = {}
     @initList initList = {}
     repeat
     while
@@ -53,6 +54,8 @@ syntax extension plm_syntax {
       <function> !?functionDeclarationListAST
     while
       <service> !?serviceListAST
+    while
+     <safe> !?safeListAST
     while
      <section> !?sectionListAST
     while
@@ -141,6 +144,7 @@ syntax extension plm_syntax {
       !functionDeclarationListAST
       !serviceListAST
       !sectionListAST
+      !safeListAST
       !primitiveListAST
       !guardListAST
     }
