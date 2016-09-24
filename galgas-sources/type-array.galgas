@@ -123,7 +123,7 @@ override method @typeArrayDeclaration enterInContext
     !routineNameForInvocationGraph:.new {!mArrayTypeName.string + " init" !mArrayTypeName.location}
     !optionalTargetType:.null
     !context:ioContext
-    !mode:.initMode
+    !mode:.bootMode
     !?temporary:temporaries
     !?staticStringMap:*
     !?variableMap:variableMap

@@ -238,7 +238,7 @@ method @taskVarListAST-element enterInContext
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:variableAnnotationType
     !context:ioContext
-    !mode:.initMode
+    !mode:.bootMode
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
