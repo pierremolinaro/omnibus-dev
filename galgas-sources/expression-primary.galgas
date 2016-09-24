@@ -219,8 +219,7 @@ override method @primaryInExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -283,8 +282,7 @@ override method @primaryInExpressionAST analyzeExpression
         !inGuard:inGuard
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !context:inContext
-        !modes:inModeSet
-        !allowPanic:inAllowPanic
+        !mode:inCurrentMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
@@ -300,8 +298,7 @@ override method @primaryInExpressionAST analyzeExpression
         !inGuard:inGuard
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !context:inContext
-        !modes:inModeSet
-        !allowPanic:inAllowPanic
+        !mode:inCurrentMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
@@ -320,8 +317,7 @@ override method @primaryInExpressionAST analyzeExpression
         !inGuard:inGuard
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !context:inContext
-        !modes:inModeSet
-        !allowPanic:inAllowPanic
+        !mode:inCurrentMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
@@ -414,8 +410,7 @@ private proc handlePropertyInExpression
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset unused inModeSet
-  ?allowPanic:let @bool unused inAllowPanic
+  ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap
@@ -485,8 +480,7 @@ proc handleFunctionCallInExpression
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -513,15 +507,14 @@ proc handleFunctionCallInExpression
       !effective:inArguments
       !callerForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
-      !requiredModeSet:inModeSet
-      !allowPanic:inAllowPanic
+      !requiredMode:inMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
-      ?routineKind:let @routineKindIR routineKind
+      ?routineKind:let @calleeKindIR routineKind
       ?routineMangledName:let @lstring functionMangledName
       ?routineNameForGeneration:let @lstring functionNameForGeneration
       ?returnType:outReturnedType
@@ -555,15 +548,14 @@ proc analyzeFunctionCallInExpression
   ?effective:let @effectiveParameterListAST inEffectiveParameterList
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?requiredModeSet:let @stringset inRequiredModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
-  !routineKind:@routineKindIR outRoutineKindIR
+  !routineKind:@calleeKindIR outRoutineKindIR
   !routineMangledName:@lstring outRoutineMangledName
   !routineNameForGeneration:@lstring outRoutineNameForGeneration
   !returnType:@unifiedTypeMap-proxy outReturnedType
@@ -592,7 +584,7 @@ proc analyzeFunctionCallInExpression
     ?outRoutineNameForGeneration
     ?let isPublic
     ?let unused isGlobal
-    ?let modeMap
+    ?let @mode calleeMode
     ?let @procedureSignature formalSignature
     ?let @routineKind routineKind
     ?*
@@ -617,8 +609,8 @@ proc analyzeFunctionCallInExpression
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outRoutineMangledName]
 #--- Check modes
   outRoutineKindIR = checkMode (
-    !requiredModes:inRequiredModeSet
-    !possibleModes:[modeMap keySet]
+    !callerMode:inRequiredMode
+    !calleeMode:calleeMode
     !kind:routineKind
     !error:inRoutineName.location
   )
@@ -632,8 +624,7 @@ proc analyzeFunctionCallInExpression
     !errorLocation:inRoutineName.location
     !callerForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
-    !requiredModeSet:inRequiredModeSet
-    !allowPanic:inAllowPanic
+    !requiredMode:inRequiredMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -654,8 +645,7 @@ proc analyzeEffectiveParameters
   ?errorLocation:let @location inErrorLocation
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?requiredModeSet:let @stringset inRequiredModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -729,8 +719,7 @@ proc analyzeEffectiveParameters
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:formal_mType
         !context:inContext
-        !modes:inRequiredModeSet
-        !allowPanic:inAllowPanic
+        !mode:inRequiredMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap

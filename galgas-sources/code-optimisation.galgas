@@ -116,6 +116,7 @@ private proc suppressInaccessibleSubprograms
     if procedure.mIsRequired then
       [!?accessibleProcedureMap insertKey
         !procedure.lkey
+        !procedure.mReceiverType
         !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
         !procedure.mAllocaList
@@ -133,6 +134,7 @@ private proc suppressInaccessibleSubprograms
     else
       [!?nonExploredProcedureMap insertKey
         !procedure.lkey
+        !procedure.mReceiverType
         !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
         !procedure.mAllocaList
@@ -209,6 +211,7 @@ private proc exploreProcs
     if [ioAccessibleEntities.mRoutineSet hasKey !procedure.mRoutineNameForGeneration.string] then
      [!?ioAccessibleProcedureMap insertKey
         !procedure.lkey
+        !procedure.mReceiverType
         !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
         !procedure.mAllocaList
@@ -226,6 +229,7 @@ private proc exploreProcs
     else
       [!?ioNonExploredProcedureMap insertKey
         !procedure.lkey
+        !procedure.mReceiverType
         !procedure.mRoutineNameForGeneration
         !procedure.mFormalArgumentListForGeneration
         !procedure.mAllocaList

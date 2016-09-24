@@ -117,8 +117,7 @@ override method @opaqueTypeDeclaration enterInContext
     !routineNameForInvocationGraph:.new {!mOpaqueTypeName.string + " init" !mOpaqueTypeName.location}
     !optionalTargetType:.null
     !context:ioContext
-    !modes:{}
-    !allowPanic:false
+    !mode:.initMode
     !?temporary:temporaries
     !?staticStringMap:*
     !?variableMap:variableMap

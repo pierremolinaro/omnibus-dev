@@ -7225,97 +7225,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_initRoutineMap ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                    @modeMap map                                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cMapElement_modeMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const char * kSearchErrorMessage_modeMap_searchKey ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_modeMap : public AC_GALGAS_map {
-//--------------------------------- Default constructor
-  public : GALGAS_modeMap (void) ;
-
-//--------------------------------- Handle copy
-  public : GALGAS_modeMap (const GALGAS_modeMap & inSource) ;
-  public : GALGAS_modeMap & operator = (const GALGAS_modeMap & inSource) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_modeMap extractObject (const GALGAS_object & inObject,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_modeMap constructor_emptyMap (LOCATION_ARGS) ;
-
-  public : static class GALGAS_modeMap constructor_mapWithMapToOverride (const class GALGAS_modeMap & inOperand0
-                                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_modeMap getter_overriddenMap (C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-  public : VIRTUAL_IN_DEBUG cMapElement_modeMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                     const GALGAS_string & inKey
-                                                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Friend
-
-  friend class cEnumerator_modeMap ;
- 
-} ; // End of GALGAS_modeMap class
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Enumerator declaration                                                                                            *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumerator_modeMap : public cGenericAbstractEnumerator {
-  public : cEnumerator_modeMap (const GALGAS_modeMap & inEnumeratedObject,
-                                const typeEnumerationOrder inOrder) ;
-
-//--- Current element access
-  public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-//--- Current element access
-  public : class GALGAS_modeMap_2D_element current (LOCATION_ARGS) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_modeMap ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                            @panicRoutinePriorityMap map                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7551,7 +7460,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                       const class GALGAS_lstring & inOperand1,
                                                       const class GALGAS_bool & inOperand2,
                                                       const class GALGAS_bool & inOperand3,
-                                                      const class GALGAS_modeMap & inOperand4,
+                                                      const class GALGAS_mode & inOperand4,
                                                       const class GALGAS_procedureSignature & inOperand5,
                                                       const class GALGAS_routineKind & inOperand6,
                                                       const class GALGAS_bool & inOperand7,
@@ -7567,7 +7476,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_lstring constinArgument1,
                                                    class GALGAS_bool constinArgument2,
                                                    class GALGAS_bool constinArgument3,
-                                                   class GALGAS_modeMap constinArgument4,
+                                                   class GALGAS_mode constinArgument4,
                                                    class GALGAS_procedureSignature constinArgument5,
                                                    class GALGAS_routineKind constinArgument6,
                                                    class GALGAS_bool constinArgument7,
@@ -7582,7 +7491,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_lstring & outArgument1,
                                                    class GALGAS_bool & outArgument2,
                                                    class GALGAS_bool & outArgument3,
-                                                   class GALGAS_modeMap & outArgument4,
+                                                   class GALGAS_mode & outArgument4,
                                                    class GALGAS_procedureSignature & outArgument5,
                                                    class GALGAS_routineKind & outArgument6,
                                                    class GALGAS_bool & outArgument7,
@@ -7618,10 +7527,10 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMModeMapForKey (class GALGAS_modeMap constinArgument0,
-                                                           class GALGAS_string constinArgument1,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG void setter_setMModeForKey (class GALGAS_mode constinArgument0,
+                                                        class GALGAS_string constinArgument1,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMReturnTypeForKey (class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                                               class GALGAS_string constinArgument1,
@@ -7654,7 +7563,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_lstring & outArgument1,
                                                    class GALGAS_bool & outArgument2,
                                                    class GALGAS_bool & outArgument3,
-                                                   class GALGAS_modeMap & outArgument4,
+                                                   class GALGAS_mode & outArgument4,
                                                    class GALGAS_procedureSignature & outArgument5,
                                                    class GALGAS_routineKind & outArgument6,
                                                    class GALGAS_bool & outArgument7,
@@ -7688,9 +7597,9 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_modeMap getter_mModeMapForKey (const class GALGAS_string & constinOperand0,
-                                                                        C_Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mModeForKey (const class GALGAS_string & constinOperand0,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeForKey (const class GALGAS_string & constinOperand0,
                                                                                            C_Compiler * inCompiler
@@ -7741,7 +7650,7 @@ class cEnumerator_routineMapForContext : public cGenericAbstractEnumerator {
   public : class GALGAS_lstring current_mRoutineLLVMName (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mIsPublic (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mGlobal (LOCATION_ARGS) const ;
-  public : class GALGAS_modeMap current_mModeMap (LOCATION_ARGS) const ;
+  public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
   public : class GALGAS_procedureSignature current_mSignature (LOCATION_ARGS) const ;
   public : class GALGAS_routineKind current_mRoutineKind (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mWeak (LOCATION_ARGS) const ;
@@ -7783,7 +7692,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_globalVariableMap mAttribute_mGlobalVariableMap ;
   public : GALGAS_moduleMap mAttribute_mModuleMap ;
   public : GALGAS_constructorMap mAttribute_mConstructorMap ;
-  public : GALGAS_modeMap mAttribute_mModeMap ;
   public : GALGAS_stringset mAttribute_mDefinedInterruptSet ;
   public : GALGAS_availableInterruptMap mAttribute_mAvailableInterruptMap ;
   public : GALGAS_infixOperatorMap mAttribute_mEqualOperatorMap ;
@@ -7847,7 +7755,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_globalVariableMap & in_mGlobalVariableMap,
                                    const GALGAS_moduleMap & in_mModuleMap,
                                    const GALGAS_constructorMap & in_mConstructorMap,
-                                   const GALGAS_modeMap & in_mModeMap,
                                    const GALGAS_stringset & in_mDefinedInterruptSet,
                                    const GALGAS_availableInterruptMap & in_mAvailableInterruptMap,
                                    const GALGAS_infixOperatorMap & in_mEqualOperatorMap,
@@ -7907,9 +7814,9 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_globalVariableMap & inOperand15,
                                                                 const class GALGAS_moduleMap & inOperand16,
                                                                 const class GALGAS_constructorMap & inOperand17,
-                                                                const class GALGAS_modeMap & inOperand18,
-                                                                const class GALGAS_stringset & inOperand19,
-                                                                const class GALGAS_availableInterruptMap & inOperand20,
+                                                                const class GALGAS_stringset & inOperand18,
+                                                                const class GALGAS_availableInterruptMap & inOperand19,
+                                                                const class GALGAS_infixOperatorMap & inOperand20,
                                                                 const class GALGAS_infixOperatorMap & inOperand21,
                                                                 const class GALGAS_infixOperatorMap & inOperand22,
                                                                 const class GALGAS_infixOperatorMap & inOperand23,
@@ -7931,12 +7838,11 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_infixOperatorMap & inOperand39,
                                                                 const class GALGAS_infixOperatorMap & inOperand40,
                                                                 const class GALGAS_infixOperatorMap & inOperand41,
-                                                                const class GALGAS_infixOperatorMap & inOperand42,
+                                                                const class GALGAS_prefixOperatorMap & inOperand42,
                                                                 const class GALGAS_prefixOperatorMap & inOperand43,
                                                                 const class GALGAS_prefixOperatorMap & inOperand44,
-                                                                const class GALGAS_prefixOperatorMap & inOperand45,
-                                                                const class GALGAS_taskMap & inOperand46,
-                                                                const class GALGAS_globalTaskVariableList & inOperand47
+                                                                const class GALGAS_taskMap & inOperand45,
+                                                                const class GALGAS_globalTaskVariableList & inOperand46
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -7994,8 +7900,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mModNoOvfOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mModOperatorMap (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_modeMap getter_mModeMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_moduleMap getter_mModuleMap (LOCATION_ARGS) const ;
 
@@ -9303,48 +9207,51 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_lstring & inOperand1,
-                                                      const class GALGAS_procFormalArgumentListForGeneration & inOperand2,
-                                                      const class GALGAS_allocaList & inOperand3,
-                                                      const class GALGAS_instructionListIR & inOperand4,
-                                                      const class GALGAS_bool & inOperand5,
+                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                      const class GALGAS_lstring & inOperand2,
+                                                      const class GALGAS_procFormalArgumentListForGeneration & inOperand3,
+                                                      const class GALGAS_allocaList & inOperand4,
+                                                      const class GALGAS_instructionListIR & inOperand5,
                                                       const class GALGAS_bool & inOperand6,
                                                       const class GALGAS_bool & inOperand7,
                                                       const class GALGAS_bool & inOperand8,
-                                                      const class GALGAS_routineKind & inOperand9,
-                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand10,
-                                                      const class GALGAS_bool & inOperand11,
+                                                      const class GALGAS_bool & inOperand9,
+                                                      const class GALGAS_routineKind & inOperand10,
+                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand11,
+                                                      const class GALGAS_bool & inOperand12,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_lstring constinArgument1,
-                                                   class GALGAS_procFormalArgumentListForGeneration constinArgument2,
-                                                   class GALGAS_allocaList constinArgument3,
-                                                   class GALGAS_instructionListIR constinArgument4,
-                                                   class GALGAS_bool constinArgument5,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument1,
+                                                   class GALGAS_lstring constinArgument2,
+                                                   class GALGAS_procFormalArgumentListForGeneration constinArgument3,
+                                                   class GALGAS_allocaList constinArgument4,
+                                                   class GALGAS_instructionListIR constinArgument5,
                                                    class GALGAS_bool constinArgument6,
                                                    class GALGAS_bool constinArgument7,
                                                    class GALGAS_bool constinArgument8,
-                                                   class GALGAS_routineKind constinArgument9,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument10,
-                                                   class GALGAS_bool constinArgument11,
+                                                   class GALGAS_bool constinArgument9,
+                                                   class GALGAS_routineKind constinArgument10,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument11,
+                                                   class GALGAS_bool constinArgument12,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_lstring & outArgument1,
-                                                   class GALGAS_procFormalArgumentListForGeneration & outArgument2,
-                                                   class GALGAS_allocaList & outArgument3,
-                                                   class GALGAS_instructionListIR & outArgument4,
-                                                   class GALGAS_bool & outArgument5,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
+                                                   class GALGAS_lstring & outArgument2,
+                                                   class GALGAS_procFormalArgumentListForGeneration & outArgument3,
+                                                   class GALGAS_allocaList & outArgument4,
+                                                   class GALGAS_instructionListIR & outArgument5,
                                                    class GALGAS_bool & outArgument6,
                                                    class GALGAS_bool & outArgument7,
                                                    class GALGAS_bool & outArgument8,
-                                                   class GALGAS_routineKind & outArgument9,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument10,
-                                                   class GALGAS_bool & outArgument11,
+                                                   class GALGAS_bool & outArgument9,
+                                                   class GALGAS_routineKind & outArgument10,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument11,
+                                                   class GALGAS_bool & outArgument12,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -9383,6 +9290,11 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeForKey (class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                class GALGAS_string constinArgument1,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
   public : VIRTUAL_IN_DEBUG void setter_setMReturnTypeForKey (class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                                               class GALGAS_string constinArgument1,
                                                               C_Compiler * inCompiler
@@ -9406,17 +9318,18 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_lstring & outArgument1,
-                                                   class GALGAS_procFormalArgumentListForGeneration & outArgument2,
-                                                   class GALGAS_allocaList & outArgument3,
-                                                   class GALGAS_instructionListIR & outArgument4,
-                                                   class GALGAS_bool & outArgument5,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
+                                                   class GALGAS_lstring & outArgument2,
+                                                   class GALGAS_procFormalArgumentListForGeneration & outArgument3,
+                                                   class GALGAS_allocaList & outArgument4,
+                                                   class GALGAS_instructionListIR & outArgument5,
                                                    class GALGAS_bool & outArgument6,
                                                    class GALGAS_bool & outArgument7,
                                                    class GALGAS_bool & outArgument8,
-                                                   class GALGAS_routineKind & outArgument9,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument10,
-                                                   class GALGAS_bool & outArgument11,
+                                                   class GALGAS_bool & outArgument9,
+                                                   class GALGAS_routineKind & outArgument10,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument11,
+                                                   class GALGAS_bool & outArgument12,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -9450,6 +9363,10 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
   public : VIRTUAL_IN_DEBUG class GALGAS_routineKind getter_mKindForKey (const class GALGAS_string & constinOperand0,
                                                                          C_Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReceiverTypeForKey (const class GALGAS_string & constinOperand0,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeForKey (const class GALGAS_string & constinOperand0,
                                                                                            C_Compiler * inCompiler
@@ -9493,6 +9410,7 @@ class cEnumerator_routineMapIR : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_unifiedTypeMap_2D_proxy current_mReceiverType (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mRoutineNameForGeneration (LOCATION_ARGS) const ;
   public : class GALGAS_procFormalArgumentListForGeneration current_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
   public : class GALGAS_allocaList current_mAllocaList (LOCATION_ARGS) const ;
@@ -11163,6 +11081,26 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationContext ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Extension getter '@mode panicAllowed' (as function)                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool extensionGetter_panicAllowed (const class GALGAS_mode & inObject,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Extension getter '@mode string' (as function)                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_string (const class GALGAS_mode & inObject,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

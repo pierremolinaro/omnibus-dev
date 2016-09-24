@@ -86,80 +86,6 @@ map @globalVariableMap %selectors {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @modeMap {
-  insert insertKey error message "the '%%%K' mode is already declared"
-  search searchKey error message "there is no '%%%K' mode"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func checkMode
-  ?requiredModes:let @stringset inRequiredModes
-  ?possibleModes:let @stringset inPossibleModes
-  ?kind:let @routineKind inRoutineKind
-  ?error:let @location inErrorLocation
-  -> @routineKindIR outResult
-{
-  if (inPossibleModes & inRequiredModes) != inRequiredModes  then
-    let missingModes = inRequiredModes - inPossibleModes
-    var s = "cannot be accessed in mode"
-    s += if [missingModes count] > 1 then "s" else "" end
-    s += ": "
-    for (m) in missingModes
-    do  s += "`" + m
-    between s += ", "
-    end
-    error inErrorLocation : s
-  end
-  var requiredModeListString = ""
-  for (m) in inRequiredModes do
-    requiredModeListString += " `" + m
-  end
-  let runInProcessorUserMode = [inRequiredModes hasKey !userModeName ()]
-  let runInProcessorPrivilegedMode =
-#    [inRequiredModes hasKey !sectionModeName ()]
-#    ||
-    [inRequiredModes hasKey !serviceModeName ()]
-    ||
-    [inRequiredModes hasKey !primitiveModeName ()]
-  switch inRoutineKind
-  case function :
-    outResult = .function
-  case section :
-    if runInProcessorUserMode && runInProcessorPrivilegedMode then
-      error inErrorLocation : "a section cannot be called in" + requiredModeListString + " mode(s)" : outResult
-    elsif runInProcessorUserMode then
-      outResult = .sectionInProcessorUserMode
-    elsif runInProcessorPrivilegedMode then
-      outResult = .sectionInProcessorPrivilegedMode
-    else
-      error inErrorLocation : "a section cannot be called in" + requiredModeListString + " mode(s)" : outResult
-    end
-  case service :
-    if runInProcessorUserMode && runInProcessorPrivilegedMode then
-      error inErrorLocation : "a service cannot be called in" + requiredModeListString + " mode(s)" : outResult
-    elsif runInProcessorUserMode then
-      outResult = .serviceInProcessorUserMode
-    elsif runInProcessorPrivilegedMode then
-      outResult = .serviceInProcessorPrivilegedMode
-    else
-      error inErrorLocation : "a service cannot be called in" + requiredModeListString + " mode(s)" : outResult
-    end
-  case primitive :
-    if runInProcessorUserMode && runInProcessorPrivilegedMode then
-      error inErrorLocation : "a primitive cannot be called in" + requiredModeListString + " mode(s)" : outResult
-    elsif runInProcessorUserMode then
-      outResult = .primitiveInProcessorUserMode
-    elsif runInProcessorPrivilegedMode then
-      outResult = .primitiveInProcessorPrivilegedMode
-    else
-      error inErrorLocation : "a service cannot be called in" + requiredModeListString + " mode(s)" : outResult
-    end
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 sharedmap @unifiedTypeMap %selectors {
   @string llvmTypeName # For Example: i23, %$toto
   @typeKind kind
@@ -247,7 +173,7 @@ struct @semanticContext {
   @globalVariableMap mGlobalVariableMap
   @moduleMap mModuleMap
   @constructorMap mConstructorMap
-  @modeMap mModeMap
+#  @modeMap mModeMap
 #--- Interrupts
   @stringset mDefinedInterruptSet
   @availableInterruptMap mAvailableInterruptMap
@@ -298,18 +224,18 @@ abstract method @abstractDeclaration enterRoutinesInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func allModeMap -> @modeMap outModeMap {
-  outModeMap = {}
-  [!?outModeMap insertKey ![bootModeName () nowhere]]
-  [!?outModeMap insertKey ![initModeName () nowhere]]
-  [!?outModeMap insertKey ![panicModeName () nowhere]]
-  [!?outModeMap insertKey ![sectionModeName () nowhere]]
-  [!?outModeMap insertKey ![primitiveModeName () nowhere]]
-  [!?outModeMap insertKey ![serviceModeName () nowhere]]
-  [!?outModeMap insertKey ![userModeName () nowhere]]
-  [!?outModeMap insertKey ![guardModeName () nowhere]]
-
-}
+#func allModeMap -> @modeMap outModeMap {
+#  outModeMap = {}
+#  [!?outModeMap insertKey ![bootModeName () nowhere]]
+#  [!?outModeMap insertKey ![initModeName () nowhere]]
+#  [!?outModeMap insertKey ![panicModeName () nowhere]]
+#  [!?outModeMap insertKey ![sectionModeName () nowhere]]
+#  [!?outModeMap insertKey ![primitiveModeName () nowhere]]
+#  [!?outModeMap insertKey ![serviceModeName () nowhere]]
+#  [!?outModeMap insertKey ![userModeName () nowhere]]
+#  [!?outModeMap insertKey ![guardModeName () nowhere]]
+#
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -322,7 +248,7 @@ proc buildSemanticContext
 {
   outSemanticContext = .default
 #--- Add predefined modes
-  outSemanticContext.mModeMap = allModeMap ()
+#  outSemanticContext.mModeMap = allModeMap ()
 #--- Enter init routines
   for initRoutine in inAST.mInitList do
     [initRoutine enterInContext !?context:outSemanticContext]
@@ -373,13 +299,13 @@ proc buildSemanticContext
     ]
   end
 #--- Check required procs mode
-  if @uint.errorCount == 0 then
-    for requiredProc in inAST.mRequiredProcList do
-      for (mode) in requiredProc.mProcedureModeList do
-        [outSemanticContext.mModeMap searchKey !mode]
-      end
-    end
-  end
+#  if @uint.errorCount == 0 then
+#    for requiredProc in inAST.mRequiredProcList do
+#      for (mode) in requiredProc.mProcedureModeList do
+#        [outSemanticContext.mModeMap searchKey !mode]
+#      end
+#    end
+#  end
 #--- Check global var declaration
   if @uint.errorCount == 0 then
     for globalVar in inAST.mGlobalVarDeclarationList do

@@ -50,7 +50,7 @@ syntax extension plm_syntax {
     while
       <module_variable> !?fieldList
     while
-      <procedure> !?functionDeclarationListAST
+      <function> !?functionDeclarationListAST
     while
       <service> !?serviceListAST
     while

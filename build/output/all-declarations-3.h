@@ -301,7 +301,7 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
   public : GALGAS_lstring mAttribute_mRoutineLLVMName ;
   public : GALGAS_bool mAttribute_mIsPublic ;
   public : GALGAS_bool mAttribute_mGlobal ;
-  public : GALGAS_modeMap mAttribute_mModeMap ;
+  public : GALGAS_mode mAttribute_mMode ;
   public : GALGAS_procedureSignature mAttribute_mSignature ;
   public : GALGAS_routineKind mAttribute_mRoutineKind ;
   public : GALGAS_bool mAttribute_mWeak ;
@@ -326,7 +326,7 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
                                                    const GALGAS_lstring & in_mRoutineLLVMName,
                                                    const GALGAS_bool & in_mIsPublic,
                                                    const GALGAS_bool & in_mGlobal,
-                                                   const GALGAS_modeMap & in_mModeMap,
+                                                   const GALGAS_mode & in_mMode,
                                                    const GALGAS_procedureSignature & in_mSignature,
                                                    const GALGAS_routineKind & in_mRoutineKind,
                                                    const GALGAS_bool & in_mWeak,
@@ -350,7 +350,7 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
                                                                                 const class GALGAS_lstring & inOperand1,
                                                                                 const class GALGAS_bool & inOperand2,
                                                                                 const class GALGAS_bool & inOperand3,
-                                                                                const class GALGAS_modeMap & inOperand4,
+                                                                                const class GALGAS_mode & inOperand4,
                                                                                 const class GALGAS_procedureSignature & inOperand5,
                                                                                 const class GALGAS_routineKind & inOperand6,
                                                                                 const class GALGAS_bool & inOperand7,
@@ -384,7 +384,7 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_modeMap getter_mModeMap (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnType (LOCATION_ARGS) const ;
 
@@ -406,72 +406,6 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineMapForContext_2D_element ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             @modeMap_2D_element struct                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_modeMap_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_modeMap_2D_element constructor_default (LOCATION_ARGS) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_modeMap_2D_element (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : VIRTUAL_IN_DEBUG ~ GALGAS_modeMap_2D_element (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_modeMap_2D_element (const GALGAS_lstring & in_lkey) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_modeMap_2D_element extractObject (const GALGAS_object & inObject,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_modeMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0
-                                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_modeMap_2D_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_modeMap_2D_element class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_modeMap_2D_element ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -4677,6 +4611,25 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_5F__39__ (GALGAS_expressionAST & outArgument0,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'function' non terminal
+//--- 'parse' label
+  public : virtual void nt_function_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_function_ (GALGAS_functionDeclarationListAST & ioArgument0,
+                                      C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'function_header' non terminal
+//--- 'parse' label
+  public : virtual void nt_function_5F_header_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_function_5F_header_ (GALGAS_mode & outArgument0,
+                                                GALGAS_lstring & outArgument1,
+                                                GALGAS_lstringlist & outArgument2,
+                                                GALGAS_procFormalArgumentList & outArgument3,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'guard' non terminal
 //--- 'parse' label
   public : virtual void nt_guard_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -4735,6 +4688,14 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
                                  const GALGAS_string inArgument2,
                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'mode' non terminal
+//--- 'parse' label
+  public : virtual void nt_mode_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_mode_ (GALGAS_mode & outArgument0,
+                                  C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'module_variable' non terminal
 //--- 'parse' label
   public : virtual void nt_module_5F_variable_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -4759,14 +4720,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_primitive_ (GALGAS_primitiveDeclarationListAST & ioArgument0,
                                        C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'procedure' non terminal
-//--- 'parse' label
-  public : virtual void nt_procedure_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_procedure_ (GALGAS_functionDeclarationListAST & ioArgument0,
-                                       C_Lexique_plm_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'procedure_call' non terminal
 //--- 'parse' label
   public : virtual void nt_procedure_5F_call_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -4782,18 +4735,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_procedure_5F_formal_5F_arguments_ (GALGAS_procFormalArgumentList & outArgument0,
                                                               C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'procedure_header' non terminal
-//--- 'parse' label
-  public : virtual void nt_procedure_5F_header_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_procedure_5F_header_ (GALGAS_bool & outArgument0,
-                                                 GALGAS_lstringlist & outArgument1,
-                                                 GALGAS_lstring & outArgument2,
-                                                 GALGAS_lstringlist & outArgument3,
-                                                 GALGAS_procFormalArgumentList & outArgument4,
-                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'property_in_extension' non terminal
 //--- 'parse' label

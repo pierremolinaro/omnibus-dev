@@ -436,8 +436,7 @@ abstract method @expressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModes
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -462,8 +461,7 @@ method @expressionAST analyzeStaticExpression
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:.null
     !context:inContext
-    !modes:{}
-    !allowPanic:false
+    !mode:.bootMode
     !?temporary:*
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:*

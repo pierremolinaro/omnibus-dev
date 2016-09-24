@@ -6,8 +6,7 @@ proc handleSubscriptInAssignmentAndExpression
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -25,8 +24,7 @@ proc handleSubscriptInAssignmentAndExpression
       !inGuard: inGuard
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !context: inContext
-      !modes: inModeSet
-      !allowPanic: inAllowPanic
+      !mode: inCurrentMode
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioVariableMap
@@ -43,8 +41,7 @@ proc handleSubscriptInAssignmentAndExpression
       !inGuard: inGuard
       !routineNameForInvocationGraph: inCallerNameForInvocationGraph
       !context: inContext
-      !modes: inModeSet
-      !allowPanic: inAllowPanic
+      !mode: inCurrentMode
       !?temporary: ioTemporaries
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap: ioVariableMap
@@ -67,8 +64,7 @@ private proc handleSubscriptArrayInAssignmentAndExpression
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -88,8 +84,7 @@ private proc handleSubscriptArrayInAssignmentAndExpression
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -125,7 +120,7 @@ private proc handleSubscriptArrayInAssignmentAndExpression
         !arraySize
         ?let @bool generatePanicInstruction
       ]
-      if generatePanicInstruction && not inAllowPanic then
+      if generatePanicInstruction && not [inCurrentMode panicAllowed] then
         error inErrorLocation : "index computation can generate panic" : ioObjectPtr
       end
     end
@@ -156,8 +151,7 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -189,8 +183,7 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:.null
       !context:inContext
-      !modes:inModeSet
-      !allowPanic:inAllowPanic
+      !mode:inCurrentMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
@@ -224,7 +217,7 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
           !arraySize
           ?let @bool generatePanicInstruction
         ]
-        if generatePanicInstruction && not inAllowPanic then
+        if generatePanicInstruction && not [inCurrentMode panicAllowed] then
           error inErrorLocation : "index computation can generated panic"
         end
       end

@@ -1,0 +1,108 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  Logical modes                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @mode {
+  case userMode
+  case sectionMode
+  case serviceMode
+  case primitiveMode
+  case guardMode
+  case panicMode
+  case bootMode
+  case initMode
+  case safeMode
+}
+
+#·······················································································································
+
+getter @mode panicAllowed -> @bool {
+  switch self
+  case userMode : result = true
+  case sectionMode : result = true
+  case serviceMode : result = true
+  case primitiveMode : result = true
+  case guardMode : result = true
+  case panicMode : result = false
+  case bootMode : result = false
+  case initMode : result = true
+  case safeMode : result = false
+  end
+}
+
+#·······················································································································
+
+getter @mode string -> @string {
+  switch self
+  case userMode : result = "user"
+  case sectionMode : result = "section"
+  case serviceMode : result = "service"
+  case primitiveMode : result = "primitive"
+  case guardMode : result = "guard"
+  case panicMode : result = "panic"
+  case bootMode : result = "boot"
+  case initMode : result = "init"
+  case safeMode : result = "safe"
+  end
+}
+
+#·······················································································································
+
+func checkMode
+  ?callerMode:let @mode inCallerMode
+  ?calleeMode:let @mode inCalleeMode
+  ?kind:let @routineKind inRoutineKind
+  ?error:let @location inErrorLocation
+  -> @calleeKindIR outResult
+{
+  switch inRoutineKind
+  case section :
+    if inCallerMode == .userMode then
+      outResult = .sectionFromProcessorUserMode
+    elsif (inCallerMode == .primitiveMode) || (inCallerMode == .sectionMode) then
+      outResult = .sectionFromProcessorPrivilegedMode
+    else
+      error inErrorLocation : "a section cannot be called from " + inCallerMode + " mode" : outResult
+    end
+  case primitive :
+    if inCallerMode == .userMode then
+      outResult = .primitiveFromProcessorUserMode
+    else
+      error inErrorLocation : "a primitive cannot be called from " + inCallerMode + " mode" : outResult
+    end
+  case service :
+    if inCallerMode == .userMode then
+      outResult = .serviceFromProcessorUserMode
+    elsif inCallerMode == .primitiveMode then
+      outResult = .serviceFromProcessorPrivilegedMode
+    else
+      error inErrorLocation : "a service cannot be called from " + inCallerMode + " mode" : outResult
+    end
+  case function :
+    var ok = inCallerMode == inCalleeMode
+    if not ok then
+      switch inCallerMode
+      case userMode :
+      case sectionMode :
+        ok = (inCalleeMode == .safeMode)
+      case serviceMode :
+        ok = (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode)
+      case primitiveMode :
+        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode)
+      case guardMode :
+        ok = (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode)
+      case panicMode, initMode :
+        ok = inCalleeMode == .safeMode
+      case bootMode :
+      case safeMode :
+      end
+    end
+    if not ok then
+      error inErrorLocation
+      : "a func " + inCalleeMode + " cannot be called from " + inCallerMode + " mode"
+    end
+    outResult = .function
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

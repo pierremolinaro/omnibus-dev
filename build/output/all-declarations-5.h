@@ -11,105 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                             @switchInstructionIR class                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_switchInstructionIR : public GALGAS_abstractInstructionIR {
-//--- Constructor
-  public : GALGAS_switchInstructionIR (void) ;
-
-//---
-  public : inline const class cPtr_switchInstructionIR * ptr (void) const { return (const cPtr_switchInstructionIR *) mObjectPtr ; }
-
-//--------------------------------- Constructor from pointer
-  public : GALGAS_switchInstructionIR (const cPtr_switchInstructionIR * inSourcePtr) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_switchInstructionIR extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_switchInstructionIR constructor_new (const class GALGAS_uint & inOperand0,
-                                                                    const class GALGAS_instructionListIR & inOperand1,
-                                                                    const class GALGAS_objectIR & inOperand2,
-                                                                    const class GALGAS_switchCaseListIR & inOperand3
-                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_switchInstructionIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_switchCaseListIR getter_mCaseGenerationList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mLabelIndex (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mSwitchExpression (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mSwitchExpressionGenerationList (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_switchInstructionIR class
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchInstructionIR ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Pointer class for @switchInstructionIR class                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cPtr_switchInstructionIR : public cPtr_abstractInstructionIR {
-//--- Attributes
-  public : GALGAS_uint mAttribute_mLabelIndex ;
-  public : GALGAS_instructionListIR mAttribute_mSwitchExpressionGenerationList ;
-  public : GALGAS_objectIR mAttribute_mSwitchExpression ;
-  public : GALGAS_switchCaseListIR mAttribute_mCaseGenerationList ;
-
-//--- Constructor
-  public : cPtr_switchInstructionIR (const GALGAS_uint & in_mLabelIndex,
-                                     const GALGAS_instructionListIR & in_mSwitchExpressionGenerationList,
-                                     const GALGAS_objectIR & in_mSwitchExpression,
-                                     const GALGAS_switchCaseListIR & in_mCaseGenerationList
-                                     COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mLabelIndex (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mSwitchExpressionGenerationList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mSwitchExpression (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_switchCaseListIR getter_mCaseGenerationList (LOCATION_ARGS) const ;
-//--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                    Extension method '@assignmentTargetAST noteInstructionTypesInPrecedenceGraph'                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -132,8 +33,7 @@ void extensionMethod_analyzeAssignmentTarget (const class GALGAS_assignmentTarge
                                               const class GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
                                               const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                               const class GALGAS_semanticContext constin_inContext,
-                                              const class GALGAS_stringset constin_inModeSet,
-                                              const class GALGAS_bool constin_inAllowPanic,
+                                              const class GALGAS_mode constin_inCurrentMode,
                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                               class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                               class GALGAS_variableMap & io_ioVariableMap,
@@ -182,16 +82,15 @@ void routine_handleSubscriptInAssignmentAndExpression (const class GALGAS_unifie
                                                        const class GALGAS_bool constinArgument2,
                                                        const class GALGAS_lstring constinArgument3,
                                                        const class GALGAS_semanticContext constinArgument4,
-                                                       const class GALGAS_stringset constinArgument5,
-                                                       const class GALGAS_bool constinArgument6,
-                                                       class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                                       class GALGAS_staticStringMap & ioArgument8,
-                                                       class GALGAS_variableMap & ioArgument9,
-                                                       class GALGAS_allocaList & ioArgument10,
-                                                       const class GALGAS_expressionAST constinArgument11,
-                                                       const class GALGAS_location constinArgument12,
-                                                       class GALGAS_instructionListIR & ioArgument13,
-                                                       class GALGAS_objectIR & ioArgument14,
+                                                       const class GALGAS_mode constinArgument5,
+                                                       class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                                       class GALGAS_staticStringMap & ioArgument7,
+                                                       class GALGAS_variableMap & ioArgument8,
+                                                       class GALGAS_allocaList & ioArgument9,
+                                                       const class GALGAS_expressionAST constinArgument10,
+                                                       const class GALGAS_location constinArgument11,
+                                                       class GALGAS_instructionListIR & ioArgument12,
+                                                       class GALGAS_objectIR & ioArgument13,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -226,7 +125,7 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
                                                                const class GALGAS_objectIR & inOperand1,
                                                                const class GALGAS_lstring & inOperand2,
                                                                const class GALGAS_lstring & inOperand3,
-                                                               const class GALGAS_routineKindIR & inOperand4,
+                                                               const class GALGAS_calleeKindIR & inOperand4,
                                                                const class GALGAS_procCallEffectiveParameterListIR & inOperand5,
                                                                const class GALGAS_bool & inOperand6
                                                                COMMA_LOCATION_ARGS) ;
@@ -250,7 +149,7 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVariableName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_calleeKindIR getter_mKind (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
 
@@ -277,7 +176,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
   public : GALGAS_objectIR mAttribute_mResult ;
   public : GALGAS_lstring mAttribute_mFunctionMangledName ;
   public : GALGAS_lstring mAttribute_mFunctionNameForGeneration ;
-  public : GALGAS_routineKindIR mAttribute_mKind ;
+  public : GALGAS_calleeKindIR mAttribute_mKind ;
   public : GALGAS_procCallEffectiveParameterListIR mAttribute_mArgumentList ;
   public : GALGAS_bool mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
 
@@ -286,7 +185,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
                                 const GALGAS_objectIR & in_mResult,
                                 const GALGAS_lstring & in_mFunctionMangledName,
                                 const GALGAS_lstring & in_mFunctionNameForGeneration,
-                                const GALGAS_routineKindIR & in_mKind,
+                                const GALGAS_calleeKindIR & in_mKind,
                                 const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList,
                                 const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
                                 COMMA_LOCATION_ARGS) ;
@@ -299,7 +198,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionMangledName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionNameForGeneration (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_routineKindIR getter_mKind (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_calleeKindIR getter_mKind (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_procCallEffectiveParameterListIR getter_mArgumentList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
 //--- Description

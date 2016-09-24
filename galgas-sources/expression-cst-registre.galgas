@@ -82,8 +82,7 @@ override method @registerConstantExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -132,8 +131,7 @@ override method @registerConstantExpressionAST analyzeExpression
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:.null
       !context:inContext
-      !modes:inModeSet
-      !allowPanic:inAllowPanic
+      !mode:inCurrentMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
@@ -168,12 +166,12 @@ override method @registerConstantExpressionAST analyzeExpression
       if not unsigned then
         error expressionLocation: "an unsigned integer expression is required here"
       else
-        if (expressionBitCount > fieldBitCount) && not inAllowPanic then
+        if (expressionBitCount > fieldBitCount) && not [inCurrentMode panicAllowed] then
           error expressionLocation
             : "operations that can generate panic are not allowed here: the expression should be an $uint" + fieldBitCount
         end
       #--- Generate an upper bound check
-        if (expressionBitCount > fieldBitCount) && inAllowPanic && not [option plm_options.noPanicGeneration value] then
+        if (expressionBitCount > fieldBitCount) && [inCurrentMode panicAllowed] && not [option plm_options.noPanicGeneration value] then
           [!?ioInstructionGenerationList appendUpperBoundCheck
             !expressionResult
             !1G << fieldBitCount

@@ -231,8 +231,7 @@ proc guardSemanticAnalysis
       !propertiesAreMutable:true
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
-      !modes:{!guardModeName ()}
-      !allowPanic:true
+      !mode:.guardMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
@@ -252,9 +251,7 @@ proc guardSemanticAnalysis
       !self:inSelfType
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
-      !modes:{!userModeName ()} # Convenience guards instructions are executed in user mode
-#      !?alloca:allocaList
-#      !?instructionListIR:instructionGenerationList
+      !mode:.userMode # Convenience guards instructions are executed in user mode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
@@ -267,8 +264,7 @@ proc guardSemanticAnalysis
       !propertiesAreMutable:true
       !routineNameForInvocationGraph:guardMangledName
       !context:inContext
-      !modes:{!userModeName ()} # Convenience guards instructions are executed in user mode
-      !allowPanic:true
+      !mode:.userMode # Convenience guards instructions are executed in user mode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
@@ -297,7 +293,7 @@ method @callInstructionAST baseGuardAnalyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
+  ?mode:let @mode inMode
 #  ?!alloca:@allocaList ioAllocaList
 #  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -314,8 +310,7 @@ method @callInstructionAST baseGuardAnalyze
     !directAccessToPropertiesAllowed: false
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
     !context: inContext
-    !modes: {!guardModeName ()}
-    !allowPanic: true
+    !mode:.guardMode
     !?temporary: ioTemporaries
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap: ioVariableMap
@@ -338,15 +333,14 @@ method @callInstructionAST baseGuardAnalyze
       !effective:mArguments
       !callerForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
-      !requiredModeSet:inModeSet
-      !allowPanic:true
+      !requiredMode:inMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList
       ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
-      ?routineKind:let @routineKindIR unused routineKind
+      ?routineKind:let @calleeKindIR unused routineKind
       ?routineMangledName:let @lstring functionMangledName
       ?routineNameForGeneration:let @lstring unused functionNameForGeneration
       ?returnType:let @unifiedTypeMap-proxy returnedType

@@ -102,7 +102,7 @@ method @initList-element initSemanticAnalysis
     !?intermediateCode:ioIntermediateCodeStruct
     !selfType:selfType
     !priority:mPriority
-    !modes:{!initModeName ()}
+    !mode:.initMode
     !requiredBy:mRequiredByProcList
     !instructionList:mInstructionList
     !endOfDeclaration:mEndOfInitLocation
@@ -127,7 +127,7 @@ proc initSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
   ?selfType:let @unifiedTypeMap-proxy inSelfType
   ?priority:let @lbigint inPriority
-  ?modes:let @stringset inModeSet
+  ?mode:let @mode inCurrentMode
   ?requiredBy:let @lstringlist inRequiredByProcList
   ?instructionList:let @instructionListAST inInstructionListAST
   ?endOfDeclaration:let @location inEndOfInitDeclaration
@@ -169,8 +169,7 @@ proc initSemanticAnalysis
     !propertiesAreMutable:true
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:true
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap

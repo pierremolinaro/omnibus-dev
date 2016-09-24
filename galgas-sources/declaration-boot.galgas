@@ -64,9 +64,9 @@ method @bootList-element bootSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  if not [inContext.mModeMap hasKey !bootModeName ()] then
-    error mBootLocation : "the `" + bootModeName () + " mode should be defined in order to use boot routines"
-  end
+#  if not [inContext.mModeMap hasKey !bootModeName ()] then
+#    error mBootLocation : "the `" + bootModeName () + " mode should be defined in order to use boot routines"
+#  end
   [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
 #---
   let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority !mPriorityLocation}
@@ -95,8 +95,7 @@ method @bootList-element bootSemanticAnalysis
     !propertiesAreMutable:false
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
-    !modes:{!bootModeName ()}
-    !allowPanic:false
+    !mode:.bootMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap

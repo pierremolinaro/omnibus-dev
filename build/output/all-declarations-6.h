@@ -176,7 +176,7 @@ typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (co
                                                                               const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                                                               const class GALGAS_lstring constinArgument1,
                                                                               const class GALGAS_semanticContext constinArgument2,
-                                                                              const class GALGAS_stringset constinArgument3,
+                                                                              const class GALGAS_mode constinArgument3,
                                                                               class GALGAS_semanticTemporariesStruct & ioArgument4,
                                                                               class GALGAS_staticStringMap & ioArgument5,
                                                                               class GALGAS_variableMap & ioArgument6,
@@ -195,22 +195,13 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
                                            const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
                                            const GALGAS_lstring constin_inCallerNameForInvocationGraph,
                                            const GALGAS_semanticContext constin_inContext,
-                                           const GALGAS_stringset constin_inModeSet,
+                                           const GALGAS_mode constin_inMode,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                            GALGAS_variableMap & io_ioVariableMap,
                                            GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                              Function 'guardModeName'                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_guardModeName (class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -226,19 +217,18 @@ void routine_analyzeFunctionCallInExpression (const class GALGAS_unifiedTypeMap_
                                               const class GALGAS_effectiveParameterListAST constinArgument5,
                                               const class GALGAS_lstring constinArgument6,
                                               const class GALGAS_semanticContext constinArgument7,
-                                              const class GALGAS_stringset constinArgument8,
-                                              const class GALGAS_bool constinArgument9,
-                                              class GALGAS_semanticTemporariesStruct & ioArgument10,
-                                              class GALGAS_staticStringMap & ioArgument11,
-                                              class GALGAS_variableMap & ioArgument12,
-                                              class GALGAS_allocaList & ioArgument13,
-                                              class GALGAS_instructionListIR & ioArgument14,
-                                              class GALGAS_procCallEffectiveParameterListIR & outArgument15,
-                                              class GALGAS_routineKindIR & outArgument16,
+                                              const class GALGAS_mode constinArgument8,
+                                              class GALGAS_semanticTemporariesStruct & ioArgument9,
+                                              class GALGAS_staticStringMap & ioArgument10,
+                                              class GALGAS_variableMap & ioArgument11,
+                                              class GALGAS_allocaList & ioArgument12,
+                                              class GALGAS_instructionListIR & ioArgument13,
+                                              class GALGAS_procCallEffectiveParameterListIR & outArgument14,
+                                              class GALGAS_calleeKindIR & outArgument15,
+                                              class GALGAS_lstring & outArgument16,
                                               class GALGAS_lstring & outArgument17,
-                                              class GALGAS_lstring & outArgument18,
-                                              class GALGAS_unifiedTypeMap_2D_proxy & outArgument19,
-                                              class GALGAS_bool & outArgument20,
+                                              class GALGAS_unifiedTypeMap_2D_proxy & outArgument18,
+                                              class GALGAS_bool & outArgument19,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
@@ -501,6 +491,28 @@ GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class C_C
 class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & constinArgument0,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                Function 'checkMode'                                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_calleeKindIR function_checkMode (const class GALGAS_mode & constinArgument0,
+                                              const class GALGAS_mode & constinArgument1,
+                                              const class GALGAS_routineKind & constinArgument2,
+                                              const class GALGAS_location & constinArgument3,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              Function 'panicModeName'                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

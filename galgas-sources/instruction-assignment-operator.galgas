@@ -102,8 +102,7 @@ override method @varOperatorAssignInstructionAST analyze
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -118,8 +117,7 @@ override method @varOperatorAssignInstructionAST analyze
     !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
     !context: inContext
-    !modes: inModeSet
-    !allowPanic: inAllowPanic
+    !mode: inCurrentMode
     !?temporary: ioTemporaries
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap: ioVariableMap
@@ -139,8 +137,7 @@ override method @varOperatorAssignInstructionAST analyze
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:[targetObject type]
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -162,7 +159,7 @@ override method @varOperatorAssignInstructionAST analyze
 #  end
 #--- Check operator is available for type
   let noPanicGeneration = [option plm_options.noPanicGeneration value]
-  let panicMode = [inModeSet hasKey !panicModeName ()]
+  let panicMode = inCurrentMode == .panicMode
   @infixOperatorMap operatorMap
   switch mOperator
   case bitWiseAndAssign :

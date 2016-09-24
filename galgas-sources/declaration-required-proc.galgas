@@ -4,7 +4,7 @@
 
 list @requiredProcedureDeclarationListAST {
   @lstring mRequiredProcedureName
-  @lstringlist mProcedureModeList
+  @mode mMode
   @bool mIsGlobal
   @procFormalArgumentList mProcFormalArgumentList
   @location mEndOfProcLocation
@@ -20,9 +20,8 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $required$
-    <procedure_header>
-      ?public:let unused public
-      ?procModes:let requiredModeList
+    <function_header>
+      ?mode:let @mode mode
       ?name:let procName
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
@@ -45,7 +44,7 @@ syntax extension plm_syntax {
     end
     ioAST.mRequiredProcList +=
       !.new{!funcMangledName !procName.location}
-      !requiredModeList
+      !mode
       !isGlobal
       !procFormalArgumentList
       !.here
@@ -66,17 +65,27 @@ proc checkRequiredProcedures
     if not [inSemanticContext.mRoutineMapForContext hasKey !requiredProc.mRequiredProcedureName.string] then
       error requiredProc.mRequiredProcedureName : "required func is not implemented"
     else
-      [inSemanticContext.mRoutineMapForContext searchKey !requiredProc.mRequiredProcedureName ?2* ?let isGlobal ?let procModes ?7*]
+      [inSemanticContext.mRoutineMapForContext searchKey
+        !requiredProc.mRequiredProcedureName
+        ?2*
+        ?let isGlobal
+        ?let @mode mode 
+        ?7*
+      ]
     #--- Check modes
-      let actualProcModeSet = [procModes keySet]
-      let requiredProcModeSet = @stringset.setWithLStringList {!requiredProc.mProcedureModeList}
-      if actualProcModeSet != requiredProcModeSet then
-        var s = "required modes:"
-        for (mode) in requiredProcModeSet do
-          s += " `" + mode
-        end
-        error [inSemanticContext.mRoutineMapForContext locationForKey !requiredProc.mRequiredProcedureName.string] : s
+      if mode != requiredProc.mMode then
+        error [inSemanticContext.mRoutineMapForContext locationForKey !requiredProc.mRequiredProcedureName.string]
+        : "required mode should be '" + requiredProc.mMode + "'"
+      
       end
+#      let actualProcModeSet = [procModes keySet]
+#      let requiredProcModeSet = @stringset.setWithLStringList {!requiredProc.mProcedureModeList}
+#      if actualProcModeSet != requiredProcModeSet then
+#        var s = "required modes:"
+#        for (mode) in requiredProcModeSet do
+#          s += " `" + mode
+#        end
+#      end
     #--- Check attributes
       if requiredProc.mIsGlobal && not isGlobal then
         error [inSemanticContext.mRoutineMapForContext locationForKey !requiredProc.mRequiredProcedureName]
