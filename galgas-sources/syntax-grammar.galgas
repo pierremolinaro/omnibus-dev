@@ -4,7 +4,7 @@
 
 syntax plm_syntax (plm_lexique) {
 
-  rule <procedure> ?!@functionDeclarationListAST ioProcListAST
+  rule <function> ?!@functionDeclarationListAST ioProcListAST
 
   rule <section> ?!@sectionDeclarationListAST ioSectionListAST
 
@@ -38,7 +38,7 @@ syntax plm_syntax (plm_lexique) {
     while
       <declaration> !?ioAst
     while
-      <procedure> !?ioAst.mProcedureListAST
+      <function> !?ioAst.mProcedureListAST
     while
       <section> !?ioAst.mSectionListAST
     while
@@ -91,7 +91,7 @@ syntax plm_target_specific_syntax (plm_lexique) {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  GRAMMAR                                                                                                              
+#  GRAMMARS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 grammar plm_grammar "SLR" {

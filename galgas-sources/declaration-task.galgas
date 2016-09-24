@@ -88,7 +88,7 @@ syntax extension plm_syntax {
       <instructionList> ?let instructionList
       let endOfProc = @location.here
       $}$
-      taskProcList += !{} !false !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
+      taskProcList += !.userMode !false !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
     while
       $setup$
       $integer$ ?let @lbigint priority
@@ -238,8 +238,7 @@ method @taskVarListAST-element enterInContext
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:variableAnnotationType
     !context:ioContext
-    !modes:{}
-    !allowPanic:true
+    !mode:.initMode
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
@@ -317,7 +316,7 @@ method @taskList-element semanticAnalysis
     routineSemanticAnalysis (
       !receiverType:taskType
       !.function
-      !{!.new {!userModeName () !procedure.mFunctionName.location}}
+      !.userMode
       !procedure.mFunctionName
       !procedure.mFunctionFormalArgumentList
       !returnTypeName:procedure.mFunctionReturnTypeName
@@ -348,7 +347,7 @@ method @taskList-element semanticAnalysis
       !?intermediateCode:ioIntermediateCodeStruct
       !selfType:taskType
       !priority:taskInitPriority
-      !modes:{!userModeName ()}
+      !mode:.userMode
       !requiredBy:{}
       !instructionList:taskInitInstructionList
       !endOfDeclaration:endOfTaskInitDeclaration
@@ -368,7 +367,7 @@ method @taskList-element semanticAnalysis
   routineSemanticAnalysis (
     !receiverType:taskType
     !.function
-    !{!.new {!userModeName () !mTaskName.location}}
+    !.userMode
     !.new {!llvmNameForTaskLoopFunction () !mTaskName.location}
     !{} # No argument
     !returnTypeName:["" nowhere]

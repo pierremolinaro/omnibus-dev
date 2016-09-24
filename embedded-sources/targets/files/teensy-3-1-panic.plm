@@ -23,7 +23,7 @@ panic setup 0 {
 //··············································································
 
 panic loop 0 {
-  time.busyWaitingDuringMS (!50)
+  time.panicBusyWaitingDuringMS (!50)
   toggle (!port:.D3)
   toggle (!port:.D4)
   toggle (!port:.D5)

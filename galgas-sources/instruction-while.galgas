@@ -58,8 +58,7 @@ override method @whileInstructionAST analyze
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -75,8 +74,7 @@ override method @whileInstructionAST analyze
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -101,8 +99,7 @@ override method @whileInstructionAST analyze
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_while_instruction
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap

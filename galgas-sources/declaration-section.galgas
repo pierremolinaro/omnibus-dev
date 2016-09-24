@@ -116,7 +116,7 @@ method @sectionDeclarationListAST enterInContext
       !routineMangledName
       !section.mPublic
       !false
-      !@modeMap {![userModeName () nowhere]}
+      !.userMode
       !signature
       !.section
       !false # Not weak
@@ -140,20 +140,28 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
 {
   for section in self do
     var mutating = false
+    var noUnusedWarning = false
     for (attribute) in section.mSectionAttributeList do
-      if attribute.string == mutatingAttribute () then
+      if attribute.string == noUnusedWarningAttribute () then
+        if noUnusedWarning then
+          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { remove }
+        end
+        noUnusedWarning = true    
+      elsif attribute.string == mutatingAttribute () then
         if mutating then
           error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
         end
         mutating = true    
       else
-        error attribute : "unknown attribute; available attribute is @" + mutatingAttribute () fixit { remove }
+        error attribute 
+        : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + mutatingAttribute ()
+        fixit { remove }
       end
     end
     routineSemanticAnalysis (
       !receiverType:inReceiverType
       !.section
-      !{!.new {!sectionModeName () !section.mSectionName.location}}
+      !.sectionMode
       !section.mSectionName
       !section.mSectionFormalArgumentList
       !returnTypeName:section.mReturnTypeName
@@ -161,7 +169,7 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
       !section.mEndOfSectionLocation
       !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:mutating
-      !warnIfUnused:true
+      !warnIfUnused:not noUnusedWarning
       !globalFunction:true
       !weakFunction:false
       !registerAccess:.readWriteAccess
@@ -193,8 +201,17 @@ method @routineMapIR sectionCodeGeneration
         ioLLVMcode += " " + [section.mReturnType llvmTypeName]
       end
       ioLLVMcode += " @" + sectionCallName + " ("
-      for () in section.mFormalArgumentListForGeneration
-      do
+      var first = true
+      if section.mReceiverType != .null then
+        ioLLVMcode += [section.mReceiverType llvmTypeName] + " * %receiver"
+        first = false
+      end
+      for () in section.mFormalArgumentListForGeneration do
+        if first then
+          first = false
+        else
+          ioLLVMcode += ", "
+        end
         switch mFormalArgumentKind
         case input :
           ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
@@ -203,8 +220,6 @@ method @routineMapIR sectionCodeGeneration
        case inputOutput :
           ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
         end
-      between
-        ioLLVMcode += ", "
       end
       ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
     end

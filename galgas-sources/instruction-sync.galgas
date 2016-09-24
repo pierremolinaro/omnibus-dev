@@ -159,8 +159,7 @@ override method @syncInstructionAST analyze
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inRequiredModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -182,8 +181,7 @@ override method @syncInstructionAST analyze
         !effective:effectiveParameterList
         !callerForInvocationGraph:inCallerNameForInvocationGraph
         !context:inContext
-        !requiredModeSet:inRequiredModeSet
-        !allowPanic:inAllowPanic
+        !requiredMode:inCurrentMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
@@ -208,8 +206,7 @@ override method @syncInstructionAST analyze
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:.null
         !context:inContext
-        !modes:inRequiredModeSet
-        !allowPanic:inAllowPanic
+        !mode:inCurrentMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
@@ -236,8 +233,7 @@ override method @syncInstructionAST analyze
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:.null
         !context:inContext
-        !modes:inRequiredModeSet
-        !allowPanic:inAllowPanic
+        !mode:inCurrentMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
@@ -258,8 +254,7 @@ override method @syncInstructionAST analyze
         !effective:effectiveParameterList
         !callerForInvocationGraph:inCallerNameForInvocationGraph
         !context:inContext
-        !requiredModeSet:inRequiredModeSet
-        !allowPanic:inAllowPanic
+        !requiredMode:inCurrentMode
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
@@ -287,8 +282,7 @@ override method @syncInstructionAST analyze
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !endOfInstructionList:endOfBranch
       !context:inContext
-      !modes:inRequiredModeSet
-      !allowPanic:inAllowPanic
+      !mode:inCurrentMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
@@ -314,8 +308,7 @@ proc analyzeGuardCall
   ?effective:let @effectiveParameterListAST inEffectiveParameterList
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?requiredModeSet:let @stringset inRequiredModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -375,8 +368,7 @@ proc analyzeGuardCall
     !errorLocation:inGuardName.location
     !callerForInvocationGraph:outGuardMangledName
     !context:inContext
-    !requiredModeSet:inRequiredModeSet
-    !allowPanic:inAllowPanic
+    !requiredMode:inRequiredMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap

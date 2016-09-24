@@ -79,7 +79,7 @@
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [52] = {
+static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [53] = {
   {"at", plm_lexique_1_at},
   {"do", plm_lexique_1_do},
   {"if", plm_lexique_1_if},
@@ -99,6 +99,7 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
   {"func", plm_lexique_1_func},
   {"init", plm_lexique_1_init},
   {"loop", plm_lexique_1_loop},
+  {"safe", plm_lexique_1_safe},
   {"self", plm_lexique_1_self},
   {"sync", plm_lexique_1_sync},
   {"task", plm_lexique_1_task},
@@ -135,7 +136,7 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
 } ;
 
 static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedString) {
-  return searchStringInTable (inSearchedString, ktable_for_plm_5F_lexique_keyWordList, 52) ;
+  return searchStringInTable (inSearchedString, ktable_for_plm_5F_lexique_keyWordList, 53) ;
 }
 
 
@@ -197,20 +198,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
         scanningOk = NO ;
       }
       mTokenCode = plm_lexique_1__24_type ;
-    }else if (scanningOk && ([self testForInputChar:96])) {
-      if (scanningOk && ([self testForCharWithFunction:isUnicodeLetter] || [self testForInputFromChar:48 toChar:57])) {
-        do {
-          scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
-          if (scanningOk && ([self testForCharWithFunction:isUnicodeLetter] || [self testForInputFromChar:48 toChar:57])) {
-          }else{
-            mLoop = NO ;
-          }
-        }while (mLoop && scanningOk) ;
-        mLoop = YES ;
-      }else{
-        scanningOk = NO ;
-      }
-      mTokenCode = plm_lexique_1__60_mode ;
     }else if (scanningOk && ([self testForInputString:@"0b" advance:YES])) {
       do {
         if (scanningOk && ([self testForInputChar:95])) {
@@ -507,7 +494,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 - (NSUInteger) styleCount {
-  return 10 ;
+  return 9 ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -531,14 +518,13 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     0 /* plm_lexique_1_identifier */,
     2 /* plm_lexique_1__40_attribute */,
     3 /* plm_lexique_1__24_type */,
-    4 /* plm_lexique_1__60_mode */,
-    5 /* plm_lexique_1_integer */,
-    6 /* plm_lexique_1__22_string_22_ */,
-    7 /* plm_lexique_1_comment */,
-    9 /* plm_lexique_1__3F_ */,
-    9 /* plm_lexique_1__3F__21_ */,
-    9 /* plm_lexique_1__21_ */,
-    9 /* plm_lexique_1__21__3F_ */,
+    4 /* plm_lexique_1_integer */,
+    5 /* plm_lexique_1__22_string_22_ */,
+    6 /* plm_lexique_1_comment */,
+    8 /* plm_lexique_1__3F_ */,
+    8 /* plm_lexique_1__3F__21_ */,
+    8 /* plm_lexique_1__21_ */,
+    8 /* plm_lexique_1__21__3F_ */,
     1 /* plm_lexique_1_and */,
     1 /* plm_lexique_1_assert */,
     1 /* plm_lexique_1_at */,
@@ -573,6 +559,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_public */,
     1 /* plm_lexique_1_register */,
     1 /* plm_lexique_1_required */,
+    1 /* plm_lexique_1_safe */,
     1 /* plm_lexique_1_section */,
     1 /* plm_lexique_1_self */,
     1 /* plm_lexique_1_service */,
@@ -591,54 +578,54 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_when */,
     1 /* plm_lexique_1_while */,
     1 /* plm_lexique_1_xor */,
-    8 /* plm_lexique_1__3A_ */,
-    8 /* plm_lexique_1__2E_ */,
-    8 /* plm_lexique_1__2C_ */,
-    8 /* plm_lexique_1__3B_ */,
-    8 /* plm_lexique_1__7B_ */,
-    8 /* plm_lexique_1__7D_ */,
-    8 /* plm_lexique_1__3D_ */,
-    8 /* plm_lexique_1__28_ */,
-    8 /* plm_lexique_1__29_ */,
-    8 /* plm_lexique_1__3D__3D_ */,
-    8 /* plm_lexique_1__21__3D_ */,
-    8 /* plm_lexique_1__3C_ */,
-    8 /* plm_lexique_1__3C__3D_ */,
-    8 /* plm_lexique_1__3E_ */,
-    8 /* plm_lexique_1__3E__3D_ */,
-    8 /* plm_lexique_1__5B_ */,
-    8 /* plm_lexique_1__5D_ */,
-    8 /* plm_lexique_1__3C__3C_ */,
-    8 /* plm_lexique_1__3E__3E_ */,
-    8 /* plm_lexique_1__7E_ */,
-    8 /* plm_lexique_1__2D__3E_ */,
-    8 /* plm_lexique_1__2E__2E__3C_ */,
-    8 /* plm_lexique_1__7C_ */,
-    8 /* plm_lexique_1__7C__3D_ */,
-    8 /* plm_lexique_1__26_ */,
-    8 /* plm_lexique_1__26__3D_ */,
-    8 /* plm_lexique_1__5E_ */,
-    8 /* plm_lexique_1__5E__3D_ */,
-    8 /* plm_lexique_1__2B_ */,
-    8 /* plm_lexique_1__2B__25_ */,
-    8 /* plm_lexique_1__2B__3D_ */,
-    8 /* plm_lexique_1__2B__25__3D_ */,
-    8 /* plm_lexique_1__2D_ */,
-    8 /* plm_lexique_1__2D__25_ */,
-    8 /* plm_lexique_1__2D__3D_ */,
-    8 /* plm_lexique_1__2D__25__3D_ */,
-    8 /* plm_lexique_1__2A_ */,
-    8 /* plm_lexique_1__2A__25_ */,
-    8 /* plm_lexique_1__2A__3D_ */,
-    8 /* plm_lexique_1__2A__25__3D_ */,
-    8 /* plm_lexique_1__2F_ */,
-    8 /* plm_lexique_1__21__2F_ */,
-    8 /* plm_lexique_1__2F__3D_ */,
-    8 /* plm_lexique_1__21__2F__3D_ */,
-    8 /* plm_lexique_1__25_ */,
-    8 /* plm_lexique_1__21__25_ */,
-    8 /* plm_lexique_1__25__3D_ */,
-    8 /* plm_lexique_1__21__25__3D_ */
+    7 /* plm_lexique_1__3A_ */,
+    7 /* plm_lexique_1__2E_ */,
+    7 /* plm_lexique_1__2C_ */,
+    7 /* plm_lexique_1__3B_ */,
+    7 /* plm_lexique_1__7B_ */,
+    7 /* plm_lexique_1__7D_ */,
+    7 /* plm_lexique_1__3D_ */,
+    7 /* plm_lexique_1__28_ */,
+    7 /* plm_lexique_1__29_ */,
+    7 /* plm_lexique_1__3D__3D_ */,
+    7 /* plm_lexique_1__21__3D_ */,
+    7 /* plm_lexique_1__3C_ */,
+    7 /* plm_lexique_1__3C__3D_ */,
+    7 /* plm_lexique_1__3E_ */,
+    7 /* plm_lexique_1__3E__3D_ */,
+    7 /* plm_lexique_1__5B_ */,
+    7 /* plm_lexique_1__5D_ */,
+    7 /* plm_lexique_1__3C__3C_ */,
+    7 /* plm_lexique_1__3E__3E_ */,
+    7 /* plm_lexique_1__7E_ */,
+    7 /* plm_lexique_1__2D__3E_ */,
+    7 /* plm_lexique_1__2E__2E__3C_ */,
+    7 /* plm_lexique_1__7C_ */,
+    7 /* plm_lexique_1__7C__3D_ */,
+    7 /* plm_lexique_1__26_ */,
+    7 /* plm_lexique_1__26__3D_ */,
+    7 /* plm_lexique_1__5E_ */,
+    7 /* plm_lexique_1__5E__3D_ */,
+    7 /* plm_lexique_1__2B_ */,
+    7 /* plm_lexique_1__2B__25_ */,
+    7 /* plm_lexique_1__2B__3D_ */,
+    7 /* plm_lexique_1__2B__25__3D_ */,
+    7 /* plm_lexique_1__2D_ */,
+    7 /* plm_lexique_1__2D__25_ */,
+    7 /* plm_lexique_1__2D__3D_ */,
+    7 /* plm_lexique_1__2D__25__3D_ */,
+    7 /* plm_lexique_1__2A_ */,
+    7 /* plm_lexique_1__2A__25_ */,
+    7 /* plm_lexique_1__2A__3D_ */,
+    7 /* plm_lexique_1__2A__25__3D_ */,
+    7 /* plm_lexique_1__2F_ */,
+    7 /* plm_lexique_1__21__2F_ */,
+    7 /* plm_lexique_1__2F__3D_ */,
+    7 /* plm_lexique_1__21__2F__3D_ */,
+    7 /* plm_lexique_1__25_ */,
+    7 /* plm_lexique_1__21__25_ */,
+    7 /* plm_lexique_1__25__3D_ */,
+    7 /* plm_lexique_1__21__25__3D_ */
   } ;
   return kTerminalSymbolStyles [inTerminal] ;
 }
@@ -654,7 +641,6 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_identifier */,
     YES /* plm_lexique_1__40_attribute */,
     YES /* plm_lexique_1__24_type */,
-    YES /* plm_lexique_1__60_mode */,
     YES /* plm_lexique_1_integer */,
     NO /* plm_lexique_1__22_string_22_ */,
     NO /* plm_lexique_1_comment */,
@@ -696,6 +682,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_public */,
     YES /* plm_lexique_1_register */,
     YES /* plm_lexique_1_required */,
+    YES /* plm_lexique_1_safe */,
     YES /* plm_lexique_1_section */,
     YES /* plm_lexique_1_self */,
     YES /* plm_lexique_1_service */,
@@ -774,13 +761,12 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 
 - (NSString *) styleNameForStyleIndex: (NSInteger) inIndex {
   NSString * result = nil ;
-  if ((inIndex >= 0) && (inIndex < 10)) {
-    NSString * kStyleArray [10] = {
+  if ((inIndex >= 0) && (inIndex < 9)) {
+    NSString * kStyleArray [9] = {
       @"Default Style",
       @"Keywords",
       @"Attributes",
       @"Types",
-      @"Modes",
       @"Integer Constants",
       @"Literal Strings",
       @"Comments",
@@ -800,13 +786,12 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
 
 - (NSString *) styleIdentifierForStyleIndex: (NSInteger) inIndex {
   NSString * result = nil ;
-  if ((inIndex >= 0) && (inIndex < 10)) {
-    NSString * kStyleArray [10] = {
+  if ((inIndex >= 0) && (inIndex < 9)) {
+    NSString * kStyleArray [9] = {
       @"plm_lexique",
       @"plm_lexique-keywordsStyle",
       @"plm_lexique-attributeStyle",
       @"plm_lexique-typeStyle",
-      @"plm_lexique-modeStyle",
       @"plm_lexique-integerStyle",
       @"plm_lexique-stringStyle",
       @"plm_lexique-commentStyle",

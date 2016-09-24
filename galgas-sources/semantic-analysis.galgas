@@ -198,7 +198,7 @@ class @functionCallIR : @abstractInstructionIR {
   @objectIR mResult
   @lstring mFunctionMangledName
   @lstring mFunctionNameForGeneration
-  @routineKindIR mKind
+  @calleeKindIR mKind
   @procCallEffectiveParameterListIR mArgumentList
   @bool mAppendFileAndLineArgumentForPanicLocation
 }
@@ -218,13 +218,20 @@ override method @functionCallIR llvmInstructionCode
   end
   ioLLVMcode += " @"
   switch mKind 
-  case function : ioLLVMcode += llvmNameForFunction (!mFunctionNameForGeneration.string)
-  case serviceInProcessorUserMode : ioLLVMcode += llvmNameForServiceCall (!mFunctionNameForGeneration.string)
-  case serviceInProcessorPrivilegedMode : ioLLVMcode += llvmNameForServiceImplementation (!mFunctionNameForGeneration.string)
-  case sectionInProcessorUserMode : ioLLVMcode += llvmNameForSectionCall (!mFunctionNameForGeneration.string)
-  case sectionInProcessorPrivilegedMode : ioLLVMcode += llvmNameForSectionImplementation (!mFunctionNameForGeneration.string)
-  case primitiveInProcessorUserMode : ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionNameForGeneration.string)
-  case primitiveInProcessorPrivilegedMode : ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionNameForGeneration.string)
+  case function :
+    ioLLVMcode += llvmNameForFunction (!mFunctionNameForGeneration.string)
+  case serviceFromProcessorUserMode :
+    ioLLVMcode += llvmNameForServiceCall (!mFunctionNameForGeneration.string)
+  case serviceFromProcessorPrivilegedMode :
+    ioLLVMcode += llvmNameForServiceImplementation (!mFunctionNameForGeneration.string)
+  case sectionFromProcessorUserMode :
+    ioLLVMcode += llvmNameForSectionCall (!mFunctionNameForGeneration.string)
+  case sectionFromProcessorPrivilegedMode :
+    ioLLVMcode += llvmNameForSectionImplementation (!mFunctionNameForGeneration.string)
+  case primitiveFromProcessorUserMode :
+    ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionNameForGeneration.string)
+  case primitiveFromProcessorPrivilegedMode :
+    ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionNameForGeneration.string)
   end
   ioLLVMcode += " ("
   for () in mArgumentList do

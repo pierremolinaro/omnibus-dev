@@ -4,7 +4,7 @@
 
 list @externProcedureDeclarationListAST {
   @lstring mExternProcedureName
-  @lstringlist mProcedureModeList
+  @mode mMode
   @procFormalArgumentList mProcFormalArgumentList
   @lstring mReturnTypeName
   @lstring mRoutineNameForGeneration
@@ -21,9 +21,8 @@ syntax extension plm_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $extern$
-    <procedure_header>
-      ?public:let unused public
-      ?procModes:let requiredModeList
+    <function_header>
+      ?mode:let @mode mode
       ?name:let procName
       ?attributes:let unused attributeList
       ?formalArguments:let procFormalArgumentList
@@ -36,7 +35,7 @@ syntax extension plm_syntax {
     end
     $:$
     $"string"$ ?let llvmName
-    ioAST.mExternProcList += !procName !requiredModeList !procFormalArgumentList !returnTypeName !llvmName !.here
+    ioAST.mExternProcList += !procName !mode !procFormalArgumentList !returnTypeName !llvmName !.here
   }
 
   #·····················································································································
@@ -83,11 +82,11 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
   end
   routineMangledName.string += ")"
 #--- Mode map
-  @modeMap procedureModeMap = {}
-  for () in mProcedureModeList do
-    [ioContext.mModeMap searchKey !mValue]
-    [!?procedureModeMap insertKey !mValue]
-  end
+#  @modeMap procedureModeMap = {}
+#  for () in mProcedureModeList do
+#    [ioContext.mModeMap searchKey !mValue]
+#    [!?procedureModeMap insertKey !mValue]
+#  end
 #--- Enter in context
   let returnType = if mReturnTypeName.string == "" then
     @unifiedTypeMap-proxy.null
@@ -99,7 +98,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
     !mRoutineNameForGeneration
     !true # isPublic
     !false # Global
-    !procedureModeMap
+    !mMode
     !signature
     !.function
     !false # Not weak
@@ -145,16 +144,15 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
   end
   routineMangledName.string += ")"
 #--- Check modes
-  @stringset procedureModeSet = {}
-  for mode in mProcedureModeList do
-    [inContext.mModeMap searchKey !mode.mValue]
-    procedureModeSet += !mode.mValue.string
-  end
+#  @stringset procedureModeSet = {}
+#  for mode in mProcedureModeList do
+#    [inContext.mModeMap searchKey !mode.mValue]
+#    procedureModeSet += !mode.mValue.string
+#  end
 #--- Variable map
   initialVariableMap (
-#    !routineNameForInvocation:routineMangledName.string
     !context:inContext
-    !userMode:[procedureModeSet hasKey !userModeName ()]
+    !userMode:mMode == .userMode
     !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]

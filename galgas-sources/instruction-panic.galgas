@@ -44,8 +44,7 @@ override method @panicInstructionAST analyze
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -53,7 +52,7 @@ override method @panicInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Panic allowed ?
-  if [inModeSet hasKey !panicModeName ()] then
+  if inCurrentMode == .panicMode then
     error mThrowLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze expression
@@ -65,8 +64,7 @@ override method @panicInstructionAST analyze
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inContext.mPanicCodeType
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap

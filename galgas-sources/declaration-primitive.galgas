@@ -99,7 +99,7 @@ method @primitiveDeclarationListAST enterInContext
     end
     routineMangledName.string += ")"
   #--- Mode map
-    @modeMap modeMap = {![userModeName () nowhere], ![primitiveModeName () nowhere]}
+#    @modeMap modeMap = {![userModeName () nowhere], ![primitiveModeName () nowhere]}
   #--- Enter in context
     let returnType = if primitive.mReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
@@ -111,7 +111,7 @@ method @primitiveDeclarationListAST enterInContext
       !routineMangledName
       !primitive.mPublic
       !false
-      !modeMap
+      !.primitiveMode
       !signature
       !.primitive
       !false # Not weak
@@ -148,7 +148,7 @@ method @primitiveDeclarationListAST primitiveSemanticAnalysis
     routineSemanticAnalysis (
       !receiverType:inReceiverType
       !.primitive
-      !{![primitiveModeName () nowhere]}
+      !.primitiveMode
       !primitive.mPrimitiveName
       !primitive.mPrimitiveFormalArgumentList
       !returnTypeName:primitive.mReturnTypeName

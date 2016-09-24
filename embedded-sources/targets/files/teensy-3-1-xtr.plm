@@ -8,22 +8,22 @@ check target "teensy-3-1"
 type $taskList : ((32)) @instantiable
 
 //--- Block running task
-extern func `primitive
+extern func primitive
 block (?!inList:ioWaitingList $taskList) : "blockInList"
 
-extern func `primitive
+extern func primitive
 block (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
 
-extern func `primitive
+extern func primitive
 block (?!inList:ioWaitingList $taskList
        ?onDeadline:inDeadline $uint32) : "blockInListAndOnDeadline"
 
 //--- Make task Ready
-extern func `primitive `service `guard
+extern func service
 makeTaskReady (?!fromList:ioWaitingList $taskList
                !found: outFound $bool) : "makeTaskReady"
 
-extern func `service
+extern func service
 makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
 
 //——————————————————————————————————————————————————————————————————————————————
@@ -32,16 +32,16 @@ makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCur
 
 type $guardList : ((32)) @instantiable
 
-extern func `guard
+extern func guard
 handle (?!guard:ioGuard $guardList) : "handleGuardedCommand"
 
-extern func `guard
+extern func guard
 handle (?guardedDeadline:inDeadlineMS $uint32) : "handleGuardedWaitUntil"
 
-extern func `primitive `service
+extern func service
 notifyChange (?!forGuard:ioGuard $guardList) : "guardDidChange"
 
-extern func `service
+extern func service
 notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32)
 : "tickHandlerForGuardedWaitUntil"
 
@@ -49,9 +49,9 @@ notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32)
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
 
-required func `service activityLedOn @global ()
+required func safe activityLedOn @global ()
 
-required func `service activityLedOff @global ()
+required func safe activityLedOff @global ()
 
 //——————————————————————————————————————————————————————————————————————————————
 //   INIT                                                                       
@@ -67,7 +67,7 @@ init 0 { // Configure Systick interrupt every ms
 //   USER TICK HANDLER                                                          
 //——————————————————————————————————————————————————————————————————————————————
 
-public func `service userTickHandler @weak () {
+public func service userTickHandler @weak () {
 }
 
 //——————————————————————————————————————————————————————————————————————————————
@@ -79,25 +79,39 @@ module time {
 
   //············································································
   
-  public func `panic `init oneMillisecondBusyWait @noUnusedWarning () {
+  public func init oneMillisecondBusyWait @noUnusedWarning () {
     loop while not SYST_CSR.COUNTFLAG.bool {}
   }
 
   //············································································
   
-  public func `service `primitive `user `guard millis @noUnusedWarning @userAccess () -> $uint32 {
+  public func panic panicOneMillisecondBusyWait @noUnusedWarning () {
+    loop while not SYST_CSR.COUNTFLAG.bool {}
+  }
+
+  //············································································
+  
+  public func safe kernelMillis @noUnusedWarning () -> $uint32 {
     result = self.mUptimeMS
   }
   
-//  public section millis () -> $uint32 {
-//    result = self.mUptimeMS
-//  }
+  public section millis () -> $uint32 {
+    result = self.kernelMillis ()
+  }
   
   //············································································
   
-  public func `panic `init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+  public func init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
     for delay $uint32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
+    }
+  }
+  
+  //············································································
+  
+  public func panic panicBusyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
+    for delay $uint32 in 0 ..< inDelay {
+      self.panicOneMillisecondBusyWait ()
     }
   }
   

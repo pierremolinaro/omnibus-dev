@@ -76,7 +76,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       end
     end
   #--- Modes
-    let @stringset modeSet = {!if xtrAttribute then serviceModeName () else sectionModeName () end}
+    let @mode mode = if xtrAttribute then .serviceMode else .sectionMode end
   #--- Invocation graph
     let routineNameForInvocationGraph = interruptNameForInvocationGraph (!isr.mISRName)
     if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
@@ -110,8 +110,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !propertiesAreMutable:true
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inSemanticContext
-      !modes:modeSet
-      !allowPanic:not [modeSet hasKey !panicModeName ()]
+      !mode:mode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap

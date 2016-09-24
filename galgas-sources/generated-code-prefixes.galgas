@@ -8,21 +8,21 @@ func %once llvmAttributeFunction -> @string outResult {
 #!   Modes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once bootModeName -> @string outResult {
-  outResult = "boot"
-}
+#func %once bootModeName -> @string outResult {
+#  outResult = "boot"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once initModeName -> @string outResult {
-  outResult = "init"
-}
-
+#func %once initModeName -> @string outResult {
+#  outResult = "init"
+#}
+#
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once sectionModeName -> @string outResult {
-  outResult = "section"
-}
+#func %once sectionModeName -> @string outResult {
+#  outResult = "section"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -32,21 +32,21 @@ func %once userModeName -> @string outResult {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once primitiveModeName -> @string outResult {
-  outResult = "primitive"
-}
+#func %once primitiveModeName -> @string outResult {
+#  outResult = "primitive"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once serviceModeName -> @string outResult {
-  outResult = "service"
-}
+#func %once serviceModeName -> @string outResult {
+#  outResult = "service"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once guardModeName -> @string outResult {
-  outResult = "guard"
-}
+#func %once guardModeName -> @string outResult {
+#  outResult = "guard"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! Names for invocation graph

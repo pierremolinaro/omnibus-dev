@@ -18,7 +18,7 @@ map @routineMapForContext {
   @lstring mRoutineLLVMName
   @bool mIsPublic
   @bool mGlobal
-  @modeMap mModeMap
+  @mode mMode
   @procedureSignature mSignature
   @routineKind mRoutineKind
   @bool mWeak

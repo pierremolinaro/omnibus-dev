@@ -70,8 +70,7 @@ override method @constructorCall analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -118,8 +117,7 @@ override method @constructorCall analyzeExpression
             !routineNameForInvocationGraph:inCallerNameForInvocationGraph
             !optionalTargetType:formal_mType
             !context:inContext
-            !modes:inModeSet
-            !allowPanic:inAllowPanic
+            !mode:inCurrentMode
             !?temporary:ioTemporaries
             !?staticStringMap:ioGlobalLiteralStringMap
             !?variableMap:ioVariableMap

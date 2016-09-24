@@ -34,7 +34,7 @@ syntax extension plm_syntax {
     while
       <property_in_extension> !?propertyList
     while
-      <procedure> !?procedureDeclarationListAST
+      <function> !?procedureDeclarationListAST
     while
      <section> !?sectionListAST
     while

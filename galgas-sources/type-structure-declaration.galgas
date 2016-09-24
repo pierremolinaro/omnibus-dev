@@ -91,9 +91,9 @@ syntax extension plm_syntax {
     while
       <declaration_struct_var> !?fieldList
     while
-      <procedure> !?procedureDeclarationListAST
+      <function> !?procedureDeclarationListAST
     while
-     <section> !?sectionListAST
+      <section> !?sectionListAST
     while
       <service> !?serviceListAST
     while
@@ -259,8 +259,7 @@ override method @structureDeclaration enterInContext
         !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
         !optionalTargetType:optionalPropertyType
         !context:ioContext
-        !modes:{}
-        !allowPanic:false
+        !mode:.initMode
         !?temporary:temporaries
         !?staticStringMap:*
         !?variableMap:*
@@ -436,21 +435,22 @@ method @structureDeclaration functionSemanticAnalysis
           + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
       end
     end
-    @stringset modeSet = {}
-    for (mode) in function.mFunctionModeList do
-      modeSet += !mode.string
-    end
-    if not [modeSet hasKey !userModeName ()] then
-      if accessProperties then
-        error function.mFunctionName : "useless @" + userAccessAttribute ()
-          + " attribute: function is never executed in `" + userModeName () + " mode"
-      end
-      accessProperties = true
-    end
+#    @stringset modeSet = {}
+#    for (mode) in function.mFunctionModeList do
+#      modeSet += !mode.string
+#    end
+#    if not [modeSet hasKey !userModeName ()] then
+#      if accessProperties then
+#        error function.mFunctionName : "useless @" + userAccessAttribute ()
+#          + " attribute: function is never executed in `" + userModeName () + " mode"
+#      end
+#      accessProperties = true
+#    end
+    accessProperties = function.mMode != .userMode
     routineSemanticAnalysis (
       !receiverType:inStructureType
       !.function
-      !function.mFunctionModeList
+      !function.mMode
       !function.mFunctionName
       !function.mFunctionFormalArgumentList
       !returnTypeName:function.mFunctionReturnTypeName

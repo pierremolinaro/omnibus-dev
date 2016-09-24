@@ -121,8 +121,7 @@ override method @globalConstantDeclaration enterInContext
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:annotationType
     !context:ioContext
-    !modes:{}
-    !allowPanic:true
+    !mode:.initMode
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap

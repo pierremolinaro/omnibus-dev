@@ -67,7 +67,6 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_identifier,
    kToken__40_attribute,
    kToken__24_type,
-   kToken__60_mode,
    kToken_integer,
    kToken__22_string_22_,
    kToken_comment,
@@ -109,6 +108,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_public,
    kToken_register,
    kToken_required,
+   kToken_safe,
    kToken_section,
    kToken_self,
    kToken_service,
@@ -1028,7 +1028,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- Element constructor used by listmap
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                  const class GALGAS_lstringlist & in_mFunctionModeList,
+                                                  const class GALGAS_mode & in_mMode,
                                                   const class GALGAS_bool & in_mPublicFunction,
                                                   const class GALGAS_lstring & in_mFunctionName,
                                                   const class GALGAS_lstringlist & in_mFunctionAttributeList,
@@ -1051,7 +1051,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_functionDeclarationListAST constructor_emptyList (LOCATION_ARGS) ;
 
-  public : static class GALGAS_functionDeclarationListAST constructor_listWithValue (const class GALGAS_lstringlist & inOperand0,
+  public : static class GALGAS_functionDeclarationListAST constructor_listWithValue (const class GALGAS_mode & inOperand0,
                                                                                      const class GALGAS_bool & inOperand1,
                                                                                      const class GALGAS_lstring & inOperand2,
                                                                                      const class GALGAS_lstringlist & inOperand3,
@@ -1067,7 +1067,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- += operator (with list of field expressions)
-  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstringlist & inOperand0,
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_mode & inOperand0,
                                                       const class GALGAS_bool & inOperand1,
                                                       const class GALGAS_lstring & inOperand2,
                                                       const class GALGAS_lstringlist & inOperand3,
@@ -1083,7 +1083,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstringlist constinArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_mode constinArgument0,
                                                        class GALGAS_bool constinArgument1,
                                                        class GALGAS_lstring constinArgument2,
                                                        class GALGAS_lstringlist constinArgument3,
@@ -1095,7 +1095,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstringlist & outArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_mode & outArgument0,
                                                   class GALGAS_bool & outArgument1,
                                                   class GALGAS_lstring & outArgument2,
                                                   class GALGAS_lstringlist & outArgument3,
@@ -1106,7 +1106,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstringlist & outArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_mode & outArgument0,
                                                  class GALGAS_bool & outArgument1,
                                                  class GALGAS_lstring & outArgument2,
                                                  class GALGAS_lstringlist & outArgument3,
@@ -1117,7 +1117,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstringlist & outArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_mode & outArgument0,
                                                        class GALGAS_bool & outArgument1,
                                                        class GALGAS_lstring & outArgument2,
                                                        class GALGAS_lstringlist & outArgument3,
@@ -1131,7 +1131,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstringlist & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_mode & outArgument0,
                                                class GALGAS_bool & outArgument1,
                                                class GALGAS_lstring & outArgument2,
                                                class GALGAS_lstringlist & outArgument3,
@@ -1142,7 +1142,7 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstringlist & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_mode & outArgument0,
                                               class GALGAS_bool & outArgument1,
                                               class GALGAS_lstring & outArgument2,
                                               class GALGAS_lstringlist & outArgument3,
@@ -1172,10 +1172,6 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
                                                                                                     C_Compiler * inCompiler
                                                                                                     COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mFunctionModeListAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                               C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
@@ -1183,6 +1179,10 @@ class GALGAS_functionDeclarationListAST : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionReturnTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                         C_Compiler * inCompiler
                                                                                         COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mModeAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mPublicFunctionAtIndex (const class GALGAS_uint & constinOperand0,
                                                                              C_Compiler * inCompiler
@@ -1218,7 +1218,7 @@ class cEnumerator_functionDeclarationListAST : public cGenericAbstractEnumerator
                                                    const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
-  public : class GALGAS_lstringlist current_mFunctionModeList (LOCATION_ARGS) const ;
+  public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mPublicFunction (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mFunctionName (LOCATION_ARGS) const ;
   public : class GALGAS_lstringlist current_mFunctionAttributeList (LOCATION_ARGS) const ;
@@ -2873,6 +2873,108 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterDecl
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                     @mode enum                                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_mode : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_mode (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_userMode,
+    kEnum_sectionMode,
+    kEnum_serviceMode,
+    kEnum_primitiveMode,
+    kEnum_guardMode,
+    kEnum_panicMode,
+    kEnum_bootMode,
+    kEnum_initMode,
+    kEnum_safeMode
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_mode extractObject (const GALGAS_object & inObject,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_mode constructor_bootMode (LOCATION_ARGS) ;
+
+  public : static class GALGAS_mode constructor_guardMode (LOCATION_ARGS) ;
+
+  public : static class GALGAS_mode constructor_initMode (LOCATION_ARGS) ;
+
+  public : static class GALGAS_mode constructor_panicMode (LOCATION_ARGS) ;
+
+  public : static class GALGAS_mode constructor_primitiveMode (LOCATION_ARGS) ;
+
+  public : static class GALGAS_mode constructor_safeMode (LOCATION_ARGS) ;
+
+  public : static class GALGAS_mode constructor_sectionMode (LOCATION_ARGS) ;
+
+  public : static class GALGAS_mode constructor_serviceMode (LOCATION_ARGS) ;
+
+  public : static class GALGAS_mode constructor_userMode (LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_mode & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBootMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGuardMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInitMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPanicMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPrimitiveMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSafeMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSectionMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isServiceMode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUserMode (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_mode class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_mode ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                              @instructionListAST list                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3181,7 +3283,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentL
 
 class GALGAS_functionDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstringlist mAttribute_mFunctionModeList ;
+  public : GALGAS_mode mAttribute_mMode ;
   public : GALGAS_bool mAttribute_mPublicFunction ;
   public : GALGAS_lstring mAttribute_mFunctionName ;
   public : GALGAS_lstringlist mAttribute_mFunctionAttributeList ;
@@ -3195,9 +3297,6 @@ class GALGAS_functionDeclarationListAST_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_functionDeclarationListAST_2D_element constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Default constructor
   public : GALGAS_functionDeclarationListAST_2D_element (void) ;
 
@@ -3205,7 +3304,7 @@ class GALGAS_functionDeclarationListAST_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_functionDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_functionDeclarationListAST_2D_element (const GALGAS_lstringlist & in_mFunctionModeList,
+  public : GALGAS_functionDeclarationListAST_2D_element (const GALGAS_mode & in_mMode,
                                                          const GALGAS_bool & in_mPublicFunction,
                                                          const GALGAS_lstring & in_mFunctionName,
                                                          const GALGAS_lstringlist & in_mFunctionAttributeList,
@@ -3225,7 +3324,7 @@ class GALGAS_functionDeclarationListAST_2D_element : public AC_GALGAS_root {
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_functionDeclarationListAST_2D_element constructor_new (const class GALGAS_lstringlist & inOperand0,
+  public : static class GALGAS_functionDeclarationListAST_2D_element constructor_new (const class GALGAS_mode & inOperand0,
                                                                                       const class GALGAS_bool & inOperand1,
                                                                                       const class GALGAS_lstring & inOperand2,
                                                                                       const class GALGAS_lstringlist & inOperand3,
@@ -3255,11 +3354,11 @@ class GALGAS_functionDeclarationListAST_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mFunctionInstructionList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mFunctionModeList (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionReturnTypeName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mPublicFunction (LOCATION_ARGS) const ;
 
@@ -3290,7 +3389,7 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
 //--------------------------------- Element constructor used by listmap
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_lstring & in_mRequiredProcedureName,
-                                                  const class GALGAS_lstringlist & in_mProcedureModeList,
+                                                  const class GALGAS_mode & in_mMode,
                                                   const class GALGAS_bool & in_mIsGlobal,
                                                   const class GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
                                                   const class GALGAS_location & in_mEndOfProcLocation
@@ -3310,7 +3409,7 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
   public : static class GALGAS_requiredProcedureDeclarationListAST constructor_emptyList (LOCATION_ARGS) ;
 
   public : static class GALGAS_requiredProcedureDeclarationListAST constructor_listWithValue (const class GALGAS_lstring & inOperand0,
-                                                                                              const class GALGAS_lstringlist & inOperand1,
+                                                                                              const class GALGAS_mode & inOperand1,
                                                                                               const class GALGAS_bool & inOperand2,
                                                                                               const class GALGAS_procFormalArgumentList & inOperand3,
                                                                                               const class GALGAS_location & inOperand4
@@ -3323,7 +3422,7 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_lstringlist & inOperand1,
+                                                      const class GALGAS_mode & inOperand1,
                                                       const class GALGAS_bool & inOperand2,
                                                       const class GALGAS_procFormalArgumentList & inOperand3,
                                                       const class GALGAS_location & inOperand4
@@ -3336,7 +3435,7 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
-                                                       class GALGAS_lstringlist constinArgument1,
+                                                       class GALGAS_mode constinArgument1,
                                                        class GALGAS_bool constinArgument2,
                                                        class GALGAS_procFormalArgumentList constinArgument3,
                                                        class GALGAS_location constinArgument4,
@@ -3345,7 +3444,7 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
-                                                  class GALGAS_lstringlist & outArgument1,
+                                                  class GALGAS_mode & outArgument1,
                                                   class GALGAS_bool & outArgument2,
                                                   class GALGAS_procFormalArgumentList & outArgument3,
                                                   class GALGAS_location & outArgument4,
@@ -3353,7 +3452,7 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
-                                                 class GALGAS_lstringlist & outArgument1,
+                                                 class GALGAS_mode & outArgument1,
                                                  class GALGAS_bool & outArgument2,
                                                  class GALGAS_procFormalArgumentList & outArgument3,
                                                  class GALGAS_location & outArgument4,
@@ -3361,7 +3460,7 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
-                                                       class GALGAS_lstringlist & outArgument1,
+                                                       class GALGAS_mode & outArgument1,
                                                        class GALGAS_bool & outArgument2,
                                                        class GALGAS_procFormalArgumentList & outArgument3,
                                                        class GALGAS_location & outArgument4,
@@ -3372,7 +3471,7 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
-                                               class GALGAS_lstringlist & outArgument1,
+                                               class GALGAS_mode & outArgument1,
                                                class GALGAS_bool & outArgument2,
                                                class GALGAS_procFormalArgumentList & outArgument3,
                                                class GALGAS_location & outArgument4,
@@ -3380,7 +3479,7 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
-                                              class GALGAS_lstringlist & outArgument1,
+                                              class GALGAS_mode & outArgument1,
                                               class GALGAS_bool & outArgument2,
                                               class GALGAS_procFormalArgumentList & outArgument3,
                                               class GALGAS_location & outArgument4,
@@ -3398,13 +3497,13 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mModeAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mProcFormalArgumentListAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                        C_Compiler * inCompiler
                                                                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mProcedureModeListAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                       C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRequiredProcedureNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                        C_Compiler * inCompiler
@@ -3441,7 +3540,7 @@ class cEnumerator_requiredProcedureDeclarationListAST : public cGenericAbstractE
 
 //--- Current element access
   public : class GALGAS_lstring current_mRequiredProcedureName (LOCATION_ARGS) const ;
-  public : class GALGAS_lstringlist current_mProcedureModeList (LOCATION_ARGS) const ;
+  public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mIsGlobal (LOCATION_ARGS) const ;
   public : class GALGAS_procFormalArgumentList current_mProcFormalArgumentList (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfProcLocation (LOCATION_ARGS) const ;
@@ -3462,7 +3561,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_requiredProcedureDe
 class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_mRequiredProcedureName ;
-  public : GALGAS_lstringlist mAttribute_mProcedureModeList ;
+  public : GALGAS_mode mAttribute_mMode ;
   public : GALGAS_bool mAttribute_mIsGlobal ;
   public : GALGAS_procFormalArgumentList mAttribute_mProcFormalArgumentList ;
   public : GALGAS_location mAttribute_mEndOfProcLocation ;
@@ -3472,9 +3571,6 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_requiredProcedureDeclarationListAST_2D_element constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Default constructor
   public : GALGAS_requiredProcedureDeclarationListAST_2D_element (void) ;
 
@@ -3483,7 +3579,7 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
 
 //--------------------------------- Native constructor
   public : GALGAS_requiredProcedureDeclarationListAST_2D_element (const GALGAS_lstring & in_mRequiredProcedureName,
-                                                                  const GALGAS_lstringlist & in_mProcedureModeList,
+                                                                  const GALGAS_mode & in_mMode,
                                                                   const GALGAS_bool & in_mIsGlobal,
                                                                   const GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
                                                                   const GALGAS_location & in_mEndOfProcLocation) ;
@@ -3500,7 +3596,7 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_requiredProcedureDeclarationListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                               const class GALGAS_lstringlist & inOperand1,
+                                                                                               const class GALGAS_mode & inOperand1,
                                                                                                const class GALGAS_bool & inOperand2,
                                                                                                const class GALGAS_procFormalArgumentList & inOperand3,
                                                                                                const class GALGAS_location & inOperand4
@@ -3522,9 +3618,9 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsGlobal (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mProcFormalArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mProcedureModeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mProcFormalArgumentList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRequiredProcedureName (LOCATION_ARGS) const ;
 
@@ -3555,7 +3651,7 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
 //--------------------------------- Element constructor used by listmap
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_lstring & in_mExternProcedureName,
-                                                  const class GALGAS_lstringlist & in_mProcedureModeList,
+                                                  const class GALGAS_mode & in_mMode,
                                                   const class GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
                                                   const class GALGAS_lstring & in_mReturnTypeName,
                                                   const class GALGAS_lstring & in_mRoutineNameForGeneration,
@@ -3576,7 +3672,7 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
   public : static class GALGAS_externProcedureDeclarationListAST constructor_emptyList (LOCATION_ARGS) ;
 
   public : static class GALGAS_externProcedureDeclarationListAST constructor_listWithValue (const class GALGAS_lstring & inOperand0,
-                                                                                            const class GALGAS_lstringlist & inOperand1,
+                                                                                            const class GALGAS_mode & inOperand1,
                                                                                             const class GALGAS_procFormalArgumentList & inOperand2,
                                                                                             const class GALGAS_lstring & inOperand3,
                                                                                             const class GALGAS_lstring & inOperand4,
@@ -3590,7 +3686,7 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_lstringlist & inOperand1,
+                                                      const class GALGAS_mode & inOperand1,
                                                       const class GALGAS_procFormalArgumentList & inOperand2,
                                                       const class GALGAS_lstring & inOperand3,
                                                       const class GALGAS_lstring & inOperand4,
@@ -3604,7 +3700,7 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
-                                                       class GALGAS_lstringlist constinArgument1,
+                                                       class GALGAS_mode constinArgument1,
                                                        class GALGAS_procFormalArgumentList constinArgument2,
                                                        class GALGAS_lstring constinArgument3,
                                                        class GALGAS_lstring constinArgument4,
@@ -3614,7 +3710,7 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                        COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
-                                                  class GALGAS_lstringlist & outArgument1,
+                                                  class GALGAS_mode & outArgument1,
                                                   class GALGAS_procFormalArgumentList & outArgument2,
                                                   class GALGAS_lstring & outArgument3,
                                                   class GALGAS_lstring & outArgument4,
@@ -3623,7 +3719,7 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                   COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
-                                                 class GALGAS_lstringlist & outArgument1,
+                                                 class GALGAS_mode & outArgument1,
                                                  class GALGAS_procFormalArgumentList & outArgument2,
                                                  class GALGAS_lstring & outArgument3,
                                                  class GALGAS_lstring & outArgument4,
@@ -3632,7 +3728,7 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
-                                                       class GALGAS_lstringlist & outArgument1,
+                                                       class GALGAS_mode & outArgument1,
                                                        class GALGAS_procFormalArgumentList & outArgument2,
                                                        class GALGAS_lstring & outArgument3,
                                                        class GALGAS_lstring & outArgument4,
@@ -3644,7 +3740,7 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
-                                               class GALGAS_lstringlist & outArgument1,
+                                               class GALGAS_mode & outArgument1,
                                                class GALGAS_procFormalArgumentList & outArgument2,
                                                class GALGAS_lstring & outArgument3,
                                                class GALGAS_lstring & outArgument4,
@@ -3653,7 +3749,7 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
-                                              class GALGAS_lstringlist & outArgument1,
+                                              class GALGAS_mode & outArgument1,
                                               class GALGAS_procFormalArgumentList & outArgument2,
                                               class GALGAS_lstring & outArgument3,
                                               class GALGAS_lstring & outArgument4,
@@ -3672,13 +3768,13 @@ class GALGAS_externProcedureDeclarationListAST : public AC_GALGAS_list {
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mModeAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mProcFormalArgumentListAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                        C_Compiler * inCompiler
                                                                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mProcedureModeListAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                       C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReturnTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                 C_Compiler * inCompiler
@@ -3719,7 +3815,7 @@ class cEnumerator_externProcedureDeclarationListAST : public cGenericAbstractEnu
 
 //--- Current element access
   public : class GALGAS_lstring current_mExternProcedureName (LOCATION_ARGS) const ;
-  public : class GALGAS_lstringlist current_mProcedureModeList (LOCATION_ARGS) const ;
+  public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
   public : class GALGAS_procFormalArgumentList current_mProcFormalArgumentList (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mReturnTypeName (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mRoutineNameForGeneration (LOCATION_ARGS) const ;
@@ -3741,7 +3837,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externProcedureDecl
 class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mAttribute_mExternProcedureName ;
-  public : GALGAS_lstringlist mAttribute_mProcedureModeList ;
+  public : GALGAS_mode mAttribute_mMode ;
   public : GALGAS_procFormalArgumentList mAttribute_mProcFormalArgumentList ;
   public : GALGAS_lstring mAttribute_mReturnTypeName ;
   public : GALGAS_lstring mAttribute_mRoutineNameForGeneration ;
@@ -3752,9 +3848,6 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_externProcedureDeclarationListAST_2D_element constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Default constructor
   public : GALGAS_externProcedureDeclarationListAST_2D_element (void) ;
 
@@ -3763,7 +3856,7 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
 
 //--------------------------------- Native constructor
   public : GALGAS_externProcedureDeclarationListAST_2D_element (const GALGAS_lstring & in_mExternProcedureName,
-                                                                const GALGAS_lstringlist & in_mProcedureModeList,
+                                                                const GALGAS_mode & in_mMode,
                                                                 const GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
                                                                 const GALGAS_lstring & in_mReturnTypeName,
                                                                 const GALGAS_lstring & in_mRoutineNameForGeneration,
@@ -3781,7 +3874,7 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_externProcedureDeclarationListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                             const class GALGAS_lstringlist & inOperand1,
+                                                                                             const class GALGAS_mode & inOperand1,
                                                                                              const class GALGAS_procFormalArgumentList & inOperand2,
                                                                                              const class GALGAS_lstring & inOperand3,
                                                                                              const class GALGAS_lstring & inOperand4,
@@ -3804,9 +3897,9 @@ class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_roo
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mExternProcedureName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mProcFormalArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mProcedureModeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mProcFormalArgumentList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
 
@@ -6651,6 +6744,19 @@ class cParser_plm_5F_syntax {
 
   protected : virtual void nt_expression_5F__39__parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
+  protected : virtual void nt_function_ (class GALGAS_functionDeclarationListAST & ioArgument0,
+                                         class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_function_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_function_5F_header_ (class GALGAS_mode & outArgument0,
+                                                   class GALGAS_lstring & outArgument1,
+                                                   class GALGAS_lstringlist & outArgument2,
+                                                   class GALGAS_procFormalArgumentList & outArgument3,
+                                                   class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_function_5F_header_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
   protected : virtual void nt_guard_ (class GALGAS_guardDeclarationListAST & ioArgument0,
                                       class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
@@ -6688,6 +6794,11 @@ class cParser_plm_5F_syntax {
 
   protected : virtual void nt_isr_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
+  protected : virtual void nt_mode_ (class GALGAS_mode & outArgument0,
+                                     class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_mode_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
   protected : virtual void nt_module_5F_variable_ (class GALGAS_structurePropertyListAST & ioArgument0,
                                                    class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
@@ -6703,11 +6814,6 @@ class cParser_plm_5F_syntax {
 
   protected : virtual void nt_primitive_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
-  protected : virtual void nt_procedure_ (class GALGAS_functionDeclarationListAST & ioArgument0,
-                                          class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
-
-  protected : virtual void nt_procedure_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
-
   protected : virtual void nt_procedure_5F_call_ (class GALGAS_callInstructionAST & outArgument0,
                                                   class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
@@ -6717,15 +6823,6 @@ class cParser_plm_5F_syntax {
                                                                  class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_procedure_5F_formal_5F_arguments_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
-
-  protected : virtual void nt_procedure_5F_header_ (class GALGAS_bool & outArgument0,
-                                                    class GALGAS_lstringlist & outArgument1,
-                                                    class GALGAS_lstring & outArgument2,
-                                                    class GALGAS_lstringlist & outArgument3,
-                                                    class GALGAS_procFormalArgumentList & outArgument4,
-                                                    class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
-
-  protected : virtual void nt_procedure_5F_header_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_property_5F_in_5F_extension_ (class GALGAS_structurePropertyListAST & ioArgument0,
                                                             class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
@@ -6866,136 +6963,135 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_declaration_5F_init_i21_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_i22_ (GALGAS_functionDeclarationListAST & ioArgument0,
-                                                      C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_function_i22_ (GALGAS_functionDeclarationListAST & ioArgument0,
+                                                     C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_i22_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_function_i22_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_header_i23_ (GALGAS_bool & outArgument0,
-                                                                GALGAS_lstringlist & outArgument1,
-                                                                GALGAS_lstring & outArgument2,
-                                                                GALGAS_lstringlist & outArgument3,
-                                                                GALGAS_procFormalArgumentList & outArgument4,
-                                                                C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_mode_i23_ (GALGAS_mode & outArgument0,
+                                                 C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_header_i23_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_mode_i23_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_i24_ (GALGAS_procFormalArgumentList & outArgument0,
+  protected : void rule_plm_5F_syntax_function_5F_header_i24_ (GALGAS_mode & outArgument0,
+                                                               GALGAS_lstring & outArgument1,
+                                                               GALGAS_lstringlist & outArgument2,
+                                                               GALGAS_procFormalArgumentList & outArgument3,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_function_5F_header_i24_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_i25_ (GALGAS_procFormalArgumentList & outArgument0,
                                                                              C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_i24_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i25_ (GALGAS_ast & ioArgument0,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i25_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_i25_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i26_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i26_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_isr_i27_ (GALGAS_isrDeclarationListAST & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_i27_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i27_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_isr_i28_ (GALGAS_isrDeclarationListAST & ioArgument0,
                                                 const GALGAS_lstring constinArgument1,
                                                 const GALGAS_string constinArgument2,
                                                 C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_isr_i27_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_isr_i28_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_section_i28_ (GALGAS_sectionDeclarationListAST & ioArgument0,
+  protected : void rule_plm_5F_syntax_section_i29_ (GALGAS_sectionDeclarationListAST & ioArgument0,
                                                     C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_section_i28_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_section_i29_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_service_i29_ (GALGAS_serviceDeclarationListAST & ioArgument0,
+  protected : void rule_plm_5F_syntax_service_i30_ (GALGAS_serviceDeclarationListAST & ioArgument0,
                                                     C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_service_i29_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_service_i30_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_primitive_i30_ (GALGAS_primitiveDeclarationListAST & ioArgument0,
+  protected : void rule_plm_5F_syntax_primitive_i31_ (GALGAS_primitiveDeclarationListAST & ioArgument0,
                                                       C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_primitive_i30_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_primitive_i31_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_guard_i31_ (GALGAS_guardDeclarationListAST & ioArgument0,
+  protected : void rule_plm_5F_syntax_guard_i32_ (GALGAS_guardDeclarationListAST & ioArgument0,
                                                   C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_guard_i31_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_guard_i32_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i32_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_syntax_declaration_i33_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_i32_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_declaration_i33_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_i33_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_i34_ (GALGAS_expressionAST & outArgument0,
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_i33_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_i34_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__31__32__i34_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__31__32__i35_ (GALGAS_expressionAST & outArgument0,
                                                                    C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__31__32__i34_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__31__32__i35_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__31__31__i35_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__31__31__i36_ (GALGAS_expressionAST & outArgument0,
                                                                    C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__31__31__i35_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__31__31__i36_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__31__30__i36_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__31__30__i37_ (GALGAS_expressionAST & outArgument0,
                                                                    C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__31__30__i36_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__31__30__i37_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__39__i37_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__39__i38_ (GALGAS_expressionAST & outArgument0,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__39__i37_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__39__i38_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__38__i38_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__38__i39_ (GALGAS_expressionAST & outArgument0,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__38__i38_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__38__i39_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__37__i39_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__37__i40_ (GALGAS_expressionAST & outArgument0,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__37__i39_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__37__i40_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__36__i40_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__36__i41_ (GALGAS_expressionAST & outArgument0,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__36__i40_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__36__i41_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__35__i41_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__35__i42_ (GALGAS_expressionAST & outArgument0,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__35__i41_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__35__i42_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__34__i42_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__34__i43_ (GALGAS_expressionAST & outArgument0,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__34__i42_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__34__i43_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__33__i43_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__33__i44_ (GALGAS_expressionAST & outArgument0,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__33__i43_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__33__i44_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__32__i44_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__32__i45_ (GALGAS_expressionAST & outArgument0,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__32__i44_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__32__i45_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__31__i45_ (GALGAS_expressionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_expression_5F__31__i46_ (GALGAS_expressionAST & outArgument0,
                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_expression_5F__31__i45_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_primary_i46_ (GALGAS_expressionAST & outArgument0,
-                                                    C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_primary_i46_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_expression_5F__31__i46_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_primary_i47_ (GALGAS_expressionAST & outArgument0,
                                                     C_Lexique_plm_5F_lexique * inLexique) ;
@@ -7077,36 +7173,36 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_primary_i62_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_effective_5F_parameters_i63_ (GALGAS_effectiveParameterListAST & outArgument0,
+  protected : void rule_plm_5F_syntax_primary_i63_ (GALGAS_expressionAST & outArgument0,
+                                                    C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_primary_i63_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_effective_5F_parameters_i64_ (GALGAS_effectiveParameterListAST & outArgument0,
                                                                     GALGAS_location & outArgument1,
                                                                     C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_effective_5F_parameters_i63_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_effective_5F_parameters_i64_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instructionList_i64_ (GALGAS_instructionListAST & outArgument0,
+  protected : void rule_plm_5F_syntax_instructionList_i65_ (GALGAS_instructionListAST & outArgument0,
                                                             C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instructionList_i64_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i65_ (GALGAS_instructionListAST & ioArgument0,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i65_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instructionList_i65_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_instruction_i66_ (GALGAS_instructionListAST & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_instruction_i66_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_assignment_5F_operator_i67_ (GALGAS_operatorAssignmentKind & outArgument0,
-                                                                   C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_assignment_5F_operator_i67_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i68_ (GALGAS_instructionListAST & ioArgument0,
+  protected : void rule_plm_5F_syntax_instruction_i67_ (GALGAS_instructionListAST & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i68_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i67_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_assignment_5F_operator_i68_ (GALGAS_operatorAssignmentKind & outArgument0,
+                                                                   C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_assignment_5F_operator_i68_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_instruction_i69_ (GALGAS_instructionListAST & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
@@ -7138,20 +7234,20 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_instruction_i74_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_if_5F_instruction_i75_ (GALGAS_ifInstructionAST & outArgument0,
-                                                              C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_if_5F_instruction_i75_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_guarded_5F_command_i76_ (GALGAS_guardedCommand & outArgument0,
-                                                               C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_guarded_5F_command_i76_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_instruction_i77_ (GALGAS_instructionListAST & ioArgument0,
+  protected : void rule_plm_5F_syntax_instruction_i75_ (GALGAS_instructionListAST & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i77_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i75_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_if_5F_instruction_i76_ (GALGAS_ifInstructionAST & outArgument0,
+                                                              C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_if_5F_instruction_i76_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_guarded_5F_command_i77_ (GALGAS_guardedCommand & outArgument0,
+                                                               C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_guarded_5F_command_i77_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_instruction_i78_ (GALGAS_instructionListAST & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
@@ -7173,30 +7269,35 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_instruction_i81_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_call_i82_ (GALGAS_callInstructionAST & outArgument0,
+  protected : void rule_plm_5F_syntax_instruction_i82_ (GALGAS_instructionListAST & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_instruction_i82_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_procedure_5F_call_i83_ (GALGAS_callInstructionAST & outArgument0,
                                                               C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_procedure_5F_call_i82_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_procedure_5F_call_i83_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i83_ (GALGAS_instructionListAST & ioArgument0,
+  protected : void rule_plm_5F_syntax_instruction_i84_ (GALGAS_instructionListAST & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_instruction_i83_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_instruction_i84_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_assignment_5F_target_i84_ (GALGAS_assignmentTargetAST & outArgument0,
+  protected : void rule_plm_5F_syntax_assignment_5F_target_i85_ (GALGAS_assignmentTargetAST & outArgument0,
                                                                  C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_assignment_5F_target_i84_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i85_ (GALGAS_ast & ioArgument0,
-                                                        C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_syntax_declaration_i85_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_assignment_5F_target_i85_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i86_ (GALGAS_ast & ioArgument0,
                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i86_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i87_ (GALGAS_ast & ioArgument0,
+                                                        C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_syntax_declaration_i87_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 

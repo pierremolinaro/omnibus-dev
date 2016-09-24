@@ -53,8 +53,7 @@ override method @literalStringInExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset unused inModeSet
-  ?allowPanic:let @bool unused inAllowPanic
+  ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap

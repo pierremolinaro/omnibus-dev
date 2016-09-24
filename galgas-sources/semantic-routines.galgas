@@ -70,7 +70,7 @@ enum @accessKind {
 proc routineSemanticAnalysis
   ?receiverType:let @unifiedTypeMap-proxy inSelfType
   ?let @routineKind inRoutineKind
-  ?let @lstringlist inRoutineModeList
+  ?let @mode inRoutineMode
   ?let @lstring inRoutineName
   ?let @procFormalArgumentList inRoutineFormalArgumentList
   ?returnTypeName:let @lstring inReturnTypeName
@@ -87,11 +87,11 @@ proc routineSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Check modes
-  @stringset procedureModeSet = {}
-  for mode in inRoutineModeList do
-    [inContext.mModeMap searchKey !mode.mValue]
-    procedureModeSet += !mode.mValue.string
-  end
+#  @stringset procedureModeSet = {}
+#  for mode in inRoutineModeList do
+#    [inContext.mModeMap searchKey !mode.mValue]
+#    procedureModeSet += !mode.mValue.string
+#  end
 #--- Mangled routine name
   var routineMangledName = if inSelfType == .null then
     inRoutineName
@@ -107,7 +107,7 @@ proc routineSemanticAnalysis
   initialVariableMap (
 #    !routineNameForInvocation:routineMangledName.string
     !context:inContext
-    !userMode:[procedureModeSet hasKey !userModeName ()]
+    !userMode:inRoutineMode == .userMode
     !registerAccess:inRegisterAccessKind
     !globalsAreConstant:false
     !returnTypeName:inReturnTypeName
@@ -137,8 +137,7 @@ proc routineSemanticAnalysis
     !propertiesAreMutable:inRoutineCanMutateProperties
     !routineNameForInvocationGraph:routineMangledName
     !context:inContext
-    !modes:procedureModeSet
-    !allowPanic:not [procedureModeSet hasKey !panicModeName ()]
+    !mode:inRoutineMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
@@ -162,9 +161,10 @@ proc routineSemanticAnalysis
     elsif inWeakFunction && weak then
       error routineMangledName : "this weak procedure overrides a weak procedure"
     elsif (not inWeakFunction) && weak then
-      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?11*] # Remove weak routine
+      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?12*] # Remove weak routine
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
         !routineMangledName
+        !inSelfType
         !routineMangledName
         !formalArguments
         !allocaList
@@ -180,6 +180,7 @@ proc routineSemanticAnalysis
     else # (not weakProcedure) && (not weak)
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
         !routineMangledName
+        !inSelfType
         !routineMangledName
         !formalArguments
         !allocaList
@@ -196,6 +197,7 @@ proc routineSemanticAnalysis
   else
     [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
       !routineMangledName
+      !inSelfType
       !routineMangledName
       !formalArguments
       !allocaList

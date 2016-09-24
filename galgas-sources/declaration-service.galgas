@@ -99,7 +99,7 @@ method @serviceDeclarationListAST enterInContext
     end
     routineMangledName.string += ")"
   #--- Mode map
-    let @modeMap modeMap = {![userModeName () nowhere], ![serviceModeName () nowhere], ![primitiveModeName () nowhere]}
+#    let @modeMap modeMap = {![userModeName () nowhere], ![serviceModeName () nowhere], ![primitiveModeName () nowhere]}
   #--- Enter in context
     let returnType = if service.mReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
@@ -111,7 +111,7 @@ method @serviceDeclarationListAST enterInContext
       !routineMangledName
       !service.mPublic
       !false
-      !modeMap
+      !.serviceMode
       !signature
       !.service
       !false # Not weak
@@ -148,7 +148,7 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
     routineSemanticAnalysis (
       !receiverType:inReceiverType
       !.service
-      !{![serviceModeName () nowhere], ![primitiveModeName () nowhere]}
+      !.serviceMode
       !service.mServiceName
       !service.mServiceFormalArgumentList
       !returnTypeName:service.mReturnTypeName

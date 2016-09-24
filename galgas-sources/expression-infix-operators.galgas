@@ -118,8 +118,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -135,8 +134,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -152,8 +150,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:[leftOperand type]
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -162,7 +159,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     ?result:let @objectIR rightOperand
   ]
 #------------------- Get operator map
-  let operatorMap = getInfixOperatorMap (!mOp !context:inContext !modes:inModeSet !mOperatorLocation)
+  let operatorMap = getInfixOperatorMap (!mOp !context:inContext !mode:inCurrentMode !mOperatorLocation)
 #------------------- Check operand types
   [operatorMap checkBinaryOperationWith
     !leftType:[leftOperand type]
@@ -189,7 +186,7 @@ override method @infixOperatorExpressionAST analyzeExpression
 private func getInfixOperatorMap
   ?let @infixOperator inOp
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
+  ?mode:let @mode inCurrentMode
   ?let @location inOperatorLocation
   -> @infixOperatorMap outOperatorMap
 {
@@ -215,7 +212,7 @@ private func getInfixOperatorMap
   case booleanXorOp :
     outOperatorMap = inContext.mBooleanXorOperatorMap
   case addOp :
-    if [inModeSet hasKey !panicModeName ()] then
+    if inCurrentMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
@@ -226,7 +223,7 @@ private func getInfixOperatorMap
   case addOpNoOvf :
     outOperatorMap = inContext.mAddNoOvfOperatorMap
   case subOp :
-    if [inModeSet hasKey !panicModeName ()] then
+    if inCurrentMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
@@ -237,7 +234,7 @@ private func getInfixOperatorMap
   case subOpNoOvf :
     outOperatorMap = inContext.mSubNoOvfOperatorMap
   case mulOp :
-    if [inModeSet hasKey !panicModeName ()] then
+    if inCurrentMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
@@ -248,7 +245,7 @@ private func getInfixOperatorMap
   case mulOpNoOvf :
     outOperatorMap = inContext.mMulNoOvfOperatorMap
   case divOp :
-    if [inModeSet hasKey !panicModeName ()] then
+    if inCurrentMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
@@ -259,7 +256,7 @@ private func getInfixOperatorMap
   case divOpNoOvf :
     outOperatorMap = inContext.mDivNoOvfOperatorMap
   case modOp :
-    if [inModeSet hasKey !panicModeName ()] then
+    if inCurrentMode == .panicMode then
       error inOperatorLocation : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     if [option plm_options.noPanicGeneration value] then
@@ -285,8 +282,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -303,8 +299,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -321,8 +316,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:[leftOperand type]
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap

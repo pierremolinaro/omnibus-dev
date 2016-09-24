@@ -49,6 +49,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "public",
   "register",
   "required",
+  "safe",
   "section",
   "self",
   "service",
@@ -125,31 +126,6 @@ rule '$' {
     error typeError
   end
   send $\$type$ 
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#   Mode Name                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#! Mode
-
-style modeStyle -> "Modes"
-
-$`mode$ ! tokenString  style modeStyle error message "a mode `..."
-
-message modeError : "in a mode name, a letter or a digit should follow the '`' character"
-
-rule '`' {
-  select
-  case isUnicodeLetter | '0'->'9' :
-    repeat
-      enterCharacterIntoString (!?tokenString !*)
-    while isUnicodeLetter | '0'->'9' :
-    end
-  default
-    error modeError
-  end
-  send $`mode$ 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

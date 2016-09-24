@@ -64,8 +64,7 @@ override method @typedConstantCall analyzeExpression
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset unused inModeSet
-  ?allowPanic:let @bool unused inAllowPanic
+  ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap unused ioVariableMap

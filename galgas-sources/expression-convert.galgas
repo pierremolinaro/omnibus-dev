@@ -69,8 +69,7 @@ override method @convertExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -86,8 +85,7 @@ override method @convertExpressionAST analyzeExpression
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -96,7 +94,7 @@ override method @convertExpressionAST analyzeExpression
     ?result:@objectIR expressionResult
   ]
 #--- 
-  if not inAllowPanic then
+  if not [inCurrentMode panicAllowed] then
     error mTypeName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
   end
 #--- Analyze type

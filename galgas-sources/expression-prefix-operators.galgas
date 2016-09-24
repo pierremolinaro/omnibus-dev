@@ -47,8 +47,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -64,8 +63,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -114,7 +112,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:0G}
   case minus :
     prefixOperatorMap = inContext.mUnaryMinusOperatorMap
-    if [inModeSet hasKey !panicModeName ()] then
+    if inCurrentMode == .panicMode then
       error mOperatorLocation
         : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end

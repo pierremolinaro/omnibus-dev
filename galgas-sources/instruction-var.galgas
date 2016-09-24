@@ -86,8 +86,7 @@ override method @varInstructionWithAssignmentAST analyze
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModes
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -106,8 +105,7 @@ override method @varInstructionWithAssignmentAST analyze
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:targetType
     !context:inContext
-    !modes:inModes
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -154,8 +152,7 @@ override method @varInstructionAST analyze
   ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset unused inModes
-  ?allowPanic:let @bool unused inAllowPanic
+  ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap

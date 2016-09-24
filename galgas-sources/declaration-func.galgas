@@ -3,7 +3,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @functionDeclarationListAST {
-  @lstringlist mFunctionModeList
+  @mode mMode
   @bool mPublicFunction
   @lstring mFunctionName
   @lstringlist mFunctionAttributeList
@@ -61,10 +61,17 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <procedure> ?!@functionDeclarationListAST ioProcListAST {
-    <procedure_header>
-      ?public:let public
-      ?procModes:let procModeList
+  rule <function> ?!@functionDeclarationListAST ioProcListAST {
+  #--- Public ?
+    @bool public
+    select
+      public = false
+    or
+      $public$
+      public = true
+    end
+    <function_header>
+      ?mode:let @mode mode
       ?name:let procName
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
@@ -79,7 +86,7 @@ syntax extension plm_syntax {
     <instructionList> ?let instructionList
     $}$
     ioProcListAST +=
-      !procModeList
+      !mode
       !public
       !procName
       !attributeList
@@ -91,26 +98,47 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <procedure_header>
-    !public:@bool outPublic
-    !procModes:@lstringlist outProcModeList
+  rule <mode> !@mode outMode {
+    select
+      outMode = .userMode
+    or
+      $panic$
+      outMode = .panicMode
+    or
+      $boot$
+      outMode = .bootMode
+    or
+      $init$
+      outMode = .initMode
+    or
+      $section$
+      outMode = .sectionMode
+    or
+      $service$
+      outMode = .serviceMode
+    or
+      $primitive$
+      outMode = .primitiveMode
+    or
+      $guard$
+      outMode = .guardMode
+    or
+      $safe$
+      outMode = .safeMode
+    end
+  }
+
+  #·····················································································································
+
+  rule <function_header>
+    !mode:@mode outMode
     !name:@lstring outProcName
     !attributes:@lstringlist outAttributeList
     !formalArguments:@procFormalArgumentList outProcFormalArgumentList
   {
-    select
-      outPublic = false
-    or
-      $public$
-      outPublic = true
-    end
+  #---
     $func$
-    outProcModeList = {}
-    repeat
-      $`mode$ ?let procMode
-      outProcModeList += !procMode
-    while
-    end
+    <mode> ?outMode
     $identifier$ ?outProcName
     outAttributeList = {}
     repeat
@@ -205,11 +233,6 @@ method @functionDeclarationListAST enterFunctionInContext
     else
       @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mFunctionReturnTypeName}
     end
-  #--- Mode map
-    @modeMap procedureModeMap = {}
-    for () in procedure.mFunctionModeList do
-      [!?procedureModeMap insertKey !mValue] ;
-    end
   #--- Attribute
     var weakProcedure = false
     var globalProcedure = false
@@ -225,16 +248,17 @@ method @functionDeclarationListAST enterFunctionInContext
       if attribute.string == mutatingAttribute () then
         canMutateProperties = true
       end
-      if attribute.string == userAccessAttribute () then
-        canAccessProperties = true
-        if canAccessProperties && not [procedureModeMap hasKey !userModeName ()] then
-          error attribute : "useless @" + attribute + " attribute: function is never executed in `" + userModeName () + " mode"
-        end
-      end
+#      if attribute.string == userAccessAttribute () then
+#        canAccessProperties = true
+#        if canAccessProperties && not [procedureModeMap hasKey !userModeName ()] then
+#          error attribute : "useless @" + attribute + " attribute: function is never executed in `" + userModeName () + " mode"
+#        end
+#      end
     end
-    if not [procedureModeMap hasKey !userModeName ()] then
-      canAccessProperties = true
-    end
+    canAccessProperties = procedure.mMode != .userMode
+#    if not [procedureModeMap hasKey !userModeName ()] then
+#      canAccessProperties = true
+#    end
   #--- Enter in context
     if [ioContext.mRoutineMapForContext hasKey !routineMangledName.string] then
       let weak = [ioContext.mRoutineMapForContext mWeakForKey !routineMangledName.string]
@@ -249,7 +273,7 @@ method @functionDeclarationListAST enterFunctionInContext
           !routineMangledName
           !procedure.mPublicFunction
           !globalProcedure
-          !procedureModeMap
+          !procedure.mMode
           !signature
           !.function
           !weakProcedure
@@ -264,7 +288,7 @@ method @functionDeclarationListAST enterFunctionInContext
           !routineMangledName
           !procedure.mPublicFunction
           !globalProcedure
-          !procedureModeMap
+          !procedure.mMode
           !signature
           !.function
           !weakProcedure
@@ -280,7 +304,7 @@ method @functionDeclarationListAST enterFunctionInContext
         !routineMangledName
         !procedure.mPublicFunction
         !globalProcedure
-        !procedureModeMap
+        !procedure.mMode
         !signature
         !.function
         !weakProcedure
@@ -331,7 +355,7 @@ method @functionDeclarationListAST procedureSemanticAnalysis
     routineSemanticAnalysis (
       !receiverType:inReceiverType
       !.function
-      !procedure.mFunctionModeList
+      !procedure.mMode
       !procedure.mFunctionName
       !procedure.mFunctionFormalArgumentList
       !returnTypeName:procedure.mFunctionReturnTypeName

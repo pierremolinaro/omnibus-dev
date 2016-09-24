@@ -159,8 +159,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !propertiesAreMutable:false
     !routineNameForInvocationGraph:routineNameForInvocationGraph
     !context:inContext
-    !modes:{!panicModeName ()}
-    !allowPanic:false
+    !mode:.panicMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap

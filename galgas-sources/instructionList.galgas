@@ -60,8 +60,7 @@ abstract method @instructionAST analyze
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -77,8 +76,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?endOfInstructionList:@location inEndOfInstructionList
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -95,8 +93,7 @@ method @instructionListAST analyzeBranchInstructionList
       !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
-      !modes:inModeSet
-      !allowPanic:inAllowPanic
+      !mode:inCurrentMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
@@ -117,8 +114,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -133,8 +129,7 @@ method @instructionListAST analyzeRoutineInstructionList
       !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !context:inContext
-      !modes:inModeSet
-      !allowPanic:inAllowPanic
+      !mode:inCurrentMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap

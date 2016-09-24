@@ -46,6 +46,7 @@ map @globalConstantMapIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @routineMapIR {
+  @unifiedTypeMap-proxy mReceiverType # .null if standalone function
   @lstring mRoutineNameForGeneration
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
   @allocaList mAllocaList

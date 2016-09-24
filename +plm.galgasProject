@@ -18,7 +18,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/syntax-grammar.galgas"
   "galgas-sources/cocoa.galgas"
 
-#--- Pointer
+#--- Configuration
   "galgas-sources/configuration.galgas"
 
 #--- Type declarations
@@ -42,6 +42,9 @@ project (1:0:0) -> "plm" {
 
 #--- Tasks
   "galgas-sources/declaration-task.galgas"
+
+#--- Modes
+  "galgas-sources/logical-modes.galgas"
 
 #--- Panic
   "galgas-sources/panic.galgas"

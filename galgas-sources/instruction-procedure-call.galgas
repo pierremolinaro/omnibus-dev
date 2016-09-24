@@ -86,8 +86,7 @@ override method @callInstructionAST analyze
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
-  ?modes:let @stringset inModeSet
-  ?allowPanic:let @bool inAllowPanic
+  ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@variableMap ioVariableMap
@@ -101,8 +100,7 @@ override method @callInstructionAST analyze
     !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
     !context: inContext
-    !modes: inModeSet
-    !allowPanic: inAllowPanic
+    !mode: inCurrentMode
     !?temporary: ioTemporaries
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap: ioVariableMap
@@ -120,8 +118,7 @@ override method @callInstructionAST analyze
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !context:inContext
-    !modes:inModeSet
-    !allowPanic:inAllowPanic
+    !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
@@ -160,14 +157,14 @@ list @procCallEffectiveParameterListIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @routineKindIR {
+enum @calleeKindIR {
   case function
-  case primitiveInProcessorUserMode
-  case sectionInProcessorUserMode
-  case serviceInProcessorUserMode
-  case primitiveInProcessorPrivilegedMode
-  case sectionInProcessorPrivilegedMode
-  case serviceInProcessorPrivilegedMode
+  case primitiveFromProcessorUserMode
+  case sectionFromProcessorUserMode
+  case serviceFromProcessorUserMode
+  case primitiveFromProcessorPrivilegedMode
+  case sectionFromProcessorPrivilegedMode
+  case serviceFromProcessorPrivilegedMode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
