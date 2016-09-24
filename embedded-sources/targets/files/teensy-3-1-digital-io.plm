@@ -41,9 +41,8 @@ enum $digitalMode {
 
 //··············································································
 
-public func safe
-digitalMode @noUnusedWarning (?port:port $digitalPort
-                              ?mode:mode $digitalMode) {
+public safe digitalMode @noUnusedWarning (?port:port $digitalPort
+                                          ?mode:mode $digitalMode) {
   switch port {
   case D0 : // PTB16
     switch mode {
@@ -338,16 +337,8 @@ digitalMode @noUnusedWarning (?port:port $digitalPort
 
 //··············································································
 
-public section userDigitalWrite @noUnusedWarning (?port:port $digitalPort
-                                                  ?value $bool) {
-  digitalWrite (!port:port !value)
-}
-
-//··············································································
-
-public func safe
-digitalWrite @noUnusedWarning (?port:port $digitalPort
-                               ?value $bool) {
+public safe digitalWrite @noUnusedWarning (?port:port $digitalPort
+                                           ?value $bool) {
   switch port {
   case D0 : // PTB16
     if value {
@@ -498,14 +489,7 @@ digitalWrite @noUnusedWarning (?port:port $digitalPort
 
 //··············································································
 
-public section userToggle @noUnusedWarning (?port:port $digitalPort) {
-  toggle (!port:port)
-}
-
-//··············································································
-
-public func safe
-toggle @noUnusedWarning (?port:port $digitalPort) {
+public safe toggle @noUnusedWarning (?port:port $digitalPort) {
   switch port {
   case D0 : // PTB16
     GPIOB_PTOR = 1 << 16 ;
@@ -560,14 +544,7 @@ toggle @noUnusedWarning (?port:port $digitalPort) {
 
 //··············································································
 
-public section userDigitalRead @noUnusedWarning (?port:port $digitalPort) -> $bool {
-  result = digitalRead (!port:port)
-}
-
-//··············································································
-
-public func safe
-digitalRead @noUnusedWarning (?port:port $digitalPort) -> $bool {
+public safe digitalRead @noUnusedWarning (?port:port $digitalPort) -> $bool {
   switch port {
   case D0 : // PTB16
     result = (GPIOB_PDIR & (1 << 16)) != 0

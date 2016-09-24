@@ -49,12 +49,12 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     sémaphore.signal ()
     self.top += 250
-    userDigitalWrite (!port:LED_L1 !true)
+    digitalWrite (!port:LED_L1 !true)
     let constanteAccentuée = self.top
     time.waitUntilMS (!deadline:constanteAccentuée)
     sémaphore.signal ()
     self.top += 250
-    userDigitalWrite (!port:LED_L1 !false)
+    digitalWrite (!port:LED_L1 !false)
   }
 }
 
@@ -63,9 +63,9 @@ task T1 priority 1 stackSize 512 {
 task T2 priority 2 stackSize 512 {
 
   while sémaphore.wait () {
-    userDigitalWrite (!port:LED_L2 !true)
+    digitalWrite (!port:LED_L2 !true)
     sémaphore.wait ()
-    userDigitalWrite (!port:LED_L2 !false)
+    digitalWrite (!port:LED_L2 !false)
   }
 }
 

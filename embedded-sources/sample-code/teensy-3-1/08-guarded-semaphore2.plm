@@ -59,11 +59,11 @@ task T0 priority 0 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s0.signal ()
     self.top += 250
-    userDigitalWrite (!port:LED_L0 !true)
+    digitalWrite (!port:LED_L0 !true)
     time.waitUntilMS (!deadline:self.top)
     s0.signal ()
     self.top += 250
-    userDigitalWrite (!port:LED_L0 !false)
+    digitalWrite (!port:LED_L0 !false)
   }
 }
 
@@ -75,11 +75,11 @@ task T1 priority 1 stackSize 512 {
   while time.waitUntilMS (!deadline:self.top) {
     s1.signal ()
     self.top += 249
-    userDigitalWrite (!port:LED_L4 !true)
+    digitalWrite (!port:LED_L4 !true)
     time.waitUntilMS (!deadline:self.top)
     s1.signal ()
     self.top += 249
-    userDigitalWrite (!port:LED_L4 !false)
+    digitalWrite (!port:LED_L4 !false)
   }
 }
 
@@ -89,16 +89,16 @@ task T2 priority 2 stackSize 512 {
   var deadline $uint32 = 0
   
   while s0.wait () {
-    userToggle (!port:LED_L1)
+    toggle (!port:LED_L1)
   }
   
   while PP () {
-    userToggle (!port:LED_L3)
+    toggle (!port:LED_L3)
   }
   
   while convenienceWaitUntilMS (!deadline:self.deadline) {
     self.deadline += 200
-    userToggle (!port:LED_L2)
+    toggle (!port:LED_L2)
   }
 }
 

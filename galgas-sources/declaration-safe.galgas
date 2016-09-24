@@ -2,14 +2,14 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @sectionDeclarationListAST {
-  @lstring mSectionName
+list @safeDeclarationListAST {
+  @lstring mSafeName
   @bool mPublic
-  @lstringlist mSectionAttributeList
-  @procFormalArgumentList mSectionFormalArgumentList
+  @lstringlist mSafeAttributeList
+  @procFormalArgumentList mSafeFormalArgumentList
   @lstring mReturnTypeName
-  @instructionListAST mSectionInstructionList
-  @location mEndOfSectionLocation
+  @instructionListAST mSafeInstructionList
+  @location mEndOfSafeLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -20,7 +20,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <section> ?!@sectionDeclarationListAST ioSectionListAST {
+  rule <safe> ?!@safeDeclarationListAST ioSafeListAST {
     @bool public
     select
       public = false
@@ -28,15 +28,15 @@ syntax extension plm_syntax {
       $public$
       public = true
     end
-    $section$
-    $identifier$ ?let sectionName
+    $safe$
+    $identifier$ ?let safeName
     @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
-    <procedure_formal_arguments> ?formalArguments:let sectionFormalArgumentList
+    <procedure_formal_arguments> ?formalArguments:let safeFormalArgumentList
     @lstring returnTypeName
     select
       returnTypeName = ["" here]
@@ -47,11 +47,11 @@ syntax extension plm_syntax {
     ${$
     <instructionList> ?let instructionList
     $}$
-    ioSectionListAST +=
-      !sectionName
+    ioSafeListAST +=
+      !safeName
       !public
       !attributeList
-      !sectionFormalArgumentList
+      !safeFormalArgumentList
       !returnTypeName
       !instructionList
       !.here
@@ -65,13 +65,13 @@ syntax extension plm_syntax {
 #  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @sectionDeclarationListAST noteSectionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @safeDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
-    for (* * formalArgumentTypeName *) in mSectionFormalArgumentList do
+    for (* * formalArgumentTypeName *) in mSafeFormalArgumentList do
       let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
       [!?ioGraph noteNode !typeName]
     end
-    [mSectionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    [mSafeInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
@@ -79,33 +79,33 @@ method @sectionDeclarationListAST noteSectionTypesInPrecedenceGraph ?!@semanticT
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @sectionDeclarationListAST enterInContext
+method @safeDeclarationListAST enterInContext
   ?receiverType:let @string inReceiverTypeName
   ?!context:@semanticContext ioContext
 {
-  for section in self do
+  for safe in self do
   #--- Signature
     var routineMangledName = if inReceiverTypeName == "" then
-      section.mSectionName
+      safe.mSafeName
     else
-      @lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
+      @lstring.new {!inReceiverTypeName + "." + safe.mSafeName !safe.mSafeName.location}
     end
     @procedureSignature signature = {}
     routineMangledName.string += "("
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in section.mSectionFormalArgumentList do
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in safe.mSafeFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
       routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
     routineMangledName.string += ")"
-    let returnType = if section.mReturnTypeName.string == "" then
+    let returnType = if safe.mReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
     else
-      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !section.mReturnTypeName}
+      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !safe.mReturnTypeName}
     end
   #--- Attributes
     var mutating = false
-    for (attribute) in section.mSectionAttributeList do
+    for (attribute) in safe.mSafeAttributeList do
       if attribute.string == mutatingAttribute () then
         mutating = true    
       end
@@ -114,11 +114,11 @@ method @sectionDeclarationListAST enterInContext
     [!?ioContext.mRoutineMapForContext insertKey
       !routineMangledName
       !routineMangledName
-      !section.mPublic
+      !safe.mPublic
       !false
       !.userMode
       !signature
-      !.section
+      !.safe
       !false # Not weak
       !returnType
       !false # No appendFileAndLineArgumentForPanicLocation
@@ -132,16 +132,16 @@ method @sectionDeclarationListAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @sectionDeclarationListAST sectionSemanticAnalysis
+method @safeDeclarationListAST sectionSemanticAnalysis
   ?receiverType:@unifiedTypeMap-proxy inReceiverType
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  for section in self do
+  for safe in self do
     var mutating = false
     var noUnusedWarning = false
-    for (attribute) in section.mSectionAttributeList do
+    for (attribute) in safe.mSafeAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if noUnusedWarning then
           error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { remove }
@@ -160,13 +160,13 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
     end
     routineSemanticAnalysis (
       !receiverType:inReceiverType
-      !.section
-      !.sectionMode
-      !section.mSectionName
-      !section.mSectionFormalArgumentList
-      !returnTypeName:section.mReturnTypeName
-      !section.mSectionInstructionList
-      !section.mEndOfSectionLocation
+      !.safe
+      !.safeMode
+      !safe.mSafeName
+      !safe.mSafeFormalArgumentList
+      !returnTypeName:safe.mReturnTypeName
+      !safe.mSafeInstructionList
+      !safe.mEndOfSafeLocation
       !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:mutating
       !warnIfUnused:not noUnusedWarning
@@ -184,29 +184,29 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR sectionCodeGeneration
+method @routineMapIR safeCodeGeneration
   ?!@string ioLLVMcode
-  ?!@2stringlist ioSectionList
+  ?!@2stringlist ioSafeList
 {
-  for section in self do
-    if section.mKind == .section then
-      let sectionCallName = llvmNameForSectionCall (!section.mRoutineNameForGeneration.string)
-      let sectionImplementationName = llvmNameForSectionImplementation (!section.mRoutineNameForGeneration.string)
-      ioSectionList += !sectionCallName !sectionImplementationName
-      ioLLVMcode += llvmTitleComment (!sectionCallName)
+  for safe in self do
+    if safe.mKind == .safe then
+      let safeCallName = llvmNameForSafeCall (!safe.mRoutineNameForGeneration.string)
+      let safeImplementationName = llvmNameForSafeImplementation (!safe.mRoutineNameForGeneration.string)
+      ioSafeList += !safeCallName !safeImplementationName
+      ioLLVMcode += llvmTitleComment (!safeCallName)
       ioLLVMcode += "declare"
-      if section.mReturnType == .null then
+      if safe.mReturnType == .null then
         ioLLVMcode += " void"
       else
-        ioLLVMcode += " " + [section.mReturnType llvmTypeName]
+        ioLLVMcode += " " + [safe.mReturnType llvmTypeName]
       end
-      ioLLVMcode += " @" + sectionCallName + " ("
+      ioLLVMcode += " @" + safeCallName + " ("
       var first = true
-      if section.mReceiverType != .null then
-        ioLLVMcode += [section.mReceiverType llvmTypeName] + " * %receiver"
+      if safe.mReceiverType != .null then
+        ioLLVMcode += [safe.mReceiverType llvmTypeName] + " * %receiver"
         first = false
       end
-      for () in section.mFormalArgumentListForGeneration do
+      for () in safe.mFormalArgumentListForGeneration do
         if first then
           first = false
         else
@@ -224,30 +224,6 @@ method @routineMapIR sectionCodeGeneration
       ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
     end
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc generateSectionAndSafeDispatcher
-  ?let @string inCurrentDirectory
-  ?let @string inTargetName
-  ?!@string ioAssemblerCode
-  ?let @2stringlist inSectionAndSafeList
-{
-  for (callName implementationName) in inSectionAndSafeList do (idx)
-    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-entry.s")
-    s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
-    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-    ioAssemblerCode += s
-  end
-  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
-  for (* implementationName) in inSectionAndSafeList do (idx)
-    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
-    s = [s stringByReplacingStringByString !"!ENTRY!" !implementationName]
-    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-    ioAssemblerCode += s
-  end
-  ioAssemblerCode += "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -98,7 +98,13 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-  [inAST.mSectionListAST sectionSemanticAnalysis
+  [inAST.mStandAloneSectionListAST sectionSemanticAnalysis
+    !receiverType:.null
+    !context:inSemanticContext
+    !?temporary:temporaries
+    !?intermediateCode:outIntermediateCodeStruct
+  ]
+  [inAST.mStandAloneSafeListAST sectionSemanticAnalysis
     !receiverType:.null
     !context:inSemanticContext
     !?temporary:temporaries
@@ -232,6 +238,10 @@ override method @functionCallIR llvmInstructionCode
     ioLLVMcode += llvmNameForPrimitiveCall (!mFunctionNameForGeneration.string)
   case primitiveFromProcessorPrivilegedMode :
     ioLLVMcode += llvmNameForPrimitiveImplementation (!mFunctionNameForGeneration.string)
+  case safeFromProcessorUserMode :
+    ioLLVMcode += llvmNameForSafeCall (!mFunctionNameForGeneration.string)
+  case safeFromProcessorPrivilegedMode :
+    ioLLVMcode += llvmNameForSafeImplementation (!mFunctionNameForGeneration.string)
   end
   ioLLVMcode += " ("
   for () in mArgumentList do

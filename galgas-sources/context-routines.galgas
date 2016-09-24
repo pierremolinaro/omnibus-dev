@@ -7,6 +7,7 @@
 enum @routineKind {
   case function
   case section
+  case safe
   case service
   case primitive
 }
