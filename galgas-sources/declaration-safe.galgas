@@ -21,13 +21,15 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <safe> ?!@safeDeclarationListAST ioSafeListAST {
-    @bool public
-    select
-      public = false
-    or
-      $public$
-      public = true
-    end
+#    @bool public
+#    select
+#      public = false
+#    or
+#      $public$
+#      public = true
+#    end
+#    $svc$
+    <svc_declaration> ?let public
     $safe$
     $identifier$ ?let safeName
     @lstringlist attributeList = {}

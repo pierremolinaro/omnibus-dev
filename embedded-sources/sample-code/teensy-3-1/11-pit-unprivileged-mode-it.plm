@@ -37,7 +37,7 @@ init 100_000 {
 
 //------------------------------------------------*
 
-section setupPIT () {
+svc section setupPIT () {
   PIT_MCR = 0
   PIT_LDVAL0 = 200000
   PIT_TCTRL0 = 3 // Interrupt, enabled
@@ -45,7 +45,7 @@ section setupPIT () {
 
 //------------------------------------------------*
 
-section getPITValue (!outValue $uint32) {
+svc section getPITValue (!outValue $uint32) {
   outValue = gPITValue
 }
 

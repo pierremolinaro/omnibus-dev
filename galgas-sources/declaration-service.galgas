@@ -21,13 +21,15 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <service> ?!@serviceDeclarationListAST ioServiceListAST {
-    @bool public
-    select
-      public = false
-    or
-      $public$
-      public = true
-    end
+#    @bool public
+#    select
+#      public = false
+#    or
+#      $public$
+#      public = true
+#    end
+#    $svc$
+    <svc_declaration> ?let public
     $service$
     $identifier$ ?let serviceName
     @lstringlist attributeList = {}

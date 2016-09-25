@@ -5014,6 +5014,14 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : static void performOnlySyntaxAnalysis (C_Compiler * inCompiler,
                                                   const C_String & inSourceFilePath) ;
 
+//------------------------------------- 'svc_declaration' non terminal
+//--- 'parse' label
+  public : virtual void nt_svc_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_svc_5F_declaration_ (GALGAS_bool & outArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
   public : virtual int32_t select_plm_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_1 (C_Lexique_plm_5F_lexique *) ;
@@ -5169,12 +5177,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_76 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_77 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_plm_5F_syntax_78 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_plm_5F_syntax_79 (C_Lexique_plm_5F_lexique *) ;
-
-  public : virtual int32_t select_plm_5F_syntax_80 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

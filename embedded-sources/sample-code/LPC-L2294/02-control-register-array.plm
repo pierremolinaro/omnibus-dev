@@ -12,13 +12,13 @@ register SINGLE_PIPO at 0x5000_0000 $uint32 {
 
 //------------------------------------------------*
 
-section ledOn () {
+svc section ledOn () {
   IO1CLR  = 1 << 23 // Led On
 }
 
 //------------------------------------------------*
 
-section ledOff () {
+svc section ledOff () {
   globalVar = SINGLE_PIPO
   globalVar = SINGLE_PIPO.fields
   globalVar = SINGLE_PIPO.fields.shifted

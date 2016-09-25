@@ -21,13 +21,15 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <section> ?!@sectionDeclarationListAST ioSectionListAST {
-    @bool public
-    select
-      public = false
-    or
-      $public$
-      public = true
-    end
+#    @bool public
+#    select
+#      public = false
+#    or
+#      $public$
+#      public = true
+#    end
+#    $svc$
+    <svc_declaration> ?let public
     $section$
     $identifier$ ?let sectionName
     @lstringlist attributeList = {}
@@ -172,7 +174,6 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
       !warnIfUnused:not noUnusedWarning
       !globalFunction:true
       !weakFunction:false
-#      !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
