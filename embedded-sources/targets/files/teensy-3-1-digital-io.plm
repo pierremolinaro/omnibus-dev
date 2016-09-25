@@ -65,8 +65,8 @@ boot 50 { // See §19.2.2 page 351
 
 //··············································································
 
-public func digitalMode @noUnusedWarning (?port:port $digitalPort
-                                          ?mode:mode $digitalMode) {
+public func pinMode @noUnusedWarning (?port:port $digitalPort
+                                      ?mode:mode $digitalMode) {
   switch port {
   case D0 : // PTB16
     switch mode {

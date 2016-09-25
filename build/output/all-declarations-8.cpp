@@ -10069,8 +10069,8 @@ const char * gWrapperFileContent_31_targetTemplates = "//\xE2""\x80""\x94""\xE2"
   "\n"
   "//\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
-  "public func digitalMode @noUnusedWarning (\?port:port $digitalPort\n"
-  "                                          \?mode:mode $digitalMode) {\n"
+  "public func pinMode @noUnusedWarning (\?port:port $digitalPort\n"
+  "                                      \?mode:mode $digitalMode) {\n"
   "  switch port {\n"
   "  case D0 : // PTB16\n"
   "    switch mode {\n"
@@ -10631,7 +10631,7 @@ const cRegularFileWrapper gWrapperFile_31_targetTemplates (
   "teensy-3-1-digital-io.plm",
   "plm",
   true, // Text file
-  16081, // Text length
+  16073, // Text length
   gWrapperFileContent_31_targetTemplates
 ) ;
 
@@ -10670,12 +10670,12 @@ const char * gWrapperFileContent_32_targetTemplates = "\n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "\n"
   "  func init configurePorts @noUnusedWarning () {\n"
-  "    digitalMode (!port:DATA_4 !mode:.OUTPUT)\n"
-  "    digitalMode (!port:DATA_5 !mode:.OUTPUT)\n"
-  "    digitalMode (!port:DATA_6 !mode:.OUTPUT)\n"
-  "    digitalMode (!port:DATA_7 !mode:.OUTPUT)\n"
-  "    digitalMode (!port:RS     !mode:.OUTPUT)\n"
-  "    digitalMode (!port:ENABLE !mode:.OUTPUT)\n"
+  "    pinMode (!port:DATA_4 !mode:.OUTPUT)\n"
+  "    pinMode (!port:DATA_5 !mode:.OUTPUT)\n"
+  "    pinMode (!port:DATA_6 !mode:.OUTPUT)\n"
+  "    pinMode (!port:DATA_7 !mode:.OUTPUT)\n"
+  "    pinMode (!port:RS     !mode:.OUTPUT)\n"
+  "    pinMode (!port:ENABLE !mode:.OUTPUT)\n"
   "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
@@ -10713,33 +10713,18 @@ const char * gWrapperFileContent_32_targetTemplates = "\n"
   "  \n"
   "  func setD5 @noUnusedWarning (\?inValue $bool) { // PTC0\n"
   "    digitalWrite (!port:DATA_5 !inValue)\n"
-  "//    if inValue {\n"
-  "//      GPIOC_PSOR = 1 << 0 ;\n"
-  "//    }else{\n"
-  "//      GPIOC_PCOR = 1 << 0 ;\n"
-  "//    }\n"
   "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
   "  func setD6 @noUnusedWarning (\?inValue $bool) { // PTD1\n"
   "    digitalWrite (!port:DATA_6 !inValue)\n"
-  "//    if inValue {\n"
-  "//      GPIOD_PSOR = 1 << 1 ;\n"
-  "//    }else{\n"
-  "//      GPIOD_PCOR = 1 << 1 ;\n"
-  "//    }\n"
   "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
   "  \n"
   "  func setD7 @noUnusedWarning (\?inValue $bool) { // PTB2\n"
   "    digitalWrite (!port:DATA_7 !inValue)\n"
-  "//    if inValue {\n"
-  "//      GPIOB_PSOR = 1 << 2 ;\n"
-  "//    }else{\n"
-  "//      GPIOB_PCOR = 1 << 2 ;\n"
-  "//    }\n"
   "  }\n"
   "  \n"
   "  //\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\xC2""\xB7""\n"
@@ -10781,9 +10766,6 @@ const char * gWrapperFileContent_32_targetTemplates = "\n"
   "  func init write4BitCommand @noUnusedWarning (\?inValue $uint8) {\n"
   "    time.busyWaitingDuringMS (!1) ;\n"
   "    self.writeFirstNibbleOf8bitCommand (!inValue)\n"
-  "//    self.driveLowRS () ;\n"
-  "//    self.programLcd4BitDataBusOutput (!inValue)\n"
-  "//    self.driveHighE ()\n"
   "    time.busyWaitingDuringMS (!1) ;\n"
   "    self.driveLowE () ;\n"
   "  }\n"
@@ -10793,15 +10775,10 @@ const char * gWrapperFileContent_32_targetTemplates = "\n"
   "  func init write8bitCommand @noUnusedWarning (\?inCommand $uint8) {\n"
   "    time.busyWaitingDuringMS (!1) ;\n"
   "    self.writeFirstNibbleOf8bitCommand (!inCommand >> 4)\n"
-  "//    self.driveLowRS () ;\n"
-  "//    self.programLcd4BitDataBusOutput (!inCommand >> 4) ;\n"
-  "//    self.driveHighE () ;\n"
   "    time.busyWaitingDuringMS (!1) ;\n"
   "    self.driveLowE () ;\n"
   "    time.busyWaitingDuringMS (!1) ;\n"
   "    self.writeSecondNibble (!inCommand) ;\n"
-  "//    self.programLcd4BitDataBusOutput (!inCommand) ;\n"
-  "//    self.driveHighE () ;\n"
   "    time.busyWaitingDuringMS (!1) ;\n"
   "    self.driveLowE () ;\n"
   "  }\n"
@@ -11103,7 +11080,7 @@ const cRegularFileWrapper gWrapperFile_32_targetTemplates (
   "teensy-3-1-lcd.plm",
   "plm",
   true, // Text file
-  15769, // Text length
+  15149, // Text length
   gWrapperFileContent_32_targetTemplates
 ) ;
 
@@ -11245,11 +11222,11 @@ const char * gWrapperFileContent_34_targetTemplates = "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "panic setup 0 {\n"
-  "  digitalMode (!port:.D3 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D4 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D5 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D6 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D7 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D3 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D4 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D5 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D6 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D7 !mode:.OUTPUT)\n"
   "  lcd.clearScreenInPanicMode ()\n"
   "  lcd.gotoInPanicMode (!line:0 !column:0)\n"
   "  lcd.printStringInPanicMode (!FILE)\n"
@@ -11279,7 +11256,7 @@ const cRegularFileWrapper gWrapperFile_34_targetTemplates (
   "teensy-3-1-panic.plm",
   "plm",
   true, // Text file
-  1005, // Text length
+  985, // Text length
   gWrapperFileContent_34_targetTemplates
 ) ;
 

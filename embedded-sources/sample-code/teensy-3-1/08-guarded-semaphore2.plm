@@ -15,7 +15,7 @@ func safe activityLedOff @global () {
 //-----------------------------------------------------------------------------*
 
 init 100 {
-  digitalMode (!port:.D13 !mode:.OUTPUT)
+  pinMode (!port:.D13 !mode:.OUTPUT)
 }
 
 //-----------------------------------------------------------------------------*
@@ -29,11 +29,11 @@ let LED_L4 = $digitalPort.D7
 //-----------------------------------------------------------------------------*
 
 init 1000 {
-  digitalMode (!port:LED_L0 !mode:.OUTPUT)
-  digitalMode (!port:LED_L1 !mode:.OUTPUT)
-  digitalMode (!port:LED_L2 !mode:.OUTPUT)
-  digitalMode (!port:LED_L3 !mode:.OUTPUT)
-  digitalMode (!port:LED_L4 !mode:.OUTPUT)
+  pinMode (!port:LED_L0 !mode:.OUTPUT)
+  pinMode (!port:LED_L1 !mode:.OUTPUT)
+  pinMode (!port:LED_L2 !mode:.OUTPUT)
+  pinMode (!port:LED_L3 !mode:.OUTPUT)
+  pinMode (!port:LED_L4 !mode:.OUTPUT)
 }
 
 //-----------------------------------------------------------------------------*
