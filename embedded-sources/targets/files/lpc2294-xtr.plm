@@ -122,7 +122,7 @@ module time {
   
   //············································································
   
-  public func waitDuringMS @noUnusedWarning @mutating @userAccess (?delay: inDelay $uint32) {
+  public func user waitDuringMS @noUnusedWarning @mutating @userAccess (?delay: inDelay $uint32) {
     self.waitUntilMS (!deadline:self.millis () + inDelay)
   }
   

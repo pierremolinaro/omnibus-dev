@@ -42,14 +42,14 @@ struct $rendezVousDataé {
   var signalerDonneeLue = $semaphore (!value:0)
   var donnée $uint32 = 0
 
-  public func output @mutating @userAccess (?data:inData $uint32) {
+  public func user output @mutating (?data:inData $uint32) {
     self.autoriserEcriture.wait ()
     self.donnée = inData
     self.autoriserLecture.signal ()
     self.signalerDonneeLue.wait ()
   }
 
-//  public func `user input (!data:outData $uint32) {
+//  public func user input (!data:outData $uint32) {
 //    self.autoriserLecture.P ()
 //    outData = self.data
 //    self.signalerDonneeLue.V ()

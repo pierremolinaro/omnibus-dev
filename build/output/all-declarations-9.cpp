@@ -1754,14 +1754,14 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1\"\
   "  var signalerDonneeLue = $semaphore (!value:0)\n"
   "  var donn\xC3""\xA9""e $uint32 = 0\n"
   "\n"
-  "  public func output @mutating @userAccess (\?data:inData $uint32) {\n"
+  "  public func user output @mutating (\?data:inData $uint32) {\n"
   "    self.autoriserEcriture.wait ()\n"
   "    self.donn\xC3""\xA9""e = inData\n"
   "    self.autoriserLecture.signal ()\n"
   "    self.signalerDonneeLue.wait ()\n"
   "  }\n"
   "\n"
-  "//  public func `user input (!data:outData $uint32) {\n"
+  "//  public func user input (!data:outData $uint32) {\n"
   "//    self.autoriserLecture.P ()\n"
   "//    outData = self.data\n"
   "//    self.signalerDonneeLue.V ()\n"
@@ -1841,7 +1841,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "10-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  3344, // Text length
+  3336, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
