@@ -12,6 +12,7 @@ enum @mode {
   case bootMode
   case initMode
   case safeMode
+  case anyMode
 }
 
 #·······················································································································
@@ -27,6 +28,7 @@ getter @mode panicAllowed -> @bool {
   case bootMode : result = false
   case initMode : result = true
   case safeMode : result = false
+  case anyMode : result = false
   end
 }
 
@@ -43,6 +45,7 @@ getter @mode string -> @string {
   case bootMode : result = "boot"
   case initMode : result = "init"
   case safeMode : result = "safe"
+  case anyMode : result = "any"
   end
 }
 
@@ -89,18 +92,21 @@ func checkMode
     if not ok then
       switch inCallerMode
       case userMode :
+        ok = inCalleeMode == .anyMode
       case sectionMode :
-        ok = (inCalleeMode == .safeMode)
+        ok = (inCalleeMode == .safeMode) || (inCalleeMode == .anyMode)
       case serviceMode :
-        ok = (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode)
+        ok = (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode) || (inCalleeMode == .anyMode)
       case primitiveMode :
-        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode)
+        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode) || (inCalleeMode == .anyMode)
       case guardMode :
-        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode)
+        ok = (inCalleeMode == .serviceMode) || (inCalleeMode == .sectionMode) || (inCalleeMode == .safeMode) || (inCalleeMode == .anyMode)
       case panicMode, initMode :
-        ok = inCalleeMode == .safeMode
+        ok = (inCalleeMode == .safeMode) || (inCalleeMode == .anyMode)
       case bootMode :
       case safeMode :
+        ok = inCalleeMode == .anyMode
+      case anyMode :
       end
     end
     if not ok then

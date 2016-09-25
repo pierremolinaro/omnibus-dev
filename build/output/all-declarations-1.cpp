@@ -12811,7 +12811,15 @@ GALGAS_mode GALGAS_mode::constructor_safeMode (UNUSED_LOCATION_ARGS) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_mode [10] = {
+GALGAS_mode GALGAS_mode::constructor_anyMode (UNUSED_LOCATION_ARGS) {
+  GALGAS_mode result ;
+  result.mEnum = kEnum_anyMode ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_mode [11] = {
   "(not built)",
   "userMode",
   "sectionMode",
@@ -12821,7 +12829,8 @@ static const char * gEnumNameArrayFor_mode [10] = {
   "panicMode",
   "bootMode",
   "initMode",
-  "safeMode"
+  "safeMode",
+  "anyMode"
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12876,6 +12885,12 @@ GALGAS_bool GALGAS_mode::getter_isInitMode (UNUSED_LOCATION_ARGS) const {
 
 GALGAS_bool GALGAS_mode::getter_isSafeMode (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_safeMode == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_mode::getter_isAnyMode (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_anyMode == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13004,6 +13019,11 @@ GALGAS_bool extensionGetter_panicAllowed (const GALGAS_mode & inObject,
       result_result = GALGAS_bool (false) ;
     }
     break ;
+  case GALGAS_mode::kEnum_anyMode:
+    {
+      result_result = GALGAS_bool (false) ;
+    }
+    break ;
   }
 //---
   return result_result ;
@@ -13069,6 +13089,11 @@ GALGAS_string extensionGetter_string (const GALGAS_mode & inObject,
   case GALGAS_mode::kEnum_safeMode:
     {
       result_result = GALGAS_string ("safe") ;
+    }
+    break ;
+  case GALGAS_mode::kEnum_anyMode:
+    {
+      result_result = GALGAS_string ("any") ;
     }
     break ;
   }

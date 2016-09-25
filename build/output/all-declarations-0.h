@@ -3119,7 +3119,8 @@ class GALGAS_mode : public AC_GALGAS_root {
     kEnum_panicMode,
     kEnum_bootMode,
     kEnum_initMode,
-    kEnum_safeMode
+    kEnum_safeMode,
+    kEnum_anyMode
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -3141,6 +3142,8 @@ class GALGAS_mode : public AC_GALGAS_root {
                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
+  public : static class GALGAS_mode constructor_anyMode (LOCATION_ARGS) ;
+
   public : static class GALGAS_mode constructor_bootMode (LOCATION_ARGS) ;
 
   public : static class GALGAS_mode constructor_guardMode (LOCATION_ARGS) ;
@@ -3171,6 +3174,8 @@ class GALGAS_mode : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAnyMode (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBootMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGuardMode (LOCATION_ARGS) const ;
