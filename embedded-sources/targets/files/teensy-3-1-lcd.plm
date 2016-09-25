@@ -219,7 +219,7 @@ module lcd {
   
   //············································································
   
-  func write8bitCommand_inUserMode @noUnusedWarning (?inCommand $uint8) {
+  func user write8bitCommand_inUserMode @noUnusedWarning (?inCommand $uint8) {
     time.waitDuringMS (!delay:1) ;
     self.writeFirstNibbleOf8bitCommand (!inCommand >> 4) ;
     time.waitDuringMS (!delay:1) ;
@@ -232,7 +232,7 @@ module lcd {
   
   //············································································
   
-  func writeData_inUserMode @noUnusedWarning (?inData $uint8) {
+  func user writeData_inUserMode @noUnusedWarning (?inData $uint8) {
     time.waitDuringMS (!delay:1) ;
     self.writeFirstNibbleOf8bitData (!inData >> 4) ;
     time.waitDuringMS (!delay:1) ;
@@ -245,7 +245,7 @@ module lcd {
   
   //············································································
   
-  public func clearScreen @noUnusedWarning () {
+  public func user clearScreen @noUnusedWarning () {
     self.write8bitCommand_inUserMode (!0x01)
   }
   
@@ -256,7 +256,7 @@ module lcd {
   // Line 2 : 20 -> 39
   // Line 3 : 84 -> 103
   
-  public func goto @noUnusedWarning (?line:inLine $uint2 ?column:inColumn $uint8) {
+  public func user goto @noUnusedWarning (?line:inLine $uint2 ?column:inColumn $uint8) {
     if inColumn < 20 {
       if inLine == 0 {
         self.write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
@@ -272,7 +272,7 @@ module lcd {
   
   //············································································
   
-  public func printSpaces @noUnusedWarning (?inCount $uint32) {
+  public func user printSpaces @noUnusedWarning (?inCount $uint32) {
     var count = inCount
     loop while (count > 0) {
       self.writeData_inUserMode (!0x20)
@@ -282,7 +282,7 @@ module lcd {
   
   //············································································
   
-  public func printUnsigned @noUnusedWarning (?inValue $uint32) {
+  public func user printUnsigned @noUnusedWarning (?inValue $uint32) {
     var divisor $uint32 = 1_000_000_000
     var value = inValue
     var isPrinting = false
@@ -303,7 +303,7 @@ module lcd {
   
   //············································································
   
-  public func printSigned @noUnusedWarning (?inValue $int32) {
+  public func user printSigned @noUnusedWarning (?inValue $int32) {
     if inValue >= 0 {
       self.printUnsigned (!truncate inValue : $uint32)
     }else{
@@ -314,7 +314,7 @@ module lcd {
   
   //············································································
   
-  public func printString @noUnusedWarning (?inValue $staticString) {
+  public func user printString @noUnusedWarning (?inValue $staticString) {
     for c in inValue {
       self.writeData_inUserMode (!c)
     }
@@ -322,7 +322,7 @@ module lcd {
   
   //············································································
   
-  public func printHex1 @noUnusedWarning (?inValue $uint32) {
+  public func user printHex1 @noUnusedWarning (?inValue $uint32) {
     let v = truncate inValue & 0xF : $uint8
     if v < 10 {
       self.writeData_inUserMode (!v + 0x30)
@@ -333,28 +333,28 @@ module lcd {
   
   //············································································
   
-  public func printHex2 @noUnusedWarning (?inValue $uint32) {
+  public func user printHex2 @noUnusedWarning (?inValue $uint32) {
     self.printHex1 (!inValue >> 4)
     self.printHex1 (!inValue)
   }
   
   //············································································
   
-  public func printHex4 @noUnusedWarning (?inValue $uint32) {
+  public func user printHex4 @noUnusedWarning (?inValue $uint32) {
     self.printHex2 (!inValue >> 8)
     self.printHex2 (!inValue)
   }
   
   //············································································
   
-  public func printHex8 @noUnusedWarning (?inValue $uint32) {
+  public func user printHex8 @noUnusedWarning (?inValue $uint32) {
     self.printHex4 (!inValue >> 16)
     self.printHex4 (!inValue)
   }
   
   //············································································
   
-  public func printHex16 @noUnusedWarning (?inValue $uint64) {
+  public func user printHex16 @noUnusedWarning (?inValue $uint64) {
     self.printHex8 (!truncate inValue >> 32 : $uint32)
     self.printHex8 (!truncate inValue : $uint32)
   }
