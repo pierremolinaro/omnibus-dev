@@ -230,7 +230,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     rule.mCommand += [src]
   rule.mCommand += ["-o", stackComputationResultFile]
   make.addRule (rule)
-  objectList.append (object)
+#   objectList.append (object)
   #---------------------------------------------- Add stacks check rule
   checkStackResultFile = productDir + "/check-stacks-result.txt"
   rule = makefile.Rule ([checkStackResultFile], "Check stacks")
@@ -242,7 +242,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
   rule.mCommand += [stackComputationResultFile]
   rule.mCommand += [checkStackResultFile]
   make.addRule (rule)
-  objectList.append (object)
+#   objectList.append (object)
   #---------------------------------------------- Add goals
   make.addGoal ("run", [productHEX, checkStackResultFile], "Building all and run")
   make.addGoal ("all", [productHEX, checkStackResultFile], "Building all")

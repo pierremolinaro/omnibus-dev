@@ -19,6 +19,19 @@ digraph G {
   primitive -> "func service";
   "func section"   [shape=box];
   primitive -> "func section";
+  
+  "safe"     [shape=box];
+  "safe" -> "func safe" ;
+  user -> safe   [color=blue, label=svc];
+  section -> safe ;
+  "func section" -> safe ;
+  service -> safe ;
+  "func service" -> safe ;
+  primitive -> safe ;
+  "func primitive" -> safe ;
+  panic -> safe ;
+  "func panic" -> safe ;
+
   "func safe"    [shape=box];
   primitive -> "func safe" ;
   service -> "func service";

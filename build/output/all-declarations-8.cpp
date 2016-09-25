@@ -5037,7 +5037,7 @@ const char * gWrapperFileContent_3_targetTemplates = "#! /usr/bin/env python\n"
   "    rule.mCommand += [src]\n"
   "  rule.mCommand += [\"-o\", stackComputationResultFile]\n"
   "  make.addRule (rule)\n"
-  "  objectList.append (object)\n"
+  "#   objectList.append (object)\n"
   "  #---------------------------------------------- Add stacks check rule\n"
   "  checkStackResultFile = productDir + \"/check-stacks-result.txt\"\n"
   "  rule = makefile.Rule ([checkStackResultFile], \"Check stacks\")\n"
@@ -5049,7 +5049,7 @@ const char * gWrapperFileContent_3_targetTemplates = "#! /usr/bin/env python\n"
   "  rule.mCommand += [stackComputationResultFile]\n"
   "  rule.mCommand += [checkStackResultFile]\n"
   "  make.addRule (rule)\n"
-  "  objectList.append (object)\n"
+  "#   objectList.append (object)\n"
   "  #---------------------------------------------- Add goals\n"
   "  make.addGoal (\"run\", [productHEX, checkStackResultFile], \"Building all and run\")\n"
   "  make.addGoal (\"all\", [productHEX, checkStackResultFile], \"Building all\")\n"
@@ -5090,7 +5090,7 @@ const cRegularFileWrapper gWrapperFile_3_targetTemplates (
   "plm.py",
   "py",
   true, // Text file
-  13071, // Text length
+  13075, // Text length
   gWrapperFileContent_3_targetTemplates
 ) ;
 
