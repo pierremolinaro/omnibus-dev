@@ -50,6 +50,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/panic.galgas"
 
 #--- Routines
+  "galgas-sources/declaration-svc.galgas"
   "galgas-sources/declaration-boot.galgas"
   "galgas-sources/declaration-init.galgas"
   "galgas-sources/declaration-func.galgas"

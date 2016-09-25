@@ -7,6 +7,21 @@
 
 \chapter{Routines}
 
+Un \emph{routine} est une construction qui définit du code à exécuter.
+
+
+
+\section{Mode logique}
+
+À chaque routine est attachée statiquement un mode d'exécution.
+
+La plupart des processeurs définit plusieurs modes d'exécution, typiquement un mode \emph{système} ou \emph{privilégié} (où toutes les ressources sont accessibles), et un mode \emph{utilisateur}, où certaines instructions, espace mémoire, registres de contrôles sont inaccessibles.
+
+Cependant, un mode \emph{système} unique est trop sommaire pour reflèter toutes les natures de routines. C'est pourquoi PLM définit huit modes de fonctionnement, qui sont décrits ci-après.
+
+\plm=user=. Ce mode est le mode d'exécution des tâches. C'est le seul mode qui correspond au mode \emph{user} du processeur. Seuls les registres de contrôle déclarés avec l'attribut \plm=@user= sont accessibles. Les instructions qui peut engendrer une panique sont autorisées.
+
+
 Le langage définit plusieurs natures de routines :
 \begin{itemize}
   \item les \emph{procédures}, dont l'appel est une instruction (\refSubsectionPage{declarationProcedure}) ;

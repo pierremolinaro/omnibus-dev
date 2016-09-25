@@ -2,13 +2,13 @@ target "LPC-L2294"
 
 //------------------------------------------------*
 
-section ledOn () {
+svc section ledOn () {
   IO1CLR  = 1 << 23 // Led On
 }
 
 //------------------------------------------------*
 
-section ledOff () {
+svc section ledOff () {
   IO1SET  = 1 << 23 // Led Off
 }
 
