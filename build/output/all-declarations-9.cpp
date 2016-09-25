@@ -2002,7 +2002,7 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1\"\
   "\n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline +%= 1000\n"
-  "    toggle (!port:LED_L1)\n"
+  "//    toggle (!port:LED_L1)\n"
   "    self.array [self.index] = 0\n"
   "    self.index +%= 1\n"
   "    if self.index == SIZE {\n"
@@ -2041,7 +2041,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  1952, // Text length
+  1954, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 
