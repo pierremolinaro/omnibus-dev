@@ -106,10 +106,10 @@ method @panicClauseListAST-element panicSemanticAnalysis
   let routineNameForInvocationGraph = panicNameForInvocationGraph (!if mIsSetup then "setup" else "loop" end !mPriority)
 #--- Variable map
   initialVariableMap (
-#    !routineNameForInvocation:routineNameForInvocationGraph.string
     !context:inContext
-    !userMode:false
-    !registerAccess:.readWriteAccess
+    !mode:.panicMode
+#    !userMode:false
+#    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap

@@ -118,3 +118,14 @@ func checkMode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @mode controlRegisterAccess ?let @bool inIsAccessibleInUserMode -> @bool {
+  switch self
+  case userMode, anyMode :
+    result = inIsAccessibleInUserMode
+  case sectionMode, serviceMode, primitiveMode, panicMode, bootMode, initMode, safeMode :
+    result = true
+  case guardMode :
+    result = false
+  end
+}

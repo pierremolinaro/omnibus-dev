@@ -369,7 +369,7 @@ method @functionDeclarationListAST procedureSemanticAnalysis
       !warnIfUnused:warnIfUnused
       !globalFunction:globalProcedure
       !weakFunction:weakProcedure
-      !registerAccess:.readWriteAccess
+#      !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct

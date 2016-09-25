@@ -327,7 +327,7 @@ method @taskList-element semanticAnalysis
       !warnIfUnused:true
       !globalFunction:false
       !weakFunction:false
-      !registerAccess:.noAccess
+#      !registerAccess:.noAccess
       !context:inContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
@@ -378,7 +378,7 @@ method @taskList-element semanticAnalysis
     !warnIfUnused:true
     !globalFunction:false
     !weakFunction:false
-    !registerAccess:.noAccess
+#    !registerAccess:.noAccess
     !context:inContext
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct

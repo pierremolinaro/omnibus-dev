@@ -59,11 +59,11 @@ proc enterFormalArguments
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @accessKind {
-  case noAccess
-  case readAccess # privilegedModeAccess
-  case readWriteAccess # userModeAccess
-}
+#enum @accessKind {
+#  case noAccess
+#  case readAccess # privilegedModeAccess
+#  case readWriteAccess # userModeAccess
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -81,17 +81,11 @@ proc routineSemanticAnalysis
   ?warnIfUnused:let @bool inWarnIfUnused
   ?globalFunction:let @bool inGlobalFunction
   ?weakFunction:let @bool inWeakFunction
-  ?registerAccess:let @accessKind inRegisterAccessKind
+#  ?registerAccess:let @accessKind inRegisterAccessKind
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Check modes
-#  @stringset procedureModeSet = {}
-#  for mode in inRoutineModeList do
-#    [inContext.mModeMap searchKey !mode.mValue]
-#    procedureModeSet += !mode.mValue.string
-#  end
 #--- Mangled routine name
   var routineMangledName = if inSelfType == .null then
     inRoutineName
@@ -105,10 +99,10 @@ proc routineSemanticAnalysis
   routineMangledName.string += ")"
 #--- Variable map
   initialVariableMap (
-#    !routineNameForInvocation:routineMangledName.string
     !context:inContext
-    !userMode:inRoutineMode == .userMode
-    !registerAccess:inRegisterAccessKind
+    !mode:inRoutineMode
+#    !userMode:inRoutineMode == .userMode
+#    !registerAccess:inRegisterAccessKind
     !globalsAreConstant:false
     !returnTypeName:inReturnTypeName
     ?@variableMap variableMap
