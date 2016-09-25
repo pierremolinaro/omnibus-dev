@@ -59,14 +59,6 @@ proc enterFormalArguments
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#enum @accessKind {
-#  case noAccess
-#  case readAccess # privilegedModeAccess
-#  case readWriteAccess # userModeAccess
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc routineSemanticAnalysis
   ?receiverType:let @unifiedTypeMap-proxy inSelfType
   ?let @routineKind inRoutineKind

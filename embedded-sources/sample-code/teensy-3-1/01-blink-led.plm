@@ -12,7 +12,6 @@ func safe activityLedOff @global () {
   digitalWrite (!port:.D13 !false)
 }
 
-
 let LED_L0 = $digitalPort.D3
 
 //——————————————————————————————————————————————————————————————————————————————
