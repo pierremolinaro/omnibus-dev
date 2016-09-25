@@ -337,7 +337,7 @@ public safe digitalMode @noUnusedWarning (?port:port $digitalPort
 
 //··············································································
 
-public safe digitalWrite @noUnusedWarning (?port:port $digitalPort
+public func digitalWrite @noUnusedWarning (?port:port $digitalPort
                                            ?value $bool) {
   switch port {
   case D0 : // PTB16
@@ -489,7 +489,7 @@ public safe digitalWrite @noUnusedWarning (?port:port $digitalPort
 
 //··············································································
 
-public safe toggle @noUnusedWarning (?port:port $digitalPort) {
+public func toggle @noUnusedWarning (?port:port $digitalPort) {
   switch port {
   case D0 : // PTB16
     GPIOB_PTOR = 1 << 16 ;
@@ -544,7 +544,7 @@ public safe toggle @noUnusedWarning (?port:port $digitalPort) {
 
 //··············································································
 
-public safe digitalRead @noUnusedWarning (?port:port $digitalPort) -> $bool {
+public func digitalRead @noUnusedWarning (?port:port $digitalPort) -> $bool {
   switch port {
   case D0 : // PTB16
     result = (GPIOB_PDIR & (1 << 16)) != 0
