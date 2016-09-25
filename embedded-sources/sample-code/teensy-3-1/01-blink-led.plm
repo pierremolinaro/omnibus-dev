@@ -17,8 +17,8 @@ let LED_L0 = $digitalPort.D3
 //——————————————————————————————————————————————————————————————————————————————
 
 init 1000 {
-  digitalMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
-  digitalMode (!port:LED_L0 !mode:.OUTPUT)
+  pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
+  pinMode (!port:LED_L0 !mode:.OUTPUT)
 }
 
 //——————————————————————————————————————————————————————————————————————————————

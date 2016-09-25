@@ -15,7 +15,7 @@ func safe activityLedOff @global () {
 //-----------------------------------------------------------------------------*
 
 init 100 {
-  digitalMode (!port:.D13 !mode:.OUTPUT)
+  pinMode (!port:.D13 !mode:.OUTPUT)
 }
 
 let LED_L1 = $digitalPort.D4
@@ -28,8 +28,8 @@ var sémaphore = $semaphore (!value:0)
 //——————————————————————————————————————————————————————————————————————————————
 
 init 1000 {
-  digitalMode (!port:LED_L1 !mode:.OUTPUT)
-  digitalMode (!port:LED_L2 !mode:.OUTPUT)
+  pinMode (!port:LED_L1 !mode:.OUTPUT)
+  pinMode (!port:LED_L2 !mode:.OUTPUT)
 }
 
 //------------------------------------------------*

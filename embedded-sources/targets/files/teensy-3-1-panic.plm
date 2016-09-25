@@ -4,11 +4,11 @@ check target "teensy-3-1"
 //——————————————————————————————————————————————————————————————————————————————
 
 panic setup 0 {
-  digitalMode (!port:.D3 !mode:.OUTPUT)
-  digitalMode (!port:.D4 !mode:.OUTPUT)
-  digitalMode (!port:.D5 !mode:.OUTPUT)
-  digitalMode (!port:.D6 !mode:.OUTPUT)
-  digitalMode (!port:.D7 !mode:.OUTPUT)
+  pinMode (!port:.D3 !mode:.OUTPUT)
+  pinMode (!port:.D4 !mode:.OUTPUT)
+  pinMode (!port:.D5 !mode:.OUTPUT)
+  pinMode (!port:.D6 !mode:.OUTPUT)
+  pinMode (!port:.D7 !mode:.OUTPUT)
   lcd.clearScreenInPanicMode ()
   lcd.gotoInPanicMode (!line:0 !column:0)
   lcd.printStringInPanicMode (!FILE)

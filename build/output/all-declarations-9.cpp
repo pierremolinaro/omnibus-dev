@@ -799,8 +799,8 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT) // Led Teensy\n"
-  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy\n"
+  "  pinMode (!port:LED_L0 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -825,7 +825,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "01-blink-led.plm",
   "plm",
   true, // Text file
-  1181, // Text length
+  1173, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -856,12 +856,12 @@ const char * gWrapperFileContent_3_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L2 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L3 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L4 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L3 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L4 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -942,7 +942,7 @@ const cRegularFileWrapper gWrapperFile_3_embeddedSampleCode (
   "02-blink-leds.plm",
   "plm",
   true, // Text file
-  3057, // Text length
+  3033, // Text length
   gWrapperFileContent_3_embeddedSampleCode
 ) ;
 
@@ -981,17 +981,17 @@ const char * gWrapperFileContent_4_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L2 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L3 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L4 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:PUSH_P0 !mode:.INPUT_PULLUP)\n"
-  "  digitalMode (!port:PUSH_P1 !mode:.INPUT_PULLUP)\n"
-  "  digitalMode (!port:PUSH_P2 !mode:.INPUT_PULLUP)\n"
-  "  digitalMode (!port:PUSH_P3 !mode:.INPUT_PULLUP)\n"
-  "  digitalMode (!port:PUSH_P4 !mode:.INPUT_PULLUP)\n"
+  "  pinMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L3 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L4 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:PUSH_P0 !mode:.INPUT_PULLUP)\n"
+  "  pinMode (!port:PUSH_P1 !mode:.INPUT_PULLUP)\n"
+  "  pinMode (!port:PUSH_P2 !mode:.INPUT_PULLUP)\n"
+  "  pinMode (!port:PUSH_P3 !mode:.INPUT_PULLUP)\n"
+  "  pinMode (!port:PUSH_P4 !mode:.INPUT_PULLUP)\n"
   "}\n"
   "\n"
   "///\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -1021,7 +1021,7 @@ const cRegularFileWrapper gWrapperFile_4_embeddedSampleCode (
   "03-push-buttons.plm",
   "plm",
   true, // Text file
-  2288, // Text length
+  2244, // Text length
   gWrapperFileContent_4_embeddedSampleCode
 ) ;
 
@@ -1044,7 +1044,7 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
@@ -1118,7 +1118,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  2347, // Text length
+  2343, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1141,7 +1141,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 100 {\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "let LED_L1 = $digitalPort.D4\n"
@@ -1154,8 +1154,8 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L2 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -1201,7 +1201,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "05-semaphore.plm",
   "plm",
   true, // Text file
-  1684, // Text length
+  1672, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
@@ -1224,15 +1224,15 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 100 {\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "let LED_L0 = $digitalPort.D3\n"
   "let LED_L1 = $digitalPort.D4\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1309,7 +1309,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "06-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  2247, // Text length
+  2235, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1332,7 +1332,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 100 {\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "let LED_L0 = $digitalPort.D3\n"
@@ -1344,11 +1344,11 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L2 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L3 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L4 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L3 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L4 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1452,7 +1452,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "07-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  3143, // Text length
+  3119, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1475,7 +1475,7 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 100 {\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1489,11 +1489,11 @@ const char * gWrapperFileContent_9_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L2 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L3 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L4 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L3 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L4 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1568,7 +1568,7 @@ const cRegularFileWrapper gWrapperFile_9_embeddedSampleCode (
   "08-guarded-semaphore2.plm",
   "plm",
   true, // Text file
-  2681, // Text length
+  2657, // Text length
   gWrapperFileContent_9_embeddedSampleCode
 ) ;
 
@@ -1591,7 +1591,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1\"\
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 100 {\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1605,11 +1605,11 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1\"\
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L2 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L3 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L4 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L3 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L4 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1703,7 +1703,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "09-rendez-vous.plm",
   "plm",
   true, // Text file
-  3550, // Text length
+  3526, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
@@ -1726,7 +1726,7 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1\"\
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 100 {\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1739,10 +1739,10 @@ const char * gWrapperFileContent_11_embeddedSampleCode = "target \"teensy-3-1\"\
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:LED_L0 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L2 !mode:.OUTPUT)\n"
-  "  digitalMode (!port:LED_L4 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L0 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L4 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1840,7 +1840,7 @@ const cRegularFileWrapper gWrapperFile_11_embeddedSampleCode (
   "10-rendez-vous-data.plm",
   "plm",
   true, // Text file
-  3336, // Text length
+  3316, // Text length
   gWrapperFileContent_11_embeddedSampleCode
 ) ;
 
@@ -1863,7 +1863,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1\"\
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 100 {\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1873,7 +1873,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1\"\
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
@@ -1940,7 +1940,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  2110, // Text length
+  2102, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 
@@ -1963,7 +1963,7 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1\"\
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
   "init 100 {\n"
-  "  digitalMode (!port:.D13 !mode:.OUTPUT)\n"
+  "  pinMode (!port:.D13 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -1973,7 +1973,7 @@ const char * gWrapperFileContent_13_embeddedSampleCode = "target \"teensy-3-1\"\
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 1000 {\n"
-  "  digitalMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -2039,7 +2039,7 @@ const cRegularFileWrapper gWrapperFile_13_embeddedSampleCode (
   "12-array-example.plm",
   "plm",
   true, // Text file
-  1954, // Text length
+  1946, // Text length
   gWrapperFileContent_13_embeddedSampleCode
 ) ;
 

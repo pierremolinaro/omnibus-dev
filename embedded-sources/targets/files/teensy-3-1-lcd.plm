@@ -31,12 +31,12 @@ module lcd {
   //············································································
 
   func init configurePorts @noUnusedWarning () {
-    digitalMode (!port:DATA_4 !mode:.OUTPUT)
-    digitalMode (!port:DATA_5 !mode:.OUTPUT)
-    digitalMode (!port:DATA_6 !mode:.OUTPUT)
-    digitalMode (!port:DATA_7 !mode:.OUTPUT)
-    digitalMode (!port:RS     !mode:.OUTPUT)
-    digitalMode (!port:ENABLE !mode:.OUTPUT)
+    pinMode (!port:DATA_4 !mode:.OUTPUT)
+    pinMode (!port:DATA_5 !mode:.OUTPUT)
+    pinMode (!port:DATA_6 !mode:.OUTPUT)
+    pinMode (!port:DATA_7 !mode:.OUTPUT)
+    pinMode (!port:RS     !mode:.OUTPUT)
+    pinMode (!port:ENABLE !mode:.OUTPUT)
   }
   
   //············································································
@@ -74,33 +74,18 @@ module lcd {
   
   func setD5 @noUnusedWarning (?inValue $bool) { // PTC0
     digitalWrite (!port:DATA_5 !inValue)
-//    if inValue {
-//      GPIOC_PSOR = 1 << 0 ;
-//    }else{
-//      GPIOC_PCOR = 1 << 0 ;
-//    }
   }
   
   //············································································
   
   func setD6 @noUnusedWarning (?inValue $bool) { // PTD1
     digitalWrite (!port:DATA_6 !inValue)
-//    if inValue {
-//      GPIOD_PSOR = 1 << 1 ;
-//    }else{
-//      GPIOD_PCOR = 1 << 1 ;
-//    }
   }
   
   //············································································
   
   func setD7 @noUnusedWarning (?inValue $bool) { // PTB2
     digitalWrite (!port:DATA_7 !inValue)
-//    if inValue {
-//      GPIOB_PSOR = 1 << 2 ;
-//    }else{
-//      GPIOB_PCOR = 1 << 2 ;
-//    }
   }
   
   //············································································
@@ -142,9 +127,6 @@ module lcd {
   func init write4BitCommand @noUnusedWarning (?inValue $uint8) {
     time.busyWaitingDuringMS (!1) ;
     self.writeFirstNibbleOf8bitCommand (!inValue)
-//    self.driveLowRS () ;
-//    self.programLcd4BitDataBusOutput (!inValue)
-//    self.driveHighE ()
     time.busyWaitingDuringMS (!1) ;
     self.driveLowE () ;
   }
@@ -154,15 +136,10 @@ module lcd {
   func init write8bitCommand @noUnusedWarning (?inCommand $uint8) {
     time.busyWaitingDuringMS (!1) ;
     self.writeFirstNibbleOf8bitCommand (!inCommand >> 4)
-//    self.driveLowRS () ;
-//    self.programLcd4BitDataBusOutput (!inCommand >> 4) ;
-//    self.driveHighE () ;
     time.busyWaitingDuringMS (!1) ;
     self.driveLowE () ;
     time.busyWaitingDuringMS (!1) ;
     self.writeSecondNibble (!inCommand) ;
-//    self.programLcd4BitDataBusOutput (!inCommand) ;
-//    self.driveHighE () ;
     time.busyWaitingDuringMS (!1) ;
     self.driveLowE () ;
   }
