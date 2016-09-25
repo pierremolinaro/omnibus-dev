@@ -159,7 +159,7 @@ method @serviceDeclarationListAST serviceSemanticAnalysis
       !warnIfUnused:warnIfUnused
       !globalFunction:true
       !weakFunction:false
-      !registerAccess:.readWriteAccess
+#      !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct

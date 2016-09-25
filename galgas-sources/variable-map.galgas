@@ -5,10 +5,10 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc initialVariableMap
-#  ?routineNameForInvocation:let @string inRoutineNameForInvocation
   ?context:let @semanticContext inContext
-  ?userMode:let @bool inAcceptUserMode
-  ?registerAccess:let @accessKind inRegisterAccessKind
+  ?mode:let @mode inRequiredMode
+#  ?userMode:let @bool inAcceptUserMode
+#  ?registerAccess:let @accessKind inRegisterAccessKind
   ?globalsAreConstant:@bool inGlobalsAreConstant
   ?returnTypeName:let @lstring inReturnTypeName
   !@variableMap outVariableMap
@@ -28,113 +28,174 @@ proc initialVariableMap
     ]
   end
 #------------------------------------------------------- Add registers
-  switch inRegisterAccessKind
-  case noAccess :
-    for () in inContext.mControlRegisterMap do
+  for register in inContext.mControlRegisterMap do
+    if not [inRequiredMode controlRegisterAccess !register.mIsAccessibleInUserMode] then
       let objectReference = @objectIR.registerReference {
-        !type:mType
-        !plmName:lkey
+        !type:register.mType
+        !plmName:register.lkey
         !readable:false
         !writable:false
-        !address:mAddress 
-        !sliceMap:mRegisterFieldAccessMap
-        !arraySize: mArraySize # 0 if not an array
-        !elementSize: mElementArraySize # 0 if not an array
+        !address:register.mAddress 
+        !sliceMap:register.mRegisterFieldAccessMap
+        !arraySize: register.mArraySize # 0 if not an array
+        !elementSize: register.mElementArraySize # 0 if not an array
       }
       [!?outVariableMap insertInaccessibleControlRegister
-        !lkey:lkey
-        !type:mType
+        !lkey:register.lkey
+        !type:register.mType
         !readAccessAllowed:false
         !objectIR:objectReference
         !copyable:false
         !canBeUsedAsInputParameter:false # Cannot be used as input parameter
       ]
-    end
-  case readAccess :
-    for () in inContext.mControlRegisterMap do
-      if inAcceptUserMode && not mIsAccessibleInUserMode then
-        let objectReference = @objectIR.registerReference {
-          !type:mType
-          !plmName:lkey
-          !readable:false
-          !writable:false
-          !address:mAddress 
-          !sliceMap:mRegisterFieldAccessMap
-          !arraySize: mArraySize # 0 if not an array
-          !elementSize: mElementArraySize # 0 if not an array
-        }
-        [!?outVariableMap insertInaccessibleControlRegister
-          !lkey:lkey
-          !type:mType
-          !readAccessAllowed:false
-          !objectIR:objectReference
-          !copyable:true
-          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-        ]
-      elsif mIsReadOnly || inGlobalsAreConstant then
-        let objectReference = @objectIR.registerReference {
-          !type:mType
-          !plmName:lkey
-          !readable:true
-          !writable:false
-          !address:mAddress 
-          !sliceMap:mRegisterFieldAccessMap
-          !arraySize: mArraySize # 0 if not an array
-          !elementSize: mElementArraySize # 0 if not an array
-        }
-        [!?outVariableMap insertUsedConstant
-          !lkey:lkey
-          !type:mType
-          !readAccessAllowed:true
-          !objectIR:objectReference
-          !copyable:true
-          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-        ]
-      end
-    end
-  case readWriteAccess :
-    for () in inContext.mControlRegisterMap do
-      if inAcceptUserMode && not mIsAccessibleInUserMode then
-        let objectReference = @objectIR.registerReference {
-          !type:mType
-          !plmName:lkey
-          !readable:false
-          !writable:false
-          !address:mAddress 
-          !sliceMap:mRegisterFieldAccessMap
-          !arraySize: mArraySize # 0 if not an array
-          !elementSize: mElementArraySize # 0 if not an array
-        }
-        [!?outVariableMap insertInaccessibleControlRegister
-          !lkey:lkey
-          !type:mType
-          !readAccessAllowed:false
-          !objectIR:objectReference
-          !copyable:true
-          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-        ]
-      else
-        let objectReference = @objectIR.registerReference {
-          !type:mType
-          !plmName:lkey
-          !readable:true
-          !writable:true
-          !address:mAddress 
-          !sliceMap:mRegisterFieldAccessMap
-          !arraySize: mArraySize # 0 if not an array
-          !elementSize: mElementArraySize # 0 if not an array
-        }
-        [!?outVariableMap insertDefinedVariable
-          !lkey:lkey
-          !type:mType
-          !readAccessAllowed:true
-          !objectIR:objectReference
-          !copyable:true
-          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
-        ]
-      end
+    elsif register.mIsReadOnly || inGlobalsAreConstant then
+      let objectReference = @objectIR.registerReference {
+        !type:register.mType
+        !plmName:register.lkey
+        !readable:true
+        !writable:false
+        !address:register.mAddress 
+        !sliceMap:register.mRegisterFieldAccessMap
+        !arraySize: register.mArraySize # 0 if not an array
+        !elementSize: register.mElementArraySize # 0 if not an array
+      }
+      [!?outVariableMap insertUsedConstant
+        !lkey:register.lkey
+        !type:register.mType
+        !readAccessAllowed:true
+        !objectIR:objectReference
+        !copyable:true
+        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+      ]
+    else
+      let objectReference = @objectIR.registerReference {
+        !type:register.mType
+        !plmName:register.lkey
+        !readable:true
+        !writable:true
+        !address:register.mAddress 
+        !sliceMap:register.mRegisterFieldAccessMap
+        !arraySize: register.mArraySize # 0 if not an array
+        !elementSize: register.mElementArraySize # 0 if not an array
+      }
+      [!?outVariableMap insertDefinedVariable
+        !lkey:register.lkey
+        !type:register.mType
+        !readAccessAllowed:true
+        !objectIR:objectReference
+        !copyable:true
+        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+      ]
     end
   end
+
+#  switch inRegisterAccessKind
+#  case noAccess :
+#    for () in inContext.mControlRegisterMap do
+#      let objectReference = @objectIR.registerReference {
+#        !type:mType
+#        !plmName:lkey
+#        !readable:false
+#        !writable:false
+#        !address:mAddress 
+#        !sliceMap:mRegisterFieldAccessMap
+#        !arraySize: mArraySize # 0 if not an array
+#        !elementSize: mElementArraySize # 0 if not an array
+#      }
+#      [!?outVariableMap insertInaccessibleControlRegister
+#        !lkey:lkey
+#        !type:mType
+#        !readAccessAllowed:false
+#        !objectIR:objectReference
+#        !copyable:false
+#        !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+#      ]
+#    end
+#  case readAccess :
+#    for () in inContext.mControlRegisterMap do
+#      if inAcceptUserMode && not mIsAccessibleInUserMode then
+#        let objectReference = @objectIR.registerReference {
+#          !type:mType
+#          !plmName:lkey
+#          !readable:false
+#          !writable:false
+#          !address:mAddress 
+#          !sliceMap:mRegisterFieldAccessMap
+#          !arraySize: mArraySize # 0 if not an array
+#          !elementSize: mElementArraySize # 0 if not an array
+#        }
+#        [!?outVariableMap insertInaccessibleControlRegister
+#          !lkey:lkey
+#          !type:mType
+#          !readAccessAllowed:false
+#          !objectIR:objectReference
+#          !copyable:true
+#          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+#        ]
+#      elsif mIsReadOnly || inGlobalsAreConstant then
+#        let objectReference = @objectIR.registerReference {
+#          !type:mType
+#          !plmName:lkey
+#          !readable:true
+#          !writable:false
+#          !address:mAddress 
+#          !sliceMap:mRegisterFieldAccessMap
+#          !arraySize: mArraySize # 0 if not an array
+#          !elementSize: mElementArraySize # 0 if not an array
+#        }
+#        [!?outVariableMap insertUsedConstant
+#          !lkey:lkey
+#          !type:mType
+#          !readAccessAllowed:true
+#          !objectIR:objectReference
+#          !copyable:true
+#          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+#        ]
+#      end
+#    end
+#  case readWriteAccess :
+#    for () in inContext.mControlRegisterMap do
+#      if inAcceptUserMode && not mIsAccessibleInUserMode then
+#        let objectReference = @objectIR.registerReference {
+#          !type:mType
+#          !plmName:lkey
+#          !readable:false
+#          !writable:false
+#          !address:mAddress 
+#          !sliceMap:mRegisterFieldAccessMap
+#          !arraySize: mArraySize # 0 if not an array
+#          !elementSize: mElementArraySize # 0 if not an array
+#        }
+#        [!?outVariableMap insertInaccessibleControlRegister
+#          !lkey:lkey
+#          !type:mType
+#          !readAccessAllowed:false
+#          !objectIR:objectReference
+#          !copyable:true
+#          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+#        ]
+#      else
+#        let objectReference = @objectIR.registerReference {
+#          !type:mType
+#          !plmName:lkey
+#          !readable:true
+#          !writable:true
+#          !address:mAddress 
+#          !sliceMap:mRegisterFieldAccessMap
+#          !arraySize: mArraySize # 0 if not an array
+#          !elementSize: mElementArraySize # 0 if not an array
+#        }
+#        [!?outVariableMap insertDefinedVariable
+#          !lkey:lkey
+#          !type:mType
+#          !readAccessAllowed:true
+#          !objectIR:objectReference
+#          !copyable:true
+#          !canBeUsedAsInputParameter:false # Cannot be used as input parameter
+#        ]
+#      end
+#    end
+#  end
 #------------------------------------------------------- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
     [!?outVariableMap insertUsedConstant
@@ -150,17 +211,6 @@ proc initialVariableMap
   for variable in inContext.mGlobalVariableMap do
     var writeAccess = variable.allowedAccessToAll
     var allowedAccess = writeAccess
-#    if not writeAccess then
-#      allowedAccess = [variable.allowedRoutineMap hasKey !inRoutineNameForInvocation]
-#      if allowedAccess then
-#        writeAccess = [variable.allowedRoutineMap mHasWriteAccessForKey !inRoutineNameForInvocation]
-#      else
-#        allowedAccess = [variable.allowedISRMap hasKey !inRoutineNameForInvocation]
-#        if allowedAccess then
-#          writeAccess = [variable.allowedISRMap mHasWriteAccessForKey !inRoutineNameForInvocation]
-#        end
-#      end
-#    end
     if inGlobalsAreConstant || variable.isConstant || not writeAccess then
       [!?outVariableMap insertUsedConstant
         !lkey:variable.lkey

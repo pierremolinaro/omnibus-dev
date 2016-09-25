@@ -11104,6 +11104,17 @@ class GALGAS_string extensionGetter_string (const class GALGAS_mode & inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                            Extension getter '@mode controlRegisterAccess' (as function)                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool extensionGetter_controlRegisterAccess (const class GALGAS_mode & inObject,
+                                                         const class GALGAS_bool & constinArgument0,
+                                                         class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Extension method '@panicClauseListAST noteTypesInPrecedenceGraph'                          *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

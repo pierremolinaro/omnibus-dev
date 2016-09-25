@@ -476,7 +476,7 @@ method @structureDeclaration functionSemanticAnalysis
       !warnIfUnused:warnIfUnused
       !globalFunction:false
       !weakFunction:false
-      !registerAccess:.readWriteAccess
+#      !registerAccess:.readWriteAccess
       !context:inContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct

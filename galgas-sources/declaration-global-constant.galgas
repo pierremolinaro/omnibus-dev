@@ -95,10 +95,10 @@ override method @globalConstantDeclaration enterInContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
   initialVariableMap (
-#    !routineNameForInvocation:"compiler" # inRoutineNameForInvocation
     !context:ioContext
-    !userMode:false
-    !registerAccess:.readWriteAccess
+    !mode:.bootMode
+#    !userMode:false
+#    !registerAccess:.readWriteAccess
     !globalsAreConstant:true # Any value, there is no defined global variable at this stage
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap

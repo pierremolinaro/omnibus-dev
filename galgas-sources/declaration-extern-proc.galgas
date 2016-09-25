@@ -143,17 +143,12 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
      routineMangledName.string += ":"
   end
   routineMangledName.string += ")"
-#--- Check modes
-#  @stringset procedureModeSet = {}
-#  for mode in mProcedureModeList do
-#    [inContext.mModeMap searchKey !mode.mValue]
-#    procedureModeSet += !mode.mValue.string
-#  end
 #--- Variable map
   initialVariableMap (
     !context:inContext
-    !userMode:mMode == .userMode
-    !registerAccess:.readWriteAccess
+    !mode:mMode
+#    !userMode:mMode == .userMode
+#    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap

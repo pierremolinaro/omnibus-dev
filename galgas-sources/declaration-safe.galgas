@@ -172,7 +172,7 @@ method @safeDeclarationListAST sectionSemanticAnalysis
       !warnIfUnused:not noUnusedWarning
       !globalFunction:true
       !weakFunction:false
-      !registerAccess:.readWriteAccess
+#      !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct

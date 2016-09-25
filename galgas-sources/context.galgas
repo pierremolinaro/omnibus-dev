@@ -173,7 +173,6 @@ struct @semanticContext {
   @globalVariableMap mGlobalVariableMap
   @moduleMap mModuleMap
   @constructorMap mConstructorMap
-#  @modeMap mModeMap
 #--- Interrupts
   @stringset mDefinedInterruptSet
   @availableInterruptMap mAvailableInterruptMap
