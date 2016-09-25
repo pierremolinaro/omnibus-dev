@@ -5,22 +5,22 @@ let f_mem $uint32 = 24_000_000
 
 // chapter 11: Port control and interrupts (PORT) Pin Control Register n
 register
-  PORTA_PCR [32] at 0x4004_9000 : 4 $uint32 {
+  PORTA_PCR @user [32] at 0x4004_9000 : 4 $uint32 {
   7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
 }
 
 register
-  PORTB_PCR [32] at 0x4004_A000 : 4 $uint32 {
+  PORTB_PCR @user [32] at 0x4004_A000 : 4 $uint32 {
   7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
 }
 
 register
-  PORTC_PCR [32] at 0x4004_B000 : 4 $uint32 {
+  PORTC_PCR @user [32] at 0x4004_B000 : 4 $uint32 {
   7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
 }
 
 register
-  PORTD_PCR [32] at 0x4004_C000 : 4 $uint32 {
+  PORTD_PCR @user [32] at 0x4004_C000 : 4 $uint32 {
   7, ISF, 4, IRQC[4], LK, 4, MUX[3], 1, DSE, ODE, PFE, 1, SRE, PE, PS
 }
 
@@ -1758,33 +1758,33 @@ register RTC_RAR at 0x4003D804 $uint32 // RTC Read Access Register
 //register I2S_MDR_DIVIDE(n)  ( (n & 0xfff))       // MCLK Divide
 
 // Chapter 47: General-Purpose Input/Output (GPIO)
-register GPIOA_PDOR   at 0x400FF000 $uint32 // Port Data Output Register
+register GPIOA_PDOR at 0x400FF000 $uint32 // Port Data Output Register
 register GPIOA_PSOR @user at 0x400FF004 $uint32 // Port Set Output Register
 register GPIOA_PCOR @user at 0x400FF008 $uint32 // Port Clear Output Register
 register GPIOA_PTOR @user at 0x400FF00C $uint32 // Port Toggle Output Register
 register GPIOA_PDIR @user at 0x400FF010 $uint32 // Port Data Input Register
-register GPIOA_PDDR   at 0x400FF014 $uint32 // Port Data Direction Register
+register GPIOA_PDDR @user at 0x400FF014 $uint32 // Port Data Direction Register
 
-register GPIOB_PDOR   at 0x400FF040 $uint32 // Port Data Output Register
+register GPIOB_PDOR at 0x400FF040 $uint32 // Port Data Output Register
 register GPIOB_PSOR @user at 0x400FF044 $uint32 // Port Set Output Register
 register GPIOB_PCOR @user at 0x400FF048 $uint32 // Port Clear Output Register
 register GPIOB_PTOR @user at 0x400FF04C $uint32 // Port Toggle Output Register
 register GPIOB_PDIR @user at 0x400FF050 $uint32 // Port Data Input Register
-register GPIOB_PDDR   at 0x400FF054 $uint32 // Port Data Direction Register
+register GPIOB_PDDR @user at 0x400FF054 $uint32 // Port Data Direction Register
 
-register GPIOC_PDOR   at 0x400FF080 $uint32 // Port Data Output Register
+register GPIOC_PDOR at 0x400FF080 $uint32 // Port Data Output Register
 register GPIOC_PSOR @user at 0x400FF084 $uint32 // Port Set Output Register
 register GPIOC_PCOR @user at 0x400FF088 $uint32 // Port Clear Output Register
 register GPIOC_PTOR @user at 0x400FF08C $uint32 // Port Toggle Output Register
 register GPIOC_PDIR @user at 0x400FF090 $uint32 // Port Data Input Register
-register GPIOC_PDDR   at 0x400FF094 $uint32 // Port Data Direction Register
+register GPIOC_PDDR @user at 0x400FF094 $uint32 // Port Data Direction Register
 
-register GPIOD_PDOR   at 0x400FF0C0 $uint32 // Port Data Output Register
+register GPIOD_PDOR at 0x400FF0C0 $uint32 // Port Data Output Register
 register GPIOD_PSOR @user at 0x400FF0C4 $uint32 // Port Set Output Register
 register GPIOD_PCOR @user at 0x400FF0C8 $uint32 // Port Clear Output Register
 register GPIOD_PTOR @user at 0x400FF0CC $uint32 // Port Toggle Output Register
 register GPIOD_PDIR @user at 0x400FF0D0 $uint32 // Port Data Input Register
-register GPIOD_PDDR   at 0x400FF0D4 $uint32 // Port Data Direction Register
+register GPIOD_PDDR @user at 0x400FF0D4 $uint32 // Port Data Direction Register
 
 //register GPIOE_PDOR   at 0x400FF100 $uint32 // Port Data Output Register
 //register GPIOE_PSOR @user at 0x400FF104 $uint32 // Port Set Output Register
@@ -1963,7 +1963,48 @@ register SYST_CVR   at 0xE000_E018 $uint32 // SysTick Current Value Register
 
 register SYST_CALIB  @ro at 0xE000_E01C $uint32 // SysTick Calibration Value
 
-register AICS0_PARCG at 0x_4000_0048 $uint32
+register AIPS0_MPRA at 0x_4000_0000 $uint32
+
+//--- AICS0_PACR (§4.5.1 and §19.2, §19.2.2)
+// SPx: Determines whether the peripheral requires supervisor privilege level
+// for accesses. When this field is set, the master privilege level must indicate
+// the supervisor access attribute, and the MPR x [MPL n ] control field for the
+// master must be set. If not, access terminates with an error response and no
+// peripheral access initiates. 
+// 0  This peripheral does not require supervisor privilege level for accesses.  // 1  This peripheral requires supervisor privilege level for accesses.  // WPx: Determines whether the peripheral allows write accessses. When this field
+// is set and a write access is attempted, access terminates with an error
+// response and no peripheral access initiates
+// 0  This peripheral allows write accesses.  // 1  This peripheral is write protected.  // TPx : Determines whether the peripheral allows accesses from an untrusted master.
+// When this bit is set and an access is attempted by an untrusted master, the 
+// access terminates with an error response and no peripheral access initiates.
+// 0  Accesses from an untrusted master are allowed.  // 1  Accesses from an untrusted master are not allowed.  
+register
+AIPS0_PACRA at 0x_4000_0020
+AIPS0_PACRB at 0x_4000_0024
+AIPS0_PACRC at 0x_4000_0028
+AIPS0_PACRD at 0x_4000_002C
+AIPS0_PACRE at 0x_4000_0040
+AIPS0_PACRF at 0x_4000_0044
+AIPS0_PACRG at 0x_4000_0048
+AIPS0_PACRH at 0x_4000_004C
+AIPS0_PACRI at 0x_4000_0050
+AIPS0_PACRJ at 0x_4000_0054
+AIPS0_PACRK at 0x_4000_0058
+AIPS0_PACRL at 0x_4000_005C
+AIPS0_PACRM at 0x_4000_0060
+AIPS0_PACRN at 0x_4000_0064
+AIPS0_PACRO at 0x_4000_0068
+AIPS0_PACRP at 0x_4000_006C
+$uint32 {
+ 1, SP0, WP0, TP0,
+ 1, SP1, WP1, TP1,
+ 1, SP2, WP2, TP2,
+ 1, SP3, WP3, TP3,
+ 1, SP4, WP4, TP4,
+ 1, SP5, WP5, TP5,
+ 1, SP6, WP6, TP6,
+ 1, SP7, WP7, TP7
+}
 
 //register ARM_DEMCR   0xE000EDFC // Debug Exception and Monitor Control
 //register ARM_DEMCR_TRCENA  (1 << 24)  // Enable debugging & monitoring blocks
