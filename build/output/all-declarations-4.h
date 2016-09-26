@@ -722,35 +722,37 @@ void extensionMethod_enterAccessibleEntities (const class GALGAS_interruptMapIR 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Extension method '@routineMapIR sectionCodeGeneration'                                *
+//                                 Extension method '@routineMapIR svcCodeGeneration'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_sectionCodeGeneration (const class GALGAS_routineMapIR inObject,
-                                            class GALGAS_string & io_ioLLVMcode,
-                                            class GALGAS__32_stringlist & io_ioSectionList,
-                                            class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
+void extensionMethod_svcCodeGeneration (const class GALGAS_routineMapIR inObject,
+                                        class GALGAS_string & io_ioLLVMcode,
+                                        class GALGAS__32_stringlist & io_ioSectionSafeList,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                          Function 'llvmNameForSectionCall'                                          *
+//                                            Function 'llvmNameForSVCCall'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForSectionCall (const class GALGAS_string & constinArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForSVCCall (const class GALGAS_lstring & constinArgument0,
+                                                 const class GALGAS_routineKind & constinArgument1,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                     Function 'llvmNameForSectionImplementation'                                     *
+//                                       Function 'llvmNameForSVCImplementation'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForSectionImplementation (const class GALGAS_string & constinArgument0,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForSVCImplementation (const class GALGAS_lstring & constinArgument0,
+                                                           const class GALGAS_routineKind & constinArgument1,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

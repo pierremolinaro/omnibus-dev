@@ -11,15 +11,127 @@ Un \emph{routine} est une construction qui définit du code à exécuter.
 
 
 
-\section{Mode logique}
+\section{Modes logiques}
 
 À chaque routine est attachée statiquement un mode d'exécution.
 
 La plupart des processeurs définit plusieurs modes d'exécution, typiquement un mode \emph{système} ou \emph{privilégié} (où toutes les ressources sont accessibles), et un mode \emph{utilisateur}, où certaines instructions, espace mémoire, registres de contrôles sont inaccessibles.
 
-Cependant, un mode \emph{système} unique est trop sommaire pour reflèter toutes les natures de routines. C'est pourquoi PLM définit huit modes de fonctionnement, qui sont décrits ci-après.
+Cependant, un mode \emph{système} unique est trop sommaire pour reflèter toutes les natures de routines. C'est pourquoi PLM définit neuf modes de fonctionnement, \plm=user=, \plm=primitive=, \plm=service=, \plm=section=, \plm=safe=, \plm=guard=, \plm=panic=, \plm=boot= et \plm=init=, qui sont décrits ci-après.
 
-\plm=user=. Ce mode est le mode d'exécution des tâches. C'est le seul mode qui correspond au mode \emph{user} du processeur. Seuls les registres de contrôle déclarés avec l'attribut \plm=@user= sont accessibles. Les instructions qui peut engendrer une panique sont autorisées.
+\subsection{Définition des modes}
+
+\plm=user=. Ce mode est le mode d'exécution des tâches. C'est le seul mode qui correspond au mode \emph{user} du processeur. Seuls les registres de contrôle déclarés avec l'attribut \plm=@user= sont accessibles. Les instructions qui peuvent engendrer une panique sont autorisées.
+
+\plm=primitive=. Dans ce mode, les opérations de l'exécutif qui peuvent bloquer ou rendre prête une tâche sont appelables. Tous les registres de contrôle sont accessibles, et les instructions qui peuvent engendrer une panique sont autorisées. 
+
+\plm=service=. Seule différence avec le mode précédent, les opérations de l'exécutif qui peuvent bloquer une tâche ne sont pas appelables, uniquement celles qui peuvent rendre prête une tâche le sont.
+
+\plm=section=. Dans ce mode, on ne peut ni bloquer ni rendre prête une tâche. Ce mode permet d'exécuter des opérations de manière indivisible. Les instructions qui peuvent engendrer une panique sont autorisées.
+
+\plm=safe=. Par rapport au mode précédent, les instructions qui peuvent engendrer une panique ne sont pas autorisées.
+
+\plm=guard=. C'est le mode d'évaluation des commandes gardées. Les seules opérations de l'exécutif autorisées sont celles relatives aux gardes. Les instructions qui peuvent engendrer une panique sont autorisées.
+
+\plm=panic=. Lorsqu'une instruction engendre une panique, l'exécution est déroutée vers les routines dédiées qui s'exécutent dans ce mode.  Les instructions qui peuvent engendrer une panique n'y sont pas autorisées.
+
+\plm=boot=. C'est le mode après le démarrage du micro-contrôleur, pour le configurer. L'accès aux variables globales est interdit (elles ne sont pas encore initialisées), seul l'accès aux registres de contrôle est autorisé. Les instructions qui peuvent engendrer une panique n'y sont pas autorisées.
+
+
+\plm=init=. C'est le mode d'initialisation. L'initialisation est exécutée après le \plm=boot=, l'accès aux variables globales est autorisé, ainsi que l'accès aux registres de contrôle. Les instructions qui peuvent engendrer une panique n'y sont pas autorisées.
+
+
+
+
+
+
+\subsection{Démarrage du micro-contrôleur}
+
+La séquence de démarrage du micro-contrôleur est illustrée par la \refFigure{}{sequenceDemarrage}.
+
+La première étape est de configurer les horloges internes du micro-contrôleur : c'est le rôle des routines \plm=boot=. À ce stade, la mémoire vive n'est toujours pas initialisée, aussi les routines \plm=boot= n'y accèdent pas (le compilateur l'assure).
+
+La deuxième étape est d'initialiser les \emph{variables globales}, c'est-à-dire mettre à zéro la zone \texttt{bss}, et de recopier à partir de la flash les valeurs initiales des variables initialisées.
+
+La troisième étape est l'exécution des routines \plm=init=. À partir de cette étape et pour les suivantes, les variables globales sont initialisées, et donc leur emploi est autorisé. Le rôle des routines \plm=init= est de configurer les entrées/sorties du micro-contrôleur.
+
+Ensuite, les tâches sont lancées, et exécutées en fonction de leurs priorités et synchronisations.
+
+\begin{figure}[t]
+  \centering
+  \small
+  \begin{tikzpicture}[
+      cloud/.style ={draw=red, thick, ellipse,fill=red!20, minimum height=2em},
+      block/.style ={rectangle, draw=blue, thick, fill=green!20, align=center},
+      decision/.style={chamfered rectangle, draw=blue, thick, fill=green!20},
+      node distance=5mm
+    ]
+    \node [cloud] (start) {\textsc{Démarrage du micro-contrôleur}} ;
+    \node [block] (boot) [below=of start] {Routines \bf\texttt{boot}} ;
+    \node [block] (raz) [below=of boot] {Initialisation des variables globales} ;
+    \node [block] (init) [below=of raz] {Routines \bf\texttt{init}} ;
+    \node [block] (setup) [below=of init] {Démarrage des tâches} ;
+
+    \draw [-stealth, thick] (start) -- (boot) ;
+    \draw [-stealth, thick] (boot) -- (raz) ;
+    \draw [-stealth, thick] (raz) -- (init) ;
+    \draw [-stealth, thick] (init) -- (setup) ;
+  \end{tikzpicture}
+  \caption{Organigramme d'exécution de la séquence de démarrage}
+  \labelFigure{sequenceDemarrage}
+  \ligne
+\end{figure}
+
+
+
+
+
+
+
+
+\subsection{Changement de mode}
+
+Les possibilités de changements de mode sont illustrés par la \refFigure{}{changementMode}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=10cm]{chapitres/changement-modes.pdf}
+%  \small
+%  \begin{tikzpicture}[
+%      user/.style ={rectangle, draw=blue, thick, align=center},
+%      system/.style ={rectangle, draw=black, thick, align=center},
+%      node distance=5mm
+%    ]
+%    \node [system] (primitive) {\texttt{primitive}} ;
+%    \node [system] (service) [right=of primitive] {\texttt{service}} ;
+%    \node [system] (section) [right=of service] {\texttt{section}} ;
+%    \node [system] (panic) [right=of section] {\texttt{panic}} ;
+%    \node [system] (init) [right=of panic] {\texttt{init}} ;
+%    \node [user] (user) [above=of primitive] {\texttt{user}} ;
+%    \node [system] (boot) [right=of user] {\texttt{boot}} ;
+%    \node [system] (safe) [below=of primitive] {\texttt{safe}} ;
+%    \node [system] (guard) [above=of panic] {\texttt{guard}} ;
+%
+%    \draw [->] (primitive) -- (service) ;
+%    \draw [->] (service) -- (section) ;
+%    \draw [->] (service) -- (safe) ;
+%    \draw [->] (section) -- (safe) ;
+%    \draw [->] (primitive) -- (safe) ;
+%    \draw [->] (init) -- (safe) ;
+%    \draw [->] (guard) -- (safe) ;
+%  \end{tikzpicture}
+  \caption{Graphe des changements de mode}
+  \labelFigure{changementMode}
+  \ligne
+\end{figure}
+
+
+---------------------------
+
+
+
+
+
 
 
 Le langage définit plusieurs natures de routines :

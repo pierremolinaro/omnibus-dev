@@ -2,15 +2,27 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @sectionDeclarationListAST {
-  @lstring mSectionName
-  @bool mPublic
-  @lstringlist mSectionAttributeList
-  @procFormalArgumentList mSectionFormalArgumentList
-  @lstring mReturnTypeName
-  @instructionListAST mSectionInstructionList
-  @location mEndOfSectionLocation
+enum @routineKind {
+  case function
+  case section
+  case safe
+  case service
+  case primitive
 }
+
+#·······················································································································
+
+list @svcDeclarationListAST {
+  @lstring mName
+  @routineKind mRoutineKind
+  @bool mPublic
+  @lstringlist mAttributeList
+  @procFormalArgumentList mFormalArgumentList
+  @lstring mReturnTypeName
+  @instructionListAST mInstructionList
+  @location mEndOfInstructionListLocation
+}
+
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
@@ -20,25 +32,24 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <section> ?!@sectionDeclarationListAST ioSectionListAST {
-#    @bool public
-#    select
-#      public = false
-#    or
-#      $public$
-#      public = true
-#    end
-#    $svc$
+  rule <section> ?!@svcDeclarationListAST ioSVCListAST {
     <svc_declaration> ?let public
-    $section$
-    $identifier$ ?let sectionName
+    @routineKind routineKind
+    select
+      $section$
+      routineKind = .section
+    or
+      $safe$
+      routineKind = .safe
+    end
+    $identifier$ ?let name
     @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
-    <procedure_formal_arguments> ?formalArguments:let sectionFormalArgumentList
+    <procedure_formal_arguments> ?formalArguments:let formalArgumentList
     @lstring returnTypeName
     select
       returnTypeName = ["" here]
@@ -49,11 +60,12 @@ syntax extension plm_syntax {
     ${$
     <instructionList> ?let instructionList
     $}$
-    ioSectionListAST +=
-      !sectionName
+    ioSVCListAST +=
+      !name
+      !routineKind
       !public
       !attributeList
-      !sectionFormalArgumentList
+      !formalArgumentList
       !returnTypeName
       !instructionList
       !.here
@@ -67,13 +79,13 @@ syntax extension plm_syntax {
 #  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @sectionDeclarationListAST noteSectionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @svcDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
-    for (* * formalArgumentTypeName *) in mSectionFormalArgumentList do
+    for (* * formalArgumentTypeName *) in mFormalArgumentList do
       let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
       [!?ioGraph noteNode !typeName]
     end
-    [mSectionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
@@ -81,33 +93,33 @@ method @sectionDeclarationListAST noteSectionTypesInPrecedenceGraph ?!@semanticT
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @sectionDeclarationListAST enterInContext
+method @svcDeclarationListAST enterInContext
   ?receiverType:let @string inReceiverTypeName
   ?!context:@semanticContext ioContext
 {
-  for section in self do
+  for svc in self do
   #--- Signature
     var routineMangledName = if inReceiverTypeName == "" then
-      section.mSectionName
+      svc.mName
     else
-      @lstring.new {!inReceiverTypeName + "." + section.mSectionName !section.mSectionName.location}
+      @lstring.new {!inReceiverTypeName + "." + svc.mName !svc.mName.location}
     end
     @procedureSignature signature = {}
     routineMangledName.string += "("
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in section.mSectionFormalArgumentList do
+    for (formalArgumentPassingMode selector formalArgumentTypeName *) in svc.mFormalArgumentList do
       let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
       signature += !formalArgumentPassingMode !selector.string !typeProxy
       routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
     routineMangledName.string += ")"
-    let returnType = if section.mReturnTypeName.string == "" then
+    let returnType = if svc.mReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
     else
-      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !section.mReturnTypeName}
+      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !svc.mReturnTypeName}
     end
   #--- Attributes
     var mutating = false
-    for (attribute) in section.mSectionAttributeList do
+    for (attribute) in svc.mAttributeList do
       if attribute.string == mutatingAttribute () then
         mutating = true    
       end
@@ -116,11 +128,11 @@ method @sectionDeclarationListAST enterInContext
     [!?ioContext.mRoutineMapForContext insertKey
       !routineMangledName
       !routineMangledName
-      !section.mPublic
+      !svc.mPublic
       !false
       !.userMode
       !signature
-      !.section
+      !svc.mRoutineKind
       !false # Not weak
       !returnType
       !false # No appendFileAndLineArgumentForPanicLocation
@@ -134,16 +146,16 @@ method @sectionDeclarationListAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @sectionDeclarationListAST sectionSemanticAnalysis
+method @svcDeclarationListAST svcSemanticAnalysis
   ?receiverType:@unifiedTypeMap-proxy inReceiverType
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  for section in self do
+  for svc in self do
     var mutating = false
     var noUnusedWarning = false
-    for (attribute) in section.mSectionAttributeList do
+    for (attribute) in svc.mAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if noUnusedWarning then
           error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { remove }
@@ -160,15 +172,23 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
         fixit { remove }
       end
     end
+    @mode mode
+    switch svc.mRoutineKind
+    case section : mode = .sectionMode
+    case primitive : mode = .primitiveMode
+    case service : mode = .serviceMode
+    case safe : mode = .safeMode
+    case function : error svc.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
+    end
     routineSemanticAnalysis (
       !receiverType:inReceiverType
-      !.section
-      !.sectionMode
-      !section.mSectionName
-      !section.mSectionFormalArgumentList
-      !returnTypeName:section.mReturnTypeName
-      !section.mSectionInstructionList
-      !section.mEndOfSectionLocation
+      !svc.mRoutineKind
+      !mode
+      !svc.mName
+      !svc.mFormalArgumentList
+      !returnTypeName:svc.mReturnTypeName
+      !svc.mInstructionList
+      !svc.mEndOfInstructionListLocation
       !directAccessToPropertiesAllowed:true
       !propertiesAreMutable:mutating
       !warnIfUnused:not noUnusedWarning
@@ -185,29 +205,29 @@ method @sectionDeclarationListAST sectionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR sectionCodeGeneration
+method @routineMapIR svcCodeGeneration
   ?!@string ioLLVMcode
-  ?!@2stringlist ioSectionList
+  ?!@2stringlist ioSectionSafeList
 {
-  for section in self do
-    if section.mKind == .section then
-      let sectionCallName = llvmNameForSectionCall (!section.mRoutineNameForGeneration.string)
-      let sectionImplementationName = llvmNameForSectionImplementation (!section.mRoutineNameForGeneration.string)
-      ioSectionList += !sectionCallName !sectionImplementationName
-      ioLLVMcode += llvmTitleComment (!sectionCallName)
+  for svc in self do
+    if (svc.mKind == .section) || (svc.mKind == .safe) then
+      let svcCallName = llvmNameForSVCCall (!svc.mRoutineNameForGeneration !svc.mKind)
+      let svcImplementationName = llvmNameForSVCImplementation (!svc.mRoutineNameForGeneration !svc.mKind)
+      ioSectionSafeList += !svcCallName !svcImplementationName
+      ioLLVMcode += llvmTitleComment (!svcCallName)
       ioLLVMcode += "declare"
-      if section.mReturnType == .null then
+      if svc.mReturnType == .null then
         ioLLVMcode += " void"
       else
-        ioLLVMcode += " " + [section.mReturnType llvmTypeName]
+        ioLLVMcode += " " + [svc.mReturnType llvmTypeName]
       end
-      ioLLVMcode += " @" + sectionCallName + " ("
+      ioLLVMcode += " @" + svcCallName + " ("
       var first = true
-      if section.mReceiverType != .null then
-        ioLLVMcode += [section.mReceiverType llvmTypeName] + " * %receiver"
+      if svc.mReceiverType != .null then
+        ioLLVMcode += [svc.mReceiverType llvmTypeName] + " * %receiver"
         first = false
       end
-      for () in section.mFormalArgumentListForGeneration do
+      for () in svc.mFormalArgumentListForGeneration do
         if first then
           first = false
         else

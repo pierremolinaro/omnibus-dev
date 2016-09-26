@@ -136,6 +136,42 @@ func llvmNameForISR ?let @string inName -> @string outName {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   SVC
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForSVCCall ?let @lstring inName ?let @routineKind inMode -> @string outName {
+  switch inMode
+  case primitive :
+    outName = llvmNameForPrimitiveCall (!inName.string)
+  case service :
+    outName = llvmNameForServiceCall (!inName.string)
+  case section :
+    outName = llvmNameForSectionCall (!inName.string)
+  case safe :
+    outName = llvmNameForSafeCall (!inName.string)
+  case function :
+    error inName : "INTERNAL ERROR" : outName
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForSVCImplementation ?let @lstring inName ?let @routineKind inMode -> @string outName {
+  switch inMode
+  case primitive :
+    outName = llvmNameForPrimitiveImplementation (!inName.string)
+  case service :
+    outName = llvmNameForServiceImplementation (!inName.string)
+  case section :
+    outName = llvmNameForSectionImplementation (!inName.string)
+  case safe :
+    outName = llvmNameForSafeImplementation (!inName.string)
+  case function :
+    error inName : "INTERNAL ERROR" : outName
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Primitives
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -6,7 +6,7 @@ syntax plm_syntax (plm_lexique) {
 
   rule <function> ?!@functionDeclarationListAST ioProcListAST
 
-  rule <section> ?!@sectionDeclarationListAST ioSectionListAST
+  rule <section> ?!@svcDeclarationListAST ioSectionListAST
 
   rule <service> ?!@serviceDeclarationListAST ioServiceListAST
 
@@ -40,9 +40,7 @@ syntax plm_syntax (plm_lexique) {
     while
       <function> !?ioAst.mProcedureListAST
     while
-      <section> !?ioAst.mStandAloneSectionListAST
-    while
-      <safe> !?ioAst.mStandAloneSafeListAST
+      <section> !?ioAst.mStandAloneSVCListAST
     while
       <service> !?ioAst.mServiceListAST
     while

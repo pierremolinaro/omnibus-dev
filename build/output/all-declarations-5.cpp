@@ -9106,7 +9106,6 @@ mAttribute_mProcedureDeclarationListAST (),
 mAttribute_mPropertyList (),
 mAttribute_mServiceListAST (),
 mAttribute_mSectionListAST (),
-mAttribute_mSafeListAST (),
 mAttribute_mPrimitiveListAST (),
 mAttribute_mGuardListAST () {
 }
@@ -9122,18 +9121,16 @@ GALGAS_extensionDeclarationListAST_2D_element::GALGAS_extensionDeclarationListAS
                                                                                               const GALGAS_functionDeclarationListAST & inOperand1,
                                                                                               const GALGAS_structurePropertyListAST & inOperand2,
                                                                                               const GALGAS_serviceDeclarationListAST & inOperand3,
-                                                                                              const GALGAS_sectionDeclarationListAST & inOperand4,
-                                                                                              const GALGAS_safeDeclarationListAST & inOperand5,
-                                                                                              const GALGAS_primitiveDeclarationListAST & inOperand6,
-                                                                                              const GALGAS_guardDeclarationListAST & inOperand7) :
+                                                                                              const GALGAS_svcDeclarationListAST & inOperand4,
+                                                                                              const GALGAS_primitiveDeclarationListAST & inOperand5,
+                                                                                              const GALGAS_guardDeclarationListAST & inOperand6) :
 mAttribute_mTypeName (inOperand0),
 mAttribute_mProcedureDeclarationListAST (inOperand1),
 mAttribute_mPropertyList (inOperand2),
 mAttribute_mServiceListAST (inOperand3),
 mAttribute_mSectionListAST (inOperand4),
-mAttribute_mSafeListAST (inOperand5),
-mAttribute_mPrimitiveListAST (inOperand6),
-mAttribute_mGuardListAST (inOperand7) {
+mAttribute_mPrimitiveListAST (inOperand5),
+mAttribute_mGuardListAST (inOperand6) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9143,8 +9140,7 @@ GALGAS_extensionDeclarationListAST_2D_element GALGAS_extensionDeclarationListAST
                                                         GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
                                                         GALGAS_structurePropertyListAST::constructor_emptyList (HERE),
                                                         GALGAS_serviceDeclarationListAST::constructor_emptyList (HERE),
-                                                        GALGAS_sectionDeclarationListAST::constructor_emptyList (HERE),
-                                                        GALGAS_safeDeclarationListAST::constructor_emptyList (HERE),
+                                                        GALGAS_svcDeclarationListAST::constructor_emptyList (HERE),
                                                         GALGAS_primitiveDeclarationListAST::constructor_emptyList (HERE),
                                                         GALGAS_guardDeclarationListAST::constructor_emptyList (HERE)) ;
 }
@@ -9155,14 +9151,13 @@ GALGAS_extensionDeclarationListAST_2D_element GALGAS_extensionDeclarationListAST
                                                                                                               const GALGAS_functionDeclarationListAST & inOperand1,
                                                                                                               const GALGAS_structurePropertyListAST & inOperand2,
                                                                                                               const GALGAS_serviceDeclarationListAST & inOperand3,
-                                                                                                              const GALGAS_sectionDeclarationListAST & inOperand4,
-                                                                                                              const GALGAS_safeDeclarationListAST & inOperand5,
-                                                                                                              const GALGAS_primitiveDeclarationListAST & inOperand6,
-                                                                                                              const GALGAS_guardDeclarationListAST & inOperand7 
+                                                                                                              const GALGAS_svcDeclarationListAST & inOperand4,
+                                                                                                              const GALGAS_primitiveDeclarationListAST & inOperand5,
+                                                                                                              const GALGAS_guardDeclarationListAST & inOperand6 
                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_extensionDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
-    result = GALGAS_extensionDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
+    result = GALGAS_extensionDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
   }
   return result ;
 }
@@ -9187,9 +9182,6 @@ typeComparisonResult GALGAS_extensionDeclarationListAST_2D_element::objectCompar
     result = mAttribute_mSectionListAST.objectCompare (inOperand.mAttribute_mSectionListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSafeListAST.objectCompare (inOperand.mAttribute_mSafeListAST) ;
-  }
-  if (result == kOperandEqual) {
     result = mAttribute_mPrimitiveListAST.objectCompare (inOperand.mAttribute_mPrimitiveListAST) ;
   }
   if (result == kOperandEqual) {
@@ -9201,7 +9193,7 @@ typeComparisonResult GALGAS_extensionDeclarationListAST_2D_element::objectCompar
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_extensionDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mTypeName.isValid () && mAttribute_mProcedureDeclarationListAST.isValid () && mAttribute_mPropertyList.isValid () && mAttribute_mServiceListAST.isValid () && mAttribute_mSectionListAST.isValid () && mAttribute_mSafeListAST.isValid () && mAttribute_mPrimitiveListAST.isValid () && mAttribute_mGuardListAST.isValid () ;
+  return mAttribute_mTypeName.isValid () && mAttribute_mProcedureDeclarationListAST.isValid () && mAttribute_mPropertyList.isValid () && mAttribute_mServiceListAST.isValid () && mAttribute_mSectionListAST.isValid () && mAttribute_mPrimitiveListAST.isValid () && mAttribute_mGuardListAST.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9212,7 +9204,6 @@ void GALGAS_extensionDeclarationListAST_2D_element::drop (void) {
   mAttribute_mPropertyList.drop () ;
   mAttribute_mServiceListAST.drop () ;
   mAttribute_mSectionListAST.drop () ;
-  mAttribute_mSafeListAST.drop () ;
   mAttribute_mPrimitiveListAST.drop () ;
   mAttribute_mGuardListAST.drop () ;
 }
@@ -9234,8 +9225,6 @@ void GALGAS_extensionDeclarationListAST_2D_element::description (C_String & ioSt
     mAttribute_mServiceListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mSectionListAST.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSafeListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mPrimitiveListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -9270,14 +9259,8 @@ GALGAS_serviceDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_sectionDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mSectionListAST (UNUSED_LOCATION_ARGS) const {
+GALGAS_svcDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mSectionListAST (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSectionListAST ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_safeDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mSafeListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSafeListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12616,443 +12599,225 @@ GALGAS_isrDeclarationListAST_2D_element GALGAS_isrDeclarationListAST_2D_element:
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_sectionDeclarationListAST_2D_element::GALGAS_sectionDeclarationListAST_2D_element (void) :
-mAttribute_mSectionName (),
+GALGAS_svcDeclarationListAST_2D_element::GALGAS_svcDeclarationListAST_2D_element (void) :
+mAttribute_mName (),
+mAttribute_mRoutineKind (),
 mAttribute_mPublic (),
-mAttribute_mSectionAttributeList (),
-mAttribute_mSectionFormalArgumentList (),
+mAttribute_mAttributeList (),
+mAttribute_mFormalArgumentList (),
 mAttribute_mReturnTypeName (),
-mAttribute_mSectionInstructionList (),
-mAttribute_mEndOfSectionLocation () {
+mAttribute_mInstructionList (),
+mAttribute_mEndOfInstructionListLocation () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_sectionDeclarationListAST_2D_element::~ GALGAS_sectionDeclarationListAST_2D_element (void) {
+GALGAS_svcDeclarationListAST_2D_element::~ GALGAS_svcDeclarationListAST_2D_element (void) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_sectionDeclarationListAST_2D_element::GALGAS_sectionDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                          const GALGAS_bool & inOperand1,
-                                                                                          const GALGAS_lstringlist & inOperand2,
-                                                                                          const GALGAS_procFormalArgumentList & inOperand3,
-                                                                                          const GALGAS_lstring & inOperand4,
-                                                                                          const GALGAS_instructionListAST & inOperand5,
-                                                                                          const GALGAS_location & inOperand6) :
-mAttribute_mSectionName (inOperand0),
-mAttribute_mPublic (inOperand1),
-mAttribute_mSectionAttributeList (inOperand2),
-mAttribute_mSectionFormalArgumentList (inOperand3),
-mAttribute_mReturnTypeName (inOperand4),
-mAttribute_mSectionInstructionList (inOperand5),
-mAttribute_mEndOfSectionLocation (inOperand6) {
+GALGAS_svcDeclarationListAST_2D_element::GALGAS_svcDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
+                                                                                  const GALGAS_routineKind & inOperand1,
+                                                                                  const GALGAS_bool & inOperand2,
+                                                                                  const GALGAS_lstringlist & inOperand3,
+                                                                                  const GALGAS_procFormalArgumentList & inOperand4,
+                                                                                  const GALGAS_lstring & inOperand5,
+                                                                                  const GALGAS_instructionListAST & inOperand6,
+                                                                                  const GALGAS_location & inOperand7) :
+mAttribute_mName (inOperand0),
+mAttribute_mRoutineKind (inOperand1),
+mAttribute_mPublic (inOperand2),
+mAttribute_mAttributeList (inOperand3),
+mAttribute_mFormalArgumentList (inOperand4),
+mAttribute_mReturnTypeName (inOperand5),
+mAttribute_mInstructionList (inOperand6),
+mAttribute_mEndOfInstructionListLocation (inOperand7) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_sectionDeclarationListAST_2D_element GALGAS_sectionDeclarationListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_sectionDeclarationListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                                      GALGAS_bool::constructor_default (HERE),
-                                                      GALGAS_lstringlist::constructor_emptyList (HERE),
-                                                      GALGAS_procFormalArgumentList::constructor_emptyList (HERE),
-                                                      GALGAS_lstring::constructor_default (HERE),
-                                                      GALGAS_instructionListAST::constructor_emptyList (HERE),
-                                                      GALGAS_location::constructor_nowhere (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sectionDeclarationListAST_2D_element GALGAS_sectionDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                          const GALGAS_bool & inOperand1,
-                                                                                                          const GALGAS_lstringlist & inOperand2,
-                                                                                                          const GALGAS_procFormalArgumentList & inOperand3,
-                                                                                                          const GALGAS_lstring & inOperand4,
-                                                                                                          const GALGAS_instructionListAST & inOperand5,
-                                                                                                          const GALGAS_location & inOperand6 
-                                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_sectionDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
-    result = GALGAS_sectionDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
+GALGAS_svcDeclarationListAST_2D_element GALGAS_svcDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                                                  const GALGAS_routineKind & inOperand1,
+                                                                                                  const GALGAS_bool & inOperand2,
+                                                                                                  const GALGAS_lstringlist & inOperand3,
+                                                                                                  const GALGAS_procFormalArgumentList & inOperand4,
+                                                                                                  const GALGAS_lstring & inOperand5,
+                                                                                                  const GALGAS_instructionListAST & inOperand6,
+                                                                                                  const GALGAS_location & inOperand7 
+                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_svcDeclarationListAST_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
+    result = GALGAS_svcDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult GALGAS_sectionDeclarationListAST_2D_element::objectCompare (const GALGAS_sectionDeclarationListAST_2D_element & inOperand) const {
+typeComparisonResult GALGAS_svcDeclarationListAST_2D_element::objectCompare (const GALGAS_svcDeclarationListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mSectionName.objectCompare (inOperand.mAttribute_mSectionName) ;
+    result = mAttribute_mName.objectCompare (inOperand.mAttribute_mName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mRoutineKind.objectCompare (inOperand.mAttribute_mRoutineKind) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mPublic.objectCompare (inOperand.mAttribute_mPublic) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSectionAttributeList.objectCompare (inOperand.mAttribute_mSectionAttributeList) ;
+    result = mAttribute_mAttributeList.objectCompare (inOperand.mAttribute_mAttributeList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSectionFormalArgumentList.objectCompare (inOperand.mAttribute_mSectionFormalArgumentList) ;
+    result = mAttribute_mFormalArgumentList.objectCompare (inOperand.mAttribute_mFormalArgumentList) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mReturnTypeName.objectCompare (inOperand.mAttribute_mReturnTypeName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSectionInstructionList.objectCompare (inOperand.mAttribute_mSectionInstructionList) ;
+    result = mAttribute_mInstructionList.objectCompare (inOperand.mAttribute_mInstructionList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mEndOfSectionLocation.objectCompare (inOperand.mAttribute_mEndOfSectionLocation) ;
+    result = mAttribute_mEndOfInstructionListLocation.objectCompare (inOperand.mAttribute_mEndOfInstructionListLocation) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool GALGAS_sectionDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mSectionName.isValid () && mAttribute_mPublic.isValid () && mAttribute_mSectionAttributeList.isValid () && mAttribute_mSectionFormalArgumentList.isValid () && mAttribute_mReturnTypeName.isValid () && mAttribute_mSectionInstructionList.isValid () && mAttribute_mEndOfSectionLocation.isValid () ;
+bool GALGAS_svcDeclarationListAST_2D_element::isValid (void) const {
+  return mAttribute_mName.isValid () && mAttribute_mRoutineKind.isValid () && mAttribute_mPublic.isValid () && mAttribute_mAttributeList.isValid () && mAttribute_mFormalArgumentList.isValid () && mAttribute_mReturnTypeName.isValid () && mAttribute_mInstructionList.isValid () && mAttribute_mEndOfInstructionListLocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_sectionDeclarationListAST_2D_element::drop (void) {
-  mAttribute_mSectionName.drop () ;
+void GALGAS_svcDeclarationListAST_2D_element::drop (void) {
+  mAttribute_mName.drop () ;
+  mAttribute_mRoutineKind.drop () ;
   mAttribute_mPublic.drop () ;
-  mAttribute_mSectionAttributeList.drop () ;
-  mAttribute_mSectionFormalArgumentList.drop () ;
+  mAttribute_mAttributeList.drop () ;
+  mAttribute_mFormalArgumentList.drop () ;
   mAttribute_mReturnTypeName.drop () ;
-  mAttribute_mSectionInstructionList.drop () ;
-  mAttribute_mEndOfSectionLocation.drop () ;
+  mAttribute_mInstructionList.drop () ;
+  mAttribute_mEndOfInstructionListLocation.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_sectionDeclarationListAST_2D_element::description (C_String & ioString,
-                                                               const int32_t inIndentation) const {
-  ioString << "<struct @sectionDeclarationListAST-element:" ;
+void GALGAS_svcDeclarationListAST_2D_element::description (C_String & ioString,
+                                                           const int32_t inIndentation) const {
+  ioString << "<struct @svcDeclarationListAST-element:" ;
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mSectionName.description (ioString, inIndentation+1) ;
+    mAttribute_mName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mRoutineKind.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mPublic.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSectionAttributeList.description (ioString, inIndentation+1) ;
+    mAttribute_mAttributeList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSectionFormalArgumentList.description (ioString, inIndentation+1) ;
+    mAttribute_mFormalArgumentList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mReturnTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSectionInstructionList.description (ioString, inIndentation+1) ;
+    mAttribute_mInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mEndOfSectionLocation.description (ioString, inIndentation+1) ;
+    mAttribute_mEndOfInstructionListLocation.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_sectionDeclarationListAST_2D_element::getter_mSectionName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSectionName ;
+GALGAS_lstring GALGAS_svcDeclarationListAST_2D_element::getter_mName (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_sectionDeclarationListAST_2D_element::getter_mPublic (UNUSED_LOCATION_ARGS) const {
+GALGAS_routineKind GALGAS_svcDeclarationListAST_2D_element::getter_mRoutineKind (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mRoutineKind ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_svcDeclarationListAST_2D_element::getter_mPublic (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mPublic ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstringlist GALGAS_sectionDeclarationListAST_2D_element::getter_mSectionAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSectionAttributeList ;
+GALGAS_lstringlist GALGAS_svcDeclarationListAST_2D_element::getter_mAttributeList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_procFormalArgumentList GALGAS_sectionDeclarationListAST_2D_element::getter_mSectionFormalArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSectionFormalArgumentList ;
+GALGAS_procFormalArgumentList GALGAS_svcDeclarationListAST_2D_element::getter_mFormalArgumentList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mFormalArgumentList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_sectionDeclarationListAST_2D_element::getter_mReturnTypeName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_svcDeclarationListAST_2D_element::getter_mReturnTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mReturnTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_instructionListAST GALGAS_sectionDeclarationListAST_2D_element::getter_mSectionInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSectionInstructionList ;
+GALGAS_instructionListAST GALGAS_svcDeclarationListAST_2D_element::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_location GALGAS_sectionDeclarationListAST_2D_element::getter_mEndOfSectionLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfSectionLocation ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       @sectionDeclarationListAST-element type                                       *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_sectionDeclarationListAST_2D_element ("sectionDeclarationListAST-element",
-                                                             NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_sectionDeclarationListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_sectionDeclarationListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_sectionDeclarationListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_sectionDeclarationListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_sectionDeclarationListAST_2D_element GALGAS_sectionDeclarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                        C_Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_sectionDeclarationListAST_2D_element result ;
-  const GALGAS_sectionDeclarationListAST_2D_element * p = (const GALGAS_sectionDeclarationListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_sectionDeclarationListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("sectionDeclarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_safeDeclarationListAST_2D_element::GALGAS_safeDeclarationListAST_2D_element (void) :
-mAttribute_mSafeName (),
-mAttribute_mPublic (),
-mAttribute_mSafeAttributeList (),
-mAttribute_mSafeFormalArgumentList (),
-mAttribute_mReturnTypeName (),
-mAttribute_mSafeInstructionList (),
-mAttribute_mEndOfSafeLocation () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_safeDeclarationListAST_2D_element::~ GALGAS_safeDeclarationListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_safeDeclarationListAST_2D_element::GALGAS_safeDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                    const GALGAS_bool & inOperand1,
-                                                                                    const GALGAS_lstringlist & inOperand2,
-                                                                                    const GALGAS_procFormalArgumentList & inOperand3,
-                                                                                    const GALGAS_lstring & inOperand4,
-                                                                                    const GALGAS_instructionListAST & inOperand5,
-                                                                                    const GALGAS_location & inOperand6) :
-mAttribute_mSafeName (inOperand0),
-mAttribute_mPublic (inOperand1),
-mAttribute_mSafeAttributeList (inOperand2),
-mAttribute_mSafeFormalArgumentList (inOperand3),
-mAttribute_mReturnTypeName (inOperand4),
-mAttribute_mSafeInstructionList (inOperand5),
-mAttribute_mEndOfSafeLocation (inOperand6) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_safeDeclarationListAST_2D_element GALGAS_safeDeclarationListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_safeDeclarationListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                                   GALGAS_bool::constructor_default (HERE),
-                                                   GALGAS_lstringlist::constructor_emptyList (HERE),
-                                                   GALGAS_procFormalArgumentList::constructor_emptyList (HERE),
-                                                   GALGAS_lstring::constructor_default (HERE),
-                                                   GALGAS_instructionListAST::constructor_emptyList (HERE),
-                                                   GALGAS_location::constructor_nowhere (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_safeDeclarationListAST_2D_element GALGAS_safeDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                    const GALGAS_bool & inOperand1,
-                                                                                                    const GALGAS_lstringlist & inOperand2,
-                                                                                                    const GALGAS_procFormalArgumentList & inOperand3,
-                                                                                                    const GALGAS_lstring & inOperand4,
-                                                                                                    const GALGAS_instructionListAST & inOperand5,
-                                                                                                    const GALGAS_location & inOperand6 
-                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_safeDeclarationListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
-    result = GALGAS_safeDeclarationListAST_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_safeDeclarationListAST_2D_element::objectCompare (const GALGAS_safeDeclarationListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAttribute_mSafeName.objectCompare (inOperand.mAttribute_mSafeName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mPublic.objectCompare (inOperand.mAttribute_mPublic) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSafeAttributeList.objectCompare (inOperand.mAttribute_mSafeAttributeList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSafeFormalArgumentList.objectCompare (inOperand.mAttribute_mSafeFormalArgumentList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mReturnTypeName.objectCompare (inOperand.mAttribute_mReturnTypeName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mSafeInstructionList.objectCompare (inOperand.mAttribute_mSafeInstructionList) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mEndOfSafeLocation.objectCompare (inOperand.mAttribute_mEndOfSafeLocation) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_safeDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mSafeName.isValid () && mAttribute_mPublic.isValid () && mAttribute_mSafeAttributeList.isValid () && mAttribute_mSafeFormalArgumentList.isValid () && mAttribute_mReturnTypeName.isValid () && mAttribute_mSafeInstructionList.isValid () && mAttribute_mEndOfSafeLocation.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_safeDeclarationListAST_2D_element::drop (void) {
-  mAttribute_mSafeName.drop () ;
-  mAttribute_mPublic.drop () ;
-  mAttribute_mSafeAttributeList.drop () ;
-  mAttribute_mSafeFormalArgumentList.drop () ;
-  mAttribute_mReturnTypeName.drop () ;
-  mAttribute_mSafeInstructionList.drop () ;
-  mAttribute_mEndOfSafeLocation.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_safeDeclarationListAST_2D_element::description (C_String & ioString,
-                                                            const int32_t inIndentation) const {
-  ioString << "<struct @safeDeclarationListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mAttribute_mSafeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mPublic.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSafeAttributeList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSafeFormalArgumentList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mReturnTypeName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mSafeInstructionList.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mEndOfSafeLocation.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_safeDeclarationListAST_2D_element::getter_mSafeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSafeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_safeDeclarationListAST_2D_element::getter_mPublic (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPublic ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_safeDeclarationListAST_2D_element::getter_mSafeAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSafeAttributeList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_procFormalArgumentList GALGAS_safeDeclarationListAST_2D_element::getter_mSafeFormalArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSafeFormalArgumentList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_safeDeclarationListAST_2D_element::getter_mReturnTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mReturnTypeName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST GALGAS_safeDeclarationListAST_2D_element::getter_mSafeInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSafeInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_safeDeclarationListAST_2D_element::getter_mEndOfSafeLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfSafeLocation ;
+GALGAS_location GALGAS_svcDeclarationListAST_2D_element::getter_mEndOfInstructionListLocation (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mEndOfInstructionListLocation ;
 }
 
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                        @safeDeclarationListAST-element type                                         *
+//                                         @svcDeclarationListAST-element type                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_safeDeclarationListAST_2D_element ("safeDeclarationListAST-element",
-                                                          NULL) ;
+kTypeDescriptor_GALGAS_svcDeclarationListAST_2D_element ("svcDeclarationListAST-element",
+                                                         NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_safeDeclarationListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_safeDeclarationListAST_2D_element ;
+const C_galgas_type_descriptor * GALGAS_svcDeclarationListAST_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_svcDeclarationListAST_2D_element ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_safeDeclarationListAST_2D_element::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_svcDeclarationListAST_2D_element::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_safeDeclarationListAST_2D_element (*this)) ;
+    macroMyNew (result, GALGAS_svcDeclarationListAST_2D_element (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_safeDeclarationListAST_2D_element GALGAS_safeDeclarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_safeDeclarationListAST_2D_element result ;
-  const GALGAS_safeDeclarationListAST_2D_element * p = (const GALGAS_safeDeclarationListAST_2D_element *) inObject.embeddedObject () ;
+GALGAS_svcDeclarationListAST_2D_element GALGAS_svcDeclarationListAST_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                C_Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_svcDeclarationListAST_2D_element result ;
+  const GALGAS_svcDeclarationListAST_2D_element * p = (const GALGAS_svcDeclarationListAST_2D_element *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_safeDeclarationListAST_2D_element *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_svcDeclarationListAST_2D_element *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("safeDeclarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("svcDeclarationListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -14973,6 +14738,160 @@ GALGAS_routineMapForContext_2D_element GALGAS_routineMapForContext_2D_element::e
       result = *p ;
     }else{
       inCompiler->castError ("routineMapForContext-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardMapForContext_2D_element::GALGAS_guardMapForContext_2D_element (void) :
+mAttribute_lkey (),
+mAttribute_mIsPublic (),
+mAttribute_mSignature () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardMapForContext_2D_element::~ GALGAS_guardMapForContext_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardMapForContext_2D_element::GALGAS_guardMapForContext_2D_element (const GALGAS_lstring & inOperand0,
+                                                                            const GALGAS_bool & inOperand1,
+                                                                            const GALGAS_procedureSignature & inOperand2) :
+mAttribute_lkey (inOperand0),
+mAttribute_mIsPublic (inOperand1),
+mAttribute_mSignature (inOperand2) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardMapForContext_2D_element GALGAS_guardMapForContext_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_guardMapForContext_2D_element (GALGAS_lstring::constructor_default (HERE),
+                                               GALGAS_bool::constructor_default (HERE),
+                                               GALGAS_procedureSignature::constructor_emptyList (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardMapForContext_2D_element GALGAS_guardMapForContext_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                                            const GALGAS_bool & inOperand1,
+                                                                                            const GALGAS_procedureSignature & inOperand2 
+                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_guardMapForContext_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+    result = GALGAS_guardMapForContext_2D_element (inOperand0, inOperand1, inOperand2) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_guardMapForContext_2D_element::objectCompare (const GALGAS_guardMapForContext_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mIsPublic.objectCompare (inOperand.mAttribute_mIsPublic) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAttribute_mSignature.objectCompare (inOperand.mAttribute_mSignature) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_guardMapForContext_2D_element::isValid (void) const {
+  return mAttribute_lkey.isValid () && mAttribute_mIsPublic.isValid () && mAttribute_mSignature.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_guardMapForContext_2D_element::drop (void) {
+  mAttribute_lkey.drop () ;
+  mAttribute_mIsPublic.drop () ;
+  mAttribute_mSignature.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_guardMapForContext_2D_element::description (C_String & ioString,
+                                                        const int32_t inIndentation) const {
+  ioString << "<struct @guardMapForContext-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mIsPublic.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mAttribute_mSignature.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_guardMapForContext_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_guardMapForContext_2D_element::getter_mIsPublic (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIsPublic ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_procedureSignature GALGAS_guardMapForContext_2D_element::getter_mSignature (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mSignature ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @guardMapForContext-element type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_guardMapForContext_2D_element ("guardMapForContext-element",
+                                                      NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_guardMapForContext_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardMapForContext_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_guardMapForContext_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_guardMapForContext_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardMapForContext_2D_element GALGAS_guardMapForContext_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_guardMapForContext_2D_element result ;
+  const GALGAS_guardMapForContext_2D_element * p = (const GALGAS_guardMapForContext_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_guardMapForContext_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardMapForContext-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

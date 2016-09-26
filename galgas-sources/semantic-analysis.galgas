@@ -98,13 +98,7 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-  [inAST.mStandAloneSectionListAST sectionSemanticAnalysis
-    !receiverType:.null
-    !context:inSemanticContext
-    !?temporary:temporaries
-    !?intermediateCode:outIntermediateCodeStruct
-  ]
-  [inAST.mStandAloneSafeListAST sectionSemanticAnalysis
+  [inAST.mStandAloneSVCListAST svcSemanticAnalysis
     !receiverType:.null
     !context:inSemanticContext
     !?temporary:temporaries
