@@ -219,44 +219,47 @@ private proc generateCodeFiles
   ]
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
-  @2stringlist serviceList = {}
+  @2stringlist primitiveAndServiceList = {}
   @2stringlist sectionList = {}
 #----------------------------------------- Use guards ?
   if generationAdds.mUsesGuards then
     let waitForGuardChange = waitForGuardChangeFunctionName ()
-    serviceList += !llvmNameForServiceCall (!waitForGuardChange) !llvmNameForServiceImplementation (!waitForGuardChange)
+    primitiveAndServiceList +=
+      !llvmNameForServiceCall (!waitForGuardChange)
+      !llvmNameForServiceImplementation (!waitForGuardChange)
     generationAdds.mExternFunctionDeclarationSet += !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
   end
 #----------------------------------------- Sections
   [inIntermediateCodeStruct.mRoutineMapIR svcCodeGeneration
     !?llvmCode
+    !?primitiveAndServiceList
     !?sectionList
   ]
 #----------------------------------------- Services
   [inIntermediateCodeStruct.mRoutineMapIR serviceCodeGeneration
     !?llvmCode
-    !?serviceList
-  ]
-#----------------------------------------- Primitives
-  [inIntermediateCodeStruct.mRoutineMapIR primitiveCodeGeneration
-    !?llvmCode
-    !?serviceList
+    !?primitiveAndServiceList
   ]
 #----------------------------------------- Guards
   [inIntermediateCodeStruct.mGuardMapIR guardCodeGeneration
     !?llvmCode
-    !?serviceList
+    !?primitiveAndServiceList
     !generationContext
     !?generationAdds
   ]
 #----------------------------------------- tasks
-  [inIntermediateCodeStruct.mTaskMapIR generateCode !?llvmCode !generationContext !?generationAdds !?serviceList]
+  [inIntermediateCodeStruct.mTaskMapIR generateCode
+    !?llvmCode
+    !generationContext
+    !?generationAdds
+    !?primitiveAndServiceList
+  ]
 #----------------------------------------- Service dispatcher
   generateServiceDispatcher (
     !inCurrentDirectory
     !inTargetName.string
     !?asCode
-    !serviceList
+    !primitiveAndServiceList
   )
 #----------------------------------------- Section, safe dispatcher
   generateSectionAndSafeDispatcher (
@@ -398,7 +401,7 @@ private proc generateCodeFiles
   json += "  },\n"
 #--- Services
   json += "  \"services\" : ["
-  for (* serviceImplementation) in serviceList
+  for (* serviceImplementation) in primitiveAndServiceList
     do json += "\n    \"" + serviceImplementation + "\""
     between json += ","
     after json += "\n"

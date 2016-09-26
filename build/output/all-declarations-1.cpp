@@ -14,22 +14,22 @@
 
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_import_5F_file_i0_ (GALGAS_lstringlist & ioArgument_ioImportedFileList,
                                                                                                                C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_import) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 67)) ;
-  GALGAS_lstring var_importedFile_2328 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 68)) ;
-  ioArgument_ioImportedFileList.addAssign_operation (var_importedFile_2328  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 69)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_importedFile_2328.mAttribute_string.getter_pathExtension (SOURCE_FILE ("syntax-grammar.galgas", 70)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_import) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 63)) ;
+  GALGAS_lstring var_importedFile_2200 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 64)) ;
+  ioArgument_ioImportedFileList.addAssign_operation (var_importedFile_2200  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 65)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_importedFile_2200.mAttribute_string.getter_pathExtension (SOURCE_FILE ("syntax-grammar.galgas", 66)).objectCompare (GALGAS_string ("plm"))).boolEnum () ;
   if (kBoolTrue == test_0) {
     TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (var_importedFile_2328.getter_location (SOURCE_FILE ("syntax-grammar.galgas", 71)), GALGAS_string ("the pah extension should be .plm"), fixItArray1  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 71)) ;
+    inCompiler->emitSemanticError (var_importedFile_2200.getter_location (SOURCE_FILE ("syntax-grammar.galgas", 67)), GALGAS_string ("the pah extension should be .plm"), fixItArray1  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 67)) ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific_5F_syntax_import_5F_file_i0_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_import) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 67)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 68)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_import) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 63)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__22_string_22_) COMMA_SOURCE_FILE ("syntax-grammar.galgas", 64)) ;
   inCompiler->resetTemplateString () ;
 }
 
@@ -42,7 +42,7 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
   outArgument_outImportedFileList.drop () ; // Release 'out' argument
   outArgument_outEndOfSourceFile.drop () ; // Release 'out' argument
   nt_configuration_ (ioArgument_ioAst, inCompiler) ;
-  outArgument_outImportedFileList = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("syntax-grammar.galgas", 83)) ;
+  outArgument_outImportedFileList = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("syntax-grammar.galgas", 79)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_plm_5F_target_5F_specific_5F_syntax_0 (inCompiler)) {
@@ -54,7 +54,7 @@ void cParser_plm_5F_target_5F_specific_5F_syntax::rule_plm_5F_target_5F_specific
       break ;
     }
   }
-  outArgument_outEndOfSourceFile = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 88)) ;
+  outArgument_outEndOfSourceFile = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("syntax-grammar.galgas", 84)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

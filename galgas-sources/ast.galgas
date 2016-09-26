@@ -28,7 +28,6 @@ struct @ast {
   @isrDeclarationListAST mISRDeclarationListAST
   @svcDeclarationListAST mStandAloneSVCListAST
   @serviceDeclarationListAST mServiceListAST
-  @primitiveDeclarationListAST mPrimitiveListAST
   @guardDeclarationListAST mGuardListAST
   @lstringlist mTargetList
   @bootList mBootList

@@ -285,7 +285,6 @@ proc buildSemanticContext
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mStandAloneSVCListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mServiceListAST enterInContext !receiverType:"" !?context: outSemanticContext]
-  [inAST.mPrimitiveListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #--- Enter tasks
   [inAST.mTaskList enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]

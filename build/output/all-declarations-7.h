@@ -253,6 +253,16 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         Function 'llvmNameForPrimitiveCall'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForPrimitiveCall (const class GALGAS_string & constinArgument0,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Function 'llvmNameForSafeCall'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
