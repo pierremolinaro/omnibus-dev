@@ -1,0 +1,222 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-plm.tex
+
+\chapterLabel{Démarrage du micro-contrôleur}{chapitreDemarrageMicro}
+
+
+\section{Séquence de démarrage}
+
+La séquence de démarrage du micro-contrôleur est illustrée par la \refFigure{}{sequenceDemarrage}.
+
+La première étape est de configurer les horloges internes du micro-contrôleur : c'est le rôle des routines \plm=boot=. À ce stade, la mémoire vive n'est toujours pas initialisée, aussi les routines \plm=boot= n'y accèdent pas (le compilateur l'assure).
+
+La deuxième étape est d'initialiser les \emph{variables globales}, c'est-à-dire mettre à zéro la zone \texttt{bss}, et de recopier à partir de la flash les valeurs initiales des variables initialisées.
+
+La troisième étape est l'exécution des routines \plm=init=. À partir de cette étape et pour les suivantes, les variables globales sont initialisées, et donc leur emploi est autorisé. Le rôle des routines \plm=init= est de configurer les entrées/sorties du micro-contrôleur.
+
+Ensuite, les tâches sont lancées, et exécutées en fonction de leurs priorités et synchronisations.
+
+\begin{figure}[t]
+  \centering
+  \small
+  \begin{tikzpicture}[
+      cloud/.style ={draw=red, thick, ellipse,fill=red!20, minimum height=2em},
+      block/.style ={rectangle, draw=blue, thick, fill=green!20, align=center},
+      decision/.style={chamfered rectangle, draw=blue, thick, fill=green!20},
+      node distance=5mm
+    ]
+    \node [cloud] (start) {\textsc{Démarrage du micro-contrôleur}} ;
+    \node [block] (boot) [below=of start] {Routines \bf\texttt{boot}} ;
+    \node [block] (raz) [below=of boot] {Initialisation des variables globales} ;
+    \node [block] (init) [below=of raz] {Routines \bf\texttt{init}} ;
+    \node [block] (setup) [below=of init] {Démarrage des tâches} ;
+
+    \draw [-stealth, thick] (start) -- (boot) ;
+    \draw [-stealth, thick] (boot) -- (raz) ;
+    \draw [-stealth, thick] (raz) -- (init) ;
+    \draw [-stealth, thick] (init) -- (setup) ;
+  \end{tikzpicture}
+  \caption{Organigramme d'exécution de la séquence de démarrage}
+  \labelFigure{sequenceDemarrage}
+  \ligne
+\end{figure}
+
+
+\sectionLabel{\texttt{boot} routines}{bootRoutine}
+\index{boot@\plm=boot=!Routine}
+\index{Routine!boot@\plm=boot=}
+
+Une routine \plm=boot= est exécutée une et une seule fois, lors du démarrage du micro-contrôleur, avant que les variables globales ne soient initialisées. Elle a la syntaxe suivante :
+\begin{PLM}
+boot priorité {
+  liste_instructions
+}
+\end{PLM}
+Où \plm=priorité= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=boot= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=boot= n'ont pas la même priorité.
+
+Les routines \plm=boot= s'exécutent dans le mode \plm=boot=.\index{boot}
+
+Comme les routines \plm=boot= s'exécutent avant que les variables globales soient initialisées, l'accès aux variables globales y est interdit. L'interdiction est mise en place de la façon suivante : il n'est pas possible d'associer une routine \plm=boot= à une variable globale lors de sa déclaration (\refSectionPage{declarationVariableGlobale}).
+
+Par contre, l'accès aux registres de contrôle est autorisé dans une routine \plm=boot= (d'ailleurs, elle sert à cela : configurer le micro-contrôleur au démarrage).
+
+
+
+
+
+
+
+\sectionLabel{\texttt{init} routines}{initRoutine}
+\index{init@\plm=init=!Routine}
+\index{Routine!init@\plm=init=}
+
+Une routine \plm=init= est exécutée une et une seule fois, lors du démarrage du micro-contrôleur, après l'initialisation des variables globales. Elle a la syntaxe suivante :
+\begin{PLM}
+init priorité {
+  liste_instructions
+}
+\end{PLM}
+Où \plm=priorité= est la priorité de la routine. C'est une constante entière statique. Les routines \plm=init= sont exécutées dans l'ordre des priorités croissantes. Le compilateur vérifie que deux routines \plm=init= n'ont pas la même priorité.
+
+Les routines \plm=init= s'exécutent dans le mode \plm=init=.\index{init}
+
+Comme les routines \plm=init= s'exécutent après l'initialisation des variables globales, l'accès aux variables globales y est autorisé, du moment que la variable globale cite le mode \plm=init= dans sa déclaration (\refSectionPage{declarationVariableGlobale}).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapterLabel{Modes d'exécution}{chapitreModesExecution}
+
+Un \emph{mode d'exécution} est une annotation qui permet au compilateur de vérifier la cohérence des appels des routines, et qui n'ajoute aucun code supplémentaire à l'exécution.
+
+En PLM, à toute routine est associé un \emph{mode d'exécution}\index{Mode@Mode d'exécution}.
+
+Les annotations de mode d'une routine sont inscrites dans l'en-tête de la routine, après son nom (voir la déclaration d'une procédure, \refSubsectionPage{declarationProcedure}). Par exemple :
+
+\begin{PLM}
+proc uneProcedure `user `init () {
+}
+\end{PLM}
+
+
+\section{Des exemples}
+
+Considérons le code suivant :
+\begin{PLM}
+proc uneRoutine `user () {
+}
+
+proc routineAppelante `user () {
+  uneRoutine () // Appel valide
+}
+\end{PLM}
+
+L'appel de \plm+uneRoutine+ est valide, car l'ensemble des modes de la routine appelée \plm+uneRoutine+ est \{\plm+`user+\} et est égal à l'ensemble des modes de la routine appelante \plm+routineAppelante+. Mais l'égalité des deux ensembles de mode n'est pas obligatoire ; par exemple :
+
+\begin{PLM}
+proc uneRoutine `user `isr () {
+}
+
+proc routineAppelante `user () {
+  uneRoutine () // Appel valide
+}
+\end{PLM}
+
+
+L'appel de \plm+uneRoutine+ est toujours valide, car l'ensemble des modes de la routine appelée \plm+uneRoutine+ est \{\plm+`user+, \plm+`isr+\} et contient l'ensemble des modes de la routine appelante \plm+routineAppelante+ qui est \{\plm+`user+\}. 
+
+Par contre, l'appel suivant est incorrect :
+
+\begin{PLM}
+proc uneRoutine `isr () {
+}
+
+proc routineAppelante `user `isr () {
+  uneRoutine () // Erreur : appel invalide
+}
+\end{PLM}
+
+L'appel de \plm+uneRoutine+ est invalide, car l'ensemble des modes de la routine appelée \plm+uneRoutine+ est \{\plm+`isr+\} et ne contient pas l'ensemble des modes de la routine appelante \plm+routineAppelante+ qui est \{\plm+`isr+, \plm+`user+\}. En effet, la routine appelante \plm+routineAppelante+ peut elle-même être appelée à partir d'une routine dont le mode est \plm+`user+ : autoriser l'appel de \plm+uneRoutine+ aurait pour conséquence de pouvoir appeler de manière indirecte une routine dont le mode associé est \plm+`isr+ à partir d'une routine dont le mode est \plm+`user+.
+
+
+\sectionLabel{Modes définis par le compilateur}{modesPredefinis}
+
+Le compilateur définit six modes d'exécution (\refTableauPage{ModeExecutionPredefinis}). Il n'est pas possible d'en définir de nouveaux.
+
+
+
+
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lll}
+  \textbf{Mode} & \textbf{Commentaire} & \textbf{Lien} \\
+  \plm=`boot= & Routines exécutées au démarrage & \refSectionPage{bootRoutine} \\
+  \plm=`init= & Routines d'initialisation & \refSectionPage{initRoutine} \\
+  \plm=`panic= & Routines de panique & \refSectionPage{routinePanique} \\
+  \plm=`kernel= & Routines du noyau de l'exécutif temps-réel &  \\
+  \plm=`isr= & Routines d'interruption &  \\
+  \plm=`section= & Sections critiques &  \\
+\end{tabular}
+\caption{Modes d'exécution définis par le compilateur}
+\labelTableau{ModeExecutionPredefinis}
+\ligne
+\end{table}

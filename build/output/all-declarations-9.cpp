@@ -646,13 +646,13 @@ const char * gWrapperFileContent_0_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "svc section ledOn () {\n"
+  "system section ledOn () {\n"
   "  IO1CLR  = 1 << 23 // Led On\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "svc section ledOff () {\n"
+  "system section ledOff () {\n"
   "  IO1SET  = 1 << 23 // Led Off\n"
   "}\n"
   "\n"
@@ -676,7 +676,7 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
   "01-blinkleds.plm",
   "plm",
   true, // Text file
-  594, // Text length
+  600, // Text length
   gWrapperFileContent_0_embeddedSampleCode
 ) ;
 
@@ -696,13 +696,13 @@ const char * gWrapperFileContent_1_embeddedSampleCode = "target \"LPC-L2294\"\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "svc section ledOn () {\n"
+  "system section ledOn () {\n"
   "  IO1CLR  = 1 << 23 // Led On\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "svc section ledOff () {\n"
+  "system section ledOff () {\n"
   "  globalVar = SINGLE_PIPO\n"
   "  globalVar = SINGLE_PIPO.fields\n"
   "  globalVar = SINGLE_PIPO.fields.shifted\n"
@@ -747,7 +747,7 @@ const cRegularFileWrapper gWrapperFile_1_embeddedSampleCode (
   "02-control-register-array.plm",
   "plm",
   true, // Text file
-  1382, // Text length
+  1388, // Text length
   gWrapperFileContent_1_embeddedSampleCode
 ) ;
 
@@ -1046,17 +1046,17 @@ const char * gWrapperFileContent_5_embeddedSampleCode = "target \"teensy-3-1\"\n
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "svc section emptySection () {\n"
+  "system section emptySection () {\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "svc service emptyService () {\n"
+  "system service emptyService () {\n"
   "}\n"
   "\n"
   "//\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\xE2""\x80""\x94""\n"
   "\n"
-  "svc section getSysTick () -> $uint32 {\n"
+  "system section getSysTick () -> $uint32 {\n"
   "  result = SYST_CVR\n"
   "}\n"
   "\n"
@@ -1115,7 +1115,7 @@ const cRegularFileWrapper gWrapperFile_5_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  2355, // Text length
+  2364, // Text length
   gWrapperFileContent_5_embeddedSampleCode
 ) ;
 
@@ -1238,14 +1238,14 @@ const char * gWrapperFileContent_7_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var value $uint32\n"
   "  var list = $taskList ()\n"
   "\n"
-  "  public svc service V @mutating () {\n"
+  "  public system service V @mutating () {\n"
   "    makeTaskReady (!\?fromList:self.list \?found:let found)\n"
   "    if not found {\n"
   "      self.value += 1\n"
   "    }\n"
   "  }\n"
   "\n"
-  "  public svc primitive P_until @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public system primitive P_until @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    result = self.value > 0\n"
   "    if result {\n"
   "      self.value -= 1\n"
@@ -1306,7 +1306,7 @@ const cRegularFileWrapper gWrapperFile_7_embeddedSampleCode (
   "06-semaphore-P-until.plm",
   "plm",
   true, // Text file
-  2263, // Text length
+  2269, // Text length
   gWrapperFileContent_7_embeddedSampleCode
 ) ;
 
@@ -1355,7 +1355,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var list = $taskList ()\n"
   "  var guardList = $guardList ()\n"
   "\n"
-  "  public svc primitive P @noUnusedWarning @mutating () {\n"
+  "  public system primitive P @noUnusedWarning @mutating () {\n"
   "    if self.value > 0 {\n"
   "      self.value -= 1\n"
   "    }else{\n"
@@ -1363,7 +1363,7 @@ const char * gWrapperFileContent_8_embeddedSampleCode = "target \"teensy-3-1\"\n
   "    }\n"
   "  }\n"
   "\n"
-  "  public svc service V @mutating () {\n"
+  "  public system service V @mutating () {\n"
   "    makeTaskReady (!\?fromList:self.list \?found:let found)\n"
   "    if not found {\n"
   "      self.value += 1\n"
@@ -1449,7 +1449,7 @@ const cRegularFileWrapper gWrapperFile_8_embeddedSampleCode (
   "07-guarded-semaphore.plm",
   "plm",
   true, // Text file
-  3147, // Text length
+  3153, // Text length
   gWrapperFileContent_8_embeddedSampleCode
 ) ;
 
@@ -1617,7 +1617,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1\"\
   "  var inputGuardList = $guardList ()\n"
   "  var outputGuardList = $guardList ()\n"
   "\n"
-  "  public svc primitive input @mutating () {\n"
+  "  public system primitive input @mutating () {\n"
   "    makeTaskReady (!\?fromList:self.outputWaitList \?found:let found)\n"
   "    if not found {\n"
   "      notifyChange (!\?forGuard:self.outputGuardList)\n"
@@ -1625,7 +1625,7 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1\"\
   "    }\n"
   "  }\n"
   "\n"
-  "  public svc primitive output @mutating () {\n"
+  "  public system primitive output @mutating () {\n"
   "    makeTaskReady (!\?fromList:self.inputWaitList \?found:let found)\n"
   "    if not found {\n"
   "      notifyChange (!\?forGuard:self.inputGuardList)\n"
@@ -1633,14 +1633,14 @@ const char * gWrapperFileContent_10_embeddedSampleCode = "target \"teensy-3-1\"\
   "    }\n"
   "  }\n"
   "\n"
-  "  public svc primitive inputUntil @noUnusedWarning @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public system primitive inputUntil @noUnusedWarning @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    makeTaskReady (!\?fromList:self.outputWaitList \?found:result)\n"
   "    if (not result) and (inDeadline > time.millis ()) { \n"
   "      block (!\?inList:self.inputWaitList !onDeadline:inDeadline)\n"
   "    }\n"
   "  }\n"
   "\n"
-  "  public svc primitive outputUntil @noUnusedWarning @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
+  "  public system primitive outputUntil @noUnusedWarning @mutating (\?deadline:inDeadline $uint32) -> $bool {\n"
   "    makeTaskReady (!\?fromList:self.inputWaitList \?found:result)\n"
   "    if (not result) and (inDeadline > time.millis ()) { \n"
   "      block (!\?inList:self.outputWaitList !onDeadline:inDeadline)\n"
@@ -1700,7 +1700,7 @@ const cRegularFileWrapper gWrapperFile_10_embeddedSampleCode (
   "09-rendez-vous.plm",
   "plm",
   true, // Text file
-  3582, // Text length
+  3594, // Text length
   gWrapperFileContent_10_embeddedSampleCode
 ) ;
 
@@ -1882,7 +1882,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1\"\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "svc section setupPIT () {\n"
+  "system section setupPIT () {\n"
   "  PIT_MCR = 0\n"
   "  PIT_LDVAL0 = 200000\n"
   "  PIT_TCTRL0 = 3 // Interrupt, enabled\n"
@@ -1890,7 +1890,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1\"\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "svc section getPITValue (!outValue $uint32) {\n"
+  "system section getPITValue (!outValue $uint32) {\n"
   "  outValue = gPITValue\n"
   "}\n"
   "\n"
@@ -1937,7 +1937,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  2110, // Text length
+  2116, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 

@@ -32,14 +32,14 @@ struct $monSemaphore {
   var value $uint32
   var list = $taskList ()
 
-  public svc service V @mutating () {
+  public system service V @mutating () {
     makeTaskReady (!?fromList:self.list ?found:let found)
     if not found {
       self.value += 1
     }
   }
 
-  public svc primitive P_until @mutating (?deadline:inDeadline $uint32) -> $bool {
+  public system primitive P_until @mutating (?deadline:inDeadline $uint32) -> $bool {
     result = self.value > 0
     if result {
       self.value -= 1

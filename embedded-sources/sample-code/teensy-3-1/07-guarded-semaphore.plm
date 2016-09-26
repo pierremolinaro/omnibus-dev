@@ -41,7 +41,7 @@ struct $monSemaphore {
   var list = $taskList ()
   var guardList = $guardList ()
 
-  public svc primitive P @noUnusedWarning @mutating () {
+  public system primitive P @noUnusedWarning @mutating () {
     if self.value > 0 {
       self.value -= 1
     }else{
@@ -49,7 +49,7 @@ struct $monSemaphore {
     }
   }
 
-  public svc service V @mutating () {
+  public system service V @mutating () {
     makeTaskReady (!?fromList:self.list ?found:let found)
     if not found {
       self.value += 1
