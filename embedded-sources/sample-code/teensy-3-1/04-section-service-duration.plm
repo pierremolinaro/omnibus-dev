@@ -20,17 +20,17 @@ init 1000 {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-svc section emptySection () {
+system section emptySection () {
 }
 
 //——————————————————————————————————————————————————————————————————————————————
 
-svc service emptyService () {
+system service emptyService () {
 }
 
 //——————————————————————————————————————————————————————————————————————————————
 
-svc section getSysTick () -> $uint32 {
+system section getSysTick () -> $uint32 {
   result = SYST_CVR
 }
 

@@ -97,7 +97,7 @@ module time {
   
   //············································································
   
-  public svc section millis @noUnusedWarning () -> $uint32 {
+  public system section millis @noUnusedWarning () -> $uint32 {
     result = self.mUptimeMS
   }
   
@@ -114,7 +114,7 @@ module time {
   
   //············································································
   
-  public svc primitive waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
+  public system primitive waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
     if inDate > self.kernelMillis () {
       block (!onDeadline:inDate)
     }

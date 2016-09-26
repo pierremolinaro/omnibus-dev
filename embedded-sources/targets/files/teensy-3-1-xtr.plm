@@ -91,7 +91,7 @@ module time {
 
   //············································································
   
-  public svc safe millis @noUnusedWarning () -> $uint32 {
+  public system safe millis @noUnusedWarning () -> $uint32 {
     result = self.mUptimeMS
   }
   
@@ -123,7 +123,7 @@ module time {
   
   //············································································
   
-  public svc primitive waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
+  public system primitive waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
     if inDate > self.mUptimeMS {
       block (!onDeadline:inDate)
     }
@@ -131,7 +131,7 @@ module time {
   
   //············································································
   
-  public svc primitive waitDuringMS @noUnusedWarning (?delay: inDelay $uint32) {
+  public system primitive waitDuringMS @noUnusedWarning (?delay: inDelay $uint32) {
     if inDelay > 0 {
       block (!onDeadline:self.mUptimeMS +% inDelay)
     }
