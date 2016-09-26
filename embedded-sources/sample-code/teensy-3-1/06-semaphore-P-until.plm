@@ -39,7 +39,7 @@ struct $monSemaphore {
     }
   }
 
-  public svc primitive P_until (?deadline:inDeadline $uint32) -> $bool {
+  public svc primitive P_until @mutating (?deadline:inDeadline $uint32) -> $bool {
     result = self.value > 0
     if result {
       self.value -= 1

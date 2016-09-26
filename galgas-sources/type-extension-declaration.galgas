@@ -7,8 +7,7 @@ list @extensionDeclarationListAST {
   @functionDeclarationListAST mProcedureDeclarationListAST
   @structurePropertyListAST mPropertyList
   @serviceDeclarationListAST mServiceListAST
-  @svcDeclarationListAST mSectionListAST
-  @primitiveDeclarationListAST mPrimitiveListAST
+  @svcDeclarationListAST mSVCListAST
   @guardDeclarationListAST mGuardListAST
 }
 
@@ -27,8 +26,7 @@ syntax extension plm_syntax {
     @functionDeclarationListAST procedureDeclarationListAST = {}
     @structurePropertyListAST propertyList = {}
     @serviceDeclarationListAST serviceListAST = {}
-    @svcDeclarationListAST sectionListAST = {}
-    @primitiveDeclarationListAST primitiveListAST = {}
+    @svcDeclarationListAST svcListAST = {}
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
@@ -36,13 +34,11 @@ syntax extension plm_syntax {
     while
       <function> !?procedureDeclarationListAST
     while
-     <section> !?sectionListAST
+     <section> !?svcListAST
     while
       <service> !?serviceListAST
     while
       <guard> !?guardListAST
-    while
-      <primitive> !?primitiveListAST
     while
       $;$
     end
@@ -52,8 +48,7 @@ syntax extension plm_syntax {
       !procedureDeclarationListAST
       !propertyList
       !serviceListAST
-      !sectionListAST
-      !primitiveListAST
+      !svcListAST
       !guardListAST
   }
 

@@ -728,6 +728,7 @@ void extensionMethod_enterAccessibleEntities (const class GALGAS_interruptMapIR 
 
 void extensionMethod_svcCodeGeneration (const class GALGAS_routineMapIR inObject,
                                         class GALGAS_string & io_ioLLVMcode,
+                                        class GALGAS__32_stringlist & io_ioPrimitiveAndServiceList,
                                         class GALGAS__32_stringlist & io_ioSectionSafeList,
                                         class C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;

@@ -8,8 +8,7 @@ class @structureDeclaration : @abstractDeclaration {
   @structurePropertyListAST mStructureFieldListAST
   @functionDeclarationListAST mFunctionDeclarationListAST
   @serviceDeclarationListAST mServiceListAST
-  @svcDeclarationListAST mSectionListAST
-  @primitiveDeclarationListAST mPrimitiveListAST
+  @svcDeclarationListAST mSVCListAST
   @guardDeclarationListAST mGuardListAST
 }
 
@@ -85,7 +84,6 @@ syntax extension plm_syntax {
     @structurePropertyListAST fieldList = {}
     @serviceDeclarationListAST serviceListAST = {}
     @svcDeclarationListAST svcListAST = {}
-    @primitiveDeclarationListAST primitiveListAST = {}
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
@@ -99,8 +97,6 @@ syntax extension plm_syntax {
     while
       <guard> !?guardListAST
     while
-      <primitive> !?primitiveListAST
-    while
       $;$
     end
     $}$
@@ -111,7 +107,6 @@ syntax extension plm_syntax {
       !procedureDeclarationListAST
       !serviceListAST
       !svcListAST
-      !primitiveListAST
       !guardListAST
     }
   }
@@ -131,7 +126,7 @@ override method @structureDeclaration addExtension
   @structureDeclaration newDeclaration = self
   let currentExtensionDeclarationListAST = ioExtensionDeclarationListAST
   ioExtensionDeclarationListAST = {}
-  for (typeName functions properties services sections primitives guards) in currentExtensionDeclarationListAST do
+  for (typeName functions properties services svcs guards) in currentExtensionDeclarationListAST do
     if mStructureName.string == typeName.string then
       newDeclaration = .new {
         ![newDeclaration mStructureName]
@@ -139,12 +134,11 @@ override method @structureDeclaration addExtension
         ![newDeclaration mStructureFieldListAST] + properties
         ![newDeclaration mFunctionDeclarationListAST] + functions
         ![newDeclaration mServiceListAST] + services
-        ![newDeclaration mSectionListAST] + sections
-        ![newDeclaration mPrimitiveListAST] + primitives
+        ![newDeclaration mSVCListAST] + svcs
         ![newDeclaration mGuardListAST] + guards      
       }
     else
-      ioExtensionDeclarationListAST += !typeName !functions !properties !services !sections !primitives !guards
+      ioExtensionDeclarationListAST += !typeName !functions !properties !services !svcs !guards
     end
   end
   outNewDeclaration = newDeclaration
@@ -180,8 +174,7 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
   end
 #--- Add structure services, section, primitives and guards
   [mServiceListAST noteServiceTypesInPrecedenceGraph !?ioGraph]
-  [mSectionListAST noteTypesInPrecedenceGraph !?ioGraph]
-  [mPrimitiveListAST notePrimitiveTypesInPrecedenceGraph !?ioGraph]
+  [mSVCListAST noteTypesInPrecedenceGraph !?ioGraph]
   [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
 }
 
@@ -350,8 +343,7 @@ override method @structureDeclaration enterRoutinesInContext
     !?context:ioContext
   ]
   [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
-  [mSectionListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
-  [mPrimitiveListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
+  [mSVCListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
   [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
 }
 
@@ -380,14 +372,7 @@ override method @structureDeclaration semanticAnalysis
     !?intermediateCode:ioIntermediateCodeStruct
   ]
 #--- Analyze svc
-  [mSectionListAST svcSemanticAnalysis
-    !receiverType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
-#--- Analyze primitives
-  [mPrimitiveListAST primitiveSemanticAnalysis
+  [mSVCListAST svcSemanticAnalysis
     !receiverType:structureType
     !context:inContext
     !?temporary:ioTemporaries

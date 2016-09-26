@@ -252,6 +252,16 @@ class GALGAS_string function_functionResultVariableName (class C_Compiler * inCo
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                    Function 'llvmNameForPrimitiveImplementation'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForPrimitiveImplementation (const class GALGAS_string & constinArgument0,
+                                                                 class C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                      Function 'llvmNameForSafeImplementation'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

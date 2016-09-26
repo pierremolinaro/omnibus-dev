@@ -41,6 +41,9 @@ syntax extension plm_syntax {
     or
       $safe$
       routineKind = .safe
+    or
+      $primitive$
+      routineKind = .primitive
     end
     $identifier$ ?let name
     @lstringlist attributeList = {}
@@ -207,13 +210,21 @@ method @svcDeclarationListAST svcSemanticAnalysis
 
 method @routineMapIR svcCodeGeneration
   ?!@string ioLLVMcode
+  ?!@2stringlist ioPrimitiveAndServiceList
   ?!@2stringlist ioSectionSafeList
 {
   for svc in self do
-    if (svc.mKind == .section) || (svc.mKind == .safe) then
+    if (svc.mKind == .section) || (svc.mKind == .safe) || (svc.mKind == .primitive) then
       let svcCallName = llvmNameForSVCCall (!svc.mRoutineNameForGeneration !svc.mKind)
       let svcImplementationName = llvmNameForSVCImplementation (!svc.mRoutineNameForGeneration !svc.mKind)
-      ioSectionSafeList += !svcCallName !svcImplementationName
+      switch svc.mKind
+      case section, safe :
+        ioSectionSafeList += !svcCallName !svcImplementationName
+      case primitive, service :
+        ioPrimitiveAndServiceList += !svcCallName !svcImplementationName
+      case function :
+        error .nowhere : "INTERNAL ERROR"
+      end
       ioLLVMcode += llvmTitleComment (!svcCallName)
       ioLLVMcode += "declare"
       if svc.mReturnType == .null then

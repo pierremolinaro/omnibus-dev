@@ -38,9 +38,8 @@ syntax extension plm_syntax {
     @functionDeclarationListAST functionDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}
     @serviceDeclarationListAST serviceListAST = {}
-    @primitiveDeclarationListAST primitiveListAST = {}
     @guardDeclarationListAST guardListAST = {}
-    @svcDeclarationListAST sectionListAST = {}
+    @svcDeclarationListAST svcListAST = {}
     @initList initList = {}
     repeat
     while
@@ -54,11 +53,9 @@ syntax extension plm_syntax {
     while
       <service> !?serviceListAST
     while
-     <section> !?sectionListAST
+     <section> !?svcListAST
     while
       <guard> !?guardListAST
-    while
-      <primitive> !?primitiveListAST
     while
       $;$
     end
@@ -109,20 +106,6 @@ syntax extension plm_syntax {
       routineMangledName.string += ")"
       requiredByList += !routineMangledName
     end
-    for primitive in primitiveListAST do
-      var routineMangledName = @lstring.new {
-        !"$" + moduleTypeName + "." + primitive.mPrimitiveName
-        !primitive.mPrimitiveName.location
-      }
-      routineMangledName.string += "("
-      for (passingMode selector * *) in primitive.mPrimitiveFormalArgumentList do
-        routineMangledName.string += [passingMode formalPassingModeString]
-        routineMangledName.string += selector.string
-        routineMangledName.string += ":"
-      end
-      routineMangledName.string += ")"
-      requiredByList += !routineMangledName
-    end
     for init in initList do
       ioAST.mInitList +=
        !init.mInitLocation
@@ -140,8 +123,7 @@ syntax extension plm_syntax {
       !fieldList
       !functionDeclarationListAST
       !serviceListAST
-      !sectionListAST
-      !primitiveListAST
+      !svcListAST
       !guardListAST
     }
   #--- Declare module

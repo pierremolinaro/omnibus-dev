@@ -6,11 +6,9 @@ syntax plm_syntax (plm_lexique) {
 
   rule <function> ?!@functionDeclarationListAST ioProcListAST
 
-  rule <section> ?!@svcDeclarationListAST ioSectionListAST
+  rule <section> ?!@svcDeclarationListAST ioSVCListAST
 
   rule <service> ?!@serviceDeclarationListAST ioServiceListAST
-
-  rule <primitive> ?!@primitiveDeclarationListAST ioPrimitiveListAST
 
   rule <isr> ?!@isrDeclarationListAST ioISRListAST ?let @lstring inSelfTypeName ?let @string inGlobalVarName
 
@@ -43,8 +41,6 @@ syntax plm_syntax (plm_lexique) {
       <section> !?ioAst.mStandAloneSVCListAST
     while
       <service> !?ioAst.mServiceListAST
-    while
-      <primitive> !?ioAst.mPrimitiveListAST
     while
       <isr> !?ioAst.mISRDeclarationListAST !["" nowhere] !""
     while

@@ -59,7 +59,6 @@ project (1:0:0) -> "plm" {
   "galgas-sources/declaration-isr.galgas"
   "galgas-sources/declaration-section.galgas"
   "galgas-sources/declaration-service.galgas"
-  "galgas-sources/declaration-primitive.galgas"
   "galgas-sources/declaration-guard.galgas"
 
 #--- Expression
