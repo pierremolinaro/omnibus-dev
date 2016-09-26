@@ -8,8 +8,7 @@ class @structureDeclaration : @abstractDeclaration {
   @structurePropertyListAST mStructureFieldListAST
   @functionDeclarationListAST mFunctionDeclarationListAST
   @serviceDeclarationListAST mServiceListAST
-  @sectionDeclarationListAST mSectionListAST
-  @safeDeclarationListAST mSafeListAST
+  @svcDeclarationListAST mSectionListAST
   @primitiveDeclarationListAST mPrimitiveListAST
   @guardDeclarationListAST mGuardListAST
 }
@@ -85,8 +84,7 @@ syntax extension plm_syntax {
     @functionDeclarationListAST procedureDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}
     @serviceDeclarationListAST serviceListAST = {}
-    @sectionDeclarationListAST sectionListAST = {}
-    @safeDeclarationListAST safeListAST = {}
+    @svcDeclarationListAST svcListAST = {}
     @primitiveDeclarationListAST primitiveListAST = {}
     @guardDeclarationListAST guardListAST = {}
     repeat
@@ -95,9 +93,7 @@ syntax extension plm_syntax {
     while
       <function> !?procedureDeclarationListAST
     while
-      <section> !?sectionListAST
-    while
-      <safe> !?safeListAST
+      <section> !?svcListAST
     while
       <service> !?serviceListAST
     while
@@ -114,8 +110,7 @@ syntax extension plm_syntax {
       !fieldList
       !procedureDeclarationListAST
       !serviceListAST
-      !sectionListAST
-      !safeListAST
+      !svcListAST
       !primitiveListAST
       !guardListAST
     }
@@ -136,7 +131,7 @@ override method @structureDeclaration addExtension
   @structureDeclaration newDeclaration = self
   let currentExtensionDeclarationListAST = ioExtensionDeclarationListAST
   ioExtensionDeclarationListAST = {}
-  for (typeName functions properties services sections safes primitives guards) in currentExtensionDeclarationListAST do
+  for (typeName functions properties services sections primitives guards) in currentExtensionDeclarationListAST do
     if mStructureName.string == typeName.string then
       newDeclaration = .new {
         ![newDeclaration mStructureName]
@@ -145,12 +140,11 @@ override method @structureDeclaration addExtension
         ![newDeclaration mFunctionDeclarationListAST] + functions
         ![newDeclaration mServiceListAST] + services
         ![newDeclaration mSectionListAST] + sections
-        ![newDeclaration mSafeListAST] + safes
         ![newDeclaration mPrimitiveListAST] + primitives
         ![newDeclaration mGuardListAST] + guards      
       }
     else
-      ioExtensionDeclarationListAST += !typeName !functions !properties !services !sections !safes !primitives !guards
+      ioExtensionDeclarationListAST += !typeName !functions !properties !services !sections !primitives !guards
     end
   end
   outNewDeclaration = newDeclaration
@@ -186,8 +180,7 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
   end
 #--- Add structure services, section, primitives and guards
   [mServiceListAST noteServiceTypesInPrecedenceGraph !?ioGraph]
-  [mSectionListAST noteSectionTypesInPrecedenceGraph !?ioGraph]
-  [mSafeListAST noteTypesInPrecedenceGraph !?ioGraph]
+  [mSectionListAST noteTypesInPrecedenceGraph !?ioGraph]
   [mPrimitiveListAST notePrimitiveTypesInPrecedenceGraph !?ioGraph]
   [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
 }
@@ -358,7 +351,6 @@ override method @structureDeclaration enterRoutinesInContext
   ]
   [mServiceListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
   [mSectionListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
-  [mSafeListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
   [mPrimitiveListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
   [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
 }
@@ -387,15 +379,8 @@ override method @structureDeclaration semanticAnalysis
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   ]
-#--- Analyze sections
-  [mSectionListAST sectionSemanticAnalysis
-    !receiverType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
-#--- Analyze safes
-  [mSafeListAST sectionSemanticAnalysis
+#--- Analyze svc
+  [mSectionListAST svcSemanticAnalysis
     !receiverType:structureType
     !context:inContext
     !?temporary:ioTemporaries

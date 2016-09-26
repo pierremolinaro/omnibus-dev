@@ -4,16 +4,6 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @routineKind {
-  case function
-  case section
-  case safe
-  case service
-  case primitive
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 # Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
 map @routineMapForContext {
   @lstring mRoutineLLVMName
@@ -43,20 +33,6 @@ map @guardMapForContext {
   insert insertKey error message "the '%K' guard is already declared in %L"
   search searchKey error message "there is no '%K' guard"
   remove removeKey error message "there is no '%K' guard"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @sectionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in self do
-    for (* * formalArgumentTypeName *) in mSectionFormalArgumentList do
-      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
-      [!?ioGraph noteNode !typeName]
-    end
-    [mSectionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

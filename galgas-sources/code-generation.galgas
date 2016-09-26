@@ -228,12 +228,7 @@ private proc generateCodeFiles
     generationAdds.mExternFunctionDeclarationSet += !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
   end
 #----------------------------------------- Sections
-  [inIntermediateCodeStruct.mRoutineMapIR sectionCodeGeneration
-    !?llvmCode
-    !?sectionList
-  ]
-#----------------------------------------- Safes
-  [inIntermediateCodeStruct.mRoutineMapIR safeCodeGeneration
+  [inIntermediateCodeStruct.mRoutineMapIR svcCodeGeneration
     !?llvmCode
     !?sectionList
   ]
