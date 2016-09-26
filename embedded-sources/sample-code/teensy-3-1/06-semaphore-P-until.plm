@@ -32,7 +32,7 @@ struct $monSemaphore {
   var value $uint32
   var list = $taskList ()
 
-  public svc service V () {
+  public svc service V @mutating () {
     makeTaskReady (!?fromList:self.list ?found:let found)
     if not found {
       self.value += 1

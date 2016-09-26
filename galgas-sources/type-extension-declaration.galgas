@@ -6,7 +6,6 @@ list @extensionDeclarationListAST {
   @lstring mTypeName
   @functionDeclarationListAST mProcedureDeclarationListAST
   @structurePropertyListAST mPropertyList
-  @serviceDeclarationListAST mServiceListAST
   @svcDeclarationListAST mSVCListAST
   @guardDeclarationListAST mGuardListAST
 }
@@ -25,7 +24,6 @@ syntax extension plm_syntax {
     ${$
     @functionDeclarationListAST procedureDeclarationListAST = {}
     @structurePropertyListAST propertyList = {}
-    @serviceDeclarationListAST serviceListAST = {}
     @svcDeclarationListAST svcListAST = {}
     @guardDeclarationListAST guardListAST = {}
     repeat
@@ -36,8 +34,6 @@ syntax extension plm_syntax {
     while
      <section> !?svcListAST
     while
-      <service> !?serviceListAST
-    while
       <guard> !?guardListAST
     while
       $;$
@@ -47,7 +43,6 @@ syntax extension plm_syntax {
       !typeName
       !procedureDeclarationListAST
       !propertyList
-      !serviceListAST
       !svcListAST
       !guardListAST
   }

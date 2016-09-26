@@ -284,7 +284,6 @@ proc buildSemanticContext
   [inAST.mProcedureListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
   [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
   [inAST.mStandAloneSVCListAST enterInContext !receiverType:"" !?context: outSemanticContext]
-  [inAST.mServiceListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #--- Enter tasks
   [inAST.mTaskList enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
@@ -296,14 +295,6 @@ proc buildSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
   end
-#--- Check required procs mode
-#  if @uint.errorCount == 0 then
-#    for requiredProc in inAST.mRequiredProcList do
-#      for (mode) in requiredProc.mProcedureModeList do
-#        [outSemanticContext.mModeMap searchKey !mode]
-#      end
-#    end
-#  end
 #--- Check global var declaration
   if @uint.errorCount == 0 then
     for globalVar in inAST.mGlobalVarDeclarationList do

@@ -37,7 +37,6 @@ syntax extension plm_syntax {
     ${$
     @functionDeclarationListAST functionDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}
-    @serviceDeclarationListAST serviceListAST = {}
     @guardDeclarationListAST guardListAST = {}
     @svcDeclarationListAST svcListAST = {}
     @initList initList = {}
@@ -50,8 +49,6 @@ syntax extension plm_syntax {
       <module_variable> !?fieldList
     while
       <function> !?functionDeclarationListAST
-    while
-      <service> !?serviceListAST
     while
      <section> !?svcListAST
     while
@@ -78,20 +75,20 @@ syntax extension plm_syntax {
         requiredByList += !routineMangledName
       end
     end
-    for service in serviceListAST do
-      var routineMangledName = @lstring.new {
-        !"$" + moduleTypeName + "." + service.mServiceName
-        !service.mServiceName.location
-      }
-      routineMangledName.string += "("
-      for (passingMode selector * *) in service.mServiceFormalArgumentList do
-        routineMangledName.string += [passingMode formalPassingModeString]
-        routineMangledName.string += selector.string
-        routineMangledName.string += ":"
-      end
-      routineMangledName.string += ")"
-      requiredByList += !routineMangledName
-    end
+#    for service in serviceListAST do
+#      var routineMangledName = @lstring.new {
+#        !"$" + moduleTypeName + "." + service.mServiceName
+#        !service.mServiceName.location
+#      }
+#      routineMangledName.string += "("
+#      for (passingMode selector * *) in service.mServiceFormalArgumentList do
+#        routineMangledName.string += [passingMode formalPassingModeString]
+#        routineMangledName.string += selector.string
+#        routineMangledName.string += ":"
+#      end
+#      routineMangledName.string += ")"
+#      requiredByList += !routineMangledName
+#    end
     for guard in guardListAST do
       var routineMangledName = @lstring.new {
         !"$" + moduleTypeName + "." + guard.mGuardName
@@ -122,7 +119,6 @@ syntax extension plm_syntax {
       !{}
       !fieldList
       !functionDeclarationListAST
-      !serviceListAST
       !svcListAST
       !guardListAST
     }

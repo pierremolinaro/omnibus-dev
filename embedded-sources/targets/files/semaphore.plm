@@ -7,7 +7,7 @@ struct $semaphore {
 
   //············································································
   
-  public svc service signal @noUnusedWarning () {
+  public svc service signal @noUnusedWarning @mutating () {
     makeTaskReady (!?fromList:self.list ?found:let found)
     if not found {
       self.value += 1
