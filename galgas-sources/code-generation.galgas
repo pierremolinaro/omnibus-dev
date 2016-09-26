@@ -220,7 +220,7 @@ private proc generateCodeFiles
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
   @2stringlist primitiveAndServiceList = {}
-  @2stringlist sectionList = {}
+  @2stringlist sectionAndSafeList = {}
 #----------------------------------------- Use guards ?
   if generationAdds.mUsesGuards then
     let waitForGuardChange = waitForGuardChangeFunctionName ()
@@ -229,16 +229,11 @@ private proc generateCodeFiles
       !llvmNameForServiceImplementation (!waitForGuardChange)
     generationAdds.mExternFunctionDeclarationSet += !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
   end
-#----------------------------------------- Sections
+#----------------------------------------- SVC
   [inIntermediateCodeStruct.mRoutineMapIR svcCodeGeneration
     !?llvmCode
     !?primitiveAndServiceList
-    !?sectionList
-  ]
-#----------------------------------------- Services
-  [inIntermediateCodeStruct.mRoutineMapIR serviceCodeGeneration
-    !?llvmCode
-    !?primitiveAndServiceList
+    !?sectionAndSafeList
   ]
 #----------------------------------------- Guards
   [inIntermediateCodeStruct.mGuardMapIR guardCodeGeneration
@@ -254,8 +249,8 @@ private proc generateCodeFiles
     !?generationAdds
     !?primitiveAndServiceList
   ]
-#----------------------------------------- Service dispatcher
-  generateServiceDispatcher (
+#----------------------------------------- Primitive, service dispatcher
+  generatePrimitiveAndServiceDispatcher (
     !inCurrentDirectory
     !inTargetName.string
     !?asCode
@@ -266,7 +261,7 @@ private proc generateCodeFiles
     !inCurrentDirectory
     !inTargetName.string
     !?asCode
-    !sectionList
+    !sectionAndSafeList
   )
 #----------------------------------------- Panic
   if not [option plm_options.noPanicGeneration value] then
@@ -409,7 +404,7 @@ private proc generateCodeFiles
   json += "  ],\n"
 #--- sections
   json += "  \"sections\" : ["
-  for (* sectionImplementation) in sectionList
+  for (* sectionImplementation) in sectionAndSafeList
     do json += "\n    \"" + sectionImplementation + "\""
     between json += ","
     after json += "\n"

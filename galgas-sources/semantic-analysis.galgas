@@ -104,12 +104,6 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-  [inAST.mServiceListAST serviceSemanticAnalysis
-    !receiverType:.null
-    !context:inSemanticContext
-    !?temporary:temporaries
-    !?intermediateCode:outIntermediateCodeStruct
-  ]
   [inAST.mGuardListAST guardSemanticAnalysis
     !receiverType:.null
     !context:inSemanticContext

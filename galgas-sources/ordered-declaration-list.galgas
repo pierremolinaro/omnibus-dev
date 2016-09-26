@@ -35,7 +35,6 @@ proc buildOrderedDeclarationList
   [inAST.mProcedureListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mExternProcList noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mStandAloneSVCListAST noteTypesInPrecedenceGraph !?precedenceGraph]
-  [inAST.mServiceListAST noteServiceTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGuardListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mControlRegisterDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGlobalVarDeclarationList noteTypesInPrecedenceGraph !?precedenceGraph]
