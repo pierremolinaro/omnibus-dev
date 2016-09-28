@@ -433,7 +433,7 @@ Toute tentative de faire figurer ce registre dans une construction qui provoque 
 
 
 \subsectionLabel{Attribut \texttt{@user}}{attributUser}\index{"@user}
-La déclaration d'un registre accepte l'attribut \plm+@user+, qui signifie qu'il est accessible en mode \plm!`user!. Par défaut, un registre de contrôle n'est pas accessible en mode  \plm!`user!. Par exemple :
+La déclaration d'un registre accepte l'attribut \plm+@user+, qui signifie qu'il est accessible en mode \plm!user!. Par défaut, un registre de contrôle n'est pas accessible en mode  \plm!user!. Par exemple :
 \begin{PLM}
 register GPIOE_PSOR @user at 0x400F_F104 $uint32
 \end{PLM}
@@ -455,7 +455,7 @@ Un registre ne peut pas :
 
 Prenons un exemple ; la procédure \plm=uneProcedure= présente un argument formel en sortie, et on suppose que \texttt{REGISTRE} est un registre de type \plm!$uint32! :
 \begin{PLM}
-func `user uneProcedure (!outValue $uint32) {
+func user uneProcedure (!outValue $uint32) {
   outValue = 5
 }
 \end{PLM}
@@ -464,14 +464,14 @@ func `user uneProcedure (!outValue $uint32) {
 
 L'écriture suivante est rejetée par le compilateur (passage d'un registre comme paramètre effectif en entrée) :
 \begin{PLM}
-func `user autreProcedure () {
+func user autreProcedure () {
   uneProcedure (?REGISTRE) // Erreur
 }
 \end{PLM}
 
 Par contre, l'écriture suivante est correcte (écriture du registre) :
 \begin{PLM}
-func `user autreProcedure () {
+func user autreProcedure () {
   REGISTRE = 5 // Ok
 }
 \end{PLM}

@@ -145,11 +145,11 @@ panic : $int32 $uint32
 import "files/mk20dx256.plm"
 import "files/boot-teensy-3-1-it.plm"
 
-required proc systickHandler `isr ()
-required proc setup `user ()
-required proc loop `user ()
+required proc systickHandler isr ()
+required proc setup user ()
+required proc loop user ()
 
-proc systickHandler `isr @weak () {
+proc systickHandler isr @weak () {
 }
 
 init 0 { // Configure Systick interrupt every ms
@@ -175,7 +175,7 @@ init 0 { // Configure Systick interrupt every ms
   \item ensuite, le compilateur calcule le graphe des appels des routines, afin de supprimer les routines inutilisées ; les procédures requises sont les racines du graphe d'accessibilité.
 \end{itemize}
 
-{\bf Lignes 12 et 13.} Déclaration de la procédure \texttt{systickHandler}. Elle s'exécute dans le mode \plm=`isr=, c'est donc une routine d'interruption. Elle est déclarée avec l'attribut \plm=@weak= (\refSubsectionPage{attributWeak}), c'est-à-dire qu'une procédure de même nom peut être déclarée, qui va remplacer celle-ci. Cette déclaration définit donc la routine par défaut.
+{\bf Lignes 12 et 13.} Déclaration de la procédure \texttt{systickHandler}. Elle s'exécute dans le mode \plm=isr=, c'est donc une routine d'interruption. Elle est déclarée avec l'attribut \plm=@weak= (\refSubsectionPage{attributWeak}), c'est-à-dire qu'une procédure de même nom peut être déclarée, qui va remplacer celle-ci. Cette déclaration définit donc la routine par défaut.
 
 {\bf Lignes 15 à 19.} Définition de la routine \plm=init 0= (\refSectionPage{initRoutine}). Le code de cette routine configure le \emph{SysTick Timer} de façon qu'une interruption \emph{SysTick} survienne toutes les millisecondes. Comme cette routine porte le numéro $0$, on est sûr qu'elle soit la première à être exécutée.
 

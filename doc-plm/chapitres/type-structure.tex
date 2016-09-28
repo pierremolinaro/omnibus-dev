@@ -166,17 +166,17 @@ var pt3 = $point3 (!p:$point (!x:4 !y:8) !z:6)
 
 Les fonctions définies dans une structure sont particulières dans le sens où deux attributs permettent de contrôler l'accès aux propriétés :
 \begin{itemize}
-\item l'attribut \plm!@userAccess! autorise la fonction à accéder aux propriétés en mode \plm!`user! ;
+\item l'attribut \plm!@userAccess! autorise la fonction à accéder aux propriétés en mode \plm!user! ;
 \item l'attribut \plm!@mutating! autorise la fonction à modifier \emph{directement} ou \emph{indirectement} les propriétés.
 \end{itemize}
 
-L'attribut \plm!@userAccess! peut paraître surprenant, mais il permet de garantir l'absence d'accès en parallèle aux propriétés par plusieurs tâches : la fonction d'une variable globale de type structure ne peut pas être appelée en mode \plm!`user! si la fonction a été définie avec l'attribut  \plm!@userAccess!.
+L'attribut \plm!@userAccess! peut paraître surprenant, mais il permet de garantir l'absence d'accès en parallèle aux propriétés par plusieurs tâches : la fonction d'une variable globale de type structure ne peut pas être appelée en mode \plm!user! si la fonction a été définie avec l'attribut  \plm!@userAccess!.
 
 \subsection{Attribut \texttt{@userAccess}}\index{"@userAccess}
 
-L'attribut \plm!@userAccess! autorise la fonction à lire \emph{directement} les propriétés en mode \plm!`user!. Par \emph{directement}, on entend que les instructions de la fonction nomment les propriétés (notation \plm=self.=), ou appellent des fonctions qui déclarent l'attribut \plm!@userAccess!.
+L'attribut \plm!@userAccess! autorise la fonction à lire \emph{directement} les propriétés en mode \plm!user!. Par \emph{directement}, on entend que les instructions de la fonction nomment les propriétés (notation \plm=self.=), ou appellent des fonctions qui déclarent l'attribut \plm!@userAccess!.
 
-Ainsi, l'attribut \plm!@userAccess! est indispensable pour lire les propriétés en mode \plm!`user!. Par contre, si la fonction ne s'exécute pas en mode \plm!`user!, cet attribut est inutile. Il est aussi inutile si la fonction appelle des sections qui lisent des propriétés.
+Ainsi, l'attribut \plm!@userAccess! est indispensable pour lire les propriétés en mode \plm!user!. Par contre, si la fonction ne s'exécute pas en mode \plm!user!, cet attribut est inutile. Il est aussi inutile si la fonction appelle des sections qui lisent des propriétés.
 
 Si l'on veut l'accès en écriture, ajouter l'attribut \plm=@mutating= est indispensable. Comme les services, primitives et gardes ont par défaut un accès en écriture aux propriétés, cet attribut est indispensable pour que leur appel soit valide. 
 
@@ -185,23 +185,23 @@ Voici un code d'exemple qui illustre les différentes possibilités :
 struct $exemple {
   var x $int32
   
-  func `user getNok () -> $int32 {
+  func user getNok () -> $int32 {
     result = self.x // Erreur : @userAccess est nécéssaire
   }
   
-  func `user getOk @userAccess () -> $int32 {
+  func user getOk @userAccess () -> $int32 {
     result = self.x // Ok : @userAccess autorise l'accès
   }
   
-  func `user getNok2  () -> $int32 {
+  func user getNok2  () -> $int32 {
     result = self.getOk () // Erreur : @userAccess est nécéssaire
   }
   
-  func `user getOk2 @userAccess () -> $int32 {
+  func user getOk2 @userAccess () -> $int32 {
     result = self.getOk () // Ok : @userAccess autorise l'accès
   }
   
-  func `section sGet () -> $int32 {
+  func section sGet () -> $int32 {
     result = self.x // Ok : @userAccess est inutile
   }
   
@@ -209,7 +209,7 @@ struct $exemple {
     result = self.x
   }
 
-  func `user getOk3 () -> $int32 {
+  func user getOk3 () -> $int32 {
     result = self.sectionGet ()
   }
 }
@@ -217,13 +217,13 @@ struct $exemple {
 
 Dans le code d'exemple ci-dessus :
 \begin{itemize}
-  \item la fonction \plm=getNok= s'exécute en mode \plm=`user=, ne nomme pas l'attribut \plm=@userAccess=, donc son instruction qui nomme une propriété déclenche une erreur de compilation ;
-  \item la fonction \plm=getOk= s'exécute en mode \plm=`user=, nomme l'attribut \plm=@userAccess=, donc son instruction qui nomme une propriété est acceptée par le compilateur ;
-  \item la fonction \plm=getNok2= s'exécute en mode \plm=`user=, ne nomme pas l'attribut \plm=@userAccess=, donc son instruction qui nomme une fonction déclarée avec cet attribut déclenche une erreur de compilation ;
-  \item la fonction \plm=getOk2= s'exécute en mode \plm=`user=, nomme l'attribut \plm=@userAccess=, donc son instruction qui nomme une fonction déclarée avec cet attribut est acceptée par le compilateur ;
-  \item la fonction \plm=sGet= s'exécute en mode \plm=`section=, l'attribut \plm=@userAccess= est inutile pour que son instruction qui nomme une propriété soit acceptée par le compilateur ;
-  \item la section \plm=sectionGet= s'exécute en mode \plm=`section=, son instruction qui nomme une propriété est acceptée par le compilateur ;
-  \item la fonction \plm=getOk3= s'exécute en mode \plm=`user=, l'attribut \plm=@userAccess= est inutile pour que l'appel à une section soit acceptée par le compilateur.
+  \item la fonction \plm=getNok= s'exécute en mode \plm=user=, ne nomme pas l'attribut \plm=@userAccess=, donc son instruction qui nomme une propriété déclenche une erreur de compilation ;
+  \item la fonction \plm=getOk= s'exécute en mode \plm=user=, nomme l'attribut \plm=@userAccess=, donc son instruction qui nomme une propriété est acceptée par le compilateur ;
+  \item la fonction \plm=getNok2= s'exécute en mode \plm=user=, ne nomme pas l'attribut \plm=@userAccess=, donc son instruction qui nomme une fonction déclarée avec cet attribut déclenche une erreur de compilation ;
+  \item la fonction \plm=getOk2= s'exécute en mode \plm=user=, nomme l'attribut \plm=@userAccess=, donc son instruction qui nomme une fonction déclarée avec cet attribut est acceptée par le compilateur ;
+  \item la fonction \plm=sGet= s'exécute en mode \plm=section=, l'attribut \plm=@userAccess= est inutile pour que son instruction qui nomme une propriété soit acceptée par le compilateur ;
+  \item la section \plm=sectionGet= s'exécute en mode \plm=section=, son instruction qui nomme une propriété est acceptée par le compilateur ;
+  \item la fonction \plm=getOk3= s'exécute en mode \plm=user=, l'attribut \plm=@userAccess= est inutile pour que l'appel à une section soit acceptée par le compilateur.
 \end{itemize}
 
 
@@ -238,19 +238,19 @@ Voici un code d'exemple qui reprend le code d'exemple de la section précédente
 struct $exemple {
   var x $int32
   
-  func `user setNok @userAccess (?inX $int32) {
+  func user setNok @userAccess (?inX $int32) {
     self.x = inX // Erreur : @mutating est nécéssaire
   }
   
-  func `user setOk @userAccess @mutating (?inX $int32) {
+  func user setOk @userAccess @mutating (?inX $int32) {
     self.x = inX // Ok : @mutating autorise l'écriture
   }
   
-  func `user setNok2 @userAccess (?inX $int32) {
+  func user setNok2 @userAccess (?inX $int32) {
     self.setOk (!inX) // Erreur : @mutating est nécéssaire
   }
   
-  func `user setOk2 @userAccess @mutating (?inX $int32) {
+  func user setOk2 @userAccess @mutating (?inX $int32) {
     self.setOk (!inX) // Ok : @mutating autorise l'accès
   }
   
@@ -258,7 +258,7 @@ struct $exemple {
     self.x = inX
   }
 
-  func `user setOk3 @userAccess @mutating (?inX $int32) {
+  func user setOk3 @userAccess @mutating (?inX $int32) {
     self.sectionSet (!inX)
   }
 
@@ -272,7 +272,7 @@ Dans le code d'exemple ci-dessus :
   \item la fonction \plm=setNok2= ne nomme pas l'attribut \plm=@mutating=, donc son instruction qui écrit une fonction déclarée avec l'attribut \plm=@mutating= déclenche une erreur de compilation ;
   \item la fonction \plm=setOk2= nomme l'attribut \plm=@mutating=, donc son instruction qui nomme une fonction déclarée avec l'attribut \plm=@mutating= est acceptée par le compilateur ;
   \item la section \plm=sectionGet= nomme l'attribut \plm=@mutating=, son instruction qui écrit une propriété est acceptée par le compilateur ;
-  \item la fonction \plm=setOk3= s'exécute en mode \plm=`user=, l'attribut \plm=@mutating= est nécessaire pour que l'appel à une section déclarée avec l'attribut \plm=@mutating= soit acceptée par le compilateur.
+  \item la fonction \plm=setOk3= s'exécute en mode \plm=user=, l'attribut \plm=@mutating= est nécessaire pour que l'appel à une section déclarée avec l'attribut \plm=@mutating= soit acceptée par le compilateur.
 \end{itemize}
 
 
@@ -289,7 +289,7 @@ Dans le code d'exemple ci-dessus :
 \sectionLabel{Sections}{sectionsStructure}
 
 
-Une structure peut définir des \emph{sections}. Une section s'exécute en mode \plm=`section=, c'est-à-dire interruptions matérielles masquées ; aucune primitive de l'exécutif n'est accessible dans ce mode. On peut donc utiliser une section pour accéder en exclusion mutuelle aux propriétés de la structure.
+Une structure peut définir des \emph{sections}. Une section s'exécute en mode \plm=section=, c'est-à-dire interruptions matérielles masquées ; aucune primitive de l'exécutif n'est accessible dans ce mode. On peut donc utiliser une section pour accéder en exclusion mutuelle aux propriétés de la structure.
 
 Par défaut, une section définie dans une structure a accès aux propriétés en lecture ; pour pouvoir accéder en écriture, il faut ajouter l'attribut \plm=@mutating=\index{"@mutating}.
 
@@ -334,7 +334,7 @@ struct $exemple {
 
 \sectionLabel{Services}{servicesStructure}
 
-Une structure peut définir des \emph{services}. Un service s'exécute en mode \plm=`service=\index{`service}, c'est-à-dire interruptions matérielles masquées ; seules les fonctions de l'exécutif pouvant libérer des tâches sont accessibles dans ce mode, qui est celui des routines d'interruption. Un exemple de service est la primitive \plm=V= du sémaphore de Dijkstra (\refSectionPage{semaphore}).
+Une structure peut définir des \emph{services}. Un service s'exécute en mode \plm=service=\index{service}, c'est-à-dire interruptions matérielles masquées ; seules les fonctions de l'exécutif pouvant libérer des tâches sont accessibles dans ce mode, qui est celui des routines d'interruption. Un exemple de service est la primitive \plm=V= du sémaphore de Dijkstra (\refSectionPage{semaphore}).
 
 Par défaut, un service défini dans une structure a accès aux propriétés en lecture et en écriture (l'attribut \plm=@mutating= est inutile).
 
@@ -350,7 +350,7 @@ Par défaut, un service défini dans une structure est privé. Pour le rendre pu
 
 \sectionLabel{Primitives}{primitivesStructure}
 
-Une structure peut définir des \emph{primitives}. Une primitive s'exécute en mode \plm=`kernel=\index{`kernel}, c'est-à-dire interruptions matérielles masquées ; les fonctions de l'exécutif pouvant bloquer ou libérer des tâches sont accessibles dans ce mode. Un exemple de service est la primitive \plm=P= du sémaphore de Dijkstra (\refSectionPage{semaphore}).
+Une structure peut définir des \emph{primitives}. Une primitive s'exécute en mode \plm=primitive=\index{primitive}, c'est-à-dire interruptions matérielles masquées ; les fonctions de l'exécutif pouvant bloquer ou libérer des tâches sont accessibles dans ce mode. Un exemple de service est la primitive \plm=P= du sémaphore de Dijkstra (\refSectionPage{semaphore}).
 
 Par défaut, une primitive définie dans une structure a accès aux propriétés en lecture et en écriture (l'attribut \plm=@mutating= est inutile).
 
@@ -389,13 +389,13 @@ struct $exemple {
 }
 
 extension $exemple {
-  func `user setOk @userAccess @mutating (?inX $int32) {
+  func user setOk @userAccess @mutating (?inX $int32) {
     self.x = inX
   }
 }
 
 extension $exemple {
-  func `user setOk2 @userAccess @mutating (?inX $int32) {
+  func user setOk2 @userAccess @mutating (?inX $int32) {
     self.setOk (!inX) 
   }
   
@@ -405,7 +405,7 @@ extension $exemple {
 }
 
 extension $exemple {
-  func `user setOk3 @userAccess @mutating (?inX $int32) {
+  func user setOk3 @userAccess @mutating (?inX $int32) {
     self.sectionSet (!inX)
   }
 }
