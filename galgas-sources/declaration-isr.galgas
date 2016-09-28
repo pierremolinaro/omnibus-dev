@@ -4,9 +4,10 @@
 
 list @isrDeclarationListAST {
   @lstring mISRName
+  @mode mMode
   @lstring mSelfTypeName # "" if standalone
   @string mGlobalVariableName # "" if standalone
-  @lstringlist mISRAttributeList
+#  @lstringlist mISRAttributeList
   @instructionListAST mISRInstructionList
   @location mEndOfISRDeclaration
 }
@@ -21,21 +22,33 @@ syntax extension plm_syntax {
 
   rule <isr> ?!@isrDeclarationListAST ioISRListAST ?let @lstring inSelfTypeName ?let @string inGlobalVarName {
     $isr$
-    $identifier$ ?let sectionName
-    @lstringlist attributeList = {}
-    repeat
-    while
-      $@attribute$ ?let attribute
-      attributeList += !attribute
-    end
+    @mode mode
+    select
+      $service$
+      mode = .serviceMode
+    or
+      $section$
+      mode = .sectionMode
+    or
+      $safe$
+      mode = .safeMode
+    end 
+    $identifier$ ?let isrName
+#    @lstringlist attributeList = {}
+#    repeat
+#    while
+#      $@attribute$ ?let attribute
+#      attributeList += !attribute
+#    end
     ${$
     <instructionList> ?let instructionList
     $}$
     ioISRListAST +=
-      !sectionName
+      !isrName
+      !mode
       !inSelfTypeName
       !inGlobalVarName
-      !attributeList
+#      !attributeList
       !instructionList
       !.here
   }
@@ -65,18 +78,17 @@ method @isrDeclarationListAST isrSemanticAnalysis
 {
   for isr in self do
   #--- Analyze attributes
-    var xtrAttribute = false
-    for (attribute) in isr.mISRAttributeList do
-      if attribute.string != "xtr" then
-        error attribute : "only @xtr attribute is allowed here" fixit { remove }
-      elsif xtrAttribute then
-        error attribute : "duplicate @xtr attribute" fixit { remove }
-      else
-        xtrAttribute = true
-      end
-    end
+#    var xtrAttribute = false
+#    for (attribute) in isr.mISRAttributeList do
+#      if attribute.string != "xtr" then
+#        error attribute : "only @xtr attribute is allowed here" fixit { remove }
+#      elsif xtrAttribute then
+#        error attribute : "duplicate @xtr attribute" fixit { remove }
+#      else
+#        xtrAttribute = true
+#      end
+#    end
   #--- Modes
-    let @mode mode = if xtrAttribute then .serviceMode else .sectionMode end
   #--- Invocation graph
     let routineNameForInvocationGraph = interruptNameForInvocationGraph (!isr.mISRName)
     if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
@@ -88,9 +100,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
   #--- Variable map
     initialVariableMap (
       !context:inSemanticContext
-      !mode:mode
-#      !userMode:false
-#      !registerAccess:.readWriteAccess
+      !mode:isr.mMode
       !globalsAreConstant:false
       !returnTypeName:["" nowhere]
       ?@variableMap variableMap
@@ -110,7 +120,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !propertiesAreMutable:true
       !routineNameForInvocationGraph:routineNameForInvocationGraph
       !context:inSemanticContext
-      !mode:mode
+      !mode:isr.mMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
@@ -129,7 +139,8 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !isr.mGlobalVariableName
       !allocaList
       !instructionGenerationList
-      !xtrAttribute
+      !isr.mMode
+#      !xtrAttribute
     ]  
   end
 }
@@ -158,10 +169,10 @@ method @interruptMapIR interruptCodeGeneration
   @stringset definedInterrupts = {}
   for interrupt in self do
     definedInterrupts += !interrupt.lkey.string
-    let interruptImplementationName = if interrupt.mXTR then
-      llvmNameForInterrupt (!interrupt.lkey).string
+    let interruptImplementationName = if interrupt.mMode == .serviceMode then
+      llvmNameForServiceInterrupt (!interrupt.lkey).string
     else
-      llvmNameForISR (!interrupt.lkey.string)
+      llvmNameForSectionOrSafeInterrupt (!interrupt.lkey.string)
     end
     ioLLVMcode += llvmTitleComment (!interruptImplementationName)
     ioLLVMcode += "define void @" + interruptImplementationName + " ()" + llvmAttributeFunction () + " {\n"
@@ -182,9 +193,9 @@ method @interruptMapIR interruptCodeGeneration
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
   #---- Generate interrupt handler for XTR
-    if interrupt.mXTR then
-     let interruptHandlerName = llvmNameForInterrupt (!interrupt.lkey).string
-     let isrName = llvmNameForISR (!interrupt.lkey.string)
+    if interrupt.mMode == .serviceMode then
+     let interruptHandlerName = llvmNameForServiceInterrupt (!interrupt.lkey).string
+     let isrName = llvmNameForSectionOrSafeInterrupt (!interrupt.lkey.string)
      let s1 = [inXTRInterruptHandlerString stringByReplacingStringByString !"!ISR!" !isrName]
      let s2 = [s1 stringByReplacingStringByString !"!HANDLER!" !interruptHandlerName]
      ioAScode += s2
@@ -195,14 +206,14 @@ method @interruptMapIR interruptCodeGeneration
     if not [definedInterrupts hasKey !lkey.string] then
       switch panicCode
       case noPanicCode :
-        let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForISR (!lkey.string)]
+        let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!lkey.string)]
         ioAScode += s
       case panicCode (@lbigint value) :
         if [option plm_options.noPanicGeneration value] then
-          let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForISR (!lkey.string)]
+          let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!lkey.string)]
           ioAScode += s
         else
-          let name = llvmNameForISR (!lkey.string)
+          let name = llvmNameForSectionOrSafeInterrupt (!lkey.string)
           ioLLVMcode += llvmTitleComment (!"Panic code for " + name)
           ioLLVMcode += "define void @" + name + " ()" + llvmAttributeFunction () + " noreturn {\n"
           ioLLVMcode += "  call void @panic.isr (" + inGenerationContext.mPanicCodeLLVMType + " " + value.bigint + ") noreturn \n"

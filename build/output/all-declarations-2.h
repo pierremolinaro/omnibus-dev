@@ -887,7 +887,7 @@ class cMapElement_interruptMapIR : public cMapElement {
   public : GALGAS_string mAttribute_mGlobalVariableName ;
   public : GALGAS_allocaList mAttribute_mAllocaList ;
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
-  public : GALGAS_bool mAttribute_mXTR ;
+  public : GALGAS_mode mAttribute_mMode ;
 
 //--- Constructor
   public : cMapElement_interruptMapIR (const GALGAS_lstring & inKey,
@@ -895,7 +895,7 @@ class cMapElement_interruptMapIR : public cMapElement {
                                        const GALGAS_string & in_mGlobalVariableName,
                                        const GALGAS_allocaList & in_mAllocaList,
                                        const GALGAS_instructionListIR & in_mInstructionGenerationList,
-                                       const GALGAS_bool & in_mXTR
+                                       const GALGAS_mode & in_mMode
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -1352,15 +1352,12 @@ class GALGAS_interruptMapIR_2D_element : public AC_GALGAS_root {
   public : GALGAS_string mAttribute_mGlobalVariableName ;
   public : GALGAS_allocaList mAttribute_mAllocaList ;
   public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
-  public : GALGAS_bool mAttribute_mXTR ;
+  public : GALGAS_mode mAttribute_mMode ;
 
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public : static GALGAS_interruptMapIR_2D_element constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Default constructor
   public : GALGAS_interruptMapIR_2D_element (void) ;
@@ -1374,7 +1371,7 @@ class GALGAS_interruptMapIR_2D_element : public AC_GALGAS_root {
                                              const GALGAS_string & in_mGlobalVariableName,
                                              const GALGAS_allocaList & in_mAllocaList,
                                              const GALGAS_instructionListIR & in_mInstructionGenerationList,
-                                             const GALGAS_bool & in_mXTR) ;
+                                             const GALGAS_mode & in_mMode) ;
 
 //-- Start of generic part --*
 
@@ -1392,7 +1389,7 @@ class GALGAS_interruptMapIR_2D_element : public AC_GALGAS_root {
                                                                           const class GALGAS_string & inOperand2,
                                                                           const class GALGAS_allocaList & inOperand3,
                                                                           const class GALGAS_instructionListIR & inOperand4,
-                                                                          const class GALGAS_bool & inOperand5
+                                                                          const class GALGAS_mode & inOperand5
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1415,9 +1412,9 @@ class GALGAS_interruptMapIR_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mSelfType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mXTR (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mSelfType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1448,23 +1445,23 @@ void extensionMethod_interruptCodeGeneration (const class GALGAS_interruptMapIR 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              Function 'llvmNameForISR'                                              *
+//                                    Function 'llvmNameForSectionOrSafeInterrupt'                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_string function_llvmNameForISR (const class GALGAS_string & constinArgument0,
-                                             class C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_llvmNameForSectionOrSafeInterrupt (const class GALGAS_string & constinArgument0,
+                                                                class C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           Function 'llvmNameForInterrupt'                                           *
+//                                       Function 'llvmNameForServiceInterrupt'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_lstring function_llvmNameForInterrupt (const class GALGAS_lstring & constinArgument0,
-                                                    class C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
+class GALGAS_lstring function_llvmNameForServiceInterrupt (const class GALGAS_lstring & constinArgument0,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 
 //---------------------------------------------------------------------------------------------------------------------*

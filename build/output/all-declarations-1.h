@@ -9046,7 +9046,7 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
                                                       const class GALGAS_string & inOperand2,
                                                       const class GALGAS_allocaList & inOperand3,
                                                       const class GALGAS_instructionListIR & inOperand4,
-                                                      const class GALGAS_bool & inOperand5,
+                                                      const class GALGAS_mode & inOperand5,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -9056,7 +9056,7 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
                                                    class GALGAS_string constinArgument2,
                                                    class GALGAS_allocaList constinArgument3,
                                                    class GALGAS_instructionListIR constinArgument4,
-                                                   class GALGAS_bool constinArgument5,
+                                                   class GALGAS_mode constinArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -9065,7 +9065,7 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
                                                    class GALGAS_string & outArgument2,
                                                    class GALGAS_allocaList & outArgument3,
                                                    class GALGAS_instructionListIR & outArgument4,
-                                                   class GALGAS_bool & outArgument5,
+                                                   class GALGAS_mode & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -9084,15 +9084,15 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMModeForKey (class GALGAS_mode constinArgument0,
+                                                        class GALGAS_string constinArgument1,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
   public : VIRTUAL_IN_DEBUG void setter_setMSelfTypeForKey (class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                                             class GALGAS_string constinArgument1,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMXTRForKey (class GALGAS_bool constinArgument0,
-                                                       class GALGAS_string constinArgument1,
-                                                       C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -9101,7 +9101,7 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
                                                    class GALGAS_string & outArgument2,
                                                    class GALGAS_allocaList & outArgument3,
                                                    class GALGAS_instructionListIR & outArgument4,
-                                                   class GALGAS_bool & outArgument5,
+                                                   class GALGAS_mode & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -9120,13 +9120,13 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
                                                                                                     C_Compiler * inCompiler
                                                                                                     COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mModeForKey (const class GALGAS_string & constinOperand0,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mSelfTypeForKey (const class GALGAS_string & constinOperand0,
                                                                                          C_Compiler * inCompiler
                                                                                          COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mXTRForKey (const class GALGAS_string & constinOperand0,
-                                                                 C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_interruptMapIR getter_overriddenMap (C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const ;
@@ -9158,7 +9158,7 @@ class cEnumerator_interruptMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_string current_mGlobalVariableName (LOCATION_ARGS) const ;
   public : class GALGAS_allocaList current_mAllocaList (LOCATION_ARGS) const ;
   public : class GALGAS_instructionListIR current_mInstructionGenerationList (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mXTR (LOCATION_ARGS) const ;
+  public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_interruptMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;

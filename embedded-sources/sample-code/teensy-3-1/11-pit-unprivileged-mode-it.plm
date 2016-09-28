@@ -55,7 +55,7 @@ var gPITValue $uint32 = 0
 
 //------------------------------------------------*
 
-isr PITChannel0 {
+isr safe PITChannel0 {
 //--- Acquitter l'interruption
   PIT_TFLG0 = 1
 //--- Incrémenter le compteur

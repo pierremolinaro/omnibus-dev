@@ -7192,10 +7192,10 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_interruptMapIR inObje
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_interruptMapIR temp_0 = inObject ;
-  cEnumerator_interruptMapIR enumerator_5812 (temp_0, kEnumeration_up) ;
-  while (enumerator_5812.hasCurrentObject ()) {
-    extensionMethod_enterAccessibleEntities (enumerator_5812.current (HERE).mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 143)) ;
-    enumerator_5812.gotoNextObject () ;
+  cEnumerator_interruptMapIR enumerator_5905 (temp_0, kEnumeration_up) ;
+  while (enumerator_5905.hasCurrentObject ()) {
+    extensionMethod_enterAccessibleEntities (enumerator_5905.current (HERE).mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 154)) ;
+    enumerator_5905.gotoNextObject () ;
   }
 }
 

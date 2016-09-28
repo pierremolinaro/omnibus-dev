@@ -1900,7 +1900,7 @@ const char * gWrapperFileContent_12_embeddedSampleCode = "target \"teensy-3-1\"\
   "\n"
   "//------------------------------------------------*\n"
   "\n"
-  "isr PITChannel0 {\n"
+  "isr safe PITChannel0 {\n"
   "//--- Acquitter l'interruption\n"
   "  PIT_TFLG0 = 1\n"
   "//--- Incr\xC3""\xA9""menter le compteur\n"
@@ -1937,7 +1937,7 @@ const cRegularFileWrapper gWrapperFile_12_embeddedSampleCode (
   "11-pit-unprivileged-mode-it.plm",
   "plm",
   true, // Text file
-  2116, // Text length
+  2121, // Text length
   gWrapperFileContent_12_embeddedSampleCode
 ) ;
 

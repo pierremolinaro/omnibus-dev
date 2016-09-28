@@ -12588,9 +12588,9 @@ GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDe
 
 GALGAS_isrDeclarationListAST_2D_element::GALGAS_isrDeclarationListAST_2D_element (void) :
 mAttribute_mISRName (),
+mAttribute_mMode (),
 mAttribute_mSelfTypeName (),
 mAttribute_mGlobalVariableName (),
-mAttribute_mISRAttributeList (),
 mAttribute_mISRInstructionList (),
 mAttribute_mEndOfISRDeclaration () {
 }
@@ -12603,36 +12603,25 @@ GALGAS_isrDeclarationListAST_2D_element::~ GALGAS_isrDeclarationListAST_2D_eleme
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_isrDeclarationListAST_2D_element::GALGAS_isrDeclarationListAST_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                  const GALGAS_lstring & inOperand1,
-                                                                                  const GALGAS_string & inOperand2,
-                                                                                  const GALGAS_lstringlist & inOperand3,
+                                                                                  const GALGAS_mode & inOperand1,
+                                                                                  const GALGAS_lstring & inOperand2,
+                                                                                  const GALGAS_string & inOperand3,
                                                                                   const GALGAS_instructionListAST & inOperand4,
                                                                                   const GALGAS_location & inOperand5) :
 mAttribute_mISRName (inOperand0),
-mAttribute_mSelfTypeName (inOperand1),
-mAttribute_mGlobalVariableName (inOperand2),
-mAttribute_mISRAttributeList (inOperand3),
+mAttribute_mMode (inOperand1),
+mAttribute_mSelfTypeName (inOperand2),
+mAttribute_mGlobalVariableName (inOperand3),
 mAttribute_mISRInstructionList (inOperand4),
 mAttribute_mEndOfISRDeclaration (inOperand5) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_isrDeclarationListAST_2D_element GALGAS_isrDeclarationListAST_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_isrDeclarationListAST_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                                  GALGAS_lstring::constructor_default (HERE),
-                                                  GALGAS_string::constructor_default (HERE),
-                                                  GALGAS_lstringlist::constructor_emptyList (HERE),
-                                                  GALGAS_instructionListAST::constructor_emptyList (HERE),
-                                                  GALGAS_location::constructor_nowhere (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_isrDeclarationListAST_2D_element GALGAS_isrDeclarationListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                  const GALGAS_lstring & inOperand1,
-                                                                                                  const GALGAS_string & inOperand2,
-                                                                                                  const GALGAS_lstringlist & inOperand3,
+                                                                                                  const GALGAS_mode & inOperand1,
+                                                                                                  const GALGAS_lstring & inOperand2,
+                                                                                                  const GALGAS_string & inOperand3,
                                                                                                   const GALGAS_instructionListAST & inOperand4,
                                                                                                   const GALGAS_location & inOperand5 
                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
@@ -12651,13 +12640,13 @@ typeComparisonResult GALGAS_isrDeclarationListAST_2D_element::objectCompare (con
     result = mAttribute_mISRName.objectCompare (inOperand.mAttribute_mISRName) ;
   }
   if (result == kOperandEqual) {
+    result = mAttribute_mMode.objectCompare (inOperand.mAttribute_mMode) ;
+  }
+  if (result == kOperandEqual) {
     result = mAttribute_mSelfTypeName.objectCompare (inOperand.mAttribute_mSelfTypeName) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mGlobalVariableName.objectCompare (inOperand.mAttribute_mGlobalVariableName) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAttribute_mISRAttributeList.objectCompare (inOperand.mAttribute_mISRAttributeList) ;
   }
   if (result == kOperandEqual) {
     result = mAttribute_mISRInstructionList.objectCompare (inOperand.mAttribute_mISRInstructionList) ;
@@ -12671,16 +12660,16 @@ typeComparisonResult GALGAS_isrDeclarationListAST_2D_element::objectCompare (con
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_isrDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mISRName.isValid () && mAttribute_mSelfTypeName.isValid () && mAttribute_mGlobalVariableName.isValid () && mAttribute_mISRAttributeList.isValid () && mAttribute_mISRInstructionList.isValid () && mAttribute_mEndOfISRDeclaration.isValid () ;
+  return mAttribute_mISRName.isValid () && mAttribute_mMode.isValid () && mAttribute_mSelfTypeName.isValid () && mAttribute_mGlobalVariableName.isValid () && mAttribute_mISRInstructionList.isValid () && mAttribute_mEndOfISRDeclaration.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_isrDeclarationListAST_2D_element::drop (void) {
   mAttribute_mISRName.drop () ;
+  mAttribute_mMode.drop () ;
   mAttribute_mSelfTypeName.drop () ;
   mAttribute_mGlobalVariableName.drop () ;
-  mAttribute_mISRAttributeList.drop () ;
   mAttribute_mISRInstructionList.drop () ;
   mAttribute_mEndOfISRDeclaration.drop () ;
 }
@@ -12695,11 +12684,11 @@ void GALGAS_isrDeclarationListAST_2D_element::description (C_String & ioString,
   }else{
     mAttribute_mISRName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
+    mAttribute_mMode.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
     mAttribute_mSelfTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mGlobalVariableName.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mAttribute_mISRAttributeList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mAttribute_mISRInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -12716,6 +12705,12 @@ GALGAS_lstring GALGAS_isrDeclarationListAST_2D_element::getter_mISRName (UNUSED_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_mode GALGAS_isrDeclarationListAST_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mMode ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_lstring GALGAS_isrDeclarationListAST_2D_element::getter_mSelfTypeName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mSelfTypeName ;
 }
@@ -12724,12 +12719,6 @@ GALGAS_lstring GALGAS_isrDeclarationListAST_2D_element::getter_mSelfTypeName (UN
 
 GALGAS_string GALGAS_isrDeclarationListAST_2D_element::getter_mGlobalVariableName (UNUSED_LOCATION_ARGS) const {
   return mAttribute_mGlobalVariableName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_isrDeclarationListAST_2D_element::getter_mISRAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mISRAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
