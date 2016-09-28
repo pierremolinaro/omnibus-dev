@@ -1102,9 +1102,9 @@ void GALGAS_initRoutineMap::method_searchKey (GALGAS_lstring inKey,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   const cMapElement_initRoutineMap * p = (const cMapElement_initRoutineMap *) performSearch (inKey,
-                                                                                               inCompiler,
-                                                                                               kSearchErrorMessage_initRoutineMap_searchKey
-                                                                                               COMMA_THERE) ;
+                                                                                             inCompiler,
+                                                                                             kSearchErrorMessage_initRoutineMap_searchKey
+                                                                                             COMMA_THERE) ;
   if (NULL == p) {
   }else{
     macroValidSharedObject (p, cMapElement_initRoutineMap) ;
@@ -3580,9 +3580,9 @@ void GALGAS_interruptMapIR::method_searchKey (GALGAS_lstring inKey,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   const cMapElement_interruptMapIR * p = (const cMapElement_interruptMapIR *) performSearch (inKey,
-                                                                                               inCompiler,
-                                                                                               kSearchErrorMessage_interruptMapIR_searchKey
-                                                                                               COMMA_THERE) ;
+                                                                                             inCompiler,
+                                                                                             kSearchErrorMessage_interruptMapIR_searchKey
+                                                                                             COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
@@ -3613,7 +3613,13 @@ void GALGAS_interruptMapIR::setter_removeKey (GALGAS_lstring inKey,
   capCollectionElement attributes ;
   performRemove (inKey, attributes, inCompiler, kRemoveErrorMessage COMMA_THERE) ;
   cMapElement_interruptMapIR * p = (cMapElement_interruptMapIR *) attributes.ptr () ;
-  if (NULL != p) {
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+    outArgument2.drop () ;
+    outArgument3.drop () ;
+    outArgument4.drop () ;
+  }else{
     macroValidSharedObject (p, cMapElement_interruptMapIR) ;
     outArgument0 = p->mAttribute_mSelfType ;
     outArgument1 = p->mAttribute_mGlobalVariableName ;
@@ -4683,9 +4689,9 @@ void GALGAS_guardMapIR::method_searchKey (GALGAS_lstring inKey,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) const {
   const cMapElement_guardMapIR * p = (const cMapElement_guardMapIR *) performSearch (inKey,
-                                                                                       inCompiler,
-                                                                                       kSearchErrorMessage_guardMapIR_searchKey
-                                                                                       COMMA_THERE) ;
+                                                                                     inCompiler,
+                                                                                     kSearchErrorMessage_guardMapIR_searchKey
+                                                                                     COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
@@ -4716,7 +4722,13 @@ void GALGAS_guardMapIR::setter_removeKey (GALGAS_lstring inKey,
   capCollectionElement attributes ;
   performRemove (inKey, attributes, inCompiler, kRemoveErrorMessage COMMA_THERE) ;
   cMapElement_guardMapIR * p = (cMapElement_guardMapIR *) attributes.ptr () ;
-  if (NULL != p) {
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+    outArgument2.drop () ;
+    outArgument3.drop () ;
+    outArgument4.drop () ;
+  }else{
     macroValidSharedObject (p, cMapElement_guardMapIR) ;
     outArgument0 = p->mAttribute_mFormalArgumentListForGeneration ;
     outArgument1 = p->mAttribute_mGuardKindGenerationIR ;
@@ -7063,9 +7075,9 @@ void GALGAS_infixOperatorMap::method_searchKey (GALGAS_lstring inKey,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   const cMapElement_infixOperatorMap * p = (const cMapElement_infixOperatorMap *) performSearch (inKey,
-                                                                                                   inCompiler,
-                                                                                                   kSearchErrorMessage_infixOperatorMap_searchKey
-                                                                                                   COMMA_THERE) ;
+                                                                                                 inCompiler,
+                                                                                                 kSearchErrorMessage_infixOperatorMap_searchKey
+                                                                                                 COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;

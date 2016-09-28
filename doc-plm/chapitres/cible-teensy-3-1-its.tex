@@ -124,10 +124,10 @@ Le module \plm=time= regroupe des fonctions dédiées à la gestion du temps. Po
 
 
 \begin{PLM}
-  public func `panic `init oneMillisecondBusyWait ()
+  public func panic init oneMillisecondBusyWait ()
 \end{PLM}
 
-Cette fonction réalise une attente active jusqu'à la prochaine milli-seconde. Elle n'est appelable que dans les modes \plm=`panic= et \plm=`init=. 
+Cette fonction réalise une attente active jusqu'à la prochaine milli-seconde. Elle n'est appelable que dans les modes \plm=panic= et \plm=init=. 
 
 
 
@@ -136,10 +136,10 @@ Cette fonction réalise une attente active jusqu'à la prochaine milli-seconde. 
 \subsubsection{Fonction \texttt{busyWaitingDuringMS}}
 
 \begin{PLM}
-  public func `panic `init busyWaitingDuringMS (?inDelay $uint32)
+  public func panic init busyWaitingDuringMS (?inDelay $uint32)
 \end{PLM}
 
-Cette fonction effectue une attente active en appelant \plm=inDelay= fois la fonction \plm=oneMillisecondBusyWait=. Elle n'est appelable que dans les modes \plm=`panic= et \plm=`init=. 
+Cette fonction effectue une attente active en appelant \plm=inDelay= fois la fonction \plm=oneMillisecondBusyWait=. Elle n'est appelable que dans les modes \plm=panic= et \plm=init=. 
 
 
 
@@ -197,7 +197,7 @@ Les constantes suivantes sont de type \plm=$uint32= et sont dédiées aux leds :
 \subsubsectionLabel{Fonction \texttt{write(?off{}:)}}{routineLedOffTeensy31it}
 
 \begin{PLM}
-  public func `user `panic `service `kernel write (?off:inLeds $uint32) 
+  public func user panic service write (?off:inLeds $uint32) 
 \end{PLM}
 
 Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire :
@@ -217,7 +217,7 @@ Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire :
 \subsubsectionLabel{Fonction \texttt{write(?on{}:)}}{routineLedOnTeensy31it}
 
 \begin{PLM}
-  public func `user `panic `service `kernel write (?on:inLeds $uint32) 
+  public func user panic service write (?on:inLeds $uint32) 
 \end{PLM}
 
 Cette routine allume un ensemble de leds. Pour allumer une led, écrire :
@@ -237,7 +237,7 @@ Cette routine allume un ensemble de leds. Pour allumer une led, écrire :
 \subsubsectionLabel{Fonction \texttt{write(?toggle{}:)}}{routineLedToggleTeensy31it}
 
 \begin{PLM}
-  public func `user `panic `service `kernel write (?toggle:inLeds $uint32) 
+  public func user panic service write (?toggle:inLeds $uint32) 
 \end{PLM}
 
 Cette routine complémente un ensemble de leds.
@@ -265,7 +265,7 @@ Pour complémenter plusieurs leds, utiliser l'opérateur \plm=|= :
 \subsubsection{Fonction \texttt{clearScreen}}
 
 \begin{PLM}
-  public func `user clearScreen ()
+  public func user clearScreen ()
 \end{PLM}
 
 Cette fonction efface l'afficheur LCD, et place le curseur au début de la première ligne.
@@ -277,8 +277,8 @@ Cette fonction efface l'afficheur LCD, et place le curseur au début de la premi
 \subsubsection{Fonction \texttt{goto}}
 
 \begin{PLM}
-public func `user goto (?line:inLine $uint2
-                        ?column:inColumn $uint8)
+public func user goto (?line:inLine $uint2
+                       ?column:inColumn $uint8)
 \end{PLM}
 
 Cette fonction place le curseur à la colonne \plm=inColumn= de la ligne \plm=inLine=. L'afficheur possédant quatre lignes, l'argument \plm=inLine= est de type \plm=$uint2=.
@@ -289,7 +289,7 @@ Cette fonction place le curseur à la colonne \plm=inColumn= de la ligne \plm=in
 \subsubsection{Fonction \texttt{printSpaces}}
 
 \begin{PLM}
-  public func `user printSpaces (?inCount $uint32)
+  public func user printSpaces (?inCount $uint32)
 \end{PLM}
 
 Cette fonction écrit \plm=inCount= caractères espace à partir de la position du curseur.
@@ -301,7 +301,7 @@ Cette fonction écrit \plm=inCount= caractères espace à partir de la position 
 \subsubsection{Fonction \texttt{printUnsigned}}
 
 \begin{PLM}
-  public func `user printUnsigned (?inValue $uint32)
+  public func user printUnsigned (?inValue $uint32)
 \end{PLM}
 
 Cette fonction écrit la valeur de l'argument (un entier non signé sur 32 bits) \plm=inValue= à partir de la position du curseur.
@@ -314,7 +314,7 @@ Cette fonction écrit la valeur de l'argument (un entier non signé sur 32 bits)
 \subsubsection{Fonction \texttt{printSigned}}
 
 \begin{PLM}
-  public func `user printSigned (?inValue $int32)
+  public func user printSigned (?inValue $int32)
 \end{PLM}
 
 Cette fonction écrit la valeur de l'argument (un entier signé sur 32 bits) \plm=inValue= à partir de la position du curseur.
@@ -328,7 +328,7 @@ Cette fonction écrit la valeur de l'argument (un entier signé sur 32 bits) \pl
 \subsubsection{Fonction \texttt{printString}}
 
 \begin{PLM}
-  public func `user printString (?inValue $staticString)
+  public func user printString (?inValue $staticString)
 \end{PLM}
 
 Cette fonction écrit la valeur de l'argument (une chaîne de caractères) \plm=inValue= à partir de la position du curseur.
@@ -344,10 +344,10 @@ Cette fonction écrit la valeur de l'argument (une chaîne de caractères) \plm=
 \subsubsection{Fonction \texttt{clearScreenInPanicMode}}
 
 \begin{PLM}
-  public func `panic clearScreenInPanicMode ()
+  public func panic clearScreenInPanicMode ()
 \end{PLM}
 
-Cette fonction efface l'afficheur LCD, et place le curseur au début de la première ligne. Appelable uniquement en mode \plm=`panic=.
+Cette fonction efface l'afficheur LCD, et place le curseur au début de la première ligne. Appelable uniquement en mode \plm=panic=.
 
 
 
@@ -356,11 +356,11 @@ Cette fonction efface l'afficheur LCD, et place le curseur au début de la premi
 \subsubsection{Fonction \texttt{gotoInPanicMode}}
 
 \begin{PLM}
-public func `panic gotoInPanicMode (?line:inLine $uint2
-                                    ?column:inColumn $uint8)
+public func panic gotoInPanicMode (?line:inLine $uint2
+                                   ?column:inColumn $uint8)
 \end{PLM}
 
-Cette fonction place le curseur à la colonne \plm=inColumn= de la ligne \plm=inLine=. L'afficheur possédant quatre lignes, l'argument \plm=inLine= est de type \plm=$uint2=. Appelable uniquement en mode \plm=`panic=.
+Cette fonction place le curseur à la colonne \plm=inColumn= de la ligne \plm=inLine=. L'afficheur possédant quatre lignes, l'argument \plm=inLine= est de type \plm=$uint2=. Appelable uniquement en mode \plm=panic=.
 
 
 
@@ -368,10 +368,10 @@ Cette fonction place le curseur à la colonne \plm=inColumn= de la ligne \plm=in
 \subsubsection{Fonction \texttt{printSpacesInPanicMode}}
 
 \begin{PLM}
-public func `panic printSpacesInPanicMode (?inCount $uint32)
+public func panic printSpacesInPanicMode (?inCount $uint32)
 \end{PLM}
 
-Cette fonction écrit \plm=inCount= caractères espace à partir de la position du curseur. Appelable uniquement en mode \plm=`panic=.
+Cette fonction écrit \plm=inCount= caractères espace à partir de la position du curseur. Appelable uniquement en mode \plm=panic=.
 
 
 
@@ -380,10 +380,10 @@ Cette fonction écrit \plm=inCount= caractères espace à partir de la position 
 \subsubsection{Fonction \texttt{printUnsignedInPanicMode}}
 
 \begin{PLM}
-public func `panic printUnsignedInPanicMode (?inValue $uint32)
+public func panic printUnsignedInPanicMode (?inValue $uint32)
 \end{PLM}
 
-Cette fonction écrit la valeur de l'argument (un entier non signé sur 32 bits) \plm=inValue= à partir de la position du curseur. Appelable uniquement en mode \plm=`panic=.
+Cette fonction écrit la valeur de l'argument (un entier non signé sur 32 bits) \plm=inValue= à partir de la position du curseur. Appelable uniquement en mode \plm=panic=.
 
 
 
@@ -393,10 +393,10 @@ Cette fonction écrit la valeur de l'argument (un entier non signé sur 32 bits)
 \subsubsection{Fonction \texttt{printSignedInPanicMode}}
 
 \begin{PLM}
-  public func `panic printSignedInPanicMode (?inValue $int32)
+  public func panic printSignedInPanicMode (?inValue $int32)
 \end{PLM}
 
-Cette fonction écrit la valeur de l'argument (un entier signé sur 32 bits) \plm=inValue= à partir de la position du curseur. Appelable uniquement en mode \plm=`panic=.
+Cette fonction écrit la valeur de l'argument (un entier signé sur 32 bits) \plm=inValue= à partir de la position du curseur. Appelable uniquement en mode \plm=panic=.
 
 
 
@@ -407,10 +407,10 @@ Cette fonction écrit la valeur de l'argument (un entier signé sur 32 bits) \pl
 \subsubsection{Fonction \texttt{printStringInPanicMode}}
 
 \begin{PLM}
-  public func `panic printStringInPanicMode (?inValue $staticString)
+  public func panic printStringInPanicMode (?inValue $staticString)
 \end{PLM}
 
-Cette fonction écrit la valeur de l'argument (une chaîne de caractères) \plm=inValue= à partir de la position du curseur. Appelable uniquement en mode \plm=`panic=.
+Cette fonction écrit la valeur de l'argument (une chaîne de caractères) \plm=inValue= à partir de la position du curseur. Appelable uniquement en mode \plm=panic=.
 
 
 
@@ -500,10 +500,10 @@ Le type opaque \plm=$guardList= est utilisé pour maintenir la liste des tâches
 \subsubsection{Fonction \texttt{block(?!inList{}:)}}
 
 \begin{PLM}
-func `kernel block (?!inList:ioWaitingList $taskList)
+func primitive block (?!inList:ioWaitingList $taskList)
 \end{PLM}
 
-Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= passée en argument. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
+Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= passée en argument. Elle est appelable en mode \plm=primitive=, c'est-à-dire par les primitives.
 
 
 
@@ -511,10 +511,10 @@ Cette fonction bloque la tâche en cours dans la liste \plm=ioWaitingList= pass�
 \subsubsection{Fonction \texttt{block(?onDeadline{}:)}}
 
 \begin{PLM}
-func `kernel block (?onDeadline:deadline $uint32) 
+func primitive block (?onDeadline:deadline $uint32) 
 \end{PLM}
 
-Cette fonction bloque la tâche en cours jusqu'à la date \plm=deadline=. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
+Cette fonction bloque la tâche en cours jusqu'à la date \plm=deadline=. Elle est appelable en mode \plm=primitive=, c'est-à-dire par les primitives.
 
 
 
@@ -525,11 +525,11 @@ Cette fonction bloque la tâche en cours jusqu'à la date \plm=deadline=. Elle e
 \subsubsection{Fonction \texttt{block(?!inList{}:?onDeadline{}:)}}
 
 \begin{PLM}
-func `kernel block (?!inList:waitingList $taskList 
+func primitive block (?!inList:waitingList $taskList 
                     ?onDeadline:deadline $uint32) 
 \end{PLM}
 
-Cette fonction bloque la tâche en cours dans la liste \plm=waitingList= jusqu'à la date \plm=deadline=. Elle est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives.
+Cette fonction bloque la tâche en cours dans la liste \plm=waitingList= jusqu'à la date \plm=deadline=. Elle est appelable en mode \plm=primitive=, c'est-à-dire par les primitives.
 
 
 
@@ -541,13 +541,13 @@ Cette fonction bloque la tâche en cours dans la liste \plm=waitingList= jusqu'�
 \subsubsection{Fonction \texttt{makeTaskReady(?!fromList{}:)}}
 
 \begin{PLM}
-func `kernel `service `guard
+func primitive service guard
 makeTaskReady (?!fromList:waitingList $taskList) -> $bool
 \end{PLM}
 
 Si la liste \plm=waitingList= est vide, la fonction renvoie \plm=false=. Si la liste n'est pas vide, cette fonction retire de la liste la tâche de plus forte priorité, la rend prête, et la fonction renvoie \plm=true=.
 
-Cette fonction est appelable en mode \plm=`kernel=, c'est-à-dire par les primitives, et en mode \plm=`service=, c'est-à-dire par les routines d'interruption.
+Cette fonction est appelable en mode \plm=primitive=, c'est-à-dire par les primitives, et en mode \plm=service=, c'est-à-dire par les routines d'interruption.
 
 
 
@@ -561,13 +561,13 @@ Cette fonction est appelable en mode \plm=`kernel=, c'est-à-dire par les primit
 \subsubsection{Fonction \texttt{makeTasksReady(?fromCurrentDate{}:)}}
 
 \begin{PLM}
-func `service
+func service
 makeTasksReady (?fromCurrentDate:currentDate $uint32)
 \end{PLM}
 
 Cette fonction rend prête toutes les tâches en attente d'échéance dont l'échéance est atteinte.
 
-Cette fonction est appelable mode \plm=`service=, c'est-à-dire par les routines d'interruption.
+Cette fonction est appelable mode \plm=service=, c'est-à-dire par les routines d'interruption.
 
 
 
@@ -577,10 +577,10 @@ Cette fonction est appelable mode \plm=`service=, c'est-à-dire par les routines
 \subsubsection{Fonction \texttt{handleGuardedCommand}}
 
 \begin{PLM}
-func `guard handleGuardedCommand (?!guard:ioGuard $guardList)
+func guard handleGuardedCommand (?!guard:ioGuard $guardList)
 \end{PLM}
 
-Cette fonction enregistre la tâche courante dans la liste \plm=ioGuard=. Cette fonction est appelable mode \plm=`guard=, c'est-à-dire par les gardes.
+Cette fonction enregistre la tâche courante dans la liste \plm=ioGuard=. Cette fonction est appelable mode \plm=guard=, c'est-à-dire par les gardes.
 
 
 
@@ -592,10 +592,10 @@ Cette fonction enregistre la tâche courante dans la liste \plm=ioGuard=. Cette 
 \subsubsection{Fonction \texttt{handleGuardedWaitUntil}}
 
 \begin{PLM}
-func `guard handleGuardedWaitUntil (?deadline:inDeadline $uint32)
+func guard handleGuardedWaitUntil (?deadline:inDeadline $uint32)
 \end{PLM}
 
-Cette fonction enregistre la tâche courante pour une attente en garde jusqu'à la date \plm=inDeadline=. Cette fonction est appelable mode \plm=`guard=, c'est-à-dire par les gardes.
+Cette fonction enregistre la tâche courante pour une attente en garde jusqu'à la date \plm=inDeadline=. Cette fonction est appelable mode \plm=guard=, c'est-à-dire par les gardes.
 
 
 
@@ -609,10 +609,10 @@ Cette fonction enregistre la tâche courante pour une attente en garde jusqu'à 
 \subsubsection{Fonction \texttt{guardDidChange}}
 
 \begin{PLM}
-func `kernel `service guardDidChange (?!guard:ioGuard $guardList)
+func primitive service guardDidChange (?!guard:ioGuard $guardList)
 \end{PLM}
 
-Cette fonction signifie aux tâches enregistrées dans \plm=ioGuard= que les gardes doivent être re-évaluées. Cette fonction est appelable en mode \plm=`kernel= et en mode  \plm=`service=.
+Cette fonction signifie aux tâches enregistrées dans \plm=ioGuard= que les gardes doivent être re-évaluées. Cette fonction est appelable en mode \plm=primitive= et en mode  \plm=service=.
 
 
 
@@ -627,11 +627,11 @@ Cette fonction signifie aux tâches enregistrées dans \plm=ioGuard= que les gar
 \subsubsection{Fonction \texttt{tickHandlerForGuardedWaitUntil}}
 
 \begin{PLM}
-func `service
+func service
 tickHandlerForGuardedWaitUntil (?currentDate:inCurrentDate $uint32)
 \end{PLM}
 
-Cette fonction signifie aux tâches en attente d'échéance en garde que l'instant \plm=inCurrentDate= est atteint, et qu'elles doivent re-évaluer leur gardes. Cette fonction est appelable en mode \plm=`service=.
+Cette fonction signifie aux tâches en attente d'échéance en garde que l'instant \plm=inCurrentDate= est atteint, et qu'elles doivent re-évaluer leur gardes. Cette fonction est appelable en mode \plm=service=.
 
 
 
@@ -757,9 +757,9 @@ isr PITChannel0 {
 }
 \end{PLM}
 
-Une routine d'interruption s'exécute en mode \plm=`section=, c'est-à-dire que les routines de l'exécutif lui sont inaccessibles. 
+Une routine d'interruption s'exécute en mode \plm=section=, c'est-à-dire que les routines de l'exécutif lui sont inaccessibles. 
 
-Si l'on veut appeler les routines de l'exécutif du mode \plm=`service=, on ajoute l'attribut \plm=@xtr= :
+Si l'on veut appeler les routines de l'exécutif du mode \plm=service=, on ajoute l'attribut \plm=@xtr= :
 
 \begin{PLM}[1]
 isr PITChannel0 @xtr {
@@ -806,11 +806,11 @@ L'interruption \texttt{SysTick} est particulière. Elle est programmé par la ro
 Cette routine \plm+userSystickHandler+ est définie par :
 
 \begin{PLM}[1]
-public func `service userTickHandler @weak () {
+public func service userTickHandler @weak () {
 }
 \end{PLM}
 
-Comme elle est déclarée avec l'attribut \plm+@weak+, elle peut être redéfinie par l'utilisateur. Elle s'exécute en mode \plm=`service=, si bien que l'on peut appeler des services de l'exécutif qui débloquent des tâches.
+Comme elle est déclarée avec l'attribut \plm+@weak+, elle peut être redéfinie par l'utilisateur. Elle s'exécute en mode \plm=service=, si bien que l'on peut appeler des services de l'exécutif qui débloquent des tâches.
 
 
 

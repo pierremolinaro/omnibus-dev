@@ -2244,9 +2244,9 @@ void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const {
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) performSearch (inKey,
-                                                                                                           inCompiler,
-                                                                                                           kSearchErrorMessage_routineMapForContext_searchKey
-                                                                                                           COMMA_THERE) ;
+                                                                                                         inCompiler,
+                                                                                                         kSearchErrorMessage_routineMapForContext_searchKey
+                                                                                                         COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
@@ -2295,7 +2295,19 @@ void GALGAS_routineMapForContext::setter_removeKey (GALGAS_lstring inKey,
   capCollectionElement attributes ;
   performRemove (inKey, attributes, inCompiler, kRemoveErrorMessage COMMA_THERE) ;
   cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes.ptr () ;
-  if (NULL != p) {
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+    outArgument2.drop () ;
+    outArgument3.drop () ;
+    outArgument4.drop () ;
+    outArgument5.drop () ;
+    outArgument6.drop () ;
+    outArgument7.drop () ;
+    outArgument8.drop () ;
+    outArgument9.drop () ;
+    outArgument10.drop () ;
+  }else{
     macroValidSharedObject (p, cMapElement_routineMapForContext) ;
     outArgument0 = p->mAttribute_mRoutineLLVMName ;
     outArgument1 = p->mAttribute_mIsPublic ;
@@ -3403,9 +3415,9 @@ void GALGAS_guardMapForContext::method_searchKey (GALGAS_lstring inKey,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const {
   const cMapElement_guardMapForContext * p = (const cMapElement_guardMapForContext *) performSearch (inKey,
-                                                                                                       inCompiler,
-                                                                                                       kSearchErrorMessage_guardMapForContext_searchKey
-                                                                                                       COMMA_THERE) ;
+                                                                                                     inCompiler,
+                                                                                                     kSearchErrorMessage_guardMapForContext_searchKey
+                                                                                                     COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
@@ -3427,7 +3439,10 @@ void GALGAS_guardMapForContext::setter_removeKey (GALGAS_lstring inKey,
   capCollectionElement attributes ;
   performRemove (inKey, attributes, inCompiler, kRemoveErrorMessage COMMA_THERE) ;
   cMapElement_guardMapForContext * p = (cMapElement_guardMapForContext *) attributes.ptr () ;
-  if (NULL != p) {
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+  }else{
     macroValidSharedObject (p, cMapElement_guardMapForContext) ;
     outArgument0 = p->mAttribute_mIsPublic ;
     outArgument1 = p->mAttribute_mSignature ;
@@ -3706,9 +3721,9 @@ void GALGAS_prefixOperatorMap::method_searchKey (GALGAS_lstring inKey,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   const cMapElement_prefixOperatorMap * p = (const cMapElement_prefixOperatorMap *) performSearch (inKey,
-                                                                                                     inCompiler,
-                                                                                                     kSearchErrorMessage_prefixOperatorMap_searchKey
-                                                                                                     COMMA_THERE) ;
+                                                                                                   inCompiler,
+                                                                                                   kSearchErrorMessage_prefixOperatorMap_searchKey
+                                                                                                   COMMA_THERE) ;
   if (NULL == p) {
   }else{
     macroValidSharedObject (p, cMapElement_prefixOperatorMap) ;
@@ -3925,9 +3940,9 @@ void GALGAS_staticStringMap::method_searchKey (GALGAS_lstring inKey,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const {
   const cMapElement_staticStringMap * p = (const cMapElement_staticStringMap *) performSearch (inKey,
-                                                                                                 inCompiler,
-                                                                                                 kSearchErrorMessage_staticStringMap_searchKey
-                                                                                                 COMMA_THERE) ;
+                                                                                               inCompiler,
+                                                                                               kSearchErrorMessage_staticStringMap_searchKey
+                                                                                               COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
   }else{
@@ -4210,9 +4225,9 @@ void GALGAS_globalConstantMap::method_searchKey (GALGAS_lstring inKey,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   const cMapElement_globalConstantMap * p = (const cMapElement_globalConstantMap *) performSearch (inKey,
-                                                                                                     inCompiler,
-                                                                                                     kSearchErrorMessage_globalConstantMap_searchKey
-                                                                                                     COMMA_THERE) ;
+                                                                                                   inCompiler,
+                                                                                                   kSearchErrorMessage_globalConstantMap_searchKey
+                                                                                                   COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
   }else{
@@ -4456,9 +4471,9 @@ void GALGAS_allowedGuardMap::method_searchKey (GALGAS_lstring inKey,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) const {
   const cMapElement_allowedGuardMap * p = (const cMapElement_allowedGuardMap *) performSearch (inKey,
-                                                                                                 inCompiler,
-                                                                                                 kSearchErrorMessage_allowedGuardMap_searchKey
-                                                                                                 COMMA_THERE) ;
+                                                                                               inCompiler,
+                                                                                               kSearchErrorMessage_allowedGuardMap_searchKey
+                                                                                               COMMA_THERE) ;
   if (NULL == p) {
   }else{
     macroValidSharedObject (p, cMapElement_allowedGuardMap) ;
@@ -4735,9 +4750,9 @@ void GALGAS_globalVariableMap::method_searchKey (GALGAS_lstring inKey,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   const cMapElement_globalVariableMap * p = (const cMapElement_globalVariableMap *) performSearch (inKey,
-                                                                                                     inCompiler,
-                                                                                                     kSearchErrorMessage_globalVariableMap_searchKey
-                                                                                                     COMMA_THERE) ;
+                                                                                                   inCompiler,
+                                                                                                   kSearchErrorMessage_globalVariableMap_searchKey
+                                                                                                   COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
@@ -5783,9 +5798,9 @@ void GALGAS_classConstantMap::method_searchKey (GALGAS_lstring inKey,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   const cMapElement_classConstantMap * p = (const cMapElement_classConstantMap *) performSearch (inKey,
-                                                                                                   inCompiler,
-                                                                                                   kSearchErrorMessage_classConstantMap_searchKey
-                                                                                                   COMMA_THERE) ;
+                                                                                                 inCompiler,
+                                                                                                 kSearchErrorMessage_classConstantMap_searchKey
+                                                                                                 COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
   }else{
@@ -6646,9 +6661,9 @@ void GALGAS_constructorMap::method_searchKey (GALGAS_lstring inKey,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   const cMapElement_constructorMap * p = (const cMapElement_constructorMap *) performSearch (inKey,
-                                                                                               inCompiler,
-                                                                                               kSearchErrorMessage_constructorMap_searchKey
-                                                                                               COMMA_THERE) ;
+                                                                                             inCompiler,
+                                                                                             kSearchErrorMessage_constructorMap_searchKey
+                                                                                             COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
   }else{
@@ -6904,9 +6919,9 @@ void GALGAS_availableInterruptMap::method_searchKey (GALGAS_lstring inKey,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const {
   const cMapElement_availableInterruptMap * p = (const cMapElement_availableInterruptMap *) performSearch (inKey,
-                                                                                                             inCompiler,
-                                                                                                             kSearchErrorMessage_availableInterruptMap_searchKey
-                                                                                                             COMMA_THERE) ;
+                                                                                                           inCompiler,
+                                                                                                           kSearchErrorMessage_availableInterruptMap_searchKey
+                                                                                                           COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
   }else{
@@ -8037,9 +8052,9 @@ void GALGAS_globalVariableMapIR::method_searchKey (GALGAS_lstring inKey,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) performSearch (inKey,
-                                                                                                         inCompiler,
-                                                                                                         kSearchErrorMessage_globalVariableMapIR_searchKey
-                                                                                                         COMMA_THERE) ;
+                                                                                                       inCompiler,
+                                                                                                       kSearchErrorMessage_globalVariableMapIR_searchKey
+                                                                                                       COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
@@ -8385,9 +8400,9 @@ void GALGAS_globalConstantMapIR::method_searchKey (GALGAS_lstring inKey,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) performSearch (inKey,
-                                                                                                         inCompiler,
-                                                                                                         kSearchErrorMessage_globalConstantMapIR_searchKey
-                                                                                                         COMMA_THERE) ;
+                                                                                                       inCompiler,
+                                                                                                       kSearchErrorMessage_globalConstantMapIR_searchKey
+                                                                                                       COMMA_THERE) ;
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;

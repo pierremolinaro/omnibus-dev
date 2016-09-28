@@ -350,7 +350,7 @@ primitive block (?!inList:ioWaitingList $taskList) : "blockInList"
 
 La signature PLM de cette fonction est \plm=block(?!inList:)=.
 
-Elle est appelable en mode \plm=kernel=, c'est-à-dire dans une primitive. Dans l'instruction d'appel engendré en assembleur, le nom utilisé sera \texttt{func.blockInList}. Le préfixe \texttt{func.} est automatiquement ajouté par le compilateur.
+Elle est appelable en mode \plm=primitive=, c'est-à-dire dans une primitive. Dans l'instruction d'appel engendré en assembleur, le nom utilisé sera \texttt{func.blockInList}. Le préfixe \texttt{func.} est automatiquement ajouté par le compilateur.
 
 Dans le code C qui implémente cette fonction, la déclaration du prototype est :
 
@@ -413,6 +413,47 @@ Comme cette nouvelle routine a le même nom, les mêmes paramètres formels et l
 
 
 
+
+\subsectionLabel{Fonctions « universelles »}{fonctionUniverselle}
+
+Les fonctions universelles peuvent être appelées à partir de n'importe quel mode. Leur déclaration est la suivante :
+
+\begin{PLM}
+// Fonction universelle renvoyant un résultat
+func nom @attribut (arguments_formels) -> $type {
+  liste_instructions
+}
+// Procédure universelle
+func nom @attribut (arguments_formels) {
+  liste_instructions
+}
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la fonction ;
+  \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction ;
+  \item \plm=arguments_formels= est la liste (éventuellement vide) des paramètres formels~;
+  \item \plm=@type= est le type de la valeur renvoyée.
+\end{itemize}
+
+En conséquence, les contraintes sur l'écriture de leurs instructions sont importantes :
+\begin{itemize}
+  \item comme elles peuvent s'exécuter en mode \plm=user=, seuls les registres de contrôles accessibles dans ce mode sont autorisés ;
+  \item comme elles peuvent s'exécuter en mode \plm=safe=, les instructions pouvant engendrer la panique ne sont pas autorisées.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
 \subsectionLabel{Fonctions et registres de contrôle}{fonctionEtRegistresContrôles}
 
 [À REVOIR]
@@ -469,10 +510,10 @@ Comme une \emph{routine système} est exécutée par le processeur en mode privi
 
 
 
-\subsection{Déclaration d'une section}
+\subsection{Déclaration d'une routine système}
 
 
-La déclaration d'une section est la suivante :
+La déclaration d'une routine système est la suivante :
 \begin{PLM}
 system mode nom @attribut1 @attribut2 (arguments_formels) {
   liste_instructions
@@ -480,22 +521,18 @@ system mode nom @attribut1 @attribut2 (arguments_formels) {
 \end{PLM}
 Où :
 \begin{itemize}
-  \item \plm=nom= est le nom de la section ;
+  \item \plm=nom= est le nom de la routine système ;
   \item \plm=mode= est le mode associé à la routine, c'est l'un des mots réservés \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe= ;
-  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la section ; actuellement, seul l'attribut \plm!@noUnusedWarning! est défini (\refSubsectionPage{attributNoWarningIfUnusedSection}).
+  \item \plm=@attribut1= \plm=@attribut2= est une liste éventuellement vide d'attributs associés à la routine système ; actuellement, seul l'attribut \plm!@noUnusedWarning! est défini (\refSubsectionPage{attributNoWarningIfUnusedSection}).
 \end{itemize}
 
 
 
 \subsectionLabel{Sections et variables globales}{sectionEtVariablesGlobales}
 
-Pour pouvoir être utilisée dans une section, une variable globale doit déclarer cette section parmi les routines autorisées (\refSectionPage{DecRoutinesAutoriseesVarGlobale}).
+[À REVOIR]
 
-
-
-\subsectionLabel{Sections et registres de contrôle}{sectionEtRegistresContrôles}
-
-Tous les registres de contrôle sont accessibles dans une section.
+Pour pouvoir être utilisée dans une routine système, une variable globale doit la déclarer parmi les routines autorisées (\refSectionPage{DecRoutinesAutoriseesVarGlobale}).
 
 
 
@@ -526,8 +563,28 @@ L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la s
 
 
 
-\sectionLabel{Routine d'interruption}{declarationRoutineInterruption}\index{Routine!Interruption}\index{Interruption!Routine}
+\sectionLabel{Routines d'interruption}{declarationRoutineInterruption}\index{Routine!Interruption}\index{Interruption!Routine}
 
+La déclaration d'une routine d'interruption est la suivante :
+\begin{PLM}
+system mode nom {
+  liste_instructions
+}
+\end{PLM}
+Où :
+\begin{itemize}
+  \item \plm=nom= est le nom de la routine ;
+  \item \plm=mode= est le mode associé à la routine, c'est l'un des mots réservés \plm=service=, \plm=section= ou \plm=safe=.
+\end{itemize}
+
+Le nom de la routine doit être un des noms de routines d'interruption déclarés par la déclaration \plm=target= (voir §§).
+
+Le mode d'exécution associé est l'un des trois modes suivants :
+\begin{itemize}
+  \item \plm=service=, les routines de l'exécutif rendant des tâches prêtes peuvent être appelées ;
+  \item \plm=section=, la routine d'interruption n'interfère pas avec l'exécutif ;
+  \item \plm=safe=, comme pour \plm=section=, et de plus les instructions pouvant engendrer la panique y sont interdites.
+\end{itemize}
 
 
 

@@ -47,18 +47,18 @@ var gCompteur $uint32 = 0 {
   func waitMS           // la liste des arguments
 }
 
-func timerHandler `isr () {
+func timerHandler isr () {
   gCompteur +%= 1
 }
 
-func wait `user (?inDuration $uint32) {
+func wait user (?inDuration $uint32) {
   let deadline = gCompteur + inDuration
   while gCompteur < deadline do
   end
 }
 \end{PLM}
 
-Note : si une variable globale est accédée par des routines appartenant à plusieurs modes, le compilateur ajoute le qualificatif \texttt{volatile}\index{volatile@\texttt{volatile}} dans le code engendré pour déclarer cette variable. C'est le cas de l'exemple ci-dessus, la variable \texttt{gCompteur} pouvant être accédée dans les modes \plm=`isr= et \plm=`user=.
+Note : si une variable globale est accédée par des routines appartenant à plusieurs modes, le compilateur ajoute le qualificatif \texttt{volatile}\index{volatile@\texttt{volatile}} dans le code engendré pour déclarer cette variable. C'est le cas de l'exemple ci-dessus, la variable \texttt{gCompteur} pouvant être accédée dans les modes \plm=isr= et \plm=user=.
 
 
 Les routines d'initialisation (\refSectionPage{initRoutine})\index{init@\plm=init=!Routine} et les routines de panique (\refSubsectionPage{routinesPanique})\index{Routine!panique \plm=panic=}
@@ -133,7 +133,7 @@ Une variable globale ne peut pas :
 
 Prenons un exemple ; la procédure \texttt{uneProcedure} présente un argument formel en sortie, et la variable globale \texttt{gGlobale} peut être accédée en lecture et écriture par la procédure \texttt{autreProcedure} :
 \begin{PLM}
-func uneProcedure `user (!outValue $uint32) {
+func uneProcedure user (!outValue $uint32) {
   outValue = 5
 }
 
@@ -144,7 +144,7 @@ var gGlobale $uint32 {
 
 L'écriture suivante est correcte (écriture de la variable globale) :
 \begin{PLM}
-func autreProcedure `user () {
+func autreProcedure user () {
   gGlobale = 10 // Ok
 }
 \end{PLM}
@@ -152,7 +152,7 @@ func autreProcedure `user () {
 
 Par contre, l'écriture suivante est rejetée par le compilateur (passage d'une variable globale comme paramètre effectif en entrée) :
 \begin{PLM}
-func autreProcedure `user () {
+func autreProcedure user () {
   uneProcedure (?gGlobale) // Erreur, variable globale comme
                            // paramètre effectif en entrée
 }
