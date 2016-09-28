@@ -103,7 +103,7 @@ module time {
   
   //············································································
   
-  isr TIMER1 @xtr {
+  isr service TIMER1 {
     TIMER1_IR = 1 // Clears MR0 interrupt
     let now = self.mUptimeMS +% 1
     self.mUptimeMS = now

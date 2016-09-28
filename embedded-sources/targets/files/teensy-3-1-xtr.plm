@@ -113,7 +113,7 @@ module time {
   
   //············································································
   
-  isr systick @xtr {
+  isr service systick {
     let now = self.mUptimeMS +% 1
     self.mUptimeMS = now
     makeTasksReady (!fromCurrentDate:now)

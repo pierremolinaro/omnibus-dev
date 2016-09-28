@@ -149,7 +149,7 @@ private proc generateCodeFiles
      !from:inTargetName.string + "/target.s"
   )
   let x = [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
-  asCode += [x stringByReplacingStringByString !"!ISR!" !llvmNameForISR (!"")]
+  asCode += [x stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!"")]
   asCode += "\n"
 #----------------------------------------- Include LLVM specific file
   var llvmCode = llvmTitleComment (!"Target specific code")
@@ -413,16 +413,16 @@ private proc generateCodeFiles
 #--- isr
   json += "  \"isr\" : ["
   var first = true
-  for (interruptName 4* usesXTR) in inIntermediateCodeStruct.mInterruptMapIR do
+  for (interruptName 4* mMode) in inIntermediateCodeStruct.mInterruptMapIR do
     if first then
       first = false
     else
       json += ","
     end
-    let interruptImplementationName = if usesXTR then
-      llvmNameForInterrupt (!interruptName).string
+    let interruptImplementationName = if mMode == .serviceMode then
+      llvmNameForServiceInterrupt (!interruptName).string
     else
-      llvmNameForISR (!interruptName.string)
+      llvmNameForSectionOrSafeInterrupt (!interruptName.string)
     end
     json += "\n    \"" + interruptImplementationName + "\""
   end
@@ -437,7 +437,7 @@ private proc generateCodeFiles
           else
             json += ","
           end
-          json += "\n    \"" + llvmNameForISR (!lkey.string) + "\""
+          json += "\n    \"" + llvmNameForSectionOrSafeInterrupt (!lkey.string) + "\""
         end
       end
     end

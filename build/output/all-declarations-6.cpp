@@ -1539,7 +1539,7 @@ mAttribute_mSelfType (),
 mAttribute_mGlobalVariableName (),
 mAttribute_mAllocaList (),
 mAttribute_mInstructionGenerationList (),
-mAttribute_mXTR () {
+mAttribute_mMode () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1554,24 +1554,13 @@ GALGAS_interruptMapIR_2D_element::GALGAS_interruptMapIR_2D_element (const GALGAS
                                                                     const GALGAS_string & inOperand2,
                                                                     const GALGAS_allocaList & inOperand3,
                                                                     const GALGAS_instructionListIR & inOperand4,
-                                                                    const GALGAS_bool & inOperand5) :
+                                                                    const GALGAS_mode & inOperand5) :
 mAttribute_lkey (inOperand0),
 mAttribute_mSelfType (inOperand1),
 mAttribute_mGlobalVariableName (inOperand2),
 mAttribute_mAllocaList (inOperand3),
 mAttribute_mInstructionGenerationList (inOperand4),
-mAttribute_mXTR (inOperand5) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_interruptMapIR_2D_element GALGAS_interruptMapIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_interruptMapIR_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                           GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
-                                           GALGAS_string::constructor_default (HERE),
-                                           GALGAS_allocaList::constructor_emptyList (HERE),
-                                           GALGAS_instructionListIR::constructor_emptyList (HERE),
-                                           GALGAS_bool::constructor_default (HERE)) ;
+mAttribute_mMode (inOperand5) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1581,7 +1570,7 @@ GALGAS_interruptMapIR_2D_element GALGAS_interruptMapIR_2D_element::constructor_n
                                                                                     const GALGAS_string & inOperand2,
                                                                                     const GALGAS_allocaList & inOperand3,
                                                                                     const GALGAS_instructionListIR & inOperand4,
-                                                                                    const GALGAS_bool & inOperand5 
+                                                                                    const GALGAS_mode & inOperand5 
                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_interruptMapIR_2D_element result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
@@ -1610,7 +1599,7 @@ typeComparisonResult GALGAS_interruptMapIR_2D_element::objectCompare (const GALG
     result = mAttribute_mInstructionGenerationList.objectCompare (inOperand.mAttribute_mInstructionGenerationList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mXTR.objectCompare (inOperand.mAttribute_mXTR) ;
+    result = mAttribute_mMode.objectCompare (inOperand.mAttribute_mMode) ;
   }
   return result ;
 }
@@ -1618,7 +1607,7 @@ typeComparisonResult GALGAS_interruptMapIR_2D_element::objectCompare (const GALG
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_interruptMapIR_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mSelfType.isValid () && mAttribute_mGlobalVariableName.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mXTR.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_mSelfType.isValid () && mAttribute_mGlobalVariableName.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mMode.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1629,7 +1618,7 @@ void GALGAS_interruptMapIR_2D_element::drop (void) {
   mAttribute_mGlobalVariableName.drop () ;
   mAttribute_mAllocaList.drop () ;
   mAttribute_mInstructionGenerationList.drop () ;
-  mAttribute_mXTR.drop () ;
+  mAttribute_mMode.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1650,7 +1639,7 @@ void GALGAS_interruptMapIR_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mAttribute_mInstructionGenerationList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mXTR.description (ioString, inIndentation+1) ;
+    mAttribute_mMode.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -1687,8 +1676,8 @@ GALGAS_instructionListIR GALGAS_interruptMapIR_2D_element::getter_mInstructionGe
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_interruptMapIR_2D_element::getter_mXTR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mXTR ;
+GALGAS_mode GALGAS_interruptMapIR_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mMode ;
 }
 
 

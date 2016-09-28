@@ -71,7 +71,7 @@ map @interruptMapIR {
   @string mGlobalVariableName # "" if standalone
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
-  @bool mXTR
+  @mode mMode
 
   insert insertKey error message "interrupt '%K' is already defined"
   search searchKey error message "** internal error **"

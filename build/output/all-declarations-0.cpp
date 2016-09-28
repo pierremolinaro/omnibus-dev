@@ -7043,9 +7043,9 @@ class cCollectionElement_isrDeclarationListAST : public cCollectionElement {
 
 //--- Constructor
   public : cCollectionElement_isrDeclarationListAST (const GALGAS_lstring & in_mISRName,
+                                                     const GALGAS_mode & in_mMode,
                                                      const GALGAS_lstring & in_mSelfTypeName,
                                                      const GALGAS_string & in_mGlobalVariableName,
-                                                     const GALGAS_lstringlist & in_mISRAttributeList,
                                                      const GALGAS_instructionListAST & in_mISRInstructionList,
                                                      const GALGAS_location & in_mEndOfISRDeclaration
                                                      COMMA_LOCATION_ARGS) ;
@@ -7066,14 +7066,14 @@ class cCollectionElement_isrDeclarationListAST : public cCollectionElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 cCollectionElement_isrDeclarationListAST::cCollectionElement_isrDeclarationListAST (const GALGAS_lstring & in_mISRName,
+                                                                                    const GALGAS_mode & in_mMode,
                                                                                     const GALGAS_lstring & in_mSelfTypeName,
                                                                                     const GALGAS_string & in_mGlobalVariableName,
-                                                                                    const GALGAS_lstringlist & in_mISRAttributeList,
                                                                                     const GALGAS_instructionListAST & in_mISRInstructionList,
                                                                                     const GALGAS_location & in_mEndOfISRDeclaration
                                                                                     COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mISRName, in_mSelfTypeName, in_mGlobalVariableName, in_mISRAttributeList, in_mISRInstructionList, in_mEndOfISRDeclaration) {
+mObject (in_mISRName, in_mMode, in_mSelfTypeName, in_mGlobalVariableName, in_mISRInstructionList, in_mEndOfISRDeclaration) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7086,7 +7086,7 @@ bool cCollectionElement_isrDeclarationListAST::isValid (void) const {
 
 cCollectionElement * cCollectionElement_isrDeclarationListAST::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_isrDeclarationListAST (mObject.mAttribute_mISRName, mObject.mAttribute_mSelfTypeName, mObject.mAttribute_mGlobalVariableName, mObject.mAttribute_mISRAttributeList, mObject.mAttribute_mISRInstructionList, mObject.mAttribute_mEndOfISRDeclaration COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_isrDeclarationListAST (mObject.mAttribute_mISRName, mObject.mAttribute_mMode, mObject.mAttribute_mSelfTypeName, mObject.mAttribute_mGlobalVariableName, mObject.mAttribute_mISRInstructionList, mObject.mAttribute_mEndOfISRDeclaration COMMA_HERE)) ;
   return result ;
 }
 
@@ -7099,16 +7099,16 @@ void cCollectionElement_isrDeclarationListAST::description (C_String & ioString,
   mObject.mAttribute_mISRName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mMode" ":" ;
+  mObject.mAttribute_mMode.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mSelfTypeName" ":" ;
   mObject.mAttribute_mSelfTypeName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mGlobalVariableName" ":" ;
   mObject.mAttribute_mGlobalVariableName.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mISRAttributeList" ":" ;
-  mObject.mAttribute_mISRAttributeList.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mISRInstructionList" ":" ;
@@ -7153,9 +7153,9 @@ GALGAS_isrDeclarationListAST GALGAS_isrDeclarationListAST::constructor_emptyList
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_isrDeclarationListAST GALGAS_isrDeclarationListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                                      const GALGAS_lstring & inOperand1,
-                                                                                      const GALGAS_string & inOperand2,
-                                                                                      const GALGAS_lstringlist & inOperand3,
+                                                                                      const GALGAS_mode & inOperand1,
+                                                                                      const GALGAS_lstring & inOperand2,
+                                                                                      const GALGAS_string & inOperand3,
                                                                                       const GALGAS_instructionListAST & inOperand4,
                                                                                       const GALGAS_location & inOperand5
                                                                                       COMMA_LOCATION_ARGS) {
@@ -7173,17 +7173,17 @@ GALGAS_isrDeclarationListAST GALGAS_isrDeclarationListAST::constructor_listWithV
 
 void GALGAS_isrDeclarationListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                               const GALGAS_lstring & in_mISRName,
+                                                              const GALGAS_mode & in_mMode,
                                                               const GALGAS_lstring & in_mSelfTypeName,
                                                               const GALGAS_string & in_mGlobalVariableName,
-                                                              const GALGAS_lstringlist & in_mISRAttributeList,
                                                               const GALGAS_instructionListAST & in_mISRInstructionList,
                                                               const GALGAS_location & in_mEndOfISRDeclaration
                                                               COMMA_LOCATION_ARGS) {
   cCollectionElement_isrDeclarationListAST * p = NULL ;
   macroMyNew (p, cCollectionElement_isrDeclarationListAST (in_mISRName,
+                                                           in_mMode,
                                                            in_mSelfTypeName,
                                                            in_mGlobalVariableName,
-                                                           in_mISRAttributeList,
                                                            in_mISRInstructionList,
                                                            in_mEndOfISRDeclaration COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
@@ -7193,9 +7193,9 @@ void GALGAS_isrDeclarationListAST::makeAttributesFromObjects (capCollectionEleme
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_isrDeclarationListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
-                                                        const GALGAS_lstring & inOperand1,
-                                                        const GALGAS_string & inOperand2,
-                                                        const GALGAS_lstringlist & inOperand3,
+                                                        const GALGAS_mode & inOperand1,
+                                                        const GALGAS_lstring & inOperand2,
+                                                        const GALGAS_string & inOperand3,
                                                         const GALGAS_instructionListAST & inOperand4,
                                                         const GALGAS_location & inOperand5
                                                         COMMA_LOCATION_ARGS) {
@@ -7212,9 +7212,9 @@ void GALGAS_isrDeclarationListAST::addAssign_operation (const GALGAS_lstring & i
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_isrDeclarationListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
-                                                         const GALGAS_lstring inOperand1,
-                                                         const GALGAS_string inOperand2,
-                                                         const GALGAS_lstringlist inOperand3,
+                                                         const GALGAS_mode inOperand1,
+                                                         const GALGAS_lstring inOperand2,
+                                                         const GALGAS_string inOperand3,
                                                          const GALGAS_instructionListAST inOperand4,
                                                          const GALGAS_location inOperand5,
                                                          const GALGAS_uint inInsertionIndex,
@@ -7233,9 +7233,9 @@ void GALGAS_isrDeclarationListAST::setter_insertAtIndex (const GALGAS_lstring in
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_isrDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
-                                                         GALGAS_lstring & outOperand1,
-                                                         GALGAS_string & outOperand2,
-                                                         GALGAS_lstringlist & outOperand3,
+                                                         GALGAS_mode & outOperand1,
+                                                         GALGAS_lstring & outOperand2,
+                                                         GALGAS_string & outOperand3,
                                                          GALGAS_instructionListAST & outOperand4,
                                                          GALGAS_location & outOperand5,
                                                          const GALGAS_uint inRemoveIndex,
@@ -7255,9 +7255,9 @@ void GALGAS_isrDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & outOpe
     }else{
       macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
       outOperand0 = p->mObject.mAttribute_mISRName ;
-      outOperand1 = p->mObject.mAttribute_mSelfTypeName ;
-      outOperand2 = p->mObject.mAttribute_mGlobalVariableName ;
-      outOperand3 = p->mObject.mAttribute_mISRAttributeList ;
+      outOperand1 = p->mObject.mAttribute_mMode ;
+      outOperand2 = p->mObject.mAttribute_mSelfTypeName ;
+      outOperand3 = p->mObject.mAttribute_mGlobalVariableName ;
       outOperand4 = p->mObject.mAttribute_mISRInstructionList ;
       outOperand5 = p->mObject.mAttribute_mEndOfISRDeclaration ;
     }
@@ -7267,9 +7267,9 @@ void GALGAS_isrDeclarationListAST::setter_removeAtIndex (GALGAS_lstring & outOpe
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_isrDeclarationListAST::setter_popFirst (GALGAS_lstring & outOperand0,
-                                                    GALGAS_lstring & outOperand1,
-                                                    GALGAS_string & outOperand2,
-                                                    GALGAS_lstringlist & outOperand3,
+                                                    GALGAS_mode & outOperand1,
+                                                    GALGAS_lstring & outOperand2,
+                                                    GALGAS_string & outOperand3,
                                                     GALGAS_instructionListAST & outOperand4,
                                                     GALGAS_location & outOperand5,
                                                     C_Compiler * inCompiler
@@ -7287,9 +7287,9 @@ void GALGAS_isrDeclarationListAST::setter_popFirst (GALGAS_lstring & outOperand0
   }else{
     macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mISRName ;
-    outOperand1 = p->mObject.mAttribute_mSelfTypeName ;
-    outOperand2 = p->mObject.mAttribute_mGlobalVariableName ;
-    outOperand3 = p->mObject.mAttribute_mISRAttributeList ;
+    outOperand1 = p->mObject.mAttribute_mMode ;
+    outOperand2 = p->mObject.mAttribute_mSelfTypeName ;
+    outOperand3 = p->mObject.mAttribute_mGlobalVariableName ;
     outOperand4 = p->mObject.mAttribute_mISRInstructionList ;
     outOperand5 = p->mObject.mAttribute_mEndOfISRDeclaration ;
   }
@@ -7298,9 +7298,9 @@ void GALGAS_isrDeclarationListAST::setter_popFirst (GALGAS_lstring & outOperand0
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_isrDeclarationListAST::setter_popLast (GALGAS_lstring & outOperand0,
-                                                   GALGAS_lstring & outOperand1,
-                                                   GALGAS_string & outOperand2,
-                                                   GALGAS_lstringlist & outOperand3,
+                                                   GALGAS_mode & outOperand1,
+                                                   GALGAS_lstring & outOperand2,
+                                                   GALGAS_string & outOperand3,
                                                    GALGAS_instructionListAST & outOperand4,
                                                    GALGAS_location & outOperand5,
                                                    C_Compiler * inCompiler
@@ -7318,9 +7318,9 @@ void GALGAS_isrDeclarationListAST::setter_popLast (GALGAS_lstring & outOperand0,
   }else{
     macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mISRName ;
-    outOperand1 = p->mObject.mAttribute_mSelfTypeName ;
-    outOperand2 = p->mObject.mAttribute_mGlobalVariableName ;
-    outOperand3 = p->mObject.mAttribute_mISRAttributeList ;
+    outOperand1 = p->mObject.mAttribute_mMode ;
+    outOperand2 = p->mObject.mAttribute_mSelfTypeName ;
+    outOperand3 = p->mObject.mAttribute_mGlobalVariableName ;
     outOperand4 = p->mObject.mAttribute_mISRInstructionList ;
     outOperand5 = p->mObject.mAttribute_mEndOfISRDeclaration ;
   }
@@ -7329,9 +7329,9 @@ void GALGAS_isrDeclarationListAST::setter_popLast (GALGAS_lstring & outOperand0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_isrDeclarationListAST::method_first (GALGAS_lstring & outOperand0,
-                                                 GALGAS_lstring & outOperand1,
-                                                 GALGAS_string & outOperand2,
-                                                 GALGAS_lstringlist & outOperand3,
+                                                 GALGAS_mode & outOperand1,
+                                                 GALGAS_lstring & outOperand2,
+                                                 GALGAS_string & outOperand3,
                                                  GALGAS_instructionListAST & outOperand4,
                                                  GALGAS_location & outOperand5,
                                                  C_Compiler * inCompiler
@@ -7349,9 +7349,9 @@ void GALGAS_isrDeclarationListAST::method_first (GALGAS_lstring & outOperand0,
   }else{
     macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mISRName ;
-    outOperand1 = p->mObject.mAttribute_mSelfTypeName ;
-    outOperand2 = p->mObject.mAttribute_mGlobalVariableName ;
-    outOperand3 = p->mObject.mAttribute_mISRAttributeList ;
+    outOperand1 = p->mObject.mAttribute_mMode ;
+    outOperand2 = p->mObject.mAttribute_mSelfTypeName ;
+    outOperand3 = p->mObject.mAttribute_mGlobalVariableName ;
     outOperand4 = p->mObject.mAttribute_mISRInstructionList ;
     outOperand5 = p->mObject.mAttribute_mEndOfISRDeclaration ;
   }
@@ -7360,9 +7360,9 @@ void GALGAS_isrDeclarationListAST::method_first (GALGAS_lstring & outOperand0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_isrDeclarationListAST::method_last (GALGAS_lstring & outOperand0,
-                                                GALGAS_lstring & outOperand1,
-                                                GALGAS_string & outOperand2,
-                                                GALGAS_lstringlist & outOperand3,
+                                                GALGAS_mode & outOperand1,
+                                                GALGAS_lstring & outOperand2,
+                                                GALGAS_string & outOperand3,
                                                 GALGAS_instructionListAST & outOperand4,
                                                 GALGAS_location & outOperand5,
                                                 C_Compiler * inCompiler
@@ -7380,9 +7380,9 @@ void GALGAS_isrDeclarationListAST::method_last (GALGAS_lstring & outOperand0,
   }else{
     macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
     outOperand0 = p->mObject.mAttribute_mISRName ;
-    outOperand1 = p->mObject.mAttribute_mSelfTypeName ;
-    outOperand2 = p->mObject.mAttribute_mGlobalVariableName ;
-    outOperand3 = p->mObject.mAttribute_mISRAttributeList ;
+    outOperand1 = p->mObject.mAttribute_mMode ;
+    outOperand2 = p->mObject.mAttribute_mSelfTypeName ;
+    outOperand3 = p->mObject.mAttribute_mGlobalVariableName ;
     outOperand4 = p->mObject.mAttribute_mISRInstructionList ;
     outOperand5 = p->mObject.mAttribute_mEndOfISRDeclaration ;
   }
@@ -7456,6 +7456,21 @@ GALGAS_lstring GALGAS_isrDeclarationListAST::getter_mISRNameAtIndex (const GALGA
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_mode GALGAS_isrDeclarationListAST::getter_mModeAtIndex (const GALGAS_uint & inIndex,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_isrDeclarationListAST * p = (cCollectionElement_isrDeclarationListAST *) attributes.ptr () ;
+  GALGAS_mode result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
+    result = p->mObject.mAttribute_mMode ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_lstring GALGAS_isrDeclarationListAST::getter_mSelfTypeNameAtIndex (const GALGAS_uint & inIndex,
                                                                           C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) const {
@@ -7480,21 +7495,6 @@ GALGAS_string GALGAS_isrDeclarationListAST::getter_mGlobalVariableNameAtIndex (c
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
     result = p->mObject.mAttribute_mGlobalVariableName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_isrDeclarationListAST::getter_mISRAttributeListAtIndex (const GALGAS_uint & inIndex,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_isrDeclarationListAST * p = (cCollectionElement_isrDeclarationListAST *) attributes.ptr () ;
-  GALGAS_lstringlist result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
-    result = p->mObject.mAttribute_mISRAttributeList ;
   }
   return result ;
 }
@@ -7558,6 +7558,14 @@ GALGAS_lstring cEnumerator_isrDeclarationListAST::current_mISRName (LOCATION_ARG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_mode cEnumerator_isrDeclarationListAST::current_mMode (LOCATION_ARGS) const {
+  const cCollectionElement_isrDeclarationListAST * p = (const cCollectionElement_isrDeclarationListAST *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
+  return p->mObject.mAttribute_mMode ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_lstring cEnumerator_isrDeclarationListAST::current_mSelfTypeName (LOCATION_ARGS) const {
   const cCollectionElement_isrDeclarationListAST * p = (const cCollectionElement_isrDeclarationListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
@@ -7570,14 +7578,6 @@ GALGAS_string cEnumerator_isrDeclarationListAST::current_mGlobalVariableName (LO
   const cCollectionElement_isrDeclarationListAST * p = (const cCollectionElement_isrDeclarationListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
   return p->mObject.mAttribute_mGlobalVariableName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist cEnumerator_isrDeclarationListAST::current_mISRAttributeList (LOCATION_ARGS) const {
-  const cCollectionElement_isrDeclarationListAST * p = (const cCollectionElement_isrDeclarationListAST *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_isrDeclarationListAST) ;
-  return p->mObject.mAttribute_mISRAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12712,49 +12712,54 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_isr_i29_ (GALGAS_isrDeclarationLi
                                                          const GALGAS_lstring constinArgument_inSelfTypeName,
                                                          const GALGAS_string constinArgument_inGlobalVarName,
                                                          C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_isr) COMMA_SOURCE_FILE ("declaration-isr.galgas", 23)) ;
-  GALGAS_lstring var_sectionName_1288 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-isr.galgas", 24)) ;
-  GALGAS_lstringlist var_attributeList_1319 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-isr.galgas", 25)) ;
-  bool repeatFlag_0 = true ;
-  while (repeatFlag_0) {
-    switch (select_plm_5F_syntax_34 (inCompiler)) {
-    case 2: {
-      GALGAS_lstring var_attribute_1379 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__40_attribute) COMMA_SOURCE_FILE ("declaration-isr.galgas", 28)) ;
-      var_attributeList_1319.addAssign_operation (var_attribute_1379  COMMA_SOURCE_FILE ("declaration-isr.galgas", 29)) ;
-    } break ;
-    default:
-      repeatFlag_0 = false ;
-      break ;
-    }
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_isr) COMMA_SOURCE_FILE ("declaration-isr.galgas", 24)) ;
+  GALGAS_mode var_mode_1284 ;
+  switch (select_plm_5F_syntax_34 (inCompiler)) {
+  case 1: {
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_service) COMMA_SOURCE_FILE ("declaration-isr.galgas", 27)) ;
+    var_mode_1284 = GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 28)) ;
+  } break ;
+  case 2: {
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_section) COMMA_SOURCE_FILE ("declaration-isr.galgas", 30)) ;
+    var_mode_1284 = GALGAS_mode::constructor_sectionMode (SOURCE_FILE ("declaration-isr.galgas", 31)) ;
+  } break ;
+  case 3: {
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_safe) COMMA_SOURCE_FILE ("declaration-isr.galgas", 33)) ;
+    var_mode_1284 = GALGAS_mode::constructor_safeMode (SOURCE_FILE ("declaration-isr.galgas", 34)) ;
+  } break ;
+  default:
+    break ;
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-isr.galgas", 31)) ;
-  GALGAS_instructionListAST var_instructionList_1472 ;
-  nt_instructionList_ (var_instructionList_1472, inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-isr.galgas", 33)) ;
-  ioArgument_ioISRListAST.addAssign_operation (var_sectionName_1288, constinArgument_inSelfTypeName, constinArgument_inGlobalVarName, var_attributeList_1319, var_instructionList_1472, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 40))  COMMA_SOURCE_FILE ("declaration-isr.galgas", 34)) ;
+  GALGAS_lstring var_isrName_1468 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-isr.galgas", 36)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-isr.galgas", 43)) ;
+  GALGAS_instructionListAST var_instructionList_1658 ;
+  nt_instructionList_ (var_instructionList_1658, inCompiler) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-isr.galgas", 45)) ;
+  ioArgument_ioISRListAST.addAssign_operation (var_isrName_1468, var_mode_1284, constinArgument_inSelfTypeName, constinArgument_inGlobalVarName, var_instructionList_1658, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 53))  COMMA_SOURCE_FILE ("declaration-isr.galgas", 46)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_plm_5F_syntax::rule_plm_5F_syntax_isr_i29_parse (C_Lexique_plm_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_isr) COMMA_SOURCE_FILE ("declaration-isr.galgas", 23)) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-isr.galgas", 24)) ;
-  bool repeatFlag_0 = true ;
-  while (repeatFlag_0) {
-    switch (select_plm_5F_syntax_34 (inCompiler)) {
-    case 2: {
-      inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__40_attribute) COMMA_SOURCE_FILE ("declaration-isr.galgas", 28)) ;
-    } break ;
-    default:
-      repeatFlag_0 = false ;
-      break ;
-    }
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_isr) COMMA_SOURCE_FILE ("declaration-isr.galgas", 24)) ;
+  switch (select_plm_5F_syntax_34 (inCompiler)) {
+  case 1: {
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_service) COMMA_SOURCE_FILE ("declaration-isr.galgas", 27)) ;
+  } break ;
+  case 2: {
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_section) COMMA_SOURCE_FILE ("declaration-isr.galgas", 30)) ;
+  } break ;
+  case 3: {
+    inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_safe) COMMA_SOURCE_FILE ("declaration-isr.galgas", 33)) ;
+  } break ;
+  default:
+    break ;
   }
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-isr.galgas", 31)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken_identifier) COMMA_SOURCE_FILE ("declaration-isr.galgas", 36)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7B_) COMMA_SOURCE_FILE ("declaration-isr.galgas", 43)) ;
   nt_instructionList_parse (inCompiler) ;
-  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-isr.galgas", 33)) ;
+  inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__7D_) COMMA_SOURCE_FILE ("declaration-isr.galgas", 45)) ;
   inCompiler->resetTemplateString () ;
 }
 
