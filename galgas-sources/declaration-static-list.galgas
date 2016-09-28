@@ -1,0 +1,145 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  AST                                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#sortedlist @bootList {
+#  @location mBootLocation
+#  @instructionListAST mInstructionList
+#  @location mEndOfBootLocation
+#  @bigint mPriority
+#  @location mPriorityLocation
+#}{
+#  mPriority <
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SYNTAX                                                                                                               
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+syntax extension plm_syntax {
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $staticlist$
+    $identifier$ ?let staticListName
+    ${$
+    repeat
+    while
+      $let$
+      $identifier$ ?let propertyName
+      $\$type$ ?let typeName
+    end
+    $}$
+  }
+
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $extend$
+    $staticlist$
+    $identifier$ ?let staticListName
+    $:$
+    $($
+    repeat
+      <expression> ?let expression
+    while
+      $,$
+    end
+    $)$
+  }
+
+  #·····················································································································
+
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  PRECEDENCE GRAPH                                                                                                     
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#method @bootList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+#  for () in self do
+#    [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+#  end
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#map @bootRoutinePriorityMap {
+#  insert insertKey error message "a boot routine with priority %K has been already declared"
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#method @bootList-element bootSemanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+##  if not [inContext.mModeMap hasKey !bootModeName ()] then
+##    error mBootLocation : "the `" + bootModeName () + " mode should be defined in order to use boot routines"
+##  end
+#  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
+##---
+#  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority !mPriorityLocation}
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+#      !routineNameForInvocationGraph
+#      !routineNameForInvocationGraph
+#    ]
+#  end
+##--- Variable map
+#  initialVariableMap (
+#    !context:inContext
+#    !mode:.bootMode
+##    !userMode:false
+##    !registerAccess:.readWriteAccess
+#    !globalsAreConstant:false
+#    !returnTypeName:["" nowhere]
+#    ?@variableMap variableMap
+#  )
+##--- Analyze instruction list
+#  @instructionListIR instructionGenerationList = {}
+#  @allocaList bootAllocaList = {}
+#  [mInstructionList analyzeRoutineInstructionList
+#    !self:.null
+#    !directAccessToPropertiesAllowed:false
+#    !propertiesAreMutable:false
+#    !routineNameForInvocationGraph:routineNameForInvocationGraph
+#    !context:inContext
+#    !mode:.bootMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+#    !?variableMap:variableMap
+#    !?alloca:bootAllocaList
+#    !?generatedCode:instructionGenerationList
+#  ]
+##--- End of variableMap
+##  [variableMap deinitTopLevelVariables]
+#  [variableMap checkAutomatonStates !mEndOfBootLocation]
+#  drop variableMap
+##--- Code generation
+#  ioIntermediateCodeStruct.mBootList +=
+#    !mPriority
+#    !mBootLocation
+#    !bootAllocaList
+#    !instructionGenerationList
+#    !mEndOfBootLocation
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#list @bootListIR {
+#  @bigint mBootIndex
+#  @location mInitLocation
+#  @allocaList mAllocaList
+#  @instructionListIR mInstructionListIR
+#  @location mEndOfInitLocation
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
