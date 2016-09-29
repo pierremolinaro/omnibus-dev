@@ -225,21 +225,6 @@ abstract method @abstractDeclaration enterRoutinesInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func allModeMap -> @modeMap outModeMap {
-#  outModeMap = {}
-#  [!?outModeMap insertKey ![bootModeName () nowhere]]
-#  [!?outModeMap insertKey ![initModeName () nowhere]]
-#  [!?outModeMap insertKey ![panicModeName () nowhere]]
-#  [!?outModeMap insertKey ![sectionModeName () nowhere]]
-#  [!?outModeMap insertKey ![primitiveModeName () nowhere]]
-#  [!?outModeMap insertKey ![serviceModeName () nowhere]]
-#  [!?outModeMap insertKey ![userModeName () nowhere]]
-#  [!?outModeMap insertKey ![guardModeName () nowhere]]
-#
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 proc buildSemanticContext
   ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
   ?sourceFile:let @lstring inSourceFile
@@ -266,7 +251,29 @@ proc buildSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
   end
-#--- Build an HTML containing all glogal constants
+#--- Enter static lists in constant map
+  for (key stringValueList) in ioStaticListValueMap do
+    let lkey = @lstring.new {!key !.nowhere}
+    let elementTypePLMName = plmNameForStaticListElementType (!lkey)
+    let elementType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !elementTypePLMName}
+    [!?outSemanticContext.mTypeMap insertType
+      !lkey:plmNameForStaticListType (!lkey)
+      !llvmTypeName:llvmNameForStaticListType (!key)
+      !kind:.arrayType {!elementType:elementType !size:[stringValueList length]}
+      !classConstantMap:{}
+      !instantiable:false
+      !copyable:false
+      !equatable:false
+      !comparable:false
+      !enumerationType:elementType
+    ]
+    let staticListType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !plmNameForStaticListType (!lkey)}
+    [!?outSemanticContext.mGlobalConstantMap insertKey
+      !lkey
+      !.globalVariableReference {!type:staticListType !plmName:lkey}
+    ]
+  end
+#--- Build an HTML containing all global constants
   buildGlobalConstantMapHTMLFile (
     !outSemanticContext.mGlobalConstantMap
     !sourceFile:inSourceFile

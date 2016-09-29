@@ -8,45 +8,9 @@ func %once llvmAttributeFunction -> @string outResult {
 #!   Modes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func %once bootModeName -> @string outResult {
-#  outResult = "boot"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func %once initModeName -> @string outResult {
-#  outResult = "init"
-#}
-#
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func %once sectionModeName -> @string outResult {
-#  outResult = "section"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func %once userModeName -> @string outResult {
   outResult = "user"
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func %once primitiveModeName -> @string outResult {
-#  outResult = "primitive"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func %once serviceModeName -> @string outResult {
-#  outResult = "service"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#func %once guardModeName -> @string outResult {
-#  outResult = "guard"
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! Names for invocation graph
@@ -346,8 +310,26 @@ func %once llvmNameForTaskSelfTerminateService -> @string outName {
 #! Static list
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForStaticListElementType ?let @string inStaticListName -> @string outName {
+func plmNameForStaticListType ?let @lstring inStaticListName -> @lstring outName {
+  outName = .new {!"staticlist." + inStaticListName !inStaticListName}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func plmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring outName {
+  outName = .new {!"staticlist.element." + inStaticListName !inStaticListName}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForStaticListType ?let @string inStaticListName -> @string outName {
   outName = "%static.list.type." + [inStaticListName assemblerRepresentation]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForStaticListElementType ?let @string inStaticListName -> @string outName {
+  outName = "%static.list.element.type." + [inStaticListName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
