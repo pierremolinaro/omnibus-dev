@@ -134,13 +134,6 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
-  for staticlist in inAST.mStaticlistListAST do
-    [staticlist staticlistSemanticAnalysis
-      !context:inSemanticContext
-      !?temporary:temporaries
-      !?intermediateCode:outIntermediateCodeStruct
-    ]
-  end
 #--- Generate panic clauses
   for panic in inAST.mPanicClauseListAST do
     [panic panicSemanticAnalysis

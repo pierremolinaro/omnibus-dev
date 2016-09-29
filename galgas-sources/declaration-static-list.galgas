@@ -9,9 +9,21 @@ list @staticlistPropertyListAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @staticlistListAST {
+class @staticlistAST : @abstractDeclaration {
   @lstring mStaticListName
   @staticlistPropertyListAST mPropertyList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @staticlistAST location -> @location {
+  result = mStaticListName.location
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @staticlistAST keyRepresentationForErrorSignaling -> @string {
+  result = "staticlist " + mStaticListName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -28,30 +40,14 @@ syntax extension plm_syntax {
     ${$
     @staticlistPropertyListAST propertyList = {}
     repeat
-    while
       $let$
       $identifier$ ?let propertyName
       $\$type$ ?let typeName
       propertyList += !propertyName !typeName
+    while
     end
     $}$
-    ioAST.mStaticlistListAST += !staticListName !propertyList
-  }
-
-  #·····················································································································
-
-  rule <declaration> ?!@ast ioAST {
-    $extend$
-    $staticlist$
-    $identifier$ ?let staticListName
-    $:$
-    $($
-    repeat
-      <expression> ?let expression
-    while
-      $,$
-    end
-    $)$
+    ioAST.mDeclarationListAST += !@staticlistAST.new {!staticListName !propertyList}
   }
 
   #·····················································································································
@@ -59,15 +55,27 @@ syntax extension plm_syntax {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  ADD EXTENSION                                                                                                        
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @staticlistAST addExtension
+  ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
+  !@abstractDeclaration outNewDeclaration
+{
+  outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @staticlistListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (* propertyList) in self do
-    for (* propertyTypeName) in propertyList do
-      let typeName = @lstring.new {!"$" + propertyTypeName !propertyTypeName.location}
-      [!?ioGraph noteNode !typeName]
-    end
+override method @staticlistAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+#--- Add 'constant name' node
+  [!?ioGraph addNode !mStaticListName !self]
+#---
+  for (* propertyTypeName) in mPropertyList do
+    let typeName = @lstring.new {!"$" + propertyTypeName !propertyTypeName.location}
+    [!?ioGraph addEdge !mStaticListName !typeName]
   end
 }
 
@@ -86,23 +94,16 @@ map @staticlistMap {
   @staticlistPropertyList mStaticlistPropertyList
 
   insert insertKey error message "static list '%K' is already defined"
-#  search searchKey error message "static list '%K' is not defined"
+  search searchKey error message "static list '%K' is not defined"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @staticlistListAST enterStaticListsInContext
+override method @staticlistAST enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-{
-  for staticlist in self do
-    [staticlist enterStaticListInContext !?context:ioContext]
-  end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @staticlistListAST-element enterStaticListInContext
-  ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   @staticlistPropertyList staticlistPropertyList = {}
   @stringset propertyNameSet = {}
@@ -121,82 +122,44 @@ method @staticlistListAST-element enterStaticListInContext
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @bootRoutinePriorityMap {
-#  insert insertKey error message "a boot routine with priority %K has been already declared"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @staticlistListAST-element staticlistSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+override method @staticlistAST enterRoutinesInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext unused ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-##  if not [inContext.mModeMap hasKey !bootModeName ()] then
-##    error mBootLocation : "the `" + bootModeName () + " mode should be defined in order to use boot routines"
-##  end
-#  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
-##---
-#  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority !mPriorityLocation}
-#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-#      !routineNameForInvocationGraph
-#      !routineNameForInvocationGraph
-#    ]
-#  end
-##--- Variable map
-#  initialVariableMap (
-#    !context:inContext
-#    !mode:.bootMode
-##    !userMode:false
-##    !registerAccess:.readWriteAccess
-#    !globalsAreConstant:false
-#    !returnTypeName:["" nowhere]
-#    ?@variableMap variableMap
-#  )
-##--- Analyze instruction list
-#  @instructionListIR instructionGenerationList = {}
-#  @allocaList bootAllocaList = {}
-#  [mInstructionList analyzeRoutineInstructionList
-#    !self:.null
-#    !directAccessToPropertiesAllowed:false
-#    !propertiesAreMutable:false
-#    !routineNameForInvocationGraph:routineNameForInvocationGraph
-#    !context:inContext
-#    !mode:.bootMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-#    !?variableMap:variableMap
-#    !?alloca:bootAllocaList
-#    !?generatedCode:instructionGenerationList
-#  ]
-##--- End of variableMap
-##  [variableMap deinitTopLevelVariables]
-#  [variableMap checkAutomatonStates !mEndOfBootLocation]
-#  drop variableMap
-##--- Code generation
-#  ioIntermediateCodeStruct.mBootList +=
-#    !mPriority
-#    !mBootLocation
-#    !bootAllocaList
-#    !instructionGenerationList
-#    !mEndOfBootLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
+#  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @bootListIR {
-#  @bigint mBootIndex
-#  @location mInitLocation
-#  @allocaList mAllocaList
-#  @instructionListIR mInstructionListIR
-#  @location mEndOfInitLocation
-#}
+override method @staticlistAST semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+method @staticlistMap generateLLVM ?!@string ioLLVMcode {
+  if [self count] > 0 then
+    ioLLVMcode += llvmTitleComment (!"Static List Element Types")
+    for (lkey propertyList) in self do
+      ioLLVMcode += "%static.list.type." + lkey + " = type {"
+      for (* propertyType) in propertyList
+      do
+        ioLLVMcode += [propertyType llvmTypeName]
+      between
+        ioLLVMcode += ", "
+      end
+      ioLLVMcode += "}\n"
+    end
+    ioLLVMcode += "\n"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

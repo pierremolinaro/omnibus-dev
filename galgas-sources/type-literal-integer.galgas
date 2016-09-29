@@ -56,6 +56,7 @@ override method @literalIntegerDeclaration enterRoutinesInContext
 override method @literalIntegerDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   let integerTypeName = [staticIntegerTypeName () nowhere]

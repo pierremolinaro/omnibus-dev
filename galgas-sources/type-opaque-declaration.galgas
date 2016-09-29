@@ -80,6 +80,7 @@ override getter @opaqueTypeDeclaration keyRepresentationForErrorSignaling -> @st
 override method @opaqueTypeDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---

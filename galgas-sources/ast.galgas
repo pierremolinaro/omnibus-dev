@@ -34,7 +34,6 @@ struct @ast {
   @panicClauseListAST mPanicClauseListAST
   @taskList mTaskListAST
   @lstringlist mCheckTargetListAST
-  @staticlistListAST mStaticlistListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

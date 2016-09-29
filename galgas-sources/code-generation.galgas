@@ -79,6 +79,8 @@ proc codeGeneration
   ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
   ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
+  ?staticlists:let @staticlistMap inStaticlistMap
+  ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
@@ -106,6 +108,8 @@ proc codeGeneration
     !panicCodeType:inPanicCodeType
     !panicLineType:inPanicLineType
     !interrupts:inAvailableInterruptMap
+    !staticlists:inStaticlistMap
+    !staticlistValues:inStaticListValueMap
     !sourceFileSet:inSourceFileAbsolutePathSet
   )
 }
@@ -131,6 +135,8 @@ private proc generateCodeFiles
   ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
   ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
+  ?staticlists:let @staticlistMap inStaticlistMap
+  ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
 {
   @generationAdds generationAdds = .default
@@ -161,6 +167,9 @@ private proc generateCodeFiles
   llvmCode += "\n"
 #----------------------------------------- Structure types declaration
   declareLLVMTypes (!inTypeMap !?llvmCode)
+#----------------------------------------- Static list type declaration
+  [inStaticlistMap generateLLVM !?llvmCode]
+  [inStaticListValueMap generateLLVM !?llvmCode]
 #----------------------------------------- Global variables
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap
     before llvmCode += llvmTitleComment (!"Global variables")

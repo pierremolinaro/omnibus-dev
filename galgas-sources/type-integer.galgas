@@ -55,6 +55,7 @@ override getter @integerDeclaration keyRepresentationForErrorSignaling -> @strin
 override method @integerDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   let integerTypeName = [[self typeName] nowhere]
