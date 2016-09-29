@@ -54,7 +54,7 @@ setter @instructionListIR appendLoadFromReference
   case null :
     error .nowhere : "<<@instructionListIR appendLoadFromReference null>>" : outResultingValue
   case possibleFunction (* functionName) :
-    error functionName : "<<@instructionListIR appendLoadFromReference possibleFunction>>" : outResultingValue
+    error functionName : "undeclared object" : outResultingValue
   case selfObject (*) :
     outResultingValue = inSource
 #--- References

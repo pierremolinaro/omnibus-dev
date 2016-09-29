@@ -343,4 +343,18 @@ func %once llvmNameForTaskSelfTerminateService -> @string outName {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! Static list
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForStaticListElementType ?let @string inStaticListName -> @string outName {
+  outName = "%static.list.type." + [inStaticListName assemblerRepresentation]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmNameForStaticList ?let @string inStaticListName -> @string outName {
+  outName = "@static.list." + [inStaticListName assemblerRepresentation]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

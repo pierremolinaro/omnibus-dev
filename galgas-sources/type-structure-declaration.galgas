@@ -271,7 +271,8 @@ override method @structureDeclaration enterInContext
       end
       propertyList += !mFieldName.string !actualPropertyType
       [!?propertyMap insertKey
-        !mFieldName !mIsPublic
+        !mFieldName
+        !mIsPublic
         !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
         !propertyIndex
       ]
