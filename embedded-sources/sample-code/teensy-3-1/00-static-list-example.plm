@@ -47,9 +47,13 @@ task T priority 12 stackSize 512 {
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline +%= 1000
     toggle (!port:LED_L1)
+    var total $uint32 = 0
     for element in maListeStatique {
-    
+      total += element.a
+      total += element.b
     }
+    lcd.goto (!line:0 !column:0)
+    lcd.printUnsigned (!total)
   }
 }
 

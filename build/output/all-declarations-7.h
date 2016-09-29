@@ -11,6 +11,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                       Function 'panicCodeForConvertOverflow'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bigint function_panicCodeForConvertOverflow (class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Function 'getInfixOperatorMap'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -391,23 +400,5 @@ class GALGAS_bigint function_panicCodeForUnsignedRemainderByZero (class C_Compil
 
 class GALGAS_bigint function_panicCodeForSignedRemainderByZero (class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Function 'panicCodeForNegativeArrayIndex'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bigint function_panicCodeForNegativeArrayIndex (class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Function 'panicCodeForTooLargeArrayIndex'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
 
 #endif
