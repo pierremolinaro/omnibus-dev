@@ -18,22 +18,23 @@ list @declarationListAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @ast {
-  @globalVarDeclarationList mGlobalVarDeclarationList
-  @declarationListAST mDeclarationList
+  @globalVarDeclarationList mGlobalVarDeclarationListAST
+  @declarationListAST mDeclarationListAST
   @extensionDeclarationListAST mExtensionDeclarationListAST
   @controlRegisterDeclarationListAST mControlRegisterDeclarationListAST
   @functionDeclarationListAST mProcedureListAST
-  @requiredProcedureDeclarationListAST mRequiredProcList
-  @externProcedureDeclarationListAST mExternProcList
+  @requiredProcedureDeclarationListAST mRequiredProcListAST
+  @externProcedureDeclarationListAST mExternProcListAST
   @isrDeclarationListAST mISRDeclarationListAST
   @svcDeclarationListAST mStandAloneSVCListAST
   @guardDeclarationListAST mGuardListAST
-  @lstringlist mTargetList
-  @bootList mBootList
-  @initList mInitList
-  @panicClauseListAST mPanicClauses
-  @taskList mTaskList
-  @lstringlist mCheckTargetList
+  @lstringlist mTargetListAST
+  @bootList mBootListAST
+  @initList mInitListAST
+  @panicClauseListAST mPanicClauseListAST
+  @taskList mTaskListAST
+  @lstringlist mCheckTargetListAST
+  @staticlistListAST mStaticlistListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

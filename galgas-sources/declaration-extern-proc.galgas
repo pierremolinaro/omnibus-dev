@@ -35,7 +35,7 @@ syntax extension plm_syntax {
     end
     $:$
     $"string"$ ?let llvmName
-    ioAST.mExternProcList += !procName !mode !procFormalArgumentList !returnTypeName !llvmName !.here
+    ioAST.mExternProcListAST += !procName !mode !procFormalArgumentList !returnTypeName !llvmName !.here
   }
 
   #·····················································································································

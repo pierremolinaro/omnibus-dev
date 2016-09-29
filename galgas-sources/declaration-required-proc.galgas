@@ -42,7 +42,7 @@ syntax extension plm_syntax {
         isGlobal = true
       end
     end
-    ioAST.mRequiredProcList +=
+    ioAST.mRequiredProcListAST +=
       !.new{!funcMangledName !procName.location}
       !mode
       !isGlobal
@@ -61,7 +61,7 @@ proc checkRequiredProcedures
   ?context:let @semanticContext inSemanticContext
   ?endOfSourceFile:let @location unused inEndOfSourceFile
 {
-  for requiredProc in inAST.mRequiredProcList do
+  for requiredProc in inAST.mRequiredProcListAST do
     if not [inSemanticContext.mRoutineMapForContext hasKey !requiredProc.mRequiredProcedureName.string] then
       error requiredProc.mRequiredProcedureName : "required func is not implemented"
     else

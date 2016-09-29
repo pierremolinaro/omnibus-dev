@@ -100,7 +100,7 @@ syntax extension plm_syntax {
 #      end
 #      $}$
 #    end
-    ioAST.mGlobalVarDeclarationList +=
+    ioAST.mGlobalVarDeclarationListAST +=
       !typeName
       !varName
       !expression

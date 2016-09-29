@@ -33,7 +33,7 @@ syntax extension plm_syntax {
     end
     $=$
     <expression> ?let @expressionAST expression
-    ioAST.mDeclarationList += !@globalConstantDeclaration.new {
+    ioAST.mDeclarationListAST += !@globalConstantDeclaration.new {
       !constantName
       !typeName
       !expression

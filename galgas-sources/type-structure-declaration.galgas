@@ -96,7 +96,7 @@ syntax extension plm_syntax {
       $;$
     end
     $}$
-    ioAST.mDeclarationList += !@structureDeclaration.new {
+    ioAST.mDeclarationListAST += !@structureDeclaration.new {
       !structureName
       !attributeList
       !fieldList

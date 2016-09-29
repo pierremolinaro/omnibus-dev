@@ -11,7 +11,7 @@ syntax extension plm_syntax {
     $\$type$ ?let newTypeName
     $:$
     <declaration_type> !newTypeName ?let declaration
-    ioAST.mDeclarationList += !declaration
+    ioAST.mDeclarationListAST += !declaration
   }
 
   #·····················································································································

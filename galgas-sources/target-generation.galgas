@@ -9,7 +9,7 @@ syntax extension plm_syntax {
   rule <declaration> ?!@ast ioAST {
     $target$
     $"string"$ ?let targetName
-    ioAST.mTargetList += !targetName
+    ioAST.mTargetListAST += !targetName
   }
 
   #·····················································································································

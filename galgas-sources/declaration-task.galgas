@@ -107,7 +107,7 @@ syntax extension plm_syntax {
     end
     let endOfTask = @location.here
     $}$
-    ioAST.mTaskList +=
+    ioAST.mTaskListAST +=
       !taskName
       !priority
       !stackSize

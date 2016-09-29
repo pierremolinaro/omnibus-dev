@@ -68,11 +68,11 @@ proc semanticAnalysis
   outIntermediateCodeStruct.mTargetParameters = inSemanticContext.mTargetParameters
   outIntermediateCodeStruct.mStaticStringMap = inGlobalLiteralStringMap
   outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList
-  for requiredProc in inAST.mRequiredProcList do
+  for requiredProc in inAST.mRequiredProcListAST do
     outIntermediateCodeStruct.mRequiredProcedureSet += !requiredProc.mRequiredProcedureName.string
   end 
 #--- Global variables
-  for globalVar in inAST.mGlobalVarDeclarationList do
+  for globalVar in inAST.mGlobalVarDeclarationListAST do
     [globalVar semanticAnalysis
       !context:inSemanticContext
       !?intermediateCode:outIntermediateCodeStruct
@@ -80,7 +80,7 @@ proc semanticAnalysis
   end
 #---
   @semanticTemporariesStruct temporaries = .default
-  for (declaration) in inAST.mDeclarationList do
+  for (declaration) in inAST.mDeclarationListAST do
     [declaration semanticAnalysis
       !context:inSemanticContext
       !?temporary:temporaries
@@ -93,7 +93,7 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-  [inAST.mTaskList semanticAnalysis
+  [inAST.mTaskListAST semanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
@@ -110,7 +110,7 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-  [inAST.mExternProcList externProcedureSemanticAnalysis
+  [inAST.mExternProcListAST externProcedureSemanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
@@ -120,22 +120,29 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-  for boot in inAST.mBootList do
+  for boot in inAST.mBootListAST do
     [boot bootSemanticAnalysis
       !context:inSemanticContext
       !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
-  for init in inAST.mInitList do
+  for init in inAST.mInitListAST do
     [init initSemanticAnalysis
       !context:inSemanticContext
       !?temporary:temporaries
       !?intermediateCode:outIntermediateCodeStruct
     ]
   end
+  for staticlist in inAST.mStaticlistListAST do
+    [staticlist staticlistSemanticAnalysis
+      !context:inSemanticContext
+      !?temporary:temporaries
+      !?intermediateCode:outIntermediateCodeStruct
+    ]
+  end
 #--- Generate panic clauses
-  for panic in inAST.mPanicClauses do
+  for panic in inAST.mPanicClauseListAST do
     [panic panicSemanticAnalysis
       !context:inSemanticContext
       !?temporary:temporaries
