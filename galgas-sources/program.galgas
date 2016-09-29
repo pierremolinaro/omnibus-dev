@@ -155,7 +155,6 @@ private proc compileProject
           !panicCodeType:semanticContext.mPanicCodeType
           !panicLineType:semanticContext.mPanicLineType
           !interrupts:semanticContext.mAvailableInterruptMap
-          !staticlists:semanticContext.mStaticlistMap
           !staticlistValues:staticListValueMap
           !sourceFileSet:sourceFileAbsolutePathSet
         )

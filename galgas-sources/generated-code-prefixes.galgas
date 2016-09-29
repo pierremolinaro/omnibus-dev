@@ -334,9 +334,3 @@ func llvmNameForStaticListElementType ?let @string inStaticListName -> @string o
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForStaticList ?let @string inStaticListName -> @string outName {
-  outName = "@static.list." + [inStaticListName assemblerRepresentation]
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-

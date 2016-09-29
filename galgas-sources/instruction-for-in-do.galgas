@@ -118,23 +118,141 @@ override method @forInstructionAST analyze
     !?instructionListIR:instructionGenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_do_instruction]
+#--- Type kind
+  let iteratedTypeKind = [[iteratedExpressionResult type] kind]
 #--- Code generation
-  ioInstructionGenerationList += !@forInstructionIR.new {
-    !enumeratedVarLLVMName
-    !iteratedElementType
-    !mEndOf_iteratedExpression_instruction
-    !iteratedExpressionResult
-    !instructionGenerationList
-  }
+  if iteratedTypeKind == .literalString then
+    ioInstructionGenerationList += !@forInstructionOnStringIR.new {
+      !enumeratedVarLLVMName
+      !mEndOf_iteratedExpression_instruction
+      !iteratedExpressionResult
+      !instructionGenerationList
+    }
+  elsif [iteratedTypeKind isArrayType] then
+    [iteratedTypeKind arrayType ?elementType:let elementType ?size:let size]
+    let varStaticInMemory = "for." + [mEndOf_iteratedExpression_instruction locationIndex] + ".list.in.memory"
+    ioAllocaList += !varStaticInMemory ![iteratedExpressionResult type]
+    ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
+      !enumeratedVarLLVMName
+      !mEndOf_iteratedExpression_instruction
+      !iteratedExpressionResult
+      !instructionGenerationList
+      !elementType
+      !size
+      !varStaticInMemory
+    }
+  else
+    error mEndOf_iteratedExpression_instruction : "this object is not enumerable"
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
+#  CODE GENERATION (ON ARRAY)
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @forInstructionIR : @abstractInstructionIR {
+class @forInstructionOnArrayIR : @abstractInstructionIR {
   @string mVarName
+  @location mLocation
+  @objectIR mExpressionResult
+  @instructionListIR mInstructionList
   @unifiedTypeMap-proxy mElementType
+  @uint mArraySize
+  @string mVarStaticInMemory
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#----------------- La boucle exprimée en C est :
+#  TYPE_ELEMENT * ptr = VALEUR_LISTE ; 
+#  unsigned idx = TAILLE_LISTE ;
+#  while (idx > 0) {
+#    ... instructions de la boucle ...
+#    ptr ++ ;
+#    idx -- ;
+#  }
+#
+#-------------------- La boucle est traduite en LLVM :
+#  br label %startLabel
+#
+#startLabel:
+#  store [TAILLE_LISTE x %TYPE_ELEMENT] %VALEUR_LISTE, [TAILLE_LISTE x %TYPE_ELEMENT] * %LISTE_EN_MEMOIRE
+#  %ptrStart = getelementptr inbounds [TAILLE_LISTE x %TYPE_ELEMENT], [TAILLE_LISTE x %TYPE_ELEMENT]* %LISTE_EN_MEMOIRE, i32 0, i32 0
+#  br label %testLabel
+#
+#testLabel:
+#  %ptrVar = phi %TYPE_ELEMENT* [%ptrStart, %startLabel], [%indexVarNext, %loopLabel]
+#  %indexVar = phi i32 [TAILLE_LISTE, %startLabel], [%ptrVarNext, %loopLabel]
+#  %testExit = icmp eq i32 %indexVar, 0
+#  br i1 %testExit, label %endLabel, label %loopLabel
+#
+#loopLabel:                                      ; preds = %1
+#  %...accès.à.une.propriété... = getelementptr inbounds %TYPE_ELEMENT, %TYPE_ELEMENT* %ptrVar, i32 0, i32 0
+#  %ptrVarNext = getelementptr inbounds %TYPE_ELEMENT, %TYPE_ELEMENT* %ptrVar, i32 1
+#  %indexVarNext = add nsw i32 %indexVar, -1
+#  br label %1
+#
+#endLabel:
+
+override method @forInstructionOnArrayIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let elementTypeLLVMName = [mElementType llvmTypeName]
+  let listTypeLLVMName = "[" + mArraySize + " x " + elementTypeLLVMName + "]"
+  let startLabel = "for." + [mLocation locationIndex] + ".start"
+  let testLabel = "for." + [mLocation locationIndex] + ".test"
+  let exitVar = "for." + [mLocation locationIndex] + ".exit"
+  let loopLabel = "for." + [mLocation locationIndex] + ".loop"
+  let endLabel  = "for." + [mLocation locationIndex] + ".end"
+  let ptrVar    = "for." + [mLocation locationIndex] + ".ptr"
+  let indexVar = "for." + [mLocation locationIndex] + ".index"
+  
+#--- Start of 'for' instruction
+  ioLLVMcode += "  br label %" + startLabel + "\n\n"
+
+  ioLLVMcode += startLabel + ":\n"
+  ioLLVMcode += "  store " + listTypeLLVMName + " " + [mExpressionResult llvmName]
+  ioLLVMcode += ", " + listTypeLLVMName + "* %" + llvmNameForLocalVariable (!mVarStaticInMemory) + "\n"
+  ioLLVMcode += "  %" + ptrVar + ".start = getelementptr inbounds " + listTypeLLVMName
+  ioLLVMcode += ", " + listTypeLLVMName + "* " + "%" + llvmNameForLocalVariable (!mVarStaticInMemory)
+  ioLLVMcode += ", i32 0, i32 0\n"
+  ioLLVMcode += "  br label %" + testLabel + "\n\n"
+  
+#--- Test
+  ioLLVMcode += testLabel + ":\n"
+  ioLLVMcode += "  %" + ptrVar + " = phi " + elementTypeLLVMName + "* [%" + ptrVar + ".start, %"
+  ioLLVMcode += startLabel + "], [%" + ptrVar + ".next, %" + loopLabel + "]\n"
+  ioLLVMcode += "  %" + indexVar + " = phi i32 [" + mArraySize + ", %" + startLabel + "], [%" + indexVar + ".next, %" + loopLabel + "]\n"
+  ioLLVMcode += "  %" + exitVar + " = icmp eq i32 %" + indexVar + ", 0\n"
+  ioLLVMcode += "  br i1 %" + exitVar + ", label %" + endLabel + ", label %" + loopLabel + "\n\n"
+
+#--- Loop  
+  ioLLVMcode += loopLabel + ":\n"
+  [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  %" + ptrVar + ".next = getelementptr inbounds " + elementTypeLLVMName + ", "
+  ioLLVMcode += elementTypeLLVMName + " * %" + ptrVar + ", i32 1\n"
+  ioLLVMcode += "  %" + indexVar + ".next = add nsw i32 %" + indexVar + ", -1\n"
+  ioLLVMcode += "  br label %" + testLabel + "\n\n"
+
+#--- End
+  ioLLVMcode += endLabel + ":\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @forInstructionOnArrayIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION (ON STRING)
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @forInstructionOnStringIR : @abstractInstructionIR {
+  @string mVarName
   @location mLocation
   @objectIR mExpressionResult
   @instructionListIR mInstructionList
@@ -142,7 +260,7 @@ class @forInstructionIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forInstructionIR llvmInstructionCode
+override method @forInstructionOnStringIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -153,7 +271,6 @@ override method @forInstructionIR llvmInstructionCode
   let endLabel  = "for." + [mLocation locationIndex] + ".end"
   let ptrVar    = "for." + [mLocation locationIndex] + ".ptr"
   let currentVar = "for." + [mLocation locationIndex] + ".current"
-  let elementTypeName = [mElementType llvmTypeName]
   
 #--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
@@ -170,11 +287,11 @@ override method @forInstructionIR llvmInstructionCode
 
 #--- Loop  
   ioLLVMcode += loopLabel + ":\n"
-  ioLLVMcode += "  store " + elementTypeName + " %" + currentVar + ", "
-  ioLLVMcode +=  elementTypeName + " * %" + llvmNameForLocalVariable (!mVarName) + "\n"
+  ioLLVMcode += "  store i8 %" + currentVar + ", "
+  ioLLVMcode += "i8 * %" + llvmNameForLocalVariable (!mVarName) + "\n"
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  %" + ptrVar + ".next = getelementptr inbounds " + elementTypeName + ", "
-  ioLLVMcode += elementTypeName + " * %" + ptrVar + ", i32 1\n"
+  ioLLVMcode += "  %" + ptrVar + ".next = getelementptr inbounds i8, "
+  ioLLVMcode += "i8 * %" + ptrVar + ", i32 1\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
 
 #--- End
@@ -183,7 +300,7 @@ override method @forInstructionIR llvmInstructionCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forInstructionIR enterAccessibleEntities
+override method @forInstructionOnStringIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint ioMaxBranchOfOnInstructions
 {

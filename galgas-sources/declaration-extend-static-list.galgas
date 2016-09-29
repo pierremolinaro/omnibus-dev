@@ -170,7 +170,7 @@ method @staticlistValues_listMap generateLLVM ?!@string ioLLVMcode {
   if [self count] > 0 then
     ioLLVMcode += llvmTitleComment (!"Static Lists")
     for (lkey initList) in self do
-      ioLLVMcode += llvmNameForStaticList (!lkey) + " = local_unnamed_addr constant ["
+      ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey) + " = local_unnamed_addr constant ["
       ioLLVMcode += [[initList length] string] + " x " + llvmNameForStaticListElementType (!lkey) + "] [\n"
       for (value) in initList
       do
