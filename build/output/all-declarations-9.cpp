@@ -827,9 +827,9 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline +%= 1000\n"
   "    toggle (!port:LED_L1)\n"
-  "//    for element in maListeStatique {\n"
-  "//    \n"
-  "//    }\n"
+  "    for element in maListeStatique {\n"
+  "    \n"
+  "    }\n"
   "  }\n"
   "}\n"
   "\n"
@@ -839,7 +839,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-static-list-example.plm",
   "plm",
   true, // Text file
-  1391, // Text length
+  1385, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

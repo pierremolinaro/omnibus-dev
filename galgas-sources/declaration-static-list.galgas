@@ -120,9 +120,9 @@ override method @staticlistAST enterInContext
     !mStaticListName
     !staticlistPropertyList
   ]
-#--- Enter in type map
+#--- Enter element type in type map
   [!?ioContext.mTypeMap insertType
-    !lkey:mStaticListName
+    !lkey:plmNameForStaticListElementType (!mStaticListName)
     !llvmTypeName:llvmNameForStaticListElementType (!mStaticListName)
     !kind:.structure {!propertyMap:staticlistPropertyMap !propertyList:staticlistPropertyList}
     !classConstantMap:{}
@@ -153,26 +153,5 @@ override method @staticlistAST semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
 {
 }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#method @staticlistMap generateLLVM ?!@string ioLLVMcode {
-#  if [self count] > 0 then
-#    ioLLVMcode += llvmTitleComment (!"Static List Element Types")
-#    for (lkey propertyList) in self do
-#      ioLLVMcode += llvmNameForStaticListElementType (!lkey) + " = type {"
-#      for (* propertyType) in propertyList
-#      do
-#        ioLLVMcode += [propertyType llvmTypeName]
-#      between
-#        ioLLVMcode += ", "
-#      end
-#      ioLLVMcode += "}\n"
-#    end
-#    ioLLVMcode += "\n"
-#  end
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

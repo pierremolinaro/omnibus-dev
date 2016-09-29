@@ -47,9 +47,9 @@ task T priority 12 stackSize 512 {
   while time.waitUntilMS (!deadline:self.deadline) {
     self.deadline +%= 1000
     toggle (!port:LED_L1)
-//    for element in maListeStatique {
-//    
-//    }
+    for element in maListeStatique {
+    
+    }
   }
 }
 
