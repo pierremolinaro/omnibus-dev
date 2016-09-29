@@ -811,8 +811,8 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "staticlist maListeStatique {\n"
-  "  let a $uint16\n"
-  "  let b $uint9\n"
+  "  let a $uint32\n"
+  "  let b $uint32\n"
   "}\n"
   "\n"
   "extend staticlist maListeStatique (5, 9)\n"
@@ -827,9 +827,13 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
   "    self.deadline +%= 1000\n"
   "    toggle (!port:LED_L1)\n"
+  "    var total $uint32 = 0\n"
   "    for element in maListeStatique {\n"
-  "    \n"
+  "      total += element.a\n"
+  "      total += element.b\n"
   "    }\n"
+  "    lcd.goto (!line:0 !column:0)\n"
+  "    lcd.printUnsigned (!total)\n"
   "  }\n"
   "}\n"
   "\n"
@@ -839,7 +843,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-static-list-example.plm",
   "plm",
   true, // Text file
-  1385, // Text length
+  1521, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

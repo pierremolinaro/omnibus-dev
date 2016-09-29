@@ -10,6 +10,539 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                     Once function 'panicCodeForConvertOverflow'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForConvertOverflow (C_Compiler * inCompiler
+                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("11", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 25)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForConvertOverflow = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForConvertOverflow ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForConvertOverflow (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForConvertOverflow) {
+    gOnceFunctionResult_panicCodeForConvertOverflow = onceFunction_panicCodeForConvertOverflow (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForConvertOverflow = true ;
+  }
+  return gOnceFunctionResult_panicCodeForConvertOverflow ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForConvertOverflow (void) {
+  gOnceFunctionResult_panicCodeForConvertOverflow.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForConvertOverflow (NULL,
+                                                                         releaseOnceFunctionResult_panicCodeForConvertOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForConvertOverflow [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForConvertOverflow (C_Compiler * inCompiler,
+                                                                            const cObjectArray & /* inEffectiveParameterArray */,
+                                                                            const GALGAS_location & /* inErrorLocation */
+                                                                            COMMA_LOCATION_ARGS) {
+  return function_panicCodeForConvertOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForConvertOverflow ("panicCodeForConvertOverflow",
+                                                                             functionWithGenericHeader_panicCodeForConvertOverflow,
+                                                                             & kTypeDescriptor_GALGAS_bigint,
+                                                                             0,
+                                                                             functionArgs_panicCodeForConvertOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Once function 'panicCodeForClosedSync'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForClosedSync (C_Compiler * inCompiler
+                                                          COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("13", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 33)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForClosedSync = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForClosedSync ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForClosedSync (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForClosedSync) {
+    gOnceFunctionResult_panicCodeForClosedSync = onceFunction_panicCodeForClosedSync (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForClosedSync = true ;
+  }
+  return gOnceFunctionResult_panicCodeForClosedSync ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForClosedSync (void) {
+  gOnceFunctionResult_panicCodeForClosedSync.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForClosedSync (NULL,
+                                                                    releaseOnceFunctionResult_panicCodeForClosedSync) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForClosedSync [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForClosedSync (C_Compiler * inCompiler,
+                                                                       const cObjectArray & /* inEffectiveParameterArray */,
+                                                                       const GALGAS_location & /* inErrorLocation */
+                                                                       COMMA_LOCATION_ARGS) {
+  return function_panicCodeForClosedSync (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForClosedSync ("panicCodeForClosedSync",
+                                                                        functionWithGenericHeader_panicCodeForClosedSync,
+                                                                        & kTypeDescriptor_GALGAS_bigint,
+                                                                        0,
+                                                                        functionArgs_panicCodeForClosedSync) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Once function 'panicCodeForNegativeArrayIndex'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForNegativeArrayIndex (C_Compiler * inCompiler
+                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("14", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 37)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForNegativeArrayIndex = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForNegativeArrayIndex ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForNegativeArrayIndex (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForNegativeArrayIndex) {
+    gOnceFunctionResult_panicCodeForNegativeArrayIndex = onceFunction_panicCodeForNegativeArrayIndex (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForNegativeArrayIndex = true ;
+  }
+  return gOnceFunctionResult_panicCodeForNegativeArrayIndex ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForNegativeArrayIndex (void) {
+  gOnceFunctionResult_panicCodeForNegativeArrayIndex.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForNegativeArrayIndex (NULL,
+                                                                            releaseOnceFunctionResult_panicCodeForNegativeArrayIndex) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForNegativeArrayIndex [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForNegativeArrayIndex (C_Compiler * inCompiler,
+                                                                               const cObjectArray & /* inEffectiveParameterArray */,
+                                                                               const GALGAS_location & /* inErrorLocation */
+                                                                               COMMA_LOCATION_ARGS) {
+  return function_panicCodeForNegativeArrayIndex (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForNegativeArrayIndex ("panicCodeForNegativeArrayIndex",
+                                                                                functionWithGenericHeader_panicCodeForNegativeArrayIndex,
+                                                                                & kTypeDescriptor_GALGAS_bigint,
+                                                                                0,
+                                                                                functionArgs_panicCodeForNegativeArrayIndex) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Once function 'panicCodeForTooLargeArrayIndex'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForTooLargeArrayIndex (C_Compiler * inCompiler
+                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("15", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 39)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForTooLargeArrayIndex = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForTooLargeArrayIndex ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForTooLargeArrayIndex) {
+    gOnceFunctionResult_panicCodeForTooLargeArrayIndex = onceFunction_panicCodeForTooLargeArrayIndex (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForTooLargeArrayIndex = true ;
+  }
+  return gOnceFunctionResult_panicCodeForTooLargeArrayIndex ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForTooLargeArrayIndex (void) {
+  gOnceFunctionResult_panicCodeForTooLargeArrayIndex.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForTooLargeArrayIndex (NULL,
+                                                                            releaseOnceFunctionResult_panicCodeForTooLargeArrayIndex) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForTooLargeArrayIndex [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForTooLargeArrayIndex (C_Compiler * inCompiler,
+                                                                               const cObjectArray & /* inEffectiveParameterArray */,
+                                                                               const GALGAS_location & /* inErrorLocation */
+                                                                               COMMA_LOCATION_ARGS) {
+  return function_panicCodeForTooLargeArrayIndex (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForTooLargeArrayIndex ("panicCodeForTooLargeArrayIndex",
+                                                                                functionWithGenericHeader_panicCodeForTooLargeArrayIndex,
+                                                                                & kTypeDescriptor_GALGAS_bigint,
+                                                                                0,
+                                                                                functionArgs_panicCodeForTooLargeArrayIndex) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Once function 'llvmAttributeFunction'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string onceFunction_llvmAttributeFunction (C_Compiler * /* inCompiler */
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  result_outResult = GALGAS_string (" nounwind ") ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_llvmAttributeFunction = false ;
+static GALGAS_string gOnceFunctionResult_llvmAttributeFunction ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_llvmAttributeFunction (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_llvmAttributeFunction) {
+    gOnceFunctionResult_llvmAttributeFunction = onceFunction_llvmAttributeFunction (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_llvmAttributeFunction = true ;
+  }
+  return gOnceFunctionResult_llvmAttributeFunction ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_llvmAttributeFunction (void) {
+  gOnceFunctionResult_llvmAttributeFunction.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmAttributeFunction (NULL,
+                                                                   releaseOnceFunctionResult_llvmAttributeFunction) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmAttributeFunction [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmAttributeFunction (C_Compiler * inCompiler,
+                                                                      const cObjectArray & /* inEffectiveParameterArray */,
+                                                                      const GALGAS_location & /* inErrorLocation */
+                                                                      COMMA_LOCATION_ARGS) {
+  return function_llvmAttributeFunction (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmAttributeFunction ("llvmAttributeFunction",
+                                                                       functionWithGenericHeader_llvmAttributeFunction,
+                                                                       & kTypeDescriptor_GALGAS_string,
+                                                                       0,
+                                                                       functionArgs_llvmAttributeFunction) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                            Once function 'userModeName'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_string onceFunction_userModeName (C_Compiler * /* inCompiler */
+                                                COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_outResult ; // Returned variable
+  result_outResult = GALGAS_string ("user") ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_userModeName = false ;
+static GALGAS_string gOnceFunctionResult_userModeName ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string function_userModeName (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_userModeName) {
+    gOnceFunctionResult_userModeName = onceFunction_userModeName (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_userModeName = true ;
+  }
+  return gOnceFunctionResult_userModeName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_userModeName (void) {
+  gOnceFunctionResult_userModeName.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_userModeName (NULL,
+                                                          releaseOnceFunctionResult_userModeName) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_userModeName [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_userModeName (C_Compiler * inCompiler,
+                                                             const cObjectArray & /* inEffectiveParameterArray */,
+                                                             const GALGAS_location & /* inErrorLocation */
+                                                             COMMA_LOCATION_ARGS) {
+  return function_userModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_userModeName ("userModeName",
+                                                              functionWithGenericHeader_userModeName,
+                                                              & kTypeDescriptor_GALGAS_string,
+                                                              0,
+                                                              functionArgs_userModeName) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        Function 'initNameForInvocationGraph'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring function_initNameForInvocationGraph (const GALGAS_unifiedTypeMap_2D_proxy & constinArgument_inReceiverType,
+                                                    const GALGAS_lbigint & constinArgument_inPriority,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring result_outName ; // Returned variable
+  GALGAS_string var_s_933 = GALGAS_string ("init") ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 21)))).boolEnum () ;
+  if (kBoolTrue == test_0) {
+    var_s_933.plusAssign_operation(GALGAS_string (" $").add_operation (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 22)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 22)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 22)) ;
+  }
+  var_s_933.plusAssign_operation(GALGAS_string (" ").add_operation (constinArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 24)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 24)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 24)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s_933, constinArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 25)) ;
+//---
+  return result_outName ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_initNameForInvocationGraph [3] = {
+  & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy,
+  & kTypeDescriptor_GALGAS_lbigint,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_initNameForInvocationGraph (C_Compiler * inCompiler,
+                                                                           const cObjectArray & inEffectiveParameterArray,
+                                                                           const GALGAS_location & /* inErrorLocation */
+                                                                           COMMA_LOCATION_ARGS) {
+  const GALGAS_unifiedTypeMap_2D_proxy operand0 = GALGAS_unifiedTypeMap_2D_proxy::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                                                                 inCompiler
+                                                                                                 COMMA_THERE) ;
+  const GALGAS_lbigint operand1 = GALGAS_lbigint::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
+                                                                 inCompiler
+                                                                 COMMA_THERE) ;
+  return function_initNameForInvocationGraph (operand0,
+                                              operand1,
+                                              inCompiler
+                                              COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_initNameForInvocationGraph ("initNameForInvocationGraph",
+                                                                            functionWithGenericHeader_initNameForInvocationGraph,
+                                                                            & kTypeDescriptor_GALGAS_lstring,
+                                                                            2,
+                                                                            functionArgs_initNameForInvocationGraph) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Function 'panicNameForInvocationGraph'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring function_panicNameForInvocationGraph (const GALGAS_string & constinArgument_inName,
+                                                     const GALGAS_lbigint & constinArgument_inPriority,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring result_outName ; // Returned variable
+  GALGAS_string var_s_1326 = GALGAS_string ("panic ").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 31)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 31)).add_operation (constinArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 31)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 31)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s_1326, constinArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 32)) ;
+//---
+  return result_outName ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicNameForInvocationGraph [3] = {
+  & kTypeDescriptor_GALGAS_string,
+  & kTypeDescriptor_GALGAS_lbigint,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicNameForInvocationGraph (C_Compiler * inCompiler,
+                                                                            const cObjectArray & inEffectiveParameterArray,
+                                                                            const GALGAS_location & /* inErrorLocation */
+                                                                            COMMA_LOCATION_ARGS) {
+  const GALGAS_string operand0 = GALGAS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                               inCompiler
+                                                               COMMA_THERE) ;
+  const GALGAS_lbigint operand1 = GALGAS_lbigint::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
+                                                                 inCompiler
+                                                                 COMMA_THERE) ;
+  return function_panicNameForInvocationGraph (operand0,
+                                               operand1,
+                                               inCompiler
+                                               COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicNameForInvocationGraph ("panicNameForInvocationGraph",
+                                                                             functionWithGenericHeader_panicNameForInvocationGraph,
+                                                                             & kTypeDescriptor_GALGAS_lstring,
+                                                                             2,
+                                                                             functionArgs_panicNameForInvocationGraph) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Function 'literalStringName'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13318,24 +13851,6 @@ const char * gWrapperFileContent_50_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "typedef struct { unsigned mA ; } TYPE_ELEMENT ;\n"
-  "\n"
-  "TYPE_ELEMENT LISTE [10] ;\n"
-  "\n"
-  "unsigned BOUCLE (void) {\n"
-  "  unsigned result = 0 ;\n"
-  "  TYPE_ELEMENT * ptr = LISTE ;\n"
-  "  unsigned idx = 10 ;\n"
-  "  while (idx > 0) {\n"
-  "    result += ptr->mA ;\n"
-  "    ptr ++ ;\n"
-  "    idx -- ;\n"
-  "  }\n"
-  "  return result;\n"
-  "}\n"
-  "\n"
-  "//---------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
   "typedef unsigned TaskList ;\n"
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n"
@@ -13815,7 +14330,7 @@ const cRegularFileWrapper gWrapperFile_50_targetTemplates (
   "target.c",
   "c",
   true, // Text file
-  24231, // Text length
+  23837, // Text length
   gWrapperFileContent_50_targetTemplates
 ) ;
 
