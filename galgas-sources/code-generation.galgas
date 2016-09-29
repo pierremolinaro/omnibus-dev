@@ -168,7 +168,7 @@ private proc generateCodeFiles
 #----------------------------------------- Structure types declaration
   declareLLVMTypes (!inTypeMap !?llvmCode)
 #----------------------------------------- Static list type declaration
-  [inStaticlistMap generateLLVM !?llvmCode]
+#  [inStaticlistMap generateLLVM !?llvmCode]
   [inStaticListValueMap generateLLVM !?llvmCode]
 #----------------------------------------- Global variables
   for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap

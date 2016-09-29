@@ -7,8 +7,6 @@
 proc initialVariableMap
   ?context:let @semanticContext inContext
   ?mode:let @mode inRequiredMode
-#  ?userMode:let @bool inAcceptUserMode
-#  ?registerAccess:let @accessKind inRegisterAccessKind
   ?globalsAreConstant:@bool inGlobalsAreConstant
   ?returnTypeName:let @lstring inReturnTypeName
   !@variableMap outVariableMap

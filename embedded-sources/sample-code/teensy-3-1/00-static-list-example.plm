@@ -1,0 +1,56 @@
+target "teensy-3-1"
+
+//——————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                               
+//——————————————————————————————————————————————————————————————————————————————
+
+func safe activityLedOn @global () {
+  digitalWrite (!port:.D13 !true)
+}
+
+func safe activityLedOff @global () {
+  digitalWrite (!port:.D13 !false)
+}
+
+//——————————————————————————————————————————————————————————————————————————————
+
+init 100 {
+  pinMode (!port:.D13 !mode:.OUTPUT)
+}
+
+//-----------------------------------------------------------------------------*
+
+let LED_L1 = $digitalPort.D4
+
+//-----------------------------------------------------------------------------*
+
+init 1000 {
+  pinMode (!port:LED_L1 !mode:.OUTPUT)
+}
+
+//-----------------------------------------------------------------------------*
+
+staticlist maListeStatique {
+  let a $uint16
+  let b $uint9
+}
+
+extend staticlist maListeStatique (5, 9)
+
+extend staticlist maListeStatique (15, 29)
+
+//-----------------------------------------------------------------------------*
+
+task T priority 12 stackSize 512 {
+  var deadline $uint32 = 0
+
+  while time.waitUntilMS (!deadline:self.deadline) {
+    self.deadline +%= 1000
+    toggle (!port:LED_L1)
+//    for element in maListeStatique {
+//    
+//    }
+  }
+}
+
+//------------------------------------------------*
