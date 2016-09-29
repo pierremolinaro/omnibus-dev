@@ -31,8 +31,8 @@ init 1000 {
 //-----------------------------------------------------------------------------*
 
 staticlist maListeStatique {
-  let a $uint16
-  let b $uint9
+  let a $uint32
+  let b $uint32
 }
 
 extend staticlist maListeStatique (5, 9)
