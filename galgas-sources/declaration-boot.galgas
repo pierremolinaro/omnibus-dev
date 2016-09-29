@@ -27,7 +27,7 @@ syntax extension plm_syntax {
     <instructionList> ?let instructionList
     let endOfInit = @location.here
     $}$
-    ioAST.mBootList +=
+    ioAST.mBootListAST +=
       !priority.location
       !instructionList
       !endOfInit
@@ -64,9 +64,6 @@ method @bootList-element bootSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#  if not [inContext.mModeMap hasKey !bootModeName ()] then
-#    error mBootLocation : "the `" + bootModeName () + " mode should be defined in order to use boot routines"
-#  end
   [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
 #---
   let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority !mPriorityLocation}
@@ -80,8 +77,6 @@ method @bootList-element bootSemanticAnalysis
   initialVariableMap (
     !context:inContext
     !mode:.bootMode
-#    !userMode:false
-#    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap

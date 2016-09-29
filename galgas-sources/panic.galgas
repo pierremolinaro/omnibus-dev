@@ -27,7 +27,7 @@ syntax extension plm_syntax {
     <instructionList> ?let instructionList
     let endOfInstructionList = @location.here
     $}$
-    ioAST.mPanicClauses +=
+    ioAST.mPanicClauseListAST +=
       !true
       !instructionList
       !endOfInstructionList
@@ -44,7 +44,7 @@ syntax extension plm_syntax {
     <instructionList> ?let instructionList
     let endOfInstructionList = @location.here
     $}$
-    ioAST.mPanicClauses +=
+    ioAST.mPanicClauseListAST +=
       !false
       !instructionList
       !endOfInstructionList

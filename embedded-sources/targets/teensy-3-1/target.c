@@ -286,7 +286,8 @@ void blockOnDeadline (const unsigned inDeadline) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) asm ("!FUNC!blockInListAndOnDeadline") ;
+void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline)
+asm ("!FUNC!blockInListAndOnDeadline") ;
 
 void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadline) {
   const unsigned currentTaskIndex = gRunningTaskControlBlock->mTaskIndex ;
@@ -304,7 +305,8 @@ void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadli
 //  M A K E    T A S K    R E A D Y                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void makeTaskReady (TaskList * ioWaitingList, bool * outFound) asm ("!FUNC!makeTaskReady") ;
+void makeTaskReady (TaskList * ioWaitingList, bool * outFound)
+asm ("!FUNC!makeTaskReady") ;
 
 void makeTaskReady (TaskList * ioWaitingList, bool * outFound) {
   *outFound = (* ioWaitingList) != 0 ;
@@ -326,7 +328,8 @@ void makeTaskReady (TaskList * ioWaitingList, bool * outFound) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void makeTasksReadyFrom (const unsigned inCurrentDate) asm ("!FUNC!makeTasksReadyFromCurrentDate") ;
+void makeTasksReadyFrom (const unsigned inCurrentDate)
+asm ("!FUNC!makeTasksReadyFromCurrentDate") ;
 
 void makeTasksReadyFrom (const unsigned inCurrentDate) {
   unsigned w = gDeadlineWaitingTaskList ;
@@ -451,7 +454,8 @@ void kernel_guardDidChange (GuardList * ioGuardList) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void tickHandlerForGuardedWaitUntil (const unsigned inUptime) asm ("!FUNC!tickHandlerForGuardedWaitUntil") ;
+void tickHandlerForGuardedWaitUntil (const unsigned inUptime)
+asm ("!FUNC!tickHandlerForGuardedWaitUntil") ;
 
 void tickHandlerForGuardedWaitUntil (const unsigned inUptime) {
   unsigned w = gDeadlineWaitingInGuardTaskList ;

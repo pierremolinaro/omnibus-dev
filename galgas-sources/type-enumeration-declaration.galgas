@@ -40,7 +40,7 @@ syntax extension plm_syntax {
     while
     end
     $}$
-    ioAST.mDeclarationList += !@enumerationDeclaration.new {
+    ioAST.mDeclarationListAST += !@enumerationDeclaration.new {
       !enumName
 #      !attributeList
       !enumCaseList

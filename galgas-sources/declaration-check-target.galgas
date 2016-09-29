@@ -10,7 +10,7 @@ syntax extension plm_syntax {
     $check$
     $target$
     $"string"$ ?let targetName
-    ioAST.mCheckTargetList += !targetName
+    ioAST.mCheckTargetListAST += !targetName
   }
 
   #·····················································································································

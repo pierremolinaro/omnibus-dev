@@ -40,7 +40,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile
 #--- Check target names are not duplicated
   if @uint.errorCount == 0 then
     @stringset targetNameSet = {}
-    for (targetName) in ast.mTargetList do
+    for (targetName) in ast.mTargetListAST do
       if [targetNameSet hasKey !targetName.string] then
         error targetName : "Duplicated target"
       end
@@ -49,12 +49,12 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile
   end
 #--- Compile project for every target
   if @uint.errorCount == 0 then
-    if [ast.mTargetList length] == 0 then
+    if [ast.mTargetListAST length] == 0 then
       warning endOfSourceFile : "no target: only syntax analysis is performed"
-    elsif [ast.mTargetList length] > 1 then
-      warning endOfSourceFile : [[ast.mTargetList length] string] + " targets: only syntax analysis is performed"
+    elsif [ast.mTargetListAST length] > 1 then
+      warning endOfSourceFile : [[ast.mTargetListAST length] string] + " targets: only syntax analysis is performed"
     else
-      for (targetName) in ast.mTargetList do
+      for (targetName) in ast.mTargetListAST do
         compileProject (
           !sourceFile:inSourceFile
           !ast:ast
@@ -89,20 +89,20 @@ private proc compileProject
   )
 #------------------------------------------------------------ Add Predefined types
 #--- Add boolean type
-  ast.mDeclarationList += !@booleanDeclaration.new {![boolTypeName () nowhere] !{}}
+  ast.mDeclarationListAST += !@booleanDeclaration.new {![boolTypeName () nowhere] !{}}
 #--- Literal integer type
-  ast.mDeclarationList += !@literalIntegerDeclaration.new
+  ast.mDeclarationListAST += !@literalIntegerDeclaration.new
 #--- Add String type
-  ast.mDeclarationList += !@literalStringDeclaration.new {![staticStringTypeName () nowhere]}
+  ast.mDeclarationListAST += !@literalStringDeclaration.new {![staticStringTypeName () nowhere]}
 #------------------------------------------------------------  Add type extensions
-  let declarationList = ast.mDeclarationList
+  let declarationList = ast.mDeclarationListAST
   var @declarationListAST newDeclarationList = {}
   var extensionDeclarationListAST = ast.mExtensionDeclarationListAST
   for (declaration) in declarationList do
     [declaration addExtension !?extensionDeclarationListAST ?let newDeclaration]
     newDeclarationList += !newDeclaration
   end
-  ast.mDeclarationList = newDeclarationList
+  ast.mDeclarationListAST = newDeclarationList
 #--- Raise an error for every unhandled extension
   for (typeName * * * *) in extensionDeclarationListAST do
     error typeName : "this type is not defined or does not support extension"
@@ -115,7 +115,7 @@ private proc compileProject
     ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
   )
 #------------------------------------------------------------ Check "check target" declarations
-  for (targetNameToCheck) in ast.mCheckTargetList do
+  for (targetNameToCheck) in ast.mCheckTargetListAST do
     if targetNameToCheck.string != inTargetName then
       error targetNameToCheck : "invalid target" fixit { replace "\"" + inTargetName.string + "\"" }
     end
@@ -188,22 +188,23 @@ private proc addTargetSpecificFiles
       !?importedFilePathSet:ioImportedFileAbsolutePathSet
     )
   end
-  ioAST.mDeclarationList = ast.mDeclarationList + ioAST.mDeclarationList
-  ioAST.mGlobalVarDeclarationList = ast.mGlobalVarDeclarationList + ioAST.mGlobalVarDeclarationList
+  ioAST.mDeclarationListAST = ast.mDeclarationListAST + ioAST.mDeclarationListAST
+  ioAST.mGlobalVarDeclarationListAST = ast.mGlobalVarDeclarationListAST + ioAST.mGlobalVarDeclarationListAST
   ioAST.mControlRegisterDeclarationListAST = ast.mControlRegisterDeclarationListAST + ioAST.mControlRegisterDeclarationListAST
   ioAST.mExtensionDeclarationListAST = ast.mExtensionDeclarationListAST + ioAST.mExtensionDeclarationListAST
   ioAST.mProcedureListAST = ast.mProcedureListAST + ioAST.mProcedureListAST
-  ioAST.mRequiredProcList = ast.mRequiredProcList + ioAST.mRequiredProcList
-  ioAST.mExternProcList = ast.mExternProcList + ioAST.mExternProcList
+  ioAST.mRequiredProcListAST = ast.mRequiredProcListAST + ioAST.mRequiredProcListAST
+  ioAST.mExternProcListAST = ast.mExternProcListAST + ioAST.mExternProcListAST
   ioAST.mStandAloneSVCListAST = ast.mStandAloneSVCListAST + ioAST.mStandAloneSVCListAST
   ioAST.mGuardListAST = ast.mGuardListAST + ioAST.mGuardListAST
-  ioAST.mTargetList += ast.mTargetList
-  ioAST.mInitList += ast.mInitList
-  ioAST.mBootList += ast.mBootList
-  ioAST.mPanicClauses += ast.mPanicClauses # + ioAST.mPanicClauses
+  ioAST.mTargetListAST += ast.mTargetListAST
+  ioAST.mInitListAST += ast.mInitListAST
+  ioAST.mBootListAST += ast.mBootListAST
+  ioAST.mPanicClauseListAST += ast.mPanicClauseListAST
 #  ioAST.mModuleDeclarationList = ast.mModuleDeclarationList + ioAST.mModuleDeclarationList
+  ioAST.mStaticlistListAST = ast.mStaticlistListAST + ioAST.mStaticlistListAST
   ioAST.mISRDeclarationListAST = ast.mISRDeclarationListAST + ioAST.mISRDeclarationListAST
-  ioAST.mTaskList = ast.mTaskList + ioAST.mTaskList
+  ioAST.mTaskListAST = ast.mTaskListAST + ioAST.mTaskListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

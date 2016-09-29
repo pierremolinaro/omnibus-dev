@@ -81,7 +81,7 @@ syntax extension plm_target_specific_syntax {
       interruptionConfigurationList += !interruptName !interruptionPanicCode
     end
     $}$
-    ioAST.mDeclarationList += !@configurationDeclarationAST.new {
+    ioAST.mDeclarationListAST += !@configurationDeclarationAST.new {
       !pointerSize
       !panicCodeTypeName
       !panicLineTypeName

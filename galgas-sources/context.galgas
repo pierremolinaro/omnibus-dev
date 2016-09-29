@@ -173,6 +173,7 @@ struct @semanticContext {
   @globalVariableMap mGlobalVariableMap
   @moduleMap mModuleMap
   @constructorMap mConstructorMap
+  @staticlistMap mStaticlistMap
 #--- Interrupts
   @stringset mDefinedInterruptSet
   @availableInterruptMap mAvailableInterruptMap
@@ -246,14 +247,12 @@ proc buildSemanticContext
   !context:@semanticContext outSemanticContext
 {
   outSemanticContext = .default
-#--- Add predefined modes
-#  outSemanticContext.mModeMap = allModeMap ()
 #--- Enter init routines
-  for initRoutine in inAST.mInitList do
+  for initRoutine in inAST.mInitListAST do
     [initRoutine enterInContext !?context:outSemanticContext]
   end
 #--- Enter panic routines
-  for panicRoutine in inAST.mPanicClauses do
+  for panicRoutine in inAST.mPanicClauseListAST do
     [panicRoutine enterInContext !?context:outSemanticContext]
   end
 #---
@@ -264,6 +263,8 @@ proc buildSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
   end
+#--- Static lists
+ [inAST.mStaticlistListAST enterStaticListsInContext !?context:outSemanticContext]
 #--- Build an HTML containing all glogal constants
   buildGlobalConstantMapHTMLFile (
     !outSemanticContext.mGlobalConstantMap
@@ -282,11 +283,11 @@ proc buildSemanticContext
 #--- Enter procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
   [inAST.mProcedureListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
-  [inAST.mExternProcList enterExternProcInContext !?context: outSemanticContext]
+  [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
   [inAST.mStandAloneSVCListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #--- Enter tasks
-  [inAST.mTaskList enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
+  [inAST.mTaskListAST enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
 #---
   for (declaration) in inDeclarationListAST do
     [declaration enterRoutinesInContext
@@ -297,7 +298,7 @@ proc buildSemanticContext
   end
 #--- Check global var declaration
   if @uint.errorCount == 0 then
-    for globalVar in inAST.mGlobalVarDeclarationList do
+    for globalVar in inAST.mGlobalVarDeclarationListAST do
       [globalVar enterInContext
         !?context:outSemanticContext
         !?staticStringMap:ioGlobalLiteralStringMap
