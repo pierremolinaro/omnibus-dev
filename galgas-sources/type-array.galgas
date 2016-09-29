@@ -88,6 +88,7 @@ override method @typeArrayDeclaration enterRoutinesInContext
 override method @typeArrayDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Get element type

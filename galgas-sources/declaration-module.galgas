@@ -176,6 +176,7 @@ map @moduleMap {
 override method @moduleDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   [!?ioContext.mModuleMap insertKey !mModuleName]

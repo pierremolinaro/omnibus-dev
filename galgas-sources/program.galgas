@@ -123,11 +123,13 @@ private proc compileProject
 #------------------------------------------------------------ Semantic context
   if @uint.errorCount == 0 then
     @staticStringMap globalLiteralStringMap = {}
+    @staticlistValues_listMap staticListValueMap = {}
     buildSemanticContext (
       !orderedDeclarationList:orderedDeclarationListAST
       !sourceFile:inSourceFile
       !ast:ast
       !?staticStringMap:globalLiteralStringMap
+      !?staticlistValues:staticListValueMap
       ?context:let @semanticContext semanticContext
     )
   #--- Semantic analysis
@@ -153,6 +155,8 @@ private proc compileProject
           !panicCodeType:semanticContext.mPanicCodeType
           !panicLineType:semanticContext.mPanicLineType
           !interrupts:semanticContext.mAvailableInterruptMap
+          !staticlists:semanticContext.mStaticlistMap
+          !staticlistValues:staticListValueMap
           !sourceFileSet:sourceFileAbsolutePathSet
         )
       end
@@ -202,7 +206,6 @@ private proc addTargetSpecificFiles
   ioAST.mBootListAST += ast.mBootListAST
   ioAST.mPanicClauseListAST += ast.mPanicClauseListAST
 #  ioAST.mModuleDeclarationList = ast.mModuleDeclarationList + ioAST.mModuleDeclarationList
-  ioAST.mStaticlistListAST = ast.mStaticlistListAST + ioAST.mStaticlistListAST
   ioAST.mISRDeclarationListAST = ast.mISRDeclarationListAST + ioAST.mISRDeclarationListAST
   ioAST.mTaskListAST = ast.mTaskListAST + ioAST.mTaskListAST
 }

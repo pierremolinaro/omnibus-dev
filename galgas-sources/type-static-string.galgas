@@ -57,6 +57,7 @@ override method @literalStringDeclaration enterRoutinesInContext
 override method @literalStringDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   let uint8Type = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !["uint8" nowhere]}

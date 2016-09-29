@@ -48,6 +48,7 @@ override getter @booleanDeclaration keyRepresentationForErrorSignaling -> @strin
 override method @booleanDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---

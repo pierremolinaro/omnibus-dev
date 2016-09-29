@@ -1,4 +1,4 @@
- #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -65,9 +65,7 @@ abstract method @expressionAST addDependenceEdgeForStaticExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @globalConstantDeclaration enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override method @globalConstantDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add 'constant name' node
   [!?ioGraph addNode !mConstantName !self]
 #--- Add dependency from constant type name
@@ -92,13 +90,12 @@ override getter @globalConstantDeclaration keyRepresentationForErrorSignaling ->
 override method @globalConstantDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
   initialVariableMap (
     !context:ioContext
     !mode:.bootMode
-#    !userMode:false
-#    !registerAccess:.readWriteAccess
     !globalsAreConstant:true # Any value, there is no defined global variable at this stage
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap

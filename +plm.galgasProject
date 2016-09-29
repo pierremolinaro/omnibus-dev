@@ -40,6 +40,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/declaration-global-variable.galgas"
   "galgas-sources/declaration-module.galgas"
   "galgas-sources/declaration-static-list.galgas"
+  "galgas-sources/declaration-extend-static-list.galgas"
 
 #--- Tasks
   "galgas-sources/declaration-task.galgas"

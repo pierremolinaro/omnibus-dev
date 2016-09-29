@@ -11,6 +11,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                       Function 'panicCodeForConvertOverflow'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bigint function_panicCodeForConvertOverflow (class C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                           Function 'getInfixOperatorMap'                                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -232,7 +241,8 @@ void routine_buildSemanticContext (const class GALGAS_declarationListAST constin
                                    const class GALGAS_lstring constinArgument1,
                                    const class GALGAS_ast constinArgument2,
                                    class GALGAS_staticStringMap & ioArgument3,
-                                   class GALGAS_semanticContext & outArgument4,
+                                   class GALGAS_staticlistValues_5F_listMap & ioArgument4,
+                                   class GALGAS_semanticContext & outArgument5,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 

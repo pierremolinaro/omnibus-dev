@@ -147,6 +147,7 @@ override method @configurationDeclarationAST enterRoutinesInContext
 override method @configurationDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   @stringset panicCodeSet = {}

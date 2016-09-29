@@ -213,6 +213,7 @@ struct @semanticContext {
 abstract method @abstractDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
   ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -244,6 +245,7 @@ proc buildSemanticContext
   ?sourceFile:let @lstring inSourceFile
   ?ast:let @ast inAST
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
   !context:@semanticContext outSemanticContext
 {
   outSemanticContext = .default
@@ -260,11 +262,10 @@ proc buildSemanticContext
     [declaration enterInContext
       !procedureDeclarationList:inAST.mProcedureListAST
       !?context:outSemanticContext
+      !?staticlistValues:ioStaticListValueMap
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
   end
-#--- Static lists
- [inAST.mStaticlistListAST enterStaticListsInContext !?context:outSemanticContext]
 #--- Build an HTML containing all glogal constants
   buildGlobalConstantMapHTMLFile (
     !outSemanticContext.mGlobalConstantMap

@@ -39,7 +39,6 @@ proc buildOrderedDeclarationList
   [inAST.mControlRegisterDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mGlobalVarDeclarationListAST noteTypesInPrecedenceGraph !?precedenceGraph]
   [inAST.mTaskListAST noteTypesInPrecedenceGraph !?precedenceGraph]
-  [inAST.mStaticlistListAST noteTypesInPrecedenceGraph !?precedenceGraph]
 #--------------------------------------- Add needed $uintXX and $intXX types
   for () in [precedenceGraph undefinedNodeKeyList] do
     let split = [mValue componentsSeparatedByString !"int"]

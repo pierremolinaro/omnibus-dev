@@ -93,7 +93,9 @@ void routine_codeGeneration (const class GALGAS_string constinArgument0,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
                              const class GALGAS_availableInterruptMap constinArgument8,
-                             const class GALGAS_stringset constinArgument9,
+                             const class GALGAS_staticlistMap constinArgument9,
+                             const class GALGAS_staticlistValues_5F_listMap constinArgument10,
+                             const class GALGAS_stringset constinArgument11,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
@@ -112,7 +114,9 @@ void routine_generateCodeFiles (const class GALGAS_string constinArgument0,
                                 const class GALGAS_unifiedTypeMap_2D_proxy constinArgument6,
                                 const class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
                                 const class GALGAS_availableInterruptMap constinArgument8,
-                                const class GALGAS_stringset constinArgument9,
+                                const class GALGAS_staticlistMap constinArgument9,
+                                const class GALGAS_staticlistValues_5F_listMap constinArgument10,
+                                const class GALGAS_stringset constinArgument11,
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
 

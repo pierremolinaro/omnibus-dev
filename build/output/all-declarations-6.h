@@ -604,13 +604,4 @@ void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Function 'panicCodeForConvertOverflow'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bigint function_panicCodeForConvertOverflow (class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
 #endif
