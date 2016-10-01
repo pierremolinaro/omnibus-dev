@@ -207,7 +207,7 @@ proc guardSemanticAnalysis
   #--- Add 'accept" output variable
     let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
     let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
-    allocaList += !resultVarName.string !resultType
+    allocaList += !resultVarName.string ![resultType llvmTypeName]
     [!?variableMap insertOutputFormalArgument
       !lkey:resultVarName
       !type:resultType
@@ -463,8 +463,8 @@ method @guardMapIR-element llvmCodeGeneration
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Allocate local variables 
-  for (variable type) in mAllocaList do
-    ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+  for (variable llvmTypeName) in mAllocaList do
+    ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
   end
 #--- Store input arguments in memory
   for () in mFormalArgumentListForGeneration do
@@ -503,8 +503,8 @@ method @guardMapIR-element llvmCodeGeneration
     ioLLVMcode += "  ret i1 false\n"
     ioLLVMcode += "}\n\n"
   case convenienceGuard (baseGuardAllocaList baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
-    for (variable type) in baseGuardAllocaList do
-      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+    for (variable  llvmTypeName) in baseGuardAllocaList do
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
     end
     [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  %baseGuard.result = call i1 @" + llvmNameForGuardCall (!baseGuardMangledName)

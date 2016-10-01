@@ -177,8 +177,8 @@ method @interruptMapIR interruptCodeGeneration
     ioLLVMcode += llvmTitleComment (!interruptImplementationName)
     ioLLVMcode += "define void @" + interruptImplementationName + " ()" + llvmAttributeFunction () + " {\n"
   #--- Alloca
-    for (variable type) in interrupt.mAllocaList do
-      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+    for (variable llvmTypeName) in interrupt.mAllocaList do
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
     end
   #--- Define self
     if interrupt.mSelfType != .null then

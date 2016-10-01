@@ -205,7 +205,7 @@ proc routineSemanticAnalysis
 
 list @allocaList {
   @string mVarName
-  @unifiedTypeMap-proxy mType
+  @string mLLVMTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -280,8 +280,8 @@ method @routineMapIR-element llvmCodeGeneration
   if mReturnType != .null then
     ioLLVMcode += "  %" + llvmNameForLocalVariable (!functionResultVariableName ()) + " = alloca " + [mReturnType llvmTypeName] + "\n"
   end
-  for (variable type) in mAllocaList do
-    ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+  for (variable llvmTypeName) in mAllocaList do
+    ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
   end
 #--- Store input arguments in memory
   for () in mFormalArgumentListForGeneration do

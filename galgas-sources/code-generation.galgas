@@ -190,8 +190,8 @@ private proc generateCodeFiles
   for boot in inIntermediateCodeStruct.mBootList do
     llvmCode += llvmSeparatorLine () + "\n"
     llvmCode += "define internal void @boot." + boot.mBootIndex + " ()" + llvmAttributeFunction () + "{\n"
-    for (variable type) in boot.mAllocaList do
-      llvmCode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+    for (variable LLVMTypeName) in boot.mAllocaList do
+      llvmCode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + LLVMTypeName + "\n"
     end
     [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
     llvmCode += "  ret void\n"

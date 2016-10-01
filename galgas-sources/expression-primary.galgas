@@ -684,7 +684,7 @@ proc analyzeEffectiveParameters
           !canBeUsedAsInputParameter:true
         ]
       end
-      ioAllocaList += !varLLVMName !type
+      ioAllocaList += !varLLVMName ![type llvmTypeName]
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
