@@ -220,8 +220,8 @@ method @initListIR generateLLVMinitCode
         ioLLVMcode += [init.mSelfType llvmTypeName] + " * %self"
       end
       ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-      for (variable type) in init.mAllocaList do
-        ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + [type llvmTypeName] + "\n"
+      for (variable llvmTypeName) in init.mAllocaList do
+        ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
       end
       [init.mInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       ioLLVMcode += "  ret void\n"

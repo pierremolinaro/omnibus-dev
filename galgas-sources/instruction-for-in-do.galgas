@@ -91,7 +91,7 @@ override method @forInstructionAST analyze
 #---
   let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
-  ioAllocaList += !enumeratedVarLLVMName !iteratedElementType
+  ioAllocaList += !enumeratedVarLLVMName ![iteratedElementType llvmTypeName]
 #--- Analyze instruction list
   [!?ioVariableMap openOverrideForRepeatBlock]
   [!?ioVariableMap insertUsedConstant
@@ -131,11 +131,7 @@ override method @forInstructionAST analyze
   elsif [iteratedTypeKind isArrayType] then
     [iteratedTypeKind arrayType ?elementType:let elementType ?size:let size]
     let varStaticListInMemory = "for." + [mEndOf_iteratedExpression_instruction locationIndex] + ".list.in.memory"
-    ioAllocaList += !varStaticListInMemory ![iteratedExpressionResult type]
-    let varIndexInMemory = "for." + [mEndOf_iteratedExpression_instruction locationIndex] + ".index"
-    ioAllocaList += !varIndexInMemory !.searchKey {!inContext.mTypeMap !.new {!"uint32" !.nowhere}}
-    let varPtrInMemory = "for." + [mEndOf_iteratedExpression_instruction locationIndex] + ".ptr"
-    ioAllocaList += !varPtrInMemory !.searchKey {!inContext.mTypeMap !.new {!"uint32" !.nowhere}}
+    ioAllocaList += !varStaticListInMemory ![[iteratedExpressionResult type] llvmTypeName]
     ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
       !enumeratedVarLLVMName
       !mEndOf_iteratedExpression_instruction
@@ -144,7 +140,6 @@ override method @forInstructionAST analyze
       !elementType
       !size
       !varStaticListInMemory
-      !varIndexInMemory
     }
   else
     error mEndOf_iteratedExpression_instruction : "this object is not enumerable"
@@ -156,14 +151,13 @@ override method @forInstructionAST analyze
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @forInstructionOnArrayIR : @abstractInstructionIR {
-  @string mVarName
+  @string mEnumeratedValueName
   @location mLocation
   @objectIR mExpressionResult
   @instructionListIR mInstructionList
   @unifiedTypeMap-proxy mElementType
   @uint mArraySize
   @string mVarStaticListInMemory
-  @string mVarIndexInMemory
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -205,13 +199,18 @@ override method @forInstructionOnArrayIR llvmInstructionCode
 {
   let elementTypeLLVMName = [mElementType llvmTypeName]
   let listTypeLLVMName = "[" + mArraySize + " x " + elementTypeLLVMName + "]"
+
   let startLabel = "for.label." + [mLocation locationIndex] + ".start"
   let testLabel = "for.label." + [mLocation locationIndex] + ".test"
+  let nextLabel = "for.label." + [mLocation locationIndex] + ".next"
   let exitVar = "for." + [mLocation locationIndex] + ".exit"
   let loopLabel = "for.label." + [mLocation locationIndex] + ".loop"
   let endLabel  = "for.label." + [mLocation locationIndex] + ".end"
-#  let ptrVar    = "for." + [mLocation locationIndex] + ".ptr"
-  
+ 
+  let indexVar  = "for.index." + [mLocation locationIndex]
+  let ptrVar  = "for.ptr." + [mLocation locationIndex]
+  let currentValue = "for.currentValue." + [mLocation locationIndex]
+ 
 #--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
 
@@ -220,37 +219,41 @@ override method @forInstructionOnArrayIR llvmInstructionCode
 #--- Init pointer
   ioLLVMcode += "  store " + listTypeLLVMName + " " + [mExpressionResult llvmName]
   ioLLVMcode += ", " + listTypeLLVMName + "* %" + llvmNameForLocalVariable (!mVarStaticListInMemory) + "\n"
-  ioLLVMcode += "  %" + mVarName + ".start = getelementptr inbounds " + listTypeLLVMName
+  ioLLVMcode += "  %" + ptrVar + ".start = getelementptr inbounds " + listTypeLLVMName
   ioLLVMcode += ", " + listTypeLLVMName + "* " + "%" + llvmNameForLocalVariable (!mVarStaticListInMemory)
   ioLLVMcode += ", i32 0, i32 0\n"
-  ioLLVMcode += "  store " + elementTypeLLVMName + "* %" + mVarName + ".start, "
-  ioLLVMcode += elementTypeLLVMName + "* %" + llvmNameForLocalVariable (!mVarName) + "\n"
 #--- Init index
-  ioLLVMcode += "  store i32 " + mArraySize + ", i32* %" + llvmNameForLocalVariable (!mVarIndexInMemory) + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
   
-#--- Test
+#------------ Test
   ioLLVMcode += testLabel + ":\n"
-#  ioLLVMcode += "  %" + ptrVar + " = phi " + elementTypeLLVMName + "* [%" + ptrVar + ".start, %"
-#  ioLLVMcode += startLabel + "], [%" + ptrVar + ".next, %" + loopLabel + "]\n"
-  ioLLVMcode += "  %" + mVarIndexInMemory + ".test = load i32, i32* %" + llvmNameForLocalVariable (!mVarIndexInMemory) + "\n"
-  ioLLVMcode += "  %" + exitVar + " = icmp eq i32 %" + mVarIndexInMemory + ".test, 0\n"
+#--- Ptr var
+  ioLLVMcode += "  %" + ptrVar + " = phi " + elementTypeLLVMName + "* [%" + ptrVar + ".start, %" + startLabel
+              + "], [%" + ptrVar + ".next, %" + nextLabel + "]\n"
+#--- Index var
+  ioLLVMcode += "  %" + indexVar + " = phi i32 [" + mArraySize + ", %" + startLabel
+              + "], [%" + indexVar + ".next, %" + nextLabel + "]\n"
+  ioLLVMcode += "  %" + exitVar + " = icmp eq i32 %" + indexVar + ", 0\n"
+#--- Ptr var
   ioLLVMcode += "  br i1 %" + exitVar + ", label %" + endLabel + ", label %" + loopLabel + "\n\n"
 
 #------------ Loop  
   ioLLVMcode += loopLabel + ":\n"
+#--- Load current value
+  ioLLVMcode += "  %" + currentValue + " = load " + elementTypeLLVMName + ", "
+  ioLLVMcode += elementTypeLLVMName + "* %" + ptrVar + "\n"
+  ioLLVMcode += "  store " + elementTypeLLVMName + " %" + currentValue + ", " + elementTypeLLVMName
+             + "* %" + llvmNameForLocalVariable (!mEnumeratedValueName) + "\n"
 #--- Loop instructions
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br label %" + nextLabel + "\n\n"
+
+  ioLLVMcode += nextLabel + ":\n"
 #--- Increment pointer
-  ioLLVMcode += "  %" + mVarName + ".value = load " + elementTypeLLVMName + "* %" + llvmNameForLocalVariable (!mVarName) + "\n"
-  ioLLVMcode += "  %" + mVarName + ".next = getelementptr inbounds " + elementTypeLLVMName + ", "
-  ioLLVMcode += elementTypeLLVMName + " * %" + mVarName + ".value, i32 1\n"
-  ioLLVMcode += "  store " + elementTypeLLVMName + " %" + mVarName + ", " + elementTypeLLVMName
-  ioLLVMcode += "* % " + llvmNameForLocalVariable (!mVarName) + "\n"
+  ioLLVMcode += "  %" + ptrVar + ".next = getelementptr inbounds " + elementTypeLLVMName + ", "
+  ioLLVMcode += elementTypeLLVMName + " * %" + ptrVar + ", i32 1\n"
 #--- Decrement index
-  ioLLVMcode += "  %" + mVarIndexInMemory + ".value = load i32, i32* %" + llvmNameForLocalVariable (!mVarIndexInMemory) + "\n"
-  ioLLVMcode += "  %" + mVarIndexInMemory + ".next = add i32 %" + mVarIndexInMemory + ".value, -1\n"
-  ioLLVMcode += "  store i32 %" + mVarIndexInMemory + ".next, i32* %" + llvmNameForLocalVariable (!mVarIndexInMemory) + "\n"
+  ioLLVMcode += "  %" + indexVar + ".next = add i32 %" + indexVar + ", -1\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
 
 #--- End

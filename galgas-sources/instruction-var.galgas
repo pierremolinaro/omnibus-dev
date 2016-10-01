@@ -136,7 +136,7 @@ override method @varInstructionWithAssignmentAST analyze
     !canBeUsedAsInputParameter:true
   ]
 #--- Code generation
-  ioAllocaList += !varName ![result type]
+  ioAllocaList += !varName ![[result type] llvmTypeName]
   [!?ioInstructionGenerationList appendStoreLocalVariable
     !varName
     ![result type]
@@ -176,7 +176,7 @@ override method @varInstructionAST analyze
     !canBeUsedAsInputParameter:true
   ]
 #--- Code generation
-  ioAllocaList += !varLLVMName !targetType
+  ioAllocaList += !varLLVMName ![targetType llvmTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
