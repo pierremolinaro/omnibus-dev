@@ -8,6 +8,7 @@ class @forInstructionAST : @instructionAST {
   @location mEndOf_iteratedExpression
   @expressionAST mWhileExpression
   @location mEndOf_whileExpression
+  @bool mStaticWhileExpression
   @instructionListAST mDoInstructionList
   @location mEndOf_do_instruction
 }
@@ -26,11 +27,23 @@ syntax extension plm_syntax {
     $in$
     <expression> ?let @expressionAST iteratedExpression
     let endOf_iteratedExpression_instruction = @location.here
+    var staticWhileExpression = false
     @expressionAST whileExpression
     select
       whileExpression = @literalBooleanInExpressionAST.new {!true}
+      staticWhileExpression = true
     or
       $while$
+      select
+        $@attribute$ ? let attributeValue
+        if attributeValue.string != staticAttribute () then
+          staticWhileExpression = true
+        else
+          error attributeValue : "the attribute should be \"@" + staticAttribute () + "\"" 
+          fixit { replace "@" + staticAttribute () }
+        end
+      or
+      end
       <expression> ?whileExpression
     end
     let endOf_whileExpression_instruction = @location.here
@@ -44,6 +57,7 @@ syntax extension plm_syntax {
       !endOf_iteratedExpression_instruction
       !whileExpression
       !endOf_whileExpression_instruction
+      !staticWhileExpression
       !instructionList
       !endOfInstruction
     }
@@ -144,7 +158,12 @@ override method @forInstructionAST analyze
 #--- Check "while" expression type is boolean
   if not [[whileExpressionResult kind] isBoolean] then
     error mEndOf_whileExpression : "'while' expression should be boolean"
+  elsif mStaticWhileExpression && not [whileExpressionResult isStatic] then
+    error mEndOf_whileExpression : "'while' expression is not static"
+  elsif [whileExpressionResult isStatic] && not mStaticWhileExpression then
+    warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
   end
+#---
   @instructionListIR doInstructionList_GenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType

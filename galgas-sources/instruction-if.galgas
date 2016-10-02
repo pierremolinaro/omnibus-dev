@@ -5,6 +5,7 @@
 class @ifInstructionAST : @instructionAST {
   @expressionAST mTestExpression
   @location mTestExpressionEndLocation
+  @bool mStaticIfExpression
   @instructionListAST mThenInstructionList
   @location mEndOfThenInstructionList
   @instructionListAST mElseInstructionList
@@ -31,6 +32,19 @@ syntax extension plm_syntax {
   rule <if_instruction> !@ifInstructionAST outIfInstruction {
     $if$
     let instructionLocation = @location.here
+    @bool staticIfExpression
+    select
+      $@attribute$ ? let attributeValue
+      if attributeValue.string != staticAttribute () then
+        staticIfExpression = true
+      else
+        error attributeValue : "the attribute should be \"@" + staticAttribute () + "\""
+        : staticIfExpression
+        fixit { replace "@" + staticAttribute () }
+      end
+    or
+     staticIfExpression = false
+    end
     <expression> ?let @expressionAST testExpression
     let testExpressionEndLocation = @location.here
     ${$
@@ -54,6 +68,7 @@ syntax extension plm_syntax {
     outIfInstruction = .new {
       !testExpression
       !testExpressionEndLocation
+      !staticIfExpression
       !thenInstructionList
       !endOfThenBranch
       !elseInstructionList
@@ -112,9 +127,10 @@ override method @ifInstructionAST analyze
 #--- Check inferred type
   if [testResult kind] != .boolean then
     error mTestExpressionEndLocation : "test expression type is '" + [testResult key] + "', it should be boolean"
-  end
-  if [testResult isStatic] then
-    error mTestExpressionEndLocation : "test expression type should not be static"
+  elsif mStaticIfExpression && not [testResult isStatic] then
+    error mTestExpressionEndLocation : "'if' expression is not static"
+  elsif [testResult isStatic] && not mStaticIfExpression then
+    warning mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
   end
   [!?ioVariableMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
