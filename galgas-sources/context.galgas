@@ -94,7 +94,7 @@ sharedmap @unifiedTypeMap %selectors {
   @bool copyable
   @bool equatable
   @bool comparable
-  @unifiedTypeMap-proxy enumerationType # .null if type is not enumerable
+#  @unifiedTypeMap-proxy enumerationType # .null if type is not enumerable
 
   insert insertType error message "the '%K' type is already declared in %L"
   search searchKey error message "there is no '%K' type"
@@ -265,7 +265,7 @@ proc buildSemanticContext
       !copyable:false
       !equatable:false
       !comparable:false
-      !enumerationType:elementType
+#      !enumerationType:elementType
     ]
     let staticListType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !plmNameForStaticListType (!lkey)}
     [!?outSemanticContext.mGlobalConstantMap insertKey

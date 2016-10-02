@@ -60,7 +60,7 @@ override method @literalStringDeclaration enterInContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
-  let uint8Type = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !["uint8" nowhere]}
+#  let uint8Type = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !["uint8" nowhere]}
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mLiteralStringTypeName
@@ -71,7 +71,7 @@ override method @literalStringDeclaration enterInContext
     !copyable:true
     !equatable:true
     !comparable:true
-    !enumerationType:uint8Type
+#    !enumerationType:uint8Type
   ]
 }
 

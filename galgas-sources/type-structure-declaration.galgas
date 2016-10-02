@@ -322,7 +322,7 @@ override method @structureDeclaration enterInContext
     !copyable:copyableAttribute
     !equatable:false
     !comparable:false
-    !enumerationType:.null # Not enumerable
+#    !enumerationType:.null # Not enumerable
   ]
 }
 

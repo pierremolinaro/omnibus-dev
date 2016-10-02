@@ -101,7 +101,7 @@ override method @typeArrayDeclaration enterInContext
     ?copyable:let copyable
     ?equatable:*
     ?comparable:*
-    ?enumerationType:*
+#    ?enumerationType:*
   ]
   if not copyable then
     error mElementTypeName : "an array element should be copyable"
@@ -150,7 +150,7 @@ override method @typeArrayDeclaration enterInContext
       !copyable:true
       !equatable:false
       !comparable:false
-      !enumerationType:elementType
+#      !enumerationType:elementType
     ]
   #--- Enter array constructor
     [!?ioContext.mConstructorMap insertKey
