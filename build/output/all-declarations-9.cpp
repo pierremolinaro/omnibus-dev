@@ -810,14 +810,14 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "staticlist maListeStatique {\n"
+  "staticArray maListeStatique {\n"
   "  let a $uint32\n"
   "  let b $uint32\n"
   "}\n"
   "\n"
-  "extend staticlist maListeStatique (5, 9)\n"
+  "extend staticArray maListeStatique (5, 9)\n"
   "\n"
-  "extend staticlist maListeStatique (15, 29)\n"
+  "extend staticArray maListeStatique (15, 29)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -825,12 +825,12 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  var deadline $uint32 = 0\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
-  "    self.deadline +%= 1000\n"
+  "    self.deadline +%= 250\n"
   "    toggle (!port:LED_L1)\n"
   "    var total $uint32 = 0\n"
-  "    for element in maListeStatique {\n"
-  "      total += element.a\n"
-  "      total += element.b\n"
+  "    for \xC3""\xA9""l\xC3""\xA9""ment in maListeStatique {\n"
+  "      total += \xC3""\xA9""l\xC3""\xA9""ment.a\n"
+  "      total += \xC3""\xA9""l\xC3""\xA9""ment.b\n"
   "    }\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.printUnsigned (!total)\n"
@@ -843,7 +843,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-static-list-example.plm",
   "plm",
   true, // Text file
-  1521, // Text length
+  1523, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

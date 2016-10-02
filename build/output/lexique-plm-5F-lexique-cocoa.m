@@ -134,7 +134,7 @@ static const C_cocoa_lexique_table_entry ktable_for_plm_5F_lexique_keyWordList [
   {"extension", plm_lexique_1_extension},
   {"primitive", plm_lexique_1_primitive},
   {"stackSize", plm_lexique_1_stackSize},
-  {"staticlist", plm_lexique_1_staticlist},
+  {"staticArray", plm_lexique_1_staticArray},
   {"configuration", plm_lexique_1_configuration}
 } ;
 
@@ -569,7 +569,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     1 /* plm_lexique_1_setup */,
     1 /* plm_lexique_1_struct */,
     1 /* plm_lexique_1_stackSize */,
-    1 /* plm_lexique_1_staticlist */,
+    1 /* plm_lexique_1_staticArray */,
     1 /* plm_lexique_1_switch */,
     1 /* plm_lexique_1_sync */,
     1 /* plm_lexique_1_system */,
@@ -695,7 +695,7 @@ static NSInteger search_into_plm_5F_lexique_keyWordList (NSString * inSearchedSt
     YES /* plm_lexique_1_setup */,
     YES /* plm_lexique_1_struct */,
     YES /* plm_lexique_1_stackSize */,
-    YES /* plm_lexique_1_staticlist */,
+    YES /* plm_lexique_1_staticArray */,
     YES /* plm_lexique_1_switch */,
     YES /* plm_lexique_1_sync */,
     YES /* plm_lexique_1_system */,

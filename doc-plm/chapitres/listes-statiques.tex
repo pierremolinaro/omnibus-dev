@@ -1,0 +1,85 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX root = ../doc-plm.tex
+
+
+
+
+
+\chapter{Tableaux statiques constants}
+
+PLM permet de construire des tableaux statiques constants, en séparant déclaration du tableau et constitution. Cette caractéristique s'appuie sur les trois constructions suivantes :
+\begin{itemize}
+  \item déclaration du tableau statique (\refSection{DecTypeTableauStatique}) ;
+  \item ajout d'un élément au tableau statique (\refSection{ajoutElementTableauStatique}) ;
+  \item parcours de'un tableau statique (\refSection{parcoursTableauStatique}).
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Déclaration}{DecTypeTableauStatique}
+
+La déclaration d'un tableau statique est réalisée par la construction \plm=staticArray= :
+
+\begin{PLM}
+staticArray maListeStatique {
+  let a $uint32
+  let b $uint32
+}
+\end{PLM}
+
+Cette construction déclare la constante \plm=maListeStatique= comme tableau constant vide. Pour le remplir, utiliser la construction \plm=extend staticArray= (\refSection{ajoutElementTableauStatique}).
+
+La composition de chaque élément est spécifiée par la liste des propriétés, chacune d'elles étant définie par son nom et son type.
+
+
+
+
+
+
+
+
+
+\sectionLabel{Ajout d'un élément au tableau}{ajoutElementTableauStatique}
+
+Un tableau statique est construit élément par élément : 
+
+\begin{PLM}
+extend staticArray maListeStatique (5, 9)
+\end{PLM}
+
+Cette déclaration ajoute un élément au tableau statique, élément dont toutes les propriétés doivent être initialisées par une expression statique. 
+
+\fbox{\begin{minipage}{1.0\textwidth}
+   {\bf Attention !} L'ordre des éléments ne peut pas être spécifié. Il peut varier d'une façon imprévisible d'une compilation à une autre. Aussi, il faut veiller que les opérations réalisées soient indépendantes de l'ordre dans lequel les éléments sont placés dans le tableau statique.
+\end{minipage}}
+
+
+
+
+
+\sectionLabel{Parcours d'un tableau statique}{parcoursTableauStatique}
+
+L'instruction \plm=for= (\refSectionPage{instructionFor}) est la seule qui accède à un tableau statique. Elle permet de parcourir tous les éléments du tableau :
+
+\begin{PLM}
+var total $uint32 = 0
+for élément in maListeStatique {
+  total += élément.a
+  total += élément.b
+}
+\end{PLM}
+
+L'élément courant est désigné par la constante \plm=élément=, et on accède aux propriétés par la notation pointée habituelle. 
+
+
+
+
+

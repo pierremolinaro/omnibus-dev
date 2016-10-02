@@ -30,14 +30,14 @@ init 1000 {
 
 //-----------------------------------------------------------------------------*
 
-staticlist maListeStatique {
+staticArray maListeStatique {
   let a $uint32
   let b $uint32
 }
 
-extend staticlist maListeStatique (5, 9)
+extend staticArray maListeStatique (5, 9)
 
-extend staticlist maListeStatique (15, 29)
+extend staticArray maListeStatique (15, 29)
 
 //-----------------------------------------------------------------------------*
 
@@ -48,9 +48,9 @@ task T priority 12 stackSize 512 {
     self.deadline +%= 250
     toggle (!port:LED_L1)
     var total $uint32 = 0
-    for element in maListeStatique {
-      total += element.a
-      total += element.b
+    for élément in maListeStatique {
+      total += élément.a
+      total += élément.b
     }
     lcd.goto (!line:0 !column:0)
     lcd.printUnsigned (!total)
