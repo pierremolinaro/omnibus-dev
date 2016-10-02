@@ -6901,6 +6901,8 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_74 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_syntax_75 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -7937,8 +7939,10 @@ class GALGAS_forInstructionAST : public GALGAS_instructionAST {
   public : static class GALGAS_forInstructionAST constructor_new (const class GALGAS_lstring & inOperand0,
                                                                   const class GALGAS_expressionAST & inOperand1,
                                                                   const class GALGAS_location & inOperand2,
-                                                                  const class GALGAS_instructionListAST & inOperand3,
-                                                                  const class GALGAS_location & inOperand4
+                                                                  const class GALGAS_expressionAST & inOperand3,
+                                                                  const class GALGAS_location & inOperand4,
+                                                                  const class GALGAS_instructionListAST & inOperand5,
+                                                                  const class GALGAS_location & inOperand6
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -7954,11 +7958,15 @@ class GALGAS_forInstructionAST : public GALGAS_instructionAST {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_do_5F_instruction (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_iteratedExpression_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_iteratedExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_whileExpression (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mIteratedExpression (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mWhileExpression (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -7981,14 +7989,18 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
 //--- Attributes
   public : GALGAS_lstring mAttribute_mVarName ;
   public : GALGAS_expressionAST mAttribute_mIteratedExpression ;
-  public : GALGAS_location mAttribute_mEndOf_5F_iteratedExpression_5F_instruction ;
+  public : GALGAS_location mAttribute_mEndOf_5F_iteratedExpression ;
+  public : GALGAS_expressionAST mAttribute_mWhileExpression ;
+  public : GALGAS_location mAttribute_mEndOf_5F_whileExpression ;
   public : GALGAS_instructionListAST mAttribute_mDoInstructionList ;
   public : GALGAS_location mAttribute_mEndOf_5F_do_5F_instruction ;
 
 //--- Constructor
   public : cPtr_forInstructionAST (const GALGAS_lstring & in_mVarName,
                                    const GALGAS_expressionAST & in_mIteratedExpression,
-                                   const GALGAS_location & in_mEndOf_5F_iteratedExpression_5F_instruction,
+                                   const GALGAS_location & in_mEndOf_5F_iteratedExpression,
+                                   const GALGAS_expressionAST & in_mWhileExpression,
+                                   const GALGAS_location & in_mEndOf_5F_whileExpression,
                                    const GALGAS_instructionListAST & in_mDoInstructionList,
                                    const GALGAS_location & in_mEndOf_5F_do_5F_instruction
                                    COMMA_LOCATION_ARGS) ;
@@ -7999,7 +8011,9 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mIteratedExpression (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_iteratedExpression_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_iteratedExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mWhileExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_whileExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_do_5F_instruction (LOCATION_ARGS) const ;
 //--- Description
