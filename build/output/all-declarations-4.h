@@ -1389,8 +1389,7 @@ class GALGAS_forInstructionOnArrayIR : public GALGAS_abstractInstructionIR {
                                                                         const class GALGAS_objectIR & inOperand4,
                                                                         const class GALGAS_instructionListIR & inOperand5,
                                                                         const class GALGAS_unifiedTypeMap_2D_proxy & inOperand6,
-                                                                        const class GALGAS_uint & inOperand7,
-                                                                        const class GALGAS_string & inOperand8
+                                                                        const class GALGAS_uint & inOperand7
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1410,11 +1409,9 @@ class GALGAS_forInstructionOnArrayIR : public GALGAS_abstractInstructionIR {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mEnumeratedValueName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mIteratedObject (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mVarStaticListInMemory (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mWhileExpressionResult (LOCATION_ARGS) const ;
 
@@ -1441,24 +1438,22 @@ class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mAttribute_mEnumeratedValueName ;
   public : GALGAS_location mAttribute_mLocation ;
-  public : GALGAS_objectIR mAttribute_mExpressionResult ;
+  public : GALGAS_objectIR mAttribute_mIteratedObject ;
   public : GALGAS_instructionListIR mAttribute_mWhileInstructionList ;
   public : GALGAS_objectIR mAttribute_mWhileExpressionResult ;
   public : GALGAS_instructionListIR mAttribute_mDoInstructionList ;
   public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mElementType ;
   public : GALGAS_uint mAttribute_mArraySize ;
-  public : GALGAS_string mAttribute_mVarStaticListInMemory ;
 
 //--- Constructor
   public : cPtr_forInstructionOnArrayIR (const GALGAS_string & in_mEnumeratedValueName,
                                          const GALGAS_location & in_mLocation,
-                                         const GALGAS_objectIR & in_mExpressionResult,
+                                         const GALGAS_objectIR & in_mIteratedObject,
                                          const GALGAS_instructionListIR & in_mWhileInstructionList,
                                          const GALGAS_objectIR & in_mWhileExpressionResult,
                                          const GALGAS_instructionListIR & in_mDoInstructionList,
                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mElementType,
-                                         const GALGAS_uint & in_mArraySize,
-                                         const GALGAS_string & in_mVarStaticListInMemory
+                                         const GALGAS_uint & in_mArraySize
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -1467,13 +1462,12 @@ class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mEnumeratedValueName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIteratedObject (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mWhileInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mWhileExpressionResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mDoInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mElementType (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_string getter_mVarStaticListInMemory (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -1530,7 +1524,7 @@ class GALGAS_forInstructionOnStringIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mDoInstructionList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mIteratedObject (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
 
@@ -1561,7 +1555,7 @@ class cPtr_forInstructionOnStringIR : public cPtr_abstractInstructionIR {
 //--- Attributes
   public : GALGAS_string mAttribute_mVarName ;
   public : GALGAS_location mAttribute_mLocation ;
-  public : GALGAS_objectIR mAttribute_mExpressionResult ;
+  public : GALGAS_objectIR mAttribute_mIteratedObject ;
   public : GALGAS_instructionListIR mAttribute_mWhileInstructionList ;
   public : GALGAS_objectIR mAttribute_mWhileExpressionResult ;
   public : GALGAS_instructionListIR mAttribute_mDoInstructionList ;
@@ -1569,7 +1563,7 @@ class cPtr_forInstructionOnStringIR : public cPtr_abstractInstructionIR {
 //--- Constructor
   public : cPtr_forInstructionOnStringIR (const GALGAS_string & in_mVarName,
                                           const GALGAS_location & in_mLocation,
-                                          const GALGAS_objectIR & in_mExpressionResult,
+                                          const GALGAS_objectIR & in_mIteratedObject,
                                           const GALGAS_instructionListIR & in_mWhileInstructionList,
                                           const GALGAS_objectIR & in_mWhileExpressionResult,
                                           const GALGAS_instructionListIR & in_mDoInstructionList
@@ -1581,7 +1575,7 @@ class cPtr_forInstructionOnStringIR : public cPtr_abstractInstructionIR {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mVarName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mExpressionResult (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mIteratedObject (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mWhileInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mWhileExpressionResult (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mDoInstructionList (LOCATION_ARGS) const ;

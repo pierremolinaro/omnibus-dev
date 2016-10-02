@@ -4,8 +4,7 @@
 
 class @forInstructionAST : @instructionAST {
   @lstring mVarName
-  @expressionAST mIteratedExpression
-  @location mEndOf_iteratedExpression
+  @lstring mIteratedObject
   @expressionAST mWhileExpression
   @location mEndOf_whileExpression
   @bool mStaticWhileExpression
@@ -25,8 +24,9 @@ syntax extension plm_syntax {
     $for$
     $identifier$ ?let varName
     $in$
-    <expression> ?let @expressionAST iteratedExpression
-    let endOf_iteratedExpression_instruction = @location.here
+    $identifier$ ?let iteratedObject
+#    <expression> ?let @expressionAST iteratedExpression
+#    let endOf_iteratedExpression_instruction = @location.here
     var staticWhileExpression = false
     @expressionAST whileExpression
     select
@@ -53,8 +53,9 @@ syntax extension plm_syntax {
     $}$
     ioInstructionList += !varName.location !@forInstructionAST.new {
       !varName
-      !iteratedExpression
-      !endOf_iteratedExpression_instruction
+      !iteratedObject
+#      !iteratedExpression
+#      !endOf_iteratedExpression_instruction
       !whileExpression
       !endOf_whileExpression_instruction
       !staticWhileExpression
@@ -73,7 +74,7 @@ syntax extension plm_syntax {
 
 override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  [mIteratedExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+#  [mIteratedExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -94,23 +95,29 @@ override method @forInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze iterated expression
-  [mIteratedExpression analyzeExpression
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.null
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR iteratedExpressionResult
+  [!?ioVariableMap searchForReadAccess
+    !lkey:mIteratedObject
+    ?2*
+    ?objectIR:let @objectIR iteratedObjectPointer
+    ?2*
   ]
+#  [mIteratedExpression analyzeExpression
+#    !self:inSelfType
+#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#    !inGuard:false
+#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#    !optionalTargetType:.null
+#    !context:inContext
+#    !mode:inCurrentMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioVariableMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    ?result:@objectIR iteratedExpressionResult
+#  ]
 #--- Type kind
-  let iteratedTypeKind = [[iteratedExpressionResult type] kind]
+  let iteratedTypeKind = [[iteratedObjectPointer type] kind]
 #--- Get iterated element type
 #  let @unifiedTypeMap-proxy iteratedElementType = [[iteratedExpressionResult type] enumerationType]
   @unifiedTypeMap-proxy iteratedElementType
@@ -119,11 +126,8 @@ override method @forInstructionAST analyze
   elsif [iteratedTypeKind isArrayType] then
     [iteratedTypeKind arrayType ?elementType:iteratedElementType ?size:*]
   else
-    error mEndOf_iteratedExpression : "this object is not enumerable" : iteratedElementType
+    error mIteratedObject : "this object is not enumerable" : iteratedElementType
   end
-#  if iteratedElementType == .null then
-#    error mEndOf_iteratedExpression : "this object is not enumerable"
-#  end
 #---
   let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
@@ -184,26 +188,23 @@ override method @forInstructionAST analyze
   if iteratedTypeKind == .literalString then
     ioInstructionGenerationList += !@forInstructionOnStringIR.new {
       !enumeratedVarLLVMName
-      !mEndOf_iteratedExpression
-      !iteratedExpressionResult
+      !mIteratedObject.location
+      !iteratedObjectPointer
       !whileExpression_GenerationList
       !whileExpressionResult
       !doInstructionList_GenerationList
     }
   elsif [iteratedTypeKind isArrayType] then
     [iteratedTypeKind arrayType ?elementType:let elementType ?size:let size]
-    let varStaticListInMemory = "for." + [mEndOf_iteratedExpression locationIndex] + ".list.in.memory"
-    ioAllocaList += !varStaticListInMemory ![[iteratedExpressionResult type] llvmTypeName]
     ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
       !enumeratedVarLLVMName
-      !mEndOf_iteratedExpression
-      !iteratedExpressionResult
+      !mIteratedObject.location
+      !iteratedObjectPointer
       !whileExpression_GenerationList
       !whileExpressionResult
       !doInstructionList_GenerationList
       !elementType
       !size
-      !varStaticListInMemory
     }
   end
 }
@@ -215,13 +216,12 @@ override method @forInstructionAST analyze
 class @forInstructionOnArrayIR : @abstractInstructionIR {
   @string mEnumeratedValueName
   @location mLocation
-  @objectIR mExpressionResult
+  @objectIR mIteratedObject
   @instructionListIR mWhileInstructionList
   @objectIR mWhileExpressionResult
   @instructionListIR mDoInstructionList
   @unifiedTypeMap-proxy mElementType
   @uint mArraySize
-  @string mVarStaticListInMemory
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -282,10 +282,10 @@ override method @forInstructionOnArrayIR llvmInstructionCode
 #--------- Loop entry
   ioLLVMcode += startLabel + ":\n"
 #--- Init pointer
-  ioLLVMcode += "  store " + listTypeLLVMName + " " + [mExpressionResult llvmName]
-  ioLLVMcode += ", " + listTypeLLVMName + "* %" + llvmNameForLocalVariable (!mVarStaticListInMemory) + "\n"
+#  ioLLVMcode += "  store " + listTypeLLVMName + " " + [mExpressionResult llvmName]
+#  ioLLVMcode += ", " + listTypeLLVMName + "* %" + llvmNameForLocalVariable (!mVarStaticListInMemory) + "\n"
   ioLLVMcode += "  %" + ptrVar + ".start = getelementptr inbounds " + listTypeLLVMName
-  ioLLVMcode += ", " + listTypeLLVMName + "* " + "%" + llvmNameForLocalVariable (!mVarStaticListInMemory)
+  ioLLVMcode += ", " + listTypeLLVMName + "* " + [mIteratedObject llvmName]
   ioLLVMcode += ", i32 0, i32 0\n"
 #--- Init index
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
@@ -348,7 +348,7 @@ override method @forInstructionOnArrayIR enterAccessibleEntities
 class @forInstructionOnStringIR : @abstractInstructionIR {
   @string mVarName
   @location mLocation
-  @objectIR mExpressionResult
+  @objectIR mIteratedObject
   @instructionListIR mWhileInstructionList
   @objectIR mWhileExpressionResult
   @instructionListIR mDoInstructionList
@@ -372,12 +372,14 @@ override method @forInstructionOnStringIR llvmInstructionCode
   
 #--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
+
   ioLLVMcode += startLabel + ":\n"
+  ioLLVMcode += "  %" + ptrVar + ".start = load i8*, i8** " + [mIteratedObject llvmName]
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
   
 #------------ Test
   ioLLVMcode += testLabel + ":\n"
-  ioLLVMcode += "  %" + ptrVar + " = phi i8* [" + [mExpressionResult llvmName] + ", %"
+  ioLLVMcode += "  %" + ptrVar + " = phi i8* [%" + ptrVar + ".start, %"
   ioLLVMcode += startLabel + "], [%" + ptrVar + ".next, %" + nextLabel + "]\n"
   ioLLVMcode += "  %" + currentVar + " = load i8, i8* %" + ptrVar + "\n"
   ioLLVMcode += "  %" + currentVar + ".nul = icmp eq i8 %" + currentVar + ", 0\n"
