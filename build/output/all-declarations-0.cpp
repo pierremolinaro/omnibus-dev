@@ -14665,7 +14665,7 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_if_5F_instruction_i76_ (GALGAS_if
   case 1: {
     GALGAS_lstring var_attributeValue_1756 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__40_attribute) COMMA_SOURCE_FILE ("instruction-if.galgas", 37)) ;
-    const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_attributeValue_1756.mAttribute_string.objectCompare (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 38)))).boolEnum () ;
+    const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_attributeValue_1756.mAttribute_string.objectCompare (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-if.galgas", 38)))).boolEnum () ;
     if (kBoolTrue == test_0) {
       var_staticIfExpression_1705 = GALGAS_bool (true) ;
     }else if (kBoolFalse == test_0) {
@@ -15008,7 +15008,7 @@ void cParser_plm_5F_syntax::rule_plm_5F_syntax_instruction_i80_ (GALGAS_instruct
     case 1: {
       GALGAS_lstring var_attributeValue_1689 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (ACCEPT_TERMINAL (C_Lexique_plm_5F_lexique::kToken__40_attribute) COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 38)) ;
-      const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_attributeValue_1689.mAttribute_string.objectCompare (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 39)))).boolEnum () ;
+      const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, var_attributeValue_1689.mAttribute_string.objectCompare (function_staticAttribute (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 39)))).boolEnum () ;
       if (kBoolTrue == test_0) {
         var_staticWhileExpression_1457 = GALGAS_bool (true) ;
       }else if (kBoolFalse == test_0) {

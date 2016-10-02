@@ -36,7 +36,7 @@ syntax extension plm_syntax {
       $while$
       select
         $@attribute$ ? let attributeValue
-        if attributeValue.string != staticAttribute () then
+        if attributeValue.string == staticAttribute () then
           staticWhileExpression = true
         else
           error attributeValue : "the attribute should be \"@" + staticAttribute () + "\"" 
