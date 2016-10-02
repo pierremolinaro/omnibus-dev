@@ -13782,6 +13782,9 @@ typeComparisonResult cPtr_forInstructionAST::dynamicObjectCompare (const acPtr_c
     result = mAttribute_mEndOf_5F_whileExpression.objectCompare (p->mAttribute_mEndOf_5F_whileExpression) ;
   }
   if (kOperandEqual == result) {
+    result = mAttribute_mStaticWhileExpression.objectCompare (p->mAttribute_mStaticWhileExpression) ;
+  }
+  if (kOperandEqual == result) {
     result = mAttribute_mDoInstructionList.objectCompare (p->mAttribute_mDoInstructionList) ;
   }
   if (kOperandEqual == result) {
@@ -13829,12 +13832,13 @@ GALGAS_forInstructionAST GALGAS_forInstructionAST::constructor_new (const GALGAS
                                                                     const GALGAS_location & inAttribute_mEndOf_5F_iteratedExpression,
                                                                     const GALGAS_expressionAST & inAttribute_mWhileExpression,
                                                                     const GALGAS_location & inAttribute_mEndOf_5F_whileExpression,
+                                                                    const GALGAS_bool & inAttribute_mStaticWhileExpression,
                                                                     const GALGAS_instructionListAST & inAttribute_mDoInstructionList,
                                                                     const GALGAS_location & inAttribute_mEndOf_5F_do_5F_instruction
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_forInstructionAST result ;
-  if (inAttribute_mVarName.isValid () && inAttribute_mIteratedExpression.isValid () && inAttribute_mEndOf_5F_iteratedExpression.isValid () && inAttribute_mWhileExpression.isValid () && inAttribute_mEndOf_5F_whileExpression.isValid () && inAttribute_mDoInstructionList.isValid () && inAttribute_mEndOf_5F_do_5F_instruction.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_forInstructionAST (inAttribute_mVarName, inAttribute_mIteratedExpression, inAttribute_mEndOf_5F_iteratedExpression, inAttribute_mWhileExpression, inAttribute_mEndOf_5F_whileExpression, inAttribute_mDoInstructionList, inAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
+  if (inAttribute_mVarName.isValid () && inAttribute_mIteratedExpression.isValid () && inAttribute_mEndOf_5F_iteratedExpression.isValid () && inAttribute_mWhileExpression.isValid () && inAttribute_mEndOf_5F_whileExpression.isValid () && inAttribute_mStaticWhileExpression.isValid () && inAttribute_mDoInstructionList.isValid () && inAttribute_mEndOf_5F_do_5F_instruction.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_forInstructionAST (inAttribute_mVarName, inAttribute_mIteratedExpression, inAttribute_mEndOf_5F_iteratedExpression, inAttribute_mWhileExpression, inAttribute_mEndOf_5F_whileExpression, inAttribute_mStaticWhileExpression, inAttribute_mDoInstructionList, inAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
   }
   return result ;
 }
@@ -13931,6 +13935,24 @@ GALGAS_location cPtr_forInstructionAST::getter_mEndOf_5F_whileExpression (UNUSED
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_bool GALGAS_forInstructionAST::getter_mStaticWhileExpression (UNUSED_LOCATION_ARGS) const {
+  GALGAS_bool result ;
+  if (NULL != mObjectPtr) {
+    const cPtr_forInstructionAST * p = (const cPtr_forInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_forInstructionAST) ;
+    result = p->mAttribute_mStaticWhileExpression ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cPtr_forInstructionAST::getter_mStaticWhileExpression (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mStaticWhileExpression ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_instructionListAST GALGAS_forInstructionAST::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
   GALGAS_instructionListAST result ;
   if (NULL != mObjectPtr) {
@@ -13974,6 +13996,7 @@ cPtr_forInstructionAST::cPtr_forInstructionAST (const GALGAS_lstring & in_mVarNa
                                                 const GALGAS_location & in_mEndOf_5F_iteratedExpression,
                                                 const GALGAS_expressionAST & in_mWhileExpression,
                                                 const GALGAS_location & in_mEndOf_5F_whileExpression,
+                                                const GALGAS_bool & in_mStaticWhileExpression,
                                                 const GALGAS_instructionListAST & in_mDoInstructionList,
                                                 const GALGAS_location & in_mEndOf_5F_do_5F_instruction
                                                 COMMA_LOCATION_ARGS) :
@@ -13983,6 +14006,7 @@ mAttribute_mIteratedExpression (in_mIteratedExpression),
 mAttribute_mEndOf_5F_iteratedExpression (in_mEndOf_5F_iteratedExpression),
 mAttribute_mWhileExpression (in_mWhileExpression),
 mAttribute_mEndOf_5F_whileExpression (in_mEndOf_5F_whileExpression),
+mAttribute_mStaticWhileExpression (in_mStaticWhileExpression),
 mAttribute_mDoInstructionList (in_mDoInstructionList),
 mAttribute_mEndOf_5F_do_5F_instruction (in_mEndOf_5F_do_5F_instruction) {
 }
@@ -14006,6 +14030,8 @@ void cPtr_forInstructionAST::description (C_String & ioString,
   ioString << ", " ;
   mAttribute_mEndOf_5F_whileExpression.description (ioString, inIndentation+1) ;
   ioString << ", " ;
+  mAttribute_mStaticWhileExpression.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
   mAttribute_mDoInstructionList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mEndOf_5F_do_5F_instruction.description (ioString, inIndentation+1) ;
@@ -14016,7 +14042,7 @@ void cPtr_forInstructionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_forInstructionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_forInstructionAST (mAttribute_mVarName, mAttribute_mIteratedExpression, mAttribute_mEndOf_5F_iteratedExpression, mAttribute_mWhileExpression, mAttribute_mEndOf_5F_whileExpression, mAttribute_mDoInstructionList, mAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_forInstructionAST (mAttribute_mVarName, mAttribute_mIteratedExpression, mAttribute_mEndOf_5F_iteratedExpression, mAttribute_mWhileExpression, mAttribute_mEndOf_5F_whileExpression, mAttribute_mStaticWhileExpression, mAttribute_mDoInstructionList, mAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
   return ptr ;
 }
 

@@ -6903,6 +6903,10 @@ class cParser_plm_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_syntax_75 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_syntax_76 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_77 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -7941,8 +7945,9 @@ class GALGAS_forInstructionAST : public GALGAS_instructionAST {
                                                                   const class GALGAS_location & inOperand2,
                                                                   const class GALGAS_expressionAST & inOperand3,
                                                                   const class GALGAS_location & inOperand4,
-                                                                  const class GALGAS_instructionListAST & inOperand5,
-                                                                  const class GALGAS_location & inOperand6
+                                                                  const class GALGAS_bool & inOperand5,
+                                                                  const class GALGAS_instructionListAST & inOperand6,
+                                                                  const class GALGAS_location & inOperand7
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -7963,6 +7968,8 @@ class GALGAS_forInstructionAST : public GALGAS_instructionAST {
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_whileExpression (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mIteratedExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mStaticWhileExpression (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
 
@@ -7992,6 +7999,7 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
   public : GALGAS_location mAttribute_mEndOf_5F_iteratedExpression ;
   public : GALGAS_expressionAST mAttribute_mWhileExpression ;
   public : GALGAS_location mAttribute_mEndOf_5F_whileExpression ;
+  public : GALGAS_bool mAttribute_mStaticWhileExpression ;
   public : GALGAS_instructionListAST mAttribute_mDoInstructionList ;
   public : GALGAS_location mAttribute_mEndOf_5F_do_5F_instruction ;
 
@@ -8001,6 +8009,7 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
                                    const GALGAS_location & in_mEndOf_5F_iteratedExpression,
                                    const GALGAS_expressionAST & in_mWhileExpression,
                                    const GALGAS_location & in_mEndOf_5F_whileExpression,
+                                   const GALGAS_bool & in_mStaticWhileExpression,
                                    const GALGAS_instructionListAST & in_mDoInstructionList,
                                    const GALGAS_location & in_mEndOf_5F_do_5F_instruction
                                    COMMA_LOCATION_ARGS) ;
@@ -8014,6 +8023,7 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_iteratedExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mWhileExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_whileExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mStaticWhileExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_do_5F_instruction (LOCATION_ARGS) const ;
 //--- Description
@@ -8382,11 +8392,12 @@ class GALGAS_ifInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_ifInstructionAST constructor_new (const class GALGAS_expressionAST & inOperand0,
                                                                  const class GALGAS_location & inOperand1,
-                                                                 const class GALGAS_instructionListAST & inOperand2,
-                                                                 const class GALGAS_location & inOperand3,
-                                                                 const class GALGAS_instructionListAST & inOperand4,
-                                                                 const class GALGAS_location & inOperand5,
-                                                                 const class GALGAS_location & inOperand6
+                                                                 const class GALGAS_bool & inOperand2,
+                                                                 const class GALGAS_instructionListAST & inOperand3,
+                                                                 const class GALGAS_location & inOperand4,
+                                                                 const class GALGAS_instructionListAST & inOperand5,
+                                                                 const class GALGAS_location & inOperand6,
+                                                                 const class GALGAS_location & inOperand7
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -8405,6 +8416,8 @@ class GALGAS_ifInstructionAST : public GALGAS_instructionAST {
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfThenInstructionList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_if_5F_instruction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mStaticIfExpression (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mTestExpression (LOCATION_ARGS) const ;
 
@@ -8433,6 +8446,7 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
 //--- Attributes
   public : GALGAS_expressionAST mAttribute_mTestExpression ;
   public : GALGAS_location mAttribute_mTestExpressionEndLocation ;
+  public : GALGAS_bool mAttribute_mStaticIfExpression ;
   public : GALGAS_instructionListAST mAttribute_mThenInstructionList ;
   public : GALGAS_location mAttribute_mEndOfThenInstructionList ;
   public : GALGAS_instructionListAST mAttribute_mElseInstructionList ;
@@ -8442,6 +8456,7 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
 //--- Constructor
   public : cPtr_ifInstructionAST (const GALGAS_expressionAST & in_mTestExpression,
                                   const GALGAS_location & in_mTestExpressionEndLocation,
+                                  const GALGAS_bool & in_mStaticIfExpression,
                                   const GALGAS_instructionListAST & in_mThenInstructionList,
                                   const GALGAS_location & in_mEndOfThenInstructionList,
                                   const GALGAS_instructionListAST & in_mElseInstructionList,
@@ -8455,6 +8470,7 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mTestExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mTestExpressionEndLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mStaticIfExpression (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mThenInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfThenInstructionList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mElseInstructionList (LOCATION_ARGS) const ;
@@ -12803,6 +12819,15 @@ class cEnumAssociatedValues_structureVarInit_expression : public cEnumAssociated
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_string function_globalAttribute (class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             Function 'staticAttribute'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_staticAttribute (class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
