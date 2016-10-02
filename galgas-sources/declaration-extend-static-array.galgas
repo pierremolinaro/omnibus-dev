@@ -2,28 +2,21 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @staticlistPropertyListAST {
-  @lstring mPropertyName
-  @lstring mPropertyType
+class @extendStaticlistDeclaration : @abstractDeclaration {
+  @lstring mStaticlistName
+  @expressionListAST mExpressions
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @staticlistAST : @abstractDeclaration {
-  @lstring mStaticListName
-  @staticlistPropertyListAST mPropertyList
+override getter @extendStaticlistDeclaration location -> @location outLocation {
+  outLocation = mStaticlistName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @staticlistAST location -> @location {
-  result = mStaticListName.location
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override getter @staticlistAST keyRepresentationForErrorSignaling -> @string {
-  result = "staticlist " + mStaticListName
+override getter @extendStaticlistDeclaration keyRepresentationForErrorSignaling -> @string {
+  result = "staticlist " + mStaticlistName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -35,19 +28,19 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    $staticlist$
+    $extend$
+    $staticArray$
     $identifier$ ?let staticListName
-    ${$
-    @staticlistPropertyListAST propertyList = {}
+    $($
+    @expressionListAST expressions = {}
     repeat
-      $let$
-      $identifier$ ?let propertyName
-      $\$type$ ?let typeName
-      propertyList += !propertyName !typeName
+      <expression> ?let exp
+      expressions += !exp !.here
     while
+      $,$
     end
-    $}$
-    ioAST.mDeclarationListAST += !@staticlistAST.new {!staticListName !propertyList}
+    $)$
+    ioAST.mDeclarationListAST += !@extendStaticlistDeclaration.new {!staticListName !expressions}
   }
 
   #·····················································································································
@@ -58,7 +51,7 @@ syntax extension plm_syntax {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticlistAST addExtension
+override method @extendStaticlistDeclaration addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   !@abstractDeclaration outNewDeclaration
 {
@@ -69,13 +62,16 @@ override method @staticlistAST addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticlistAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @extendStaticlistDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+#--- Node name
+  let nodeName = @lstring.new{!mStaticlistName.string + "." + [[ioGraph keyList] length] !mStaticlistName}
 #--- Add 'constant name' node
-  [!?ioGraph addNode !mStaticListName !self]
-#---
-  for (* propertyTypeName) in mPropertyList do
-    let typeName = @lstring.new {!"$" + propertyTypeName !propertyTypeName.location}
-    [!?ioGraph addEdge !mStaticListName !typeName]
+  [!?ioGraph addNode !nodeName !self]
+#--- Add dependency from static type declaration
+  [!?ioGraph addEdge !nodeName !mStaticlistName]
+#--- Add dependency from source expression
+  for (exp *) in mExpressions do
+    [exp addDependenceEdgeForStaticExpression !nodeName !?ioGraph]
   end
 }
 
@@ -83,60 +79,72 @@ override method @staticlistAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @staticlistMap {
-  @propertyList mStaticlistPropertyList
-
-  insert insertKey error message "static list '%K' is already defined"
-  search searchKey error message "static list '%K' is not defined"
-}
+listmap @staticlistValues_listMap (@stringlist)
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticlistAST enterInContext
+override method @extendStaticlistDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
-  @propertyList staticlistPropertyList = {}
-  @propertyMap staticlistPropertyMap = {}
-  @stringset propertyNameSet = {}
-  for (propertyName propertyTypeName) in mPropertyList do
-    let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !propertyTypeName}
-    if [propertyNameSet hasKey !propertyName] then
-      error propertyName : "duplicated property name"
+  [ioContext.mStaticlistMap searchKey !mStaticlistName ?let staticlistPropertyList]
+  if [staticlistPropertyList length] != [mExpressions length] then
+    error mStaticlistName
+    : [[staticlistPropertyList length] string] + " expressions required, "
+    + [[mExpressions length] string] + " provided"
+  else
+    var staticValue = "{"
+    for (exp endOfExp) in mExpressions, (* propertyType) in staticlistPropertyList do
+      initialVariableMap (
+        !context:ioContext
+        !mode:.bootMode
+        !globalsAreConstant:true # Any value, there is no defined global variable at this stage
+        !returnTypeName:["" nowhere]
+        ?@variableMap variableMap
+      )
+      @semanticTemporariesStruct temporaries = .default
+      @instructionListIR instructionGenerationList = {}
+      @allocaList allocaList = {}
+      [exp analyzeExpression
+        !self:.null
+        !directAccessToPropertiesAllowed:false
+        !inGuard:false
+        !routineNameForInvocationGraph:["compiler" nowhere]
+        !optionalTargetType:propertyType
+        !context:ioContext
+        !mode:.bootMode
+        !?temporary:temporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:variableMap
+        !?alloca:allocaList
+        !?instructionListIR:instructionGenerationList
+        ?result:let @objectIR expressionResult
+      ]
+    #--- Check assignment compatibility
+      let result = checkAssignmentCompatibility (
+        !source:expressionResult
+        !targetAnnotationType:propertyType
+        !errorLocation:endOfExp
+        !staticTypeAllowed:false
+      )
+      if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
+        error endOfExp : "source expression cannot be statically computed"
+      end
+    #--- Enter in static value
+      staticValue += [propertyType llvmTypeName] + " " + [expressionResult llvmName]
+    between
+      staticValue += ", "
     end
-    propertyNameSet += !propertyName
-    staticlistPropertyList += !propertyName !propertyType
-    let propertyIndex = [staticlistPropertyMap count]
-    [!?staticlistPropertyMap insertKey
-      !propertyName
-      !true # Public
-      !.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
-      !propertyIndex
-    ]
+    staticValue += "}"
+    ioStaticListValueMap += !mStaticlistName !staticValue
   end
-  [!?ioContext.mStaticlistMap insertKey
-    !mStaticListName
-    !staticlistPropertyList
-  ]
-#--- Enter element type in type map
-  [!?ioContext.mTypeMap insertType
-    !lkey:plmNameForStaticListElementType (!mStaticListName)
-    !llvmTypeName:llvmNameForStaticListElementType (!mStaticListName)
-    !kind:.structure {!propertyMap:staticlistPropertyMap !propertyList:staticlistPropertyList}
-    !classConstantMap:{}
-    !instantiable:false
-    !copyable:false
-    !equatable:false
-    !comparable:false
-    !enumerationType:.null # Not enumerable
-  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticlistAST enterRoutinesInContext
+override method @extendStaticlistDeclaration enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -147,7 +155,7 @@ override method @staticlistAST enterRoutinesInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticlistAST semanticAnalysis
+override method @extendStaticlistDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
@@ -155,3 +163,25 @@ override method @staticlistAST semanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  CODE GENERATION                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @staticlistValues_listMap generateLLVM ?!@string ioLLVMcode {
+  if [self count] > 0 then
+    ioLLVMcode += llvmTitleComment (!"Static Lists")
+    for (lkey initList) in self do
+      ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey) + " = private unnamed_addr constant ["
+      ioLLVMcode += [[initList length] string] + " x " + llvmNameForStaticListElementType (!lkey) + "] [\n"
+      for (value) in initList
+      do
+        ioLLVMcode += "  " + llvmNameForStaticListElementType (!lkey) + " " + value
+      between
+        ioLLVMcode += ",\n"
+      end
+      ioLLVMcode += "\n]\n\n"
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+

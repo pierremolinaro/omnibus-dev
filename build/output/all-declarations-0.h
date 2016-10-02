@@ -115,7 +115,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken_setup,
    kToken_struct,
    kToken_stackSize,
-   kToken_staticlist,
+   kToken_staticArray,
    kToken_switch,
    kToken_sync,
    kToken_system,

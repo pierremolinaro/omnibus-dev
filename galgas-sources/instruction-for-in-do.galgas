@@ -290,6 +290,7 @@ override method @forInstructionOnStringIR llvmInstructionCode
   let startLabel = "for." + [mLocation locationIndex] + ".start"
   let testLabel = "for." + [mLocation locationIndex] + ".test"
   let loopLabel = "for." + [mLocation locationIndex] + ".loop"
+  let nextLabel = "for." + [mLocation locationIndex] + ".next"
   let endLabel  = "for." + [mLocation locationIndex] + ".end"
   let ptrVar    = "for." + [mLocation locationIndex] + ".ptr"
   let currentVar = "for." + [mLocation locationIndex] + ".current"
@@ -302,16 +303,21 @@ override method @forInstructionOnStringIR llvmInstructionCode
 #--- Test
   ioLLVMcode += testLabel + ":\n"
   ioLLVMcode += "  %" + ptrVar + " = phi i8* [" + [mExpressionResult llvmName] + ", %"
-  ioLLVMcode += startLabel + "], [%" + ptrVar + ".next, %" + loopLabel + "]\n"
+  ioLLVMcode += startLabel + "], [%" + ptrVar + ".next, %" + nextLabel + "]\n"
   ioLLVMcode += "  %" + currentVar + " = load i8, i8* %" + ptrVar + "\n"
   ioLLVMcode += "  %" + currentVar + ".nul = icmp eq i8 %" + currentVar + ", 0\n"
   ioLLVMcode += "  br i1 %" + currentVar + ".nul, label %" + endLabel + ", label %" + loopLabel + "\n\n"
 
-#--- Loop  
+#--------------------- Loop  
   ioLLVMcode += loopLabel + ":\n"
+#--- Get current value
   ioLLVMcode += "  store i8 %" + currentVar + ", "
   ioLLVMcode += "i8 * %" + llvmNameForLocalVariable (!mVarName) + "\n"
+#--- Loop body
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br label %" + nextLabel + "\n\n"
+#--- Next value
+  ioLLVMcode += nextLabel + ":\n"
   ioLLVMcode += "  %" + ptrVar + ".next = getelementptr inbounds i8, "
   ioLLVMcode += "i8 * %" + ptrVar + ", i32 1\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"

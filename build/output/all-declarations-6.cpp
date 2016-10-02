@@ -9283,7 +9283,7 @@ static GALGAS_string extensionGetter_staticlistAST_keyRepresentationForErrorSign
   GALGAS_string result_result ; // Returned variable
   const cPtr_staticlistAST * object = (const cPtr_staticlistAST *) inObject ;
   macroValidSharedObject (object, cPtr_staticlistAST) ;
-  result_result = GALGAS_string ("staticlist ").add_operation (object->mAttribute_mStaticListName.getter_string (SOURCE_FILE ("declaration-static-list.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 26)) ;
+  result_result = GALGAS_string ("staticlist ").add_operation (object->mAttribute_mStaticListName.getter_string (SOURCE_FILE ("declaration-static-array.galgas", 26)), inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 26)) ;
 //---
   return result_result ;
 }
@@ -9342,15 +9342,15 @@ static void extensionMethod_staticlistAST_enterInPrecedenceGraph (const cPtr_abs
   macroValidSharedObject (object, cPtr_staticlistAST) ;
   {
   const GALGAS_staticlistAST temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (object->mAttribute_mStaticListName, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 74)) ;
+  ioArgument_ioGraph.setter_addNode (object->mAttribute_mStaticListName, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 74)) ;
   }
-  cEnumerator_staticlistPropertyListAST enumerator_3328 (object->mAttribute_mPropertyList, kEnumeration_up) ;
-  while (enumerator_3328.hasCurrentObject ()) {
-    GALGAS_lstring var_typeName_3348 = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_3328.current_mPropertyType (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 77)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 77)), enumerator_3328.current_mPropertyType (HERE).mAttribute_location  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 77)) ;
+  cEnumerator_staticlistPropertyListAST enumerator_3329 (object->mAttribute_mPropertyList, kEnumeration_up) ;
+  while (enumerator_3329.hasCurrentObject ()) {
+    GALGAS_lstring var_typeName_3349 = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (enumerator_3329.current_mPropertyType (HERE).getter_string (SOURCE_FILE ("declaration-static-array.galgas", 77)), inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 77)), enumerator_3329.current_mPropertyType (HERE).mAttribute_location  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 77)) ;
     {
-    ioArgument_ioGraph.setter_addEdge (object->mAttribute_mStaticListName, var_typeName_3348 COMMA_SOURCE_FILE ("declaration-static-list.galgas", 78)) ;
+    ioArgument_ioGraph.setter_addEdge (object->mAttribute_mStaticListName, var_typeName_3349 COMMA_SOURCE_FILE ("declaration-static-array.galgas", 78)) ;
     }
-    enumerator_3328.gotoNextObject () ;
+    enumerator_3329.gotoNextObject () ;
   }
 }
 
@@ -9380,30 +9380,30 @@ static void extensionMethod_staticlistAST_enterInContext (const cPtr_abstractDec
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_staticlistAST * object = (const cPtr_staticlistAST *) inObject ;
   macroValidSharedObject (object, cPtr_staticlistAST) ;
-  GALGAS_propertyList var_staticlistPropertyList_4521 = GALGAS_propertyList::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 101)) ;
-  GALGAS_propertyMap var_staticlistPropertyMap_4563 = GALGAS_propertyMap::constructor_emptyMap (SOURCE_FILE ("declaration-static-list.galgas", 102)) ;
-  GALGAS_stringset var_propertyNameSet_4597 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-static-list.galgas", 103)) ;
-  cEnumerator_staticlistPropertyListAST enumerator_4657 (object->mAttribute_mPropertyList, kEnumeration_up) ;
-  while (enumerator_4657.hasCurrentObject ()) {
-    GALGAS_unifiedTypeMap_2D_proxy var_propertyType_4681 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_4657.current_mPropertyType (HERE), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 105)) ;
-    const enumGalgasBool test_0 = var_propertyNameSet_4597.getter_hasKey (enumerator_4657.current_mPropertyName (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 106)) COMMA_SOURCE_FILE ("declaration-static-list.galgas", 106)).boolEnum () ;
+  GALGAS_propertyList var_staticlistPropertyList_4522 = GALGAS_propertyList::constructor_emptyList (SOURCE_FILE ("declaration-static-array.galgas", 101)) ;
+  GALGAS_propertyMap var_staticlistPropertyMap_4564 = GALGAS_propertyMap::constructor_emptyMap (SOURCE_FILE ("declaration-static-array.galgas", 102)) ;
+  GALGAS_stringset var_propertyNameSet_4598 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-static-array.galgas", 103)) ;
+  cEnumerator_staticlistPropertyListAST enumerator_4658 (object->mAttribute_mPropertyList, kEnumeration_up) ;
+  while (enumerator_4658.hasCurrentObject ()) {
+    GALGAS_unifiedTypeMap_2D_proxy var_propertyType_4682 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_4658.current_mPropertyType (HERE), inCompiler  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 105)) ;
+    const enumGalgasBool test_0 = var_propertyNameSet_4598.getter_hasKey (enumerator_4658.current_mPropertyName (HERE).getter_string (SOURCE_FILE ("declaration-static-array.galgas", 106)) COMMA_SOURCE_FILE ("declaration-static-array.galgas", 106)).boolEnum () ;
     if (kBoolTrue == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (enumerator_4657.current_mPropertyName (HERE).getter_location (SOURCE_FILE ("declaration-static-list.galgas", 107)), GALGAS_string ("duplicated property name"), fixItArray1  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 107)) ;
+      inCompiler->emitSemanticError (enumerator_4658.current_mPropertyName (HERE).getter_location (SOURCE_FILE ("declaration-static-array.galgas", 107)), GALGAS_string ("duplicated property name"), fixItArray1  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 107)) ;
     }
-    var_propertyNameSet_4597.addAssign_operation (enumerator_4657.current_mPropertyName (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 109))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 109)) ;
-    var_staticlistPropertyList_4521.addAssign_operation (enumerator_4657.current_mPropertyName (HERE).getter_string (SOURCE_FILE ("declaration-static-list.galgas", 110)), var_propertyType_4681  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 110)) ;
-    GALGAS_uint var_propertyIndex_4985 = var_staticlistPropertyMap_4563.getter_count (SOURCE_FILE ("declaration-static-list.galgas", 111)) ;
+    var_propertyNameSet_4598.addAssign_operation (enumerator_4658.current_mPropertyName (HERE).getter_string (SOURCE_FILE ("declaration-static-array.galgas", 109))  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 109)) ;
+    var_staticlistPropertyList_4522.addAssign_operation (enumerator_4658.current_mPropertyName (HERE).getter_string (SOURCE_FILE ("declaration-static-array.galgas", 110)), var_propertyType_4682  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 110)) ;
+    GALGAS_uint var_propertyIndex_4986 = var_staticlistPropertyMap_4564.getter_count (SOURCE_FILE ("declaration-static-array.galgas", 111)) ;
     {
-    var_staticlistPropertyMap_4563.setter_insertKey (enumerator_4657.current_mPropertyName (HERE), GALGAS_bool (true), GALGAS_objectIR::constructor_property (var_propertyType_4681, enumerator_4657.current_mPropertyName (HERE), var_propertyIndex_4985  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 115)), var_propertyIndex_4985, inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 112)) ;
+    var_staticlistPropertyMap_4564.setter_insertKey (enumerator_4658.current_mPropertyName (HERE), GALGAS_bool (true), GALGAS_objectIR::constructor_property (var_propertyType_4682, enumerator_4658.current_mPropertyName (HERE), var_propertyIndex_4986  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 115)), var_propertyIndex_4986, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 112)) ;
     }
-    enumerator_4657.gotoNextObject () ;
+    enumerator_4658.gotoNextObject () ;
   }
   {
-  ioArgument_ioContext.mAttribute_mStaticlistMap.setter_insertKey (object->mAttribute_mStaticListName, var_staticlistPropertyList_4521, inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 119)) ;
+  ioArgument_ioContext.mAttribute_mStaticlistMap.setter_insertKey (object->mAttribute_mStaticListName, var_staticlistPropertyList_4522, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 119)) ;
   }
   {
-  ioArgument_ioContext.mAttribute_mTypeMap.setter_insertType (function_plmNameForStaticListElementType (object->mAttribute_mStaticListName, inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 125)), function_llvmNameForStaticListElementType (object->mAttribute_mStaticListName.getter_string (SOURCE_FILE ("declaration-static-list.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 126)), GALGAS_typeKind::constructor_structure (var_staticlistPropertyMap_4563, var_staticlistPropertyList_4521  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 127)), GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("declaration-static-list.galgas", 128)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_bool (false), GALGAS_bool (false), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-static-list.galgas", 133)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 124)) ;
+  ioArgument_ioContext.mAttribute_mTypeMap.setter_insertType (function_plmNameForStaticListElementType (object->mAttribute_mStaticListName, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 125)), function_llvmNameForStaticListElementType (object->mAttribute_mStaticListName.getter_string (SOURCE_FILE ("declaration-static-array.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 126)), GALGAS_typeKind::constructor_structure (var_staticlistPropertyMap_4564, var_staticlistPropertyList_4522  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 127)), GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("declaration-static-array.galgas", 128)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_bool (false), GALGAS_bool (false), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-static-array.galgas", 133)), inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 124)) ;
   }
 }
 
@@ -9509,7 +9509,7 @@ static GALGAS_string extensionGetter_extendStaticlistDeclaration_keyRepresentati
   GALGAS_string result_result ; // Returned variable
   const cPtr_extendStaticlistDeclaration * object = (const cPtr_extendStaticlistDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_extendStaticlistDeclaration) ;
-  result_result = GALGAS_string ("staticlist ").add_operation (object->mAttribute_mStaticlistName.getter_string (SOURCE_FILE ("declaration-extend-static-list.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 19)) ;
+  result_result = GALGAS_string ("staticlist ").add_operation (object->mAttribute_mStaticlistName.getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 19)) ;
 //---
   return result_result ;
 }
@@ -9566,18 +9566,18 @@ static void extensionMethod_extendStaticlistDeclaration_enterInPrecedenceGraph (
                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_extendStaticlistDeclaration * object = (const cPtr_extendStaticlistDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_extendStaticlistDeclaration) ;
-  GALGAS_lstring var_nodeName_3067 = GALGAS_lstring::constructor_new (object->mAttribute_mStaticlistName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 67)).add_operation (ioArgument_ioGraph.getter_keyList (SOURCE_FILE ("declaration-extend-static-list.galgas", 67)).getter_length (SOURCE_FILE ("declaration-extend-static-list.galgas", 67)).getter_string (SOURCE_FILE ("declaration-extend-static-list.galgas", 67)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 67)), object->mAttribute_mStaticlistName.getter_location (SOURCE_FILE ("declaration-extend-static-list.galgas", 67))  COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 67)) ;
+  GALGAS_lstring var_nodeName_3068 = GALGAS_lstring::constructor_new (object->mAttribute_mStaticlistName.mAttribute_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 67)).add_operation (ioArgument_ioGraph.getter_keyList (SOURCE_FILE ("declaration-extend-static-array.galgas", 67)).getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 67)).getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 67)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 67)), object->mAttribute_mStaticlistName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 67))  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 67)) ;
   {
   const GALGAS_extendStaticlistDeclaration temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (var_nodeName_3067, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 69)) ;
+  ioArgument_ioGraph.setter_addNode (var_nodeName_3068, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 69)) ;
   }
   {
-  ioArgument_ioGraph.setter_addEdge (var_nodeName_3067, object->mAttribute_mStaticlistName COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 71)) ;
+  ioArgument_ioGraph.setter_addEdge (var_nodeName_3068, object->mAttribute_mStaticlistName COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 71)) ;
   }
-  cEnumerator_expressionListAST enumerator_3398 (object->mAttribute_mExpressions, kEnumeration_up) ;
-  while (enumerator_3398.hasCurrentObject ()) {
-    callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) enumerator_3398.current_mExpression (HERE).ptr (), var_nodeName_3067, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 74)) ;
-    enumerator_3398.gotoNextObject () ;
+  cEnumerator_expressionListAST enumerator_3399 (object->mAttribute_mExpressions, kEnumeration_up) ;
+  while (enumerator_3399.hasCurrentObject ()) {
+    callExtensionMethod_addDependenceEdgeForStaticExpression ((const cPtr_expressionAST *) enumerator_3399.current_mExpression (HERE).ptr (), var_nodeName_3068, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 74)) ;
+    enumerator_3399.gotoNextObject () ;
   }
 }
 
@@ -9607,49 +9607,49 @@ static void extensionMethod_extendStaticlistDeclaration_enterInContext (const cP
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_extendStaticlistDeclaration * object = (const cPtr_extendStaticlistDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_extendStaticlistDeclaration) ;
-  GALGAS_propertyList var_staticlistPropertyList_4412 ;
-  ioArgument_ioContext.mAttribute_mStaticlistMap.method_searchKey (object->mAttribute_mStaticlistName, var_staticlistPropertyList_4412, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 92)) ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_staticlistPropertyList_4412.getter_length (SOURCE_FILE ("declaration-extend-static-list.galgas", 93)).objectCompare (object->mAttribute_mExpressions.getter_length (SOURCE_FILE ("declaration-extend-static-list.galgas", 93)))).boolEnum () ;
+  GALGAS_propertyList var_staticlistPropertyList_4413 ;
+  ioArgument_ioContext.mAttribute_mStaticlistMap.method_searchKey (object->mAttribute_mStaticlistName, var_staticlistPropertyList_4413, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 92)) ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, var_staticlistPropertyList_4413.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 93)).objectCompare (object->mAttribute_mExpressions.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 93)))).boolEnum () ;
   if (kBoolTrue == test_0) {
     TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (object->mAttribute_mStaticlistName.getter_location (SOURCE_FILE ("declaration-extend-static-list.galgas", 94)), var_staticlistPropertyList_4412.getter_length (SOURCE_FILE ("declaration-extend-static-list.galgas", 95)).getter_string (SOURCE_FILE ("declaration-extend-static-list.galgas", 95)).add_operation (GALGAS_string (" expressions required, "), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 95)).add_operation (object->mAttribute_mExpressions.getter_length (SOURCE_FILE ("declaration-extend-static-list.galgas", 96)).getter_string (SOURCE_FILE ("declaration-extend-static-list.galgas", 96)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 95)).add_operation (GALGAS_string (" provided"), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 96)), fixItArray1  COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 94)) ;
+    inCompiler->emitSemanticError (object->mAttribute_mStaticlistName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 94)), var_staticlistPropertyList_4413.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 95)).getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 95)).add_operation (GALGAS_string (" expressions required, "), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 95)).add_operation (object->mAttribute_mExpressions.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 96)).getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 96)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 95)).add_operation (GALGAS_string (" provided"), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 96)), fixItArray1  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 94)) ;
   }else if (kBoolFalse == test_0) {
-    GALGAS_string var_staticValue_4659 = GALGAS_string ("{") ;
-    cEnumerator_expressionListAST enumerator_4704 (object->mAttribute_mExpressions, kEnumeration_up) ;
-    cEnumerator_propertyList enumerator_4748 (var_staticlistPropertyList_4412, kEnumeration_up) ;
-    while (enumerator_4704.hasCurrentObject () && enumerator_4748.hasCurrentObject ()) {
-      GALGAS_variableMap var_variableMap_4996 ;
+    GALGAS_string var_staticValue_4660 = GALGAS_string ("{") ;
+    cEnumerator_expressionListAST enumerator_4705 (object->mAttribute_mExpressions, kEnumeration_up) ;
+    cEnumerator_propertyList enumerator_4749 (var_staticlistPropertyList_4413, kEnumeration_up) ;
+    while (enumerator_4705.hasCurrentObject () && enumerator_4749.hasCurrentObject ()) {
+      GALGAS_variableMap var_variableMap_4997 ;
       {
-      routine_initialVariableMap (ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-extend-static-list.galgas", 102)), GALGAS_bool (true), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-extend-static-list.galgas", 104)), var_variableMap_4996, inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 100)) ;
+      routine_initialVariableMap (ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-extend-static-array.galgas", 102)), GALGAS_bool (true), GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-extend-static-array.galgas", 104)), var_variableMap_4997, inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 100)) ;
       }
-      GALGAS_semanticTemporariesStruct var_temporaries_5049 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("declaration-extend-static-list.galgas", 107)) ;
-      GALGAS_instructionListIR var_instructionGenerationList_5111 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-extend-static-list.galgas", 108)) ;
-      GALGAS_allocaList var_allocaList_5145 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-extend-static-list.galgas", 109)) ;
-      GALGAS_objectIR var_expressionResult_5667 ;
-      callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) enumerator_4704.current_mExpression (HERE).ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extend-static-list.galgas", 111)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-extend-static-list.galgas", 114)), enumerator_4748.current_mType (HERE), ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-extend-static-list.galgas", 117)), var_temporaries_5049, ioArgument_ioGlobalLiteralStringMap, var_variableMap_4996, var_allocaList_5145, var_instructionGenerationList_5111, var_expressionResult_5667, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 110)) ;
-      GALGAS_objectIR var_result_5732 = function_checkAssignmentCompatibility (var_expressionResult_5667, enumerator_4748.current_mType (HERE), enumerator_4704.current_mEndOfExpression (HERE), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 126)) ;
-      GALGAS_bool test_2 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList_5111.getter_length (SOURCE_FILE ("declaration-extend-static-list.galgas", 132)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+      GALGAS_semanticTemporariesStruct var_temporaries_5050 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("declaration-extend-static-array.galgas", 107)) ;
+      GALGAS_instructionListIR var_instructionGenerationList_5112 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("declaration-extend-static-array.galgas", 108)) ;
+      GALGAS_allocaList var_allocaList_5146 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("declaration-extend-static-array.galgas", 109)) ;
+      GALGAS_objectIR var_expressionResult_5668 ;
+      callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) enumerator_4705.current_mExpression (HERE).ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extend-static-array.galgas", 111)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("declaration-extend-static-array.galgas", 114)), enumerator_4749.current_mType (HERE), ioArgument_ioContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("declaration-extend-static-array.galgas", 117)), var_temporaries_5050, ioArgument_ioGlobalLiteralStringMap, var_variableMap_4997, var_allocaList_5146, var_instructionGenerationList_5112, var_expressionResult_5668, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 110)) ;
+      GALGAS_objectIR var_result_5733 = function_checkAssignmentCompatibility (var_expressionResult_5668, enumerator_4749.current_mType (HERE), enumerator_4705.current_mEndOfExpression (HERE), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 126)) ;
+      GALGAS_bool test_2 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList_5112.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 132)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
       if (kBoolTrue != test_2.boolEnum ()) {
-        test_2 = GALGAS_bool (kIsStrictSup, var_allocaList_5145.getter_length (SOURCE_FILE ("declaration-extend-static-list.galgas", 132)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+        test_2 = GALGAS_bool (kIsStrictSup, var_allocaList_5146.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 132)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
       }
       GALGAS_bool test_3 = test_2 ;
       if (kBoolTrue != test_3.boolEnum ()) {
-        test_3 = extensionGetter_isStatic (var_result_5732, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 132)).operator_not (SOURCE_FILE ("declaration-extend-static-list.galgas", 132)) ;
+        test_3 = extensionGetter_isStatic (var_result_5733, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 132)).operator_not (SOURCE_FILE ("declaration-extend-static-array.galgas", 132)) ;
       }
       const enumGalgasBool test_4 = test_3.boolEnum () ;
       if (kBoolTrue == test_4) {
         TC_Array <C_FixItDescription> fixItArray5 ;
-        inCompiler->emitSemanticError (enumerator_4704.current_mEndOfExpression (HERE), GALGAS_string ("source expression cannot be statically computed"), fixItArray5  COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 133)) ;
+        inCompiler->emitSemanticError (enumerator_4705.current_mEndOfExpression (HERE), GALGAS_string ("source expression cannot be statically computed"), fixItArray5  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 133)) ;
       }
-      var_staticValue_4659.plusAssign_operation(enumerator_4748.current_mType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 136)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 136)).add_operation (extensionGetter_llvmName (var_expressionResult_5667, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 136)), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 136)) ;
-      if (enumerator_4704.hasNextObject () && enumerator_4748.hasNextObject ()) {
-        var_staticValue_4659.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 138)) ;
+      var_staticValue_4660.plusAssign_operation(enumerator_4749.current_mType (HERE).getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 136)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 136)).add_operation (extensionGetter_llvmName (var_expressionResult_5668, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 136)), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 136)) ;
+      if (enumerator_4705.hasNextObject () && enumerator_4749.hasNextObject ()) {
+        var_staticValue_4660.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 138)) ;
       }
-      enumerator_4704.gotoNextObject () ;
-      enumerator_4748.gotoNextObject () ;
+      enumerator_4705.gotoNextObject () ;
+      enumerator_4749.gotoNextObject () ;
     }
-    var_staticValue_4659.plusAssign_operation(GALGAS_string ("}"), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 140)) ;
-    ioArgument_ioStaticListValueMap.addAssign_operation (object->mAttribute_mStaticlistName.getter_string (SOURCE_FILE ("declaration-extend-static-list.galgas", 141)), var_staticValue_4659  COMMA_SOURCE_FILE ("declaration-extend-static-list.galgas", 141)) ;
+    var_staticValue_4660.plusAssign_operation(GALGAS_string ("}"), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 140)) ;
+    ioArgument_ioStaticListValueMap.addAssign_operation (object->mAttribute_mStaticlistName.getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 141)), var_staticValue_4660  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 141)) ;
   }
 }
 
