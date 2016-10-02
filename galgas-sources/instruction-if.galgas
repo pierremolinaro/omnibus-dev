@@ -35,7 +35,7 @@ syntax extension plm_syntax {
     @bool staticIfExpression
     select
       $@attribute$ ? let attributeValue
-      if attributeValue.string != staticAttribute () then
+      if attributeValue.string == staticAttribute () then
         staticIfExpression = true
       else
         error attributeValue : "the attribute should be \"@" + staticAttribute () + "\""
