@@ -5,7 +5,9 @@
 class @forInstructionAST : @instructionAST {
   @lstring mVarName
   @expressionAST mIteratedExpression
-  @location mEndOf_iteratedExpression_instruction
+  @location mEndOf_iteratedExpression
+  @expressionAST mWhileExpression
+  @location mEndOf_whileExpression
   @instructionListAST mDoInstructionList
   @location mEndOf_do_instruction
 }
@@ -22,16 +24,26 @@ syntax extension plm_syntax {
     $for$
     $identifier$ ?let varName
     $in$
-    <expression> ?let @expressionAST expression
+    <expression> ?let @expressionAST iteratedExpression
     let endOf_iteratedExpression_instruction = @location.here
+    @expressionAST whileExpression
+    select
+      whileExpression = @literalBooleanInExpressionAST.new {!true}
+    or
+      $while$
+      <expression> ?whileExpression
+    end
+    let endOf_whileExpression_instruction = @location.here
     ${$
     <instructionList> ?let instructionList
     let endOfInstruction = @location.here
     $}$
     ioInstructionList += !varName.location !@forInstructionAST.new {
       !varName
-      !expression
+      !iteratedExpression
       !endOf_iteratedExpression_instruction
+      !whileExpression
+      !endOf_whileExpression_instruction
       !instructionList
       !endOfInstruction
     }
@@ -86,7 +98,7 @@ override method @forInstructionAST analyze
 #--- Get iterated element type
   let @unifiedTypeMap-proxy iteratedElementType = [[iteratedExpressionResult type] enumerationType]
   if iteratedElementType == .null then
-    error mEndOf_iteratedExpression_instruction : "this object is not enumerable"
+    error mEndOf_iteratedExpression : "this object is not enumerable"
   end
 #---
   let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
@@ -102,7 +114,28 @@ override method @forInstructionAST analyze
     !copyable:true
     !canBeUsedAsInputParameter:false
   ]
-  @instructionListIR instructionGenerationList = {}
+#--- Analyze while expression
+  @instructionListIR whileExpression_GenerationList = {}
+  [mWhileExpression analyzeExpression
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.null
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:whileExpression_GenerationList
+    ?result:@objectIR whileExpressionResult
+  ]
+#--- Check "while" expression type is boolean
+  if not [[whileExpressionResult kind] isBoolean] then
+    error mEndOf_whileExpression : "'while' expression should be boolean"
+  end
+  @instructionListIR doInstructionList_GenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !propertiesAreMutable:inRoutineCanMutateProperties
@@ -115,7 +148,7 @@ override method @forInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
-    !?instructionListIR:instructionGenerationList
+    !?instructionListIR:doInstructionList_GenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_do_instruction]
 #--- Type kind
@@ -124,25 +157,29 @@ override method @forInstructionAST analyze
   if iteratedTypeKind == .literalString then
     ioInstructionGenerationList += !@forInstructionOnStringIR.new {
       !enumeratedVarLLVMName
-      !mEndOf_iteratedExpression_instruction
+      !mEndOf_iteratedExpression
       !iteratedExpressionResult
-      !instructionGenerationList
+      !whileExpression_GenerationList
+      !whileExpressionResult
+      !doInstructionList_GenerationList
     }
   elsif [iteratedTypeKind isArrayType] then
     [iteratedTypeKind arrayType ?elementType:let elementType ?size:let size]
-    let varStaticListInMemory = "for." + [mEndOf_iteratedExpression_instruction locationIndex] + ".list.in.memory"
+    let varStaticListInMemory = "for." + [mEndOf_iteratedExpression locationIndex] + ".list.in.memory"
     ioAllocaList += !varStaticListInMemory ![[iteratedExpressionResult type] llvmTypeName]
     ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
       !enumeratedVarLLVMName
-      !mEndOf_iteratedExpression_instruction
+      !mEndOf_iteratedExpression
       !iteratedExpressionResult
-      !instructionGenerationList
+      !whileExpression_GenerationList
+      !whileExpressionResult
+      !doInstructionList_GenerationList
       !elementType
       !size
       !varStaticListInMemory
     }
   else
-    error mEndOf_iteratedExpression_instruction : "this object is not enumerable"
+    error mEndOf_iteratedExpression : "this object is not enumerable"
   end
 }
 
@@ -154,7 +191,9 @@ class @forInstructionOnArrayIR : @abstractInstructionIR {
   @string mEnumeratedValueName
   @location mLocation
   @objectIR mExpressionResult
-  @instructionListIR mInstructionList
+  @instructionListIR mWhileInstructionList
+  @objectIR mWhileExpressionResult
+  @instructionListIR mDoInstructionList
   @unifiedTypeMap-proxy mElementType
   @uint mArraySize
   @string mVarStaticListInMemory
@@ -200,12 +239,13 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   let elementTypeLLVMName = [mElementType llvmTypeName]
   let listTypeLLVMName = "[" + mArraySize + " x " + elementTypeLLVMName + "]"
 
-  let startLabel = "for.label." + [mLocation locationIndex] + ".start"
-  let testLabel = "for.label." + [mLocation locationIndex] + ".test"
-  let nextLabel = "for.label." + [mLocation locationIndex] + ".next"
-  let exitVar = "for." + [mLocation locationIndex] + ".exit"
-  let loopLabel = "for.label." + [mLocation locationIndex] + ".loop"
-  let endLabel  = "for.label." + [mLocation locationIndex] + ".end"
+  let startLabel = "for.label.start." + [mLocation locationIndex]
+  let testLabel = "for.label.test." + [mLocation locationIndex]
+  let whileLabel = "for.label.while." + [mLocation locationIndex]
+  let nextLabel = "for.label.next." + [mLocation locationIndex]
+  let loopVar = "for.loop." + [mLocation locationIndex]
+  let loopLabel = "for.label.loop." + [mLocation locationIndex]
+  let endLabel  = "for.label.end." + [mLocation locationIndex]
  
   let indexVar  = "for.index." + [mLocation locationIndex]
   let ptrVar  = "for.ptr." + [mLocation locationIndex]
@@ -233,9 +273,15 @@ override method @forInstructionOnArrayIR llvmInstructionCode
 #--- Index var
   ioLLVMcode += "  %" + indexVar + " = phi i32 [" + mArraySize + ", %" + startLabel
               + "], [%" + indexVar + ".next, %" + nextLabel + "]\n"
-  ioLLVMcode += "  %" + exitVar + " = icmp eq i32 %" + indexVar + ", 0\n"
+  ioLLVMcode += "  %" + loopVar + " = icmp ugt i32 %" + indexVar + ", 0\n"
 #--- Ptr var
-  ioLLVMcode += "  br i1 %" + exitVar + ", label %" + endLabel + ", label %" + loopLabel + "\n\n"
+  ioLLVMcode += "  br i1 %" + loopVar + ", label %" + whileLabel + ", label %" + endLabel + "\n\n"
+
+#------------ While
+  ioLLVMcode += whileLabel + ":\n"
+#--- While instructions
+  [mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br i1 " + [mWhileExpressionResult llvmName] + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 
 #------------ Loop  
   ioLLVMcode += loopLabel + ":\n"
@@ -245,7 +291,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ioLLVMcode += "  store " + elementTypeLLVMName + " %" + currentValue + ", " + elementTypeLLVMName
              + "* %" + llvmNameForLocalVariable (!mEnumeratedValueName) + "\n"
 #--- Loop instructions
-  [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  [mDoInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + nextLabel + "\n\n"
 
   ioLLVMcode += nextLabel + ":\n"
@@ -266,7 +312,8 @@ override method @forInstructionOnArrayIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mWhileInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mDoInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -277,7 +324,9 @@ class @forInstructionOnStringIR : @abstractInstructionIR {
   @string mVarName
   @location mLocation
   @objectIR mExpressionResult
-  @instructionListIR mInstructionList
+  @instructionListIR mWhileInstructionList
+  @objectIR mWhileExpressionResult
+  @instructionListIR mDoInstructionList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -287,26 +336,33 @@ override method @forInstructionOnStringIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let startLabel = "for." + [mLocation locationIndex] + ".start"
-  let testLabel = "for." + [mLocation locationIndex] + ".test"
-  let loopLabel = "for." + [mLocation locationIndex] + ".loop"
-  let nextLabel = "for." + [mLocation locationIndex] + ".next"
-  let endLabel  = "for." + [mLocation locationIndex] + ".end"
-  let ptrVar    = "for." + [mLocation locationIndex] + ".ptr"
-  let currentVar = "for." + [mLocation locationIndex] + ".current"
+  let startLabel = "for.label.start." + [mLocation locationIndex]
+  let testLabel = "for.label.test." + [mLocation locationIndex]
+  let loopLabel = "for.label.loop." + [mLocation locationIndex]
+  let whileLabel = "for.label.while." + [mLocation locationIndex]
+  let nextLabel = "for.label.next." + [mLocation locationIndex]
+  let endLabel  = "for.label.end." + [mLocation locationIndex]
+  let ptrVar    = "for.ptr." + [mLocation locationIndex]
+  let currentVar = "for.current." + [mLocation locationIndex]
   
 #--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
   ioLLVMcode += startLabel + ":\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
   
-#--- Test
+#------------ Test
   ioLLVMcode += testLabel + ":\n"
   ioLLVMcode += "  %" + ptrVar + " = phi i8* [" + [mExpressionResult llvmName] + ", %"
   ioLLVMcode += startLabel + "], [%" + ptrVar + ".next, %" + nextLabel + "]\n"
   ioLLVMcode += "  %" + currentVar + " = load i8, i8* %" + ptrVar + "\n"
   ioLLVMcode += "  %" + currentVar + ".nul = icmp eq i8 %" + currentVar + ", 0\n"
-  ioLLVMcode += "  br i1 %" + currentVar + ".nul, label %" + endLabel + ", label %" + loopLabel + "\n\n"
+  ioLLVMcode += "  br i1 %" + currentVar + ".nul, label %" + endLabel + ", label %" + whileLabel + "\n\n"
+
+#------------ While
+  ioLLVMcode += whileLabel + ":\n"
+#--- While instructions
+  [mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br i1 " + [mWhileExpressionResult llvmName] + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 
 #--------------------- Loop  
   ioLLVMcode += loopLabel + ":\n"
@@ -314,7 +370,7 @@ override method @forInstructionOnStringIR llvmInstructionCode
   ioLLVMcode += "  store i8 %" + currentVar + ", "
   ioLLVMcode += "i8 * %" + llvmNameForLocalVariable (!mVarName) + "\n"
 #--- Loop body
-  [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  [mDoInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + nextLabel + "\n\n"
 #--- Next value
   ioLLVMcode += nextLabel + ":\n"
@@ -332,7 +388,8 @@ override method @forInstructionOnStringIR enterAccessibleEntities
   ?!@accessibleEntities ioAccessibleEntities
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mWhileInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mDoInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
