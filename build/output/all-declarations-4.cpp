@@ -13770,10 +13770,7 @@ typeComparisonResult cPtr_forInstructionAST::dynamicObjectCompare (const acPtr_c
     result = mAttribute_mVarName.objectCompare (p->mAttribute_mVarName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mIteratedExpression.objectCompare (p->mAttribute_mIteratedExpression) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mEndOf_5F_iteratedExpression.objectCompare (p->mAttribute_mEndOf_5F_iteratedExpression) ;
+    result = mAttribute_mIteratedObject.objectCompare (p->mAttribute_mIteratedObject) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mWhileExpression.objectCompare (p->mAttribute_mWhileExpression) ;
@@ -13828,8 +13825,7 @@ GALGAS_instructionAST (inSourcePtr) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_forInstructionAST GALGAS_forInstructionAST::constructor_new (const GALGAS_lstring & inAttribute_mVarName,
-                                                                    const GALGAS_expressionAST & inAttribute_mIteratedExpression,
-                                                                    const GALGAS_location & inAttribute_mEndOf_5F_iteratedExpression,
+                                                                    const GALGAS_lstring & inAttribute_mIteratedObject,
                                                                     const GALGAS_expressionAST & inAttribute_mWhileExpression,
                                                                     const GALGAS_location & inAttribute_mEndOf_5F_whileExpression,
                                                                     const GALGAS_bool & inAttribute_mStaticWhileExpression,
@@ -13837,8 +13833,8 @@ GALGAS_forInstructionAST GALGAS_forInstructionAST::constructor_new (const GALGAS
                                                                     const GALGAS_location & inAttribute_mEndOf_5F_do_5F_instruction
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_forInstructionAST result ;
-  if (inAttribute_mVarName.isValid () && inAttribute_mIteratedExpression.isValid () && inAttribute_mEndOf_5F_iteratedExpression.isValid () && inAttribute_mWhileExpression.isValid () && inAttribute_mEndOf_5F_whileExpression.isValid () && inAttribute_mStaticWhileExpression.isValid () && inAttribute_mDoInstructionList.isValid () && inAttribute_mEndOf_5F_do_5F_instruction.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_forInstructionAST (inAttribute_mVarName, inAttribute_mIteratedExpression, inAttribute_mEndOf_5F_iteratedExpression, inAttribute_mWhileExpression, inAttribute_mEndOf_5F_whileExpression, inAttribute_mStaticWhileExpression, inAttribute_mDoInstructionList, inAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
+  if (inAttribute_mVarName.isValid () && inAttribute_mIteratedObject.isValid () && inAttribute_mWhileExpression.isValid () && inAttribute_mEndOf_5F_whileExpression.isValid () && inAttribute_mStaticWhileExpression.isValid () && inAttribute_mDoInstructionList.isValid () && inAttribute_mEndOf_5F_do_5F_instruction.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_forInstructionAST (inAttribute_mVarName, inAttribute_mIteratedObject, inAttribute_mWhileExpression, inAttribute_mEndOf_5F_whileExpression, inAttribute_mStaticWhileExpression, inAttribute_mDoInstructionList, inAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
   }
   return result ;
 }
@@ -13863,38 +13859,20 @@ GALGAS_lstring cPtr_forInstructionAST::getter_mVarName (UNUSED_LOCATION_ARGS) co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST GALGAS_forInstructionAST::getter_mIteratedExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_expressionAST result ;
+GALGAS_lstring GALGAS_forInstructionAST::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
+  GALGAS_lstring result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionAST * p = (const cPtr_forInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forInstructionAST) ;
-    result = p->mAttribute_mIteratedExpression ;
+    result = p->mAttribute_mIteratedObject ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_expressionAST cPtr_forInstructionAST::getter_mIteratedExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIteratedExpression ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_forInstructionAST::getter_mEndOf_5F_iteratedExpression (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionAST * p = (const cPtr_forInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionAST) ;
-    result = p->mAttribute_mEndOf_5F_iteratedExpression ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_forInstructionAST::getter_mEndOf_5F_iteratedExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOf_5F_iteratedExpression ;
+GALGAS_lstring cPtr_forInstructionAST::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIteratedObject ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13992,8 +13970,7 @@ GALGAS_location cPtr_forInstructionAST::getter_mEndOf_5F_do_5F_instruction (UNUS
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_forInstructionAST::cPtr_forInstructionAST (const GALGAS_lstring & in_mVarName,
-                                                const GALGAS_expressionAST & in_mIteratedExpression,
-                                                const GALGAS_location & in_mEndOf_5F_iteratedExpression,
+                                                const GALGAS_lstring & in_mIteratedObject,
                                                 const GALGAS_expressionAST & in_mWhileExpression,
                                                 const GALGAS_location & in_mEndOf_5F_whileExpression,
                                                 const GALGAS_bool & in_mStaticWhileExpression,
@@ -14002,8 +13979,7 @@ cPtr_forInstructionAST::cPtr_forInstructionAST (const GALGAS_lstring & in_mVarNa
                                                 COMMA_LOCATION_ARGS) :
 cPtr_instructionAST (THERE),
 mAttribute_mVarName (in_mVarName),
-mAttribute_mIteratedExpression (in_mIteratedExpression),
-mAttribute_mEndOf_5F_iteratedExpression (in_mEndOf_5F_iteratedExpression),
+mAttribute_mIteratedObject (in_mIteratedObject),
 mAttribute_mWhileExpression (in_mWhileExpression),
 mAttribute_mEndOf_5F_whileExpression (in_mEndOf_5F_whileExpression),
 mAttribute_mStaticWhileExpression (in_mStaticWhileExpression),
@@ -14022,9 +13998,7 @@ void cPtr_forInstructionAST::description (C_String & ioString,
   ioString << "[@forInstructionAST:" ;
   mAttribute_mVarName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mIteratedExpression.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mEndOf_5F_iteratedExpression.description (ioString, inIndentation+1) ;
+  mAttribute_mIteratedObject.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mWhileExpression.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -14042,7 +14016,7 @@ void cPtr_forInstructionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_forInstructionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_forInstructionAST (mAttribute_mVarName, mAttribute_mIteratedExpression, mAttribute_mEndOf_5F_iteratedExpression, mAttribute_mWhileExpression, mAttribute_mEndOf_5F_whileExpression, mAttribute_mStaticWhileExpression, mAttribute_mDoInstructionList, mAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_forInstructionAST (mAttribute_mVarName, mAttribute_mIteratedObject, mAttribute_mWhileExpression, mAttribute_mEndOf_5F_whileExpression, mAttribute_mStaticWhileExpression, mAttribute_mDoInstructionList, mAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -14105,7 +14079,7 @@ typeComparisonResult cPtr_forInstructionOnArrayIR::dynamicObjectCompare (const a
     result = mAttribute_mLocation.objectCompare (p->mAttribute_mLocation) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mExpressionResult.objectCompare (p->mAttribute_mExpressionResult) ;
+    result = mAttribute_mIteratedObject.objectCompare (p->mAttribute_mIteratedObject) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mWhileInstructionList.objectCompare (p->mAttribute_mWhileInstructionList) ;
@@ -14121,9 +14095,6 @@ typeComparisonResult cPtr_forInstructionOnArrayIR::dynamicObjectCompare (const a
   }
   if (kOperandEqual == result) {
     result = mAttribute_mArraySize.objectCompare (p->mAttribute_mArraySize) ;
-  }
-  if (kOperandEqual == result) {
-    result = mAttribute_mVarStaticListInMemory.objectCompare (p->mAttribute_mVarStaticListInMemory) ;
   }
   return result ;
 }
@@ -14164,17 +14135,16 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_forInstructionOnArrayIR GALGAS_forInstructionOnArrayIR::constructor_new (const GALGAS_string & inAttribute_mEnumeratedValueName,
                                                                                 const GALGAS_location & inAttribute_mLocation,
-                                                                                const GALGAS_objectIR & inAttribute_mExpressionResult,
+                                                                                const GALGAS_objectIR & inAttribute_mIteratedObject,
                                                                                 const GALGAS_instructionListIR & inAttribute_mWhileInstructionList,
                                                                                 const GALGAS_objectIR & inAttribute_mWhileExpressionResult,
                                                                                 const GALGAS_instructionListIR & inAttribute_mDoInstructionList,
                                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mElementType,
-                                                                                const GALGAS_uint & inAttribute_mArraySize,
-                                                                                const GALGAS_string & inAttribute_mVarStaticListInMemory
+                                                                                const GALGAS_uint & inAttribute_mArraySize
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_forInstructionOnArrayIR result ;
-  if (inAttribute_mEnumeratedValueName.isValid () && inAttribute_mLocation.isValid () && inAttribute_mExpressionResult.isValid () && inAttribute_mWhileInstructionList.isValid () && inAttribute_mWhileExpressionResult.isValid () && inAttribute_mDoInstructionList.isValid () && inAttribute_mElementType.isValid () && inAttribute_mArraySize.isValid () && inAttribute_mVarStaticListInMemory.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_forInstructionOnArrayIR (inAttribute_mEnumeratedValueName, inAttribute_mLocation, inAttribute_mExpressionResult, inAttribute_mWhileInstructionList, inAttribute_mWhileExpressionResult, inAttribute_mDoInstructionList, inAttribute_mElementType, inAttribute_mArraySize, inAttribute_mVarStaticListInMemory COMMA_THERE)) ;
+  if (inAttribute_mEnumeratedValueName.isValid () && inAttribute_mLocation.isValid () && inAttribute_mIteratedObject.isValid () && inAttribute_mWhileInstructionList.isValid () && inAttribute_mWhileExpressionResult.isValid () && inAttribute_mDoInstructionList.isValid () && inAttribute_mElementType.isValid () && inAttribute_mArraySize.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_forInstructionOnArrayIR (inAttribute_mEnumeratedValueName, inAttribute_mLocation, inAttribute_mIteratedObject, inAttribute_mWhileInstructionList, inAttribute_mWhileExpressionResult, inAttribute_mDoInstructionList, inAttribute_mElementType, inAttribute_mArraySize COMMA_THERE)) ;
   }
   return result ;
 }
@@ -14217,20 +14187,20 @@ GALGAS_location cPtr_forInstructionOnArrayIR::getter_mLocation (UNUSED_LOCATION_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR GALGAS_forInstructionOnArrayIR::getter_mExpressionResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR GALGAS_forInstructionOnArrayIR::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mAttribute_mExpressionResult ;
+    result = p->mAttribute_mIteratedObject ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR cPtr_forInstructionOnArrayIR::getter_mExpressionResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExpressionResult ;
+GALGAS_objectIR cPtr_forInstructionOnArrayIR::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIteratedObject ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14324,47 +14294,27 @@ GALGAS_uint cPtr_forInstructionOnArrayIR::getter_mArraySize (UNUSED_LOCATION_ARG
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_forInstructionOnArrayIR::getter_mVarStaticListInMemory (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnArrayIR * p = (const cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    result = p->mAttribute_mVarStaticListInMemory ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_forInstructionOnArrayIR::getter_mVarStaticListInMemory (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVarStaticListInMemory ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //                                  Pointer class for @forInstructionOnArrayIR class                                   *
 //---------------------------------------------------------------------------------------------------------------------*
 
 cPtr_forInstructionOnArrayIR::cPtr_forInstructionOnArrayIR (const GALGAS_string & in_mEnumeratedValueName,
                                                             const GALGAS_location & in_mLocation,
-                                                            const GALGAS_objectIR & in_mExpressionResult,
+                                                            const GALGAS_objectIR & in_mIteratedObject,
                                                             const GALGAS_instructionListIR & in_mWhileInstructionList,
                                                             const GALGAS_objectIR & in_mWhileExpressionResult,
                                                             const GALGAS_instructionListIR & in_mDoInstructionList,
                                                             const GALGAS_unifiedTypeMap_2D_proxy & in_mElementType,
-                                                            const GALGAS_uint & in_mArraySize,
-                                                            const GALGAS_string & in_mVarStaticListInMemory
+                                                            const GALGAS_uint & in_mArraySize
                                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mEnumeratedValueName (in_mEnumeratedValueName),
 mAttribute_mLocation (in_mLocation),
-mAttribute_mExpressionResult (in_mExpressionResult),
+mAttribute_mIteratedObject (in_mIteratedObject),
 mAttribute_mWhileInstructionList (in_mWhileInstructionList),
 mAttribute_mWhileExpressionResult (in_mWhileExpressionResult),
 mAttribute_mDoInstructionList (in_mDoInstructionList),
 mAttribute_mElementType (in_mElementType),
-mAttribute_mArraySize (in_mArraySize),
-mAttribute_mVarStaticListInMemory (in_mVarStaticListInMemory) {
+mAttribute_mArraySize (in_mArraySize) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14380,7 +14330,7 @@ void cPtr_forInstructionOnArrayIR::description (C_String & ioString,
   ioString << ", " ;
   mAttribute_mLocation.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mExpressionResult.description (ioString, inIndentation+1) ;
+  mAttribute_mIteratedObject.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mWhileInstructionList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -14391,8 +14341,6 @@ void cPtr_forInstructionOnArrayIR::description (C_String & ioString,
   mAttribute_mElementType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mArraySize.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mAttribute_mVarStaticListInMemory.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -14400,7 +14348,7 @@ void cPtr_forInstructionOnArrayIR::description (C_String & ioString,
 
 acPtr_class * cPtr_forInstructionOnArrayIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_forInstructionOnArrayIR (mAttribute_mEnumeratedValueName, mAttribute_mLocation, mAttribute_mExpressionResult, mAttribute_mWhileInstructionList, mAttribute_mWhileExpressionResult, mAttribute_mDoInstructionList, mAttribute_mElementType, mAttribute_mArraySize, mAttribute_mVarStaticListInMemory COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_forInstructionOnArrayIR (mAttribute_mEnumeratedValueName, mAttribute_mLocation, mAttribute_mIteratedObject, mAttribute_mWhileInstructionList, mAttribute_mWhileExpressionResult, mAttribute_mDoInstructionList, mAttribute_mElementType, mAttribute_mArraySize COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -14463,7 +14411,7 @@ typeComparisonResult cPtr_forInstructionOnStringIR::dynamicObjectCompare (const 
     result = mAttribute_mLocation.objectCompare (p->mAttribute_mLocation) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mExpressionResult.objectCompare (p->mAttribute_mExpressionResult) ;
+    result = mAttribute_mIteratedObject.objectCompare (p->mAttribute_mIteratedObject) ;
   }
   if (kOperandEqual == result) {
     result = mAttribute_mWhileInstructionList.objectCompare (p->mAttribute_mWhileInstructionList) ;
@@ -14513,14 +14461,14 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 
 GALGAS_forInstructionOnStringIR GALGAS_forInstructionOnStringIR::constructor_new (const GALGAS_string & inAttribute_mVarName,
                                                                                   const GALGAS_location & inAttribute_mLocation,
-                                                                                  const GALGAS_objectIR & inAttribute_mExpressionResult,
+                                                                                  const GALGAS_objectIR & inAttribute_mIteratedObject,
                                                                                   const GALGAS_instructionListIR & inAttribute_mWhileInstructionList,
                                                                                   const GALGAS_objectIR & inAttribute_mWhileExpressionResult,
                                                                                   const GALGAS_instructionListIR & inAttribute_mDoInstructionList
                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_forInstructionOnStringIR result ;
-  if (inAttribute_mVarName.isValid () && inAttribute_mLocation.isValid () && inAttribute_mExpressionResult.isValid () && inAttribute_mWhileInstructionList.isValid () && inAttribute_mWhileExpressionResult.isValid () && inAttribute_mDoInstructionList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_forInstructionOnStringIR (inAttribute_mVarName, inAttribute_mLocation, inAttribute_mExpressionResult, inAttribute_mWhileInstructionList, inAttribute_mWhileExpressionResult, inAttribute_mDoInstructionList COMMA_THERE)) ;
+  if (inAttribute_mVarName.isValid () && inAttribute_mLocation.isValid () && inAttribute_mIteratedObject.isValid () && inAttribute_mWhileInstructionList.isValid () && inAttribute_mWhileExpressionResult.isValid () && inAttribute_mDoInstructionList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_forInstructionOnStringIR (inAttribute_mVarName, inAttribute_mLocation, inAttribute_mIteratedObject, inAttribute_mWhileInstructionList, inAttribute_mWhileExpressionResult, inAttribute_mDoInstructionList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -14563,20 +14511,20 @@ GALGAS_location cPtr_forInstructionOnStringIR::getter_mLocation (UNUSED_LOCATION
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR GALGAS_forInstructionOnStringIR::getter_mExpressionResult (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR GALGAS_forInstructionOnStringIR::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR result ;
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mAttribute_mExpressionResult ;
+    result = p->mAttribute_mIteratedObject ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_objectIR cPtr_forInstructionOnStringIR::getter_mExpressionResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExpressionResult ;
+GALGAS_objectIR cPtr_forInstructionOnStringIR::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
+  return mAttribute_mIteratedObject ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14639,7 +14587,7 @@ GALGAS_instructionListIR cPtr_forInstructionOnStringIR::getter_mDoInstructionLis
 
 cPtr_forInstructionOnStringIR::cPtr_forInstructionOnStringIR (const GALGAS_string & in_mVarName,
                                                               const GALGAS_location & in_mLocation,
-                                                              const GALGAS_objectIR & in_mExpressionResult,
+                                                              const GALGAS_objectIR & in_mIteratedObject,
                                                               const GALGAS_instructionListIR & in_mWhileInstructionList,
                                                               const GALGAS_objectIR & in_mWhileExpressionResult,
                                                               const GALGAS_instructionListIR & in_mDoInstructionList
@@ -14647,7 +14595,7 @@ cPtr_forInstructionOnStringIR::cPtr_forInstructionOnStringIR (const GALGAS_strin
 cPtr_abstractInstructionIR (THERE),
 mAttribute_mVarName (in_mVarName),
 mAttribute_mLocation (in_mLocation),
-mAttribute_mExpressionResult (in_mExpressionResult),
+mAttribute_mIteratedObject (in_mIteratedObject),
 mAttribute_mWhileInstructionList (in_mWhileInstructionList),
 mAttribute_mWhileExpressionResult (in_mWhileExpressionResult),
 mAttribute_mDoInstructionList (in_mDoInstructionList) {
@@ -14666,7 +14614,7 @@ void cPtr_forInstructionOnStringIR::description (C_String & ioString,
   ioString << ", " ;
   mAttribute_mLocation.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mExpressionResult.description (ioString, inIndentation+1) ;
+  mAttribute_mIteratedObject.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mAttribute_mWhileInstructionList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
@@ -14680,7 +14628,7 @@ void cPtr_forInstructionOnStringIR::description (C_String & ioString,
 
 acPtr_class * cPtr_forInstructionOnStringIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_forInstructionOnStringIR (mAttribute_mVarName, mAttribute_mLocation, mAttribute_mExpressionResult, mAttribute_mWhileInstructionList, mAttribute_mWhileExpressionResult, mAttribute_mDoInstructionList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_forInstructionOnStringIR (mAttribute_mVarName, mAttribute_mLocation, mAttribute_mIteratedObject, mAttribute_mWhileInstructionList, mAttribute_mWhileExpressionResult, mAttribute_mDoInstructionList COMMA_THERE)) ;
   return ptr ;
 }
 
