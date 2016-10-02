@@ -95,11 +95,21 @@ override method @forInstructionAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR iteratedExpressionResult
   ]
+#--- Type kind
+  let iteratedTypeKind = [[iteratedExpressionResult type] kind]
 #--- Get iterated element type
-  let @unifiedTypeMap-proxy iteratedElementType = [[iteratedExpressionResult type] enumerationType]
-  if iteratedElementType == .null then
-    error mEndOf_iteratedExpression : "this object is not enumerable"
+#  let @unifiedTypeMap-proxy iteratedElementType = [[iteratedExpressionResult type] enumerationType]
+  @unifiedTypeMap-proxy iteratedElementType
+  if iteratedTypeKind == .literalString then
+    iteratedElementType = .searchKey {!inContext.mTypeMap !["uint8" nowhere]}
+  elsif [iteratedTypeKind isArrayType] then
+    [iteratedTypeKind arrayType ?elementType:iteratedElementType ?size:*]
+  else
+    error mEndOf_iteratedExpression : "this object is not enumerable" : iteratedElementType
   end
+#  if iteratedElementType == .null then
+#    error mEndOf_iteratedExpression : "this object is not enumerable"
+#  end
 #---
   let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
@@ -151,8 +161,6 @@ override method @forInstructionAST analyze
     !?instructionListIR:doInstructionList_GenerationList
   ]
   [!?ioVariableMap closeOverride !mEndOf_do_instruction]
-#--- Type kind
-  let iteratedTypeKind = [[iteratedExpressionResult type] kind]
 #--- Code generation
   if iteratedTypeKind == .literalString then
     ioInstructionGenerationList += !@forInstructionOnStringIR.new {
@@ -178,8 +186,6 @@ override method @forInstructionAST analyze
       !size
       !varStaticListInMemory
     }
-  else
-    error mEndOf_iteratedExpression : "this object is not enumerable"
   end
 }
 

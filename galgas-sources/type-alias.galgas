@@ -92,7 +92,7 @@ override method @typeAliasDeclaration enterInContext
     ?copyable:let copyable
     ?equatable:let equatable
     ?comparable:let comparable
-    ?enumerationType:let enumerationType
+#    ?enumerationType:let enumerationType
   ]
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType
@@ -104,7 +104,7 @@ override method @typeAliasDeclaration enterInContext
     !copyable:copyable
     !equatable:equatable
     !comparable:comparable
-    !enumerationType:enumerationType
+#    !enumerationType:enumerationType
   ]
 #--- Enter infix operators
   let newNewInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !mNewTypeName.string)
