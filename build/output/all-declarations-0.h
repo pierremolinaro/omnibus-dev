@@ -12353,10 +12353,9 @@ class GALGAS_extendStaticArrayExpressionAST : public AC_GALGAS_root {
   public : static class GALGAS_extendStaticArrayExpressionAST constructor_expression (const class GALGAS_expressionAST & inOperand0
                                                                                       COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_extendStaticArrayExpressionAST constructor_function (const class GALGAS_mode & inOperand0,
-                                                                                    const class GALGAS_lstring & inOperand1,
-                                                                                    const class GALGAS_procFormalArgumentList & inOperand2,
-                                                                                    const class GALGAS_lstring & inOperand3
+  public : static class GALGAS_extendStaticArrayExpressionAST constructor_function (const class GALGAS_lstring & inOperand0,
+                                                                                    const class GALGAS_procFormalArgumentList & inOperand1,
+                                                                                    const class GALGAS_lstring & inOperand2
                                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -12372,10 +12371,9 @@ class GALGAS_extendStaticArrayExpressionAST : public AC_GALGAS_root {
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_mode & outArgument0,
-                                                  class GALGAS_lstring & outArgument1,
-                                                  class GALGAS_procFormalArgumentList & outArgument2,
-                                                  class GALGAS_lstring & outArgument3,
+  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_lstring & outArgument0,
+                                                  class GALGAS_procFormalArgumentList & outArgument1,
+                                                  class GALGAS_lstring & outArgument2,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -12420,16 +12418,14 @@ class cEnumAssociatedValues_extendStaticArrayExpressionAST_expression : public c
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_extendStaticArrayExpressionAST_function : public cEnumAssociatedValues {
-  public : const GALGAS_mode mAssociatedValue0 ;
-  public : const GALGAS_lstring mAssociatedValue1 ;
-  public : const GALGAS_procFormalArgumentList mAssociatedValue2 ;
-  public : const GALGAS_lstring mAssociatedValue3 ;
+  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_procFormalArgumentList mAssociatedValue1 ;
+  public : const GALGAS_lstring mAssociatedValue2 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_extendStaticArrayExpressionAST_function (const GALGAS_mode & inAssociatedValue0,
-                                                                          const GALGAS_lstring & inAssociatedValue1,
-                                                                          const GALGAS_procFormalArgumentList & inAssociatedValue2,
-                                                                          const GALGAS_lstring & inAssociatedValue3
+  public : cEnumAssociatedValues_extendStaticArrayExpressionAST_function (const GALGAS_lstring & inAssociatedValue0,
+                                                                          const GALGAS_procFormalArgumentList & inAssociatedValue1,
+                                                                          const GALGAS_lstring & inAssociatedValue2
                                                                           COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

@@ -151,14 +151,23 @@ private proc suppressInaccessibleSubprograms
   end
 #--- Then, boot and init clauses
   for boot in ioIntermediateCodeStruct.mBootList do
-    [boot.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
+    [boot.mInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
   end
   for init in ioIntermediateCodeStruct.mInitList do
-    [init.mInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
+    [init.mInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
   end
 #--- Tasks (setup and loop)
   for task in ioIntermediateCodeStruct.mTaskMapIR do
-    [task.mInitInstructionListIR enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
+    [task.mInitInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
     outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + "." + llvmNameForTaskLoopFunction () + "()"
   end
 #--- Panic clauses (if panic code is generated)
@@ -177,10 +186,16 @@ private proc suppressInaccessibleSubprograms
     !?outAccessibleEntities
     !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
   ]
+#--- Static arraies
+#  log "GLOBALS: " : outAccessibleEntities.mGlobalVariableSet
+#  for staticArray in ioIntermediateCodeStruct.mStaticArrayMap do
+#    if [outAccessibleEntities.mGlobalVariableSet hasKey !staticArray.lkey] then
+#      outAccessibleEntities.mRoutineSet += staticArray.mInvokedFunctionSet
+#    end
+#  end
 #--- Explore routines
   var continues = true
-  let bound = [ioIntermediateCodeStruct.mRoutineMapIR count]
-    + [ioIntermediateCodeStruct.mGuardMapIR count]
+  let bound = [ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mGuardMapIR count]
   loop (bound + 1) while continues do
     continues = false
     exploreProcs (

@@ -11,7 +11,7 @@ list @procFormalArgumentListForGeneration {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 graph @subprogramInvocationGraph (@lstringlist) {
-  insert addNode error message "the '%K' subprogram is already declared at %L"
+  insert addNode error message "the '%K' routine is already declared at %L"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

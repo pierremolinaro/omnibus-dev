@@ -144,7 +144,6 @@ override method @staticArrayAST enterInContext
       end
       propertyNameSet += !propertyName
       propertyList += !propertyName !propertyType
-#      staticArrayPropertyList += !propertyName !.valueType{!type:propertyType}
       let propertyIndex = [staticlistPropertyMap count]
       [!?staticlistPropertyMap insertKey
         !propertyName
@@ -180,7 +179,6 @@ override method @staticArrayAST enterInContext
         ]
       end
       propertyList += !propertyName !.searchKey {!ioContext.mTypeMap !lRoutineMangledName}
-#      staticArrayPropertyList += !propertyName !.function{!mode:mode !signature:signature !returnType:returnTypeProxy}
     end
   end
   [!?ioContext.mStaticlistMap insertKey
@@ -188,10 +186,14 @@ override method @staticArrayAST enterInContext
     !propertyList
   ]
 #--- Enter element type in type map
+  let kind = @typeKind.structure {
+    !typeName:llvmNameForStaticListElementType (!mStaticListName)
+    !propertyMap:staticlistPropertyMap
+    !propertyList:propertyList
+  }
   [!?ioContext.mTypeMap insertType
     !lkey:plmTypeName
-#    !llvmTypeName:llvmNameForStaticListElementType (!mStaticListName)
-    !kind:.structure {!typeName:llvmNameForStaticListElementType (!mStaticListName) !propertyMap:staticlistPropertyMap !propertyList:propertyList}
+    !kind:kind
     !classConstantMap:{}
     !instantiable:false
     !copyable:false

@@ -639,6 +639,17 @@ class GALGAS_lstring function_llvmNameForStaticListElementType (const class GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                        Extension method '@staticlistValues_listMap enterAccessibleEntities'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_enterAccessibleEntities (const class GALGAS_staticlistValues_5F_listMap inObject,
+                                              class GALGAS_accessibleEntities & io_ioAccessibleEntities,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                        Extension method '@panicClauseListAST-element panicSemanticAnalysis'                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

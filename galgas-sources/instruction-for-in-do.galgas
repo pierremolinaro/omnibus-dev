@@ -196,6 +196,10 @@ override method @forInstructionAST analyze
     }
   elsif [iteratedTypeKind isArrayType] then
     [iteratedTypeKind arrayType ?typeName:* ?elementType:let elementType ?size:let size]
+    @stringset invokedFunctionSet = {}
+    if [ioTemporaries.mStaticArrayMap hasKey !mIteratedObject] then
+      [ioTemporaries.mStaticArrayMap searchKey !mIteratedObject ?invokedFunctionSet]
+    end
     ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
       !enumeratedVarLLVMName
       !mIteratedObject.location
@@ -205,6 +209,7 @@ override method @forInstructionAST analyze
       !doInstructionList_GenerationList
       !elementType
       !size
+      !invokedFunctionSet
     }
   end
 }
@@ -222,6 +227,7 @@ class @forInstructionOnArrayIR : @abstractInstructionIR {
   @instructionListIR mDoInstructionList
   @unifiedTypeMap-proxy mElementType
   @uint mArraySize
+  @stringset mInvokedFunctionSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -339,6 +345,7 @@ override method @forInstructionOnArrayIR enterAccessibleEntities
 {
   [mWhileInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
   [mDoInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  ioAccessibleEntities.mRoutineSet += mInvokedFunctionSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
