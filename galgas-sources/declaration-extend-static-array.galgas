@@ -287,8 +287,16 @@ override method @extendStaticArrayDeclarationAST semanticAnalysis
       invokedFunctionSet += !routineMangledName
     end
   end
-  [!?ioTemporaries.mStaticArrayMap insertKey !mStaticlistName !invokedFunctionSet]
-  [!?ioIntermediateCodeStruct.mStaticArrayMap insertKey !mStaticlistName !invokedFunctionSet]
+  with mStaticlistName.string in !?ioTemporaries.mStaticArrayMap do
+    mInvokedFunctionSet += invokedFunctionSet
+  else
+    [!?ioTemporaries.mStaticArrayMap insertKey !mStaticlistName !invokedFunctionSet]
+  end
+  with mStaticlistName.string in !?ioIntermediateCodeStruct.mStaticArrayMap do
+    mInvokedFunctionSet += invokedFunctionSet
+  else
+    [!?ioIntermediateCodeStruct.mStaticArrayMap insertKey !mStaticlistName !invokedFunctionSet]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

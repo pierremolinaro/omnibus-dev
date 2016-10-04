@@ -219,7 +219,7 @@ private proc suppressInaccessibleSubprograms
   @staticArrayMap currentStaticArrayMap = {}
   for (staticArrayMame value) in ioIntermediateCodeStruct.mStaticArrayMap do
     if [outAccessibleEntities.mGlobalVariableSet hasKey !staticArrayMame] then
-      [!?currentStaticArrayMap insertKey !staticArrayMame !value]
+     [!?currentStaticArrayMap insertKey !staticArrayMame !value]
     end
   end
   if currentStaticArrayMap != ioIntermediateCodeStruct.mStaticArrayMap then
