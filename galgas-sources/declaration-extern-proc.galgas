@@ -76,22 +76,17 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
   var routineMangledName = mExternProcedureName
   routineMangledName.string += "("
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
-    let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
     signature += !formalArgumentPassingMode !selector.string !typeProxy
     routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   routineMangledName.string += ")"
-#--- Mode map
-#  @modeMap procedureModeMap = {}
-#  for () in mProcedureModeList do
-#    [ioContext.mModeMap searchKey !mValue]
-#    [!?procedureModeMap insertKey !mValue]
-#  end
 #--- Enter in context
-  let returnType = if mReturnTypeName.string == "" then
-    @unifiedTypeMap-proxy.null
+  @unifiedTypeMap-proxy returnType
+  if mReturnTypeName.string == "" then
+    returnType = .null
   else
-    @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mReturnTypeName}
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReturnTypeName ?returnType]
   end
   [!?ioContext.mRoutineMapForContext insertKey
     !routineMangledName

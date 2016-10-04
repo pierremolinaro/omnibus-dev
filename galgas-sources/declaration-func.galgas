@@ -204,6 +204,10 @@ method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePre
       [!?ioGraph noteNode !typeName]
     end
     [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    if mFunctionReturnTypeName.string != "" then
+      let typeName = llvmRegularTypeMangledNameFromName (!mFunctionReturnTypeName)
+      [!?ioGraph noteNode !typeName]
+    end
   end
 }
 
@@ -225,16 +229,17 @@ method @functionDeclarationListAST enterFunctionInContext
     routineMangledName.string += "("
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mFunctionFormalArgumentList do
-      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
       signature += !formalArgumentPassingMode !selector.string !typeProxy
       routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
     routineMangledName.string += ")"
   #--- Return type
-    let returnType = if procedure.mFunctionReturnTypeName.string == "" then
-      @unifiedTypeMap-proxy.null
+    @unifiedTypeMap-proxy returnType
+    if procedure.mFunctionReturnTypeName.string == "" then
+      returnType = .null
     else
-      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mFunctionReturnTypeName}
+      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !procedure.mFunctionReturnTypeName ?returnType]
     end
   #--- Attribute
     var weakProcedure = false
