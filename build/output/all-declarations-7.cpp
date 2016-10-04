@@ -78,11 +78,23 @@ static void extensionMethod_extendStaticArrayDeclarationAST_semanticAnalysis (co
     }
     enumerator_12835.gotoNextObject () ;
   }
-  {
-  ioArgument_ioTemporaries.mAttribute_mStaticArrayMap.setter_insertKey (object->mAttribute_mStaticlistName, var_invokedFunctionSet_12789, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 290)) ;
+  cMapElement_staticArrayMap * objectArray_13368 = (cMapElement_staticArrayMap *) ioArgument_ioTemporaries.mAttribute_mStaticArrayMap.readWriteAccessForWithInstruction (inCompiler, object->mAttribute_mStaticlistName.mAttribute_string  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 290)) ;
+  if (NULL != objectArray_13368) {
+      macroValidSharedObject (objectArray_13368, cMapElement_staticArrayMap) ;
+    objectArray_13368->mAttribute_mInvokedFunctionSet.plusAssign_operation(var_invokedFunctionSet_12789, inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 291)) ;
+  }else{
+    {
+    ioArgument_ioTemporaries.mAttribute_mStaticArrayMap.setter_insertKey (object->mAttribute_mStaticlistName, var_invokedFunctionSet_12789, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 293)) ;
+    }
   }
-  {
-  ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticArrayMap.setter_insertKey (object->mAttribute_mStaticlistName, var_invokedFunctionSet_12789, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 291)) ;
+  cMapElement_staticArrayMap * objectArray_13580 = (cMapElement_staticArrayMap *) ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticArrayMap.readWriteAccessForWithInstruction (inCompiler, object->mAttribute_mStaticlistName.mAttribute_string  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 295)) ;
+  if (NULL != objectArray_13580) {
+      macroValidSharedObject (objectArray_13580, cMapElement_staticArrayMap) ;
+    objectArray_13580->mAttribute_mInvokedFunctionSet.plusAssign_operation(var_invokedFunctionSet_12789, inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 296)) ;
+  }else{
+    {
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticArrayMap.setter_insertKey (object->mAttribute_mStaticlistName, var_invokedFunctionSet_12789, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 298)) ;
+    }
   }
 }
 

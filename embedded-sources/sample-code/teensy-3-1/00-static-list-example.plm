@@ -44,13 +44,13 @@ func user toggleL2 () {
   toggle (!port:LED_L2)
 }
 
-func user toggleL3 @noUnusedWarning () {
+func user toggleL3 () {
   toggle (!port:LED_L3)
 }
 
 extend staticArray maListeStatique (5, 9, func toggleL2 ())
 
-//extend staticArray maListeStatique (15, 29)
+extend staticArray maListeStatique (15, 29, func toggleL3 ())
 
 //-----------------------------------------------------------------------------*
 
@@ -64,6 +64,7 @@ task T priority 12 stackSize 512 {
     for élément in maListeStatique {
       total += élément.a
       total += élément.b
+      élément.f ()
     }
     lcd.goto (!line:0 !column:0)
     lcd.printUnsigned (!total)
