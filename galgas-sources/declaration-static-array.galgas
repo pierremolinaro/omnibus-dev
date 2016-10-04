@@ -116,22 +116,8 @@ override method @staticArrayAST enterInPrecedenceGraph ?!@semanticTypePrecedence
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @staticArrayPropertyType {
-  case valueType (@unifiedTypeMap-proxy type)
-  case function (@mode mode @procedureSignature signature @unifiedTypeMap-proxy returnType)
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-list @staticArrayPropertyList {
-  @string mPropertyName
-  @staticArrayPropertyType mType
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 map @staticlistMap {
-  @staticArrayPropertyList mStaticlistPropertyList
+  @propertyList mStaticlistPropertyList
 
   insert insertKey error message "static list '%K' is already defined"
   search searchKey error message "static list '%K' is not defined"
@@ -146,7 +132,6 @@ override method @staticArrayAST enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   @propertyList propertyList = {}
-  @staticArrayPropertyList staticArrayPropertyList = {}
   @propertyMap staticlistPropertyMap = {}
   @stringset propertyNameSet = {}
   let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
@@ -159,7 +144,7 @@ override method @staticArrayAST enterInContext
       end
       propertyNameSet += !propertyName
       propertyList += !propertyName !propertyType
-      staticArrayPropertyList += !propertyName !.valueType{!type:propertyType}
+#      staticArrayPropertyList += !propertyName !.valueType{!type:propertyType}
       let propertyIndex = [staticlistPropertyMap count]
       [!?staticlistPropertyMap insertKey
         !propertyName
@@ -168,7 +153,6 @@ override method @staticArrayAST enterInContext
         !propertyIndex
       ]
     case function (@mode mode @procFormalArgumentList formalArgs @lstring returnTypeName) :
-#      @lstring routineMangledName = .new {!plmTypeName.string + "." + propertyName !plmTypeName.location}
       var routineMangledName = "func." + mode + "("
       @procedureSignature signature = {}
       for (formalArgumentPassingMode selector formalArgumentTypeName *) in formalArgs do
@@ -196,12 +180,12 @@ override method @staticArrayAST enterInContext
         ]
       end
       propertyList += !propertyName !.searchKey {!ioContext.mTypeMap !lRoutineMangledName}
-      staticArrayPropertyList += !propertyName !.function{!mode:mode !signature:signature !returnType:returnTypeProxy}
+#      staticArrayPropertyList += !propertyName !.function{!mode:mode !signature:signature !returnType:returnTypeProxy}
     end
   end
   [!?ioContext.mStaticlistMap insertKey
     !mStaticListName
-    !staticArrayPropertyList
+    !propertyList
   ]
 #--- Enter element type in type map
   [!?ioContext.mTypeMap insertType
