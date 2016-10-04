@@ -168,20 +168,34 @@ override method @staticArrayAST enterInContext
         !propertyIndex
       ]
     case function (@mode mode @procFormalArgumentList formalArgs @lstring returnTypeName) :
-      @lstring routineMangledName = .new {!plmTypeName.string + "." + propertyName !plmTypeName.location}
-      routineMangledName.string += "("
+#      @lstring routineMangledName = .new {!plmTypeName.string + "." + propertyName !plmTypeName.location}
+      var routineMangledName = "func." + mode + "("
       @procedureSignature signature = {}
       for (formalArgumentPassingMode selector formalArgumentTypeName *) in formalArgs do
         let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
         signature += !formalArgumentPassingMode !selector.string !typeProxy
-        routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+        routineMangledName += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+                           + [[typeProxy kind] llvmTypeName]
       end
-      routineMangledName.string += ")"
+      routineMangledName += ")" + returnTypeName.string
       let @unifiedTypeMap-proxy returnTypeProxy = if returnTypeName.string == "" then
         .null
       else
         .searchKey {!ioContext.mTypeMap !returnTypeName}
       end
+      let lRoutineMangledName = @lstring.new {!routineMangledName !propertyName.location}
+      if not [ioContext.mTypeMap hasKey !lRoutineMangledName] then
+        [!?ioContext.mTypeMap insertType
+          !lkey:lRoutineMangledName
+          !kind:.function{!mode:mode !signature:signature !returnTypeProxy:returnTypeProxy}
+          !classConstantMap:{}
+          !instantiable:false
+          !copyable:false
+          !equatable:false
+          !comparable:false
+        ]
+      end
+      propertyList += !propertyName !.searchKey {!ioContext.mTypeMap !lRoutineMangledName}
       staticArrayPropertyList += !propertyName !.function{!mode:mode !signature:signature !returnType:returnTypeProxy}
     end
   end
