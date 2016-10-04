@@ -4,7 +4,7 @@
 
 enum @extendStaticArrayExpressionAST {
   case expression (@expressionAST exp)
-  case function (@lstring functionName @procFormalArgumentList formalArgs @lstring returnTypeName)
+  case function (@lstring functionName @procFormalArgumentList formalArgs)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -55,15 +55,8 @@ syntax extension plm_syntax {
         $func$
         $identifier$ ?let functionName
         <procedure_formal_arguments> ?formalArguments:let formalArgs
-        @lstring returnTypeName
-        select
-          returnTypeName = ["" here]
-        or
-          $->$
-          $\$type$ ?returnTypeName
-        end
         expressions +=
-          !.function {!functionName:functionName !formalArgs:formalArgs !returnTypeName:returnTypeName}
+          !.function {!functionName:functionName !formalArgs:formalArgs}
           !.here
       end
     while
@@ -104,13 +97,9 @@ override method @extendStaticArrayDeclarationAST enterInPrecedenceGraph ?!@seman
     switch operand
     case expression (@expressionAST exp) :
       [exp addDependenceEdgeForStaticExpression !nodeName !?ioGraph]
-    case function (* @procFormalArgumentList formalArgs @lstring returnTypeName) :
+    case function (* @procFormalArgumentList formalArgs) :
       for (* * formalArgumentTypeName *) in formalArgs do
         let typeName = llvmRegularTypeMangledNameFromName (!formalArgumentTypeName)
-        [!?ioGraph noteNode !typeName]
-      end
-      if returnTypeName.string != "" then
-        let typeName = llvmRegularTypeMangledNameFromName (!returnTypeName)
         [!?ioGraph noteNode !typeName]
       end
     end
@@ -182,7 +171,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
         #--- Enter in static value
           staticValue += [[type kind] llvmTypeName] + " " + [expressionResult llvmName]
         end      
-      case function (@lstring functionName @procFormalArgumentList formalArgs @lstring returnTypeName) :
+      case function (@lstring functionName @procFormalArgumentList formalArgs) :
         if not [[type kind] isFunction] then
           error endOfExp : "a static expression is expected here"
         else
@@ -197,7 +186,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           @procedureSignature signature = {}
           for (formalArgumentPassingMode selector formalArgumentTypeName *) in formalArgs do
             let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-            signature += !formalArgumentPassingMode !selector.string !typeProxy
+            signature += !formalArgumentPassingMode !selector !typeProxy
             routineMangledName += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
           end
           routineMangledName += ")"
@@ -206,18 +195,45 @@ override method @extendStaticArrayDeclarationAST enterInContext
             !lRoutineMangledName
             ?let @lstring candidateRoutineLLVMName
             ?let @bool candidateIsPublic
-            ?let @bool candidateIsGlobal
+            ?let @bool unused candidateIsGlobal
             ?let @mode candidateMode
             ?let @procedureSignature candidateSignature
             ?let @routineKind candidateRoutineKind
             ?let @bool unused candidateWeak
             ?let @unifiedTypeMap-proxy candidateReturnType
-            ?let @bool candidateAppendFileAndLineArgumentForPanicLocation
-            ?let @bool candidateCanAccessProperties
-            ?let @bool candidateCanMutateProperties
+            ?let @bool unused candidateAppendFileAndLineArgumentForPanicLocation
+            ?let @bool unused candidateCanAccessProperties
+            ?let @bool unused candidateCanMutateProperties
           ]
+        #--- Check accessibility
+          if not candidateIsPublic then
+            let declarationFile = [[ioContext.mRoutineMapForContext locationForKey !routineMangledName] file]
+            let invocationFile = [functionName.location file]
+            if invocationFile != declarationFile then
+              error functionName : "this function is not public"
+            end
+          end
+          if not [candidateRoutineKind isFunction] then
+            error functionName : "this routine is not a function"
+          end
           if requiredMode != candidateMode then
             error functionName : "this function runs in " + candidateMode + " mode, but " + requiredMode + " is required"
+          end
+          if (requiredReturnTypeProxy == .null) && (candidateReturnType != .null) then
+            error functionName : "this function should return an $" + [candidateReturnType key] + " object"
+          elsif (requiredReturnTypeProxy != .null) && (candidateReturnType == .null) then
+            error functionName : "this function should return no object"
+          end
+          if [requiredSignature length] != [candidateSignature length] then
+            error functionName
+            : "this function has " + [candidateSignature length] + " argument(s) ("
+            + [requiredSignature length] + " required)"
+          else
+            for required in requiredSignature, candidate in candidateSignature do
+              if required.mType != candidate.mType then
+                error candidate.mSelector : "argument type should be $" + [required.mType key]
+              end
+            end
           end
           staticValue += [[type kind] llvmTypeName] + " @" + llvmNameForFunction (!candidateRoutineLLVMName)
         end
@@ -255,13 +271,13 @@ map @staticArrayMap {
 override method @extendStaticArrayDeclarationAST semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   @stringset invokedFunctionSet = {}
   for (operand endOfExp) in mExpressions do
     switch operand
     case expression (@expressionAST unused exp) :
-    case function (@lstring functionName @procFormalArgumentList formalArgs *) :
+    case function (@lstring functionName @procFormalArgumentList formalArgs) :
       var routineMangledName = functionName.string
       routineMangledName += "("
       for (formalArgumentPassingMode selector formalArgumentTypeName *) in formalArgs do
@@ -272,16 +288,22 @@ override method @extendStaticArrayDeclarationAST semanticAnalysis
     end
   end
   [!?ioTemporaries.mStaticArrayMap insertKey !mStaticlistName !invokedFunctionSet]
+  [!?ioIntermediateCodeStruct.mStaticArrayMap insertKey !mStaticlistName !invokedFunctionSet]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @staticlistValues_listMap generateLLVM ?!@string ioLLVMcode {
-  if [self count] > 0 then
-    ioLLVMcode += llvmTitleComment (!"Static Lists")
-    for (key initList) in self do
+method @staticlistValues_listMap generateLLVM ?let @staticArrayMap inUsefulStaticArrayMap ?!@string ioLLVMcode {
+#  log inUsefulStaticArrayMap
+  var first = true
+  for (key initList) in self do
+    if [inUsefulStaticArrayMap hasKey !key] then
+      if first then
+        first = false
+        ioLLVMcode += llvmTitleComment (!"Static Arraies")
+      end
       ioLLVMcode += "@" + llvmNameForGlobalVariable (!key) + " = private unnamed_addr constant ["
       ioLLVMcode += [[initList length] string] + " x %$" + llvmNameForStaticListElementType (![key nowhere]) + "] [\n"
       for (value) in initList
@@ -293,14 +315,6 @@ method @staticlistValues_listMap generateLLVM ?!@string ioLLVMcode {
       ioLLVMcode += "\n]\n\n"
     end
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ACCESSIBILITY                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @staticlistValues_listMap  enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities {
-
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

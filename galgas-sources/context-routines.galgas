@@ -40,7 +40,7 @@ map @guardMapForContext {
 
 list @procedureSignature {
   @procFormalArgumentPassingMode mFormalArgumentPassingMode
-  @string mSelector
+  @lstring mSelector
   @unifiedTypeMap-proxy mType
 }
 

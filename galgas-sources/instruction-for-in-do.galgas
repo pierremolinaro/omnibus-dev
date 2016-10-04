@@ -197,12 +197,13 @@ override method @forInstructionAST analyze
   elsif [iteratedTypeKind isArrayType] then
     [iteratedTypeKind arrayType ?typeName:* ?elementType:let elementType ?size:let size]
     @stringset invokedFunctionSet = {}
+#    log "AZERTY: " : ioTemporaries.mStaticArrayMap
     if [ioTemporaries.mStaticArrayMap hasKey !mIteratedObject] then
       [ioTemporaries.mStaticArrayMap searchKey !mIteratedObject ?invokedFunctionSet]
     end
     ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
       !enumeratedVarLLVMName
-      !mIteratedObject.location
+      !mIteratedObject
       !iteratedObjectPointer
       !whileExpression_GenerationList
       !whileExpressionResult
@@ -220,7 +221,7 @@ override method @forInstructionAST analyze
 
 class @forInstructionOnArrayIR : @abstractInstructionIR {
   @string mEnumeratedValueName
-  @location mLocation
+  @lstring mIteratedObjectName
   @objectIR mIteratedObject
   @instructionListIR mWhileInstructionList
   @objectIR mWhileExpressionResult
@@ -269,18 +270,19 @@ override method @forInstructionOnArrayIR llvmInstructionCode
 {
   let elementTypeLLVMName = [[mElementType kind] llvmTypeName]
   let listTypeLLVMName = "[" + mArraySize + " x " + elementTypeLLVMName + "]"
-
-  let startLabel = "for.label.start." + [mLocation locationIndex]
-  let testLabel = "for.label.test." + [mLocation locationIndex]
-  let whileLabel = "for.label.while." + [mLocation locationIndex]
-  let nextLabel = "for.label.next." + [mLocation locationIndex]
-  let loopVar = "for.loop." + [mLocation locationIndex]
-  let loopLabel = "for.label.loop." + [mLocation locationIndex]
-  let endLabel  = "for.label.end." + [mLocation locationIndex]
+  let locationIndex = [[mIteratedObjectName.location locationIndex] string]
+  
+  let startLabel = "for.label.start." + locationIndex
+  let testLabel = "for.label.test." + locationIndex
+  let whileLabel = "for.label.while." + locationIndex
+  let nextLabel = "for.label.next." + locationIndex
+  let loopVar = "for.loop." + locationIndex
+  let loopLabel = "for.label.loop." + locationIndex
+  let endLabel  = "for.label.end." + locationIndex
  
-  let indexVar  = "for.index." + [mLocation locationIndex]
-  let ptrVar  = "for.ptr." + [mLocation locationIndex]
-  let currentValue = "for.currentValue." + [mLocation locationIndex]
+  let indexVar  = "for.index." + locationIndex
+  let ptrVar  = "for.ptr." + locationIndex
+  let currentValue = "for.currentValue." + locationIndex
  
 #--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
@@ -288,8 +290,6 @@ override method @forInstructionOnArrayIR llvmInstructionCode
 #--------- Loop entry
   ioLLVMcode += startLabel + ":\n"
 #--- Init pointer
-#  ioLLVMcode += "  store " + listTypeLLVMName + " " + [mExpressionResult llvmName]
-#  ioLLVMcode += ", " + listTypeLLVMName + "* %" + llvmNameForLocalVariable (!mVarStaticListInMemory) + "\n"
   ioLLVMcode += "  %" + ptrVar + ".start = getelementptr inbounds " + listTypeLLVMName
   ioLLVMcode += ", " + listTypeLLVMName + "* " + [mIteratedObject llvmName]
   ioLLVMcode += ", i32 0, i32 0\n"
@@ -346,6 +346,7 @@ override method @forInstructionOnArrayIR enterAccessibleEntities
   [mWhileInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
   [mDoInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
   ioAccessibleEntities.mRoutineSet += mInvokedFunctionSet
+  ioAccessibleEntities.mGlobalVariableSet += !mIteratedObjectName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
