@@ -184,7 +184,7 @@ map @controlRegisterMap {
 
 method @controlRegisterDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (registerNameList registerTypeName * *) in self do
-    let typeName = @lstring.new {!"$" + registerTypeName !registerTypeName.location}
+    let typeName = llvmRegularTypeMangledNameFromName (!registerTypeName)
     [!?ioGraph noteNode !typeName]
   end
 }
@@ -225,6 +225,8 @@ method @controlRegisterDeclarationListAST-element controlRegisterType
   case opaque (*) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   case arrayType (* *) :
+    error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
+  case function (* * *) :
     error mRegisterTypeName : "a register should be an $intXX or an $uintXX" : outRegisterBitCount
   end
 }

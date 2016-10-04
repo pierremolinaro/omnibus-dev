@@ -30,9 +30,9 @@ override method @literalStringDeclaration addExtension
 override method @literalStringDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let literalStringTypeName = @lstring.new {!"$" + mLiteralStringTypeName !mLiteralStringTypeName.location}
+  let literalStringTypeName = llvmRegularTypeMangledNameFromName (!mLiteralStringTypeName)
   [!?ioGraph addNode !literalStringTypeName !self]
-  [!?ioGraph addEdge !literalStringTypeName !["$uint8" nowhere]]
+  [!?ioGraph addEdge !literalStringTypeName !llvmRegularTypeMangledNameFromName (!["uint8" nowhere])]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

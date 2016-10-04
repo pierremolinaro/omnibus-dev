@@ -143,13 +143,13 @@ override method @structureDeclaration addExtension
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let structureTypeName = @lstring.new {!"$" + mStructureName !mStructureName.location}
+  let structureTypeName = llvmRegularTypeMangledNameFromName (!mStructureName)
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
 #--- add field types
   for (* * fieldTypeName initExpression) in mStructureFieldListAST do
     if fieldTypeName.string != "" then
-      let typeName = @lstring.new {!"$" + fieldTypeName !fieldTypeName.location}
+      let typeName = llvmRegularTypeMangledNameFromName (!fieldTypeName)
       [!?ioGraph addEdge !structureTypeName !typeName]
     end
     switch initExpression
@@ -161,7 +161,7 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
 #--- Add structure procedures
   for () in mFunctionDeclarationListAST do
     for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
-      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      let typeName = llvmRegularTypeMangledNameFromName (!formalArgumentTypeName)
       [!?ioGraph noteNode !typeName]
     end
     [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
@@ -334,11 +334,11 @@ override method @structureDeclaration enterRoutinesInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
   [mFunctionDeclarationListAST enterFunctionInContext
-    !selfTypeName:"$" + mStructureName.string
+    !selfTypeName:llvmRegularTypeMangledNameFromName (!mStructureName).string
     !?context:ioContext
   ]
-  [mSVCListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
-  [mGuardListAST enterInContext !receiverType:"$" + mStructureName.string !?context:ioContext]
+  [mSVCListAST enterInContext !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string !?context:ioContext]
+  [mGuardListAST enterInContext !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string !?context:ioContext]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

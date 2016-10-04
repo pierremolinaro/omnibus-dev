@@ -44,7 +44,7 @@ override method @callInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
     case input (*):
     case inputWithType (* @lstring typeName *) :
       if typeName.string != "" then
-        [!?ioGraph noteNode !.new {!"$" + typeName !typeName.location}]
+        [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
       end
     case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case outputInput (*) :

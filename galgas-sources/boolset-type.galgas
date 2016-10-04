@@ -58,7 +58,7 @@ syntax extension plm_syntax {
 override method @boolsetDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let boolsetTypeName = @lstring.new {!"$" + mBoolsetName !mBoolsetName.location}
+  let boolsetTypeName = regularTypeNameFromName (!mBoolsetName)
   [!?ioGraph addNode !boolsetTypeName !self]
 }
 

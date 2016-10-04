@@ -21,11 +21,15 @@ init 100 {
 //-----------------------------------------------------------------------------*
 
 let LED_L1 = $digitalPort.D4
+let LED_L2 = $digitalPort.D5
+let LED_L3 = $digitalPort.D6
 
 //-----------------------------------------------------------------------------*
 
 init 1000 {
   pinMode (!port:LED_L1 !mode:.OUTPUT)
+  pinMode (!port:LED_L2 !mode:.OUTPUT)
+  pinMode (!port:LED_L3 !mode:.OUTPUT)
 }
 
 //-----------------------------------------------------------------------------*
@@ -33,11 +37,20 @@ init 1000 {
 staticArray maListeStatique {
   let a $uint32
   let b $uint32
+//  let f func user ()
 }
 
-extend staticArray maListeStatique (5, 9)
+func user toggleL2 @noUnusedWarning () {
+  toggle (!port:LED_L2)
+}
 
-extend staticArray maListeStatique (15, 29)
+func user toggleL3 @noUnusedWarning () {
+  toggle (!port:LED_L3)
+}
+
+extend staticArray maListeStatique (5, 9) // , func toggleL2)
+
+extend staticArray maListeStatique (15, 29) // , func toggleL3)
 
 //-----------------------------------------------------------------------------*
 

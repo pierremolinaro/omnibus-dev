@@ -70,7 +70,7 @@ override method @globalConstantDeclaration enterInPrecedenceGraph ?!@semanticTyp
   [!?ioGraph addNode !mConstantName !self]
 #--- Add dependency from constant type name
   if mConstantTypeName.string != "" then
-    let typeName = @lstring.new {!"$" + mConstantTypeName !mConstantTypeName.location}
+    let typeName = llvmRegularTypeMangledNameFromName (!mConstantTypeName)
     [!?ioGraph addEdge !mConstantName !typeName]
   end
 #--- Add dependency from source expression

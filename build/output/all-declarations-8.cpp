@@ -10,6 +10,689 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          Routine 'routineSemanticAnalysis'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_routineSemanticAnalysis (const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inSelfType,
+                                      const GALGAS_routineKind constinArgument_inRoutineKind,
+                                      const GALGAS_mode constinArgument_inRoutineMode,
+                                      const GALGAS_lstring constinArgument_inRoutineName,
+                                      const GALGAS_procFormalArgumentList constinArgument_inRoutineFormalArgumentList,
+                                      const GALGAS_lstring constinArgument_inReturnTypeName,
+                                      const GALGAS_instructionListAST constinArgument_inRoutineInstructionList,
+                                      const GALGAS_location constinArgument_inEndOfRoutineDeclaration,
+                                      const GALGAS_bool constinArgument_inDirectAccessToPropertiesAllowed,
+                                      const GALGAS_bool constinArgument_inRoutineCanMutateProperties,
+                                      const GALGAS_bool constinArgument_inWarnIfUnused,
+                                      const GALGAS_bool constinArgument_inGlobalFunction,
+                                      const GALGAS_bool constinArgument_inWeakFunction,
+                                      const GALGAS_semanticContext constinArgument_inContext,
+                                      GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                      GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
+                                      C_Compiler * inCompiler
+                                      COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring temp_0 ;
+  const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-routines.galgas", 82)))).boolEnum () ;
+  if (kBoolTrue == test_1) {
+    temp_0 = constinArgument_inRoutineName ;
+  }else if (kBoolFalse == test_1) {
+    temp_0 = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (constinArgument_inSelfType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 85)).add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 85)).add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("semantic-routines.galgas", 85)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 85)), constinArgument_inRoutineName.mAttribute_location  COMMA_SOURCE_FILE ("semantic-routines.galgas", 85)) ;
+  }
+  GALGAS_lstring var_routineMangledName_3507 = temp_0 ;
+  var_routineMangledName_3507.mAttribute_string.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 87)) ;
+  cEnumerator_procFormalArgumentList enumerator_3770 (constinArgument_inRoutineFormalArgumentList, kEnumeration_up) ;
+  while (enumerator_3770.hasCurrentObject ()) {
+    var_routineMangledName_3507.mAttribute_string.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_3770.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 89)).add_operation (enumerator_3770.current_mSelector (HERE).getter_string (SOURCE_FILE ("semantic-routines.galgas", 89)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 89)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 89)), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 89)) ;
+    enumerator_3770.gotoNextObject () ;
+  }
+  var_routineMangledName_3507.mAttribute_string.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 91)) ;
+  GALGAS_variableMap var_variableMap_4185 ;
+  {
+  routine_initialVariableMap (constinArgument_inContext, constinArgument_inRoutineMode, GALGAS_bool (false), constinArgument_inReturnTypeName, var_variableMap_4185, inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 93)) ;
+  }
+  GALGAS_procFormalArgumentListForGeneration var_formalArguments_4274 = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 103)) ;
+  {
+  routine_enterFormalArguments (constinArgument_inContext, constinArgument_inRoutineFormalArgumentList, var_variableMap_4185, var_formalArguments_4274, inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 104)) ;
+  }
+  const enumGalgasBool test_2 = ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineMangledName_3507.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 111)).operator_not (SOURCE_FILE ("semantic-routines.galgas", 111)).boolEnum () ;
+  if (kBoolTrue == test_2) {
+    {
+    ioArgument_ioTemporaries.mAttribute_mSubprogramInvocationGraph.setter_addNode (var_routineMangledName_3507, var_routineMangledName_3507, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 112)) ;
+    }
+  }
+  GALGAS_allocaList var_allocaList_4716 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 118)) ;
+  GALGAS_instructionListIR var_instructionGenerationList_4768 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 119)) ;
+  extensionMethod_analyzeRoutineInstructionList (constinArgument_inRoutineInstructionList, constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inRoutineCanMutateProperties, var_routineMangledName_3507, constinArgument_inContext, constinArgument_inRoutineMode, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mAttribute_mStaticStringMap, var_variableMap_4185, var_allocaList_4716, var_instructionGenerationList_4768, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 120)) ;
+  var_variableMap_4185.method_checkAutomatonStates (constinArgument_inEndOfRoutineDeclaration, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 135)) ;
+  GALGAS_unifiedTypeMap_2D_proxy temp_3 ;
+  const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, constinArgument_inReturnTypeName.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  if (kBoolTrue == test_4) {
+    temp_3 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("semantic-routines.galgas", 139)) ;
+  }else if (kBoolFalse == test_4) {
+    temp_3 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mAttribute_mTypeMap, constinArgument_inReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 141)) ;
+  }
+  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5463 = temp_3 ;
+  const enumGalgasBool test_5 = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_hasKey (var_routineMangledName_3507.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 143)).boolEnum () ;
+  if (kBoolTrue == test_5) {
+    GALGAS_bool var_weak_5721 = ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.getter_mWeakForKey (var_routineMangledName_3507.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 144)) ;
+    GALGAS_bool test_6 = constinArgument_inWeakFunction ;
+    if (kBoolTrue == test_6.boolEnum ()) {
+      test_6 = var_weak_5721.operator_not (SOURCE_FILE ("semantic-routines.galgas", 145)) ;
+    }
+    const enumGalgasBool test_7 = test_6.boolEnum () ;
+    if (kBoolTrue == test_7) {
+    }else if (kBoolFalse == test_7) {
+      GALGAS_bool test_8 = constinArgument_inWeakFunction ;
+      if (kBoolTrue == test_8.boolEnum ()) {
+        test_8 = var_weak_5721 ;
+      }
+      const enumGalgasBool test_9 = test_8.boolEnum () ;
+      if (kBoolTrue == test_9) {
+        TC_Array <C_FixItDescription> fixItArray10 ;
+        inCompiler->emitSemanticError (var_routineMangledName_3507.getter_location (SOURCE_FILE ("semantic-routines.galgas", 148)), GALGAS_string ("this weak procedure overrides a weak procedure"), fixItArray10  COMMA_SOURCE_FILE ("semantic-routines.galgas", 148)) ;
+      }else if (kBoolFalse == test_9) {
+        GALGAS_bool test_11 = constinArgument_inWeakFunction.operator_not (SOURCE_FILE ("semantic-routines.galgas", 149)) ;
+        if (kBoolTrue == test_11.boolEnum ()) {
+          test_11 = var_weak_5721 ;
+        }
+        const enumGalgasBool test_12 = test_11.boolEnum () ;
+        if (kBoolTrue == test_12) {
+          {
+          GALGAS_unifiedTypeMap_2D_proxy joker_6130_12 ; // Joker input parameter
+          GALGAS_lstring joker_6130_11 ; // Joker input parameter
+          GALGAS_procFormalArgumentListForGeneration joker_6130_10 ; // Joker input parameter
+          GALGAS_allocaList joker_6130_9 ; // Joker input parameter
+          GALGAS_instructionListIR joker_6130_8 ; // Joker input parameter
+          GALGAS_bool joker_6130_7 ; // Joker input parameter
+          GALGAS_bool joker_6130_6 ; // Joker input parameter
+          GALGAS_bool joker_6130_5 ; // Joker input parameter
+          GALGAS_bool joker_6130_4 ; // Joker input parameter
+          GALGAS_routineKind joker_6130_3 ; // Joker input parameter
+          GALGAS_unifiedTypeMap_2D_proxy joker_6130_2 ; // Joker input parameter
+          GALGAS_bool joker_6130_1 ; // Joker input parameter
+          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_removeKey (var_routineMangledName_3507, joker_6130_12, joker_6130_11, joker_6130_10, joker_6130_9, joker_6130_8, joker_6130_7, joker_6130_6, joker_6130_5, joker_6130_4, joker_6130_3, joker_6130_2, joker_6130_1, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 150)) ;
+          }
+          {
+          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_routineMangledName_3507, constinArgument_inSelfType, var_routineMangledName_3507, var_formalArguments_4274, var_allocaList_4716, var_instructionGenerationList_4768, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (var_routineMangledName_3507.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 158)), constinArgument_inWarnIfUnused, constinArgument_inWeakFunction, constinArgument_inGlobalFunction, constinArgument_inRoutineKind, var_returnType_5463, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 151)) ;
+          }
+        }else if (kBoolFalse == test_12) {
+          {
+          ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_routineMangledName_3507, constinArgument_inSelfType, var_routineMangledName_3507, var_formalArguments_4274, var_allocaList_4716, var_instructionGenerationList_4768, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (var_routineMangledName_3507.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 174)), constinArgument_inWarnIfUnused, constinArgument_inWeakFunction, constinArgument_inGlobalFunction, constinArgument_inRoutineKind, var_returnType_5463, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 167)) ;
+          }
+        }
+      }
+    }
+  }else if (kBoolFalse == test_5) {
+    {
+    ioArgument_ioIntermediateCodeStruct.mAttribute_mRoutineMapIR.setter_insertKey (var_routineMangledName_3507, constinArgument_inSelfType, var_routineMangledName_3507, var_formalArguments_4274, var_allocaList_4716, var_instructionGenerationList_4768, ioArgument_ioIntermediateCodeStruct.mAttribute_mRequiredProcedureSet.getter_hasKey (var_routineMangledName_3507.mAttribute_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 191)), constinArgument_inWarnIfUnused, constinArgument_inWeakFunction, constinArgument_inGlobalFunction, constinArgument_inRoutineKind, var_returnType_5463, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 184)) ;
+    }
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                Once function 'panicCodeForUnsignedAdditionOverflow'                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForUnsignedAdditionOverflow (C_Compiler * inCompiler
+                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 3)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForUnsignedAdditionOverflow = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForUnsignedAdditionOverflow ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForUnsignedAdditionOverflow (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForUnsignedAdditionOverflow) {
+    gOnceFunctionResult_panicCodeForUnsignedAdditionOverflow = onceFunction_panicCodeForUnsignedAdditionOverflow (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForUnsignedAdditionOverflow = true ;
+  }
+  return gOnceFunctionResult_panicCodeForUnsignedAdditionOverflow ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForUnsignedAdditionOverflow (void) {
+  gOnceFunctionResult_panicCodeForUnsignedAdditionOverflow.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedAdditionOverflow (NULL,
+                                                                                  releaseOnceFunctionResult_panicCodeForUnsignedAdditionOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedAdditionOverflow [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedAdditionOverflow (C_Compiler * inCompiler,
+                                                                                     const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                     const GALGAS_location & /* inErrorLocation */
+                                                                                     COMMA_LOCATION_ARGS) {
+  return function_panicCodeForUnsignedAdditionOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedAdditionOverflow ("panicCodeForUnsignedAdditionOverflow",
+                                                                                      functionWithGenericHeader_panicCodeForUnsignedAdditionOverflow,
+                                                                                      & kTypeDescriptor_GALGAS_bigint,
+                                                                                      0,
+                                                                                      functionArgs_panicCodeForUnsignedAdditionOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Once function 'panicCodeForSignedAdditionOverflow'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForSignedAdditionOverflow (C_Compiler * inCompiler
+                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("2", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 5)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForSignedAdditionOverflow = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForSignedAdditionOverflow ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForSignedAdditionOverflow (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForSignedAdditionOverflow) {
+    gOnceFunctionResult_panicCodeForSignedAdditionOverflow = onceFunction_panicCodeForSignedAdditionOverflow (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForSignedAdditionOverflow = true ;
+  }
+  return gOnceFunctionResult_panicCodeForSignedAdditionOverflow ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForSignedAdditionOverflow (void) {
+  gOnceFunctionResult_panicCodeForSignedAdditionOverflow.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedAdditionOverflow (NULL,
+                                                                                releaseOnceFunctionResult_panicCodeForSignedAdditionOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedAdditionOverflow [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForSignedAdditionOverflow (C_Compiler * inCompiler,
+                                                                                   const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                   const GALGAS_location & /* inErrorLocation */
+                                                                                   COMMA_LOCATION_ARGS) {
+  return function_panicCodeForSignedAdditionOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForSignedAdditionOverflow ("panicCodeForSignedAdditionOverflow",
+                                                                                    functionWithGenericHeader_panicCodeForSignedAdditionOverflow,
+                                                                                    & kTypeDescriptor_GALGAS_bigint,
+                                                                                    0,
+                                                                                    functionArgs_panicCodeForSignedAdditionOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                Once function 'panicCodeForUnsignedSubtractOverflow'                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForUnsignedSubtractOverflow (C_Compiler * inCompiler
+                                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("3", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 7)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForUnsignedSubtractOverflow = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForUnsignedSubtractOverflow ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForUnsignedSubtractOverflow (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForUnsignedSubtractOverflow) {
+    gOnceFunctionResult_panicCodeForUnsignedSubtractOverflow = onceFunction_panicCodeForUnsignedSubtractOverflow (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForUnsignedSubtractOverflow = true ;
+  }
+  return gOnceFunctionResult_panicCodeForUnsignedSubtractOverflow ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForUnsignedSubtractOverflow (void) {
+  gOnceFunctionResult_panicCodeForUnsignedSubtractOverflow.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedSubtractOverflow (NULL,
+                                                                                  releaseOnceFunctionResult_panicCodeForUnsignedSubtractOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedSubtractOverflow [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedSubtractOverflow (C_Compiler * inCompiler,
+                                                                                     const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                     const GALGAS_location & /* inErrorLocation */
+                                                                                     COMMA_LOCATION_ARGS) {
+  return function_panicCodeForUnsignedSubtractOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedSubtractOverflow ("panicCodeForUnsignedSubtractOverflow",
+                                                                                      functionWithGenericHeader_panicCodeForUnsignedSubtractOverflow,
+                                                                                      & kTypeDescriptor_GALGAS_bigint,
+                                                                                      0,
+                                                                                      functionArgs_panicCodeForUnsignedSubtractOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Once function 'panicCodeForSignedSubtractOverflow'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForSignedSubtractOverflow (C_Compiler * inCompiler
+                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("4", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 9)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForSignedSubtractOverflow = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForSignedSubtractOverflow ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForSignedSubtractOverflow (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForSignedSubtractOverflow) {
+    gOnceFunctionResult_panicCodeForSignedSubtractOverflow = onceFunction_panicCodeForSignedSubtractOverflow (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForSignedSubtractOverflow = true ;
+  }
+  return gOnceFunctionResult_panicCodeForSignedSubtractOverflow ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForSignedSubtractOverflow (void) {
+  gOnceFunctionResult_panicCodeForSignedSubtractOverflow.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedSubtractOverflow (NULL,
+                                                                                releaseOnceFunctionResult_panicCodeForSignedSubtractOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedSubtractOverflow [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForSignedSubtractOverflow (C_Compiler * inCompiler,
+                                                                                   const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                   const GALGAS_location & /* inErrorLocation */
+                                                                                   COMMA_LOCATION_ARGS) {
+  return function_panicCodeForSignedSubtractOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForSignedSubtractOverflow ("panicCodeForSignedSubtractOverflow",
+                                                                                    functionWithGenericHeader_panicCodeForSignedSubtractOverflow,
+                                                                                    & kTypeDescriptor_GALGAS_bigint,
+                                                                                    0,
+                                                                                    functionArgs_panicCodeForSignedSubtractOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Once function 'panicCodeForUnsignedMultiplicationOverflow'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForUnsignedMultiplicationOverflow (C_Compiler * inCompiler
+                                                                              COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("5", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 11)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForUnsignedMultiplicationOverflow = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForUnsignedMultiplicationOverflow (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForUnsignedMultiplicationOverflow) {
+    gOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow = onceFunction_panicCodeForUnsignedMultiplicationOverflow (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForUnsignedMultiplicationOverflow = true ;
+  }
+  return gOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow (void) {
+  gOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedMultiplicationOverflow (NULL,
+                                                                                        releaseOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedMultiplicationOverflow [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedMultiplicationOverflow (C_Compiler * inCompiler,
+                                                                                           const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                           const GALGAS_location & /* inErrorLocation */
+                                                                                           COMMA_LOCATION_ARGS) {
+  return function_panicCodeForUnsignedMultiplicationOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedMultiplicationOverflow ("panicCodeForUnsignedMultiplicationOverflow",
+                                                                                            functionWithGenericHeader_panicCodeForUnsignedMultiplicationOverflow,
+                                                                                            & kTypeDescriptor_GALGAS_bigint,
+                                                                                            0,
+                                                                                            functionArgs_panicCodeForUnsignedMultiplicationOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                              Once function 'panicCodeForSignedMultiplicationOverflow'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForSignedMultiplicationOverflow (C_Compiler * inCompiler
+                                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("6", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 13)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForSignedMultiplicationOverflow = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForSignedMultiplicationOverflow ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForSignedMultiplicationOverflow (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForSignedMultiplicationOverflow) {
+    gOnceFunctionResult_panicCodeForSignedMultiplicationOverflow = onceFunction_panicCodeForSignedMultiplicationOverflow (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForSignedMultiplicationOverflow = true ;
+  }
+  return gOnceFunctionResult_panicCodeForSignedMultiplicationOverflow ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForSignedMultiplicationOverflow (void) {
+  gOnceFunctionResult_panicCodeForSignedMultiplicationOverflow.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedMultiplicationOverflow (NULL,
+                                                                                      releaseOnceFunctionResult_panicCodeForSignedMultiplicationOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedMultiplicationOverflow [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForSignedMultiplicationOverflow (C_Compiler * inCompiler,
+                                                                                         const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                         const GALGAS_location & /* inErrorLocation */
+                                                                                         COMMA_LOCATION_ARGS) {
+  return function_panicCodeForSignedMultiplicationOverflow (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForSignedMultiplicationOverflow ("panicCodeForSignedMultiplicationOverflow",
+                                                                                          functionWithGenericHeader_panicCodeForSignedMultiplicationOverflow,
+                                                                                          & kTypeDescriptor_GALGAS_bigint,
+                                                                                          0,
+                                                                                          functionArgs_panicCodeForSignedMultiplicationOverflow) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Once function 'panicCodeForUnsignedDivisionByZero'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForUnsignedDivisionByZero (C_Compiler * inCompiler
+                                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("7", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 15)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForUnsignedDivisionByZero = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForUnsignedDivisionByZero ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForUnsignedDivisionByZero (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForUnsignedDivisionByZero) {
+    gOnceFunctionResult_panicCodeForUnsignedDivisionByZero = onceFunction_panicCodeForUnsignedDivisionByZero (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForUnsignedDivisionByZero = true ;
+  }
+  return gOnceFunctionResult_panicCodeForUnsignedDivisionByZero ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForUnsignedDivisionByZero (void) {
+  gOnceFunctionResult_panicCodeForUnsignedDivisionByZero.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedDivisionByZero (NULL,
+                                                                                releaseOnceFunctionResult_panicCodeForUnsignedDivisionByZero) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedDivisionByZero [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForUnsignedDivisionByZero (C_Compiler * inCompiler,
+                                                                                   const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                   const GALGAS_location & /* inErrorLocation */
+                                                                                   COMMA_LOCATION_ARGS) {
+  return function_panicCodeForUnsignedDivisionByZero (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForUnsignedDivisionByZero ("panicCodeForUnsignedDivisionByZero",
+                                                                                    functionWithGenericHeader_panicCodeForUnsignedDivisionByZero,
+                                                                                    & kTypeDescriptor_GALGAS_bigint,
+                                                                                    0,
+                                                                                    functionArgs_panicCodeForUnsignedDivisionByZero) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Once function 'panicCodeForSignedDivisionByZero'                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_bigint onceFunction_panicCodeForSignedDivisionByZero (C_Compiler * inCompiler
+                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_bigint result_outResult ; // Returned variable
+  result_outResult = GALGAS_bigint ("8", inCompiler  COMMA_SOURCE_FILE ("panic-codes.galgas", 17)) ;
+//---
+  return result_outResult ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function implementation                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static bool gOnceFunctionResultAvailable_panicCodeForSignedDivisionByZero = false ;
+static GALGAS_bigint gOnceFunctionResult_panicCodeForSignedDivisionByZero ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bigint function_panicCodeForSignedDivisionByZero (class C_Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  if (! gOnceFunctionResultAvailable_panicCodeForSignedDivisionByZero) {
+    gOnceFunctionResult_panicCodeForSignedDivisionByZero = onceFunction_panicCodeForSignedDivisionByZero (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_panicCodeForSignedDivisionByZero = true ;
+  }
+  return gOnceFunctionResult_panicCodeForSignedDivisionByZero ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void releaseOnceFunctionResult_panicCodeForSignedDivisionByZero (void) {
+  gOnceFunctionResult_panicCodeForSignedDivisionByZero.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedDivisionByZero (NULL,
+                                                                              releaseOnceFunctionResult_panicCodeForSignedDivisionByZero) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedDivisionByZero [1] = {
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_panicCodeForSignedDivisionByZero (C_Compiler * inCompiler,
+                                                                                 const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                 const GALGAS_location & /* inErrorLocation */
+                                                                                 COMMA_LOCATION_ARGS) {
+  return function_panicCodeForSignedDivisionByZero (inCompiler COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_panicCodeForSignedDivisionByZero ("panicCodeForSignedDivisionByZero",
+                                                                                  functionWithGenericHeader_panicCodeForSignedDivisionByZero,
+                                                                                  & kTypeDescriptor_GALGAS_bigint,
+                                                                                  0,
+                                                                                  functionArgs_panicCodeForSignedDivisionByZero) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                 Once function 'panicCodeForUnsignedRemainderByZero'                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -436,10 +1119,10 @@ C_galgas_function_descriptor functionDescriptor_panicCodeForTooLargeArrayIndex (
 
 static GALGAS_string onceFunction_llvmAttributeFunction (C_Compiler * /* inCompiler */
                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string (" nounwind ") ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string (" nounwind ") ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -506,10 +1189,10 @@ C_galgas_function_descriptor functionDescriptor_llvmAttributeFunction ("llvmAttr
 
 static GALGAS_string onceFunction_staticAttribute (C_Compiler * /* inCompiler */
                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("static") ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("static") ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -570,16 +1253,110 @@ C_galgas_function_descriptor functionDescriptor_staticAttribute ("staticAttribut
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                    Function 'llvmRegularTypeMangledNameFromName'                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring function_llvmRegularTypeMangledNameFromName (const GALGAS_lstring & constinArgument_inName,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring result_result ; // Returned variable
+  result_result = GALGAS_lstring::constructor_new (GALGAS_string ("$").add_operation (constinArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 18)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 18)), constinArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 18)) ;
+//---
+  return result_result ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_llvmRegularTypeMangledNameFromName [2] = {
+  & kTypeDescriptor_GALGAS_lstring,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_llvmRegularTypeMangledNameFromName (C_Compiler * inCompiler,
+                                                                                   const cObjectArray & inEffectiveParameterArray,
+                                                                                   const GALGAS_location & /* inErrorLocation */
+                                                                                   COMMA_LOCATION_ARGS) {
+  const GALGAS_lstring operand0 = GALGAS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                                 inCompiler
+                                                                 COMMA_THERE) ;
+  return function_llvmRegularTypeMangledNameFromName (operand0,
+                                                      inCompiler
+                                                      COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_llvmRegularTypeMangledNameFromName ("llvmRegularTypeMangledNameFromName",
+                                                                                    functionWithGenericHeader_llvmRegularTypeMangledNameFromName,
+                                                                                    & kTypeDescriptor_GALGAS_lstring,
+                                                                                    1,
+                                                                                    functionArgs_llvmRegularTypeMangledNameFromName) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Function 'moduleMangledNameFromModuleName'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring function_moduleMangledNameFromModuleName (const GALGAS_lstring & constinArgument_inModuleName,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring result_result ; // Returned variable
+  result_result = GALGAS_lstring::constructor_new (constinArgument_inModuleName.mAttribute_string.add_operation (GALGAS_string ("$"), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 24)), constinArgument_inModuleName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 24)) ;
+//---
+  return result_result ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_moduleMangledNameFromModuleName [2] = {
+  & kTypeDescriptor_GALGAS_lstring,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_moduleMangledNameFromModuleName (C_Compiler * inCompiler,
+                                                                                const cObjectArray & inEffectiveParameterArray,
+                                                                                const GALGAS_location & /* inErrorLocation */
+                                                                                COMMA_LOCATION_ARGS) {
+  const GALGAS_lstring operand0 = GALGAS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                                 inCompiler
+                                                                 COMMA_THERE) ;
+  return function_moduleMangledNameFromModuleName (operand0,
+                                                   inCompiler
+                                                   COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_moduleMangledNameFromModuleName ("moduleMangledNameFromModuleName",
+                                                                                 functionWithGenericHeader_moduleMangledNameFromModuleName,
+                                                                                 & kTypeDescriptor_GALGAS_lstring,
+                                                                                 1,
+                                                                                 functionArgs_moduleMangledNameFromModuleName) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Once function 'userModeName'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 static GALGAS_string onceFunction_userModeName (C_Compiler * /* inCompiler */
                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("user") ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("user") ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -649,13 +1426,13 @@ GALGAS_lstring function_initNameForInvocationGraph (const GALGAS_unifiedTypeMap_
                                                     C_Compiler * inCompiler
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
-  GALGAS_string var_s_1131 = GALGAS_string ("init") ;
-  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 27)))).boolEnum () ;
+  GALGAS_string var_s_1743 = GALGAS_string ("init") ;
+  const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inReceiverType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("generated-code-prefixes.galgas", 41)))).boolEnum () ;
   if (kBoolTrue == test_0) {
-    var_s_1131.plusAssign_operation(GALGAS_string (" $").add_operation (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 28)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 28)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 28)) ;
+    var_s_1743.plusAssign_operation(GALGAS_string (" $").add_operation (constinArgument_inReceiverType.getter_key (inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 42)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 42)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 42)) ;
   }
-  var_s_1131.plusAssign_operation(GALGAS_string (" ").add_operation (constinArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 30)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 30)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 30)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s_1131, constinArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 31)) ;
+  var_s_1743.plusAssign_operation(GALGAS_string (" ").add_operation (constinArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 44)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 44)), inCompiler  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 44)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s_1743, constinArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 45)) ;
 //---
   return result_outName ;
 }
@@ -708,8 +1485,8 @@ GALGAS_lstring function_panicNameForInvocationGraph (const GALGAS_string & const
                                                      C_Compiler * inCompiler
                                                      COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
-  GALGAS_string var_s_1524 = GALGAS_string ("panic ").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 37)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 37)).add_operation (constinArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 37)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 37)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s_1524, constinArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 38)) ;
+  GALGAS_string var_s_2136 = GALGAS_string ("panic ").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 51)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 51)).add_operation (constinArgument_inPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 51)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 51)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s_2136, constinArgument_inPriority.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 52)) ;
 //---
   return result_outName ;
 }
@@ -761,7 +1538,7 @@ GALGAS_string function_literalStringName (const GALGAS_uint & constinArgument_in
                                           C_Compiler * inCompiler
                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("@string.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 46)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 46)) ;
+  result_outName = GALGAS_string ("@string.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 60)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 60)) ;
 //---
   return result_outName ;
 }
@@ -808,7 +1585,7 @@ GALGAS_string function_literalCharacterArrayName (const GALGAS_uint & constinArg
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("@str.array.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 52)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 52)) ;
+  result_outName = GALGAS_string ("@str.array.").add_operation (constinArgument_inIndex.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 66)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 66)) ;
 //---
   return result_outName ;
 }
@@ -1135,7 +1912,7 @@ GALGAS_string function_llvmNameForFunction (const GALGAS_string & constinArgumen
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("func.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 84)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 84)) ;
+  result_outName = GALGAS_string ("func.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 98)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 98)) ;
 //---
   return result_outName ;
 }
@@ -1182,8 +1959,8 @@ GALGAS_lstring function_interruptNameForInvocationGraph (const GALGAS_lstring & 
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
-  GALGAS_string var_s_3748 = GALGAS_string ("interrupt ").add_operation (constinArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 92)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 92)) ;
-  result_outName = GALGAS_lstring::constructor_new (var_s_3748, constinArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 93)) ;
+  GALGAS_string var_s_4360 = GALGAS_string ("interrupt ").add_operation (constinArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 106)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 106)) ;
+  result_outName = GALGAS_lstring::constructor_new (var_s_4360, constinArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 107)) ;
 //---
   return result_outName ;
 }
@@ -1230,7 +2007,7 @@ GALGAS_lstring function_llvmNameForServiceInterrupt (const GALGAS_lstring & cons
                                                      C_Compiler * inCompiler
                                                      COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
-  result_outName = GALGAS_lstring::constructor_new (GALGAS_string ("isr.service.").add_operation (constinArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 99)), constinArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 99)) ;
+  result_outName = GALGAS_lstring::constructor_new (GALGAS_string ("isr.service.").add_operation (constinArgument_inName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 113)), constinArgument_inName.mAttribute_location  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 113)) ;
 //---
   return result_outName ;
 }
@@ -1277,7 +2054,7 @@ GALGAS_string function_llvmNameForSectionOrSafeInterrupt (const GALGAS_string & 
                                                           C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("isr.section.or.safe.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 105)) ;
+  result_outName = GALGAS_string ("isr.section.or.safe.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 119)) ;
 //---
   return result_outName ;
 }
@@ -1330,28 +2107,28 @@ GALGAS_string function_llvmNameForSVCCall (const GALGAS_lstring & constinArgumen
     break ;
   case GALGAS_routineKind::kEnum_primitive:
     {
-      result_outName = function_llvmNameForPrimitiveCall (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 115)) ;
+      result_outName = function_llvmNameForPrimitiveCall (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 129)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_service:
     {
-      result_outName = function_llvmNameForServiceCall (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 117)) ;
+      result_outName = function_llvmNameForServiceCall (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 131)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_section:
     {
-      result_outName = function_llvmNameForSectionCall (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 119)) ;
+      result_outName = function_llvmNameForSectionCall (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 133)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_safe:
     {
-      result_outName = function_llvmNameForSafeCall (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 121)) ;
+      result_outName = function_llvmNameForSafeCall (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 135)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_function:
     {
       TC_Array <C_FixItDescription> fixItArray0 ;
-      inCompiler->emitSemanticError (constinArgument_inName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 123)), GALGAS_string ("INTERNAL ERROR"), fixItArray0  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 123)) ;
+      inCompiler->emitSemanticError (constinArgument_inName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 137)), GALGAS_string ("INTERNAL ERROR"), fixItArray0  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 137)) ;
       result_outName.drop () ; // Release error dropped variable
     }
     break ;
@@ -1413,28 +2190,28 @@ GALGAS_string function_llvmNameForSVCImplementation (const GALGAS_lstring & cons
     break ;
   case GALGAS_routineKind::kEnum_primitive:
     {
-      result_outName = function_llvmNameForPrimitiveImplementation (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 132)) ;
+      result_outName = function_llvmNameForPrimitiveImplementation (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 146)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_service:
     {
-      result_outName = function_llvmNameForServiceImplementation (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 134)) ;
+      result_outName = function_llvmNameForServiceImplementation (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 148)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_section:
     {
-      result_outName = function_llvmNameForSectionImplementation (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 136)) ;
+      result_outName = function_llvmNameForSectionImplementation (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 150)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_safe:
     {
-      result_outName = function_llvmNameForSafeImplementation (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 138)) ;
+      result_outName = function_llvmNameForSafeImplementation (constinArgument_inName.mAttribute_string, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 152)) ;
     }
     break ;
   case GALGAS_routineKind::kEnum_function:
     {
       TC_Array <C_FixItDescription> fixItArray0 ;
-      inCompiler->emitSemanticError (constinArgument_inName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 140)), GALGAS_string ("INTERNAL ERROR"), fixItArray0  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 140)) ;
+      inCompiler->emitSemanticError (constinArgument_inName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 154)), GALGAS_string ("INTERNAL ERROR"), fixItArray0  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 154)) ;
       result_outName.drop () ; // Release error dropped variable
     }
     break ;
@@ -1490,7 +2267,7 @@ GALGAS_string function_llvmNameForPrimitiveCall (const GALGAS_string & constinAr
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("primitive.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 149)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 149)) ;
+  result_outName = GALGAS_string ("primitive.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 163)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 163)) ;
 //---
   return result_outName ;
 }
@@ -1537,7 +2314,7 @@ GALGAS_string function_llvmNameForPrimitiveImplementation (const GALGAS_string &
                                                            C_Compiler * inCompiler
                                                            COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("primitive.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 155)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 155)) ;
+  result_outName = GALGAS_string ("primitive.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 169)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 169)) ;
 //---
   return result_outName ;
 }
@@ -1584,7 +2361,7 @@ GALGAS_string function_llvmNameForServiceCall (const GALGAS_string & constinArgu
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("service.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 163)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 163)) ;
+  result_outName = GALGAS_string ("service.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 177)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 177)) ;
 //---
   return result_outName ;
 }
@@ -1631,7 +2408,7 @@ GALGAS_string function_llvmNameForServiceImplementation (const GALGAS_string & c
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("service.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 169)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 169)) ;
+  result_outName = GALGAS_string ("service.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 183)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 183)) ;
 //---
   return result_outName ;
 }
@@ -1678,7 +2455,7 @@ GALGAS_string function_llvmNameForSectionCall (const GALGAS_string & constinArgu
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("section.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 177)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 177)) ;
+  result_outName = GALGAS_string ("section.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 191)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 191)) ;
 //---
   return result_outName ;
 }
@@ -1725,7 +2502,7 @@ GALGAS_string function_llvmNameForSectionImplementation (const GALGAS_string & c
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("section.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 183)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 183)) ;
+  result_outName = GALGAS_string ("section.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 197)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 197)) ;
 //---
   return result_outName ;
 }
@@ -1772,7 +2549,7 @@ GALGAS_string function_llvmNameForSafeCall (const GALGAS_string & constinArgumen
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("safe.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 191)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 191)) ;
+  result_outName = GALGAS_string ("safe.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 205)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 205)) ;
 //---
   return result_outName ;
 }
@@ -1819,7 +2596,7 @@ GALGAS_string function_llvmNameForSafeImplementation (const GALGAS_string & cons
                                                       C_Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("safe.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 197)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 197)) ;
+  result_outName = GALGAS_string ("safe.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 211)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 211)) ;
 //---
   return result_outName ;
 }
@@ -1936,7 +2713,7 @@ GALGAS_string function_llvmNameForGuardCall (const GALGAS_string & constinArgume
                                              C_Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("guard.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 211)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 211)) ;
+  result_outName = GALGAS_string ("guard.call.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 225)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 225)) ;
 //---
   return result_outName ;
 }
@@ -1983,7 +2760,7 @@ GALGAS_string function_llvmNameForGuardImplementation (const GALGAS_string & con
                                                        C_Compiler * inCompiler
                                                        COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("guard.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 217)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 217)) ;
+  result_outName = GALGAS_string ("guard.implementation.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 231)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 231)) ;
 //---
   return result_outName ;
 }
@@ -2100,7 +2877,7 @@ GALGAS_string function_llvmNameForLocalVariable (const GALGAS_string & constinAr
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("var.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 231)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 231)) ;
+  result_outName = GALGAS_string ("var.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 245)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 245)) ;
 //---
   return result_outName ;
 }
@@ -2147,7 +2924,7 @@ GALGAS_string function_llvmNameForGlobalVariable (const GALGAS_string & constinA
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("gvar.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 237)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 237)) ;
+  result_outName = GALGAS_string ("gvar.").add_operation (constinArgument_inName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 251)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 251)) ;
 //---
   return result_outName ;
 }
@@ -2192,10 +2969,10 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForGlobalVariable ("llvm
 
 static GALGAS_string onceFunction_mutatingAttribute (C_Compiler * /* inCompiler */
                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("mutating") ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("mutating") ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -2262,10 +3039,10 @@ C_galgas_function_descriptor functionDescriptor_mutatingAttribute ("mutatingAttr
 
 static GALGAS_string onceFunction_userAccessAttribute (C_Compiler * /* inCompiler */
                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("userAccess") ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("userAccess") ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -2332,10 +3109,10 @@ C_galgas_function_descriptor functionDescriptor_userAccessAttribute ("userAccess
 
 static GALGAS_string onceFunction_noUnusedWarningAttribute (C_Compiler * /* inCompiler */
                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("noUnusedWarning") ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("noUnusedWarning") ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -2402,10 +3179,10 @@ C_galgas_function_descriptor functionDescriptor_noUnusedWarningAttribute ("noUnu
 
 static GALGAS_string onceFunction_globalAttribute (C_Compiler * /* inCompiler */
                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("global") ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("global") ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -2472,10 +3249,10 @@ C_galgas_function_descriptor functionDescriptor_globalAttribute ("globalAttribut
 
 static GALGAS_string onceFunction_weakAttribute (C_Compiler * /* inCompiler */
                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("weak") ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("weak") ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -2543,10 +3320,10 @@ C_galgas_function_descriptor functionDescriptor_weakAttribute ("weakAttribute",
 GALGAS_string function_stackNameForTask (const GALGAS_string & constinArgument_inTaskName,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("@").add_operation (GALGAS_string ("task.stack.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 277)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 277)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 277)) ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("@").add_operation (GALGAS_string ("task.stack.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 291)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 291)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 291)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -2590,10 +3367,10 @@ C_galgas_function_descriptor functionDescriptor_stackNameForTask ("stackNameForT
 GALGAS_string function_initNameForTaskType (const GALGAS_string & constinArgument_inTaskTypeName,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("@").add_operation (GALGAS_string ("task.init.$").add_operation (constinArgument_inTaskTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 283)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 283)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 283)) ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("@").add_operation (GALGAS_string ("task.init.$").add_operation (constinArgument_inTaskTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 297)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 297)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 297)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -2637,10 +3414,10 @@ C_galgas_function_descriptor functionDescriptor_initNameForTaskType ("initNameFo
 GALGAS_string function_stackAddressForTask (const GALGAS_string & constinArgument_inTaskName,
                                             C_Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("%").add_operation (GALGAS_string ("task.stack.address.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 289)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 289)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 289)) ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("%").add_operation (GALGAS_string ("task.stack.address.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 303)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 303)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 303)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -2684,10 +3461,10 @@ C_galgas_function_descriptor functionDescriptor_stackAddressForTask ("stackAddre
 GALGAS_string function_mainRoutineNameForTask (const GALGAS_string & constinArgument_inTaskName,
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outResult ; // Returned variable
-  result_outResult = GALGAS_string ("@").add_operation (GALGAS_string ("task.main.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 295)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 295)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 295)) ;
+  GALGAS_string result_result ; // Returned variable
+  result_result = GALGAS_string ("@").add_operation (GALGAS_string ("task.main.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 309)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 309)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 309)) ;
 //---
-  return result_outResult ;
+  return result_result ;
 }
 
 
@@ -2732,7 +3509,7 @@ GALGAS_string function_llvmNameForTaskGlobalVar (const GALGAS_string & constinAr
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("task.globalvar.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 301)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 301)) ;
+  result_outName = GALGAS_string ("task.globalvar.").add_operation (constinArgument_inTaskName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 315)).getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 315)) ;
 //---
   return result_outName ;
 }
@@ -2919,7 +3696,7 @@ GALGAS_lstring function_plmNameForStaticListType (const GALGAS_lstring & constin
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
-  result_outName = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 320)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 320)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 320))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 320)) ;
+  result_outName = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 334)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 334)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 334))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 334)) ;
 //---
   return result_outName ;
 }
@@ -2966,7 +3743,7 @@ GALGAS_lstring function_plmNameForStaticListElementType (const GALGAS_lstring & 
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_outName ; // Returned variable
-  result_outName = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.element.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 326)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 326)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 326))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 326)) ;
+  result_outName = GALGAS_lstring::constructor_new (GALGAS_string ("staticlist.element.").add_operation (constinArgument_inStaticListName.getter_string (SOURCE_FILE ("generated-code-prefixes.galgas", 340)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 340)), constinArgument_inStaticListName.getter_location (SOURCE_FILE ("generated-code-prefixes.galgas", 340))  COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 340)) ;
 //---
   return result_outName ;
 }
@@ -3013,7 +3790,7 @@ GALGAS_string function_llvmNameForStaticListType (const GALGAS_string & constinA
                                                   C_Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("%static.list.type.").add_operation (constinArgument_inStaticListName.getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 332)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 332)) ;
+  result_outName = GALGAS_string ("%static.list.type.").add_operation (constinArgument_inStaticListName.getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 346)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 346)) ;
 //---
   return result_outName ;
 }
@@ -3060,7 +3837,7 @@ GALGAS_string function_llvmNameForStaticListElementType (const GALGAS_string & c
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string result_outName ; // Returned variable
-  result_outName = GALGAS_string ("%static.list.element.type.").add_operation (constinArgument_inStaticListName.getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 338)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 338)) ;
+  result_outName = GALGAS_string ("%static.list.element.type.").add_operation (constinArgument_inStaticListName.getter_assemblerRepresentation (SOURCE_FILE ("generated-code-prefixes.galgas", 352)), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 352)) ;
 //---
   return result_outName ;
 }
@@ -5438,10 +6215,14 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
         ioArgument_ioLLVMcode.plusAssign_operation(enumerator_21103.current_llvmTypeName (HERE).add_operation (GALGAS_string (" = type ["), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 486)).add_operation (extractedValue_arraySize.getter_string (SOURCE_FILE ("code-generation.galgas", 486)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 486)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 486)).add_operation (extractedValue_elementType.getter_llvmTypeName (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 486)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 486)).add_operation (GALGAS_string ("]\n"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 486)), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 486)) ;
       }
       break ;
+    case GALGAS_typeKind::kEnum_function:
+      {
+      }
+      break ;
     }
     enumerator_21103.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 489)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 490)) ;
 }
 
 

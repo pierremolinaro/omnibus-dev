@@ -200,7 +200,7 @@ syntax extension plm_syntax {
 method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
     for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
-      let typeName = @lstring.new {!"$" + formalArgumentTypeName !formalArgumentTypeName.location}
+      let typeName = llvmRegularTypeMangledNameFromName (!formalArgumentTypeName)
       [!?ioGraph noteNode !typeName]
     end
     [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]

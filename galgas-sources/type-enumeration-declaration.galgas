@@ -69,9 +69,9 @@ override method @enumerationDeclaration addExtension
 override method @enumerationDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let typeName = @lstring.new {!"$" + mEnumerationName !mEnumerationName.location}
+  let typeName = llvmRegularTypeMangledNameFromName (!mEnumerationName)
   [!?ioGraph addNode !typeName !self]
-  [!?ioGraph addEdge !typeName !["$" + boolTypeName () nowhere]]
+  [!?ioGraph addEdge !typeName !llvmRegularTypeMangledNameFromName (![boolTypeName () nowhere])]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

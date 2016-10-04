@@ -31,14 +31,14 @@ override method @booleanDeclaration addExtension
 override method @booleanDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let boolTypeName = @lstring.new {!"$" + mBooleanTypeName !mBooleanTypeName.location}
+  let boolTypeName = llvmRegularTypeMangledNameFromName (!mBooleanTypeName)
   [!?ioGraph addNode !boolTypeName !self]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @booleanDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "bool $" + mBooleanTypeName 
+  outRepresentation = "bool " + llvmRegularTypeMangledNameFromName (!mBooleanTypeName)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
