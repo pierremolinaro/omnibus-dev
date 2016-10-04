@@ -2306,10 +2306,10 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_typeKind & inObject,
     break ;
   case GALGAS_typeKind::kEnum_function:
     {
-      const cEnumAssociatedValues_typeKind_function * extractPtr_5606 = (const cEnumAssociatedValues_typeKind_function *) (temp_0.unsafePointer ()) ;
-      const GALGAS_mode extractedValue_mode = extractPtr_5606->mAssociatedValue0 ;
-      const GALGAS_procedureSignature extractedValue_signature = extractPtr_5606->mAssociatedValue1 ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_returnTypeProxy = extractPtr_5606->mAssociatedValue2 ;
+      const cEnumAssociatedValues_typeKind_function * extractPtr_5607 = (const cEnumAssociatedValues_typeKind_function *) (temp_0.unsafePointer ()) ;
+      const GALGAS_mode extractedValue_mode = extractPtr_5607->mAssociatedValue0 ;
+      const GALGAS_procedureSignature extractedValue_signature = extractPtr_5607->mAssociatedValue1 ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_returnTypeProxy = extractPtr_5607->mAssociatedValue2 ;
       const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, extractedValue_returnTypeProxy.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("context.galgas", 124)))).boolEnum () ;
       if (kBoolTrue == test_2) {
         result_result = GALGAS_string ("void") ;
@@ -2339,7 +2339,7 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_typeKind & inObject,
         }
         enumerator_5385.gotoNextObject () ;
       }
-      result_result.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context.galgas", 139)) ;
+      result_result.plusAssign_operation(GALGAS_string (")*"), inCompiler  COMMA_SOURCE_FILE ("context.galgas", 139)) ;
     }
     break ;
   }

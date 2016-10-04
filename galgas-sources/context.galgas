@@ -136,7 +136,7 @@ getter @typeKind llvmTypeName -> @string {
       end
     between result += ", "
     end
-    result += ")"
+    result += ")*"
   end
 }
 

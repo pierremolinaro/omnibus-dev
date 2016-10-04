@@ -817,7 +817,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "staticArray maListeStatique {\n"
   "  let a $uint32\n"
   "  let b $uint32\n"
-  "//  let f func user ()\n"
+  "  let f func user ()\n"
   "}\n"
   "\n"
   "func user toggleL2 @noUnusedWarning () {\n"
@@ -828,9 +828,9 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  toggle (!port:LED_L3)\n"
   "}\n"
   "\n"
-  "extend staticArray maListeStatique (5, 9) // , func toggleL2)\n"
+  "//extend staticArray maListeStatique (5, 9) // , func toggleL2)\n"
   "\n"
-  "extend staticArray maListeStatique (15, 29) // , func toggleL3)\n"
+  "//extend staticArray maListeStatique (15, 29) // , func toggleL3)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -841,10 +841,10 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "    self.deadline +%= 250\n"
   "    toggle (!port:LED_L1)\n"
   "    var total $uint32 = 0\n"
-  "    for \xC3""\xA9""l\xC3""\xA9""ment in maListeStatique {\n"
-  "      total += \xC3""\xA9""l\xC3""\xA9""ment.a\n"
-  "      total += \xC3""\xA9""l\xC3""\xA9""ment.b\n"
-  "    }\n"
+  "//    for \xC3""\xA9""l\xC3""\xA9""ment in maListeStatique {\n"
+  "//      total += \xC3""\xA9""l\xC3""\xA9""ment.a\n"
+  "//      total += \xC3""\xA9""l\xC3""\xA9""ment.b\n"
+  "//    }\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.printUnsigned (!total)\n"
   "  }\n"
@@ -856,7 +856,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-static-list-example.plm",
   "plm",
   true, // Text file
-  1858, // Text length
+  1868, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
