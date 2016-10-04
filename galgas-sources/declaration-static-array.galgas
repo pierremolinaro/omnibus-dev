@@ -193,7 +193,7 @@ override method @staticArrayAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:plmTypeName
     !llvmTypeName:llvmNameForStaticListElementType (!mStaticListName)
-    !kind:.structure {!propertyMap:staticlistPropertyMap !propertyList:propertyList}
+    !kind:.structure {!typeName:plmTypeName !propertyMap:staticlistPropertyMap !propertyList:propertyList}
     !classConstantMap:{}
     !instantiable:false
     !copyable:false

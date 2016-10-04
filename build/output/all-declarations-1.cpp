@@ -13657,10 +13657,10 @@ void extensionMethod_enterInContext (const GALGAS_taskList inObject,
       enumerator_6311.gotoNextObject () ;
     }
     {
-    ioArgument_ioContext.mAttribute_mTypeMap.setter_insertType (enumerator_6141.current (HERE).mAttribute_mTaskName, GALGAS_string ("%").add_operation (GALGAS_string ("$").add_operation (enumerator_6141.current (HERE).mAttribute_mTaskName.getter_string (SOURCE_FILE ("declaration-task.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 187)).getter_assemblerRepresentation (SOURCE_FILE ("declaration-task.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 187)), GALGAS_typeKind::constructor_structure (var_propertyMap_6231, var_propertyList_6197  COMMA_SOURCE_FILE ("declaration-task.galgas", 188)), GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 189)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_bool (false), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 185)) ;
+    ioArgument_ioContext.mAttribute_mTypeMap.setter_insertType (enumerator_6141.current (HERE).mAttribute_mTaskName, GALGAS_string ("%").add_operation (GALGAS_string ("$").add_operation (enumerator_6141.current (HERE).mAttribute_mTaskName.getter_string (SOURCE_FILE ("declaration-task.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 187)).getter_assemblerRepresentation (SOURCE_FILE ("declaration-task.galgas", 187)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 187)), GALGAS_typeKind::constructor_structure (enumerator_6141.current (HERE).mAttribute_mTaskName, var_propertyMap_6231, var_propertyList_6197  COMMA_SOURCE_FILE ("declaration-task.galgas", 188)), GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("declaration-task.galgas", 189)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_bool (false), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 185)) ;
     }
-    GALGAS_unifiedTypeMap_2D_proxy var_taskType_6979 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_6141.current (HERE).mAttribute_mTaskName, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 196)) ;
-    ioArgument_ioContext.mAttribute_mGlobalTaskVariableList.addAssign_operation (enumerator_6141.current (HERE).mAttribute_mTaskName.mAttribute_string, enumerator_6141.current (HERE).mAttribute_mTaskName.mAttribute_string, GALGAS_objectIR::constructor_llvmStructureConstant (var_taskType_6979, var_initialValueList_6272  COMMA_SOURCE_FILE ("declaration-task.galgas", 200))  COMMA_SOURCE_FILE ("declaration-task.galgas", 197)) ;
+    GALGAS_unifiedTypeMap_2D_proxy var_taskType_7004 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mAttribute_mTypeMap, enumerator_6141.current (HERE).mAttribute_mTaskName, inCompiler  COMMA_SOURCE_FILE ("declaration-task.galgas", 196)) ;
+    ioArgument_ioContext.mAttribute_mGlobalTaskVariableList.addAssign_operation (enumerator_6141.current (HERE).mAttribute_mTaskName.mAttribute_string, enumerator_6141.current (HERE).mAttribute_mTaskName.mAttribute_string, GALGAS_objectIR::constructor_llvmStructureConstant (var_taskType_7004, var_initialValueList_6272  COMMA_SOURCE_FILE ("declaration-task.galgas", 200))  COMMA_SOURCE_FILE ("declaration-task.galgas", 197)) ;
     extensionMethod_enterFunctionInContext (enumerator_6141.current (HERE).mAttribute_mTaskProcList, GALGAS_string ("$").add_operation (enumerator_6141.current (HERE).mAttribute_mTaskName.getter_string (SOURCE_FILE ("declaration-task.galgas", 202)), inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 202)), ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 202)) ;
     enumerator_6141.gotoNextObject () ;
   }
@@ -13679,19 +13679,19 @@ void extensionMethod_semanticAnalysis (const GALGAS_taskList inObject,
                                        GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                        C_Compiler * inCompiler
                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_stringset var_prioritySet_10501 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-task.galgas", 286)) ;
+  GALGAS_stringset var_prioritySet_10526 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-task.galgas", 286)) ;
   const GALGAS_taskList temp_0 = inObject ;
-  cEnumerator_taskList enumerator_10525 (temp_0, kEnumeration_up) ;
-  while (enumerator_10525.hasCurrentObject ()) {
-    extensionMethod_semanticAnalysis (enumerator_10525.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 288)) ;
-    GALGAS_string var_priorityString_10691 = enumerator_10525.current (HERE).mAttribute_mPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("declaration-task.galgas", 293)) ;
-    const enumGalgasBool test_1 = var_prioritySet_10501.getter_hasKey (var_priorityString_10691 COMMA_SOURCE_FILE ("declaration-task.galgas", 294)).boolEnum () ;
+  cEnumerator_taskList enumerator_10550 (temp_0, kEnumeration_up) ;
+  while (enumerator_10550.hasCurrentObject ()) {
+    extensionMethod_semanticAnalysis (enumerator_10550.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("declaration-task.galgas", 288)) ;
+    GALGAS_string var_priorityString_10716 = enumerator_10550.current (HERE).mAttribute_mPriority.mAttribute_bigint.getter_string (SOURCE_FILE ("declaration-task.galgas", 293)) ;
+    const enumGalgasBool test_1 = var_prioritySet_10526.getter_hasKey (var_priorityString_10716 COMMA_SOURCE_FILE ("declaration-task.galgas", 294)).boolEnum () ;
     if (kBoolTrue == test_1) {
       TC_Array <C_FixItDescription> fixItArray2 ;
-      inCompiler->emitSemanticError (enumerator_10525.current (HERE).mAttribute_mPriority.getter_location (SOURCE_FILE ("declaration-task.galgas", 295)), GALGAS_string ("duplicate priority"), fixItArray2  COMMA_SOURCE_FILE ("declaration-task.galgas", 295)) ;
+      inCompiler->emitSemanticError (enumerator_10550.current (HERE).mAttribute_mPriority.getter_location (SOURCE_FILE ("declaration-task.galgas", 295)), GALGAS_string ("duplicate priority"), fixItArray2  COMMA_SOURCE_FILE ("declaration-task.galgas", 295)) ;
     }
-    var_prioritySet_10501.addAssign_operation (var_priorityString_10691  COMMA_SOURCE_FILE ("declaration-task.galgas", 297)) ;
-    enumerator_10525.gotoNextObject () ;
+    var_prioritySet_10526.addAssign_operation (var_priorityString_10716  COMMA_SOURCE_FILE ("declaration-task.galgas", 297)) ;
+    enumerator_10550.gotoNextObject () ;
   }
 }
 

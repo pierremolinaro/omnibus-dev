@@ -8,11 +8,11 @@ enum @typeKind {
   case boolean
   case literalString
   case enumeration (@enumConstantMap constantMap)
-  case structure (@propertyMap propertyMap @propertyList propertyList)
+  case structure (@lstring typeName @propertyMap propertyMap @propertyList propertyList)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount)
-  case arrayType (@unifiedTypeMap-proxy elementType @bigint size)
+  case arrayType (@lstring typeName @unifiedTypeMap-proxy elementType @bigint size)
   case function (@mode mode @procedureSignature signature @unifiedTypeMap-proxy returnTypeProxy)
 }
 
@@ -95,10 +95,49 @@ sharedmap @unifiedTypeMap %selectors {
   @bool copyable
   @bool equatable
   @bool comparable
-#  @unifiedTypeMap-proxy enumerationType # .null if type is not enumerable
 
   insert insertType error message "the '%K' type is already declared in %L"
   search searchKey error message "there is no '%K' type"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @typeKind llvmTypeName -> @string {
+  switch self
+  case boolean :
+    result = "i1"
+  case literalString :
+    result = "i8*"
+  case enumeration (@enumConstantMap constantMap) :
+    result = "i" + [[constantMap count] - 1 significantBitCount]
+  case structure (@lstring typeName @propertyMap unused propertyMap @propertyList unused propertyList) :
+    result = "%" + [llvmRegularTypeMangledNameFromName (!typeName) assemblerRepresentation]
+  case integer (@bigint unused min @bigint unused max @bool unused unsigned @uint bitCount) :
+    result = "i" + bitCount
+  case staticInteger :
+    error .nowhere : "INTERNAL ERROR" : result
+  case opaque (@bigint bitCount) :
+    result = "i" + bitCount
+  case arrayType (@lstring typeName * *) :
+    result = "%" + [llvmRegularTypeMangledNameFromName (!typeName) assemblerRepresentation]
+  case function (@mode unused mode @procedureSignature signature @unifiedTypeMap-proxy returnTypeProxy) :
+    if returnTypeProxy == .null then
+      result = "void"
+    else
+      result = [[returnTypeProxy kind] llvmTypeName]
+    end
+    result += "("
+    for () in signature 
+    do
+      result += [[mType kind] llvmTypeName]
+      switch mFormalArgumentPassingMode
+      case inputOutput, output : result += "*"
+      case input :
+      end
+    between result += ", "
+    end
+    result += ")"
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -260,7 +299,7 @@ proc buildSemanticContext
     [!?outSemanticContext.mTypeMap insertType
       !lkey:plmNameForStaticListType (!lkey)
       !llvmTypeName:llvmNameForStaticListType (!key)
-      !kind:.arrayType {!elementType:elementType !size:[stringValueList length]}
+      !kind:.arrayType {!typeName:plmNameForStaticListType (!lkey) !elementType:elementType !size:[stringValueList length]}
       !classConstantMap:{}
       !instantiable:false
       !copyable:false

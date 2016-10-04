@@ -316,13 +316,12 @@ override method @structureDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
     !llvmTypeName:"%" + ["$" + mStructureName assemblerRepresentation]
-    !kind:.structure {!propertyMap:propertyMap !propertyList:propertyList}
+    !kind:.structure {!typeName:mStructureName !propertyMap:propertyMap !propertyList:propertyList}
     !classConstantMap:{}
     !instantiable:true
     !copyable:copyableAttribute
     !equatable:false
     !comparable:false
-#    !enumerationType:.null # Not enumerable
   ]
 }
 

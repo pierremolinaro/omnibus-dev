@@ -144,7 +144,7 @@ override method @typeArrayDeclaration enterInContext
     [!?ioContext.mTypeMap insertType
       !lkey:mArrayTypeName
       !llvmTypeName:"%" + ["$" + mArrayTypeName assemblerRepresentation]
-      !kind:.arrayType {!elementType:elementType !size:arraySize}
+      !kind:.arrayType {!typeName:mArrayTypeName !elementType:elementType !size:arraySize}
       !classConstantMap:classConstantMap
       !instantiable:true
       !copyable:true

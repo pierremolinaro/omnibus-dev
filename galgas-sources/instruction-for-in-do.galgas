@@ -124,7 +124,7 @@ override method @forInstructionAST analyze
   if iteratedTypeKind == .literalString then
     iteratedElementType = .searchKey {!inContext.mTypeMap !["uint8" nowhere]}
   elsif [iteratedTypeKind isArrayType] then
-    [iteratedTypeKind arrayType ?elementType:iteratedElementType ?size:*]
+    [iteratedTypeKind arrayType ?typeName:* ?elementType:iteratedElementType ?size:*]
   else
     error mIteratedObject : "this object is not enumerable" : iteratedElementType
   end
@@ -195,7 +195,7 @@ override method @forInstructionAST analyze
       !doInstructionList_GenerationList
     }
   elsif [iteratedTypeKind isArrayType] then
-    [iteratedTypeKind arrayType ?elementType:let elementType ?size:let size]
+    [iteratedTypeKind arrayType ?typeName:* ?elementType:let elementType ?size:let size]
     ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
       !enumeratedVarLLVMName
       !mIteratedObject.location
