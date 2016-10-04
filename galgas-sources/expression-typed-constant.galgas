@@ -39,7 +39,7 @@ override method @typedConstantCall addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   if mOptionalTypeName.string != "" then
-    [!?ioGraph addEdge !inConstantName !.new{!"$" + mOptionalTypeName !mOptionalTypeName.location}]
+    [!?ioGraph addEdge !inConstantName !llvmRegularTypeMangledNameFromName (!mOptionalTypeName)]
   end
 }
 
@@ -49,7 +49,7 @@ override method @typedConstantCall addDependenceEdgeForStaticExpression
 
 override method @typedConstantCall noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if mOptionalTypeName.string != "" then
-    [!?ioGraph noteNode !.new{!"$" + mOptionalTypeName !mOptionalTypeName.location}]
+    [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!mOptionalTypeName)]
   end
 }
 

@@ -801,11 +801,15 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "let LED_L1 = $digitalPort.D4\n"
+  "let LED_L2 = $digitalPort.D5\n"
+  "let LED_L3 = $digitalPort.D6\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 1000 {\n"
   "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L3 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
@@ -813,11 +817,20 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "staticArray maListeStatique {\n"
   "  let a $uint32\n"
   "  let b $uint32\n"
+  "//  let f func user ()\n"
   "}\n"
   "\n"
-  "extend staticArray maListeStatique (5, 9)\n"
+  "func user toggleL2 @noUnusedWarning () {\n"
+  "  toggle (!port:LED_L2)\n"
+  "}\n"
   "\n"
-  "extend staticArray maListeStatique (15, 29)\n"
+  "func user toggleL3 @noUnusedWarning () {\n"
+  "  toggle (!port:LED_L3)\n"
+  "}\n"
+  "\n"
+  "extend staticArray maListeStatique (5, 9) // , func toggleL2)\n"
+  "\n"
+  "extend staticArray maListeStatique (15, 29) // , func toggleL3)\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -843,7 +856,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-static-list-example.plm",
   "plm",
   true, // Text file
-  1523, // Text length
+  1858, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

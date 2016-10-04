@@ -37,15 +37,15 @@ override method @integerDeclaration addExtension
 override method @integerDeclaration enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let integerTypeName = ["$" + [self typeName] nowhere]
+  let integerTypeName = llvmRegularTypeMangledNameFromName (![[self typeName] nowhere])
   [!?ioGraph addNode !integerTypeName !self]
-  [!?ioGraph addEdge !integerTypeName !["$" + staticIntegerTypeName () nowhere]]
+  [!?ioGraph addEdge !integerTypeName !llvmRegularTypeMangledNameFromName (![staticIntegerTypeName () nowhere])]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @integerDeclaration keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "integer $" + [self typeName] 
+  outRepresentation = "integer " + llvmRegularTypeMangledNameFromName (![[self typeName] nowhere])
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

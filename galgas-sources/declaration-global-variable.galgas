@@ -197,7 +197,7 @@ syntax extension plm_syntax {
 method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (globalVariableTypeName 3*) in self do
     if globalVariableTypeName.string != "" then
-      let typeName = @lstring.new {!"$" + globalVariableTypeName !globalVariableTypeName.location}
+      let typeName = llvmRegularTypeMangledNameFromName (!globalVariableTypeName)
       [!?ioGraph noteNode !typeName]
     end
   end

@@ -57,8 +57,8 @@ override method @typeArrayDeclaration addExtension
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeArrayDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let newTypeName = @lstring.new {!"$" + mArrayTypeName !mArrayTypeName.location}
-  let elementTypeName = @lstring.new {!"$" + mElementTypeName !mElementTypeName.location}
+  let newTypeName = llvmRegularTypeMangledNameFromName (!mArrayTypeName)
+  let elementTypeName = llvmRegularTypeMangledNameFromName (!mElementTypeName)
   [!?ioGraph addNode !newTypeName !self]
   [!?ioGraph addEdge !newTypeName !elementTypeName]
   [mSizeExpression addDependenceEdgeForStaticExpression !newTypeName !?ioGraph]

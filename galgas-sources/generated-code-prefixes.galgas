@@ -1,21 +1,35 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once llvmAttributeFunction -> @string outResult {
-  outResult = " nounwind "
+func %once llvmAttributeFunction -> @string {
+  result = " nounwind "
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once staticAttribute -> @string outResult {
-  outResult = "static"
+func %once staticAttribute -> @string {
+  result = "static"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#!   Type
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmRegularTypeMangledNameFromName ?let @lstring inName -> @lstring {
+  result = .new {!"$" + inName !inName.location}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func moduleMangledNameFromModuleName ?let @lstring inModuleName -> @lstring {
+  result = .new {!inModuleName.string + "$" !inModuleName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Modes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once userModeName -> @string outResult {
-  outResult = "user"
+func %once userModeName -> @string {
+  result = "user"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -241,58 +255,58 @@ func llvmNameForGlobalVariable ?let @string inName -> @string outName {
 #!   Attributes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once mutatingAttribute -> @string outResult {
-  outResult = "mutating"
+func %once mutatingAttribute -> @string {
+  result = "mutating"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once userAccessAttribute -> @string outResult {
-  outResult = "userAccess"
+func %once userAccessAttribute -> @string {
+  result = "userAccess"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once noUnusedWarningAttribute -> @string outResult {
-  outResult = "noUnusedWarning"
+func %once noUnusedWarningAttribute -> @string {
+  result = "noUnusedWarning"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once globalAttribute -> @string outResult {
-  outResult = "global"
+func %once globalAttribute -> @string {
+  result = "global"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once weakAttribute -> @string outResult {
-  outResult = "weak"
+func %once weakAttribute -> @string {
+  result = "weak"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! Tasks
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func stackNameForTask ?let @string inTaskName -> @string outResult {
-  outResult = "@" + ["task.stack." + inTaskName assemblerRepresentation]
+func stackNameForTask ?let @string inTaskName -> @string {
+  result = "@" + ["task.stack." + inTaskName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func initNameForTaskType ?let @string inTaskTypeName -> @string outResult {
-  outResult = "@" + ["task.init.$" + inTaskTypeName assemblerRepresentation]
+func initNameForTaskType ?let @string inTaskTypeName -> @string {
+  result = "@" + ["task.init.$" + inTaskTypeName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func stackAddressForTask ?let @string inTaskName -> @string outResult {
-  outResult = "%" + ["task.stack.address." + inTaskName assemblerRepresentation]
+func stackAddressForTask ?let @string inTaskName -> @string {
+  result = "%" + ["task.stack.address." + inTaskName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func mainRoutineNameForTask ?let @string inTaskName -> @string outResult {
-  outResult = "@" + ["task.main." + inTaskName assemblerRepresentation]
+func mainRoutineNameForTask ?let @string inTaskName -> @string {
+  result = "@" + ["task.main." + inTaskName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

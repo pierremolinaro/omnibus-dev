@@ -131,7 +131,7 @@ method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
     for variable in mVarList do
       [variable.mVarInitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
       if variable.mVarTypeName.string != "" then
-        let typeName = @lstring.new {!"$" + variable.mVarTypeName !variable.mVarTypeName.location}
+        let typeName = llvmRegularTypeMangledNameFromName (!variable.mVarTypeName)
         [!?ioGraph noteNode !typeName]
       end
     end

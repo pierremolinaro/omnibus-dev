@@ -33,7 +33,7 @@ syntax extension plm_syntax {
   rule <declaration> ?!@ast ioAST {
     $module$
     $identifier$ ?let moduleName
-    let moduleTypeName = @lstring.new {!moduleName.string + "$" !moduleName.location}
+    let moduleTypeName = moduleMangledNameFromModuleName (!moduleName)
     ${$
     @functionDeclarationListAST functionDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}
@@ -136,7 +136,7 @@ syntax extension plm_syntax {
 
 override method @moduleDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  [!?ioGraph addNode !mModuleName !self]
-  let moduleTypeName = @lstring.new {!"$" + mModuleName + "$" !mModuleName.location}
+  let moduleTypeName = llvmRegularTypeMangledNameFromName (!moduleMangledNameFromModuleName (!mModuleName))
  [!?ioGraph addEdge !mModuleName !moduleTypeName]
 }
 
@@ -208,7 +208,7 @@ override method @moduleDeclarationAST semanticAnalysis
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let moduleTypeName = @lstring.new {!mModuleName.string + "$" !mModuleName.location}
+  let moduleTypeName = moduleMangledNameFromModuleName (!mModuleName)
   let moduleType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
   [inContext.mConstructorMap searchKey !moduleTypeName ?let constructorValue]
   [constructorValue structure ?constructorSignature:* ?sortedOperandList:let sortedOperandList]

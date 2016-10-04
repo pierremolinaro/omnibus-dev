@@ -2,20 +2,34 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @extendStaticlistDeclaration : @abstractDeclaration {
-  @lstring mStaticlistName
-  @expressionListAST mExpressions
+enum @extendStaticArrayExpressionAST {
+  case expression (@expressionAST exp)
+  case function (@lstring functionName)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @extendStaticlistDeclaration location -> @location outLocation {
+list @extendStaticArrayExpressionListAST {
+  @extendStaticArrayExpressionAST mExpression
+  @location mEndOfExpression
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @extendStaticArrayDeclarationAST : @abstractDeclaration {
+  @lstring mStaticlistName
+  @extendStaticArrayExpressionListAST mExpressions
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override getter @extendStaticArrayDeclarationAST location -> @location outLocation {
   outLocation = mStaticlistName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @extendStaticlistDeclaration keyRepresentationForErrorSignaling -> @string {
+override getter @extendStaticArrayDeclarationAST keyRepresentationForErrorSignaling -> @string {
   result = "staticlist " + mStaticlistName
 }
 
@@ -32,15 +46,21 @@ syntax extension plm_syntax {
     $staticArray$
     $identifier$ ?let staticListName
     $($
-    @expressionListAST expressions = {}
+    @extendStaticArrayExpressionListAST expressions = {}
     repeat
-      <expression> ?let exp
-      expressions += !exp !.here
+      select
+        <expression> ?let exp
+        expressions += !.expression {!exp:exp} !.here
+      or
+        $func$
+        $identifier$ ?let functionName
+        expressions += !.function {!functionName:functionName} !.here
+      end
     while
       $,$
     end
     $)$
-    ioAST.mDeclarationListAST += !@extendStaticlistDeclaration.new {!staticListName !expressions}
+    ioAST.mDeclarationListAST += !@extendStaticArrayDeclarationAST.new {!staticListName !expressions}
   }
 
   #·····················································································································
@@ -51,7 +71,7 @@ syntax extension plm_syntax {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extendStaticlistDeclaration addExtension
+override method @extendStaticArrayDeclarationAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   !@abstractDeclaration outNewDeclaration
 {
@@ -62,7 +82,7 @@ override method @extendStaticlistDeclaration addExtension
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extendStaticlistDeclaration enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @extendStaticArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Node name
   let nodeName = @lstring.new{!mStaticlistName.string + "." + [[ioGraph keyList] length] !mStaticlistName}
 #--- Add 'constant name' node
@@ -70,8 +90,12 @@ override method @extendStaticlistDeclaration enterInPrecedenceGraph ?!@semanticT
 #--- Add dependency from static type declaration
   [!?ioGraph addEdge !nodeName !mStaticlistName]
 #--- Add dependency from source expression
-  for (exp *) in mExpressions do
-    [exp addDependenceEdgeForStaticExpression !nodeName !?ioGraph]
+  for (operand *) in mExpressions do
+    switch operand
+    case expression (@expressionAST exp) :
+      [exp addDependenceEdgeForStaticExpression !nodeName !?ioGraph]
+    case function (@lstring unused functionName) :
+    end
   end
 }
 
@@ -83,7 +107,7 @@ listmap @staticlistValues_listMap (@stringlist)
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extendStaticlistDeclaration enterInContext
+override method @extendStaticArrayDeclarationAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
@@ -96,46 +120,59 @@ override method @extendStaticlistDeclaration enterInContext
     + [[mExpressions length] string] + " provided"
   else
     var staticValue = "{"
-    for (exp endOfExp) in mExpressions, (* propertyType) in staticlistPropertyList do
-      initialVariableMap (
-        !context:ioContext
-        !mode:.bootMode
-        !globalsAreConstant:true # Any value, there is no defined global variable at this stage
-        !returnTypeName:["" nowhere]
-        ?@variableMap variableMap
-      )
-      @semanticTemporariesStruct temporaries = .default
-      @instructionListIR instructionGenerationList = {}
-      @allocaList allocaList = {}
-      [exp analyzeExpression
-        !self:.null
-        !directAccessToPropertiesAllowed:false
-        !inGuard:false
-        !routineNameForInvocationGraph:["compiler" nowhere]
-        !optionalTargetType:propertyType
-        !context:ioContext
-        !mode:.bootMode
-        !?temporary:temporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:variableMap
-        !?alloca:allocaList
-        !?instructionListIR:instructionGenerationList
-        ?result:let @objectIR expressionResult
-      ]
-    #--- Check assignment compatibility
-      let result = checkAssignmentCompatibility (
-        !source:expressionResult
-        !targetAnnotationType:propertyType
-        !errorLocation:endOfExp
-        !staticTypeAllowed:false
-      )
-      if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
-        error endOfExp : "source expression cannot be statically computed"
+    var firstStaticValue = true
+    for (operand endOfExp) in mExpressions, (* type) in staticlistPropertyList do
+      switch operand
+      case expression (@expressionAST exp) :
+        switch type
+        case valueType (@unifiedTypeMap-proxy propertyType) :
+          initialVariableMap (
+            !context:ioContext
+            !mode:.bootMode
+            !globalsAreConstant:true # Any value, there is no defined global variable at this stage
+            !returnTypeName:["" nowhere]
+            ?@variableMap variableMap
+          )
+          @semanticTemporariesStruct temporaries = .default
+          @instructionListIR instructionGenerationList = {}
+          @allocaList allocaList = {}
+          [exp analyzeExpression
+            !self:.null
+            !directAccessToPropertiesAllowed:false
+            !inGuard:false
+            !routineNameForInvocationGraph:["compiler" nowhere]
+            !optionalTargetType:propertyType
+            !context:ioContext
+            !mode:.bootMode
+            !?temporary:temporaries
+            !?staticStringMap:ioGlobalLiteralStringMap
+            !?variableMap:variableMap
+            !?alloca:allocaList
+            !?instructionListIR:instructionGenerationList
+            ?result:let @objectIR expressionResult
+          ]
+        #--- Check assignment compatibility
+          let result = checkAssignmentCompatibility (
+            !source:expressionResult
+            !targetAnnotationType:propertyType
+            !errorLocation:endOfExp
+            !staticTypeAllowed:false
+          )
+          if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
+            error endOfExp : "source expression cannot be statically computed"
+          end
+        #--- Enter in static value
+          if firstStaticValue then
+            firstStaticValue = false
+          else
+            staticValue += ", "
+          end
+          staticValue += [propertyType llvmTypeName] + " " + [expressionResult llvmName]
+        case function (@mode unused mode @procedureSignature unused signature @unifiedTypeMap-proxy unused returnTypeProxy) :
+          error endOfExp : "a function name is expected here"
+        end      
+      case function (@lstring unused functionName) :
       end
-    #--- Enter in static value
-      staticValue += [propertyType llvmTypeName] + " " + [expressionResult llvmName]
-    between
-      staticValue += ", "
     end
     staticValue += "}"
     ioStaticListValueMap += !mStaticlistName !staticValue
@@ -144,7 +181,7 @@ override method @extendStaticlistDeclaration enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extendStaticlistDeclaration enterRoutinesInContext
+override method @extendStaticArrayDeclarationAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -155,7 +192,7 @@ override method @extendStaticlistDeclaration enterRoutinesInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extendStaticlistDeclaration semanticAnalysis
+override method @extendStaticArrayDeclarationAST semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct

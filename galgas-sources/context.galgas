@@ -13,6 +13,7 @@ enum @typeKind {
   case staticInteger
   case opaque (@bigint bitCount)
   case arrayType (@unifiedTypeMap-proxy elementType @bigint size)
+  case function (@mode mode @procedureSignature signature @unifiedTypeMap-proxy returnTypeProxy)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

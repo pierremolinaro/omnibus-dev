@@ -57,7 +57,7 @@ syntax extension plm_syntax {
 
 override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if mTypeName.string != "" then
-    let typeName = @lstring.new {!"$" + mTypeName !mTypeName.location}
+    let typeName = llvmRegularTypeMangledNameFromName (!mTypeName)
     [!?ioGraph noteNode !typeName]
   end
   [mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
@@ -97,6 +97,8 @@ override method @forLowerUpperBoundInstructionAST analyze
   case staticInteger :
     error mTypeName : "an integer type is required here"
   case structure (* *) :
+    error mTypeName : "an integer type is required here"
+  case function (* * *) :
     error mTypeName : "an integer type is required here"
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
   #--- Analyze expressions

@@ -170,7 +170,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
         case input (*):
         case inputWithType (* @lstring typeName *) :
           if typeName.string != "" then
-            [!?ioGraph noteNode !.new {!"$" + typeName !typeName.location}]
+            [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
           end
         case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
         case outputInput (*) :
@@ -197,7 +197,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
         case input (*):
         case inputWithType (* @lstring typeName *) :
           if typeName.string != "" then
-            [!?ioGraph noteNode !.new {!"$" + typeName !typeName.location}]
+            [!?ioGraph noteNode !llvmRegularTypeMangledNameFromName (!typeName)]
           end
         case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
         case outputInput (*) :
@@ -778,6 +778,8 @@ proc analyzeEffectiveParameters
           error name : "a literal string does not handle field access" : parameterList, ioEffectiveParameterListIR
         case enumeration (*) :
           error name : "an enumeration does not handle field access" : parameterList, ioEffectiveParameterListIR
+        case function (* * *) :
+          error name : "a function does not handle field access" : parameterList, ioEffectiveParameterListIR
         case integer (* * * *) :
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
         case structure (@propertyMap propertyMap *) :

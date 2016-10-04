@@ -110,11 +110,11 @@ override method @configurationDeclarationAST addExtension
 override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let rootNode =  @lstring.new {!"config" !mPanicCodeTypeName.location}
   [!?ioGraph addNode !rootNode !self]
-  let panicCodeTypeName = @lstring.new {!"$" + mPanicCodeTypeName !mPanicCodeTypeName.location}
+  let panicCodeTypeName = llvmRegularTypeMangledNameFromName (!mPanicCodeTypeName)
   [!?ioGraph addEdge !rootNode !panicCodeTypeName]
-  let panicLineTypeName = @lstring.new {!"$" + mPanicLineTypeName !mPanicLineTypeName.location}
+  let panicLineTypeName = llvmRegularTypeMangledNameFromName (!mPanicLineTypeName)
   [!?ioGraph addEdge !rootNode !panicLineTypeName]
-  let unsignedIntegerTypeName = @lstring.new {!"$" + mUnsignedIntegerTypeName !mUnsignedIntegerTypeName.location}
+  let unsignedIntegerTypeName =llvmRegularTypeMangledNameFromName (!mUnsignedIntegerTypeName)
   [!?ioGraph addEdge !rootNode !unsignedIntegerTypeName]
 }
 
