@@ -156,7 +156,7 @@ override method @staticArrayAST enterInContext
       @procedureSignature signature = {}
       for (formalArgumentPassingMode selector formalArgumentTypeName *) in formalArgs do
         let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-        signature += !formalArgumentPassingMode !selector.string !typeProxy
+        signature += !formalArgumentPassingMode !selector !typeProxy
         routineMangledName += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
                            + [[typeProxy kind] llvmTypeName]
       end

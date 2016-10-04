@@ -297,7 +297,8 @@ method @routineMapIR-element llvmCodeGeneration
     switch mFormalArgumentKind
     case input :
       let llvmType = [[mFormalArgumentType kind] llvmTypeName]
-      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
+      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + " * %"
+                 + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
     case output, inputOutput :
     end
   end

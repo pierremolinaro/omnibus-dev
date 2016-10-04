@@ -230,7 +230,7 @@ method @functionDeclarationListAST enterFunctionInContext
     @procedureSignature signature = {}
     for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mFunctionFormalArgumentList do
       [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
-      signature += !formalArgumentPassingMode !selector.string !typeProxy
+      signature += !formalArgumentPassingMode !selector !typeProxy
       routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
     end
     routineMangledName.string += ")"

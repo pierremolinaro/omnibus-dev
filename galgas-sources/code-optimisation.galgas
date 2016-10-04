@@ -186,13 +186,6 @@ private proc suppressInaccessibleSubprograms
     !?outAccessibleEntities
     !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
   ]
-#--- Static arraies
-#  log "GLOBALS: " : outAccessibleEntities.mGlobalVariableSet
-#  for staticArray in ioIntermediateCodeStruct.mStaticArrayMap do
-#    if [outAccessibleEntities.mGlobalVariableSet hasKey !staticArray.lkey] then
-#      outAccessibleEntities.mRoutineSet += staticArray.mInvokedFunctionSet
-#    end
-#  end
 #--- Explore routines
   var continues = true
   let bound = [ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mGuardMapIR count]
@@ -219,6 +212,18 @@ private proc suppressInaccessibleSubprograms
   end
   if ioIntermediateCodeStruct.mGuardMapIR != accessibleGuardMap then
     ioIntermediateCodeStruct.mGuardMapIR = accessibleGuardMap
+    ioOptimizing = true
+  end
+#--- Static arraies
+#  log "GLOBALS: " : outAccessibleEntities.mGlobalVariableSet
+  @staticArrayMap currentStaticArrayMap = {}
+  for (staticArrayMame value) in ioIntermediateCodeStruct.mStaticArrayMap do
+    if [outAccessibleEntities.mGlobalVariableSet hasKey !staticArrayMame] then
+      [!?currentStaticArrayMap insertKey !staticArrayMame !value]
+    end
+  end
+  if currentStaticArrayMap != ioIntermediateCodeStruct.mStaticArrayMap then
+    ioIntermediateCodeStruct.mStaticArrayMap = currentStaticArrayMap
     ioOptimizing = true
   end
 }
