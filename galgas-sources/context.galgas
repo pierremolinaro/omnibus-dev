@@ -282,12 +282,43 @@ proc buildSemanticContext
   for panicRoutine in inAST.mPanicClauseListAST do
     [panicRoutine enterInContext !?context:outSemanticContext]
   end
+#--- Enter procedures, functions, sections, services, guards in context
+  [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
+  [inAST.mProcedureListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
+  [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
+  [inAST.mStandAloneSVCListAST enterInContext !receiverType:"" !?context: outSemanticContext]
+  [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #---
   for (declaration) in inDeclarationListAST do
     [declaration enterInContext
       !procedureDeclarationList:inAST.mProcedureListAST
       !?context:outSemanticContext
       !?staticlistValues:ioStaticListValueMap
+      !?staticStringMap:ioGlobalLiteralStringMap
+    ]
+  end
+#--- Build an HTML containing all global constants
+  buildGlobalConstantMapHTMLFile (
+    !outSemanticContext.mGlobalConstantMap
+    !sourceFile:inSourceFile
+  )
+#--- Enter control registers in context
+  enterControlRegistersInContext (
+    !inAST.mControlRegisterDeclarationListAST
+    !?context: outSemanticContext
+    !?staticStringMap:ioGlobalLiteralStringMap
+  )
+  buildControlRegisterMapHTMLFile (
+    !outSemanticContext.mControlRegisterMap
+    !sourceFile:inSourceFile
+  )
+#--- Enter tasks
+  [inAST.mTaskListAST enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
+#---
+  for (declaration) in inDeclarationListAST do
+    [declaration enterRoutinesInContext
+      !procedureDeclarationList:inAST.mProcedureListAST
+      !?context:outSemanticContext
       !?staticStringMap:ioGlobalLiteralStringMap
     ]
   end
@@ -310,37 +341,6 @@ proc buildSemanticContext
     [!?outSemanticContext.mGlobalConstantMap insertKey
       !lkey
       !.globalVariableReference {!type:staticListType !plmName:lkey}
-    ]
-  end
-#--- Build an HTML containing all global constants
-  buildGlobalConstantMapHTMLFile (
-    !outSemanticContext.mGlobalConstantMap
-    !sourceFile:inSourceFile
-  )
-#--- Enter control registers in context
-  enterControlRegistersInContext (
-    !inAST.mControlRegisterDeclarationListAST
-    !?context: outSemanticContext
-    !?staticStringMap:ioGlobalLiteralStringMap
-  )
-  buildControlRegisterMapHTMLFile (
-    !outSemanticContext.mControlRegisterMap
-    !sourceFile:inSourceFile
-  )
-#--- Enter procedures, functions, sections, services, guards in context
-  [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
-  [inAST.mProcedureListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
-  [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
-  [inAST.mStandAloneSVCListAST enterInContext !receiverType:"" !?context: outSemanticContext]
-  [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
-#--- Enter tasks
-  [inAST.mTaskListAST enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
-#---
-  for (declaration) in inDeclarationListAST do
-    [declaration enterRoutinesInContext
-      !procedureDeclarationList:inAST.mProcedureListAST
-      !?context:outSemanticContext
-      !?staticStringMap:ioGlobalLiteralStringMap
     ]
   end
 #--- Check global var declaration

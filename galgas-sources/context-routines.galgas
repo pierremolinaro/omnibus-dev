@@ -4,8 +4,7 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-# Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
-map @routineMapForContext {
+map @routineMapForContext { # Key is a mangled name
   @lstring mRoutineLLVMName
   @bool mIsPublic
   @bool mGlobal

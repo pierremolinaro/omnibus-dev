@@ -4,7 +4,7 @@
 
 enum @extendStaticArrayExpressionAST {
   case expression (@expressionAST exp)
-  case function (@lstring functionName)
+  case function (@mode mode @lstring functionName @procFormalArgumentList formalArgs @lstring returnTypeName)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -53,8 +53,19 @@ syntax extension plm_syntax {
         expressions += !.expression {!exp:exp} !.here
       or
         $func$
+        <mode> ?let mode
         $identifier$ ?let functionName
-        expressions += !.function {!functionName:functionName} !.here
+        <procedure_formal_arguments> ?formalArguments:let formalArgs
+        @lstring returnTypeName
+        select
+          returnTypeName = ["" here]
+        or
+          $->$
+          $\$type$ ?returnTypeName
+        end
+        expressions +=
+          !.function {!mode:mode !functionName:functionName !formalArgs:formalArgs !returnTypeName:returnTypeName}
+          !.here
       end
     while
       $,$
@@ -94,7 +105,15 @@ override method @extendStaticArrayDeclarationAST enterInPrecedenceGraph ?!@seman
     switch operand
     case expression (@expressionAST exp) :
       [exp addDependenceEdgeForStaticExpression !nodeName !?ioGraph]
-    case function (@lstring unused functionName) :
+    case function (* * @procFormalArgumentList formalArgs @lstring returnTypeName) :
+      for (* * formalArgumentTypeName *) in formalArgs do
+        let typeName = llvmRegularTypeMangledNameFromName (!formalArgumentTypeName)
+        [!?ioGraph noteNode !typeName]
+      end
+      if returnTypeName.string != "" then
+        let typeName = llvmRegularTypeMangledNameFromName (!returnTypeName)
+        [!?ioGraph noteNode !typeName]
+      end
     end
   end
 }
@@ -120,7 +139,6 @@ override method @extendStaticArrayDeclarationAST enterInContext
     + [[mExpressions length] string] + " provided"
   else
     var staticValue = "{"
-    var firstStaticValue = true
     for (operand endOfExp) in mExpressions, (* type) in staticArrayPropertyList do
       switch operand
       case expression (@expressionAST exp) :
@@ -163,15 +181,44 @@ override method @extendStaticArrayDeclarationAST enterInContext
             error endOfExp : "source expression cannot be statically computed"
           end
         #--- Enter in static value
-          if firstStaticValue then
-            firstStaticValue = false
-          else
-            staticValue += ", "
-          end
           staticValue += [[type kind] llvmTypeName] + " " + [expressionResult llvmName]
         end      
-      case function (@lstring unused functionName) :
+      case function (@mode mode @lstring functionName @procFormalArgumentList formalArgs @lstring returnTypeName) :
+        if not [[type kind] isFunction] then
+          error endOfExp : "a static expression is expected here"
+        else
+        #--- Compute function mangled name
+          var routineMangledName = functionName.string
+          routineMangledName += "("
+          @procedureSignature signature = {}
+          for (formalArgumentPassingMode selector formalArgumentTypeName *) in formalArgs do
+            let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
+            signature += !formalArgumentPassingMode !selector.string !typeProxy
+            routineMangledName += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+          end
+          routineMangledName += ")"
+          let s = [ioContext.mRoutineMapForContext keyList]
+          log s
+          let lRoutineMangledName = @lstring.new {!routineMangledName !functionName.location}
+          [ioContext.mRoutineMapForContext searchKey
+            !lRoutineMangledName
+            ?let @lstring candidateRoutineLLVMName
+            ?let @bool candidateIsPublic
+            ?let @bool candidateIsGlobal
+            ?let @mode candidateMode
+            ?let @procedureSignature candidateSignature
+            ?let @routineKind candidateRoutineKind
+            ?let @bool candidateWeak
+            ?let @unifiedTypeMap-proxy candidateReturnType
+            ?let @bool candidateAppendFileAndLineArgumentForPanicLocation
+            ?let @bool candidateCanAccessProperties
+            ?let @bool candidateCanMutateProperties
+          ]
+          staticValue += candidateRoutineLLVMName
+        end
       end
+    between
+      staticValue += ", "
     end
     staticValue += "}"
     ioStaticListValueMap += !mStaticlistName !staticValue
