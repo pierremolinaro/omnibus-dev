@@ -36,7 +36,7 @@ override method @testArrayIndexIR llvmInstructionCode
     let testToZeroOk = "test.index.zero.ok." + ioGenerationAdds.mUniqueIndex
     let testToZeroFailure = "test.index.zero.fails." + ioGenerationAdds.mUniqueIndex
     ioGenerationAdds.mUniqueIndex ++
-    ioLLVMcode += "  " + testToZero + " = icmp sge " + [[mIndex type] llvmTypeName] + " " + [mIndex llvmName] + ", 0\n"
+    ioLLVMcode += "  " + testToZero + " = icmp sge " + [[[mIndex type] kind] llvmTypeName] + " " + [mIndex llvmName] + ", 0\n"
     ioLLVMcode += "  br i1 " + testToZero + ", label %" + testToZeroOk + ", label %" + testToZeroFailure + "\n\n"
   
     ioLLVMcode += testToZeroFailure + ":\n"
@@ -54,7 +54,7 @@ override method @testArrayIndexIR llvmInstructionCode
     let testToSizeFailure = "test.index.size.fails." + ioGenerationAdds.mUniqueIndex
     ioLLVMcode += "  " + testToSize + " = icmp "
     ioLLVMcode += if isUnsigned then "ult" else "slt" end
-    ioLLVMcode += " " + [[mIndex type] llvmTypeName] + " " + [mIndex llvmName] + ", " + mSize + "\n"
+    ioLLVMcode += " " + [[[mIndex type] kind] llvmTypeName] + " " + [mIndex llvmName] + ", " + mSize + "\n"
     ioLLVMcode += "  br i1 " + testToSize + ", label %" + testToSizeOk + ", label %" + testToSizeFailure + "\n\n"
   
     ioLLVMcode += testToSizeFailure + ":\n"

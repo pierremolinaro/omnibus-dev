@@ -139,8 +139,8 @@ private proc generateCodeFiles
   @generationAdds generationAdds = .default
   generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
   let @generationContext generationContext = .new {
-    ![inPanicCodeType llvmTypeName]
-    ![inPanicLineType llvmTypeName]
+    ![[inPanicCodeType kind] llvmTypeName]
+    ![[inPanicLineType kind] llvmTypeName]
     !inIntermediateCodeStruct.mGlobalTaskVariableList
     !inAvailableInterruptMap
   }
@@ -473,9 +473,9 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     case enumeration (*) :
     case integer (* * * *) :
     case structure (* * propertyList) :
-      ioLLVMcode += llvmTypeName + " = type {"
+      ioLLVMcode += [kind llvmTypeName] + " = type {"
       for () in propertyList
-        do ioLLVMcode += [mType llvmTypeName]
+        do ioLLVMcode += [[mType kind] llvmTypeName]
         between ioLLVMcode += ", "
       end
       ioLLVMcode += "}\n"
@@ -483,7 +483,7 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
     case staticInteger : 
     case opaque (*) :
     case arrayType (* elementType arraySize) :
-      ioLLVMcode += llvmTypeName + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
+      ioLLVMcode += [kind llvmTypeName] + " = type [" + arraySize + " x " + [[elementType kind] llvmTypeName] + "]\n"
     case function (* * *) :
     end
   end

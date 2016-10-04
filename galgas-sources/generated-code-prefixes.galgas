@@ -36,122 +36,122 @@ func %once userModeName -> @string {
 #! Names for invocation graph
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func initNameForInvocationGraph ?let @unifiedTypeMap-proxy inReceiverType ?let @lbigint inPriority -> @lstring outName {
+func initNameForInvocationGraph ?let @unifiedTypeMap-proxy inReceiverType ?let @lbigint inPriority -> @lstring {
   var s = "init"
   if inReceiverType != .null then
     s += " $" + [inReceiverType key]
   end
   s += " " + inPriority.bigint
-  outName = .new {!s !inPriority.location}
+  result = .new {!s !inPriority.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func panicNameForInvocationGraph ?let @string inName ?let @lbigint inPriority -> @lstring outName {
+func panicNameForInvocationGraph ?let @string inName ?let @lbigint inPriority -> @lstring {
   let s = "panic " + inName + " " + inPriority.bigint
-  outName = .new {!s !inPriority.location}
+  result = .new {!s !inPriority.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  Literal Strings
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func literalStringName ?let @uint inIndex -> @string outName {
-  outName = "@string." + inIndex
+func literalStringName ?let @uint inIndex -> @string {
+  result = "@string." + inIndex
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func literalCharacterArrayName ?let @uint inIndex -> @string outName {
-  outName = "@str.array." + inIndex
+func literalCharacterArrayName ?let @uint inIndex -> @string {
+  result = "@str.array." + inIndex
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once staticStringTypeName -> @string outName {
-  outName = "staticString"
+func %once staticStringTypeName -> @string {
+  result = "staticString"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once boolTypeName -> @string outName {
-  outName = "bool"
+func %once boolTypeName -> @string {
+  result = "bool"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once staticIntegerTypeName -> @string outName {
-  outName = "staticInt"
+func %once staticIntegerTypeName -> @string {
+  result = "staticInt"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Functions
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once functionResultVariableName -> @string outName {
-  outName = "result"
+func %once functionResultVariableName -> @string {
+  result = "result"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForFunction ?let @string inName -> @string outName {
-  outName = ["func." + inName assemblerRepresentation]
+func llvmNameForFunction ?let @string inName -> @string {
+  result = ["func." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Interrupt routine
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func interruptNameForInvocationGraph ?let @lstring inName -> @lstring outName {
+func interruptNameForInvocationGraph ?let @lstring inName -> @lstring {
   let s = "interrupt " + inName
-  outName = .new {!s !inName.location}
+  result = .new {!s !inName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForServiceInterrupt ?let @lstring inName -> @lstring outName {
-  outName = .new {!"isr.service." + inName !inName.location}
+func llvmNameForServiceInterrupt ?let @lstring inName -> @lstring {
+  result = .new {!"isr.service." + inName !inName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSectionOrSafeInterrupt ?let @string inName -> @string outName {
-  outName = "isr.section.or.safe." + inName
+func llvmNameForSectionOrSafeInterrupt ?let @string inName -> @string {
+  result = "isr.section.or.safe." + inName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   SVC
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSVCCall ?let @lstring inName ?let @routineKind inMode -> @string outName {
+func llvmNameForSVCCall ?let @lstring inName ?let @routineKind inMode -> @string {
   switch inMode
   case primitive :
-    outName = llvmNameForPrimitiveCall (!inName.string)
+    result = llvmNameForPrimitiveCall (!inName.string)
   case service :
-    outName = llvmNameForServiceCall (!inName.string)
+    result = llvmNameForServiceCall (!inName.string)
   case section :
-    outName = llvmNameForSectionCall (!inName.string)
+    result = llvmNameForSectionCall (!inName.string)
   case safe :
-    outName = llvmNameForSafeCall (!inName.string)
+    result = llvmNameForSafeCall (!inName.string)
   case function :
-    error inName : "INTERNAL ERROR" : outName
+    error inName : "INTERNAL ERROR" : result
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSVCImplementation ?let @lstring inName ?let @routineKind inMode -> @string outName {
+func llvmNameForSVCImplementation ?let @lstring inName ?let @routineKind inMode -> @string {
   switch inMode
   case primitive :
-    outName = llvmNameForPrimitiveImplementation (!inName.string)
+    result = llvmNameForPrimitiveImplementation (!inName.string)
   case service :
-    outName = llvmNameForServiceImplementation (!inName.string)
+    result = llvmNameForServiceImplementation (!inName.string)
   case section :
-    outName = llvmNameForSectionImplementation (!inName.string)
+    result = llvmNameForSectionImplementation (!inName.string)
   case safe :
-    outName = llvmNameForSafeImplementation (!inName.string)
+    result = llvmNameForSafeImplementation (!inName.string)
   case function :
-    error inName : "INTERNAL ERROR" : outName
+    error inName : "INTERNAL ERROR" : result
   end
 }
 
@@ -159,96 +159,96 @@ func llvmNameForSVCImplementation ?let @lstring inName ?let @routineKind inMode 
 #!   Primitives
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForPrimitiveCall ?let @string inName -> @string outName {
-  outName = ["primitive.call." + inName assemblerRepresentation]
+func llvmNameForPrimitiveCall ?let @string inName -> @string {
+  result = ["primitive.call." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForPrimitiveImplementation ?let @string inName -> @string outName {
-  outName = ["primitive.implementation." + inName assemblerRepresentation]
+func llvmNameForPrimitiveImplementation ?let @string inName -> @string {
+  result = ["primitive.implementation." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Services
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForServiceCall ?let @string inName -> @string outName {
-  outName = ["service.call." + inName assemblerRepresentation]
+func llvmNameForServiceCall ?let @string inName -> @string {
+  result = ["service.call." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForServiceImplementation ?let @string inName -> @string outName {
-  outName = ["service.implementation." + inName assemblerRepresentation]
+func llvmNameForServiceImplementation ?let @string inName -> @string {
+  result = ["service.implementation." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Sections
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSectionCall ?let @string inName -> @string outName {
-  outName = ["section.call." + inName assemblerRepresentation]
+func llvmNameForSectionCall ?let @string inName -> @string {
+  result = ["section.call." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSectionImplementation ?let @string inName -> @string outName {
-  outName = ["section.implementation." + inName assemblerRepresentation]
+func llvmNameForSectionImplementation ?let @string inName -> @string {
+  result = ["section.implementation." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Safe
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSafeCall ?let @string inName -> @string outName {
-  outName = ["safe.call." + inName assemblerRepresentation]
+func llvmNameForSafeCall ?let @string inName -> @string {
+  result = ["safe.call." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSafeImplementation ?let @string inName -> @string outName {
-  outName = ["safe.implementation." + inName assemblerRepresentation]
+func llvmNameForSafeImplementation ?let @string inName -> @string {
+  result = ["safe.implementation." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Guards
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once acceptVariableName -> @string outName {
-  outName = "accept"
+func %once acceptVariableName -> @string {
+  result = "accept"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForGuardCall ?let @string inName -> @string outName {
-  outName = ["guard.call." + inName assemblerRepresentation]
+func llvmNameForGuardCall ?let @string inName -> @string {
+  result = ["guard.call." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForGuardImplementation ?let @string inName -> @string outName {
-  outName = ["guard.implementation." + inName assemblerRepresentation]
+func llvmNameForGuardImplementation ?let @string inName -> @string {
+  result = ["guard.implementation." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once waitForGuardChangeFunctionName -> @string outName {
-  outName = "waitForGuardChange"
+func %once waitForGuardChangeFunctionName -> @string {
+  result = "waitForGuardChange"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  Variable names
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForLocalVariable ?let @string inName -> @string outName {
-  outName = ["var." + inName assemblerRepresentation]
+func llvmNameForLocalVariable ?let @string inName -> @string {
+  result = ["var." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForGlobalVariable ?let @string inName -> @string outName {
-  outName = ["gvar." + inName assemblerRepresentation]
+func llvmNameForGlobalVariable ?let @string inName -> @string {
+  result = ["gvar." + inName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -311,45 +311,45 @@ func mainRoutineNameForTask ?let @string inTaskName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForTaskGlobalVar ?let @string inTaskName -> @string outName {
-  outName = ["task.globalvar." + inTaskName assemblerRepresentation]
+func llvmNameForTaskGlobalVar ?let @string inTaskName -> @string {
+  result = ["task.globalvar." + inTaskName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once llvmNameForTaskLoopFunction -> @string outName {
-  outName = "task$loop"
+func %once llvmNameForTaskLoopFunction -> @string {
+  result = "task$loop"
 }
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once llvmNameForTaskSelfTerminateService -> @string outName {
-  outName = "self.terminate"
+func %once llvmNameForTaskSelfTerminateService -> @string {
+  result = "self.terminate"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! Static list
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func plmNameForStaticListType ?let @lstring inStaticListName -> @lstring outName {
-  outName = .new {!"staticlist." + inStaticListName !inStaticListName}
+func plmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
+  result = .new {!"staticlist." + inStaticListName !inStaticListName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func plmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring outName {
-  outName = .new {!"staticlist.element." + inStaticListName !inStaticListName}
+func plmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
+  result = .new {!"staticlist.element." + inStaticListName !inStaticListName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForStaticListType ?let @string inStaticListName -> @string outName {
-  outName = "%static.list.type." + [inStaticListName assemblerRepresentation]
+func llvmNameForStaticListType ?let @string inStaticListName -> @string {
+  result = "static.list.type." + [inStaticListName assemblerRepresentation]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForStaticListElementType ?let @string inStaticListName -> @string outName {
-  outName = "%static.list.element.type." + [inStaticListName assemblerRepresentation]
+func llvmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
+  result = .new{!"static.list.element.type." + [inStaticListName assemblerRepresentation] !inStaticListName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -557,16 +557,6 @@ void routine_handleSubscriptInAssignmentAndExpression (const class GALGAS_unifie
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                               Extension getter '@typeKind llvmTypeName' (as function)                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_llvmTypeName (const class GALGAS_typeKind & inObject,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                                @functionCallIR class                                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

@@ -228,7 +228,7 @@ override method @moduleDeclarationAST semanticAnalysis
 
 method @moduleListIR-element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += "@" + llvmNameForGlobalVariable (!mModuleName) + " = internal global "
-  ioLLVMcode += [mType llvmTypeName] + " {"
+  ioLLVMcode += [[mType kind] llvmTypeName] + " {"
   for (value) in mInitialValueList
     do ioLLVMcode += [value llvmTypeName] + " " + [value llvmName]
     between ioLLVMcode += ", "  

@@ -24,7 +24,7 @@ override method @storeGlobalVariableIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetVarType llvmTypeName]
+  let llvmType = [[mTargetVarType kind] llvmTypeName]
   ioLLVMcode += "  store "
   if mIsVolatile then
     ioLLVMcode += "volatile "

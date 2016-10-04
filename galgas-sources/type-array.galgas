@@ -94,14 +94,13 @@ override method @typeArrayDeclaration enterInContext
 #--- Get element type
   [ioContext.mTypeMap searchKey
     !lkey:mElementTypeName
-    ?llvmTypeName:*
+#    ?llvmTypeName:*
     ?kind:*
     ?classConstantMap:*
     ?instantiable:let instantiable
     ?copyable:let copyable
     ?equatable:*
     ?comparable:*
-#    ?enumerationType:*
   ]
   if not copyable then
     error mElementTypeName : "an array element should be copyable"
@@ -143,14 +142,13 @@ override method @typeArrayDeclaration enterInContext
   #--- Enter in type map
     [!?ioContext.mTypeMap insertType
       !lkey:mArrayTypeName
-      !llvmTypeName:"%" + ["$" + mArrayTypeName assemblerRepresentation]
+#      !llvmTypeName:"%" + ["$" + mArrayTypeName assemblerRepresentation]
       !kind:.arrayType {!typeName:mArrayTypeName !elementType:elementType !size:arraySize}
       !classConstantMap:classConstantMap
       !instantiable:true
       !copyable:true
       !equatable:false
       !comparable:false
-#      !enumerationType:elementType
     ]
   #--- Enter array constructor
     [!?ioContext.mConstructorMap insertKey

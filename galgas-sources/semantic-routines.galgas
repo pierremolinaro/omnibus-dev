@@ -245,7 +245,7 @@ method @routineMapIR-element llvmCodeGeneration
   if mReturnType == .null then
     ioLLVMcode += " void"
   else
-    ioLLVMcode += " " + [mReturnType llvmTypeName]
+    ioLLVMcode += " " + [[mReturnType kind] llvmTypeName]
   end
   ioLLVMcode += " @" + routineName + " ("
   let receiverTypeName = [lkey.string stringByDeletingPathExtension]
@@ -262,11 +262,11 @@ method @routineMapIR-element llvmCodeGeneration
     end
     switch mFormalArgumentKind
     case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   end
   if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
@@ -278,7 +278,8 @@ method @routineMapIR-element llvmCodeGeneration
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Add result variable ?
   if mReturnType != .null then
-    ioLLVMcode += "  %" + llvmNameForLocalVariable (!functionResultVariableName ()) + " = alloca " + [mReturnType llvmTypeName] + "\n"
+    ioLLVMcode += "  %" + llvmNameForLocalVariable (!functionResultVariableName ())
+                + " = alloca " + [[mReturnType kind] llvmTypeName] + "\n"
   end
   for (variable llvmTypeName) in mAllocaList do
     ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
@@ -287,7 +288,7 @@ method @routineMapIR-element llvmCodeGeneration
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
-      let llvmType = [mFormalArgumentType llvmTypeName]
+      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
       ioLLVMcode += "  %" + llvmNameForLocalVariable (!mFormalArgumentName) + " = alloca " + llvmType + "\n"
     case output, inputOutput :
     end
@@ -295,7 +296,7 @@ method @routineMapIR-element llvmCodeGeneration
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
-      let llvmType = [mFormalArgumentType llvmTypeName]
+      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
       ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
     case output, inputOutput :
     end
@@ -307,8 +308,8 @@ method @routineMapIR-element llvmCodeGeneration
     ioLLVMcode += "  ret void\n"
   else
     let resultVarLLVMName = "%" + llvmNameForLocalVariable (!functionResultVariableName ())
-    ioLLVMcode += "  %result = load " + [mReturnType llvmTypeName] + ", " + [mReturnType llvmTypeName] + " * " + resultVarLLVMName + "\n"
-    ioLLVMcode += "  ret " + [mReturnType llvmTypeName] + " %result\n"
+    ioLLVMcode += "  %result = load " + [[mReturnType kind] llvmTypeName] + ", " + [[mReturnType kind] llvmTypeName] + " * " + resultVarLLVMName + "\n"
+    ioLLVMcode += "  ret " + [[mReturnType kind] llvmTypeName] + " %result\n"
   end
   ioLLVMcode += "}\n\n"
 }

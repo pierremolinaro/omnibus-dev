@@ -184,14 +184,13 @@ method @taskList enterInContext
   #--- Enter task variable map as structure type in type map
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName
-      !llvmTypeName:"%" + ["$" + task.mTaskName assemblerRepresentation]
+#      !llvmTypeName:"%" + ["$" + task.mTaskName assemblerRepresentation]
       !kind:.structure {!typeName:task.mTaskName !propertyMap:propertyMap !propertyList:propertyList}
       !classConstantMap:{}
       !instantiable:false
       !copyable:false
       !equatable:false
       !comparable:false
-#      !enumerationType:.null # Not enumerable
     ]
     let taskType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !task.mTaskName}
     ioContext.mGlobalTaskVariableList +=

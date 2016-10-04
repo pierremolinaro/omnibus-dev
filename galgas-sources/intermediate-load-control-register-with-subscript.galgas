@@ -40,7 +40,7 @@ override method @ComputeRegisterAddressWithSubscriptIR llvmInstructionCode
              + ", " + mElementArraySize + " ; " + [mElementArraySize hexString] + "\n"
   ioLLVMcode += "  " + scriptedRegisterAddressValueName + " = add i32 " + registerOffsetName
              + ", " + mRegisterAddress + " ; " + [mRegisterAddress hexString] + "\n"
-  let llvmType = [[mTarget type] llvmTypeName]
+  let llvmType = [[[mTarget type] kind] llvmTypeName]
   ioLLVMcode += "  " + [mTarget llvmName] + " = inttoptr i32 " + scriptedRegisterAddressValueName
              + " to " + llvmType + " *\n"
 }

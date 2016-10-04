@@ -83,7 +83,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
     ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]
-  let llvmType = [mOperandType llvmTypeName]
+  let llvmType = [[mOperandType kind] llvmTypeName]
   ioLLVMcode += "  " + [mTarget llvmName] + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
   ioLLVMcode += " (" + llvmType + " " + [mLeft llvmName] + ", " + llvmType + " " + [mRight llvmName] + ")\n"
   ioLLVMcode += "  " + [mTarget llvmName] + ".hasOvf = extractvalue {" + llvmType + ", i1} " + [mTarget llvmName] + ".r, 1\n"
@@ -113,7 +113,7 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
     ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]
-  let llvmType = [mOperandType llvmTypeName]
+  let llvmType = [[mOperandType kind] llvmTypeName]
   ioLLVMcode += "  " + [mRight llvmName] + ".isZero = icmp eq " + llvmType + " " + [mRight llvmName] + ", 0\n"
   let labelName = [mTarget name]
   ioLLVMcode += "  br i1 " + [mRight llvmName] + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
@@ -133,7 +133,7 @@ override method @binaryOperationIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let llvmType = [mOperandType llvmTypeName]
+  let llvmType = [[mOperandType kind] llvmTypeName]
   switch mOperation
   case addNoOVF :
     ioLLVMcode += "  " + [mTarget llvmName] + " = add " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"

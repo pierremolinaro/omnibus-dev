@@ -217,7 +217,7 @@ method @initListIR generateLLVMinitCode
     if generate then
       ioLLVMcode += "define internal void @init." + init.mPriority + " ("
       if init.mSelfType != .null then
-        ioLLVMcode += [init.mSelfType llvmTypeName] + " * %self"
+        ioLLVMcode += [[init.mSelfType kind] llvmTypeName] + " * %self"
       end
       ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
       for (variable llvmTypeName) in init.mAllocaList do
@@ -243,7 +243,7 @@ method @initListIR generateLLVMinitCode
     if generate then
       ioLLVMcode += "  call void @init." + init.mPriority + " ("
       if init.mSelfType != .null then
-        ioLLVMcode += [init.mSelfType llvmTypeName] + " * @" + llvmNameForGlobalVariable (!init.mGlobalVariable)
+        ioLLVMcode += [[init.mSelfType kind] llvmTypeName] + " * @" + llvmNameForGlobalVariable (!init.mGlobalVariable)
       end
       ioLLVMcode += ")\n"
     end

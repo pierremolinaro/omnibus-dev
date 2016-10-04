@@ -64,14 +64,13 @@ override method @booleanDeclaration enterInContext
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mBooleanTypeName
-    !llvmTypeName:"i1"
+#    !llvmTypeName:"i1"
     !kind:.boolean
     !classConstantMap:{}
     !instantiable:true
     !copyable:copyable
     !equatable:true
     !comparable:true
-#    !enumerationType:.null # Not enumerable
   ]
 #--- Enter boolean type
   if ioContext.mBooleanType != .null then
