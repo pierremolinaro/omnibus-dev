@@ -113,19 +113,20 @@ override method @extendStaticArrayDeclarationAST enterInContext
   ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 {
-  [ioContext.mStaticlistMap searchKey !mStaticlistName ?let staticlistPropertyList]
-  if [staticlistPropertyList length] != [mExpressions length] then
+  [ioContext.mStaticlistMap searchKey !mStaticlistName ?let staticArrayPropertyList]
+  if [staticArrayPropertyList length] != [mExpressions length] then
     error mStaticlistName
-    : [[staticlistPropertyList length] string] + " expressions required, "
+    : [[staticArrayPropertyList length] string] + " expressions required, "
     + [[mExpressions length] string] + " provided"
   else
     var staticValue = "{"
     var firstStaticValue = true
-    for (operand endOfExp) in mExpressions, (* type) in staticlistPropertyList do
+    for (operand endOfExp) in mExpressions, (* type) in staticArrayPropertyList do
       switch operand
       case expression (@expressionAST exp) :
-        switch type
-        case valueType (@unifiedTypeMap-proxy propertyType) :
+        if [[type kind] isFunction] then
+          error endOfExp : "a function name is expected here"
+        else
           initialVariableMap (
             !context:ioContext
             !mode:.bootMode
@@ -141,7 +142,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
             !directAccessToPropertiesAllowed:false
             !inGuard:false
             !routineNameForInvocationGraph:["compiler" nowhere]
-            !optionalTargetType:propertyType
+            !optionalTargetType:type
             !context:ioContext
             !mode:.bootMode
             !?temporary:temporaries
@@ -154,7 +155,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
         #--- Check assignment compatibility
           let result = checkAssignmentCompatibility (
             !source:expressionResult
-            !targetAnnotationType:propertyType
+            !targetAnnotationType:type
             !errorLocation:endOfExp
             !staticTypeAllowed:false
           )
@@ -167,9 +168,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           else
             staticValue += ", "
           end
-          staticValue += [[propertyType kind] llvmTypeName] + " " + [expressionResult llvmName]
-        case function (@mode unused mode @procedureSignature unused signature @unifiedTypeMap-proxy unused returnTypeProxy) :
-          error endOfExp : "a function name is expected here"
+          staticValue += [[type kind] llvmTypeName] + " " + [expressionResult llvmName]
         end      
       case function (@lstring unused functionName) :
       end

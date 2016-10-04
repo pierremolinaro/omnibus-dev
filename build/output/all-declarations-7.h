@@ -11,19 +11,6 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                                Function 'checkMode'                                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_calleeKindIR function_checkMode (const class GALGAS_mode & constinArgument0,
-                                              const class GALGAS_mode & constinArgument1,
-                                              const class GALGAS_routineKind & constinArgument2,
-                                              const class GALGAS_location & constinArgument3,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                              Function 'panicModeName'                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -362,5 +349,44 @@ void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
                                class GALGAS_intermediateCodeStruct & outArgument5,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         Function 'llvmNameForPrimitiveCall'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForPrimitiveCall (const class GALGAS_string & constinArgument0,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Function 'llvmNameForSafeCall'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSafeCall (const class GALGAS_string & constinArgument0,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'llvmNameForSectionCall'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSectionCall (const class GALGAS_string & constinArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Function 'panicCodeForUnsignedAdditionOverflow'                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bigint function_panicCodeForUnsignedAdditionOverflow (class C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
 
 #endif
