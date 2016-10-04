@@ -6548,8 +6548,9 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_typeKind constructor_arrayType (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                               const class GALGAS_bigint & inOperand1
+  public : static class GALGAS_typeKind constructor_arrayType (const class GALGAS_lstring & inOperand0,
+                                                               const class GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
+                                                               const class GALGAS_bigint & inOperand2
                                                                COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_boolean (LOCATION_ARGS) ;
@@ -6575,8 +6576,9 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 
   public : static class GALGAS_typeKind constructor_staticInteger (LOCATION_ARGS) ;
 
-  public : static class GALGAS_typeKind constructor_structure (const class GALGAS_propertyMap & inOperand0,
-                                                               const class GALGAS_propertyList & inOperand1
+  public : static class GALGAS_typeKind constructor_structure (const class GALGAS_lstring & inOperand0,
+                                                               const class GALGAS_propertyMap & inOperand1,
+                                                               const class GALGAS_propertyList & inOperand2
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -6588,8 +6590,9 @@ class GALGAS_typeKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_arrayType (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                   class GALGAS_bigint & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_arrayType (class GALGAS_lstring & outArgument0,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument1,
+                                                   class GALGAS_bigint & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -6614,8 +6617,9 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_propertyMap & outArgument0,
-                                                   class GALGAS_propertyList & outArgument1,
+  public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_lstring & outArgument0,
+                                                   class GALGAS_propertyMap & outArgument1,
+                                                   class GALGAS_propertyList & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -6674,12 +6678,14 @@ class cEnumAssociatedValues_typeKind_enumeration : public cEnumAssociatedValues 
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_typeKind_structure : public cEnumAssociatedValues {
-  public : const GALGAS_propertyMap mAssociatedValue0 ;
-  public : const GALGAS_propertyList mAssociatedValue1 ;
+  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_propertyMap mAssociatedValue1 ;
+  public : const GALGAS_propertyList mAssociatedValue2 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_propertyMap & inAssociatedValue0,
-                                                     const GALGAS_propertyList & inAssociatedValue1
+  public : cEnumAssociatedValues_typeKind_structure (const GALGAS_lstring & inAssociatedValue0,
+                                                     const GALGAS_propertyMap & inAssociatedValue1,
+                                                     const GALGAS_propertyList & inAssociatedValue2
                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
@@ -6730,12 +6736,14 @@ class cEnumAssociatedValues_typeKind_opaque : public cEnumAssociatedValues {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_typeKind_arrayType : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_bigint mAssociatedValue1 ;
+  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue1 ;
+  public : const GALGAS_bigint mAssociatedValue2 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_typeKind_arrayType (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                     const GALGAS_bigint & inAssociatedValue1
+  public : cEnumAssociatedValues_typeKind_arrayType (const GALGAS_lstring & inAssociatedValue0,
+                                                     const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue1,
+                                                     const GALGAS_bigint & inAssociatedValue2
                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

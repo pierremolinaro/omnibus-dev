@@ -250,7 +250,7 @@ override method @primaryInExpressionAST analyzeExpression
     if inSelfType == .null then
       error selfLocation : "'self' is not available in this context" : currentPointer
     elsif [[inSelfType kind] isStructure] then
-      [[inSelfType kind] structure ?propertyMap:let structureObjectMap ?1*]
+      [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?1*]
       if [structureObjectMap hasKey !mObjectName] then
         [structureObjectMap searchKey
           !mObjectName
@@ -421,7 +421,7 @@ private proc handlePropertyInExpression
 {
 #--- Structure
   if [[[ioObjectPtr type] kind] isStructure] then
-    [[[ioObjectPtr type] kind] structure ?propertyMap:let structureObjectMap ?1*]
+    [[[ioObjectPtr type] kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?1*]
     if [structureObjectMap hasKey !inPropertyName] then
       [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property ?*]
       handlePropertyAccessInExpression (
@@ -768,7 +768,7 @@ proc analyzeEffectiveParameters
         switch [inSelfType kind]
         case opaque (*) :
           error name : "an opaque type does not handle field access" : parameterList, ioEffectiveParameterListIR
-        case arrayType (* *) :
+        case arrayType (* * *) :
           error name : "an array type does not handle field access" : parameterList, ioEffectiveParameterListIR
         case boolean :
           error name : "a boolean does not handle field access" : parameterList, ioEffectiveParameterListIR
@@ -782,7 +782,7 @@ proc analyzeEffectiveParameters
           error name : "a function does not handle field access" : parameterList, ioEffectiveParameterListIR
         case integer (* * * *) :
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR
-        case structure (@propertyMap propertyMap *) :
+        case structure (* @propertyMap propertyMap *) :
           [propertyMap searchKey !name ?let unused public ?let propertyObject ?let idx]
           getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
           [!?ioInstructionGenerationList appendPropertyReferenceFromSelf

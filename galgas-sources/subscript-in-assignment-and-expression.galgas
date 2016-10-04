@@ -75,7 +75,7 @@ private proc handleSubscriptArrayInAssignmentAndExpression
   ?!@objectIR ioObjectPtr
 {
 #--- Analyze array type
-  [[[ioObjectPtr type] kind] arrayType ?elementType:let type ?size:let @bigint arraySize]
+  [[[ioObjectPtr type] kind] arrayType ?typeName:* ?elementType:let type ?size:let @bigint arraySize]
 #--- Analyze index expression
   [inIndexExpression analyzeExpression
     !self:inSelfType
