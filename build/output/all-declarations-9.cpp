@@ -817,10 +817,10 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "staticArray maListeStatique {\n"
   "  let a $uint32\n"
   "  let b $uint32\n"
-  "//  let f func user ()\n"
+  "  let f func user ()\n"
   "}\n"
   "\n"
-  "func user toggleL2 @noUnusedWarning () {\n"
+  "func user toggleL2 () {\n"
   "  toggle (!port:LED_L2)\n"
   "}\n"
   "\n"
@@ -828,7 +828,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "  toggle (!port:LED_L3)\n"
   "}\n"
   "\n"
-  "//extend staticArray maListeStatique (5, 9, func toggleL2 ())\n"
+  "extend staticArray maListeStatique (5, 9, func toggleL2 ())\n"
   "\n"
   "//extend staticArray maListeStatique (15, 29)\n"
   "\n"
@@ -856,7 +856,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-static-list-example.plm",
   "plm",
   true, // Text file
-  1848, // Text length
+  1827, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

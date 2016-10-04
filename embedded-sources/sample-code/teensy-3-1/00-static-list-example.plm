@@ -37,10 +37,10 @@ init 1000 {
 staticArray maListeStatique {
   let a $uint32
   let b $uint32
-//  let f func user ()
+  let f func user ()
 }
 
-func user toggleL2 @noUnusedWarning () {
+func user toggleL2 () {
   toggle (!port:LED_L2)
 }
 
@@ -48,7 +48,7 @@ func user toggleL3 @noUnusedWarning () {
   toggle (!port:LED_L3)
 }
 
-//extend staticArray maListeStatique (5, 9, func toggleL2 ())
+extend staticArray maListeStatique (5, 9, func toggleL2 ())
 
 //extend staticArray maListeStatique (15, 29)
 
@@ -61,10 +61,10 @@ task T priority 12 stackSize 512 {
     self.deadline +%= 250
     toggle (!port:LED_L1)
     var total $uint32 = 0
-//    for élément in maListeStatique {
-//      total += élément.a
-//      total += élément.b
-//    }
+    for élément in maListeStatique {
+      total += élément.a
+      total += élément.b
+    }
     lcd.goto (!line:0 !column:0)
     lcd.printUnsigned (!total)
   }
