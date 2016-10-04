@@ -85,26 +85,24 @@ override method @typeAliasDeclaration enterInContext
 #--- Enter in type map
   [ioContext.mTypeMap searchKey
     !lkey:mAliasedTypeName
-    ?llvmTypeName:let llvmTypeMane
+#    ?llvmTypeName:let llvmTypeMane
     ?kind:let kind
     ?classConstantMap:let classConstantMap
     ?instantiable:let instanciable
     ?copyable:let copyable
     ?equatable:let equatable
     ?comparable:let comparable
-#    ?enumerationType:let enumerationType
   ]
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mNewTypeName
-    !llvmTypeName:llvmTypeMane
+#    !llvmTypeName:llvmTypeMane
     !kind:kind
     !classConstantMap:classConstantMap
     !instantiable:instanciable
     !copyable:copyable
     !equatable:equatable
     !comparable:comparable
-#    !enumerationType:enumerationType
   ]
 #--- Enter infix operators
   let newNewInfixKey = combineTypeNamesForInfixOperator (!mNewTypeName.string !mNewTypeName.string)

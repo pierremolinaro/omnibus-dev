@@ -148,7 +148,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   #---
     let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
     ioTemporaries.mTemporaryIndex ++
-    ioAllocaList += !enumeratedVarLLVMName ![type llvmTypeName]
+    ioAllocaList += !enumeratedVarLLVMName ![[type kind] llvmTypeName]
   #--- Analyze instruction list
     [!?ioVariableMap openOverrideForRepeatBlock]
     [!?ioVariableMap insertUsedConstant
@@ -212,7 +212,7 @@ override method @forLowerUpperBoundInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let llvmType = [mType llvmTypeName]
+  let llvmType = [[mType kind] llvmTypeName]
   let llvmVarName = llvmNameForLocalVariable (!mVarName)
   let testLabel = "for." + [mLocation locationIndex] + ".test"
   let loopLabel = "for." + [mLocation locationIndex] + ".loop"

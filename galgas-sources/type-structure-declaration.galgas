@@ -315,7 +315,7 @@ override method @structureDeclaration enterInContext
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
-    !llvmTypeName:"%" + ["$" + mStructureName assemblerRepresentation]
+#    !llvmTypeName:"%" + ["$" + mStructureName assemblerRepresentation]
     !kind:.structure {!typeName:mStructureName !propertyMap:propertyMap !propertyList:propertyList}
     !classConstantMap:{}
     !instantiable:true

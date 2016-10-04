@@ -118,14 +118,13 @@ override method @enumerationDeclaration enterInContext
   end
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName
-    !llvmTypeName:"i" + [[enumConstantMap count] - 1 significantBitCount]
+#    !llvmTypeName:"i" + [[enumConstantMap count] - 1 significantBitCount]
     !kind:.enumeration {!constantMap:enumConstantMap}
     !classConstantMap:classConstantMap
     !instantiable:true
     !copyable:copyable
     !equatable:true
     !comparable:true
-#    !enumerationType:.null # Not enumerable
   ]
 #--- Infix operators
   enterEnumerationOperators (

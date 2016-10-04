@@ -131,7 +131,7 @@ override method @forInstructionAST analyze
 #---
   let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
-  ioAllocaList += !enumeratedVarLLVMName ![iteratedElementType llvmTypeName]
+  ioAllocaList += !enumeratedVarLLVMName ![[iteratedElementType kind] llvmTypeName]
 #--- Analyze instruction list
   [!?ioVariableMap openOverrideForRepeatBlock]
   [!?ioVariableMap insertUsedConstant
@@ -261,7 +261,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let elementTypeLLVMName = [mElementType llvmTypeName]
+  let elementTypeLLVMName = [[mElementType kind] llvmTypeName]
   let listTypeLLVMName = "[" + mArraySize + " x " + elementTypeLLVMName + "]"
 
   let startLabel = "for.label.start." + [mLocation locationIndex]

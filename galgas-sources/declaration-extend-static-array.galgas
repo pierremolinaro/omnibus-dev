@@ -167,7 +167,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           else
             staticValue += ", "
           end
-          staticValue += [propertyType llvmTypeName] + " " + [expressionResult llvmName]
+          staticValue += [[propertyType kind] llvmTypeName] + " " + [expressionResult llvmName]
         case function (@mode unused mode @procedureSignature unused signature @unifiedTypeMap-proxy unused returnTypeProxy) :
           error endOfExp : "a function name is expected here"
         end      
@@ -206,12 +206,12 @@ override method @extendStaticArrayDeclarationAST semanticAnalysis
 method @staticlistValues_listMap generateLLVM ?!@string ioLLVMcode {
   if [self count] > 0 then
     ioLLVMcode += llvmTitleComment (!"Static Lists")
-    for (lkey initList) in self do
-      ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey) + " = private unnamed_addr constant ["
-      ioLLVMcode += [[initList length] string] + " x " + llvmNameForStaticListElementType (!lkey) + "] [\n"
+    for (key initList) in self do
+      ioLLVMcode += "@" + llvmNameForGlobalVariable (!key) + " = private unnamed_addr constant ["
+      ioLLVMcode += [[initList length] string] + " x %$" + llvmNameForStaticListElementType (![key nowhere]) + "] [\n"
       for (value) in initList
       do
-        ioLLVMcode += "  " + llvmNameForStaticListElementType (!lkey) + " " + value
+        ioLLVMcode += "  %$" + llvmNameForStaticListElementType (![key nowhere]) + " " + value
       between
         ioLLVMcode += ",\n"
       end

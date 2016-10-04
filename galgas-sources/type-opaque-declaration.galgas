@@ -132,7 +132,7 @@ override method @opaqueTypeDeclaration enterInContext
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     [!?ioContext.mTypeMap insertType
       !lkey:mOpaqueTypeName
-      !llvmTypeName:"i" + bitSize
+#      !llvmTypeName:"i" + bitSize
       !kind:.opaque {!bitCount:bitSize}
       !classConstantMap:{}
       !instantiable:instantiable

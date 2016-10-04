@@ -211,18 +211,18 @@ method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMco
   if mReturnType == .null then
     ioLLVMcode += " void"
   else
-      ioLLVMcode += " " + [mReturnType llvmTypeName]
+      ioLLVMcode += " " + [[mReturnType kind] llvmTypeName]
   end
   ioLLVMcode += " @" + procName + " ("
   for () in mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
     case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   between
     ioLLVMcode += ", "

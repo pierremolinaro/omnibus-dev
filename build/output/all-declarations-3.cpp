@@ -6658,7 +6658,6 @@ GALGAS_globalVariableMap GALGAS_globalVariableMap::extractObject (const GALGAS_o
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_unifiedTypeMap::cMapElement_unifiedTypeMap (const GALGAS_lstring & inKey,
-                                                        const GALGAS_string & in_llvmTypeName,
                                                         const GALGAS_typeKind & in_kind,
                                                         const GALGAS_classConstantMap & in_classConstantMap,
                                                         const GALGAS_bool & in_instantiable,
@@ -6667,7 +6666,6 @@ cMapElement_unifiedTypeMap::cMapElement_unifiedTypeMap (const GALGAS_lstring & i
                                                         const GALGAS_bool & in_comparable
                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mAttribute_llvmTypeName (in_llvmTypeName),
 mAttribute_kind (in_kind),
 mAttribute_classConstantMap (in_classConstantMap),
 mAttribute_instantiable (in_instantiable),
@@ -6679,24 +6677,20 @@ mAttribute_comparable (in_comparable) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_unifiedTypeMap::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_llvmTypeName.isValid () && mAttribute_kind.isValid () && mAttribute_classConstantMap.isValid () && mAttribute_instantiable.isValid () && mAttribute_copyable.isValid () && mAttribute_equatable.isValid () && mAttribute_comparable.isValid () ;
+  return mAttribute_lkey.isValid () && mAttribute_kind.isValid () && mAttribute_classConstantMap.isValid () && mAttribute_instantiable.isValid () && mAttribute_copyable.isValid () && mAttribute_equatable.isValid () && mAttribute_comparable.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_unifiedTypeMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_unifiedTypeMap (mAttribute_lkey, mAttribute_llvmTypeName, mAttribute_kind, mAttribute_classConstantMap, mAttribute_instantiable, mAttribute_copyable, mAttribute_equatable, mAttribute_comparable COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_unifiedTypeMap (mAttribute_lkey, mAttribute_kind, mAttribute_classConstantMap, mAttribute_instantiable, mAttribute_copyable, mAttribute_equatable, mAttribute_comparable COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_unifiedTypeMap::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "llvmTypeName" ":" ;
-  mAttribute_llvmTypeName.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "kind" ":" ;
@@ -6728,9 +6722,6 @@ void cMapElement_unifiedTypeMap::description (C_String & ioString, const int32_t
 typeComparisonResult cMapElement_unifiedTypeMap::compare (const cCollectionElement * inOperand) const {
   cMapElement_unifiedTypeMap * operand = (cMapElement_unifiedTypeMap *) inOperand ;
   typeComparisonResult result = mAttribute_lkey.objectCompare (operand->mAttribute_lkey) ;
-  if (kOperandEqual == result) {
-    result = mAttribute_llvmTypeName.objectCompare (operand->mAttribute_llvmTypeName) ;
-  }
   if (kOperandEqual == result) {
     result = mAttribute_kind.objectCompare (operand->mAttribute_kind) ;
   }
@@ -6807,17 +6798,16 @@ GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_emptyMap (LOCATION_ARGS
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_unifiedTypeMap::setter_insertType (GALGAS_lstring inKey,
-                                               GALGAS_string inArgument0,
-                                               GALGAS_typeKind inArgument1,
-                                               GALGAS_classConstantMap inArgument2,
+                                               GALGAS_typeKind inArgument0,
+                                               GALGAS_classConstantMap inArgument1,
+                                               GALGAS_bool inArgument2,
                                                GALGAS_bool inArgument3,
                                                GALGAS_bool inArgument4,
                                                GALGAS_bool inArgument5,
-                                               GALGAS_bool inArgument6,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) {
   cMapElement_unifiedTypeMap * p = NULL ;
-  macroMyNew (p, cMapElement_unifiedTypeMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_unifiedTypeMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -6837,13 +6827,12 @@ const char * kSearchErrorMessage_unifiedTypeMap_searchKey = "there is no '%K' ty
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_unifiedTypeMap::method_searchKey (GALGAS_lstring inKey,
-                                              GALGAS_string & outArgument0,
-                                              GALGAS_typeKind & outArgument1,
-                                              GALGAS_classConstantMap & outArgument2,
+                                              GALGAS_typeKind & outArgument0,
+                                              GALGAS_classConstantMap & outArgument1,
+                                              GALGAS_bool & outArgument2,
                                               GALGAS_bool & outArgument3,
                                               GALGAS_bool & outArgument4,
                                               GALGAS_bool & outArgument5,
-                                              GALGAS_bool & outArgument6,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) const {
   const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) performSearch (inKey,
@@ -6857,32 +6846,15 @@ void GALGAS_unifiedTypeMap::method_searchKey (GALGAS_lstring inKey,
     outArgument3.drop () ;
     outArgument4.drop () ;
     outArgument5.drop () ;
-    outArgument6.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    outArgument0 = p->mAttribute_llvmTypeName ;
-    outArgument1 = p->mAttribute_kind ;
-    outArgument2 = p->mAttribute_classConstantMap ;
-    outArgument3 = p->mAttribute_instantiable ;
-    outArgument4 = p->mAttribute_copyable ;
-    outArgument5 = p->mAttribute_equatable ;
-    outArgument6 = p->mAttribute_comparable ;
+    outArgument0 = p->mAttribute_kind ;
+    outArgument1 = p->mAttribute_classConstantMap ;
+    outArgument2 = p->mAttribute_instantiable ;
+    outArgument3 = p->mAttribute_copyable ;
+    outArgument4 = p->mAttribute_equatable ;
+    outArgument5 = p->mAttribute_comparable ;
   }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_unifiedTypeMap::getter_llvmTypeNameForKey (const GALGAS_string & inKey,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_string result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mAttribute_llvmTypeName ;
-  }
-  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6973,20 +6945,6 @@ GALGAS_bool GALGAS_unifiedTypeMap::getter_comparableForKey (const GALGAS_string 
     result = p->mAttribute_comparable ;
   }
   return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_unifiedTypeMap::setter_setLlvmTypeNameForKey (GALGAS_string inAttributeValue,
-                                                          GALGAS_string inKey,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mAttribute_llvmTypeName = inAttributeValue ;
-  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7097,14 +7055,6 @@ GALGAS_lstring cEnumerator_unifiedTypeMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mAttribute_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cEnumerator_unifiedTypeMap::current_llvmTypeName (LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mAttribute_llvmTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

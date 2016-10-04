@@ -144,7 +144,7 @@ getter @objectIR type -> @unifiedTypeMap-proxy outResult {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @objectIR llvmTypeName -> @string outResult {
-  outResult = [[self type] llvmTypeName]
+  outResult = [[[self type] kind] llvmTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

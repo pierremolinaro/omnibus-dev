@@ -207,7 +207,7 @@ proc guardSemanticAnalysis
   #--- Add 'accept" output variable
     let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
     let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
-    allocaList += !resultVarName.string ![resultType llvmTypeName]
+    allocaList += !resultVarName.string ![[resultType kind] llvmTypeName]
     [!?variableMap insertOutputFormalArgument
       !lkey:resultVarName
       !type:resultType
@@ -411,11 +411,11 @@ method @guardMapIR guardCodeGeneration
         if first then first = false else ioLLVMcode += ", " end
         switch mFormalArgumentKind
         case input :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
         case output :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
        case inputOutput :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
         end
       end
       ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
@@ -454,11 +454,11 @@ method @guardMapIR-element llvmCodeGeneration
     end
     switch mFormalArgumentKind
     case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
@@ -470,7 +470,7 @@ method @guardMapIR-element llvmCodeGeneration
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
-      let llvmType = [mFormalArgumentType llvmTypeName]
+      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
       ioLLVMcode += "  %" + llvmNameForLocalVariable (!mFormalArgumentName) + " = alloca " + llvmType + "\n"
     case output, inputOutput :
     end
@@ -478,7 +478,7 @@ method @guardMapIR-element llvmCodeGeneration
   for () in mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
-      let llvmType = [mFormalArgumentType llvmTypeName]
+      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
       ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", "
          + llvmType + " * %" + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
     case output, inputOutput :

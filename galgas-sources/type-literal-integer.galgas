@@ -63,14 +63,13 @@ override method @literalIntegerDeclaration enterInContext
  #---
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
-    !llvmTypeName:"<<literal integer>>"
+#    !llvmTypeName:"<<literal integer>>"
     !kind:.staticInteger
     !classConstantMap:{}
     !instantiable:true
     !copyable:true
     !equatable:true
     !comparable:true
-#    !enumerationType:.null # Not enumerable
   ]
 #--- Enter integer operators
   enterLiteralIntegerOperators (

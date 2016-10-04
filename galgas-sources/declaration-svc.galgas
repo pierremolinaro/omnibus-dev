@@ -240,12 +240,12 @@ method @routineMapIR svcCodeGeneration
       if svc.mReturnType == .null then
         ioLLVMcode += " void"
       else
-        ioLLVMcode += " " + [svc.mReturnType llvmTypeName]
+        ioLLVMcode += " " + [[svc.mReturnType kind] llvmTypeName]
       end
       ioLLVMcode += " @" + svcCallName + " ("
       var first = true
       if svc.mReceiverType != .null then
-        ioLLVMcode += [svc.mReceiverType llvmTypeName] + " * %receiver"
+        ioLLVMcode += [[svc.mReceiverType kind] llvmTypeName] + " * %receiver"
         first = false
       end
       for () in svc.mFormalArgumentListForGeneration do
@@ -256,11 +256,11 @@ method @routineMapIR svcCodeGeneration
         end
         switch mFormalArgumentKind
         case input :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
         case output :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
        case inputOutput :
-          ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
         end
       end
       ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"

@@ -72,14 +72,13 @@ override method @integerDeclaration enterInContext
  #---
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
-    !llvmTypeName:"i" + mSize
+#    !llvmTypeName:"i" + mSize
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
     !classConstantMap:{}
     !instantiable:true
     !copyable:true
     !equatable:true
     !comparable:true
-#    !enumerationType:.null # Not enumerable
   ]
 #--- Enter integer <-> integer operators
   enter_integer_integer_operators (

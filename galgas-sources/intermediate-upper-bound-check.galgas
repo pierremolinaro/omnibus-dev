@@ -28,7 +28,7 @@ override method @upperBoundCheckIR llvmInstructionCode
     ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
     ?let staticStringIndex
   ]
-  let llvmType = [[mSource type] llvmTypeName]
+  let llvmType = [[[mSource type] kind] llvmTypeName]
   let llvmSourceName = [mSource llvmName]
   let llvmLabelName = [mSource name]
   ioLLVMcode += "  " + llvmSourceName + ".isOk = icmp ult " + llvmType + " " + llvmSourceName + ", " + mUpperBoundPlusOne + "\n"
