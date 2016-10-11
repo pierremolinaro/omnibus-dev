@@ -513,7 +513,6 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
   public : GALGAS_mode mProperty_mMode ;
   public : GALGAS_procedureSignature mProperty_mSignature ;
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
-  public : GALGAS_bool mProperty_mAppendFileAndLineArgumentForPanicLocation ;
   public : GALGAS_bool mProperty_mCanAccessProperties ;
   public : GALGAS_bool mProperty_mCanMutateProperties ;
 
@@ -537,7 +536,6 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
                                                    const GALGAS_mode & in_mMode,
                                                    const GALGAS_procedureSignature & in_mSignature,
                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType,
-                                                   const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation,
                                                    const GALGAS_bool & in_mCanAccessProperties,
                                                    const GALGAS_bool & in_mCanMutateProperties) ;
 
@@ -561,8 +559,7 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
                                                                                 const class GALGAS_procedureSignature & inOperand6,
                                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & inOperand7,
                                                                                 const class GALGAS_bool & inOperand8,
-                                                                                const class GALGAS_bool & inOperand9,
-                                                                                const class GALGAS_bool & inOperand10
+                                                                                const class GALGAS_bool & inOperand9
                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -578,8 +575,6 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mCanAccessProperties (LOCATION_ARGS) const ;
 

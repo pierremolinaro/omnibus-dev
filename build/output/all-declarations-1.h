@@ -8260,7 +8260,6 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                       const class GALGAS_unifiedTypeMap_2D_proxy & inOperand7,
                                                       const class GALGAS_bool & inOperand8,
                                                       const class GALGAS_bool & inOperand9,
-                                                      const class GALGAS_bool & inOperand10,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -8275,14 +8274,8 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
                                                    class GALGAS_bool constinArgument8,
                                                    class GALGAS_bool constinArgument9,
-                                                   class GALGAS_bool constinArgument10,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setMAppendFileAndLineArgumentForPanicLocationForKey (class GALGAS_bool constinArgument0,
-                                                                                             class GALGAS_string constinArgument1,
-                                                                                             C_Compiler * inCompiler
-                                                                                             COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMCanAccessPropertiesForKey (class GALGAS_bool constinArgument0,
                                                                        class GALGAS_string constinArgument1,
@@ -8341,17 +8334,12 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_unifiedTypeMap_2D_proxy & outArgument7,
                                                    class GALGAS_bool & outArgument8,
                                                    class GALGAS_bool & outArgument9,
-                                                   class GALGAS_bool & outArgument10,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocationForKey (const class GALGAS_string & constinOperand0,
-                                                                                                       C_Compiler * inCompiler
-                                                                                                       COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mCanAccessPropertiesForKey (const class GALGAS_string & constinOperand0,
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const ;
@@ -8421,7 +8409,6 @@ class cEnumerator_routineMapForContext : public cGenericAbstractEnumerator {
   public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
   public : class GALGAS_procedureSignature current_mSignature (LOCATION_ARGS) const ;
   public : class GALGAS_unifiedTypeMap_2D_proxy current_mReturnType (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mCanAccessProperties (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mCanMutateProperties (LOCATION_ARGS) const ;
 //--- Current element access

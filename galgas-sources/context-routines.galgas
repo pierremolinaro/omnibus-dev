@@ -8,7 +8,6 @@ map @routineMapForContext { # Key is a mangled name
   @mode mMode
   @procedureSignature mSignature
   @unifiedTypeMap-proxy mReturnType
-  @bool mAppendFileAndLineArgumentForPanicLocation
   @bool mCanAccessProperties
   @bool mCanMutateProperties
 

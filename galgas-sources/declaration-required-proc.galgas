@@ -71,7 +71,7 @@ proc checkRequiredProcedures
         ?let isGlobal
         ?*
         ?let @mode mode 
-        ?5*
+        ?4*
       ]
     #--- Check modes
       if mode != requiredProc.mMode then

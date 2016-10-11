@@ -344,7 +344,7 @@ method @callInstructionAST baseGuardAnalyze
       ?routineMangledName:let @lstring functionMangledName
       ?routineNameForGeneration:let @lstring unused functionNameForGeneration
       ?returnType:let @unifiedTypeMap-proxy returnedType
-      ?appendFileAndLineArgumentForPanicLocation:let unused appendFileAndLineArgumentForPanicLocation
+#      ?appendFileAndLineArgumentForPanicLocation:let unused appendFileAndLineArgumentForPanicLocation
     )
     if returnedType != .null then
       error functionName : "<< internal guard error >>"

@@ -551,8 +551,7 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
                                                                const class GALGAS_lstring & inOperand2,
                                                                const class GALGAS_lstring & inOperand3,
                                                                const class GALGAS_calleeKindIR & inOperand4,
-                                                               const class GALGAS_procCallEffectiveParameterListIR & inOperand5,
-                                                               const class GALGAS_bool & inOperand6
+                                                               const class GALGAS_procCallEffectiveParameterListIR & inOperand5
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -564,8 +563,6 @@ class GALGAS_functionCallIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_procCallEffectiveParameterListIR getter_mArgumentList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionMangledName (LOCATION_ARGS) const ;
@@ -603,7 +600,6 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
   public : GALGAS_lstring mProperty_mFunctionNameForGeneration ;
   public : GALGAS_calleeKindIR mProperty_mKind ;
   public : GALGAS_procCallEffectiveParameterListIR mProperty_mArgumentList ;
-  public : GALGAS_bool mProperty_mAppendFileAndLineArgumentForPanicLocation ;
 
 //--- Constructor
   public : cPtr_functionCallIR (const GALGAS_string & in_mGlobalVariableName,
@@ -611,8 +607,7 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
                                 const GALGAS_lstring & in_mFunctionMangledName,
                                 const GALGAS_lstring & in_mFunctionNameForGeneration,
                                 const GALGAS_calleeKindIR & in_mKind,
-                                const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList,
-                                const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
+                                const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList
                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -625,7 +620,6 @@ class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionNameForGeneration (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_calleeKindIR getter_mKind (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_procCallEffectiveParameterListIR getter_mArgumentList (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
