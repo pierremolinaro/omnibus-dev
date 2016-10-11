@@ -168,6 +168,32 @@ override method @forInstructionAST analyze
     warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
   end
 #---
+  var context = inContext
+#  if [[iteratedElementType kind] isStructure] then
+#    [[iteratedElementType kind] structure ?2* ?propertyList:let propList]
+#    for (propertyName propertyType) in propList do
+#      if [[propertyType kind] isFunction] then
+#        [[propertyType kind] function ?mode:let mode ?signature:let signature ?returnTypeProxy:let returnType]
+#        var functionMangleName = llvmRegularTypeMangledNameFromName (!plmNameForStaticListElementType (!mIteratedObject))
+#        functionMangleName.string += "." + [propertyType key]
+#        [!?context.mRoutineMapForContext insertKey
+#          !functionMangleName
+#          !functionMangleName
+#          !true # is public
+#          !false # global
+#          !mode
+#          !signature
+#          !.function
+#          !false # weak
+#          !returnType
+#          !false # mAppendFileAndLineArgumentForPanicLocation
+#          !false # mCanAccessProperties
+#          !false # mCanMutateProperties
+#        ]
+#      end
+#    end
+#  end
+#---
   @instructionListIR doInstructionList_GenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
@@ -175,7 +201,7 @@ override method @forInstructionAST analyze
     !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !endOfInstructionList:mEndOf_do_instruction
-    !context:inContext
+    !context:context
     !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
@@ -197,7 +223,6 @@ override method @forInstructionAST analyze
   elsif [iteratedTypeKind isArrayType] then
     [iteratedTypeKind arrayType ?typeName:* ?elementType:let elementType ?size:let size]
     @stringset invokedFunctionSet = {}
-#    log "AZERTY: " : ioTemporaries.mStaticArrayMap
     if [ioTemporaries.mStaticArrayMap hasKey !mIteratedObject] then
       [ioTemporaries.mStaticArrayMap searchKey !mIteratedObject ?invokedFunctionSet]
     end

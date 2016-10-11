@@ -17,22 +17,22 @@ typeComparisonResult cPtr_forInstructionOnStringIR::dynamicObjectCompare (const 
   const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mVarName.objectCompare (p->mAttribute_mVarName) ;
+    result = mProperty_mVarName.objectCompare (p->mProperty_mVarName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLocation.objectCompare (p->mAttribute_mLocation) ;
+    result = mProperty_mLocation.objectCompare (p->mProperty_mLocation) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mIteratedObject.objectCompare (p->mAttribute_mIteratedObject) ;
+    result = mProperty_mIteratedObject.objectCompare (p->mProperty_mIteratedObject) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mWhileInstructionList.objectCompare (p->mAttribute_mWhileInstructionList) ;
+    result = mProperty_mWhileInstructionList.objectCompare (p->mProperty_mWhileInstructionList) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mWhileExpressionResult.objectCompare (p->mAttribute_mWhileExpressionResult) ;
+    result = mProperty_mWhileExpressionResult.objectCompare (p->mProperty_mWhileExpressionResult) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mDoInstructionList.objectCompare (p->mAttribute_mDoInstructionList) ;
+    result = mProperty_mDoInstructionList.objectCompare (p->mProperty_mDoInstructionList) ;
   }
   return result ;
 }
@@ -92,7 +92,7 @@ GALGAS_string GALGAS_forInstructionOnStringIR::getter_mVarName (UNUSED_LOCATION_
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mAttribute_mVarName ;
+    result = p->mProperty_mVarName ;
   }
   return result ;
 }
@@ -100,7 +100,7 @@ GALGAS_string GALGAS_forInstructionOnStringIR::getter_mVarName (UNUSED_LOCATION_
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_forInstructionOnStringIR::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVarName ;
+  return mProperty_mVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -110,7 +110,7 @@ GALGAS_location GALGAS_forInstructionOnStringIR::getter_mLocation (UNUSED_LOCATI
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mAttribute_mLocation ;
+    result = p->mProperty_mLocation ;
   }
   return result ;
 }
@@ -118,7 +118,7 @@ GALGAS_location GALGAS_forInstructionOnStringIR::getter_mLocation (UNUSED_LOCATI
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cPtr_forInstructionOnStringIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLocation ;
+  return mProperty_mLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -128,7 +128,7 @@ GALGAS_objectIR GALGAS_forInstructionOnStringIR::getter_mIteratedObject (UNUSED_
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mAttribute_mIteratedObject ;
+    result = p->mProperty_mIteratedObject ;
   }
   return result ;
 }
@@ -136,7 +136,7 @@ GALGAS_objectIR GALGAS_forInstructionOnStringIR::getter_mIteratedObject (UNUSED_
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_forInstructionOnStringIR::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIteratedObject ;
+  return mProperty_mIteratedObject ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -146,7 +146,7 @@ GALGAS_instructionListIR GALGAS_forInstructionOnStringIR::getter_mWhileInstructi
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mAttribute_mWhileInstructionList ;
+    result = p->mProperty_mWhileInstructionList ;
   }
   return result ;
 }
@@ -154,7 +154,7 @@ GALGAS_instructionListIR GALGAS_forInstructionOnStringIR::getter_mWhileInstructi
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR cPtr_forInstructionOnStringIR::getter_mWhileInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mWhileInstructionList ;
+  return mProperty_mWhileInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -164,7 +164,7 @@ GALGAS_objectIR GALGAS_forInstructionOnStringIR::getter_mWhileExpressionResult (
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mAttribute_mWhileExpressionResult ;
+    result = p->mProperty_mWhileExpressionResult ;
   }
   return result ;
 }
@@ -172,7 +172,7 @@ GALGAS_objectIR GALGAS_forInstructionOnStringIR::getter_mWhileExpressionResult (
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_forInstructionOnStringIR::getter_mWhileExpressionResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mWhileExpressionResult ;
+  return mProperty_mWhileExpressionResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -182,7 +182,7 @@ GALGAS_instructionListIR GALGAS_forInstructionOnStringIR::getter_mDoInstructionL
   if (NULL != mObjectPtr) {
     const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mAttribute_mDoInstructionList ;
+    result = p->mProperty_mDoInstructionList ;
   }
   return result ;
 }
@@ -190,7 +190,7 @@ GALGAS_instructionListIR GALGAS_forInstructionOnStringIR::getter_mDoInstructionL
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR cPtr_forInstructionOnStringIR::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDoInstructionList ;
+  return mProperty_mDoInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -205,12 +205,12 @@ cPtr_forInstructionOnStringIR::cPtr_forInstructionOnStringIR (const GALGAS_strin
                                                               const GALGAS_instructionListIR & in_mDoInstructionList
                                                               COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mVarName (in_mVarName),
-mAttribute_mLocation (in_mLocation),
-mAttribute_mIteratedObject (in_mIteratedObject),
-mAttribute_mWhileInstructionList (in_mWhileInstructionList),
-mAttribute_mWhileExpressionResult (in_mWhileExpressionResult),
-mAttribute_mDoInstructionList (in_mDoInstructionList) {
+mProperty_mVarName (in_mVarName),
+mProperty_mLocation (in_mLocation),
+mProperty_mIteratedObject (in_mIteratedObject),
+mProperty_mWhileInstructionList (in_mWhileInstructionList),
+mProperty_mWhileExpressionResult (in_mWhileExpressionResult),
+mProperty_mDoInstructionList (in_mDoInstructionList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -222,17 +222,17 @@ const C_galgas_type_descriptor * cPtr_forInstructionOnStringIR::classDescriptor 
 void cPtr_forInstructionOnStringIR::description (C_String & ioString,
                                                  const int32_t inIndentation) const {
   ioString << "[@forInstructionOnStringIR:" ;
-  mAttribute_mVarName.description (ioString, inIndentation+1) ;
+  mProperty_mVarName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLocation.description (ioString, inIndentation+1) ;
+  mProperty_mLocation.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mIteratedObject.description (ioString, inIndentation+1) ;
+  mProperty_mIteratedObject.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mWhileInstructionList.description (ioString, inIndentation+1) ;
+  mProperty_mWhileInstructionList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mWhileExpressionResult.description (ioString, inIndentation+1) ;
+  mProperty_mWhileExpressionResult.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mDoInstructionList.description (ioString, inIndentation+1) ;
+  mProperty_mDoInstructionList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -240,7 +240,7 @@ void cPtr_forInstructionOnStringIR::description (C_String & ioString,
 
 acPtr_class * cPtr_forInstructionOnStringIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_forInstructionOnStringIR (mAttribute_mVarName, mAttribute_mLocation, mAttribute_mIteratedObject, mAttribute_mWhileInstructionList, mAttribute_mWhileExpressionResult, mAttribute_mDoInstructionList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_forInstructionOnStringIR (mProperty_mVarName, mProperty_mLocation, mProperty_mIteratedObject, mProperty_mWhileInstructionList, mProperty_mWhileExpressionResult, mProperty_mDoInstructionList COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -297,28 +297,28 @@ typeComparisonResult cPtr_forLowerUpperBoundInstructionAST::dynamicObjectCompare
   const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mVarName.objectCompare (p->mAttribute_mVarName) ;
+    result = mProperty_mVarName.objectCompare (p->mProperty_mVarName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mTypeName.objectCompare (p->mAttribute_mTypeName) ;
+    result = mProperty_mTypeName.objectCompare (p->mProperty_mTypeName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLowerBoundExpression.objectCompare (p->mAttribute_mLowerBoundExpression) ;
+    result = mProperty_mLowerBoundExpression.objectCompare (p->mProperty_mLowerBoundExpression) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction.objectCompare (p->mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction) ;
+    result = mProperty_mEndOf_5F_lowerBoundExpression_5F_instruction.objectCompare (p->mProperty_mEndOf_5F_lowerBoundExpression_5F_instruction) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mUpperBoundExpression.objectCompare (p->mAttribute_mUpperBoundExpression) ;
+    result = mProperty_mUpperBoundExpression.objectCompare (p->mProperty_mUpperBoundExpression) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction.objectCompare (p->mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction) ;
+    result = mProperty_mEndOf_5F_upperBoundExpression_5F_instruction.objectCompare (p->mProperty_mEndOf_5F_upperBoundExpression_5F_instruction) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mDoInstructionList.objectCompare (p->mAttribute_mDoInstructionList) ;
+    result = mProperty_mDoInstructionList.objectCompare (p->mProperty_mDoInstructionList) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mEndOf_5F_do_5F_instruction.objectCompare (p->mAttribute_mEndOf_5F_do_5F_instruction) ;
+    result = mProperty_mEndOf_5F_do_5F_instruction.objectCompare (p->mProperty_mEndOf_5F_do_5F_instruction) ;
   }
   return result ;
 }
@@ -380,7 +380,7 @@ GALGAS_lstring GALGAS_forLowerUpperBoundInstructionAST::getter_mVarName (UNUSED_
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mVarName ;
+    result = p->mProperty_mVarName ;
   }
   return result ;
 }
@@ -388,7 +388,7 @@ GALGAS_lstring GALGAS_forLowerUpperBoundInstructionAST::getter_mVarName (UNUSED_
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cPtr_forLowerUpperBoundInstructionAST::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVarName ;
+  return mProperty_mVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -398,7 +398,7 @@ GALGAS_lstring GALGAS_forLowerUpperBoundInstructionAST::getter_mTypeName (UNUSED
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mTypeName ;
+    result = p->mProperty_mTypeName ;
   }
   return result ;
 }
@@ -406,7 +406,7 @@ GALGAS_lstring GALGAS_forLowerUpperBoundInstructionAST::getter_mTypeName (UNUSED
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cPtr_forLowerUpperBoundInstructionAST::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeName ;
+  return mProperty_mTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -416,7 +416,7 @@ GALGAS_expressionAST GALGAS_forLowerUpperBoundInstructionAST::getter_mLowerBound
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mLowerBoundExpression ;
+    result = p->mProperty_mLowerBoundExpression ;
   }
   return result ;
 }
@@ -424,7 +424,7 @@ GALGAS_expressionAST GALGAS_forLowerUpperBoundInstructionAST::getter_mLowerBound
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_expressionAST cPtr_forLowerUpperBoundInstructionAST::getter_mLowerBoundExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLowerBoundExpression ;
+  return mProperty_mLowerBoundExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -434,7 +434,7 @@ GALGAS_location GALGAS_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_lowerB
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction ;
+    result = p->mProperty_mEndOf_5F_lowerBoundExpression_5F_instruction ;
   }
   return result ;
 }
@@ -442,7 +442,7 @@ GALGAS_location GALGAS_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_lowerB
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cPtr_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_lowerBoundExpression_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction ;
+  return mProperty_mEndOf_5F_lowerBoundExpression_5F_instruction ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -452,7 +452,7 @@ GALGAS_expressionAST GALGAS_forLowerUpperBoundInstructionAST::getter_mUpperBound
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mUpperBoundExpression ;
+    result = p->mProperty_mUpperBoundExpression ;
   }
   return result ;
 }
@@ -460,7 +460,7 @@ GALGAS_expressionAST GALGAS_forLowerUpperBoundInstructionAST::getter_mUpperBound
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_expressionAST cPtr_forLowerUpperBoundInstructionAST::getter_mUpperBoundExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUpperBoundExpression ;
+  return mProperty_mUpperBoundExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -470,7 +470,7 @@ GALGAS_location GALGAS_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_upperB
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction ;
+    result = p->mProperty_mEndOf_5F_upperBoundExpression_5F_instruction ;
   }
   return result ;
 }
@@ -478,7 +478,7 @@ GALGAS_location GALGAS_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_upperB
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cPtr_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_upperBoundExpression_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction ;
+  return mProperty_mEndOf_5F_upperBoundExpression_5F_instruction ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -488,7 +488,7 @@ GALGAS_instructionListAST GALGAS_forLowerUpperBoundInstructionAST::getter_mDoIns
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mDoInstructionList ;
+    result = p->mProperty_mDoInstructionList ;
   }
   return result ;
 }
@@ -496,7 +496,7 @@ GALGAS_instructionListAST GALGAS_forLowerUpperBoundInstructionAST::getter_mDoIns
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST cPtr_forLowerUpperBoundInstructionAST::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDoInstructionList ;
+  return mProperty_mDoInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -506,7 +506,7 @@ GALGAS_location GALGAS_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_do_5F_
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionAST * p = (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionAST) ;
-    result = p->mAttribute_mEndOf_5F_do_5F_instruction ;
+    result = p->mProperty_mEndOf_5F_do_5F_instruction ;
   }
   return result ;
 }
@@ -514,7 +514,7 @@ GALGAS_location GALGAS_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_do_5F_
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cPtr_forLowerUpperBoundInstructionAST::getter_mEndOf_5F_do_5F_instruction (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOf_5F_do_5F_instruction ;
+  return mProperty_mEndOf_5F_do_5F_instruction ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -531,14 +531,14 @@ cPtr_forLowerUpperBoundInstructionAST::cPtr_forLowerUpperBoundInstructionAST (co
                                                                               const GALGAS_location & in_mEndOf_5F_do_5F_instruction
                                                                               COMMA_LOCATION_ARGS) :
 cPtr_instructionAST (THERE),
-mAttribute_mVarName (in_mVarName),
-mAttribute_mTypeName (in_mTypeName),
-mAttribute_mLowerBoundExpression (in_mLowerBoundExpression),
-mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction (in_mEndOf_5F_lowerBoundExpression_5F_instruction),
-mAttribute_mUpperBoundExpression (in_mUpperBoundExpression),
-mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction (in_mEndOf_5F_upperBoundExpression_5F_instruction),
-mAttribute_mDoInstructionList (in_mDoInstructionList),
-mAttribute_mEndOf_5F_do_5F_instruction (in_mEndOf_5F_do_5F_instruction) {
+mProperty_mVarName (in_mVarName),
+mProperty_mTypeName (in_mTypeName),
+mProperty_mLowerBoundExpression (in_mLowerBoundExpression),
+mProperty_mEndOf_5F_lowerBoundExpression_5F_instruction (in_mEndOf_5F_lowerBoundExpression_5F_instruction),
+mProperty_mUpperBoundExpression (in_mUpperBoundExpression),
+mProperty_mEndOf_5F_upperBoundExpression_5F_instruction (in_mEndOf_5F_upperBoundExpression_5F_instruction),
+mProperty_mDoInstructionList (in_mDoInstructionList),
+mProperty_mEndOf_5F_do_5F_instruction (in_mEndOf_5F_do_5F_instruction) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -550,21 +550,21 @@ const C_galgas_type_descriptor * cPtr_forLowerUpperBoundInstructionAST::classDes
 void cPtr_forLowerUpperBoundInstructionAST::description (C_String & ioString,
                                                          const int32_t inIndentation) const {
   ioString << "[@forLowerUpperBoundInstructionAST:" ;
-  mAttribute_mVarName.description (ioString, inIndentation+1) ;
+  mProperty_mVarName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mTypeName.description (ioString, inIndentation+1) ;
+  mProperty_mTypeName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLowerBoundExpression.description (ioString, inIndentation+1) ;
+  mProperty_mLowerBoundExpression.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction.description (ioString, inIndentation+1) ;
+  mProperty_mEndOf_5F_lowerBoundExpression_5F_instruction.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mUpperBoundExpression.description (ioString, inIndentation+1) ;
+  mProperty_mUpperBoundExpression.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction.description (ioString, inIndentation+1) ;
+  mProperty_mEndOf_5F_upperBoundExpression_5F_instruction.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mDoInstructionList.description (ioString, inIndentation+1) ;
+  mProperty_mDoInstructionList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mEndOf_5F_do_5F_instruction.description (ioString, inIndentation+1) ;
+  mProperty_mEndOf_5F_do_5F_instruction.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -572,7 +572,7 @@ void cPtr_forLowerUpperBoundInstructionAST::description (C_String & ioString,
 
 acPtr_class * cPtr_forLowerUpperBoundInstructionAST::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_forLowerUpperBoundInstructionAST (mAttribute_mVarName, mAttribute_mTypeName, mAttribute_mLowerBoundExpression, mAttribute_mEndOf_5F_lowerBoundExpression_5F_instruction, mAttribute_mUpperBoundExpression, mAttribute_mEndOf_5F_upperBoundExpression_5F_instruction, mAttribute_mDoInstructionList, mAttribute_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_forLowerUpperBoundInstructionAST (mProperty_mVarName, mProperty_mTypeName, mProperty_mLowerBoundExpression, mProperty_mEndOf_5F_lowerBoundExpression_5F_instruction, mProperty_mUpperBoundExpression, mProperty_mEndOf_5F_upperBoundExpression_5F_instruction, mProperty_mDoInstructionList, mProperty_mEndOf_5F_do_5F_instruction COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -629,25 +629,25 @@ typeComparisonResult cPtr_forLowerUpperBoundInstructionIR::dynamicObjectCompare 
   const cPtr_forLowerUpperBoundInstructionIR * p = (const cPtr_forLowerUpperBoundInstructionIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mVarName.objectCompare (p->mAttribute_mVarName) ;
+    result = mProperty_mVarName.objectCompare (p->mProperty_mVarName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mType.objectCompare (p->mAttribute_mType) ;
+    result = mProperty_mType.objectCompare (p->mProperty_mType) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mUnsigned.objectCompare (p->mAttribute_mUnsigned) ;
+    result = mProperty_mUnsigned.objectCompare (p->mProperty_mUnsigned) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLocation.objectCompare (p->mAttribute_mLocation) ;
+    result = mProperty_mLocation.objectCompare (p->mProperty_mLocation) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLowerExpressionResult.objectCompare (p->mAttribute_mLowerExpressionResult) ;
+    result = mProperty_mLowerExpressionResult.objectCompare (p->mProperty_mLowerExpressionResult) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mUpperExpressionResult.objectCompare (p->mAttribute_mUpperExpressionResult) ;
+    result = mProperty_mUpperExpressionResult.objectCompare (p->mProperty_mUpperExpressionResult) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mInstructionList.objectCompare (p->mAttribute_mInstructionList) ;
+    result = mProperty_mInstructionList.objectCompare (p->mProperty_mInstructionList) ;
   }
   return result ;
 }
@@ -708,7 +708,7 @@ GALGAS_string GALGAS_forLowerUpperBoundInstructionIR::getter_mVarName (UNUSED_LO
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionIR * p = (const cPtr_forLowerUpperBoundInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionIR) ;
-    result = p->mAttribute_mVarName ;
+    result = p->mProperty_mVarName ;
   }
   return result ;
 }
@@ -716,7 +716,7 @@ GALGAS_string GALGAS_forLowerUpperBoundInstructionIR::getter_mVarName (UNUSED_LO
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_forLowerUpperBoundInstructionIR::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVarName ;
+  return mProperty_mVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -726,7 +726,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_forLowerUpperBoundInstructionIR::getter_mT
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionIR * p = (const cPtr_forLowerUpperBoundInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionIR) ;
-    result = p->mAttribute_mType ;
+    result = p->mProperty_mType ;
   }
   return result ;
 }
@@ -734,7 +734,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_forLowerUpperBoundInstructionIR::getter_mT
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cPtr_forLowerUpperBoundInstructionIR::getter_mType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mType ;
+  return mProperty_mType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -744,7 +744,7 @@ GALGAS_bool GALGAS_forLowerUpperBoundInstructionIR::getter_mUnsigned (UNUSED_LOC
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionIR * p = (const cPtr_forLowerUpperBoundInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionIR) ;
-    result = p->mAttribute_mUnsigned ;
+    result = p->mProperty_mUnsigned ;
   }
   return result ;
 }
@@ -752,7 +752,7 @@ GALGAS_bool GALGAS_forLowerUpperBoundInstructionIR::getter_mUnsigned (UNUSED_LOC
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cPtr_forLowerUpperBoundInstructionIR::getter_mUnsigned (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUnsigned ;
+  return mProperty_mUnsigned ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -762,7 +762,7 @@ GALGAS_location GALGAS_forLowerUpperBoundInstructionIR::getter_mLocation (UNUSED
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionIR * p = (const cPtr_forLowerUpperBoundInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionIR) ;
-    result = p->mAttribute_mLocation ;
+    result = p->mProperty_mLocation ;
   }
   return result ;
 }
@@ -770,7 +770,7 @@ GALGAS_location GALGAS_forLowerUpperBoundInstructionIR::getter_mLocation (UNUSED
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cPtr_forLowerUpperBoundInstructionIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLocation ;
+  return mProperty_mLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -780,7 +780,7 @@ GALGAS_objectIR GALGAS_forLowerUpperBoundInstructionIR::getter_mLowerExpressionR
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionIR * p = (const cPtr_forLowerUpperBoundInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionIR) ;
-    result = p->mAttribute_mLowerExpressionResult ;
+    result = p->mProperty_mLowerExpressionResult ;
   }
   return result ;
 }
@@ -788,7 +788,7 @@ GALGAS_objectIR GALGAS_forLowerUpperBoundInstructionIR::getter_mLowerExpressionR
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_forLowerUpperBoundInstructionIR::getter_mLowerExpressionResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLowerExpressionResult ;
+  return mProperty_mLowerExpressionResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -798,7 +798,7 @@ GALGAS_objectIR GALGAS_forLowerUpperBoundInstructionIR::getter_mUpperExpressionR
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionIR * p = (const cPtr_forLowerUpperBoundInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionIR) ;
-    result = p->mAttribute_mUpperExpressionResult ;
+    result = p->mProperty_mUpperExpressionResult ;
   }
   return result ;
 }
@@ -806,7 +806,7 @@ GALGAS_objectIR GALGAS_forLowerUpperBoundInstructionIR::getter_mUpperExpressionR
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_forLowerUpperBoundInstructionIR::getter_mUpperExpressionResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUpperExpressionResult ;
+  return mProperty_mUpperExpressionResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -816,7 +816,7 @@ GALGAS_instructionListIR GALGAS_forLowerUpperBoundInstructionIR::getter_mInstruc
   if (NULL != mObjectPtr) {
     const cPtr_forLowerUpperBoundInstructionIR * p = (const cPtr_forLowerUpperBoundInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_forLowerUpperBoundInstructionIR) ;
-    result = p->mAttribute_mInstructionList ;
+    result = p->mProperty_mInstructionList ;
   }
   return result ;
 }
@@ -824,7 +824,7 @@ GALGAS_instructionListIR GALGAS_forLowerUpperBoundInstructionIR::getter_mInstruc
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR cPtr_forLowerUpperBoundInstructionIR::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionList ;
+  return mProperty_mInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -840,13 +840,13 @@ cPtr_forLowerUpperBoundInstructionIR::cPtr_forLowerUpperBoundInstructionIR (cons
                                                                             const GALGAS_instructionListIR & in_mInstructionList
                                                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mVarName (in_mVarName),
-mAttribute_mType (in_mType),
-mAttribute_mUnsigned (in_mUnsigned),
-mAttribute_mLocation (in_mLocation),
-mAttribute_mLowerExpressionResult (in_mLowerExpressionResult),
-mAttribute_mUpperExpressionResult (in_mUpperExpressionResult),
-mAttribute_mInstructionList (in_mInstructionList) {
+mProperty_mVarName (in_mVarName),
+mProperty_mType (in_mType),
+mProperty_mUnsigned (in_mUnsigned),
+mProperty_mLocation (in_mLocation),
+mProperty_mLowerExpressionResult (in_mLowerExpressionResult),
+mProperty_mUpperExpressionResult (in_mUpperExpressionResult),
+mProperty_mInstructionList (in_mInstructionList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -858,19 +858,19 @@ const C_galgas_type_descriptor * cPtr_forLowerUpperBoundInstructionIR::classDesc
 void cPtr_forLowerUpperBoundInstructionIR::description (C_String & ioString,
                                                         const int32_t inIndentation) const {
   ioString << "[@forLowerUpperBoundInstructionIR:" ;
-  mAttribute_mVarName.description (ioString, inIndentation+1) ;
+  mProperty_mVarName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mType.description (ioString, inIndentation+1) ;
+  mProperty_mType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mUnsigned.description (ioString, inIndentation+1) ;
+  mProperty_mUnsigned.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLocation.description (ioString, inIndentation+1) ;
+  mProperty_mLocation.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLowerExpressionResult.description (ioString, inIndentation+1) ;
+  mProperty_mLowerExpressionResult.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mUpperExpressionResult.description (ioString, inIndentation+1) ;
+  mProperty_mUpperExpressionResult.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mInstructionList.description (ioString, inIndentation+1) ;
+  mProperty_mInstructionList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -878,7 +878,7 @@ void cPtr_forLowerUpperBoundInstructionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_forLowerUpperBoundInstructionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_forLowerUpperBoundInstructionIR (mAttribute_mVarName, mAttribute_mType, mAttribute_mUnsigned, mAttribute_mLocation, mAttribute_mLowerExpressionResult, mAttribute_mUpperExpressionResult, mAttribute_mInstructionList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_forLowerUpperBoundInstructionIR (mProperty_mVarName, mProperty_mType, mProperty_mUnsigned, mProperty_mLocation, mProperty_mLowerExpressionResult, mProperty_mUpperExpressionResult, mProperty_mInstructionList COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -967,9 +967,9 @@ GALGAS_string extensionGetter_passingModeForActualSelector (const GALGAS_effecti
     }
     break ;
   }
-  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, constinArgument_inSelector.mAttribute_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+  const enumGalgasBool test_1 = GALGAS_bool (kIsNotEqual, constinArgument_inSelector.mProperty_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_1) {
-    result_outResult.plusAssign_operation(constinArgument_inSelector.mAttribute_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 69)), inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 69)) ;
+    result_outResult.plusAssign_operation(constinArgument_inSelector.mProperty_string.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 69)), inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 69)) ;
   }
 //---
   return result_outResult ;
@@ -987,16 +987,16 @@ typeComparisonResult cPtr_switchInstructionIR::dynamicObjectCompare (const acPtr
   const cPtr_switchInstructionIR * p = (const cPtr_switchInstructionIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_switchInstructionIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mLabelIndex.objectCompare (p->mAttribute_mLabelIndex) ;
+    result = mProperty_mLabelIndex.objectCompare (p->mProperty_mLabelIndex) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSwitchExpressionGenerationList.objectCompare (p->mAttribute_mSwitchExpressionGenerationList) ;
+    result = mProperty_mSwitchExpressionGenerationList.objectCompare (p->mProperty_mSwitchExpressionGenerationList) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSwitchExpression.objectCompare (p->mAttribute_mSwitchExpression) ;
+    result = mProperty_mSwitchExpression.objectCompare (p->mProperty_mSwitchExpression) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mCaseGenerationList.objectCompare (p->mAttribute_mCaseGenerationList) ;
+    result = mProperty_mCaseGenerationList.objectCompare (p->mProperty_mCaseGenerationList) ;
   }
   return result ;
 }
@@ -1054,7 +1054,7 @@ GALGAS_uint GALGAS_switchInstructionIR::getter_mLabelIndex (UNUSED_LOCATION_ARGS
   if (NULL != mObjectPtr) {
     const cPtr_switchInstructionIR * p = (const cPtr_switchInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_switchInstructionIR) ;
-    result = p->mAttribute_mLabelIndex ;
+    result = p->mProperty_mLabelIndex ;
   }
   return result ;
 }
@@ -1062,7 +1062,7 @@ GALGAS_uint GALGAS_switchInstructionIR::getter_mLabelIndex (UNUSED_LOCATION_ARGS
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cPtr_switchInstructionIR::getter_mLabelIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLabelIndex ;
+  return mProperty_mLabelIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1072,7 +1072,7 @@ GALGAS_instructionListIR GALGAS_switchInstructionIR::getter_mSwitchExpressionGen
   if (NULL != mObjectPtr) {
     const cPtr_switchInstructionIR * p = (const cPtr_switchInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_switchInstructionIR) ;
-    result = p->mAttribute_mSwitchExpressionGenerationList ;
+    result = p->mProperty_mSwitchExpressionGenerationList ;
   }
   return result ;
 }
@@ -1080,7 +1080,7 @@ GALGAS_instructionListIR GALGAS_switchInstructionIR::getter_mSwitchExpressionGen
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR cPtr_switchInstructionIR::getter_mSwitchExpressionGenerationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSwitchExpressionGenerationList ;
+  return mProperty_mSwitchExpressionGenerationList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1090,7 +1090,7 @@ GALGAS_objectIR GALGAS_switchInstructionIR::getter_mSwitchExpression (UNUSED_LOC
   if (NULL != mObjectPtr) {
     const cPtr_switchInstructionIR * p = (const cPtr_switchInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_switchInstructionIR) ;
-    result = p->mAttribute_mSwitchExpression ;
+    result = p->mProperty_mSwitchExpression ;
   }
   return result ;
 }
@@ -1098,7 +1098,7 @@ GALGAS_objectIR GALGAS_switchInstructionIR::getter_mSwitchExpression (UNUSED_LOC
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_switchInstructionIR::getter_mSwitchExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSwitchExpression ;
+  return mProperty_mSwitchExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1108,7 +1108,7 @@ GALGAS_switchCaseListIR GALGAS_switchInstructionIR::getter_mCaseGenerationList (
   if (NULL != mObjectPtr) {
     const cPtr_switchInstructionIR * p = (const cPtr_switchInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_switchInstructionIR) ;
-    result = p->mAttribute_mCaseGenerationList ;
+    result = p->mProperty_mCaseGenerationList ;
   }
   return result ;
 }
@@ -1116,7 +1116,7 @@ GALGAS_switchCaseListIR GALGAS_switchInstructionIR::getter_mCaseGenerationList (
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_switchCaseListIR cPtr_switchInstructionIR::getter_mCaseGenerationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mCaseGenerationList ;
+  return mProperty_mCaseGenerationList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1129,10 +1129,10 @@ cPtr_switchInstructionIR::cPtr_switchInstructionIR (const GALGAS_uint & in_mLabe
                                                     const GALGAS_switchCaseListIR & in_mCaseGenerationList
                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mLabelIndex (in_mLabelIndex),
-mAttribute_mSwitchExpressionGenerationList (in_mSwitchExpressionGenerationList),
-mAttribute_mSwitchExpression (in_mSwitchExpression),
-mAttribute_mCaseGenerationList (in_mCaseGenerationList) {
+mProperty_mLabelIndex (in_mLabelIndex),
+mProperty_mSwitchExpressionGenerationList (in_mSwitchExpressionGenerationList),
+mProperty_mSwitchExpression (in_mSwitchExpression),
+mProperty_mCaseGenerationList (in_mCaseGenerationList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1144,13 +1144,13 @@ const C_galgas_type_descriptor * cPtr_switchInstructionIR::classDescriptor (void
 void cPtr_switchInstructionIR::description (C_String & ioString,
                                             const int32_t inIndentation) const {
   ioString << "[@switchInstructionIR:" ;
-  mAttribute_mLabelIndex.description (ioString, inIndentation+1) ;
+  mProperty_mLabelIndex.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSwitchExpressionGenerationList.description (ioString, inIndentation+1) ;
+  mProperty_mSwitchExpressionGenerationList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSwitchExpression.description (ioString, inIndentation+1) ;
+  mProperty_mSwitchExpression.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mCaseGenerationList.description (ioString, inIndentation+1) ;
+  mProperty_mCaseGenerationList.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -1158,7 +1158,7 @@ void cPtr_switchInstructionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_switchInstructionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_switchInstructionIR (mAttribute_mLabelIndex, mAttribute_mSwitchExpressionGenerationList, mAttribute_mSwitchExpression, mAttribute_mCaseGenerationList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_switchInstructionIR (mProperty_mLabelIndex, mProperty_mSwitchExpressionGenerationList, mProperty_mSwitchExpression, mProperty_mCaseGenerationList COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -1441,7 +1441,7 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const GALGAS_assignm
                                                             GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
                                                             C_Compiler * inCompiler
                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_accessInAssignmentListAST enumerator_3107 (inObject.mAttribute_mAccessList, kEnumeration_up) ;
+  cEnumerator_accessInAssignmentListAST enumerator_3107 (inObject.mProperty_mAccessList, kENUMERATION_UP) ;
   while (enumerator_3107.hasCurrentObject ()) {
     switch (enumerator_3107.current_mAccess (HERE).enumValue ()) {
     case GALGAS_accessInAssignmentAST::kNotBuilt:
@@ -1488,12 +1488,12 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
                                               COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outCurrentObject.drop () ; // Release 'out' argument
   outArgument_outGlobalVariableReceiverName.drop () ; // Release 'out' argument
-  switch (inObject.mAttribute_mSelfAccess.enumValue ()) {
+  switch (inObject.mProperty_mSelfAccess.enumValue ()) {
   case GALGAS_assignmentSelfAccessAST::kNotBuilt:
     break ;
   case GALGAS_assignmentSelfAccessAST::kEnum_noSelfAccess:
     {
-      const enumGalgasBool test_0 = ioArgument_ioVariableMap.getter_hasKey (inObject.mAttribute_mIdentifier.getter_string (SOURCE_FILE ("assignment-target.galgas", 118)) COMMA_SOURCE_FILE ("assignment-target.galgas", 118)).boolEnum () ;
+      const enumGalgasBool test_0 = ioArgument_ioVariableMap.getter_hasKey (inObject.mProperty_mIdentifier.getter_string (SOURCE_FILE ("assignment-target.galgas", 118)) COMMA_SOURCE_FILE ("assignment-target.galgas", 118)).boolEnum () ;
       if (kBoolTrue == test_0) {
         switch (constinArgument_inSelfAccessKind.enumValue ()) {
         case GALGAS_targetAccessKind::kNotBuilt:
@@ -1505,7 +1505,7 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
             GALGAS_bool joker_4919_1 ; // Joker input parameter
             GALGAS_bool joker_4950_2 ; // Joker input parameter
             GALGAS_bool joker_4950_1 ; // Joker input parameter
-            ioArgument_ioVariableMap.setter_searchForReadAccess (inObject.mAttribute_mIdentifier, joker_4919_2, joker_4919_1, outArgument_outCurrentObject, joker_4950_2, joker_4950_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 121)) ;
+            ioArgument_ioVariableMap.setter_searchForReadAccess (inObject.mProperty_mIdentifier, joker_4919_2, joker_4919_1, outArgument_outCurrentObject, joker_4950_2, joker_4950_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 121)) ;
             }
           }
           break ;
@@ -1516,7 +1516,7 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
             GALGAS_bool joker_5038_1 ; // Joker input parameter
             GALGAS_bool joker_5069_2 ; // Joker input parameter
             GALGAS_bool joker_5069_1 ; // Joker input parameter
-            ioArgument_ioVariableMap.setter_searchForWriteAccess (inObject.mAttribute_mIdentifier, joker_5038_2, joker_5038_1, outArgument_outCurrentObject, joker_5069_2, joker_5069_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 123)) ;
+            ioArgument_ioVariableMap.setter_searchForWriteAccess (inObject.mProperty_mIdentifier, joker_5038_2, joker_5038_1, outArgument_outCurrentObject, joker_5069_2, joker_5069_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 123)) ;
             }
           }
           break ;
@@ -1527,7 +1527,7 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
             GALGAS_bool joker_5165_1 ; // Joker input parameter
             GALGAS_bool joker_5196_2 ; // Joker input parameter
             GALGAS_bool joker_5196_1 ; // Joker input parameter
-            ioArgument_ioVariableMap.setter_searchForReadWriteAccess (inObject.mAttribute_mIdentifier, joker_5165_2, joker_5165_1, outArgument_outCurrentObject, joker_5196_2, joker_5196_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 125)) ;
+            ioArgument_ioVariableMap.setter_searchForReadWriteAccess (inObject.mProperty_mIdentifier, joker_5165_2, joker_5165_1, outArgument_outCurrentObject, joker_5196_2, joker_5196_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 125)) ;
             }
           }
           break ;
@@ -1535,20 +1535,20 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
         GALGAS_string temp_1 ;
         const enumGalgasBool test_2 = outArgument_outCurrentObject.getter_isGlobalVariableReference (SOURCE_FILE ("assignment-target.galgas", 127)).boolEnum () ;
         if (kBoolTrue == test_2) {
-          temp_1 = inObject.mAttribute_mIdentifier.mAttribute_string ;
+          temp_1 = inObject.mProperty_mIdentifier.mProperty_string ;
         }else if (kBoolFalse == test_2) {
           temp_1 = GALGAS_string::makeEmptyString () ;
         }
         outArgument_outGlobalVariableReceiverName = temp_1 ;
       }else if (kBoolFalse == test_0) {
-        outArgument_outCurrentObject = GALGAS_objectIR::constructor_possibleFunction (GALGAS_objectIR::constructor_null (SOURCE_FILE ("assignment-target.galgas", 129)), inObject.mAttribute_mIdentifier  COMMA_SOURCE_FILE ("assignment-target.galgas", 129)) ;
+        outArgument_outCurrentObject = GALGAS_objectIR::constructor_possibleFunction (GALGAS_objectIR::constructor_null (SOURCE_FILE ("assignment-target.galgas", 129)), inObject.mProperty_mIdentifier  COMMA_SOURCE_FILE ("assignment-target.galgas", 129)) ;
         outArgument_outGlobalVariableReceiverName = GALGAS_string::makeEmptyString () ;
       }
     }
     break ;
   case GALGAS_assignmentSelfAccessAST::kEnum_selfAccess:
     {
-      const cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess * extractPtr_6525 = (const cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess *) (inObject.mAttribute_mSelfAccess.unsafePointer ()) ;
+      const cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess * extractPtr_6525 = (const cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess *) (inObject.mProperty_mSelfAccess.unsafePointer ()) ;
       const GALGAS_location extractedValue_selfLocation = extractPtr_6525->mAssociatedValue0 ;
       outArgument_outGlobalVariableReceiverName = GALGAS_string::makeEmptyString () ;
       const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("assignment-target.galgas", 134)))).boolEnum () ;
@@ -1563,17 +1563,17 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
           GALGAS_lstring joker_5839 ; // Joker input parameter
           GALGAS_propertyList joker_5878_1 ; // Joker input parameter
           constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 137)).method_structure (joker_5839, var_structureObjectMap_5876, joker_5878_1, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 137)) ;
-          const enumGalgasBool test_6 = var_structureObjectMap_5876.getter_hasKey (inObject.mAttribute_mIdentifier.getter_string (SOURCE_FILE ("assignment-target.galgas", 138)) COMMA_SOURCE_FILE ("assignment-target.galgas", 138)).boolEnum () ;
+          const enumGalgasBool test_6 = var_structureObjectMap_5876.getter_hasKey (inObject.mProperty_mIdentifier.getter_string (SOURCE_FILE ("assignment-target.galgas", 138)) COMMA_SOURCE_FILE ("assignment-target.galgas", 138)).boolEnum () ;
           if (kBoolTrue == test_6) {
             GALGAS_objectIR var_object_6032 ;
             GALGAS_bool joker_6009 ; // Joker input parameter
             GALGAS_uint joker_6044 ; // Joker input parameter
-            var_structureObjectMap_5876.method_searchKey (inObject.mAttribute_mIdentifier, joker_6009, var_object_6032, joker_6044, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 139)) ;
+            var_structureObjectMap_5876.method_searchKey (inObject.mProperty_mIdentifier, joker_6009, var_object_6032, joker_6044, inCompiler COMMA_SOURCE_FILE ("assignment-target.galgas", 139)) ;
             {
             routine_handleSelfAccessInAssignment (constinArgument_inSelfType, var_object_6032, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outCurrentObject, inCompiler  COMMA_SOURCE_FILE ("assignment-target.galgas", 145)) ;
             }
           }else if (kBoolFalse == test_6) {
-            outArgument_outCurrentObject = GALGAS_objectIR::constructor_possibleFunction (GALGAS_objectIR::constructor_selfObject (constinArgument_inSelfType  COMMA_SOURCE_FILE ("assignment-target.galgas", 153)), inObject.mAttribute_mIdentifier  COMMA_SOURCE_FILE ("assignment-target.galgas", 153)) ;
+            outArgument_outCurrentObject = GALGAS_objectIR::constructor_possibleFunction (GALGAS_objectIR::constructor_selfObject (constinArgument_inSelfType  COMMA_SOURCE_FILE ("assignment-target.galgas", 153)), inObject.mProperty_mIdentifier  COMMA_SOURCE_FILE ("assignment-target.galgas", 153)) ;
           }
         }else if (kBoolFalse == test_5) {
           TC_Array <C_FixItDescription> fixItArray7 ;
@@ -1585,7 +1585,7 @@ void extensionMethod_analyzeAssignmentTarget (const GALGAS_assignmentTargetAST i
     }
     break ;
   }
-  cEnumerator_accessInAssignmentListAST enumerator_6597 (inObject.mAttribute_mAccessList, kEnumeration_up) ;
+  cEnumerator_accessInAssignmentListAST enumerator_6597 (inObject.mProperty_mAccessList, kENUMERATION_UP) ;
   while (enumerator_6597.hasCurrentObject ()) {
     switch (enumerator_6597.current_mAccess (HERE).enumValue ()) {
     case GALGAS_accessInAssignmentAST::kNotBuilt:
@@ -2270,7 +2270,7 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_typeKind & inObject,
       const GALGAS_lstring extractedValue_typeName = extractPtr_4756->mAssociatedValue0 ;
       const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_4756->mAssociatedValue1 ;
       const GALGAS_propertyList extractedValue_propertyList = extractPtr_4756->mAssociatedValue2 ;
-      result_result = GALGAS_string ("%").add_operation (function_llvmRegularTypeMangledNameFromName (extractedValue_typeName, inCompiler COMMA_SOURCE_FILE ("context.galgas", 114)).mAttribute_string.getter_assemblerRepresentation (SOURCE_FILE ("context.galgas", 114)), inCompiler COMMA_SOURCE_FILE ("context.galgas", 114)) ;
+      result_result = GALGAS_string ("%").add_operation (function_llvmRegularTypeMangledNameFromName (extractedValue_typeName, inCompiler COMMA_SOURCE_FILE ("context.galgas", 114)).mProperty_string.getter_assemblerRepresentation (SOURCE_FILE ("context.galgas", 114)), inCompiler COMMA_SOURCE_FILE ("context.galgas", 114)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_integer:
@@ -2301,7 +2301,7 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_typeKind & inObject,
     {
       const cEnumAssociatedValues_typeKind_arrayType * extractPtr_5108 = (const cEnumAssociatedValues_typeKind_arrayType *) (temp_0.unsafePointer ()) ;
       const GALGAS_lstring extractedValue_typeName = extractPtr_5108->mAssociatedValue0 ;
-      result_result = GALGAS_string ("%").add_operation (extractedValue_typeName.mAttribute_string.getter_assemblerRepresentation (SOURCE_FILE ("context.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("context.galgas", 122)) ;
+      result_result = GALGAS_string ("%").add_operation (extractedValue_typeName.mProperty_string.getter_assemblerRepresentation (SOURCE_FILE ("context.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("context.galgas", 122)) ;
     }
     break ;
   case GALGAS_typeKind::kEnum_function:
@@ -2317,7 +2317,7 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_typeKind & inObject,
         result_result = extensionGetter_llvmTypeName (extractedValue_returnTypeProxy.getter_kind (inCompiler COMMA_SOURCE_FILE ("context.galgas", 127)), inCompiler COMMA_SOURCE_FILE ("context.galgas", 127)) ;
       }
       result_result.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context.galgas", 129)) ;
-      cEnumerator_procedureSignature enumerator_5385 (extractedValue_signature, kEnumeration_up) ;
+      cEnumerator_procedureSignature enumerator_5385 (extractedValue_signature, kENUMERATION_UP) ;
       while (enumerator_5385.hasCurrentObject ()) {
         result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_5385.current_mType (HERE).getter_kind (inCompiler COMMA_SOURCE_FILE ("context.galgas", 132)), inCompiler COMMA_SOURCE_FILE ("context.galgas", 132)), inCompiler  COMMA_SOURCE_FILE ("context.galgas", 132)) ;
         switch (enumerator_5385.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
@@ -2353,54 +2353,54 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_typeKind & inObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_semanticContext::GALGAS_semanticContext (void) :
-mAttribute_mTargetParameters (),
-mAttribute_mPointerSize (),
-mAttribute_mBooleanType (),
-mAttribute_mLiteralIntegerType (),
-mAttribute_mPanicCodeType (),
-mAttribute_mPanicLineType (),
-mAttribute_mUnsignedIntegerType (),
-mAttribute_mTypeMap (),
-mAttribute_mRoutineMapForContext (),
-mAttribute_mGuardMapForContext (),
-mAttribute_mInitRoutineMap (),
-mAttribute_mPanicSetupRoutinePriorityMap (),
-mAttribute_mPanicLoopRoutinePriorityMap (),
-mAttribute_mControlRegisterMap (),
-mAttribute_mGlobalConstantMap (),
-mAttribute_mGlobalVariableMap (),
-mAttribute_mModuleMap (),
-mAttribute_mConstructorMap (),
-mAttribute_mStaticlistMap (),
-mAttribute_mDefinedInterruptSet (),
-mAttribute_mAvailableInterruptMap (),
-mAttribute_mEqualOperatorMap (),
-mAttribute_mNonEqualOperatorMap (),
-mAttribute_mStrictInfOperatorMap (),
-mAttribute_mInfEqualOperatorMap (),
-mAttribute_mStrictSupOperatorMap (),
-mAttribute_mSupEqualOperatorMap (),
-mAttribute_mAndOperatorMap (),
-mAttribute_mOrOperatorMap (),
-mAttribute_mXorOperatorMap (),
-mAttribute_mBooleanXorOperatorMap (),
-mAttribute_mAddOperatorMap (),
-mAttribute_mAddNoOvfOperatorMap (),
-mAttribute_mSubOperatorMap (),
-mAttribute_mSubNoOvfOperatorMap (),
-mAttribute_mMulOperatorMap (),
-mAttribute_mMulNoOvfOperatorMap (),
-mAttribute_mDivOperatorMap (),
-mAttribute_mDivNoOvfOperatorMap (),
-mAttribute_mModOperatorMap (),
-mAttribute_mModNoOvfOperatorMap (),
-mAttribute_mLeftShiftOperatorMap (),
-mAttribute_mRightShiftOperatorMap (),
-mAttribute_mUnaryMinusOperatorMap (),
-mAttribute_mNotOperatorMap (),
-mAttribute_mUnsignedComplementOperatorMap (),
-mAttribute_mTaskMap (),
-mAttribute_mGlobalTaskVariableList () {
+mProperty_mTargetParameters (),
+mProperty_mPointerSize (),
+mProperty_mBooleanType (),
+mProperty_mLiteralIntegerType (),
+mProperty_mPanicCodeType (),
+mProperty_mPanicLineType (),
+mProperty_mUnsignedIntegerType (),
+mProperty_mTypeMap (),
+mProperty_mRoutineMapForContext (),
+mProperty_mGuardMapForContext (),
+mProperty_mInitRoutineMap (),
+mProperty_mPanicSetupRoutinePriorityMap (),
+mProperty_mPanicLoopRoutinePriorityMap (),
+mProperty_mControlRegisterMap (),
+mProperty_mGlobalConstantMap (),
+mProperty_mGlobalVariableMap (),
+mProperty_mModuleMap (),
+mProperty_mConstructorMap (),
+mProperty_mStaticlistMap (),
+mProperty_mDefinedInterruptSet (),
+mProperty_mAvailableInterruptMap (),
+mProperty_mEqualOperatorMap (),
+mProperty_mNonEqualOperatorMap (),
+mProperty_mStrictInfOperatorMap (),
+mProperty_mInfEqualOperatorMap (),
+mProperty_mStrictSupOperatorMap (),
+mProperty_mSupEqualOperatorMap (),
+mProperty_mAndOperatorMap (),
+mProperty_mOrOperatorMap (),
+mProperty_mXorOperatorMap (),
+mProperty_mBooleanXorOperatorMap (),
+mProperty_mAddOperatorMap (),
+mProperty_mAddNoOvfOperatorMap (),
+mProperty_mSubOperatorMap (),
+mProperty_mSubNoOvfOperatorMap (),
+mProperty_mMulOperatorMap (),
+mProperty_mMulNoOvfOperatorMap (),
+mProperty_mDivOperatorMap (),
+mProperty_mDivNoOvfOperatorMap (),
+mProperty_mModOperatorMap (),
+mProperty_mModNoOvfOperatorMap (),
+mProperty_mLeftShiftOperatorMap (),
+mProperty_mRightShiftOperatorMap (),
+mProperty_mUnaryMinusOperatorMap (),
+mProperty_mNotOperatorMap (),
+mProperty_mUnsignedComplementOperatorMap (),
+mProperty_mTaskMap (),
+mProperty_mGlobalTaskVariableList () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2458,54 +2458,54 @@ GALGAS_semanticContext::GALGAS_semanticContext (const GALGAS_targetParameters & 
                                                 const GALGAS_prefixOperatorMap & inOperand45,
                                                 const GALGAS_taskMap & inOperand46,
                                                 const GALGAS_globalTaskVariableList & inOperand47) :
-mAttribute_mTargetParameters (inOperand0),
-mAttribute_mPointerSize (inOperand1),
-mAttribute_mBooleanType (inOperand2),
-mAttribute_mLiteralIntegerType (inOperand3),
-mAttribute_mPanicCodeType (inOperand4),
-mAttribute_mPanicLineType (inOperand5),
-mAttribute_mUnsignedIntegerType (inOperand6),
-mAttribute_mTypeMap (inOperand7),
-mAttribute_mRoutineMapForContext (inOperand8),
-mAttribute_mGuardMapForContext (inOperand9),
-mAttribute_mInitRoutineMap (inOperand10),
-mAttribute_mPanicSetupRoutinePriorityMap (inOperand11),
-mAttribute_mPanicLoopRoutinePriorityMap (inOperand12),
-mAttribute_mControlRegisterMap (inOperand13),
-mAttribute_mGlobalConstantMap (inOperand14),
-mAttribute_mGlobalVariableMap (inOperand15),
-mAttribute_mModuleMap (inOperand16),
-mAttribute_mConstructorMap (inOperand17),
-mAttribute_mStaticlistMap (inOperand18),
-mAttribute_mDefinedInterruptSet (inOperand19),
-mAttribute_mAvailableInterruptMap (inOperand20),
-mAttribute_mEqualOperatorMap (inOperand21),
-mAttribute_mNonEqualOperatorMap (inOperand22),
-mAttribute_mStrictInfOperatorMap (inOperand23),
-mAttribute_mInfEqualOperatorMap (inOperand24),
-mAttribute_mStrictSupOperatorMap (inOperand25),
-mAttribute_mSupEqualOperatorMap (inOperand26),
-mAttribute_mAndOperatorMap (inOperand27),
-mAttribute_mOrOperatorMap (inOperand28),
-mAttribute_mXorOperatorMap (inOperand29),
-mAttribute_mBooleanXorOperatorMap (inOperand30),
-mAttribute_mAddOperatorMap (inOperand31),
-mAttribute_mAddNoOvfOperatorMap (inOperand32),
-mAttribute_mSubOperatorMap (inOperand33),
-mAttribute_mSubNoOvfOperatorMap (inOperand34),
-mAttribute_mMulOperatorMap (inOperand35),
-mAttribute_mMulNoOvfOperatorMap (inOperand36),
-mAttribute_mDivOperatorMap (inOperand37),
-mAttribute_mDivNoOvfOperatorMap (inOperand38),
-mAttribute_mModOperatorMap (inOperand39),
-mAttribute_mModNoOvfOperatorMap (inOperand40),
-mAttribute_mLeftShiftOperatorMap (inOperand41),
-mAttribute_mRightShiftOperatorMap (inOperand42),
-mAttribute_mUnaryMinusOperatorMap (inOperand43),
-mAttribute_mNotOperatorMap (inOperand44),
-mAttribute_mUnsignedComplementOperatorMap (inOperand45),
-mAttribute_mTaskMap (inOperand46),
-mAttribute_mGlobalTaskVariableList (inOperand47) {
+mProperty_mTargetParameters (inOperand0),
+mProperty_mPointerSize (inOperand1),
+mProperty_mBooleanType (inOperand2),
+mProperty_mLiteralIntegerType (inOperand3),
+mProperty_mPanicCodeType (inOperand4),
+mProperty_mPanicLineType (inOperand5),
+mProperty_mUnsignedIntegerType (inOperand6),
+mProperty_mTypeMap (inOperand7),
+mProperty_mRoutineMapForContext (inOperand8),
+mProperty_mGuardMapForContext (inOperand9),
+mProperty_mInitRoutineMap (inOperand10),
+mProperty_mPanicSetupRoutinePriorityMap (inOperand11),
+mProperty_mPanicLoopRoutinePriorityMap (inOperand12),
+mProperty_mControlRegisterMap (inOperand13),
+mProperty_mGlobalConstantMap (inOperand14),
+mProperty_mGlobalVariableMap (inOperand15),
+mProperty_mModuleMap (inOperand16),
+mProperty_mConstructorMap (inOperand17),
+mProperty_mStaticlistMap (inOperand18),
+mProperty_mDefinedInterruptSet (inOperand19),
+mProperty_mAvailableInterruptMap (inOperand20),
+mProperty_mEqualOperatorMap (inOperand21),
+mProperty_mNonEqualOperatorMap (inOperand22),
+mProperty_mStrictInfOperatorMap (inOperand23),
+mProperty_mInfEqualOperatorMap (inOperand24),
+mProperty_mStrictSupOperatorMap (inOperand25),
+mProperty_mSupEqualOperatorMap (inOperand26),
+mProperty_mAndOperatorMap (inOperand27),
+mProperty_mOrOperatorMap (inOperand28),
+mProperty_mXorOperatorMap (inOperand29),
+mProperty_mBooleanXorOperatorMap (inOperand30),
+mProperty_mAddOperatorMap (inOperand31),
+mProperty_mAddNoOvfOperatorMap (inOperand32),
+mProperty_mSubOperatorMap (inOperand33),
+mProperty_mSubNoOvfOperatorMap (inOperand34),
+mProperty_mMulOperatorMap (inOperand35),
+mProperty_mMulNoOvfOperatorMap (inOperand36),
+mProperty_mDivOperatorMap (inOperand37),
+mProperty_mDivNoOvfOperatorMap (inOperand38),
+mProperty_mModOperatorMap (inOperand39),
+mProperty_mModNoOvfOperatorMap (inOperand40),
+mProperty_mLeftShiftOperatorMap (inOperand41),
+mProperty_mRightShiftOperatorMap (inOperand42),
+mProperty_mUnaryMinusOperatorMap (inOperand43),
+mProperty_mNotOperatorMap (inOperand44),
+mProperty_mUnsignedComplementOperatorMap (inOperand45),
+mProperty_mTaskMap (inOperand46),
+mProperty_mGlobalTaskVariableList (inOperand47) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2624,148 +2624,148 @@ GALGAS_semanticContext GALGAS_semanticContext::constructor_new (const GALGAS_tar
 typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanticContext & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mTargetParameters.objectCompare (inOperand.mAttribute_mTargetParameters) ;
+    result = mProperty_mTargetParameters.objectCompare (inOperand.mProperty_mTargetParameters) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPointerSize.objectCompare (inOperand.mAttribute_mPointerSize) ;
+    result = mProperty_mPointerSize.objectCompare (inOperand.mProperty_mPointerSize) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mBooleanType.objectCompare (inOperand.mAttribute_mBooleanType) ;
+    result = mProperty_mBooleanType.objectCompare (inOperand.mProperty_mBooleanType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mLiteralIntegerType.objectCompare (inOperand.mAttribute_mLiteralIntegerType) ;
+    result = mProperty_mLiteralIntegerType.objectCompare (inOperand.mProperty_mLiteralIntegerType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPanicCodeType.objectCompare (inOperand.mAttribute_mPanicCodeType) ;
+    result = mProperty_mPanicCodeType.objectCompare (inOperand.mProperty_mPanicCodeType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPanicLineType.objectCompare (inOperand.mAttribute_mPanicLineType) ;
+    result = mProperty_mPanicLineType.objectCompare (inOperand.mProperty_mPanicLineType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mUnsignedIntegerType.objectCompare (inOperand.mAttribute_mUnsignedIntegerType) ;
+    result = mProperty_mUnsignedIntegerType.objectCompare (inOperand.mProperty_mUnsignedIntegerType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mTypeMap.objectCompare (inOperand.mAttribute_mTypeMap) ;
+    result = mProperty_mTypeMap.objectCompare (inOperand.mProperty_mTypeMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRoutineMapForContext.objectCompare (inOperand.mAttribute_mRoutineMapForContext) ;
+    result = mProperty_mRoutineMapForContext.objectCompare (inOperand.mProperty_mRoutineMapForContext) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGuardMapForContext.objectCompare (inOperand.mAttribute_mGuardMapForContext) ;
+    result = mProperty_mGuardMapForContext.objectCompare (inOperand.mProperty_mGuardMapForContext) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInitRoutineMap.objectCompare (inOperand.mAttribute_mInitRoutineMap) ;
+    result = mProperty_mInitRoutineMap.objectCompare (inOperand.mProperty_mInitRoutineMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPanicSetupRoutinePriorityMap.objectCompare (inOperand.mAttribute_mPanicSetupRoutinePriorityMap) ;
+    result = mProperty_mPanicSetupRoutinePriorityMap.objectCompare (inOperand.mProperty_mPanicSetupRoutinePriorityMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPanicLoopRoutinePriorityMap.objectCompare (inOperand.mAttribute_mPanicLoopRoutinePriorityMap) ;
+    result = mProperty_mPanicLoopRoutinePriorityMap.objectCompare (inOperand.mProperty_mPanicLoopRoutinePriorityMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mControlRegisterMap.objectCompare (inOperand.mAttribute_mControlRegisterMap) ;
+    result = mProperty_mControlRegisterMap.objectCompare (inOperand.mProperty_mControlRegisterMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGlobalConstantMap.objectCompare (inOperand.mAttribute_mGlobalConstantMap) ;
+    result = mProperty_mGlobalConstantMap.objectCompare (inOperand.mProperty_mGlobalConstantMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVariableMap.objectCompare (inOperand.mAttribute_mGlobalVariableMap) ;
+    result = mProperty_mGlobalVariableMap.objectCompare (inOperand.mProperty_mGlobalVariableMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mModuleMap.objectCompare (inOperand.mAttribute_mModuleMap) ;
+    result = mProperty_mModuleMap.objectCompare (inOperand.mProperty_mModuleMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mConstructorMap.objectCompare (inOperand.mAttribute_mConstructorMap) ;
+    result = mProperty_mConstructorMap.objectCompare (inOperand.mProperty_mConstructorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mStaticlistMap.objectCompare (inOperand.mAttribute_mStaticlistMap) ;
+    result = mProperty_mStaticlistMap.objectCompare (inOperand.mProperty_mStaticlistMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mDefinedInterruptSet.objectCompare (inOperand.mAttribute_mDefinedInterruptSet) ;
+    result = mProperty_mDefinedInterruptSet.objectCompare (inOperand.mProperty_mDefinedInterruptSet) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAvailableInterruptMap.objectCompare (inOperand.mAttribute_mAvailableInterruptMap) ;
+    result = mProperty_mAvailableInterruptMap.objectCompare (inOperand.mProperty_mAvailableInterruptMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mEqualOperatorMap.objectCompare (inOperand.mAttribute_mEqualOperatorMap) ;
+    result = mProperty_mEqualOperatorMap.objectCompare (inOperand.mProperty_mEqualOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mNonEqualOperatorMap.objectCompare (inOperand.mAttribute_mNonEqualOperatorMap) ;
+    result = mProperty_mNonEqualOperatorMap.objectCompare (inOperand.mProperty_mNonEqualOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mStrictInfOperatorMap.objectCompare (inOperand.mAttribute_mStrictInfOperatorMap) ;
+    result = mProperty_mStrictInfOperatorMap.objectCompare (inOperand.mProperty_mStrictInfOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInfEqualOperatorMap.objectCompare (inOperand.mAttribute_mInfEqualOperatorMap) ;
+    result = mProperty_mInfEqualOperatorMap.objectCompare (inOperand.mProperty_mInfEqualOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mStrictSupOperatorMap.objectCompare (inOperand.mAttribute_mStrictSupOperatorMap) ;
+    result = mProperty_mStrictSupOperatorMap.objectCompare (inOperand.mProperty_mStrictSupOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSupEqualOperatorMap.objectCompare (inOperand.mAttribute_mSupEqualOperatorMap) ;
+    result = mProperty_mSupEqualOperatorMap.objectCompare (inOperand.mProperty_mSupEqualOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAndOperatorMap.objectCompare (inOperand.mAttribute_mAndOperatorMap) ;
+    result = mProperty_mAndOperatorMap.objectCompare (inOperand.mProperty_mAndOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mOrOperatorMap.objectCompare (inOperand.mAttribute_mOrOperatorMap) ;
+    result = mProperty_mOrOperatorMap.objectCompare (inOperand.mProperty_mOrOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mXorOperatorMap.objectCompare (inOperand.mAttribute_mXorOperatorMap) ;
+    result = mProperty_mXorOperatorMap.objectCompare (inOperand.mProperty_mXorOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mBooleanXorOperatorMap.objectCompare (inOperand.mAttribute_mBooleanXorOperatorMap) ;
+    result = mProperty_mBooleanXorOperatorMap.objectCompare (inOperand.mProperty_mBooleanXorOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAddOperatorMap.objectCompare (inOperand.mAttribute_mAddOperatorMap) ;
+    result = mProperty_mAddOperatorMap.objectCompare (inOperand.mProperty_mAddOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAddNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mAddNoOvfOperatorMap) ;
+    result = mProperty_mAddNoOvfOperatorMap.objectCompare (inOperand.mProperty_mAddNoOvfOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSubOperatorMap.objectCompare (inOperand.mAttribute_mSubOperatorMap) ;
+    result = mProperty_mSubOperatorMap.objectCompare (inOperand.mProperty_mSubOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSubNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mSubNoOvfOperatorMap) ;
+    result = mProperty_mSubNoOvfOperatorMap.objectCompare (inOperand.mProperty_mSubNoOvfOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mMulOperatorMap.objectCompare (inOperand.mAttribute_mMulOperatorMap) ;
+    result = mProperty_mMulOperatorMap.objectCompare (inOperand.mProperty_mMulOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mMulNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mMulNoOvfOperatorMap) ;
+    result = mProperty_mMulNoOvfOperatorMap.objectCompare (inOperand.mProperty_mMulNoOvfOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mDivOperatorMap.objectCompare (inOperand.mAttribute_mDivOperatorMap) ;
+    result = mProperty_mDivOperatorMap.objectCompare (inOperand.mProperty_mDivOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mDivNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mDivNoOvfOperatorMap) ;
+    result = mProperty_mDivNoOvfOperatorMap.objectCompare (inOperand.mProperty_mDivNoOvfOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mModOperatorMap.objectCompare (inOperand.mAttribute_mModOperatorMap) ;
+    result = mProperty_mModOperatorMap.objectCompare (inOperand.mProperty_mModOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mModNoOvfOperatorMap.objectCompare (inOperand.mAttribute_mModNoOvfOperatorMap) ;
+    result = mProperty_mModNoOvfOperatorMap.objectCompare (inOperand.mProperty_mModNoOvfOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mLeftShiftOperatorMap.objectCompare (inOperand.mAttribute_mLeftShiftOperatorMap) ;
+    result = mProperty_mLeftShiftOperatorMap.objectCompare (inOperand.mProperty_mLeftShiftOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRightShiftOperatorMap.objectCompare (inOperand.mAttribute_mRightShiftOperatorMap) ;
+    result = mProperty_mRightShiftOperatorMap.objectCompare (inOperand.mProperty_mRightShiftOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mUnaryMinusOperatorMap.objectCompare (inOperand.mAttribute_mUnaryMinusOperatorMap) ;
+    result = mProperty_mUnaryMinusOperatorMap.objectCompare (inOperand.mProperty_mUnaryMinusOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mNotOperatorMap.objectCompare (inOperand.mAttribute_mNotOperatorMap) ;
+    result = mProperty_mNotOperatorMap.objectCompare (inOperand.mProperty_mNotOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mUnsignedComplementOperatorMap.objectCompare (inOperand.mAttribute_mUnsignedComplementOperatorMap) ;
+    result = mProperty_mUnsignedComplementOperatorMap.objectCompare (inOperand.mProperty_mUnsignedComplementOperatorMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mTaskMap.objectCompare (inOperand.mAttribute_mTaskMap) ;
+    result = mProperty_mTaskMap.objectCompare (inOperand.mProperty_mTaskMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGlobalTaskVariableList.objectCompare (inOperand.mAttribute_mGlobalTaskVariableList) ;
+    result = mProperty_mGlobalTaskVariableList.objectCompare (inOperand.mProperty_mGlobalTaskVariableList) ;
   }
   return result ;
 }
@@ -2773,60 +2773,60 @@ typeComparisonResult GALGAS_semanticContext::objectCompare (const GALGAS_semanti
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_semanticContext::isValid (void) const {
-  return mAttribute_mTargetParameters.isValid () && mAttribute_mPointerSize.isValid () && mAttribute_mBooleanType.isValid () && mAttribute_mLiteralIntegerType.isValid () && mAttribute_mPanicCodeType.isValid () && mAttribute_mPanicLineType.isValid () && mAttribute_mUnsignedIntegerType.isValid () && mAttribute_mTypeMap.isValid () && mAttribute_mRoutineMapForContext.isValid () && mAttribute_mGuardMapForContext.isValid () && mAttribute_mInitRoutineMap.isValid () && mAttribute_mPanicSetupRoutinePriorityMap.isValid () && mAttribute_mPanicLoopRoutinePriorityMap.isValid () && mAttribute_mControlRegisterMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mModuleMap.isValid () && mAttribute_mConstructorMap.isValid () && mAttribute_mStaticlistMap.isValid () && mAttribute_mDefinedInterruptSet.isValid () && mAttribute_mAvailableInterruptMap.isValid () && mAttribute_mEqualOperatorMap.isValid () && mAttribute_mNonEqualOperatorMap.isValid () && mAttribute_mStrictInfOperatorMap.isValid () && mAttribute_mInfEqualOperatorMap.isValid () && mAttribute_mStrictSupOperatorMap.isValid () && mAttribute_mSupEqualOperatorMap.isValid () && mAttribute_mAndOperatorMap.isValid () && mAttribute_mOrOperatorMap.isValid () && mAttribute_mXorOperatorMap.isValid () && mAttribute_mBooleanXorOperatorMap.isValid () && mAttribute_mAddOperatorMap.isValid () && mAttribute_mAddNoOvfOperatorMap.isValid () && mAttribute_mSubOperatorMap.isValid () && mAttribute_mSubNoOvfOperatorMap.isValid () && mAttribute_mMulOperatorMap.isValid () && mAttribute_mMulNoOvfOperatorMap.isValid () && mAttribute_mDivOperatorMap.isValid () && mAttribute_mDivNoOvfOperatorMap.isValid () && mAttribute_mModOperatorMap.isValid () && mAttribute_mModNoOvfOperatorMap.isValid () && mAttribute_mLeftShiftOperatorMap.isValid () && mAttribute_mRightShiftOperatorMap.isValid () && mAttribute_mUnaryMinusOperatorMap.isValid () && mAttribute_mNotOperatorMap.isValid () && mAttribute_mUnsignedComplementOperatorMap.isValid () && mAttribute_mTaskMap.isValid () && mAttribute_mGlobalTaskVariableList.isValid () ;
+  return mProperty_mTargetParameters.isValid () && mProperty_mPointerSize.isValid () && mProperty_mBooleanType.isValid () && mProperty_mLiteralIntegerType.isValid () && mProperty_mPanicCodeType.isValid () && mProperty_mPanicLineType.isValid () && mProperty_mUnsignedIntegerType.isValid () && mProperty_mTypeMap.isValid () && mProperty_mRoutineMapForContext.isValid () && mProperty_mGuardMapForContext.isValid () && mProperty_mInitRoutineMap.isValid () && mProperty_mPanicSetupRoutinePriorityMap.isValid () && mProperty_mPanicLoopRoutinePriorityMap.isValid () && mProperty_mControlRegisterMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mGlobalVariableMap.isValid () && mProperty_mModuleMap.isValid () && mProperty_mConstructorMap.isValid () && mProperty_mStaticlistMap.isValid () && mProperty_mDefinedInterruptSet.isValid () && mProperty_mAvailableInterruptMap.isValid () && mProperty_mEqualOperatorMap.isValid () && mProperty_mNonEqualOperatorMap.isValid () && mProperty_mStrictInfOperatorMap.isValid () && mProperty_mInfEqualOperatorMap.isValid () && mProperty_mStrictSupOperatorMap.isValid () && mProperty_mSupEqualOperatorMap.isValid () && mProperty_mAndOperatorMap.isValid () && mProperty_mOrOperatorMap.isValid () && mProperty_mXorOperatorMap.isValid () && mProperty_mBooleanXorOperatorMap.isValid () && mProperty_mAddOperatorMap.isValid () && mProperty_mAddNoOvfOperatorMap.isValid () && mProperty_mSubOperatorMap.isValid () && mProperty_mSubNoOvfOperatorMap.isValid () && mProperty_mMulOperatorMap.isValid () && mProperty_mMulNoOvfOperatorMap.isValid () && mProperty_mDivOperatorMap.isValid () && mProperty_mDivNoOvfOperatorMap.isValid () && mProperty_mModOperatorMap.isValid () && mProperty_mModNoOvfOperatorMap.isValid () && mProperty_mLeftShiftOperatorMap.isValid () && mProperty_mRightShiftOperatorMap.isValid () && mProperty_mUnaryMinusOperatorMap.isValid () && mProperty_mNotOperatorMap.isValid () && mProperty_mUnsignedComplementOperatorMap.isValid () && mProperty_mTaskMap.isValid () && mProperty_mGlobalTaskVariableList.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_semanticContext::drop (void) {
-  mAttribute_mTargetParameters.drop () ;
-  mAttribute_mPointerSize.drop () ;
-  mAttribute_mBooleanType.drop () ;
-  mAttribute_mLiteralIntegerType.drop () ;
-  mAttribute_mPanicCodeType.drop () ;
-  mAttribute_mPanicLineType.drop () ;
-  mAttribute_mUnsignedIntegerType.drop () ;
-  mAttribute_mTypeMap.drop () ;
-  mAttribute_mRoutineMapForContext.drop () ;
-  mAttribute_mGuardMapForContext.drop () ;
-  mAttribute_mInitRoutineMap.drop () ;
-  mAttribute_mPanicSetupRoutinePriorityMap.drop () ;
-  mAttribute_mPanicLoopRoutinePriorityMap.drop () ;
-  mAttribute_mControlRegisterMap.drop () ;
-  mAttribute_mGlobalConstantMap.drop () ;
-  mAttribute_mGlobalVariableMap.drop () ;
-  mAttribute_mModuleMap.drop () ;
-  mAttribute_mConstructorMap.drop () ;
-  mAttribute_mStaticlistMap.drop () ;
-  mAttribute_mDefinedInterruptSet.drop () ;
-  mAttribute_mAvailableInterruptMap.drop () ;
-  mAttribute_mEqualOperatorMap.drop () ;
-  mAttribute_mNonEqualOperatorMap.drop () ;
-  mAttribute_mStrictInfOperatorMap.drop () ;
-  mAttribute_mInfEqualOperatorMap.drop () ;
-  mAttribute_mStrictSupOperatorMap.drop () ;
-  mAttribute_mSupEqualOperatorMap.drop () ;
-  mAttribute_mAndOperatorMap.drop () ;
-  mAttribute_mOrOperatorMap.drop () ;
-  mAttribute_mXorOperatorMap.drop () ;
-  mAttribute_mBooleanXorOperatorMap.drop () ;
-  mAttribute_mAddOperatorMap.drop () ;
-  mAttribute_mAddNoOvfOperatorMap.drop () ;
-  mAttribute_mSubOperatorMap.drop () ;
-  mAttribute_mSubNoOvfOperatorMap.drop () ;
-  mAttribute_mMulOperatorMap.drop () ;
-  mAttribute_mMulNoOvfOperatorMap.drop () ;
-  mAttribute_mDivOperatorMap.drop () ;
-  mAttribute_mDivNoOvfOperatorMap.drop () ;
-  mAttribute_mModOperatorMap.drop () ;
-  mAttribute_mModNoOvfOperatorMap.drop () ;
-  mAttribute_mLeftShiftOperatorMap.drop () ;
-  mAttribute_mRightShiftOperatorMap.drop () ;
-  mAttribute_mUnaryMinusOperatorMap.drop () ;
-  mAttribute_mNotOperatorMap.drop () ;
-  mAttribute_mUnsignedComplementOperatorMap.drop () ;
-  mAttribute_mTaskMap.drop () ;
-  mAttribute_mGlobalTaskVariableList.drop () ;
+  mProperty_mTargetParameters.drop () ;
+  mProperty_mPointerSize.drop () ;
+  mProperty_mBooleanType.drop () ;
+  mProperty_mLiteralIntegerType.drop () ;
+  mProperty_mPanicCodeType.drop () ;
+  mProperty_mPanicLineType.drop () ;
+  mProperty_mUnsignedIntegerType.drop () ;
+  mProperty_mTypeMap.drop () ;
+  mProperty_mRoutineMapForContext.drop () ;
+  mProperty_mGuardMapForContext.drop () ;
+  mProperty_mInitRoutineMap.drop () ;
+  mProperty_mPanicSetupRoutinePriorityMap.drop () ;
+  mProperty_mPanicLoopRoutinePriorityMap.drop () ;
+  mProperty_mControlRegisterMap.drop () ;
+  mProperty_mGlobalConstantMap.drop () ;
+  mProperty_mGlobalVariableMap.drop () ;
+  mProperty_mModuleMap.drop () ;
+  mProperty_mConstructorMap.drop () ;
+  mProperty_mStaticlistMap.drop () ;
+  mProperty_mDefinedInterruptSet.drop () ;
+  mProperty_mAvailableInterruptMap.drop () ;
+  mProperty_mEqualOperatorMap.drop () ;
+  mProperty_mNonEqualOperatorMap.drop () ;
+  mProperty_mStrictInfOperatorMap.drop () ;
+  mProperty_mInfEqualOperatorMap.drop () ;
+  mProperty_mStrictSupOperatorMap.drop () ;
+  mProperty_mSupEqualOperatorMap.drop () ;
+  mProperty_mAndOperatorMap.drop () ;
+  mProperty_mOrOperatorMap.drop () ;
+  mProperty_mXorOperatorMap.drop () ;
+  mProperty_mBooleanXorOperatorMap.drop () ;
+  mProperty_mAddOperatorMap.drop () ;
+  mProperty_mAddNoOvfOperatorMap.drop () ;
+  mProperty_mSubOperatorMap.drop () ;
+  mProperty_mSubNoOvfOperatorMap.drop () ;
+  mProperty_mMulOperatorMap.drop () ;
+  mProperty_mMulNoOvfOperatorMap.drop () ;
+  mProperty_mDivOperatorMap.drop () ;
+  mProperty_mDivNoOvfOperatorMap.drop () ;
+  mProperty_mModOperatorMap.drop () ;
+  mProperty_mModNoOvfOperatorMap.drop () ;
+  mProperty_mLeftShiftOperatorMap.drop () ;
+  mProperty_mRightShiftOperatorMap.drop () ;
+  mProperty_mUnaryMinusOperatorMap.drop () ;
+  mProperty_mNotOperatorMap.drop () ;
+  mProperty_mUnsignedComplementOperatorMap.drop () ;
+  mProperty_mTaskMap.drop () ;
+  mProperty_mGlobalTaskVariableList.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -2837,101 +2837,101 @@ void GALGAS_semanticContext::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mTargetParameters.description (ioString, inIndentation+1) ;
+    mProperty_mTargetParameters.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPointerSize.description (ioString, inIndentation+1) ;
+    mProperty_mPointerSize.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mBooleanType.description (ioString, inIndentation+1) ;
+    mProperty_mBooleanType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mLiteralIntegerType.description (ioString, inIndentation+1) ;
+    mProperty_mLiteralIntegerType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPanicCodeType.description (ioString, inIndentation+1) ;
+    mProperty_mPanicCodeType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPanicLineType.description (ioString, inIndentation+1) ;
+    mProperty_mPanicLineType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mUnsignedIntegerType.description (ioString, inIndentation+1) ;
+    mProperty_mUnsignedIntegerType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mTypeMap.description (ioString, inIndentation+1) ;
+    mProperty_mTypeMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRoutineMapForContext.description (ioString, inIndentation+1) ;
+    mProperty_mRoutineMapForContext.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGuardMapForContext.description (ioString, inIndentation+1) ;
+    mProperty_mGuardMapForContext.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInitRoutineMap.description (ioString, inIndentation+1) ;
+    mProperty_mInitRoutineMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPanicSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    mProperty_mPanicSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPanicLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    mProperty_mPanicLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mControlRegisterMap.description (ioString, inIndentation+1) ;
+    mProperty_mControlRegisterMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGlobalConstantMap.description (ioString, inIndentation+1) ;
+    mProperty_mGlobalConstantMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGlobalVariableMap.description (ioString, inIndentation+1) ;
+    mProperty_mGlobalVariableMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mModuleMap.description (ioString, inIndentation+1) ;
+    mProperty_mModuleMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mConstructorMap.description (ioString, inIndentation+1) ;
+    mProperty_mConstructorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mStaticlistMap.description (ioString, inIndentation+1) ;
+    mProperty_mStaticlistMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mDefinedInterruptSet.description (ioString, inIndentation+1) ;
+    mProperty_mDefinedInterruptSet.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAvailableInterruptMap.description (ioString, inIndentation+1) ;
+    mProperty_mAvailableInterruptMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mEqualOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mEqualOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mNonEqualOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mNonEqualOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mStrictInfOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mStrictInfOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInfEqualOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mInfEqualOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mStrictSupOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mStrictSupOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSupEqualOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mSupEqualOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAndOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mAndOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mOrOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mOrOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mXorOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mXorOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mBooleanXorOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mBooleanXorOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAddOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mAddOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAddNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mAddNoOvfOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSubOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mSubOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSubNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mSubNoOvfOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mMulOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mMulOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mMulNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mMulNoOvfOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mDivOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mDivOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mDivNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mDivNoOvfOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mModOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mModOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mModNoOvfOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mModNoOvfOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mLeftShiftOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mLeftShiftOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRightShiftOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mRightShiftOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mUnaryMinusOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mUnaryMinusOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mNotOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mNotOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mUnsignedComplementOperatorMap.description (ioString, inIndentation+1) ;
+    mProperty_mUnsignedComplementOperatorMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mTaskMap.description (ioString, inIndentation+1) ;
+    mProperty_mTaskMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGlobalTaskVariableList.description (ioString, inIndentation+1) ;
+    mProperty_mGlobalTaskVariableList.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -2939,289 +2939,289 @@ void GALGAS_semanticContext::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_targetParameters GALGAS_semanticContext::getter_mTargetParameters (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetParameters ;
+  return mProperty_mTargetParameters ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_semanticContext::getter_mPointerSize (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPointerSize ;
+  return mProperty_mPointerSize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::getter_mBooleanType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBooleanType ;
+  return mProperty_mBooleanType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::getter_mLiteralIntegerType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLiteralIntegerType ;
+  return mProperty_mLiteralIntegerType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::getter_mPanicCodeType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPanicCodeType ;
+  return mProperty_mPanicCodeType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::getter_mPanicLineType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPanicLineType ;
+  return mProperty_mPanicLineType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_semanticContext::getter_mUnsignedIntegerType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUnsignedIntegerType ;
+  return mProperty_mUnsignedIntegerType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap GALGAS_semanticContext::getter_mTypeMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeMap ;
+  return mProperty_mTypeMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineMapForContext GALGAS_semanticContext::getter_mRoutineMapForContext (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRoutineMapForContext ;
+  return mProperty_mRoutineMapForContext ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardMapForContext GALGAS_semanticContext::getter_mGuardMapForContext (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGuardMapForContext ;
+  return mProperty_mGuardMapForContext ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initRoutineMap GALGAS_semanticContext::getter_mInitRoutineMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitRoutineMap ;
+  return mProperty_mInitRoutineMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap GALGAS_semanticContext::getter_mPanicSetupRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPanicSetupRoutinePriorityMap ;
+  return mProperty_mPanicSetupRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap GALGAS_semanticContext::getter_mPanicLoopRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPanicLoopRoutinePriorityMap ;
+  return mProperty_mPanicLoopRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterMap GALGAS_semanticContext::getter_mControlRegisterMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mControlRegisterMap ;
+  return mProperty_mControlRegisterMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_globalConstantMap GALGAS_semanticContext::getter_mGlobalConstantMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalConstantMap ;
+  return mProperty_mGlobalConstantMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_globalVariableMap GALGAS_semanticContext::getter_mGlobalVariableMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVariableMap ;
+  return mProperty_mGlobalVariableMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap GALGAS_semanticContext::getter_mModuleMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mModuleMap ;
+  return mProperty_mModuleMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorMap GALGAS_semanticContext::getter_mConstructorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mConstructorMap ;
+  return mProperty_mConstructorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_staticlistMap GALGAS_semanticContext::getter_mStaticlistMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStaticlistMap ;
+  return mProperty_mStaticlistMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_stringset GALGAS_semanticContext::getter_mDefinedInterruptSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDefinedInterruptSet ;
+  return mProperty_mDefinedInterruptSet ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_availableInterruptMap GALGAS_semanticContext::getter_mAvailableInterruptMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAvailableInterruptMap ;
+  return mProperty_mAvailableInterruptMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEqualOperatorMap ;
+  return mProperty_mEqualOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mNonEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mNonEqualOperatorMap ;
+  return mProperty_mNonEqualOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mStrictInfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStrictInfOperatorMap ;
+  return mProperty_mStrictInfOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mInfEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInfEqualOperatorMap ;
+  return mProperty_mInfEqualOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mStrictSupOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStrictSupOperatorMap ;
+  return mProperty_mStrictSupOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mSupEqualOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSupEqualOperatorMap ;
+  return mProperty_mSupEqualOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mAndOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAndOperatorMap ;
+  return mProperty_mAndOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mOrOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOrOperatorMap ;
+  return mProperty_mOrOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mXorOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mXorOperatorMap ;
+  return mProperty_mXorOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mBooleanXorOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBooleanXorOperatorMap ;
+  return mProperty_mBooleanXorOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mAddOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAddOperatorMap ;
+  return mProperty_mAddOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mAddNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAddNoOvfOperatorMap ;
+  return mProperty_mAddNoOvfOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mSubOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubOperatorMap ;
+  return mProperty_mSubOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mSubNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubNoOvfOperatorMap ;
+  return mProperty_mSubNoOvfOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mMulOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMulOperatorMap ;
+  return mProperty_mMulOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mMulNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMulNoOvfOperatorMap ;
+  return mProperty_mMulNoOvfOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mDivOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDivOperatorMap ;
+  return mProperty_mDivOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mDivNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mDivNoOvfOperatorMap ;
+  return mProperty_mDivNoOvfOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mModOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mModOperatorMap ;
+  return mProperty_mModOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mModNoOvfOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mModNoOvfOperatorMap ;
+  return mProperty_mModNoOvfOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mLeftShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLeftShiftOperatorMap ;
+  return mProperty_mLeftShiftOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_infixOperatorMap GALGAS_semanticContext::getter_mRightShiftOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRightShiftOperatorMap ;
+  return mProperty_mRightShiftOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_prefixOperatorMap GALGAS_semanticContext::getter_mUnaryMinusOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUnaryMinusOperatorMap ;
+  return mProperty_mUnaryMinusOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_prefixOperatorMap GALGAS_semanticContext::getter_mNotOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mNotOperatorMap ;
+  return mProperty_mNotOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_prefixOperatorMap GALGAS_semanticContext::getter_mUnsignedComplementOperatorMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUnsignedComplementOperatorMap ;
+  return mProperty_mUnsignedComplementOperatorMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMap GALGAS_semanticContext::getter_mTaskMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTaskMap ;
+  return mProperty_mTaskMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_globalTaskVariableList GALGAS_semanticContext::getter_mGlobalTaskVariableList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalTaskVariableList ;
+  return mProperty_mGlobalTaskVariableList ;
 }
 
 
@@ -3272,13 +3272,13 @@ GALGAS_semanticContext GALGAS_semanticContext::extractObject (const GALGAS_objec
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (void) :
-mAttribute_mTemporaryIndex (),
-mAttribute_mPanicSetupRoutinePriorityMap (),
-mAttribute_mPanicLoopRoutinePriorityMap (),
-mAttribute_mInitRoutinePriorityMap (),
-mAttribute_mBootRoutinePriorityMap (),
-mAttribute_mSubprogramInvocationGraph (),
-mAttribute_mStaticArrayMap () {
+mProperty_mTemporaryIndex (),
+mProperty_mPanicSetupRoutinePriorityMap (),
+mProperty_mPanicLoopRoutinePriorityMap (),
+mProperty_mInitRoutinePriorityMap (),
+mProperty_mBootRoutinePriorityMap (),
+mProperty_mSubprogramInvocationGraph (),
+mProperty_mStaticArrayMap () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3295,13 +3295,13 @@ GALGAS_semanticTemporariesStruct::GALGAS_semanticTemporariesStruct (const GALGAS
                                                                     const GALGAS_bootRoutinePriorityMap & inOperand4,
                                                                     const GALGAS_subprogramInvocationGraph & inOperand5,
                                                                     const GALGAS_staticArrayMap & inOperand6) :
-mAttribute_mTemporaryIndex (inOperand0),
-mAttribute_mPanicSetupRoutinePriorityMap (inOperand1),
-mAttribute_mPanicLoopRoutinePriorityMap (inOperand2),
-mAttribute_mInitRoutinePriorityMap (inOperand3),
-mAttribute_mBootRoutinePriorityMap (inOperand4),
-mAttribute_mSubprogramInvocationGraph (inOperand5),
-mAttribute_mStaticArrayMap (inOperand6) {
+mProperty_mTemporaryIndex (inOperand0),
+mProperty_mPanicSetupRoutinePriorityMap (inOperand1),
+mProperty_mPanicLoopRoutinePriorityMap (inOperand2),
+mProperty_mInitRoutinePriorityMap (inOperand3),
+mProperty_mBootRoutinePriorityMap (inOperand4),
+mProperty_mSubprogramInvocationGraph (inOperand5),
+mProperty_mStaticArrayMap (inOperand6) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3338,25 +3338,25 @@ GALGAS_semanticTemporariesStruct GALGAS_semanticTemporariesStruct::constructor_n
 typeComparisonResult GALGAS_semanticTemporariesStruct::objectCompare (const GALGAS_semanticTemporariesStruct & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mTemporaryIndex.objectCompare (inOperand.mAttribute_mTemporaryIndex) ;
+    result = mProperty_mTemporaryIndex.objectCompare (inOperand.mProperty_mTemporaryIndex) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPanicSetupRoutinePriorityMap.objectCompare (inOperand.mAttribute_mPanicSetupRoutinePriorityMap) ;
+    result = mProperty_mPanicSetupRoutinePriorityMap.objectCompare (inOperand.mProperty_mPanicSetupRoutinePriorityMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPanicLoopRoutinePriorityMap.objectCompare (inOperand.mAttribute_mPanicLoopRoutinePriorityMap) ;
+    result = mProperty_mPanicLoopRoutinePriorityMap.objectCompare (inOperand.mProperty_mPanicLoopRoutinePriorityMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInitRoutinePriorityMap.objectCompare (inOperand.mAttribute_mInitRoutinePriorityMap) ;
+    result = mProperty_mInitRoutinePriorityMap.objectCompare (inOperand.mProperty_mInitRoutinePriorityMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mBootRoutinePriorityMap.objectCompare (inOperand.mAttribute_mBootRoutinePriorityMap) ;
+    result = mProperty_mBootRoutinePriorityMap.objectCompare (inOperand.mProperty_mBootRoutinePriorityMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSubprogramInvocationGraph.objectCompare (inOperand.mAttribute_mSubprogramInvocationGraph) ;
+    result = mProperty_mSubprogramInvocationGraph.objectCompare (inOperand.mProperty_mSubprogramInvocationGraph) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mStaticArrayMap.objectCompare (inOperand.mAttribute_mStaticArrayMap) ;
+    result = mProperty_mStaticArrayMap.objectCompare (inOperand.mProperty_mStaticArrayMap) ;
   }
   return result ;
 }
@@ -3364,19 +3364,19 @@ typeComparisonResult GALGAS_semanticTemporariesStruct::objectCompare (const GALG
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_semanticTemporariesStruct::isValid (void) const {
-  return mAttribute_mTemporaryIndex.isValid () && mAttribute_mPanicSetupRoutinePriorityMap.isValid () && mAttribute_mPanicLoopRoutinePriorityMap.isValid () && mAttribute_mInitRoutinePriorityMap.isValid () && mAttribute_mBootRoutinePriorityMap.isValid () && mAttribute_mSubprogramInvocationGraph.isValid () && mAttribute_mStaticArrayMap.isValid () ;
+  return mProperty_mTemporaryIndex.isValid () && mProperty_mPanicSetupRoutinePriorityMap.isValid () && mProperty_mPanicLoopRoutinePriorityMap.isValid () && mProperty_mInitRoutinePriorityMap.isValid () && mProperty_mBootRoutinePriorityMap.isValid () && mProperty_mSubprogramInvocationGraph.isValid () && mProperty_mStaticArrayMap.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_semanticTemporariesStruct::drop (void) {
-  mAttribute_mTemporaryIndex.drop () ;
-  mAttribute_mPanicSetupRoutinePriorityMap.drop () ;
-  mAttribute_mPanicLoopRoutinePriorityMap.drop () ;
-  mAttribute_mInitRoutinePriorityMap.drop () ;
-  mAttribute_mBootRoutinePriorityMap.drop () ;
-  mAttribute_mSubprogramInvocationGraph.drop () ;
-  mAttribute_mStaticArrayMap.drop () ;
+  mProperty_mTemporaryIndex.drop () ;
+  mProperty_mPanicSetupRoutinePriorityMap.drop () ;
+  mProperty_mPanicLoopRoutinePriorityMap.drop () ;
+  mProperty_mInitRoutinePriorityMap.drop () ;
+  mProperty_mBootRoutinePriorityMap.drop () ;
+  mProperty_mSubprogramInvocationGraph.drop () ;
+  mProperty_mStaticArrayMap.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3387,19 +3387,19 @@ void GALGAS_semanticTemporariesStruct::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mTemporaryIndex.description (ioString, inIndentation+1) ;
+    mProperty_mTemporaryIndex.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPanicSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    mProperty_mPanicSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPanicLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    mProperty_mPanicLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInitRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    mProperty_mInitRoutinePriorityMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mBootRoutinePriorityMap.description (ioString, inIndentation+1) ;
+    mProperty_mBootRoutinePriorityMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSubprogramInvocationGraph.description (ioString, inIndentation+1) ;
+    mProperty_mSubprogramInvocationGraph.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mStaticArrayMap.description (ioString, inIndentation+1) ;
+    mProperty_mStaticArrayMap.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -3407,43 +3407,43 @@ void GALGAS_semanticTemporariesStruct::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_semanticTemporariesStruct::getter_mTemporaryIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTemporaryIndex ;
+  return mProperty_mTemporaryIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap GALGAS_semanticTemporariesStruct::getter_mPanicSetupRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPanicSetupRoutinePriorityMap ;
+  return mProperty_mPanicSetupRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap GALGAS_semanticTemporariesStruct::getter_mPanicLoopRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPanicLoopRoutinePriorityMap ;
+  return mProperty_mPanicLoopRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initRoutinePriorityMap GALGAS_semanticTemporariesStruct::getter_mInitRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitRoutinePriorityMap ;
+  return mProperty_mInitRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap GALGAS_semanticTemporariesStruct::getter_mBootRoutinePriorityMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBootRoutinePriorityMap ;
+  return mProperty_mBootRoutinePriorityMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_subprogramInvocationGraph GALGAS_semanticTemporariesStruct::getter_mSubprogramInvocationGraph (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubprogramInvocationGraph ;
+  return mProperty_mSubprogramInvocationGraph ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_staticArrayMap GALGAS_semanticTemporariesStruct::getter_mStaticArrayMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStaticArrayMap ;
+  return mProperty_mStaticArrayMap ;
 }
 
 
@@ -3500,25 +3500,25 @@ typeComparisonResult cPtr_functionCallIR::dynamicObjectCompare (const acPtr_clas
   const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_functionCallIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mGlobalVariableName.objectCompare (p->mAttribute_mGlobalVariableName) ;
+    result = mProperty_mGlobalVariableName.objectCompare (p->mProperty_mGlobalVariableName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mResult.objectCompare (p->mAttribute_mResult) ;
+    result = mProperty_mResult.objectCompare (p->mProperty_mResult) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mFunctionMangledName.objectCompare (p->mAttribute_mFunctionMangledName) ;
+    result = mProperty_mFunctionMangledName.objectCompare (p->mProperty_mFunctionMangledName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mFunctionNameForGeneration.objectCompare (p->mAttribute_mFunctionNameForGeneration) ;
+    result = mProperty_mFunctionNameForGeneration.objectCompare (p->mProperty_mFunctionNameForGeneration) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mKind.objectCompare (p->mAttribute_mKind) ;
+    result = mProperty_mKind.objectCompare (p->mProperty_mKind) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mArgumentList.objectCompare (p->mAttribute_mArgumentList) ;
+    result = mProperty_mArgumentList.objectCompare (p->mProperty_mArgumentList) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mAppendFileAndLineArgumentForPanicLocation.objectCompare (p->mAttribute_mAppendFileAndLineArgumentForPanicLocation) ;
+    result = mProperty_mAppendFileAndLineArgumentForPanicLocation.objectCompare (p->mProperty_mAppendFileAndLineArgumentForPanicLocation) ;
   }
   return result ;
 }
@@ -3579,7 +3579,7 @@ GALGAS_string GALGAS_functionCallIR::getter_mGlobalVariableName (UNUSED_LOCATION
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mGlobalVariableName ;
+    result = p->mProperty_mGlobalVariableName ;
   }
   return result ;
 }
@@ -3587,7 +3587,7 @@ GALGAS_string GALGAS_functionCallIR::getter_mGlobalVariableName (UNUSED_LOCATION
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_functionCallIR::getter_mGlobalVariableName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVariableName ;
+  return mProperty_mGlobalVariableName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3597,7 +3597,7 @@ GALGAS_objectIR GALGAS_functionCallIR::getter_mResult (UNUSED_LOCATION_ARGS) con
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mResult ;
+    result = p->mProperty_mResult ;
   }
   return result ;
 }
@@ -3605,7 +3605,7 @@ GALGAS_objectIR GALGAS_functionCallIR::getter_mResult (UNUSED_LOCATION_ARGS) con
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_functionCallIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResult ;
+  return mProperty_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3615,7 +3615,7 @@ GALGAS_lstring GALGAS_functionCallIR::getter_mFunctionMangledName (UNUSED_LOCATI
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mFunctionMangledName ;
+    result = p->mProperty_mFunctionMangledName ;
   }
   return result ;
 }
@@ -3623,7 +3623,7 @@ GALGAS_lstring GALGAS_functionCallIR::getter_mFunctionMangledName (UNUSED_LOCATI
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cPtr_functionCallIR::getter_mFunctionMangledName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionMangledName ;
+  return mProperty_mFunctionMangledName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3633,7 +3633,7 @@ GALGAS_lstring GALGAS_functionCallIR::getter_mFunctionNameForGeneration (UNUSED_
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mFunctionNameForGeneration ;
+    result = p->mProperty_mFunctionNameForGeneration ;
   }
   return result ;
 }
@@ -3641,7 +3641,7 @@ GALGAS_lstring GALGAS_functionCallIR::getter_mFunctionNameForGeneration (UNUSED_
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring cPtr_functionCallIR::getter_mFunctionNameForGeneration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionNameForGeneration ;
+  return mProperty_mFunctionNameForGeneration ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3651,7 +3651,7 @@ GALGAS_calleeKindIR GALGAS_functionCallIR::getter_mKind (UNUSED_LOCATION_ARGS) c
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mKind ;
+    result = p->mProperty_mKind ;
   }
   return result ;
 }
@@ -3659,7 +3659,7 @@ GALGAS_calleeKindIR GALGAS_functionCallIR::getter_mKind (UNUSED_LOCATION_ARGS) c
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_calleeKindIR cPtr_functionCallIR::getter_mKind (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mKind ;
+  return mProperty_mKind ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3669,7 +3669,7 @@ GALGAS_procCallEffectiveParameterListIR GALGAS_functionCallIR::getter_mArgumentL
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mArgumentList ;
+    result = p->mProperty_mArgumentList ;
   }
   return result ;
 }
@@ -3677,7 +3677,7 @@ GALGAS_procCallEffectiveParameterListIR GALGAS_functionCallIR::getter_mArgumentL
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_procCallEffectiveParameterListIR cPtr_functionCallIR::getter_mArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mArgumentList ;
+  return mProperty_mArgumentList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3687,7 +3687,7 @@ GALGAS_bool GALGAS_functionCallIR::getter_mAppendFileAndLineArgumentForPanicLoca
   if (NULL != mObjectPtr) {
     const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
+    result = p->mProperty_mAppendFileAndLineArgumentForPanicLocation ;
   }
   return result ;
 }
@@ -3695,7 +3695,7 @@ GALGAS_bool GALGAS_functionCallIR::getter_mAppendFileAndLineArgumentForPanicLoca
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cPtr_functionCallIR::getter_mAppendFileAndLineArgumentForPanicLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
+  return mProperty_mAppendFileAndLineArgumentForPanicLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3711,13 +3711,13 @@ cPtr_functionCallIR::cPtr_functionCallIR (const GALGAS_string & in_mGlobalVariab
                                           const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mGlobalVariableName (in_mGlobalVariableName),
-mAttribute_mResult (in_mResult),
-mAttribute_mFunctionMangledName (in_mFunctionMangledName),
-mAttribute_mFunctionNameForGeneration (in_mFunctionNameForGeneration),
-mAttribute_mKind (in_mKind),
-mAttribute_mArgumentList (in_mArgumentList),
-mAttribute_mAppendFileAndLineArgumentForPanicLocation (in_mAppendFileAndLineArgumentForPanicLocation) {
+mProperty_mGlobalVariableName (in_mGlobalVariableName),
+mProperty_mResult (in_mResult),
+mProperty_mFunctionMangledName (in_mFunctionMangledName),
+mProperty_mFunctionNameForGeneration (in_mFunctionNameForGeneration),
+mProperty_mKind (in_mKind),
+mProperty_mArgumentList (in_mArgumentList),
+mProperty_mAppendFileAndLineArgumentForPanicLocation (in_mAppendFileAndLineArgumentForPanicLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3729,19 +3729,19 @@ const C_galgas_type_descriptor * cPtr_functionCallIR::classDescriptor (void) con
 void cPtr_functionCallIR::description (C_String & ioString,
                                        const int32_t inIndentation) const {
   ioString << "[@functionCallIR:" ;
-  mAttribute_mGlobalVariableName.description (ioString, inIndentation+1) ;
+  mProperty_mGlobalVariableName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mResult.description (ioString, inIndentation+1) ;
+  mProperty_mResult.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mFunctionMangledName.description (ioString, inIndentation+1) ;
+  mProperty_mFunctionMangledName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mFunctionNameForGeneration.description (ioString, inIndentation+1) ;
+  mProperty_mFunctionNameForGeneration.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mKind.description (ioString, inIndentation+1) ;
+  mProperty_mKind.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mArgumentList.description (ioString, inIndentation+1) ;
+  mProperty_mArgumentList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mAppendFileAndLineArgumentForPanicLocation.description (ioString, inIndentation+1) ;
+  mProperty_mAppendFileAndLineArgumentForPanicLocation.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -3749,7 +3749,7 @@ void cPtr_functionCallIR::description (C_String & ioString,
 
 acPtr_class * cPtr_functionCallIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_functionCallIR (mAttribute_mGlobalVariableName, mAttribute_mResult, mAttribute_mFunctionMangledName, mAttribute_mFunctionNameForGeneration, mAttribute_mKind, mAttribute_mArgumentList, mAttribute_mAppendFileAndLineArgumentForPanicLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_functionCallIR (mProperty_mGlobalVariableName, mProperty_mResult, mProperty_mFunctionMangledName, mProperty_mFunctionNameForGeneration, mProperty_mKind, mProperty_mArgumentList, mProperty_mAppendFileAndLineArgumentForPanicLocation COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -3800,19 +3800,19 @@ GALGAS_functionCallIR GALGAS_functionCallIR::extractObject (const GALGAS_object 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineMapIR_2D_element::GALGAS_routineMapIR_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mReceiverType (),
-mAttribute_mRoutineNameForGeneration (),
-mAttribute_mFormalArgumentListForGeneration (),
-mAttribute_mAllocaList (),
-mAttribute_mInstructionGenerationList (),
-mAttribute_mIsRequired (),
-mAttribute_mWarnIfUnused (),
-mAttribute_mWeak (),
-mAttribute_mGlobal (),
-mAttribute_mKind (),
-mAttribute_mReturnType (),
-mAttribute_mAppendFileAndLineArgumentForPanicLocation () {
+mProperty_lkey (),
+mProperty_mReceiverType (),
+mProperty_mRoutineNameForGeneration (),
+mProperty_mFormalArgumentListForGeneration (),
+mProperty_mAllocaList (),
+mProperty_mInstructionGenerationList (),
+mProperty_mIsRequired (),
+mProperty_mWarnIfUnused (),
+mProperty_mWeak (),
+mProperty_mGlobal (),
+mProperty_mKind (),
+mProperty_mReturnType (),
+mProperty_mAppendFileAndLineArgumentForPanicLocation () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3835,19 +3835,19 @@ GALGAS_routineMapIR_2D_element::GALGAS_routineMapIR_2D_element (const GALGAS_lst
                                                                 const GALGAS_routineKind & inOperand10,
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand11,
                                                                 const GALGAS_bool & inOperand12) :
-mAttribute_lkey (inOperand0),
-mAttribute_mReceiverType (inOperand1),
-mAttribute_mRoutineNameForGeneration (inOperand2),
-mAttribute_mFormalArgumentListForGeneration (inOperand3),
-mAttribute_mAllocaList (inOperand4),
-mAttribute_mInstructionGenerationList (inOperand5),
-mAttribute_mIsRequired (inOperand6),
-mAttribute_mWarnIfUnused (inOperand7),
-mAttribute_mWeak (inOperand8),
-mAttribute_mGlobal (inOperand9),
-mAttribute_mKind (inOperand10),
-mAttribute_mReturnType (inOperand11),
-mAttribute_mAppendFileAndLineArgumentForPanicLocation (inOperand12) {
+mProperty_lkey (inOperand0),
+mProperty_mReceiverType (inOperand1),
+mProperty_mRoutineNameForGeneration (inOperand2),
+mProperty_mFormalArgumentListForGeneration (inOperand3),
+mProperty_mAllocaList (inOperand4),
+mProperty_mInstructionGenerationList (inOperand5),
+mProperty_mIsRequired (inOperand6),
+mProperty_mWarnIfUnused (inOperand7),
+mProperty_mWeak (inOperand8),
+mProperty_mGlobal (inOperand9),
+mProperty_mKind (inOperand10),
+mProperty_mReturnType (inOperand11),
+mProperty_mAppendFileAndLineArgumentForPanicLocation (inOperand12) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3878,43 +3878,43 @@ GALGAS_routineMapIR_2D_element GALGAS_routineMapIR_2D_element::constructor_new (
 typeComparisonResult GALGAS_routineMapIR_2D_element::objectCompare (const GALGAS_routineMapIR_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mReceiverType.objectCompare (inOperand.mAttribute_mReceiverType) ;
+    result = mProperty_mReceiverType.objectCompare (inOperand.mProperty_mReceiverType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRoutineNameForGeneration.objectCompare (inOperand.mAttribute_mRoutineNameForGeneration) ;
+    result = mProperty_mRoutineNameForGeneration.objectCompare (inOperand.mProperty_mRoutineNameForGeneration) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentListForGeneration.objectCompare (inOperand.mAttribute_mFormalArgumentListForGeneration) ;
+    result = mProperty_mFormalArgumentListForGeneration.objectCompare (inOperand.mProperty_mFormalArgumentListForGeneration) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAllocaList.objectCompare (inOperand.mAttribute_mAllocaList) ;
+    result = mProperty_mAllocaList.objectCompare (inOperand.mProperty_mAllocaList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInstructionGenerationList.objectCompare (inOperand.mAttribute_mInstructionGenerationList) ;
+    result = mProperty_mInstructionGenerationList.objectCompare (inOperand.mProperty_mInstructionGenerationList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mIsRequired.objectCompare (inOperand.mAttribute_mIsRequired) ;
+    result = mProperty_mIsRequired.objectCompare (inOperand.mProperty_mIsRequired) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mWarnIfUnused.objectCompare (inOperand.mAttribute_mWarnIfUnused) ;
+    result = mProperty_mWarnIfUnused.objectCompare (inOperand.mProperty_mWarnIfUnused) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mWeak.objectCompare (inOperand.mAttribute_mWeak) ;
+    result = mProperty_mWeak.objectCompare (inOperand.mProperty_mWeak) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGlobal.objectCompare (inOperand.mAttribute_mGlobal) ;
+    result = mProperty_mGlobal.objectCompare (inOperand.mProperty_mGlobal) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mKind.objectCompare (inOperand.mAttribute_mKind) ;
+    result = mProperty_mKind.objectCompare (inOperand.mProperty_mKind) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mReturnType.objectCompare (inOperand.mAttribute_mReturnType) ;
+    result = mProperty_mReturnType.objectCompare (inOperand.mProperty_mReturnType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAppendFileAndLineArgumentForPanicLocation.objectCompare (inOperand.mAttribute_mAppendFileAndLineArgumentForPanicLocation) ;
+    result = mProperty_mAppendFileAndLineArgumentForPanicLocation.objectCompare (inOperand.mProperty_mAppendFileAndLineArgumentForPanicLocation) ;
   }
   return result ;
 }
@@ -3922,25 +3922,25 @@ typeComparisonResult GALGAS_routineMapIR_2D_element::objectCompare (const GALGAS
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_routineMapIR_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mReceiverType.isValid () && mAttribute_mRoutineNameForGeneration.isValid () && mAttribute_mFormalArgumentListForGeneration.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInstructionGenerationList.isValid () && mAttribute_mIsRequired.isValid () && mAttribute_mWarnIfUnused.isValid () && mAttribute_mWeak.isValid () && mAttribute_mGlobal.isValid () && mAttribute_mKind.isValid () && mAttribute_mReturnType.isValid () && mAttribute_mAppendFileAndLineArgumentForPanicLocation.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mReceiverType.isValid () && mProperty_mRoutineNameForGeneration.isValid () && mProperty_mFormalArgumentListForGeneration.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInstructionGenerationList.isValid () && mProperty_mIsRequired.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mWeak.isValid () && mProperty_mGlobal.isValid () && mProperty_mKind.isValid () && mProperty_mReturnType.isValid () && mProperty_mAppendFileAndLineArgumentForPanicLocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_routineMapIR_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mReceiverType.drop () ;
-  mAttribute_mRoutineNameForGeneration.drop () ;
-  mAttribute_mFormalArgumentListForGeneration.drop () ;
-  mAttribute_mAllocaList.drop () ;
-  mAttribute_mInstructionGenerationList.drop () ;
-  mAttribute_mIsRequired.drop () ;
-  mAttribute_mWarnIfUnused.drop () ;
-  mAttribute_mWeak.drop () ;
-  mAttribute_mGlobal.drop () ;
-  mAttribute_mKind.drop () ;
-  mAttribute_mReturnType.drop () ;
-  mAttribute_mAppendFileAndLineArgumentForPanicLocation.drop () ;
+  mProperty_lkey.drop () ;
+  mProperty_mReceiverType.drop () ;
+  mProperty_mRoutineNameForGeneration.drop () ;
+  mProperty_mFormalArgumentListForGeneration.drop () ;
+  mProperty_mAllocaList.drop () ;
+  mProperty_mInstructionGenerationList.drop () ;
+  mProperty_mIsRequired.drop () ;
+  mProperty_mWarnIfUnused.drop () ;
+  mProperty_mWeak.drop () ;
+  mProperty_mGlobal.drop () ;
+  mProperty_mKind.drop () ;
+  mProperty_mReturnType.drop () ;
+  mProperty_mAppendFileAndLineArgumentForPanicLocation.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3951,31 +3951,31 @@ void GALGAS_routineMapIR_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mReceiverType.description (ioString, inIndentation+1) ;
+    mProperty_mReceiverType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRoutineNameForGeneration.description (ioString, inIndentation+1) ;
+    mProperty_mRoutineNameForGeneration.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
+    mProperty_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAllocaList.description (ioString, inIndentation+1) ;
+    mProperty_mAllocaList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInstructionGenerationList.description (ioString, inIndentation+1) ;
+    mProperty_mInstructionGenerationList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mIsRequired.description (ioString, inIndentation+1) ;
+    mProperty_mIsRequired.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mWarnIfUnused.description (ioString, inIndentation+1) ;
+    mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mWeak.description (ioString, inIndentation+1) ;
+    mProperty_mWeak.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGlobal.description (ioString, inIndentation+1) ;
+    mProperty_mGlobal.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mKind.description (ioString, inIndentation+1) ;
+    mProperty_mKind.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mReturnType.description (ioString, inIndentation+1) ;
+    mProperty_mReturnType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAppendFileAndLineArgumentForPanicLocation.description (ioString, inIndentation+1) ;
+    mProperty_mAppendFileAndLineArgumentForPanicLocation.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -3983,79 +3983,79 @@ void GALGAS_routineMapIR_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_routineMapIR_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_routineMapIR_2D_element::getter_mReceiverType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mReceiverType ;
+  return mProperty_mReceiverType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_routineMapIR_2D_element::getter_mRoutineNameForGeneration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRoutineNameForGeneration ;
+  return mProperty_mRoutineNameForGeneration ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_procFormalArgumentListForGeneration GALGAS_routineMapIR_2D_element::getter_mFormalArgumentListForGeneration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentListForGeneration ;
+  return mProperty_mFormalArgumentListForGeneration ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_routineMapIR_2D_element::getter_mAllocaList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAllocaList ;
+  return mProperty_mAllocaList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_routineMapIR_2D_element::getter_mInstructionGenerationList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionGenerationList ;
+  return mProperty_mInstructionGenerationList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_routineMapIR_2D_element::getter_mIsRequired (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIsRequired ;
+  return mProperty_mIsRequired ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_routineMapIR_2D_element::getter_mWarnIfUnused (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mWarnIfUnused ;
+  return mProperty_mWarnIfUnused ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_routineMapIR_2D_element::getter_mWeak (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mWeak ;
+  return mProperty_mWeak ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_routineMapIR_2D_element::getter_mGlobal (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobal ;
+  return mProperty_mGlobal ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKind GALGAS_routineMapIR_2D_element::getter_mKind (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mKind ;
+  return mProperty_mKind ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_routineMapIR_2D_element::getter_mReturnType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mReturnType ;
+  return mProperty_mReturnType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_routineMapIR_2D_element::getter_mAppendFileAndLineArgumentForPanicLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
+  return mProperty_mAppendFileAndLineArgumentForPanicLocation ;
 }
 
 
@@ -4331,7 +4331,7 @@ GALGAS_string extensionGetter_llvmName (const GALGAS_objectIR & inObject,
       const cEnumAssociatedValues_objectIR_llvmStructureConstant * extractPtr_4329 = (const cEnumAssociatedValues_objectIR_llvmStructureConstant *) (temp_0.unsafePointer ()) ;
       const GALGAS_operandIRList extractedValue_inValues = extractPtr_4329->mAssociatedValue1 ;
       result_outResult = GALGAS_string ("{") ;
-      cEnumerator_operandIRList enumerator_4194 (extractedValue_inValues, kEnumeration_up) ;
+      cEnumerator_operandIRList enumerator_4194 (extractedValue_inValues, kENUMERATION_UP) ;
       while (enumerator_4194.hasCurrentObject ()) {
         result_outResult.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_4194.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 91)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 91)).add_operation (extensionGetter_llvmName (enumerator_4194.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 91)), inCompiler  COMMA_SOURCE_FILE ("intermediate-value-representation.galgas", 91)) ;
         if (enumerator_4194.hasNextObject ()) {
@@ -4970,24 +4970,24 @@ GALGAS_bool extensionGetter_isStatic (const GALGAS_objectIR & inObject,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (void) :
-mAttribute_mStaticStringMap (),
-mAttribute_mGlobalVariableMap (),
-mAttribute_mGlobalConstantMap (),
-mAttribute_mRoutineMapIR (),
-mAttribute_mGuardMapIR (),
-mAttribute_mInterruptMapIR (),
-mAttribute_mExternProcedureMapIR (),
-mAttribute_mRequiredProcedureSet (),
-mAttribute_mBootList (),
-mAttribute_mInitList (),
-mAttribute_mPanicSetupInstructionListIR (),
-mAttribute_mPanicLoopInstructionListIR (),
-mAttribute_mTaskMapIR (),
-mAttribute_mGlobalTaskVariableList (),
-mAttribute_mMaxBranchOfOnInstructions (),
-mAttribute_mTargetParameters (),
-mAttribute_mModuleList (),
-mAttribute_mStaticArrayMap () {
+mProperty_mStaticStringMap (),
+mProperty_mGlobalVariableMap (),
+mProperty_mGlobalConstantMap (),
+mProperty_mRoutineMapIR (),
+mProperty_mGuardMapIR (),
+mProperty_mInterruptMapIR (),
+mProperty_mExternProcedureMapIR (),
+mProperty_mRequiredProcedureSet (),
+mProperty_mBootList (),
+mProperty_mInitList (),
+mProperty_mPanicSetupInstructionListIR (),
+mProperty_mPanicLoopInstructionListIR (),
+mProperty_mTaskMapIR (),
+mProperty_mGlobalTaskVariableList (),
+mProperty_mMaxBranchOfOnInstructions (),
+mProperty_mTargetParameters (),
+mProperty_mModuleList (),
+mProperty_mStaticArrayMap () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5015,24 +5015,24 @@ GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (const GALGAS_stati
                                                               const GALGAS_targetParameters & inOperand15,
                                                               const GALGAS_moduleListIR & inOperand16,
                                                               const GALGAS_staticArrayMap & inOperand17) :
-mAttribute_mStaticStringMap (inOperand0),
-mAttribute_mGlobalVariableMap (inOperand1),
-mAttribute_mGlobalConstantMap (inOperand2),
-mAttribute_mRoutineMapIR (inOperand3),
-mAttribute_mGuardMapIR (inOperand4),
-mAttribute_mInterruptMapIR (inOperand5),
-mAttribute_mExternProcedureMapIR (inOperand6),
-mAttribute_mRequiredProcedureSet (inOperand7),
-mAttribute_mBootList (inOperand8),
-mAttribute_mInitList (inOperand9),
-mAttribute_mPanicSetupInstructionListIR (inOperand10),
-mAttribute_mPanicLoopInstructionListIR (inOperand11),
-mAttribute_mTaskMapIR (inOperand12),
-mAttribute_mGlobalTaskVariableList (inOperand13),
-mAttribute_mMaxBranchOfOnInstructions (inOperand14),
-mAttribute_mTargetParameters (inOperand15),
-mAttribute_mModuleList (inOperand16),
-mAttribute_mStaticArrayMap (inOperand17) {
+mProperty_mStaticStringMap (inOperand0),
+mProperty_mGlobalVariableMap (inOperand1),
+mProperty_mGlobalConstantMap (inOperand2),
+mProperty_mRoutineMapIR (inOperand3),
+mProperty_mGuardMapIR (inOperand4),
+mProperty_mInterruptMapIR (inOperand5),
+mProperty_mExternProcedureMapIR (inOperand6),
+mProperty_mRequiredProcedureSet (inOperand7),
+mProperty_mBootList (inOperand8),
+mProperty_mInitList (inOperand9),
+mProperty_mPanicSetupInstructionListIR (inOperand10),
+mProperty_mPanicLoopInstructionListIR (inOperand11),
+mProperty_mTaskMapIR (inOperand12),
+mProperty_mGlobalTaskVariableList (inOperand13),
+mProperty_mMaxBranchOfOnInstructions (inOperand14),
+mProperty_mTargetParameters (inOperand15),
+mProperty_mModuleList (inOperand16),
+mProperty_mStaticArrayMap (inOperand17) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5091,58 +5091,58 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (co
 typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_intermediateCodeStruct & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mStaticStringMap.objectCompare (inOperand.mAttribute_mStaticStringMap) ;
+    result = mProperty_mStaticStringMap.objectCompare (inOperand.mProperty_mStaticStringMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVariableMap.objectCompare (inOperand.mAttribute_mGlobalVariableMap) ;
+    result = mProperty_mGlobalVariableMap.objectCompare (inOperand.mProperty_mGlobalVariableMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGlobalConstantMap.objectCompare (inOperand.mAttribute_mGlobalConstantMap) ;
+    result = mProperty_mGlobalConstantMap.objectCompare (inOperand.mProperty_mGlobalConstantMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRoutineMapIR.objectCompare (inOperand.mAttribute_mRoutineMapIR) ;
+    result = mProperty_mRoutineMapIR.objectCompare (inOperand.mProperty_mRoutineMapIR) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGuardMapIR.objectCompare (inOperand.mAttribute_mGuardMapIR) ;
+    result = mProperty_mGuardMapIR.objectCompare (inOperand.mProperty_mGuardMapIR) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInterruptMapIR.objectCompare (inOperand.mAttribute_mInterruptMapIR) ;
+    result = mProperty_mInterruptMapIR.objectCompare (inOperand.mProperty_mInterruptMapIR) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mExternProcedureMapIR.objectCompare (inOperand.mAttribute_mExternProcedureMapIR) ;
+    result = mProperty_mExternProcedureMapIR.objectCompare (inOperand.mProperty_mExternProcedureMapIR) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRequiredProcedureSet.objectCompare (inOperand.mAttribute_mRequiredProcedureSet) ;
+    result = mProperty_mRequiredProcedureSet.objectCompare (inOperand.mProperty_mRequiredProcedureSet) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mBootList.objectCompare (inOperand.mAttribute_mBootList) ;
+    result = mProperty_mBootList.objectCompare (inOperand.mProperty_mBootList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInitList.objectCompare (inOperand.mAttribute_mInitList) ;
+    result = mProperty_mInitList.objectCompare (inOperand.mProperty_mInitList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPanicSetupInstructionListIR.objectCompare (inOperand.mAttribute_mPanicSetupInstructionListIR) ;
+    result = mProperty_mPanicSetupInstructionListIR.objectCompare (inOperand.mProperty_mPanicSetupInstructionListIR) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPanicLoopInstructionListIR.objectCompare (inOperand.mAttribute_mPanicLoopInstructionListIR) ;
+    result = mProperty_mPanicLoopInstructionListIR.objectCompare (inOperand.mProperty_mPanicLoopInstructionListIR) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mTaskMapIR.objectCompare (inOperand.mAttribute_mTaskMapIR) ;
+    result = mProperty_mTaskMapIR.objectCompare (inOperand.mProperty_mTaskMapIR) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGlobalTaskVariableList.objectCompare (inOperand.mAttribute_mGlobalTaskVariableList) ;
+    result = mProperty_mGlobalTaskVariableList.objectCompare (inOperand.mProperty_mGlobalTaskVariableList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mMaxBranchOfOnInstructions.objectCompare (inOperand.mAttribute_mMaxBranchOfOnInstructions) ;
+    result = mProperty_mMaxBranchOfOnInstructions.objectCompare (inOperand.mProperty_mMaxBranchOfOnInstructions) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mTargetParameters.objectCompare (inOperand.mAttribute_mTargetParameters) ;
+    result = mProperty_mTargetParameters.objectCompare (inOperand.mProperty_mTargetParameters) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mModuleList.objectCompare (inOperand.mAttribute_mModuleList) ;
+    result = mProperty_mModuleList.objectCompare (inOperand.mProperty_mModuleList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mStaticArrayMap.objectCompare (inOperand.mAttribute_mStaticArrayMap) ;
+    result = mProperty_mStaticArrayMap.objectCompare (inOperand.mProperty_mStaticArrayMap) ;
   }
   return result ;
 }
@@ -5150,30 +5150,30 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_intermediateCodeStruct::isValid (void) const {
-  return mAttribute_mStaticStringMap.isValid () && mAttribute_mGlobalVariableMap.isValid () && mAttribute_mGlobalConstantMap.isValid () && mAttribute_mRoutineMapIR.isValid () && mAttribute_mGuardMapIR.isValid () && mAttribute_mInterruptMapIR.isValid () && mAttribute_mExternProcedureMapIR.isValid () && mAttribute_mRequiredProcedureSet.isValid () && mAttribute_mBootList.isValid () && mAttribute_mInitList.isValid () && mAttribute_mPanicSetupInstructionListIR.isValid () && mAttribute_mPanicLoopInstructionListIR.isValid () && mAttribute_mTaskMapIR.isValid () && mAttribute_mGlobalTaskVariableList.isValid () && mAttribute_mMaxBranchOfOnInstructions.isValid () && mAttribute_mTargetParameters.isValid () && mAttribute_mModuleList.isValid () && mAttribute_mStaticArrayMap.isValid () ;
+  return mProperty_mStaticStringMap.isValid () && mProperty_mGlobalVariableMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mRoutineMapIR.isValid () && mProperty_mGuardMapIR.isValid () && mProperty_mInterruptMapIR.isValid () && mProperty_mExternProcedureMapIR.isValid () && mProperty_mRequiredProcedureSet.isValid () && mProperty_mBootList.isValid () && mProperty_mInitList.isValid () && mProperty_mPanicSetupInstructionListIR.isValid () && mProperty_mPanicLoopInstructionListIR.isValid () && mProperty_mTaskMapIR.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mMaxBranchOfOnInstructions.isValid () && mProperty_mTargetParameters.isValid () && mProperty_mModuleList.isValid () && mProperty_mStaticArrayMap.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_intermediateCodeStruct::drop (void) {
-  mAttribute_mStaticStringMap.drop () ;
-  mAttribute_mGlobalVariableMap.drop () ;
-  mAttribute_mGlobalConstantMap.drop () ;
-  mAttribute_mRoutineMapIR.drop () ;
-  mAttribute_mGuardMapIR.drop () ;
-  mAttribute_mInterruptMapIR.drop () ;
-  mAttribute_mExternProcedureMapIR.drop () ;
-  mAttribute_mRequiredProcedureSet.drop () ;
-  mAttribute_mBootList.drop () ;
-  mAttribute_mInitList.drop () ;
-  mAttribute_mPanicSetupInstructionListIR.drop () ;
-  mAttribute_mPanicLoopInstructionListIR.drop () ;
-  mAttribute_mTaskMapIR.drop () ;
-  mAttribute_mGlobalTaskVariableList.drop () ;
-  mAttribute_mMaxBranchOfOnInstructions.drop () ;
-  mAttribute_mTargetParameters.drop () ;
-  mAttribute_mModuleList.drop () ;
-  mAttribute_mStaticArrayMap.drop () ;
+  mProperty_mStaticStringMap.drop () ;
+  mProperty_mGlobalVariableMap.drop () ;
+  mProperty_mGlobalConstantMap.drop () ;
+  mProperty_mRoutineMapIR.drop () ;
+  mProperty_mGuardMapIR.drop () ;
+  mProperty_mInterruptMapIR.drop () ;
+  mProperty_mExternProcedureMapIR.drop () ;
+  mProperty_mRequiredProcedureSet.drop () ;
+  mProperty_mBootList.drop () ;
+  mProperty_mInitList.drop () ;
+  mProperty_mPanicSetupInstructionListIR.drop () ;
+  mProperty_mPanicLoopInstructionListIR.drop () ;
+  mProperty_mTaskMapIR.drop () ;
+  mProperty_mGlobalTaskVariableList.drop () ;
+  mProperty_mMaxBranchOfOnInstructions.drop () ;
+  mProperty_mTargetParameters.drop () ;
+  mProperty_mModuleList.drop () ;
+  mProperty_mStaticArrayMap.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5184,41 +5184,41 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mStaticStringMap.description (ioString, inIndentation+1) ;
+    mProperty_mStaticStringMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGlobalVariableMap.description (ioString, inIndentation+1) ;
+    mProperty_mGlobalVariableMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGlobalConstantMap.description (ioString, inIndentation+1) ;
+    mProperty_mGlobalConstantMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRoutineMapIR.description (ioString, inIndentation+1) ;
+    mProperty_mRoutineMapIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGuardMapIR.description (ioString, inIndentation+1) ;
+    mProperty_mGuardMapIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInterruptMapIR.description (ioString, inIndentation+1) ;
+    mProperty_mInterruptMapIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mExternProcedureMapIR.description (ioString, inIndentation+1) ;
+    mProperty_mExternProcedureMapIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRequiredProcedureSet.description (ioString, inIndentation+1) ;
+    mProperty_mRequiredProcedureSet.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mBootList.description (ioString, inIndentation+1) ;
+    mProperty_mBootList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInitList.description (ioString, inIndentation+1) ;
+    mProperty_mInitList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPanicSetupInstructionListIR.description (ioString, inIndentation+1) ;
+    mProperty_mPanicSetupInstructionListIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPanicLoopInstructionListIR.description (ioString, inIndentation+1) ;
+    mProperty_mPanicLoopInstructionListIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mTaskMapIR.description (ioString, inIndentation+1) ;
+    mProperty_mTaskMapIR.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGlobalTaskVariableList.description (ioString, inIndentation+1) ;
+    mProperty_mGlobalTaskVariableList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mMaxBranchOfOnInstructions.description (ioString, inIndentation+1) ;
+    mProperty_mMaxBranchOfOnInstructions.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mTargetParameters.description (ioString, inIndentation+1) ;
+    mProperty_mTargetParameters.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mModuleList.description (ioString, inIndentation+1) ;
+    mProperty_mModuleList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mStaticArrayMap.description (ioString, inIndentation+1) ;
+    mProperty_mStaticArrayMap.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -5226,109 +5226,109 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_staticStringMap GALGAS_intermediateCodeStruct::getter_mStaticStringMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStaticStringMap ;
+  return mProperty_mStaticStringMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_globalVariableMapIR GALGAS_intermediateCodeStruct::getter_mGlobalVariableMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVariableMap ;
+  return mProperty_mGlobalVariableMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_globalConstantMapIR GALGAS_intermediateCodeStruct::getter_mGlobalConstantMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalConstantMap ;
+  return mProperty_mGlobalConstantMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineMapIR GALGAS_intermediateCodeStruct::getter_mRoutineMapIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRoutineMapIR ;
+  return mProperty_mRoutineMapIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardMapIR GALGAS_intermediateCodeStruct::getter_mGuardMapIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGuardMapIR ;
+  return mProperty_mGuardMapIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_interruptMapIR GALGAS_intermediateCodeStruct::getter_mInterruptMapIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInterruptMapIR ;
+  return mProperty_mInterruptMapIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_externProcedureMapIR GALGAS_intermediateCodeStruct::getter_mExternProcedureMapIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExternProcedureMapIR ;
+  return mProperty_mExternProcedureMapIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_stringset GALGAS_intermediateCodeStruct::getter_mRequiredProcedureSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRequiredProcedureSet ;
+  return mProperty_mRequiredProcedureSet ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootListIR GALGAS_intermediateCodeStruct::getter_mBootList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBootList ;
+  return mProperty_mBootList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initListIR GALGAS_intermediateCodeStruct::getter_mInitList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitList ;
+  return mProperty_mInitList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_intermediateCodeStruct::getter_mPanicSetupInstructionListIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPanicSetupInstructionListIR ;
+  return mProperty_mPanicSetupInstructionListIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_intermediateCodeStruct::getter_mPanicLoopInstructionListIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPanicLoopInstructionListIR ;
+  return mProperty_mPanicLoopInstructionListIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMapIR GALGAS_intermediateCodeStruct::getter_mTaskMapIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTaskMapIR ;
+  return mProperty_mTaskMapIR ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_globalTaskVariableList GALGAS_intermediateCodeStruct::getter_mGlobalTaskVariableList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalTaskVariableList ;
+  return mProperty_mGlobalTaskVariableList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_intermediateCodeStruct::getter_mMaxBranchOfOnInstructions (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMaxBranchOfOnInstructions ;
+  return mProperty_mMaxBranchOfOnInstructions ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_targetParameters GALGAS_intermediateCodeStruct::getter_mTargetParameters (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetParameters ;
+  return mProperty_mTargetParameters ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleListIR GALGAS_intermediateCodeStruct::getter_mModuleList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mModuleList ;
+  return mProperty_mModuleList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_staticArrayMap GALGAS_intermediateCodeStruct::getter_mStaticArrayMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStaticArrayMap ;
+  return mProperty_mStaticArrayMap ;
 }
 
 
@@ -5385,10 +5385,10 @@ typeComparisonResult cPtr_extendIR::dynamicObjectCompare (const acPtr_class * in
   const cPtr_extendIR * p = (const cPtr_extendIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_extendIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mResult.objectCompare (p->mAttribute_mResult) ;
+    result = mProperty_mResult.objectCompare (p->mProperty_mResult) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSource.objectCompare (p->mAttribute_mSource) ;
+    result = mProperty_mSource.objectCompare (p->mProperty_mSource) ;
   }
   return result ;
 }
@@ -5444,7 +5444,7 @@ GALGAS_objectIR GALGAS_extendIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   if (NULL != mObjectPtr) {
     const cPtr_extendIR * p = (const cPtr_extendIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_extendIR) ;
-    result = p->mAttribute_mResult ;
+    result = p->mProperty_mResult ;
   }
   return result ;
 }
@@ -5452,7 +5452,7 @@ GALGAS_objectIR GALGAS_extendIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_extendIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResult ;
+  return mProperty_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5462,7 +5462,7 @@ GALGAS_objectIR GALGAS_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   if (NULL != mObjectPtr) {
     const cPtr_extendIR * p = (const cPtr_extendIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_extendIR) ;
-    result = p->mAttribute_mSource ;
+    result = p->mProperty_mSource ;
   }
   return result ;
 }
@@ -5470,7 +5470,7 @@ GALGAS_objectIR GALGAS_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_extendIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSource ;
+  return mProperty_mSource ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5481,8 +5481,8 @@ cPtr_extendIR::cPtr_extendIR (const GALGAS_objectIR & in_mResult,
                               const GALGAS_objectIR & in_mSource
                               COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mResult (in_mResult),
-mAttribute_mSource (in_mSource) {
+mProperty_mResult (in_mResult),
+mProperty_mSource (in_mSource) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5494,9 +5494,9 @@ const C_galgas_type_descriptor * cPtr_extendIR::classDescriptor (void) const {
 void cPtr_extendIR::description (C_String & ioString,
                                  const int32_t inIndentation) const {
   ioString << "[@extendIR:" ;
-  mAttribute_mResult.description (ioString, inIndentation+1) ;
+  mProperty_mResult.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSource.description (ioString, inIndentation+1) ;
+  mProperty_mSource.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -5504,7 +5504,7 @@ void cPtr_extendIR::description (C_String & ioString,
 
 acPtr_class * cPtr_extendIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_extendIR (mAttribute_mResult, mAttribute_mSource COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_extendIR (mProperty_mResult, mProperty_mSource COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -5561,10 +5561,10 @@ typeComparisonResult cPtr_truncIR::dynamicObjectCompare (const acPtr_class * inO
   const cPtr_truncIR * p = (const cPtr_truncIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_truncIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mResult.objectCompare (p->mAttribute_mResult) ;
+    result = mProperty_mResult.objectCompare (p->mProperty_mResult) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSource.objectCompare (p->mAttribute_mSource) ;
+    result = mProperty_mSource.objectCompare (p->mProperty_mSource) ;
   }
   return result ;
 }
@@ -5620,7 +5620,7 @@ GALGAS_objectIR GALGAS_truncIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
   if (NULL != mObjectPtr) {
     const cPtr_truncIR * p = (const cPtr_truncIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_truncIR) ;
-    result = p->mAttribute_mResult ;
+    result = p->mProperty_mResult ;
   }
   return result ;
 }
@@ -5628,7 +5628,7 @@ GALGAS_objectIR GALGAS_truncIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_truncIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResult ;
+  return mProperty_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5638,7 +5638,7 @@ GALGAS_objectIR GALGAS_truncIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
   if (NULL != mObjectPtr) {
     const cPtr_truncIR * p = (const cPtr_truncIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_truncIR) ;
-    result = p->mAttribute_mSource ;
+    result = p->mProperty_mSource ;
   }
   return result ;
 }
@@ -5646,7 +5646,7 @@ GALGAS_objectIR GALGAS_truncIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_truncIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSource ;
+  return mProperty_mSource ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5657,8 +5657,8 @@ cPtr_truncIR::cPtr_truncIR (const GALGAS_objectIR & in_mResult,
                             const GALGAS_objectIR & in_mSource
                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mResult (in_mResult),
-mAttribute_mSource (in_mSource) {
+mProperty_mResult (in_mResult),
+mProperty_mSource (in_mSource) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5670,9 +5670,9 @@ const C_galgas_type_descriptor * cPtr_truncIR::classDescriptor (void) const {
 void cPtr_truncIR::description (C_String & ioString,
                                 const int32_t inIndentation) const {
   ioString << "[@truncIR:" ;
-  mAttribute_mResult.description (ioString, inIndentation+1) ;
+  mProperty_mResult.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSource.description (ioString, inIndentation+1) ;
+  mProperty_mSource.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -5680,7 +5680,7 @@ void cPtr_truncIR::description (C_String & ioString,
 
 acPtr_class * cPtr_truncIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_truncIR (mAttribute_mResult, mAttribute_mSource COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_truncIR (mProperty_mResult, mProperty_mSource COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -5737,13 +5737,13 @@ typeComparisonResult cPtr_leftShiftIR::dynamicObjectCompare (const acPtr_class *
   const cPtr_leftShiftIR * p = (const cPtr_leftShiftIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_leftShiftIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mResult.objectCompare (p->mAttribute_mResult) ;
+    result = mProperty_mResult.objectCompare (p->mProperty_mResult) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSource.objectCompare (p->mAttribute_mSource) ;
+    result = mProperty_mSource.objectCompare (p->mProperty_mSource) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mShiftAmount.objectCompare (p->mAttribute_mShiftAmount) ;
+    result = mProperty_mShiftAmount.objectCompare (p->mProperty_mShiftAmount) ;
   }
   return result ;
 }
@@ -5800,7 +5800,7 @@ GALGAS_objectIR GALGAS_leftShiftIR::getter_mResult (UNUSED_LOCATION_ARGS) const 
   if (NULL != mObjectPtr) {
     const cPtr_leftShiftIR * p = (const cPtr_leftShiftIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_leftShiftIR) ;
-    result = p->mAttribute_mResult ;
+    result = p->mProperty_mResult ;
   }
   return result ;
 }
@@ -5808,7 +5808,7 @@ GALGAS_objectIR GALGAS_leftShiftIR::getter_mResult (UNUSED_LOCATION_ARGS) const 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_leftShiftIR::getter_mResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResult ;
+  return mProperty_mResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5818,7 +5818,7 @@ GALGAS_objectIR GALGAS_leftShiftIR::getter_mSource (UNUSED_LOCATION_ARGS) const 
   if (NULL != mObjectPtr) {
     const cPtr_leftShiftIR * p = (const cPtr_leftShiftIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_leftShiftIR) ;
-    result = p->mAttribute_mSource ;
+    result = p->mProperty_mSource ;
   }
   return result ;
 }
@@ -5826,7 +5826,7 @@ GALGAS_objectIR GALGAS_leftShiftIR::getter_mSource (UNUSED_LOCATION_ARGS) const 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_leftShiftIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSource ;
+  return mProperty_mSource ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5836,7 +5836,7 @@ GALGAS_uint GALGAS_leftShiftIR::getter_mShiftAmount (UNUSED_LOCATION_ARGS) const
   if (NULL != mObjectPtr) {
     const cPtr_leftShiftIR * p = (const cPtr_leftShiftIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_leftShiftIR) ;
-    result = p->mAttribute_mShiftAmount ;
+    result = p->mProperty_mShiftAmount ;
   }
   return result ;
 }
@@ -5844,7 +5844,7 @@ GALGAS_uint GALGAS_leftShiftIR::getter_mShiftAmount (UNUSED_LOCATION_ARGS) const
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cPtr_leftShiftIR::getter_mShiftAmount (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mShiftAmount ;
+  return mProperty_mShiftAmount ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5856,9 +5856,9 @@ cPtr_leftShiftIR::cPtr_leftShiftIR (const GALGAS_objectIR & in_mResult,
                                     const GALGAS_uint & in_mShiftAmount
                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mResult (in_mResult),
-mAttribute_mSource (in_mSource),
-mAttribute_mShiftAmount (in_mShiftAmount) {
+mProperty_mResult (in_mResult),
+mProperty_mSource (in_mSource),
+mProperty_mShiftAmount (in_mShiftAmount) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5870,11 +5870,11 @@ const C_galgas_type_descriptor * cPtr_leftShiftIR::classDescriptor (void) const 
 void cPtr_leftShiftIR::description (C_String & ioString,
                                     const int32_t inIndentation) const {
   ioString << "[@leftShiftIR:" ;
-  mAttribute_mResult.description (ioString, inIndentation+1) ;
+  mProperty_mResult.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSource.description (ioString, inIndentation+1) ;
+  mProperty_mSource.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mShiftAmount.description (ioString, inIndentation+1) ;
+  mProperty_mShiftAmount.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -5882,7 +5882,7 @@ void cPtr_leftShiftIR::description (C_String & ioString,
 
 acPtr_class * cPtr_leftShiftIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_leftShiftIR (mAttribute_mResult, mAttribute_mSource, mAttribute_mShiftAmount COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_leftShiftIR (mProperty_mResult, mProperty_mSource, mProperty_mShiftAmount COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -5939,22 +5939,22 @@ typeComparisonResult cPtr_binaryOperationIR::dynamicObjectCompare (const acPtr_c
   const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_binaryOperationIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTarget.objectCompare (p->mAttribute_mTarget) ;
+    result = mProperty_mTarget.objectCompare (p->mProperty_mTarget) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mOperandType.objectCompare (p->mAttribute_mOperandType) ;
+    result = mProperty_mOperandType.objectCompare (p->mProperty_mOperandType) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLeft.objectCompare (p->mAttribute_mLeft) ;
+    result = mProperty_mLeft.objectCompare (p->mProperty_mLeft) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mOperation.objectCompare (p->mAttribute_mOperation) ;
+    result = mProperty_mOperation.objectCompare (p->mProperty_mOperation) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mRight.objectCompare (p->mAttribute_mRight) ;
+    result = mProperty_mRight.objectCompare (p->mProperty_mRight) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLocation.objectCompare (p->mAttribute_mLocation) ;
+    result = mProperty_mLocation.objectCompare (p->mProperty_mLocation) ;
   }
   return result ;
 }
@@ -6014,7 +6014,7 @@ GALGAS_objectIR GALGAS_binaryOperationIR::getter_mTarget (UNUSED_LOCATION_ARGS) 
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_binaryOperationIR) ;
-    result = p->mAttribute_mTarget ;
+    result = p->mProperty_mTarget ;
   }
   return result ;
 }
@@ -6022,7 +6022,7 @@ GALGAS_objectIR GALGAS_binaryOperationIR::getter_mTarget (UNUSED_LOCATION_ARGS) 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_binaryOperationIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTarget ;
+  return mProperty_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6032,7 +6032,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_binaryOperationIR::getter_mOperandType (UN
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_binaryOperationIR) ;
-    result = p->mAttribute_mOperandType ;
+    result = p->mProperty_mOperandType ;
   }
   return result ;
 }
@@ -6040,7 +6040,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_binaryOperationIR::getter_mOperandType (UN
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cPtr_binaryOperationIR::getter_mOperandType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperandType ;
+  return mProperty_mOperandType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6050,7 +6050,7 @@ GALGAS_objectIR GALGAS_binaryOperationIR::getter_mLeft (UNUSED_LOCATION_ARGS) co
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_binaryOperationIR) ;
-    result = p->mAttribute_mLeft ;
+    result = p->mProperty_mLeft ;
   }
   return result ;
 }
@@ -6058,7 +6058,7 @@ GALGAS_objectIR GALGAS_binaryOperationIR::getter_mLeft (UNUSED_LOCATION_ARGS) co
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_binaryOperationIR::getter_mLeft (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLeft ;
+  return mProperty_mLeft ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6068,7 +6068,7 @@ GALGAS_llvmBinaryOperation GALGAS_binaryOperationIR::getter_mOperation (UNUSED_L
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_binaryOperationIR) ;
-    result = p->mAttribute_mOperation ;
+    result = p->mProperty_mOperation ;
   }
   return result ;
 }
@@ -6076,7 +6076,7 @@ GALGAS_llvmBinaryOperation GALGAS_binaryOperationIR::getter_mOperation (UNUSED_L
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation cPtr_binaryOperationIR::getter_mOperation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperation ;
+  return mProperty_mOperation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6086,7 +6086,7 @@ GALGAS_objectIR GALGAS_binaryOperationIR::getter_mRight (UNUSED_LOCATION_ARGS) c
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_binaryOperationIR) ;
-    result = p->mAttribute_mRight ;
+    result = p->mProperty_mRight ;
   }
   return result ;
 }
@@ -6094,7 +6094,7 @@ GALGAS_objectIR GALGAS_binaryOperationIR::getter_mRight (UNUSED_LOCATION_ARGS) c
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_binaryOperationIR::getter_mRight (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRight ;
+  return mProperty_mRight ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6104,7 +6104,7 @@ GALGAS_location GALGAS_binaryOperationIR::getter_mLocation (UNUSED_LOCATION_ARGS
   if (NULL != mObjectPtr) {
     const cPtr_binaryOperationIR * p = (const cPtr_binaryOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_binaryOperationIR) ;
-    result = p->mAttribute_mLocation ;
+    result = p->mProperty_mLocation ;
   }
   return result ;
 }
@@ -6112,7 +6112,7 @@ GALGAS_location GALGAS_binaryOperationIR::getter_mLocation (UNUSED_LOCATION_ARGS
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cPtr_binaryOperationIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLocation ;
+  return mProperty_mLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6127,12 +6127,12 @@ cPtr_binaryOperationIR::cPtr_binaryOperationIR (const GALGAS_objectIR & in_mTarg
                                                 const GALGAS_location & in_mLocation
                                                 COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTarget (in_mTarget),
-mAttribute_mOperandType (in_mOperandType),
-mAttribute_mLeft (in_mLeft),
-mAttribute_mOperation (in_mOperation),
-mAttribute_mRight (in_mRight),
-mAttribute_mLocation (in_mLocation) {
+mProperty_mTarget (in_mTarget),
+mProperty_mOperandType (in_mOperandType),
+mProperty_mLeft (in_mLeft),
+mProperty_mOperation (in_mOperation),
+mProperty_mRight (in_mRight),
+mProperty_mLocation (in_mLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6144,17 +6144,17 @@ const C_galgas_type_descriptor * cPtr_binaryOperationIR::classDescriptor (void) 
 void cPtr_binaryOperationIR::description (C_String & ioString,
                                           const int32_t inIndentation) const {
   ioString << "[@binaryOperationIR:" ;
-  mAttribute_mTarget.description (ioString, inIndentation+1) ;
+  mProperty_mTarget.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mOperandType.description (ioString, inIndentation+1) ;
+  mProperty_mOperandType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLeft.description (ioString, inIndentation+1) ;
+  mProperty_mLeft.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mOperation.description (ioString, inIndentation+1) ;
+  mProperty_mOperation.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mRight.description (ioString, inIndentation+1) ;
+  mProperty_mRight.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLocation.description (ioString, inIndentation+1) ;
+  mProperty_mLocation.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -6162,7 +6162,7 @@ void cPtr_binaryOperationIR::description (C_String & ioString,
 
 acPtr_class * cPtr_binaryOperationIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_binaryOperationIR (mAttribute_mTarget, mAttribute_mOperandType, mAttribute_mLeft, mAttribute_mOperation, mAttribute_mRight, mAttribute_mLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_binaryOperationIR (mProperty_mTarget, mProperty_mOperandType, mProperty_mLeft, mProperty_mOperation, mProperty_mRight, mProperty_mLocation COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -6275,24 +6275,24 @@ static void extensionMethod_binaryOperationIR_enterCodeForOverflowOperation (con
   macroValidSharedObject (object, cPtr_binaryOperationIR) ;
   GALGAS_uint var_staticStringIndex_2105 ;
   {
-  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mAttribute_mStaticStringMap, object->mAttribute_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 83)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 83)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 83)), var_staticStringIndex_2105, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 82)) ;
+  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mProperty_mStaticStringMap, object->mProperty_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 83)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 83)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 83)), var_staticStringIndex_2105, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 82)) ;
   }
-  GALGAS_string var_llvmType_2124 = extensionGetter_llvmTypeName (object->mAttribute_mOperandType.getter_kind (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 86)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 86)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (GALGAS_string (".r = call {"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (GALGAS_string (", i1} @llvm."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (GALGAS_string (".with.overflow."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (extensionGetter_llvmName (object->mAttribute_mLeft, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (extensionGetter_llvmName (object->mAttribute_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)).add_operation (GALGAS_string (".hasOvf = extractvalue {"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)).add_operation (GALGAS_string (", i1} "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)).add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)).add_operation (GALGAS_string (".r, 1\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)) ;
-  GALGAS_string var_labelName_2543 = extensionGetter_name (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 90)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)).add_operation (GALGAS_string (".hasOvf, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)).add_operation (var_labelName_2543, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)).add_operation (GALGAS_string (".ovf, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)).add_operation (var_labelName_2543, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)).add_operation (GALGAS_string (".noovf\n"
+  GALGAS_string var_llvmType_2124 = extensionGetter_llvmTypeName (object->mProperty_mOperandType.getter_kind (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 86)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 86)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (GALGAS_string (".r = call {"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (GALGAS_string (", i1} @llvm."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (GALGAS_string (".with.overflow."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 87)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (extensionGetter_llvmName (object->mProperty_mLeft, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 88)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)).add_operation (GALGAS_string (".hasOvf = extractvalue {"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)).add_operation (GALGAS_string (", i1} "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)).add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)).add_operation (GALGAS_string (".r, 1\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 89)) ;
+  GALGAS_string var_labelName_2543 = extensionGetter_name (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 90)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)).add_operation (GALGAS_string (".hasOvf, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)).add_operation (var_labelName_2543, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)).add_operation (GALGAS_string (".ovf, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)).add_operation (var_labelName_2543, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)).add_operation (GALGAS_string (".noovf\n"
     "\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 91)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_labelName_2543.add_operation (GALGAS_string (".ovf:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 92)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 92)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @raise_panic.").add_operation (var_staticStringIndex_2105.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 93)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 93)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 93)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 93)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mPanicLineLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 94)).add_operation (object->mAttribute_mLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 94)).getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 94)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 94)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 94)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 94)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mPanicCodeLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 95)).add_operation (constinArgument_inPanicCode.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 95)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 95)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 95)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 95)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mProperty_mPanicLineLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 94)).add_operation (object->mProperty_mLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 94)).getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 94)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 94)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 94)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 94)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mProperty_mPanicCodeLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 95)).add_operation (constinArgument_inPanicCode.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 95)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 95)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 95)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 95)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  unreachable\n"
     "\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 96)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_labelName_2543.add_operation (GALGAS_string (".noovf:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 97)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 97)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (GALGAS_string (" = extractvalue {"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (GALGAS_string (", i1} "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (GALGAS_string (".r, 0\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)) ;
-  ioArgument_ioGenerationAdds.mAttribute_mExternFunctionDeclarationSet.addAssign_operation (GALGAS_string ("declare {").add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (", i1} @llvm."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (".with.overflow."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (" %a, "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (" %b)"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100))  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (GALGAS_string (" = extractvalue {"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (GALGAS_string (", i1} "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)).add_operation (GALGAS_string (".r, 0\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 98)) ;
+  ioArgument_ioGenerationAdds.mProperty_mExternFunctionDeclarationSet.addAssign_operation (GALGAS_string ("declare {").add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (", i1} @llvm."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (".with.overflow."), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (" %a, "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (var_llvmType_2124, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100)).add_operation (GALGAS_string (" %b)"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 100))  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 99)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6377,21 +6377,21 @@ static void extensionMethod_binaryOperationIR_enterCodeForDivisionWithZeroDiviso
   macroValidSharedObject (object, cPtr_binaryOperationIR) ;
   GALGAS_uint var_staticStringIndex_3868 ;
   {
-  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mAttribute_mStaticStringMap, object->mAttribute_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 113)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 113)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 113)), var_staticStringIndex_3868, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 112)) ;
+  extensionSetter_findOrAddStaticString (ioArgument_ioGenerationAdds.mProperty_mStaticStringMap, object->mProperty_mLocation.getter_file (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 113)).getter_lastPathComponent (SOURCE_FILE ("intermediate-binary-operation.galgas", 113)).getter_stringByDeletingPathExtension (SOURCE_FILE ("intermediate-binary-operation.galgas", 113)), var_staticStringIndex_3868, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 112)) ;
   }
-  GALGAS_string var_llvmType_3887 = extensionGetter_llvmTypeName (object->mAttribute_mOperandType.getter_kind (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 116)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 116)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (GALGAS_string (".isZero = icmp eq "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (var_llvmType_3887, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (extensionGetter_llvmName (object->mAttribute_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (GALGAS_string (", 0\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)) ;
-  GALGAS_string var_labelName_4051 = extensionGetter_name (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 ").add_operation (extensionGetter_llvmName (object->mAttribute_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (GALGAS_string (".isZero, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (var_labelName_4051, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (GALGAS_string (".divideByZero, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (var_labelName_4051, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (GALGAS_string (".ok\n"
+  GALGAS_string var_llvmType_3887 = extensionGetter_llvmTypeName (object->mProperty_mOperandType.getter_kind (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 116)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 116)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (GALGAS_string (".isZero = icmp eq "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (var_llvmType_3887, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)).add_operation (GALGAS_string (", 0\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 117)) ;
+  GALGAS_string var_labelName_4051 = extensionGetter_name (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 118)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 ").add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (GALGAS_string (".isZero, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (var_labelName_4051, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (GALGAS_string (".divideByZero, label %"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (var_labelName_4051, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)).add_operation (GALGAS_string (".ok\n"
     "\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 119)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_labelName_4051.add_operation (GALGAS_string (".divideByZero:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 120)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 120)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @raise_panic.").add_operation (var_staticStringIndex_3868.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 121)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)).add_operation (GALGAS_string (" ("), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 121)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mPanicLineLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)).add_operation (object->mAttribute_mLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)).getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mAttribute_mPanicCodeLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)).add_operation (constinArgument_inPanicCode.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mProperty_mPanicLineLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)).add_operation (object->mProperty_mLocation.getter_line (inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)).getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 122)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(constinArgument_inGenerationContext.mProperty_mPanicCodeLLVMType.add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)).add_operation (constinArgument_inPanicCode.getter_string (SOURCE_FILE ("intermediate-binary-operation.galgas", 123)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 123)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  unreachable\n"
     "\n"), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 124)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(var_labelName_4051.add_operation (GALGAS_string (".ok:\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 125)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 125)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mAttribute_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (var_llvmType_3887, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (extensionGetter_llvmName (object->mAttribute_mLeft, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (extensionGetter_llvmName (object->mAttribute_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (extensionGetter_llvmName (object->mProperty_mTarget, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (" = "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (constinArgument_inOperation, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (var_llvmType_3887, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (extensionGetter_llvmName (object->mProperty_mLeft, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (extensionGetter_llvmName (object->mProperty_mRight, inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)), inCompiler  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 126)) ;
 }
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -6420,22 +6420,22 @@ typeComparisonResult cPtr_shortCircuitAndOperationIR::dynamicObjectCompare (cons
   const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetOperand.objectCompare (p->mAttribute_mTargetOperand) ;
+    result = mProperty_mTargetOperand.objectCompare (p->mProperty_mTargetOperand) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLeftOperand.objectCompare (p->mAttribute_mLeftOperand) ;
+    result = mProperty_mLeftOperand.objectCompare (p->mProperty_mLeftOperand) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLeftInstructionList.objectCompare (p->mAttribute_mLeftInstructionList) ;
+    result = mProperty_mLeftInstructionList.objectCompare (p->mProperty_mLeftInstructionList) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mRightOperand.objectCompare (p->mAttribute_mRightOperand) ;
+    result = mProperty_mRightOperand.objectCompare (p->mProperty_mRightOperand) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mRightInstructionList.objectCompare (p->mAttribute_mRightInstructionList) ;
+    result = mProperty_mRightInstructionList.objectCompare (p->mProperty_mRightInstructionList) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLocation.objectCompare (p->mAttribute_mLocation) ;
+    result = mProperty_mLocation.objectCompare (p->mProperty_mLocation) ;
   }
   return result ;
 }
@@ -6495,7 +6495,7 @@ GALGAS_objectIR GALGAS_shortCircuitAndOperationIR::getter_mTargetOperand (UNUSED
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    result = p->mAttribute_mTargetOperand ;
+    result = p->mProperty_mTargetOperand ;
   }
   return result ;
 }
@@ -6503,7 +6503,7 @@ GALGAS_objectIR GALGAS_shortCircuitAndOperationIR::getter_mTargetOperand (UNUSED
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_shortCircuitAndOperationIR::getter_mTargetOperand (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetOperand ;
+  return mProperty_mTargetOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6513,7 +6513,7 @@ GALGAS_objectIR GALGAS_shortCircuitAndOperationIR::getter_mLeftOperand (UNUSED_L
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    result = p->mAttribute_mLeftOperand ;
+    result = p->mProperty_mLeftOperand ;
   }
   return result ;
 }
@@ -6521,7 +6521,7 @@ GALGAS_objectIR GALGAS_shortCircuitAndOperationIR::getter_mLeftOperand (UNUSED_L
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_shortCircuitAndOperationIR::getter_mLeftOperand (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLeftOperand ;
+  return mProperty_mLeftOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6531,7 +6531,7 @@ GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::getter_mLeftInstruct
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    result = p->mAttribute_mLeftInstructionList ;
+    result = p->mProperty_mLeftInstructionList ;
   }
   return result ;
 }
@@ -6539,7 +6539,7 @@ GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::getter_mLeftInstruct
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR cPtr_shortCircuitAndOperationIR::getter_mLeftInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLeftInstructionList ;
+  return mProperty_mLeftInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6549,7 +6549,7 @@ GALGAS_objectIR GALGAS_shortCircuitAndOperationIR::getter_mRightOperand (UNUSED_
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    result = p->mAttribute_mRightOperand ;
+    result = p->mProperty_mRightOperand ;
   }
   return result ;
 }
@@ -6557,7 +6557,7 @@ GALGAS_objectIR GALGAS_shortCircuitAndOperationIR::getter_mRightOperand (UNUSED_
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_shortCircuitAndOperationIR::getter_mRightOperand (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRightOperand ;
+  return mProperty_mRightOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6567,7 +6567,7 @@ GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::getter_mRightInstruc
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    result = p->mAttribute_mRightInstructionList ;
+    result = p->mProperty_mRightInstructionList ;
   }
   return result ;
 }
@@ -6575,7 +6575,7 @@ GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::getter_mRightInstruc
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR cPtr_shortCircuitAndOperationIR::getter_mRightInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRightInstructionList ;
+  return mProperty_mRightInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6585,7 +6585,7 @@ GALGAS_location GALGAS_shortCircuitAndOperationIR::getter_mLocation (UNUSED_LOCA
   if (NULL != mObjectPtr) {
     const cPtr_shortCircuitAndOperationIR * p = (const cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    result = p->mAttribute_mLocation ;
+    result = p->mProperty_mLocation ;
   }
   return result ;
 }
@@ -6593,7 +6593,7 @@ GALGAS_location GALGAS_shortCircuitAndOperationIR::getter_mLocation (UNUSED_LOCA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cPtr_shortCircuitAndOperationIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLocation ;
+  return mProperty_mLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6608,12 +6608,12 @@ cPtr_shortCircuitAndOperationIR::cPtr_shortCircuitAndOperationIR (const GALGAS_o
                                                                   const GALGAS_location & in_mLocation
                                                                   COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetOperand (in_mTargetOperand),
-mAttribute_mLeftOperand (in_mLeftOperand),
-mAttribute_mLeftInstructionList (in_mLeftInstructionList),
-mAttribute_mRightOperand (in_mRightOperand),
-mAttribute_mRightInstructionList (in_mRightInstructionList),
-mAttribute_mLocation (in_mLocation) {
+mProperty_mTargetOperand (in_mTargetOperand),
+mProperty_mLeftOperand (in_mLeftOperand),
+mProperty_mLeftInstructionList (in_mLeftInstructionList),
+mProperty_mRightOperand (in_mRightOperand),
+mProperty_mRightInstructionList (in_mRightInstructionList),
+mProperty_mLocation (in_mLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6625,17 +6625,17 @@ const C_galgas_type_descriptor * cPtr_shortCircuitAndOperationIR::classDescripto
 void cPtr_shortCircuitAndOperationIR::description (C_String & ioString,
                                                    const int32_t inIndentation) const {
   ioString << "[@shortCircuitAndOperationIR:" ;
-  mAttribute_mTargetOperand.description (ioString, inIndentation+1) ;
+  mProperty_mTargetOperand.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLeftOperand.description (ioString, inIndentation+1) ;
+  mProperty_mLeftOperand.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLeftInstructionList.description (ioString, inIndentation+1) ;
+  mProperty_mLeftInstructionList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mRightOperand.description (ioString, inIndentation+1) ;
+  mProperty_mRightOperand.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mRightInstructionList.description (ioString, inIndentation+1) ;
+  mProperty_mRightInstructionList.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLocation.description (ioString, inIndentation+1) ;
+  mProperty_mLocation.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -6643,7 +6643,7 @@ void cPtr_shortCircuitAndOperationIR::description (C_String & ioString,
 
 acPtr_class * cPtr_shortCircuitAndOperationIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_shortCircuitAndOperationIR (mAttribute_mTargetOperand, mAttribute_mLeftOperand, mAttribute_mLeftInstructionList, mAttribute_mRightOperand, mAttribute_mRightInstructionList, mAttribute_mLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_shortCircuitAndOperationIR (mProperty_mTargetOperand, mProperty_mLeftOperand, mProperty_mLeftInstructionList, mProperty_mRightOperand, mProperty_mRightInstructionList, mProperty_mLocation COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -6700,16 +6700,16 @@ typeComparisonResult cPtr_ComputeRegisterAddressWithSubscriptIR::dynamicObjectCo
   const cPtr_ComputeRegisterAddressWithSubscriptIR * p = (const cPtr_ComputeRegisterAddressWithSubscriptIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_ComputeRegisterAddressWithSubscriptIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTarget.objectCompare (p->mAttribute_mTarget) ;
+    result = mProperty_mTarget.objectCompare (p->mProperty_mTarget) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mIndexResult.objectCompare (p->mAttribute_mIndexResult) ;
+    result = mProperty_mIndexResult.objectCompare (p->mProperty_mIndexResult) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mRegisterAddress.objectCompare (p->mAttribute_mRegisterAddress) ;
+    result = mProperty_mRegisterAddress.objectCompare (p->mProperty_mRegisterAddress) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mElementArraySize.objectCompare (p->mAttribute_mElementArraySize) ;
+    result = mProperty_mElementArraySize.objectCompare (p->mProperty_mElementArraySize) ;
   }
   return result ;
 }
@@ -6767,7 +6767,7 @@ GALGAS_objectIR GALGAS_ComputeRegisterAddressWithSubscriptIR::getter_mTarget (UN
   if (NULL != mObjectPtr) {
     const cPtr_ComputeRegisterAddressWithSubscriptIR * p = (const cPtr_ComputeRegisterAddressWithSubscriptIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_ComputeRegisterAddressWithSubscriptIR) ;
-    result = p->mAttribute_mTarget ;
+    result = p->mProperty_mTarget ;
   }
   return result ;
 }
@@ -6775,7 +6775,7 @@ GALGAS_objectIR GALGAS_ComputeRegisterAddressWithSubscriptIR::getter_mTarget (UN
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_ComputeRegisterAddressWithSubscriptIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTarget ;
+  return mProperty_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6785,7 +6785,7 @@ GALGAS_objectIR GALGAS_ComputeRegisterAddressWithSubscriptIR::getter_mIndexResul
   if (NULL != mObjectPtr) {
     const cPtr_ComputeRegisterAddressWithSubscriptIR * p = (const cPtr_ComputeRegisterAddressWithSubscriptIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_ComputeRegisterAddressWithSubscriptIR) ;
-    result = p->mAttribute_mIndexResult ;
+    result = p->mProperty_mIndexResult ;
   }
   return result ;
 }
@@ -6793,7 +6793,7 @@ GALGAS_objectIR GALGAS_ComputeRegisterAddressWithSubscriptIR::getter_mIndexResul
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_ComputeRegisterAddressWithSubscriptIR::getter_mIndexResult (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIndexResult ;
+  return mProperty_mIndexResult ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6803,7 +6803,7 @@ GALGAS_bigint GALGAS_ComputeRegisterAddressWithSubscriptIR::getter_mRegisterAddr
   if (NULL != mObjectPtr) {
     const cPtr_ComputeRegisterAddressWithSubscriptIR * p = (const cPtr_ComputeRegisterAddressWithSubscriptIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_ComputeRegisterAddressWithSubscriptIR) ;
-    result = p->mAttribute_mRegisterAddress ;
+    result = p->mProperty_mRegisterAddress ;
   }
   return result ;
 }
@@ -6811,7 +6811,7 @@ GALGAS_bigint GALGAS_ComputeRegisterAddressWithSubscriptIR::getter_mRegisterAddr
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cPtr_ComputeRegisterAddressWithSubscriptIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterAddress ;
+  return mProperty_mRegisterAddress ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6821,7 +6821,7 @@ GALGAS_bigint GALGAS_ComputeRegisterAddressWithSubscriptIR::getter_mElementArray
   if (NULL != mObjectPtr) {
     const cPtr_ComputeRegisterAddressWithSubscriptIR * p = (const cPtr_ComputeRegisterAddressWithSubscriptIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_ComputeRegisterAddressWithSubscriptIR) ;
-    result = p->mAttribute_mElementArraySize ;
+    result = p->mProperty_mElementArraySize ;
   }
   return result ;
 }
@@ -6829,7 +6829,7 @@ GALGAS_bigint GALGAS_ComputeRegisterAddressWithSubscriptIR::getter_mElementArray
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cPtr_ComputeRegisterAddressWithSubscriptIR::getter_mElementArraySize (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mElementArraySize ;
+  return mProperty_mElementArraySize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6842,10 +6842,10 @@ cPtr_ComputeRegisterAddressWithSubscriptIR::cPtr_ComputeRegisterAddressWithSubsc
                                                                                         const GALGAS_bigint & in_mElementArraySize
                                                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTarget (in_mTarget),
-mAttribute_mIndexResult (in_mIndexResult),
-mAttribute_mRegisterAddress (in_mRegisterAddress),
-mAttribute_mElementArraySize (in_mElementArraySize) {
+mProperty_mTarget (in_mTarget),
+mProperty_mIndexResult (in_mIndexResult),
+mProperty_mRegisterAddress (in_mRegisterAddress),
+mProperty_mElementArraySize (in_mElementArraySize) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6857,13 +6857,13 @@ const C_galgas_type_descriptor * cPtr_ComputeRegisterAddressWithSubscriptIR::cla
 void cPtr_ComputeRegisterAddressWithSubscriptIR::description (C_String & ioString,
                                                               const int32_t inIndentation) const {
   ioString << "[@ComputeRegisterAddressWithSubscriptIR:" ;
-  mAttribute_mTarget.description (ioString, inIndentation+1) ;
+  mProperty_mTarget.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mIndexResult.description (ioString, inIndentation+1) ;
+  mProperty_mIndexResult.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mRegisterAddress.description (ioString, inIndentation+1) ;
+  mProperty_mRegisterAddress.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mElementArraySize.description (ioString, inIndentation+1) ;
+  mProperty_mElementArraySize.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -6871,7 +6871,7 @@ void cPtr_ComputeRegisterAddressWithSubscriptIR::description (C_String & ioStrin
 
 acPtr_class * cPtr_ComputeRegisterAddressWithSubscriptIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_ComputeRegisterAddressWithSubscriptIR (mAttribute_mTarget, mAttribute_mIndexResult, mAttribute_mRegisterAddress, mAttribute_mElementArraySize COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_ComputeRegisterAddressWithSubscriptIR (mProperty_mTarget, mProperty_mIndexResult, mProperty_mRegisterAddress, mProperty_mElementArraySize COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -6928,10 +6928,10 @@ typeComparisonResult cPtr_loadRegisterIR::dynamicObjectCompare (const acPtr_clas
   const cPtr_loadRegisterIR * p = (const cPtr_loadRegisterIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_loadRegisterIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetValue.objectCompare (p->mAttribute_mTargetValue) ;
+    result = mProperty_mTargetValue.objectCompare (p->mProperty_mTargetValue) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mRegisterAddress.objectCompare (p->mAttribute_mRegisterAddress) ;
+    result = mProperty_mRegisterAddress.objectCompare (p->mProperty_mRegisterAddress) ;
   }
   return result ;
 }
@@ -6987,7 +6987,7 @@ GALGAS_objectIR GALGAS_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARGS
   if (NULL != mObjectPtr) {
     const cPtr_loadRegisterIR * p = (const cPtr_loadRegisterIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadRegisterIR) ;
-    result = p->mAttribute_mTargetValue ;
+    result = p->mProperty_mTargetValue ;
   }
   return result ;
 }
@@ -6995,7 +6995,7 @@ GALGAS_objectIR GALGAS_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARGS
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_loadRegisterIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetValue ;
+  return mProperty_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7005,7 +7005,7 @@ GALGAS_bigint GALGAS_loadRegisterIR::getter_mRegisterAddress (UNUSED_LOCATION_AR
   if (NULL != mObjectPtr) {
     const cPtr_loadRegisterIR * p = (const cPtr_loadRegisterIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadRegisterIR) ;
-    result = p->mAttribute_mRegisterAddress ;
+    result = p->mProperty_mRegisterAddress ;
   }
   return result ;
 }
@@ -7013,7 +7013,7 @@ GALGAS_bigint GALGAS_loadRegisterIR::getter_mRegisterAddress (UNUSED_LOCATION_AR
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cPtr_loadRegisterIR::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterAddress ;
+  return mProperty_mRegisterAddress ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7024,8 +7024,8 @@ cPtr_loadRegisterIR::cPtr_loadRegisterIR (const GALGAS_objectIR & in_mTargetValu
                                           const GALGAS_bigint & in_mRegisterAddress
                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetValue (in_mTargetValue),
-mAttribute_mRegisterAddress (in_mRegisterAddress) {
+mProperty_mTargetValue (in_mTargetValue),
+mProperty_mRegisterAddress (in_mRegisterAddress) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7037,9 +7037,9 @@ const C_galgas_type_descriptor * cPtr_loadRegisterIR::classDescriptor (void) con
 void cPtr_loadRegisterIR::description (C_String & ioString,
                                        const int32_t inIndentation) const {
   ioString << "[@loadRegisterIR:" ;
-  mAttribute_mTargetValue.description (ioString, inIndentation+1) ;
+  mProperty_mTargetValue.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mRegisterAddress.description (ioString, inIndentation+1) ;
+  mProperty_mRegisterAddress.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -7047,7 +7047,7 @@ void cPtr_loadRegisterIR::description (C_String & ioString,
 
 acPtr_class * cPtr_loadRegisterIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_loadRegisterIR (mAttribute_mTargetValue, mAttribute_mRegisterAddress COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_loadRegisterIR (mProperty_mTargetValue, mProperty_mRegisterAddress COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -7104,13 +7104,13 @@ typeComparisonResult cPtr_loadGlobalVariableIR::dynamicObjectCompare (const acPt
   const cPtr_loadGlobalVariableIR * p = (const cPtr_loadGlobalVariableIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_loadGlobalVariableIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetValue.objectCompare (p->mAttribute_mTargetValue) ;
+    result = mProperty_mTargetValue.objectCompare (p->mProperty_mTargetValue) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mVariableName.objectCompare (p->mAttribute_mVariableName) ;
+    result = mProperty_mVariableName.objectCompare (p->mProperty_mVariableName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mIsVolatile.objectCompare (p->mAttribute_mIsVolatile) ;
+    result = mProperty_mIsVolatile.objectCompare (p->mProperty_mIsVolatile) ;
   }
   return result ;
 }
@@ -7167,7 +7167,7 @@ GALGAS_objectIR GALGAS_loadGlobalVariableIR::getter_mTargetValue (UNUSED_LOCATIO
   if (NULL != mObjectPtr) {
     const cPtr_loadGlobalVariableIR * p = (const cPtr_loadGlobalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadGlobalVariableIR) ;
-    result = p->mAttribute_mTargetValue ;
+    result = p->mProperty_mTargetValue ;
   }
   return result ;
 }
@@ -7175,7 +7175,7 @@ GALGAS_objectIR GALGAS_loadGlobalVariableIR::getter_mTargetValue (UNUSED_LOCATIO
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_loadGlobalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetValue ;
+  return mProperty_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7185,7 +7185,7 @@ GALGAS_string GALGAS_loadGlobalVariableIR::getter_mVariableName (UNUSED_LOCATION
   if (NULL != mObjectPtr) {
     const cPtr_loadGlobalVariableIR * p = (const cPtr_loadGlobalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadGlobalVariableIR) ;
-    result = p->mAttribute_mVariableName ;
+    result = p->mProperty_mVariableName ;
   }
   return result ;
 }
@@ -7193,7 +7193,7 @@ GALGAS_string GALGAS_loadGlobalVariableIR::getter_mVariableName (UNUSED_LOCATION
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_loadGlobalVariableIR::getter_mVariableName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVariableName ;
+  return mProperty_mVariableName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7203,7 +7203,7 @@ GALGAS_bool GALGAS_loadGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_ARG
   if (NULL != mObjectPtr) {
     const cPtr_loadGlobalVariableIR * p = (const cPtr_loadGlobalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadGlobalVariableIR) ;
-    result = p->mAttribute_mIsVolatile ;
+    result = p->mProperty_mIsVolatile ;
   }
   return result ;
 }
@@ -7211,7 +7211,7 @@ GALGAS_bool GALGAS_loadGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_ARG
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cPtr_loadGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIsVolatile ;
+  return mProperty_mIsVolatile ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7223,9 +7223,9 @@ cPtr_loadGlobalVariableIR::cPtr_loadGlobalVariableIR (const GALGAS_objectIR & in
                                                       const GALGAS_bool & in_mIsVolatile
                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetValue (in_mTargetValue),
-mAttribute_mVariableName (in_mVariableName),
-mAttribute_mIsVolatile (in_mIsVolatile) {
+mProperty_mTargetValue (in_mTargetValue),
+mProperty_mVariableName (in_mVariableName),
+mProperty_mIsVolatile (in_mIsVolatile) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7237,11 +7237,11 @@ const C_galgas_type_descriptor * cPtr_loadGlobalVariableIR::classDescriptor (voi
 void cPtr_loadGlobalVariableIR::description (C_String & ioString,
                                              const int32_t inIndentation) const {
   ioString << "[@loadGlobalVariableIR:" ;
-  mAttribute_mTargetValue.description (ioString, inIndentation+1) ;
+  mProperty_mTargetValue.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mVariableName.description (ioString, inIndentation+1) ;
+  mProperty_mVariableName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mIsVolatile.description (ioString, inIndentation+1) ;
+  mProperty_mIsVolatile.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -7249,7 +7249,7 @@ void cPtr_loadGlobalVariableIR::description (C_String & ioString,
 
 acPtr_class * cPtr_loadGlobalVariableIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_loadGlobalVariableIR (mAttribute_mTargetValue, mAttribute_mVariableName, mAttribute_mIsVolatile COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_loadGlobalVariableIR (mProperty_mTargetValue, mProperty_mVariableName, mProperty_mIsVolatile COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -7306,13 +7306,13 @@ typeComparisonResult cPtr_loadLocalVariableIR::dynamicObjectCompare (const acPtr
   const cPtr_loadLocalVariableIR * p = (const cPtr_loadLocalVariableIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_loadLocalVariableIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetValue.objectCompare (p->mAttribute_mTargetValue) ;
+    result = mProperty_mTargetValue.objectCompare (p->mProperty_mTargetValue) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mVariableName.objectCompare (p->mAttribute_mVariableName) ;
+    result = mProperty_mVariableName.objectCompare (p->mProperty_mVariableName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mVolatile.objectCompare (p->mAttribute_mVolatile) ;
+    result = mProperty_mVolatile.objectCompare (p->mProperty_mVolatile) ;
   }
   return result ;
 }
@@ -7369,7 +7369,7 @@ GALGAS_objectIR GALGAS_loadLocalVariableIR::getter_mTargetValue (UNUSED_LOCATION
   if (NULL != mObjectPtr) {
     const cPtr_loadLocalVariableIR * p = (const cPtr_loadLocalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadLocalVariableIR) ;
-    result = p->mAttribute_mTargetValue ;
+    result = p->mProperty_mTargetValue ;
   }
   return result ;
 }
@@ -7377,7 +7377,7 @@ GALGAS_objectIR GALGAS_loadLocalVariableIR::getter_mTargetValue (UNUSED_LOCATION
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_loadLocalVariableIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetValue ;
+  return mProperty_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7387,7 +7387,7 @@ GALGAS_string GALGAS_loadLocalVariableIR::getter_mVariableName (UNUSED_LOCATION_
   if (NULL != mObjectPtr) {
     const cPtr_loadLocalVariableIR * p = (const cPtr_loadLocalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadLocalVariableIR) ;
-    result = p->mAttribute_mVariableName ;
+    result = p->mProperty_mVariableName ;
   }
   return result ;
 }
@@ -7395,7 +7395,7 @@ GALGAS_string GALGAS_loadLocalVariableIR::getter_mVariableName (UNUSED_LOCATION_
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_loadLocalVariableIR::getter_mVariableName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVariableName ;
+  return mProperty_mVariableName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7405,7 +7405,7 @@ GALGAS_bool GALGAS_loadLocalVariableIR::getter_mVolatile (UNUSED_LOCATION_ARGS) 
   if (NULL != mObjectPtr) {
     const cPtr_loadLocalVariableIR * p = (const cPtr_loadLocalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadLocalVariableIR) ;
-    result = p->mAttribute_mVolatile ;
+    result = p->mProperty_mVolatile ;
   }
   return result ;
 }
@@ -7413,7 +7413,7 @@ GALGAS_bool GALGAS_loadLocalVariableIR::getter_mVolatile (UNUSED_LOCATION_ARGS) 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cPtr_loadLocalVariableIR::getter_mVolatile (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVolatile ;
+  return mProperty_mVolatile ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7425,9 +7425,9 @@ cPtr_loadLocalVariableIR::cPtr_loadLocalVariableIR (const GALGAS_objectIR & in_m
                                                     const GALGAS_bool & in_mVolatile
                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetValue (in_mTargetValue),
-mAttribute_mVariableName (in_mVariableName),
-mAttribute_mVolatile (in_mVolatile) {
+mProperty_mTargetValue (in_mTargetValue),
+mProperty_mVariableName (in_mVariableName),
+mProperty_mVolatile (in_mVolatile) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7439,11 +7439,11 @@ const C_galgas_type_descriptor * cPtr_loadLocalVariableIR::classDescriptor (void
 void cPtr_loadLocalVariableIR::description (C_String & ioString,
                                             const int32_t inIndentation) const {
   ioString << "[@loadLocalVariableIR:" ;
-  mAttribute_mTargetValue.description (ioString, inIndentation+1) ;
+  mProperty_mTargetValue.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mVariableName.description (ioString, inIndentation+1) ;
+  mProperty_mVariableName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mVolatile.description (ioString, inIndentation+1) ;
+  mProperty_mVolatile.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -7451,7 +7451,7 @@ void cPtr_loadLocalVariableIR::description (C_String & ioString,
 
 acPtr_class * cPtr_loadLocalVariableIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_loadLocalVariableIR (mAttribute_mTargetValue, mAttribute_mVariableName, mAttribute_mVolatile COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_loadLocalVariableIR (mProperty_mTargetValue, mProperty_mVariableName, mProperty_mVolatile COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -7508,13 +7508,13 @@ typeComparisonResult cPtr_loadFromTemporaryReferenceIR::dynamicObjectCompare (co
   const cPtr_loadFromTemporaryReferenceIR * p = (const cPtr_loadFromTemporaryReferenceIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_loadFromTemporaryReferenceIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetValue.objectCompare (p->mAttribute_mTargetValue) ;
+    result = mProperty_mTargetValue.objectCompare (p->mProperty_mTargetValue) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLLVMName.objectCompare (p->mAttribute_mLLVMName) ;
+    result = mProperty_mLLVMName.objectCompare (p->mProperty_mLLVMName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mVolatile.objectCompare (p->mAttribute_mVolatile) ;
+    result = mProperty_mVolatile.objectCompare (p->mProperty_mVolatile) ;
   }
   return result ;
 }
@@ -7571,7 +7571,7 @@ GALGAS_objectIR GALGAS_loadFromTemporaryReferenceIR::getter_mTargetValue (UNUSED
   if (NULL != mObjectPtr) {
     const cPtr_loadFromTemporaryReferenceIR * p = (const cPtr_loadFromTemporaryReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadFromTemporaryReferenceIR) ;
-    result = p->mAttribute_mTargetValue ;
+    result = p->mProperty_mTargetValue ;
   }
   return result ;
 }
@@ -7579,7 +7579,7 @@ GALGAS_objectIR GALGAS_loadFromTemporaryReferenceIR::getter_mTargetValue (UNUSED
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_loadFromTemporaryReferenceIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetValue ;
+  return mProperty_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7589,7 +7589,7 @@ GALGAS_string GALGAS_loadFromTemporaryReferenceIR::getter_mLLVMName (UNUSED_LOCA
   if (NULL != mObjectPtr) {
     const cPtr_loadFromTemporaryReferenceIR * p = (const cPtr_loadFromTemporaryReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadFromTemporaryReferenceIR) ;
-    result = p->mAttribute_mLLVMName ;
+    result = p->mProperty_mLLVMName ;
   }
   return result ;
 }
@@ -7597,7 +7597,7 @@ GALGAS_string GALGAS_loadFromTemporaryReferenceIR::getter_mLLVMName (UNUSED_LOCA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_loadFromTemporaryReferenceIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLLVMName ;
+  return mProperty_mLLVMName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7607,7 +7607,7 @@ GALGAS_bool GALGAS_loadFromTemporaryReferenceIR::getter_mVolatile (UNUSED_LOCATI
   if (NULL != mObjectPtr) {
     const cPtr_loadFromTemporaryReferenceIR * p = (const cPtr_loadFromTemporaryReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_loadFromTemporaryReferenceIR) ;
-    result = p->mAttribute_mVolatile ;
+    result = p->mProperty_mVolatile ;
   }
   return result ;
 }
@@ -7615,7 +7615,7 @@ GALGAS_bool GALGAS_loadFromTemporaryReferenceIR::getter_mVolatile (UNUSED_LOCATI
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cPtr_loadFromTemporaryReferenceIR::getter_mVolatile (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVolatile ;
+  return mProperty_mVolatile ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7627,9 +7627,9 @@ cPtr_loadFromTemporaryReferenceIR::cPtr_loadFromTemporaryReferenceIR (const GALG
                                                                       const GALGAS_bool & in_mVolatile
                                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetValue (in_mTargetValue),
-mAttribute_mLLVMName (in_mLLVMName),
-mAttribute_mVolatile (in_mVolatile) {
+mProperty_mTargetValue (in_mTargetValue),
+mProperty_mLLVMName (in_mLLVMName),
+mProperty_mVolatile (in_mVolatile) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7641,11 +7641,11 @@ const C_galgas_type_descriptor * cPtr_loadFromTemporaryReferenceIR::classDescrip
 void cPtr_loadFromTemporaryReferenceIR::description (C_String & ioString,
                                                      const int32_t inIndentation) const {
   ioString << "[@loadFromTemporaryReferenceIR:" ;
-  mAttribute_mTargetValue.description (ioString, inIndentation+1) ;
+  mProperty_mTargetValue.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLLVMName.description (ioString, inIndentation+1) ;
+  mProperty_mLLVMName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mVolatile.description (ioString, inIndentation+1) ;
+  mProperty_mVolatile.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -7653,7 +7653,7 @@ void cPtr_loadFromTemporaryReferenceIR::description (C_String & ioString,
 
 acPtr_class * cPtr_loadFromTemporaryReferenceIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_loadFromTemporaryReferenceIR (mAttribute_mTargetValue, mAttribute_mLLVMName, mAttribute_mVolatile COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_loadFromTemporaryReferenceIR (mProperty_mTargetValue, mProperty_mLLVMName, mProperty_mVolatile COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -7710,13 +7710,13 @@ typeComparisonResult cPtr_storeVolatileIR::dynamicObjectCompare (const acPtr_cla
   const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_storeVolatileIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetVarType.objectCompare (p->mAttribute_mTargetVarType) ;
+    result = mProperty_mTargetVarType.objectCompare (p->mProperty_mTargetVarType) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mAddress.objectCompare (p->mAttribute_mAddress) ;
+    result = mProperty_mAddress.objectCompare (p->mProperty_mAddress) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSourceValue.objectCompare (p->mAttribute_mSourceValue) ;
+    result = mProperty_mSourceValue.objectCompare (p->mProperty_mSourceValue) ;
   }
   return result ;
 }
@@ -7773,7 +7773,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeVolatileIR::getter_mTargetVarType (UN
   if (NULL != mObjectPtr) {
     const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeVolatileIR) ;
-    result = p->mAttribute_mTargetVarType ;
+    result = p->mProperty_mTargetVarType ;
   }
   return result ;
 }
@@ -7781,7 +7781,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeVolatileIR::getter_mTargetVarType (UN
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cPtr_storeVolatileIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVarType ;
+  return mProperty_mTargetVarType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7791,7 +7791,7 @@ GALGAS_bigint GALGAS_storeVolatileIR::getter_mAddress (UNUSED_LOCATION_ARGS) con
   if (NULL != mObjectPtr) {
     const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeVolatileIR) ;
-    result = p->mAttribute_mAddress ;
+    result = p->mProperty_mAddress ;
   }
   return result ;
 }
@@ -7799,7 +7799,7 @@ GALGAS_bigint GALGAS_storeVolatileIR::getter_mAddress (UNUSED_LOCATION_ARGS) con
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cPtr_storeVolatileIR::getter_mAddress (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAddress ;
+  return mProperty_mAddress ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7809,7 +7809,7 @@ GALGAS_objectIR GALGAS_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARG
   if (NULL != mObjectPtr) {
     const cPtr_storeVolatileIR * p = (const cPtr_storeVolatileIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeVolatileIR) ;
-    result = p->mAttribute_mSourceValue ;
+    result = p->mProperty_mSourceValue ;
   }
   return result ;
 }
@@ -7817,7 +7817,7 @@ GALGAS_objectIR GALGAS_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARG
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_storeVolatileIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceValue ;
+  return mProperty_mSourceValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7829,9 +7829,9 @@ cPtr_storeVolatileIR::cPtr_storeVolatileIR (const GALGAS_unifiedTypeMap_2D_proxy
                                             const GALGAS_objectIR & in_mSourceValue
                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetVarType (in_mTargetVarType),
-mAttribute_mAddress (in_mAddress),
-mAttribute_mSourceValue (in_mSourceValue) {
+mProperty_mTargetVarType (in_mTargetVarType),
+mProperty_mAddress (in_mAddress),
+mProperty_mSourceValue (in_mSourceValue) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7843,11 +7843,11 @@ const C_galgas_type_descriptor * cPtr_storeVolatileIR::classDescriptor (void) co
 void cPtr_storeVolatileIR::description (C_String & ioString,
                                         const int32_t inIndentation) const {
   ioString << "[@storeVolatileIR:" ;
-  mAttribute_mTargetVarType.description (ioString, inIndentation+1) ;
+  mProperty_mTargetVarType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mAddress.description (ioString, inIndentation+1) ;
+  mProperty_mAddress.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSourceValue.description (ioString, inIndentation+1) ;
+  mProperty_mSourceValue.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -7855,7 +7855,7 @@ void cPtr_storeVolatileIR::description (C_String & ioString,
 
 acPtr_class * cPtr_storeVolatileIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_storeVolatileIR (mAttribute_mTargetVarType, mAttribute_mAddress, mAttribute_mSourceValue COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_storeVolatileIR (mProperty_mTargetVarType, mProperty_mAddress, mProperty_mSourceValue COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -7912,16 +7912,16 @@ typeComparisonResult cPtr_storeGlobalVariableIR::dynamicObjectCompare (const acP
   const cPtr_storeGlobalVariableIR * p = (const cPtr_storeGlobalVariableIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_storeGlobalVariableIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mGlobalVarName.objectCompare (p->mAttribute_mGlobalVarName) ;
+    result = mProperty_mGlobalVarName.objectCompare (p->mProperty_mGlobalVarName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetVarType.objectCompare (p->mAttribute_mTargetVarType) ;
+    result = mProperty_mTargetVarType.objectCompare (p->mProperty_mTargetVarType) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSourceValue.objectCompare (p->mAttribute_mSourceValue) ;
+    result = mProperty_mSourceValue.objectCompare (p->mProperty_mSourceValue) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mIsVolatile.objectCompare (p->mAttribute_mIsVolatile) ;
+    result = mProperty_mIsVolatile.objectCompare (p->mProperty_mIsVolatile) ;
   }
   return result ;
 }
@@ -7979,7 +7979,7 @@ GALGAS_string GALGAS_storeGlobalVariableIR::getter_mGlobalVarName (UNUSED_LOCATI
   if (NULL != mObjectPtr) {
     const cPtr_storeGlobalVariableIR * p = (const cPtr_storeGlobalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeGlobalVariableIR) ;
-    result = p->mAttribute_mGlobalVarName ;
+    result = p->mProperty_mGlobalVarName ;
   }
   return result ;
 }
@@ -7987,7 +7987,7 @@ GALGAS_string GALGAS_storeGlobalVariableIR::getter_mGlobalVarName (UNUSED_LOCATI
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_storeGlobalVariableIR::getter_mGlobalVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVarName ;
+  return mProperty_mGlobalVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7997,7 +7997,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeGlobalVariableIR::getter_mTargetVarTy
   if (NULL != mObjectPtr) {
     const cPtr_storeGlobalVariableIR * p = (const cPtr_storeGlobalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeGlobalVariableIR) ;
-    result = p->mAttribute_mTargetVarType ;
+    result = p->mProperty_mTargetVarType ;
   }
   return result ;
 }
@@ -8005,7 +8005,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeGlobalVariableIR::getter_mTargetVarTy
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cPtr_storeGlobalVariableIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVarType ;
+  return mProperty_mTargetVarType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8015,7 +8015,7 @@ GALGAS_objectIR GALGAS_storeGlobalVariableIR::getter_mSourceValue (UNUSED_LOCATI
   if (NULL != mObjectPtr) {
     const cPtr_storeGlobalVariableIR * p = (const cPtr_storeGlobalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeGlobalVariableIR) ;
-    result = p->mAttribute_mSourceValue ;
+    result = p->mProperty_mSourceValue ;
   }
   return result ;
 }
@@ -8023,7 +8023,7 @@ GALGAS_objectIR GALGAS_storeGlobalVariableIR::getter_mSourceValue (UNUSED_LOCATI
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_storeGlobalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceValue ;
+  return mProperty_mSourceValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8033,7 +8033,7 @@ GALGAS_bool GALGAS_storeGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_AR
   if (NULL != mObjectPtr) {
     const cPtr_storeGlobalVariableIR * p = (const cPtr_storeGlobalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeGlobalVariableIR) ;
-    result = p->mAttribute_mIsVolatile ;
+    result = p->mProperty_mIsVolatile ;
   }
   return result ;
 }
@@ -8041,7 +8041,7 @@ GALGAS_bool GALGAS_storeGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_AR
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cPtr_storeGlobalVariableIR::getter_mIsVolatile (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIsVolatile ;
+  return mProperty_mIsVolatile ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8054,10 +8054,10 @@ cPtr_storeGlobalVariableIR::cPtr_storeGlobalVariableIR (const GALGAS_string & in
                                                         const GALGAS_bool & in_mIsVolatile
                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mGlobalVarName (in_mGlobalVarName),
-mAttribute_mTargetVarType (in_mTargetVarType),
-mAttribute_mSourceValue (in_mSourceValue),
-mAttribute_mIsVolatile (in_mIsVolatile) {
+mProperty_mGlobalVarName (in_mGlobalVarName),
+mProperty_mTargetVarType (in_mTargetVarType),
+mProperty_mSourceValue (in_mSourceValue),
+mProperty_mIsVolatile (in_mIsVolatile) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8069,13 +8069,13 @@ const C_galgas_type_descriptor * cPtr_storeGlobalVariableIR::classDescriptor (vo
 void cPtr_storeGlobalVariableIR::description (C_String & ioString,
                                               const int32_t inIndentation) const {
   ioString << "[@storeGlobalVariableIR:" ;
-  mAttribute_mGlobalVarName.description (ioString, inIndentation+1) ;
+  mProperty_mGlobalVarName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mTargetVarType.description (ioString, inIndentation+1) ;
+  mProperty_mTargetVarType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSourceValue.description (ioString, inIndentation+1) ;
+  mProperty_mSourceValue.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mIsVolatile.description (ioString, inIndentation+1) ;
+  mProperty_mIsVolatile.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -8083,7 +8083,7 @@ void cPtr_storeGlobalVariableIR::description (C_String & ioString,
 
 acPtr_class * cPtr_storeGlobalVariableIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_storeGlobalVariableIR (mAttribute_mGlobalVarName, mAttribute_mTargetVarType, mAttribute_mSourceValue, mAttribute_mIsVolatile COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_storeGlobalVariableIR (mProperty_mGlobalVarName, mProperty_mTargetVarType, mProperty_mSourceValue, mProperty_mIsVolatile COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -8140,13 +8140,13 @@ typeComparisonResult cPtr_storeLocalVariableIR::dynamicObjectCompare (const acPt
   const cPtr_storeLocalVariableIR * p = (const cPtr_storeLocalVariableIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_storeLocalVariableIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mLocalVarName.objectCompare (p->mAttribute_mLocalVarName) ;
+    result = mProperty_mLocalVarName.objectCompare (p->mProperty_mLocalVarName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetVarType.objectCompare (p->mAttribute_mTargetVarType) ;
+    result = mProperty_mTargetVarType.objectCompare (p->mProperty_mTargetVarType) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSourceValue.objectCompare (p->mAttribute_mSourceValue) ;
+    result = mProperty_mSourceValue.objectCompare (p->mProperty_mSourceValue) ;
   }
   return result ;
 }
@@ -8203,7 +8203,7 @@ GALGAS_string GALGAS_storeLocalVariableIR::getter_mLocalVarName (UNUSED_LOCATION
   if (NULL != mObjectPtr) {
     const cPtr_storeLocalVariableIR * p = (const cPtr_storeLocalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeLocalVariableIR) ;
-    result = p->mAttribute_mLocalVarName ;
+    result = p->mProperty_mLocalVarName ;
   }
   return result ;
 }
@@ -8211,7 +8211,7 @@ GALGAS_string GALGAS_storeLocalVariableIR::getter_mLocalVarName (UNUSED_LOCATION
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_storeLocalVariableIR::getter_mLocalVarName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLocalVarName ;
+  return mProperty_mLocalVarName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8221,7 +8221,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeLocalVariableIR::getter_mTargetVarTyp
   if (NULL != mObjectPtr) {
     const cPtr_storeLocalVariableIR * p = (const cPtr_storeLocalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeLocalVariableIR) ;
-    result = p->mAttribute_mTargetVarType ;
+    result = p->mProperty_mTargetVarType ;
   }
   return result ;
 }
@@ -8229,7 +8229,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeLocalVariableIR::getter_mTargetVarTyp
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cPtr_storeLocalVariableIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVarType ;
+  return mProperty_mTargetVarType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8239,7 +8239,7 @@ GALGAS_objectIR GALGAS_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATIO
   if (NULL != mObjectPtr) {
     const cPtr_storeLocalVariableIR * p = (const cPtr_storeLocalVariableIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeLocalVariableIR) ;
-    result = p->mAttribute_mSourceValue ;
+    result = p->mProperty_mSourceValue ;
   }
   return result ;
 }
@@ -8247,7 +8247,7 @@ GALGAS_objectIR GALGAS_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATIO
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_storeLocalVariableIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceValue ;
+  return mProperty_mSourceValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8259,9 +8259,9 @@ cPtr_storeLocalVariableIR::cPtr_storeLocalVariableIR (const GALGAS_string & in_m
                                                       const GALGAS_objectIR & in_mSourceValue
                                                       COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mLocalVarName (in_mLocalVarName),
-mAttribute_mTargetVarType (in_mTargetVarType),
-mAttribute_mSourceValue (in_mSourceValue) {
+mProperty_mLocalVarName (in_mLocalVarName),
+mProperty_mTargetVarType (in_mTargetVarType),
+mProperty_mSourceValue (in_mSourceValue) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8273,11 +8273,11 @@ const C_galgas_type_descriptor * cPtr_storeLocalVariableIR::classDescriptor (voi
 void cPtr_storeLocalVariableIR::description (C_String & ioString,
                                              const int32_t inIndentation) const {
   ioString << "[@storeLocalVariableIR:" ;
-  mAttribute_mLocalVarName.description (ioString, inIndentation+1) ;
+  mProperty_mLocalVarName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mTargetVarType.description (ioString, inIndentation+1) ;
+  mProperty_mTargetVarType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSourceValue.description (ioString, inIndentation+1) ;
+  mProperty_mSourceValue.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -8285,7 +8285,7 @@ void cPtr_storeLocalVariableIR::description (C_String & ioString,
 
 acPtr_class * cPtr_storeLocalVariableIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_storeLocalVariableIR (mAttribute_mLocalVarName, mAttribute_mTargetVarType, mAttribute_mSourceValue COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_storeLocalVariableIR (mProperty_mLocalVarName, mProperty_mTargetVarType, mProperty_mSourceValue COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -8342,16 +8342,16 @@ typeComparisonResult cPtr_storeFromTemporaryReferenceIR::dynamicObjectCompare (c
   const cPtr_storeFromTemporaryReferenceIR * p = (const cPtr_storeFromTemporaryReferenceIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_storeFromTemporaryReferenceIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetVarType.objectCompare (p->mAttribute_mTargetVarType) ;
+    result = mProperty_mTargetVarType.objectCompare (p->mProperty_mTargetVarType) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLLVMName.objectCompare (p->mAttribute_mLLVMName) ;
+    result = mProperty_mLLVMName.objectCompare (p->mProperty_mLLVMName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSourceValue.objectCompare (p->mAttribute_mSourceValue) ;
+    result = mProperty_mSourceValue.objectCompare (p->mProperty_mSourceValue) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mVolatile.objectCompare (p->mAttribute_mVolatile) ;
+    result = mProperty_mVolatile.objectCompare (p->mProperty_mVolatile) ;
   }
   return result ;
 }
@@ -8409,7 +8409,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeFromTemporaryReferenceIR::getter_mTar
   if (NULL != mObjectPtr) {
     const cPtr_storeFromTemporaryReferenceIR * p = (const cPtr_storeFromTemporaryReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeFromTemporaryReferenceIR) ;
-    result = p->mAttribute_mTargetVarType ;
+    result = p->mProperty_mTargetVarType ;
   }
   return result ;
 }
@@ -8417,7 +8417,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_storeFromTemporaryReferenceIR::getter_mTar
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cPtr_storeFromTemporaryReferenceIR::getter_mTargetVarType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetVarType ;
+  return mProperty_mTargetVarType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8427,7 +8427,7 @@ GALGAS_string GALGAS_storeFromTemporaryReferenceIR::getter_mLLVMName (UNUSED_LOC
   if (NULL != mObjectPtr) {
     const cPtr_storeFromTemporaryReferenceIR * p = (const cPtr_storeFromTemporaryReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeFromTemporaryReferenceIR) ;
-    result = p->mAttribute_mLLVMName ;
+    result = p->mProperty_mLLVMName ;
   }
   return result ;
 }
@@ -8435,7 +8435,7 @@ GALGAS_string GALGAS_storeFromTemporaryReferenceIR::getter_mLLVMName (UNUSED_LOC
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_storeFromTemporaryReferenceIR::getter_mLLVMName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLLVMName ;
+  return mProperty_mLLVMName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8445,7 +8445,7 @@ GALGAS_objectIR GALGAS_storeFromTemporaryReferenceIR::getter_mSourceValue (UNUSE
   if (NULL != mObjectPtr) {
     const cPtr_storeFromTemporaryReferenceIR * p = (const cPtr_storeFromTemporaryReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeFromTemporaryReferenceIR) ;
-    result = p->mAttribute_mSourceValue ;
+    result = p->mProperty_mSourceValue ;
   }
   return result ;
 }
@@ -8453,7 +8453,7 @@ GALGAS_objectIR GALGAS_storeFromTemporaryReferenceIR::getter_mSourceValue (UNUSE
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_storeFromTemporaryReferenceIR::getter_mSourceValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSourceValue ;
+  return mProperty_mSourceValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8463,7 +8463,7 @@ GALGAS_bool GALGAS_storeFromTemporaryReferenceIR::getter_mVolatile (UNUSED_LOCAT
   if (NULL != mObjectPtr) {
     const cPtr_storeFromTemporaryReferenceIR * p = (const cPtr_storeFromTemporaryReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_storeFromTemporaryReferenceIR) ;
-    result = p->mAttribute_mVolatile ;
+    result = p->mProperty_mVolatile ;
   }
   return result ;
 }
@@ -8471,7 +8471,7 @@ GALGAS_bool GALGAS_storeFromTemporaryReferenceIR::getter_mVolatile (UNUSED_LOCAT
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool cPtr_storeFromTemporaryReferenceIR::getter_mVolatile (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mVolatile ;
+  return mProperty_mVolatile ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8484,10 +8484,10 @@ cPtr_storeFromTemporaryReferenceIR::cPtr_storeFromTemporaryReferenceIR (const GA
                                                                         const GALGAS_bool & in_mVolatile
                                                                         COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetVarType (in_mTargetVarType),
-mAttribute_mLLVMName (in_mLLVMName),
-mAttribute_mSourceValue (in_mSourceValue),
-mAttribute_mVolatile (in_mVolatile) {
+mProperty_mTargetVarType (in_mTargetVarType),
+mProperty_mLLVMName (in_mLLVMName),
+mProperty_mSourceValue (in_mSourceValue),
+mProperty_mVolatile (in_mVolatile) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8499,13 +8499,13 @@ const C_galgas_type_descriptor * cPtr_storeFromTemporaryReferenceIR::classDescri
 void cPtr_storeFromTemporaryReferenceIR::description (C_String & ioString,
                                                       const int32_t inIndentation) const {
   ioString << "[@storeFromTemporaryReferenceIR:" ;
-  mAttribute_mTargetVarType.description (ioString, inIndentation+1) ;
+  mProperty_mTargetVarType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLLVMName.description (ioString, inIndentation+1) ;
+  mProperty_mLLVMName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSourceValue.description (ioString, inIndentation+1) ;
+  mProperty_mSourceValue.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mVolatile.description (ioString, inIndentation+1) ;
+  mProperty_mVolatile.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -8513,7 +8513,7 @@ void cPtr_storeFromTemporaryReferenceIR::description (C_String & ioString,
 
 acPtr_class * cPtr_storeFromTemporaryReferenceIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_storeFromTemporaryReferenceIR (mAttribute_mTargetVarType, mAttribute_mLLVMName, mAttribute_mSourceValue, mAttribute_mVolatile COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_storeFromTemporaryReferenceIR (mProperty_mTargetVarType, mProperty_mLLVMName, mProperty_mSourceValue, mProperty_mVolatile COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -8570,16 +8570,16 @@ typeComparisonResult cPtr_getPropertyReferenceIR::dynamicObjectCompare (const ac
   const cPtr_getPropertyReferenceIR * p = (const cPtr_getPropertyReferenceIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_getPropertyReferenceIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTarget.objectCompare (p->mAttribute_mTarget) ;
+    result = mProperty_mTarget.objectCompare (p->mProperty_mTarget) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSource.objectCompare (p->mAttribute_mSource) ;
+    result = mProperty_mSource.objectCompare (p->mProperty_mSource) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mPLMname.objectCompare (p->mAttribute_mPLMname) ;
+    result = mProperty_mPLMname.objectCompare (p->mProperty_mPLMname) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mPropertyIndex.objectCompare (p->mAttribute_mPropertyIndex) ;
+    result = mProperty_mPropertyIndex.objectCompare (p->mProperty_mPropertyIndex) ;
   }
   return result ;
 }
@@ -8637,7 +8637,7 @@ GALGAS_objectIR GALGAS_getPropertyReferenceIR::getter_mTarget (UNUSED_LOCATION_A
   if (NULL != mObjectPtr) {
     const cPtr_getPropertyReferenceIR * p = (const cPtr_getPropertyReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getPropertyReferenceIR) ;
-    result = p->mAttribute_mTarget ;
+    result = p->mProperty_mTarget ;
   }
   return result ;
 }
@@ -8645,7 +8645,7 @@ GALGAS_objectIR GALGAS_getPropertyReferenceIR::getter_mTarget (UNUSED_LOCATION_A
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_getPropertyReferenceIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTarget ;
+  return mProperty_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8655,7 +8655,7 @@ GALGAS_objectIR GALGAS_getPropertyReferenceIR::getter_mSource (UNUSED_LOCATION_A
   if (NULL != mObjectPtr) {
     const cPtr_getPropertyReferenceIR * p = (const cPtr_getPropertyReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getPropertyReferenceIR) ;
-    result = p->mAttribute_mSource ;
+    result = p->mProperty_mSource ;
   }
   return result ;
 }
@@ -8663,7 +8663,7 @@ GALGAS_objectIR GALGAS_getPropertyReferenceIR::getter_mSource (UNUSED_LOCATION_A
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_getPropertyReferenceIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSource ;
+  return mProperty_mSource ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8673,7 +8673,7 @@ GALGAS_string GALGAS_getPropertyReferenceIR::getter_mPLMname (UNUSED_LOCATION_AR
   if (NULL != mObjectPtr) {
     const cPtr_getPropertyReferenceIR * p = (const cPtr_getPropertyReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getPropertyReferenceIR) ;
-    result = p->mAttribute_mPLMname ;
+    result = p->mProperty_mPLMname ;
   }
   return result ;
 }
@@ -8681,7 +8681,7 @@ GALGAS_string GALGAS_getPropertyReferenceIR::getter_mPLMname (UNUSED_LOCATION_AR
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_getPropertyReferenceIR::getter_mPLMname (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPLMname ;
+  return mProperty_mPLMname ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8691,7 +8691,7 @@ GALGAS_string GALGAS_getPropertyReferenceIR::getter_mPropertyIndex (UNUSED_LOCAT
   if (NULL != mObjectPtr) {
     const cPtr_getPropertyReferenceIR * p = (const cPtr_getPropertyReferenceIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getPropertyReferenceIR) ;
-    result = p->mAttribute_mPropertyIndex ;
+    result = p->mProperty_mPropertyIndex ;
   }
   return result ;
 }
@@ -8699,7 +8699,7 @@ GALGAS_string GALGAS_getPropertyReferenceIR::getter_mPropertyIndex (UNUSED_LOCAT
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_getPropertyReferenceIR::getter_mPropertyIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPropertyIndex ;
+  return mProperty_mPropertyIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8712,10 +8712,10 @@ cPtr_getPropertyReferenceIR::cPtr_getPropertyReferenceIR (const GALGAS_objectIR 
                                                           const GALGAS_string & in_mPropertyIndex
                                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTarget (in_mTarget),
-mAttribute_mSource (in_mSource),
-mAttribute_mPLMname (in_mPLMname),
-mAttribute_mPropertyIndex (in_mPropertyIndex) {
+mProperty_mTarget (in_mTarget),
+mProperty_mSource (in_mSource),
+mProperty_mPLMname (in_mPLMname),
+mProperty_mPropertyIndex (in_mPropertyIndex) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8727,13 +8727,13 @@ const C_galgas_type_descriptor * cPtr_getPropertyReferenceIR::classDescriptor (v
 void cPtr_getPropertyReferenceIR::description (C_String & ioString,
                                                const int32_t inIndentation) const {
   ioString << "[@getPropertyReferenceIR:" ;
-  mAttribute_mTarget.description (ioString, inIndentation+1) ;
+  mProperty_mTarget.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSource.description (ioString, inIndentation+1) ;
+  mProperty_mSource.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mPLMname.description (ioString, inIndentation+1) ;
+  mProperty_mPLMname.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mPropertyIndex.description (ioString, inIndentation+1) ;
+  mProperty_mPropertyIndex.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -8741,7 +8741,7 @@ void cPtr_getPropertyReferenceIR::description (C_String & ioString,
 
 acPtr_class * cPtr_getPropertyReferenceIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_getPropertyReferenceIR (mAttribute_mTarget, mAttribute_mSource, mAttribute_mPLMname, mAttribute_mPropertyIndex COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_getPropertyReferenceIR (mProperty_mTarget, mProperty_mSource, mProperty_mPLMname, mProperty_mPropertyIndex COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -8798,16 +8798,16 @@ typeComparisonResult cPtr_getPropertyReferenceFromSelfIR::dynamicObjectCompare (
   const cPtr_getPropertyReferenceFromSelfIR * p = (const cPtr_getPropertyReferenceFromSelfIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_getPropertyReferenceFromSelfIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTarget.objectCompare (p->mAttribute_mTarget) ;
+    result = mProperty_mTarget.objectCompare (p->mProperty_mTarget) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSelfType.objectCompare (p->mAttribute_mSelfType) ;
+    result = mProperty_mSelfType.objectCompare (p->mProperty_mSelfType) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mPropertyName.objectCompare (p->mAttribute_mPropertyName) ;
+    result = mProperty_mPropertyName.objectCompare (p->mProperty_mPropertyName) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mPropertyIndex.objectCompare (p->mAttribute_mPropertyIndex) ;
+    result = mProperty_mPropertyIndex.objectCompare (p->mProperty_mPropertyIndex) ;
   }
   return result ;
 }
@@ -8865,7 +8865,7 @@ GALGAS_objectIR GALGAS_getPropertyReferenceFromSelfIR::getter_mTarget (UNUSED_LO
   if (NULL != mObjectPtr) {
     const cPtr_getPropertyReferenceFromSelfIR * p = (const cPtr_getPropertyReferenceFromSelfIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getPropertyReferenceFromSelfIR) ;
-    result = p->mAttribute_mTarget ;
+    result = p->mProperty_mTarget ;
   }
   return result ;
 }
@@ -8873,7 +8873,7 @@ GALGAS_objectIR GALGAS_getPropertyReferenceFromSelfIR::getter_mTarget (UNUSED_LO
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_getPropertyReferenceFromSelfIR::getter_mTarget (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTarget ;
+  return mProperty_mTarget ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8883,7 +8883,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_getPropertyReferenceFromSelfIR::getter_mSe
   if (NULL != mObjectPtr) {
     const cPtr_getPropertyReferenceFromSelfIR * p = (const cPtr_getPropertyReferenceFromSelfIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getPropertyReferenceFromSelfIR) ;
-    result = p->mAttribute_mSelfType ;
+    result = p->mProperty_mSelfType ;
   }
   return result ;
 }
@@ -8891,7 +8891,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_getPropertyReferenceFromSelfIR::getter_mSe
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy cPtr_getPropertyReferenceFromSelfIR::getter_mSelfType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSelfType ;
+  return mProperty_mSelfType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8901,7 +8901,7 @@ GALGAS_string GALGAS_getPropertyReferenceFromSelfIR::getter_mPropertyName (UNUSE
   if (NULL != mObjectPtr) {
     const cPtr_getPropertyReferenceFromSelfIR * p = (const cPtr_getPropertyReferenceFromSelfIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getPropertyReferenceFromSelfIR) ;
-    result = p->mAttribute_mPropertyName ;
+    result = p->mProperty_mPropertyName ;
   }
   return result ;
 }
@@ -8909,7 +8909,7 @@ GALGAS_string GALGAS_getPropertyReferenceFromSelfIR::getter_mPropertyName (UNUSE
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string cPtr_getPropertyReferenceFromSelfIR::getter_mPropertyName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPropertyName ;
+  return mProperty_mPropertyName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8919,7 +8919,7 @@ GALGAS_uint GALGAS_getPropertyReferenceFromSelfIR::getter_mPropertyIndex (UNUSED
   if (NULL != mObjectPtr) {
     const cPtr_getPropertyReferenceFromSelfIR * p = (const cPtr_getPropertyReferenceFromSelfIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_getPropertyReferenceFromSelfIR) ;
-    result = p->mAttribute_mPropertyIndex ;
+    result = p->mProperty_mPropertyIndex ;
   }
   return result ;
 }
@@ -8927,7 +8927,7 @@ GALGAS_uint GALGAS_getPropertyReferenceFromSelfIR::getter_mPropertyIndex (UNUSED
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cPtr_getPropertyReferenceFromSelfIR::getter_mPropertyIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPropertyIndex ;
+  return mProperty_mPropertyIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8940,10 +8940,10 @@ cPtr_getPropertyReferenceFromSelfIR::cPtr_getPropertyReferenceFromSelfIR (const 
                                                                           const GALGAS_uint & in_mPropertyIndex
                                                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTarget (in_mTarget),
-mAttribute_mSelfType (in_mSelfType),
-mAttribute_mPropertyName (in_mPropertyName),
-mAttribute_mPropertyIndex (in_mPropertyIndex) {
+mProperty_mTarget (in_mTarget),
+mProperty_mSelfType (in_mSelfType),
+mProperty_mPropertyName (in_mPropertyName),
+mProperty_mPropertyIndex (in_mPropertyIndex) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8955,13 +8955,13 @@ const C_galgas_type_descriptor * cPtr_getPropertyReferenceFromSelfIR::classDescr
 void cPtr_getPropertyReferenceFromSelfIR::description (C_String & ioString,
                                                        const int32_t inIndentation) const {
   ioString << "[@getPropertyReferenceFromSelfIR:" ;
-  mAttribute_mTarget.description (ioString, inIndentation+1) ;
+  mProperty_mTarget.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSelfType.description (ioString, inIndentation+1) ;
+  mProperty_mSelfType.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mPropertyName.description (ioString, inIndentation+1) ;
+  mProperty_mPropertyName.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mPropertyIndex.description (ioString, inIndentation+1) ;
+  mProperty_mPropertyIndex.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -8969,7 +8969,7 @@ void cPtr_getPropertyReferenceFromSelfIR::description (C_String & ioString,
 
 acPtr_class * cPtr_getPropertyReferenceFromSelfIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_getPropertyReferenceFromSelfIR (mAttribute_mTarget, mAttribute_mSelfType, mAttribute_mPropertyName, mAttribute_mPropertyIndex COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_getPropertyReferenceFromSelfIR (mProperty_mTarget, mProperty_mSelfType, mProperty_mPropertyName, mProperty_mPropertyIndex COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -9026,16 +9026,16 @@ typeComparisonResult cPtr_selectInstructionIR::dynamicObjectCompare (const acPtr
   const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_selectInstructionIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mTargetValue.objectCompare (p->mAttribute_mTargetValue) ;
+    result = mProperty_mTargetValue.objectCompare (p->mProperty_mTargetValue) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_m_5F_if_5F_variable.objectCompare (p->mAttribute_m_5F_if_5F_variable) ;
+    result = mProperty_m_5F_if_5F_variable.objectCompare (p->mProperty_m_5F_if_5F_variable) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_m_5F_then_5F_variable.objectCompare (p->mAttribute_m_5F_then_5F_variable) ;
+    result = mProperty_m_5F_then_5F_variable.objectCompare (p->mProperty_m_5F_then_5F_variable) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_m_5F_else_5F_variable.objectCompare (p->mAttribute_m_5F_else_5F_variable) ;
+    result = mProperty_m_5F_else_5F_variable.objectCompare (p->mProperty_m_5F_else_5F_variable) ;
   }
   return result ;
 }
@@ -9093,7 +9093,7 @@ GALGAS_objectIR GALGAS_selectInstructionIR::getter_mTargetValue (UNUSED_LOCATION
   if (NULL != mObjectPtr) {
     const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_selectInstructionIR) ;
-    result = p->mAttribute_mTargetValue ;
+    result = p->mProperty_mTargetValue ;
   }
   return result ;
 }
@@ -9101,7 +9101,7 @@ GALGAS_objectIR GALGAS_selectInstructionIR::getter_mTargetValue (UNUSED_LOCATION
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_selectInstructionIR::getter_mTargetValue (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTargetValue ;
+  return mProperty_mTargetValue ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9111,7 +9111,7 @@ GALGAS_objectIR GALGAS_selectInstructionIR::getter_m_5F_if_5F_variable (UNUSED_L
   if (NULL != mObjectPtr) {
     const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_selectInstructionIR) ;
-    result = p->mAttribute_m_5F_if_5F_variable ;
+    result = p->mProperty_m_5F_if_5F_variable ;
   }
   return result ;
 }
@@ -9119,7 +9119,7 @@ GALGAS_objectIR GALGAS_selectInstructionIR::getter_m_5F_if_5F_variable (UNUSED_L
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_selectInstructionIR::getter_m_5F_if_5F_variable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_m_5F_if_5F_variable ;
+  return mProperty_m_5F_if_5F_variable ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9129,7 +9129,7 @@ GALGAS_objectIR GALGAS_selectInstructionIR::getter_m_5F_then_5F_variable (UNUSED
   if (NULL != mObjectPtr) {
     const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_selectInstructionIR) ;
-    result = p->mAttribute_m_5F_then_5F_variable ;
+    result = p->mProperty_m_5F_then_5F_variable ;
   }
   return result ;
 }
@@ -9137,7 +9137,7 @@ GALGAS_objectIR GALGAS_selectInstructionIR::getter_m_5F_then_5F_variable (UNUSED
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_selectInstructionIR::getter_m_5F_then_5F_variable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_m_5F_then_5F_variable ;
+  return mProperty_m_5F_then_5F_variable ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9147,7 +9147,7 @@ GALGAS_objectIR GALGAS_selectInstructionIR::getter_m_5F_else_5F_variable (UNUSED
   if (NULL != mObjectPtr) {
     const cPtr_selectInstructionIR * p = (const cPtr_selectInstructionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_selectInstructionIR) ;
-    result = p->mAttribute_m_5F_else_5F_variable ;
+    result = p->mProperty_m_5F_else_5F_variable ;
   }
   return result ;
 }
@@ -9155,7 +9155,7 @@ GALGAS_objectIR GALGAS_selectInstructionIR::getter_m_5F_else_5F_variable (UNUSED
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_selectInstructionIR::getter_m_5F_else_5F_variable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_m_5F_else_5F_variable ;
+  return mProperty_m_5F_else_5F_variable ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9168,10 +9168,10 @@ cPtr_selectInstructionIR::cPtr_selectInstructionIR (const GALGAS_objectIR & in_m
                                                     const GALGAS_objectIR & in_m_5F_else_5F_variable
                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mTargetValue (in_mTargetValue),
-mAttribute_m_5F_if_5F_variable (in_m_5F_if_5F_variable),
-mAttribute_m_5F_then_5F_variable (in_m_5F_then_5F_variable),
-mAttribute_m_5F_else_5F_variable (in_m_5F_else_5F_variable) {
+mProperty_mTargetValue (in_mTargetValue),
+mProperty_m_5F_if_5F_variable (in_m_5F_if_5F_variable),
+mProperty_m_5F_then_5F_variable (in_m_5F_then_5F_variable),
+mProperty_m_5F_else_5F_variable (in_m_5F_else_5F_variable) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9183,13 +9183,13 @@ const C_galgas_type_descriptor * cPtr_selectInstructionIR::classDescriptor (void
 void cPtr_selectInstructionIR::description (C_String & ioString,
                                             const int32_t inIndentation) const {
   ioString << "[@selectInstructionIR:" ;
-  mAttribute_mTargetValue.description (ioString, inIndentation+1) ;
+  mProperty_mTargetValue.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_m_5F_if_5F_variable.description (ioString, inIndentation+1) ;
+  mProperty_m_5F_if_5F_variable.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_m_5F_then_5F_variable.description (ioString, inIndentation+1) ;
+  mProperty_m_5F_then_5F_variable.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_m_5F_else_5F_variable.description (ioString, inIndentation+1) ;
+  mProperty_m_5F_else_5F_variable.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -9197,7 +9197,7 @@ void cPtr_selectInstructionIR::description (C_String & ioString,
 
 acPtr_class * cPtr_selectInstructionIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_selectInstructionIR (mAttribute_mTargetValue, mAttribute_m_5F_if_5F_variable, mAttribute_m_5F_then_5F_variable, mAttribute_m_5F_else_5F_variable COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_selectInstructionIR (mProperty_mTargetValue, mProperty_m_5F_if_5F_variable, mProperty_m_5F_then_5F_variable, mProperty_m_5F_else_5F_variable COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -9254,13 +9254,13 @@ typeComparisonResult cPtr_testArrayIndexIR::dynamicObjectCompare (const acPtr_cl
   const cPtr_testArrayIndexIR * p = (const cPtr_testArrayIndexIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mIndex.objectCompare (p->mAttribute_mIndex) ;
+    result = mProperty_mIndex.objectCompare (p->mProperty_mIndex) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mErrorLocation.objectCompare (p->mAttribute_mErrorLocation) ;
+    result = mProperty_mErrorLocation.objectCompare (p->mProperty_mErrorLocation) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mSize.objectCompare (p->mAttribute_mSize) ;
+    result = mProperty_mSize.objectCompare (p->mProperty_mSize) ;
   }
   return result ;
 }
@@ -9317,7 +9317,7 @@ GALGAS_objectIR GALGAS_testArrayIndexIR::getter_mIndex (UNUSED_LOCATION_ARGS) co
   if (NULL != mObjectPtr) {
     const cPtr_testArrayIndexIR * p = (const cPtr_testArrayIndexIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
-    result = p->mAttribute_mIndex ;
+    result = p->mProperty_mIndex ;
   }
   return result ;
 }
@@ -9325,7 +9325,7 @@ GALGAS_objectIR GALGAS_testArrayIndexIR::getter_mIndex (UNUSED_LOCATION_ARGS) co
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_testArrayIndexIR::getter_mIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIndex ;
+  return mProperty_mIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9335,7 +9335,7 @@ GALGAS_location GALGAS_testArrayIndexIR::getter_mErrorLocation (UNUSED_LOCATION_
   if (NULL != mObjectPtr) {
     const cPtr_testArrayIndexIR * p = (const cPtr_testArrayIndexIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
-    result = p->mAttribute_mErrorLocation ;
+    result = p->mProperty_mErrorLocation ;
   }
   return result ;
 }
@@ -9343,7 +9343,7 @@ GALGAS_location GALGAS_testArrayIndexIR::getter_mErrorLocation (UNUSED_LOCATION_
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cPtr_testArrayIndexIR::getter_mErrorLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mErrorLocation ;
+  return mProperty_mErrorLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9353,7 +9353,7 @@ GALGAS_bigint GALGAS_testArrayIndexIR::getter_mSize (UNUSED_LOCATION_ARGS) const
   if (NULL != mObjectPtr) {
     const cPtr_testArrayIndexIR * p = (const cPtr_testArrayIndexIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
-    result = p->mAttribute_mSize ;
+    result = p->mProperty_mSize ;
   }
   return result ;
 }
@@ -9361,7 +9361,7 @@ GALGAS_bigint GALGAS_testArrayIndexIR::getter_mSize (UNUSED_LOCATION_ARGS) const
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cPtr_testArrayIndexIR::getter_mSize (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSize ;
+  return mProperty_mSize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9373,9 +9373,9 @@ cPtr_testArrayIndexIR::cPtr_testArrayIndexIR (const GALGAS_objectIR & in_mIndex,
                                               const GALGAS_bigint & in_mSize
                                               COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mIndex (in_mIndex),
-mAttribute_mErrorLocation (in_mErrorLocation),
-mAttribute_mSize (in_mSize) {
+mProperty_mIndex (in_mIndex),
+mProperty_mErrorLocation (in_mErrorLocation),
+mProperty_mSize (in_mSize) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9387,11 +9387,11 @@ const C_galgas_type_descriptor * cPtr_testArrayIndexIR::classDescriptor (void) c
 void cPtr_testArrayIndexIR::description (C_String & ioString,
                                          const int32_t inIndentation) const {
   ioString << "[@testArrayIndexIR:" ;
-  mAttribute_mIndex.description (ioString, inIndentation+1) ;
+  mProperty_mIndex.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mErrorLocation.description (ioString, inIndentation+1) ;
+  mProperty_mErrorLocation.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mSize.description (ioString, inIndentation+1) ;
+  mProperty_mSize.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -9399,7 +9399,7 @@ void cPtr_testArrayIndexIR::description (C_String & ioString,
 
 acPtr_class * cPtr_testArrayIndexIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_testArrayIndexIR (mAttribute_mIndex, mAttribute_mErrorLocation, mAttribute_mSize COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_testArrayIndexIR (mProperty_mIndex, mProperty_mErrorLocation, mProperty_mSize COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -9456,16 +9456,16 @@ typeComparisonResult cPtr_upperBoundCheckIR::dynamicObjectCompare (const acPtr_c
   const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
   if (kOperandEqual == result) {
-    result = mAttribute_mSource.objectCompare (p->mAttribute_mSource) ;
+    result = mProperty_mSource.objectCompare (p->mProperty_mSource) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mUpperBoundPlusOne.objectCompare (p->mAttribute_mUpperBoundPlusOne) ;
+    result = mProperty_mUpperBoundPlusOne.objectCompare (p->mProperty_mUpperBoundPlusOne) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mPanicCode.objectCompare (p->mAttribute_mPanicCode) ;
+    result = mProperty_mPanicCode.objectCompare (p->mProperty_mPanicCode) ;
   }
   if (kOperandEqual == result) {
-    result = mAttribute_mLocation.objectCompare (p->mAttribute_mLocation) ;
+    result = mProperty_mLocation.objectCompare (p->mProperty_mLocation) ;
   }
   return result ;
 }
@@ -9523,7 +9523,7 @@ GALGAS_objectIR GALGAS_upperBoundCheckIR::getter_mSource (UNUSED_LOCATION_ARGS) 
   if (NULL != mObjectPtr) {
     const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
-    result = p->mAttribute_mSource ;
+    result = p->mProperty_mSource ;
   }
   return result ;
 }
@@ -9531,7 +9531,7 @@ GALGAS_objectIR GALGAS_upperBoundCheckIR::getter_mSource (UNUSED_LOCATION_ARGS) 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR cPtr_upperBoundCheckIR::getter_mSource (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSource ;
+  return mProperty_mSource ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9541,7 +9541,7 @@ GALGAS_bigint GALGAS_upperBoundCheckIR::getter_mUpperBoundPlusOne (UNUSED_LOCATI
   if (NULL != mObjectPtr) {
     const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
-    result = p->mAttribute_mUpperBoundPlusOne ;
+    result = p->mProperty_mUpperBoundPlusOne ;
   }
   return result ;
 }
@@ -9549,7 +9549,7 @@ GALGAS_bigint GALGAS_upperBoundCheckIR::getter_mUpperBoundPlusOne (UNUSED_LOCATI
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint cPtr_upperBoundCheckIR::getter_mUpperBoundPlusOne (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mUpperBoundPlusOne ;
+  return mProperty_mUpperBoundPlusOne ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9559,7 +9559,7 @@ GALGAS_uint GALGAS_upperBoundCheckIR::getter_mPanicCode (UNUSED_LOCATION_ARGS) c
   if (NULL != mObjectPtr) {
     const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
-    result = p->mAttribute_mPanicCode ;
+    result = p->mProperty_mPanicCode ;
   }
   return result ;
 }
@@ -9567,7 +9567,7 @@ GALGAS_uint GALGAS_upperBoundCheckIR::getter_mPanicCode (UNUSED_LOCATION_ARGS) c
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint cPtr_upperBoundCheckIR::getter_mPanicCode (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPanicCode ;
+  return mProperty_mPanicCode ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9577,7 +9577,7 @@ GALGAS_location GALGAS_upperBoundCheckIR::getter_mLocation (UNUSED_LOCATION_ARGS
   if (NULL != mObjectPtr) {
     const cPtr_upperBoundCheckIR * p = (const cPtr_upperBoundCheckIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_upperBoundCheckIR) ;
-    result = p->mAttribute_mLocation ;
+    result = p->mProperty_mLocation ;
   }
   return result ;
 }
@@ -9585,7 +9585,7 @@ GALGAS_location GALGAS_upperBoundCheckIR::getter_mLocation (UNUSED_LOCATION_ARGS
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location cPtr_upperBoundCheckIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mLocation ;
+  return mProperty_mLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9598,10 +9598,10 @@ cPtr_upperBoundCheckIR::cPtr_upperBoundCheckIR (const GALGAS_objectIR & in_mSour
                                                 const GALGAS_location & in_mLocation
                                                 COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
-mAttribute_mSource (in_mSource),
-mAttribute_mUpperBoundPlusOne (in_mUpperBoundPlusOne),
-mAttribute_mPanicCode (in_mPanicCode),
-mAttribute_mLocation (in_mLocation) {
+mProperty_mSource (in_mSource),
+mProperty_mUpperBoundPlusOne (in_mUpperBoundPlusOne),
+mProperty_mPanicCode (in_mPanicCode),
+mProperty_mLocation (in_mLocation) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9613,13 +9613,13 @@ const C_galgas_type_descriptor * cPtr_upperBoundCheckIR::classDescriptor (void) 
 void cPtr_upperBoundCheckIR::description (C_String & ioString,
                                           const int32_t inIndentation) const {
   ioString << "[@upperBoundCheckIR:" ;
-  mAttribute_mSource.description (ioString, inIndentation+1) ;
+  mProperty_mSource.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mUpperBoundPlusOne.description (ioString, inIndentation+1) ;
+  mProperty_mUpperBoundPlusOne.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mPanicCode.description (ioString, inIndentation+1) ;
+  mProperty_mPanicCode.description (ioString, inIndentation+1) ;
   ioString << ", " ;
-  mAttribute_mLocation.description (ioString, inIndentation+1) ;
+  mProperty_mLocation.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -9627,7 +9627,7 @@ void cPtr_upperBoundCheckIR::description (C_String & ioString,
 
 acPtr_class * cPtr_upperBoundCheckIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_upperBoundCheckIR (mAttribute_mSource, mAttribute_mUpperBoundPlusOne, mAttribute_mPanicCode, mAttribute_mLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_upperBoundCheckIR (mProperty_mSource, mProperty_mUpperBoundPlusOne, mProperty_mPanicCode, mProperty_mLocation COMMA_THERE)) ;
   return ptr ;
 }
 
@@ -9686,15 +9686,15 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_routineMapIR_2D_eleme
                                               GALGAS_uint & ioArgument_ioMaxBranchOfOnInstructions,
                                               C_Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
-  extensionMethod_enterAccessibleEntities (inObject.mAttribute_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 32)) ;
+  extensionMethod_enterAccessibleEntities (inObject.mProperty_mInstructionGenerationList, ioArgument_ioAccessibleEntities, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("code-optimisation.galgas", 32)) ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_enumConstantMap_2D_element::GALGAS_enumConstantMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mIndex () {
+mProperty_lkey (),
+mProperty_mIndex () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9706,8 +9706,8 @@ GALGAS_enumConstantMap_2D_element::~ GALGAS_enumConstantMap_2D_element (void) {
 
 GALGAS_enumConstantMap_2D_element::GALGAS_enumConstantMap_2D_element (const GALGAS_lstring & inOperand0,
                                                                       const GALGAS_uint & inOperand1) :
-mAttribute_lkey (inOperand0),
-mAttribute_mIndex (inOperand1) {
+mProperty_lkey (inOperand0),
+mProperty_mIndex (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9734,10 +9734,10 @@ GALGAS_enumConstantMap_2D_element GALGAS_enumConstantMap_2D_element::constructor
 typeComparisonResult GALGAS_enumConstantMap_2D_element::objectCompare (const GALGAS_enumConstantMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mIndex.objectCompare (inOperand.mAttribute_mIndex) ;
+    result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
   }
   return result ;
 }
@@ -9745,14 +9745,14 @@ typeComparisonResult GALGAS_enumConstantMap_2D_element::objectCompare (const GAL
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_enumConstantMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mIndex.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mIndex.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_enumConstantMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mIndex.drop () ;
+  mProperty_lkey.drop () ;
+  mProperty_mIndex.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9763,9 +9763,9 @@ void GALGAS_enumConstantMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mIndex.description (ioString, inIndentation+1) ;
+    mProperty_mIndex.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -9773,13 +9773,13 @@ void GALGAS_enumConstantMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_enumConstantMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_enumConstantMap_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIndex ;
+  return mProperty_mIndex ;
 }
 
 
@@ -9830,10 +9830,10 @@ GALGAS_enumConstantMap_2D_element GALGAS_enumConstantMap_2D_element::extractObje
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structurePropertyListAST_2D_element::GALGAS_structurePropertyListAST_2D_element (void) :
-mAttribute_mFieldName (),
-mAttribute_mIsPublic (),
-mAttribute_mFieldTypeName (),
-mAttribute_mInitialisation () {
+mProperty_mFieldName (),
+mProperty_mIsPublic (),
+mProperty_mFieldTypeName (),
+mProperty_mInitialisation () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9847,10 +9847,10 @@ GALGAS_structurePropertyListAST_2D_element::GALGAS_structurePropertyListAST_2D_e
                                                                                         const GALGAS_bool & inOperand1,
                                                                                         const GALGAS_lstring & inOperand2,
                                                                                         const GALGAS_structureVarInit & inOperand3) :
-mAttribute_mFieldName (inOperand0),
-mAttribute_mIsPublic (inOperand1),
-mAttribute_mFieldTypeName (inOperand2),
-mAttribute_mInitialisation (inOperand3) {
+mProperty_mFieldName (inOperand0),
+mProperty_mIsPublic (inOperand1),
+mProperty_mFieldTypeName (inOperand2),
+mProperty_mInitialisation (inOperand3) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9872,16 +9872,16 @@ GALGAS_structurePropertyListAST_2D_element GALGAS_structurePropertyListAST_2D_el
 typeComparisonResult GALGAS_structurePropertyListAST_2D_element::objectCompare (const GALGAS_structurePropertyListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mFieldName.objectCompare (inOperand.mAttribute_mFieldName) ;
+    result = mProperty_mFieldName.objectCompare (inOperand.mProperty_mFieldName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mIsPublic.objectCompare (inOperand.mAttribute_mIsPublic) ;
+    result = mProperty_mIsPublic.objectCompare (inOperand.mProperty_mIsPublic) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFieldTypeName.objectCompare (inOperand.mAttribute_mFieldTypeName) ;
+    result = mProperty_mFieldTypeName.objectCompare (inOperand.mProperty_mFieldTypeName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInitialisation.objectCompare (inOperand.mAttribute_mInitialisation) ;
+    result = mProperty_mInitialisation.objectCompare (inOperand.mProperty_mInitialisation) ;
   }
   return result ;
 }
@@ -9889,16 +9889,16 @@ typeComparisonResult GALGAS_structurePropertyListAST_2D_element::objectCompare (
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_structurePropertyListAST_2D_element::isValid (void) const {
-  return mAttribute_mFieldName.isValid () && mAttribute_mIsPublic.isValid () && mAttribute_mFieldTypeName.isValid () && mAttribute_mInitialisation.isValid () ;
+  return mProperty_mFieldName.isValid () && mProperty_mIsPublic.isValid () && mProperty_mFieldTypeName.isValid () && mProperty_mInitialisation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_structurePropertyListAST_2D_element::drop (void) {
-  mAttribute_mFieldName.drop () ;
-  mAttribute_mIsPublic.drop () ;
-  mAttribute_mFieldTypeName.drop () ;
-  mAttribute_mInitialisation.drop () ;
+  mProperty_mFieldName.drop () ;
+  mProperty_mIsPublic.drop () ;
+  mProperty_mFieldTypeName.drop () ;
+  mProperty_mInitialisation.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9909,13 +9909,13 @@ void GALGAS_structurePropertyListAST_2D_element::description (C_String & ioStrin
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mFieldName.description (ioString, inIndentation+1) ;
+    mProperty_mFieldName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mIsPublic.description (ioString, inIndentation+1) ;
+    mProperty_mIsPublic.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFieldTypeName.description (ioString, inIndentation+1) ;
+    mProperty_mFieldTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInitialisation.description (ioString, inIndentation+1) ;
+    mProperty_mInitialisation.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -9923,25 +9923,25 @@ void GALGAS_structurePropertyListAST_2D_element::description (C_String & ioStrin
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_structurePropertyListAST_2D_element::getter_mFieldName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFieldName ;
+  return mProperty_mFieldName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_structurePropertyListAST_2D_element::getter_mIsPublic (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIsPublic ;
+  return mProperty_mIsPublic ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_structurePropertyListAST_2D_element::getter_mFieldTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFieldTypeName ;
+  return mProperty_mFieldTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structureVarInit GALGAS_structurePropertyListAST_2D_element::getter_mInitialisation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitialisation ;
+  return mProperty_mInitialisation ;
 }
 
 
@@ -9992,8 +9992,8 @@ GALGAS_structurePropertyListAST_2D_element GALGAS_structurePropertyListAST_2D_el
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList_2D_element::GALGAS_propertyList_2D_element (void) :
-mAttribute_mPropertyName (),
-mAttribute_mType () {
+mProperty_mPropertyName (),
+mProperty_mType () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10005,8 +10005,8 @@ GALGAS_propertyList_2D_element::~ GALGAS_propertyList_2D_element (void) {
 
 GALGAS_propertyList_2D_element::GALGAS_propertyList_2D_element (const GALGAS_string & inOperand0,
                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand1) :
-mAttribute_mPropertyName (inOperand0),
-mAttribute_mType (inOperand1) {
+mProperty_mPropertyName (inOperand0),
+mProperty_mType (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10033,10 +10033,10 @@ GALGAS_propertyList_2D_element GALGAS_propertyList_2D_element::constructor_new (
 typeComparisonResult GALGAS_propertyList_2D_element::objectCompare (const GALGAS_propertyList_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mPropertyName.objectCompare (inOperand.mAttribute_mPropertyName) ;
+    result = mProperty_mPropertyName.objectCompare (inOperand.mProperty_mPropertyName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mType.objectCompare (inOperand.mAttribute_mType) ;
+    result = mProperty_mType.objectCompare (inOperand.mProperty_mType) ;
   }
   return result ;
 }
@@ -10044,14 +10044,14 @@ typeComparisonResult GALGAS_propertyList_2D_element::objectCompare (const GALGAS
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_propertyList_2D_element::isValid (void) const {
-  return mAttribute_mPropertyName.isValid () && mAttribute_mType.isValid () ;
+  return mProperty_mPropertyName.isValid () && mProperty_mType.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyList_2D_element::drop (void) {
-  mAttribute_mPropertyName.drop () ;
-  mAttribute_mType.drop () ;
+  mProperty_mPropertyName.drop () ;
+  mProperty_mType.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10062,9 +10062,9 @@ void GALGAS_propertyList_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mPropertyName.description (ioString, inIndentation+1) ;
+    mProperty_mPropertyName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mType.description (ioString, inIndentation+1) ;
+    mProperty_mType.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -10072,13 +10072,13 @@ void GALGAS_propertyList_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string GALGAS_propertyList_2D_element::getter_mPropertyName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPropertyName ;
+  return mProperty_mPropertyName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_propertyList_2D_element::getter_mType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mType ;
+  return mProperty_mType ;
 }
 
 
@@ -10129,10 +10129,10 @@ GALGAS_propertyList_2D_element GALGAS_propertyList_2D_element::extractObject (co
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyMap_2D_element::GALGAS_propertyMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mIsPublic (),
-mAttribute_mPropertyObject (),
-mAttribute_mIndex () {
+mProperty_lkey (),
+mProperty_mIsPublic (),
+mProperty_mPropertyObject (),
+mProperty_mIndex () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10146,10 +10146,10 @@ GALGAS_propertyMap_2D_element::GALGAS_propertyMap_2D_element (const GALGAS_lstri
                                                               const GALGAS_bool & inOperand1,
                                                               const GALGAS_objectIR & inOperand2,
                                                               const GALGAS_uint & inOperand3) :
-mAttribute_lkey (inOperand0),
-mAttribute_mIsPublic (inOperand1),
-mAttribute_mPropertyObject (inOperand2),
-mAttribute_mIndex (inOperand3) {
+mProperty_lkey (inOperand0),
+mProperty_mIsPublic (inOperand1),
+mProperty_mPropertyObject (inOperand2),
+mProperty_mIndex (inOperand3) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10171,16 +10171,16 @@ GALGAS_propertyMap_2D_element GALGAS_propertyMap_2D_element::constructor_new (co
 typeComparisonResult GALGAS_propertyMap_2D_element::objectCompare (const GALGAS_propertyMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mIsPublic.objectCompare (inOperand.mAttribute_mIsPublic) ;
+    result = mProperty_mIsPublic.objectCompare (inOperand.mProperty_mIsPublic) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPropertyObject.objectCompare (inOperand.mAttribute_mPropertyObject) ;
+    result = mProperty_mPropertyObject.objectCompare (inOperand.mProperty_mPropertyObject) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mIndex.objectCompare (inOperand.mAttribute_mIndex) ;
+    result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
   }
   return result ;
 }
@@ -10188,16 +10188,16 @@ typeComparisonResult GALGAS_propertyMap_2D_element::objectCompare (const GALGAS_
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_propertyMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mIsPublic.isValid () && mAttribute_mPropertyObject.isValid () && mAttribute_mIndex.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mIsPublic.isValid () && mProperty_mPropertyObject.isValid () && mProperty_mIndex.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mIsPublic.drop () ;
-  mAttribute_mPropertyObject.drop () ;
-  mAttribute_mIndex.drop () ;
+  mProperty_lkey.drop () ;
+  mProperty_mIsPublic.drop () ;
+  mProperty_mPropertyObject.drop () ;
+  mProperty_mIndex.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10208,13 +10208,13 @@ void GALGAS_propertyMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mIsPublic.description (ioString, inIndentation+1) ;
+    mProperty_mIsPublic.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPropertyObject.description (ioString, inIndentation+1) ;
+    mProperty_mPropertyObject.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mIndex.description (ioString, inIndentation+1) ;
+    mProperty_mIndex.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -10222,25 +10222,25 @@ void GALGAS_propertyMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_propertyMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_propertyMap_2D_element::getter_mIsPublic (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIsPublic ;
+  return mProperty_mIsPublic ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR GALGAS_propertyMap_2D_element::getter_mPropertyObject (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPropertyObject ;
+  return mProperty_mPropertyObject ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_propertyMap_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIndex ;
+  return mProperty_mIndex ;
 }
 
 
@@ -10291,9 +10291,9 @@ GALGAS_propertyMap_2D_element GALGAS_propertyMap_2D_element::extractObject (cons
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constructorSignature_2D_element::GALGAS_constructorSignature_2D_element (void) :
-mAttribute_mSelector (),
-mAttribute_mType (),
-mAttribute_mFieldIndex () {
+mProperty_mSelector (),
+mProperty_mType (),
+mProperty_mFieldIndex () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10306,9 +10306,9 @@ GALGAS_constructorSignature_2D_element::~ GALGAS_constructorSignature_2D_element
 GALGAS_constructorSignature_2D_element::GALGAS_constructorSignature_2D_element (const GALGAS_string & inOperand0,
                                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                                                 const GALGAS_uint & inOperand2) :
-mAttribute_mSelector (inOperand0),
-mAttribute_mType (inOperand1),
-mAttribute_mFieldIndex (inOperand2) {
+mProperty_mSelector (inOperand0),
+mProperty_mType (inOperand1),
+mProperty_mFieldIndex (inOperand2) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10337,13 +10337,13 @@ GALGAS_constructorSignature_2D_element GALGAS_constructorSignature_2D_element::c
 typeComparisonResult GALGAS_constructorSignature_2D_element::objectCompare (const GALGAS_constructorSignature_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mSelector.objectCompare (inOperand.mAttribute_mSelector) ;
+    result = mProperty_mSelector.objectCompare (inOperand.mProperty_mSelector) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mType.objectCompare (inOperand.mAttribute_mType) ;
+    result = mProperty_mType.objectCompare (inOperand.mProperty_mType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFieldIndex.objectCompare (inOperand.mAttribute_mFieldIndex) ;
+    result = mProperty_mFieldIndex.objectCompare (inOperand.mProperty_mFieldIndex) ;
   }
   return result ;
 }
@@ -10351,15 +10351,15 @@ typeComparisonResult GALGAS_constructorSignature_2D_element::objectCompare (cons
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_constructorSignature_2D_element::isValid (void) const {
-  return mAttribute_mSelector.isValid () && mAttribute_mType.isValid () && mAttribute_mFieldIndex.isValid () ;
+  return mProperty_mSelector.isValid () && mProperty_mType.isValid () && mProperty_mFieldIndex.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constructorSignature_2D_element::drop (void) {
-  mAttribute_mSelector.drop () ;
-  mAttribute_mType.drop () ;
-  mAttribute_mFieldIndex.drop () ;
+  mProperty_mSelector.drop () ;
+  mProperty_mType.drop () ;
+  mProperty_mFieldIndex.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10370,11 +10370,11 @@ void GALGAS_constructorSignature_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mSelector.description (ioString, inIndentation+1) ;
+    mProperty_mSelector.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mType.description (ioString, inIndentation+1) ;
+    mProperty_mType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFieldIndex.description (ioString, inIndentation+1) ;
+    mProperty_mFieldIndex.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -10382,19 +10382,19 @@ void GALGAS_constructorSignature_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string GALGAS_constructorSignature_2D_element::getter_mSelector (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSelector ;
+  return mProperty_mSelector ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_constructorSignature_2D_element::getter_mType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mType ;
+  return mProperty_mType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_constructorSignature_2D_element::getter_mFieldIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFieldIndex ;
+  return mProperty_mFieldIndex ;
 }
 
 
@@ -10445,8 +10445,8 @@ GALGAS_constructorSignature_2D_element GALGAS_constructorSignature_2D_element::e
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_sortedOperandIRList_2D_element::GALGAS_sortedOperandIRList_2D_element (void) :
-mAttribute_mOperand (),
-mAttribute_mIndex () {
+mProperty_mOperand (),
+mProperty_mIndex () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10458,8 +10458,8 @@ GALGAS_sortedOperandIRList_2D_element::~ GALGAS_sortedOperandIRList_2D_element (
 
 GALGAS_sortedOperandIRList_2D_element::GALGAS_sortedOperandIRList_2D_element (const GALGAS_objectIR & inOperand0,
                                                                               const GALGAS_uint & inOperand1) :
-mAttribute_mOperand (inOperand0),
-mAttribute_mIndex (inOperand1) {
+mProperty_mOperand (inOperand0),
+mProperty_mIndex (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10479,10 +10479,10 @@ GALGAS_sortedOperandIRList_2D_element GALGAS_sortedOperandIRList_2D_element::con
 typeComparisonResult GALGAS_sortedOperandIRList_2D_element::objectCompare (const GALGAS_sortedOperandIRList_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mOperand.objectCompare (inOperand.mAttribute_mOperand) ;
+    result = mProperty_mOperand.objectCompare (inOperand.mProperty_mOperand) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mIndex.objectCompare (inOperand.mAttribute_mIndex) ;
+    result = mProperty_mIndex.objectCompare (inOperand.mProperty_mIndex) ;
   }
   return result ;
 }
@@ -10490,14 +10490,14 @@ typeComparisonResult GALGAS_sortedOperandIRList_2D_element::objectCompare (const
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_sortedOperandIRList_2D_element::isValid (void) const {
-  return mAttribute_mOperand.isValid () && mAttribute_mIndex.isValid () ;
+  return mProperty_mOperand.isValid () && mProperty_mIndex.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_sortedOperandIRList_2D_element::drop (void) {
-  mAttribute_mOperand.drop () ;
-  mAttribute_mIndex.drop () ;
+  mProperty_mOperand.drop () ;
+  mProperty_mIndex.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10508,9 +10508,9 @@ void GALGAS_sortedOperandIRList_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mOperand.description (ioString, inIndentation+1) ;
+    mProperty_mOperand.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mIndex.description (ioString, inIndentation+1) ;
+    mProperty_mIndex.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -10518,13 +10518,13 @@ void GALGAS_sortedOperandIRList_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_objectIR GALGAS_sortedOperandIRList_2D_element::getter_mOperand (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mOperand ;
+  return mProperty_mOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_sortedOperandIRList_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIndex ;
+  return mProperty_mIndex ;
 }
 
 
@@ -10575,11 +10575,11 @@ GALGAS_sortedOperandIRList_2D_element GALGAS_sortedOperandIRList_2D_element::ext
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_extensionDeclarationListAST_2D_element::GALGAS_extensionDeclarationListAST_2D_element (void) :
-mAttribute_mTypeName (),
-mAttribute_mProcedureDeclarationListAST (),
-mAttribute_mPropertyList (),
-mAttribute_mSVCListAST (),
-mAttribute_mGuardListAST () {
+mProperty_mTypeName (),
+mProperty_mProcedureDeclarationListAST (),
+mProperty_mPropertyList (),
+mProperty_mSVCListAST (),
+mProperty_mGuardListAST () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10594,11 +10594,11 @@ GALGAS_extensionDeclarationListAST_2D_element::GALGAS_extensionDeclarationListAS
                                                                                               const GALGAS_structurePropertyListAST & inOperand2,
                                                                                               const GALGAS_svcDeclarationListAST & inOperand3,
                                                                                               const GALGAS_guardDeclarationListAST & inOperand4) :
-mAttribute_mTypeName (inOperand0),
-mAttribute_mProcedureDeclarationListAST (inOperand1),
-mAttribute_mPropertyList (inOperand2),
-mAttribute_mSVCListAST (inOperand3),
-mAttribute_mGuardListAST (inOperand4) {
+mProperty_mTypeName (inOperand0),
+mProperty_mProcedureDeclarationListAST (inOperand1),
+mProperty_mPropertyList (inOperand2),
+mProperty_mSVCListAST (inOperand3),
+mProperty_mGuardListAST (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10631,19 +10631,19 @@ GALGAS_extensionDeclarationListAST_2D_element GALGAS_extensionDeclarationListAST
 typeComparisonResult GALGAS_extensionDeclarationListAST_2D_element::objectCompare (const GALGAS_extensionDeclarationListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mTypeName.objectCompare (inOperand.mAttribute_mTypeName) ;
+    result = mProperty_mTypeName.objectCompare (inOperand.mProperty_mTypeName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mProcedureDeclarationListAST.objectCompare (inOperand.mAttribute_mProcedureDeclarationListAST) ;
+    result = mProperty_mProcedureDeclarationListAST.objectCompare (inOperand.mProperty_mProcedureDeclarationListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPropertyList.objectCompare (inOperand.mAttribute_mPropertyList) ;
+    result = mProperty_mPropertyList.objectCompare (inOperand.mProperty_mPropertyList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSVCListAST.objectCompare (inOperand.mAttribute_mSVCListAST) ;
+    result = mProperty_mSVCListAST.objectCompare (inOperand.mProperty_mSVCListAST) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGuardListAST.objectCompare (inOperand.mAttribute_mGuardListAST) ;
+    result = mProperty_mGuardListAST.objectCompare (inOperand.mProperty_mGuardListAST) ;
   }
   return result ;
 }
@@ -10651,17 +10651,17 @@ typeComparisonResult GALGAS_extensionDeclarationListAST_2D_element::objectCompar
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_extensionDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mTypeName.isValid () && mAttribute_mProcedureDeclarationListAST.isValid () && mAttribute_mPropertyList.isValid () && mAttribute_mSVCListAST.isValid () && mAttribute_mGuardListAST.isValid () ;
+  return mProperty_mTypeName.isValid () && mProperty_mProcedureDeclarationListAST.isValid () && mProperty_mPropertyList.isValid () && mProperty_mSVCListAST.isValid () && mProperty_mGuardListAST.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_extensionDeclarationListAST_2D_element::drop (void) {
-  mAttribute_mTypeName.drop () ;
-  mAttribute_mProcedureDeclarationListAST.drop () ;
-  mAttribute_mPropertyList.drop () ;
-  mAttribute_mSVCListAST.drop () ;
-  mAttribute_mGuardListAST.drop () ;
+  mProperty_mTypeName.drop () ;
+  mProperty_mProcedureDeclarationListAST.drop () ;
+  mProperty_mPropertyList.drop () ;
+  mProperty_mSVCListAST.drop () ;
+  mProperty_mGuardListAST.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10672,15 +10672,15 @@ void GALGAS_extensionDeclarationListAST_2D_element::description (C_String & ioSt
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mTypeName.description (ioString, inIndentation+1) ;
+    mProperty_mTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mProcedureDeclarationListAST.description (ioString, inIndentation+1) ;
+    mProperty_mProcedureDeclarationListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPropertyList.description (ioString, inIndentation+1) ;
+    mProperty_mPropertyList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSVCListAST.description (ioString, inIndentation+1) ;
+    mProperty_mSVCListAST.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGuardListAST.description (ioString, inIndentation+1) ;
+    mProperty_mGuardListAST.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -10688,31 +10688,31 @@ void GALGAS_extensionDeclarationListAST_2D_element::description (C_String & ioSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_extensionDeclarationListAST_2D_element::getter_mTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTypeName ;
+  return mProperty_mTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_functionDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mProcedureDeclarationListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcedureDeclarationListAST ;
+  return mProperty_mProcedureDeclarationListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_structurePropertyListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mPropertyList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPropertyList ;
+  return mProperty_mPropertyList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_svcDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mSVCListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSVCListAST ;
+  return mProperty_mSVCListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_guardDeclarationListAST GALGAS_extensionDeclarationListAST_2D_element::getter_mGuardListAST (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGuardListAST ;
+  return mProperty_mGuardListAST ;
 }
 
 
@@ -10763,11 +10763,11 @@ GALGAS_extensionDeclarationListAST_2D_element GALGAS_extensionDeclarationListAST
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterNameList_2D_element::GALGAS_controlRegisterNameList_2D_element (void) :
-mAttribute_mRegisterName (),
-mAttribute_mControlRegisterKind (),
-mAttribute_mAttributeList (),
-mAttribute_mRegisterAddress (),
-mAttribute_mRegisterAddressLocation () {
+mProperty_mRegisterName (),
+mProperty_mControlRegisterKind (),
+mProperty_mAttributeList (),
+mProperty_mRegisterAddress (),
+mProperty_mRegisterAddressLocation () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10782,11 +10782,11 @@ GALGAS_controlRegisterNameList_2D_element::GALGAS_controlRegisterNameList_2D_ele
                                                                                       const GALGAS_lstringlist & inOperand2,
                                                                                       const GALGAS_expressionAST & inOperand3,
                                                                                       const GALGAS_location & inOperand4) :
-mAttribute_mRegisterName (inOperand0),
-mAttribute_mControlRegisterKind (inOperand1),
-mAttribute_mAttributeList (inOperand2),
-mAttribute_mRegisterAddress (inOperand3),
-mAttribute_mRegisterAddressLocation (inOperand4) {
+mProperty_mRegisterName (inOperand0),
+mProperty_mControlRegisterKind (inOperand1),
+mProperty_mAttributeList (inOperand2),
+mProperty_mRegisterAddress (inOperand3),
+mProperty_mRegisterAddressLocation (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10809,19 +10809,19 @@ GALGAS_controlRegisterNameList_2D_element GALGAS_controlRegisterNameList_2D_elem
 typeComparisonResult GALGAS_controlRegisterNameList_2D_element::objectCompare (const GALGAS_controlRegisterNameList_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mRegisterName.objectCompare (inOperand.mAttribute_mRegisterName) ;
+    result = mProperty_mRegisterName.objectCompare (inOperand.mProperty_mRegisterName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mControlRegisterKind.objectCompare (inOperand.mAttribute_mControlRegisterKind) ;
+    result = mProperty_mControlRegisterKind.objectCompare (inOperand.mProperty_mControlRegisterKind) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAttributeList.objectCompare (inOperand.mAttribute_mAttributeList) ;
+    result = mProperty_mAttributeList.objectCompare (inOperand.mProperty_mAttributeList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRegisterAddress.objectCompare (inOperand.mAttribute_mRegisterAddress) ;
+    result = mProperty_mRegisterAddress.objectCompare (inOperand.mProperty_mRegisterAddress) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRegisterAddressLocation.objectCompare (inOperand.mAttribute_mRegisterAddressLocation) ;
+    result = mProperty_mRegisterAddressLocation.objectCompare (inOperand.mProperty_mRegisterAddressLocation) ;
   }
   return result ;
 }
@@ -10829,17 +10829,17 @@ typeComparisonResult GALGAS_controlRegisterNameList_2D_element::objectCompare (c
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_controlRegisterNameList_2D_element::isValid (void) const {
-  return mAttribute_mRegisterName.isValid () && mAttribute_mControlRegisterKind.isValid () && mAttribute_mAttributeList.isValid () && mAttribute_mRegisterAddress.isValid () && mAttribute_mRegisterAddressLocation.isValid () ;
+  return mProperty_mRegisterName.isValid () && mProperty_mControlRegisterKind.isValid () && mProperty_mAttributeList.isValid () && mProperty_mRegisterAddress.isValid () && mProperty_mRegisterAddressLocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterNameList_2D_element::drop (void) {
-  mAttribute_mRegisterName.drop () ;
-  mAttribute_mControlRegisterKind.drop () ;
-  mAttribute_mAttributeList.drop () ;
-  mAttribute_mRegisterAddress.drop () ;
-  mAttribute_mRegisterAddressLocation.drop () ;
+  mProperty_mRegisterName.drop () ;
+  mProperty_mControlRegisterKind.drop () ;
+  mProperty_mAttributeList.drop () ;
+  mProperty_mRegisterAddress.drop () ;
+  mProperty_mRegisterAddressLocation.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10850,15 +10850,15 @@ void GALGAS_controlRegisterNameList_2D_element::description (C_String & ioString
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mRegisterName.description (ioString, inIndentation+1) ;
+    mProperty_mRegisterName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mControlRegisterKind.description (ioString, inIndentation+1) ;
+    mProperty_mControlRegisterKind.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAttributeList.description (ioString, inIndentation+1) ;
+    mProperty_mAttributeList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRegisterAddress.description (ioString, inIndentation+1) ;
+    mProperty_mRegisterAddress.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRegisterAddressLocation.description (ioString, inIndentation+1) ;
+    mProperty_mRegisterAddressLocation.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -10866,31 +10866,31 @@ void GALGAS_controlRegisterNameList_2D_element::description (C_String & ioString
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_controlRegisterNameList_2D_element::getter_mRegisterName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterName ;
+  return mProperty_mRegisterName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterKind GALGAS_controlRegisterNameList_2D_element::getter_mControlRegisterKind (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mControlRegisterKind ;
+  return mProperty_mControlRegisterKind ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstringlist GALGAS_controlRegisterNameList_2D_element::getter_mAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAttributeList ;
+  return mProperty_mAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_expressionAST GALGAS_controlRegisterNameList_2D_element::getter_mRegisterAddress (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterAddress ;
+  return mProperty_mRegisterAddress ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_controlRegisterNameList_2D_element::getter_mRegisterAddressLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterAddressLocation ;
+  return mProperty_mRegisterAddressLocation ;
 }
 
 
@@ -10941,7 +10941,7 @@ GALGAS_controlRegisterNameList_2D_element GALGAS_controlRegisterNameList_2D_elem
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList_2D_element::GALGAS_controlRegisterBitSliceList_2D_element (void) :
-mAttribute_mRegisterBitSlice () {
+mProperty_mRegisterBitSlice () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10952,7 +10952,7 @@ GALGAS_controlRegisterBitSliceList_2D_element::~ GALGAS_controlRegisterBitSliceL
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSliceList_2D_element::GALGAS_controlRegisterBitSliceList_2D_element (const GALGAS_controlRegisterBitSlice & inOperand0) :
-mAttribute_mRegisterBitSlice (inOperand0) {
+mProperty_mRegisterBitSlice (inOperand0) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10971,7 +10971,7 @@ GALGAS_controlRegisterBitSliceList_2D_element GALGAS_controlRegisterBitSliceList
 typeComparisonResult GALGAS_controlRegisterBitSliceList_2D_element::objectCompare (const GALGAS_controlRegisterBitSliceList_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mRegisterBitSlice.objectCompare (inOperand.mAttribute_mRegisterBitSlice) ;
+    result = mProperty_mRegisterBitSlice.objectCompare (inOperand.mProperty_mRegisterBitSlice) ;
   }
   return result ;
 }
@@ -10979,13 +10979,13 @@ typeComparisonResult GALGAS_controlRegisterBitSliceList_2D_element::objectCompar
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_controlRegisterBitSliceList_2D_element::isValid (void) const {
-  return mAttribute_mRegisterBitSlice.isValid () ;
+  return mProperty_mRegisterBitSlice.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterBitSliceList_2D_element::drop (void) {
-  mAttribute_mRegisterBitSlice.drop () ;
+  mProperty_mRegisterBitSlice.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10996,7 +10996,7 @@ void GALGAS_controlRegisterBitSliceList_2D_element::description (C_String & ioSt
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mRegisterBitSlice.description (ioString, inIndentation+1) ;
+    mProperty_mRegisterBitSlice.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -11004,7 +11004,7 @@ void GALGAS_controlRegisterBitSliceList_2D_element::description (C_String & ioSt
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSliceList_2D_element::getter_mRegisterBitSlice (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterBitSlice ;
+  return mProperty_mRegisterBitSlice ;
 }
 
 
@@ -11055,9 +11055,9 @@ GALGAS_controlRegisterBitSliceList_2D_element GALGAS_controlRegisterBitSliceList
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap_2D_element::GALGAS_controlRegisterFieldMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mBitIndex (),
-mAttribute_mBitCount () {
+mProperty_lkey (),
+mProperty_mBitIndex (),
+mProperty_mBitCount () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11070,9 +11070,9 @@ GALGAS_controlRegisterFieldMap_2D_element::~ GALGAS_controlRegisterFieldMap_2D_e
 GALGAS_controlRegisterFieldMap_2D_element::GALGAS_controlRegisterFieldMap_2D_element (const GALGAS_lstring & inOperand0,
                                                                                       const GALGAS_uint & inOperand1,
                                                                                       const GALGAS_uint & inOperand2) :
-mAttribute_lkey (inOperand0),
-mAttribute_mBitIndex (inOperand1),
-mAttribute_mBitCount (inOperand2) {
+mProperty_lkey (inOperand0),
+mProperty_mBitIndex (inOperand1),
+mProperty_mBitCount (inOperand2) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11101,13 +11101,13 @@ GALGAS_controlRegisterFieldMap_2D_element GALGAS_controlRegisterFieldMap_2D_elem
 typeComparisonResult GALGAS_controlRegisterFieldMap_2D_element::objectCompare (const GALGAS_controlRegisterFieldMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mBitIndex.objectCompare (inOperand.mAttribute_mBitIndex) ;
+    result = mProperty_mBitIndex.objectCompare (inOperand.mProperty_mBitIndex) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mBitCount.objectCompare (inOperand.mAttribute_mBitCount) ;
+    result = mProperty_mBitCount.objectCompare (inOperand.mProperty_mBitCount) ;
   }
   return result ;
 }
@@ -11115,15 +11115,15 @@ typeComparisonResult GALGAS_controlRegisterFieldMap_2D_element::objectCompare (c
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_controlRegisterFieldMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mBitIndex.isValid () && mAttribute_mBitCount.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mBitIndex.isValid () && mProperty_mBitCount.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterFieldMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mBitIndex.drop () ;
-  mAttribute_mBitCount.drop () ;
+  mProperty_lkey.drop () ;
+  mProperty_mBitIndex.drop () ;
+  mProperty_mBitCount.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11134,11 +11134,11 @@ void GALGAS_controlRegisterFieldMap_2D_element::description (C_String & ioString
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mBitIndex.description (ioString, inIndentation+1) ;
+    mProperty_mBitIndex.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mBitCount.description (ioString, inIndentation+1) ;
+    mProperty_mBitCount.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -11146,19 +11146,19 @@ void GALGAS_controlRegisterFieldMap_2D_element::description (C_String & ioString
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_controlRegisterFieldMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_controlRegisterFieldMap_2D_element::getter_mBitIndex (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBitIndex ;
+  return mProperty_mBitIndex ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_controlRegisterFieldMap_2D_element::getter_mBitCount (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mBitCount ;
+  return mProperty_mBitCount ;
 }
 
 
@@ -11209,11 +11209,11 @@ GALGAS_controlRegisterFieldMap_2D_element GALGAS_controlRegisterFieldMap_2D_elem
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_sliceMap_2D_element::GALGAS_sliceMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mAccessOperator (),
-mAttribute_mAccessRightOperand (),
-mAttribute_mSubMap (),
-mAttribute_mResultType () {
+mProperty_lkey (),
+mProperty_mAccessOperator (),
+mProperty_mAccessRightOperand (),
+mProperty_mSubMap (),
+mProperty_mResultType () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11228,11 +11228,11 @@ GALGAS_sliceMap_2D_element::GALGAS_sliceMap_2D_element (const GALGAS_lstring & i
                                                         const GALGAS_bigint & inOperand2,
                                                         const GALGAS_sliceMap & inOperand3,
                                                         const GALGAS_unifiedTypeMap_2D_proxy & inOperand4) :
-mAttribute_lkey (inOperand0),
-mAttribute_mAccessOperator (inOperand1),
-mAttribute_mAccessRightOperand (inOperand2),
-mAttribute_mSubMap (inOperand3),
-mAttribute_mResultType (inOperand4) {
+mProperty_lkey (inOperand0),
+mProperty_mAccessOperator (inOperand1),
+mProperty_mAccessRightOperand (inOperand2),
+mProperty_mSubMap (inOperand3),
+mProperty_mResultType (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11255,19 +11255,19 @@ GALGAS_sliceMap_2D_element GALGAS_sliceMap_2D_element::constructor_new (const GA
 typeComparisonResult GALGAS_sliceMap_2D_element::objectCompare (const GALGAS_sliceMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAccessOperator.objectCompare (inOperand.mAttribute_mAccessOperator) ;
+    result = mProperty_mAccessOperator.objectCompare (inOperand.mProperty_mAccessOperator) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAccessRightOperand.objectCompare (inOperand.mAttribute_mAccessRightOperand) ;
+    result = mProperty_mAccessRightOperand.objectCompare (inOperand.mProperty_mAccessRightOperand) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSubMap.objectCompare (inOperand.mAttribute_mSubMap) ;
+    result = mProperty_mSubMap.objectCompare (inOperand.mProperty_mSubMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mResultType.objectCompare (inOperand.mAttribute_mResultType) ;
+    result = mProperty_mResultType.objectCompare (inOperand.mProperty_mResultType) ;
   }
   return result ;
 }
@@ -11275,17 +11275,17 @@ typeComparisonResult GALGAS_sliceMap_2D_element::objectCompare (const GALGAS_sli
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_sliceMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mAccessOperator.isValid () && mAttribute_mAccessRightOperand.isValid () && mAttribute_mSubMap.isValid () && mAttribute_mResultType.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mAccessOperator.isValid () && mProperty_mAccessRightOperand.isValid () && mProperty_mSubMap.isValid () && mProperty_mResultType.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_sliceMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mAccessOperator.drop () ;
-  mAttribute_mAccessRightOperand.drop () ;
-  mAttribute_mSubMap.drop () ;
-  mAttribute_mResultType.drop () ;
+  mProperty_lkey.drop () ;
+  mProperty_mAccessOperator.drop () ;
+  mProperty_mAccessRightOperand.drop () ;
+  mProperty_mSubMap.drop () ;
+  mProperty_mResultType.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11296,15 +11296,15 @@ void GALGAS_sliceMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAccessOperator.description (ioString, inIndentation+1) ;
+    mProperty_mAccessOperator.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAccessRightOperand.description (ioString, inIndentation+1) ;
+    mProperty_mAccessRightOperand.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSubMap.description (ioString, inIndentation+1) ;
+    mProperty_mSubMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mResultType.description (ioString, inIndentation+1) ;
+    mProperty_mResultType.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -11312,31 +11312,31 @@ void GALGAS_sliceMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_sliceMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_llvmBinaryOperation GALGAS_sliceMap_2D_element::getter_mAccessOperator (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAccessOperator ;
+  return mProperty_mAccessOperator ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint GALGAS_sliceMap_2D_element::getter_mAccessRightOperand (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAccessRightOperand ;
+  return mProperty_mAccessRightOperand ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_sliceMap GALGAS_sliceMap_2D_element::getter_mSubMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSubMap ;
+  return mProperty_mSubMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_sliceMap_2D_element::getter_mResultType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mResultType ;
+  return mProperty_mResultType ;
 }
 
 
@@ -11387,17 +11387,17 @@ GALGAS_sliceMap_2D_element GALGAS_sliceMap_2D_element::extractObject (const GALG
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterMap_2D_element::GALGAS_controlRegisterMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mType (),
-mAttribute_mIsReadOnly (),
-mAttribute_mIsAccessibleInUserMode (),
-mAttribute_mRegisterFieldAccessMap (),
-mAttribute_mRegisterFieldMap (),
-mAttribute_mAddress (),
-mAttribute_mControlRegisterFieldList (),
-mAttribute_mRegisterBitCount (),
-mAttribute_mArraySize (),
-mAttribute_mElementArraySize () {
+mProperty_lkey (),
+mProperty_mType (),
+mProperty_mIsReadOnly (),
+mProperty_mIsAccessibleInUserMode (),
+mProperty_mRegisterFieldAccessMap (),
+mProperty_mRegisterFieldMap (),
+mProperty_mAddress (),
+mProperty_mControlRegisterFieldList (),
+mProperty_mRegisterBitCount (),
+mProperty_mArraySize (),
+mProperty_mElementArraySize () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11418,17 +11418,17 @@ GALGAS_controlRegisterMap_2D_element::GALGAS_controlRegisterMap_2D_element (cons
                                                                             const GALGAS_uint & inOperand8,
                                                                             const GALGAS_uint & inOperand9,
                                                                             const GALGAS_uint & inOperand10) :
-mAttribute_lkey (inOperand0),
-mAttribute_mType (inOperand1),
-mAttribute_mIsReadOnly (inOperand2),
-mAttribute_mIsAccessibleInUserMode (inOperand3),
-mAttribute_mRegisterFieldAccessMap (inOperand4),
-mAttribute_mRegisterFieldMap (inOperand5),
-mAttribute_mAddress (inOperand6),
-mAttribute_mControlRegisterFieldList (inOperand7),
-mAttribute_mRegisterBitCount (inOperand8),
-mAttribute_mArraySize (inOperand9),
-mAttribute_mElementArraySize (inOperand10) {
+mProperty_lkey (inOperand0),
+mProperty_mType (inOperand1),
+mProperty_mIsReadOnly (inOperand2),
+mProperty_mIsAccessibleInUserMode (inOperand3),
+mProperty_mRegisterFieldAccessMap (inOperand4),
+mProperty_mRegisterFieldMap (inOperand5),
+mProperty_mAddress (inOperand6),
+mProperty_mControlRegisterFieldList (inOperand7),
+mProperty_mRegisterBitCount (inOperand8),
+mProperty_mArraySize (inOperand9),
+mProperty_mElementArraySize (inOperand10) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11473,37 +11473,37 @@ GALGAS_controlRegisterMap_2D_element GALGAS_controlRegisterMap_2D_element::const
 typeComparisonResult GALGAS_controlRegisterMap_2D_element::objectCompare (const GALGAS_controlRegisterMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mType.objectCompare (inOperand.mAttribute_mType) ;
+    result = mProperty_mType.objectCompare (inOperand.mProperty_mType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mIsReadOnly.objectCompare (inOperand.mAttribute_mIsReadOnly) ;
+    result = mProperty_mIsReadOnly.objectCompare (inOperand.mProperty_mIsReadOnly) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mIsAccessibleInUserMode.objectCompare (inOperand.mAttribute_mIsAccessibleInUserMode) ;
+    result = mProperty_mIsAccessibleInUserMode.objectCompare (inOperand.mProperty_mIsAccessibleInUserMode) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRegisterFieldAccessMap.objectCompare (inOperand.mAttribute_mRegisterFieldAccessMap) ;
+    result = mProperty_mRegisterFieldAccessMap.objectCompare (inOperand.mProperty_mRegisterFieldAccessMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRegisterFieldMap.objectCompare (inOperand.mAttribute_mRegisterFieldMap) ;
+    result = mProperty_mRegisterFieldMap.objectCompare (inOperand.mProperty_mRegisterFieldMap) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAddress.objectCompare (inOperand.mAttribute_mAddress) ;
+    result = mProperty_mAddress.objectCompare (inOperand.mProperty_mAddress) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mControlRegisterFieldList.objectCompare (inOperand.mAttribute_mControlRegisterFieldList) ;
+    result = mProperty_mControlRegisterFieldList.objectCompare (inOperand.mProperty_mControlRegisterFieldList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRegisterBitCount.objectCompare (inOperand.mAttribute_mRegisterBitCount) ;
+    result = mProperty_mRegisterBitCount.objectCompare (inOperand.mProperty_mRegisterBitCount) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mArraySize.objectCompare (inOperand.mAttribute_mArraySize) ;
+    result = mProperty_mArraySize.objectCompare (inOperand.mProperty_mArraySize) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mElementArraySize.objectCompare (inOperand.mAttribute_mElementArraySize) ;
+    result = mProperty_mElementArraySize.objectCompare (inOperand.mProperty_mElementArraySize) ;
   }
   return result ;
 }
@@ -11511,23 +11511,23 @@ typeComparisonResult GALGAS_controlRegisterMap_2D_element::objectCompare (const 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_controlRegisterMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mType.isValid () && mAttribute_mIsReadOnly.isValid () && mAttribute_mIsAccessibleInUserMode.isValid () && mAttribute_mRegisterFieldAccessMap.isValid () && mAttribute_mRegisterFieldMap.isValid () && mAttribute_mAddress.isValid () && mAttribute_mControlRegisterFieldList.isValid () && mAttribute_mRegisterBitCount.isValid () && mAttribute_mArraySize.isValid () && mAttribute_mElementArraySize.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mIsAccessibleInUserMode.isValid () && mProperty_mRegisterFieldAccessMap.isValid () && mProperty_mRegisterFieldMap.isValid () && mProperty_mAddress.isValid () && mProperty_mControlRegisterFieldList.isValid () && mProperty_mRegisterBitCount.isValid () && mProperty_mArraySize.isValid () && mProperty_mElementArraySize.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_controlRegisterMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mType.drop () ;
-  mAttribute_mIsReadOnly.drop () ;
-  mAttribute_mIsAccessibleInUserMode.drop () ;
-  mAttribute_mRegisterFieldAccessMap.drop () ;
-  mAttribute_mRegisterFieldMap.drop () ;
-  mAttribute_mAddress.drop () ;
-  mAttribute_mControlRegisterFieldList.drop () ;
-  mAttribute_mRegisterBitCount.drop () ;
-  mAttribute_mArraySize.drop () ;
-  mAttribute_mElementArraySize.drop () ;
+  mProperty_lkey.drop () ;
+  mProperty_mType.drop () ;
+  mProperty_mIsReadOnly.drop () ;
+  mProperty_mIsAccessibleInUserMode.drop () ;
+  mProperty_mRegisterFieldAccessMap.drop () ;
+  mProperty_mRegisterFieldMap.drop () ;
+  mProperty_mAddress.drop () ;
+  mProperty_mControlRegisterFieldList.drop () ;
+  mProperty_mRegisterBitCount.drop () ;
+  mProperty_mArraySize.drop () ;
+  mProperty_mElementArraySize.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11538,27 +11538,27 @@ void GALGAS_controlRegisterMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mType.description (ioString, inIndentation+1) ;
+    mProperty_mType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mIsReadOnly.description (ioString, inIndentation+1) ;
+    mProperty_mIsReadOnly.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mIsAccessibleInUserMode.description (ioString, inIndentation+1) ;
+    mProperty_mIsAccessibleInUserMode.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRegisterFieldAccessMap.description (ioString, inIndentation+1) ;
+    mProperty_mRegisterFieldAccessMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRegisterFieldMap.description (ioString, inIndentation+1) ;
+    mProperty_mRegisterFieldMap.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAddress.description (ioString, inIndentation+1) ;
+    mProperty_mAddress.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mControlRegisterFieldList.description (ioString, inIndentation+1) ;
+    mProperty_mControlRegisterFieldList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRegisterBitCount.description (ioString, inIndentation+1) ;
+    mProperty_mRegisterBitCount.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mArraySize.description (ioString, inIndentation+1) ;
+    mProperty_mArraySize.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mElementArraySize.description (ioString, inIndentation+1) ;
+    mProperty_mElementArraySize.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -11566,67 +11566,67 @@ void GALGAS_controlRegisterMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_controlRegisterMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_controlRegisterMap_2D_element::getter_mType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mType ;
+  return mProperty_mType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_controlRegisterMap_2D_element::getter_mIsReadOnly (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIsReadOnly ;
+  return mProperty_mIsReadOnly ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_controlRegisterMap_2D_element::getter_mIsAccessibleInUserMode (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIsAccessibleInUserMode ;
+  return mProperty_mIsAccessibleInUserMode ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_sliceMap GALGAS_controlRegisterMap_2D_element::getter_mRegisterFieldAccessMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterFieldAccessMap ;
+  return mProperty_mRegisterFieldAccessMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldMap GALGAS_controlRegisterMap_2D_element::getter_mRegisterFieldMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterFieldMap ;
+  return mProperty_mRegisterFieldMap ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint GALGAS_controlRegisterMap_2D_element::getter_mAddress (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAddress ;
+  return mProperty_mAddress ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_controlRegisterFieldList GALGAS_controlRegisterMap_2D_element::getter_mControlRegisterFieldList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mControlRegisterFieldList ;
+  return mProperty_mControlRegisterFieldList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_controlRegisterMap_2D_element::getter_mRegisterBitCount (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRegisterBitCount ;
+  return mProperty_mRegisterBitCount ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_controlRegisterMap_2D_element::getter_mArraySize (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mArraySize ;
+  return mProperty_mArraySize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_uint GALGAS_controlRegisterMap_2D_element::getter_mElementArraySize (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mElementArraySize ;
+  return mProperty_mElementArraySize ;
 }
 
 
@@ -11677,7 +11677,7 @@ GALGAS_controlRegisterMap_2D_element GALGAS_controlRegisterMap_2D_element::extra
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap_2D_element::GALGAS_moduleMap_2D_element (void) :
-mAttribute_lkey () {
+mProperty_lkey () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11688,7 +11688,7 @@ GALGAS_moduleMap_2D_element::~ GALGAS_moduleMap_2D_element (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleMap_2D_element::GALGAS_moduleMap_2D_element (const GALGAS_lstring & inOperand0) :
-mAttribute_lkey (inOperand0) {
+mProperty_lkey (inOperand0) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11713,7 +11713,7 @@ GALGAS_moduleMap_2D_element GALGAS_moduleMap_2D_element::constructor_new (const 
 typeComparisonResult GALGAS_moduleMap_2D_element::objectCompare (const GALGAS_moduleMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   return result ;
 }
@@ -11721,13 +11721,13 @@ typeComparisonResult GALGAS_moduleMap_2D_element::objectCompare (const GALGAS_mo
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_moduleMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
+  return mProperty_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_moduleMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
+  mProperty_lkey.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11738,7 +11738,7 @@ void GALGAS_moduleMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -11746,7 +11746,7 @@ void GALGAS_moduleMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_moduleMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 
@@ -11797,8 +11797,8 @@ GALGAS_moduleMap_2D_element GALGAS_moduleMap_2D_element::extractObject (const GA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_staticArrayPropertyListAST_2D_element::GALGAS_staticArrayPropertyListAST_2D_element (void) :
-mAttribute_mPropertyName (),
-mAttribute_mPropertyType () {
+mProperty_mPropertyName (),
+mProperty_mPropertyType () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11810,8 +11810,8 @@ GALGAS_staticArrayPropertyListAST_2D_element::~ GALGAS_staticArrayPropertyListAS
 
 GALGAS_staticArrayPropertyListAST_2D_element::GALGAS_staticArrayPropertyListAST_2D_element (const GALGAS_lstring & inOperand0,
                                                                                             const GALGAS_staticArrayPropertyTypeAST & inOperand1) :
-mAttribute_mPropertyName (inOperand0),
-mAttribute_mPropertyType (inOperand1) {
+mProperty_mPropertyName (inOperand0),
+mProperty_mPropertyType (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11831,10 +11831,10 @@ GALGAS_staticArrayPropertyListAST_2D_element GALGAS_staticArrayPropertyListAST_2
 typeComparisonResult GALGAS_staticArrayPropertyListAST_2D_element::objectCompare (const GALGAS_staticArrayPropertyListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mPropertyName.objectCompare (inOperand.mAttribute_mPropertyName) ;
+    result = mProperty_mPropertyName.objectCompare (inOperand.mProperty_mPropertyName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPropertyType.objectCompare (inOperand.mAttribute_mPropertyType) ;
+    result = mProperty_mPropertyType.objectCompare (inOperand.mProperty_mPropertyType) ;
   }
   return result ;
 }
@@ -11842,14 +11842,14 @@ typeComparisonResult GALGAS_staticArrayPropertyListAST_2D_element::objectCompare
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_staticArrayPropertyListAST_2D_element::isValid (void) const {
-  return mAttribute_mPropertyName.isValid () && mAttribute_mPropertyType.isValid () ;
+  return mProperty_mPropertyName.isValid () && mProperty_mPropertyType.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_staticArrayPropertyListAST_2D_element::drop (void) {
-  mAttribute_mPropertyName.drop () ;
-  mAttribute_mPropertyType.drop () ;
+  mProperty_mPropertyName.drop () ;
+  mProperty_mPropertyType.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11860,9 +11860,9 @@ void GALGAS_staticArrayPropertyListAST_2D_element::description (C_String & ioStr
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mPropertyName.description (ioString, inIndentation+1) ;
+    mProperty_mPropertyName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPropertyType.description (ioString, inIndentation+1) ;
+    mProperty_mPropertyType.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -11870,13 +11870,13 @@ void GALGAS_staticArrayPropertyListAST_2D_element::description (C_String & ioStr
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_staticArrayPropertyListAST_2D_element::getter_mPropertyName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPropertyName ;
+  return mProperty_mPropertyName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_staticArrayPropertyTypeAST GALGAS_staticArrayPropertyListAST_2D_element::getter_mPropertyType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPropertyType ;
+  return mProperty_mPropertyType ;
 }
 
 
@@ -11927,8 +11927,8 @@ GALGAS_staticArrayPropertyListAST_2D_element GALGAS_staticArrayPropertyListAST_2
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_staticlistMap_2D_element::GALGAS_staticlistMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mStaticlistPropertyList () {
+mProperty_lkey (),
+mProperty_mStaticlistPropertyList () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11940,8 +11940,8 @@ GALGAS_staticlistMap_2D_element::~ GALGAS_staticlistMap_2D_element (void) {
 
 GALGAS_staticlistMap_2D_element::GALGAS_staticlistMap_2D_element (const GALGAS_lstring & inOperand0,
                                                                   const GALGAS_propertyList & inOperand1) :
-mAttribute_lkey (inOperand0),
-mAttribute_mStaticlistPropertyList (inOperand1) {
+mProperty_lkey (inOperand0),
+mProperty_mStaticlistPropertyList (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11968,10 +11968,10 @@ GALGAS_staticlistMap_2D_element GALGAS_staticlistMap_2D_element::constructor_new
 typeComparisonResult GALGAS_staticlistMap_2D_element::objectCompare (const GALGAS_staticlistMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mStaticlistPropertyList.objectCompare (inOperand.mAttribute_mStaticlistPropertyList) ;
+    result = mProperty_mStaticlistPropertyList.objectCompare (inOperand.mProperty_mStaticlistPropertyList) ;
   }
   return result ;
 }
@@ -11979,14 +11979,14 @@ typeComparisonResult GALGAS_staticlistMap_2D_element::objectCompare (const GALGA
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_staticlistMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mStaticlistPropertyList.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mStaticlistPropertyList.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_staticlistMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mStaticlistPropertyList.drop () ;
+  mProperty_lkey.drop () ;
+  mProperty_mStaticlistPropertyList.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11997,9 +11997,9 @@ void GALGAS_staticlistMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mStaticlistPropertyList.description (ioString, inIndentation+1) ;
+    mProperty_mStaticlistPropertyList.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -12007,13 +12007,13 @@ void GALGAS_staticlistMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_staticlistMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_propertyList GALGAS_staticlistMap_2D_element::getter_mStaticlistPropertyList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStaticlistPropertyList ;
+  return mProperty_mStaticlistPropertyList ;
 }
 
 
@@ -12064,8 +12064,8 @@ GALGAS_staticlistMap_2D_element GALGAS_staticlistMap_2D_element::extractObject (
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_extendStaticArrayExpressionListAST_2D_element::GALGAS_extendStaticArrayExpressionListAST_2D_element (void) :
-mAttribute_mExpression (),
-mAttribute_mEndOfExpression () {
+mProperty_mExpression (),
+mProperty_mEndOfExpression () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12077,8 +12077,8 @@ GALGAS_extendStaticArrayExpressionListAST_2D_element::~ GALGAS_extendStaticArray
 
 GALGAS_extendStaticArrayExpressionListAST_2D_element::GALGAS_extendStaticArrayExpressionListAST_2D_element (const GALGAS_extendStaticArrayExpressionAST & inOperand0,
                                                                                                             const GALGAS_location & inOperand1) :
-mAttribute_mExpression (inOperand0),
-mAttribute_mEndOfExpression (inOperand1) {
+mProperty_mExpression (inOperand0),
+mProperty_mEndOfExpression (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12098,10 +12098,10 @@ GALGAS_extendStaticArrayExpressionListAST_2D_element GALGAS_extendStaticArrayExp
 typeComparisonResult GALGAS_extendStaticArrayExpressionListAST_2D_element::objectCompare (const GALGAS_extendStaticArrayExpressionListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mExpression.objectCompare (inOperand.mAttribute_mExpression) ;
+    result = mProperty_mExpression.objectCompare (inOperand.mProperty_mExpression) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mEndOfExpression.objectCompare (inOperand.mAttribute_mEndOfExpression) ;
+    result = mProperty_mEndOfExpression.objectCompare (inOperand.mProperty_mEndOfExpression) ;
   }
   return result ;
 }
@@ -12109,14 +12109,14 @@ typeComparisonResult GALGAS_extendStaticArrayExpressionListAST_2D_element::objec
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_extendStaticArrayExpressionListAST_2D_element::isValid (void) const {
-  return mAttribute_mExpression.isValid () && mAttribute_mEndOfExpression.isValid () ;
+  return mProperty_mExpression.isValid () && mProperty_mEndOfExpression.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_extendStaticArrayExpressionListAST_2D_element::drop (void) {
-  mAttribute_mExpression.drop () ;
-  mAttribute_mEndOfExpression.drop () ;
+  mProperty_mExpression.drop () ;
+  mProperty_mEndOfExpression.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12127,9 +12127,9 @@ void GALGAS_extendStaticArrayExpressionListAST_2D_element::description (C_String
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mExpression.description (ioString, inIndentation+1) ;
+    mProperty_mExpression.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mEndOfExpression.description (ioString, inIndentation+1) ;
+    mProperty_mEndOfExpression.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -12137,13 +12137,13 @@ void GALGAS_extendStaticArrayExpressionListAST_2D_element::description (C_String
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_extendStaticArrayExpressionAST GALGAS_extendStaticArrayExpressionListAST_2D_element::getter_mExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExpression ;
+  return mProperty_mExpression ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_extendStaticArrayExpressionListAST_2D_element::getter_mEndOfExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfExpression ;
+  return mProperty_mEndOfExpression ;
 }
 
 
@@ -12194,8 +12194,8 @@ GALGAS_extendStaticArrayExpressionListAST_2D_element GALGAS_extendStaticArrayExp
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_staticArrayMap_2D_element::GALGAS_staticArrayMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mInvokedFunctionSet () {
+mProperty_lkey (),
+mProperty_mInvokedFunctionSet () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12207,8 +12207,8 @@ GALGAS_staticArrayMap_2D_element::~ GALGAS_staticArrayMap_2D_element (void) {
 
 GALGAS_staticArrayMap_2D_element::GALGAS_staticArrayMap_2D_element (const GALGAS_lstring & inOperand0,
                                                                     const GALGAS_stringset & inOperand1) :
-mAttribute_lkey (inOperand0),
-mAttribute_mInvokedFunctionSet (inOperand1) {
+mProperty_lkey (inOperand0),
+mProperty_mInvokedFunctionSet (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12235,10 +12235,10 @@ GALGAS_staticArrayMap_2D_element GALGAS_staticArrayMap_2D_element::constructor_n
 typeComparisonResult GALGAS_staticArrayMap_2D_element::objectCompare (const GALGAS_staticArrayMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInvokedFunctionSet.objectCompare (inOperand.mAttribute_mInvokedFunctionSet) ;
+    result = mProperty_mInvokedFunctionSet.objectCompare (inOperand.mProperty_mInvokedFunctionSet) ;
   }
   return result ;
 }
@@ -12246,14 +12246,14 @@ typeComparisonResult GALGAS_staticArrayMap_2D_element::objectCompare (const GALG
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_staticArrayMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mInvokedFunctionSet.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mInvokedFunctionSet.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_staticArrayMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mInvokedFunctionSet.drop () ;
+  mProperty_lkey.drop () ;
+  mProperty_mInvokedFunctionSet.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12264,9 +12264,9 @@ void GALGAS_staticArrayMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInvokedFunctionSet.description (ioString, inIndentation+1) ;
+    mProperty_mInvokedFunctionSet.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -12274,13 +12274,13 @@ void GALGAS_staticArrayMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_staticArrayMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_stringset GALGAS_staticArrayMap_2D_element::getter_mInvokedFunctionSet (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInvokedFunctionSet ;
+  return mProperty_mInvokedFunctionSet ;
 }
 
 
@@ -12331,9 +12331,9 @@ GALGAS_staticArrayMap_2D_element GALGAS_staticArrayMap_2D_element::extractObject
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitListAST_2D_element::GALGAS_taskInitListAST_2D_element (void) :
-mAttribute_mTaskInitPriority (),
-mAttribute_mTaskInitInstructionList (),
-mAttribute_mEndOfTaskInitDeclaration () {
+mProperty_mTaskInitPriority (),
+mProperty_mTaskInitInstructionList (),
+mProperty_mEndOfTaskInitDeclaration () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12346,9 +12346,9 @@ GALGAS_taskInitListAST_2D_element::~ GALGAS_taskInitListAST_2D_element (void) {
 GALGAS_taskInitListAST_2D_element::GALGAS_taskInitListAST_2D_element (const GALGAS_lbigint & inOperand0,
                                                                       const GALGAS_instructionListAST & inOperand1,
                                                                       const GALGAS_location & inOperand2) :
-mAttribute_mTaskInitPriority (inOperand0),
-mAttribute_mTaskInitInstructionList (inOperand1),
-mAttribute_mEndOfTaskInitDeclaration (inOperand2) {
+mProperty_mTaskInitPriority (inOperand0),
+mProperty_mTaskInitInstructionList (inOperand1),
+mProperty_mEndOfTaskInitDeclaration (inOperand2) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12377,13 +12377,13 @@ GALGAS_taskInitListAST_2D_element GALGAS_taskInitListAST_2D_element::constructor
 typeComparisonResult GALGAS_taskInitListAST_2D_element::objectCompare (const GALGAS_taskInitListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mTaskInitPriority.objectCompare (inOperand.mAttribute_mTaskInitPriority) ;
+    result = mProperty_mTaskInitPriority.objectCompare (inOperand.mProperty_mTaskInitPriority) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mTaskInitInstructionList.objectCompare (inOperand.mAttribute_mTaskInitInstructionList) ;
+    result = mProperty_mTaskInitInstructionList.objectCompare (inOperand.mProperty_mTaskInitInstructionList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mEndOfTaskInitDeclaration.objectCompare (inOperand.mAttribute_mEndOfTaskInitDeclaration) ;
+    result = mProperty_mEndOfTaskInitDeclaration.objectCompare (inOperand.mProperty_mEndOfTaskInitDeclaration) ;
   }
   return result ;
 }
@@ -12391,15 +12391,15 @@ typeComparisonResult GALGAS_taskInitListAST_2D_element::objectCompare (const GAL
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_taskInitListAST_2D_element::isValid (void) const {
-  return mAttribute_mTaskInitPriority.isValid () && mAttribute_mTaskInitInstructionList.isValid () && mAttribute_mEndOfTaskInitDeclaration.isValid () ;
+  return mProperty_mTaskInitPriority.isValid () && mProperty_mTaskInitInstructionList.isValid () && mProperty_mEndOfTaskInitDeclaration.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitListAST_2D_element::drop (void) {
-  mAttribute_mTaskInitPriority.drop () ;
-  mAttribute_mTaskInitInstructionList.drop () ;
-  mAttribute_mEndOfTaskInitDeclaration.drop () ;
+  mProperty_mTaskInitPriority.drop () ;
+  mProperty_mTaskInitInstructionList.drop () ;
+  mProperty_mEndOfTaskInitDeclaration.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12410,11 +12410,11 @@ void GALGAS_taskInitListAST_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mTaskInitPriority.description (ioString, inIndentation+1) ;
+    mProperty_mTaskInitPriority.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mTaskInitInstructionList.description (ioString, inIndentation+1) ;
+    mProperty_mTaskInitInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mEndOfTaskInitDeclaration.description (ioString, inIndentation+1) ;
+    mProperty_mEndOfTaskInitDeclaration.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -12422,19 +12422,19 @@ void GALGAS_taskInitListAST_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint GALGAS_taskInitListAST_2D_element::getter_mTaskInitPriority (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTaskInitPriority ;
+  return mProperty_mTaskInitPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_taskInitListAST_2D_element::getter_mTaskInitInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTaskInitInstructionList ;
+  return mProperty_mTaskInitInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_taskInitListAST_2D_element::getter_mEndOfTaskInitDeclaration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfTaskInitDeclaration ;
+  return mProperty_mEndOfTaskInitDeclaration ;
 }
 
 
@@ -12485,10 +12485,10 @@ GALGAS_taskInitListAST_2D_element GALGAS_taskInitListAST_2D_element::extractObje
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskInitSortedListAST_2D_element::GALGAS_taskInitSortedListAST_2D_element (void) :
-mAttribute_mTaskInitPriority (),
-mAttribute_mTaskInitInstructionList (),
-mAttribute_mEndOfTaskInitDeclaration (),
-mAttribute_mPriority () {
+mProperty_mTaskInitPriority (),
+mProperty_mTaskInitInstructionList (),
+mProperty_mEndOfTaskInitDeclaration (),
+mProperty_mPriority () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12502,10 +12502,10 @@ GALGAS_taskInitSortedListAST_2D_element::GALGAS_taskInitSortedListAST_2D_element
                                                                                   const GALGAS_instructionListAST & inOperand1,
                                                                                   const GALGAS_location & inOperand2,
                                                                                   const GALGAS_bigint & inOperand3) :
-mAttribute_mTaskInitPriority (inOperand0),
-mAttribute_mTaskInitInstructionList (inOperand1),
-mAttribute_mEndOfTaskInitDeclaration (inOperand2),
-mAttribute_mPriority (inOperand3) {
+mProperty_mTaskInitPriority (inOperand0),
+mProperty_mTaskInitInstructionList (inOperand1),
+mProperty_mEndOfTaskInitDeclaration (inOperand2),
+mProperty_mPriority (inOperand3) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12536,16 +12536,16 @@ GALGAS_taskInitSortedListAST_2D_element GALGAS_taskInitSortedListAST_2D_element:
 typeComparisonResult GALGAS_taskInitSortedListAST_2D_element::objectCompare (const GALGAS_taskInitSortedListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mTaskInitPriority.objectCompare (inOperand.mAttribute_mTaskInitPriority) ;
+    result = mProperty_mTaskInitPriority.objectCompare (inOperand.mProperty_mTaskInitPriority) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mTaskInitInstructionList.objectCompare (inOperand.mAttribute_mTaskInitInstructionList) ;
+    result = mProperty_mTaskInitInstructionList.objectCompare (inOperand.mProperty_mTaskInitInstructionList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mEndOfTaskInitDeclaration.objectCompare (inOperand.mAttribute_mEndOfTaskInitDeclaration) ;
+    result = mProperty_mEndOfTaskInitDeclaration.objectCompare (inOperand.mProperty_mEndOfTaskInitDeclaration) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPriority.objectCompare (inOperand.mAttribute_mPriority) ;
+    result = mProperty_mPriority.objectCompare (inOperand.mProperty_mPriority) ;
   }
   return result ;
 }
@@ -12553,16 +12553,16 @@ typeComparisonResult GALGAS_taskInitSortedListAST_2D_element::objectCompare (con
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_taskInitSortedListAST_2D_element::isValid (void) const {
-  return mAttribute_mTaskInitPriority.isValid () && mAttribute_mTaskInitInstructionList.isValid () && mAttribute_mEndOfTaskInitDeclaration.isValid () && mAttribute_mPriority.isValid () ;
+  return mProperty_mTaskInitPriority.isValid () && mProperty_mTaskInitInstructionList.isValid () && mProperty_mEndOfTaskInitDeclaration.isValid () && mProperty_mPriority.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskInitSortedListAST_2D_element::drop (void) {
-  mAttribute_mTaskInitPriority.drop () ;
-  mAttribute_mTaskInitInstructionList.drop () ;
-  mAttribute_mEndOfTaskInitDeclaration.drop () ;
-  mAttribute_mPriority.drop () ;
+  mProperty_mTaskInitPriority.drop () ;
+  mProperty_mTaskInitInstructionList.drop () ;
+  mProperty_mEndOfTaskInitDeclaration.drop () ;
+  mProperty_mPriority.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12573,13 +12573,13 @@ void GALGAS_taskInitSortedListAST_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mTaskInitPriority.description (ioString, inIndentation+1) ;
+    mProperty_mTaskInitPriority.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mTaskInitInstructionList.description (ioString, inIndentation+1) ;
+    mProperty_mTaskInitInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mEndOfTaskInitDeclaration.description (ioString, inIndentation+1) ;
+    mProperty_mEndOfTaskInitDeclaration.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPriority.description (ioString, inIndentation+1) ;
+    mProperty_mPriority.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -12587,25 +12587,25 @@ void GALGAS_taskInitSortedListAST_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lbigint GALGAS_taskInitSortedListAST_2D_element::getter_mTaskInitPriority (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTaskInitPriority ;
+  return mProperty_mTaskInitPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_taskInitSortedListAST_2D_element::getter_mTaskInitInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTaskInitInstructionList ;
+  return mProperty_mTaskInitInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_taskInitSortedListAST_2D_element::getter_mEndOfTaskInitDeclaration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfTaskInitDeclaration ;
+  return mProperty_mEndOfTaskInitDeclaration ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint GALGAS_taskInitSortedListAST_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPriority ;
+  return mProperty_mPriority ;
 }
 
 
@@ -12656,7 +12656,7 @@ GALGAS_taskInitSortedListAST_2D_element GALGAS_taskInitSortedListAST_2D_element:
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap_2D_element::GALGAS_taskProcedureMap_2D_element (void) :
-mAttribute_lkey () {
+mProperty_lkey () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12667,7 +12667,7 @@ GALGAS_taskProcedureMap_2D_element::~ GALGAS_taskProcedureMap_2D_element (void) 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap_2D_element::GALGAS_taskProcedureMap_2D_element (const GALGAS_lstring & inOperand0) :
-mAttribute_lkey (inOperand0) {
+mProperty_lkey (inOperand0) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12692,7 +12692,7 @@ GALGAS_taskProcedureMap_2D_element GALGAS_taskProcedureMap_2D_element::construct
 typeComparisonResult GALGAS_taskProcedureMap_2D_element::objectCompare (const GALGAS_taskProcedureMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   return result ;
 }
@@ -12700,13 +12700,13 @@ typeComparisonResult GALGAS_taskProcedureMap_2D_element::objectCompare (const GA
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_taskProcedureMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
+  return mProperty_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskProcedureMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
+  mProperty_lkey.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12717,7 +12717,7 @@ void GALGAS_taskProcedureMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -12725,7 +12725,7 @@ void GALGAS_taskProcedureMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_taskProcedureMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 
@@ -12776,8 +12776,8 @@ GALGAS_taskProcedureMap_2D_element GALGAS_taskProcedureMap_2D_element::extractOb
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMap_2D_element::GALGAS_taskMap_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mTaskProcedureMap () {
+mProperty_lkey (),
+mProperty_mTaskProcedureMap () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12789,8 +12789,8 @@ GALGAS_taskMap_2D_element::~ GALGAS_taskMap_2D_element (void) {
 
 GALGAS_taskMap_2D_element::GALGAS_taskMap_2D_element (const GALGAS_lstring & inOperand0,
                                                       const GALGAS_taskProcedureMap & inOperand1) :
-mAttribute_lkey (inOperand0),
-mAttribute_mTaskProcedureMap (inOperand1) {
+mProperty_lkey (inOperand0),
+mProperty_mTaskProcedureMap (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12817,10 +12817,10 @@ GALGAS_taskMap_2D_element GALGAS_taskMap_2D_element::constructor_new (const GALG
 typeComparisonResult GALGAS_taskMap_2D_element::objectCompare (const GALGAS_taskMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mTaskProcedureMap.objectCompare (inOperand.mAttribute_mTaskProcedureMap) ;
+    result = mProperty_mTaskProcedureMap.objectCompare (inOperand.mProperty_mTaskProcedureMap) ;
   }
   return result ;
 }
@@ -12828,14 +12828,14 @@ typeComparisonResult GALGAS_taskMap_2D_element::objectCompare (const GALGAS_task
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_taskMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mTaskProcedureMap.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mTaskProcedureMap.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mTaskProcedureMap.drop () ;
+  mProperty_lkey.drop () ;
+  mProperty_mTaskProcedureMap.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12846,9 +12846,9 @@ void GALGAS_taskMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mTaskProcedureMap.description (ioString, inIndentation+1) ;
+    mProperty_mTaskProcedureMap.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -12856,13 +12856,13 @@ void GALGAS_taskMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_taskMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskProcedureMap GALGAS_taskMap_2D_element::getter_mTaskProcedureMap (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTaskProcedureMap ;
+  return mProperty_mTaskProcedureMap ;
 }
 
 
@@ -12913,12 +12913,12 @@ GALGAS_taskMap_2D_element GALGAS_taskMap_2D_element::extractObject (const GALGAS
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_taskMapIR_2D_element::GALGAS_taskMapIR_2D_element (void) :
-mAttribute_lkey (),
-mAttribute_mTaskType (),
-mAttribute_mPriority (),
-mAttribute_mStackSize (),
-mAttribute_mAllocaList (),
-mAttribute_mInitInstructionListIR () {
+mProperty_lkey (),
+mProperty_mTaskType (),
+mProperty_mPriority (),
+mProperty_mStackSize (),
+mProperty_mAllocaList (),
+mProperty_mInitInstructionListIR () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12934,12 +12934,12 @@ GALGAS_taskMapIR_2D_element::GALGAS_taskMapIR_2D_element (const GALGAS_lstring &
                                                           const GALGAS_bigint & inOperand3,
                                                           const GALGAS_allocaList & inOperand4,
                                                           const GALGAS_instructionListIR & inOperand5) :
-mAttribute_lkey (inOperand0),
-mAttribute_mTaskType (inOperand1),
-mAttribute_mPriority (inOperand2),
-mAttribute_mStackSize (inOperand3),
-mAttribute_mAllocaList (inOperand4),
-mAttribute_mInitInstructionListIR (inOperand5) {
+mProperty_lkey (inOperand0),
+mProperty_mTaskType (inOperand1),
+mProperty_mPriority (inOperand2),
+mProperty_mStackSize (inOperand3),
+mProperty_mAllocaList (inOperand4),
+mProperty_mInitInstructionListIR (inOperand5) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -12974,22 +12974,22 @@ GALGAS_taskMapIR_2D_element GALGAS_taskMapIR_2D_element::constructor_new (const 
 typeComparisonResult GALGAS_taskMapIR_2D_element::objectCompare (const GALGAS_taskMapIR_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mTaskType.objectCompare (inOperand.mAttribute_mTaskType) ;
+    result = mProperty_mTaskType.objectCompare (inOperand.mProperty_mTaskType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPriority.objectCompare (inOperand.mAttribute_mPriority) ;
+    result = mProperty_mPriority.objectCompare (inOperand.mProperty_mPriority) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mStackSize.objectCompare (inOperand.mAttribute_mStackSize) ;
+    result = mProperty_mStackSize.objectCompare (inOperand.mProperty_mStackSize) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAllocaList.objectCompare (inOperand.mAttribute_mAllocaList) ;
+    result = mProperty_mAllocaList.objectCompare (inOperand.mProperty_mAllocaList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInitInstructionListIR.objectCompare (inOperand.mAttribute_mInitInstructionListIR) ;
+    result = mProperty_mInitInstructionListIR.objectCompare (inOperand.mProperty_mInitInstructionListIR) ;
   }
   return result ;
 }
@@ -12997,18 +12997,18 @@ typeComparisonResult GALGAS_taskMapIR_2D_element::objectCompare (const GALGAS_ta
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_taskMapIR_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () && mAttribute_mTaskType.isValid () && mAttribute_mPriority.isValid () && mAttribute_mStackSize.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInitInstructionListIR.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mTaskType.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInitInstructionListIR.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_taskMapIR_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
-  mAttribute_mTaskType.drop () ;
-  mAttribute_mPriority.drop () ;
-  mAttribute_mStackSize.drop () ;
-  mAttribute_mAllocaList.drop () ;
-  mAttribute_mInitInstructionListIR.drop () ;
+  mProperty_lkey.drop () ;
+  mProperty_mTaskType.drop () ;
+  mProperty_mPriority.drop () ;
+  mProperty_mStackSize.drop () ;
+  mProperty_mAllocaList.drop () ;
+  mProperty_mInitInstructionListIR.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13019,17 +13019,17 @@ void GALGAS_taskMapIR_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mTaskType.description (ioString, inIndentation+1) ;
+    mProperty_mTaskType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPriority.description (ioString, inIndentation+1) ;
+    mProperty_mPriority.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mStackSize.description (ioString, inIndentation+1) ;
+    mProperty_mStackSize.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAllocaList.description (ioString, inIndentation+1) ;
+    mProperty_mAllocaList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInitInstructionListIR.description (ioString, inIndentation+1) ;
+    mProperty_mInitInstructionListIR.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -13037,37 +13037,37 @@ void GALGAS_taskMapIR_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_taskMapIR_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_taskMapIR_2D_element::getter_mTaskType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mTaskType ;
+  return mProperty_mTaskType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint GALGAS_taskMapIR_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPriority ;
+  return mProperty_mPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint GALGAS_taskMapIR_2D_element::getter_mStackSize (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mStackSize ;
+  return mProperty_mStackSize ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_taskMapIR_2D_element::getter_mAllocaList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAllocaList ;
+  return mProperty_mAllocaList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_taskMapIR_2D_element::getter_mInitInstructionListIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitInstructionListIR ;
+  return mProperty_mInitInstructionListIR ;
 }
 
 
@@ -13118,7 +13118,7 @@ GALGAS_taskMapIR_2D_element GALGAS_taskMapIR_2D_element::extractObject (const GA
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap_2D_element::GALGAS_panicRoutinePriorityMap_2D_element (void) :
-mAttribute_lkey () {
+mProperty_lkey () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13129,7 +13129,7 @@ GALGAS_panicRoutinePriorityMap_2D_element::~ GALGAS_panicRoutinePriorityMap_2D_e
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_panicRoutinePriorityMap_2D_element::GALGAS_panicRoutinePriorityMap_2D_element (const GALGAS_lstring & inOperand0) :
-mAttribute_lkey (inOperand0) {
+mProperty_lkey (inOperand0) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13154,7 +13154,7 @@ GALGAS_panicRoutinePriorityMap_2D_element GALGAS_panicRoutinePriorityMap_2D_elem
 typeComparisonResult GALGAS_panicRoutinePriorityMap_2D_element::objectCompare (const GALGAS_panicRoutinePriorityMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   return result ;
 }
@@ -13162,13 +13162,13 @@ typeComparisonResult GALGAS_panicRoutinePriorityMap_2D_element::objectCompare (c
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_panicRoutinePriorityMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
+  return mProperty_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_panicRoutinePriorityMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
+  mProperty_lkey.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13179,7 +13179,7 @@ void GALGAS_panicRoutinePriorityMap_2D_element::description (C_String & ioString
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -13187,7 +13187,7 @@ void GALGAS_panicRoutinePriorityMap_2D_element::description (C_String & ioString
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_panicRoutinePriorityMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 
@@ -13238,14 +13238,14 @@ GALGAS_panicRoutinePriorityMap_2D_element GALGAS_panicRoutinePriorityMap_2D_elem
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_svcDeclarationListAST_2D_element::GALGAS_svcDeclarationListAST_2D_element (void) :
-mAttribute_mName (),
-mAttribute_mRoutineKind (),
-mAttribute_mPublic (),
-mAttribute_mAttributeList (),
-mAttribute_mFormalArgumentList (),
-mAttribute_mReturnTypeName (),
-mAttribute_mInstructionList (),
-mAttribute_mEndOfInstructionListLocation () {
+mProperty_mName (),
+mProperty_mRoutineKind (),
+mProperty_mPublic (),
+mProperty_mAttributeList (),
+mProperty_mFormalArgumentList (),
+mProperty_mReturnTypeName (),
+mProperty_mInstructionList (),
+mProperty_mEndOfInstructionListLocation () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13263,14 +13263,14 @@ GALGAS_svcDeclarationListAST_2D_element::GALGAS_svcDeclarationListAST_2D_element
                                                                                   const GALGAS_lstring & inOperand5,
                                                                                   const GALGAS_instructionListAST & inOperand6,
                                                                                   const GALGAS_location & inOperand7) :
-mAttribute_mName (inOperand0),
-mAttribute_mRoutineKind (inOperand1),
-mAttribute_mPublic (inOperand2),
-mAttribute_mAttributeList (inOperand3),
-mAttribute_mFormalArgumentList (inOperand4),
-mAttribute_mReturnTypeName (inOperand5),
-mAttribute_mInstructionList (inOperand6),
-mAttribute_mEndOfInstructionListLocation (inOperand7) {
+mProperty_mName (inOperand0),
+mProperty_mRoutineKind (inOperand1),
+mProperty_mPublic (inOperand2),
+mProperty_mAttributeList (inOperand3),
+mProperty_mFormalArgumentList (inOperand4),
+mProperty_mReturnTypeName (inOperand5),
+mProperty_mInstructionList (inOperand6),
+mProperty_mEndOfInstructionListLocation (inOperand7) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13296,28 +13296,28 @@ GALGAS_svcDeclarationListAST_2D_element GALGAS_svcDeclarationListAST_2D_element:
 typeComparisonResult GALGAS_svcDeclarationListAST_2D_element::objectCompare (const GALGAS_svcDeclarationListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mName.objectCompare (inOperand.mAttribute_mName) ;
+    result = mProperty_mName.objectCompare (inOperand.mProperty_mName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mRoutineKind.objectCompare (inOperand.mAttribute_mRoutineKind) ;
+    result = mProperty_mRoutineKind.objectCompare (inOperand.mProperty_mRoutineKind) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPublic.objectCompare (inOperand.mAttribute_mPublic) ;
+    result = mProperty_mPublic.objectCompare (inOperand.mProperty_mPublic) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAttributeList.objectCompare (inOperand.mAttribute_mAttributeList) ;
+    result = mProperty_mAttributeList.objectCompare (inOperand.mProperty_mAttributeList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentList.objectCompare (inOperand.mAttribute_mFormalArgumentList) ;
+    result = mProperty_mFormalArgumentList.objectCompare (inOperand.mProperty_mFormalArgumentList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mReturnTypeName.objectCompare (inOperand.mAttribute_mReturnTypeName) ;
+    result = mProperty_mReturnTypeName.objectCompare (inOperand.mProperty_mReturnTypeName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInstructionList.objectCompare (inOperand.mAttribute_mInstructionList) ;
+    result = mProperty_mInstructionList.objectCompare (inOperand.mProperty_mInstructionList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mEndOfInstructionListLocation.objectCompare (inOperand.mAttribute_mEndOfInstructionListLocation) ;
+    result = mProperty_mEndOfInstructionListLocation.objectCompare (inOperand.mProperty_mEndOfInstructionListLocation) ;
   }
   return result ;
 }
@@ -13325,20 +13325,20 @@ typeComparisonResult GALGAS_svcDeclarationListAST_2D_element::objectCompare (con
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_svcDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mName.isValid () && mAttribute_mRoutineKind.isValid () && mAttribute_mPublic.isValid () && mAttribute_mAttributeList.isValid () && mAttribute_mFormalArgumentList.isValid () && mAttribute_mReturnTypeName.isValid () && mAttribute_mInstructionList.isValid () && mAttribute_mEndOfInstructionListLocation.isValid () ;
+  return mProperty_mName.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mPublic.isValid () && mProperty_mAttributeList.isValid () && mProperty_mFormalArgumentList.isValid () && mProperty_mReturnTypeName.isValid () && mProperty_mInstructionList.isValid () && mProperty_mEndOfInstructionListLocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_svcDeclarationListAST_2D_element::drop (void) {
-  mAttribute_mName.drop () ;
-  mAttribute_mRoutineKind.drop () ;
-  mAttribute_mPublic.drop () ;
-  mAttribute_mAttributeList.drop () ;
-  mAttribute_mFormalArgumentList.drop () ;
-  mAttribute_mReturnTypeName.drop () ;
-  mAttribute_mInstructionList.drop () ;
-  mAttribute_mEndOfInstructionListLocation.drop () ;
+  mProperty_mName.drop () ;
+  mProperty_mRoutineKind.drop () ;
+  mProperty_mPublic.drop () ;
+  mProperty_mAttributeList.drop () ;
+  mProperty_mFormalArgumentList.drop () ;
+  mProperty_mReturnTypeName.drop () ;
+  mProperty_mInstructionList.drop () ;
+  mProperty_mEndOfInstructionListLocation.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13349,21 +13349,21 @@ void GALGAS_svcDeclarationListAST_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mName.description (ioString, inIndentation+1) ;
+    mProperty_mName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mRoutineKind.description (ioString, inIndentation+1) ;
+    mProperty_mRoutineKind.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPublic.description (ioString, inIndentation+1) ;
+    mProperty_mPublic.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAttributeList.description (ioString, inIndentation+1) ;
+    mProperty_mAttributeList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFormalArgumentList.description (ioString, inIndentation+1) ;
+    mProperty_mFormalArgumentList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mReturnTypeName.description (ioString, inIndentation+1) ;
+    mProperty_mReturnTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInstructionList.description (ioString, inIndentation+1) ;
+    mProperty_mInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mEndOfInstructionListLocation.description (ioString, inIndentation+1) ;
+    mProperty_mEndOfInstructionListLocation.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -13371,49 +13371,49 @@ void GALGAS_svcDeclarationListAST_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_svcDeclarationListAST_2D_element::getter_mName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mName ;
+  return mProperty_mName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_routineKind GALGAS_svcDeclarationListAST_2D_element::getter_mRoutineKind (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRoutineKind ;
+  return mProperty_mRoutineKind ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_svcDeclarationListAST_2D_element::getter_mPublic (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPublic ;
+  return mProperty_mPublic ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstringlist GALGAS_svcDeclarationListAST_2D_element::getter_mAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAttributeList ;
+  return mProperty_mAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_procFormalArgumentList GALGAS_svcDeclarationListAST_2D_element::getter_mFormalArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentList ;
+  return mProperty_mFormalArgumentList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_svcDeclarationListAST_2D_element::getter_mReturnTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mReturnTypeName ;
+  return mProperty_mReturnTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_svcDeclarationListAST_2D_element::getter_mInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionList ;
+  return mProperty_mInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_svcDeclarationListAST_2D_element::getter_mEndOfInstructionListLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfInstructionListLocation ;
+  return mProperty_mEndOfInstructionListLocation ;
 }
 
 
@@ -13464,7 +13464,7 @@ GALGAS_svcDeclarationListAST_2D_element GALGAS_svcDeclarationListAST_2D_element:
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap_2D_element::GALGAS_bootRoutinePriorityMap_2D_element (void) :
-mAttribute_lkey () {
+mProperty_lkey () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13475,7 +13475,7 @@ GALGAS_bootRoutinePriorityMap_2D_element::~ GALGAS_bootRoutinePriorityMap_2D_ele
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bootRoutinePriorityMap_2D_element::GALGAS_bootRoutinePriorityMap_2D_element (const GALGAS_lstring & inOperand0) :
-mAttribute_lkey (inOperand0) {
+mProperty_lkey (inOperand0) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13500,7 +13500,7 @@ GALGAS_bootRoutinePriorityMap_2D_element GALGAS_bootRoutinePriorityMap_2D_elemen
 typeComparisonResult GALGAS_bootRoutinePriorityMap_2D_element::objectCompare (const GALGAS_bootRoutinePriorityMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   return result ;
 }
@@ -13508,13 +13508,13 @@ typeComparisonResult GALGAS_bootRoutinePriorityMap_2D_element::objectCompare (co
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_bootRoutinePriorityMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
+  return mProperty_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_bootRoutinePriorityMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
+  mProperty_lkey.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13525,7 +13525,7 @@ void GALGAS_bootRoutinePriorityMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -13533,7 +13533,7 @@ void GALGAS_bootRoutinePriorityMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_bootRoutinePriorityMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 
@@ -13584,7 +13584,7 @@ GALGAS_bootRoutinePriorityMap_2D_element GALGAS_bootRoutinePriorityMap_2D_elemen
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initRoutineMap_2D_element::GALGAS_initRoutineMap_2D_element (void) :
-mAttribute_lkey () {
+mProperty_lkey () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13595,7 +13595,7 @@ GALGAS_initRoutineMap_2D_element::~ GALGAS_initRoutineMap_2D_element (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initRoutineMap_2D_element::GALGAS_initRoutineMap_2D_element (const GALGAS_lstring & inOperand0) :
-mAttribute_lkey (inOperand0) {
+mProperty_lkey (inOperand0) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13620,7 +13620,7 @@ GALGAS_initRoutineMap_2D_element GALGAS_initRoutineMap_2D_element::constructor_n
 typeComparisonResult GALGAS_initRoutineMap_2D_element::objectCompare (const GALGAS_initRoutineMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   return result ;
 }
@@ -13628,13 +13628,13 @@ typeComparisonResult GALGAS_initRoutineMap_2D_element::objectCompare (const GALG
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_initRoutineMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
+  return mProperty_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_initRoutineMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
+  mProperty_lkey.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13645,7 +13645,7 @@ void GALGAS_initRoutineMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -13653,7 +13653,7 @@ void GALGAS_initRoutineMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_initRoutineMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 
@@ -13704,7 +13704,7 @@ GALGAS_initRoutineMap_2D_element GALGAS_initRoutineMap_2D_element::extractObject
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initRoutinePriorityMap_2D_element::GALGAS_initRoutinePriorityMap_2D_element (void) :
-mAttribute_lkey () {
+mProperty_lkey () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13715,7 +13715,7 @@ GALGAS_initRoutinePriorityMap_2D_element::~ GALGAS_initRoutinePriorityMap_2D_ele
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initRoutinePriorityMap_2D_element::GALGAS_initRoutinePriorityMap_2D_element (const GALGAS_lstring & inOperand0) :
-mAttribute_lkey (inOperand0) {
+mProperty_lkey (inOperand0) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13740,7 +13740,7 @@ GALGAS_initRoutinePriorityMap_2D_element GALGAS_initRoutinePriorityMap_2D_elemen
 typeComparisonResult GALGAS_initRoutinePriorityMap_2D_element::objectCompare (const GALGAS_initRoutinePriorityMap_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_lkey.objectCompare (inOperand.mAttribute_lkey) ;
+    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   return result ;
 }
@@ -13748,13 +13748,13 @@ typeComparisonResult GALGAS_initRoutinePriorityMap_2D_element::objectCompare (co
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_initRoutinePriorityMap_2D_element::isValid (void) const {
-  return mAttribute_lkey.isValid () ;
+  return mProperty_lkey.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_initRoutinePriorityMap_2D_element::drop (void) {
-  mAttribute_lkey.drop () ;
+  mProperty_lkey.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13765,7 +13765,7 @@ void GALGAS_initRoutinePriorityMap_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_lkey.description (ioString, inIndentation+1) ;
+    mProperty_lkey.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -13773,7 +13773,7 @@ void GALGAS_initRoutinePriorityMap_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_initRoutinePriorityMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_lkey ;
+  return mProperty_lkey ;
 }
 
 
@@ -13824,12 +13824,12 @@ GALGAS_initRoutinePriorityMap_2D_element GALGAS_initRoutinePriorityMap_2D_elemen
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_initListIR_2D_element::GALGAS_initListIR_2D_element (void) :
-mAttribute_mSelfType (),
-mAttribute_mGlobalVariable (),
-mAttribute_mInitRequiredByProcList (),
-mAttribute_mPriority (),
-mAttribute_mAllocaList (),
-mAttribute_mInstructionListIR () {
+mProperty_mSelfType (),
+mProperty_mGlobalVariable (),
+mProperty_mInitRequiredByProcList (),
+mProperty_mPriority (),
+mProperty_mAllocaList (),
+mProperty_mInstructionListIR () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13845,12 +13845,12 @@ GALGAS_initListIR_2D_element::GALGAS_initListIR_2D_element (const GALGAS_unified
                                                             const GALGAS_bigint & inOperand3,
                                                             const GALGAS_allocaList & inOperand4,
                                                             const GALGAS_instructionListIR & inOperand5) :
-mAttribute_mSelfType (inOperand0),
-mAttribute_mGlobalVariable (inOperand1),
-mAttribute_mInitRequiredByProcList (inOperand2),
-mAttribute_mPriority (inOperand3),
-mAttribute_mAllocaList (inOperand4),
-mAttribute_mInstructionListIR (inOperand5) {
+mProperty_mSelfType (inOperand0),
+mProperty_mGlobalVariable (inOperand1),
+mProperty_mInitRequiredByProcList (inOperand2),
+mProperty_mPriority (inOperand3),
+mProperty_mAllocaList (inOperand4),
+mProperty_mInstructionListIR (inOperand5) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13885,22 +13885,22 @@ GALGAS_initListIR_2D_element GALGAS_initListIR_2D_element::constructor_new (cons
 typeComparisonResult GALGAS_initListIR_2D_element::objectCompare (const GALGAS_initListIR_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mSelfType.objectCompare (inOperand.mAttribute_mSelfType) ;
+    result = mProperty_mSelfType.objectCompare (inOperand.mProperty_mSelfType) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVariable.objectCompare (inOperand.mAttribute_mGlobalVariable) ;
+    result = mProperty_mGlobalVariable.objectCompare (inOperand.mProperty_mGlobalVariable) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInitRequiredByProcList.objectCompare (inOperand.mAttribute_mInitRequiredByProcList) ;
+    result = mProperty_mInitRequiredByProcList.objectCompare (inOperand.mProperty_mInitRequiredByProcList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPriority.objectCompare (inOperand.mAttribute_mPriority) ;
+    result = mProperty_mPriority.objectCompare (inOperand.mProperty_mPriority) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mAllocaList.objectCompare (inOperand.mAttribute_mAllocaList) ;
+    result = mProperty_mAllocaList.objectCompare (inOperand.mProperty_mAllocaList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mInstructionListIR.objectCompare (inOperand.mAttribute_mInstructionListIR) ;
+    result = mProperty_mInstructionListIR.objectCompare (inOperand.mProperty_mInstructionListIR) ;
   }
   return result ;
 }
@@ -13908,18 +13908,18 @@ typeComparisonResult GALGAS_initListIR_2D_element::objectCompare (const GALGAS_i
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_initListIR_2D_element::isValid (void) const {
-  return mAttribute_mSelfType.isValid () && mAttribute_mGlobalVariable.isValid () && mAttribute_mInitRequiredByProcList.isValid () && mAttribute_mPriority.isValid () && mAttribute_mAllocaList.isValid () && mAttribute_mInstructionListIR.isValid () ;
+  return mProperty_mSelfType.isValid () && mProperty_mGlobalVariable.isValid () && mProperty_mInitRequiredByProcList.isValid () && mProperty_mPriority.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInstructionListIR.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_initListIR_2D_element::drop (void) {
-  mAttribute_mSelfType.drop () ;
-  mAttribute_mGlobalVariable.drop () ;
-  mAttribute_mInitRequiredByProcList.drop () ;
-  mAttribute_mPriority.drop () ;
-  mAttribute_mAllocaList.drop () ;
-  mAttribute_mInstructionListIR.drop () ;
+  mProperty_mSelfType.drop () ;
+  mProperty_mGlobalVariable.drop () ;
+  mProperty_mInitRequiredByProcList.drop () ;
+  mProperty_mPriority.drop () ;
+  mProperty_mAllocaList.drop () ;
+  mProperty_mInstructionListIR.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -13930,17 +13930,17 @@ void GALGAS_initListIR_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mSelfType.description (ioString, inIndentation+1) ;
+    mProperty_mSelfType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGlobalVariable.description (ioString, inIndentation+1) ;
+    mProperty_mGlobalVariable.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInitRequiredByProcList.description (ioString, inIndentation+1) ;
+    mProperty_mInitRequiredByProcList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPriority.description (ioString, inIndentation+1) ;
+    mProperty_mPriority.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mAllocaList.description (ioString, inIndentation+1) ;
+    mProperty_mAllocaList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mInstructionListIR.description (ioString, inIndentation+1) ;
+    mProperty_mInstructionListIR.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -13948,37 +13948,37 @@ void GALGAS_initListIR_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_unifiedTypeMap_2D_proxy GALGAS_initListIR_2D_element::getter_mSelfType (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSelfType ;
+  return mProperty_mSelfType ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string GALGAS_initListIR_2D_element::getter_mGlobalVariable (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVariable ;
+  return mProperty_mGlobalVariable ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstringlist GALGAS_initListIR_2D_element::getter_mInitRequiredByProcList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInitRequiredByProcList ;
+  return mProperty_mInitRequiredByProcList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bigint GALGAS_initListIR_2D_element::getter_mPriority (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPriority ;
+  return mProperty_mPriority ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_allocaList GALGAS_initListIR_2D_element::getter_mAllocaList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mAllocaList ;
+  return mProperty_mAllocaList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListIR GALGAS_initListIR_2D_element::getter_mInstructionListIR (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mInstructionListIR ;
+  return mProperty_mInstructionListIR ;
 }
 
 
@@ -14029,14 +14029,14 @@ GALGAS_initListIR_2D_element GALGAS_initListIR_2D_element::extractObject (const 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_functionDeclarationListAST_2D_element::GALGAS_functionDeclarationListAST_2D_element (void) :
-mAttribute_mMode (),
-mAttribute_mPublicFunction (),
-mAttribute_mFunctionName (),
-mAttribute_mFunctionAttributeList (),
-mAttribute_mFunctionFormalArgumentList (),
-mAttribute_mFunctionReturnTypeName (),
-mAttribute_mFunctionInstructionList (),
-mAttribute_mEndOfFunctionDeclaration () {
+mProperty_mMode (),
+mProperty_mPublicFunction (),
+mProperty_mFunctionName (),
+mProperty_mFunctionAttributeList (),
+mProperty_mFunctionFormalArgumentList (),
+mProperty_mFunctionReturnTypeName (),
+mProperty_mFunctionInstructionList (),
+mProperty_mEndOfFunctionDeclaration () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14054,14 +14054,14 @@ GALGAS_functionDeclarationListAST_2D_element::GALGAS_functionDeclarationListAST_
                                                                                             const GALGAS_lstring & inOperand5,
                                                                                             const GALGAS_instructionListAST & inOperand6,
                                                                                             const GALGAS_location & inOperand7) :
-mAttribute_mMode (inOperand0),
-mAttribute_mPublicFunction (inOperand1),
-mAttribute_mFunctionName (inOperand2),
-mAttribute_mFunctionAttributeList (inOperand3),
-mAttribute_mFunctionFormalArgumentList (inOperand4),
-mAttribute_mFunctionReturnTypeName (inOperand5),
-mAttribute_mFunctionInstructionList (inOperand6),
-mAttribute_mEndOfFunctionDeclaration (inOperand7) {
+mProperty_mMode (inOperand0),
+mProperty_mPublicFunction (inOperand1),
+mProperty_mFunctionName (inOperand2),
+mProperty_mFunctionAttributeList (inOperand3),
+mProperty_mFunctionFormalArgumentList (inOperand4),
+mProperty_mFunctionReturnTypeName (inOperand5),
+mProperty_mFunctionInstructionList (inOperand6),
+mProperty_mEndOfFunctionDeclaration (inOperand7) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14087,28 +14087,28 @@ GALGAS_functionDeclarationListAST_2D_element GALGAS_functionDeclarationListAST_2
 typeComparisonResult GALGAS_functionDeclarationListAST_2D_element::objectCompare (const GALGAS_functionDeclarationListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mMode.objectCompare (inOperand.mAttribute_mMode) ;
+    result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mPublicFunction.objectCompare (inOperand.mAttribute_mPublicFunction) ;
+    result = mProperty_mPublicFunction.objectCompare (inOperand.mProperty_mPublicFunction) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFunctionName.objectCompare (inOperand.mAttribute_mFunctionName) ;
+    result = mProperty_mFunctionName.objectCompare (inOperand.mProperty_mFunctionName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFunctionAttributeList.objectCompare (inOperand.mAttribute_mFunctionAttributeList) ;
+    result = mProperty_mFunctionAttributeList.objectCompare (inOperand.mProperty_mFunctionAttributeList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFunctionFormalArgumentList.objectCompare (inOperand.mAttribute_mFunctionFormalArgumentList) ;
+    result = mProperty_mFunctionFormalArgumentList.objectCompare (inOperand.mProperty_mFunctionFormalArgumentList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFunctionReturnTypeName.objectCompare (inOperand.mAttribute_mFunctionReturnTypeName) ;
+    result = mProperty_mFunctionReturnTypeName.objectCompare (inOperand.mProperty_mFunctionReturnTypeName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFunctionInstructionList.objectCompare (inOperand.mAttribute_mFunctionInstructionList) ;
+    result = mProperty_mFunctionInstructionList.objectCompare (inOperand.mProperty_mFunctionInstructionList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mEndOfFunctionDeclaration.objectCompare (inOperand.mAttribute_mEndOfFunctionDeclaration) ;
+    result = mProperty_mEndOfFunctionDeclaration.objectCompare (inOperand.mProperty_mEndOfFunctionDeclaration) ;
   }
   return result ;
 }
@@ -14116,20 +14116,20 @@ typeComparisonResult GALGAS_functionDeclarationListAST_2D_element::objectCompare
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_functionDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mMode.isValid () && mAttribute_mPublicFunction.isValid () && mAttribute_mFunctionName.isValid () && mAttribute_mFunctionAttributeList.isValid () && mAttribute_mFunctionFormalArgumentList.isValid () && mAttribute_mFunctionReturnTypeName.isValid () && mAttribute_mFunctionInstructionList.isValid () && mAttribute_mEndOfFunctionDeclaration.isValid () ;
+  return mProperty_mMode.isValid () && mProperty_mPublicFunction.isValid () && mProperty_mFunctionName.isValid () && mProperty_mFunctionAttributeList.isValid () && mProperty_mFunctionFormalArgumentList.isValid () && mProperty_mFunctionReturnTypeName.isValid () && mProperty_mFunctionInstructionList.isValid () && mProperty_mEndOfFunctionDeclaration.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_functionDeclarationListAST_2D_element::drop (void) {
-  mAttribute_mMode.drop () ;
-  mAttribute_mPublicFunction.drop () ;
-  mAttribute_mFunctionName.drop () ;
-  mAttribute_mFunctionAttributeList.drop () ;
-  mAttribute_mFunctionFormalArgumentList.drop () ;
-  mAttribute_mFunctionReturnTypeName.drop () ;
-  mAttribute_mFunctionInstructionList.drop () ;
-  mAttribute_mEndOfFunctionDeclaration.drop () ;
+  mProperty_mMode.drop () ;
+  mProperty_mPublicFunction.drop () ;
+  mProperty_mFunctionName.drop () ;
+  mProperty_mFunctionAttributeList.drop () ;
+  mProperty_mFunctionFormalArgumentList.drop () ;
+  mProperty_mFunctionReturnTypeName.drop () ;
+  mProperty_mFunctionInstructionList.drop () ;
+  mProperty_mEndOfFunctionDeclaration.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14140,21 +14140,21 @@ void GALGAS_functionDeclarationListAST_2D_element::description (C_String & ioStr
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mMode.description (ioString, inIndentation+1) ;
+    mProperty_mMode.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mPublicFunction.description (ioString, inIndentation+1) ;
+    mProperty_mPublicFunction.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFunctionName.description (ioString, inIndentation+1) ;
+    mProperty_mFunctionName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFunctionAttributeList.description (ioString, inIndentation+1) ;
+    mProperty_mFunctionAttributeList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFunctionFormalArgumentList.description (ioString, inIndentation+1) ;
+    mProperty_mFunctionFormalArgumentList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFunctionReturnTypeName.description (ioString, inIndentation+1) ;
+    mProperty_mFunctionReturnTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFunctionInstructionList.description (ioString, inIndentation+1) ;
+    mProperty_mFunctionInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mEndOfFunctionDeclaration.description (ioString, inIndentation+1) ;
+    mProperty_mEndOfFunctionDeclaration.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -14162,49 +14162,49 @@ void GALGAS_functionDeclarationListAST_2D_element::description (C_String & ioStr
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_mode GALGAS_functionDeclarationListAST_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMode ;
+  return mProperty_mMode ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_functionDeclarationListAST_2D_element::getter_mPublicFunction (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mPublicFunction ;
+  return mProperty_mPublicFunction ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_functionDeclarationListAST_2D_element::getter_mFunctionName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionName ;
+  return mProperty_mFunctionName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstringlist GALGAS_functionDeclarationListAST_2D_element::getter_mFunctionAttributeList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionAttributeList ;
+  return mProperty_mFunctionAttributeList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_procFormalArgumentList GALGAS_functionDeclarationListAST_2D_element::getter_mFunctionFormalArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionFormalArgumentList ;
+  return mProperty_mFunctionFormalArgumentList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_functionDeclarationListAST_2D_element::getter_mFunctionReturnTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionReturnTypeName ;
+  return mProperty_mFunctionReturnTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_functionDeclarationListAST_2D_element::getter_mFunctionInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFunctionInstructionList ;
+  return mProperty_mFunctionInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_functionDeclarationListAST_2D_element::getter_mEndOfFunctionDeclaration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfFunctionDeclaration ;
+  return mProperty_mEndOfFunctionDeclaration ;
 }
 
 
@@ -14255,10 +14255,10 @@ GALGAS_functionDeclarationListAST_2D_element GALGAS_functionDeclarationListAST_2
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_procFormalArgumentList_2D_element::GALGAS_procFormalArgumentList_2D_element (void) :
-mAttribute_mFormalArgumentPassingMode (),
-mAttribute_mSelector (),
-mAttribute_mFormalArgumentTypeName (),
-mAttribute_mFormalArgumentName () {
+mProperty_mFormalArgumentPassingMode (),
+mProperty_mSelector (),
+mProperty_mFormalArgumentTypeName (),
+mProperty_mFormalArgumentName () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14272,10 +14272,10 @@ GALGAS_procFormalArgumentList_2D_element::GALGAS_procFormalArgumentList_2D_eleme
                                                                                     const GALGAS_lstring & inOperand1,
                                                                                     const GALGAS_lstring & inOperand2,
                                                                                     const GALGAS_lstring & inOperand3) :
-mAttribute_mFormalArgumentPassingMode (inOperand0),
-mAttribute_mSelector (inOperand1),
-mAttribute_mFormalArgumentTypeName (inOperand2),
-mAttribute_mFormalArgumentName (inOperand3) {
+mProperty_mFormalArgumentPassingMode (inOperand0),
+mProperty_mSelector (inOperand1),
+mProperty_mFormalArgumentTypeName (inOperand2),
+mProperty_mFormalArgumentName (inOperand3) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14297,16 +14297,16 @@ GALGAS_procFormalArgumentList_2D_element GALGAS_procFormalArgumentList_2D_elemen
 typeComparisonResult GALGAS_procFormalArgumentList_2D_element::objectCompare (const GALGAS_procFormalArgumentList_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentPassingMode.objectCompare (inOperand.mAttribute_mFormalArgumentPassingMode) ;
+    result = mProperty_mFormalArgumentPassingMode.objectCompare (inOperand.mProperty_mFormalArgumentPassingMode) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSelector.objectCompare (inOperand.mAttribute_mSelector) ;
+    result = mProperty_mSelector.objectCompare (inOperand.mProperty_mSelector) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentTypeName.objectCompare (inOperand.mAttribute_mFormalArgumentTypeName) ;
+    result = mProperty_mFormalArgumentTypeName.objectCompare (inOperand.mProperty_mFormalArgumentTypeName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mFormalArgumentName.objectCompare (inOperand.mAttribute_mFormalArgumentName) ;
+    result = mProperty_mFormalArgumentName.objectCompare (inOperand.mProperty_mFormalArgumentName) ;
   }
   return result ;
 }
@@ -14314,16 +14314,16 @@ typeComparisonResult GALGAS_procFormalArgumentList_2D_element::objectCompare (co
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_procFormalArgumentList_2D_element::isValid (void) const {
-  return mAttribute_mFormalArgumentPassingMode.isValid () && mAttribute_mSelector.isValid () && mAttribute_mFormalArgumentTypeName.isValid () && mAttribute_mFormalArgumentName.isValid () ;
+  return mProperty_mFormalArgumentPassingMode.isValid () && mProperty_mSelector.isValid () && mProperty_mFormalArgumentTypeName.isValid () && mProperty_mFormalArgumentName.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_procFormalArgumentList_2D_element::drop (void) {
-  mAttribute_mFormalArgumentPassingMode.drop () ;
-  mAttribute_mSelector.drop () ;
-  mAttribute_mFormalArgumentTypeName.drop () ;
-  mAttribute_mFormalArgumentName.drop () ;
+  mProperty_mFormalArgumentPassingMode.drop () ;
+  mProperty_mSelector.drop () ;
+  mProperty_mFormalArgumentTypeName.drop () ;
+  mProperty_mFormalArgumentName.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14334,13 +14334,13 @@ void GALGAS_procFormalArgumentList_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mFormalArgumentPassingMode.description (ioString, inIndentation+1) ;
+    mProperty_mFormalArgumentPassingMode.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSelector.description (ioString, inIndentation+1) ;
+    mProperty_mSelector.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFormalArgumentTypeName.description (ioString, inIndentation+1) ;
+    mProperty_mFormalArgumentTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mFormalArgumentName.description (ioString, inIndentation+1) ;
+    mProperty_mFormalArgumentName.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -14348,25 +14348,25 @@ void GALGAS_procFormalArgumentList_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_procFormalArgumentPassingMode GALGAS_procFormalArgumentList_2D_element::getter_mFormalArgumentPassingMode (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentPassingMode ;
+  return mProperty_mFormalArgumentPassingMode ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_procFormalArgumentList_2D_element::getter_mSelector (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSelector ;
+  return mProperty_mSelector ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_procFormalArgumentList_2D_element::getter_mFormalArgumentTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentTypeName ;
+  return mProperty_mFormalArgumentTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_procFormalArgumentList_2D_element::getter_mFormalArgumentName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mFormalArgumentName ;
+  return mProperty_mFormalArgumentName ;
 }
 
 
@@ -14417,11 +14417,11 @@ GALGAS_procFormalArgumentList_2D_element GALGAS_procFormalArgumentList_2D_elemen
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_requiredProcedureDeclarationListAST_2D_element::GALGAS_requiredProcedureDeclarationListAST_2D_element (void) :
-mAttribute_mRequiredProcedureName (),
-mAttribute_mMode (),
-mAttribute_mIsGlobal (),
-mAttribute_mProcFormalArgumentList (),
-mAttribute_mEndOfProcLocation () {
+mProperty_mRequiredProcedureName (),
+mProperty_mMode (),
+mProperty_mIsGlobal (),
+mProperty_mProcFormalArgumentList (),
+mProperty_mEndOfProcLocation () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14436,11 +14436,11 @@ GALGAS_requiredProcedureDeclarationListAST_2D_element::GALGAS_requiredProcedureD
                                                                                                               const GALGAS_bool & inOperand2,
                                                                                                               const GALGAS_procFormalArgumentList & inOperand3,
                                                                                                               const GALGAS_location & inOperand4) :
-mAttribute_mRequiredProcedureName (inOperand0),
-mAttribute_mMode (inOperand1),
-mAttribute_mIsGlobal (inOperand2),
-mAttribute_mProcFormalArgumentList (inOperand3),
-mAttribute_mEndOfProcLocation (inOperand4) {
+mProperty_mRequiredProcedureName (inOperand0),
+mProperty_mMode (inOperand1),
+mProperty_mIsGlobal (inOperand2),
+mProperty_mProcFormalArgumentList (inOperand3),
+mProperty_mEndOfProcLocation (inOperand4) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14463,19 +14463,19 @@ GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDe
 typeComparisonResult GALGAS_requiredProcedureDeclarationListAST_2D_element::objectCompare (const GALGAS_requiredProcedureDeclarationListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mRequiredProcedureName.objectCompare (inOperand.mAttribute_mRequiredProcedureName) ;
+    result = mProperty_mRequiredProcedureName.objectCompare (inOperand.mProperty_mRequiredProcedureName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mMode.objectCompare (inOperand.mAttribute_mMode) ;
+    result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mIsGlobal.objectCompare (inOperand.mAttribute_mIsGlobal) ;
+    result = mProperty_mIsGlobal.objectCompare (inOperand.mProperty_mIsGlobal) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mProcFormalArgumentList.objectCompare (inOperand.mAttribute_mProcFormalArgumentList) ;
+    result = mProperty_mProcFormalArgumentList.objectCompare (inOperand.mProperty_mProcFormalArgumentList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mEndOfProcLocation.objectCompare (inOperand.mAttribute_mEndOfProcLocation) ;
+    result = mProperty_mEndOfProcLocation.objectCompare (inOperand.mProperty_mEndOfProcLocation) ;
   }
   return result ;
 }
@@ -14483,17 +14483,17 @@ typeComparisonResult GALGAS_requiredProcedureDeclarationListAST_2D_element::obje
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_requiredProcedureDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mRequiredProcedureName.isValid () && mAttribute_mMode.isValid () && mAttribute_mIsGlobal.isValid () && mAttribute_mProcFormalArgumentList.isValid () && mAttribute_mEndOfProcLocation.isValid () ;
+  return mProperty_mRequiredProcedureName.isValid () && mProperty_mMode.isValid () && mProperty_mIsGlobal.isValid () && mProperty_mProcFormalArgumentList.isValid () && mProperty_mEndOfProcLocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_requiredProcedureDeclarationListAST_2D_element::drop (void) {
-  mAttribute_mRequiredProcedureName.drop () ;
-  mAttribute_mMode.drop () ;
-  mAttribute_mIsGlobal.drop () ;
-  mAttribute_mProcFormalArgumentList.drop () ;
-  mAttribute_mEndOfProcLocation.drop () ;
+  mProperty_mRequiredProcedureName.drop () ;
+  mProperty_mMode.drop () ;
+  mProperty_mIsGlobal.drop () ;
+  mProperty_mProcFormalArgumentList.drop () ;
+  mProperty_mEndOfProcLocation.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14504,15 +14504,15 @@ void GALGAS_requiredProcedureDeclarationListAST_2D_element::description (C_Strin
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mRequiredProcedureName.description (ioString, inIndentation+1) ;
+    mProperty_mRequiredProcedureName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mMode.description (ioString, inIndentation+1) ;
+    mProperty_mMode.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mIsGlobal.description (ioString, inIndentation+1) ;
+    mProperty_mIsGlobal.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mProcFormalArgumentList.description (ioString, inIndentation+1) ;
+    mProperty_mProcFormalArgumentList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mEndOfProcLocation.description (ioString, inIndentation+1) ;
+    mProperty_mEndOfProcLocation.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -14520,31 +14520,31 @@ void GALGAS_requiredProcedureDeclarationListAST_2D_element::description (C_Strin
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mRequiredProcedureName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mRequiredProcedureName ;
+  return mProperty_mRequiredProcedureName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_mode GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMode ;
+  return mProperty_mMode ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_bool GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mIsGlobal (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mIsGlobal ;
+  return mProperty_mIsGlobal ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_procFormalArgumentList GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mProcFormalArgumentList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mProcFormalArgumentList ;
+  return mProperty_mProcFormalArgumentList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_requiredProcedureDeclarationListAST_2D_element::getter_mEndOfProcLocation (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfProcLocation ;
+  return mProperty_mEndOfProcLocation ;
 }
 
 
@@ -14595,12 +14595,12 @@ GALGAS_requiredProcedureDeclarationListAST_2D_element GALGAS_requiredProcedureDe
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_isrDeclarationListAST_2D_element::GALGAS_isrDeclarationListAST_2D_element (void) :
-mAttribute_mISRName (),
-mAttribute_mMode (),
-mAttribute_mSelfTypeName (),
-mAttribute_mGlobalVariableName (),
-mAttribute_mISRInstructionList (),
-mAttribute_mEndOfISRDeclaration () {
+mProperty_mISRName (),
+mProperty_mMode (),
+mProperty_mSelfTypeName (),
+mProperty_mGlobalVariableName (),
+mProperty_mISRInstructionList (),
+mProperty_mEndOfISRDeclaration () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14616,12 +14616,12 @@ GALGAS_isrDeclarationListAST_2D_element::GALGAS_isrDeclarationListAST_2D_element
                                                                                   const GALGAS_string & inOperand3,
                                                                                   const GALGAS_instructionListAST & inOperand4,
                                                                                   const GALGAS_location & inOperand5) :
-mAttribute_mISRName (inOperand0),
-mAttribute_mMode (inOperand1),
-mAttribute_mSelfTypeName (inOperand2),
-mAttribute_mGlobalVariableName (inOperand3),
-mAttribute_mISRInstructionList (inOperand4),
-mAttribute_mEndOfISRDeclaration (inOperand5) {
+mProperty_mISRName (inOperand0),
+mProperty_mMode (inOperand1),
+mProperty_mSelfTypeName (inOperand2),
+mProperty_mGlobalVariableName (inOperand3),
+mProperty_mISRInstructionList (inOperand4),
+mProperty_mEndOfISRDeclaration (inOperand5) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14645,22 +14645,22 @@ GALGAS_isrDeclarationListAST_2D_element GALGAS_isrDeclarationListAST_2D_element:
 typeComparisonResult GALGAS_isrDeclarationListAST_2D_element::objectCompare (const GALGAS_isrDeclarationListAST_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mISRName.objectCompare (inOperand.mAttribute_mISRName) ;
+    result = mProperty_mISRName.objectCompare (inOperand.mProperty_mISRName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mMode.objectCompare (inOperand.mAttribute_mMode) ;
+    result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mSelfTypeName.objectCompare (inOperand.mAttribute_mSelfTypeName) ;
+    result = mProperty_mSelfTypeName.objectCompare (inOperand.mProperty_mSelfTypeName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mGlobalVariableName.objectCompare (inOperand.mAttribute_mGlobalVariableName) ;
+    result = mProperty_mGlobalVariableName.objectCompare (inOperand.mProperty_mGlobalVariableName) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mISRInstructionList.objectCompare (inOperand.mAttribute_mISRInstructionList) ;
+    result = mProperty_mISRInstructionList.objectCompare (inOperand.mProperty_mISRInstructionList) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mEndOfISRDeclaration.objectCompare (inOperand.mAttribute_mEndOfISRDeclaration) ;
+    result = mProperty_mEndOfISRDeclaration.objectCompare (inOperand.mProperty_mEndOfISRDeclaration) ;
   }
   return result ;
 }
@@ -14668,18 +14668,18 @@ typeComparisonResult GALGAS_isrDeclarationListAST_2D_element::objectCompare (con
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_isrDeclarationListAST_2D_element::isValid (void) const {
-  return mAttribute_mISRName.isValid () && mAttribute_mMode.isValid () && mAttribute_mSelfTypeName.isValid () && mAttribute_mGlobalVariableName.isValid () && mAttribute_mISRInstructionList.isValid () && mAttribute_mEndOfISRDeclaration.isValid () ;
+  return mProperty_mISRName.isValid () && mProperty_mMode.isValid () && mProperty_mSelfTypeName.isValid () && mProperty_mGlobalVariableName.isValid () && mProperty_mISRInstructionList.isValid () && mProperty_mEndOfISRDeclaration.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_isrDeclarationListAST_2D_element::drop (void) {
-  mAttribute_mISRName.drop () ;
-  mAttribute_mMode.drop () ;
-  mAttribute_mSelfTypeName.drop () ;
-  mAttribute_mGlobalVariableName.drop () ;
-  mAttribute_mISRInstructionList.drop () ;
-  mAttribute_mEndOfISRDeclaration.drop () ;
+  mProperty_mISRName.drop () ;
+  mProperty_mMode.drop () ;
+  mProperty_mSelfTypeName.drop () ;
+  mProperty_mGlobalVariableName.drop () ;
+  mProperty_mISRInstructionList.drop () ;
+  mProperty_mEndOfISRDeclaration.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14690,17 +14690,17 @@ void GALGAS_isrDeclarationListAST_2D_element::description (C_String & ioString,
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mISRName.description (ioString, inIndentation+1) ;
+    mProperty_mISRName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mMode.description (ioString, inIndentation+1) ;
+    mProperty_mMode.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mSelfTypeName.description (ioString, inIndentation+1) ;
+    mProperty_mSelfTypeName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mGlobalVariableName.description (ioString, inIndentation+1) ;
+    mProperty_mGlobalVariableName.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mISRInstructionList.description (ioString, inIndentation+1) ;
+    mProperty_mISRInstructionList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mEndOfISRDeclaration.description (ioString, inIndentation+1) ;
+    mProperty_mEndOfISRDeclaration.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -14708,37 +14708,37 @@ void GALGAS_isrDeclarationListAST_2D_element::description (C_String & ioString,
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_isrDeclarationListAST_2D_element::getter_mISRName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mISRName ;
+  return mProperty_mISRName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_mode GALGAS_isrDeclarationListAST_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mMode ;
+  return mProperty_mMode ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_isrDeclarationListAST_2D_element::getter_mSelfTypeName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSelfTypeName ;
+  return mProperty_mSelfTypeName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_string GALGAS_isrDeclarationListAST_2D_element::getter_mGlobalVariableName (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mGlobalVariableName ;
+  return mProperty_mGlobalVariableName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_instructionListAST GALGAS_isrDeclarationListAST_2D_element::getter_mISRInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mISRInstructionList ;
+  return mProperty_mISRInstructionList ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_location GALGAS_isrDeclarationListAST_2D_element::getter_mEndOfISRDeclaration (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mEndOfISRDeclaration ;
+  return mProperty_mEndOfISRDeclaration ;
 }
 
 
@@ -14789,8 +14789,8 @@ GALGAS_isrDeclarationListAST_2D_element GALGAS_isrDeclarationListAST_2D_element:
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_functionCallEffectiveParameterList_2D_element::GALGAS_functionCallEffectiveParameterList_2D_element (void) :
-mAttribute_mSelector (),
-mAttribute_mExpression () {
+mProperty_mSelector (),
+mProperty_mExpression () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14802,8 +14802,8 @@ GALGAS_functionCallEffectiveParameterList_2D_element::~ GALGAS_functionCallEffec
 
 GALGAS_functionCallEffectiveParameterList_2D_element::GALGAS_functionCallEffectiveParameterList_2D_element (const GALGAS_lstring & inOperand0,
                                                                                                             const GALGAS_expressionAST & inOperand1) :
-mAttribute_mSelector (inOperand0),
-mAttribute_mExpression (inOperand1) {
+mProperty_mSelector (inOperand0),
+mProperty_mExpression (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14823,10 +14823,10 @@ GALGAS_functionCallEffectiveParameterList_2D_element GALGAS_functionCallEffectiv
 typeComparisonResult GALGAS_functionCallEffectiveParameterList_2D_element::objectCompare (const GALGAS_functionCallEffectiveParameterList_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
-    result = mAttribute_mSelector.objectCompare (inOperand.mAttribute_mSelector) ;
+    result = mProperty_mSelector.objectCompare (inOperand.mProperty_mSelector) ;
   }
   if (result == kOperandEqual) {
-    result = mAttribute_mExpression.objectCompare (inOperand.mAttribute_mExpression) ;
+    result = mProperty_mExpression.objectCompare (inOperand.mProperty_mExpression) ;
   }
   return result ;
 }
@@ -14834,14 +14834,14 @@ typeComparisonResult GALGAS_functionCallEffectiveParameterList_2D_element::objec
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_functionCallEffectiveParameterList_2D_element::isValid (void) const {
-  return mAttribute_mSelector.isValid () && mAttribute_mExpression.isValid () ;
+  return mProperty_mSelector.isValid () && mProperty_mExpression.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_functionCallEffectiveParameterList_2D_element::drop (void) {
-  mAttribute_mSelector.drop () ;
-  mAttribute_mExpression.drop () ;
+  mProperty_mSelector.drop () ;
+  mProperty_mExpression.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -14852,9 +14852,9 @@ void GALGAS_functionCallEffectiveParameterList_2D_element::description (C_String
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
-    mAttribute_mSelector.description (ioString, inIndentation+1) ;
+    mProperty_mSelector.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mAttribute_mExpression.description (ioString, inIndentation+1) ;
+    mProperty_mExpression.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -14862,13 +14862,13 @@ void GALGAS_functionCallEffectiveParameterList_2D_element::description (C_String
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_functionCallEffectiveParameterList_2D_element::getter_mSelector (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mSelector ;
+  return mProperty_mSelector ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_expressionAST GALGAS_functionCallEffectiveParameterList_2D_element::getter_mExpression (UNUSED_LOCATION_ARGS) const {
-  return mAttribute_mExpression ;
+  return mProperty_mExpression ;
 }
 
 

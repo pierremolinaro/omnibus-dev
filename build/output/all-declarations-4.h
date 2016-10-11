@@ -142,8 +142,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_booleanDeclaration 
 
 class cPtr_booleanDeclaration : public cPtr_abstractDeclaration {
 //--- Attributes
-  public : GALGAS_lstring mAttribute_mBooleanTypeName ;
-  public : GALGAS_lstringlist mAttribute_mAttributeList ;
+  public : GALGAS_lstring mProperty_mBooleanTypeName ;
+  public : GALGAS_lstringlist mProperty_mAttributeList ;
 
 //--- Constructor
   public : cPtr_booleanDeclaration (const GALGAS_lstring & in_mBooleanTypeName,
@@ -212,7 +212,7 @@ class GALGAS_string function_userAccessAttribute (class C_Compiler * inCompiler
 
 class cPtr_infixOperatorDescription : public acPtr_class {
 //--- Attributes
-  public : GALGAS_llvmBinaryOperation mAttribute_mOperator ;
+  public : GALGAS_llvmBinaryOperation mProperty_mOperator ;
 
 //--- Constructor
   public : cPtr_infixOperatorDescription (const GALGAS_llvmBinaryOperation & in_mOperator
@@ -524,7 +524,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalStringDeclar
 
 class cPtr_literalStringDeclaration : public cPtr_abstractDeclaration {
 //--- Attributes
-  public : GALGAS_lstring mAttribute_mLiteralStringTypeName ;
+  public : GALGAS_lstring mProperty_mLiteralStringTypeName ;
 
 //--- Constructor
   public : cPtr_literalStringDeclaration (const GALGAS_lstring & in_mLiteralStringTypeName
@@ -855,9 +855,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertInstructionI
 
 class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTarget ;
-  public : GALGAS_objectIR mAttribute_mOperand ;
-  public : GALGAS_location mAttribute_mLocation ;
+  public : GALGAS_objectIR mProperty_mTarget ;
+  public : GALGAS_objectIR mProperty_mOperand ;
+  public : GALGAS_location mProperty_mLocation ;
 
 //--- Constructor
   public : cPtr_convertInstructionIR (const GALGAS_objectIR & in_mTarget,
@@ -945,8 +945,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncateInstruction
 
 class cPtr_truncateInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTarget ;
-  public : GALGAS_objectIR mAttribute_mOperand ;
+  public : GALGAS_objectIR mProperty_mTarget ;
+  public : GALGAS_objectIR mProperty_mOperand ;
 
 //--- Constructor
   public : cPtr_truncateInstructionIR (const GALGAS_objectIR & in_mTarget,
@@ -1131,9 +1131,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assertInstructionIR
 
 class cPtr_assertInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_location mAttribute_mAssertInstructionLocation ;
-  public : GALGAS_instructionListIR mAttribute_mInstructionList ;
-  public : GALGAS_objectIR mAttribute_mExpressionValue ;
+  public : GALGAS_location mProperty_mAssertInstructionLocation ;
+  public : GALGAS_instructionListIR mProperty_mInstructionList ;
+  public : GALGAS_objectIR mProperty_mExpressionValue ;
 
 //--- Constructor
   public : cPtr_assertInstructionIR (const GALGAS_location & in_mAssertInstructionLocation,
@@ -1227,10 +1227,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifInstructionIR ;
 
 class cPtr_ifInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTestVariable ;
-  public : GALGAS_location mAttribute_mLocation ;
-  public : GALGAS_instructionListIR mAttribute_mThenInstructionGenerationList ;
-  public : GALGAS_instructionListIR mAttribute_mElseInstructionGenerationList ;
+  public : GALGAS_objectIR mProperty_mTestVariable ;
+  public : GALGAS_location mProperty_mLocation ;
+  public : GALGAS_instructionListIR mProperty_mThenInstructionGenerationList ;
+  public : GALGAS_instructionListIR mProperty_mElseInstructionGenerationList ;
 
 //--- Constructor
   public : cPtr_ifInstructionIR (const GALGAS_objectIR & in_mTestVariable,
@@ -1326,10 +1326,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_whileInstructionIR 
 
 class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_uint mAttribute_mLabelIndex ;
-  public : GALGAS_instructionListIR mAttribute_mTestInstructionGenerationList ;
-  public : GALGAS_objectIR mAttribute_mTestExpression ;
-  public : GALGAS_instructionListIR mAttribute_mInstructionGenerationList ;
+  public : GALGAS_uint mProperty_mLabelIndex ;
+  public : GALGAS_instructionListIR mProperty_mTestInstructionGenerationList ;
+  public : GALGAS_objectIR mProperty_mTestExpression ;
+  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
 
 //--- Constructor
   public : cPtr_whileInstructionIR (const GALGAS_uint & in_mLabelIndex,
@@ -1440,15 +1440,15 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionOnArr
 
 class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_string mAttribute_mEnumeratedValueName ;
-  public : GALGAS_lstring mAttribute_mIteratedObjectName ;
-  public : GALGAS_objectIR mAttribute_mIteratedObject ;
-  public : GALGAS_instructionListIR mAttribute_mWhileInstructionList ;
-  public : GALGAS_objectIR mAttribute_mWhileExpressionResult ;
-  public : GALGAS_instructionListIR mAttribute_mDoInstructionList ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mElementType ;
-  public : GALGAS_uint mAttribute_mArraySize ;
-  public : GALGAS_stringset mAttribute_mInvokedFunctionSet ;
+  public : GALGAS_string mProperty_mEnumeratedValueName ;
+  public : GALGAS_lstring mProperty_mIteratedObjectName ;
+  public : GALGAS_objectIR mProperty_mIteratedObject ;
+  public : GALGAS_instructionListIR mProperty_mWhileInstructionList ;
+  public : GALGAS_objectIR mProperty_mWhileExpressionResult ;
+  public : GALGAS_instructionListIR mProperty_mDoInstructionList ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mElementType ;
+  public : GALGAS_uint mProperty_mArraySize ;
+  public : GALGAS_stringset mProperty_mInvokedFunctionSet ;
 
 //--- Constructor
   public : cPtr_forInstructionOnArrayIR (const GALGAS_string & in_mEnumeratedValueName,

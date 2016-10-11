@@ -152,7 +152,7 @@ override method @staticArrayAST enterInContext
         !propertyIndex
       ]
     case function (@mode mode @procFormalArgumentList formalArgs @lstring returnTypeName) :
-      var routineMangledName = "func." + mode + "("
+      var routineMangledName = propertyName.string + "("
       @procedureSignature signature = {}
       for (formalArgumentPassingMode selector formalArgumentTypeName *) in formalArgs do
         let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
@@ -178,7 +178,15 @@ override method @staticArrayAST enterInContext
           !comparable:false
         ]
       end
-      propertyList += !propertyName !.searchKey {!ioContext.mTypeMap !lRoutineMangledName}
+      let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !lRoutineMangledName}
+      propertyList += !propertyName !propertyType
+      let propertyIndex = [staticlistPropertyMap count]
+      [!?staticlistPropertyMap insertKey
+        !propertyName
+        !true # Public
+        !.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
+        !propertyIndex
+      ]
     end
   end
   [!?ioContext.mStaticlistMap insertKey

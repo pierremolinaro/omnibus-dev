@@ -95,7 +95,7 @@ override method @callInstructionAST analyze
 {
   [mAssignmentTargetAST analyzeAssignmentTarget
     !self: inSelfType
-    !targetAccessKind:.readWrite
+    !targetAccessKind:.read # § .readWrite
     !propertiesAreMutable: inRoutineCanMutateProperties
     !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph
