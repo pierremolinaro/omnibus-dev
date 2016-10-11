@@ -4184,7 +4184,6 @@ mProperty_mAllocaList (),
 mProperty_mInstructionGenerationList (),
 mProperty_mIsRequired (),
 mProperty_mWarnIfUnused (),
-mProperty_mWeak (),
 mProperty_mGlobal (),
 mProperty_mKind (),
 mProperty_mReturnType (),
@@ -4207,10 +4206,9 @@ GALGAS_routineMapIR_2D_element::GALGAS_routineMapIR_2D_element (const GALGAS_lst
                                                                 const GALGAS_bool & inOperand6,
                                                                 const GALGAS_bool & inOperand7,
                                                                 const GALGAS_bool & inOperand8,
-                                                                const GALGAS_bool & inOperand9,
-                                                                const GALGAS_routineKind & inOperand10,
-                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand11,
-                                                                const GALGAS_bool & inOperand12) :
+                                                                const GALGAS_routineKind & inOperand9,
+                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand10,
+                                                                const GALGAS_bool & inOperand11) :
 mProperty_lkey (inOperand0),
 mProperty_mReceiverType (inOperand1),
 mProperty_mRoutineNameForGeneration (inOperand2),
@@ -4219,11 +4217,10 @@ mProperty_mAllocaList (inOperand4),
 mProperty_mInstructionGenerationList (inOperand5),
 mProperty_mIsRequired (inOperand6),
 mProperty_mWarnIfUnused (inOperand7),
-mProperty_mWeak (inOperand8),
-mProperty_mGlobal (inOperand9),
-mProperty_mKind (inOperand10),
-mProperty_mReturnType (inOperand11),
-mProperty_mAppendFileAndLineArgumentForPanicLocation (inOperand12) {
+mProperty_mGlobal (inOperand8),
+mProperty_mKind (inOperand9),
+mProperty_mReturnType (inOperand10),
+mProperty_mAppendFileAndLineArgumentForPanicLocation (inOperand11) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4237,14 +4234,13 @@ GALGAS_routineMapIR_2D_element GALGAS_routineMapIR_2D_element::constructor_new (
                                                                                 const GALGAS_bool & inOperand6,
                                                                                 const GALGAS_bool & inOperand7,
                                                                                 const GALGAS_bool & inOperand8,
-                                                                                const GALGAS_bool & inOperand9,
-                                                                                const GALGAS_routineKind & inOperand10,
-                                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand11,
-                                                                                const GALGAS_bool & inOperand12 
+                                                                                const GALGAS_routineKind & inOperand9,
+                                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand10,
+                                                                                const GALGAS_bool & inOperand11 
                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_routineMapIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid ()) {
-    result = GALGAS_routineMapIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid ()) {
+    result = GALGAS_routineMapIR_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11) ;
   }
   return result ;
 }
@@ -4278,9 +4274,6 @@ typeComparisonResult GALGAS_routineMapIR_2D_element::objectCompare (const GALGAS
     result = mProperty_mWarnIfUnused.objectCompare (inOperand.mProperty_mWarnIfUnused) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mWeak.objectCompare (inOperand.mProperty_mWeak) ;
-  }
-  if (result == kOperandEqual) {
     result = mProperty_mGlobal.objectCompare (inOperand.mProperty_mGlobal) ;
   }
   if (result == kOperandEqual) {
@@ -4298,7 +4291,7 @@ typeComparisonResult GALGAS_routineMapIR_2D_element::objectCompare (const GALGAS
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_routineMapIR_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mReceiverType.isValid () && mProperty_mRoutineNameForGeneration.isValid () && mProperty_mFormalArgumentListForGeneration.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInstructionGenerationList.isValid () && mProperty_mIsRequired.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mWeak.isValid () && mProperty_mGlobal.isValid () && mProperty_mKind.isValid () && mProperty_mReturnType.isValid () && mProperty_mAppendFileAndLineArgumentForPanicLocation.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mReceiverType.isValid () && mProperty_mRoutineNameForGeneration.isValid () && mProperty_mFormalArgumentListForGeneration.isValid () && mProperty_mAllocaList.isValid () && mProperty_mInstructionGenerationList.isValid () && mProperty_mIsRequired.isValid () && mProperty_mWarnIfUnused.isValid () && mProperty_mGlobal.isValid () && mProperty_mKind.isValid () && mProperty_mReturnType.isValid () && mProperty_mAppendFileAndLineArgumentForPanicLocation.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4312,7 +4305,6 @@ void GALGAS_routineMapIR_2D_element::drop (void) {
   mProperty_mInstructionGenerationList.drop () ;
   mProperty_mIsRequired.drop () ;
   mProperty_mWarnIfUnused.drop () ;
-  mProperty_mWeak.drop () ;
   mProperty_mGlobal.drop () ;
   mProperty_mKind.drop () ;
   mProperty_mReturnType.drop () ;
@@ -4342,8 +4334,6 @@ void GALGAS_routineMapIR_2D_element::description (C_String & ioString,
     mProperty_mIsRequired.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mWarnIfUnused.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mWeak.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mGlobal.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -4402,12 +4392,6 @@ GALGAS_bool GALGAS_routineMapIR_2D_element::getter_mIsRequired (UNUSED_LOCATION_
 
 GALGAS_bool GALGAS_routineMapIR_2D_element::getter_mWarnIfUnused (UNUSED_LOCATION_ARGS) const {
   return mProperty_mWarnIfUnused ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineMapIR_2D_element::getter_mWeak (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mWeak ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

@@ -67,8 +67,8 @@ init 0 { // Configure Systick interrupt every ms
 //   USER TICK HANDLER                                                          
 //——————————————————————————————————————————————————————————————————————————————
 
-public func service userTickHandler @weak () {
-}
+//public func service userTickHandler @weak () {
+//}
 
 //——————————————————————————————————————————————————————————————————————————————
 //   TIME                                                                       
@@ -118,7 +118,7 @@ module time {
     self.mUptimeMS = now
     makeTasksReady (!fromCurrentDate:now)
     notifyChangeForGuardedWaitUntil (!withCurrentDate:now)
-    userTickHandler ()
+//    userTickHandler ()
   }
   
   //············································································

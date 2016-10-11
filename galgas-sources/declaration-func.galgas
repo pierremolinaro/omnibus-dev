@@ -242,55 +242,41 @@ method @functionDeclarationListAST enterFunctionInContext
       [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !procedure.mFunctionReturnTypeName ?returnType]
     end
   #--- Attribute
-    var weakProcedure = false
     var globalProcedure = false
     var canMutateProperties = false
     var canAccessProperties = false
-    for (attribute) in procedure.mFunctionAttributeList while not weakProcedure do
-      if attribute.string == weakAttribute () then
-        weakProcedure = true
-      end
+    for (attribute) in procedure.mFunctionAttributeList do
       if attribute.string == globalAttribute () then
         globalProcedure = true
-      end
-      if attribute.string == mutatingAttribute () then
+      elsif attribute.string == mutatingAttribute () then
         canMutateProperties = true
       end
-#      if attribute.string == userAccessAttribute () then
-#        canAccessProperties = true
-#        if canAccessProperties && not [procedureModeMap hasKey !userModeName ()] then
-#          error attribute : "useless @" + attribute + " attribute: function is never executed in `" + userModeName () + " mode"
-#        end
-#      end
     end
     canAccessProperties = procedure.mMode != .userMode
-#    if not [procedureModeMap hasKey !userModeName ()] then
-#      canAccessProperties = true
-#    end
   #--- Enter in context
-    if [ioContext.mRoutineMapForContext hasKey !routineMangledName.string] then
-      let weak = [ioContext.mRoutineMapForContext mWeakForKey !routineMangledName.string]
-      if weakProcedure && not weak then
-        # redefined weak procedure is ignored
-      elsif weakProcedure && weak then
-        error procedure.mFunctionName : "this weak procedure overrides a weak procedure"
-      elsif (not weakProcedure) && weak then
-        [!?ioContext.mRoutineMapForContext removeKey !routineMangledName ?11*] # Remove weak routine
-        [!?ioContext.mRoutineMapForContext insertKey # Insert routine
-          !routineMangledName
-          !routineMangledName
-          !procedure.mPublicFunction
-          !globalProcedure
-          !procedure.mMode
-          !signature
-          !.function
-          !weakProcedure
-          !returnType
-          !false # No appendFileAndLineArgumentForPanicLocation
-          !canMutateProperties
-          !canAccessProperties
-        ]
-      else # (not weakProcedure) && (not weak)
+#    if [ioContext.mRoutineMapForContext hasKey !routineMangledName.string] then
+#      let weak = [ioContext.mRoutineMapForContext mWeakForKey !routineMangledName.string]
+#      if weakProcedure && not weak then
+#        # redefined weak procedure is ignored
+#      elsif weakProcedure && weak then
+#        error procedure.mFunctionName : "this weak procedure overrides a weak procedure"
+#      elsif (not weakProcedure) && weak then
+#        [!?ioContext.mRoutineMapForContext removeKey !routineMangledName ?11*] # Remove weak routine
+#        [!?ioContext.mRoutineMapForContext insertKey # Insert routine
+#          !routineMangledName
+#          !routineMangledName
+#          !procedure.mPublicFunction
+#          !globalProcedure
+#          !procedure.mMode
+#          !signature
+#          !.function
+#          !weakProcedure
+#          !returnType
+#          !false # No appendFileAndLineArgumentForPanicLocation
+#          !canMutateProperties
+#          !canAccessProperties
+#        ]
+#      else # (not weakProcedure) && (not weak)
         [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
           !routineMangledName
           !routineMangledName
@@ -299,29 +285,27 @@ method @functionDeclarationListAST enterFunctionInContext
           !procedure.mMode
           !signature
           !.function
-          !weakProcedure
           !returnType
           !false # No appendFileAndLineArgumentForPanicLocation
           !canMutateProperties
           !canAccessProperties
         ]
-      end
-    else
-      [!?ioContext.mRoutineMapForContext insertKey
-        !routineMangledName
-        !routineMangledName
-        !procedure.mPublicFunction
-        !globalProcedure
-        !procedure.mMode
-        !signature
-        !.function
-        !weakProcedure
-        !returnType
-        !false # No appendFileAndLineArgumentForPanicLocation
-        !canMutateProperties
-        !canAccessProperties
-      ]
-    end
+#      end
+#    else
+#      [!?ioContext.mRoutineMapForContext insertKey
+#        !routineMangledName
+#        !routineMangledName
+#        !procedure.mPublicFunction
+#        !globalProcedure
+#        !procedure.mMode
+#        !signature
+#        !.function
+#        !returnType
+#        !false # No appendFileAndLineArgumentForPanicLocation
+#        !canMutateProperties
+#        !canAccessProperties
+#      ]
+#    end
   end
 }
 
@@ -338,7 +322,6 @@ method @functionDeclarationListAST procedureSemanticAnalysis
   for procedure in self do
     var warnIfUnused = true
     var globalProcedure = false
-    var weakProcedure = false
     for (attribute) in procedure.mFunctionAttributeList do
       if attribute.string == noUnusedWarningAttribute () then
         if not warnIfUnused then
@@ -350,14 +333,9 @@ method @functionDeclarationListAST procedureSemanticAnalysis
           error attribute : "duplicated @" + globalAttribute () + " attribute"
         end
         globalProcedure = true    
-      elsif attribute.string == weakAttribute () then
-        if weakProcedure then
-          error attribute : "duplicated @" + weakAttribute () + " attribute"
-        end
-        weakProcedure = true    
       else
         error attribute : "unknown attribute; available attributes are @"
-          + noUnusedWarningAttribute () + ", @" + weakAttribute () + ", @" + globalAttribute ()
+          + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + ", @" + globalAttribute ()
       end
     end
     routineSemanticAnalysis (
@@ -373,8 +351,6 @@ method @functionDeclarationListAST procedureSemanticAnalysis
       !propertiesAreMutable:true
       !warnIfUnused:warnIfUnused
       !globalFunction:globalProcedure
-      !weakFunction:weakProcedure
-#      !registerAccess:.readWriteAccess
       !context:inSemanticContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct

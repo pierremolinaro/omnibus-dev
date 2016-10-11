@@ -424,8 +424,6 @@ method @structureDeclaration functionSemanticAnalysis
       !propertiesAreMutable:mutating
       !warnIfUnused:warnIfUnused
       !globalFunction:false
-      !weakFunction:false
-#      !registerAccess:.readWriteAccess
       !context:inContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct

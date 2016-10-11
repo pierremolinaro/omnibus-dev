@@ -123,7 +123,6 @@ private proc suppressInaccessibleSubprograms
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
-        !procedure.mWeak
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
@@ -141,7 +140,6 @@ private proc suppressInaccessibleSubprograms
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
-        !procedure.mWeak
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
@@ -250,7 +248,6 @@ private proc exploreProcs
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
-        !procedure.mWeak
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType
@@ -268,7 +265,6 @@ private proc exploreProcs
         !procedure.mInstructionGenerationList
         !procedure.mIsRequired
         !procedure.mWarnIfUnused
-        !procedure.mWeak
         !procedure.mGlobal
         !procedure.mKind
         !procedure.mReturnType

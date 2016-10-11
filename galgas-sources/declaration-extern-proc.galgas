@@ -96,7 +96,6 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
     !mMode
     !signature
     !.function
-    !false # Not weak
     !returnType
     !false # No appendFileAndLineArgumentForPanicLocation
     !false # canMutateProperties

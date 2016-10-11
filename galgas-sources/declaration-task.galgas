@@ -315,8 +315,6 @@ method @taskList-element semanticAnalysis
       !propertiesAreMutable:true
       !warnIfUnused:true
       !globalFunction:false
-      !weakFunction:false
-#      !registerAccess:.noAccess
       !context:inContext
       !?temporary:ioTemporaries
       !?intermediateCode:ioIntermediateCodeStruct
@@ -366,8 +364,6 @@ method @taskList-element semanticAnalysis
     !propertiesAreMutable:true
     !warnIfUnused:true
     !globalFunction:false
-    !weakFunction:false
-#    !registerAccess:.noAccess
     !context:inContext
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct

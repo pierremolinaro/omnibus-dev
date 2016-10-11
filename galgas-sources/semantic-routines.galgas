@@ -72,8 +72,6 @@ proc routineSemanticAnalysis
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
   ?warnIfUnused:let @bool inWarnIfUnused
   ?globalFunction:let @bool inGlobalFunction
-  ?weakFunction:let @bool inWeakFunction
-#  ?registerAccess:let @accessKind inRegisterAccessKind
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -93,8 +91,6 @@ proc routineSemanticAnalysis
   initialVariableMap (
     !context:inContext
     !mode:inRoutineMode
-#    !userMode:inRoutineMode == .userMode
-#    !registerAccess:inRegisterAccessKind
     !globalsAreConstant:false
     !returnTypeName:inReturnTypeName
     ?@variableMap variableMap
@@ -140,30 +136,30 @@ proc routineSemanticAnalysis
   else
     @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
   end
-  if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !routineMangledName.string] then
-    let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !routineMangledName.string]
-    if inWeakFunction && not weak then
-      # redefined weak procedure is ignored
-    elsif inWeakFunction && weak then
-      error routineMangledName : "this weak procedure overrides a weak procedure"
-    elsif (not inWeakFunction) && weak then
-      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?12*] # Remove weak routine
-      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
-        !routineMangledName
-        !inSelfType
-        !routineMangledName
-        !formalArguments
-        !allocaList
-        !instructionGenerationList
-        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-        !inWarnIfUnused
-        !inWeakFunction
-        !inGlobalFunction
-        !inRoutineKind
-        !returnType
-        !false
-      ]  
-    else # (not weakProcedure) && (not weak)
+#  if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !routineMangledName.string] then
+#    let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !routineMangledName.string]
+#    if inWeakFunction && not weak then
+#      # redefined weak procedure is ignored
+#    elsif inWeakFunction && weak then
+#      error routineMangledName : "this weak procedure overrides a weak procedure"
+#    elsif (not inWeakFunction) && weak then
+#      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?12*] # Remove weak routine
+#      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
+#        !routineMangledName
+#        !inSelfType
+#        !routineMangledName
+#        !formalArguments
+#        !allocaList
+#        !instructionGenerationList
+#        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
+#        !inWarnIfUnused
+#        !inWeakFunction
+#        !inGlobalFunction
+#        !inRoutineKind
+#        !returnType
+#        !false
+#      ]  
+#    else # (not weakProcedure) && (not weak)
       [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
         !routineMangledName
         !inSelfType
@@ -173,30 +169,30 @@ proc routineSemanticAnalysis
         !instructionGenerationList
         ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
         !inWarnIfUnused
-        !inWeakFunction
+#        !inWeakFunction
         !inGlobalFunction
         !inRoutineKind
         !returnType
         !false
       ]
-    end
-  else
-    [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
-      !routineMangledName
-      !inSelfType
-      !routineMangledName
-      !formalArguments
-      !allocaList
-      !instructionGenerationList
-      ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-      !inWarnIfUnused
-      !inWeakFunction
-      !inGlobalFunction
-      !inRoutineKind
-      !returnType
-      !false
-    ]  
-  end
+#    end
+#  else
+#    [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
+#      !routineMangledName
+#      !inSelfType
+#      !routineMangledName
+#      !formalArguments
+#      !allocaList
+#      !instructionGenerationList
+#      ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
+#      !inWarnIfUnused
+#      !inWeakFunction
+#      !inGlobalFunction
+#      !inRoutineKind
+#      !returnType
+#      !false
+#    ]  
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

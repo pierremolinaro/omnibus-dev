@@ -8187,11 +8187,10 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                       const class GALGAS_mode & inOperand4,
                                                       const class GALGAS_procedureSignature & inOperand5,
                                                       const class GALGAS_routineKind & inOperand6,
-                                                      const class GALGAS_bool & inOperand7,
-                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand8,
+                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand7,
+                                                      const class GALGAS_bool & inOperand8,
                                                       const class GALGAS_bool & inOperand9,
                                                       const class GALGAS_bool & inOperand10,
-                                                      const class GALGAS_bool & inOperand11,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -8203,11 +8202,10 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_mode constinArgument4,
                                                    class GALGAS_procedureSignature constinArgument5,
                                                    class GALGAS_routineKind constinArgument6,
-                                                   class GALGAS_bool constinArgument7,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument8,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument7,
+                                                   class GALGAS_bool constinArgument8,
                                                    class GALGAS_bool constinArgument9,
                                                    class GALGAS_bool constinArgument10,
-                                                   class GALGAS_bool constinArgument11,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -8218,11 +8216,10 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_mode & outArgument4,
                                                    class GALGAS_procedureSignature & outArgument5,
                                                    class GALGAS_routineKind & outArgument6,
-                                                   class GALGAS_bool & outArgument7,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument8,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument7,
+                                                   class GALGAS_bool & outArgument8,
                                                    class GALGAS_bool & outArgument9,
                                                    class GALGAS_bool & outArgument10,
-                                                   class GALGAS_bool & outArgument11,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -8276,11 +8273,6 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMWeakForKey (class GALGAS_bool constinArgument0,
-                                                        class GALGAS_string constinArgument1,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
@@ -8290,11 +8282,10 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                    class GALGAS_mode & outArgument4,
                                                    class GALGAS_procedureSignature & outArgument5,
                                                    class GALGAS_routineKind & outArgument6,
-                                                   class GALGAS_bool & outArgument7,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument8,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument7,
+                                                   class GALGAS_bool & outArgument8,
                                                    class GALGAS_bool & outArgument9,
                                                    class GALGAS_bool & outArgument10,
-                                                   class GALGAS_bool & outArgument11,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -8341,10 +8332,6 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWeakForKey (const class GALGAS_string & constinOperand0,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapForContext getter_overriddenMap (C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
 
@@ -8377,7 +8364,6 @@ class cEnumerator_routineMapForContext : public cGenericAbstractEnumerator {
   public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
   public : class GALGAS_procedureSignature current_mSignature (LOCATION_ARGS) const ;
   public : class GALGAS_routineKind current_mRoutineKind (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mWeak (LOCATION_ARGS) const ;
   public : class GALGAS_unifiedTypeMap_2D_proxy current_mReturnType (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mCanAccessProperties (LOCATION_ARGS) const ;
@@ -9944,10 +9930,9 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
                                                       const class GALGAS_bool & inOperand6,
                                                       const class GALGAS_bool & inOperand7,
                                                       const class GALGAS_bool & inOperand8,
-                                                      const class GALGAS_bool & inOperand9,
-                                                      const class GALGAS_routineKind & inOperand10,
-                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand11,
-                                                      const class GALGAS_bool & inOperand12,
+                                                      const class GALGAS_routineKind & inOperand9,
+                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand10,
+                                                      const class GALGAS_bool & inOperand11,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -9961,10 +9946,9 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
                                                    class GALGAS_bool constinArgument6,
                                                    class GALGAS_bool constinArgument7,
                                                    class GALGAS_bool constinArgument8,
-                                                   class GALGAS_bool constinArgument9,
-                                                   class GALGAS_routineKind constinArgument10,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument11,
-                                                   class GALGAS_bool constinArgument12,
+                                                   class GALGAS_routineKind constinArgument9,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy constinArgument10,
+                                                   class GALGAS_bool constinArgument11,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -9977,10 +9961,9 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
                                                    class GALGAS_bool & outArgument6,
                                                    class GALGAS_bool & outArgument7,
                                                    class GALGAS_bool & outArgument8,
-                                                   class GALGAS_bool & outArgument9,
-                                                   class GALGAS_routineKind & outArgument10,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument11,
-                                                   class GALGAS_bool & outArgument12,
+                                                   class GALGAS_routineKind & outArgument9,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument10,
+                                                   class GALGAS_bool & outArgument11,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -10039,11 +10022,6 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMWeakForKey (class GALGAS_bool constinArgument0,
-                                                        class GALGAS_string constinArgument1,
-                                                        C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
@@ -10055,10 +10033,9 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
                                                    class GALGAS_bool & outArgument6,
                                                    class GALGAS_bool & outArgument7,
                                                    class GALGAS_bool & outArgument8,
-                                                   class GALGAS_bool & outArgument9,
-                                                   class GALGAS_routineKind & outArgument10,
-                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument11,
-                                                   class GALGAS_bool & outArgument12,
+                                                   class GALGAS_routineKind & outArgument9,
+                                                   class GALGAS_unifiedTypeMap_2D_proxy & outArgument10,
+                                                   class GALGAS_bool & outArgument11,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -10109,10 +10086,6 @@ class GALGAS_routineMapIR : public AC_GALGAS_map {
                                                                           C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWeakForKey (const class GALGAS_string & constinOperand0,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapIR getter_overriddenMap (C_Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) const ;
 
@@ -10146,7 +10119,6 @@ class cEnumerator_routineMapIR : public cGenericAbstractEnumerator {
   public : class GALGAS_instructionListIR current_mInstructionGenerationList (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mIsRequired (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mWarnIfUnused (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mWeak (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mGlobal (LOCATION_ARGS) const ;
   public : class GALGAS_routineKind current_mKind (LOCATION_ARGS) const ;
   public : class GALGAS_unifiedTypeMap_2D_proxy current_mReturnType (LOCATION_ARGS) const ;
