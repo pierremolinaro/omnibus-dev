@@ -72,10 +72,7 @@ override method @integerDeclaration enterInContext
  #---
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
-#    !llvmTypeName:"i" + mSize
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
-    !classConstantMap:{}
-    !instantiable:true
     !copyable:true
     !equatable:true
     !comparable:true

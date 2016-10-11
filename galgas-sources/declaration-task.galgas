@@ -184,10 +184,7 @@ method @taskList enterInContext
   #--- Enter task variable map as structure type in type map
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName
-#      !llvmTypeName:"%" + ["$" + task.mTaskName assemblerRepresentation]
-      !kind:.structure {!typeName:task.mTaskName !propertyMap:propertyMap !propertyList:propertyList}
-      !classConstantMap:{}
-      !instantiable:false
+      !kind:.structure {!typeName:task.mTaskName !propertyMap:propertyMap !propertyList:propertyList !flags:0}
       !copyable:false
       !equatable:false
       !comparable:false
@@ -199,10 +196,6 @@ method @taskList enterInContext
       !.llvmStructureConstant{!type: taskType !values:initialValueList}
   #--- Task procedures
     [task.mTaskProcList enterFunctionInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
-#    @taskProcedureMap taskProcedureMap = {}
-#    for procedure in task.mTaskProcList do
-#      [!?taskProcedureMap insertKey !procedure.mFunctionName]
-#    end
   end
 }
 
@@ -260,7 +253,7 @@ method @taskVarListAST-element enterInContext
   )
   drop variableAnnotationType, expressionResult
 #--- Enter variable
-  if not [[result type] instantiable] then
+  if not [[[result type] kind] instanciable] then
     error mVarName : "$" + [result key] + " type is not instanciable"
   end
   [!?ioPropertyMap insertKey

@@ -469,9 +469,9 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
   for () in inTypeMap do
     switch kind
     case boolean :
-    case enumeration (*) :
+    case enumeration (* *) :
     case integer (* * * *) :
-    case structure (* * propertyList) :
+    case structure (* * propertyList *) :
       ioLLVMcode += [kind llvmTypeName] + " = type {"
       for () in propertyList
         do ioLLVMcode += [[mType kind] llvmTypeName]
@@ -480,8 +480,8 @@ proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
       ioLLVMcode += "}\n"
     case literalString : 
     case staticInteger : 
-    case opaque (*) :
-    case arrayType (* elementType arraySize) :
+    case opaque (* *) :
+    case arrayType (* elementType arraySize * *) :
       ioLLVMcode += [kind llvmTypeName] + " = type [" + arraySize + " x " + [[elementType kind] llvmTypeName] + "]\n"
     case function (* * *) :
     end

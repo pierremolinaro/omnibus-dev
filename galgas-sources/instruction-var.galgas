@@ -161,7 +161,7 @@ override method @varInstructionAST analyze
 {
   let @unifiedTypeMap-proxy targetType = .searchKey {!inContext.mTypeMap !mTypeName}
 #---
-  if not [targetType instantiable] then
+  if not [[targetType kind] instanciable] then
     error mVarName : "$" + [targetType key] + " type is not instanciable"
   end
 #--- Declare local variable

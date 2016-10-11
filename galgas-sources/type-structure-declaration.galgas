@@ -263,7 +263,7 @@ override method @structureDeclaration enterInContext
       else
         actualPropertyType = [expressionIR type]
       end
-      if not [actualPropertyType instantiable] then
+      if not [[actualPropertyType kind] instanciable] then
         error mFieldName : "$" + [actualPropertyType key] + " type is not instanciable"
       end
       if not [actualPropertyType copyable] then
@@ -278,7 +278,7 @@ override method @structureDeclaration enterInContext
       ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     case noExpression :
-      if not [optionalPropertyType instantiable] then
+      if not [[optionalPropertyType kind] instanciable] then
         error mFieldName : "$" + [optionalPropertyType key] + " type is not instanciable"
       end
       propertyList += !mFieldName.string !optionalPropertyType
@@ -297,6 +297,7 @@ override method @structureDeclaration enterInContext
     !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
   ]
 #---------------------------------------- Attribute "copyable"
+  var flags = instanciableFlag ()
   var copyableAttribute = false
   for (s) in mAttributeListAST do
     if s.string == "copyable" then
@@ -315,10 +316,7 @@ override method @structureDeclaration enterInContext
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
-#    !llvmTypeName:"%" + ["$" + mStructureName assemblerRepresentation]
-    !kind:.structure {!typeName:mStructureName !propertyMap:propertyMap !propertyList:propertyList}
-    !classConstantMap:{}
-    !instantiable:true
+    !kind:.structure {!typeName:mStructureName !propertyMap:propertyMap !propertyList:propertyList !flags:flags}
     !copyable:copyableAttribute
     !equatable:false
     !comparable:false

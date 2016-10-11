@@ -63,10 +63,7 @@ override method @literalStringDeclaration enterInContext
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mLiteralStringTypeName
-#    !llvmTypeName:"i8*"
     !kind:.literalString
-    !classConstantMap:{}
-    !instantiable:true
     !copyable:true
     !equatable:true
     !comparable:true

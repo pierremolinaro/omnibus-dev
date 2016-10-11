@@ -96,7 +96,7 @@ override method @letInstructionWithAssignmentAST analyze
   )
   drop targetType
 #---
-  if not [[result type] instantiable] then
+  if not [[[result type] kind] instanciable] then
     error mVarName : "$" + [result key] + " type is not instanciable" : result
   end
 #--- Declare local constant
