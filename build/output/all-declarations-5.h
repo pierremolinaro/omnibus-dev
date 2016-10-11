@@ -84,12 +84,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionOnStr
 
 class cPtr_forInstructionOnStringIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_string mAttribute_mVarName ;
-  public : GALGAS_location mAttribute_mLocation ;
-  public : GALGAS_objectIR mAttribute_mIteratedObject ;
-  public : GALGAS_instructionListIR mAttribute_mWhileInstructionList ;
-  public : GALGAS_objectIR mAttribute_mWhileExpressionResult ;
-  public : GALGAS_instructionListIR mAttribute_mDoInstructionList ;
+  public : GALGAS_string mProperty_mVarName ;
+  public : GALGAS_location mProperty_mLocation ;
+  public : GALGAS_objectIR mProperty_mIteratedObject ;
+  public : GALGAS_instructionListIR mProperty_mWhileInstructionList ;
+  public : GALGAS_objectIR mProperty_mWhileExpressionResult ;
+  public : GALGAS_instructionListIR mProperty_mDoInstructionList ;
 
 //--- Constructor
   public : cPtr_forInstructionOnStringIR (const GALGAS_string & in_mVarName,
@@ -198,13 +198,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forLowerUpperBoundI
 
 class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_string mAttribute_mVarName ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
-  public : GALGAS_bool mAttribute_mUnsigned ;
-  public : GALGAS_location mAttribute_mLocation ;
-  public : GALGAS_objectIR mAttribute_mLowerExpressionResult ;
-  public : GALGAS_objectIR mAttribute_mUpperExpressionResult ;
-  public : GALGAS_instructionListIR mAttribute_mInstructionList ;
+  public : GALGAS_string mProperty_mVarName ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
+  public : GALGAS_bool mProperty_mUnsigned ;
+  public : GALGAS_location mProperty_mLocation ;
+  public : GALGAS_objectIR mProperty_mLowerExpressionResult ;
+  public : GALGAS_objectIR mProperty_mUpperExpressionResult ;
+  public : GALGAS_instructionListIR mProperty_mInstructionList ;
 
 //--- Constructor
   public : cPtr_forLowerUpperBoundInstructionIR (const GALGAS_string & in_mVarName,
@@ -317,10 +317,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchInstructionIR
 
 class cPtr_switchInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_uint mAttribute_mLabelIndex ;
-  public : GALGAS_instructionListIR mAttribute_mSwitchExpressionGenerationList ;
-  public : GALGAS_objectIR mAttribute_mSwitchExpression ;
-  public : GALGAS_switchCaseListIR mAttribute_mCaseGenerationList ;
+  public : GALGAS_uint mProperty_mLabelIndex ;
+  public : GALGAS_instructionListIR mProperty_mSwitchExpressionGenerationList ;
+  public : GALGAS_objectIR mProperty_mSwitchExpression ;
+  public : GALGAS_switchCaseListIR mProperty_mCaseGenerationList ;
 
 //--- Constructor
   public : cPtr_switchInstructionIR (const GALGAS_uint & in_mLabelIndex,
@@ -510,13 +510,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_functionCallIR ;
 
 class cPtr_functionCallIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_string mAttribute_mGlobalVariableName ;
-  public : GALGAS_objectIR mAttribute_mResult ;
-  public : GALGAS_lstring mAttribute_mFunctionMangledName ;
-  public : GALGAS_lstring mAttribute_mFunctionNameForGeneration ;
-  public : GALGAS_calleeKindIR mAttribute_mKind ;
-  public : GALGAS_procCallEffectiveParameterListIR mAttribute_mArgumentList ;
-  public : GALGAS_bool mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
+  public : GALGAS_string mProperty_mGlobalVariableName ;
+  public : GALGAS_objectIR mProperty_mResult ;
+  public : GALGAS_lstring mProperty_mFunctionMangledName ;
+  public : GALGAS_lstring mProperty_mFunctionNameForGeneration ;
+  public : GALGAS_calleeKindIR mProperty_mKind ;
+  public : GALGAS_procCallEffectiveParameterListIR mProperty_mArgumentList ;
+  public : GALGAS_bool mProperty_mAppendFileAndLineArgumentForPanicLocation ;
 
 //--- Constructor
   public : cPtr_functionCallIR (const GALGAS_string & in_mGlobalVariableName,

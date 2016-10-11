@@ -563,12 +563,25 @@ proc analyzeFunctionCallInExpression
 {
 #---
   outEffectiveParameterListIR = {}
-#--- Add receiver as first argument
   let receiverType = [inReceiver type]
+#--- Special case : call a function from a static array during enumeration
+  var specialCase = (receiverType != .null) && [[receiverType kind] isStructure]
+  if specialCase then
+    [[receiverType kind] structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?propertyList:*]
+    if [propertyMap hasKey !inRoutineName] then
+      [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject ?*]
+      [propertyObject property ?type:let type ?plmName:let unused plmName ?index:let unused index]
+      specialCase = [[type kind] isFunction]
+      if specialCase then
+        log inRoutineName
+      end
+    end
+  end
+#--- Add receiver as first argument
   if receiverType != .null then
     outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
     outEffectiveParameterListIR += !.outputInput !inReceiver
-  else
+ else
     outRoutineMangledName = inRoutineName
   end
 #--- Build LLVM mangled name

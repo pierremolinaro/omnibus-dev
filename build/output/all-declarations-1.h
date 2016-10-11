@@ -149,9 +149,9 @@ class GALGAS_interruptionConfigurationList : public AC_GALGAS_list {
   public : GALGAS_interruptionConfigurationList (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_interruptionConfigurationList (cSharedList * inSharedListPtr) ;
+  public : GALGAS_interruptionConfigurationList (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_lstring & in_mInterruptName,
                                                   const class GALGAS_interruptionPanicCode & in_mInterruptionPanicCode
@@ -283,10 +283,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigu
 
 class GALGAS_targetParameters : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lbigint mAttribute_mSystemStackSize ;
-  public : GALGAS_lbigint mAttribute_mStackedUserRegisterOnInterruptByteSize ;
-  public : GALGAS_lbigint mAttribute_mServicePushedRegisterByteSize ;
-  public : GALGAS_lbigint mAttribute_mSectionPushedRegisterByteSize ;
+  public : GALGAS_lbigint mProperty_mSystemStackSize ;
+  public : GALGAS_lbigint mProperty_mStackedUserRegisterOnInterruptByteSize ;
+  public : GALGAS_lbigint mProperty_mServicePushedRegisterByteSize ;
+  public : GALGAS_lbigint mProperty_mSectionPushedRegisterByteSize ;
 
 
 //--------------------------------- Accessors
@@ -364,12 +364,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_targetParameters ;
 
 class cPtr_configurationDeclarationAST : public cPtr_abstractDeclaration {
 //--- Attributes
-  public : GALGAS_lbigint mAttribute_mPointerSize ;
-  public : GALGAS_lstring mAttribute_mPanicCodeTypeName ;
-  public : GALGAS_lstring mAttribute_mPanicLineTypeName ;
-  public : GALGAS_lstring mAttribute_mUnsignedIntegerTypeName ;
-  public : GALGAS_targetParameters mAttribute_mTargetParameters ;
-  public : GALGAS_interruptionConfigurationList mAttribute_mInterruptionConfigurationList ;
+  public : GALGAS_lbigint mProperty_mPointerSize ;
+  public : GALGAS_lstring mProperty_mPanicCodeTypeName ;
+  public : GALGAS_lstring mProperty_mPanicLineTypeName ;
+  public : GALGAS_lstring mProperty_mUnsignedIntegerTypeName ;
+  public : GALGAS_targetParameters mProperty_mTargetParameters ;
+  public : GALGAS_interruptionConfigurationList mProperty_mInterruptionConfigurationList ;
 
 //--- Constructor
   public : cPtr_configurationDeclarationAST (const GALGAS_lbigint & in_mPointerSize,
@@ -505,8 +505,8 @@ class cEnumAssociatedValues_interruptionPanicCode_panicCode : public cEnumAssoci
 
 class GALGAS_interruptionConfigurationList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_mInterruptName ;
-  public : GALGAS_interruptionPanicCode mAttribute_mInterruptionPanicCode ;
+  public : GALGAS_lstring mProperty_mInterruptName ;
+  public : GALGAS_interruptionPanicCode mProperty_mInterruptionPanicCode ;
 
 
 //--------------------------------- Accessors
@@ -677,7 +677,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumConstantMap ;
 
 class cMapElement_enumConstantMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_uint mAttribute_mIndex ;
+  public : GALGAS_uint mProperty_mIndex ;
 
 //--- Constructor
   public : cMapElement_enumConstantMap (const GALGAS_lstring & inKey,
@@ -705,8 +705,8 @@ class cMapElement_enumConstantMap : public cMapElement {
 
 class GALGAS_enumConstantMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_uint mAttribute_mIndex ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_uint mProperty_mIndex ;
 
 
 //--------------------------------- Accessors
@@ -776,10 +776,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumConstantMap_2D_
 
 class GALGAS_structurePropertyListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_mFieldName ;
-  public : GALGAS_bool mAttribute_mIsPublic ;
-  public : GALGAS_lstring mAttribute_mFieldTypeName ;
-  public : GALGAS_structureVarInit mAttribute_mInitialisation ;
+  public : GALGAS_lstring mProperty_mFieldName ;
+  public : GALGAS_bool mProperty_mIsPublic ;
+  public : GALGAS_lstring mProperty_mFieldTypeName ;
+  public : GALGAS_structureVarInit mProperty_mInitialisation ;
 
 
 //--------------------------------- Accessors
@@ -857,9 +857,9 @@ class GALGAS_propertyList : public AC_GALGAS_list {
   public : GALGAS_propertyList (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_propertyList (cSharedList * inSharedListPtr) ;
+  public : GALGAS_propertyList (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_string & in_mPropertyName,
                                                   const class GALGAS_unifiedTypeMap_2D_proxy & in_mType
@@ -1065,8 +1065,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMap_2D_p
 
 class GALGAS_propertyList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_string mAttribute_mPropertyName ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
+  public : GALGAS_string mProperty_mPropertyName ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
 
 
 //--------------------------------- Accessors
@@ -1495,9 +1495,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR ;
 
 class cMapElement_propertyMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_bool mAttribute_mIsPublic ;
-  public : GALGAS_objectIR mAttribute_mPropertyObject ;
-  public : GALGAS_uint mAttribute_mIndex ;
+  public : GALGAS_bool mProperty_mIsPublic ;
+  public : GALGAS_objectIR mProperty_mPropertyObject ;
+  public : GALGAS_uint mProperty_mIndex ;
 
 //--- Constructor
   public : cMapElement_propertyMap (const GALGAS_lstring & inKey,
@@ -1527,10 +1527,10 @@ class cMapElement_propertyMap : public cMapElement {
 
 class GALGAS_propertyMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_bool mAttribute_mIsPublic ;
-  public : GALGAS_objectIR mAttribute_mPropertyObject ;
-  public : GALGAS_uint mAttribute_mIndex ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_bool mProperty_mIsPublic ;
+  public : GALGAS_objectIR mProperty_mPropertyObject ;
+  public : GALGAS_uint mProperty_mIndex ;
 
 
 //--------------------------------- Accessors
@@ -1608,9 +1608,9 @@ class GALGAS_constructorSignature : public AC_GALGAS_list {
   public : GALGAS_constructorSignature (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_constructorSignature (cSharedList * inSharedListPtr) ;
+  public : GALGAS_constructorSignature (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_string & in_mSelector,
                                                   const class GALGAS_unifiedTypeMap_2D_proxy & in_mType,
@@ -1756,9 +1756,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorSignatur
 
 class GALGAS_constructorSignature_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_string mAttribute_mSelector ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
-  public : GALGAS_uint mAttribute_mFieldIndex ;
+  public : GALGAS_string mProperty_mSelector ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
+  public : GALGAS_uint mProperty_mFieldIndex ;
 
 
 //--------------------------------- Accessors
@@ -1926,9 +1926,9 @@ class GALGAS_operandIRList : public AC_GALGAS_list {
   public : GALGAS_operandIRList (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_operandIRList (cSharedList * inSharedListPtr) ;
+  public : GALGAS_operandIRList (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_objectIR & in_mOperand
                                                   COMMA_LOCATION_ARGS) ;
@@ -2411,10 +2411,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceMap ;
 
 class cMapElement_sliceMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_llvmBinaryOperation mAttribute_mAccessOperator ;
-  public : GALGAS_bigint mAttribute_mAccessRightOperand ;
-  public : GALGAS_sliceMap mAttribute_mSubMap ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mResultType ;
+  public : GALGAS_llvmBinaryOperation mProperty_mAccessOperator ;
+  public : GALGAS_bigint mProperty_mAccessRightOperand ;
+  public : GALGAS_sliceMap mProperty_mSubMap ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mResultType ;
 
 //--- Constructor
   public : cMapElement_sliceMap (const GALGAS_lstring & inKey,
@@ -2683,8 +2683,8 @@ class cEnumAssociatedValues_objectIR_possibleFunction : public cEnumAssociatedVa
 
 class GALGAS_sortedOperandIRList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_objectIR mAttribute_mOperand ;
-  public : GALGAS_uint mAttribute_mIndex ;
+  public : GALGAS_objectIR mProperty_mOperand ;
+  public : GALGAS_uint mProperty_mIndex ;
 
 
 //--------------------------------- Accessors
@@ -2834,8 +2834,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerDeclaration 
 
 class cPtr_integerDeclaration : public cPtr_abstractDeclaration {
 //--- Attributes
-  public : GALGAS_bool mAttribute_mIsSigned ;
-  public : GALGAS_uint mAttribute_mSize ;
+  public : GALGAS_bool mProperty_mIsSigned ;
+  public : GALGAS_uint mProperty_mSize ;
 
 //--- Constructor
   public : cPtr_integerDeclaration (const GALGAS_bool & in_mIsSigned,
@@ -2965,11 +2965,11 @@ class cPtr_literalIntegerDeclaration : public cPtr_abstractDeclaration {
 
 class GALGAS_controlRegisterNameList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_mRegisterName ;
-  public : GALGAS_controlRegisterKind mAttribute_mControlRegisterKind ;
-  public : GALGAS_lstringlist mAttribute_mAttributeList ;
-  public : GALGAS_expressionAST mAttribute_mRegisterAddress ;
-  public : GALGAS_location mAttribute_mRegisterAddressLocation ;
+  public : GALGAS_lstring mProperty_mRegisterName ;
+  public : GALGAS_controlRegisterKind mProperty_mControlRegisterKind ;
+  public : GALGAS_lstringlist mProperty_mAttributeList ;
+  public : GALGAS_expressionAST mProperty_mRegisterAddress ;
+  public : GALGAS_location mProperty_mRegisterAddressLocation ;
 
 
 //--------------------------------- Accessors
@@ -3048,7 +3048,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterName
 
 class GALGAS_controlRegisterBitSliceList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_controlRegisterBitSlice mAttribute_mRegisterBitSlice ;
+  public : GALGAS_controlRegisterBitSlice mProperty_mRegisterBitSlice ;
 
 
 //--------------------------------- Accessors
@@ -3114,9 +3114,9 @@ class GALGAS_controlRegisterFieldList : public AC_GALGAS_list {
   public : GALGAS_controlRegisterFieldList (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_controlRegisterFieldList (cSharedList * inSharedListPtr) ;
+  public : GALGAS_controlRegisterFieldList (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_uint & in_mFieldBitCount,
                                                   const class GALGAS_string & in_mFieldName
@@ -3248,8 +3248,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFiel
 
 class GALGAS_controlRegisterFieldList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_uint mAttribute_mFieldBitCount ;
-  public : GALGAS_string mAttribute_mFieldName ;
+  public : GALGAS_uint mProperty_mFieldBitCount ;
+  public : GALGAS_string mProperty_mFieldName ;
 
 
 //--------------------------------- Accessors
@@ -3436,8 +3436,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFiel
 
 class cMapElement_controlRegisterFieldMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_uint mAttribute_mBitIndex ;
-  public : GALGAS_uint mAttribute_mBitCount ;
+  public : GALGAS_uint mProperty_mBitIndex ;
+  public : GALGAS_uint mProperty_mBitCount ;
 
 //--- Constructor
   public : cMapElement_controlRegisterFieldMap (const GALGAS_lstring & inKey,
@@ -3466,9 +3466,9 @@ class cMapElement_controlRegisterFieldMap : public cMapElement {
 
 class GALGAS_controlRegisterFieldMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_uint mAttribute_mBitIndex ;
-  public : GALGAS_uint mAttribute_mBitCount ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_uint mProperty_mBitIndex ;
+  public : GALGAS_uint mProperty_mBitCount ;
 
 
 //--------------------------------- Accessors
@@ -3542,11 +3542,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFiel
 
 class GALGAS_sliceMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_llvmBinaryOperation mAttribute_mAccessOperator ;
-  public : GALGAS_bigint mAttribute_mAccessRightOperand ;
-  public : GALGAS_sliceMap mAttribute_mSubMap ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mResultType ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_llvmBinaryOperation mProperty_mAccessOperator ;
+  public : GALGAS_bigint mProperty_mAccessRightOperand ;
+  public : GALGAS_sliceMap mProperty_mSubMap ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mResultType ;
 
 
 //--------------------------------- Accessors
@@ -3846,16 +3846,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterMap 
 
 class cMapElement_controlRegisterMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
-  public : GALGAS_bool mAttribute_mIsReadOnly ;
-  public : GALGAS_bool mAttribute_mIsAccessibleInUserMode ;
-  public : GALGAS_sliceMap mAttribute_mRegisterFieldAccessMap ;
-  public : GALGAS_controlRegisterFieldMap mAttribute_mRegisterFieldMap ;
-  public : GALGAS_bigint mAttribute_mAddress ;
-  public : GALGAS_controlRegisterFieldList mAttribute_mControlRegisterFieldList ;
-  public : GALGAS_uint mAttribute_mRegisterBitCount ;
-  public : GALGAS_uint mAttribute_mArraySize ;
-  public : GALGAS_uint mAttribute_mElementArraySize ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
+  public : GALGAS_bool mProperty_mIsReadOnly ;
+  public : GALGAS_bool mProperty_mIsAccessibleInUserMode ;
+  public : GALGAS_sliceMap mProperty_mRegisterFieldAccessMap ;
+  public : GALGAS_controlRegisterFieldMap mProperty_mRegisterFieldMap ;
+  public : GALGAS_bigint mProperty_mAddress ;
+  public : GALGAS_controlRegisterFieldList mProperty_mControlRegisterFieldList ;
+  public : GALGAS_uint mProperty_mRegisterBitCount ;
+  public : GALGAS_uint mProperty_mArraySize ;
+  public : GALGAS_uint mProperty_mElementArraySize ;
 
 //--- Constructor
   public : cMapElement_controlRegisterMap (const GALGAS_lstring & inKey,
@@ -3892,17 +3892,17 @@ class cMapElement_controlRegisterMap : public cMapElement {
 
 class GALGAS_controlRegisterMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
-  public : GALGAS_bool mAttribute_mIsReadOnly ;
-  public : GALGAS_bool mAttribute_mIsAccessibleInUserMode ;
-  public : GALGAS_sliceMap mAttribute_mRegisterFieldAccessMap ;
-  public : GALGAS_controlRegisterFieldMap mAttribute_mRegisterFieldMap ;
-  public : GALGAS_bigint mAttribute_mAddress ;
-  public : GALGAS_controlRegisterFieldList mAttribute_mControlRegisterFieldList ;
-  public : GALGAS_uint mAttribute_mRegisterBitCount ;
-  public : GALGAS_uint mAttribute_mArraySize ;
-  public : GALGAS_uint mAttribute_mElementArraySize ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
+  public : GALGAS_bool mProperty_mIsReadOnly ;
+  public : GALGAS_bool mProperty_mIsAccessibleInUserMode ;
+  public : GALGAS_sliceMap mProperty_mRegisterFieldAccessMap ;
+  public : GALGAS_controlRegisterFieldMap mProperty_mRegisterFieldMap ;
+  public : GALGAS_bigint mProperty_mAddress ;
+  public : GALGAS_controlRegisterFieldList mProperty_mControlRegisterFieldList ;
+  public : GALGAS_uint mProperty_mRegisterBitCount ;
+  public : GALGAS_uint mProperty_mArraySize ;
+  public : GALGAS_uint mProperty_mElementArraySize ;
 
 
 //--------------------------------- Accessors
@@ -4258,7 +4258,7 @@ class cMapElement_moduleMap : public cMapElement {
 
 class GALGAS_moduleMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
+  public : GALGAS_lstring mProperty_lkey ;
 
 
 //--------------------------------- Accessors
@@ -4327,9 +4327,9 @@ class GALGAS_moduleListIR : public AC_GALGAS_list {
   public : GALGAS_moduleListIR (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_moduleListIR (cSharedList * inSharedListPtr) ;
+  public : GALGAS_moduleListIR (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_string & in_mModuleName,
                                                   const class GALGAS_unifiedTypeMap_2D_proxy & in_mType,
@@ -4475,9 +4475,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_moduleListIR ;
 
 class GALGAS_moduleListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_string mAttribute_mModuleName ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
-  public : GALGAS_operandIRList mAttribute_mInitialValueList ;
+  public : GALGAS_string mProperty_mModuleName ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
+  public : GALGAS_operandIRList mProperty_mInitialValueList ;
 
 
 //--------------------------------- Accessors
@@ -4551,7 +4551,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_moduleListIR_2D_ele
 
 class GALGAS_operandIRList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_objectIR mAttribute_mOperand ;
+  public : GALGAS_objectIR mProperty_mOperand ;
 
 
 //--------------------------------- Accessors
@@ -4614,10 +4614,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_operandIRList_2D_el
 
 class GALGAS_procFormalArgumentList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_procFormalArgumentPassingMode mAttribute_mFormalArgumentPassingMode ;
-  public : GALGAS_lstring mAttribute_mSelector ;
-  public : GALGAS_lstring mAttribute_mFormalArgumentTypeName ;
-  public : GALGAS_lstring mAttribute_mFormalArgumentName ;
+  public : GALGAS_procFormalArgumentPassingMode mProperty_mFormalArgumentPassingMode ;
+  public : GALGAS_lstring mProperty_mSelector ;
+  public : GALGAS_lstring mProperty_mFormalArgumentTypeName ;
+  public : GALGAS_lstring mProperty_mFormalArgumentName ;
 
 
 //--------------------------------- Accessors
@@ -4692,8 +4692,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentL
 
 class GALGAS_staticArrayPropertyListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_mPropertyName ;
-  public : GALGAS_staticArrayPropertyTypeAST mAttribute_mPropertyType ;
+  public : GALGAS_lstring mProperty_mPropertyName ;
+  public : GALGAS_staticArrayPropertyTypeAST mProperty_mPropertyType ;
 
 
 //--------------------------------- Accessors
@@ -4864,7 +4864,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticlistMap ;
 
 class cMapElement_staticlistMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_propertyList mAttribute_mStaticlistPropertyList ;
+  public : GALGAS_propertyList mProperty_mStaticlistPropertyList ;
 
 //--- Constructor
   public : cMapElement_staticlistMap (const GALGAS_lstring & inKey,
@@ -4892,8 +4892,8 @@ class cMapElement_staticlistMap : public cMapElement {
 
 class GALGAS_staticlistMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_propertyList mAttribute_mStaticlistPropertyList ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_propertyList mProperty_mStaticlistPropertyList ;
 
 
 //--------------------------------- Accessors
@@ -4963,8 +4963,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticlistMap_2D_el
 
 class GALGAS_extendStaticArrayExpressionListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_extendStaticArrayExpressionAST mAttribute_mExpression ;
-  public : GALGAS_location mAttribute_mEndOfExpression ;
+  public : GALGAS_extendStaticArrayExpressionAST mProperty_mExpression ;
+  public : GALGAS_location mProperty_mEndOfExpression ;
 
 
 //--------------------------------- Accessors
@@ -5135,7 +5135,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticArrayMap ;
 
 class cMapElement_staticArrayMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_stringset mAttribute_mInvokedFunctionSet ;
+  public : GALGAS_stringset mProperty_mInvokedFunctionSet ;
 
 //--- Constructor
   public : cMapElement_staticArrayMap (const GALGAS_lstring & inKey,
@@ -5163,8 +5163,8 @@ class cMapElement_staticArrayMap : public cMapElement {
 
 class GALGAS_staticArrayMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_stringset mAttribute_mInvokedFunctionSet ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_stringset mProperty_mInvokedFunctionSet ;
 
 
 //--------------------------------- Accessors
@@ -5234,9 +5234,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticArrayMap_2D_e
 
 class GALGAS_taskVarListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_mVarName ;
-  public : GALGAS_lstring mAttribute_mVarTypeName ;
-  public : GALGAS_expressionAST mAttribute_mVarInitExpression ;
+  public : GALGAS_lstring mProperty_mVarName ;
+  public : GALGAS_lstring mProperty_mVarTypeName ;
+  public : GALGAS_expressionAST mProperty_mVarInitExpression ;
 
 
 //--------------------------------- Accessors
@@ -5307,9 +5307,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskVarListAST_2D_e
 
 class GALGAS_taskInitListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lbigint mAttribute_mTaskInitPriority ;
-  public : GALGAS_instructionListAST mAttribute_mTaskInitInstructionList ;
-  public : GALGAS_location mAttribute_mEndOfTaskInitDeclaration ;
+  public : GALGAS_lbigint mProperty_mTaskInitPriority ;
+  public : GALGAS_instructionListAST mProperty_mTaskInitInstructionList ;
+  public : GALGAS_location mProperty_mEndOfTaskInitDeclaration ;
 
 
 //--------------------------------- Accessors
@@ -5383,9 +5383,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskInitListAST_2D_
 
 class GALGAS_syncInstructionBranchList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_guardedCommand mAttribute_mGuardedCommand ;
-  public : GALGAS_instructionListAST mAttribute_mInstructionList ;
-  public : GALGAS_location mAttribute_mEndOfBranch ;
+  public : GALGAS_guardedCommand mProperty_mGuardedCommand ;
+  public : GALGAS_instructionListAST mProperty_mInstructionList ;
+  public : GALGAS_location mProperty_mEndOfBranch ;
 
 
 //--------------------------------- Accessors
@@ -5456,8 +5456,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncInstructionBran
 
 class GALGAS_instructionListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_location mAttribute_mInstructionLocation ;
-  public : GALGAS_instructionAST mAttribute_mInstruction ;
+  public : GALGAS_location mProperty_mInstructionLocation ;
+  public : GALGAS_instructionAST mProperty_mInstruction ;
 
 
 //--------------------------------- Accessors
@@ -5629,10 +5629,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskInitSortedListA
 
 class GALGAS_taskInitSortedListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lbigint mAttribute_mTaskInitPriority ;
-  public : GALGAS_instructionListAST mAttribute_mTaskInitInstructionList ;
-  public : GALGAS_location mAttribute_mEndOfTaskInitDeclaration ;
-  public : GALGAS_bigint mAttribute_mPriority ;
+  public : GALGAS_lbigint mProperty_mTaskInitPriority ;
+  public : GALGAS_instructionListAST mProperty_mTaskInitInstructionList ;
+  public : GALGAS_location mProperty_mEndOfTaskInitDeclaration ;
+  public : GALGAS_bigint mProperty_mPriority ;
 
 
 //--------------------------------- Accessors
@@ -5872,7 +5872,7 @@ class cMapElement_taskProcedureMap : public cMapElement {
 
 class GALGAS_taskProcedureMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
+  public : GALGAS_lstring mProperty_lkey ;
 
 
 //--------------------------------- Accessors
@@ -6042,7 +6042,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMap ;
 
 class cMapElement_taskMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_taskProcedureMap mAttribute_mTaskProcedureMap ;
+  public : GALGAS_taskProcedureMap mProperty_mTaskProcedureMap ;
 
 //--- Constructor
   public : cMapElement_taskMap (const GALGAS_lstring & inKey,
@@ -6070,8 +6070,8 @@ class cMapElement_taskMap : public cMapElement {
 
 class GALGAS_taskMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_taskProcedureMap mAttribute_mTaskProcedureMap ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_taskProcedureMap mProperty_mTaskProcedureMap ;
 
 
 //--------------------------------- Accessors
@@ -6311,9 +6311,9 @@ class GALGAS_procedureSignature : public AC_GALGAS_list {
   public : GALGAS_procedureSignature (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_procedureSignature (cSharedList * inSharedListPtr) ;
+  public : GALGAS_procedureSignature (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
                                                   const class GALGAS_lstring & in_mSelector,
@@ -6580,9 +6580,9 @@ class GALGAS_globalTaskVariableList : public AC_GALGAS_list {
   public : GALGAS_globalTaskVariableList (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_globalTaskVariableList (cSharedList * inSharedListPtr) ;
+  public : GALGAS_globalTaskVariableList (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_string & in_mTaskName,
                                                   const class GALGAS_string & in_mTaskTypeName,
@@ -6832,7 +6832,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_classConstantMap ;
 
 class cMapElement_classConstantMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_objectIR mAttribute_mValue ;
+  public : GALGAS_objectIR mProperty_mValue ;
 
 //--- Constructor
   public : cMapElement_classConstantMap (const GALGAS_lstring & inKey,
@@ -6964,7 +6964,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticStringMap ;
 
 class cMapElement_staticStringMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_uint mAttribute_mIndex ;
+  public : GALGAS_uint mProperty_mIndex ;
 
 //--- Constructor
   public : cMapElement_staticStringMap (const GALGAS_lstring & inKey,
@@ -7170,12 +7170,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMap ;
 
 class cMapElement_unifiedTypeMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_typeKind mAttribute_kind ;
-  public : GALGAS_classConstantMap mAttribute_classConstantMap ;
-  public : GALGAS_bool mAttribute_instantiable ;
-  public : GALGAS_bool mAttribute_copyable ;
-  public : GALGAS_bool mAttribute_equatable ;
-  public : GALGAS_bool mAttribute_comparable ;
+  public : GALGAS_typeKind mProperty_kind ;
+  public : GALGAS_classConstantMap mProperty_classConstantMap ;
+  public : GALGAS_bool mProperty_instantiable ;
+  public : GALGAS_bool mProperty_copyable ;
+  public : GALGAS_bool mProperty_equatable ;
+  public : GALGAS_bool mProperty_comparable ;
 
 //--- Constructor
   public : cMapElement_unifiedTypeMap (const GALGAS_lstring & inKey,
@@ -8463,54 +8463,54 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineMapForContex
 
 class GALGAS_semanticContext : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_targetParameters mAttribute_mTargetParameters ;
-  public : GALGAS_uint mAttribute_mPointerSize ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mBooleanType ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mLiteralIntegerType ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mPanicCodeType ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mPanicLineType ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mUnsignedIntegerType ;
-  public : GALGAS_unifiedTypeMap mAttribute_mTypeMap ;
-  public : GALGAS_routineMapForContext mAttribute_mRoutineMapForContext ;
-  public : GALGAS_guardMapForContext mAttribute_mGuardMapForContext ;
-  public : GALGAS_initRoutineMap mAttribute_mInitRoutineMap ;
-  public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicSetupRoutinePriorityMap ;
-  public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicLoopRoutinePriorityMap ;
-  public : GALGAS_controlRegisterMap mAttribute_mControlRegisterMap ;
-  public : GALGAS_globalConstantMap mAttribute_mGlobalConstantMap ;
-  public : GALGAS_globalVariableMap mAttribute_mGlobalVariableMap ;
-  public : GALGAS_moduleMap mAttribute_mModuleMap ;
-  public : GALGAS_constructorMap mAttribute_mConstructorMap ;
-  public : GALGAS_staticlistMap mAttribute_mStaticlistMap ;
-  public : GALGAS_stringset mAttribute_mDefinedInterruptSet ;
-  public : GALGAS_availableInterruptMap mAttribute_mAvailableInterruptMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mEqualOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mNonEqualOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mStrictInfOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mInfEqualOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mStrictSupOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mSupEqualOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mAndOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mOrOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mXorOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mBooleanXorOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mAddOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mAddNoOvfOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mSubOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mSubNoOvfOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mMulOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mMulNoOvfOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mDivOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mDivNoOvfOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mModOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mModNoOvfOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mLeftShiftOperatorMap ;
-  public : GALGAS_infixOperatorMap mAttribute_mRightShiftOperatorMap ;
-  public : GALGAS_prefixOperatorMap mAttribute_mUnaryMinusOperatorMap ;
-  public : GALGAS_prefixOperatorMap mAttribute_mNotOperatorMap ;
-  public : GALGAS_prefixOperatorMap mAttribute_mUnsignedComplementOperatorMap ;
-  public : GALGAS_taskMap mAttribute_mTaskMap ;
-  public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
+  public : GALGAS_targetParameters mProperty_mTargetParameters ;
+  public : GALGAS_uint mProperty_mPointerSize ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mBooleanType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mLiteralIntegerType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mPanicCodeType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mPanicLineType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mUnsignedIntegerType ;
+  public : GALGAS_unifiedTypeMap mProperty_mTypeMap ;
+  public : GALGAS_routineMapForContext mProperty_mRoutineMapForContext ;
+  public : GALGAS_guardMapForContext mProperty_mGuardMapForContext ;
+  public : GALGAS_initRoutineMap mProperty_mInitRoutineMap ;
+  public : GALGAS_panicRoutinePriorityMap mProperty_mPanicSetupRoutinePriorityMap ;
+  public : GALGAS_panicRoutinePriorityMap mProperty_mPanicLoopRoutinePriorityMap ;
+  public : GALGAS_controlRegisterMap mProperty_mControlRegisterMap ;
+  public : GALGAS_globalConstantMap mProperty_mGlobalConstantMap ;
+  public : GALGAS_globalVariableMap mProperty_mGlobalVariableMap ;
+  public : GALGAS_moduleMap mProperty_mModuleMap ;
+  public : GALGAS_constructorMap mProperty_mConstructorMap ;
+  public : GALGAS_staticlistMap mProperty_mStaticlistMap ;
+  public : GALGAS_stringset mProperty_mDefinedInterruptSet ;
+  public : GALGAS_availableInterruptMap mProperty_mAvailableInterruptMap ;
+  public : GALGAS_infixOperatorMap mProperty_mEqualOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mNonEqualOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mStrictInfOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mInfEqualOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mStrictSupOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mSupEqualOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mAndOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mOrOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mXorOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mBooleanXorOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mAddOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mAddNoOvfOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mSubOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mSubNoOvfOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mMulOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mMulNoOvfOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mDivOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mDivNoOvfOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mModOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mModNoOvfOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mLeftShiftOperatorMap ;
+  public : GALGAS_infixOperatorMap mProperty_mRightShiftOperatorMap ;
+  public : GALGAS_prefixOperatorMap mProperty_mUnaryMinusOperatorMap ;
+  public : GALGAS_prefixOperatorMap mProperty_mNotOperatorMap ;
+  public : GALGAS_prefixOperatorMap mProperty_mUnsignedComplementOperatorMap ;
+  public : GALGAS_taskMap mProperty_mTaskMap ;
+  public : GALGAS_globalTaskVariableList mProperty_mGlobalTaskVariableList ;
 
 
 //--------------------------------- Accessors
@@ -8793,9 +8793,9 @@ class GALGAS_bootListIR : public AC_GALGAS_list {
   public : GALGAS_bootListIR (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_bootListIR (cSharedList * inSharedListPtr) ;
+  public : GALGAS_bootListIR (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_bigint & in_mBootIndex,
                                                   const class GALGAS_location & in_mInitLocation,
@@ -8972,9 +8972,9 @@ class GALGAS_initListIR : public AC_GALGAS_list {
   public : GALGAS_initListIR (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_initListIR (cSharedList * inSharedListPtr) ;
+  public : GALGAS_initListIR (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
                                                   const class GALGAS_string & in_mGlobalVariable,
@@ -9165,9 +9165,9 @@ class GALGAS_instructionListIR : public AC_GALGAS_list {
   public : GALGAS_instructionListIR (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_instructionListIR (cSharedList * inSharedListPtr) ;
+  public : GALGAS_instructionListIR (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_abstractInstructionIR & in_mInstructionGeneration
                                                   COMMA_LOCATION_ARGS) ;
@@ -10397,24 +10397,24 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMapIR ;
 
 class GALGAS_intermediateCodeStruct : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_staticStringMap mAttribute_mStaticStringMap ;
-  public : GALGAS_globalVariableMapIR mAttribute_mGlobalVariableMap ;
-  public : GALGAS_globalConstantMapIR mAttribute_mGlobalConstantMap ;
-  public : GALGAS_routineMapIR mAttribute_mRoutineMapIR ;
-  public : GALGAS_guardMapIR mAttribute_mGuardMapIR ;
-  public : GALGAS_interruptMapIR mAttribute_mInterruptMapIR ;
-  public : GALGAS_externProcedureMapIR mAttribute_mExternProcedureMapIR ;
-  public : GALGAS_stringset mAttribute_mRequiredProcedureSet ;
-  public : GALGAS_bootListIR mAttribute_mBootList ;
-  public : GALGAS_initListIR mAttribute_mInitList ;
-  public : GALGAS_instructionListIR mAttribute_mPanicSetupInstructionListIR ;
-  public : GALGAS_instructionListIR mAttribute_mPanicLoopInstructionListIR ;
-  public : GALGAS_taskMapIR mAttribute_mTaskMapIR ;
-  public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
-  public : GALGAS_uint mAttribute_mMaxBranchOfOnInstructions ;
-  public : GALGAS_targetParameters mAttribute_mTargetParameters ;
-  public : GALGAS_moduleListIR mAttribute_mModuleList ;
-  public : GALGAS_staticArrayMap mAttribute_mStaticArrayMap ;
+  public : GALGAS_staticStringMap mProperty_mStaticStringMap ;
+  public : GALGAS_globalVariableMapIR mProperty_mGlobalVariableMap ;
+  public : GALGAS_globalConstantMapIR mProperty_mGlobalConstantMap ;
+  public : GALGAS_routineMapIR mProperty_mRoutineMapIR ;
+  public : GALGAS_guardMapIR mProperty_mGuardMapIR ;
+  public : GALGAS_interruptMapIR mProperty_mInterruptMapIR ;
+  public : GALGAS_externProcedureMapIR mProperty_mExternProcedureMapIR ;
+  public : GALGAS_stringset mProperty_mRequiredProcedureSet ;
+  public : GALGAS_bootListIR mProperty_mBootList ;
+  public : GALGAS_initListIR mProperty_mInitList ;
+  public : GALGAS_instructionListIR mProperty_mPanicSetupInstructionListIR ;
+  public : GALGAS_instructionListIR mProperty_mPanicLoopInstructionListIR ;
+  public : GALGAS_taskMapIR mProperty_mTaskMapIR ;
+  public : GALGAS_globalTaskVariableList mProperty_mGlobalTaskVariableList ;
+  public : GALGAS_uint mProperty_mMaxBranchOfOnInstructions ;
+  public : GALGAS_targetParameters mProperty_mTargetParameters ;
+  public : GALGAS_moduleListIR mProperty_mModuleList ;
+  public : GALGAS_staticArrayMap mProperty_mStaticArrayMap ;
 
 
 //--------------------------------- Accessors
@@ -10798,13 +10798,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_initRoutinePriority
 
 class GALGAS_semanticTemporariesStruct : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_uint mAttribute_mTemporaryIndex ;
-  public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicSetupRoutinePriorityMap ;
-  public : GALGAS_panicRoutinePriorityMap mAttribute_mPanicLoopRoutinePriorityMap ;
-  public : GALGAS_initRoutinePriorityMap mAttribute_mInitRoutinePriorityMap ;
-  public : GALGAS_bootRoutinePriorityMap mAttribute_mBootRoutinePriorityMap ;
-  public : GALGAS_subprogramInvocationGraph mAttribute_mSubprogramInvocationGraph ;
-  public : GALGAS_staticArrayMap mAttribute_mStaticArrayMap ;
+  public : GALGAS_uint mProperty_mTemporaryIndex ;
+  public : GALGAS_panicRoutinePriorityMap mProperty_mPanicSetupRoutinePriorityMap ;
+  public : GALGAS_panicRoutinePriorityMap mProperty_mPanicLoopRoutinePriorityMap ;
+  public : GALGAS_initRoutinePriorityMap mProperty_mInitRoutinePriorityMap ;
+  public : GALGAS_bootRoutinePriorityMap mProperty_mBootRoutinePriorityMap ;
+  public : GALGAS_subprogramInvocationGraph mProperty_mSubprogramInvocationGraph ;
+  public : GALGAS_staticArrayMap mProperty_mStaticArrayMap ;
 
 
 //--------------------------------- Accessors
@@ -10897,9 +10897,9 @@ class GALGAS_allocaList : public AC_GALGAS_list {
   public : GALGAS_allocaList (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_allocaList (cSharedList * inSharedListPtr) ;
+  public : GALGAS_allocaList (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_string & in_mVarName,
                                                   const class GALGAS_string & in_mLLVMTypeName
@@ -11031,11 +11031,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allocaList ;
 
 class cMapElement_taskMapIR : public cMapElement {
 //--- Map attributes
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTaskType ;
-  public : GALGAS_bigint mAttribute_mPriority ;
-  public : GALGAS_bigint mAttribute_mStackSize ;
-  public : GALGAS_allocaList mAttribute_mAllocaList ;
-  public : GALGAS_instructionListIR mAttribute_mInitInstructionListIR ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mTaskType ;
+  public : GALGAS_bigint mProperty_mPriority ;
+  public : GALGAS_bigint mProperty_mStackSize ;
+  public : GALGAS_allocaList mProperty_mAllocaList ;
+  public : GALGAS_instructionListIR mProperty_mInitInstructionListIR ;
 
 //--- Constructor
   public : cMapElement_taskMapIR (const GALGAS_lstring & inKey,
@@ -11067,12 +11067,12 @@ class cMapElement_taskMapIR : public cMapElement {
 
 class GALGAS_taskMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTaskType ;
-  public : GALGAS_bigint mAttribute_mPriority ;
-  public : GALGAS_bigint mAttribute_mStackSize ;
-  public : GALGAS_allocaList mAttribute_mAllocaList ;
-  public : GALGAS_instructionListIR mAttribute_mInitInstructionListIR ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mTaskType ;
+  public : GALGAS_bigint mProperty_mPriority ;
+  public : GALGAS_bigint mProperty_mStackSize ;
+  public : GALGAS_allocaList mProperty_mAllocaList ;
+  public : GALGAS_instructionListIR mProperty_mInitInstructionListIR ;
 
 
 //--------------------------------- Accessors
@@ -11158,8 +11158,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMapIR_2D_elemen
 
 class GALGAS_allocaList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_string mAttribute_mVarName ;
-  public : GALGAS_string mAttribute_mLLVMTypeName ;
+  public : GALGAS_string mProperty_mVarName ;
+  public : GALGAS_string mProperty_mLLVMTypeName ;
 
 
 //--------------------------------- Accessors
@@ -11298,7 +11298,7 @@ class cPtr_abstractInstructionIR : public acPtr_class {
 
 class GALGAS_instructionListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_abstractInstructionIR mAttribute_mInstructionGeneration ;
+  public : GALGAS_abstractInstructionIR mProperty_mInstructionGeneration ;
 
 
 //--------------------------------- Accessors
@@ -11473,11 +11473,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskSortedListIR ;
 
 class GALGAS_taskSortedListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_string mAttribute_mTaskName ;
-  public : GALGAS_bigint mAttribute_mPriority ;
-  public : GALGAS_bigint mAttribute_mStackSize ;
-  public : GALGAS_allocaList mAttribute_mAllocaList ;
-  public : GALGAS_instructionListIR mAttribute_mInitInstructionListIR ;
+  public : GALGAS_string mProperty_mTaskName ;
+  public : GALGAS_bigint mProperty_mPriority ;
+  public : GALGAS_bigint mProperty_mStackSize ;
+  public : GALGAS_allocaList mProperty_mAllocaList ;
+  public : GALGAS_instructionListIR mProperty_mInitInstructionListIR ;
 
 
 //--------------------------------- Accessors
@@ -11732,10 +11732,10 @@ void extensionMethod_instructionListLLVMCode (const class GALGAS_instructionList
 
 class GALGAS_generationAdds : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_uint mAttribute_mUniqueIndex ;
-  public : GALGAS_stringset mAttribute_mExternFunctionDeclarationSet ;
-  public : GALGAS_staticStringMap mAttribute_mStaticStringMap ;
-  public : GALGAS_bool mAttribute_mUsesGuards ;
+  public : GALGAS_uint mProperty_mUniqueIndex ;
+  public : GALGAS_stringset mProperty_mExternFunctionDeclarationSet ;
+  public : GALGAS_staticStringMap mProperty_mStaticStringMap ;
+  public : GALGAS_bool mProperty_mUsesGuards ;
 
 
 //--------------------------------- Accessors
@@ -11813,10 +11813,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationAdds ;
 
 class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_string mAttribute_mPanicCodeLLVMType ;
-  public : GALGAS_string mAttribute_mPanicLineLLVMType ;
-  public : GALGAS_globalTaskVariableList mAttribute_mGlobalTaskVariableList ;
-  public : GALGAS_availableInterruptMap mAttribute_mAvailableInterruptMap ;
+  public : GALGAS_string mProperty_mPanicCodeLLVMType ;
+  public : GALGAS_string mProperty_mPanicLineLLVMType ;
+  public : GALGAS_globalTaskVariableList mProperty_mGlobalTaskVariableList ;
+  public : GALGAS_availableInterruptMap mProperty_mAvailableInterruptMap ;
 
 
 //--------------------------------- Accessors

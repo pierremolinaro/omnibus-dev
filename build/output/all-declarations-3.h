@@ -17,8 +17,8 @@
 
 class GALGAS_switchCaseList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstringlist mAttribute_mCaseIdentifiers ;
-  public : GALGAS_instructionListAST mAttribute_mCaseInstructionList ;
+  public : GALGAS_lstringlist mProperty_mCaseIdentifiers ;
+  public : GALGAS_instructionListAST mProperty_mCaseInstructionList ;
 
 
 //--------------------------------- Accessors
@@ -91,9 +91,9 @@ class GALGAS_switchCaseListIR : public AC_GALGAS_list {
   public : GALGAS_switchCaseListIR (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_switchCaseListIR (cSharedList * inSharedListPtr) ;
+  public : GALGAS_switchCaseListIR (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_uintlist & in_mCaseIdentifierIndexes,
                                                   const class GALGAS_instructionListIR & in_mCaseInstructionList
@@ -225,8 +225,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchCaseListIR ;
 
 class GALGAS_switchCaseListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_uintlist mAttribute_mCaseIdentifierIndexes ;
-  public : GALGAS_instructionListIR mAttribute_mCaseInstructionList ;
+  public : GALGAS_uintlist mProperty_mCaseIdentifierIndexes ;
+  public : GALGAS_instructionListIR mProperty_mCaseInstructionList ;
 
 
 //--------------------------------- Accessors
@@ -296,7 +296,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchCaseListIR_2D
 
 class GALGAS_accessInAssignmentListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_accessInAssignmentAST mAttribute_mAccess ;
+  public : GALGAS_accessInAssignmentAST mProperty_mAccess ;
 
 
 //--------------------------------- Accessors
@@ -576,18 +576,18 @@ class GALGAS_string callExtensionGetter_keyRepresentationForErrorSignaling (cons
 
 class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_lstring mAttribute_mRoutineLLVMName ;
-  public : GALGAS_bool mAttribute_mIsPublic ;
-  public : GALGAS_bool mAttribute_mGlobal ;
-  public : GALGAS_mode mAttribute_mMode ;
-  public : GALGAS_procedureSignature mAttribute_mSignature ;
-  public : GALGAS_routineKind mAttribute_mRoutineKind ;
-  public : GALGAS_bool mAttribute_mWeak ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mReturnType ;
-  public : GALGAS_bool mAttribute_mAppendFileAndLineArgumentForPanicLocation ;
-  public : GALGAS_bool mAttribute_mCanAccessProperties ;
-  public : GALGAS_bool mAttribute_mCanMutateProperties ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_lstring mProperty_mRoutineLLVMName ;
+  public : GALGAS_bool mProperty_mIsPublic ;
+  public : GALGAS_bool mProperty_mGlobal ;
+  public : GALGAS_mode mProperty_mMode ;
+  public : GALGAS_procedureSignature mProperty_mSignature ;
+  public : GALGAS_routineKind mProperty_mRoutineKind ;
+  public : GALGAS_bool mProperty_mWeak ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
+  public : GALGAS_bool mProperty_mAppendFileAndLineArgumentForPanicLocation ;
+  public : GALGAS_bool mProperty_mCanAccessProperties ;
+  public : GALGAS_bool mProperty_mCanMutateProperties ;
 
 
 //--------------------------------- Accessors
@@ -694,9 +694,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineMapForContex
 
 class GALGAS_procedureSignature_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_procFormalArgumentPassingMode mAttribute_mFormalArgumentPassingMode ;
-  public : GALGAS_lstring mAttribute_mSelector ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
+  public : GALGAS_procFormalArgumentPassingMode mProperty_mFormalArgumentPassingMode ;
+  public : GALGAS_lstring mProperty_mSelector ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
 
 
 //--------------------------------- Accessors
@@ -767,9 +767,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procedureSignature_
 
 class GALGAS_guardMapForContext_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_bool mAttribute_mIsPublic ;
-  public : GALGAS_procedureSignature mAttribute_mSignature ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_bool mProperty_mIsPublic ;
+  public : GALGAS_procedureSignature mProperty_mSignature ;
 
 
 //--------------------------------- Accessors
@@ -869,7 +869,7 @@ class cMapElement_prefixOperatorMap : public cMapElement {
 
 class GALGAS_prefixOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
+  public : GALGAS_lstring mProperty_lkey ;
 
 
 //--------------------------------- Accessors
@@ -935,8 +935,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorMap_2
 
 class GALGAS_staticStringMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_uint mAttribute_mIndex ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_uint mProperty_mIndex ;
 
 
 //--------------------------------- Accessors
@@ -1018,7 +1018,7 @@ void extensionSetter_findOrAddStaticString (class GALGAS_staticStringMap & ioObj
 
 class cMapElement_globalConstantMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_objectIR mAttribute_mValue ;
+  public : GALGAS_objectIR mProperty_mValue ;
 
 //--- Constructor
   public : cMapElement_globalConstantMap (const GALGAS_lstring & inKey,
@@ -1046,8 +1046,8 @@ class cMapElement_globalConstantMap : public cMapElement {
 
 class GALGAS_globalConstantMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_objectIR mAttribute_mValue ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_objectIR mProperty_mValue ;
 
 
 //--------------------------------- Accessors
@@ -1231,7 +1231,7 @@ class cMapElement_allowedGuardMap : public cMapElement {
 
 class GALGAS_allowedGuardMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
+  public : GALGAS_lstring mProperty_lkey ;
 
 
 //--------------------------------- Accessors
@@ -1297,12 +1297,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allowedGuardMap_2D_
 
 class cMapElement_globalVariableMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_type ;
-  public : GALGAS_stringset mAttribute_executionModeSet ;
-  public : GALGAS_allowedGuardMap mAttribute_allowedGuardMap ;
-  public : GALGAS_objectIR mAttribute_initialValue ;
-  public : GALGAS_bool mAttribute_isConstant ;
-  public : GALGAS_bool mAttribute_allowedAccessToAll ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_type ;
+  public : GALGAS_stringset mProperty_executionModeSet ;
+  public : GALGAS_allowedGuardMap mProperty_allowedGuardMap ;
+  public : GALGAS_objectIR mProperty_initialValue ;
+  public : GALGAS_bool mProperty_isConstant ;
+  public : GALGAS_bool mProperty_allowedAccessToAll ;
 
 //--- Constructor
   public : cMapElement_globalVariableMap (const GALGAS_lstring & inKey,
@@ -1335,13 +1335,13 @@ class cMapElement_globalVariableMap : public cMapElement {
 
 class GALGAS_globalVariableMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_type ;
-  public : GALGAS_stringset mAttribute_executionModeSet ;
-  public : GALGAS_allowedGuardMap mAttribute_allowedGuardMap ;
-  public : GALGAS_objectIR mAttribute_initialValue ;
-  public : GALGAS_bool mAttribute_isConstant ;
-  public : GALGAS_bool mAttribute_allowedAccessToAll ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_type ;
+  public : GALGAS_stringset mProperty_executionModeSet ;
+  public : GALGAS_allowedGuardMap mProperty_allowedGuardMap ;
+  public : GALGAS_objectIR mProperty_initialValue ;
+  public : GALGAS_bool mProperty_isConstant ;
+  public : GALGAS_bool mProperty_allowedAccessToAll ;
 
 
 //--------------------------------- Accessors
@@ -1428,8 +1428,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalVariableMap_2
 
 class GALGAS_classConstantMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_objectIR mAttribute_mValue ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_objectIR mProperty_mValue ;
 
 
 //--------------------------------- Accessors
@@ -1499,9 +1499,9 @@ class GALGAS_operandList : public AC_GALGAS_list {
   public : GALGAS_operandList (void) ;
 
 //--------------------------------- List constructor used by listmap
-  public : GALGAS_operandList (cSharedList * inSharedListPtr) ;
+  public : GALGAS_operandList (const capCollectionElementArray & inSharedArray) ;
 
-//--------------------------------- Element constructor used by listmap
+//--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_objectIR & in_mOperand
                                                   COMMA_LOCATION_ARGS) ;
@@ -1619,7 +1619,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_operandList ;
 
 class GALGAS_operandList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_objectIR mAttribute_mOperand ;
+  public : GALGAS_objectIR mProperty_mOperand ;
 
 
 //--------------------------------- Accessors
@@ -1809,7 +1809,7 @@ class cEnumAssociatedValues_constructorValue_structure : public cEnumAssociatedV
 
 class cMapElement_constructorMap : public cMapElement {
 //--- Map attributes
-  public : GALGAS_constructorValue mAttribute_mInitValue ;
+  public : GALGAS_constructorValue mProperty_mInitValue ;
 
 //--- Constructor
   public : cMapElement_constructorMap (const GALGAS_lstring & inKey,
@@ -1837,8 +1837,8 @@ class cMapElement_constructorMap : public cMapElement {
 
 class GALGAS_constructorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_constructorValue mAttribute_mInitValue ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_constructorValue mProperty_mInitValue ;
 
 
 //--------------------------------- Accessors
@@ -1905,8 +1905,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorMap_2D_e
 
 class GALGAS_availableInterruptMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_interruptionPanicCode mAttribute_mInterruptionPanicCode ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_interruptionPanicCode mProperty_mInterruptionPanicCode ;
 
 
 //--------------------------------- Accessors
@@ -1973,9 +1973,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_availableInterruptM
 
 class GALGAS_globalTaskVariableList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_string mAttribute_mTaskName ;
-  public : GALGAS_string mAttribute_mTaskTypeName ;
-  public : GALGAS_objectIR mAttribute_mInitialValue ;
+  public : GALGAS_string mProperty_mTaskName ;
+  public : GALGAS_string mProperty_mTaskTypeName ;
+  public : GALGAS_objectIR mProperty_mInitialValue ;
 
 
 //--------------------------------- Accessors
@@ -2222,9 +2222,9 @@ void extensionMethod_llvmCodeGeneration (const class GALGAS_routineMapIR_2D_elem
 
 class cMapElement_globalVariableMapIR : public cMapElement {
 //--- Map attributes
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
-  public : GALGAS_bool mAttribute_mGenerateVolatile ;
-  public : GALGAS_objectIR mAttribute_mInitialValue ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
+  public : GALGAS_bool mProperty_mGenerateVolatile ;
+  public : GALGAS_objectIR mProperty_mInitialValue ;
 
 //--- Constructor
   public : cMapElement_globalVariableMapIR (const GALGAS_lstring & inKey,
@@ -2254,10 +2254,10 @@ class cMapElement_globalVariableMapIR : public cMapElement {
 
 class GALGAS_globalVariableMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
-  public : GALGAS_bool mAttribute_mGenerateVolatile ;
-  public : GALGAS_objectIR mAttribute_mInitialValue ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
+  public : GALGAS_bool mProperty_mGenerateVolatile ;
+  public : GALGAS_objectIR mProperty_mInitialValue ;
 
 
 //--------------------------------- Accessors
@@ -2332,8 +2332,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalVariableMapIR
 
 class cMapElement_globalConstantMapIR : public cMapElement {
 //--- Map attributes
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
-  public : GALGAS_objectIR mAttribute_mSourceExpression ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
+  public : GALGAS_objectIR mProperty_mSourceExpression ;
 
 //--- Constructor
   public : cMapElement_globalConstantMapIR (const GALGAS_lstring & inKey,
@@ -2362,9 +2362,9 @@ class cMapElement_globalConstantMapIR : public cMapElement {
 
 class GALGAS_globalConstantMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mAttribute_lkey ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mType ;
-  public : GALGAS_objectIR mAttribute_mSourceExpression ;
+  public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mType ;
+  public : GALGAS_objectIR mProperty_mSourceExpression ;
 
 
 //--------------------------------- Accessors
@@ -2502,8 +2502,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendIR ;
 
 class cPtr_extendIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mResult ;
-  public : GALGAS_objectIR mAttribute_mSource ;
+  public : GALGAS_objectIR mProperty_mResult ;
+  public : GALGAS_objectIR mProperty_mSource ;
 
 //--- Constructor
   public : cPtr_extendIR (const GALGAS_objectIR & in_mResult,
@@ -2601,8 +2601,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncIR ;
 
 class cPtr_truncIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mResult ;
-  public : GALGAS_objectIR mAttribute_mSource ;
+  public : GALGAS_objectIR mProperty_mResult ;
+  public : GALGAS_objectIR mProperty_mSource ;
 
 //--- Constructor
   public : cPtr_truncIR (const GALGAS_objectIR & in_mResult,
@@ -2704,9 +2704,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_leftShiftIR ;
 
 class cPtr_leftShiftIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mResult ;
-  public : GALGAS_objectIR mAttribute_mSource ;
-  public : GALGAS_uint mAttribute_mShiftAmount ;
+  public : GALGAS_objectIR mProperty_mResult ;
+  public : GALGAS_objectIR mProperty_mSource ;
+  public : GALGAS_uint mProperty_mShiftAmount ;
 
 //--- Constructor
   public : cPtr_leftShiftIR (const GALGAS_objectIR & in_mResult,
@@ -2822,12 +2822,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_binaryOperationIR ;
 
 class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTarget ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mOperandType ;
-  public : GALGAS_objectIR mAttribute_mLeft ;
-  public : GALGAS_llvmBinaryOperation mAttribute_mOperation ;
-  public : GALGAS_objectIR mAttribute_mRight ;
-  public : GALGAS_location mAttribute_mLocation ;
+  public : GALGAS_objectIR mProperty_mTarget ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mOperandType ;
+  public : GALGAS_objectIR mProperty_mLeft ;
+  public : GALGAS_llvmBinaryOperation mProperty_mOperation ;
+  public : GALGAS_objectIR mProperty_mRight ;
+  public : GALGAS_location mProperty_mLocation ;
 
 //--- Constructor
   public : cPtr_binaryOperationIR (const GALGAS_objectIR & in_mTarget,
@@ -2949,12 +2949,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_shortCircuitAndOper
 
 class cPtr_shortCircuitAndOperationIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTargetOperand ;
-  public : GALGAS_objectIR mAttribute_mLeftOperand ;
-  public : GALGAS_instructionListIR mAttribute_mLeftInstructionList ;
-  public : GALGAS_objectIR mAttribute_mRightOperand ;
-  public : GALGAS_instructionListIR mAttribute_mRightInstructionList ;
-  public : GALGAS_location mAttribute_mLocation ;
+  public : GALGAS_objectIR mProperty_mTargetOperand ;
+  public : GALGAS_objectIR mProperty_mLeftOperand ;
+  public : GALGAS_instructionListIR mProperty_mLeftInstructionList ;
+  public : GALGAS_objectIR mProperty_mRightOperand ;
+  public : GALGAS_instructionListIR mProperty_mRightInstructionList ;
+  public : GALGAS_location mProperty_mLocation ;
 
 //--- Constructor
   public : cPtr_shortCircuitAndOperationIR (const GALGAS_objectIR & in_mTargetOperand,
@@ -3068,10 +3068,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ComputeRegisterAddr
 
 class cPtr_ComputeRegisterAddressWithSubscriptIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTarget ;
-  public : GALGAS_objectIR mAttribute_mIndexResult ;
-  public : GALGAS_bigint mAttribute_mRegisterAddress ;
-  public : GALGAS_bigint mAttribute_mElementArraySize ;
+  public : GALGAS_objectIR mProperty_mTarget ;
+  public : GALGAS_objectIR mProperty_mIndexResult ;
+  public : GALGAS_bigint mProperty_mRegisterAddress ;
+  public : GALGAS_bigint mProperty_mElementArraySize ;
 
 //--- Constructor
   public : cPtr_ComputeRegisterAddressWithSubscriptIR (const GALGAS_objectIR & in_mTarget,
@@ -3173,8 +3173,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadRegisterIR ;
 
 class cPtr_loadRegisterIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTargetValue ;
-  public : GALGAS_bigint mAttribute_mRegisterAddress ;
+  public : GALGAS_objectIR mProperty_mTargetValue ;
+  public : GALGAS_bigint mProperty_mRegisterAddress ;
 
 //--- Constructor
   public : cPtr_loadRegisterIR (const GALGAS_objectIR & in_mTargetValue,
@@ -3276,9 +3276,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadGlobalVariableI
 
 class cPtr_loadGlobalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTargetValue ;
-  public : GALGAS_string mAttribute_mVariableName ;
-  public : GALGAS_bool mAttribute_mIsVolatile ;
+  public : GALGAS_objectIR mProperty_mTargetValue ;
+  public : GALGAS_string mProperty_mVariableName ;
+  public : GALGAS_bool mProperty_mIsVolatile ;
 
 //--- Constructor
   public : cPtr_loadGlobalVariableIR (const GALGAS_objectIR & in_mTargetValue,
@@ -3382,9 +3382,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadLocalVariableIR
 
 class cPtr_loadLocalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTargetValue ;
-  public : GALGAS_string mAttribute_mVariableName ;
-  public : GALGAS_bool mAttribute_mVolatile ;
+  public : GALGAS_objectIR mProperty_mTargetValue ;
+  public : GALGAS_string mProperty_mVariableName ;
+  public : GALGAS_bool mProperty_mVolatile ;
 
 //--- Constructor
   public : cPtr_loadLocalVariableIR (const GALGAS_objectIR & in_mTargetValue,
@@ -3488,9 +3488,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadFromTemporaryRe
 
 class cPtr_loadFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTargetValue ;
-  public : GALGAS_string mAttribute_mLLVMName ;
-  public : GALGAS_bool mAttribute_mVolatile ;
+  public : GALGAS_objectIR mProperty_mTargetValue ;
+  public : GALGAS_string mProperty_mLLVMName ;
+  public : GALGAS_bool mProperty_mVolatile ;
 
 //--- Constructor
   public : cPtr_loadFromTemporaryReferenceIR (const GALGAS_objectIR & in_mTargetValue,
@@ -3594,9 +3594,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeVolatileIR ;
 
 class cPtr_storeVolatileIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
-  public : GALGAS_bigint mAttribute_mAddress ;
-  public : GALGAS_objectIR mAttribute_mSourceValue ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mTargetVarType ;
+  public : GALGAS_bigint mProperty_mAddress ;
+  public : GALGAS_objectIR mProperty_mSourceValue ;
 
 //--- Constructor
   public : cPtr_storeVolatileIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
@@ -3704,10 +3704,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeGlobalVariable
 
 class cPtr_storeGlobalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_string mAttribute_mGlobalVarName ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
-  public : GALGAS_objectIR mAttribute_mSourceValue ;
-  public : GALGAS_bool mAttribute_mIsVolatile ;
+  public : GALGAS_string mProperty_mGlobalVarName ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mTargetVarType ;
+  public : GALGAS_objectIR mProperty_mSourceValue ;
+  public : GALGAS_bool mProperty_mIsVolatile ;
 
 //--- Constructor
   public : cPtr_storeGlobalVariableIR (const GALGAS_string & in_mGlobalVarName,
@@ -3813,9 +3813,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeLocalVariableI
 
 class cPtr_storeLocalVariableIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_string mAttribute_mLocalVarName ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
-  public : GALGAS_objectIR mAttribute_mSourceValue ;
+  public : GALGAS_string mProperty_mLocalVarName ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mTargetVarType ;
+  public : GALGAS_objectIR mProperty_mSourceValue ;
 
 //--- Constructor
   public : cPtr_storeLocalVariableIR (const GALGAS_string & in_mLocalVarName,
@@ -3923,10 +3923,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeFromTemporaryR
 
 class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mTargetVarType ;
-  public : GALGAS_string mAttribute_mLLVMName ;
-  public : GALGAS_objectIR mAttribute_mSourceValue ;
-  public : GALGAS_bool mAttribute_mVolatile ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mTargetVarType ;
+  public : GALGAS_string mProperty_mLLVMName ;
+  public : GALGAS_objectIR mProperty_mSourceValue ;
+  public : GALGAS_bool mProperty_mVolatile ;
 
 //--- Constructor
   public : cPtr_storeFromTemporaryReferenceIR (const GALGAS_unifiedTypeMap_2D_proxy & in_mTargetVarType,
@@ -4086,10 +4086,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getPropertyReferenc
 
 class cPtr_getPropertyReferenceIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTarget ;
-  public : GALGAS_objectIR mAttribute_mSource ;
-  public : GALGAS_string mAttribute_mPLMname ;
-  public : GALGAS_string mAttribute_mPropertyIndex ;
+  public : GALGAS_objectIR mProperty_mTarget ;
+  public : GALGAS_objectIR mProperty_mSource ;
+  public : GALGAS_string mProperty_mPLMname ;
+  public : GALGAS_string mProperty_mPropertyIndex ;
 
 //--- Constructor
   public : cPtr_getPropertyReferenceIR (const GALGAS_objectIR & in_mTarget,
@@ -4199,10 +4199,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getPropertyReferenc
 
 class cPtr_getPropertyReferenceFromSelfIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTarget ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mAttribute_mSelfType ;
-  public : GALGAS_string mAttribute_mPropertyName ;
-  public : GALGAS_uint mAttribute_mPropertyIndex ;
+  public : GALGAS_objectIR mProperty_mTarget ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mSelfType ;
+  public : GALGAS_string mProperty_mPropertyName ;
+  public : GALGAS_uint mProperty_mPropertyIndex ;
 
 //--- Constructor
   public : cPtr_getPropertyReferenceFromSelfIR (const GALGAS_objectIR & in_mTarget,
@@ -4312,10 +4312,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_selectInstructionIR
 
 class cPtr_selectInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mTargetValue ;
-  public : GALGAS_objectIR mAttribute_m_5F_if_5F_variable ;
-  public : GALGAS_objectIR mAttribute_m_5F_then_5F_variable ;
-  public : GALGAS_objectIR mAttribute_m_5F_else_5F_variable ;
+  public : GALGAS_objectIR mProperty_mTargetValue ;
+  public : GALGAS_objectIR mProperty_m_5F_if_5F_variable ;
+  public : GALGAS_objectIR mProperty_m_5F_then_5F_variable ;
+  public : GALGAS_objectIR mProperty_m_5F_else_5F_variable ;
 
 //--- Constructor
   public : cPtr_selectInstructionIR (const GALGAS_objectIR & in_mTargetValue,
@@ -4422,9 +4422,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_testArrayIndexIR ;
 
 class cPtr_testArrayIndexIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mIndex ;
-  public : GALGAS_location mAttribute_mErrorLocation ;
-  public : GALGAS_bigint mAttribute_mSize ;
+  public : GALGAS_objectIR mProperty_mIndex ;
+  public : GALGAS_location mProperty_mErrorLocation ;
+  public : GALGAS_bigint mProperty_mSize ;
 
 //--- Constructor
   public : cPtr_testArrayIndexIR (const GALGAS_objectIR & in_mIndex,
@@ -4542,10 +4542,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_upperBoundCheckIR ;
 
 class cPtr_upperBoundCheckIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mAttribute_mSource ;
-  public : GALGAS_bigint mAttribute_mUpperBoundPlusOne ;
-  public : GALGAS_uint mAttribute_mPanicCode ;
-  public : GALGAS_location mAttribute_mLocation ;
+  public : GALGAS_objectIR mProperty_mSource ;
+  public : GALGAS_bigint mProperty_mUpperBoundPlusOne ;
+  public : GALGAS_uint mProperty_mPanicCode ;
+  public : GALGAS_location mProperty_mLocation ;
 
 //--- Constructor
   public : cPtr_upperBoundCheckIR (const GALGAS_objectIR & in_mSource,
@@ -4635,7 +4635,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sourceLocationIR ;
 
 class cPtr_sourceLocationIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_location mAttribute_mSourceLocation ;
+  public : GALGAS_location mProperty_mSourceLocation ;
 
 //--- Constructor
   public : cPtr_sourceLocationIR (const GALGAS_location & in_mSourceLocation
@@ -4664,11 +4664,11 @@ class cPtr_sourceLocationIR : public cPtr_abstractInstructionIR {
 
 class GALGAS_accessibleEntities : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_stringset mAttribute_mRoutineSet ;
-  public : GALGAS_stringset mAttribute_mGuardSet ;
-  public : GALGAS_stringset mAttribute_mSectionSet ;
-  public : GALGAS_stringset mAttribute_mGlobalVariableSet ;
-  public : GALGAS_stringset mAttribute_mTaskVariableSet ;
+  public : GALGAS_stringset mProperty_mRoutineSet ;
+  public : GALGAS_stringset mProperty_mGuardSet ;
+  public : GALGAS_stringset mProperty_mSectionSet ;
+  public : GALGAS_stringset mProperty_mGlobalVariableSet ;
+  public : GALGAS_stringset mProperty_mTaskVariableSet ;
 
 
 //--------------------------------- Accessors
@@ -4787,8 +4787,8 @@ void extensionMethod_enterAccessibleEntities (const class GALGAS_instructionList
 
 class GALGAS_staticlistValues_5F_listMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_string mAttribute_key ;
-  public : GALGAS_stringlist mAttribute_mList ;
+  public : GALGAS_string mProperty_key ;
+  public : GALGAS_stringlist mProperty_mList ;
 
 
 //--------------------------------- Accessors
