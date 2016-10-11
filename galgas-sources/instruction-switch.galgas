@@ -107,7 +107,7 @@ override method @switchInstructionAST analyze
 #--- Check inferred type
   @enumConstantMap enumConstantMap
   if [[switchValueIR kind] isEnumeration] then
-    [[switchValueIR kind] enumeration ?constantMap:enumConstantMap]
+    [[switchValueIR kind] enumeration ?constantMap:enumConstantMap ?1*]
   else
     error mEndOf_test_expression
       : "test expression type is '" + [switchValueIR key] + "', it should be boolean"

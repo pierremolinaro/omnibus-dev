@@ -84,14 +84,14 @@ override method @opaqueTypeDeclaration enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---
+  @uint flags = 0
   var copyable = false ;
-  var instantiable = false ;
   for (attribute) in mAttributeList do
     if attribute.string == "instantiable" then
-      if instantiable then
+      if (flags & instanciableFlag ()) != 0 then
         error attribute : "duplicated attribute"
       else
-        instantiable = true
+        flags = flags | instanciableFlag ()
       end
     elsif attribute.string == "copyable" then
       if copyable then
@@ -132,14 +132,10 @@ override method @opaqueTypeDeclaration enterInContext
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     [!?ioContext.mTypeMap insertType
       !lkey:mOpaqueTypeName
-#      !llvmTypeName:"i" + bitSize
-      !kind:.opaque {!bitCount:bitSize}
-      !classConstantMap:{}
-      !instantiable:instantiable
+      !kind:.opaque {!bitCount:bitSize !flags:flags}
       !copyable:copyable
       !equatable:false
       !comparable:false
-#      !enumerationType:.null # Not enumerable
     ]
   #--- Constructor
     [!?ioContext.mConstructorMap insertKey

@@ -87,16 +87,16 @@ override method @forLowerUpperBoundInstructionAST analyze
   switch [type kind]
   case boolean :
     error mTypeName : "an integer type is required here"
-  case arrayType (* * *) :
+  case arrayType (* * * * *) :
     error mTypeName : "an integer type is required here"
-  case enumeration (*) :
+  case enumeration (* *) :
   case literalString :
     error mTypeName : "an integer type is required here"
-  case opaque (*) :
+  case opaque (* *) :
     error mTypeName : "an integer type is required here"
   case staticInteger :
     error mTypeName : "an integer type is required here"
-  case structure (* * *) :
+  case structure (* * * *) :
     error mTypeName : "an integer type is required here"
   case function (* * *) :
     error mTypeName : "an integer type is required here"
