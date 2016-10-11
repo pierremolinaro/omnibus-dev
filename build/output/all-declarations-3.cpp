@@ -5556,15 +5556,15 @@ void extensionSetter_findOrAddStaticString (GALGAS_staticStringMap & ioObject,
                                             COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outIndex.drop () ; // Release 'out' argument
   const GALGAS_staticStringMap temp_0 = ioObject ;
-  const enumGalgasBool test_1 = temp_0.getter_hasKey (inArgument_inString COMMA_SOURCE_FILE ("context.galgas", 52)).boolEnum () ;
+  const enumGalgasBool test_1 = temp_0.getter_hasKey (inArgument_inString COMMA_SOURCE_FILE ("context.galgas", 60)).boolEnum () ;
   if (kBoolTrue == test_1) {
     const GALGAS_staticStringMap temp_2 = ioObject ;
-    temp_2.method_searchKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("context.galgas", 53)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("context.galgas", 53)) ;
+    temp_2.method_searchKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("context.galgas", 61)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("context.galgas", 61)) ;
   }else if (kBoolFalse == test_1) {
     const GALGAS_staticStringMap temp_3 = ioObject ;
-    outArgument_outIndex = temp_3.getter_count (SOURCE_FILE ("context.galgas", 55)) ;
+    outArgument_outIndex = temp_3.getter_count (SOURCE_FILE ("context.galgas", 63)) ;
     {
-    ioObject.setter_insertKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("context.galgas", 56)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("context.galgas", 56)) ;
+    ioObject.setter_insertKey (inArgument_inString.getter_nowhere (SOURCE_FILE ("context.galgas", 64)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("context.galgas", 64)) ;
     }
   }
 }
