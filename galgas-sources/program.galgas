@@ -89,7 +89,7 @@ private proc compileProject
   )
 #------------------------------------------------------------ Add Predefined types
 #--- Add boolean type
-  ast.mDeclarationListAST += !@booleanDeclaration.new {![boolTypeName () nowhere] !{}}
+  ast.mDeclarationListAST += !@booleanDeclaration.new {![boolTypeName () nowhere]}
 #--- Literal integer type
   ast.mDeclarationListAST += !@literalIntegerDeclaration.new
 #--- Add String type

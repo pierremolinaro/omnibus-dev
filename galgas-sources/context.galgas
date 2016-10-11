@@ -93,8 +93,6 @@ map @globalVariableMap %selectors {
 
 sharedmap @unifiedTypeMap %selectors {
   @typeKind kind
-#  @bool instantiable
-  @bool copyable
   @bool equatable
   @bool comparable
 
@@ -105,8 +103,12 @@ sharedmap @unifiedTypeMap %selectors {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #func %once equatableFlag    -> @uint { result = 1 << 0 }
 #func %once comparableFlag   -> @uint { result = 1 << 1 }
-#func %once instanciableFlag -> @uint { result = 1 << 2 }
-#func %once copiableFlag     -> @uint { result = 1 << 3 }
+
+getter @unifiedTypeMap-proxy instanciable -> @bool {
+  result = [[self kind] instanciable]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @typeKind instanciable -> @bool {
   switch self
@@ -124,6 +126,35 @@ getter @typeKind instanciable -> @bool {
     result = (flags & instanciableFlag ()) != 0
   case arrayType (* * * * @uint flags) :
     result = (flags & instanciableFlag ()) != 0
+  case function (* * *) :
+    result = false
+  end  
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @unifiedTypeMap-proxy copyable -> @bool {
+  result = [[self kind] copyable]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @typeKind copyable -> @bool {
+  switch self
+  case boolean :
+    result = true
+  case literalString, staticInteger :
+    result = true
+  case enumeration (* *) :
+    result = true
+  case structure (* * * @uint flags) :
+    result = (flags & copyableFlag ()) != 0
+  case integer (* * * *) :
+    result = true
+  case opaque (* @uint flags) :
+    result = (flags & copyableFlag ()) != 0
+  case arrayType (* * * * @uint flags) :
+    result = (flags & copyableFlag ()) != 0
   case function (* * *) :
     result = false
   end  
@@ -386,7 +417,6 @@ proc buildSemanticContext
         !classConstantMap: {}
         !flags:0
       }
-      !copyable:false
       !equatable:false
       !comparable:false
     ]

@@ -61,21 +61,21 @@ void routine_enterFormalArguments (const GALGAS_semanticContext constinArgument_
     case GALGAS_procFormalArgumentPassingMode::kEnum_input:
       {
         {
-        ioArgument_ioVariableMap.setter_insertConstantInputFormalArgument (enumerator_1231.current_mFormalArgumentName (HERE), var_typeProxy_1252, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1252, enumerator_1231.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 34)), var_typeProxy_1252.getter_copyable (inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 35)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 30)) ;
+        ioArgument_ioVariableMap.setter_insertConstantInputFormalArgument (enumerator_1231.current_mFormalArgumentName (HERE), var_typeProxy_1252, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1252, enumerator_1231.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 34)), extensionGetter_copyable (var_typeProxy_1252, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 35)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 30)) ;
         }
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
       {
         {
-        ioArgument_ioVariableMap.setter_insertInputOutputFormalArgument (enumerator_1231.current_mFormalArgumentName (HERE), var_typeProxy_1252, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1252, enumerator_1231.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 43)), var_typeProxy_1252.getter_copyable (inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 44)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 39)) ;
+        ioArgument_ioVariableMap.setter_insertInputOutputFormalArgument (enumerator_1231.current_mFormalArgumentName (HERE), var_typeProxy_1252, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1252, enumerator_1231.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 43)), extensionGetter_copyable (var_typeProxy_1252, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 44)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 39)) ;
         }
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_output:
       {
         {
-        ioArgument_ioVariableMap.setter_insertOutputFormalArgument (enumerator_1231.current_mFormalArgumentName (HERE), var_typeProxy_1252, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1252, enumerator_1231.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 52)), var_typeProxy_1252.getter_copyable (inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 53)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 48)) ;
+        ioArgument_ioVariableMap.setter_insertOutputFormalArgument (enumerator_1231.current_mFormalArgumentName (HERE), var_typeProxy_1252, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1252, enumerator_1231.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 52)), extensionGetter_copyable (var_typeProxy_1252, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 53)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 48)) ;
         }
       }
       break ;
@@ -1540,11 +1540,11 @@ C_galgas_function_descriptor functionDescriptor_instanciableFlag ("instanciableF
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            Once function 'copiableFlag'                                             *
+//                                            Once function 'copyableFlag'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_uint onceFunction_copiableFlag (C_Compiler * /* inCompiler */
+static GALGAS_uint onceFunction_copyableFlag (C_Compiler * /* inCompiler */
                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_uint result_result ; // Returned variable
   result_result = GALGAS_uint ((uint32_t) 1U).left_shift_operation (GALGAS_uint ((uint32_t) 3U) COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 20)) ;
@@ -1558,55 +1558,55 @@ static GALGAS_uint onceFunction_copiableFlag (C_Compiler * /* inCompiler */
 //  Function implementation                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static bool gOnceFunctionResultAvailable_copiableFlag = false ;
-static GALGAS_uint gOnceFunctionResult_copiableFlag ;
+static bool gOnceFunctionResultAvailable_copyableFlag = false ;
+static GALGAS_uint gOnceFunctionResult_copyableFlag ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint function_copiableFlag (class C_Compiler * inCompiler
+GALGAS_uint function_copyableFlag (class C_Compiler * inCompiler
               COMMA_LOCATION_ARGS) {
-  if (! gOnceFunctionResultAvailable_copiableFlag) {
-    gOnceFunctionResult_copiableFlag = onceFunction_copiableFlag (inCompiler COMMA_THERE) ;
-    gOnceFunctionResultAvailable_copiableFlag = true ;
+  if (! gOnceFunctionResultAvailable_copyableFlag) {
+    gOnceFunctionResult_copyableFlag = onceFunction_copyableFlag (inCompiler COMMA_THERE) ;
+    gOnceFunctionResultAvailable_copyableFlag = true ;
   }
-  return gOnceFunctionResult_copiableFlag ;
+  return gOnceFunctionResult_copyableFlag ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static void releaseOnceFunctionResult_copiableFlag (void) {
-  gOnceFunctionResult_copiableFlag.drop () ;
+static void releaseOnceFunctionResult_copyableFlag (void) {
+  gOnceFunctionResult_copyableFlag.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_PrologueEpilogue gEpilogueForOnceFunction_copiableFlag (NULL,
-                                                          releaseOnceFunctionResult_copiableFlag) ;
+C_PrologueEpilogue gEpilogueForOnceFunction_copyableFlag (NULL,
+                                                          releaseOnceFunctionResult_copyableFlag) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //  Function introspection                                                                                             *
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const C_galgas_type_descriptor * functionArgs_copiableFlag [1] = {
+static const C_galgas_type_descriptor * functionArgs_copyableFlag [1] = {
   NULL
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static GALGAS_object functionWithGenericHeader_copiableFlag (C_Compiler * inCompiler,
+static GALGAS_object functionWithGenericHeader_copyableFlag (C_Compiler * inCompiler,
                                                              const cObjectArray & /* inEffectiveParameterArray */,
                                                              const GALGAS_location & /* inErrorLocation */
                                                              COMMA_LOCATION_ARGS) {
-  return function_copiableFlag (inCompiler COMMA_THERE).getter_object (THERE) ;
+  return function_copyableFlag (inCompiler COMMA_THERE).getter_object (THERE) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-C_galgas_function_descriptor functionDescriptor_copiableFlag ("copiableFlag",
-                                                              functionWithGenericHeader_copiableFlag,
+C_galgas_function_descriptor functionDescriptor_copyableFlag ("copyableFlag",
+                                                              functionWithGenericHeader_copyableFlag,
                                                               & kTypeDescriptor_GALGAS_uint,
                                                               0,
-                                                              functionArgs_copiableFlag) ;
+                                                              functionArgs_copyableFlag) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

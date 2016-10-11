@@ -95,11 +95,10 @@ override method @typeArrayDeclaration enterInContext
   [ioContext.mTypeMap searchKey
     !lkey:mElementTypeName
     ?kind:let kind
-    ?copyable:let copyable
     ?equatable:*
     ?comparable:*
   ]
-  if not copyable then
+  if not [kind copyable] then
     error mElementTypeName : "an array element should be copyable"
   end
   if not [kind instanciable] then
@@ -144,9 +143,8 @@ override method @typeArrayDeclaration enterInContext
         !elementType:elementType
         !size:arraySize
         !classConstantMap:classConstantMap
-        !flags: instanciableFlag () | copiableFlag ()
+        !flags: instanciableFlag () | copyableFlag ()
       }
-      !copyable:true
       !equatable:false
       !comparable:false
     ]

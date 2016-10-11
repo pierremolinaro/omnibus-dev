@@ -171,7 +171,6 @@ override method @staticArrayAST enterInContext
         [!?ioContext.mTypeMap insertType
           !lkey:lRoutineMangledName
           !kind:.function{!mode:mode !signature:signature !returnTypeProxy:returnTypeProxy}
-          !copyable:false
           !equatable:false
           !comparable:false
         ]
@@ -201,7 +200,6 @@ override method @staticArrayAST enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:plmTypeName
     !kind:kind
-    !copyable:false
     !equatable:false
     !comparable:false
   ]

@@ -298,26 +298,23 @@ override method @structureDeclaration enterInContext
   ]
 #---------------------------------------- Attribute "copyable"
   var flags = instanciableFlag ()
-  var copyableAttribute = false
   for (s) in mAttributeListAST do
     if s.string == "copyable" then
-      if copyableAttribute then
+      if (flags & instanciableFlag ()) != 0 then
         error s : "duplicated attribute"
+      elsif not canBeCopied then
+        error mStructureName : "this structure cannot be copied, one field is not copyable"
+      else
+        flags = flags | instanciableFlag ()
       end
-      copyableAttribute = true
     else
       error s : "only @copyable attribute is allowed here"
     end
-  end
-  if copyableAttribute && not canBeCopied then
-    error mStructureName : "this structure cannot be copied, one field is not copyable"
-    copyableAttribute = false
   end
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
     !kind:.structure {!typeName:mStructureName !propertyMap:propertyMap !propertyList:propertyList !flags:flags}
-    !copyable:copyableAttribute
     !equatable:false
     !comparable:false
   ]
