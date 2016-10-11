@@ -161,16 +161,17 @@ override method @staticArrayAST enterInContext
                            + [[typeProxy kind] llvmTypeName]
       end
       routineMangledName += ")" + returnTypeName.string
-      let @unifiedTypeMap-proxy returnTypeProxy = if returnTypeName.string == "" then
+      let @unifiedTypeMap-proxy returnType = if returnTypeName.string == "" then
         .null
       else
         .searchKey {!ioContext.mTypeMap !returnTypeName}
       end
       let lRoutineMangledName = @lstring.new {!routineMangledName !propertyName.location}
+      let descriptor = @routineDescriptor.new {!mode !signature !returnType}
       if not [ioContext.mTypeMap hasKey !lRoutineMangledName] then
         [!?ioContext.mTypeMap insertType
           !lkey:lRoutineMangledName
-          !kind:.function{!mode:mode !signature:signature !returnTypeProxy:returnTypeProxy}
+          !kind:.function{!descriptor:descriptor}
         ]
       end
       let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !lRoutineMangledName}

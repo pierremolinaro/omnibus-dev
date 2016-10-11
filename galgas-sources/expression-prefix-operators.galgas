@@ -86,7 +86,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     case literalString : error mOperatorLocation : "internal error" : leftOperand
     case enumeration (* *) :  error mOperatorLocation : "internal error" : leftOperand
     case structure (* * * *) : error mOperatorLocation : "internal error" : leftOperand
-    case function (* * *) : error mOperatorLocation : "internal error" : leftOperand
+    case function (*) : error mOperatorLocation : "internal error" : leftOperand
     case staticInteger : # error mOperatorLocation : "internal error" : leftOperand
       if inOptionalTargetType == .null then
         error mOperatorLocation : "the ~ operator cannot be applied to static int, without inferred type" : leftOperand

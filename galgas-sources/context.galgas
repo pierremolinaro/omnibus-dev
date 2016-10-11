@@ -1,7 +1,15 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #                                                                                                                       
-#    B U I L D    S E M A N T I C    C O N T E X T                                                                      
+#    S E M A N T I C    C O N T E X T                                                                      
 #                                                                                                                       
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+struct @routineDescriptor {
+  @mode mMode
+  @procedureSignature mSignature
+  @unifiedTypeMap-proxy mReturnType
+}
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @typeKind {
@@ -17,7 +25,7 @@ enum @typeKind {
                   @bigint size
                   @classConstantMap classConstantMap
                   @uint flags)
-  case function (@mode mode @procedureSignature signature @unifiedTypeMap-proxy returnTypeProxy)
+  case function (@routineDescriptor descriptor)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -123,7 +131,7 @@ getter @typeKind equatable -> @bool {
     result = (flags & equatableFlag ()) != 0
   case arrayType (* * * * @uint flags) :
     result = (flags & equatableFlag ()) != 0
-  case function (* * *) :
+  case function (*) :
     result = false
   end  
 }
@@ -152,7 +160,7 @@ getter @typeKind instanciable -> @bool {
     result = (flags & instanciableFlag ()) != 0
   case arrayType (* * * * @uint flags) :
     result = (flags & instanciableFlag ()) != 0
-  case function (* * *) :
+  case function (*) :
     result = false
   end  
 }
@@ -181,7 +189,7 @@ getter @typeKind copyable -> @bool {
     result = (flags & copyableFlag ()) != 0
   case arrayType (* * * * @uint flags) :
     result = (flags & copyableFlag ()) != 0
-  case function (* * *) :
+  case function (*) :
     result = false
   end  
 }
@@ -202,7 +210,7 @@ getter @unifiedTypeMap-proxy classConstantMap -> @classConstantMap {
     result = {}
   case arrayType (* * * @classConstantMap classConstantMap *) :
     result = classConstantMap
-  case function (* * *) :
+  case function (*) :
     result = {}
   end  
 }
@@ -227,14 +235,14 @@ getter @typeKind llvmTypeName -> @string {
     result = "i" + bitCount
   case arrayType (@lstring typeName * * * *) :
     result = "%" + [typeName assemblerRepresentation]
-  case function (@mode unused mode @procedureSignature signature @unifiedTypeMap-proxy returnTypeProxy) :
-    if returnTypeProxy == .null then
+  case function (descriptor) :
+    if descriptor.mReturnType == .null then
       result = "void"
     else
-      result = [[returnTypeProxy kind] llvmTypeName]
+      result = [[descriptor.mReturnType kind] llvmTypeName]
     end
     result += "("
-    for () in signature 
+    for () in descriptor.mSignature 
     do
       result += [[mType kind] llvmTypeName]
       switch mFormalArgumentPassingMode

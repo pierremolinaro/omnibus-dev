@@ -175,11 +175,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
         if not [[type kind] isFunction] then
           error endOfExp : "a static expression is expected here"
         else
-          [[type kind] function
-            ?mode:let @mode requiredMode
-            ?signature:let @procedureSignature requiredSignature
-            ?returnTypeProxy:let @unifiedTypeMap-proxy requiredReturnTypeProxy
-          ]
+          [[type kind] function ?descriptor:let functionDescriptor]
         #--- Compute function mangled name
           var routineMangledName = functionName.string
           routineMangledName += "("
@@ -215,20 +211,20 @@ override method @extendStaticArrayDeclarationAST enterInContext
           if not [candidateRoutineKind isFunction] then
             error functionName : "this routine is not a function"
           end
-          if requiredMode != candidateMode then
-            error functionName : "this function runs in " + candidateMode + " mode, but " + requiredMode + " is required"
+          if functionDescriptor.mMode != candidateMode then
+            error functionName : "this function runs in " + candidateMode + " mode, but " + functionDescriptor.mMode + " is required"
           end
-          if (requiredReturnTypeProxy == .null) && (candidateReturnType != .null) then
+          if (functionDescriptor.mReturnType == .null) && (candidateReturnType != .null) then
             error functionName : "this function should return an $" + [candidateReturnType key] + " object"
-          elsif (requiredReturnTypeProxy != .null) && (candidateReturnType == .null) then
+          elsif (functionDescriptor.mReturnType != .null) && (candidateReturnType == .null) then
             error functionName : "this function should return no object"
           end
-          if [requiredSignature length] != [candidateSignature length] then
+          if [functionDescriptor.mSignature length] != [candidateSignature length] then
             error functionName
             : "this function has " + [candidateSignature length] + " argument(s) ("
-            + [requiredSignature length] + " required)"
+            + [functionDescriptor.mSignature length] + " required)"
           else
-            for required in requiredSignature, candidate in candidateSignature do
+            for required in functionDescriptor.mSignature, candidate in candidateSignature do
               if required.mType != candidate.mType then
                 error candidate.mSelector : "argument type should be $" + [required.mType key]
               end

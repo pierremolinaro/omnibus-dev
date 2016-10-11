@@ -790,7 +790,7 @@ proc analyzeEffectiveParameters
           error name : "a literal string does not handle field access" : parameterList, ioEffectiveParameterListIR
         case enumeration (* *) :
           error name : "an enumeration does not handle field access" : parameterList, ioEffectiveParameterListIR
-        case function (* * *) :
+        case function (*) :
           error name : "a function does not handle field access" : parameterList, ioEffectiveParameterListIR
         case integer (* * * *) :
           error name : "an integer does not handle field access" : parameterList, ioEffectiveParameterListIR

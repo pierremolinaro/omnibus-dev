@@ -153,7 +153,7 @@ override method @registerConstantExpressionAST analyzeExpression
       error expressionLocation: "an unsigned integer expression is required here"
     case literalString :
       error expressionLocation: "an unsigned integer expression is required here"
-    case function (* * *) :
+    case function (*) :
       error expressionLocation: "an unsigned integer expression is required here"
     case staticInteger :
       [expressionResult literalInteger ?1* ?value:let @bigint value]
