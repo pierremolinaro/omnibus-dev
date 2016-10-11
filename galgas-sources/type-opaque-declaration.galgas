@@ -85,7 +85,6 @@ override method @opaqueTypeDeclaration enterInContext
 {
 #---
   @uint flags = 0
-  var copyable = false ;
   for (attribute) in mAttributeList do
     if attribute.string == "instantiable" then
       if (flags & instanciableFlag ()) != 0 then
@@ -94,10 +93,10 @@ override method @opaqueTypeDeclaration enterInContext
         flags = flags | instanciableFlag ()
       end
     elsif attribute.string == "copyable" then
-      if copyable then
+      if (flags & copyableFlag ()) != 0 then
         error attribute : "duplicated attribute"
       else
-        copyable = true
+        flags = flags | copyableFlag ()
       end
     else
       error attribute : "only @copyable and @instantiable attributes are allowed here"
@@ -133,7 +132,6 @@ override method @opaqueTypeDeclaration enterInContext
     [!?ioContext.mTypeMap insertType
       !lkey:mOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize !flags:flags}
-      !copyable:copyable
       !equatable:false
       !comparable:false
     ]

@@ -1031,9 +1031,6 @@ class GALGAS_unifiedTypeMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_comparable (C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_copyable (C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_equatable (C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const ;
 
@@ -7066,7 +7063,6 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
                                                     class GALGAS_typeKind constinArgument1,
                                                     class GALGAS_bool constinArgument2,
                                                     class GALGAS_bool constinArgument3,
-                                                    class GALGAS_bool constinArgument4,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -7074,11 +7070,6 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
                                                              class GALGAS_string constinArgument1,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
-
-  public : VIRTUAL_IN_DEBUG void setter_setCopyableForKey (class GALGAS_bool constinArgument0,
-                                                           class GALGAS_string constinArgument1,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setEquatableForKey (class GALGAS_bool constinArgument0,
                                                             class GALGAS_string constinArgument1,
@@ -7096,7 +7087,6 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
                                                    class GALGAS_typeKind & outArgument1,
                                                    class GALGAS_bool & outArgument2,
                                                    class GALGAS_bool & outArgument3,
-                                                   class GALGAS_bool & outArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -7106,10 +7096,6 @@ class GALGAS_unifiedTypeMap : public AC_GALGAS_uniqueMap {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_comparableForKey (const class GALGAS_string & constinOperand0,
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_copyableForKey (const class GALGAS_string & constinOperand0,
-                                                                     C_Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_equatableForKey (const class GALGAS_string & constinOperand0,
                                                                       C_Compiler * inCompiler
@@ -7143,7 +7129,6 @@ class cEnumerator_unifiedTypeMap : public cGenericAbstractEnumerator {
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public : class GALGAS_typeKind current_kind (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_copyable (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_equatable (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_comparable (LOCATION_ARGS) const ;
 } ;
@@ -7161,14 +7146,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMap ;
 class cMapElement_unifiedTypeMap : public cMapElement {
 //--- Map attributes
   public : GALGAS_typeKind mProperty_kind ;
-  public : GALGAS_bool mProperty_copyable ;
   public : GALGAS_bool mProperty_equatable ;
   public : GALGAS_bool mProperty_comparable ;
 
 //--- Constructor
   public : cMapElement_unifiedTypeMap (const GALGAS_lstring & inKey,
                                        const GALGAS_typeKind & in_kind,
-                                       const GALGAS_bool & in_copyable,
                                        const GALGAS_bool & in_equatable,
                                        const GALGAS_bool & in_comparable
                                        COMMA_LOCATION_ARGS) ;

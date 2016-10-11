@@ -86,7 +86,6 @@ override method @typeAliasDeclaration enterInContext
   [ioContext.mTypeMap searchKey
     !lkey:mAliasedTypeName
     ?kind:let kind
-    ?copyable:let copyable
     ?equatable:let equatable
     ?comparable:let comparable
   ]
@@ -94,7 +93,6 @@ override method @typeAliasDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mNewTypeName
     !kind:kind
-    !copyable:copyable
     !equatable:equatable
     !comparable:comparable
   ]

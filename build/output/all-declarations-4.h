@@ -106,8 +106,7 @@ class GALGAS_booleanDeclaration : public GALGAS_abstractDeclaration {
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_booleanDeclaration constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                   const class GALGAS_lstringlist & inOperand1
+  public : static class GALGAS_booleanDeclaration constructor_new (const class GALGAS_lstring & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -119,8 +118,6 @@ class GALGAS_booleanDeclaration : public GALGAS_abstractDeclaration {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mBooleanTypeName (LOCATION_ARGS) const ;
 
 
@@ -143,11 +140,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_booleanDeclaration 
 class cPtr_booleanDeclaration : public cPtr_abstractDeclaration {
 //--- Attributes
   public : GALGAS_lstring mProperty_mBooleanTypeName ;
-  public : GALGAS_lstringlist mProperty_mAttributeList ;
 
 //--- Constructor
-  public : cPtr_booleanDeclaration (const GALGAS_lstring & in_mBooleanTypeName,
-                                    const GALGAS_lstringlist & in_mAttributeList
+  public : cPtr_booleanDeclaration (const GALGAS_lstring & in_mBooleanTypeName
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -155,7 +150,6 @@ class cPtr_booleanDeclaration : public cPtr_abstractDeclaration {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mBooleanTypeName (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -670,6 +664,16 @@ class GALGAS_lstring function_panicNameForInvocationGraph (const class GALGAS_st
 
 class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Extension getter '@unifiedTypeMap-proxy copyable' (as function)                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_bool extensionGetter_copyable (const class GALGAS_unifiedTypeMap_2D_proxy & inObject,
+                                            class C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
