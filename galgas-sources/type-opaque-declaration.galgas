@@ -132,8 +132,6 @@ override method @opaqueTypeDeclaration enterInContext
     [!?ioContext.mTypeMap insertType
       !lkey:mOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize !flags:flags}
-      !equatable:false
-      !comparable:false
     ]
   #--- Constructor
     [!?ioContext.mConstructorMap insertKey

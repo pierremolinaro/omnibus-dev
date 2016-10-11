@@ -64,8 +64,6 @@ override method @literalIntegerDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
     !kind:.staticInteger
-    !equatable:true
-    !comparable:true
   ]
 #--- Enter integer operators
   enterLiteralIntegerOperators (

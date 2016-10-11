@@ -315,8 +315,6 @@ override method @structureDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
     !kind:.structure {!typeName:mStructureName !propertyMap:propertyMap !propertyList:propertyList !flags:flags}
-    !equatable:false
-    !comparable:false
   ]
 }
 

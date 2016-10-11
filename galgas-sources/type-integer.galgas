@@ -73,8 +73,6 @@ override method @integerDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:integerTypeName
     !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
-    !equatable:true
-    !comparable:true
   ]
 #--- Enter integer <-> integer operators
   enter_integer_integer_operators (

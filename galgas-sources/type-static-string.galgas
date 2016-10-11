@@ -64,8 +64,6 @@ override method @literalStringDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mLiteralStringTypeName
     !kind:.literalString
-    !equatable:true
-    !comparable:true
   ]
 }
 

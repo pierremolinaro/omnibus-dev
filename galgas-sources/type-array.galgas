@@ -95,8 +95,6 @@ override method @typeArrayDeclaration enterInContext
   [ioContext.mTypeMap searchKey
     !lkey:mElementTypeName
     ?kind:let kind
-    ?equatable:*
-    ?comparable:*
   ]
   if not [kind copyable] then
     error mElementTypeName : "an array element should be copyable"
@@ -145,8 +143,6 @@ override method @typeArrayDeclaration enterInContext
         !classConstantMap:classConstantMap
         !flags: instanciableFlag () | copyableFlag ()
       }
-      !equatable:false
-      !comparable:false
     ]
   #--- Enter array constructor
     [!?ioContext.mConstructorMap insertKey

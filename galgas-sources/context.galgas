@@ -93,16 +93,42 @@ map @globalVariableMap %selectors {
 
 sharedmap @unifiedTypeMap %selectors {
   @typeKind kind
-  @bool equatable
-  @bool comparable
 
   insert insertType error message "the '%K' type is already declared in %L"
   search searchKey error message "there is no '%K' type"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#func %once equatableFlag    -> @uint { result = 1 << 0 }
 #func %once comparableFlag   -> @uint { result = 1 << 1 }
+
+getter @unifiedTypeMap-proxy equatable -> @bool {
+  result = [[self kind] equatable]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @typeKind equatable -> @bool {
+  switch self
+  case boolean :
+    result = true
+  case literalString, staticInteger :
+    result = true
+  case enumeration (* *) :
+    result = true
+  case structure (* * * @uint flags) :
+    result = (flags & equatableFlag ()) != 0
+  case integer (* * * *) :
+    result = true
+  case opaque (* @uint flags) :
+    result = (flags & equatableFlag ()) != 0
+  case arrayType (* * * * @uint flags) :
+    result = (flags & equatableFlag ()) != 0
+  case function (* * *) :
+    result = false
+  end  
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @unifiedTypeMap-proxy instanciable -> @bool {
   result = [[self kind] instanciable]
@@ -417,8 +443,6 @@ proc buildSemanticContext
         !classConstantMap: {}
         !flags:0
       }
-      !equatable:false
-      !comparable:false
     ]
     let staticListType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !plmNameForStaticListType (!lkey)}
     [!?outSemanticContext.mGlobalConstantMap insertKey
