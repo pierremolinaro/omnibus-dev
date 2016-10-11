@@ -1,17 +1,12 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#                                                                                                                       
-#    B U I L D    S E M A N T I C    C O N T E X T                                                                      
-#                                                                                                                       
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @routineMapForContext { # Key is a mangled name
   @lstring mRoutineLLVMName
   @bool mIsPublic
   @bool mGlobal
+  @routineKind mRoutineKind
   @mode mMode
   @procedureSignature mSignature
-  @routineKind mRoutineKind
-#  @bool mWeak
   @unifiedTypeMap-proxy mReturnType
   @bool mAppendFileAndLineArgumentForPanicLocation
   @bool mCanAccessProperties
@@ -19,7 +14,6 @@ map @routineMapForContext { # Key is a mangled name
 
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"
-  remove removeKey error message "there is no '%K' routine"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

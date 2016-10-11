@@ -1395,9 +1395,9 @@ mProperty_lkey (),
 mProperty_mRoutineLLVMName (),
 mProperty_mIsPublic (),
 mProperty_mGlobal (),
+mProperty_mRoutineKind (),
 mProperty_mMode (),
 mProperty_mSignature (),
-mProperty_mRoutineKind (),
 mProperty_mReturnType (),
 mProperty_mAppendFileAndLineArgumentForPanicLocation (),
 mProperty_mCanAccessProperties (),
@@ -1415,9 +1415,9 @@ GALGAS_routineMapForContext_2D_element::GALGAS_routineMapForContext_2D_element (
                                                                                 const GALGAS_lstring & inOperand1,
                                                                                 const GALGAS_bool & inOperand2,
                                                                                 const GALGAS_bool & inOperand3,
-                                                                                const GALGAS_mode & inOperand4,
-                                                                                const GALGAS_procedureSignature & inOperand5,
-                                                                                const GALGAS_routineKind & inOperand6,
+                                                                                const GALGAS_routineKind & inOperand4,
+                                                                                const GALGAS_mode & inOperand5,
+                                                                                const GALGAS_procedureSignature & inOperand6,
                                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand7,
                                                                                 const GALGAS_bool & inOperand8,
                                                                                 const GALGAS_bool & inOperand9,
@@ -1426,9 +1426,9 @@ mProperty_lkey (inOperand0),
 mProperty_mRoutineLLVMName (inOperand1),
 mProperty_mIsPublic (inOperand2),
 mProperty_mGlobal (inOperand3),
-mProperty_mMode (inOperand4),
-mProperty_mSignature (inOperand5),
-mProperty_mRoutineKind (inOperand6),
+mProperty_mRoutineKind (inOperand4),
+mProperty_mMode (inOperand5),
+mProperty_mSignature (inOperand6),
 mProperty_mReturnType (inOperand7),
 mProperty_mAppendFileAndLineArgumentForPanicLocation (inOperand8),
 mProperty_mCanAccessProperties (inOperand9),
@@ -1441,9 +1441,9 @@ GALGAS_routineMapForContext_2D_element GALGAS_routineMapForContext_2D_element::c
                                                                                                 const GALGAS_lstring & inOperand1,
                                                                                                 const GALGAS_bool & inOperand2,
                                                                                                 const GALGAS_bool & inOperand3,
-                                                                                                const GALGAS_mode & inOperand4,
-                                                                                                const GALGAS_procedureSignature & inOperand5,
-                                                                                                const GALGAS_routineKind & inOperand6,
+                                                                                                const GALGAS_routineKind & inOperand4,
+                                                                                                const GALGAS_mode & inOperand5,
+                                                                                                const GALGAS_procedureSignature & inOperand6,
                                                                                                 const GALGAS_unifiedTypeMap_2D_proxy & inOperand7,
                                                                                                 const GALGAS_bool & inOperand8,
                                                                                                 const GALGAS_bool & inOperand9,
@@ -1473,13 +1473,13 @@ typeComparisonResult GALGAS_routineMapForContext_2D_element::objectCompare (cons
     result = mProperty_mGlobal.objectCompare (inOperand.mProperty_mGlobal) ;
   }
   if (result == kOperandEqual) {
+    result = mProperty_mRoutineKind.objectCompare (inOperand.mProperty_mRoutineKind) ;
+  }
+  if (result == kOperandEqual) {
     result = mProperty_mMode.objectCompare (inOperand.mProperty_mMode) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mSignature.objectCompare (inOperand.mProperty_mSignature) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mRoutineKind.objectCompare (inOperand.mProperty_mRoutineKind) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_mReturnType.objectCompare (inOperand.mProperty_mReturnType) ;
@@ -1499,7 +1499,7 @@ typeComparisonResult GALGAS_routineMapForContext_2D_element::objectCompare (cons
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_routineMapForContext_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mRoutineLLVMName.isValid () && mProperty_mIsPublic.isValid () && mProperty_mGlobal.isValid () && mProperty_mMode.isValid () && mProperty_mSignature.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mReturnType.isValid () && mProperty_mAppendFileAndLineArgumentForPanicLocation.isValid () && mProperty_mCanAccessProperties.isValid () && mProperty_mCanMutateProperties.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mRoutineLLVMName.isValid () && mProperty_mIsPublic.isValid () && mProperty_mGlobal.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mMode.isValid () && mProperty_mSignature.isValid () && mProperty_mReturnType.isValid () && mProperty_mAppendFileAndLineArgumentForPanicLocation.isValid () && mProperty_mCanAccessProperties.isValid () && mProperty_mCanMutateProperties.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1509,9 +1509,9 @@ void GALGAS_routineMapForContext_2D_element::drop (void) {
   mProperty_mRoutineLLVMName.drop () ;
   mProperty_mIsPublic.drop () ;
   mProperty_mGlobal.drop () ;
+  mProperty_mRoutineKind.drop () ;
   mProperty_mMode.drop () ;
   mProperty_mSignature.drop () ;
-  mProperty_mRoutineKind.drop () ;
   mProperty_mReturnType.drop () ;
   mProperty_mAppendFileAndLineArgumentForPanicLocation.drop () ;
   mProperty_mCanAccessProperties.drop () ;
@@ -1534,11 +1534,11 @@ void GALGAS_routineMapForContext_2D_element::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mGlobal.description (ioString, inIndentation+1) ;
     ioString << ", " ;
+    mProperty_mRoutineKind.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
     mProperty_mMode.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mSignature.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mRoutineKind.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mReturnType.description (ioString, inIndentation+1) ;
     ioString << ", " ;
@@ -1577,6 +1577,12 @@ GALGAS_bool GALGAS_routineMapForContext_2D_element::getter_mGlobal (UNUSED_LOCAT
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_routineKind GALGAS_routineMapForContext_2D_element::getter_mRoutineKind (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRoutineKind ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_mode GALGAS_routineMapForContext_2D_element::getter_mMode (UNUSED_LOCATION_ARGS) const {
   return mProperty_mMode ;
 }
@@ -1585,12 +1591,6 @@ GALGAS_mode GALGAS_routineMapForContext_2D_element::getter_mMode (UNUSED_LOCATIO
 
 GALGAS_procedureSignature GALGAS_routineMapForContext_2D_element::getter_mSignature (UNUSED_LOCATION_ARGS) const {
   return mProperty_mSignature ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineKind GALGAS_routineMapForContext_2D_element::getter_mRoutineKind (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRoutineKind ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4632,7 +4632,7 @@ void extensionMethod_enterExternProcInContext (const GALGAS_externProcedureDecla
     }
   }
   {
-  ioArgument_ioContext.mProperty_mRoutineMapForContext.setter_insertKey (var_routineMangledName_3326, inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (true), GALGAS_bool (false), inObject.mProperty_mMode, var_signature_3296, GALGAS_routineKind::constructor_function (SOURCE_FILE ("declaration-extern-proc.galgas", 98)), var_returnType_3845, GALGAS_bool (false), GALGAS_bool (false), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 91)) ;
+  ioArgument_ioContext.mProperty_mRoutineMapForContext.setter_insertKey (var_routineMangledName_3326, inObject.mProperty_mRoutineNameForGeneration, GALGAS_bool (true), GALGAS_bool (false), GALGAS_routineKind::constructor_function (SOURCE_FILE ("declaration-extern-proc.galgas", 96)), inObject.mProperty_mMode, var_signature_3296, var_returnType_3845, GALGAS_bool (false), GALGAS_bool (false), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 91)) ;
   }
 }
 
@@ -11072,10 +11072,10 @@ static void extensionMethod_staticArrayAST_enterInContext (const cPtr_abstractDe
       break ;
     case GALGAS_staticArrayPropertyTypeAST::kEnum_function:
       {
-        const cEnumAssociatedValues_staticArrayPropertyTypeAST_function * extractPtr_8203 = (const cEnumAssociatedValues_staticArrayPropertyTypeAST_function *) (enumerator_5938.current_mPropertyType (HERE).unsafePointer ()) ;
-        const GALGAS_mode extractedValue_mode = extractPtr_8203->mAssociatedValue0 ;
-        const GALGAS_procFormalArgumentList extractedValue_formalArgs = extractPtr_8203->mAssociatedValue1 ;
-        const GALGAS_lstring extractedValue_returnTypeName = extractPtr_8203->mAssociatedValue2 ;
+        const cEnumAssociatedValues_staticArrayPropertyTypeAST_function * extractPtr_8214 = (const cEnumAssociatedValues_staticArrayPropertyTypeAST_function *) (enumerator_5938.current_mPropertyType (HERE).unsafePointer ()) ;
+        const GALGAS_mode extractedValue_mode = extractPtr_8214->mAssociatedValue0 ;
+        const GALGAS_procFormalArgumentList extractedValue_formalArgs = extractPtr_8214->mAssociatedValue1 ;
+        const GALGAS_lstring extractedValue_returnTypeName = extractPtr_8214->mAssociatedValue2 ;
         GALGAS_string var_routineMangledName_6688 = enumerator_5938.current_mPropertyName (HERE).mProperty_string.add_operation (GALGAS_string ("("), inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 155)) ;
         GALGAS_procedureSignature var_signature_6752 = GALGAS_procedureSignature::constructor_emptyList (SOURCE_FILE ("declaration-static-array.galgas", 156)) ;
         cEnumerator_procFormalArgumentList enumerator_6843 (extractedValue_formalArgs, kENUMERATION_UP) ;
@@ -11095,18 +11095,18 @@ static void extensionMethod_staticArrayAST_enterInContext (const cPtr_abstractDe
         }
         GALGAS_unifiedTypeMap_2D_proxy var_returnType_7286 = temp_2 ;
         GALGAS_lstring var_lRoutineMangledName_7446 = GALGAS_lstring::constructor_new (var_routineMangledName_6688, enumerator_5938.current_mPropertyName (HERE).mProperty_location  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 169)) ;
-        GALGAS_routineDescriptor var_descriptor_7527 = GALGAS_routineDescriptor::constructor_new (extractedValue_mode, var_signature_6752, var_returnType_7286  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 170)) ;
+        GALGAS_routineDescriptor var_descriptor_7527 = GALGAS_routineDescriptor::constructor_new (GALGAS_routineKind::constructor_function (SOURCE_FILE ("declaration-static-array.galgas", 170)), extractedValue_mode, var_signature_6752, var_returnType_7286  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 170)) ;
         const enumGalgasBool test_4 = ioArgument_ioContext.mProperty_mTypeMap.getter_hasKey (var_lRoutineMangledName_7446.getter_string (SOURCE_FILE ("declaration-static-array.galgas", 171)) COMMA_SOURCE_FILE ("declaration-static-array.galgas", 171)).operator_not (SOURCE_FILE ("declaration-static-array.galgas", 171)).boolEnum () ;
         if (kBoolTrue == test_4) {
           {
           ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (var_lRoutineMangledName_7446, GALGAS_typeKind::constructor_function (var_descriptor_7527  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 172)) ;
           }
         }
-        GALGAS_unifiedTypeMap_2D_proxy var_propertyType_7820 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mProperty_mTypeMap, var_lRoutineMangledName_7446, inCompiler  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 177)) ;
-        var_propertyList_5743.addAssign_operation (enumerator_5938.current_mPropertyName (HERE).getter_string (SOURCE_FILE ("declaration-static-array.galgas", 178)), var_propertyType_7820  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 178)) ;
-        GALGAS_uint var_propertyIndex_7971 = var_staticlistPropertyMap_5785.getter_count (SOURCE_FILE ("declaration-static-array.galgas", 179)) ;
+        GALGAS_unifiedTypeMap_2D_proxy var_propertyType_7831 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.mProperty_mTypeMap, var_lRoutineMangledName_7446, inCompiler  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 177)) ;
+        var_propertyList_5743.addAssign_operation (enumerator_5938.current_mPropertyName (HERE).getter_string (SOURCE_FILE ("declaration-static-array.galgas", 178)), var_propertyType_7831  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 178)) ;
+        GALGAS_uint var_propertyIndex_7982 = var_staticlistPropertyMap_5785.getter_count (SOURCE_FILE ("declaration-static-array.galgas", 179)) ;
         {
-        var_staticlistPropertyMap_5785.setter_insertKey (enumerator_5938.current_mPropertyName (HERE), GALGAS_bool (true), GALGAS_objectIR::constructor_property (var_propertyType_7820, enumerator_5938.current_mPropertyName (HERE), var_propertyIndex_7971  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 183)), var_propertyIndex_7971, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 180)) ;
+        var_staticlistPropertyMap_5785.setter_insertKey (enumerator_5938.current_mPropertyName (HERE), GALGAS_bool (true), GALGAS_objectIR::constructor_property (var_propertyType_7831, enumerator_5938.current_mPropertyName (HERE), var_propertyIndex_7982  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 183)), var_propertyIndex_7982, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 180)) ;
         }
       }
       break ;
@@ -11116,9 +11116,9 @@ static void extensionMethod_staticArrayAST_enterInContext (const cPtr_abstractDe
   {
   ioArgument_ioContext.mProperty_mStaticlistMap.setter_insertKey (object->mProperty_mStaticListName, var_propertyList_5743, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 188)) ;
   }
-  GALGAS_typeKind var_kind_8347 = GALGAS_typeKind::constructor_structure (function_llvmNameForStaticListElementType (object->mProperty_mStaticListName, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 194)), var_staticlistPropertyMap_5785, var_propertyList_5743, GALGAS_uint ((uint32_t) 0U)  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 193)) ;
+  GALGAS_typeKind var_kind_8358 = GALGAS_typeKind::constructor_structure (function_llvmNameForStaticListElementType (object->mProperty_mStaticListName, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 194)), var_staticlistPropertyMap_5785, var_propertyList_5743, GALGAS_uint ((uint32_t) 0U)  COMMA_SOURCE_FILE ("declaration-static-array.galgas", 193)) ;
   {
-  ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (var_plmTypeName_5842, var_kind_8347, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 199)) ;
+  ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (var_plmTypeName_5842, var_kind_8358, inCompiler COMMA_SOURCE_FILE ("declaration-static-array.galgas", 199)) ;
   }
 }
 
