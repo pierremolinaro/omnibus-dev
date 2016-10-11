@@ -110,8 +110,6 @@ override method @enumerationDeclaration enterInContext
   [!?ioContext.mTypeMap insertType
     !lkey:mEnumerationName
     !kind:.enumeration {!constantMap:enumConstantMap !classConstantMap:classConstantMap}
-    !equatable:true
-    !comparable:true
   ]
 #--- Infix operators
   enterEnumerationOperators (

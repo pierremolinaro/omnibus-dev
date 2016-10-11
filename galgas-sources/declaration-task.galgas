@@ -185,8 +185,6 @@ method @taskList enterInContext
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName
       !kind:.structure {!typeName:task.mTaskName !propertyMap:propertyMap !propertyList:propertyList !flags:0}
-      !equatable:false
-      !comparable:false
     ]
     let taskType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !task.mTaskName}
     ioContext.mGlobalTaskVariableList +=

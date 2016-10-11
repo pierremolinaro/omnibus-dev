@@ -51,12 +51,7 @@ override method @booleanDeclaration enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #--- Enter in type map
-  [!?ioContext.mTypeMap insertType
-    !lkey:mBooleanTypeName
-    !kind:.boolean
-    !equatable:true
-    !comparable:true
-  ]
+  [!?ioContext.mTypeMap insertType !lkey:mBooleanTypeName !kind:.boolean]
 #--- Enter boolean type
   if ioContext.mBooleanType != .null then
     error mBooleanTypeName : "Boolean type already defined"
