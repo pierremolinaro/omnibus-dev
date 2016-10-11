@@ -518,7 +518,7 @@ proc handleFunctionCallInExpression
       ?routineMangledName:let @lstring functionMangledName
       ?routineNameForGeneration:let @lstring functionNameForGeneration
       ?returnType:outReturnedType
-      ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
+#      ?appendFileAndLineArgumentForPanicLocation:let appendFileAndLineArgumentForPanicLocation
     )
   #--- New LLVM variable for function call result
     getNewTempVariable (!outReturnedType !functionMangledName !?ioTemporaries ?let functionResult)
@@ -530,7 +530,7 @@ proc handleFunctionCallInExpression
       !functionNameForGeneration
       !routineKind
       !effectiveParameterListIR
-      !appendFileAndLineArgumentForPanicLocation
+#      !appendFileAndLineArgumentForPanicLocation
     }
   #---
     ioObjectPtr = functionResult
@@ -559,7 +559,7 @@ proc analyzeFunctionCallInExpression
   !routineMangledName:@lstring outRoutineMangledName
   !routineNameForGeneration:@lstring outRoutineNameForGeneration
   !returnType:@unifiedTypeMap-proxy outReturnedType
-  !appendFileAndLineArgumentForPanicLocation:@bool outAppendFileAndLineArgumentForPanicLocation
+#  !appendFileAndLineArgumentForPanicLocation:@bool outAppendFileAndLineArgumentForPanicLocation
 {
 #---
   outEffectiveParameterListIR = {}
@@ -601,7 +601,7 @@ proc analyzeFunctionCallInExpression
     ?let @mode calleeMode
     ?let @procedureSignature formalSignature
     ?outReturnedType
-    ?outAppendFileAndLineArgumentForPanicLocation
+#    ?outAppendFileAndLineArgumentForPanicLocation
     ?let unused canMutateProperties
     ?let unused canAccessPropertiesInUserMode
   ]

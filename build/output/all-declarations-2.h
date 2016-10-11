@@ -190,7 +190,6 @@ class cMapElement_routineMapForContext : public cMapElement {
   public : GALGAS_mode mProperty_mMode ;
   public : GALGAS_procedureSignature mProperty_mSignature ;
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
-  public : GALGAS_bool mProperty_mAppendFileAndLineArgumentForPanicLocation ;
   public : GALGAS_bool mProperty_mCanAccessProperties ;
   public : GALGAS_bool mProperty_mCanMutateProperties ;
 
@@ -203,7 +202,6 @@ class cMapElement_routineMapForContext : public cMapElement {
                                              const GALGAS_mode & in_mMode,
                                              const GALGAS_procedureSignature & in_mSignature,
                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType,
-                                             const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation,
                                              const GALGAS_bool & in_mCanAccessProperties,
                                              const GALGAS_bool & in_mCanMutateProperties
                                              COMMA_LOCATION_ARGS) ;

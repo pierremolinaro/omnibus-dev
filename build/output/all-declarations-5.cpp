@@ -4033,9 +4033,6 @@ typeComparisonResult cPtr_functionCallIR::dynamicObjectCompare (const acPtr_clas
   if (kOperandEqual == result) {
     result = mProperty_mArgumentList.objectCompare (p->mProperty_mArgumentList) ;
   }
-  if (kOperandEqual == result) {
-    result = mProperty_mAppendFileAndLineArgumentForPanicLocation.objectCompare (p->mProperty_mAppendFileAndLineArgumentForPanicLocation) ;
-  }
   return result ;
 }
 
@@ -4078,12 +4075,11 @@ GALGAS_functionCallIR GALGAS_functionCallIR::constructor_new (const GALGAS_strin
                                                               const GALGAS_lstring & inAttribute_mFunctionMangledName,
                                                               const GALGAS_lstring & inAttribute_mFunctionNameForGeneration,
                                                               const GALGAS_calleeKindIR & inAttribute_mKind,
-                                                              const GALGAS_procCallEffectiveParameterListIR & inAttribute_mArgumentList,
-                                                              const GALGAS_bool & inAttribute_mAppendFileAndLineArgumentForPanicLocation
+                                                              const GALGAS_procCallEffectiveParameterListIR & inAttribute_mArgumentList
                                                               COMMA_LOCATION_ARGS) {
   GALGAS_functionCallIR result ;
-  if (inAttribute_mGlobalVariableName.isValid () && inAttribute_mResult.isValid () && inAttribute_mFunctionMangledName.isValid () && inAttribute_mFunctionNameForGeneration.isValid () && inAttribute_mKind.isValid () && inAttribute_mArgumentList.isValid () && inAttribute_mAppendFileAndLineArgumentForPanicLocation.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_functionCallIR (inAttribute_mGlobalVariableName, inAttribute_mResult, inAttribute_mFunctionMangledName, inAttribute_mFunctionNameForGeneration, inAttribute_mKind, inAttribute_mArgumentList, inAttribute_mAppendFileAndLineArgumentForPanicLocation COMMA_THERE)) ;
+  if (inAttribute_mGlobalVariableName.isValid () && inAttribute_mResult.isValid () && inAttribute_mFunctionMangledName.isValid () && inAttribute_mFunctionNameForGeneration.isValid () && inAttribute_mKind.isValid () && inAttribute_mArgumentList.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_functionCallIR (inAttribute_mGlobalVariableName, inAttribute_mResult, inAttribute_mFunctionMangledName, inAttribute_mFunctionNameForGeneration, inAttribute_mKind, inAttribute_mArgumentList COMMA_THERE)) ;
   }
   return result ;
 }
@@ -4197,24 +4193,6 @@ GALGAS_procCallEffectiveParameterListIR cPtr_functionCallIR::getter_mArgumentLis
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_functionCallIR::getter_mAppendFileAndLineArgumentForPanicLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_bool result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_functionCallIR * p = (const cPtr_functionCallIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_functionCallIR) ;
-    result = p->mProperty_mAppendFileAndLineArgumentForPanicLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cPtr_functionCallIR::getter_mAppendFileAndLineArgumentForPanicLocation (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mAppendFileAndLineArgumentForPanicLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 //                                       Pointer class for @functionCallIR class                                       *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -4223,8 +4201,7 @@ cPtr_functionCallIR::cPtr_functionCallIR (const GALGAS_string & in_mGlobalVariab
                                           const GALGAS_lstring & in_mFunctionMangledName,
                                           const GALGAS_lstring & in_mFunctionNameForGeneration,
                                           const GALGAS_calleeKindIR & in_mKind,
-                                          const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList,
-                                          const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation
+                                          const GALGAS_procCallEffectiveParameterListIR & in_mArgumentList
                                           COMMA_LOCATION_ARGS) :
 cPtr_abstractInstructionIR (THERE),
 mProperty_mGlobalVariableName (in_mGlobalVariableName),
@@ -4232,8 +4209,7 @@ mProperty_mResult (in_mResult),
 mProperty_mFunctionMangledName (in_mFunctionMangledName),
 mProperty_mFunctionNameForGeneration (in_mFunctionNameForGeneration),
 mProperty_mKind (in_mKind),
-mProperty_mArgumentList (in_mArgumentList),
-mProperty_mAppendFileAndLineArgumentForPanicLocation (in_mAppendFileAndLineArgumentForPanicLocation) {
+mProperty_mArgumentList (in_mArgumentList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4256,8 +4232,6 @@ void cPtr_functionCallIR::description (C_String & ioString,
   mProperty_mKind.description (ioString, inIndentation+1) ;
   ioString << ", " ;
   mProperty_mArgumentList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mAppendFileAndLineArgumentForPanicLocation.description (ioString, inIndentation+1) ;
   ioString << "]" ;
 }
 
@@ -4265,7 +4239,7 @@ void cPtr_functionCallIR::description (C_String & ioString,
 
 acPtr_class * cPtr_functionCallIR::duplicate (LOCATION_ARGS) const {
   acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_functionCallIR (mProperty_mGlobalVariableName, mProperty_mResult, mProperty_mFunctionMangledName, mProperty_mFunctionNameForGeneration, mProperty_mKind, mProperty_mArgumentList, mProperty_mAppendFileAndLineArgumentForPanicLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_functionCallIR (mProperty_mGlobalVariableName, mProperty_mResult, mProperty_mFunctionMangledName, mProperty_mFunctionNameForGeneration, mProperty_mKind, mProperty_mArgumentList COMMA_THERE)) ;
   return ptr ;
 }
 

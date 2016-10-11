@@ -228,7 +228,6 @@ void routine_analyzeFunctionCallInExpression (const class GALGAS_unifiedTypeMap_
                                               class GALGAS_lstring & outArgument16,
                                               class GALGAS_lstring & outArgument17,
                                               class GALGAS_unifiedTypeMap_2D_proxy & outArgument18,
-                                              class GALGAS_bool & outArgument19,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 

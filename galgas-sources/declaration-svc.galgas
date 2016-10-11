@@ -147,7 +147,7 @@ method @svcDeclarationListAST enterInContext
       !.userMode
       !signature
       !returnType
-      !false # No appendFileAndLineArgumentForPanicLocation
+#      !false # No appendFileAndLineArgumentForPanicLocation
       !mutating # canMutateProperties
       !true # canAccessPropertiesInUserMode
     ]

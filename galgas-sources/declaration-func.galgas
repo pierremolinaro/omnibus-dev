@@ -263,7 +263,6 @@ method @functionDeclarationListAST enterFunctionInContext
       !procedure.mMode
       !signature
       !returnType
-      !false # No appendFileAndLineArgumentForPanicLocation
       !canMutateProperties
       !canAccessProperties
     ]

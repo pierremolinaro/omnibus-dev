@@ -3280,7 +3280,6 @@ cMapElement_routineMapForContext::cMapElement_routineMapForContext (const GALGAS
                                                                     const GALGAS_mode & in_mMode,
                                                                     const GALGAS_procedureSignature & in_mSignature,
                                                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType,
-                                                                    const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation,
                                                                     const GALGAS_bool & in_mCanAccessProperties,
                                                                     const GALGAS_bool & in_mCanMutateProperties
                                                                     COMMA_LOCATION_ARGS) :
@@ -3292,7 +3291,6 @@ mProperty_mRoutineKind (in_mRoutineKind),
 mProperty_mMode (in_mMode),
 mProperty_mSignature (in_mSignature),
 mProperty_mReturnType (in_mReturnType),
-mProperty_mAppendFileAndLineArgumentForPanicLocation (in_mAppendFileAndLineArgumentForPanicLocation),
 mProperty_mCanAccessProperties (in_mCanAccessProperties),
 mProperty_mCanMutateProperties (in_mCanMutateProperties) {
 }
@@ -3300,14 +3298,14 @@ mProperty_mCanMutateProperties (in_mCanMutateProperties) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_routineMapForContext::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mRoutineLLVMName.isValid () && mProperty_mIsPublic.isValid () && mProperty_mGlobal.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mMode.isValid () && mProperty_mSignature.isValid () && mProperty_mReturnType.isValid () && mProperty_mAppendFileAndLineArgumentForPanicLocation.isValid () && mProperty_mCanAccessProperties.isValid () && mProperty_mCanMutateProperties.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mRoutineLLVMName.isValid () && mProperty_mIsPublic.isValid () && mProperty_mGlobal.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mMode.isValid () && mProperty_mSignature.isValid () && mProperty_mReturnType.isValid () && mProperty_mCanAccessProperties.isValid () && mProperty_mCanMutateProperties.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_routineMapForContext::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_routineMapForContext (mProperty_lkey, mProperty_mRoutineLLVMName, mProperty_mIsPublic, mProperty_mGlobal, mProperty_mRoutineKind, mProperty_mMode, mProperty_mSignature, mProperty_mReturnType, mProperty_mAppendFileAndLineArgumentForPanicLocation, mProperty_mCanAccessProperties, mProperty_mCanMutateProperties COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_routineMapForContext (mProperty_lkey, mProperty_mRoutineLLVMName, mProperty_mIsPublic, mProperty_mGlobal, mProperty_mRoutineKind, mProperty_mMode, mProperty_mSignature, mProperty_mReturnType, mProperty_mCanAccessProperties, mProperty_mCanMutateProperties COMMA_HERE)) ;
   return result ;
 }
 
@@ -3344,10 +3342,6 @@ void cMapElement_routineMapForContext::description (C_String & ioString, const i
   mProperty_mReturnType.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mAppendFileAndLineArgumentForPanicLocation" ":" ;
-  mProperty_mAppendFileAndLineArgumentForPanicLocation.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mCanAccessProperties" ":" ;
   mProperty_mCanAccessProperties.description (ioString, inIndentation) ;
   ioString << "\n" ;
@@ -3381,9 +3375,6 @@ typeComparisonResult cMapElement_routineMapForContext::compare (const cCollectio
   }
   if (kOperandEqual == result) {
     result = mProperty_mReturnType.objectCompare (operand->mProperty_mReturnType) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mAppendFileAndLineArgumentForPanicLocation.objectCompare (operand->mProperty_mAppendFileAndLineArgumentForPanicLocation) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mCanAccessProperties.objectCompare (operand->mProperty_mCanAccessProperties) ;
@@ -3451,11 +3442,10 @@ void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & in
                                                        const GALGAS_unifiedTypeMap_2D_proxy & inArgument6,
                                                        const GALGAS_bool & inArgument7,
                                                        const GALGAS_bool & inArgument8,
-                                                       const GALGAS_bool & inArgument9,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   cMapElement_routineMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8, inArgument9 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3476,11 +3466,10 @@ void GALGAS_routineMapForContext::setter_insertKey (GALGAS_lstring inKey,
                                                     GALGAS_unifiedTypeMap_2D_proxy inArgument6,
                                                     GALGAS_bool inArgument7,
                                                     GALGAS_bool inArgument8,
-                                                    GALGAS_bool inArgument9,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   cMapElement_routineMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8, inArgument9 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3505,7 +3494,6 @@ void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
                                                     GALGAS_unifiedTypeMap_2D_proxy & outArgument6,
                                                     GALGAS_bool & outArgument7,
                                                     GALGAS_bool & outArgument8,
-                                                    GALGAS_bool & outArgument9,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const {
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) performSearch (inKey,
@@ -3522,7 +3510,6 @@ void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
     outArgument6.drop () ;
     outArgument7.drop () ;
     outArgument8.drop () ;
-    outArgument9.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_routineMapForContext) ;
     outArgument0 = p->mProperty_mRoutineLLVMName ;
@@ -3532,9 +3519,8 @@ void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
     outArgument4 = p->mProperty_mMode ;
     outArgument5 = p->mProperty_mSignature ;
     outArgument6 = p->mProperty_mReturnType ;
-    outArgument7 = p->mProperty_mAppendFileAndLineArgumentForPanicLocation ;
-    outArgument8 = p->mProperty_mCanAccessProperties ;
-    outArgument9 = p->mProperty_mCanMutateProperties ;
+    outArgument7 = p->mProperty_mCanAccessProperties ;
+    outArgument8 = p->mProperty_mCanMutateProperties ;
   }
 }
 
@@ -3639,21 +3625,6 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_routineMapForContext::getter_mReturnTypeFo
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_routineMapForContext) ;
     result = p->mProperty_mReturnType ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineMapForContext::getter_mAppendFileAndLineArgumentForPanicLocationForKey (const GALGAS_string & inKey,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_bool result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    result = p->mProperty_mAppendFileAndLineArgumentForPanicLocation ;
   }
   return result ;
 }
@@ -3788,20 +3759,6 @@ void GALGAS_routineMapForContext::setter_setMReturnTypeForKey (GALGAS_unifiedTyp
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_routineMapForContext::setter_setMAppendFileAndLineArgumentForPanicLocationForKey (GALGAS_bool inAttributeValue,
-                                                                                              GALGAS_string inKey,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
-  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    p->mProperty_mAppendFileAndLineArgumentForPanicLocation = inAttributeValue ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 void GALGAS_routineMapForContext::setter_setMCanAccessPropertiesForKey (GALGAS_bool inAttributeValue,
                                                                         GALGAS_string inKey,
                                                                         C_Compiler * inCompiler
@@ -3851,7 +3808,7 @@ cGenericAbstractEnumerator (inOrder) {
 GALGAS_routineMapForContext_2D_element cEnumerator_routineMapForContext::current (LOCATION_ARGS) const {
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return GALGAS_routineMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mRoutineLLVMName, p->mProperty_mIsPublic, p->mProperty_mGlobal, p->mProperty_mRoutineKind, p->mProperty_mMode, p->mProperty_mSignature, p->mProperty_mReturnType, p->mProperty_mAppendFileAndLineArgumentForPanicLocation, p->mProperty_mCanAccessProperties, p->mProperty_mCanMutateProperties) ;
+  return GALGAS_routineMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mRoutineLLVMName, p->mProperty_mIsPublic, p->mProperty_mGlobal, p->mProperty_mRoutineKind, p->mProperty_mMode, p->mProperty_mSignature, p->mProperty_mReturnType, p->mProperty_mCanAccessProperties, p->mProperty_mCanMutateProperties) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3916,14 +3873,6 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_routineMapForContext::current_mReturn
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapForContext) ;
   return p->mProperty_mReturnType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool cEnumerator_routineMapForContext::current_mAppendFileAndLineArgumentForPanicLocation (LOCATION_ARGS) const {
-  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return p->mProperty_mAppendFileAndLineArgumentForPanicLocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

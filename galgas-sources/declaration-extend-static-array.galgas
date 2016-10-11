@@ -196,7 +196,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
             ?let @mode candidateMode
             ?let @procedureSignature candidateSignature
             ?let @unifiedTypeMap-proxy candidateReturnType
-            ?let @bool unused candidateAppendFileAndLineArgumentForPanicLocation
+#            ?let @bool unused candidateAppendFileAndLineArgumentForPanicLocation
             ?let @bool unused candidateCanAccessProperties
             ?let @bool unused candidateCanMutateProperties
           ]
