@@ -192,9 +192,9 @@ override method @extendStaticArrayDeclarationAST enterInContext
             ?let @lstring candidateRoutineLLVMName
             ?let @bool candidateIsPublic
             ?let @bool unused candidateIsGlobal
+            ?let @routineKind candidateRoutineKind
             ?let @mode candidateMode
             ?let @procedureSignature candidateSignature
-            ?let @routineKind candidateRoutineKind
             ?let @unifiedTypeMap-proxy candidateReturnType
             ?let @bool unused candidateAppendFileAndLineArgumentForPanicLocation
             ?let @bool unused candidateCanAccessProperties

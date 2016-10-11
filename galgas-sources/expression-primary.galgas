@@ -597,9 +597,9 @@ proc analyzeFunctionCallInExpression
     ?outRoutineNameForGeneration
     ?let isPublic
     ?let unused isGlobal
+    ?let @routineKind routineKind
     ?let @mode calleeMode
     ?let @procedureSignature formalSignature
-    ?let @routineKind routineKind
     ?outReturnedType
     ?outAppendFileAndLineArgumentForPanicLocation
     ?let unused canMutateProperties

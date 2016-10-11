@@ -186,9 +186,9 @@ class cMapElement_routineMapForContext : public cMapElement {
   public : GALGAS_lstring mProperty_mRoutineLLVMName ;
   public : GALGAS_bool mProperty_mIsPublic ;
   public : GALGAS_bool mProperty_mGlobal ;
+  public : GALGAS_routineKind mProperty_mRoutineKind ;
   public : GALGAS_mode mProperty_mMode ;
   public : GALGAS_procedureSignature mProperty_mSignature ;
-  public : GALGAS_routineKind mProperty_mRoutineKind ;
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
   public : GALGAS_bool mProperty_mAppendFileAndLineArgumentForPanicLocation ;
   public : GALGAS_bool mProperty_mCanAccessProperties ;
@@ -199,9 +199,9 @@ class cMapElement_routineMapForContext : public cMapElement {
                                              const GALGAS_lstring & in_mRoutineLLVMName,
                                              const GALGAS_bool & in_mIsPublic,
                                              const GALGAS_bool & in_mGlobal,
+                                             const GALGAS_routineKind & in_mRoutineKind,
                                              const GALGAS_mode & in_mMode,
                                              const GALGAS_procedureSignature & in_mSignature,
-                                             const GALGAS_routineKind & in_mRoutineKind,
                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType,
                                              const GALGAS_bool & in_mAppendFileAndLineArgumentForPanicLocation,
                                              const GALGAS_bool & in_mCanAccessProperties,

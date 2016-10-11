@@ -254,58 +254,19 @@ method @functionDeclarationListAST enterFunctionInContext
     end
     canAccessProperties = procedure.mMode != .userMode
   #--- Enter in context
-#    if [ioContext.mRoutineMapForContext hasKey !routineMangledName.string] then
-#      let weak = [ioContext.mRoutineMapForContext mWeakForKey !routineMangledName.string]
-#      if weakProcedure && not weak then
-#        # redefined weak procedure is ignored
-#      elsif weakProcedure && weak then
-#        error procedure.mFunctionName : "this weak procedure overrides a weak procedure"
-#      elsif (not weakProcedure) && weak then
-#        [!?ioContext.mRoutineMapForContext removeKey !routineMangledName ?11*] # Remove weak routine
-#        [!?ioContext.mRoutineMapForContext insertKey # Insert routine
-#          !routineMangledName
-#          !routineMangledName
-#          !procedure.mPublicFunction
-#          !globalProcedure
-#          !procedure.mMode
-#          !signature
-#          !.function
-#          !weakProcedure
-#          !returnType
-#          !false # No appendFileAndLineArgumentForPanicLocation
-#          !canMutateProperties
-#          !canAccessProperties
-#        ]
-#      else # (not weakProcedure) && (not weak)
-        [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
-          !routineMangledName
-          !routineMangledName
-          !procedure.mPublicFunction
-          !globalProcedure
-          !procedure.mMode
-          !signature
-          !.function
-          !returnType
-          !false # No appendFileAndLineArgumentForPanicLocation
-          !canMutateProperties
-          !canAccessProperties
-        ]
-#      end
-#    else
-#      [!?ioContext.mRoutineMapForContext insertKey
-#        !routineMangledName
-#        !routineMangledName
-#        !procedure.mPublicFunction
-#        !globalProcedure
-#        !procedure.mMode
-#        !signature
-#        !.function
-#        !returnType
-#        !false # No appendFileAndLineArgumentForPanicLocation
-#        !canMutateProperties
-#        !canAccessProperties
-#      ]
-#    end
+    [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
+      !routineMangledName
+      !routineMangledName
+      !procedure.mPublicFunction
+      !globalProcedure
+      !.function
+      !procedure.mMode
+      !signature
+      !returnType
+      !false # No appendFileAndLineArgumentForPanicLocation
+      !canMutateProperties
+      !canAccessProperties
+    ]
   end
 }
 

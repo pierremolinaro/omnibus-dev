@@ -93,9 +93,9 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
     !mRoutineNameForGeneration
     !true # isPublic
     !false # Global
+    !.function
     !mMode
     !signature
-    !.function
     !returnType
     !false # No appendFileAndLineArgumentForPanicLocation
     !false # canMutateProperties

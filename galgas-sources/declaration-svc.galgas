@@ -143,9 +143,9 @@ method @svcDeclarationListAST enterInContext
       !routineMangledName
       !svc.mPublic
       !false
+      !svc.mRoutineKind
       !.userMode
       !signature
-      !svc.mRoutineKind
       !returnType
       !false # No appendFileAndLineArgumentForPanicLocation
       !mutating # canMutateProperties
