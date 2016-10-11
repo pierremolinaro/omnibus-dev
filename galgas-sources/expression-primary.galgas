@@ -600,7 +600,6 @@ proc analyzeFunctionCallInExpression
     ?let @mode calleeMode
     ?let @procedureSignature formalSignature
     ?let @routineKind routineKind
-    ?*
     ?outReturnedType
     ?outAppendFileAndLineArgumentForPanicLocation
     ?let unused canMutateProperties

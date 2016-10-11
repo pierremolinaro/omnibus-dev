@@ -11,7 +11,7 @@ map @routineMapForContext { # Key is a mangled name
   @mode mMode
   @procedureSignature mSignature
   @routineKind mRoutineKind
-  @bool mWeak
+#  @bool mWeak
   @unifiedTypeMap-proxy mReturnType
   @bool mAppendFileAndLineArgumentForPanicLocation
   @bool mCanAccessProperties
