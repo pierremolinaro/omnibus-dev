@@ -176,19 +176,14 @@ override method @extendStaticArrayDeclarationAST enterInContext
           error endOfExp : "a static expression is expected here"
         else
           [[type kind] function ?descriptor:let functionDescriptor]
-        #--- Compute function mangled name
-          var routineMangledName = functionName.string
-          routineMangledName += "("
-          @procedureSignature signature = {}
-          for (formalArgumentPassingMode selector formalArgumentTypeName *) in formalArgs do
-            let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-            signature += !formalArgumentPassingMode !selector !typeProxy
-            routineMangledName += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-          end
-          routineMangledName += ")"
-          let lRoutineMangledName = @lstring.new {!routineMangledName !functionName.location}
+        #--- Routine mangled name
+          let routineMangledName = routineMangledNameFromAST (
+            !"" 
+            !functionName
+            !formalArgs
+          )
           [ioContext.mRoutineMapForContext searchKey
-            !lRoutineMangledName
+            !routineMangledName
             ?let @lstring candidateRoutineLLVMName
             ?let @routineDescriptor routineDescriptor
           ]
@@ -270,12 +265,12 @@ override method @extendStaticArrayDeclarationAST semanticAnalysis
     switch operand
     case expression (@expressionAST unused exp) :
     case function (@lstring functionName @procFormalArgumentList formalArgs) :
-      var routineMangledName = functionName.string
-      routineMangledName += "("
-      for (formalArgumentPassingMode selector formalArgumentTypeName *) in formalArgs do
-        routineMangledName += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-      end
-      routineMangledName += ")"
+    #--- Routine mangled name
+      let routineMangledName = routineMangledNameFromAST (
+        !"" 
+        !functionName
+        !formalArgs
+      )
       invokedFunctionSet += !routineMangledName
     end
   end

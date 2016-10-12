@@ -77,16 +77,11 @@ proc routineSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Mangled routine name
-  var routineMangledName = if inSelfType == .null then
-    inRoutineName
-  else
-    @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
-  end
-  routineMangledName.string += "("
-  for (formalArgumentPassingMode selector * *) in inRoutineFormalArgumentList do
-    routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-  end
-  routineMangledName.string += ")"
+  let routineMangledName = routineMangledNameFromAST (
+    !if inSelfType == .null then "" else "$" + [inSelfType key] end
+    !inRoutineName
+    !inRoutineFormalArgumentList
+  )
 #--- Variable map
   initialVariableMap (
     !context:inContext
@@ -136,63 +131,20 @@ proc routineSemanticAnalysis
   else
     @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
   end
-#  if [ioIntermediateCodeStruct.mRoutineMapIR hasKey !routineMangledName.string] then
-#    let weak = [ioIntermediateCodeStruct.mRoutineMapIR mWeakForKey !routineMangledName.string]
-#    if inWeakFunction && not weak then
-#      # redefined weak procedure is ignored
-#    elsif inWeakFunction && weak then
-#      error routineMangledName : "this weak procedure overrides a weak procedure"
-#    elsif (not inWeakFunction) && weak then
-#      [!?ioIntermediateCodeStruct.mRoutineMapIR removeKey !routineMangledName ?12*] # Remove weak routine
-#      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
-#        !routineMangledName
-#        !inSelfType
-#        !routineMangledName
-#        !formalArguments
-#        !allocaList
-#        !instructionGenerationList
-#        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-#        !inWarnIfUnused
-#        !inWeakFunction
-#        !inGlobalFunction
-#        !inRoutineKind
-#        !returnType
-#        !false
-#      ]  
-#    else # (not weakProcedure) && (not weak)
-      [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
-        !routineMangledName
-        !inSelfType
-        !routineMangledName
-        !formalArguments
-        !allocaList
-        !instructionGenerationList
-        ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-        !inWarnIfUnused
-#        !inWeakFunction
-        !inGlobalFunction
-        !inRoutineKind
-        !returnType
-        !false
-      ]
-#    end
-#  else
-#    [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey
-#      !routineMangledName
-#      !inSelfType
-#      !routineMangledName
-#      !formalArguments
-#      !allocaList
-#      !instructionGenerationList
-#      ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-#      !inWarnIfUnused
-#      !inWeakFunction
-#      !inGlobalFunction
-#      !inRoutineKind
-#      !returnType
-#      !false
-#    ]  
-#  end
+  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
+    !routineMangledName
+    !inSelfType
+    !routineMangledName
+    !formalArguments
+    !allocaList
+    !instructionGenerationList
+    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
+    !inWarnIfUnused
+    !inGlobalFunction
+    !inRoutineKind
+    !returnType
+    !false
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -244,7 +196,7 @@ method @routineMapIR-element llvmCodeGeneration
     ioLLVMcode += " " + [[mReturnType kind] llvmTypeName]
   end
   ioLLVMcode += " @" + routineName + " ("
-  let receiverTypeName = [lkey.string stringByDeletingPathExtension]
+  let receiverTypeName = if mReceiverType == .null then "" else "$" + [mReceiverType key] end
   var first = true
   if receiverTypeName != "" then
     ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"

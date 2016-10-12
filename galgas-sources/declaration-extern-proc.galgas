@@ -68,19 +68,15 @@ method @externProcedureDeclarationListAST enterExternProcInContext
 }
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST-element enterExternProcInContext
-  ?!context:@semanticContext ioContext
-{
+method @externProcedureDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
+#--- Routine mangled name
+  let routineMangledName = routineMangledNameFromAST (
+    !"" 
+    !mExternProcedureName
+    !mProcFormalArgumentList
+  )
 #--- Signature
-  @procedureSignature signature = {}
-  var routineMangledName = mExternProcedureName
-  routineMangledName.string += "("
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in mProcFormalArgumentList do
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
-    signature += !formalArgumentPassingMode !selector !typeProxy
-    routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-  end
-  routineMangledName.string += ")"
+  routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
 #--- Enter in context
   @unifiedTypeMap-proxy returnType
   if mReturnTypeName.string == "" then
@@ -130,20 +126,15 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Routine mangled name
-  var routineMangledName = mExternProcedureName
-  routineMangledName.string += "("
-  for (passingMode selector * *) in mProcFormalArgumentList do
-    routineMangledName.string += [passingMode formalPassingModeString]
-     routineMangledName.string += selector.string
-     routineMangledName.string += ":"
-  end
-  routineMangledName.string += ")"
+  let routineMangledName = routineMangledNameFromAST (
+    !"" 
+    !mExternProcedureName
+    !mProcFormalArgumentList
+  )
 #--- Variable map
   initialVariableMap (
     !context:inContext
     !mode:mMode
-#    !userMode:mMode == .userMode
-#    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap

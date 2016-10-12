@@ -207,6 +207,18 @@ class cMapElement_routineMapForContext : public cMapElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             Routine 'routineSignature'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_routineSignature (class GALGAS_unifiedTypeMap & ioArgument0,
+                               const class GALGAS_procFormalArgumentList constinArgument1,
+                               class GALGAS_procedureSignature & outArgument2,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                            Extension method '@svcDeclarationListAST svcSemanticAnalysis'                            *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1077,6 +1089,16 @@ class GALGAS_string function_llvmNameForGlobalVariable (const class GALGAS_strin
 class GALGAS_string extensionGetter_llvmTypeName (const class GALGAS_typeKind & inObject,
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//               Extension getter '@procFormalArgumentPassingMode formalPassingModeString' (as function)               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_formalPassingModeString (const class GALGAS_procFormalArgumentPassingMode & inObject,
+                                                             class C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2544,6 +2566,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardKindGeneration
 class cMapElement_guardMapIR : public cMapElement {
 //--- Map attributes
   public : GALGAS_procFormalArgumentListForGeneration mProperty_mFormalArgumentListForGeneration ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReceiverType ;
   public : GALGAS_guardKindGenerationIR mProperty_mGuardKindGenerationIR ;
   public : GALGAS_allocaList mProperty_mAllocaList ;
   public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
@@ -2552,6 +2575,7 @@ class cMapElement_guardMapIR : public cMapElement {
 //--- Constructor
   public : cMapElement_guardMapIR (const GALGAS_lstring & inKey,
                                    const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
+                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mReceiverType,
                                    const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
                                    const GALGAS_allocaList & in_mAllocaList,
                                    const GALGAS_instructionListIR & in_mInstructionGenerationList,
@@ -2581,6 +2605,7 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mProperty_lkey ;
   public : GALGAS_procFormalArgumentListForGeneration mProperty_mFormalArgumentListForGeneration ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReceiverType ;
   public : GALGAS_guardKindGenerationIR mProperty_mGuardKindGenerationIR ;
   public : GALGAS_allocaList mProperty_mAllocaList ;
   public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
@@ -2600,6 +2625,7 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_guardMapIR_2D_element (const GALGAS_lstring & in_lkey,
                                          const GALGAS_procFormalArgumentListForGeneration & in_mFormalArgumentListForGeneration,
+                                         const GALGAS_unifiedTypeMap_2D_proxy & in_mReceiverType,
                                          const GALGAS_guardKindGenerationIR & in_mGuardKindGenerationIR,
                                          const GALGAS_allocaList & in_mAllocaList,
                                          const GALGAS_instructionListIR & in_mInstructionGenerationList,
@@ -2618,10 +2644,11 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_guardMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                       const class GALGAS_procFormalArgumentListForGeneration & inOperand1,
-                                                                      const class GALGAS_guardKindGenerationIR & inOperand2,
-                                                                      const class GALGAS_allocaList & inOperand3,
-                                                                      const class GALGAS_instructionListIR & inOperand4,
-                                                                      const class GALGAS_bool & inOperand5
+                                                                      const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                      const class GALGAS_guardKindGenerationIR & inOperand3,
+                                                                      const class GALGAS_allocaList & inOperand4,
+                                                                      const class GALGAS_instructionListIR & inOperand5,
+                                                                      const class GALGAS_bool & inOperand6
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2645,6 +2672,8 @@ class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_guardKindGenerationIR getter_mGuardKindGenerationIR (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReceiverType (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mWarnIfUnused (LOCATION_ARGS) const ;
 

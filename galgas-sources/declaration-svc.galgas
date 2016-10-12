@@ -111,20 +111,15 @@ method @svcDeclarationListAST enterInContext
   ?!context:@semanticContext ioContext
 {
   for svc in self do
+  #--- Routine mangled name
+    let routineMangledName = routineMangledNameFromAST (
+      !inReceiverTypeName 
+      !svc.mName
+      !svc.mFormalArgumentList
+    )
   #--- Signature
-    var routineMangledName = if inReceiverTypeName == "" then
-      svc.mName
-    else
-      @lstring.new {!inReceiverTypeName + "." + svc.mName !svc.mName.location}
-    end
-    @procedureSignature signature = {}
-    routineMangledName.string += "("
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in svc.mFormalArgumentList do
-      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-      signature += !formalArgumentPassingMode !selector !typeProxy
-      routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-    end
-    routineMangledName.string += ")"
+    routineSignature (!?ioContext.mTypeMap !svc.mFormalArgumentList ?let signature)
+  #--- Return type
     let returnType = if svc.mReturnTypeName.string == "" then
       @unifiedTypeMap-proxy.null
     else

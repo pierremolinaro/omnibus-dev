@@ -61,17 +61,11 @@ syntax extension plm_syntax {
     @lstringlist requiredByList = {}
     for function in functionDeclarationListAST do
       if function.mPublicFunction then
-        var routineMangledName = @lstring.new {
-          !"$" + moduleTypeName + "." + function.mFunctionName
-          !function.mFunctionName.location
-        }
-        routineMangledName.string += "("
-        for (passingMode selector * *) in function.mFunctionFormalArgumentList do
-          routineMangledName.string += [passingMode formalPassingModeString]
-          routineMangledName.string += selector.string
-          routineMangledName.string += ":"
-        end
-        routineMangledName.string += ")"
+        let routineMangledName = routineMangledNameFromAST (
+          !"$" + moduleTypeName 
+          !function.mFunctionName
+          !function.mFunctionFormalArgumentList
+        )
         requiredByList += !routineMangledName
       end
     end
@@ -90,17 +84,11 @@ syntax extension plm_syntax {
 #      requiredByList += !routineMangledName
 #    end
     for guard in guardListAST do
-      var routineMangledName = @lstring.new {
-        !"$" + moduleTypeName + "." + guard.mGuardName
-        !guard.mGuardName.location
-      }
-      routineMangledName.string += "("
-      for (passingMode selector * *) in guard.mGuardFormalArgumentList do
-        routineMangledName.string += [passingMode formalPassingModeString]
-        routineMangledName.string += selector.string
-        routineMangledName.string += ":"
-      end
-      routineMangledName.string += ")"
+      let routineMangledName = routineMangledNameFromAST (
+        !"$" + moduleTypeName 
+        !guard.mGuardName
+        !guard.mGuardFormalArgumentList
+      )
       requiredByList += !routineMangledName
     end
     for init in initList do

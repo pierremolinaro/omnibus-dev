@@ -327,17 +327,15 @@ proc analyzeGuardCall
       ?objectIR:let objectIR
       ?2*
     ]
-    outGuardMangledName = .new {!"$" + [receiverType key] + "." + inGuardName !inGuardName.location}
     outEffectiveParameterListIR += !.outputInput !objectIR
   else
-    outGuardMangledName = inGuardName
     receiverType = .null
   end
-  outGuardMangledName.string += "("
-  for (formalArgumentPassingMode selector) in inEffectiveParameterList do
-    outGuardMangledName.string += [formalArgumentPassingMode matchingFormalArgument] + selector + ":"
-  end
-  outGuardMangledName.string += ")"
+  outGuardMangledName = routineMangledNameFromCall (
+    !if inReceiverName.string == "" then "" else "$" + [receiverType key] end
+    !inGuardName
+    !inEffectiveParameterList
+  )
   [inContext.mGuardMapForContext searchKey
     !outGuardMangledName
     ?let isPublic
@@ -356,7 +354,6 @@ proc analyzeGuardCall
     end  
   end  
 #--- Enter in invocation graph
-#  let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !inGuardName)
   [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outGuardMangledName]
 #--- Analyze effective parameters
   analyzeEffectiveParameters (

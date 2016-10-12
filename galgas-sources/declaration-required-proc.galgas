@@ -25,13 +25,11 @@ syntax extension plm_syntax {
       ?name:let procName
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
-    var funcMangledName = procName.string + "("
-    for (passingMode selector * *) in procFormalArgumentList do
-      funcMangledName += [passingMode formalPassingModeString]
-      funcMangledName += selector
-      funcMangledName += ":"
-    end
-    funcMangledName += ")"
+    let funcMangledName = routineMangledNameFromAST (
+      !"" 
+      !procName
+      !procFormalArgumentList
+    )
     var isGlobal = false
     for (attribute) in attributeList do
       if attribute.string != globalAttribute () then
