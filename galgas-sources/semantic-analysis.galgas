@@ -70,7 +70,8 @@ proc semanticAnalysis
   outIntermediateCodeStruct.mStaticStringMap = inGlobalLiteralStringMap
   outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList
   for requiredProc in inAST.mRequiredProcListAST do
-    outIntermediateCodeStruct.mRequiredProcedureSet += !requiredProc.mRequiredProcedureName.string
+    let requiredProcedureMangledName = routineMangledNameFromAST (!"" !requiredProc.mName !requiredProc.mFormalArgumentList)
+    outIntermediateCodeStruct.mRequiredProcedureSet += !requiredProcedureMangledName.string
   end 
 #--- Global variables
   for globalVar in inAST.mGlobalVarDeclarationListAST do

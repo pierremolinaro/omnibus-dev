@@ -248,7 +248,8 @@ method @functionDeclarationListAST enterFunctionInContext
     let canAccessProperties = procedure.mMode != .userMode
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
-      !routineMangledName
+ #     !routineMangledName
+      !procedure.mFunctionName
       !argumentSignatureFromFormalArgumentList (!procedure.mFunctionName !procedure.mFunctionFormalArgumentList)
       !routineMangledName
       !.new{

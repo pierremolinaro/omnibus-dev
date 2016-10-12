@@ -177,16 +177,18 @@ override method @extendStaticArrayDeclarationAST enterInContext
         else
           [[type kind] function ?descriptor:let functionDescriptor]
         #--- Routine mangled name
-          let routineMangledName = routineMangledNameFromAST (
-            !"" 
-            !functionName
-            !formalArgs
-          )
+#          let routineMangledName = routineMangledNameFromAST (
+#            !"" 
+#            !functionName
+#            !formalArgs
+#          )
+          let argumentSignature = argumentSignatureFromFormalArgumentList (!functionName !formalArgs)
           [ioContext.mRoutineMapForContext searchKey
-            !routineMangledName
-            ?*
+            !functionName
+            !argumentSignature
             ?let @lstring candidateRoutineLLVMName
             ?let @routineDescriptor routineDescriptor
+            ?let functionDefinitionLocation
           ]
           let candidateIsPublic = routineDescriptor.mIsPublic
           let candidateRoutineKind = routineDescriptor.mRoutineKind
@@ -195,7 +197,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           let candidateReturnType = routineDescriptor.mReturnType
         #--- Check accessibility
           if not candidateIsPublic then
-            let declarationFile = [[ioContext.mRoutineMapForContext locationForKey !routineMangledName] file]
+            let declarationFile = [functionDefinitionLocation file]
             let invocationFile = [functionName.location file]
             if invocationFile != declarationFile then
               error functionName : "this function is not public"
