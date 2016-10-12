@@ -576,19 +576,17 @@ proc analyzeFunctionCallInExpression
   end
 #--- Add receiver as first argument
   if receiverType != .null then
-    outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
+#    outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
     outEffectiveParameterListIR += !.outputInput !inReceiver
  else
-    outRoutineMangledName = inRoutineName
+#    outRoutineMangledName = inRoutineName
   end
 #--- Build LLVM mangled name
-  outRoutineMangledName.string += "("
-  for (passingMode selector) in inEffectiveParameterList do
-    outRoutineMangledName.string += [passingMode matchingFormalArgument]
-    outRoutineMangledName.string += selector.string
-    outRoutineMangledName.string += ":"
-  end
-  outRoutineMangledName.string += ")"
+  outRoutineMangledName = routineMangledNameFromCall (
+    !if receiverType == .null then "" else "$" + [receiverType key] end
+    !inRoutineName
+    !inEffectiveParameterList
+  )
   [inContext.mRoutineMapForContext searchKey
     !outRoutineMangledName
     ?outRoutineNameForGeneration

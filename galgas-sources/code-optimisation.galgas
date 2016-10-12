@@ -290,6 +290,7 @@ private proc exploreGuards
       [!?ioAccessibleGuardMap insertKey
         !guard.lkey
         !guard.mFormalArgumentListForGeneration
+        !guard.mReceiverType
         !guard.mGuardKindGenerationIR
         !guard.mAllocaList
         !guard.mInstructionGenerationList
@@ -301,6 +302,7 @@ private proc exploreGuards
       [!?ioNonExploredGuardMap insertKey
         !guard.lkey
         !guard.mFormalArgumentListForGeneration
+        !guard.mReceiverType
         !guard.mGuardKindGenerationIR
         !guard.mAllocaList
         !guard.mInstructionGenerationList

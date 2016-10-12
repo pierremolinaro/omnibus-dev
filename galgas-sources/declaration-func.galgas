@@ -220,20 +220,14 @@ method @functionDeclarationListAST enterFunctionInContext
   ?!context:@semanticContext ioContext
 {
   for procedure in self do
+  #--- Routine mangled name
+    let routineMangledName = routineMangledNameFromAST (
+      !inSelfTypeName 
+      !procedure.mFunctionName
+      !procedure.mFunctionFormalArgumentList
+    )
   #--- Signature
-    var routineMangledName = if inSelfTypeName == "" then
-      procedure.mFunctionName
-    else
-      @lstring.new {!inSelfTypeName + "." + procedure.mFunctionName !procedure.mFunctionName.location}
-    end
-    routineMangledName.string += "("
-    @procedureSignature signature = {}
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in procedure.mFunctionFormalArgumentList do
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !formalArgumentTypeName ?let typeProxy]
-      signature += !formalArgumentPassingMode !selector !typeProxy
-      routineMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-    end
-    routineMangledName.string += ")"
+    routineSignature (!?ioContext.mTypeMap !procedure.mFunctionFormalArgumentList ?let signature)
   #--- Return type
     @unifiedTypeMap-proxy returnType
     if procedure.mFunctionReturnTypeName.string == "" then
@@ -241,10 +235,9 @@ method @functionDeclarationListAST enterFunctionInContext
     else
       [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !procedure.mFunctionReturnTypeName ?returnType]
     end
-  #--- Attribute
+  #--- Attributes
     var globalProcedure = false
     var canMutateProperties = false
-    var canAccessProperties = false
     for (attribute) in procedure.mFunctionAttributeList do
       if attribute.string == globalAttribute () then
         globalProcedure = true
@@ -252,7 +245,7 @@ method @functionDeclarationListAST enterFunctionInContext
         canMutateProperties = true
       end
     end
-    canAccessProperties = procedure.mMode != .userMode
+    let canAccessProperties = procedure.mMode != .userMode
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
       !routineMangledName

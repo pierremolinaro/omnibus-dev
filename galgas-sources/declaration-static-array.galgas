@@ -152,29 +152,27 @@ override method @staticArrayAST enterInContext
         !propertyIndex
       ]
     case function (@mode mode @procFormalArgumentList formalArgs @lstring returnTypeName) :
-      var routineMangledName = propertyName.string + "("
-      @procedureSignature signature = {}
-      for (formalArgumentPassingMode selector formalArgumentTypeName *) in formalArgs do
-        let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-        signature += !formalArgumentPassingMode !selector !typeProxy
-        routineMangledName += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-                           + [[typeProxy kind] llvmTypeName]
-      end
-      routineMangledName += ")" + returnTypeName.string
+    #--- Routine mangled name
+      let routineMangledName = routineMangledNameFromAST (
+        !"" 
+        !propertyName
+        !formalArgs
+      )
+    #--- Signature
+      routineSignature (!?ioContext.mTypeMap !formalArgs ?let signature)
       let @unifiedTypeMap-proxy returnType = if returnTypeName.string == "" then
         .null
       else
         .searchKey {!ioContext.mTypeMap !returnTypeName}
       end
-      let lRoutineMangledName = @lstring.new {!routineMangledName !propertyName.location}
       let descriptor = @routineDescriptor.new {!true !false !.function !mode !signature !returnType !false !false}
-      if not [ioContext.mTypeMap hasKey !lRoutineMangledName] then
+      if not [ioContext.mTypeMap hasKey !routineMangledName] then
         [!?ioContext.mTypeMap insertType
-          !lkey:lRoutineMangledName
+          !lkey:routineMangledName
           !kind:.function{!descriptor:descriptor}
         ]
       end
-      let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !lRoutineMangledName}
+      let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName}
       propertyList += !propertyName !propertyType
       let propertyIndex = [staticlistPropertyMap count]
       [!?staticlistPropertyMap insertKey

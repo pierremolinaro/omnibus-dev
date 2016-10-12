@@ -54,7 +54,6 @@ map @routineMapIR {
   @instructionListIR mInstructionGenerationList
   @bool mIsRequired
   @bool mWarnIfUnused
-#  @bool mWeak
   @bool mGlobal
   @routineKind mKind
   @unifiedTypeMap-proxy mReturnType # .null if no return value

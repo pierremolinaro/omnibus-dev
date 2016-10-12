@@ -13,20 +13,69 @@ struct @routineDescriptor {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @newRoutineMapForContext { # Key is a routine name
-  @newRoutineSignatureMapForContext mSignatureMap
+#map @newRoutineMapForContext { # Key is a routine name
+#  @newRoutineSignatureMapForContext mSignatureMap
+#
+#  insert insertKey error message "the '%K' routine is already declared in %L"
+#  search searchKey error message "there is no '%K' routine"
+#}
 
-  insert insertKey error message "the '%K' routine is already declared in %L"
-  search searchKey error message "there is no '%K' routine"
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#map @newRoutineSignatureMapForContext { # Key is the signature name
+#  @routineDescriptor mDescriptor
+#
+#  insert insertKey error message "the '%K' routine is already declared in %L"
+#  search searchKey error message "there is no '%K' routine"
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func routineMangledNameFromAST ?let @string inReceiverTypeName
+                               ?let @lstring inRoutineName
+                               ?let @procFormalArgumentList inFormalArgumentList-> @lstring
+{
+  result = if inReceiverTypeName == "" then
+    inRoutineName
+  else
+    @lstring.new {!inReceiverTypeName + "." + inRoutineName !inRoutineName.location}
+  end
+  result.string += "("
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    result.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  result.string += ")"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @newRoutineSignatureMapForContext { # Key is the signature name
-  @routineDescriptor mDescriptor
+func routineMangledNameFromCall ?let @string inReceiverTypeName
+                                ?let @lstring inRoutineName
+                                ?let @effectiveParameterListAST inEffectiveParameterList-> @lstring
+{
+  result = if inReceiverTypeName == "" then
+    inRoutineName
+  else
+    @lstring.new {!inReceiverTypeName + "." + inRoutineName !inRoutineName.location}
+  end
+  result.string += "("
+  for (passingMode selector) in inEffectiveParameterList do
+    result.string += [passingMode matchingFormalArgument] + selector + ":"
+  end
+  result.string += ")"
+}
 
-  insert insertKey error message "the '%K' routine is already declared in %L"
-  search searchKey error message "there is no '%K' routine"
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc routineSignature ?!@unifiedTypeMap ioTypeMap
+                      ?let @procFormalArgumentList inFormalArgumentList
+                      !@procedureSignature outResult
+{
+  outResult = {}
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    [@unifiedTypeMap-proxy makeProxy !?ioTypeMap !formalArgumentTypeName ?let typeProxy]
+    outResult += !formalArgumentPassingMode !selector !typeProxy
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -34,14 +83,6 @@ map @newRoutineSignatureMapForContext { # Key is the signature name
 map @routineMapForContext { # Key is a mangled name
   @lstring mRoutineLLVMName
   @routineDescriptor mDescriptor
-#  @bool mIsPublic
-#  @bool mGlobal
-#  @routineKind mRoutineKind
-#  @mode mMode
-#  @procedureSignature mSignature
-#  @unifiedTypeMap-proxy mReturnType
-#  @bool mCanAccessProperties
-#  @bool mCanMutateProperties
 
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"

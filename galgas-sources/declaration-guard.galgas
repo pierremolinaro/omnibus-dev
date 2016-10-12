@@ -96,20 +96,14 @@ method @guardDeclarationListAST enterInContext
   ?!context:@semanticContext ioContext
 {
   for guard in self do
+  #--- Guard mangled name
+    let guardMangledName = routineMangledNameFromAST (
+      !inReceiverTypeName 
+      !guard.mGuardName
+      !guard.mGuardFormalArgumentList
+    )
   #--- Signature
-    var guardMangledName = if inReceiverTypeName == "" then
-      guard.mGuardName
-    else
-      @lstring.new {!inReceiverTypeName + "." + guard.mGuardName !guard.mGuardName.location}
-    end
-    guardMangledName.string += "("
-    @procedureSignature signature = {}
-    for (formalArgumentPassingMode selector formalArgumentTypeName *) in guard.mGuardFormalArgumentList do
-      let typeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !formalArgumentTypeName}
-      signature += !formalArgumentPassingMode !selector !typeProxy
-      guardMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-    end
-    guardMangledName.string += ")"
+    routineSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
   #--- Enter in context
     [!?ioContext.mGuardMapForContext insertKey
       !guardMangledName
@@ -171,16 +165,11 @@ proc guardSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Guard mangled name
-  var guardMangledName = if inSelfType == .null then
-    inRoutineName
-  else
-    @lstring.new {!"$" + [inSelfType key] + "." + inRoutineName !inRoutineName.location}
-  end
-  guardMangledName.string += "("
-  for (formalArgumentPassingMode selector * *) in inRoutineFormalArgumentList do
-    guardMangledName.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-  end
-  guardMangledName.string += ")"
+  let guardMangledName = routineMangledNameFromAST (
+    !if inSelfType == .null then "" else "$" + [inSelfType key] end
+    !inRoutineName
+    !inRoutineFormalArgumentList
+  )
 #--- Enter subprogram invocation graph
   if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !guardMangledName.string] then
     [!?ioTemporaries.mSubprogramInvocationGraph addNode
@@ -192,8 +181,6 @@ proc guardSemanticAnalysis
   initialVariableMap (
     !context:inContext
     !mode:.guardMode
-#    !userMode:false
-#    !registerAccess:.noAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@variableMap variableMap
@@ -280,6 +267,7 @@ proc guardSemanticAnalysis
   [!?ioIntermediateCodeStruct.mGuardMapIR insertKey
     !guardMangledName
     !formalArguments
+    !inSelfType
     !convenienceGuardGenerationIR
     !allocaList
     !instructionGenerationList
@@ -344,7 +332,6 @@ method @callInstructionAST baseGuardAnalyze
       ?routineMangledName:let @lstring functionMangledName
       ?routineNameForGeneration:let @lstring unused functionNameForGeneration
       ?returnType:let @unifiedTypeMap-proxy returnedType
-#      ?appendFileAndLineArgumentForPanicLocation:let unused appendFileAndLineArgumentForPanicLocation
     )
     if returnedType != .null then
       error functionName : "<< internal guard error >>"
@@ -375,6 +362,7 @@ enum @guardKindGenerationIR {
 
 map @guardMapIR {
   @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @unifiedTypeMap-proxy mReceiverType
   @guardKindGenerationIR mGuardKindGenerationIR
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
@@ -402,7 +390,7 @@ method @guardMapIR guardCodeGeneration
       ioServiceList += !guardCallName !guardImplementationName
       ioLLVMcode += llvmTitleComment (!guardImplementationName)
       ioLLVMcode += "declare i1 @" + guardCallName + " ("
-      let typeName = [guard.lkey.string stringByDeletingPathExtension]
+      let typeName = if guard.mReceiverType == .null then "" else "$" + [guard.mReceiverType key] end
       var first = typeName == ""
       if not first then
         ioLLVMcode += "%" + [typeName assemblerRepresentation] + " * %self"  
@@ -440,7 +428,7 @@ method @guardMapIR-element llvmCodeGeneration
   end
   ioLLVMcode += llvmTitleComment (!guardRoutineName)
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
-  let receiverTypeName = [lkey.string stringByDeletingPathExtension]
+  let receiverTypeName = if mReceiverType == .null then "" else "$" + [mReceiverType key] end
   var first = true
   if receiverTypeName != "" then
     ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"
