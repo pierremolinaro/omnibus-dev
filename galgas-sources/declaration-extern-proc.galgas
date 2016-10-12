@@ -70,11 +70,11 @@ method @externProcedureDeclarationListAST enterExternProcInContext
 
 method @externProcedureDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
 #--- Routine mangled name
-  let routineMangledName = routineMangledNameFromAST (
-    !"" 
-    !mExternProcedureName
-    !mProcFormalArgumentList
-  )
+#  let routineMangledName = routineMangledNameFromAST (
+#    !"" 
+#    !mExternProcedureName
+#    !mProcFormalArgumentList
+#  )
 #--- Signature
   routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
 #--- Enter in context
@@ -85,7 +85,8 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReturnTypeName ?returnType]
   end
   [!?ioContext.mRoutineMapForContext insertKey
-    !routineMangledName
+#    !routineMangledName
+    !mExternProcedureName
     !argumentSignatureFromFormalArgumentList (!mExternProcedureName !mProcFormalArgumentList)
     !mRoutineNameForGeneration
     !.new {

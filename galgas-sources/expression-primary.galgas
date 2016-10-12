@@ -588,10 +588,11 @@ proc analyzeFunctionCallInExpression
     !inEffectiveParameterList
   )
   [inContext.mRoutineMapForContext searchKey
-    !outRoutineMangledName
-    ?*
+    !inRoutineName
+    !argumentSignatureFromEffectiveArgumentList (!inRoutineName !inEffectiveParameterList)
     ?outRoutineNameForGeneration
     ?let @routineDescriptor routineDescriptor
+    ?let @location outRoutineLocation
   ]
   let isPublic = routineDescriptor.mIsPublic
   let routineKind = routineDescriptor.mRoutineKind
@@ -601,7 +602,7 @@ proc analyzeFunctionCallInExpression
 #--- Check accessibility
   if not isPublic then
     if receiverType == .null then # Standalone function
-      let @string declarationFile = [[inContext.mRoutineMapForContext locationForKey !outRoutineMangledName.string] file]
+      let @string declarationFile = [outRoutineLocation file]
       let invocationFile = [inRoutineName.location file]
       if invocationFile != declarationFile then
         error inRoutineName : "this routine is not public"

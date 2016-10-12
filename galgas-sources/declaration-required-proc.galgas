@@ -3,10 +3,10 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @requiredProcedureDeclarationListAST {
-  @lstring mRequiredProcedureName
+  @lstring mName
   @mode mMode
   @bool mIsGlobal
-  @procFormalArgumentList mProcFormalArgumentList
+  @procFormalArgumentList mFormalArgumentList
   @location mEndOfProcLocation
 }
 
@@ -25,11 +25,11 @@ syntax extension plm_syntax {
       ?name:let procName
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
-    let funcMangledName = routineMangledNameFromAST (
-      !"" 
-      !procName
-      !procFormalArgumentList
-    )
+#    let funcMangledName = routineMangledNameFromAST (
+#      !"" 
+#      !procName
+#      !procFormalArgumentList
+#    )
     var isGlobal = false
     for (attribute) in attributeList do
       if attribute.string != globalAttribute () then
@@ -41,7 +41,8 @@ syntax extension plm_syntax {
       end
     end
     ioAST.mRequiredProcListAST +=
-      !.new{!funcMangledName !procName.location}
+      !procName
+#      !.new{!funcMangledName !procName.location}
       !mode
       !isGlobal
       !procFormalArgumentList
@@ -60,29 +61,30 @@ proc checkRequiredProcedures
   ?endOfSourceFile:let @location unused inEndOfSourceFile
 {
   for requiredProc in inAST.mRequiredProcListAST do
-    if not [inSemanticContext.mRoutineMapForContext hasKey !requiredProc.mRequiredProcedureName.string] then
-      error requiredProc.mRequiredProcedureName : "required func is not implemented"
+    let argumentSignature = argumentSignatureFromFormalArgumentList (!requiredProc.mName !requiredProc.mFormalArgumentList)
+    if not [inSemanticContext.mRoutineMapForContext hasKey !requiredProc.mName !argumentSignature] then
+      error requiredProc.mName : "required func is not implemented"
     else
       [inSemanticContext.mRoutineMapForContext searchKey
-        !requiredProc.mRequiredProcedureName
-        ?2*
+        !requiredProc.mName
+        !argumentSignature
+        ?*
         ?let @routineDescriptor routineDescriptor
+        ?let @location routineLocation
       ]
       let isGlobal = routineDescriptor.mGlobal
       let mode = routineDescriptor.mMode
     #--- Check modes
       if mode != requiredProc.mMode then
-        error [inSemanticContext.mRoutineMapForContext locationForKey !requiredProc.mRequiredProcedureName.string]
-        : "required mode should be '" + requiredProc.mMode + "'"
-      
+        error routineLocation : "required mode should be '" + requiredProc.mMode + "'"    
       end
     #--- Check attributes
       if requiredProc.mIsGlobal && not isGlobal then
-        error [inSemanticContext.mRoutineMapForContext locationForKey !requiredProc.mRequiredProcedureName]
+        error routineLocation
         : "missing @" + globalAttribute () + " attribute (required function declaration names it)"
         fixit { after " @" + globalAttribute () }
       elsif isGlobal && not requiredProc.mIsGlobal then
-        error [inSemanticContext.mRoutineMapForContext locationForKey !requiredProc.mRequiredProcedureName]
+        error routineLocation
         : "incorrect @" + globalAttribute () + " attribute (required function declaration does not name it)"
       end
     end

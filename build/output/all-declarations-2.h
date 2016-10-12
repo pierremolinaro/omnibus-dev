@@ -188,38 +188,6 @@ class GALGAS_string function_mutatingAttribute (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                  Class for element of '@routineMapForContext' map                                   *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cMapElement_routineMapForContext : public cMapElement {
-//--- Map attributes
-  public : GALGAS_lstring mProperty_mArgumentSignature ;
-  public : GALGAS_lstring mProperty_mRoutineLLVMName ;
-  public : GALGAS_routineDescriptor mProperty_mDescriptor ;
-
-//--- Constructor
-  public : cMapElement_routineMapForContext (const GALGAS_lstring & inKey,
-                                             const GALGAS_lstring & in_mArgumentSignature,
-                                             const GALGAS_lstring & in_mRoutineLLVMName,
-                                             const GALGAS_routineDescriptor & in_mDescriptor
-                                             COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cMapElement * copy (void) ;
-
-//--- Description
- public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                             Routine 'routineSignature'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -229,6 +197,20 @@ void routine_routineSignature (class GALGAS_unifiedTypeMap & ioArgument0,
                                class GALGAS_procedureSignature & outArgument2,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Extension setter '@routineMapForContext insertKey'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_insertKey (class GALGAS_routineMapForContext & ioObject,
+                                const class GALGAS_lstring constin_inRoutineName,
+                                const class GALGAS_lstring constin_inArgumentSignature,
+                                const class GALGAS_lstring constin_inRoutineLLVMName,
+                                const class GALGAS_routineDescriptor constin_inDescriptor,
+                                class C_Compiler * inCompiler
+                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

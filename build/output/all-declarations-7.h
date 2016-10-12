@@ -191,6 +191,17 @@ void routine_handlePropertyAccessInExpression (class GALGAS_objectIR & ioArgumen
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                Function 'argumentSignatureFromEffectiveArgumentList'                                *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_argumentSignatureFromEffectiveArgumentList (const class GALGAS_location & constinArgument0,
+                                                                          const class GALGAS_effectiveParameterListAST & constinArgument1,
+                                                                          class C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                        Function 'routineMangledNameFromCall'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -324,40 +335,5 @@ void routine_buildOrderedDeclarationList (const class GALGAS_ast constinArgument
                                           class GALGAS_declarationListAST & outArgument3,
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Routine 'buildSemanticContext'                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_buildSemanticContext (const class GALGAS_declarationListAST constinArgument0,
-                                   const class GALGAS_lstring constinArgument1,
-                                   const class GALGAS_ast constinArgument2,
-                                   class GALGAS_staticStringMap & ioArgument3,
-                                   class GALGAS_staticlistValues_5F_listMap & ioArgument4,
-                                   class GALGAS_semanticContext & outArgument5,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Function 'llvmNameForStaticListType'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string function_llvmNameForStaticListType (const class GALGAS_string & constinArgument0,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                         Function 'plmNameForStaticListType'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_plmNameForStaticListType (const class GALGAS_lstring & constinArgument0,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
 
 #endif

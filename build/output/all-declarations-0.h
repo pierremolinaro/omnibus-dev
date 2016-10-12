@@ -2958,10 +2958,10 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- Element constructor
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                  const class GALGAS_lstring & in_mRequiredProcedureName,
+                                                  const class GALGAS_lstring & in_mName,
                                                   const class GALGAS_mode & in_mMode,
                                                   const class GALGAS_bool & in_mIsGlobal,
-                                                  const class GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
+                                                  const class GALGAS_procFormalArgumentList & in_mFormalArgumentList,
                                                   const class GALGAS_location & in_mEndOfProcLocation
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -3063,6 +3063,10 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
                                                                                     C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mFormalArgumentListAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                                   C_Compiler * inCompiler
+                                                                                                   COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsGlobalAtIndex (const class GALGAS_uint & constinOperand0,
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) const ;
@@ -3071,13 +3075,9 @@ class GALGAS_requiredProcedureDeclarationListAST : public AC_GALGAS_list {
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mProcFormalArgumentListAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                                       C_Compiler * inCompiler
-                                                                                                       COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRequiredProcedureNameAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                                       C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mNameAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_requiredProcedureDeclarationListAST getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                                       C_Compiler * inCompiler
@@ -3109,10 +3109,10 @@ class cEnumerator_requiredProcedureDeclarationListAST : public cGenericAbstractE
                                                             const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
-  public : class GALGAS_lstring current_mRequiredProcedureName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mName (LOCATION_ARGS) const ;
   public : class GALGAS_mode current_mMode (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mIsGlobal (LOCATION_ARGS) const ;
-  public : class GALGAS_procFormalArgumentList current_mProcFormalArgumentList (LOCATION_ARGS) const ;
+  public : class GALGAS_procFormalArgumentList current_mFormalArgumentList (LOCATION_ARGS) const ;
   public : class GALGAS_location current_mEndOfProcLocation (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_requiredProcedureDeclarationListAST_2D_element current (LOCATION_ARGS) const ;
@@ -3130,10 +3130,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_requiredProcedureDe
 
 class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_lstring mProperty_mRequiredProcedureName ;
+  public : GALGAS_lstring mProperty_mName ;
   public : GALGAS_mode mProperty_mMode ;
   public : GALGAS_bool mProperty_mIsGlobal ;
-  public : GALGAS_procFormalArgumentList mProperty_mProcFormalArgumentList ;
+  public : GALGAS_procFormalArgumentList mProperty_mFormalArgumentList ;
   public : GALGAS_location mProperty_mEndOfProcLocation ;
 
 
@@ -3148,10 +3148,10 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
   public : VIRTUAL_IN_DEBUG ~ GALGAS_requiredProcedureDeclarationListAST_2D_element (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_requiredProcedureDeclarationListAST_2D_element (const GALGAS_lstring & in_mRequiredProcedureName,
+  public : GALGAS_requiredProcedureDeclarationListAST_2D_element (const GALGAS_lstring & in_mName,
                                                                   const GALGAS_mode & in_mMode,
                                                                   const GALGAS_bool & in_mIsGlobal,
-                                                                  const GALGAS_procFormalArgumentList & in_mProcFormalArgumentList,
+                                                                  const GALGAS_procFormalArgumentList & in_mFormalArgumentList,
                                                                   const GALGAS_location & in_mEndOfProcLocation) ;
 
 //-- Start of generic part --*
@@ -3186,13 +3186,13 @@ class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_r
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfProcLocation (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mFormalArgumentList (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsGlobal (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_procFormalArgumentList getter_mProcFormalArgumentList (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRequiredProcedureName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
