@@ -1,15 +1,47 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @routineMapForContext { # Key is a mangled name
-  @lstring mRoutineLLVMName
+struct @routineDescriptor {
   @bool mIsPublic
   @bool mGlobal
   @routineKind mRoutineKind
   @mode mMode
   @procedureSignature mSignature
-  @unifiedTypeMap-proxy mReturnType
+  @unifiedTypeMap-proxy mReturnType # .null if no returned value
   @bool mCanAccessProperties
   @bool mCanMutateProperties
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @newRoutineMapForContext { # Key is a routine name
+  @newRoutineSignatureMapForContext mSignatureMap
+
+  insert insertKey error message "the '%K' routine is already declared in %L"
+  search searchKey error message "there is no '%K' routine"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @newRoutineSignatureMapForContext { # Key is the signature name
+  @routineDescriptor mDescriptor
+
+  insert insertKey error message "the '%K' routine is already declared in %L"
+  search searchKey error message "there is no '%K' routine"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+map @routineMapForContext { # Key is a mangled name
+  @lstring mRoutineLLVMName
+  @routineDescriptor mDescriptor
+#  @bool mIsPublic
+#  @bool mGlobal
+#  @routineKind mRoutineKind
+#  @mode mMode
+#  @procedureSignature mSignature
+#  @unifiedTypeMap-proxy mReturnType
+#  @bool mCanAccessProperties
+#  @bool mCanMutateProperties
 
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"

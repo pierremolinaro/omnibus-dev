@@ -91,14 +91,16 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext
   [!?ioContext.mRoutineMapForContext insertKey
     !routineMangledName
     !mRoutineNameForGeneration
-    !true # isPublic
-    !false # Global
-    !.function
-    !mMode
-    !signature
-    !returnType
-    !false # canMutateProperties
-    !false # canAccessPropertiesInUserMode
+    !.new {
+      !true # isPublic
+      !false # Global
+      !.function
+      !mMode
+      !signature
+      !returnType
+      !false # canMutateProperties
+      !false # canAccessPropertiesInUserMode
+    }
   ]
 }
 

@@ -190,16 +190,13 @@ override method @extendStaticArrayDeclarationAST enterInContext
           [ioContext.mRoutineMapForContext searchKey
             !lRoutineMangledName
             ?let @lstring candidateRoutineLLVMName
-            ?let @bool candidateIsPublic
-            ?let @bool unused candidateIsGlobal
-            ?let @routineKind candidateRoutineKind
-            ?let @mode candidateMode
-            ?let @procedureSignature candidateSignature
-            ?let @unifiedTypeMap-proxy candidateReturnType
-#            ?let @bool unused candidateAppendFileAndLineArgumentForPanicLocation
-            ?let @bool unused candidateCanAccessProperties
-            ?let @bool unused candidateCanMutateProperties
+            ?let @routineDescriptor routineDescriptor
           ]
+          let candidateIsPublic = routineDescriptor.mIsPublic
+          let candidateRoutineKind = routineDescriptor.mRoutineKind
+          let candidateMode = routineDescriptor.mMode
+          let candidateSignature = routineDescriptor.mSignature
+          let candidateReturnType = routineDescriptor.mReturnType
         #--- Check accessibility
           if not candidateIsPublic then
             let declarationFile = [[ioContext.mRoutineMapForContext locationForKey !routineMangledName] file]

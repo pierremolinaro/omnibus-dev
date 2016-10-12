@@ -257,14 +257,16 @@ method @functionDeclarationListAST enterFunctionInContext
     [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
       !routineMangledName
       !routineMangledName
-      !procedure.mPublicFunction
-      !globalProcedure
-      !.function
-      !procedure.mMode
-      !signature
-      !returnType
-      !canMutateProperties
-      !canAccessProperties
+      !.new{
+        !procedure.mPublicFunction
+        !globalProcedure
+        !.function
+        !procedure.mMode
+        !signature
+        !returnType
+        !canMutateProperties
+        !canAccessProperties
+      }
     ]
   end
 }
