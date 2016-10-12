@@ -579,6 +579,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procedureSignature_
 class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mProperty_lkey ;
+  public : GALGAS_lstring mProperty_mArgumentSignature ;
   public : GALGAS_lstring mProperty_mRoutineLLVMName ;
   public : GALGAS_routineDescriptor mProperty_mDescriptor ;
 
@@ -595,6 +596,7 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_routineMapForContext_2D_element (const GALGAS_lstring & in_lkey,
+                                                   const GALGAS_lstring & in_mArgumentSignature,
                                                    const GALGAS_lstring & in_mRoutineLLVMName,
                                                    const GALGAS_routineDescriptor & in_mDescriptor) ;
 
@@ -611,7 +613,8 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_routineMapForContext_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                 const class GALGAS_lstring & inOperand1,
-                                                                                const class GALGAS_routineDescriptor & inOperand2
+                                                                                const class GALGAS_lstring & inOperand2,
+                                                                                const class GALGAS_routineDescriptor & inOperand3
                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -627,6 +630,8 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_lkey (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mArgumentSignature (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineDescriptor getter_mDescriptor (LOCATION_ARGS) const ;
 

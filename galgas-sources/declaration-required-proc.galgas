@@ -65,7 +65,7 @@ proc checkRequiredProcedures
     else
       [inSemanticContext.mRoutineMapForContext searchKey
         !requiredProc.mRequiredProcedureName
-        ?*
+        ?2*
         ?let @routineDescriptor routineDescriptor
       ]
       let isGlobal = routineDescriptor.mGlobal

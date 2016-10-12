@@ -168,6 +168,17 @@ void extensionMethod_enterInContext (const class GALGAS_svcDeclarationListAST in
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                 Function 'argumentSignatureFromFormalArgumentList'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_argumentSignatureFromFormalArgumentList (const class GALGAS_location & constinArgument0,
+                                                                       const class GALGAS_procFormalArgumentList & constinArgument1,
+                                                                       class C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Function 'mutatingAttribute'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -183,11 +194,13 @@ class GALGAS_string function_mutatingAttribute (class C_Compiler * inCompiler
 
 class cMapElement_routineMapForContext : public cMapElement {
 //--- Map attributes
+  public : GALGAS_lstring mProperty_mArgumentSignature ;
   public : GALGAS_lstring mProperty_mRoutineLLVMName ;
   public : GALGAS_routineDescriptor mProperty_mDescriptor ;
 
 //--- Constructor
   public : cMapElement_routineMapForContext (const GALGAS_lstring & inKey,
+                                             const GALGAS_lstring & in_mArgumentSignature,
                                              const GALGAS_lstring & in_mRoutineLLVMName,
                                              const GALGAS_routineDescriptor & in_mDescriptor
                                              COMMA_LOCATION_ARGS) ;

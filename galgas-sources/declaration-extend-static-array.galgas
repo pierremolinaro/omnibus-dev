@@ -184,6 +184,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           )
           [ioContext.mRoutineMapForContext searchKey
             !routineMangledName
+            ?*
             ?let @lstring candidateRoutineLLVMName
             ?let @routineDescriptor routineDescriptor
           ]

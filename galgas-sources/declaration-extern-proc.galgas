@@ -86,6 +86,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
   end
   [!?ioContext.mRoutineMapForContext insertKey
     !routineMangledName
+    !argumentSignatureFromFormalArgumentList (!mExternProcedureName !mProcFormalArgumentList)
     !mRoutineNameForGeneration
     !.new {
       !true # isPublic

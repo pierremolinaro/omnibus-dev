@@ -589,6 +589,7 @@ proc analyzeFunctionCallInExpression
   )
   [inContext.mRoutineMapForContext searchKey
     !outRoutineMangledName
+    ?*
     ?outRoutineNameForGeneration
     ?let @routineDescriptor routineDescriptor
   ]

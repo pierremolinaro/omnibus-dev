@@ -80,13 +80,48 @@ proc routineSignature ?!@unifiedTypeMap ioTypeMap
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+func argumentSignatureFromFormalArgumentList ?let @location inRoutineNameLocation
+                                             ?let @procFormalArgumentList inFormalArgumentList-> @lstring
+{
+  var key = ""
+  key += "("
+  for (formalArgumentPassingMode selector * *) in inFormalArgumentList do
+    key += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  key += ")"
+  result = .new {!key !inRoutineNameLocation}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#map @routineArgumentSignatureMapForContext { # Key is the argument signature
+#  @lstring mRoutineLLVMName
+#  @routineDescriptor mDescriptor
+#
+#  insert insertKey error message "the '%K' routine is already declared in %L"
+#  search searchKey error message "there is no '%K' routine"
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 map @routineMapForContext { # Key is a mangled name
+  @lstring mArgumentSignature
   @lstring mRoutineLLVMName
   @routineDescriptor mDescriptor
 
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#map @outineMapForContext { # Key is a mangled name
+#  @lstring mRoutineLLVMName
+#  @routineDescriptor mDescriptor
+#
+#  insert insertKey error message "the '%K' routine is already declared in %L"
+#  search searchKey error message "there is no '%K' routine"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

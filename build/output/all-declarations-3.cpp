@@ -3731,10 +3731,12 @@ GALGAS_procedureSignature GALGAS_procedureSignature::extractObject (const GALGAS
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_routineMapForContext::cMapElement_routineMapForContext (const GALGAS_lstring & inKey,
+                                                                    const GALGAS_lstring & in_mArgumentSignature,
                                                                     const GALGAS_lstring & in_mRoutineLLVMName,
                                                                     const GALGAS_routineDescriptor & in_mDescriptor
                                                                     COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
+mProperty_mArgumentSignature (in_mArgumentSignature),
 mProperty_mRoutineLLVMName (in_mRoutineLLVMName),
 mProperty_mDescriptor (in_mDescriptor) {
 }
@@ -3742,20 +3744,24 @@ mProperty_mDescriptor (in_mDescriptor) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_routineMapForContext::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mRoutineLLVMName.isValid () && mProperty_mDescriptor.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mArgumentSignature.isValid () && mProperty_mRoutineLLVMName.isValid () && mProperty_mDescriptor.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_routineMapForContext::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_routineMapForContext (mProperty_lkey, mProperty_mRoutineLLVMName, mProperty_mDescriptor COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_routineMapForContext (mProperty_lkey, mProperty_mArgumentSignature, mProperty_mRoutineLLVMName, mProperty_mDescriptor COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_routineMapForContext::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mArgumentSignature" ":" ;
+  mProperty_mArgumentSignature.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mRoutineLLVMName" ":" ;
@@ -3771,6 +3777,9 @@ void cMapElement_routineMapForContext::description (C_String & ioString, const i
 typeComparisonResult cMapElement_routineMapForContext::compare (const cCollectionElement * inOperand) const {
   cMapElement_routineMapForContext * operand = (cMapElement_routineMapForContext *) inOperand ;
   typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mArgumentSignature.objectCompare (operand->mProperty_mArgumentSignature) ;
+  }
   if (kOperandEqual == result) {
     result = mProperty_mRoutineLLVMName.objectCompare (operand->mProperty_mRoutineLLVMName) ;
   }
@@ -3829,11 +3838,12 @@ GALGAS_routineMapForContext GALGAS_routineMapForContext::getter_overriddenMap (C
 
 void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
                                                        const GALGAS_lstring & inArgument0,
-                                                       const GALGAS_routineDescriptor & inArgument1,
+                                                       const GALGAS_lstring & inArgument1,
+                                                       const GALGAS_routineDescriptor & inArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   cMapElement_routineMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3846,11 +3856,12 @@ void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & in
 
 void GALGAS_routineMapForContext::setter_insertKey (GALGAS_lstring inKey,
                                                     GALGAS_lstring inArgument0,
-                                                    GALGAS_routineDescriptor inArgument1,
+                                                    GALGAS_lstring inArgument1,
+                                                    GALGAS_routineDescriptor inArgument2,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   cMapElement_routineMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3867,7 +3878,8 @@ const char * kSearchErrorMessage_routineMapForContext_searchKey = "there is no '
 
 void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
                                                     GALGAS_lstring & outArgument0,
-                                                    GALGAS_routineDescriptor & outArgument1,
+                                                    GALGAS_lstring & outArgument1,
+                                                    GALGAS_routineDescriptor & outArgument2,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const {
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) performSearch (inKey,
@@ -3877,11 +3889,28 @@ void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
   if (NULL == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
+    outArgument2.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-    outArgument0 = p->mProperty_mRoutineLLVMName ;
-    outArgument1 = p->mProperty_mDescriptor ;
+    outArgument0 = p->mProperty_mArgumentSignature ;
+    outArgument1 = p->mProperty_mRoutineLLVMName ;
+    outArgument2 = p->mProperty_mDescriptor ;
   }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_routineMapForContext::getter_mArgumentSignatureForKey (const GALGAS_string & inKey,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
+  GALGAS_lstring result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
+    result = p->mProperty_mArgumentSignature ;
+  }
+  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3912,6 +3941,20 @@ GALGAS_routineDescriptor GALGAS_routineMapForContext::getter_mDescriptorForKey (
     result = p->mProperty_mDescriptor ;
   }
   return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_routineMapForContext::setter_setMArgumentSignatureForKey (GALGAS_lstring inAttributeValue,
+                                                                      GALGAS_string inKey,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_routineMapForContext * p = (cMapElement_routineMapForContext *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_routineMapForContext) ;
+    p->mProperty_mArgumentSignature = inAttributeValue ;
+  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3965,7 +4008,7 @@ cGenericAbstractEnumerator (inOrder) {
 GALGAS_routineMapForContext_2D_element cEnumerator_routineMapForContext::current (LOCATION_ARGS) const {
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapForContext) ;
-  return GALGAS_routineMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mRoutineLLVMName, p->mProperty_mDescriptor) ;
+  return GALGAS_routineMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mArgumentSignature, p->mProperty_mRoutineLLVMName, p->mProperty_mDescriptor) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3974,6 +4017,14 @@ GALGAS_lstring cEnumerator_routineMapForContext::current_lkey (LOCATION_ARGS) co
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mProperty_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_routineMapForContext::current_mArgumentSignature (LOCATION_ARGS) const {
+  const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_routineMapForContext) ;
+  return p->mProperty_mArgumentSignature ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
