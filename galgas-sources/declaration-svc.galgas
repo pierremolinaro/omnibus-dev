@@ -141,15 +141,16 @@ method @svcDeclarationListAST enterInContext
     [!?ioContext.mRoutineMapForContext insertKey
       !routineMangledName
       !routineMangledName
-      !svc.mPublic
-      !false
-      !svc.mRoutineKind
-      !.userMode
-      !signature
-      !returnType
-#      !false # No appendFileAndLineArgumentForPanicLocation
-      !mutating # canMutateProperties
-      !true # canAccessPropertiesInUserMode
+      !.new {
+        !svc.mPublic
+        !false
+        !svc.mRoutineKind
+        !.userMode
+        !signature
+        !returnType
+        !mutating # canMutateProperties
+        !true # canAccessPropertiesInUserMode
+      }
     ]
   end
 }

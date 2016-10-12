@@ -167,7 +167,7 @@ override method @staticArrayAST enterInContext
         .searchKey {!ioContext.mTypeMap !returnTypeName}
       end
       let lRoutineMangledName = @lstring.new {!routineMangledName !propertyName.location}
-      let descriptor = @routineDescriptor.new {!.function !mode !signature !returnType}
+      let descriptor = @routineDescriptor.new {!true !false !.function !mode !signature !returnType !false !false}
       if not [ioContext.mTypeMap hasKey !lRoutineMangledName] then
         [!?ioContext.mTypeMap insertType
           !lkey:lRoutineMangledName

@@ -67,12 +67,11 @@ proc checkRequiredProcedures
     else
       [inSemanticContext.mRoutineMapForContext searchKey
         !requiredProc.mRequiredProcedureName
-        ?2*
-        ?let isGlobal
         ?*
-        ?let @mode mode 
-        ?4*
+        ?let @routineDescriptor routineDescriptor
       ]
+      let isGlobal = routineDescriptor.mGlobal
+      let mode = routineDescriptor.mMode
     #--- Check modes
       if mode != requiredProc.mMode then
         error [inSemanticContext.mRoutineMapForContext locationForKey !requiredProc.mRequiredProcedureName.string]
