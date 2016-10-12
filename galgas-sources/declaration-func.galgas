@@ -249,6 +249,7 @@ method @functionDeclarationListAST enterFunctionInContext
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
       !routineMangledName
+      !argumentSignatureFromFormalArgumentList (!procedure.mFunctionName !procedure.mFunctionFormalArgumentList)
       !routineMangledName
       !.new{
         !procedure.mPublicFunction

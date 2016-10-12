@@ -8272,16 +8272,23 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_lstring & inOperand1,
-                                                      const class GALGAS_routineDescriptor & inOperand2,
+                                                      const class GALGAS_lstring & inOperand2,
+                                                      const class GALGAS_routineDescriptor & inOperand3,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_lstring constinArgument1,
-                                                   class GALGAS_routineDescriptor constinArgument2,
+                                                   class GALGAS_lstring constinArgument2,
+                                                   class GALGAS_routineDescriptor constinArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMArgumentSignatureForKey (class GALGAS_lstring constinArgument0,
+                                                                     class GALGAS_string constinArgument1,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMDescriptorForKey (class GALGAS_routineDescriptor constinArgument0,
                                                               class GALGAS_string constinArgument1,
@@ -8297,13 +8304,18 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
                                                    class GALGAS_lstring & outArgument1,
-                                                   class GALGAS_routineDescriptor & outArgument2,
+                                                   class GALGAS_lstring & outArgument2,
+                                                   class GALGAS_routineDescriptor & outArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mArgumentSignatureForKey (const class GALGAS_string & constinOperand0,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_routineDescriptor getter_mDescriptorForKey (const class GALGAS_string & constinOperand0,
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) const ;
@@ -8338,6 +8350,7 @@ class cEnumerator_routineMapForContext : public cGenericAbstractEnumerator {
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mArgumentSignature (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mRoutineLLVMName (LOCATION_ARGS) const ;
   public : class GALGAS_routineDescriptor current_mDescriptor (LOCATION_ARGS) const ;
 //--- Current element access

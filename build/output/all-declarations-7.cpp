@@ -75,9 +75,9 @@ static void extensionMethod_extendStaticArrayDeclarationAST_enterInContext (cons
         break ;
       case GALGAS_extendStaticArrayExpressionAST::kEnum_function:
         {
-          const cEnumAssociatedValues_extendStaticArrayExpressionAST_function * extractPtr_10545 = (const cEnumAssociatedValues_extendStaticArrayExpressionAST_function *) (enumerator_5912.current_mExpression (HERE).unsafePointer ()) ;
-          const GALGAS_lstring extractedValue_functionName = extractPtr_10545->mAssociatedValue0 ;
-          const GALGAS_procFormalArgumentList extractedValue_formalArgs = extractPtr_10545->mAssociatedValue1 ;
+          const cEnumAssociatedValues_extendStaticArrayExpressionAST_function * extractPtr_10560 = (const cEnumAssociatedValues_extendStaticArrayExpressionAST_function *) (enumerator_5912.current_mExpression (HERE).unsafePointer ()) ;
+          const GALGAS_lstring extractedValue_functionName = extractPtr_10560->mAssociatedValue0 ;
+          const GALGAS_procFormalArgumentList extractedValue_formalArgs = extractPtr_10560->mAssociatedValue1 ;
           const enumGalgasBool test_8 = enumerator_5949.current_mType (HERE).getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 175)).getter_isFunction (SOURCE_FILE ("declaration-extend-static-array.galgas", 175)).operator_not (SOURCE_FILE ("declaration-extend-static-array.galgas", 175)).boolEnum () ;
           if (kBoolTrue == test_8) {
             TC_Array <C_FixItDescription> fixItArray9 ;
@@ -86,83 +86,84 @@ static void extensionMethod_extendStaticArrayDeclarationAST_enterInContext (cons
             GALGAS_routineDescriptor var_functionDescriptor_8028 ;
             enumerator_5949.current_mType (HERE).getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 178)).method_function (var_functionDescriptor_8028, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 178)) ;
             GALGAS_lstring var_routineMangledName_8096 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), extractedValue_functionName, extractedValue_formalArgs, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 180)) ;
-            GALGAS_lstring var_candidateRoutineLLVMName_8341 ;
-            GALGAS_routineDescriptor var_routineDescriptor_8395 ;
-            ioArgument_ioContext.mProperty_mRoutineMapForContext.method_searchKey (var_routineMangledName_8096, var_candidateRoutineLLVMName_8341, var_routineDescriptor_8395, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 185)) ;
-            GALGAS_bool var_candidateIsPublic_8439 = var_routineDescriptor_8395.mProperty_mIsPublic ;
-            GALGAS_routineKind var_candidateRoutineKind_8504 = var_routineDescriptor_8395.mProperty_mRoutineKind ;
-            GALGAS_mode var_candidateMode_8565 = var_routineDescriptor_8395.mProperty_mMode ;
-            GALGAS_procedureSignature var_candidateSignature_8624 = var_routineDescriptor_8395.mProperty_mSignature ;
-            GALGAS_unifiedTypeMap_2D_proxy var_candidateReturnType_8689 = var_routineDescriptor_8395.mProperty_mReturnType ;
-            const enumGalgasBool test_10 = var_candidateIsPublic_8439.operator_not (SOURCE_FILE ("declaration-extend-static-array.galgas", 196)).boolEnum () ;
+            GALGAS_lstring var_candidateRoutineLLVMName_8356 ;
+            GALGAS_routineDescriptor var_routineDescriptor_8410 ;
+            GALGAS_lstring joker_8304 ; // Joker input parameter
+            ioArgument_ioContext.mProperty_mRoutineMapForContext.method_searchKey (var_routineMangledName_8096, joker_8304, var_candidateRoutineLLVMName_8356, var_routineDescriptor_8410, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 185)) ;
+            GALGAS_bool var_candidateIsPublic_8454 = var_routineDescriptor_8410.mProperty_mIsPublic ;
+            GALGAS_routineKind var_candidateRoutineKind_8519 = var_routineDescriptor_8410.mProperty_mRoutineKind ;
+            GALGAS_mode var_candidateMode_8580 = var_routineDescriptor_8410.mProperty_mMode ;
+            GALGAS_procedureSignature var_candidateSignature_8639 = var_routineDescriptor_8410.mProperty_mSignature ;
+            GALGAS_unifiedTypeMap_2D_proxy var_candidateReturnType_8704 = var_routineDescriptor_8410.mProperty_mReturnType ;
+            const enumGalgasBool test_10 = var_candidateIsPublic_8454.operator_not (SOURCE_FILE ("declaration-extend-static-array.galgas", 197)).boolEnum () ;
             if (kBoolTrue == test_10) {
-              GALGAS_string var_declarationFile_8826 = ioArgument_ioContext.mProperty_mRoutineMapForContext.getter_locationForKey (var_routineMangledName_8096.getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 197)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 197)).getter_file (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 197)) ;
-              GALGAS_string var_invocationFile_8935 = extractedValue_functionName.mProperty_location.getter_file (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 198)) ;
-              const enumGalgasBool test_11 = GALGAS_bool (kIsNotEqual, var_invocationFile_8935.objectCompare (var_declarationFile_8826)).boolEnum () ;
+              GALGAS_string var_declarationFile_8841 = ioArgument_ioContext.mProperty_mRoutineMapForContext.getter_locationForKey (var_routineMangledName_8096.getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 198)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 198)).getter_file (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 198)) ;
+              GALGAS_string var_invocationFile_8950 = extractedValue_functionName.mProperty_location.getter_file (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 199)) ;
+              const enumGalgasBool test_11 = GALGAS_bool (kIsNotEqual, var_invocationFile_8950.objectCompare (var_declarationFile_8841)).boolEnum () ;
               if (kBoolTrue == test_11) {
                 TC_Array <C_FixItDescription> fixItArray12 ;
-                inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 200)), GALGAS_string ("this function is not public"), fixItArray12  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 200)) ;
+                inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 201)), GALGAS_string ("this function is not public"), fixItArray12  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 201)) ;
               }
             }
-            const enumGalgasBool test_13 = var_candidateRoutineKind_8504.getter_isFunction (SOURCE_FILE ("declaration-extend-static-array.galgas", 203)).operator_not (SOURCE_FILE ("declaration-extend-static-array.galgas", 203)).boolEnum () ;
+            const enumGalgasBool test_13 = var_candidateRoutineKind_8519.getter_isFunction (SOURCE_FILE ("declaration-extend-static-array.galgas", 204)).operator_not (SOURCE_FILE ("declaration-extend-static-array.galgas", 204)).boolEnum () ;
             if (kBoolTrue == test_13) {
               TC_Array <C_FixItDescription> fixItArray14 ;
-              inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 204)), GALGAS_string ("this routine is not a function"), fixItArray14  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 204)) ;
+              inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 205)), GALGAS_string ("this routine is not a function"), fixItArray14  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 205)) ;
             }
-            const enumGalgasBool test_15 = GALGAS_bool (kIsNotEqual, var_functionDescriptor_8028.mProperty_mMode.objectCompare (var_candidateMode_8565)).boolEnum () ;
+            const enumGalgasBool test_15 = GALGAS_bool (kIsNotEqual, var_functionDescriptor_8028.mProperty_mMode.objectCompare (var_candidateMode_8580)).boolEnum () ;
             if (kBoolTrue == test_15) {
               TC_Array <C_FixItDescription> fixItArray16 ;
-              inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 207)), GALGAS_string ("this function runs in ").add_operation (extensionGetter_string (var_candidateMode_8565, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 207)).add_operation (GALGAS_string (" mode, but "), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 207)).add_operation (extensionGetter_string (var_functionDescriptor_8028.mProperty_mMode, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 207)).add_operation (GALGAS_string (" is required"), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 207)), fixItArray16  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 207)) ;
+              inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 208)), GALGAS_string ("this function runs in ").add_operation (extensionGetter_string (var_candidateMode_8580, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 208)).add_operation (GALGAS_string (" mode, but "), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 208)).add_operation (extensionGetter_string (var_functionDescriptor_8028.mProperty_mMode, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 208)).add_operation (GALGAS_string (" is required"), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 208)), fixItArray16  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 208)) ;
             }
-            GALGAS_bool test_17 = GALGAS_bool (kIsEqual, var_functionDescriptor_8028.mProperty_mReturnType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extend-static-array.galgas", 209)))) ;
+            GALGAS_bool test_17 = GALGAS_bool (kIsEqual, var_functionDescriptor_8028.mProperty_mReturnType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extend-static-array.galgas", 210)))) ;
             if (kBoolTrue == test_17.boolEnum ()) {
-              test_17 = GALGAS_bool (kIsNotEqual, var_candidateReturnType_8689.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extend-static-array.galgas", 209)))) ;
+              test_17 = GALGAS_bool (kIsNotEqual, var_candidateReturnType_8704.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extend-static-array.galgas", 210)))) ;
             }
             const enumGalgasBool test_18 = test_17.boolEnum () ;
             if (kBoolTrue == test_18) {
               TC_Array <C_FixItDescription> fixItArray19 ;
-              inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 210)), GALGAS_string ("this function should return an $").add_operation (var_candidateReturnType_8689.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 210)).add_operation (GALGAS_string (" object"), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 210)), fixItArray19  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 210)) ;
+              inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 211)), GALGAS_string ("this function should return an $").add_operation (var_candidateReturnType_8704.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 211)).add_operation (GALGAS_string (" object"), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 211)), fixItArray19  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 211)) ;
             }else if (kBoolFalse == test_18) {
-              GALGAS_bool test_20 = GALGAS_bool (kIsNotEqual, var_functionDescriptor_8028.mProperty_mReturnType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extend-static-array.galgas", 211)))) ;
+              GALGAS_bool test_20 = GALGAS_bool (kIsNotEqual, var_functionDescriptor_8028.mProperty_mReturnType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extend-static-array.galgas", 212)))) ;
               if (kBoolTrue == test_20.boolEnum ()) {
-                test_20 = GALGAS_bool (kIsEqual, var_candidateReturnType_8689.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extend-static-array.galgas", 211)))) ;
+                test_20 = GALGAS_bool (kIsEqual, var_candidateReturnType_8704.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extend-static-array.galgas", 212)))) ;
               }
               const enumGalgasBool test_21 = test_20.boolEnum () ;
               if (kBoolTrue == test_21) {
                 TC_Array <C_FixItDescription> fixItArray22 ;
-                inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 212)), GALGAS_string ("this function should return no object"), fixItArray22  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 212)) ;
+                inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 213)), GALGAS_string ("this function should return no object"), fixItArray22  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 213)) ;
               }
             }
-            const enumGalgasBool test_23 = GALGAS_bool (kIsNotEqual, var_functionDescriptor_8028.mProperty_mSignature.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 214)).objectCompare (var_candidateSignature_8624.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 214)))).boolEnum () ;
+            const enumGalgasBool test_23 = GALGAS_bool (kIsNotEqual, var_functionDescriptor_8028.mProperty_mSignature.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 215)).objectCompare (var_candidateSignature_8639.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 215)))).boolEnum () ;
             if (kBoolTrue == test_23) {
               TC_Array <C_FixItDescription> fixItArray24 ;
-              inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 215)), GALGAS_string ("this function has ").add_operation (var_candidateSignature_8624.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 216)).getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 216)).add_operation (GALGAS_string (" argument(s) ("), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 216)).add_operation (var_functionDescriptor_8028.mProperty_mSignature.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 217)).getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 216)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 216)).add_operation (GALGAS_string (" required)"), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 217)), fixItArray24  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 215)) ;
+              inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 216)), GALGAS_string ("this function has ").add_operation (var_candidateSignature_8639.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 217)).getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 217)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 217)).add_operation (GALGAS_string (" argument(s) ("), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 217)).add_operation (var_functionDescriptor_8028.mProperty_mSignature.getter_length (SOURCE_FILE ("declaration-extend-static-array.galgas", 218)).getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 217)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 217)).add_operation (GALGAS_string (" required)"), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 218)), fixItArray24  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 216)) ;
             }else if (kBoolFalse == test_23) {
-              cEnumerator_procedureSignature enumerator_10189 (var_functionDescriptor_8028.mProperty_mSignature, kENUMERATION_UP) ;
-              cEnumerator_procedureSignature enumerator_10222 (var_candidateSignature_8624, kENUMERATION_UP) ;
-              while (enumerator_10189.hasCurrentObject () && enumerator_10222.hasCurrentObject ()) {
-                const enumGalgasBool test_25 = GALGAS_bool (kIsNotEqual, enumerator_10189.current (HERE).mProperty_mType.objectCompare (enumerator_10222.current (HERE).mProperty_mType)).boolEnum () ;
+              cEnumerator_procedureSignature enumerator_10204 (var_functionDescriptor_8028.mProperty_mSignature, kENUMERATION_UP) ;
+              cEnumerator_procedureSignature enumerator_10237 (var_candidateSignature_8639, kENUMERATION_UP) ;
+              while (enumerator_10204.hasCurrentObject () && enumerator_10237.hasCurrentObject ()) {
+                const enumGalgasBool test_25 = GALGAS_bool (kIsNotEqual, enumerator_10204.current (HERE).mProperty_mType.objectCompare (enumerator_10237.current (HERE).mProperty_mType)).boolEnum () ;
                 if (kBoolTrue == test_25) {
                   TC_Array <C_FixItDescription> fixItArray26 ;
-                  inCompiler->emitSemanticError (enumerator_10222.current (HERE).mProperty_mSelector.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 221)), GALGAS_string ("argument type should be $").add_operation (enumerator_10189.current (HERE).mProperty_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 221)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 221)), fixItArray26  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 221)) ;
+                  inCompiler->emitSemanticError (enumerator_10237.current (HERE).mProperty_mSelector.getter_location (SOURCE_FILE ("declaration-extend-static-array.galgas", 222)), GALGAS_string ("argument type should be $").add_operation (enumerator_10204.current (HERE).mProperty_mType.getter_key (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 222)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 222)), fixItArray26  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 222)) ;
                 }
-                enumerator_10189.gotoNextObject () ;
-                enumerator_10222.gotoNextObject () ;
+                enumerator_10204.gotoNextObject () ;
+                enumerator_10237.gotoNextObject () ;
               }
             }
-            var_staticValue_5863.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_5949.current_mType (HERE).getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 225)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 225)).add_operation (GALGAS_string (" @"), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 225)).add_operation (function_llvmNameForFunction (var_candidateRoutineLLVMName_8341.getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 225)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 225)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 225)), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 225)) ;
+            var_staticValue_5863.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_5949.current_mType (HERE).getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 226)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 226)).add_operation (GALGAS_string (" @"), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 226)).add_operation (function_llvmNameForFunction (var_candidateRoutineLLVMName_8356.getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 226)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 226)), inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 226)), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 226)) ;
           }
         }
         break ;
       }
       if (enumerator_5912.hasNextObject () && enumerator_5949.hasNextObject ()) {
-        var_staticValue_5863.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 229)) ;
+        var_staticValue_5863.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 230)) ;
       }
       enumerator_5912.gotoNextObject () ;
       enumerator_5949.gotoNextObject () ;
     }
-    var_staticValue_5863.plusAssign_operation(GALGAS_string ("}"), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 231)) ;
-    ioArgument_ioStaticListValueMap.addAssign_operation (object->mProperty_mStaticlistName.getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 232)), var_staticValue_5863  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 232)) ;
+    var_staticValue_5863.plusAssign_operation(GALGAS_string ("}"), inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 232)) ;
+    ioArgument_ioStaticListValueMap.addAssign_operation (object->mProperty_mStaticlistName.getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 233)), var_staticValue_5863  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 233)) ;
   }
 }
 
@@ -216,46 +217,46 @@ static void extensionMethod_extendStaticArrayDeclarationAST_semanticAnalysis (co
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_extendStaticArrayDeclarationAST * object = (const cPtr_extendStaticArrayDeclarationAST *) inObject ;
   macroValidSharedObject (object, cPtr_extendStaticArrayDeclarationAST) ;
-  GALGAS_stringset var_invokedFunctionSet_12012 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-extend-static-array.galgas", 263)) ;
-  cEnumerator_extendStaticArrayExpressionListAST enumerator_12058 (object->mProperty_mExpressions, kENUMERATION_UP) ;
-  while (enumerator_12058.hasCurrentObject ()) {
-    switch (enumerator_12058.current_mExpression (HERE).enumValue ()) {
+  GALGAS_stringset var_invokedFunctionSet_12027 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-extend-static-array.galgas", 264)) ;
+  cEnumerator_extendStaticArrayExpressionListAST enumerator_12073 (object->mProperty_mExpressions, kENUMERATION_UP) ;
+  while (enumerator_12073.hasCurrentObject ()) {
+    switch (enumerator_12073.current_mExpression (HERE).enumValue ()) {
     case GALGAS_extendStaticArrayExpressionAST::kNotBuilt:
       break ;
     case GALGAS_extendStaticArrayExpressionAST::kEnum_expression:
       {
-        const cEnumAssociatedValues_extendStaticArrayExpressionAST_expression * extractPtr_12130 = (const cEnumAssociatedValues_extendStaticArrayExpressionAST_expression *) (enumerator_12058.current_mExpression (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_exp = extractPtr_12130->mAssociatedValue0 ;
+        const cEnumAssociatedValues_extendStaticArrayExpressionAST_expression * extractPtr_12145 = (const cEnumAssociatedValues_extendStaticArrayExpressionAST_expression *) (enumerator_12073.current_mExpression (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_exp = extractPtr_12145->mAssociatedValue0 ;
       }
       break ;
     case GALGAS_extendStaticArrayExpressionAST::kEnum_function:
       {
-        const cEnumAssociatedValues_extendStaticArrayExpressionAST_function * extractPtr_12409 = (const cEnumAssociatedValues_extendStaticArrayExpressionAST_function *) (enumerator_12058.current_mExpression (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_functionName = extractPtr_12409->mAssociatedValue0 ;
-        const GALGAS_procFormalArgumentList extractedValue_formalArgs = extractPtr_12409->mAssociatedValue1 ;
-        GALGAS_lstring var_routineMangledName_12268 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), extractedValue_functionName, extractedValue_formalArgs, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 269)) ;
-        var_invokedFunctionSet_12012.addAssign_operation (var_routineMangledName_12268.getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 274))  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 274)) ;
+        const cEnumAssociatedValues_extendStaticArrayExpressionAST_function * extractPtr_12424 = (const cEnumAssociatedValues_extendStaticArrayExpressionAST_function *) (enumerator_12073.current_mExpression (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_functionName = extractPtr_12424->mAssociatedValue0 ;
+        const GALGAS_procFormalArgumentList extractedValue_formalArgs = extractPtr_12424->mAssociatedValue1 ;
+        GALGAS_lstring var_routineMangledName_12283 = function_routineMangledNameFromAST (GALGAS_string::makeEmptyString (), extractedValue_functionName, extractedValue_formalArgs, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 270)) ;
+        var_invokedFunctionSet_12027.addAssign_operation (var_routineMangledName_12283.getter_string (SOURCE_FILE ("declaration-extend-static-array.galgas", 275))  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 275)) ;
       }
       break ;
     }
-    enumerator_12058.gotoNextObject () ;
+    enumerator_12073.gotoNextObject () ;
   }
-  cMapElement_staticArrayMap * objectArray_12430 = (cMapElement_staticArrayMap *) ioArgument_ioTemporaries.mProperty_mStaticArrayMap.readWriteAccessForWithInstruction (inCompiler, object->mProperty_mStaticlistName.mProperty_string  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 277)) ;
-  if (NULL != objectArray_12430) {
-      macroValidSharedObject (objectArray_12430, cMapElement_staticArrayMap) ;
-    objectArray_12430->mProperty_mInvokedFunctionSet.plusAssign_operation(var_invokedFunctionSet_12012, inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 278)) ;
+  cMapElement_staticArrayMap * objectArray_12445 = (cMapElement_staticArrayMap *) ioArgument_ioTemporaries.mProperty_mStaticArrayMap.readWriteAccessForWithInstruction (inCompiler, object->mProperty_mStaticlistName.mProperty_string  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 278)) ;
+  if (NULL != objectArray_12445) {
+      macroValidSharedObject (objectArray_12445, cMapElement_staticArrayMap) ;
+    objectArray_12445->mProperty_mInvokedFunctionSet.plusAssign_operation(var_invokedFunctionSet_12027, inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 279)) ;
   }else{
     {
-    ioArgument_ioTemporaries.mProperty_mStaticArrayMap.setter_insertKey (object->mProperty_mStaticlistName, var_invokedFunctionSet_12012, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 280)) ;
+    ioArgument_ioTemporaries.mProperty_mStaticArrayMap.setter_insertKey (object->mProperty_mStaticlistName, var_invokedFunctionSet_12027, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 281)) ;
     }
   }
-  cMapElement_staticArrayMap * objectArray_12642 = (cMapElement_staticArrayMap *) ioArgument_ioIntermediateCodeStruct.mProperty_mStaticArrayMap.readWriteAccessForWithInstruction (inCompiler, object->mProperty_mStaticlistName.mProperty_string  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 282)) ;
-  if (NULL != objectArray_12642) {
-      macroValidSharedObject (objectArray_12642, cMapElement_staticArrayMap) ;
-    objectArray_12642->mProperty_mInvokedFunctionSet.plusAssign_operation(var_invokedFunctionSet_12012, inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 283)) ;
+  cMapElement_staticArrayMap * objectArray_12657 = (cMapElement_staticArrayMap *) ioArgument_ioIntermediateCodeStruct.mProperty_mStaticArrayMap.readWriteAccessForWithInstruction (inCompiler, object->mProperty_mStaticlistName.mProperty_string  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 283)) ;
+  if (NULL != objectArray_12657) {
+      macroValidSharedObject (objectArray_12657, cMapElement_staticArrayMap) ;
+    objectArray_12657->mProperty_mInvokedFunctionSet.plusAssign_operation(var_invokedFunctionSet_12027, inCompiler  COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 284)) ;
   }else{
     {
-    ioArgument_ioIntermediateCodeStruct.mProperty_mStaticArrayMap.setter_insertKey (object->mProperty_mStaticlistName, var_invokedFunctionSet_12012, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 285)) ;
+    ioArgument_ioIntermediateCodeStruct.mProperty_mStaticArrayMap.setter_insertKey (object->mProperty_mStaticlistName, var_invokedFunctionSet_12027, inCompiler COMMA_SOURCE_FILE ("declaration-extend-static-array.galgas", 286)) ;
     }
   }
 }
@@ -587,28 +588,28 @@ void routine_generateSectionAndSafeDispatcher (const GALGAS_string constinArgume
                                                const GALGAS__32_stringlist constinArgument_inSectionAndSafeList,
                                                C_Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator__32_stringlist enumerator_9650 (constinArgument_inSectionAndSafeList, kENUMERATION_UP) ;
-  GALGAS_uint index_9596 ((uint32_t) 0) ;
-  while (enumerator_9650.hasCurrentObject ()) {
-    GALGAS_string var_s_9669 = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 274)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 274)) ;
-    var_s_9669 = var_s_9669.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_9650.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 275)) ;
-    var_s_9669 = var_s_9669.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_9596.getter_string (SOURCE_FILE ("declaration-svc.galgas", 276)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 276)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_s_9669, inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 277)) ;
-    enumerator_9650.gotoNextObject () ;
-    index_9596.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 273)) ;
+  cEnumerator__32_stringlist enumerator_9735 (constinArgument_inSectionAndSafeList, kENUMERATION_UP) ;
+  GALGAS_uint index_9681 ((uint32_t) 0) ;
+  while (enumerator_9735.hasCurrentObject ()) {
+    GALGAS_string var_s_9754 = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 275)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 275)) ;
+    var_s_9754 = var_s_9754.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_9735.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 276)) ;
+    var_s_9754 = var_s_9754.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_9681.getter_string (SOURCE_FILE ("declaration-svc.galgas", 277)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 277)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_s_9754, inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 278)) ;
+    enumerator_9735.gotoNextObject () ;
+    index_9681.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 274)) ;
   }
-  ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 279)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 279)), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 279)) ;
-  cEnumerator__32_stringlist enumerator_10102 (constinArgument_inSectionAndSafeList, kENUMERATION_UP) ;
-  GALGAS_uint index_10055 ((uint32_t) 0) ;
-  while (enumerator_10102.hasCurrentObject ()) {
-    GALGAS_string var_s_10121 = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 281)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 281)) ;
-    var_s_10121 = var_s_10121.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_10102.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 282)) ;
-    var_s_10121 = var_s_10121.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_10055.getter_string (SOURCE_FILE ("declaration-svc.galgas", 283)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 283)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_s_10121, inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 284)) ;
-    enumerator_10102.gotoNextObject () ;
-    index_10055.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 280)) ;
+  ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 280)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 280)), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 280)) ;
+  cEnumerator__32_stringlist enumerator_10187 (constinArgument_inSectionAndSafeList, kENUMERATION_UP) ;
+  GALGAS_uint index_10140 ((uint32_t) 0) ;
+  while (enumerator_10187.hasCurrentObject ()) {
+    GALGAS_string var_s_10206 = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/section-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 282)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 282)) ;
+    var_s_10206 = var_s_10206.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_10187.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 283)) ;
+    var_s_10206 = var_s_10206.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_10140.getter_string (SOURCE_FILE ("declaration-svc.galgas", 284)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 284)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_s_10206, inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 285)) ;
+    enumerator_10187.gotoNextObject () ;
+    index_10140.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 281)) ;
   }
-  ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 286)) ;
+  ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 287)) ;
 }
 
 
@@ -624,28 +625,28 @@ void routine_generatePrimitiveAndServiceDispatcher (const GALGAS_string constinA
                                                     const GALGAS__32_stringlist constinArgument_inServiceList,
                                                     C_Compiler * inCompiler
                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator__32_stringlist enumerator_10754 (constinArgument_inServiceList, kENUMERATION_UP) ;
-  GALGAS_uint index_10724 ((uint32_t) 0) ;
-  while (enumerator_10754.hasCurrentObject ()) {
-    GALGAS_string var_s_10773 = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 298)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 298)) ;
-    var_s_10773 = var_s_10773.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_10754.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 299)) ;
-    var_s_10773 = var_s_10773.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_10724.getter_string (SOURCE_FILE ("declaration-svc.galgas", 300)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 300)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_s_10773, inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 301)) ;
-    enumerator_10754.gotoNextObject () ;
-    index_10724.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 297)) ;
+  cEnumerator__32_stringlist enumerator_10839 (constinArgument_inServiceList, kENUMERATION_UP) ;
+  GALGAS_uint index_10809 ((uint32_t) 0) ;
+  while (enumerator_10839.hasCurrentObject ()) {
+    GALGAS_string var_s_10858 = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 299)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 299)) ;
+    var_s_10858 = var_s_10858.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_10839.current_mValue_30_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 300)) ;
+    var_s_10858 = var_s_10858.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_10809.getter_string (SOURCE_FILE ("declaration-svc.galgas", 301)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 301)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_s_10858, inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 302)) ;
+    enumerator_10839.gotoNextObject () ;
+    index_10809.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 298)) ;
   }
-  ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 303)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 303)), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 303)) ;
-  cEnumerator__32_stringlist enumerator_11199 (constinArgument_inServiceList, kENUMERATION_UP) ;
-  GALGAS_uint index_11159 ((uint32_t) 0) ;
-  while (enumerator_11199.hasCurrentObject ()) {
-    GALGAS_string var_s_11218 = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 305)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 305)) ;
-    var_s_11218 = var_s_11218.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_11199.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 306)) ;
-    var_s_11218 = var_s_11218.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_11159.getter_string (SOURCE_FILE ("declaration-svc.galgas", 307)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 307)) ;
-    ioArgument_ioAssemblerCode.plusAssign_operation(var_s_11218, inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 308)) ;
-    enumerator_11199.gotoNextObject () ;
-    index_11159.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 304)) ;
+  ioArgument_ioAssemblerCode.plusAssign_operation(function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-dispatcher-header.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 304)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 304)), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 304)) ;
+  cEnumerator__32_stringlist enumerator_11284 (constinArgument_inServiceList, kENUMERATION_UP) ;
+  GALGAS_uint index_11244 ((uint32_t) 0) ;
+  while (enumerator_11284.hasCurrentObject ()) {
+    GALGAS_string var_s_11303 = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.add_operation (GALGAS_string ("/service-dispatcher-entry.s"), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 306)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 306)) ;
+    var_s_11303 = var_s_11303.getter_stringByReplacingStringByString (GALGAS_string ("!ENTRY!"), enumerator_11284.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 307)) ;
+    var_s_11303 = var_s_11303.getter_stringByReplacingStringByString (GALGAS_string ("!IDX!"), index_11244.getter_string (SOURCE_FILE ("declaration-svc.galgas", 308)), inCompiler COMMA_SOURCE_FILE ("declaration-svc.galgas", 308)) ;
+    ioArgument_ioAssemblerCode.plusAssign_operation(var_s_11303, inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 309)) ;
+    enumerator_11284.gotoNextObject () ;
+    index_11244.increment_operation (inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 305)) ;
   }
-  ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 310)) ;
+  ioArgument_ioAssemblerCode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-svc.galgas", 311)) ;
 }
 
 
@@ -716,19 +717,20 @@ void routine_checkRequiredProcedures (const GALGAS_ast constinArgument_inAST,
       TC_Array <C_FixItDescription> fixItArray1 ;
       inCompiler->emitSemanticError (enumerator_2369.current (HERE).mProperty_mRequiredProcedureName.getter_location (SOURCE_FILE ("declaration-required-proc.galgas", 64)), GALGAS_string ("required func is not implemented"), fixItArray1  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 64)) ;
     }else if (kBoolFalse == test_0) {
-      GALGAS_routineDescriptor var_routineDescriptor_2738 ;
-      GALGAS_lstring joker_2687 ; // Joker input parameter
-      constinArgument_inSemanticContext.mProperty_mRoutineMapForContext.method_searchKey (enumerator_2369.current (HERE).mProperty_mRequiredProcedureName, joker_2687, var_routineDescriptor_2738, inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 66)) ;
-      GALGAS_bool var_isGlobal_2765 = var_routineDescriptor_2738.mProperty_mGlobal ;
-      GALGAS_mode var_mode_2808 = var_routineDescriptor_2738.mProperty_mMode ;
-      const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, var_mode_2808.objectCompare (enumerator_2369.current (HERE).mProperty_mMode)).boolEnum () ;
+      GALGAS_routineDescriptor var_routineDescriptor_2739 ;
+      GALGAS_lstring joker_2687_2 ; // Joker input parameter
+      GALGAS_lstring joker_2687_1 ; // Joker input parameter
+      constinArgument_inSemanticContext.mProperty_mRoutineMapForContext.method_searchKey (enumerator_2369.current (HERE).mProperty_mRequiredProcedureName, joker_2687_2, joker_2687_1, var_routineDescriptor_2739, inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 66)) ;
+      GALGAS_bool var_isGlobal_2766 = var_routineDescriptor_2739.mProperty_mGlobal ;
+      GALGAS_mode var_mode_2809 = var_routineDescriptor_2739.mProperty_mMode ;
+      const enumGalgasBool test_2 = GALGAS_bool (kIsNotEqual, var_mode_2809.objectCompare (enumerator_2369.current (HERE).mProperty_mMode)).boolEnum () ;
       if (kBoolTrue == test_2) {
         TC_Array <C_FixItDescription> fixItArray3 ;
         inCompiler->emitSemanticError (constinArgument_inSemanticContext.mProperty_mRoutineMapForContext.getter_locationForKey (enumerator_2369.current (HERE).mProperty_mRequiredProcedureName.mProperty_string, inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 75)), GALGAS_string ("required mode should be '").add_operation (extensionGetter_string (enumerator_2369.current (HERE).mProperty_mMode, inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 76)), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 76)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 76)), fixItArray3  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 75)) ;
       }
       GALGAS_bool test_4 = enumerator_2369.current (HERE).mProperty_mIsGlobal ;
       if (kBoolTrue == test_4.boolEnum ()) {
-        test_4 = var_isGlobal_2765.operator_not (SOURCE_FILE ("declaration-required-proc.galgas", 80)) ;
+        test_4 = var_isGlobal_2766.operator_not (SOURCE_FILE ("declaration-required-proc.galgas", 80)) ;
       }
       const enumGalgasBool test_5 = test_4.boolEnum () ;
       if (kBoolTrue == test_5) {
@@ -736,7 +738,7 @@ void routine_checkRequiredProcedures (const GALGAS_ast constinArgument_inAST,
         appendFixItActions (fixItArray6, kFixItInsertAfter, GALGAS_string (" @").add_operation (function_globalAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 83)), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 83))) ;
         inCompiler->emitSemanticError (constinArgument_inSemanticContext.mProperty_mRoutineMapForContext.getter_locationForKey (enumerator_2369.current (HERE).mProperty_mRequiredProcedureName.getter_string (SOURCE_FILE ("declaration-required-proc.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 81)), GALGAS_string ("missing @").add_operation (function_globalAttribute (inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 82)), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 82)).add_operation (GALGAS_string (" attribute (required function declaration names it)"), inCompiler COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 82)), fixItArray6  COMMA_SOURCE_FILE ("declaration-required-proc.galgas", 81)) ;
       }else if (kBoolFalse == test_5) {
-        GALGAS_bool test_7 = var_isGlobal_2765 ;
+        GALGAS_bool test_7 = var_isGlobal_2766 ;
         if (kBoolTrue == test_7.boolEnum ()) {
           test_7 = enumerator_2369.current (HERE).mProperty_mIsGlobal.operator_not (SOURCE_FILE ("declaration-required-proc.galgas", 84)) ;
         }
@@ -3803,38 +3805,39 @@ void routine_analyzeFunctionCallInExpression (const GALGAS_unifiedTypeMap_2D_pro
     temp_5 = GALGAS_string ("$").add_operation (var_receiverType_21719.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 586)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 586)) ;
   }
   outArgument_outRoutineMangledName = function_routineMangledNameFromCall (temp_5, constinArgument_inRoutineName, constinArgument_inEffectiveParameterList, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 585)) ;
-  GALGAS_routineDescriptor var_routineDescriptor_23012 ;
-  constinArgument_inContext.mProperty_mRoutineMapForContext.method_searchKey (outArgument_outRoutineMangledName, outArgument_outRoutineNameForGeneration, var_routineDescriptor_23012, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 590)) ;
-  GALGAS_bool var_isPublic_23031 = var_routineDescriptor_23012.mProperty_mIsPublic ;
-  GALGAS_routineKind var_routineKind_23079 = var_routineDescriptor_23012.mProperty_mRoutineKind ;
-  GALGAS_mode var_calleeMode_23129 = var_routineDescriptor_23012.mProperty_mMode ;
-  GALGAS_procedureSignature var_formalSignature_23177 = var_routineDescriptor_23012.mProperty_mSignature ;
-  outArgument_outReturnedType = var_routineDescriptor_23012.mProperty_mReturnType ;
-  const enumGalgasBool test_7 = var_isPublic_23031.operator_not (SOURCE_FILE ("expression-primary.galgas", 601)).boolEnum () ;
+  GALGAS_routineDescriptor var_routineDescriptor_23019 ;
+  GALGAS_lstring joker_22939 ; // Joker input parameter
+  constinArgument_inContext.mProperty_mRoutineMapForContext.method_searchKey (outArgument_outRoutineMangledName, joker_22939, outArgument_outRoutineNameForGeneration, var_routineDescriptor_23019, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 590)) ;
+  GALGAS_bool var_isPublic_23038 = var_routineDescriptor_23019.mProperty_mIsPublic ;
+  GALGAS_routineKind var_routineKind_23086 = var_routineDescriptor_23019.mProperty_mRoutineKind ;
+  GALGAS_mode var_calleeMode_23136 = var_routineDescriptor_23019.mProperty_mMode ;
+  GALGAS_procedureSignature var_formalSignature_23184 = var_routineDescriptor_23019.mProperty_mSignature ;
+  outArgument_outReturnedType = var_routineDescriptor_23019.mProperty_mReturnType ;
+  const enumGalgasBool test_7 = var_isPublic_23038.operator_not (SOURCE_FILE ("expression-primary.galgas", 602)).boolEnum () ;
   if (kBoolTrue == test_7) {
-    const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, var_receiverType_21719.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-primary.galgas", 602)))).boolEnum () ;
+    const enumGalgasBool test_8 = GALGAS_bool (kIsEqual, var_receiverType_21719.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-primary.galgas", 603)))).boolEnum () ;
     if (kBoolTrue == test_8) {
-      GALGAS_string var_declarationFile_23396 = constinArgument_inContext.mProperty_mRoutineMapForContext.getter_locationForKey (outArgument_outRoutineMangledName.mProperty_string, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 603)).getter_file (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 603)) ;
-      GALGAS_string var_invocationFile_23509 = constinArgument_inRoutineName.mProperty_location.getter_file (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 604)) ;
-      const enumGalgasBool test_9 = GALGAS_bool (kIsNotEqual, var_invocationFile_23509.objectCompare (var_declarationFile_23396)).boolEnum () ;
+      GALGAS_string var_declarationFile_23403 = constinArgument_inContext.mProperty_mRoutineMapForContext.getter_locationForKey (outArgument_outRoutineMangledName.mProperty_string, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 604)).getter_file (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 604)) ;
+      GALGAS_string var_invocationFile_23516 = constinArgument_inRoutineName.mProperty_location.getter_file (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 605)) ;
+      const enumGalgasBool test_9 = GALGAS_bool (kIsNotEqual, var_invocationFile_23516.objectCompare (var_declarationFile_23403)).boolEnum () ;
       if (kBoolTrue == test_9) {
         TC_Array <C_FixItDescription> fixItArray10 ;
-        inCompiler->emitSemanticError (constinArgument_inRoutineName.getter_location (SOURCE_FILE ("expression-primary.galgas", 606)), GALGAS_string ("this routine is not public"), fixItArray10  COMMA_SOURCE_FILE ("expression-primary.galgas", 606)) ;
+        inCompiler->emitSemanticError (constinArgument_inRoutineName.getter_location (SOURCE_FILE ("expression-primary.galgas", 607)), GALGAS_string ("this routine is not public"), fixItArray10  COMMA_SOURCE_FILE ("expression-primary.galgas", 607)) ;
       }
     }else if (kBoolFalse == test_8) {
       const enumGalgasBool test_11 = GALGAS_bool (kIsNotEqual, var_receiverType_21719.objectCompare (constinArgument_inSelfType)).boolEnum () ;
       if (kBoolTrue == test_11) {
         TC_Array <C_FixItDescription> fixItArray12 ;
-        inCompiler->emitSemanticError (constinArgument_inRoutineName.getter_location (SOURCE_FILE ("expression-primary.galgas", 609)), GALGAS_string ("this routine is not public"), fixItArray12  COMMA_SOURCE_FILE ("expression-primary.galgas", 609)) ;
+        inCompiler->emitSemanticError (constinArgument_inRoutineName.getter_location (SOURCE_FILE ("expression-primary.galgas", 610)), GALGAS_string ("this routine is not public"), fixItArray12  COMMA_SOURCE_FILE ("expression-primary.galgas", 610)) ;
       }
     }
   }
   {
-  ioArgument_ioTemporaries.mProperty_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, outArgument_outRoutineMangledName COMMA_SOURCE_FILE ("expression-primary.galgas", 613)) ;
+  ioArgument_ioTemporaries.mProperty_mSubprogramInvocationGraph.setter_addEdge (constinArgument_inCallerNameForInvocationGraph, outArgument_outRoutineMangledName COMMA_SOURCE_FILE ("expression-primary.galgas", 614)) ;
   }
-  outArgument_outRoutineKindIR = function_checkMode (constinArgument_inRequiredMode, var_calleeMode_23129, var_routineKind_23079, constinArgument_inRoutineName.mProperty_location, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 615)) ;
+  outArgument_outRoutineKindIR = function_checkMode (constinArgument_inRequiredMode, var_calleeMode_23136, var_routineKind_23086, constinArgument_inRoutineName.mProperty_location, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 616)) ;
   {
-  routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inRoutineCanMutateProperties, var_formalSignature_23177, constinArgument_inEffectiveParameterList, constinArgument_inRoutineName.mProperty_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, outArgument_outEffectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 622)) ;
+  routine_analyzeEffectiveParameters (constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inRoutineCanMutateProperties, var_formalSignature_23184, constinArgument_inEffectiveParameterList, constinArgument_inRoutineName.mProperty_location, constinArgument_inCallerNameForInvocationGraph, constinArgument_inContext, constinArgument_inRequiredMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, outArgument_outEffectiveParameterListIR, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 623)) ;
   }
 }
 
@@ -3862,219 +3865,219 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
                                          GALGAS_procCallEffectiveParameterListIR & ioArgument_ioEffectiveParameterListIR,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_procEffectiveParameterList var_parameterList_25849 = GALGAS_procEffectiveParameterList::constructor_emptyList (SOURCE_FILE ("expression-primary.galgas", 661)) ;
-  cEnumerator_procedureSignature enumerator_25892 (constinArgument_inFormalSignature, kENUMERATION_UP) ;
-  cEnumerator_effectiveParameterListAST enumerator_25935 (constinArgument_inEffectiveParameterList, kENUMERATION_UP) ;
-  while (enumerator_25892.hasCurrentObject () && enumerator_25935.hasCurrentObject ()) {
-    switch (enumerator_25935.current_mEffectiveParameterKind (HERE).enumValue ()) {
+  GALGAS_procEffectiveParameterList var_parameterList_25856 = GALGAS_procEffectiveParameterList::constructor_emptyList (SOURCE_FILE ("expression-primary.galgas", 662)) ;
+  cEnumerator_procedureSignature enumerator_25899 (constinArgument_inFormalSignature, kENUMERATION_UP) ;
+  cEnumerator_effectiveParameterListAST enumerator_25942 (constinArgument_inEffectiveParameterList, kENUMERATION_UP) ;
+  while (enumerator_25899.hasCurrentObject () && enumerator_25942.hasCurrentObject ()) {
+    switch (enumerator_25942.current_mEffectiveParameterKind (HERE).enumValue ()) {
     case GALGAS_effectiveParameterPassingModeAST::kNotBuilt:
       break ;
     case GALGAS_effectiveParameterPassingModeAST::kEnum_inputWithType:
       {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType * extractPtr_27273 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType *) (enumerator_25935.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_bool extractedValue_constant = extractPtr_27273->mAssociatedValue0 ;
-        const GALGAS_lstring extractedValue_typeName = extractPtr_27273->mAssociatedValue1 ;
-        const GALGAS_lstring extractedValue_name = extractPtr_27273->mAssociatedValue2 ;
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType * extractPtr_27280 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_inputWithType *) (enumerator_25942.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_bool extractedValue_constant = extractPtr_27280->mAssociatedValue0 ;
+        const GALGAS_lstring extractedValue_typeName = extractPtr_27280->mAssociatedValue1 ;
+        const GALGAS_lstring extractedValue_name = extractPtr_27280->mAssociatedValue2 ;
         GALGAS_unifiedTypeMap_2D_proxy temp_0 ;
         const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, extractedValue_typeName.mProperty_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
         if (kBoolTrue == test_1) {
-          temp_0 = enumerator_25892.current_mType (HERE) ;
+          temp_0 = enumerator_25899.current_mType (HERE) ;
         }else if (kBoolFalse == test_1) {
-          temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mProperty_mTypeMap, extractedValue_typeName, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 668)) ;
+          temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mProperty_mTypeMap, extractedValue_typeName, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 669)) ;
         }
-        GALGAS_unifiedTypeMap_2D_proxy var_type_26073 = temp_0 ;
-        GALGAS_lstring var_varLLVMName_26241 = GALGAS_lstring::constructor_new (extractedValue_name.mProperty_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 670)).add_operation (ioArgument_ioTemporaries.mProperty_mTemporaryIndex.getter_string (SOURCE_FILE ("expression-primary.galgas", 670)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 670)), extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 670))  COMMA_SOURCE_FILE ("expression-primary.galgas", 670)) ;
-        ioArgument_ioTemporaries.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 671)) ;
+        GALGAS_unifiedTypeMap_2D_proxy var_type_26080 = temp_0 ;
+        GALGAS_lstring var_varLLVMName_26248 = GALGAS_lstring::constructor_new (extractedValue_name.mProperty_string.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 671)).add_operation (ioArgument_ioTemporaries.mProperty_mTemporaryIndex.getter_string (SOURCE_FILE ("expression-primary.galgas", 671)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 671)), extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 671))  COMMA_SOURCE_FILE ("expression-primary.galgas", 671)) ;
+        ioArgument_ioTemporaries.mProperty_mTemporaryIndex.increment_operation (inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 672)) ;
         const enumGalgasBool test_2 = extractedValue_constant.boolEnum () ;
         if (kBoolTrue == test_2) {
           {
-          ioArgument_ioVariableMap.setter_insertConstant (extractedValue_name, var_type_26073, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_type_26073, var_varLLVMName_26241  COMMA_SOURCE_FILE ("expression-primary.galgas", 677)), GALGAS_bool (true), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 673)) ;
+          ioArgument_ioVariableMap.setter_insertConstant (extractedValue_name, var_type_26080, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_type_26080, var_varLLVMName_26248  COMMA_SOURCE_FILE ("expression-primary.galgas", 678)), GALGAS_bool (true), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 674)) ;
           }
         }else if (kBoolFalse == test_2) {
           {
-          ioArgument_ioVariableMap.setter_insertDefinedVariable (extractedValue_name, var_type_26073, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_type_26073, var_varLLVMName_26241  COMMA_SOURCE_FILE ("expression-primary.galgas", 686)), GALGAS_bool (true), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 682)) ;
+          ioArgument_ioVariableMap.setter_insertDefinedVariable (extractedValue_name, var_type_26080, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_type_26080, var_varLLVMName_26248  COMMA_SOURCE_FILE ("expression-primary.galgas", 687)), GALGAS_bool (true), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 683)) ;
           }
         }
-        ioArgument_ioAllocaList.addAssign_operation (var_varLLVMName_26241.getter_string (SOURCE_FILE ("expression-primary.galgas", 691)), extensionGetter_llvmTypeName (var_type_26073.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 691)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 691))  COMMA_SOURCE_FILE ("expression-primary.galgas", 691)) ;
-        var_parameterList_25849.addAssign_operation (enumerator_25935.current_mEffectiveParameterKind (HERE), enumerator_25935.current_mSelector (HERE), var_type_26073  COMMA_SOURCE_FILE ("expression-primary.galgas", 692)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("expression-primary.galgas", 694)), GALGAS_objectIR::constructor_llvmTemporaryValue (var_type_26073, GALGAS_lstring::constructor_new (function_llvmNameForLocalVariable (var_varLLVMName_26241.getter_string (SOURCE_FILE ("expression-primary.galgas", 695)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 695)), var_varLLVMName_26241.getter_location (SOURCE_FILE ("expression-primary.galgas", 695))  COMMA_SOURCE_FILE ("expression-primary.galgas", 695)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("expression-primary.galgas", 695))  COMMA_SOURCE_FILE ("expression-primary.galgas", 695))  COMMA_SOURCE_FILE ("expression-primary.galgas", 693)) ;
+        ioArgument_ioAllocaList.addAssign_operation (var_varLLVMName_26248.getter_string (SOURCE_FILE ("expression-primary.galgas", 692)), extensionGetter_llvmTypeName (var_type_26080.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 692)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 692))  COMMA_SOURCE_FILE ("expression-primary.galgas", 692)) ;
+        var_parameterList_25856.addAssign_operation (enumerator_25942.current_mEffectiveParameterKind (HERE), enumerator_25942.current_mSelector (HERE), var_type_26080  COMMA_SOURCE_FILE ("expression-primary.galgas", 693)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("expression-primary.galgas", 695)), GALGAS_objectIR::constructor_llvmTemporaryValue (var_type_26080, GALGAS_lstring::constructor_new (function_llvmNameForLocalVariable (var_varLLVMName_26248.getter_string (SOURCE_FILE ("expression-primary.galgas", 696)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 696)), var_varLLVMName_26248.getter_location (SOURCE_FILE ("expression-primary.galgas", 696))  COMMA_SOURCE_FILE ("expression-primary.galgas", 696)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("expression-primary.galgas", 696))  COMMA_SOURCE_FILE ("expression-primary.galgas", 696))  COMMA_SOURCE_FILE ("expression-primary.galgas", 694)) ;
       }
       break ;
     case GALGAS_effectiveParameterPassingModeAST::kEnum_input:
       {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_input * extractPtr_28251 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_input *) (enumerator_25935.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_28251->mAssociatedValue0 ;
-        GALGAS_unifiedTypeMap_2D_proxy var_type_27392 ;
-        GALGAS_bool var_accessIsAllowed_27439 ;
-        GALGAS_objectIR var_objectIR_27470 ;
-        GALGAS_bool var_isCopyable_27503 ;
-        GALGAS_bool var_canBeUsedAsInputParameter_27617 ;
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_input * extractPtr_28258 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_input *) (enumerator_25942.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_28258->mAssociatedValue0 ;
+        GALGAS_unifiedTypeMap_2D_proxy var_type_27399 ;
+        GALGAS_bool var_accessIsAllowed_27446 ;
+        GALGAS_objectIR var_objectIR_27477 ;
+        GALGAS_bool var_isCopyable_27510 ;
+        GALGAS_bool var_canBeUsedAsInputParameter_27624 ;
         {
-        ioArgument_ioVariableMap.setter_searchForWriteAccess (extractedValue_name, var_type_27392, var_accessIsAllowed_27439, var_objectIR_27470, var_isCopyable_27503, var_canBeUsedAsInputParameter_27617, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 697)) ;
+        ioArgument_ioVariableMap.setter_searchForWriteAccess (extractedValue_name, var_type_27399, var_accessIsAllowed_27446, var_objectIR_27477, var_isCopyable_27510, var_canBeUsedAsInputParameter_27624, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 698)) ;
         }
-        const enumGalgasBool test_3 = var_accessIsAllowed_27439.operator_not (SOURCE_FILE ("expression-primary.galgas", 705)).boolEnum () ;
+        const enumGalgasBool test_3 = var_accessIsAllowed_27446.operator_not (SOURCE_FILE ("expression-primary.galgas", 706)).boolEnum () ;
         if (kBoolTrue == test_3) {
           TC_Array <C_FixItDescription> fixItArray4 ;
-          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 706)), GALGAS_string ("routine has no access right on the this variable"), fixItArray4  COMMA_SOURCE_FILE ("expression-primary.galgas", 706)) ;
+          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 707)), GALGAS_string ("routine has no access right on the this variable"), fixItArray4  COMMA_SOURCE_FILE ("expression-primary.galgas", 707)) ;
         }
-        const enumGalgasBool test_5 = var_canBeUsedAsInputParameter_27617.operator_not (SOURCE_FILE ("expression-primary.galgas", 708)).boolEnum () ;
+        const enumGalgasBool test_5 = var_canBeUsedAsInputParameter_27624.operator_not (SOURCE_FILE ("expression-primary.galgas", 709)).boolEnum () ;
         if (kBoolTrue == test_5) {
           TC_Array <C_FixItDescription> fixItArray6 ;
-          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 709)), GALGAS_string ("this variable cannot be used as input parameter"), fixItArray6  COMMA_SOURCE_FILE ("expression-primary.galgas", 709)) ;
+          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 710)), GALGAS_string ("this variable cannot be used as input parameter"), fixItArray6  COMMA_SOURCE_FILE ("expression-primary.galgas", 710)) ;
         }
-        const enumGalgasBool test_7 = var_isCopyable_27503.operator_not (SOURCE_FILE ("expression-primary.galgas", 711)).boolEnum () ;
+        const enumGalgasBool test_7 = var_isCopyable_27510.operator_not (SOURCE_FILE ("expression-primary.galgas", 712)).boolEnum () ;
         if (kBoolTrue == test_7) {
           TC_Array <C_FixItDescription> fixItArray8 ;
-          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 712)), GALGAS_string ("an $").add_operation (var_type_27392.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 712)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 712)).add_operation (GALGAS_string (" instance is not copyable"), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 712)), fixItArray8  COMMA_SOURCE_FILE ("expression-primary.galgas", 712)) ;
+          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 713)), GALGAS_string ("an $").add_operation (var_type_27399.getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 713)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 713)).add_operation (GALGAS_string (" instance is not copyable"), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 713)), fixItArray8  COMMA_SOURCE_FILE ("expression-primary.galgas", 713)) ;
         }
-        var_parameterList_25849.addAssign_operation (enumerator_25935.current_mEffectiveParameterKind (HERE), enumerator_25935.current_mSelector (HERE), var_type_27392  COMMA_SOURCE_FILE ("expression-primary.galgas", 714)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("expression-primary.galgas", 716)), GALGAS_objectIR::constructor_llvmTemporaryValue (var_type_27392, GALGAS_lstring::constructor_new (function_llvmNameForLocalVariable (extensionGetter_name (var_objectIR_27470, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 717)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 717)), extensionGetter_location (var_objectIR_27470, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 717))  COMMA_SOURCE_FILE ("expression-primary.galgas", 717)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("expression-primary.galgas", 717))  COMMA_SOURCE_FILE ("expression-primary.galgas", 717))  COMMA_SOURCE_FILE ("expression-primary.galgas", 715)) ;
+        var_parameterList_25856.addAssign_operation (enumerator_25942.current_mEffectiveParameterKind (HERE), enumerator_25942.current_mSelector (HERE), var_type_27399  COMMA_SOURCE_FILE ("expression-primary.galgas", 715)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_input (SOURCE_FILE ("expression-primary.galgas", 717)), GALGAS_objectIR::constructor_llvmTemporaryValue (var_type_27399, GALGAS_lstring::constructor_new (function_llvmNameForLocalVariable (extensionGetter_name (var_objectIR_27477, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 718)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 718)), extensionGetter_location (var_objectIR_27477, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 718))  COMMA_SOURCE_FILE ("expression-primary.galgas", 718)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("expression-primary.galgas", 718))  COMMA_SOURCE_FILE ("expression-primary.galgas", 718))  COMMA_SOURCE_FILE ("expression-primary.galgas", 716)) ;
       }
       break ;
     case GALGAS_effectiveParameterPassingModeAST::kEnum_output:
       {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_output * extractPtr_29249 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_output *) (enumerator_25935.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_expression = extractPtr_29249->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfExp = extractPtr_29249->mAssociatedValue1 ;
-        GALGAS_objectIR var_expressionResult_28896 ;
-        callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_expression.ptr (), constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, enumerator_25892.current_mType (HERE), constinArgument_inContext, constinArgument_inRequiredMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult_28896, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 719)) ;
-        GALGAS_objectIR var_result_28921 = function_checkAssignmentCompatibility (var_expressionResult_28896, enumerator_25892.current_mType (HERE), extractedValue_endOfExp, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 734)) ;
-        var_parameterList_25849.addAssign_operation (enumerator_25935.current_mEffectiveParameterKind (HERE), enumerator_25935.current_mSelector (HERE), enumerator_25892.current_mType (HERE)  COMMA_SOURCE_FILE ("expression-primary.galgas", 740)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_output (SOURCE_FILE ("expression-primary.galgas", 741)), var_result_28921  COMMA_SOURCE_FILE ("expression-primary.galgas", 741)) ;
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_output * extractPtr_29256 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_output *) (enumerator_25942.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_expression = extractPtr_29256->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfExp = extractPtr_29256->mAssociatedValue1 ;
+        GALGAS_objectIR var_expressionResult_28903 ;
+        callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) extractedValue_expression.ptr (), constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, GALGAS_bool (false), constinArgument_inCallerNameForInvocationGraph, enumerator_25899.current_mType (HERE), constinArgument_inContext, constinArgument_inRequiredMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioVariableMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_expressionResult_28903, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 720)) ;
+        GALGAS_objectIR var_result_28928 = function_checkAssignmentCompatibility (var_expressionResult_28903, enumerator_25899.current_mType (HERE), extractedValue_endOfExp, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 735)) ;
+        var_parameterList_25856.addAssign_operation (enumerator_25942.current_mEffectiveParameterKind (HERE), enumerator_25942.current_mSelector (HERE), enumerator_25899.current_mType (HERE)  COMMA_SOURCE_FILE ("expression-primary.galgas", 741)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_output (SOURCE_FILE ("expression-primary.galgas", 742)), var_result_28928  COMMA_SOURCE_FILE ("expression-primary.galgas", 742)) ;
       }
       break ;
     case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInput:
       {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput * extractPtr_30133 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput *) (enumerator_25935.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_30133->mAssociatedValue0 ;
-        GALGAS_unifiedTypeMap_2D_proxy var_type_29378 ;
-        GALGAS_bool var_accessIsAllowed_29425 ;
-        GALGAS_objectIR var_objectIR_29456 ;
-        GALGAS_bool var_canBeUsedAsInputParameter_29533 ;
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput * extractPtr_30140 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInput *) (enumerator_25942.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_30140->mAssociatedValue0 ;
+        GALGAS_unifiedTypeMap_2D_proxy var_type_29385 ;
+        GALGAS_bool var_accessIsAllowed_29432 ;
+        GALGAS_objectIR var_objectIR_29463 ;
+        GALGAS_bool var_canBeUsedAsInputParameter_29540 ;
         {
-        GALGAS_bool joker_29466_1 ; // Joker input parameter
-        ioArgument_ioVariableMap.setter_searchForReadWriteAccess (extractedValue_name, var_type_29378, var_accessIsAllowed_29425, var_objectIR_29456, joker_29466_1, var_canBeUsedAsInputParameter_29533, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 743)) ;
+        GALGAS_bool joker_29473_1 ; // Joker input parameter
+        ioArgument_ioVariableMap.setter_searchForReadWriteAccess (extractedValue_name, var_type_29385, var_accessIsAllowed_29432, var_objectIR_29463, joker_29473_1, var_canBeUsedAsInputParameter_29540, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 744)) ;
         }
-        const enumGalgasBool test_9 = var_canBeUsedAsInputParameter_29533.operator_not (SOURCE_FILE ("expression-primary.galgas", 751)).boolEnum () ;
+        const enumGalgasBool test_9 = var_canBeUsedAsInputParameter_29540.operator_not (SOURCE_FILE ("expression-primary.galgas", 752)).boolEnum () ;
         if (kBoolTrue == test_9) {
           TC_Array <C_FixItDescription> fixItArray10 ;
-          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 752)), GALGAS_string ("this variable cannot be used as output/input parameter"), fixItArray10  COMMA_SOURCE_FILE ("expression-primary.galgas", 752)) ;
+          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 753)), GALGAS_string ("this variable cannot be used as output/input parameter"), fixItArray10  COMMA_SOURCE_FILE ("expression-primary.galgas", 753)) ;
         }
-        const enumGalgasBool test_11 = var_accessIsAllowed_29425.operator_not (SOURCE_FILE ("expression-primary.galgas", 754)).boolEnum () ;
+        const enumGalgasBool test_11 = var_accessIsAllowed_29432.operator_not (SOURCE_FILE ("expression-primary.galgas", 755)).boolEnum () ;
         if (kBoolTrue == test_11) {
           TC_Array <C_FixItDescription> fixItArray12 ;
-          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 755)), GALGAS_string ("routine has no access right on the this variable"), fixItArray12  COMMA_SOURCE_FILE ("expression-primary.galgas", 755)) ;
+          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 756)), GALGAS_string ("routine has no access right on the this variable"), fixItArray12  COMMA_SOURCE_FILE ("expression-primary.galgas", 756)) ;
         }
-        var_parameterList_25849.addAssign_operation (enumerator_25935.current_mEffectiveParameterKind (HERE), enumerator_25935.current_mSelector (HERE), var_type_29378  COMMA_SOURCE_FILE ("expression-primary.galgas", 757)) ;
-        GALGAS_objectIR var_argumentIR_29895 = GALGAS_objectIR::constructor_llvmTemporaryValue (var_type_29378, GALGAS_lstring::constructor_new (function_llvmNameForLocalVariable (extensionGetter_llvmName (var_objectIR_29456, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 760)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 760)), extensionGetter_location (var_objectIR_29456, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 760))  COMMA_SOURCE_FILE ("expression-primary.galgas", 760)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("expression-primary.galgas", 761))  COMMA_SOURCE_FILE ("expression-primary.galgas", 758)) ;
-        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("expression-primary.galgas", 763)), var_argumentIR_29895  COMMA_SOURCE_FILE ("expression-primary.galgas", 763)) ;
+        var_parameterList_25856.addAssign_operation (enumerator_25942.current_mEffectiveParameterKind (HERE), enumerator_25942.current_mSelector (HERE), var_type_29385  COMMA_SOURCE_FILE ("expression-primary.galgas", 758)) ;
+        GALGAS_objectIR var_argumentIR_29902 = GALGAS_objectIR::constructor_llvmTemporaryValue (var_type_29385, GALGAS_lstring::constructor_new (function_llvmNameForLocalVariable (extensionGetter_llvmName (var_objectIR_29463, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 761)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 761)), extensionGetter_location (var_objectIR_29463, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 761))  COMMA_SOURCE_FILE ("expression-primary.galgas", 761)), GALGAS_sliceMap::constructor_emptyMap (SOURCE_FILE ("expression-primary.galgas", 762))  COMMA_SOURCE_FILE ("expression-primary.galgas", 759)) ;
+        ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("expression-primary.galgas", 764)), var_argumentIR_29902  COMMA_SOURCE_FILE ("expression-primary.galgas", 764)) ;
       }
       break ;
     case GALGAS_effectiveParameterPassingModeAST::kEnum_outputInputSelfVariable:
       {
-        const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable * extractPtr_32445 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable *) (enumerator_25935.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_32445->mAssociatedValue0 ;
-        const enumGalgasBool test_13 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-primary.galgas", 765)))).boolEnum () ;
+        const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable * extractPtr_32452 = (const cEnumAssociatedValues_effectiveParameterPassingModeAST_outputInputSelfVariable *) (enumerator_25942.current_mEffectiveParameterKind (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_32452->mAssociatedValue0 ;
+        const enumGalgasBool test_13 = GALGAS_bool (kIsEqual, constinArgument_inSelfType.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-primary.galgas", 766)))).boolEnum () ;
         if (kBoolTrue == test_13) {
           TC_Array <C_FixItDescription> fixItArray14 ;
-          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 766)), GALGAS_string ("'self' is not available in this context"), fixItArray14  COMMA_SOURCE_FILE ("expression-primary.galgas", 766)) ;
-          var_parameterList_25849.drop () ; // Release error dropped variable
+          inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 767)), GALGAS_string ("'self' is not available in this context"), fixItArray14  COMMA_SOURCE_FILE ("expression-primary.galgas", 767)) ;
+          var_parameterList_25856.drop () ; // Release error dropped variable
           ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
         }else if (kBoolFalse == test_13) {
-          const enumGalgasBool test_15 = constinArgument_inDirectAccessToPropertiesAllowed.operator_not (SOURCE_FILE ("expression-primary.galgas", 767)).boolEnum () ;
+          const enumGalgasBool test_15 = constinArgument_inDirectAccessToPropertiesAllowed.operator_not (SOURCE_FILE ("expression-primary.galgas", 768)).boolEnum () ;
           if (kBoolTrue == test_15) {
             TC_Array <C_FixItDescription> fixItArray16 ;
-            inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 768)), GALGAS_string ("the current function should be declared @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 768)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 768)), fixItArray16  COMMA_SOURCE_FILE ("expression-primary.galgas", 768)) ;
+            inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 769)), GALGAS_string ("the current function should be declared @").add_operation (function_userAccessAttribute (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 769)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 769)), fixItArray16  COMMA_SOURCE_FILE ("expression-primary.galgas", 769)) ;
           }else if (kBoolFalse == test_15) {
-            const enumGalgasBool test_17 = constinArgument_inRoutineCanMutateProperties.operator_not (SOURCE_FILE ("expression-primary.galgas", 769)).boolEnum () ;
+            const enumGalgasBool test_17 = constinArgument_inRoutineCanMutateProperties.operator_not (SOURCE_FILE ("expression-primary.galgas", 770)).boolEnum () ;
             if (kBoolTrue == test_17) {
               TC_Array <C_FixItDescription> fixItArray18 ;
-              inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 770)), GALGAS_string ("the current routine should be declared @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 770)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 770)), fixItArray18  COMMA_SOURCE_FILE ("expression-primary.galgas", 770)) ;
+              inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 771)), GALGAS_string ("the current routine should be declared @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 771)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 771)), fixItArray18  COMMA_SOURCE_FILE ("expression-primary.galgas", 771)) ;
             }else if (kBoolFalse == test_17) {
-              switch (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 772)).enumValue ()) {
+              switch (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 773)).enumValue ()) {
               case GALGAS_typeKind::kNotBuilt:
                 break ;
               case GALGAS_typeKind::kEnum_opaque:
                 {
                   TC_Array <C_FixItDescription> fixItArray19 ;
-                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 774)), GALGAS_string ("an opaque type does not handle field access"), fixItArray19  COMMA_SOURCE_FILE ("expression-primary.galgas", 774)) ;
-                  var_parameterList_25849.drop () ; // Release error dropped variable
+                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 775)), GALGAS_string ("an opaque type does not handle field access"), fixItArray19  COMMA_SOURCE_FILE ("expression-primary.galgas", 775)) ;
+                  var_parameterList_25856.drop () ; // Release error dropped variable
                   ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
                 }
                 break ;
               case GALGAS_typeKind::kEnum_arrayType:
                 {
                   TC_Array <C_FixItDescription> fixItArray20 ;
-                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 776)), GALGAS_string ("an array type does not handle field access"), fixItArray20  COMMA_SOURCE_FILE ("expression-primary.galgas", 776)) ;
-                  var_parameterList_25849.drop () ; // Release error dropped variable
+                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 777)), GALGAS_string ("an array type does not handle field access"), fixItArray20  COMMA_SOURCE_FILE ("expression-primary.galgas", 777)) ;
+                  var_parameterList_25856.drop () ; // Release error dropped variable
                   ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
                 }
                 break ;
               case GALGAS_typeKind::kEnum_boolean:
                 {
                   TC_Array <C_FixItDescription> fixItArray21 ;
-                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 778)), GALGAS_string ("a boolean does not handle field access"), fixItArray21  COMMA_SOURCE_FILE ("expression-primary.galgas", 778)) ;
-                  var_parameterList_25849.drop () ; // Release error dropped variable
+                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 779)), GALGAS_string ("a boolean does not handle field access"), fixItArray21  COMMA_SOURCE_FILE ("expression-primary.galgas", 779)) ;
+                  var_parameterList_25856.drop () ; // Release error dropped variable
                   ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
                 }
                 break ;
               case GALGAS_typeKind::kEnum_staticInteger:
                 {
                   TC_Array <C_FixItDescription> fixItArray22 ;
-                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 780)), GALGAS_string ("an integer does not handle field access"), fixItArray22  COMMA_SOURCE_FILE ("expression-primary.galgas", 780)) ;
-                  var_parameterList_25849.drop () ; // Release error dropped variable
+                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 781)), GALGAS_string ("an integer does not handle field access"), fixItArray22  COMMA_SOURCE_FILE ("expression-primary.galgas", 781)) ;
+                  var_parameterList_25856.drop () ; // Release error dropped variable
                   ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
                 }
                 break ;
               case GALGAS_typeKind::kEnum_literalString:
                 {
                   TC_Array <C_FixItDescription> fixItArray23 ;
-                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 782)), GALGAS_string ("a literal string does not handle field access"), fixItArray23  COMMA_SOURCE_FILE ("expression-primary.galgas", 782)) ;
-                  var_parameterList_25849.drop () ; // Release error dropped variable
+                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 783)), GALGAS_string ("a literal string does not handle field access"), fixItArray23  COMMA_SOURCE_FILE ("expression-primary.galgas", 783)) ;
+                  var_parameterList_25856.drop () ; // Release error dropped variable
                   ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
                 }
                 break ;
               case GALGAS_typeKind::kEnum_enumeration:
                 {
                   TC_Array <C_FixItDescription> fixItArray24 ;
-                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 784)), GALGAS_string ("an enumeration does not handle field access"), fixItArray24  COMMA_SOURCE_FILE ("expression-primary.galgas", 784)) ;
-                  var_parameterList_25849.drop () ; // Release error dropped variable
+                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 785)), GALGAS_string ("an enumeration does not handle field access"), fixItArray24  COMMA_SOURCE_FILE ("expression-primary.galgas", 785)) ;
+                  var_parameterList_25856.drop () ; // Release error dropped variable
                   ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
                 }
                 break ;
               case GALGAS_typeKind::kEnum_function:
                 {
                   TC_Array <C_FixItDescription> fixItArray25 ;
-                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 786)), GALGAS_string ("a function does not handle field access"), fixItArray25  COMMA_SOURCE_FILE ("expression-primary.galgas", 786)) ;
-                  var_parameterList_25849.drop () ; // Release error dropped variable
+                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 787)), GALGAS_string ("a function does not handle field access"), fixItArray25  COMMA_SOURCE_FILE ("expression-primary.galgas", 787)) ;
+                  var_parameterList_25856.drop () ; // Release error dropped variable
                   ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
                 }
                 break ;
               case GALGAS_typeKind::kEnum_integer:
                 {
                   TC_Array <C_FixItDescription> fixItArray26 ;
-                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 788)), GALGAS_string ("an integer does not handle field access"), fixItArray26  COMMA_SOURCE_FILE ("expression-primary.galgas", 788)) ;
-                  var_parameterList_25849.drop () ; // Release error dropped variable
+                  inCompiler->emitSemanticError (extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 789)), GALGAS_string ("an integer does not handle field access"), fixItArray26  COMMA_SOURCE_FILE ("expression-primary.galgas", 789)) ;
+                  var_parameterList_25856.drop () ; // Release error dropped variable
                   ioArgument_ioEffectiveParameterListIR.drop () ; // Release error dropped variable
                 }
                 break ;
               case GALGAS_typeKind::kEnum_structure:
                 {
-                  const cEnumAssociatedValues_typeKind_structure * extractPtr_32419 = (const cEnumAssociatedValues_typeKind_structure *) (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 772)).unsafePointer ()) ;
-                  const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_32419->mAssociatedValue1 ;
-                  GALGAS_bool var_public_31895 ;
-                  GALGAS_objectIR var_propertyObject_31915 ;
-                  GALGAS_uint var_idx_31924 ;
-                  extractedValue_propertyMap.method_searchKey (extractedValue_name, var_public_31895, var_propertyObject_31915, var_idx_31924, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 790)) ;
-                  GALGAS_objectIR var_fieldObjectReference_32026 ;
+                  const cEnumAssociatedValues_typeKind_structure * extractPtr_32426 = (const cEnumAssociatedValues_typeKind_structure *) (constinArgument_inSelfType.getter_kind (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 773)).unsafePointer ()) ;
+                  const GALGAS_propertyMap extractedValue_propertyMap = extractPtr_32426->mAssociatedValue1 ;
+                  GALGAS_bool var_public_31902 ;
+                  GALGAS_objectIR var_propertyObject_31922 ;
+                  GALGAS_uint var_idx_31931 ;
+                  extractedValue_propertyMap.method_searchKey (extractedValue_name, var_public_31902, var_propertyObject_31922, var_idx_31931, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 791)) ;
+                  GALGAS_objectIR var_fieldObjectReference_32033 ;
                   {
-                  routine_getNewTempVariable (extensionGetter_type (var_propertyObject_31915, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 791)), extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 791)), ioArgument_ioTemporaries, var_fieldObjectReference_32026, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 791)) ;
+                  routine_getNewTempVariable (extensionGetter_type (var_propertyObject_31922, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 792)), extractedValue_name.getter_location (SOURCE_FILE ("expression-primary.galgas", 792)), ioArgument_ioTemporaries, var_fieldObjectReference_32033, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 792)) ;
                   }
                   {
-                  extensionSetter_appendPropertyReferenceFromSelf (ioArgument_ioInstructionGenerationList, var_fieldObjectReference_32026, constinArgument_inSelfType, extractedValue_name.getter_string (SOURCE_FILE ("expression-primary.galgas", 795)), var_idx_31924, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 792)) ;
+                  extensionSetter_appendPropertyReferenceFromSelf (ioArgument_ioInstructionGenerationList, var_fieldObjectReference_32033, constinArgument_inSelfType, extractedValue_name.getter_string (SOURCE_FILE ("expression-primary.galgas", 796)), var_idx_31931, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 793)) ;
                   }
-                  var_parameterList_25849.addAssign_operation (enumerator_25935.current_mEffectiveParameterKind (HERE), enumerator_25935.current_mSelector (HERE), extensionGetter_type (var_propertyObject_31915, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 798))  COMMA_SOURCE_FILE ("expression-primary.galgas", 798)) ;
-                  ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("expression-primary.galgas", 800)), var_fieldObjectReference_32026  COMMA_SOURCE_FILE ("expression-primary.galgas", 799)) ;
+                  var_parameterList_25856.addAssign_operation (enumerator_25942.current_mEffectiveParameterKind (HERE), enumerator_25942.current_mSelector (HERE), extensionGetter_type (var_propertyObject_31922, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 799))  COMMA_SOURCE_FILE ("expression-primary.galgas", 799)) ;
+                  ioArgument_ioEffectiveParameterListIR.addAssign_operation (GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (SOURCE_FILE ("expression-primary.galgas", 801)), var_fieldObjectReference_32033  COMMA_SOURCE_FILE ("expression-primary.galgas", 800)) ;
                 }
                 break ;
               }
@@ -4084,31 +4087,31 @@ void routine_analyzeEffectiveParameters (const GALGAS_unifiedTypeMap_2D_proxy co
       }
       break ;
     }
-    enumerator_25892.gotoNextObject () ;
-    enumerator_25935.gotoNextObject () ;
+    enumerator_25899.gotoNextObject () ;
+    enumerator_25942.gotoNextObject () ;
   }
-  const enumGalgasBool test_27 = GALGAS_bool (kIsNotEqual, constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("expression-primary.galgas", 807)).objectCompare (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("expression-primary.galgas", 807)))).boolEnum () ;
+  const enumGalgasBool test_27 = GALGAS_bool (kIsNotEqual, constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("expression-primary.galgas", 808)).objectCompare (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("expression-primary.galgas", 808)))).boolEnum () ;
   if (kBoolTrue == test_27) {
     TC_Array <C_FixItDescription> fixItArray28 ;
-    inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("this routine requires ").add_operation (constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("expression-primary.galgas", 808)).getter_string (SOURCE_FILE ("expression-primary.galgas", 808)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 808)).add_operation (GALGAS_string (" argument(s), this call names "), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 808)).add_operation (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("expression-primary.galgas", 809)).getter_string (SOURCE_FILE ("expression-primary.galgas", 808)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 808)).add_operation (GALGAS_string (" argument(s)"), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 809)), fixItArray28  COMMA_SOURCE_FILE ("expression-primary.galgas", 808)) ;
+    inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("this routine requires ").add_operation (constinArgument_inFormalSignature.getter_length (SOURCE_FILE ("expression-primary.galgas", 809)).getter_string (SOURCE_FILE ("expression-primary.galgas", 809)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 809)).add_operation (GALGAS_string (" argument(s), this call names "), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 809)).add_operation (constinArgument_inEffectiveParameterList.getter_length (SOURCE_FILE ("expression-primary.galgas", 810)).getter_string (SOURCE_FILE ("expression-primary.galgas", 809)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 809)).add_operation (GALGAS_string (" argument(s)"), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 810)), fixItArray28  COMMA_SOURCE_FILE ("expression-primary.galgas", 809)) ;
   }else if (kBoolFalse == test_27) {
-    cEnumerator_procedureSignature enumerator_32777 (constinArgument_inFormalSignature, kENUMERATION_UP) ;
-    cEnumerator_procEffectiveParameterList enumerator_32806 (var_parameterList_25849, kENUMERATION_UP) ;
-    while (enumerator_32777.hasCurrentObject () && enumerator_32806.hasCurrentObject ()) {
-      const enumGalgasBool test_29 = GALGAS_bool (kIsNotEqual, enumerator_32777.current_mType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 812)).objectCompare (enumerator_32806.current_mParameterType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 812)))).boolEnum () ;
+    cEnumerator_procedureSignature enumerator_32784 (constinArgument_inFormalSignature, kENUMERATION_UP) ;
+    cEnumerator_procEffectiveParameterList enumerator_32813 (var_parameterList_25856, kENUMERATION_UP) ;
+    while (enumerator_32784.hasCurrentObject () && enumerator_32813.hasCurrentObject ()) {
+      const enumGalgasBool test_29 = GALGAS_bool (kIsNotEqual, enumerator_32784.current_mType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 813)).objectCompare (enumerator_32813.current_mParameterType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 813)))).boolEnum () ;
       if (kBoolTrue == test_29) {
         TC_Array <C_FixItDescription> fixItArray30 ;
-        inCompiler->emitSemanticError (enumerator_32806.current_mSelector (HERE).getter_location (SOURCE_FILE ("expression-primary.galgas", 813)), GALGAS_string ("the actual parameter type is '").add_operation (enumerator_32806.current_mParameterType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 813)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 813)).add_operation (GALGAS_string ("', and is incompatible with the formal type '"), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 813)).add_operation (enumerator_32777.current_mType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 814)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 814)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 814)), fixItArray30  COMMA_SOURCE_FILE ("expression-primary.galgas", 813)) ;
+        inCompiler->emitSemanticError (enumerator_32813.current_mSelector (HERE).getter_location (SOURCE_FILE ("expression-primary.galgas", 814)), GALGAS_string ("the actual parameter type is '").add_operation (enumerator_32813.current_mParameterType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 814)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 814)).add_operation (GALGAS_string ("', and is incompatible with the formal type '"), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 814)).add_operation (enumerator_32784.current_mType (HERE).getter_key (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 815)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 815)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 815)), fixItArray30  COMMA_SOURCE_FILE ("expression-primary.galgas", 814)) ;
       }
-      GALGAS_string var_requiredPassingMode_33097 = extensionGetter_requiredActualPassingModeForSelector (enumerator_32777.current_mFormalArgumentPassingMode (HERE), enumerator_32777.current_mSelector (HERE).getter_string (SOURCE_FILE ("expression-primary.galgas", 816)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 816)) ;
-      GALGAS_string var_testedPassingMode_33218 = extensionGetter_passingModeForActualSelector (enumerator_32806.current_mEffectiveParameterPassingMode (HERE), enumerator_32806.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 817)) ;
-      const enumGalgasBool test_31 = GALGAS_bool (kIsNotEqual, var_requiredPassingMode_33097.objectCompare (var_testedPassingMode_33218)).boolEnum () ;
+      GALGAS_string var_requiredPassingMode_33104 = extensionGetter_requiredActualPassingModeForSelector (enumerator_32784.current_mFormalArgumentPassingMode (HERE), enumerator_32784.current_mSelector (HERE).getter_string (SOURCE_FILE ("expression-primary.galgas", 817)), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 817)) ;
+      GALGAS_string var_testedPassingMode_33225 = extensionGetter_passingModeForActualSelector (enumerator_32813.current_mEffectiveParameterPassingMode (HERE), enumerator_32813.current_mSelector (HERE), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 818)) ;
+      const enumGalgasBool test_31 = GALGAS_bool (kIsNotEqual, var_requiredPassingMode_33104.objectCompare (var_testedPassingMode_33225)).boolEnum () ;
       if (kBoolTrue == test_31) {
         TC_Array <C_FixItDescription> fixItArray32 ;
-        inCompiler->emitSemanticError (enumerator_32806.current_mSelector (HERE).getter_location (SOURCE_FILE ("expression-primary.galgas", 819)), GALGAS_string ("the required selector is '").add_operation (var_requiredPassingMode_33097, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 819)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 819)), fixItArray32  COMMA_SOURCE_FILE ("expression-primary.galgas", 819)) ;
+        inCompiler->emitSemanticError (enumerator_32813.current_mSelector (HERE).getter_location (SOURCE_FILE ("expression-primary.galgas", 820)), GALGAS_string ("the required selector is '").add_operation (var_requiredPassingMode_33104, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 820)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 820)), fixItArray32  COMMA_SOURCE_FILE ("expression-primary.galgas", 820)) ;
       }
-      enumerator_32777.gotoNextObject () ;
-      enumerator_32806.gotoNextObject () ;
+      enumerator_32784.gotoNextObject () ;
+      enumerator_32813.gotoNextObject () ;
     }
   }
 }
@@ -7522,6 +7525,67 @@ void routine_routineSignature (GALGAS_unifiedTypeMap & ioArgument_ioTypeMap,
   }
 }
 
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Function 'argumentSignatureFromFormalArgumentList'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring function_argumentSignatureFromFormalArgumentList (const GALGAS_location & constinArgument_inRoutineNameLocation,
+                                                                 const GALGAS_procFormalArgumentList & constinArgument_inFormalArgumentList,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_lstring result_result ; // Returned variable
+  GALGAS_string var_key_3461 = GALGAS_string::makeEmptyString () ;
+  var_key_3461.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 87)) ;
+  cEnumerator_procFormalArgumentList enumerator_3550 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
+  while (enumerator_3550.hasCurrentObject ()) {
+    var_key_3461.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_3550.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 89)).add_operation (enumerator_3550.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 89)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 89)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 89)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 89)) ;
+    enumerator_3550.gotoNextObject () ;
+  }
+  var_key_3461.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 91)) ;
+  result_result = GALGAS_lstring::constructor_new (var_key_3461, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("context-routines.galgas", 92)) ;
+//---
+  return result_result ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//  Function introspection                                                                                             *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const C_galgas_type_descriptor * functionArgs_argumentSignatureFromFormalArgumentList [3] = {
+  & kTypeDescriptor_GALGAS_location,
+  & kTypeDescriptor_GALGAS_procFormalArgumentList,
+  NULL
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_object functionWithGenericHeader_argumentSignatureFromFormalArgumentList (C_Compiler * inCompiler,
+                                                                                        const cObjectArray & inEffectiveParameterArray,
+                                                                                        const GALGAS_location & /* inErrorLocation */
+                                                                                        COMMA_LOCATION_ARGS) {
+  const GALGAS_location operand0 = GALGAS_location::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
+                                                                   inCompiler
+                                                                   COMMA_THERE) ;
+  const GALGAS_procFormalArgumentList operand1 = GALGAS_procFormalArgumentList::extractObject (inEffectiveParameterArray.objectAtIndex (1 COMMA_HERE),
+                                                                                               inCompiler
+                                                                                               COMMA_THERE) ;
+  return function_argumentSignatureFromFormalArgumentList (operand0,
+                                                           operand1,
+                                                           inCompiler
+                                                           COMMA_THERE).getter_object (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_galgas_function_descriptor functionDescriptor_argumentSignatureFromFormalArgumentList ("argumentSignatureFromFormalArgumentList",
+                                                                                         functionWithGenericHeader_argumentSignatureFromFormalArgumentList,
+                                                                                         & kTypeDescriptor_GALGAS_lstring,
+                                                                                         2,
+                                                                                         functionArgs_argumentSignatureFromFormalArgumentList) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

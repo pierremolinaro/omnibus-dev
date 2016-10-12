@@ -135,6 +135,7 @@ method @svcDeclarationListAST enterInContext
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
       !routineMangledName
+      !argumentSignatureFromFormalArgumentList (!svc.mName !svc.mFormalArgumentList)
       !routineMangledName
       !.new {
         !svc.mPublic
