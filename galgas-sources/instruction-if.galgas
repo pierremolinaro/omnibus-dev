@@ -122,8 +122,14 @@ override method @ifInstructionAST analyze
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR testResult
+    ?result:let @objectIR testResultPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !testResultPossibleReference
+    !mTestExpressionEndLocation
+    ?let testResult
+  ]  
 #--- Check inferred type
   if [testResult kind] != .boolean then
     error mTestExpressionEndLocation : "test expression type is '" + [testResult key] + "', it should be boolean"

@@ -102,8 +102,14 @@ override method @switchInstructionAST analyze
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:switchExpressionGenerationList
-    ?result:@objectIR switchValueIR
+    ?result:@objectIR switchValueIRPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !switchValueIRPossibleReference
+    !mEndOf_test_expression
+    ?let switchValueIR
+  ]  
 #--- Check inferred type
   @enumConstantMap enumConstantMap
   if [[switchValueIR kind] isEnumeration] then

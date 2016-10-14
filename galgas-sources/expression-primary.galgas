@@ -333,14 +333,14 @@ override method @primaryInExpressionAST analyzeExpression
       end
     end
   end
-
+  outResult = currentPointer
 #--- Load from memory  
-  [!?ioInstructionGenerationList appendLoadFromReference
-    !?ioTemporaries
-    !currentPointer
-    !mObjectName.location
-    ?outResult
-  ]  
+#  [!?ioInstructionGenerationList appendLoadFromReference
+#    !?ioTemporaries
+#    !currentPointer
+#    !mObjectName.location
+#    ?outResult
+#  ]  
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -576,10 +576,7 @@ proc analyzeFunctionCallInExpression
   end
 #--- Add receiver as first argument
   if receiverType != .null then
-#    outRoutineMangledName = .new {!"$" + [receiverType key] + "." + inRoutineName !inRoutineName.location}
     outEffectiveParameterListIR += !.outputInput !inReceiver
- else
-#    outRoutineMangledName = inRoutineName
   end
 #--- Build LLVM mangled name
   outRoutineMangledName = routineMangledNameFromCall (
@@ -733,8 +730,14 @@ proc analyzeEffectiveParameters
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @objectIR expressionResult
       ]
+      [!?ioInstructionGenerationList appendLoadFromReference
+        !?ioTemporaries
+        !expressionResult
+        !endOfExp
+        ?let expressionValue
+      ]  
       let result = checkAssignmentCompatibility (
-        !source:expressionResult
+        !source:expressionValue
         !targetAnnotationType:formal_mType
         !errorLocation:endOfExp
         !staticTypeAllowed:false

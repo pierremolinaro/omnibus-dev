@@ -90,8 +90,14 @@ private proc handleSubscriptArrayInAssignmentAndExpression
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR indexResult
+    ?result:let @objectIR indexResultPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !indexResultPossibleReference
+    !inErrorLocation
+    ?let indexResult
+  ]  
   if [indexResult isLiteralInteger] then # Static expression
     [indexResult literalInteger ?1* ?value:let @bigint indexValue]
     if (indexValue < 0G) || (indexValue >= arraySize) then
@@ -189,8 +195,14 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
       !?variableMap:ioVariableMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
-      ?result:let @objectIR indexResult
+      ?result:let @objectIR indexResultPossibleReference
     ]
+    [!?ioInstructionGenerationList appendLoadFromReference
+      !?ioTemporaries
+      !indexResultPossibleReference
+      !inErrorLocation
+      ?let indexResult
+    ]  
   #--- Static expression ?
     if [indexResult isLiteralInteger] then # Static expression
       [indexResult literalInteger ?1* ?value:let @bigint indexValue]

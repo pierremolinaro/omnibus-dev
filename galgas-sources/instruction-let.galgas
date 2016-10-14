@@ -85,8 +85,14 @@ override method @letInstructionWithAssignmentAST analyze
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR expressionResult
+    ?result:let @objectIR expressionResultPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !expressionResultPossibleReference
+    !mVarName
+    ?let expressionResult
+  ]  
 #--- Declare local constant
   var result = checkAssignmentCompatibility (
     !source:expressionResult

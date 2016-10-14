@@ -91,8 +91,14 @@ override method @convertExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR expressionResult
+    ?result:@objectIR expressionResultPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !expressionResultPossibleReference
+    !mTypeName
+    ?let expressionResult
+  ]  
 #--- 
   if not [inCurrentMode panicAllowed] then
     error mTypeName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
