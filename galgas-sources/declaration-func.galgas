@@ -219,44 +219,43 @@ method @functionDeclarationListAST enterFunctionInContext
   ?selfTypeName:let @string inSelfTypeName
   ?!context:@semanticContext ioContext
 {
-  for procedure in self do
-  #--- Routine mangled name
-    let routineMangledName = routineMangledNameFromAST (
-      !inSelfTypeName 
-      !procedure.mFunctionName
-      !procedure.mFunctionFormalArgumentList
-    )
+  for function in self do
   #--- Signature
-    routineSignature (!?ioContext.mTypeMap !procedure.mFunctionFormalArgumentList ?let signature)
+    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
   #--- Return type
     @unifiedTypeMap-proxy returnType
-    if procedure.mFunctionReturnTypeName.string == "" then
+    if function.mFunctionReturnTypeName.string == "" then
       returnType = .null
     else
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !procedure.mFunctionReturnTypeName ?returnType]
+      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?returnType]
     end
   #--- Attributes
-    var globalProcedure = false
+    var globalFunction = false
     var canMutateProperties = false
-    for (attribute) in procedure.mFunctionAttributeList do
+    for (attribute) in function.mFunctionAttributeList do
       if attribute.string == globalAttribute () then
-        globalProcedure = true
+        globalFunction = true
       elsif attribute.string == mutatingAttribute () then
         canMutateProperties = true
       end
     end
-    let canAccessProperties = procedure.mMode != .userMode
+    let canAccessProperties = function.mMode != .userMode
+  #--- Routine mangled name
+    let routineMangledName = routineMangledNameFromAST (
+      !inSelfTypeName 
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+    )
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
- #     !routineMangledName
-      !procedure.mFunctionName
-      !argumentSignatureFromFormalArgumentList (!procedure.mFunctionName !procedure.mFunctionFormalArgumentList)
+      !function.mFunctionName
+      !argumentSignatureFromFormalArgumentList (!function.mFunctionName !function.mFunctionFormalArgumentList)
       !routineMangledName
       !.new{
-        !procedure.mPublicFunction
-        !globalProcedure
+        !function.mPublicFunction
+        !globalFunction
         !.function
-        !procedure.mMode
+        !function.mMode
         !signature
         !returnType
         !canMutateProperties

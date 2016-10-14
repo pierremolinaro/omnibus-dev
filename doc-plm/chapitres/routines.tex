@@ -385,34 +385,6 @@ L'attribut \plm+@global+ signifie que la procédure sera visible par le code C e
 
 
 
-\subsectionLabel{Attribut \texttt{@weak}}{attributWeak}\index{"@weak}
-
-[À REVOIR??]
-
-
-L'attribut \plm+@weak+ signifie que la fonction peut être redéfinie par une fonction de même nom, avec les mêmes paramètres formels, les mêmes modes. Les fichiers de définition de cible utilisent cette possibilité pour définir des routines par défaut.
-
-%Par exemple, la cible \texttt{teensy-3-1-it} définit cette routine d'interruption (voir le deuxième exemple du tutorial, \refSectionPage{deuxiemeExemple}) :
-
-\begin{PLM}
-proc systickHandler isr @weak () {
-}
-\end{PLM}
-
-Par défaut, la routine d'interruption \plm+systickHandler+ est donc définie, vide. Le programme d'exemple définit cette routine :
-
-\begin{PLM}
-proc systickHandler isr () {
-  gUpTimeMS += 1
-}
-\end{PLM}
-
-Comme cette nouvelle routine a le même nom, les mêmes paramètres formels et le même mode que la routine marquée \plm+@weak+, elle est utilisée à la place de celle-ci.
-
-
-
-
-
 
 \subsectionLabel{Fonctions « universelles »}{fonctionUniverselle}
 

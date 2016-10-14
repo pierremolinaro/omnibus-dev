@@ -138,8 +138,6 @@ On va explorer successivement le fichier \texttt{myTeensy.plm-target} puis le r�
 Voici le contenu du fichier \texttt{myTeensy.plm-target} :
 
 \begin{PLM}[1]
-pointerSize 32
-
 panic : $int32 $uint32
 
 import "files/mk20dx256.plm"
@@ -149,16 +147,12 @@ required proc systickHandler isr ()
 required proc setup user ()
 required proc loop user ()
 
-proc systickHandler isr @weak () {
-}
-
 init 0 { // Configure Systick interrupt every ms
   SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
   SYST_CVR = 0
   SYST_CSR = $SYST_CSR {CLKSOURCE, TICKINT, ENABLE}
 }
 \end{PLM}
-%\ligne\\
 
 {\bf Ligne 1.} Définition de la taille d'un pointeur, en nombre de bits.
 
@@ -174,8 +168,6 @@ init 0 { // Configure Systick interrupt every ms
   \item d'abord, que les procédures citées doivent être définies soit dans la cible (c'est le cas de \texttt{systickHandler}), soit dans le code utilisateur (ici \texttt{01-blinkled.plm}) : c'est le cas des procédures \texttt{setup} et \texttt{loop} ;
   \item ensuite, le compilateur calcule le graphe des appels des routines, afin de supprimer les routines inutilisées ; les procédures requises sont les racines du graphe d'accessibilité.
 \end{itemize}
-
-{\bf Lignes 12 et 13.} Déclaration de la procédure \texttt{systickHandler}. Elle s'exécute dans le mode \plm=isr=, c'est donc une routine d'interruption. Elle est déclarée avec l'attribut \plm=@weak= (\refSubsectionPage{attributWeak}), c'est-à-dire qu'une procédure de même nom peut être déclarée, qui va remplacer celle-ci. Cette déclaration définit donc la routine par défaut.
 
 {\bf Lignes 15 à 19.} Définition de la routine \plm=init 0= (\refSectionPage{initRoutine}). Le code de cette routine configure le \emph{SysTick Timer} de façon qu'une interruption \emph{SysTick} survienne toutes les millisecondes. Comme cette routine porte le numéro $0$, on est sûr qu'elle soit la première à être exécutée.
 
