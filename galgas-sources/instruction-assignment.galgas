@@ -89,8 +89,14 @@ override method @varAssignmentInstructionAST analyze
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR sourceOperand
+    ?result:@objectIR sourceOperandPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !sourceOperandPossibleReference
+    !mAssignmentTargetAST.mIdentifier
+    ?let sourceOperand
+  ]  
   let result = checkAssignmentCompatibility (
     !source:sourceOperand
     !targetAnnotationType:[currentObject type]

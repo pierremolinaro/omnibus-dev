@@ -91,8 +91,14 @@ override method @truncateExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR expressionResult
+    ?result:@objectIR expressionResultPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !expressionResultPossibleReference
+    !mTypeName
+    ?let expressionResult
+  ]  
 #--- Analyze type
   let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
 #--- Check types

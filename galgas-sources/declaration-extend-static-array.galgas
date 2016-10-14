@@ -176,12 +176,6 @@ override method @extendStaticArrayDeclarationAST enterInContext
           error endOfExp : "a static expression is expected here"
         else
           [[type kind] function ?descriptor:let functionDescriptor]
-        #--- Routine mangled name
-#          let routineMangledName = routineMangledNameFromAST (
-#            !"" 
-#            !functionName
-#            !formalArgs
-#          )
           let argumentSignature = argumentSignatureFromFormalArgumentList (!functionName !formalArgs)
           [ioContext.mRoutineMapForContext searchKey
             !functionName

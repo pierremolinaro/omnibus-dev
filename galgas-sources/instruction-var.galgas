@@ -111,8 +111,14 @@ override method @varInstructionWithAssignmentAST analyze
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR expressionResult
+    ?result:@objectIR sourcePossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !sourcePossibleReference
+    !mVarName
+    ?let expressionResult
+  ]  
 #--- Check type compatibility
   if targetType == .null then
     targetType = [expressionResult type]

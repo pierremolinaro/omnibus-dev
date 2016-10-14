@@ -140,8 +140,14 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR leftOperand
+    ?result:let @objectIR leftOperandPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !leftOperandPossibleReference
+    !mOperatorLocation
+    ?let leftOperand
+  ]  
 #------------------- Analyze right expression
   [mRightExpression analyzeExpression
     !self:inSelfType
@@ -156,8 +162,14 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR rightOperand
+    ?result:let @objectIR rightOperandPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !rightOperandPossibleReference
+    !mOperatorLocation
+    ?let rightOperand
+  ]  
 #------------------- Get operator map
   let operatorMap = getInfixOperatorMap (!mOp !context:inContext !mode:inCurrentMode !mOperatorLocation)
 #------------------- Check operand types
@@ -305,8 +317,14 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:leftInstructionGenerationList
-    ?result:let @objectIR leftOperand
+    ?result:let @objectIR leftOperandPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !leftOperandPossibleReference
+    !mOperatorLocation
+    ?let leftOperand
+  ]  
 #--- Analyze right expression
   @instructionListIR rightInstructionGenerationList = {}
   [mRightExpression analyzeExpression
@@ -322,8 +340,14 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:rightInstructionGenerationList
-    ?result:let @objectIR rightOperand
+    ?result:let @objectIR rightOperandPossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !rightOperandPossibleReference
+    !mOperatorLocation
+    ?let rightOperand
+  ]  
 #--- Check left type is boolean
   if [leftOperand kind] != .boolean then
     error mOperatorLocation : "left operand should be boolean"

@@ -80,8 +80,14 @@ override method @whileInstructionAST analyze
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:testInstructionGenerationList
-    ?result:@objectIR testValue
+    ?result:@objectIR testValuePossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !testValuePossibleReference
+    !mEndOf_test_expression
+    ?let testValue
+  ]  
 #--- Check inferred type
   if [testValue kind] != .boolean then
     error mEndOf_test_expression : "test expression type is '" + [testValue key] + "', it should be boolean"

@@ -24,6 +24,7 @@ class @varOperatorAssignInstructionAST : @instructionAST {
   @assignmentTargetAST mAssignmentTargetAST
   @operatorAssignmentKind mOperator
   @expressionAST mSourceExpression
+  @location mEndOfSourceExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -76,6 +77,7 @@ syntax extension plm_syntax {
       !assignmentTargetAST
       !operatorAssign
       !expression
+      !.here
     }
   }
 
@@ -143,8 +145,14 @@ override method @varOperatorAssignInstructionAST analyze
     !?variableMap:ioVariableMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR sourceValue
+    ?result:@objectIR sourcePossibleReference
   ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !sourcePossibleReference
+    !mEndOfSourceExpression
+    ?let sourceValue
+  ]  
 #--- Write local variable
 #  [!?ioVariableMap searchForReadWriteAccess
 #    !lkey:mTargetVarName
@@ -216,9 +224,6 @@ override method @varOperatorAssignInstructionAST analyze
     ?resultType:*
     ?op:let @infixOperatorDescription binaryOperator
   ]
-#  if not isCopyable then
-#    error mTargetVarName : "an $" + [targetType key] + " instance is not copyable"
-#  end
 #--- Code generation
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
@@ -226,11 +231,6 @@ override method @varOperatorAssignInstructionAST analyze
     !mAssignmentTargetAST.mIdentifier
     ?let variableValue
   ]
-#  [targetVariableKind loadFromMemory
-#    !?temporary:ioTemporaries
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?resultingValue:@objectIR variableValue
-#  ]
   [binaryOperator generateInfixOperatorCode
     !?ioTemporaries
     !?ioInstructionGenerationList

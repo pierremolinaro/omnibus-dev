@@ -11441,7 +11441,8 @@ class GALGAS_varOperatorAssignInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_varOperatorAssignInstructionAST constructor_new (const class GALGAS_assignmentTargetAST & inOperand0,
                                                                                 const class GALGAS_operatorAssignmentKind & inOperand1,
-                                                                                const class GALGAS_expressionAST & inOperand2
+                                                                                const class GALGAS_expressionAST & inOperand2,
+                                                                                const class GALGAS_location & inOperand3
                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -11454,6 +11455,8 @@ class GALGAS_varOperatorAssignInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_assignmentTargetAST getter_mAssignmentTargetAST (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfSourceExpression (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_operatorAssignmentKind getter_mOperator (LOCATION_ARGS) const ;
 
@@ -11603,11 +11606,13 @@ class cPtr_varOperatorAssignInstructionAST : public cPtr_instructionAST {
   public : GALGAS_assignmentTargetAST mProperty_mAssignmentTargetAST ;
   public : GALGAS_operatorAssignmentKind mProperty_mOperator ;
   public : GALGAS_expressionAST mProperty_mSourceExpression ;
+  public : GALGAS_location mProperty_mEndOfSourceExpression ;
 
 //--- Constructor
   public : cPtr_varOperatorAssignInstructionAST (const GALGAS_assignmentTargetAST & in_mAssignmentTargetAST,
                                                  const GALGAS_operatorAssignmentKind & in_mOperator,
-                                                 const GALGAS_expressionAST & in_mSourceExpression
+                                                 const GALGAS_expressionAST & in_mSourceExpression,
+                                                 const GALGAS_location & in_mEndOfSourceExpression
                                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -11617,6 +11622,7 @@ class cPtr_varOperatorAssignInstructionAST : public cPtr_instructionAST {
   public : VIRTUAL_IN_DEBUG GALGAS_assignmentTargetAST getter_mAssignmentTargetAST (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_operatorAssignmentKind getter_mOperator (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfSourceExpression (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
