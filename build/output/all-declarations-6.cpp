@@ -1568,7 +1568,7 @@ GALGAS_accessInAssignmentListAST_2D_element GALGAS_accessInAssignmentListAST_2D_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element (void) :
+GALGAS_routineArgumentSignatureMapForContext_2D_element::GALGAS_routineArgumentSignatureMapForContext_2D_element (void) :
 mProperty_lkey (),
 mProperty_mRoutineLLVMName (),
 mProperty_mDescriptor () {
@@ -1576,14 +1576,14 @@ mProperty_mDescriptor () {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::~ GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element (void) {
+GALGAS_routineArgumentSignatureMapForContext_2D_element::~ GALGAS_routineArgumentSignatureMapForContext_2D_element (void) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                                                                  const GALGAS_lstring & inOperand1,
-                                                                                                                                  const GALGAS_routineDescriptor & inOperand2) :
+GALGAS_routineArgumentSignatureMapForContext_2D_element::GALGAS_routineArgumentSignatureMapForContext_2D_element (const GALGAS_lstring & inOperand0,
+                                                                                                                  const GALGAS_lstring & inOperand1,
+                                                                                                                  const GALGAS_routineDescriptor & inOperand2) :
 mProperty_lkey (inOperand0),
 mProperty_mRoutineLLVMName (inOperand1),
 mProperty_mDescriptor (inOperand2) {
@@ -1591,20 +1591,20 @@ mProperty_mDescriptor (inOperand2) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                                                                  const GALGAS_lstring & inOperand1,
-                                                                                                                                                  const GALGAS_routineDescriptor & inOperand2 
-                                                                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element result ;
+GALGAS_routineArgumentSignatureMapForContext_2D_element GALGAS_routineArgumentSignatureMapForContext_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                                                                                  const GALGAS_lstring & inOperand1,
+                                                                                                                                  const GALGAS_routineDescriptor & inOperand2 
+                                                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_routineArgumentSignatureMapForContext_2D_element result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
-    result = GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element (inOperand0, inOperand1, inOperand2) ;
+    result = GALGAS_routineArgumentSignatureMapForContext_2D_element (inOperand0, inOperand1, inOperand2) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::objectCompare (const GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element & inOperand) const {
+typeComparisonResult GALGAS_routineArgumentSignatureMapForContext_2D_element::objectCompare (const GALGAS_routineArgumentSignatureMapForContext_2D_element & inOperand) const {
    typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
     result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
@@ -1620,13 +1620,13 @@ typeComparisonResult GALGAS_internalRoutineArgumentSignatureMapForContext_2D_ele
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::isValid (void) const {
+bool GALGAS_routineArgumentSignatureMapForContext_2D_element::isValid (void) const {
   return mProperty_lkey.isValid () && mProperty_mRoutineLLVMName.isValid () && mProperty_mDescriptor.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::drop (void) {
+void GALGAS_routineArgumentSignatureMapForContext_2D_element::drop (void) {
   mProperty_lkey.drop () ;
   mProperty_mRoutineLLVMName.drop () ;
   mProperty_mDescriptor.drop () ;
@@ -1634,9 +1634,9 @@ void GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::drop (void
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::description (C_String & ioString,
-                                                                                   const int32_t inIndentation) const {
-  ioString << "<struct @internalRoutineArgumentSignatureMapForContext-element:" ;
+void GALGAS_routineArgumentSignatureMapForContext_2D_element::description (C_String & ioString,
+                                                                           const int32_t inIndentation) const {
+  ioString << "<struct @routineArgumentSignatureMapForContext-element:" ;
   if (! isValid ()) {
     ioString << " not built" ;
   }else{
@@ -1651,19 +1651,19 @@ void GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::descriptio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_routineArgumentSignatureMapForContext_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
   return mProperty_lkey ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::getter_mRoutineLLVMName (UNUSED_LOCATION_ARGS) const {
+GALGAS_lstring GALGAS_routineArgumentSignatureMapForContext_2D_element::getter_mRoutineLLVMName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mRoutineLLVMName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_routineDescriptor GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::getter_mDescriptor (UNUSED_LOCATION_ARGS) const {
+GALGAS_routineDescriptor GALGAS_routineArgumentSignatureMapForContext_2D_element::getter_mDescriptor (UNUSED_LOCATION_ARGS) const {
   return mProperty_mDescriptor ;
 }
 
@@ -1671,42 +1671,42 @@ GALGAS_routineDescriptor GALGAS_internalRoutineArgumentSignatureMapForContext_2D
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                             @internalRoutineArgumentSignatureMapForContext-element type                             *
+//                                 @routineArgumentSignatureMapForContext-element type                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element ("internalRoutineArgumentSignatureMapForContext-element",
-                                                                                 NULL) ;
+kTypeDescriptor_GALGAS_routineArgumentSignatureMapForContext_2D_element ("routineArgumentSignatureMapForContext-element",
+                                                                         NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element ;
+const C_galgas_type_descriptor * GALGAS_routineArgumentSignatureMapForContext_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_routineArgumentSignatureMapForContext_2D_element ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_routineArgumentSignatureMapForContext_2D_element::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element (*this)) ;
+    macroMyNew (result, GALGAS_routineArgumentSignatureMapForContext_2D_element (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                                                                C_Compiler * inCompiler
-                                                                                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element result ;
-  const GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element * p = (const GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element *) inObject.embeddedObject () ;
+GALGAS_routineArgumentSignatureMapForContext_2D_element GALGAS_routineArgumentSignatureMapForContext_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                                                                C_Compiler * inCompiler
+                                                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_routineArgumentSignatureMapForContext_2D_element result ;
+  const GALGAS_routineArgumentSignatureMapForContext_2D_element * p = (const GALGAS_routineArgumentSignatureMapForContext_2D_element *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_routineArgumentSignatureMapForContext_2D_element *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("internalRoutineArgumentSignatureMapForContext-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("routineArgumentSignatureMapForContext-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -1716,7 +1716,7 @@ GALGAS_internalRoutineArgumentSignatureMapForContext_2D_element GALGAS_internalR
 
 GALGAS_internalRoutineMapForContext_2D_element::GALGAS_internalRoutineMapForContext_2D_element (void) :
 mProperty_lkey (),
-mProperty_mInternalRoutineArgumentSignatureMapForContext () {
+mProperty_mRoutineArgumentSignatureMapForContext () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1727,22 +1727,22 @@ GALGAS_internalRoutineMapForContext_2D_element::~ GALGAS_internalRoutineMapForCo
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_internalRoutineMapForContext_2D_element::GALGAS_internalRoutineMapForContext_2D_element (const GALGAS_lstring & inOperand0,
-                                                                                                const GALGAS_internalRoutineArgumentSignatureMapForContext & inOperand1) :
+                                                                                                const GALGAS_routineArgumentSignatureMapForContext & inOperand1) :
 mProperty_lkey (inOperand0),
-mProperty_mInternalRoutineArgumentSignatureMapForContext (inOperand1) {
+mProperty_mRoutineArgumentSignatureMapForContext (inOperand1) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_internalRoutineMapForContext_2D_element GALGAS_internalRoutineMapForContext_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_internalRoutineMapForContext_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                                         GALGAS_internalRoutineArgumentSignatureMapForContext::constructor_emptyMap (HERE)) ;
+                                                         GALGAS_routineArgumentSignatureMapForContext::constructor_emptyMap (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_internalRoutineMapForContext_2D_element GALGAS_internalRoutineMapForContext_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                                const GALGAS_internalRoutineArgumentSignatureMapForContext & inOperand1 
+                                                                                                                const GALGAS_routineArgumentSignatureMapForContext & inOperand1 
                                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_internalRoutineMapForContext_2D_element result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
@@ -1759,7 +1759,7 @@ typeComparisonResult GALGAS_internalRoutineMapForContext_2D_element::objectCompa
     result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mInternalRoutineArgumentSignatureMapForContext.objectCompare (inOperand.mProperty_mInternalRoutineArgumentSignatureMapForContext) ;
+    result = mProperty_mRoutineArgumentSignatureMapForContext.objectCompare (inOperand.mProperty_mRoutineArgumentSignatureMapForContext) ;
   }
   return result ;
 }
@@ -1767,14 +1767,14 @@ typeComparisonResult GALGAS_internalRoutineMapForContext_2D_element::objectCompa
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_internalRoutineMapForContext_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mInternalRoutineArgumentSignatureMapForContext.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mRoutineArgumentSignatureMapForContext.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_internalRoutineMapForContext_2D_element::drop (void) {
   mProperty_lkey.drop () ;
-  mProperty_mInternalRoutineArgumentSignatureMapForContext.drop () ;
+  mProperty_mRoutineArgumentSignatureMapForContext.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1787,7 +1787,7 @@ void GALGAS_internalRoutineMapForContext_2D_element::description (C_String & ioS
   }else{
     mProperty_lkey.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mInternalRoutineArgumentSignatureMapForContext.description (ioString, inIndentation+1) ;
+    mProperty_mRoutineArgumentSignatureMapForContext.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -1800,8 +1800,8 @@ GALGAS_lstring GALGAS_internalRoutineMapForContext_2D_element::getter_lkey (UNUS
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_internalRoutineArgumentSignatureMapForContext GALGAS_internalRoutineMapForContext_2D_element::getter_mInternalRoutineArgumentSignatureMapForContext (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInternalRoutineArgumentSignatureMapForContext ;
+GALGAS_routineArgumentSignatureMapForContext GALGAS_internalRoutineMapForContext_2D_element::getter_mRoutineArgumentSignatureMapForContext (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mRoutineArgumentSignatureMapForContext ;
 }
 
 
@@ -7777,34 +7777,34 @@ static void extensionMethod_structureDeclaration_enterInContext (const cPtr_abst
     index_8824.increment_operation (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 230)) ;
   }
   {
-  ioArgument_ioContext.mProperty_mConstructorMap.setter_insertKey (object->mProperty_mStructureName, GALGAS_constructorValue::constructor_structure (var_constructorSignature_8788, var_sortedOperandIRList_8738  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 297)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 295)) ;
+  ioArgument_ioContext.mProperty_mConstructorMap.setter_insertKey (object->mProperty_mStructureName, GALGAS_constructorValue::constructor_structure (var_constructorSignature_8788, var_sortedOperandIRList_8738  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 298)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 296)) ;
   }
-  GALGAS_uint var_flags_11656 = function_instanciableFlag (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 300)) ;
-  cEnumerator_lstringlist enumerator_11709 (object->mProperty_mAttributeListAST, kENUMERATION_UP) ;
-  while (enumerator_11709.hasCurrentObject ()) {
-    const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, enumerator_11709.current_mValue (HERE).mProperty_string.objectCompare (GALGAS_string ("copyable"))).boolEnum () ;
+  GALGAS_uint var_flags_11674 = function_instanciableFlag (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 301)) ;
+  cEnumerator_lstringlist enumerator_11727 (object->mProperty_mAttributeListAST, kENUMERATION_UP) ;
+  while (enumerator_11727.hasCurrentObject ()) {
+    const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, enumerator_11727.current_mValue (HERE).mProperty_string.objectCompare (GALGAS_string ("copyable"))).boolEnum () ;
     if (kBoolTrue == test_12) {
-      const enumGalgasBool test_13 = GALGAS_bool (kIsNotEqual, var_flags_11656.operator_and (function_instanciableFlag (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 303)) COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 303)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+      const enumGalgasBool test_13 = GALGAS_bool (kIsNotEqual, var_flags_11674.operator_and (function_instanciableFlag (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 304)) COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 304)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
       if (kBoolTrue == test_13) {
         TC_Array <C_FixItDescription> fixItArray14 ;
-        inCompiler->emitSemanticError (enumerator_11709.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 304)), GALGAS_string ("duplicated attribute"), fixItArray14  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 304)) ;
+        inCompiler->emitSemanticError (enumerator_11727.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 305)), GALGAS_string ("duplicated attribute"), fixItArray14  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 305)) ;
       }else if (kBoolFalse == test_13) {
-        const enumGalgasBool test_15 = var_canBeCopied_8811.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 305)).boolEnum () ;
+        const enumGalgasBool test_15 = var_canBeCopied_8811.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 306)).boolEnum () ;
         if (kBoolTrue == test_15) {
           TC_Array <C_FixItDescription> fixItArray16 ;
-          inCompiler->emitSemanticError (object->mProperty_mStructureName.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 306)), GALGAS_string ("this structure cannot be copied, one field is not copyable"), fixItArray16  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 306)) ;
+          inCompiler->emitSemanticError (object->mProperty_mStructureName.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 307)), GALGAS_string ("this structure cannot be copied, one field is not copyable"), fixItArray16  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 307)) ;
         }else if (kBoolFalse == test_15) {
-          var_flags_11656 = var_flags_11656.operator_or (function_instanciableFlag (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 308)) COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 308)) ;
+          var_flags_11674 = var_flags_11674.operator_or (function_instanciableFlag (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 309)) COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 309)) ;
         }
       }
     }else if (kBoolFalse == test_12) {
       TC_Array <C_FixItDescription> fixItArray17 ;
-      inCompiler->emitSemanticError (enumerator_11709.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 311)), GALGAS_string ("only @copyable attribute is allowed here"), fixItArray17  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 311)) ;
+      inCompiler->emitSemanticError (enumerator_11727.current_mValue (HERE).getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 312)), GALGAS_string ("only @copyable attribute is allowed here"), fixItArray17  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 312)) ;
     }
-    enumerator_11709.gotoNextObject () ;
+    enumerator_11727.gotoNextObject () ;
   }
   {
-  ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mStructureName, GALGAS_typeKind::constructor_structure (object->mProperty_mStructureName, var_propertyMap_8690, var_propertyList_8658, var_flags_11656  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 317)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 315)) ;
+  ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mStructureName, GALGAS_typeKind::constructor_structure (object->mProperty_mStructureName, var_propertyMap_8690, var_propertyList_8658, var_flags_11674  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 318)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 316)) ;
   }
 }
 
@@ -7833,9 +7833,9 @@ static void extensionMethod_structureDeclaration_enterRoutinesInContext (const c
                                                                          COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_structureDeclaration * object = (const cPtr_structureDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_structureDeclaration) ;
-  extensionMethod_enterFunctionInContext (object->mProperty_mFunctionDeclarationListAST, function_llvmRegularTypeMangledNameFromName (object->mProperty_mStructureName, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 329)).mProperty_string, ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 328)) ;
-  extensionMethod_enterInContext (object->mProperty_mSVCListAST, function_llvmRegularTypeMangledNameFromName (object->mProperty_mStructureName, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 332)).mProperty_string, ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 332)) ;
-  extensionMethod_enterInContext (object->mProperty_mGuardListAST, function_llvmRegularTypeMangledNameFromName (object->mProperty_mStructureName, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 333)).mProperty_string, ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 333)) ;
+  extensionMethod_enterFunctionInContext (object->mProperty_mFunctionDeclarationListAST, function_llvmRegularTypeMangledNameFromName (object->mProperty_mStructureName, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 330)).mProperty_string, ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 329)) ;
+  extensionMethod_enterInContext (object->mProperty_mSVCListAST, function_llvmRegularTypeMangledNameFromName (object->mProperty_mStructureName, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 333)).mProperty_string, ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 333)) ;
+  extensionMethod_enterInContext (object->mProperty_mGuardListAST, function_llvmRegularTypeMangledNameFromName (object->mProperty_mStructureName, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 334)).mProperty_string, ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 334)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -7863,11 +7863,11 @@ static void extensionMethod_structureDeclaration_semanticAnalysis (const cPtr_ab
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_structureDeclaration * object = (const cPtr_structureDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_structureDeclaration) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_structureType_13751 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mProperty_mTypeMap, object->mProperty_mStructureName, inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 345)) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_structureType_13769 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mProperty_mTypeMap, object->mProperty_mStructureName, inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 346)) ;
   const GALGAS_structureDeclaration temp_0 = object ;
-  callExtensionMethod_functionSemanticAnalysis ((const cPtr_structureDeclaration *) temp_0.ptr (), var_structureType_13751, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 347)) ;
-  extensionMethod_svcSemanticAnalysis (object->mProperty_mSVCListAST, var_structureType_13751, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 354)) ;
-  extensionMethod_guardSemanticAnalysis (object->mProperty_mGuardListAST, var_structureType_13751, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 361)) ;
+  callExtensionMethod_functionSemanticAnalysis ((const cPtr_structureDeclaration *) temp_0.ptr (), var_structureType_13769, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 348)) ;
+  extensionMethod_svcSemanticAnalysis (object->mProperty_mSVCListAST, var_structureType_13769, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 355)) ;
+  extensionMethod_guardSemanticAnalysis (object->mProperty_mGuardListAST, var_structureType_13769, constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 362)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

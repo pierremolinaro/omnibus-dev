@@ -13,24 +13,6 @@ struct @routineDescriptor {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @newRoutineMapForContext { # Key is a routine name
-#  @newRoutineSignatureMapForContext mSignatureMap
-#
-#  insert insertKey error message "the '%K' routine is already declared in %L"
-#  search searchKey error message "there is no '%K' routine"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#map @newRoutineSignatureMapForContext { # Key is the signature name
-#  @routineDescriptor mDescriptor
-#
-#  insert insertKey error message "the '%K' routine is already declared in %L"
-#  search searchKey error message "there is no '%K' routine"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 func routineMangledNameFromAST ?let @string inReceiverTypeName
                                ?let @lstring inRoutineName
                                ?let @procFormalArgumentList inFormalArgumentList-> @lstring
@@ -108,19 +90,7 @@ func argumentSignatureFromEffectiveArgumentList ?let @location inRoutineNameLoca
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @routineMapForContext { # Key is a mangled name
-#  @lstring inRoutineName
-#  @lstring mArgumentSignature
-#  @lstring mRoutineLLVMName
-#  @routineDescriptor mDescriptor
-#
-#  insert insertKey error message "the '%K' routine is already declared in %L"
-#  search searchKey error message "there is no '%K' routine"
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-map @internalRoutineArgumentSignatureMapForContext { # argument signature is the key
+map @routineArgumentSignatureMapForContext { # argument signature is the key
   @lstring mRoutineLLVMName
   @routineDescriptor mDescriptor
 
@@ -131,7 +101,7 @@ map @internalRoutineArgumentSignatureMapForContext { # argument signature is the
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @internalRoutineMapForContext { # Key is a mangled name
-  @internalRoutineArgumentSignatureMapForContext mInternalRoutineArgumentSignatureMapForContext
+  @routineArgumentSignatureMapForContext mRoutineArgumentSignatureMapForContext
 
   insert insertKey error message "the '%K' routine is already declared in %L"
   search searchKey error message "there is no '%K' routine"
@@ -152,19 +122,19 @@ setter @routineMapForContext insertKey
   ?let @routineDescriptor inDescriptor
 {
   with inRoutineName.string in !?mInternalRoutineMapForContext do
-    [!?mInternalRoutineArgumentSignatureMapForContext insertKey
+    [!?mRoutineArgumentSignatureMapForContext insertKey
       !inArgumentSignature
       !inRoutineLLVMName
       !inDescriptor
     ]
   else
-    @internalRoutineArgumentSignatureMapForContext internalRoutineArgumentSignatureMapForContext = {}
-    [!?internalRoutineArgumentSignatureMapForContext insertKey
+    @routineArgumentSignatureMapForContext routineArgumentSignatureMapForContext = {}
+    [!?routineArgumentSignatureMapForContext insertKey
       !inArgumentSignature
       !inRoutineLLVMName
       !inDescriptor
     ]
-    [!?mInternalRoutineMapForContext insertKey !inRoutineName !internalRoutineArgumentSignatureMapForContext]
+    [!?mInternalRoutineMapForContext insertKey !inRoutineName !routineArgumentSignatureMapForContext]
   end
 }
 

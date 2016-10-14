@@ -39,6 +39,8 @@ setter @instructionListIR appendStoreFromReference
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue possibleFunction>>"
   case null :
     error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue null>>"
+  case functionProperty (* *) :
+    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue functionProperty>>"
   end
 }
 
@@ -108,6 +110,8 @@ setter @instructionListIR appendLoadFromReference
   case literalString (***) :
     outResultingValue = inSource
   case zero (*) :
+    outResultingValue = inSource
+  case functionProperty (* *) :
     outResultingValue = inSource
   end
 }

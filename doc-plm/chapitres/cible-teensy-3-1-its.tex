@@ -803,14 +803,13 @@ L'interruption \texttt{SysTick} est particulière. Elle est programmé par la ro
   \item appelle la routine \plm+userSystickHandler+.
 \end{itemize}
 
-Cette routine \plm+userSystickHandler+ est définie par :
+Cette routine \plm+userSystickHandler+ est définie par [À REVOIR] :
 
 \begin{PLM}[1]
-public func service userTickHandler @weak () {
+public func service userTickHandler () {
 }
 \end{PLM}
 
-Comme elle est déclarée avec l'attribut \plm+@weak+, elle peut être redéfinie par l'utilisateur. Elle s'exécute en mode \plm=service=, si bien que l'on peut appeler des services de l'exécutif qui débloquent des tâches.
 
 
 
