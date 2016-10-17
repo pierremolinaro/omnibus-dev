@@ -78,7 +78,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -97,6 +97,8 @@ override method @forLowerUpperBoundInstructionAST analyze
   case staticInteger :
     error mTypeName : "an integer type is required here"
   case structure (* * * *) :
+    error mTypeName : "an integer type is required here"
+  case pointer (*) :
     error mTypeName : "an integer type is required here"
   case function (*) :
     error mTypeName : "an integer type is required here"

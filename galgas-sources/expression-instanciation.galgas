@@ -48,7 +48,7 @@ override method @instanciationAST analyzeExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
+  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {

@@ -1016,6 +1016,11 @@ class GALGAS_unifiedTypeMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
+  public : static void class_method_makeOptionalProxy (class GALGAS_unifiedTypeMap & ioArgument0,
+                                                       class GALGAS_lstring constinArgument1,
+                                                       class GALGAS_unifiedTypeMap_2D_proxy & outArgument2
+                                                       COMMA_LOCATION_ARGS) ;
+
   public : static void class_method_makeProxy (class GALGAS_unifiedTypeMap & ioArgument0,
                                                class GALGAS_lstring constinArgument1,
                                                class GALGAS_unifiedTypeMap_2D_proxy & outArgument2
@@ -6578,7 +6583,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
     kEnum_staticInteger,
     kEnum_opaque,
     kEnum_arrayType,
-    kEnum_function
+    kEnum_function,
+    kEnum_pointer
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -6633,6 +6639,9 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                             const class GALGAS_uint & inOperand1
                                                             COMMA_LOCATION_ARGS) ;
 
+  public : static class GALGAS_typeKind constructor_pointer (const class GALGAS_typeKind & inOperand0
+                                                             COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_typeKind constructor_staticInteger (LOCATION_ARGS) ;
 
   public : static class GALGAS_typeKind constructor_structure (const class GALGAS_lstring & inOperand0,
@@ -6679,6 +6688,10 @@ class GALGAS_typeKind : public AC_GALGAS_root {
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG void method_pointer (class GALGAS_typeKind & outArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_structure (class GALGAS_lstring & outArgument0,
                                                    class GALGAS_propertyMap & outArgument1,
                                                    class GALGAS_propertyList & outArgument2,
@@ -6702,6 +6715,8 @@ class GALGAS_typeKind : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOpaque (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPointer (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStaticInteger (LOCATION_ARGS) const ;
 
@@ -6972,6 +6987,22 @@ class cEnumAssociatedValues_typeKind_function : public cEnumAssociatedValues {
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_typeKind_function (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_typeKind_pointer : public cEnumAssociatedValues {
+  public : const GALGAS_typeKind mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_typeKind_pointer (const GALGAS_typeKind & inAssociatedValue0
+                                                   COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_typeKind_pointer (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

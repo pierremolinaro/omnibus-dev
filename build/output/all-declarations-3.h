@@ -354,13 +354,13 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_targetAccessKind ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                           @variableMap_2D_proxy map proxy                                           *
+//                                        @unifiedSymbolMap_2D_proxy map proxy                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_variableMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
+class GALGAS_unifiedSymbolMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
 //--------------------------------- Default constructor
-  public : GALGAS_variableMap_2D_proxy (void) ;
+  public : GALGAS_unifiedSymbolMap_2D_proxy (void) ;
 
 //-- Start of generic part --*
 
@@ -368,61 +368,66 @@ class GALGAS_variableMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_variableMap_2D_proxy extractObject (const GALGAS_object & inObject,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_unifiedSymbolMap_2D_proxy extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_variableMap_2D_proxy constructor_neutralAccess (const class GALGAS_variableMap & inOperand0,
-                                                                               const class GALGAS_lstring & inOperand1,
-                                                                               class C_Compiler * inCompiler
-                                                                               COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_unifiedSymbolMap_2D_proxy constructor_neutralAccess (const class GALGAS_unifiedSymbolMap & inOperand0,
+                                                                                    const class GALGAS_lstring & inOperand1,
+                                                                                    class C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_variableMap_2D_proxy constructor_null (LOCATION_ARGS) ;
+  public : static class GALGAS_unifiedSymbolMap_2D_proxy constructor_null (LOCATION_ARGS) ;
 
-  public : static class GALGAS_variableMap_2D_proxy constructor_searchForConstantMethodCall (const class GALGAS_variableMap & inOperand0,
-                                                                                             const class GALGAS_lstring & inOperand1,
-                                                                                             class C_Compiler * inCompiler
-                                                                                             COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_unifiedSymbolMap_2D_proxy constructor_searchForConstantMethodCall (const class GALGAS_unifiedSymbolMap & inOperand0,
+                                                                                                  const class GALGAS_lstring & inOperand1,
+                                                                                                  class C_Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_variableMap_2D_proxy constructor_searchForDropAccess (const class GALGAS_variableMap & inOperand0,
-                                                                                     const class GALGAS_lstring & inOperand1,
-                                                                                     class C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_variableMap_2D_proxy constructor_searchForMethodCall (const class GALGAS_variableMap & inOperand0,
-                                                                                     const class GALGAS_lstring & inOperand1,
-                                                                                     class C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_variableMap_2D_proxy constructor_searchForReadAccess (const class GALGAS_variableMap & inOperand0,
-                                                                                     const class GALGAS_lstring & inOperand1,
-                                                                                     class C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
-
-  public : static class GALGAS_variableMap_2D_proxy constructor_searchForReadWriteAccess (const class GALGAS_variableMap & inOperand0,
+  public : static class GALGAS_unifiedSymbolMap_2D_proxy constructor_searchForDropAccess (const class GALGAS_unifiedSymbolMap & inOperand0,
                                                                                           const class GALGAS_lstring & inOperand1,
                                                                                           class C_Compiler * inCompiler
                                                                                           COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_variableMap_2D_proxy constructor_searchForWriteAccess (const class GALGAS_variableMap & inOperand0,
-                                                                                      const class GALGAS_lstring & inOperand1,
-                                                                                      class C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_unifiedSymbolMap_2D_proxy constructor_searchForMethodCall (const class GALGAS_unifiedSymbolMap & inOperand0,
+                                                                                          const class GALGAS_lstring & inOperand1,
+                                                                                          class C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_unifiedSymbolMap_2D_proxy constructor_searchForReadAccess (const class GALGAS_unifiedSymbolMap & inOperand0,
+                                                                                          const class GALGAS_lstring & inOperand1,
+                                                                                          class C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_unifiedSymbolMap_2D_proxy constructor_searchForReadWriteAccess (const class GALGAS_unifiedSymbolMap & inOperand0,
+                                                                                               const class GALGAS_lstring & inOperand1,
+                                                                                               class C_Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_unifiedSymbolMap_2D_proxy constructor_searchForWriteAccess (const class GALGAS_unifiedSymbolMap & inOperand0,
+                                                                                           const class GALGAS_lstring & inOperand1,
+                                                                                           class C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
-  public : static void class_method_makeProxy (class GALGAS_variableMap & ioArgument0,
+  public : static void class_method_makeOptionalProxy (class GALGAS_unifiedSymbolMap & ioArgument0,
+                                                       class GALGAS_lstring constinArgument1,
+                                                       class GALGAS_unifiedSymbolMap_2D_proxy & outArgument2
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : static void class_method_makeProxy (class GALGAS_unifiedSymbolMap & ioArgument0,
                                                class GALGAS_lstring constinArgument1,
-                                               class GALGAS_variableMap_2D_proxy & outArgument2
+                                               class GALGAS_unifiedSymbolMap_2D_proxy & outArgument2
                                                COMMA_LOCATION_ARGS) ;
 
-  public : static void class_method_makeProxyFromString (class GALGAS_variableMap & ioArgument0,
+  public : static void class_method_makeProxyFromString (class GALGAS_unifiedSymbolMap & ioArgument0,
                                                          class GALGAS_string constinArgument1,
-                                                         class GALGAS_variableMap_2D_proxy & outArgument2
+                                                         class GALGAS_unifiedSymbolMap_2D_proxy & outArgument2
                                                          COMMA_LOCATION_ARGS) ;
 
 
@@ -446,12 +451,12 @@ class GALGAS_variableMap_2D_proxy : public AC_GALGAS_uniqueMapProxy {
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
-} ; // End of GALGAS_variableMap_2D_proxy class
+} ; // End of GALGAS_unifiedSymbolMap_2D_proxy class
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_variableMap_2D_proxy ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedSymbolMap_2D_proxy ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -4931,101 +4936,85 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_expression_ (GALGAS_expressionAST & outArgument0,
                                         C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'expression_1' non terminal
+//------------------------------------- 'expression_addition' non terminal
 //--- 'parse' label
-  public : virtual void nt_expression_5F__31__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_expression_5F_addition_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F__31__ (GALGAS_expressionAST & outArgument0,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_10' non terminal
-//--- 'parse' label
-  public : virtual void nt_expression_5F__31__30__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_expression_5F__31__30__ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_addition_ (GALGAS_expressionAST & outArgument0,
                                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'expression_11' non terminal
+//------------------------------------- 'expression_bitwise_and' non terminal
 //--- 'parse' label
-  public : virtual void nt_expression_5F__31__31__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_expression_5F_bitwise_5F_and_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F__31__31__ (GALGAS_expressionAST & outArgument0,
+  public : virtual void nt_expression_5F_bitwise_5F_and_ (GALGAS_expressionAST & outArgument0,
+                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_bitwise_or' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F_bitwise_5F_or_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F_bitwise_5F_or_ (GALGAS_expressionAST & outArgument0,
+                                                         C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_bitwise_xor' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F_bitwise_5F_xor_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F_bitwise_5F_xor_ (GALGAS_expressionAST & outArgument0,
+                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_comparison' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F_comparison_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F_comparison_ (GALGAS_expressionAST & outArgument0,
+                                                      C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_equality' non terminal
+//--- 'parse' label
+  public : virtual void nt_expression_5F_equality_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_expression_5F_equality_ (GALGAS_expressionAST & outArgument0,
                                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'expression_12' non terminal
+//------------------------------------- 'expression_logical_and' non terminal
 //--- 'parse' label
-  public : virtual void nt_expression_5F__31__32__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_expression_5F_logical_5F_and_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F__31__32__ (GALGAS_expressionAST & outArgument0,
-                                                    C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_expression_5F_logical_5F_and_ (GALGAS_expressionAST & outArgument0,
+                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'expression_2' non terminal
+//------------------------------------- 'expression_logical_xor' non terminal
 //--- 'parse' label
-  public : virtual void nt_expression_5F__32__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_expression_5F_logical_5F_xor_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F__32__ (GALGAS_expressionAST & outArgument0,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_expression_5F_logical_5F_xor_ (GALGAS_expressionAST & outArgument0,
+                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'expression_3' non terminal
+//------------------------------------- 'expression_product' non terminal
 //--- 'parse' label
-  public : virtual void nt_expression_5F__33__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_expression_5F_product_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F__33__ (GALGAS_expressionAST & outArgument0,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_expression_5F_product_ (GALGAS_expressionAST & outArgument0,
+                                                   C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'expression_4' non terminal
+//------------------------------------- 'expression_shift' non terminal
 //--- 'parse' label
-  public : virtual void nt_expression_5F__34__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_expression_5F_shift_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_expression_5F__34__ (GALGAS_expressionAST & outArgument0,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_5' non terminal
-//--- 'parse' label
-  public : virtual void nt_expression_5F__35__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_expression_5F__35__ (GALGAS_expressionAST & outArgument0,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_6' non terminal
-//--- 'parse' label
-  public : virtual void nt_expression_5F__36__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_expression_5F__36__ (GALGAS_expressionAST & outArgument0,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_7' non terminal
-//--- 'parse' label
-  public : virtual void nt_expression_5F__37__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_expression_5F__37__ (GALGAS_expressionAST & outArgument0,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_8' non terminal
-//--- 'parse' label
-  public : virtual void nt_expression_5F__38__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_expression_5F__38__ (GALGAS_expressionAST & outArgument0,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_9' non terminal
-//--- 'parse' label
-  public : virtual void nt_expression_5F__39__parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_expression_5F__39__ (GALGAS_expressionAST & outArgument0,
-                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_expression_5F_shift_ (GALGAS_expressionAST & outArgument0,
+                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'function' non terminal
 //--- 'parse' label

@@ -223,12 +223,7 @@ method @functionDeclarationListAST enterFunctionInContext
   #--- Signature
     routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
   #--- Return type
-    @unifiedTypeMap-proxy returnType
-    if function.mFunctionReturnTypeName.string == "" then
-      returnType = .null
-    else
-      [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?returnType]
-    end
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
   #--- Attributes
     var globalFunction = false
     var canMutateProperties = false

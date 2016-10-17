@@ -108,11 +108,9 @@ method @panicClauseListAST-element panicSemanticAnalysis
   initialVariableMap (
     !context:inContext
     !mode:.panicMode
-#    !userMode:false
-#    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@variableMap variableMap
+    ?@unifiedSymbolMap variableMap
   )
 #--- Insert predefined input arguments
   let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}

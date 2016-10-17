@@ -89,7 +89,7 @@ override method @varInstructionWithAssignmentAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -161,7 +161,7 @@ override method @varInstructionAST analyze
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {

@@ -183,7 +183,7 @@ proc guardSemanticAnalysis
     !mode:.guardMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@variableMap variableMap
+    ?@unifiedSymbolMap variableMap
   )
   @procFormalArgumentListForGeneration formalArguments = {}
   @guardKindGenerationIR convenienceGuardGenerationIR
@@ -282,11 +282,9 @@ method @callInstructionAST baseGuardAnalyze
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   @allocaList baseGuardAllocaList = {}

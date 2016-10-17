@@ -63,7 +63,7 @@ override method @literalBooleanInExpressionAST analyzeExpression
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap unused ioVariableMap
+  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult

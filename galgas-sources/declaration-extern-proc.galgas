@@ -78,14 +78,8 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
 #--- Signature
   routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
 #--- Enter in context
-  @unifiedTypeMap-proxy returnType
-  if mReturnTypeName.string == "" then
-    returnType = .null
-  else
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReturnTypeName ?returnType]
-  end
+  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnType]
   [!?ioContext.mRoutineMapForContext insertKey
-#    !routineMangledName
     !mExternProcedureName
     !argumentSignatureFromFormalArgumentList (!mExternProcedureName !mProcFormalArgumentList)
     !mRoutineNameForGeneration
@@ -139,7 +133,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !mode:mMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@variableMap variableMap
+    ?@unifiedSymbolMap variableMap
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}
