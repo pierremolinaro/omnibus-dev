@@ -50,7 +50,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
@@ -86,14 +86,23 @@ override method @prefixOperatorExpressionAST analyzeExpression
     prefixOperatorMap = inContext.mUnsignedComplementOperatorMap
     binaryOperator = .xor
     switch [expressionResult kind]
-    case arrayType (* * * * *) : error mOperatorLocation : "internal error" : leftOperand
-    case opaque (* *) : error mOperatorLocation : "internal error" : leftOperand
-    case boolean : error mOperatorLocation : "internal error" : leftOperand
-    case literalString : error mOperatorLocation : "internal error" : leftOperand
-    case enumeration (* *) :  error mOperatorLocation : "internal error" : leftOperand
-    case structure (* * * *) : error mOperatorLocation : "internal error" : leftOperand
-    case function (*) : error mOperatorLocation : "internal error" : leftOperand
-    case staticInteger : # error mOperatorLocation : "internal error" : leftOperand
+    case arrayType (* * * * *) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case opaque (* *) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case boolean :
+      error mOperatorLocation : "internal error" : leftOperand
+    case literalString :
+      error mOperatorLocation : "internal error" : leftOperand
+    case enumeration (* *) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case structure (* * * *) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case function (*) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case pointer (*) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case staticInteger :
       if inOptionalTargetType == .null then
         error mOperatorLocation : "the ~ operator cannot be applied to static int, without inferred type" : leftOperand
       elsif [[inOptionalTargetType kind] isInteger] then

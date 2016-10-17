@@ -63,7 +63,7 @@ abstract method @instructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 
@@ -79,7 +79,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -117,7 +117,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
 {

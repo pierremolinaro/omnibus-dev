@@ -158,7 +158,7 @@ proc initSemanticAnalysis
 #    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@variableMap variableMap
+    ?@unifiedSymbolMap variableMap
   )
 #--- Analyze instruction list
   outInstructionGenerationList = {}

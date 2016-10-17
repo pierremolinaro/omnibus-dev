@@ -9,7 +9,7 @@ proc handleSubscriptInAssignmentAndExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
 
   ?let @expressionAST inIndexExpression 
@@ -67,7 +67,7 @@ private proc handleSubscriptArrayInAssignmentAndExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
@@ -160,7 +160,7 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@variableMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation

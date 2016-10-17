@@ -764,7 +764,7 @@ void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArg
 
 void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
                                    const class GALGAS_procFormalArgumentList constinArgument1,
-                                   class GALGAS_variableMap & ioArgument2,
+                                   class GALGAS_unifiedSymbolMap & ioArgument2,
                                    class GALGAS_procFormalArgumentListForGeneration & ioArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;

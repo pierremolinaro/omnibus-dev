@@ -248,7 +248,7 @@ method @globalVarDeclarationList-element enterInContext
   @allocaList allocaList = {}
   variableMapWithConstants (
     !context:ioContext
-    ?@variableMap variableMap
+    ?@unifiedSymbolMap variableMap
   )
   [mSourceExpression analyzeExpression
      !self:.null

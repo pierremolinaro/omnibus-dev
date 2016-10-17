@@ -9,7 +9,7 @@ proc initialVariableMap
   ?mode:let @mode inRequiredMode
   ?globalsAreConstant:@bool inGlobalsAreConstant
   ?returnTypeName:let @lstring inReturnTypeName
-  !@variableMap outVariableMap
+  !@unifiedSymbolMap outVariableMap
 {
   outVariableMap = .emptyMap
 #------------------------------------------------------- Add modules
@@ -140,7 +140,7 @@ proc initialVariableMap
 
 proc variableMapWithConstants
   ?context:let @semanticContext inContext
-  !@variableMap outVariableMap
+  !@unifiedSymbolMap outVariableMap
 {
   outVariableMap = .emptyMap
 #--- Add global constants
@@ -174,7 +174,7 @@ proc getNewTempVariable
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sharedmap @variableMap %selectors {
+sharedmap @unifiedSymbolMap %selectors {
   @unifiedTypeMap-proxy type
   @bool readAccessAllowed
   @objectIR objectIR

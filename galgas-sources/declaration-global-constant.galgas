@@ -98,7 +98,7 @@ override method @globalConstantDeclaration enterInContext
     !mode:.bootMode
     !globalsAreConstant:true # Any value, there is no defined global variable at this stage
     !returnTypeName:["" nowhere]
-    ?@variableMap variableMap
+    ?@unifiedSymbolMap variableMap
   )
 #--- Get destination type
   @unifiedTypeMap-proxy annotationType

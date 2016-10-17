@@ -19,7 +19,7 @@ graph @subprogramInvocationGraph (@lstringlist) {
 proc enterFormalArguments
   ?context:let @semanticContext inContext
   ?let @procFormalArgumentList inFormalArgumentPassingMode
-  ?!@variableMap ioVariableMap
+  ?!@unifiedSymbolMap ioVariableMap
   ?!@procFormalArgumentListForGeneration ioFormalArguments
 {
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
@@ -88,7 +88,7 @@ proc routineSemanticAnalysis
     !mode:inRoutineMode
     !globalsAreConstant:false
     !returnTypeName:inReturnTypeName
-    ?@variableMap variableMap
+    ?@unifiedSymbolMap variableMap
   )
 #--- Analyse formal arguments
   @procFormalArgumentListForGeneration formalArguments = {}

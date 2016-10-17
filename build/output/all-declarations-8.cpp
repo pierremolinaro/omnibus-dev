@@ -731,40 +731,40 @@ C_PrologueEpilogue gMethod_functionCallIR_enterAccessibleEntities (defineExtensi
 
 void routine_enterFormalArguments (const GALGAS_semanticContext constinArgument_inContext,
                                    const GALGAS_procFormalArgumentList constinArgument_inFormalArgumentPassingMode,
-                                   GALGAS_variableMap & ioArgument_ioVariableMap,
+                                   GALGAS_unifiedSymbolMap & ioArgument_ioVariableMap,
                                    GALGAS_procFormalArgumentListForGeneration & ioArgument_ioFormalArguments,
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_procFormalArgumentList enumerator_1231 (constinArgument_inFormalArgumentPassingMode, kENUMERATION_UP) ;
-  while (enumerator_1231.hasCurrentObject ()) {
-    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy_1252 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mProperty_mTypeMap, enumerator_1231.current_mFormalArgumentTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 26)) ;
-    ioArgument_ioFormalArguments.addAssign_operation (enumerator_1231.current_mFormalArgumentPassingMode (HERE), var_typeProxy_1252, enumerator_1231.current_mFormalArgumentName (HERE).mProperty_string  COMMA_SOURCE_FILE ("semantic-routines.galgas", 27)) ;
-    switch (enumerator_1231.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
+  cEnumerator_procFormalArgumentList enumerator_1236 (constinArgument_inFormalArgumentPassingMode, kENUMERATION_UP) ;
+  while (enumerator_1236.hasCurrentObject ()) {
+    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy_1257 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mProperty_mTypeMap, enumerator_1236.current_mFormalArgumentTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 26)) ;
+    ioArgument_ioFormalArguments.addAssign_operation (enumerator_1236.current_mFormalArgumentPassingMode (HERE), var_typeProxy_1257, enumerator_1236.current_mFormalArgumentName (HERE).mProperty_string  COMMA_SOURCE_FILE ("semantic-routines.galgas", 27)) ;
+    switch (enumerator_1236.current_mFormalArgumentPassingMode (HERE).enumValue ()) {
     case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_input:
       {
         {
-        ioArgument_ioVariableMap.setter_insertConstantInputFormalArgument (enumerator_1231.current_mFormalArgumentName (HERE), var_typeProxy_1252, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1252, enumerator_1231.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 34)), extensionGetter_copyable (var_typeProxy_1252, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 35)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 30)) ;
+        ioArgument_ioVariableMap.setter_insertConstantInputFormalArgument (enumerator_1236.current_mFormalArgumentName (HERE), var_typeProxy_1257, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1257, enumerator_1236.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 34)), extensionGetter_copyable (var_typeProxy_1257, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 35)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 30)) ;
         }
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
       {
         {
-        ioArgument_ioVariableMap.setter_insertInputOutputFormalArgument (enumerator_1231.current_mFormalArgumentName (HERE), var_typeProxy_1252, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1252, enumerator_1231.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 43)), extensionGetter_copyable (var_typeProxy_1252, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 44)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 39)) ;
+        ioArgument_ioVariableMap.setter_insertInputOutputFormalArgument (enumerator_1236.current_mFormalArgumentName (HERE), var_typeProxy_1257, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1257, enumerator_1236.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 43)), extensionGetter_copyable (var_typeProxy_1257, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 44)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 39)) ;
         }
       }
       break ;
     case GALGAS_procFormalArgumentPassingMode::kEnum_output:
       {
         {
-        ioArgument_ioVariableMap.setter_insertOutputFormalArgument (enumerator_1231.current_mFormalArgumentName (HERE), var_typeProxy_1252, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1252, enumerator_1231.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 52)), extensionGetter_copyable (var_typeProxy_1252, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 53)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 48)) ;
+        ioArgument_ioVariableMap.setter_insertOutputFormalArgument (enumerator_1236.current_mFormalArgumentName (HERE), var_typeProxy_1257, GALGAS_bool (true), GALGAS_objectIR::constructor_localVariableReference (var_typeProxy_1257, enumerator_1236.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("semantic-routines.galgas", 52)), extensionGetter_copyable (var_typeProxy_1257, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 53)), GALGAS_bool (true), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 48)) ;
         }
       }
       break ;
     }
-    enumerator_1231.gotoNextObject () ;
+    enumerator_1236.gotoNextObject () ;
   }
 }
 
@@ -799,25 +799,25 @@ void routine_routineSemanticAnalysis (const GALGAS_unifiedTypeMap_2D_proxy const
   }else if (kBoolFalse == test_1) {
     temp_0 = GALGAS_string ("$").add_operation (constinArgument_inSelfType.getter_key (inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 81)) ;
   }
-  GALGAS_lstring var_routineMangledName_3407 = function_routineMangledNameFromAST (temp_0, constinArgument_inRoutineName, constinArgument_inRoutineFormalArgumentList, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 80)) ;
-  GALGAS_variableMap var_variableMap_3746 ;
+  GALGAS_lstring var_routineMangledName_3412 = function_routineMangledNameFromAST (temp_0, constinArgument_inRoutineName, constinArgument_inRoutineFormalArgumentList, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 80)) ;
+  GALGAS_unifiedSymbolMap var_variableMap_3756 ;
   {
-  routine_initialVariableMap (constinArgument_inContext, constinArgument_inRoutineMode, GALGAS_bool (false), constinArgument_inReturnTypeName, var_variableMap_3746, inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 86)) ;
+  routine_initialVariableMap (constinArgument_inContext, constinArgument_inRoutineMode, GALGAS_bool (false), constinArgument_inReturnTypeName, var_variableMap_3756, inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 86)) ;
   }
-  GALGAS_procFormalArgumentListForGeneration var_formalArguments_3835 = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 94)) ;
+  GALGAS_procFormalArgumentListForGeneration var_formalArguments_3845 = GALGAS_procFormalArgumentListForGeneration::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 94)) ;
   {
-  routine_enterFormalArguments (constinArgument_inContext, constinArgument_inRoutineFormalArgumentList, var_variableMap_3746, var_formalArguments_3835, inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 95)) ;
+  routine_enterFormalArguments (constinArgument_inContext, constinArgument_inRoutineFormalArgumentList, var_variableMap_3756, var_formalArguments_3845, inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 95)) ;
   }
-  const enumGalgasBool test_2 = ioArgument_ioTemporaries.mProperty_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineMangledName_3407.mProperty_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 102)).operator_not (SOURCE_FILE ("semantic-routines.galgas", 102)).boolEnum () ;
+  const enumGalgasBool test_2 = ioArgument_ioTemporaries.mProperty_mSubprogramInvocationGraph.getter_isNodeDefined (var_routineMangledName_3412.mProperty_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 102)).operator_not (SOURCE_FILE ("semantic-routines.galgas", 102)).boolEnum () ;
   if (kBoolTrue == test_2) {
     {
-    ioArgument_ioTemporaries.mProperty_mSubprogramInvocationGraph.setter_addNode (var_routineMangledName_3407, var_routineMangledName_3407, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 103)) ;
+    ioArgument_ioTemporaries.mProperty_mSubprogramInvocationGraph.setter_addNode (var_routineMangledName_3412, var_routineMangledName_3412, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 103)) ;
     }
   }
-  GALGAS_allocaList var_allocaList_4277 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 109)) ;
-  GALGAS_instructionListIR var_instructionGenerationList_4329 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 110)) ;
-  extensionMethod_analyzeRoutineInstructionList (constinArgument_inRoutineInstructionList, constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inRoutineCanMutateProperties, var_routineMangledName_3407, constinArgument_inContext, constinArgument_inRoutineMode, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mProperty_mStaticStringMap, var_variableMap_3746, var_allocaList_4277, var_instructionGenerationList_4329, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 111)) ;
-  var_variableMap_3746.method_checkAutomatonStates (constinArgument_inEndOfRoutineDeclaration, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 126)) ;
+  GALGAS_allocaList var_allocaList_4287 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 109)) ;
+  GALGAS_instructionListIR var_instructionGenerationList_4339 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("semantic-routines.galgas", 110)) ;
+  extensionMethod_analyzeRoutineInstructionList (constinArgument_inRoutineInstructionList, constinArgument_inSelfType, constinArgument_inDirectAccessToPropertiesAllowed, constinArgument_inRoutineCanMutateProperties, var_routineMangledName_3412, constinArgument_inContext, constinArgument_inRoutineMode, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct.mProperty_mStaticStringMap, var_variableMap_3756, var_allocaList_4287, var_instructionGenerationList_4339, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 111)) ;
+  var_variableMap_3756.method_checkAutomatonStates (constinArgument_inEndOfRoutineDeclaration, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 126)) ;
   GALGAS_unifiedTypeMap_2D_proxy temp_3 ;
   const enumGalgasBool test_4 = GALGAS_bool (kIsEqual, constinArgument_inReturnTypeName.mProperty_string.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_4) {
@@ -825,9 +825,9 @@ void routine_routineSemanticAnalysis (const GALGAS_unifiedTypeMap_2D_proxy const
   }else if (kBoolFalse == test_4) {
     temp_3 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.mProperty_mTypeMap, constinArgument_inReturnTypeName, inCompiler  COMMA_SOURCE_FILE ("semantic-routines.galgas", 132)) ;
   }
-  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5024 = temp_3 ;
+  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5034 = temp_3 ;
   {
-  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineMapIR.setter_insertKey (var_routineMangledName_3407, constinArgument_inSelfType, var_routineMangledName_3407, var_formalArguments_3835, var_allocaList_4277, var_instructionGenerationList_4329, ioArgument_ioIntermediateCodeStruct.mProperty_mRequiredProcedureSet.getter_hasKey (var_routineMangledName_3407.mProperty_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 141)), constinArgument_inWarnIfUnused, constinArgument_inGlobalFunction, constinArgument_inRoutineKind, var_returnType_5024, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 134)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineMapIR.setter_insertKey (var_routineMangledName_3412, constinArgument_inSelfType, var_routineMangledName_3412, var_formalArguments_3845, var_allocaList_4287, var_instructionGenerationList_4339, ioArgument_ioIntermediateCodeStruct.mProperty_mRequiredProcedureSet.getter_hasKey (var_routineMangledName_3412.mProperty_string COMMA_SOURCE_FILE ("semantic-routines.galgas", 141)), constinArgument_inWarnIfUnused, constinArgument_inGlobalFunction, constinArgument_inRoutineKind, var_returnType_5034, GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 134)) ;
   }
 }
 
@@ -7076,10 +7076,16 @@ void routine_declareLLVMTypes (const GALGAS_unifiedTypeMap constinArgument_inTyp
       {
       }
       break ;
+    case GALGAS_typeKind::kEnum_pointer:
+      {
+        const cEnumAssociatedValues_typeKind_pointer * extractPtr_21765 = (const cEnumAssociatedValues_typeKind_pointer *) (enumerator_21115.current_kind (HERE).unsafePointer ()) ;
+        const GALGAS_typeKind extractedValue_pointee = extractPtr_21765->mAssociatedValue0 ;
+      }
+      break ;
     }
     enumerator_21115.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 489)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 490)) ;
 }
 
 

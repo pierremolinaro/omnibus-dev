@@ -1504,7 +1504,7 @@ void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructi
                                                     const class GALGAS_mode constin_inCurrentMode,
                                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                    class GALGAS_variableMap & io_ioVariableMap,
+                                                    class GALGAS_unifiedSymbolMap & io_ioVariableMap,
                                                     class GALGAS_allocaList & io_ioAllocaList,
                                                     class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                     class C_Compiler * inCompiler
@@ -1520,55 +1520,55 @@ void routine_initialVariableMap (const class GALGAS_semanticContext constinArgum
                                  const class GALGAS_mode constinArgument1,
                                  class GALGAS_bool inArgument2,
                                  const class GALGAS_lstring constinArgument3,
-                                 class GALGAS_variableMap & outArgument4,
+                                 class GALGAS_unifiedSymbolMap & outArgument4,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               @variableMap unique map                                               *
+//                                            @unifiedSymbolMap unique map                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cMapElement_variableMap ;
+class cMapElement_unifiedSymbolMap ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const char * kSearchErrorMessage_variableMap_searchForReadAccess ;
+extern const char * kSearchErrorMessage_unifiedSymbolMap_searchForReadAccess ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const char * kSearchErrorMessage_variableMap_searchForWriteAccess ;
+extern const char * kSearchErrorMessage_unifiedSymbolMap_searchForWriteAccess ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const char * kSearchErrorMessage_variableMap_searchForReadWriteAccess ;
+extern const char * kSearchErrorMessage_unifiedSymbolMap_searchForReadWriteAccess ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const char * kSearchErrorMessage_variableMap_searchForDropAccess ;
+extern const char * kSearchErrorMessage_unifiedSymbolMap_searchForDropAccess ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const char * kSearchErrorMessage_variableMap_searchForConstantMethodCall ;
+extern const char * kSearchErrorMessage_unifiedSymbolMap_searchForConstantMethodCall ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const char * kSearchErrorMessage_variableMap_searchForMethodCall ;
+extern const char * kSearchErrorMessage_unifiedSymbolMap_searchForMethodCall ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const char * kSearchErrorMessage_variableMap_neutralAccess ;
+extern const char * kSearchErrorMessage_unifiedSymbolMap_neutralAccess ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
+class GALGAS_unifiedSymbolMap : public AC_GALGAS_uniqueMap {
 //--------------------------------- Default constructor
-  public : GALGAS_variableMap (void) ;
+  public : GALGAS_unifiedSymbolMap (void) ;
 
 //--------------------------------- Handle copy
-  public : GALGAS_variableMap (const GALGAS_variableMap & inSource) ;
-  public : GALGAS_variableMap & operator = (const GALGAS_variableMap & inSource) ;
+  public : GALGAS_unifiedSymbolMap (const GALGAS_unifiedSymbolMap & inSource) ;
+  public : GALGAS_unifiedSymbolMap & operator = (const GALGAS_unifiedSymbolMap & inSource) ;
 
 //-- Start of generic part --*
 
@@ -1576,12 +1576,12 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
   protected : virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_variableMap extractObject (const GALGAS_object & inObject,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
+  public : static GALGAS_unifiedSymbolMap extractObject (const GALGAS_object & inObject,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_variableMap constructor_emptyMap (LOCATION_ARGS) ;
+  public : static class GALGAS_unifiedSymbolMap constructor_emptyMap (LOCATION_ARGS) ;
 
 
 //--------------------------------- Setters
@@ -1850,23 +1850,23 @@ class GALGAS_variableMap : public AC_GALGAS_uniqueMap {
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
-  public : VIRTUAL_IN_DEBUG cMapElement_variableMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
-                                                                                         const GALGAS_string & inKey
-                                                                                         COMMA_LOCATION_ARGS) ;
+  public : VIRTUAL_IN_DEBUG cMapElement_unifiedSymbolMap * readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                              const GALGAS_string & inKey
+                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Friend
 
-  friend class cEnumerator_variableMap ;
+  friend class cEnumerator_unifiedSymbolMap ;
  
-} ; // End of GALGAS_variableMap class
+} ; // End of GALGAS_unifiedSymbolMap class
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   Enumerator declaration                                                                                            *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumerator_variableMap : public cGenericAbstractEnumerator {
-  public : cEnumerator_variableMap (const GALGAS_variableMap & inEnumeratedObject,
-                                    const typeEnumerationOrder inOrder) ;
+class cEnumerator_unifiedSymbolMap : public cGenericAbstractEnumerator {
+  public : cEnumerator_unifiedSymbolMap (const GALGAS_unifiedSymbolMap & inEnumeratedObject,
+                                         const typeEnumerationOrder inOrder) ;
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
@@ -1879,15 +1879,15 @@ class cEnumerator_variableMap : public cGenericAbstractEnumerator {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_variableMap ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedSymbolMap ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                       Class for element of '@variableMap' map                                       *
+//                                    Class for element of '@unifiedSymbolMap' map                                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cMapElement_variableMap : public cMapElement {
+class cMapElement_unifiedSymbolMap : public cMapElement {
 //--- Map attributes
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_type ;
   public : GALGAS_bool mProperty_readAccessAllowed ;
@@ -1896,13 +1896,13 @@ class cMapElement_variableMap : public cMapElement {
   public : GALGAS_bool mProperty_canBeUsedAsInputParameter ;
 
 //--- Constructor
-  public : cMapElement_variableMap (const GALGAS_lstring & inKey,
-                                    const GALGAS_unifiedTypeMap_2D_proxy & in_type,
-                                    const GALGAS_bool & in_readAccessAllowed,
-                                    const GALGAS_objectIR & in_objectIR,
-                                    const GALGAS_bool & in_copyable,
-                                    const GALGAS_bool & in_canBeUsedAsInputParameter
-                                    COMMA_LOCATION_ARGS) ;
+  public : cMapElement_unifiedSymbolMap (const GALGAS_lstring & inKey,
+                                         const GALGAS_unifiedTypeMap_2D_proxy & in_type,
+                                         const GALGAS_bool & in_readAccessAllowed,
+                                         const GALGAS_objectIR & in_objectIR,
+                                         const GALGAS_bool & in_copyable,
+                                         const GALGAS_bool & in_canBeUsedAsInputParameter
+                                         COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -2772,7 +2772,7 @@ typedef void (*extensionMethodSignature_expressionAST_analyzeExpression) (const 
                                                                           const class GALGAS_mode constinArgument6,
                                                                           class GALGAS_semanticTemporariesStruct & ioArgument7,
                                                                           class GALGAS_staticStringMap & ioArgument8,
-                                                                          class GALGAS_variableMap & ioArgument9,
+                                                                          class GALGAS_unifiedSymbolMap & ioArgument9,
                                                                           class GALGAS_allocaList & ioArgument10,
                                                                           class GALGAS_instructionListIR & ioArgument11,
                                                                           class GALGAS_objectIR & outArgument12,
@@ -2796,7 +2796,7 @@ void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inO
                                             const GALGAS_mode constin_inCurrentMode,
                                             GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                             GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                            GALGAS_variableMap & io_ioVariableMap,
+                                            GALGAS_unifiedSymbolMap & io_ioVariableMap,
                                             GALGAS_allocaList & io_ioAllocaList,
                                             GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                             GALGAS_objectIR & out_outResult,
@@ -3303,7 +3303,7 @@ typedef void (*extensionMethodSignature_instructionAST_analyze) (const class cPt
                                                                  const class GALGAS_mode constinArgument5,
                                                                  class GALGAS_semanticTemporariesStruct & ioArgument6,
                                                                  class GALGAS_staticStringMap & ioArgument7,
-                                                                 class GALGAS_variableMap & ioArgument8,
+                                                                 class GALGAS_unifiedSymbolMap & ioArgument8,
                                                                  class GALGAS_allocaList & ioArgument9,
                                                                  class GALGAS_instructionListIR & ioArgument10,
                                                                  class C_Compiler * inCompiler
@@ -3325,7 +3325,7 @@ void callExtensionMethod_analyze (const class cPtr_instructionAST * inObject,
                                   const GALGAS_mode constin_inCurrentMode,
                                   GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                   GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                  GALGAS_variableMap & io_ioVariableMap,
+                                  GALGAS_unifiedSymbolMap & io_ioVariableMap,
                                   GALGAS_allocaList & io_ioAllocaList,
                                   GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                   C_Compiler * inCompiler
@@ -3347,7 +3347,7 @@ void extensionMethod_analyzeBranchInstructionList (const class GALGAS_instructio
                                                    const class GALGAS_mode constin_inCurrentMode,
                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                                   class GALGAS_variableMap & io_ioVariableMap,
+                                                   class GALGAS_unifiedSymbolMap & io_ioVariableMap,
                                                    class GALGAS_allocaList & io_ioAllocaList,
                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                    class C_Compiler * inCompiler

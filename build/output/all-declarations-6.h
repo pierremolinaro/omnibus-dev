@@ -118,7 +118,7 @@ class GALGAS_objectIR function_checkAssignmentCompatibility (const class GALGAS_
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_variableMapWithConstants (const class GALGAS_semanticContext constinArgument0,
-                                       class GALGAS_variableMap & outArgument1,
+                                       class GALGAS_unifiedSymbolMap & outArgument1,
                                        class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 
@@ -179,7 +179,7 @@ typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (co
                                                                               const class GALGAS_mode constinArgument3,
                                                                               class GALGAS_semanticTemporariesStruct & ioArgument4,
                                                                               class GALGAS_staticStringMap & ioArgument5,
-                                                                              class GALGAS_variableMap & ioArgument6,
+                                                                              class GALGAS_unifiedSymbolMap & ioArgument6,
                                                                               class GALGAS_guardKindGenerationIR & outArgument7,
                                                                               class C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
@@ -198,7 +198,7 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
                                            const GALGAS_mode constin_inMode,
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                           GALGAS_variableMap & io_ioVariableMap,
+                                           GALGAS_unifiedSymbolMap & io_ioVariableMap,
                                            GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
@@ -220,7 +220,7 @@ void routine_analyzeFunctionCallInExpression (const class GALGAS_unifiedTypeMap_
                                               const class GALGAS_mode constinArgument8,
                                               class GALGAS_semanticTemporariesStruct & ioArgument9,
                                               class GALGAS_staticStringMap & ioArgument10,
-                                              class GALGAS_variableMap & ioArgument11,
+                                              class GALGAS_unifiedSymbolMap & ioArgument11,
                                               class GALGAS_allocaList & ioArgument12,
                                               class GALGAS_instructionListIR & ioArgument13,
                                               class GALGAS_procCallEffectiveParameterListIR & outArgument14,
