@@ -233,6 +233,11 @@ proc buildSemanticContext
     !outSemanticContext.mGlobalConstantMap
     !sourceFile:inSourceFile
   )
+#--- Build an HTML containing all types
+  buildTypeMapHTMLFile (
+    !outSemanticContext.mTypeMap
+    !sourceFile:inSourceFile
+  )
 #--- Enter control registers in context
   enterControlRegistersInContext (
     !inAST.mControlRegisterDeclarationListAST

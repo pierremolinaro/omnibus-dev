@@ -2050,6 +2050,10 @@ class GALGAS_lstring function_llvmNameForServiceInterrupt (const class GALGAS_ls
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_doNotDetectRecursiveCalls ;
 
+extern C_BoolCommandLineOption gOption_plm_5F_options_emitGlobalConstantHTMLDumpFile ;
+
+extern C_BoolCommandLineOption gOption_plm_5F_options_emitTypeMap ;
+
 extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedSampleFiles ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedTargets ;
@@ -2073,8 +2077,6 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_performFlashing ;
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeControlRegisterHTMLDumpFile ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeDeclarationDependencyGraphFile ;
-
-extern C_BoolCommandLineOption gOption_plm_5F_options_writeGlobalConstantHTMLDumpFile ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_writeRoutineInvocationGraphFile ;
 

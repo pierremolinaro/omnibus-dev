@@ -25,6 +25,24 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
+    identifier:@"emitGlobalConstantHTMLDumpFile"
+    commandChar:0
+    commandString:@"emit-global-constant-map"
+    comment:@"Emit global constant map in an HTML file"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
+    identifier:@"emitTypeMap"
+    commandChar:116
+    commandString:@"emit-type-map"
+    comment:@"Emit type map in an HTML file"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"plm_options"
     identifier:@"listEmbeddedSampleFiles"
     commandChar:108
     commandString:@"list-embedded-samples"
@@ -117,8 +135,8 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     initWithDomainName:@"plm_options"
     identifier:@"writeControlRegisterHTMLDumpFile"
     commandChar:0
-    commandString:@"control-register-map"
-    comment:@"Write control register map in an HTML file"
+    commandString:@"emit-control-register-map"
+    comment:@"Emit control register map in an HTML file"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;
@@ -126,17 +144,8 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     initWithDomainName:@"plm_options"
     identifier:@"writeDeclarationDependencyGraphFile"
     commandChar:100
-    commandString:@"declaration-dependency-graph"
-    comment:@"Write declaration dependency graph file"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"plm_options"
-    identifier:@"writeGlobalConstantHTMLDumpFile"
-    commandChar:0
-    commandString:@"global-constant-map"
-    comment:@"Write global constant map in an HTML file"
+    commandString:@"emit-declaration-dependency-graph"
+    comment:@"Emit declaration dependency graph file"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;
@@ -144,8 +153,8 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
     initWithDomainName:@"plm_options"
     identifier:@"writeRoutineInvocationGraphFile"
     commandChar:105
-    commandString:@"routine-invocation-graph"
-    comment:@"Write routine invocation graph file"
+    commandString:@"emit-routine-invocation-graph"
+    comment:@"Emit routine invocation graph file"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

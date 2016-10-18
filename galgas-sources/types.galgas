@@ -162,7 +162,7 @@ getter @typeKind llvmTypeName -> @string {
   case integer (@bigint unused min @bigint unused max @bool unused unsigned @uint bitCount) :
     result = "i" + bitCount
   case staticInteger :
-    error .nowhere : "INTERNAL ERROR" : result
+    result = "—"
   case opaque (@bigint bitCount *) :
     result = "i" + bitCount
   case arrayType (@lstring typeName * * * *) :
@@ -187,6 +187,88 @@ getter @typeKind llvmTypeName -> @string {
   case pointer (pointee) :
     result = [pointee llvmTypeName] + "*"
   end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @typeKind descriptionForHTMLFile -> @string {
+  switch self
+  case boolean :
+    result = "Boolean"
+  case literalString :
+    result = "Literal String"
+  case enumeration (* *) :
+    result = "Enumeration"
+  case structure (* * * *) :
+    result = "Structure"
+  case integer (* * @bool unsigned @uint bitCount) :
+    result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end
+           + ", " + if unsigned then "unsigned" else "signed" end + ")"
+  case staticInteger :
+    result = "Static Integer"
+  case opaque (@bigint bitCount *) :
+    result = "Opaque (" + bitCount + " bits)"
+  case arrayType (* * * * *) :
+    result = "Array"
+  case function (*) :
+    result = "Function"
+  case pointer (pointee) :
+    result = "Pointer to " + [pointee llvmTypeName]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  BUILD TYPE MAP HTML FILE                                                                                                      
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc buildTypeMapHTMLFile
+  ?@unifiedTypeMap inTypeMap
+  ?sourceFile:let @lstring inSourceFile
+{
+#------------------------------------ Build an HTML file that contains all types
+  let @string typeDumpFilePath = inSourceFile.string + ".types.html"
+  if [option plm_options.emitTypeMap value] then
+    @stringset firstLetterSet = {}
+    for () in inTypeMap do
+      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
+    end
+    @string tableOfTypeString = ""
+    @char currentFirstLetter = ' '
+    for () type_ in inTypeMap do
+      if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
+        currentFirstLetter = [type_lkey.string characterAtIndex !0]
+        tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
+      end
+      tableOfTypeString += linkForHTMLTypeMap (!type_lkey.string) + "<br>"
+    end
+    let @string typeDumpString = [filewrapper typeDumpGenerationTemplate.dump
+      ![inSourceFile lastPathComponent]
+      !inTypeMap
+      !firstLetterSet
+      !tableOfTypeString
+    ]
+    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
+  else
+    [@string deleteFileIfExists !typeDumpFilePath]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+filewrapper typeDumpGenerationTemplate in "../generation-templates/" {
+}{
+}{
+  template dump "typeDump.html.galgasTemplate"
+    ?@string PROJECT_NAME
+    ?@unifiedTypeMap GLOBAL_TYPE_MAP
+    ?@stringset FIRST_LETTER_SET
+    ?@string TABLE_OF_TYPES_STRING
+}
+
+#----------------------------------------------------------------------------------------------------------------------*
+
+func linkForHTMLTypeMap ?let @string inTypeName -> @string outResult {
+  outResult = "<a class=\"header_link\" href=\"#" + inTypeName + "\">" + inTypeName + "</a>"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
