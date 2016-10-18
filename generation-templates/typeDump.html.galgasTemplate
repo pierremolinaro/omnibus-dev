@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Global constants of %!PROJECT_NAME%</title>
+<style type="text/css">body {
+  font-family: Georgia, sans-serif ;
+  font-size: small ;
+}
+
+h1 {
+  text-align: center ;
+}
+
+.selecteur {
+  color:green ;
+}
+
+a.header_link {
+  background-color: #FFFFCC ;
+}
+
+a:visited, a:link, a:active{
+  color: blue ;
+  text-decoration: underline ;
+}
+
+a:hover {
+  color:green ;
+  background-color: #FFFF00 ;
+  text-decoration: none ;
+}
+
+table.result {
+  border: 1px solid #666666 ;
+}
+
+td.result_title {
+  font-weight: bold ;
+  text-align: center ;
+  background-color: yellow ;
+}
+
+tr.result_line {
+  background-color: #EEEEEE ;
+}
+
+</style>
+</head>
+<body>
+<div>
+<h1>Types defined by %!PROJECT_NAME%</h1>
+<p>This document lists all %![[GLOBAL_TYPE_MAP count] string]% defined types, sorted by name.</p>
+<p>%
+for () in FIRST_LETTER_SET
+do %<a class="header_link" href="#%![[[key characterAtIndex!0] uint] string]%">%!key%</a>%
+between % - %
+end
+%</p>
+<p>%
+!TABLE_OF_TYPES_STRING%
+</p>
+<table class="result">
+<tr><td class="result_title">Type Name</td><td class="result_title">Description</td><td class="result_title">LLVM Type Name</td></tr>\n%
+for () in GLOBAL_TYPE_MAP do
+  %<tr class="result_line"><td><a name="%!lkey.string%">%!lkey.string%</a></td><td>%![kind descriptionForHTMLFile]%</td><td>%![kind llvmTypeName]%</td></tr>\n%
+end%
+</table>
+</div>
+</body>
+</html>

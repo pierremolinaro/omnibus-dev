@@ -2,10 +2,11 @@ option plm_options {
   @stringlist pathList: '\0', "path" -> "Search pathes for source files"
   @bool noPanicGeneration: '\0', "no-panic-generation" -> "Do not generate panic code"
 
-  @bool writeRoutineInvocationGraphFile : 'i', "routine-invocation-graph" -> "Write routine invocation graph file"
-  @bool writeDeclarationDependencyGraphFile : 'd', "declaration-dependency-graph" -> "Write declaration dependency graph file"
-  @bool writeGlobalConstantHTMLDumpFile : '\0', "global-constant-map" -> "Write global constant map in an HTML file"
-  @bool writeControlRegisterHTMLDumpFile : '\0', "control-register-map" -> "Write control register map in an HTML file"
+  @bool emitTypeMap : 't', "emit-type-map" -> "Emit type map in an HTML file"
+  @bool writeRoutineInvocationGraphFile : 'i', "emit-routine-invocation-graph" -> "Emit routine invocation graph file"
+  @bool writeDeclarationDependencyGraphFile : 'd', "emit-declaration-dependency-graph" -> "Emit declaration dependency graph file"
+  @bool emitGlobalConstantHTMLDumpFile : '\0', "emit-global-constant-map" -> "Emit global constant map in an HTML file"
+  @bool writeControlRegisterHTMLDumpFile : '\0', "emit-control-register-map" -> "Emit control register map in an HTML file"
   @bool doNotDetectRecursiveCalls : 'r', "do-not-detect-recursive-calls" -> "Do not detect recursive calls"
 
   @bool listEmbeddedSampleFiles : 'l', "list-embedded-samples" -> "List embedded sample files"

@@ -521,6 +521,16 @@ class GALGAS_classConstantMap extensionGetter_classConstantMap (const class GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                          Extension getter '@typeKind descriptionForHTMLFile' (as function)                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string extensionGetter_descriptionForHTMLFile (const class GALGAS_typeKind & inObject,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                                @functionCallIR class                                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
