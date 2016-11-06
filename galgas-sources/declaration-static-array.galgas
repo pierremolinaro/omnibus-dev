@@ -172,8 +172,8 @@ override method @staticArrayAST enterInContext
           !kind:.function{!descriptor:descriptor}
         ]
       end
-      let functionTypeKind = @typeKind.function {!descriptor:descriptor}
-      let functionPointerTypeKind = @typeKind.pointer {!pointee:functionTypeKind}
+#      let functionTypeKind = @typeKind.function {!descriptor:descriptor}
+#      let functionPointerTypeKind = @typeKind.pointer {!pointee:functionTypeKind}
       let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName}
       propertyList += !propertyName !propertyType
       let propertyIndex = [staticlistPropertyMap count]
