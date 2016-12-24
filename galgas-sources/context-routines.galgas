@@ -15,7 +15,7 @@ struct @routineDescriptor {
 
 func routineMangledNameFromAST ?let @string inReceiverTypeName
                                ?let @lstring inRoutineName
-                               ?let @procFormalArgumentList inFormalArgumentList-> @lstring
+                               ?let @procFormalArgumentList inFormalArgumentList -> @lstring
 {
   result = if inReceiverTypeName == "" then
     inRoutineName

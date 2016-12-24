@@ -37,6 +37,16 @@ class cParser_plm_5F_target_5F_specific_5F_syntax {
 
   protected : virtual void nt_import_5F_file_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
+  protected : virtual void nt_interruptConfigList_ (class GALGAS_interruptionConfigurationList & outArgument0,
+                                                    class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_interruptConfigList_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_targetParameters_ (class GALGAS_targetParameters & outArgument0,
+                                                 class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_targetParameters_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
 
 //--- Rule declarations
   protected : void rule_plm_5F_target_5F_specific_5F_syntax_import_5F_file_i0_ (GALGAS_lstringlist & ioArgument0,
@@ -51,10 +61,20 @@ class cParser_plm_5F_target_5F_specific_5F_syntax {
 
   protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i1_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_i2_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_target_5F_specific_5F_syntax_targetParameters_i2_ (GALGAS_targetParameters & outArgument0,
+                                                                                  C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_target_5F_specific_5F_syntax_targetParameters_i2_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_ (GALGAS_interruptionConfigurationList & outArgument0,
+                                                                                     C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_i4_ (GALGAS_ast & ioArgument0,
                                                                                C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_i2_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_i4_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
 
 
@@ -98,12 +118,11 @@ class GALGAS_configurationDeclarationAST : public GALGAS_abstractDeclaration {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_configurationDeclarationAST constructor_new (const class GALGAS_lbigint & inOperand0,
+  public : static class GALGAS_configurationDeclarationAST constructor_new (const class GALGAS_lstring & inOperand0,
                                                                             const class GALGAS_lstring & inOperand1,
                                                                             const class GALGAS_lstring & inOperand2,
-                                                                            const class GALGAS_lstring & inOperand3,
-                                                                            const class GALGAS_targetParameters & inOperand4,
-                                                                            const class GALGAS_interruptionConfigurationList & inOperand5
+                                                                            const class GALGAS_targetParameters & inOperand3,
+                                                                            const class GALGAS_interruptionConfigurationList & inOperand4
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -120,8 +139,6 @@ class GALGAS_configurationDeclarationAST : public GALGAS_abstractDeclaration {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPanicCodeTypeName (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPanicLineTypeName (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_targetParameters getter_mTargetParameters (LOCATION_ARGS) const ;
 
@@ -283,6 +300,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigu
 
 class GALGAS_targetParameters : public AC_GALGAS_root {
 //--------------------------------- Public data members
+  public : GALGAS_lbigint mProperty_mPointerSize ;
   public : GALGAS_lbigint mProperty_mSystemStackSize ;
   public : GALGAS_lbigint mProperty_mStackedUserRegisterOnInterruptByteSize ;
   public : GALGAS_lbigint mProperty_mServicePushedRegisterByteSize ;
@@ -303,7 +321,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_targetParameters (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_targetParameters (const GALGAS_lbigint & in_mSystemStackSize,
+  public : GALGAS_targetParameters (const GALGAS_lbigint & in_mPointerSize,
+                                    const GALGAS_lbigint & in_mSystemStackSize,
                                     const GALGAS_lbigint & in_mStackedUserRegisterOnInterruptByteSize,
                                     const GALGAS_lbigint & in_mServicePushedRegisterByteSize,
                                     const GALGAS_lbigint & in_mSectionPushedRegisterByteSize) ;
@@ -322,7 +341,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
   public : static class GALGAS_targetParameters constructor_new (const class GALGAS_lbigint & inOperand0,
                                                                  const class GALGAS_lbigint & inOperand1,
                                                                  const class GALGAS_lbigint & inOperand2,
-                                                                 const class GALGAS_lbigint & inOperand3
+                                                                 const class GALGAS_lbigint & inOperand3,
+                                                                 const class GALGAS_lbigint & inOperand4
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -337,6 +357,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSectionPushedRegisterByteSize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mServicePushedRegisterByteSize (LOCATION_ARGS) const ;
@@ -364,7 +386,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_targetParameters ;
 
 class cPtr_configurationDeclarationAST : public cPtr_abstractDeclaration {
 //--- Attributes
-  public : GALGAS_lbigint mProperty_mPointerSize ;
   public : GALGAS_lstring mProperty_mPanicCodeTypeName ;
   public : GALGAS_lstring mProperty_mPanicLineTypeName ;
   public : GALGAS_lstring mProperty_mUnsignedIntegerTypeName ;
@@ -372,8 +393,7 @@ class cPtr_configurationDeclarationAST : public cPtr_abstractDeclaration {
   public : GALGAS_interruptionConfigurationList mProperty_mInterruptionConfigurationList ;
 
 //--- Constructor
-  public : cPtr_configurationDeclarationAST (const GALGAS_lbigint & in_mPointerSize,
-                                             const GALGAS_lstring & in_mPanicCodeTypeName,
+  public : cPtr_configurationDeclarationAST (const GALGAS_lstring & in_mPanicCodeTypeName,
                                              const GALGAS_lstring & in_mPanicLineTypeName,
                                              const GALGAS_lstring & in_mUnsignedIntegerTypeName,
                                              const GALGAS_targetParameters & in_mTargetParameters,
@@ -384,7 +404,6 @@ class cPtr_configurationDeclarationAST : public cPtr_abstractDeclaration {
   public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPanicCodeTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPanicLineTypeName (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mUnsignedIntegerTypeName (LOCATION_ARGS) const ;

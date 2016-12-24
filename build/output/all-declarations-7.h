@@ -11,6 +11,16 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                     Function 'plmNameForStaticListElementType'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_plmNameForStaticListElementType (const class GALGAS_lstring & constinArgument0,
+                                                               class C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                                Function 'checkMode'                                                 *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -322,18 +332,5 @@ void routine_handleSubscriptRegisterArrayInAssignmentAndExpression (const class 
                                                                     class GALGAS_objectIR & ioArgument13,
                                                                     class C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Routine 'buildOrderedDeclarationList'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_buildOrderedDeclarationList (const class GALGAS_ast constinArgument0,
-                                          const class GALGAS_string constinArgument1,
-                                          const class GALGAS_location constinArgument2,
-                                          class GALGAS_declarationListAST & outArgument3,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
 
 #endif
