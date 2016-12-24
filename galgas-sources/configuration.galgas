@@ -17,6 +17,7 @@ list @interruptionConfigurationList {
 #·······················································································································
 
 struct @targetParameters {
+  @lbigint mPointerSize
   @lbigint mSystemStackSize
   @lbigint mStackedUserRegisterOnInterruptByteSize
   @lbigint mServicePushedRegisterByteSize
@@ -26,7 +27,6 @@ struct @targetParameters {
 #·······················································································································
 
 class @configurationDeclarationAST : @abstractDeclaration {
-  @lbigint mPointerSize
   @lstring mPanicCodeTypeName
   @lstring mPanicLineTypeName
   @lstring mUnsignedIntegerTypeName
@@ -42,15 +42,9 @@ syntax extension plm_target_specific_syntax {
 
   #·····················································································································
 
-  rule <configuration> ?!@ast ioAST {
-    $configuration$
+  rule <targetParameters> !@targetParameters parameters {
+    $:$
     $integer$ ?let pointerSize
-    $:$
-    $\$type$ ?let panicCodeTypeName 
-    $:$
-    $\$type$ ?let panicLineTypeName
-    $:$
-    $\$type$ ?let unsignedIntegerTypeName
     $:$
     $integer$ ?let systemStackSize
     $:$
@@ -59,14 +53,20 @@ syntax extension plm_target_specific_syntax {
     $integer$ ?let servicePushedRegisterByteSize
     $:$
     $integer$ ?let sectionPushedRegisterByteSize
-    ${$
-    let parameters = @targetParameters.new {
+    parameters = @targetParameters.new {
+      !pointerSize
       !systemStackSize
       !stackedUserRegisterOnInterruptByteSize
       !servicePushedRegisterByteSize
       !sectionPushedRegisterByteSize
     }
-    @interruptionConfigurationList interruptionConfigurationList = {}
+  }
+
+  #·····················································································································
+
+  rule <interruptConfigList> !@interruptionConfigurationList interruptionConfigurationList {
+    ${$
+    interruptionConfigurationList = {}
     repeat
     while
       $identifier$ ?let interruptName
@@ -81,8 +81,20 @@ syntax extension plm_target_specific_syntax {
       interruptionConfigurationList += !interruptName !interruptionPanicCode
     end
     $}$
+  }
+
+  #·····················································································································
+
+  rule <configuration> ?!@ast ioAST {
+    $configuration$
+    $\$type$ ?let panicCodeTypeName 
+    $:$
+    $\$type$ ?let panicLineTypeName
+    $:$
+    $\$type$ ?let unsignedIntegerTypeName
+    <targetParameters> ?let parameters
+    <interruptConfigList> ?let interruptionConfigurationList
     ioAST.mDeclarationListAST += !@configurationDeclarationAST.new {
-      !pointerSize
       !panicCodeTypeName
       !panicLineTypeName
       !unsignedIntegerTypeName
@@ -152,11 +164,11 @@ override method @configurationDeclarationAST enterInContext
 {
   @stringset panicCodeSet = {}
   if ioContext.mPointerSize != 0 then
-    error mPointerSize : "duplicate configuration"
-  elsif mPointerSize.bigint == 0G then
-    error mPointerSize : "zero size pointer not allowed"
+    error mTargetParameters.mPointerSize : "duplicate configuration"
+  elsif mTargetParameters.mPointerSize.bigint == 0G then
+    error mTargetParameters.mPointerSize : "zero size pointer not allowed"
   else
-    ioContext.mPointerSize = [mPointerSize.bigint uint]
+    ioContext.mPointerSize = [mTargetParameters.mPointerSize.bigint uint]
   end
   ioContext.mTargetParameters = mTargetParameters
   ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicCodeTypeName}

@@ -1,15 +1,12 @@
 \startSymbol{configuration\_start\_symbol}{2}
 
-\nonTerminalSummaryStart \nonTerminalSummary{configuration}{0}\nonTerminalSummarySeparator \nonTerminalSummary{configuration\_start\_symbol}{2}\nonTerminalSummarySeparator \nonTerminalSummary{import\_file}{1}\nonTerminalSummaryEnd \nonTerminalSection{configuration}{0}
+\nonTerminalSummaryStart \nonTerminalSummary{configuration}{0}\nonTerminalSummarySeparator \nonTerminalSummary{configuration\_start\_symbol}{2}\nonTerminalSummarySeparator \nonTerminalSummary{import\_file}{1}\nonTerminalSummarySeparator \nonTerminalSummary{interruptConfigList}{4}\nonTerminalSummarySeparator \nonTerminalSummary{targetParameters}{3}\nonTerminalSummaryEnd \nonTerminalSection{configuration}{0}
 
-\ruleSubsection{plm\_target\_specific\_syntax}{configuration}{45}
+\ruleSubsection{plm\_target\_specific\_syntax}{configuration}{88}
 
 \begin{tikzpicture}
   \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
-    & & & & & & & & & & & & & & & & & & & & & & & & & & & \node (p3-27) [point] {}; & \\
-    & & & & & & & & & & & & & & & & & & & & & & & & \node (p2-24) [terminal] {:}; & \node (p2-25) [terminal] {integer}; & \\
-    & & & & & & & & & & & & & & & & & & & & & & \node (p1-22) [terminal] {identifier}; & \node (p1-23) [point] {}; & \node (p1-24) [point] {}; & & \node (p1-26) [point] {}; & \\
-    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {configuration}; & \node (p0-3) [terminal] {integer}; & \node (p0-4) [terminal] {:}; & \node (p0-5) [terminal] {\$type}; & \node (p0-6) [terminal] {:}; & \node (p0-7) [terminal] {\$type}; & \node (p0-8) [terminal] {:}; & \node (p0-9) [terminal] {\$type}; & \node (p0-10) [terminal] {:}; & \node (p0-11) [terminal] {integer}; & \node (p0-12) [terminal] {:}; & \node (p0-13) [terminal] {integer}; & \node (p0-14) [terminal] {:}; & \node (p0-15) [terminal] {integer}; & \node (p0-16) [terminal] {:}; & \node (p0-17) [terminal] {integer}; & \node (p0-18) [terminal] {\{}; & \node (p0-19) [point] {}; & \node (p0-20) [point] {}; & \node (p0-21) [point] {}; & & & & & & & \node (p0-28) [terminal] {\}}; & \node (p0-29) [lastPoint] {}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {configuration}; & \node (p0-3) [terminal] {\$type}; & \node (p0-4) [terminal] {:}; & \node (p0-5) [terminal] {\$type}; & \node (p0-6) [terminal] {:}; & \node (p0-7) [terminal] {\$type}; & \node (p0-8) [nonterminal] {\nonTerminalSymbol{targetParameters}{3}}; & \node (p0-9) [nonterminal] {\nonTerminalSymbol{interruptConfigList}{4}}; & \node (p0-10) [lastPoint] {}; & \\
   };
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-3) ;
@@ -20,25 +17,6 @@
   \draw[->] (p0-7) -- (p0-8) ;
   \draw[->] (p0-8) -- (p0-9) ;
   \draw[->] (p0-9) -- (p0-10) ;
-  \draw[->] (p0-10) -- (p0-11) ;
-  \draw[->] (p0-11) -- (p0-12) ;
-  \draw[->] (p0-12) -- (p0-13) ;
-  \draw[->] (p0-13) -- (p0-14) ;
-  \draw[->] (p0-14) -- (p0-15) ;
-  \draw[->] (p0-15) -- (p0-16) ;
-  \draw[->] (p0-16) -- (p0-17) ;
-  \draw[->] (p0-17) -- (p0-18) ;
-  \draw (p0-18) -- (p0-20) ;
-  \draw[->] (p0-21) |- (p1-22) ;
-  \draw (p1-22) -- (p1-24) ;
-  \draw[->] (p1-23) |- (p2-24) ;
-  \draw[->] (p2-24) -- (p2-25) ;
-  \draw (p1-24) -- (p1-26) ;
-  \draw[->] (p2-25) -| (p1-26) ;
-  \draw[->] (p3-27) -| (p0-19) ;
-  \draw[->] (p1-26) -| (p3-27) ;
-  \draw[->] (p0-20) -- (p0-28) ;
-  \draw[->] (p0-28) -- (p0-29) ;
 \end{tikzpicture}
 
 \nonTerminalSection{configuration\_start\_symbol}{2}
@@ -70,5 +48,51 @@
   \draw[->] (P0start) -- (p0-2) ;
   \draw[->] (p0-2) -- (p0-3) ;
   \draw[->] (p0-3) -- (p0-4) ;
+\end{tikzpicture}
+
+\nonTerminalSection{interruptConfigList}{4}
+
+\ruleSubsection{plm\_target\_specific\_syntax}{configuration}{67}
+
+\begin{tikzpicture}
+  \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
+    & & & & & & & & & & & \node (p3-11) [point] {}; & \\
+    & & & & & & & & \node (p2-8) [terminal] {:}; & \node (p2-9) [terminal] {integer}; & \\
+    & & & & & & \node (p1-6) [terminal] {identifier}; & \node (p1-7) [point] {}; & \node (p1-8) [point] {}; & & \node (p1-10) [point] {}; & \\
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {\{}; & \node (p0-3) [point] {}; & \node (p0-4) [point] {}; & \node (p0-5) [point] {}; & & & & & & & \node (p0-12) [terminal] {\}}; & \node (p0-13) [lastPoint] {}; & \\
+  };
+  \draw[->] (P0start) -- (p0-2) ;
+  \draw (p0-2) -- (p0-4) ;
+  \draw[->] (p0-5) |- (p1-6) ;
+  \draw (p1-6) -- (p1-8) ;
+  \draw[->] (p1-7) |- (p2-8) ;
+  \draw[->] (p2-8) -- (p2-9) ;
+  \draw (p1-8) -- (p1-10) ;
+  \draw[->] (p2-9) -| (p1-10) ;
+  \draw[->] (p3-11) -| (p0-3) ;
+  \draw[->] (p1-10) -| (p3-11) ;
+  \draw[->] (p0-4) -- (p0-12) ;
+  \draw[->] (p0-12) -- (p0-13) ;
+\end{tikzpicture}
+
+\nonTerminalSection{targetParameters}{3}
+
+\ruleSubsection{plm\_target\_specific\_syntax}{configuration}{45}
+
+\begin{tikzpicture}
+  \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {:}; & \node (p0-3) [terminal] {integer}; & \node (p0-4) [terminal] {:}; & \node (p0-5) [terminal] {integer}; & \node (p0-6) [terminal] {:}; & \node (p0-7) [terminal] {integer}; & \node (p0-8) [terminal] {:}; & \node (p0-9) [terminal] {integer}; & \node (p0-10) [terminal] {:}; & \node (p0-11) [terminal] {integer}; & \node (p0-12) [lastPoint] {}; & \\
+  };
+  \draw[->] (P0start) -- (p0-2) ;
+  \draw[->] (p0-2) -- (p0-3) ;
+  \draw[->] (p0-3) -- (p0-4) ;
+  \draw[->] (p0-4) -- (p0-5) ;
+  \draw[->] (p0-5) -- (p0-6) ;
+  \draw[->] (p0-6) -- (p0-7) ;
+  \draw[->] (p0-7) -- (p0-8) ;
+  \draw[->] (p0-8) -- (p0-9) ;
+  \draw[->] (p0-9) -- (p0-10) ;
+  \draw[->] (p0-10) -- (p0-11) ;
+  \draw[->] (p0-11) -- (p0-12) ;
 \end{tikzpicture}
 
