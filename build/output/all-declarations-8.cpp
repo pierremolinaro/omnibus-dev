@@ -10046,143 +10046,21 @@ const cRegularFileWrapper gWrapperFile_13_targetTemplates (
   gWrapperFileContent_13_targetTemplates
 ) ;
 
-//--- File 'LPC-L2294/section-dispatcher-code-udfcoded.s'
-
-const char * gWrapperFileContent_14_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@                                                                                                                      *\n"
-  "@        U N D E F I N E D    I N S T R U C T I O N    H A N D L E R                                                   *\n"
-  "@                                                                                                                      *\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@                                                                                                                      *\n"
-  "@ We use some arm undefined instructions for performing kernel defined operations that do not use context switchs.     *\n"
-  "@                                                                                                                      *\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@                                                                                                                      *\n"
-  "@           In ARM Architecture ReferenceManual, page A3-39                                                            *\n"
-  "@          A3.16.5 Architecturally Undefined Instruction space                                                         *\n"
-  "@                                                                                                                      *\n"
-  "@ In general, Undefined instructions might be used to extend the ARM instruction set in the future. However, it is     *\n"
-  "@ intended that instructions with the following encoding will not be used for this:                                    *\n"
-  "@                                                                                                                      *\n"
-  "@ 3322 2222 2222 1111  1111 1100 0000 0000                                                                             *\n"
-  "@ 1098 7654 3210 9876  5432 1098 7654 3210                                                                             *\n"
-  "@ ---- ---- ---- ----  ---- ---- ---- ----                                                                             *\n"
-  "@ cond 0111 1111 xxxx  xxxx xxxx 1111 xxxx                                                                             *\n"
-  "@                                                                                                                      *\n"
-  "@ If a programmer wants to use an Undefined instruction for software, purposes with minimal risk that future hardware  *\n"
-  "@ will treat it as a defined instruction, one of the instructions with this encoding must be used.                     *\n"
-  "@                                                                                                                      *\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "  .global as_undef_handler\n"
-  "\n"
-  "as_undef_handler:\n"
-  "@--- Save preserved registers\n"
-  "  stmfd r13!, {r7, lr}\n"
-  "@--- r7 <- bits 15-8 of undef instruction\n"
-  "@    LDRB loads a byte from memory and zero-extends the byte to a 32-bit word.\n"
-  "  ldrb  r7, [lr, #-4 + 1] @ -4 for undef instruction, +1 for getting second byte\n"
-  "@--- r12 <- address of routine to call\n"
-  "  ldr   r12, =__und_dispatcher_table\n"
-  "  ldr   r12, [r12, r7, LSL #2]\n"
-  "@--- Call routine\n"
-  "  mov   lr, pc\n"
-  "  bx    r12\n"
-  "@--- Return from interrupt\n"
-  "  ldmfd r13!, {r7, pc}^\n"
-  "\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n" ;
-
-const cRegularFileWrapper gWrapperFile_14_targetTemplates (
-  "section-dispatcher-code-udfcoded.s",
-  "s",
-  true, // Text file
-  3653, // Text length
-  gWrapperFileContent_14_targetTemplates
-) ;
-
-//--- File 'LPC-L2294/section-dispatcher-entry-udfcoded.s'
-
-const char * gWrapperFileContent_15_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
-
-const cRegularFileWrapper gWrapperFile_15_targetTemplates (
-  "section-dispatcher-entry-udfcoded.s",
-  "s",
-  true, // Text file
-  25, // Text length
-  gWrapperFileContent_15_targetTemplates
-) ;
-
-//--- File 'LPC-L2294/section-dispatcher-header-udfcoded.s'
-
-const char * gWrapperFileContent_16_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@                                                                                                                      *\n"
-  "@                 S E C T I O N   T A B L E                                                                            *\n"
-  "@                                                                                                                      *\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "  UNDEFINED_INSTRUCTION = 0xE7F000F0\n"
-  "\n"
-  "__und_dispatcher_table:\n" ;
-
-const cRegularFileWrapper gWrapperFile_16_targetTemplates (
-  "section-dispatcher-header-udfcoded.s",
-  "s",
-  true, // Text file
-  668, // Text length
-  gWrapperFileContent_16_targetTemplates
-) ;
-
-//--- File 'LPC-L2294/section-invocation-udfcoded.s'
-
-const char * gWrapperFileContent_17_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@  Section !ENTRY!\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "\t.section\t\".text.!ENTRY!\",\"ax\",%progbits\n"
-  "\t.globl\t!ENTRY!\n"
-  "\t.align\t1\n"
-  "\t.type\t!ENTRY!,%function\n"
-  "\t.code\t32\n"
-  "\n"
-  "!ENTRY!:\n"
-  "\t.fnstart\n"
-  "  .word  UNDEFINED_INSTRUCTION + (!IDX! << 8)\n"
-  "  bx  lr\n"
-  "\n"
-  ".Lfunc_end_!ENTRY!:\n"
-  "  .size\t!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!\n"
-  "  .cantunwind\n"
-  "\t.fnend\n"
-  "\n"
-  "  .global !ENTRY!\n"
-  "  .type !ENTRY!, %function\n"
-  "\n" ;
-
-const cRegularFileWrapper gWrapperFile_17_targetTemplates (
-  "section-invocation-udfcoded.s",
-  "s",
-  true, // Text file
-  575, // Text length
-  gWrapperFileContent_17_targetTemplates
-) ;
-
 //--- File 'LPC-L2294/service-dispatcher-entry.s'
 
-const char * gWrapperFileContent_18_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
+const char * gWrapperFileContent_14_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
 
-const cRegularFileWrapper gWrapperFile_18_targetTemplates (
+const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "service-dispatcher-entry.s",
   "s",
   true, // Text file
   25, // Text length
-  gWrapperFileContent_18_targetTemplates
+  gWrapperFileContent_14_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/service-dispatcher-header.s'
 
-const char * gWrapperFileContent_19_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_15_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    D I S P A T C H E R    T A B L E                                                            *\n"
   "@                                                                                                                      *\n"
@@ -10190,17 +10068,17 @@ const char * gWrapperFileContent_19_targetTemplates = "@------------------------
   "\n"
   "__swi_dispatcher_table:\n" ;
 
-const cRegularFileWrapper gWrapperFile_19_targetTemplates (
+const cRegularFileWrapper gWrapperFile_15_targetTemplates (
   "service-dispatcher-header.s",
   "s",
   true, // Text file
   630, // Text length
-  gWrapperFileContent_19_targetTemplates
+  gWrapperFileContent_15_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/service-entry.s'
 
-const char * gWrapperFileContent_20_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_16_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -10221,17 +10099,17 @@ const char * gWrapperFileContent_20_targetTemplates = "@------------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_20_targetTemplates (
+const cRegularFileWrapper gWrapperFile_16_targetTemplates (
   "service-entry.s",
   "s",
   true, // Text file
   496, // Text length
-  gWrapperFileContent_20_targetTemplates
+  gWrapperFileContent_16_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/target-panic.ll'
 
-const char * gWrapperFileContent_21_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_17_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "define internal void @raise_panic (!PANICLINE! %inSourceLine, !PANICCODE! %inCode, i8* %inSourceFile) nounwind noreturn naked {\n"
   ";--- Mask interrupt: write 1 into FAULTMASK register\n"
@@ -10242,17 +10120,17 @@ const char * gWrapperFileContent_21_targetTemplates = ";------------------------
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_21_targetTemplates (
+const cRegularFileWrapper gWrapperFile_17_targetTemplates (
   "target-panic.ll",
   "ll",
   true, // Text file
   520, // Text length
-  gWrapperFileContent_21_targetTemplates
+  gWrapperFileContent_17_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/target.c'
 
-const char * gWrapperFileContent_22_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_18_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#define VICIntEnClr    (*((volatile unsigned *) 0xFFFFF014))\n"
   "#define VICIntEnable   (*((volatile unsigned *) 0xFFFFF010))\n"
@@ -10727,17 +10605,17 @@ const char * gWrapperFileContent_22_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_22_targetTemplates (
+const cRegularFileWrapper gWrapperFile_18_targetTemplates (
   "target.c",
   "c",
   true, // Text file
   22165, // Text length
-  gWrapperFileContent_22_targetTemplates
+  gWrapperFileContent_18_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/target.ll'
 
-const char * gWrapperFileContent_23_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+const char * gWrapperFileContent_19_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"armv4-none--eabi\"\n"
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
@@ -10851,17 +10729,17 @@ const char * gWrapperFileContent_23_targetTemplates = "target datalayout = \"e-m
   ";--- Create task \n"
   "declare void @kernel_create_task (i32 %inTaskIndex, i32* %inStackBufferAddress, i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n" ;
 
-const cRegularFileWrapper gWrapperFile_23_targetTemplates (
+const cRegularFileWrapper gWrapperFile_19_targetTemplates (
   "target.ll",
   "ll",
   true, // Text file
   4749, // Text length
-  gWrapperFileContent_23_targetTemplates
+  gWrapperFileContent_19_targetTemplates
 ) ;
 
 //--- File 'LPC-L2294/target.s'
 
-const char * gWrapperFileContent_24_targetTemplates = "  .code 32\n"
+const char * gWrapperFileContent_20_targetTemplates = "  .code 32\n"
   "\t.text\n"
   "\t.syntax unified\n"
   "\t.cpu\tarm7tdmi-s\n"
@@ -11245,11 +11123,133 @@ const char * gWrapperFileContent_24_targetTemplates = "  .code 32\n"
   "  ldmia r0, {r0-r12, pc}^\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_24_targetTemplates (
+const cRegularFileWrapper gWrapperFile_20_targetTemplates (
   "target.s",
   "s",
   true, // Text file
   21554, // Text length
+  gWrapperFileContent_20_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/udfcoded-section-dispatcher-code.s'
+
+const char * gWrapperFileContent_21_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@        U N D E F I N E D    I N S T R U C T I O N    H A N D L E R                                                   *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@ We use some arm undefined instructions for performing kernel defined operations that do not use context switchs.     *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@           In ARM Architecture ReferenceManual, page A3-39                                                            *\n"
+  "@          A3.16.5 Architecturally Undefined Instruction space                                                         *\n"
+  "@                                                                                                                      *\n"
+  "@ In general, Undefined instructions might be used to extend the ARM instruction set in the future. However, it is     *\n"
+  "@ intended that instructions with the following encoding will not be used for this:                                    *\n"
+  "@                                                                                                                      *\n"
+  "@ 3322 2222 2222 1111  1111 1100 0000 0000                                                                             *\n"
+  "@ 1098 7654 3210 9876  5432 1098 7654 3210                                                                             *\n"
+  "@ ---- ---- ---- ----  ---- ---- ---- ----                                                                             *\n"
+  "@ cond 0111 1111 xxxx  xxxx xxxx 1111 xxxx                                                                             *\n"
+  "@                                                                                                                      *\n"
+  "@ If a programmer wants to use an Undefined instruction for software, purposes with minimal risk that future hardware  *\n"
+  "@ will treat it as a defined instruction, one of the instructions with this encoding must be used.                     *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global as_undef_handler\n"
+  "\n"
+  "as_undef_handler:\n"
+  "@--- Save preserved registers\n"
+  "  stmfd r13!, {r7, lr}\n"
+  "@--- r7 <- bits 15-8 of undef instruction\n"
+  "@    LDRB loads a byte from memory and zero-extends the byte to a 32-bit word.\n"
+  "  ldrb  r7, [lr, #-4 + 1] @ -4 for undef instruction, +1 for getting second byte\n"
+  "@--- r12 <- address of routine to call\n"
+  "  ldr   r12, =__und_dispatcher_table\n"
+  "  ldr   r12, [r12, r7, LSL #2]\n"
+  "@--- Call routine\n"
+  "  mov   lr, pc\n"
+  "  bx    r12\n"
+  "@--- Return from interrupt\n"
+  "  ldmfd r13!, {r7, pc}^\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_21_targetTemplates (
+  "udfcoded-section-dispatcher-code.s",
+  "s",
+  true, // Text file
+  3653, // Text length
+  gWrapperFileContent_21_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/udfcoded-section-dispatcher-entry.s'
+
+const char * gWrapperFileContent_22_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
+
+const cRegularFileWrapper gWrapperFile_22_targetTemplates (
+  "udfcoded-section-dispatcher-entry.s",
+  "s",
+  true, // Text file
+  25, // Text length
+  gWrapperFileContent_22_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/udfcoded-section-dispatcher-header.s'
+
+const char * gWrapperFileContent_23_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 S E C T I O N   T A B L E                                                                            *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  UNDEFINED_INSTRUCTION = 0xE7F000F0\n"
+  "\n"
+  "__und_dispatcher_table:\n" ;
+
+const cRegularFileWrapper gWrapperFile_23_targetTemplates (
+  "udfcoded-section-dispatcher-header.s",
+  "s",
+  true, // Text file
+  668, // Text length
+  gWrapperFileContent_23_targetTemplates
+) ;
+
+//--- File 'LPC-L2294/udfcoded-section-invocation.s'
+
+const char * gWrapperFileContent_24_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@  Section !ENTRY!\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "\t.section\t\".text.!ENTRY!\",\"ax\",%progbits\n"
+  "\t.globl\t!ENTRY!\n"
+  "\t.align\t1\n"
+  "\t.type\t!ENTRY!,%function\n"
+  "\t.code\t32\n"
+  "\n"
+  "!ENTRY!:\n"
+  "\t.fnstart\n"
+  "  .word  UNDEFINED_INSTRUCTION + (!IDX! << 8)\n"
+  "  bx  lr\n"
+  "\n"
+  ".Lfunc_end_!ENTRY!:\n"
+  "  .size\t!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!\n"
+  "  .cantunwind\n"
+  "\t.fnend\n"
+  "\n"
+  "  .global !ENTRY!\n"
+  "  .type !ENTRY!, %function\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_24_targetTemplates (
+  "udfcoded-section-invocation.s",
+  "s",
+  true, // Text file
+  575, // Text length
   gWrapperFileContent_24_targetTemplates
 ) ;
 
@@ -11259,14 +11259,14 @@ const char * gWrapperFileContent_25_targetTemplates = "@------------------------
   "@  Undefined interrupt !ISR!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "\t!ISR! = 0\n"
+  "\t!ISR! = 0xFFFFFFFF\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_25_targetTemplates (
   "undefined-interrupt.s",
   "s",
   true, // Text file
-  284, // Text length
+  293, // Text length
   gWrapperFileContent_25_targetTemplates
 ) ;
 
@@ -16016,150 +16016,21 @@ const cRegularFileWrapper gWrapperFile_43_targetTemplates (
   gWrapperFileContent_43_targetTemplates
 ) ;
 
-//--- File 'teensy-3-1/section-dispatcher-code-udfcoded.s'
-
-const char * gWrapperFileContent_44_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@                                                                                                                      *\n"
-  "@                 U D F    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
-  "@                                                                                                                      *\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@                                                                                                                      *\n"
-  "@                    |                            |                                                                    *\n"
-  "@          PSP+32 -> |----------------------------| \\ \n"
-  "@                    | xPSR                       |  |\n"
-  "@          PSP+28 -> |----------------------------|  |\n"
-  "@                    | PC (UDF instruction)       |  |\n"
-  "@          PSP+24 -> |----------------------------|  |\n"
-  "@                    | LR                         |  |\n"
-  "@          PSP+20 -> |----------------------------|  |\n"
-  "@                    | R12                        |  |  Saved by interrupt response\n"
-  "@          PSP+16 -> |----------------------------|  |\n"
-  "@                    | R3                         |  |\n"
-  "@          PSP+12 -> |----------------------------|  |\n"
-  "@                    | R2                         |  |\n"
-  "@          PSP+8  -> |----------------------------|  |\n"
-  "@                    | R1                         |  |\n"
-  "@          PSP+4  -> |----------------------------|  |\n"
-  "@                    | R0                         |  |\n"
-  "@          PSP    -> |----------------------------| /\n"
-  "@                                                                                                                      *\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "  .global as_section_handler\n"
-  "  .type as_section_handler, %function\n"
-  "\n"
-  "as_section_handler:\n"
-  "@----------------------------------------- Save preserved registers\n"
-  "  push  {r5, lr}\n"
-  "@----------------------------------------- R5 <- thread SP\n"
-  "  mrs   r5, psp           @ r5 <- thread SP\n"
-  "@----------------------------------------- LR <- Address of UDF instruction\n"
-  "  ldr   lr, [r5, #24]     @ 24 : 6 stacked registers before saved PC\n"
-  "@----------------------------------------- Set return address to instruction following UDF\n"
-  "  adds  lr, #2\n"
-  "  str   lr, [r5, #24]\n"
-  "@----------------------------------------- R12 <- address of dispatcher\n"
-  "  ldr   r12, =__udf_dispatcher_table\n"
-  "@----------------------------------------- LR <- bits 0-7 of UDF instruction\n"
-  "  ldrb  lr, [lr, #-2]            @ LR is service call index\n"
-  "@----------------------------------------- r12 <- address of routine to call\n"
-  "  ldr   r12, [r12, lr, lsl #2]   @ R12 += LR << 2\n"
-  "@----------------------------------------- Call service routine\n"
-  "  blx   r12                      @ R5: thread PSP\n"
-  "@----------------------------------------- Set return code (from R0 to R3) in stacked registers\n"
-  "  stmia r5!, {r0, r1, r2, r3}    @ R5 is thread SP\n"
-  "@----------------------------------------- Restore preserved registers, return from interrupt\n"
-  "  pop   {r5, pc}\n"
-  "\n" ;
-
-const cRegularFileWrapper gWrapperFile_44_targetTemplates (
-  "section-dispatcher-code-udfcoded.s",
-  "s",
-  true, // Text file
-  3348, // Text length
-  gWrapperFileContent_44_targetTemplates
-) ;
-
-//--- File 'teensy-3-1/section-dispatcher-entry-udfcoded.s'
-
-const char * gWrapperFileContent_45_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
-
-const cRegularFileWrapper gWrapperFile_45_targetTemplates (
-  "section-dispatcher-entry-udfcoded.s",
-  "s",
-  true, // Text file
-  25, // Text length
-  gWrapperFileContent_45_targetTemplates
-) ;
-
-//--- File 'teensy-3-1/section-dispatcher-header-udfcoded.s'
-
-const char * gWrapperFileContent_46_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@                                                                                                                      *\n"
-  "@                 S E C T I O N   T A B L E                                                                            *\n"
-  "@                                                                                                                      *\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "__udf_dispatcher_table:\n" ;
-
-const cRegularFileWrapper gWrapperFile_46_targetTemplates (
-  "section-dispatcher-header-udfcoded.s",
-  "s",
-  true, // Text file
-  630, // Text length
-  gWrapperFileContent_46_targetTemplates
-) ;
-
-//--- File 'teensy-3-1/section-invocation-udfcoded.s'
-
-const char * gWrapperFileContent_47_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "@  Section !ENTRY!\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "\t.section\t\".text.!ENTRY!\",\"ax\",%progbits\n"
-  "\t.globl\t!ENTRY!\n"
-  "\t.align\t1\n"
-  "\t.type\t!ENTRY!,%function\n"
-  "\t.code\t16\n"
-  "\t.thumb_func\n"
-  "\n"
-  "!ENTRY!:\n"
-  "\t.fnstart\n"
-  "  udf !IDX!\n"
-  "  bx  lr\n"
-  "\n"
-  ".Lfunc_end_!ENTRY!:\n"
-  "  .size\t!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!\n"
-  "  .cantunwind\n"
-  "\t.fnend\n"
-  "\n"
-  "  .global !ENTRY!\n"
-  "  .type !ENTRY!, %function\n"
-  "\n" ;
-
-const cRegularFileWrapper gWrapperFile_47_targetTemplates (
-  "section-invocation-udfcoded.s",
-  "s",
-  true, // Text file
-  554, // Text length
-  gWrapperFileContent_47_targetTemplates
-) ;
-
 //--- File 'teensy-3-1/service-dispatcher-entry.s'
 
-const char * gWrapperFileContent_48_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
+const char * gWrapperFileContent_44_targetTemplates = "  .word  !ENTRY! @ !IDX! + 1\n" ;
 
-const cRegularFileWrapper gWrapperFile_48_targetTemplates (
+const cRegularFileWrapper gWrapperFile_44_targetTemplates (
   "service-dispatcher-entry.s",
   "s",
   true, // Text file
   29, // Text length
-  gWrapperFileContent_48_targetTemplates
+  gWrapperFileContent_44_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/service-dispatcher-header.s'
 
-const char * gWrapperFileContent_49_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_45_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    D I S P A T C H E R    T A B L E                                                            *\n"
   "@                                                                                                                      *\n"
@@ -16170,17 +16041,17 @@ const char * gWrapperFileContent_49_targetTemplates = "@------------------------
   "__svc_dispatcher_table:\n"
   "  .word __direct_return_for_null_service @ 0\n" ;
 
-const cRegularFileWrapper gWrapperFile_49_targetTemplates (
+const cRegularFileWrapper gWrapperFile_45_targetTemplates (
   "service-dispatcher-header.s",
   "s",
   true, // Text file
   728, // Text length
-  gWrapperFileContent_49_targetTemplates
+  gWrapperFileContent_45_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/service-entry.s'
 
-const char * gWrapperFileContent_50_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_46_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@  Service !ENTRY!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
@@ -16202,17 +16073,17 @@ const char * gWrapperFileContent_50_targetTemplates = "@------------------------
   "\t.fnend\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_50_targetTemplates (
+const cRegularFileWrapper gWrapperFile_46_targetTemplates (
   "service-entry.s",
   "s",
   true, // Text file
   513, // Text length
-  gWrapperFileContent_50_targetTemplates
+  gWrapperFileContent_46_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/target-panic.ll'
 
-const char * gWrapperFileContent_51_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_47_targetTemplates = ";----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "define internal void @raise_panic (!PANICLINE! %inSourceLine, !PANICCODE! %inCode, i8* %inSourceFile) nounwind noreturn naked {\n"
   ";--- Mask interrupt: write 1 into FAULTMASK register\n"
@@ -16223,17 +16094,17 @@ const char * gWrapperFileContent_51_targetTemplates = ";------------------------
   "}\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_51_targetTemplates (
+const cRegularFileWrapper gWrapperFile_47_targetTemplates (
   "target-panic.ll",
   "ll",
   true, // Text file
   519, // Text length
-  gWrapperFileContent_51_targetTemplates
+  gWrapperFileContent_47_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/target.c'
 
-const char * gWrapperFileContent_52_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
+const char * gWrapperFileContent_48_targetTemplates = "//---------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "#define TASK_COUNT (!TASKCOUNT!)\n"
   "#define GUARD_COUNT (!GUARDCOUNT!)\n"
@@ -16715,17 +16586,17 @@ const char * gWrapperFileContent_52_targetTemplates = "//-----------------------
   "\n"
   "//---------------------------------------------------------------------------------------------------------------------*\n" ;
 
-const cRegularFileWrapper gWrapperFile_52_targetTemplates (
+const cRegularFileWrapper gWrapperFile_48_targetTemplates (
   "target.c",
   "c",
   true, // Text file
   23837, // Text length
-  gWrapperFileContent_52_targetTemplates
+  gWrapperFileContent_48_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/target.ll'
 
-const char * gWrapperFileContent_53_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
+const char * gWrapperFileContent_49_targetTemplates = "target datalayout = \"e-m:e-p:32:32-i64:64-v128:64:128-a:0:32-n32-S64\"\n"
   "target triple = \"thumbv7em-none--eabi\"\n"
   "\n"
   ";----------------------------------------------------------------------------------------------------------------------*\n"
@@ -16834,17 +16705,17 @@ const char * gWrapperFileContent_53_targetTemplates = "target datalayout = \"e-m
   ";--- Create task \n"
   "declare void @kernel_create_task (i32 %inTaskIndex, i32* %inStackBufferAddress, i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n" ;
 
-const cRegularFileWrapper gWrapperFile_53_targetTemplates (
+const cRegularFileWrapper gWrapperFile_49_targetTemplates (
   "target.ll",
   "ll",
   true, // Text file
   4552, // Text length
-  gWrapperFileContent_53_targetTemplates
+  gWrapperFileContent_49_targetTemplates
 ) ;
 
 //--- File 'teensy-3-1/target.s'
 
-const char * gWrapperFileContent_54_targetTemplates = "\t.syntax unified\n"
+const char * gWrapperFileContent_50_targetTemplates = "\t.syntax unified\n"
   "\t.cpu cortex-m4\n"
   "\t.thumb\n"
   "\n"
@@ -16991,6 +16862,19 @@ const char * gWrapperFileContent_54_targetTemplates = "\t.syntax unified\n"
   "  .word -1\n"
   "  .word -1\n"
   "  .word -2\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 S V C    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "\t.section\t\".text.__endlessloop\",\"ax\",%progbits\n"
+  "\n"
+  "__endlessloop :\n"
+  "  b __endlessloop\n"
+  "\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
   "  .text\n"
   "\n"
@@ -17155,11 +17039,140 @@ const char * gWrapperFileContent_54_targetTemplates = "\t.syntax unified\n"
   "  b  infiniteLoop\n"
   "\n" ;
 
-const cRegularFileWrapper gWrapperFile_54_targetTemplates (
+const cRegularFileWrapper gWrapperFile_50_targetTemplates (
   "target.s",
   "s",
   true, // Text file
-  13642, // Text length
+  14453, // Text length
+  gWrapperFileContent_50_targetTemplates
+) ;
+
+//--- File 'teensy-3-1/udfcoded-section-dispatcher-code.s'
+
+const char * gWrapperFileContent_51_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 U D F    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                    |                            |                                                                    *\n"
+  "@          PSP+32 -> |----------------------------| \\ \n"
+  "@                    | xPSR                       |  |\n"
+  "@          PSP+28 -> |----------------------------|  |\n"
+  "@                    | PC (UDF instruction)       |  |\n"
+  "@          PSP+24 -> |----------------------------|  |\n"
+  "@                    | LR                         |  |\n"
+  "@          PSP+20 -> |----------------------------|  |\n"
+  "@                    | R12                        |  |  Saved by interrupt response\n"
+  "@          PSP+16 -> |----------------------------|  |\n"
+  "@                    | R3                         |  |\n"
+  "@          PSP+12 -> |----------------------------|  |\n"
+  "@                    | R2                         |  |\n"
+  "@          PSP+8  -> |----------------------------|  |\n"
+  "@                    | R1                         |  |\n"
+  "@          PSP+4  -> |----------------------------|  |\n"
+  "@                    | R0                         |  |\n"
+  "@          PSP    -> |----------------------------| /\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "  .global as_section_handler\n"
+  "  .type as_section_handler, %function\n"
+  "\n"
+  "as_section_handler:\n"
+  "@----------------------------------------- Save preserved registers\n"
+  "  push  {r5, lr}\n"
+  "@----------------------------------------- R5 <- thread SP\n"
+  "  mrs   r5, psp           @ r5 <- thread SP\n"
+  "@----------------------------------------- LR <- Address of UDF instruction\n"
+  "  ldr   lr, [r5, #24]     @ 24 : 6 stacked registers before saved PC\n"
+  "@----------------------------------------- Set return address to instruction following UDF\n"
+  "  adds  lr, #2\n"
+  "  str   lr, [r5, #24]\n"
+  "@----------------------------------------- R12 <- address of dispatcher\n"
+  "  ldr   r12, =__udf_dispatcher_table\n"
+  "@----------------------------------------- LR <- bits 0-7 of UDF instruction\n"
+  "  ldrb  lr, [lr, #-2]            @ LR is service call index\n"
+  "@----------------------------------------- r12 <- address of routine to call\n"
+  "  ldr   r12, [r12, lr, lsl #2]   @ R12 += LR << 2\n"
+  "@----------------------------------------- Call service routine\n"
+  "  blx   r12                      @ R5: thread PSP\n"
+  "@----------------------------------------- Set return code (from R0 to R3) in stacked registers\n"
+  "  stmia r5!, {r0, r1, r2, r3}    @ R5 is thread SP\n"
+  "@----------------------------------------- Restore preserved registers, return from interrupt\n"
+  "  pop   {r5, pc}\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_51_targetTemplates (
+  "udfcoded-section-dispatcher-code.s",
+  "s",
+  true, // Text file
+  3348, // Text length
+  gWrapperFileContent_51_targetTemplates
+) ;
+
+//--- File 'teensy-3-1/udfcoded-section-dispatcher-entry.s'
+
+const char * gWrapperFileContent_52_targetTemplates = "  .word  !ENTRY! @ !IDX!\n" ;
+
+const cRegularFileWrapper gWrapperFile_52_targetTemplates (
+  "udfcoded-section-dispatcher-entry.s",
+  "s",
+  true, // Text file
+  25, // Text length
+  gWrapperFileContent_52_targetTemplates
+) ;
+
+//--- File 'teensy-3-1/udfcoded-section-dispatcher-header.s'
+
+const char * gWrapperFileContent_53_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@                                                                                                                      *\n"
+  "@                 S E C T I O N   T A B L E                                                                            *\n"
+  "@                                                                                                                      *\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "__udf_dispatcher_table:\n" ;
+
+const cRegularFileWrapper gWrapperFile_53_targetTemplates (
+  "udfcoded-section-dispatcher-header.s",
+  "s",
+  true, // Text file
+  630, // Text length
+  gWrapperFileContent_53_targetTemplates
+) ;
+
+//--- File 'teensy-3-1/udfcoded-section-invocation.s'
+
+const char * gWrapperFileContent_54_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "@  Section !ENTRY!\n"
+  "@----------------------------------------------------------------------------------------------------------------------*\n"
+  "\n"
+  "\t.section\t\".text.!ENTRY!\",\"ax\",%progbits\n"
+  "\t.globl\t!ENTRY!\n"
+  "\t.align\t1\n"
+  "\t.type\t!ENTRY!,%function\n"
+  "\t.code\t16\n"
+  "\t.thumb_func\n"
+  "\n"
+  "!ENTRY!:\n"
+  "\t.fnstart\n"
+  "  udf !IDX!\n"
+  "  bx  lr\n"
+  "\n"
+  ".Lfunc_end_!ENTRY!:\n"
+  "  .size\t!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!\n"
+  "  .cantunwind\n"
+  "\t.fnend\n"
+  "\n"
+  "  .global !ENTRY!\n"
+  "  .type !ENTRY!, %function\n"
+  "\n" ;
+
+const cRegularFileWrapper gWrapperFile_54_targetTemplates (
+  "udfcoded-section-invocation.s",
+  "s",
+  true, // Text file
+  554, // Text length
   gWrapperFileContent_54_targetTemplates
 ) ;
 
@@ -17169,14 +17182,14 @@ const char * gWrapperFileContent_55_targetTemplates = "@------------------------
   "@  Undefined interrupt !ISR!\n"
   "@----------------------------------------------------------------------------------------------------------------------*\n"
   "\n"
-  "\t!ISR! = -1\n"
+  "\t!ISR! = __endlessloop\n"
   "\n" ;
 
 const cRegularFileWrapper gWrapperFile_55_targetTemplates (
   "undefined-interrupt.s",
   "s",
   true, // Text file
-  285, // Text length
+  296, // Text length
   gWrapperFileContent_55_targetTemplates
 ) ;
 
