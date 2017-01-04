@@ -138,38 +138,342 @@ On va explorer successivement le fichier \texttt{myTeensy.plm-target} puis le r�
 Voici le contenu du fichier \texttt{myTeensy.plm-target} :
 
 \begin{PLM}[1]
-panic : $int32 $uint32
-
-import "files/mk20dx256.plm"
-import "files/boot-teensy-3-1-it.plm"
-
-required proc systickHandler isr ()
-required proc setup user ()
-required proc loop user ()
-
-init 0 { // Configure Systick interrupt every ms
-  SYST_RVR = 96000 - 1 // Interrupt every 96000 core clocks, i.e. every ms
-  SYST_CVR = 0
-  SYST_CSR = $SYST_CSR {CLKSOURCE, TICKINT, ENABLE}
+configuration
+  $int32 // Panic code type
+  :$uint32 // Panic line type
+  :$uint32 // Unsigned integer type
+  :32 // Pointer bit count
+  :1024 // System stack size
+  :32 // User stacked registers byte count
+  :12 // Service handler system stack byte count footprint 
+  :8 // Section handler system stack byte count footprint
+  :"udfcoded" // Section invocation scheme
+{ // Interruption vectors
+  NMI : 2
+  MemManage : 4
+  BusFault : 5
+  UsageFault : 6
+  DebugMonitor : 12
+  PendSV : 14
+  systick : 15
+  DMAChannel0TranfertComplete : 16
+  ...
+  softwareInterrupt : 110
 }
+
+import "files/registers-mk20dx256.plm"
+import "files/teensy-3-1-boot.plm"
+import "files/teensy-3-1-xtr.plm"
+import "files/teensy-3-1-digital-io.plm"
+import "files/teensy-3-1-lcd.plm"
+import "files/teensy-3-1-panic.plm"
+import "files/semaphore.plm"
 \end{PLM}
 
-{\bf Ligne 1.} Définition de la taille d'un pointeur, en nombre de bits.
+Le fichier \texttt{myTeensy.plm-target} contient la directive \plm=configuration= et une séquence d'importation, qui liste tous les fichiers qui seront automatiquement inclus lors de la compilation d'un projet.
+
+{\bf Panic code type.} C'est le type utilisé pour le code de panique.
+
+{\bf Panic line type.} Type utilisé pour coder le numéro de la ligne source du fichier contenant l'instruction qui peut engendrer une panique.
+
+{\bf Unsigned integer type.}
+
+{\bf Pointer bit count.} Le nombre de bits d'un pointeur. Le Cortex-M4 étant une machine 32 bits, sa valeur est 32.
+
+{\bf System stack size.} La taille en octets allouée à la pile système.
+
+{\bf User stacked registers byte count.} Le nombre d'octets empilés dans la pile utilisateur lors d'une exception. Le Cortex-M4 empilant 8 registres, cette valeur est 32. Elle est utilisée pour les calculs de pile.
+
+{\bf Service handler system stack byte count footprint.} Le \emph{service handler}\footnote{Utilisé pour implémenter les appels système par \texttt{SVC} et les interruptions.} utilise le nombre indiqué d'octets dans la pile. Cette valeur est utilisée pour les calculs de pile.
+
+{\bf Section handler system stack byte count footprint.} Le \emph{section handler}\footnote{Utilisé pour implémenter les sections.} utilise le nombre indiqué d'octets dans la pile. Cette valeur est utilisée pour les calculs de pile.
+
+{\bf Section invocation scheme.} Cette chaîne définit le schéma qui est utilisé pour implémenter les appels de section (\refSubsectionPage{schemaAppelSections}).
+
+{\bf Interruption vectors.} La liste de toutes les interruptions, chacune d'elle étant accompagnée de son numéro.
 
 
-{\bf Ligne 3.} Déclaration des types entier relatifs à la panique (\refSectionPage{typePanique}). Le premier type définit le type du code de la panique (\plm+$int32+, dont un code peut être négatif, positif, ou nul), le second le type du numéro de ligne (\plm+$uint32+, un numéro de ligne est positif). Cette déclaration est obligatoire.
-
-{\bf Lignes 5 et 6.} Importation de fichiers source. Le fichier \texttt{mk20dx256.plm} contient la définition des registres de contrôle du processeur qui équipe la carte \emph{Teensy 3.1}, \texttt{boot-teensy-3-1-it.plm} contient le code de configuration du processeur (routine \plm=boot 0=). Si l'appel du compilateur contient l'option \texttt{-T=cibles} (par exemple : \texttt{plm -T=cibles 01-blinkled.plm}), alors, ces fichiers sont recherchés dans le système de fichiers, relativement au répertoire \texttt{cibles}.Si l'appel du compilateur ne contient pas l'option \texttt{-T} (par exemple : \texttt{plm 01-blinkled.plm}), alors, ces fichiers sont recherchés parmi les fichiers embarqués dans l'exécutable.
 
 
 
-{\bf Lignes 8 à 10.} Déclaration des procédures requises (\refSubsectionPage{procedureRequise}). Ces déclarations ont une double signification :
+
+\subsectionLabel{Schéma d'appel des sections}{schemaAppelSections}
+
+Quand le code d'une tâche appelle une section, celui-ci doit s'effectuer à travers un \emph{system call}\footnote{Quand une section est appelée à partir d'un mode privilégié, l'appel est un simple appel de routine.}.
+
+L'implémentation de cette opération est paramètrable grâce à quatre fichiers assembleurs, placés dans le répertoire \texttt{myTeensy}. Le nom de ces fichiers est préfixé par la chaîne spécifiée dans le champ \emph{Section invocation scheme} de la \plm=configuration= (voir \refSubsectionPage{fichierTarget}), ce qui autorise de disposer de plusieurs implémentations possibles. Pour le schéma nommé \plm="udfcoded"=, ces quatre fichiers sont :
 \begin{itemize}
-  \item d'abord, que les procédures citées doivent être définies soit dans la cible (c'est le cas de \texttt{systickHandler}), soit dans le code utilisateur (ici \texttt{01-blinkled.plm}) : c'est le cas des procédures \texttt{setup} et \texttt{loop} ;
-  \item ensuite, le compilateur calcule le graphe des appels des routines, afin de supprimer les routines inutilisées ; les procédures requises sont les racines du graphe d'accessibilité.
+  \item \texttt{udfcoded-section-dispatcher-code.s} : implémentation du code exécuté par l'appel système invoqué par l'appel à une section ;
+  \item \texttt{udfcoded-section-dispatcher-entry.s} : entrée du tableau définissant le nom de la fonction implémentant la section ;
+  \item \texttt{udfcoded-section-dispatcher-header.s} : en-tête du tableau contenant les noms de la fonction implémentant la section ;
+  \item \texttt{udfcoded-section-invocation.s} : implémentation de l'appel à une section. 
 \end{itemize}
 
-{\bf Lignes 15 à 19.} Définition de la routine \plm=init 0= (\refSectionPage{initRoutine}). Le code de cette routine configure le \emph{SysTick Timer} de façon qu'une interruption \emph{SysTick} survienne toutes les millisecondes. Comme cette routine porte le numéro $0$, on est sûr qu'elle soit la première à être exécutée.
+Trois schémas sont proposés, \plm="udfcoded"=, \plm="r12idx"= et \plm="r12direct"=, et sont décris dans les sections suivantes. Le \refTableauPage{dureeSchemasServices} résume les caractéristiques de chacun. Les durées sont estimées grâce au projet \texttt{04-section-service-duration.plm}. 
+
+\begin{table}[t]
+\centering
+\begin{tabular}{llll}
+  \textbf{Nom du schéma} & \textbf{Par entrée} & \textbf{\texttt{as\_section\_handler}} & \textbf{Durée estimée} \\
+   & (octets) & (octets) & (en cycles d'horloge) \\
+  \plm="udfcoded"= & 4 + 4 & 40 & 64 \\
+  \plm="r12idx"= & 8 + 4 & 36 & 65 \\
+  \plm="r12direct"= & 12 + 0 & 24 & 61 \\
+\end{tabular}
+\caption{Caractèristiques de différents schémas d'appel de section}
+\labelTableau{dureeSchemasServices}
+\ligne
+\end{table}
+
+
+\subsubsection{Schéma \texttt{udfcoded} d'appel des sections}
+
+Dans ce schéma, l'instruction indéfinie \texttt{UDF} est utilisée. Le code de cette instruction est \texttt{0xDF$xx$}, où $xx$ est une valeur que le Cortex ignore. On utilise ce champ pour coder l'indice du service appelé.
+
+Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{udfcoded-section-invocation.s}. Le contenu de fichier est :
+\begin{SHELL}\small
+\hspace*{1.2em}.section  ".text.!USER\_ROUTINE!","ax",\%progbits\\
+\hspace*{1.2em}.global !USER\_ROUTINE!\\
+\hspace*{1.2em}.type  !USER\_ROUTINE!,\%function\\
+\hspace*{1.2em}.align  1\\
+\hspace*{1.2em}.code  16\\
+\hspace*{1.2em}.thumb\_func\\
+\\
+!USER\_ROUTINE!:\\
+\hspace*{1.2em}.fnstart\\
+\hspace*{1.2em}udf !IDX!\\
+\hspace*{1.2em}bx  lr\\
+\\
+.Lfunc\_end\_!USER\_ROUTINE!:\\
+\hspace*{1.2em}.size  !USER\_ROUTINE!, .Lfunc\_end\_!USER\_ROUTINE! - !USER\_ROUTINE!\\
+\hspace*{1.2em}.cantunwind\\
+\hspace*{1.2em}.fnend
+\end{SHELL}
+
+Trois séquences sont remplacées par le compilateur PLM :
+\begin{itemize}
+\item \texttt{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur ;
+\item \texttt{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section (inutilisée dans ce shéma) ;
+\item \texttt{!IDX!}, par l'indice de la section\footnote{Lorsqu'il analyse un projet, PLM numérote les sections qu'il rencontre (à partir de $0$). C'est ce numéro qui remplace la séquence \texttt{!IDX!}.}.
+\end{itemize}
+
+PLM effectue donc cette opération pour chaque section, par ordre croissant de l'indice, et accumule le texte produit dans le fichier assembleur \texttt{src.s}.
+
+Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}, défini par le fichier \texttt{udfcoded-section-dispatcher-code.s} :
+
+\begin{SHELL}\small
+\hspace*{1.2em}.section	".text.as\_section\_handler","ax",\%progbits\\
+\hspace*{1.2em}.global as\_section\_handler\\
+\hspace*{1.2em}.type as\_section\_handler, \%function\\
+\\
+as\_section\_handler:\\
+@--------------------- Save preserved registers\\
+\hspace*{1.2em}push  {r5, lr}\\
+@--------------------- R5 <- thread SP\\
+\hspace*{1.2em}mrs   r5, psp           @ r5 <- thread SP\\
+@--------------------- LR <- Address of UDF instruction\\
+\hspace*{1.2em}ldr   lr, [r5, \#24]     @ 24 : 6 stacked registers before saved PC\\
+@--------------------- Set return address to instruction following UDF\\
+\hspace*{1.2em}adds  lr, \#2\\
+\hspace*{1.2em}str   lr, [r5, \#24]\\
+@--------------------- R12 <- address of dispatcher\\
+\hspace*{1.2em}ldr   r12, =\_\_udf\_dispatcher\_table\\
+@--------------------- LR <- bits 0-7 of UDF instruction\\
+\hspace*{1.2em}ldrb  lr, [lr, \#-2]            @ LR is service call index\\
+@--------------------- r12 <- address of routine to call\\
+\hspace*{1.2em}ldr   r12, [r12, lr, lsl \#2]   @ Address R12 + LR << 2\\
+@--------------------- Call service routine\\
+\hspace*{1.2em}blx   r12                      @ R5: thread PSP\\
+@--------------------- Set return code (from R0 to R3) in stacked registers\\
+\hspace*{1.2em}stmia r5!, {r0, r1, r2, r3}    @ R5 is thread SP\\
+@--------------------- Restore preserved registers, return from interrupt\\
+\hspace*{1.2em}pop   {r5, pc}
+\end{SHELL}
+
+Ce code va rechercher dans l'instruction \texttt{UDF} la valeur $xx$ de l'octet de poids faible, et l'utilise pour construire l'adresse d'une entrée du tableau \texttt{\_\_udf\_dispatcher\_table}. Cette entrée contient l'adresse de la routine à exécuter.
+
+Il faut donc construire ce tableau. Le fichier \texttt{udfcoded-section-dispatcher-header.s} définit son en-tête :
+
+\begin{SHELL}\small
+\_\_udf\_dispatcher\_table:
+\end{SHELL}
+
+Ce texte est ajouté à la fin du fichier assembleur \texttt{src.s}.
+
+Ensuite, PLM va utiliser le fichier \texttt{udfcoded-section-dispatcher-entry.s} pour définir chaque entrée du tableau :
+\begin{SHELL}\small
+\hspace*{1.2em}.word !IMPLEMENTATION\_ROUTINE! @ !IDX!, user routine !USER\_ROUTINE!
+
+\end{SHELL}
+
+PLM effectue pour chaque section les substitutions de \texttt{!IMPLEMENTATION\_ROUTINE!}, de \texttt{!USER\_ROUTINE!} et de \texttt{!IDX!}, par ordre croissant de l'indice, en ajoutant le texte produit à la fin du fichier assembleur \texttt{src.s}.
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Schéma \texttt{r12idx} d'appel des sections}
+
+Dans ce schéma, l'instruction indéfinie \texttt{UDF} est utilisée.  Le code de cette instruction est \texttt{0xDF$xx$}, où $xx$ est une valeur que le Cortex ignore. Contrairement au shéma précédent, le champ $xx$ est toujours à $0$, l'indice de la section est entré dans le registre $r12$.
+
+Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r12idx-section-invocation.s}. Le contenu de fichier est :
+\begin{SHELL}\small
+\hspace*{1.2em}.section  ".text.!USER\_ROUTINE!","ax",\%progbits\\
+\hspace*{1.2em}.global !USER\_ROUTINE!\\
+\hspace*{1.2em}.type  !USER\_ROUTINE!,\%function\\
+\hspace*{1.2em}.align  1\\
+\hspace*{1.2em}.code  16\\
+\hspace*{1.2em}.thumb\_func\\
+\\
+!USER\_ROUTINE!:\\
+\hspace*{1.2em}.fnstart\\
+\hspace*{1.2em}mov r12, !IDX!\\
+\hspace*{1.2em}udf 0\\
+\hspace*{1.2em}bx  lr\\
+\\
+.Lfunc\_end\_!USER\_ROUTINE!:\\
+\hspace*{1.2em}.size  !USER\_ROUTINE!, .Lfunc\_end\_!USER\_ROUTINE! - !USER\_ROUTINE!\\
+\hspace*{1.2em}.cantunwind\\
+\hspace*{1.2em}.fnend
+\end{SHELL}
+
+Trois séquences sont remplacées par le compilateur PLM :
+\begin{itemize}
+\item \texttt{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur ;
+\item \texttt{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section (inutilisée dans ce shéma) ;
+\item \texttt{!IDX!}, par l'indice de la section\footnote{Lorsqu'il analyse un projet, PLM numérote les sections qu'il rencontre (à partir de $0$). C'est ce numéro qui remplace la séquence \texttt{!IDX!}.}.
+\end{itemize}
+
+PLM effectue donc cette opération pour chaque section, par ordre croissant de l'indice, et accumule le texte produit dans le fichier assembleur \texttt{src.s}.
+
+Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}, défini par le fichier \texttt{r12idx-section-dispatcher-code.s} :
+
+\begin{SHELL}\small
+\hspace*{1.2em}.section	".text.as\_section\_handler","ax",\%progbits\\
+\hspace*{1.2em}.global as\_section\_handler\\
+\hspace*{1.2em}.type as\_section\_handler, \%function\\
+\\
+as\_section\_handler:\\
+@--------------------- Save preserved registers\\
+\hspace*{1.2em}push  {r5, lr}\\
+@--------------------- R5 <- thread SP\\
+\hspace*{1.2em}mrs   r5, psp           @ r5 <- thread SP\\
+@--------------------- LR <- Address of UDF instruction\\
+\hspace*{1.2em}ldr   lr, [r5, \#24]     @ 24 : 6 stacked registers before saved PC\\
+@--------------------- Set return address to instruction following UDF\\
+\hspace*{1.2em}adds  lr, \#2\\
+\hspace*{1.2em}str   lr, [r5, \#24]\\
+@--------------------- LR <- address of dispatcher table\\
+\hspace*{1.2em}ldr   lr, =\_\_udf\_dispatcher\_table\\
+@--------------------- r12 <- address of routine to call\\
+\hspace*{1.2em}ldr   r12, [lr, r12, lsl \#2]   @ Address : LR + R12 << 2\\
+@--------------------- Call service routine\\
+\hspace*{1.2em}blx   r12                      @ R5: thread PSP\\
+@--------------------- Set return code (from R0 to R3) in stacked registers\\
+\hspace*{1.2em}stmia r5!, {r0, r1, r2, r3}    @ R5 is thread SP\\
+@--------------------- Restore preserved registers, return from interrupt\\
+\hspace*{1.2em}pop   {r5, pc}
+\end{SHELL}
+
+Ce code va utiliser la valeur \texttt{r12} pour construire l'adresse d'une entrée du tableau \texttt{\_\_udf\_dispatcher\_table}. Cette entrée contient l'adresse de la routine à exécuter.
+
+Il faut donc construire ce tableau\footnote{Les fichiers \texttt{r12idx-section-dispatcher-header.s} et \texttt{r12idx-section-dispatcher-entry.s} sont identiques à ceux du schéma précédent \texttt{"udfcoded"}.}. Le fichier \texttt{r12idx-section-dispatcher-header.s} définit son en-tête :
+
+\begin{SHELL}\small
+\_\_udf\_dispatcher\_table:
+\end{SHELL}
+
+Ce texte est ajouté à la fin du fichier assembleur \texttt{src.s}.
+
+Ensuite, PLM va utiliser le fichier \texttt{r12idx-section-dispatcher-entry.s} pour définir chaque entrée du tableau :
+\begin{SHELL}\small
+\hspace*{1.2em}.word !IMPLEMENTATION\_ROUTINE! @ !IDX!, user routine !USER\_ROUTINE!
+
+\end{SHELL}
+
+PLM effectue pour chaque section les substitutions de \texttt{!IMPLEMENTATION\_ROUTINE!}, de \texttt{!USER\_ROUTINE!} et de \texttt{!IDX!}, par ordre croissant de l'indice, en ajoutant le texte produit à la fin du fichier assembleur \texttt{src.s}.
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Schéma \texttt{r12direct} d'appel des sections}
+
+Dans ce schéma, l'instruction indéfinie \texttt{UDF} est utilisée. L'adresse de la routine implémentant la section est entrée dans le registre $r12$.
+
+Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r12direct-section-invocation.s}. Le contenu de fichier est :
+\begin{SHELL}\small
+\hspace*{1.2em}.section  ".text.!USER\_ROUTINE!","ax",\%progbits\\
+\hspace*{1.2em}.global !USER\_ROUTINE!\\
+\hspace*{1.2em}.type  !USER\_ROUTINE!,\%function\\
+\hspace*{1.2em}.align  1\\
+\hspace*{1.2em}.code  16\\
+\hspace*{1.2em}.thumb\_func\\
+\\
+!USER\_ROUTINE!:\\
+\hspace*{1.2em}.fnstart\\
+\hspace*{1.2em}ldr r12, =!IMPLEMENTATION\_ROUTINE!\\
+\hspace*{1.2em}udf 0\\
+\hspace*{1.2em}bx  lr\\
+\\
+.Lfunc\_end\_!USER\_ROUTINE!:\\
+\hspace*{1.2em}.size  !USER\_ROUTINE!, .Lfunc\_end\_!USER\_ROUTINE! - !USER\_ROUTINE!\\
+\hspace*{1.2em}.cantunwind\\
+\hspace*{1.2em}.fnend
+\end{SHELL}
+
+Trois séquences sont remplacées par le compilateur PLM :
+\begin{itemize}
+\item \texttt{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur ;
+\item \texttt{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section ;
+\item \texttt{!IDX!}, par l'indice de la section (inutilisé dans ce shéma).
+\end{itemize}
+
+PLM effectue donc cette opération pour chaque section, par ordre croissant de l'indice, et accumule le texte produit dans le fichier assembleur \texttt{src.s}.
+
+Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}, défini par le fichier \texttt{r12direct-section-dispatcher-code.s} :
+
+\begin{SHELL}\small
+\hspace*{1.2em}.section	".text.as\_section\_handler","ax",\%progbits\\
+\hspace*{1.2em}.global as\_section\_handler\\
+\hspace*{1.2em}.type as\_section\_handler, \%function\\
+\\
+as\_section\_handler:\\
+@--------------------- Save preserved registers\\
+\hspace*{1.2em}push  {r5, lr}\\
+@--------------------- R5 <- thread SP\\
+\hspace*{1.2em}mrs   r5, psp           @ r5 <- thread SP\\
+@--------------------- LR <- Address of UDF instruction\\
+\hspace*{1.2em}ldr   lr, [r5, \#24]     @ 24 : 6 stacked registers before saved PC\\
+@--------------------- Set return address to instruction following UDF\\
+\hspace*{1.2em}adds  lr, \#2\\
+\hspace*{1.2em}str   lr, [r5, \#24]\\
+@--------------------- Call service routine\\
+\hspace*{1.2em}blx   r12                      @ R5: thread PSP\\
+@--------------------- Set return code (from R0 to R3) in stacked registers\\
+\hspace*{1.2em}stmia r5!, {r0, r1, r2, r3}    @ R5 is thread SP\\
+@--------------------- Restore preserved registers, return from interrupt\\
+\hspace*{1.2em}pop   {r5, pc}
+\end{SHELL}
+
+Ce code utilise directement la valeur \texttt{r12}, c'est l'adresse de la routine à exécuter.
+
+Les fichiers \texttt{r12direct-section-dispatcher-header.s} et \texttt{r12direct-section-dispatcher-entry.s} sont inutiles pour ce schéma, et sont donc vides.
+
+
+
+
 
 
 
@@ -185,7 +489,7 @@ Texte à définir…
 
 \sectionLabel{La directive \texttt{check target}}{directiveCheckTarget}\index{check target}
 
-La directive \plm=check target= permet de vérifier l'identité de la cible. Elle est utile pour spécifier qu'un fichier est spécifique à une cible. À la compilation, toute directive \plm=check target= incorrecte entraîne une erreur.
+La directive \plm=check target= permet de vérifier l'identité de la cible. Elle est utile pour s'assurer qu'un fichier est acceptable par une cible. À la compilation, toute directive \plm=check target= incorrecte entraîne une erreur.
 
 Par exemple, compiler pour la cible \plm+"teensy-3-1"+ est spécifié par :
 

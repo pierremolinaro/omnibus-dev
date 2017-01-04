@@ -155,11 +155,8 @@
 	.section	".text.__endlessloop","ax",%progbits
 
 __endlessloop :
+  nop @ So endloop is 4 byte long
   b __endlessloop
-
-@----------------------------------------------------------------------------------------------------------------------*
-
-  .text
 
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
@@ -214,6 +211,8 @@ __endlessloop :
   .lcomm backgroundTaskContext, 4
 
 @----------------------------------------------------------------------------------------------------------------------*
+
+	.section	".text.as_svc_handler","ax",%progbits
 
   .global as_svc_handler
   .type as_svc_handler, %function
@@ -295,6 +294,8 @@ __no_context_to_restore:
 .lcomm backgroundTaskStack, 32
 
 @----------------------------------------------------------------------------------------------------------------------*
+
+	.section	".text.as_reset_handler","ax",%progbits
 
   .global as_reset_handler
   .type as_reset_handler, %function
