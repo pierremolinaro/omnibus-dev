@@ -81,6 +81,7 @@ proc codeGeneration
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
+  ?sectionImplementation:let @string inSectionInvocationScheme
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
 #--- Create source directory (if does not exist)
@@ -109,6 +110,7 @@ proc codeGeneration
     !interrupts:inAvailableInterruptMap
     !staticlistValues:inStaticListValueMap
     !sourceFileSet:inSourceFileAbsolutePathSet
+    !sectionImplementation:inSectionInvocationScheme
   )
 }
 
@@ -135,6 +137,7 @@ private proc generateCodeFiles
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
+  ?sectionImplementation:let @string inSectionInvocationScheme
 {
   @generationAdds generationAdds = .default
   generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
@@ -265,6 +268,7 @@ private proc generateCodeFiles
   generateSectionAndSafeDispatcher (
     !inCurrentDirectory
     !inTargetName.string
+    !inSectionInvocationScheme
     !?asCode
     !sectionAndSafeList
   )

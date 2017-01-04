@@ -347,6 +347,7 @@ void routine_codeGeneration (const class GALGAS_string constinArgument0,
                              const class GALGAS_availableInterruptMap constinArgument8,
                              const class GALGAS_staticlistValues_5F_listMap constinArgument9,
                              const class GALGAS_stringset constinArgument10,
+                             const class GALGAS_string constinArgument11,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
@@ -367,6 +368,7 @@ void routine_generateCodeFiles (const class GALGAS_string constinArgument0,
                                 const class GALGAS_availableInterruptMap constinArgument8,
                                 const class GALGAS_staticlistValues_5F_listMap constinArgument9,
                                 const class GALGAS_stringset constinArgument10,
+                                const class GALGAS_string constinArgument11,
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
 
@@ -455,6 +457,8 @@ extern const char * gWrapperFileContent_51_targetTemplates ;
 extern const char * gWrapperFileContent_52_targetTemplates ;
 extern const char * gWrapperFileContent_53_targetTemplates ;
 extern const char * gWrapperFileContent_54_targetTemplates ;
+extern const char * gWrapperFileContent_55_targetTemplates ;
+extern const char * gWrapperFileContent_56_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -516,6 +520,8 @@ extern const cRegularFileWrapper gWrapperFile_51_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_52_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_53_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_54_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_55_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_56_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

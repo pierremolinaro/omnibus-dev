@@ -8,6 +8,7 @@ configuration
   :0 // Stacked registers bytes count (ARM7TDMI save no reg in user stack on interrupt)
   :16 // as_swi_handler saves 4 registers on system stack
   :8 // as_undef_handler saves 2 registers on system stack
+  :"udfcoded" // Section invocation scheme
 {
   WDT
   ARMCore0

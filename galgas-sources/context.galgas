@@ -177,6 +177,8 @@ struct @semanticContext {
 #--- Tasks
   @taskMap mTaskMap
   @globalTaskVariableList mGlobalTaskVariableList
+#--- Implementation parameters
+  @string mSectionInvocationScheme
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

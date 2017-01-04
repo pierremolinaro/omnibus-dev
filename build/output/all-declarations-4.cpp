@@ -163,10 +163,16 @@ static const int16_t gActionTable_plm_target_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (33)
 , END
 // State S33 (index = 119)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (34)
+, END
+// State S34 (index = 122)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (35)
+, END
+// State S35 (index = 125)
 , C_Lexique_plm_5F_lexique::kToken__7B_, REDUCE (2)
 , END} ;
 
-static const uint32_t gActionTableIndex_plm_target_grammar [34] = {
+static const uint32_t gActionTableIndex_plm_target_grammar [36] = {
   0  // S0
 , 3  // S1
 , 6  // S2
@@ -201,6 +207,8 @@ static const uint32_t gActionTableIndex_plm_target_grammar [34] = {
 , 113  // S31
 , 116  // S32
 , 119  // S33
+, 122  // S34
+, 125  // S35
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -231,7 +239,7 @@ static const int16_t gSuccessorTable_plm_target_grammar_20 [3] = {7, 24, -1} ;
 
 static const int16_t gSuccessorTable_plm_target_grammar_24 [3] = {6, 28, -1} ;
 
-static const int16_t * gSuccessorTable_plm_target_grammar [34] = {
+static const int16_t * gSuccessorTable_plm_target_grammar [36] = {
 gSuccessorTable_plm_target_grammar_0, NULL, gSuccessorTable_plm_target_grammar_2, NULL, 
   NULL, NULL, gSuccessorTable_plm_target_grammar_6, NULL, 
   NULL, NULL, NULL, NULL, 
@@ -240,7 +248,7 @@ gSuccessorTable_plm_target_grammar_0, NULL, gSuccessorTable_plm_target_grammar_2
   gSuccessorTable_plm_target_grammar_20, NULL, NULL, NULL, 
   gSuccessorTable_plm_target_grammar_24, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
-  NULL, NULL} ;
+  NULL, NULL, NULL, NULL} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
@@ -251,7 +259,7 @@ gSuccessorTable_plm_target_grammar_0, NULL, gSuccessorTable_plm_target_grammar_2
 static const int16_t gProductionsTable_plm_target_grammar [12 * 2] = {
   1, 2,
   2, 2,
-  3, 10,
+  3, 12,
   4, 3,
   0, 8,
   5, 0,
@@ -545,7 +553,8 @@ mProperty_mPointerSize (),
 mProperty_mSystemStackSize (),
 mProperty_mStackedUserRegisterOnInterruptByteSize (),
 mProperty_mServicePushedRegisterByteSize (),
-mProperty_mSectionPushedRegisterByteSize () {
+mProperty_mSectionPushedRegisterByteSize (),
+mProperty_mSectionInvocationScheme () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -559,12 +568,14 @@ GALGAS_targetParameters::GALGAS_targetParameters (const GALGAS_lbigint & inOpera
                                                   const GALGAS_lbigint & inOperand1,
                                                   const GALGAS_lbigint & inOperand2,
                                                   const GALGAS_lbigint & inOperand3,
-                                                  const GALGAS_lbigint & inOperand4) :
+                                                  const GALGAS_lbigint & inOperand4,
+                                                  const GALGAS_lstring & inOperand5) :
 mProperty_mPointerSize (inOperand0),
 mProperty_mSystemStackSize (inOperand1),
 mProperty_mStackedUserRegisterOnInterruptByteSize (inOperand2),
 mProperty_mServicePushedRegisterByteSize (inOperand3),
-mProperty_mSectionPushedRegisterByteSize (inOperand4) {
+mProperty_mSectionPushedRegisterByteSize (inOperand4),
+mProperty_mSectionInvocationScheme (inOperand5) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -574,7 +585,8 @@ GALGAS_targetParameters GALGAS_targetParameters::constructor_default (UNUSED_LOC
                                   GALGAS_lbigint::constructor_default (HERE),
                                   GALGAS_lbigint::constructor_default (HERE),
                                   GALGAS_lbigint::constructor_default (HERE),
-                                  GALGAS_lbigint::constructor_default (HERE)) ;
+                                  GALGAS_lbigint::constructor_default (HERE),
+                                  GALGAS_lstring::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -583,11 +595,12 @@ GALGAS_targetParameters GALGAS_targetParameters::constructor_new (const GALGAS_l
                                                                   const GALGAS_lbigint & inOperand1,
                                                                   const GALGAS_lbigint & inOperand2,
                                                                   const GALGAS_lbigint & inOperand3,
-                                                                  const GALGAS_lbigint & inOperand4 
+                                                                  const GALGAS_lbigint & inOperand4,
+                                                                  const GALGAS_lstring & inOperand5 
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_targetParameters result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-    result = GALGAS_targetParameters (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
+    result = GALGAS_targetParameters (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
   }
   return result ;
 }
@@ -611,13 +624,16 @@ typeComparisonResult GALGAS_targetParameters::objectCompare (const GALGAS_target
   if (result == kOperandEqual) {
     result = mProperty_mSectionPushedRegisterByteSize.objectCompare (inOperand.mProperty_mSectionPushedRegisterByteSize) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mSectionInvocationScheme.objectCompare (inOperand.mProperty_mSectionInvocationScheme) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_targetParameters::isValid (void) const {
-  return mProperty_mPointerSize.isValid () && mProperty_mSystemStackSize.isValid () && mProperty_mStackedUserRegisterOnInterruptByteSize.isValid () && mProperty_mServicePushedRegisterByteSize.isValid () && mProperty_mSectionPushedRegisterByteSize.isValid () ;
+  return mProperty_mPointerSize.isValid () && mProperty_mSystemStackSize.isValid () && mProperty_mStackedUserRegisterOnInterruptByteSize.isValid () && mProperty_mServicePushedRegisterByteSize.isValid () && mProperty_mSectionPushedRegisterByteSize.isValid () && mProperty_mSectionInvocationScheme.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -628,6 +644,7 @@ void GALGAS_targetParameters::drop (void) {
   mProperty_mStackedUserRegisterOnInterruptByteSize.drop () ;
   mProperty_mServicePushedRegisterByteSize.drop () ;
   mProperty_mSectionPushedRegisterByteSize.drop () ;
+  mProperty_mSectionInvocationScheme.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -647,6 +664,8 @@ void GALGAS_targetParameters::description (C_String & ioString,
     mProperty_mServicePushedRegisterByteSize.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mSectionPushedRegisterByteSize.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mSectionInvocationScheme.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -679,6 +698,12 @@ GALGAS_lbigint GALGAS_targetParameters::getter_mServicePushedRegisterByteSize (U
 
 GALGAS_lbigint GALGAS_targetParameters::getter_mSectionPushedRegisterByteSize (UNUSED_LOCATION_ARGS) const {
   return mProperty_mSectionPushedRegisterByteSize ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_targetParameters::getter_mSectionInvocationScheme (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSectionInvocationScheme ;
 }
 
 

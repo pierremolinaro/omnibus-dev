@@ -305,6 +305,7 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
   public : GALGAS_lbigint mProperty_mStackedUserRegisterOnInterruptByteSize ;
   public : GALGAS_lbigint mProperty_mServicePushedRegisterByteSize ;
   public : GALGAS_lbigint mProperty_mSectionPushedRegisterByteSize ;
+  public : GALGAS_lstring mProperty_mSectionInvocationScheme ;
 
 
 //--------------------------------- Accessors
@@ -325,7 +326,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                     const GALGAS_lbigint & in_mSystemStackSize,
                                     const GALGAS_lbigint & in_mStackedUserRegisterOnInterruptByteSize,
                                     const GALGAS_lbigint & in_mServicePushedRegisterByteSize,
-                                    const GALGAS_lbigint & in_mSectionPushedRegisterByteSize) ;
+                                    const GALGAS_lbigint & in_mSectionPushedRegisterByteSize,
+                                    const GALGAS_lstring & in_mSectionInvocationScheme) ;
 
 //-- Start of generic part --*
 
@@ -342,7 +344,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                                                  const class GALGAS_lbigint & inOperand1,
                                                                  const class GALGAS_lbigint & inOperand2,
                                                                  const class GALGAS_lbigint & inOperand3,
-                                                                 const class GALGAS_lbigint & inOperand4
+                                                                 const class GALGAS_lbigint & inOperand4,
+                                                                 const class GALGAS_lstring & inOperand5
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -358,6 +361,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionInvocationScheme (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSectionPushedRegisterByteSize (LOCATION_ARGS) const ;
 
@@ -8685,6 +8690,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : GALGAS_prefixOperatorMap mProperty_mUnsignedComplementOperatorMap ;
   public : GALGAS_taskMap mProperty_mTaskMap ;
   public : GALGAS_globalTaskVariableList mProperty_mGlobalTaskVariableList ;
+  public : GALGAS_string mProperty_mSectionInvocationScheme ;
 
 
 //--------------------------------- Accessors
@@ -8748,7 +8754,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_prefixOperatorMap & in_mNotOperatorMap,
                                    const GALGAS_prefixOperatorMap & in_mUnsignedComplementOperatorMap,
                                    const GALGAS_taskMap & in_mTaskMap,
-                                   const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
+                                   const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
+                                   const GALGAS_string & in_mSectionInvocationScheme) ;
 
 //-- Start of generic part --*
 
@@ -8808,7 +8815,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_prefixOperatorMap & inOperand44,
                                                                 const class GALGAS_prefixOperatorMap & inOperand45,
                                                                 const class GALGAS_taskMap & inOperand46,
-                                                                const class GALGAS_globalTaskVariableList & inOperand47
+                                                                const class GALGAS_globalTaskVariableList & inOperand47,
+                                                                const class GALGAS_string & inOperand48
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -8892,6 +8900,8 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mRightShiftOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapForContext getter_mRoutineMapForContext (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSectionInvocationScheme (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_staticlistMap getter_mStaticlistMap (LOCATION_ARGS) const ;
 
