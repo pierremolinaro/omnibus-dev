@@ -157,6 +157,7 @@ private proc compileProject
           !interrupts:semanticContext.mAvailableInterruptMap
           !staticlistValues:staticListValueMap
           !sourceFileSet:sourceFileAbsolutePathSet
+          !sectionImplementation:semanticContext.mSectionInvocationScheme
         )
       end
     end

@@ -8,6 +8,7 @@ configuration
   :32 // Stacked registers bytes count (Cortex M4 saves 8 regs in user stack on interrupt)
   :12 // as_svc_handler saves 3 registers on system stack
   :8 // as_section_handler saves 2 registers on system stack
+  :"udfcoded" // Section invocation scheme
 {
   NMI : 2
   MemManage : 4

@@ -269,23 +269,39 @@ method @routineMapIR svcCodeGeneration
 proc generateSectionAndSafeDispatcher
   ?let @string inCurrentDirectory
   ?let @string inTargetName
+  ?let @string inSectionInvocationScheme
   ?!@string ioAssemblerCode
   ?let @2stringlist inSectionAndSafeList
 {
   for (callName implementationName) in inSectionAndSafeList do (idx)
-    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-entry.s")
+    var s = getTargetTextFile (
+      !currentDir:inCurrentDirectory
+      !from:inTargetName + "/section-invocation-" + inSectionInvocationScheme + ".s"
+    )
     s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
     s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
     ioAssemblerCode += s
   end
-  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-header.s")
+  ioAssemblerCode += getTargetTextFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName + "/section-dispatcher-header-" + inSectionInvocationScheme + ".s"
+  )
   for (* implementationName) in inSectionAndSafeList do (idx)
-    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/section-dispatcher-entry.s")
+    var s = getTargetTextFile (
+      !currentDir:inCurrentDirectory
+      !from:inTargetName + "/section-dispatcher-entry-" + inSectionInvocationScheme + ".s"
+    )
     s = [s stringByReplacingStringByString !"!ENTRY!" !implementationName]
     s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
     ioAssemblerCode += s
   end
   ioAssemblerCode += "\n"
+  ioAssemblerCode += getTargetTextFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName + "/section-dispatcher-code-" + inSectionInvocationScheme + ".s"
+  )
+  ioAssemblerCode += "@-------------------------------------------------------------"
+  ioAssemblerCode += "---------------------------------------------------------*\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

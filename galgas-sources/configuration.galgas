@@ -22,6 +22,7 @@ struct @targetParameters {
   @lbigint mStackedUserRegisterOnInterruptByteSize
   @lbigint mServicePushedRegisterByteSize
   @lbigint mSectionPushedRegisterByteSize
+  @lstring mSectionInvocationScheme
 }
 
 #·······················································································································
@@ -53,12 +54,15 @@ syntax extension plm_target_specific_syntax {
     $integer$ ?let servicePushedRegisterByteSize
     $:$
     $integer$ ?let sectionPushedRegisterByteSize
+    $:$
+    $"string"$ ?let sectionImplementationName
     parameters = @targetParameters.new {
       !pointerSize
       !systemStackSize
       !stackedUserRegisterOnInterruptByteSize
       !servicePushedRegisterByteSize
       !sectionPushedRegisterByteSize
+      !sectionImplementationName
     }
   }
 
@@ -174,6 +178,7 @@ override method @configurationDeclarationAST enterInContext
   ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicCodeTypeName}
   ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicLineTypeName}
   ioContext.mUnsignedIntegerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mUnsignedIntegerTypeName}
+  ioContext.mSectionInvocationScheme = mTargetParameters.mSectionInvocationScheme.string
   for (name panicCode) in mInterruptionConfigurationList do
     [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
     switch panicCode
