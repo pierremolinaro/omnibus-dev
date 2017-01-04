@@ -6,5 +6,7 @@
 
   .type __direct_return_for_null_service, %function
 
+  .align  2
+
 __svc_dispatcher_table:
   .word __direct_return_for_null_service @ 0

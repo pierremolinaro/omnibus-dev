@@ -43,31 +43,6 @@ syntax extension plm_target_specific_syntax {
 
   #·····················································································································
 
-  rule <targetParameters> !@targetParameters parameters {
-    $:$
-    $integer$ ?let pointerSize
-    $:$
-    $integer$ ?let systemStackSize
-    $:$
-    $integer$ ?let stackedUserRegisterOnInterruptByteSize
-    $:$
-    $integer$ ?let servicePushedRegisterByteSize
-    $:$
-    $integer$ ?let sectionPushedRegisterByteSize
-    $:$
-    $"string"$ ?let sectionImplementationName
-    parameters = @targetParameters.new {
-      !pointerSize
-      !systemStackSize
-      !stackedUserRegisterOnInterruptByteSize
-      !servicePushedRegisterByteSize
-      !sectionPushedRegisterByteSize
-      !sectionImplementationName
-    }
-  }
-
-  #·····················································································································
-
   rule <interruptConfigList> !@interruptionConfigurationList interruptionConfigurationList {
     ${$
     interruptionConfigurationList = {}
@@ -96,7 +71,26 @@ syntax extension plm_target_specific_syntax {
     $\$type$ ?let panicLineTypeName
     $:$
     $\$type$ ?let unsignedIntegerTypeName
-    <targetParameters> ?let parameters
+    $:$
+    $integer$ ?let pointerSize
+    $:$
+    $integer$ ?let systemStackSize
+    $:$
+    $integer$ ?let stackedUserRegisterOnInterruptByteSize
+    $:$
+    $integer$ ?let servicePushedRegisterByteSize
+    $:$
+    $integer$ ?let sectionPushedRegisterByteSize
+    $:$
+    $"string"$ ?let sectionImplementationName
+    let parameters = @targetParameters.new {
+      !pointerSize
+      !systemStackSize
+      !stackedUserRegisterOnInterruptByteSize
+      !servicePushedRegisterByteSize
+      !sectionPushedRegisterByteSize
+      !sectionImplementationName
+    }
     <interruptConfigList> ?let interruptionConfigurationList
     ioAST.mDeclarationListAST += !@configurationDeclarationAST.new {
       !panicCodeTypeName

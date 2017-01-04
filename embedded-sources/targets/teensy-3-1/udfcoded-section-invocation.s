@@ -1,24 +1,22 @@
 @----------------------------------------------------------------------------------------------------------------------*
-@  Section !ENTRY!
+@  Section !USER_ROUTINE!, implemented by !IMPLEMENTATION_ROUTINE!
 @----------------------------------------------------------------------------------------------------------------------*
 
-	.section	".text.!ENTRY!","ax",%progbits
-	.globl	!ENTRY!
-	.align	1
-	.type	!ENTRY!,%function
-	.code	16
-	.thumb_func
+  .section  ".text.!USER_ROUTINE!","ax",%progbits
 
-!ENTRY!:
-	.fnstart
+  .global !USER_ROUTINE!
+  .type  !USER_ROUTINE!,%function
+
+  .align  1
+  .code  16
+  .thumb_func
+
+!USER_ROUTINE!:
+  .fnstart
   udf !IDX!
   bx  lr
 
-.Lfunc_end_!ENTRY!:
-  .size	!ENTRY!, .Lfunc_end_!ENTRY! - !ENTRY!
+.Lfunc_end_!USER_ROUTINE!:
+  .size  !USER_ROUTINE!, .Lfunc_end_!USER_ROUTINE! - !USER_ROUTINE!
   .cantunwind
-	.fnend
-
-  .global !ENTRY!
-  .type !ENTRY!, %function
-
+  .fnend

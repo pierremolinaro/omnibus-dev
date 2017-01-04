@@ -278,7 +278,8 @@ proc generateSectionAndSafeDispatcher
       !currentDir:inCurrentDirectory
       !from:inTargetName + "/" + inSectionInvocationScheme + "-section-invocation.s"
     )
-    s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
+    s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
+    s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
     s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
     ioAssemblerCode += s
   end
@@ -286,12 +287,13 @@ proc generateSectionAndSafeDispatcher
     !currentDir:inCurrentDirectory
     !from:inTargetName + "/" + inSectionInvocationScheme + "-section-dispatcher-header.s"
   )
-  for (* implementationName) in inSectionAndSafeList do (idx)
+  for (callName implementationName) in inSectionAndSafeList do (idx)
     var s = getTargetTextFile (
       !currentDir:inCurrentDirectory
       !from:inTargetName + "/" + inSectionInvocationScheme + "-section-dispatcher-entry.s"
     )
-    s = [s stringByReplacingStringByString !"!ENTRY!" !implementationName]
+    s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
+    s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
     s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
     ioAssemblerCode += s
   end

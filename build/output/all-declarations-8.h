@@ -459,6 +459,14 @@ extern const char * gWrapperFileContent_53_targetTemplates ;
 extern const char * gWrapperFileContent_54_targetTemplates ;
 extern const char * gWrapperFileContent_55_targetTemplates ;
 extern const char * gWrapperFileContent_56_targetTemplates ;
+extern const char * gWrapperFileContent_57_targetTemplates ;
+extern const char * gWrapperFileContent_58_targetTemplates ;
+extern const char * gWrapperFileContent_59_targetTemplates ;
+extern const char * gWrapperFileContent_60_targetTemplates ;
+extern const char * gWrapperFileContent_61_targetTemplates ;
+extern const char * gWrapperFileContent_62_targetTemplates ;
+extern const char * gWrapperFileContent_63_targetTemplates ;
+extern const char * gWrapperFileContent_64_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -522,6 +530,14 @@ extern const cRegularFileWrapper gWrapperFile_53_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_54_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_55_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_56_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_57_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_58_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_59_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_60_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_61_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_62_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_63_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_64_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

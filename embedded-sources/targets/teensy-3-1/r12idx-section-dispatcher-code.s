@@ -25,7 +25,7 @@
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-  .section  ".text.as_section_handler","ax",%progbits
+	.section	".text.as_section_handler","ax",%progbits
 
   .global as_section_handler
   .type as_section_handler, %function
@@ -40,12 +40,10 @@ as_section_handler:
 @--------------------- Set return address to instruction following UDF
   adds  lr, #2
   str   lr, [r5, #24]
-@--------------------- R12 <- address of dispatcher
-  ldr   r12, =__udf_dispatcher_table
-@--------------------- LR <- bits 0-7 of UDF instruction
-  ldrb  lr, [lr, #-2]            @ LR is service call index
+@--------------------- LR <- address of dispatcher table
+  ldr   lr, =__udf_dispatcher_table
 @--------------------- r12 <- address of routine to call
-  ldr   r12, [r12, lr, lsl #2]   @ R12 += LR << 2
+  ldr   r12, [lr, r12, lsl #2]   @ Address : LR + R12 << 2
 @--------------------- Call service routine
   blx   r12                      @ R5: thread PSP
 @--------------------- Set return code (from R0 to R3) in stacked registers
