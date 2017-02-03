@@ -214,17 +214,17 @@ void extensionSetter_insertKey (class GALGAS_routineMapForContext & ioObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Extension method '@systemRoutineDeclarationListAST svcSemanticAnalysis'                       *
+//                  Extension method '@systemRoutineDeclarationListAST systemRoutineSemanticAnalysis'                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_svcSemanticAnalysis (const class GALGAS_systemRoutineDeclarationListAST inObject,
-                                          class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
-                                          const class GALGAS_semanticContext constin_inSemanticContext,
-                                          class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                          class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                          class C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
+void extensionMethod_systemRoutineSemanticAnalysis (const class GALGAS_systemRoutineDeclarationListAST inObject,
+                                                    class GALGAS_unifiedTypeMap_2D_proxy in_inReceiverType,
+                                                    const class GALGAS_semanticContext constin_inSemanticContext,
+                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                    class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

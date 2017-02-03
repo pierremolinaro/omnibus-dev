@@ -15,9 +15,8 @@ func %once staticAttribute -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once equatableFlag    -> @uint { result = 1 << 0 }
-#func %once comparableFlag   -> @uint { result = 1 << 1 }
-func %once instanciableFlag -> @uint { result = 1 << 2 }
-func %once copyableFlag     -> @uint { result = 1 << 3 }
+func %once instanciableFlag -> @uint { result = 1 << 1 }
+func %once copyableFlag     -> @uint { result = 1 << 2 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Type
@@ -105,6 +104,19 @@ func %once functionResultVariableName -> @string {
 
 func llvmNameForFunction ?let @string inName -> @string {
   result = ["func." + inName assemblerRepresentation]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func mapNameForFunctionAndSignature ?let @lstring inName ?let @procedureSignature signature -> @lstring {
+  var s = inName.string + "("
+  for formalArgument in signature do
+    s += [formalArgument.mFormalArgumentPassingMode formalPassingModeString]
+    s += formalArgument.mSelector
+    s += ":"
+  end
+  s += ")"
+  result = .new {!s !inName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

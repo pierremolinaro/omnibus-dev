@@ -156,7 +156,7 @@ method @systemRoutineDeclarationListAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @systemRoutineDeclarationListAST svcSemanticAnalysis
+method @systemRoutineDeclarationListAST systemRoutineSemanticAnalysis
   ?receiverType:@unifiedTypeMap-proxy inReceiverType
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
