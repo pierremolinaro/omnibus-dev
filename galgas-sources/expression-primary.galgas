@@ -256,7 +256,6 @@ override method @primaryInExpressionAST analyzeExpression
           !mObjectName
           ?*
           ?let object
-          ?*
         ]
         handleSelfAccessInExpression (
           !inSelfType
@@ -416,7 +415,7 @@ private proc handlePropertyInExpression
   if [[[ioObjectPtr type] kind] isStructure] then
     [[[ioObjectPtr type] kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?2*]
     if [structureObjectMap hasKey !inPropertyName] then
-      [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property ?*]
+      [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property]
       handlePropertyAccessInExpression (
         !?ioObjectPtr
         !inPropertyName.location
@@ -560,7 +559,7 @@ proc analyzeFunctionCallInExpression
   if specialCase then
     [[receiverType kind] structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?2*]
     if [propertyMap hasKey !inRoutineName] then
-      [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject ?*]
+      [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject]
       [propertyObject property ?type:let type ?plmName:let unused plmName ?index:let unused index]
       specialCase = [[type kind] isFunction]
       if specialCase then
@@ -788,7 +787,8 @@ proc analyzeEffectiveParameters
         case integer (* * * *) :
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
         case structure (* @propertyMap propertyMap * *) :
-          [propertyMap searchKey !name ?let unused public ?let propertyObject ?let idx]
+          [propertyMap searchKey !name ?let unused public ?let propertyObject]
+          [propertyObject property ?2* ?index:let idx]
           getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
           [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
             !fieldObjectReference

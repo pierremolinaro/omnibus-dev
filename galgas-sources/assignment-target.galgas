@@ -139,7 +139,7 @@ method @assignmentTargetAST analyzeAssignmentTarget
           !mIdentifier
           ?*
           ?let object
-          ?*
+#          ?*
         ]
         handleSelfAccessInAssignment (
           !inSelfType
@@ -226,7 +226,7 @@ private proc handlePropertyAccessInAssignment
   if [[[ioObject type] kind] isStructure] then
     [[[ioObject type] kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?2*]
     if [structureObjectMap hasKey !inPropertyName] then
-      [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property ?*]
+      [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property]
       if [property isProperty] then
         [property property ?type:let type ?plmName:let name ?index:let index]
         let newObject = @objectIR.temporaryReference {
