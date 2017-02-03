@@ -36,7 +36,7 @@ var nom = expression
 
 \subsection{Déclaration d'une variable locale non initialisée}
 \begin{PLM}
-var nom $yype
+var nom $type
 \end{PLM}
 Où :
 \begin{itemize}
@@ -215,74 +215,50 @@ Si le programme est compilé avec l'option \texttt{-{}-no-panic-generation}, alo
 
 L'instruction \plm=if= a une structure classique, où \plm=condition= est une expression booléenne :
 \begin{PLM}
-if condition then
+if condition {
   instructions_then
-else
+}else{
   instructions_else
-end
+}
 \end{PLM}
 
 Le compilateur vérifie que la \plm=condition= n'est pas une expression statique : une erreur de compilation est émise si elle l'est.
 
 La branche \plm=else= est optionnelle :
 \begin{PLM}
-if condition then
+if condition {
   instructions_then
-end
+}
 \end{PLM}
 
 
-Une ou plusieurs branches \plm=elsif= peuvent être ajoutées, avec ou sans branche \plm=else= :
+Une ou plusieurs branches \plm=else if= peuvent être ajoutées, avec ou sans branche \plm=else= :
 \begin{PLM}
-if condition then
+if condition {
   instructions_then
-elsif condition2 then
+}else if condition2 {
   instructions_elsif
-elsif condition3 then
+}else if condition3 {
   instructions_elsif_3
-else
+}else{
   instructions_else
-end
+}
 \end{PLM}
 
-\subsectionLabel{Étiquettes}{etiquette-if}
 
-Des \emph{étiquettes} peuvent être ajoutées pour augmenter la lisibilité :
+\section{Instruction \texttt{loop}}
+\index{if@\plm=loop=}
+
+L'instruction \plm=loop= permet d'exprimer une répétition, où la \plm=condition= est testée avant l'exécution des instructions de la boucle :
 \begin{PLM}
-if@xyz condition then
-  instructions_then
-elsif@xyz condition2 then
-  instructions_elsif
-elsif@xyz condition3 then
-  instructions_elsif_3
-else@xyz
-  instructions_else
-end@xyz
-\end{PLM}
-
-Une étiquette est lexicalement un attribut, c'est-à-dire un nom préfixé par un \texttt{@}. Si une étiquette est apposée à un \plm!if!, alors les \plm!elsif!, \plm!else! et \plm!end! correspondants doivent être suivis par la même étiquette. De plus, une étiquette est unique dans une routine.
-
-
-\section{Instruction \texttt{while}}
-\index{if@\plm=while=}
-
-L'instruction \plm=while= permet d'exprimer une répétition, où la \plm=condition= est testée avant l'exécution des instructions de la boucle :
-\begin{PLM}
-while condition do
+loop while condition {
   instructions_while
-end
+}
 \end{PLM}
 
 \plm=condition= est une expression booléenne, qui ne doit pas être statique : une erreur de compilation est émise si elle l'est.
 
-Des \emph{étiquettes} peuvent être ajoutées pour augmenter la lisibilité :
-\begin{PLM}
-while@boucle condition do
-  instructions_while
-end@boucle
-\end{PLM}
 
-Une étiquette est lexicalement un attribut, c'est-à-dire un nom préfixé par un \texttt{@}. Si une étiquette est apposée à un \plm!while!, alors le \plm!end! correspondant doit être suivi par la même étiquette. De plus, une étiquette est unique dans une routine.
 
 
 
@@ -296,3 +272,57 @@ Une étiquette est lexicalement un attribut, c'est-à-dire un nom préfixé par 
 \sectionLabel{Instruction \texttt{for}}{instructionFor}
 
 
+\begin{PLM}
+for nom $type in lower_bound ..< upper_bound {
+  instructions_for
+}
+\end{PLM}
+
+
+\begin{PLM}
+for nom in objet while expression {
+  instructions_for
+}
+\end{PLM}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Instruction d'appel de routine}{instructionAppelRoutine}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Instruction \texttt{switch}}{instructionSwitch}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{Instruction \texttt{sync}}{instructionSync}

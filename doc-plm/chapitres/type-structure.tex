@@ -186,7 +186,7 @@ struct $exemple {
   var x $int32
   
   func user getNok () -> $int32 {
-    result = self.x // Erreur : @userAccess est nécéssaire
+    result = self.x // Erreur : @userAccess est nécessaire
   }
   
   func user getOk @userAccess () -> $int32 {
@@ -194,7 +194,7 @@ struct $exemple {
   }
   
   func user getNok2  () -> $int32 {
-    result = self.getOk () // Erreur : @userAccess est nécéssaire
+    result = self.getOk () // Erreur : @userAccess est nécessaire
   }
   
   func user getOk2 @userAccess () -> $int32 {
@@ -239,7 +239,7 @@ struct $exemple {
   var x $int32
   
   func user setNok @userAccess (?inX $int32) {
-    self.x = inX // Erreur : @mutating est nécéssaire
+    self.x = inX // Erreur : @mutating est nécessaire
   }
   
   func user setOk @userAccess @mutating (?inX $int32) {
@@ -247,7 +247,7 @@ struct $exemple {
   }
   
   func user setNok2 @userAccess (?inX $int32) {
-    self.setOk (!inX) // Erreur : @mutating est nécéssaire
+    self.setOk (!inX) // Erreur : @mutating est nécessaire
   }
   
   func user setOk2 @userAccess @mutating (?inX $int32) {

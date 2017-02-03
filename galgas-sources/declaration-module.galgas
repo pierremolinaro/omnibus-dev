@@ -38,7 +38,7 @@ syntax extension plm_syntax {
     @functionDeclarationListAST functionDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}
     @guardDeclarationListAST guardListAST = {}
-    @svcDeclarationListAST svcListAST = {}
+    @systemRoutineDeclarationListAST svcListAST = {}
     @initList initList = {}
     repeat
     while
@@ -50,7 +50,7 @@ syntax extension plm_syntax {
     while
       <function> !?functionDeclarationListAST
     while
-     <section> !?svcListAST
+     <system_routine> !?svcListAST
     while
       <guard> !?guardListAST
     while

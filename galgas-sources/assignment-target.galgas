@@ -37,7 +37,6 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <assignment_target> !@assignmentTargetAST outAssignmentTargetAST {
-#    $zzz$
   #--- Self ?
     @assignmentSelfAccessAST selfAccess
     select

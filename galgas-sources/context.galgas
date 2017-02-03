@@ -219,7 +219,7 @@ proc buildSemanticContext
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
   [inAST.mProcedureListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
   [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
-  [inAST.mStandAloneSVCListAST enterInContext !receiverType:"" !?context: outSemanticContext]
+  [inAST.mStandAloneSystemRoutineListAST enterInContext !receiverType:"" !?context: outSemanticContext]
   [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
 #---
   for (declaration) in inDeclarationListAST do

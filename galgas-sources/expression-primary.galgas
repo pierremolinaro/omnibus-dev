@@ -334,13 +334,6 @@ override method @primaryInExpressionAST analyzeExpression
     end
   end
   outResult = currentPointer
-#--- Load from memory  
-#  [!?ioInstructionGenerationList appendLoadFromReference
-#    !?ioTemporaries
-#    !currentPointer
-#    !mObjectName.location
-#    ?outResult
-#  ]  
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -492,6 +485,7 @@ proc handleFunctionCallInExpression
   !@unifiedTypeMap-proxy outReturnedType
 {
   if not [ioObjectPtr isPossibleFunction] then
+    log ioObjectPtr
     error inErrorLocation : "object is not a function" : ioObjectPtr, outReturnedType
   elsif inGuard then
     [ioObjectPtr possibleFunction ?1* ?functionName:let functionName]

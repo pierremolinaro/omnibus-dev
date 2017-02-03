@@ -1,11 +1,11 @@
-%!TEX encoding = UTF-8 Unicode
+ %!TEX encoding = UTF-8 Unicode
 %!TEX root = ../doc-plm.tex
 
 
 
 
 
-\chapterLabel{Synchronisations}{chapitreSynchros}
+\chapterLabel{Synchronisation et communication}{chapitreSynchros}
 
 
 
@@ -57,4 +57,41 @@ struct $semaphore {
 }
 \end{PLM}
 
+
+
+
+\section{Implémentation des commandes gardées}
+
+\begin{figure}[ht]
+  \centering
+  \small
+  \begin{tikzpicture}[
+      block/.style ={chamfered rectangle, draw=black, fill=green!20, align=center, minimum height=0.75cm, minimum width=4cm},
+      node distance=2cm and 4cm
+    ]
+    \node [block] (horsGarde) at (0, 0) {Hors garde \textbar~$n == 0$} ;
+    \node [block] (gardeModifie) [right=of horsGarde] {Garde modifiée \textbar~$n == 0$} ;
+    \node [block] (evaluation) [below=of gardeModifie] {En évaluation \textbar~$n > 0$};
+    \node [block] (attente) [below=of horsGarde] {En attente \textbar~$n > 0$};
+
+    \draw [-stealth, thick] (-3, 0) to (horsGarde) ;
+
+    \draw [-stealth, thick, orange] (horsGarde) to [out=300,in=135] node [below] {Garde neutre $\blacktriangleright~n := n+1$} (evaluation) ;
+    \draw [-stealth, thick, orange] (evaluation) to [loop below] node [below] {Garde neutre $\blacktriangleright~n := n+1$} (evaluation) ;
+    \draw [-stealth, thick, orange] (gardeModifie) to [loop above] node [above] {Garde neutre $\blacktriangleright~n := n+1$} (gardeModifie) ;
+
+    \draw [-stealth, thick, OliveGreen] (evaluation) to [out=120,in=315] node [above] {Garde vraie $\blacktriangleright~n := 0$} (horsGarde) ;
+    \draw [-stealth, thick, OliveGreen] (horsGarde) to [loop above] node [above] {Garde vraie $\blacktriangleright~n := 0$} (horsGarde) ;
+    \draw [-stealth, thick, OliveGreen] (gardeModifie) to [out=175,in=5] node [above] {Garde vraie $\blacktriangleright~n := 0$} (horsGarde) ;
+
+    \draw [-stealth, thick, blue] (evaluation) to node [below] {waitForChange} (attente) ;
+    \draw [-stealth, thick, blue] (gardeModifie) to [out=185,in=355] node [below] {waitForChange} (horsGarde) ;
+
+    \draw [-stealth, thick, Maroon] (attente) to node [left] {guardDidChange} (horsGarde) ;
+    \draw [-stealth, thick, Maroon] (evaluation) to node [right] {guardDidChange} (gardeModifie) ;
+  \end{tikzpicture}
+  \caption{Graphe d'état des gardes d'une tâche}
+  \labelFigure{commandeGardee}
+  \ligne
+\end{figure}
 

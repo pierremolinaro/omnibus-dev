@@ -798,7 +798,7 @@ Quand la panique est inactivée, aucune routine d'interruption pas défaut n'est
 L'interruption \texttt{SysTick} est particulière. Elle est programmé par la routine \plm+init 0+ de façon à engendrer une interruption chaque milliseconde. Cette interruption se déclenche après la fin de l'exécution la routine \plm+init 0+, y compris éventuellement dans les routines \plm+init+ qui suivent. La routine d'interruption associée, inaccessible à l'utilisateur :
 \begin{itemize}
   \item incrémente une variable globale de comptage du temps ;
-  \item appelle la routine \plm=makeTasksReadyFrom= qui contrôle les tâches bloquées en attente d'échéance ; 
+  \item appelle la routine \plm=makeTasksReadyFrom= qui contrôle les tâches bloquées en attente d'échéance~; 
   \item appelle la routine \plm=tickHandlerForGuardedWaitUntil= qui contrôle les tâches en attente d'échéance en garde ; 
   \item appelle la routine \plm+userSystickHandler+.
 \end{itemize}

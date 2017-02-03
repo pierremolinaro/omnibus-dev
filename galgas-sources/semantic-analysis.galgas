@@ -100,7 +100,7 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-  [inAST.mStandAloneSVCListAST svcSemanticAnalysis
+  [inAST.mStandAloneSystemRoutineListAST svcSemanticAnalysis
     !receiverType:.null
     !context:inSemanticContext
     !?temporary:temporaries

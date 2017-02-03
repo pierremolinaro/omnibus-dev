@@ -6,7 +6,7 @@
 	.global	!USER_ROUTINE!
 	.type	!USER_ROUTINE!,%function
 
-	.align	1
+	.align	2
 	.code	32
 
 !USER_ROUTINE!:

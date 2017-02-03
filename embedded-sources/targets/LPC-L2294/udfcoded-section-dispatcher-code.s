@@ -24,6 +24,8 @@
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
+	.section	.text.as_undef_handler,"ax",%progbits
+
   .global as_undef_handler
 
 as_undef_handler:

@@ -13,7 +13,8 @@
 
 !USER_ROUTINE!:
   .fnstart
-  ldr r12, =!IMPLEMENTATION_ROUTINE!
+  movw  r12, :lower16:!IMPLEMENTATION_ROUTINE!
+  movt  r12, :upper16:!IMPLEMENTATION_ROUTINE!
   udf 0
   bx  lr
 

@@ -49,9 +49,9 @@ notifyChangeForGuardedWaitUntil (?withCurrentDate:inCurrentDate $uint32)
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
 
-required func safe activityLedOn @global ()
+required func safe activityLedOn @exported ()
 
-required func safe activityLedOff @global ()
+required func safe activityLedOff @exported ()
 
 //——————————————————————————————————————————————————————————————————————————————
 //   INIT                                                                       

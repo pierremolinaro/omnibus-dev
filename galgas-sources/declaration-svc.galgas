@@ -12,7 +12,7 @@ enum @routineKind {
 
 #·······················································································································
 
-list @svcDeclarationListAST {
+list @systemRoutineDeclarationListAST {
   @lstring mName
   @routineKind mRoutineKind
   @bool mPublic
@@ -32,7 +32,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <section> ?!@svcDeclarationListAST ioSVCListAST {
+  rule <system_routine> ?!@systemRoutineDeclarationListAST ioSVCListAST {
     @bool public
     select
       public = false
@@ -92,7 +92,7 @@ syntax extension plm_syntax {
 #  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @svcDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+method @systemRoutineDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for () in self do
     for (* * formalArgumentTypeName *) in mFormalArgumentList do
       let typeName = llvmRegularTypeMangledNameFromName (!formalArgumentTypeName)
@@ -106,7 +106,7 @@ method @svcDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePreceden
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @svcDeclarationListAST enterInContext
+method @systemRoutineDeclarationListAST enterInContext
   ?receiverType:let @string inReceiverTypeName
   ?!context:@semanticContext ioContext
 {
@@ -156,7 +156,7 @@ method @svcDeclarationListAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @svcDeclarationListAST svcSemanticAnalysis
+method @systemRoutineDeclarationListAST svcSemanticAnalysis
   ?receiverType:@unifiedTypeMap-proxy inReceiverType
   ?context:let @semanticContext inSemanticContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
