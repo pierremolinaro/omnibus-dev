@@ -303,6 +303,17 @@ void routine_enterEnumerationOperators (class GALGAS_lstring inArgument0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                      Function 'mapNameForFunctionAndSignature'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_mapNameForFunctionAndSignature (const class GALGAS_lstring & constinArgument0,
+                                                              const class GALGAS_procedureSignature & constinArgument1,
+                                                              class C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                          Function 'staticIntegerTypeName'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

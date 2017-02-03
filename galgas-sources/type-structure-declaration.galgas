@@ -288,7 +288,6 @@ override method @structureDeclaration enterInContext
       constructorSignature += !mFieldName.string !optionalPropertyType !propertyIndex
     end
   end
-#--- Function map
 #--- Enter in constructor map
   [!?ioContext.mConstructorMap insertKey
     !mStructureName
@@ -309,6 +308,26 @@ override method @structureDeclaration enterInContext
       error s : "only @copyable attribute is allowed here"
     end
   end
+#---------------------------------------- Enter routines in property map
+  for function in mFunctionDeclarationListAST do
+   #--- Signature
+    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let @procedureSignature signature)
+  #--- Return type
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
+  #--- Function mangled name
+    let functionMangledName = routineMangledNameFromAST (
+      !mStructureName 
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+    )
+  #---
+    let name = mapNameForFunctionAndSignature (!function.mFunctionName !signature)
+    [!?propertyMap insertKey
+      !name
+      !function.mPublicFunction
+      !.function {!returnType:returnType !signature:signature !plmName:functionMangledName}
+    ]
+  end
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
@@ -327,8 +346,14 @@ override method @structureDeclaration enterRoutinesInContext
     !selfTypeName:llvmRegularTypeMangledNameFromName (!mStructureName).string
     !?context:ioContext
   ]
-  [mSystemRoutineListAST enterInContext !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string !?context:ioContext]
-  [mGuardListAST enterInContext !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string !?context:ioContext]
+  [mSystemRoutineListAST enterInContext
+    !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string
+    !?context:ioContext
+  ]
+  [mGuardListAST enterInContext
+    !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string
+    !?context:ioContext
+  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -348,8 +373,8 @@ override method @structureDeclaration semanticAnalysis
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   ]
-#--- Analyze svc
-  [mSystemRoutineListAST svcSemanticAnalysis
+#--- Analyze system routines
+  [mSystemRoutineListAST systemRoutineSemanticAnalysis
     !receiverType:structureType
     !context:inContext
     !?temporary:ioTemporaries
