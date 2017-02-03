@@ -95,7 +95,8 @@ FIQAddr:       .word !ISR!FIQ
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
-   .section .init, "ax"
+   .section .text.as_reset_handler, "ax"
+
    .global as_reset_handler
 
 as_reset_handler:
@@ -121,13 +122,13 @@ as_reset_handler:
 @---------------------------------------- Call entry point
    b    __entry_point
 
-   .text
-
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
 @              I N T E R R U P T    V E C T O R S                                                                      *
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
+
+   .section .text.__plm_interrupt_vectors, "ax"
 
   .global __plm_interrupt_vectors
 
@@ -216,6 +217,8 @@ __plm_interrupt_vectors :
 @        S W I    H A N D L E R                                                                                        *
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
+
+	.section	.text.as_swi_handler,"ax",%progbits
 
   .global as_swi_handler
 

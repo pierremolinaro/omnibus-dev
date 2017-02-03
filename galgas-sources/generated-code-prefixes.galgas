@@ -282,8 +282,8 @@ func %once noUnusedWarningAttribute -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once globalAttribute -> @string {
-  result = "global"
+func %once exportedAttribute -> @string {
+  result = "exported"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

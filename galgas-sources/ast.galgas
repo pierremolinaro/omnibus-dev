@@ -26,7 +26,7 @@ struct @ast {
   @requiredProcedureDeclarationListAST mRequiredProcListAST
   @externProcedureDeclarationListAST mExternProcListAST
   @isrDeclarationListAST mISRDeclarationListAST
-  @svcDeclarationListAST mStandAloneSVCListAST
+  @systemRoutineDeclarationListAST mStandAloneSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
   @lstringlist mTargetListAST
   @bootList mBootListAST

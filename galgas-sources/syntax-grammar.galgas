@@ -6,7 +6,7 @@ syntax plm_syntax (plm_lexique) {
 
   rule <function> ?!@functionDeclarationListAST ioProcListAST
 
-  rule <section> ?!@svcDeclarationListAST ioSVCListAST
+  rule <system_routine> ?!@systemRoutineDeclarationListAST ioSVCListAST
 
   rule <isr> ?!@isrDeclarationListAST ioISRListAST ?let @lstring inSelfTypeName ?let @string inGlobalVarName
 
@@ -36,7 +36,7 @@ syntax plm_syntax (plm_lexique) {
     while
       <function> !?ioAst.mProcedureListAST
     while
-      <section> !?ioAst.mStandAloneSVCListAST
+      <system_routine> !?ioAst.mStandAloneSystemRoutineListAST
     while
       <isr> !?ioAst.mISRDeclarationListAST !["" nowhere] !""
     while

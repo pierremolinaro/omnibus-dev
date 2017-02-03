@@ -4,13 +4,13 @@
 \chapterLabel{Démarrage du micro-contrôleur}{chapitreDemarrageMicro}
 
 
-\section{Séquence de démarrage}
+\sectionLabel{Séquence de démarrage}{sequenceDemarrage}
 
 La séquence de démarrage du micro-contrôleur est illustrée par la \refFigure{}{sequenceDemarrage}.
 
 La première étape est de configurer les horloges internes du micro-contrôleur : c'est le rôle des routines \plm=boot=. À ce stade, la mémoire vive n'est toujours pas initialisée, aussi les routines \plm=boot= n'y accèdent pas (le compilateur l'assure).
 
-La deuxième étape est d'initialiser les \emph{variables globales}, c'est-à-dire mettre à zéro la zone \texttt{bss}, et de recopier à partir de la flash les valeurs initiales des variables initialisées.
+La deuxième étape est d'initialiser les \emph{variables globales}, c'est-à-dire mettre à zéro la zone «~\texttt{.bss.*}~», et de recopier à partir de la flash les valeurs initiales des variables initialisées.
 
 La troisième étape est l'exécution des routines \plm=init=. À partir de cette étape et pour les suivantes, les variables globales sont initialisées, et donc leur emploi est autorisé. Le rôle des routines \plm=init= est de configurer les entrées/sorties du micro-contrôleur.
 

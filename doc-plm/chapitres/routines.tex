@@ -14,14 +14,14 @@ Un \emph{routine} est une construction qui contient du code à exécuter. PLM d�
   \item les \emph{boot routines}, exécutées une fois avant l'initialisation des variables globales (\refSectionPage{bootRoutine}) ;
   \item les \emph{init routines}, exécutées une fois après l'initialisation des variables globales (\refSectionPage{initRoutine}) ;
   \item les \emph{routines de panique}, exécutées lors d'une panique (\refSectionPage{routinePanique}) ;
-  \item les routines \emph{systèmes}, qui sont les points d'entrée des routines privilégiées à partir des routines utilisateur (\refSectionPage{declarationSystem}) ;
+  \item les routines \emph{système}, qui sont les points d'entrée des routines privilégiées à partir des routines utilisateur (\refSectionPage{declarationSystem}) ;
   \item les \emph{routines d'interruption}, qui sont des primitives de l'exécutif (\refSectionPage{declarationRoutineInterruption}).
 \end{itemize}
 
 
 \section{Modes logiques}
 
-À chaque routine est attachée statiquement un mode d'exécution.
+À chaque routine est attaché statiquement un mode d'exécution.
 
 La plupart des processeurs définit plusieurs modes d'exécution, typiquement un mode \emph{système} ou \emph{privilégié} (où toutes les ressources sont accessibles), et un mode \emph{utilisateur}, où certaines instructions, espace mémoire, registres de contrôles sont inaccessibles.
 
@@ -241,7 +241,7 @@ Où :
   \item \plm=mode= est le mode associé à la fonction, c'est l'un des mots réservés \plm=primitive=, \plm=service=, \plm=section= ou \plm=safe= ;
   \item \plm=@attribut= est une liste éventuellement vide d'attributs associés à la fonction ;
   \item \plm=arguments_formels= est la liste (éventuellement vide) des paramètres formels~;
-  \item \plm=@type= est le type de la valeur renvoyée.
+  \item \plm=$type= est le type de la valeur renvoyée.
 \end{itemize}
 
 Contrairement à beaucoup de langages, PLM n'a pas d'instruction \texttt{return}, qui permettrait de nommer la valeur de retour. En PLM, une variable nommée \plm=result= est implicitement déclarée du type \plm=$type=, et est non valuée initialement. La liste d'instructions de la fonction {\bf doit} valuer cette variable. Sa valeur à l'issue de l'exécution de la liste d'instructions est la valeur renvoyée par la fonction. 
@@ -365,7 +365,7 @@ Le type C \texttt{TaskList} correspond au type PLM \plm=$taskList= ; ces deux ty
 
 Le mode de passage de l'argument est spécifié par le sélecteur \plm=?!inList:=, c'est le mode \emph{entrée/sortie}, qui correspond au passage d'un pointeur en C. C'est au programmeur de s'assurer que les mode de passage spécifiés en PLM et C correspondent.
 
-Enfin, le nom de la routine engendré en assembleur par le compilateur CLANG est spécifié par \texttt{asm("!FUNC!blockInList")}. Le nom « \texttt{blockInList} » doit être celui déclaré comme « \emph{nom-assembleur} » dans la déclaration PLM, et « \texttt{!FUNC!} » est remplacé par « \texttt{func.} » par le pré-processeur PLM.
+Enfin, le nom assembleur de la routine engendrée par le compilateur CLANG est spécifié par la deuxième ligne «~\texttt{asm("!FUNC!blockInList")}~». Le nom « \texttt{blockInList} » doit être celui déclaré comme «~\emph{nom-assembleur}~» dans la déclaration PLM, et « \texttt{!FUNC!} » est remplacé par «~\texttt{func.}~» par le compilateur PLM.
 
 
 
@@ -377,9 +377,9 @@ L'attribut \plm+@noUnusedWarning+ signifie qu'aucune alerte n'est émise si la f
 
 
 
-\subsectionLabel{Attribut \texttt{@global}}{attributProcGlobale}\index{"@global}
+\subsectionLabel{Attribut \texttt{@exported}}{attributProcGlobale}\index{"@global}
 
-L'attribut \plm+@global+ signifie que la procédure sera visible par le code C et assembleur du projet. Ainsi une procédure écrite en PLM pourra être appelée à partir du code C et du code assembleur.
+L'attribut \plm+@exported+ signifie que la procédure sera visible par le code C et assembleur du projet. Ainsi une procédure écrite en PLM pourra être appelée à partir du code C et du code assembleur.
 
 
 
@@ -388,7 +388,7 @@ L'attribut \plm+@global+ signifie que la procédure sera visible par le code C e
 
 \subsectionLabel{Fonctions « universelles »}{fonctionUniverselle}
 
-Les fonctions universelles peuvent être appelées à partir de n'importe quel mode. Leur déclaration est la suivante :
+Les fonctions universelles peuvent être appelées à partir de n'importe quel mode. Leur déclaration est la suivante, la notation de mode est simplement absente~:
 
 \begin{PLM}
 // Fonction universelle renvoyant un résultat
@@ -435,21 +435,23 @@ Si la fonction est déclarée avec le mode \plm!user!, seuls les registres de co
 
 \subsectionLabel{Fonctions et variables globales}{fonctionEtVariableGlobale}
 
-Les fonctions peuvent accéder aux variables globales en lecture, mais ne peuvent pas les modifier.
+Voir \refSectionPage{restrictionUsageVariableGlobale}.
 
-L'accès en lecture à une variable globale est autorisé par la variable qui nomme la fonction parmi les routines autorisées :
-
-\begin{PLM}
-var gGlobalVar $uint56 {
-  ...
-  func getGlobalVar
-}
-
-func getGlobalVar user () -> $uint56 {
-  result = getGlobalVar
-}
-\end{PLM}
-
+%Les fonctions peuvent accéder aux variables globales en lecture, mais ne peuvent pas les modifier.
+%
+%L'accès en lecture à une variable globale est autorisé par la variable qui nomme la fonction parmi les routines autorisées :
+%
+%\begin{PLM}
+%var gGlobalVar $uint56 {
+%  ...
+%  func getGlobalVar
+%}
+%
+%func getGlobalVar user () -> $uint56 {
+%  result = getGlobalVar
+%}
+%\end{PLM}
+%
 
 
 
@@ -500,11 +502,6 @@ Où :
 
 
 
-\subsectionLabel{Sections et variables globales}{sectionEtVariablesGlobales}
-
-[À REVOIR]
-
-Pour pouvoir être utilisée dans une routine système, une variable globale doit la déclarer parmi les routines autorisées (\refSectionPage{DecRoutinesAutoriseesVarGlobale}).
 
 
 

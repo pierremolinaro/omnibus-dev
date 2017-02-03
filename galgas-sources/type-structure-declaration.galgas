@@ -7,7 +7,7 @@ class @structureDeclaration : @abstractDeclaration {
   @lstringlist mAttributeListAST
   @structurePropertyListAST mStructureFieldListAST
   @functionDeclarationListAST mFunctionDeclarationListAST
-  @svcDeclarationListAST mSVCListAST
+  @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
 }
 
@@ -81,7 +81,7 @@ syntax extension plm_syntax {
     ${$
     @functionDeclarationListAST procedureDeclarationListAST = {}
     @structurePropertyListAST fieldList = {}
-    @svcDeclarationListAST svcListAST = {}
+    @systemRoutineDeclarationListAST systemRoutineListAST = {}
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
@@ -89,7 +89,7 @@ syntax extension plm_syntax {
     while
       <function> !?procedureDeclarationListAST
     while
-      <section> !?svcListAST
+      <system_routine> !?systemRoutineListAST
     while
       <guard> !?guardListAST
     while
@@ -101,7 +101,7 @@ syntax extension plm_syntax {
       !attributeList
       !fieldList
       !procedureDeclarationListAST
-      !svcListAST
+      !systemRoutineListAST
       !guardListAST
     }
   }
@@ -128,7 +128,7 @@ override method @structureDeclaration addExtension
         ![newDeclaration mAttributeListAST]
         ![newDeclaration mStructureFieldListAST] + properties
         ![newDeclaration mFunctionDeclarationListAST] + functions
-        ![newDeclaration mSVCListAST] + svcs
+        ![newDeclaration mSystemRoutineListAST] + svcs
         ![newDeclaration mGuardListAST] + guards      
       }
     else
@@ -167,7 +167,7 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
     [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 #--- Add structure services, section, primitives and guards
-  [mSVCListAST noteTypesInPrecedenceGraph !?ioGraph]
+  [mSystemRoutineListAST noteTypesInPrecedenceGraph !?ioGraph]
   [mGuardListAST noteTypesInPrecedenceGraph !?ioGraph]
 }
 
@@ -215,6 +215,21 @@ sortedlist @sortedOperandIRList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @unifiedStructureElementKind {
+  case property (@objectIR object @uint index)
+}
+
+#·······················································································································
+
+map @unifiedStructureElementMap {
+  @bool mIsPublic
+  @unifiedStructureElementKind mElement
+  insert insertKey error message "the '%K' element is already declared"
+  search searchKey error message "there is no '%K' entity in this context"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 override method @structureDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -222,6 +237,7 @@ override method @structureDeclaration enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---------------------------------------- Properties
+  @unifiedStructureElementMap unifiedStructureElementMap = {} 
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
@@ -276,6 +292,12 @@ override method @structureDeclaration enterInContext
         !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
         !propertyIndex
       ]
+#      [!?unifiedStructureElementMap insertKey
+#        !mFieldName
+#        !mIsPublic
+#        !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
+#        !propertyIndex
+#      ]     
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     case noExpression :
       if not [[optionalPropertyType kind] instanciable] then
@@ -330,7 +352,7 @@ override method @structureDeclaration enterRoutinesInContext
     !selfTypeName:llvmRegularTypeMangledNameFromName (!mStructureName).string
     !?context:ioContext
   ]
-  [mSVCListAST enterInContext !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string !?context:ioContext]
+  [mSystemRoutineListAST enterInContext !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string !?context:ioContext]
   [mGuardListAST enterInContext !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string !?context:ioContext]
 }
 
@@ -352,7 +374,7 @@ override method @structureDeclaration semanticAnalysis
     !?intermediateCode:ioIntermediateCodeStruct
   ]
 #--- Analyze svc
-  [mSVCListAST svcSemanticAnalysis
+  [mSystemRoutineListAST svcSemanticAnalysis
     !receiverType:structureType
     !context:inContext
     !?temporary:ioTemporaries

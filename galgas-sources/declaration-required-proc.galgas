@@ -32,8 +32,8 @@ syntax extension plm_syntax {
 #    )
     var isGlobal = false
     for (attribute) in attributeList do
-      if attribute.string != globalAttribute () then
-        error attribute : "invalid attribute" fixit { replace "@" + globalAttribute () }
+      if attribute.string != exportedAttribute () then
+        error attribute : "invalid attribute" fixit { replace "@" + exportedAttribute () }
       elsif isGlobal then
         error attribute : "duplicated attribute" fixit { remove }
       else
@@ -81,11 +81,11 @@ proc checkRequiredProcedures
     #--- Check attributes
       if requiredProc.mIsGlobal && not isGlobal then
         error routineLocation
-        : "missing @" + globalAttribute () + " attribute (required function declaration names it)"
-        fixit { after " @" + globalAttribute () }
+        : "missing @" + exportedAttribute () + " attribute (required function declaration names it)"
+        fixit { after " @" + exportedAttribute () }
       elsif isGlobal && not requiredProc.mIsGlobal then
         error routineLocation
-        : "incorrect @" + globalAttribute () + " attribute (required function declaration does not name it)"
+        : "incorrect @" + exportedAttribute () + " attribute (required function declaration does not name it)"
       end
     end
   end

@@ -25,52 +25,27 @@
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
-%   A F F I C H E R    L E    D E T A I L    D E S    S C H É M A S    É L E C T R O N I Q U E S                        *
-%                                                                                                                       *
-%-----------------------------------------------------------------------------------------------------------------------*
-
-%--- Par défaut, le détail des schémas est affiché
-\providecommand\afficherDetailSchema{true}
-
-%-----------------------------------------------------------------------------------------------------------------------*
-%                                                                                                                       *
 %   E N C O D A G E    D E S    S O U R C E S     :     U T F 8                                                         *
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
-
-%--------------------------- Pour compilation LaTex
-
-%--- Ce paquetage permet d'effectuer certaines césures, et ainsi d'éviter les messages "Overfull \hbox"
-%\usepackage[T1]{fontenc}
-
-%--- Paquetage pour le codage des sources en UTF-8
-%\usepackage[utf8x]{inputenc}
-
-%--- Paquetage pour imposer les réglages français
-%\usepackage[frenchb]{babel}
-
-%--- Polices
-%%\usepackage{fouriernc}
-%%\usepackage[scaled=0.875]{helvet}
-
-%\usepackage[scaled=0.85, default]{sourcecodepro}
-%\usepackage[scaled=1.0, default]{sourcesanspro}
-
 
 %--------------------------- Pour compilation XeLaTex
 % http://www.tuteurs.ens.fr/logiciels/latex/xetex.html
 \RequirePackage{etex}
 \usepackage{fontspec}
-\setmainfont{Verdana}[Ligatures=TeX]
-\setsansfont{Courier}[Ligatures=NoCommon]
-\setmonofont{Menlo}[Ligatures=NoCommon]
+\setmainfont[Ligatures=TeX]{Cambria} % {Gill Sans} % {Palatino} % {Optima} % {Hoefler Text}
+\setsansfont[Ligatures={NoCommon}]{Courier}
+\setmonofont[Ligatures=NoCommon, Scale=0.9]{Menlo}
 \usepackage{polyglossia}
 \setdefaultlanguage{french}
 
 %-----------------------------------------------------------------------------------------------------------------------*
-%                                                                                                                       *
-%   R É G L A G E S    « F R A N Ç A I S »                                                                              *
-%                                                                                                                       *
+
+% http://forum.mathematex.net/latex-f6/supprimer-les-espaces-devant-la-ponctuation-t15951.html
+\makeatletter
+\newcommand{\nospace}[1]{\nofrench@punctuation\texttt{#1}}
+\makeatother
+
 %-----------------------------------------------------------------------------------------------------------------------*
 
 %--- Latex demande ce paquetage pour mieux afficher le caractère "°" et \textquotesingle "'"
@@ -179,6 +154,20 @@
 %  http://tex.stackexchange.com/questions/6238/get-the-title-instead-of-the-number-of-a-referenced-chapter-section
 
 \usepackage{nameref}% Only if hyperref isn't loaded
+
+%-----------------------------------------------------------------------------------------------------------------------*
+%                                                                                                                       *
+%   E N U M I T E M                                                                                                     *
+%                                                                                                                       *
+%-----------------------------------------------------------------------------------------------------------------------*
+% Ce paquetage permet de personaliser les listes, par exemple : 
+% http://www.xm1math.net/doculatex/listes.html
+%\begin{enumerate}[label=(\arabic*)]
+%  \item ... ; % (1) ...
+%  \item ... ; % (2) ...
+%\end{enumerate}
+
+\usepackage{enumitem}
 
 %-----------------------------------------------------------------------------------------------------------------------*
 %                                                                                                                       *
@@ -482,22 +471,6 @@
   shadows%
 }
 
-%--- Contrôle de l'affichage des circuits électroniques
-\ifthenelse{\equal{\sortieEnCouleur}{true} \and \equal{\afficherDetailSchema}{true}}{
-
-}{
-  \newcommand\PMCouleurGrilleSchema{white} % Pour afficher la grille des schémas en blanc (donc invisible)
-  \newcommand\PMAfficherPoint{0} % Pour ne pas afficher les points (par défaut, ils sont affichés)
-  \newcommand\PMCouleurFondComposantsIntegres{\fondTableau} % Couleur de fond des composants intégrés
-}
-
-%--- Autre couleur utilisée
-\ifthenelse{\equal{\sortieEnCouleur}{true}}{
-  \newcommand\couleurAlterneeSchema{green!50}
-}{
-  \newcommand\couleurAlterneeSchema{gray!50}
-}
-
 %-----------------------------------------------------------------------------------------------------------------------*
 %   A F F I C H A G E    D U    C O D E    P L M                                                                        *
 %-----------------------------------------------------------------------------------------------------------------------*
@@ -616,9 +589,16 @@
 %                                                                                                                       *
 %-----------------------------------------------------------------------------------------------------------------------*
 
+% http://forum.mathematex.net/latex-f6/supprimer-les-espaces-devant-la-ponctuation-t15951.html
+% \nofrench@punctuation supprime l'insertion d'espace avant '!', ':'.
+% \addfontfeatures{Ligatures={NoRequired, NoCommon, NoContextual}}
+% \addfontfeatures{Mapping=}
+
+\makeatletter
 \newenvironment{SHELL}
-{\begin{mdframed}[backgroundcolor=lightgray!50,linewidth=0]\tt}
+{\begin{mdframed}[backgroundcolor=lightgray!50,linewidth=0]\tt\nofrench@punctuation}
 {\end{mdframed}}
+\makeatother
 
 
 %-----------------------------------------------------------------------------------------------------------------------*

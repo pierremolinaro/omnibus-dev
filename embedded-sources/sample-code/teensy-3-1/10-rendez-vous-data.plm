@@ -4,11 +4,11 @@ target "teensy-3-1"
 //   ACTIVITY LED                                                               
 //——————————————————————————————————————————————————————————————————————————————
 
-func safe activityLedOn @global () {
+func safe activityLedOn @exported () {
   digitalWrite (!port:.D13 !true)
 }
 
-func safe activityLedOff @global () {
+func safe activityLedOff @exported () {
   digitalWrite (!port:.D13 !false)
 }
 

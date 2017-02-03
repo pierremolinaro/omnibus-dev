@@ -6,7 +6,7 @@ list @extensionDeclarationListAST {
   @lstring mTypeName
   @functionDeclarationListAST mProcedureDeclarationListAST
   @structurePropertyListAST mPropertyList
-  @svcDeclarationListAST mSVCListAST
+  @systemRoutineDeclarationListAST mSVCListAST
   @guardDeclarationListAST mGuardListAST
 }
 
@@ -24,7 +24,7 @@ syntax extension plm_syntax {
     ${$
     @functionDeclarationListAST procedureDeclarationListAST = {}
     @structurePropertyListAST propertyList = {}
-    @svcDeclarationListAST svcListAST = {}
+    @systemRoutineDeclarationListAST svcListAST = {}
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
@@ -32,7 +32,7 @@ syntax extension plm_syntax {
     while
       <function> !?procedureDeclarationListAST
     while
-     <section> !?svcListAST
+     <system_routine> !?svcListAST
     while
       <guard> !?guardListAST
     while

@@ -228,7 +228,7 @@ method @functionDeclarationListAST enterFunctionInContext
     var globalFunction = false
     var canMutateProperties = false
     for (attribute) in function.mFunctionAttributeList do
-      if attribute.string == globalAttribute () then
+      if attribute.string == exportedAttribute () then
         globalFunction = true
       elsif attribute.string == mutatingAttribute () then
         canMutateProperties = true
@@ -279,14 +279,14 @@ method @functionDeclarationListAST procedureSemanticAnalysis
           error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
         end
         warnIfUnused = false    
-      elsif attribute.string == globalAttribute () then
+      elsif attribute.string == exportedAttribute () then
         if globalProcedure then
-          error attribute : "duplicated @" + globalAttribute () + " attribute"
+          error attribute : "duplicated @" + exportedAttribute () + " attribute"
         end
         globalProcedure = true    
       else
         error attribute : "unknown attribute; available attributes are @"
-          + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + ", @" + globalAttribute ()
+          + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + ", @" + exportedAttribute ()
       end
     end
     routineSemanticAnalysis (

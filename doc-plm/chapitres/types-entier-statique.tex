@@ -31,7 +31,7 @@ Il est possible d'utiliser une constante entière statique pour définir une aut
 let P = N + 1 // Ok, P a pour type $staticInt, et vaut 1_000_001
 \end{PLM}
 
-Le type \plm!$staticInt! n'est pas acceptable pour une variable, aussi la déclaration suivant provoque une erreur de compilation :
+Le type \plm!$staticInt! n'est pas acceptable pour une variable, aussi la déclaration suivante provoque une erreur de compilation :
 \begin{PLM}
 var N = 1_000_000 // Erreur, $staticInt invalide pour une variable
 \end{PLM}
@@ -47,7 +47,7 @@ var w $uint8 = 1_000 // Erreur, 1_000 ne peut pas être représenté
                      // par un entier non signé de 8 bits
 \end{PLM}
 
-Comme les constantes entières statiques sont calculées à la compilation, l'écriture suivante est correcte :
+Comme les constantes entières statiques sont calculées à la compilation, l'écriture suivante est correcte~:
 \begin{PLM}
 let A = 1_000_000_000_000_000_000_000_000_000_000_000_000_000
 let B = 1_000_000_000_000_000_000_000_000_000_000_000_000_001
