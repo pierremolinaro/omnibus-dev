@@ -191,7 +191,6 @@ list @propertyList {
 map @propertyMap {
   @bool mIsPublic
   @objectIR mPropertyObject
-  @uint mIndex
   insert insertKey error message "the '%K' property is already declared"
   search searchKey error message "there is no '%K' property"
 }
@@ -215,21 +214,6 @@ sortedlist @sortedOperandIRList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @unifiedStructureElementKind {
-  case property (@objectIR object @uint index)
-}
-
-#·······················································································································
-
-map @unifiedStructureElementMap {
-  @bool mIsPublic
-  @unifiedStructureElementKind mElement
-  insert insertKey error message "the '%K' element is already declared"
-  search searchKey error message "there is no '%K' entity in this context"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @structureDeclaration enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
@@ -237,7 +221,6 @@ override method @structureDeclaration enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---------------------------------------- Properties
-  @unifiedStructureElementMap unifiedStructureElementMap = {} 
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
@@ -290,14 +273,7 @@ override method @structureDeclaration enterInContext
         !mFieldName
         !mIsPublic
         !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
-        !propertyIndex
       ]
-#      [!?unifiedStructureElementMap insertKey
-#        !mFieldName
-#        !mIsPublic
-#        !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
-#        !propertyIndex
-#      ]     
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     case noExpression :
       if not [[optionalPropertyType kind] instanciable] then
@@ -308,7 +284,6 @@ override method @structureDeclaration enterInContext
         !mFieldName
         !mIsPublic
         !.property {!type:optionalPropertyType !plmName:mFieldName !index:propertyIndex}
-        !propertyIndex
       ]
       constructorSignature += !mFieldName.string !optionalPropertyType !propertyIndex
     end

@@ -257,7 +257,6 @@ method @taskVarListAST-element enterInContext
     !mVarName
     !false
     !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
-    ![ioPropertyList length]
   ]
   ioInitialValueList += !result
   ioPropertyList += !mVarName.string ![result type]
