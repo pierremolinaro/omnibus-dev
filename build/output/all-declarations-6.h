@@ -214,7 +214,7 @@ void routine_analyzeFunctionCallInExpression (const class GALGAS_unifiedTypeMap_
                                               const class GALGAS_bool constinArgument2,
                                               const class GALGAS_objectIR constinArgument3,
                                               const class GALGAS_lstring constinArgument4,
-                                              const class GALGAS_effectiveParameterListAST constinArgument5,
+                                              const class GALGAS_effectiveArgumentListAST constinArgument5,
                                               const class GALGAS_lstring constinArgument6,
                                               const class GALGAS_semanticContext constinArgument7,
                                               const class GALGAS_mode constinArgument8,
@@ -308,7 +308,7 @@ void routine_enterEnumerationOperators (class GALGAS_lstring inArgument0,
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_lstring function_mapNameForFunctionAndSignature (const class GALGAS_lstring & constinArgument0,
-                                                              const class GALGAS_procedureSignature & constinArgument1,
+                                                              const class GALGAS_routineTypedSignature & constinArgument1,
                                                               class C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 

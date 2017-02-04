@@ -108,7 +108,7 @@ func llvmNameForFunction ?let @string inName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func mapNameForFunctionAndSignature ?let @lstring inName ?let @procedureSignature signature -> @lstring {
+func mapNameForFunctionAndSignature ?let @lstring inName ?let @routineTypedSignature signature -> @lstring {
   var s = inName.string + "("
   for formalArgument in signature do
     s += [formalArgument.mFormalArgumentPassingMode formalPassingModeString]

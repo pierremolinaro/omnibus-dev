@@ -771,9 +771,9 @@ void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArg
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
-                                   const class GALGAS_procFormalArgumentList constinArgument1,
+                                   const class GALGAS_routineFormalArgumentList constinArgument1,
                                    class GALGAS_unifiedSymbolMap & ioArgument2,
-                                   class GALGAS_procFormalArgumentListForGeneration & ioArgument3,
+                                   class GALGAS_routineFormalArgumentListForGeneration & ioArgument3,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
@@ -1066,16 +1066,6 @@ class GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infix
                                                                 const GALGAS_bigint constin_inRight,
                                                                 class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//              Extension getter '@effectiveParameterPassingModeAST matchingFormalArgument' (as function)              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_string extensionGetter_matchingFormalArgument (const class GALGAS_effectiveParameterPassingModeAST & inObject,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -142,7 +142,7 @@ void routine_handleFunctionCallInExpression (const class GALGAS_unifiedTypeMap_2
                                              class GALGAS_staticStringMap & ioArgument9,
                                              class GALGAS_unifiedSymbolMap & ioArgument10,
                                              class GALGAS_allocaList & ioArgument11,
-                                             const class GALGAS_effectiveParameterListAST constinArgument12,
+                                             const class GALGAS_effectiveArgumentListAST constinArgument12,
                                              const class GALGAS_location constinArgument13,
                                              class GALGAS_instructionListIR & ioArgument14,
                                              class GALGAS_objectIR & ioArgument15,
@@ -202,24 +202,13 @@ void routine_handlePropertyAccessInExpression (class GALGAS_objectIR & ioArgumen
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                Function 'argumentSignatureFromEffectiveArgumentList'                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_argumentSignatureFromEffectiveArgumentList (const class GALGAS_location & constinArgument0,
-                                                                          const class GALGAS_effectiveParameterListAST & constinArgument1,
-                                                                          class C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                        Function 'routineMangledNameFromCall'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_lstring function_routineMangledNameFromCall (const class GALGAS_string & constinArgument0,
                                                           const class GALGAS_lstring & constinArgument1,
-                                                          const class GALGAS_effectiveParameterListAST & constinArgument2,
+                                                          const class GALGAS_effectiveArgumentListAST & constinArgument2,
                                                           class C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
@@ -232,8 +221,8 @@ class GALGAS_lstring function_routineMangledNameFromCall (const class GALGAS_str
 void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                          const class GALGAS_bool constinArgument1,
                                          const class GALGAS_bool constinArgument2,
-                                         const class GALGAS_procedureSignature constinArgument3,
-                                         const class GALGAS_effectiveParameterListAST constinArgument4,
+                                         const class GALGAS_routineTypedSignature constinArgument3,
+                                         const class GALGAS_effectiveArgumentListAST constinArgument4,
                                          const class GALGAS_location constinArgument5,
                                          const class GALGAS_lstring constinArgument6,
                                          const class GALGAS_semanticContext constinArgument7,
@@ -256,7 +245,7 @@ void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_pr
 void routine_analyzeGuardCall (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
                                const class GALGAS_lstring constinArgument1,
                                const class GALGAS_lstring constinArgument2,
-                               const class GALGAS_effectiveParameterListAST constinArgument3,
+                               const class GALGAS_effectiveArgumentListAST constinArgument3,
                                const class GALGAS_lstring constinArgument4,
                                const class GALGAS_semanticContext constinArgument5,
                                const class GALGAS_mode constinArgument6,

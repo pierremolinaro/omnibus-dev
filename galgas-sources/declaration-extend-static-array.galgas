@@ -4,7 +4,7 @@
 
 enum @extendStaticArrayExpressionAST {
   case expression (@expressionAST exp)
-  case function (@lstring functionName @procFormalArgumentList formalArgs)
+  case function (@lstring functionName @routineFormalArgumentList formalArgs)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -97,7 +97,7 @@ override method @extendStaticArrayDeclarationAST enterInPrecedenceGraph ?!@seman
     switch operand
     case expression (@expressionAST exp) :
       [exp addDependenceEdgeForStaticExpression !nodeName !?ioGraph]
-    case function (* @procFormalArgumentList formalArgs) :
+    case function (* @routineFormalArgumentList formalArgs) :
       for (* * formalArgumentTypeName *) in formalArgs do
         let typeName = llvmRegularTypeMangledNameFromName (!formalArgumentTypeName)
         [!?ioGraph noteNode !typeName]
@@ -171,12 +171,12 @@ override method @extendStaticArrayDeclarationAST enterInContext
         #--- Enter in static value
           staticValue += [[type kind] llvmTypeName] + " " + [expressionResult llvmName]
         end      
-      case function (@lstring functionName @procFormalArgumentList formalArgs) :
+      case function (@lstring functionName @routineFormalArgumentList formalArgs) :
         if not [[type kind] isFunction] then
           error endOfExp : "a static expression is expected here"
         else
           [[type kind] function ?descriptor:let functionDescriptor]
-          let argumentSignature = argumentSignatureFromFormalArgumentList (!functionName !formalArgs)
+          let argumentSignature = [formalArgs routineSignature !functionName]
           [ioContext.mRoutineMapForContext searchKey
             !functionName
             !argumentSignature
@@ -186,7 +186,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           ]
           let candidateIsPublic = routineDescriptor.mIsPublic
           let candidateRoutineKind = routineDescriptor.mRoutineKind
-          let candidateMode = routineDescriptor.mMode
+          let candidateMode = routineDescriptor.mExecutionMode
           let candidateSignature = routineDescriptor.mSignature
           let candidateReturnType = routineDescriptor.mReturnType
         #--- Check accessibility
@@ -200,8 +200,8 @@ override method @extendStaticArrayDeclarationAST enterInContext
           if not [candidateRoutineKind isFunction] then
             error functionName : "this routine is not a function"
           end
-          if functionDescriptor.mMode != candidateMode then
-            error functionName : "this function runs in " + candidateMode + " mode, but " + functionDescriptor.mMode + " is required"
+          if functionDescriptor.mExecutionMode != candidateMode then
+            error functionName : "this function runs in " + candidateMode + " mode, but " + functionDescriptor.mExecutionMode + " is required"
           end
           if (functionDescriptor.mReturnType == .null) && (candidateReturnType != .null) then
             error functionName : "this function should return an $" + [candidateReturnType key] + " object"
@@ -261,7 +261,7 @@ override method @extendStaticArrayDeclarationAST semanticAnalysis
   for (operand endOfExp) in mExpressions do
     switch operand
     case expression (@expressionAST unused exp) :
-    case function (@lstring functionName @procFormalArgumentList formalArgs) :
+    case function (@lstring functionName @routineFormalArgumentList formalArgs) :
     #--- Routine mangled name
       let routineMangledName = routineMangledNameFromAST (
         !"" 

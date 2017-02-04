@@ -2,7 +2,7 @@
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @procFormalArgumentListForGeneration {
+list @routineFormalArgumentListForGeneration {
   @procFormalArgumentPassingMode mFormalArgumentKind
   @unifiedTypeMap-proxy mFormalArgumentType
   @string mFormalArgumentName
@@ -18,9 +18,9 @@ graph @subprogramInvocationGraph (@lstringlist) {
 
 proc enterFormalArguments
   ?context:let @semanticContext inContext
-  ?let @procFormalArgumentList inFormalArgumentPassingMode
+  ?let @routineFormalArgumentList inFormalArgumentPassingMode
   ?!@unifiedSymbolMap ioVariableMap
-  ?!@procFormalArgumentListForGeneration ioFormalArguments
+  ?!@routineFormalArgumentListForGeneration ioFormalArguments
 {
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
@@ -64,7 +64,7 @@ proc routineSemanticAnalysis
   ?let @routineKind inRoutineKind
   ?let @mode inRoutineMode
   ?let @lstring inRoutineName
-  ?let @procFormalArgumentList inRoutineFormalArgumentList
+  ?let @routineFormalArgumentList inRoutineFormalArgumentList
   ?returnTypeName:let @lstring inReturnTypeName
   ?let @instructionListAST inRoutineInstructionList
   ?let @location inEndOfRoutineDeclaration
@@ -91,7 +91,7 @@ proc routineSemanticAnalysis
     ?@unifiedSymbolMap variableMap
   )
 #--- Analyse formal arguments
-  @procFormalArgumentListForGeneration formalArguments = {}
+  @routineFormalArgumentListForGeneration formalArguments = {}
   enterFormalArguments (
     !context:inContext
     !inRoutineFormalArgumentList

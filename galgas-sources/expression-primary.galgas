@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @effectiveParameterPassingModeAST {
+enum @effectiveArgumentPassingModeAST {
   case input (@lstring name)
   case inputWithType (@bool constant @lstring typeName @lstring name)
   case output (@expressionAST exp @location endOfExp)
@@ -12,7 +12,7 @@ enum @effectiveParameterPassingModeAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @effectiveParameterPassingModeAST matchingFormalArgument -> @string outResult {
+getter @effectiveArgumentPassingModeAST matchingFormalArgument -> @string outResult {
   switch self 
   case input (*) : outResult = "!"
   case inputWithType (* * *) : outResult = "!"
@@ -24,8 +24,8 @@ getter @effectiveParameterPassingModeAST matchingFormalArgument -> @string outRe
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @effectiveParameterListAST {
-  @effectiveParameterPassingModeAST mEffectiveParameterKind
+list @effectiveArgumentListAST {
+  @effectiveArgumentPassingModeAST mEffectiveParameterKind
   @lstring mSelector
 }
 
@@ -41,7 +41,7 @@ enum @primaryInExpressionSelfAccessAST {
 enum @primaryInExpressionAccessAST {
   case property (@lstring name)
   case arrayAccess (@expressionAST index @location endOfIndex)
-  case funcCall (@effectiveParameterListAST arguments @location endOfArguments)
+  case funcCall (@effectiveArgumentListAST arguments @location endOfArguments)
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -101,7 +101,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <effective_parameters> !@effectiveParameterListAST outEffectiveParameterList !@location outEndOfArgs {
+  rule <effective_parameters> !@effectiveArgumentListAST outEffectiveParameterList !@location outEndOfArgs {
     outEffectiveParameterList = {}
     $($
     repeat
@@ -164,7 +164,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
     case property (@lstring unused name) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-    case funcCall (@effectiveParameterListAST arguments *) :
+    case funcCall (@effectiveArgumentListAST arguments *) :
       for () in arguments do
         switch mEffectiveParameterKind
         case input (*):
@@ -191,7 +191,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
     case property (@lstring unused name) :
     case arrayAccess (@expressionAST indexExpression *) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-    case funcCall (@effectiveParameterListAST arguments *) :
+    case funcCall (@effectiveArgumentListAST arguments *) :
       for () in arguments do
         switch mEffectiveParameterKind
         case input (*):
@@ -307,7 +307,7 @@ override method @primaryInExpressionAST analyzeExpression
         !?ioInstructionGenerationList
         !?currentPointer
       )
-    case funcCall (@effectiveParameterListAST arguments @location errorLocation) :
+    case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
       handleFunctionCallInExpression (
         !self:inSelfType
         !globalVariableReceiverName:globalVariableReceiverName
@@ -477,7 +477,7 @@ proc handleFunctionCallInExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!alloca:@allocaList ioAllocaList
-  ?let @effectiveParameterListAST inArguments 
+  ?let @effectiveArgumentListAST inArguments 
   ?let @location inErrorLocation
   ?!@instructionListIR ioInstructionGenerationList
   ?!@objectIR ioObjectPtr
@@ -536,7 +536,7 @@ proc analyzeFunctionCallInExpression
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?receiver:let @objectIR inReceiver
   ?routineName:let @lstring inRoutineName
-  ?effective:let @effectiveParameterListAST inEffectiveParameterList
+  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?requiredMode:let @mode inRequiredMode
@@ -580,14 +580,14 @@ proc analyzeFunctionCallInExpression
   )
   [inContext.mRoutineMapForContext searchKey
     !inRoutineName
-    !argumentSignatureFromEffectiveArgumentList (!inRoutineName !inEffectiveParameterList)
+    ![inEffectiveParameterList routineSignature !inRoutineName]
     ?outRoutineNameForGeneration
     ?let @routineDescriptor routineDescriptor
     ?let @location outRoutineLocation
   ]
   let isPublic = routineDescriptor.mIsPublic
   let routineKind = routineDescriptor.mRoutineKind
-  let calleeMode = routineDescriptor.mMode
+  let calleeMode = routineDescriptor.mExecutionMode
   let formalSignature = routineDescriptor.mSignature
   outReturnedType = routineDescriptor.mReturnType
 #--- Check accessibility
@@ -637,8 +637,8 @@ proc analyzeEffectiveParameters
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?formal:let @procedureSignature inFormalSignature
-  ?effective:let @effectiveParameterListAST inEffectiveParameterList
+  ?formal:let @routineTypedSignature inFormalSignature
+  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
   ?errorLocation:let @location inErrorLocation
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext

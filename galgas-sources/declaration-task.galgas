@@ -76,7 +76,7 @@ syntax extension plm_syntax {
     while
       $func$
       $identifier$ ?let procName
-      <procedure_formal_arguments> ?formalArguments:let @procFormalArgumentList formalArgumentList
+      <procedure_formal_arguments> ?formalArguments:let @routineFormalArgumentList formalArgumentList
       @lstring returnTypeName
       select
         returnTypeName = ["" here]

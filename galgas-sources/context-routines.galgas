@@ -1,21 +1,93 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! ROUTINE TYPED SIGNATURE
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+# La signature typée d'une routine est la liste du mode de passage, du sélecteur, du type de ses arguments formels.
+
+list @routineTypedSignature {
+  @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  @lstring mSelector
+  @unifiedTypeMap-proxy mType
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! ROUTINE SIGNATURE
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+# La signature d'une routine est une chaîne de caractères constituée :
+#   - du caractère "(" ;
+#   - pour chaque argument :
+#       * du mode de passage de l'argument formel,
+#       * du sélecteur,
+#       * du caractère ":"
+#   - du caractère ")".
+# Le couple (nom de routine, signature) est unique. Pour un nom de routine donné, la signature identifie la routine.
+# La signature est facilement calculable à partir de la liste des paramètres formels ou de la liste des arguments
+# effectifs d'un appel.
+
+#·······················································································································
+
+#getter @routineTypedSignature signatureAsLString ?let @location inRoutineNameLocation -> @lstring {
+#  var s = "("
+#  for argument in self do
+#    s += [argument.mFormalArgumentPassingMode formalPassingModeString]
+#    s += argument.mSelector.string
+#    s += ":"
+#  end
+#  s += ")"
+#  result = .new {!s !inRoutineNameLocation}
+#}
+
+#·······················································································································
+
+getter @routineFormalArgumentList routineSignature ?let @location inRoutineNameLocation -> @lstring {
+  var key = ""
+  key += "("
+  for (formalArgumentPassingMode selector * *) in self do
+    key += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  key += ")"
+  result = .new {!key !inRoutineNameLocation}
+}
+
+#·······················································································································
+
+getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
+  var key = ""
+  key += "("
+  for (passingMode selector) in self do
+    key += [passingMode matchingFormalArgument] + selector + ":"
+  end
+  key += ")"
+  result = .new {!key !inRoutineNameLocation}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @routineKind {
+  case function
+  case section
+  case safe
+  case service
+  case primitive
+}
+
+#·······················································································································
 
 struct @routineDescriptor {
-  @bool mIsPublic
-  @bool mGlobal
+  @bool mIsPublic # Routine is declared with "public"
+  @bool mExported # Routine is declared with @exported attribute
   @routineKind mRoutineKind
-  @mode mMode
-  @procedureSignature mSignature
+  @mode mExecutionMode
+  @routineTypedSignature mSignature
   @unifiedTypeMap-proxy mReturnType # .null if no returned value
   @bool mCanAccessProperties
-  @bool mCanMutateProperties
+  @bool mCanMutateProperties # Routine is declared with @mutating attribute
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func routineMangledNameFromAST ?let @string inReceiverTypeName
                                ?let @lstring inRoutineName
-                               ?let @procFormalArgumentList inFormalArgumentList -> @lstring
+                               ?let @routineFormalArgumentList inFormalArgumentList -> @lstring
 {
   result = if inReceiverTypeName == "" then
     inRoutineName
@@ -33,7 +105,7 @@ func routineMangledNameFromAST ?let @string inReceiverTypeName
 
 func routineMangledNameFromCall ?let @string inReceiverTypeName
                                 ?let @lstring inRoutineName
-                                ?let @effectiveParameterListAST inEffectiveParameterList-> @lstring
+                                ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
 {
   result = if inReceiverTypeName == "" then
     inRoutineName
@@ -50,42 +122,14 @@ func routineMangledNameFromCall ?let @string inReceiverTypeName
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc routineSignature ?!@unifiedTypeMap ioTypeMap
-                      ?let @procFormalArgumentList inFormalArgumentList
-                      !@procedureSignature outResult
+                      ?let @routineFormalArgumentList inFormalArgumentList
+                      !@routineTypedSignature outResult
 {
   outResult = {}
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
     [@unifiedTypeMap-proxy makeProxy !?ioTypeMap !formalArgumentTypeName ?let typeProxy]
     outResult += !formalArgumentPassingMode !selector !typeProxy
   end
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func argumentSignatureFromFormalArgumentList ?let @location inRoutineNameLocation
-                                             ?let @procFormalArgumentList inFormalArgumentList-> @lstring
-{
-  var key = ""
-  key += "("
-  for (formalArgumentPassingMode selector * *) in inFormalArgumentList do
-    key += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-  end
-  key += ")"
-  result = .new {!key !inRoutineNameLocation}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func argumentSignatureFromEffectiveArgumentList ?let @location inRoutineNameLocation
-                                                ?let @effectiveParameterListAST inEffectiveParameterList -> @lstring
-{
-  var key = ""
-  key += "("
-  for (passingMode selector) in inEffectiveParameterList do
-    key += [passingMode matchingFormalArgument] + selector + ":"
-  end
-  key += ")"
-  result = .new {!key !inRoutineNameLocation}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -166,7 +210,7 @@ getter @routineMapForContext hasKey ?let @lstring inRoutineName ?let @lstring in
 # Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
 map @guardMapForContext {
   @bool mIsPublic
-  @procedureSignature mSignature
+  @routineTypedSignature mSignature
 
   insert insertKey error message "the '%K' guard is already declared in %L"
   search searchKey error message "there is no '%K' guard"
@@ -174,13 +218,11 @@ map @guardMapForContext {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
+#! UNIVERSAL PROPERTY - ROUTINE MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+# Cette table contient routines et variables. La clé est le nom de la variable ou le nom de la routine. Il est valide
+# d'avoir plusieurs routines de même nom, du moment qu'elle se distinguent par leur signature. Il est valide d'avoir une
+# variable de même nom qu'une routine : la syntaxe permet de savoir si une routine ou une variable est attendue.
 
-list @procedureSignature {
-  @procFormalArgumentPassingMode mFormalArgumentPassingMode
-  @lstring mSelector
-  @unifiedTypeMap-proxy mType
-}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

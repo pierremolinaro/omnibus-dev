@@ -6,7 +6,7 @@ enum @guardedCommand {
   case synchronization (@bool isWhileCommand # if false, it is an "until" command
                         @lstring optionalReceiverName
                         @lstring guardName
-                        @effectiveParameterListAST effectiveParameterListAST)
+                        @effectiveArgumentListAST effectiveParameterListAST)
 
   case boolean (@bool isWhileCommand # if false, it is an "until" command
                 @expressionAST expression
@@ -17,7 +17,7 @@ enum @guardedCommand {
                     @location endOfExpression
                     @lstring optionalReceiverName
                     @lstring guardName
-                    @effectiveParameterListAST effectiveParameterListAST)
+                    @effectiveArgumentListAST effectiveParameterListAST)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -305,7 +305,7 @@ proc analyzeGuardCall
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?receiverName:let @lstring inReceiverName
   ?routineName:let @lstring inGuardName
-  ?effective:let @effectiveParameterListAST inEffectiveParameterList
+  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
   ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?requiredMode:let @mode inRequiredMode
@@ -339,7 +339,7 @@ proc analyzeGuardCall
   [inContext.mGuardMapForContext searchKey
     !outGuardMangledName
     ?let isPublic
-    ?let @procedureSignature formalSignature
+    ?let @routineTypedSignature formalSignature
   ]
 #--- Check accessibility
   if not isPublic then

@@ -5,7 +5,7 @@
 list @externProcedureDeclarationListAST {
   @lstring mExternProcedureName
   @mode mMode
-  @procFormalArgumentList mProcFormalArgumentList
+  @routineFormalArgumentList mProcFormalArgumentList
   @lstring mReturnTypeName
   @lstring mRoutineNameForGeneration
   @location mEndOfProcLocation
@@ -81,7 +81,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
   [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnType]
   [!?ioContext.mRoutineMapForContext insertKey
     !mExternProcedureName
-    !argumentSignatureFromFormalArgumentList (!mExternProcedureName !mProcFormalArgumentList)
+    ![mProcFormalArgumentList routineSignature !mExternProcedureName]
     !mRoutineNameForGeneration
     !.new {
       !true # isPublic
@@ -136,7 +136,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     ?@unifiedSymbolMap variableMap
   )
 #--- Analyse formal arguments
-  @procFormalArgumentListForGeneration formalArguments = {}
+  @routineFormalArgumentListForGeneration formalArguments = {}
   enterFormalArguments (
     !context:inContext
     !mProcFormalArgumentList
@@ -171,7 +171,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @externProcedureMapIR {
-  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
   @unifiedTypeMap-proxy mReturnType
   insert insertKey error message "extern procedure %K is already declared"
 }

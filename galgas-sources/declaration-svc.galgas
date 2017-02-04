@@ -1,15 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-enum @routineKind {
-  case function
-  case section
-  case safe
-  case service
-  case primitive
-}
-
 #·······················································································································
 
 list @systemRoutineDeclarationListAST {
@@ -17,7 +7,7 @@ list @systemRoutineDeclarationListAST {
   @routineKind mRoutineKind
   @bool mPublic
   @lstringlist mAttributeList
-  @procFormalArgumentList mFormalArgumentList
+  @routineFormalArgumentList mFormalArgumentList
   @lstring mReturnTypeName
   @instructionListAST mInstructionList
   @location mEndOfInstructionListLocation
@@ -134,7 +124,7 @@ method @systemRoutineDeclarationListAST enterInContext
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
       !svc.mName
-      !argumentSignatureFromFormalArgumentList (!svc.mName !svc.mFormalArgumentList)
+      ![svc.mFormalArgumentList routineSignature !svc.mName]
       !routineMangledName
       !.new {
         !svc.mPublic
