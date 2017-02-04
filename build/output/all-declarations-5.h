@@ -483,30 +483,30 @@ void extensionSetter_insertProperty (class GALGAS_universalPropertyAndRoutineMap
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                      Extension method '@universalPropertyAndRoutineMapForContext getProperty'                       *
+//                     Extension method '@universalPropertyAndRoutineMapForContext searchProperty'                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_getProperty (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
-                                  const class GALGAS_lstring constin_inPropertyName,
-                                  class GALGAS_bool & out_outIsPublic,
-                                  class GALGAS_objectIR & out_outObjectIR,
-                                  class C_Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
+void extensionMethod_searchProperty (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
+                                     const class GALGAS_lstring constin_inPropertyName,
+                                     class GALGAS_bool & out_outIsPublic,
+                                     class GALGAS_objectIR & out_outObjectIR,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                       Extension method '@universalPropertyAndRoutineMapForContext getRoutine'                       *
+//                     Extension method '@universalPropertyAndRoutineMapForContext searchRoutine'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_getRoutine (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
-                                 const class GALGAS_lstring constin_inRoutineName,
-                                 const class GALGAS_lstring constin_inArgumentSignature,
-                                 class GALGAS_string & out_outLLVMInvocationRoutineName,
-                                 class GALGAS_routineDescriptor & out_outDescriptor,
-                                 class C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
+void extensionMethod_searchRoutine (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
+                                    const class GALGAS_lstring constin_inRoutineName,
+                                    const class GALGAS_lstring constin_inArgumentSignature,
+                                    class GALGAS_string & out_outLLVMInvocationRoutineName,
+                                    class GALGAS_routineDescriptor & out_outDescriptor,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

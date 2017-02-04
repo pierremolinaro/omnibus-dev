@@ -319,7 +319,7 @@ setter @universalPropertyAndRoutineMapForContext insertProperty
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @universalPropertyAndRoutineMapForContext getProperty
+method @universalPropertyAndRoutineMapForContext searchProperty
   ?let @lstring inPropertyName
   !@bool outIsPublic
   !@objectIR outObjectIR
@@ -336,7 +336,7 @@ method @universalPropertyAndRoutineMapForContext getProperty
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @universalPropertyAndRoutineMapForContext getRoutine
+method @universalPropertyAndRoutineMapForContext searchRoutine
   ?let @lstring inRoutineName
   ?let @lstring inArgumentSignature
   !@string outLLVMInvocationRoutineName
