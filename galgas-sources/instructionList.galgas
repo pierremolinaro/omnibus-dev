@@ -54,6 +54,13 @@ method @instructionListAST noteInstructionListTypesInPrecedenceGraph
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+struct @generationStruct {
+  @allocaList mAllocaList
+#  @instructionListIR mInstructionGenerationList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 abstract method @instructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
@@ -65,7 +72,7 @@ abstract method @instructionAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!analysis:@generationStruct ioGenerationStruct
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -82,7 +89,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!analysis:@generationStruct ioGenerationStruct
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Begin branch
@@ -100,7 +107,7 @@ method @instructionListAST analyzeBranchInstructionList
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
+      !?analysis:ioGenerationStruct
       !?instructionListIR:ioInstructionGenerationList
     ]
   end
@@ -122,7 +129,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!analysis:@generationStruct ioGenerationStruct
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
 {
   for () in self do
@@ -138,7 +145,7 @@ method @instructionListAST analyzeRoutineInstructionList
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
+      !?analysis:ioGenerationStruct
       !?instructionListIR:ioInstructionGenerationList
     ]
   end

@@ -109,7 +109,7 @@ override method @varOperatorAssignInstructionAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!analysis:@generationStruct ioGenerationStruct
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #---
@@ -125,7 +125,7 @@ override method @varOperatorAssignInstructionAST analyze
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?alloca: ioAllocaList
+    !?analysis:ioGenerationStruct
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR targetObject
     ?globalVariableReceiverName:let unused globalVariableReceiverName
@@ -146,7 +146,7 @@ override method @varOperatorAssignInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
+    !?analysis:ioGenerationStruct
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR sourcePossibleReference
   ]

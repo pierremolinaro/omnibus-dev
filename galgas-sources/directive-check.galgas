@@ -52,7 +52,7 @@ override method @checkInstructionAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!analysis:@generationStruct ioGenerationStruct
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
 #--- Analyze expression
@@ -69,7 +69,7 @@ override method @checkInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
+    !?analysis:ioGenerationStruct
     !?instructionListIR:instructionGenerationList
     ?result:@objectIR expressionResult
   ]

@@ -245,7 +245,7 @@ method @globalVarDeclarationList-element enterInContext
 #--- Analyze source expression
   @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}
-  @allocaList allocaList = {}
+  @generationStruct generationStruct = .default
   variableMapWithConstants (
     !context:ioContext
     ?@unifiedSymbolMap variableMap
@@ -263,11 +263,11 @@ method @globalVarDeclarationList-element enterInContext
      !?staticStringMap:ioGlobalLiteralStringMap
      !?variableMap:variableMap
      !?variableMap:universalMap
-     !?alloca:allocaList
+     !?analysis:generationStruct
      !?instructionListIR:instructionGenerationList
      ?result:let @objectIR expressionResult
   ]
-  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
+  if ([instructionGenerationList length] > 0) || ([generationStruct.mAllocaList length] > 0) || not [expressionResult isStatic] then
     error mVarName : "source expression cannot be statically computed"
   end
 #--- Check variable type and expression type

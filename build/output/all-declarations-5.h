@@ -684,7 +684,7 @@ void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArg
                                    const class GALGAS_lstringlist constinArgument6,
                                    const class GALGAS_instructionListAST constinArgument7,
                                    const class GALGAS_location constinArgument8,
-                                   class GALGAS_allocaList & outArgument9,
+                                   class GALGAS_generationStruct & outArgument9,
                                    class GALGAS_instructionListIR & outArgument10,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;

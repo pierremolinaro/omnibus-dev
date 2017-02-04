@@ -85,7 +85,7 @@ override method @switchInstructionAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!analysis:@generationStruct ioGenerationStruct
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze test expression
@@ -102,7 +102,7 @@ override method @switchInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
+    !?analysis:ioGenerationStruct
     !?instructionListIR:switchExpressionGenerationList
     ?result:@objectIR switchValueIRPossibleReference
   ]
@@ -151,7 +151,7 @@ override method @switchInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
+      !?analysis:ioGenerationStruct
       !?instructionListIR:instructionGenerationList
     ]
     switchCaseListIR += !caseIdentifierIndexList !instructionGenerationList
