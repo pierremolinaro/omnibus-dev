@@ -65,7 +65,7 @@ override method @letInstructionWithAssignmentAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let @unifiedTypeMap-proxy targetType = if mOptionalTypeName.string == ""
@@ -85,7 +85,7 @@ override method @letInstructionWithAssignmentAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?analysis:ioGenerationStruct
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR expressionResultPossibleReference
   ]
@@ -111,7 +111,7 @@ override method @letInstructionWithAssignmentAST analyze
   let varPLMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
   if [result key] != staticIntegerTypeName () then
-    ioGenerationStruct.mAllocaList += !varPLMName ![[[result type] kind] llvmTypeName]
+    ioAllocaList += !varPLMName ![[[result type] kind] llvmTypeName]
     let localConstant = @objectIR.localVariableReference {!type:[result type] !plmName:varPLMName}
     [!?ioInstructionGenerationList appendStoreFromReference !localConstant !mVarName !result]
   end

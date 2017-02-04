@@ -84,7 +84,7 @@ method @bootList-element bootSemanticAnalysis
   )
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
-  @generationStruct generationStruct = .default
+  @allocaList bootAllocaList = {}
   [mInstructionList analyzeRoutineInstructionList
     !self:.null
     !directAccessToPropertiesAllowed:false
@@ -96,7 +96,7 @@ method @bootList-element bootSemanticAnalysis
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?variableMap:universalMap
-    !?analysis:generationStruct
+    !?alloca:bootAllocaList
     !?generatedCode:instructionGenerationList
   ]
 #--- End of variableMap
@@ -107,7 +107,7 @@ method @bootList-element bootSemanticAnalysis
   ioIntermediateCodeStruct.mBootList +=
     !mPriority
     !mBootLocation
-    !generationStruct.mAllocaList
+    !bootAllocaList
     !instructionGenerationList
     !mEndOfBootLocation
 }

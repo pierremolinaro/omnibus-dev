@@ -104,7 +104,7 @@ override method @opaqueTypeDeclaration enterInContext
   end
 #--- Compute array size
   @instructionListIR initInstructionGenerationList = {}
-  @generationStruct generationStruct = .default
+  @allocaList allocaList = {}
   @semanticTemporariesStruct temporaries = .default
   variableMapWithConstants (
     !context:ioContext
@@ -123,11 +123,11 @@ override method @opaqueTypeDeclaration enterInContext
     !?staticStringMap:*
     !?variableMap:variableMap
     !?variableMap:universalMap
-    !?analysis:generationStruct
+    !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
     ?result:@objectIR sizeExpressionIR
   ]
-  if (([generationStruct.mAllocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
+  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
     error mSizeExpressionLocation : "array size expression is not static"
   else
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]

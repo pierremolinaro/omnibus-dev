@@ -91,7 +91,7 @@ override method @varInstructionWithAssignmentAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   @unifiedTypeMap-proxy targetType = if mOptionalTypeName.string == ""
@@ -111,7 +111,7 @@ override method @varInstructionWithAssignmentAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?analysis:ioGenerationStruct
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR sourcePossibleReference
   ]
@@ -144,7 +144,7 @@ override method @varInstructionWithAssignmentAST analyze
     !canBeUsedAsInputParameter:true
   ]
 #--- Code generation
-  ioGenerationStruct.mAllocaList += !varName ![[[result type] kind] llvmTypeName]
+  ioAllocaList += !varName ![[[result type] kind] llvmTypeName]
   [!?ioInstructionGenerationList appendStoreLocalVariable
     !varName
     ![result type]
@@ -165,7 +165,7 @@ override method @varInstructionAST analyze
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
   let @unifiedTypeMap-proxy targetType = .searchKey {!inContext.mTypeMap !mTypeName}
@@ -185,7 +185,7 @@ override method @varInstructionAST analyze
     !canBeUsedAsInputParameter:true
   ]
 #--- Code generation
-  ioGenerationStruct.mAllocaList += !varLLVMName ![[targetType kind] llvmTypeName]
+  ioAllocaList += !varLLVMName ![[targetType kind] llvmTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

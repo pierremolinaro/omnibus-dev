@@ -87,7 +87,7 @@ override method @registerConstantExpressionAST analyzeExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
@@ -137,7 +137,7 @@ override method @registerConstantExpressionAST analyzeExpression
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?analysis:ioGenerationStruct
+      !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:let @objectIR expressionResult
     ]

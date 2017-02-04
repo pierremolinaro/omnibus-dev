@@ -123,7 +123,7 @@ override method @infixOperatorExpressionAST analyzeExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
@@ -140,7 +140,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?analysis:ioGenerationStruct
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR leftOperandPossibleReference
   ]
@@ -163,7 +163,7 @@ override method @infixOperatorExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?analysis:ioGenerationStruct
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR rightOperandPossibleReference
   ]
@@ -302,7 +302,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
@@ -320,7 +320,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?analysis:ioGenerationStruct
+    !?alloca:ioAllocaList
     !?instructionListIR:leftInstructionGenerationList
     ?result:let @objectIR leftOperandPossibleReference
   ]
@@ -344,7 +344,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?analysis:ioGenerationStruct
+    !?alloca:ioAllocaList
     !?instructionListIR:rightInstructionGenerationList
     ?result:let @objectIR rightOperandPossibleReference
   ]

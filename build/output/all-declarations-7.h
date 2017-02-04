@@ -225,7 +225,7 @@ void routine_analyzeFunctionCallInExpression (const class GALGAS_unifiedTypeMap_
                                               class GALGAS_staticStringMap & ioArgument10,
                                               class GALGAS_unifiedSymbolMap & ioArgument11,
                                               class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument12,
-                                              class GALGAS_generationStruct & ioArgument13,
+                                              class GALGAS_allocaList & ioArgument13,
                                               class GALGAS_instructionListIR & ioArgument14,
                                               class GALGAS_procCallEffectiveParameterListIR & outArgument15,
                                               class GALGAS_calleeKindIR & outArgument16,

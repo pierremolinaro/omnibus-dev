@@ -164,7 +164,7 @@ override method @syncInstructionAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   @syncInstructionBranchListIR onInstructionBranchListIR = {}
@@ -187,7 +187,7 @@ override method @syncInstructionAST analyze
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?variableMap:ioUniversalMap
-        !?analysis:ioGenerationStruct
+        !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
         ?guardMangledName:let @lstring guardMangledName
@@ -213,7 +213,7 @@ override method @syncInstructionAST analyze
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?variableMap:ioUniversalMap
-        !?analysis:ioGenerationStruct
+        !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?result:@objectIR sourceOperand
       ]
@@ -241,7 +241,7 @@ override method @syncInstructionAST analyze
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?variableMap:ioUniversalMap
-        !?analysis:ioGenerationStruct
+        !?alloca:ioAllocaList
         !?instructionListIR:boolExpInstructionGenerationList
         ?result:let @objectIR boolExpressionResult
       ]
@@ -263,7 +263,7 @@ override method @syncInstructionAST analyze
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?variableMap:ioUniversalMap
-        !?analysis:ioGenerationStruct
+        !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
         ?guardMangledName:let @lstring guardMangledName
@@ -292,7 +292,7 @@ override method @syncInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?analysis:ioGenerationStruct
+      !?alloca:ioAllocaList
       !?instructionListIR:branchInstructionGenerationList
     ]
     [!?ioVariableMap closeOverride !endOfBranch]
@@ -319,7 +319,7 @@ proc analyzeGuardCall
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !guardMangledName:@lstring outGuardMangledName
@@ -377,7 +377,7 @@ proc analyzeGuardCall
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?analysis:ioGenerationStruct
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:outEffectiveParameterListIR
   )

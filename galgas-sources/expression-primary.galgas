@@ -224,7 +224,7 @@ override method @primaryInExpressionAST analyzeExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
@@ -286,7 +286,7 @@ override method @primaryInExpressionAST analyzeExpression
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
-        !?analysis:ioGenerationStruct
+        !?alloca:ioAllocaList
         !propertyName
         !?ioInstructionGenerationList
         !?currentPointer
@@ -303,7 +303,7 @@ override method @primaryInExpressionAST analyzeExpression
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?variableMap:ioUniversalMap
-        !?analysis:ioGenerationStruct
+        !?alloca:ioAllocaList
         !indexExpression
         !endOfIndex
         !?ioInstructionGenerationList
@@ -323,7 +323,7 @@ override method @primaryInExpressionAST analyzeExpression
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?variableMap:ioUniversalMap
-        !?analysis:ioGenerationStruct
+        !?alloca:ioAllocaList
         !arguments
         !errorLocation
         !?ioInstructionGenerationList
@@ -409,7 +409,7 @@ private proc handlePropertyInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap unused ioVariableMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList unused ioAllocaList
   ?let @lstring inPropertyName
   ?!@instructionListIR ioInstructionGenerationList
   ?!@objectIR ioObjectPtr
@@ -480,7 +480,7 @@ proc handleFunctionCallInExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?let @effectiveArgumentListAST inArguments 
   ?let @location inErrorLocation
   ?!@instructionListIR ioInstructionGenerationList
@@ -508,7 +508,7 @@ proc handleFunctionCallInExpression
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?analysis:ioGenerationStruct
+      !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
       ?routineKind:let @calleeKindIR routineKind
@@ -548,7 +548,7 @@ proc analyzeFunctionCallInExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !routineKind:@calleeKindIR outRoutineKindIR
@@ -630,7 +630,7 @@ proc analyzeFunctionCallInExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?analysis:ioGenerationStruct
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:outEffectiveParameterListIR
   )
@@ -652,7 +652,7 @@ proc analyzeEffectiveParameters
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
 {
@@ -687,7 +687,7 @@ proc analyzeEffectiveParameters
           !canBeUsedAsInputParameter:true
         ]
       end
-      ioGenerationStruct.mAllocaList += !varLLVMName ![[type kind] llvmTypeName]
+      ioAllocaList += !varLLVMName ![[type kind] llvmTypeName]
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
@@ -727,7 +727,7 @@ proc analyzeEffectiveParameters
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?variableMap:ioUniversalMap
-        !?analysis:ioGenerationStruct
+        !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @objectIR expressionResult
       ]
