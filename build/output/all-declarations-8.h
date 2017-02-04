@@ -11,6 +11,52 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                               Routine 'handleSubscriptArrayInAssignmentAndExpression'                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleSubscriptArrayInAssignmentAndExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                            const class GALGAS_bool constinArgument1,
+                                                            const class GALGAS_bool constinArgument2,
+                                                            const class GALGAS_lstring constinArgument3,
+                                                            const class GALGAS_semanticContext constinArgument4,
+                                                            const class GALGAS_mode constinArgument5,
+                                                            class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                                            class GALGAS_staticStringMap & ioArgument7,
+                                                            class GALGAS_unifiedSymbolMap & ioArgument8,
+                                                            class GALGAS_allocaList & ioArgument9,
+                                                            const class GALGAS_expressionAST constinArgument10,
+                                                            const class GALGAS_location constinArgument11,
+                                                            class GALGAS_instructionListIR & ioArgument12,
+                                                            class GALGAS_objectIR & ioArgument13,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Routine 'handleSubscriptRegisterArrayInAssignmentAndExpression'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleSubscriptRegisterArrayInAssignmentAndExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                    const class GALGAS_bool constinArgument1,
+                                                                    const class GALGAS_bool constinArgument2,
+                                                                    const class GALGAS_lstring constinArgument3,
+                                                                    const class GALGAS_semanticContext constinArgument4,
+                                                                    const class GALGAS_mode constinArgument5,
+                                                                    class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                                                    class GALGAS_staticStringMap & ioArgument7,
+                                                                    class GALGAS_unifiedSymbolMap & ioArgument8,
+                                                                    class GALGAS_allocaList & ioArgument9,
+                                                                    const class GALGAS_expressionAST constinArgument10,
+                                                                    const class GALGAS_location constinArgument11,
+                                                                    class GALGAS_instructionListIR & ioArgument12,
+                                                                    class GALGAS_objectIR & ioArgument13,
+                                                                    class C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                        Routine 'buildOrderedDeclarationList'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

@@ -158,7 +158,6 @@ method @assignmentTargetAST analyzeAssignmentTarget
   for (access) in mAccessList do
     switch access
     case property (propertyName) :
-      log propertyName
       handlePropertyAccessInAssignment (
         !?outCurrentObject
         !propertyName
@@ -228,8 +227,6 @@ private proc handlePropertyAccessInAssignment
     if [structureObjectMap hasKey !inPropertyName] then
       [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property]
       if [property isProperty] then
-       message "ZE PROPERTY " + inPropertyName + "\n"
-       log structureObjectMap
        [property property ?type:let type ?plmName:let name ?index:let index]
         let newObject = @objectIR.temporaryReference {
           !type:type
