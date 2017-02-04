@@ -63,7 +63,7 @@ getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLo
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @routineKind {
-  case function
+  case function (@mode executionMode)
   case section
   case safe
   case service

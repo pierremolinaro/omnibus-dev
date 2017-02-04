@@ -3790,6 +3790,11 @@ class GALGAS_routineKind : public AC_GALGAS_root {
   } enumeration ;
   
 //--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
+
   private : enumeration mEnum ;
 
 //--------------------------------- Accessors
@@ -3808,7 +3813,8 @@ class GALGAS_routineKind : public AC_GALGAS_root {
                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_routineKind constructor_function (LOCATION_ARGS) ;
+  public : static class GALGAS_routineKind constructor_function (const class GALGAS_mode & inOperand0
+                                                                 COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_routineKind constructor_primitive (LOCATION_ARGS) ;
 
@@ -3827,6 +3833,10 @@ class GALGAS_routineKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_mode & outArgument0,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
@@ -3850,6 +3860,26 @@ class GALGAS_routineKind : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineKind ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                        @routineKind enum, associated values                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_routineKind_function : public cEnumAssociatedValues {
+  public : const GALGAS_mode mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_routineKind_function (const GALGAS_mode & inAssociatedValue0
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_routineKind_function (void) {}
+} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

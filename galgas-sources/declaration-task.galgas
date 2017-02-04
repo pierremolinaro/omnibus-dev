@@ -303,7 +303,7 @@ method @taskList-element semanticAnalysis
   for procedure in mTaskProcList do
     routineSemanticAnalysis (
       !receiverType:taskType
-      !.function
+      !.function {!executionMode:.userMode}
       !.userMode
       !procedure.mFunctionName
       !procedure.mFunctionFormalArgumentList
@@ -352,7 +352,7 @@ method @taskList-element semanticAnalysis
   end
   routineSemanticAnalysis (
     !receiverType:taskType
-    !.function
+    !.function{!executionMode:.userMode}
     !.userMode
     !.new {!llvmNameForTaskLoopFunction () !mTaskName.location}
     !{} # No argument

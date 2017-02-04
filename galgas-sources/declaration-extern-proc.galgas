@@ -86,7 +86,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
     !.new {
       !true # isPublic
       !false # Global
-      !.function
+      !.function {!executionMode:mMode}
       !mMode
       !signature
       !returnType
