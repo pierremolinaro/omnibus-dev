@@ -73,7 +73,7 @@ proc checkRequiredProcedures
         ?let @location routineLocation
       ]
       let isExported = routineDescriptor.mExported
-      let mode = routineDescriptor.mExecutionMode
+      let mode = [routineDescriptor.mRoutineKind executionMode]
     #--- Check modes
       if mode != requiredProc.mExecutionMode then
         error routineLocation : "required mode should be '" + requiredProc.mExecutionMode + "'"    

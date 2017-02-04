@@ -377,16 +377,16 @@ GALGAS_lstring function_routineMangledNameFromAST (const GALGAS_string & constin
   if (kBoolTrue == test_1) {
     temp_0 = constinArgument_inRoutineName ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 95)).add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("context-routines.galgas", 95)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 95)), constinArgument_inRoutineName.mProperty_location  COMMA_SOURCE_FILE ("context-routines.galgas", 95)) ;
+    temp_0 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 118)).add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("context-routines.galgas", 118)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 118)), constinArgument_inRoutineName.mProperty_location  COMMA_SOURCE_FILE ("context-routines.galgas", 118)) ;
   }
   result_result = temp_0 ;
-  result_result.mProperty_string.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 97)) ;
-  cEnumerator_routineFormalArgumentList enumerator_4087 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
-  while (enumerator_4087.hasCurrentObject ()) {
-    result_result.mProperty_string.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_4087.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 99)).add_operation (enumerator_4087.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 99)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 99)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 99)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 99)) ;
-    enumerator_4087.gotoNextObject () ;
+  result_result.mProperty_string.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 120)) ;
+  cEnumerator_routineFormalArgumentList enumerator_4644 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
+  while (enumerator_4644.hasCurrentObject ()) {
+    result_result.mProperty_string.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_4644.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 122)).add_operation (enumerator_4644.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 122)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 122)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 122)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 122)) ;
+    enumerator_4644.gotoNextObject () ;
   }
-  result_result.mProperty_string.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 101)) ;
+  result_result.mProperty_string.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 124)) ;
 //---
   return result_result ;
 }
@@ -450,16 +450,16 @@ GALGAS_lstring function_routineMangledNameFromCall (const GALGAS_string & consti
   if (kBoolTrue == test_1) {
     temp_0 = constinArgument_inRoutineName ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 113)).add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("context-routines.galgas", 113)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 113)), constinArgument_inRoutineName.mProperty_location  COMMA_SOURCE_FILE ("context-routines.galgas", 113)) ;
+    temp_0 = GALGAS_lstring::constructor_new (constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 136)).add_operation (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("context-routines.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 136)), constinArgument_inRoutineName.mProperty_location  COMMA_SOURCE_FILE ("context-routines.galgas", 136)) ;
   }
   result_result = temp_0 ;
-  result_result.mProperty_string.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 115)) ;
-  cEnumerator_effectiveArgumentListAST enumerator_4799 (constinArgument_inEffectiveParameterList, kENUMERATION_UP) ;
-  while (enumerator_4799.hasCurrentObject ()) {
-    result_result.mProperty_string.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_4799.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 117)).add_operation (enumerator_4799.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 117)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 117)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 117)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 117)) ;
-    enumerator_4799.gotoNextObject () ;
+  result_result.mProperty_string.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 138)) ;
+  cEnumerator_effectiveArgumentListAST enumerator_5356 (constinArgument_inEffectiveParameterList, kENUMERATION_UP) ;
+  while (enumerator_5356.hasCurrentObject ()) {
+    result_result.mProperty_string.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_5356.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 140)).add_operation (enumerator_5356.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 140)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 140)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 140)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 140)) ;
+    enumerator_5356.gotoNextObject () ;
   }
-  result_result.mProperty_string.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 119)) ;
+  result_result.mProperty_string.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 142)) ;
 //---
   return result_result ;
 }
@@ -518,15 +518,15 @@ void routine_routineSignature (GALGAS_unifiedTypeMap & ioArgument_ioTypeMap,
                                C_Compiler * /* inCompiler */
                                COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResult.drop () ; // Release 'out' argument
-  outArgument_outResult = GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("context-routines.galgas", 128)) ;
-  cEnumerator_routineFormalArgumentList enumerator_5323 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
-  while (enumerator_5323.hasCurrentObject ()) {
-    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy_5414 ;
+  outArgument_outResult = GALGAS_routineTypedSignature::constructor_emptyList (SOURCE_FILE ("context-routines.galgas", 151)) ;
+  cEnumerator_routineFormalArgumentList enumerator_5880 (constinArgument_inFormalArgumentList, kENUMERATION_UP) ;
+  while (enumerator_5880.hasCurrentObject ()) {
+    GALGAS_unifiedTypeMap_2D_proxy var_typeProxy_5971 ;
     {
-    GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioTypeMap, enumerator_5323.current_mFormalArgumentTypeName (HERE), var_typeProxy_5414 COMMA_SOURCE_FILE ("context-routines.galgas", 130)) ;
+    GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioTypeMap, enumerator_5880.current_mFormalArgumentTypeName (HERE), var_typeProxy_5971 COMMA_SOURCE_FILE ("context-routines.galgas", 153)) ;
     }
-    outArgument_outResult.addAssign_operation (enumerator_5323.current_mFormalArgumentPassingMode (HERE), enumerator_5323.current_mSelector (HERE), var_typeProxy_5414  COMMA_SOURCE_FILE ("context-routines.galgas", 131)) ;
-    enumerator_5323.gotoNextObject () ;
+    outArgument_outResult.addAssign_operation (enumerator_5880.current_mFormalArgumentPassingMode (HERE), enumerator_5880.current_mSelector (HERE), var_typeProxy_5971  COMMA_SOURCE_FILE ("context-routines.galgas", 154)) ;
+    enumerator_5880.gotoNextObject () ;
   }
 }
 

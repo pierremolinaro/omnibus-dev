@@ -448,6 +448,16 @@ class GALGAS_string extensionGetter_matchingFormalArgument (const class GALGAS_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                             Extension getter '@routineKind executionMode' (as function)                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_mode extensionGetter_executionMode (const class GALGAS_routineKind & inObject,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                     @routineArgumentSignatureMapForContext map                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
