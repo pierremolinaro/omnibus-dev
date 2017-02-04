@@ -250,7 +250,6 @@ method @functionDeclarationListAST enterFunctionInContext
         !function.mPublicFunction
         !globalFunction
         !.function {!executionMode:function.mMode}
-        !function.mMode
         !signature
         !returnType
         !canMutateProperties

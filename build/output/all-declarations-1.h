@@ -6636,7 +6636,6 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
   public : GALGAS_bool mProperty_mIsPublic ;
   public : GALGAS_bool mProperty_mExported ;
   public : GALGAS_routineKind mProperty_mRoutineKind ;
-  public : GALGAS_mode mProperty_mMode ;
   public : GALGAS_routineTypedSignature mProperty_mSignature ;
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
   public : GALGAS_bool mProperty_mCanAccessProperties ;
@@ -6657,7 +6656,6 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
   public : GALGAS_routineDescriptor (const GALGAS_bool & in_mIsPublic,
                                      const GALGAS_bool & in_mExported,
                                      const GALGAS_routineKind & in_mRoutineKind,
-                                     const GALGAS_mode & in_mMode,
                                      const GALGAS_routineTypedSignature & in_mSignature,
                                      const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType,
                                      const GALGAS_bool & in_mCanAccessProperties,
@@ -6677,11 +6675,10 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
   public : static class GALGAS_routineDescriptor constructor_new (const class GALGAS_bool & inOperand0,
                                                                   const class GALGAS_bool & inOperand1,
                                                                   const class GALGAS_routineKind & inOperand2,
-                                                                  const class GALGAS_mode & inOperand3,
-                                                                  const class GALGAS_routineTypedSignature & inOperand4,
-                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
-                                                                  const class GALGAS_bool & inOperand6,
-                                                                  const class GALGAS_bool & inOperand7
+                                                                  const class GALGAS_routineTypedSignature & inOperand3,
+                                                                  const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
+                                                                  const class GALGAS_bool & inOperand5,
+                                                                  const class GALGAS_bool & inOperand6
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -6703,8 +6700,6 @@ class GALGAS_routineDescriptor : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mExported (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnType (LOCATION_ARGS) const ;
 

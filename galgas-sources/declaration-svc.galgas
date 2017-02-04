@@ -130,7 +130,6 @@ method @systemRoutineDeclarationListAST enterInContext
         !svc.mPublic
         !false
         !svc.mRoutineKind
-        !.userMode
         !signature
         !returnType
         !mutating # canMutateProperties
