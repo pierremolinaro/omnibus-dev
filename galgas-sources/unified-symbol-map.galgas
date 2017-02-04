@@ -10,8 +10,9 @@ proc initialVariableMap
   ?globalsAreConstant:@bool inGlobalsAreConstant
   ?returnTypeName:let @lstring inReturnTypeName
   !@unifiedSymbolMap outVariableMap
+  !@universalPropertyAndRoutineMapForContext outUniversalMap
 {
-  @universalPropertyAndRoutineMapForContext universalMap = .default
+  outUniversalMap = .default
   outVariableMap = .emptyMap
 #------------------------------------------------------- Add modules
   for (moduleName) in inContext.mModuleMap do
@@ -25,7 +26,7 @@ proc initialVariableMap
       !copyable:false
       !canBeUsedAsInputParameter:false # Cannot be used as input parameter
     ]
-    [!?universalMap insertModule !moduleName !moduleType]
+    [!?outUniversalMap insertModule !moduleName !moduleType]
   end
 #------------------------------------------------------- Add registers
   for register in inContext.mControlRegisterMap do
@@ -41,7 +42,7 @@ proc initialVariableMap
       !arraySize:register.mArraySize # 0 if not an array
       !elementSize:register.mElementArraySize # 0 if not an array
     }
-    [!?universalMap insertRegister !register.lkey !objectReference]
+    [!?outUniversalMap insertRegister !register.lkey !objectReference]
     if not registerIsAccessible then
       [!?outVariableMap insertInaccessibleControlRegister
         !lkey:register.lkey
@@ -73,7 +74,7 @@ proc initialVariableMap
   end
 #------------------------------------------------------- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
-    [!?universalMap insertRegister !constantName !constantValue]
+    [!?outUniversalMap insertRegister !constantName !constantValue]
     [!?outVariableMap insertUsedConstant
       !lkey:constantName
       !type:[constantValue type]
@@ -86,7 +87,7 @@ proc initialVariableMap
 #------------------------------------------------------- Add global variables
   for variable in inContext.mGlobalVariableMap do
     let objectIR = @objectIR.globalVariableReference {!type:variable.type !plmName:variable.lkey}
-    [!?universalMap insertGlobalVariable !variable.lkey !objectIR !not inGlobalsAreConstant]
+    [!?outUniversalMap insertGlobalVariable !variable.lkey !objectIR !not inGlobalsAreConstant]
     var writeAccess = variable.allowedAccessToAll
     var allowedAccess = writeAccess
     if inGlobalsAreConstant || variable.isConstant || not writeAccess then
@@ -114,7 +115,7 @@ proc initialVariableMap
     let resultVarName = @lstring.new {!functionResultVariableName () !inReturnTypeName.location}
     let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
     let objectIR = @objectIR.localVariableReference {!type:resultType !plmName:resultVarName}
-    [!?universalMap insertLocalVariable !resultVarName !objectIR]
+    [!?outUniversalMap insertLocalVariable !resultVarName !objectIR !false]
     [!?outVariableMap insertOutputFormalArgument
       !lkey:resultVarName
       !type:resultType

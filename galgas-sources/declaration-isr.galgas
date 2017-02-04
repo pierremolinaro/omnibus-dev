@@ -104,6 +104,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !globalsAreConstant:false
       !returnTypeName:["" nowhere]
       ?@unifiedSymbolMap variableMap
+      ?@universalPropertyAndRoutineMapForContext universalMap
     )
   #--- Self type
     let selfType = if isr.mSelfTypeName.string == "" then
@@ -124,6 +125,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
+      !?variableMap:universalMap
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]

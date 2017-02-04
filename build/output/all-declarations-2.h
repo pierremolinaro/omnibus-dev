@@ -1505,6 +1505,7 @@ void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructi
                                                     class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                     class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                     class GALGAS_unifiedSymbolMap & io_ioVariableMap,
+                                                    class GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
                                                     class GALGAS_allocaList & io_ioAllocaList,
                                                     class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                     class C_Compiler * inCompiler
@@ -1521,6 +1522,7 @@ void routine_initialVariableMap (const class GALGAS_semanticContext constinArgum
                                  class GALGAS_bool inArgument2,
                                  const class GALGAS_lstring constinArgument3,
                                  class GALGAS_unifiedSymbolMap & outArgument4,
+                                 class GALGAS_universalPropertyAndRoutineMapForContext & outArgument5,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
@@ -3306,8 +3308,9 @@ typedef void (*extensionMethodSignature_instructionAST_analyze) (const class cPt
                                                                  class GALGAS_semanticTemporariesStruct & ioArgument6,
                                                                  class GALGAS_staticStringMap & ioArgument7,
                                                                  class GALGAS_unifiedSymbolMap & ioArgument8,
-                                                                 class GALGAS_allocaList & ioArgument9,
-                                                                 class GALGAS_instructionListIR & ioArgument10,
+                                                                 class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument9,
+                                                                 class GALGAS_allocaList & ioArgument10,
+                                                                 class GALGAS_instructionListIR & ioArgument11,
                                                                  class C_Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
@@ -3328,6 +3331,7 @@ void callExtensionMethod_analyze (const class cPtr_instructionAST * inObject,
                                   GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                   GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                   GALGAS_unifiedSymbolMap & io_ioVariableMap,
+                                  GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
                                   GALGAS_allocaList & io_ioAllocaList,
                                   GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                   C_Compiler * inCompiler
@@ -3350,6 +3354,7 @@ void extensionMethod_analyzeBranchInstructionList (const class GALGAS_instructio
                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                                    class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                                    class GALGAS_unifiedSymbolMap & io_ioVariableMap,
+                                                   class GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
                                                    class GALGAS_allocaList & io_ioAllocaList,
                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                    class C_Compiler * inCompiler

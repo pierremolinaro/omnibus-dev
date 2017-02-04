@@ -154,11 +154,10 @@ proc initSemanticAnalysis
   initialVariableMap (
     !context:inContext
     !mode:.initMode
-#    !userMode:false
-#    !registerAccess:.readWriteAccess
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@unifiedSymbolMap variableMap
+    ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Analyze instruction list
   outInstructionGenerationList = {}
@@ -173,6 +172,7 @@ proc initSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
+    !?variableMap:universalMap
     !?alloca:outAllocaList
     !?generatedCode:outInstructionGenerationList
   ]
