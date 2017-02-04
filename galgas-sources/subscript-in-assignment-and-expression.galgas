@@ -11,7 +11,7 @@ proc handleSubscriptInAssignmentAndExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
 
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
@@ -30,7 +30,7 @@ proc handleSubscriptInAssignmentAndExpression
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?analysis:ioGenerationStruct
+      !?alloca: ioAllocaList
       !inIndexExpression 
       !inErrorLocation
       !?ioInstructionGenerationList
@@ -48,7 +48,7 @@ proc handleSubscriptInAssignmentAndExpression
       !?staticStringMap: ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?analysis:ioGenerationStruct
+      !?alloca: ioAllocaList
       !inIndexExpression 
       !inErrorLocation
       !?ioInstructionGenerationList
@@ -72,7 +72,7 @@ private proc handleSubscriptArrayInAssignmentAndExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
   ?!@instructionListIR ioInstructionGenerationList
@@ -93,7 +93,7 @@ private proc handleSubscriptArrayInAssignmentAndExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?analysis:ioGenerationStruct
+    !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR indexResultPossibleReference
   ]
@@ -167,7 +167,7 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
   ?let @location inErrorLocation
   ?!@instructionListIR ioInstructionGenerationList
@@ -200,7 +200,7 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?analysis:ioGenerationStruct
+      !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:let @objectIR indexResultPossibleReference
     ]

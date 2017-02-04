@@ -435,7 +435,7 @@ abstract method @expressionAST analyzeExpression
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!analysis:@generationStruct ioGenerationStruct
+  ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 
@@ -448,7 +448,7 @@ method @expressionAST analyzeStaticExpression
   !result:@objectIR outResult
 {
   @instructionListIR instructionGenerationList = {}
-  @generationStruct generationStruct = .default
+  @allocaList allocaList = {}
   [self analyzeExpression
     !self:.null
     !directAccessToPropertiesAllowed:false
@@ -461,11 +461,11 @@ method @expressionAST analyzeStaticExpression
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:*
     !?variableMap:*
-    !?analysis:generationStruct
+    !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:outResult
   ]
-  if ([generationStruct.mAllocaList length] > 0) || ([instructionGenerationList length] > 0) || not [outResult isStatic] then
+  if ([allocaList length] > 0) || ([instructionGenerationList length] > 0) || not [outResult isStatic] then
     error inErrorLocation : "this expression should be a static expression" : outResult
   end
 }

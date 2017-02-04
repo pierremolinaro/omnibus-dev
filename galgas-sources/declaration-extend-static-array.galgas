@@ -143,7 +143,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           )
           @semanticTemporariesStruct temporaries = .default
           @instructionListIR instructionGenerationList = {}
-          @generationStruct generationStruct = .default
+          @allocaList allocaList = {}
           [exp analyzeExpression
             !self:.null
             !directAccessToPropertiesAllowed:false
@@ -156,7 +156,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
             !?staticStringMap:ioGlobalLiteralStringMap
             !?variableMap:variableMap
             !?variableMap:universalMap
-            !?analysis:generationStruct
+            !?alloca:allocaList
             !?instructionListIR:instructionGenerationList
             ?result:let @objectIR expressionResult
           ]
@@ -167,7 +167,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
             !errorLocation:endOfExp
             !staticTypeAllowed:false
           )
-          if ([instructionGenerationList length] > 0) || ([generationStruct.mAllocaList length] > 0) || not [result isStatic] then
+          if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
             error endOfExp : "source expression cannot be statically computed"
           end
         #--- Enter in static value

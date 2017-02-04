@@ -215,7 +215,7 @@ method @taskVarListAST-element enterInContext
 #--- Analyze source expression
   @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}
-  @generationStruct generationStruct = .default
+  @allocaList allocaList = {}
   variableMapWithConstants (
     !context:ioContext
     ?@unifiedSymbolMap variableMap
@@ -233,11 +233,11 @@ method @taskVarListAST-element enterInContext
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
     !?variableMap:universalMap
-    !?analysis:generationStruct
+    !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:let @objectIR expressionResult
   ]
-  if ([instructionGenerationList length] > 0) || ([generationStruct.mAllocaList length] > 0) || not [expressionResult isStatic] then
+  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
     error mVarName : "source expression cannot be statically computed"
   end
 #--- Check variable type and expression type
@@ -327,7 +327,7 @@ method @taskList-element semanticAnalysis
     taskInitSortedListAST += !priority !instructionList !endOfDeclaration !priority.bigint
   end
   @instructionListIR initInstructionListIR = {}
-  @generationStruct generationStruct = .default
+  @allocaList initAllocaList = {}
   for (taskInitPriority taskInitInstructionList endOfTaskInitDeclaration *) in taskInitSortedListAST do
     initSemanticAnalysis (
       !context:inContext
@@ -339,11 +339,11 @@ method @taskList-element semanticAnalysis
       !requiredBy:{}
       !instructionList:taskInitInstructionList
       !endOfDeclaration:endOfTaskInitDeclaration
-      ?let partialGenerationStruct
+      ?let partialAllocaList
       ?let @instructionListIR partialInstructionGenerationList
     )
     initInstructionListIR += partialInstructionGenerationList
-    generationStruct.mAllocaList += partialGenerationStruct.mAllocaList
+    initAllocaList += partialAllocaList
   end
 #------------------------------------------- Analyze task guarded command
 #  Build a "task.loop" function that contains a sync instruction
@@ -375,7 +375,7 @@ method @taskList-element semanticAnalysis
     !taskType
     !mPriority.bigint
     !mStackSize.bigint
-    !generationStruct.mAllocaList
+    !initAllocaList
     !initInstructionListIR
   ]
 }

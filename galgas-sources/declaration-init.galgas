@@ -106,7 +106,7 @@ method @initList-element initSemanticAnalysis
     !requiredBy:mRequiredByProcList
     !instructionList:mInstructionList
     !endOfDeclaration:mEndOfInitLocation
-    ?let @generationStruct generationStruct
+    ?let @allocaList allocaList
     ?let @instructionListIR instructionGenerationList
   )
 #--- Code generation
@@ -115,7 +115,7 @@ method @initList-element initSemanticAnalysis
     !mGlobalVarName
     !mRequiredByProcList
     !mPriority.bigint
-    !generationStruct.mAllocaList
+    !allocaList
     !instructionGenerationList
 }
 
@@ -131,7 +131,7 @@ proc initSemanticAnalysis
   ?requiredBy:let @lstringlist inRequiredByProcList
   ?instructionList:let @instructionListAST inInstructionListAST
   ?endOfDeclaration:let @location inEndOfInitDeclaration
-  !@generationStruct outAnalysisStruct
+  !@allocaList outAllocaList
   !@instructionListIR outInstructionGenerationList
 {
 #--- Check init routine is unique
@@ -161,7 +161,7 @@ proc initSemanticAnalysis
   )
 #--- Analyze instruction list
   outInstructionGenerationList = {}
-  outAnalysisStruct = .default
+  outAllocaList = {}
   [inInstructionListAST analyzeRoutineInstructionList
     !self:inSelfType
     !directAccessToPropertiesAllowed:true
@@ -173,7 +173,7 @@ proc initSemanticAnalysis
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?variableMap:universalMap
-    !?analysis:outAnalysisStruct
+    !?alloca:outAllocaList
     !?generatedCode:outInstructionGenerationList
   ]
 #--- End of variableMap
