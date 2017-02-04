@@ -2958,25 +2958,25 @@ GALGAS_guardMapForContext GALGAS_guardMapForContext::extractObject (const GALGAS
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_internalUniversalPropertyAndRoutineMapForContext::cMapElement_internalUniversalPropertyAndRoutineMapForContext (const GALGAS_lstring & inKey,
-                                                                                                                            const GALGAS_possibleProperty & in_mProperty,
+                                                                                                                            const GALGAS_possibleValuedObject & in_mPossibleValuedObject,
                                                                                                                             const GALGAS_routineSignatureMapForContext & in_mRoutineSignatureMapForContext
                                                                                                                             COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mProperty_mProperty (in_mProperty),
+mProperty_mPossibleValuedObject (in_mPossibleValuedObject),
 mProperty_mRoutineSignatureMapForContext (in_mRoutineSignatureMapForContext) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_internalUniversalPropertyAndRoutineMapForContext::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mProperty.isValid () && mProperty_mRoutineSignatureMapForContext.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mPossibleValuedObject.isValid () && mProperty_mRoutineSignatureMapForContext.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_internalUniversalPropertyAndRoutineMapForContext::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_internalUniversalPropertyAndRoutineMapForContext (mProperty_lkey, mProperty_mProperty, mProperty_mRoutineSignatureMapForContext COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_internalUniversalPropertyAndRoutineMapForContext (mProperty_lkey, mProperty_mPossibleValuedObject, mProperty_mRoutineSignatureMapForContext COMMA_HERE)) ;
   return result ;
 }
 
@@ -2985,8 +2985,8 @@ cMapElement * cMapElement_internalUniversalPropertyAndRoutineMapForContext::copy
 void cMapElement_internalUniversalPropertyAndRoutineMapForContext::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mProperty" ":" ;
-  mProperty_mProperty.description (ioString, inIndentation) ;
+  ioString << "mPossibleValuedObject" ":" ;
+  mProperty_mPossibleValuedObject.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mRoutineSignatureMapForContext" ":" ;
@@ -2999,7 +2999,7 @@ typeComparisonResult cMapElement_internalUniversalPropertyAndRoutineMapForContex
   cMapElement_internalUniversalPropertyAndRoutineMapForContext * operand = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) inOperand ;
   typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
   if (kOperandEqual == result) {
-    result = mProperty_mProperty.objectCompare (operand->mProperty_mProperty) ;
+    result = mProperty_mPossibleValuedObject.objectCompare (operand->mProperty_mPossibleValuedObject) ;
   }
   if (kOperandEqual == result) {
     result = mProperty_mRoutineSignatureMapForContext.objectCompare (operand->mProperty_mRoutineSignatureMapForContext) ;
@@ -3055,7 +3055,7 @@ GALGAS_internalUniversalPropertyAndRoutineMapForContext GALGAS_internalUniversal
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_internalUniversalPropertyAndRoutineMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
-                                                                                   const GALGAS_possibleProperty & inArgument0,
+                                                                                   const GALGAS_possibleValuedObject & inArgument0,
                                                                                    const GALGAS_routineSignatureMapForContext & inArgument1,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) {
@@ -3072,7 +3072,7 @@ void GALGAS_internalUniversalPropertyAndRoutineMapForContext::addAssign_operatio
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_internalUniversalPropertyAndRoutineMapForContext::setter_insertKey (GALGAS_lstring inKey,
-                                                                                GALGAS_possibleProperty inArgument0,
+                                                                                GALGAS_possibleValuedObject inArgument0,
                                                                                 GALGAS_routineSignatureMapForContext inArgument1,
                                                                                 C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) {
@@ -3093,7 +3093,7 @@ const char * kSearchErrorMessage_internalUniversalPropertyAndRoutineMapForContex
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_internalUniversalPropertyAndRoutineMapForContext::method_searchKey (GALGAS_lstring inKey,
-                                                                                GALGAS_possibleProperty & outArgument0,
+                                                                                GALGAS_possibleValuedObject & outArgument0,
                                                                                 GALGAS_routineSignatureMapForContext & outArgument1,
                                                                                 C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) const {
@@ -3106,22 +3106,22 @@ void GALGAS_internalUniversalPropertyAndRoutineMapForContext::method_searchKey (
     outArgument1.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    outArgument0 = p->mProperty_mProperty ;
+    outArgument0 = p->mProperty_mPossibleValuedObject ;
     outArgument1 = p->mProperty_mRoutineSignatureMapForContext ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_possibleProperty GALGAS_internalUniversalPropertyAndRoutineMapForContext::getter_mPropertyForKey (const GALGAS_string & inKey,
-                                                                                                         C_Compiler * inCompiler
-                                                                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_possibleValuedObject GALGAS_internalUniversalPropertyAndRoutineMapForContext::getter_mPossibleValuedObjectForKey (const GALGAS_string & inKey,
+                                                                                                                         C_Compiler * inCompiler
+                                                                                                                         COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = (const cMapElement_internalUniversalPropertyAndRoutineMapForContext *) attributes ;
-  GALGAS_possibleProperty result ;
+  GALGAS_possibleValuedObject result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    result = p->mProperty_mProperty ;
+    result = p->mProperty_mPossibleValuedObject ;
   }
   return result ;
 }
@@ -3143,15 +3143,15 @@ GALGAS_routineSignatureMapForContext GALGAS_internalUniversalPropertyAndRoutineM
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_internalUniversalPropertyAndRoutineMapForContext::setter_setMPropertyForKey (GALGAS_possibleProperty inAttributeValue,
-                                                                                         GALGAS_string inKey,
-                                                                                         C_Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) {
+void GALGAS_internalUniversalPropertyAndRoutineMapForContext::setter_setMPossibleValuedObjectForKey (GALGAS_possibleValuedObject inAttributeValue,
+                                                                                                     GALGAS_string inKey,
+                                                                                                     C_Compiler * inCompiler
+                                                                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    p->mProperty_mProperty = inAttributeValue ;
+    p->mProperty_mPossibleValuedObject = inAttributeValue ;
   }
 }
 
@@ -3192,7 +3192,7 @@ cGenericAbstractEnumerator (inOrder) {
 GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element cEnumerator_internalUniversalPropertyAndRoutineMapForContext::current (LOCATION_ARGS) const {
   const cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = (const cMapElement_internalUniversalPropertyAndRoutineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-  return GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mProperty, p->mProperty_mRoutineSignatureMapForContext) ;
+  return GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mPossibleValuedObject, p->mProperty_mRoutineSignatureMapForContext) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3205,10 +3205,10 @@ GALGAS_lstring cEnumerator_internalUniversalPropertyAndRoutineMapForContext::cur
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_possibleProperty cEnumerator_internalUniversalPropertyAndRoutineMapForContext::current_mProperty (LOCATION_ARGS) const {
+GALGAS_possibleValuedObject cEnumerator_internalUniversalPropertyAndRoutineMapForContext::current_mPossibleValuedObject (LOCATION_ARGS) const {
   const cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = (const cMapElement_internalUniversalPropertyAndRoutineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-  return p->mProperty_mProperty ;
+  return p->mProperty_mPossibleValuedObject ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

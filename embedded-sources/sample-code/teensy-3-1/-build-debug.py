@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+ 
 #----------------------------------------------------------------------------------------------------------------------*
 
 import os
@@ -81,11 +81,11 @@ def runCommand (command) :
 
 def compileSource (source) :
   print MAGENTA() + BOLD () + "********** Compile " + source + ENDC ()
-  command = ["../../../makefile-macosx/plm", "-v", "--Oz", source]
+  command = ["../../../makefile-macosx/plm-debug", "-v", "--Oz", source]
   returncode = subprocess.call (command)
   if returncode != 0 :
     sys.exit (returncode)
-  command = ["../../../makefile-macosx/plm", "--no-panic-generation", "-v", "--Oz", source]
+  command = ["../../../makefile-macosx/plm-debug", "--no-panic-generation", "-v", "--Oz", source]
   returncode = subprocess.call (command)
   if returncode != 0 :
     sys.exit (returncode)
@@ -97,7 +97,7 @@ scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
 #--- Compile PLM
 print MAGENTA() + BOLD () + "********** Compile PLM" + ENDC ()
-runCommand (["python", "../../../makefile-macosx/build+release.py"])
+runCommand (["python", "../../../makefile-macosx/build+debug.py"])
 #--- Compile PLM sources
 for dirname, dirnames, filenames in os.walk (scriptDir):
   for file in filenames :

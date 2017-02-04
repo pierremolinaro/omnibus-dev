@@ -434,28 +434,6 @@ void routine_handleSubscriptInAssignmentAndExpression (const class GALGAS_unifie
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      @possibleProperty enum, associated values                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cEnumAssociatedValues_possibleProperty_property : public cEnumAssociatedValues {
-  public : const GALGAS_bool mAssociatedValue0 ;
-  public : const GALGAS_objectIR mAssociatedValue1 ;
-
-//--- Constructor
-  public : cEnumAssociatedValues_possibleProperty_property (const GALGAS_bool & inAssociatedValue0,
-                                                            const GALGAS_objectIR & inAssociatedValue1
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
-  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public : virtual ~ cEnumAssociatedValues_possibleProperty_property (void) {}
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                     Extension setter '@universalPropertyAndRoutineMapForContext insertRoutine'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -467,6 +445,110 @@ void extensionSetter_insertRoutine (class GALGAS_universalPropertyAndRoutineMapF
                                     const class GALGAS_routineDescriptor constin_inDescriptor,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    @possibleValuedObject enum, associated values                                    *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_possibleValuedObject_property : public cEnumAssociatedValues {
+  public : const GALGAS_bool mAssociatedValue0 ;
+  public : const GALGAS_objectIR mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_possibleValuedObject_property (const GALGAS_bool & inAssociatedValue0,
+                                                                const GALGAS_objectIR & inAssociatedValue1
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_property (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_possibleValuedObject_module : public cEnumAssociatedValues {
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_possibleValuedObject_module (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_module (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_possibleValuedObject_register : public cEnumAssociatedValues {
+  public : const GALGAS_objectIR mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_possibleValuedObject_register (const GALGAS_objectIR & inAssociatedValue0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_register (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_possibleValuedObject_constant : public cEnumAssociatedValues {
+  public : const GALGAS_objectIR mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_possibleValuedObject_constant (const GALGAS_objectIR & inAssociatedValue0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_constant (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_possibleValuedObject_globalVariableReference : public cEnumAssociatedValues {
+  public : const GALGAS_bool mAssociatedValue0 ;
+  public : const GALGAS_objectIR mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_possibleValuedObject_globalVariableReference (const GALGAS_bool & inAssociatedValue0,
+                                                                               const GALGAS_objectIR & inAssociatedValue1
+                                                                               COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_globalVariableReference (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_possibleValuedObject_localVariableReference : public cEnumAssociatedValues {
+  public : const GALGAS_objectIR mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_possibleValuedObject_localVariableReference (const GALGAS_objectIR & inAssociatedValue0
+                                                                              COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_possibleValuedObject_localVariableReference (void) {}
+} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -483,16 +565,77 @@ void extensionSetter_insertProperty (class GALGAS_universalPropertyAndRoutineMap
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                     Extension method '@universalPropertyAndRoutineMapForContext searchProperty'                     *
+//                      Extension setter '@universalPropertyAndRoutineMapForContext insertModule'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_searchProperty (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
-                                     const class GALGAS_lstring constin_inPropertyName,
-                                     class GALGAS_bool & out_outIsPublic,
-                                     class GALGAS_objectIR & out_outObjectIR,
+void extensionSetter_insertModule (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                   const class GALGAS_lstring constin_inModuleName,
+                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inModuleType,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                     Extension setter '@universalPropertyAndRoutineMapForContext insertRegister'                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_insertRegister (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                     const class GALGAS_lstring constin_inRegisterName,
+                                     const class GALGAS_objectIR constin_inRegisterObjectIR,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                     Extension setter '@universalPropertyAndRoutineMapForContext insertConstant'                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_insertConstant (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                     const class GALGAS_lstring constin_inConstantName,
+                                     const class GALGAS_objectIR constin_inConstantObjectIR,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                  Extension setter '@universalPropertyAndRoutineMapForContext insertGlobalVariable'                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_insertGlobalVariable (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                           const class GALGAS_lstring constin_inGlobalVariableName,
+                                           const class GALGAS_objectIR constin_inObjectIR,
+                                           const class GALGAS_bool constin_inWritable,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                  Extension setter '@universalPropertyAndRoutineMapForContext insertLocalVariable'                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_insertLocalVariable (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                          const class GALGAS_lstring constin_inLocalVariableName,
+                                          const class GALGAS_objectIR constin_inObjectIR,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                   Extension method '@universalPropertyAndRoutineMapForContext searchValuedObject'                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_searchValuedObject (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
+                                         const class GALGAS_lstring constin_inValuedObjectName,
+                                         class GALGAS_bool & out_outIsPublic,
+                                         class GALGAS_objectIR & out_outObjectIR,
+                                         class C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

@@ -1,0 +1,253 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! UNIVERSAL PROPERTY - ROUTINE MAP
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+# Cette table contient routines et variables. La clé est le nom de la variable ou le nom de la routine. Il est valide
+# d'avoir plusieurs routines de même nom, du moment qu'elle se distinguent par leur signature. Il est valide d'avoir une
+# variable de même nom qu'une routine : la syntaxe permet de savoir si une routine ou une variable est attendue.
+
+#·······················································································································
+
+struct @universalPropertyAndRoutineMapForContext {
+  @internalUniversalPropertyAndRoutineMapForContext mInternalPropertyAndRoutineMapForContext
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! INSERT SETTERS
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+setter @universalPropertyAndRoutineMapForContext insertRoutine
+  ?let @lstring inRoutineName
+  ?let @lstring inArgumentSignature
+  ?let @string inLLVMInvocationRoutineName
+  ?let @routineDescriptor inDescriptor
+{
+  with inRoutineName.string in !?mInternalPropertyAndRoutineMapForContext do
+    [!?mRoutineSignatureMapForContext insertKey
+      !inArgumentSignature
+      !inLLVMInvocationRoutineName
+      !inDescriptor
+    ]
+  else
+    @routineSignatureMapForContext routineSignatureMapForContext = {}
+    [!?routineSignatureMapForContext insertKey
+      !inArgumentSignature
+      !inLLVMInvocationRoutineName
+      !inDescriptor
+    ]
+    [!?mInternalPropertyAndRoutineMapForContext insertKey !inRoutineName !.undefined !routineSignatureMapForContext]
+  end
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext insertProperty
+  ?let @lstring inPropertyName
+  ?let @bool inIsPublic
+  ?let @objectIR inObjectIR
+{
+  let newValue = @possibleValuedObject.property {!isPublic:inIsPublic !objectIR:inObjectIR}
+  with inPropertyName.string in !?mInternalPropertyAndRoutineMapForContext do
+    if [mPossibleValuedObject isUndefined] then
+      mPossibleValuedObject = newValue
+    else
+      error inPropertyName : "object already defined in this context"
+    end
+  else
+    [!?mInternalPropertyAndRoutineMapForContext insertKey
+      !inPropertyName
+      !newValue
+      !{} # empty routine map
+    ]
+  end
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext insertModule
+  ?let @lstring inModuleName
+  ?let @unifiedTypeMap-proxy inModuleType
+{
+  let newValue = @possibleValuedObject.module {!type:inModuleType}
+  with inModuleName.string in !?mInternalPropertyAndRoutineMapForContext do
+    if [mPossibleValuedObject isUndefined] then
+      mPossibleValuedObject = newValue
+    else
+      error inModuleName : "object already defined in this context"
+    end
+  else
+    [!?mInternalPropertyAndRoutineMapForContext insertKey
+      !inModuleName
+      !newValue
+      !{} # empty routine map
+    ]
+  end
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext insertRegister
+  ?let @lstring inRegisterName
+  ?let @objectIR inRegisterObjectIR
+{
+  let newValue = @possibleValuedObject.register {!objectIR:inRegisterObjectIR}
+  with inRegisterName.string in !?mInternalPropertyAndRoutineMapForContext do
+    if [mPossibleValuedObject isUndefined] then
+      mPossibleValuedObject = newValue
+    else
+      error inRegisterName : "object already defined in this context"
+    end
+  else
+    [!?mInternalPropertyAndRoutineMapForContext insertKey
+      !inRegisterName
+      !newValue
+      !{} # empty routine map
+    ]
+  end
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext insertConstant
+  ?let @lstring inConstantName
+  ?let @objectIR inConstantObjectIR
+{
+  let newValue = @possibleValuedObject.constant {!objectIR:inConstantObjectIR}
+  with inConstantName.string in !?mInternalPropertyAndRoutineMapForContext do
+    if [mPossibleValuedObject isUndefined] then
+      mPossibleValuedObject = newValue
+    else
+      error inConstantName : "object already defined in this context"
+    end
+  else
+    [!?mInternalPropertyAndRoutineMapForContext insertKey
+      !inConstantName
+      !newValue
+      !{} # empty routine map
+    ]
+  end
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext insertGlobalVariable
+  ?let @lstring inGlobalVariableName
+  ?let @objectIR inObjectIR
+  ?let @bool inWritable
+{
+  let newValue = @possibleValuedObject.globalVariableReference {!writable:inWritable !objectIR:inObjectIR}
+  with inGlobalVariableName.string in !?mInternalPropertyAndRoutineMapForContext do
+    if [mPossibleValuedObject isUndefined] then
+      mPossibleValuedObject = newValue
+    else
+      error inGlobalVariableName : "object already defined in this context"
+    end
+  else
+    [!?mInternalPropertyAndRoutineMapForContext insertKey
+      !inGlobalVariableName
+      !newValue
+      !{} # empty routine map
+    ]
+  end
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext insertLocalVariable
+  ?let @lstring inLocalVariableName
+  ?let @objectIR inObjectIR
+{
+  let newValue = @possibleValuedObject.localVariableReference {!objectIR:inObjectIR}
+  with inLocalVariableName.string in !?mInternalPropertyAndRoutineMapForContext do
+    if [mPossibleValuedObject isUndefined] then
+      mPossibleValuedObject = newValue
+    else
+      error inLocalVariableName : "object already defined in this context"
+    end
+  else
+    [!?mInternalPropertyAndRoutineMapForContext insertKey
+      !inLocalVariableName
+      !newValue
+      !{} # empty routine map
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! SEARCH METHODS
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @universalPropertyAndRoutineMapForContext searchValuedObject
+  ?let @lstring inValuedObjectName
+  !@bool outIsPublic
+  !@objectIR outObjectIR
+{
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let property ?*]
+  switch property
+  case undefined :
+    error inValuedObjectName : "undefined in this context" : outIsPublic, outObjectIR
+  case property (@bool isPublic @objectIR objectIR) :
+    outIsPublic = isPublic
+    outObjectIR = objectIR
+  case module (@unifiedTypeMap-proxy type) :
+    outIsPublic = true
+    outObjectIR = .globalVariableReference {!type:type !plmName:inValuedObjectName}
+  case register (@objectIR objectIR) :
+    outIsPublic = true
+    outObjectIR = objectIR
+  case constant (@objectIR objectIR) :
+    outIsPublic = true
+    outObjectIR = objectIR
+  case globalVariableReference (* @objectIR objectIR) :
+    outIsPublic = true
+    outObjectIR = objectIR
+  case localVariableReference (@objectIR objectIR) :
+    outIsPublic = true
+    outObjectIR = objectIR
+  end
+}
+
+#·······················································································································
+
+method @universalPropertyAndRoutineMapForContext searchRoutine
+  ?let @lstring inRoutineName
+  ?let @lstring inArgumentSignature
+  !@string outLLVMInvocationRoutineName
+  !@routineDescriptor outDescriptor
+{
+  [mInternalPropertyAndRoutineMapForContext searchKey !inRoutineName ?* ?let @routineSignatureMapForContext routineMap]
+  [routineMap searchKey !inArgumentSignature ?outLLVMInvocationRoutineName ?outDescriptor]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @possibleValuedObject {
+  case undefined
+  case property (@bool isPublic @objectIR objectIR)
+  case module (@unifiedTypeMap-proxy type)
+  case register (@objectIR objectIR)
+  case constant (@objectIR objectIR)
+  case globalVariableReference (@bool writable @objectIR objectIR)
+  case localVariableReference (@objectIR objectIR)
+}
+
+#·······················································································································
+
+map @internalUniversalPropertyAndRoutineMapForContext { # Key is a variable, property, routine name
+  @possibleValuedObject mPossibleValuedObject
+  @routineSignatureMapForContext mRoutineSignatureMapForContext
+
+  insert insertKey error message "the '%K' routine is already declared in %L"
+  search searchKey error message "there is no '%K' routine"
+}
+
+#·······················································································································
+
+map @routineSignatureMapForContext { # argument signature is the key
+  @string mLLVMInvocationRoutineName # Name used in LLVM for calling this routine
+  @routineDescriptor mDescriptor
+
+  insert insertKey error message "the '%K' routine signature is already declared in %L"
+  search searchKey error message "there is no '%K' routine signature"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
