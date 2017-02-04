@@ -844,7 +844,7 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "    for \xC3""\xA9""l\xC3""\xA9""ment in maListeStatique {\n"
   "      total += \xC3""\xA9""l\xC3""\xA9""ment.a\n"
   "      total += \xC3""\xA9""l\xC3""\xA9""ment.b\n"
-  "      \xC3""\xA9""l\xC3""\xA9""ment.f ()\n"
+  "//      \xC3""\xA9""l\xC3""\xA9""ment.f ()\n"
   "    }\n"
   "    lcd.goto (!line:0 !column:0)\n"
   "    lcd.printUnsigned (!total)\n"
@@ -857,7 +857,7 @@ const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
   "00-static-list-example.plm",
   "plm",
   true, // Text file
-  1841, // Text length
+  1843, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 

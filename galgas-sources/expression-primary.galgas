@@ -484,7 +484,6 @@ proc handleFunctionCallInExpression
   !@unifiedTypeMap-proxy outReturnedType
 {
   if not [ioObjectPtr isPossibleFunction] then ###
-    log ioObjectPtr
     error inErrorLocation : "object is not a function" : ioObjectPtr, outReturnedType
   elsif inGuard then
     [ioObjectPtr possibleFunction ?1* ?functionName:let functionName]
@@ -558,7 +557,6 @@ proc analyzeFunctionCallInExpression
   var specialCase = (receiverType != .null) && [[receiverType kind] isStructure]
   if specialCase then
     [[receiverType kind] structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?2*]
-    message "ROUTINE NAME " + inRoutineName + "\n"
     if [propertyMap hasKey !inRoutineName] then
       [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject]
       [propertyObject property ?type:let type ?plmName:let unused plmName ?index:let unused index]

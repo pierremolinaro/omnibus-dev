@@ -563,6 +563,148 @@ void routine_handleSubscriptInAssignmentAndExpression (const class GALGAS_unifie
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                  @universalPropertyAndRoutineMapForContext struct                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_universalPropertyAndRoutineMapForContext : public AC_GALGAS_root {
+//--------------------------------- Public data members
+  public : GALGAS_internalUniversalPropertyAndRoutineMapForContext mProperty_mInternalPropertyAndRoutineMapForContext ;
+
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_universalPropertyAndRoutineMapForContext constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_universalPropertyAndRoutineMapForContext (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_universalPropertyAndRoutineMapForContext (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_universalPropertyAndRoutineMapForContext (const GALGAS_internalUniversalPropertyAndRoutineMapForContext & in_mInternalPropertyAndRoutineMapForContext) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_universalPropertyAndRoutineMapForContext extractObject (const GALGAS_object & inObject,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_universalPropertyAndRoutineMapForContext constructor_new (const class GALGAS_internalUniversalPropertyAndRoutineMapForContext & inOperand0
+                                                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_universalPropertyAndRoutineMapForContext & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_internalUniversalPropertyAndRoutineMapForContext getter_mInternalPropertyAndRoutineMapForContext (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_universalPropertyAndRoutineMapForContext class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_universalPropertyAndRoutineMapForContext ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                      @possibleProperty enum, associated values                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_possibleProperty_property : public cEnumAssociatedValues {
+  public : const GALGAS_bool mAssociatedValue0 ;
+  public : const GALGAS_objectIR mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_possibleProperty_property (const GALGAS_bool & inAssociatedValue0,
+                                                            const GALGAS_objectIR & inAssociatedValue1
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_possibleProperty_property (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                     Extension setter '@universalPropertyAndRoutineMapForContext insertRoutine'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_insertRoutine (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                    const class GALGAS_lstring constin_inRoutineName,
+                                    const class GALGAS_lstring constin_inArgumentSignature,
+                                    const class GALGAS_string constin_inLLVMInvocationRoutineName,
+                                    const class GALGAS_routineDescriptor constin_inDescriptor,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                     Extension setter '@universalPropertyAndRoutineMapForContext insertProperty'                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_insertProperty (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                     const class GALGAS_lstring constin_inPropertyName,
+                                     const class GALGAS_bool constin_inIsPublic,
+                                     const class GALGAS_objectIR constin_inObjectIR,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Extension method '@universalPropertyAndRoutineMapForContext getProperty'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_getProperty (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
+                                  const class GALGAS_lstring constin_inPropertyName,
+                                  class GALGAS_bool & out_outIsPublic,
+                                  class GALGAS_objectIR & out_outObjectIR,
+                                  class C_Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Extension method '@universalPropertyAndRoutineMapForContext getRoutine'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_getRoutine (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
+                                 const class GALGAS_lstring constin_inRoutineName,
+                                 const class GALGAS_lstring constin_inArgumentSignature,
+                                 class GALGAS_string & out_outLLVMInvocationRoutineName,
+                                 class GALGAS_routineDescriptor & out_outDescriptor,
+                                 class C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                          Extension getter '@unifiedTypeMap-proxy equatable' (as function)                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

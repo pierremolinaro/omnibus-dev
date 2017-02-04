@@ -213,7 +213,6 @@ private proc suppressInaccessibleSubprograms
     ioOptimizing = true
   end
 #--- Static arraies
-#  log "GLOBALS: " : outAccessibleEntities.mGlobalVariableSet
   @staticArrayMap currentStaticArrayMap = {}
   for (staticArrayMame value) in ioIntermediateCodeStruct.mStaticArrayMap do
     if [outAccessibleEntities.mGlobalVariableSet hasKey !staticArrayMame] then
