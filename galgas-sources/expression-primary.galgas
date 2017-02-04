@@ -785,8 +785,8 @@ proc analyzeEffectiveParameters
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
         case integer (* * * *) :
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case structure (* @propertyMap propertyMap universalMap * *) :
-          [propertyMap searchKey !name ?let unused public ?let propertyObject]
+        case structure (* * universalMap * *) :
+          [universalMap searchProperty !name ?let unused public ?let propertyObject]
           [propertyObject property ?2* ?index:let idx]
           getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
           [!?ioInstructionGenerationList appendPropertyReferenceFromSelf

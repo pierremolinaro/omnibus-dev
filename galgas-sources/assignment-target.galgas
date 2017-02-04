@@ -134,6 +134,7 @@ method @assignmentTargetAST analyzeAssignmentTarget
       error selfLocation : "'self' is not available in this context" : outCurrentObject
     elsif [[inSelfType kind] isStructure] then
       [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let universalMap ?2*]
+ ##     [universalMap searchProperty !mIdentifier ?* ?let object]
       if [structureObjectMap hasKey !mIdentifier] then
         [structureObjectMap searchKey
           !mIdentifier
