@@ -72,11 +72,34 @@ enum @routineKind {
 
 #·······················································································································
 
+getter @routineKind executionMode -> @mode {
+  switch self
+  case function (mode) : result = mode
+  case section : result = .sectionMode
+  case safe : result = .safeMode
+  case service : result = .serviceMode
+  case primitive : result = .primitiveMode
+  end
+}
+
+#  case userMode
+#  case sectionMode
+#  case serviceMode
+#  case primitiveMode
+#  case guardMode
+#  case panicMode
+#  case bootMode
+#  case initMode
+#  case safeMode
+#  case anyMode
+
+#·······················································································································
+
 struct @routineDescriptor {
   @bool mIsPublic # Routine is declared with "public"
   @bool mExported # Routine is declared with @exported attribute
   @routineKind mRoutineKind
-  @mode mExecutionMode
+  @mode mMode
   @routineTypedSignature mSignature
   @unifiedTypeMap-proxy mReturnType # .null if no returned value
   @bool mCanAccessProperties # Routine is declared with @access attribute

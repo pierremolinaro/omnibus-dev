@@ -186,7 +186,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           ]
           let candidateIsPublic = routineDescriptor.mIsPublic
           let candidateRoutineKind = routineDescriptor.mRoutineKind
-          let candidateMode = routineDescriptor.mExecutionMode
+          let candidateMode = [routineDescriptor.mRoutineKind executionMode] # routineDescriptor.mExecutionMode
           let candidateSignature = routineDescriptor.mSignature
           let candidateReturnType = routineDescriptor.mReturnType
         #--- Check accessibility
@@ -200,8 +200,9 @@ override method @extendStaticArrayDeclarationAST enterInContext
           if not [candidateRoutineKind isFunction] then
             error functionName : "this routine is not a function"
           end
-          if functionDescriptor.mExecutionMode != candidateMode then
-            error functionName : "this function runs in " + candidateMode + " mode, but " + functionDescriptor.mExecutionMode + " is required"
+          let currentMode = [functionDescriptor.mRoutineKind executionMode]
+          if currentMode != candidateMode then
+            error functionName : "this function runs in " + candidateMode + " mode, but " + currentMode + " is required"
           end
           if (functionDescriptor.mReturnType == .null) && (candidateReturnType != .null) then
             error functionName : "this function should return an $" + [candidateReturnType key] + " object"

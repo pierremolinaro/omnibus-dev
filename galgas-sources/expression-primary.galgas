@@ -585,7 +585,7 @@ proc analyzeFunctionCallInExpression
   ]
   let isPublic = routineDescriptor.mIsPublic
   let routineKind = routineDescriptor.mRoutineKind
-  let calleeMode = routineDescriptor.mExecutionMode
+  let calleeMode = [routineKind executionMode] # routineDescriptor.mExecutionMode
   let formalSignature = routineDescriptor.mSignature
   outReturnedType = routineDescriptor.mReturnType
 #--- Check accessibility
