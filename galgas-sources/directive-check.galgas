@@ -68,6 +68,7 @@ override method @checkInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
     ?result:@objectIR expressionResult

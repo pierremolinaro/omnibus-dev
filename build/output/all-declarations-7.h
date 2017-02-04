@@ -119,6 +119,7 @@ class GALGAS_objectIR function_checkAssignmentCompatibility (const class GALGAS_
 
 void routine_variableMapWithConstants (const class GALGAS_semanticContext constinArgument0,
                                        class GALGAS_unifiedSymbolMap & outArgument1,
+                                       class GALGAS_universalPropertyAndRoutineMapForContext & outArgument2,
                                        class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 
@@ -180,7 +181,8 @@ typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (co
                                                                               class GALGAS_semanticTemporariesStruct & ioArgument4,
                                                                               class GALGAS_staticStringMap & ioArgument5,
                                                                               class GALGAS_unifiedSymbolMap & ioArgument6,
-                                                                              class GALGAS_guardKindGenerationIR & outArgument7,
+                                                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument7,
+                                                                              class GALGAS_guardKindGenerationIR & outArgument8,
                                                                               class C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
 
@@ -199,6 +201,7 @@ void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST *
                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                            GALGAS_unifiedSymbolMap & io_ioVariableMap,
+                                           GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
                                            GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
@@ -221,13 +224,14 @@ void routine_analyzeFunctionCallInExpression (const class GALGAS_unifiedTypeMap_
                                               class GALGAS_semanticTemporariesStruct & ioArgument9,
                                               class GALGAS_staticStringMap & ioArgument10,
                                               class GALGAS_unifiedSymbolMap & ioArgument11,
-                                              class GALGAS_allocaList & ioArgument12,
-                                              class GALGAS_instructionListIR & ioArgument13,
-                                              class GALGAS_procCallEffectiveParameterListIR & outArgument14,
-                                              class GALGAS_calleeKindIR & outArgument15,
-                                              class GALGAS_lstring & outArgument16,
+                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument12,
+                                              class GALGAS_allocaList & ioArgument13,
+                                              class GALGAS_instructionListIR & ioArgument14,
+                                              class GALGAS_procCallEffectiveParameterListIR & outArgument15,
+                                              class GALGAS_calleeKindIR & outArgument16,
                                               class GALGAS_lstring & outArgument17,
-                                              class GALGAS_unifiedTypeMap_2D_proxy & outArgument18,
+                                              class GALGAS_lstring & outArgument18,
+                                              class GALGAS_unifiedTypeMap_2D_proxy & outArgument19,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 

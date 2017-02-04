@@ -123,7 +123,8 @@ override method @varOperatorAssignInstructionAST analyze
     !mode: inCurrentMode
     !?temporary: ioTemporaries
     !?staticStringMap: ioGlobalLiteralStringMap
-    !?variableMap: ioVariableMap
+    !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR targetObject
@@ -144,6 +145,7 @@ override method @varOperatorAssignInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR sourcePossibleReference

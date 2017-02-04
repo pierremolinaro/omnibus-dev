@@ -81,6 +81,7 @@ override method @ifExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
@@ -97,6 +98,7 @@ override method @ifExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR ifExpressionResult
@@ -117,6 +119,7 @@ override method @ifExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR thenExpressionTempResult
@@ -139,6 +142,7 @@ override method @ifExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR elseExpressionTempResult

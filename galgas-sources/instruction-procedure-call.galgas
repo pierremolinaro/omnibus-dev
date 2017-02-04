@@ -105,6 +105,7 @@ override method @callInstructionAST analyze
     !?temporary: ioTemporaries
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap: ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR currentObject
@@ -123,6 +124,7 @@ override method @callInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !mArguments
     !mEndOfArguments

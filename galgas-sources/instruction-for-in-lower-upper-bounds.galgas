@@ -116,6 +116,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:@objectIR lowerBoundExpressionResultPossibleReference
@@ -137,6 +138,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:@objectIR upperBoundExpressionResultPossibleReference

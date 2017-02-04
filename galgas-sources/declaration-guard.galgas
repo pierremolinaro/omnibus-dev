@@ -244,6 +244,7 @@ proc guardSemanticAnalysis
       !?temporary:ioTemporaries
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
+      !?variableMap:universalMap
       ?convenienceGuardGenerationIR
     ]
   #--- Analyze instruction list
@@ -288,6 +289,7 @@ method @callInstructionAST baseGuardAnalyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
   @allocaList baseGuardAllocaList = {}
@@ -303,6 +305,7 @@ method @callInstructionAST baseGuardAnalyze
     !?temporary: ioTemporaries
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap: ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca: baseGuardAllocaList
     !?instructionListIR: baseGuardInstructionGenerationList
     ?@objectIR currentObject
@@ -326,6 +329,7 @@ method @callInstructionAST baseGuardAnalyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?variableMap:ioUniversalMap
       !?alloca:baseGuardAllocaList
       !?instructionListIR:baseGuardInstructionGenerationList
       ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR

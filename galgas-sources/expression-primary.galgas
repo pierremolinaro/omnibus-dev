@@ -223,6 +223,7 @@ override method @primaryInExpressionAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
@@ -301,6 +302,7 @@ override method @primaryInExpressionAST analyzeExpression
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !indexExpression
         !endOfIndex
@@ -320,6 +322,7 @@ override method @primaryInExpressionAST analyzeExpression
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !arguments
         !errorLocation
@@ -476,6 +479,7 @@ proc handleFunctionCallInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @effectiveArgumentListAST inArguments 
   ?let @location inErrorLocation
@@ -503,6 +507,7 @@ proc handleFunctionCallInExpression
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
@@ -542,6 +547,7 @@ proc analyzeFunctionCallInExpression
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
@@ -623,6 +629,7 @@ proc analyzeFunctionCallInExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:outEffectiveParameterListIR
@@ -644,6 +651,7 @@ proc analyzeEffectiveParameters
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
@@ -718,6 +726,7 @@ proc analyzeEffectiveParameters
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
         ?result:let @objectIR expressionResult

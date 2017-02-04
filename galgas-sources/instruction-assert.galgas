@@ -71,6 +71,7 @@ override method @assertInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
     ?result:@objectIR expressionValue

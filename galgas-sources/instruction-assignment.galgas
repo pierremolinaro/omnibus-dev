@@ -68,6 +68,7 @@ override method @varAssignmentInstructionAST analyze
     !?temporary: ioTemporaries
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap: ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca: ioAllocaList
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR currentObject
@@ -88,6 +89,7 @@ override method @varAssignmentInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR sourceOperandPossibleReference

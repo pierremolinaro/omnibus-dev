@@ -156,6 +156,7 @@ override method @forInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:whileExpression_GenerationList
     ?result:@objectIR whileExpressionResult
