@@ -209,6 +209,7 @@ proc guardSemanticAnalysis
       !context:inContext
       !inRoutineFormalArgumentList
       !?variableMap
+      !?universalMap
       !?formalArguments
     )
     convenienceGuardGenerationIR = .baseGuard
@@ -233,6 +234,7 @@ proc guardSemanticAnalysis
       !context:inContext
       !inRoutineFormalArgumentList
       !?variableMap
+      !?universalMap
       !?formalArguments
     )
   #--- Analyze base guard
@@ -265,6 +267,7 @@ proc guardSemanticAnalysis
   end 
 #--- End of variableMap
 #  [variableMap deinitTopLevelVariables]
+  [universalMap checkLocalVariableFinalState]
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
   drop variableMap
 #--- Code generation

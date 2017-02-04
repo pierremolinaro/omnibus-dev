@@ -20,36 +20,41 @@ proc enterFormalArguments
   ?context:let @semanticContext inContext
   ?let @routineFormalArgumentList inFormalArgumentPassingMode
   ?!@unifiedSymbolMap ioVariableMap
+  ?!@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!@routineFormalArgumentListForGeneration ioFormalArguments
 {
   for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
     let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
+    let objectIR = @objectIR.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
     switch argumentKind
     case input :
+      [!?ioUniversalMap insertLocalConstant !formalArgumentName !objectIR]
       [!?ioVariableMap insertConstantInputFormalArgument
         !lkey:formalArgumentName
         !type:typeProxy
         !readAccessAllowed:true
-        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
+        !objectIR:objectIR
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
     case inputOutput :
+      [!?ioUniversalMap insertLocalVariable !formalArgumentName !objectIR !.hasUnreadValue !true]
       [!?ioVariableMap insertInputOutputFormalArgument
         !lkey:formalArgumentName
         !type:typeProxy
         !readAccessAllowed:true
-        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
+        !objectIR:objectIR
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
     case output :
+      [!?ioUniversalMap insertLocalVariable !formalArgumentName !objectIR !.noValue !true]
       [!?ioVariableMap insertOutputFormalArgument
         !lkey:formalArgumentName
         !type:typeProxy
         !readAccessAllowed:true
-        !objectIR:.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
+        !objectIR:objectIR
         !copyable:[typeProxy copyable]
         !canBeUsedAsInputParameter:true
       ]
@@ -97,6 +102,7 @@ proc routineSemanticAnalysis
     !context:inContext
     !inRoutineFormalArgumentList
     !?variableMap
+    !?universalMap
     !?formalArguments
   )
 #--- Enter subprogram invocation graph
@@ -125,6 +131,7 @@ proc routineSemanticAnalysis
   ]
 #--- End of variableMap
 #  [variableMap deinitTopLevelVariables]
+  [universalMap checkLocalVariableFinalState]
   [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
   drop variableMap
 #--- Code generation

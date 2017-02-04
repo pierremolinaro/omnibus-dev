@@ -42,7 +42,12 @@ proc initialVariableMap
       !arraySize:register.mArraySize # 0 if not an array
       !elementSize:register.mElementArraySize # 0 if not an array
     }
-    [!?outUniversalMap insertRegister !register.lkey !objectReference]
+    [!?outUniversalMap insertRegister
+      !register.lkey
+      !readable:registerIsAccessible
+      !writable:registerIsWritable
+      !objectReference
+    ]
     if not registerIsAccessible then
       [!?outVariableMap insertInaccessibleControlRegister
         !lkey:register.lkey
@@ -74,7 +79,7 @@ proc initialVariableMap
   end
 #------------------------------------------------------- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
-    [!?outUniversalMap insertRegister !constantName !constantValue]
+    [!?outUniversalMap insertGlobalConstant !constantName !constantValue]
     [!?outVariableMap insertUsedConstant
       !lkey:constantName
       !type:[constantValue type]
@@ -110,12 +115,23 @@ proc initialVariableMap
       ]
     end
   end
+#------------------------------------------------------- Add stand-alone routines
+  for routines in inContext.mRoutineMapForContext.mInternalRoutineMapForContext do
+    for signature in routines.mRoutineArgumentSignatureMapForContext do
+      [!?outUniversalMap insertRoutine
+        !routines.lkey
+        !signature.lkey
+        !signature.mRoutineLLVMName
+        !signature.mDescriptor
+       ]
+     end
+  end
 #------------------------------------------------------- Add result variable ?
   if inReturnTypeName.string != "" then
     let resultVarName = @lstring.new {!functionResultVariableName () !inReturnTypeName.location}
     let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
     let objectIR = @objectIR.localVariableReference {!type:resultType !plmName:resultVarName}
-    [!?outUniversalMap insertLocalVariable !resultVarName !objectIR !false]
+    [!?outUniversalMap insertLocalVariable !resultVarName !objectIR !.noValue !true]
     [!?outVariableMap insertOutputFormalArgument
       !lkey:resultVarName
       !type:resultType
@@ -138,7 +154,7 @@ proc variableMapWithConstants
   outUniversalMap = .default
 #--- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
-    [!?outUniversalMap insertRegister !constantName !constantValue]
+    [!?outUniversalMap insertGlobalConstant !constantName !constantValue]
     [!?outVariableMap insertUsedConstant
       !lkey:constantName
       !type:[constantValue type]

@@ -6718,19 +6718,28 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext : public AC_GALGAS
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_valuedObjectState & inOperand1,
-                                                      const class GALGAS_possibleValuedObject & inOperand2,
-                                                      const class GALGAS_routineSignatureMapForContext & inOperand3,
+                                                      const class GALGAS_valuedObjectStateStack & inOperand1,
+                                                      const class GALGAS_valuedObjectState & inOperand2,
+                                                      const class GALGAS_bool & inOperand3,
+                                                      const class GALGAS_possibleValuedObject & inOperand4,
+                                                      const class GALGAS_routineSignatureMapForContext & inOperand5,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_valuedObjectState constinArgument1,
-                                                   class GALGAS_possibleValuedObject constinArgument2,
-                                                   class GALGAS_routineSignatureMapForContext constinArgument3,
+                                                   class GALGAS_valuedObjectStateStack constinArgument1,
+                                                   class GALGAS_valuedObjectState constinArgument2,
+                                                   class GALGAS_bool constinArgument3,
+                                                   class GALGAS_possibleValuedObject constinArgument4,
+                                                   class GALGAS_routineSignatureMapForContext constinArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMObjectShouldBeValuedAtEndOfScopeForKey (class GALGAS_bool constinArgument0,
+                                                                                    class GALGAS_string constinArgument1,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMObjectStateForKey (class GALGAS_valuedObjectState constinArgument0,
                                                                class GALGAS_string constinArgument1,
@@ -6747,18 +6756,29 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext : public AC_GALGAS
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMStackStateForKey (class GALGAS_valuedObjectStateStack constinArgument0,
+                                                              class GALGAS_string constinArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_valuedObjectState & outArgument1,
-                                                   class GALGAS_possibleValuedObject & outArgument2,
-                                                   class GALGAS_routineSignatureMapForContext & outArgument3,
+                                                   class GALGAS_valuedObjectStateStack & outArgument1,
+                                                   class GALGAS_valuedObjectState & outArgument2,
+                                                   class GALGAS_bool & outArgument3,
+                                                   class GALGAS_possibleValuedObject & outArgument4,
+                                                   class GALGAS_routineSignatureMapForContext & outArgument5,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mObjectShouldBeValuedAtEndOfScopeForKey (const class GALGAS_string & constinOperand0,
+                                                                                              C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_valuedObjectState getter_mObjectStateForKey (const class GALGAS_string & constinOperand0,
                                                                                       C_Compiler * inCompiler
                                                                                       COMMA_LOCATION_ARGS) const ;
@@ -6770,6 +6790,10 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext : public AC_GALGAS
   public : VIRTUAL_IN_DEBUG class GALGAS_routineSignatureMapForContext getter_mRoutineSignatureMapForContextForKey (const class GALGAS_string & constinOperand0,
                                                                                                                     C_Compiler * inCompiler
                                                                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_valuedObjectStateStack getter_mStackStateForKey (const class GALGAS_string & constinOperand0,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_internalUniversalPropertyAndRoutineMapForContext getter_overriddenMap (C_Compiler * inCompiler
                                                                                                                 COMMA_LOCATION_ARGS) const ;
@@ -6797,7 +6821,9 @@ class cEnumerator_internalUniversalPropertyAndRoutineMapForContext : public cGen
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_valuedObjectStateStack current_mStackState (LOCATION_ARGS) const ;
   public : class GALGAS_valuedObjectState current_mObjectState (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mObjectShouldBeValuedAtEndOfScope (LOCATION_ARGS) const ;
   public : class GALGAS_possibleValuedObject current_mPossibleValuedObject (LOCATION_ARGS) const ;
   public : class GALGAS_routineSignatureMapForContext current_mRoutineSignatureMapForContext (LOCATION_ARGS) const ;
 //--- Current element access

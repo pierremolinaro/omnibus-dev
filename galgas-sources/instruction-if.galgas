@@ -140,6 +140,7 @@ override method @ifInstructionAST analyze
   elsif [testResult isStatic] && not mStaticIfExpression then
     warning mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
   end
+  [!?ioUniversalMap openOverrideForSelectBlock]
   [!?ioVariableMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
   @instructionListIR thenInstructionGenerationList = {}
@@ -175,6 +176,7 @@ override method @ifInstructionAST analyze
     !?alloca:ioAllocaList
     !?instructionListIR:elseInstructionGenerationList
   ]
+  [!?ioUniversalMap closeOverride !mEndOf_if_instruction]
   [!?ioVariableMap closeOverride !mEndOf_if_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@ifInstructionIR.new {

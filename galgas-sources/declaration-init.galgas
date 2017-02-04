@@ -178,6 +178,7 @@ proc initSemanticAnalysis
   ]
 #--- End of variableMap
 #  [variableMap deinitTopLevelVariables]
+  [universalMap checkLocalVariableFinalState]
   [variableMap checkAutomatonStates !inEndOfInitDeclaration]
   drop variableMap
 }

@@ -101,6 +101,7 @@ method @bootList-element bootSemanticAnalysis
   ]
 #--- End of variableMap
 #  [variableMap deinitTopLevelVariables]
+  [universalMap checkLocalVariableFinalState]
   [variableMap checkAutomatonStates !mEndOfBootLocation]
   drop variableMap
 #--- Code generation

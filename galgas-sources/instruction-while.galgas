@@ -98,6 +98,7 @@ override method @whileInstructionAST analyze
   end
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
+  [!?ioUniversalMap openOverrideForRepeatBlock]
   [!?ioVariableMap openOverrideForRepeatBlock]
   [mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
@@ -114,6 +115,7 @@ override method @whileInstructionAST analyze
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
   ]
+  [!?ioUniversalMap closeOverride !mEndOf_while_instruction]
   [!?ioVariableMap closeOverride !mEndOf_while_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@whileInstructionIR.new {

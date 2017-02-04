@@ -169,6 +169,7 @@ override method @syncInstructionAST analyze
 {
   @syncInstructionBranchListIR onInstructionBranchListIR = {}
   for (guardedCommand instructionList endOfBranch) in mBranchList do
+    [!?ioUniversalMap openOverrideForSelectBlock]
     [!?ioVariableMap openOverrideForSelectBlock]
   #--- Guard
     @guardedCommandIR guardedCommandIR
@@ -295,6 +296,7 @@ override method @syncInstructionAST analyze
       !?alloca:ioAllocaList
       !?instructionListIR:branchInstructionGenerationList
     ]
+    [!?ioUniversalMap closeOverride !endOfBranch]
     [!?ioVariableMap closeOverride !endOfBranch]
   #---
     onInstructionBranchListIR +=

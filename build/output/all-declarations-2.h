@@ -1513,6 +1513,16 @@ void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//              Extension method '@universalPropertyAndRoutineMapForContext checkLocalVariableFinalState'              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_checkLocalVariableFinalState (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
+                                                   class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Routine 'initialVariableMap'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3372,6 +3382,27 @@ void extensionSetter_appendSourceLineComment (class GALGAS_instructionListIR & i
                                               const class GALGAS_location constin_inSourceLocation,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                      Extension setter '@universalPropertyAndRoutineMapForContext closeBranch'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_closeBranch (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                  const class GALGAS_location constin_inErrorLocation,
+                                  class C_Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                       Extension setter '@universalPropertyAndRoutineMapForContext openBranch'                       *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_openBranch (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                 class C_Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
