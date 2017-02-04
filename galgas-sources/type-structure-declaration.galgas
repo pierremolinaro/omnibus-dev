@@ -325,7 +325,7 @@ override method @structureDeclaration enterInContext
     [!?propertyMap insertKey
       !name
       !function.mPublicFunction
-      !.function {!mode:function.mMode !kind:.function !returnType:returnType !signature:signature !plmName:functionMangledName}
+      !.function {!mode:function.mMode !kind:.function {!executionMode:function.mMode} !returnType:returnType !signature:signature !plmName:functionMangledName}
     ]
   end
   for system in mSystemRoutineListAST do
@@ -444,7 +444,7 @@ method @structureDeclaration functionSemanticAnalysis
     accessProperties = function.mMode != .userMode
     routineSemanticAnalysis (
       !receiverType:inStructureType
-      !.function
+      !.function {!executionMode:function.mMode}
       !function.mMode
       !function.mFunctionName
       !function.mFunctionFormalArgumentList

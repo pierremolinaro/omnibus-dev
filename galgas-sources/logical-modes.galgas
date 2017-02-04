@@ -87,7 +87,7 @@ func checkMode
     else
       error inErrorLocation : "a service cannot be called from " + inCallerMode + " mode" : outResult
     end
-  case function :
+  case function (*) :
     var ok = inCallerMode == inCalleeMode
     if not ok then
       switch inCallerMode

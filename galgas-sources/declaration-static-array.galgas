@@ -164,7 +164,7 @@ override method @staticArrayAST enterInContext
       else
         .searchKey {!ioContext.mTypeMap !returnTypeName}
       end
-      let descriptor = @routineDescriptor.new {!true !false !.function !mode !signature !returnType !false !false}
+      let descriptor = @routineDescriptor.new {!true !false !.function {!executionMode:mode} !mode !signature !returnType !false !false}
       if not [ioContext.mTypeMap hasKey !routineMangledName] then
         [!?ioContext.mTypeMap insertType
           !lkey:routineMangledName

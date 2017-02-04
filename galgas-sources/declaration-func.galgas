@@ -249,7 +249,7 @@ method @functionDeclarationListAST enterFunctionInContext
       !.new{
         !function.mPublicFunction
         !globalFunction
-        !.function
+        !.function {!executionMode:function.mMode}
         !function.mMode
         !signature
         !returnType
@@ -291,7 +291,7 @@ method @functionDeclarationListAST procedureSemanticAnalysis
     end
     routineSemanticAnalysis (
       !receiverType:inReceiverType
-      !.function
+      !.function {!executionMode:procedure.mMode}
       !procedure.mMode
       !procedure.mFunctionName
       !procedure.mFunctionFormalArgumentList

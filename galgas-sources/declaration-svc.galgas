@@ -176,7 +176,7 @@ method @systemRoutineDeclarationListAST systemRoutineSemanticAnalysis
     case primitive : mode = .primitiveMode
     case service : mode = .serviceMode
     case safe : mode = .safeMode
-    case function : error svc.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
+    case function (*) : error svc.mEndOfInstructionListLocation : "INTERNAL ERROR" : mode
     end
     routineSemanticAnalysis (
       !receiverType:inReceiverType
@@ -208,7 +208,7 @@ method @routineMapIR svcCodeGeneration
   ?!@2stringlist ioSectionSafeList
 {
   for svc in self do
-    if svc.mKind != .function then
+    if not [svc.mKind isFunction] then
       let svcCallName = llvmNameForSVCCall (!svc.mRoutineNameForGeneration !svc.mKind)
       let svcImplementationName = llvmNameForSVCImplementation (!svc.mRoutineNameForGeneration !svc.mKind)
       switch svc.mKind
@@ -216,7 +216,7 @@ method @routineMapIR svcCodeGeneration
         ioSectionSafeList += !svcCallName !svcImplementationName
       case primitive, service :
         ioPrimitiveAndServiceList += !svcCallName !svcImplementationName
-      case function :
+      case function (*) :
         error .nowhere : "INTERNAL ERROR"
       end
       ioLLVMcode += llvmTitleComment (!svcCallName)
