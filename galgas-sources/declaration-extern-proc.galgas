@@ -87,7 +87,6 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
       !true # isPublic
       !false # Global
       !.function {!executionMode:mMode}
-      !mMode
       !signature
       !returnType
       !false # canMutateProperties

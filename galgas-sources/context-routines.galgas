@@ -99,7 +99,6 @@ struct @routineDescriptor {
   @bool mIsPublic # Routine is declared with "public"
   @bool mExported # Routine is declared with @exported attribute
   @routineKind mRoutineKind
-  @mode mMode
   @routineTypedSignature mSignature
   @unifiedTypeMap-proxy mReturnType # .null if no returned value
   @bool mCanAccessProperties # Routine is declared with @access attribute
