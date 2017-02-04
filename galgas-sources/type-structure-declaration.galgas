@@ -325,7 +325,26 @@ override method @structureDeclaration enterInContext
     [!?propertyMap insertKey
       !name
       !function.mPublicFunction
-      !.function {!returnType:returnType !signature:signature !plmName:functionMangledName}
+      !.function {!mode:function.mMode !kind:.function !returnType:returnType !signature:signature !plmName:functionMangledName}
+    ]
+  end
+  for system in mSystemRoutineListAST do
+   #--- Signature
+    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @procedureSignature signature)
+  #--- Return type
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnType]
+  #--- Function mangled name
+    let functionMangledName = routineMangledNameFromAST (
+      !mStructureName 
+      !system.mName
+      !system.mFormalArgumentList
+    )
+  #---
+    let name = mapNameForFunctionAndSignature (!system.mName !signature)
+    [!?propertyMap insertKey
+      !name
+      !system.mPublic
+      !.function {!mode:.userMode !kind:system.mRoutineKind !returnType:returnType !signature:signature !plmName:functionMangledName}
     ]
   end
 #---------------------------------------- Enter in type map

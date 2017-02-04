@@ -132,10 +132,6 @@ override method @callInstructionAST analyze
   if returnedType != .null then
     error mEndOfArguments : "the function cannot be called in instruction: lost return value"
   end
-#--- Generate IR
-#  if returnedType != .null then
-#    error routineName : "cannot be called in instruction: return value"
-#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

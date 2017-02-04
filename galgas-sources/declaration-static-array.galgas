@@ -177,7 +177,7 @@ override method @staticArrayAST enterInContext
       propertyList += !propertyName !propertyType
       let propertyIndex = [staticlistPropertyMap count]
       [!?staticlistPropertyMap insertKey
-        !propertyName
+        !routineMangledName # propertyName
         !true # Public
         !.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
       ]

@@ -1302,9 +1302,11 @@ class GALGAS_objectIR : public AC_GALGAS_root {
                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_objectIR constructor_function (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
-                                                              const class GALGAS_procedureSignature & inOperand1,
-                                                              const class GALGAS_lstring & inOperand2
+  public : static class GALGAS_objectIR constructor_function (const class GALGAS_mode & inOperand0,
+                                                              const class GALGAS_routineKind & inOperand1,
+                                                              const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                              const class GALGAS_procedureSignature & inOperand3,
+                                                              const class GALGAS_lstring & inOperand4
                                                               COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_objectIR constructor_globalVariableReference (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
@@ -1375,9 +1377,11 @@ class GALGAS_objectIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
-                                                  class GALGAS_procedureSignature & outArgument1,
-                                                  class GALGAS_lstring & outArgument2,
+  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_mode & outArgument0,
+                                                  class GALGAS_routineKind & outArgument1,
+                                                  class GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
+                                                  class GALGAS_procedureSignature & outArgument3,
+                                                  class GALGAS_lstring & outArgument4,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) const ;
 
@@ -2717,14 +2721,18 @@ class cEnumAssociatedValues_objectIR_property : public cEnumAssociatedValues {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cEnumAssociatedValues_objectIR_function : public cEnumAssociatedValues {
-  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
-  public : const GALGAS_procedureSignature mAssociatedValue1 ;
-  public : const GALGAS_lstring mAssociatedValue2 ;
+  public : const GALGAS_mode mAssociatedValue0 ;
+  public : const GALGAS_routineKind mAssociatedValue1 ;
+  public : const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue2 ;
+  public : const GALGAS_procedureSignature mAssociatedValue3 ;
+  public : const GALGAS_lstring mAssociatedValue4 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_objectIR_function (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
-                                                    const GALGAS_procedureSignature & inAssociatedValue1,
-                                                    const GALGAS_lstring & inAssociatedValue2
+  public : cEnumAssociatedValues_objectIR_function (const GALGAS_mode & inAssociatedValue0,
+                                                    const GALGAS_routineKind & inAssociatedValue1,
+                                                    const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2,
+                                                    const GALGAS_procedureSignature & inAssociatedValue3,
+                                                    const GALGAS_lstring & inAssociatedValue4
                                                     COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,

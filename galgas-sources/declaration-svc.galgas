@@ -23,7 +23,6 @@ list @systemRoutineDeclarationListAST {
   @location mEndOfInstructionListLocation
 }
 
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -134,7 +133,6 @@ method @systemRoutineDeclarationListAST enterInContext
     end
   #--- Enter in context
     [!?ioContext.mRoutineMapForContext insertKey
-#      !routineMangledName
       !svc.mName
       !argumentSignatureFromFormalArgumentList (!svc.mName !svc.mFormalArgumentList)
       !routineMangledName

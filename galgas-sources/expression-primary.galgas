@@ -558,6 +558,7 @@ proc analyzeFunctionCallInExpression
   var specialCase = (receiverType != .null) && [[receiverType kind] isStructure]
   if specialCase then
     [[receiverType kind] structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?2*]
+    message "ROUTINE NAME " + inRoutineName + "\n"
     if [propertyMap hasKey !inRoutineName] then
       [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject]
       [propertyObject property ?type:let type ?plmName:let unused plmName ?index:let unused index]

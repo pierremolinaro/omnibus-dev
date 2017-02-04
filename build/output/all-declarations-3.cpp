@@ -9819,8 +9819,8 @@ void extensionSetter_appendLoadFromReference (GALGAS_instructionListIR & ioObjec
     break ;
   case GALGAS_objectIR::kEnum_possibleFunction:
     {
-      const cEnumAssociatedValues_objectIR_possibleFunction * extractPtr_2884 = (const cEnumAssociatedValues_objectIR_possibleFunction *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_lstring extractedValue_functionName = extractPtr_2884->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectIR_possibleFunction * extractPtr_2888 = (const cEnumAssociatedValues_objectIR_possibleFunction *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_lstring extractedValue_functionName = extractPtr_2888->mAssociatedValue1 ;
       TC_Array <C_FixItDescription> fixItArray1 ;
       inCompiler->emitSemanticError (extractedValue_functionName.getter_location (SOURCE_FILE ("intermediate-load-store.galgas", 59)), GALGAS_string ("undeclared object"), fixItArray1  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 59)) ;
       outArgument_outResultingValue.drop () ; // Release error dropped variable
@@ -9833,9 +9833,9 @@ void extensionSetter_appendLoadFromReference (GALGAS_instructionListIR & ioObjec
     break ;
   case GALGAS_objectIR::kEnum_globalVariableReference:
     {
-      const cEnumAssociatedValues_objectIR_globalVariableReference * extractPtr_3207 = (const cEnumAssociatedValues_objectIR_globalVariableReference *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_3207->mAssociatedValue0 ;
-      const GALGAS_lstring extractedValue_name = extractPtr_3207->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectIR_globalVariableReference * extractPtr_3211 = (const cEnumAssociatedValues_objectIR_globalVariableReference *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_3211->mAssociatedValue0 ;
+      const GALGAS_lstring extractedValue_name = extractPtr_3211->mAssociatedValue1 ;
       {
       routine_getNewTempVariable (extractedValue_type, extractedValue_name.getter_location (SOURCE_FILE ("intermediate-load-store.galgas", 64)), ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 64)) ;
       }
@@ -9846,9 +9846,9 @@ void extensionSetter_appendLoadFromReference (GALGAS_instructionListIR & ioObjec
     break ;
   case GALGAS_objectIR::kEnum_localVariableReference:
     {
-      const cEnumAssociatedValues_objectIR_localVariableReference * extractPtr_3437 = (const cEnumAssociatedValues_objectIR_localVariableReference *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_3437->mAssociatedValue0 ;
-      const GALGAS_lstring extractedValue_name = extractPtr_3437->mAssociatedValue1 ;
+      const cEnumAssociatedValues_objectIR_localVariableReference * extractPtr_3441 = (const cEnumAssociatedValues_objectIR_localVariableReference *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_3441->mAssociatedValue0 ;
+      const GALGAS_lstring extractedValue_name = extractPtr_3441->mAssociatedValue1 ;
       {
       routine_getNewTempVariable (extractedValue_type, extractedValue_name.getter_location (SOURCE_FILE ("intermediate-load-store.galgas", 71)), ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 71)) ;
       }
@@ -9859,10 +9859,10 @@ void extensionSetter_appendLoadFromReference (GALGAS_instructionListIR & ioObjec
     break ;
   case GALGAS_objectIR::kEnum_temporaryReference:
     {
-      const cEnumAssociatedValues_objectIR_temporaryReference * extractPtr_3698 = (const cEnumAssociatedValues_objectIR_temporaryReference *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_3698->mAssociatedValue0 ;
-      const GALGAS_lstring extractedValue_llvmName = extractPtr_3698->mAssociatedValue1 ;
-      const GALGAS_bool extractedValue_volatile = extractPtr_3698->mAssociatedValue3 ;
+      const cEnumAssociatedValues_objectIR_temporaryReference * extractPtr_3702 = (const cEnumAssociatedValues_objectIR_temporaryReference *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_3702->mAssociatedValue0 ;
+      const GALGAS_lstring extractedValue_llvmName = extractPtr_3702->mAssociatedValue1 ;
+      const GALGAS_bool extractedValue_volatile = extractPtr_3702->mAssociatedValue3 ;
       {
       routine_getNewTempVariable (extractedValue_type, extractedValue_llvmName.getter_location (SOURCE_FILE ("intermediate-load-store.galgas", 78)), ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 78)) ;
       }
@@ -9873,11 +9873,11 @@ void extensionSetter_appendLoadFromReference (GALGAS_instructionListIR & ioObjec
     break ;
   case GALGAS_objectIR::kEnum_registerReference:
     {
-      const cEnumAssociatedValues_objectIR_registerReference * extractPtr_4078 = (const cEnumAssociatedValues_objectIR_registerReference *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_4078->mAssociatedValue0 ;
-      const GALGAS_lstring extractedValue_registerName = extractPtr_4078->mAssociatedValue1 ;
-      const GALGAS_bigint extractedValue_address = extractPtr_4078->mAssociatedValue4 ;
-      const GALGAS_uint extractedValue_arraySize = extractPtr_4078->mAssociatedValue6 ;
+      const cEnumAssociatedValues_objectIR_registerReference * extractPtr_4082 = (const cEnumAssociatedValues_objectIR_registerReference *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_4082->mAssociatedValue0 ;
+      const GALGAS_lstring extractedValue_registerName = extractPtr_4082->mAssociatedValue1 ;
+      const GALGAS_bigint extractedValue_address = extractPtr_4082->mAssociatedValue4 ;
+      const GALGAS_uint extractedValue_arraySize = extractPtr_4082->mAssociatedValue6 ;
       const enumGalgasBool test_2 = GALGAS_bool (kIsStrictSup, extractedValue_arraySize.objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
       if (kBoolTrue == test_2) {
         TC_Array <C_FixItDescription> fixItArray3 ;
@@ -9895,10 +9895,10 @@ void extensionSetter_appendLoadFromReference (GALGAS_instructionListIR & ioObjec
     break ;
   case GALGAS_objectIR::kEnum_property:
     {
-      const cEnumAssociatedValues_objectIR_property * extractPtr_4330 = (const cEnumAssociatedValues_objectIR_property *) (constinArgument_inSource.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_4330->mAssociatedValue0 ;
-      const GALGAS_lstring extractedValue_plmName = extractPtr_4330->mAssociatedValue1 ;
-      const GALGAS_uint extractedValue_index = extractPtr_4330->mAssociatedValue2 ;
+      const cEnumAssociatedValues_objectIR_property * extractPtr_4334 = (const cEnumAssociatedValues_objectIR_property *) (constinArgument_inSource.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_type = extractPtr_4334->mAssociatedValue0 ;
+      const GALGAS_lstring extractedValue_plmName = extractPtr_4334->mAssociatedValue1 ;
+      const GALGAS_uint extractedValue_index = extractPtr_4334->mAssociatedValue2 ;
       {
       routine_getNewTempVariable (extractedValue_type, extractedValue_plmName.getter_location (SOURCE_FILE ("intermediate-load-store.galgas", 96)), ioArgument_ioTemporaries, outArgument_outResultingValue, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-store.galgas", 96)) ;
       }
