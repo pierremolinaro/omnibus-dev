@@ -64,7 +64,7 @@ task T priority 12 stackSize 512 {
     for élément in maListeStatique {
       total += élément.a
       total += élément.b
-//      élément.f ()
+      élément.f ()
     }
     lcd.goto (!line:0 !column:0)
     lcd.printUnsigned (!total)
