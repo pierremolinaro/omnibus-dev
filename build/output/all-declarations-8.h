@@ -263,17 +263,6 @@ class GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * 
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                      Function 'mapNameForFunctionAndSignature'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_lstring function_mapNameForFunctionAndSignature (const class GALGAS_lstring & constinArgument0,
-                                                              const class GALGAS_routineTypedSignature & constinArgument1,
-                                                              class C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                             Routine 'codeOptimisation'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
