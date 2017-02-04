@@ -64,6 +64,7 @@ abstract method @instructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 
@@ -80,6 +81,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
@@ -97,6 +99,7 @@ method @instructionListAST analyzeBranchInstructionList
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
     ]
@@ -118,6 +121,7 @@ method @instructionListAST analyzeRoutineInstructionList
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
 {
@@ -133,6 +137,7 @@ method @instructionListAST analyzeRoutineInstructionList
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
+      !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
     ]

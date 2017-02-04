@@ -80,6 +80,7 @@ method @bootList-element bootSemanticAnalysis
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
     ?@unifiedSymbolMap variableMap
+    ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
@@ -94,6 +95,7 @@ method @bootList-element bootSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
+    !?variableMap:universalMap
     !?alloca:bootAllocaList
     !?generatedCode:instructionGenerationList
   ]

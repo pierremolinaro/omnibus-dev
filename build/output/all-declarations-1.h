@@ -6718,17 +6718,24 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext : public AC_GALGAS
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_possibleValuedObject & inOperand1,
-                                                      const class GALGAS_routineSignatureMapForContext & inOperand2,
+                                                      const class GALGAS_valuedObjectState & inOperand1,
+                                                      const class GALGAS_possibleValuedObject & inOperand2,
+                                                      const class GALGAS_routineSignatureMapForContext & inOperand3,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_possibleValuedObject constinArgument1,
-                                                   class GALGAS_routineSignatureMapForContext constinArgument2,
+                                                   class GALGAS_valuedObjectState constinArgument1,
+                                                   class GALGAS_possibleValuedObject constinArgument2,
+                                                   class GALGAS_routineSignatureMapForContext constinArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMObjectStateForKey (class GALGAS_valuedObjectState constinArgument0,
+                                                               class GALGAS_string constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
   public : VIRTUAL_IN_DEBUG void setter_setMPossibleValuedObjectForKey (class GALGAS_possibleValuedObject constinArgument0,
                                                                         class GALGAS_string constinArgument1,
@@ -6743,14 +6750,19 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext : public AC_GALGAS
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_possibleValuedObject & outArgument1,
-                                                   class GALGAS_routineSignatureMapForContext & outArgument2,
+                                                   class GALGAS_valuedObjectState & outArgument1,
+                                                   class GALGAS_possibleValuedObject & outArgument2,
+                                                   class GALGAS_routineSignatureMapForContext & outArgument3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_valuedObjectState getter_mObjectStateForKey (const class GALGAS_string & constinOperand0,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_possibleValuedObject getter_mPossibleValuedObjectForKey (const class GALGAS_string & constinOperand0,
                                                                                                   C_Compiler * inCompiler
                                                                                                   COMMA_LOCATION_ARGS) const ;
@@ -6785,6 +6797,7 @@ class cEnumerator_internalUniversalPropertyAndRoutineMapForContext : public cGen
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public : class GALGAS_valuedObjectState current_mObjectState (LOCATION_ARGS) const ;
   public : class GALGAS_possibleValuedObject current_mPossibleValuedObject (LOCATION_ARGS) const ;
   public : class GALGAS_routineSignatureMapForContext current_mRoutineSignatureMapForContext (LOCATION_ARGS) const ;
 //--- Current element access

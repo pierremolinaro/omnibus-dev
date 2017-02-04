@@ -99,6 +99,7 @@ override method @globalConstantDeclaration enterInContext
     !globalsAreConstant:true # Any value, there is no defined global variable at this stage
     !returnTypeName:["" nowhere]
     ?@unifiedSymbolMap variableMap
+    ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Get destination type
   @unifiedTypeMap-proxy annotationType

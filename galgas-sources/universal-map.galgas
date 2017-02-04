@@ -34,7 +34,7 @@ setter @universalPropertyAndRoutineMapForContext insertRoutine
       !inLLVMInvocationRoutineName
       !inDescriptor
     ]
-    [!?mInternalPropertyAndRoutineMapForContext insertKey !inRoutineName !.undefined !routineSignatureMapForContext]
+    [!?mInternalPropertyAndRoutineMapForContext insertKey !inRoutineName !.noValue !.undefined !routineSignatureMapForContext]
   end
 }
 
@@ -55,6 +55,7 @@ setter @universalPropertyAndRoutineMapForContext insertProperty
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inPropertyName
+      !.noValue
       !newValue
       !{} # empty routine map
     ]
@@ -77,6 +78,7 @@ setter @universalPropertyAndRoutineMapForContext insertModule
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inModuleName
+      !.noValue
       !newValue
       !{} # empty routine map
     ]
@@ -99,6 +101,7 @@ setter @universalPropertyAndRoutineMapForContext insertRegister
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inRegisterName
+      !.noValue
       !newValue
       !{} # empty routine map
     ]
@@ -121,6 +124,7 @@ setter @universalPropertyAndRoutineMapForContext insertConstant
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inConstantName
+      !.noValue
       !newValue
       !{} # empty routine map
     ]
@@ -144,6 +148,7 @@ setter @universalPropertyAndRoutineMapForContext insertGlobalVariable
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inGlobalVariableName
+      !.noValue
       !newValue
       !{} # empty routine map
     ]
@@ -155,10 +160,13 @@ setter @universalPropertyAndRoutineMapForContext insertGlobalVariable
 setter @universalPropertyAndRoutineMapForContext insertLocalVariable
   ?let @lstring inLocalVariableName
   ?let @objectIR inObjectIR
+  ?let @bool inHasValue
 {
+  let @valuedObjectState objectState = if inHasValue then .hasReadValue else .noValue end
   let newValue = @possibleValuedObject.localVariableReference {!objectIR:inObjectIR}
   with inLocalVariableName.string in !?mInternalPropertyAndRoutineMapForContext do
     if [mPossibleValuedObject isUndefined] then
+      mObjectState = objectState
       mPossibleValuedObject = newValue
     else
       error inLocalVariableName : "object already defined in this context"
@@ -166,6 +174,7 @@ setter @universalPropertyAndRoutineMapForContext insertLocalVariable
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inLocalVariableName
+      !objectState
       !newValue
       !{} # empty routine map
     ]
@@ -181,7 +190,7 @@ method @universalPropertyAndRoutineMapForContext searchValuedObject
   !@bool outIsPublic
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let property ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueKind ?let property ?*]
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context" : outIsPublic, outObjectIR
@@ -201,8 +210,12 @@ method @universalPropertyAndRoutineMapForContext searchValuedObject
     outIsPublic = true
     outObjectIR = objectIR
   case localVariableReference (@objectIR objectIR) :
-    outIsPublic = true
-    outObjectIR = objectIR
+    if valueKind == .noValue then
+      error inValuedObjectName : "'" + inValuedObjectName + "' has no value" : outIsPublic, outObjectIR
+    else
+      outIsPublic = true
+      outObjectIR = objectIR
+    end
   end
 }
 
@@ -214,25 +227,16 @@ method @universalPropertyAndRoutineMapForContext searchRoutine
   !@string outLLVMInvocationRoutineName
   !@routineDescriptor outDescriptor
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inRoutineName ?* ?let @routineSignatureMapForContext routineMap]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inRoutineName ?2* ?let @routineSignatureMapForContext routineMap]
   [routineMap searchKey !inArgumentSignature ?outLLVMInvocationRoutineName ?outDescriptor]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-enum @possibleValuedObject {
-  case undefined
-  case property (@bool isPublic @objectIR objectIR)
-  case module (@unifiedTypeMap-proxy type)
-  case register (@objectIR objectIR)
-  case constant (@objectIR objectIR)
-  case globalVariableReference (@bool writable @objectIR objectIR)
-  case localVariableReference (@objectIR objectIR)
-}
-
-#·······················································································································
+#! INTERNAL MAPS
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @internalUniversalPropertyAndRoutineMapForContext { # Key is a variable, property, routine name
+  @valuedObjectState mObjectState
   @possibleValuedObject mPossibleValuedObject
   @routineSignatureMapForContext mRoutineSignatureMapForContext
 
@@ -248,6 +252,30 @@ map @routineSignatureMapForContext { # argument signature is the key
 
   insert insertKey error message "the '%K' routine signature is already declared in %L"
   search searchKey error message "there is no '%K' routine signature"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! VALUED OBJECT
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @possibleValuedObject {
+  case undefined
+  case property (@bool isPublic @objectIR objectIR)
+  case module (@unifiedTypeMap-proxy type)
+  case register (@objectIR objectIR)
+  case constant (@objectIR objectIR)
+  case globalVariableReference (@bool writable @objectIR objectIR)
+  case localVariableReference (@objectIR objectIR)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! VALUED OBJECT STATE
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @valuedObjectState {
+  case noValue
+  case hasUnreadValue
+  case hasReadValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

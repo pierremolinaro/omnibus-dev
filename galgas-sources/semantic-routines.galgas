@@ -89,6 +89,7 @@ proc routineSemanticAnalysis
     !globalsAreConstant:false
     !returnTypeName:inReturnTypeName
     ?@unifiedSymbolMap variableMap
+    ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Analyse formal arguments
   @routineFormalArgumentListForGeneration formalArguments = {}
@@ -118,6 +119,7 @@ proc routineSemanticAnalysis
     !?temporary:ioTemporaries
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
+    !?variableMap:universalMap
     !?alloca:allocaList
     !?generatedCode:instructionGenerationList
   ]
