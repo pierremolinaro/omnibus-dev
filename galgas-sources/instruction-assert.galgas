@@ -52,7 +52,7 @@ override method @assertInstructionAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!analysis:@generationStruct ioGenerationStruct
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if inCurrentMode == .panicMode then
@@ -72,7 +72,7 @@ override method @assertInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
+    !?analysis:ioGenerationStruct
     !?instructionListIR:instructionGenerationList
     ?result:@objectIR expressionValue
   ]

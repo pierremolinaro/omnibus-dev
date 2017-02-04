@@ -80,7 +80,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!analysis:@generationStruct ioGenerationStruct
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Get iterated element type
@@ -117,7 +117,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
+      !?analysis:ioGenerationStruct
       !?instructionListIR:ioInstructionGenerationList
       ?result:@objectIR lowerBoundExpressionResultPossibleReference
     ]
@@ -139,7 +139,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
+      !?analysis:ioGenerationStruct
       !?instructionListIR:ioInstructionGenerationList
       ?result:@objectIR upperBoundExpressionResultPossibleReference
     ]
@@ -165,7 +165,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   #---
     let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
     ioTemporaries.mTemporaryIndex ++
-    ioAllocaList += !enumeratedVarLLVMName ![[type kind] llvmTypeName]
+    ioGenerationStruct.mAllocaList += !enumeratedVarLLVMName ![[type kind] llvmTypeName]
   #--- Analyze instruction list
     [!?ioVariableMap openOverrideForRepeatBlock]
     [!?ioVariableMap insertUsedConstant
@@ -189,7 +189,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
+      !?analysis:ioGenerationStruct
       !?instructionListIR:instructionGenerationList
     ]
     [!?ioVariableMap closeOverride !mEndOf_do_instruction]

@@ -107,7 +107,7 @@ proc routineSemanticAnalysis
     ]
   end
 #--- Analyze instruction list
-  @allocaList allocaList = {}
+  @generationStruct generationStruct = .default
   @instructionListIR instructionGenerationList = {}
   [inRoutineInstructionList analyzeRoutineInstructionList
     !self:inSelfType
@@ -120,7 +120,7 @@ proc routineSemanticAnalysis
     !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
     !?variableMap:variableMap
     !?variableMap:universalMap
-    !?alloca:allocaList
+    !?analysis:generationStruct
     !?generatedCode:instructionGenerationList
   ]
 #--- End of variableMap
@@ -138,7 +138,7 @@ proc routineSemanticAnalysis
     !inSelfType
     !routineMangledName
     !formalArguments
-    !allocaList
+    !generationStruct.mAllocaList
     !instructionGenerationList
     ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
     !inWarnIfUnused

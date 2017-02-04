@@ -91,7 +91,7 @@ override method @callInstructionAST analyze
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!analysis:@generationStruct ioGenerationStruct
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   [mAssignmentTargetAST analyzeAssignmentTarget
@@ -106,7 +106,7 @@ override method @callInstructionAST analyze
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap: ioVariableMap
     !?variableMap:ioUniversalMap
-    !?alloca: ioAllocaList
+    !?analysis:ioGenerationStruct
     !?instructionListIR: ioInstructionGenerationList
     ?@objectIR currentObject
     ?globalVariableReceiverName:let globalVariableReceiverName
@@ -125,7 +125,7 @@ override method @callInstructionAST analyze
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
+    !?analysis:ioGenerationStruct
     !mArguments
     !mEndOfArguments
     !?ioInstructionGenerationList

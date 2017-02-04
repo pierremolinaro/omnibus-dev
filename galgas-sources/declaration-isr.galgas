@@ -113,7 +113,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       @unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !isr.mSelfTypeName}
     end
   #--- Analyze instruction list
-    @allocaList allocaList = {}
+    @generationStruct generationStruct = .default
     @instructionListIR instructionGenerationList = {}
     [isr.mISRInstructionList analyzeRoutineInstructionList
       !self:selfType
@@ -126,7 +126,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
       !?variableMap:universalMap
-      !?alloca:allocaList
+      !?analysis:generationStruct
       !?generatedCode:instructionGenerationList
     ]
   #--- End of variableMap
@@ -139,10 +139,9 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !isr.mISRName
       !selfType
       !isr.mGlobalVariableName
-      !allocaList
+      !generationStruct.mAllocaList
       !instructionGenerationList
       !isr.mMode
-#      !xtrAttribute
     ]  
   end
 }

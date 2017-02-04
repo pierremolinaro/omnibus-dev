@@ -107,7 +107,7 @@ method @assignmentTargetAST analyzeAssignmentTarget
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  ?!analysis:@generationStruct ioGenerationStruct
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !@objectIR outCurrentObject
   !globalVariableReceiverName:@string outGlobalVariableReceiverName
@@ -178,7 +178,7 @@ method @assignmentTargetAST analyzeAssignmentTarget
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
         !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
+        !?analysis:ioGenerationStruct
         !indexExpression
         !endOfExpression
         !?ioInstructionGenerationList

@@ -213,6 +213,7 @@ proc guardSemanticAnalysis
     )
     convenienceGuardGenerationIR = .baseGuard
   #--- Analyze instruction list
+    @generationStruct generationStruct = .default
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
       !directAccessToPropertiesAllowed:true
@@ -224,7 +225,7 @@ proc guardSemanticAnalysis
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
       !?variableMap:universalMap
-      !?alloca:allocaList
+      !?analysis:generationStruct
       !?generatedCode:instructionGenerationList
     ]
   case convenienceGuard (baseGuardInstruction):
@@ -248,6 +249,7 @@ proc guardSemanticAnalysis
       ?convenienceGuardGenerationIR
     ]
   #--- Analyze instruction list
+    @generationStruct generationStruct = .default
     [inRoutineInstructionList analyzeRoutineInstructionList
       !self:inSelfType
       !directAccessToPropertiesAllowed:true
@@ -259,7 +261,7 @@ proc guardSemanticAnalysis
       !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
       !?variableMap:variableMap
       !?variableMap:universalMap
-      !?alloca:allocaList
+      !?analysis:generationStruct
       !?generatedCode:instructionGenerationList
     ]
   end 
@@ -292,8 +294,8 @@ method @callInstructionAST baseGuardAnalyze
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  @allocaList baseGuardAllocaList = {}
   @instructionListIR baseGuardInstructionGenerationList = {}
+  @generationStruct baseGuardAnalysisStruct = .default
   [mAssignmentTargetAST analyzeAssignmentTarget
     !self: inSelfType
     !targetAccessKind:.readWrite
@@ -306,7 +308,7 @@ method @callInstructionAST baseGuardAnalyze
     !?staticStringMap: ioGlobalLiteralStringMap
     !?variableMap: ioVariableMap
     !?variableMap:ioUniversalMap
-    !?alloca: baseGuardAllocaList
+    !?analysis:baseGuardAnalysisStruct
     !?instructionListIR: baseGuardInstructionGenerationList
     ?@objectIR currentObject
     ?globalVariableReceiverName: let unused globalVariableReceiverName
@@ -330,7 +332,7 @@ method @callInstructionAST baseGuardAnalyze
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
-      !?alloca:baseGuardAllocaList
+      !?analysis:baseGuardAnalysisStruct
       !?instructionListIR:baseGuardInstructionGenerationList
       ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
       ?routineKind:let @calleeKindIR unused routineKind
@@ -343,7 +345,7 @@ method @callInstructionAST baseGuardAnalyze
     end
   #--- Code generation
     outConvenienceGuardGenerationIR = .convenienceGuard {
-      !baseGuardAllocaList:baseGuardAllocaList
+      !baseGuardAllocaList:baseGuardAnalysisStruct.mAllocaList
       !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
       !baseGuardMangledName:functionMangledName.string
       !baseGuardEffectiveParameterList:effectiveParameterListIR
