@@ -13,7 +13,7 @@ list @guardDeclarationListAST {
   @lstring mGuardName
   @bool mIsPublic
   @lstringlist mGuardAttributeList
-  @procFormalArgumentList mGuardFormalArgumentList
+  @routineFormalArgumentList mGuardFormalArgumentList
   @guardKind mGuardKind
   @instructionListAST mGuardInstructionList
   @location mEndOfGuardDeclaration
@@ -155,7 +155,7 @@ method @guardDeclarationListAST guardSemanticAnalysis
 proc guardSemanticAnalysis
   ?receiverType:let @unifiedTypeMap-proxy inSelfType
   ?let @lstring inRoutineName
-  ?let @procFormalArgumentList inRoutineFormalArgumentList
+  ?let @routineFormalArgumentList inRoutineFormalArgumentList
   ?let @guardKind inGuardKind
   ?let @instructionListAST inRoutineInstructionList
   ?let @location inEndOfRoutineDeclaration
@@ -185,7 +185,7 @@ proc guardSemanticAnalysis
     !returnTypeName:["" nowhere]
     ?@unifiedSymbolMap variableMap
   )
-  @procFormalArgumentListForGeneration formalArguments = {}
+  @routineFormalArgumentListForGeneration formalArguments = {}
   @guardKindGenerationIR convenienceGuardGenerationIR
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}
@@ -359,7 +359,7 @@ enum @guardKindGenerationIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @guardMapIR {
-  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
   @unifiedTypeMap-proxy mReceiverType
   @guardKindGenerationIR mGuardKindGenerationIR
   @allocaList mAllocaList

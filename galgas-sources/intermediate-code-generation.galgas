@@ -49,7 +49,7 @@ map @globalConstantMapIR {
 map @routineMapIR {
   @unifiedTypeMap-proxy mReceiverType # .null if standalone function
   @lstring mRoutineNameForGeneration
-  @procFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
   @allocaList mAllocaList
   @instructionListIR mInstructionGenerationList
   @bool mIsRequired

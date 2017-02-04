@@ -4,7 +4,7 @@
 
 class @callInstructionAST : @instructionAST {
   @assignmentTargetAST mAssignmentTargetAST
-  @effectiveParameterListAST mArguments
+  @effectiveArgumentListAST mArguments
   @location mEndOfArguments
 }
 
@@ -57,7 +57,7 @@ override method @callInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @effectiveParameterPassingModeAST passingModeForActualSelector ?let @lstring inSelector -> @string outResult {
+getter @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstring inSelector -> @string outResult {
   switch self
   case input (*) : outResult = "?"
   case inputWithType (* * *) : outResult = "?"
@@ -73,7 +73,7 @@ getter @effectiveParameterPassingModeAST passingModeForActualSelector ?let @lstr
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @procEffectiveParameterList {
-  @effectiveParameterPassingModeAST mEffectiveParameterPassingMode
+  @effectiveArgumentPassingModeAST mEffectiveParameterPassingMode
   @lstring mSelector
   @unifiedTypeMap-proxy mParameterType
 }

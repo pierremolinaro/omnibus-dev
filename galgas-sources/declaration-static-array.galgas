@@ -4,7 +4,7 @@
 
 enum @staticArrayPropertyTypeAST {
   case valueType (@lstring type)
-  case function (@mode mode @procFormalArgumentList formalArgs @lstring returnType)
+  case function (@mode mode @routineFormalArgumentList formalArgs @lstring returnType)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -99,7 +99,7 @@ override method @staticArrayAST enterInPrecedenceGraph ?!@semanticTypePrecedence
     case valueType (@lstring propertyTypeName) :
       let typeName = llvmRegularTypeMangledNameFromName (!propertyTypeName)
       [!?ioGraph addEdge !mStaticListName !typeName]
-    case function (* @procFormalArgumentList formalArgs @lstring returnType) :
+    case function (* @routineFormalArgumentList formalArgs @lstring returnType) :
       for (* * formalArgumentTypeName *) in formalArgs do
         let typeName = llvmRegularTypeMangledNameFromName(!formalArgumentTypeName)
         [!?ioGraph noteNode !typeName]
@@ -150,7 +150,7 @@ override method @staticArrayAST enterInContext
         !true # Public
         !.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
       ]
-    case function (@mode mode @procFormalArgumentList formalArgs @lstring returnTypeName) :
+    case function (@mode mode @routineFormalArgumentList formalArgs @lstring returnTypeName) :
     #--- Routine mangled name
       let routineMangledName = routineMangledNameFromAST (
         !"" 

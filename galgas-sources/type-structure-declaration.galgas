@@ -311,7 +311,7 @@ override method @structureDeclaration enterInContext
 #---------------------------------------- Enter routines in property map
   for function in mFunctionDeclarationListAST do
    #--- Signature
-    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let @procedureSignature signature)
+    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let @routineTypedSignature signature)
   #--- Return type
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
   #--- Function mangled name
@@ -330,7 +330,7 @@ override method @structureDeclaration enterInContext
   end
   for system in mSystemRoutineListAST do
    #--- Signature
-    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @procedureSignature signature)
+    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature signature)
   #--- Return type
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnType]
   #--- Function mangled name
