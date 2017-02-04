@@ -8,7 +8,11 @@ enum @typeKind {
   case boolean
   case literalString
   case enumeration (@enumConstantMap constantMap @classConstantMap classConstantMap)
-  case structure (@lstring typeName @propertyMap propertyMap @propertyList propertyList @uint flags)
+  case structure (@lstring typeName
+                  @propertyMap propertyMap
+                  @universalPropertyAndRoutineMapForContext universalMap
+                  @propertyList propertyList
+                  @uint flags)
   case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
   case staticInteger
   case opaque (@bigint bitCount @uint flags)
@@ -47,7 +51,7 @@ getter @typeKind equatable -> @bool {
     result = true
   case enumeration (* *) :
     result = true
-  case structure (* * * @uint flags) :
+  case structure (* * * * @uint flags) :
     result = (flags & equatableFlag ()) != 0
   case integer (* * * *) :
     result = true
@@ -78,7 +82,7 @@ getter @typeKind instanciable -> @bool {
     result = true
   case enumeration (* *) :
     result = true
-  case structure (* * * @uint flags) :
+  case structure (* * * * @uint flags) :
     result = (flags & instanciableFlag ()) != 0
   case integer (* * * *) :
     result = true
@@ -109,7 +113,7 @@ getter @typeKind copyable -> @bool {
     result = true
   case enumeration (* *) :
     result = true
-  case structure (* * * @uint flags) :
+  case structure (* * * * @uint flags) :
     result = (flags & copyableFlag ()) != 0
   case integer (* * * *) :
     result = true
@@ -132,7 +136,7 @@ getter @unifiedTypeMap-proxy classConstantMap -> @classConstantMap {
     result = {}
   case enumeration (* @classConstantMap classConstantMap) :
     result = classConstantMap
-  case structure (* * * *) :
+  case structure (* * * * *) :
     result = {}
   case integer (* * * *) :
     result = {}
@@ -157,7 +161,7 @@ getter @typeKind llvmTypeName -> @string {
     result = "i8*"
   case enumeration (@enumConstantMap constantMap *) :
     result = "i" + [[constantMap count] - 1 significantBitCount]
-  case structure (@lstring typeName * * *) :
+  case structure (@lstring typeName * * * *) :
     result = "%" + [llvmRegularTypeMangledNameFromName (!typeName) assemblerRepresentation]
   case integer (@bigint unused min @bigint unused max @bool unused unsigned @uint bitCount) :
     result = "i" + bitCount
@@ -199,7 +203,7 @@ getter @typeKind descriptionForHTMLFile -> @string {
     result = "Literal String"
   case enumeration (* *) :
     result = "Enumeration"
-  case structure (* * * *) :
+  case structure (* * * * *) :
     result = "Structure"
   case integer (* * @bool unsigned @uint bitCount) :
     result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end

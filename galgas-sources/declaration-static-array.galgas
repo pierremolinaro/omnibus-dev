@@ -191,6 +191,7 @@ override method @staticArrayAST enterInContext
   let kind = @typeKind.structure {
     !typeName:llvmNameForStaticListElementType (!mStaticListName)
     !propertyMap:staticlistPropertyMap
+    !universalMap:.default
     !propertyList:propertyList
     !flags:0
   }

@@ -147,7 +147,7 @@ override method @registerConstantExpressionAST analyzeExpression
       error expressionLocation: "an unsigned integer expression is required here"
     case enumeration (* *) :
       error expressionLocation: "an unsigned integer expression is required here"
-    case structure (* * * *) :
+    case structure (* * * * *) :
       error expressionLocation: "an unsigned integer expression is required here"
     case boolean :
       error expressionLocation: "an unsigned integer expression is required here"

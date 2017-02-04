@@ -221,6 +221,7 @@ override method @structureDeclaration enterInContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
 {
 #---------------------------------------- Properties
+  @universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext = .default
   @propertyList propertyList = {}
   @propertyMap propertyMap = {}
   @sortedOperandIRList sortedOperandIRList = {}
@@ -274,6 +275,11 @@ override method @structureDeclaration enterInContext
         !mIsPublic
         !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
       ]
+      [!?universalPropertyAndRoutineMapForContext insertProperty
+        !mFieldName
+        !mIsPublic
+        !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
+      ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     case noExpression :
       if not [[optionalPropertyType kind] instanciable] then
@@ -281,6 +287,11 @@ override method @structureDeclaration enterInContext
       end
       propertyList += !mFieldName.string !optionalPropertyType
       [!?propertyMap insertKey
+        !mFieldName
+        !mIsPublic
+        !.property {!type:optionalPropertyType !plmName:mFieldName !index:propertyIndex}
+      ]
+      [!?universalPropertyAndRoutineMapForContext insertProperty
         !mFieldName
         !mIsPublic
         !.property {!type:optionalPropertyType !plmName:mFieldName !index:propertyIndex}
@@ -309,48 +320,86 @@ override method @structureDeclaration enterInContext
     end
   end
 #---------------------------------------- Enter routines in property map
-#  for function in mFunctionDeclarationListAST do
-#   #--- Signature
-#    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let @routineTypedSignature signature)
-#  #--- Return type
-#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
-#  #--- Function mangled name
-#    let functionMangledName = routineMangledNameFromAST (
-#      !mStructureName 
-#      !function.mFunctionName
-#      !function.mFunctionFormalArgumentList
-#    )
-#  #---
-#    let name = mapNameForFunctionAndSignature (!function.mFunctionName !signature)
-#    [!?propertyMap insertKey
-#      !name
-#      !function.mPublicFunction
-#      !.function {!mode:function.mMode !kind:.function {!executionMode:function.mMode} !returnType:returnType !signature:signature !plmName:functionMangledName}
-#    ]
-#  end
-#  for system in mSystemRoutineListAST do
-#   #--- Signature
-#    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature signature)
-#  #--- Return type
-#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnType]
-#  #--- Function mangled name
-#    let functionMangledName = routineMangledNameFromAST (
-#      !mStructureName 
-#      !system.mName
-#      !system.mFormalArgumentList
-#    )
-#  #---
-#    let name = mapNameForFunctionAndSignature (!system.mName !signature)
-#    [!?propertyMap insertKey
-#      !name
-#      !system.mPublic
-#      !.function {!mode:.userMode !kind:system.mRoutineKind !returnType:returnType !signature:signature !plmName:functionMangledName}
-#    ]
-#  end
+  for function in mFunctionDeclarationListAST do
+  #--- Attribute set
+    @stringset attributeSet = {}
+    for attribute in function.mFunctionAttributeList do
+      attributeSet += !attribute.mValue.string
+    end
+  #--- Signature
+    let signature = [function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
+    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let @routineTypedSignature typedSignature)
+  #--- Return type
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
+  #--- Function invocation name
+    let invocationName = routineMangledNameFromAST (
+      !mStructureName 
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+    )
+  #--- Function descriptor
+    let functionDescriptor = @routineDescriptor.new {
+      !function.mPublicFunction
+      ![attributeSet hasKey !exportedAttribute ()]
+      !.function {!executionMode:function.mMode}
+      !typedSignature
+      !returnType
+      ![attributeSet hasKey !accessAttribute ()]
+      ![attributeSet hasKey !mutatingAttribute ()]
+    }
+  #---
+    [!?universalPropertyAndRoutineMapForContext insertRoutine
+      !function.mFunctionName
+      !signature
+      !invocationName
+      !functionDescriptor
+    ]
+  end
+  for system in mSystemRoutineListAST do
+  #--- Attribute set
+    @stringset attributeSet = {}
+    for attribute in system.mAttributeList do
+      attributeSet += !attribute.mValue.string
+    end
+  #--- Signature
+    let signature = [system.mFormalArgumentList routineSignature !system.mName]
+    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature typedSignature)
+  #--- Return type
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnType]
+  #--- Function invocation name
+    let invocationName = routineMangledNameFromAST (
+      !mStructureName 
+      !system.mName
+      !system.mFormalArgumentList
+    )
+  #--- Function descriptor
+    let descriptor = @routineDescriptor.new {
+      !system.mPublic
+      ![attributeSet hasKey !exportedAttribute ()]
+      !system.mRoutineKind
+      !typedSignature
+      !returnType
+      ![attributeSet hasKey !accessAttribute ()]
+      ![attributeSet hasKey !mutatingAttribute ()]
+    }
+  #---
+    [!?universalPropertyAndRoutineMapForContext insertRoutine
+      !system.mName
+      !signature
+      !invocationName
+      !descriptor
+    ]
+  end
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
-    !kind:.structure {!typeName:mStructureName !propertyMap:propertyMap !propertyList:propertyList !flags:flags}
+    !kind:.structure {
+      !typeName:mStructureName
+      !propertyMap:propertyMap
+      !universalMap:universalPropertyAndRoutineMapForContext
+      !propertyList:propertyList
+      !flags:flags
+    }
   ]
 }
 

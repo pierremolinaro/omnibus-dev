@@ -107,19 +107,6 @@ func llvmNameForFunction ?let @string inName -> @string {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func mapNameForFunctionAndSignature ?let @lstring inName ?let @routineTypedSignature signature -> @lstring {
-  var s = inName.string + "("
-  for formalArgument in signature do
-    s += [formalArgument.mFormalArgumentPassingMode formalPassingModeString]
-    s += formalArgument.mSelector
-    s += ":"
-  end
-  s += ")"
-  result = .new {!s !inName.location}
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Interrupt routine
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -284,6 +271,12 @@ func %once mutatingAttribute -> @string {
 
 func %once userAccessAttribute -> @string {
   result = "userAccess"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once accessAttribute -> @string {
+  result = "access"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
