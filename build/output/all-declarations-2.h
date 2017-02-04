@@ -2777,9 +2777,10 @@ typedef void (*extensionMethodSignature_expressionAST_analyzeExpression) (const 
                                                                           class GALGAS_semanticTemporariesStruct & ioArgument7,
                                                                           class GALGAS_staticStringMap & ioArgument8,
                                                                           class GALGAS_unifiedSymbolMap & ioArgument9,
-                                                                          class GALGAS_allocaList & ioArgument10,
-                                                                          class GALGAS_instructionListIR & ioArgument11,
-                                                                          class GALGAS_objectIR & outArgument12,
+                                                                          class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument10,
+                                                                          class GALGAS_allocaList & ioArgument11,
+                                                                          class GALGAS_instructionListIR & ioArgument12,
+                                                                          class GALGAS_objectIR & outArgument13,
                                                                           class C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -2801,6 +2802,7 @@ void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inO
                                             GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                             GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                             GALGAS_unifiedSymbolMap & io_ioVariableMap,
+                                            GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
                                             GALGAS_allocaList & io_ioAllocaList,
                                             GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                             GALGAS_objectIR & out_outResult,

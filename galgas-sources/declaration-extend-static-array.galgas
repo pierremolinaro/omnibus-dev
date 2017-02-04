@@ -155,6 +155,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
             !?temporary:temporaries
             !?staticStringMap:ioGlobalLiteralStringMap
             !?variableMap:variableMap
+            !?variableMap:universalMap
             !?alloca:allocaList
             !?instructionListIR:instructionGenerationList
             ?result:let @objectIR expressionResult

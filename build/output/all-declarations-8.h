@@ -192,12 +192,13 @@ void routine_handleFunctionCallInExpression (const class GALGAS_unifiedTypeMap_2
                                              class GALGAS_semanticTemporariesStruct & ioArgument8,
                                              class GALGAS_staticStringMap & ioArgument9,
                                              class GALGAS_unifiedSymbolMap & ioArgument10,
-                                             class GALGAS_allocaList & ioArgument11,
-                                             const class GALGAS_effectiveArgumentListAST constinArgument12,
-                                             const class GALGAS_location constinArgument13,
-                                             class GALGAS_instructionListIR & ioArgument14,
-                                             class GALGAS_objectIR & ioArgument15,
-                                             class GALGAS_unifiedTypeMap_2D_proxy & outArgument16,
+                                             class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument11,
+                                             class GALGAS_allocaList & ioArgument12,
+                                             const class GALGAS_effectiveArgumentListAST constinArgument13,
+                                             const class GALGAS_location constinArgument14,
+                                             class GALGAS_instructionListIR & ioArgument15,
+                                             class GALGAS_objectIR & ioArgument16,
+                                             class GALGAS_unifiedTypeMap_2D_proxy & outArgument17,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -281,9 +282,10 @@ void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_pr
                                          class GALGAS_semanticTemporariesStruct & ioArgument9,
                                          class GALGAS_staticStringMap & ioArgument10,
                                          class GALGAS_unifiedSymbolMap & ioArgument11,
-                                         class GALGAS_allocaList & ioArgument12,
-                                         class GALGAS_instructionListIR & ioArgument13,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument14,
+                                         class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument12,
+                                         class GALGAS_allocaList & ioArgument13,
+                                         class GALGAS_instructionListIR & ioArgument14,
+                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument15,
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -303,10 +305,11 @@ void routine_analyzeGuardCall (const class GALGAS_unifiedTypeMap_2D_proxy consti
                                class GALGAS_semanticTemporariesStruct & ioArgument7,
                                class GALGAS_staticStringMap & ioArgument8,
                                class GALGAS_unifiedSymbolMap & ioArgument9,
-                               class GALGAS_allocaList & ioArgument10,
-                               class GALGAS_instructionListIR & ioArgument11,
-                               class GALGAS_procCallEffectiveParameterListIR & outArgument12,
-                               class GALGAS_lstring & outArgument13,
+                               class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument10,
+                               class GALGAS_allocaList & ioArgument11,
+                               class GALGAS_instructionListIR & ioArgument12,
+                               class GALGAS_procCallEffectiveParameterListIR & outArgument13,
+                               class GALGAS_lstring & outArgument14,
                                class C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 

@@ -219,6 +219,7 @@ method @taskVarListAST-element enterInContext
   variableMapWithConstants (
     !context:ioContext
     ?@unifiedSymbolMap variableMap
+    ?@universalPropertyAndRoutineMapForContext universalMap
   )
   [mVarInitExpression analyzeExpression
     !self:.null
@@ -231,6 +232,7 @@ method @taskVarListAST-element enterInContext
     !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:variableMap
+    !?variableMap:universalMap
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList
     ?result:let @objectIR expressionResult

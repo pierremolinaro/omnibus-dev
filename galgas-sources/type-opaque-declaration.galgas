@@ -109,6 +109,7 @@ override method @opaqueTypeDeclaration enterInContext
   variableMapWithConstants (
     !context:ioContext
     ?@unifiedSymbolMap variableMap
+    ?@universalPropertyAndRoutineMapForContext universalMap
   )
   [mSizeExpression analyzeExpression
     !self:.null
@@ -121,6 +122,7 @@ override method @opaqueTypeDeclaration enterInContext
     !?temporary:temporaries
     !?staticStringMap:*
     !?variableMap:variableMap
+    !?variableMap:universalMap
     !?alloca:allocaList
     !?instructionListIR:initInstructionGenerationList
     ?result:@objectIR sizeExpressionIR

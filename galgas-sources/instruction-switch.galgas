@@ -101,6 +101,7 @@ override method @switchInstructionAST analyze
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:switchExpressionGenerationList
     ?result:@objectIR switchValueIRPossibleReference

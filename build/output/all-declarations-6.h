@@ -264,6 +264,7 @@ void extensionMethod_analyzeAssignmentTarget (const class GALGAS_assignmentTarge
                                               class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                               class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                               class GALGAS_unifiedSymbolMap & io_ioVariableMap,
+                                              class GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
                                               class GALGAS_allocaList & io_ioAllocaList,
                                               class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                               class GALGAS_objectIR & out_outCurrentObject,
@@ -313,11 +314,12 @@ void routine_handleSubscriptInAssignmentAndExpression (const class GALGAS_unifie
                                                        class GALGAS_semanticTemporariesStruct & ioArgument6,
                                                        class GALGAS_staticStringMap & ioArgument7,
                                                        class GALGAS_unifiedSymbolMap & ioArgument8,
-                                                       class GALGAS_allocaList & ioArgument9,
-                                                       const class GALGAS_expressionAST constinArgument10,
-                                                       const class GALGAS_location constinArgument11,
-                                                       class GALGAS_instructionListIR & ioArgument12,
-                                                       class GALGAS_objectIR & ioArgument13,
+                                                       class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument9,
+                                                       class GALGAS_allocaList & ioArgument10,
+                                                       const class GALGAS_expressionAST constinArgument11,
+                                                       const class GALGAS_location constinArgument12,
+                                                       class GALGAS_instructionListIR & ioArgument13,
+                                                       class GALGAS_objectIR & ioArgument14,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 

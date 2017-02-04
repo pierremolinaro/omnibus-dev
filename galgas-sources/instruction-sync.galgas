@@ -186,6 +186,7 @@ override method @syncInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
@@ -211,6 +212,7 @@ override method @syncInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?result:@objectIR sourceOperand
@@ -238,6 +240,7 @@ override method @syncInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:boolExpInstructionGenerationList
         ?result:let @objectIR boolExpressionResult
@@ -259,6 +262,7 @@ override method @syncInstructionAST analyze
         !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioVariableMap
+        !?variableMap:ioUniversalMap
         !?alloca:ioAllocaList
         !?instructionListIR:guardInstructionGenerationList
         ?effectiveIR:let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
@@ -314,6 +318,7 @@ proc analyzeGuardCall
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
@@ -371,6 +376,7 @@ proc analyzeGuardCall
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     !?effectiveIR:outEffectiveParameterListIR

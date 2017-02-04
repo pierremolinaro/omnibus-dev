@@ -132,10 +132,13 @@ proc initialVariableMap
 proc variableMapWithConstants
   ?context:let @semanticContext inContext
   !@unifiedSymbolMap outVariableMap
+  !@universalPropertyAndRoutineMapForContext outUniversalMap
 {
   outVariableMap = .emptyMap
+  outUniversalMap = .default
 #--- Add global constants
   for (constantName constantValue) in inContext.mGlobalConstantMap do
+    [!?outUniversalMap insertRegister !constantName !constantValue]
     [!?outVariableMap insertUsedConstant
       !lkey:constantName
       !type:[constantValue type]
