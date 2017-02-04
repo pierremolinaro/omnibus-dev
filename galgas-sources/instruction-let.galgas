@@ -115,6 +115,7 @@ override method @letInstructionWithAssignmentAST analyze
     let localConstant = @objectIR.localVariableReference {!type:[result type] !plmName:varPLMName}
     [!?ioInstructionGenerationList appendStoreFromReference !localConstant !mVarName !result]
   end
+  [!?ioUniversalMap insertLocalConstant !mVarName !expressionResult]
   [!?ioVariableMap insertConstant
     !lkey:mVarName
     !type:[result type]

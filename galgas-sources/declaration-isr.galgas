@@ -131,6 +131,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
     ]
   #--- End of variableMap
 #    [variableMap deinitTopLevelVariables]
+    [universalMap checkLocalVariableFinalState]
     [variableMap checkAutomatonStates !isr.mEndOfISRDeclaration]
     drop variableMap
   #--- Code generation

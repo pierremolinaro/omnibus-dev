@@ -125,6 +125,7 @@ override method @switchInstructionAST analyze
     error mEndOf_test_expression : "test expression type should not be static"
   end
 #--- Analyse case list
+  [!?ioUniversalMap openOverrideForSelectBlock]
   [!?ioVariableMap openOverrideForSelectBlock]
   @stringset usedEnumerationValues = {}
   @switchCaseListIR switchCaseListIR = {}
@@ -156,6 +157,7 @@ override method @switchInstructionAST analyze
     ]
     switchCaseListIR += !caseIdentifierIndexList !instructionGenerationList
   end  
+  [!?ioUniversalMap closeOverride !mEndOf_while_instruction]
   [!?ioVariableMap closeOverride !mEndOf_while_instruction]
 #--- Check all enumeration values are named in switch instructions
   for (lkey *) in enumConstantMap do

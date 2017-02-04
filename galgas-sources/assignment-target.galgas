@@ -3,8 +3,8 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @assignmentSelfAccessAST {
-  case noSelfAccess
-  case selfAccess (@location selfLocation)
+  case noSelfPrefix
+  case selfPrefix (@location selfLocation)
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -23,7 +23,7 @@ list @accessInAssignmentListAST {
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @assignmentTargetAST {
-  @assignmentSelfAccessAST mSelfAccess
+  @assignmentSelfAccessAST mHasSelfPrefix
   @lstring mIdentifier
   @accessInAssignmentListAST mAccessList
 }
@@ -40,10 +40,10 @@ syntax extension plm_syntax {
   #--- Self ?
     @assignmentSelfAccessAST selfAccess
     select
-      selfAccess = .noSelfAccess
+      selfAccess = .noSelfPrefix
     or
       $self$
-      selfAccess = .selfAccess {!selfLocation:.here}
+      selfAccess = .selfPrefix {!selfLocation:.here}
       $.$
     end
   #--- Object
@@ -62,7 +62,6 @@ syntax extension plm_syntax {
       $]$
       accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
     end
-  #---
     outAssignmentTargetAST = .new {!selfAccess !identifier !accessListAST}
   }
 
@@ -113,8 +112,9 @@ method @assignmentTargetAST analyzeAssignmentTarget
   !globalVariableReceiverName:@string outGlobalVariableReceiverName
 {
 #--- object access, with ou without self
-  switch mSelfAccess
-  case noSelfAccess :
+  switch mHasSelfPrefix
+  case noSelfPrefix :
+#    [!?ioUniversalMap searchValuedObjectForWriteAccess !mIdentifier ?let isPublic ?let currentObject]
     if [ioVariableMap hasKey !mIdentifier] then
       switch inSelfAccessKind
       case read :
@@ -129,12 +129,12 @@ method @assignmentTargetAST analyzeAssignmentTarget
       outCurrentObject = .possibleFunction {!receiver:.null !functionName:mIdentifier}
       outGlobalVariableReceiverName = ""
     end
-  case selfAccess (@location selfLocation) :
+  case selfPrefix (@location selfLocation) :
     outGlobalVariableReceiverName = "" # Receiver is not a global variable
     if inSelfType == .null then
       error selfLocation : "'self' is not available in this context" : outCurrentObject
     elsif [[inSelfType kind] isStructure] then
-      [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let universalMap ?2*]
+      [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
  ##     [universalMap searchProperty !mIdentifier ?* ?let object]
       if [structureObjectMap hasKey !mIdentifier] then
         [structureObjectMap searchKey
@@ -226,7 +226,7 @@ private proc handlePropertyAccessInAssignment
   ?!@instructionListIR ioInstructionGenerationList
 {
   if [[[ioObject type] kind] isStructure] then
-    [[[ioObject type] kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let universalMap ?2*]
+    [[[ioObject type] kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
     if [structureObjectMap hasKey !inPropertyName] then
       [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property]
       if [property isProperty] then

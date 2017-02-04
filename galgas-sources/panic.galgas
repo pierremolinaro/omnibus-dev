@@ -168,6 +168,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
   ]
 #--- End of variableMap
 #  [variableMap deinitTopLevelVariables]
+  [universalMap checkLocalVariableFinalState]
   [variableMap checkAutomatonStates !mEndOfPanicInstructions]
   drop variableMap
 #--- Code generation

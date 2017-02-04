@@ -135,11 +135,13 @@ override method @varInstructionWithAssignmentAST analyze
 #--- Declare local variable
   let varName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
   ioTemporaries.mTemporaryIndex ++
+  let objectIR = @objectIR.localVariableReference {!type:[result type] !plmName:varName}
+  [!?ioUniversalMap insertLocalVariable !mVarName !objectIR !.hasUnreadValue !false]
   [!?ioVariableMap insertDefinedVariable
     !lkey:mVarName
     !type:[result type]
     !readAccessAllowed:true
-    !objectIR:.localVariableReference {!type:[result type] !plmName:varName}
+    !objectIR:objectIR
     !copyable:[[result type] copyable]
     !canBeUsedAsInputParameter:true
   ]
@@ -164,7 +166,7 @@ override method @varInstructionAST analyze
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {

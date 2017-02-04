@@ -141,6 +141,7 @@ method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysi
     !context:inContext
     !mProcFormalArgumentList
     !?variableMap
+    !?universalMap
     !?formalArguments
   )
 #--- End of variableMap

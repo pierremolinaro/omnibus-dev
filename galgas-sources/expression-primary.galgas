@@ -251,7 +251,7 @@ override method @primaryInExpressionAST analyzeExpression
     if inSelfType == .null then
       error selfLocation : "'self' is not available in this context" : currentPointer
     elsif [[inSelfType kind] isStructure] then
-      [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let universalMap ?2*]
+      [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
       if [structureObjectMap hasKey !mObjectName] then
         [structureObjectMap searchKey
           !mObjectName
@@ -416,7 +416,7 @@ private proc handlePropertyInExpression
 {
 #--- Structure
   if [[[ioObjectPtr type] kind] isStructure] then
-    [[[ioObjectPtr type] kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let universalMap ?2*]
+    [[[ioObjectPtr type] kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
     if [structureObjectMap hasKey !inPropertyName] then
       [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property]
       handlePropertyAccessInExpression (
@@ -562,7 +562,7 @@ proc analyzeFunctionCallInExpression
 #--- Special case : call a function from a static array during enumeration
   var specialCase = (receiverType != .null) && [[receiverType kind] isStructure]
   if specialCase then
-    [[receiverType kind] structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?universalMap:let universalMap ?2*]
+    [[receiverType kind] structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?universalMap:let unused universalMap ?2*]
     if [propertyMap hasKey !inRoutineName] then
       [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject]
       [propertyObject property ?type:let type ?plmName:let unused plmName ?index:let unused index]
@@ -795,7 +795,8 @@ proc analyzeEffectiveParameters
         case integer (* * * *) :
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
         case structure (* * universalMap * *) :
-          [universalMap searchValuedObject !name ?let unused public ?let propertyObject]
+          var m = universalMap
+          [!?m searchValuedObjectForReadAccess !name ?let unused public ?let propertyObject]
           [propertyObject property ?2* ?index:let idx]
           getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
           [!?ioInstructionGenerationList appendPropertyReferenceFromSelf

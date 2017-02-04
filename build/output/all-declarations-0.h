@@ -4256,8 +4256,8 @@ class GALGAS_assignmentSelfAccessAST : public AC_GALGAS_root {
 //--------------------------------- Enumeration
   public : typedef enum {
     kNotBuilt,
-    kEnum_noSelfAccess,
-    kEnum_selfAccess
+    kEnum_noSelfPrefix,
+    kEnum_selfPrefix
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -4284,9 +4284,9 @@ class GALGAS_assignmentSelfAccessAST : public AC_GALGAS_root {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_assignmentSelfAccessAST constructor_noSelfAccess (LOCATION_ARGS) ;
+  public : static class GALGAS_assignmentSelfAccessAST constructor_noSelfPrefix (LOCATION_ARGS) ;
 
-  public : static class GALGAS_assignmentSelfAccessAST constructor_selfAccess (const class GALGAS_location & inOperand0
+  public : static class GALGAS_assignmentSelfAccessAST constructor_selfPrefix (const class GALGAS_location & inOperand0
                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4298,16 +4298,16 @@ class GALGAS_assignmentSelfAccessAST : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_selfAccess (class GALGAS_location & outArgument0,
+  public : VIRTUAL_IN_DEBUG void method_selfPrefix (class GALGAS_location & outArgument0,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoSelfAccess (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoSelfPrefix (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSelfAccess (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSelfPrefix (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -4451,7 +4451,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentL
 
 class GALGAS_assignmentTargetAST : public AC_GALGAS_root {
 //--------------------------------- Public data members
-  public : GALGAS_assignmentSelfAccessAST mProperty_mSelfAccess ;
+  public : GALGAS_assignmentSelfAccessAST mProperty_mHasSelfPrefix ;
   public : GALGAS_lstring mProperty_mIdentifier ;
   public : GALGAS_accessInAssignmentListAST mProperty_mAccessList ;
 
@@ -4467,7 +4467,7 @@ class GALGAS_assignmentTargetAST : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_assignmentTargetAST (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_assignmentTargetAST (const GALGAS_assignmentSelfAccessAST & in_mSelfAccess,
+  public : GALGAS_assignmentTargetAST (const GALGAS_assignmentSelfAccessAST & in_mHasSelfPrefix,
                                        const GALGAS_lstring & in_mIdentifier,
                                        const GALGAS_accessInAssignmentListAST & in_mAccessList) ;
 
@@ -4501,9 +4501,9 @@ class GALGAS_assignmentTargetAST : public AC_GALGAS_root {
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_mAccessList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_assignmentSelfAccessAST getter_mHasSelfPrefix (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_assignmentSelfAccessAST getter_mSelfAccess (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -11872,18 +11872,18 @@ class cEnumAssociatedValues_accessInAssignmentAST_arrayAccess : public cEnumAsso
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess : public cEnumAssociatedValues {
+class cEnumAssociatedValues_assignmentSelfAccessAST_selfPrefix : public cEnumAssociatedValues {
   public : const GALGAS_location mAssociatedValue0 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess (const GALGAS_location & inAssociatedValue0
+  public : cEnumAssociatedValues_assignmentSelfAccessAST_selfPrefix (const GALGAS_location & inAssociatedValue0
                                                                      COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_assignmentSelfAccessAST_selfAccess (void) {}
+  public : virtual ~ cEnumAssociatedValues_assignmentSelfAccessAST_selfPrefix (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

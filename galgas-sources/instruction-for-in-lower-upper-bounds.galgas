@@ -167,6 +167,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     ioTemporaries.mTemporaryIndex ++
     ioAllocaList += !enumeratedVarLLVMName ![[type kind] llvmTypeName]
   #--- Analyze instruction list
+    [!?ioUniversalMap openOverrideForRepeatBlock]
     [!?ioVariableMap openOverrideForRepeatBlock]
     [!?ioVariableMap insertUsedConstant
       !lkey:mVarName
@@ -192,6 +193,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?alloca:ioAllocaList
       !?instructionListIR:instructionGenerationList
     ]
+    [!?ioUniversalMap closeOverride !mEndOf_do_instruction]
     [!?ioVariableMap closeOverride !mEndOf_do_instruction]
   #--- Code generation
     ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR.new {
