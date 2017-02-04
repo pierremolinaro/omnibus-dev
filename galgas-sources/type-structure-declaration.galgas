@@ -309,44 +309,44 @@ override method @structureDeclaration enterInContext
     end
   end
 #---------------------------------------- Enter routines in property map
-  for function in mFunctionDeclarationListAST do
-   #--- Signature
-    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let @routineTypedSignature signature)
-  #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
-  #--- Function mangled name
-    let functionMangledName = routineMangledNameFromAST (
-      !mStructureName 
-      !function.mFunctionName
-      !function.mFunctionFormalArgumentList
-    )
-  #---
-    let name = mapNameForFunctionAndSignature (!function.mFunctionName !signature)
-    [!?propertyMap insertKey
-      !name
-      !function.mPublicFunction
-      !.function {!mode:function.mMode !kind:.function {!executionMode:function.mMode} !returnType:returnType !signature:signature !plmName:functionMangledName}
-    ]
-  end
-  for system in mSystemRoutineListAST do
-   #--- Signature
-    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature signature)
-  #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnType]
-  #--- Function mangled name
-    let functionMangledName = routineMangledNameFromAST (
-      !mStructureName 
-      !system.mName
-      !system.mFormalArgumentList
-    )
-  #---
-    let name = mapNameForFunctionAndSignature (!system.mName !signature)
-    [!?propertyMap insertKey
-      !name
-      !system.mPublic
-      !.function {!mode:.userMode !kind:system.mRoutineKind !returnType:returnType !signature:signature !plmName:functionMangledName}
-    ]
-  end
+#  for function in mFunctionDeclarationListAST do
+#   #--- Signature
+#    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let @routineTypedSignature signature)
+#  #--- Return type
+#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
+#  #--- Function mangled name
+#    let functionMangledName = routineMangledNameFromAST (
+#      !mStructureName 
+#      !function.mFunctionName
+#      !function.mFunctionFormalArgumentList
+#    )
+#  #---
+#    let name = mapNameForFunctionAndSignature (!function.mFunctionName !signature)
+#    [!?propertyMap insertKey
+#      !name
+#      !function.mPublicFunction
+#      !.function {!mode:function.mMode !kind:.function {!executionMode:function.mMode} !returnType:returnType !signature:signature !plmName:functionMangledName}
+#    ]
+#  end
+#  for system in mSystemRoutineListAST do
+#   #--- Signature
+#    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature signature)
+#  #--- Return type
+#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnType]
+#  #--- Function mangled name
+#    let functionMangledName = routineMangledNameFromAST (
+#      !mStructureName 
+#      !system.mName
+#      !system.mFormalArgumentList
+#    )
+#  #---
+#    let name = mapNameForFunctionAndSignature (!system.mName !signature)
+#    [!?propertyMap insertKey
+#      !name
+#      !system.mPublic
+#      !.function {!mode:.userMode !kind:system.mRoutineKind !returnType:returnType !signature:signature !plmName:functionMangledName}
+#    ]
+#  end
 #---------------------------------------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:mStructureName
