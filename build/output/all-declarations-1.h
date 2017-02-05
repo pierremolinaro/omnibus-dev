@@ -6680,6 +6680,185 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineDescriptor ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                  @scopeStack list                                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_scopeStack : public AC_GALGAS_list {
+//--------------------------------- Default constructor
+  public : GALGAS_scopeStack (void) ;
+
+//--------------------------------- List constructor used by listmap
+  public : GALGAS_scopeStack (const capCollectionElementArray & inSharedArray) ;
+
+//--------------------------------- Element constructor
+  public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                  const class GALGAS_scopeKind & in_mScopeKind,
+                                                  const class GALGAS_bool & in_mFirstBranch,
+                                                  const class GALGAS_referenceStateMap & in_mInitialStateMap,
+                                                  const class GALGAS_referenceStateMap & in_mReferenceStateMap,
+                                                  const class GALGAS_lstringlist & in_mObjectList
+                                                  COMMA_LOCATION_ARGS) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_scopeStack extractObject (const GALGAS_object & inObject,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_scopeStack constructor_emptyList (LOCATION_ARGS) ;
+
+  public : static class GALGAS_scopeStack constructor_listWithValue (const class GALGAS_scopeKind & inOperand0,
+                                                                     const class GALGAS_bool & inOperand1,
+                                                                     const class GALGAS_referenceStateMap & inOperand2,
+                                                                     const class GALGAS_referenceStateMap & inOperand3,
+                                                                     const class GALGAS_lstringlist & inOperand4
+                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with expression)
+  public : VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_scopeStack inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_scopeKind & inOperand0,
+                                                      const class GALGAS_bool & inOperand1,
+                                                      const class GALGAS_referenceStateMap & inOperand2,
+                                                      const class GALGAS_referenceStateMap & inOperand3,
+                                                      const class GALGAS_lstringlist & inOperand4
+                                                      COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public : VIRTUAL_IN_DEBUG GALGAS_scopeStack add_operation (const GALGAS_scopeStack & inOperand,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_scopeKind constinArgument0,
+                                                       class GALGAS_bool constinArgument1,
+                                                       class GALGAS_referenceStateMap constinArgument2,
+                                                       class GALGAS_referenceStateMap constinArgument3,
+                                                       class GALGAS_lstringlist constinArgument4,
+                                                       class GALGAS_uint constinArgument5,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_scopeKind & outArgument0,
+                                                  class GALGAS_bool & outArgument1,
+                                                  class GALGAS_referenceStateMap & outArgument2,
+                                                  class GALGAS_referenceStateMap & outArgument3,
+                                                  class GALGAS_lstringlist & outArgument4,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_scopeKind & outArgument0,
+                                                 class GALGAS_bool & outArgument1,
+                                                 class GALGAS_referenceStateMap & outArgument2,
+                                                 class GALGAS_referenceStateMap & outArgument3,
+                                                 class GALGAS_lstringlist & outArgument4,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_scopeKind & outArgument0,
+                                                       class GALGAS_bool & outArgument1,
+                                                       class GALGAS_referenceStateMap & outArgument2,
+                                                       class GALGAS_referenceStateMap & outArgument3,
+                                                       class GALGAS_lstringlist & outArgument4,
+                                                       class GALGAS_uint constinArgument5,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_scopeKind & outArgument0,
+                                               class GALGAS_bool & outArgument1,
+                                               class GALGAS_referenceStateMap & outArgument2,
+                                               class GALGAS_referenceStateMap & outArgument3,
+                                               class GALGAS_lstringlist & outArgument4,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_scopeKind & outArgument0,
+                                              class GALGAS_bool & outArgument1,
+                                              class GALGAS_referenceStateMap & outArgument2,
+                                              class GALGAS_referenceStateMap & outArgument3,
+                                              class GALGAS_lstringlist & outArgument4,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mFirstBranchAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_referenceStateMap getter_mInitialStateMapAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                           C_Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mObjectListAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_referenceStateMap getter_mReferenceStateMapAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_scopeKind getter_mScopeKindAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_scopeStack getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_scopeStack getter_subListToIndex (const class GALGAS_uint & constinOperand0,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_scopeStack getter_subListWithRange (const class GALGAS_range & constinOperand0,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_scopeStack ;
+ 
+} ; // End of GALGAS_scopeStack class
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Enumerator declaration                                                                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumerator_scopeStack : public cGenericAbstractEnumerator {
+  public : cEnumerator_scopeStack (const GALGAS_scopeStack & inEnumeratedObject,
+                                   const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public : class GALGAS_scopeKind current_mScopeKind (LOCATION_ARGS) const ;
+  public : class GALGAS_bool current_mFirstBranch (LOCATION_ARGS) const ;
+  public : class GALGAS_referenceStateMap current_mInitialStateMap (LOCATION_ARGS) const ;
+  public : class GALGAS_referenceStateMap current_mReferenceStateMap (LOCATION_ARGS) const ;
+  public : class GALGAS_lstringlist current_mObjectList (LOCATION_ARGS) const ;
+//--- Current element access
+  public : class GALGAS_scopeStack_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_scopeStack ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                @internalUniversalPropertyAndRoutineMapForContext map                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6718,21 +6897,19 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext : public AC_GALGAS
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_valuedObjectStateStack & inOperand1,
-                                                      const class GALGAS_valuedObjectState & inOperand2,
-                                                      const class GALGAS_bool & inOperand3,
-                                                      const class GALGAS_possibleValuedObject & inOperand4,
-                                                      const class GALGAS_routineSignatureMapForContext & inOperand5,
+                                                      const class GALGAS_valuedObjectState & inOperand1,
+                                                      const class GALGAS_bool & inOperand2,
+                                                      const class GALGAS_possibleValuedObject & inOperand3,
+                                                      const class GALGAS_routineSignatureMapForContext & inOperand4,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_valuedObjectStateStack constinArgument1,
-                                                   class GALGAS_valuedObjectState constinArgument2,
-                                                   class GALGAS_bool constinArgument3,
-                                                   class GALGAS_possibleValuedObject constinArgument4,
-                                                   class GALGAS_routineSignatureMapForContext constinArgument5,
+                                                   class GALGAS_valuedObjectState constinArgument1,
+                                                   class GALGAS_bool constinArgument2,
+                                                   class GALGAS_possibleValuedObject constinArgument3,
+                                                   class GALGAS_routineSignatureMapForContext constinArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -6756,19 +6933,13 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext : public AC_GALGAS
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMStackStateForKey (class GALGAS_valuedObjectStateStack constinArgument0,
-                                                              class GALGAS_string constinArgument1,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_valuedObjectStateStack & outArgument1,
-                                                   class GALGAS_valuedObjectState & outArgument2,
-                                                   class GALGAS_bool & outArgument3,
-                                                   class GALGAS_possibleValuedObject & outArgument4,
-                                                   class GALGAS_routineSignatureMapForContext & outArgument5,
+                                                   class GALGAS_valuedObjectState & outArgument1,
+                                                   class GALGAS_bool & outArgument2,
+                                                   class GALGAS_possibleValuedObject & outArgument3,
+                                                   class GALGAS_routineSignatureMapForContext & outArgument4,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
 
@@ -6790,10 +6961,6 @@ class GALGAS_internalUniversalPropertyAndRoutineMapForContext : public AC_GALGAS
   public : VIRTUAL_IN_DEBUG class GALGAS_routineSignatureMapForContext getter_mRoutineSignatureMapForContextForKey (const class GALGAS_string & constinOperand0,
                                                                                                                     C_Compiler * inCompiler
                                                                                                                     COMMA_LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_valuedObjectStateStack getter_mStackStateForKey (const class GALGAS_string & constinOperand0,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_internalUniversalPropertyAndRoutineMapForContext getter_overriddenMap (C_Compiler * inCompiler
                                                                                                                 COMMA_LOCATION_ARGS) const ;
@@ -6821,7 +6988,6 @@ class cEnumerator_internalUniversalPropertyAndRoutineMapForContext : public cGen
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-  public : class GALGAS_valuedObjectStateStack current_mStackState (LOCATION_ARGS) const ;
   public : class GALGAS_valuedObjectState current_mObjectState (LOCATION_ARGS) const ;
   public : class GALGAS_bool current_mObjectShouldBeValuedAtEndOfScope (LOCATION_ARGS) const ;
   public : class GALGAS_possibleValuedObject current_mPossibleValuedObject (LOCATION_ARGS) const ;
@@ -6843,6 +7009,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_internalUniversalPr
 class GALGAS_universalPropertyAndRoutineMapForContext : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_internalUniversalPropertyAndRoutineMapForContext mProperty_mInternalPropertyAndRoutineMapForContext ;
+  public : GALGAS_scopeStack mProperty_mScopeStack ;
+  public : GALGAS_lstringlist mProperty_mLocalObjectList ;
 
 
 //--------------------------------- Accessors
@@ -6859,7 +7027,9 @@ class GALGAS_universalPropertyAndRoutineMapForContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG ~ GALGAS_universalPropertyAndRoutineMapForContext (void) ;
 
 //--------------------------------- Native constructor
-  public : GALGAS_universalPropertyAndRoutineMapForContext (const GALGAS_internalUniversalPropertyAndRoutineMapForContext & in_mInternalPropertyAndRoutineMapForContext) ;
+  public : GALGAS_universalPropertyAndRoutineMapForContext (const GALGAS_internalUniversalPropertyAndRoutineMapForContext & in_mInternalPropertyAndRoutineMapForContext,
+                                                            const GALGAS_scopeStack & in_mScopeStack,
+                                                            const GALGAS_lstringlist & in_mLocalObjectList) ;
 
 //-- Start of generic part --*
 
@@ -6872,7 +7042,9 @@ class GALGAS_universalPropertyAndRoutineMapForContext : public AC_GALGAS_root {
                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_universalPropertyAndRoutineMapForContext constructor_new (const class GALGAS_internalUniversalPropertyAndRoutineMapForContext & inOperand0
+  public : static class GALGAS_universalPropertyAndRoutineMapForContext constructor_new (const class GALGAS_internalUniversalPropertyAndRoutineMapForContext & inOperand0,
+                                                                                         const class GALGAS_scopeStack & inOperand1,
+                                                                                         const class GALGAS_lstringlist & inOperand2
                                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -6888,6 +7060,10 @@ class GALGAS_universalPropertyAndRoutineMapForContext : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_internalUniversalPropertyAndRoutineMapForContext getter_mInternalPropertyAndRoutineMapForContext (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mLocalObjectList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_scopeStack getter_mScopeStack (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

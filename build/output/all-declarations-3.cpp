@@ -2958,14 +2958,12 @@ GALGAS_guardMapForContext GALGAS_guardMapForContext::extractObject (const GALGAS
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_internalUniversalPropertyAndRoutineMapForContext::cMapElement_internalUniversalPropertyAndRoutineMapForContext (const GALGAS_lstring & inKey,
-                                                                                                                            const GALGAS_valuedObjectStateStack & in_mStackState,
                                                                                                                             const GALGAS_valuedObjectState & in_mObjectState,
                                                                                                                             const GALGAS_bool & in_mObjectShouldBeValuedAtEndOfScope,
                                                                                                                             const GALGAS_possibleValuedObject & in_mPossibleValuedObject,
                                                                                                                             const GALGAS_routineSignatureMapForContext & in_mRoutineSignatureMapForContext
                                                                                                                             COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mProperty_mStackState (in_mStackState),
 mProperty_mObjectState (in_mObjectState),
 mProperty_mObjectShouldBeValuedAtEndOfScope (in_mObjectShouldBeValuedAtEndOfScope),
 mProperty_mPossibleValuedObject (in_mPossibleValuedObject),
@@ -2975,24 +2973,20 @@ mProperty_mRoutineSignatureMapForContext (in_mRoutineSignatureMapForContext) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool cMapElement_internalUniversalPropertyAndRoutineMapForContext::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mStackState.isValid () && mProperty_mObjectState.isValid () && mProperty_mObjectShouldBeValuedAtEndOfScope.isValid () && mProperty_mPossibleValuedObject.isValid () && mProperty_mRoutineSignatureMapForContext.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mObjectState.isValid () && mProperty_mObjectShouldBeValuedAtEndOfScope.isValid () && mProperty_mPossibleValuedObject.isValid () && mProperty_mRoutineSignatureMapForContext.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement * cMapElement_internalUniversalPropertyAndRoutineMapForContext::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_internalUniversalPropertyAndRoutineMapForContext (mProperty_lkey, mProperty_mStackState, mProperty_mObjectState, mProperty_mObjectShouldBeValuedAtEndOfScope, mProperty_mPossibleValuedObject, mProperty_mRoutineSignatureMapForContext COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_internalUniversalPropertyAndRoutineMapForContext (mProperty_lkey, mProperty_mObjectState, mProperty_mObjectShouldBeValuedAtEndOfScope, mProperty_mPossibleValuedObject, mProperty_mRoutineSignatureMapForContext COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cMapElement_internalUniversalPropertyAndRoutineMapForContext::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mStackState" ":" ;
-  mProperty_mStackState.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mObjectState" ":" ;
@@ -3016,9 +3010,6 @@ void cMapElement_internalUniversalPropertyAndRoutineMapForContext::description (
 typeComparisonResult cMapElement_internalUniversalPropertyAndRoutineMapForContext::compare (const cCollectionElement * inOperand) const {
   cMapElement_internalUniversalPropertyAndRoutineMapForContext * operand = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) inOperand ;
   typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mStackState.objectCompare (operand->mProperty_mStackState) ;
-  }
   if (kOperandEqual == result) {
     result = mProperty_mObjectState.objectCompare (operand->mProperty_mObjectState) ;
   }
@@ -3082,15 +3073,14 @@ GALGAS_internalUniversalPropertyAndRoutineMapForContext GALGAS_internalUniversal
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_internalUniversalPropertyAndRoutineMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
-                                                                                   const GALGAS_valuedObjectStateStack & inArgument0,
-                                                                                   const GALGAS_valuedObjectState & inArgument1,
-                                                                                   const GALGAS_bool & inArgument2,
-                                                                                   const GALGAS_possibleValuedObject & inArgument3,
-                                                                                   const GALGAS_routineSignatureMapForContext & inArgument4,
+                                                                                   const GALGAS_valuedObjectState & inArgument0,
+                                                                                   const GALGAS_bool & inArgument1,
+                                                                                   const GALGAS_possibleValuedObject & inArgument2,
+                                                                                   const GALGAS_routineSignatureMapForContext & inArgument3,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) {
   cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3102,15 +3092,14 @@ void GALGAS_internalUniversalPropertyAndRoutineMapForContext::addAssign_operatio
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_internalUniversalPropertyAndRoutineMapForContext::setter_insertKey (GALGAS_lstring inKey,
-                                                                                GALGAS_valuedObjectStateStack inArgument0,
-                                                                                GALGAS_valuedObjectState inArgument1,
-                                                                                GALGAS_bool inArgument2,
-                                                                                GALGAS_possibleValuedObject inArgument3,
-                                                                                GALGAS_routineSignatureMapForContext inArgument4,
+                                                                                GALGAS_valuedObjectState inArgument0,
+                                                                                GALGAS_bool inArgument1,
+                                                                                GALGAS_possibleValuedObject inArgument2,
+                                                                                GALGAS_routineSignatureMapForContext inArgument3,
                                                                                 C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) {
   cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = NULL ;
-  macroMyNew (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4 COMMA_HERE)) ;
+  macroMyNew (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -3126,11 +3115,10 @@ const char * kSearchErrorMessage_internalUniversalPropertyAndRoutineMapForContex
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_internalUniversalPropertyAndRoutineMapForContext::method_searchKey (GALGAS_lstring inKey,
-                                                                                GALGAS_valuedObjectStateStack & outArgument0,
-                                                                                GALGAS_valuedObjectState & outArgument1,
-                                                                                GALGAS_bool & outArgument2,
-                                                                                GALGAS_possibleValuedObject & outArgument3,
-                                                                                GALGAS_routineSignatureMapForContext & outArgument4,
+                                                                                GALGAS_valuedObjectState & outArgument0,
+                                                                                GALGAS_bool & outArgument1,
+                                                                                GALGAS_possibleValuedObject & outArgument2,
+                                                                                GALGAS_routineSignatureMapForContext & outArgument3,
                                                                                 C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) const {
   const cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = (const cMapElement_internalUniversalPropertyAndRoutineMapForContext *) performSearch (inKey,
@@ -3142,30 +3130,13 @@ void GALGAS_internalUniversalPropertyAndRoutineMapForContext::method_searchKey (
     outArgument1.drop () ;
     outArgument2.drop () ;
     outArgument3.drop () ;
-    outArgument4.drop () ;
   }else{
     macroValidSharedObject (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    outArgument0 = p->mProperty_mStackState ;
-    outArgument1 = p->mProperty_mObjectState ;
-    outArgument2 = p->mProperty_mObjectShouldBeValuedAtEndOfScope ;
-    outArgument3 = p->mProperty_mPossibleValuedObject ;
-    outArgument4 = p->mProperty_mRoutineSignatureMapForContext ;
+    outArgument0 = p->mProperty_mObjectState ;
+    outArgument1 = p->mProperty_mObjectShouldBeValuedAtEndOfScope ;
+    outArgument2 = p->mProperty_mPossibleValuedObject ;
+    outArgument3 = p->mProperty_mRoutineSignatureMapForContext ;
   }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valuedObjectStateStack GALGAS_internalUniversalPropertyAndRoutineMapForContext::getter_mStackStateForKey (const GALGAS_string & inKey,
-                                                                                                                 C_Compiler * inCompiler
-                                                                                                                 COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = (const cMapElement_internalUniversalPropertyAndRoutineMapForContext *) attributes ;
-  GALGAS_valuedObjectStateStack result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    result = p->mProperty_mStackState ;
-  }
-  return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3226,20 +3197,6 @@ GALGAS_routineSignatureMapForContext GALGAS_internalUniversalPropertyAndRoutineM
     result = p->mProperty_mRoutineSignatureMapForContext ;
   }
   return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_internalUniversalPropertyAndRoutineMapForContext::setter_setMStackStateForKey (GALGAS_valuedObjectStateStack inAttributeValue,
-                                                                                           GALGAS_string inKey,
-                                                                                           C_Compiler * inCompiler
-                                                                                           COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = (cMapElement_internalUniversalPropertyAndRoutineMapForContext *) attributes ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-    p->mProperty_mStackState = inAttributeValue ;
-  }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3321,7 +3278,7 @@ cGenericAbstractEnumerator (inOrder) {
 GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element cEnumerator_internalUniversalPropertyAndRoutineMapForContext::current (LOCATION_ARGS) const {
   const cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = (const cMapElement_internalUniversalPropertyAndRoutineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-  return GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mStackState, p->mProperty_mObjectState, p->mProperty_mObjectShouldBeValuedAtEndOfScope, p->mProperty_mPossibleValuedObject, p->mProperty_mRoutineSignatureMapForContext) ;
+  return GALGAS_internalUniversalPropertyAndRoutineMapForContext_2D_element (p->mProperty_lkey, p->mProperty_mObjectState, p->mProperty_mObjectShouldBeValuedAtEndOfScope, p->mProperty_mPossibleValuedObject, p->mProperty_mRoutineSignatureMapForContext) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3330,14 +3287,6 @@ GALGAS_lstring cEnumerator_internalUniversalPropertyAndRoutineMapForContext::cur
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
   return p->mProperty_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valuedObjectStateStack cEnumerator_internalUniversalPropertyAndRoutineMapForContext::current_mStackState (LOCATION_ARGS) const {
-  const cMapElement_internalUniversalPropertyAndRoutineMapForContext * p = (const cMapElement_internalUniversalPropertyAndRoutineMapForContext *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_internalUniversalPropertyAndRoutineMapForContext) ;
-  return p->mProperty_mStackState ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3419,16 +3368,20 @@ GALGAS_internalUniversalPropertyAndRoutineMapForContext GALGAS_internalUniversal
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                 Class for element of '@valuedObjectStateStack' list                                 *
+//                                       Class for element of '@scopeStack' list                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cCollectionElement_valuedObjectStateStack : public cCollectionElement {
-  public : GALGAS_valuedObjectStateStack_2D_element mObject ;
+class cCollectionElement_scopeStack : public cCollectionElement {
+  public : GALGAS_scopeStack_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_valuedObjectStateStack (const GALGAS_valuedObjectState & in_objectState
-                                                      COMMA_LOCATION_ARGS) ;
+  public : cCollectionElement_scopeStack (const GALGAS_scopeKind & in_mScopeKind,
+                                          const GALGAS_bool & in_mFirstBranch,
+                                          const GALGAS_referenceStateMap & in_mInitialStateMap,
+                                          const GALGAS_referenceStateMap & in_mReferenceStateMap,
+                                          const GALGAS_lstringlist & in_mObjectList
+                                          COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
   public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
@@ -3445,70 +3398,94 @@ class cCollectionElement_valuedObjectStateStack : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_valuedObjectStateStack::cCollectionElement_valuedObjectStateStack (const GALGAS_valuedObjectState & in_objectState
-                                                                                      COMMA_LOCATION_ARGS) :
+cCollectionElement_scopeStack::cCollectionElement_scopeStack (const GALGAS_scopeKind & in_mScopeKind,
+                                                              const GALGAS_bool & in_mFirstBranch,
+                                                              const GALGAS_referenceStateMap & in_mInitialStateMap,
+                                                              const GALGAS_referenceStateMap & in_mReferenceStateMap,
+                                                              const GALGAS_lstringlist & in_mObjectList
+                                                              COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_objectState) {
+mObject (in_mScopeKind, in_mFirstBranch, in_mInitialStateMap, in_mReferenceStateMap, in_mObjectList) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-bool cCollectionElement_valuedObjectStateStack::isValid (void) const {
+bool cCollectionElement_scopeStack::isValid (void) const {
   return mObject.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement * cCollectionElement_valuedObjectStateStack::copy (void) {
+cCollectionElement * cCollectionElement_scopeStack::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_valuedObjectStateStack (mObject.mProperty_objectState COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_scopeStack (mObject.mProperty_mScopeKind, mObject.mProperty_mFirstBranch, mObject.mProperty_mInitialStateMap, mObject.mProperty_mReferenceStateMap, mObject.mProperty_mObjectList COMMA_HERE)) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cCollectionElement_valuedObjectStateStack::description (C_String & ioString, const int32_t inIndentation) const {
+void cCollectionElement_scopeStack::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "objectState" ":" ;
-  mObject.mProperty_objectState.description (ioString, inIndentation) ;
+  ioString << "mScopeKind" ":" ;
+  mObject.mProperty_mScopeKind.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mFirstBranch" ":" ;
+  mObject.mProperty_mFirstBranch.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mInitialStateMap" ":" ;
+  mObject.mProperty_mInitialStateMap.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mReferenceStateMap" ":" ;
+  mObject.mProperty_mReferenceStateMap.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mObjectList" ":" ;
+  mObject.mProperty_mObjectList.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cCollectionElement_valuedObjectStateStack::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_valuedObjectStateStack * operand = (cCollectionElement_valuedObjectStateStack *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_valuedObjectStateStack) ;
+typeComparisonResult cCollectionElement_scopeStack::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_scopeStack * operand = (cCollectionElement_scopeStack *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_scopeStack) ;
   return mObject.objectCompare (operand->mObject) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectStateStack::GALGAS_valuedObjectStateStack (void) :
+GALGAS_scopeStack::GALGAS_scopeStack (void) :
 AC_GALGAS_list () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectStateStack::GALGAS_valuedObjectStateStack (const capCollectionElementArray & inSharedArray) :
+GALGAS_scopeStack::GALGAS_scopeStack (const capCollectionElementArray & inSharedArray) :
 AC_GALGAS_list (inSharedArray) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectStateStack GALGAS_valuedObjectStateStack::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_valuedObjectStateStack  (capCollectionElementArray ()) ;
+GALGAS_scopeStack GALGAS_scopeStack::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+  return GALGAS_scopeStack  (capCollectionElementArray ()) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectStateStack GALGAS_valuedObjectStateStack::constructor_listWithValue (const GALGAS_valuedObjectState & inOperand0
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_valuedObjectStateStack result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_valuedObjectStateStack (capCollectionElementArray ()) ;
+GALGAS_scopeStack GALGAS_scopeStack::constructor_listWithValue (const GALGAS_scopeKind & inOperand0,
+                                                                const GALGAS_bool & inOperand1,
+                                                                const GALGAS_referenceStateMap & inOperand2,
+                                                                const GALGAS_referenceStateMap & inOperand3,
+                                                                const GALGAS_lstringlist & inOperand4
+                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_scopeStack result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_scopeStack (capCollectionElementArray ()) ;
     capCollectionElement attributes ;
-    GALGAS_valuedObjectStateStack::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
+    GALGAS_scopeStack::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE) ;
     result.appendObject (attributes) ;
   }
   return result ;
@@ -3516,22 +3493,34 @@ GALGAS_valuedObjectStateStack GALGAS_valuedObjectStateStack::constructor_listWit
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_valuedObjectStateStack::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                               const GALGAS_valuedObjectState & in_objectState
-                                                               COMMA_LOCATION_ARGS) {
-  cCollectionElement_valuedObjectStateStack * p = NULL ;
-  macroMyNew (p, cCollectionElement_valuedObjectStateStack (in_objectState COMMA_THERE)) ;
+void GALGAS_scopeStack::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                   const GALGAS_scopeKind & in_mScopeKind,
+                                                   const GALGAS_bool & in_mFirstBranch,
+                                                   const GALGAS_referenceStateMap & in_mInitialStateMap,
+                                                   const GALGAS_referenceStateMap & in_mReferenceStateMap,
+                                                   const GALGAS_lstringlist & in_mObjectList
+                                                   COMMA_LOCATION_ARGS) {
+  cCollectionElement_scopeStack * p = NULL ;
+  macroMyNew (p, cCollectionElement_scopeStack (in_mScopeKind,
+                                                in_mFirstBranch,
+                                                in_mInitialStateMap,
+                                                in_mReferenceStateMap,
+                                                in_mObjectList COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_valuedObjectStateStack::addAssign_operation (const GALGAS_valuedObjectState & inOperand0
-                                                         COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid ()) {
+void GALGAS_scopeStack::addAssign_operation (const GALGAS_scopeKind & inOperand0,
+                                             const GALGAS_bool & inOperand1,
+                                             const GALGAS_referenceStateMap & inOperand2,
+                                             const GALGAS_referenceStateMap & inOperand3,
+                                             const GALGAS_lstringlist & inOperand4
+                                             COMMA_LOCATION_ARGS) {
+  if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_valuedObjectStateStack (inOperand0 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_scopeStack (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3541,13 +3530,17 @@ void GALGAS_valuedObjectStateStack::addAssign_operation (const GALGAS_valuedObje
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_valuedObjectStateStack::setter_insertAtIndex (const GALGAS_valuedObjectState inOperand0,
-                                                          const GALGAS_uint inInsertionIndex,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid ()) {
+void GALGAS_scopeStack::setter_insertAtIndex (const GALGAS_scopeKind inOperand0,
+                                              const GALGAS_bool inOperand1,
+                                              const GALGAS_referenceStateMap inOperand2,
+                                              const GALGAS_referenceStateMap inOperand3,
+                                              const GALGAS_lstringlist inOperand4,
+                                              const GALGAS_uint inInsertionIndex,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
+  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
     cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_valuedObjectStateStack (inOperand0 COMMA_THERE)) ;
+    macroMyNew (p, cCollectionElement_scopeStack (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
     capCollectionElement attributes ;
     attributes.setPointer (p) ;
     macroDetachSharedObject (p) ;
@@ -3557,93 +3550,153 @@ void GALGAS_valuedObjectStateStack::setter_insertAtIndex (const GALGAS_valuedObj
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_valuedObjectStateStack::setter_removeAtIndex (GALGAS_valuedObjectState & outOperand0,
-                                                          const GALGAS_uint inRemoveIndex,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
+void GALGAS_scopeStack::setter_removeAtIndex (GALGAS_scopeKind & outOperand0,
+                                              GALGAS_bool & outOperand1,
+                                              GALGAS_referenceStateMap & outOperand2,
+                                              GALGAS_referenceStateMap & outOperand3,
+                                              GALGAS_lstringlist & outOperand4,
+                                              const GALGAS_uint inRemoveIndex,
+                                              C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) {
   if (isValid () && inRemoveIndex.isValid ()) {
     capCollectionElement attributes ;
     removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_valuedObjectStateStack * p = (cCollectionElement_valuedObjectStateStack *) attributes.ptr () ;
+    cCollectionElement_scopeStack * p = (cCollectionElement_scopeStack *) attributes.ptr () ;
     if (NULL == p) {
       outOperand0.drop () ;
+      outOperand1.drop () ;
+      outOperand2.drop () ;
+      outOperand3.drop () ;
+      outOperand4.drop () ;
     }else{
-      macroValidSharedObject (p, cCollectionElement_valuedObjectStateStack) ;
-      outOperand0 = p->mObject.mProperty_objectState ;
+      macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+      outOperand0 = p->mObject.mProperty_mScopeKind ;
+      outOperand1 = p->mObject.mProperty_mFirstBranch ;
+      outOperand2 = p->mObject.mProperty_mInitialStateMap ;
+      outOperand3 = p->mObject.mProperty_mReferenceStateMap ;
+      outOperand4 = p->mObject.mProperty_mObjectList ;
     }
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_valuedObjectStateStack::setter_popFirst (GALGAS_valuedObjectState & outOperand0,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
+void GALGAS_scopeStack::setter_popFirst (GALGAS_scopeKind & outOperand0,
+                                         GALGAS_bool & outOperand1,
+                                         GALGAS_referenceStateMap & outOperand2,
+                                         GALGAS_referenceStateMap & outOperand3,
+                                         GALGAS_lstringlist & outOperand4,
+                                         C_Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_valuedObjectStateStack * p = (cCollectionElement_valuedObjectStateStack *) attributes.ptr () ;
+  cCollectionElement_scopeStack * p = (cCollectionElement_scopeStack *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_valuedObjectStateStack) ;
-    outOperand0 = p->mObject.mProperty_objectState ;
+    macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+    outOperand0 = p->mObject.mProperty_mScopeKind ;
+    outOperand1 = p->mObject.mProperty_mFirstBranch ;
+    outOperand2 = p->mObject.mProperty_mInitialStateMap ;
+    outOperand3 = p->mObject.mProperty_mReferenceStateMap ;
+    outOperand4 = p->mObject.mProperty_mObjectList ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_valuedObjectStateStack::setter_popLast (GALGAS_valuedObjectState & outOperand0,
-                                                    C_Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
+void GALGAS_scopeStack::setter_popLast (GALGAS_scopeKind & outOperand0,
+                                        GALGAS_bool & outOperand1,
+                                        GALGAS_referenceStateMap & outOperand2,
+                                        GALGAS_referenceStateMap & outOperand3,
+                                        GALGAS_lstringlist & outOperand4,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_valuedObjectStateStack * p = (cCollectionElement_valuedObjectStateStack *) attributes.ptr () ;
+  cCollectionElement_scopeStack * p = (cCollectionElement_scopeStack *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_valuedObjectStateStack) ;
-    outOperand0 = p->mObject.mProperty_objectState ;
+    macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+    outOperand0 = p->mObject.mProperty_mScopeKind ;
+    outOperand1 = p->mObject.mProperty_mFirstBranch ;
+    outOperand2 = p->mObject.mProperty_mInitialStateMap ;
+    outOperand3 = p->mObject.mProperty_mReferenceStateMap ;
+    outOperand4 = p->mObject.mProperty_mObjectList ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_valuedObjectStateStack::method_first (GALGAS_valuedObjectState & outOperand0,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const {
+void GALGAS_scopeStack::method_first (GALGAS_scopeKind & outOperand0,
+                                      GALGAS_bool & outOperand1,
+                                      GALGAS_referenceStateMap & outOperand2,
+                                      GALGAS_referenceStateMap & outOperand3,
+                                      GALGAS_lstringlist & outOperand4,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_valuedObjectStateStack * p = (cCollectionElement_valuedObjectStateStack *) attributes.ptr () ;
+  cCollectionElement_scopeStack * p = (cCollectionElement_scopeStack *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_valuedObjectStateStack) ;
-    outOperand0 = p->mObject.mProperty_objectState ;
+    macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+    outOperand0 = p->mObject.mProperty_mScopeKind ;
+    outOperand1 = p->mObject.mProperty_mFirstBranch ;
+    outOperand2 = p->mObject.mProperty_mInitialStateMap ;
+    outOperand3 = p->mObject.mProperty_mReferenceStateMap ;
+    outOperand4 = p->mObject.mProperty_mObjectList ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_valuedObjectStateStack::method_last (GALGAS_valuedObjectState & outOperand0,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
+void GALGAS_scopeStack::method_last (GALGAS_scopeKind & outOperand0,
+                                     GALGAS_bool & outOperand1,
+                                     GALGAS_referenceStateMap & outOperand2,
+                                     GALGAS_referenceStateMap & outOperand3,
+                                     GALGAS_lstringlist & outOperand4,
+                                     C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_valuedObjectStateStack * p = (cCollectionElement_valuedObjectStateStack *) attributes.ptr () ;
+  cCollectionElement_scopeStack * p = (cCollectionElement_scopeStack *) attributes.ptr () ;
   if (NULL == p) {
     outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+    outOperand3.drop () ;
+    outOperand4.drop () ;
   }else{
-    macroValidSharedObject (p, cCollectionElement_valuedObjectStateStack) ;
-    outOperand0 = p->mObject.mProperty_objectState ;
+    macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+    outOperand0 = p->mObject.mProperty_mScopeKind ;
+    outOperand1 = p->mObject.mProperty_mFirstBranch ;
+    outOperand2 = p->mObject.mProperty_mInitialStateMap ;
+    outOperand3 = p->mObject.mProperty_mReferenceStateMap ;
+    outOperand4 = p->mObject.mProperty_mObjectList ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectStateStack GALGAS_valuedObjectStateStack::add_operation (const GALGAS_valuedObjectStateStack & inOperand,
-                                                                            C_Compiler * /* inCompiler */
-                                                                            COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_valuedObjectStateStack result ;
+GALGAS_scopeStack GALGAS_scopeStack::add_operation (const GALGAS_scopeStack & inOperand,
+                                                    C_Compiler * /* inCompiler */
+                                                    COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_scopeStack result ;
   if (isValid () && inOperand.isValid ()) {
     result = *this ;
     result.appendList (inOperand) ;
@@ -3653,53 +3706,113 @@ GALGAS_valuedObjectStateStack GALGAS_valuedObjectStateStack::add_operation (cons
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectStateStack GALGAS_valuedObjectStateStack::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const {
-  GALGAS_valuedObjectStateStack result = GALGAS_valuedObjectStateStack::constructor_emptyList (THERE) ;
+GALGAS_scopeStack GALGAS_scopeStack::getter_subListWithRange (const GALGAS_range & inRange,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
+  GALGAS_scopeStack result = GALGAS_scopeStack::constructor_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectStateStack GALGAS_valuedObjectStateStack::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const {
-  GALGAS_valuedObjectStateStack result = GALGAS_valuedObjectStateStack::constructor_emptyList (THERE) ;
+GALGAS_scopeStack GALGAS_scopeStack::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
+  GALGAS_scopeStack result = GALGAS_scopeStack::constructor_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectStateStack GALGAS_valuedObjectStateStack::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                                    C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) const {
-  GALGAS_valuedObjectStateStack result = GALGAS_valuedObjectStateStack::constructor_emptyList (THERE) ;
+GALGAS_scopeStack GALGAS_scopeStack::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
+  GALGAS_scopeStack result = GALGAS_scopeStack::constructor_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_valuedObjectStateStack::plusAssign_operation (const GALGAS_valuedObjectStateStack inOperand,
-                                                          C_Compiler * /* inCompiler */
-                                                          COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_scopeStack::plusAssign_operation (const GALGAS_scopeStack inOperand,
+                                              C_Compiler * /* inCompiler */
+                                              COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectState GALGAS_valuedObjectStateStack::getter_objectStateAtIndex (const GALGAS_uint & inIndex,
-                                                                                   C_Compiler * inCompiler
-                                                                                   COMMA_LOCATION_ARGS) const {
+GALGAS_scopeKind GALGAS_scopeStack::getter_mScopeKindAtIndex (const GALGAS_uint & inIndex,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_valuedObjectStateStack * p = (cCollectionElement_valuedObjectStateStack *) attributes.ptr () ;
-  GALGAS_valuedObjectState result ;
+  cCollectionElement_scopeStack * p = (cCollectionElement_scopeStack *) attributes.ptr () ;
+  GALGAS_scopeKind result ;
   if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_valuedObjectStateStack) ;
-    result = p->mObject.mProperty_objectState ;
+    macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+    result = p->mObject.mProperty_mScopeKind ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_scopeStack::getter_mFirstBranchAtIndex (const GALGAS_uint & inIndex,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_scopeStack * p = (cCollectionElement_scopeStack *) attributes.ptr () ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+    result = p->mObject.mProperty_mFirstBranch ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap GALGAS_scopeStack::getter_mInitialStateMapAtIndex (const GALGAS_uint & inIndex,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_scopeStack * p = (cCollectionElement_scopeStack *) attributes.ptr () ;
+  GALGAS_referenceStateMap result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+    result = p->mObject.mProperty_mInitialStateMap ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap GALGAS_scopeStack::getter_mReferenceStateMapAtIndex (const GALGAS_uint & inIndex,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_scopeStack * p = (cCollectionElement_scopeStack *) attributes.ptr () ;
+  GALGAS_referenceStateMap result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+    result = p->mObject.mProperty_mReferenceStateMap ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_scopeStack::getter_mObjectListAtIndex (const GALGAS_uint & inIndex,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_scopeStack * p = (cCollectionElement_scopeStack *) attributes.ptr () ;
+  GALGAS_lstringlist result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+    result = p->mObject.mProperty_mObjectList ;
   }
   return result ;
 }
@@ -3708,27 +3821,59 @@ GALGAS_valuedObjectState GALGAS_valuedObjectStateStack::getter_objectStateAtInde
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumerator_valuedObjectStateStack::cEnumerator_valuedObjectStateStack (const GALGAS_valuedObjectStateStack & inEnumeratedObject,
-                                                                        const typeEnumerationOrder inOrder) :
+cEnumerator_scopeStack::cEnumerator_scopeStack (const GALGAS_scopeStack & inEnumeratedObject,
+                                                const typeEnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectStateStack_2D_element cEnumerator_valuedObjectStateStack::current (LOCATION_ARGS) const {
-  const cCollectionElement_valuedObjectStateStack * p = (const cCollectionElement_valuedObjectStateStack *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_valuedObjectStateStack) ;
+GALGAS_scopeStack_2D_element cEnumerator_scopeStack::current (LOCATION_ARGS) const {
+  const cCollectionElement_scopeStack * p = (const cCollectionElement_scopeStack *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_scopeStack) ;
   return p->mObject ;
 }
 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectState cEnumerator_valuedObjectStateStack::current_objectState (LOCATION_ARGS) const {
-  const cCollectionElement_valuedObjectStateStack * p = (const cCollectionElement_valuedObjectStateStack *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_valuedObjectStateStack) ;
-  return p->mObject.mProperty_objectState ;
+GALGAS_scopeKind cEnumerator_scopeStack::current_mScopeKind (LOCATION_ARGS) const {
+  const cCollectionElement_scopeStack * p = (const cCollectionElement_scopeStack *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+  return p->mObject.mProperty_mScopeKind ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_scopeStack::current_mFirstBranch (LOCATION_ARGS) const {
+  const cCollectionElement_scopeStack * p = (const cCollectionElement_scopeStack *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+  return p->mObject.mProperty_mFirstBranch ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap cEnumerator_scopeStack::current_mInitialStateMap (LOCATION_ARGS) const {
+  const cCollectionElement_scopeStack * p = (const cCollectionElement_scopeStack *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+  return p->mObject.mProperty_mInitialStateMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap cEnumerator_scopeStack::current_mReferenceStateMap (LOCATION_ARGS) const {
+  const cCollectionElement_scopeStack * p = (const cCollectionElement_scopeStack *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+  return p->mObject.mProperty_mReferenceStateMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist cEnumerator_scopeStack::current_mObjectList (LOCATION_ARGS) const {
+  const cCollectionElement_scopeStack * p = (const cCollectionElement_scopeStack *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_scopeStack) ;
+  return p->mObject.mProperty_mObjectList ;
 }
 
 
@@ -3736,42 +3881,409 @@ GALGAS_valuedObjectState cEnumerator_valuedObjectStateStack::current_objectState
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                            @valuedObjectStateStack type                                             *
+//                                                  @scopeStack type                                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_valuedObjectStateStack ("valuedObjectStateStack",
-                                               NULL) ;
+kTypeDescriptor_GALGAS_scopeStack ("scopeStack",
+                                   NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_valuedObjectStateStack::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_valuedObjectStateStack ;
+const C_galgas_type_descriptor * GALGAS_scopeStack::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_scopeStack ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_valuedObjectStateStack::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_scopeStack::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_valuedObjectStateStack (*this)) ;
+    macroMyNew (result, GALGAS_scopeStack (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_valuedObjectStateStack GALGAS_valuedObjectStateStack::extractObject (const GALGAS_object & inObject,
-                                                                            C_Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_valuedObjectStateStack result ;
-  const GALGAS_valuedObjectStateStack * p = (const GALGAS_valuedObjectStateStack *) inObject.embeddedObject () ;
+GALGAS_scopeStack GALGAS_scopeStack::extractObject (const GALGAS_object & inObject,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_scopeStack result ;
+  const GALGAS_scopeStack * p = (const GALGAS_scopeStack *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_valuedObjectStateStack *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_scopeStack *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("valuedObjectStateStack", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("scopeStack", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_scopeKind::GALGAS_scopeKind (void) :
+mEnum (kNotBuilt) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_scopeKind GALGAS_scopeKind::constructor_selectScope (UNUSED_LOCATION_ARGS) {
+  GALGAS_scopeKind result ;
+  result.mEnum = kEnum_selectScope ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_scopeKind GALGAS_scopeKind::constructor_repeatScope (UNUSED_LOCATION_ARGS) {
+  GALGAS_scopeKind result ;
+  result.mEnum = kEnum_repeatScope ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gEnumNameArrayFor_scopeKind [3] = {
+  "(not built)",
+  "selectScope",
+  "repeatScope"
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_scopeKind::getter_isSelectScope (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_selectScope == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_scopeKind::getter_isRepeatScope (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_repeatScope == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_scopeKind::description (C_String & ioString,
+                                    const int32_t /* inIndentation */) const {
+  ioString << "<enum @scopeKind: " << gEnumNameArrayFor_scopeKind [mEnum] ;
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_scopeKind::objectCompare (const GALGAS_scopeKind & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                   @scopeKind type                                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_scopeKind ("scopeKind",
+                                  NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_scopeKind::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_scopeKind ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_scopeKind::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_scopeKind (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_scopeKind GALGAS_scopeKind::extractObject (const GALGAS_object & inObject,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_scopeKind result ;
+  const GALGAS_scopeKind * p = (const GALGAS_scopeKind *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_scopeKind *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("scopeKind", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_referenceStateMap::cMapElement_referenceStateMap (const GALGAS_lstring & inKey,
+                                                              const GALGAS_valuedObjectState & in_mState
+                                                              COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mProperty_mState (in_mState) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_referenceStateMap::isValid (void) const {
+  return mProperty_lkey.isValid () && mProperty_mState.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_referenceStateMap::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_referenceStateMap (mProperty_lkey, mProperty_mState COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_referenceStateMap::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mState" ":" ;
+  mProperty_mState.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_referenceStateMap::compare (const cCollectionElement * inOperand) const {
+  cMapElement_referenceStateMap * operand = (cMapElement_referenceStateMap *) inOperand ;
+  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mState.objectCompare (operand->mProperty_mState) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap::GALGAS_referenceStateMap (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap::GALGAS_referenceStateMap (const GALGAS_referenceStateMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap & GALGAS_referenceStateMap::operator = (const GALGAS_referenceStateMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap GALGAS_referenceStateMap::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_referenceStateMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap GALGAS_referenceStateMap::constructor_mapWithMapToOverride (const GALGAS_referenceStateMap & inMapToOverride
+                                                                                     COMMA_LOCATION_ARGS) {
+  GALGAS_referenceStateMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap GALGAS_referenceStateMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  GALGAS_referenceStateMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_referenceStateMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                    const GALGAS_valuedObjectState & inArgument0,
+                                                    C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) {
+  cMapElement_referenceStateMap * p = NULL ;
+  macroMyNew (p, cMapElement_referenceStateMap (inKey, inArgument0 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@referenceStateMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_referenceStateMap::setter_insertKey (GALGAS_lstring inKey,
+                                                 GALGAS_valuedObjectState inArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_referenceStateMap * p = NULL ;
+  macroMyNew (p, cMapElement_referenceStateMap (inKey, inArgument0 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "INTERNAL ERROR" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_referenceStateMap_searchKey = "INTERNAL ERROR" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_referenceStateMap::method_searchKey (GALGAS_lstring inKey,
+                                                 GALGAS_valuedObjectState & outArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
+  const cMapElement_referenceStateMap * p = (const cMapElement_referenceStateMap *) performSearch (inKey,
+                                                                                                   inCompiler,
+                                                                                                   kSearchErrorMessage_referenceStateMap_searchKey
+                                                                                                   COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_referenceStateMap) ;
+    outArgument0 = p->mProperty_mState ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valuedObjectState GALGAS_referenceStateMap::getter_mStateForKey (const GALGAS_string & inKey,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_referenceStateMap * p = (const cMapElement_referenceStateMap *) attributes ;
+  GALGAS_valuedObjectState result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_referenceStateMap) ;
+    result = p->mProperty_mState ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_referenceStateMap::setter_setMStateForKey (GALGAS_valuedObjectState inAttributeValue,
+                                                       GALGAS_string inKey,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_referenceStateMap * p = (cMapElement_referenceStateMap *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_referenceStateMap) ;
+    p->mProperty_mState = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_referenceStateMap * GALGAS_referenceStateMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                             const GALGAS_string & inKey
+                                                                                             COMMA_LOCATION_ARGS) {
+  cMapElement_referenceStateMap * result = (cMapElement_referenceStateMap *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_referenceStateMap) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_referenceStateMap::cEnumerator_referenceStateMap (const GALGAS_referenceStateMap & inEnumeratedObject,
+                                                              const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap_2D_element cEnumerator_referenceStateMap::current (LOCATION_ARGS) const {
+  const cMapElement_referenceStateMap * p = (const cMapElement_referenceStateMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_referenceStateMap) ;
+  return GALGAS_referenceStateMap_2D_element (p->mProperty_lkey, p->mProperty_mState) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_referenceStateMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mProperty_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_valuedObjectState cEnumerator_referenceStateMap::current_mState (LOCATION_ARGS) const {
+  const cMapElement_referenceStateMap * p = (const cMapElement_referenceStateMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_referenceStateMap) ;
+  return p->mProperty_mState ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                               @referenceStateMap type                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_referenceStateMap ("referenceStateMap",
+                                          NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_referenceStateMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_referenceStateMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_referenceStateMap::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_referenceStateMap (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_referenceStateMap GALGAS_referenceStateMap::extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_referenceStateMap result ;
+  const GALGAS_referenceStateMap * p = (const GALGAS_referenceStateMap *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_referenceStateMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("referenceStateMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -4209,6 +4721,43 @@ GALGAS_routineSignatureMapForContext GALGAS_routineSignatureMapForContext::extra
   }
   return result ;
 }
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                    Extension Getter '@valuedObjectState string'                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string extensionGetter_string (const GALGAS_valuedObjectState & inObject,
+                                      C_Compiler * /* inCompiler */
+                                      COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  const GALGAS_valuedObjectState temp_0 = inObject ;
+  switch (temp_0.enumValue ()) {
+  case GALGAS_valuedObjectState::kNotBuilt:
+    break ;
+  case GALGAS_valuedObjectState::kEnum_noValue:
+    {
+      result_result = GALGAS_string ("no value") ;
+    }
+    break ;
+  case GALGAS_valuedObjectState::kEnum_hasUnreadValue:
+    {
+      result_result = GALGAS_string ("unread value") ;
+    }
+    break ;
+  case GALGAS_valuedObjectState::kEnum_hasReadValue:
+    {
+      result_result = GALGAS_string ("read value") ;
+    }
+    break ;
+  }
+//---
+  return result_result ;
+}
+
+
+
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -12994,524 +13543,6 @@ GALGAS_bootListIR_2D_element GALGAS_bootListIR_2D_element::extractObject (const 
       result = *p ;
     }else{
       inCompiler->castError ("bootListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST_2D_element::GALGAS_instructionListAST_2D_element (void) :
-mProperty_mInstructionLocation (),
-mProperty_mInstruction () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST_2D_element::~ GALGAS_instructionListAST_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST_2D_element::GALGAS_instructionListAST_2D_element (const GALGAS_location & inOperand0,
-                                                                            const GALGAS_instructionAST & inOperand1) :
-mProperty_mInstructionLocation (inOperand0),
-mProperty_mInstruction (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST_2D_element GALGAS_instructionListAST_2D_element::constructor_new (const GALGAS_location & inOperand0,
-                                                                                            const GALGAS_instructionAST & inOperand1 
-                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_instructionListAST_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_instructionListAST_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_instructionListAST_2D_element::objectCompare (const GALGAS_instructionListAST_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mInstructionLocation.objectCompare (inOperand.mProperty_mInstructionLocation) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mInstruction.objectCompare (inOperand.mProperty_mInstruction) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_instructionListAST_2D_element::isValid (void) const {
-  return mProperty_mInstructionLocation.isValid () && mProperty_mInstruction.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_instructionListAST_2D_element::drop (void) {
-  mProperty_mInstructionLocation.drop () ;
-  mProperty_mInstruction.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_instructionListAST_2D_element::description (C_String & ioString,
-                                                        const int32_t inIndentation) const {
-  ioString << "<struct @instructionListAST-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mInstructionLocation.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mInstruction.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_instructionListAST_2D_element::getter_mInstructionLocation (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInstructionLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionAST GALGAS_instructionListAST_2D_element::getter_mInstruction (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mInstruction ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                          @instructionListAST-element type                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_instructionListAST_2D_element ("instructionListAST-element",
-                                                      NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_instructionListAST_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_instructionListAST_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_instructionListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_instructionListAST_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST_2D_element GALGAS_instructionListAST_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                          C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_instructionListAST_2D_element result ;
-  const GALGAS_instructionListAST_2D_element * p = (const GALGAS_instructionListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_instructionListAST_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("instructionListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList_2D_element::GALGAS_switchCaseList_2D_element (void) :
-mProperty_mCaseIdentifiers (),
-mProperty_mCaseInstructionList () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList_2D_element::~ GALGAS_switchCaseList_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList_2D_element::GALGAS_switchCaseList_2D_element (const GALGAS_lstringlist & inOperand0,
-                                                                    const GALGAS_instructionListAST & inOperand1) :
-mProperty_mCaseIdentifiers (inOperand0),
-mProperty_mCaseInstructionList (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList_2D_element GALGAS_switchCaseList_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_switchCaseList_2D_element (GALGAS_lstringlist::constructor_emptyList (HERE),
-                                           GALGAS_instructionListAST::constructor_emptyList (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList_2D_element GALGAS_switchCaseList_2D_element::constructor_new (const GALGAS_lstringlist & inOperand0,
-                                                                                    const GALGAS_instructionListAST & inOperand1 
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_switchCaseList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_switchCaseList_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_switchCaseList_2D_element::objectCompare (const GALGAS_switchCaseList_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mCaseIdentifiers.objectCompare (inOperand.mProperty_mCaseIdentifiers) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mCaseInstructionList.objectCompare (inOperand.mProperty_mCaseInstructionList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_switchCaseList_2D_element::isValid (void) const {
-  return mProperty_mCaseIdentifiers.isValid () && mProperty_mCaseInstructionList.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList_2D_element::drop (void) {
-  mProperty_mCaseIdentifiers.drop () ;
-  mProperty_mCaseInstructionList.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList_2D_element::description (C_String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString << "<struct @switchCaseList-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mCaseIdentifiers.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mCaseInstructionList.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_switchCaseList_2D_element::getter_mCaseIdentifiers (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mCaseIdentifiers ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST GALGAS_switchCaseList_2D_element::getter_mCaseInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mCaseInstructionList ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                            @switchCaseList-element type                                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_switchCaseList_2D_element ("switchCaseList-element",
-                                                  NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_switchCaseList_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_switchCaseList_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_switchCaseList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_switchCaseList_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList_2D_element GALGAS_switchCaseList_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                  C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_switchCaseList_2D_element result ;
-  const GALGAS_switchCaseList_2D_element * p = (const GALGAS_switchCaseList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_switchCaseList_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("switchCaseList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseListIR_2D_element::GALGAS_switchCaseListIR_2D_element (void) :
-mProperty_mCaseIdentifierIndexes (),
-mProperty_mCaseInstructionList () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseListIR_2D_element::~ GALGAS_switchCaseListIR_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseListIR_2D_element::GALGAS_switchCaseListIR_2D_element (const GALGAS_uintlist & inOperand0,
-                                                                        const GALGAS_instructionListIR & inOperand1) :
-mProperty_mCaseIdentifierIndexes (inOperand0),
-mProperty_mCaseInstructionList (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseListIR_2D_element GALGAS_switchCaseListIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
-  return GALGAS_switchCaseListIR_2D_element (GALGAS_uintlist::constructor_emptyList (HERE),
-                                             GALGAS_instructionListIR::constructor_emptyList (HERE)) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseListIR_2D_element GALGAS_switchCaseListIR_2D_element::constructor_new (const GALGAS_uintlist & inOperand0,
-                                                                                        const GALGAS_instructionListIR & inOperand1 
-                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_switchCaseListIR_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_switchCaseListIR_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_switchCaseListIR_2D_element::objectCompare (const GALGAS_switchCaseListIR_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mCaseIdentifierIndexes.objectCompare (inOperand.mProperty_mCaseIdentifierIndexes) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mCaseInstructionList.objectCompare (inOperand.mProperty_mCaseInstructionList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_switchCaseListIR_2D_element::isValid (void) const {
-  return mProperty_mCaseIdentifierIndexes.isValid () && mProperty_mCaseInstructionList.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseListIR_2D_element::drop (void) {
-  mProperty_mCaseIdentifierIndexes.drop () ;
-  mProperty_mCaseInstructionList.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseListIR_2D_element::description (C_String & ioString,
-                                                      const int32_t inIndentation) const {
-  ioString << "<struct @switchCaseListIR-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mCaseIdentifierIndexes.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mCaseInstructionList.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_uintlist GALGAS_switchCaseListIR_2D_element::getter_mCaseIdentifierIndexes (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mCaseIdentifierIndexes ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_switchCaseListIR_2D_element::getter_mCaseInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mCaseInstructionList ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @switchCaseListIR-element type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_switchCaseListIR_2D_element ("switchCaseListIR-element",
-                                                    NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_switchCaseListIR_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_switchCaseListIR_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_switchCaseListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_switchCaseListIR_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseListIR_2D_element GALGAS_switchCaseListIR_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_switchCaseListIR_2D_element result ;
-  const GALGAS_switchCaseListIR_2D_element * p = (const GALGAS_switchCaseListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_switchCaseListIR_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("switchCaseListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valuedObjectStateStack_2D_element::GALGAS_valuedObjectStateStack_2D_element (void) :
-mProperty_objectState () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valuedObjectStateStack_2D_element::~ GALGAS_valuedObjectStateStack_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valuedObjectStateStack_2D_element::GALGAS_valuedObjectStateStack_2D_element (const GALGAS_valuedObjectState & inOperand0) :
-mProperty_objectState (inOperand0) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valuedObjectStateStack_2D_element GALGAS_valuedObjectStateStack_2D_element::constructor_new (const GALGAS_valuedObjectState & inOperand0 
-                                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_valuedObjectStateStack_2D_element result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_valuedObjectStateStack_2D_element (inOperand0) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_valuedObjectStateStack_2D_element::objectCompare (const GALGAS_valuedObjectStateStack_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_objectState.objectCompare (inOperand.mProperty_objectState) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_valuedObjectStateStack_2D_element::isValid (void) const {
-  return mProperty_objectState.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_valuedObjectStateStack_2D_element::drop (void) {
-  mProperty_objectState.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_valuedObjectStateStack_2D_element::description (C_String & ioString,
-                                                            const int32_t inIndentation) const {
-  ioString << "<struct @valuedObjectStateStack-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_objectState.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valuedObjectState GALGAS_valuedObjectStateStack_2D_element::getter_objectState (UNUSED_LOCATION_ARGS) const {
-  return mProperty_objectState ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        @valuedObjectStateStack-element type                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_valuedObjectStateStack_2D_element ("valuedObjectStateStack-element",
-                                                          NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_valuedObjectStateStack_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_valuedObjectStateStack_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_valuedObjectStateStack_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_valuedObjectStateStack_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_valuedObjectStateStack_2D_element GALGAS_valuedObjectStateStack_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                                  C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_valuedObjectStateStack_2D_element result ;
-  const GALGAS_valuedObjectStateStack_2D_element * p = (const GALGAS_valuedObjectStateStack_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_valuedObjectStateStack_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("valuedObjectStateStack-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

@@ -10,6 +10,508 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+#include "utilities/MF_MemoryControl.h"
+#include "galgas2/C_galgas_CLI_Options.h"
+
+#include "files/C_FileManager.h"
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                                       N O N    T E R M I N A L    N A M E S                                          
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const char * gNonTerminalNames_plm_target_grammar [8] = {
+  "<configuration>",// Index 0
+  "<import_file>",// Index 1
+  "<configuration_start_symbol>",// Index 2
+  "<interruptConfigList>",// Index 3
+  "<select_plm_5F_target_5F_specific_5F_syntax_0>",// Index 4
+  "<select_plm_5F_target_5F_specific_5F_syntax_1>",// Index 5
+  "<select_plm_5F_target_5F_specific_5F_syntax_2>",// Index 6
+  "<>"// Index 7
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                                S L R    A N A L Y Z E R    A C T I O N    T A B L E                                  
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+// Action tables handle shift and reduce actions ;
+//  - a shift action is (terminal_symbol, SHIFT (n)) : if shifts to state n ;
+//  - the accept action is (terminal_symbol, ACCEPT) ;
+//  - a reduce action is (terminal_symbol, REDUCE (n)) ; if reduces to state n.
+
+#define SHIFT(a) ((a) + 2)
+#define REDUCE(a) (-(a) - 1)
+#define ACCEPT (1)
+#define END (-1)
+
+static const int16_t gActionTable_plm_target_grammar [] = {
+// State S0 (index = 0)
+  C_Lexique_plm_5F_lexique::kToken_configuration, SHIFT (1)
+, END
+// State S1 (index = 3)
+, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (4)
+, END
+// State S2 (index = 6)
+, C_Lexique_plm_5F_lexique::kToken_import, SHIFT (5)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (4)
+, END
+// State S3 (index = 11)
+, C_Lexique_plm_5F_lexique::kToken_, ACCEPT
+, END
+// State S4 (index = 14)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (8)
+, END
+// State S5 (index = 17)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (9)
+, END
+// State S6 (index = 20)
+, C_Lexique_plm_5F_lexique::kToken_import, SHIFT (5)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (4)
+, END
+// State S7 (index = 25)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (1)
+, END
+// State S8 (index = 28)
+, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (11)
+, END
+// State S9 (index = 31)
+, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (0)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (0)
+, END
+// State S10 (index = 36)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (5)
+, END
+// State S11 (index = 39)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (12)
+, END
+// State S12 (index = 42)
+, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (13)
+, END
+// State S13 (index = 45)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (14)
+, END
+// State S14 (index = 48)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (15)
+, END
+// State S15 (index = 51)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (16)
+, END
+// State S16 (index = 54)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (17)
+, END
+// State S17 (index = 57)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (18)
+, END
+// State S18 (index = 60)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (19)
+, END
+// State S19 (index = 63)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (20)
+, END
+// State S20 (index = 66)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (21)
+, END
+// State S21 (index = 69)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (22)
+, END
+// State S22 (index = 72)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (23)
+, END
+// State S23 (index = 75)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (24)
+, END
+// State S24 (index = 78)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (25)
+, END
+// State S25 (index = 81)
+, C_Lexique_plm_5F_lexique::kToken__7B_, SHIFT (26)
+, END
+// State S26 (index = 84)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (28)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (6)
+, END
+// State S27 (index = 89)
+, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (3)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (3)
+, END
+// State S28 (index = 94)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (8)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (30)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (8)
+, END
+// State S29 (index = 101)
+, C_Lexique_plm_5F_lexique::kToken__7D_, SHIFT (32)
+, END
+// State S30 (index = 104)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (33)
+, END
+// State S31 (index = 107)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (28)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (6)
+, END
+// State S32 (index = 112)
+, C_Lexique_plm_5F_lexique::kToken_import, REDUCE (2)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (2)
+, END
+// State S33 (index = 117)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (9)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (9)
+, END
+// State S34 (index = 122)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (7)
+, END} ;
+
+static const uint32_t gActionTableIndex_plm_target_grammar [35] = {
+  0  // S0
+, 3  // S1
+, 6  // S2
+, 11  // S3
+, 14  // S4
+, 17  // S5
+, 20  // S6
+, 25  // S7
+, 28  // S8
+, 31  // S9
+, 36  // S10
+, 39  // S11
+, 42  // S12
+, 45  // S13
+, 48  // S14
+, 51  // S15
+, 54  // S16
+, 57  // S17
+, 60  // S18
+, 63  // S19
+, 66  // S20
+, 69  // S21
+, 72  // S22
+, 75  // S23
+, 78  // S24
+, 81  // S25
+, 84  // S26
+, 89  // S27
+, 94  // S28
+, 101  // S29
+, 104  // S30
+, 107  // S31
+, 112  // S32
+, 117  // S33
+, 122  // S34
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                                            SLR states successors table                                               
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+// Successor tables handle non terminal successors ;
+// an entry is (non_terminal_symbol, n) ; successor is state n.
+
+static const int16_t gSuccessorTable_plm_target_grammar_0 [5] = {0, 2,
+  2, 3, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_2 [5] = {1, 6,
+  4, 7, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_6 [5] = {1, 6,
+  4, 10, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_25 [3] = {3, 27, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_26 [3] = {5, 29, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_28 [3] = {6, 31, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_31 [3] = {5, 34, -1} ;
+
+static const int16_t * gSuccessorTable_plm_target_grammar [35] = {
+gSuccessorTable_plm_target_grammar_0, NULL, gSuccessorTable_plm_target_grammar_2, NULL, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_6, NULL, 
+  NULL, NULL, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
+  NULL, NULL, NULL, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_25, gSuccessorTable_plm_target_grammar_26, NULL, 
+  gSuccessorTable_plm_target_grammar_28, NULL, NULL, gSuccessorTable_plm_target_grammar_31, 
+  NULL, NULL, NULL} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                          Production rules infos (left non terminal, size of right string)                            
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+static const int16_t gProductionsTable_plm_target_grammar [11 * 2] = {
+  1, 2,
+  2, 2,
+  3, 3,
+  0, 19,
+  4, 0,
+  4, 2,
+  5, 0,
+  5, 3,
+  6, 0,
+  6, 2,
+  7, 1
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                                    'configuration' non terminal implementation                                       
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cGrammar_plm_5F_target_5F_grammar::nt_configuration_parse (C_Lexique_plm_5F_lexique * inLexique) {
+  switch (inLexique->nextProductionIndex ()) {
+  case 3 :
+      rule_plm_5F_target_5F_specific_5F_syntax_configuration_i3_parse(inLexique) ;
+    break ;
+  default :
+    inLexique->internalBottomUpParserError (HERE) ;
+    break ;
+  }
+}
+
+void cGrammar_plm_5F_target_5F_grammar::nt_configuration_ (GALGAS_ast &  parameter_1,
+                                C_Lexique_plm_5F_lexique * inLexique) {
+  switch (inLexique->nextProductionIndex ()) {
+  case 3 :
+      rule_plm_5F_target_5F_specific_5F_syntax_configuration_i3_(parameter_1, inLexique) ;
+    break ;
+  default :
+    inLexique->internalBottomUpParserError (HERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                                     'import_file' non terminal implementation                                        
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cGrammar_plm_5F_target_5F_grammar::nt_import_5F_file_parse (C_Lexique_plm_5F_lexique * inLexique) {
+  switch (inLexique->nextProductionIndex ()) {
+  case 0 :
+      rule_plm_5F_target_5F_specific_5F_syntax_import_5F_file_i0_parse(inLexique) ;
+    break ;
+  default :
+    inLexique->internalBottomUpParserError (HERE) ;
+    break ;
+  }
+}
+
+void cGrammar_plm_5F_target_5F_grammar::nt_import_5F_file_ (GALGAS_lstringlist &  parameter_1,
+                                C_Lexique_plm_5F_lexique * inLexique) {
+  switch (inLexique->nextProductionIndex ()) {
+  case 0 :
+      rule_plm_5F_target_5F_specific_5F_syntax_import_5F_file_i0_(parameter_1, inLexique) ;
+    break ;
+  default :
+    inLexique->internalBottomUpParserError (HERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                              'configuration_start_symbol' non terminal implementation                                
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cGrammar_plm_5F_target_5F_grammar::nt_configuration_5F_start_5F_symbol_parse (C_Lexique_plm_5F_lexique * inLexique) {
+  switch (inLexique->nextProductionIndex ()) {
+  case 1 :
+      rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i1_parse(inLexique) ;
+    break ;
+  default :
+    inLexique->internalBottomUpParserError (HERE) ;
+    break ;
+  }
+}
+
+void cGrammar_plm_5F_target_5F_grammar::nt_configuration_5F_start_5F_symbol_ (GALGAS_ast &  parameter_1,
+                                GALGAS_lstringlist &  parameter_2,
+                                GALGAS_location &  parameter_3,
+                                C_Lexique_plm_5F_lexique * inLexique) {
+  switch (inLexique->nextProductionIndex ()) {
+  case 1 :
+      rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i1_(parameter_1, parameter_2, parameter_3, inLexique) ;
+    break ;
+  default :
+    inLexique->internalBottomUpParserError (HERE) ;
+  }
+}
+
+void cGrammar_plm_5F_target_5F_grammar::performIndexing (C_Compiler * /* inCompiler */,
+             const C_String & /* inSourceFilePath */) {
+}
+
+void cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (C_Compiler * inCompiler,
+             const C_String & inSourceFilePath) {
+  C_Lexique_plm_5F_lexique * scanner = NULL ;
+  macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, inSourceFilePath COMMA_HERE)) ;
+  if (scanner->sourceText ().isValid ()) {
+    scanner->performLexicalAnalysis () ;
+  }
+  macroDetachSharedObject (scanner) ;
+}
+
+void cGrammar_plm_5F_target_5F_grammar::performOnlySyntaxAnalysis (C_Compiler * inCompiler,
+             const C_String & inSourceFilePath) {
+  C_Lexique_plm_5F_lexique * scanner = NULL ;
+  macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, inSourceFilePath COMMA_HERE)) ;
+  if (scanner->sourceText ().isValid ()) {
+    scanner->performBottomUpParsing (gActionTable_plm_target_grammar, gNonTerminalNames_plm_target_grammar,
+                                     gActionTableIndex_plm_target_grammar, gSuccessorTable_plm_target_grammar,
+                                     gProductionsTable_plm_target_grammar) ;
+  }
+  macroDetachSharedObject (scanner) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                                        Grammar start symbol implementation                                           
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cGrammar_plm_5F_target_5F_grammar::_performSourceFileParsing_ (C_Compiler * inCompiler,
+                                GALGAS_lstring inFilePath,
+                                GALGAS_ast &  parameter_1,
+                                GALGAS_lstringlist &  parameter_2,
+                                GALGAS_location &  parameter_3
+                                COMMA_LOCATION_ARGS) {
+  if (inFilePath.isValid ()) {
+    const GALGAS_string filePathAsString = inFilePath.getter_string (HERE) ;
+    C_String filePath = filePathAsString.stringValue () ;
+    if (! C_FileManager::isAbsolutePath (filePath)) {
+      filePath = inCompiler->sourceFilePath ().stringByDeletingLastPathComponent ().stringByAppendingPathComponent (filePath) ;
+    }
+    if (C_FileManager::fileExistsAtPath (filePath)) {
+      C_Lexique_plm_5F_lexique * scanner = NULL ;
+      macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, filePath COMMA_HERE)) ;
+      if (scanner->sourceText ().isValid ()) {
+        const bool ok = scanner->performBottomUpParsing (gActionTable_plm_target_grammar, gNonTerminalNames_plm_target_grammar,
+                                                         gActionTableIndex_plm_target_grammar, gSuccessorTable_plm_target_grammar,
+                                                         gProductionsTable_plm_target_grammar) ;
+        if (ok && ! executionModeIsSyntaxAnalysisOnly ()) {
+          cGrammar_plm_5F_target_5F_grammar grammar ;
+          grammar.nt_configuration_5F_start_5F_symbol_ (parameter_1, parameter_2, parameter_3, scanner) ;
+        }
+      }else{
+        C_String message ;
+        message << "the '" << filePath << "' file exists, but cannot be read" ;
+        const GALGAS_location errorLocation (inFilePath.getter_location (THERE)) ;
+        inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <C_FixItDescription> () COMMA_THERE) ;
+      }
+      macroDetachSharedObject (scanner) ;
+    }else{
+      C_String message ;
+      message << "the '" << filePath << "' file does not exist" ;
+      const GALGAS_location errorLocation (inFilePath.getter_location (THERE)) ;
+      inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <C_FixItDescription> () COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cGrammar_plm_5F_target_5F_grammar::_performSourceStringParsing_ (C_Compiler * inCompiler,
+                                GALGAS_string inSourceString,
+                                GALGAS_string inNameString,
+                                GALGAS_ast &  parameter_1,
+                                GALGAS_lstringlist &  parameter_2,
+                                GALGAS_location &  parameter_3
+                                COMMA_UNUSED_LOCATION_ARGS) {
+  if (inSourceString.isValid () && inNameString.isValid ()) {
+    const C_String sourceString = inSourceString.stringValue () ;
+    const C_String nameString = inNameString.stringValue () ;
+    C_Lexique_plm_5F_lexique * scanner = NULL ;
+    macroMyNew (scanner, C_Lexique_plm_5F_lexique (inCompiler, sourceString, nameString COMMA_HERE)) ;
+    if (scanner->sourceText ().isValid ()) {
+      const bool ok = scanner->performBottomUpParsing (gActionTable_plm_target_grammar, gNonTerminalNames_plm_target_grammar,
+                                                       gActionTableIndex_plm_target_grammar, gSuccessorTable_plm_target_grammar,
+                                                       gProductionsTable_plm_target_grammar) ;
+      if (ok && ! executionModeIsSyntaxAnalysisOnly ()) {
+        cGrammar_plm_5F_target_5F_grammar grammar ;
+        grammar.nt_configuration_5F_start_5F_symbol_ (parameter_1, parameter_2, parameter_3, scanner) ;
+      }
+    }
+    macroDetachSharedObject (scanner) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                                 'interruptConfigList' non terminal implementation                                    
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cGrammar_plm_5F_target_5F_grammar::nt_interruptConfigList_parse (C_Lexique_plm_5F_lexique * inLexique) {
+  switch (inLexique->nextProductionIndex ()) {
+  case 2 :
+      rule_plm_5F_target_5F_specific_5F_syntax_interruptConfigList_i2_parse(inLexique) ;
+    break ;
+  default :
+    inLexique->internalBottomUpParserError (HERE) ;
+    break ;
+  }
+}
+
+void cGrammar_plm_5F_target_5F_grammar::nt_interruptConfigList_ (GALGAS_interruptionConfigurationList &  parameter_1,
+                                C_Lexique_plm_5F_lexique * inLexique) {
+  switch (inLexique->nextProductionIndex ()) {
+  case 2 :
+      rule_plm_5F_target_5F_specific_5F_syntax_interruptConfigList_i2_(parameter_1, inLexique) ;
+    break ;
+  default :
+    inLexique->internalBottomUpParserError (HERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                     'select_plm_5F_target_5F_specific_5F_syntax_0' non terminal implementation                       
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+int32_t cGrammar_plm_5F_target_5F_grammar::select_plm_5F_target_5F_specific_5F_syntax_0 (C_Lexique_plm_5F_lexique * inLexique) {
+// Productions numbers : 4 5
+  return inLexique->nextProductionIndex () - 3 ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                     'select_plm_5F_target_5F_specific_5F_syntax_1' non terminal implementation                       
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+int32_t cGrammar_plm_5F_target_5F_grammar::select_plm_5F_target_5F_specific_5F_syntax_1 (C_Lexique_plm_5F_lexique * inLexique) {
+// Productions numbers : 6 7
+  return inLexique->nextProductionIndex () - 5 ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                     'select_plm_5F_target_5F_specific_5F_syntax_2' non terminal implementation                       
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+int32_t cGrammar_plm_5F_target_5F_grammar::select_plm_5F_target_5F_specific_5F_syntax_2 (C_Lexique_plm_5F_lexique * inLexique) {
+// Productions numbers : 8 9
+  return inLexique->nextProductionIndex () - 7 ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_targetParameters::GALGAS_targetParameters (void) :
 mProperty_mPointerSize (),
 mProperty_mSystemStackSize (),
@@ -14375,286 +14877,6 @@ GALGAS_forInstructionOnArrayIR GALGAS_forInstructionOnArrayIR::extractObject (co
       result = *p ;
     }else{
       inCompiler->castError ("forInstructionOnArrayIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_forInstructionOnStringIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mVarName.objectCompare (p->mProperty_mVarName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mLocation.objectCompare (p->mProperty_mLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mIteratedObject.objectCompare (p->mProperty_mIteratedObject) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mWhileInstructionList.objectCompare (p->mProperty_mWhileInstructionList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mWhileExpressionResult.objectCompare (p->mProperty_mWhileExpressionResult) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mDoInstructionList.objectCompare (p->mProperty_mDoInstructionList) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_forInstructionOnStringIR::objectCompare (const GALGAS_forInstructionOnStringIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forInstructionOnStringIR::GALGAS_forInstructionOnStringIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forInstructionOnStringIR::GALGAS_forInstructionOnStringIR (const cPtr_forInstructionOnStringIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_forInstructionOnStringIR) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forInstructionOnStringIR GALGAS_forInstructionOnStringIR::constructor_new (const GALGAS_string & inAttribute_mVarName,
-                                                                                  const GALGAS_location & inAttribute_mLocation,
-                                                                                  const GALGAS_objectIR & inAttribute_mIteratedObject,
-                                                                                  const GALGAS_instructionListIR & inAttribute_mWhileInstructionList,
-                                                                                  const GALGAS_objectIR & inAttribute_mWhileExpressionResult,
-                                                                                  const GALGAS_instructionListIR & inAttribute_mDoInstructionList
-                                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_forInstructionOnStringIR result ;
-  if (inAttribute_mVarName.isValid () && inAttribute_mLocation.isValid () && inAttribute_mIteratedObject.isValid () && inAttribute_mWhileInstructionList.isValid () && inAttribute_mWhileExpressionResult.isValid () && inAttribute_mDoInstructionList.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_forInstructionOnStringIR (inAttribute_mVarName, inAttribute_mLocation, inAttribute_mIteratedObject, inAttribute_mWhileInstructionList, inAttribute_mWhileExpressionResult, inAttribute_mDoInstructionList COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_forInstructionOnStringIR::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mProperty_mVarName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string cPtr_forInstructionOnStringIR::getter_mVarName (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mVarName ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location GALGAS_forInstructionOnStringIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_location result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mProperty_mLocation ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_location cPtr_forInstructionOnStringIR::getter_mLocation (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mLocation ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_forInstructionOnStringIR::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
-  GALGAS_objectIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mProperty_mIteratedObject ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR cPtr_forInstructionOnStringIR::getter_mIteratedObject (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mIteratedObject ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_forInstructionOnStringIR::getter_mWhileInstructionList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_instructionListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mProperty_mWhileInstructionList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR cPtr_forInstructionOnStringIR::getter_mWhileInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mWhileInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_forInstructionOnStringIR::getter_mWhileExpressionResult (UNUSED_LOCATION_ARGS) const {
-  GALGAS_objectIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mProperty_mWhileExpressionResult ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR cPtr_forInstructionOnStringIR::getter_mWhileExpressionResult (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mWhileExpressionResult ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR GALGAS_forInstructionOnStringIR::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
-  GALGAS_instructionListIR result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_forInstructionOnStringIR * p = (const cPtr_forInstructionOnStringIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnStringIR) ;
-    result = p->mProperty_mDoInstructionList ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListIR cPtr_forInstructionOnStringIR::getter_mDoInstructionList (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mDoInstructionList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                  Pointer class for @forInstructionOnStringIR class                                  *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_forInstructionOnStringIR::cPtr_forInstructionOnStringIR (const GALGAS_string & in_mVarName,
-                                                              const GALGAS_location & in_mLocation,
-                                                              const GALGAS_objectIR & in_mIteratedObject,
-                                                              const GALGAS_instructionListIR & in_mWhileInstructionList,
-                                                              const GALGAS_objectIR & in_mWhileExpressionResult,
-                                                              const GALGAS_instructionListIR & in_mDoInstructionList
-                                                              COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mProperty_mVarName (in_mVarName),
-mProperty_mLocation (in_mLocation),
-mProperty_mIteratedObject (in_mIteratedObject),
-mProperty_mWhileInstructionList (in_mWhileInstructionList),
-mProperty_mWhileExpressionResult (in_mWhileExpressionResult),
-mProperty_mDoInstructionList (in_mDoInstructionList) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_forInstructionOnStringIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_forInstructionOnStringIR ;
-}
-
-void cPtr_forInstructionOnStringIR::description (C_String & ioString,
-                                                 const int32_t inIndentation) const {
-  ioString << "[@forInstructionOnStringIR:" ;
-  mProperty_mVarName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mLocation.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mIteratedObject.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mWhileInstructionList.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mWhileExpressionResult.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mDoInstructionList.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_forInstructionOnStringIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_forInstructionOnStringIR (mProperty_mVarName, mProperty_mLocation, mProperty_mIteratedObject, mProperty_mWhileInstructionList, mProperty_mWhileExpressionResult, mProperty_mDoInstructionList COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @forInstructionOnStringIR type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_forInstructionOnStringIR ("forInstructionOnStringIR",
-                                                 & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_forInstructionOnStringIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_forInstructionOnStringIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_forInstructionOnStringIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_forInstructionOnStringIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_forInstructionOnStringIR GALGAS_forInstructionOnStringIR::extractObject (const GALGAS_object & inObject,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_forInstructionOnStringIR result ;
-  const GALGAS_forInstructionOnStringIR * p = (const GALGAS_forInstructionOnStringIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_forInstructionOnStringIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("forInstructionOnStringIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

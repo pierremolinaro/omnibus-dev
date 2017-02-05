@@ -9,6 +9,27 @@
 
 struct @universalPropertyAndRoutineMapForContext {
   @internalUniversalPropertyAndRoutineMapForContext mInternalPropertyAndRoutineMapForContext
+  @scopeStack mScopeStack
+  @lstringlist mLocalObjectList
+}
+
+enum @scopeKind {
+  case selectScope
+  case repeatScope
+}
+
+list @scopeStack {
+  @scopeKind mScopeKind
+  @bool mFirstBranch
+  @referenceStateMap mInitialStateMap
+  @referenceStateMap mReferenceStateMap
+  @lstringlist mObjectList
+}
+
+map @referenceStateMap {
+  @valuedObjectState mState
+  insert insertKey error message "INTERNAL ERROR"
+  search searchKey error message "INTERNAL ERROR"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -36,7 +57,6 @@ setter @universalPropertyAndRoutineMapForContext insertRoutine
     ]
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inRoutineName
-      !{}
       !.noValue
       !false
       !.undefined
@@ -62,7 +82,6 @@ setter @universalPropertyAndRoutineMapForContext insertProperty
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inPropertyName
-      !{}
       !.noValue
       !false
       !newValue
@@ -87,7 +106,6 @@ setter @universalPropertyAndRoutineMapForContext insertModule
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inModuleName
-      !{}
       !.noValue
       !false
       !newValue
@@ -118,7 +136,6 @@ setter @universalPropertyAndRoutineMapForContext insertRegister
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inRegisterName
-      !{}
       !.noValue
       !false
       !newValue
@@ -143,7 +160,6 @@ setter @universalPropertyAndRoutineMapForContext insertGlobalConstant
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inConstantName
-      !{}
       !.noValue
       !false
       !newValue
@@ -155,27 +171,27 @@ setter @universalPropertyAndRoutineMapForContext insertGlobalConstant
 #·······················································································································
 
 setter @universalPropertyAndRoutineMapForContext insertLocalConstant
-  ?let @lstring inConstantName
+  ?let @lstring inLocalConstantName
   ?let @objectIR inConstantObjectIR
 {
   let newValue = @possibleValuedObject.localConstant {!objectIR:inConstantObjectIR}
-  with inConstantName.string in !?mInternalPropertyAndRoutineMapForContext do
+  with inLocalConstantName.string in !?mInternalPropertyAndRoutineMapForContext do
     if [mPossibleValuedObject isUndefined] then
       mObjectState = .hasUnreadValue
       mPossibleValuedObject = newValue
     else
-      error inConstantName : "object already defined in this context"
+      error inLocalConstantName : "object already defined in this context"
     end
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
-      !inConstantName
-      !{}
+      !inLocalConstantName
       !.hasUnreadValue
       !false
       !newValue
       !{} # empty routine map
     ]
   end
+  mLocalObjectList += !inLocalConstantName
 }
 
 #·······················································································································
@@ -195,7 +211,6 @@ setter @universalPropertyAndRoutineMapForContext insertGlobalVariable
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inGlobalVariableName
-      !{}
       !.noValue
       !false
       !newValue
@@ -224,13 +239,13 @@ setter @universalPropertyAndRoutineMapForContext insertLocalVariable
   else
     [!?mInternalPropertyAndRoutineMapForContext insertKey
       !inLocalVariableName
-      !{}
       !inVariableInitialState
       !inObjectShouldBeValuedAtEndOfScope
       !newValue
       !{} # empty routine map
     ]
   end
+  mLocalObjectList += !inLocalVariableName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -261,6 +276,7 @@ method @universalPropertyAndRoutineMapForContext checkLocalVariableFinalState {
 #·······················································································································
 
 setter @universalPropertyAndRoutineMapForContext openOverrideForSelectBlock {
+  @referenceStateMap initialStateMap = {}
   for entry in mInternalPropertyAndRoutineMapForContext do
     switch entry.mPossibleValuedObject
     case undefined :
@@ -269,42 +285,126 @@ setter @universalPropertyAndRoutineMapForContext openOverrideForSelectBlock {
     case register (* * *) :
     case globalConstant (*) :
     case localConstant (*) :
-      [!?mInternalPropertyAndRoutineMapForContext setMStackStateForKey
-        !entry.mStackState + @valuedObjectStateStack {!entry.mObjectState}
-        !entry.lkey
-      ]
+      [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
     case globalVariableReference (* *) :
     case localVariableReference (*) :
-      [!?mInternalPropertyAndRoutineMapForContext setMStackStateForKey
-        !entry.mStackState + @valuedObjectStateStack {!entry.mObjectState}
-        !entry.lkey
-      ]
+      [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
+    end
+  end
+  mScopeStack += !.selectScope !true !initialStateMap !{} !mLocalObjectList
+  mLocalObjectList = {}
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext openOverrideForRepeatBlock {
+  @referenceStateMap initialStateMap = {}
+  for entry in mInternalPropertyAndRoutineMapForContext do
+    switch entry.mPossibleValuedObject
+    case undefined :
+    case property (* *) :
+    case module (*) :
+    case register (* * *) :
+    case globalConstant (*) :
+    case localConstant (*) :
+      [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
+    case globalVariableReference (* *) :
+    case localVariableReference (*) :
+      [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
+    end
+  end
+  mScopeStack += !.repeatScope !true !initialStateMap ! {} !mLocalObjectList
+  mLocalObjectList = {}
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext openBranch {
+  [mScopeStack last ?* ?* ?let initialStateMap ?2*]
+  for (key objectState) in initialStateMap do
+    [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !objectState !key]
+  end
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext closeBranch ?let @location inErrorLocation {
+  [!?mScopeStack popLast ?let scopeKind ?let firstBranch ?let initialStateMap ?let referenceStateMap ?let localObjectList]
+  if firstBranch then
+    @referenceStateMap newReferenceStateMap = {}
+    for entry in mInternalPropertyAndRoutineMapForContext do
+      switch entry.mPossibleValuedObject
+      case undefined :
+      case property (* *) :
+      case module (*) :
+      case register (* * *) :
+      case globalConstant (*) :
+      case localConstant (*) :
+        [!?newReferenceStateMap insertKey !entry.lkey !entry.mObjectState]
+      case globalVariableReference (* *) :
+      case localVariableReference (*) :
+        [!?newReferenceStateMap insertKey !entry.lkey !entry.mObjectState]
+      end
+    end
+    mScopeStack += !scopeKind !false !initialStateMap !newReferenceStateMap !localObjectList
+  else
+    switch scopeKind
+    case selectScope :
+      for (lkey objectState) in referenceStateMap do
+        [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?3*]
+        if objectState != currentObjectState then
+          error inErrorLocation
+            : "invalid state for object '" + lkey + "': found " + currentObjectState + ", required " + objectState
+        end
+      end
+      mScopeStack += !scopeKind !false !initialStateMap !referenceStateMap !localObjectList
+    case repeatScope :
+     for (lkey objectState) in referenceStateMap do
+        [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?3*]
+        if objectState != currentObjectState then
+          error inErrorLocation
+            : "invalid state for object '" + lkey + "': found " + currentObjectState + ", required " + objectState
+        end
+      end
+      mScopeStack += !scopeKind !false !initialStateMap !referenceStateMap !localObjectList
     end
   end
 }
 
 #·······················································································································
 
-setter @universalPropertyAndRoutineMapForContext openOverrideForRepeatBlock {
-
-}
-
-#·······················································································································
-
 setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location inErrorLocation {
-
-}
-
-#·······················································································································
-
-setter @universalPropertyAndRoutineMapForContext openBranch {
-
-}
-
-#·······················································································································
-
-setter @universalPropertyAndRoutineMapForContext closeBranch ?let @location inErrorLocation {
-
+  [!?mScopeStack popLast ?* ?* ?* ?let referenceStateMap ?let localObjectList]
+#--- Restore value object state
+  for (key objectState) in referenceStateMap do
+    [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !objectState !key]
+  end
+#--- For current scope objects, check their final state
+  for (lkey) in mLocalObjectList do
+    [mInternalPropertyAndRoutineMapForContext searchKey !lkey ?let currentObjectState ?let objectShouldBeValuedAtEndOfScope ?let possibleValuedObject ?*]
+    switch possibleValuedObject
+    case undefined :
+    case property (* *) :
+    case module (*) :
+    case register (* * *) :
+    case globalConstant (*) :
+    case localConstant (*) :
+      if currentObjectState == .hasUnreadValue then
+        warning inErrorLocation : "'" + lkey + "' is never read"
+      end
+    case globalVariableReference (* *) :
+    case localVariableReference (*) :
+      if (currentObjectState == .noValue) && objectShouldBeValuedAtEndOfScope then
+        warning inErrorLocation : "'" + lkey + "' should be valued at the end of routine"
+      end
+    end
+  end
+#--- Remove cuurent scope objets, by setting their kind to "undefined"
+  for (lkey) in mLocalObjectList do
+    [!?mInternalPropertyAndRoutineMapForContext setMPossibleValuedObjectForKey !.undefined !lkey]
+  end
+#--- Restore current scope objects
+  mLocalObjectList = localObjectList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -316,7 +416,7 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
   !@bool outIsPublic
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?* ?let valueKind ?* ?let property ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueKind ?* ?let property ?*]
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context" : outIsPublic, outObjectIR
@@ -367,7 +467,7 @@ setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAcces
   !@bool outIsPublic
   !@objectIR outObjectIR
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?* ?let valueKind ?* ?let property ?*]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueKind ?* ?let property ?*]
   switch property
   case undefined :
     error inValuedObjectName : "undefined in this context" : outIsPublic, outObjectIR
@@ -414,7 +514,7 @@ method @universalPropertyAndRoutineMapForContext searchRoutine
   !@string outLLVMInvocationRoutineName
   !@routineDescriptor outDescriptor
 {
-  [mInternalPropertyAndRoutineMapForContext searchKey !inRoutineName ?4* ?let @routineSignatureMapForContext routineMap]
+  [mInternalPropertyAndRoutineMapForContext searchKey !inRoutineName ?3* ?let @routineSignatureMapForContext routineMap]
   [routineMap searchKey !inArgumentSignature ?outLLVMInvocationRoutineName ?outDescriptor]
 }
 
@@ -423,7 +523,7 @@ method @universalPropertyAndRoutineMapForContext searchRoutine
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @internalUniversalPropertyAndRoutineMapForContext { # Key is a variable, property, routine name
-  @valuedObjectStateStack mStackState
+#  @valuedObjectStateStack mStackState
   @valuedObjectState mObjectState
   @bool mObjectShouldBeValuedAtEndOfScope
   @possibleValuedObject mPossibleValuedObject
@@ -435,9 +535,9 @@ map @internalUniversalPropertyAndRoutineMapForContext { # Key is a variable, pro
 
 #·······················································································································
 
-list @valuedObjectStateStack {
-  @valuedObjectState objectState
-}
+#list @valuedObjectStateStack {
+#  @valuedObjectState objectState
+#}
 
 #·······················································································································
 
@@ -472,6 +572,16 @@ enum @valuedObjectState {
   case noValue
   case hasUnreadValue
   case hasReadValue
+}
+
+#·······················································································································
+
+getter @valuedObjectState string -> @string {
+  switch self
+  case noValue : result = "no value"
+  case hasUnreadValue : result = "unread value"
+  case hasReadValue : result = "read value"
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
