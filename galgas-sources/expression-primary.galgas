@@ -788,11 +788,12 @@ proc analyzeEffectiveParameters
         !.input
         !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!varLLVMName) !varLLVMName} !sliceMap:{}}
     case input (@lstring name) :
+      [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?* ?let objectIR]
       [!?ioVariableMap searchForWriteAccess
         !lkey:name
         ?type:let type
         ?readAccessAllowed:let accessIsAllowed
-        ?objectIR:let objectIR
+        ?objectIR:* #let objectIR
         ?copyable:let isCopyable                                                 
         ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
       ]

@@ -888,6 +888,19 @@ void extensionSetter_searchValuedObjectForWriteAccess (class GALGAS_universalPro
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//          Extension setter '@universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteAccess'          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                                           const class GALGAS_lstring constin_inValuedObjectName,
+                                                           class GALGAS_bool & out_outIsPublic,
+                                                           class GALGAS_objectIR & out_outObjectIR,
+                                                           class C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                     Extension method '@universalPropertyAndRoutineMapForContext searchRoutine'                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
