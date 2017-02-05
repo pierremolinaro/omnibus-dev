@@ -389,4 +389,15 @@ void routine_enter_5F_literal_5F_integer_5F_operators (const class GALGAS_lstrin
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                       Routine 'enterLiteralIntegerOperators'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterLiteralIntegerOperators (const class GALGAS_lstring constinArgument0,
+                                           class GALGAS_semanticContext & ioArgument1,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
 #endif

@@ -31,6 +31,13 @@ list @effectiveArgumentListAST {
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @primaryInExpressionSelfAccessAST {
+  case noSelfAccess
+  case selfAccess (@location selfLocation)
+}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 enum @primaryInExpressionAccessAST {
   case property (@lstring name)
   case arrayAccess (@expressionAST index @location endOfIndex)
@@ -45,19 +52,10 @@ list @primaryInExpressionAccessListAST {
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @primaryInExpressionAST : @expressionAST {
+class @primaryInExpressionAST : @expressionAST {
+  @primaryInExpressionSelfAccessAST mSelfAccess 
   @lstring mObjectName
   @primaryInExpressionAccessListAST mAccessList
-}
-
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @primaryInNoSelfExpressionAST : @primaryInExpressionAST {
-}
-
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-class @primaryInSelfExpressionAST : @primaryInExpressionAST {
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -70,12 +68,12 @@ syntax extension plm_syntax {
 
   rule <primary> !@expressionAST outExpression {
   #--- Self ?
-    @bool selfAccess
+    @primaryInExpressionSelfAccessAST selfAccess
     select
-      selfAccess = false
+      selfAccess = .noSelfAccess
     or
       $self$
-      selfAccess = true
+      selfAccess = .selfAccess {!selfLocation:.here}
       $.$
     end
   #--- Object
@@ -98,11 +96,7 @@ syntax extension plm_syntax {
       accessListAST += !.funcCall {!arguments:arguments !endOfArguments:endOfArguments}
     end
   #--- AST
-    if selfAccess then
-      outExpression = @primaryInSelfExpressionAST.new {!objectName !accessListAST}
-    else
-      outExpression = @primaryInNoSelfExpressionAST.new {!objectName !accessListAST}
-    end
+    outExpression = @primaryInExpressionAST.new {!selfAccess !objectName !accessListAST}
   }
 
   #·····················································································································
@@ -218,106 +212,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 #  SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @primaryInNoSelfExpressionAST analyzeExpression
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@objectIR outResult
-{
-  @objectIR currentPointer
-  @string globalVariableReceiverName
-  if inGuard then
-    error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer, globalVariableReceiverName
-  elsif [ioVariableMap hasKey !mObjectName] then
-    [!?ioVariableMap searchForReadAccess !lkey:mObjectName
-      ?2*
-      ?objectIR:currentPointer
-      ?2*
-    ]
-    globalVariableReceiverName = if [currentPointer isGlobalVariableReference] then mObjectName.string else "" end
-  else # Stand alone function call ?
-    currentPointer = .possibleFunction {!receiver:.null !functionName:mObjectName}
-    globalVariableReceiverName = ""
-  end
-#--- Access list
-  for (access) in mAccessList do
-    switch access
-    case property (@lstring propertyName) :
-      handlePropertyInExpression (
-        !self:inSelfType
-        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioVariableMap
-        !?alloca:ioAllocaList
-        !propertyName
-        !?ioInstructionGenerationList
-        !?currentPointer
-      )
-    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-      handleSubscriptInAssignmentAndExpression (
-        !self:inSelfType
-        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioVariableMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !indexExpression
-        !endOfIndex
-        !?ioInstructionGenerationList
-        !?currentPointer
-      )
-    case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
-      handleFunctionCallInExpression (
-        !self:inSelfType
-        !globalVariableReceiverName:globalVariableReceiverName
-        !propertiesAreMutable:false
-        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioVariableMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !arguments
-        !errorLocation
-        !?ioInstructionGenerationList
-        !?currentPointer
-        ?let returnedType
-      )
-      if returnedType == .null then
-        error errorLocation : "the function cannot be called in expression: no return value"
-      end
-    end
-  end
-  outResult = currentPointer
-}
-
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @primaryInSelfExpressionAST analyzeExpression
+override method @primaryInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
@@ -335,29 +230,47 @@ override method @primaryInSelfExpressionAST analyzeExpression
 {
 #--- object access, with ou without self
   @objectIR currentPointer
-  @string globalVariableReceiverName = ""
-  if inSelfType == .null then
-    error mObjectName : "'self' is not available in this context" : currentPointer
-  elsif [[inSelfType kind] isStructure] then
-    [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
-    if [structureObjectMap hasKey !mObjectName] then
-      [structureObjectMap searchKey
-        !mObjectName
-        ?*
-        ?let object
+  @string globalVariableReceiverName
+  switch mSelfAccess
+  case noSelfAccess :
+    if inGuard then
+      error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer, globalVariableReceiverName
+    elsif [ioVariableMap hasKey !mObjectName] then
+      [!?ioVariableMap searchForReadAccess !lkey:mObjectName
+        ?2*
+        ?objectIR:currentPointer
+        ?2*
       ]
-      handleSelfAccessInExpression (
-        !inSelfType
-        !object
-        !?ioTemporaries
-        !?ioInstructionGenerationList
-        ?currentPointer
-      )
-    else # Function call ?
-      currentPointer = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mObjectName}
+      globalVariableReceiverName = if [currentPointer isGlobalVariableReference] then mObjectName.string else "" end
+    else # Stand alone function call ?
+      currentPointer = .possibleFunction {!receiver:.null !functionName:mObjectName}
+      globalVariableReceiverName = ""
     end
-  else
-    error mObjectName : "'self' should be a structure instance" : currentPointer
+  case selfAccess (@location selfLocation) :
+    globalVariableReceiverName = ""
+    if inSelfType == .null then
+      error selfLocation : "'self' is not available in this context" : currentPointer
+    elsif [[inSelfType kind] isStructure] then
+      [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
+      if [structureObjectMap hasKey !mObjectName] then
+        [structureObjectMap searchKey
+          !mObjectName
+          ?*
+          ?let object
+        ]
+        handleSelfAccessInExpression (
+          !inSelfType
+          !object
+          !?ioTemporaries
+          !?ioInstructionGenerationList
+          ?currentPointer
+        )
+      else # Function call ?
+        currentPointer = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mObjectName}
+      end
+    else
+      error selfLocation : "'self' should be a structure instance" : currentPointer
+    end
   end
 #--- Access list
   for (access) in mAccessList do
