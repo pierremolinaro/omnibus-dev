@@ -101,7 +101,6 @@ project (1:0:0) -> "plm" {
 #--- Compilation phases
   "galgas-sources/context-routines.galgas"
   "galgas-sources/universal-map.galgas"
-  "galgas-sources/scope-handling.galgas"
   "galgas-sources/unified-symbol-map.galgas"
   "galgas-sources/ordered-declaration-list.galgas"
   "galgas-sources/context.galgas"
