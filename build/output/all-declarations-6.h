@@ -868,7 +868,6 @@ void extensionSetter_closeOverride (class GALGAS_universalPropertyAndRoutineMapF
 
 void extensionSetter_searchValuedObjectForReadAccess (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
                                                       const class GALGAS_lstring constin_inValuedObjectName,
-                                                      class GALGAS_bool & out_outIsPublic,
                                                       class GALGAS_objectIR & out_outObjectIR,
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
@@ -881,7 +880,6 @@ void extensionSetter_searchValuedObjectForReadAccess (class GALGAS_universalProp
 
 void extensionSetter_searchValuedObjectForWriteAccess (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
                                                        const class GALGAS_lstring constin_inValuedObjectName,
-                                                       class GALGAS_bool & out_outIsPublic,
                                                        class GALGAS_objectIR & out_outObjectIR,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
@@ -894,7 +892,6 @@ void extensionSetter_searchValuedObjectForWriteAccess (class GALGAS_universalPro
 
 void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
                                                            const class GALGAS_lstring constin_inValuedObjectName,
-                                                           class GALGAS_bool & out_outIsPublic,
                                                            class GALGAS_objectIR & out_outObjectIR,
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;

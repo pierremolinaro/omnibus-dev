@@ -175,9 +175,9 @@ override method @forLowerUpperBoundInstructionAST analyze
     let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
     ioTemporaries.mTemporaryIndex ++
     ioAllocaList += !enumeratedVarLLVMName ![[type kind] llvmTypeName]
-    let objectIR = @objectIR.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}
     if mVarName.string != "" then
-      [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
+     let objectIR = @objectIR.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}
+     [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
       [!?ioVariableMap insertUsedConstant
         !lkey:mVarName
         !type:type
