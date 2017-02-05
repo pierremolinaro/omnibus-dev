@@ -167,8 +167,7 @@ override method @assignmentTargetNoSelfAST analyzeAssignmentTarget
   end
 #--- Analyze properties, subscripts
   if [mAccessList length] == 0 then # 
-    [ioUniversalMap searchValuedObject !mIdentifier ?let unused isPublic ?outCurrentObject]
-    [!?ioUniversalMap checkValuedObjectIsWritable !mIdentifier]
+    [!?ioUniversalMap searchValuedObjectForWriteAccess !mIdentifier ?let unused isPublic ?outCurrentObject]
   else
     for (access) in mAccessList do
       switch access

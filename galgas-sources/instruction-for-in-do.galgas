@@ -96,8 +96,7 @@ override method @forInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze iterated expression
-  [ioUniversalMap searchValuedObject !mIteratedObject ?* ?let @objectIR iteratedObjectPointer]
-  [!?ioUniversalMap checkValuedObjectIsReadable !mIteratedObject]
+  [!?ioUniversalMap searchValuedObjectForReadAccess !mIteratedObject ?* ?let @objectIR iteratedObjectPointer]
   [!?ioVariableMap searchForReadAccess
     !lkey:mIteratedObject
     ?2*

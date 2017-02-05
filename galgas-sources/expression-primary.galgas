@@ -252,8 +252,7 @@ override method @primaryNoSelfInExpressionAST analyzeExpression
   end
 #--- Access list
   if [mAccessList length] == 0 then # Primary is a single var
-    [ioUniversalMap searchValuedObject !mObjectName ?let unused isPublic ?outResult]
-    [!?ioUniversalMap checkValuedObjectIsReadable !mObjectName]
+    [!?ioUniversalMap searchValuedObjectForReadAccess !mObjectName ?let unused isPublic ?outResult]
   else
     for (access) in mAccessList do
       switch access
@@ -891,7 +890,8 @@ proc analyzeEffectiveParameters
         case integer (* * * *) :
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
         case structure (* * universalMap * *) :
-          [universalMap searchValuedObject !name ?let unused public ?let propertyObject]
+          var m = universalMap
+          [!?m searchValuedObjectForReadAccess !name ?let unused public ?let propertyObject]
           [propertyObject property ?2* ?index:let idx]
           getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
           [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
