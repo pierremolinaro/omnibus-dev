@@ -23,7 +23,13 @@ syntax extension plm_syntax {
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
     $for$
-    $identifier$ ?let varName
+    @lstring varName
+    select
+      $_$
+      varName = ["" here]
+    or
+      $identifier$ ?varName
+    end
     $\$type$ ?let typeName
     $in$
     <expression> ?let @expressionAST lowerBoundExpression
@@ -163,22 +169,25 @@ override method @forLowerUpperBoundInstructionAST analyze
       !staticTypeAllowed:false
     )
   #---
+    [!?ioUniversalMap openOverrideForRepeatBlock]
+    [!?ioVariableMap openOverrideForRepeatBlock]
+  #--- Enter iteration variable name
     let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
     ioTemporaries.mTemporaryIndex ++
     ioAllocaList += !enumeratedVarLLVMName ![[type kind] llvmTypeName]
-  #--- Analyze instruction list
-    [!?ioUniversalMap openOverrideForRepeatBlock]
-    [!?ioVariableMap openOverrideForRepeatBlock]
     let objectIR = @objectIR.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}
-    [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
-    [!?ioVariableMap insertUsedConstant
-      !lkey:mVarName
-      !type:type
-      !readAccessAllowed:true # Read access ok
-      !objectIR:objectIR
-      !copyable:true
-      !canBeUsedAsInputParameter:false
-    ]
+    if mVarName.string != "" then
+      [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
+      [!?ioVariableMap insertUsedConstant
+        !lkey:mVarName
+        !type:type
+        !readAccessAllowed:true # Read access ok
+        !objectIR:objectIR
+        !copyable:true
+        !canBeUsedAsInputParameter:false
+      ]
+    end
+  #--- Analyze instruction list
     @instructionListIR instructionGenerationList = {}
     [mDoInstructionList analyzeBranchInstructionList
       !self:inSelfType
