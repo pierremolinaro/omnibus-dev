@@ -130,7 +130,7 @@ override method @varOperatorAssignInstructionAST analyze
 #---
   [mAssignmentTargetAST analyzeAssignmentTarget
     !self: inSelfType
-    !targetAccessKind:.write
+    !targetAccessKind:.readWrite
     !propertiesAreMutable: inRoutineCanMutateProperties
     !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
     !routineNameForInvocationGraph: inCallerNameForInvocationGraph

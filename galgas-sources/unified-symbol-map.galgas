@@ -30,12 +30,12 @@ proc initialVariableMap
   end
 #------------------------------------------------------- Add registers
   for register in inContext.mControlRegisterMap do
-    let registerIsAccessible = [inRequiredMode controlRegisterAccess !register.mIsAccessibleInUserMode]
-    let registerIsWritable = registerIsAccessible && not register.mIsReadOnly && not inGlobalsAreConstant
+    let registerIsReadable = [inRequiredMode controlRegisterAccess !register.mIsAccessibleInUserMode]
+    let registerIsWritable = registerIsReadable && not register.mIsReadOnly && not inGlobalsAreConstant
     let objectReference = @objectIR.registerReference {
       !type:register.mType
       !plmName:register.lkey
-      !readable:registerIsAccessible
+      !readable:registerIsReadable
       !writable:registerIsWritable
       !address:register.mAddress 
       !sliceMap:register.mRegisterFieldAccessMap
@@ -44,11 +44,11 @@ proc initialVariableMap
     }
     [!?outUniversalMap insertRegister
       !register.lkey
-      !readable:registerIsAccessible
+      !readable:registerIsReadable
       !writable:registerIsWritable
       !objectReference
     ]
-    if not registerIsAccessible then
+    if not registerIsReadable then
       [!?outVariableMap insertInaccessibleControlRegister
         !lkey:register.lkey
         !type:register.mType

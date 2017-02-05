@@ -169,11 +169,13 @@ override method @forLowerUpperBoundInstructionAST analyze
   #--- Analyze instruction list
     [!?ioUniversalMap openOverrideForRepeatBlock]
     [!?ioVariableMap openOverrideForRepeatBlock]
+    let objectIR = @objectIR.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}
+    [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
     [!?ioVariableMap insertUsedConstant
       !lkey:mVarName
       !type:type
       !readAccessAllowed:true # Read access ok
-      !objectIR:.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}
+      !objectIR:objectIR
       !copyable:true
       !canBeUsedAsInputParameter:false
     ]
