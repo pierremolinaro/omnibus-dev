@@ -190,7 +190,6 @@ class @functionCallIR : @abstractInstructionIR {
   @lstring mFunctionNameForGeneration
   @calleeKindIR mKind
   @procCallEffectiveParameterListIR mArgumentList
-#  @bool mAppendFileAndLineArgumentForPanicLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

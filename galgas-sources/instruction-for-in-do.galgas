@@ -96,10 +96,12 @@ override method @forInstructionAST analyze
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze iterated expression
+  [ioUniversalMap searchValuedObject !mIteratedObject ?* ?let @objectIR iteratedObjectPointer]
+  [!?ioUniversalMap checkValuedObjectIsReadable !mIteratedObject]
   [!?ioVariableMap searchForReadAccess
     !lkey:mIteratedObject
     ?2*
-    ?objectIR:let @objectIR iteratedObjectPointer
+    ?objectIR:* # let @objectIR iteratedObjectPointer
     ?2*
   ]
 #  [mIteratedExpression analyzeExpression
@@ -136,11 +138,13 @@ override method @forInstructionAST analyze
 #--- Analyze instruction list
   [!?ioUniversalMap openOverrideForRepeatBlock]
   [!?ioVariableMap openOverrideForRepeatBlock]
+  let objectIR = @objectIR.localVariableReference {!type:iteratedElementType !plmName:enumeratedVarLLVMName}
+  [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
   [!?ioVariableMap insertUsedConstant
     !lkey:mVarName
     !type:iteratedElementType
     !readAccessAllowed:true # Read access ok
-    !objectIR:.localVariableReference {!type:iteratedElementType !plmName:enumeratedVarLLVMName}
+    !objectIR:objectIR
     !copyable:true
     !canBeUsedAsInputParameter:false
   ]
@@ -170,8 +174,6 @@ override method @forInstructionAST analyze
   elsif [whileExpressionResult isStatic] && not mStaticWhileExpression then
     warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
   end
-#---
-#  var context = inContext
 #---
   @instructionListIR doInstructionList_GenerationList = {}
   [mDoInstructionList analyzeBranchInstructionList

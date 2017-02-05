@@ -20,7 +20,6 @@ enum @objectIR {
                           @uint elementSize) # 0 if not an array
 #--- Structure property
   case property (@unifiedTypeMap-proxy type @lstring plmName @uint index)
-#  case function (@mode mode @routineKind kind @unifiedTypeMap-proxy returnType @routineTypedSignature signature @lstring plmName)
 #--- Values
   case llvmTemporaryValue (@unifiedTypeMap-proxy type @lstring llvmName @sliceMap sliceMap)
   case literalInteger  (@unifiedTypeMap-proxy type @bigint value)

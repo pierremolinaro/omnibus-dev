@@ -251,69 +251,74 @@ override method @primaryNoSelfInExpressionAST analyzeExpression
     globalVariableReceiverName = ""
   end
 #--- Access list
-  for (access) in mAccessList do
-    switch access
-    case property (@lstring propertyName) :
-      handlePropertyInExpression (
-        !self:inSelfType
-        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioVariableMap
-        !?alloca:ioAllocaList
-        !propertyName
-        !?ioInstructionGenerationList
-        !?currentPointer
-      )
-    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-      handleSubscriptInAssignmentAndExpression (
-        !self:inSelfType
-        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioVariableMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !indexExpression
-        !endOfIndex
-        !?ioInstructionGenerationList
-        !?currentPointer
-      )
-    case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
-      handleFunctionCallInExpression (
-        !self:inSelfType
-        !globalVariableReceiverName:globalVariableReceiverName
-        !propertiesAreMutable:false
-        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioVariableMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !arguments
-        !errorLocation
-        !?ioInstructionGenerationList
-        !?currentPointer
-        ?let returnedType
-      )
-      if returnedType == .null then
-        error errorLocation : "the function cannot be called in expression: no return value"
+  if [mAccessList length] == 0 then # Primary is a single var
+    [ioUniversalMap searchValuedObject !mObjectName ?let unused isPublic ?outResult]
+    [!?ioUniversalMap checkValuedObjectIsReadable !mObjectName]
+  else
+    for (access) in mAccessList do
+      switch access
+      case property (@lstring propertyName) :
+        handlePropertyInExpression (
+          !self:inSelfType
+          !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+          !inGuard:inGuard
+          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+          !context:inContext
+          !mode:inCurrentMode
+          !?temporary:ioTemporaries
+          !?staticStringMap:ioGlobalLiteralStringMap
+          !?variableMap:ioVariableMap
+          !?alloca:ioAllocaList
+          !propertyName
+          !?ioInstructionGenerationList
+          !?currentPointer
+        )
+      case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+        handleSubscriptInAssignmentAndExpression (
+          !self:inSelfType
+          !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+          !inGuard:inGuard
+          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+          !context:inContext
+          !mode:inCurrentMode
+          !?temporary:ioTemporaries
+          !?staticStringMap:ioGlobalLiteralStringMap
+          !?variableMap:ioVariableMap
+          !?variableMap:ioUniversalMap
+          !?alloca:ioAllocaList
+          !indexExpression
+          !endOfIndex
+          !?ioInstructionGenerationList
+          !?currentPointer
+        )
+      case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
+        handleFunctionCallInExpression (
+          !self:inSelfType
+          !globalVariableReceiverName:globalVariableReceiverName
+          !propertiesAreMutable:false
+          !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+          !inGuard:inGuard
+          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+          !context:inContext
+          !mode:inCurrentMode
+          !?temporary:ioTemporaries
+          !?staticStringMap:ioGlobalLiteralStringMap
+          !?variableMap:ioVariableMap
+          !?variableMap:ioUniversalMap
+          !?alloca:ioAllocaList
+          !arguments
+          !errorLocation
+          !?ioInstructionGenerationList
+          !?currentPointer
+          ?let returnedType
+        )
+        if returnedType == .null then
+          error errorLocation : "the function cannot be called in expression: no return value"
+        end
       end
     end
+    outResult = currentPointer
   end
-  outResult = currentPointer
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -756,21 +761,24 @@ proc analyzeEffectiveParameters
       end
       let varLLVMName = @lstring.new {!name.string + "." + ioTemporaries.mTemporaryIndex !name}
       ioTemporaries.mTemporaryIndex ++
+      let objectIR = @objectIR.localVariableReference {!type:type !plmName:varLLVMName}
       if constant then
+        [!?ioUniversalMap insertLocalConstant !name !objectIR]
         [!?ioVariableMap insertConstant
           !lkey:name
           !type:type
           !readAccessAllowed:true
-          !objectIR:.localVariableReference {!type:type !plmName:varLLVMName}
+          !objectIR:objectIR
           !copyable:true
           !canBeUsedAsInputParameter:true
         ]
       else
+        [!?ioUniversalMap insertLocalVariable !name !objectIR !.hasUnreadValue !false]
         [!?ioVariableMap insertDefinedVariable
           !lkey:name
           !type:type
           !readAccessAllowed:true
-          !objectIR:.localVariableReference {!type:type !plmName:varLLVMName}
+          !objectIR:objectIR
           !copyable:true
           !canBeUsedAsInputParameter:true
         ]

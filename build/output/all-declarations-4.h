@@ -22,13 +22,21 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_assignment_5F_operator_ (GALGAS_operatorAssignmentKind & outArgument0,
                                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'assignment_target' non terminal
+//------------------------------------- 'assignment_target_noself' non terminal
 //--- 'parse' label
-  public : virtual void nt_assignment_5F_target_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_assignment_5F_target_5F_noself_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public : virtual void nt_assignment_5F_target_ (GALGAS_assignmentTargetAST & outArgument0,
-                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
+  public : virtual void nt_assignment_5F_target_5F_noself_ (GALGAS_assignmentTargetNoSelfAST & outArgument0,
+                                                            C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'assignment_target_self' non terminal
+//--- 'parse' label
+  public : virtual void nt_assignment_5F_target_5F_self_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_assignment_5F_target_5F_self_ (GALGAS_assignmentTargetSelfAST & outArgument0,
+                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'declaration' non terminal
 //--- 'parse' label

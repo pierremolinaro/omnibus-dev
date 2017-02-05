@@ -1,12 +1,5 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-enum @assignmentSelfAccessAST {
-  case noSelfPrefix
-  case selfPrefix (@location selfLocation)
-}
-
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @accessInAssignmentAST {
@@ -22,10 +15,19 @@ list @accessInAssignmentListAST {
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct @assignmentTargetAST {
-  @assignmentSelfAccessAST mHasSelfPrefix
+abstract class @assignmentTargetAST {
   @lstring mIdentifier
   @accessInAssignmentListAST mAccessList
+}
+
+#·······················································································································
+
+class @assignmentTargetNoSelfAST : @assignmentTargetAST {
+}
+
+#·······················································································································
+
+class @assignmentTargetSelfAST : @assignmentTargetAST {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -36,16 +38,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <assignment_target> !@assignmentTargetAST outAssignmentTargetAST {
-  #--- Self ?
-    @assignmentSelfAccessAST selfAccess
-    select
-      selfAccess = .noSelfPrefix
-    or
-      $self$
-      selfAccess = .selfPrefix {!selfLocation:.here}
-      $.$
-    end
+  rule <assignment_target_noself> !@assignmentTargetNoSelfAST outAssignmentTargetAST {
   #--- Object
     $identifier$ ?let identifier
   #--- Properties and subscript
@@ -62,7 +55,32 @@ syntax extension plm_syntax {
       $]$
       accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
     end
-    outAssignmentTargetAST = .new {!selfAccess !identifier !accessListAST}
+    outAssignmentTargetAST = @assignmentTargetNoSelfAST.new {!identifier !accessListAST}
+  }
+
+  #·····················································································································
+
+  rule <assignment_target_self> !@assignmentTargetSelfAST outAssignmentTargetAST {
+  #--- Self
+    $self$
+    $.$
+  #--- Object
+    $identifier$ ?let identifier
+  #--- Properties and subscript
+    @accessInAssignmentListAST accessListAST = {}
+    repeat
+    while
+      $.$
+      $identifier$ ?let propertyName
+      accessListAST += !.property {!name:propertyName}
+    while
+      $[$
+      <expression> ?let expression
+      let endOfIndex = @location.here
+      $]$
+      accessListAST += !.arrayAccess {!index:expression !endOfIndex:endOfIndex}
+    end
+    outAssignmentTargetAST = .new {!identifier !accessListAST}
   }
 
   #·····················································································································
@@ -92,9 +110,29 @@ enum @targetAccessKind {
   case write
   case readWrite
 }
+
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @assignmentTargetAST analyzeAssignmentTarget
+abstract method @assignmentTargetAST analyzeAssignmentTarget
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?targetAccessKind:let @targetAccessKind inSelfAccessKind
+  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !@objectIR outCurrentObject
+  !globalVariableReceiverName:@string outGlobalVariableReceiverName
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @assignmentTargetNoSelfAST analyzeAssignmentTarget
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?targetAccessKind:let @targetAccessKind inSelfAccessKind
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
@@ -112,49 +150,102 @@ method @assignmentTargetAST analyzeAssignmentTarget
   !globalVariableReceiverName:@string outGlobalVariableReceiverName
 {
 #--- object access, with ou without self
-  switch mHasSelfPrefix
-  case noSelfPrefix :
 #    [!?ioUniversalMap searchValuedObjectForWriteAccess !mIdentifier ?let isPublic ?let currentObject]
-    if [ioVariableMap hasKey !mIdentifier] then
-      switch inSelfAccessKind
-      case read :
-        [!?ioVariableMap searchForReadAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
-      case write :
-        [!?ioVariableMap searchForWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
-      case readWrite :
-        [!?ioVariableMap searchForReadWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
-      end
-      outGlobalVariableReceiverName = if [outCurrentObject isGlobalVariableReference] then mIdentifier.string else "" end
-    else # Stand alone function call ?
-      outCurrentObject = .possibleFunction {!receiver:.null !functionName:mIdentifier}
-      outGlobalVariableReceiverName = ""
+  if [ioVariableMap hasKey !mIdentifier] then
+    switch inSelfAccessKind
+    case read :
+      [!?ioVariableMap searchForReadAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
+    case write :
+      [!?ioVariableMap searchForWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
+    case readWrite :
+      [!?ioVariableMap searchForReadWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
     end
-  case selfPrefix (@location selfLocation) :
-    outGlobalVariableReceiverName = "" # Receiver is not a global variable
-    if inSelfType == .null then
-      error selfLocation : "'self' is not available in this context" : outCurrentObject
-    elsif [[inSelfType kind] isStructure] then
-      [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
- ##     [universalMap searchProperty !mIdentifier ?* ?let object]
-      if [structureObjectMap hasKey !mIdentifier] then
-        [structureObjectMap searchKey
-          !mIdentifier
-          ?*
-          ?let object
-        ]
-        handleSelfAccessInAssignment (
-          !inSelfType
-          !object
+    outGlobalVariableReceiverName = if [outCurrentObject isGlobalVariableReference] then mIdentifier.string else "" end
+  else # Stand alone function call ?
+    outCurrentObject = .possibleFunction {!receiver:.null !functionName:mIdentifier}
+    outGlobalVariableReceiverName = ""
+  end
+#--- Analyze properties, subscripts
+  if [mAccessList length] == 0 then # 
+    [ioUniversalMap searchValuedObject !mIdentifier ?let unused isPublic ?outCurrentObject]
+    [!?ioUniversalMap checkValuedObjectIsWritable !mIdentifier]
+  else
+    for (access) in mAccessList do
+      switch access
+      case property (propertyName) :
+        handlePropertyAccessInAssignment (
+          !?outCurrentObject
+          !propertyName
           !?ioTemporaries
           !?ioInstructionGenerationList
-          ?outCurrentObject
         )
-      else # Function call ?
-        outCurrentObject = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mIdentifier}
+      case arrayAccess (indexExpression endOfExpression) :
+        handleSubscriptInAssignmentAndExpression (
+          !self:inSelfType
+          !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+          !inGuard:false
+          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+          !context:inContext
+          !mode:inCurrentMode
+          !?temporary:ioTemporaries
+          !?staticStringMap:ioGlobalLiteralStringMap
+          !?variableMap:ioVariableMap
+          !?variableMap:ioUniversalMap
+          !?alloca:ioAllocaList
+          !indexExpression
+          !endOfExpression
+          !?ioInstructionGenerationList
+          !?outCurrentObject
+        )
       end
-    else
-      error selfLocation : "'self' should be a structure instance" : outCurrentObject, outGlobalVariableReceiverName
     end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @assignmentTargetSelfAST analyzeAssignmentTarget
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?targetAccessKind:let @targetAccessKind unused inSelfAccessKind
+  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !@objectIR outCurrentObject
+  !globalVariableReceiverName:@string outGlobalVariableReceiverName
+{
+#--- object access, with ou without self
+  outGlobalVariableReceiverName = "" # Receiver is not a global variable
+  if inSelfType == .null then
+    error mIdentifier : "'self' is not available in this context" : outCurrentObject
+  elsif [[inSelfType kind] isStructure] then
+    [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
+ ##     [universalMap searchProperty !mIdentifier ?* ?let object]
+    if [structureObjectMap hasKey !mIdentifier] then
+      [structureObjectMap searchKey
+        !mIdentifier
+        ?*
+        ?let object
+      ]
+      handleSelfAccessInAssignment (
+        !inSelfType
+        !object
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+        ?outCurrentObject
+      )
+    else # Function call ?
+      outCurrentObject = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mIdentifier}
+    end
+  else
+    error mIdentifier : "'self' should be a structure instance" : outCurrentObject, outGlobalVariableReceiverName
   end
 #--- Analyze properties, subscripts
   for (access) in mAccessList do
@@ -190,7 +281,7 @@ method @assignmentTargetAST analyzeAssignmentTarget
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc handleSelfAccessInAssignment
+proc handleSelfAccessInAssignment
   ?let @unifiedTypeMap-proxy inSelfType
   ?let @objectIR inObject
   ?!@semanticTemporariesStruct ioTemporaries
@@ -219,7 +310,7 @@ private proc handleSelfAccessInAssignment
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc handlePropertyAccessInAssignment
+proc handlePropertyAccessInAssignment
   ?!@objectIR ioObject
   ?let @lstring inPropertyName
   ?!@semanticTemporariesStruct ioTemporaries

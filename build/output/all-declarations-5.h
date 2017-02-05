@@ -685,6 +685,18 @@ class GALGAS_bool extensionGetter_copyable (const class GALGAS_unifiedTypeMap_2D
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                Extension setter '@universalPropertyAndRoutineMapForContext insertUsedLocalConstant'                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_insertUsedLocalConstant (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                              const class GALGAS_lstring constin_inLocalConstantName,
+                                              const class GALGAS_objectIR constin_inConstantObjectIR,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                 Extension method '@routineMapIR svcCodeGeneration'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -789,6 +801,45 @@ void extensionMethod_enterAccessibleEntities (const class GALGAS_interruptMapIR 
                                               class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                          Abstract extension method '@callInstructionAST baseGuardAnalyze'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_callInstructionAST_baseGuardAnalyze) (const class cPtr_callInstructionAST * inObject,
+                                                                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                              const class GALGAS_lstring constinArgument1,
+                                                                              const class GALGAS_semanticContext constinArgument2,
+                                                                              const class GALGAS_mode constinArgument3,
+                                                                              class GALGAS_semanticTemporariesStruct & ioArgument4,
+                                                                              class GALGAS_staticStringMap & ioArgument5,
+                                                                              class GALGAS_unifiedSymbolMap & ioArgument6,
+                                                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument7,
+                                                                              class GALGAS_guardKindGenerationIR & outArgument8,
+                                                                              class C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_baseGuardAnalyze (const int32_t inClassIndex,
+                                            extensionMethodSignature_callInstructionAST_baseGuardAnalyze inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_baseGuardAnalyze (const class cPtr_callInstructionAST * inObject,
+                                           const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                           const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                           const GALGAS_semanticContext constin_inContext,
+                                           const GALGAS_mode constin_inMode,
+                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                           GALGAS_unifiedSymbolMap & io_ioVariableMap,
+                                           GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
+                                           GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

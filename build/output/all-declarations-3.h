@@ -1136,14 +1136,14 @@ class GALGAS_routineSignatureMapForContext : public AC_GALGAS_map {
 
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
-                                                      const class GALGAS_string & inOperand1,
+                                                      const class GALGAS_lstring & inOperand1,
                                                       const class GALGAS_routineDescriptor & inOperand2,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public : VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_string constinArgument1,
+                                                   class GALGAS_lstring constinArgument1,
                                                    class GALGAS_routineDescriptor constinArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
@@ -1153,7 +1153,7 @@ class GALGAS_routineSignatureMapForContext : public AC_GALGAS_map {
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMLLVMInvocationRoutineNameForKey (class GALGAS_string constinArgument0,
+  public : VIRTUAL_IN_DEBUG void setter_setMLLVMInvocationRoutineNameForKey (class GALGAS_lstring constinArgument0,
                                                                              class GALGAS_string constinArgument1,
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) ;
@@ -1161,7 +1161,7 @@ class GALGAS_routineSignatureMapForContext : public AC_GALGAS_map {
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
-                                                   class GALGAS_string & outArgument1,
+                                                   class GALGAS_lstring & outArgument1,
                                                    class GALGAS_routineDescriptor & outArgument2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const ;
@@ -1173,9 +1173,9 @@ class GALGAS_routineSignatureMapForContext : public AC_GALGAS_map {
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMInvocationRoutineNameForKey (const class GALGAS_string & constinOperand0,
-                                                                                         C_Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLLVMInvocationRoutineNameForKey (const class GALGAS_string & constinOperand0,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineSignatureMapForContext getter_overriddenMap (C_Compiler * inCompiler
                                                                                              COMMA_LOCATION_ARGS) const ;
@@ -1203,7 +1203,7 @@ class cEnumerator_routineSignatureMapForContext : public cGenericAbstractEnumera
 
 //--- Current element access
   public : class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
-  public : class GALGAS_string current_mLLVMInvocationRoutineName (LOCATION_ARGS) const ;
+  public : class GALGAS_lstring current_mLLVMInvocationRoutineName (LOCATION_ARGS) const ;
   public : class GALGAS_routineDescriptor current_mDescriptor (LOCATION_ARGS) const ;
 //--- Current element access
   public : class GALGAS_routineSignatureMapForContext_2D_element current (LOCATION_ARGS) const ;
@@ -1688,12 +1688,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_referenceStateMap_2
 
 class cMapElement_routineSignatureMapForContext : public cMapElement {
 //--- Map attributes
-  public : GALGAS_string mProperty_mLLVMInvocationRoutineName ;
+  public : GALGAS_lstring mProperty_mLLVMInvocationRoutineName ;
   public : GALGAS_routineDescriptor mProperty_mDescriptor ;
 
 //--- Constructor
   public : cMapElement_routineSignatureMapForContext (const GALGAS_lstring & inKey,
-                                                      const GALGAS_string & in_mLLVMInvocationRoutineName,
+                                                      const GALGAS_lstring & in_mLLVMInvocationRoutineName,
                                                       const GALGAS_routineDescriptor & in_mDescriptor
                                                       COMMA_LOCATION_ARGS) ;
 
@@ -1719,7 +1719,7 @@ class cMapElement_routineSignatureMapForContext : public cMapElement {
 class GALGAS_routineSignatureMapForContext_2D_element : public AC_GALGAS_root {
 //--------------------------------- Public data members
   public : GALGAS_lstring mProperty_lkey ;
-  public : GALGAS_string mProperty_mLLVMInvocationRoutineName ;
+  public : GALGAS_lstring mProperty_mLLVMInvocationRoutineName ;
   public : GALGAS_routineDescriptor mProperty_mDescriptor ;
 
 
@@ -1735,7 +1735,7 @@ class GALGAS_routineSignatureMapForContext_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public : GALGAS_routineSignatureMapForContext_2D_element (const GALGAS_lstring & in_lkey,
-                                                            const GALGAS_string & in_mLLVMInvocationRoutineName,
+                                                            const GALGAS_lstring & in_mLLVMInvocationRoutineName,
                                                             const GALGAS_routineDescriptor & in_mDescriptor) ;
 
 //-- Start of generic part --*
@@ -1750,7 +1750,7 @@ class GALGAS_routineSignatureMapForContext_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_routineSignatureMapForContext_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                         const class GALGAS_string & inOperand1,
+                                                                                         const class GALGAS_lstring & inOperand1,
                                                                                          const class GALGAS_routineDescriptor & inOperand2
                                                                                          COMMA_LOCATION_ARGS) ;
 
@@ -1770,7 +1770,7 @@ class GALGAS_routineSignatureMapForContext_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineDescriptor getter_mDescriptor (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMInvocationRoutineName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLLVMInvocationRoutineName (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
