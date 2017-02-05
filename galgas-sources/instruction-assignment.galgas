@@ -16,13 +16,26 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
-    <assignment_target> ?let @assignmentTargetAST assignmentTargetAST
+    <assignment_target_noself> ?let assignmentTargetAST
   #--- Source expression
     $=$
     <expression> ?let sourceExpression
   #--- AST
     ioInstructionList +=
-      !assignmentTargetAST.mIdentifier.location
+      ![assignmentTargetAST mIdentifier].location
+      !@varAssignmentInstructionAST.new {!assignmentTargetAST !sourceExpression}
+  }
+
+  #·····················································································································
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    <assignment_target_self> ?let assignmentTargetAST
+  #--- Source expression
+    $=$
+    <expression> ?let sourceExpression
+  #--- AST
+    ioInstructionList +=
+      ![assignmentTargetAST mIdentifier].location
       !@varAssignmentInstructionAST.new {!assignmentTargetAST !sourceExpression}
   }
 
@@ -75,7 +88,7 @@ override method @varAssignmentInstructionAST analyze
     ?globalVariableReceiverName:let unused globalVariableReceiverName
   ]
   if [currentObject isPossibleFunction] then
-    error mAssignmentTargetAST.mIdentifier : "invalid assignment target" : currentObject
+    error [mAssignmentTargetAST mIdentifier] : "invalid assignment target" : currentObject
   end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -97,16 +110,16 @@ override method @varAssignmentInstructionAST analyze
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !sourceOperandPossibleReference
-    !mAssignmentTargetAST.mIdentifier
+    ![mAssignmentTargetAST mIdentifier]
     ?let sourceOperand
   ]  
   let result = checkAssignmentCompatibility (
     !source:sourceOperand
     !targetAnnotationType:[currentObject type]
-    !errorLocation:mAssignmentTargetAST.mIdentifier
+    !errorLocation:[mAssignmentTargetAST mIdentifier]
     !staticTypeAllowed:false
   )
-  [!?ioInstructionGenerationList appendStoreFromReference !currentObject !mAssignmentTargetAST.mIdentifier !result]
+  [!?ioInstructionGenerationList appendStoreFromReference !currentObject ![mAssignmentTargetAST mIdentifier] !result]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

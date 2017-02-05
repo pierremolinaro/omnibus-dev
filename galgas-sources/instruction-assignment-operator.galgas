@@ -69,7 +69,22 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <instruction> ?!@instructionListAST ioInstructionList {
-    <assignment_target> ?let @assignmentTargetAST assignmentTargetAST
+    <assignment_target_noself> ?let assignmentTargetAST
+    let instructionLocation = @location.here
+    <assignment_operator> ?let @operatorAssignmentKind operatorAssign
+    <expression> ?let @expressionAST expression
+    ioInstructionList += !instructionLocation !@varOperatorAssignInstructionAST.new {
+      !assignmentTargetAST
+      !operatorAssign
+      !expression
+      !.here
+    }
+  }
+
+  #·····················································································································
+
+  rule <instruction> ?!@instructionListAST ioInstructionList {
+    <assignment_target_self> ?let assignmentTargetAST
     let instructionLocation = @location.here
     <assignment_operator> ?let @operatorAssignmentKind operatorAssign
     <expression> ?let @expressionAST expression
@@ -131,7 +146,7 @@ override method @varOperatorAssignInstructionAST analyze
     ?globalVariableReceiverName:let unused globalVariableReceiverName
   ]
   if [targetObject isPossibleFunction] then
-    error mAssignmentTargetAST.mIdentifier : "invalid assignment target" : targetObject
+    error [mAssignmentTargetAST mIdentifier] : "invalid assignment target" : targetObject
   end
 #--- Analyze source expression
   [mSourceExpression analyzeExpression
@@ -181,7 +196,7 @@ override method @varOperatorAssignInstructionAST analyze
     operatorMap = inContext.mXorOperatorMap
   case addAssign :
     if panicMode then
-      error mAssignmentTargetAST.mIdentifier
+      error [mAssignmentTargetAST mIdentifier]
        : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     operatorMap = if noPanicGeneration then inContext.mAddNoOvfOperatorMap else inContext.mAddOperatorMap end
@@ -189,7 +204,7 @@ override method @varOperatorAssignInstructionAST analyze
     operatorMap = inContext.mAddNoOvfOperatorMap
   case subAssign :
     if panicMode then
-      error mAssignmentTargetAST.mIdentifier
+      error [mAssignmentTargetAST mIdentifier]
        : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     operatorMap = if noPanicGeneration then inContext.mSubNoOvfOperatorMap else inContext.mSubOperatorMap end
@@ -197,7 +212,7 @@ override method @varOperatorAssignInstructionAST analyze
     operatorMap = inContext.mSubNoOvfOperatorMap
   case mulAssign :
     if panicMode then
-      error mAssignmentTargetAST.mIdentifier
+      error [mAssignmentTargetAST mIdentifier]
        : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     operatorMap = if noPanicGeneration then inContext.mMulNoOvfOperatorMap else inContext.mMulOperatorMap end
@@ -205,7 +220,7 @@ override method @varOperatorAssignInstructionAST analyze
     operatorMap = inContext.mMulNoOvfOperatorMap
   case divAssign :
     if panicMode then
-      error mAssignmentTargetAST.mIdentifier
+      error [mAssignmentTargetAST mIdentifier]
        : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     operatorMap = if noPanicGeneration then inContext.mDivNoOvfOperatorMap else inContext.mDivOperatorMap end
@@ -213,7 +228,7 @@ override method @varOperatorAssignInstructionAST analyze
     operatorMap = inContext.mDivNoOvfOperatorMap
   case modAssign :
     if panicMode then
-      error mAssignmentTargetAST.mIdentifier
+      error [mAssignmentTargetAST mIdentifier]
        : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
     end
     operatorMap = if noPanicGeneration then inContext.mModNoOvfOperatorMap else inContext.mModOperatorMap end
@@ -223,7 +238,7 @@ override method @varOperatorAssignInstructionAST analyze
   [operatorMap checkBinaryOperationWith
     !leftType:[targetObject type]
     !rightType:[sourceValue type]
-    !operatorLocation:mAssignmentTargetAST.mIdentifier
+    !operatorLocation:[mAssignmentTargetAST mIdentifier]
     ?resultType:*
     ?op:let @infixOperatorDescription binaryOperator
   ]
@@ -231,21 +246,21 @@ override method @varOperatorAssignInstructionAST analyze
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !targetObject
-    !mAssignmentTargetAST.mIdentifier
+    ![mAssignmentTargetAST mIdentifier]
     ?let variableValue
   ]
   [binaryOperator generateInfixOperatorCode
     !?ioTemporaries
     !?ioInstructionGenerationList
     !variableValue
-    !mAssignmentTargetAST.mIdentifier
+    ![mAssignmentTargetAST mIdentifier]
     !sourceValue
     ![targetObject type]
     ?let newResultingValue
   ]
   [!?ioInstructionGenerationList appendStoreFromReference
     !targetObject
-    !mAssignmentTargetAST.mIdentifier
+    ![mAssignmentTargetAST mIdentifier]
     !newResultingValue
   ]
 }

@@ -196,6 +196,12 @@ proc guardSemanticAnalysis
     let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
     let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
     allocaList += !resultVarName.string ![[resultType kind] llvmTypeName]
+    [!?universalMap insertLocalVariable
+      !resultVarName
+      !.localVariableReference {!type:resultType !plmName:resultVarName}
+      !.noValue
+      !true
+    ]
     [!?variableMap insertOutputFormalArgument
       !lkey:resultVarName
       !type:resultType
@@ -284,7 +290,36 @@ proc guardSemanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @callInstructionAST baseGuardAnalyze
+abstract method @callInstructionAST baseGuardAnalyze
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @simpleCallInstructionAST baseGuardAnalyze
+  ?self:let @unifiedTypeMap-proxy unused inSelfType
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?context:let @semanticContext unused inContext
+  ?mode:let @mode unused inMode
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
+  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+{
+  error mSandAloneRoutineName : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @complexCallInstructionAST baseGuardAnalyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext

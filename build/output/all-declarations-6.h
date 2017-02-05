@@ -379,6 +379,57 @@ class GALGAS_string extensionGetter_passingModeForActualSelector (const class GA
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                    Abstract extension method '@assignmentTargetAST analyzeTargetForRoutineCall'                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionMethodSignature_assignmentTargetAST_analyzeTargetForRoutineCall) (const class cPtr_assignmentTargetAST * inObject,
+                                                                                          const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                                          const class GALGAS_targetAccessKind constinArgument1,
+                                                                                          const class GALGAS_bool constinArgument2,
+                                                                                          const class GALGAS_bool constinArgument3,
+                                                                                          const class GALGAS_lstring constinArgument4,
+                                                                                          const class GALGAS_semanticContext constinArgument5,
+                                                                                          const class GALGAS_mode constinArgument6,
+                                                                                          class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                                                                          class GALGAS_staticStringMap & ioArgument8,
+                                                                                          class GALGAS_unifiedSymbolMap & ioArgument9,
+                                                                                          class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument10,
+                                                                                          class GALGAS_allocaList & ioArgument11,
+                                                                                          class GALGAS_instructionListIR & ioArgument12,
+                                                                                          class GALGAS_objectIR & outArgument13,
+                                                                                          class GALGAS_string & outArgument14,
+                                                                                          class C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_analyzeTargetForRoutineCall (const int32_t inClassIndex,
+                                                       extensionMethodSignature_assignmentTargetAST_analyzeTargetForRoutineCall inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_analyzeTargetForRoutineCall (const class cPtr_assignmentTargetAST * inObject,
+                                                      const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                                      const GALGAS_targetAccessKind constin_inSelfAccessKind,
+                                                      const GALGAS_bool constin_inRoutineCanMutateProperties,
+                                                      const GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
+                                                      const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                                      const GALGAS_semanticContext constin_inContext,
+                                                      const GALGAS_mode constin_inCurrentMode,
+                                                      GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                      GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                      GALGAS_unifiedSymbolMap & io_ioVariableMap,
+                                                      GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
+                                                      GALGAS_allocaList & io_ioAllocaList,
+                                                      GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                      GALGAS_objectIR & out_outCurrentObject,
+                                                      GALGAS_string & out_outGlobalVariableReceiverName,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             @switchInstructionIR class                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -482,86 +533,73 @@ class cPtr_switchInstructionIR : public cPtr_abstractInstructionIR {
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_assignmentTargetAST inObject,
-                                                            class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                            class C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_assignmentTargetAST_noteInstructionTypesInPrecedenceGraph) (const class cPtr_assignmentTargetAST * inObject,
+                                                                                                    class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
+                                                                                                    class C_Compiler * inCompiler
+                                                                                                    COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_noteInstructionTypesInPrecedenceGraph (const int32_t inClassIndex,
+                                                                 extensionMethodSignature_assignmentTargetAST_noteInstructionTypesInPrecedenceGraph inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_noteInstructionTypesInPrecedenceGraph (const class cPtr_assignmentTargetAST * inObject,
+                                                                GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Extension method '@assignmentTargetAST analyzeAssignmentTarget'                           *
+//                      Abstract extension method '@assignmentTargetAST analyzeAssignmentTarget'                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_analyzeAssignmentTarget (const class GALGAS_assignmentTargetAST inObject,
-                                              const class GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                              const class GALGAS_targetAccessKind constin_inSelfAccessKind,
-                                              const class GALGAS_bool constin_inRoutineCanMutateProperties,
-                                              const class GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
-                                              const class GALGAS_lstring constin_inCallerNameForInvocationGraph,
-                                              const class GALGAS_semanticContext constin_inContext,
-                                              const class GALGAS_mode constin_inCurrentMode,
-                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                              class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                              class GALGAS_unifiedSymbolMap & io_ioVariableMap,
-                                              class GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
-                                              class GALGAS_allocaList & io_ioAllocaList,
-                                              class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                              class GALGAS_objectIR & out_outCurrentObject,
-                                              class GALGAS_string & out_outGlobalVariableReceiverName,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_assignmentTargetAST_analyzeAssignmentTarget) (const class cPtr_assignmentTargetAST * inObject,
+                                                                                      const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                                                                      const class GALGAS_targetAccessKind constinArgument1,
+                                                                                      const class GALGAS_bool constinArgument2,
+                                                                                      const class GALGAS_bool constinArgument3,
+                                                                                      const class GALGAS_lstring constinArgument4,
+                                                                                      const class GALGAS_semanticContext constinArgument5,
+                                                                                      const class GALGAS_mode constinArgument6,
+                                                                                      class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                                                                      class GALGAS_staticStringMap & ioArgument8,
+                                                                                      class GALGAS_unifiedSymbolMap & ioArgument9,
+                                                                                      class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument10,
+                                                                                      class GALGAS_allocaList & ioArgument11,
+                                                                                      class GALGAS_instructionListIR & ioArgument12,
+                                                                                      class GALGAS_objectIR & outArgument13,
+                                                                                      class GALGAS_string & outArgument14,
+                                                                                      class C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Routine 'handlePropertyAccessInAssignment'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
 
-void routine_handlePropertyAccessInAssignment (class GALGAS_objectIR & ioArgument0,
-                                               const class GALGAS_lstring constinArgument1,
-                                               class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                               class GALGAS_instructionListIR & ioArgument3,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
+void enterExtensionMethod_analyzeAssignmentTarget (const int32_t inClassIndex,
+                                                   extensionMethodSignature_assignmentTargetAST_analyzeAssignmentTarget inMethod) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Routine 'handleSelfAccessInAssignment'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
 
-void routine_handleSelfAccessInAssignment (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                           const class GALGAS_objectIR constinArgument1,
-                                           class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                           class GALGAS_instructionListIR & ioArgument3,
-                                           class GALGAS_objectIR & outArgument4,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                 Routine 'handleSubscriptInAssignmentAndExpression'                                  *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleSubscriptInAssignmentAndExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                       const class GALGAS_bool constinArgument1,
-                                                       const class GALGAS_bool constinArgument2,
-                                                       const class GALGAS_lstring constinArgument3,
-                                                       const class GALGAS_semanticContext constinArgument4,
-                                                       const class GALGAS_mode constinArgument5,
-                                                       class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                       class GALGAS_staticStringMap & ioArgument7,
-                                                       class GALGAS_unifiedSymbolMap & ioArgument8,
-                                                       class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument9,
-                                                       class GALGAS_allocaList & ioArgument10,
-                                                       const class GALGAS_expressionAST constinArgument11,
-                                                       const class GALGAS_location constinArgument12,
-                                                       class GALGAS_instructionListIR & ioArgument13,
-                                                       class GALGAS_objectIR & ioArgument14,
-                                                       class C_Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_analyzeAssignmentTarget (const class cPtr_assignmentTargetAST * inObject,
+                                                  const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                                  const GALGAS_targetAccessKind constin_inSelfAccessKind,
+                                                  const GALGAS_bool constin_inRoutineCanMutateProperties,
+                                                  const GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
+                                                  const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                                  const GALGAS_semanticContext constin_inContext,
+                                                  const GALGAS_mode constin_inCurrentMode,
+                                                  GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                  GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                                  GALGAS_unifiedSymbolMap & io_ioVariableMap,
+                                                  GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
+                                                  GALGAS_allocaList & io_ioAllocaList,
+                                                  GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                  GALGAS_objectIR & out_outCurrentObject,
+                                                  GALGAS_string & out_outGlobalVariableReceiverName,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -572,7 +610,7 @@ void routine_handleSubscriptInAssignmentAndExpression (const class GALGAS_unifie
 void extensionSetter_insertRoutine (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
                                     const class GALGAS_lstring constin_inRoutineName,
                                     const class GALGAS_lstring constin_inArgumentSignature,
-                                    const class GALGAS_string constin_inLLVMInvocationRoutineName,
+                                    const class GALGAS_lstring constin_inLLVMInvocationRoutineName,
                                     const class GALGAS_routineDescriptor constin_inDescriptor,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
@@ -844,7 +882,7 @@ void extensionMethod_searchValuedObject (const class GALGAS_universalPropertyAnd
 void extensionMethod_searchRoutine (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
                                     const class GALGAS_lstring constin_inRoutineName,
                                     const class GALGAS_lstring constin_inArgumentSignature,
-                                    class GALGAS_string & out_outLLVMInvocationRoutineName,
+                                    class GALGAS_lstring & out_outLLVMInvocationRoutineName,
                                     class GALGAS_routineDescriptor & out_outDescriptor,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
