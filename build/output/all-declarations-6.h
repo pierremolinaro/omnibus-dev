@@ -862,16 +862,29 @@ void extensionSetter_closeOverride (class GALGAS_universalPropertyAndRoutineMapF
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                   Extension method '@universalPropertyAndRoutineMapForContext searchValuedObject'                   *
+//            Extension setter '@universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess'             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_searchValuedObject (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
-                                         const class GALGAS_lstring constin_inValuedObjectName,
-                                         class GALGAS_bool & out_outIsPublic,
-                                         class GALGAS_objectIR & out_outObjectIR,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
+void extensionSetter_searchValuedObjectForReadAccess (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                                      const class GALGAS_lstring constin_inValuedObjectName,
+                                                      class GALGAS_bool & out_outIsPublic,
+                                                      class GALGAS_objectIR & out_outObjectIR,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//            Extension setter '@universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAccess'            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_searchValuedObjectForWriteAccess (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
+                                                       const class GALGAS_lstring constin_inValuedObjectName,
+                                                       class GALGAS_bool & out_outIsPublic,
+                                                       class GALGAS_objectIR & out_outObjectIR,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -886,28 +899,6 @@ void extensionMethod_searchRoutine (const class GALGAS_universalPropertyAndRouti
                                     class GALGAS_routineDescriptor & out_outDescriptor,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//              Extension setter '@universalPropertyAndRoutineMapForContext checkValuedObjectIsReadable'               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_checkValuedObjectIsReadable (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
-                                                  const class GALGAS_lstring constin_inValuedObjectName,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//              Extension setter '@universalPropertyAndRoutineMapForContext checkValuedObjectIsWritable'               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void extensionSetter_checkValuedObjectIsWritable (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
-                                                  const class GALGAS_lstring constin_inValuedObjectName,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
