@@ -98,7 +98,7 @@ module time {
   //············································································
   
   public func init busyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
-    for delay $uint32 in 0 ..< inDelay {
+    for _ $uint32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
     }
   }
@@ -106,7 +106,7 @@ module time {
   //············································································
   
   public func panic panicBusyWaitingDuringMS @noUnusedWarning (?inDelay $uint32) {
-    for delay $uint32 in 0 ..< inDelay {
+    for _ $uint32 in 0 ..< inDelay {
       self.panicOneMillisecondBusyWait ()
     }
   }

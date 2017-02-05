@@ -139,6 +139,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
    kToken__3D_,
    kToken__28_,
    kToken__29_,
+   kToken__5F_,
    kToken__3D__3D_,
    kToken__21__3D_,
    kToken__3C_,
@@ -210,7 +211,7 @@ class C_Lexique_plm_5F_lexique : public C_Lexique {
   protected : virtual C_String getMessageForTerminal (const int16_t inTerminalSymbol) const ;
 
 //--- Get terminal count
-  public : virtual int16_t terminalVocabularyCount (void) const { return 114 ; }
+  public : virtual int16_t terminalVocabularyCount (void) const { return 115 ; }
 
 //--- Get Token String
   public : virtual C_String getCurrentTokenString (const cToken * inTokenPtr) const ;
@@ -6662,6 +6663,8 @@ class cParser_plm_5F_syntax {
   protected : virtual int32_t select_plm_5F_syntax_79 (C_Lexique_plm_5F_lexique *) = 0 ;
 
   protected : virtual int32_t select_plm_5F_syntax_80 (C_Lexique_plm_5F_lexique *) = 0 ;
+
+  protected : virtual int32_t select_plm_5F_syntax_81 (C_Lexique_plm_5F_lexique *) = 0 ;
 
 
 } ;
