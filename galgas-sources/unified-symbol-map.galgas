@@ -184,7 +184,7 @@ proc getNewTempVariable
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sharedmap @unifiedSymbolMap %selectors {
+shared map @unifiedSymbolMap %selectors {
   @unifiedTypeMap-proxy type
   @bool readAccessAllowed
   @objectIR objectIR

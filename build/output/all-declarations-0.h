@@ -444,9 +444,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_declarationListAST 
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_declarationListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_abstractDeclaration mProperty_mDeclaration ;
-
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -741,12 +740,14 @@ class cPtr_expressionAST : public acPtr_class {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_globalVarDeclarationList_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_mTypeName ;
-  public : GALGAS_lstring mProperty_mVarName ;
-  public : GALGAS_expressionAST mProperty_mSourceExpression ;
-  public : GALGAS_bool mProperty_mAllowedAccessToAll ;
 
+  public : GALGAS_lstring mProperty_mVarName ;
+
+  public : GALGAS_expressionAST mProperty_mSourceExpression ;
+
+  public : GALGAS_bool mProperty_mAllowedAccessToAll ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1812,13 +1813,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_systemRoutineDeclar
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_extensionDeclarationListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_mTypeName ;
-  public : GALGAS_functionDeclarationListAST mProperty_mProcedureDeclarationListAST ;
-  public : GALGAS_structurePropertyListAST mProperty_mPropertyList ;
-  public : GALGAS_systemRoutineDeclarationListAST mProperty_mSVCListAST ;
-  public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
 
+  public : GALGAS_functionDeclarationListAST mProperty_mProcedureDeclarationListAST ;
+
+  public : GALGAS_structurePropertyListAST mProperty_mPropertyList ;
+
+  public : GALGAS_systemRoutineDeclarationListAST mProperty_mSVCListAST ;
+
+  public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2365,12 +2369,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterName
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_controlRegisterDeclarationListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_controlRegisterNameList mProperty_mRegisterNameList ;
-  public : GALGAS_lstring mProperty_mRegisterTypeName ;
-  public : GALGAS_controlRegisterBitSliceList mProperty_mRegisterBitSliceList ;
-  public : GALGAS_location mProperty_mRegisterBitSliceListLocation ;
 
+  public : GALGAS_lstring mProperty_mRegisterTypeName ;
+
+  public : GALGAS_controlRegisterBitSliceList mProperty_mRegisterBitSliceList ;
+
+  public : GALGAS_location mProperty_mRegisterBitSliceListLocation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2855,16 +2861,22 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineFormalArgume
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_functionDeclarationListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_mode mProperty_mMode ;
-  public : GALGAS_bool mProperty_mPublicFunction ;
-  public : GALGAS_lstring mProperty_mFunctionName ;
-  public : GALGAS_lstringlist mProperty_mFunctionAttributeList ;
-  public : GALGAS_routineFormalArgumentList mProperty_mFunctionFormalArgumentList ;
-  public : GALGAS_lstring mProperty_mFunctionReturnTypeName ;
-  public : GALGAS_instructionListAST mProperty_mFunctionInstructionList ;
-  public : GALGAS_location mProperty_mEndOfFunctionDeclaration ;
 
+  public : GALGAS_bool mProperty_mPublicFunction ;
+
+  public : GALGAS_lstring mProperty_mFunctionName ;
+
+  public : GALGAS_lstringlist mProperty_mFunctionAttributeList ;
+
+  public : GALGAS_routineFormalArgumentList mProperty_mFunctionFormalArgumentList ;
+
+  public : GALGAS_lstring mProperty_mFunctionReturnTypeName ;
+
+  public : GALGAS_instructionListAST mProperty_mFunctionInstructionList ;
+
+  public : GALGAS_location mProperty_mEndOfFunctionDeclaration ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -3132,13 +3144,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_requiredProcedureDe
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_requiredProcedureDeclarationListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_mName ;
-  public : GALGAS_mode mProperty_mExecutionMode ;
-  public : GALGAS_bool mProperty_mIsExported ;
-  public : GALGAS_routineFormalArgumentList mProperty_mFormalArgumentList ;
-  public : GALGAS_location mProperty_mEndOfProcLocation ;
 
+  public : GALGAS_mode mProperty_mExecutionMode ;
+
+  public : GALGAS_bool mProperty_mIsExported ;
+
+  public : GALGAS_routineFormalArgumentList mProperty_mFormalArgumentList ;
+
+  public : GALGAS_location mProperty_mEndOfProcLocation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -3408,14 +3423,18 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externProcedureDecl
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_externProcedureDeclarationListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_mExternProcedureName ;
-  public : GALGAS_mode mProperty_mMode ;
-  public : GALGAS_routineFormalArgumentList mProperty_mProcFormalArgumentList ;
-  public : GALGAS_lstring mProperty_mReturnTypeName ;
-  public : GALGAS_lstring mProperty_mRoutineNameForGeneration ;
-  public : GALGAS_location mProperty_mEndOfProcLocation ;
 
+  public : GALGAS_mode mProperty_mMode ;
+
+  public : GALGAS_routineFormalArgumentList mProperty_mProcFormalArgumentList ;
+
+  public : GALGAS_lstring mProperty_mReturnTypeName ;
+
+  public : GALGAS_lstring mProperty_mRoutineNameForGeneration ;
+
+  public : GALGAS_location mProperty_mEndOfProcLocation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -3689,14 +3708,18 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_isrDeclarationListA
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_isrDeclarationListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_mISRName ;
-  public : GALGAS_mode mProperty_mMode ;
-  public : GALGAS_lstring mProperty_mSelfTypeName ;
-  public : GALGAS_string mProperty_mGlobalVariableName ;
-  public : GALGAS_instructionListAST mProperty_mISRInstructionList ;
-  public : GALGAS_location mProperty_mEndOfISRDeclaration ;
 
+  public : GALGAS_mode mProperty_mMode ;
+
+  public : GALGAS_lstring mProperty_mSelfTypeName ;
+
+  public : GALGAS_string mProperty_mGlobalVariableName ;
+
+  public : GALGAS_instructionListAST mProperty_mISRInstructionList ;
+
+  public : GALGAS_location mProperty_mEndOfISRDeclaration ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -3889,16 +3912,22 @@ class cEnumAssociatedValues_routineKind_function : public cEnumAssociatedValues 
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_systemRoutineDeclarationListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_mName ;
-  public : GALGAS_routineKind mProperty_mRoutineKind ;
-  public : GALGAS_bool mProperty_mPublic ;
-  public : GALGAS_lstringlist mProperty_mAttributeList ;
-  public : GALGAS_routineFormalArgumentList mProperty_mFormalArgumentList ;
-  public : GALGAS_lstring mProperty_mReturnTypeName ;
-  public : GALGAS_instructionListAST mProperty_mInstructionList ;
-  public : GALGAS_location mProperty_mEndOfInstructionListLocation ;
 
+  public : GALGAS_routineKind mProperty_mRoutineKind ;
+
+  public : GALGAS_bool mProperty_mPublic ;
+
+  public : GALGAS_lstringlist mProperty_mAttributeList ;
+
+  public : GALGAS_routineFormalArgumentList mProperty_mFormalArgumentList ;
+
+  public : GALGAS_lstring mProperty_mReturnTypeName ;
+
+  public : GALGAS_instructionListAST mProperty_mInstructionList ;
+
+  public : GALGAS_location mProperty_mEndOfInstructionListLocation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -4369,15 +4398,20 @@ class cEnumAssociatedValues_guardKind_convenienceGuard : public cEnumAssociatedV
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_guardDeclarationListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_mGuardName ;
-  public : GALGAS_bool mProperty_mIsPublic ;
-  public : GALGAS_lstringlist mProperty_mGuardAttributeList ;
-  public : GALGAS_routineFormalArgumentList mProperty_mGuardFormalArgumentList ;
-  public : GALGAS_guardKind mProperty_mGuardKind ;
-  public : GALGAS_instructionListAST mProperty_mGuardInstructionList ;
-  public : GALGAS_location mProperty_mEndOfGuardDeclaration ;
 
+  public : GALGAS_bool mProperty_mIsPublic ;
+
+  public : GALGAS_lstringlist mProperty_mGuardAttributeList ;
+
+  public : GALGAS_routineFormalArgumentList mProperty_mGuardFormalArgumentList ;
+
+  public : GALGAS_guardKind mProperty_mGuardKind ;
+
+  public : GALGAS_instructionListAST mProperty_mGuardInstructionList ;
+
+  public : GALGAS_location mProperty_mEndOfGuardDeclaration ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -4574,13 +4608,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bootList ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_bootList_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_location mProperty_mBootLocation ;
-  public : GALGAS_instructionListAST mProperty_mInstructionList ;
-  public : GALGAS_location mProperty_mEndOfBootLocation ;
-  public : GALGAS_bigint mProperty_mPriority ;
-  public : GALGAS_location mProperty_mPriorityLocation ;
 
+  public : GALGAS_instructionListAST mProperty_mInstructionList ;
+
+  public : GALGAS_location mProperty_mEndOfBootLocation ;
+
+  public : GALGAS_bigint mProperty_mPriority ;
+
+  public : GALGAS_location mProperty_mPriorityLocation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -4786,15 +4823,20 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_initList ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_initList_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_location mProperty_mInitLocation ;
-  public : GALGAS_lstring mProperty_mSelfTypeName ;
-  public : GALGAS_string mProperty_mGlobalVarName ;
-  public : GALGAS_lstringlist mProperty_mRequiredByProcList ;
-  public : GALGAS_instructionListAST mProperty_mInstructionList ;
-  public : GALGAS_location mProperty_mEndOfInitLocation ;
-  public : GALGAS_lbigint mProperty_mPriority ;
 
+  public : GALGAS_lstring mProperty_mSelfTypeName ;
+
+  public : GALGAS_string mProperty_mGlobalVarName ;
+
+  public : GALGAS_lstringlist mProperty_mRequiredByProcList ;
+
+  public : GALGAS_instructionListAST mProperty_mInstructionList ;
+
+  public : GALGAS_location mProperty_mEndOfInitLocation ;
+
+  public : GALGAS_lbigint mProperty_mPriority ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -4987,12 +5029,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicClauseListAST 
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_panicClauseListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_bool mProperty_mIsSetup ;
-  public : GALGAS_instructionListAST mProperty_mPanicInstructionList ;
-  public : GALGAS_location mProperty_mEndOfPanicInstructions ;
-  public : GALGAS_lbigint mProperty_mPriority ;
 
+  public : GALGAS_instructionListAST mProperty_mPanicInstructionList ;
+
+  public : GALGAS_location mProperty_mEndOfPanicInstructions ;
+
+  public : GALGAS_lbigint mProperty_mPriority ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -5742,16 +5786,22 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskVarListAST ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_taskList_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_mTaskName ;
-  public : GALGAS_lbigint mProperty_mPriority ;
-  public : GALGAS_lbigint mProperty_mStackSize ;
-  public : GALGAS_taskVarListAST mProperty_mVarList ;
-  public : GALGAS_functionDeclarationListAST mProperty_mTaskProcList ;
-  public : GALGAS_taskInitListAST mProperty_mTaskInitListAST ;
-  public : GALGAS_syncInstructionBranchList mProperty_mGuardedCommandList ;
-  public : GALGAS_location mProperty_mEndOfTaskDeclaration ;
 
+  public : GALGAS_lbigint mProperty_mPriority ;
+
+  public : GALGAS_lbigint mProperty_mStackSize ;
+
+  public : GALGAS_taskVarListAST mProperty_mVarList ;
+
+  public : GALGAS_functionDeclarationListAST mProperty_mTaskProcList ;
+
+  public : GALGAS_taskInitListAST mProperty_mTaskInitListAST ;
+
+  public : GALGAS_syncInstructionBranchList mProperty_mGuardedCommandList ;
+
+  public : GALGAS_location mProperty_mEndOfTaskDeclaration ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -13438,24 +13488,38 @@ class GALGAS_string function_staticAttribute (class C_Compiler * inCompiler
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_ast : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_globalVarDeclarationList mProperty_mGlobalVarDeclarationListAST ;
-  public : GALGAS_declarationListAST mProperty_mDeclarationListAST ;
-  public : GALGAS_extensionDeclarationListAST mProperty_mExtensionDeclarationListAST ;
-  public : GALGAS_controlRegisterDeclarationListAST mProperty_mControlRegisterDeclarationListAST ;
-  public : GALGAS_functionDeclarationListAST mProperty_mProcedureListAST ;
-  public : GALGAS_requiredProcedureDeclarationListAST mProperty_mRequiredProcListAST ;
-  public : GALGAS_externProcedureDeclarationListAST mProperty_mExternProcListAST ;
-  public : GALGAS_isrDeclarationListAST mProperty_mISRDeclarationListAST ;
-  public : GALGAS_systemRoutineDeclarationListAST mProperty_mStandAloneSystemRoutineListAST ;
-  public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
-  public : GALGAS_lstringlist mProperty_mTargetListAST ;
-  public : GALGAS_bootList mProperty_mBootListAST ;
-  public : GALGAS_initList mProperty_mInitListAST ;
-  public : GALGAS_panicClauseListAST mProperty_mPanicClauseListAST ;
-  public : GALGAS_taskList mProperty_mTaskListAST ;
-  public : GALGAS_lstringlist mProperty_mCheckTargetListAST ;
 
+  public : GALGAS_declarationListAST mProperty_mDeclarationListAST ;
+
+  public : GALGAS_extensionDeclarationListAST mProperty_mExtensionDeclarationListAST ;
+
+  public : GALGAS_controlRegisterDeclarationListAST mProperty_mControlRegisterDeclarationListAST ;
+
+  public : GALGAS_functionDeclarationListAST mProperty_mProcedureListAST ;
+
+  public : GALGAS_requiredProcedureDeclarationListAST mProperty_mRequiredProcListAST ;
+
+  public : GALGAS_externProcedureDeclarationListAST mProperty_mExternProcListAST ;
+
+  public : GALGAS_isrDeclarationListAST mProperty_mISRDeclarationListAST ;
+
+  public : GALGAS_systemRoutineDeclarationListAST mProperty_mStandAloneSystemRoutineListAST ;
+
+  public : GALGAS_guardDeclarationListAST mProperty_mGuardListAST ;
+
+  public : GALGAS_lstringlist mProperty_mTargetListAST ;
+
+  public : GALGAS_bootList mProperty_mBootListAST ;
+
+  public : GALGAS_initList mProperty_mInitListAST ;
+
+  public : GALGAS_panicClauseListAST mProperty_mPanicClauseListAST ;
+
+  public : GALGAS_taskList mProperty_mTaskListAST ;
+
+  public : GALGAS_lstringlist mProperty_mCheckTargetListAST ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
