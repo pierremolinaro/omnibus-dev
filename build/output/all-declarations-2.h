@@ -84,9 +84,8 @@ class cMapElement_panicRoutinePriorityMap : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_panicRoutinePriorityMap_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -465,20 +464,30 @@ class cMapElement_routineMapIR : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_routineMapIR_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReceiverType ;
-  public : GALGAS_lstring mProperty_mRoutineNameForGeneration ;
-  public : GALGAS_routineFormalArgumentListForGeneration mProperty_mFormalArgumentListForGeneration ;
-  public : GALGAS_allocaList mProperty_mAllocaList ;
-  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
-  public : GALGAS_bool mProperty_mIsRequired ;
-  public : GALGAS_bool mProperty_mWarnIfUnused ;
-  public : GALGAS_bool mProperty_mGlobal ;
-  public : GALGAS_routineKind mProperty_mKind ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
-  public : GALGAS_bool mProperty_mAppendFileAndLineArgumentForPanicLocation ;
 
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReceiverType ;
+
+  public : GALGAS_lstring mProperty_mRoutineNameForGeneration ;
+
+  public : GALGAS_routineFormalArgumentListForGeneration mProperty_mFormalArgumentListForGeneration ;
+
+  public : GALGAS_allocaList mProperty_mAllocaList ;
+
+  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
+
+  public : GALGAS_bool mProperty_mIsRequired ;
+
+  public : GALGAS_bool mProperty_mWarnIfUnused ;
+
+  public : GALGAS_bool mProperty_mGlobal ;
+
+  public : GALGAS_routineKind mProperty_mKind ;
+
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
+
+  public : GALGAS_bool mProperty_mAppendFileAndLineArgumentForPanicLocation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -620,9 +629,8 @@ class cMapElement_bootRoutinePriorityMap : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_bootRoutinePriorityMap_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -686,13 +694,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bootRoutinePriority
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_bootListIR_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_bigint mProperty_mBootIndex ;
-  public : GALGAS_location mProperty_mInitLocation ;
-  public : GALGAS_allocaList mProperty_mAllocaList ;
-  public : GALGAS_instructionListIR mProperty_mInstructionListIR ;
-  public : GALGAS_location mProperty_mEndOfInitLocation ;
 
+  public : GALGAS_location mProperty_mInitLocation ;
+
+  public : GALGAS_allocaList mProperty_mAllocaList ;
+
+  public : GALGAS_instructionListIR mProperty_mInstructionListIR ;
+
+  public : GALGAS_location mProperty_mEndOfInitLocation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -809,9 +820,8 @@ class cMapElement_initRoutineMap : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_initRoutineMap_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -901,9 +911,8 @@ class cMapElement_initRoutinePriorityMap : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_initRoutinePriorityMap_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -967,14 +976,18 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_initRoutinePriority
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mSelfType ;
-  public : GALGAS_string mProperty_mGlobalVariable ;
-  public : GALGAS_lstringlist mProperty_mInitRequiredByProcList ;
-  public : GALGAS_bigint mProperty_mPriority ;
-  public : GALGAS_allocaList mProperty_mAllocaList ;
-  public : GALGAS_instructionListIR mProperty_mInstructionListIR ;
 
+  public : GALGAS_string mProperty_mGlobalVariable ;
+
+  public : GALGAS_lstringlist mProperty_mInitRequiredByProcList ;
+
+  public : GALGAS_bigint mProperty_mPriority ;
+
+  public : GALGAS_allocaList mProperty_mAllocaList ;
+
+  public : GALGAS_instructionListIR mProperty_mInstructionListIR ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1227,11 +1240,12 @@ class cMapElement_externProcedureMapIR : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-  public : GALGAS_routineFormalArgumentListForGeneration mProperty_mFormalArgumentListForGeneration ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
 
+  public : GALGAS_routineFormalArgumentListForGeneration mProperty_mFormalArgumentListForGeneration ;
+
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1303,11 +1317,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externProcedureMapI
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_routineFormalArgumentListForGeneration_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_procFormalArgumentPassingMode mProperty_mFormalArgumentKind ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mFormalArgumentType ;
-  public : GALGAS_string mProperty_mFormalArgumentName ;
 
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mFormalArgumentType ;
+
+  public : GALGAS_string mProperty_mFormalArgumentName ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1517,9 +1532,20 @@ void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructi
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionMethod_checkLocalVariableFinalState (const class GALGAS_universalPropertyAndRoutineMapForContext inObject,
-                                                   class C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+typedef void (*extensionMethodSignature_universalPropertyAndRoutineMapForContext_checkLocalVariableFinalState) (const class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                                                class C_Compiler * inCompiler
+                                                                                                                COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_checkLocalVariableFinalState (const int32_t inClassIndex,
+                                                        extensionMethodSignature_universalPropertyAndRoutineMapForContext_checkLocalVariableFinalState inMethod) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_checkLocalVariableFinalState (const class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1936,14 +1962,18 @@ class cMapElement_unifiedSymbolMap : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_interruptMapIR_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mSelfType ;
-  public : GALGAS_string mProperty_mGlobalVariableName ;
-  public : GALGAS_allocaList mProperty_mAllocaList ;
-  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
-  public : GALGAS_mode mProperty_mMode ;
 
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mSelfType ;
+
+  public : GALGAS_string mProperty_mGlobalVariableName ;
+
+  public : GALGAS_allocaList mProperty_mAllocaList ;
+
+  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
+
+  public : GALGAS_mode mProperty_mMode ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2422,10 +2452,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procEffectiveParame
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_procCallEffectiveParameterListIR_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_procEffectiveParameterPassingModeIR mProperty_mEffectiveParameterPassingMode ;
-  public : GALGAS_objectIR mProperty_mParameter ;
 
+  public : GALGAS_objectIR mProperty_mParameter ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2611,15 +2641,20 @@ class cMapElement_guardMapIR : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_guardMapIR_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-  public : GALGAS_routineFormalArgumentListForGeneration mProperty_mFormalArgumentListForGeneration ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReceiverType ;
-  public : GALGAS_guardKindGenerationIR mProperty_mGuardKindGenerationIR ;
-  public : GALGAS_allocaList mProperty_mAllocaList ;
-  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
-  public : GALGAS_bool mProperty_mWarnIfUnused ;
 
+  public : GALGAS_routineFormalArgumentListForGeneration mProperty_mFormalArgumentListForGeneration ;
+
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mReceiverType ;
+
+  public : GALGAS_guardKindGenerationIR mProperty_mGuardKindGenerationIR ;
+
+  public : GALGAS_allocaList mProperty_mAllocaList ;
+
+  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
+
+  public : GALGAS_bool mProperty_mWarnIfUnused ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2865,10 +2900,10 @@ class GALGAS_bool extensionGetter_isStatic (const class GALGAS_objectIR & inObje
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_functionCallEffectiveParameterList_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_mSelector ;
-  public : GALGAS_expressionAST mProperty_mExpression ;
 
+  public : GALGAS_expressionAST mProperty_mExpression ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -3011,11 +3046,12 @@ class cMapElement_infixOperatorMap : public cMapElement {
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_lkey ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mResultType ;
-  public : GALGAS_infixOperatorDescription mProperty_mOperation ;
 
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mResultType ;
+
+  public : GALGAS_infixOperatorDescription mProperty_mOperation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -3084,11 +3120,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorMap_2D
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_registerIntegerFieldListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstring mProperty_mFieldName ;
-  public : GALGAS_expressionAST mProperty_mExpression ;
-  public : GALGAS_location mProperty_mExpressionLocation ;
 
+  public : GALGAS_expressionAST mProperty_mExpression ;
+
+  public : GALGAS_location mProperty_mExpressionLocation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -3157,10 +3194,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIntegerFiel
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_effectiveArgumentListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_effectiveArgumentPassingModeAST mProperty_mEffectiveParameterKind ;
-  public : GALGAS_lstring mProperty_mSelector ;
 
+  public : GALGAS_lstring mProperty_mSelector ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -3225,9 +3262,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentLi
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_primaryInExpressionAccessListAST_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_primaryInExpressionAccessAST mProperty_mAccess ;
-
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -3389,10 +3425,22 @@ void extensionSetter_appendSourceLineComment (class GALGAS_instructionListIR & i
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_closeBranch (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
-                                  const class GALGAS_location constin_inErrorLocation,
-                                  class C_Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
+typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_closeBranch) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                               const class GALGAS_location constinArgument0,
+                                                                                               class C_Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_closeBranch (const int32_t inClassIndex,
+                                       extensionSetterSignature_universalPropertyAndRoutineMapForContext_closeBranch inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_closeBranch (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                      const GALGAS_location constin_inErrorLocation,
+                                      C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3400,9 +3448,20 @@ void extensionSetter_closeBranch (class GALGAS_universalPropertyAndRoutineMapFor
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_openBranch (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
-                                 class C_Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
+typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_openBranch) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                              class C_Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_openBranch (const int32_t inClassIndex,
+                                      extensionSetterSignature_universalPropertyAndRoutineMapForContext_openBranch inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_openBranch (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                     C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -3857,10 +3916,10 @@ class cEnumAssociatedValues_guardedCommandIR_boolAndSync : public cEnumAssociate
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_syncInstructionBranchListIR_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_guardedCommandIR mProperty_mGuardedCommand ;
-  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
 
+  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -4166,11 +4225,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procEffectiveParame
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_procEffectiveParameterList_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_effectiveArgumentPassingModeAST mProperty_mEffectiveParameterPassingMode ;
-  public : GALGAS_lstring mProperty_mSelector ;
-  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mParameterType ;
 
+  public : GALGAS_lstring mProperty_mSelector ;
+
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mParameterType ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -4341,10 +4401,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_calleeKindIR ;
 //---------------------------------------------------------------------------------------------------------------------*
 
 class GALGAS_switchCaseList_2D_element : public AC_GALGAS_root {
-//--------------------------------- Public data members
+//--------------------------------- Properties
   public : GALGAS_lstringlist mProperty_mCaseIdentifiers ;
-  public : GALGAS_instructionListAST mProperty_mCaseInstructionList ;
 
+  public : GALGAS_instructionListAST mProperty_mCaseInstructionList ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;

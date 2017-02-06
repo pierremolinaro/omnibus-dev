@@ -272,12 +272,19 @@ loop while condition {
 \sectionLabel{Instruction \texttt{for}}{instructionFor}
 
 
+\subsection{Énumération entière}
 \begin{PLM}
 for nom $type in lower_bound ..< upper_bound {
   instructions_for
 }
 \end{PLM}
 
+Si il n'est pas lu par les \plm=instructions_for=, \plm=nom= peut être remplacé par le joker « \plm=_= ».
+
+
+
+
+\subsection{Énumération d'un tableau ou d'une chaîne de caractères}
 
 \begin{PLM}
 for nom in objet while expression {

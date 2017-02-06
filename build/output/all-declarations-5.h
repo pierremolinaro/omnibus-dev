@@ -689,11 +689,24 @@ class GALGAS_bool extensionGetter_copyable (const class GALGAS_unifiedTypeMap_2D
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void extensionSetter_insertUsedLocalConstant (class GALGAS_universalPropertyAndRoutineMapForContext & ioObject,
-                                              const class GALGAS_lstring constin_inLocalConstantName,
-                                              const class GALGAS_objectIR constin_inConstantObjectIR,
-                                              class C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
+typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_insertUsedLocalConstant) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                                           const class GALGAS_lstring constinArgument0,
+                                                                                                           const class GALGAS_objectIR constinArgument1,
+                                                                                                           class C_Compiler * inCompiler
+                                                                                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_insertUsedLocalConstant (const int32_t inClassIndex,
+                                                   extensionSetterSignature_universalPropertyAndRoutineMapForContext_insertUsedLocalConstant inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_insertUsedLocalConstant (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                  const GALGAS_lstring constin_inLocalConstantName,
+                                                  const GALGAS_objectIR constin_inConstantObjectIR,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

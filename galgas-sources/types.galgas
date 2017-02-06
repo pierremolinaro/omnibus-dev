@@ -27,7 +27,7 @@ enum @typeKind {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sharedmap @unifiedTypeMap %selectors {
+shared map @unifiedTypeMap %selectors {
   @typeKind kind
 
   insert insertType error message "the '%K' type is already declared in %L"

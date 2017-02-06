@@ -7,7 +7,7 @@
 
 #·······················································································································
 
-struct @universalPropertyAndRoutineMapForContext {
+shared class @universalPropertyAndRoutineMapForContext {
   @internalUniversalPropertyAndRoutineMapForContext mInternalPropertyAndRoutineMapForContext
   @scopeStack mScopeStack
   @lstringlist mLocalObjectList
