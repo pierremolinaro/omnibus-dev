@@ -190,6 +190,166 @@ class GALGAS_string function_acceptVariableName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                            @internalRepresentation enum                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_internalRepresentation : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_internalRepresentation (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_standAloneIdentifier,
+    kEnum_structureProperty,
+    kEnum_registerBitField
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
+
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_internalRepresentation extractObject (const GALGAS_object & inObject,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_internalRepresentation constructor_registerBitField (const class GALGAS_lstring & inOperand0,
+                                                                                    const class GALGAS_sliceMap & inOperand1,
+                                                                                    const class GALGAS_uint & inOperand2,
+                                                                                    const class GALGAS_uint & inOperand3
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_internalRepresentation constructor_standAloneIdentifier (const class GALGAS_lstring & inOperand0
+                                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_internalRepresentation constructor_structureProperty (const class GALGAS_lstring & inOperand0,
+                                                                                     const class GALGAS_universalPropertyAndRoutineMapForContext & inOperand1
+                                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_internalRepresentation & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_registerBitField (class GALGAS_lstring & outArgument0,
+                                                          class GALGAS_sliceMap & outArgument1,
+                                                          class GALGAS_uint & outArgument2,
+                                                          class GALGAS_uint & outArgument3,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_standAloneIdentifier (class GALGAS_lstring & outArgument0,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_structureProperty (class GALGAS_lstring & outArgument0,
+                                                           class GALGAS_universalPropertyAndRoutineMapForContext & outArgument1,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegisterBitField (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStandAloneIdentifier (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStructureProperty (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_internalRepresentation class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_internalRepresentation ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   @internalRepresentation enum, associated values                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_internalRepresentation_standAloneIdentifier : public cEnumAssociatedValues {
+  public : const GALGAS_lstring mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_internalRepresentation_standAloneIdentifier (const GALGAS_lstring & inAssociatedValue0
+                                                                              COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_internalRepresentation_standAloneIdentifier (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_internalRepresentation_structureProperty : public cEnumAssociatedValues {
+  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_universalPropertyAndRoutineMapForContext mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_internalRepresentation_structureProperty (const GALGAS_lstring & inAssociatedValue0,
+                                                                           const GALGAS_universalPropertyAndRoutineMapForContext & inAssociatedValue1
+                                                                           COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_internalRepresentation_structureProperty (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_internalRepresentation_registerBitField : public cEnumAssociatedValues {
+  public : const GALGAS_lstring mAssociatedValue0 ;
+  public : const GALGAS_sliceMap mAssociatedValue1 ;
+  public : const GALGAS_uint mAssociatedValue2 ;
+  public : const GALGAS_uint mAssociatedValue3 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_internalRepresentation_registerBitField (const GALGAS_lstring & inAssociatedValue0,
+                                                                          const GALGAS_sliceMap & inAssociatedValue1,
+                                                                          const GALGAS_uint & inAssociatedValue2,
+                                                                          const GALGAS_uint & inAssociatedValue3
+                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_internalRepresentation_registerBitField (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                        Function 'functionResultVariableName'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

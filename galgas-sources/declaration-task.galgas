@@ -171,6 +171,7 @@ method @taskList enterInContext
   #--- task variables
     @propertyList propertyList = {}
     @propertyMap propertyMap = {}
+    @universalPropertyAndRoutineMapForContext universalPropertyMap = .default
     @operandIRList initialValueList = {}
     for variable in task.mVarList do
       [variable enterInContext
@@ -178,13 +179,21 @@ method @taskList enterInContext
         !?staticStringMap:ioGlobalLiteralStringMap
         !?propertyList
         !?propertyMap
+        !?universalPropertyMap
         !?initialValueList
       ]
     end
   #--- Enter task variable map as structure type in type map
+    let taskTypeKind = @typeKind.structure {
+      !typeName:task.mTaskName
+      !propertyMap:propertyMap 
+      !universalMap:universalPropertyMap
+      !propertyList:propertyList
+      !flags:0
+    }
     [!?ioContext.mTypeMap insertType
       !lkey:task.mTaskName
-      !kind:.structure {!typeName:task.mTaskName !propertyMap:propertyMap !universalMap:.default !propertyList:propertyList !flags:0}
+      !kind:taskTypeKind
     ]
     let taskType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !task.mTaskName}
     ioContext.mGlobalTaskVariableList +=
@@ -203,6 +212,7 @@ method @taskVarListAST-element enterInContext
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
   ?!@propertyList ioPropertyList
   ?!@propertyMap ioPropertyMap
+  ?!@universalPropertyAndRoutineMapForContext ioUniversalPropertyAndRoutineMapForContext
   ?!@operandIRList ioInitialValueList
 {
 #--- Get destination type
@@ -256,6 +266,11 @@ method @taskVarListAST-element enterInContext
     error mVarName : "$" + [result key] + " type is not instanciable"
   end
   [!?ioPropertyMap insertKey
+    !mVarName
+    !false
+    !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
+  ]
+  [!?ioUniversalPropertyAndRoutineMapForContext insertProperty
     !mVarName
     !false
     !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}

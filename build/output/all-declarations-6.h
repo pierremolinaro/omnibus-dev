@@ -943,71 +943,6 @@ void callExtensionSetter_insertLocalVariable (class cPtr_universalPropertyAndRou
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//               Extension setter '@universalPropertyAndRoutineMapForContext openOverrideForSelectBlock'               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_openOverrideForSelectBlock) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                                                                              class C_Compiler * inCompiler
-                                                                                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_openOverrideForSelectBlock (const int32_t inClassIndex,
-                                                      extensionSetterSignature_universalPropertyAndRoutineMapForContext_openOverrideForSelectBlock inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_openOverrideForSelectBlock (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//               Extension setter '@universalPropertyAndRoutineMapForContext openOverrideForRepeatBlock'               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_openOverrideForRepeatBlock) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                                                                              class C_Compiler * inCompiler
-                                                                                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_openOverrideForRepeatBlock (const int32_t inClassIndex,
-                                                      extensionSetterSignature_universalPropertyAndRoutineMapForContext_openOverrideForRepeatBlock inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_openOverrideForRepeatBlock (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                     Extension setter '@universalPropertyAndRoutineMapForContext closeOverride'                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_closeOverride) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                                                                                 const class GALGAS_location constinArgument0,
-                                                                                                 class C_Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionSetter_closeOverride (const int32_t inClassIndex,
-                                         extensionSetterSignature_universalPropertyAndRoutineMapForContext_closeOverride inModifier) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionSetter_closeOverride (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
-                                        const GALGAS_location constin_inErrorLocation,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //            Extension setter '@universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess'             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1107,6 +1042,71 @@ void callExtensionMethod_searchRoutine (const class cPtr_universalPropertyAndRou
                                         const GALGAS_lstring constin_inArgumentSignature,
                                         GALGAS_lstring & out_outLLVMInvocationRoutineName,
                                         GALGAS_routineDescriptor & out_outDescriptor,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//               Extension setter '@universalPropertyAndRoutineMapForContext openOverrideForSelectBlock'               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_openOverrideForSelectBlock) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                                              class C_Compiler * inCompiler
+                                                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_openOverrideForSelectBlock (const int32_t inClassIndex,
+                                                      extensionSetterSignature_universalPropertyAndRoutineMapForContext_openOverrideForSelectBlock inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_openOverrideForSelectBlock (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//               Extension setter '@universalPropertyAndRoutineMapForContext openOverrideForRepeatBlock'               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_openOverrideForRepeatBlock) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                                              class C_Compiler * inCompiler
+                                                                                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_openOverrideForRepeatBlock (const int32_t inClassIndex,
+                                                      extensionSetterSignature_universalPropertyAndRoutineMapForContext_openOverrideForRepeatBlock inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_openOverrideForRepeatBlock (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                     Extension setter '@universalPropertyAndRoutineMapForContext closeOverride'                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typedef void (*extensionSetterSignature_universalPropertyAndRoutineMapForContext_closeOverride) (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                                                                                 const class GALGAS_location constinArgument0,
+                                                                                                 class C_Compiler * inCompiler
+                                                                                                 COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionSetter_closeOverride (const int32_t inClassIndex,
+                                         extensionSetterSignature_universalPropertyAndRoutineMapForContext_closeOverride inModifier) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionSetter_closeOverride (class cPtr_universalPropertyAndRoutineMapForContext * inObject,
+                                        const GALGAS_location constin_inErrorLocation,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
