@@ -6,7 +6,8 @@ enum @selfInExpressionAST {
   case noSelf
   case selfAt (@location location)
 }
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#·······················································································································
 
 enum @effectiveArgumentPassingModeAST {
   case input (@lstring name)
@@ -16,7 +17,7 @@ enum @effectiveArgumentPassingModeAST {
   case outputInputSelfVariable (@lstring name)
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 getter @effectiveArgumentPassingModeAST matchingFormalArgument -> @string outResult {
   switch self 
@@ -28,14 +29,14 @@ getter @effectiveArgumentPassingModeAST matchingFormalArgument -> @string outRes
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 list @effectiveArgumentListAST {
   @effectiveArgumentPassingModeAST mEffectiveParameterKind
   @lstring mSelector
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 enum @primaryInExpressionAccessAST {
   case property (@lstring name)
@@ -43,13 +44,13 @@ enum @primaryInExpressionAccessAST {
   case funcCall (@effectiveArgumentListAST arguments @location endOfArguments)
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 list @primaryInExpressionAccessListAST {
   @primaryInExpressionAccessAST mAccess
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#·······················································································································
 
 class @primaryInExpressionAST : @expressionAST {
   @selfInExpressionAST mSelf
@@ -211,6 +212,15 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 #  SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+enum @internalRepresentation {
+  case standAloneIdentifier (@lstring identifier)
+  case structureProperty (@lstring propertyName @universalPropertyAndRoutineMapForContext structureMap)
+  case registerBitField (@lstring bitFieldName @sliceMap sliceMap @uint arraySize @uint elementSize)
+#  case registerInExpression (@lstring bitFieldName @sliceMap sliceMap @uint arraySize @uint elementSize)
+}
+
+#·······················································································································
+
 override method @primaryInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
@@ -228,10 +238,12 @@ override method @primaryInExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- object access, with ou without self
+  @internalRepresentation internalRepresentation
   @objectIR currentPointer
   @string globalVariableReceiverName
   switch mSelf
   case noSelf :
+    internalRepresentation = .standAloneIdentifier {!identifier:mObjectName}
     if inGuard then
       error mObjectName : "in guard, only 'self' properties may be accessed" : currentPointer, globalVariableReceiverName
     elsif [ioVariableMap hasKey !mObjectName] then
@@ -248,9 +260,10 @@ override method @primaryInExpressionAST analyzeExpression
   case selfAt (selfLocation) :
     globalVariableReceiverName = ""
     if inSelfType == .null then
-      error selfLocation : "'self' is not available in this context" : currentPointer
+      error selfLocation : "'self' is not available in this context" : currentPointer, internalRepresentation
     elsif [[inSelfType kind] isStructure] then
-      [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
+      [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let structureMap ?2*]
+      internalRepresentation = .structureProperty {!propertyName:mObjectName !structureMap:structureMap}
       if [structureObjectMap hasKey !mObjectName] then
         [structureObjectMap searchKey
           !mObjectName
@@ -268,13 +281,105 @@ override method @primaryInExpressionAST analyzeExpression
         currentPointer = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mObjectName}
       end
     else
-      error selfLocation : "'self' should be a structure instance" : currentPointer
+      error selfLocation : "'self' should be a structure instance" : currentPointer, internalRepresentation
     end
   end
 #--- Access list
   for (access) in mAccessList do
     switch access
     case property (@lstring propertyName) :
+      switch internalRepresentation
+      case standAloneIdentifier (identifier) :
+        [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?let @objectIR objectIR]
+        switch objectIR
+        case globalVariableReference (type unused plmName) :
+          if [[type kind] isStructure] then
+            [[type kind] structure ?typeName:* ?propertyMap:* ?universalMap:let structureMap ?2*]
+            internalRepresentation = .structureProperty {!propertyName:propertyName !structureMap:structureMap}
+          else
+            error identifier : "this should be a structure instance" : currentPointer, internalRepresentation
+          end
+        case null :
+        case selfObject (*) :
+          error identifier : "«selfObject» invalid here" : internalRepresentation
+        case localVariableReference (@unifiedTypeMap-proxy type @lstring unused plmName) :
+          if [[type kind] isStructure] then
+            [[type kind] structure ?typeName:* ?propertyMap:* ?universalMap:let structureMap ?2*]
+            internalRepresentation = .structureProperty {!propertyName:propertyName !structureMap:structureMap}
+          else
+            error identifier : "this should be a structure instance" : currentPointer, internalRepresentation
+          end
+        case registerReference (@unifiedTypeMap-proxy unused type
+                                @lstring unused plmName
+                                @bool unused readable
+                                @bool unused writable
+                                @bigint unused address
+                                @sliceMap sliceMap
+                                @uint arraySize # 0 if not an array
+                                @uint elementSize) : # 0 if not an array
+#          internalRepresentation = .registerInExpression {
+#            !bitFieldName:propertyName
+#            !sliceMap:sliceMap
+#            !arraySize:arraySize
+#            !elementSize:elementSize
+#          }
+          [sliceMap searchKey !propertyName 
+             ?let @llvmBinaryOperation unused accessOperator
+             ?let @bigint unused accessRightOperand
+             ?let @sliceMap subMap
+             ?let @unifiedTypeMap-proxy unused resultType
+           ]
+           internalRepresentation = .registerBitField {
+             !bitFieldName:propertyName
+             !sliceMap:subMap
+             !arraySize:arraySize
+             !elementSize:elementSize
+           }
+        case temporaryReference (* * * *) :
+          error identifier : "«temporaryReference» invalid here" : internalRepresentation
+        case property (* * *) :
+          error identifier : "«property» invalid here" : internalRepresentation
+        case llvmTemporaryValue (* * *) :
+          error identifier : "«llvmTemporaryValue» invalid here" : internalRepresentation
+        case literalInteger  (* *) :
+          error identifier : "«literalInteger» invalid here" : internalRepresentation
+        case llvmStructureConstant (* *) :
+           error identifier : "«llvmStructureConstant» invalid here" : internalRepresentation
+        case literalString  (* * *) :
+           error identifier : "a global string constant is invalid here" : internalRepresentation
+        case zero (*) :
+          error identifier : "«zero» invalid here" : internalRepresentation
+        case possibleFunction (* *) :
+          error identifier : "«possibleFunction» invalid here" : internalRepresentation
+        end
+      case structureProperty (masterPropertyName masterStructureMap) :
+        var m = masterStructureMap
+        log m
+        [!?m searchValuedObjectForReadAccess !masterPropertyName ?let @objectIR objectIR]
+        if [[objectIR kind] isStructure] then
+          [[objectIR kind] structure ?typeName:* ?propertyMap:* ?universalMap:let structureMap ?2*]
+          internalRepresentation = .structureProperty {!propertyName:propertyName !structureMap:structureMap}
+        else
+          error masterPropertyName : "'" + masterPropertyName + "' should be a structure" : internalRepresentation
+        end
+      case registerBitField (@lstring bitFieldName @sliceMap sliceMap @uint arraySize @uint unused elementSize) :
+        if arraySize > 0 then
+          error bitFieldName : "'" + bitFieldName + "' is an array" : internalRepresentation
+        else
+          [sliceMap searchKey !propertyName 
+             ?let @llvmBinaryOperation unused accessOperator
+             ?let @bigint unused accessRightOperand
+             ?let @sliceMap subMap
+             ?let @unifiedTypeMap-proxy unused resultType
+           ]
+           internalRepresentation = .registerBitField {
+             !bitFieldName:propertyName
+             !sliceMap:subMap
+             !arraySize:0
+             !elementSize:0
+           }
+        end
+      end
       handlePropertyInExpression (
         !self:inSelfType
         !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed

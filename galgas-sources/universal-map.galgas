@@ -256,6 +256,144 @@ setter @universalPropertyAndRoutineMapForContext insertLocalVariable
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! SEARCH METHODS
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
+  ?let @lstring inValuedObjectName
+  !@objectIR outObjectIR
+{
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
+  switch property
+  case undefined :
+    error inValuedObjectName : "undefined in this context" : outObjectIR
+  case property (@bool unused isPublic @objectIR objectIR) :
+    outObjectIR = objectIR
+  case module (@unifiedTypeMap-proxy type) :
+    outObjectIR = .globalVariableReference {!type:type !plmName:inValuedObjectName}
+  case register (* * @objectIR objectIR) :
+    outObjectIR = objectIR
+  case globalConstant (@objectIR objectIR) :
+    outObjectIR = objectIR
+  case localConstant (@objectIR objectIR) :
+    outObjectIR = objectIR
+    if valueState == .hasUnreadValue then
+      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
+    end
+  case globalVariableReference (* @objectIR objectIR) :
+    outObjectIR = objectIR
+  case localVariableReference (@objectIR objectIR) :
+    switch valueState 
+    case noValue :
+      error inValuedObjectName : "'" + inValuedObjectName + "' has no value" : outObjectIR
+    case hasUnreadValue :
+      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
+      outObjectIR = objectIR
+    case hasReadValue :
+      outObjectIR = objectIR
+    end
+  end
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAccess
+  ?let @lstring inValuedObjectName
+  !@objectIR outObjectIR
+{
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
+  switch property
+  case undefined :
+    error inValuedObjectName : "undefined in this context" : outObjectIR
+  case property (* *) :
+    error inValuedObjectName : "a property cannot be written" : outObjectIR
+  case module (*) :
+    error inValuedObjectName : "a module cannot be written" : outObjectIR
+  case register (* @bool writable @objectIR objectIR) :
+    if writable then
+      outObjectIR = objectIR
+    else
+      error inValuedObjectName : "the register cannot be written" : outObjectIR
+    end
+  case globalConstant (*) :
+    error inValuedObjectName : "a constant cannot be written" : outObjectIR
+  case localConstant (*) :
+    error inValuedObjectName : "a constant cannot be written" : outObjectIR
+  case globalVariableReference (@bool writable @objectIR objectIR) :
+    if writable then
+      outObjectIR = objectIR
+    else
+      error inValuedObjectName : "a global variable cannot be written" : outObjectIR
+    end
+  case localVariableReference (@objectIR objectIR) :
+    outObjectIR = objectIR
+    switch valueState 
+    case noValue, hasReadValue :
+      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
+    case hasUnreadValue :
+      warning inValuedObjectName : "previous '" + inValuedObjectName + "' value has not been read"
+    end
+  end
+}
+
+#·······················································································································
+
+setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteAccess
+  ?let @lstring inValuedObjectName
+  !@objectIR outObjectIR
+{
+  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
+  switch property
+  case undefined :
+    error inValuedObjectName : "undefined in this context" : outObjectIR
+  case property (* *) :
+    error inValuedObjectName : "a property cannot be written" : outObjectIR
+  case module (*) :
+    error inValuedObjectName : "a module cannot be written" : outObjectIR
+  case register (@bool readable @bool writable @objectIR objectIR) :
+    if writable & readable then
+      outObjectIR = objectIR
+    elsif not readable then
+      error inValuedObjectName : "the register cannot be read" : outObjectIR
+    else
+      error inValuedObjectName : "the register cannot be written" : outObjectIR
+    end
+  case globalConstant (*) :
+    error inValuedObjectName : "a constant cannot be written" : outObjectIR
+  case localConstant (*) :
+    error inValuedObjectName : "a constant cannot be written" : outObjectIR
+  case globalVariableReference (@bool writable @objectIR objectIR) :
+    if writable then
+      outObjectIR = objectIR
+    else
+      error inValuedObjectName : "a global variable cannot be written" : outObjectIR
+    end
+  case localVariableReference (@objectIR objectIR) :
+    switch valueState 
+    case noValue :
+      error inValuedObjectName : "object has no value" : outObjectIR
+    case hasUnreadValue :
+      outObjectIR = objectIR
+    case hasReadValue :
+      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
+      outObjectIR = objectIR
+    end
+  end
+}
+
+#·······················································································································
+
+method @universalPropertyAndRoutineMapForContext searchRoutine
+  ?let @lstring inRoutineName
+  ?let @lstring inArgumentSignature
+  !@lstring outLLVMInvocationRoutineName
+  !@routineDescriptor outDescriptor
+{
+  [mInternalPropertyAndRoutineMapForContext searchKey !inRoutineName ?3* ?let @routineSignatureMapForContext routineMap]
+  [routineMap searchKey !inArgumentSignature ?outLLVMInvocationRoutineName ?outDescriptor]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! STATE HANDLING
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -416,144 +554,6 @@ setter @universalPropertyAndRoutineMapForContext closeOverride ?let @location in
   end
 #--- Restore current scope objects
   mLocalObjectList = localObjectList
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! SEARCH METHODS
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadAccess
-  ?let @lstring inValuedObjectName
-  !@objectIR outObjectIR
-{
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
-  switch property
-  case undefined :
-    error inValuedObjectName : "undefined in this context" : outObjectIR
-  case property (@bool unused isPublic @objectIR objectIR) :
-    outObjectIR = objectIR
-  case module (@unifiedTypeMap-proxy type) :
-    outObjectIR = .globalVariableReference {!type:type !plmName:inValuedObjectName}
-  case register (* * @objectIR objectIR) :
-    outObjectIR = objectIR
-  case globalConstant (@objectIR objectIR) :
-    outObjectIR = objectIR
-  case localConstant (@objectIR objectIR) :
-    outObjectIR = objectIR
-    if valueState == .hasUnreadValue then
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
-    end
-  case globalVariableReference (* @objectIR objectIR) :
-    outObjectIR = objectIR
-  case localVariableReference (@objectIR objectIR) :
-    switch valueState 
-    case noValue :
-      error inValuedObjectName : "'" + inValuedObjectName + "' has no value" : outObjectIR
-    case hasUnreadValue :
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasReadValue !inValuedObjectName]
-      outObjectIR = objectIR
-    case hasReadValue :
-      outObjectIR = objectIR
-    end
-  end
-}
-
-#·······················································································································
-
-setter @universalPropertyAndRoutineMapForContext searchValuedObjectForWriteAccess
-  ?let @lstring inValuedObjectName
-  !@objectIR outObjectIR
-{
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
-  switch property
-  case undefined :
-    error inValuedObjectName : "undefined in this context" : outObjectIR
-  case property (* *) :
-    error inValuedObjectName : "a property cannot be written" : outObjectIR
-  case module (*) :
-    error inValuedObjectName : "a module cannot be written" : outObjectIR
-  case register (* @bool writable @objectIR objectIR) :
-    if writable then
-      outObjectIR = objectIR
-    else
-      error inValuedObjectName : "the register cannot be written" : outObjectIR
-    end
-  case globalConstant (*) :
-    error inValuedObjectName : "a constant cannot be written" : outObjectIR
-  case localConstant (*) :
-    error inValuedObjectName : "a constant cannot be written" : outObjectIR
-  case globalVariableReference (@bool writable @objectIR objectIR) :
-    if writable then
-      outObjectIR = objectIR
-    else
-      error inValuedObjectName : "a global variable cannot be written" : outObjectIR
-    end
-  case localVariableReference (@objectIR objectIR) :
-    outObjectIR = objectIR
-    switch valueState 
-    case noValue, hasReadValue :
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
-    case hasUnreadValue :
-      warning inValuedObjectName : "previous '" + inValuedObjectName + "' value has not been read"
-    end
-  end
-}
-
-#·······················································································································
-
-setter @universalPropertyAndRoutineMapForContext searchValuedObjectForReadWriteAccess
-  ?let @lstring inValuedObjectName
-  !@objectIR outObjectIR
-{
-  [mInternalPropertyAndRoutineMapForContext searchKey !inValuedObjectName ?let valueState ?* ?let property ?*]
-  switch property
-  case undefined :
-    error inValuedObjectName : "undefined in this context" : outObjectIR
-  case property (* *) :
-    error inValuedObjectName : "a property cannot be written" : outObjectIR
-  case module (*) :
-    error inValuedObjectName : "a module cannot be written" : outObjectIR
-  case register (@bool readable @bool writable @objectIR objectIR) :
-    if writable & readable then
-      outObjectIR = objectIR
-    elsif not readable then
-      error inValuedObjectName : "the register cannot be read" : outObjectIR
-    else
-      error inValuedObjectName : "the register cannot be written" : outObjectIR
-    end
-  case globalConstant (*) :
-    error inValuedObjectName : "a constant cannot be written" : outObjectIR
-  case localConstant (*) :
-    error inValuedObjectName : "a constant cannot be written" : outObjectIR
-  case globalVariableReference (@bool writable @objectIR objectIR) :
-    if writable then
-      outObjectIR = objectIR
-    else
-      error inValuedObjectName : "a global variable cannot be written" : outObjectIR
-    end
-  case localVariableReference (@objectIR objectIR) :
-    switch valueState 
-    case noValue :
-      error inValuedObjectName : "object has no value" : outObjectIR
-    case hasUnreadValue :
-      outObjectIR = objectIR
-    case hasReadValue :
-      [!?mInternalPropertyAndRoutineMapForContext setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
-      outObjectIR = objectIR
-    end
-  end
-}
-
-#·······················································································································
-
-method @universalPropertyAndRoutineMapForContext searchRoutine
-  ?let @lstring inRoutineName
-  ?let @lstring inArgumentSignature
-  !@lstring outLLVMInvocationRoutineName
-  !@routineDescriptor outDescriptor
-{
-  [mInternalPropertyAndRoutineMapForContext searchKey !inRoutineName ?3* ?let @routineSignatureMapForContext routineMap]
-  [routineMap searchKey !inArgumentSignature ?outLLVMInvocationRoutineName ?outDescriptor]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

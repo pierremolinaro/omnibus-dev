@@ -7945,6 +7945,7 @@ void extensionMethod_enterInContext (const class GALGAS_taskVarListAST_2D_elemen
                                      class GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
                                      class GALGAS_propertyList & io_ioPropertyList,
                                      class GALGAS_propertyMap & io_ioPropertyMap,
+                                     class GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalPropertyAndRoutineMapForContext,
                                      class GALGAS_operandIRList & io_ioInitialValueList,
                                      class C_Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
