@@ -317,12 +317,6 @@ override method @primaryInExpressionAST analyzeExpression
                                 @sliceMap sliceMap
                                 @uint arraySize # 0 if not an array
                                 @uint elementSize) : # 0 if not an array
-#          internalRepresentation = .registerInExpression {
-#            !bitFieldName:propertyName
-#            !sliceMap:sliceMap
-#            !arraySize:arraySize
-#            !elementSize:elementSize
-#          }
           [sliceMap searchKey !propertyName 
              ?let @llvmBinaryOperation unused accessOperator
              ?let @bigint unused accessRightOperand
@@ -396,6 +390,70 @@ override method @primaryInExpressionAST analyzeExpression
         !?currentPointer
       )
     case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+#      switch internalRepresentation 
+#      case standAloneIdentifier (@lstring identifier) :
+#        [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?let @objectIR objectIR]
+#        [[[objectIR type] kind] arrayType ?typeName:* ?elementType:let type ?size:let @bigint arraySize ?2*]
+#        switch objectIR
+#        case globalVariableReference (type unused plmName) :
+#          if [[type kind] isStructure] then
+#            [[type kind] structure ?typeName:* ?propertyMap:* ?universalMap:let structureMap ?2*]
+#            internalRepresentation = .structureProperty {!propertyName:propertyName !structureMap:structureMap}
+#          else
+#            error identifier : "this should be a structure instance" : currentPointer, internalRepresentation
+#          end
+#        case null :
+#        case selfObject (*) :
+#          error identifier : "«selfObject» invalid here" : internalRepresentation
+#        case localVariableReference (@unifiedTypeMap-proxy type @lstring unused plmName) :
+#          if [[type kind] isStructure] then
+#            [[type kind] structure ?typeName:* ?propertyMap:* ?universalMap:let structureMap ?2*]
+#            internalRepresentation = .structureProperty {!propertyName:propertyName !structureMap:structureMap}
+#          else
+#            error identifier : "this should be a structure instance" : currentPointer, internalRepresentation
+#          end
+#        case registerReference (@unifiedTypeMap-proxy unused type
+#                                @lstring unused plmName
+#                                @bool unused readable
+#                                @bool unused writable
+#                                @bigint unused address
+#                                @sliceMap sliceMap
+#                                @uint arraySize # 0 if not an array
+#                                @uint elementSize) : # 0 if not an array
+#          [sliceMap searchKey !propertyName 
+#             ?let @llvmBinaryOperation unused accessOperator
+#             ?let @bigint unused accessRightOperand
+#             ?let @sliceMap subMap
+#             ?let @unifiedTypeMap-proxy unused resultType
+#           ]
+#           internalRepresentation = .registerBitField {
+#             !bitFieldName:propertyName
+#             !sliceMap:subMap
+#             !arraySize:arraySize
+#             !elementSize:elementSize
+#           }
+#        case temporaryReference (* * * *) :
+#          error identifier : "«temporaryReference» invalid here" : internalRepresentation
+#        case property (* * *) :
+#          error identifier : "«property» invalid here" : internalRepresentation
+#        case llvmTemporaryValue (* * *) :
+#          error identifier : "«llvmTemporaryValue» invalid here" : internalRepresentation
+#        case literalInteger  (* *) :
+#          error identifier : "«literalInteger» invalid here" : internalRepresentation
+#        case llvmStructureConstant (* *) :
+#           error identifier : "«llvmStructureConstant» invalid here" : internalRepresentation
+#        case literalString  (* * *) :
+#           error identifier : "a global string constant is invalid here" : internalRepresentation
+#        case zero (*) :
+#          error identifier : "«zero» invalid here" : internalRepresentation
+#        case possibleFunction (* *) :
+#          error identifier : "«possibleFunction» invalid here" : internalRepresentation
+#        end
+#      case structureProperty (@lstring propertyName @universalPropertyAndRoutineMapForContext structureMap) :
+#        error propertyName : "«structureProperty» invalid here" : internalRepresentation
+#      case registerBitField (@lstring bitFieldName @sliceMap sliceMap @uint arraySize @uint elementSize) :
+#        error bitFieldName : "«registerBitField» invalid here" : internalRepresentation
+#      end
       handleSubscriptInAssignmentAndExpression (
         !self:inSelfType
         !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
