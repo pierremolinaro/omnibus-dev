@@ -424,6 +424,20 @@ void routine_handlePropertyInExpression (const class GALGAS_unifiedTypeMap_2D_pr
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                       Routine 'handleSelfAccessInExpression'                                        *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleSelfAccessInExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+                                           const class GALGAS_objectIR constinArgument1,
+                                           class GALGAS_semanticTemporariesStruct & ioArgument2,
+                                           class GALGAS_instructionListIR & ioArgument3,
+                                           class GALGAS_objectIR & outArgument4,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                 Routine 'handleSubscriptInAssignmentAndExpression'                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -445,20 +459,6 @@ void routine_handleSubscriptInAssignmentAndExpression (const class GALGAS_unifie
                                                        class GALGAS_objectIR & ioArgument14,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Routine 'handleSelfAccessInExpression'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleSelfAccessInExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                           const class GALGAS_objectIR constinArgument1,
-                                           class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                           class GALGAS_instructionListIR & ioArgument3,
-                                           class GALGAS_objectIR & outArgument4,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

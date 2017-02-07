@@ -13,25 +13,6 @@ shared class @universalPropertyAndRoutineMapForContext {
   @lstringlist mLocalObjectList
 }
 
-enum @scopeKind {
-  case selectScope
-  case repeatScope
-}
-
-list @scopeStack {
-  @scopeKind mScopeKind
-  @bool mFirstBranch
-  @referenceStateMap mInitialStateMap
-  @referenceStateMap mReferenceStateMap
-  @lstringlist mObjectList
-}
-
-map @referenceStateMap {
-  @valuedObjectState mState
-  insert insertKey error message "INTERNAL ERROR"
-  search searchKey error message "INTERNAL ERROR"
-}
-
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! INSERT SETTERS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -587,6 +568,31 @@ map @internalUniversalPropertyAndRoutineMapForContext { # Key is a variable, pro
 
   insert insertKey error message "the '%K' entity is already declared in %L"
   search searchKey error message "there is no '%K' entity"
+}
+
+#·······················································································································
+
+enum @scopeKind {
+  case selectScope
+  case repeatScope
+}
+
+#·······················································································································
+
+list @scopeStack {
+  @scopeKind mScopeKind
+  @bool mFirstBranch
+  @referenceStateMap mInitialStateMap
+  @referenceStateMap mReferenceStateMap
+  @lstringlist mObjectList
+}
+
+#·······················································································································
+
+map @referenceStateMap {
+  @valuedObjectState mState
+  insert insertKey error message "INTERNAL ERROR"
+  search searchKey error message "INTERNAL ERROR"
 }
 
 #·······················································································································
