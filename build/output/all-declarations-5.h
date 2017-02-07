@@ -1339,6 +1339,27 @@ class cEnumAssociatedValues_internalRepresentation_registerBitField : public cEn
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                     Routine 'handleArrayAccessInExpressionNew'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleArrayAccessInExpressionNew (class GALGAS_internalRepresentation & ioArgument0,
+                                               const class GALGAS_expressionAST constinArgument1,
+                                               const class GALGAS_location constinArgument2,
+                                               const class GALGAS_lstring constinArgument3,
+                                               const class GALGAS_unifiedTypeMap_2D_proxy constinArgument4,
+                                               const class GALGAS_semanticContext constinArgument5,
+                                               const class GALGAS_mode constinArgument6,
+                                               class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                               class GALGAS_staticStringMap & ioArgument8,
+                                               class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument9,
+                                               class GALGAS_allocaList & ioArgument10,
+                                               class GALGAS_instructionListIR & ioArgument11,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                    Routine 'handlePropertyAccessInExpressionNew'                                    *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

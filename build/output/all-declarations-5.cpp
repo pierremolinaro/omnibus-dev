@@ -12373,16 +12373,19 @@ static void extensionMethod_primaryInExpressionAST_analyzeExpressionNew (const c
       break ;
     case GALGAS_primaryInExpressionAccessAST::kEnum_arrayAccess:
       {
-        const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess * extractPtr_11236 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess *) (enumerator_10605.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_11236->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_endOfIndex = extractPtr_11236->mAssociatedValue1 ;
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess * extractPtr_11745 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess *) (enumerator_10605.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_expressionAST extractedValue_indexExpression = extractPtr_11745->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_endOfIndex = extractPtr_11745->mAssociatedValue1 ;
+        {
+        routine_handleArrayAccessInExpressionNew (var_internalRepresentation_9786, extractedValue_indexExpression, extractedValue_endOfIndex, constinArgument_inCallerNameForInvocationGraph, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inCurrentMode, ioArgument_ioTemporaries, ioArgument_ioGlobalLiteralStringMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 276)) ;
+        }
       }
       break ;
     case GALGAS_primaryInExpressionAccessAST::kEnum_funcCall:
       {
-        const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall * extractPtr_11318 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall *) (enumerator_10605.current_mAccess (HERE).unsafePointer ()) ;
-        const GALGAS_effectiveArgumentListAST extractedValue_arguments = extractPtr_11318->mAssociatedValue0 ;
-        const GALGAS_location extractedValue_errorLocation = extractPtr_11318->mAssociatedValue1 ;
+        const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall * extractPtr_11827 = (const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall *) (enumerator_10605.current_mAccess (HERE).unsafePointer ()) ;
+        const GALGAS_effectiveArgumentListAST extractedValue_arguments = extractPtr_11827->mAssociatedValue0 ;
+        const GALGAS_location extractedValue_errorLocation = extractPtr_11827->mAssociatedValue1 ;
       }
       break ;
     }
