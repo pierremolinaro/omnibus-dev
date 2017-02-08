@@ -136,6 +136,79 @@ override method @convertExpressionAST analyzeExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @convertExpressionAST analyzeExpressionNew
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Analyze expression
+  [mExpression analyzeExpressionNew
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR expressionResultPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !expressionResultPossibleReference
+    !mTypeName
+    ?let expressionResult
+  ]  
+#--- 
+  if not [inCurrentMode panicAllowed] then
+    error mTypeName : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+  end
+#--- Analyze type
+  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
+#--- Check types
+  if not [[resultType kind] isInteger] then
+    error mTypeName : "this type is not an integer type" : outResult
+  elsif not [[expressionResult kind] isInteger] then
+    error mEndOfExpression : "expression type is not an integer type" : outResult
+  else
+    [[expressionResult kind] integer ?min:let minSource ?max:let maxSource ?2*]
+    [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?2*]
+    let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
+    if alwaysPossible then
+      error mTypeName:"useless explicit conversion"
+    end
+    getNewTempVariable (!resultType !mEndOfExpression !?ioTemporaries ?outResult)
+    if [option plm_options.noPanicGeneration value] then
+      ioInstructionGenerationList += !@truncateInstructionIR.new {
+        !outResult
+        !expressionResult
+      }
+    else
+      ioInstructionGenerationList += !@convertInstructionIR.new {
+        !outResult
+        !expressionResult
+        !mTypeName.location
+      }
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @convertInstructionIR

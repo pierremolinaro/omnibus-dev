@@ -49,7 +49,28 @@ override method @instanciationAST analyzeExpression
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@unifiedSymbolMap unused ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Analyze constructor source type
+  let expressionType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
+#--- Generate code
+  [inContext.mInstanciationMap searchKey !mTypeName ?let @literalStructureList literalStructureList]
+  outResult = .literalStructure {!value:literalStructureList}
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @instanciationAST analyzeExpressionNew
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {

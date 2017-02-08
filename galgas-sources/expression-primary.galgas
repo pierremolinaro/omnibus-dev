@@ -214,14 +214,13 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 
 enum @internalRepresentation {
   case standAloneIdentifier (@lstring identifier)
-  case structureProperty (@lstring propertyName @universalPropertyAndRoutineMapForContext structureMap)
-  case registerBitField (@lstring bitFieldName @sliceMap sliceMap @uint arraySize @uint elementSize)
-#  case registerInExpression (@lstring bitFieldName @sliceMap sliceMap @uint arraySize @uint elementSize)
+  case structureMember (@lstring propertyName @objectIR currentPointerIR)
+  case bitField (@sliceMap sliceMap @objectIR valueIR)
 }
 
 #·······················································································································
 
-method @primaryInExpressionAST analyzeExpressionNew
+override method @primaryInExpressionAST analyzeExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
@@ -234,7 +233,7 @@ method @primaryInExpressionAST analyzeExpressionNew
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !result:@objectIR outResult
+  !result:@objectIR outResult
 {
 #--- object access, with ou without self
   @internalRepresentation internalRepresentation
@@ -249,8 +248,10 @@ method @primaryInExpressionAST analyzeExpressionNew
     if inSelfType == .null then
       error selfLocation : "'self' is not available in this context" : internalRepresentation
     elsif [[inSelfType kind] isStructure] then
-      [[inSelfType kind] structure ?typeName:* ?propertyMap:* ?universalMap:let structureMap ?2*]
-      internalRepresentation = .structureProperty {!propertyName:mObjectName !structureMap:structureMap}
+      internalRepresentation = .structureMember {
+        !propertyName:mObjectName
+        !currentPointerIR:.selfObject {!type:inSelfType}
+      }
     else
       error selfLocation : "'self' should be a structure instance" : internalRepresentation
     end
@@ -287,8 +288,38 @@ method @primaryInExpressionAST analyzeExpressionNew
         !?alloca:ioAllocaList
         !?instructionListIR:ioInstructionGenerationList
       )
-    case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
+    case funcCall (@effectiveArgumentListAST unused arguments @location unused errorLocation) :
     end
+  end
+#--- Analyze current internal representation, in order to get result as @objectIR
+  switch internalRepresentation
+  case standAloneIdentifier (@lstring unused identifier) :
+    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
+  case structureMember (propertyName @objectIR currentPointer) :
+    if [[currentPointer kind] isStructure] then
+      [[currentPointer kind] structure ?2* ?universalMap:let structureMap ?2*]
+      var m = structureMap
+      [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
+      ioTemporaries.mTemporaryIndex ++
+      let newObject = @objectIR.temporaryReference {
+         !type:[masterPropertyIR type] # [currentPointer type]
+         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+         !sliceMap:{}
+         !volatile:false
+      }
+      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
+      [!?ioInstructionGenerationList appendGetPropertyReference
+        !newObject
+        !currentPointer
+        !propertyName
+        !index
+      ]
+      outResult = newObject
+    else
+      error [currentPointer location] : "this should be a structure instance" : outResult
+    end
+  case bitField (@sliceMap unused sliceMap @objectIR valueIR) :
+    outResult = valueIR
   end
 }
 
@@ -296,22 +327,22 @@ method @primaryInExpressionAST analyzeExpressionNew
 
 proc handleArrayAccessInExpressionNew
   ?!@internalRepresentation ioInternalRepresentation
-  ?let @expressionAST inExpression
-  ?let @location inEndOfIndex
+  ?let @expressionAST unused inExpression
+  ?let @location unused inEndOfIndex
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
   ?!alloca:@allocaList unused ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
   switch ioInternalRepresentation
-  case standAloneIdentifier (@lstring identifier) :
-  case structureProperty (@lstring propertyName @universalPropertyAndRoutineMapForContext structureMap) :
-  case registerBitField (@lstring bitFieldName @sliceMap sliceMap @uint arraySize @uint elementSize) :
+  case standAloneIdentifier (@lstring unused identifier) :
+  case structureMember (unused propertyName @objectIR unused currentPointerIR) :
+  case bitField (@sliceMap unused sliceMap unused valueIR) :
   end
 }
 
@@ -322,13 +353,13 @@ proc handlePropertyAccessInExpressionNew
   ?let @lstring inPropertyName
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-  ?context:let @semanticContext unused inContext
+  ?context:let @semanticContext inContext
   ?mode:let @mode unused inCurrentMode
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   switch ioInternalRepresentation
   case standAloneIdentifier (identifier) :
@@ -336,41 +367,57 @@ proc handlePropertyAccessInExpressionNew
     switch objectIR
     case globalVariableReference (type unused plmName) :
       if [[type kind] isStructure] then
-        [[type kind] structure ?typeName:* ?propertyMap:* ?universalMap:let structureMap ?2*]
-        ioInternalRepresentation = .structureProperty {!propertyName:inPropertyName !structureMap:structureMap}
+        ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
       else
         error identifier : "this should be a structure instance" : ioInternalRepresentation
       end
     case null :
     case selfObject (*) :
       error identifier : "«selfObject» invalid here" : ioInternalRepresentation
-    case localVariableReference (@unifiedTypeMap-proxy type @lstring unused plmName) :
+    case localVariableReference (@unifiedTypeMap-proxy type @lstring plmName) :
       if [[type kind] isStructure] then
-        [[type kind] structure ?typeName:* ?propertyMap:* ?universalMap:let structureMap ?2*]
-        ioInternalRepresentation = .structureProperty {!propertyName:inPropertyName !structureMap:structureMap}
+        let objectIR = @objectIR.llvmTemporaryValue {
+          !type:type
+          !llvmName:.new {!llvmNameForLocalVariable (!plmName) !plmName} !sliceMap:{}
+        }
+        ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
       else
         error identifier : "this should be a structure instance" : ioInternalRepresentation
       end
-    case registerReference (@unifiedTypeMap-proxy unused type
-                            @lstring unused plmName
-                            @bool unused readable
-                            @bool unused writable
-                            @bigint unused address
+    case registerReference (@unifiedTypeMap-proxy type
+                            @lstring plmRegisterName
+                            * *
+                            @bigint address
                             @sliceMap sliceMap
-                            @uint arraySize # 0 if not an array
-                            @uint elementSize) : # 0 if not an array
-      [sliceMap searchKey !inPropertyName 
-         ?let @llvmBinaryOperation unused accessOperator
-         ?let @bigint unused accessRightOperand
-         ?let @sliceMap subMap
-         ?let @unifiedTypeMap-proxy unused resultType
-       ]
-       ioInternalRepresentation = .registerBitField {
-         !bitFieldName:inPropertyName
-         !sliceMap:subMap
-         !arraySize:arraySize
-         !elementSize:elementSize
-       }
+                            @uint arraySize *) : # 0 if not an array
+      if arraySize > 0 then
+        error inPropertyName : "register is an array, dot notation unavailable" : ioInternalRepresentation
+      else
+        getNewTempVariable (!type !plmRegisterName !?ioTemporaries ?let registerIR)
+        [!?ioInstructionGenerationList appendLoadVolatileRegister !registerIR !address]
+        [sliceMap searchKey
+          !inPropertyName
+          ?let @llvmBinaryOperation accessOperator
+          ?let @bigint accessRightOperand
+          ?let @sliceMap resultSliceMap
+          ?let @unifiedTypeMap-proxy resultType
+        ]
+        let resultObject = @objectIR.llvmTemporaryValue {
+          !type:resultType
+          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
+          !sliceMap:resultSliceMap
+        }
+        ioTemporaries.mTemporaryIndex ++
+        [!?ioInstructionGenerationList appendBinaryOperation
+          !resultObject
+          ![registerIR type]
+          !inPropertyName.location
+          !registerIR
+          !accessOperator
+          !.literalInteger {!type: inContext.mLiteralIntegerType !value:accessRightOperand}
+        ]
+        ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
+      end
     case temporaryReference (* * * *) :
       error identifier : "«temporaryReference» invalid here" : ioInternalRepresentation
     case property (* * *) :
@@ -388,33 +435,52 @@ proc handlePropertyAccessInExpressionNew
     case possibleFunction (* *) :
       error identifier : "«possibleFunction» invalid here" : ioInternalRepresentation
     end
-  case structureProperty (masterPropertyName masterStructureMap) :
-    var m = masterStructureMap
-    log m
-    [!?m searchValuedObjectForReadAccess !masterPropertyName ?let @objectIR objectIR]
-    if [[objectIR kind] isStructure] then
-      [[objectIR kind] structure ?typeName:* ?propertyMap:* ?universalMap:let structureMap ?2*]
-      ioInternalRepresentation = .structureProperty {!propertyName:inPropertyName !structureMap:structureMap}
+  case structureMember (masterPropertyName currentPointer) :
+    if [[currentPointer kind] isStructure] then
+      [[currentPointer kind] structure ?2* ?universalMap:let structureMap ?2*]
+      var m = structureMap
+      [!?m searchValuedObjectForReadAccess !masterPropertyName ?let @objectIR masterPropertyIR]
+      ioTemporaries.mTemporaryIndex ++
+      let newObject = @objectIR.temporaryReference {
+         !type:[currentPointer type]
+         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
+         !sliceMap:{}
+         !volatile:false
+      }
+      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
+      [!?ioInstructionGenerationList appendGetPropertyReference
+        !newObject
+        !currentPointer
+        !masterPropertyName
+        !index
+      ]
+      ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:masterPropertyIR}
     else
       error masterPropertyName : "'" + masterPropertyName + "' should be a structure" : ioInternalRepresentation
     end
-  case registerBitField (@lstring bitFieldName @sliceMap sliceMap @uint arraySize @uint unused elementSize) :
-    if arraySize > 0 then
-      error bitFieldName : "'" + bitFieldName + "' is an array" : ioInternalRepresentation
-    else
-      [sliceMap searchKey !inPropertyName 
-         ?let @llvmBinaryOperation unused accessOperator
-         ?let @bigint unused accessRightOperand
-         ?let @sliceMap subMap
-         ?let @unifiedTypeMap-proxy unused resultType
-       ]
-       ioInternalRepresentation = .registerBitField {
-         !bitFieldName:inPropertyName
-         !sliceMap:subMap
-         !arraySize:0
-         !elementSize:0
-       }
-    end
+  case bitField (@sliceMap sliceMap @objectIR currentObject) :
+    [sliceMap searchKey
+      !inPropertyName
+      ?let @llvmBinaryOperation accessOperator
+      ?let @bigint accessRightOperand
+      ?let @sliceMap resultSliceMap
+      ?let @unifiedTypeMap-proxy resultType
+    ]
+    let resultObject = @objectIR.llvmTemporaryValue {
+      !type:resultType
+      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
+      !sliceMap:resultSliceMap
+    }
+    ioTemporaries.mTemporaryIndex ++
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !resultObject
+      ![currentObject type]
+      !inPropertyName.location
+      !currentObject
+      !accessOperator
+      !.literalInteger {!type: inContext.mLiteralIntegerType !value:accessRightOperand}
+    ]
+    ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
   end
 }
 
@@ -425,7 +491,7 @@ override method @primaryInExpressionAST analyzeExpression
   ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
@@ -544,21 +610,6 @@ override method @primaryInExpressionAST analyzeExpression
     end
   end
   outResult = currentPointer
-  [self analyzeExpressionNew
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !inGuard:inGuard
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:*
-    !?instructionListIR:*
-#  !result:@objectIR outResult
-  ]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -441,6 +441,23 @@ abstract method @expressionAST analyzeExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+abstract method @expressionAST analyzeExpressionNew
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 method @expressionAST analyzeStaticExpression
   ?errorLocation:let @location inErrorLocation
   ?context:let @semanticContext inContext
