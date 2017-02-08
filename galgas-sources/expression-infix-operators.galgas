@@ -198,6 +198,89 @@ override method @infixOperatorExpressionAST analyzeExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+override method @infixOperatorExpressionAST analyzeExpressionNew
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#------------------- Analyze left expression
+  [mLeftExpression analyzeExpressionNew
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @objectIR leftOperandPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !leftOperandPossibleReference
+    !mOperatorLocation
+    ?let leftOperand
+  ]  
+#------------------- Analyze right expression
+  [mRightExpression analyzeExpressionNew
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:[leftOperand type]
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @objectIR rightOperandPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !rightOperandPossibleReference
+    !mOperatorLocation
+    ?let rightOperand
+  ]  
+#------------------- Get operator map
+  let operatorMap = getInfixOperatorMap (!mOp !context:inContext !mode:inCurrentMode !mOperatorLocation)
+#------------------- Check operand types
+  [operatorMap checkBinaryOperationWith
+    !leftType:[leftOperand type]
+    !rightType:[rightOperand type]
+    !operatorLocation:mOperatorLocation
+    ?resultType:let resultType
+    ?op:let @infixOperatorDescription binaryOperator
+  ]
+#------------------- Generate code
+  [binaryOperator generateInfixOperatorCode
+    !?ioTemporaries
+    !?ioInstructionGenerationList
+    !leftOperand
+    !mOperatorLocation
+    !rightOperand
+    !resultType
+    ?outResult
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 private func getInfixOperatorMap
   ?let @infixOperator inOp
   ?context:let @semanticContext inContext
@@ -343,6 +426,90 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:rightInstructionGenerationList
+    ?result:let @objectIR rightOperandPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !rightOperandPossibleReference
+    !mOperatorLocation
+    ?let rightOperand
+  ]  
+#--- Check left type is boolean
+  if [leftOperand kind] != .boolean then
+    error mOperatorLocation : "left operand should be boolean"
+  end
+#--- Check right type is boolean
+  if [rightOperand kind] != .boolean then
+    error mOperatorLocation : "left operand should be boolean"
+  end
+#--- Result type : bool 
+  getNewTempVariable (!inContext.mBooleanType !mOperatorLocation !?ioTemporaries ?outResult)
+#--- Generate code
+  [!?ioInstructionGenerationList appendShortCircuitAndOperation
+    !outResult
+    !leftOperand
+    !leftInstructionGenerationList
+    !rightOperand
+    !rightInstructionGenerationList
+    !mOperatorLocation
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpressionNew
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Analyze left expression
+  @instructionListIR leftInstructionGenerationList = {}
+  [mLeftExpression analyzeExpressionNew
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:leftInstructionGenerationList
+    ?result:let @objectIR leftOperandPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !leftOperandPossibleReference
+    !mOperatorLocation
+    ?let leftOperand
+  ]  
+#--- Analyze right expression
+  @instructionListIR rightInstructionGenerationList = {}
+  [mRightExpression analyzeExpressionNew
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:[leftOperand type]
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:rightInstructionGenerationList

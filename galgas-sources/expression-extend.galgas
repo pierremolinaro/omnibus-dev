@@ -139,3 +139,79 @@ override method @extendExpressionAST analyzeExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @extendExpressionAST analyzeExpressionNew
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Analyze expression
+  [mExpression analyzeExpressionNew
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR expressionResultPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !expressionResultPossibleReference
+    !mTypeName
+    ?let expressionResult
+  ]  
+#--- Analyze type
+  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
+#--- Check types
+  if not [[resultType kind] isInteger] then
+    error mTypeName : "this type is not an integer type" : outResult
+  elsif not [[expressionResult kind] isInteger] then
+    error mEndOfExpression : "expression type is not an integer type" : outResult
+  else
+    [[expressionResult kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize]
+    [[resultType kind] integer ?min:* ?max:* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize]
+    if sourceIsUnsigned && targetIsUnsigned then # unsigned -> unsigned
+      if sourceSize > targetSize then
+        error mTypeName: "cannot extend, use convert or trunc"
+      elsif sourceSize == targetSize then
+        error mTypeName: "same size: useless extend operation"
+      end
+    elsif sourceIsUnsigned && not targetIsUnsigned then # unsigned -> signed
+      if sourceSize >= targetSize then
+        error mTypeName: "cannot extend, use convert or trunc"
+      end
+    elsif not sourceIsUnsigned && targetIsUnsigned then # signed -> unsigned
+      error mTypeName: "cannot extend, use convert or trunc"
+    else # signed -> signed
+      if sourceSize > targetSize then
+        error mTypeName: "cannot extend, use convert or trunc"
+      elsif sourceSize == targetSize then
+        error mTypeName: "same size: useless extend operation"
+      end
+    end
+    getNewTempVariable (!resultType !mTypeName !?ioTemporaries ?outResult)
+    [!?ioInstructionGenerationList appendExtend
+      !outResult
+      !expressionResult
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

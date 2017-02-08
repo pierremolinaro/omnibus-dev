@@ -1134,51 +1134,6 @@ class GALGAS_bigint callExtensionGetter_performStaticOperation (const cPtr_infix
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                           Extension method '@primaryInExpressionAST analyzeExpressionNew'                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzeExpressionNew) (const class cPtr_primaryInExpressionAST * inObject,
-                                                                                      const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                                                      const class GALGAS_bool constinArgument1,
-                                                                                      const class GALGAS_bool constinArgument2,
-                                                                                      const class GALGAS_lstring constinArgument3,
-                                                                                      const class GALGAS_unifiedTypeMap_2D_proxy constinArgument4,
-                                                                                      const class GALGAS_semanticContext constinArgument5,
-                                                                                      const class GALGAS_mode constinArgument6,
-                                                                                      class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                                                                      class GALGAS_staticStringMap & ioArgument8,
-                                                                                      class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument9,
-                                                                                      class GALGAS_allocaList & ioArgument10,
-                                                                                      class GALGAS_instructionListIR & ioArgument11,
-                                                                                      class C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_analyzeExpressionNew (const int32_t inClassIndex,
-                                                extensionMethodSignature_primaryInExpressionAST_analyzeExpressionNew inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_analyzeExpressionNew (const class cPtr_primaryInExpressionAST * inObject,
-                                               const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                               const GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
-                                               const GALGAS_bool constin_inGuard,
-                                               const GALGAS_lstring constin_inCallerNameForInvocationGraph,
-                                               const GALGAS_unifiedTypeMap_2D_proxy constin_inOptionalTargetType,
-                                               const GALGAS_semanticContext constin_inContext,
-                                               const GALGAS_mode constin_inCurrentMode,
-                                               GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                               GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                               GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
-                                               GALGAS_allocaList & io_ioAllocaList,
-                                               GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                                            @internalRepresentation enum                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1191,8 +1146,8 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
   public : typedef enum {
     kNotBuilt,
     kEnum_standAloneIdentifier,
-    kEnum_structureProperty,
-    kEnum_registerBitField
+    kEnum_structureMember,
+    kEnum_bitField
   } enumeration ;
   
 //--------------------------------- Private data member
@@ -1219,18 +1174,16 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_internalRepresentation constructor_registerBitField (const class GALGAS_lstring & inOperand0,
-                                                                                    const class GALGAS_sliceMap & inOperand1,
-                                                                                    const class GALGAS_uint & inOperand2,
-                                                                                    const class GALGAS_uint & inOperand3
-                                                                                    COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_internalRepresentation constructor_bitField (const class GALGAS_sliceMap & inOperand0,
+                                                                            const class GALGAS_objectIR & inOperand1
+                                                                            COMMA_LOCATION_ARGS) ;
 
   public : static class GALGAS_internalRepresentation constructor_standAloneIdentifier (const class GALGAS_lstring & inOperand0
                                                                                         COMMA_LOCATION_ARGS) ;
 
-  public : static class GALGAS_internalRepresentation constructor_structureProperty (const class GALGAS_lstring & inOperand0,
-                                                                                     const class GALGAS_universalPropertyAndRoutineMapForContext & inOperand1
-                                                                                     COMMA_LOCATION_ARGS) ;
+  public : static class GALGAS_internalRepresentation constructor_structureMember (const class GALGAS_lstring & inOperand0,
+                                                                                   const class GALGAS_objectIR & inOperand1
+                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
   public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
@@ -1241,30 +1194,28 @@ class GALGAS_internalRepresentation : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public : VIRTUAL_IN_DEBUG void method_registerBitField (class GALGAS_lstring & outArgument0,
-                                                          class GALGAS_sliceMap & outArgument1,
-                                                          class GALGAS_uint & outArgument2,
-                                                          class GALGAS_uint & outArgument3,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_bitField (class GALGAS_sliceMap & outArgument0,
+                                                  class GALGAS_objectIR & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG void method_standAloneIdentifier (class GALGAS_lstring & outArgument0,
                                                               C_Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG void method_structureProperty (class GALGAS_lstring & outArgument0,
-                                                           class GALGAS_universalPropertyAndRoutineMapForContext & outArgument1,
-                                                           C_Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void method_structureMember (class GALGAS_lstring & outArgument0,
+                                                         class GALGAS_objectIR & outArgument1,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegisterBitField (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitField (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStandAloneIdentifier (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStructureProperty (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStructureMember (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -1299,84 +1250,39 @@ class cEnumAssociatedValues_internalRepresentation_standAloneIdentifier : public
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_internalRepresentation_structureProperty : public cEnumAssociatedValues {
+class cEnumAssociatedValues_internalRepresentation_structureMember : public cEnumAssociatedValues {
   public : const GALGAS_lstring mAssociatedValue0 ;
-  public : const GALGAS_universalPropertyAndRoutineMapForContext mAssociatedValue1 ;
+  public : const GALGAS_objectIR mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_internalRepresentation_structureProperty (const GALGAS_lstring & inAssociatedValue0,
-                                                                           const GALGAS_universalPropertyAndRoutineMapForContext & inAssociatedValue1
-                                                                           COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_internalRepresentation_structureMember (const GALGAS_lstring & inAssociatedValue0,
+                                                                         const GALGAS_objectIR & inAssociatedValue1
+                                                                         COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_internalRepresentation_structureProperty (void) {}
+  public : virtual ~ cEnumAssociatedValues_internalRepresentation_structureMember (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-class cEnumAssociatedValues_internalRepresentation_registerBitField : public cEnumAssociatedValues {
-  public : const GALGAS_lstring mAssociatedValue0 ;
-  public : const GALGAS_sliceMap mAssociatedValue1 ;
-  public : const GALGAS_uint mAssociatedValue2 ;
-  public : const GALGAS_uint mAssociatedValue3 ;
+class cEnumAssociatedValues_internalRepresentation_bitField : public cEnumAssociatedValues {
+  public : const GALGAS_sliceMap mAssociatedValue0 ;
+  public : const GALGAS_objectIR mAssociatedValue1 ;
 
 //--- Constructor
-  public : cEnumAssociatedValues_internalRepresentation_registerBitField (const GALGAS_lstring & inAssociatedValue0,
-                                                                          const GALGAS_sliceMap & inAssociatedValue1,
-                                                                          const GALGAS_uint & inAssociatedValue2,
-                                                                          const GALGAS_uint & inAssociatedValue3
-                                                                          COMMA_LOCATION_ARGS) ;
+  public : cEnumAssociatedValues_internalRepresentation_bitField (const GALGAS_sliceMap & inAssociatedValue0,
+                                                                  const GALGAS_objectIR & inAssociatedValue1
+                                                                  COMMA_LOCATION_ARGS) ;
 
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
-  public : virtual ~ cEnumAssociatedValues_internalRepresentation_registerBitField (void) {}
+  public : virtual ~ cEnumAssociatedValues_internalRepresentation_bitField (void) {}
 } ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Routine 'handleArrayAccessInExpressionNew'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleArrayAccessInExpressionNew (class GALGAS_internalRepresentation & ioArgument0,
-                                               const class GALGAS_expressionAST constinArgument1,
-                                               const class GALGAS_location constinArgument2,
-                                               const class GALGAS_lstring constinArgument3,
-                                               const class GALGAS_unifiedTypeMap_2D_proxy constinArgument4,
-                                               const class GALGAS_semanticContext constinArgument5,
-                                               const class GALGAS_mode constinArgument6,
-                                               class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                               class GALGAS_staticStringMap & ioArgument8,
-                                               class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument9,
-                                               class GALGAS_allocaList & ioArgument10,
-                                               class GALGAS_instructionListIR & ioArgument11,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                    Routine 'handlePropertyAccessInExpressionNew'                                    *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handlePropertyAccessInExpressionNew (class GALGAS_internalRepresentation & ioArgument0,
-                                                  const class GALGAS_lstring constinArgument1,
-                                                  const class GALGAS_lstring constinArgument2,
-                                                  const class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
-                                                  const class GALGAS_semanticContext constinArgument4,
-                                                  const class GALGAS_mode constinArgument5,
-                                                  class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                                  class GALGAS_staticStringMap & ioArgument7,
-                                                  class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
-                                                  class GALGAS_allocaList & ioArgument9,
-                                                  class GALGAS_instructionListIR & ioArgument10,
-                                                  class C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -1560,6 +1466,105 @@ class cPtr_ifInstructionIR : public cPtr_abstractInstructionIR {
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mThenInstructionGenerationList (LOCATION_ARGS) const ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mElseInstructionGenerationList (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @whileInstructionIR class                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_whileInstructionIR : public GALGAS_abstractInstructionIR {
+//--- Constructor
+  public : GALGAS_whileInstructionIR (void) ;
+
+//---
+  public : inline const class cPtr_whileInstructionIR * ptr (void) const { return (const cPtr_whileInstructionIR *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_whileInstructionIR (const cPtr_whileInstructionIR * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_whileInstructionIR extractObject (const GALGAS_object & inObject,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_whileInstructionIR constructor_new (const class GALGAS_uint & inOperand0,
+                                                                   const class GALGAS_instructionListIR & inOperand1,
+                                                                   const class GALGAS_objectIR & inOperand2,
+                                                                   const class GALGAS_instructionListIR & inOperand3
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_whileInstructionIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mLabelIndex (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTestExpression (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mTestInstructionGenerationList (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_whileInstructionIR class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_whileInstructionIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Pointer class for @whileInstructionIR class                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
+//--- Attributes
+  public : GALGAS_uint mProperty_mLabelIndex ;
+  public : GALGAS_instructionListIR mProperty_mTestInstructionGenerationList ;
+  public : GALGAS_objectIR mProperty_mTestExpression ;
+  public : GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
+
+//--- Constructor
+  public : cPtr_whileInstructionIR (const GALGAS_uint & in_mLabelIndex,
+                                    const GALGAS_instructionListIR & in_mTestInstructionGenerationList,
+                                    const GALGAS_objectIR & in_mTestExpression,
+                                    const GALGAS_instructionListIR & in_mInstructionGenerationList
+                                    COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mLabelIndex (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mTestInstructionGenerationList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTestExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG GALGAS_instructionListIR getter_mInstructionGenerationList (LOCATION_ARGS) const ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

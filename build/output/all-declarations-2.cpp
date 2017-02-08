@@ -6792,6 +6792,79 @@ void callExtensionMethod_analyzeExpression (const cPtr_expressionAST * inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                           Abstract extension method '@expressionAST analyzeExpressionNew'                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <extensionMethodSignature_expressionAST_analyzeExpressionNew> gExtensionMethodTable_expressionAST_analyzeExpressionNew ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_analyzeExpressionNew (const int32_t inClassIndex,
+                                                extensionMethodSignature_expressionAST_analyzeExpressionNew inMethod) {
+  gExtensionMethodTable_expressionAST_analyzeExpressionNew.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeExtensionMethod_expressionAST_analyzeExpressionNew (void) {
+  gExtensionMethodTable_expressionAST_analyzeExpressionNew.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_expressionAST_analyzeExpressionNew (NULL,
+                                                               freeExtensionMethod_expressionAST_analyzeExpressionNew) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_analyzeExpressionNew (const cPtr_expressionAST * inObject,
+                                               const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
+                                               const GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
+                                               const GALGAS_bool constin_inGuard,
+                                               const GALGAS_lstring constin_inCallerNameForInvocationGraph,
+                                               const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
+                                               const GALGAS_semanticContext constin_inContext,
+                                               const GALGAS_mode constin_inCurrentMode,
+                                               GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                               GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
+                                               GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
+                                               GALGAS_allocaList & io_ioAllocaList,
+                                               GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                               GALGAS_objectIR & out_outResult,
+                                               C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+  out_outResult.drop () ;
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_expressionAST) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    extensionMethodSignature_expressionAST_analyzeExpressionNew f = NULL ;
+    if (classIndex < gExtensionMethodTable_expressionAST_analyzeExpressionNew.count ()) {
+      f = gExtensionMethodTable_expressionAST_analyzeExpressionNew (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+      while ((NULL == f) && (NULL != p)) {
+        if (p->mSlotID < gExtensionMethodTable_expressionAST_analyzeExpressionNew.count ()) {
+          f = gExtensionMethodTable_expressionAST_analyzeExpressionNew (p->mSlotID COMMA_HERE) ;
+        }
+        p = p->mSuperclassDescriptor ;
+      }
+      gExtensionMethodTable_expressionAST_analyzeExpressionNew.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inSelfType, constin_inDirectAccessToPropertiesAllowed, constin_inGuard, constin_inCallerNameForInvocationGraph, constin_inTargetType, constin_inContext, constin_inCurrentMode, io_ioTemporaries, io_ioGlobalLiteralStringMap, io_ioUniversalMap, io_ioAllocaList, io_ioInstructionGenerationList, out_outResult, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                              Extension method '@expressionAST analyzeStaticExpression'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6852,25 +6925,25 @@ static void extensionMethod_expressionAST_analyzeStaticExpression (const cPtr_ex
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_expressionAST * object = inObject ;
   macroValidSharedObject (object, cPtr_expressionAST) ;
-  GALGAS_instructionListIR var_instructionGenerationList_14358 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("expression-operator-priority.galgas", 450)) ;
-  GALGAS_allocaList var_allocaList_14388 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("expression-operator-priority.galgas", 451)) ;
-  GALGAS_semanticTemporariesStruct joker_14643 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("expression-operator-priority.galgas", 460)) ;
-  GALGAS_unifiedSymbolMap joker_14710 = GALGAS_unifiedSymbolMap::constructor_emptyMap (SOURCE_FILE ("expression-operator-priority.galgas", 462)) ;
-  GALGAS_universalPropertyAndRoutineMapForContext joker_14730 = GALGAS_universalPropertyAndRoutineMapForContext::constructor_default (SOURCE_FILE ("expression-operator-priority.galgas", 463)) ;
+  GALGAS_instructionListIR var_instructionGenerationList_15223 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("expression-operator-priority.galgas", 467)) ;
+  GALGAS_allocaList var_allocaList_15253 = GALGAS_allocaList::constructor_emptyList (SOURCE_FILE ("expression-operator-priority.galgas", 468)) ;
+  GALGAS_semanticTemporariesStruct joker_15508 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("expression-operator-priority.galgas", 477)) ;
+  GALGAS_unifiedSymbolMap joker_15575 = GALGAS_unifiedSymbolMap::constructor_emptyMap (SOURCE_FILE ("expression-operator-priority.galgas", 479)) ;
+  GALGAS_universalPropertyAndRoutineMapForContext joker_15595 = GALGAS_universalPropertyAndRoutineMapForContext::constructor_default (SOURCE_FILE ("expression-operator-priority.galgas", 480)) ;
   const GALGAS_expressionAST temp_0 = object ;
-  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) temp_0.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-operator-priority.galgas", 453)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("expression-operator-priority.galgas", 456)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-operator-priority.galgas", 457)), constinArgument_inContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("expression-operator-priority.galgas", 459)), joker_14643, ioArgument_ioGlobalLiteralStringMap, joker_14710, joker_14730, var_allocaList_14388, var_instructionGenerationList_14358, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 452)) ;
-  GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_allocaList_14388.getter_length (SOURCE_FILE ("expression-operator-priority.galgas", 468)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+  callExtensionMethod_analyzeExpression ((const cPtr_expressionAST *) temp_0.ptr (), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-operator-priority.galgas", 470)), GALGAS_bool (false), GALGAS_bool (false), GALGAS_string ("compiler").getter_nowhere (SOURCE_FILE ("expression-operator-priority.galgas", 473)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("expression-operator-priority.galgas", 474)), constinArgument_inContext, GALGAS_mode::constructor_bootMode (SOURCE_FILE ("expression-operator-priority.galgas", 476)), joker_15508, ioArgument_ioGlobalLiteralStringMap, joker_15575, joker_15595, var_allocaList_15253, var_instructionGenerationList_15223, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 469)) ;
+  GALGAS_bool test_1 = GALGAS_bool (kIsStrictSup, var_allocaList_15253.getter_length (SOURCE_FILE ("expression-operator-priority.galgas", 485)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   if (kBoolTrue != test_1.boolEnum ()) {
-    test_1 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList_14358.getter_length (SOURCE_FILE ("expression-operator-priority.galgas", 468)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+    test_1 = GALGAS_bool (kIsStrictSup, var_instructionGenerationList_15223.getter_length (SOURCE_FILE ("expression-operator-priority.galgas", 485)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
   }
   GALGAS_bool test_2 = test_1 ;
   if (kBoolTrue != test_2.boolEnum ()) {
-    test_2 = extensionGetter_isStatic (outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 468)).operator_not (SOURCE_FILE ("expression-operator-priority.galgas", 468)) ;
+    test_2 = extensionGetter_isStatic (outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 485)).operator_not (SOURCE_FILE ("expression-operator-priority.galgas", 485)) ;
   }
   const enumGalgasBool test_3 = test_2.boolEnum () ;
   if (kBoolTrue == test_3) {
     TC_Array <C_FixItDescription> fixItArray4 ;
-    inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("this expression should be a static expression"), fixItArray4  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 469)) ;
+    inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("this expression should be a static expression"), fixItArray4  COMMA_SOURCE_FILE ("expression-operator-priority.galgas", 486)) ;
     outArgument_outResult.drop () ; // Release error dropped variable
   }
 }
@@ -14186,415 +14259,6 @@ GALGAS_calleeKindIR GALGAS_calleeKindIR::extractObject (const GALGAS_object & in
       result = *p ;
     }else{
       inCompiler->castError ("calleeKindIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Class for element of '@switchCaseList' list                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class cCollectionElement_switchCaseList : public cCollectionElement {
-  public : GALGAS_switchCaseList_2D_element mObject ;
-
-//--- Constructor
-  public : cCollectionElement_switchCaseList (const GALGAS_lstringlist & in_mCaseIdentifiers,
-                                              const GALGAS_instructionListAST & in_mCaseInstructionList
-                                              COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
-
-//--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cCollectionElement_switchCaseList::cCollectionElement_switchCaseList (const GALGAS_lstringlist & in_mCaseIdentifiers,
-                                                                      const GALGAS_instructionListAST & in_mCaseInstructionList
-                                                                      COMMA_LOCATION_ARGS) :
-cCollectionElement (THERE),
-mObject (in_mCaseIdentifiers, in_mCaseInstructionList) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool cCollectionElement_switchCaseList::isValid (void) const {
-  return mObject.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cCollectionElement * cCollectionElement_switchCaseList::copy (void) {
-  cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_switchCaseList (mObject.mProperty_mCaseIdentifiers, mObject.mProperty_mCaseInstructionList COMMA_HERE)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cCollectionElement_switchCaseList::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mCaseIdentifiers" ":" ;
-  mObject.mProperty_mCaseIdentifiers.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mCaseInstructionList" ":" ;
-  mObject.mProperty_mCaseInstructionList.description (ioString, inIndentation) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cCollectionElement_switchCaseList::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_switchCaseList * operand = (cCollectionElement_switchCaseList *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_switchCaseList) ;
-  return mObject.objectCompare (operand->mObject) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList::GALGAS_switchCaseList (void) :
-AC_GALGAS_list () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList::GALGAS_switchCaseList (const capCollectionElementArray & inSharedArray) :
-AC_GALGAS_list (inSharedArray) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList GALGAS_switchCaseList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_switchCaseList  (capCollectionElementArray ()) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList GALGAS_switchCaseList::constructor_listWithValue (const GALGAS_lstringlist & inOperand0,
-                                                                        const GALGAS_instructionListAST & inOperand1
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_switchCaseList result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_switchCaseList (capCollectionElementArray ()) ;
-    capCollectionElement attributes ;
-    GALGAS_switchCaseList::makeAttributesFromObjects (attributes, inOperand0, inOperand1 COMMA_THERE) ;
-    result.appendObject (attributes) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                       const GALGAS_lstringlist & in_mCaseIdentifiers,
-                                                       const GALGAS_instructionListAST & in_mCaseInstructionList
-                                                       COMMA_LOCATION_ARGS) {
-  cCollectionElement_switchCaseList * p = NULL ;
-  macroMyNew (p, cCollectionElement_switchCaseList (in_mCaseIdentifiers,
-                                                    in_mCaseInstructionList COMMA_THERE)) ;
-  outAttributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList::addAssign_operation (const GALGAS_lstringlist & inOperand0,
-                                                 const GALGAS_instructionListAST & inOperand1
-                                                 COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_switchCaseList (inOperand0, inOperand1 COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    appendObject (attributes) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList::setter_insertAtIndex (const GALGAS_lstringlist inOperand0,
-                                                  const GALGAS_instructionListAST inOperand1,
-                                                  const GALGAS_uint inInsertionIndex,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  if (isValid () && inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-    cCollectionElement * p = NULL ;
-    macroMyNew (p, cCollectionElement_switchCaseList (inOperand0, inOperand1 COMMA_THERE)) ;
-    capCollectionElement attributes ;
-    attributes.setPointer (p) ;
-    macroDetachSharedObject (p) ;
-    insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList::setter_removeAtIndex (GALGAS_lstringlist & outOperand0,
-                                                  GALGAS_instructionListAST & outOperand1,
-                                                  const GALGAS_uint inRemoveIndex,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  if (isValid () && inRemoveIndex.isValid ()) {
-    capCollectionElement attributes ;
-    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-    cCollectionElement_switchCaseList * p = (cCollectionElement_switchCaseList *) attributes.ptr () ;
-    if (NULL == p) {
-      outOperand0.drop () ;
-      outOperand1.drop () ;
-    }else{
-      macroValidSharedObject (p, cCollectionElement_switchCaseList) ;
-      outOperand0 = p->mObject.mProperty_mCaseIdentifiers ;
-      outOperand1 = p->mObject.mProperty_mCaseInstructionList ;
-    }
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList::setter_popFirst (GALGAS_lstringlist & outOperand0,
-                                             GALGAS_instructionListAST & outOperand1,
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_switchCaseList * p = (cCollectionElement_switchCaseList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_switchCaseList) ;
-    outOperand0 = p->mObject.mProperty_mCaseIdentifiers ;
-    outOperand1 = p->mObject.mProperty_mCaseInstructionList ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList::setter_popLast (GALGAS_lstringlist & outOperand0,
-                                            GALGAS_instructionListAST & outOperand1,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_switchCaseList * p = (cCollectionElement_switchCaseList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_switchCaseList) ;
-    outOperand0 = p->mObject.mProperty_mCaseIdentifiers ;
-    outOperand1 = p->mObject.mProperty_mCaseInstructionList ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList::method_first (GALGAS_lstringlist & outOperand0,
-                                          GALGAS_instructionListAST & outOperand1,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_switchCaseList * p = (cCollectionElement_switchCaseList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_switchCaseList) ;
-    outOperand0 = p->mObject.mProperty_mCaseIdentifiers ;
-    outOperand1 = p->mObject.mProperty_mCaseInstructionList ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList::method_last (GALGAS_lstringlist & outOperand0,
-                                         GALGAS_instructionListAST & outOperand1,
-                                         C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_switchCaseList * p = (cCollectionElement_switchCaseList *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-    outOperand1.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_switchCaseList) ;
-    outOperand0 = p->mObject.mProperty_mCaseIdentifiers ;
-    outOperand1 = p->mObject.mProperty_mCaseInstructionList ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList GALGAS_switchCaseList::add_operation (const GALGAS_switchCaseList & inOperand,
-                                                            C_Compiler * /* inCompiler */
-                                                            COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_switchCaseList result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList GALGAS_switchCaseList::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) const {
-  GALGAS_switchCaseList result = GALGAS_switchCaseList::constructor_emptyList (THERE) ;
-  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList GALGAS_switchCaseList::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) const {
-  GALGAS_switchCaseList result = GALGAS_switchCaseList::constructor_emptyList (THERE) ;
-  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList GALGAS_switchCaseList::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
-  GALGAS_switchCaseList result = GALGAS_switchCaseList::constructor_emptyList (THERE) ;
-  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_switchCaseList::plusAssign_operation (const GALGAS_switchCaseList inOperand,
-                                                  C_Compiler * /* inCompiler */
-                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  appendList (inOperand) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist GALGAS_switchCaseList::getter_mCaseIdentifiersAtIndex (const GALGAS_uint & inIndex,
-                                                                          C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_switchCaseList * p = (cCollectionElement_switchCaseList *) attributes.ptr () ;
-  GALGAS_lstringlist result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_switchCaseList) ;
-    result = p->mObject.mProperty_mCaseIdentifiers ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST GALGAS_switchCaseList::getter_mCaseInstructionListAtIndex (const GALGAS_uint & inIndex,
-                                                                                     C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_switchCaseList * p = (cCollectionElement_switchCaseList *) attributes.ptr () ;
-  GALGAS_instructionListAST result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_switchCaseList) ;
-    result = p->mObject.mProperty_mCaseInstructionList ;
-  }
-  return result ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumerator_switchCaseList::cEnumerator_switchCaseList (const GALGAS_switchCaseList & inEnumeratedObject,
-                                                        const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList_2D_element cEnumerator_switchCaseList::current (LOCATION_ARGS) const {
-  const cCollectionElement_switchCaseList * p = (const cCollectionElement_switchCaseList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_switchCaseList) ;
-  return p->mObject ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstringlist cEnumerator_switchCaseList::current_mCaseIdentifiers (LOCATION_ARGS) const {
-  const cCollectionElement_switchCaseList * p = (const cCollectionElement_switchCaseList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_switchCaseList) ;
-  return p->mObject.mProperty_mCaseIdentifiers ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_instructionListAST cEnumerator_switchCaseList::current_mCaseInstructionList (LOCATION_ARGS) const {
-  const cCollectionElement_switchCaseList * p = (const cCollectionElement_switchCaseList *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_switchCaseList) ;
-  return p->mObject.mProperty_mCaseInstructionList ;
-}
-
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                @switchCaseList type                                                 *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_switchCaseList ("switchCaseList",
-                                       NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_switchCaseList::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_switchCaseList ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_switchCaseList::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_switchCaseList (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_switchCaseList GALGAS_switchCaseList::extractObject (const GALGAS_object & inObject,
-                                                            C_Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_switchCaseList result ;
-  const GALGAS_switchCaseList * p = (const GALGAS_switchCaseList *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_switchCaseList *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("switchCaseList", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

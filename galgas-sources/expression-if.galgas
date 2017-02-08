@@ -169,3 +169,117 @@ override method @ifExpressionAST analyzeExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @ifExpressionAST analyzeExpressionNew
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Analyze if expression
+  [mIfExpression analyzeExpressionNew
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @objectIR ifExpressionResultPossibleReference 
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !ifExpressionResultPossibleReference
+    !mIfExpressionEndLocation
+    ?let ifExpressionResult
+  ]  
+#--- Check "if" expression type is boolean
+  if not [[ifExpressionResult kind] isBoolean] then
+    error mIfExpressionEndLocation : "'if' expression should be boolean"
+  end
+#--- Analyze 'then' expression
+  [mThenExpression analyzeExpressionNew
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @objectIR thenExpressionPossibleReferenceResult
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !thenExpressionPossibleReferenceResult
+    !mThenExpressionEndLocation
+    ?let thenExpressionTempResult
+  ]  
+  let thenExpressionResult = checkAssignmentCompatibility (
+    !source:thenExpressionTempResult
+    !targetAnnotationType:inOptionalTargetType
+    !errorLocation:mThenExpressionEndLocation
+    !staticTypeAllowed:false
+  )
+#--- Analyze 'else' expression
+  [mElseExpression analyzeExpressionNew
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @objectIR elseExpressionPossibleReferenceResult
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !elseExpressionPossibleReferenceResult
+    !mThenExpressionEndLocation
+    ?let elseExpressionTempResult
+  ]  
+  let elseExpressionResult = checkAssignmentCompatibility (
+    !source:elseExpressionTempResult
+    !targetAnnotationType:[thenExpressionResult type]
+    !errorLocation:mElseExpressionEndLocation
+    !staticTypeAllowed:false
+  )
+#--- 'if' expression is static ?
+  if [ifExpressionResult isStatic] then # yes, perform 'if' statically
+    [ifExpressionResult literalInteger ?1* ?value:let value]
+    outResult = if value != 0G then thenExpressionResult else elseExpressionResult end
+  else # No, generate 'select' LLVM instruction
+    getNewTempVariable (![elseExpressionResult type] !mIfExpressionEndLocation !?ioTemporaries ?outResult)
+    [!?ioInstructionGenerationList appendSelectOperation
+      !outResult
+      !ifExpressionResult
+      !thenExpressionResult
+      !elseExpressionResult
+    ]      
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
