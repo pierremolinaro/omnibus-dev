@@ -222,7 +222,7 @@ enum @internalRepresentation {
 
 override method @primaryInExpressionAST analyzeExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -278,6 +278,9 @@ override method @primaryInExpressionAST analyzeExpressionNew
         !?internalRepresentation
         !indexExpression
         !endOfIndex
+        !self:inSelfType
+        !inGuard:inGuard
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
         !optionalTargetType:inOptionalTargetType
         !context:inContext
@@ -327,22 +330,90 @@ override method @primaryInExpressionAST analyzeExpressionNew
 
 proc handleArrayAccessInExpressionNew
   ?!@internalRepresentation ioInternalRepresentation
-  ?let @expressionAST unused inExpression
-  ?let @location unused inEndOfIndex
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?let @expressionAST inIndexExpression
+  ?let @location inEndOfIndex
+  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?inGuard:let @bool inGuard
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?mode:let @mode unused inCurrentMode
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
+  @objectIR variableIR
+  @location errorLocation
   switch ioInternalRepresentation
-  case standAloneIdentifier (@lstring unused identifier) :
-  case structureMember (unused propertyName @objectIR unused currentPointerIR) :
-  case bitField (@sliceMap unused sliceMap unused valueIR) :
+  case standAloneIdentifier (@lstring identifier) :
+    errorLocation = identifier
+    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?variableIR]
+  case structureMember (@lstring propertyName @objectIR currentPointerIR) :
+    if [[currentPointerIR kind] isStructure] then
+      errorLocation = propertyName
+      [[currentPointerIR kind] structure ?2* ?universalMap:let structureMap ?2*]
+      var m = structureMap
+      [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
+      ioTemporaries.mTemporaryIndex ++
+      variableIR = @objectIR.temporaryReference {
+         !type:[masterPropertyIR type] # [currentPointer type]
+         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+         !sliceMap:{}
+         !volatile:false
+      }
+      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
+      [!?ioInstructionGenerationList appendGetPropertyReference
+        !variableIR
+        !currentPointerIR
+        !propertyName
+        !index
+      ]
+    else
+      error [currentPointerIR location] : "this should be a structure instance" : variableIR, errorLocation
+    end
+  case bitField (@sliceMap unused sliceMap valueIR) :
+    error [valueIR location] : "this object is not an array" : variableIR, errorLocation
+  end
+#--- Check current object is an array
+  if [[[variableIR type] kind] isArrayType] then
+    handleSubscriptArrayInAssignmentAndExpressionNew (
+      !self: inSelfType
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap:ioUniversalMap
+      !?alloca: ioAllocaList
+      !inIndexExpression 
+      !inEndOfIndex
+      !?ioInstructionGenerationList
+      !?variableIR
+   )
+  elsif [variableIR isRegisterReference] then
+    handleSubscriptRegisterArrayInAssignmentAndExpressionNew (
+      !self: inSelfType
+      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+      !inGuard: inGuard
+      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+      !context: inContext
+      !mode: inCurrentMode
+      !?temporary: ioTemporaries
+      !?staticStringMap: ioGlobalLiteralStringMap
+      !?variableMap:ioUniversalMap
+      !?alloca: ioAllocaList
+      !inIndexExpression 
+      !inEndOfIndex
+      !?ioInstructionGenerationList
+      !?variableIR
+   )
+  else
+    error errorLocation : "the receiver is not an array and does not accept subscripting"
   end
 }
 
@@ -442,7 +513,7 @@ proc handlePropertyAccessInExpressionNew
       [!?m searchValuedObjectForReadAccess !masterPropertyName ?let @objectIR masterPropertyIR]
       ioTemporaries.mTemporaryIndex ++
       let newObject = @objectIR.temporaryReference {
-         !type:[currentPointer type]
+         !type:[masterPropertyIR type] # [currentPointer type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
          !sliceMap:{}
          !volatile:false
