@@ -111,22 +111,6 @@ override method @constructorCall analyzeExpression
           if effective_mSelector.string != formal_mSelector  then
             error effective_mSelector : "the selector should be '!" + formal_mSelector + ":'"
           end
-#          [effective_mExpression analyzeExpression
-#            !self:inSelfType
-#            !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#            !inGuard:inGuard
-#            !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#            !optionalTargetType:formal_mType
-#            !context:inContext
-#            !mode:inCurrentMode
-#            !?temporary:ioTemporaries
-#            !?staticStringMap:ioGlobalLiteralStringMap
-#            !?variableMap:ioVariableMap
-#            !?variableMap:ioUniversalMap
-#            !?alloca:ioAllocaList
-#            !?instructionListIR:ioInstructionGenerationList
-#            ?result:let @objectIR expressionResult
-#          ]
           [effective_mExpression analyzeExpressionNew
             !self:inSelfType
             !inGuard:inGuard

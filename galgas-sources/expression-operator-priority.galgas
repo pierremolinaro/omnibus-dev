@@ -465,9 +465,8 @@ method @expressionAST analyzeStaticExpression
 {
   @instructionListIR instructionGenerationList = {}
   @allocaList allocaList = {}
-  [self analyzeExpression
+  [self analyzeExpressionNew
     !self:.null
-    !directAccessToPropertiesAllowed:false
     !inGuard:false
     !routineNameForInvocationGraph:["compiler" nowhere]
     !optionalTargetType:.null
@@ -475,7 +474,6 @@ method @expressionAST analyzeStaticExpression
     !mode:.bootMode
     !?temporary:*
     !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:*
     !?variableMap:*
     !?alloca:allocaList
     !?instructionListIR:instructionGenerationList

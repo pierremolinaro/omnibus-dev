@@ -83,7 +83,7 @@ override method @varInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 override method @varInstructionWithAssignmentAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
@@ -99,22 +99,6 @@ override method @varInstructionWithAssignmentAST analyze
     else .searchKey {!inContext.mTypeMap !mOptionalTypeName}
   end
 #--- Analyze source expression
-  [mSourceExpression analyzeExpression
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:targetType
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR sourcePossibleReference
-  ]
   [mSourceExpression analyzeExpressionNew
     !self:inSelfType
     !inGuard:false
@@ -122,12 +106,12 @@ override method @varInstructionWithAssignmentAST analyze
     !optionalTargetType:targetType
     !context:inContext
     !mode:inCurrentMode
-    !?temporary:* # ioTemporaries
+    !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioUniversalMap
-    !?alloca:* # ioAllocaList
-    !?instructionListIR:* # ioInstructionGenerationList
-    ?result:* # @objectIR sourcePossibleReference
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @objectIR sourcePossibleReference
   ]
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries

@@ -202,22 +202,6 @@ override method @syncInstructionAST analyze
       }
     case boolean (isWhileCommand expression endOfExpression) :
       @instructionListIR guardInstructionGenerationList = {}
-      [expression analyzeExpression
-        !self:inSelfType
-        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-        !inGuard:true
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:.null
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioVariableMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:guardInstructionGenerationList
-        ?result:@objectIR sourceOperand
-      ]
       [expression analyzeExpressionNew
         !self:inSelfType
         !inGuard:true
@@ -225,12 +209,12 @@ override method @syncInstructionAST analyze
         !optionalTargetType:.null
         !context:inContext
         !mode:inCurrentMode
-        !?temporary:* # ioTemporaries
+        !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioUniversalMap
-        !?alloca:* # ioAllocaList
-        !?instructionListIR:* # guardInstructionGenerationList
-        ?result:* # @objectIR sourceOperand
+        !?alloca:ioAllocaList
+        !?instructionListIR:guardInstructionGenerationList
+        ?result:let @objectIR sourceOperand
       ]
       if [sourceOperand key] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
@@ -244,22 +228,6 @@ override method @syncInstructionAST analyze
       }
     case boolAndSync (isWhileCommand expression endOfExpression optionalReceiverName guardName effectiveParameterList) :
       @instructionListIR boolExpInstructionGenerationList = {}
-      [expression analyzeExpression
-        !self:inSelfType
-        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-        !inGuard:true
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:.null
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioVariableMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:boolExpInstructionGenerationList
-        ?result:let @objectIR boolExpressionResult
-      ]
       [expression analyzeExpressionNew
         !self:inSelfType
         !inGuard:true
@@ -267,12 +235,12 @@ override method @syncInstructionAST analyze
         !optionalTargetType:.null
         !context:inContext
         !mode:inCurrentMode
-        !?temporary:* # ioTemporaries
+        !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioUniversalMap
-        !?alloca:* # ioAllocaList
-        !?instructionListIR:* # boolExpInstructionGenerationList
-        ?result:* # let @objectIR boolExpressionResult
+        !?alloca:ioAllocaList
+        !?instructionListIR:boolExpInstructionGenerationList
+        ?result:let @objectIR boolExpressionResult
       ]
       if [boolExpressionResult key] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"

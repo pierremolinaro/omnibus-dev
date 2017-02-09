@@ -605,8 +605,6 @@ proc handleFunctionCallInExpressionNew
       functionName = propertyName
       effectiveParameterListIR += !.outputInput !currentPointerIR # Add receiver as first argument
       routineMangledName = routineMangledNameFromCall (!"$" + [[currentPointerIR type] key] !propertyName !inArguments)
-      log propertyName
-      log "KEY" : [[currentPointerIR type] key]
     else
       error [currentPointerIR location]
        : "this object should be a structure"
@@ -626,7 +624,6 @@ proc handleFunctionCallInExpressionNew
     ?let @lstring LLVMInvocationRoutineName
     ?let @routineDescriptor routineDescriptor
   ]
-  log LLVMInvocationRoutineName
 #  let isPublic = routineDescriptor.mIsPublic
   let routineKind = routineDescriptor.mRoutineKind
   let calleeMode = [routineKind executionMode] # routineDescriptor.mExecutionMode
@@ -1364,22 +1361,6 @@ proc analyzeEffectiveParameters
         !.input
         !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (![objectIR name]) ![objectIR location]} !sliceMap:{}}
     case output (@expressionAST expression @location endOfExp) :
-      [expression analyzeExpression
-        !self:inSelfType
-        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-        !inGuard:false
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:formal_mType
-        !context:inContext
-        !mode:inRequiredMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioVariableMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
-        ?result:let @objectIR expressionResult
-      ]
       [expression analyzeExpressionNew
         !self:inSelfType
         !inGuard:false
@@ -1387,12 +1368,12 @@ proc analyzeEffectiveParameters
         !optionalTargetType:formal_mType
         !context:inContext
         !mode:inRequiredMode
-        !?temporary:* # ioTemporaries
+        !?temporary:ioTemporaries
         !?staticStringMap:ioGlobalLiteralStringMap
         !?variableMap:ioUniversalMap
-        !?alloca:* # ioAllocaList
-        !?instructionListIR:* # ioInstructionGenerationList
-        ?result:* # let @objectIR expressionResult
+        !?alloca:ioAllocaList
+        !?instructionListIR:ioInstructionGenerationList
+        ?result:let @objectIR expressionResult
       ]
       [!?ioInstructionGenerationList appendLoadFromReference
         !?ioTemporaries

@@ -239,9 +239,8 @@ override method @structureDeclaration enterInContext
     @semanticTemporariesStruct temporaries = .default
     switch mInitialisation
     case expression (initExpression) :
-      [initExpression analyzeExpression
+     [initExpression analyzeExpressionNew
         !self:.null
-        !directAccessToPropertiesAllowed:false
         !inGuard:false
         !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
         !optionalTargetType:optionalPropertyType
@@ -250,24 +249,9 @@ override method @structureDeclaration enterInContext
         !?temporary:temporaries
         !?staticStringMap:*
         !?variableMap:*
-        !?variableMap:*
         !?alloca:allocaList
         !?instructionListIR:initInstructionGenerationList
-        ?result:@objectIR expressionIR
-      ]
-     [initExpression analyzeExpressionNew
-        !self:.null
-        !inGuard:false
-        !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
-        !optionalTargetType:optionalPropertyType
-        !context:ioContext
-        !mode:.bootMode
-        !?temporary:* # temporaries
-        !?staticStringMap:*
-        !?variableMap:*
-        !?alloca:* # allocaList
-        !?instructionListIR:* # initInstructionGenerationList
-        ?result:* # @objectIR expressionIR
+        ?result:let @objectIR expressionIR
       ]
       if ([initInstructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionIR isStatic] then
         error mFieldName : "initialization expression cannot be computed statically"
@@ -348,7 +332,7 @@ override method @structureDeclaration enterInContext
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
   #--- Function invocation name
     let invocationName = routineMangledNameFromAST (
-      !mStructureName 
+      !"$" + mStructureName 
       !function.mFunctionName
       !function.mFunctionFormalArgumentList
     )
@@ -383,7 +367,7 @@ override method @structureDeclaration enterInContext
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnType]
   #--- Function invocation name
     let invocationName = routineMangledNameFromAST (
-      !mStructureName 
+      !"$" + mStructureName 
       !system.mName
       !system.mFormalArgumentList
     )

@@ -289,7 +289,6 @@ override method @extendStaticArrayDeclarationAST semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @staticlistValues_listMap generateLLVM ?let @staticArrayMap inUsefulStaticArrayMap ?!@string ioLLVMcode {
-#  log inUsefulStaticArrayMap
   var first = true
   for (key initList) in self do
     if [inUsefulStaticArrayMap hasKey !key] then

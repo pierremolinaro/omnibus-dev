@@ -41,13 +41,13 @@ override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 override method @panicInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -58,22 +58,6 @@ override method @panicInstructionAST analyze
   end
 #--- Analyze expression
   @instructionListIR unusedInstructionListIR = {}
-  [mCodeExpression analyzeExpression
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:inContext.mPanicCodeType
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:unusedInstructionListIR
-    ?result:@objectIR result
-  ]
   [mCodeExpression analyzeExpressionNew
     !self:inSelfType
     !inGuard:false
@@ -81,12 +65,12 @@ override method @panicInstructionAST analyze
     !optionalTargetType:inContext.mPanicCodeType
     !context:inContext
     !mode:inCurrentMode
-    !?temporary:* # ioTemporaries
+    !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioUniversalMap
-    !?alloca:* # ioAllocaList
-    !?instructionListIR:* # unusedInstructionListIR
-    ?result:* # @objectIR result
+    !?alloca:ioAllocaList
+    !?instructionListIR:unusedInstructionListIR
+    ?result:let @objectIR result
   ]
 #--- Expression type check
 #--- Expression is static ?

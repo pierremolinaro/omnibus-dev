@@ -90,22 +90,6 @@ override method @switchInstructionAST analyze
 {
 #--- Analyze test expression
   @instructionListIR switchExpressionGenerationList = {}
-  [mSwitchExpression analyzeExpression
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.null
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:switchExpressionGenerationList
-    ?result:@objectIR switchValueIRPossibleReference
-  ]
   [mSwitchExpression analyzeExpressionNew
     !self:inSelfType
     !inGuard:false
@@ -113,12 +97,12 @@ override method @switchInstructionAST analyze
     !optionalTargetType:.null
     !context:inContext
     !mode:inCurrentMode
-    !?temporary:* # ioTemporaries
+    !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioUniversalMap
-    !?alloca:* # ioAllocaList
-    !?instructionListIR:* # switchExpressionGenerationList
-    ?result:* # @objectIR switchValueIRPossibleReference
+    !?alloca:ioAllocaList
+    !?instructionListIR:switchExpressionGenerationList
+    ?result:let @objectIR switchValueIRPossibleReference
   ]
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries

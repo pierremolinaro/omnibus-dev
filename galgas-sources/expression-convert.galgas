@@ -79,22 +79,6 @@ override method @convertExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Analyze expression
-#  [mExpression analyzeExpression
-#    !self:inSelfType
-#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#    !inGuard:inGuard
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !optionalTargetType:inOptionalTargetType
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?result:@objectIR expressionResultPossibleReference
-#  ]
   [mExpression analyzeExpressionNew
     !self:inSelfType
     !inGuard:inGuard

@@ -44,13 +44,13 @@ override method @assertInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
 override method @assertInstructionAST analyze
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -60,22 +60,6 @@ override method @assertInstructionAST analyze
   end
 #--- Analyze expression
   @instructionListIR instructionGenerationList = {}
-  [mExpression analyzeExpression
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.null
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:instructionGenerationList
-    ?result:@objectIR expressionValue
-  ]
   [mExpression analyzeExpressionNew
     !self:inSelfType
     !inGuard:false
@@ -83,12 +67,12 @@ override method @assertInstructionAST analyze
     !optionalTargetType:.null
     !context:inContext
     !mode:inCurrentMode
-    !?temporary:* # ioTemporaries
+    !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioUniversalMap
-    !?alloca:* # ioAllocaList
-    !?instructionListIR:* # instructionGenerationList
-    ?result:* # @objectIR expressionValue
+    !?alloca:ioAllocaList
+    !?instructionListIR:instructionGenerationList
+    ?result:let @objectIR expressionValue
   ]
 #--- Check inferred type
   if not [[expressionValue kind] isBoolean] then
