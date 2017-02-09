@@ -76,6 +76,20 @@ override method @assertInstructionAST analyze
     !?instructionListIR:instructionGenerationList
     ?result:@objectIR expressionValue
   ]
+  [mExpression analyzeExpressionNew
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.null
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:* # ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:* # ioAllocaList
+    !?instructionListIR:* # instructionGenerationList
+    ?result:* # @objectIR expressionValue
+  ]
 #--- Check inferred type
   if not [[expressionValue kind] isBoolean] then
     error mAssertInstructionLocation : "expression is not boolean"

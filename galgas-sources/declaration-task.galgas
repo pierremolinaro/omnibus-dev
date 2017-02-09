@@ -247,6 +247,20 @@ method @taskVarListAST-element enterInContext
     !?instructionListIR:instructionGenerationList
     ?result:let @objectIR expressionResult
   ]
+  [mVarInitExpression analyzeExpressionNew
+    !self:.null
+    !inGuard:false
+    !routineNameForInvocationGraph:["compiler" nowhere]
+    !optionalTargetType:variableAnnotationType
+    !context:ioContext
+    !mode:.bootMode
+    !?temporary:* # temporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:universalMap
+    !?alloca:* # allocaList
+    !?instructionListIR:* # instructionGenerationList
+    ?result:* # let @objectIR expressionResult
+  ]
   if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
     error mVarName : "source expression cannot be statically computed"
   end

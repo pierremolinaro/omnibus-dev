@@ -84,6 +84,20 @@ override method @whileInstructionAST analyze
     !?instructionListIR:testInstructionGenerationList
     ?result:@objectIR testValuePossibleReference
   ]
+  [mTestExpression analyzeExpressionNew
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.null
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:* # ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:* # ioAllocaList
+    !?instructionListIR:* # testInstructionGenerationList
+    ?result:* # @objectIR testValuePossibleReference
+  ]
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !testValuePossibleReference

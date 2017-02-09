@@ -106,6 +106,20 @@ override method @switchInstructionAST analyze
     !?instructionListIR:switchExpressionGenerationList
     ?result:@objectIR switchValueIRPossibleReference
   ]
+  [mSwitchExpression analyzeExpressionNew
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.null
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:* # ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:* # ioAllocaList
+    !?instructionListIR:* # switchExpressionGenerationList
+    ?result:* # @objectIR switchValueIRPossibleReference
+  ]
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !switchValueIRPossibleReference

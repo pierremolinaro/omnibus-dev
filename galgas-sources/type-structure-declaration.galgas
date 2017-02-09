@@ -255,6 +255,20 @@ override method @structureDeclaration enterInContext
         !?instructionListIR:initInstructionGenerationList
         ?result:@objectIR expressionIR
       ]
+     [initExpression analyzeExpressionNew
+        !self:.null
+        !inGuard:false
+        !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
+        !optionalTargetType:optionalPropertyType
+        !context:ioContext
+        !mode:.bootMode
+        !?temporary:* # temporaries
+        !?staticStringMap:*
+        !?variableMap:*
+        !?alloca:* # allocaList
+        !?instructionListIR:* # initInstructionGenerationList
+        ?result:* # @objectIR expressionIR
+      ]
       if ([initInstructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionIR isStatic] then
         error mFieldName : "initialization expression cannot be computed statically"
       end

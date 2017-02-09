@@ -115,6 +115,20 @@ override method @varInstructionWithAssignmentAST analyze
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR sourcePossibleReference
   ]
+  [mSourceExpression analyzeExpressionNew
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:targetType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:* # ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:* # ioAllocaList
+    !?instructionListIR:* # ioInstructionGenerationList
+    ?result:* # @objectIR sourcePossibleReference
+  ]
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !sourcePossibleReference

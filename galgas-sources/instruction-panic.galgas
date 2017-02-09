@@ -74,6 +74,20 @@ override method @panicInstructionAST analyze
     !?instructionListIR:unusedInstructionListIR
     ?result:@objectIR result
   ]
+  [mCodeExpression analyzeExpressionNew
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inContext.mPanicCodeType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:* # ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:* # ioAllocaList
+    !?instructionListIR:* # unusedInstructionListIR
+    ?result:* # @objectIR result
+  ]
 #--- Expression type check
 #--- Expression is static ?
   if ([unusedInstructionListIR length] > 0)
