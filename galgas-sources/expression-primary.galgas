@@ -707,6 +707,8 @@ proc handleFunctionCallInExpressionNew
     !calleeKind
     !effectiveParameterListIR
   }
+#---
+  ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:functionResult}
 
 
 

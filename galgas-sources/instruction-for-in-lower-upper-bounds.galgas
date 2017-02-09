@@ -127,6 +127,20 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?instructionListIR:ioInstructionGenerationList
       ?result:@objectIR lowerBoundExpressionResultPossibleReference
     ]
+    [mLowerBoundExpression analyzeExpressionNew
+      !self:inSelfType
+      !inGuard:false
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !optionalTargetType:type
+      !context:inContext
+      !mode:inCurrentMode
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioUniversalMap
+      !?alloca:*
+      !?instructionListIR:*
+      ?result:* # @objectIR lowerBoundExpressionResultPossibleReferenceNew
+    ]
     [!?ioInstructionGenerationList appendLoadFromReference
       !?ioTemporaries
       !lowerBoundExpressionResultPossibleReference
@@ -148,6 +162,20 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList
       ?result:@objectIR upperBoundExpressionResultPossibleReference
+    ]
+    [mUpperBoundExpression analyzeExpressionNew
+      !self:inSelfType
+      !inGuard:false
+      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+      !optionalTargetType:type
+      !context:inContext
+      !mode:inCurrentMode
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioGlobalLiteralStringMap
+      !?variableMap:ioUniversalMap
+      !?alloca:* # ioAllocaList
+      !?instructionListIR:* # ioInstructionGenerationList
+      ?result:* # @objectIR upperBoundExpressionResultPossibleReference
     ]
     [!?ioInstructionGenerationList appendLoadFromReference
       !?ioTemporaries
