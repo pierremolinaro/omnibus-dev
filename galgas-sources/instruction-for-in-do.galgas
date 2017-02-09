@@ -103,21 +103,6 @@ override method @forInstructionAST analyze
     ?objectIR:* # let @objectIR iteratedObjectPointer
     ?2*
   ]
-#  [mIteratedExpression analyzeExpression ####
-#    !self:inSelfType
-#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#    !inGuard:false
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !optionalTargetType:.null
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?result:@objectIR iteratedExpressionResult
-#  ]
 #--- Type kind
   let iteratedTypeKind = [[iteratedObjectPointer type] kind]
 #--- Get iterated element type

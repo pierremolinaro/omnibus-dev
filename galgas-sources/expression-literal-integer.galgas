@@ -43,28 +43,7 @@ override method @literalIntegerInExpressionAST noteExpressionTypesInPrecedenceGr
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @literalIntegerInExpressionAST analyzeExpression
-  ?self:let @unifiedTypeMap-proxy unused inSelfType
-  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
-  ?inGuard:let @bool unused inGuard
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode unused inCurrentMode
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-  !result:@objectIR outResult
-{
-  outResult = .literalInteger {!type: inContext.mLiteralIntegerType !value:mLiteralInteger.bigint}
-}
-
+#!  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalIntegerInExpressionAST analyzeExpressionNew
