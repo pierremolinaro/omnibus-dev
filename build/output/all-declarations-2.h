@@ -2807,55 +2807,6 @@ void extensionMethod_llvmCodeGeneration (const class GALGAS_guardMapIR_2D_elemen
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                            Abstract extension method '@expressionAST analyzeExpression'                             *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typedef void (*extensionMethodSignature_expressionAST_analyzeExpression) (const class cPtr_expressionAST * inObject,
-                                                                          const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                                                          const class GALGAS_bool constinArgument1,
-                                                                          const class GALGAS_bool constinArgument2,
-                                                                          const class GALGAS_lstring constinArgument3,
-                                                                          const class GALGAS_unifiedTypeMap_2D_proxy constinArgument4,
-                                                                          const class GALGAS_semanticContext constinArgument5,
-                                                                          const class GALGAS_mode constinArgument6,
-                                                                          class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                                                          class GALGAS_staticStringMap & ioArgument8,
-                                                                          class GALGAS_unifiedSymbolMap & ioArgument9,
-                                                                          class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument10,
-                                                                          class GALGAS_allocaList & ioArgument11,
-                                                                          class GALGAS_instructionListIR & ioArgument12,
-                                                                          class GALGAS_objectIR & outArgument13,
-                                                                          class C_Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void enterExtensionMethod_analyzeExpression (const int32_t inClassIndex,
-                                             extensionMethodSignature_expressionAST_analyzeExpression inMethod) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inObject,
-                                            const GALGAS_unifiedTypeMap_2D_proxy constin_inSelfType,
-                                            const GALGAS_bool constin_inDirectAccessToPropertiesAllowed,
-                                            const GALGAS_bool constin_inGuard,
-                                            const GALGAS_lstring constin_inCallerNameForInvocationGraph,
-                                            const GALGAS_unifiedTypeMap_2D_proxy constin_inTargetType,
-                                            const GALGAS_semanticContext constin_inContext,
-                                            const GALGAS_mode constin_inCurrentMode,
-                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                            GALGAS_staticStringMap & io_ioGlobalLiteralStringMap,
-                                            GALGAS_unifiedSymbolMap & io_ioVariableMap,
-                                            GALGAS_universalPropertyAndRoutineMapForContext & io_ioUniversalMap,
-                                            GALGAS_allocaList & io_ioAllocaList,
-                                            GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                            GALGAS_objectIR & out_outResult,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
 //                           Abstract extension method '@expressionAST analyzeExpressionNew'                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4438,5 +4389,76 @@ class GALGAS_calleeKindIR : public AC_GALGAS_root {
 //---------------------------------------------------------------------------------------------------------------------*
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_calleeKindIR ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          @switchCaseList_2D_element struct                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_switchCaseList_2D_element : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public : GALGAS_lstringlist mProperty_mCaseIdentifiers ;
+
+  public : GALGAS_instructionListAST mProperty_mCaseInstructionList ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
+  public : VIRTUAL_IN_DEBUG void drop (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_switchCaseList_2D_element constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Default constructor
+  public : GALGAS_switchCaseList_2D_element (void) ;
+
+//--------------------------------- Virtual destructor (in debug mode)
+  public : VIRTUAL_IN_DEBUG ~ GALGAS_switchCaseList_2D_element (void) ;
+
+//--------------------------------- Native constructor
+  public : GALGAS_switchCaseList_2D_element (const GALGAS_lstringlist & in_mCaseIdentifiers,
+                                             const GALGAS_instructionListAST & in_mCaseInstructionList) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_switchCaseList_2D_element extractObject (const GALGAS_object & inObject,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_switchCaseList_2D_element constructor_new (const class GALGAS_lstringlist & inOperand0,
+                                                                          const class GALGAS_instructionListAST & inOperand1
+                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_switchCaseList_2D_element & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mCaseIdentifiers (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mCaseInstructionList (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_switchCaseList_2D_element class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchCaseList_2D_element ;
 
 #endif
