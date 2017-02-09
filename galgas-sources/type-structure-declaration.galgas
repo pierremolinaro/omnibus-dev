@@ -239,7 +239,7 @@ override method @structureDeclaration enterInContext
     @semanticTemporariesStruct temporaries = .default
     switch mInitialisation
     case expression (initExpression) :
-     [initExpression analyzeExpressionNew
+      [initExpression analyzeExpressionNew
         !self:.null
         !inGuard:false
         !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
@@ -253,7 +253,7 @@ override method @structureDeclaration enterInContext
         !?instructionListIR:initInstructionGenerationList
         ?result:let @objectIR expressionIR
       ]
-      if ([initInstructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionIR isStatic] then
+      if (([initInstructionGenerationList length] + [allocaList length]) > 0) || not [expressionIR isStatic] then
         error mFieldName : "initialization expression cannot be computed statically"
       end
       @unifiedTypeMap-proxy actualPropertyType
@@ -327,7 +327,7 @@ override method @structureDeclaration enterInContext
     end
   #--- Signature
     let signature = [function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
-    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let @routineTypedSignature typedSignature)
+    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let typedSignature)
   #--- Return type
     [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
   #--- Function invocation name

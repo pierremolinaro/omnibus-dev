@@ -776,7 +776,7 @@ const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode (
   gWrapperAllDirectories_embeddedSampleCode_1
 ) ;
 
-//--- File 'teensy-3-1/00-static-list-example.plm'
+//--- File 'teensy-3-1/00-structure-example.plm'
 
 const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
@@ -801,63 +801,45 @@ const char * gWrapperFileContent_2_embeddedSampleCode = "target \"teensy-3-1\"\n
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "let LED_L1 = $digitalPort.D4\n"
-  "let LED_L2 = $digitalPort.D5\n"
-  "let LED_L3 = $digitalPort.D6\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 1000 {\n"
   "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
-  "  pinMode (!port:LED_L2 !mode:.OUTPUT)\n"
-  "  pinMode (!port:LED_L3 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "staticArray maListeStatique {\n"
-  "  let a $uint32\n"
-  "  let b $uint32\n"
-  "  let f func user ()\n"
+  "struct $B {\n"
+  "  var a $uint32 = 0\n"
+  "  var b $uint32 = 0\n"
   "}\n"
   "\n"
-  "func user toggleL2 () {\n"
-  "  toggle (!port:LED_L2)\n"
+  "struct $C {\n"
+  "  var c = $B ()\n"
   "}\n"
-  "\n"
-  "func user toggleL3 () {\n"
-  "  toggle (!port:LED_L3)\n"
-  "}\n"
-  "\n"
-  "extend staticArray maListeStatique (5, 9, func toggleL2 ())\n"
-  "\n"
-  "extend staticArray maListeStatique (15, 29, func toggleL3 ())\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T priority 12 stackSize 512 {\n"
   "  var deadline $uint32 = 0\n"
+  "  var acc = $C ()\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
-  "    self.deadline +%= 250\n"
+  "    self.deadline +%= 1000\n"
   "    toggle (!port:LED_L1)\n"
-  "    var total $uint32 = 0\n"
-  "    for \xC3""\xA9""l\xC3""\xA9""ment in maListeStatique {\n"
-  "      total += \xC3""\xA9""l\xC3""\xA9""ment.a\n"
-  "      total += \xC3""\xA9""l\xC3""\xA9""ment.b\n"
-  "//      \xC3""\xA9""l\xC3""\xA9""ment.f ()\n"
-  "    }\n"
-  "    lcd.goto (!line:0 !column:0)\n"
-  "    lcd.printUnsigned (!total)\n"
+  "    let n = self.acc.c.a +% self.deadline\n"
+  "    self.acc.c.a = n\n"
   "  }\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_2_embeddedSampleCode (
-  "00-static-list-example.plm",
+  "00-structure-example.plm",
   "plm",
   true, // Text file
-  1843, // Text length
+  1359, // Text length
   gWrapperFileContent_2_embeddedSampleCode
 ) ;
 
@@ -2126,7 +2108,7 @@ const cRegularFileWrapper gWrapperFile_14_embeddedSampleCode (
   gWrapperFileContent_14_embeddedSampleCode
 ) ;
 
-//--- File 'teensy-3-1/20-structure-example.plm'
+//--- File 'teensy-3-1/13-static-list-example.plm'
 
 const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-1\"\n"
   "\n"
@@ -2151,45 +2133,63 @@ const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-1\"\
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "let LED_L1 = $digitalPort.D4\n"
+  "let LED_L2 = $digitalPort.D5\n"
+  "let LED_L3 = $digitalPort.D6\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "init 1000 {\n"
   "  pinMode (!port:LED_L1 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L2 !mode:.OUTPUT)\n"
+  "  pinMode (!port:LED_L3 !mode:.OUTPUT)\n"
   "}\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
-  "struct $B {\n"
-  "  var a $uint32 = 0\n"
-  "  var b $uint32 = 0\n"
+  "staticArray maListeStatique {\n"
+  "  let a $uint32\n"
+  "  let b $uint32\n"
+  "  let f func user ()\n"
   "}\n"
   "\n"
-  "struct $C {\n"
-  "  var c = $B ()\n"
+  "func user toggleL2 () {\n"
+  "  toggle (!port:LED_L2)\n"
   "}\n"
+  "\n"
+  "func user toggleL3 () {\n"
+  "  toggle (!port:LED_L3)\n"
+  "}\n"
+  "\n"
+  "extend staticArray maListeStatique (5, 9, func toggleL2 ())\n"
+  "\n"
+  "extend staticArray maListeStatique (15, 29, func toggleL3 ())\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
   "task T priority 12 stackSize 512 {\n"
   "  var deadline $uint32 = 0\n"
-  "  var acc = $C ()\n"
   "\n"
   "  while time.waitUntilMS (!deadline:self.deadline) {\n"
-  "    self.deadline +%= 1000\n"
+  "    self.deadline +%= 250\n"
   "    toggle (!port:LED_L1)\n"
-  "    let n = self.acc.c.a +% self.deadline\n"
-  "    self.acc.c.a = n\n"
+  "    var total $uint32 = 0\n"
+  "    for \xC3""\xA9""l\xC3""\xA9""ment in maListeStatique {\n"
+  "      total += \xC3""\xA9""l\xC3""\xA9""ment.a\n"
+  "      total += \xC3""\xA9""l\xC3""\xA9""ment.b\n"
+  "//      \xC3""\xA9""l\xC3""\xA9""ment.f ()\n"
+  "    }\n"
+  "    lcd.goto (!line:0 !column:0)\n"
+  "    lcd.printUnsigned (!total)\n"
   "  }\n"
   "}\n"
   "\n"
   "//------------------------------------------------*\n" ;
 
 const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
-  "20-structure-example.plm",
+  "13-static-list-example.plm",
   "plm",
   true, // Text file
-  1359, // Text length
+  1843, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 
