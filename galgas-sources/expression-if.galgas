@@ -172,7 +172,6 @@ override method @ifExpressionAST analyzeExpression
 
 override method @ifExpressionAST analyzeExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -188,7 +187,6 @@ override method @ifExpressionAST analyzeExpressionNew
 #--- Analyze if expression
   [mIfExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
@@ -214,7 +212,6 @@ override method @ifExpressionAST analyzeExpressionNew
 #--- Analyze 'then' expression
   [mThenExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
@@ -242,7 +239,6 @@ override method @ifExpressionAST analyzeExpressionNew
 #--- Analyze 'else' expression
   [mElseExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType

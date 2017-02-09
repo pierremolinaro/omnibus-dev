@@ -158,7 +158,6 @@ private proc handleSubscriptArrayInAssignmentAndExpression
 
 proc handleSubscriptArrayInAssignmentAndExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -177,7 +176,6 @@ proc handleSubscriptArrayInAssignmentAndExpressionNew
 #--- Analyze index expression
   [inIndexExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
@@ -357,7 +355,6 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
 
 proc handleSubscriptRegisterArrayInAssignmentAndExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
@@ -388,7 +385,6 @@ proc handleSubscriptRegisterArrayInAssignmentAndExpressionNew
   else
     [inIndexExpression analyzeExpressionNew
       !self:inSelfType
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !inGuard:inGuard
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:.null

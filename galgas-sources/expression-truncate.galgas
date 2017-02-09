@@ -131,7 +131,6 @@ override method @truncateExpressionAST analyzeExpression
 
 override method @truncateExpressionAST analyzeExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
@@ -147,7 +146,6 @@ override method @truncateExpressionAST analyzeExpressionNew
 #--- Analyze expression
   [mExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null

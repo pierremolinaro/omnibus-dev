@@ -109,7 +109,6 @@ override method @varAssignmentInstructionAST analyze
   ]
   [mSourceExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:[currentObject type]
