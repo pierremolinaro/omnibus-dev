@@ -292,7 +292,7 @@ override method @structureDeclaration enterInContext
       ]
       [!?universalPropertyAndRoutineMapForContext insertProperty
         !mFieldName
-        !mIsPublic
+        !public:mIsPublic
         !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
       ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
@@ -308,7 +308,7 @@ override method @structureDeclaration enterInContext
       ]
       [!?universalPropertyAndRoutineMapForContext insertProperty
         !mFieldName
-        !mIsPublic
+        !public:mIsPublic
         !.property {!type:optionalPropertyType !plmName:mFieldName !index:propertyIndex}
       ]
       constructorSignature += !mFieldName.string !optionalPropertyType !propertyIndex

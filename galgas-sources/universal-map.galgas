@@ -50,7 +50,7 @@ setter @universalPropertyAndRoutineMapForContext insertRoutine
 
 setter @universalPropertyAndRoutineMapForContext insertProperty
   ?let @lstring inPropertyName
-  ?let @bool inIsPublic
+  ?public:let @bool inIsPublic
   ?let @objectIR inObjectIR
 {
   let newValue = @possibleValuedObject.property {!isPublic:inIsPublic !objectIR:inObjectIR}
