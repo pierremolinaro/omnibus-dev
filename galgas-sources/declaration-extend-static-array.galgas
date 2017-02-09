@@ -138,28 +138,12 @@ override method @extendStaticArrayDeclarationAST enterInContext
             !mode:.bootMode
             !globalsAreConstant:true # Any value, there is no defined global variable at this stage
             !returnTypeName:["" nowhere]
-            ?@unifiedSymbolMap variableMap
+            ?*
             ?@universalPropertyAndRoutineMapForContext universalMap
           )
           @semanticTemporariesStruct temporaries = .default
           @instructionListIR instructionGenerationList = {}
           @allocaList allocaList = {}
-          [exp analyzeExpression
-            !self:.null
-            !directAccessToPropertiesAllowed:false
-            !inGuard:false
-            !routineNameForInvocationGraph:["compiler" nowhere]
-            !optionalTargetType:type
-            !context:ioContext
-            !mode:.bootMode
-            !?temporary:temporaries
-            !?staticStringMap:ioGlobalLiteralStringMap
-            !?variableMap:variableMap
-            !?variableMap:universalMap
-            !?alloca:allocaList
-            !?instructionListIR:instructionGenerationList
-            ?result:let @objectIR expressionResult
-          ]
           [exp analyzeExpressionNew
             !self:.null
             !inGuard:false
@@ -167,12 +151,12 @@ override method @extendStaticArrayDeclarationAST enterInContext
             !optionalTargetType:type
             !context:ioContext
             !mode:.bootMode
-            !?temporary:* # temporaries
+            !?temporary:temporaries
             !?staticStringMap:ioGlobalLiteralStringMap
-            !?variableMap:* # universalMap
-            !?alloca:* # allocaList
-            !?instructionListIR:* # instructionGenerationList
-            ?result:* # let @objectIR expressionResult
+            !?variableMap:universalMap
+            !?alloca:allocaList
+            !?instructionListIR:instructionGenerationList
+            ?result:let @objectIR expressionResult
           ]
         #--- Check assignment compatibility
           let result = checkAssignmentCompatibility (

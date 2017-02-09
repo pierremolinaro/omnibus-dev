@@ -64,7 +64,7 @@ override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@se
 
 override method @convertExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -72,16 +72,31 @@ override method @convertExpressionAST analyzeExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
 #--- Analyze expression
-  [mExpression analyzeExpression
+#  [mExpression analyzeExpression
+#    !self:inSelfType
+#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#    !inGuard:inGuard
+#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#    !optionalTargetType:inOptionalTargetType
+#    !context:inContext
+#    !mode:inCurrentMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioVariableMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    ?result:@objectIR expressionResultPossibleReference
+#  ]
+  [mExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
@@ -89,25 +104,10 @@ override method @convertExpressionAST analyzeExpression
     !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR expressionResultPossibleReference
-  ]
- [mExpression analyzeExpressionNew
-    !self:inSelfType
-    !inGuard:inGuard
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:* # ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:* # ioAllocaList
-    !?instructionListIR:* # ioInstructionGenerationList
-    ?result:* # @objectIR expressionResultPossibleReference
   ]
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
