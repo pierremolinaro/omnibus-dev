@@ -65,7 +65,7 @@ override method @constructorCall noteExpressionTypesInPrecedenceGraph ?!@semanti
 
 override method @constructorCall analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -73,7 +73,7 @@ override method @constructorCall analyzeExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -111,9 +111,24 @@ override method @constructorCall analyzeExpression
           if effective_mSelector.string != formal_mSelector  then
             error effective_mSelector : "the selector should be '!" + formal_mSelector + ":'"
           end
-          [effective_mExpression analyzeExpression
+#          [effective_mExpression analyzeExpression
+#            !self:inSelfType
+#            !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#            !inGuard:inGuard
+#            !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#            !optionalTargetType:formal_mType
+#            !context:inContext
+#            !mode:inCurrentMode
+#            !?temporary:ioTemporaries
+#            !?staticStringMap:ioGlobalLiteralStringMap
+#            !?variableMap:ioVariableMap
+#            !?variableMap:ioUniversalMap
+#            !?alloca:ioAllocaList
+#            !?instructionListIR:ioInstructionGenerationList
+#            ?result:let @objectIR expressionResult
+#          ]
+          [effective_mExpression analyzeExpressionNew
             !self:inSelfType
-            !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
             !inGuard:inGuard
             !routineNameForInvocationGraph:inCallerNameForInvocationGraph
             !optionalTargetType:formal_mType
@@ -121,25 +136,10 @@ override method @constructorCall analyzeExpression
             !mode:inCurrentMode
             !?temporary:ioTemporaries
             !?staticStringMap:ioGlobalLiteralStringMap
-            !?variableMap:ioVariableMap
             !?variableMap:ioUniversalMap
             !?alloca:ioAllocaList
             !?instructionListIR:ioInstructionGenerationList
             ?result:let @objectIR expressionResult
-          ]
-         [effective_mExpression analyzeExpressionNew
-            !self:inSelfType
-            !inGuard:inGuard
-            !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-            !optionalTargetType:formal_mType
-            !context:inContext
-            !mode:inCurrentMode
-            !?temporary:* # ioTemporaries
-            !?staticStringMap:ioGlobalLiteralStringMap
-            !?variableMap:ioUniversalMap
-            !?alloca:* # ioAllocaList
-            !?instructionListIR:* # ioInstructionGenerationList
-            ?result:* # let @objectIR expressionResult
           ]
           let result = checkAssignmentCompatibility (
             !source:expressionResult

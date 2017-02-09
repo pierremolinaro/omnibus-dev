@@ -114,12 +114,12 @@ override method @varAssignmentInstructionAST analyze
     !optionalTargetType:[currentObject type]
     !context:inContext
     !mode:inCurrentMode
-    !?temporary:ioTemporaries
+    !?temporary:* # ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioUniversalMap
-    !?alloca:*
-    !?instructionListIR:*
-    ?result:*
+    !?alloca:* # ioAllocaList
+    !?instructionListIR:* # ioInstructionGenerationList
+    ?result:* # @objectIR sourceOperandPossibleReference
   ]
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries

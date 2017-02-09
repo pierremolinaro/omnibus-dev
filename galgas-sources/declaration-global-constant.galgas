@@ -98,7 +98,7 @@ override method @globalConstantDeclaration enterInContext
     !mode:.bootMode
     !globalsAreConstant:true # Any value, there is no defined global variable at this stage
     !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMap variableMap
+    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Get destination type
@@ -112,22 +112,6 @@ override method @globalConstantDeclaration enterInContext
   @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}
   @allocaList allocaList = {}
-  [mSourceExpression analyzeExpression
-    !self:.null
-    !directAccessToPropertiesAllowed:false
-    !inGuard:false
-    !routineNameForInvocationGraph:["compiler" nowhere]
-    !optionalTargetType:annotationType
-    !context:ioContext
-    !mode:.bootMode
-    !?temporary:temporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:variableMap
-    !?variableMap:universalMap
-    !?alloca:allocaList
-    !?instructionListIR:instructionGenerationList
-    ?result:let @objectIR expressionResult
-  ]
   [mSourceExpression analyzeExpressionNew
     !self:.null
     !inGuard:false
@@ -135,12 +119,12 @@ override method @globalConstantDeclaration enterInContext
     !optionalTargetType:annotationType
     !context:ioContext
     !mode:.bootMode
-    !?temporary:* # temporaries
+    !?temporary:temporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:universalMap
-    !?alloca:* # allocaList
-    !?instructionListIR:* # instructionGenerationList
-    ?result:* # let @objectIR expressionResult
+    !?alloca:allocaList
+    !?instructionListIR:instructionGenerationList
+    ?result:@objectIR expressionResult
   ]
 #--- Check assignment compatibility
   let result = checkAssignmentCompatibility (

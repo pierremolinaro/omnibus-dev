@@ -248,25 +248,9 @@ method @globalVarDeclarationList-element enterInContext
   @allocaList allocaList = {}
   variableMapWithConstants (
     !context:ioContext
-    ?@unifiedSymbolMap variableMap
+    ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
-  [mSourceExpression analyzeExpression
-     !self:.null
-     !directAccessToPropertiesAllowed:false
-     !inGuard:false
-     !routineNameForInvocationGraph:["compiler" nowhere]
-     !optionalTargetType:variableAnnotationType
-     !context:ioContext
-     !mode:.bootMode
-     !?temporary:temporaries
-     !?staticStringMap:ioGlobalLiteralStringMap
-     !?variableMap:variableMap
-     !?variableMap:universalMap
-     !?alloca:allocaList
-     !?instructionListIR:instructionGenerationList
-     ?result:let @objectIR expressionResult
-  ]
   [mSourceExpression analyzeExpressionNew
      !self:.null
      !inGuard:false
@@ -274,12 +258,12 @@ method @globalVarDeclarationList-element enterInContext
      !optionalTargetType:variableAnnotationType
      !context:ioContext
      !mode:.bootMode
-     !?temporary:* # temporaries
+     !?temporary:temporaries
      !?staticStringMap:ioGlobalLiteralStringMap
      !?variableMap:universalMap
-     !?alloca:* # allocaList
-     !?instructionListIR:* # instructionGenerationList
-     ?result:* # let @objectIR expressionResult
+     !?alloca:allocaList
+     !?instructionListIR:instructionGenerationList
+     ?result:@objectIR expressionResult
   ]
   if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
     error mVarName : "source expression cannot be statically computed"
