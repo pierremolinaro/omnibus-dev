@@ -63,14 +63,14 @@ proc handleSubscriptInAssignmentAndExpression
 
 private proc handleSubscriptArrayInAssignmentAndExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
@@ -81,9 +81,8 @@ private proc handleSubscriptArrayInAssignmentAndExpression
 #--- Analyze array type
   [[[ioObjectPtr type] kind] arrayType ?typeName:* ?elementType:let type ?size:let @bigint arraySize ?2*]
 #--- Analyze index expression
-  [inIndexExpression analyzeExpression
+  [inIndexExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:.null
@@ -91,25 +90,10 @@ private proc handleSubscriptArrayInAssignmentAndExpression
     !mode:inCurrentMode
     !?temporary:ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR indexResultPossibleReference
-  ]
- [inIndexExpression analyzeExpressionNew
-    !self:inSelfType
-    !inGuard:inGuard
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.null
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:* # ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:* # ioAllocaList
-    !?instructionListIR:* # ioInstructionGenerationList
-    ?result:* # let @objectIR indexResultPossibleReference
   ]
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
@@ -263,14 +247,14 @@ proc handleSubscriptArrayInAssignmentAndExpressionNew
 
 private proc handleSubscriptRegisterArrayInAssignmentAndExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
@@ -293,9 +277,8 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
   elsif not readable then
     error inErrorLocation : "register cannot be read in this context" : ioObjectPtr
   else
-    [inIndexExpression analyzeExpression
+    [inIndexExpression analyzeExpressionNew
       !self:inSelfType
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !inGuard:inGuard
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:.null
@@ -303,7 +286,6 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
       !mode:inCurrentMode
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
       !?variableMap:ioUniversalMap
       !?alloca:ioAllocaList
       !?instructionListIR:ioInstructionGenerationList

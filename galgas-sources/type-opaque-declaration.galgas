@@ -111,22 +111,6 @@ override method @opaqueTypeDeclaration enterInContext
     ?@unifiedSymbolMap variableMap
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
-  [mSizeExpression analyzeExpression
-    !self:.null
-    !directAccessToPropertiesAllowed:false
-    !inGuard:false
-    !routineNameForInvocationGraph:.new {!mOpaqueTypeName.string + " init" !mOpaqueTypeName.location}
-    !optionalTargetType:.null
-    !context:ioContext
-    !mode:.bootMode
-    !?temporary:temporaries
-    !?staticStringMap:*
-    !?variableMap:variableMap
-    !?variableMap:universalMap
-    !?alloca:allocaList
-    !?instructionListIR:initInstructionGenerationList
-    ?result:@objectIR sizeExpressionIR
-  ]
   [mSizeExpression analyzeExpressionNew
     !self:.null
     !inGuard:false
@@ -134,12 +118,12 @@ override method @opaqueTypeDeclaration enterInContext
     !optionalTargetType:.null
     !context:ioContext
     !mode:.bootMode
-    !?temporary:* # temporaries
+    !?temporary:temporaries
     !?staticStringMap:*
     !?variableMap:universalMap
-    !?alloca:* # allocaList
-    !?instructionListIR:* # initInstructionGenerationList
-    ?result:* # @objectIR sizeExpressionIR
+    !?alloca:allocaList
+    !?instructionListIR:initInstructionGenerationList
+    ?result:let @objectIR sizeExpressionIR
   ]
   if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
     error mSizeExpressionLocation : "array size expression is not static"

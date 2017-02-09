@@ -111,22 +111,6 @@ override method @forLowerUpperBoundInstructionAST analyze
     error mTypeName : "an integer type is required here"
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
   #--- Analyze expressions
-    [mLowerBoundExpression analyzeExpression
-      !self:inSelfType
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-      !inGuard:false
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:type
-      !context:inContext
-      !mode:inCurrentMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      ?result:@objectIR lowerBoundExpressionResultPossibleReference
-    ]
     [mLowerBoundExpression analyzeExpressionNew
       !self:inSelfType
       !inGuard:false
@@ -137,9 +121,9 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioUniversalMap
-      !?alloca:*
-      !?instructionListIR:*
-      ?result:* # @objectIR lowerBoundExpressionResultPossibleReferenceNew
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      ?result:let @objectIR lowerBoundExpressionResultPossibleReference
     ]
     [!?ioInstructionGenerationList appendLoadFromReference
       !?ioTemporaries
@@ -147,22 +131,6 @@ override method @forLowerUpperBoundInstructionAST analyze
       !mEndOf_lowerBoundExpression_instruction
       ?let lowerBoundExpressionResult
     ]  
-    [mUpperBoundExpression analyzeExpression
-      !self:inSelfType
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-      !inGuard:false
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:type
-      !context:inContext
-      !mode:inCurrentMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      ?result:@objectIR upperBoundExpressionResultPossibleReference
-    ]
     [mUpperBoundExpression analyzeExpressionNew
       !self:inSelfType
       !inGuard:false
@@ -173,9 +141,9 @@ override method @forLowerUpperBoundInstructionAST analyze
       !?temporary:ioTemporaries
       !?staticStringMap:ioGlobalLiteralStringMap
       !?variableMap:ioUniversalMap
-      !?alloca:* # ioAllocaList
-      !?instructionListIR:* # ioInstructionGenerationList
-      ?result:* # @objectIR upperBoundExpressionResultPossibleReference
+      !?alloca:ioAllocaList
+      !?instructionListIR:ioInstructionGenerationList
+      ?result:let @objectIR upperBoundExpressionResultPossibleReference
     ]
     [!?ioInstructionGenerationList appendLoadFromReference
       !?ioTemporaries

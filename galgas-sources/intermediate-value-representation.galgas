@@ -76,7 +76,7 @@ getter @objectIR llvmName -> @string {
   case null : error [self location] : "<<@objectIR llvmName null>>" : result
   case possibleFunction (**) :
     error [self location] : "<<@objectIR llvmName possibleFunction>>" : result
-  case property (***) : error [self location] : "<<@objectIR llvmName>>" : result
+  case property (***) : error [self location] : "<<@objectIR property llvmName>>" : result
   case globalVariableReference (* plmName) : result = "@" + llvmNameForGlobalVariable (!plmName)
   case localVariableReference (* plmName) : result = "%" + llvmNameForLocalVariable (!plmName)
   case registerReference (********): error [self location] : "<<@objectIR llvmName>>" : result

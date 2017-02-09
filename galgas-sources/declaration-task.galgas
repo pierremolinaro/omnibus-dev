@@ -231,22 +231,6 @@ method @taskVarListAST-element enterInContext
     ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
-#  [mVarInitExpression analyzeExpression
-#    !self:.null
-#    !directAccessToPropertiesAllowed:false
-#    !inGuard:false
-#    !routineNameForInvocationGraph:["compiler" nowhere]
-#    !optionalTargetType:variableAnnotationType
-#    !context:ioContext
-#    !mode:.bootMode
-#    !?temporary:temporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:variableMap
-#    !?variableMap:universalMap
-#    !?alloca:allocaList
-#    !?instructionListIR:instructionGenerationList
-#    ?result:let @objectIR expressionResult
-#  ]
   [mVarInitExpression analyzeExpressionNew
     !self:.null
     !inGuard:false

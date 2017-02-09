@@ -33,7 +33,6 @@ override method @instanciationAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
   ?!@constantPrecedenceGraph unused ioGraph
 {
-#  [!?ioGraph addEdge !inConstantName !mTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
