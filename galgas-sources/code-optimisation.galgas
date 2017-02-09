@@ -49,7 +49,10 @@ proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateC
       s += "  " + [ioIntermediateCodeStruct.mStaticStringMap count] + " static strings\n"
       s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
       s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
-      s += "  " + [ioIntermediateCodeStruct.mRoutineMapIR count] + " routines\n"
+      s += "  " + [ioIntermediateCodeStruct.mRoutineMapIR count] + " routine(s)\n"
+      for routine in ioIntermediateCodeStruct.mRoutineMapIR do
+        s += "   - " + routine.lkey + "\n"
+      end
       s += "  " + [ioIntermediateCodeStruct.mGuardMapIR count] + " guards\n"
       message s
     end
