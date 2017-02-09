@@ -27,7 +27,6 @@ override method @ComputeRegisterAddressWithSubscriptIR llvmInstructionCode
   let registerOffsetName = "%register.subscript." + ioGenerationAdds.mUniqueIndex
   let registerIndexName = "%register.index." + ioGenerationAdds.mUniqueIndex
   let scriptedRegisterAddressValueName = "%register.address.value." + ioGenerationAdds.mUniqueIndex
-#  let scriptedRegisterAddressName = "%register.address." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
 #--- Needs to perm an extend to i32 ?
   [[mIndexResult kind] integer ?min:* ?max:* ?unsigned:* ?bitCount:let bitCount]

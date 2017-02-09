@@ -406,6 +406,7 @@ proc handleArrayAccessInExpressionNew
       !?ioInstructionGenerationList
       !?variableIR
    )
+   ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:variableIR}
   elsif [variableIR isRegisterReference] then
     handleSubscriptRegisterArrayInAssignmentAndExpressionNew (
       !self: inSelfType
@@ -421,7 +422,9 @@ proc handleArrayAccessInExpressionNew
       !inEndOfIndex
       !?ioInstructionGenerationList
       !?variableIR
+      ?sliceMap:let sliceMap
    )
+   ioInternalRepresentation = .bitField {!sliceMap:sliceMap !valueIR:variableIR}
   else
     error errorLocation : "the receiver is not an array and does not accept subscripting"
   end

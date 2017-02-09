@@ -97,6 +97,20 @@ private proc handleSubscriptArrayInAssignmentAndExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result:let @objectIR indexResultPossibleReference
   ]
+ [inIndexExpression analyzeExpressionNew
+    !self:inSelfType
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.null
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:* # ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:* # ioAllocaList
+    !?instructionListIR:* # ioInstructionGenerationList
+    ?result:* # let @objectIR indexResultPossibleReference
+  ]
   [!?ioInstructionGenerationList appendLoadFromReference
     !?ioTemporaries
     !indexResultPossibleReference
@@ -367,6 +381,7 @@ proc handleSubscriptRegisterArrayInAssignmentAndExpressionNew
   ?let @location inErrorLocation
   ?!@instructionListIR ioInstructionGenerationList
   ?!@objectIR ioObjectPtr
+  !sliceMap:@sliceMap outSliceMap
 {
   [ioObjectPtr registerReference
     ?type:let registerType
@@ -374,7 +389,7 @@ proc handleSubscriptRegisterArrayInAssignmentAndExpressionNew
     ?readable:let readable
     ?writable:let writable
     ?address:let @bigint registerAddress
-    ?sliceMap:@sliceMap registerBitSliceMap
+    ?sliceMap:outSliceMap
     ?arraySize:let @uint arraySize # 0 if not an array
     ?elementSize:let @uint elementArraySize # 0 if not an array
   ]
@@ -415,7 +430,7 @@ proc handleSubscriptRegisterArrayInAssignmentAndExpressionNew
           !readable:readable
           !writable:writable
           !address:registerAddress + indexValue * elementArraySize
-          !sliceMap:registerBitSliceMap
+          !sliceMap:outSliceMap
           !arraySize:0
           !elementSize:0
         }
@@ -433,10 +448,11 @@ proc handleSubscriptRegisterArrayInAssignmentAndExpressionNew
           error inErrorLocation : "index computation can generated panic"
         end
       end
+    #--- Compute register address
       let registerAddressObject = @objectIR.temporaryReference {
         !type:registerType
         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inErrorLocation}
-        !sliceMap:registerBitSliceMap
+        !sliceMap:outSliceMap
         !volatile:true
       }
       ioTemporaries.mTemporaryIndex ++
@@ -446,7 +462,14 @@ proc handleSubscriptRegisterArrayInAssignmentAndExpressionNew
         !registerAddress
         !elementArraySize
       ]
-      ioObjectPtr = registerAddressObject
+    #--- Load register
+      [!?ioInstructionGenerationList appendLoadFromReference
+        !?ioTemporaries
+        !registerAddressObject
+        !inErrorLocation
+        ?let loadedValueIR
+      ]
+      ioObjectPtr = loadedValueIR
     else
       error inErrorLocation : "index expression is not an integer" : ioObjectPtr
     end

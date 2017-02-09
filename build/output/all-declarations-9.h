@@ -50,6 +50,7 @@ void routine_handleSubscriptRegisterArrayInAssignmentAndExpressionNew (const cla
                                                                        const class GALGAS_location constinArgument10,
                                                                        class GALGAS_instructionListIR & ioArgument11,
                                                                        class GALGAS_objectIR & ioArgument12,
+                                                                       class GALGAS_sliceMap & outArgument13,
                                                                        class C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) ;
 
