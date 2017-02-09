@@ -228,7 +228,7 @@ shared map @unifiedSymbolMap %selectors {
   }
 
 #--- Local constant
-  state localConstant warning "the '%K' constant value is unused" {
+  state localConstant { # warning "the '%K' constant value is unused" {
     neutralAccess   -> localConstant
     readAccess      -> usedLocalConstant
     writeAccess     -> usedLocalConstant error "a constant cannot be written"
@@ -257,7 +257,7 @@ shared map @unifiedSymbolMap %selectors {
     readWriteAccess -> undefinedLocalVariable error "an undefined local variable cannot be modified"
     constMethodCall -> undefinedLocalVariable error "an undefined local variable cannot be read"
     methodCall      -> undefinedLocalVariable error "an undefined local variable cannot be modified"
-    dropAccess      -> undefinedLocalVariable warning "the local variable has no value"
+    dropAccess      -> undefinedLocalVariable # warning "the local variable has no value"
   }
 
   state definedLocalVariable { # warning "the '%K' local variable value is unused" {
@@ -267,7 +267,7 @@ shared map @unifiedSymbolMap %selectors {
     readWriteAccess -> usedLocalVariable
     constMethodCall -> usedLocalVariable
     methodCall      -> usedLocalVariable
-    dropAccess      -> droppedLocalVariable warning "the local variable has been dropped without any read"
+    dropAccess      -> droppedLocalVariable # warning "the local variable has been dropped without any read"
   }
 
   state usedLocalVariable {
@@ -287,7 +287,7 @@ shared map @unifiedSymbolMap %selectors {
     readWriteAccess -> definedLocalVariable error "a dropped local variable cannot be read"
     constMethodCall -> definedLocalVariable error "the local variable is dropped"
     methodCall      -> definedLocalVariable error "the local variable is dropped"
-    dropAccess      -> droppedLocalVariable warning "the local variable is already dropped"
+    dropAccess      -> droppedLocalVariable # warning "the local variable is already dropped"
   }
 
 #--- Output formal parameter
@@ -296,9 +296,9 @@ shared map @unifiedSymbolMap %selectors {
     readAccess      -> undefinedOutputFormalArgument error "an undefined output formal parameter cannot be read"
     writeAccess     -> definedOutputFormalArgument
     readWriteAccess -> undefinedOutputFormalArgument error "an undefined output formal parameter cannot be read"
-    constMethodCall -> undefinedOutputFormalArgument warning "the output formal parameter has no value"
-    methodCall      -> undefinedOutputFormalArgument warning "the output formal parameter has no value"
-    dropAccess      -> undefinedOutputFormalArgument warning "the output formal parameter has no value"
+    constMethodCall -> undefinedOutputFormalArgument # warning "the output formal parameter has no value"
+    methodCall      -> undefinedOutputFormalArgument # warning "the output formal parameter has no value"
+    dropAccess      -> undefinedOutputFormalArgument # warning "the output formal parameter has no value"
   }
 
   state definedOutputFormalArgument {
@@ -339,22 +339,22 @@ shared map @unifiedSymbolMap %selectors {
     readWriteAccess -> droppedInputOutputFormalArgument error "a dropped input/output formal argument cannot be read"
     constMethodCall -> droppedInputOutputFormalArgument error "the input/output formal argument is dropped"
     methodCall      -> droppedInputOutputFormalArgument error "the input/output formal argument is dropped"
-    dropAccess      -> droppedInputOutputFormalArgument warning "the input/output formal argument is already dropped"
+    dropAccess      -> droppedInputOutputFormalArgument # warning "the input/output formal argument is already dropped"
   }
 
 #--- Input/Output formal parameter declared as unused
   state inputOutputFormalArgumentDeclaredAsUnused {
     neutralAccess   -> inputOutputFormalArgumentDeclaredAsUnused
-    readAccess      -> usedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
-    writeAccess     -> usedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
-    readWriteAccess -> usedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
-    constMethodCall -> usedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
-    methodCall      -> usedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
-    dropAccess      -> droppedInputOutputFormalArgument warning "the input/output formal parameter has been declared as unused"
+    readAccess      -> usedInputOutputFormalArgument # warning "the input/output formal parameter has been declared as unused"
+    writeAccess     -> usedInputOutputFormalArgument # warning "the input/output formal parameter has been declared as unused"
+    readWriteAccess -> usedInputOutputFormalArgument # warning "the input/output formal parameter has been declared as unused"
+    constMethodCall -> usedInputOutputFormalArgument # warning "the input/output formal parameter has been declared as unused"
+    methodCall      -> usedInputOutputFormalArgument # warning "the input/output formal parameter has been declared as unused"
+    dropAccess      -> droppedInputOutputFormalArgument # warning "the input/output formal parameter has been declared as unused"
   }
 
 #--- Constant input formal parameter
-  state constantInputFormalArgument warning "the constant '%K' input formal parameter is not used and is not declared as unused" {
+  state constantInputFormalArgument { # warning "the constant '%K' input formal parameter is not used and is not declared as unused" {
     neutralAccess   -> constantInputFormalArgument
     readAccess      -> usedConstantInputFormalArgument
     writeAccess     -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be written"
@@ -377,10 +377,10 @@ shared map @unifiedSymbolMap %selectors {
 #--- Constant input formal parameter declared as unused
   state constantInputFormalArgumentDeclaredAsUnused {
     neutralAccess   -> constantInputFormalArgumentDeclaredAsUnused
-    readAccess      -> usedConstantInputFormalArgument warning "the constant input formal parameter is declared as unused"
+    readAccess      -> usedConstantInputFormalArgument # warning "the constant input formal parameter is declared as unused"
     writeAccess     -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be written"
     readWriteAccess -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be modified"
-    constMethodCall -> usedConstantInputFormalArgument warning "the constant input formal parameter is declared as unused"
+    constMethodCall -> usedConstantInputFormalArgument # warning "the constant input formal parameter is declared as unused"
     methodCall      -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be modified"
     dropAccess      -> usedConstantInputFormalArgument error "a constant input formal parameter cannot be dropped"
   }
