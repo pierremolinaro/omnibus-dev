@@ -133,7 +133,7 @@ override method @ifInstructionAST analyze
     !optionalTargetType:.null
     !context:inContext
     !mode:inCurrentMode
-    !?temporary:ioTemporaries
+    !?temporary:* # ioTemporaries
     !?staticStringMap:ioGlobalLiteralStringMap
     !?variableMap:ioUniversalMap
     !?alloca:* # ioAllocaList
