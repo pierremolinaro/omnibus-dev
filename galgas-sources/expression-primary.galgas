@@ -605,6 +605,8 @@ proc handleFunctionCallInExpressionNew
       functionName = propertyName
       effectiveParameterListIR += !.outputInput !currentPointerIR # Add receiver as first argument
       routineMangledName = routineMangledNameFromCall (!"$" + [[currentPointerIR type] key] !propertyName !inArguments)
+      log propertyName
+      log "KEY" : [[currentPointerIR type] key]
     else
       error [currentPointerIR location]
        : "this object should be a structure"
@@ -624,39 +626,7 @@ proc handleFunctionCallInExpressionNew
     ?let @lstring LLVMInvocationRoutineName
     ?let @routineDescriptor routineDescriptor
   ]
-#---
-#  outEffectiveParameterListIR = {}
-#  let receiverType = [inReceiver type]
-##--- Special case : call a function from a static array during enumeration
-#  var specialCase = (receiverType != .null) && [[receiverType kind] isStructure]
-#  if specialCase then
-#    [[receiverType kind] structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?universalMap:let unused universalMap ?2*]
-#    if [propertyMap hasKey !inRoutineName] then
-#      [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject]
-#      [propertyObject property ?type:let type ?plmName:let unused plmName ?index:let unused index]
-#      specialCase = [[type kind] isFunction]
-#      if specialCase then
-#        log inRoutineName
-#      end
-#    end
-#  end
-##--- Add receiver as first argument
-#  if receiverType != .null then
-#    outEffectiveParameterListIR += !.outputInput !inReceiver
-#  end
-#--- Build LLVM mangled name
-#  let routineMangledName = routineMangledNameFromCall (
-#    !if receiverType == .null then "" else "$" + [receiverType key] end
-#    !inRoutineName
-#    !inEffectiveParameterList
-#  )
-#  [inContext.mRoutineMapForContext searchKey
-#    !inRoutineName
-#    ![inEffectiveParameterList routineSignature !inRoutineName]
-#    ?outRoutineNameForGeneration
-#    ?let @routineDescriptor routineDescriptor
-#    ?let @location outRoutineLocation
-#  ]
+  log LLVMInvocationRoutineName
 #  let isPublic = routineDescriptor.mIsPublic
   let routineKind = routineDescriptor.mRoutineKind
   let calleeMode = [routineKind executionMode] # routineDescriptor.mExecutionMode
@@ -712,154 +682,7 @@ proc handleFunctionCallInExpressionNew
   }
 #---
   ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:functionResult}
-
-
-
-
-#  if not [ioObjectPtr isPossibleFunction] then ###
-#    error inErrorLocation : "object is not a function" : ioObjectPtr, outReturnedType
-#  elsif inGuard then
-#    [ioObjectPtr possibleFunction ?1* ?functionName:let functionName]
-#    error functionName : "a function cannot be called in guard expression" : ioObjectPtr, outReturnedType
-#  else
-#    [ioObjectPtr possibleFunction ?receiver:let receiver ?functionName:let functionName]
-#    analyzeFunctionCallInExpressionNew (
-#      !self:inSelfType
-#      !propertiesAreMutable:inRoutineCanMutateProperties
-#      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#      !receiver:receiver
-#      !routineName:functionName
-#      !effective:inArguments
-#      !callerForInvocationGraph:inCallerNameForInvocationGraph
-#      !context:inContext
-#      !requiredMode:inMode
-#      !?temporary:ioTemporaries
-#      !?staticStringMap:ioGlobalLiteralStringMap
-#      !?variableMap:ioUniversalMap
-#      !?alloca:ioAllocaList
-#      !?instructionListIR:ioInstructionGenerationList
-#      ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
-#      ?routineKind:let @calleeKindIR routineKind
-#      ?routineMangledName:let @lstring functionMangledName
-#      ?routineNameForGeneration:let @lstring functionNameForGeneration
-#      ?returnType:outReturnedType
-#    )
-#  #--- New LLVM variable for function call result
-#    getNewTempVariable (!outReturnedType !functionMangledName !?ioTemporaries ?let functionResult)
-#  #--- Code generation
-#    ioInstructionGenerationList += !@functionCallIR.new {
-#      !inGlobalVariableReceiverName
-#      !functionResult
-#      !functionMangledName
-#      !functionNameForGeneration
-#      !routineKind
-#      !effectiveParameterListIR
-#    }
-#  #---
-#    ioObjectPtr = functionResult
-#  end
 }
-
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#proc analyzeFunctionCallInExpressionNew
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-#  ?receiver:let @objectIR inReceiver
-#  ?routineName:let @lstring inRoutineName
-#  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
-#  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?requiredMode:let @mode inRequiredMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
-#  !routineKind:@calleeKindIR outRoutineKindIR
-#  !routineMangledName:@lstring outRoutineMangledName
-#  !routineNameForGeneration:@lstring outRoutineNameForGeneration
-#  !returnType:@unifiedTypeMap-proxy outReturnedType
-#{
-##---
-#  outEffectiveParameterListIR = {}
-#  let receiverType = [inReceiver type]
-##--- Special case : call a function from a static array during enumeration
-#  var specialCase = (receiverType != .null) && [[receiverType kind] isStructure]
-#  if specialCase then
-#    [[receiverType kind] structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?universalMap:let unused universalMap ?2*]
-#    if [propertyMap hasKey !inRoutineName] then
-#      [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject]
-#      [propertyObject property ?type:let type ?plmName:let unused plmName ?index:let unused index]
-#      specialCase = [[type kind] isFunction]
-#      if specialCase then
-#        log inRoutineName
-#      end
-#    end
-#  end
-##--- Add receiver as first argument
-#  if receiverType != .null then
-#    outEffectiveParameterListIR += !.outputInput !inReceiver
-#  end
-##--- Build LLVM mangled name
-#  outRoutineMangledName = routineMangledNameFromCall (
-#    !if receiverType == .null then "" else "$" + [receiverType key] end
-#    !inRoutineName
-#    !inEffectiveParameterList
-#  )
-#  [inContext.mRoutineMapForContext searchKey
-#    !inRoutineName
-#    ![inEffectiveParameterList routineSignature !inRoutineName]
-#    ?outRoutineNameForGeneration
-#    ?let @routineDescriptor routineDescriptor
-#    ?let @location outRoutineLocation
-#  ]
-#  let isPublic = routineDescriptor.mIsPublic
-#  let routineKind = routineDescriptor.mRoutineKind
-#  let calleeMode = [routineKind executionMode] # routineDescriptor.mExecutionMode
-#  let formalSignature = routineDescriptor.mSignature
-#  outReturnedType = routineDescriptor.mReturnType
-##--- Check accessibility
-#  if not isPublic then
-#    if receiverType == .null then # Standalone function
-#      let @string declarationFile = [outRoutineLocation file]
-#      let invocationFile = [inRoutineName.location file]
-#      if invocationFile != declarationFile then
-#        error inRoutineName : "this routine is not public"
-#      end
-#    elsif receiverType != inSelfType then
-#      error inRoutineName : "this routine is not public"
-#    end  
-#  end  
-##--- Enter in invocation graph
-#  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outRoutineMangledName]
-##--- Check modes
-#  outRoutineKindIR = checkMode (
-#    !callerMode:inRequiredMode
-#    !calleeMode:calleeMode
-#    !kind:routineKind
-#    !error:inRoutineName.location
-#  )
-##--- Analyze effective parameters
-#  analyzeEffectiveParametersNew (
-#    !self:inSelfType
-#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#    !formal:formalSignature
-#    !effective:inEffectiveParameterList
-#    !errorLocation:inRoutineName.location
-#    !callerForInvocationGraph:inCallerNameForInvocationGraph
-#    !context:inContext
-#    !requiredMode:inRequiredMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    !?effectiveIR:outEffectiveParameterListIR
-#  )
-#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
