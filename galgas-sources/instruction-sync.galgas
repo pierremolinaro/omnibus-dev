@@ -218,6 +218,20 @@ override method @syncInstructionAST analyze
         !?instructionListIR:guardInstructionGenerationList
         ?result:@objectIR sourceOperand
       ]
+      [expression analyzeExpressionNew
+        !self:inSelfType
+        !inGuard:true
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:.null
+        !context:inContext
+        !mode:inCurrentMode
+        !?temporary:* # ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioUniversalMap
+        !?alloca:* # ioAllocaList
+        !?instructionListIR:* # guardInstructionGenerationList
+        ?result:* # @objectIR sourceOperand
+      ]
       if [sourceOperand key] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"
       elsif [sourceOperand isStatic] then
@@ -245,6 +259,20 @@ override method @syncInstructionAST analyze
         !?alloca:ioAllocaList
         !?instructionListIR:boolExpInstructionGenerationList
         ?result:let @objectIR boolExpressionResult
+      ]
+      [expression analyzeExpressionNew
+        !self:inSelfType
+        !inGuard:true
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !optionalTargetType:.null
+        !context:inContext
+        !mode:inCurrentMode
+        !?temporary:* # ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioUniversalMap
+        !?alloca:* # ioAllocaList
+        !?instructionListIR:* # boolExpInstructionGenerationList
+        ?result:* # let @objectIR boolExpressionResult
       ]
       if [boolExpressionResult key] != boolTypeName () then
         error endOfExpression : "guarded expression should be boolean"

@@ -127,6 +127,20 @@ override method @constructorCall analyzeExpression
             !?instructionListIR:ioInstructionGenerationList
             ?result:let @objectIR expressionResult
           ]
+         [effective_mExpression analyzeExpressionNew
+            !self:inSelfType
+            !inGuard:inGuard
+            !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+            !optionalTargetType:formal_mType
+            !context:inContext
+            !mode:inCurrentMode
+            !?temporary:* # ioTemporaries
+            !?staticStringMap:ioGlobalLiteralStringMap
+            !?variableMap:ioUniversalMap
+            !?alloca:* # ioAllocaList
+            !?instructionListIR:* # ioInstructionGenerationList
+            ?result:* # let @objectIR expressionResult
+          ]
           let result = checkAssignmentCompatibility (
             !source:expressionResult
             !targetAnnotationType:formal_mType

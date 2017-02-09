@@ -160,6 +160,20 @@ override method @extendStaticArrayDeclarationAST enterInContext
             !?instructionListIR:instructionGenerationList
             ?result:let @objectIR expressionResult
           ]
+          [exp analyzeExpressionNew
+            !self:.null
+            !inGuard:false
+            !routineNameForInvocationGraph:["compiler" nowhere]
+            !optionalTargetType:type
+            !context:ioContext
+            !mode:.bootMode
+            !?temporary:* # temporaries
+            !?staticStringMap:ioGlobalLiteralStringMap
+            !?variableMap:* # universalMap
+            !?alloca:* # allocaList
+            !?instructionListIR:* # instructionGenerationList
+            ?result:* # let @objectIR expressionResult
+          ]
         #--- Check assignment compatibility
           let result = checkAssignmentCompatibility (
             !source:expressionResult

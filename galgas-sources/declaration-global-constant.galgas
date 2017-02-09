@@ -128,6 +128,20 @@ override method @globalConstantDeclaration enterInContext
     !?instructionListIR:instructionGenerationList
     ?result:let @objectIR expressionResult
   ]
+  [mSourceExpression analyzeExpressionNew
+    !self:.null
+    !inGuard:false
+    !routineNameForInvocationGraph:["compiler" nowhere]
+    !optionalTargetType:annotationType
+    !context:ioContext
+    !mode:.bootMode
+    !?temporary:* # temporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:universalMap
+    !?alloca:* # allocaList
+    !?instructionListIR:* # instructionGenerationList
+    ?result:* # let @objectIR expressionResult
+  ]
 #--- Check assignment compatibility
   let result = checkAssignmentCompatibility (
     !source:expressionResult

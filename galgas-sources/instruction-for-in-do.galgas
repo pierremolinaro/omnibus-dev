@@ -165,6 +165,20 @@ override method @forInstructionAST analyze
     !?instructionListIR:whileExpression_GenerationList
     ?result:@objectIR whileExpressionResult
   ]
+  [mWhileExpression analyzeExpressionNew
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.null
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:* # ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:* # ioAllocaList
+    !?instructionListIR:* # whileExpression_GenerationList
+    ?result:* # @objectIR whileExpressionResult
+  ]
 #--- Check "while" expression type is boolean
   if not [[whileExpressionResult kind] isBoolean] then
     error mEndOf_whileExpression : "'while' expression should be boolean"
