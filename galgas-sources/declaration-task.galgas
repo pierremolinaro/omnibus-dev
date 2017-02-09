@@ -286,7 +286,7 @@ method @taskVarListAST-element enterInContext
   ]
   [!?ioUniversalPropertyAndRoutineMapForContext insertProperty
     !mVarName
-    !false
+    !public:false
     !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
   ]
   ioInitialValueList += !result

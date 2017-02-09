@@ -133,6 +133,7 @@ override method @staticArrayAST enterInContext
 {
   @propertyList propertyList = {}
   @propertyMap staticlistPropertyMap = {}
+  @universalPropertyAndRoutineMapForContext universalMap = .default
   @stringset propertyNameSet = {}
   let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
   for (propertyName type) in mPropertyList do
@@ -145,10 +146,12 @@ override method @staticArrayAST enterInContext
       propertyNameSet += !propertyName
       propertyList += !propertyName !propertyType
       let propertyIndex = [staticlistPropertyMap count]
+      let objectIR = @objectIR.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
+      [!?universalMap insertProperty !propertyName !public:true !objectIR]
       [!?staticlistPropertyMap insertKey
         !propertyName
         !true # Public
-        !.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
+        !objectIR
       ]
     case function (@mode mode @routineFormalArgumentList formalArgs @lstring returnTypeName) :
     #--- Routine mangled name
@@ -191,7 +194,7 @@ override method @staticArrayAST enterInContext
   let kind = @typeKind.structure {
     !typeName:llvmNameForStaticListElementType (!mStaticListName)
     !propertyMap:staticlistPropertyMap
-    !universalMap:.default
+    !universalMap:universalMap
     !propertyList:propertyList
     !flags:0
   }

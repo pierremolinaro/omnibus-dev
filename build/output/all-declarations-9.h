@@ -573,13 +573,4 @@ class GALGAS_bigint function_panicCodeForSignedRemainderByZero (class C_Compiler
 class GALGAS_bigint function_panicCodeForNegativeArrayIndex (class C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                      Function 'panicCodeForTooLargeArrayIndex'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-class GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
-
 #endif
