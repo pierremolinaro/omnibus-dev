@@ -316,13 +316,13 @@ override method @primaryInExpressionAST analyzeExpressionNew
       [[currentPointer kind] structure ?2* ?universalMap:let structureMap ?2*]
       var m = structureMap
       [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
-      ioTemporaries.mTemporaryIndex ++
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type] # [currentPointer type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
          !sliceMap:{}
          !volatile:false
       }
+      ioTemporaries.mTemporaryIndex ++
       [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
       [!?ioInstructionGenerationList appendGetPropertyReference
         !newObject
@@ -369,13 +369,13 @@ proc handleArrayAccessInExpressionNew
       [[currentPointerIR kind] structure ?2* ?universalMap:let structureMap ?2*]
       var m = structureMap
       [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
-      ioTemporaries.mTemporaryIndex ++
       variableIR = @objectIR.temporaryReference {
          !type:[masterPropertyIR type] # [currentPointer type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
          !sliceMap:{}
          !volatile:false
       }
+      ioTemporaries.mTemporaryIndex ++
       [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
       [!?ioInstructionGenerationList appendGetPropertyReference
         !variableIR
@@ -524,13 +524,13 @@ proc handlePropertyAccessInExpressionNew
       [[currentPointer kind] structure ?2* ?universalMap:let structureMap ?2*]
       var m = structureMap
       [!?m searchValuedObjectForReadAccess !masterPropertyName ?let @objectIR masterPropertyIR]
-      ioTemporaries.mTemporaryIndex ++
       let newObject = @objectIR.temporaryReference {
          !type:[masterPropertyIR type] # [currentPointer type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
          !sliceMap:{}
          !volatile:false
       }
+      ioTemporaries.mTemporaryIndex ++
       [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
       [!?ioInstructionGenerationList appendGetPropertyReference
         !newObject
