@@ -64,6 +64,7 @@ override method @instanciationAST analyzeExpression
 
 override method @instanciationAST analyzeExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
+  ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
   ?context:let @semanticContext inContext

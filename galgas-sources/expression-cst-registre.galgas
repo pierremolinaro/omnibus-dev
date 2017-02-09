@@ -224,7 +224,6 @@ override method @registerConstantExpressionAST analyzeExpression
 
 override method @registerConstantExpressionAST analyzeExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
@@ -273,7 +272,6 @@ override method @registerConstantExpressionAST analyzeExpressionNew
   #--- Analyze expression
     [expression analyzeExpressionNew
       !self:inSelfType
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
       !inGuard:inGuard
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
       !optionalTargetType:.null

@@ -200,7 +200,6 @@ override method @infixOperatorExpressionAST analyzeExpression
 
 override method @infixOperatorExpressionAST analyzeExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -216,7 +215,6 @@ override method @infixOperatorExpressionAST analyzeExpressionNew
 #------------------- Analyze left expression
   [mLeftExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
@@ -238,7 +236,6 @@ override method @infixOperatorExpressionAST analyzeExpressionNew
 #------------------- Analyze right expression
   [mRightExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:[leftOperand type]
@@ -462,7 +459,6 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
 
 override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -479,7 +475,6 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpressionNe
   @instructionListIR leftInstructionGenerationList = {}
   [mLeftExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:inOptionalTargetType
@@ -502,7 +497,6 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpressionNe
   @instructionListIR rightInstructionGenerationList = {}
   [mRightExpression analyzeExpressionNew
     !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
     !optionalTargetType:[leftOperand type]

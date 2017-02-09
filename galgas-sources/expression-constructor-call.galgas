@@ -149,7 +149,6 @@ override method @constructorCall analyzeExpression
 
 override method @constructorCall analyzeExpressionNew
   ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
   ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
@@ -196,7 +195,6 @@ override method @constructorCall analyzeExpressionNew
           end
           [effective_mExpression analyzeExpressionNew
             !self:inSelfType
-            !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
             !inGuard:inGuard
             !routineNameForInvocationGraph:inCallerNameForInvocationGraph
             !optionalTargetType:formal_mType
