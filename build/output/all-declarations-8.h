@@ -485,6 +485,51 @@ void routine_handleSubscriptRegisterArrayInAssignmentAndExpressionNew (const cla
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                      Routine 'handleMethodCallInExpressionNew'                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleMethodCallInExpressionNew (const class GALGAS_lstring constinArgument0,
+                                              const class GALGAS_objectIR constinArgument1,
+                                              const class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
+                                              const class GALGAS_lstring constinArgument3,
+                                              const class GALGAS_semanticContext constinArgument4,
+                                              const class GALGAS_mode constinArgument5,
+                                              class GALGAS_semanticTemporariesStruct & ioArgument6,
+                                              class GALGAS_staticStringMap & ioArgument7,
+                                              class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument8,
+                                              class GALGAS_allocaList & ioArgument9,
+                                              const class GALGAS_effectiveArgumentListAST constinArgument10,
+                                              class GALGAS_instructionListIR & ioArgument11,
+                                              class GALGAS_objectIR & outArgument12,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Routine 'handleStandAloneFunctionCallInExpression'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_handleStandAloneFunctionCallInExpression (class GALGAS_internalRepresentation & ioArgument0,
+                                                       const class GALGAS_lstring constinArgument1,
+                                                       const class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
+                                                       const class GALGAS_bool constinArgument3,
+                                                       const class GALGAS_lstring constinArgument4,
+                                                       const class GALGAS_semanticContext constinArgument5,
+                                                       const class GALGAS_mode constinArgument6,
+                                                       class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                                       class GALGAS_staticStringMap & ioArgument8,
+                                                       class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument9,
+                                                       class GALGAS_allocaList & ioArgument10,
+                                                       const class GALGAS_effectiveArgumentListAST constinArgument11,
+                                                       const class GALGAS_location constinArgument12,
+                                                       class GALGAS_instructionListIR & ioArgument13,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                        Function 'routineMangledNameFromCall'                                        *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -516,56 +561,6 @@ void routine_analyzeEffectiveParametersNew (const class GALGAS_unifiedTypeMap_2D
                                             class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                       Routine 'handleSelfAccessInExpression'                                        *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handleSelfAccessInExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                           const class GALGAS_objectIR constinArgument1,
-                                           class GALGAS_semanticTemporariesStruct & ioArgument2,
-                                           class GALGAS_instructionListIR & ioArgument3,
-                                           class GALGAS_objectIR & outArgument4,
-                                           class C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                     Routine 'handlePropertyAccessInExpression'                                      *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handlePropertyAccessInExpression (class GALGAS_objectIR & ioArgument0,
-                                               const class GALGAS_location constinArgument1,
-                                               const class GALGAS_objectIR constinArgument2,
-                                               class GALGAS_semanticTemporariesStruct & ioArgument3,
-                                               class GALGAS_instructionListIR & ioArgument4,
-                                               class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Routine 'handlePropertyInExpression'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_handlePropertyInExpression (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                         const class GALGAS_bool constinArgument1,
-                                         const class GALGAS_bool constinArgument2,
-                                         const class GALGAS_lstring constinArgument3,
-                                         const class GALGAS_semanticContext constinArgument4,
-                                         const class GALGAS_mode constinArgument5,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument6,
-                                         class GALGAS_staticStringMap & ioArgument7,
-                                         class GALGAS_unifiedSymbolMap & ioArgument8,
-                                         class GALGAS_allocaList & ioArgument9,
-                                         const class GALGAS_lstring constinArgument10,
-                                         class GALGAS_instructionListIR & ioArgument11,
-                                         class GALGAS_objectIR & ioArgument12,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *

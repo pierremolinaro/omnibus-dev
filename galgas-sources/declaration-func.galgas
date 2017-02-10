@@ -254,6 +254,7 @@ method @functionDeclarationListAST enterFunctionInContext
         !returnType
         !canMutateProperties
         !canAccessProperties
+        !.staticCall
       }
     ]
   end

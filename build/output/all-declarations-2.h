@@ -167,6 +167,26 @@ void extensionMethod_enterInContext (const class GALGAS_systemRoutineDeclaration
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                    @routineCallingSheme enum, associated values                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall : public cEnumAssociatedValues {
+  public : const GALGAS_uint mAssociatedValue0 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall (const GALGAS_uint & inAssociatedValue0
+                                                                           COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_routineCallingSheme_propertyIndirectCall (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                            Function 'mutatingAttribute'                                             *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*

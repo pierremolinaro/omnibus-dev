@@ -37,20 +37,29 @@ init 1000 {
 staticArray maListeStatique {
   let a $uint32
   let b $uint32
-  let f func user ()
+  let p func user ()
+  let f func user () -> $uint32
 }
 
 func user toggleL2 () {
   toggle (!port:LED_L2)
 }
 
+func user p2 () -> $uint32 {
+  result = 10
+}
+
 func user toggleL3 () {
   toggle (!port:LED_L3)
 }
 
-extend staticArray maListeStatique (5, 9, func toggleL2 ())
+func user p3 () -> $uint32 {
+  result = 15
+}
 
-extend staticArray maListeStatique (15, 29, func toggleL3 ())
+extend staticArray maListeStatique (5, 9, func toggleL2 (), func p2 ())
+
+extend staticArray maListeStatique (15, 29, func toggleL3 (), func p3 ())
 
 //-----------------------------------------------------------------------------*
 
@@ -64,6 +73,7 @@ task T priority 12 stackSize 512 {
     for élément in maListeStatique {
       total += élément.a
       total += élément.b
+      total += élément.f ()
 //      élément.f ()
     }
     lcd.goto (!line:0 !column:0)

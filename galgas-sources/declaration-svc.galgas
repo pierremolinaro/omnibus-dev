@@ -134,6 +134,7 @@ method @systemRoutineDeclarationListAST enterInContext
         !returnType
         !mutating # canMutateProperties
         !true # canAccessPropertiesInUserMode
+        !.staticCall
       }
     ]
   end
