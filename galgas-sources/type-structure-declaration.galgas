@@ -345,6 +345,7 @@ override method @structureDeclaration enterInContext
       !returnType
       ![attributeSet hasKey !accessAttribute ()]
       ![attributeSet hasKey !mutatingAttribute ()]
+      !.staticCall
     }
   #---
     [!?universalPropertyAndRoutineMapForContext insertRoutine
@@ -380,6 +381,7 @@ override method @structureDeclaration enterInContext
       !returnType
       ![attributeSet hasKey !accessAttribute ()]
       ![attributeSet hasKey !mutatingAttribute ()]
+      !.staticCall
     }
   #---
     [!?universalPropertyAndRoutineMapForContext insertRoutine

@@ -25,19 +25,6 @@ list @routineTypedSignature {
 
 #·······················································································································
 
-#getter @routineTypedSignature signatureAsLString ?let @location inRoutineNameLocation -> @lstring {
-#  var s = "("
-#  for argument in self do
-#    s += [argument.mFormalArgumentPassingMode formalPassingModeString]
-#    s += argument.mSelector.string
-#    s += ":"
-#  end
-#  s += ")"
-#  result = .new {!s !inRoutineNameLocation}
-#}
-
-#·······················································································································
-
 getter @routineFormalArgumentList routineSignature ?let @location inRoutineNameLocation -> @lstring {
   var key = ""
   key += "("
@@ -84,6 +71,13 @@ getter @routineKind executionMode -> @mode {
 
 #·······················································································································
 
+enum @routineCallingSheme {
+  case staticCall
+  case propertyIndirectCall (@uint index)
+}
+
+#·······················································································································
+
 struct @routineDescriptor {
   @bool mIsPublic # Routine is declared with "public"
   @bool mExported # Routine is declared with @exported attribute
@@ -92,6 +86,7 @@ struct @routineDescriptor {
   @unifiedTypeMap-proxy mReturnType # .null if no returned value
   @bool mCanAccessProperties # Routine is declared with @access attribute
   @bool mCanMutateProperties # Routine is declared with @mutating attribute
+  @routineCallingSheme mRoutineCallingScheme
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

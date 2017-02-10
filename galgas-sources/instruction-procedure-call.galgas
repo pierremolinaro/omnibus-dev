@@ -346,7 +346,7 @@ override method @simpleCallInstructionAST analyze
     !?effectiveIR:effectiveParameterListIR
   )
 #--- Code generation
-  ioInstructionGenerationList += !@functionCallIR.new {
+  ioInstructionGenerationList += !@staticRoutineCallIR.new {
     !""
     !.null
     !routineMangledName

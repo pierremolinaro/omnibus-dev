@@ -136,7 +136,7 @@ override method @staticArrayAST enterInContext
   @universalPropertyAndRoutineMapForContext universalMap = .default
   @stringset propertyNameSet = {}
   let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
-  for (propertyName type) in mPropertyList do
+  for (propertyName type) in mPropertyList do (propertyIndex)
     switch type
     case valueType (@lstring propertyTypeName) :
       let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !propertyTypeName}
@@ -145,7 +145,6 @@ override method @staticArrayAST enterInContext
       end
       propertyNameSet += !propertyName
       propertyList += !propertyName !propertyType
-      let propertyIndex = [staticlistPropertyMap count]
       let objectIR = @objectIR.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
       [!?universalMap insertProperty !propertyName !public:true !objectIR]
       [!?staticlistPropertyMap insertKey
@@ -167,7 +166,22 @@ override method @staticArrayAST enterInContext
       else
         .searchKey {!ioContext.mTypeMap !returnTypeName}
       end
-      let descriptor = @routineDescriptor.new {!true !false !.function {!executionMode:mode} !signature !returnType !false !false}
+      let descriptor = @routineDescriptor.new {
+        !true
+        !false
+        !.function {!executionMode:mode}
+        !signature
+        !returnType
+        !false
+        !false
+        !.propertyIndirectCall {!index:propertyIndex}
+      }
+      [!?universalMap insertRoutine
+        !propertyName
+        ![formalArgs routineSignature !propertyName]
+        !routineMangledName
+        !descriptor
+      ]
       if not [ioContext.mTypeMap hasKey !routineMangledName] then
         [!?ioContext.mTypeMap insertType
           !lkey:routineMangledName
