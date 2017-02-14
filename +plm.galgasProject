@@ -110,6 +110,7 @@ project (1:0:0) -> "plm" {
 
 #--- Intermediate code
   "galgas-sources/panic-codes.galgas"
+  "galgas-sources/llvm-type.galgas"
   "galgas-sources/generated-code-prefixes.galgas"
   "galgas-sources/intermediate-value-representation.galgas"
   "galgas-sources/intermediate-code-generation.galgas"

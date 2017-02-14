@@ -1,0 +1,36 @@
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+enum @llvmType {
+  case void
+  case int (@uint size)
+  case pointer (@llvmType type)
+  case function (@llvmType resultType @llvmTypeList formalParameterTypes)
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @llvmTypeList {
+  @llvmType mType
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+getter @llvmType llvmTypeName -> @string {
+  switch self
+  case void :
+    result = "void"
+  case int (@uint size) :
+    result = "i" + size
+  case pointer (@llvmType type) :
+    result = [type llvmTypeName] + "*"
+  case function (@llvmType resultType @llvmTypeList formalParameterTypes) :
+    result = [resultType llvmTypeName] + "("
+    for (type) in formalParameterTypes
+    do result += [type llvmTypeName]
+    between result += ","
+    end
+    result += ")"
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
