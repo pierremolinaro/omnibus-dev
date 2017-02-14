@@ -2271,6 +2271,7 @@ const cDirectoryWrapper gWrapperDirectory_0_embeddedSampleCode (
 #include "galgas2/C_galgas_CLI_Options.h"
 #include "galgas2/F_verbose_output.h"
 #include "galgas2/cLexiqueIntrospection.h"
+#include "command_line_interface/C_builtin_CLI_Options.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
@@ -2439,52 +2440,52 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
     returnCode = 1 ;
   }else{
   //--- Common lexique object
-    C_Compiler * commonLexique = NULL ;
-    macroMyNew (commonLexique, C_Compiler (NULL COMMA_HERE)) ;
+    C_Compiler * commonCompiler = NULL ;
+    macroMyNew (commonCompiler, C_Compiler (NULL COMMA_HERE)) ;
     try{
-      routine_before (commonLexique COMMA_HERE) ;
-      cLexiqueIntrospection::handleGetKeywordListOption (commonLexique) ;
+      routine_before (commonCompiler COMMA_HERE) ;
+      cLexiqueIntrospection::handleGetKeywordListOption (commonCompiler) ;
       const bool verboseOptionOn = verboseOutput () ;
       for (int32_t i=0 ; i<sourceFilesArray.count () ; i++) {
         const C_String fileExtension = sourceFilesArray (i COMMA_HERE).pathExtension () ;
         const GALGAS_string sfp = GALGAS_string (sourceFilesArray (i COMMA_HERE)) ;
-        const GALGAS_location location = commonLexique->here () ;
+        const GALGAS_location location = commonCompiler->here () ;
         const GALGAS_lstring sourceFilePath (sfp, location) ;
         int r = 0 ;
         if (fileExtension == "plm-target") {
           switch (executionMode ()) {
           case kExecutionModeNormal :
-            routine_programRule_5F__30_ (sourceFilePath, commonLexique COMMA_HERE) ;
+            routine_programRule_5F__30_ (sourceFilePath, commonCompiler COMMA_HERE) ;
             break ;
           case kExecutionModeLexicalAnalysisOnly :
-            cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           case kExecutionModeSyntaxAnalysisOnly :
-            cGrammar_plm_5F_target_5F_grammar::performOnlySyntaxAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_target_5F_grammar::performOnlySyntaxAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           case kExecutionModeIndexing :
-            cGrammar_plm_5F_target_5F_grammar::performIndexing (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_target_5F_grammar::performIndexing (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           case kExecutionModeLatex :
-            cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_target_5F_grammar::performOnlyLexicalAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           }
         }else if (fileExtension == "plm") {
           switch (executionMode ()) {
           case kExecutionModeNormal :
-            routine_programRule_5F__31_ (sourceFilePath, commonLexique COMMA_HERE) ;
+            routine_programRule_5F__31_ (sourceFilePath, commonCompiler COMMA_HERE) ;
             break ;
           case kExecutionModeLexicalAnalysisOnly :
-            cGrammar_plm_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_grammar::performOnlyLexicalAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           case kExecutionModeSyntaxAnalysisOnly :
-            cGrammar_plm_5F_grammar::performOnlySyntaxAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_grammar::performOnlySyntaxAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           case kExecutionModeIndexing :
-            cGrammar_plm_5F_grammar::performIndexing (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_grammar::performIndexing (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           case kExecutionModeLatex :
-            cGrammar_plm_5F_grammar::performOnlyLexicalAnalysis (commonLexique, sourceFilesArray (i COMMA_HERE)) ;
+            cGrammar_plm_5F_grammar::performOnlyLexicalAnalysis (commonCompiler, sourceFilesArray (i COMMA_HERE)) ;
             break ;
           }
         }else{
@@ -2507,7 +2508,11 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
         }
       }
     //--- Epilogue
-      routine_after (commonLexique COMMA_HERE) ;
+      routine_after (commonCompiler COMMA_HERE) ;
+    //--- Emit JSON issue file ?
+      if (gOption_generic_5F_cli_5F_options_emit_5F_issue_5F_json_5F_file.mValue != "") {
+        commonCompiler->writeIssueJSONFile (gOption_generic_5F_cli_5F_options_emit_5F_issue_5F_json_5F_file.mValue) ;
+      }
     //--- Display error and warnings count
       if (verboseOptionOn || (totalWarningCount () > 0) || (totalErrorCount () > 0)) {
         C_String message ;
@@ -2536,7 +2541,7 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
       printf ("**** Unknow exception ****\n") ;
       throw ;
     }
-    macroDetachSharedObject (commonLexique) ;
+    macroDetachSharedObject (commonCompiler) ;
   }
   return returnCode ;
 }

@@ -11,6 +11,15 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             Function 'accessAttribute'                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_accessAttribute (class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                          Function 'staticIntegerTypeName'                                           *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -588,30 +597,5 @@ void routine_handleFunctionCallInExpression (const class GALGAS_unifiedTypeMap_2
                                              class GALGAS_unifiedTypeMap_2D_proxy & outArgument17,
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                        Routine 'analyzeEffectiveParameters'                                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_analyzeEffectiveParameters (const class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
-                                         const class GALGAS_bool constinArgument1,
-                                         const class GALGAS_bool constinArgument2,
-                                         const class GALGAS_routineTypedSignature constinArgument3,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument4,
-                                         const class GALGAS_location constinArgument5,
-                                         const class GALGAS_lstring constinArgument6,
-                                         const class GALGAS_semanticContext constinArgument7,
-                                         const class GALGAS_mode constinArgument8,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument9,
-                                         class GALGAS_staticStringMap & ioArgument10,
-                                         class GALGAS_unifiedSymbolMap & ioArgument11,
-                                         class GALGAS_universalPropertyAndRoutineMapForContext & ioArgument12,
-                                         class GALGAS_allocaList & ioArgument13,
-                                         class GALGAS_instructionListIR & ioArgument14,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument15,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
 
 #endif
