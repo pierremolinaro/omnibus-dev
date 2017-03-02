@@ -63,7 +63,7 @@ Les mots réservés correspondant aux éléments du langage sont listés dans le
 
 \section{Constante entière}
 
-Vous pouvez écrire les constantes entières en décimal, en hexadécimal ou en binaire. Une constante entière de type \plm!$staticInt! ; ce type est décrit au \refChapterPage{chapitreTypeEntierStatique}. 
+Vous pouvez écrire les constantes entières en décimal, en hexadécimal ou en binaire. Une constante entière de type \plm!$staticInt!~; ce type est décrit au \refChapterPage{chapitreTypeEntierStatique}. 
 
 \textbf{Décimal.} Une constante entière décimale commence par un chiffre décimal, et est suivie par zéro, un ou plusieurs chiffres décimaux, ou caractères «~\texttt{\_}~».
 
@@ -71,7 +71,7 @@ Vous pouvez écrire les constantes entières en décimal, en hexadécimal ou en 
 
 \textbf{Binaire.} Une constante entière binaire commence par la séquence «~\texttt{0b}~» suivie par un ou plusieurs chiffres binaires, \texttt{0} ou \texttt{1}, ou caractères « \texttt{\_} ».
 
-Dans une constante entière, écrite en binaire, décimal ou en hexadécimal, le caractère «~\texttt{\_}~» peut servir de séparateur ; on peut ainsi écrire indifféremment : \plm!123!, \plm!1_23!, \plm!1_2_3!, \plm!1___23!, \dots
+Dans une constante entière, écrite en binaire, décimal ou en hexadécimal, le caractère «~\texttt{\_}~» peut servir de séparateur~; on peut ainsi écrire indifféremment : \plm!123!, \plm!1_23!, \plm!1_2_3!, \plm!1___23!, \dots
 
 Contrairement au C, un nombre qui commence par un zéro est un nombre écrit en décimal.
 
@@ -127,8 +127,8 @@ PLM définit les délimiteurs listés dans le \refTableau{delimiteursLangage}.
 
 Un attribut est une séquence commençant par un \texttt{@} et suivi d'un ou plusieurs chiffres, lettres. Voici quelques attributs valides : \plm!@toto!, \plm!@truc1!, \plm!@123!. Un attribut sert à différents usages comme par exemple (liste non exhautive) :
 \begin{itemize}
-  \item \plm!@ro! indique qu'un registre de contrôle est accessible en lecture seule (\refSubsectionPage{attributRo}) ;
-  \item ajouter une étiquette à une instruction \plm!if! (\refSubsectionPage{etiquette-if}), pour en augmenter la lisibilité.
+  \item \plm!@ro! indique qu'un registre de contrôle est accessible en lecture seule (\refSubsectionPage{attributRo})~;
+  \item ajouter une étiquette à une instruction \plm!if! (\refSectionPage{instructionIF}), pour en augmenter la lisibilité.
 \end{itemize}
 
 
@@ -142,7 +142,7 @@ Un attribut est une séquence commençant par un \texttt{@} et suivi d'un ou plu
 
 Un sélecteur spécifie le mode de passage d'un argument formel et d'un paramètre effectif. Ils se présentent sous plusieurs formes :
 \begin{itemize}
-  \item une forme anonyme : \plm+?+, \plm+!+, \plm+?!+, \plm+!?+ ;
+  \item une forme anonyme : \plm+?+, \plm+!+, \plm+?!+, \plm+!?+~;
   \item \plm+?selecteur:+, \plm+!selecteur:+, \plm+?!selecteur:+, \plm+!?selecteur:+, où $selecteur$ est une séquence de lettres ou de chiffres.
 \end{itemize}
 

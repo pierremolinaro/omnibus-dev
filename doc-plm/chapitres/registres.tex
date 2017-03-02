@@ -8,13 +8,13 @@
 
 %À titre d'exemple, nous allons nous intéresser au registre \texttt{ICSR} du processeur ARMv7-M. Le \emph{manuel de référence de l'architecture ARMv7-M}\footnote{\url{http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.ddi0403e.b/index.html}} décrit ce registre comme indiqué à la \refFigure{}{definitionPORTxPCRn}, et indique que son adresse est \texttt{0xE000ED04}.
 
-Dans ce chapitre, nous allons décrire :
+Dans ce chapitre, nous allons décrire~:
 \begin{itemize}
-  \item comment déclarer un registre de contrôle, comment lui affecter une valeur, et le lire (\refSectionPage{simpleDeclarationRegistre}) ;
-  \item comment déclarer les champs d'un registre de contrôle, et comment les utiliser (\refSectionPage{declarationRegistreEtChamps}) ;
-  \item comment déclarer plusieurs registres de contrôle ayant la même composition de champs (\refSectionPage{declarationPlusieursRegistres}) ;
-  \item comment déclarer et utiliser un tableau de registres de contrôle (\refSectionPage{declarationTableauRegistres}) ;
-  \item les attributs applicables aux registres de contrôle (\refSectionPage{attributsRegistreControle}) ;
+  \item comment déclarer un registre de contrôle, comment lui affecter une valeur, et le lire (\refSectionPage{simpleDeclarationRegistre})~;
+  \item comment déclarer les champs d'un registre de contrôle, et comment les utiliser (\refSectionPage{declarationRegistreEtChamps})~;
+  \item comment déclarer plusieurs registres de contrôle ayant la même composition de champs (\refSectionPage{declarationPlusieursRegistres})~;
+  \item comment déclarer et utiliser un tableau de registres de contrôle (\refSectionPage{declarationTableauRegistres})~;
+  \item les attributs applicables aux registres de contrôle (\refSectionPage{attributsRegistreControle})~;
   \item les restrictions d'usage des registres de contrôle (\refSectionPage{restrictionsUsageRegistres}).
 \end{itemize}
 
@@ -34,7 +34,7 @@ Dans ce chapitre, nous allons décrire :
 
 \sectionLabel{Simple déclaration d'un registre}{simpleDeclarationRegistre}
 
-Pour déclarer le registre \texttt{PORTA\_PCR0} (\refFigure{}{definitionPORTxPCRn}), situé à l'adresse \texttt{0x4004\_9000}, on écrit :
+Pour déclarer le registre \texttt{PORTA\_PCR0} (\refFigure{}{definitionPORTxPCRn}), situé à l'adresse \texttt{0x4004\_9000}, on écrit~:
 
 \begin{PLM}
 register PORTA_PCR0 at 0x4004_9000 $uint32
@@ -42,24 +42,24 @@ register PORTA_PCR0 at 0x4004_9000 $uint32
 
 Le type \plm+$uint32+ qui est mentionné signifie que les valeurs écrites et lues de ce registre sont des entiers non signés de 32 bits. Tout type entier, signé ou non signé est autorisé.
 
-Pour lire ou écrire ce registre, on le nomme comme s'il s'agissait d'une simple variable. Par exemple, pour configurer le bit $0$ du port \texttt{A} en entrée ou en sortie logique, il faut écrire $1$ dans le champ \texttt{MUX} et zéro dans les autres champs. Comme le champ \texttt{MUX} commence au $8^e$ bit, on écrit :
+Pour lire ou écrire ce registre, on le nomme comme s'il s'agissait d'une simple variable. Par exemple, pour configurer le bit $0$ du port \texttt{A} en entrée ou en sortie logique, il faut écrire $1$ dans le champ \texttt{MUX} et zéro dans les autres champs. Comme le champ \texttt{MUX} commence au $8^e$ bit, on écrit~:
 
 \begin{PLM}
 PORTA_PCR0 = 1 << 8
 \end{PLM}
 
-Si l'on veut que ce port soit un \emph{collecteur ouvert} si il est programmé en sortie, il faut mettre le champ \texttt{ODE} à $1$. On écrit donc :
+Si l'on veut que ce port soit un \emph{collecteur ouvert} si il est programmé en sortie, il faut mettre le champ \texttt{ODE} à $1$. On écrit donc~:
 \begin{PLM}
 PORTA_PCR0 = (1 << 8) | (1 << 5)
 \end{PLM}
 
-Lire le contenu du registre est réalisé par une instruction d'affectation :
+Lire le contenu du registre est réalisé par une instruction d'affectation~:
 \begin{PLM}
 let x = PORTA_PCR0
 \end{PLM}
 Le type de la constante \plm+x+ est \plm+$uint32+, déduit du type du registre de contrôle \texttt{PORTA\_PCR0}.
 
-Pour savoir si le bit \texttt{ODE} est activé, on réalise un masquage (l'annotation du type \plm+$bool+ est facultative) :
+Pour savoir si le bit \texttt{ODE} est activé, on réalise un masquage (l'annotation du type \plm+$bool+ est facultative)~:
 \begin{PLM}
 let ODEactivé $bool = (PORTA_PCR0 & (1 << 5)) != 0
 \end{PLM}
@@ -81,7 +81,7 @@ Toutes ces formulations peuvent être rendues plus intelligibles en précisant l
 
 \sectionLabel{Déclaration d'un registre et de ses champs}{declarationRegistreEtChamps}
 
-Lors de la déclaration d'un registre, il est possible de préciser la composition de ses champs entiers et booléens. Par exemple, pour le registre \texttt{PORTA\_PCR0} et en s'appyant par sa description dans la \refFigurePage{}{definitionPORTxPCRn} :
+Lors de la déclaration d'un registre, il est possible de préciser la composition de ses champs entiers et booléens. Par exemple, pour le registre \texttt{PORTA\_PCR0} et en s'appyant par sa description dans la \refFigurePage{}{definitionPORTxPCRn}~:
 
 \begin{PLM}
 register PORTA_PCR0 at 0x4004_9000 $uint32 {
@@ -89,20 +89,20 @@ register PORTA_PCR0 at 0x4004_9000 $uint32 {
 }
 \end{PLM}
 
-Entre accolades, trois définitions différentes peuvent apparaître :
+Entre accolades, trois définitions différentes peuvent apparaître~:
 \begin{itemize}
-\item un nombre indique le nombre de bits consécutifs inutilisés ;
-\item un identificateur (par exemple \plm=ISF=) nomme un champ booléen ;
+\item un nombre indique le nombre de bits consécutifs inutilisés~;
+\item un identificateur (par exemple \plm=ISF=) nomme un champ booléen~;
 \item un identificateur suivi d'un nombre entre crochets (par exemple \plm=IRQC[4]=) nomme un champ entier constitué du nombre indiqué de bits consécutifs.
 \end{itemize}
 
-La description commence par le bit le plus significatif : comme le type du registre est \plm+$uint32+ (entier non signé sur 32 bits), le premier bit nommé \texttt{ISF} porte le n°24, \texttt{IRQC} s'étend sur 4 bits à partir du n°16, ...
+La description commence par le bit le plus significatif~: comme le type du registre est \plm+$uint32+ (entier non signé sur 32 bits), le premier bit nommé \texttt{ISF} porte le n°24, \texttt{IRQC} s'étend sur 4 bits à partir du n°16,~...
 
 Cette écriture n'est autorisée que si le type nommé (ici \plm+$uint32+) est une type entier non signé. Les types signés (\plm+$int32+, ...) sont interdits. Le compilateur vérifie que la description des champs définit exactement le nombre de bits du type nommé, ici les 32 bits du type \plm+$uint32+.
 
-Définir la composition des champs d'un registre permet d'utiliser des constructions qui simplifient :
+Définir la composition des champs d'un registre permet d'utiliser des constructions qui simplifient~:
 \begin{itemize}
-  \item l'obtention de leur valeur (\refSubsectionPage{accesValeurChamps}) ;
+  \item l'obtention de leur valeur (\refSubsectionPage{accesValeurChamps})~;
   \item la construction d'une valeur à affecter à un registre de contrôle (\refSubsectionPage{constructionChampEntierRegistre}).
 \end{itemize}
 
@@ -117,14 +117,14 @@ Définir la composition des champs d'un registre permet d'utiliser des construct
 
 \subsectionLabel{Accès en lecture aux champs}{accesValeurChamps}
 
-À la \refSection{simpleDeclarationRegistre}, pour obtenir la valeur du champ \texttt{MUX} est activé, on réalisait un décalage suivi d'un masquage :
+À la \refSection{simpleDeclarationRegistre}, pour obtenir la valeur du champ \texttt{MUX} est activé, on réalisait un décalage suivi d'un masquage~:
 \begin{PLM}
 let champMUX $uint32 = (PORTA_PCR0 >> 8) & 7 // 0, 1, 2, ..., 7
 \end{PLM}
 
 Plusieurs formulations nommant le champ \texttt{MUX} sont possibles.
 
-La première renvoie la valeur du champ non décalée :
+La première renvoie la valeur du champ non décalée~:
 
 \begin{PLM}
 let résultatNonDécalé $uint32 = PORTA_PCR0.MUX
@@ -139,23 +139,23 @@ let champMUX $uint32 = PORTA_PCR0.MUX.shifted // 0, 1, 2, ..., 7
 L'expression \plm+PORTA_PCR0.MUX.shifted+ est équivalente à \plm+(PORTA_PCR0 >> 8) & 7+.
 
 
-Pour le champ booléen \texttt{ODE}, on écrivait à la \refSection{simpleDeclarationRegistre} :
+Pour le champ booléen \texttt{ODE}, on écrivait à la \refSection{simpleDeclarationRegistre}~:
 
 \begin{PLM}
 let ODEactivé $bool = (PORTA_PCR0 & (1 << 5)) != 0
 \end{PLM}
 
-On peut maintenant écrire (noter que le type du résultat est \plm=$uint32=) :
+On peut maintenant écrire (noter que le type du résultat est \plm=$uint32=)~:
 \begin{PLM}
 let champODEnonDécalé $uint32 = PORTA_PCR0.ODE // 0 ou 2**5
 \end{PLM}
 
-De même, on peut obtenir la valeur justifiée à droite (noter que le type du résultat est toujours \plm=$uint32=) :
+De même, on peut obtenir la valeur justifiée à droite (noter que le type du résultat est toujours \plm=$uint32=)~:
 \begin{PLM}
 let champODEdécalé $uint32 = PORTA_PCR0.ODE.shifted // 0 ou 1
 \end{PLM}
 
-Pour obtenir la valeur valeur booléenne, on utilise l'accesseur \plm=bool= (noter que le type du résultat est maintenant \plm=$bool=) :
+Pour obtenir la valeur valeur booléenne, on utilise l'accesseur \plm=bool= (noter que le type du résultat est maintenant \plm=$bool=)~:
 \begin{PLM}
 let ODEactivé $bool = PORTA_PCR0.ODE.bool // false ou true
 \end{PLM}
@@ -184,13 +184,13 @@ L'expression \plm+PORTA_PCR0.ODE.bool+ est équivalente à \plm+(PORTA_PCR0 & (1
 La construction particulière \plm+$registre {champ:expression, ...}+ permet de définir facilement la valeur à affecter à un registre de contrôle. Prenons toujours l'exemple du regitre \texttt{PORTA\_PCR0} dont la composition est décrite à la \refFigurePage{}{definitionPORTxPCRn}.
 
 
-À la \refSection{simpleDeclarationRegistre}, pour écrire $1$ dans le champ \texttt{MUX} et zéro dans les autres champs on écrivait :
+À la \refSection{simpleDeclarationRegistre}, pour écrire $1$ dans le champ \texttt{MUX} et zéro dans les autres champs on écrivait~:
 
 \begin{PLM}
 PORTA_PCR0 = 1 << 8
 \end{PLM}
 
-En utilisant la notation dédiée, on écrit maintenant : 
+En utilisant la notation dédiée, on écrit maintenant~: 
 
 \begin{PLM}
 PORTA_PCR0 = $PORTA_PCR0 {MUX:1}
@@ -198,12 +198,12 @@ PORTA_PCR0 = $PORTA_PCR0 {MUX:1}
 
 L'expression \plm+$PORTA_PCR0 {MUX:1}+ est équivalente à \plm+1 << 8+.
 
-Si l'on veut que ce port soit un \emph{collecteur ouvert} si il est programmé en sortie, il faut mettre le champ \texttt{ODE} à $1$, et on écrivait :
+Si l'on veut que ce port soit un \emph{collecteur ouvert} si il est programmé en sortie, il faut mettre le champ \texttt{ODE} à $1$, et on écrivait~:
 \begin{PLM}
 PORTA_PCR0 = (1 << 8) | (1 << 5)
 \end{PLM}
 
-On peut maintenant écrire :
+On peut maintenant écrire~:
 
 \begin{PLM}
 PORTA_PCR0 = $PORTA_PCR0 {MUX:1, ODE:1}
@@ -212,37 +212,37 @@ PORTA_PCR0 = $PORTA_PCR0 {MUX:1, ODE:1}
 
 \subsection{Vérifications sémantiques}
  
-Examinons maintenant les conditions de validité de l'\plm=expression= dans la construction \plm+$registre {champ:expression, ...}+.
+Examinons maintenant les conditions de validité de l'\plm=expression= dans la construction (décrite à la \refSubsectionPage{constructionChampEntierRegistre}) \plm+$registre {champ:expression, ...}+.
 
-{\bf Expression entière statique.} Le compilateur vérifie qu'elle est comprise entre $0$ et $2^n-1$, $n$ étant le nombre de bits du champ : par exemple, pour le champ \texttt{MUX} de $3$ bits, une valeur entre $0$ et $7$. Ainsi :
+{\bf Expression entière statique.} Le compilateur vérifie qu'elle est comprise entre $0$ et $2^n-1$, $n$ étant le nombre de bits du champ~: par exemple, pour le champ \texttt{MUX} de $3$ bits, une valeur entre $0$ et $7$. Ainsi~:
 
 \begin{PLM}
 PORTA_PCR0 = $PORTA_PCR0 {MUX:1-2} // Erreur de compilation, exp. < 0
 PORTA_PCR0 = $PORTA_PCR0 {MUX:8} // Erreur de compilation, exp. > 7
 \end{PLM}
 
-{\bf Expression entière non statique signée.} Le compilateur considère que c'est une erreur : uniquement une expression entière non statique non signée est acceptable.
+{\bf Expression entière non statique signée.} Le compilateur considère que c'est une erreur~: uniquement une expression entière non statique non signée est acceptable.
 
 
 {\bf Expression entière non statique non signée.} Il y a plusieurs sous cas à examiner.
 
-Si l'\plm=expression= est d'un type entier non signé dont le nombre de bits est inférieur ou égal au nombre de bits du champ, alors toute valeur de l'\plm+expression+ est acceptable : le code engendré se borne à faire le décalage à gauche de la valeur de l'\plm+expression+.
+Si l'\plm=expression= est d'un type entier non signé dont le nombre de bits est inférieur ou égal au nombre de bits du champ, alors toute valeur de l'\plm+expression+ est acceptable~: le code engendré se borne à faire le décalage à gauche de la valeur de l'\plm+expression+.
 
-Par exemple, le champ \texttt{MUX} s'étendant sur $3$ bits, une expression de type \plm=$uint3=, \plm=$uint2= ou \plm=$uint1= est toujours acceptée :
+Par exemple, le champ \texttt{MUX} s'étendant sur $3$ bits, une expression de type \plm=$uint3=, \plm=$uint2= ou \plm=$uint1= est toujours acceptée~:
 
 \begin{PLM}
 let x $uint2 = 1
 PORTA_PCR0 = $PORTA_PCR0 {MUX:x} // Ok
 \end{PLM}
 
-Dans le cas contraire, c'est-à-dire si l'\plm=expression= est d'un type entier non signé dont le nombre de bits est strictement supérieur au nombre de bits du champ, une vérification de la valeur à l'exécution est effectuée : si la valeur de l'\plm+expression+ est trop grande, la panique (code : voir \refTableauPage{tableauCodePanique}) est déclenchée. Si la génération de code panique n'est pas activée, le débordement est silencieusement ignoré. Par exemple :
+Dans le cas contraire, c'est-à-dire si l'\plm=expression= est d'un type entier non signé dont le nombre de bits est strictement supérieur au nombre de bits du champ, une vérification de la valeur à l'exécution est effectuée~: si la valeur de l'\plm+expression+ est trop grande, la panique (code~: voir \refTableauPage{tableauCodePanique}) est déclenchée. Si la génération de code panique n'est pas activée, le débordement est silencieusement ignoré. Par exemple~:
 
 \begin{PLM}
 let x $uint8 = ... 
 PORTA_PCR0 = $PORTA_PCR0 {MUX:x} // Vérification à l'exécution
 \end{PLM}
 
-Si le code ci-dessus apparaît dans une routine où la génération de panique est interdite (par exemple, dans une routine \plm=boot=), alors il déclenche une erreur de compilation. Il faut ajouter une troncature explicite pour le code soit accepté :
+Si le code ci-dessus apparaît dans une routine où la génération de panique est interdite (par exemple, dans une routine \plm=boot=), alors il déclenche une erreur de compilation. Il faut ajouter une troncature explicite pour le code soit accepté~:
 
 \begin{PLM}
 let x $uint8 = ... 
@@ -269,14 +269,14 @@ Ce code n'effectue aucune vérification à l'exécution.
 
 \subsection{Constantes associées aux champs}
 
-Il y a une variante de la construction précédente, qui consiste à ommettre l'expression associée à chaque champ. Dans ce cas, c'est la valeur maximum du champ est utilisée. Par exemple, pour le registre \texttt{PORTA\_PCR0} décrit à la \refFigurePage{}{definitionPORTxPCRn}, comme le champ \texttt{MUX} s'étend sur $3$ bits, \plm+$PORTA_PCR0 {MUX}+ est équivalent à  \plm+$PORTA_PCR0 {MUX:7}+. De même, \texttt{ODE} étant un champ booléen, \plm+$PORTA_PCR0 {ODE}+ est équivalent à  \plm+$PORTA_PCR0 {ODE:1}+
+Il y a une variante de la construction précédente, qui consiste à ommettre l'expression associée à chaque champ. Dans ce cas, c'est la valeur maximum du champ est utilisée. Par exemple, pour le registre \texttt{PORTA\_PCR0} décrit à la \refFigurePage{}{definitionPORTxPCRn}, comme le champ \texttt{MUX} s'étend sur $3$ bits, \plm+$PORTA_PCR0 {MUX}+ est équivalent à  \plm+$PORTA_PCR0 {MUX:7}+. De même, \texttt{ODE} étant un champ booléen, \plm+$PORTA_PCR0 {ODE}+ est équivalent à \plm+$PORTA_PCR0 {ODE:1}+.
 
-Les deux variantes peuvent être utilisées dans la même construction ; au lieu de :
+Les deux variantes peuvent être utilisées dans la même construction~; au lieu de~:
 \begin{PLM}
 PORTA_PCR0 = $PORTA_PCR0 {MUX:1, ODE:1}
 \end{PLM}
 
-On peut écrire :
+On peut écrire~:
 \begin{PLM}
 PORTA_PCR0 = $PORTA_PCR0 {MUX:1, ODE}
 \end{PLM}
@@ -298,7 +298,7 @@ PORTA_PCR0 = $PORTA_PCR0 {MUX:1, ODE}
 
 \sectionLabel{Déclaration de plusieurs registres}{declarationPlusieursRegistres}
 
-Il est possible de regrouper les déclarations de registres partageant la même décomposition de leur champs. Par exemple, pour les registres \texttt{PORT$n$\_PCR$m$} du \texttt{mk20dx256} (seule la déclaration de deux premiers registres est montrée) :
+Il est possible de regrouper les déclarations de registres partageant la même décomposition de leur champs. Par exemple, pour les registres \texttt{PORT$n$\_PCR$m$} du \texttt{mk20dx256} (seule la déclaration de deux premiers registres est montrée)~:
 
 \begin{PLM}
 register
@@ -327,11 +327,11 @@ Le micro-contrôleur \texttt{LPC2294} de NXP possède 4 modules CAN.
   La documentation du \texttt{LPC2294} numérote ces modules de $1$ à $4$. Dans ce document, ils sont numérotés de $0$ à $3$, ce qui s'avère beaucoup plus pratique à l'usage.
 \end{minipage}}
 
-Les registres de ces modules sont aux adresses :
+Les registres de ces modules sont aux adresses~:
 
 \texttt{0xE004\_4000 + (canal << 14) + register\_offset}
 
-où \texttt{canal} vaut $0$ pour le module $0$, …, $3$ pour le module 3 ; \texttt{register\_offset} est une valeur propre à chaque type de registre. Par exemple, pour les registres \texttt{CANCMR}, l'offset est égal à 4. Les quatre registres \texttt{CANCMR} sont donc aux adresses :
+où \texttt{canal} vaut $0$ pour le module $0$, …, $3$ pour le module 3~; \texttt{register\_offset} est une valeur propre à chaque type de registre. Par exemple, pour les registres \texttt{CANCMR}, l'offset est égal à 4. Les quatre registres \texttt{CANCMR} sont donc aux adresses~:
 
 \texttt{CANCMR0} : \texttt{0xE004\_4000 + (0 << 14) + 4 = 0xE004\_4004}
 
@@ -341,7 +341,7 @@ où \texttt{canal} vaut $0$ pour le module $0$, …, $3$ pour le module 3 ; \tex
 
 \texttt{CANCMR3} : \texttt{0xE004\_4000 + (3 << 14) + 4 = 0xE005\_0004}
 
-Il est possible de déclarer ces registres individuellement :
+Il est possible de déclarer ces registres individuellement~:
 
 \begin{PLM}
 register
@@ -354,7 +354,7 @@ $uint32 {
 }
 \end{PLM}
 
-Mais on n'a pas de solution simple pour sélectionner un de ces registres en fonction du numéro de module. Si on veut écrire une valeur \plm=v= dans le registre désigné par la variable \plm=n= (dont la valeur est comprise entre $0$ et $3$), il faut écrire :
+Mais on n'a pas de solution simple pour sélectionner un de ces registres en fonction du numéro de module. Si on veut écrire une valeur \plm=v= dans le registre désigné par la variable \plm=n= (dont la valeur est comprise entre $0$ et $3$), il faut écrire~:
 
 \begin{PLM}
 if n == 0 {
@@ -368,7 +368,7 @@ if n == 0 {
 }
 \end{PLM}
 
-On peut simplifier l'accès en déclarant les registres \texttt{CANCMR$n$} comme un tableau de registres de contrôle :
+On peut simplifier l'accès en déclarant les registres \texttt{CANCMR$n$} comme un tableau de registres de contrôle~:
 
 \begin{PLM}
 register
@@ -378,13 +378,13 @@ $uint8 {
 }
 \end{PLM}
 
-D'une manière générale, la déclaration d'un tableau de registres de contrôle est de la forme :
+D'une manière générale, la déclaration d'un tableau de registres de contrôle est de la forme~:
 \begin{PLM}
-register nom_registre [taille] at adresse_base : multiplicateur
+register nom_registre [taille] at adresse_base~: multiplicateur
 $type { ... }
 \end{PLM}
 
-La \plm=taille= doit toujours être égale à une puissance de $2$. L'adresse du registre d'indice $i$ est égale à \texttt{adresse\_base + $i$ * multiplicateur}. Ici :
+La \plm=taille= doit toujours être égale à une puissance de $2$. L'adresse du registre d'indice $i$ est égale à \texttt{adresse\_base + $i$ * multiplicateur}. Ici~:
 
 Adresse de \texttt{CANCMR[0]} : \texttt{0xE004\_4004 + 0 * (1 << 14) = 0xE004\_4004}
 
@@ -396,7 +396,7 @@ Adresse de \texttt{CANCMR[3]} : \texttt{0xE004\_4004 + 3 * (1 << 14) = 0xE005\_0
 
 Si vous voulez confirmer le calcul des adresses des registres de contrôle, utilisez l'option \OPTION{-{}-control-register-map} (\refSectionPage{optionsDebogage}) qui affiche le détail de la définition des registres de contrôle dans un fichier HTML.
  
-L'accès aux registres de contrôle s'effectue alors en utilisant la notation \plm=[...]= habituelle de l'accès à un élément de tableau. Par exemple, en reprenant l'exemple précédent, écrire une valeur \plm=v= dans le registre désigné par la variable \plm=n= (dont la valeur est comprise entre $0$ et $3$) s'exprime simplement par :
+L'accès aux registres de contrôle s'effectue alors en utilisant la notation \plm=[...]= habituelle de l'accès à un élément de tableau. Par exemple, en reprenant l'exemple précédent, écrire une valeur \plm=v= dans le registre désigné par la variable \plm=n= (dont la valeur est comprise entre $0$ et $3$) s'exprime simplement par~:
 
 \begin{PLM}
 CANCMR[n] = v
@@ -404,7 +404,7 @@ CANCMR[n] = v
 
 L'indice d'un tableau de registre peut-être une expression entière statique, ou une expression dynamique signée ou non signée. Les vérifications à la compilation et à l'exécution sont les même que pour l'accès à un élément de tableau (voir la \refSectionPage{AccesElementTableau}).
 
-En particulier, si l'indice est une expression de type non signée dont la valeur maximum est strictement inférieure à la taille du tableau, aucune vérification n'est faite à l'exécution, puisque l'indice sera toujours valide : 
+En particulier, si l'indice est une expression de type non signée dont la valeur maximum est strictement inférieure à la taille du tableau, aucune vérification n'est faite à l'exécution, puisque l'indice sera toujours valide~: 
 
 \begin{PLM}
 let n $uint2 = ...
@@ -433,7 +433,7 @@ Toute tentative de faire figurer ce registre dans une construction qui provoque 
 
 
 \subsectionLabel{Attribut \texttt{@user}}{attributUser}\index{"@user}
-La déclaration d'un registre accepte l'attribut \plm+@user+, qui signifie qu'il est accessible en mode \plm!user!. Par défaut, un registre de contrôle n'est pas accessible en mode  \plm!user!. Par exemple :
+La déclaration d'un registre accepte l'attribut \plm+@user+, qui signifie qu'il est accessible en mode \plm!user!. Par défaut, un registre de contrôle n'est pas accessible en mode  \plm!user!. Par exemple~:
 \begin{PLM}
 register GPIOE_PSOR @user at 0x400F_F104 $uint32
 \end{PLM}
@@ -447,13 +447,13 @@ register GPIOE_PSOR @user at 0x400F_F104 $uint32
 
 \sectionLabel{Restrictions d'usage des registres}{restrictionsUsageRegistres}\index{Parametre effectif@Paramètre effectif!Registre}
 
-Un registre ne peut pas :
+Un registre ne peut pas~:
 \begin{itemize}
-  \item apparaître comme paramètre effectif en entrée d'une procédure ;
+  \item apparaître comme paramètre effectif en entrée d'une procédure~;
   \item apparaître comme paramètre effectif en sortie/entrée d'une procédure.
 \end{itemize}
 
-Prenons un exemple ; la procédure \plm=uneProcedure= présente un argument formel en sortie, et on suppose que \texttt{REGISTRE} est un registre de type \plm!$uint32! :
+Prenons un exemple~; la procédure \plm=uneProcedure= présente un argument formel en sortie, et on suppose que \texttt{REGISTRE} est un registre de type \plm!$uint32! :
 \begin{PLM}
 func user uneProcedure (!outValue $uint32) {
   outValue = 5
@@ -462,14 +462,14 @@ func user uneProcedure (!outValue $uint32) {
 
 
 
-L'écriture suivante est rejetée par le compilateur (passage d'un registre comme paramètre effectif en entrée) :
+L'écriture suivante est rejetée par le compilateur (passage d'un registre comme paramètre effectif en entrée)~:
 \begin{PLM}
 func user autreProcedure () {
   uneProcedure (?REGISTRE) // Erreur
 }
 \end{PLM}
 
-Par contre, l'écriture suivante est correcte (écriture du registre) :
+Par contre, l'écriture suivante est correcte (écriture du registre)~:
 \begin{PLM}
 func user autreProcedure () {
   REGISTRE = 5 // Ok

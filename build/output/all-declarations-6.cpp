@@ -9040,6 +9040,41 @@ typeComparisonResult cEnumAssociatedValues_llvmType_pointer::compare (const cEnu
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+cEnumAssociatedValues_llvmType_arrayType::cEnumAssociatedValues_llvmType_arrayType (const GALGAS_llvmType & inAssociatedValue0,
+                                                                                    const GALGAS_uint & inAssociatedValue1
+                                                                                    COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues (THERE),
+mAssociatedValue0 (inAssociatedValue0),
+mAssociatedValue1 (inAssociatedValue1) {
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cEnumAssociatedValues_llvmType_arrayType::description (C_String & ioString,
+                                                            const int32_t inIndentation) const {
+  ioString << "(\n" ;
+  mAssociatedValue0.description (ioString, inIndentation) ;
+  mAssociatedValue1.description (ioString, inIndentation) ;
+  ioString << ")" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cEnumAssociatedValues_llvmType_arrayType::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_llvmType_arrayType * ptr = dynamic_cast<const cEnumAssociatedValues_llvmType_arrayType *> (inOperand) ;
+  macroValidPointer (ptr) ;
+  typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
+  }
+  if (result == kOperandEqual) {
+    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 cEnumAssociatedValues_llvmType_function::cEnumAssociatedValues_llvmType_function (const GALGAS_llvmType & inAssociatedValue0,
                                                                                   const GALGAS_llvmTypeList & inAssociatedValue1
                                                                                   COMMA_LOCATION_ARGS) :
@@ -9120,6 +9155,22 @@ GALGAS_llvmType GALGAS_llvmType::constructor_pointer (const GALGAS_llvmType & in
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_llvmType GALGAS_llvmType::constructor_arrayType (const GALGAS_llvmType & inAssociatedValue0,
+                                                        const GALGAS_uint & inAssociatedValue1
+                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_llvmType result ;
+  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
+    result.mEnum = kEnum_arrayType ;
+    cEnumAssociatedValues * ptr = NULL ;
+    macroMyNew (ptr, cEnumAssociatedValues_llvmType_arrayType (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
+    result.mAssociatedValues.setPointer (ptr) ;
+    macroDetachSharedObject (ptr) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_llvmType GALGAS_llvmType::constructor_function (const GALGAS_llvmType & inAssociatedValue0,
                                                        const GALGAS_llvmTypeList & inAssociatedValue1
                                                        COMMA_LOCATION_ARGS) {
@@ -9168,6 +9219,25 @@ void GALGAS_llvmType::method_pointer (GALGAS_llvmType & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+void GALGAS_llvmType::method_arrayType (GALGAS_llvmType & outAssociatedValue0,
+                                        GALGAS_uint & outAssociatedValue1,
+                                        C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) const {
+  if (mEnum != kEnum_arrayType) {
+    outAssociatedValue0.drop () ;
+    outAssociatedValue1.drop () ;
+    C_String s ;
+    s << "method @llvmType arrayType invoked with an invalid enum value" ;
+    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
+  }else{
+    const cEnumAssociatedValues_llvmType_arrayType * ptr = (const cEnumAssociatedValues_llvmType_arrayType *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 void GALGAS_llvmType::method_function (GALGAS_llvmType & outAssociatedValue0,
                                        GALGAS_llvmTypeList & outAssociatedValue1,
                                        C_Compiler * inCompiler
@@ -9187,11 +9257,12 @@ void GALGAS_llvmType::method_function (GALGAS_llvmType & outAssociatedValue0,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_llvmType [5] = {
+static const char * gEnumNameArrayFor_llvmType [6] = {
   "(not built)",
   "void",
   "int",
   "pointer",
+  "arrayType",
   "function"
 } ;
 
@@ -9211,6 +9282,12 @@ GALGAS_bool GALGAS_llvmType::getter_isInt (UNUSED_LOCATION_ARGS) const {
 
 GALGAS_bool GALGAS_llvmType::getter_isPointer (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_pointer == mEnum) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_llvmType::getter_isArrayType (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_arrayType == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -9308,33 +9385,41 @@ GALGAS_string extensionGetter_llvmTypeName (const GALGAS_llvmType & inObject,
     break ;
   case GALGAS_llvmType::kEnum_int:
     {
-      const cEnumAssociatedValues_llvmType_int * extractPtr_709 = (const cEnumAssociatedValues_llvmType_int *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_size = extractPtr_709->mAssociatedValue0 ;
-      result_result = GALGAS_string ("i").add_operation (extractedValue_size.getter_string (SOURCE_FILE ("llvm-type.galgas", 23)), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 23)) ;
+      const cEnumAssociatedValues_llvmType_int * extractPtr_754 = (const cEnumAssociatedValues_llvmType_int *) (temp_0.unsafePointer ()) ;
+      const GALGAS_uint extractedValue_size = extractPtr_754->mAssociatedValue0 ;
+      result_result = GALGAS_string ("i").add_operation (extractedValue_size.getter_string (SOURCE_FILE ("llvm-type.galgas", 24)), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 24)) ;
     }
     break ;
   case GALGAS_llvmType::kEnum_pointer:
     {
-      const cEnumAssociatedValues_llvmType_pointer * extractPtr_782 = (const cEnumAssociatedValues_llvmType_pointer *) (temp_0.unsafePointer ()) ;
-      const GALGAS_llvmType extractedValue_type = extractPtr_782->mAssociatedValue0 ;
-      result_result = extensionGetter_llvmTypeName (extractedValue_type, inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 25)).add_operation (GALGAS_string ("*"), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 25)) ;
+      const cEnumAssociatedValues_llvmType_pointer * extractPtr_827 = (const cEnumAssociatedValues_llvmType_pointer *) (temp_0.unsafePointer ()) ;
+      const GALGAS_llvmType extractedValue_type = extractPtr_827->mAssociatedValue0 ;
+      result_result = extensionGetter_llvmTypeName (extractedValue_type, inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 26)).add_operation (GALGAS_string ("*"), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 26)) ;
+    }
+    break ;
+  case GALGAS_llvmType::kEnum_arrayType:
+    {
+      const cEnumAssociatedValues_llvmType_arrayType * extractPtr_934 = (const cEnumAssociatedValues_llvmType_arrayType *) (temp_0.unsafePointer ()) ;
+      const GALGAS_llvmType extractedValue_type = extractPtr_934->mAssociatedValue0 ;
+      const GALGAS_uint extractedValue_size = extractPtr_934->mAssociatedValue1 ;
+      result_result = GALGAS_string ("[").add_operation (extensionGetter_llvmTypeName (extractedValue_type, inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 28)), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 28)).add_operation (GALGAS_string (" x "), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 28)).add_operation (extractedValue_size.getter_string (SOURCE_FILE ("llvm-type.galgas", 28)), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 28)).add_operation (GALGAS_string ("]"), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 28)) ;
     }
     break ;
   case GALGAS_llvmType::kEnum_function:
     {
-      const cEnumAssociatedValues_llvmType_function * extractPtr_1031 = (const cEnumAssociatedValues_llvmType_function *) (temp_0.unsafePointer ()) ;
-      const GALGAS_llvmType extractedValue_resultType = extractPtr_1031->mAssociatedValue0 ;
-      const GALGAS_llvmTypeList extractedValue_formalParameterTypes = extractPtr_1031->mAssociatedValue1 ;
-      result_result = extensionGetter_llvmTypeName (extractedValue_resultType, inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 27)).add_operation (GALGAS_string ("("), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 27)) ;
-      cEnumerator_llvmTypeList enumerator_942 (extractedValue_formalParameterTypes, kENUMERATION_UP) ;
-      while (enumerator_942.hasCurrentObject ()) {
-        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_942.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 29)), inCompiler  COMMA_SOURCE_FILE ("llvm-type.galgas", 29)) ;
-        if (enumerator_942.hasNextObject ()) {
-          result_result.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("llvm-type.galgas", 30)) ;
+      const cEnumAssociatedValues_llvmType_function * extractPtr_1183 = (const cEnumAssociatedValues_llvmType_function *) (temp_0.unsafePointer ()) ;
+      const GALGAS_llvmType extractedValue_resultType = extractPtr_1183->mAssociatedValue0 ;
+      const GALGAS_llvmTypeList extractedValue_formalParameterTypes = extractPtr_1183->mAssociatedValue1 ;
+      result_result = extensionGetter_llvmTypeName (extractedValue_resultType, inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 30)).add_operation (GALGAS_string ("("), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 30)) ;
+      cEnumerator_llvmTypeList enumerator_1094 (extractedValue_formalParameterTypes, kENUMERATION_UP) ;
+      while (enumerator_1094.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_1094.current_mType (HERE), inCompiler COMMA_SOURCE_FILE ("llvm-type.galgas", 32)), inCompiler  COMMA_SOURCE_FILE ("llvm-type.galgas", 32)) ;
+        if (enumerator_1094.hasNextObject ()) {
+          result_result.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("llvm-type.galgas", 33)) ;
         }
-        enumerator_942.gotoNextObject () ;
+        enumerator_1094.gotoNextObject () ;
       }
-      result_result.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("llvm-type.galgas", 32)) ;
+      result_result.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("llvm-type.galgas", 35)) ;
     }
     break ;
   }
