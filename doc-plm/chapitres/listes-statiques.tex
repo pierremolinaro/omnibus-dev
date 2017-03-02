@@ -83,3 +83,39 @@ L'élément courant est désigné par la constante \plm=élément=, et on accèd
 
 
 
+
+
+
+\section{Fonctions}
+
+Il est possible de définir des propriétés désignant une routine. Celle-ci peut être une \emph{vraie} fonction (c'est-à-dire appelable dans une expression et qui renvoie une valeur), ou bien une \emph{procédure}, appelable dans une instruction et qui ne renvoie aucune valeur. Par exemple~:
+
+\begin{PLM}
+staticArray maListeStatique {
+  let propriétéFonction func user () -> $uint32
+  let propriétéProcédure func user ()
+}
+
+func user maFonction () -> $uint32 {
+  result = 10
+}
+
+func user maProcédure () -> $uint32 {
+  ...
+}
+
+extend staticArray maListeStatique (func maFonction (), func maProcédure ())
+
+\end{PLM}
+
+Et l'appel de ces fonctions~:
+\begin{PLM}
+var total $uint32 = 0
+for élément in maListeStatique {
+  total += élément.propriétéFonction ()
+  élément.maProcédure ()
+}
+\end{PLM}
+
+
+

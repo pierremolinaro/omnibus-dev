@@ -3105,6 +3105,7 @@ class GALGAS_llvmType : public AC_GALGAS_root {
     kEnum_void,
     kEnum_int,
     kEnum_pointer,
+    kEnum_arrayType,
     kEnum_function
   } enumeration ;
   
@@ -3132,6 +3133,10 @@ class GALGAS_llvmType : public AC_GALGAS_root {
                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
+  public : static class GALGAS_llvmType constructor_arrayType (const class GALGAS_llvmType & inOperand0,
+                                                               const class GALGAS_uint & inOperand1
+                                                               COMMA_LOCATION_ARGS) ;
+
   public : static class GALGAS_llvmType constructor_function (const class GALGAS_llvmType & inOperand0,
                                                               const class GALGAS_llvmTypeList & inOperand1
                                                               COMMA_LOCATION_ARGS) ;
@@ -3153,6 +3158,11 @@ class GALGAS_llvmType : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_arrayType (class GALGAS_llvmType & outArgument0,
+                                                   class GALGAS_uint & outArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_llvmType & outArgument0,
                                                   class GALGAS_llvmTypeList & outArgument1,
                                                   C_Compiler * inCompiler
@@ -3169,6 +3179,8 @@ class GALGAS_llvmType : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayType (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFunction (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInt (LOCATION_ARGS) const ;
@@ -3222,6 +3234,24 @@ class cEnumAssociatedValues_llvmType_pointer : public cEnumAssociatedValues {
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_llvmType_pointer (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_llvmType_arrayType : public cEnumAssociatedValues {
+  public : const GALGAS_llvmType mAssociatedValue0 ;
+  public : const GALGAS_uint mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_llvmType_arrayType (const GALGAS_llvmType & inAssociatedValue0,
+                                                     const GALGAS_uint & inAssociatedValue1
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_llvmType_arrayType (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

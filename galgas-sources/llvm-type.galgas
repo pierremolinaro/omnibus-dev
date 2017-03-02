@@ -4,6 +4,7 @@ enum @llvmType {
   case void
   case int (@uint size)
   case pointer (@llvmType type)
+  case arrayType (@llvmType type @uint size)
   case function (@llvmType resultType @llvmTypeList formalParameterTypes)
 }
 
@@ -23,6 +24,8 @@ getter @llvmType llvmTypeName -> @string {
     result = "i" + size
   case pointer (@llvmType type) :
     result = [type llvmTypeName] + "*"
+  case arrayType (@llvmType type @uint size) :
+    result = "[" + [type llvmTypeName] + " x " + size + "]"
   case function (@llvmType resultType @llvmTypeList formalParameterTypes) :
     result = [resultType llvmTypeName] + "("
     for (type) in formalParameterTypes

@@ -75,7 +75,7 @@ task T priority 0 stackSize 512 {
       let t1 = getSysTick ()
       lcd.printUnsigned (!t0 - t1 - systickDuration)
       lcd.printSpaces (!1)
-   }
+    }
   }
   
 
