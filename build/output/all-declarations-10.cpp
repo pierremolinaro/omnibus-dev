@@ -5202,7 +5202,8 @@ const char * gWrapperFileContent_5_targetTemplates = "#! /usr/bin/env python\n"
   "  (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()\n"
   "  if SYSTEM_NAME == \"Darwin\":\n"
   "    MACHINE = \"i386\"\n"
-  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-4.0.0rc2-binutils-2.27-openocd-0.8.0-libusb-1.0.20\")\n"
+  "  return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-4.0.0-binutils-2.28-openocd-0.8.0-libusb-1.0.21\")\n"
+  "  #return os.path.expanduser (\"~/plm-tools/plm-\" + SYSTEM_NAME + \"-\" + MACHINE + \"-llvm-3.9.1-binutils-2.27-openocd-0.8.0-libusb-1.0.20\")\n"
   "\n"
   "#----------------------------------------------------------------------------------------------------------------------*\n" ;
 
@@ -5210,7 +5211,7 @@ const cRegularFileWrapper gWrapperFile_5_targetTemplates (
   "toolpath.py",
   "py",
   true, // Text file
-  942, // Text length
+  1077, // Text length
   gWrapperFileContent_5_targetTemplates
 ) ;
 

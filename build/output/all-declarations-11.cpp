@@ -1169,7 +1169,7 @@ const char * gWrapperFileContent_6_embeddedSampleCode = "target \"teensy-3-1\"\n
   "      let t1 = getSysTick ()\n"
   "      lcd.printUnsigned (!t0 - t1 - systickDuration)\n"
   "      lcd.printSpaces (!1)\n"
-  "   }\n"
+  "    }\n"
   "  }\n"
   "  \n"
   "\n"
@@ -1183,7 +1183,7 @@ const cRegularFileWrapper gWrapperFile_6_embeddedSampleCode (
   "04-section-service-duration.plm",
   "plm",
   true, // Text file
-  2368, // Text length
+  2369, // Text length
   gWrapperFileContent_6_embeddedSampleCode
 ) ;
 
