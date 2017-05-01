@@ -293,6 +293,14 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual void nt_property_5F_in_5F_extension_ (GALGAS_structurePropertyListAST & ioArgument0,
                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'registerDeclaration' non terminal
+//--- 'parse' label
+  public : virtual void nt_registerDeclaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_registerDeclaration_ (GALGAS_controlRegisterNameList & ioArgument0,
+                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'start_symbol' non terminal
 //--- 'parse' label
   public : virtual void nt_start_5F_symbol_parse (C_Lexique_plm_5F_lexique * inCompiler) ;

@@ -55,45 +55,46 @@ syntax extension plm_syntax {
     $register$
     @controlRegisterNameList registerDeclarationList = {}
     repeat
-      $identifier$ ?let registerName
-      @lstringlist attributeList = {}
-      repeat
-      while
-        $@attribute$ ?let attribute
-        attributeList += !attribute
-      end
-      select
-        $at$
-        <expression> ?let registerAddress
-        registerDeclarationList +=
-          !registerName
-          !.scalar
-          !attributeList
-          !registerAddress 
-          !.here
-      or
-        $[$
-        <expression> ?let sizeExpression
-        let sizeExpressionLocation = @location.here
-        $]$
-        $at$
-        <expression> ?let baseAddressExpression
-        let baseAddressExpressionLocation = @location.here
-        $:$
-        <expression> ?let arrayElementSizeExpression
-        let arrayElementSizeExpressionLocation = @location.here
-        registerDeclarationList +=
-          !registerName
-          !.registerArray {
-             !arraySize:sizeExpression
-             !arraySizeLocation:sizeExpressionLocation
-             !arrayElementSize:arrayElementSizeExpression
-             !arrayElementSizeLocation:arrayElementSizeExpressionLocation
-           }
-          !attributeList
-          !baseAddressExpression 
-          !baseAddressExpressionLocation
-      end
+      <registerDeclaration> !?registerDeclarationList
+#      $identifier$ ?let registerName
+#      @lstringlist attributeList = {}
+#      repeat
+#      while
+#        $@attribute$ ?let attribute
+#        attributeList += !attribute
+#      end
+#      select
+#        $at$
+#        <expression> ?let registerAddress
+#        registerDeclarationList +=
+#          !registerName
+#          !.scalar
+#          !attributeList
+#          !registerAddress 
+#          !.here
+#      or
+#        $[$
+#        <expression> ?let sizeExpression
+#        let sizeExpressionLocation = @location.here
+#        $]$
+#        $at$
+#        <expression> ?let baseAddressExpression
+#        let baseAddressExpressionLocation = @location.here
+#        $:$
+#        <expression> ?let arrayElementSizeExpression
+#        let arrayElementSizeExpressionLocation = @location.here
+#        registerDeclarationList +=
+#          !registerName
+#          !.registerArray {
+#             !arraySize:sizeExpression
+#             !arraySizeLocation:sizeExpressionLocation
+#             !arrayElementSize:arrayElementSizeExpression
+#             !arrayElementSizeLocation:arrayElementSizeExpressionLocation
+#           }
+#          !attributeList
+#          !baseAddressExpression 
+#          !baseAddressExpressionLocation
+#      end
     while
     end
     $\$type$ ?let registerTypeName
@@ -128,6 +129,50 @@ syntax extension plm_syntax {
       !registerTypeName
       !registerBitSliceList
       !.here
+  }
+
+  #·····················································································································
+
+  rule <registerDeclaration> ?!@controlRegisterNameList ioRegisterDeclarationList {
+    $identifier$ ?let registerName
+    @lstringlist attributeList = {}
+    repeat
+    while
+      $@attribute$ ?let attribute
+      attributeList += !attribute
+    end
+    select
+      $at$
+      <expression> ?let registerAddress
+      ioRegisterDeclarationList +=
+        !registerName
+        !.scalar
+        !attributeList
+        !registerAddress 
+        !.here
+    or
+      $[$
+      <expression> ?let sizeExpression
+      let sizeExpressionLocation = @location.here
+      $]$
+      $at$
+      <expression> ?let baseAddressExpression
+      let baseAddressExpressionLocation = @location.here
+      $:$
+      <expression> ?let arrayElementSizeExpression
+      let arrayElementSizeExpressionLocation = @location.here
+      ioRegisterDeclarationList +=
+        !registerName
+        !.registerArray {
+           !arraySize:sizeExpression
+           !arraySizeLocation:sizeExpressionLocation
+           !arrayElementSize:arrayElementSizeExpression
+           !arrayElementSizeLocation:arrayElementSizeExpressionLocation
+         }
+        !attributeList
+        !baseAddressExpression 
+        !baseAddressExpressionLocation
+    end
   }
 
   #·····················································································································
