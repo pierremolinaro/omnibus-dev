@@ -57,9 +57,10 @@ func user p3 () -> $uint32 {
   result = 15
 }
 
-extend staticArray maListeStatique (5, 9, func toggleL2 (), func p2 ())
-
-extend staticArray maListeStatique (15, 29, func toggleL3 (), func p3 ())
+extend staticArray maListeStatique (
+  5, 9, func toggleL2 (), func p2 () ;
+  15, 29, func toggleL3 (), func p3 ()
+)
 
 //-----------------------------------------------------------------------------*
 

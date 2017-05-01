@@ -2169,9 +2169,10 @@ const char * gWrapperFileContent_15_embeddedSampleCode = "target \"teensy-3-1\"\
   "  result = 15\n"
   "}\n"
   "\n"
-  "extend staticArray maListeStatique (5, 9, func toggleL2 (), func p2 ())\n"
-  "\n"
-  "extend staticArray maListeStatique (15, 29, func toggleL3 (), func p3 ())\n"
+  "extend staticArray maListeStatique (\n"
+  "  5, 9, func toggleL2 (), func p2 () ;\n"
+  "  15, 29, func toggleL3 (), func p3 ()\n"
+  ")\n"
   "\n"
   "//-----------------------------------------------------------------------------*\n"
   "\n"
@@ -2199,7 +2200,7 @@ const cRegularFileWrapper gWrapperFile_15_embeddedSampleCode (
   "20-static-list-example.plm",
   "plm",
   true, // Text file
-  2019, // Text length
+  1989, // Text length
   gWrapperFileContent_15_embeddedSampleCode
 ) ;
 

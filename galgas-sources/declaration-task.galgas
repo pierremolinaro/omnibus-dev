@@ -60,6 +60,72 @@ syntax extension plm_syntax {
     @functionDeclarationListAST taskProcList = {}
     @taskInitListAST taskInitListAST = {}
     @syncInstructionBranchList branchList = {}
+    <taskBody> !?taskVarList !?taskProcList !?taskInitListAST !?branchList
+#    repeat
+#    while
+#      $var$
+#      $identifier$ ?let varName
+#      @lstring typeName
+#      select
+#        typeName = ["" nowhere]
+#      or
+#        $\$type$ ?typeName
+#      end
+#      $=$
+#      <expression> ?let initExpression
+#      taskVarList += !varName !typeName !initExpression
+#    while
+#      $func$
+#      $identifier$ ?let procName
+#      <procedure_formal_arguments> ?formalArguments:let @routineFormalArgumentList formalArgumentList
+#      @lstring returnTypeName
+#      select
+#        returnTypeName = ["" here]
+#      or
+#        $->$
+#        $\$type$ ?returnTypeName
+#      end
+#      ${$
+#      <instructionList> ?let instructionList
+#      let endOfProc = @location.here
+#      $}$
+#      taskProcList += !.userMode !false !procName !{} !formalArgumentList !returnTypeName !instructionList !endOfProc
+#    while
+#      $setup$
+#      $integer$ ?let @lbigint priority
+#      ${$
+#      <instructionList> ?let instructionList
+#      let endOfInit = @location.here
+#      $}$
+#      taskInitListAST += !priority !instructionList !endOfInit
+#    while
+#      <guarded_command> ?let @guardedCommand guardedCommand
+#      ${$
+#      <instructionList> ?let instructionList
+#      let endOfInstructions = @location.here
+#      $}$
+#      branchList += !guardedCommand !instructionList !endOfInstructions
+#    end
+    let endOfTask = @location.here
+    $}$
+    ioAST.mTaskListAST +=
+      !taskName
+      !priority
+      !stackSize
+      !taskVarList
+      !taskProcList
+      !taskInitListAST
+      !branchList
+      !endOfTask
+  }
+
+  #·····················································································································
+
+  rule <taskBody> ?!@taskVarListAST taskVarList
+                  ?!@functionDeclarationListAST taskProcList
+                  ?!@taskInitListAST taskInitListAST
+                  ?!@syncInstructionBranchList branchList
+{
     repeat
     while
       $var$
@@ -105,17 +171,6 @@ syntax extension plm_syntax {
       $}$
       branchList += !guardedCommand !instructionList !endOfInstructions
     end
-    let endOfTask = @location.here
-    $}$
-    ioAST.mTaskListAST +=
-      !taskName
-      !priority
-      !stackSize
-      !taskVarList
-      !taskProcList
-      !taskInitListAST
-      !branchList
-      !endOfTask
   }
 
   #·····················································································································
