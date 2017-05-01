@@ -47,28 +47,52 @@ syntax extension plm_syntax {
     ${$
     @staticArrayPropertyListAST propertyList = {}
     repeat
-      $let$
-      $identifier$ ?let propertyName
-      select
-        $\$type$ ?let typeName
-        propertyList += !propertyName !.valueType{!type:typeName}
-      or
-        $func$
-        <mode> ?let mode
-        <procedure_formal_arguments> ?formalArguments:let formalArgs
-        @lstring returnType
-        select
-          returnType = ["" here]
-        or
-          $->$
-          $\$type$ ?returnType
-        end
-        propertyList += !propertyName !.function{!mode:mode !formalArgs:formalArgs !returnType:returnType}
-      end
+      <staticArrayProperty> !?propertyList
+#      $let$
+#      $identifier$ ?let propertyName
+#      select
+#        $\$type$ ?let typeName
+#        propertyList += !propertyName !.valueType{!type:typeName}
+#      or
+#        $func$
+#        <mode> ?let mode
+#        <procedure_formal_arguments> ?formalArguments:let formalArgs
+#        @lstring returnType
+#        select
+#          returnType = ["" here]
+#        or
+#          $->$
+#          $\$type$ ?returnType
+#        end
+#        propertyList += !propertyName !.function{!mode:mode !formalArgs:formalArgs !returnType:returnType}
+#      end
     while
     end
     $}$
     ioAST.mDeclarationListAST += !@staticArrayAST.new {!staticListName !propertyList}
+  }
+
+  #·····················································································································
+
+  rule <staticArrayProperty> ?!@staticArrayPropertyListAST ioPropertyList {
+    $let$
+    $identifier$ ?let propertyName
+    select
+      $\$type$ ?let typeName
+      ioPropertyList += !propertyName !.valueType{!type:typeName}
+    or
+      $func$
+      <mode> ?let mode
+      <procedure_formal_arguments> ?formalArguments:let formalArgs
+      @lstring returnType
+      select
+        returnType = ["" here]
+      or
+        $->$
+        $\$type$ ?returnType
+      end
+      ioPropertyList += !propertyName !.function{!mode:mode !formalArgs:formalArgs !returnType:returnType}
+    end
   }
 
   #·····················································································································

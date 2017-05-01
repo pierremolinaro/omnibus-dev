@@ -49,17 +49,34 @@ La composition de chaque élément est spécifiée par la liste des propriétés
 
 \sectionLabel{Ajout d'un élément au tableau}{ajoutElementTableauStatique}
 
-Un tableau statique est construit élément par élément : 
+La construction \plm=extend staticArray= permet d'ajouter un élément en fin de tableau statique :
 
 \begin{PLM}
 extend staticArray maListeStatique (5, 9)
 \end{PLM}
 
-Cette déclaration ajoute un élément au tableau statique, élément dont toutes les propriétés doivent être initialisées par une expression statique. 
+Toutes les propriétés de l'élément ajouté doivent être initialisées par une expression statique. 
 
-\fbox{\begin{minipage}{1.0\textwidth}
-   {\bf Attention !} L'ordre des éléments ne peut pas être spécifié. Il peut varier d'une façon imprévisible d'une compilation à une autre. Aussi, il faut veiller que les opérations réalisées soient indépendantes de l'ordre dans lequel les éléments sont placés dans le tableau statique.
-\end{minipage}}
+Pour ajouter plusieurs éléments, on peut écrire :
+\begin{PLM}
+extend staticArray maListeStatique (5, 9)
+extend staticArray maListeStatique (15, 8)
+\end{PLM}
+
+Ou utiliser le délimiteur \plm=;= pour séparer les éléments apparaissant dans une même déclaration :
+\begin{PLM}
+extend staticArray maListeStatique (5, 9 ; 15, 8)
+\end{PLM}
+
+\section{Ordre des éléments}
+
+Le compilateur regroupe les constructions \plm=extend staticArray= d'un même fichier de façon à ce que les éléments soient dans le tableau dans l'ordre d'apparition dans le fichier. Si les constructions \plm=extend staticArray= apparaissent dans plusieurs fichiers, l'ordre des groupes formés par fichier est imprévisible.
+
+
+
+%\fbox{\begin{minipage}{1.0\textwidth}
+%   {\bf Attention !} L'ordre des éléments ne peut pas être spécifié. Il peut varier d'une façon imprévisible d'une compilation à une autre. Aussi, il faut veiller que les opérations réalisées soient indépendantes de l'ordre dans lequel les éléments sont placés dans le tableau statique.
+%\end{minipage}}
 
 
 

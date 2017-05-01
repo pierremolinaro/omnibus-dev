@@ -46,25 +46,35 @@ syntax extension plm_syntax {
     $staticArray$
     $identifier$ ?let staticListName
     $($
-    @extendStaticArrayExpressionListAST expressions = {}
     repeat
-      select
-        <expression> ?let exp
-        expressions += !.expression {!exp:exp} !.here
-      or
-        $func$
-        $identifier$ ?let functionName
-        <procedure_formal_arguments> ?formalArguments:let formalArgs
-        expressions +=
-          !.function {!functionName:functionName !formalArgs:formalArgs}
-          !.here
+      @extendStaticArrayExpressionListAST expressions = {}
+      repeat
+        <staticArray_exp> !?expressions
+      while
+        $,$
       end
+      ioAST.mDeclarationListAST += !@extendStaticArrayDeclarationAST.new {!staticListName !expressions}
     while
-      $,$
+      $;$
     end
     $)$
-    ioAST.mDeclarationListAST += !@extendStaticArrayDeclarationAST.new {!staticListName !expressions}
   }
+
+  #·····················································································································
+
+  rule <staticArray_exp> ?!@extendStaticArrayExpressionListAST ioExpressions {
+    select
+      <expression> ?let exp
+      ioExpressions += !.expression {!exp:exp} !.here
+    or
+      $func$
+      $identifier$ ?let functionName
+      <procedure_formal_arguments> ?formalArguments:let formalArgs
+      ioExpressions +=
+        !.function {!functionName:functionName !formalArgs:formalArgs}
+        !.here
+    end
+   }
 
   #·····················································································································
 

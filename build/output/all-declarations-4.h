@@ -331,6 +331,22 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : static void performOnlySyntaxAnalysis (C_Compiler * inCompiler,
                                                   const C_String & inSourceFilePath) ;
 
+//------------------------------------- 'staticArrayProperty' non terminal
+//--- 'parse' label
+  public : virtual void nt_staticArrayProperty_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_staticArrayProperty_ (GALGAS_staticArrayPropertyListAST & ioArgument0,
+                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'staticArray_exp' non terminal
+//--- 'parse' label
+  public : virtual void nt_staticArray_5F_exp_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_staticArray_5F_exp_ (GALGAS_extendStaticArrayExpressionListAST & ioArgument0,
+                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
 //------------------------------------- 'system_routine' non terminal
 //--- 'parse' label
   public : virtual void nt_system_5F_routine_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -338,6 +354,17 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_system_5F_routine_ (GALGAS_systemRoutineDeclarationListAST & ioArgument0,
                                                C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'taskBody' non terminal
+//--- 'parse' label
+  public : virtual void nt_taskBody_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_taskBody_ (GALGAS_taskVarListAST & ioArgument0,
+                                      GALGAS_functionDeclarationListAST & ioArgument1,
+                                      GALGAS_taskInitListAST & ioArgument2,
+                                      GALGAS_syncInstructionBranchList & ioArgument3,
+                                      C_Lexique_plm_5F_lexique * inCompiler) ;
 
   public : virtual int32_t select_plm_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
@@ -502,6 +529,8 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
   public : virtual int32_t select_plm_5F_syntax_80 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_syntax_81 (C_Lexique_plm_5F_lexique *) ;
+
+  public : virtual int32_t select_plm_5F_syntax_82 (C_Lexique_plm_5F_lexique *) ;
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
