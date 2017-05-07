@@ -257,14 +257,14 @@ method @routineMapIR svcCodeGeneration
 proc generateSectionAndSafeDispatcher
   ?let @string inCurrentDirectory
   ?let @string inTargetName
-  ?let @string inSectionInvocationScheme
+  ?targetParameters:let @targetParameters inTargetParameters
   ?!@string ioAssemblerCode
   ?let @2stringlist inSectionAndSafeList
 {
   for (callName implementationName) in inSectionAndSafeList do (idx)
     var s = getTargetTextFile (
       !currentDir:inCurrentDirectory
-      !from:inTargetName + "/" + inSectionInvocationScheme + "-section-invocation.s"
+      !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherInvocation
     )
     s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
     s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
@@ -273,12 +273,12 @@ proc generateSectionAndSafeDispatcher
   end
   ioAssemblerCode += getTargetTextFile (
     !currentDir:inCurrentDirectory
-    !from:inTargetName + "/" + inSectionInvocationScheme + "-section-dispatcher-header.s"
+    !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherHeader # + "-section-dispatcher-header.s"
   )
   for (callName implementationName) in inSectionAndSafeList do (idx)
     var s = getTargetTextFile (
       !currentDir:inCurrentDirectory
-      !from:inTargetName + "/" + inSectionInvocationScheme + "-section-dispatcher-entry.s"
+      !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherEntry # + "-section-dispatcher-entry.s"
     )
     s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
     s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
@@ -288,7 +288,7 @@ proc generateSectionAndSafeDispatcher
   ioAssemblerCode += "\n"
   ioAssemblerCode += getTargetTextFile (
     !currentDir:inCurrentDirectory
-    !from:inTargetName + "/" + inSectionInvocationScheme + "-section-dispatcher-code.s"
+    !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherCode # + "-section-dispatcher-code.s"
   )
   ioAssemblerCode += "@-------------------------------------------------------------"
   ioAssemblerCode += "---------------------------------------------------------*\n"
@@ -301,16 +301,26 @@ proc generatePrimitiveAndServiceDispatcher
   ?let @string inTargetName
   ?!@string ioAssemblerCode
   ?let @2stringlist inServiceList
+  ?targetParameters:let @targetParameters inTargetParameters
 {
   for (callName *) in inServiceList do (idx)
-    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-entry.s")
+    var s = getTargetTextFile (
+      !currentDir:inCurrentDirectory
+      !from:inTargetName + "/" + inTargetParameters.mServiceEntry
+    )
     s = [s stringByReplacingStringByString !"!ENTRY!" !callName]
     s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
     ioAssemblerCode += s
   end
-  ioAssemblerCode += getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-header.s")
+  ioAssemblerCode += getTargetTextFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName + "/" + inTargetParameters.mServiceDispatcherHeader
+  )
   for (* implementationName) in inServiceList do (idx)
-    var s = getTargetTextFile (!currentDir:inCurrentDirectory !from:inTargetName + "/service-dispatcher-entry.s")
+    var s = getTargetTextFile (
+      !currentDir:inCurrentDirectory
+      !from:inTargetName + "/" + inTargetParameters.mServiceDispatcherEntry
+    )
     s = [s stringByReplacingStringByString !"!ENTRY!" !implementationName]
     s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
     ioAssemblerCode += s

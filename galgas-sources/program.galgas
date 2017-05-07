@@ -157,10 +157,7 @@ private proc compileProject
           !interrupts:semanticContext.mAvailableInterruptMap
           !staticlistValues:staticListValueMap
           !sourceFileSet:sourceFileAbsolutePathSet
-          !sectionImplementation:semanticContext.mSectionInvocationScheme
-          !targetParameters:semanticContext.mTargetParameters #.m_C_definitionFiles
-#          !SsourceFileList:semanticContext.mTargetParameters.m_S_definitionFiles
-#          !LLsourceFileList:semanticContext.mTargetParameters.m_LL_definitionFiles
+          !targetParameters:semanticContext.mTargetParameters
         )
       end
     end

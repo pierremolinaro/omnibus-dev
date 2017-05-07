@@ -19,11 +19,6 @@ list @interruptionConfigurationList {
 struct @targetParameters {
   @2lstringlist mPython_utilityToolList
   @lstring mPython_build
-#  @lstring mPython_build_verbose
-#  @lstring mPython_clean
-#  @lstring mPython_objdump
-#  @lstring mPython_objsize
-#  @lstring mPython_run
   @lstring mTargetPanic_LL_filePath
   @lstring mLinkerScript
   @lbigint mPointerSize
@@ -31,10 +26,22 @@ struct @targetParameters {
   @lbigint mStackedUserRegisterOnInterruptByteSize
   @lbigint mServicePushedRegisterByteSize
   @lbigint mSectionPushedRegisterByteSize
-  @lstring mSectionInvocationScheme
+  
+  @lstring mSectionDispatcherCode
+  @lstring mSectionDispatcherEntry
+  @lstring mSectionDispatcherHeader
+  @lstring mSectionDispatcherInvocation
+
   @lstringlist m_C_definitionFiles
   @lstringlist m_S_definitionFiles
   @lstringlist m_LL_definitionFiles
+  
+  @lstring mXtrInterruptHandler
+  @lstring mUndefinedInterruptHandler
+  
+  @lstring mServiceDispatcherEntry
+  @lstring mServiceDispatcherHeader
+  @lstring mServiceEntry
 }
 
 #·······················································································································
@@ -55,30 +62,22 @@ syntax extension plm_target_specific_syntax {
 
   #·····················································································································
 
+  rule <key> ?let @string inKey {
+    $identifier$ ?let key
+    if key.string != inKey then
+      error key : "invalid key" fixit { replace inKey }
+    end
+    $:$
+  }
+
+  #·····················································································································
+
   rule <configuration_start_symbol>
-    ?!@ast ioAst
+    ?!@ast ioAST
     !importClauseList:@lstringlist outImportedFileList
     !endOfSourceFile:@location outEndOfSourceFile
   {
-    <configuration> !?ioAst
-    outImportedFileList = {}
-    $:$
-    select
-    or
-      repeat
-        $"string"$ ?let relativeFilePath
-        outImportedFileList += !relativeFilePath
-      while
-        $,$
-      end
-    end
-    outEndOfSourceFile = .here
-  }
-
-   #·····················································································································
-
-  rule <configuration> ?!@ast ioAST {
-    $:$
+    <key> !"PYTHON_UTILITIES"
     @2lstringlist python_utilityToolList = {}
     select
     or
@@ -91,41 +90,41 @@ syntax extension plm_target_specific_syntax {
         $,$
       end
     end
-    $:$
+    <key> !"PYTHON_BUILD"
     $"string"$ ?let python_build
-#    $:$
-#    $"string"$ ?let python_build_verbose
-#    $:$
-#    $"string"$ ?let python_clean
-#    $:$
-#    $"string"$ ?let python_objdump
-#    $:$
-#    $"string"$ ?let python_objsize
-#    $:$
-#    $"string"$ ?let python_run
-    $:$
+    <key> !"LINKER_SCRIPT"
     $"string"$ ?let linkerScript
-    $:$
+    <key> !"PANIC"
     $\$type$ ?let panicCodeTypeName 
-    $,$
+    $;$
     $\$type$ ?let panicLineTypeName
-    $,$
+    $;$
     $"string"$ ?let targetPanic_LL_filePath
-    $:$
+    <key> !"UINT_TYPE"
     $\$type$ ?let unsignedIntegerTypeName
-    $:$
+    <key> !"POINTER_BIT_COUNT"
     $integer$ ?let pointerSize
-    $:$
+    <key> !"SYSTEM_STACK_SIZE"
     $integer$ ?let systemStackSize
-    $:$
-    $integer$ ?let stackedUserRegisterOnInterruptByteSize
-    $:$
+    <key> !"SERVICE"
+    $"string"$ ?let serviceDispatcherEntry
+    $;$
+    $"string"$ ?let serviceDispatcherHeader
+    $;$
+    $"string"$ ?let serviceEntry
+    $;$
     $integer$ ?let servicePushedRegisterByteSize
-    $:$
-    $"string"$ ?let sectionImplementationName
-    $,$
+    <key> !"SECTION"
+    $"string"$ ?let sectionDispatcherCode
+    $;$
+    $"string"$ ?let sectionDispatcherEntry
+    $;$
+    $"string"$ ?let sectionDispatcherHeader
+    $;$
+    $"string"$ ?let sectionDispatcherInvocation
+    $;$
     $integer$ ?let sectionPushedRegisterByteSize
-    $:$
+    <key> !"C_FILES"
     @lstringlist C_definitionFiles = {}
     repeat
       $"string"$ ?let fileRelativePath
@@ -133,7 +132,7 @@ syntax extension plm_target_specific_syntax {
     while
       $,$
     end
-    $:$
+    <key> !"S_FILES"
     @lstringlist S_definitionFiles = {}
     repeat
       $"string"$ ?let fileRelativePath
@@ -141,7 +140,7 @@ syntax extension plm_target_specific_syntax {
     while
       $,$
     end
-    $:$
+    <key> !"LL_FILES"
     @lstringlist LL_definitionFiles = {}
     repeat
       $"string"$ ?let fileRelativePath
@@ -149,14 +148,27 @@ syntax extension plm_target_specific_syntax {
     while
       $,$
     end
-    let parameters = @targetParameters.new {
+    outImportedFileList = {}
+    <key> !"PLM_FILES"
+    select
+    or
+      repeat
+        $"string"$ ?let relativeFilePath
+        outImportedFileList += !relativeFilePath
+      while
+        $,$
+      end
+    end
+    <key> !"INTERRUPT_HANDLER"
+    $"string"$ ?let xtrInterruptHandler
+    $;$
+    $"string"$ ?let undefinedInterruptHandler
+    $;$
+    $integer$ ?let stackedUserRegisterOnInterruptByteSize
+    <interruptConfigList> ?let interruptionConfigurationList
+     let parameters = @targetParameters.new {
       !python_utilityToolList
       !python_build
-#      !python_build_verbose
-#      !python_clean
-#      !python_objdump
-#      !python_objsize
-#      !python_run
       !targetPanic_LL_filePath
       !linkerScript
       !pointerSize
@@ -164,26 +176,34 @@ syntax extension plm_target_specific_syntax {
       !stackedUserRegisterOnInterruptByteSize
       !servicePushedRegisterByteSize
       !sectionPushedRegisterByteSize
-      !sectionImplementationName
+      !sectionDispatcherCode
+      !sectionDispatcherEntry
+      !sectionDispatcherHeader
+      !sectionDispatcherInvocation
       !C_definitionFiles
       !S_definitionFiles
       !LL_definitionFiles
+      !xtrInterruptHandler
+      !undefinedInterruptHandler
+      !serviceDispatcherEntry
+      !serviceDispatcherHeader
+      !serviceEntry
     }
-    <interruptConfigList> ?let interruptionConfigurationList
-    ioAST.mDeclarationListAST += !@configurationDeclarationAST.new {
+   ioAST.mDeclarationListAST += !@configurationDeclarationAST.new {
       !panicCodeTypeName
       !panicLineTypeName
       !unsignedIntegerTypeName
       !parameters
       !interruptionConfigurationList
     }
+    outEndOfSourceFile = .here
   }
 
  #·····················································································································
 
   rule <interruptConfigList> !@interruptionConfigurationList interruptionConfigurationList {
-    $:$
     interruptionConfigurationList = {}
+    <key> !"INTERRUPTS"
     select
     or
       repeat
@@ -274,7 +294,6 @@ override method @configurationDeclarationAST enterInContext
   ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicCodeTypeName}
   ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicLineTypeName}
   ioContext.mUnsignedIntegerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mUnsignedIntegerTypeName}
-  ioContext.mSectionInvocationScheme = mTargetParameters.mSectionInvocationScheme.string
   for (name panicCode) in mInterruptionConfigurationList do
     [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
     switch panicCode

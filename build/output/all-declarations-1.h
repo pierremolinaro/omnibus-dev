@@ -20,11 +20,6 @@ class cParser_plm_5F_target_5F_specific_5F_syntax {
   public : virtual ~ cParser_plm_5F_target_5F_specific_5F_syntax (void) {}
 
 //--- Non terminal declarations
-  protected : virtual void nt_configuration_ (class GALGAS_ast & ioArgument0,
-                                              class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
-
-  protected : virtual void nt_configuration_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
-
   protected : virtual void nt_configuration_5F_start_5F_symbol_ (class GALGAS_ast & ioArgument0,
                                                                  class GALGAS_lstringlist & outArgument1,
                                                                  class GALGAS_location & outArgument2,
@@ -37,19 +32,24 @@ class cParser_plm_5F_target_5F_specific_5F_syntax {
 
   protected : virtual void nt_interruptConfigList_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
+  protected : virtual void nt_key_ (const class GALGAS_string constinArgument0,
+                                    class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_key_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
 
 //--- Rule declarations
-  protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i0_ (GALGAS_ast & ioArgument0,
+  protected : void rule_plm_5F_target_5F_specific_5F_syntax_key_i0_ (const GALGAS_string constinArgument0,
+                                                                     C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_target_5F_specific_5F_syntax_key_i0_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+
+  protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i1_ (GALGAS_ast & ioArgument0,
                                                                                                   GALGAS_lstringlist & outArgument1,
                                                                                                   GALGAS_location & outArgument2,
                                                                                                   C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i0_parse (C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_i1_ (GALGAS_ast & ioArgument0,
-                                                                               C_Lexique_plm_5F_lexique * inLexique) ;
-
-  protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_i1_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i1_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_target_5F_specific_5F_syntax_interruptConfigList_i2_ (GALGAS_interruptionConfigurationList & outArgument0,
                                                                                      C_Lexique_plm_5F_lexique * inLexique) ;
@@ -312,13 +312,29 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
   public : GALGAS_lbigint mProperty_mSectionPushedRegisterByteSize ;
 
-  public : GALGAS_lstring mProperty_mSectionInvocationScheme ;
+  public : GALGAS_lstring mProperty_mSectionDispatcherCode ;
+
+  public : GALGAS_lstring mProperty_mSectionDispatcherEntry ;
+
+  public : GALGAS_lstring mProperty_mSectionDispatcherHeader ;
+
+  public : GALGAS_lstring mProperty_mSectionDispatcherInvocation ;
 
   public : GALGAS_lstringlist mProperty_m_5F_C_5F_definitionFiles ;
 
   public : GALGAS_lstringlist mProperty_m_5F_S_5F_definitionFiles ;
 
   public : GALGAS_lstringlist mProperty_m_5F_LL_5F_definitionFiles ;
+
+  public : GALGAS_lstring mProperty_mXtrInterruptHandler ;
+
+  public : GALGAS_lstring mProperty_mUndefinedInterruptHandler ;
+
+  public : GALGAS_lstring mProperty_mServiceDispatcherEntry ;
+
+  public : GALGAS_lstring mProperty_mServiceDispatcherHeader ;
+
+  public : GALGAS_lstring mProperty_mServiceEntry ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -343,10 +359,18 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                     const GALGAS_lbigint & in_mStackedUserRegisterOnInterruptByteSize,
                                     const GALGAS_lbigint & in_mServicePushedRegisterByteSize,
                                     const GALGAS_lbigint & in_mSectionPushedRegisterByteSize,
-                                    const GALGAS_lstring & in_mSectionInvocationScheme,
+                                    const GALGAS_lstring & in_mSectionDispatcherCode,
+                                    const GALGAS_lstring & in_mSectionDispatcherEntry,
+                                    const GALGAS_lstring & in_mSectionDispatcherHeader,
+                                    const GALGAS_lstring & in_mSectionDispatcherInvocation,
                                     const GALGAS_lstringlist & in_m_5F_C_5F_definitionFiles,
                                     const GALGAS_lstringlist & in_m_5F_S_5F_definitionFiles,
-                                    const GALGAS_lstringlist & in_m_5F_LL_5F_definitionFiles) ;
+                                    const GALGAS_lstringlist & in_m_5F_LL_5F_definitionFiles,
+                                    const GALGAS_lstring & in_mXtrInterruptHandler,
+                                    const GALGAS_lstring & in_mUndefinedInterruptHandler,
+                                    const GALGAS_lstring & in_mServiceDispatcherEntry,
+                                    const GALGAS_lstring & in_mServiceDispatcherHeader,
+                                    const GALGAS_lstring & in_mServiceEntry) ;
 
 //-- Start of generic part --*
 
@@ -369,9 +393,17 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                                                  const class GALGAS_lbigint & inOperand7,
                                                                  const class GALGAS_lbigint & inOperand8,
                                                                  const class GALGAS_lstring & inOperand9,
-                                                                 const class GALGAS_lstringlist & inOperand10,
-                                                                 const class GALGAS_lstringlist & inOperand11,
-                                                                 const class GALGAS_lstringlist & inOperand12
+                                                                 const class GALGAS_lstring & inOperand10,
+                                                                 const class GALGAS_lstring & inOperand11,
+                                                                 const class GALGAS_lstring & inOperand12,
+                                                                 const class GALGAS_lstringlist & inOperand13,
+                                                                 const class GALGAS_lstringlist & inOperand14,
+                                                                 const class GALGAS_lstringlist & inOperand15,
+                                                                 const class GALGAS_lstring & inOperand16,
+                                                                 const class GALGAS_lstring & inOperand17,
+                                                                 const class GALGAS_lstring & inOperand18,
+                                                                 const class GALGAS_lstring & inOperand19,
+                                                                 const class GALGAS_lstring & inOperand20
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -394,9 +426,21 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS__32_lstringlist getter_mPython_5F_utilityToolList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionInvocationScheme (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherCode (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherEntry (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherHeader (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherInvocation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSectionPushedRegisterByteSize (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceDispatcherEntry (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceDispatcherHeader (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceEntry (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mServicePushedRegisterByteSize (LOCATION_ARGS) const ;
 
@@ -405,6 +449,10 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSystemStackSize (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTargetPanic_5F_LL_5F_filePath (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mUndefinedInterruptHandler (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mXtrInterruptHandler (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_m_5F_C_5F_definitionFiles (LOCATION_ARGS) const ;
 
@@ -9477,8 +9525,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : GALGAS_globalTaskVariableList mProperty_mGlobalTaskVariableList ;
 
-  public : GALGAS_string mProperty_mSectionInvocationScheme ;
-
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
   public : VIRTUAL_IN_DEBUG void drop (void) ;
@@ -9540,8 +9586,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                    const GALGAS_prefixOperatorMap & in_mNotOperatorMap,
                                    const GALGAS_prefixOperatorMap & in_mUnsignedComplementOperatorMap,
                                    const GALGAS_taskMap & in_mTaskMap,
-                                   const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
-                                   const GALGAS_string & in_mSectionInvocationScheme) ;
+                                   const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList) ;
 
 //-- Start of generic part --*
 
@@ -9601,8 +9646,7 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
                                                                 const class GALGAS_prefixOperatorMap & inOperand44,
                                                                 const class GALGAS_prefixOperatorMap & inOperand45,
                                                                 const class GALGAS_taskMap & inOperand46,
-                                                                const class GALGAS_globalTaskVariableList & inOperand47,
-                                                                const class GALGAS_string & inOperand48
+                                                                const class GALGAS_globalTaskVariableList & inOperand47
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -9686,8 +9730,6 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_infixOperatorMap getter_mRightShiftOperatorMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_routineMapForContext getter_mRoutineMapForContext (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mSectionInvocationScheme (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_staticlistMap getter_mStaticlistMap (LOCATION_ARGS) const ;
 

@@ -14,14 +14,6 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specific_5F_syntax {
-//------------------------------------- 'configuration' non terminal
-//--- 'parse' label
-  public : virtual void nt_configuration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_configuration_ (GALGAS_ast & ioArgument0,
-                                           C_Lexique_plm_5F_lexique * inCompiler) ;
-
 //------------------------------------- 'configuration_start_symbol' non terminal
 //--- 'parse' label
   public : virtual void nt_configuration_5F_start_5F_symbol_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
@@ -67,6 +59,14 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specif
 //----------- '' label
   public : virtual void nt_interruptConfigList_ (GALGAS_interruptionConfigurationList & outArgument0,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'key' non terminal
+//--- 'parse' label
+  public : virtual void nt_key_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_key_ (const GALGAS_string inArgument0,
+                                 C_Lexique_plm_5F_lexique * inCompiler) ;
 
   public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
