@@ -239,7 +239,7 @@ override method @structureDeclaration enterInContext
     @semanticTemporariesStruct temporaries = .default
     switch mInitialisation
     case expression (initExpression) :
-      [initExpression analyzeExpressionNew
+      [initExpression analyzeExpression
         !self:.null
         !inGuard:false
         !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}

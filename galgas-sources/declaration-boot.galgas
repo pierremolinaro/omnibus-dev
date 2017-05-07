@@ -79,7 +79,7 @@ method @bootList-element bootSemanticAnalysis
     !mode:.bootMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMap variableMap
+    ?@unifiedSymbolMapEx variableMap
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Analyze instruction list

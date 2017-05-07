@@ -50,7 +50,7 @@ before {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 filewrapper targetTemplates in "../embedded-sources/targets" {
-  "py", "ld", "c", "s", "plm", "plm-target", "ll"
+  "py", "ld", "c", "s", "plm", "plm-target", "ll", "txt"
 }{
 }{
 }
@@ -63,34 +63,18 @@ proc generateTarget
   ?targetName:let @lstring inTargetName
   ?targetParameters:let @targetParameters inTargetParameters
 {
-#--- Copy makefile.py
-  copyExecutableFile (
-    !currentDir:inCurrentDirectory
-    !from:"makefile.py"
-    !to:inProductDirectory + "/sources/makefile.py"
-  )
-#--- Copy plm.py
-  copyExecutableFile (
-    !currentDir:inCurrentDirectory
-    !from:"toolpath.py"
-    !to:inProductDirectory + "/sources/toolpath.py"
-  )
-#--- Copy check-stacks.py
-  copyExecutableFile (
-    !currentDir:inCurrentDirectory
-    !from:"check-stacks.py"
-    !to:inProductDirectory + "/sources/check-stacks.py"
-  )
-#--- Copy plm.py
-  copyExecutableFile (
-    !currentDir:inCurrentDirectory
-    !from:"plm.py"
-    !to:inProductDirectory + "/sources/plm.py"
-  )
+#--- Copy python utility scripts
+  for (relativePath destinationFile) in inTargetParameters.mPython_utilityToolList do
+    copyExecutableFile (
+      !currentDir:inCurrentDirectory
+      !from:inTargetName.string + "/" + relativePath
+      !to:inProductDirectory + "/" + destinationFile
+    )
+  end
 #--- Copy linker.ld
   copyFileWithSubstitutions (
     !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/linker.ld"
+    !from:inTargetName.string + "/" + inTargetParameters.mLinkerScript
     !to:inProductDirectory + "/sources/linker.ld"
     !{!"!SYSTEMSTACKSIZE!" ![inTargetParameters.mSystemStackSize.bigint string]}
   )
@@ -128,40 +112,40 @@ proc generateTarget
   end 
   copyExecutableFileWithSubstitutions (
     !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/build.py"
+    !from:inTargetName.string + "/" + inTargetParameters.mPython_build
     !to:inProductDirectory + "/build.py"
     !{!"<<OPT_OPTIMIZATION_OPTION>>" !opt_optimizationOption, !"<<LLC_OPTIMIZATION_OPTION>>" !llc_optimizationOption}
   )
-#--- Copy build-verbose.py
-  copyExecutableFile (
-    !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/build-verbose.py"
-    !to:inProductDirectory + "/build-verbose.py"
-  )
-#--- Copy clean.py
-  copyExecutableFile (
-    !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/clean.py"
-    !to:inProductDirectory + "/clean.py"
-  )
-#--- Copy objsize.py
-  copyExecutableFile (
-    !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/objsize.py"
-    !to:inProductDirectory + "/objsize.py"
-  )
-#--- Copy objdump.py
-  copyExecutableFile (
-    !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/objdump.py"
-    !to:inProductDirectory + "/objdump.py"
-  )
-#--- Copy run.py
-  copyExecutableFile (
-    !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/run.py"
-    !to:inProductDirectory + "/run.py"
-  )
+##--- Copy build-verbose.py
+#  copyExecutableFile (
+#    !currentDir:inCurrentDirectory
+#    !from:inTargetName.string + "/" + inTargetParameters.mPython_build_verbose
+#    !to:inProductDirectory + "/build-verbose.py"
+#  )
+##--- Copy clean.py
+#  copyExecutableFile (
+#    !currentDir:inCurrentDirectory
+#    !from:inTargetName.string + "/" + inTargetParameters.mPython_clean
+#    !to:inProductDirectory + "/clean.py"
+#  )
+##--- Copy objsize.py
+#  copyExecutableFile (
+#    !currentDir:inCurrentDirectory
+#    !from:inTargetName.string + "/" + inTargetParameters.mPython_objsize
+#    !to:inProductDirectory + "/objsize.py"
+#  )
+##--- Copy objdump.py
+#  copyExecutableFile (
+#    !currentDir:inCurrentDirectory
+#    !from:inTargetName.string + "/" + inTargetParameters.mPython_objdump
+#    !to:inProductDirectory + "/objdump.py"
+#  )
+##--- Copy run.py
+#  copyExecutableFile (
+#    !currentDir:inCurrentDirectory
+#    !from:inTargetName.string + "/" + inTargetParameters.mPython_run
+#    !to:inProductDirectory + "/run.py"
+#  )
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

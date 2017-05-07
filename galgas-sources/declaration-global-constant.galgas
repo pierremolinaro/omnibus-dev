@@ -112,7 +112,7 @@ override method @globalConstantDeclaration enterInContext
   @semanticTemporariesStruct temporaries = .default
   @instructionListIR instructionGenerationList = {}
   @allocaList allocaList = {}
-  [mSourceExpression analyzeExpressionNew
+  [mSourceExpression analyzeExpression
     !self:.null
     !inGuard:false
     !routineNameForInvocationGraph:["compiler" nowhere]

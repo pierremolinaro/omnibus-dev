@@ -1,0 +1,79 @@
+//--- Python tool list
+  :"../py-toolpath.txt" -> "sources/toolpath.py",
+   "../py-makefile.txt" -> "sources/makefile.py",
+   "../py-check-stacks.txt" -> "sources/check-stacks.py",
+   "../py-plm.txt" -> "sources/plm.py",
+   "../py-build-verbose.txt" -> "build-verbose.py",
+   "../py-clean.txt" -> "clean.py",
+   "../py-objdump.txt" -> "objdump.py",
+   "../py-objsize.txt" -> "objsize.py",
+   "py-run.txt" -> "run.py"
+//--- Python build script
+  :"py-build.txt"
+//--- Linker script
+  :"ld-linker.txt"
+// Panic code type, panic line type, panic generation file
+  :$int32, $uint32, "target-panic.ll"
+// Unsigned integer type
+  :$uint32
+// Pointer bit count
+  :32
+// System stack size
+  :1024
+// Stacked registers bytes count (ARM7TDMI save no reg in user stack on interrupt)
+  :0
+// as_swi_handler saves 4 32-bits registers on system stack
+  :16
+// Section invocation scheme, saves 2 32-bits registers on system stack
+  :"udfcoded", 8
+//--- C Source files
+  :"c-arm7tdmi-vectors.c",
+   "c-arm7tdmi-context.c",
+   "../c-real-time-kernel.c",
+   "c-countTrainingZeros.c"
+//--- Assembler Source files
+  :"s-target.s"
+//--- LLVM Source files
+  :"ll-arm7tdmi.ll",
+   "../ll-clear-bss.ll",
+   "../ll-copy-data-section.ll",
+   "../ll-configuration-on-boot.ll",
+   "../ll-create-task.ll",
+   "ll-install-interrupts.ll"
+//--- Interrupt vectors
+ :WDT,
+  ARMCore0,
+  ARMCore1,
+  TIMER0,
+  TIMER1,
+  UART0,
+  UART1,
+  PWM0,
+  I2C,
+  SPI0,
+  SPI1_SSP,
+  PLL,
+  RTC,
+  EINT0,
+  EINT1,
+  EINT2,
+  EINT3,
+  ADC,
+  CAN_COMMON,
+  CAN0_TX,
+  CAN1_TX,
+  CAN2_TX,
+  CAN3_TX,
+  FULLCAN,
+  CAN0_RX,
+  CAN1_RX,
+  CAN2_RX,
+  CAN3_RX,
+  PAbort -> 40,
+  DAbort -> 41,
+  FIQ -> 42
+//--- Included PLM sources (with their ".plm" extension)
+ :"plm-registers-lpc2294.plm",
+  "plm-lpc2294-xtr.plm",
+  "../plm-semaphore.plm"
+

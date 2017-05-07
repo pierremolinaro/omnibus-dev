@@ -110,7 +110,7 @@ method @panicClauseListAST-element panicSemanticAnalysis
     !mode:.panicMode
     !globalsAreConstant:false
     !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMap variableMap
+    ?@unifiedSymbolMapEx variableMap
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
 #--- Insert predefined input arguments

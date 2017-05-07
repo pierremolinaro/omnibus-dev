@@ -111,7 +111,7 @@ method @infixOperatorMap checkBinaryOperationWith
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @infixOperatorExpressionAST analyzeExpressionNew
+override method @infixOperatorExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -126,7 +126,7 @@ override method @infixOperatorExpressionAST analyzeExpressionNew
   !result:@objectIR outResult
 {
 #------------------- Analyze left expression
-  [mLeftExpression analyzeExpressionNew
+  [mLeftExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -147,7 +147,7 @@ override method @infixOperatorExpressionAST analyzeExpressionNew
     ?let leftOperand
   ]  
 #------------------- Analyze right expression
-  [mRightExpression analyzeExpressionNew
+  [mRightExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -283,7 +283,7 @@ private func getInfixOperatorMap
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpressionNew
+override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -299,7 +299,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpressionNe
 {
 #--- Analyze left expression
   @instructionListIR leftInstructionGenerationList = {}
-  [mLeftExpression analyzeExpressionNew
+  [mLeftExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -321,7 +321,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpressionNe
   ]  
 #--- Analyze right expression
   @instructionListIR rightInstructionGenerationList = {}
-  [mRightExpression analyzeExpressionNew
+  [mRightExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph

@@ -108,10 +108,10 @@ override method @typeArrayDeclaration enterInContext
   @semanticTemporariesStruct temporaries = .default
   variableMapWithConstants (
     !context:ioContext
-    ?@unifiedSymbolMap variableMap
+    ?@unifiedSymbolMapEx variableMap
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
-  [mSizeExpression analyzeExpressionNew
+  [mSizeExpression analyzeExpression
     !self:.null
     !inGuard:false
     !routineNameForInvocationGraph:.new {!mArrayTypeName.string + " init" !mArrayTypeName.location}

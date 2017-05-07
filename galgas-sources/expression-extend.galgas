@@ -62,7 +62,7 @@ override method @extendExpressionAST noteExpressionTypesInPrecedenceGraph ?!@sem
 #! @extendExpressionAST
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extendExpressionAST analyzeExpressionNew
+override method @extendExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -77,7 +77,7 @@ override method @extendExpressionAST analyzeExpressionNew
   !result:@objectIR outResult
 {
 #--- Analyze expression
-  [mExpression analyzeExpressionNew
+  [mExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph

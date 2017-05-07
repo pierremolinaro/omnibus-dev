@@ -63,7 +63,7 @@ override method @constructorCall noteExpressionTypesInPrecedenceGraph ?!@semanti
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @constructorCall analyzeExpressionNew
+override method @constructorCall analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -109,7 +109,7 @@ override method @constructorCall analyzeExpressionNew
           if effective_mSelector.string != formal_mSelector  then
             error effective_mSelector : "the selector should be '!" + formal_mSelector + ":'"
           end
-          [effective_mExpression analyzeExpressionNew
+          [effective_mExpression analyzeExpression
             !self:inSelfType
             !inGuard:inGuard
             !routineNameForInvocationGraph:inCallerNameForInvocationGraph

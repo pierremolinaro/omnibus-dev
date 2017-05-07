@@ -70,7 +70,7 @@ override method @ifExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanti
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ifExpressionAST analyzeExpressionNew
+override method @ifExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -85,7 +85,7 @@ override method @ifExpressionAST analyzeExpressionNew
   !result:@objectIR outResult
 {
 #--- Analyze if expression
-  [mIfExpression analyzeExpressionNew
+  [mIfExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -110,7 +110,7 @@ override method @ifExpressionAST analyzeExpressionNew
     error mIfExpressionEndLocation : "'if' expression should be boolean"
   end
 #--- Analyze 'then' expression
-  [mThenExpression analyzeExpressionNew
+  [mThenExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -137,7 +137,7 @@ override method @ifExpressionAST analyzeExpressionNew
     !staticTypeAllowed:false
   )
 #--- Analyze 'else' expression
-  [mElseExpression analyzeExpressionNew
+  [mElseExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph

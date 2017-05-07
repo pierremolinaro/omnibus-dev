@@ -162,7 +162,7 @@ override method @syncInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -202,7 +202,7 @@ override method @syncInstructionAST analyze
       }
     case boolean (isWhileCommand expression endOfExpression) :
       @instructionListIR guardInstructionGenerationList = {}
-      [expression analyzeExpressionNew
+      [expression analyzeExpression
         !self:inSelfType
         !inGuard:true
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -228,7 +228,7 @@ override method @syncInstructionAST analyze
       }
     case boolAndSync (isWhileCommand expression endOfExpression optionalReceiverName guardName effectiveParameterList) :
       @instructionListIR boolExpInstructionGenerationList = {}
-      [expression analyzeExpressionNew
+      [expression analyzeExpression
         !self:inSelfType
         !inGuard:true
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -315,7 +315,7 @@ proc analyzeGuardCall
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList

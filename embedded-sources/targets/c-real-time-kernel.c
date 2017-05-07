@@ -24,129 +24,8 @@ typedef unsigned char bool ;
 typedef enum {GUARD_EVALUATING_OR_OUTSIDE, GUARD_DID_CHANGE, GUARD_WAITING_FOR_CHANGE} GuardState ;
 
 //---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//   T A S K    R O U T I N E    T Y P E                                                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
 
-typedef void (* RoutineTaskType) (void) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-/*static unsigned countTrainingZeros (const unsigned inValue) {
-  unsigned result = 0 ;
-  unsigned w = inValue ;
-  while ((w & 1) == 0) {
-    result ++ ;
-    w >>= 1 ;
-  }
-  return result ;
-}*/
-
-static unsigned countTrainingZeros (const unsigned inValue) {
-  unsigned reversedValue ;
-  __asm__ ("rbit %0, %1" : "=r" (reversedValue) : "r" (inValue)) ;
-  unsigned result ;
-  __asm__ ("clz %0, %1" : "=r" (result) : "r" (reversedValue)) ;
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                C O R T E X    M 4    S T A C K E D    R E G I S T E R S                                             *
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//         PSP+32 -> |                            |                                                                    *
-//                   |----------------------------| \                                                                  *
-//         PSP+28 -> | xPSR                       |  |                                                                 *
-//                   |----------------------------|  |                                                                 *
-//         PSP+24 -> | PC (after SVC instruction) |  |                                                                 *
-//                   |----------------------------|  |                                                                 *
-//         PSP+20 -> | LR                         |  |                                                                 *
-//                   |----------------------------|  |                                                                 *
-//         PSP+16 -> | R12                        |  |  Saved by interrupt response                                    *
-//                   |----------------------------|  |                                                                 *
-//         PSP+12 -> | R3                         |  |                                                                 *
-//                   |----------------------------|  |                                                                 *
-//         PSP+8  -> | R2                         |  |                                                                 *
-//                   |----------------------------|  |                                                                 *
-//         PSP+4  -> | R1                         |  |                                                                 *
-//                   |----------------------------|  |                                                                 *
-//   /---- PSP ----> | R0                         |  |                                                                 *
-//   |               |----------------------------| /                                                                  *
-//   |                                                                                                                 *
-//   |                                        *---------------------*
-//   |                                        | LR return code      | +36 [ 9]
-//   |                                        *---------------------*
-//   \----------------------------------------| R13 (PSP)           | +32 [ 8]
-//                                            *---------------------*
-//                                            | R11                 | +28 [ 7]
-//                                            *---------------------*
-//                                            | R10                 | +24 [ 6]
-//                                            *---------------------*
-//                                            | R9                  | +20 [ 5]
-//                                            *---------------------*
-//                                            | R8                  | +16 [ 4]
-//                                            *---------------------*
-//                                            | R7                  | +12 [ 3]
-//                                            *---------------------*
-//                                            | R6                  | + 8 [ 2]
-//                                            *---------------------*
-//                                            | R5                  | + 4 [ 1]
-//  *--------------------------------*        *---------------------*
-//  | gRunningTaskContextSaveAddress +------> | R4                  | + 0 [ 0]
-//  *--------------------------------*        *---------------------*
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-typedef struct {
-  unsigned mR0 ;
-  unsigned mR1 ;
-  unsigned mR2 ;
-  unsigned mR3 ;
-  unsigned mR12 ;
-  unsigned mLR ;
-  unsigned mPC ;
-  unsigned mXPSR ;
-} StackedRegisters ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-typedef struct {
-  unsigned mR4 ;
-  unsigned mR5 ;
-  unsigned mR6 ;
-  unsigned mR7 ;
-  unsigned mR8 ;
-  unsigned mR9 ;
-  unsigned mR10 ;
-  unsigned mR11 ;
-  StackedRegisters * mSP_USR ;
-  unsigned mLR_RETURN_CODE ;
-} TaskContext ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void kernel_set_task_context (TaskContext * inTaskContext,
-                                     const unsigned inTopOfStack,
-                                     RoutineTaskType inTaskRoutine) {
-//--- Initialize LR
-  inTaskContext->mLR_RETURN_CODE = 0xFFFFFFFD ;
-//--- Initialize SP
-  StackedRegisters * ptr = (StackedRegisters *) (inTopOfStack - sizeof (StackedRegisters)) ; // 8 stacked registers
-  inTaskContext->mSP_USR = ptr ;
-//--- Initialize PC
-  ptr->mPC = (unsigned) inTaskRoutine ;
-//--- Initialize CPSR
-  ptr->mXPSR = 1 << 24 ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void kernel_set_return_code (TaskContext * inTaskContext,
-                                    const unsigned inReturnCode) {
-  StackedRegisters * ptr = inTaskContext->mSP_USR ;
-  ptr->mR0 = inReturnCode ;
-}
+static unsigned countTrainingZeros (const unsigned inValue) ; // Defined in countTrainingZeros.c
 
 //---------------------------------------------------------------------------------------------------------------------*
 //   T A S K    C O N T R O L    B L O C K                                                                             *
@@ -305,8 +184,7 @@ void blockInListAndOnDeadline (TaskList * ioWaitingList, const unsigned inDeadli
 //  M A K E    T A S K    R E A D Y                                                                                    *
 //---------------------------------------------------------------------------------------------------------------------*
 
-void makeTaskReady (TaskList * ioWaitingList, bool * outFound)
-asm ("!FUNC!makeTaskReady") ;
+void makeTaskReady (TaskList * ioWaitingList, bool * outFound) asm ("!FUNC!makeTaskReady") ;
 
 void makeTaskReady (TaskList * ioWaitingList, bool * outFound) {
   *outFound = (* ioWaitingList) != 0 ;
@@ -328,8 +206,7 @@ void makeTaskReady (TaskList * ioWaitingList, bool * outFound) {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void makeTasksReadyFrom (const unsigned inCurrentDate)
-asm ("!FUNC!makeTasksReadyFromCurrentDate") ;
+void makeTasksReadyFrom (const unsigned inCurrentDate) asm ("!FUNC!makeTasksReadyFromCurrentDate") ;
 
 void makeTasksReadyFrom (const unsigned inCurrentDate) {
   unsigned w = gDeadlineWaitingTaskList ;
@@ -439,7 +316,7 @@ void kernel_guardDidChange (GuardList * ioGuardList) {
     const unsigned taskIndex = countTrainingZeros (ioGuardList->mGuardValue) ;
     ioGuardList->mGuardValue &= ~ (1 << taskIndex) ;
     TaskControlBlock * taskControlBlockPtr = & gTaskDescriptorArray [taskIndex] ;
-    removeTaskFromGuards (taskControlBlockPtr) ;    
+    removeTaskFromGuards (taskControlBlockPtr) ;
     if (taskControlBlockPtr->mGuardState == GUARD_WAITING_FOR_CHANGE) {
       kernel_set_return_code (& taskControlBlockPtr->mTaskContext, 1) ;
       kernel_makeTaskReady (taskIndex) ;

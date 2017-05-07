@@ -23,7 +23,7 @@ def archiveBaseURL ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def llvmOptimizerCompiler ():
-  return [toolpath.toolDir () + "/bin/opt", "-<<OPT_OPTIMIZATION_OPTION>>", "-disable-simplify-libcalls", "-S"]
+  return [toolpath.toolDir () + "/bin/opt", "-Oz", "-disable-simplify-libcalls", "-S"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *
@@ -32,7 +32,7 @@ def llvmOptimizerCompiler ():
 #----------------------------------------------------------------------------------------------------------------------*
 
 def LLCcompiler ():
-  return [toolpath.toolDir () + "/bin/llc", "-function-sections", "-data-sections", "-<<LLC_OPTIMIZATION_OPTION>>"]
+  return [toolpath.toolDir () + "/bin/llc", "-function-sections", "-data-sections", "-O2"]
 
 #----------------------------------------------------------------------------------------------------------------------*
 #                                                                                                                      *

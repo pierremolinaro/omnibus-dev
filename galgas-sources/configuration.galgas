@@ -17,12 +17,24 @@ list @interruptionConfigurationList {
 #·······················································································································
 
 struct @targetParameters {
+  @2lstringlist mPython_utilityToolList
+  @lstring mPython_build
+#  @lstring mPython_build_verbose
+#  @lstring mPython_clean
+#  @lstring mPython_objdump
+#  @lstring mPython_objsize
+#  @lstring mPython_run
+  @lstring mTargetPanic_LL_filePath
+  @lstring mLinkerScript
   @lbigint mPointerSize
   @lbigint mSystemStackSize
   @lbigint mStackedUserRegisterOnInterruptByteSize
   @lbigint mServicePushedRegisterByteSize
   @lbigint mSectionPushedRegisterByteSize
   @lstring mSectionInvocationScheme
+  @lstringlist m_C_definitionFiles
+  @lstringlist m_S_definitionFiles
+  @lstringlist m_LL_definitionFiles
 }
 
 #·······················································································································
@@ -43,32 +55,62 @@ syntax extension plm_target_specific_syntax {
 
   #·····················································································································
 
-  rule <interruptConfigList> !@interruptionConfigurationList interruptionConfigurationList {
-    ${$
-    interruptionConfigurationList = {}
-    repeat
-    while
-      $identifier$ ?let interruptName
-      @interruptionPanicCode interruptionPanicCode
-      select
-        interruptionPanicCode = .noPanicCode
-      or
-        $:$
-        $integer$ ?let panicCode
-        interruptionPanicCode = .panicCode {!value:panicCode}
+  rule <configuration_start_symbol>
+    ?!@ast ioAst
+    !importClauseList:@lstringlist outImportedFileList
+    !endOfSourceFile:@location outEndOfSourceFile
+  {
+    <configuration> !?ioAst
+    outImportedFileList = {}
+    $:$
+    select
+    or
+      repeat
+        $"string"$ ?let relativeFilePath
+        outImportedFileList += !relativeFilePath
+      while
+        $,$
       end
-      interruptionConfigurationList += !interruptName !interruptionPanicCode
     end
-    $}$
+    outEndOfSourceFile = .here
   }
 
-  #·····················································································································
+   #·····················································································································
 
   rule <configuration> ?!@ast ioAST {
-    $configuration$
-    $\$type$ ?let panicCodeTypeName 
     $:$
+    @2lstringlist python_utilityToolList = {}
+    select
+    or
+      repeat
+        $"string"$ ?let relativePath
+        $->$
+        $"string"$ ?let destinationFile
+        python_utilityToolList += !relativePath !destinationFile
+      while
+        $,$
+      end
+    end
+    $:$
+    $"string"$ ?let python_build
+#    $:$
+#    $"string"$ ?let python_build_verbose
+#    $:$
+#    $"string"$ ?let python_clean
+#    $:$
+#    $"string"$ ?let python_objdump
+#    $:$
+#    $"string"$ ?let python_objsize
+#    $:$
+#    $"string"$ ?let python_run
+    $:$
+    $"string"$ ?let linkerScript
+    $:$
+    $\$type$ ?let panicCodeTypeName 
+    $,$
     $\$type$ ?let panicLineTypeName
+    $,$
+    $"string"$ ?let targetPanic_LL_filePath
     $:$
     $\$type$ ?let unsignedIntegerTypeName
     $:$
@@ -80,16 +122,52 @@ syntax extension plm_target_specific_syntax {
     $:$
     $integer$ ?let servicePushedRegisterByteSize
     $:$
+    $"string"$ ?let sectionImplementationName
+    $,$
     $integer$ ?let sectionPushedRegisterByteSize
     $:$
-    $"string"$ ?let sectionImplementationName
+    @lstringlist C_definitionFiles = {}
+    repeat
+      $"string"$ ?let fileRelativePath
+      C_definitionFiles += !fileRelativePath
+    while
+      $,$
+    end
+    $:$
+    @lstringlist S_definitionFiles = {}
+    repeat
+      $"string"$ ?let fileRelativePath
+      S_definitionFiles += !fileRelativePath
+    while
+      $,$
+    end
+    $:$
+    @lstringlist LL_definitionFiles = {}
+    repeat
+      $"string"$ ?let fileRelativePath
+      LL_definitionFiles += !fileRelativePath
+    while
+      $,$
+    end
     let parameters = @targetParameters.new {
+      !python_utilityToolList
+      !python_build
+#      !python_build_verbose
+#      !python_clean
+#      !python_objdump
+#      !python_objsize
+#      !python_run
+      !targetPanic_LL_filePath
+      !linkerScript
       !pointerSize
       !systemStackSize
       !stackedUserRegisterOnInterruptByteSize
       !servicePushedRegisterByteSize
       !sectionPushedRegisterByteSize
       !sectionImplementationName
+      !C_definitionFiles
+      !S_definitionFiles
+      !LL_definitionFiles
     }
     <interruptConfigList> ?let interruptionConfigurationList
     ioAST.mDeclarationListAST += !@configurationDeclarationAST.new {
@@ -99,6 +177,30 @@ syntax extension plm_target_specific_syntax {
       !parameters
       !interruptionConfigurationList
     }
+  }
+
+ #·····················································································································
+
+  rule <interruptConfigList> !@interruptionConfigurationList interruptionConfigurationList {
+    $:$
+    interruptionConfigurationList = {}
+    select
+    or
+      repeat
+        $identifier$ ?let interruptName
+        @interruptionPanicCode interruptionPanicCode
+        select
+          interruptionPanicCode = .noPanicCode
+        or
+          $->$
+          $integer$ ?let panicCode
+          interruptionPanicCode = .panicCode {!value:panicCode}
+        end
+        interruptionConfigurationList += !interruptName !interruptionPanicCode
+      while
+        $,$
+      end
+    end
   }
 
   #·····················································································································

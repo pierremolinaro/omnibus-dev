@@ -140,7 +140,9 @@ syntax extension plm_syntax {
       or
         $\$type$ ?typeName
       end
-      outEffectiveParameterList += !.inputWithType{!constant:constant !typeName:typeName !name:effectiveParameterName} !selector
+      outEffectiveParameterList += 
+        !.inputWithType{!constant:constant !typeName:typeName !name:effectiveParameterName}
+        !selector
     end
     outEndOfArgs = .here
     $)$
@@ -220,7 +222,7 @@ enum @internalRepresentation {
 
 #·······················································································································
 
-override method @primaryInExpressionAST analyzeExpressionNew
+override method @primaryInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -259,7 +261,7 @@ override method @primaryInExpressionAST analyzeExpressionNew
   for (access) in mAccessList do
     switch access
     case property (@lstring propertyName) :
-      handlePropertyAccessInExpressionNew (
+      handlePropertyAccessInExpression (
         !?internalRepresentation
         !propertyName
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -273,7 +275,7 @@ override method @primaryInExpressionAST analyzeExpressionNew
         !?instructionListIR:ioInstructionGenerationList
       )
     case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-      handleArrayAccessInExpressionNew (
+      handleArrayAccessInExpression (
         !?internalRepresentation
         !indexExpression
         !endOfIndex
@@ -341,7 +343,7 @@ override method @primaryInExpressionAST analyzeExpressionNew
 
 #·······················································································································
 
-proc handlePropertyAccessInExpressionNew
+private proc handlePropertyAccessInExpression
   ?!@internalRepresentation ioInternalRepresentation
   ?let @lstring inPropertyName
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
@@ -479,7 +481,7 @@ proc handlePropertyAccessInExpressionNew
 
 #·······················································································································
 
-proc handleArrayAccessInExpressionNew
+private proc handleArrayAccessInExpression
   ?!@internalRepresentation ioInternalRepresentation
   ?let @expressionAST inIndexExpression
   ?let @location inEndOfIndex
@@ -570,7 +572,7 @@ proc handleArrayAccessInExpressionNew
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc handleFunctionCallInExpressionNew
+private proc handleFunctionCallInExpressionNew
   ?!@internalRepresentation ioInternalRepresentation
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
@@ -881,7 +883,7 @@ proc analyzeEffectiveParametersNew
           !sliceMap:{}
         }
     case output (@expressionAST expression @location endOfExp) :
-      [expression analyzeExpressionNew
+      [expression analyzeExpression
         !self:inSelfType
         !inGuard:false
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -1004,7 +1006,7 @@ proc handleFunctionCallInExpression
   ?mode:let @mode inMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @effectiveArgumentListAST inArguments 
@@ -1072,7 +1074,7 @@ proc analyzeFunctionCallInExpression
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -1176,7 +1178,7 @@ proc analyzeEffectiveParameters
   ?requiredMode:let @mode inRequiredMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -1245,7 +1247,7 @@ proc analyzeEffectiveParameters
         !.input
         !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (![objectIR name]) ![objectIR location]} !sliceMap:{}}
     case output (@expressionAST expression @location endOfExp) :
-      [expression analyzeExpressionNew
+      [expression analyzeExpression
         !self:inSelfType
         !inGuard:false
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph

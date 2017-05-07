@@ -105,8 +105,9 @@ void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0
 //---------------------------------------------------------------------------------------------------------------------*
 
 void routine_recursiveImportEmbeddedTargetFiles (class GALGAS_ast & ioArgument0,
-                                                 class GALGAS_lstringlist inArgument1,
-                                                 class GALGAS_stringset & ioArgument2,
+                                                 const class GALGAS_string constinArgument1,
+                                                 class GALGAS_lstringlist inArgument2,
+                                                 class GALGAS_stringset & ioArgument3,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 

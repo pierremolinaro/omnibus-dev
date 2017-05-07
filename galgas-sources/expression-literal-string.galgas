@@ -46,7 +46,7 @@ override method @literalStringInExpressionAST noteExpressionTypesInPrecedenceGra
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringInExpressionAST analyzeExpressionNew
+override method @literalStringInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph

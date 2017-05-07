@@ -9,7 +9,7 @@ proc handleSubscriptInAssignmentAndExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
 
@@ -70,7 +70,7 @@ private proc handleSubscriptArrayInAssignmentAndExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
@@ -81,7 +81,7 @@ private proc handleSubscriptArrayInAssignmentAndExpression
 #--- Analyze array type
   [[[ioObjectPtr type] kind] arrayType ?typeName:* ?elementType:let type ?size:let @bigint arraySize ?2*]
 #--- Analyze index expression
-  [inIndexExpression analyzeExpressionNew
+  [inIndexExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -172,7 +172,7 @@ proc handleSubscriptArrayInAssignmentAndExpressionNew
 #--- Analyze array type
   [[[ioObjectPtr type] kind] arrayType ?typeName:* ?elementType:let type ?size:let @bigint arraySize ?2*]
 #--- Analyze index expression
-  [inIndexExpression analyzeExpressionNew
+  [inIndexExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -254,7 +254,7 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?let @expressionAST inIndexExpression 
@@ -277,7 +277,7 @@ private proc handleSubscriptRegisterArrayInAssignmentAndExpression
   elsif not readable then
     error inErrorLocation : "register cannot be read in this context" : ioObjectPtr
   else
-    [inIndexExpression analyzeExpressionNew
+    [inIndexExpression analyzeExpression
       !self:inSelfType
       !inGuard:inGuard
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -380,7 +380,7 @@ proc handleSubscriptRegisterArrayInAssignmentAndExpressionNew
   elsif not readable then
     error inErrorLocation : "register cannot be read in this context" : ioObjectPtr
   else
-    [inIndexExpression analyzeExpressionNew
+    [inIndexExpression analyzeExpression
       !self:inSelfType
       !inGuard:inGuard
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph

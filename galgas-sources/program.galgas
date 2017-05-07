@@ -158,6 +158,9 @@ private proc compileProject
           !staticlistValues:staticListValueMap
           !sourceFileSet:sourceFileAbsolutePathSet
           !sectionImplementation:semanticContext.mSectionInvocationScheme
+          !targetParameters:semanticContext.mTargetParameters #.m_C_definitionFiles
+#          !SsourceFileList:semanticContext.mTargetParameters.m_S_definitionFiles
+#          !LLsourceFileList:semanticContext.mTargetParameters.m_LL_definitionFiles
         )
       end
     end
@@ -173,7 +176,7 @@ private proc addTargetSpecificFiles
   ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
 {
   @ast ast = .default
-  if [option plm_options.useDirAsTargetDir value] != "" then
+  if [option plm_options.useDirAsTargetDir value] != "" then # Target is definied in files
     let targetDirectory = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     if [targetDirectory directoryExists] then
       recursiveImportFileSystemTargetFiles (
@@ -185,10 +188,18 @@ private proc addTargetSpecificFiles
     else
       error ["" nowhere]: "the '" + [option plm_options.useDirAsTargetDir value] + "' directory does not exist"
     end
-  else
+  else # Target is defined in embedded files
+  #--- Parse target definition file
+    let @filewrapper fw = [filewrapper targetTemplates]
+    let source = [fw textFileContentsAtPath !inTargetName.string + "/+config.plm-target"]
+    grammar plm_target_grammar on (source, inTargetName.string)
+      !?ioAST
+      ?importClauseList:let importedFileList
+      ?endOfSourceFile:*
     recursiveImportEmbeddedTargetFiles (
       !?ast:ast
-      !importClauseList:{!.new {!inTargetName.string + ".plm-target" !inTargetName.location}}
+      !currentDirectory:inTargetName.string
+      !importClauseList:importedFileList
       !?importedFilePathSet:ioImportedFileAbsolutePathSet
     )
   end
@@ -205,7 +216,6 @@ private proc addTargetSpecificFiles
   ioAST.mInitListAST += ast.mInitListAST
   ioAST.mBootListAST += ast.mBootListAST
   ioAST.mPanicClauseListAST += ast.mPanicClauseListAST
-#  ioAST.mModuleDeclarationList = ast.mModuleDeclarationList + ioAST.mModuleDeclarationList
   ioAST.mISRDeclarationListAST = ast.mISRDeclarationListAST + ioAST.mISRDeclarationListAST
   ioAST.mTaskListAST = ast.mTaskListAST + ioAST.mTaskListAST
 }
@@ -259,38 +269,27 @@ private proc recursiveImportFileSystemTargetFiles
 
 private proc recursiveImportEmbeddedTargetFiles
   ?!ast:@ast ioAST
+  ?currentDirectory:let @string inCurrentDirectory
   ?importClauseList:@lstringlist inImportedClauseList
   ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
 {
   for (path) in inImportedClauseList do
+    let fullPath = inCurrentDirectory + "/" + path
     let @filewrapper fw = [filewrapper targetTemplates]
-    if [fw fileExistsAtPath !path.string] then
-      let embeddedPath = ":" + path
+    if [fw fileExistsAtPath !fullPath] then
+      let embeddedPath = ":" + fullPath
       if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
         ioImportedFileAbsolutePathSet += !embeddedPath
-        if [path pathExtension] == "plm" then
-          grammar plm_grammar on ([fw textFileContentsAtPath !path.string], path.string)
-            !?ioAST
-            ?importClauseList:let importedFileList
-            ?endOfSourceFile:*
-          recursiveImportEmbeddedTargetFiles (
-            !?ast:ioAST
-            !importClauseList:importedFileList
-            !?importedFilePathSet:ioImportedFileAbsolutePathSet
-          )
-        elsif [path pathExtension] == "plm-target" then
-          grammar plm_target_grammar on ([fw textFileContentsAtPath !path.string], path.string)
-            !?ioAST
-            ?importClauseList:let importedFileList
-            ?endOfSourceFile:*
-          recursiveImportEmbeddedTargetFiles (
-            !?ast:ioAST
-            !importClauseList:importedFileList
-            !?importedFilePathSet:ioImportedFileAbsolutePathSet
-          )
-        else
-          error path : "invalid extension (should be .plm or .plm-target)"
-        end
+        grammar plm_grammar on ([fw textFileContentsAtPath !fullPath], path.string)
+          !?ioAST
+          ?importClauseList:let importedFileList
+          ?endOfSourceFile:*
+        recursiveImportEmbeddedTargetFiles (
+          !?ast:ioAST
+          !currentDirectory:[fullPath stringByDeletingLastPathComponent]
+          !importClauseList:importedFileList
+          !?importedFilePathSet:ioImportedFileAbsolutePathSet
+        )
       end
     else
       error path : "cannot find this file in embedded files"

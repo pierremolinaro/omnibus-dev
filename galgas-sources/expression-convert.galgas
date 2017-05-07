@@ -62,7 +62,7 @@ override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@se
 #! @convertExpressionAST
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @convertExpressionAST analyzeExpressionNew
+override method @convertExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -77,7 +77,7 @@ override method @convertExpressionAST analyzeExpressionNew
   !result:@objectIR outResult
 {
 #--- Analyze expression
-  [mExpression analyzeExpressionNew
+  [mExpression analyzeExpression
     !self:inSelfType
     !inGuard:inGuard
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph

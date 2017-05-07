@@ -9,7 +9,7 @@ proc initialVariableMap
   ?mode:let @mode inRequiredMode
   ?globalsAreConstant:@bool inGlobalsAreConstant
   ?returnTypeName:let @lstring inReturnTypeName
-  !@unifiedSymbolMap outVariableMap
+  !@unifiedSymbolMapEx outVariableMap
   !@universalPropertyAndRoutineMapForContext outUniversalMap
 {
   outUniversalMap = .default
@@ -147,7 +147,7 @@ proc initialVariableMap
 
 proc variableMapWithConstants
   ?context:let @semanticContext inContext
-  !@unifiedSymbolMap outVariableMap
+  !@unifiedSymbolMapEx outVariableMap
   !@universalPropertyAndRoutineMapForContext outUniversalMap
 {
   outVariableMap = .emptyMap
@@ -184,7 +184,7 @@ proc getNewTempVariable
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared map @unifiedSymbolMap %selectors {
+shared map @unifiedSymbolMapEx %selectors {
   @unifiedTypeMap-proxy type
   @bool readAccessAllowed
   @objectIR objectIR

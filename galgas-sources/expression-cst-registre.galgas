@@ -75,7 +75,7 @@ override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGr
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @registerConstantExpressionAST analyzeExpressionNew
+override method @registerConstantExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -123,7 +123,7 @@ override method @registerConstantExpressionAST analyzeExpressionNew
       ?let @uint fieldBitCount
     ]
   #--- Analyze expression
-    [expression analyzeExpressionNew
+    [expression analyzeExpression
       !self:inSelfType
       !inGuard:inGuard
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph

@@ -96,6 +96,7 @@ void routine_codeGeneration (const class GALGAS_string constinArgument0,
                              const class GALGAS_staticlistValues_5F_listMap constinArgument9,
                              const class GALGAS_stringset constinArgument10,
                              const class GALGAS_string constinArgument11,
+                             const class GALGAS_targetParameters constinArgument12,
                              class C_Compiler * inCompiler
                              COMMA_LOCATION_ARGS) ;
 
@@ -117,6 +118,7 @@ void routine_generateCodeFiles (const class GALGAS_string constinArgument0,
                                 const class GALGAS_staticlistValues_5F_listMap constinArgument9,
                                 const class GALGAS_stringset constinArgument10,
                                 const class GALGAS_string constinArgument11,
+                                const class GALGAS_targetParameters constinArgument12,
                                 class C_Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
 
@@ -215,6 +217,13 @@ extern const char * gWrapperFileContent_61_targetTemplates ;
 extern const char * gWrapperFileContent_62_targetTemplates ;
 extern const char * gWrapperFileContent_63_targetTemplates ;
 extern const char * gWrapperFileContent_64_targetTemplates ;
+extern const char * gWrapperFileContent_65_targetTemplates ;
+extern const char * gWrapperFileContent_66_targetTemplates ;
+extern const char * gWrapperFileContent_67_targetTemplates ;
+extern const char * gWrapperFileContent_68_targetTemplates ;
+extern const char * gWrapperFileContent_69_targetTemplates ;
+extern const char * gWrapperFileContent_70_targetTemplates ;
+extern const char * gWrapperFileContent_71_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -286,6 +295,13 @@ extern const cRegularFileWrapper gWrapperFile_61_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_62_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_63_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_64_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_65_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_66_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_67_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_68_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_69_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_70_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_71_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

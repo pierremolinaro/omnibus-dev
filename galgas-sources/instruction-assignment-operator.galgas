@@ -122,7 +122,7 @@ override method @varOperatorAssignInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -149,7 +149,7 @@ override method @varOperatorAssignInstructionAST analyze
     error [mAssignmentTargetAST mIdentifier] : "invalid assignment target" : targetObject
   end
 #--- Analyze source expression
-  [mSourceExpression analyzeExpressionNew
+  [mSourceExpression analyzeExpression
     !self:inSelfType
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
