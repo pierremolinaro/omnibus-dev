@@ -1,5 +1,6 @@
 //--- Python tool list
-  :"../../py-toolpath.txt" -> "sources/toolpath.py",
+PYTHON_UTILITIES:
+   "../../py-toolpath.txt" -> "sources/toolpath.py",
    "../../py-makefile.txt" -> "sources/makefile.py",
    "../../py-check-stacks.txt" -> "sources/check-stacks.py",
    "../../py-plm.txt" -> "sources/plm.py",
@@ -9,39 +10,70 @@
    "../../py-objsize.txt" -> "objsize.py",
    "../py-run.txt" -> "run.py"
 //--- Python build script
-  :"../py-build.txt"
+PYTHON_BUILD:
+   "../py-build.txt"
 //--- Linker script
-  :"../ld-linker.txt"
+LINKER_SCRIPT:
+  "../ld-linker.txt"
 // Panic code type, panic line type, panic generation file
-  :$int32, $uint32, "../target-panic.ll"
+PANIC:
+  $int32 ; $uint32 ; "../target-panic.ll"
 // Unsigned integer type
-  :$uint32
+UINT_TYPE:
+  $uint32
 // Pointer bit count
-  :32
+POINTER_BIT_COUNT:
+  32
 // System stack size (in byte count)
-  :1024
-// Stacked registers bytes count (Cortex M4 saves 8 regs in user stack on interrupt)
-  :32 
-// as_svc_handler saves 3 registers on system stack
-  :12
-// Section invocation scheme, saves 2 registers on system stack
-  :"r12direct", 8
+SYSTEM_STACK_SIZE:
+  1024
+// Service implementation
+SERVICE:
+  "service-dispatcher-entry.s" ;
+  "service-dispatcher-header.s" ;
+  "service-entry.s" ;
+  12 // as_svc_handler saves 3 registers on system stack
+// Section invocation
+SECTION:
+  "r12direct-section-dispatcher-code.s" ;
+  "r12direct-section-dispatcher-entry.s" ;
+  "r12direct-section-dispatcher-header.s" ;
+  "r12direct-section-invocation.s" ;
+  8 // saves 2 registers on system stack
 //--- C Source files
-  :"../c-cortex-m4-context.c",
-   "../../c-real-time-kernel.c",
-   "../c-countTrainingZeros.c"
+C_FILES:
+  "../c-cortex-m4-context.c",
+  "../../c-real-time-kernel.c",
+  "../c-countTrainingZeros.c"
 //--- Assembler Source files
-  :"s-interrupt-vectors.s",
-   "s-reset-handler.s",
-   "s-svc-handler.s"
+S_FILES:
+  "s-interrupt-vectors.s",
+  "s-reset-handler.s",
+  "s-svc-handler.s"
 //--- LLVM Source files
-  :"../ll-cortex-m4.ll",
-   "../../ll-clear-bss.ll",
-   "../../ll-copy-data-section.ll",
-   "../../ll-configuration-on-boot.ll",
-   "../../ll-create-task.ll"
+LL_FILES:
+  "../ll-cortex-m4.ll",
+  "../../ll-clear-bss.ll",
+  "../../ll-copy-data-section.ll",
+  "../../ll-configuration-on-boot.ll",
+  "../../ll-create-task.ll"
+//--- PLM included files
+PLM_FILES:
+  "../plm-registers-mk20dx256.plm",
+  "../plm-teensy-3-1-boot.plm",
+  "../plm-teensy-3-1-xtr.plm",
+  "../plm-teensy-3-1-digital-io.plm",
+  "../plm-teensy-3-1-lcd.plm",
+  "../plm-teensy-3-1-panic.plm",
+  "../../plm-semaphore.plm"
+//--- Interrupt handler
+INTERRUPT_HANDLER:
+  "../xtr-interrupt-handler.s" ;
+  "../undefined-interrupt.s" ;
+  32 // Cortex M4 saves 8 regs in user stack on interrupt
 //--- Interrupts
- :NMI -> 2,
+INTERRUPTS:
+  NMI -> 2,
   MemManage -> 4,
   BusFault -> 5,
   UsageFault -> 6,
@@ -117,11 +149,3 @@
   pinDetectPortD -> 106,
   pinDetectPortE -> 107,
   softwareInterrupt -> 110
-//--- PLM included files (with their ".plm" extension)
- :"../plm-registers-mk20dx256.plm",
-  "../plm-teensy-3-1-boot.plm",
-  "../plm-teensy-3-1-xtr.plm",
-  "../plm-teensy-3-1-digital-io.plm",
-  "../plm-teensy-3-1-lcd.plm",
-  "../plm-teensy-3-1-panic.plm",
-  "../../plm-semaphore.plm"

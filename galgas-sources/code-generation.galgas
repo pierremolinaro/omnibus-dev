@@ -81,7 +81,6 @@ proc codeGeneration
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
-  ?sectionImplementation:let @string inSectionInvocationScheme
   ?targetParameters:let @targetParameters inTargetParameters
 {
   let homeDir = @string.homeDirectory + "/plm-products/"
@@ -111,7 +110,6 @@ proc codeGeneration
     !interrupts:inAvailableInterruptMap
     !staticlistValues:inStaticListValueMap
     !sourceFileSet:inSourceFileAbsolutePathSet
-    !sectionImplementation:inSectionInvocationScheme
     !targetParameters:inTargetParameters
   )
 }
@@ -139,7 +137,6 @@ private proc generateCodeFiles
   ?interrupts:let @availableInterruptMap inAvailableInterruptMap
   ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
   ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
-  ?sectionImplementation:let @string inSectionInvocationScheme
   ?targetParameters:let @targetParameters inTargetParameters
 {
   @generationAdds generationAdds = .default
@@ -220,11 +217,11 @@ private proc generateCodeFiles
 #----------------------------------------- Interrupts
   let undefinedInterruptString = getTargetTextFile (
     !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/undefined-interrupt.s"
+    !from:inTargetName.string + "/" + inTargetParameters.mUndefinedInterruptHandler
   )
   let XTRInterruptHandlerString = getTargetTextFile (
     !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/xtr-interrupt-handler.s"
+    !from:inTargetName.string + "/" + inTargetParameters.mXtrInterruptHandler
   )
   [inIntermediateCodeStruct.mInterruptMapIR interruptCodeGeneration
     !?llvmCode
@@ -272,12 +269,13 @@ private proc generateCodeFiles
     !inTargetName.string
     !?asCode
     !primitiveAndServiceList
+    !targetParameters:inTargetParameters
   )
 #----------------------------------------- Section, safe dispatcher
   generateSectionAndSafeDispatcher (
     !inCurrentDirectory
     !inTargetName.string
-    !inSectionInvocationScheme
+    !targetParameters:inTargetParameters
     !?asCode
     !sectionAndSafeList
   )

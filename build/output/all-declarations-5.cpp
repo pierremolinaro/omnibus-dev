@@ -25,7 +25,7 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 static const char * gNonTerminalNames_plm_target_grammar [14] = {
-  "<configuration>",// Index 0
+  "<key>",// Index 0
   "<configuration_start_symbol>",// Index 1
   "<interruptConfigList>",// Index 2
   "<select_plm_5F_target_5F_specific_5F_syntax_0>",// Index 3
@@ -59,327 +59,399 @@ static const char * gNonTerminalNames_plm_target_grammar [14] = {
 
 static const int16_t gActionTable_plm_target_grammar [] = {
 // State S0 (index = 0)
-  C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (1)
+  C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
 // State S1 (index = 3)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (7)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (4)
+, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (4)
 , END
-// State S2 (index = 8)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (6)
+// State S2 (index = 6)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (3)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (5)
 , END
 // State S3 (index = 11)
 , C_Lexique_plm_5F_lexique::kToken_, ACCEPT
 , END
 // State S4 (index = 14)
-, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (7)
-, END
-// State S5 (index = 17)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (8)
-, END
-// State S6 (index = 20)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (9)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (3)
-, END
-// State S7 (index = 25)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (11)
-, END
-// State S8 (index = 28)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (12)
-, END
-// State S9 (index = 31)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (13)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (5)
-, END
-// State S10 (index = 36)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (0)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, REDUCE (0)
+, C_Lexique_plm_5F_lexique::kToken__24_type, REDUCE (0)
+, C_Lexique_plm_5F_lexique::kToken_integer, REDUCE (0)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (0)
 , END
-// State S11 (index = 39)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (9)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (15)
+// State S5 (index = 25)
+, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (7)
 , END
-// State S12 (index = 44)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (17)
+// State S6 (index = 28)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S13 (index = 47)
+// State S7 (index = 31)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (9)
+, END
+// State S8 (index = 34)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (10)
+, END
+// State S9 (index = 37)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (5)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (11)
+, END
+// State S10 (index = 42)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S11 (index = 45)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (14)
+, END
+// State S12 (index = 48)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (4)
+, END
+// State S13 (index = 51)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (15)
+, END
+// State S14 (index = 54)
+, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (16)
+, END
+// State S15 (index = 57)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S16 (index = 60)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (18)
 , END
-// State S14 (index = 50)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (4)
+// State S17 (index = 63)
+, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (19)
 , END
-// State S15 (index = 53)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (19)
+// State S18 (index = 66)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (5)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (11)
 , END
-// State S16 (index = 56)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (8)
+// State S19 (index = 71)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (21)
 , END
-// State S17 (index = 59)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (20)
+// State S20 (index = 74)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (6)
 , END
-// State S18 (index = 62)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (13)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (5)
+// State S21 (index = 77)
+, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (22)
 , END
-// State S19 (index = 67)
-, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (22)
+// State S22 (index = 80)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (23)
 , END
-// State S20 (index = 70)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (23)
-, END
-// State S21 (index = 73)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (6)
-, END
-// State S22 (index = 76)
+// State S23 (index = 83)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (24)
 , END
-// State S23 (index = 79)
-, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (25)
+// State S24 (index = 86)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S24 (index = 82)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (9)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (15)
+// State S25 (index = 89)
+, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (26)
 , END
-// State S25 (index = 87)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (27)
+// State S26 (index = 92)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S26 (index = 90)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (10)
+// State S27 (index = 95)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (28)
 , END
-// State S27 (index = 93)
-, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (28)
+// State S28 (index = 98)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S28 (index = 96)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (29)
+// State S29 (index = 101)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (30)
 , END
-// State S29 (index = 99)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (30)
+// State S30 (index = 104)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S30 (index = 102)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (31)
+// State S31 (index = 107)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (32)
 , END
-// State S31 (index = 105)
-, C_Lexique_plm_5F_lexique::kToken__24_type, SHIFT (32)
+// State S32 (index = 110)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (33)
 , END
-// State S32 (index = 108)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (33)
+// State S33 (index = 113)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (34)
 , END
-// State S33 (index = 111)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (34)
+// State S34 (index = 116)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (35)
 , END
-// State S34 (index = 114)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (35)
+// State S35 (index = 119)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (36)
 , END
-// State S35 (index = 117)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (36)
+// State S36 (index = 122)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (37)
 , END
-// State S36 (index = 120)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (37)
-, END
-// State S37 (index = 123)
+// State S37 (index = 125)
 , C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (38)
 , END
-// State S38 (index = 126)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (39)
+// State S38 (index = 128)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S39 (index = 129)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (40)
+// State S39 (index = 131)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (40)
 , END
-// State S40 (index = 132)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (41)
+// State S40 (index = 134)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (41)
 , END
-// State S41 (index = 135)
+// State S41 (index = 137)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (42)
 , END
-// State S42 (index = 138)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (43)
+// State S42 (index = 140)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (43)
 , END
-// State S43 (index = 141)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (44)
+// State S43 (index = 143)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (44)
 , END
-// State S44 (index = 144)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (45)
+// State S44 (index = 146)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (45)
 , END
-// State S45 (index = 147)
+// State S45 (index = 149)
 , C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (46)
 , END
-// State S46 (index = 150)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (11)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (47)
+// State S46 (index = 152)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (47)
 , END
 // State S47 (index = 155)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (49)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (48)
 , END
 // State S48 (index = 158)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (50)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
 // State S49 (index = 161)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (11)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (47)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (50)
 , END
-// State S50 (index = 166)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (52)
+// State S50 (index = 164)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (7)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (51)
 , END
 // State S51 (index = 169)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (12)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (53)
 , END
 // State S52 (index = 172)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (13)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (53)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S53 (index = 177)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (55)
+// State S53 (index = 175)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (7)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (51)
 , END
 // State S54 (index = 180)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (56)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (56)
 , END
 // State S55 (index = 183)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (13)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (53)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (8)
 , END
-// State S56 (index = 188)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (58)
+// State S56 (index = 186)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (9)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (57)
 , END
 // State S57 (index = 191)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (14)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (59)
 , END
 // State S58 (index = 194)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (15)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (59)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S59 (index = 199)
-, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (61)
+// State S59 (index = 197)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (9)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (57)
 , END
 // State S60 (index = 202)
-, C_Lexique_plm_5F_lexique::kToken__3A_, SHIFT (62)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (62)
 , END
 // State S61 (index = 205)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (15)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (59)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (10)
 , END
-// State S62 (index = 210)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (17)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (65)
+// State S62 (index = 208)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (11)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (63)
 , END
-// State S63 (index = 215)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (1)
+// State S63 (index = 213)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (65)
 , END
-// State S64 (index = 218)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (16)
+// State S64 (index = 216)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
 , END
-// State S65 (index = 221)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (21)
-, C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (21)
-, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (67)
+// State S65 (index = 219)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (11)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (63)
 , END
-// State S66 (index = 228)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (2)
+// State S66 (index = 224)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (13)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (68)
 , END
-// State S67 (index = 231)
-, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (69)
+// State S67 (index = 229)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (12)
 , END
-// State S68 (index = 234)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (19)
+// State S68 (index = 232)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (15)
 , C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (70)
 , END
-// State S69 (index = 239)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (22)
+// State S69 (index = 237)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S70 (index = 240)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (73)
+, END
+// State S71 (index = 243)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (14)
+, END
+// State S72 (index = 246)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (74)
+, END
+// State S73 (index = 249)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (15)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (70)
+, END
+// State S74 (index = 254)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (76)
+, END
+// State S75 (index = 257)
+, C_Lexique_plm_5F_lexique::kToken_identifier, REDUCE (16)
+, END
+// State S76 (index = 260)
+, C_Lexique_plm_5F_lexique::kToken__22_string_22_, SHIFT (77)
+, END
+// State S77 (index = 263)
+, C_Lexique_plm_5F_lexique::kToken__3B_, SHIFT (78)
+, END
+// State S78 (index = 266)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (79)
+, END
+// State S79 (index = 269)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (1)
+, END
+// State S80 (index = 272)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (82)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (17)
+, END
+// State S81 (index = 277)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (1)
+, END
+// State S82 (index = 280)
+, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (84)
+, C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (21)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (21)
+, END
+// State S83 (index = 287)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (2)
+, END
+// State S84 (index = 290)
+, C_Lexique_plm_5F_lexique::kToken_integer, SHIFT (86)
+, END
+// State S85 (index = 293)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (87)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (19)
+, END
+// State S86 (index = 298)
 , C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (22)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (22)
 , END
-// State S70 (index = 244)
-, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (72)
+// State S87 (index = 303)
+, C_Lexique_plm_5F_lexique::kToken_identifier, SHIFT (89)
 , END
-// State S71 (index = 247)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (18)
+// State S88 (index = 306)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (18)
 , END
-// State S72 (index = 250)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (21)
+// State S89 (index = 309)
+, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (84)
 , C_Lexique_plm_5F_lexique::kToken__2C_, REDUCE (21)
-, C_Lexique_plm_5F_lexique::kToken__2D__3E_, SHIFT (67)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (21)
 , END
-// State S73 (index = 257)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (19)
-, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (70)
+// State S90 (index = 316)
+, C_Lexique_plm_5F_lexique::kToken__2C_, SHIFT (87)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (19)
 , END
-// State S74 (index = 262)
-, C_Lexique_plm_5F_lexique::kToken__3A_, REDUCE (20)
+// State S91 (index = 321)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (20)
 , END} ;
 
-static const uint32_t gActionTableIndex_plm_target_grammar [75] = {
+static const uint32_t gActionTableIndex_plm_target_grammar [92] = {
   0  // S0
 , 3  // S1
-, 8  // S2
+, 6  // S2
 , 11  // S3
 , 14  // S4
-, 17  // S5
-, 20  // S6
-, 25  // S7
-, 28  // S8
-, 31  // S9
-, 36  // S10
-, 39  // S11
-, 44  // S12
-, 47  // S13
-, 50  // S14
-, 53  // S15
-, 56  // S16
-, 59  // S17
-, 62  // S18
-, 67  // S19
-, 70  // S20
-, 73  // S21
-, 76  // S22
-, 79  // S23
-, 82  // S24
-, 87  // S25
-, 90  // S26
-, 93  // S27
-, 96  // S28
-, 99  // S29
-, 102  // S30
-, 105  // S31
-, 108  // S32
-, 111  // S33
-, 114  // S34
-, 117  // S35
-, 120  // S36
-, 123  // S37
-, 126  // S38
-, 129  // S39
-, 132  // S40
-, 135  // S41
-, 138  // S42
-, 141  // S43
-, 144  // S44
-, 147  // S45
-, 150  // S46
+, 25  // S5
+, 28  // S6
+, 31  // S7
+, 34  // S8
+, 37  // S9
+, 42  // S10
+, 45  // S11
+, 48  // S12
+, 51  // S13
+, 54  // S14
+, 57  // S15
+, 60  // S16
+, 63  // S17
+, 66  // S18
+, 71  // S19
+, 74  // S20
+, 77  // S21
+, 80  // S22
+, 83  // S23
+, 86  // S24
+, 89  // S25
+, 92  // S26
+, 95  // S27
+, 98  // S28
+, 101  // S29
+, 104  // S30
+, 107  // S31
+, 110  // S32
+, 113  // S33
+, 116  // S34
+, 119  // S35
+, 122  // S36
+, 125  // S37
+, 128  // S38
+, 131  // S39
+, 134  // S40
+, 137  // S41
+, 140  // S42
+, 143  // S43
+, 146  // S44
+, 149  // S45
+, 152  // S46
 , 155  // S47
 , 158  // S48
 , 161  // S49
-, 166  // S50
+, 164  // S50
 , 169  // S51
 , 172  // S52
-, 177  // S53
+, 175  // S53
 , 180  // S54
 , 183  // S55
-, 188  // S56
+, 186  // S56
 , 191  // S57
 , 194  // S58
-, 199  // S59
+, 197  // S59
 , 202  // S60
 , 205  // S61
-, 210  // S62
-, 215  // S63
-, 218  // S64
-, 221  // S65
-, 228  // S66
-, 231  // S67
-, 234  // S68
-, 239  // S69
-, 244  // S70
-, 247  // S71
-, 250  // S72
-, 257  // S73
-, 262  // S74
+, 208  // S62
+, 213  // S63
+, 216  // S64
+, 219  // S65
+, 224  // S66
+, 229  // S67
+, 232  // S68
+, 237  // S69
+, 240  // S70
+, 243  // S71
+, 246  // S72
+, 249  // S73
+, 254  // S74
+, 257  // S75
+, 260  // S76
+, 263  // S77
+, 266  // S78
+, 269  // S79
+, 272  // S80
+, 277  // S81
+, 280  // S82
+, 287  // S83
+, 290  // S84
+, 293  // S85
+, 298  // S86
+, 303  // S87
+, 306  // S88
+, 309  // S89
+, 316  // S90
+, 321  // S91
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -394,62 +466,93 @@ static const uint32_t gActionTableIndex_plm_target_grammar [75] = {
 static const int16_t gSuccessorTable_plm_target_grammar_0 [5] = {0, 2,
   1, 3, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_1 [3] = {5, 5, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_2 [3] = {3, 6, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_6 [3] = {3, 10, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_6 [3] = {0, 8, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_9 [3] = {4, 14, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_9 [3] = {4, 12, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_11 [3] = {6, 16, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_10 [3] = {0, 13, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_18 [3] = {4, 21, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_15 [3] = {0, 17, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_24 [3] = {6, 26, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_18 [3] = {4, 20, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_46 [3] = {7, 48, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_24 [3] = {0, 25, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_49 [3] = {7, 51, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_26 [3] = {0, 27, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_52 [3] = {8, 54, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_28 [3] = {0, 29, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_55 [3] = {8, 57, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_30 [3] = {0, 31, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_58 [3] = {9, 60, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_38 [3] = {0, 39, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_60 [3] = {2, 63, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_48 [3] = {0, 49, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_61 [3] = {9, 64, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_50 [3] = {5, 52, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_62 [3] = {10, 66, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_52 [3] = {0, 54, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_65 [3] = {12, 68, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_53 [3] = {5, 55, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_68 [3] = {11, 71, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_56 [3] = {6, 58, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_72 [3] = {12, 73, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_58 [3] = {0, 60, -1} ;
 
-static const int16_t gSuccessorTable_plm_target_grammar_73 [3] = {11, 74, -1} ;
+static const int16_t gSuccessorTable_plm_target_grammar_59 [3] = {6, 61, -1} ;
 
-static const int16_t * gSuccessorTable_plm_target_grammar [75] = {
-gSuccessorTable_plm_target_grammar_0, gSuccessorTable_plm_target_grammar_1, NULL, NULL, 
+static const int16_t gSuccessorTable_plm_target_grammar_62 [3] = {7, 64, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_64 [3] = {0, 66, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_65 [3] = {7, 67, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_66 [3] = {8, 69, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_68 [3] = {9, 71, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_69 [3] = {0, 72, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_73 [3] = {9, 75, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_79 [5] = {0, 80,
+  2, 81, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_80 [3] = {10, 83, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_82 [3] = {12, 85, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_85 [3] = {11, 88, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_89 [3] = {12, 90, -1} ;
+
+static const int16_t gSuccessorTable_plm_target_grammar_90 [3] = {11, 91, -1} ;
+
+static const int16_t * gSuccessorTable_plm_target_grammar [92] = {
+gSuccessorTable_plm_target_grammar_0, NULL, gSuccessorTable_plm_target_grammar_2, NULL, 
   NULL, NULL, gSuccessorTable_plm_target_grammar_6, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_9, NULL, gSuccessorTable_plm_target_grammar_11, 
-  NULL, NULL, NULL, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_9, gSuccessorTable_plm_target_grammar_10, NULL, 
+  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_15, 
   NULL, NULL, gSuccessorTable_plm_target_grammar_18, NULL, 
   NULL, NULL, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_24, NULL, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_24, NULL, gSuccessorTable_plm_target_grammar_26, NULL, 
+  gSuccessorTable_plm_target_grammar_28, NULL, gSuccessorTable_plm_target_grammar_30, NULL, 
+  NULL, NULL, NULL, NULL, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_38, NULL, 
   NULL, NULL, NULL, NULL, 
   NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_46, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_49, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_52, NULL, NULL, gSuccessorTable_plm_target_grammar_55, 
-  NULL, NULL, gSuccessorTable_plm_target_grammar_58, NULL, 
-  gSuccessorTable_plm_target_grammar_60, gSuccessorTable_plm_target_grammar_61, gSuccessorTable_plm_target_grammar_62, NULL, 
-  NULL, gSuccessorTable_plm_target_grammar_65, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_68, NULL, NULL, NULL, 
-  gSuccessorTable_plm_target_grammar_72, gSuccessorTable_plm_target_grammar_73, NULL} ;
+  gSuccessorTable_plm_target_grammar_48, NULL, gSuccessorTable_plm_target_grammar_50, NULL, 
+  gSuccessorTable_plm_target_grammar_52, gSuccessorTable_plm_target_grammar_53, NULL, NULL, 
+  gSuccessorTable_plm_target_grammar_56, NULL, gSuccessorTable_plm_target_grammar_58, gSuccessorTable_plm_target_grammar_59, 
+  NULL, NULL, gSuccessorTable_plm_target_grammar_62, NULL, 
+  gSuccessorTable_plm_target_grammar_64, gSuccessorTable_plm_target_grammar_65, gSuccessorTable_plm_target_grammar_66, NULL, 
+  gSuccessorTable_plm_target_grammar_68, gSuccessorTable_plm_target_grammar_69, NULL, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_73, NULL, NULL, 
+  NULL, NULL, NULL, gSuccessorTable_plm_target_grammar_79, 
+  gSuccessorTable_plm_target_grammar_80, NULL, gSuccessorTable_plm_target_grammar_82, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_85, NULL, NULL, 
+  NULL, gSuccessorTable_plm_target_grammar_89, gSuccessorTable_plm_target_grammar_90, NULL} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
@@ -458,21 +561,21 @@ gSuccessorTable_plm_target_grammar_0, gSuccessorTable_plm_target_grammar_1, NULL
 //---------------------------------------------------------------------------------------------------------------------*
 
 static const int16_t gProductionsTable_plm_target_grammar [24 * 2] = {
-  1, 3,
-  0, 36,
+  0, 2,
+  1, 54,
   2, 2,
   3, 0,
-  3, 2,
+  3, 4,
   4, 0,
-  4, 3,
+  4, 5,
   5, 0,
-  5, 4,
+  5, 3,
   6, 0,
-  6, 5,
+  6, 3,
   7, 0,
   7, 3,
   8, 0,
-  8, 3,
+  8, 2,
   9, 0,
   9, 3,
   10, 0,
@@ -486,14 +589,14 @@ static const int16_t gProductionsTable_plm_target_grammar [24 * 2] = {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
-//                                    'configuration' non terminal implementation                                       
+//                                         'key' non terminal implementation                                            
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cGrammar_plm_5F_target_5F_grammar::nt_configuration_parse (C_Lexique_plm_5F_lexique * inLexique) {
+void cGrammar_plm_5F_target_5F_grammar::nt_key_parse (C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
-  case 1 :
-      rule_plm_5F_target_5F_specific_5F_syntax_configuration_i1_parse(inLexique) ;
+  case 0 :
+      rule_plm_5F_target_5F_specific_5F_syntax_key_i0_parse(inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -501,11 +604,11 @@ void cGrammar_plm_5F_target_5F_grammar::nt_configuration_parse (C_Lexique_plm_5F
   }
 }
 
-void cGrammar_plm_5F_target_5F_grammar::nt_configuration_ (GALGAS_ast &  parameter_1,
+void cGrammar_plm_5F_target_5F_grammar::nt_key_ (const GALGAS_string  parameter_1,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
-  case 1 :
-      rule_plm_5F_target_5F_specific_5F_syntax_configuration_i1_(parameter_1, inLexique) ;
+  case 0 :
+      rule_plm_5F_target_5F_specific_5F_syntax_key_i0_(parameter_1, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -520,8 +623,8 @@ void cGrammar_plm_5F_target_5F_grammar::nt_configuration_ (GALGAS_ast &  paramet
 
 void cGrammar_plm_5F_target_5F_grammar::nt_configuration_5F_start_5F_symbol_parse (C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
-  case 0 :
-      rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i0_parse(inLexique) ;
+  case 1 :
+      rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i1_parse(inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -534,8 +637,8 @@ void cGrammar_plm_5F_target_5F_grammar::nt_configuration_5F_start_5F_symbol_ (GA
                                 GALGAS_location &  parameter_3,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
-  case 0 :
-      rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i0_(parameter_1, parameter_2, parameter_3, inLexique) ;
+  case 1 :
+      rule_plm_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i1_(parameter_1, parameter_2, parameter_3, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -792,10 +895,18 @@ mProperty_mSystemStackSize (),
 mProperty_mStackedUserRegisterOnInterruptByteSize (),
 mProperty_mServicePushedRegisterByteSize (),
 mProperty_mSectionPushedRegisterByteSize (),
-mProperty_mSectionInvocationScheme (),
+mProperty_mSectionDispatcherCode (),
+mProperty_mSectionDispatcherEntry (),
+mProperty_mSectionDispatcherHeader (),
+mProperty_mSectionDispatcherInvocation (),
 mProperty_m_5F_C_5F_definitionFiles (),
 mProperty_m_5F_S_5F_definitionFiles (),
-mProperty_m_5F_LL_5F_definitionFiles () {
+mProperty_m_5F_LL_5F_definitionFiles (),
+mProperty_mXtrInterruptHandler (),
+mProperty_mUndefinedInterruptHandler (),
+mProperty_mServiceDispatcherEntry (),
+mProperty_mServiceDispatcherHeader (),
+mProperty_mServiceEntry () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -815,9 +926,17 @@ GALGAS_targetParameters::GALGAS_targetParameters (const GALGAS__32_lstringlist &
                                                   const GALGAS_lbigint & inOperand7,
                                                   const GALGAS_lbigint & inOperand8,
                                                   const GALGAS_lstring & inOperand9,
-                                                  const GALGAS_lstringlist & inOperand10,
-                                                  const GALGAS_lstringlist & inOperand11,
-                                                  const GALGAS_lstringlist & inOperand12) :
+                                                  const GALGAS_lstring & inOperand10,
+                                                  const GALGAS_lstring & inOperand11,
+                                                  const GALGAS_lstring & inOperand12,
+                                                  const GALGAS_lstringlist & inOperand13,
+                                                  const GALGAS_lstringlist & inOperand14,
+                                                  const GALGAS_lstringlist & inOperand15,
+                                                  const GALGAS_lstring & inOperand16,
+                                                  const GALGAS_lstring & inOperand17,
+                                                  const GALGAS_lstring & inOperand18,
+                                                  const GALGAS_lstring & inOperand19,
+                                                  const GALGAS_lstring & inOperand20) :
 mProperty_mPython_5F_utilityToolList (inOperand0),
 mProperty_mPython_5F_build (inOperand1),
 mProperty_mTargetPanic_5F_LL_5F_filePath (inOperand2),
@@ -827,10 +946,18 @@ mProperty_mSystemStackSize (inOperand5),
 mProperty_mStackedUserRegisterOnInterruptByteSize (inOperand6),
 mProperty_mServicePushedRegisterByteSize (inOperand7),
 mProperty_mSectionPushedRegisterByteSize (inOperand8),
-mProperty_mSectionInvocationScheme (inOperand9),
-mProperty_m_5F_C_5F_definitionFiles (inOperand10),
-mProperty_m_5F_S_5F_definitionFiles (inOperand11),
-mProperty_m_5F_LL_5F_definitionFiles (inOperand12) {
+mProperty_mSectionDispatcherCode (inOperand9),
+mProperty_mSectionDispatcherEntry (inOperand10),
+mProperty_mSectionDispatcherHeader (inOperand11),
+mProperty_mSectionDispatcherInvocation (inOperand12),
+mProperty_m_5F_C_5F_definitionFiles (inOperand13),
+mProperty_m_5F_S_5F_definitionFiles (inOperand14),
+mProperty_m_5F_LL_5F_definitionFiles (inOperand15),
+mProperty_mXtrInterruptHandler (inOperand16),
+mProperty_mUndefinedInterruptHandler (inOperand17),
+mProperty_mServiceDispatcherEntry (inOperand18),
+mProperty_mServiceDispatcherHeader (inOperand19),
+mProperty_mServiceEntry (inOperand20) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -846,9 +973,17 @@ GALGAS_targetParameters GALGAS_targetParameters::constructor_default (UNUSED_LOC
                                   GALGAS_lbigint::constructor_default (HERE),
                                   GALGAS_lbigint::constructor_default (HERE),
                                   GALGAS_lstring::constructor_default (HERE),
+                                  GALGAS_lstring::constructor_default (HERE),
+                                  GALGAS_lstring::constructor_default (HERE),
+                                  GALGAS_lstring::constructor_default (HERE),
                                   GALGAS_lstringlist::constructor_emptyList (HERE),
                                   GALGAS_lstringlist::constructor_emptyList (HERE),
-                                  GALGAS_lstringlist::constructor_emptyList (HERE)) ;
+                                  GALGAS_lstringlist::constructor_emptyList (HERE),
+                                  GALGAS_lstring::constructor_default (HERE),
+                                  GALGAS_lstring::constructor_default (HERE),
+                                  GALGAS_lstring::constructor_default (HERE),
+                                  GALGAS_lstring::constructor_default (HERE),
+                                  GALGAS_lstring::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -863,13 +998,21 @@ GALGAS_targetParameters GALGAS_targetParameters::constructor_new (const GALGAS__
                                                                   const GALGAS_lbigint & inOperand7,
                                                                   const GALGAS_lbigint & inOperand8,
                                                                   const GALGAS_lstring & inOperand9,
-                                                                  const GALGAS_lstringlist & inOperand10,
-                                                                  const GALGAS_lstringlist & inOperand11,
-                                                                  const GALGAS_lstringlist & inOperand12 
+                                                                  const GALGAS_lstring & inOperand10,
+                                                                  const GALGAS_lstring & inOperand11,
+                                                                  const GALGAS_lstring & inOperand12,
+                                                                  const GALGAS_lstringlist & inOperand13,
+                                                                  const GALGAS_lstringlist & inOperand14,
+                                                                  const GALGAS_lstringlist & inOperand15,
+                                                                  const GALGAS_lstring & inOperand16,
+                                                                  const GALGAS_lstring & inOperand17,
+                                                                  const GALGAS_lstring & inOperand18,
+                                                                  const GALGAS_lstring & inOperand19,
+                                                                  const GALGAS_lstring & inOperand20 
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_targetParameters result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid ()) {
-    result = GALGAS_targetParameters (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid () && inOperand19.isValid () && inOperand20.isValid ()) {
+    result = GALGAS_targetParameters (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18, inOperand19, inOperand20) ;
   }
   return result ;
 }
@@ -906,7 +1049,16 @@ typeComparisonResult GALGAS_targetParameters::objectCompare (const GALGAS_target
     result = mProperty_mSectionPushedRegisterByteSize.objectCompare (inOperand.mProperty_mSectionPushedRegisterByteSize) ;
   }
   if (result == kOperandEqual) {
-    result = mProperty_mSectionInvocationScheme.objectCompare (inOperand.mProperty_mSectionInvocationScheme) ;
+    result = mProperty_mSectionDispatcherCode.objectCompare (inOperand.mProperty_mSectionDispatcherCode) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mSectionDispatcherEntry.objectCompare (inOperand.mProperty_mSectionDispatcherEntry) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mSectionDispatcherHeader.objectCompare (inOperand.mProperty_mSectionDispatcherHeader) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mSectionDispatcherInvocation.objectCompare (inOperand.mProperty_mSectionDispatcherInvocation) ;
   }
   if (result == kOperandEqual) {
     result = mProperty_m_5F_C_5F_definitionFiles.objectCompare (inOperand.mProperty_m_5F_C_5F_definitionFiles) ;
@@ -917,13 +1069,28 @@ typeComparisonResult GALGAS_targetParameters::objectCompare (const GALGAS_target
   if (result == kOperandEqual) {
     result = mProperty_m_5F_LL_5F_definitionFiles.objectCompare (inOperand.mProperty_m_5F_LL_5F_definitionFiles) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mXtrInterruptHandler.objectCompare (inOperand.mProperty_mXtrInterruptHandler) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mUndefinedInterruptHandler.objectCompare (inOperand.mProperty_mUndefinedInterruptHandler) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mServiceDispatcherEntry.objectCompare (inOperand.mProperty_mServiceDispatcherEntry) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mServiceDispatcherHeader.objectCompare (inOperand.mProperty_mServiceDispatcherHeader) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mServiceEntry.objectCompare (inOperand.mProperty_mServiceEntry) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_targetParameters::isValid (void) const {
-  return mProperty_mPython_5F_utilityToolList.isValid () && mProperty_mPython_5F_build.isValid () && mProperty_mTargetPanic_5F_LL_5F_filePath.isValid () && mProperty_mLinkerScript.isValid () && mProperty_mPointerSize.isValid () && mProperty_mSystemStackSize.isValid () && mProperty_mStackedUserRegisterOnInterruptByteSize.isValid () && mProperty_mServicePushedRegisterByteSize.isValid () && mProperty_mSectionPushedRegisterByteSize.isValid () && mProperty_mSectionInvocationScheme.isValid () && mProperty_m_5F_C_5F_definitionFiles.isValid () && mProperty_m_5F_S_5F_definitionFiles.isValid () && mProperty_m_5F_LL_5F_definitionFiles.isValid () ;
+  return mProperty_mPython_5F_utilityToolList.isValid () && mProperty_mPython_5F_build.isValid () && mProperty_mTargetPanic_5F_LL_5F_filePath.isValid () && mProperty_mLinkerScript.isValid () && mProperty_mPointerSize.isValid () && mProperty_mSystemStackSize.isValid () && mProperty_mStackedUserRegisterOnInterruptByteSize.isValid () && mProperty_mServicePushedRegisterByteSize.isValid () && mProperty_mSectionPushedRegisterByteSize.isValid () && mProperty_mSectionDispatcherCode.isValid () && mProperty_mSectionDispatcherEntry.isValid () && mProperty_mSectionDispatcherHeader.isValid () && mProperty_mSectionDispatcherInvocation.isValid () && mProperty_m_5F_C_5F_definitionFiles.isValid () && mProperty_m_5F_S_5F_definitionFiles.isValid () && mProperty_m_5F_LL_5F_definitionFiles.isValid () && mProperty_mXtrInterruptHandler.isValid () && mProperty_mUndefinedInterruptHandler.isValid () && mProperty_mServiceDispatcherEntry.isValid () && mProperty_mServiceDispatcherHeader.isValid () && mProperty_mServiceEntry.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -938,10 +1105,18 @@ void GALGAS_targetParameters::drop (void) {
   mProperty_mStackedUserRegisterOnInterruptByteSize.drop () ;
   mProperty_mServicePushedRegisterByteSize.drop () ;
   mProperty_mSectionPushedRegisterByteSize.drop () ;
-  mProperty_mSectionInvocationScheme.drop () ;
+  mProperty_mSectionDispatcherCode.drop () ;
+  mProperty_mSectionDispatcherEntry.drop () ;
+  mProperty_mSectionDispatcherHeader.drop () ;
+  mProperty_mSectionDispatcherInvocation.drop () ;
   mProperty_m_5F_C_5F_definitionFiles.drop () ;
   mProperty_m_5F_S_5F_definitionFiles.drop () ;
   mProperty_m_5F_LL_5F_definitionFiles.drop () ;
+  mProperty_mXtrInterruptHandler.drop () ;
+  mProperty_mUndefinedInterruptHandler.drop () ;
+  mProperty_mServiceDispatcherEntry.drop () ;
+  mProperty_mServiceDispatcherHeader.drop () ;
+  mProperty_mServiceEntry.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -970,13 +1145,29 @@ void GALGAS_targetParameters::description (C_String & ioString,
     ioString << ", " ;
     mProperty_mSectionPushedRegisterByteSize.description (ioString, inIndentation+1) ;
     ioString << ", " ;
-    mProperty_mSectionInvocationScheme.description (ioString, inIndentation+1) ;
+    mProperty_mSectionDispatcherCode.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mSectionDispatcherEntry.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mSectionDispatcherHeader.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mSectionDispatcherInvocation.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_m_5F_C_5F_definitionFiles.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_m_5F_S_5F_definitionFiles.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_m_5F_LL_5F_definitionFiles.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mXtrInterruptHandler.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mUndefinedInterruptHandler.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mServiceDispatcherEntry.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mServiceDispatcherHeader.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mServiceEntry.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -1037,8 +1228,26 @@ GALGAS_lbigint GALGAS_targetParameters::getter_mSectionPushedRegisterByteSize (U
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_lstring GALGAS_targetParameters::getter_mSectionInvocationScheme (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSectionInvocationScheme ;
+GALGAS_lstring GALGAS_targetParameters::getter_mSectionDispatcherCode (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSectionDispatcherCode ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_targetParameters::getter_mSectionDispatcherEntry (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSectionDispatcherEntry ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_targetParameters::getter_mSectionDispatcherHeader (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSectionDispatcherHeader ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_targetParameters::getter_mSectionDispatcherInvocation (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSectionDispatcherInvocation ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1057,6 +1266,36 @@ GALGAS_lstringlist GALGAS_targetParameters::getter_m_5F_S_5F_definitionFiles (UN
 
 GALGAS_lstringlist GALGAS_targetParameters::getter_m_5F_LL_5F_definitionFiles (UNUSED_LOCATION_ARGS) const {
   return mProperty_m_5F_LL_5F_definitionFiles ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_targetParameters::getter_mXtrInterruptHandler (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mXtrInterruptHandler ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_targetParameters::getter_mUndefinedInterruptHandler (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mUndefinedInterruptHandler ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_targetParameters::getter_mServiceDispatcherEntry (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mServiceDispatcherEntry ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_targetParameters::getter_mServiceDispatcherHeader (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mServiceDispatcherHeader ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring GALGAS_targetParameters::getter_mServiceEntry (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mServiceEntry ;
 }
 
 
@@ -14466,408 +14705,6 @@ GALGAS_guardedCommand GALGAS_guardedCommand::extractObject (const GALGAS_object 
       result = *p ;
     }else{
       inCompiler->castError ("guardedCommand", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_guardedCommandIR_synchronization::cEnumAssociatedValues_guardedCommandIR_synchronization (const GALGAS_bool & inAssociatedValue0,
-                                                                                                                const GALGAS_string & inAssociatedValue1,
-                                                                                                                const GALGAS_string & inAssociatedValue2,
-                                                                                                                const GALGAS_instructionListIR & inAssociatedValue3,
-                                                                                                                const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue4
-                                                                                                                COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2),
-mAssociatedValue3 (inAssociatedValue3),
-mAssociatedValue4 (inAssociatedValue4) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_guardedCommandIR_synchronization::description (C_String & ioString,
-                                                                          const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  mAssociatedValue3.description (ioString, inIndentation) ;
-  mAssociatedValue4.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_guardedCommandIR_synchronization::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_guardedCommandIR_synchronization * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_synchronization *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue4.objectCompare (ptr->mAssociatedValue4) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_guardedCommandIR_booleanGuard::cEnumAssociatedValues_guardedCommandIR_booleanGuard (const GALGAS_bool & inAssociatedValue0,
-                                                                                                          const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                                                          const GALGAS_objectIR & inAssociatedValue2
-                                                                                                          COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_guardedCommandIR_booleanGuard::description (C_String & ioString,
-                                                                       const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_guardedCommandIR_booleanGuard::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_guardedCommandIR_booleanGuard * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_booleanGuard *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-cEnumAssociatedValues_guardedCommandIR_boolAndSync::cEnumAssociatedValues_guardedCommandIR_boolAndSync (const GALGAS_bool & inAssociatedValue0,
-                                                                                                        const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                                                        const GALGAS_objectIR & inAssociatedValue2,
-                                                                                                        const GALGAS_string & inAssociatedValue3,
-                                                                                                        const GALGAS_string & inAssociatedValue4,
-                                                                                                        const GALGAS_instructionListIR & inAssociatedValue5,
-                                                                                                        const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue6
-                                                                                                        COMMA_LOCATION_ARGS) :
-cEnumAssociatedValues (THERE),
-mAssociatedValue0 (inAssociatedValue0),
-mAssociatedValue1 (inAssociatedValue1),
-mAssociatedValue2 (inAssociatedValue2),
-mAssociatedValue3 (inAssociatedValue3),
-mAssociatedValue4 (inAssociatedValue4),
-mAssociatedValue5 (inAssociatedValue5),
-mAssociatedValue6 (inAssociatedValue6) {
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cEnumAssociatedValues_guardedCommandIR_boolAndSync::description (C_String & ioString,
-                                                                      const int32_t inIndentation) const {
-  ioString << "(\n" ;
-  mAssociatedValue0.description (ioString, inIndentation) ;
-  mAssociatedValue1.description (ioString, inIndentation) ;
-  mAssociatedValue2.description (ioString, inIndentation) ;
-  mAssociatedValue3.description (ioString, inIndentation) ;
-  mAssociatedValue4.description (ioString, inIndentation) ;
-  mAssociatedValue5.description (ioString, inIndentation) ;
-  mAssociatedValue6.description (ioString, inIndentation) ;
-  ioString << ")" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cEnumAssociatedValues_guardedCommandIR_boolAndSync::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_guardedCommandIR_boolAndSync * ptr = dynamic_cast<const cEnumAssociatedValues_guardedCommandIR_boolAndSync *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue3.objectCompare (ptr->mAssociatedValue3) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue4.objectCompare (ptr->mAssociatedValue4) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue5.objectCompare (ptr->mAssociatedValue5) ;
-  }
-  if (result == kOperandEqual) {
-    result = mAssociatedValue6.objectCompare (ptr->mAssociatedValue6) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_guardedCommandIR::GALGAS_guardedCommandIR (void) :
-mAssociatedValues (),
-mEnum (kNotBuilt) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_synchronization (const GALGAS_bool & inAssociatedValue0,
-                                                                              const GALGAS_string & inAssociatedValue1,
-                                                                              const GALGAS_string & inAssociatedValue2,
-                                                                              const GALGAS_instructionListIR & inAssociatedValue3,
-                                                                              const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue4
-                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid ()) {
-    result.mEnum = kEnum_synchronization ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_synchronization (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_booleanGuard (const GALGAS_bool & inAssociatedValue0,
-                                                                           const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                           const GALGAS_objectIR & inAssociatedValue2
-                                                                           COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
-    result.mEnum = kEnum_booleanGuard ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_booleanGuard (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_boolAndSync (const GALGAS_bool & inAssociatedValue0,
-                                                                          const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                          const GALGAS_objectIR & inAssociatedValue2,
-                                                                          const GALGAS_string & inAssociatedValue3,
-                                                                          const GALGAS_string & inAssociatedValue4,
-                                                                          const GALGAS_instructionListIR & inAssociatedValue5,
-                                                                          const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue6
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid () && inAssociatedValue6.isValid ()) {
-    result.mEnum = kEnum_boolAndSync ;
-    cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_guardedCommandIR_boolAndSync (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3, inAssociatedValue4, inAssociatedValue5, inAssociatedValue6 COMMA_THERE)) ;
-    result.mAssociatedValues.setPointer (ptr) ;
-    macroDetachSharedObject (ptr) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_guardedCommandIR::method_synchronization (GALGAS_bool & outAssociatedValue0,
-                                                      GALGAS_string & outAssociatedValue1,
-                                                      GALGAS_string & outAssociatedValue2,
-                                                      GALGAS_instructionListIR & outAssociatedValue3,
-                                                      GALGAS_procCallEffectiveParameterListIR & outAssociatedValue4,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_synchronization) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    outAssociatedValue3.drop () ;
-    outAssociatedValue4.drop () ;
-    C_String s ;
-    s << "method @guardedCommandIR synchronization invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_guardedCommandIR_synchronization * ptr = (const cEnumAssociatedValues_guardedCommandIR_synchronization *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-    outAssociatedValue3 = ptr->mAssociatedValue3 ;
-    outAssociatedValue4 = ptr->mAssociatedValue4 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_guardedCommandIR::method_booleanGuard (GALGAS_bool & outAssociatedValue0,
-                                                   GALGAS_instructionListIR & outAssociatedValue1,
-                                                   GALGAS_objectIR & outAssociatedValue2,
-                                                   C_Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_booleanGuard) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    C_String s ;
-    s << "method @guardedCommandIR booleanGuard invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_guardedCommandIR_booleanGuard * ptr = (const cEnumAssociatedValues_guardedCommandIR_booleanGuard *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedValue0,
-                                                  GALGAS_instructionListIR & outAssociatedValue1,
-                                                  GALGAS_objectIR & outAssociatedValue2,
-                                                  GALGAS_string & outAssociatedValue3,
-                                                  GALGAS_string & outAssociatedValue4,
-                                                  GALGAS_instructionListIR & outAssociatedValue5,
-                                                  GALGAS_procCallEffectiveParameterListIR & outAssociatedValue6,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const {
-  if (mEnum != kEnum_boolAndSync) {
-    outAssociatedValue0.drop () ;
-    outAssociatedValue1.drop () ;
-    outAssociatedValue2.drop () ;
-    outAssociatedValue3.drop () ;
-    outAssociatedValue4.drop () ;
-    outAssociatedValue5.drop () ;
-    outAssociatedValue6.drop () ;
-    C_String s ;
-    s << "method @guardedCommandIR boolAndSync invoked with an invalid enum value" ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const cEnumAssociatedValues_guardedCommandIR_boolAndSync * ptr = (const cEnumAssociatedValues_guardedCommandIR_boolAndSync *) unsafePointer () ;
-    outAssociatedValue0 = ptr->mAssociatedValue0 ;
-    outAssociatedValue1 = ptr->mAssociatedValue1 ;
-    outAssociatedValue2 = ptr->mAssociatedValue2 ;
-    outAssociatedValue3 = ptr->mAssociatedValue3 ;
-    outAssociatedValue4 = ptr->mAssociatedValue4 ;
-    outAssociatedValue5 = ptr->mAssociatedValue5 ;
-    outAssociatedValue6 = ptr->mAssociatedValue6 ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static const char * gEnumNameArrayFor_guardedCommandIR [4] = {
-  "(not built)",
-  "synchronization",
-  "booleanGuard",
-  "boolAndSync"
-} ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_guardedCommandIR::getter_isSynchronization (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_synchronization == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_guardedCommandIR::getter_isBooleanGuard (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_booleanGuard == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_guardedCommandIR::getter_isBoolAndSync (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (kNotBuilt != mEnum, kEnum_boolAndSync == mEnum) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_guardedCommandIR::description (C_String & ioString,
-                                           const int32_t inIndentation) const {
-  ioString << "<enum @guardedCommandIR: " << gEnumNameArrayFor_guardedCommandIR [mEnum] ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_guardedCommandIR::objectCompare (const GALGAS_guardedCommandIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               @guardedCommandIR type                                                *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_guardedCommandIR ("guardedCommandIR",
-                                         NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_guardedCommandIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_guardedCommandIR ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_guardedCommandIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_guardedCommandIR (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_guardedCommandIR result ;
-  const GALGAS_guardedCommandIR * p = (const GALGAS_guardedCommandIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_guardedCommandIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("guardedCommandIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
