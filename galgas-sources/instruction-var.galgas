@@ -89,7 +89,7 @@ override method @varInstructionWithAssignmentAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -99,7 +99,7 @@ override method @varInstructionWithAssignmentAST analyze
     else .searchKey {!inContext.mTypeMap !mOptionalTypeName}
   end
 #--- Analyze source expression
-  [mSourceExpression analyzeExpressionNew
+  [mSourceExpression analyzeExpression
     !self:inSelfType
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -163,7 +163,7 @@ override method @varInstructionAST analyze
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList

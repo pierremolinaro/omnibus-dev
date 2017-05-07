@@ -103,7 +103,7 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !mode:isr.mMode
       !globalsAreConstant:false
       !returnTypeName:["" nowhere]
-      ?@unifiedSymbolMap variableMap
+      ?@unifiedSymbolMapEx variableMap
       ?@universalPropertyAndRoutineMapForContext universalMap
     )
   #--- Self type

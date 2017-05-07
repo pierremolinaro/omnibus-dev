@@ -53,7 +53,7 @@ override method @literalBooleanInExpressionAST noteExpressionTypesInPrecedenceGr
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalBooleanInExpressionAST analyzeExpressionNew
+override method @literalBooleanInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph

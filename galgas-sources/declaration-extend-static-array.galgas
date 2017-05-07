@@ -154,7 +154,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           @semanticTemporariesStruct temporaries = .default
           @instructionListIR instructionGenerationList = {}
           @allocaList allocaList = {}
-          [exp analyzeExpressionNew
+          [exp analyzeExpression
             !self:.null
             !inGuard:false
             !routineNameForInvocationGraph:["compiler" nowhere]

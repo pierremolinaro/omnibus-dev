@@ -286,7 +286,7 @@ method @taskVarListAST-element enterInContext
     ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
-  [mVarInitExpression analyzeExpressionNew
+  [mVarInitExpression analyzeExpression
     !self:.null
     !inGuard:false
     !routineNameForInvocationGraph:["compiler" nowhere]

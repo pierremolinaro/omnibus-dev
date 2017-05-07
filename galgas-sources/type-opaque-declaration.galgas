@@ -108,10 +108,10 @@ override method @opaqueTypeDeclaration enterInContext
   @semanticTemporariesStruct temporaries = .default
   variableMapWithConstants (
     !context:ioContext
-    ?@unifiedSymbolMap variableMap
+    ?@unifiedSymbolMapEx variableMap
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
-  [mSizeExpression analyzeExpressionNew
+  [mSizeExpression analyzeExpression
     !self:.null
     !inGuard:false
     !routineNameForInvocationGraph:.new {!mOpaqueTypeName.string + " init" !mOpaqueTypeName.location}

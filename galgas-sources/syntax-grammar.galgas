@@ -55,31 +55,6 @@ syntax plm_target_specific_syntax (plm_lexique) {
 
   #·····················································································································
 
-  rule <import_file> ?!@lstringlist ioImportedFileList {
-    $import$
-    $"string"$ ?let importedFile
-    ioImportedFileList += !importedFile
-    if [importedFile.string pathExtension] != "plm" then
-      error importedFile : "the pah extension should be .plm"
-    end
-  }
-
-  #·····················································································································
-
-  rule <configuration_start_symbol>
-    ?!@ast ioAst
-    !importClauseList:@lstringlist outImportedFileList
-    !endOfSourceFile:@location outEndOfSourceFile
-  {
-    <configuration> !?ioAst
-    outImportedFileList = {}
-    repeat
-    while
-      <import_file> !?outImportedFileList
-    end
-    outEndOfSourceFile = .here
-  }
-
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

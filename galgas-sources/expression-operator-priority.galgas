@@ -13,12 +13,6 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-#  rule <expression> !@expressionAST outExpression {
-#    <expression_12> ?outExpression
-#  }
-
-  #·····················································································································
-
   rule <expression> !@expressionAST outExpression {
     <expression_logical_xor> ?outExpression
     repeat
@@ -423,7 +417,7 @@ abstract method @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticT
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @expressionAST analyzeExpressionNew
+abstract method @expressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool inGuard
   ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
@@ -447,7 +441,7 @@ method @expressionAST analyzeStaticExpression
 {
   @instructionListIR instructionGenerationList = {}
   @allocaList allocaList = {}
-  [self analyzeExpressionNew
+  [self analyzeExpression
     !self:.null
     !inGuard:false
     !routineNameForInvocationGraph:["compiler" nowhere]

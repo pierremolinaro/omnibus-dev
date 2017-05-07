@@ -90,7 +90,7 @@ override method @forInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -134,7 +134,7 @@ override method @forInstructionAST analyze
   ]
 #--- Analyze while expression
   @instructionListIR whileExpression_GenerationList = {}
-  [mWhileExpression analyzeExpressionNew
+  [mWhileExpression analyzeExpression
     !self:inSelfType
     !inGuard:false
     !routineNameForInvocationGraph:inCallerNameForInvocationGraph

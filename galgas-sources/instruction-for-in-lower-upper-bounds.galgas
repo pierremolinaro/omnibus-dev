@@ -84,7 +84,7 @@ override method @forLowerUpperBoundInstructionAST analyze
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
@@ -111,7 +111,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     error mTypeName : "an integer type is required here"
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
   #--- Analyze expressions
-    [mLowerBoundExpression analyzeExpressionNew
+    [mLowerBoundExpression analyzeExpression
       !self:inSelfType
       !inGuard:false
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph
@@ -131,7 +131,7 @@ override method @forLowerUpperBoundInstructionAST analyze
       !mEndOf_lowerBoundExpression_instruction
       ?let lowerBoundExpressionResult
     ]  
-    [mUpperBoundExpression analyzeExpressionNew
+    [mUpperBoundExpression analyzeExpression
       !self:inSelfType
       !inGuard:false
       !routineNameForInvocationGraph:inCallerNameForInvocationGraph

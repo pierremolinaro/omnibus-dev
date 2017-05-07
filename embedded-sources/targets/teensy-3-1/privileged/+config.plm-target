@@ -1,0 +1,127 @@
+//--- Python tool list
+  :"../../py-toolpath.txt" -> "sources/toolpath.py",
+   "../../py-makefile.txt" -> "sources/makefile.py",
+   "../../py-check-stacks.txt" -> "sources/check-stacks.py",
+   "../../py-plm.txt" -> "sources/plm.py",
+   "../../py-build-verbose.txt" -> "build-verbose.py",
+   "../../py-clean.txt" -> "clean.py",
+   "../../py-objdump.txt" -> "objdump.py",
+   "../../py-objsize.txt" -> "objsize.py",
+   "../py-run.txt" -> "run.py"
+//--- Python build script
+  :"../py-build.txt"
+//--- Linker script
+  :"../ld-linker.txt"
+// Panic code type, panic line type, panic generation file
+  :$int32, $uint32, "../target-panic.ll"
+// Unsigned integer type
+  :$uint32
+// Pointer bit count
+  :32
+// System stack size (in byte count)
+  :1024
+// Stacked registers bytes count (Cortex M4 saves 8 regs in user stack on interrupt)
+  :32 
+// as_svc_handler saves 3 registers on system stack
+  :12
+// Section invocation scheme, saves 2 registers on system stack
+  :"r12direct", 8
+//--- C Source files
+  :"../c-cortex-m4-context.c",
+   "../../c-real-time-kernel.c",
+   "../c-countTrainingZeros.c"
+//--- Assembler Source files
+  :"s-interrupt-vectors.s",
+   "s-reset-handler.s",
+   "s-svc-handler.s"
+//--- LLVM Source files
+  :"../ll-cortex-m4.ll",
+   "../../ll-clear-bss.ll",
+   "../../ll-copy-data-section.ll",
+   "../../ll-configuration-on-boot.ll",
+   "../../ll-create-task.ll"
+//--- Interrupts
+ :NMI -> 2,
+  MemManage -> 4,
+  BusFault -> 5,
+  UsageFault -> 6,
+  DebugMonitor -> 12,
+  PendSV -> 14,
+  systick -> 15,
+  DMAChannel0TranfertComplete -> 16,
+  DMAChannel1TranfertComplete -> 17,
+  DMAChannel2TranfertComplete -> 18,
+  DMAChannel3TranfertComplete -> 19,
+  DMAChannel4TranfertComplete -> 20,
+  DMAChannel5TranfertComplete -> 21,
+  DMAChannel6TranfertComplete -> 22,
+  DMAChannel7TranfertComplete -> 23,
+  DMAChannel8TranfertComplete -> 24,
+  DMAChannel9TranfertComplete -> 25,
+  DMAChannel10TranfertComplete -> 26,
+  DMAChannel11TranfertComplete -> 27,
+  DMAChannel12TranfertComplete -> 28,
+  DMAChannel13TranfertComplete -> 29,
+  DMAChannel14TranfertComplete -> 30,
+  DMAChannel15TranfertComplete -> 31,
+  DMAError -> 32,
+  flashMemoryCommandComplete -> 34,
+  flashMemoryReadCollision -> 35,
+  modeController -> 36,
+  LLWU -> 37,
+  WDOGEWM -> 38,
+  I2C0 -> 40,
+  I2C1 -> 41,
+  SPI0 -> 42,
+  SPI1 -> 43,
+  CAN0MessageBuffer -> 45,
+  CAN0BusOff -> 46,
+  CAN0Error -> 47,
+  CAN0TransmitWarning -> 48,
+  CAN0ReceiveWarning -> 49,
+  CAN0WakeUp -> 50,
+  I2S0Transmit -> 51,
+  I2S0Receive -> 52,
+  UART0LON -> 60,
+  UART0Status -> 61,
+  UART0Error -> 62,
+  UART1Status -> 63,
+  UART1Error -> 64,
+  UART2Status -> 65,
+  UART2Error -> 66,
+  ADC0 -> 73,
+  ADC1 -> 74,
+  CMP0 -> 75,
+  CMP1 -> 76,
+  CMP2 -> 77,
+  FMT0 -> 78,
+  FMT1 -> 79,
+  FMT2 -> 80,
+  CMT -> 81,
+  RTCAlarm -> 82,
+  RTCSecond -> 83,
+  PITChannel0 -> 84,
+  PITChannel1 -> 85,
+  PITChannel2 -> 86,
+  PITChannel3 -> 87,
+  PDB -> 88,
+  USBOTG -> 89,
+  USBChargerDetect -> 90,
+  DAC0 -> 97,
+  TSI -> 99,
+  MCG -> 100,
+  lowPowerTimer -> 101,
+  pinDetectPortA -> 103,
+  pinDetectPortB -> 104,
+  pinDetectPortC -> 105,
+  pinDetectPortD -> 106,
+  pinDetectPortE -> 107,
+  softwareInterrupt -> 110
+//--- PLM included files (with their ".plm" extension)
+ :"../plm-registers-mk20dx256.plm",
+  "../plm-teensy-3-1-boot.plm",
+  "../plm-teensy-3-1-xtr.plm",
+  "../plm-teensy-3-1-digital-io.plm",
+  "../plm-teensy-3-1-lcd.plm",
+  "../plm-teensy-3-1-panic.plm",
+  "../../plm-semaphore.plm"

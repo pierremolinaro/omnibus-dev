@@ -251,7 +251,7 @@ method @globalVarDeclarationList-element enterInContext
     ?*
     ?@universalPropertyAndRoutineMapForContext universalMap
   )
-  [mSourceExpression analyzeExpressionNew
+  [mSourceExpression analyzeExpression
      !self:.null
      !inGuard:false
      !routineNameForInvocationGraph:["compiler" nowhere]

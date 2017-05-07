@@ -11,9 +11,9 @@ Dans ce chapitre, nous allons voir comment est définie une cible, en prenant po
 
 Si vous voulez définir votre propre cible, la lecture de ce chapitre est indispensable. 
 
-Le compilateur recherche la cible citée :
+Le compilateur recherche la cible citée~:
 \begin{itemize}
-  \item par défaut, parmi les fichiers embarqués dans le compilateur PLM ;
+  \item par défaut, parmi les fichiers embarqués dans le compilateur PLM~;
   \item si l'option \texttt{-T=$cibles$} est présente dans la ligne de commande, dans les fichiers du répertoire $cibles$.
 \end{itemize}
 
@@ -26,7 +26,7 @@ Pour explorer les fichiers indispensables à la définition d'une cible, il est 
 Une cible est définie par une arborescence de fichiers, soit embarquée dans le compilateur, soit située dans le système de fichiers. On va voir dans cette section comment est configurée une cible dans le système de fichiers, permettant ainsi de créer ses propres cibles. Pour cela, on commence par extraire de l'exécutable du compilateur les cibles qu'il embarque.
 
 \subsection{Liste des cibles embarquées}
-À titre d'information, on peut appeler l'option \texttt{-L} pour obtenir la liste des cibles embarquées :
+À titre d'information, on peut appeler l'option \texttt{-L} pour obtenir la liste des cibles embarquées~:
 \begin{SHELL}
 {\bfseries plm -L}\\
 Embedded targets:\\ 
@@ -35,7 +35,7 @@ Embedded targets:\\
 \end{SHELL}
 
 \subsection{Extraction des cibles embarquées}
-L'option \texttt{-X=cibles} permet d'extraire de l'exécutable du compilateur tous les fichiers de définition des cibles et de les placer dans le répertoire \texttt{cibles}\footnote{Ici, le répertoire destination \texttt{cibles} est un répertoire relatif au répertoire courant, mais un répertoire absolu peut aussi être utilisé.} :
+L'option \texttt{-X=cibles} permet d'extraire de l'exécutable du compilateur tous les fichiers de définition des cibles et de les placer dans le répertoire \texttt{cibles}\footnote{Ici, le répertoire destination \texttt{cibles} est un répertoire relatif au répertoire courant, mais un répertoire absolu peut aussi être utilisé.}~:
 \begin{SHELL}
 {\bfseries plm -X=cibles}\\
 \hspace*{1.2em}cibles/makefile.py\\
@@ -45,13 +45,13 @@ L'option \texttt{-X=cibles} permet d'extraire de l'exécutable du compilateur to
 \end{SHELL}
 
 \subsection{Extraction d'un fichier d'exemple}
-On extrait maintenant un fichier d'exemple \texttt{01-blinkled.plm} pour la cible \texttt{teensy-3-1-it} :
+On extrait maintenant un fichier d'exemple \texttt{01-blinkled.plm} pour la cible \texttt{teensy-3-1-it}~:
 \begin{SHELL}
 \bfseries plm -x=/teensy-3-1-it/01-blinkled.plm
 \end{SHELL}
 
 \subsection{Compilation du fichier exemple}
-Le fichier \texttt{01-blinkled.plm} est écrit dans le répertoire local. Maintenant, pour compiler ce fichier, on peut faire référence aux cibles que l'on vient d'extraire au moyen de l'option \texttt{-T} :
+Le fichier \texttt{01-blinkled.plm} est écrit dans le répertoire local. Maintenant, pour compiler ce fichier, on peut faire référence aux cibles que l'on vient d'extraire au moyen de l'option \texttt{-T}~:
 \begin{SHELL}
 \bfseries plm -T=cibles 01-blinkled.plm
 \end{SHELL}
@@ -59,25 +59,25 @@ Le fichier \texttt{01-blinkled.plm} est écrit dans le répertoire local. Mainte
 
 \subsection{Changement du nom de la cible dans le système de fichiers}
 
-Pour se convaincre que la cible nommée dans le fichier est bien celle située dans le répertoire \texttt{cibles}, nous allons changer son nom. Pour cela, nous devons modifier :
+Pour se convaincre que la cible nommée dans le fichier est bien celle située dans le répertoire \texttt{cibles}, nous allons changer son nom. Pour cela, nous devons modifier~:
 \begin{itemize}
-  \item la référence à la cible dans le fichier \texttt{01-blinkled.plm} ;
+  \item la référence à la cible dans le fichier \texttt{01-blinkled.plm}~;
   \item le nom d'un fichier et d'un répertoire dans le répertoire \texttt{cibles}. 
 \end{itemize}
 
-Commençons par le fichier \texttt{01-blinkled.plm}. Sa première ligne est :
+Commençons par le fichier \texttt{01-blinkled.plm}. Sa première ligne est~:
 
 \begin{PLM}[1]
 target "teensy-3-1"
 \end{PLM}
 
-Cette ligne signifie que la cible s'appelle \texttt{teensy-3-1-it}. Nous allons la renommer en \texttt{myTeensy}. La première ligne du fichier \texttt{01-blinkled.plm} devient donc :
+Cette ligne signifie que la cible s'appelle \texttt{teensy-3-1-it}. Nous allons la renommer en \texttt{myTeensy}. La première ligne du fichier \texttt{01-blinkled.plm} devient donc~:
 
 \begin{PLM}[1]
 target "myTeensy"
 \end{PLM}
 
-Maintenant, si on essaie de compiler le fichier \texttt{01-blinkled.plm}, une erreur se déclenche : la cible \texttt{myTeensy} n'est pas définie. Pour la définir, listons le contenu le répertoire \texttt{cibles} :
+Maintenant, si on essaie de compiler le fichier \texttt{01-blinkled.plm}, une erreur se déclenche~: la cible \texttt{myTeensy} n'est pas définie. Pour la définir, listons le contenu le répertoire \texttt{cibles}~:
 \begin{SHELL}
 {\bfseries ls -1F cibles}\\
 files/\\
@@ -88,18 +88,18 @@ teensy-3-1-it.plm-target\\
 ...
 \end{SHELL}
 
-Le répertoire \texttt{files} et le fichier \texttt{makefile.py} seront présentés plus loin. Chaque cible est définie par un répertoire et un fichier, dont l'extension est \texttt{plm-target}. Nous allons donc effectuer les renommages suivants :
+Le répertoire \texttt{files} et le fichier \texttt{makefile.py} seront présentés plus loin. Chaque cible est définie par un répertoire et un fichier, dont l'extension est \texttt{plm-target}. Nous allons donc effectuer les renommages suivants~:
 \begin{itemize}
-  \item le répertoire \texttt{teensy-3-1-it} est renommé en \texttt{myTeensy} ;
+  \item le répertoire \texttt{teensy-3-1-it} est renommé en \texttt{myTeensy}~;
   \item le fichier \texttt{teensy-3-1-it.plm-target} en \texttt{myTeensy.plm-target}.
 \end{itemize}
 
-À présent, la compilation s'effectue avec succès :
+À présent, la compilation s'effectue avec succès~:
 \begin{SHELL}
 \bfseries plm -T=cibles 01-blinkled.plm
 \end{SHELL}
 
-Si on essaie de compiler en utilisant les cibles embarquées dans le compilateur :
+Si on essaie de compiler en utilisant les cibles embarquées dans le compilateur~:
 \begin{SHELL}
 \bfseries plm 01-blinkled.plm
 \end{SHELL}
@@ -115,9 +115,9 @@ Une erreur se déclenche, la cible \texttt{myTeensy} n'étant pas définie dans 
 
 Nous allons décrire comment est définie une cible dans le système de fichiers. Nous prenons comme exemple la cible \texttt{myTeensy} du répertoire \texttt{cibles} (voir la \refSectionPage{cibleDansSystemeFichiers}).
 
-Pour la cible \texttt{myTeensy} :
+Pour la cible \texttt{myTeensy}~:
 \begin{itemize}
-  \item le fichier \texttt{myTeensy.plm-target} permet de paramétrer l'analyse sémantique ;
+  \item le fichier \texttt{myTeensy.plm-target} permet de paramétrer l'analyse sémantique~;
   \item le répertoire \texttt{myTeensy} permet de configurer la génération de code.
 \end{itemize}
 
@@ -135,7 +135,7 @@ On va explorer successivement le fichier \texttt{myTeensy.plm-target} puis le r�
 
 \subsectionLabel{Le fichier \texttt{myTeensy.plm-target}}{fichierTarget}
 
-Voici le contenu du fichier \texttt{myTeensy.plm-target} :
+Voici le contenu du fichier \texttt{myTeensy.plm-target}~:
 
 \begin{PLM}[1]
 configuration
@@ -190,7 +190,7 @@ Le fichier \texttt{myTeensy.plm-target} contient la directive \plm=configuration
 
 {\bf Section invocation scheme.} Cette chaîne définit le schéma qui est utilisé pour implémenter les appels de section (\refSubsectionPage{schemaAppelSections}).
 
-{\bf Interruption vectors.} La liste de toutes les interruptions, chacune d'elle étant accompagnée de son numéro. Celui-ci est utilisé par lors de la panique, si une interruption se déclenche alors qu'aucune routine de réponse à cette interruption n'est installée.
+{\bf Interruption vectors.} La liste de toutes les interruptions, chacune d'elle étant accompagnée de son numéro. Celui-ci est utilisé lors de la panique, si une interruption se déclenche alors qu'aucune routine de réponse à cette interruption n'est installée.
 
 
 
@@ -201,12 +201,12 @@ Le fichier \texttt{myTeensy.plm-target} contient la directive \plm=configuration
 
 Quand le code d'une tâche appelle une section, celui-ci doit s'effectuer à travers un \emph{system call}\footnote{Quand une section est appelée à partir d'un mode privilégié, l'appel est un simple appel de routine.}.
 
-L'implémentation de cette opération est paramètrable grâce à quatre fichiers assembleurs, placés dans le répertoire \texttt{myTeensy}. Le nom de ces fichiers est préfixé par la chaîne spécifiée dans le champ \emph{Section invocation scheme} de la \plm=configuration= (voir \refSubsectionPage{fichierTarget}), ce qui autorise de disposer de plusieurs implémentations possibles. Pour le schéma nommé \plm="udfcoded"=, ces quatre fichiers sont :
+L'implémentation de cette opération est paramètrable grâce à quatre fichiers assembleurs, placés dans le répertoire \texttt{myTeensy}. Le nom de ces fichiers est préfixé par la chaîne spécifiée dans le champ \emph{Section invocation scheme} de la \plm=configuration= (voir \refSubsectionPage{fichierTarget}), ce qui autorise de disposer de plusieurs implémentations possibles. Pour le schéma nommé \plm="udfcoded"=, ces quatre fichiers sont~:
 \begin{itemize}
-  \item \texttt{udfcoded-section-dispatcher-code.s} : implémentation du code exécuté par l'appel système invoqué par l'appel à une section ;
-  \item \texttt{udfcoded-section-dispatcher-entry.s} : entrée du tableau définissant le nom de la fonction implémentant la section ;
-  \item \texttt{udfcoded-section-dispatcher-header.s} : en-tête du tableau contenant les noms de la fonction implémentant la section ;
-  \item \texttt{udfcoded-section-invocation.s} : implémentation de l'appel à une section. 
+  \item \texttt{udfcoded-section-dispatcher-code.s}~: implémentation du code exécuté par l'appel système invoqué par l'appel à une section~;
+  \item \texttt{udfcoded-section-dispatcher-entry.s}~: entrée du tableau définissant le nom de la fonction implémentant la section~;
+  \item \texttt{udfcoded-section-dispatcher-header.s}~: en-tête du tableau contenant les noms de la fonction implémentant la section~;
+  \item \texttt{udfcoded-section-invocation.s}~: implémentation de l'appel à une section. 
 \end{itemize}
 
 Trois schémas sont proposés, \plm="udfcoded"=, \plm="r12idx"= et \plm="r12direct"=, et sont décrits dans les sections suivantes. Le \refTableauPage{dureeSchemasServices} résume les caractéristiques de chacun. Les durées sont estimées grâce au projet \texttt{04-section-service-duration.plm}. 
@@ -230,7 +230,7 @@ Trois schémas sont proposés, \plm="udfcoded"=, \plm="r12idx"= et \plm="r12dire
 
 Dans ce schéma, l'instruction indéfinie \texttt{UDF} est utilisée. Le code de cette instruction est \texttt{0xDE$xx$}, où $xx$ est une valeur que le Cortex ignore. On utilise ce champ pour coder l'indice du service appelé.
 
-Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{udfcoded-section-invocation.s}. Le contenu de fichier est :
+Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{udfcoded-section-invocation.s}. Le contenu de fichier est~:
 \begin{SHELL}\small
 \hspace*{1.2em}.section  ".text.!USER\_ROUTINE!","ax",\%progbits\\
 \hspace*{1.2em}.global !USER\_ROUTINE!\\
@@ -250,16 +250,16 @@ Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{ud
 \hspace*{1.2em}.fnend
 \end{SHELL}
 
-Trois séquences sont remplacées par le compilateur PLM :
+Trois séquences sont remplacées par le compilateur PLM~:
 \begin{itemize}
-\item \nospace{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur ;
-\item \nospace{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section (inutilisée dans ce shéma) ;
+\item \nospace{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur~;
+\item \nospace{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section (inutilisée dans ce shéma)~;
 \item \nospace{!IDX!}, par l'indice de la section\footnote{Lorsqu'il analyse un projet, PLM numérote les sections qu'il rencontre (à partir de $0$). C'est ce numéro qui remplace la séquence \nospace{!IDX!}.}.
 \end{itemize}
 
 PLM effectue donc cette opération pour chaque section, par ordre croissant de l'indice, et accumule le texte produit dans le fichier assembleur \texttt{src.s}.
 
-Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}, défini par le fichier \texttt{udfcoded-section-dispatcher-code.s} :
+Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}, défini par le fichier \texttt{udfcoded-section-dispatcher-code.s}~:
 
 \begin{SHELL}\small
 \hspace*{1.2em}.section	".text.as\_section\_handler","ax",\%progbits\\
@@ -292,11 +292,11 @@ as\_section\_handler:\\
 
 Ce code va rechercher dans l'instruction \texttt{UDF} la valeur $xx$ de l'octet de poids faible, et l'utilise pour construire l'adresse d'une entrée du tableau \texttt{\_\_udf\_dispatcher\_table}. Cette entrée contient l'adresse de la routine à exécuter.
 
-Remarquer ce code empile deux registres (soit 8 octets) dans la pile système ; il faut s'assurer que cette valeur correspond à la valeur du paramètre \emph{Section handler system stack byte count footprint} déclaré dans la \plm=configuration=.
+Remarquer ce code empile deux registres (soit 8 octets) dans la pile système~; il faut s'assurer que cette valeur correspond à la valeur du paramètre \emph{Section handler system stack byte count footprint} déclaré dans la \plm=configuration=.
 
 Remarquer aussi que lorsque l'instruction \texttt{UDF} est exécutée, l'adresse de retour empilée est l'adresse de l'instruction \texttt{UDF}, et non pas l'adresse de l'instruction suivante. Il faut donc manuellement ajouter $2$ à l'adresse de retour.
 
-Il faut donc construire ce tableau. Le fichier \texttt{udfcoded-section-dispatcher-header.s} définit son en-tête :
+Il faut donc construire ce tableau. Le fichier \texttt{udfcoded-section-dispatcher-header.s} définit son en-tête~:
 
 \begin{SHELL}\small
 \_\_udf\_dispatcher\_table:
@@ -304,7 +304,7 @@ Il faut donc construire ce tableau. Le fichier \texttt{udfcoded-section-dispatch
 
 Ce texte est ajouté à la fin du fichier assembleur \texttt{src.s}.
 
-Ensuite, PLM va utiliser le fichier \texttt{udfcoded-section-dispatcher-entry.s} pour définir chaque entrée du tableau :
+Ensuite, PLM va utiliser le fichier \texttt{udfcoded-section-dispatcher-entry.s} pour définir chaque entrée du tableau~:
 \begin{SHELL}\small
 \hspace*{1.2em}.word !IMPLEMENTATION\_ROUTINE! @ !IDX!, user routine !USER\_ROUTINE!
 
@@ -325,7 +325,7 @@ PLM effectue pour chaque section les substitutions de \nospace{!IMPLEMENTATION\_
 
 Dans ce schéma, l'instruction indéfinie \texttt{UDF} est utilisée.  Le code de cette instruction est \texttt{0xDE$xx$}, où $xx$ est une valeur que le Cortex ignore. Contrairement au shéma précédent, le champ $xx$ est toujours à $0$, l'indice de la section est entré dans le registre \texttt{r12}.
 
-Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r12idx-section-invocation.s}. Le contenu de fichier est :
+Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r12idx-section-invocation.s}. Le contenu de fichier est~:
 \begin{SHELL}\small
 \hspace*{1.2em}.section  ".text.!USER\_ROUTINE!","ax",\%progbits\\
 \hspace*{1.2em}.global !USER\_ROUTINE!\\
@@ -346,16 +346,16 @@ Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r1
 \hspace*{1.2em}.fnend
 \end{SHELL}
 
-Trois séquences sont remplacées par le compilateur PLM :
+Trois séquences sont remplacées par le compilateur PLM~:
 \begin{itemize}
-\item \nospace{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur ;
-\item \nospace{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section (inutilisée dans ce shéma) ;
+\item \nospace{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur~;
+\item \nospace{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section (inutilisée dans ce shéma)~;
 \item \nospace{!IDX!}, par l'indice de la section\footnote{Lorsqu'il analyse un projet, PLM numérote les sections qu'il rencontre (à partir de $0$). C'est ce numéro qui remplace la séquence \nospace{!IDX!}.}.
 \end{itemize}
 
 PLM effectue donc cette opération pour chaque section, par ordre croissant de l'indice, et accumule le texte produit dans le fichier assembleur \texttt{src.s}.
 
-Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}, défini par le fichier \texttt{r12idx-section-dispatcher-code.s} :
+Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}, défini par le fichier \texttt{r12idx-section-dispatcher-code.s}~:
 
 \begin{SHELL}\small
 \hspace*{1.2em}.section	".text.as\_section\_handler","ax",\%progbits\\
@@ -386,9 +386,9 @@ as\_section\_handler:\\
 
 Ce code va utiliser la valeur \texttt{r12} pour construire l'adresse d'une entrée du tableau \texttt{\_\_udf\_dispatcher\_table}. Cette entrée contient l'adresse de la routine à exécuter.
 
-Remarquer ce code empile deux registres (soit 8 octets) dans la pile système ; il faut s'assurer que cette valeur correspond à la valeur du paramètre \emph{Section handler system stack byte count footprint} déclaré dans la \plm=configuration=.
+Remarquer ce code empile deux registres (soit 8 octets) dans la pile système~; il faut s'assurer que cette valeur correspond à la valeur du paramètre \emph{Section handler system stack byte count footprint} déclaré dans la \plm=configuration=.
 
-Il faut donc construire ce tableau\footnote{Les fichiers \texttt{r12idx-section-dispatcher-header.s} et \texttt{r12idx-section-dispatcher-entry.s} sont identiques à ceux du schéma précédent \texttt{"udfcoded"}.}. Le fichier \texttt{r12idx-section-dispatcher-header.s} définit son en-tête :
+Il faut donc construire ce tableau\footnote{Les fichiers \texttt{r12idx-section-dispatcher-header.s} et \texttt{r12idx-section-dispatcher-entry.s} sont identiques à ceux du schéma précédent \texttt{"udfcoded"}.}. Le fichier \texttt{r12idx-section-dispatcher-header.s} définit son en-tête~:
 
 \begin{SHELL}\small
 \_\_udf\_dispatcher\_table:
@@ -396,7 +396,7 @@ Il faut donc construire ce tableau\footnote{Les fichiers \texttt{r12idx-section-
 
 Ce texte est ajouté à la fin du fichier assembleur \texttt{src.s}.
 
-Ensuite, PLM va utiliser le fichier \texttt{r12idx-section-dispatcher-entry.s} pour définir chaque entrée du tableau :
+Ensuite, PLM va utiliser le fichier \texttt{r12idx-section-dispatcher-entry.s} pour définir chaque entrée du tableau~:
 \begin{SHELL}\small
 \hspace*{1.2em}.word !IMPLEMENTATION\_ROUTINE! @ !IDX!, user routine !USER\_ROUTINE!
 
@@ -418,7 +418,7 @@ PLM effectue pour chaque section les substitutions de \nospace{!IMPLEMENTATION\_
 
 Dans ce schéma, l'instruction indéfinie \texttt{UDF} est utilisée. L'adresse de la routine implémentant la section est entrée dans le registre \texttt{r12}.
 
-Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r12direct-section-invocation.s}. Le contenu de fichier est :
+Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r12direct-section-invocation.s}. Le contenu de fichier est~:
 \begin{SHELL}\small
 \hspace*{1.2em}.section  ".text.!USER\_ROUTINE!","ax",\%progbits\\
 \hspace*{1.2em}.global !USER\_ROUTINE!\\
@@ -440,16 +440,16 @@ Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r1
 \hspace*{1.2em}.fnend
 \end{SHELL}
 
-Trois séquences sont remplacées par le compilateur PLM :
+Trois séquences sont remplacées par le compilateur PLM~:
 \begin{itemize}
-\item \nospace{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur ;
-\item \nospace{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section ;
+\item \nospace{!USER\_ROUTINE!}, par le nom assembleur de la fonction qui implémente l'appel de la section en mode utilisateur~;
+\item \nospace{!IMPLEMENTATION\_ROUTINE!}, par le nom assembleur de la fonction qui implémente la section~;
 \item \nospace{!IDX!}, par l'indice de la section (inutilisé dans ce shéma).
 \end{itemize}
 
 PLM effectue donc cette opération pour chaque section, par ordre croissant de l'indice, et accumule le texte produit dans le fichier assembleur \texttt{src.s}.
 
-Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}, défini par le fichier \texttt{r12direct-section-dispatcher-code.s} :
+Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}, défini par le fichier \texttt{r12direct-section-dispatcher-code.s}~:
 
 \begin{SHELL}\small
 \hspace*{1.2em}.section	".text.as\_section\_handler","ax",\%progbits\\
@@ -474,7 +474,7 @@ as\_section\_handler:\\
 \hspace*{1.2em}pop   {r5, pc}
 \end{SHELL}
 
-Ce code utilise directement la valeur \texttt{r12}, c'est l'adresse de la routine à exécuter. Remarquer ce code empile deux registres (soit 8 octets) dans la pile système ; il faut s'assurer que cette valeur correspond à la valeur du paramètre \emph{Section handler system stack byte count footprint} déclaré dans la \plm=configuration=.
+Ce code utilise directement la valeur \texttt{r12}, c'est l'adresse de la routine à exécuter. Remarquer ce code empile deux registres (soit 8 octets) dans la pile système~; il faut s'assurer que cette valeur correspond à la valeur du paramètre \emph{Section handler system stack byte count footprint} déclaré dans la \plm=configuration=.
 
 
 Les fichiers \texttt{r12direct-section-dispatcher-header.s} et \texttt{r12direct-section-dispatcher-entry.s} sont inutiles pour ce schéma, et sont donc vides.
@@ -499,25 +499,25 @@ Texte à définir…
 
 La directive \plm=check target= permet de vérifier l'identité de la cible. Elle est utile pour s'assurer qu'un fichier est acceptable par une cible. À la compilation, toute directive \plm=check target= incorrecte entraîne une erreur.
 
-Par exemple, compiler pour la cible \plm+"teensy-3-1"+ est spécifié par :
+Par exemple, compiler pour la cible \plm+"teensy-3-1"+ est spécifié par~:
 
 \begin{PLM}
 target "teensy-3-1"
 \end{PLM}
 
-Si la définition du projet implique d'importer le fichier \plm+"monFichier.plm"+ :
+Si la définition du projet implique d'importer le fichier \plm+"monFichier.plm"+~:
 
 \begin{PLM}
 target "teensy-3-1"
 import "monFichier.plm"
 \end{PLM}
 
-Si le contenu de ce fichier commence par :
+Si le contenu de ce fichier commence par~:
 \begin{PLM}
 check target "lpc2294"
 \end{PLM}
 
-Alors une erreur de compilation apparaît. La directive \plm=check target= doit être :
+Alors une erreur de compilation apparaît. La directive \plm=check target= doit être~:
 \begin{PLM}
 check target "teensy-3-1"
 \end{PLM}

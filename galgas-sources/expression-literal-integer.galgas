@@ -46,7 +46,7 @@ override method @literalIntegerInExpressionAST noteExpressionTypesInPrecedenceGr
 #!  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerInExpressionAST analyzeExpressionNew
+override method @literalIntegerInExpressionAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph

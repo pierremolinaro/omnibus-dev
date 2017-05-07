@@ -57,7 +57,7 @@ override method @typedConstantCall noteExpressionTypesInPrecedenceGraph ?!@seman
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typedConstantCall analyzeExpressionNew
+override method @typedConstantCall analyzeExpression
   ?self:let @unifiedTypeMap-proxy unused inSelfType
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph

@@ -77,11 +77,6 @@ init 100 {
 }
 
 //——————————————————————————————————————————————————————————————————————————————
-  
-//public func service userSystickHandler @weak () {
-//}
-  
-//——————————————————————————————————————————————————————————————————————————————
 
 module time {
 
@@ -109,7 +104,6 @@ module time {
     self.mUptimeMS = now
     makeTasksReady (!fromCurrentDate:now)
     notifyChangeForGuardedWaitUntil (!withCurrentDate:now)
-//    userSystickHandler ()
   }
   
   //············································································

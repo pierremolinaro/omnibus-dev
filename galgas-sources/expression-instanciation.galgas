@@ -47,7 +47,7 @@ override method @instanciationAST analyzeExpression
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@globalLiteralStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMap unused ioVariableMap
+  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
   ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
@@ -61,7 +61,7 @@ override method @instanciationAST analyzeExpression
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @instanciationAST analyzeExpressionNew
+override method @instanciationAST analyzeExpression
   ?self:let @unifiedTypeMap-proxy inSelfType
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
