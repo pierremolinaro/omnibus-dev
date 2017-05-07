@@ -79,6 +79,8 @@ class cParser_plm_5F_target_5F_specific_5F_syntax {
 
   protected : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_9 (C_Lexique_plm_5F_lexique *) = 0 ;
 
+  protected : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_10 (C_Lexique_plm_5F_lexique *) = 0 ;
+
 
 } ;
 
@@ -288,6 +290,103 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigu
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                          @sectionImplementationScheme enum                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_sectionImplementationScheme : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_sectionImplementationScheme (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_none,
+    kEnum_svc,
+    kEnum_function
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : AC_GALGAS_enumAssociatedValues mAssociatedValues ;
+  public : VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
+    return mAssociatedValues.unsafePointer () ;
+  }
+
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_sectionImplementationScheme extractObject (const GALGAS_object & inObject,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_sectionImplementationScheme constructor_function (const class GALGAS_string & inOperand0,
+                                                                                 const class GALGAS_string & inOperand1
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : static class GALGAS_sectionImplementationScheme constructor_none (LOCATION_ARGS) ;
+
+  public : static class GALGAS_sectionImplementationScheme constructor_svc (const class GALGAS_lbigint & inOperand0,
+                                                                            const class GALGAS_lstring & inOperand1,
+                                                                            const class GALGAS_lstring & inOperand2,
+                                                                            const class GALGAS_lstring & inOperand3,
+                                                                            const class GALGAS_lstring & inOperand4
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_sectionImplementationScheme & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+  public : VIRTUAL_IN_DEBUG void method_function (class GALGAS_string & outArgument0,
+                                                  class GALGAS_string & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG void method_svc (class GALGAS_lbigint & outArgument0,
+                                             class GALGAS_lstring & outArgument1,
+                                             class GALGAS_lstring & outArgument2,
+                                             class GALGAS_lstring & outArgument3,
+                                             class GALGAS_lstring & outArgument4,
+                                             C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFunction (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNone (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSvc (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_sectionImplementationScheme class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sectionImplementationScheme ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                              @targetParameters struct                                               *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -312,15 +411,7 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
   public : GALGAS_lbigint mProperty_mServicePushedRegisterByteSize ;
 
-  public : GALGAS_lbigint mProperty_mSectionPushedRegisterByteSize ;
-
-  public : GALGAS_lstring mProperty_mSectionHandler ;
-
-  public : GALGAS_lstring mProperty_mSectionDispatcherEntry ;
-
-  public : GALGAS_lstring mProperty_mSectionDispatcherHeader ;
-
-  public : GALGAS_lstring mProperty_mSectionDispatcherInvocation ;
+  public : GALGAS_sectionImplementationScheme mProperty_mSectionImplementation ;
 
   public : GALGAS_lstringlist mProperty_m_5F_C_5F_definitionFiles ;
 
@@ -361,11 +452,7 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                     const GALGAS_lbigint & in_mStackedUserRegisterOnInterruptByteSize,
                                     const GALGAS_lstring & in_mServiceHandler,
                                     const GALGAS_lbigint & in_mServicePushedRegisterByteSize,
-                                    const GALGAS_lbigint & in_mSectionPushedRegisterByteSize,
-                                    const GALGAS_lstring & in_mSectionHandler,
-                                    const GALGAS_lstring & in_mSectionDispatcherEntry,
-                                    const GALGAS_lstring & in_mSectionDispatcherHeader,
-                                    const GALGAS_lstring & in_mSectionDispatcherInvocation,
+                                    const GALGAS_sectionImplementationScheme & in_mSectionImplementation,
                                     const GALGAS_lstringlist & in_m_5F_C_5F_definitionFiles,
                                     const GALGAS_lstringlist & in_m_5F_S_5F_definitionFiles,
                                     const GALGAS_lstringlist & in_m_5F_LL_5F_definitionFiles,
@@ -395,19 +482,15 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                                                  const class GALGAS_lbigint & inOperand6,
                                                                  const class GALGAS_lstring & inOperand7,
                                                                  const class GALGAS_lbigint & inOperand8,
-                                                                 const class GALGAS_lbigint & inOperand9,
-                                                                 const class GALGAS_lstring & inOperand10,
-                                                                 const class GALGAS_lstring & inOperand11,
-                                                                 const class GALGAS_lstring & inOperand12,
+                                                                 const class GALGAS_sectionImplementationScheme & inOperand9,
+                                                                 const class GALGAS_lstringlist & inOperand10,
+                                                                 const class GALGAS_lstringlist & inOperand11,
+                                                                 const class GALGAS_lstringlist & inOperand12,
                                                                  const class GALGAS_lstring & inOperand13,
-                                                                 const class GALGAS_lstringlist & inOperand14,
-                                                                 const class GALGAS_lstringlist & inOperand15,
-                                                                 const class GALGAS_lstringlist & inOperand16,
-                                                                 const class GALGAS_lstring & inOperand17,
-                                                                 const class GALGAS_lstring & inOperand18,
-                                                                 const class GALGAS_lstring & inOperand19,
-                                                                 const class GALGAS_lstring & inOperand20,
-                                                                 const class GALGAS_lstring & inOperand21
+                                                                 const class GALGAS_lstring & inOperand14,
+                                                                 const class GALGAS_lstring & inOperand15,
+                                                                 const class GALGAS_lstring & inOperand16,
+                                                                 const class GALGAS_lstring & inOperand17
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -430,15 +513,7 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS__32_lstringlist getter_mPython_5F_utilityToolList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherEntry (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherHeader (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherInvocation (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionHandler (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSectionPushedRegisterByteSize (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_sectionImplementationScheme getter_mSectionImplementation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceDispatcherEntry (LOCATION_ARGS) const ;
 
@@ -613,6 +688,52 @@ class cEnumAssociatedValues_interruptionPanicCode_panicCode : public cEnumAssoci
   public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public : virtual ~ cEnumAssociatedValues_interruptionPanicCode_panicCode (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                @sectionImplementationScheme enum, associated values                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_sectionImplementationScheme_svc : public cEnumAssociatedValues {
+  public : const GALGAS_lbigint mAssociatedValue0 ;
+  public : const GALGAS_lstring mAssociatedValue1 ;
+  public : const GALGAS_lstring mAssociatedValue2 ;
+  public : const GALGAS_lstring mAssociatedValue3 ;
+  public : const GALGAS_lstring mAssociatedValue4 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_sectionImplementationScheme_svc (const GALGAS_lbigint & inAssociatedValue0,
+                                                                  const GALGAS_lstring & inAssociatedValue1,
+                                                                  const GALGAS_lstring & inAssociatedValue2,
+                                                                  const GALGAS_lstring & inAssociatedValue3,
+                                                                  const GALGAS_lstring & inAssociatedValue4
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_sectionImplementationScheme_svc (void) {}
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cEnumAssociatedValues_sectionImplementationScheme_function : public cEnumAssociatedValues {
+  public : const GALGAS_string mAssociatedValue0 ;
+  public : const GALGAS_string mAssociatedValue1 ;
+
+//--- Constructor
+  public : cEnumAssociatedValues_sectionImplementationScheme_function (const GALGAS_string & inAssociatedValue0,
+                                                                       const GALGAS_string & inAssociatedValue1
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+  public : virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+
+  public : virtual ~ cEnumAssociatedValues_sectionImplementationScheme_function (void) {}
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*

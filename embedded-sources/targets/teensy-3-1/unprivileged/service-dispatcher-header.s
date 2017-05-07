@@ -1,9 +1,12 @@
 @----------------------------------------------------------------------------------------------------------------------*
 @                                                                                                                      *
-@                 S E C T I O N   T A B L E                                                                            *
+@                 S V C    D I S P A T C H E R    T A B L E                                                            *
 @                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
+  .type __direct_return_for_null_service, %function
+
   .align  2
 
-__udf_dispatcher_table:
+__svc_dispatcher_table:
+  .word __direct_return_for_null_service @ 0

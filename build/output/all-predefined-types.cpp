@@ -394,6 +394,49 @@ GALGAS_lstring cEnumerator_lstringlist::current_mValue (LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                                    @string type                                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_string ("string",
+                               NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_string::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_string ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_string::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_string (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_string::extractObject (const GALGAS_object & inObject,
+                                            C_Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) {
+  GALGAS_string result ;
+  const GALGAS_string * p = (const GALGAS_string *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_string *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("string", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                                 @2lstringlist type                                                  *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -953,49 +996,6 @@ GALGAS_bool GALGAS_bool::extractObject (const GALGAS_object & inObject,
       result = *p ;
     }else{
       inCompiler->castError ("bool", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                                    @string type                                                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_string ("string",
-                               NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_string::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_string ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_string::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_string (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_string GALGAS_string::extractObject (const GALGAS_object & inObject,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
-  GALGAS_string result ;
-  const GALGAS_string * p = (const GALGAS_string *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_string *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("string", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

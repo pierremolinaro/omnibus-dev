@@ -16,6 +16,29 @@ list @interruptionConfigurationList {
 
 #·······················································································································
 
+enum @sectionImplementationScheme {
+  case none
+  case svc (@lbigint sectionPushedRegisterByteSize 
+            @lstring sectionHandler
+            @lstring sectionDispatcherEntry
+            @lstring sectionDispatcherHeader
+            @lstring sectionDispatcherInvocation)
+  case function (@string disableInterruptInLLVM @string enableInterruptInLLVM)
+  default none
+}
+
+#·······················································································································
+
+getter @sectionImplementationScheme sectionStackByteSize -> @bigint {
+  switch self
+  case svc (sectionPushedRegisterByteSize * * * *) : result = sectionPushedRegisterByteSize.bigint
+  case function (* *) : result = 0G
+  case none: result = 0G
+  end
+}
+
+#·······················································································································
+
 struct @targetParameters {
   @2lstringlist mPython_utilityToolList
   @lstring mPython_build
@@ -28,11 +51,7 @@ struct @targetParameters {
   @lstring mServiceHandler
   @lbigint mServicePushedRegisterByteSize
 
-  @lbigint mSectionPushedRegisterByteSize 
-  @lstring mSectionHandler
-  @lstring mSectionDispatcherEntry
-  @lstring mSectionDispatcherHeader
-  @lstring mSectionDispatcherInvocation
+  @sectionImplementationScheme mSectionImplementation
 
   @lstringlist m_C_definitionFiles
   @lstringlist m_S_definitionFiles
@@ -119,15 +138,33 @@ syntax extension plm_target_specific_syntax {
     $;$
     $integer$ ?let servicePushedRegisterByteSize
     <key> !"SECTION"
-    $"string"$ ?let sectionDispatcherCode
-    $;$
-    $"string"$ ?let sectionDispatcherEntry
-    $;$
-    $"string"$ ?let sectionDispatcherHeader
-    $;$
-    $"string"$ ?let sectionDispatcherInvocation
-    $;$
-    $integer$ ?let sectionPushedRegisterByteSize
+    @sectionImplementationScheme sectionImplementation
+    select
+      $"string"$ ?let sectionHandler
+      $;$
+      $"string"$ ?let sectionDispatcherEntry
+      $;$
+      $"string"$ ?let sectionDispatcherHeader
+      $;$
+      $"string"$ ?let sectionDispatcherInvocation
+      $;$
+      $integer$ ?let sectionPushedRegisterByteSize
+      sectionImplementation = .svc{
+        !sectionPushedRegisterByteSize:sectionPushedRegisterByteSize
+        !sectionHandler:sectionHandler
+        !sectionDispatcherEntry:sectionDispatcherEntry
+        !sectionDispatcherHeader:sectionDispatcherHeader
+        !sectionDispatcherInvocation:sectionDispatcherInvocation
+      }
+    or
+      $"string"$ ?let sectionDisableInterrupt
+      $;$
+      $"string"$ ?let sectionEnableInterrupt
+      sectionImplementation = .function {
+        !disableInterruptInLLVM:sectionDisableInterrupt
+        !enableInterruptInLLVM:sectionEnableInterrupt
+      }    
+    end
     <key> !"C_FILES"
     @lstringlist C_definitionFiles = {}
     repeat
@@ -180,11 +217,7 @@ syntax extension plm_target_specific_syntax {
       !stackedUserRegisterOnInterruptByteSize
       !serviceHandler
       !servicePushedRegisterByteSize
-      !sectionPushedRegisterByteSize
-      !sectionDispatcherCode
-      !sectionDispatcherEntry
-      !sectionDispatcherHeader
-      !sectionDispatcherInvocation
+      !sectionImplementation
       !C_definitionFiles
       !S_definitionFiles
       !LL_definitionFiles

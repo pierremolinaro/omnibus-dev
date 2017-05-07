@@ -36,8 +36,11 @@ SERVICE:
   12 // as_svc_handler saves 3 registers on system stack
 // Section implementation
 SECTION:
-  "call void asm sideeffect \"cpsid i\", \"\"() nounwind" ; // Disable interrupt
-  "call void asm sideeffect \"cpsie i\", \"\"() nounwind"   // Enable interrupt
+  "udfcoded-section-handler.s" ;
+  "udfcoded-section-dispatcher-entry.s" ;
+  "udfcoded-section-dispatcher-header.s" ;
+  "udfcoded-section-invocation.s" ;
+  8 // saves 2 registers on system stack
 //--- C Source files
 C_FILES:
   "../c-cortex-m4-context.c",
@@ -73,7 +76,6 @@ INTERRUPT_HANDLER:
 //--- Interrupts
 INTERRUPTS:
   NMI -> 2,
-  HardFault -> 3,
   MemManage -> 4,
   BusFault -> 5,
   UsageFault -> 6,

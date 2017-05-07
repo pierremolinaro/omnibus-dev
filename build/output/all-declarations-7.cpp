@@ -5630,6 +5630,194 @@ GALGAS_systemRoutineDeclarationListAST_2D_element GALGAS_systemRoutineDeclaratio
 
 //---------------------------------------------------------------------------------------------------------------------*
 
+GALGAS_sectionIRlist_2D_element::GALGAS_sectionIRlist_2D_element (void) :
+mProperty_mSectionCallName (),
+mProperty_mSectionImplementationName (),
+mProperty_mReceiverType (),
+mProperty_mFormalArgumentListForGeneration (),
+mProperty_mReturnType () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sectionIRlist_2D_element::~ GALGAS_sectionIRlist_2D_element (void) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sectionIRlist_2D_element::GALGAS_sectionIRlist_2D_element (const GALGAS_string & inOperand0,
+                                                                  const GALGAS_string & inOperand1,
+                                                                  const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                  const GALGAS_routineFormalArgumentListForGeneration & inOperand3,
+                                                                  const GALGAS_unifiedTypeMap_2D_proxy & inOperand4) :
+mProperty_mSectionCallName (inOperand0),
+mProperty_mSectionImplementationName (inOperand1),
+mProperty_mReceiverType (inOperand2),
+mProperty_mFormalArgumentListForGeneration (inOperand3),
+mProperty_mReturnType (inOperand4) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sectionIRlist_2D_element GALGAS_sectionIRlist_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_sectionIRlist_2D_element (GALGAS_string::constructor_default (HERE),
+                                          GALGAS_string::constructor_default (HERE),
+                                          GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
+                                          GALGAS_routineFormalArgumentListForGeneration::constructor_emptyList (HERE),
+                                          GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sectionIRlist_2D_element GALGAS_sectionIRlist_2D_element::constructor_new (const GALGAS_string & inOperand0,
+                                                                                  const GALGAS_string & inOperand1,
+                                                                                  const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                                  const GALGAS_routineFormalArgumentListForGeneration & inOperand3,
+                                                                                  const GALGAS_unifiedTypeMap_2D_proxy & inOperand4 
+                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_sectionIRlist_2D_element result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
+    result = GALGAS_sectionIRlist_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_sectionIRlist_2D_element::objectCompare (const GALGAS_sectionIRlist_2D_element & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mSectionCallName.objectCompare (inOperand.mProperty_mSectionCallName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mSectionImplementationName.objectCompare (inOperand.mProperty_mSectionImplementationName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mReceiverType.objectCompare (inOperand.mProperty_mReceiverType) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mFormalArgumentListForGeneration.objectCompare (inOperand.mProperty_mFormalArgumentListForGeneration) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mReturnType.objectCompare (inOperand.mProperty_mReturnType) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_sectionIRlist_2D_element::isValid (void) const {
+  return mProperty_mSectionCallName.isValid () && mProperty_mSectionImplementationName.isValid () && mProperty_mReceiverType.isValid () && mProperty_mFormalArgumentListForGeneration.isValid () && mProperty_mReturnType.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_sectionIRlist_2D_element::drop (void) {
+  mProperty_mSectionCallName.drop () ;
+  mProperty_mSectionImplementationName.drop () ;
+  mProperty_mReceiverType.drop () ;
+  mProperty_mFormalArgumentListForGeneration.drop () ;
+  mProperty_mReturnType.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_sectionIRlist_2D_element::description (C_String & ioString,
+                                                   const int32_t inIndentation) const {
+  ioString << "<struct @sectionIRlist-element:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mSectionCallName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mSectionImplementationName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mReceiverType.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mReturnType.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_sectionIRlist_2D_element::getter_mSectionCallName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSectionCallName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_string GALGAS_sectionIRlist_2D_element::getter_mSectionImplementationName (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSectionImplementationName ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_sectionIRlist_2D_element::getter_mReceiverType (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mReceiverType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_routineFormalArgumentListForGeneration GALGAS_sectionIRlist_2D_element::getter_mFormalArgumentListForGeneration (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mFormalArgumentListForGeneration ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_sectionIRlist_2D_element::getter_mReturnType (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mReturnType ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                             @sectionIRlist-element type                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_sectionIRlist_2D_element ("sectionIRlist-element",
+                                                 NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_sectionIRlist_2D_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_sectionIRlist_2D_element ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_sectionIRlist_2D_element::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_sectionIRlist_2D_element (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_sectionIRlist_2D_element GALGAS_sectionIRlist_2D_element::extractObject (const GALGAS_object & inObject,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_sectionIRlist_2D_element result ;
+  const GALGAS_sectionIRlist_2D_element * p = (const GALGAS_sectionIRlist_2D_element *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_sectionIRlist_2D_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("sectionIRlist-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
 GALGAS_bootRoutinePriorityMap_2D_element::GALGAS_bootRoutinePriorityMap_2D_element (void) :
 mProperty_lkey () {
 }
@@ -13273,22 +13461,22 @@ static void extensionMethod_configurationDeclarationAST_enterInPrecedenceGraph (
                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_configurationDeclarationAST * object = (const cPtr_configurationDeclarationAST *) inObject ;
   macroValidSharedObject (object, cPtr_configurationDeclarationAST) ;
-  GALGAS_lstring var_rootNode_7879 = GALGAS_lstring::constructor_new (GALGAS_string ("config"), object->mProperty_mPanicCodeTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("configuration.galgas", 248)) ;
+  GALGAS_lstring var_rootNode_9174 = GALGAS_lstring::constructor_new (GALGAS_string ("config"), object->mProperty_mPanicCodeTypeName.getter_location (HERE)  COMMA_SOURCE_FILE ("configuration.galgas", 281)) ;
   {
   const GALGAS_configurationDeclarationAST temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (var_rootNode_7879, temp_0, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 249)) ;
+  ioArgument_ioGraph.setter_addNode (var_rootNode_9174, temp_0, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
   }
-  GALGAS_lstring var_panicCodeTypeName_7998 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mPanicCodeTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 250)) ;
+  GALGAS_lstring var_panicCodeTypeName_9293 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mPanicCodeTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
   {
-  ioArgument_ioGraph.setter_addEdge (var_rootNode_7879, var_panicCodeTypeName_7998 COMMA_SOURCE_FILE ("configuration.galgas", 251)) ;
+  ioArgument_ioGraph.setter_addEdge (var_rootNode_9174, var_panicCodeTypeName_9293 COMMA_SOURCE_FILE ("configuration.galgas", 284)) ;
   }
-  GALGAS_lstring var_panicLineTypeName_8132 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mPanicLineTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 252)) ;
+  GALGAS_lstring var_panicLineTypeName_9427 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mPanicLineTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 285)) ;
   {
-  ioArgument_ioGraph.setter_addEdge (var_rootNode_7879, var_panicLineTypeName_8132 COMMA_SOURCE_FILE ("configuration.galgas", 253)) ;
+  ioArgument_ioGraph.setter_addEdge (var_rootNode_9174, var_panicLineTypeName_9427 COMMA_SOURCE_FILE ("configuration.galgas", 286)) ;
   }
-  GALGAS_lstring var_unsignedIntegerTypeName_8272 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mUnsignedIntegerTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 254)) ;
+  GALGAS_lstring var_unsignedIntegerTypeName_9567 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mUnsignedIntegerTypeName, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 287)) ;
   {
-  ioArgument_ioGraph.setter_addEdge (var_rootNode_7879, var_unsignedIntegerTypeName_8272 COMMA_SOURCE_FILE ("configuration.galgas", 255)) ;
+  ioArgument_ioGraph.setter_addEdge (var_rootNode_9174, var_unsignedIntegerTypeName_9567 COMMA_SOURCE_FILE ("configuration.galgas", 288)) ;
   }
 }
 
@@ -13399,30 +13587,30 @@ static void extensionMethod_configurationDeclarationAST_enterInContext (const cP
                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_configurationDeclarationAST * object = (const cPtr_configurationDeclarationAST *) inObject ;
   macroValidSharedObject (object, cPtr_configurationDeclarationAST) ;
-  GALGAS_stringset var_panicCodeSet_10099 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("configuration.galgas", 290)) ;
+  GALGAS_stringset var_panicCodeSet_11394 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("configuration.galgas", 323)) ;
   const enumGalgasBool test_0 = GALGAS_bool (kIsNotEqual, ioArgument_ioContext.getter_mPointerSize (HERE).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
   if (kBoolTrue == test_0) {
     TC_Array <C_FixItDescription> fixItArray1 ;
-    inCompiler->emitSemanticError (object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_location (SOURCE_FILE ("configuration.galgas", 292)), GALGAS_string ("duplicate configuration"), fixItArray1  COMMA_SOURCE_FILE ("configuration.galgas", 292)) ;
+    inCompiler->emitSemanticError (object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_location (SOURCE_FILE ("configuration.galgas", 325)), GALGAS_string ("duplicate configuration"), fixItArray1  COMMA_SOURCE_FILE ("configuration.galgas", 325)) ;
   }else if (kBoolFalse == test_0) {
-    const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_bigint (HERE).objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 293)))).boolEnum () ;
+    const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_bigint (HERE).objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 326)))).boolEnum () ;
     if (kBoolTrue == test_2) {
       TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_location (SOURCE_FILE ("configuration.galgas", 294)), GALGAS_string ("zero size pointer not allowed"), fixItArray3  COMMA_SOURCE_FILE ("configuration.galgas", 294)) ;
+      inCompiler->emitSemanticError (object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_location (SOURCE_FILE ("configuration.galgas", 327)), GALGAS_string ("zero size pointer not allowed"), fixItArray3  COMMA_SOURCE_FILE ("configuration.galgas", 327)) ;
     }else if (kBoolFalse == test_2) {
-      ioArgument_ioContext.mProperty_mPointerSize = object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_bigint (HERE).getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 296)) ;
+      ioArgument_ioContext.mProperty_mPointerSize = object->mProperty_mTargetParameters.getter_mPointerSize (HERE).getter_bigint (HERE).getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 329)) ;
     }
   }
   ioArgument_ioContext.mProperty_mTargetParameters = object->mProperty_mTargetParameters ;
-  ioArgument_ioContext.mProperty_mPanicCodeType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mPanicCodeTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 299)) ;
-  ioArgument_ioContext.mProperty_mPanicLineType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mPanicLineTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 300)) ;
-  ioArgument_ioContext.mProperty_mUnsignedIntegerType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mUnsignedIntegerTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 301)) ;
-  cEnumerator_interruptionConfigurationList enumerator_10858 (object->mProperty_mInterruptionConfigurationList, kENUMERATION_UP) ;
-  while (enumerator_10858.hasCurrentObject ()) {
+  ioArgument_ioContext.mProperty_mPanicCodeType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mPanicCodeTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 332)) ;
+  ioArgument_ioContext.mProperty_mPanicLineType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mPanicLineTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 333)) ;
+  ioArgument_ioContext.mProperty_mUnsignedIntegerType = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mUnsignedIntegerTypeName, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 334)) ;
+  cEnumerator_interruptionConfigurationList enumerator_12153 (object->mProperty_mInterruptionConfigurationList, kENUMERATION_UP) ;
+  while (enumerator_12153.hasCurrentObject ()) {
     {
-    ioArgument_ioContext.mProperty_mAvailableInterruptMap.setter_insertKey (enumerator_10858.current_mInterruptName (HERE), enumerator_10858.current_mInterruptionPanicCode (HERE), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 303)) ;
+    ioArgument_ioContext.mProperty_mAvailableInterruptMap.setter_insertKey (enumerator_12153.current_mInterruptName (HERE), enumerator_12153.current_mInterruptionPanicCode (HERE), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 336)) ;
     }
-    switch (enumerator_10858.current_mInterruptionPanicCode (HERE).enumValue ()) {
+    switch (enumerator_12153.current_mInterruptionPanicCode (HERE).enumValue ()) {
     case GALGAS_interruptionPanicCode::kNotBuilt:
       break ;
     case GALGAS_interruptionPanicCode::kEnum_noPanicCode:
@@ -13431,19 +13619,19 @@ static void extensionMethod_configurationDeclarationAST_enterInContext (const cP
       break ;
     case GALGAS_interruptionPanicCode::kEnum_panicCode:
       {
-        const cEnumAssociatedValues_interruptionPanicCode_panicCode * extractPtr_11157 = (const cEnumAssociatedValues_interruptionPanicCode_panicCode *) (enumerator_10858.current_mInterruptionPanicCode (HERE).unsafePointer ()) ;
-        const GALGAS_lbigint extractedValue_value = extractPtr_11157->mAssociatedValue0 ;
-        GALGAS_string var_s_11014 = extractedValue_value.getter_bigint (HERE).getter_string (SOURCE_FILE ("configuration.galgas", 307)) ;
-        const enumGalgasBool test_4 = var_panicCodeSet_10099.getter_hasKey (var_s_11014 COMMA_SOURCE_FILE ("configuration.galgas", 308)).boolEnum () ;
+        const cEnumAssociatedValues_interruptionPanicCode_panicCode * extractPtr_12452 = (const cEnumAssociatedValues_interruptionPanicCode_panicCode *) (enumerator_12153.current_mInterruptionPanicCode (HERE).unsafePointer ()) ;
+        const GALGAS_lbigint extractedValue_value = extractPtr_12452->mAssociatedValue0 ;
+        GALGAS_string var_s_12309 = extractedValue_value.getter_bigint (HERE).getter_string (SOURCE_FILE ("configuration.galgas", 340)) ;
+        const enumGalgasBool test_4 = var_panicCodeSet_11394.getter_hasKey (var_s_12309 COMMA_SOURCE_FILE ("configuration.galgas", 341)).boolEnum () ;
         if (kBoolTrue == test_4) {
           TC_Array <C_FixItDescription> fixItArray5 ;
-          inCompiler->emitSemanticError (extractedValue_value.getter_location (SOURCE_FILE ("configuration.galgas", 309)), GALGAS_string ("duplicate panic code"), fixItArray5  COMMA_SOURCE_FILE ("configuration.galgas", 309)) ;
+          inCompiler->emitSemanticError (extractedValue_value.getter_location (SOURCE_FILE ("configuration.galgas", 342)), GALGAS_string ("duplicate panic code"), fixItArray5  COMMA_SOURCE_FILE ("configuration.galgas", 342)) ;
         }
-        var_panicCodeSet_10099.addAssign_operation (var_s_11014  COMMA_SOURCE_FILE ("configuration.galgas", 311)) ;
+        var_panicCodeSet_11394.addAssign_operation (var_s_12309  COMMA_SOURCE_FILE ("configuration.galgas", 344)) ;
       }
       break ;
     }
-    enumerator_10858.gotoNextObject () ;
+    enumerator_12153.gotoNextObject () ;
   }
 }
 
@@ -14007,145 +14195,4 @@ static void defineExtensionGetter_enumerationDeclaration_location (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gGetter_enumerationDeclaration_location (defineExtensionGetter_enumerationDeclaration_location, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                         Overriding extension method '@enumerationDeclaration addExtension'                          *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_enumerationDeclaration_addExtension (const cPtr_abstractDeclaration * inObject,
-                                                                 GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
-                                                                 GALGAS_abstractDeclaration & outArgument_outNewDeclaration,
-                                                                 C_Compiler * /* inCompiler */
-                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_enumerationDeclaration * object = (const cPtr_enumerationDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_enumerationDeclaration) ;
-  const GALGAS_enumerationDeclaration temp_0 = object ;
-  outArgument_outNewDeclaration = temp_0 ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_enumerationDeclaration_addExtension (void) {
-  enterExtensionMethod_addExtension (kTypeDescriptor_GALGAS_enumerationDeclaration.mSlotID,
-                                     extensionMethod_enumerationDeclaration_addExtension) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_enumerationDeclaration_addExtension (defineExtensionMethod_enumerationDeclaration_addExtension, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                    Overriding extension method '@enumerationDeclaration enterInPrecedenceGraph'                     *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_enumerationDeclaration_enterInPrecedenceGraph (const cPtr_abstractDeclaration * inObject,
-                                                                           GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                           C_Compiler * inCompiler
-                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_enumerationDeclaration * object = (const cPtr_enumerationDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_enumerationDeclaration) ;
-  GALGAS_lstring var_typeName_2952 = function_llvmRegularTypeMangledNameFromName (object->mProperty_mEnumerationName, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 72)) ;
-  {
-  const GALGAS_enumerationDeclaration temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (var_typeName_2952, temp_0, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 73)) ;
-  }
-  {
-  ioArgument_ioGraph.setter_addEdge (var_typeName_2952, function_llvmRegularTypeMangledNameFromName (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 74)).getter_nowhere (SOURCE_FILE ("type-enumeration-declaration.galgas", 74)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 74)) COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 74)) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_enumerationDeclaration_enterInPrecedenceGraph (void) {
-  enterExtensionMethod_enterInPrecedenceGraph (kTypeDescriptor_GALGAS_enumerationDeclaration.mSlotID,
-                                               extensionMethod_enumerationDeclaration_enterInPrecedenceGraph) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_enumerationDeclaration_enterInPrecedenceGraph (defineExtensionMethod_enumerationDeclaration_enterInPrecedenceGraph, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//              Overriding extension getter '@enumerationDeclaration keyRepresentationForErrorSignaling'               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static GALGAS_string extensionGetter_enumerationDeclaration_keyRepresentationForErrorSignaling (const cPtr_abstractDeclaration * inObject,
-                                                                                                C_Compiler * inCompiler
-                                                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_outRepresentation ; // Returned variable
-  const cPtr_enumerationDeclaration * object = (const cPtr_enumerationDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_enumerationDeclaration) ;
-  result_outRepresentation = GALGAS_string ("enum $").add_operation (object->mProperty_mEnumerationName.getter_string (SOURCE_FILE ("type-enumeration-declaration.galgas", 80)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 80)) ;
-//---
-  return result_outRepresentation ;
-}
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionGetter_enumerationDeclaration_keyRepresentationForErrorSignaling (void) {
-  enterExtensionGetter_keyRepresentationForErrorSignaling (kTypeDescriptor_GALGAS_enumerationDeclaration.mSlotID,
-                                                           extensionGetter_enumerationDeclaration_keyRepresentationForErrorSignaling) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gGetter_enumerationDeclaration_keyRepresentationForErrorSignaling (defineExtensionGetter_enumerationDeclaration_keyRepresentationForErrorSignaling, NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                        Overriding extension method '@enumerationDeclaration enterInContext'                         *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void extensionMethod_enumerationDeclaration_enterInContext (const cPtr_abstractDeclaration * inObject,
-                                                                   const GALGAS_functionDeclarationListAST /* constinArgument_inProcedureListAST */,
-                                                                   GALGAS_semanticContext & ioArgument_ioContext,
-                                                                   GALGAS_staticlistValues_5F_listMap & /* ioArgument_ioStaticListValueMap */,
-                                                                   GALGAS_staticStringMap & /* ioArgument_ioGlobalLiteralStringMap */,
-                                                                   C_Compiler * inCompiler
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_enumerationDeclaration * object = (const cPtr_enumerationDeclaration *) inObject ;
-  macroValidSharedObject (object, cPtr_enumerationDeclaration) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_selfType_4509 ;
-  {
-  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mProperty_mTypeMap, object->mProperty_mEnumerationName, var_selfType_4509 COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 102)) ;
-  }
-  GALGAS_enumConstantMap var_enumConstantMap_4545 = GALGAS_enumConstantMap::constructor_emptyMap (SOURCE_FILE ("type-enumeration-declaration.galgas", 103)) ;
-  GALGAS_classConstantMap var_classConstantMap_4587 = GALGAS_classConstantMap::constructor_emptyMap (SOURCE_FILE ("type-enumeration-declaration.galgas", 104)) ;
-  cEnumerator_lstringlist enumerator_4621 (object->mProperty_mCaseNameList, kENUMERATION_UP) ;
-  while (enumerator_4621.hasCurrentObject ()) {
-    GALGAS_uint var_idx_4636 = var_enumConstantMap_4545.getter_count (SOURCE_FILE ("type-enumeration-declaration.galgas", 106)) ;
-    {
-    var_enumConstantMap_4545.setter_insertKey (enumerator_4621.current_mValue (HERE), var_idx_4636, inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 107)) ;
-    }
-    {
-    var_classConstantMap_4587.setter_insertKey (enumerator_4621.current_mValue (HERE), GALGAS_objectIR::constructor_literalInteger (var_selfType_4509, var_idx_4636.getter_bigint (SOURCE_FILE ("type-enumeration-declaration.galgas", 108))  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 108)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 108)) ;
-    }
-    enumerator_4621.gotoNextObject () ;
-  }
-  {
-  ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mEnumerationName, GALGAS_typeKind::constructor_enumeration (var_enumConstantMap_4545, var_classConstantMap_4587  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 112)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 110)) ;
-  }
-  {
-  routine_enterEnumerationOperators (object->mProperty_mEnumerationName, ioArgument_ioContext, inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 115)) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-static void defineExtensionMethod_enumerationDeclaration_enterInContext (void) {
-  enterExtensionMethod_enterInContext (kTypeDescriptor_GALGAS_enumerationDeclaration.mSlotID,
-                                       extensionMethod_enumerationDeclaration_enterInContext) ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-C_PrologueEpilogue gMethod_enumerationDeclaration_enterInContext (defineExtensionMethod_enumerationDeclaration_enterInContext, NULL) ;
 
