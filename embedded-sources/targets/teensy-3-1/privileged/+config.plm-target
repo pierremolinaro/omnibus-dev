@@ -29,16 +29,17 @@ SYSTEM_STACK_SIZE:
   1024
 // Service implementation
 SERVICE:
+  "service-handler.s" ;
   "service-dispatcher-entry.s" ;
   "service-dispatcher-header.s" ;
   "service-entry.s" ;
   12 // as_svc_handler saves 3 registers on system stack
 // Section invocation
 SECTION:
-  "r12direct-section-dispatcher-code.s" ;
-  "r12direct-section-dispatcher-entry.s" ;
-  "r12direct-section-dispatcher-header.s" ;
-  "r12direct-section-invocation.s" ;
+  "udfcoded-section-handler.s" ;
+  "udfcoded-section-dispatcher-entry.s" ;
+  "udfcoded-section-dispatcher-header.s" ;
+  "udfcoded-section-invocation.s" ;
   8 // saves 2 registers on system stack
 //--- C Source files
 C_FILES:
@@ -48,8 +49,7 @@ C_FILES:
 //--- Assembler Source files
 S_FILES:
   "s-interrupt-vectors.s",
-  "s-reset-handler.s",
-  "s-svc-handler.s"
+  "s-reset-handler.s"
 //--- LLVM Source files
 LL_FILES:
   "../ll-cortex-m4.ll",

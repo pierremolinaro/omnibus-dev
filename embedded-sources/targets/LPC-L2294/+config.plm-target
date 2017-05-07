@@ -29,6 +29,7 @@ SYSTEM_STACK_SIZE:
   1024
 // Service implementation
 SERVICE:
+  "service-handler.s" ;
   "service-dispatcher-entry.s" ;
   "service-dispatcher-header.s" ;
   "service-entry.s" ;
