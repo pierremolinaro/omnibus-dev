@@ -308,11 +308,13 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
   public : GALGAS_lbigint mProperty_mStackedUserRegisterOnInterruptByteSize ;
 
+  public : GALGAS_lstring mProperty_mServiceHandler ;
+
   public : GALGAS_lbigint mProperty_mServicePushedRegisterByteSize ;
 
   public : GALGAS_lbigint mProperty_mSectionPushedRegisterByteSize ;
 
-  public : GALGAS_lstring mProperty_mSectionDispatcherCode ;
+  public : GALGAS_lstring mProperty_mSectionHandler ;
 
   public : GALGAS_lstring mProperty_mSectionDispatcherEntry ;
 
@@ -357,9 +359,10 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                     const GALGAS_lbigint & in_mPointerSize,
                                     const GALGAS_lbigint & in_mSystemStackSize,
                                     const GALGAS_lbigint & in_mStackedUserRegisterOnInterruptByteSize,
+                                    const GALGAS_lstring & in_mServiceHandler,
                                     const GALGAS_lbigint & in_mServicePushedRegisterByteSize,
                                     const GALGAS_lbigint & in_mSectionPushedRegisterByteSize,
-                                    const GALGAS_lstring & in_mSectionDispatcherCode,
+                                    const GALGAS_lstring & in_mSectionHandler,
                                     const GALGAS_lstring & in_mSectionDispatcherEntry,
                                     const GALGAS_lstring & in_mSectionDispatcherHeader,
                                     const GALGAS_lstring & in_mSectionDispatcherInvocation,
@@ -390,20 +393,21 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                                                  const class GALGAS_lbigint & inOperand4,
                                                                  const class GALGAS_lbigint & inOperand5,
                                                                  const class GALGAS_lbigint & inOperand6,
-                                                                 const class GALGAS_lbigint & inOperand7,
+                                                                 const class GALGAS_lstring & inOperand7,
                                                                  const class GALGAS_lbigint & inOperand8,
-                                                                 const class GALGAS_lstring & inOperand9,
+                                                                 const class GALGAS_lbigint & inOperand9,
                                                                  const class GALGAS_lstring & inOperand10,
                                                                  const class GALGAS_lstring & inOperand11,
                                                                  const class GALGAS_lstring & inOperand12,
-                                                                 const class GALGAS_lstringlist & inOperand13,
+                                                                 const class GALGAS_lstring & inOperand13,
                                                                  const class GALGAS_lstringlist & inOperand14,
                                                                  const class GALGAS_lstringlist & inOperand15,
-                                                                 const class GALGAS_lstring & inOperand16,
+                                                                 const class GALGAS_lstringlist & inOperand16,
                                                                  const class GALGAS_lstring & inOperand17,
                                                                  const class GALGAS_lstring & inOperand18,
                                                                  const class GALGAS_lstring & inOperand19,
-                                                                 const class GALGAS_lstring & inOperand20
+                                                                 const class GALGAS_lstring & inOperand20,
+                                                                 const class GALGAS_lstring & inOperand21
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -426,13 +430,13 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS__32_lstringlist getter_mPython_5F_utilityToolList (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherCode (LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherEntry (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherHeader (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherInvocation (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionHandler (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSectionPushedRegisterByteSize (LOCATION_ARGS) const ;
 
@@ -441,6 +445,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceDispatcherHeader (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceEntry (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceHandler (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mServicePushedRegisterByteSize (LOCATION_ARGS) const ;
 

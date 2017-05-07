@@ -273,12 +273,12 @@ proc generateSectionAndSafeDispatcher
   end
   ioAssemblerCode += getTargetTextFile (
     !currentDir:inCurrentDirectory
-    !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherHeader # + "-section-dispatcher-header.s"
+    !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherHeader
   )
   for (callName implementationName) in inSectionAndSafeList do (idx)
     var s = getTargetTextFile (
       !currentDir:inCurrentDirectory
-      !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherEntry # + "-section-dispatcher-entry.s"
+      !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherEntry
     )
     s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
     s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
@@ -288,7 +288,7 @@ proc generateSectionAndSafeDispatcher
   ioAssemblerCode += "\n"
   ioAssemblerCode += getTargetTextFile (
     !currentDir:inCurrentDirectory
-    !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherCode # + "-section-dispatcher-code.s"
+    !from:inTargetName + "/" + inTargetParameters.mSectionHandler
   )
   ioAssemblerCode += "@-------------------------------------------------------------"
   ioAssemblerCode += "---------------------------------------------------------*\n"
@@ -303,6 +303,12 @@ proc generatePrimitiveAndServiceDispatcher
   ?let @2stringlist inServiceList
   ?targetParameters:let @targetParameters inTargetParameters
 {
+#--- Generate service handler
+  ioAssemblerCode += getTargetTextFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName + "/" + inTargetParameters.mServiceHandler
+  )
+#---
   for (callName *) in inServiceList do (idx)
     var s = getTargetTextFile (
       !currentDir:inCurrentDirectory

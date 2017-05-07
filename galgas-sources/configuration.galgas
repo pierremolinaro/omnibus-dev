@@ -24,10 +24,12 @@ struct @targetParameters {
   @lbigint mPointerSize
   @lbigint mSystemStackSize
   @lbigint mStackedUserRegisterOnInterruptByteSize
+
+  @lstring mServiceHandler
   @lbigint mServicePushedRegisterByteSize
-  @lbigint mSectionPushedRegisterByteSize
-  
-  @lstring mSectionDispatcherCode
+
+  @lbigint mSectionPushedRegisterByteSize 
+  @lstring mSectionHandler
   @lstring mSectionDispatcherEntry
   @lstring mSectionDispatcherHeader
   @lstring mSectionDispatcherInvocation
@@ -107,6 +109,8 @@ syntax extension plm_target_specific_syntax {
     <key> !"SYSTEM_STACK_SIZE"
     $integer$ ?let systemStackSize
     <key> !"SERVICE"
+    $"string"$ ?let serviceHandler
+    $;$
     $"string"$ ?let serviceDispatcherEntry
     $;$
     $"string"$ ?let serviceDispatcherHeader
@@ -174,6 +178,7 @@ syntax extension plm_target_specific_syntax {
       !pointerSize
       !systemStackSize
       !stackedUserRegisterOnInterruptByteSize
+      !serviceHandler
       !servicePushedRegisterByteSize
       !sectionPushedRegisterByteSize
       !sectionDispatcherCode
