@@ -234,7 +234,6 @@ private proc generateCodeFiles
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
   @2stringlist primitiveAndServiceList = {}
-  @2stringlist sectionAndSafeList = {}
 #----------------------------------------- Use guards ?
   if generationAdds.mUsesGuards then
     let waitForGuardChange = waitForGuardChangeFunctionName ()
@@ -244,10 +243,11 @@ private proc generateCodeFiles
     generationAdds.mExternFunctionDeclarationSet += !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
   end
 #----------------------------------------- SVC
+  @sectionIRlist sectionIRlist = {}
   [inIntermediateCodeStruct.mRoutineMapIR svcCodeGeneration
     !?llvmCode
     !?primitiveAndServiceList
-    !?sectionAndSafeList
+    !?sectionIRlist
   ]
 #----------------------------------------- Guards
   [inIntermediateCodeStruct.mGuardMapIR guardCodeGeneration
@@ -277,7 +277,8 @@ private proc generateCodeFiles
     !inTargetName.string
     !targetParameters:inTargetParameters
     !?asCode
-    !sectionAndSafeList
+    !?llvmCode
+    !sectionIRlist
   )
 #----------------------------------------- Panic
   if not [option plm_options.noPanicGeneration value] then
@@ -404,7 +405,7 @@ private proc generateCodeFiles
   json += "  \"stacked-register-size-on-user-stack\" : "
        + inIntermediateCodeStruct.mTargetParameters.mStackedUserRegisterOnInterruptByteSize.bigint + ",\n"
   json += "  \"service-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mServicePushedRegisterByteSize.bigint + ",\n"
-  json += "  \"section-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mSectionPushedRegisterByteSize.bigint + ",\n"
+  json += "  \"section-stack-needs\" : " + [inIntermediateCodeStruct.mTargetParameters.mSectionImplementation sectionStackByteSize] + ",\n"
 #--- Tasks
   json += "  \"tasks\" : {"
   for task in inIntermediateCodeStruct.mTaskMapIR
@@ -423,7 +424,7 @@ private proc generateCodeFiles
   json += "  ],\n"
 #--- sections
   json += "  \"sections\" : ["
-  for (* sectionImplementation) in sectionAndSafeList
+  for (* sectionImplementation * * *) in sectionIRlist
     do json += "\n    \"" + sectionImplementation + "\""
     between json += ","
     after json += "\n"

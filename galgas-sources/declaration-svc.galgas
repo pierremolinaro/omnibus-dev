@@ -202,10 +202,93 @@ method @systemRoutineDeclarationListAST systemRoutineSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @sectionIRlist {
+  @string mSectionCallName
+  @string mSectionImplementationName
+  @unifiedTypeMap-proxy mReceiverType # .null if standalone function
+  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @unifiedTypeMap-proxy mReturnType # .null if no return value
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmFunctionPrototype ?let @unifiedTypeMap-proxy inReturnType
+                           ?let @string inFunctionName
+                           ?let @unifiedTypeMap-proxy inReceiverType
+                           ?let @routineFormalArgumentListForGeneration inFormalArgumentListForGeneration
+                           -> @string {
+  if inReturnType == .null then
+    result = "void"
+  else
+    result = [[inReturnType kind] llvmTypeName]
+  end
+  result += " @" + inFunctionName + " ("
+  var first = true
+  if inReceiverType != .null then
+    result += [[inReceiverType kind] llvmTypeName] + " * %receiver"
+    first = false
+  end
+  for () in inFormalArgumentListForGeneration do
+    if first then
+      first = false
+    else
+      result += ", "
+    end
+    switch mFormalArgumentKind
+    case input :
+      result += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      result += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+   case inputOutput :
+      result += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+    end
+  end
+  result += ")" + llvmAttributeFunction ()
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func llvmFunctionCall ?let @unifiedTypeMap-proxy inReturnType
+                      ?let @string inFunctionName
+                      ?let @unifiedTypeMap-proxy inReceiverType
+                      ?let @routineFormalArgumentListForGeneration inFormalArgumentListForGeneration
+                      -> @string {
+  result = "call"
+  if inReturnType == .null then
+    result += " void"
+  else
+    result += " " + [[inReturnType kind] llvmTypeName]
+  end
+  result += " @" + inFunctionName + " ("
+  var first = true
+  if inReceiverType != .null then
+    result += "%receiver"
+    first = false
+  end
+  for () in inFormalArgumentListForGeneration do
+    if first then
+      first = false
+    else
+      result += ", "
+    end
+    switch mFormalArgumentKind
+    case input :
+      result += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      result += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+   case inputOutput :
+      result += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+    end
+  end
+  result += ")"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 method @routineMapIR svcCodeGeneration
   ?!@string ioLLVMcode
   ?!@2stringlist ioPrimitiveAndServiceList
-  ?!@2stringlist ioSectionSafeList
+  ?!@sectionIRlist ioSectionList
 {
   for svc in self do
     if not [svc.mKind isFunction] then
@@ -213,41 +296,25 @@ method @routineMapIR svcCodeGeneration
       let svcImplementationName = llvmNameForSVCImplementation (!svc.mRoutineNameForGeneration !svc.mKind)
       switch svc.mKind
       case section, safe :
-        ioSectionSafeList += !svcCallName !svcImplementationName
+        ioSectionList +=
+          !svcCallName
+          !svcImplementationName
+          !svc.mReceiverType
+          !svc.mFormalArgumentListForGeneration
+          !svc.mReturnType
       case primitive, service :
+        ioLLVMcode += llvmTitleComment (!svcCallName)
+        let prototype = llvmFunctionPrototype (
+          !svc.mReturnType
+          !svcCallName
+          !svc.mReceiverType
+          !svc.mFormalArgumentListForGeneration
+        )
+        ioLLVMcode += "declare " + prototype + "\n\n"
         ioPrimitiveAndServiceList += !svcCallName !svcImplementationName
       case function (*) :
         error .nowhere : "INTERNAL ERROR"
       end
-      ioLLVMcode += llvmTitleComment (!svcCallName)
-      ioLLVMcode += "declare"
-      if svc.mReturnType == .null then
-        ioLLVMcode += " void"
-      else
-        ioLLVMcode += " " + [[svc.mReturnType kind] llvmTypeName]
-      end
-      ioLLVMcode += " @" + svcCallName + " ("
-      var first = true
-      if svc.mReceiverType != .null then
-        ioLLVMcode += [[svc.mReceiverType kind] llvmTypeName] + " * %receiver"
-        first = false
-      end
-      for () in svc.mFormalArgumentListForGeneration do
-        if first then
-          first = false
-        else
-          ioLLVMcode += ", "
-        end
-        switch mFormalArgumentKind
-        case input :
-          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
-        case output :
-          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
-       case inputOutput :
-          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
-        end
-      end
-      ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
     end
   end
 }
@@ -259,39 +326,84 @@ proc generateSectionAndSafeDispatcher
   ?let @string inTargetName
   ?targetParameters:let @targetParameters inTargetParameters
   ?!@string ioAssemblerCode
-  ?let @2stringlist inSectionAndSafeList
+  ?!@string ioLLVMcode
+  ?let @sectionIRlist inSectionIRlist
 {
-  for (callName implementationName) in inSectionAndSafeList do (idx)
-    var s = getTargetTextFile (
+  switch inTargetParameters.mSectionImplementation
+  case svc (* sectionHandler sectionDispatcherEntry sectionDispatcherHeader sectionDispatcherInvocation):
+    for (callName * receiverType formalArguments resultType) in inSectionIRlist do
+      let prototype = llvmFunctionPrototype (
+        !resultType
+        !callName
+        !receiverType
+        !formalArguments
+      )
+      ioLLVMcode += llvmTitleComment (!callName)
+      ioLLVMcode += "declare " + prototype + "\n\n"
+    end
+    for (callName implementationName * * *) in inSectionIRlist do (idx)
+      var s = getTargetTextFile (
+        !currentDir:inCurrentDirectory
+        !from:inTargetName + "/" + sectionDispatcherInvocation
+      )
+      s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
+      s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
+      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+      ioAssemblerCode += s
+    end
+    ioAssemblerCode += getTargetTextFile (
       !currentDir:inCurrentDirectory
-      !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherInvocation
+      !from:inTargetName + "/" + sectionDispatcherHeader
     )
-    s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
-    s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
-    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-    ioAssemblerCode += s
-  end
-  ioAssemblerCode += getTargetTextFile (
-    !currentDir:inCurrentDirectory
-    !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherHeader
-  )
-  for (callName implementationName) in inSectionAndSafeList do (idx)
-    var s = getTargetTextFile (
+    for (callName implementationName * * *) in inSectionIRlist do (idx)
+      var s = getTargetTextFile (
+        !currentDir:inCurrentDirectory
+        !from:inTargetName + "/" + sectionDispatcherEntry
+      )
+      s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
+      s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
+      s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
+      ioAssemblerCode += s
+    end
+    ioAssemblerCode += "\n"
+    ioAssemblerCode += getTargetTextFile (
       !currentDir:inCurrentDirectory
-      !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherEntry
+      !from:inTargetName + "/" + sectionHandler
     )
-    s = [s stringByReplacingStringByString !"!USER_ROUTINE!" !callName]
-    s = [s stringByReplacingStringByString !"!IMPLEMENTATION_ROUTINE!" !implementationName]
-    s = [s stringByReplacingStringByString !"!IDX!" ![idx string]]
-    ioAssemblerCode += s
+    ioAssemblerCode += "@-------------------------------------------------------------"
+    ioAssemblerCode += "---------------------------------------------------------*\n"
+  case function (disableInterruptInLLVM enableInterruptInLLVM) :
+    for (callName implementationName receiverType formalArguments resultType) in inSectionIRlist do
+      let prototype = llvmFunctionPrototype (
+        !resultType
+        !callName
+        !receiverType
+        !formalArguments
+      )
+      @string resultTypeName
+      if resultType == .null then
+        resultTypeName = "void"
+      else
+        resultTypeName = [[resultType kind] llvmTypeName]
+      end
+      ioLLVMcode += llvmTitleComment (!callName)
+      ioLLVMcode += "define " + prototype + " {\n"
+      ioLLVMcode += "  " + disableInterruptInLLVM + " ; Disable interrupt\n"
+      ioLLVMcode += "  "
+      if resultType != .null then
+        ioLLVMcode += "%result = "
+      end
+      ioLLVMcode += llvmFunctionCall (!resultType !implementationName !receiverType !formalArguments) + "\n"
+      ioLLVMcode += "  " + enableInterruptInLLVM + " ; Enable interrupt\n"
+      ioLLVMcode += "  ret " + resultTypeName
+      if resultType != .null then
+        ioLLVMcode += " %result"
+      end
+      ioLLVMcode += "\n"
+      ioLLVMcode += "}\n\n"
+    end
+  case none :
   end
-  ioAssemblerCode += "\n"
-  ioAssemblerCode += getTargetTextFile (
-    !currentDir:inCurrentDirectory
-    !from:inTargetName + "/" + inTargetParameters.mSectionHandler
-  )
-  ioAssemblerCode += "@-------------------------------------------------------------"
-  ioAssemblerCode += "---------------------------------------------------------*\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

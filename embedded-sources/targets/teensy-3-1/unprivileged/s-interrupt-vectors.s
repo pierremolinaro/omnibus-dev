@@ -8,7 +8,7 @@
 @--- ARM Core System Handler Vectors
   .word as_reset_handler @ 1
   .word !ISR!NMI @ 2
-  .word !ISR!HardFault @ 3
+  .word as_section_handler @ 3
   .word !ISR!MemManage @ 4
   .word !ISR!BusFault @ 5
   .word !ISR!UsageFault @ 6

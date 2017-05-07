@@ -11,6 +11,17 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         Routine 'enterEnumerationOperators'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void routine_enterEnumerationOperators (class GALGAS_lstring inArgument0,
+                                        class GALGAS_semanticContext & ioArgument1,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             Function 'accessAttribute'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -272,6 +283,19 @@ class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                             Function 'llvmFunctionCall'                                             *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmFunctionCall (const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument0,
+                                               const class GALGAS_string & constinArgument1,
+                                               const class GALGAS_unifiedTypeMap_2D_proxy & constinArgument2,
+                                               const class GALGAS_routineFormalArgumentListForGeneration & constinArgument3,
+                                               class C_Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                     Routine 'generateSectionAndSafeDispatcher'                                      *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -280,7 +304,8 @@ void routine_generateSectionAndSafeDispatcher (const class GALGAS_string constin
                                                const class GALGAS_string constinArgument1,
                                                const class GALGAS_targetParameters constinArgument2,
                                                class GALGAS_string & ioArgument3,
-                                               const class GALGAS__32_stringlist constinArgument4,
+                                               class GALGAS_string & ioArgument4,
+                                               const class GALGAS_sectionIRlist constinArgument5,
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 

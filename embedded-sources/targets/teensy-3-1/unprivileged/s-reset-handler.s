@@ -2,8 +2,6 @@
 @                                                                                                                      *
 @                 R E S E T    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                *
 @                                                                                                                      *
-@ Threads have privileged access                                                                                       *
-@                                                                                                                      *
 @----------------------------------------------------------------------------------------------------------------------*
 
 .lcomm backgroundTaskStack, 32
@@ -25,7 +23,7 @@ as_reset_handler:
 @ bit 0 : 0 -> Thread mode has privileged access, 1 -> Thread mode has unprivileged access
 @ bit 1 : 0 -> Use SP_main as the current stack, 1 -> In Thread mode, use SP_process as the current stack
 @ bit 2 : 0 -> FP extension not active, 1 -> FP extension is active
-  movs r2, #2 @ Thread mode has privileged access, double stack
+  movs r2, #3
   msr  control, r2
 @ Software must use an ISB barrier instruction to ensure a write to the CONTROL register
 @ takes effect before the next instruction is executed.

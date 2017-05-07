@@ -215,7 +215,9 @@ message incorrectStringEnd : "string does not end with '\"'"
 
 rule '"' {
   repeat
-   while ' ' | '!' | '#'-> '\uFFFD' :
+  while "\\\"" :
+    enterCharacterIntoString (!?tokenString !'"')
+  while ' ' | '!' | '#'-> '\uFFFD' :
     enterCharacterIntoString (!?tokenString !*)
   end
   select

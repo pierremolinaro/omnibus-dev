@@ -375,11 +375,11 @@ GALGAS_string GALGAS_filewrapper::getter_textFileContentsAtPath (const GALGAS_st
       const cRegularFileWrapper * file = findFileInDirectory (dir, path.stringValue ().lastPathComponent ()) ;
       if (file == NULL) {
         C_String errorMessage ;
-        errorMessage << "textFileContentsAtPath: the '" << path.stringValue () << "' path does not exist" ;
+        errorMessage << "textFileContentsAtPath: the '" << inPath.stringValue () << "' path does not exist" ;
         inCompiler->onTheFlyRunTimeError (errorMessage COMMA_THERE) ;
       }else if (! file->mIsTextFile) {
         C_String errorMessage ;
-        errorMessage << "textFileContentsAtPath: the '" << path.stringValue () << "' path points on a binary file" ;
+        errorMessage << "textFileContentsAtPath: the '" << inPath.stringValue () << "' path points on a binary file" ;
         inCompiler->onTheFlyRunTimeError (errorMessage COMMA_THERE) ;
       }else{
         result = GALGAS_string (file->mContents) ;
