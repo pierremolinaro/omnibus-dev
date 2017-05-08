@@ -87,78 +87,80 @@ private proc compileProject
     !currentDirectory:inCurrentDirectory
     !?importedFilePathSet:sourceFileAbsolutePathSet
   )
-#------------------------------------------------------------ Add Predefined types
-#--- Add boolean type
-  ast.mDeclarationListAST += !@booleanDeclaration.new {![boolTypeName () nowhere]}
-#--- Literal integer type
-  ast.mDeclarationListAST += !@literalIntegerDeclaration.new
-#--- Add String type
-  ast.mDeclarationListAST += !@literalStringDeclaration.new {![staticStringTypeName () nowhere]}
-#------------------------------------------------------------  Add type extensions
-  let declarationList = ast.mDeclarationListAST
-  var @declarationListAST newDeclarationList = {}
-  var extensionDeclarationListAST = ast.mExtensionDeclarationListAST
-  for (declaration) in declarationList do
-    [declaration addExtension !?extensionDeclarationListAST ?let newDeclaration]
-    newDeclarationList += !newDeclaration
-  end
-  ast.mDeclarationListAST = newDeclarationList
-#--- Raise an error for every unhandled extension
-  for (typeName * * * *) in extensionDeclarationListAST do
-    error typeName : "this type is not defined or does not support extension"
-  end
-#------------------------------------------------------------ Ordered declaration list
-  buildOrderedDeclarationList (
-    !ast:ast
-    !sourceFile:inSourceFile.string
-    !endOfSourceFile:inEndOfSourceFile
-    ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
-  )
-#------------------------------------------------------------ Check "check target" declarations
-  for (targetNameToCheck) in ast.mCheckTargetListAST do
-    if targetNameToCheck.string != inTargetName then
-      error targetNameToCheck : "invalid target" fixit { replace "\"" + inTargetName.string + "\"" }
-    end
-  end
-#------------------------------------------------------------ Semantic context
   if @uint.errorCount == 0 then
-    @staticStringMap globalLiteralStringMap = {}
-    @staticlistValues_listMap staticListValueMap = {}
-    buildSemanticContext (
-      !orderedDeclarationList:orderedDeclarationListAST
-      !sourceFile:inSourceFile
+  #------------------------------------------------------------ Add Predefined types
+  #--- Add boolean type
+    ast.mDeclarationListAST += !@booleanDeclaration.new {![boolTypeName () nowhere]}
+  #--- Literal integer type
+    ast.mDeclarationListAST += !@literalIntegerDeclaration.new
+  #--- Add String type
+    ast.mDeclarationListAST += !@literalStringDeclaration.new {![staticStringTypeName () nowhere]}
+  #------------------------------------------------------------  Add type extensions
+    let declarationList = ast.mDeclarationListAST
+    var @declarationListAST newDeclarationList = {}
+    var extensionDeclarationListAST = ast.mExtensionDeclarationListAST
+    for (declaration) in declarationList do
+      [declaration addExtension !?extensionDeclarationListAST ?let newDeclaration]
+      newDeclarationList += !newDeclaration
+    end
+    ast.mDeclarationListAST = newDeclarationList
+  #--- Raise an error for every unhandled extension
+    for (typeName * * * *) in extensionDeclarationListAST do
+      error typeName : "this type is not defined or does not support extension"
+    end
+  #------------------------------------------------------------ Ordered declaration list
+    buildOrderedDeclarationList (
       !ast:ast
-      !?staticStringMap:globalLiteralStringMap
-      !?staticlistValues:staticListValueMap
-      ?context:let @semanticContext semanticContext
+      !sourceFile:inSourceFile.string
+      !endOfSourceFile:inEndOfSourceFile
+      ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
     )
-  #--- Semantic analysis
+  #------------------------------------------------------------ Check "check target" declarations
+    for (targetNameToCheck) in ast.mCheckTargetListAST do
+      if targetNameToCheck.string != inTargetName then
+        error targetNameToCheck : "invalid target" fixit { replace "\"" + inTargetName.string + "\"" }
+      end
+    end
+  #------------------------------------------------------------ Semantic context
     if @uint.errorCount == 0 then
-      semanticAnalysis (
-        !sourceFile:inSourceFile.string
+      @staticStringMap globalLiteralStringMap = {}
+      @staticlistValues_listMap staticListValueMap = {}
+      buildSemanticContext (
+        !orderedDeclarationList:orderedDeclarationListAST
+        !sourceFile:inSourceFile
         !ast:ast
-        !context:semanticContext
-        !endOfSourceFile:inEndOfSourceFile
-        !staticStringMap:globalLiteralStringMap
-        ?intermediateCode:@intermediateCodeStruct intermediateCodeStruct
+        !?staticStringMap:globalLiteralStringMap
+        !?staticlistValues:staticListValueMap
+        ?context:let @semanticContext semanticContext
       )
-    #--- Code generation
+    #--- Semantic analysis
       if @uint.errorCount == 0 then
-        codeOptimisation (!?intermediateCode:intermediateCodeStruct)
-        codeGeneration (
-          !currentDir:inCurrentDirectory
-          !outputFile:inSourceFile.string
-          !eof:inEndOfSourceFile
-          !intermediateCode:intermediateCodeStruct
-          !typeMap:semanticContext.mTypeMap
-          !target:inTargetName
-          !panicCodeType:semanticContext.mPanicCodeType
-          !panicLineType:semanticContext.mPanicLineType
-          !interrupts:semanticContext.mAvailableInterruptMap
-          !staticlistValues:staticListValueMap
-          !sourceFileSet:sourceFileAbsolutePathSet
-          !targetParameters:semanticContext.mTargetParameters
+        semanticAnalysis (
+          !sourceFile:inSourceFile.string
+          !ast:ast
+          !context:semanticContext
+          !endOfSourceFile:inEndOfSourceFile
+          !staticStringMap:globalLiteralStringMap
+          ?intermediateCode:@intermediateCodeStruct intermediateCodeStruct
         )
+      #--- Code generation
+        if @uint.errorCount == 0 then
+          codeOptimisation (!?intermediateCode:intermediateCodeStruct)
+          codeGeneration (
+            !currentDir:inCurrentDirectory
+            !outputFile:inSourceFile.string
+            !eof:inEndOfSourceFile
+            !intermediateCode:intermediateCodeStruct
+            !typeMap:semanticContext.mTypeMap
+            !target:inTargetName
+            !panicCodeType:semanticContext.mPanicCodeType
+            !panicLineType:semanticContext.mPanicLineType
+            !interrupts:semanticContext.mAvailableInterruptMap
+            !staticlistValues:staticListValueMap
+            !sourceFileSet:sourceFileAbsolutePathSet
+            !targetParameters:semanticContext.mTargetParameters
+          )
+        end
       end
     end
   end
@@ -173,32 +175,47 @@ private proc addTargetSpecificFiles
   ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
 {
   @ast ast = .default
-  if [option plm_options.useDirAsTargetDir value] != "" then # Target is definied in files
+  if [option plm_options.useDirAsTargetDir value] != "" then # Target is defined in files
     let targetDirectory = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     if [targetDirectory directoryExists] then
-      recursiveImportFileSystemTargetFiles (
-        !?ast:ast
-        !targetDirectory:targetDirectory
-        !importClauseList:{!.new {!inTargetName.string + ".plm-target" !inTargetName.location}}
-        !?importedFilePathSet:ioImportedFileAbsolutePathSet
-      )
+      let targetDefinitionFullPath = targetDirectory + "/" + inTargetName.string + "/+config.plm-target"
+      if [targetDefinitionFullPath fileExists] then
+        grammar plm_target_grammar in [targetDefinitionFullPath nowhere]
+          !?ioAST
+          ?importClauseList:let importedFileList
+          ?endOfSourceFile:*
+        recursiveImportFileSystemTargetFiles (
+          !?ast:ast
+          !targetDirectory:targetDirectory + "/" + inTargetName.string
+          !importClauseList:importedFileList
+          !?importedFilePathSet:ioImportedFileAbsolutePathSet
+        )
+      else
+        error inTargetName
+          : "This target is not defined in '" + [option plm_options.useDirAsTargetDir value] + "' directory"
+      end
     else
       error ["" nowhere]: "the '" + [option plm_options.useDirAsTargetDir value] + "' directory does not exist"
     end
   else # Target is defined in embedded files
   #--- Parse target definition file
     let @filewrapper fw = [filewrapper targetTemplates]
-    let source = [fw textFileContentsAtPath !inTargetName.string + "/+config.plm-target"]
-    grammar plm_target_grammar on (source, inTargetName.string)
-      !?ioAST
-      ?importClauseList:let importedFileList
-      ?endOfSourceFile:*
-    recursiveImportEmbeddedTargetFiles (
-      !?ast:ast
-      !currentDirectory:inTargetName.string
-      !importClauseList:importedFileList
-      !?importedFilePathSet:ioImportedFileAbsolutePathSet
-    )
+    if [fw fileExistsAtPath !inTargetName.string + "/+config.plm-target"] then
+      let source = [fw textFileContentsAtPath !inTargetName.string + "/+config.plm-target"]
+      grammar plm_target_grammar on (source, inTargetName.string)
+        !?ioAST
+        ?importClauseList:let importedFileList
+        ?endOfSourceFile:*
+      recursiveImportEmbeddedTargetFiles (
+        !?ast:ast
+        !currentDirectory:inTargetName.string
+        !importClauseList:importedFileList
+        !?importedFilePathSet:ioImportedFileAbsolutePathSet
+      )
+    else
+      error inTargetName
+        : "This target is not defined in embedded targets"
+    end
   end
   ioAST.mDeclarationListAST = ast.mDeclarationListAST + ioAST.mDeclarationListAST
   ioAST.mGlobalVarDeclarationListAST = ast.mGlobalVarDeclarationListAST + ioAST.mGlobalVarDeclarationListAST

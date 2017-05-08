@@ -13301,11 +13301,11 @@ C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedSampleFiles ("plm_opt
                                          "list-embedded-samples",
                                          "List embedded sample files") ;
 
-C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedTargets ("plm_options",
-                                         "listEmbeddedTargets",
+C_BoolCommandLineOption gOption_plm_5F_options_listTargets ("plm_options",
+                                         "listTargets",
                                          76,
-                                         "list-embedded-targets",
-                                         "List embedded targets") ;
+                                         "list-targets",
+                                         "List targets") ;
 
 C_BoolCommandLineOption gOption_plm_5F_options_noPanicGeneration ("plm_options",
                                          "noPanicGeneration",

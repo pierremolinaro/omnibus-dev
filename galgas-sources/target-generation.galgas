@@ -21,26 +21,41 @@ syntax extension plm_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 before {
+#--- List targets
   let @filewrapper fw = [filewrapper targetTemplates]
-  if [option plm_options.listEmbeddedTargets value] then
-    let embeddedFiles = [fw allTextFilePathes]
-    message "Embedded targets:\n"
-    for (f) in embeddedFiles do
-      if [f pathExtension] == "plm-target" then
-        message "  " + [[f lastPathComponent] stringByDeletingPathExtension] + '\n'
+  if [option plm_options.listTargets value] then
+    let targetDirectoryOption = [option plm_options.useDirAsTargetDir value]
+    if targetDirectoryOption == "" then
+      let embeddedFiles = [fw allTextFilePathes]
+      message "Embedded targets:\n"
+      for (f) in embeddedFiles do
+        if [f lastPathComponent] == "+config.plm-target" then
+          let targetName = [[f stringByDeletingLastPathComponent] subStringFromIndex !1]
+          message "  " + targetName + '\n'
+        end
+      end
+    else
+      let targetDirectory = [targetDirectoryOption absolutePathFromPath !.stringWithCurrentDirectory]
+      message "Targets in '" + targetDirectory + "' directory\n"
+      let allConfigFiles = [targetDirectory regularFilesWithExtensions !true !{!"plm-target"}]
+      for (f) in allConfigFiles do
+        if [f lastPathComponent] == "+config.plm-target" then
+          message "  " + [f stringByDeletingLastPathComponent] + '\n'
+        end
       end
     end
   end
+#--- Extract embedded targets
   let path = [option plm_options.extractEmbeddedTargets value]
   if path != "" then
     let embeddedFiles = [fw allTextFilePathes]
     for (f) in embeddedFiles do
       let filePath = path + f
-        message "  " + filePath + '\n'
-        let dir = [filePath stringByDeletingLastPathComponent]
-        [dir makeDirectory]
-        let text = [fw textFileContentsAtPath !f]
-        [text writeToFileWhenDifferentContents !filePath ?*]
+      message "  " + filePath + '\n'
+      let dir = [filePath stringByDeletingLastPathComponent]
+      [dir makeDirectory]
+      let text = [fw textFileContentsAtPath !f]
+      [text writeToFileWhenDifferentContents !filePath ?*]
     end
   end
 }
@@ -116,36 +131,6 @@ proc generateTarget
     !to:inProductDirectory + "/build.py"
     !{!"<<OPT_OPTIMIZATION_OPTION>>" !opt_optimizationOption, !"<<LLC_OPTIMIZATION_OPTION>>" !llc_optimizationOption}
   )
-##--- Copy build-verbose.py
-#  copyExecutableFile (
-#    !currentDir:inCurrentDirectory
-#    !from:inTargetName.string + "/" + inTargetParameters.mPython_build_verbose
-#    !to:inProductDirectory + "/build-verbose.py"
-#  )
-##--- Copy clean.py
-#  copyExecutableFile (
-#    !currentDir:inCurrentDirectory
-#    !from:inTargetName.string + "/" + inTargetParameters.mPython_clean
-#    !to:inProductDirectory + "/clean.py"
-#  )
-##--- Copy objsize.py
-#  copyExecutableFile (
-#    !currentDir:inCurrentDirectory
-#    !from:inTargetName.string + "/" + inTargetParameters.mPython_objsize
-#    !to:inProductDirectory + "/objsize.py"
-#  )
-##--- Copy objdump.py
-#  copyExecutableFile (
-#    !currentDir:inCurrentDirectory
-#    !from:inTargetName.string + "/" + inTargetParameters.mPython_objdump
-#    !to:inProductDirectory + "/objdump.py"
-#  )
-##--- Copy run.py
-#  copyExecutableFile (
-#    !currentDir:inCurrentDirectory
-#    !from:inTargetName.string + "/" + inTargetParameters.mPython_run
-#    !to:inProductDirectory + "/run.py"
-#  )
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

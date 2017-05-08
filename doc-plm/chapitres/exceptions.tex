@@ -35,19 +35,19 @@
 
 \sectionLabel{Définition des types liés à la panique}{typePanique}\index{panique:@\plm=panique:=}
 
-Une panique est caractérisée par trois informations :
+Une panique est caractérisée par trois informations~:
 \begin{itemize}
   \item son code (\refTableauPage{tableauCodePanique}) ;
   \item le nom du fichier source de l'instruction qui a levé la panique ;
   \item le numéro de ligne du fichier source de l'instruction qui a levé la panique.
 \end{itemize}
 
-Le type du code et du numéro de ligne ne sont pas prédéfinis par le langage. La construction suivante définit ces types :
+Le type du code et du numéro de ligne ne sont pas prédéfinis par le langage. La construction suivante définit ces types~:
 \begin{PLM}
 panique : nomDuTypeDuCode nomDuTypeDuNumeroDeLigne
 \end{PLM}
 
-Par exemple, les numéros de code sont des entiers signés 32 bits, et les numéros de ligne des entiers non signés 32 bits :
+Par exemple, les numéros de code sont des entiers signés 32 bits, et les numéros de ligne des entiers non signés 32 bits~:
 \begin{PLM}
 panique : $int32 $uint32
 \end{PLM}
@@ -81,7 +81,7 @@ Cette construction doit apparaître exactement une fois. Normalement, c'est le f
   \ligne
 \end{figure}
 
-Lors de l'occurrence d'une panique, l'exécution séquentielle des instructions est abandonnée, et :
+Lors de l'occurrence d'une panique, l'exécution séquentielle des instructions est abandonnée, et~:
 \begin{itemize}
   \item les interruptions sont masquées, si elles ne le sont pas déjà ;
   \item les routines de panique \texttt{setup} sont exécutées une fois ;
@@ -98,7 +98,7 @@ Si plusieurs routines de panique \texttt{loop} sont définies, celles-ci sont ex
 \index{panic setup@\plm=panic setup=}
 \index{Routine!panic\plm=panic=}
 
-Leur syntaxe est la suivante :
+Leur syntaxe est la suivante~:
 \begin{PLM}
 proc panic nom priorite {
   liste_instructions
@@ -109,7 +109,7 @@ proc panic nom priorite {
 
 \plm=liste_instructions= est une liste d'instructions qui n'a pas le droit d'engendrer de panique. Toutes les opérations susceptibles de le faire sont donc interdites, et leur usage provoque une erreur de compilation. Par exemple, l'addition \plm=+= est interdite, il faut utiliser \plm=&+= à la place.
 
-Trois constantes sont prédéfinies :
+Trois constantes sont prédéfinies~:
 \begin{itemize}
   \item \plm=CODE=, qui contient le code de panique, et dont le type est défini par la construction \plm=panic:= (\refSectionPage{typePanique}) ;
   \item \plm=FILE=, qui contient le nom du fichier source de l'instruction qui a déclenché la panique, et dont le type est \plm=StaticString= ;
@@ -121,7 +121,7 @@ Les trois constantes \plm=CODE=, \plm=FILE= et \plm=LINE= permettent de signaler
 
 \section{Exemples}
 
-Pour redémarrer un processeur ARMv7 lors d'une panique, on peut écrire la routine de panique \texttt{setup} suivante :
+Pour redémarrer un processeur ARMv7 lors d'une panique, on peut écrire la routine de panique \texttt{setup} suivante~:
 \begin{PLM}
 panic proc setup 255 {
   AIRCR = $AIRCR {VECTKEY:0x5FA, SYSRESETREQ}

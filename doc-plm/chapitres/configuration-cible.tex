@@ -7,14 +7,14 @@
 
 \chapterLabel{Définition d'une cible}{chapitreConfCible}
 
-Dans ce chapitre, nous allons voir comment est définie une cible, en prenant pour exemple la cible \texttt{teensy-3-1-it}. 
+Dans ce chapitre, nous allons voir comment est définie une cible, en prenant pour exemple la cible \texttt{teensy-3-1/unprivileged}. 
 
 Si vous voulez définir votre propre cible, la lecture de ce chapitre est indispensable. 
 
 Le compilateur recherche la cible citée~:
 \begin{itemize}
   \item par défaut, parmi les fichiers embarqués dans le compilateur PLM~;
-  \item si l'option \texttt{-T=$cibles$} est présente dans la ligne de commande, dans les fichiers du répertoire $cibles$.
+  \item si l'option \OPTION{-T=$repertoire$} (voir \refSectionPage{optionsCiblesEmbarquees}) est présente dans la ligne de commande, dans les fichiers du répertoire $cibles$.
 \end{itemize}
 
 Pour explorer les fichiers indispensables à la définition d'une cible, il est nécessaire de les placer dans le système de fichiers. La première section de ce chapitre (\refSectionPage{cibleDansSystemeFichiers}) va donc indiquer comment extraire de l'exécutable les fichiers de définition des cibles, et comment les exploiter.
@@ -26,85 +26,130 @@ Pour explorer les fichiers indispensables à la définition d'une cible, il est 
 Une cible est définie par une arborescence de fichiers, soit embarquée dans le compilateur, soit située dans le système de fichiers. On va voir dans cette section comment est configurée une cible dans le système de fichiers, permettant ainsi de créer ses propres cibles. Pour cela, on commence par extraire de l'exécutable du compilateur les cibles qu'il embarque.
 
 \subsection{Liste des cibles embarquées}
-À titre d'information, on peut appeler l'option \texttt{-L} pour obtenir la liste des cibles embarquées~:
+À titre d'information, on peut appeler l'option \OPTION{-L} pour obtenir la liste des cibles embarquées~:
 \begin{SHELL}
 {\bfseries plm -L}\\
 Embedded targets:\\ 
-\hspace*{1.2em}teensy-3-1-it\\
+\hspace*{1.2em}LPC-2294\\
+\hspace*{1.2em}teensy-3-1/privileged\\
+\hspace*{1.2em}teensy-3-1/unprivileged\\
 \hspace*{1.2em}...
 \end{SHELL}
 
 \subsection{Extraction des cibles embarquées}
-L'option \texttt{-X=cibles} permet d'extraire de l'exécutable du compilateur tous les fichiers de définition des cibles et de les placer dans le répertoire \texttt{cibles}\footnote{Ici, le répertoire destination \texttt{cibles} est un répertoire relatif au répertoire courant, mais un répertoire absolu peut aussi être utilisé.}~:
+L'option \OPTION{-X=cibles} permet d'extraire de l'exécutable du compilateur tous les fichiers de définition des cibles et de les placer dans le répertoire \texttt{cibles}\footnote{Ici, le répertoire destination \texttt{cibles} est un répertoire relatif au répertoire courant, mais un répertoire absolu peut aussi être utilisé.}~:
 \begin{SHELL}
 {\bfseries plm -X=cibles}\\
-\hspace*{1.2em}cibles/makefile.py\\
-\hspace*{1.2em}cibles/teensy-3-1-it.plm-target\\
-\hspace*{1.2em}cibles/files/boot-teensy-3-1-it.plm\\
 \hspace*{1.2em}...
 \end{SHELL}
 
-\subsection{Extraction d'un fichier d'exemple}
-On extrait maintenant un fichier d'exemple \texttt{01-blinkled.plm} pour la cible \texttt{teensy-3-1-it}~:
+
+
+
+
+\subsection{Liste des fichiers d'exemple embarqués dans l'exécutable}
+L'option \OPTION{-l} permet d'afficher la liste de tous les fichiers d'exemple embarqués dans l'exécutable du compilateur ~:
 \begin{SHELL}
-\bfseries plm -x=/teensy-3-1-it/01-blinkled.plm
+{\bfseries plm -l}\\
+\hspace*{1.2em}LPC-L2294/01-blinkleds.plm\\
+\hspace*{1.2em}LPC-L2294/02-control-register-array.plm\\
+\hspace*{1.2em}teensy-3-1/00-structure-example.plm\\
+\hspace*{1.2em}teensy-3-1/01-blink-led.plm\\
+\hspace*{1.2em}...
 \end{SHELL}
 
-\subsection{Compilation du fichier exemple}
-Le fichier \texttt{01-blinkled.plm} est écrit dans le répertoire local. Maintenant, pour compiler ce fichier, on peut faire référence aux cibles que l'on vient d'extraire au moyen de l'option \texttt{-T}~:
+
+
+
+\subsection{Extraction d'un fichier d'exemple}
+On extrait maintenant un fichier d'exemple \texttt{teensy-3-1/01-blink-led.plm}~:
 \begin{SHELL}
-\bfseries plm -T=cibles 01-blinkled.plm
+\bfseries plm -x=teensy-3-1/01-blink-led.plm
+\end{SHELL}
+
+Le fichier extrait est recopié dans le répertoire courant.
+
+
+
+
+
+
+\subsection{Compilation du fichier exemple}
+Par défaut, le compilateur utilise les cibles qu'il embarque :
+\begin{SHELL}
+\bfseries plm 01-blink-led.plm
+\end{SHELL}
+
+Si on veut utiliser les cibles définies dans le répertoire $cibles$, on utilise l'option \OPTION{-T}~:
+\begin{SHELL}
+\bfseries plm -T=cibles 01-blink-led.plm
 \end{SHELL}
 
 
 \subsection{Changement du nom de la cible dans le système de fichiers}
 
-Pour se convaincre que la cible nommée dans le fichier est bien celle située dans le répertoire \texttt{cibles}, nous allons changer son nom. Pour cela, nous devons modifier~:
+Pour se convaincre que la cible nommée dans le fichier est bien celle située dans le répertoire $cibles$, nous allons changer son nom. Pour cela, nous devons modifier~:
 \begin{itemize}
-  \item la référence à la cible dans le fichier \texttt{01-blinkled.plm}~;
+  \item la référence à la cible dans le fichier \texttt{01-blink-led.plm}~;
   \item le nom d'un fichier et d'un répertoire dans le répertoire \texttt{cibles}. 
 \end{itemize}
 
-Commençons par le fichier \texttt{01-blinkled.plm}. Sa première ligne est~:
+Commençons par le fichier \texttt{01-blink-led.plm}. Sa première ligne est~:
 
-\begin{PLM}[1]
-target "teensy-3-1"
+\begin{PLM}
+target "teensy-3-1/unprivileged"
 \end{PLM}
 
-Cette ligne signifie que la cible s'appelle \texttt{teensy-3-1-it}. Nous allons la renommer en \texttt{myTeensy}. La première ligne du fichier \texttt{01-blinkled.plm} devient donc~:
+Cette ligne signifie que la cible s'appelle \texttt{teensy-3-1/unprivileged}. Nous allons la renommer en \texttt{teensy-3-1/custom}. La première ligne du fichier \texttt{01-blink-led.plm} devient donc~:
 
-\begin{PLM}[1]
-target "myTeensy"
+\begin{PLM}
+target "teensy-3-1/custom"
 \end{PLM}
 
-Maintenant, si on essaie de compiler le fichier \texttt{01-blinkled.plm}, une erreur se déclenche~: la cible \texttt{myTeensy} n'est pas définie. Pour la définir, listons le contenu le répertoire \texttt{cibles}~:
+Maintenant, si on essaie de compiler le fichier \texttt{01-blink-led.plm}, une erreur se déclenche~: la cible \texttt{teensy-3-1/custom} n'est pas définie.
 \begin{SHELL}
-{\bfseries ls -1F cibles}\\
-files/\\
-makefile.py\\
-...\\
-teensy-3-1-it/\\
-teensy-3-1-it.plm-target\\
-...
+{\bfseries plm -T=cibles 01-blink-led.plm}\\
+\textcolor{red}{semantic error \#1: This target is not defined in 'cibles' directory}\\
+\textcolor{red}{target "teensy-3-1/custom"}\\
+\textcolor{red}{-{}-{}-{}-{}-{}-{}-\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}}
 \end{SHELL}
 
-Le répertoire \texttt{files} et le fichier \texttt{makefile.py} seront présentés plus loin. Chaque cible est définie par un répertoire et un fichier, dont l'extension est \texttt{plm-target}. Nous allons donc effectuer les renommages suivants~:
-\begin{itemize}
-  \item le répertoire \texttt{teensy-3-1-it} est renommé en \texttt{myTeensy}~;
-  \item le fichier \texttt{teensy-3-1-it.plm-target} en \texttt{myTeensy.plm-target}.
-\end{itemize}
 
-À présent, la compilation s'effectue avec succès~:
+Pour définir la cible, il faut d'abord comprendre comment le répertoire \texttt{cibles} est organisé. Affichons la liste de ses sous répertoires~:
 \begin{SHELL}
-\bfseries plm -T=cibles 01-blinkled.plm
+{\bfseries find cibles -type d}\\
+cibles\\
+cibles/LPC-L2294\\
+cibles/teensy-3-1\\
+cibles/teensy-3-1/privileged\\
+cibles/teensy-3-1/unprivileged
+\end{SHELL}
+
+Chaque sous répertoire peut définir une cible\footnote{Pour cela, il doit en fait contenir un fichier \texttt{+config.plm-target}.}. Il suffit donc de dupliquer le répertoire \texttt{teensy-3-1/unprivileged} en le renommant \texttt{teensy-3-1/custom}~:
+\begin{SHELL}
+{\bfseries find cibles -type d}\\
+cibles\\
+cibles/LPC-L2294\\
+cibles/teensy-3-1\\
+cibles/teensy-3-1/custom\\
+cibles/teensy-3-1/privileged\\
+cibles/teensy-3-1/unprivileged
+\end{SHELL}
+
+Maintenant, la compilation s'effectue avec succès~:
+\begin{SHELL}
+{\bfseries plm -T=cibles 01-blink-led.plm}
 \end{SHELL}
 
 Si on essaie de compiler en utilisant les cibles embarquées dans le compilateur~:
 \begin{SHELL}
-\bfseries plm 01-blinkled.plm
+{\bfseries plm 01-blink-led.plm}\\
+\textcolor{red}{semantic error \#1: This target is not defined in embedded targets}\\
+\textcolor{red}{target "teensy-3-1/custom"}\\
+\textcolor{red}{-{}-{}-{}-{}-{}-{}-\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}\^{}}
 \end{SHELL}
 
-Une erreur se déclenche, la cible \texttt{myTeensy} n'étant pas définie dans l'exécutable du compilateur.
+Une erreur se déclenche, la cible \texttt{teensy-3-1/custom} n'étant pas définie dans l'exécutable du compilateur.
 
 
 
@@ -113,83 +158,360 @@ Une erreur se déclenche, la cible \texttt{myTeensy} n'étant pas définie dans 
 
 \sectionLabel{Comment est définie une cible}{exempleDefinitionCible}
 
-Nous allons décrire comment est définie une cible dans le système de fichiers. Nous prenons comme exemple la cible \texttt{myTeensy} du répertoire \texttt{cibles} (voir la \refSectionPage{cibleDansSystemeFichiers}).
+Nous allons décrire comment est définie une cible dans le système de fichiers. Nous prenons comme exemple la cible \texttt{teensy-3-1/custom} du répertoire \texttt{cibles} (voir la \refSectionPage{cibleDansSystemeFichiers}).
 
-Pour la cible \texttt{myTeensy}~:
-\begin{itemize}
-  \item le fichier \texttt{myTeensy.plm-target} permet de paramétrer l'analyse sémantique~;
-  \item le répertoire \texttt{myTeensy} permet de configurer la génération de code.
-\end{itemize}
+Un répertoire définit une cible si il contient un fichier nommé \texttt{+config.plm-target}. Le contenu de ce fichier configure la cible, en voici le début~:
 
-On va explorer successivement le fichier \texttt{myTeensy.plm-target} puis le répertoire \texttt{myTeensy}.
-
-
-
-
-
-
-
-
-
-
-
-\subsectionLabel{Le fichier \texttt{myTeensy.plm-target}}{fichierTarget}
-
-Voici le contenu du fichier \texttt{myTeensy.plm-target}~:
-
-\begin{PLM}[1]
-configuration
-  $int32 // Panic code type
-  :$uint32 // Panic line type
-  :$uint32 // Unsigned integer type
-  :32 // Pointer bit count
-  :1024 // System stack size
-  :32 // User stacked registers byte count
-  :12 // Service handler system stack byte count footprint 
-  :8 // Section handler system stack byte count footprint
-  :"udfcoded" // Section invocation scheme
-{ // Interruption vectors
-  NMI : 2
-  MemManage : 4
-  BusFault : 5
-  UsageFault : 6
-  DebugMonitor : 12
-  PendSV : 14
-  systick : 15
-  DMAChannel0TranfertComplete : 16
-  ...
-  softwareInterrupt : 110
-}
-
-import "files/registers-mk20dx256.plm"
-import "files/teensy-3-1-boot.plm"
-import "files/teensy-3-1-xtr.plm"
-import "files/teensy-3-1-digital-io.plm"
-import "files/teensy-3-1-lcd.plm"
-import "files/teensy-3-1-panic.plm"
-import "files/semaphore.plm"
+\begin{PLM}
+//--- Python tool list
+PYTHON_UTILITIES:
+   "../../py-toolpath.txt" -> "sources/toolpath.py",
+   "../../py-makefile.txt" -> "sources/makefile.py",
+   ...
 \end{PLM}
 
-Le fichier \texttt{myTeensy.plm-target} contient la directive \plm=configuration= et une séquence d'importation, qui liste tous les fichiers qui seront automatiquement inclus lors de la compilation d'un projet.
 
-{\bf Panic code type.} C'est le type utilisé pour le code de panique.
+Le contenu est une séquence de définitions, chacune d'elles ayant la syntaxe suivante~:
+\begin{itemize}
+  \item son nom (dans l'exemple ci-dessus, \plm=PYTHON_UTILITIES=)~;
+  \item le délimiteur \plm=:=~;
+  \item une liste d'items séparés par une \plm=,=, ce qui signifie qu'un nombre quelconque d'items est accepté~;
+  \item {\bf ou} une liste d'items séparés par un \plm=;=, ce qui signifie qu'un nombre fixe d'items est accepté, et que chacun d'eux a une signification particulière~;
+  \item {\bf ou} un simple item.
+\end{itemize}
 
-{\bf Panic line type.} Type utilisé pour coder le numéro de la ligne source du fichier contenant l'instruction qui peut engendrer une panique.
+L'ordre des séquences est imposée.
 
-{\bf Unsigned integer type.}
+Les sections qui suivent détaillent chaque définition, dans leur ordre d'apparition dans le fichier \texttt{+config.plm-target}.
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{\texttt{PYTHON\_UTILITIES}}{configurationPythonUtilities}
+
+\begin{PLM}
+PYTHON_UTILITIES:
+   "../../py-toolpath.txt" -> "sources/toolpath.py",
+   "../../py-makefile.txt" -> "sources/makefile.py",
+   "../../py-check-stacks.txt" -> "sources/check-stacks.py",
+   "../../py-plm.txt" -> "sources/plm.py",
+   "../../py-build-verbose.txt" -> "build-verbose.py",
+   "../../py-clean.txt" -> "clean.py",
+   "../../py-objdump.txt" -> "objdump.py",
+   "../../py-objsize.txt" -> "objsize.py",
+   "../py-run.txt" -> "run.py"
+\end{PLM}
+
+Cette déclaration liste une liste de fichiers à recopier dans le répertoire engendré pour chaque projet :
+\begin{itemize}
+  \item le fichier source (par exemple \texttt{../../py-toolpath.txt}) est désigné par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}~;
+  \item le fichier destination (par exemple \texttt{sources/toolpath.py}) est désigné par un chemin relatif par rapport au répertoire du projet~;
+  \item le fichier destination est rendu exécutable.
+\end{itemize}
+
+
+
+
+
+\sectionLabel{\texttt{PYTHON\_BUILD}}{configurationPythonBuild}
+
+\begin{PLM}
+PYTHON_BUILD:
+   "../py-build.txt"
+\end{PLM}
+
+Le fichier source (ici \texttt{../py-build.txt}) est désigné par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
+
+Deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fichier source~:
+\begin{itemize}
+  \item \texttt{<<OPT\_OPTIMIZATION\_OPTION>>} est remplacé par l'option d'optimisation choisie (\texttt{O0}, \texttt{O1}, \texttt{O2}, \texttt{O3}, \texttt{Os} ou \texttt{Oz})~;
+  \item \texttt{<<LLC\_OPTIMIZATION\_OPTION>>} est remplacé par l'option d'optimisation correspondante pour l'utilitaire \texttt{llc} (\texttt{O0}, \texttt{O1}, \texttt{O2} ou \texttt{O3}.
+\end{itemize}
+
+
+La chaîne résultat est copiée dans le fichier \texttt{build.py} situé dans le répertoire du projet. Ce fichier est rendu exécutable.
+
+
+
+
+
+
+
+
+
+\sectionLabel{\texttt{LINKER\_SCRIPT}}{configurationLinkerScript}
+
+\begin{PLM}
+LINKER_SCRIPT:
+  "../ld-linker.txt"
+\end{PLM}
+
+Le fichier source (ici \texttt{../ld-linker.txt}) est désigné par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
+
+Une substitution est effectuée dans la chaîne obtenue par la lecture du fichier source~:
+\begin{itemize}
+  \item \texttt{!SYSTEMSTACKSIZE!} est remplacé par la taille allouée (en nombre d'octets) à la pile système~; cette valeur est fixée par la définition \texttt{SYSTEM\_STACK\_SIZE}, voir \refSectionPage{configurationSystemStackSize}.
+\end{itemize}
+
+La chaîne résultat est copiée dans le fichier \texttt{sources/linker.ld} situé dans le répertoire du projet.
+
+
+
+
+
+
+
+
+
+
+
+\sectionLabel{\texttt{PANIC}}{configurationPanic}
+
+\begin{PLM}
+PANIC:
+  $int32 ; $uint32 ; "../target-panic.ll"
+\end{PLM}
+
+Trois informations (séparées par un point-virgule) sont définies ici~:
+\begin{itemize}
+  \item la première (ici \plm=$int32=) est le type PLM utilisé pour le code de panique~;
+  \item la deuxième (ici \plm=$uint32=) est le type PLM utilisé pour coder le numéro de la ligne source du fichier contenant l'instruction qui peut engendrer une panique~;
+  \item la dernière (ici \plm="../target-panic.ll"=) désigne un fichier source LLVM par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
+\end{itemize}
+
+Deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fichier source \texttt{../target-panic.ll}~:
+\begin{itemize}
+  \item \texttt{!PANICCODE!} est remplacé par le type LLVM correspondant type PLM utilisé pour le code de panique (donc, ici \texttt{i32} qui est le type LLVM image de \plm=$int32=)~;
+  \item \texttt{!PANICLINE!} est remplacé par le type PLM utilisé pour coder le numéro de la ligne source  (donc, ici \texttt{i32} qui est aussi le type LLVM image de \plm=$uint32=).
+\end{itemize}
+
+
+La chaîne résultat est ensuite ajouté au fichier source LLVM \texttt{src.ll} du projet.
+
+
+
+
+
+
+
+\sectionLabel{\texttt{UINT\_TYPE}}{configurationUINT}
+
+\begin{PLM}
+UINT_TYPE:
+  $uint32
+\end{PLM}
+
+
+Définit le type \plm=$uint=.
+
+
+
+
+
+
+
+\sectionLabel{\texttt{POINTER\_BIT\_COUNT}}{configurationPointerBitCount}
+
+\begin{PLM}
+POINTER_BIT_COUNT:
+  32
+\end{PLM}
+
+
 
 {\bf Pointer bit count.} Le nombre de bits d'un pointeur. Le Cortex-M4 étant une machine 32 bits, sa valeur est 32.
 
+
+
+
+
+
+
+\sectionLabel{\texttt{SYSTEM\_STACK\_SIZE}}{configurationSystemStackSize}
+
+\begin{PLM}
+SYSTEM_STACK_SIZE:
+  1024
+\end{PLM}
+
+
+
+
 {\bf System stack size.} La taille en octets allouée à la pile système.
+
+
+
+
+
+
+
+\sectionLabel{\texttt{SERVICE}}{configurationService}
+
+\begin{PLM}
+SERVICE:
+  "service-handler.s" ;
+  "service-dispatcher-entry.s" ;
+  "service-dispatcher-header.s" ;
+  "service-entry.s" ;
+  12 // as_svc_handler saves 3 registers on system stack
+\end{PLM}
+
+
+
+
 
 {\bf User stacked registers byte count.} Le nombre d'octets empilés dans la pile utilisateur lors d'une exception. Le Cortex-M4 empilant 8 registres, cette valeur est 32. Elle est utilisée pour les calculs de pile.
 
 {\bf Service handler system stack byte count footprint.} Le \emph{service handler}\footnote{Utilisé pour implémenter les appels système par \texttt{SVC} et les interruptions.} utilise le nombre indiqué d'octets dans la pile. Cette valeur est utilisée pour les calculs de pile.
 
+
+
+
+
+
+
+
+\sectionLabel{\texttt{SECTION}}{configurationSection}
+
+\begin{PLM}
+SECTION:
+  "udfcoded-section-handler.s" ;
+  "udfcoded-section-dispatcher-entry.s" ;
+  "udfcoded-section-dispatcher-header.s" ;
+  "udfcoded-section-invocation.s" ;
+  8 // saves 2 registers on system stack
+\end{PLM}
+
 {\bf Section handler system stack byte count footprint.} Le \emph{section handler}\footnote{Utilisé pour implémenter les sections.} utilise le nombre indiqué d'octets dans la pile. Cette valeur est utilisée pour les calculs de pile.
 
 {\bf Section invocation scheme.} Cette chaîne définit le schéma qui est utilisé pour implémenter les appels de section (\refSubsectionPage{schemaAppelSections}).
 
+
+
+
+
+
+
+
+\sectionLabel{\texttt{C\_FILES}}{configurationFichiersC}
+
+\begin{PLM}
+C_FILES:
+  "../c-cortex-m4-context.c",
+  "../../c-real-time-kernel.c",
+  "../c-countTrainingZeros.c"
+\end{PLM}
+
+
+
+
+
+
+
+
+\sectionLabel{\texttt{S\_FILES}}{configurationFichiersAssembleur}
+
+\begin{PLM}
+S_FILES:
+  "../s-cortex-m4-header.s",
+  "../s-endloop-for-unhandled-interrupt.s",
+  "s-interrupt-vectors.s",
+  "s-reset-handler.s"
+\end{PLM}
+
+
+
+
+
+
+
+
+\sectionLabel{\texttt{LL\_FILES}}{configurationFichiersLLVM}
+
+\begin{PLM}
+LL_FILES:
+  "../ll-cortex-m4.ll",
+  "../../ll-clear-bss.ll",
+  "../../ll-copy-data-section.ll",
+  "../../ll-configuration-on-boot.ll",
+  "../../ll-create-task.ll"
+\end{PLM}
+
+
+
+
+
+
+
+
+\sectionLabel{\texttt{PLM\_FILES}}{configurationFichiersPLM}
+
+\begin{PLM}
+PLM_FILES:
+  "../plm-registers-mk20dx256.plm",
+  "../plm-teensy-3-1-boot.plm",
+  "../plm-teensy-3-1-xtr.plm",
+  "../plm-teensy-3-1-digital-io.plm",
+  "../plm-teensy-3-1-lcd.plm",
+  "../plm-teensy-3-1-panic.plm",
+  "../../plm-semaphore.plm"
+\end{PLM}
+
+
+
+
+
+
+
+
+\sectionLabel{\texttt{INTERRUPT\_HANDLER}}{configurationInterruptHandler}
+
+\begin{PLM}
+INTERRUPT_HANDLER:
+  "../xtr-interrupt-handler.s" ;
+  "../undefined-interrupt.s" ;
+  32 // Cortex M4 saves 8 regs in user stack on interrupt
+\end{PLM}
+
+
+
+
+
+
+
+
+\sectionLabel{\texttt{INTERRUPTS}}{configurationInterrupts}
+
+\begin{PLM}
+INTERRUPTS:
+  NMI -> 2,
+  MemManage -> 4,
+  BusFault -> 5,
+  UsageFault -> 6,
+  DebugMonitor -> 12,
+  PendSV -> 14,
+  systick -> 15,
+  DMAChannel0TranfertComplete -> 16,
+  DMAChannel1TranfertComplete -> 17,
+  ...
+  pinDetectPortD -> 106,
+  pinDetectPortE -> 107,
+  softwareInterrupt -> 110
+\end{PLM}
+
+
+
+
+
+
+
+`
 {\bf Interruption vectors.} La liste de toutes les interruptions, chacune d'elle étant accompagnée de son numéro. Celui-ci est utilisé lors de la panique, si une interruption se déclenche alors qu'aucune routine de réponse à cette interruption n'est installée.
 
 
@@ -197,11 +519,11 @@ Le fichier \texttt{myTeensy.plm-target} contient la directive \plm=configuration
 
 
 
-\subsectionLabel{Schéma d'appel des sections}{schemaAppelSections}
+\sectionLabel{Schéma d'appel des sections}{schemaAppelSections}
 
 Quand le code d'une tâche appelle une section, celui-ci doit s'effectuer à travers un \emph{system call}\footnote{Quand une section est appelée à partir d'un mode privilégié, l'appel est un simple appel de routine.}.
 
-L'implémentation de cette opération est paramètrable grâce à quatre fichiers assembleurs, placés dans le répertoire \texttt{myTeensy}. Le nom de ces fichiers est préfixé par la chaîne spécifiée dans le champ \emph{Section invocation scheme} de la \plm=configuration= (voir \refSubsectionPage{fichierTarget}), ce qui autorise de disposer de plusieurs implémentations possibles. Pour le schéma nommé \plm="udfcoded"=, ces quatre fichiers sont~:
+L'implémentation de cette opération est paramètrable grâce à quatre fichiers assembleurs, placés dans le répertoire \texttt{teensy-3-1/custom}. Le nom de ces fichiers est préfixé par la chaîne spécifiée dans le champ \emph{Section invocation scheme} de la \plm=configuration= (voir \refSubsectionPage{fichierTarget}), ce qui autorise de disposer de plusieurs implémentations possibles. Pour le schéma nommé \plm="udfcoded"=, ces quatre fichiers sont~:
 \begin{itemize}
   \item \texttt{udfcoded-section-dispatcher-code.s}~: implémentation du code exécuté par l'appel système invoqué par l'appel à une section~;
   \item \texttt{udfcoded-section-dispatcher-entry.s}~: entrée du tableau définissant le nom de la fonction implémentant la section~;
@@ -488,7 +810,7 @@ Les fichiers \texttt{r12direct-section-dispatcher-header.s} et \texttt{r12direct
 
 
 
-\subsection{Le répertoire \texttt{myTeensy}}
+\subsection{Le répertoire \texttt{teensy-3-1/custom}}
 
 Texte à définir…
 
