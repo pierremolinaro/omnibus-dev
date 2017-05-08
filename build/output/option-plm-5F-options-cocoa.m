@@ -52,10 +52,10 @@ void enterOptionsFor_plm_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"plm_options"
-    identifier:@"listEmbeddedTargets"
+    identifier:@"listTargets"
     commandChar:76
-    commandString:@"list-embedded-targets"
-    comment:@"List embedded targets"
+    commandString:@"list-targets"
+    comment:@"List targets"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

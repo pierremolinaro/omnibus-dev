@@ -16,7 +16,7 @@ before {
     let files = [fw allTextFilePathes]
     message "Embedded sample code:\n"
     for (f) in files do
-      message "  " + f + '\n'
+      message "  " + [f subStringFromIndex !1] + '\n'
     end
   end
   let path = [option plm_options.extractEmbeddedSampleFile value]

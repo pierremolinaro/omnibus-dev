@@ -2386,7 +2386,7 @@ extern C_BoolCommandLineOption gOption_plm_5F_options_emitTypeMap ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedSampleFiles ;
 
-extern C_BoolCommandLineOption gOption_plm_5F_options_listEmbeddedTargets ;
+extern C_BoolCommandLineOption gOption_plm_5F_options_listTargets ;
 
 extern C_BoolCommandLineOption gOption_plm_5F_options_noPanicGeneration ;
 
