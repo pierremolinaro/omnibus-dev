@@ -1,5 +1,4 @@
 option plm_options {
-  @stringlist pathList: '\0', "path" -> "Search pathes for source files"
   @bool noPanicGeneration: '\0', "no-panic-generation" -> "Do not generate panic code"
 
   @bool emitTypeMap : 't', "emit-type-map" -> "Emit type map in an HTML file"
@@ -15,6 +14,8 @@ option plm_options {
   @bool listEmbeddedTargets : 'L', "list-embedded-targets" -> "List embedded targets"
   @string extractEmbeddedTargets : 'X', "extract-embedded-targets" -> "Extract embedded targets"
   @string useDirAsTargetDir : 'T', "use-target-dir" -> "Use directory as target definition directory, instead of using embedded targets"
+
+  @stringlist pathList: '\0', "path" -> "Search pathes for source files"
 
 #--- Optimization
   @bool optimization_displayDeadCodeElimination : 'z', "display-deadcode-elimination" -> "Display dead code elimination"
