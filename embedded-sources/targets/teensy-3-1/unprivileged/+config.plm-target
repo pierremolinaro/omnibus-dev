@@ -18,9 +18,6 @@ LINKER_SCRIPT:
 // Panic code type, panic line type, panic generation file
 PANIC:
   $int32 ; $uint32 ; "../target-panic.ll"
-// Unsigned integer type
-UINT_TYPE:
-  $uint32
 // Pointer bit count
 POINTER_BIT_COUNT:
   32
@@ -30,17 +27,17 @@ SYSTEM_STACK_SIZE:
 // Service implementation
 SERVICE:
   "service-handler.s" ;
-  "service-dispatcher-entry.s" ;
+  12 ; // as_svc_handler saves 3 registers on system stack
   "service-dispatcher-header.s" ;
-  "service-entry.s" ;
-  12 // as_svc_handler saves 3 registers on system stack
+  "service-dispatcher-entry.s" ;
+  "service-entry.s"
 // Section implementation
 SECTION:
   "udfcoded-section-handler.s" ;
-  "udfcoded-section-dispatcher-entry.s" ;
+  8 ; // saves 2 registers on system stack
   "udfcoded-section-dispatcher-header.s" ;
-  "udfcoded-section-invocation.s" ;
-  8 // saves 2 registers on system stack
+  "udfcoded-section-dispatcher-entry.s" ;
+  "udfcoded-section-invocation.s"
 //--- C Source files
 C_FILES:
   "../c-cortex-m4-context.c",

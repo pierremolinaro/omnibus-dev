@@ -156,7 +156,7 @@ Une erreur se déclenche, la cible \texttt{teensy-3-1/custom} n'étant pas défi
 
 
 
-\sectionLabel{Comment est définie une cible}{exempleDefinitionCible}
+\sectionLabel{Définition d'une cible : fichier \texttt{+config.plm-target}}{exempleDefinitionCible}
 
 Nous allons décrire comment est définie une cible dans le système de fichiers. Nous prenons comme exemple la cible \texttt{teensy-3-1/custom} du répertoire \texttt{cibles} (voir la \refSectionPage{cibleDansSystemeFichiers}).
 
@@ -175,9 +175,10 @@ Le contenu est une séquence de définitions, chacune d'elles ayant la syntaxe s
 \begin{itemize}
   \item son nom (dans l'exemple ci-dessus, \plm=PYTHON_UTILITIES=)~;
   \item le délimiteur \plm=:=~;
-  \item une liste d'items séparés par une \plm=,=, ce qui signifie qu'un nombre quelconque d'items est accepté~;
-  \item {\bf ou} une liste d'items séparés par un \plm=;=, ce qui signifie qu'un nombre fixe d'items est accepté, et que chacun d'eux a une signification particulière~;
-  \item {\bf ou} un simple item.
+  \item une liste d'items séparés par un virgule, ce qui signifie qu'un nombre quelconque d'items est accepté~;
+  \item {\bf ou} une liste d'items séparés par un point-virgule, ce qui signifie qu'un nombre fixe d'items est accepté, et que chacun d'eux a une signification particulière~;
+  \item {\bf ou} un simple item~;
+  \item quand un item désigne un fichier par un chemin relatif, celui-ci est pris à partir du répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
 \end{itemize}
 
 L'ordre des séquences est imposée.
@@ -193,7 +194,7 @@ Les sections qui suivent détaillent chaque définition, dans leur ordre d'appar
 
 
 
-\sectionLabel{\texttt{PYTHON\_UTILITIES}}{configurationPythonUtilities}
+\subsectionLabel{\texttt{PYTHON\_UTILITIES}}{configurationPythonUtilities}\index{PYTHON\_UTILITIES}
 
 \begin{PLM}
 PYTHON_UTILITIES:
@@ -219,7 +220,7 @@ Cette déclaration liste une liste de fichiers à recopier dans le répertoire e
 
 
 
-\sectionLabel{\texttt{PYTHON\_BUILD}}{configurationPythonBuild}
+\subsectionLabel{\texttt{PYTHON\_BUILD}}{configurationPythonBuild}\index{PYTHON\_BUILD}
 
 \begin{PLM}
 PYTHON_BUILD:
@@ -231,7 +232,7 @@ Le fichier source (ici \texttt{../py-build.txt}) est désigné par un chemin rel
 Deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fichier source~:
 \begin{itemize}
   \item \texttt{<<OPT\_OPTIMIZATION\_OPTION>>} est remplacé par l'option d'optimisation choisie (\texttt{O0}, \texttt{O1}, \texttt{O2}, \texttt{O3}, \texttt{Os} ou \texttt{Oz})~;
-  \item \texttt{<<LLC\_OPTIMIZATION\_OPTION>>} est remplacé par l'option d'optimisation correspondante pour l'utilitaire \texttt{llc} (\texttt{O0}, \texttt{O1}, \texttt{O2} ou \texttt{O3}.
+  \item \texttt{<<LLC\_OPTIMIZATION\_OPTION>>} est remplacé par l'option d'optimisation correspondante pour l'utilitaire \texttt{llc} (\texttt{O0}, \texttt{O1}, \texttt{O2} ou \texttt{O3}).
 \end{itemize}
 
 
@@ -245,7 +246,7 @@ La chaîne résultat est copiée dans le fichier \texttt{build.py} situé dans l
 
 
 
-\sectionLabel{\texttt{LINKER\_SCRIPT}}{configurationLinkerScript}
+\subsectionLabel{\texttt{LINKER\_SCRIPT}}{configurationLinkerScript}\index{LINKER\_SCRIPT}
 
 \begin{PLM}
 LINKER_SCRIPT:
@@ -256,7 +257,7 @@ Le fichier source (ici \texttt{../ld-linker.txt}) est désigné par un chemin re
 
 Une substitution est effectuée dans la chaîne obtenue par la lecture du fichier source~:
 \begin{itemize}
-  \item \texttt{!SYSTEMSTACKSIZE!} est remplacé par la taille allouée (en nombre d'octets) à la pile système~; cette valeur est fixée par la définition \texttt{SYSTEM\_STACK\_SIZE}, voir \refSectionPage{configurationSystemStackSize}.
+  \item \texttt{!SYSTEMSTACKSIZE!} est remplacé par la taille allouée (en nombre d'octets) à la pile système~; cette valeur est fixée par la définition \texttt{SYSTEM\_STACK\_SIZE}, voir \refSubsectionPage{configurationSystemStackSize}.
 \end{itemize}
 
 La chaîne résultat est copiée dans le fichier \texttt{sources/linker.ld} situé dans le répertoire du projet.
@@ -271,18 +272,18 @@ La chaîne résultat est copiée dans le fichier \texttt{sources/linker.ld} situ
 
 
 
-\sectionLabel{\texttt{PANIC}}{configurationPanic}
+\subsectionLabel{\texttt{PANIC}}{configurationPanic}\index{PANIC}
 
 \begin{PLM}
 PANIC:
   $int32 ; $uint32 ; "../target-panic.ll"
 \end{PLM}
 
-Trois informations (séparées par un point-virgule) sont définies ici~:
+Trois arguments (séparés par un point-virgule) sont définis ici~:
 \begin{itemize}
-  \item la première (ici \plm=$int32=) est le type PLM utilisé pour le code de panique~;
-  \item la deuxième (ici \plm=$uint32=) est le type PLM utilisé pour coder le numéro de la ligne source du fichier contenant l'instruction qui peut engendrer une panique~;
-  \item la dernière (ici \plm="../target-panic.ll"=) désigne un fichier source LLVM par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
+  \item le premier (ici \plm=$int32=) est le type PLM utilisé pour le code de panique~;
+  \item le deuxième (ici \plm=$uint32=) est le type PLM utilisé pour coder le numéro de la ligne source du fichier contenant l'instruction qui peut engendrer une panique~;
+  \item le dernier (ici \plm="../target-panic.ll"=) désigne un fichier source LLVM par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
 \end{itemize}
 
 Deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fichier source \texttt{../target-panic.ll}~:
@@ -292,7 +293,7 @@ Deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fi
 \end{itemize}
 
 
-La chaîne résultat est ensuite ajouté au fichier source LLVM \texttt{src.ll} du projet.
+La chaîne résultat est ensuite ajoutée au fichier source LLVM \texttt{src.ll} du projet.
 
 
 
@@ -300,50 +301,34 @@ La chaîne résultat est ensuite ajouté au fichier source LLVM \texttt{src.ll} 
 
 
 
-\sectionLabel{\texttt{UINT\_TYPE}}{configurationUINT}
-
-\begin{PLM}
-UINT_TYPE:
-  $uint32
-\end{PLM}
-
-
-Définit le type \plm=$uint=.
-
-
-
-
-
-
-
-\sectionLabel{\texttt{POINTER\_BIT\_COUNT}}{configurationPointerBitCount}
+\subsectionLabel{\texttt{POINTER\_BIT\_COUNT}}{configurationPointerBitCount}\index{POINTER\_BIT\_COUNT}
 
 \begin{PLM}
 POINTER_BIT_COUNT:
   32
 \end{PLM}
 
-
-
-{\bf Pointer bit count.} Le nombre de bits d'un pointeur. Le Cortex-M4 étant une machine 32 bits, sa valeur est 32.
-
+Le nombre de bits d'un pointeur. Le Cortex-M4 étant une machine 32 bits, sa valeur est 32.
 
 
 
 
 
 
-\sectionLabel{\texttt{SYSTEM\_STACK\_SIZE}}{configurationSystemStackSize}
+
+
+
+
+
+
+\subsectionLabel{\texttt{SYSTEM\_STACK\_SIZE}}{configurationSystemStackSize}\index{SYSTEM\_STACK\_SIZE}
 
 \begin{PLM}
 SYSTEM_STACK_SIZE:
   1024
 \end{PLM}
 
-
-
-
-{\bf System stack size.} La taille en octets allouée à la pile système.
+La taille en octets allouée à la pile système.
 
 
 
@@ -351,24 +336,44 @@ SYSTEM_STACK_SIZE:
 
 
 
-\sectionLabel{\texttt{SERVICE}}{configurationService}
+\subsectionLabel{\texttt{SERVICE}}{configurationService}\index{SERVICE}
 
 \begin{PLM}
 SERVICE:
   "service-handler.s" ;
-  "service-dispatcher-entry.s" ;
+  12 ; // as_svc_handler saves 3 registers on system stack
   "service-dispatcher-header.s" ;
-  "service-entry.s" ;
-  12 // as_svc_handler saves 3 registers on system stack
+  "service-dispatcher-entry.s" ;
+  "service-entry.s"
 \end{PLM}
 
+Le premier argument (ici \plm="service-handler.s"=) est un fichier assembleur désigné par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}. Son contenu est simplement ajouté au fichier source assembleur \texttt{src.s} du projet. Ce fichier contient l'implémentation du \emph{svc handler}.
+
+Le deuxième argument (ici \plm=12=) est le nombre d'octets de la pile système que l'exécution du \emph{svc handler} utilise.
+
+Les troisième et quatrième arguments (ici les chaînes \plm="service-dispatcher-header.s"= et \plm="service-dispatcher-entry.s"=) désignent des fichiers assembleur par un chemin relatif au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}. Ces deux fichiers permettent de construire la table des appels système. D'abord, le contenu du fichier \plm="service-dispatcher-header.s"= est simplement ajouté au fichier source assembleur \texttt{src.s} du projet. Ensuite, l'opération suivante est effectuée pour chaque service défini dans le projet~:
+\begin{itemize}
+  \item deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fichier source \texttt{service-dispatcher-entry.s}~:
+  \begin{itemize}
+    \item \texttt{!ENTRY!} est remplacé par le nom assembleur de la routine réalisant l'implémentation du service~;
+    \item \texttt{!IDX!} est remplacé par l'indice du service (PLM numérote les services, à partir de $0$)~;
+  \end{itemize}
+  \item la chaîne résultat est simplement ajoutée au fichier source assembleur \texttt{src.s} du projet.
+\end{itemize}
+
+Le dernier argument (ici \plm="service-entry.s"=) permet de construire la routine appelée par les tâches. Il désigne un fichier assembleur par un chemin relatif au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}. Ensuite, l'opération suivante est effectuée pour chaque service défini dans le projet~:
+\begin{itemize}
+  \item deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fichier source \texttt{service-entry.s}~:
+  \begin{itemize}
+    \item \texttt{!ENTRY!} est remplacé par le nom assembleur de la routine appelée par les tâches~;
+    \item \texttt{!IDX!} est remplacé par l'indice du service~;
+  \end{itemize}
+  \item la chaîne résultat est simplement ajoutée au fichier source assembleur \texttt{src.s} du projet.
+\end{itemize}
 
 
 
 
-{\bf User stacked registers byte count.} Le nombre d'octets empilés dans la pile utilisateur lors d'une exception. Le Cortex-M4 empilant 8 registres, cette valeur est 32. Elle est utilisée pour les calculs de pile.
-
-{\bf Service handler system stack byte count footprint.} Le \emph{service handler}\footnote{Utilisé pour implémenter les appels système par \texttt{SVC} et les interruptions.} utilise le nombre indiqué d'octets dans la pile. Cette valeur est utilisée pour les calculs de pile.
 
 
 
@@ -376,30 +381,69 @@ SERVICE:
 
 
 
+\subsectionLabel{\texttt{SECTION}}{configurationSection}\index{SECTION}
 
-\sectionLabel{\texttt{SECTION}}{configurationSection}
+Il y a deux possibilités -- selon les cibles -- pour paramétrer l'implémentation des sections~:
+\begin{itemize}
+  \item par un appel système (\refSubsubsection{configurationSectionAppelSysteme})~;
+  \item par un masquage temporaire des interruptions (\refSubsubsectionPage{configurationSectionMasquageInterruption}).
+\end{itemize}
+
+\subsubsectionLabel{Implémentation via un appel système}{configurationSectionAppelSysteme}
 
 \begin{PLM}
 SECTION:
   "udfcoded-section-handler.s" ;
-  "udfcoded-section-dispatcher-entry.s" ;
+  8 ; // saves 2 registers on system stack
   "udfcoded-section-dispatcher-header.s" ;
-  "udfcoded-section-invocation.s" ;
-  8 // saves 2 registers on system stack
+  "udfcoded-section-dispatcher-entry.s" ;
+  "udfcoded-section-invocation.s"
 \end{PLM}
 
-{\bf Section handler system stack byte count footprint.} Le \emph{section handler}\footnote{Utilisé pour implémenter les sections.} utilise le nombre indiqué d'octets dans la pile. Cette valeur est utilisée pour les calculs de pile.
+L'implémentation des sections via des appels système est détaillée à la \refSectionPage{schemaAppelSectionsViaSystemCall}.
 
-{\bf Section invocation scheme.} Cette chaîne définit le schéma qui est utilisé pour implémenter les appels de section (\refSubsectionPage{schemaAppelSections}).
+Le premier argument (ici \plm="udfcoded-section-handler.s"=) est un fichier assembleur désigné par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}. Son contenu est simplement ajouté au fichier source assembleur \texttt{src.s} du projet. Ce fichier contient l'implémentation du \emph{handler} associé.
+
+Le deuxième argument (ici \plm=8=) est le nombre d'octets de la pile système que l'exécution du \emph{handler} utilise.
+
+Les troisième et quatrième arguments (ici les chaînes \plm="udfcoded-dispatcher-header.s"= et \plm="service-dispatcher-entry.s"=) désignent des fichiers assembleur par un chemin relatif au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}. Ces deux fichiers permettent de construire la table des appels système. D'abord, le contenu du fichier \plm="udfcoded-dispatcher-header.s"= est simplement ajouté au fichier source assembleur \texttt{src.s} du projet. Ensuite, l'opération suivante est effectuée pour chaque section définie dans le projet~:
+\begin{itemize}
+  \item deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fichier source \texttt{udfcoded-dispatcher-entry.s}~:
+  \begin{itemize}
+    \item \texttt{!ENTRY!} est remplacé par le nom assembleur de la routine réalisant l'implémentation de la section~;
+    \item \texttt{!IDX!} est remplacé par l'indice de la section (PLM numérote les sections, à partir de $0$)~;
+  \end{itemize}
+  \item la chaîne résultat est simplement ajoutée au fichier source assembleur \texttt{src.s} du projet.
+\end{itemize}
+
+Le dernier argument (ici \plm="udfcoded-entry.s"=) permet de construire la routine appelée par les tâches. Il désigne un fichier assembleur par un chemin relatif au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}. Ensuite, l'opération suivante est effectuée pour chaque section définie dans le projet~:
+\begin{itemize}
+  \item deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fichier source \texttt{udfcoded-entry.s}~:
+  \begin{itemize}
+    \item \texttt{!ENTRY!} est remplacé par le nom assembleur de la routine appelée par les tâches~;
+    \item \texttt{!IDX!} est remplacé par l'indice de la section~;
+  \end{itemize}
+  \item la chaîne résultat est simplement ajoutée au fichier source assembleur \texttt{src.s} du projet.
+\end{itemize}
+
+
+
+\subsubsectionLabel{Implémentation via un masquage temporaire des interruptions}{configurationSectionMasquageInterruption}
+
+\begin{PLM}
+SECTION:
+"call void asm sideeffect \"cpsid i\", \"\"() nounwind";// Disable interrupt
+"call void asm sideeffect \"cpsie i\", \"\"() nounwind" // Enable interrupt
+\end{PLM}
+
+Cette implémentation exige que les tâches puissent masquer les interruptions, ce qui impose qu'elles s'exécutent en mode privilégié. C'est par exemple le cas de la cible \texttt{teensy-3-1/privileged}.
+
+Dans ce cas, l'implémentation est complètement réalisée en LLVM, sans avoir besoin de fichier assembleur. Il faut simplement fournir les instructions LLVM de \emph{masquage} et \emph{démasquage} des interruptions. C'est le rôle des deux arguments. Ils expriment les instructions LLVM qui embarquent les instructions assembleur correspondantes.
 
 
 
 
-
-
-
-
-\sectionLabel{\texttt{C\_FILES}}{configurationFichiersC}
+\subsectionLabel{\texttt{C\_FILES}}{configurationFichiersC}\index{C\_FILES}
 
 \begin{PLM}
 C_FILES:
@@ -415,7 +459,7 @@ C_FILES:
 
 
 
-\sectionLabel{\texttt{S\_FILES}}{configurationFichiersAssembleur}
+\subsectionLabel{\texttt{S\_FILES}}{configurationFichiersAssembleur}\index{S\_FILES}
 
 \begin{PLM}
 S_FILES:
@@ -432,7 +476,7 @@ S_FILES:
 
 
 
-\sectionLabel{\texttt{LL\_FILES}}{configurationFichiersLLVM}
+\subsectionLabel{\texttt{LL\_FILES}}{configurationFichiersLLVM}\index{LL\_FILES}
 
 \begin{PLM}
 LL_FILES:
@@ -450,7 +494,7 @@ LL_FILES:
 
 
 
-\sectionLabel{\texttt{PLM\_FILES}}{configurationFichiersPLM}
+\subsectionLabel{\texttt{PLM\_FILES}}{configurationFichiersPLM}\index{PLM\_FILES}
 
 \begin{PLM}
 PLM_FILES:
@@ -470,7 +514,7 @@ PLM_FILES:
 
 
 
-\sectionLabel{\texttt{INTERRUPT\_HANDLER}}{configurationInterruptHandler}
+\subsectionLabel{\texttt{INTERRUPT\_HANDLER}}{configurationInterruptHandler}\index{INTERRUPT\_HANDLER}
 
 \begin{PLM}
 INTERRUPT_HANDLER:
@@ -486,7 +530,7 @@ INTERRUPT_HANDLER:
 
 
 
-\sectionLabel{\texttt{INTERRUPTS}}{configurationInterrupts}
+\subsectionLabel{\texttt{INTERRUPTS}}{configurationInterrupts}\index{INTERRUPTS}
 
 \begin{PLM}
 INTERRUPTS:
@@ -511,7 +555,7 @@ INTERRUPTS:
 
 
 
-`
+
 {\bf Interruption vectors.} La liste de toutes les interruptions, chacune d'elle étant accompagnée de son numéro. Celui-ci est utilisé lors de la panique, si une interruption se déclenche alors qu'aucune routine de réponse à cette interruption n'est installée.
 
 
@@ -519,11 +563,11 @@ INTERRUPTS:
 
 
 
-\sectionLabel{Schéma d'appel des sections}{schemaAppelSections}
+\sectionLabel{Schéma d'appel des sections}{schemaAppelSectionsViaSystemCall}
 
 Quand le code d'une tâche appelle une section, celui-ci doit s'effectuer à travers un \emph{system call}\footnote{Quand une section est appelée à partir d'un mode privilégié, l'appel est un simple appel de routine.}.
 
-L'implémentation de cette opération est paramètrable grâce à quatre fichiers assembleurs, placés dans le répertoire \texttt{teensy-3-1/custom}. Le nom de ces fichiers est préfixé par la chaîne spécifiée dans le champ \emph{Section invocation scheme} de la \plm=configuration= (voir \refSubsectionPage{fichierTarget}), ce qui autorise de disposer de plusieurs implémentations possibles. Pour le schéma nommé \plm="udfcoded"=, ces quatre fichiers sont~:
+L'implémentation de cette opération est paramètrable grâce à quatre fichiers assembleurs, placés dans le répertoire \texttt{teensy-3-1/custom}. Le nom de ces fichiers est préfixé par la chaîne spécifiée dans le champ \emph{Section invocation scheme} de la \plm=configuration= (voir \refSubsectionPage{configurationSection}), ce qui autorise de disposer de plusieurs implémentations possibles. Pour le schéma nommé \plm="udfcoded"=, ces quatre fichiers sont~:
 \begin{itemize}
   \item \texttt{udfcoded-section-dispatcher-code.s}~: implémentation du code exécuté par l'appel système invoqué par l'appel à une section~;
   \item \texttt{udfcoded-section-dispatcher-entry.s}~: entrée du tableau définissant le nom de la fonction implémentant la section~;
