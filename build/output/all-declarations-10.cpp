@@ -6405,9 +6405,6 @@ const char * gWrapperFileContent_14_targetTemplates = "//--- Python tool list\n"
   "// Panic code type, panic line type, panic generation file\n"
   "PANIC:\n"
   "  $int32 ; $uint32 ; \"target-panic.ll\"\n"
-  "// Unsigned integer type\n"
-  "UINT_TYPE:\n"
-  "  $uint32\n"
   "// Pointer bit count\n"
   "POINTER_BIT_COUNT:\n"
   "  32\n"
@@ -6417,17 +6414,17 @@ const char * gWrapperFileContent_14_targetTemplates = "//--- Python tool list\n"
   "// Service implementation\n"
   "SERVICE:\n"
   "  \"service-handler.s\" ;\n"
-  "  \"service-dispatcher-entry.s\" ;\n"
+  "  16 ; // as_swi_handler saves 4 32-bits registers on system stack\n"
   "  \"service-dispatcher-header.s\" ;\n"
-  "  \"service-entry.s\" ;\n"
-  "  16 // as_swi_handler saves 4 32-bits registers on system stack\n"
+  "  \"service-dispatcher-entry.s\" ;\n"
+  "  \"service-entry.s\"\n"
   "// Section implementation\n"
   "SECTION:\n"
   "  \"udfcoded-section-dispatcher-code.s\" ;\n"
-  "  \"udfcoded-section-dispatcher-entry.s\" ;\n"
+  "  8 ; // saves 2 registers on system stack\n"
   "  \"udfcoded-section-dispatcher-header.s\" ;\n"
-  "  \"udfcoded-section-invocation.s\" ;\n"
-  "  8 // saves 2 registers on system stack\n"
+  "  \"udfcoded-section-dispatcher-entry.s\" ;\n"
+  "  \"udfcoded-section-invocation.s\"\n"
   "//--- C Source files\n"
   "C_FILES:\n"
   "  \"c-arm7tdmi-vectors.c\",\n"
@@ -6493,7 +6490,7 @@ const cRegularFileWrapper gWrapperFile_14_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  2257, // Text length
+  2211, // Text length
   gWrapperFileContent_14_targetTemplates
 ) ;
 
@@ -12820,9 +12817,6 @@ const char * gWrapperFileContent_56_targetTemplates = "//--- Python tool list\n"
   "// Panic code type, panic line type, panic generation file\n"
   "PANIC:\n"
   "  $int32 ; $uint32 ; \"../target-panic.ll\"\n"
-  "// Unsigned integer type\n"
-  "UINT_TYPE:\n"
-  "  $uint32\n"
   "// Pointer bit count\n"
   "POINTER_BIT_COUNT:\n"
   "  32\n"
@@ -12832,10 +12826,10 @@ const char * gWrapperFileContent_56_targetTemplates = "//--- Python tool list\n"
   "// Service implementation\n"
   "SERVICE:\n"
   "  \"service-handler.s\" ;\n"
-  "  \"service-dispatcher-entry.s\" ;\n"
+  "  12 ; // as_svc_handler saves 3 registers on system stack\n"
   "  \"service-dispatcher-header.s\" ;\n"
-  "  \"service-entry.s\" ;\n"
-  "  12 // as_svc_handler saves 3 registers on system stack\n"
+  "  \"service-dispatcher-entry.s\" ;\n"
+  "  \"service-entry.s\"\n"
   "// Section implementation\n"
   "SECTION:\n"
   "  \"call void asm sideeffect \\\"cpsid i\\\", \\\"\\\"() nounwind\" ; // Disable interrupt\n"
@@ -12956,7 +12950,7 @@ const cRegularFileWrapper gWrapperFile_56_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  3951, // Text length
+  3905, // Text length
   gWrapperFileContent_56_targetTemplates
 ) ;
 
@@ -13240,12 +13234,6 @@ const cRegularFileWrapper gWrapperFile_61_targetTemplates (
 //--- File 'privileged/service-handler.s'
 
 const char * gWrapperFileContent_62_targetTemplates = "@----------------------------------------------------------------------------------------------------------------------*\n"
-  "\n"
-  "\t.syntax unified\n"
-  "\t.cpu cortex-m4\n"
-  "\t.thumb\n"
-  "\n"
-  "@----------------------------------------------------------------------------------------------------------------------*\n"
   "@                                                                                                                      *\n"
   "@                 S V C    H A N D L E R    ( D O U B L E    S T A C K    M O D E )                                    *\n"
   "@                                                                                                                      *\n"
@@ -13377,7 +13365,7 @@ const cRegularFileWrapper gWrapperFile_62_targetTemplates (
   "service-handler.s",
   "s",
   true, // Text file
-  7917, // Text length
+  7753, // Text length
   gWrapperFileContent_62_targetTemplates
 ) ;
 
@@ -13432,9 +13420,6 @@ const char * gWrapperFileContent_63_targetTemplates = "//--- Python tool list\n"
   "// Panic code type, panic line type, panic generation file\n"
   "PANIC:\n"
   "  $int32 ; $uint32 ; \"../target-panic.ll\"\n"
-  "// Unsigned integer type\n"
-  "UINT_TYPE:\n"
-  "  $uint32\n"
   "// Pointer bit count\n"
   "POINTER_BIT_COUNT:\n"
   "  32\n"
@@ -13444,17 +13429,17 @@ const char * gWrapperFileContent_63_targetTemplates = "//--- Python tool list\n"
   "// Service implementation\n"
   "SERVICE:\n"
   "  \"service-handler.s\" ;\n"
-  "  \"service-dispatcher-entry.s\" ;\n"
+  "  12 ; // as_svc_handler saves 3 registers on system stack\n"
   "  \"service-dispatcher-header.s\" ;\n"
-  "  \"service-entry.s\" ;\n"
-  "  12 // as_svc_handler saves 3 registers on system stack\n"
+  "  \"service-dispatcher-entry.s\" ;\n"
+  "  \"service-entry.s\"\n"
   "// Section implementation\n"
   "SECTION:\n"
   "  \"udfcoded-section-handler.s\" ;\n"
-  "  \"udfcoded-section-dispatcher-entry.s\" ;\n"
+  "  8 ; // saves 2 registers on system stack\n"
   "  \"udfcoded-section-dispatcher-header.s\" ;\n"
-  "  \"udfcoded-section-invocation.s\" ;\n"
-  "  8 // saves 2 registers on system stack\n"
+  "  \"udfcoded-section-dispatcher-entry.s\" ;\n"
+  "  \"udfcoded-section-invocation.s\"\n"
   "//--- C Source files\n"
   "C_FILES:\n"
   "  \"../c-cortex-m4-context.c\",\n"
@@ -13570,7 +13555,7 @@ const cRegularFileWrapper gWrapperFile_63_targetTemplates (
   "+config.plm-target",
   "plm-target",
   true, // Text file
-  3967, // Text length
+  3921, // Text length
   gWrapperFileContent_63_targetTemplates
 ) ;
 
