@@ -90,7 +90,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   let labelName = [mTarget name]
   ioLLVMcode += "  br i1 " + [mTarget llvmName] + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
   ioLLVMcode += labelName + ".ovf:\n"
-  ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
   ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
   ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + inPanicCode + ")\n"
   ioLLVMcode += "  unreachable\n\n"
@@ -118,7 +118,7 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
   let labelName = [mTarget name]
   ioLLVMcode += "  br i1 " + [mRight llvmName] + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
   ioLLVMcode += labelName + ".divideByZero:\n"
-  ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
   ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
   ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + inPanicCode + ")\n"
   ioLLVMcode += "  unreachable\n\n"

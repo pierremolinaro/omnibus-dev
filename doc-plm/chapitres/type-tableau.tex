@@ -119,11 +119,11 @@ t [20] // Erreur de compilation, indice trop grand
 Comme la validité est effectuée à la compilation, aucune vérification de validité n'est effectuée à l'exécution.
 
 
-\subsection{Expression indice non signée}
+\subsectionLabel{Expression indice non signée}{indiceNonSigne}
 
 Si l'\plm=expression_indice= est une instance d'un type entier non signé, il y a deux possibilités.
 
-Soit ce type entier non signé présente une valeur maximum supérieure ou égale à la taille du tableau : alors le code engendré vérifie à l'exécution que l'\plm=expression_indice= a une valeur valide. Dans l'exemple ci-dessous, le tableau \plm=t= contient $20$ éléments, l'\plm=expression_indice= doit donc être inférieure ou égale à $19$ ; or la plage de valeurs de \plm=$uint32= dépasse cette borne, aussi la validité est vérifiée à l'exécution. En cas d'échec, la panique est déclenchée.
+Soit ce type entier non signé présente une valeur maximum supérieure ou égale à la taille du tableau : alors le code engendré vérifie à l'exécution que l'\plm=expression_indice= a une valeur valide. Dans l'exemple ci-dessous, le tableau \plm=t= contient $20$ éléments, l'\plm=expression_indice= doit donc être inférieure ou égale à $19$ ; or la plage de valeurs de \plm=$uint32= dépasse cette borne, aussi la validité est vérifiée à l'exécution. En cas d'échec, la panique est déclenchée (\refTableauPage{tableauCodePanique}).
 \begin{PLM}
 var i $uint32 = ...
 var x = t [i] // Vérification à l'exécution que i < 20
@@ -139,7 +139,7 @@ var x = t [i] // Aucune vérification à l'exécution car toujours i < 20
 
 
 
-\subsection{Expression indice signée}
+\subsectionLabel{Expression indice signée}{indiceSigne}
 
 Quand l'\plm=expression_indice= est une expression entière signée, il faut vérifier :
 \begin{itemize}
@@ -160,6 +160,7 @@ var i $int4 = ... // Donc -16 <= i < 15
 var x = t [i] // Vérification à l'exécution que 0 <= i
 \end{PLM}
 
+En cas d'échec de la vérification à l'exécution, la panique est déclenchée (\refTableauPage{tableauCodePanique}).
 
 \subsection{Accès à un élément en mode panique}
 

@@ -54,16 +54,16 @@ Ensuite, les tâches sont lancées, et exécutées en fonction de leurs priorit�
       decision/.style={chamfered rectangle, draw=blue, thick, fill=green!20},
       node distance=5mm
     ]
-    \node [cloud] (start) {\textsc{Démarrage du micro-contrôleur}} ;
-    \node [block] (boot) [below=of start] {Routines \bf\texttt{boot}} ;
-    \node [block] (raz) [below=of boot] {Initialisation des variables globales} ;
-    \node [block] (init) [below=of raz] {Routines \bf\texttt{init}} ;
-    \node [block] (setup) [below=of init] {Démarrage des tâches} ;
+    \node [cloud] (start) {\textsc{Démarrage du micro-contrôleur}};
+    \node [block] (boot) [below=of start] {Routines \bf\texttt{boot}};
+    \node [block] (raz) [below=of boot] {Initialisation des variables globales};
+    \node [block] (init) [below=of raz] {Routines \bf\texttt{init}};
+    \node [block] (setup) [below=of init] {Démarrage des tâches};
 
-    \draw [-stealth, thick] (start) -- (boot) ;
-    \draw [-stealth, thick] (boot) -- (raz) ;
-    \draw [-stealth, thick] (raz) -- (init) ;
-    \draw [-stealth, thick] (init) -- (setup) ;
+    \draw [-stealth, thick] (start) -- (boot);
+    \draw [-stealth, thick] (boot) -- (raz);
+    \draw [-stealth, thick] (raz) -- (init);
+    \draw [-stealth, thick] (init) -- (setup);
   \end{tikzpicture}
   \caption{Organigramme d'exécution de la cible \texttt{teensy-3-1-it}}
   \labelFigure{sequenceDemarrageTeensySequentialSystick}
@@ -110,10 +110,10 @@ Vous pouvez ajouter vos propres routines \plm+init+. À chaque routine \plm+init
 
 L'API de la cible \texttt{teensy-3-1-it} regroupe les fonctions disponibles dans des modules et des types :
 \begin{itemize}
-  \item le module \plm=time=, la gestion du temps (\refSubsectionPage{moduleTime}) ;
-  \item le module \plm=leds=, la gestion des leds (\refSubsectionPage{moduleLeds}) ;
-  \item le module \plm=lcd=, la gestion de l'afficheur LCD (\refSubsectionPage{moduleLCD}) ;
-  \item le type \plm=$semaphore=, le sémaphore de Dijkstra (\refSubsectionPage{typeSemaphore}) ;
+  \item le module \plm=time=, la gestion du temps (\refSubsectionPage{moduleTime})~;
+  \item le module \plm=leds=, la gestion des leds (\refSubsectionPage{moduleLeds})~;
+  \item le module \plm=lcd=, la gestion de l'afficheur LCD (\refSubsectionPage{moduleLCD})~;
+  \item le type \plm=$semaphore=, le sémaphore de Dijkstra (\refSubsectionPage{typeSemaphore})~;
 \end{itemize}
 
 \subsectionLabel{Module \texttt{time}}{moduleTime}
@@ -202,13 +202,13 @@ Les constantes suivantes sont de type \plm=$uint32= et sont dédiées aux leds :
 
 Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire :
 
-\begin{PLM}[1]
+\begin{PLM}
   leds.write (!off:LED_L0)
 \end{PLM}
 
  Pour éteindre plusieurs leds, utiliser l'opérateur \plm=|= :
  
-\begin{PLM}[1]
+\begin{PLM}
   leds.write (!off:LED_L0 | LED_L4)
 \end{PLM}
 
@@ -222,13 +222,13 @@ Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire :
 
 Cette routine allume un ensemble de leds. Pour allumer une led, écrire :
 
-\begin{PLM}[1]
+\begin{PLM}
   leds.write (!on:LED_L0)
 \end{PLM}
 
  Pour allumer plusieurs leds, utiliser l'opérateur \plm=|= :
  
-\begin{PLM}[1]
+\begin{PLM}
   leds.write (!on:LED_L0 | LED_L4)
 \end{PLM}
 
@@ -244,13 +244,13 @@ Cette routine complémente un ensemble de leds.
 
 Pour complémenter une led, écrire :
 
-\begin{PLM}[1]
+\begin{PLM}
   leds.write (!toggle:LED_L0)
 \end{PLM}
 
 Pour complémenter plusieurs leds, utiliser l'opérateur \plm=|= :
 
-\begin{PLM}[1]
+\begin{PLM}
   leds.write (!toggle:LED_L0 | LED_L4)
 \end{PLM}
 
@@ -426,7 +426,7 @@ Le type \plm=$semaphore= implémente le sémaphore de Dijstra. La liste des tâc
 
 La déclaration d'un sémaphore mentionne sa valeur initiale, qui est un entier non signé de 32 bits :
 
-\begin{PLM}[1]
+\begin{PLM}
   var s = $semaphore (!value:0)
 \end{PLM}
 
@@ -644,16 +644,16 @@ Cette fonction signifie aux tâches en attente d'échéance en garde que l'insta
 
 Toutes les interruptions du micro-contrôleur sont accessibles en PLM, avec quelques exceptions :
 \begin{itemize}
-  \item l'interruption n°$1$ (\emph{Reset}), est réservée par PLM ;
-  \item l'interruption n°$3$ (\emph{HardFault}), est réservée par PLM ;
-  \item l'interruption n°$11$ (\emph{svc}), est réservée par PLM ;
-  \item l'interruption n°$15$ (\emph{systick}), est implémentée par la cible ; toutefois, une fonction \texttt{userSystickHandler} est disponible, voir \refSubsectionPage{SystickPourTeensy31It}.
+  \item l'interruption n°$1$ (\emph{Reset}), est réservée par PLM~;
+  \item l'interruption n°$3$ (\emph{HardFault}), est réservée par PLM~;
+  \item l'interruption n°$11$ (\emph{svc}), est réservée par PLM~;
+  \item l'interruption n°$15$ (\emph{systick}), est implémentée par la cible~; toutefois, une fonction \texttt{userSystickHandler} est disponible, voir \refSubsectionPage{SystickPourTeensy31It}.
 \end{itemize}
 
 Une routine d'interruption porte un des noms définis par la cible :
 \begin{itemize}
-  \item interruptions $1$ à $27$ : \refTableauPage{tableItTeensySequentialSystick1} ;
-  \item interruptions $28$ à $90$ : \refTableauPage{tableItTeensySequentialSystick2} ;
+  \item interruptions $1$ à $27$ : \refTableauPage{tableItTeensySequentialSystick1}~;
+  \item interruptions $28$ à $90$ : \refTableauPage{tableItTeensySequentialSystick2}~;
   \item interruptions $91$ à $110$ : \refTableauPage{tableItTeensySequentialSystick3}.
 \end{itemize}
 
@@ -662,8 +662,8 @@ Une routine d'interruption porte un des noms définis par la cible :
 
 % Les \refTableau{tableItTeensySequentialSystick1}, \refTableau{tableItTeensySequentialSystick2} et \refTableau{tableItTeensySequentialSystick3} listent les interruptions définies par le processeur qui équipe la carte \emph{Teensy 3.1}. L'utilisateur peut définir une routine d'interruption pour chacune d'entre elles, sauf l'interruption n°1 (remise à zéro), et la n°15 (\texttt{SysTick}) qui est prise en charge de façon particulière (voir la \refSubsectionTitlePage{SystickPourTeensy31It}). Celle des autres interruptions est décrite dans les sections suivantes :
 %\begin{itemize}
-%  \item \refSubsectionTitlePage{itsTeensy31AvecExceptions} ;
-%  \item \refSubsectionTitlePage{itsTeensy31SansExceptions} ;
+%  \item \refSubsectionTitlePage{itsTeensy31AvecExceptions}~;
+%  \item \refSubsectionTitlePage{itsTeensy31SansExceptions}~;
 %  \item \refSubsectionTitlePage{itsTeensyRoutinesUtilisateur}.
 %\end{itemize}
 
@@ -747,26 +747,50 @@ Une routine d'interruption porte un des noms définis par la cible :
 \end{table}
 
 
-\subsection{Définir une routine d'interruption}
+\subsectionLabel{Définir une routine d'interruption}{definirRoutineInterruption}
 
-Prenons l'exemple de l'interruption \texttt{PITChannel0}, qui porte le numéro $84$. La routine d'interruption est écrite comme suit :
+Prenons l'exemple d'une interruption que l'on appelera \texttt{MyIT}. On déclare la routine d'interruption avec l'un des trois qualificatifs suivants ~:
+\begin{itemize}
+  \item \plm=section=, \refSubsubsection{itModeSection}~;
+  \item \plm=safe=, \refSubsubsection{itModeSafe}~;
+  \item \plm=service=, \refSubsubsection{itModeService}.
+\end{itemize}
 
-\begin{PLM}[1]
-isr PITChannel0 {
+
+
+\subsubsectionLabel{Routine d'interruption en mode \texttt{section}}{itModeSection}
+
+\begin{PLM}
+isr section MyIT {
   ...
 }
 \end{PLM}
 
-Une routine d'interruption s'exécute en mode \plm=section=, c'est-à-dire que les routines de l'exécutif lui sont inaccessibles. 
+La routine d'interruption s'exécute en mode \plm=section=, c'est-à-dire que les routines de l'exécutif lui sont inaccessibles. 
 
-Si l'on veut appeler les routines de l'exécutif du mode \plm=service=, on ajoute l'attribut \plm=@xtr= :
 
-\begin{PLM}[1]
-isr PITChannel0 @xtr {
+
+\subsubsectionLabel{Routine d'interruption en mode \texttt{safe}}{itModeSafe}
+
+\begin{PLM}
+isr safe MyIT {
   ...
 }
 \end{PLM}
 
+La routine d'interruption s'exécute en mode \plm=safe=, c'est-à-dire que les routines de l'exécutif lui sont inaccessibles, et elle ne peut pas invoquer des instructions povant provoquer la panique. 
+
+
+
+\subsubsectionLabel{Routine d'interruption en mode \texttt{service}}{itModeService}
+
+\begin{PLM}
+isr service MyIT {
+  ...
+}
+\end{PLM}
+
+La routine d'interruption s'exécute en mode \plm=service=, les routines correspondantes de l'exécutif sont accessibles. 
 
 
 
@@ -778,8 +802,8 @@ isr PITChannel0 @xtr {
 
 Quand la panique est activée, une routine par défaut est prédéfinie pour chaque interruption (sauf pour celles réservées par ARM et par PLM). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est l'opposé du numéro de l'interruption. Par exemple, pour l'interruption $84$ (\texttt{PITChannel0}), la routine prédéfinie est :
 
-\begin{PLM}[1]
-isr PITChannel0 {
+\begin{PLM}
+isr section PITChannel0 {
   panic -84
 }
 \end{PLM}
@@ -787,7 +811,7 @@ isr PITChannel0 {
 
 \subsectionLabel{Routines d'interruption par défaut, panique inactivée}{itsTeensy31SansExceptions}
 
-Quand la panique est inactivée, aucune routine d'interruption pas défaut n'est engendrée ; dans la table des vecteurs d'interruption, l'entrée d'une routine d'interruption indéfinie contient la valeur $0$.
+Quand la panique est inactivée, aucune routine d'interruption pas défaut n'est engendrée~; dans la table des vecteurs d'interruption, l'entrée d'une routine d'interruption indéfinie contient une valeur par défaut qui dépend de la cible.
 
 
 
@@ -797,15 +821,15 @@ Quand la panique est inactivée, aucune routine d'interruption pas défaut n'est
 
 L'interruption \texttt{SysTick} est particulière. Elle est programmé par la routine \plm+init 0+ de façon à engendrer une interruption chaque milliseconde. Cette interruption se déclenche après la fin de l'exécution la routine \plm+init 0+, y compris éventuellement dans les routines \plm+init+ qui suivent. La routine d'interruption associée, inaccessible à l'utilisateur :
 \begin{itemize}
-  \item incrémente une variable globale de comptage du temps ;
+  \item incrémente une variable globale de comptage du temps~;
   \item appelle la routine \plm=makeTasksReadyFrom= qui contrôle les tâches bloquées en attente d'échéance~; 
-  \item appelle la routine \plm=tickHandlerForGuardedWaitUntil= qui contrôle les tâches en attente d'échéance en garde ; 
+  \item appelle la routine \plm=tickHandlerForGuardedWaitUntil= qui contrôle les tâches en attente d'échéance en garde~; 
   \item appelle la routine \plm+userSystickHandler+.
 \end{itemize}
 
 Cette routine \plm+userSystickHandler+ est définie par [À REVOIR] :
 
-\begin{PLM}[1]
+\begin{PLM}
 public func service userTickHandler () {
 }
 \end{PLM}

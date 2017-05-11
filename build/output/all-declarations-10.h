@@ -11,6 +11,36 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                         Function 'llvmNameForPrimitiveCall'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForPrimitiveCall (const class GALGAS_string & constinArgument0,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           Function 'llvmNameForSafeCall'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSafeCall (const class GALGAS_string & constinArgument0,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                          Function 'llvmNameForSectionCall'                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_string function_llvmNameForSectionCall (const class GALGAS_string & constinArgument0,
+                                                     class C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                             Routine 'codeOptimisation'                                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -223,7 +253,6 @@ extern const char * gWrapperFileContent_69_targetTemplates ;
 extern const char * gWrapperFileContent_70_targetTemplates ;
 extern const char * gWrapperFileContent_71_targetTemplates ;
 extern const char * gWrapperFileContent_72_targetTemplates ;
-extern const char * gWrapperFileContent_73_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -303,7 +332,6 @@ extern const cRegularFileWrapper gWrapperFile_69_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_70_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_71_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_72_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_73_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

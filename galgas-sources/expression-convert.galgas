@@ -183,7 +183,7 @@ override method @convertInstructionIR llvmInstructionCode
   ioLLVMcode += " " + operandType + " " + [mOperand llvmName] + ", " + maxTarget + "\n"
   ioLLVMcode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
   ioLLVMcode += convertFailLabel + ":\n"
-  ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
   ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
   ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForConvertOverflow () + ") ; File '" + [[mLocation file] lastPathComponent] + "'\n"
   ioLLVMcode += "  unreachable\n\n"

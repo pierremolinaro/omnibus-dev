@@ -196,11 +196,11 @@ L'instruction \plm=panic= a la syntaxe suivante :
 panic expression
 \end{PLM}
 
-L'\plm=expression= est une expression entière, calculée statiquement. Son type est défini pour chaque cible (\refSectionPage{typePanique}) et peut être signé (les valeurs négatives sont alors acceptées) ou non signé.
+L'\plm=expression= est une expression entière, calculée statiquement. Son type est défini pour chaque cible (\refSubsectionPage{configurationPanic}), c'est un type entier non signé.
 
-Si le programme est compilé avec la panique activée, alors l'exécution de l'instruction \plm=panic= déclenche la panique avec le code est la valeur de l'\plm=expression=.
+Si le programme est compilé avec la panique activée, alors l'exécution de l'instruction \plm=panic= déclenche la panique avec le code est la valeur de l'\plm=expression=. Pour éviter un conflit de code avec les codes prédéfinis dans PLM, consulter le \refTableauPage{tableauCodePanique}.
 
-Si le programme est compilé avec l'option \texttt{-{}-no-panic-generation}, alors aucun code n'est engendré.
+Si le programme est compilé avec l'option \texttt{-{}-no-panic-generation}, alors aucun code n'est engendré, l'instruction est ignorée.
 
 
 

@@ -11,13 +11,17 @@ panic setup 0 {
   pinMode (!port:.D7 !mode:.OUTPUT)
   lcd.clearScreenInPanicMode ()
   lcd.gotoInPanicMode (!line:0 !column:0)
-  lcd.printStringInPanicMode (!FILE)
-  lcd.gotoInPanicMode (!line:1 !column:0)
-  lcd.printStringInPanicMode (!"Line:")
-  lcd.printUnsignedInPanicMode (!LINE)
-  lcd.gotoInPanicMode (!line:2 !column:0)
+  if LINE == 0 { // ISR Panic
+    lcd.printStringInPanicMode (!"ISR PANIC")  
+  }else{
+    lcd.printStringInPanicMode (!FILE)
+    lcd.gotoInPanicMode (!line:2 !column:0)
+    lcd.printStringInPanicMode (!"Line:")
+    lcd.printUnsignedInPanicMode (!LINE)
+  }
+  lcd.gotoInPanicMode (!line:3 !column:0)
   lcd.printStringInPanicMode (!"Code:")
-  lcd.printSignedInPanicMode (!CODE)
+  lcd.printUnsignedInPanicMode (!CODE)
 }
 
 //··············································································

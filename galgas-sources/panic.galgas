@@ -83,8 +83,8 @@ method @panicClauseListAST-element enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicModeName -> @string outResult {
-  outResult = "panic"
+func %once panicModeName -> @string {
+  result = "panic"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

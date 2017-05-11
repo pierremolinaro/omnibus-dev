@@ -40,7 +40,7 @@ override method @testArrayIndexIR llvmInstructionCode
     ioLLVMcode += "  br i1 " + testToZero + ", label %" + testToZeroOk + ", label %" + testToZeroFailure + "\n\n"
   
     ioLLVMcode += testToZeroFailure + ":\n"
-    ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+    ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
     ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mErrorLocation line] + ", "
     ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForNegativeArrayIndex () + ") noreturn \n"
     ioLLVMcode += "  unreachable\n\n"
@@ -58,7 +58,7 @@ override method @testArrayIndexIR llvmInstructionCode
     ioLLVMcode += "  br i1 " + testToSize + ", label %" + testToSizeOk + ", label %" + testToSizeFailure + "\n\n"
   
     ioLLVMcode += testToSizeFailure + ":\n"
-    ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+    ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
     ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mErrorLocation line] + ", "
     ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForTooLargeArrayIndex () + ") noreturn \n"
     ioLLVMcode += "  unreachable\n\n"
