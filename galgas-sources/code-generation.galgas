@@ -290,7 +290,7 @@ private proc generateCodeFiles
     let s2 = [s1 stringByReplacingStringByString !"!PANICLINE!" !generationContext.mPanicLineLLVMType]
     llvmCode += s2
     llvmCode += llvmTitleComment (!"Raise Panic internal")
-    llvmCode += "define internal void @raise_panic_internal ("
+    llvmCode += "define internal void @raise.panic.internal ("
     llvmCode += generationContext.mPanicLineLLVMType + " %in.LINE, "
     llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
     llvmCode += "i8* %in.FILE)" + llvmAttributeFunction () + "noreturn {\n"
@@ -322,17 +322,13 @@ private proc generateCodeFiles
     llvmCode += "  br label %panic.loop\n"
     llvmCode += "}\n\n"
   #--- Panic for isr
-    [!?generationAdds.mStaticStringMap findOrAddStaticString
-      !"-"
-      ?let staticStringIndex
-    ]
+    [!?generationAdds.mStaticStringMap findOrAddStaticString !"" ?let emptyStringIndex]
     llvmCode += llvmTitleComment (!"Panic for ISR")
     llvmCode += "define internal void @panic.isr (" + generationContext.mPanicCodeLLVMType + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
-    llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
-    llvmCode += "  %isr.code = sub " + generationContext.mPanicCodeLLVMType + " 0, %in.CODE\n"
-    llvmCode += "  call void @raise_panic_internal ("    
+    llvmCode += "  %str.FILE = load i8*, i8** @string." + emptyStringIndex + "\n"
+    llvmCode += "  call void @raise.panic.internal ("    
     llvmCode += generationContext.mPanicLineLLVMType + " 0, "
-    llvmCode += generationContext.mPanicCodeLLVMType + " %isr.code, "
+    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
     llvmCode += "i8* %str.FILE"
     llvmCode += " )\n"    
     llvmCode += "  unreachable\n"    
@@ -343,13 +339,13 @@ private proc generateCodeFiles
         ![[filePath lastPathComponent] stringByDeletingPathExtension]
         ?let staticStringIndex
       ]
-      let routineName = "@raise_panic." + staticStringIndex
+      let routineName = "@raise.panic." + staticStringIndex
       llvmCode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
       llvmCode += "define internal void " + routineName + " ("
       llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
       llvmCode += generationContext.mPanicCodeLLVMType + " %inCode)" + llvmAttributeFunction () + "noreturn {\n"
       llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
-      llvmCode += "  call void @raise_panic ("
+      llvmCode += "  call void @raise.panic ("
       llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
       llvmCode += generationContext.mPanicCodeLLVMType + " %inCode, i8* %str.FILE)\n"
       llvmCode += "  unreachable\n"

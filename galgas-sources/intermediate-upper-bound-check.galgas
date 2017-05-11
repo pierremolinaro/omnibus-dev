@@ -34,7 +34,7 @@ override method @upperBoundCheckIR llvmInstructionCode
   ioLLVMcode += "  " + llvmSourceName + ".isOk = icmp ult " + llvmType + " " + llvmSourceName + ", " + mUpperBoundPlusOne + "\n"
   ioLLVMcode += "  br i1 " + llvmSourceName + ".isOk, label %" + llvmLabelName + ".ovf, label %" + llvmLabelName + ".ok\n\n"
   ioLLVMcode += llvmLabelName + ".ovf:\n"
-  ioLLVMcode += "  call void @raise_panic." + staticStringIndex + " ("
+  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
   ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
   ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mPanicCode + ")\n"
   ioLLVMcode += "  unreachable\n\n"

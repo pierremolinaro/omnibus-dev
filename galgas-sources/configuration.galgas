@@ -200,9 +200,9 @@ syntax extension plm_target_specific_syntax {
     <key> !"INTERRUPT_HANDLER"
     $"string"$ ?let xtrInterruptHandler
     $;$
-    $"string"$ ?let undefinedInterruptHandler
-    $;$
     $integer$ ?let stackedUserRegisterOnInterruptByteSize
+    $;$
+    $"string"$ ?let undefinedInterruptHandler
     <interruptConfigList> ?let interruptionConfigurationList
      let parameters = @targetParameters.new {
       !python_utilityToolList
@@ -227,7 +227,6 @@ syntax extension plm_target_specific_syntax {
    ioAST.mDeclarationListAST += !@configurationDeclarationAST.new {
       !panicCodeTypeName
       !panicLineTypeName
-#      !unsignedIntegerTypeName
       !parameters
       !interruptionConfigurationList
     }
@@ -281,8 +280,6 @@ override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticT
   [!?ioGraph addEdge !rootNode !panicCodeTypeName]
   let panicLineTypeName = llvmRegularTypeMangledNameFromName (!mPanicLineTypeName)
   [!?ioGraph addEdge !rootNode !panicLineTypeName]
-#  let unsignedIntegerTypeName =llvmRegularTypeMangledNameFromName (!mUnsignedIntegerTypeName)
-#  [!?ioGraph addEdge !rootNode !unsignedIntegerTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -326,8 +323,27 @@ override method @configurationDeclarationAST enterInContext
     ioContext.mPointerSize = [mTargetParameters.mPointerSize.bigint uint]
   end
   ioContext.mTargetParameters = mTargetParameters
+#--- Panic code type
   ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicCodeTypeName}
+  if [[ioContext.mPanicCodeType kind] isInteger] then
+    [[ioContext.mPanicCodeType kind] integer ?2* ?unsigned:let unsigned ?1*]
+    if not unsigned then
+      error mPanicCodeTypeName : "this type should be an unsigned integer type"
+    end
+  else
+    error mPanicCodeTypeName : "this type should be an unsigned integer type"
+  end
+#--- Panic line type
   ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicLineTypeName}
+  if [[ioContext.mPanicLineType kind] isInteger] then
+    [[ioContext.mPanicLineType kind] integer ?2* ?unsigned:let unsigned ?1*]
+    if not unsigned then
+      error mPanicLineTypeName : "this type should be an unsigned integer type"
+    end
+  else
+    error mPanicLineTypeName : "this type should be an unsigned integer type"
+  end
+#--- Interrupt panic codes
   for (name panicCode) in mInterruptionConfigurationList do
     [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
     switch panicCode

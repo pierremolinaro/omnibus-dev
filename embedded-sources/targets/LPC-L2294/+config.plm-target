@@ -17,7 +17,7 @@ LINKER_SCRIPT:
   "ld-linker.txt"
 // Panic code type, panic line type, panic generation file
 PANIC:
-  $int32 ; $uint32 ; "target-panic.ll"
+  $uint32 ; $uint32 ; "target-panic.ll"
 // Pointer bit count
 POINTER_BIT_COUNT:
   32
@@ -63,8 +63,8 @@ PLM_FILES:
 //--- Interrupt handler
 INTERRUPT_HANDLER:
   "xtr-interrupt-handler.s" ;
-  "undefined-interrupt.s" ;
-  0 // ARM7TDMI save no reg in user stack on interrupt
+  0 ; // ARM7TDMI save no reg in user stack on interrupt
+  "undefined-interrupt.s"
 //--- Interrupt vectors
 INTERRUPTS:
   WDT,

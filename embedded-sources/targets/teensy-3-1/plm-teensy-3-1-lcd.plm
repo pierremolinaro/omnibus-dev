@@ -278,17 +278,6 @@ module lcd {
   
   //············································································
   
-  public func user printSigned @noUnusedWarning (?inValue $int32) {
-    if inValue >= 0 {
-      self.printUnsigned (!truncate inValue : $uint32)
-    }else{
-      self.writeData_inUserMode (!0x2D) // Signe -
-      self.printUnsigned (!truncate - inValue : $uint32)
-    }
-  }
-  
-  //············································································
-  
   public func user printString @noUnusedWarning (?inValue $staticString) {
     for c in inValue {
       self.writeData_inUserMode (!c)

@@ -33,7 +33,7 @@
 % http://www.tuteurs.ens.fr/logiciels/latex/xetex.html
 \RequirePackage{etex}
 \usepackage{fontspec}
-\setmainfont[Ligatures=TeX, Scale=1.15]{Gill Sans} % {Gill Sans} % {Palatino} % {Optima} % {Hoefler Text}
+\setmainfont[Ligatures=TeX, Scale=1.1]{Gill Sans} % {Gill Sans} % {Palatino} % {Optima} % {Hoefler Text}
 \setsansfont[Ligatures={NoCommon}]{Courier}
 \setmonofont[Ligatures=NoCommon, Scale=0.9]{Menlo}
 \usepackage{polyglossia}
@@ -266,7 +266,7 @@
 \newcommand\refChapter[1]{\hyperref[chapter:#1]{chapitre \ref*{chapter:#1}}}
 
 \newcommand\refChapterPage[1]{\hyperref[chapter:#1]{chapitre \ref*{chapter:#1} page \pageref{chapter:#1}}}
-\newcommand\refChapterTitlePage[1]{\hyperref[chapter:#1]{chapitre « \emph{\nameref*{chapter:#1}} » page \pageref{chapter:#1}}}
+\newcommand\refChapterTitlePage[1]{\hyperref[chapter:#1]{chapitre «~\emph{\nameref*{chapter:#1}}~» page \pageref{chapter:#1}}}
 \newcommand\refChapterTitle[1]{\nameref{chapter:#1}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SECTION
@@ -277,7 +277,7 @@
 % \refSectionPage{label-section} ---> "section x.y page n"   où x.y est le n° de la section
 \newcommand\refSection[1]{\hyperref[sec:#1]{section \ref*{sec:#1}}}
 \newcommand\refSectionPage[1]{\hyperref[sec:#1]{section \ref*{sec:#1} page \pageref{sec:#1}}}
-\newcommand\refSectionTitlePage[1]{\hyperref[sec:#1]{section « \emph{\nameref*{sec:#1}} » page \pageref{sec:#1}}}
+\newcommand\refSectionTitlePage[1]{\hyperref[sec:#1]{section «~\emph{\nameref*{sec:#1}}~» page \pageref{sec:#1}}}
 \newcommand\refSectionTitle[1]{\nameref{sec:#1}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SUB-SECTION
@@ -288,7 +288,7 @@
 % \refSubsectionPage{label-section} ---> "section x.y page n"   où x.y est le n° de la sub-section
 \newcommand\refSubsection[1]{\hyperref[subsec:#1]{section \ref*{subsec:#1}}}
 \newcommand\refSubsectionPage[1]{\hyperref[subsec:#1]{section \ref*{subsec:#1} page \pageref{subsec:#1}}}
-\newcommand\refSubsectionTitlePage[1]{\hyperref[subsec:#1]{section « \emph{\nameref*{subsec:#1}} » page \pageref{subsec:#1}}}
+\newcommand\refSubsectionTitlePage[1]{\hyperref[subsec:#1]{section «~\emph{\nameref*{subsec:#1}}~» page \pageref{subsec:#1}}}
 \newcommand\refSubsectionTitle[1]{\nameref{subsec:#1}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SUB-SUB-SECTION
@@ -299,7 +299,7 @@
 % \refSubsectionPage{label-section} ---> "page n"   où n est la page de la sub-sub-section
 \newcommand\refSubsubsection[1]{\hyperref[subsubsec:#1]{section \ref*{subsubsec:#1}}}
 \newcommand\refSubsubsectionPage[1]{\hyperref[subsubsec:#1]{section \ref*{subsubsec:#1} page \pageref{subsubsec:#1}}}
-\newcommand\refSubsubsectionTitlePage[1]{\hyperref[subsubsec:#1]{section « \emph{\nameref*{subsubsec:#1}} » page \pageref{subsubsec:#1}}}
+\newcommand\refSubsubsectionTitlePage[1]{\hyperref[subsubsec:#1]{section «~\emph{\nameref*{subsubsec:#1}}~» page \pageref{subsubsec:#1}}}
 \newcommand\refSubsubsectionTitle[1]{\nameref{subsubsec:#1}}
 
 %------------------------------------------------------------------------------------------ RÉFÉRENCES À UNE SUB-SUB-SUB-SECTION

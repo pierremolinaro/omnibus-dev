@@ -175,10 +175,10 @@ Le contenu est une séquence de définitions, chacune d'elles ayant la syntaxe s
 \begin{itemize}
   \item son nom (dans l'exemple ci-dessus, \plm=PYTHON_UTILITIES=)~;
   \item le délimiteur \plm=:=~;
-  \item une liste d'items séparés par un virgule, ce qui signifie qu'un nombre quelconque d'items est accepté~;
-  \item {\bf ou} une liste d'items séparés par un point-virgule, ce qui signifie qu'un nombre fixe d'items est accepté, et que chacun d'eux a une signification particulière~;
-  \item {\bf ou} un simple item~;
-  \item quand un item désigne un fichier par un chemin relatif, celui-ci est pris à partir du répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
+  \item une liste de paramètres séparés par un virgule, ce qui signifie qu'un nombre quelconque d'items est accepté~;
+  \item {\bf ou} une liste de paramètres séparés par un point-virgule, ce qui signifie qu'un nombre fixe d'items est accepté, et que chacun d'eux a une signification particulière~;
+  \item {\bf ou} un simple paramètre~;
+  \item quand un paramètre désigne un fichier par un chemin relatif, celui-ci est pris à partir du répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
 \end{itemize}
 
 L'ordre des séquences est imposée.
@@ -452,7 +452,18 @@ C_FILES:
   "../c-countTrainingZeros.c"
 \end{PLM}
 
+Cette entrée liste tous les fichiers C qui composent le fichier \texttt{src.c} d'un projet. Il sont tous désignés par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
 
+Les opérations effectuées sont les suivantes~:
+\begin{itemize}
+  \item les fichiers sont lus et concaténés dans leur ordre d'apparition dans l'entrée \texttt{C\_FILES}~:
+  \item deux substitutions sont effectuées dans la chaîne obtenue par la lecture du fichier source \texttt{udfcoded-entry.s}~:
+  \begin{itemize}
+    \item \texttt{!TASKCOUNT!} est remplacé par le nombre de tâches du projet~;
+    \item \texttt{!GUARDCOUNT!} est remplacé par le nombre maximum de commandes gardées des tâches du projet~;
+  \end{itemize}
+  \item la chaîne résultat constitue le fichier source C \texttt{src.c} du projet.
+\end{itemize}
 
 
 
@@ -464,10 +475,21 @@ C_FILES:
 \begin{PLM}
 S_FILES:
   "../s-cortex-m4-header.s",
-  "../s-endloop-for-unhandled-interrupt.s",
   "s-interrupt-vectors.s",
   "s-reset-handler.s"
 \end{PLM}
+
+Cette entrée liste tous les fichiers assembleur qui composent le début du fichier \texttt{src.s} d'un projet. Il sont tous désignés par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
+
+Les opérations effectuées sont les suivantes~:
+\begin{itemize}
+  \item les fichiers sont lus et concaténés dans leur ordre d'apparition dans l'entrée \texttt{S\_FILES}~:
+  \item la chaîne résultat constitue le début du fichier source assembleur \texttt{src.s} du projet~; PLM y ajoute ensuite le texte assembleur provenant de l'implémentation des services, des sections et des interruptions.
+\end{itemize}
+
+
+
+
 
 
 
@@ -486,6 +508,19 @@ LL_FILES:
   "../../ll-configuration-on-boot.ll",
   "../../ll-create-task.ll"
 \end{PLM}
+
+Cette entrée liste tous les fichiers LLVM qui composent le début du fichier \texttt{src.ll} d'un projet. Il sont tous désignés par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
+
+Les opérations effectuées sont les suivantes~:
+\begin{itemize}
+  \item les fichiers sont lus et concaténés dans leur ordre d'apparition dans l'entrée \texttt{LL\_FILES}~:
+  \item la chaîne résultat constitue le début du fichier source assembleur \texttt{src.ll} du projet~; PLM y ajoute ensuite le texte LLVM provenant de la compilation des sources PLM.
+\end{itemize}
+
+
+
+
+
 
 
 
@@ -507,6 +542,7 @@ PLM_FILES:
   "../../plm-semaphore.plm"
 \end{PLM}
 
+Cette entrée liste tous les fichiers PLM qui sont automatiquement inclus lors de la compilation d'un projet. Il sont tous désignés par un chemin relatif par rapport au répertoire qui contient le fichier de configuration \texttt{+config.plm-target}.
 
 
 
@@ -519,9 +555,36 @@ PLM_FILES:
 \begin{PLM}
 INTERRUPT_HANDLER:
   "../xtr-interrupt-handler.s" ;
-  "../undefined-interrupt.s" ;
-  32 // Cortex M4 saves 8 regs in user stack on interrupt
+  32 ; // Cortex M4 saves 8 regs in user stack on interrupt
+  "../undefined-interrupt.s"
 \end{PLM}
+
+Le premier argument définit le handler d'interruption, qui est engendré pour chaque interruption qui s'exécute en mode \plm=service=\footnote{Le compilateur PLM prend complètement en charge la compilation d'une routine d'interruption déclarée avec le qualificatif \texttt{section} ou  \texttt{safe}.} (c'est-à-dire déclarée avec le qualificatif \plm=service=\index{isr!service}, \refSubsectionPage{definirRoutineInterruption}). Les opérations effectuées sont les suivantes~:
+\begin{itemize}
+  \item pour chaque interruption qui s'exécute en mode \plm=service=, le fichier est lu~:
+  \item deux substitutions sont effectuées dans la chaîne obtenue~:
+  \begin{itemize}
+    \item \texttt{!ISR!} est remplacé par le nom assembleur du handler assembleur~;
+    \item \texttt{!HANDLER!} est remplacé par le nom assembleur de la routine issue de la compilation PLM de la routine d'interruption~;
+  \end{itemize}
+  \item la chaîne résultat est ajoutée au fichier source assembleur \texttt{src.s} du projet.
+\end{itemize}
+
+
+
+Le deuxième argument (ici \plm=32=) est le nombre d'octets empilés dans le pile d'une tâche lorsqu'une interruption survient.
+
+
+
+Le dernier paramètre est utilisé uniquement quand le projet est compilé sans engendrer le code de panique. Il définit le handler pour toute interruption non définie en PLM\footnote{Quand un projet est compilé avec le code de panique, le compilateur PLM prend en charge les interruptions non définies.}. Les opérations effectuées sont les suivantes~:
+\begin{itemize}
+  \item pour chaque interruption indéfinie, le fichier \texttt{../undefined-interrupt.s} est lu~:
+  \item une substitution est effectuée dans la chaîne obtenue~:
+  \begin{itemize}
+    \item \texttt{!ISR!} est remplacé par le nom assembleur du handler assembleur~;
+  \end{itemize}
+  \item la chaîne résultat est ajoutée au fichier source assembleur \texttt{src.s} du projet.
+\end{itemize}
 
 
 
@@ -538,11 +601,6 @@ INTERRUPTS:
   MemManage -> 4,
   BusFault -> 5,
   UsageFault -> 6,
-  DebugMonitor -> 12,
-  PendSV -> 14,
-  systick -> 15,
-  DMAChannel0TranfertComplete -> 16,
-  DMAChannel1TranfertComplete -> 17,
   ...
   pinDetectPortD -> 106,
   pinDetectPortE -> 107,
@@ -550,13 +608,7 @@ INTERRUPTS:
 \end{PLM}
 
 
-
-
-
-
-
-
-{\bf Interruption vectors.} La liste de toutes les interruptions, chacune d'elle étant accompagnée de son numéro. Celui-ci est utilisé lors de la panique, si une interruption se déclenche alors qu'aucune routine de réponse à cette interruption n'est installée.
+La liste de toutes les interruptions, chacune d'elle étant accompagnée de son numéro. Celui-ci est utilisé lors de la panique, si une interruption se déclenche alors qu'aucune routine de réponse à cette interruption n'est installée.
 
 
 
@@ -565,9 +617,9 @@ INTERRUPTS:
 
 \sectionLabel{Schéma d'appel des sections}{schemaAppelSectionsViaSystemCall}
 
-Quand le code d'une tâche appelle une section, celui-ci doit s'effectuer à travers un \emph{system call}\footnote{Quand une section est appelée à partir d'un mode privilégié, l'appel est un simple appel de routine.}.
+Est présenté ici comment sont implémentées les sections, dont l'appel à partir des tâches s'effectue via un \emph{system call}\footnote{Quand une section est appelée à partir d'un mode privilégié, l'appel est un simple appel de routine.}. c'est le cas de la cible \texttt{teensy-3-1/unprivileged}, que nous prenons comme exemple tout au long des explications.
 
-L'implémentation de cette opération est paramètrable grâce à quatre fichiers assembleurs, placés dans le répertoire \texttt{teensy-3-1/custom}. Le nom de ces fichiers est préfixé par la chaîne spécifiée dans le champ \emph{Section invocation scheme} de la \plm=configuration= (voir \refSubsectionPage{configurationSection}), ce qui autorise de disposer de plusieurs implémentations possibles. Pour le schéma nommé \plm="udfcoded"=, ces quatre fichiers sont~:
+L'implémentation de cette opération est paramètrable grâce à quatre fichiers assembleurs, comme expliqué à la \refSubsubsectionTitlePage{configurationSectionAppelSysteme}~:
 \begin{itemize}
   \item \texttt{udfcoded-section-dispatcher-code.s}~: implémentation du code exécuté par l'appel système invoqué par l'appel à une section~;
   \item \texttt{udfcoded-section-dispatcher-entry.s}~: entrée du tableau définissant le nom de la fonction implémentant la section~;
@@ -575,16 +627,16 @@ L'implémentation de cette opération est paramètrable grâce à quatre fichier
   \item \texttt{udfcoded-section-invocation.s}~: implémentation de l'appel à une section. 
 \end{itemize}
 
-Trois schémas sont proposés, \plm="udfcoded"=, \plm="r12idx"= et \plm="r12direct"=, et sont décrits dans les sections suivantes. Le \refTableauPage{dureeSchemasServices} résume les caractéristiques de chacun. Les durées sont estimées grâce au projet \texttt{04-section-service-duration.plm}. 
+Il suffit donc de changer ces fichiers assembleur pour modifier le schéma d'appel. En fait, trois schémas sont possibles pour la cible \texttt{teensy-3-1/unprivileged} : \texttt{udfcoded} (celui utilisé), \texttt{r12idx} et \texttt{r12direct}, et sont décrits dans les sections suivantes. Le \refTableauPage{dureeSchemasServices} résume les caractéristiques de chacun. Les durées sont estimées grâce au projet \texttt{04-section-service-duration.plm}. 
 
 \begin{table}[t]
 \centering
 \begin{tabular}{llll}
   \textbf{Nom du schéma} & \textbf{Par entrée} & \textbf{\texttt{as\_section\_handler}} & \textbf{Durée estimée} \\
    & (octets) & (octets) & (en cycles d'horloge) \\
-  \plm="udfcoded"= & 4 + 4 & 40 & 64 \\
-  \plm="r12idx"= & 8 + 4 & 36 & 65 \\
-  \plm="r12direct"= & 12 + 0 & 24 & 61 \\
+  \texttt{udfcoded} & 4 + 4 & 40 & 64 \\
+  \texttt{r12idx} & 8 + 4 & 36 & 65 \\
+  \texttt{r12direct} & 12 + 0 & 24 & 61 \\
 \end{tabular}
 \caption{Caractéristiques de différents schémas d'appel de section}
 \labelTableau{dureeSchemasServices}
@@ -592,7 +644,7 @@ Trois schémas sont proposés, \plm="udfcoded"=, \plm="r12idx"= et \plm="r12dire
 \end{table}
 
 
-\subsubsection{Schéma \texttt{udfcoded} d'appel des sections}
+\subsection{Schéma \texttt{udfcoded} d'appel des sections}
 
 Dans ce schéma, l'instruction indéfinie \texttt{UDF} est utilisée. Le code de cette instruction est \texttt{0xDE$xx$}, où $xx$ est une valeur que le Cortex ignore. On utilise ce champ pour coder l'indice du service appelé.
 
@@ -625,7 +677,7 @@ Trois séquences sont remplacées par le compilateur PLM~:
 
 PLM effectue donc cette opération pour chaque section, par ordre croissant de l'indice, et accumule le texte produit dans le fichier assembleur \texttt{src.s}.
 
-Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}, défini par le fichier \texttt{udfcoded-section-dispatcher-code.s}~:
+Donc, quand une instruction \texttt{UDF} est rencontrée, le Cortex exécute l'exception n°3, qui renvoie vers \texttt{as\_section\_handler}\footnote{Ce qui est défini dans le fichier \texttt{s-interrupt-vectors.s} de la cible qui décrit la table des interruptions (voir \refSubsectionTitlePage{configurationFichiersAssembleur}).}, défini par le fichier \texttt{udfcoded-section-dispatcher-code.s}~:
 
 \begin{SHELL}\small
 \hspace*{1.2em}.section	".text.as\_section\_handler","ax",\%progbits\\
@@ -687,9 +739,9 @@ PLM effectue pour chaque section les substitutions de \nospace{!IMPLEMENTATION\_
 
 
 
-\subsubsection{Schéma \texttt{r12idx} d'appel des sections}
+\subsection{Schéma \texttt{r12idx} d'appel des sections}
 
-Dans ce schéma, l'instruction indéfinie \texttt{UDF} est utilisée.  Le code de cette instruction est \texttt{0xDE$xx$}, où $xx$ est une valeur que le Cortex ignore. Contrairement au shéma précédent, le champ $xx$ est toujours à $0$, l'indice de la section est entré dans le registre \texttt{r12}.
+Dans ce schéma, l'instruction indéfinie \texttt{UDF} est utilisée.  Le code de cette instruction est \texttt{0xDE$xx$}, où $xx$ est une valeur que le Cortex ignore. Contrairement au shéma précédent, le champ $xx$ est toujours à $0$, l'indice de la section est entré dans le registre \texttt{r12}\footnote{L'ABI considère le registre \texttt{r12} comme l'\emph{Intra-Procedure-call scratch register}~: \emph{register r12 (IP) may be used by a linker as a scratch register between a routine and any subroutine it calls}.}.
 
 Pour coder l'appel relatif à une section, PLM va utiliser le fichier \texttt{r12idx-section-invocation.s}. Le contenu de fichier est~:
 \begin{SHELL}\small
@@ -780,7 +832,7 @@ PLM effectue pour chaque section les substitutions de \nospace{!IMPLEMENTATION\_
 
 
 
-\subsubsection{Schéma \texttt{r12direct} d'appel des sections}
+\subsection{Schéma \texttt{r12direct} d'appel des sections}
 
 Dans ce schéma, l'instruction indéfinie \texttt{UDF} est utilisée. L'adresse de la routine implémentant la section est entrée dans le registre \texttt{r12}.
 
@@ -847,44 +899,4 @@ Les fichiers \texttt{r12direct-section-dispatcher-header.s} et \texttt{r12direct
 
 
 
-
-
-
-
-
-
-
-\subsection{Le répertoire \texttt{teensy-3-1/custom}}
-
-Texte à définir…
-
-
-
-
-\sectionLabel{La directive \texttt{check target}}{directiveCheckTarget}\index{check target}
-
-La directive \plm=check target= permet de vérifier l'identité de la cible. Elle est utile pour s'assurer qu'un fichier est acceptable par une cible. À la compilation, toute directive \plm=check target= incorrecte entraîne une erreur.
-
-Par exemple, compiler pour la cible \plm+"teensy-3-1"+ est spécifié par~:
-
-\begin{PLM}
-target "teensy-3-1"
-\end{PLM}
-
-Si la définition du projet implique d'importer le fichier \plm+"monFichier.plm"+~:
-
-\begin{PLM}
-target "teensy-3-1"
-import "monFichier.plm"
-\end{PLM}
-
-Si le contenu de ce fichier commence par~:
-\begin{PLM}
-check target "lpc2294"
-\end{PLM}
-
-Alors une erreur de compilation apparaît. La directive \plm=check target= doit être~:
-\begin{PLM}
-check target "teensy-3-1"
-\end{PLM}
 

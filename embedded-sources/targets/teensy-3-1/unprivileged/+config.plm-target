@@ -17,7 +17,7 @@ LINKER_SCRIPT:
   "../ld-linker.txt"
 // Panic code type, panic line type, panic generation file
 PANIC:
-  $int32 ; $uint32 ; "../target-panic.ll"
+  $uint32 ; $uint32 ; "../target-panic.ll"
 // Pointer bit count
 POINTER_BIT_COUNT:
   32
@@ -46,7 +46,6 @@ C_FILES:
 //--- Assembler Source files
 S_FILES:
   "../s-cortex-m4-header.s",
-  "../s-endloop-for-unhandled-interrupt.s",
   "s-interrupt-vectors.s",
   "s-reset-handler.s"
 //--- LLVM Source files
@@ -68,8 +67,8 @@ PLM_FILES:
 //--- Interrupt handler
 INTERRUPT_HANDLER:
   "../xtr-interrupt-handler.s" ;
-  "../undefined-interrupt.s" ;
-  32 // Cortex M4 saves 8 regs in user stack on interrupt
+  32 ; // Cortex M4 saves 8 regs in user stack on interrupt
+  "../undefined-interrupt.s"
 //--- Interrupts
 INTERRUPTS:
   NMI -> 2,

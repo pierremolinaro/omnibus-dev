@@ -32,3 +32,32 @@ Où \plm="chemin.plm"= est un chemin (absolu, relatif) vers le fichier à import
 Importer plusieurs fois le même fichier n'est pas une erreur. Le compilateur garde trace des importations déjà effectuées et ignore les importations des fichiers déjà importés.
 
 L'extension \texttt{.plm} doit être mentionnée dans le chemin.
+
+
+\sectionLabel{La directive \texttt{check target}}{directiveCheckTarget}\index{check target}
+
+La directive \plm=check target= permet de vérifier l'identité de la cible. Elle est utile pour s'assurer qu'un fichier est acceptable par une cible. À la compilation, toute directive \plm=check target= incorrecte entraîne une erreur.
+
+Par exemple, compiler pour la cible \plm+"teensy-3-1"+ est spécifié par~:
+
+\begin{PLM}
+target "teensy-3-1"
+\end{PLM}
+
+Si la définition du projet implique d'importer le fichier \plm+"monFichier.plm"+~:
+
+\begin{PLM}
+target "teensy-3-1"
+import "monFichier.plm"
+\end{PLM}
+
+Si le contenu de ce fichier commence par~:
+\begin{PLM}
+check target "lpc2294"
+\end{PLM}
+
+Alors une erreur de compilation apparaît. La directive \plm=check target= doit être~:
+\begin{PLM}
+check target "teensy-3-1"
+\end{PLM}
+

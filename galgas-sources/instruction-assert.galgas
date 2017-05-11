@@ -109,10 +109,9 @@ override method @assertInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let assertErrorCode = 7
   [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
   ioLLVMcode += "if (!" + [mExpressionValue llvmName] + ") {\n"
-  ioLLVMcode += "  raise_exception (" + assertErrorCode
+  ioLLVMcode += "  raise_exception (" + panicCodeForAssertViolation ()
      + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
      + ", " + [mAssertInstructionLocation line] + ") ;\n"
   ioLLVMcode += "}\n" 
