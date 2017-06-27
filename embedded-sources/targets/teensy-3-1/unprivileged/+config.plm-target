@@ -24,6 +24,9 @@ POINTER_BIT_COUNT:
 // System stack size (in byte count)
 SYSTEM_STACK_SIZE:
   1024
+// NOP instruction in LLVM
+NOP:
+  "call void asm sideeffect \"nop\", \"\"() nounwind"
 // Service implementation
 SERVICE:
   "service-handler.s" ;

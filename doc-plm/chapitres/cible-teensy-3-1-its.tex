@@ -7,7 +7,7 @@
 
 \chapter{Cible \texttt{teensy-3-1-it}}\index{Cible!\texttt{teensy-3-1-it}}
 
-Dans l'état actuel de PLM, une seule cible est définie : \texttt{teensy-3-1-it}.  Elle permet une programmation séquentielle avec routines d'interruption. L'interruption \texttt{systick} est programmée pour se déclencher chaque milliseconde. L'objet de ce chapitre est de décrire son utilisation.
+Dans l'état actuel de PLM, une seule cible est définie~: \texttt{teensy-3-1-it}.  Elle permet une programmation séquentielle avec routines d'interruption. L'interruption \texttt{systick} est programmée pour se déclencher chaque milliseconde. L'objet de ce chapitre est de décrire son utilisation.
 
 Il est possible de définir sa propre cible (\refChapterPage{chapitreConfCible}).
 
@@ -36,7 +36,7 @@ La \refFigure{}{sequenceDemarrageTeensySequentialSystick} définit l'organigramm
 
 Le micro-contrôleur démarre sur une horloge interne, la mémoire vive n'étant pas initialisée. Il est dans le mode \emph{thread, priviliged access}, avec une seule pile. La configuration conservera cette pile unique, jusqu'au démarrage des tâches.
 
-La première étape est de configurer les horloges internes du micro-contrôleur : c'est le rôle des routines \plm=boot= (\refSectionPage{personalisationDemarrageTeensy31it}). À ce stade, la mémoire vive n'est toujours pas initialisée, aussi les routines \plm=boot= n'y accèdent pas (le compilateur l'assure).
+La première étape est de configurer les horloges internes du micro-contrôleur~: c'est le rôle des routines \plm=boot= (\refSectionPage{personalisationDemarrageTeensy31it}). À ce stade, la mémoire vive n'est toujours pas initialisée, aussi les routines \plm=boot= n'y accèdent pas (le compilateur l'assure).
 
 La deuxième étape est d'initialiser les \emph{variables globales}, c'est-à-dire mettre à zéro la zone \texttt{bss}, et de recopier à partir de la flash les valeurs initiales des variables initialisées.
 
@@ -108,7 +108,7 @@ Vous pouvez ajouter vos propres routines \plm+init+. À chaque routine \plm+init
 
 \section{API}
 
-L'API de la cible \texttt{teensy-3-1-it} regroupe les fonctions disponibles dans des modules et des types :
+L'API de la cible \texttt{teensy-3-1-it} regroupe les fonctions disponibles dans des modules et des types~:
 \begin{itemize}
   \item le module \plm=time=, la gestion du temps (\refSubsectionPage{moduleTime})~;
   \item le module \plm=leds=, la gestion des leds (\refSubsectionPage{moduleLeds})~;
@@ -191,7 +191,7 @@ Cette fonction exprime l'attente passive en garde pendant \plm=inDelay= milli-se
 
 \subsubsection{Constantes}
 
-Les constantes suivantes sont de type \plm=$uint32= et sont dédiées aux leds : \plm=LED_L0=, \plm=LED_L1=, \plm=LED_L2=, \plm=LED_L3= et \plm=LED_L4=.
+Les constantes suivantes sont de type \plm=$uint32= et sont dédiées aux leds~: \plm=LED_L0=, \plm=LED_L1=, \plm=LED_L2=, \plm=LED_L3= et \plm=LED_L4=.
 
 
 \subsubsectionLabel{Fonction \texttt{write(?off{}:)}}{routineLedOffTeensy31it}
@@ -200,13 +200,13 @@ Les constantes suivantes sont de type \plm=$uint32= et sont dédiées aux leds :
   public func user panic service write (?off:inLeds $uint32) 
 \end{PLM}
 
-Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire :
+Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire~:
 
 \begin{PLM}
   leds.write (!off:LED_L0)
 \end{PLM}
 
- Pour éteindre plusieurs leds, utiliser l'opérateur \plm=|= :
+ Pour éteindre plusieurs leds, utiliser l'opérateur \plm=|=~:
  
 \begin{PLM}
   leds.write (!off:LED_L0 | LED_L4)
@@ -220,13 +220,13 @@ Cette routine éteint un ensemble de leds. Pour éteindre une led, écrire :
   public func user panic service write (?on:inLeds $uint32) 
 \end{PLM}
 
-Cette routine allume un ensemble de leds. Pour allumer une led, écrire :
+Cette routine allume un ensemble de leds. Pour allumer une led, écrire~:
 
 \begin{PLM}
   leds.write (!on:LED_L0)
 \end{PLM}
 
- Pour allumer plusieurs leds, utiliser l'opérateur \plm=|= :
+ Pour allumer plusieurs leds, utiliser l'opérateur \plm=|=~:
  
 \begin{PLM}
   leds.write (!on:LED_L0 | LED_L4)
@@ -242,13 +242,13 @@ Cette routine allume un ensemble de leds. Pour allumer une led, écrire :
 
 Cette routine complémente un ensemble de leds.
 
-Pour complémenter une led, écrire :
+Pour complémenter une led, écrire~:
 
 \begin{PLM}
   leds.write (!toggle:LED_L0)
 \end{PLM}
 
-Pour complémenter plusieurs leds, utiliser l'opérateur \plm=|= :
+Pour complémenter plusieurs leds, utiliser l'opérateur \plm=|=~:
 
 \begin{PLM}
   leds.write (!toggle:LED_L0 | LED_L4)
@@ -424,7 +424,7 @@ Cette fonction écrit la valeur de l'argument (une chaîne de caractères) \plm=
 Le type \plm=$semaphore= implémente le sémaphore de Dijstra. La liste des tâches bloquées est ordonnée selon leur priorité.
 
 
-La déclaration d'un sémaphore mentionne sa valeur initiale, qui est un entier non signé de 32 bits :
+La déclaration d'un sémaphore mentionne sa valeur initiale, qui est un entier non signé de 32 bits~:
 
 \begin{PLM}
   var s = $semaphore (!value:0)
@@ -642,7 +642,7 @@ Cette fonction signifie aux tâches en attente d'échéance en garde que l'insta
 
 \section{Les routines d'interruption}
 
-Toutes les interruptions du micro-contrôleur sont accessibles en PLM, avec quelques exceptions :
+Toutes les interruptions du micro-contrôleur sont accessibles en PLM, avec quelques exceptions~:
 \begin{itemize}
   \item l'interruption n°$1$ (\emph{Reset}), est réservée par PLM~;
   \item l'interruption n°$3$ (\emph{HardFault}), est réservée par PLM~;
@@ -650,17 +650,17 @@ Toutes les interruptions du micro-contrôleur sont accessibles en PLM, avec quel
   \item l'interruption n°$15$ (\emph{systick}), est implémentée par la cible~; toutefois, une fonction \texttt{userSystickHandler} est disponible, voir \refSubsectionPage{SystickPourTeensy31It}.
 \end{itemize}
 
-Une routine d'interruption porte un des noms définis par la cible :
+Une routine d'interruption porte un des noms définis par la cible~:
 \begin{itemize}
-  \item interruptions $1$ à $27$ : \refTableauPage{tableItTeensySequentialSystick1}~;
-  \item interruptions $28$ à $90$ : \refTableauPage{tableItTeensySequentialSystick2}~;
-  \item interruptions $91$ à $110$ : \refTableauPage{tableItTeensySequentialSystick3}.
+  \item interruptions $1$ à $27$~: \refTableauPage{tableItTeensySequentialSystick1}~;
+  \item interruptions $28$ à $90$~: \refTableauPage{tableItTeensySequentialSystick2}~;
+  \item interruptions $91$ à $110$~: \refTableauPage{tableItTeensySequentialSystick3}.
 \end{itemize}
 
 
 
 
-% Les \refTableau{tableItTeensySequentialSystick1}, \refTableau{tableItTeensySequentialSystick2} et \refTableau{tableItTeensySequentialSystick3} listent les interruptions définies par le processeur qui équipe la carte \emph{Teensy 3.1}. L'utilisateur peut définir une routine d'interruption pour chacune d'entre elles, sauf l'interruption n°1 (remise à zéro), et la n°15 (\texttt{SysTick}) qui est prise en charge de façon particulière (voir la \refSubsectionTitlePage{SystickPourTeensy31It}). Celle des autres interruptions est décrite dans les sections suivantes :
+% Les \refTableau{tableItTeensySequentialSystick1}, \refTableau{tableItTeensySequentialSystick2} et \refTableau{tableItTeensySequentialSystick3} listent les interruptions définies par le processeur qui équipe la carte \emph{Teensy 3.1}. L'utilisateur peut définir une routine d'interruption pour chacune d'entre elles, sauf l'interruption n°1 (remise à zéro), et la n°15 (\texttt{SysTick}) qui est prise en charge de façon particulière (voir la \refSubsectionTitlePage{SystickPourTeensy31It}). Celle des autres interruptions est décrite dans les sections suivantes~:
 %\begin{itemize}
 %  \item \refSubsectionTitlePage{itsTeensy31AvecExceptions}~;
 %  \item \refSubsectionTitlePage{itsTeensy31SansExceptions}~;
@@ -800,7 +800,7 @@ La routine d'interruption s'exécute en mode \plm=service=, les routines corresp
 
 \subsectionLabel{Routines d'interruption par défaut, panique activée}{itsTeensy31AvecExceptions}
 
-Quand la panique est activée, une routine par défaut est prédéfinie pour chaque interruption (sauf pour celles réservées par ARM et par PLM). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est l'opposé du numéro de l'interruption. Par exemple, pour l'interruption $84$ (\texttt{PITChannel0}), la routine prédéfinie est :
+Quand la panique est activée, une routine par défaut est prédéfinie pour chaque interruption (sauf pour celles réservées par ARM et par PLM). Celle-ci exécute l'instruction \plm+panic+, dont l'argument est l'opposé du numéro de l'interruption. Par exemple, pour l'interruption $84$ (\texttt{PITChannel0}), la routine prédéfinie est~:
 
 \begin{PLM}
 isr section PITChannel0 {
@@ -819,7 +819,7 @@ Quand la panique est inactivée, aucune routine d'interruption pas défaut n'est
 
 \subsectionLabel{Routine associée à l'interruption \texttt{SysTick}}{SystickPourTeensy31It}
 
-L'interruption \texttt{SysTick} est particulière. Elle est programmé par la routine \plm+init 0+ de façon à engendrer une interruption chaque milliseconde. Cette interruption se déclenche après la fin de l'exécution la routine \plm+init 0+, y compris éventuellement dans les routines \plm+init+ qui suivent. La routine d'interruption associée, inaccessible à l'utilisateur :
+L'interruption \texttt{SysTick} est particulière. Elle est programmé par la routine \plm+init 0+ de façon à engendrer une interruption chaque milliseconde. Cette interruption se déclenche après la fin de l'exécution la routine \plm+init 0+, y compris éventuellement dans les routines \plm+init+ qui suivent. La routine d'interruption associée, inaccessible à l'utilisateur~:
 \begin{itemize}
   \item incrémente une variable globale de comptage du temps~;
   \item appelle la routine \plm=makeTasksReadyFrom= qui contrôle les tâches bloquées en attente d'échéance~; 
@@ -827,7 +827,7 @@ L'interruption \texttt{SysTick} est particulière. Elle est programmé par la ro
   \item appelle la routine \plm+userSystickHandler+.
 \end{itemize}
 
-Cette routine \plm+userSystickHandler+ est définie par [À REVOIR] :
+Cette routine \plm+userSystickHandler+ est définie par [À REVOIR]~:
 
 \begin{PLM}
 public func service userTickHandler () {

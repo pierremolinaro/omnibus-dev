@@ -48,6 +48,8 @@ struct @targetParameters {
   @lbigint mSystemStackSize
   @lbigint mStackedUserRegisterOnInterruptByteSize
 
+  @lstring mNopInstructionStringInLLVM
+
   @lstring mServiceHandler
   @lbigint mServicePushedRegisterByteSize
 
@@ -124,6 +126,8 @@ syntax extension plm_target_specific_syntax {
     $integer$ ?let pointerSize
     <key> !"SYSTEM_STACK_SIZE"
     $integer$ ?let systemStackSize
+    <key> !"NOP"
+    $"string"$ ?let nopInstructionStringInLLVM
     <key> !"SERVICE"
     $"string"$ ?let serviceHandler
     $;$
@@ -212,6 +216,7 @@ syntax extension plm_target_specific_syntax {
       !pointerSize
       !systemStackSize
       !stackedUserRegisterOnInterruptByteSize
+      !nopInstructionStringInLLVM
       !serviceHandler
       !servicePushedRegisterByteSize
       !sectionImplementation

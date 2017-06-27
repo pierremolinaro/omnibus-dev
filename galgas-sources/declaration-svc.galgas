@@ -262,7 +262,7 @@ func llvmFunctionCall ?let @unifiedTypeMap-proxy inReturnType
   result += " @" + inFunctionName + " ("
   var first = true
   if inReceiverType != .null then
-    result += "%receiver"
+    result += [[inReceiverType kind] llvmTypeName] + " * %receiver"
     first = false
   end
   for () in inFormalArgumentListForGeneration do

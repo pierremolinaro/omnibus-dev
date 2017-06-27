@@ -1,4 +1,4 @@
-target "teensy-3-1/unprivileged"
+target "teensy-3-1/privileged"
 
 //——————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                               
