@@ -404,6 +404,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
   public : GALGAS_lbigint mProperty_mStackedUserRegisterOnInterruptByteSize ;
 
+  public : GALGAS_lstring mProperty_mNopInstructionStringInLLVM ;
+
   public : GALGAS_lstring mProperty_mServiceHandler ;
 
   public : GALGAS_lbigint mProperty_mServicePushedRegisterByteSize ;
@@ -447,6 +449,7 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                     const GALGAS_lbigint & in_mPointerSize,
                                     const GALGAS_lbigint & in_mSystemStackSize,
                                     const GALGAS_lbigint & in_mStackedUserRegisterOnInterruptByteSize,
+                                    const GALGAS_lstring & in_mNopInstructionStringInLLVM,
                                     const GALGAS_lstring & in_mServiceHandler,
                                     const GALGAS_lbigint & in_mServicePushedRegisterByteSize,
                                     const GALGAS_sectionImplementationScheme & in_mSectionImplementation,
@@ -478,16 +481,17 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
                                                                  const class GALGAS_lbigint & inOperand5,
                                                                  const class GALGAS_lbigint & inOperand6,
                                                                  const class GALGAS_lstring & inOperand7,
-                                                                 const class GALGAS_lbigint & inOperand8,
-                                                                 const class GALGAS_sectionImplementationScheme & inOperand9,
-                                                                 const class GALGAS_lstringlist & inOperand10,
+                                                                 const class GALGAS_lstring & inOperand8,
+                                                                 const class GALGAS_lbigint & inOperand9,
+                                                                 const class GALGAS_sectionImplementationScheme & inOperand10,
                                                                  const class GALGAS_lstringlist & inOperand11,
                                                                  const class GALGAS_lstringlist & inOperand12,
-                                                                 const class GALGAS_lstring & inOperand13,
+                                                                 const class GALGAS_lstringlist & inOperand13,
                                                                  const class GALGAS_lstring & inOperand14,
                                                                  const class GALGAS_lstring & inOperand15,
                                                                  const class GALGAS_lstring & inOperand16,
-                                                                 const class GALGAS_lstring & inOperand17
+                                                                 const class GALGAS_lstring & inOperand17,
+                                                                 const class GALGAS_lstring & inOperand18
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -503,6 +507,8 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 
 //--------------------------------- Getters
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLinkerScript (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mNopInstructionStringInLLVM (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPointerSize (LOCATION_ARGS) const ;
 
@@ -12979,6 +12985,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 
   public : GALGAS_string mProperty_mPanicLineLLVMType ;
 
+  public : GALGAS_string mProperty_mNopInstructionInLLVM ;
+
   public : GALGAS_globalTaskVariableList mProperty_mGlobalTaskVariableList ;
 
   public : GALGAS_availableInterruptMap mProperty_mAvailableInterruptMap ;
@@ -12999,6 +13007,7 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_generationContext (const GALGAS_string & in_mPanicCodeLLVMType,
                                      const GALGAS_string & in_mPanicLineLLVMType,
+                                     const GALGAS_string & in_mNopInstructionInLLVM,
                                      const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
                                      const GALGAS_availableInterruptMap & in_mAvailableInterruptMap) ;
 
@@ -13015,8 +13024,9 @@ class GALGAS_generationContext : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_generationContext constructor_new (const class GALGAS_string & inOperand0,
                                                                   const class GALGAS_string & inOperand1,
-                                                                  const class GALGAS_globalTaskVariableList & inOperand2,
-                                                                  const class GALGAS_availableInterruptMap & inOperand3
+                                                                  const class GALGAS_string & inOperand2,
+                                                                  const class GALGAS_globalTaskVariableList & inOperand3,
+                                                                  const class GALGAS_availableInterruptMap & inOperand4
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -13034,6 +13044,8 @@ class GALGAS_generationContext : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_availableInterruptMap getter_mAvailableInterruptMap (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_globalTaskVariableList getter_mGlobalTaskVariableList (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mNopInstructionInLLVM (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mPanicCodeLLVMType (LOCATION_ARGS) const ;
 

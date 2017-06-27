@@ -1,0 +1,75 @@
+
+check target "teensy-3-6"
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+boot 0 {
+//--------------------------------------------------- Disable watchdog timer
+// These two instructions are required for unlocking watchdog timer
+  WDOG_UNLOCK = WDOG_UNLOCK_SEQ1
+  WDOG_UNLOCK = WDOG_UNLOCK_SEQ2
+//--- Disable watchdog timer
+  WDOG_STCTRLH = 0
+  nop
+  nop
+//--------------------------------------------------- Enable clocks to always-used peripherals
+  SIM_SCGC3 = $SIM_SCGC3 {ADC1, FTM2, FTM3}
+  SIM_SCGC5 = $SIM_SCGC5 {PORTA, PORTB, PORTC, PORTD, PORTE}    // clocks active to all GPIO
+  SIM_SCGC6 = $SIM_SCGC6 {RTC, FTM0, FTM1, ADC0, FTF}
+//  SCB_CPACR = 0x00F0_0000; // Enable floating point unit
+  LMEM_PCCCR = $LMEM_PCCCR {GO, INVW1, INVW0, ENWRBUF, ENCACHE} // 0x8500_0003
+//--- If the RTC oscillator isn't enabled, get it started early
+  if not RTC_CR.OSCE.bool {
+    RTC_SR = 0
+    RTC_CR = $RTC_CR {SC16P, SC4P, OSCE}
+  }
+//--- Release I/O pins hold, if we woke up from VLLS mode
+  if PMC_REGSC.ACKISO != 0 {
+    PMC_REGSC |= $PMC_REGSC {ACKISO}
+  }
+//--- Since this is a write once register, make it visible to all F_CPU's
+//    so we can into other sleep modes in the future at any speed
+  SMC_PMPROT = $SMC_PMPROT {AHSRUN, AVLP, ALLS, AVLLS}
+// TODO: do this while the PLL is waiting to lock....
+  SCB_VTOR = 0  // use vector table in flash
+//  // default all interrupts to medium priority level
+////  for (int32_t i=0; i < NVIC_NUM_INTERRUPTS; i++) NVIC_SET_PRIORITY(i, 128);
+//---------2- Initialisation de la PLL
+// start in FEI mode
+//--- Enable capacitors for crystal
+  OSC_CR = $OSC_CR {SC8P, SC2P, ERCLKEN}
+//--- Enable osc, 8-32 MHz range, low power mode
+  MCG_C2 = $MCG_C2 {RANGE0:2, EREFS}
+//--- Switch to crystal as clock source, FLL input = 16 MHz / 512
+  MCG_C1 = $MCG_C1 {CLKS:2, FRDIV:4}
+//--- Wait for crystal oscillator to begin
+  loop while MCG_S.OSCINIT0 == 0 {}
+//--- Wait for FLL to use oscillator
+  loop while MCG_S.IREFST != 0 {}
+//--- Wait for MCGOUT to use oscillator
+  loop while MCG_S.CLKST != $MCG_S {CLKST:2} {}
+//--- Now we're in FBE mode
+//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz
+  SMC_PMCTRL = $SMC_PMCTRL {RUNM:3} // enter HSRUN mode
+  loop while SMC_PMSTAT != $SMC_PMSTAT{RUN} {}
+//---
+  MCG_C5 = $MCG_C5 {PRDIV0:1} // 180 MHz
+//--- Config PLL for 96 MHz output
+  MCG_C6 = $MCG_C6 {PLLS, VDIV0:29}// 180 MHz
+//--- Wait for PLL to start using xtal as its input
+  loop while MCG_S.PLLST == 0 {}
+//--- Wait for PLL to lock
+  loop while MCG_S.LOCK0 == 0 {}
+//--- Now we're in PBE mode
+//    Config divisors: 180 MHz core, 60 MHz bus, 25.7 MHz flash
+  SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:6} // 180 MHz
+  SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:0}
+//--- Switch to PLL as clock source, FLL input = 16 MHz / 512
+  MCG_C1 = $MCG_C1 {CLKS:0, FRDIV:4}
+//--- Wait for PLL clock to be used
+  loop while MCG_S.CLKST != $MCG_S {CLKST:3} {}
+//--- USB clock
+  SIM_SOPT2 = $SIM_SOPT2 {USBSRC, PLLFLLSEL:3, TRACECLKSEL, CLKOUTSEL:6}
+}
+
+//-----------------------------------------------------------------------------*

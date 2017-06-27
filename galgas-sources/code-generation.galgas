@@ -119,6 +119,7 @@ proc codeGeneration
 struct @generationContext {
   @string mPanicCodeLLVMType
   @string mPanicLineLLVMType
+  @string mNopInstructionInLLVM
   @globalTaskVariableList mGlobalTaskVariableList
   @availableInterruptMap mAvailableInterruptMap
 }
@@ -144,6 +145,7 @@ private proc generateCodeFiles
   let @generationContext generationContext = .new {
     ![[inPanicCodeType kind] llvmTypeName]
     ![[inPanicLineType kind] llvmTypeName]
+    !inTargetParameters.mNopInstructionStringInLLVM.string
     !inIntermediateCodeStruct.mGlobalTaskVariableList
     !inAvailableInterruptMap
   }

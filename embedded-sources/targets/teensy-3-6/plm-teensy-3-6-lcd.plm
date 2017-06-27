@@ -1,0 +1,427 @@
+
+check target "teensy-3-6"
+
+//——————————————————————————————————————————————————————————————————————————————
+
+// http://esd.cs.ucr.edu/labs/interface/interface.html
+
+//——————————————————————————————————————————————————————————————————————————————
+//   PORT CONFIGURATION                                                         
+//——————————————————————————————————————————————————————————————————————————————
+
+//   DB4 : PTB0 --> $digitalPort.D16
+//   DB5 : PTC0 --> $digitalPort.D15
+//   DB6 : PTD1 --> $digitalPort.D14
+//   DB7 : PTB2 --> $digitalPort.D19
+//   RS  : PTB3 --> $digitalPort.D18
+//   E   : PTB1 --> $digitalPort.D17
+
+let DATA_4 = $digitalPort.D16
+let DATA_5 = $digitalPort.D15
+let DATA_6 = $digitalPort.D14
+let DATA_7 = $digitalPort.D19
+
+let RS = $digitalPort.D18
+let ENABLE = $digitalPort.D17
+
+//——————————————————————————————————————————————————————————————————————————————
+
+module lcd {
+  
+  //············································································
+
+  func init configurePorts @noUnusedWarning () {
+    pinMode (!port:DATA_4 !mode:.OUTPUT)
+    pinMode (!port:DATA_5 !mode:.OUTPUT)
+    pinMode (!port:DATA_6 !mode:.OUTPUT)
+    pinMode (!port:DATA_7 !mode:.OUTPUT)
+    pinMode (!port:RS     !mode:.OUTPUT)
+    pinMode (!port:ENABLE !mode:.OUTPUT)
+  }
+  
+  //············································································
+  
+  func driveHighE @noUnusedWarning () {
+    digitalWrite (!port:ENABLE !true)
+  }
+  
+  //············································································
+  
+  func driveLowE @noUnusedWarning () {
+    digitalWrite (!port:ENABLE !false)
+  }
+  
+  //············································································
+  
+  
+  func driveHighRS @noUnusedWarning () {
+   digitalWrite (!port:RS !true)
+  }
+  
+  //············································································
+  
+  func driveLowRS @noUnusedWarning () {
+    digitalWrite (!port:RS !false)
+  }
+  
+  //············································································
+  
+  func setD4 @noUnusedWarning (?inValue $bool) { // PTB0
+    digitalWrite (!port:DATA_4 !inValue)
+  }
+  
+  //············································································
+  
+  func setD5 @noUnusedWarning (?inValue $bool) { // PTC0
+    digitalWrite (!port:DATA_5 !inValue)
+  }
+  
+  //············································································
+  
+  func setD6 @noUnusedWarning (?inValue $bool) { // PTD1
+    digitalWrite (!port:DATA_6 !inValue)
+  }
+  
+  //············································································
+  
+  func setD7 @noUnusedWarning (?inValue $bool) { // PTB2
+    digitalWrite (!port:DATA_7 !inValue)
+  }
+  
+  //············································································
+  //   UTILITY ROUTINES                                                         
+  //············································································
+  
+  func programLcd4BitDataBusOutput @noUnusedWarning (?inValue $uint8) {
+    self.setD4 (!(inValue & 0x01) != 0)
+    self.setD5 (!(inValue & 0x02) != 0)
+    self.setD6 (!(inValue & 0x04) != 0)
+    self.setD7 (!(inValue & 0x08) != 0)
+  }
+  
+  //············································································
+    
+  func writeFirstNibbleOf8bitCommand @noUnusedWarning (?inValue $uint8) {
+    self.driveLowRS () ;
+    self.programLcd4BitDataBusOutput (!inValue)
+    self.driveHighE () ;
+  }
+ 
+  //············································································
+    
+  func writeFirstNibbleOf8bitData @noUnusedWarning (?inValue $uint8) {
+    self.driveHighRS () ;
+    self.programLcd4BitDataBusOutput (!inValue)
+    self.driveHighE () ;
+  }
+ 
+   //············································································
+ 
+  func writeSecondNibble @noUnusedWarning (?inValue $uint8) {
+    self.programLcd4BitDataBusOutput (!inValue)
+    self.driveHighE () ;
+  }
+  
+  //············································································
+  
+  func init write4BitCommand @noUnusedWarning (?inValue $uint8) {
+    time.busyWaitingDuringMS (!1) ;
+    self.writeFirstNibbleOf8bitCommand (!inValue)
+    time.busyWaitingDuringMS (!1) ;
+    self.driveLowE () ;
+  }
+  
+  //············································································
+  
+  func init write8bitCommand @noUnusedWarning (?inCommand $uint8) {
+    time.busyWaitingDuringMS (!1) ;
+    self.writeFirstNibbleOf8bitCommand (!inCommand >> 4)
+    time.busyWaitingDuringMS (!1) ;
+    self.driveLowE () ;
+    time.busyWaitingDuringMS (!1) ;
+    self.writeSecondNibble (!inCommand) ;
+    time.busyWaitingDuringMS (!1) ;
+    self.driveLowE () ;
+  }
+  
+  //············································································
+  //   LCD INIT                                                                 
+  //············································································
+  
+  init 10 {
+    self.configurePorts () ;
+  //--- Étape 1 : attendre 15 ms
+    time.busyWaitingDuringMS (!15) ;
+  //--- Étape 2 : écrire la commande 0x30
+    self.write4BitCommand (!0x3) ;
+  //--- Étape 3 : attendre 4,1 ms (en fait 5 ms)
+    time.busyWaitingDuringMS (!5) ;
+  //--- Étape 4 : écrire la commande 0x30 une 2e fois
+    self.write4BitCommand (!0x3) ;
+  //--- Étape 5 : attendre 100 µs
+    time.busyWaitingDuringMS (!1) ;
+  //--- Étape 6 : écrire la commande 0x30 une 3e fois
+    self.write4BitCommand (!0x3) ;
+  //--- Étape 7 : écrire la commande 0x20 pour passer en 4 bits
+    self.write4BitCommand (!0x2) ;
+  //--- Étape 8 : écrire la commande 'Set Interface Length' : 0 0 1 DL N F * *
+  //    DL : Data interface length : 0 (4 bits)
+  //    N : Number of Display lines : 1 (2 lignes)
+  //    F : Character Font : 0 (5x7)
+    self.write8bitCommand (!0x28) ;
+  //--- Étape 9 : écrire la commande 'Display Off'
+    self.write8bitCommand (!0x08) ;
+  //--- Étape 10 : écrire la commande 'Clear Display'
+    self.write8bitCommand (!0x01) ;
+  //--- Étape 11 : écrire la commande 'Set Cursor Move Direction' : 0 0 0 0 0 1 ID S
+  //    ID : Increment Cursor after Each Byte Written to Display : 1 (oui)
+  //    S : Shift Display When Byte Written : 0 (non)
+    self.write8bitCommand (!0x06) ;
+  //--- Étape 12 : écrire la commande 'Move Cursor / Shift Display' : 0 0 0 1 SC RL * *
+  //    SC : Display Shift On : 1 (oui)
+  //    RL : Direction of Shift : 1 (vers la droite)
+    self.write8bitCommand (!0x1C) ;
+  //--- Étape 13 : écrire la commande 'Return Cursor and LCD to Home Position'
+    self.write8bitCommand (!0x02) ;
+  //--- Étape 14 : écrire la commande 'Enable Display / Cursor' : 0 0 0 0 1 D C B
+  //    D : Turn Display On : 1 (oui)
+  //    C : Turn Cursor On : 0 (non)
+  //    B : Cursor Blink On : 0 (non)
+    self.write8bitCommand (!0x0C) ;
+  }
+  
+  //············································································
+  //   PRINT ROUTINES IN USER MODE                                              
+  //············································································
+  
+  func user write8bitCommand_inUserMode @noUnusedWarning (?inCommand $uint8) {
+    time.waitDuringMS (!delay:1) ;
+    self.writeFirstNibbleOf8bitCommand (!inCommand >> 4) ;
+    time.waitDuringMS (!delay:1) ;
+    self.driveLowE () ;
+    time.waitDuringMS (!delay:1) ;
+    self.writeSecondNibble (!inCommand) ;
+    time.waitDuringMS (!delay:1) ;
+    self.driveLowE () ;
+  }
+  
+  //············································································
+  
+  func user writeData_inUserMode @noUnusedWarning (?inData $uint8) {
+    time.waitDuringMS (!delay:1) ;
+    self.writeFirstNibbleOf8bitData (!inData >> 4) ;
+    time.waitDuringMS (!delay:1) ;
+    self.driveLowE () ;
+    time.waitDuringMS (!delay:1) ;
+    self.writeSecondNibble (!inData) ;
+    time.waitDuringMS (!delay:1) ;
+    self.driveLowE () ;
+  }
+  
+  //············································································
+  
+  public func user clearScreen @noUnusedWarning () {
+    self.write8bitCommand_inUserMode (!0x01)
+  }
+  
+  //············································································
+  
+  // Line 0 : 00 -> 19
+  // Line 1 : 64 -> 83
+  // Line 2 : 20 -> 39
+  // Line 3 : 84 -> 103
+  
+  public func user goto @noUnusedWarning (?line:inLine $uint2 ?column:inColumn $uint8) {
+    if inColumn < 20 {
+      if inLine == 0 {
+        self.write8bitCommand_inUserMode (!0x80 + 0 + inColumn) ;
+      }else if inLine == 1 {
+        self.write8bitCommand_inUserMode (!0x80 + 64 + inColumn) ;
+      }else if inLine == 2 {
+        self.write8bitCommand_inUserMode (!0x80 + 20 + inColumn) ;
+      }else{
+        self.write8bitCommand_inUserMode (!0x80 + 84 + inColumn) ;
+      }
+    }
+  }
+  
+  //············································································
+  
+  public func user printSpaces @noUnusedWarning (?inCount $uint32) {
+    var count = inCount
+    loop while (count > 0) {
+      self.writeData_inUserMode (!0x20)
+      count -= 1
+    }
+  }
+  
+  //············································································
+  
+  public func user printUnsigned @noUnusedWarning (?inValue $uint32) {
+    var divisor $uint32 = 1_000_000_000
+    var value = inValue
+    var isPrinting = false
+    loop while divisor > 0 {
+      if isPrinting or (value >= divisor) {
+        let quotient = value / divisor
+        let remainder = value - quotient * divisor
+        self.writeData_inUserMode (!0x30 + convert quotient : $uint8)
+        value = remainder
+        isPrinting = true
+      }
+      divisor = divisor / 10
+    }
+    if not isPrinting {
+      self.writeData_inUserMode (!0x30)
+    }
+  }
+  
+  //············································································
+  
+  public func user printString @noUnusedWarning (?inValue $staticString) {
+    for c in inValue {
+      self.writeData_inUserMode (!c)
+    }
+  }
+  
+  //············································································
+  
+  public func user printHex1 @noUnusedWarning (?inValue $uint32) {
+    let v = truncate inValue & 0xF : $uint8
+    if v < 10 {
+      self.writeData_inUserMode (!v + 0x30)
+    }else{
+      self.writeData_inUserMode (!v + 0x41 - 10)
+    }
+  }
+  
+  //············································································
+  
+  public func user printHex2 @noUnusedWarning (?inValue $uint32) {
+    self.printHex1 (!inValue >> 4)
+    self.printHex1 (!inValue)
+  }
+  
+  //············································································
+  
+  public func user printHex4 @noUnusedWarning (?inValue $uint32) {
+    self.printHex2 (!inValue >> 8)
+    self.printHex2 (!inValue)
+  }
+  
+  //············································································
+  
+  public func user printHex8 @noUnusedWarning (?inValue $uint32) {
+    self.printHex4 (!inValue >> 16)
+    self.printHex4 (!inValue)
+  }
+  
+  //············································································
+  
+  public func user printHex16 @noUnusedWarning (?inValue $uint64) {
+    self.printHex8 (!truncate inValue >> 32 : $uint32)
+    self.printHex8 (!truncate inValue : $uint32)
+  }
+  
+  //············································································
+  //   PANIC                                                                    
+  //············································································
+  
+  func panic writeDataInPanicMode @noUnusedWarning (?inData $uint8) {
+    time.panicOneMillisecondBusyWait () ;
+    self.driveHighRS () ;
+    self.programLcd4BitDataBusOutput (!inData >> 4) ;
+    self.driveHighE () ;
+    time.panicOneMillisecondBusyWait () ;
+    self.driveLowE () ;
+    time.panicOneMillisecondBusyWait () ;
+    self.programLcd4BitDataBusOutput (!inData) ;
+    self.driveHighE () ;
+    time.panicOneMillisecondBusyWait () ;
+    self.driveLowE () ;
+  }
+  
+  //············································································
+  
+  public func panic printUnsignedInPanicMode @noUnusedWarning (?inValue $uint32) {
+    var divisor $uint32 = 1_000_000_000
+    var value = inValue
+    var isPrinting = false
+    loop while divisor > 0 {
+      if isPrinting or (value >= divisor) {
+        let quotient = value !/ divisor
+        let remainder = value -% quotient *% divisor
+        self.writeDataInPanicMode (!0x30 +% truncate quotient : $uint8)
+        value = remainder
+        isPrinting = true
+      }
+      divisor = divisor !/ 10
+    }
+    if not isPrinting {
+      self.writeDataInPanicMode (!0x30)
+    }
+  }
+  
+  //············································································
+  
+  public func panic printSignedInPanicMode @noUnusedWarning (?inValue $int32) {
+    if inValue >= 0 {
+      self.printUnsignedInPanicMode (!truncate inValue : $uint32)
+    }else{
+      self.writeDataInPanicMode (!0x2D) // Signe -
+      self.printUnsignedInPanicMode (!truncate -% inValue : $uint32)
+    }
+  }
+  
+  //············································································
+  
+  func panic write8bitCommandInPanicMode @noUnusedWarning (?inCommand $uint8) {
+    time.panicOneMillisecondBusyWait () ;
+    self.driveLowRS () ;
+    self.programLcd4BitDataBusOutput (!inCommand >> 4) ;
+    self.driveHighE () ;
+    time.panicOneMillisecondBusyWait () ;
+    self.driveLowE () ;
+    time.panicOneMillisecondBusyWait () ;
+    self.programLcd4BitDataBusOutput (!inCommand) ;
+    self.driveHighE () ;
+    time.panicOneMillisecondBusyWait () ;
+    self.driveLowE () ;
+  }
+  
+  //············································································
+  
+  public func panic gotoInPanicMode @noUnusedWarning (?line:inLine $uint32 ?column:inColumn $uint8) {
+    if inColumn < 20 {
+      if inLine == 0 {
+        self.write8bitCommandInPanicMode (!0x80 +% 0 +% inColumn) ;
+      }else if inLine == 1 {
+        self.write8bitCommandInPanicMode (!0x80 +% 64 +% inColumn) ;
+      }else if inLine == 2 {
+        self.write8bitCommandInPanicMode (!0x80 +% 20 +% inColumn) ;
+      }else if inLine == 3 {
+        self.write8bitCommandInPanicMode (!0x80 +% 84 +% inColumn) ;
+      }
+    }
+  }
+  
+  //············································································
+  
+  public func panic clearScreenInPanicMode @noUnusedWarning () {
+    self.write8bitCommandInPanicMode (!0x01)
+    time.panicBusyWaitingDuringMS (!4)
+  }
+  
+  //············································································
+  
+  public func panic printStringInPanicMode @noUnusedWarning (?inString $staticString) {
+    for c in inString {
+      self.writeDataInPanicMode (!c)
+    }
+  }
+
+  //············································································
+
+}
+
+//——————————————————————————————————————————————————————————————————————————————

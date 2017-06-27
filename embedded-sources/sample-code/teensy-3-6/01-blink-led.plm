@@ -1,0 +1,41 @@
+target "teensy-3-6/unprivileged"
+let F_CPU_MHZ = 180
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//   ACTIVITY LED                                                               
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func safe activityLedOn @exported () {
+  digitalWrite (!port:.D13 !true)
+}
+
+func safe activityLedOff @exported () {
+  digitalWrite (!port:.D13 !false)
+}
+
+let LED_L0 = $digitalPort.D3
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+init 1000 {
+  pinMode (!port:.D13 !mode:.OUTPUT) // Led Teensy
+  pinMode (!port:LED_L0 !mode:.OUTPUT)
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+task Tâche priority 1 stackSize 512 {
+  var compteur $uint32 = 0
+  
+  while time.waitUntilMS (!deadline:self.compteur) {
+    digitalWrite (!port:LED_L0 !true)
+    self.compteur +%= 500
+    time.waitUntilMS (!deadline: self.compteur)
+    digitalWrite (!port:LED_L0 !false)
+    self.compteur +%= 500
+//    lcd.goto (!line:0 !column:0)
+//    lcd.printUnsigned (!time.millis ())
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

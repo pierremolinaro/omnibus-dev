@@ -40,6 +40,7 @@ list keyWordList style keywordsStyle error message "the '%K' keyword" {
   "let",
   "loop",
   "module",
+  "nop",
   "not",
   "or",
   "panic",

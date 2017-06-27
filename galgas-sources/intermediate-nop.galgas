@@ -1,0 +1,29 @@
+
+setter @instructionListIR appendNOP {
+  self += !@nopIR.new
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+class @nopIR : @abstractInstructionIR {
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @nopIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  " + inGenerationContext.mNopInstructionInLLVM + " ; NOP instruction in LLVM\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @nopIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
