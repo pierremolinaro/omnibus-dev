@@ -1,5 +1,5 @@
 target "teensy-3-6/unprivileged"
-let F_CPU_MHZ = 180
+let F_CPU_MHZ = 240
 
 //——————————————————————————————————————————————————————————————————————————————
 //   ACTIVITY LED                                                               

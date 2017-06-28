@@ -200,7 +200,7 @@ register SIM_SCGC7 at 0x40048040 $uint32 { // System Clock Gating Control Regist
 register SIM_CLKDIV1 at 0x4004_8044 $uint32 {// System Clock Divider Register 1
   OUTDIV1[4], // Divide value for the core/system clock
   OUTDIV2[4], // Divide value for the peripheral clock
-  4,
+  OUTDIV3[4], // Divide value for flexbus
   OUTDIV4[4], // Divide value for the flash clock
   16
 }

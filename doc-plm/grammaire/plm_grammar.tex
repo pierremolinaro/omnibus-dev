@@ -1165,6 +1165,16 @@
   \draw[->] (p0-8) -- (p0-9) ;
 \end{tikzpicture}
 
+\ruleSubsection{plm\_syntax}{instruction-nop}{16}
+
+\begin{tikzpicture}
+  \matrix[column sep=\ruleMatrixColumnSeparation, row sep=\ruleMatrixRowSeparation] {
+    \node (P0start) [firstPoint] {}; & & \node (p0-2) [terminal] {nop}; & \node (p0-3) [lastPoint] {}; & \\
+  };
+  \draw[->] (P0start) -- (p0-2) ;
+  \draw[->] (p0-2) -- (p0-3) ;
+\end{tikzpicture}
+
 \ruleSubsection{plm\_syntax}{instruction-assert}{18}
 
 \begin{tikzpicture}

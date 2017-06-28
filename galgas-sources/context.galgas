@@ -148,7 +148,7 @@ struct @semanticContext {
 #--- Interrupts
   @stringset mDefinedInterruptSet
   @availableInterruptMap mAvailableInterruptMap
-#--- Operator
+#--- Operators
   @infixOperatorMap mEqualOperatorMap           # ==
   @infixOperatorMap mNonEqualOperatorMap        # !=
   @infixOperatorMap mStrictInfOperatorMap       # <
