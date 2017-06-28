@@ -117,9 +117,18 @@ private proc enterBooleanOperators
     !selfTypeProxy
     !@infixObjectObjectOperatorDescription.new {!.xor}
   ]
+  [!?ioContext.mOrOperatorMap insertKey
+    !boolBoolOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!.ior}
+  ]
+  [!?ioContext.mAndOperatorMap insertKey
+    !boolBoolOp
+    !selfTypeProxy
+    !@infixObjectObjectOperatorDescription.new {!.and}
+  ]
   [!?ioContext.mNotOperatorMap insertKey
     !inBooleanTypeName
-#    !selfTypeProxy
   ]
 }
 

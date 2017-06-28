@@ -28,7 +28,7 @@ Où :
   \item \plm=expression= est l'expression qui fournit la valeur initiale de cette variable ; cette expression peut être statique ou non.
 \end{itemize}
 
-L'annotation de type peut être omise ; la variable a alors le type de l'expression qui l'initialise :
+L'annotation de type peut être omise ; la variable a alors le type de l'expression qui l'initialise~:
 \begin{PLM}
 var nom = expression
 \end{PLM}
@@ -38,7 +38,7 @@ var nom = expression
 \begin{PLM}
 var nom $type
 \end{PLM}
-Où :
+Où~:
 \begin{itemize}
   \item \plm=nom= est le nom de la variable locale ;
   \item \plm=$type= est le nom du type de la variable globale.
@@ -57,20 +57,20 @@ Le compilateur garantit qu'aucune lecture n'est faite avant que la variable reç
 
 \sectionLabel{Déclaration d'une constante locale}{declarationConstanteLocale}\index{Constante!locale}
 
-La déclaration d'une constante locale apparaît dans une liste d'instructions et sa syntaxe est la suivante :
+La déclaration d'une constante locale apparaît dans une liste d'instructions et sa syntaxe est la suivante~:
 
 \begin{PLM}
 let nom $type = expression
 \end{PLM}
 
-Où :
+Où~:
 \begin{itemize}
   \item \plm=nom= est le nom de la constante globale ;
   \item \plm=$type= est le nom du type de la constante globale ;
   \item \plm=expression= est l'expression qui fournit la valeur de cette constante ; cette expression est soit calculable statiquement, soit à l'exécution.
 \end{itemize}
 
-Il n'y a aucune restriction pour l'\plm=expression= : elle peut nommer constantes locales et globales, variables locales et globales.
+Il n'y a aucune restriction pour l'\plm=expression=~: elle peut nommer constantes locales et globales, variables locales et globales.
 
 
 
@@ -79,13 +79,13 @@ Il n'y a aucune restriction pour l'\plm=expression= : elle peut nommer constante
 
 \section {Instruction d'affectation}
 
-L'instruction d'affectation se présente sous plusieurs formes ; la plus simple est la suivante :
+L'instruction d'affectation se présente sous plusieurs formes ; la plus simple est la suivante~:
 
 \begin{PLM}
 nom = expression
 \end{PLM}
 
-Où :
+Où~:
 \begin{itemize}
   \item \plm=nom= est le nom d'une variable glogale ou locale, ou le nom d'un registre de contrôle ;
   \item \plm=expression= est l'expression qui fournit la valeur.
@@ -333,3 +333,13 @@ for nom in objet while expression {
 
 
 \sectionLabel{Instruction \texttt{sync}}{instructionSync}
+
+
+\sectionLabel{Instruction \texttt{nop}}{instructionNop}
+
+\begin{PLM}
+nop
+\end{PLM}
+
+Le mot réservé \plm=nop= engendre une instruction assembleur \emph{nop}.
+

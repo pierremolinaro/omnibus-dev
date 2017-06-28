@@ -131,12 +131,10 @@ private proc enterLiteralIntegerOperators
   ]
   [!?ioContext.mUnsignedComplementOperatorMap insertKey
     !inIntegerTypeName
-#    !selfTypeProxy
   ]
 #--- Negate operator
   [!?ioContext.mUnaryMinusOperatorMap insertKey
     !inIntegerTypeName
-#    !selfTypeProxy
   ]
 #--- Arithmetic operators
   [!?ioContext.mAddOperatorMap insertKey
@@ -217,28 +215,7 @@ override method @literalIntegerDeclaration semanticAnalysis
 #  INFIX OPERATIONS                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#enum @literalIntegerInfixOperator {
-#  case equal
-#  case nonEqual
-#  case strictInf
-#  case strictSup
-#  case infEqual
-#  case supEqual
-#  case and
-#  case ior
-#  case xor
-#  case add
-#  case sub
-#  case mul
-#  case div
-#  case rem
-#  case leftShift
-#  case rightShift
-#}
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 class @literal_literal_integerInfixOperation : @infixOperatorDescription {
-#  @literalIntegerInfixOperator mOperator
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -256,6 +233,7 @@ override method @literal_literal_integerInfixOperation generateInfixOperatorCode
   [inRightOperand literalInteger ?1* ?value:let @bigint rightValue]
   let result = [self performStaticOperation !leftValue !rightValue]
   outResult = .literalInteger {!type: inResultType !value:result}
+#  message "LITERAL LITERAL " + leftValue + " " + rightValue + " -> " + result + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

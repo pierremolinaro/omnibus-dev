@@ -336,6 +336,18 @@ La taille en octets allouée à la pile système.
 
 
 
+\subsectionLabel{\texttt{NOP}}{configurationNop}\index{nop}
+\begin{PLM}
+NOP:
+  "call void asm sideeffect \"nop\", \"\"() nounwind"
+\end{PLM}
+
+Cette entrée définit l'instruction processeur \texttt{nop}, telle qu'elle doit être formulée en LLVM. Pour insérer cette instruction en PLM, utiser le mot réservé \plm=nop= (\refSectionPage{instructionNop}).
+
+
+
+
+
 \subsectionLabel{\texttt{SERVICE}}{configurationService}\index{SERVICE}
 
 \begin{PLM}

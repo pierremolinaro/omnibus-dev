@@ -177,14 +177,12 @@ private proc enter_integer_integer_operators
     ]
     [!?ioContext.mUnsignedComplementOperatorMap insertKey
       !inIntegerTypeName
-#      !selfTypeProxy
     ]
   end
 #--- Negate operator (for signed integers)
   if inIsSigned then
     [!?ioContext.mUnaryMinusOperatorMap insertKey
       !inIntegerTypeName
-#      !selfTypeProxy
     ]
   end
 #--- Arithmetic operators
@@ -267,12 +265,15 @@ override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
   ?let @unifiedTypeMap-proxy inResultType
   !@objectIR outResult
 {
+#  message "INFIX OP " + "\n"
   if [inLeftOperand isLiteralInteger] && [inRightOperand isLiteralInteger] then
     [inLeftOperand  literalInteger ?1* ?value:let @bigint left]
     [inRightOperand literalInteger ?1* ?value:let @bigint right]
+#    message "INFIX OP LITERAL LITERAL " + left + " " + right + "\n"
     let resultValue = [self performStaticOperation !left !right]
     outResult = .literalInteger {!type: inResultType !value:resultValue}
   else
+#    message "INFIX OP COMPUTE\n"
     getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendBinaryOperation
@@ -429,6 +430,7 @@ override method @integerObject_literal_infixOperator generateInfixOperatorCode
   ?let @unifiedTypeMap-proxy inResultType
   !@objectIR outResult
 {
+#  message "INFIX OP2 " + "\n"
 #--- Check right literal integer can be extented to left integer type, ans is not zero
   [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
   [[inLeftOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?2*]
@@ -579,7 +581,6 @@ private proc enter_literal_integer_operators
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @literal_integerObject_infixOperator : @infixOperatorDescription {
-#  @llvmBinaryOperation mOperator
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -593,6 +594,7 @@ override method @literal_integerObject_infixOperator generateInfixOperatorCode
   ?let @unifiedTypeMap-proxy inResultType
   !@objectIR outResult
 {
+#  message "INFIX OP3 " + "\n"
 #--- Check left literal integer can be extented to right integer type
   [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]
   [[inRightOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?2*]

@@ -49,27 +49,92 @@ boot 0 {
 //--- Wait for MCGOUT to use oscillator
   loop while MCG_S.CLKST != $MCG_S {CLKST:2} {}
 //--- Now we're in FBE mode
-//    Config PLL input for 16 MHz Crystal / 4 = 4 MHz
-  SMC_PMCTRL = $SMC_PMCTRL {RUNM:3} // enter HSRUN mode
-  loop while SMC_PMSTAT != $SMC_PMSTAT{RUN} {}
-//---
-  MCG_C5 = $MCG_C5 {PRDIV0:1} // 180 MHz
-//--- Config PLL for 96 MHz output
-  MCG_C6 = $MCG_C6 {PLLS, VDIV0:29}// 180 MHz
+//--- If we need faster than crystal, turn on the PLL
+  if @static F_CPU_MHZ > 120 {
+    SMC_PMCTRL = $SMC_PMCTRL {RUNM:3} // enter HSRUN mode
+    loop while SMC_PMSTAT != $SMC_PMSTAT{RUN} {}
+  }
+  check (F_CPU_MHZ == 240) or (F_CPU_MHZ == 216) or (F_CPU_MHZ == 192) or (F_CPU_MHZ == 180) or (F_CPU_MHZ == 168)
+    or (F_CPU_MHZ == 144) or (F_CPU_MHZ == 120) or (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24)
+    or (F_CPU_MHZ == 72)
+//--- Configure CPU clock
+  if @static F_CPU_MHZ == 240 {
+    MCG_C5 = $MCG_C5 {PRDIV0:0}
+    MCG_C6 = $MCG_C6 {PLLS, VDIV0:14}
+  }else if @static F_CPU_MHZ == 216 {
+    MCG_C5 = $MCG_C5 {PRDIV0:0}
+    MCG_C6 = $MCG_C6 {PLLS, VDIV0:11}
+  }else if @static F_CPU_MHZ == 192 {
+    MCG_C5 = $MCG_C5 {PRDIV0:0}
+    MCG_C6 = $MCG_C6 {PLLS, VDIV0:8}
+  }else if @static F_CPU_MHZ == 180 {
+    MCG_C5 = $MCG_C5 {PRDIV0:1}
+    MCG_C6 = $MCG_C6 {PLLS, VDIV0:29}
+  }else if @static F_CPU_MHZ == 168 {
+    MCG_C5 = $MCG_C5 {PRDIV0:0}
+    MCG_C6 = $MCG_C6 {PLLS, VDIV0:5}
+  }else if @static F_CPU_MHZ == 144 {
+    MCG_C5 = $MCG_C5 {PRDIV0:0}
+    MCG_C6 = $MCG_C6 {PLLS, VDIV0:2}
+  }else if @static F_CPU_MHZ == 120 {
+    MCG_C5 = $MCG_C5 {PRDIV0:1}
+    MCG_C6 = $MCG_C6 {PLLS, VDIV0:14}
+  }else if @static (F_CPU_MHZ == 96) or (F_CPU_MHZ == 48) or (F_CPU_MHZ == 24) {
+    MCG_C5 = $MCG_C5 {PRDIV0:1}
+    MCG_C6 = $MCG_C6 {PLLS, VDIV0:8}
+  }else if @static F_CPU_MHZ == 72 {
+    MCG_C5 = $MCG_C5 {PRDIV0:1}
+    MCG_C6 = $MCG_C6 {PLLS, VDIV0:2}
+  }
 //--- Wait for PLL to start using xtal as its input
   loop while MCG_S.PLLST == 0 {}
 //--- Wait for PLL to lock
   loop while MCG_S.LOCK0 == 0 {}
-//--- Now we're in PBE mode
-//    Config divisors: 180 MHz core, 60 MHz bus, 25.7 MHz flash
-  SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:6} // 180 MHz
-  SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:0}
-//--- Switch to PLL as clock source, FLL input = 16 MHz / 512
+//------------------------------------ Now we're in PBE mode : now program the clock dividers
+  if @static F_CPU_MHZ == 240 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:7} // Bus 60 MHz, Flash 30 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:4} // USB clock = 240 MHz / 5
+  }else if @static F_CPU_MHZ == 216 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:7} // bus = 54 MHz, Flash 27 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:0} // USB clock = IRC48M
+  }else if @static F_CPU_MHZ == 192 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:6} // bus = 48 MHz, Flash 27.4 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:3} // USB clock = 192 MHz / 4
+  }else if @static F_CPU_MHZ == 180 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:6} // bus = 60 MHz, Flash 25.7 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:0} // USB clock = IRC48M
+  }else if @static F_CPU_MHZ == 168 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:2, OUTDIV4:5} // bus = 56 MHz, Flash 28 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:6, USBFRAC} // USB clock = 168 MHz * 2 / 7
+  }else if @static F_CPU_MHZ == 144 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:4} // bus = 48 MHz, Flash 28.8 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:2} // USB clock = 144 MHz / 3
+  }else if @static F_CPU_MHZ == 120 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:0, OUTDIV4:4} // bus = 60 MHz, Flash 24 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:4, USBFRAC} // USB clock = 120 MHz * 2 / 5
+  }else if @static F_CPU_MHZ == 96 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:1, OUTDIV4:3} // bus = 48 MHz, Flash 24 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:2} // USB clock = 96 MHz / 2
+  }else if @static F_CPU_MHZ == 72 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:0, OUTDIV2:0, OUTDIV4:2} // bus = 36 MHz, Flash 24 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:2, USBFRAC} // USB clock = 72 MHz * 2 / 3
+  }else if @static F_CPU_MHZ == 48 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:1, OUTDIV2:1, OUTDIV3:1, OUTDIV4:3} // bus = 48 MHz, Flash 24 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:1} // USB clock = 72 MHz / 2
+  }else if @static F_CPU_MHZ == 24 {
+    SIM_CLKDIV1 = $SIM_CLKDIV1 {OUTDIV1:3, OUTDIV2:3, OUTDIV3:3, OUTDIV4:3} // bus = 24 MHz, Flash 24 MHz
+    SIM_CLKDIV2 = $SIM_CLKDIV2 {USBDIV:1} // USB clock = 72 MHz / 2
+  }
+//--- Switch to PLL as clock source
   MCG_C1 = $MCG_C1 {CLKS:0, FRDIV:4}
 //--- Wait for PLL clock to be used
   loop while MCG_S.CLKST != $MCG_S {CLKST:3} {}
 //--- USB clock
-  SIM_SOPT2 = $SIM_SOPT2 {USBSRC, PLLFLLSEL:3, TRACECLKSEL, CLKOUTSEL:6}
+  if @static (F_CPU_MHZ == 240) or (F_CPU_MHZ == 180) {
+    SIM_SOPT2 = $SIM_SOPT2 {USBSRC, PLLFLLSEL:3, TRACECLKSEL, CLKOUTSEL:6} // PLLFLLSEL:3 --> IRC48SEL
+  }else{
+    SIM_SOPT2 = $SIM_SOPT2 {USBSRC, PLLFLLSEL:1, TRACECLKSEL, CLKOUTSEL:6}
+  }
 }
 
 //-----------------------------------------------------------------------------*
