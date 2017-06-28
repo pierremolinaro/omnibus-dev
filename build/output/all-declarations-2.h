@@ -196,6 +196,18 @@ class GALGAS_string function_mutatingAttribute (class C_Compiler * inCompiler
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                        Function 'routineMangledNameFromAST'                                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_lstring function_routineMangledNameFromAST (const class GALGAS_string & constinArgument0,
+                                                         const class GALGAS_lstring & constinArgument1,
+                                                         const class GALGAS_routineFormalArgumentList & constinArgument2,
+                                                         class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                    Extension getter '@routineFormalArgumentList routineSignature' (as function)                     *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -1343,8 +1355,6 @@ class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_string mProperty_mGlobalVariable ;
 
-  public : GALGAS_lstringlist mProperty_mInitRequiredByProcList ;
-
   public : GALGAS_bigint mProperty_mPriority ;
 
   public : GALGAS_allocaList mProperty_mAllocaList ;
@@ -1367,7 +1377,6 @@ class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_initListIR_2D_element (const GALGAS_unifiedTypeMap_2D_proxy & in_mSelfType,
                                          const GALGAS_string & in_mGlobalVariable,
-                                         const GALGAS_lstringlist & in_mInitRequiredByProcList,
                                          const GALGAS_bigint & in_mPriority,
                                          const GALGAS_allocaList & in_mAllocaList,
                                          const GALGAS_instructionListIR & in_mInstructionListIR) ;
@@ -1385,10 +1394,9 @@ class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_initListIR_2D_element constructor_new (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
                                                                       const class GALGAS_string & inOperand1,
-                                                                      const class GALGAS_lstringlist & inOperand2,
-                                                                      const class GALGAS_bigint & inOperand3,
-                                                                      const class GALGAS_allocaList & inOperand4,
-                                                                      const class GALGAS_instructionListIR & inOperand5
+                                                                      const class GALGAS_bigint & inOperand2,
+                                                                      const class GALGAS_allocaList & inOperand3,
+                                                                      const class GALGAS_instructionListIR & inOperand4
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1406,8 +1414,6 @@ class GALGAS_initListIR_2D_element : public AC_GALGAS_root {
   public : VIRTUAL_IN_DEBUG class GALGAS_allocaList getter_mAllocaList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mGlobalVariable (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mInitRequiredByProcList (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_instructionListIR getter_mInstructionListIR (LOCATION_ARGS) const ;
 

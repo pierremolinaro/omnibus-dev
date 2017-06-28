@@ -25,11 +25,6 @@ syntax extension plm_syntax {
       ?name:let procName
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
-#    let funcMangledName = routineMangledNameFromAST (
-#      !"" 
-#      !procName
-#      !procFormalArgumentList
-#    )
     var isGlobal = false
     for (attribute) in attributeList do
       if attribute.string != exportedAttribute () then
@@ -42,7 +37,6 @@ syntax extension plm_syntax {
     end
     ioAST.mRequiredProcListAST +=
       !procName
-#      !.new{!funcMangledName !procName.location}
       !mode
       !isGlobal
       !procFormalArgumentList

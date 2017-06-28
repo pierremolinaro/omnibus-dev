@@ -280,8 +280,6 @@ extern const char * gWrapperFileContent_96_targetTemplates ;
 extern const char * gWrapperFileContent_97_targetTemplates ;
 extern const char * gWrapperFileContent_98_targetTemplates ;
 extern const char * gWrapperFileContent_99_targetTemplates ;
-extern const char * gWrapperFileContent_100_targetTemplates ;
-extern const char * gWrapperFileContent_101_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -388,8 +386,6 @@ extern const cRegularFileWrapper gWrapperFile_96_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_97_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_98_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_99_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_100_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_101_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

@@ -638,6 +638,90 @@ void extensionMethod_semanticAnalysis (const class GALGAS_globalVarDeclarationLi
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                              @requiredModuleAST class                                               *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_requiredModuleAST : public GALGAS_abstractDeclaration {
+//--- Constructor
+  public : GALGAS_requiredModuleAST (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public : static GALGAS_requiredModuleAST constructor_default (LOCATION_ARGS) ;
+
+//---
+  public : inline const class cPtr_requiredModuleAST * ptr (void) const { return (const cPtr_requiredModuleAST *) mObjectPtr ; }
+
+//--------------------------------- Constructor from pointer
+  public : GALGAS_requiredModuleAST (const cPtr_requiredModuleAST * inSourcePtr) ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_requiredModuleAST extractObject (const GALGAS_object & inObject,
+                                                          C_Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_requiredModuleAST constructor_new (const class GALGAS_lstring & inOperand0
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_requiredModuleAST & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_requiredModuleAST class
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_requiredModuleAST ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                     Pointer class for @requiredModuleAST class                                      *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class cPtr_requiredModuleAST : public cPtr_abstractDeclaration {
+//--- Attributes
+  public : GALGAS_lstring mProperty_mModuleName ;
+
+//--- Constructor
+  public : cPtr_requiredModuleAST (const GALGAS_lstring & in_mModuleName
+                                   COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+
+//--- Attribute accessors
+  public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mModuleName (LOCATION_ARGS) const ;
+//--- Description
+  public : virtual void description (C_String & ioString,
+                                     const int32_t inIndentation) const ;
+
+  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+
+  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+
+} ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                              Extension method '@staticlistValues_listMap generateLLVM'                              *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -812,11 +896,10 @@ void routine_initSemanticAnalysis (const class GALGAS_semanticContext constinArg
                                    const class GALGAS_unifiedTypeMap_2D_proxy constinArgument3,
                                    const class GALGAS_lbigint constinArgument4,
                                    const class GALGAS_mode constinArgument5,
-                                   const class GALGAS_lstringlist constinArgument6,
-                                   const class GALGAS_instructionListAST constinArgument7,
-                                   const class GALGAS_location constinArgument8,
-                                   class GALGAS_allocaList & outArgument9,
-                                   class GALGAS_instructionListIR & outArgument10,
+                                   const class GALGAS_instructionListAST constinArgument6,
+                                   const class GALGAS_location constinArgument7,
+                                   class GALGAS_allocaList & outArgument8,
+                                   class GALGAS_instructionListIR & outArgument9,
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 

@@ -24,6 +24,8 @@ let DATA_7 = $digitalPort.D19
 let RS = $digitalPort.D18
 let ENABLE = $digitalPort.D17
 
+required module lcd
+
 //——————————————————————————————————————————————————————————————————————————————
 
 module lcd {

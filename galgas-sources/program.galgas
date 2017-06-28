@@ -108,6 +108,8 @@ private proc compileProject
     for (typeName * * * *) in extensionDeclarationListAST do
       error typeName : "this type is not defined or does not support extension"
     end
+  #------------------------------------------------------------ Retain required modules
+    retainRequiredModules (!?ast)
   #------------------------------------------------------------ Ordered declaration list
     buildOrderedDeclarationList (
       !ast:ast
@@ -232,6 +234,8 @@ private proc addTargetSpecificFiles
   ioAST.mPanicClauseListAST += ast.mPanicClauseListAST
   ioAST.mISRDeclarationListAST = ast.mISRDeclarationListAST + ioAST.mISRDeclarationListAST
   ioAST.mTaskListAST = ast.mTaskListAST + ioAST.mTaskListAST
+  ioAST.mModuleDeclarationListAST = ast.mModuleDeclarationListAST + ioAST.mModuleDeclarationListAST
+  ioAST.mRequiredModuleListAST = ast.mRequiredModuleListAST + ioAST.mRequiredModuleListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
