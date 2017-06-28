@@ -2,7 +2,20 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @moduleDeclarationAST : @abstractDeclaration {
+class @moduleDeclarationAST : @structureDeclaration {
+  @lstring mModuleName
+  @initList mModuleInitListAST
+}
+
+#·······················································································································
+
+list @moduleDeclarationListAST {
+  @moduleDeclarationAST mModule
+}
+
+#·······················································································································
+
+class @requiredModuleAST : @abstractDeclaration {
   @lstring mModuleName
 }
 
@@ -57,63 +70,28 @@ syntax extension plm_syntax {
       $;$
     end
     $}$
-  #--- Declare init list
-    @lstringlist requiredByList = {}
-    for function in functionDeclarationListAST do
-      if function.mPublicFunction then
-        let routineMangledName = routineMangledNameFromAST (
-          !"$" + moduleTypeName 
-          !function.mFunctionName
-          !function.mFunctionFormalArgumentList
-        )
-        requiredByList += !routineMangledName
-      end
-    end
-#    for service in serviceListAST do
-#      var routineMangledName = @lstring.new {
-#        !"$" + moduleTypeName + "." + service.mServiceName
-#        !service.mServiceName.location
-#      }
-#      routineMangledName.string += "("
-#      for (passingMode selector * *) in service.mServiceFormalArgumentList do
-#        routineMangledName.string += [passingMode formalPassingModeString]
-#        routineMangledName.string += selector.string
-#        routineMangledName.string += ":"
-#      end
-#      routineMangledName.string += ")"
-#      requiredByList += !routineMangledName
-#    end
-    for guard in guardListAST do
-      let routineMangledName = routineMangledNameFromAST (
-        !"$" + moduleTypeName 
-        !guard.mGuardName
-        !guard.mGuardFormalArgumentList
-      )
-      requiredByList += !routineMangledName
-    end
-    for init in initList do
-      ioAST.mInitListAST +=
-       !init.mInitLocation
-       !moduleTypeName
-       !moduleName.string
-       !requiredByList
-       !init.mInstructionList
-       !init.mEndOfInitLocation
-       !init.mPriority
-    end
-  #--- Declare structure
-    ioAST.mDeclarationListAST += !@structureDeclaration.new {
+  #--- Declare module
+    ioAST.mModuleDeclarationListAST += !@moduleDeclarationAST.new {
       !moduleTypeName
       !{}
       !fieldList
       !functionDeclarationListAST
       !svcListAST
       !guardListAST
+      !moduleName
+      !initList
     }
-  #--- Declare module
-    ioAST.mDeclarationListAST += !@moduleDeclarationAST.new {!moduleName}
   }
 
+  #·····················································································································
+
+  rule <declaration> ?!@ast ioAST {
+    $required$
+    $module$
+    $identifier$ ?let moduleName
+    ioAST.mRequiredModuleListAST += !moduleName
+  }
+ 
   #·····················································································································
 
 }
@@ -122,7 +100,7 @@ syntax extension plm_syntax {
 #  PRECEDENCE GRAPH                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @moduleDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override method @requiredModuleAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  [!?ioGraph addNode !mModuleName !self]
   let moduleTypeName = llvmRegularTypeMangledNameFromName (!moduleMangledNameFromModuleName (!mModuleName))
  [!?ioGraph addEdge !mModuleName !moduleTypeName]
@@ -130,13 +108,13 @@ override method @moduleDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrec
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @moduleDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override getter @requiredModuleAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "module " + mModuleName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @moduleDeclarationAST location -> @location outLocation {
+override getter @requiredModuleAST location -> @location outLocation {
   outLocation = mModuleName.location
 }
 
@@ -144,11 +122,42 @@ override getter @moduleDeclarationAST location -> @location outLocation {
 #  ADD EXTENSION                                                                                                        
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @moduleDeclarationAST addExtension
+override method @requiredModuleAST addExtension
   ?!@extensionDeclarationListAST unused ioExtensionDeclarationListAST
   !@abstractDeclaration outNewDeclaration
 {
   outNewDeclaration = self
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  RETAIN REQUIRED MODULES IN DECLARATION LIST AST                                                                                                  
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc retainRequiredModules ?!@ast ioAST {
+  @stringset instanciedModuleSet = {}
+  for (moduleName) in ioAST.mRequiredModuleListAST do
+    if [instanciedModuleSet hasKey !moduleName.string] then
+      error moduleName : "this module is instancied more than once"
+    end
+    instanciedModuleSet += !moduleName.string
+  end
+#--- Tranfer required modules in declaration list AST (and init list AST)
+  for (declaration) in ioAST.mModuleDeclarationListAST do
+    if [instanciedModuleSet hasKey !declaration.mModuleName.string] then
+      ioAST.mDeclarationListAST += !declaration
+      ioAST.mDeclarationListAST += !@requiredModuleAST.new {!declaration.mModuleName}
+      for init in declaration.mModuleInitListAST do
+        ioAST.mInitListAST +=
+         !init.mInitLocation
+         !declaration.mStructureName
+         !declaration.mModuleName
+         !init.mInstructionList
+         !init.mEndOfInitLocation
+         !init.mPriority
+      end
+    end
+  end
+  ioAST.mModuleDeclarationListAST = {}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -161,7 +170,7 @@ map @moduleMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @moduleDeclarationAST enterInContext
+override method @requiredModuleAST enterInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext ioContext
   ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
@@ -172,7 +181,7 @@ override method @moduleDeclarationAST enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @moduleDeclarationAST enterRoutinesInContext
+override method @requiredModuleAST enterRoutinesInContext
   ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
   ?!context:@semanticContext unused ioContext
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -191,7 +200,7 @@ list @moduleListIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @moduleDeclarationAST semanticAnalysis
+override method @requiredModuleAST semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct

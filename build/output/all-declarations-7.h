@@ -437,15 +437,4 @@ class GALGAS_string function_llvmNameForSectionImplementation (const class GALGA
                                                                class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           Routine 'enterBooleanOperators'                                           *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_enterBooleanOperators (class GALGAS_lstring inArgument0,
-                                    class GALGAS_semanticContext & ioArgument1,
-                                    class C_Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
 #endif

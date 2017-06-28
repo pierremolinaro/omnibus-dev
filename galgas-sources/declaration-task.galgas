@@ -404,7 +404,6 @@ method @taskList-element semanticAnalysis
       !selfType:taskType
       !priority:taskInitPriority
       !mode:.userMode
-      !requiredBy:{}
       !instructionList:taskInitInstructionList
       !endOfDeclaration:endOfTaskInitDeclaration
       ?let partialAllocaList

@@ -21,12 +21,12 @@ PANIC:
 // Pointer bit count
 POINTER_BIT_COUNT:
   32
-// NOP instruction in LLVM
-NOP:
-  "call void asm sideeffect \"nop\", \"\"() nounwind"
 // System stack size
 SYSTEM_STACK_SIZE:
   1024
+// NOP instruction in LLVM
+NOP:
+  "call void asm sideeffect \"nop\", \"\"() nounwind"
 // Service implementation
 SERVICE:
   "service-handler.s" ;

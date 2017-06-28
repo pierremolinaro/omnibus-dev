@@ -62,6 +62,7 @@ LL_FILES:
 PLM_FILES:
   "../plm-registers-mk66fx1m0.plm",
   "../plm-teensy-3-6-boot.plm",
+  "../plm-teensy-3-6-time.plm",
   "../plm-teensy-3-6-xtr.plm",
   "../plm-teensy-3-6-digital-io.plm",
   "../plm-teensy-3-6-lcd.plm",
