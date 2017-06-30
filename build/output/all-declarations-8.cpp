@@ -4426,11 +4426,11 @@ static void extensionMethod_requiredModuleAST_enterInPrecedenceGraph (const cPtr
   macroValidSharedObject (object, cPtr_requiredModuleAST) ;
   {
   const GALGAS_requiredModuleAST temp_0 = object ;
-  ioArgument_ioGraph.setter_addNode (object->mProperty_mModuleName, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 142)) ;
+  ioArgument_ioGraph.setter_addNode (object->mProperty_mModuleName, temp_0, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 141)) ;
   }
-  GALGAS_lstring var_moduleTypeName_5142 = function_llvmRegularTypeMangledNameFromName (function_moduleMangledNameFromModuleName (object->mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 143)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 143)) ;
+  GALGAS_lstring var_moduleTypeName_5186 = function_llvmRegularTypeMangledNameFromName (function_moduleMangledNameFromModuleName (object->mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 142)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 142)) ;
   {
-  ioArgument_ioGraph.setter_addEdge (object->mProperty_mModuleName, var_moduleTypeName_5142 COMMA_SOURCE_FILE ("declaration-module.galgas", 144)) ;
+  ioArgument_ioGraph.setter_addEdge (object->mProperty_mModuleName, var_moduleTypeName_5186 COMMA_SOURCE_FILE ("declaration-module.galgas", 143)) ;
   }
 }
 
@@ -4457,7 +4457,7 @@ static GALGAS_string extensionGetter_requiredModuleAST_keyRepresentationForError
   GALGAS_string result_outRepresentation ; // Returned variable
   const cPtr_requiredModuleAST * object = (const cPtr_requiredModuleAST *) inObject ;
   macroValidSharedObject (object, cPtr_requiredModuleAST) ;
-  result_outRepresentation = GALGAS_string ("module ").add_operation (object->mProperty_mModuleName.getter_string (SOURCE_FILE ("declaration-module.galgas", 150)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 150)) ;
+  result_outRepresentation = GALGAS_string ("module ").add_operation (object->mProperty_mModuleName.getter_string (SOURCE_FILE ("declaration-module.galgas", 149)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 149)) ;
 //---
   return result_outRepresentation ;
 }
@@ -4540,78 +4540,78 @@ C_PrologueEpilogue gMethod_requiredModuleAST_addExtension (defineExtensionMethod
 void routine_retainRequiredModules (GALGAS_ast & ioArgument_ioAST,
                                     C_Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_instanciedModuleMap var_instanciedModuleMap_7486 = GALGAS_instanciedModuleMap::constructor_emptyMap (SOURCE_FILE ("declaration-module.galgas", 191)) ;
-  GALGAS_stringset var_validModuleNames_7521 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-module.galgas", 192)) ;
-  cEnumerator_moduleInstanciationListAST enumerator_7637 (ioArgument_ioAST.getter_mRequiredModuleListAST (HERE), kENUMERATION_UP) ;
-  while (enumerator_7637.hasCurrentObject ()) {
-    GALGAS_moduleInstanciationArgumentMap var_moduleInstanciationArgumentMap_7708 = GALGAS_moduleInstanciationArgumentMap::constructor_emptyMap (SOURCE_FILE ("declaration-module.galgas", 194)) ;
-    cEnumerator_moduleInstanciationArgumentListAST enumerator_7752 (enumerator_7637.current_mModuleInstanciationArgumentList (HERE), kENUMERATION_UP) ;
-    while (enumerator_7752.hasCurrentObject ()) {
+  GALGAS_instanciedModuleMap var_instanciedModuleMap_7530 = GALGAS_instanciedModuleMap::constructor_emptyMap (SOURCE_FILE ("declaration-module.galgas", 190)) ;
+  GALGAS_stringset var_validModuleNames_7565 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-module.galgas", 191)) ;
+  cEnumerator_moduleInstanciationListAST enumerator_7681 (ioArgument_ioAST.getter_mRequiredModuleListAST (HERE), kENUMERATION_UP) ;
+  while (enumerator_7681.hasCurrentObject ()) {
+    GALGAS_moduleInstanciationArgumentMap var_moduleInstanciationArgumentMap_7752 = GALGAS_moduleInstanciationArgumentMap::constructor_emptyMap (SOURCE_FILE ("declaration-module.galgas", 193)) ;
+    cEnumerator_moduleInstanciationArgumentListAST enumerator_7796 (enumerator_7681.current_mModuleInstanciationArgumentList (HERE), kENUMERATION_UP) ;
+    while (enumerator_7796.hasCurrentObject ()) {
       {
-      var_moduleInstanciationArgumentMap_7708.setter_insertKey (enumerator_7752.current_mSelector (HERE), enumerator_7752.current_mExpression (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 196)) ;
+      var_moduleInstanciationArgumentMap_7752.setter_insertKey (enumerator_7796.current_mSelector (HERE), enumerator_7796.current_mExpression (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 195)) ;
       }
-      enumerator_7752.gotoNextObject () ;
+      enumerator_7796.gotoNextObject () ;
     }
     {
-    var_instanciedModuleMap_7486.setter_insertKey (enumerator_7637.current_mModuleName (HERE), var_moduleInstanciationArgumentMap_7708, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 198)) ;
+    var_instanciedModuleMap_7530.setter_insertKey (enumerator_7681.current_mModuleName (HERE), var_moduleInstanciationArgumentMap_7752, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 197)) ;
     }
-    enumerator_7637.gotoNextObject () ;
+    enumerator_7681.gotoNextObject () ;
   }
-  cEnumerator_moduleDeclarationListAST enumerator_8054 (ioArgument_ioAST.getter_mModuleDeclarationListAST (HERE), kENUMERATION_UP) ;
-  while (enumerator_8054.hasCurrentObject ()) {
-    const enumGalgasBool test_0 = var_instanciedModuleMap_7486.getter_hasKey (enumerator_8054.current_mModule (HERE).getter_mModuleName (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("declaration-module.galgas", 202)).boolEnum () ;
+  cEnumerator_moduleDeclarationListAST enumerator_8098 (ioArgument_ioAST.getter_mModuleDeclarationListAST (HERE), kENUMERATION_UP) ;
+  while (enumerator_8098.hasCurrentObject ()) {
+    const enumGalgasBool test_0 = var_instanciedModuleMap_7530.getter_hasKey (enumerator_8098.current_mModule (HERE).getter_mModuleName (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("declaration-module.galgas", 201)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      var_validModuleNames_7521.addAssign_operation (enumerator_8054.current_mModule (HERE).getter_mModuleName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 203)) ;
-      GALGAS_moduleInstanciationArgumentMap var_moduleInstanciationArgumentMap_8286 ;
-      var_instanciedModuleMap_7486.method_searchKey (enumerator_8054.current_mModule (HERE).getter_mModuleName (HERE), var_moduleInstanciationArgumentMap_8286, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 204)) ;
-      GALGAS_stringset var_validArgumentSet_8381 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-module.galgas", 206)) ;
-      GALGAS_structurePropertyListAST var_modulePropertyListAST_8440 = GALGAS_structurePropertyListAST::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 207)) ;
-      cEnumerator_modulePropertyListAST enumerator_8550 (enumerator_8054.current_mModule (HERE).getter_mPropertyListAST (HERE), kENUMERATION_UP) ;
-      while (enumerator_8550.hasCurrentObject ()) {
-        GALGAS_expressionAST var_initExpression_8591 ;
-        switch (enumerator_8550.current_mOptionalExpression (HERE).enumValue ()) {
+      var_validModuleNames_7565.addAssign_operation (enumerator_8098.current_mModule (HERE).getter_mModuleName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 202)) ;
+      GALGAS_moduleInstanciationArgumentMap var_moduleInstanciationArgumentMap_8330 ;
+      var_instanciedModuleMap_7530.method_searchKey (enumerator_8098.current_mModule (HERE).getter_mModuleName (HERE), var_moduleInstanciationArgumentMap_8330, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 203)) ;
+      GALGAS_stringset var_validArgumentSet_8425 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("declaration-module.galgas", 205)) ;
+      GALGAS_structurePropertyListAST var_modulePropertyListAST_8484 = GALGAS_structurePropertyListAST::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 206)) ;
+      cEnumerator_modulePropertyListAST enumerator_8594 (enumerator_8098.current_mModule (HERE).getter_mPropertyListAST (HERE), kENUMERATION_UP) ;
+      while (enumerator_8594.hasCurrentObject ()) {
+        GALGAS_expressionAST var_initExpression_8635 ;
+        switch (enumerator_8594.current_mOptionalExpression (HERE).enumValue ()) {
         case GALGAS_structureVarInit::kNotBuilt:
           break ;
         case GALGAS_structureVarInit::kEnum_noExpression:
           {
-            var_moduleInstanciationArgumentMap_8286.method_searchKey (enumerator_8550.current_mPropertyName (HERE), var_initExpression_8591, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 212)) ;
-            var_validArgumentSet_8381.addAssign_operation (enumerator_8550.current_mPropertyName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 213)) ;
+            var_moduleInstanciationArgumentMap_8330.method_searchKey (enumerator_8594.current_mPropertyName (HERE), var_initExpression_8635, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 211)) ;
+            var_validArgumentSet_8425.addAssign_operation (enumerator_8594.current_mPropertyName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 212)) ;
           }
           break ;
         case GALGAS_structureVarInit::kEnum_expression:
           {
-            const cEnumAssociatedValues_structureVarInit_expression * extractPtr_8869 = (const cEnumAssociatedValues_structureVarInit_expression *) (enumerator_8550.current_mOptionalExpression (HERE).unsafePointer ()) ;
-            const GALGAS_expressionAST extractedValue_expression = extractPtr_8869->mAssociatedValue0 ;
-            var_initExpression_8591 = extractedValue_expression ;
+            const cEnumAssociatedValues_structureVarInit_expression * extractPtr_8913 = (const cEnumAssociatedValues_structureVarInit_expression *) (enumerator_8594.current_mOptionalExpression (HERE).unsafePointer ()) ;
+            const GALGAS_expressionAST extractedValue_expression = extractPtr_8913->mAssociatedValue0 ;
+            var_initExpression_8635 = extractedValue_expression ;
           }
           break ;
         }
-        var_modulePropertyListAST_8440.addAssign_operation (enumerator_8550.current_mPropertyName (HERE), GALGAS_bool (false), enumerator_8550.current_mTypeName (HERE), GALGAS_structureVarInit::constructor_expression (var_initExpression_8591  COMMA_SOURCE_FILE ("declaration-module.galgas", 221))  COMMA_SOURCE_FILE ("declaration-module.galgas", 217)) ;
-        enumerator_8550.gotoNextObject () ;
+        var_modulePropertyListAST_8484.addAssign_operation (enumerator_8594.current_mPropertyName (HERE), GALGAS_bool (false), enumerator_8594.current_mTypeName (HERE), GALGAS_structureVarInit::constructor_expression (var_initExpression_8635  COMMA_SOURCE_FILE ("declaration-module.galgas", 220))  COMMA_SOURCE_FILE ("declaration-module.galgas", 216)) ;
+        enumerator_8594.gotoNextObject () ;
       }
-      cEnumerator_stringset enumerator_9210 (var_moduleInstanciationArgumentMap_8286.getter_keySet (SOURCE_FILE ("declaration-module.galgas", 224)).substract_operation (var_validArgumentSet_8381, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 224)), kENUMERATION_UP) ;
-      while (enumerator_9210.hasCurrentObject ()) {
+      cEnumerator_stringset enumerator_9254 (var_moduleInstanciationArgumentMap_8330.getter_keySet (SOURCE_FILE ("declaration-module.galgas", 223)).substract_operation (var_validArgumentSet_8425, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 223)), kENUMERATION_UP) ;
+      while (enumerator_9254.hasCurrentObject ()) {
         TC_Array <C_FixItDescription> fixItArray1 ;
-        inCompiler->emitSemanticError (var_moduleInstanciationArgumentMap_8286.getter_locationForKey (enumerator_9210.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 225)), GALGAS_string ("invalid selector"), fixItArray1  COMMA_SOURCE_FILE ("declaration-module.galgas", 225)) ;
-        enumerator_9210.gotoNextObject () ;
+        inCompiler->emitSemanticError (var_moduleInstanciationArgumentMap_8330.getter_locationForKey (enumerator_9254.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 224)), GALGAS_string ("invalid selector"), fixItArray1  COMMA_SOURCE_FILE ("declaration-module.galgas", 224)) ;
+        enumerator_9254.gotoNextObject () ;
       }
-      GALGAS_lstring var_moduleTypeName_9356 = function_moduleMangledNameFromModuleName (enumerator_8054.current_mModule (HERE).getter_mModuleName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 228)) ;
-      ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_requiredModuleAST::constructor_new (enumerator_8054.current_mModule (HERE).getter_mModuleName (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 229))  COMMA_SOURCE_FILE ("declaration-module.galgas", 229)) ;
-      ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_structureDeclaration::constructor_new (var_moduleTypeName_9356, GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 232)), var_modulePropertyListAST_8440, enumerator_8054.current_mModule (HERE).getter_mFunctionDeclarationListAST (HERE), enumerator_8054.current_mModule (HERE).getter_mSystemRoutineListAST (HERE), enumerator_8054.current_mModule (HERE).getter_mGuardListAST (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 230))  COMMA_SOURCE_FILE ("declaration-module.galgas", 230)) ;
-      cEnumerator_initList enumerator_9818 (enumerator_8054.current_mModule (HERE).getter_mModuleInitListAST (HERE), kENUMERATION_UP) ;
-      while (enumerator_9818.hasCurrentObject ()) {
-        ioArgument_ioAST.mProperty_mInitListAST.addAssign_operation (enumerator_9818.current (HERE).getter_mInitLocation (HERE), var_moduleTypeName_9356, enumerator_8054.current_mModule (HERE).getter_mModuleName (HERE).getter_string (SOURCE_FILE ("declaration-module.galgas", 242)), enumerator_9818.current (HERE).getter_mInstructionList (HERE), enumerator_9818.current (HERE).getter_mEndOfInitLocation (HERE), enumerator_9818.current (HERE).getter_mPriority (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 239)) ;
-        enumerator_9818.gotoNextObject () ;
+      GALGAS_lstring var_moduleTypeName_9400 = function_moduleMangledNameFromModuleName (enumerator_8098.current_mModule (HERE).getter_mModuleName (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 227)) ;
+      ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_requiredModuleAST::constructor_new (enumerator_8098.current_mModule (HERE).getter_mModuleName (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 228))  COMMA_SOURCE_FILE ("declaration-module.galgas", 228)) ;
+      ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_structureDeclaration::constructor_new (var_moduleTypeName_9400, GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 231)), var_modulePropertyListAST_8484, enumerator_8098.current_mModule (HERE).getter_mFunctionDeclarationListAST (HERE), enumerator_8098.current_mModule (HERE).getter_mSystemRoutineListAST (HERE), enumerator_8098.current_mModule (HERE).getter_mGuardListAST (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 229))  COMMA_SOURCE_FILE ("declaration-module.galgas", 229)) ;
+      cEnumerator_initList enumerator_9862 (enumerator_8098.current_mModule (HERE).getter_mModuleInitListAST (HERE), kENUMERATION_UP) ;
+      while (enumerator_9862.hasCurrentObject ()) {
+        ioArgument_ioAST.mProperty_mInitListAST.addAssign_operation (enumerator_9862.current (HERE).getter_mInitLocation (HERE), var_moduleTypeName_9400, enumerator_8098.current_mModule (HERE).getter_mModuleName (HERE).getter_string (SOURCE_FILE ("declaration-module.galgas", 241)), enumerator_9862.current (HERE).getter_mInstructionList (HERE), enumerator_9862.current (HERE).getter_mEndOfInitLocation (HERE), enumerator_9862.current (HERE).getter_mPriority (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 238)) ;
+        enumerator_9862.gotoNextObject () ;
       }
     }
-    enumerator_8054.gotoNextObject () ;
+    enumerator_8098.gotoNextObject () ;
   }
-  ioArgument_ioAST.mProperty_mModuleDeclarationListAST = GALGAS_moduleDeclarationListAST::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 249)) ;
-  cEnumerator_stringset enumerator_10252 (var_instanciedModuleMap_7486.getter_keySet (SOURCE_FILE ("declaration-module.galgas", 251)).substract_operation (var_validModuleNames_7521, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 251)), kENUMERATION_UP) ;
-  while (enumerator_10252.hasCurrentObject ()) {
+  ioArgument_ioAST.mProperty_mModuleDeclarationListAST = GALGAS_moduleDeclarationListAST::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 248)) ;
+  cEnumerator_stringset enumerator_10292 (var_instanciedModuleMap_7530.getter_keySet (SOURCE_FILE ("declaration-module.galgas", 250)).substract_operation (var_validModuleNames_7565, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 250)), kENUMERATION_UP) ;
+  while (enumerator_10292.hasCurrentObject ()) {
     TC_Array <C_FixItDescription> fixItArray2 ;
-    inCompiler->emitSemanticError (var_instanciedModuleMap_7486.getter_locationForKey (enumerator_10252.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 252)), GALGAS_string ("undefined module"), fixItArray2  COMMA_SOURCE_FILE ("declaration-module.galgas", 252)) ;
-    enumerator_10252.gotoNextObject () ;
+    inCompiler->emitSemanticError (var_instanciedModuleMap_7530.getter_locationForKey (enumerator_10292.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 251)), GALGAS_string ("undefined module"), fixItArray2  COMMA_SOURCE_FILE ("declaration-module.galgas", 251)) ;
+    enumerator_10292.gotoNextObject () ;
   }
 }
 
@@ -4632,7 +4632,7 @@ static void extensionMethod_requiredModuleAST_enterInContext (const cPtr_abstrac
   const cPtr_requiredModuleAST * object = (const cPtr_requiredModuleAST *) inObject ;
   macroValidSharedObject (object, cPtr_requiredModuleAST) ;
   {
-  ioArgument_ioContext.mProperty_mModuleMap.setter_insertKey (object->mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 272)) ;
+  ioArgument_ioContext.mProperty_mModuleMap.setter_insertKey (object->mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 271)) ;
   }
 }
 
@@ -4686,20 +4686,20 @@ static void extensionMethod_requiredModuleAST_semanticAnalysis (const cPtr_abstr
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_requiredModuleAST * object = (const cPtr_requiredModuleAST *) inObject ;
   macroValidSharedObject (object, cPtr_requiredModuleAST) ;
-  GALGAS_lstring var_moduleTypeName_12547 = function_moduleMangledNameFromModuleName (object->mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 301)) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_moduleType_12613 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), var_moduleTypeName_12547, inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 302)) ;
-  GALGAS_constructorValue var_constructorValue_12762 ;
-  constinArgument_inContext.getter_mConstructorMap (HERE).method_searchKey (var_moduleTypeName_12547, var_constructorValue_12762, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 303)) ;
-  GALGAS_sortedOperandIRList var_sortedOperandList_12858 ;
-  GALGAS_constructorSignature joker_12816 ; // Joker input parameter
-  var_constructorValue_12762.method_structure (joker_12816, var_sortedOperandList_12858, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 304)) ;
-  GALGAS_operandIRList var_initialValueList_12893 = GALGAS_operandIRList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 305)) ;
-  cEnumerator_sortedOperandIRList enumerator_12942 (var_sortedOperandList_12858, kENUMERATION_UP) ;
-  while (enumerator_12942.hasCurrentObject ()) {
-    var_initialValueList_12893.addAssign_operation (enumerator_12942.current_mOperand (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 307)) ;
-    enumerator_12942.gotoNextObject () ;
+  GALGAS_lstring var_moduleTypeName_12579 = function_moduleMangledNameFromModuleName (object->mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 300)) ;
+  GALGAS_unifiedTypeMap_2D_proxy var_moduleType_12645 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), var_moduleTypeName_12579, inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 301)) ;
+  GALGAS_constructorValue var_constructorValue_12794 ;
+  constinArgument_inContext.getter_mConstructorMap (HERE).method_searchKey (var_moduleTypeName_12579, var_constructorValue_12794, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 302)) ;
+  GALGAS_sortedOperandIRList var_sortedOperandList_12890 ;
+  GALGAS_constructorSignature joker_12848 ; // Joker input parameter
+  var_constructorValue_12794.method_structure (joker_12848, var_sortedOperandList_12890, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 303)) ;
+  GALGAS_operandIRList var_initialValueList_12925 = GALGAS_operandIRList::constructor_emptyList (SOURCE_FILE ("declaration-module.galgas", 304)) ;
+  cEnumerator_sortedOperandIRList enumerator_12974 (var_sortedOperandList_12890, kENUMERATION_UP) ;
+  while (enumerator_12974.hasCurrentObject ()) {
+    var_initialValueList_12925.addAssign_operation (enumerator_12974.current_mOperand (HERE)  COMMA_SOURCE_FILE ("declaration-module.galgas", 306)) ;
+    enumerator_12974.gotoNextObject () ;
   }
-  ioArgument_ioIntermediateCodeStruct.mProperty_mModuleList.addAssign_operation (object->mProperty_mModuleName.getter_string (HERE), var_moduleType_12613, var_initialValueList_12893  COMMA_SOURCE_FILE ("declaration-module.galgas", 309)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mModuleList.addAssign_operation (object->mProperty_mModuleName.getter_string (HERE), var_moduleType_12645, var_initialValueList_12925  COMMA_SOURCE_FILE ("declaration-module.galgas", 308)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*

@@ -56,21 +56,20 @@ syntax extension plm_syntax {
   rule <module_variable> ?!@modulePropertyListAST ioPropertyList {
     $var$
     $identifier$ ?let fieldName
-    @lstring typeName
     select
-      $\$type$ ?typeName
-    or
-      typeName = ["" nowhere]
-    end
-    @structureVarInit optionalExpression
-    select
-      optionalExpression = .noExpression
+      $\$type$ ?let typeName
+      select
+        ioPropertyList += !fieldName !typeName !.noExpression
+      or
+        $=$
+        <expression> ?let initExpression
+        ioPropertyList += !fieldName !typeName !.expression {!initExpression:initExpression}
+      end
     or
       $=$
       <expression> ?let initExpression
-      optionalExpression = .expression {!initExpression:initExpression}
+      ioPropertyList += !fieldName !["" nowhere] !.expression {!initExpression:initExpression}
     end
-    ioPropertyList += !fieldName !typeName !optionalExpression
   }
   
   #·····················································································································
@@ -248,9 +247,9 @@ proc retainRequiredModules ?!@ast ioAST {
   end
   ioAST.mModuleDeclarationListAST = {}
 #--- Check all modules named in instanciation constructs have been implemented
-      for (unusedModuleName) in [instanciedModuleMap keySet] - validModuleNames do
-        error [instanciedModuleMap locationForKey !unusedModuleName] : "undefined module"
-      end
+  for (unusedModuleName) in [instanciedModuleMap keySet] - validModuleNames do
+    error [instanciedModuleMap locationForKey !unusedModuleName] : "undefined module"
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
