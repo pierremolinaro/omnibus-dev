@@ -1,4 +1,4 @@
-target "teensy-3-6/unprivileged"
+target "teensy-3-6/privileged"
 let F_CPU_MHZ = 240
 
 //——————————————————————————————————————————————————————————————————————————————
