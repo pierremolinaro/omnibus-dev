@@ -280,6 +280,13 @@ extern const char * gWrapperFileContent_96_targetTemplates ;
 extern const char * gWrapperFileContent_97_targetTemplates ;
 extern const char * gWrapperFileContent_98_targetTemplates ;
 extern const char * gWrapperFileContent_99_targetTemplates ;
+extern const char * gWrapperFileContent_100_targetTemplates ;
+extern const char * gWrapperFileContent_101_targetTemplates ;
+extern const char * gWrapperFileContent_102_targetTemplates ;
+extern const char * gWrapperFileContent_103_targetTemplates ;
+extern const char * gWrapperFileContent_104_targetTemplates ;
+extern const char * gWrapperFileContent_105_targetTemplates ;
+extern const char * gWrapperFileContent_106_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -386,6 +393,13 @@ extern const cRegularFileWrapper gWrapperFile_96_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_97_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_98_targetTemplates ;
 extern const cRegularFileWrapper gWrapperFile_99_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_100_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_101_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_102_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_103_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_104_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_105_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_106_targetTemplates ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -396,5 +410,6 @@ extern const cDirectoryWrapper gWrapperDirectory_3_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_4_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_5_targetTemplates ;
 extern const cDirectoryWrapper gWrapperDirectory_6_targetTemplates ;
+extern const cDirectoryWrapper gWrapperDirectory_7_targetTemplates ;
 
 #endif

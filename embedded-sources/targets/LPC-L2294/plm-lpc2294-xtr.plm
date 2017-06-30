@@ -1,5 +1,5 @@
 //——————————————————————————————————————————————————————————————————————————————
-//   SYNCHRONIZATION TOOLS ROUTINES                                             
+//   SYNCHRONIZATION TOOLS ROUTINES
 //——————————————————————————————————————————————————————————————————————————————
 
 type $taskList : ((32)) @instantiable
@@ -20,7 +20,7 @@ makeTaskReady (?!fromList:ioWaitingList $taskList
 extern func service makeTasksReady (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
 
 //——————————————————————————————————————————————————————————————————————————————
-//   GUARD                                                                      
+//   GUARD
 //——————————————————————————————————————————————————————————————————————————————
 
 type $guardList : ((32)) @instantiable
@@ -76,7 +76,7 @@ init 100 {
   TIMER1_TCR = 1
 }
 
-required module time
+module time ()
 
 //——————————————————————————————————————————————————————————————————————————————
 
@@ -85,21 +85,21 @@ module time {
   //············································································
 
   var mUptimeMS $uint32 = 0
-  
+
   //············································································
-  
+
   public func safe kernelMillis @noUnusedWarning () -> $uint32 {
     result = self.mUptimeMS
   }
-  
+
   //············································································
-  
+
   public system section millis @noUnusedWarning () -> $uint32 {
     result = self.mUptimeMS
   }
-  
+
   //············································································
-  
+
   isr service TIMER1 {
     TIMER1_IR = 1 // Clears MR0 interrupt
     let now = self.mUptimeMS +% 1
@@ -107,23 +107,23 @@ module time {
     makeTasksReady (!fromCurrentDate:now)
     notifyChangeForGuardedWaitUntil (!withCurrentDate:now)
   }
-  
+
   //············································································
-  
+
   public system primitive waitUntilMS @noUnusedWarning (?deadline: inDate $uint32) {
     if inDate > self.kernelMillis () {
       block (!onDeadline:inDate)
     }
   }
-  
+
   //············································································
-  
+
   public func user waitDuringMS @noUnusedWarning @mutating @userAccess (?delay: inDelay $uint32) {
     self.waitUntilMS (!deadline:self.millis () + inDelay)
   }
-  
+
   //············································································
-  
+
   public guard waitUntilMS @noUnusedWarning (?deadline:inDeadline $uint32) {
     accept = inDeadline <= self.kernelMillis ()
     if not accept {

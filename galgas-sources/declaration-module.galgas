@@ -86,9 +86,10 @@ syntax extension plm_syntax {
   #·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    $required$
     $module$
     $identifier$ ?let moduleName
+    $($
+    $)$
     ioAST.mRequiredModuleListAST += !moduleName
   }
  
