@@ -9,87 +9,88 @@ check target "teensy-3-6"
 //   PORT CONFIGURATION
 //——————————————————————————————————————————————————————————————————————————————
 
-//   DB4 : PTB0 --> $digitalPort.D16
-//   DB5 : PTC0 --> $digitalPort.D15
-//   DB6 : PTD1 --> $digitalPort.D14
-//   DB7 : PTB2 --> $digitalPort.D19
-//   RS  : PTB3 --> $digitalPort.D18
-//   E   : PTB1 --> $digitalPort.D17
 
-let DATA_4 = $digitalPort.D16
-let DATA_5 = $digitalPort.D15
-let DATA_6 = $digitalPort.D14
-let DATA_7 = $digitalPort.D19
-
-let RS = $digitalPort.D18
-let ENABLE = $digitalPort.D17
+//let DB4 = $digitalPort.D16
+//let DB5 = $digitalPort.D15
+//let DB6 = $digitalPort.D14
+//let DB7 = $digitalPort.D19
+//
+//let RS = $digitalPort.D18
+//let ENABLE = $digitalPort.D17
 
 //——————————————————————————————————————————————————————————————————————————————
 
-module lcd ()
+module lcd (!DB4:.D16 !DB5:.D15 !DB6:.D14 !DB7:.D19 !RS:.D18 !ENABLE:.D17)
 
 //——————————————————————————————————————————————————————————————————————————————
 
 module lcd {
+  var DB4 $digitalPort
+  var DB5 $digitalPort
+  var DB6 $digitalPort
+  var DB7 $digitalPort
+  
+  var RS $digitalPort
+  var ENABLE $digitalPort
 
   //············································································
 
   func init configurePorts @noUnusedWarning () {
-    pinMode (!port:DATA_4 !mode:.OUTPUT)
-    pinMode (!port:DATA_5 !mode:.OUTPUT)
-    pinMode (!port:DATA_6 !mode:.OUTPUT)
-    pinMode (!port:DATA_7 !mode:.OUTPUT)
-    pinMode (!port:RS     !mode:.OUTPUT)
-    pinMode (!port:ENABLE !mode:.OUTPUT)
+    pinMode (!port:self.DB4 !mode:.OUTPUT)
+    pinMode (!port:self.DB5 !mode:.OUTPUT)
+    pinMode (!port:self.DB6 !mode:.OUTPUT)
+    pinMode (!port:self.DB7 !mode:.OUTPUT)
+    pinMode (!port:self.RS     !mode:.OUTPUT)
+    pinMode (!port:self.ENABLE !mode:.OUTPUT)
   }
 
   //············································································
 
   func driveHighE @noUnusedWarning () {
-    digitalWrite (!port:ENABLE !true)
+    digitalWrite (!port:self.ENABLE !true)
   }
 
   //············································································
 
   func driveLowE @noUnusedWarning () {
-    digitalWrite (!port:ENABLE !false)
+    digitalWrite (!port:self.ENABLE !false)
   }
 
   //············································································
 
 
   func driveHighRS @noUnusedWarning () {
-   digitalWrite (!port:RS !true)
+   digitalWrite (!port:self.RS !true)
   }
 
   //············································································
 
   func driveLowRS @noUnusedWarning () {
-    digitalWrite (!port:RS !false)
+    digitalWrite (!port:self.RS !false)
   }
 
   //············································································
 
-  func setD4 @noUnusedWarning (?inValue $bool) { // PTB0
-    digitalWrite (!port:DATA_4 !inValue)
+  func setD4 @noUnusedWarning (?inValue $bool) {
+    digitalWrite (!port:self.DB4 !inValue)
   }
 
   //············································································
 
-  func setD5 @noUnusedWarning (?inValue $bool) { // PTC0
-    digitalWrite (!port:DATA_5 !inValue)
+  func setD5 @noUnusedWarning (?inValue $bool) {
+    digitalWrite (!port:self.DB5 !inValue)
   }
 
   //············································································
 
-  func setD6 @noUnusedWarning (?inValue $bool) { // PTD1
-    digitalWrite (!port:DATA_6 !inValue)
+  func setD6 @noUnusedWarning (?inValue $bool) {
+    digitalWrite (!port:self.DB6 !inValue)
   }
 
   //············································································
 
-  func setD7 @noUnusedWarning (?inValue $bool) { // PTB2
-    digitalWrite (!port:DATA_7 !inValue)
+  func setD7 @noUnusedWarning (?inValue $bool) {
+    digitalWrite (!port:self.DB7 !inValue)
   }
 
   //············································································

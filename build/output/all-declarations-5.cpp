@@ -6340,192 +6340,165 @@ GALGAS_globalVariableMapIR_2D_element GALGAS_globalVariableMapIR_2D_element::ext
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
-//   Object comparison                                                                                                 *
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult cPtr_moduleDeclarationAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_moduleDeclarationAST * p = (const cPtr_moduleDeclarationAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_moduleDeclarationAST) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mStructureName.objectCompare (p->mProperty_mStructureName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mAttributeListAST.objectCompare (p->mProperty_mAttributeListAST) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mStructureFieldListAST.objectCompare (p->mProperty_mStructureFieldListAST) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mFunctionDeclarationListAST.objectCompare (p->mProperty_mFunctionDeclarationListAST) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mSystemRoutineListAST.objectCompare (p->mProperty_mSystemRoutineListAST) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mGuardListAST.objectCompare (p->mProperty_mGuardListAST) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mModuleName.objectCompare (p->mProperty_mModuleName) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mModuleInitListAST.objectCompare (p->mProperty_mModuleInitListAST) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-
-typeComparisonResult GALGAS_moduleDeclarationAST::objectCompare (const GALGAS_moduleDeclarationAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
-    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
-    if (mySlot < operandSlot) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (mySlot > operandSlot) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
-    }
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_moduleDeclarationAST::GALGAS_moduleDeclarationAST (void) :
-GALGAS_structureDeclaration () {
+mProperty_mModuleName (),
+mProperty_mPropertyListAST (),
+mProperty_mFunctionDeclarationListAST (),
+mProperty_mSystemRoutineListAST (),
+mProperty_mGuardListAST (),
+mProperty_mModuleInitListAST () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_moduleDeclarationAST GALGAS_moduleDeclarationAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_moduleDeclarationAST::constructor_new (GALGAS_lstring::constructor_default (HERE),
-                                                       GALGAS_lstringlist::constructor_emptyList (HERE),
-                                                       GALGAS_structurePropertyListAST::constructor_emptyList (HERE),
-                                                       GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
-                                                       GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (HERE),
-                                                       GALGAS_guardDeclarationListAST::constructor_emptyList (HERE),
-                                                       GALGAS_lstring::constructor_default (HERE),
-                                                       GALGAS_initList::constructor_emptySortedList (HERE)
-                                                       COMMA_THERE) ;
+GALGAS_moduleDeclarationAST::~ GALGAS_moduleDeclarationAST (void) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_moduleDeclarationAST::GALGAS_moduleDeclarationAST (const cPtr_moduleDeclarationAST * inSourcePtr) :
-GALGAS_structureDeclaration (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_moduleDeclarationAST) ;
+GALGAS_moduleDeclarationAST::GALGAS_moduleDeclarationAST (const GALGAS_lstring & inOperand0,
+                                                          const GALGAS_modulePropertyListAST & inOperand1,
+                                                          const GALGAS_functionDeclarationListAST & inOperand2,
+                                                          const GALGAS_systemRoutineDeclarationListAST & inOperand3,
+                                                          const GALGAS_guardDeclarationListAST & inOperand4,
+                                                          const GALGAS_initList & inOperand5) :
+mProperty_mModuleName (inOperand0),
+mProperty_mPropertyListAST (inOperand1),
+mProperty_mFunctionDeclarationListAST (inOperand2),
+mProperty_mSystemRoutineListAST (inOperand3),
+mProperty_mGuardListAST (inOperand4),
+mProperty_mModuleInitListAST (inOperand5) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_moduleDeclarationAST GALGAS_moduleDeclarationAST::constructor_new (const GALGAS_lstring & inAttribute_mStructureName,
-                                                                          const GALGAS_lstringlist & inAttribute_mAttributeListAST,
-                                                                          const GALGAS_structurePropertyListAST & inAttribute_mStructureFieldListAST,
-                                                                          const GALGAS_functionDeclarationListAST & inAttribute_mFunctionDeclarationListAST,
-                                                                          const GALGAS_systemRoutineDeclarationListAST & inAttribute_mSystemRoutineListAST,
-                                                                          const GALGAS_guardDeclarationListAST & inAttribute_mGuardListAST,
-                                                                          const GALGAS_lstring & inAttribute_mModuleName,
-                                                                          const GALGAS_initList & inAttribute_mModuleInitListAST
-                                                                          COMMA_LOCATION_ARGS) {
+GALGAS_moduleDeclarationAST GALGAS_moduleDeclarationAST::constructor_default (UNUSED_LOCATION_ARGS) {
+  return GALGAS_moduleDeclarationAST (GALGAS_lstring::constructor_default (HERE),
+                                      GALGAS_modulePropertyListAST::constructor_emptyList (HERE),
+                                      GALGAS_functionDeclarationListAST::constructor_emptyList (HERE),
+                                      GALGAS_systemRoutineDeclarationListAST::constructor_emptyList (HERE),
+                                      GALGAS_guardDeclarationListAST::constructor_emptyList (HERE),
+                                      GALGAS_initList::constructor_emptySortedList (HERE)) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_moduleDeclarationAST GALGAS_moduleDeclarationAST::constructor_new (const GALGAS_lstring & inOperand0,
+                                                                          const GALGAS_modulePropertyListAST & inOperand1,
+                                                                          const GALGAS_functionDeclarationListAST & inOperand2,
+                                                                          const GALGAS_systemRoutineDeclarationListAST & inOperand3,
+                                                                          const GALGAS_guardDeclarationListAST & inOperand4,
+                                                                          const GALGAS_initList & inOperand5 
+                                                                          COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_moduleDeclarationAST result ;
-  if (inAttribute_mStructureName.isValid () && inAttribute_mAttributeListAST.isValid () && inAttribute_mStructureFieldListAST.isValid () && inAttribute_mFunctionDeclarationListAST.isValid () && inAttribute_mSystemRoutineListAST.isValid () && inAttribute_mGuardListAST.isValid () && inAttribute_mModuleName.isValid () && inAttribute_mModuleInitListAST.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_moduleDeclarationAST (inAttribute_mStructureName, inAttribute_mAttributeListAST, inAttribute_mStructureFieldListAST, inAttribute_mFunctionDeclarationListAST, inAttribute_mSystemRoutineListAST, inAttribute_mGuardListAST, inAttribute_mModuleName, inAttribute_mModuleInitListAST COMMA_THERE)) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid ()) {
+    result = GALGAS_moduleDeclarationAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5) ;
   }
   return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult GALGAS_moduleDeclarationAST::objectCompare (const GALGAS_moduleDeclarationAST & inOperand) const {
+   typeComparisonResult result = kOperandEqual ;
+  if (result == kOperandEqual) {
+    result = mProperty_mModuleName.objectCompare (inOperand.mProperty_mModuleName) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mPropertyListAST.objectCompare (inOperand.mProperty_mPropertyListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mFunctionDeclarationListAST.objectCompare (inOperand.mProperty_mFunctionDeclarationListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mSystemRoutineListAST.objectCompare (inOperand.mProperty_mSystemRoutineListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mGuardListAST.objectCompare (inOperand.mProperty_mGuardListAST) ;
+  }
+  if (result == kOperandEqual) {
+    result = mProperty_mModuleInitListAST.objectCompare (inOperand.mProperty_mModuleInitListAST) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool GALGAS_moduleDeclarationAST::isValid (void) const {
+  return mProperty_mModuleName.isValid () && mProperty_mPropertyListAST.isValid () && mProperty_mFunctionDeclarationListAST.isValid () && mProperty_mSystemRoutineListAST.isValid () && mProperty_mGuardListAST.isValid () && mProperty_mModuleInitListAST.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_moduleDeclarationAST::drop (void) {
+  mProperty_mModuleName.drop () ;
+  mProperty_mPropertyListAST.drop () ;
+  mProperty_mFunctionDeclarationListAST.drop () ;
+  mProperty_mSystemRoutineListAST.drop () ;
+  mProperty_mGuardListAST.drop () ;
+  mProperty_mModuleInitListAST.drop () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_moduleDeclarationAST::description (C_String & ioString,
+                                               const int32_t inIndentation) const {
+  ioString << "<struct @moduleDeclarationAST:" ;
+  if (! isValid ()) {
+    ioString << " not built" ;
+  }else{
+    mProperty_mModuleName.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mPropertyListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mSystemRoutineListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mGuardListAST.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mModuleInitListAST.description (ioString, inIndentation+1) ;
+  }
+  ioString << ">" ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_lstring GALGAS_moduleDeclarationAST::getter_mModuleName (UNUSED_LOCATION_ARGS) const {
-  GALGAS_lstring result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_moduleDeclarationAST * p = (const cPtr_moduleDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_moduleDeclarationAST) ;
-    result = p->mProperty_mModuleName ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring cPtr_moduleDeclarationAST::getter_mModuleName (UNUSED_LOCATION_ARGS) const {
   return mProperty_mModuleName ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_initList GALGAS_moduleDeclarationAST::getter_mModuleInitListAST (UNUSED_LOCATION_ARGS) const {
-  GALGAS_initList result ;
-  if (NULL != mObjectPtr) {
-    const cPtr_moduleDeclarationAST * p = (const cPtr_moduleDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_moduleDeclarationAST) ;
-    result = p->mProperty_mModuleInitListAST ;
-  }
-  return result ;
+GALGAS_modulePropertyListAST GALGAS_moduleDeclarationAST::getter_mPropertyListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPropertyListAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_initList cPtr_moduleDeclarationAST::getter_mModuleInitListAST (UNUSED_LOCATION_ARGS) const {
+GALGAS_functionDeclarationListAST GALGAS_moduleDeclarationAST::getter_mFunctionDeclarationListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mFunctionDeclarationListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_systemRoutineDeclarationListAST GALGAS_moduleDeclarationAST::getter_mSystemRoutineListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mSystemRoutineListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_guardDeclarationListAST GALGAS_moduleDeclarationAST::getter_mGuardListAST (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mGuardListAST ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_initList GALGAS_moduleDeclarationAST::getter_mModuleInitListAST (UNUSED_LOCATION_ARGS) const {
   return mProperty_mModuleInitListAST ;
 }
 
-//---------------------------------------------------------------------------------------------------------------------*
-//                                    Pointer class for @moduleDeclarationAST class                                    *
-//---------------------------------------------------------------------------------------------------------------------*
-
-cPtr_moduleDeclarationAST::cPtr_moduleDeclarationAST (const GALGAS_lstring & in_mStructureName,
-                                                      const GALGAS_lstringlist & in_mAttributeListAST,
-                                                      const GALGAS_structurePropertyListAST & in_mStructureFieldListAST,
-                                                      const GALGAS_functionDeclarationListAST & in_mFunctionDeclarationListAST,
-                                                      const GALGAS_systemRoutineDeclarationListAST & in_mSystemRoutineListAST,
-                                                      const GALGAS_guardDeclarationListAST & in_mGuardListAST,
-                                                      const GALGAS_lstring & in_mModuleName,
-                                                      const GALGAS_initList & in_mModuleInitListAST
-                                                      COMMA_LOCATION_ARGS) :
-cPtr_structureDeclaration (in_mStructureName, in_mAttributeListAST, in_mStructureFieldListAST, in_mFunctionDeclarationListAST, in_mSystemRoutineListAST, in_mGuardListAST COMMA_THERE),
-mProperty_mModuleName (in_mModuleName),
-mProperty_mModuleInitListAST (in_mModuleInitListAST) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * cPtr_moduleDeclarationAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_moduleDeclarationAST ;
-}
-
-void cPtr_moduleDeclarationAST::description (C_String & ioString,
-                                             const int32_t inIndentation) const {
-  ioString << "[@moduleDeclarationAST:" ;
-  mProperty_mStructureName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mAttributeListAST.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mStructureFieldListAST.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mFunctionDeclarationListAST.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mSystemRoutineListAST.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mGuardListAST.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mModuleName.description (ioString, inIndentation+1) ;
-  ioString << ", " ;
-  mProperty_mModuleInitListAST.description (ioString, inIndentation+1) ;
-  ioString << "]" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-acPtr_class * cPtr_moduleDeclarationAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
-  macroMyNew (ptr, cPtr_moduleDeclarationAST (mProperty_mStructureName, mProperty_mAttributeListAST, mProperty_mStructureFieldListAST, mProperty_mFunctionDeclarationListAST, mProperty_mSystemRoutineListAST, mProperty_mGuardListAST, mProperty_mModuleName, mProperty_mModuleInitListAST COMMA_THERE)) ;
-  return ptr ;
-}
 
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -6536,7 +6509,7 @@ acPtr_class * cPtr_moduleDeclarationAST::duplicate (LOCATION_ARGS) const {
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_moduleDeclarationAST ("moduleDeclarationAST",
-                                             & kTypeDescriptor_GALGAS_structureDeclaration) ;
+                                             NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 

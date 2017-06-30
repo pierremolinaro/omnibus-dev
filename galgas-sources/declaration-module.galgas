@@ -2,8 +2,20 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @moduleDeclarationAST : @structureDeclaration {
+list @modulePropertyListAST {
+  @lstring mPropertyName
+  @lstring mTypeName # Empty string if no type annotation
+  @structureVarInit mOptionalExpression
+}
+
+#·······················································································································
+
+struct @moduleDeclarationAST {
   @lstring mModuleName
+  @modulePropertyListAST mPropertyListAST
+  @functionDeclarationListAST mFunctionDeclarationListAST
+  @systemRoutineDeclarationListAST mSystemRoutineListAST
+  @guardDeclarationListAST mGuardListAST
   @initList mModuleInitListAST
 }
 
@@ -11,6 +23,20 @@ class @moduleDeclarationAST : @structureDeclaration {
 
 list @moduleDeclarationListAST {
   @moduleDeclarationAST mModule
+}
+
+#·······················································································································
+
+list @moduleInstanciationArgumentListAST {
+  @lstring mSelector
+  @expressionAST mExpression
+}
+
+#·······················································································································
+
+list @moduleInstanciationListAST {
+  @lstring mModuleName
+  @moduleInstanciationArgumentListAST mModuleInstanciationArgumentList
 }
 
 #·······················································································································
@@ -27,7 +53,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <module_variable> ?!@structurePropertyListAST ioPropertyList {
+  rule <module_variable> ?!@modulePropertyListAST ioPropertyList {
     $var$
     $identifier$ ?let fieldName
     @lstring typeName
@@ -36,9 +62,15 @@ syntax extension plm_syntax {
     or
       typeName = ["" nowhere]
     end
-    $=$
-    <expression> ?let initExpression
-    ioPropertyList += !fieldName !false !typeName !.expression{!initExpression:initExpression}
+    @structureVarInit optionalExpression
+    select
+      optionalExpression = .noExpression
+    or
+      $=$
+      <expression> ?let initExpression
+      optionalExpression = .expression {!initExpression:initExpression}
+    end
+    ioPropertyList += !fieldName !typeName !optionalExpression
   }
   
   #·····················································································································
@@ -49,7 +81,7 @@ syntax extension plm_syntax {
     let moduleTypeName = moduleMangledNameFromModuleName (!moduleName)
     ${$
     @functionDeclarationListAST functionDeclarationListAST = {}
-    @structurePropertyListAST fieldList = {}
+    @modulePropertyListAST modulePropertyListAST = {}
     @guardDeclarationListAST guardListAST = {}
     @systemRoutineDeclarationListAST svcListAST = {}
     @initList initList = {}
@@ -59,7 +91,7 @@ syntax extension plm_syntax {
     while
       <isr> !?ioAST.mISRDeclarationListAST !moduleTypeName !moduleName.string
     while
-      <module_variable> !?fieldList
+      <module_variable> !?modulePropertyListAST
     while
       <function> !?functionDeclarationListAST
     while
@@ -72,13 +104,11 @@ syntax extension plm_syntax {
     $}$
   #--- Declare module
     ioAST.mModuleDeclarationListAST += !@moduleDeclarationAST.new {
-      !moduleTypeName
-      !{}
-      !fieldList
+      !moduleName
+      !modulePropertyListAST
       !functionDeclarationListAST
       !svcListAST
       !guardListAST
-      !moduleName
       !initList
     }
   }
@@ -89,8 +119,15 @@ syntax extension plm_syntax {
     $module$
     $identifier$ ?let moduleName
     $($
+    @moduleInstanciationArgumentListAST moduleInstanciationArgumentList = {}
+    repeat
+    while
+      $!$ ?let selector
+      <expression> ?let expression
+      moduleInstanciationArgumentList += !selector !expression
+    end
     $)$
-    ioAST.mRequiredModuleListAST += !moduleName
+    ioAST.mRequiredModuleListAST += !moduleName !moduleInstanciationArgumentList
   }
  
   #·····················································································································
@@ -134,23 +171,74 @@ override method @requiredModuleAST addExtension
 #  RETAIN REQUIRED MODULES IN DECLARATION LIST AST                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+map @moduleInstanciationArgumentMap {
+  @expressionAST mExpression
+  insert insertKey error message "duplicated '%K' selector"
+  search searchKey error message "uninitialized '%K' property"
+}
+
+#·······················································································································
+
+map @instanciedModuleMap {
+  @moduleInstanciationArgumentMap mModuleInstanciationArgumentMap
+  insert insertKey error message "the '%K' module is already instancied in %L"
+  search searchKey error message "internal error %K"
+}
+
+#·······················································································································
+
 proc retainRequiredModules ?!@ast ioAST {
-  @stringset instanciedModuleSet = {}
-  for (moduleName) in ioAST.mRequiredModuleListAST do
-    if [instanciedModuleSet hasKey !moduleName.string] then
-      error moduleName : "this module is instancied more than once"
-    end
-    instanciedModuleSet += !moduleName.string
+  @instanciedModuleMap instanciedModuleMap = {}
+  @stringset validModuleNames = {} # For checking alk required modules have been declared
+  for (moduleName args) in ioAST.mRequiredModuleListAST do
+     @moduleInstanciationArgumentMap moduleInstanciationArgumentMap = {}
+     for (selector expression) in args do
+       [!?moduleInstanciationArgumentMap insertKey !selector !expression]
+     end
+    [!?instanciedModuleMap insertKey !moduleName !moduleInstanciationArgumentMap]
   end
-#--- Tranfer required modules in declaration list AST (and init list AST)
+#--- Append required modules to declaration list AST (and init list AST)
   for (declaration) in ioAST.mModuleDeclarationListAST do
-    if [instanciedModuleSet hasKey !declaration.mModuleName.string] then
-      ioAST.mDeclarationListAST += !declaration
+    if [instanciedModuleMap hasKey !declaration.mModuleName.string] then
+      validModuleNames += !declaration.mModuleName.string
+      [instanciedModuleMap searchKey !declaration.mModuleName ?let moduleInstanciationArgumentMap]
+    #--- Build module property list, adding init expression
+      @stringset validArgumentSet = {}
+      @structurePropertyListAST modulePropertyListAST = {}
+      for (propertyName optionalPropertyTypeName optionalInitExpression) in declaration.mPropertyListAST do
+        @expressionAST initExpression
+        switch optionalInitExpression 
+        case noExpression :
+          [moduleInstanciationArgumentMap searchKey !propertyName ?initExpression]
+          validArgumentSet += !propertyName.string
+        case expression (expression) :
+          initExpression = expression
+        end
+        modulePropertyListAST += 
+         !propertyName
+         !false
+         !optionalPropertyTypeName
+         !.expression{!initExpression:initExpression}
+      end
+    #--- Check all arguments of module instanciation have been used
+      for (unusedSelector) in [moduleInstanciationArgumentMap keySet] - validArgumentSet do
+        error [moduleInstanciationArgumentMap locationForKey !unusedSelector] : "invalid selector"
+      end
+    #---
+      let moduleTypeName = moduleMangledNameFromModuleName (!declaration.mModuleName)
       ioAST.mDeclarationListAST += !@requiredModuleAST.new {!declaration.mModuleName}
+      ioAST.mDeclarationListAST += !@structureDeclaration.new {
+        !moduleTypeName
+        !{}
+        !modulePropertyListAST
+        !declaration.mFunctionDeclarationListAST
+        !declaration.mSystemRoutineListAST
+        !declaration.mGuardListAST
+      }
       for init in declaration.mModuleInitListAST do
         ioAST.mInitListAST +=
          !init.mInitLocation
-         !declaration.mStructureName
+         !moduleTypeName
          !declaration.mModuleName
          !init.mInstructionList
          !init.mEndOfInitLocation
@@ -159,6 +247,10 @@ proc retainRequiredModules ?!@ast ioAST {
     end
   end
   ioAST.mModuleDeclarationListAST = {}
+#--- Check all modules named in instanciation constructs have been implemented
+      for (unusedModuleName) in [instanciedModuleMap keySet] - validModuleNames do
+        error [instanciedModuleMap locationForKey !unusedModuleName] : "undefined module"
+      end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
