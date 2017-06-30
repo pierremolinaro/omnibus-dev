@@ -35,7 +35,7 @@ struct @ast {
   @taskList mTaskListAST
   @lstringlist mCheckTargetListAST
   @moduleDeclarationListAST mModuleDeclarationListAST
-  @lstringlist mRequiredModuleListAST
+  @moduleInstanciationListAST mRequiredModuleListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
