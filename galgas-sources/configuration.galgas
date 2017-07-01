@@ -94,24 +94,62 @@ syntax extension plm_target_specific_syntax {
 
   #·····················································································································
 
-  rule <configuration_start_symbol>
-    ?!@ast ioAST
-    !importClauseList:@lstringlist outImportedFileList
-    !endOfSourceFile:@location outEndOfSourceFile
-  {
+  rule <python_utility_tool_list> !@2lstringlist outPythonUtilityToolList {
     <key> !"PYTHON_UTILITIES"
-    @2lstringlist python_utilityToolList = {}
+    outPythonUtilityToolList = {}
     select
     or
       repeat
         $"string"$ ?let relativePath
         $->$
         $"string"$ ?let destinationFile
-        python_utilityToolList += !relativePath !destinationFile
+        outPythonUtilityToolList += !relativePath !destinationFile
       while
         $,$
       end
     end
+  }
+
+  #·····················································································································
+
+  rule <section_specification> !@sectionImplementationScheme outSectionImplementation {
+    <key> !"SECTION"
+    select
+      $"string"$ ?let sectionHandler
+      $;$
+      $integer$ ?let sectionPushedRegisterByteSize
+      $;$
+      $"string"$ ?let sectionDispatcherHeader
+      $;$
+      $"string"$ ?let sectionDispatcherEntry
+      $;$
+      $"string"$ ?let sectionDispatcherInvocation
+      outSectionImplementation = .svc{
+        !sectionPushedRegisterByteSize:sectionPushedRegisterByteSize
+        !sectionHandler:sectionHandler
+        !sectionDispatcherEntry:sectionDispatcherEntry
+        !sectionDispatcherHeader:sectionDispatcherHeader
+        !sectionDispatcherInvocation:sectionDispatcherInvocation
+      }
+    or
+      $"string"$ ?let sectionDisableInterrupt
+      $;$
+      $"string"$ ?let sectionEnableInterrupt
+      outSectionImplementation = .function {
+        !disableInterruptInLLVM:sectionDisableInterrupt
+        !enableInterruptInLLVM:sectionEnableInterrupt
+      }    
+    end
+  }
+
+  #·····················································································································
+
+  rule <configuration_start_symbol>
+    ?!@ast ioAST
+    !importClauseList:@lstringlist outImportedFileList
+    !endOfSourceFile:@location outEndOfSourceFile
+  {
+    <python_utility_tool_list> ?let python_utilityToolList
     <key> !"PYTHON_BUILD"
     $"string"$ ?let python_build
     <key> !"LINKER_SCRIPT"
@@ -138,34 +176,7 @@ syntax extension plm_target_specific_syntax {
     $"string"$ ?let serviceDispatcherEntry
     $;$
     $"string"$ ?let serviceEntry
-    <key> !"SECTION"
-    @sectionImplementationScheme sectionImplementation
-    select
-      $"string"$ ?let sectionHandler
-      $;$
-      $integer$ ?let sectionPushedRegisterByteSize
-      $;$
-      $"string"$ ?let sectionDispatcherHeader
-      $;$
-      $"string"$ ?let sectionDispatcherEntry
-      $;$
-      $"string"$ ?let sectionDispatcherInvocation
-      sectionImplementation = .svc{
-        !sectionPushedRegisterByteSize:sectionPushedRegisterByteSize
-        !sectionHandler:sectionHandler
-        !sectionDispatcherEntry:sectionDispatcherEntry
-        !sectionDispatcherHeader:sectionDispatcherHeader
-        !sectionDispatcherInvocation:sectionDispatcherInvocation
-      }
-    or
-      $"string"$ ?let sectionDisableInterrupt
-      $;$
-      $"string"$ ?let sectionEnableInterrupt
-      sectionImplementation = .function {
-        !disableInterruptInLLVM:sectionDisableInterrupt
-        !enableInterruptInLLVM:sectionEnableInterrupt
-      }    
-    end
+    <section_specification> ?let sectionImplementation
     <key> !"C_FILES"
     @lstringlist C_definitionFiles = {}
     repeat
