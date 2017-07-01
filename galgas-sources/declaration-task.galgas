@@ -445,6 +445,8 @@ method @taskList-element semanticAnalysis
     !initAllocaList
     !initInstructionListIR
   ]
+#------------------------------------------- Generate task var access
+  generatePropertyAccess (!structureType:taskType !?intermediateCode:ioIntermediateCodeStruct)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

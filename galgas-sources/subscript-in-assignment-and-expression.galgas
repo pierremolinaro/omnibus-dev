@@ -113,10 +113,9 @@ private proc handleSubscriptArrayInAssignmentAndExpression
         !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference
+      [!?ioInstructionGenerationList appendGetArrayElementReference
         !result
         !ioObjectPtr
-        !"[" + indexValue + "]"
         ![indexValue uint]
       ]
       ioObjectPtr = result      
@@ -140,10 +139,9 @@ private proc handleSubscriptArrayInAssignmentAndExpression
         !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference
+      [!?ioInstructionGenerationList appendGetArrayElementReference
         !result
         !ioObjectPtr
-        !"[" + [indexResult name] + "]"
         ![indexResult llvmName]
       ]
       ioObjectPtr = result      
@@ -204,10 +202,9 @@ proc handleSubscriptArrayInAssignmentAndExpressionNew
         !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference
+      [!?ioInstructionGenerationList appendGetArrayElementReference
         !result
         !ioObjectPtr
-        !"[" + indexValue + "]"
         ![indexValue uint]
       ]
       ioObjectPtr = result      
@@ -231,10 +228,9 @@ proc handleSubscriptArrayInAssignmentAndExpressionNew
         !volatile:false
       }
       ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference
+      [!?ioInstructionGenerationList appendGetArrayElementReference
         !result
         !ioObjectPtr
-        !"[" + [indexResult name] + "]"
         ![indexResult llvmName]
       ]
       ioObjectPtr = result      

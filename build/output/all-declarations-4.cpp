@@ -10,6 +10,1100 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                          Abstract extension method '@abstractDeclaration semanticAnalysis'                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static TC_UniqueArray <extensionMethodSignature_abstractDeclaration_semanticAnalysis> gExtensionMethodTable_abstractDeclaration_semanticAnalysis ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void enterExtensionMethod_semanticAnalysis (const int32_t inClassIndex,
+                                            extensionMethodSignature_abstractDeclaration_semanticAnalysis inMethod) {
+  gExtensionMethodTable_abstractDeclaration_semanticAnalysis.forceObjectAtIndex (inClassIndex, inMethod, NULL COMMA_HERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void freeExtensionMethod_abstractDeclaration_semanticAnalysis (void) {
+  gExtensionMethodTable_abstractDeclaration_semanticAnalysis.free () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_abstractDeclaration_semanticAnalysis (NULL,
+                                                                 freeExtensionMethod_abstractDeclaration_semanticAnalysis) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void callExtensionMethod_semanticAnalysis (const cPtr_abstractDeclaration * inObject,
+                                           const GALGAS_semanticContext constin_inContext,
+                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                           C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (NULL != inObject) {
+    macroValidSharedObject (inObject, cPtr_abstractDeclaration) ;
+    const C_galgas_type_descriptor * info = inObject->classDescriptor () ;
+    const int32_t classIndex = info->mSlotID ;
+    extensionMethodSignature_abstractDeclaration_semanticAnalysis f = NULL ;
+    if (classIndex < gExtensionMethodTable_abstractDeclaration_semanticAnalysis.count ()) {
+      f = gExtensionMethodTable_abstractDeclaration_semanticAnalysis (classIndex COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      const C_galgas_type_descriptor * p = info->mSuperclassDescriptor ;
+      while ((NULL == f) && (NULL != p)) {
+        if (p->mSlotID < gExtensionMethodTable_abstractDeclaration_semanticAnalysis.count ()) {
+          f = gExtensionMethodTable_abstractDeclaration_semanticAnalysis (p->mSlotID COMMA_HERE) ;
+        }
+        p = p->mSuperclassDescriptor ;
+      }
+      gExtensionMethodTable_abstractDeclaration_semanticAnalysis.forceObjectAtIndex (classIndex, f, NULL COMMA_HERE) ;
+    }
+    if (NULL == f) {
+      fatalError ("FATAL CATEGORY METHOD CALL ERROR", __FILE__, __LINE__) ;
+    }else{
+      f (inObject, constin_inContext, io_ioTemporaries, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
+    }
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                         '@subprogramInvocationGraph' graph                                          *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph::GALGAS_subprogramInvocationGraph (void) :
+AC_GALGAS_graph () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::constructor_emptyGraph (LOCATION_ARGS) {
+  GALGAS_subprogramInvocationGraph result ;
+  result.makeNewEmptyGraph (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::setter_addNode (GALGAS_lstring inKey,
+                                                       GALGAS_lstring inArgument_0,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  GALGAS_lstringlist::makeAttributesFromObjects (attributes, inArgument_0 COMMA_THERE) ;
+  const char * kErrorMessage = "the '%K' routine is already declared at %L" ;
+  internalAddNode (inKey, kErrorMessage, attributes, inCompiler COMMA_THERE) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_topologicalSort (GALGAS_lstringlist & outSortedList,
+                                                               GALGAS_lstringlist & outSortedKeyList,
+                                                               GALGAS_lstringlist & outUnsortedList,
+                                                               GALGAS_lstringlist & outUnsortedKeyList,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const {
+  capCollectionElementArray sortedList ;
+  capCollectionElementArray unsortedList ;
+  internalTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
+  outSortedList = GALGAS_lstringlist (sortedList) ;
+  outUnsortedList = GALGAS_lstringlist (unsortedList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_depthFirstTopologicalSort (GALGAS_lstringlist & outSortedList,
+                                                                         GALGAS_lstringlist & outSortedKeyList,
+                                                                         GALGAS_lstringlist & outUnsortedList,
+                                                                         GALGAS_lstringlist & outUnsortedKeyList,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) const {
+  capCollectionElementArray sortedList ;
+  capCollectionElementArray unsortedList ;
+  internalDepthFirstTopologicalSort (sortedList, outSortedKeyList, unsortedList, outUnsortedKeyList, inCompiler COMMA_THERE) ;
+  outSortedList = GALGAS_lstringlist (sortedList) ;
+  outUnsortedList = GALGAS_lstringlist (unsortedList) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::getter_reversedGraph (LOCATION_ARGS) const {
+  GALGAS_subprogramInvocationGraph result ;
+  result.reversedGraphFromGraph (*this COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_circularities (GALGAS_lstringlist & outInfoList,
+                                                             GALGAS_lstringlist & outKeyList
+                                                             COMMA_LOCATION_ARGS) const {
+  capCollectionElementArray infoList ;
+  internalFindCircularities (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_lstringlist (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_nodesWithNoSuccessor (GALGAS_lstringlist & outInfoList,
+                                                                    GALGAS_lstringlist & outKeyList
+                                                                    COMMA_LOCATION_ARGS) const {
+  capCollectionElementArray infoList ;
+  internalNodesWithNoSuccessor (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_lstringlist (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_subprogramInvocationGraph::method_nodesWithNoPredecessor (GALGAS_lstringlist & outInfoList,
+                                                                      GALGAS_lstringlist & outKeyList
+                                                                      COMMA_LOCATION_ARGS) const {
+  capCollectionElementArray infoList ;
+  internalNodesWithNoPredecessor (infoList, outKeyList COMMA_THERE) ;
+  outInfoList = GALGAS_lstringlist (infoList) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::getter_subgraphFromNodes (const GALGAS_lstringlist & inStartKeyList,
+                                                                                             const GALGAS_stringset & inKeysToExclude,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) const {
+  GALGAS_subprogramInvocationGraph result ;
+  subGraph (result, inStartKeyList, inKeysToExclude, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstringlist GALGAS_subprogramInvocationGraph::getter_accessibleNodesFrom (const GALGAS_lstringlist & inStartKeyList,
+                                                                                 const GALGAS_stringset & inNodesToExclude,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) const {
+  GALGAS_lstringlist result ;
+  GALGAS_subprogramInvocationGraph resultingGraph ;
+  subGraph (resultingGraph,
+            inStartKeyList,
+            inNodesToExclude,
+            inCompiler
+            COMMA_THERE) ;
+  if (resultingGraph.isValid ()) {
+    result = resultingGraph.getter_lkeyList (THERE) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                           @subprogramInvocationGraph type                                           *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_subprogramInvocationGraph ("subprogramInvocationGraph",
+                                                  NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_subprogramInvocationGraph::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_subprogramInvocationGraph ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_subprogramInvocationGraph::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_subprogramInvocationGraph (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_subprogramInvocationGraph GALGAS_subprogramInvocationGraph::extractObject (const GALGAS_object & inObject,
+                                                                                  C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_subprogramInvocationGraph result ;
+  const GALGAS_subprogramInvocationGraph * p = (const GALGAS_subprogramInvocationGraph *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_subprogramInvocationGraph *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("subprogramInvocationGraph", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Extension method '@routineMapIR llvmCodeGeneration'                                 *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionMethod_llvmCodeGeneration (const GALGAS_routineMapIR inObject,
+                                         GALGAS_string & ioArgument_ioLLVMcode,
+                                         GALGAS_string & ioArgument_ioAssemblerCode,
+                                         const GALGAS_generationContext constinArgument_inGenerationContext,
+                                         GALGAS_generationAdds & ioArgument_ioGenerationAdds,
+                                         C_Compiler * inCompiler
+                                         COMMA_UNUSED_LOCATION_ARGS) {
+  const GALGAS_routineMapIR temp_0 = inObject ;
+  cEnumerator_routineMapIR enumerator_9005 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_9005.hasCurrentObject ()) {
+    extensionMethod_llvmCodeGeneration (enumerator_9005.current (HERE), ioArgument_ioLLVMcode, ioArgument_ioAssemblerCode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("semantic-routines.galgas", 239)) ;
+    enumerator_9005.gotoNextObject () ;
+  }
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_globalVariableMapIR::cMapElement_globalVariableMapIR (const GALGAS_lstring & inKey,
+                                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
+                                                                  const GALGAS_bool & in_mGenerateVolatile,
+                                                                  const GALGAS_objectIR & in_mInitialValue
+                                                                  COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mProperty_mType (in_mType),
+mProperty_mGenerateVolatile (in_mGenerateVolatile),
+mProperty_mInitialValue (in_mInitialValue) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_globalVariableMapIR::isValid (void) const {
+  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mGenerateVolatile.isValid () && mProperty_mInitialValue.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_globalVariableMapIR::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_globalVariableMapIR (mProperty_lkey, mProperty_mType, mProperty_mGenerateVolatile, mProperty_mInitialValue COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_globalVariableMapIR::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mType" ":" ;
+  mProperty_mType.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mGenerateVolatile" ":" ;
+  mProperty_mGenerateVolatile.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mInitialValue" ":" ;
+  mProperty_mInitialValue.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_globalVariableMapIR::compare (const cCollectionElement * inOperand) const {
+  cMapElement_globalVariableMapIR * operand = (cMapElement_globalVariableMapIR *) inOperand ;
+  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mType.objectCompare (operand->mProperty_mType) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mGenerateVolatile.objectCompare (operand->mProperty_mGenerateVolatile) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mInitialValue.objectCompare (operand->mProperty_mInitialValue) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMapIR::GALGAS_globalVariableMapIR (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMapIR::GALGAS_globalVariableMapIR (const GALGAS_globalVariableMapIR & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMapIR & GALGAS_globalVariableMapIR::operator = (const GALGAS_globalVariableMapIR & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMapIR GALGAS_globalVariableMapIR::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_globalVariableMapIR result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMapIR GALGAS_globalVariableMapIR::constructor_mapWithMapToOverride (const GALGAS_globalVariableMapIR & inMapToOverride
+                                                                                         COMMA_LOCATION_ARGS) {
+  GALGAS_globalVariableMapIR result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMapIR GALGAS_globalVariableMapIR::getter_overriddenMap (C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
+  GALGAS_globalVariableMapIR result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableMapIR::addAssign_operation (const GALGAS_lstring & inKey,
+                                                      const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
+                                                      const GALGAS_bool & inArgument1,
+                                                      const GALGAS_objectIR & inArgument2,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  cMapElement_globalVariableMapIR * p = NULL ;
+  macroMyNew (p, cMapElement_globalVariableMapIR (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@globalVariableMapIR insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableMapIR::setter_insertKey (GALGAS_lstring inKey,
+                                                   GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                   GALGAS_bool inArgument1,
+                                                   GALGAS_objectIR inArgument2,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
+  cMapElement_globalVariableMapIR * p = NULL ;
+  macroMyNew (p, cMapElement_globalVariableMapIR (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "** internal error **" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_globalVariableMapIR_searchKey = "** internal error **" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableMapIR::method_searchKey (GALGAS_lstring inKey,
+                                                   GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                   GALGAS_bool & outArgument1,
+                                                   GALGAS_objectIR & outArgument2,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
+  const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) performSearch (inKey,
+                                                                                                       inCompiler,
+                                                                                                       kSearchErrorMessage_globalVariableMapIR_searchKey
+                                                                                                       COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+    outArgument2.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+    outArgument0 = p->mProperty_mType ;
+    outArgument1 = p->mProperty_mGenerateVolatile ;
+    outArgument2 = p->mProperty_mInitialValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_globalVariableMapIR::getter_mTypeForKey (const GALGAS_string & inKey,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) attributes ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+    result = p->mProperty_mType ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool GALGAS_globalVariableMapIR::getter_mGenerateVolatileForKey (const GALGAS_string & inKey,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) attributes ;
+  GALGAS_bool result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+    result = p->mProperty_mGenerateVolatile ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_globalVariableMapIR::getter_mInitialValueForKey (const GALGAS_string & inKey,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) attributes ;
+  GALGAS_objectIR result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+    result = p->mProperty_mInitialValue ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableMapIR::setter_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                        GALGAS_string inKey,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_globalVariableMapIR * p = (cMapElement_globalVariableMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+    p->mProperty_mType = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableMapIR::setter_setMGenerateVolatileForKey (GALGAS_bool inAttributeValue,
+                                                                    GALGAS_string inKey,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_globalVariableMapIR * p = (cMapElement_globalVariableMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+    p->mProperty_mGenerateVolatile = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalVariableMapIR::setter_setMInitialValueForKey (GALGAS_objectIR inAttributeValue,
+                                                                GALGAS_string inKey,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_globalVariableMapIR * p = (cMapElement_globalVariableMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+    p->mProperty_mInitialValue = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_globalVariableMapIR * GALGAS_globalVariableMapIR::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                 const GALGAS_string & inKey
+                                                                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_globalVariableMapIR * result = (cMapElement_globalVariableMapIR *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_globalVariableMapIR) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_globalVariableMapIR::cEnumerator_globalVariableMapIR (const GALGAS_globalVariableMapIR & inEnumeratedObject,
+                                                                  const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMapIR_2D_element cEnumerator_globalVariableMapIR::current (LOCATION_ARGS) const {
+  const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+  return GALGAS_globalVariableMapIR_2D_element (p->mProperty_lkey, p->mProperty_mType, p->mProperty_mGenerateVolatile, p->mProperty_mInitialValue) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_globalVariableMapIR::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mProperty_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_globalVariableMapIR::current_mType (LOCATION_ARGS) const {
+  const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+  return p->mProperty_mType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_bool cEnumerator_globalVariableMapIR::current_mGenerateVolatile (LOCATION_ARGS) const {
+  const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+  return p->mProperty_mGenerateVolatile ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR cEnumerator_globalVariableMapIR::current_mInitialValue (LOCATION_ARGS) const {
+  const cMapElement_globalVariableMapIR * p = (const cMapElement_globalVariableMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_globalVariableMapIR) ;
+  return p->mProperty_mInitialValue ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @globalVariableMapIR type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_globalVariableMapIR ("globalVariableMapIR",
+                                            NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_globalVariableMapIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_globalVariableMapIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_globalVariableMapIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_globalVariableMapIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalVariableMapIR GALGAS_globalVariableMapIR::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_globalVariableMapIR result ;
+  const GALGAS_globalVariableMapIR * p = (const GALGAS_globalVariableMapIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_globalVariableMapIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("globalVariableMapIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_globalConstantMapIR::cMapElement_globalConstantMapIR (const GALGAS_lstring & inKey,
+                                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mType,
+                                                                  const GALGAS_objectIR & in_mSourceExpression
+                                                                  COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mProperty_mType (in_mType),
+mProperty_mSourceExpression (in_mSourceExpression) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+bool cMapElement_globalConstantMapIR::isValid (void) const {
+  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mSourceExpression.isValid () ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement * cMapElement_globalConstantMapIR::copy (void) {
+  cMapElement * result = NULL ;
+  macroMyNew (result, cMapElement_globalConstantMapIR (mProperty_lkey, mProperty_mType, mProperty_mSourceExpression COMMA_HERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cMapElement_globalConstantMapIR::description (C_String & ioString, const int32_t inIndentation) const {
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mType" ":" ;
+  mProperty_mType.description (ioString, inIndentation) ;
+  ioString << "\n" ;
+  ioString.writeStringMultiple ("| ", inIndentation) ;
+  ioString << "mSourceExpression" ":" ;
+  mProperty_mSourceExpression.description (ioString, inIndentation) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cMapElement_globalConstantMapIR::compare (const cCollectionElement * inOperand) const {
+  cMapElement_globalConstantMapIR * operand = (cMapElement_globalConstantMapIR *) inOperand ;
+  typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mType.objectCompare (operand->mProperty_mType) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mSourceExpression.objectCompare (operand->mProperty_mSourceExpression) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMapIR::GALGAS_globalConstantMapIR (void) :
+AC_GALGAS_map () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMapIR::GALGAS_globalConstantMapIR (const GALGAS_globalConstantMapIR & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMapIR & GALGAS_globalConstantMapIR::operator = (const GALGAS_globalConstantMapIR & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMapIR GALGAS_globalConstantMapIR::constructor_emptyMap (LOCATION_ARGS) {
+  GALGAS_globalConstantMapIR result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMapIR GALGAS_globalConstantMapIR::constructor_mapWithMapToOverride (const GALGAS_globalConstantMapIR & inMapToOverride
+                                                                                         COMMA_LOCATION_ARGS) {
+  GALGAS_globalConstantMapIR result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMapIR GALGAS_globalConstantMapIR::getter_overriddenMap (C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const {
+  GALGAS_globalConstantMapIR result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalConstantMapIR::addAssign_operation (const GALGAS_lstring & inKey,
+                                                      const GALGAS_unifiedTypeMap_2D_proxy & inArgument0,
+                                                      const GALGAS_objectIR & inArgument1,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  cMapElement_globalConstantMapIR * p = NULL ;
+  macroMyNew (p, cMapElement_globalConstantMapIR (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "@globalConstantMapIR insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalConstantMapIR::setter_insertKey (GALGAS_lstring inKey,
+                                                   GALGAS_unifiedTypeMap_2D_proxy inArgument0,
+                                                   GALGAS_objectIR inArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) {
+  cMapElement_globalConstantMapIR * p = NULL ;
+  macroMyNew (p, cMapElement_globalConstantMapIR (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "** internal error **" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const char * kSearchErrorMessage_globalConstantMapIR_searchKey = "** internal error **" ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalConstantMapIR::method_searchKey (GALGAS_lstring inKey,
+                                                   GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+                                                   GALGAS_objectIR & outArgument1,
+                                                   C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
+  const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) performSearch (inKey,
+                                                                                                       inCompiler,
+                                                                                                       kSearchErrorMessage_globalConstantMapIR_searchKey
+                                                                                                       COMMA_THERE) ;
+  if (NULL == p) {
+    outArgument0.drop () ;
+    outArgument1.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+    outArgument0 = p->mProperty_mType ;
+    outArgument1 = p->mProperty_mSourceExpression ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_globalConstantMapIR::getter_mTypeForKey (const GALGAS_string & inKey,
+                                                                               C_Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) attributes ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+    result = p->mProperty_mType ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR GALGAS_globalConstantMapIR::getter_mSourceExpressionForKey (const GALGAS_string & inKey,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) attributes ;
+  GALGAS_objectIR result ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+    result = p->mProperty_mSourceExpression ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalConstantMapIR::setter_setMTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+                                                        GALGAS_string inKey,
+                                                        C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_globalConstantMapIR * p = (cMapElement_globalConstantMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+    p->mProperty_mType = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+void GALGAS_globalConstantMapIR::setter_setMSourceExpressionForKey (GALGAS_objectIR inAttributeValue,
+                                                                    GALGAS_string inKey,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_globalConstantMapIR * p = (cMapElement_globalConstantMapIR *) attributes ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+    p->mProperty_mSourceExpression = inAttributeValue ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cMapElement_globalConstantMapIR * GALGAS_globalConstantMapIR::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
+                                                                                                 const GALGAS_string & inKey
+                                                                                                 COMMA_LOCATION_ARGS) {
+  cMapElement_globalConstantMapIR * result = (cMapElement_globalConstantMapIR *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_globalConstantMapIR) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+cEnumerator_globalConstantMapIR::cEnumerator_globalConstantMapIR (const GALGAS_globalConstantMapIR & inEnumeratedObject,
+                                                                  const typeEnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMapIR_2D_element cEnumerator_globalConstantMapIR::current (LOCATION_ARGS) const {
+  const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+  return GALGAS_globalConstantMapIR_2D_element (p->mProperty_lkey, p->mProperty_mType, p->mProperty_mSourceExpression) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_lstring cEnumerator_globalConstantMapIR::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mProperty_lkey ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_globalConstantMapIR::current_mType (LOCATION_ARGS) const {
+  const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+  return p->mProperty_mType ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_objectIR cEnumerator_globalConstantMapIR::current_mSourceExpression (LOCATION_ARGS) const {
+  const cMapElement_globalConstantMapIR * p = (const cMapElement_globalConstantMapIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_globalConstantMapIR) ;
+  return p->mProperty_mSourceExpression ;
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                              @globalConstantMapIR type                                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_globalConstantMapIR ("globalConstantMapIR",
+                                            NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_globalConstantMapIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_globalConstantMapIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_globalConstantMapIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_globalConstantMapIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_globalConstantMapIR GALGAS_globalConstantMapIR::extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_globalConstantMapIR result ;
+  const GALGAS_globalConstantMapIR * p = (const GALGAS_globalConstantMapIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_globalConstantMapIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("globalConstantMapIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                   Extension method '@instructionListIR appendNOP'                                   *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendNOP (GALGAS_instructionListIR & ioObject,
+                                C_Compiler * /* inCompiler */
+                                COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_nopIR::constructor_new (SOURCE_FILE ("intermediate-nop.galgas", 3))  COMMA_SOURCE_FILE ("intermediate-nop.galgas", 3)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//   Object comparison                                                                                                 *
+//---------------------------------------------------------------------------------------------------------------------*
+
+typeComparisonResult cPtr_nopIR::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
+  return kOperandEqual ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+
+typeComparisonResult GALGAS_nopIR::objectCompare (const GALGAS_nopIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const int32_t mySlot = mObjectPtr->classDescriptor ()->mSlotID ;
+    const int32_t operandSlot = inOperand.mObjectPtr->classDescriptor ()->mSlotID ;
+    if (mySlot < operandSlot) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mySlot > operandSlot) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_nopIR::GALGAS_nopIR (void) :
+GALGAS_abstractInstructionIR () {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_nopIR GALGAS_nopIR::constructor_default (LOCATION_ARGS) {
+  return GALGAS_nopIR::constructor_new (THERE) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_nopIR::GALGAS_nopIR (const cPtr_nopIR * inSourcePtr) :
+GALGAS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_nopIR) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_nopIR GALGAS_nopIR::constructor_new (LOCATION_ARGS) {
+  GALGAS_nopIR result ;
+  macroMyNew (result.mObjectPtr, cPtr_nopIR (THERE)) ;
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                           Pointer class for @nopIR class                                            *
+//---------------------------------------------------------------------------------------------------------------------*
+
+cPtr_nopIR::cPtr_nopIR (LOCATION_ARGS) :
+cPtr_abstractInstructionIR (THERE) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * cPtr_nopIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_nopIR ;
+}
+
+void cPtr_nopIR::description (C_String & ioString,
+                              const int32_t /* inIndentation */) const {
+  ioString << "[@nopIR]" ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+acPtr_class * cPtr_nopIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_nopIR (THERE)) ;
+  return ptr ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                                     @nopIR type                                                     *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_nopIR ("nopIR",
+                              & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+const C_galgas_type_descriptor * GALGAS_nopIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_nopIR ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+AC_GALGAS_root * GALGAS_nopIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_nopIR (*this)) ;
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_nopIR GALGAS_nopIR::extractObject (const GALGAS_object & inObject,
+                                          C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) {
+  GALGAS_nopIR result ;
+  const GALGAS_nopIR * p = (const GALGAS_nopIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_nopIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("nopIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                 Extension method '@instructionListIR appendExtend'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendExtend (GALGAS_instructionListIR & ioObject,
+                                   const GALGAS_objectIR constinArgument_inResult,
+                                   const GALGAS_objectIR constinArgument_inSource,
+                                   C_Compiler * /* inCompiler */
+                                   COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_extendIR::constructor_new (constinArgument_inResult, constinArgument_inSource  COMMA_SOURCE_FILE ("intermediate-extend.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-extend.galgas", 6)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                                  Extension method '@instructionListIR appendTrunc'                                  *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendTrunc (GALGAS_instructionListIR & ioObject,
+                                  const GALGAS_objectIR constinArgument_inResult,
+                                  const GALGAS_objectIR constinArgument_inSource,
+                                  C_Compiler * /* inCompiler */
+                                  COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_truncIR::constructor_new (constinArgument_inResult, constinArgument_inSource  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 6)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                Extension method '@instructionListIR appendShiftLeft'                                *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -509,6 +1603,22 @@ void extensionSetter_appendPropertyReferenceFromSelf (GALGAS_instructionListIR &
     inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 10)), GALGAS_string ("<<INTERNAL ERROR>>"), fixItArray1  COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 10)) ;
   }
   ioObject.addAssign_operation (GALGAS_getPropertyReferenceFromSelfIR::constructor_new (constinArgument_inTarget, constinArgument_inSelfType, constinArgument_inPropertyName, constinArgument_inPropertyIndex  COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 12))  COMMA_SOURCE_FILE ("intermediate-get-element-ptr-from-self.galgas", 12)) ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Extension method '@instructionListIR appendGetArrayElementReference'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+void extensionSetter_appendGetArrayElementReference (GALGAS_instructionListIR & ioObject,
+                                                     const GALGAS_objectIR constinArgument_inTarget,
+                                                     const GALGAS_objectIR constinArgument_inSource,
+                                                     const GALGAS_string constinArgument_inElementIndex,
+                                                     C_Compiler * /* inCompiler */
+                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GALGAS_getArrayElementReferenceIR::constructor_new (constinArgument_inTarget, constinArgument_inSource, constinArgument_inElementIndex  COMMA_SOURCE_FILE ("intermediate-get-array-element-reference.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-get-array-element-reference.galgas", 7)) ;
 }
 
 
@@ -3597,22 +4707,22 @@ GALGAS_ast GALGAS_ast::extractObject (const GALGAS_object & inObject,
 static const char * gNonTerminalNames_plm_grammar [127] = {
   "<function>",// Index 0
   "<system_routine>",// Index 1
-  "<isr>",// Index 2
-  "<import_file>",// Index 3
-  "<start_symbol>",// Index 4
-  "<declaration>",// Index 5
-  "<declaration_type>",// Index 6
-  "<struct_var_declaration>",// Index 7
-  "<property_in_extension>",// Index 8
-  "<registerDeclaration>",// Index 9
-  "<module_variable>",// Index 10
-  "<staticArrayProperty>",// Index 11
-  "<staticArray_exp>",// Index 12
-  "<taskBody>",// Index 13
-  "<declaration_init>",// Index 14
-  "<mode>",// Index 15
-  "<function_header>",// Index 16
-  "<procedure_formal_arguments>",// Index 17
+  "<import_file>",// Index 2
+  "<start_symbol>",// Index 3
+  "<declaration>",// Index 4
+  "<declaration_type>",// Index 5
+  "<struct_var_declaration>",// Index 6
+  "<property_in_extension>",// Index 7
+  "<registerDeclaration>",// Index 8
+  "<module_variable>",// Index 9
+  "<staticArrayProperty>",// Index 10
+  "<staticArray_exp>",// Index 11
+  "<taskBody>",// Index 12
+  "<declaration_init>",// Index 13
+  "<mode>",// Index 14
+  "<function_header>",// Index 15
+  "<procedure_formal_arguments>",// Index 16
+  "<isr>",// Index 17
   "<guard>",// Index 18
   "<expression>",// Index 19
   "<expression_logical_xor>",// Index 20
@@ -3918,36 +5028,9 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (96)
 , END
 // State S25 (index = 277)
-, C_Lexique_plm_5F_lexique::kToken_import, SHIFT (1)
-, C_Lexique_plm_5F_lexique::kToken_type, SHIFT (2)
-, C_Lexique_plm_5F_lexique::kToken_enum, SHIFT (3)
-, C_Lexique_plm_5F_lexique::kToken_public, SHIFT (4)
-, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (5)
-, C_Lexique_plm_5F_lexique::kToken_struct, SHIFT (6)
-, C_Lexique_plm_5F_lexique::kToken_extension, SHIFT (7)
-, C_Lexique_plm_5F_lexique::kToken_register, SHIFT (8)
-, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (9)
-, C_Lexique_plm_5F_lexique::kToken_module, SHIFT (10)
-, C_Lexique_plm_5F_lexique::kToken_staticArray, SHIFT (11)
-, C_Lexique_plm_5F_lexique::kToken_func, REDUCE (191)
-, C_Lexique_plm_5F_lexique::kToken_extend, SHIFT (12)
-, C_Lexique_plm_5F_lexique::kToken_task, SHIFT (13)
-, C_Lexique_plm_5F_lexique::kToken_panic, SHIFT (14)
-, C_Lexique_plm_5F_lexique::kToken_system, REDUCE (181)
-, C_Lexique_plm_5F_lexique::kToken_boot, SHIFT (15)
-, C_Lexique_plm_5F_lexique::kToken_init, SHIFT (16)
-, C_Lexique_plm_5F_lexique::kToken_guard, REDUCE (216)
-, C_Lexique_plm_5F_lexique::kToken_required, SHIFT (17)
-, C_Lexique_plm_5F_lexique::kToken_extern, SHIFT (18)
-, C_Lexique_plm_5F_lexique::kToken_isr, SHIFT (19)
-, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (20)
-, C_Lexique_plm_5F_lexique::kToken_target, SHIFT (21)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (96)
-, END
-// State S26 (index = 328)
 , C_Lexique_plm_5F_lexique::kToken_, ACCEPT
 , END
-// State S27 (index = 331)
+// State S26 (index = 280)
 , C_Lexique_plm_5F_lexique::kToken_import, SHIFT (1)
 , C_Lexique_plm_5F_lexique::kToken_type, SHIFT (2)
 , C_Lexique_plm_5F_lexique::kToken_enum, SHIFT (3)
@@ -3974,7 +5057,7 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_target, SHIFT (21)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (96)
 , END
-// State S28 (index = 382)
+// State S27 (index = 331)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_type, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_enum, REDUCE (28)
@@ -4000,6 +5083,33 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_check, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_target, REDUCE (28)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (28)
+, END
+// State S28 (index = 382)
+, C_Lexique_plm_5F_lexique::kToken_import, SHIFT (1)
+, C_Lexique_plm_5F_lexique::kToken_type, SHIFT (2)
+, C_Lexique_plm_5F_lexique::kToken_enum, SHIFT (3)
+, C_Lexique_plm_5F_lexique::kToken_public, SHIFT (4)
+, C_Lexique_plm_5F_lexique::kToken_var, SHIFT (5)
+, C_Lexique_plm_5F_lexique::kToken_struct, SHIFT (6)
+, C_Lexique_plm_5F_lexique::kToken_extension, SHIFT (7)
+, C_Lexique_plm_5F_lexique::kToken_register, SHIFT (8)
+, C_Lexique_plm_5F_lexique::kToken_let, SHIFT (9)
+, C_Lexique_plm_5F_lexique::kToken_module, SHIFT (10)
+, C_Lexique_plm_5F_lexique::kToken_staticArray, SHIFT (11)
+, C_Lexique_plm_5F_lexique::kToken_func, REDUCE (191)
+, C_Lexique_plm_5F_lexique::kToken_extend, SHIFT (12)
+, C_Lexique_plm_5F_lexique::kToken_task, SHIFT (13)
+, C_Lexique_plm_5F_lexique::kToken_panic, SHIFT (14)
+, C_Lexique_plm_5F_lexique::kToken_system, REDUCE (181)
+, C_Lexique_plm_5F_lexique::kToken_boot, SHIFT (15)
+, C_Lexique_plm_5F_lexique::kToken_init, SHIFT (16)
+, C_Lexique_plm_5F_lexique::kToken_guard, REDUCE (216)
+, C_Lexique_plm_5F_lexique::kToken_required, SHIFT (17)
+, C_Lexique_plm_5F_lexique::kToken_extern, SHIFT (18)
+, C_Lexique_plm_5F_lexique::kToken_isr, SHIFT (19)
+, C_Lexique_plm_5F_lexique::kToken_check, SHIFT (20)
+, C_Lexique_plm_5F_lexique::kToken_target, SHIFT (21)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (96)
 , END
 // State S29 (index = 433)
 , C_Lexique_plm_5F_lexique::kToken_import, REDUCE (38)
@@ -4215,13 +5325,13 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (99)
 , END
 // State S62 (index = 760)
-, C_Lexique_plm_5F_lexique::kToken_, REDUCE (100)
-, END
-// State S63 (index = 763)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (101)
 , END
-// State S64 (index = 766)
+// State S63 (index = 763)
 , C_Lexique_plm_5F_lexique::kToken_, REDUCE (97)
+, END
+// State S64 (index = 766)
+, C_Lexique_plm_5F_lexique::kToken_, REDUCE (100)
 , END
 // State S65 (index = 769)
 , C_Lexique_plm_5F_lexique::kToken_section, SHIFT (105)
@@ -6679,13 +7789,13 @@ static const int16_t gActionTable_plm_grammar [] = {
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (155)
 , END
 // State S241 (index = 5151)
-, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (152)
-, END
-// State S242 (index = 5154)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (153)
 , END
-// State S243 (index = 5157)
+// State S242 (index = 5154)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (151)
+, END
+// State S243 (index = 5157)
+, C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (152)
 , END
 // State S244 (index = 5160)
 , C_Lexique_plm_5F_lexique::kToken__7D_, REDUCE (156)
@@ -15650,7 +16760,7 @@ static const uint32_t gActionTableIndex_plm_grammar [714] = {
 , 175  // S23
 , 226  // S24
 , 277  // S25
-, 328  // S26
+, 280  // S26
 , 331  // S27
 , 382  // S28
 , 433  // S29
@@ -16354,28 +17464,28 @@ static const int16_t gSuccessorTable_plm_grammar_0 [25] = {0, 22,
   2, 24,
   3, 25,
   4, 26,
-  5, 27,
-  14, 28,
+  13, 27,
+  17, 28,
   18, 29,
   40, 30,
   72, 31,
   76, 32,
   83, 33, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_8 [3] = {9, 41, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_8 [3] = {8, 41, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_17 [3] = {16, 52, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_17 [3] = {15, 52, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_18 [3] = {16, 53, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_18 [3] = {15, 53, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_19 [3] = {82, 57, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_22 [23] = {0, 22,
   1, 23,
   2, 24,
-  3, 25,
-  5, 27,
-  14, 28,
+  4, 26,
+  13, 27,
+  17, 28,
   18, 29,
   40, 60,
   72, 31,
@@ -16385,9 +17495,9 @@ static const int16_t gSuccessorTable_plm_grammar_22 [23] = {0, 22,
 static const int16_t gSuccessorTable_plm_grammar_23 [23] = {0, 22,
   1, 23,
   2, 24,
-  3, 25,
-  5, 27,
-  14, 28,
+  4, 26,
+  13, 27,
+  17, 28,
   18, 29,
   40, 61,
   72, 31,
@@ -16397,40 +17507,40 @@ static const int16_t gSuccessorTable_plm_grammar_23 [23] = {0, 22,
 static const int16_t gSuccessorTable_plm_grammar_24 [23] = {0, 22,
   1, 23,
   2, 24,
-  3, 25,
-  5, 27,
-  14, 28,
+  4, 26,
+  13, 27,
+  17, 28,
   18, 29,
   40, 62,
   72, 31,
   76, 32,
   83, 33, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_25 [23] = {0, 22,
+static const int16_t gSuccessorTable_plm_grammar_26 [23] = {0, 22,
   1, 23,
   2, 24,
-  3, 25,
-  5, 27,
-  14, 28,
+  4, 26,
+  13, 27,
+  17, 28,
   18, 29,
   40, 63,
   72, 31,
   76, 32,
   83, 33, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_27 [23] = {0, 22,
+static const int16_t gSuccessorTable_plm_grammar_28 [23] = {0, 22,
   1, 23,
   2, 24,
-  3, 25,
-  5, 27,
-  14, 28,
+  4, 26,
+  13, 27,
+  17, 28,
   18, 29,
   40, 64,
   72, 31,
   76, 32,
   83, 33, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_32 [3] = {16, 66, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_32 [3] = {15, 66, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_37 [3] = {58, 71, -1} ;
 
@@ -16438,12 +17548,12 @@ static const int16_t gSuccessorTable_plm_grammar_38 [3] = {45, 73, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_40 [3] = {55, 76, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_41 [5] = {9, 77,
+static const int16_t gSuccessorTable_plm_grammar_41 [5] = {8, 77,
   50, 78, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_42 [3] = {57, 80, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_51 [5] = {15, 99,
+static const int16_t gSuccessorTable_plm_grammar_51 [5] = {14, 99,
   78, 100, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_53 [3] = {81, 102, -1} ;
@@ -16452,13 +17562,13 @@ static const int16_t gSuccessorTable_plm_grammar_65 [3] = {73, 109, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_66 [3] = {77, 111, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_68 [3] = {6, 115, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_68 [3] = {5, 115, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_72 [3] = {45, 118, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_74 [19] = {0, 122,
   1, 123,
-  8, 124,
+  7, 124,
   18, 125,
   47, 126,
   48, 127,
@@ -16470,14 +17580,14 @@ static const int16_t gSuccessorTable_plm_grammar_75 [3] = {55, 128, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_76 [3] = {56, 131, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_77 [5] = {9, 77,
+static const int16_t gSuccessorTable_plm_grammar_77 [5] = {8, 77,
   50, 132, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_81 [21] = {0, 137,
   1, 138,
-  2, 139,
-  10, 140,
-  14, 141,
+  9, 139,
+  13, 140,
+  17, 141,
   18, 142,
   61, 143,
   72, 31,
@@ -16486,7 +17596,7 @@ static const int16_t gSuccessorTable_plm_grammar_81 [21] = {0, 137,
 
 static const int16_t gSuccessorTable_plm_grammar_82 [3] = {62, 145, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_83 [3] = {11, 147, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_83 [3] = {10, 147, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_88 [15] = {32, 166,
   33, 167,
@@ -16525,7 +17635,7 @@ static const int16_t gSuccessorTable_plm_grammar_117 [29] = {19, 203,
 
 static const int16_t gSuccessorTable_plm_grammar_119 [19] = {0, 219,
   1, 220,
-  7, 221,
+  6, 221,
   18, 222,
   42, 223,
   46, 224,
@@ -16535,7 +17645,7 @@ static const int16_t gSuccessorTable_plm_grammar_119 [19] = {0, 219,
 
 static const int16_t gSuccessorTable_plm_grammar_121 [19] = {0, 122,
   1, 123,
-  8, 124,
+  7, 124,
   18, 125,
   47, 225,
   48, 127,
@@ -16545,7 +17655,7 @@ static const int16_t gSuccessorTable_plm_grammar_121 [19] = {0, 122,
 
 static const int16_t gSuccessorTable_plm_grammar_122 [19] = {0, 122,
   1, 123,
-  8, 124,
+  7, 124,
   18, 125,
   47, 226,
   48, 127,
@@ -16555,7 +17665,7 @@ static const int16_t gSuccessorTable_plm_grammar_122 [19] = {0, 122,
 
 static const int16_t gSuccessorTable_plm_grammar_123 [19] = {0, 122,
   1, 123,
-  8, 124,
+  7, 124,
   18, 125,
   47, 227,
   48, 127,
@@ -16565,7 +17675,7 @@ static const int16_t gSuccessorTable_plm_grammar_123 [19] = {0, 122,
 
 static const int16_t gSuccessorTable_plm_grammar_124 [19] = {0, 122,
   1, 123,
-  8, 124,
+  7, 124,
   18, 125,
   47, 228,
   48, 127,
@@ -16575,7 +17685,7 @@ static const int16_t gSuccessorTable_plm_grammar_124 [19] = {0, 122,
 
 static const int16_t gSuccessorTable_plm_grammar_125 [19] = {0, 122,
   1, 123,
-  8, 124,
+  7, 124,
   18, 125,
   47, 229,
   48, 127,
@@ -16632,9 +17742,9 @@ static const int16_t gSuccessorTable_plm_grammar_134 [29] = {19, 236,
 
 static const int16_t gSuccessorTable_plm_grammar_136 [21] = {0, 137,
   1, 138,
-  2, 139,
-  10, 140,
-  14, 141,
+  9, 139,
+  13, 140,
+  17, 141,
   18, 142,
   61, 238,
   72, 31,
@@ -16643,9 +17753,9 @@ static const int16_t gSuccessorTable_plm_grammar_136 [21] = {0, 137,
 
 static const int16_t gSuccessorTable_plm_grammar_137 [21] = {0, 137,
   1, 138,
-  2, 139,
-  10, 140,
-  14, 141,
+  9, 139,
+  13, 140,
+  17, 141,
   18, 142,
   61, 239,
   72, 31,
@@ -16654,9 +17764,9 @@ static const int16_t gSuccessorTable_plm_grammar_137 [21] = {0, 137,
 
 static const int16_t gSuccessorTable_plm_grammar_138 [21] = {0, 137,
   1, 138,
-  2, 139,
-  10, 140,
-  14, 141,
+  9, 139,
+  13, 140,
+  17, 141,
   18, 142,
   61, 240,
   72, 31,
@@ -16665,9 +17775,9 @@ static const int16_t gSuccessorTable_plm_grammar_138 [21] = {0, 137,
 
 static const int16_t gSuccessorTable_plm_grammar_139 [21] = {0, 137,
   1, 138,
-  2, 139,
-  10, 140,
-  14, 141,
+  9, 139,
+  13, 140,
+  17, 141,
   18, 142,
   61, 241,
   72, 31,
@@ -16676,9 +17786,9 @@ static const int16_t gSuccessorTable_plm_grammar_139 [21] = {0, 137,
 
 static const int16_t gSuccessorTable_plm_grammar_140 [21] = {0, 137,
   1, 138,
-  2, 139,
-  10, 140,
-  14, 141,
+  9, 139,
+  13, 140,
+  17, 141,
   18, 142,
   61, 242,
   72, 31,
@@ -16687,9 +17797,9 @@ static const int16_t gSuccessorTable_plm_grammar_140 [21] = {0, 137,
 
 static const int16_t gSuccessorTable_plm_grammar_141 [21] = {0, 137,
   1, 138,
-  2, 139,
-  10, 140,
-  14, 141,
+  9, 139,
+  13, 140,
+  17, 141,
   18, 142,
   61, 243,
   72, 31,
@@ -16698,9 +17808,9 @@ static const int16_t gSuccessorTable_plm_grammar_141 [21] = {0, 137,
 
 static const int16_t gSuccessorTable_plm_grammar_142 [21] = {0, 137,
   1, 138,
-  2, 139,
-  10, 140,
-  14, 141,
+  9, 139,
+  13, 140,
+  17, 141,
   18, 142,
   61, 244,
   72, 31,
@@ -16722,10 +17832,10 @@ static const int16_t gSuccessorTable_plm_grammar_144 [29] = {19, 246,
   98, 215,
   101, 216, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_147 [5] = {11, 249,
+static const int16_t gSuccessorTable_plm_grammar_147 [5] = {10, 249,
   63, 250, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_148 [33] = {12, 252,
+static const int16_t gSuccessorTable_plm_grammar_148 [33] = {11, 252,
   19, 253,
   20, 204,
   21, 205,
@@ -16868,7 +17978,7 @@ static const int16_t gSuccessorTable_plm_grammar_182 [15] = {32, 303,
 
 static const int16_t gSuccessorTable_plm_grammar_183 [3] = {84, 304, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_184 [3] = {17, 306, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_184 [3] = {16, 306, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_185 [29] = {19, 307,
   20, 204,
@@ -17017,7 +18127,7 @@ static const int16_t gSuccessorTable_plm_grammar_214 [3] = {96, 357, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_218 [19] = {0, 219,
   1, 220,
-  7, 221,
+  6, 221,
   18, 222,
   42, 223,
   46, 360,
@@ -17027,7 +18137,7 @@ static const int16_t gSuccessorTable_plm_grammar_218 [19] = {0, 219,
 
 static const int16_t gSuccessorTable_plm_grammar_219 [19] = {0, 219,
   1, 220,
-  7, 221,
+  6, 221,
   18, 222,
   42, 223,
   46, 361,
@@ -17037,7 +18147,7 @@ static const int16_t gSuccessorTable_plm_grammar_219 [19] = {0, 219,
 
 static const int16_t gSuccessorTable_plm_grammar_220 [19] = {0, 219,
   1, 220,
-  7, 221,
+  6, 221,
   18, 222,
   42, 223,
   46, 362,
@@ -17047,7 +18157,7 @@ static const int16_t gSuccessorTable_plm_grammar_220 [19] = {0, 219,
 
 static const int16_t gSuccessorTable_plm_grammar_221 [19] = {0, 219,
   1, 220,
-  7, 221,
+  6, 221,
   18, 222,
   42, 223,
   46, 363,
@@ -17057,7 +18167,7 @@ static const int16_t gSuccessorTable_plm_grammar_221 [19] = {0, 219,
 
 static const int16_t gSuccessorTable_plm_grammar_222 [19] = {0, 219,
   1, 220,
-  7, 221,
+  6, 221,
   18, 222,
   42, 223,
   46, 364,
@@ -17073,7 +18183,7 @@ static const int16_t gSuccessorTable_plm_grammar_246 [3] = {62, 375, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_248 [3] = {64, 378, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_249 [5] = {11, 249,
+static const int16_t gSuccessorTable_plm_grammar_249 [5] = {10, 249,
   63, 379, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_252 [3] = {67, 383, -1} ;
@@ -17195,13 +18305,13 @@ static const int16_t gSuccessorTable_plm_grammar_294 [29] = {19, 412,
 
 static const int16_t gSuccessorTable_plm_grammar_296 [3] = {79, 413, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_297 [3] = {17, 414, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_297 [3] = {16, 414, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_300 [3] = {125, 416, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_301 [3] = {74, 417, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_302 [3] = {17, 418, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_302 [3] = {16, 418, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_305 [3] = {80, 423, -1} ;
 
@@ -17402,12 +18512,12 @@ static const int16_t gSuccessorTable_plm_grammar_373 [29] = {19, 476,
   98, 215,
   101, 216, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_377 [5] = {15, 477,
+static const int16_t gSuccessorTable_plm_grammar_377 [5] = {14, 477,
   78, 100, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_381 [3] = {17, 478, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_381 [3] = {16, 478, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_382 [33] = {12, 479,
+static const int16_t gSuccessorTable_plm_grammar_382 [33] = {11, 479,
   19, 253,
   20, 204,
   21, 205,
@@ -17590,11 +18700,11 @@ static const int16_t gSuccessorTable_plm_grammar_474 [29] = {19, 555,
   98, 215,
   101, 216, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_477 [3] = {17, 556, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_477 [3] = {16, 556, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_479 [3] = {67, 557, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_480 [33] = {12, 558,
+static const int16_t gSuccessorTable_plm_grammar_480 [33] = {11, 558,
   19, 253,
   20, 204,
   21, 205,
@@ -17611,7 +18721,7 @@ static const int16_t gSuccessorTable_plm_grammar_480 [33] = {12, 558,
   98, 215,
   101, 216, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_482 [11] = {13, 563,
+static const int16_t gSuccessorTable_plm_grammar_482 [11] = {12, 563,
   36, 564,
   69, 565,
   112, 400,
@@ -17856,7 +18966,7 @@ static const int16_t gSuccessorTable_plm_grammar_613 [3] = {66, 649, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_614 [3] = {70, 651, -1} ;
 
-static const int16_t gSuccessorTable_plm_grammar_615 [3] = {17, 652, -1} ;
+static const int16_t gSuccessorTable_plm_grammar_615 [3] = {16, 652, -1} ;
 
 static const int16_t gSuccessorTable_plm_grammar_618 [15] = {32, 654,
   33, 167,
@@ -18053,8 +19163,8 @@ gSuccessorTable_plm_grammar_0, NULL, NULL, NULL,
   NULL, NULL, NULL, NULL, 
   NULL, gSuccessorTable_plm_grammar_17, gSuccessorTable_plm_grammar_18, gSuccessorTable_plm_grammar_19, 
   NULL, NULL, gSuccessorTable_plm_grammar_22, gSuccessorTable_plm_grammar_23, 
-  gSuccessorTable_plm_grammar_24, gSuccessorTable_plm_grammar_25, NULL, gSuccessorTable_plm_grammar_27, 
-  NULL, NULL, NULL, NULL, 
+  gSuccessorTable_plm_grammar_24, NULL, gSuccessorTable_plm_grammar_26, NULL, 
+  gSuccessorTable_plm_grammar_28, NULL, NULL, NULL, 
   gSuccessorTable_plm_grammar_32, NULL, NULL, NULL, 
   NULL, gSuccessorTable_plm_grammar_37, gSuccessorTable_plm_grammar_38, NULL, 
   gSuccessorTable_plm_grammar_40, gSuccessorTable_plm_grammar_41, gSuccessorTable_plm_grammar_42, NULL, 
@@ -18234,45 +19344,45 @@ gSuccessorTable_plm_grammar_0, NULL, NULL, NULL,
 //---------------------------------------------------------------------------------------------------------------------*
 
 static const int16_t gProductionsTable_plm_grammar [333 * 2] = {
-  3, 2,
-  4, 1,
+  2, 2,
+  3, 1,
+  4, 4,
   5, 4,
+  4, 7,
   6, 4,
-  5, 7,
-  7, 4,
+  4, 6,
+  5, 1,
+  4, 5,
+  7, 6,
   5, 6,
-  6, 1,
-  5, 5,
-  8, 6,
-  6, 6,
-  5, 5,
+  4, 5,
+  8, 3,
+  4, 5,
+  4, 5,
   9, 3,
-  5, 5,
-  5, 5,
+  4, 5,
+  4, 5,
+  4, 6,
   10, 3,
-  5, 5,
-  5, 5,
-  5, 6,
-  11, 3,
-  5, 8,
+  4, 8,
+  11, 1,
+  4, 9,
   12, 1,
-  5, 9,
-  13, 1,
-  5, 6,
-  5, 6,
+  4, 6,
+  4, 6,
   1, 10,
-  5, 5,
-  5, 1,
-  14, 5,
+  4, 5,
+  4, 1,
+  13, 5,
   0, 6,
-  15, 1,
-  16, 5,
-  17, 3,
-  5, 2,
-  5, 5,
-  2, 6,
+  14, 1,
+  15, 5,
+  16, 3,
+  4, 2,
+  4, 5,
+  17, 6,
   18, 9,
-  5, 1,
+  4, 1,
   19, 2,
   20, 2,
   21, 2,
@@ -18328,8 +19438,8 @@ static const int16_t gProductionsTable_plm_grammar [333 * 2] = {
   33, 10,
   38, 2,
   39, 4,
-  5, 2,
-  5, 4,
+  4, 2,
+  4, 4,
   40, 0,
   40, 2,
   40, 2,
@@ -18619,36 +19729,6 @@ void cGrammar_plm_5F_grammar::nt_system_5F_routine_ (GALGAS_systemRoutineDeclara
   switch (inLexique->nextProductionIndex ()) {
   case 26 :
       rule_plm_5F_syntax_system_5F_routine_i26_(parameter_1, inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                      
-//                                         'isr' non terminal implementation                                            
-//                                                                                                                      
-//---------------------------------------------------------------------------------------------------------------------*
-
-void cGrammar_plm_5F_grammar::nt_isr_parse (C_Lexique_plm_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 36 :
-      rule_plm_5F_syntax_isr_i36_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
-
-void cGrammar_plm_5F_grammar::nt_isr_ (GALGAS_isrDeclarationListAST &  parameter_1,
-                                const GALGAS_lstring  parameter_2,
-                                const GALGAS_string  parameter_3,
-                                C_Lexique_plm_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 36 :
-      rule_plm_5F_syntax_isr_i36_(parameter_1, parameter_2, parameter_3, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -19308,6 +20388,35 @@ void cGrammar_plm_5F_grammar::nt_procedure_5F_formal_5F_arguments_ (GALGAS_routi
   switch (inLexique->nextProductionIndex ()) {
   case 33 :
       rule_plm_5F_syntax_procedure_5F_formal_5F_arguments_i33_(parameter_1, inLexique) ;
+    break ;
+  default :
+    inLexique->internalBottomUpParserError (HERE) ;
+  }
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                      
+//                                         'isr' non terminal implementation                                            
+//                                                                                                                      
+//---------------------------------------------------------------------------------------------------------------------*
+
+void cGrammar_plm_5F_grammar::nt_isr_parse (C_Lexique_plm_5F_lexique * inLexique) {
+  switch (inLexique->nextProductionIndex ()) {
+  case 36 :
+      rule_plm_5F_syntax_isr_i36_parse(inLexique) ;
+    break ;
+  default :
+    inLexique->internalBottomUpParserError (HERE) ;
+    break ;
+  }
+}
+
+void cGrammar_plm_5F_grammar::nt_isr_ (GALGAS_isrDeclarationListAST &  parameter_1,
+                                const GALGAS_lstring  parameter_2,
+                                C_Lexique_plm_5F_lexique * inLexique) {
+  switch (inLexique->nextProductionIndex ()) {
+  case 36 :
+      rule_plm_5F_syntax_isr_i36_(parameter_1, parameter_2, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;

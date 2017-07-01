@@ -5,7 +5,7 @@
 class @structureDeclaration : @abstractDeclaration {
   @lstring mStructureName
   @lstringlist mAttributeListAST
-  @structurePropertyListAST mStructureFieldListAST
+  @structurePropertyListAST mStructurePropertyListAST
   @functionDeclarationListAST mFunctionDeclarationListAST
   @systemRoutineDeclarationListAST mSystemRoutineListAST
   @guardDeclarationListAST mGuardListAST
@@ -27,9 +27,9 @@ enum @structurePropertyInitOptionalExpressionAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @structurePropertyListAST {
-  @lstring mFieldName
+  @lstring mPropertyName
   @bool mIsPublic
-  @lstring mFieldTypeName
+  @lstring mPropertyTypeName
   @structurePropertyInitOptionalExpressionAST mInitialisation
 }
 
@@ -126,7 +126,7 @@ override method @structureDeclaration addExtension
       newDeclaration = .new {
         ![newDeclaration mStructureName]
         ![newDeclaration mAttributeListAST]
-        ![newDeclaration mStructureFieldListAST] + properties
+        ![newDeclaration mStructurePropertyListAST] + properties
         ![newDeclaration mFunctionDeclarationListAST] + functions
         ![newDeclaration mSystemRoutineListAST] + svcs
         ![newDeclaration mGuardListAST] + guards      
@@ -147,7 +147,7 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
 #--- Add structure type name as node
   [!?ioGraph addNode !structureTypeName !self]
 #--- add field types
-  for (* * fieldTypeName initExpression) in mStructureFieldListAST do
+  for (* * fieldTypeName initExpression) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       let typeName = llvmRegularTypeMangledNameFromName (!fieldTypeName)
       [!?ioGraph addEdge !structureTypeName !typeName]
@@ -227,11 +227,11 @@ override method @structureDeclaration enterInContext
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   var canBeCopied = true
-  for () in mStructureFieldListAST do (propertyIndex)
+  for () in mStructurePropertyListAST do (propertyIndex)
   #--- Field type
-    let @unifiedTypeMap-proxy optionalPropertyType = if mFieldTypeName.string == ""
+    let @unifiedTypeMap-proxy optionalPropertyType = if mPropertyTypeName.string == ""
       then .null
-      else .searchKey {!ioContext.mTypeMap !mFieldTypeName}
+      else .searchKey {!ioContext.mTypeMap !mPropertyTypeName}
     end
   #--- Init expression
     @instructionListIR initInstructionGenerationList = {}
@@ -254,7 +254,7 @@ override method @structureDeclaration enterInContext
         ?result:let @objectIR expressionIR
       ]
       if (([initInstructionGenerationList length] + [allocaList length]) > 0) || not [expressionIR isStatic] then
-        error mFieldName : "initialization expression cannot be computed statically"
+        error mPropertyName : "initialization expression cannot be computed statically"
       end
       @unifiedTypeMap-proxy actualPropertyType
       if optionalPropertyType != .null then
@@ -263,39 +263,39 @@ override method @structureDeclaration enterInContext
         actualPropertyType = [expressionIR type]
       end
       if not [[actualPropertyType kind] instanciable] then
-        error mFieldName : "$" + [actualPropertyType key] + " type is not instanciable"
+        error mPropertyName : "$" + [actualPropertyType key] + " type is not instanciable"
       end
       if not [actualPropertyType copyable] then
         canBeCopied = false
       end
-      propertyList += !mFieldName.string !actualPropertyType
+      propertyList += !mPropertyName.string !actualPropertyType
       [!?propertyMap insertKey
-        !mFieldName
+        !mPropertyName
         !mIsPublic
-        !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
+        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
       ]
       [!?universalPropertyAndRoutineMapForContext insertProperty
-        !mFieldName
+        !mPropertyName
         !public:mIsPublic
-        !.property {!type:actualPropertyType !plmName:mFieldName !index:propertyIndex}
+        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
       ]
       sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
     case noExpression :
       if not [[optionalPropertyType kind] instanciable] then
-        error mFieldName : "$" + [optionalPropertyType key] + " type is not instanciable"
+        error mPropertyName : "$" + [optionalPropertyType key] + " type is not instanciable"
       end
-      propertyList += !mFieldName.string !optionalPropertyType
+      propertyList += !mPropertyName.string !optionalPropertyType
       [!?propertyMap insertKey
-        !mFieldName
+        !mPropertyName
         !mIsPublic
-        !.property {!type:optionalPropertyType !plmName:mFieldName !index:propertyIndex}
+        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
       ]
       [!?universalPropertyAndRoutineMapForContext insertProperty
-        !mFieldName
+        !mPropertyName
         !public:mIsPublic
-        !.property {!type:optionalPropertyType !plmName:mFieldName !index:propertyIndex}
+        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
       ]
-      constructorSignature += !mFieldName.string !optionalPropertyType !propertyIndex
+      constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
     end
   end
 #--- Enter in constructor map
@@ -456,6 +456,8 @@ override method @structureDeclaration semanticAnalysis
     !?temporary:ioTemporaries
     !?intermediateCode:ioIntermediateCodeStruct
   ]
+#--- Generate property access
+  generatePropertyAccess (!structureType:structureType !?intermediateCode:ioIntermediateCodeStruct)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -515,6 +517,48 @@ method @structureDeclaration functionSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  GENERATE PROPERTY ACCESS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+list @propertyAccessRoutineList {
+  @unifiedTypeMap-proxy mStructureType
+  @unifiedTypeMap-proxy mPropertyType
+  @string mPropertyName
+  @uint mPropertyIndex
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+proc generatePropertyAccess
+  ?structureType:let @unifiedTypeMap-proxy inStructureType
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  [[inStructureType kind] structure ?1* ?propertyMap:let @propertyMap propertyMap ?1* ?propertyList:@propertyList propertyList ?1*]
+  for (propertyName * objectIR) in propertyMap do
+ #   [propertyMap searchKey !propertyName ?* ?let @objectIR objectIR]
+    [objectIR property ?type:let propertyType ?plmName:* ?index:@uint index]
+    ioIntermediateCodeStruct.mPropertyAccessRoutineList += 
+      !inStructureType
+      !propertyType
+      !propertyName.string
+      !index
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
+  for (structureType propertyType propertyName propertyIndex) in self do
+    let structTypeName = [[structureType kind] llvmTypeName]
+    let propTypeName = [[propertyType kind] llvmTypeName]
+    ioLLVMcode += llvmTitleComment (!"Access property '" + propertyName + "' of structure " + structTypeName)
+    ioLLVMcode += "define internal " + propTypeName
+    ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
+    ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"
+    ioLLVMcode += "  %result = getelementptr inbounds " + structTypeName + ", " + structTypeName + " * %self, "
+    ioLLVMcode += "i32 0, i32 " + propertyIndex + " ; " + propertyName + ", index " + propertyIndex + "\n"
+    ioLLVMcode += "  ret " + propTypeName + " * %result\n"
+    ioLLVMcode += "}\n\n"
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

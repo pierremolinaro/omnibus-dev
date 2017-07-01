@@ -213,7 +213,7 @@ proc buildSemanticContext
   for panicRoutine in inAST.mPanicClauseListAST do
     [panicRoutine enterInContext !?context:outSemanticContext]
   end
-#--- Enter procedures, functions, sections, services, guards in context
+#--- Enter standalone procedures, functions, sections, services, guards in context
   [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
   [inAST.mProcedureListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
   [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]

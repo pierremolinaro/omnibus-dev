@@ -107,6 +107,7 @@ project (1:0:0) -> "plm" {
   "galgas-sources/ordered-declaration-list.galgas"
   "galgas-sources/context.galgas"
   "galgas-sources/types.galgas"
+  "galgas-sources/entity-resolution.galgas"
   "galgas-sources/semantic-analysis.galgas"
   "galgas-sources/semantic-routines.galgas"
 
@@ -136,6 +137,7 @@ project (1:0:0) -> "plm" {
 
   "galgas-sources/intermediate-get-property-reference.galgas"
   "galgas-sources/intermediate-get-element-ptr-from-self.galgas"
+  "galgas-sources/intermediate-get-array-element-reference.galgas"
   "galgas-sources/intermediate-select-instruction.galgas"
 
   "galgas-sources/intermediate-test-array-index.galgas"

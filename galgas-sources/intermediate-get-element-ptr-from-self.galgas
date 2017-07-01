@@ -29,9 +29,13 @@ override method @getPropertyReferenceFromSelfIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let llvmType = [[mSelfType kind] llvmTypeName]
-  ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + " * %self, i32 0, i32 " + mPropertyIndex
-  ioLLVMcode += " ; " + mPropertyName + "\n"
+  ioLLVMcode += "  " + [mTarget llvmName]
+  ioLLVMcode += " = call " + [mTarget llvmTypeName] + "* @\"" + llvmType + ".access." + mPropertyName
+  ioLLVMcode += "\" (" + llvmType + " * %self) ; " + mPropertyName + "\n"
+
+#  ioLLVMcode += ";  " + [mTarget llvmName] + " = getelementptr inbounds "
+#  ioLLVMcode += llvmType + ", " + llvmType + " * %self, i32 0, i32 " + mPropertyIndex
+#  ioLLVMcode += " ; " + mPropertyName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
