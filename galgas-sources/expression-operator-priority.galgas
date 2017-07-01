@@ -459,3 +459,5 @@ method @expressionAST analyzeStaticExpression
     error inErrorLocation : "this expression should be a static expression" : outResult
   end
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

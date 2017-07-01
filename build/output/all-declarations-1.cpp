@@ -1249,7 +1249,7 @@ class cCollectionElement_structurePropertyListAST : public cCollectionElement {
   public : cCollectionElement_structurePropertyListAST (const GALGAS_lstring & in_mFieldName,
                                                         const GALGAS_bool & in_mIsPublic,
                                                         const GALGAS_lstring & in_mFieldTypeName,
-                                                        const GALGAS_structureVarInit & in_mInitialisation
+                                                        const GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation
                                                         COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -1270,7 +1270,7 @@ class cCollectionElement_structurePropertyListAST : public cCollectionElement {
 cCollectionElement_structurePropertyListAST::cCollectionElement_structurePropertyListAST (const GALGAS_lstring & in_mFieldName,
                                                                                           const GALGAS_bool & in_mIsPublic,
                                                                                           const GALGAS_lstring & in_mFieldTypeName,
-                                                                                          const GALGAS_structureVarInit & in_mInitialisation
+                                                                                          const GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation
                                                                                           COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mFieldName, in_mIsPublic, in_mFieldTypeName, in_mInitialisation) {
@@ -1342,7 +1342,7 @@ GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::constructor_emp
 GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                             const GALGAS_bool & inOperand1,
                                                                                             const GALGAS_lstring & inOperand2,
-                                                                                            const GALGAS_structureVarInit & inOperand3
+                                                                                            const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand3
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_structurePropertyListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
@@ -1360,7 +1360,7 @@ void GALGAS_structurePropertyListAST::makeAttributesFromObjects (capCollectionEl
                                                                  const GALGAS_lstring & in_mFieldName,
                                                                  const GALGAS_bool & in_mIsPublic,
                                                                  const GALGAS_lstring & in_mFieldTypeName,
-                                                                 const GALGAS_structureVarInit & in_mInitialisation
+                                                                 const GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation
                                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement_structurePropertyListAST * p = NULL ;
   macroMyNew (p, cCollectionElement_structurePropertyListAST (in_mFieldName,
@@ -1376,7 +1376,7 @@ void GALGAS_structurePropertyListAST::makeAttributesFromObjects (capCollectionEl
 void GALGAS_structurePropertyListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                            const GALGAS_bool & inOperand1,
                                                            const GALGAS_lstring & inOperand2,
-                                                           const GALGAS_structureVarInit & inOperand3
+                                                           const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand3
                                                            COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
     cCollectionElement * p = NULL ;
@@ -1393,7 +1393,7 @@ void GALGAS_structurePropertyListAST::addAssign_operation (const GALGAS_lstring 
 void GALGAS_structurePropertyListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                             const GALGAS_bool inOperand1,
                                                             const GALGAS_lstring inOperand2,
-                                                            const GALGAS_structureVarInit inOperand3,
+                                                            const GALGAS_structurePropertyInitOptionalExpressionAST inOperand3,
                                                             const GALGAS_uint inInsertionIndex,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
@@ -1412,7 +1412,7 @@ void GALGAS_structurePropertyListAST::setter_insertAtIndex (const GALGAS_lstring
 void GALGAS_structurePropertyListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                             GALGAS_bool & outOperand1,
                                                             GALGAS_lstring & outOperand2,
-                                                            GALGAS_structureVarInit & outOperand3,
+                                                            GALGAS_structurePropertyInitOptionalExpressionAST & outOperand3,
                                                             const GALGAS_uint inRemoveIndex,
                                                             C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) {
@@ -1440,7 +1440,7 @@ void GALGAS_structurePropertyListAST::setter_removeAtIndex (GALGAS_lstring & out
 void GALGAS_structurePropertyListAST::setter_popFirst (GALGAS_lstring & outOperand0,
                                                        GALGAS_bool & outOperand1,
                                                        GALGAS_lstring & outOperand2,
-                                                       GALGAS_structureVarInit & outOperand3,
+                                                       GALGAS_structurePropertyInitOptionalExpressionAST & outOperand3,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -1465,7 +1465,7 @@ void GALGAS_structurePropertyListAST::setter_popFirst (GALGAS_lstring & outOpera
 void GALGAS_structurePropertyListAST::setter_popLast (GALGAS_lstring & outOperand0,
                                                       GALGAS_bool & outOperand1,
                                                       GALGAS_lstring & outOperand2,
-                                                      GALGAS_structureVarInit & outOperand3,
+                                                      GALGAS_structurePropertyInitOptionalExpressionAST & outOperand3,
                                                       C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -1490,7 +1490,7 @@ void GALGAS_structurePropertyListAST::setter_popLast (GALGAS_lstring & outOperan
 void GALGAS_structurePropertyListAST::method_first (GALGAS_lstring & outOperand0,
                                                     GALGAS_bool & outOperand1,
                                                     GALGAS_lstring & outOperand2,
-                                                    GALGAS_structureVarInit & outOperand3,
+                                                    GALGAS_structurePropertyInitOptionalExpressionAST & outOperand3,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -1515,7 +1515,7 @@ void GALGAS_structurePropertyListAST::method_first (GALGAS_lstring & outOperand0
 void GALGAS_structurePropertyListAST::method_last (GALGAS_lstring & outOperand0,
                                                    GALGAS_bool & outOperand1,
                                                    GALGAS_lstring & outOperand2,
-                                                   GALGAS_structureVarInit & outOperand3,
+                                                   GALGAS_structurePropertyInitOptionalExpressionAST & outOperand3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -1633,12 +1633,12 @@ GALGAS_lstring GALGAS_structurePropertyListAST::getter_mFieldTypeNameAtIndex (co
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit GALGAS_structurePropertyListAST::getter_mInitialisationAtIndex (const GALGAS_uint & inIndex,
-                                                                                        C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) const {
+GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_structurePropertyListAST::getter_mInitialisationAtIndex (const GALGAS_uint & inIndex,
+                                                                                                                  C_Compiler * inCompiler
+                                                                                                                  COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
-  GALGAS_structureVarInit result ;
+  GALGAS_structurePropertyInitOptionalExpressionAST result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     result = p->mObject.mProperty_mInitialisation ;
@@ -1691,7 +1691,7 @@ GALGAS_lstring cEnumerator_structurePropertyListAST::current_mFieldTypeName (LOC
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit cEnumerator_structurePropertyListAST::current_mInitialisation (LOCATION_ARGS) const {
+GALGAS_structurePropertyInitOptionalExpressionAST cEnumerator_structurePropertyListAST::current_mInitialisation (LOCATION_ARGS) const {
   const cCollectionElement_structurePropertyListAST * p = (const cCollectionElement_structurePropertyListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
   return p->mObject.mProperty_mInitialisation ;
@@ -1745,16 +1745,16 @@ GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::extractObject (
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cEnumAssociatedValues_structureVarInit_expression::cEnumAssociatedValues_structureVarInit_expression (const GALGAS_expressionAST & inAssociatedValue0
-                                                                                                      COMMA_LOCATION_ARGS) :
+cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression::cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression (const GALGAS_expressionAST & inAssociatedValue0
+                                                                                                                                                          COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
 } ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cEnumAssociatedValues_structureVarInit_expression::description (C_String & ioString,
-                                                                     const int32_t inIndentation) const {
+void cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression::description (C_String & ioString,
+                                                                                               const int32_t inIndentation) const {
   ioString << "(\n" ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   ioString << ")" ;
@@ -1762,8 +1762,8 @@ void cEnumAssociatedValues_structureVarInit_expression::description (C_String & 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult cEnumAssociatedValues_structureVarInit_expression::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_structureVarInit_expression * ptr = dynamic_cast<const cEnumAssociatedValues_structureVarInit_expression *> (inOperand) ;
+typeComparisonResult cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression::compare (const cEnumAssociatedValues * inOperand) const {
+  const cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression * ptr = dynamic_cast<const cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression *> (inOperand) ;
   macroValidPointer (ptr) ;
   typeComparisonResult result = kOperandEqual ;
   if (result == kOperandEqual) {
@@ -1774,20 +1774,20 @@ typeComparisonResult cEnumAssociatedValues_structureVarInit_expression::compare 
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit::GALGAS_structureVarInit (void) :
+GALGAS_structurePropertyInitOptionalExpressionAST::GALGAS_structurePropertyInitOptionalExpressionAST (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit GALGAS_structureVarInit::constructor_expression (const GALGAS_expressionAST & inAssociatedValue0
-                                                                         COMMA_LOCATION_ARGS) {
-  GALGAS_structureVarInit result ;
+GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_structurePropertyInitOptionalExpressionAST::constructor_expression (const GALGAS_expressionAST & inAssociatedValue0
+                                                                                                                             COMMA_LOCATION_ARGS) {
+  GALGAS_structurePropertyInitOptionalExpressionAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_expression ;
     cEnumAssociatedValues * ptr = NULL ;
-    macroMyNew (ptr, cEnumAssociatedValues_structureVarInit_expression (inAssociatedValue0 COMMA_THERE)) ;
+    macroMyNew (ptr, cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
   }
@@ -1796,31 +1796,31 @@ GALGAS_structureVarInit GALGAS_structureVarInit::constructor_expression (const G
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit GALGAS_structureVarInit::constructor_noExpression (UNUSED_LOCATION_ARGS) {
-  GALGAS_structureVarInit result ;
+GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_structurePropertyInitOptionalExpressionAST::constructor_noExpression (UNUSED_LOCATION_ARGS) {
+  GALGAS_structurePropertyInitOptionalExpressionAST result ;
   result.mEnum = kEnum_noExpression ;
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureVarInit::method_expression (GALGAS_expressionAST & outAssociatedValue0,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
+void GALGAS_structurePropertyInitOptionalExpressionAST::method_expression (GALGAS_expressionAST & outAssociatedValue0,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_expression) {
     outAssociatedValue0.drop () ;
     C_String s ;
-    s << "method @structureVarInit expression invoked with an invalid enum value" ;
+    s << "method @structurePropertyInitOptionalExpressionAST expression invoked with an invalid enum value" ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
-    const cEnumAssociatedValues_structureVarInit_expression * ptr = (const cEnumAssociatedValues_structureVarInit_expression *) unsafePointer () ;
+    const cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression * ptr = (const cEnumAssociatedValues_structurePropertyInitOptionalExpressionAST_expression *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const char * gEnumNameArrayFor_structureVarInit [3] = {
+static const char * gEnumNameArrayFor_structurePropertyInitOptionalExpressionAST [3] = {
   "(not built)",
   "expression",
   "noExpression"
@@ -1828,28 +1828,28 @@ static const char * gEnumNameArrayFor_structureVarInit [3] = {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_structureVarInit::getter_isExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_structurePropertyInitOptionalExpressionAST::getter_isExpression (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_expression == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_bool GALGAS_structureVarInit::getter_isNoExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_bool GALGAS_structurePropertyInitOptionalExpressionAST::getter_isNoExpression (UNUSED_LOCATION_ARGS) const {
   return GALGAS_bool (kNotBuilt != mEnum, kEnum_noExpression == mEnum) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_structureVarInit::description (C_String & ioString,
-                                           const int32_t inIndentation) const {
-  ioString << "<enum @structureVarInit: " << gEnumNameArrayFor_structureVarInit [mEnum] ;
+void GALGAS_structurePropertyInitOptionalExpressionAST::description (C_String & ioString,
+                                                                     const int32_t inIndentation) const {
+  ioString << "<enum @structurePropertyInitOptionalExpressionAST: " << gEnumNameArrayFor_structurePropertyInitOptionalExpressionAST [mEnum] ;
   mAssociatedValues.description (ioString, inIndentation) ;
   ioString << ">" ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-typeComparisonResult GALGAS_structureVarInit::objectCompare (const GALGAS_structureVarInit & inOperand) const {
+typeComparisonResult GALGAS_structurePropertyInitOptionalExpressionAST::objectCompare (const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
     if (mEnum < inOperand.mEnum) {
@@ -1865,42 +1865,42 @@ typeComparisonResult GALGAS_structureVarInit::objectCompare (const GALGAS_struct
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                               @structureVarInit type                                                *
+//                                  @structurePropertyInitOptionalExpressionAST type                                   *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_structureVarInit ("structureVarInit",
-                                         NULL) ;
+kTypeDescriptor_GALGAS_structurePropertyInitOptionalExpressionAST ("structurePropertyInitOptionalExpressionAST",
+                                                                   NULL) ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-const C_galgas_type_descriptor * GALGAS_structureVarInit::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_structureVarInit ;
+const C_galgas_type_descriptor * GALGAS_structurePropertyInitOptionalExpressionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_structurePropertyInitOptionalExpressionAST ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-AC_GALGAS_root * GALGAS_structureVarInit::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_structurePropertyInitOptionalExpressionAST::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_structureVarInit (*this)) ;
+    macroMyNew (result, GALGAS_structurePropertyInitOptionalExpressionAST (*this)) ;
   }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit GALGAS_structureVarInit::extractObject (const GALGAS_object & inObject,
-                                                                C_Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GALGAS_structureVarInit result ;
-  const GALGAS_structureVarInit * p = (const GALGAS_structureVarInit *) inObject.embeddedObject () ;
+GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_structurePropertyInitOptionalExpressionAST::extractObject (const GALGAS_object & inObject,
+                                                                                                                    C_Compiler * inCompiler
+                                                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_structurePropertyInitOptionalExpressionAST result ;
+  const GALGAS_structurePropertyInitOptionalExpressionAST * p = (const GALGAS_structurePropertyInitOptionalExpressionAST *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_structureVarInit *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_structurePropertyInitOptionalExpressionAST *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("structureVarInit", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("structurePropertyInitOptionalExpressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -7483,7 +7483,7 @@ class cCollectionElement_modulePropertyListAST : public cCollectionElement {
 //--- Constructor
   public : cCollectionElement_modulePropertyListAST (const GALGAS_lstring & in_mPropertyName,
                                                      const GALGAS_lstring & in_mTypeName,
-                                                     const GALGAS_structureVarInit & in_mOptionalExpression
+                                                     const GALGAS_structurePropertyInitOptionalExpressionAST & in_mOptionalExpression
                                                      COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -7503,7 +7503,7 @@ class cCollectionElement_modulePropertyListAST : public cCollectionElement {
 
 cCollectionElement_modulePropertyListAST::cCollectionElement_modulePropertyListAST (const GALGAS_lstring & in_mPropertyName,
                                                                                     const GALGAS_lstring & in_mTypeName,
-                                                                                    const GALGAS_structureVarInit & in_mOptionalExpression
+                                                                                    const GALGAS_structurePropertyInitOptionalExpressionAST & in_mOptionalExpression
                                                                                     COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (in_mPropertyName, in_mTypeName, in_mOptionalExpression) {
@@ -7570,7 +7570,7 @@ GALGAS_modulePropertyListAST GALGAS_modulePropertyListAST::constructor_emptyList
 
 GALGAS_modulePropertyListAST GALGAS_modulePropertyListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                                       const GALGAS_lstring & inOperand1,
-                                                                                      const GALGAS_structureVarInit & inOperand2
+                                                                                      const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand2
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_modulePropertyListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
@@ -7587,7 +7587,7 @@ GALGAS_modulePropertyListAST GALGAS_modulePropertyListAST::constructor_listWithV
 void GALGAS_modulePropertyListAST::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                               const GALGAS_lstring & in_mPropertyName,
                                                               const GALGAS_lstring & in_mTypeName,
-                                                              const GALGAS_structureVarInit & in_mOptionalExpression
+                                                              const GALGAS_structurePropertyInitOptionalExpressionAST & in_mOptionalExpression
                                                               COMMA_LOCATION_ARGS) {
   cCollectionElement_modulePropertyListAST * p = NULL ;
   macroMyNew (p, cCollectionElement_modulePropertyListAST (in_mPropertyName,
@@ -7601,7 +7601,7 @@ void GALGAS_modulePropertyListAST::makeAttributesFromObjects (capCollectionEleme
 
 void GALGAS_modulePropertyListAST::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                         const GALGAS_lstring & inOperand1,
-                                                        const GALGAS_structureVarInit & inOperand2
+                                                        const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand2
                                                         COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
@@ -7617,7 +7617,7 @@ void GALGAS_modulePropertyListAST::addAssign_operation (const GALGAS_lstring & i
 
 void GALGAS_modulePropertyListAST::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                          const GALGAS_lstring inOperand1,
-                                                         const GALGAS_structureVarInit inOperand2,
+                                                         const GALGAS_structurePropertyInitOptionalExpressionAST inOperand2,
                                                          const GALGAS_uint inInsertionIndex,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
@@ -7635,7 +7635,7 @@ void GALGAS_modulePropertyListAST::setter_insertAtIndex (const GALGAS_lstring in
 
 void GALGAS_modulePropertyListAST::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                          GALGAS_lstring & outOperand1,
-                                                         GALGAS_structureVarInit & outOperand2,
+                                                         GALGAS_structurePropertyInitOptionalExpressionAST & outOperand2,
                                                          const GALGAS_uint inRemoveIndex,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
@@ -7660,7 +7660,7 @@ void GALGAS_modulePropertyListAST::setter_removeAtIndex (GALGAS_lstring & outOpe
 
 void GALGAS_modulePropertyListAST::setter_popFirst (GALGAS_lstring & outOperand0,
                                                     GALGAS_lstring & outOperand1,
-                                                    GALGAS_structureVarInit & outOperand2,
+                                                    GALGAS_structurePropertyInitOptionalExpressionAST & outOperand2,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -7682,7 +7682,7 @@ void GALGAS_modulePropertyListAST::setter_popFirst (GALGAS_lstring & outOperand0
 
 void GALGAS_modulePropertyListAST::setter_popLast (GALGAS_lstring & outOperand0,
                                                    GALGAS_lstring & outOperand1,
-                                                   GALGAS_structureVarInit & outOperand2,
+                                                   GALGAS_structurePropertyInitOptionalExpressionAST & outOperand2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -7704,7 +7704,7 @@ void GALGAS_modulePropertyListAST::setter_popLast (GALGAS_lstring & outOperand0,
 
 void GALGAS_modulePropertyListAST::method_first (GALGAS_lstring & outOperand0,
                                                  GALGAS_lstring & outOperand1,
-                                                 GALGAS_structureVarInit & outOperand2,
+                                                 GALGAS_structurePropertyInitOptionalExpressionAST & outOperand2,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -7726,7 +7726,7 @@ void GALGAS_modulePropertyListAST::method_first (GALGAS_lstring & outOperand0,
 
 void GALGAS_modulePropertyListAST::method_last (GALGAS_lstring & outOperand0,
                                                 GALGAS_lstring & outOperand1,
-                                                GALGAS_structureVarInit & outOperand2,
+                                                GALGAS_structurePropertyInitOptionalExpressionAST & outOperand2,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -7827,12 +7827,12 @@ GALGAS_lstring GALGAS_modulePropertyListAST::getter_mTypeNameAtIndex (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit GALGAS_modulePropertyListAST::getter_mOptionalExpressionAtIndex (const GALGAS_uint & inIndex,
-                                                                                         C_Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) const {
+GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_modulePropertyListAST::getter_mOptionalExpressionAtIndex (const GALGAS_uint & inIndex,
+                                                                                                                   C_Compiler * inCompiler
+                                                                                                                   COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_modulePropertyListAST * p = (cCollectionElement_modulePropertyListAST *) attributes.ptr () ;
-  GALGAS_structureVarInit result ;
+  GALGAS_structurePropertyInitOptionalExpressionAST result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_modulePropertyListAST) ;
     result = p->mObject.mProperty_mOptionalExpression ;
@@ -7877,7 +7877,7 @@ GALGAS_lstring cEnumerator_modulePropertyListAST::current_mTypeName (LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit cEnumerator_modulePropertyListAST::current_mOptionalExpression (LOCATION_ARGS) const {
+GALGAS_structurePropertyInitOptionalExpressionAST cEnumerator_modulePropertyListAST::current_mOptionalExpression (LOCATION_ARGS) const {
   const cCollectionElement_modulePropertyListAST * p = (const cCollectionElement_modulePropertyListAST *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_modulePropertyListAST) ;
   return p->mObject.mProperty_mOptionalExpression ;

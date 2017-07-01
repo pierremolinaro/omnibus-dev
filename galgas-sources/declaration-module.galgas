@@ -5,7 +5,7 @@
 list @modulePropertyListAST {
   @lstring mPropertyName
   @lstring mTypeName # Empty string if no type annotation
-  @structureVarInit mOptionalExpression
+  @structurePropertyInitOptionalExpressionAST mOptionalExpression
 }
 
 #·······················································································································

@@ -17,6 +17,13 @@ list @declarationListAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+list @checkTargetListAST {
+  @location mTargetConstructLocation
+  @lstringlist mAcceptedTargetList
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 struct @ast {
   @globalVarDeclarationList mGlobalVarDeclarationListAST
   @declarationListAST mDeclarationListAST
@@ -33,7 +40,7 @@ struct @ast {
   @initList mInitListAST
   @panicClauseListAST mPanicClauseListAST
   @taskList mTaskListAST
-  @lstringlist mCheckTargetListAST
+  @checkTargetListAST mCheckTargetListAST
   @moduleDeclarationListAST mModuleDeclarationListAST
   @moduleInstanciationListAST mRequiredModuleListAST
 }

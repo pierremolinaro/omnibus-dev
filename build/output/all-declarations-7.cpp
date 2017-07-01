@@ -2459,7 +2459,7 @@ GALGAS_structurePropertyListAST_2D_element::~ GALGAS_structurePropertyListAST_2D
 GALGAS_structurePropertyListAST_2D_element::GALGAS_structurePropertyListAST_2D_element (const GALGAS_lstring & inOperand0,
                                                                                         const GALGAS_bool & inOperand1,
                                                                                         const GALGAS_lstring & inOperand2,
-                                                                                        const GALGAS_structureVarInit & inOperand3) :
+                                                                                        const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand3) :
 mProperty_mFieldName (inOperand0),
 mProperty_mIsPublic (inOperand1),
 mProperty_mFieldTypeName (inOperand2),
@@ -2471,7 +2471,7 @@ mProperty_mInitialisation (inOperand3) {
 GALGAS_structurePropertyListAST_2D_element GALGAS_structurePropertyListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                         const GALGAS_bool & inOperand1,
                                                                                                         const GALGAS_lstring & inOperand2,
-                                                                                                        const GALGAS_structureVarInit & inOperand3 
+                                                                                                        const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand3 
                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_structurePropertyListAST_2D_element result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
@@ -2553,7 +2553,7 @@ GALGAS_lstring GALGAS_structurePropertyListAST_2D_element::getter_mFieldTypeName
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit GALGAS_structurePropertyListAST_2D_element::getter_mInitialisation (UNUSED_LOCATION_ARGS) const {
+GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_structurePropertyListAST_2D_element::getter_mInitialisation (UNUSED_LOCATION_ARGS) const {
   return mProperty_mInitialisation ;
 }
 
@@ -4288,7 +4288,7 @@ GALGAS_modulePropertyListAST_2D_element::~ GALGAS_modulePropertyListAST_2D_eleme
 
 GALGAS_modulePropertyListAST_2D_element::GALGAS_modulePropertyListAST_2D_element (const GALGAS_lstring & inOperand0,
                                                                                   const GALGAS_lstring & inOperand1,
-                                                                                  const GALGAS_structureVarInit & inOperand2) :
+                                                                                  const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand2) :
 mProperty_mPropertyName (inOperand0),
 mProperty_mTypeName (inOperand1),
 mProperty_mOptionalExpression (inOperand2) {
@@ -4298,7 +4298,7 @@ mProperty_mOptionalExpression (inOperand2) {
 
 GALGAS_modulePropertyListAST_2D_element GALGAS_modulePropertyListAST_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                   const GALGAS_lstring & inOperand1,
-                                                                                                  const GALGAS_structureVarInit & inOperand2 
+                                                                                                  const GALGAS_structurePropertyInitOptionalExpressionAST & inOperand2 
                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_modulePropertyListAST_2D_element result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
@@ -4368,7 +4368,7 @@ GALGAS_lstring GALGAS_modulePropertyListAST_2D_element::getter_mTypeName (UNUSED
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_structureVarInit GALGAS_modulePropertyListAST_2D_element::getter_mOptionalExpression (UNUSED_LOCATION_ARGS) const {
+GALGAS_structurePropertyInitOptionalExpressionAST GALGAS_modulePropertyListAST_2D_element::getter_mOptionalExpression (UNUSED_LOCATION_ARGS) const {
   return mProperty_mOptionalExpression ;
 }
 
@@ -13040,13 +13040,13 @@ void extensionMethod_generateLLVM (const GALGAS_moduleListIR_2D_element inObject
                                    COMMA_UNUSED_LOCATION_ARGS) {
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("@").add_operation (function_llvmNameForGlobalVariable (inObject.mProperty_mModuleName, inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 319)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 319)).add_operation (GALGAS_string (" = internal global "), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 319)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 319)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (inObject.mProperty_mType.getter_kind (inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 320)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 320)).add_operation (GALGAS_string (" {"), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 320)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 320)) ;
-  cEnumerator_operandIRList enumerator_13731 (inObject.mProperty_mInitialValueList, kENUMERATION_UP) ;
-  while (enumerator_13731.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_13731.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 322)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 322)).add_operation (extensionGetter_llvmName (enumerator_13731.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 322)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 322)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 322)) ;
-    if (enumerator_13731.hasNextObject ()) {
+  cEnumerator_operandIRList enumerator_13757 (inObject.mProperty_mInitialValueList, kENUMERATION_UP) ;
+  while (enumerator_13757.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_13757.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 322)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 322)).add_operation (extensionGetter_llvmName (enumerator_13757.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 322)), inCompiler COMMA_SOURCE_FILE ("declaration-module.galgas", 322)), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 322)) ;
+    if (enumerator_13757.hasNextObject ()) {
       ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 323)) ;
     }
-    enumerator_13731.gotoNextObject () ;
+    enumerator_13757.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-module.galgas", 325)) ;
 }
