@@ -68,6 +68,22 @@ class cGrammar_plm_5F_target_5F_grammar : public cParser_plm_5F_target_5F_specif
   public : virtual void nt_key_ (const GALGAS_string inArgument0,
                                  C_Lexique_plm_5F_lexique * inCompiler) ;
 
+//------------------------------------- 'python_utility_tool_list' non terminal
+//--- 'parse' label
+  public : virtual void nt_python_5F_utility_5F_tool_5F_list_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_python_5F_utility_5F_tool_5F_list_ (GALGAS__32_lstringlist & outArgument0,
+                                                               C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'section_specification' non terminal
+//--- 'parse' label
+  public : virtual void nt_section_5F_specification_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_section_5F_specification_ (GALGAS_sectionImplementationScheme & outArgument0,
+                                                      C_Lexique_plm_5F_lexique * inCompiler) ;
+
   public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_0 (C_Lexique_plm_5F_lexique *) ;
 
   public : virtual int32_t select_plm_5F_target_5F_specific_5F_syntax_1 (C_Lexique_plm_5F_lexique *) ;
