@@ -2248,6 +2248,7 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 
 //----------- '' label
   public : virtual void nt_assignment_5F_operator_ (GALGAS_operatorAssignmentKind & outArgument0,
+                                                    GALGAS_infixOperator & outArgument1,
                                                     C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'assignment_target_noself' non terminal
@@ -2281,14 +2282,6 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_declaration_5F_init_ (GALGAS_initList & ioArgument0,
                                                  C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'declaration_struct_var' non terminal
-//--- 'parse' label
-  public : virtual void nt_declaration_5F_struct_5F_var_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public : virtual void nt_declaration_5F_struct_5F_var_ (GALGAS_structurePropertyListAST & ioArgument0,
-                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'declaration_type' non terminal
 //--- 'parse' label
@@ -2582,6 +2575,14 @@ class cGrammar_plm_5F_grammar : public cParser_plm_5F_syntax {
 //----------- '' label
   public : virtual void nt_staticArray_5F_exp_ (GALGAS_extendStaticArrayExpressionListAST & ioArgument0,
                                                 C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'struct_var_declaration' non terminal
+//--- 'parse' label
+  public : virtual void nt_struct_5F_var_5F_declaration_parse (C_Lexique_plm_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public : virtual void nt_struct_5F_var_5F_declaration_ (GALGAS_structurePropertyListAST & ioArgument0,
+                                                          C_Lexique_plm_5F_lexique * inCompiler) ;
 
 //------------------------------------- 'system_routine' non terminal
 //--- 'parse' label
