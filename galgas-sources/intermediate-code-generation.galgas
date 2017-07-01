@@ -23,6 +23,7 @@ struct @intermediateCodeStruct {
   @targetParameters mTargetParameters
   @moduleListIR mModuleList
   @staticArrayMap mStaticArrayMap
+  @propertyAccessRoutineList mPropertyAccessRoutineList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -5,9 +5,7 @@
 list @isrDeclarationListAST {
   @lstring mISRName
   @mode mMode
-  @lstring mSelfTypeName # "" if standalone
-  @string mGlobalVariableName # "" if standalone
-#  @lstringlist mISRAttributeList
+  @lstring mModuleName # "" if standalone
   @instructionListAST mISRInstructionList
   @location mEndOfISRDeclaration
 }
@@ -20,7 +18,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <isr> ?!@isrDeclarationListAST ioISRListAST ?let @lstring inSelfTypeName ?let @string inGlobalVarName {
+  rule <isr> ?!@isrDeclarationListAST ioISRListAST ?let @lstring inModuleName {
     $isr$
     @mode mode
     select
@@ -34,21 +32,13 @@ syntax extension plm_syntax {
       mode = .safeMode
     end 
     $identifier$ ?let isrName
-#    @lstringlist attributeList = {}
-#    repeat
-#    while
-#      $@attribute$ ?let attribute
-#      attributeList += !attribute
-#    end
     ${$
     <instructionList> ?let instructionList
     $}$
     ioISRListAST +=
       !isrName
       !mode
-      !inSelfTypeName
-      !inGlobalVarName
-#      !attributeList
+      !inModuleName
       !instructionList
       !.here
   }
@@ -77,18 +67,6 @@ method @isrDeclarationListAST isrSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for isr in self do
-  #--- Analyze attributes
-#    var xtrAttribute = false
-#    for (attribute) in isr.mISRAttributeList do
-#      if attribute.string != "xtr" then
-#        error attribute : "only @xtr attribute is allowed here" fixit { remove }
-#      elsif xtrAttribute then
-#        error attribute : "duplicate @xtr attribute" fixit { remove }
-#      else
-#        xtrAttribute = true
-#      end
-#    end
-  #--- Modes
   #--- Invocation graph
     let routineNameForInvocationGraph = interruptNameForInvocationGraph (!isr.mISRName)
     if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
@@ -107,10 +85,10 @@ method @isrDeclarationListAST isrSemanticAnalysis
       ?@universalPropertyAndRoutineMapForContext universalMap
     )
   #--- Self type
-    let selfType = if isr.mSelfTypeName.string == "" then
+    let selfType = if isr.mModuleName.string == "" then
       @unifiedTypeMap-proxy.null
     else
-      @unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !isr.mSelfTypeName}
+      @unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !moduleMangledNameFromModuleName (!isr.mModuleName)}
     end
   #--- Analyze instruction list
     @allocaList allocaList = {}
@@ -130,7 +108,6 @@ method @isrDeclarationListAST isrSemanticAnalysis
       !?generatedCode:instructionGenerationList
     ]
   #--- End of variableMap
-#    [variableMap deinitTopLevelVariables]
     [universalMap checkLocalVariableFinalState]
     [variableMap checkAutomatonStates !isr.mEndOfISRDeclaration]
     drop variableMap
@@ -139,11 +116,10 @@ method @isrDeclarationListAST isrSemanticAnalysis
     [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
       !isr.mISRName
       !selfType
-      !isr.mGlobalVariableName
+      !isr.mModuleName
       !allocaList
       !instructionGenerationList
       !isr.mMode
-#      !xtrAttribute
     ]  
   end
 }

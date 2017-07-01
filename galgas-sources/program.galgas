@@ -108,16 +108,23 @@ private proc compileProject
     for (typeName * * * *) in extensionDeclarationListAST do
       error typeName : "this type is not defined or does not support extension"
     end
-  #------------------------------------------------------------ Retain required modules
+  end
+#------------------------------------------------------------ Retain required modules
+  if @uint.errorCount == 0 then
     retainRequiredModules (!?ast)
-  #------------------------------------------------------------ Ordered declaration list
+  end
+#------------------------------------------------------------ Ordered declaration list
+  @declarationListAST orderedDeclarationListAST = .default
+  if @uint.errorCount == 0 then
     buildOrderedDeclarationList (
       !ast:ast
       !sourceFile:inSourceFile.string
       !endOfSourceFile:inEndOfSourceFile
-      ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
+      ?orderedDeclarationList:orderedDeclarationListAST
     )
-  #------------------------------------------------------------ Check "check target" declarations
+  end
+#------------------------------------------------------------ Check "check target" declarations
+  if @uint.errorCount == 0 then
     for (targetLocation acceptedTargetList) in ast.mCheckTargetListAST do
       var accepted = false
       for (possibleTarget) in acceptedTargetList while not accepted do
@@ -127,48 +134,57 @@ private proc compileProject
         error targetLocation : "invalid target"
       end
     end
-  #------------------------------------------------------------ Semantic context
-    if @uint.errorCount == 0 then
-      @staticStringMap globalLiteralStringMap = {}
-      @staticlistValues_listMap staticListValueMap = {}
-      buildSemanticContext (
-        !orderedDeclarationList:orderedDeclarationListAST
-        !sourceFile:inSourceFile
-        !ast:ast
-        !?staticStringMap:globalLiteralStringMap
-        !?staticlistValues:staticListValueMap
-        ?context:let @semanticContext semanticContext
-      )
-    #--- Semantic analysis
-      if @uint.errorCount == 0 then
-        semanticAnalysis (
-          !sourceFile:inSourceFile.string
-          !ast:ast
-          !context:semanticContext
-          !endOfSourceFile:inEndOfSourceFile
-          !staticStringMap:globalLiteralStringMap
-          ?intermediateCode:@intermediateCodeStruct intermediateCodeStruct
-        )
-      #--- Code generation
-        if @uint.errorCount == 0 then
-          codeOptimisation (!?intermediateCode:intermediateCodeStruct)
-          codeGeneration (
-            !currentDir:inCurrentDirectory
-            !outputFile:inSourceFile.string
-            !eof:inEndOfSourceFile
-            !intermediateCode:intermediateCodeStruct
-            !typeMap:semanticContext.mTypeMap
-            !target:inTargetName
-            !panicCodeType:semanticContext.mPanicCodeType
-            !panicLineType:semanticContext.mPanicLineType
-            !interrupts:semanticContext.mAvailableInterruptMap
-            !staticlistValues:staticListValueMap
-            !sourceFileSet:sourceFileAbsolutePathSet
-            !targetParameters:semanticContext.mTargetParameters
-          )
-        end
-      end
-    end
+  end
+#------------------------------------------------------------ Semantic context
+  @semanticContext semanticContext = .default
+  @staticStringMap globalLiteralStringMap = {}
+  @staticlistValues_listMap staticListValueMap = {}
+  if @uint.errorCount == 0 then
+    buildSemanticContext (
+      !orderedDeclarationList:orderedDeclarationListAST
+      !sourceFile:inSourceFile
+      !ast:ast
+      !?staticStringMap:globalLiteralStringMap
+      !?staticlistValues:staticListValueMap
+      ?context:semanticContext
+    )
+  end
+#------------------------------------------------------------ Entity resolution
+#  if @uint.errorCount == 0 then
+#    resolveEntities (!ast:ast !context:semanticContext)
+#  end
+#------------------------------------------------------------ Semantic analysis
+  @intermediateCodeStruct intermediateCodeStruct = .default
+  if @uint.errorCount == 0 then
+    semanticAnalysis (
+      !sourceFile:inSourceFile.string
+      !ast:ast
+      !context:semanticContext
+      !endOfSourceFile:inEndOfSourceFile
+      !staticStringMap:globalLiteralStringMap
+      ?intermediateCode:intermediateCodeStruct
+    )
+  end
+#------------------------------------------------------------ Code optimisation
+  if @uint.errorCount == 0 then
+    codeOptimisation (!?intermediateCode:intermediateCodeStruct)
+  end
+#------------------------------------------------------------ Code generation
+  if @uint.errorCount == 0 then
+    codeGeneration (
+      !currentDir:inCurrentDirectory
+      !outputFile:inSourceFile.string
+      !eof:inEndOfSourceFile
+      !intermediateCode:intermediateCodeStruct
+      !typeMap:semanticContext.mTypeMap
+      !target:inTargetName
+      !panicCodeType:semanticContext.mPanicCodeType
+      !panicLineType:semanticContext.mPanicLineType
+      !interrupts:semanticContext.mAvailableInterruptMap
+      !staticlistValues:staticListValueMap
+      !sourceFileSet:sourceFileAbsolutePathSet
+      !targetParameters:semanticContext.mTargetParameters
+    )
   end
 }
 

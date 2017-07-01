@@ -157,6 +157,68 @@ proc routineSemanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#proc routineResolveEntities
+#  ?receiverType:let @unifiedTypeMap-proxy inSelfType
+#  ?let @routineKind inRoutineKind
+#  ?let @mode inRoutineMode
+#  ?let @lstring inRoutineName
+#  ?let @routineFormalArgumentList inRoutineFormalArgumentList
+#  ?returnTypeName:let @lstring inReturnTypeName
+#  ?let @instructionListAST inRoutineInstructionList
+#  ?let @location inEndOfRoutineDeclaration
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?context:let @semanticContext inContext
+#{
+##--- Mangled routine name
+#  let routineMangledName = routineMangledNameFromAST (
+#    !if inSelfType == .null then "" else "$" + [inSelfType key] end
+#    !inRoutineName
+#    !inRoutineFormalArgumentList
+#  )
+##--- Variable map
+#  initialVariableMap (
+#    !context:inContext
+#    !mode:inRoutineMode
+#    !globalsAreConstant:false
+#    !returnTypeName:inReturnTypeName
+#    ?@unifiedSymbolMapEx variableMap
+#    ?@universalPropertyAndRoutineMapForContext universalMap
+#  )
+##--- Analyse formal arguments
+#  @routineFormalArgumentListForGeneration formalArguments = {}
+#  enterFormalArguments (
+#    !context:inContext
+#    !inRoutineFormalArgumentList
+#    !?variableMap
+#    !?universalMap
+#    !?formalArguments
+#  )
+##--- Analyze instruction list
+#  @allocaList allocaList = {}
+#  @instructionListIR instructionGenerationList = {}
+#  [inRoutineInstructionList analyzeRoutineInstructionList
+#    !self:inSelfType
+#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#    !propertiesAreMutable:inRoutineCanMutateProperties
+#    !routineNameForInvocationGraph:routineMangledName
+#    !context:inContext
+#    !mode:inRoutineMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+#    !?variableMap:variableMap
+#    !?variableMap:universalMap
+#    !?alloca:allocaList
+#    !?generatedCode:instructionGenerationList
+#  ]
+##--- End of variableMap
+#  [universalMap checkLocalVariableFinalState]
+#  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
+#  drop variableMap
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

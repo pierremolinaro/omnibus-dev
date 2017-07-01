@@ -310,3 +310,28 @@ method @functionDeclarationListAST procedureSemanticAnalysis
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#   RESOLVE ENTITIES                                                                                                           
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#method @functionDeclarationListAST resolveEntitiesInProcedures
+#  ?receiverType:@unifiedTypeMap-proxy inReceiverType
+#  ?context:let @semanticContext inSemanticContext
+#{
+#  for procedure in self do
+#    routineResolveEntities (
+#      !receiverType:inReceiverType
+#      !.function {!executionMode:procedure.mMode}
+#      !procedure.mMode
+#      !procedure.mFunctionName
+#      !procedure.mFunctionFormalArgumentList
+#      !returnTypeName:procedure.mFunctionReturnTypeName
+#      !procedure.mFunctionInstructionList
+#      !procedure.mEndOfFunctionDeclaration
+#      !directAccessToPropertiesAllowed:true
+#      !propertiesAreMutable:true
+#      !context:inSemanticContext
+#    )
+#  end
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

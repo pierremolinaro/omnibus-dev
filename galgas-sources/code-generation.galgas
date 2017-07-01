@@ -376,6 +376,8 @@ private proc generateCodeFiles
       llvmCode += literalCharacterArrayName (!mIndex) + ", i32 0, i32 0), align 4\n\n"
     end
   end
+#----------------------------------------- Property access
+  [inIntermediateCodeStruct.mPropertyAccessRoutineList generateCode !?llvmCode]
 #----------------------------------------- Write LLVM file
   llvmCode += llvmSeparatorLine ()
   [llvmCode writeToFileWhenDifferentContents !sourceDirectory + "/src.ll" ?*]

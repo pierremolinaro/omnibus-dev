@@ -1,42 +1,36 @@
 
-setter @instructionListIR appendGetPropertyReference
+setter @instructionListIR appendGetArrayElementReference
   ?let @objectIR inTarget
   ?let @objectIR inSource
-  ?let @string inPLMname
-  ?let @string inPropertyIndex
+  ?let @string inElementIndex
 {
-  self += !@getPropertyReferenceIR.new {!inTarget !inSource !inPLMname !inPropertyIndex}
+  self += !@getArrayElementReferenceIR.new {!inTarget !inSource !inElementIndex}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @getPropertyReferenceIR : @abstractInstructionIR {
+class @getArrayElementReferenceIR : @abstractInstructionIR {
   @objectIR mTarget
   @objectIR mSource
-  @string mPLMname
-  @string mPropertyIndex
+  @string mElementIndex
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @getPropertyReferenceIR llvmInstructionCode
+override method @getArrayElementReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mTarget llvmName]
-  ioLLVMcode += " = call " + [mTarget llvmTypeName] + "* @\"" + [mSource llvmTypeName] + ".access." + mPLMname
-  ioLLVMcode += "\" (" + [mSource llvmTypeName] + " * " + [mSource llvmName] + ") ; " + mPLMname + "\n"
-
   let llvmType = [[[mSource type] kind] llvmTypeName]
-  ioLLVMcode += ";  " + [mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mPropertyIndex
-  ioLLVMcode += " ; " + mPLMname + "\n"
+  ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mElementIndex
+  ioLLVMcode += " ; Element of index " + mElementIndex + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @getPropertyReferenceIR enterAccessibleEntities 
+override method @getArrayElementReferenceIR enterAccessibleEntities 
   ?!@accessibleEntities unused ioAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

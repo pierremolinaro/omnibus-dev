@@ -8,8 +8,6 @@ syntax plm_syntax (plm_lexique) {
 
   rule <system_routine> ?!@systemRoutineDeclarationListAST ioSVCListAST
 
-  rule <isr> ?!@isrDeclarationListAST ioISRListAST ?let @lstring inSelfTypeName ?let @string inGlobalVarName
-
   #·····················································································································
 
   rule <import_file> ?!@lstringlist ioImportedFileList {
@@ -38,7 +36,7 @@ syntax plm_syntax (plm_lexique) {
     while
       <system_routine> !?ioAst.mStandAloneSystemRoutineListAST
     while
-      <isr> !?ioAst.mISRDeclarationListAST !["" nowhere] !""
+      <isr> !?ioAst.mISRDeclarationListAST !["" nowhere] # No module name
     while
       <import_file> !?outImportedFileList
     end

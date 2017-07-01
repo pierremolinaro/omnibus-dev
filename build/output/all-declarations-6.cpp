@@ -10859,7 +10859,8 @@ mProperty_mGlobalTaskVariableList (),
 mProperty_mMaxBranchOfOnInstructions (),
 mProperty_mTargetParameters (),
 mProperty_mModuleList (),
-mProperty_mStaticArrayMap () {
+mProperty_mStaticArrayMap (),
+mProperty_mPropertyAccessRoutineList () {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10886,7 +10887,8 @@ GALGAS_intermediateCodeStruct::GALGAS_intermediateCodeStruct (const GALGAS_stati
                                                               const GALGAS_uint & inOperand14,
                                                               const GALGAS_targetParameters & inOperand15,
                                                               const GALGAS_moduleListIR & inOperand16,
-                                                              const GALGAS_staticArrayMap & inOperand17) :
+                                                              const GALGAS_staticArrayMap & inOperand17,
+                                                              const GALGAS_propertyAccessRoutineList & inOperand18) :
 mProperty_mStaticStringMap (inOperand0),
 mProperty_mGlobalVariableMap (inOperand1),
 mProperty_mGlobalConstantMap (inOperand2),
@@ -10904,7 +10906,8 @@ mProperty_mGlobalTaskVariableList (inOperand13),
 mProperty_mMaxBranchOfOnInstructions (inOperand14),
 mProperty_mTargetParameters (inOperand15),
 mProperty_mModuleList (inOperand16),
-mProperty_mStaticArrayMap (inOperand17) {
+mProperty_mStaticArrayMap (inOperand17),
+mProperty_mPropertyAccessRoutineList (inOperand18) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10927,7 +10930,8 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default
                                         GALGAS_uint::constructor_default (HERE),
                                         GALGAS_targetParameters::constructor_default (HERE),
                                         GALGAS_moduleListIR::constructor_emptyList (HERE),
-                                        GALGAS_staticArrayMap::constructor_emptyMap (HERE)) ;
+                                        GALGAS_staticArrayMap::constructor_emptyMap (HERE),
+                                        GALGAS_propertyAccessRoutineList::constructor_emptyList (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -10949,11 +10953,12 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (co
                                                                               const GALGAS_uint & inOperand14,
                                                                               const GALGAS_targetParameters & inOperand15,
                                                                               const GALGAS_moduleListIR & inOperand16,
-                                                                              const GALGAS_staticArrayMap & inOperand17 
+                                                                              const GALGAS_staticArrayMap & inOperand17,
+                                                                              const GALGAS_propertyAccessRoutineList & inOperand18 
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_intermediateCodeStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid ()) {
-    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17) ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid () && inOperand14.isValid () && inOperand15.isValid () && inOperand16.isValid () && inOperand17.isValid () && inOperand18.isValid ()) {
+    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13, inOperand14, inOperand15, inOperand16, inOperand17, inOperand18) ;
   }
   return result ;
 }
@@ -11016,13 +11021,16 @@ typeComparisonResult GALGAS_intermediateCodeStruct::objectCompare (const GALGAS_
   if (result == kOperandEqual) {
     result = mProperty_mStaticArrayMap.objectCompare (inOperand.mProperty_mStaticArrayMap) ;
   }
+  if (result == kOperandEqual) {
+    result = mProperty_mPropertyAccessRoutineList.objectCompare (inOperand.mProperty_mPropertyAccessRoutineList) ;
+  }
   return result ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 bool GALGAS_intermediateCodeStruct::isValid (void) const {
-  return mProperty_mStaticStringMap.isValid () && mProperty_mGlobalVariableMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mRoutineMapIR.isValid () && mProperty_mGuardMapIR.isValid () && mProperty_mInterruptMapIR.isValid () && mProperty_mExternProcedureMapIR.isValid () && mProperty_mRequiredProcedureSet.isValid () && mProperty_mBootList.isValid () && mProperty_mInitList.isValid () && mProperty_mPanicSetupInstructionListIR.isValid () && mProperty_mPanicLoopInstructionListIR.isValid () && mProperty_mTaskMapIR.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mMaxBranchOfOnInstructions.isValid () && mProperty_mTargetParameters.isValid () && mProperty_mModuleList.isValid () && mProperty_mStaticArrayMap.isValid () ;
+  return mProperty_mStaticStringMap.isValid () && mProperty_mGlobalVariableMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mRoutineMapIR.isValid () && mProperty_mGuardMapIR.isValid () && mProperty_mInterruptMapIR.isValid () && mProperty_mExternProcedureMapIR.isValid () && mProperty_mRequiredProcedureSet.isValid () && mProperty_mBootList.isValid () && mProperty_mInitList.isValid () && mProperty_mPanicSetupInstructionListIR.isValid () && mProperty_mPanicLoopInstructionListIR.isValid () && mProperty_mTaskMapIR.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mMaxBranchOfOnInstructions.isValid () && mProperty_mTargetParameters.isValid () && mProperty_mModuleList.isValid () && mProperty_mStaticArrayMap.isValid () && mProperty_mPropertyAccessRoutineList.isValid () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11046,6 +11054,7 @@ void GALGAS_intermediateCodeStruct::drop (void) {
   mProperty_mTargetParameters.drop () ;
   mProperty_mModuleList.drop () ;
   mProperty_mStaticArrayMap.drop () ;
+  mProperty_mPropertyAccessRoutineList.drop () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11091,6 +11100,8 @@ void GALGAS_intermediateCodeStruct::description (C_String & ioString,
     mProperty_mModuleList.description (ioString, inIndentation+1) ;
     ioString << ", " ;
     mProperty_mStaticArrayMap.description (ioString, inIndentation+1) ;
+    ioString << ", " ;
+    mProperty_mPropertyAccessRoutineList.description (ioString, inIndentation+1) ;
   }
   ioString << ">" ;
 }
@@ -11201,6 +11212,12 @@ GALGAS_moduleListIR GALGAS_intermediateCodeStruct::getter_mModuleList (UNUSED_LO
 
 GALGAS_staticArrayMap GALGAS_intermediateCodeStruct::getter_mStaticArrayMap (UNUSED_LOCATION_ARGS) const {
   return mProperty_mStaticArrayMap ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+GALGAS_propertyAccessRoutineList GALGAS_intermediateCodeStruct::getter_mPropertyAccessRoutineList (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mPropertyAccessRoutineList ;
 }
 
 
