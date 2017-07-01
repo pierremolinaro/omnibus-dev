@@ -3465,7 +3465,7 @@ static const char * gNonTerminalNames_plm_grammar [126] = {
   "<start_symbol>",// Index 4
   "<declaration>",// Index 5
   "<declaration_type>",// Index 6
-  "<declaration_struct_var>",// Index 7
+  "<struct_var_declaration>",// Index 7
   "<property_in_extension>",// Index 8
   "<registerDeclaration>",// Index 9
   "<module_variable>",// Index 10
@@ -18767,14 +18767,14 @@ void cGrammar_plm_5F_grammar::nt_declaration_5F_type_ (const GALGAS_lstring  par
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
-//                                'declaration_struct_var' non terminal implementation                                  
+//                                'struct_var_declaration' non terminal implementation                                  
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cGrammar_plm_5F_grammar::nt_declaration_5F_struct_5F_var_parse (C_Lexique_plm_5F_lexique * inLexique) {
+void cGrammar_plm_5F_grammar::nt_struct_5F_var_5F_declaration_parse (C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 5 :
-      rule_plm_5F_syntax_declaration_5F_struct_5F_var_i5_parse(inLexique) ;
+      rule_plm_5F_syntax_struct_5F_var_5F_declaration_i5_parse(inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -18782,11 +18782,11 @@ void cGrammar_plm_5F_grammar::nt_declaration_5F_struct_5F_var_parse (C_Lexique_p
   }
 }
 
-void cGrammar_plm_5F_grammar::nt_declaration_5F_struct_5F_var_ (GALGAS_structurePropertyListAST &  parameter_1,
+void cGrammar_plm_5F_grammar::nt_struct_5F_var_5F_declaration_ (GALGAS_structurePropertyListAST &  parameter_1,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 5 :
-      rule_plm_5F_syntax_declaration_5F_struct_5F_var_i5_(parameter_1, inLexique) ;
+      rule_plm_5F_syntax_struct_5F_var_5F_declaration_i5_(parameter_1, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
@@ -19744,10 +19744,11 @@ void cGrammar_plm_5F_grammar::nt_assignment_5F_operator_parse (C_Lexique_plm_5F_
 }
 
 void cGrammar_plm_5F_grammar::nt_assignment_5F_operator_ (GALGAS_operatorAssignmentKind &  parameter_1,
+                                GALGAS_infixOperator &  parameter_2,
                                 C_Lexique_plm_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
   case 72 :
-      rule_plm_5F_syntax_assignment_5F_operator_i72_(parameter_1, inLexique) ;
+      rule_plm_5F_syntax_assignment_5F_operator_i72_(parameter_1, parameter_2, inLexique) ;
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;

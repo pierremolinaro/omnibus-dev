@@ -6664,6 +6664,7 @@ class cParser_plm_5F_syntax {
 
 //--- Non terminal declarations
   protected : virtual void nt_assignment_5F_operator_ (class GALGAS_operatorAssignmentKind & outArgument0,
+                                                       class GALGAS_infixOperator & outArgument1,
                                                        class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_assignment_5F_operator_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
@@ -6687,11 +6688,6 @@ class cParser_plm_5F_syntax {
                                                     class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_declaration_5F_init_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
-
-  protected : virtual void nt_declaration_5F_struct_5F_var_ (class GALGAS_structurePropertyListAST & ioArgument0,
-                                                             class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
-
-  protected : virtual void nt_declaration_5F_struct_5F_var_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_declaration_5F_type_ (const class GALGAS_lstring constinArgument0,
                                                     class GALGAS_abstractDeclaration & outArgument1,
@@ -6862,6 +6858,11 @@ class cParser_plm_5F_syntax {
 
   protected : virtual void nt_staticArray_5F_exp_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
+  protected : virtual void nt_struct_5F_var_5F_declaration_ (class GALGAS_structurePropertyListAST & ioArgument0,
+                                                             class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
+  protected : virtual void nt_struct_5F_var_5F_declaration_parse (class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
+
   protected : virtual void nt_system_5F_routine_ (class GALGAS_systemRoutineDeclarationListAST & ioArgument0,
                                                   class C_Lexique_plm_5F_lexique * inLexique) = 0 ;
 
@@ -6905,10 +6906,10 @@ class cParser_plm_5F_syntax {
 
   protected : void rule_plm_5F_syntax_declaration_i4_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_5F_struct_5F_var_i5_ (GALGAS_structurePropertyListAST & ioArgument0,
+  protected : void rule_plm_5F_syntax_struct_5F_var_5F_declaration_i5_ (GALGAS_structurePropertyListAST & ioArgument0,
                                                                         C_Lexique_plm_5F_lexique * inLexique) ;
 
-  protected : void rule_plm_5F_syntax_declaration_5F_struct_5F_var_i5_parse (C_Lexique_plm_5F_lexique * inLexique) ;
+  protected : void rule_plm_5F_syntax_struct_5F_var_5F_declaration_i5_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_declaration_i6_ (GALGAS_ast & ioArgument0,
                                                        C_Lexique_plm_5F_lexique * inLexique) ;
@@ -7252,6 +7253,7 @@ class cParser_plm_5F_syntax {
   protected : void rule_plm_5F_syntax_instruction_i71_parse (C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_assignment_5F_operator_i72_ (GALGAS_operatorAssignmentKind & outArgument0,
+                                                                   GALGAS_infixOperator & outArgument1,
                                                                    C_Lexique_plm_5F_lexique * inLexique) ;
 
   protected : void rule_plm_5F_syntax_assignment_5F_operator_i72_parse (C_Lexique_plm_5F_lexique * inLexique) ;

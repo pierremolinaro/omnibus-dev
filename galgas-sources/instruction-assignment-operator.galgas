@@ -35,34 +35,43 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <assignment_operator> !@operatorAssignmentKind outOp {
+  rule <assignment_operator> !@operatorAssignmentKind outOp !@infixOperator outOperator {
     select
       $|=$
       outOp = .bitWiseOrAssign
+      outOperator = .orOp
     or
       $&=$
       outOp = .bitWiseAndAssign
+      outOperator = .andOp
     or
       $^=$
       outOp = .bitWiseXorAssign
+      outOperator = .xorOp
     or
       $+=$
       outOp = .addAssign
+      outOperator = .addOp
     or
       $+%=$
       outOp = .addModuloAssign
+      outOperator = .addOpNoOvf
     or
       $-=$
       outOp = .subAssign
+      outOperator = .subOp
     or
       $-%=$
       outOp = .subModuloAssign
+      outOperator = .subOpNoOvf
     or
       $*=$
       outOp = .mulAssign
+      outOperator = .mulOp
     or
       $*%=$
       outOp = .mulModuloAssign
+      outOperator = .mulOpNoOvf
     end
   }
 
@@ -71,7 +80,7 @@ syntax extension plm_syntax {
   rule <instruction> ?!@instructionListAST ioInstructionList {
     <assignment_target_noself> ?let assignmentTargetAST
     let instructionLocation = @location.here
-    <assignment_operator> ?let @operatorAssignmentKind operatorAssign
+    <assignment_operator> ?let @operatorAssignmentKind operatorAssign ?let @infixOperator unused infixOperator
     <expression> ?let @expressionAST expression
     ioInstructionList += !instructionLocation !@varOperatorAssignInstructionAST.new {
       !assignmentTargetAST
@@ -83,10 +92,28 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
+#  rule <instruction> ?!@instructionListAST ioInstructionList {
+#    <assignment_target_noself> ?let assignmentTargetAST
+#    <assignment_operator> ?* ?let @infixOperator infixOperator
+#    let operatorLocation = @location.here
+#    <expression> ?let @expressionAST expression
+#    let sourceExpression = @infixOperatorExpressionAST.new {
+#      !assignmentTargetAST
+#      !operatorLocation
+#      !infixOperator
+#      !expression
+#    }
+#    ioInstructionList +=
+#      ![assignmentTargetAST mIdentifier].location
+#      !@varAssignmentInstructionAST.new {!assignmentTargetAST !sourceExpression}
+#  }
+
+  #·····················································································································
+
   rule <instruction> ?!@instructionListAST ioInstructionList {
     <assignment_target_self> ?let assignmentTargetAST
     let instructionLocation = @location.here
-    <assignment_operator> ?let @operatorAssignmentKind operatorAssign
+    <assignment_operator> ?let @operatorAssignmentKind operatorAssign ?let @infixOperator unused infixOperator
     <expression> ?let @expressionAST expression
     ioInstructionList += !instructionLocation !@varOperatorAssignInstructionAST.new {
       !assignmentTargetAST
@@ -169,18 +196,6 @@ override method @varOperatorAssignInstructionAST analyze
     !mEndOfSourceExpression
     ?let sourceValue
   ]  
-#--- Write local variable
-#  [!?ioVariableMap searchForReadWriteAccess
-#    !lkey:mTargetVarName
-#    ?1*
-#    ?readAccessAllowed:let accessIsAllowed
-#    ?variableKind:let targetVariableKind
-#    ?copyable:let isCopyable                                                 
-#    ?3*
-#  ]
-#  if not accessIsAllowed then
-#    error mTargetVarName : "routine has no access right on the this variable"
-#  end
 #--- Check operator is available for type
   let noPanicGeneration = [option plm_options.noPanicGeneration value]
   let panicMode = inCurrentMode == .panicMode

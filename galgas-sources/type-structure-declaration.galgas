@@ -41,7 +41,7 @@ syntax extension plm_syntax {
 
   #·····················································································································
 
-  rule <declaration_struct_var> ?!@structurePropertyListAST ioFieldListAST {
+  rule <struct_var_declaration> ?!@structurePropertyListAST ioFieldListAST {
     @bool public
     select
       public = false
@@ -85,7 +85,7 @@ syntax extension plm_syntax {
     @guardDeclarationListAST guardListAST = {}
     repeat
     while
-      <declaration_struct_var> !?fieldList
+      <struct_var_declaration> !?fieldList
     while
       <function> !?procedureDeclarationListAST
     while
@@ -511,6 +511,10 @@ method @structureDeclaration functionSemanticAnalysis
     )
   end
 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  GENERATE PROPERTY ACCESS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
