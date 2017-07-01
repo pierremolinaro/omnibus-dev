@@ -322,7 +322,12 @@ proc handlePropertyAccessInAssignment
   ?!@instructionListIR ioInstructionGenerationList
 {
   if [[[ioObject type] kind] isStructure] then
-    [[[ioObject type] kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
+    [[[ioObject type] kind] structure
+      ?typeName:*
+      ?propertyMap:let structureObjectMap
+      ?universalMap:let unused universalMap
+      ?2*
+    ]
     if [structureObjectMap hasKey !inPropertyName] then
       [structureObjectMap searchKey !inPropertyName ?* ?@objectIR property]
       if [property isProperty] then
