@@ -437,7 +437,7 @@ private proc handlePropertyAccessInExpression
       [!?m searchValuedObjectForReadAccess !masterPropertyName ?let @objectIR masterPropertyIR]
       [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
       let newObject = @objectIR.temporaryReference {
-         !type:[masterPropertyIR type] # [masterPropertyIR type]
+         !type:[masterPropertyIR type]
          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
          !sliceMap:{}
          !volatile:false
