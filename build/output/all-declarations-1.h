@@ -1041,7 +1041,7 @@ class GALGAS_structurePropertyListAST_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_lstring mProperty_mFieldTypeName ;
 
-  public : GALGAS_structureVarInit mProperty_mInitialisation ;
+  public : GALGAS_structurePropertyInitOptionalExpressionAST mProperty_mInitialisation ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -1057,7 +1057,7 @@ class GALGAS_structurePropertyListAST_2D_element : public AC_GALGAS_root {
   public : GALGAS_structurePropertyListAST_2D_element (const GALGAS_lstring & in_mFieldName,
                                                        const GALGAS_bool & in_mIsPublic,
                                                        const GALGAS_lstring & in_mFieldTypeName,
-                                                       const GALGAS_structureVarInit & in_mInitialisation) ;
+                                                       const GALGAS_structurePropertyInitOptionalExpressionAST & in_mInitialisation) ;
 
 //-- Start of generic part --*
 
@@ -1073,7 +1073,7 @@ class GALGAS_structurePropertyListAST_2D_element : public AC_GALGAS_root {
   public : static class GALGAS_structurePropertyListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                     const class GALGAS_bool & inOperand1,
                                                                                     const class GALGAS_lstring & inOperand2,
-                                                                                    const class GALGAS_structureVarInit & inOperand3
+                                                                                    const class GALGAS_structurePropertyInitOptionalExpressionAST & inOperand3
                                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -1092,7 +1092,7 @@ class GALGAS_structurePropertyListAST_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFieldTypeName (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_structureVarInit getter_mInitialisation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_structurePropertyInitOptionalExpressionAST getter_mInitialisation (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
 
@@ -4401,7 +4401,7 @@ class GALGAS_modulePropertyListAST_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_lstring mProperty_mTypeName ;
 
-  public : GALGAS_structureVarInit mProperty_mOptionalExpression ;
+  public : GALGAS_structurePropertyInitOptionalExpressionAST mProperty_mOptionalExpression ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -4416,7 +4416,7 @@ class GALGAS_modulePropertyListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_modulePropertyListAST_2D_element (const GALGAS_lstring & in_mPropertyName,
                                                     const GALGAS_lstring & in_mTypeName,
-                                                    const GALGAS_structureVarInit & in_mOptionalExpression) ;
+                                                    const GALGAS_structurePropertyInitOptionalExpressionAST & in_mOptionalExpression) ;
 
 //-- Start of generic part --*
 
@@ -4431,7 +4431,7 @@ class GALGAS_modulePropertyListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_modulePropertyListAST_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                  const class GALGAS_lstring & inOperand1,
-                                                                                 const class GALGAS_structureVarInit & inOperand2
+                                                                                 const class GALGAS_structurePropertyInitOptionalExpressionAST & inOperand2
                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -4446,7 +4446,7 @@ class GALGAS_modulePropertyListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_structureVarInit getter_mOptionalExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_structurePropertyInitOptionalExpressionAST getter_mOptionalExpression (LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPropertyName (LOCATION_ARGS) const ;
 

@@ -19,7 +19,7 @@ override getter @structureDeclaration location -> @location outLocation {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @structureVarInit {
+enum @structurePropertyInitOptionalExpressionAST {
   case expression (@expressionAST initExpression)
   case noExpression
 }
@@ -30,7 +30,7 @@ list @structurePropertyListAST {
   @lstring mFieldName
   @bool mIsPublic
   @lstring mFieldTypeName
-  @structureVarInit mInitialisation
+  @structurePropertyInitOptionalExpressionAST mInitialisation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

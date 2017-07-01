@@ -1,8 +1,8 @@
-check target "teensy-3-6"
+check target "teensy-3-6/unprivileged", "teensy-3-6/privileged"
 
-let f_cpu $uint32 = 96_000_000
-let f_bus $uint32 = 48_000_000
-let f_mem $uint32 = 24_000_000
+//let f_cpu $uint32 = 96_000_000
+//let f_bus $uint32 = 48_000_000
+//let f_mem $uint32 = 24_000_000
 
 // chapter 11: Port control and interrupts (PORT) Pin Control Register n
 register

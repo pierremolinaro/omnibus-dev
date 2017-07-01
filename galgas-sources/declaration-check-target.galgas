@@ -9,8 +9,15 @@ syntax extension plm_syntax {
   rule <declaration> ?!@ast ioAST {
     $check$
     $target$
-    $"string"$ ?let targetName
-    ioAST.mCheckTargetListAST += !targetName
+    let targetConstructLocation = @location.here
+    @lstringlist acceptedTargetList = {}
+    repeat
+      $"string"$ ?let targetName
+      acceptedTargetList += !targetName
+    while
+      $,$
+    end
+    ioAST.mCheckTargetListAST += !targetConstructLocation !acceptedTargetList
   }
 
   #·····················································································································

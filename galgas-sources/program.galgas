@@ -118,9 +118,13 @@ private proc compileProject
       ?orderedDeclarationList:let @declarationListAST orderedDeclarationListAST
     )
   #------------------------------------------------------------ Check "check target" declarations
-    for (targetNameToCheck) in ast.mCheckTargetListAST do
-      if targetNameToCheck.string != inTargetName then
-        error targetNameToCheck : "invalid target" fixit { replace "\"" + inTargetName.string + "\"" }
+    for (targetLocation acceptedTargetList) in ast.mCheckTargetListAST do
+      var accepted = false
+      for (possibleTarget) in acceptedTargetList while not accepted do
+        accepted = possibleTarget.string != inTargetName
+      end
+      if not accepted then
+        error targetLocation : "invalid target"
       end
     end
   #------------------------------------------------------------ Semantic context
@@ -236,6 +240,7 @@ private proc addTargetSpecificFiles
   ioAST.mTaskListAST = ast.mTaskListAST + ioAST.mTaskListAST
   ioAST.mModuleDeclarationListAST = ast.mModuleDeclarationListAST + ioAST.mModuleDeclarationListAST
   ioAST.mRequiredModuleListAST = ast.mRequiredModuleListAST + ioAST.mRequiredModuleListAST
+  ioAST.mCheckTargetListAST = ast.mCheckTargetListAST + ioAST.mCheckTargetListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
