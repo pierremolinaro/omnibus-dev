@@ -53,9 +53,9 @@ method @bootList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @bootRoutinePriorityMap {
-  insert insertKey error message "a boot routine with priority %K has been already declared"
-}
+#map @bootRoutinePriorityMap {
+#  insert insertKey error message "a boot routine with priority %K has been already declared"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

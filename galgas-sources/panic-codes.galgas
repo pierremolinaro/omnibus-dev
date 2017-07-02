@@ -28,7 +28,7 @@
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForRegisterFieldOvf -> @bigint outResult { outResult = 13G }
+#func %once panicCodeForRegisterFieldOvf -> @bigint outResult { outResult = 13G }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

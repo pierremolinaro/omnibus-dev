@@ -76,81 +76,81 @@ override getter @typeArrayDeclaration keyRepresentationForErrorSignaling -> @str
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
+#override method @typeArrayDeclaration enterRoutinesInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext unused ioContext
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclaration enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-#--- Get element type
-  [ioContext.mTypeMap searchKey
-    !lkey:mElementTypeName
-    ?kind:let kind
-  ]
-  if not [kind copyable] then
-    error mElementTypeName : "an array element should be copyable"
-  end
-  if not [kind instanciable] then
-    error mElementTypeName : "an array element should be instanciable"
-  end
-#--- Compute array size
-  @instructionListIR initInstructionGenerationList = {}
-  @allocaList allocaList = {}
-  @semanticTemporariesStruct temporaries = .default
-  variableMapWithConstants (
-    !context:ioContext
-    ?@unifiedSymbolMapEx variableMap
-    ?@universalPropertyAndRoutineMapForContext universalMap
-  )
-  [mSizeExpression analyzeExpression
-    !self:.null
-    !inGuard:false
-    !routineNameForInvocationGraph:.new {!mArrayTypeName.string + " init" !mArrayTypeName.location}
-    !optionalTargetType:.null
-    !context:ioContext
-    !mode:.bootMode
-    !?temporary:temporaries
-    !?staticStringMap:*
-    !?variableMap:universalMap
-    !?alloca:allocaList
-    !?instructionListIR:initInstructionGenerationList
-    ?result:let @objectIR sizeExpressionIR
-  ]
-  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
-    error mSizeExpressionLocation : "array size expression is not static"
-  else
-    [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
-    let elementType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName}
-  #--- Class method map : add "size" method
-    @classConstantMap classConstantMap = {}
-    [!?classConstantMap insertKey !["size" nowhere] !sizeExpressionIR]
-  #--- Enter in type map
-    [!?ioContext.mTypeMap insertType
-      !lkey:mArrayTypeName
-      !kind:.arrayType {
-        !typeName:mArrayTypeName
-        !elementType:elementType
-        !size:arraySize
-        !classConstantMap:classConstantMap
-        !flags: instanciableFlag () | copyableFlag ()
-      }
-    ]
-  #--- Enter array constructor
-    [!?ioContext.mConstructorMap insertKey
-      !mArrayTypeName
-      !.zero
-    ]
-  end
-}
+#override method @typeArrayDeclaration enterInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext ioContext
+#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+##--- Get element type
+#  [ioContext.mTypeMap searchKey
+#    !lkey:mElementTypeName
+#    ?kind:let kind
+#  ]
+#  if not [kind copyable] then
+#    error mElementTypeName : "an array element should be copyable"
+#  end
+#  if not [kind instanciable] then
+#    error mElementTypeName : "an array element should be instanciable"
+#  end
+##--- Compute array size
+#  @instructionListIR initInstructionGenerationList = {}
+#  @allocaList allocaList = {}
+#  @semanticTemporariesStruct temporaries = .default
+#  variableMapWithConstants (
+#    !context:ioContext
+#    ?@unifiedSymbolMapEx variableMap
+#    ?@universalPropertyAndRoutineMapForContext universalMap
+#  )
+#  [mSizeExpression analyzeExpression
+#    !self:.null
+#    !inGuard:false
+#    !routineNameForInvocationGraph:.new {!mArrayTypeName.string + " init" !mArrayTypeName.location}
+#    !optionalTargetType:.null
+#    !context:ioContext
+#    !mode:.bootMode
+#    !?temporary:temporaries
+#    !?staticStringMap:*
+#    !?variableMap:universalMap
+#    !?alloca:allocaList
+#    !?instructionListIR:initInstructionGenerationList
+#    ?result:let @objectIR sizeExpressionIR
+#  ]
+#  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
+#    error mSizeExpressionLocation : "array size expression is not static"
+#  else
+#    [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
+#    let elementType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mElementTypeName}
+#  #--- Class method map : add "size" method
+#    @classConstantMap classConstantMap = {}
+#    [!?classConstantMap insertKey !["size" nowhere] !sizeExpressionIR]
+#  #--- Enter in type map
+#    [!?ioContext.mTypeMap insertType
+#      !lkey:mArrayTypeName
+#      !kind:.arrayType {
+#        !typeName:mArrayTypeName
+#        !elementType:elementType
+#        !size:arraySize
+#        !classConstantMap:classConstantMap
+#        !flags: instanciableFlag () | copyableFlag ()
+#      }
+#    ]
+#  #--- Enter array constructor
+#    [!?ioContext.mConstructorMap insertKey
+#      !mArrayTypeName
+#      !.zero
+#    ]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    

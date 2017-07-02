@@ -75,159 +75,159 @@ override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPreceden
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forLowerUpperBoundInstructionAST analyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-#--- Get iterated element type
-  let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
-  switch [type kind]
-  case boolean :
-    error mTypeName : "an integer type is required here"
-  case arrayType (* * * * *) :
-    error mTypeName : "an integer type is required here"
-  case enumeration (* *) :
-  case literalString :
-    error mTypeName : "an integer type is required here"
-  case opaque (* *) :
-    error mTypeName : "an integer type is required here"
-  case staticInteger :
-    error mTypeName : "an integer type is required here"
-  case structure (* * * * *) :
-    error mTypeName : "an integer type is required here"
-  case pointer (*) :
-    error mTypeName : "an integer type is required here"
-  case function (*) :
-    error mTypeName : "an integer type is required here"
-  case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
-  #--- Analyze expressions
-    [mLowerBoundExpression analyzeExpression
-      !self:inSelfType
-      !inGuard:false
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:type
-      !context:inContext
-      !mode:inCurrentMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      ?result:let @objectIR lowerBoundExpressionResultPossibleReference
-    ]
-    [!?ioInstructionGenerationList appendLoadFromReference
-      !?ioTemporaries
-      !lowerBoundExpressionResultPossibleReference
-      !mEndOf_lowerBoundExpression_instruction
-      ?let lowerBoundExpressionResult
-    ]  
-    [mUpperBoundExpression analyzeExpression
-      !self:inSelfType
-      !inGuard:false
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !optionalTargetType:type
-      !context:inContext
-      !mode:inCurrentMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      ?result:let @objectIR upperBoundExpressionResultPossibleReference
-    ]
-    [!?ioInstructionGenerationList appendLoadFromReference
-      !?ioTemporaries
-      !upperBoundExpressionResultPossibleReference
-      !mEndOf_upperBoundExpression_instruction
-      ?let upperBoundExpressionResult
-    ]  
-  #--- Check expression types
-    let lowerBound = checkAssignmentCompatibility (
-      !source:lowerBoundExpressionResult
-      !targetAnnotationType:type
-      !errorLocation:mEndOf_lowerBoundExpression_instruction
-      !staticTypeAllowed:false
-    )
-    let upperBound = checkAssignmentCompatibility (
-      !source:upperBoundExpressionResult
-      !targetAnnotationType:type
-      !errorLocation:mEndOf_upperBoundExpression_instruction
-      !staticTypeAllowed:false
-    )
-  #---
-    [!?ioUniversalMap openOverrideForRepeatBlock]
-    [!?ioVariableMap openOverrideForRepeatBlock]
-  #--- Enter iteration variable name
-    let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
-    ioTemporaries.mTemporaryIndex ++
-    ioAllocaList += !enumeratedVarLLVMName ![[type kind] llvmTypeName]
-    if mVarName.string != "" then
-     let objectIR = @objectIR.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}
-     [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
-      [!?ioVariableMap insertUsedConstant
-        !lkey:mVarName
-        !type:type
-        !readAccessAllowed:true # Read access ok
-        !objectIR:objectIR
-        !copyable:true
-        !canBeUsedAsInputParameter:false
-      ]
-    end
-  #--- Analyze instruction list
-    @instructionListIR instructionGenerationList = {}
-    [mDoInstructionList analyzeBranchInstructionList
-      !self:inSelfType
-      !propertiesAreMutable:inRoutineCanMutateProperties
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !endOfInstructionList:mEndOf_do_instruction
-      !context:inContext
-      !mode:inCurrentMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:instructionGenerationList
-    ]
-    [!?ioUniversalMap closeOverride !mEndOf_do_instruction]
-    [!?ioVariableMap closeOverride !mEndOf_do_instruction]
-  #--- Code generation
-    ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR.new {
-      !enumeratedVarLLVMName
-      !type
-      !unsigned
-      !mEndOf_do_instruction
-      !lowerBound
-      !upperBound
-      !instructionGenerationList
-    }
-  end
-}
+#override method @forLowerUpperBoundInstructionAST analyze
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#{
+##--- Get iterated element type
+#  let type = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
+#  switch [type kind]
+#  case boolean :
+#    error mTypeName : "an integer type is required here"
+#  case arrayType (* * * * *) :
+#    error mTypeName : "an integer type is required here"
+#  case enumeration (* *) :
+#  case literalString :
+#    error mTypeName : "an integer type is required here"
+#  case opaque (* *) :
+#    error mTypeName : "an integer type is required here"
+#  case staticInteger :
+#    error mTypeName : "an integer type is required here"
+#  case structure (* * * * *) :
+#    error mTypeName : "an integer type is required here"
+#  case pointer (*) :
+#    error mTypeName : "an integer type is required here"
+#  case function (*) :
+#    error mTypeName : "an integer type is required here"
+#  case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
+#  #--- Analyze expressions
+#    [mLowerBoundExpression analyzeExpression
+#      !self:inSelfType
+#      !inGuard:false
+#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#      !optionalTargetType:type
+#      !context:inContext
+#      !mode:inCurrentMode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca:ioAllocaList
+#      !?instructionListIR:ioInstructionGenerationList
+#      ?result:let @objectIR lowerBoundExpressionResultPossibleReference
+#    ]
+#    [!?ioInstructionGenerationList appendLoadFromReference
+#      !?ioTemporaries
+#      !lowerBoundExpressionResultPossibleReference
+#      !mEndOf_lowerBoundExpression_instruction
+#      ?let lowerBoundExpressionResult
+#    ]  
+#    [mUpperBoundExpression analyzeExpression
+#      !self:inSelfType
+#      !inGuard:false
+#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#      !optionalTargetType:type
+#      !context:inContext
+#      !mode:inCurrentMode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca:ioAllocaList
+#      !?instructionListIR:ioInstructionGenerationList
+#      ?result:let @objectIR upperBoundExpressionResultPossibleReference
+#    ]
+#    [!?ioInstructionGenerationList appendLoadFromReference
+#      !?ioTemporaries
+#      !upperBoundExpressionResultPossibleReference
+#      !mEndOf_upperBoundExpression_instruction
+#      ?let upperBoundExpressionResult
+#    ]  
+#  #--- Check expression types
+#    let lowerBound = checkAssignmentCompatibility (
+#      !source:lowerBoundExpressionResult
+#      !targetAnnotationType:type
+#      !errorLocation:mEndOf_lowerBoundExpression_instruction
+#      !staticTypeAllowed:false
+#    )
+#    let upperBound = checkAssignmentCompatibility (
+#      !source:upperBoundExpressionResult
+#      !targetAnnotationType:type
+#      !errorLocation:mEndOf_upperBoundExpression_instruction
+#      !staticTypeAllowed:false
+#    )
+#  #---
+#    [!?ioUniversalMap openOverrideForRepeatBlock]
+#    [!?ioVariableMap openOverrideForRepeatBlock]
+#  #--- Enter iteration variable name
+#    let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+#    ioTemporaries.mTemporaryIndex ++
+#    ioAllocaList += !enumeratedVarLLVMName ![[type kind] llvmTypeName]
+#    if mVarName.string != "" then
+#     let objectIR = @objectIR.localVariableReference {!type:type !plmName:enumeratedVarLLVMName}
+#     [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
+#      [!?ioVariableMap insertUsedConstant
+#        !lkey:mVarName
+#        !type:type
+#        !readAccessAllowed:true # Read access ok
+#        !objectIR:objectIR
+#        !copyable:true
+#        !canBeUsedAsInputParameter:false
+#      ]
+#    end
+#  #--- Analyze instruction list
+#    @instructionListIR instructionGenerationList = {}
+#    [mDoInstructionList analyzeBranchInstructionList
+#      !self:inSelfType
+#      !propertiesAreMutable:inRoutineCanMutateProperties
+#      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#      !endOfInstructionList:mEndOf_do_instruction
+#      !context:inContext
+#      !mode:inCurrentMode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioVariableMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca:ioAllocaList
+#      !?instructionListIR:instructionGenerationList
+#    ]
+#    [!?ioUniversalMap closeOverride !mEndOf_do_instruction]
+#    [!?ioVariableMap closeOverride !mEndOf_do_instruction]
+#  #--- Code generation
+#    ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR.new {
+#      !enumeratedVarLLVMName
+#      !type
+#      !unsigned
+#      !mEndOf_do_instruction
+#      !lowerBound
+#      !upperBound
+#      !instructionGenerationList
+#    }
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
-  @string mVarName
-  @unifiedTypeMap-proxy mType
-  @bool mUnsigned
-  @location mLocation
-  @objectIR mLowerExpressionResult
-  @objectIR mUpperExpressionResult
-  @instructionListIR mInstructionList
-}
+#class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
+#  @string mVarName
+#  @unifiedTypeMap-proxy mType
+#  @bool mUnsigned
+#  @location mLocation
+#  @objectIR mLowerExpressionResult
+#  @objectIR mUpperExpressionResult
+#  @instructionListIR mInstructionList
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #         for x in LOW ..< UP do INST end 

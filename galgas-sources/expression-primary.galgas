@@ -214,656 +214,1016 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
 #! SEMANTICS                                                                                                            
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @internalRepresentation {
-  case standAloneIdentifier (@lstring identifier)
-  case structureMember (@lstring propertyName @objectIR currentPointerIR)
-  case bitField (@sliceMap sliceMap @objectIR valueIR)
-}
+#enum @internalRepresentation {
+#  case standAloneIdentifier (@lstring identifier)
+#  case structureMember (@lstring propertyName @objectIR currentPointerIR)
+#  case bitField (@sliceMap sliceMap @objectIR valueIR)
+#}
 
 #·······················································································································
 
-override method @primaryInExpressionAST analyzeExpression
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@objectIR outResult
-{
-#--- object access, with ou without self
-  @internalRepresentation internalRepresentation
-  switch mSelf
-  case noSelf :
-    if inGuard then
-      error mObjectName : "in guard, only 'self' properties may be accessed" : internalRepresentation
-    else 
-      internalRepresentation = .standAloneIdentifier {!identifier:mObjectName}
-    end
-  case selfAt (selfLocation) :
-    if inSelfType == .null then
-      error selfLocation : "'self' is not available in this context" : internalRepresentation
-    elsif [[inSelfType kind] isStructure] then
-      internalRepresentation = .structureMember {
-        !propertyName:mObjectName
-        !currentPointerIR:.selfObject {!type:inSelfType}
-      }
-    else
-      error selfLocation : "'self' should be a structure instance" : internalRepresentation
-    end
-  end
-#--- Access list
-  for (access) in mAccessList do
-    switch access
-    case property (@lstring propertyName) :
-      handlePropertyAccessInExpression (
-        !?internalRepresentation
-        !propertyName
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:inOptionalTargetType
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
-      )
-    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
-      handleArrayAccessInExpression (
-        !?internalRepresentation
-        !indexExpression
-        !endOfIndex
-        !self:inSelfType
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:inOptionalTargetType
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
-      )
-    case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
-      handleFunctionCallInExpressionNew (
-        !?internalRepresentation
-        !self:inSelfType
-        !inGuard:inGuard
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inCurrentMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !arguments 
-        !errorLocation
-        !?ioInstructionGenerationList
-      )
-    end
-  end
-#--- Analyze current internal representation, in order to get result as @objectIR
-  switch internalRepresentation
-  case standAloneIdentifier (@lstring unused identifier) :
-    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
-  case structureMember (propertyName @objectIR currentPointer) :
-    if [[currentPointer kind] isStructure] then
-      [[currentPointer kind] structure ?2* ?universalMap:let structureMap ?2*]
-      var m = structureMap
-      [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
-      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
-      let newObject = @objectIR.temporaryReference {
-         !type:[masterPropertyIR type] # [currentPointer type]
-         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
-         !sliceMap:{}
-         !volatile:false
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference
-        !newObject
-        !currentPointer
-        !propertyName
-        !index
-      ]
-      outResult = newObject
-    else
-      error [currentPointer location] : "this should be a structure instance" : outResult
-    end
-  case bitField (@sliceMap unused sliceMap @objectIR valueIR) :
-    outResult = valueIR
-  end
-}
+#override method @primaryInExpressionAST analyzeExpression
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?inGuard:let @bool inGuard
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#  !result:@objectIR outResult
+#{
+##--- object access, with ou without self
+#  @internalRepresentation internalRepresentation
+#  switch mSelf
+#  case noSelf :
+#    if inGuard then
+#      error mObjectName : "in guard, only 'self' properties may be accessed" : internalRepresentation
+#    else 
+#      internalRepresentation = .standAloneIdentifier {!identifier:mObjectName}
+#    end
+#  case selfAt (selfLocation) :
+#    if inSelfType == .null then
+#      error selfLocation : "'self' is not available in this context" : internalRepresentation
+#    elsif [[inSelfType kind] isStructure] then
+#      internalRepresentation = .structureMember {
+#        !propertyName:mObjectName
+#        !currentPointerIR:.selfObject {!type:inSelfType}
+#      }
+#    else
+#      error selfLocation : "'self' should be a structure instance" : internalRepresentation
+#    end
+#  end
+##--- Access list
+#  for (access) in mAccessList do
+#    switch access
+#    case property (@lstring propertyName) :
+#      handlePropertyAccessInExpression (
+#        !?internalRepresentation
+#        !propertyName
+#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#        !optionalTargetType:inOptionalTargetType
+#        !context:inContext
+#        !mode:inCurrentMode
+#        !?temporary:ioTemporaries
+#        !?staticStringMap:ioGlobalLiteralStringMap
+#        !?variableMap:ioUniversalMap
+#        !?alloca:ioAllocaList
+#        !?instructionListIR:ioInstructionGenerationList
+#      )
+#    case arrayAccess (@expressionAST indexExpression @location endOfIndex) :
+#      handleArrayAccessInExpression (
+#        !?internalRepresentation
+#        !indexExpression
+#        !endOfIndex
+#        !self:inSelfType
+#        !inGuard:inGuard
+#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#        !optionalTargetType:inOptionalTargetType
+#        !context:inContext
+#        !mode:inCurrentMode
+#        !?temporary:ioTemporaries
+#        !?staticStringMap:ioGlobalLiteralStringMap
+#        !?variableMap:ioUniversalMap
+#        !?alloca:ioAllocaList
+#        !?instructionListIR:ioInstructionGenerationList
+#      )
+#    case funcCall (@effectiveArgumentListAST arguments @location errorLocation) :
+#      handleFunctionCallInExpressionNew (
+#        !?internalRepresentation
+#        !self:inSelfType
+#        !inGuard:inGuard
+#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#        !context:inContext
+#        !mode:inCurrentMode
+#        !?temporary:ioTemporaries
+#        !?staticStringMap:ioGlobalLiteralStringMap
+#        !?variableMap:ioUniversalMap
+#        !?alloca:ioAllocaList
+#        !arguments 
+#        !errorLocation
+#        !?ioInstructionGenerationList
+#      )
+#    end
+#  end
+##--- Analyze current internal representation, in order to get result as @objectIR
+#  switch internalRepresentation
+#  case standAloneIdentifier (@lstring unused identifier) :
+#    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?outResult]
+#  case structureMember (propertyName @objectIR currentPointer) :
+#    if [[currentPointer kind] isStructure] then
+#      [[currentPointer kind] structure ?2* ?universalMap:let structureMap ?2*]
+#      var m = structureMap
+#      [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
+#      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
+#      let newObject = @objectIR.temporaryReference {
+#         !type:[masterPropertyIR type] # [currentPointer type]
+#         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+#         !sliceMap:{}
+#         !volatile:false
+#      }
+#      ioTemporaries.mTemporaryIndex ++
+#      [!?ioInstructionGenerationList appendGetPropertyReference
+#        !newObject
+#        !currentPointer
+#        !propertyName
+#        !index
+#      ]
+#      outResult = newObject
+#    else
+#      error [currentPointer location] : "this should be a structure instance" : outResult
+#    end
+#  case bitField (@sliceMap unused sliceMap @objectIR valueIR) :
+#    outResult = valueIR
+#  end
+#}
 
 #·······················································································································
 
-private proc handlePropertyAccessInExpression
-  ?!@internalRepresentation ioInternalRepresentation
-  ?let @lstring inPropertyName
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode unused inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-  switch ioInternalRepresentation
-  case standAloneIdentifier (identifier) :
-    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?let @objectIR objectIR]
-    switch objectIR
-    case globalVariableReference (type unused plmName) :
-      if [[type kind] isStructure] then
-        ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
-      else
-        error identifier : "this should be a structure instance" : ioInternalRepresentation
-      end
-    case null :
-    case selfObject (*) :
-      error identifier : "«selfObject» invalid here" : ioInternalRepresentation
-    case localVariableReference (@unifiedTypeMap-proxy type @lstring plmName) :
-      if [[type kind] isStructure] then
-        let objectIR = @objectIR.llvmTemporaryValue {
-          !type:type
-          !llvmName:.new {!llvmNameForLocalVariable (!plmName) !plmName} !sliceMap:{}
-        }
-        ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
-      else
-        error identifier : "this should be a structure instance" : ioInternalRepresentation
-      end
-    case registerReference (@unifiedTypeMap-proxy type
-                            @lstring plmRegisterName
-                            * *
-                            @bigint address
-                            @sliceMap sliceMap
-                            @uint arraySize *) : # 0 if not an array
-      if arraySize > 0 then
-        error inPropertyName : "register is an array, dot notation unavailable" : ioInternalRepresentation
-      else
-        getNewTempVariable (!type !plmRegisterName !?ioTemporaries ?let registerIR)
-        [!?ioInstructionGenerationList appendLoadVolatileRegister !registerIR !address]
-        [sliceMap searchKey
-          !inPropertyName
-          ?let @llvmBinaryOperation accessOperator
-          ?let @bigint accessRightOperand
-          ?let @sliceMap resultSliceMap
-          ?let @unifiedTypeMap-proxy resultType
-        ]
-        let resultObject = @objectIR.llvmTemporaryValue {
-          !type:resultType
-          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
-          !sliceMap:resultSliceMap
-        }
-        ioTemporaries.mTemporaryIndex ++
-        [!?ioInstructionGenerationList appendBinaryOperation
-          !resultObject
-          ![registerIR type]
-          !inPropertyName.location
-          !registerIR
-          !accessOperator
-          !.literalInteger {!type: inContext.mLiteralIntegerType !value:accessRightOperand}
-        ]
-        ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
-      end
-    case temporaryReference (* * * *) :
-      error identifier : "«temporaryReference» invalid here" : ioInternalRepresentation
-    case property (* * *) :
-      error identifier : "«property» invalid here" : ioInternalRepresentation
-    case llvmTemporaryValue (* * *) :
-      error identifier : "«llvmTemporaryValue» invalid here" : ioInternalRepresentation
-    case literalInteger  (* *) :
-      error identifier : "«literalInteger» invalid here" : ioInternalRepresentation
-    case llvmStructureConstant (* *) :
-       error identifier : "«llvmStructureConstant» invalid here" : ioInternalRepresentation
-    case literalString  (* * *) :
-       error identifier : "a global string constant is invalid here" : ioInternalRepresentation
-    case zero (*) :
-      error identifier : "«zero» invalid here" : ioInternalRepresentation
-    case possibleFunction (* *) :
-      error identifier : "«possibleFunction» invalid here" : ioInternalRepresentation
-    end
-  case structureMember (masterPropertyName currentPointer) :
-    if [[currentPointer kind] isStructure] then
-      [[currentPointer kind] structure ?2* ?universalMap:let structureMap ?2*]
-      var m = structureMap
-      [!?m searchValuedObjectForReadAccess !masterPropertyName ?let @objectIR masterPropertyIR]
-      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
-      let newObject = @objectIR.temporaryReference {
-         !type:[masterPropertyIR type]
-         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
-         !sliceMap:{}
-         !volatile:false
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [!?ioInstructionGenerationList appendGetPropertyReference
-        !newObject
-        !currentPointer
-        !masterPropertyName
-        !index
-      ]
-      ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:newObject}
-    else
-      error masterPropertyName : "'" + masterPropertyName + "' should be a structure" : ioInternalRepresentation
-    end
-  case bitField (@sliceMap sliceMap @objectIR currentObject) :
-    [sliceMap searchKey
-      !inPropertyName
-      ?let @llvmBinaryOperation accessOperator
-      ?let @bigint accessRightOperand
-      ?let @sliceMap resultSliceMap
-      ?let @unifiedTypeMap-proxy resultType
-    ]
-    let resultObject = @objectIR.llvmTemporaryValue {
-      !type:resultType
-      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
-      !sliceMap:resultSliceMap
-    }
-    ioTemporaries.mTemporaryIndex ++
-    [!?ioInstructionGenerationList appendBinaryOperation
-      !resultObject
-      ![currentObject type]
-      !inPropertyName.location
-      !currentObject
-      !accessOperator
-      !.literalInteger {!type: inContext.mLiteralIntegerType !value:accessRightOperand}
-    ]
-    ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
-  end
-}
+#private proc handlePropertyAccessInExpression
+#  ?!@internalRepresentation ioInternalRepresentation
+#  ?let @lstring inPropertyName
+#  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+#  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode unused inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList unused ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#{
+#  switch ioInternalRepresentation
+#  case standAloneIdentifier (identifier) :
+#    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?let @objectIR objectIR]
+#    switch objectIR
+#    case globalVariableReference (type unused plmName) :
+#      if [[type kind] isStructure] then
+#        ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
+#      else
+#        error identifier : "this should be a structure instance" : ioInternalRepresentation
+#      end
+#    case null :
+#    case selfObject (*) :
+#      error identifier : "«selfObject» invalid here" : ioInternalRepresentation
+#    case localVariableReference (@unifiedTypeMap-proxy type @lstring plmName) :
+#      if [[type kind] isStructure] then
+#        let objectIR = @objectIR.llvmTemporaryValue {
+#          !type:type
+#          !llvmName:.new {!llvmNameForLocalVariable (!plmName) !plmName} !sliceMap:{}
+#        }
+#        ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:objectIR}
+#      else
+#        error identifier : "this should be a structure instance" : ioInternalRepresentation
+#      end
+#    case registerReference (@unifiedTypeMap-proxy type
+#                            @lstring plmRegisterName
+#                            * *
+#                            @bigint address
+#                            @sliceMap sliceMap
+#                            @uint arraySize *) : # 0 if not an array
+#      if arraySize > 0 then
+#        error inPropertyName : "register is an array, dot notation unavailable" : ioInternalRepresentation
+#      else
+#        getNewTempVariable (!type !plmRegisterName !?ioTemporaries ?let registerIR)
+#        [!?ioInstructionGenerationList appendLoadVolatileRegister !registerIR !address]
+#        [sliceMap searchKey
+#          !inPropertyName
+#          ?let @llvmBinaryOperation accessOperator
+#          ?let @bigint accessRightOperand
+#          ?let @sliceMap resultSliceMap
+#          ?let @unifiedTypeMap-proxy resultType
+#        ]
+#        let resultObject = @objectIR.llvmTemporaryValue {
+#          !type:resultType
+#          !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
+#          !sliceMap:resultSliceMap
+#        }
+#        ioTemporaries.mTemporaryIndex ++
+#        [!?ioInstructionGenerationList appendBinaryOperation
+#          !resultObject
+#          ![registerIR type]
+#          !inPropertyName.location
+#          !registerIR
+#          !accessOperator
+#          !.literalInteger {!type: inContext.mLiteralIntegerType !value:accessRightOperand}
+#        ]
+#        ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
+#      end
+#    case temporaryReference (* * * *) :
+#      error identifier : "«temporaryReference» invalid here" : ioInternalRepresentation
+#    case property (* * *) :
+#      error identifier : "«property» invalid here" : ioInternalRepresentation
+#    case llvmTemporaryValue (* * *) :
+#      error identifier : "«llvmTemporaryValue» invalid here" : ioInternalRepresentation
+#    case literalInteger  (* *) :
+#      error identifier : "«literalInteger» invalid here" : ioInternalRepresentation
+#    case llvmStructureConstant (* *) :
+#       error identifier : "«llvmStructureConstant» invalid here" : ioInternalRepresentation
+#    case literalString  (* * *) :
+#       error identifier : "a global string constant is invalid here" : ioInternalRepresentation
+#    case zero (*) :
+#      error identifier : "«zero» invalid here" : ioInternalRepresentation
+#    case possibleFunction (* *) :
+#      error identifier : "«possibleFunction» invalid here" : ioInternalRepresentation
+#    end
+#  case structureMember (masterPropertyName currentPointer) :
+#    if [[currentPointer kind] isStructure] then
+#      [[currentPointer kind] structure ?2* ?universalMap:let structureMap ?2*]
+#      var m = structureMap
+#      [!?m searchValuedObjectForReadAccess !masterPropertyName ?let @objectIR masterPropertyIR]
+#      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
+#      let newObject = @objectIR.temporaryReference {
+#         !type:[masterPropertyIR type]
+#         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !masterPropertyName}
+#         !sliceMap:{}
+#         !volatile:false
+#      }
+#      ioTemporaries.mTemporaryIndex ++
+#      [!?ioInstructionGenerationList appendGetPropertyReference
+#        !newObject
+#        !currentPointer
+#        !masterPropertyName
+#        !index
+#      ]
+#      ioInternalRepresentation = .structureMember {!propertyName:inPropertyName !currentPointerIR:newObject}
+#    else
+#      error masterPropertyName : "'" + masterPropertyName + "' should be a structure" : ioInternalRepresentation
+#    end
+#  case bitField (@sliceMap sliceMap @objectIR currentObject) :
+#    [sliceMap searchKey
+#      !inPropertyName
+#      ?let @llvmBinaryOperation accessOperator
+#      ?let @bigint accessRightOperand
+#      ?let @sliceMap resultSliceMap
+#      ?let @unifiedTypeMap-proxy resultType
+#    ]
+#    let resultObject = @objectIR.llvmTemporaryValue {
+#      !type:resultType
+#      !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inPropertyName}
+#      !sliceMap:resultSliceMap
+#    }
+#    ioTemporaries.mTemporaryIndex ++
+#    [!?ioInstructionGenerationList appendBinaryOperation
+#      !resultObject
+#      ![currentObject type]
+#      !inPropertyName.location
+#      !currentObject
+#      !accessOperator
+#      !.literalInteger {!type: inContext.mLiteralIntegerType !value:accessRightOperand}
+#    ]
+#    ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
+#  end
+#}
 
 #·······················································································································
 
-private proc handleArrayAccessInExpression
-  ?!@internalRepresentation ioInternalRepresentation
-  ?let @expressionAST inIndexExpression
-  ?let @location inEndOfIndex
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-  @objectIR variableIR
-  @location errorLocation
-  switch ioInternalRepresentation
-  case standAloneIdentifier (@lstring identifier) :
-    errorLocation = identifier
-    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?variableIR]
-  case structureMember (@lstring propertyName @objectIR currentPointerIR) :
-    if [[currentPointerIR kind] isStructure] then
-      errorLocation = propertyName
-      [[currentPointerIR kind] structure ?2* ?universalMap:let structureMap ?2*]
-      var m = structureMap
-      [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
-      variableIR = @objectIR.temporaryReference {
-         !type:[masterPropertyIR type] # [currentPointer type]
-         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
-         !sliceMap:{}
-         !volatile:false
-      }
-      ioTemporaries.mTemporaryIndex ++
-      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
-      [!?ioInstructionGenerationList appendGetPropertyReference
-        !variableIR
-        !currentPointerIR
-        !propertyName
-        !index
-      ]
-    else
-      error [currentPointerIR location] : "this should be a structure instance" : variableIR, errorLocation
-    end
-  case bitField (@sliceMap unused sliceMap valueIR) :
-    error [valueIR location] : "this object is not an array" : variableIR, errorLocation
-  end
-#--- Check current object is an array
-  if [[[variableIR type] kind] isArrayType] then
-    handleSubscriptArrayInAssignmentAndExpressionNew (
-      !self: inSelfType
-      !inGuard: inGuard
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-      !context: inContext
-      !mode: inCurrentMode
-      !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
-      !?variableMap:ioUniversalMap
-      !?alloca: ioAllocaList
-      !inIndexExpression 
-      !inEndOfIndex
-      !?ioInstructionGenerationList
-      !?variableIR
-   )
-   ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:variableIR}
-  elsif [variableIR isRegisterReference] then
-    handleSubscriptRegisterArrayInAssignmentAndExpressionNew (
-      !self: inSelfType
-      !inGuard: inGuard
-      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-      !context: inContext
-      !mode: inCurrentMode
-      !?temporary: ioTemporaries
-      !?staticStringMap: ioGlobalLiteralStringMap
-      !?variableMap:ioUniversalMap
-      !?alloca: ioAllocaList
-      !inIndexExpression 
-      !inEndOfIndex
-      !?ioInstructionGenerationList
-      !?variableIR
-      ?sliceMap:let sliceMap
-   )
-   ioInternalRepresentation = .bitField {!sliceMap:sliceMap !valueIR:variableIR}
-  else
-    error errorLocation : "the receiver is not an array and does not accept subscripting"
-  end
-}
+#private proc handleArrayAccessInExpression
+#  ?!@internalRepresentation ioInternalRepresentation
+#  ?let @expressionAST inIndexExpression
+#  ?let @location inEndOfIndex
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?inGuard:let @bool inGuard
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#{
+#  @objectIR variableIR
+#  @location errorLocation
+#  switch ioInternalRepresentation
+#  case standAloneIdentifier (@lstring identifier) :
+#    errorLocation = identifier
+#    [!?ioUniversalMap searchValuedObjectForReadAccess !identifier ?variableIR]
+#  case structureMember (@lstring propertyName @objectIR currentPointerIR) :
+#    if [[currentPointerIR kind] isStructure] then
+#      errorLocation = propertyName
+#      [[currentPointerIR kind] structure ?2* ?universalMap:let structureMap ?2*]
+#      var m = structureMap
+#      [!?m searchValuedObjectForReadAccess !propertyName ?let @objectIR masterPropertyIR]
+#      variableIR = @objectIR.temporaryReference {
+#         !type:[masterPropertyIR type] # [currentPointer type]
+#         !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !propertyName}
+#         !sliceMap:{}
+#         !volatile:false
+#      }
+#      ioTemporaries.mTemporaryIndex ++
+#      [masterPropertyIR property ?type:* ?plmName:* ?index:let index]
+#      [!?ioInstructionGenerationList appendGetPropertyReference
+#        !variableIR
+#        !currentPointerIR
+#        !propertyName
+#        !index
+#      ]
+#    else
+#      error [currentPointerIR location] : "this should be a structure instance" : variableIR, errorLocation
+#    end
+#  case bitField (@sliceMap unused sliceMap valueIR) :
+#    error [valueIR location] : "this object is not an array" : variableIR, errorLocation
+#  end
+##--- Check current object is an array
+#  if [[[variableIR type] kind] isArrayType] then
+#    handleSubscriptArrayInAssignmentAndExpressionNew (
+#      !self: inSelfType
+#      !inGuard: inGuard
+#      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+#      !context: inContext
+#      !mode: inCurrentMode
+#      !?temporary: ioTemporaries
+#      !?staticStringMap: ioGlobalLiteralStringMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca: ioAllocaList
+#      !inIndexExpression 
+#      !inEndOfIndex
+#      !?ioInstructionGenerationList
+#      !?variableIR
+#   )
+#   ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:variableIR}
+#  elsif [variableIR isRegisterReference] then
+#    handleSubscriptRegisterArrayInAssignmentAndExpressionNew (
+#      !self: inSelfType
+#      !inGuard: inGuard
+#      !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+#      !context: inContext
+#      !mode: inCurrentMode
+#      !?temporary: ioTemporaries
+#      !?staticStringMap: ioGlobalLiteralStringMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca: ioAllocaList
+#      !inIndexExpression 
+#      !inEndOfIndex
+#      !?ioInstructionGenerationList
+#      !?variableIR
+#      ?sliceMap:let sliceMap
+#   )
+#   ioInternalRepresentation = .bitField {!sliceMap:sliceMap !valueIR:variableIR}
+#  else
+#    error errorLocation : "the receiver is not an array and does not accept subscripting"
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc handleFunctionCallInExpressionNew
-  ?!@internalRepresentation ioInternalRepresentation
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?let @effectiveArgumentListAST inArguments 
-  ?let @location inErrorLocation
-  ?!@instructionListIR ioInstructionGenerationList
-{
-#--- Cannot call a function in guard
-  if inGuard then
-    error inErrorLocation : "a routine cannot be called in guard"
-  end
-#--- Get function name and map containing the function definition
-  switch ioInternalRepresentation
-  case bitField (* @objectIR valueIR) :
-    error [valueIR location]
-      : "this is not a function"
-      : ioInternalRepresentation
-  case standAloneIdentifier (@lstring identifier) : # This a call idf (....)
-    handleStandAloneFunctionCallInExpression (
-      !?ioInternalRepresentation
-      !identifier
-      !self:inSelfType
-      !inGuard:inGuard
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !context:inContext
-      !mode:inMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !inArguments 
-      !inErrorLocation
-      !?ioInstructionGenerationList
-    )
-  case structureMember (@lstring propertyName @objectIR currentPointerIR) :
-    if [[currentPointerIR kind] isStructure] then
-      handleMethodCallInExpressionNew (
-        !propertyName
-        !currentPointerIR
-        !self:inSelfType
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !context:inContext
-        !mode:inMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !inArguments 
-        !?ioInstructionGenerationList
-        ?let @objectIR callReturnedResult
-      )
-      ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:callReturnedResult}
-    else
-      error [currentPointerIR location] : "this object should be a structure" : ioInternalRepresentation
-    end
-  end
-}
+#private proc handleFunctionCallInExpressionNew
+#  ?!@internalRepresentation ioInternalRepresentation
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?inGuard:let @bool inGuard
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?let @effectiveArgumentListAST inArguments 
+#  ?let @location inErrorLocation
+#  ?!@instructionListIR ioInstructionGenerationList
+#{
+##--- Cannot call a function in guard
+#  if inGuard then
+#    error inErrorLocation : "a routine cannot be called in guard"
+#  end
+##--- Get function name and map containing the function definition
+#  switch ioInternalRepresentation
+#  case bitField (* @objectIR valueIR) :
+#    error [valueIR location]
+#      : "this is not a function"
+#      : ioInternalRepresentation
+#  case standAloneIdentifier (@lstring identifier) : # This a call idf (....)
+#    handleStandAloneFunctionCallInExpression (
+#      !?ioInternalRepresentation
+#      !identifier
+#      !self:inSelfType
+#      !inGuard:inGuard
+#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#      !context:inContext
+#      !mode:inMode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca:ioAllocaList
+#      !inArguments 
+#      !inErrorLocation
+#      !?ioInstructionGenerationList
+#    )
+#  case structureMember (@lstring propertyName @objectIR currentPointerIR) :
+#    if [[currentPointerIR kind] isStructure] then
+#      handleMethodCallInExpressionNew (
+#        !propertyName
+#        !currentPointerIR
+#        !self:inSelfType
+#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#        !context:inContext
+#        !mode:inMode
+#        !?temporary:ioTemporaries
+#        !?staticStringMap:ioGlobalLiteralStringMap
+#        !?variableMap:ioUniversalMap
+#        !?alloca:ioAllocaList
+#        !inArguments 
+#        !?ioInstructionGenerationList
+#        ?let @objectIR callReturnedResult
+#      )
+#      ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:callReturnedResult}
+#    else
+#      error [currentPointerIR location] : "this object should be a structure" : ioInternalRepresentation
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc handleMethodCallInExpressionNew
-  ?let @lstring inMethodName
-  ?let @objectIR inCurrentPointerIR
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?let @effectiveArgumentListAST inArguments 
-  ?!@instructionListIR ioInstructionGenerationList
-  !@objectIR outCallReturnedResult
-{
-  [[inCurrentPointerIR kind] structure ?2* ?universalMap:var currentMap ?2*]
-  let routineMangledName = routineMangledNameFromCall (!"$" + [[inCurrentPointerIR type] key] !inMethodName !inArguments)
-#--- Get called function signature
-  let signature = [inArguments routineSignature !inMethodName.location]
-#--- Search function in map
-  [currentMap searchRoutine
-    !inMethodName
-    !signature
-    ?let @lstring LLVMInvocationRoutineName
-    ?@routineDescriptor routineDescriptor
-  ]
-#--- Check routine is actually a function
-  if routineDescriptor.mReturnType == .null then
-    error inMethodName : "not a function (returns no value)" : routineDescriptor
-  end
-#--- Check modes
-  let calleeKind = checkMode (
-    !callerMode:inMode
-    !calleeMode:[routineDescriptor.mRoutineKind executionMode]
-    !kind:routineDescriptor.mRoutineKind
-    !error:inMethodName.location
-  )
-#--- Add receiver as first parameter ?
-  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-  switch routineDescriptor.mRoutineCallingScheme
-  case staticCall :
-    effectiveParameterListIR += !.outputInput !inCurrentPointerIR # Add receiver as first argument
-  case propertyIndirectCall (*) :
-  end
-#--- Analyze effective parameters
-  analyzeEffectiveParametersNew (
-    !self:inSelfType
-    !formal:routineDescriptor.mSignature
-    !effective:inArguments
-    !errorLocation:inMethodName.location
-    !callerForInvocationGraph:inCallerNameForInvocationGraph
-    !context:inContext
-    !requiredMode:inMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    !?effectiveIR:effectiveParameterListIR
-  )
-#--- New LLVM variable for function call result
-  getNewTempVariable (!routineDescriptor.mReturnType !routineMangledName !?ioTemporaries ?outCallReturnedResult)
-#--- Generate call
-  switch routineDescriptor.mRoutineCallingScheme
-  case staticCall :
-  #--- Code generation
-    ioInstructionGenerationList += !@staticRoutineCallIR.new {
-      !"" # globalVariableReceiverName
-      !outCallReturnedResult
-      !routineMangledName
-      !LLVMInvocationRoutineName
-      !calleeKind
-      !effectiveParameterListIR
-    }
-  #--- Enter in invocation graph
-    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-  case propertyIndirectCall (propertyIndex) :
-    let propertyReference = @objectIR.temporaryReference {
-       !type:[inCurrentPointerIR type] #.function {!descriptor:routineDescriptor} #  TYPE IS IRRELEVANT
-       !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inMethodName}
-       !sliceMap:{}
-       !volatile:false
-    }
-    ioTemporaries.mTemporaryIndex ++
-    [!?ioInstructionGenerationList appendGetPropertyReference
-      !propertyReference
-      !inCurrentPointerIR
-      !inMethodName
-      !propertyIndex
-    ]
-  #--- Code generation
-    ioInstructionGenerationList += !@indirectRoutineCallIR.new {
-      !propertyReference
-      !.function {!descriptor:routineDescriptor}
-      !outCallReturnedResult
-      !effectiveParameterListIR
-    }
-  end
-}
+#proc handleMethodCallInExpressionNew
+#  ?let @lstring inMethodName
+#  ?let @objectIR inCurrentPointerIR
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?let @effectiveArgumentListAST inArguments 
+#  ?!@instructionListIR ioInstructionGenerationList
+#  !@objectIR outCallReturnedResult
+#{
+#  [[inCurrentPointerIR kind] structure ?2* ?universalMap:var currentMap ?2*]
+#  let routineMangledName = routineMangledNameFromCall (!"$" + [[inCurrentPointerIR type] key] !inMethodName !inArguments)
+##--- Get called function signature
+#  let signature = [inArguments routineSignature !inMethodName.location]
+##--- Search function in map
+#  [currentMap searchRoutine
+#    !inMethodName
+#    !signature
+#    ?let @lstring LLVMInvocationRoutineName
+#    ?@routineDescriptor routineDescriptor
+#  ]
+##--- Check routine is actually a function
+#  if routineDescriptor.mReturnType == .null then
+#    error inMethodName : "not a function (returns no value)" : routineDescriptor
+#  end
+##--- Check modes
+#  let calleeKind = checkMode (
+#    !callerMode:inMode
+#    !calleeMode:[routineDescriptor.mRoutineKind executionMode]
+#    !kind:routineDescriptor.mRoutineKind
+#    !error:inMethodName.location
+#  )
+##--- Add receiver as first parameter ?
+#  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+#  switch routineDescriptor.mRoutineCallingScheme
+#  case staticCall :
+#    effectiveParameterListIR += !.outputInput !inCurrentPointerIR # Add receiver as first argument
+#  case propertyIndirectCall (*) :
+#  end
+##--- Analyze effective parameters
+#  analyzeEffectiveParametersNew (
+#    !self:inSelfType
+#    !formal:routineDescriptor.mSignature
+#    !effective:inArguments
+#    !errorLocation:inMethodName.location
+#    !callerForInvocationGraph:inCallerNameForInvocationGraph
+#    !context:inContext
+#    !requiredMode:inMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    !?effectiveIR:effectiveParameterListIR
+#  )
+##--- New LLVM variable for function call result
+#  getNewTempVariable (!routineDescriptor.mReturnType !routineMangledName !?ioTemporaries ?outCallReturnedResult)
+##--- Generate call
+#  switch routineDescriptor.mRoutineCallingScheme
+#  case staticCall :
+#  #--- Code generation
+#    ioInstructionGenerationList += !@staticRoutineCallIR.new {
+#      !"" # globalVariableReceiverName
+#      !outCallReturnedResult
+#      !routineMangledName
+#      !LLVMInvocationRoutineName
+#      !calleeKind
+#      !effectiveParameterListIR
+#    }
+#  #--- Enter in invocation graph
+#    [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+#  case propertyIndirectCall (propertyIndex) :
+#    let propertyReference = @objectIR.temporaryReference {
+#       !type:[inCurrentPointerIR type] #.function {!descriptor:routineDescriptor} #  TYPE IS IRRELEVANT
+#       !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inMethodName}
+#       !sliceMap:{}
+#       !volatile:false
+#    }
+#    ioTemporaries.mTemporaryIndex ++
+#    [!?ioInstructionGenerationList appendGetPropertyReference
+#      !propertyReference
+#      !inCurrentPointerIR
+#      !inMethodName
+#      !propertyIndex
+#    ]
+#  #--- Code generation
+#    ioInstructionGenerationList += !@indirectRoutineCallIR.new {
+#      !propertyReference
+#      !.function {!descriptor:routineDescriptor}
+#      !outCallReturnedResult
+#      !effectiveParameterListIR
+#    }
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc handleStandAloneFunctionCallInExpression
-  ?!@internalRepresentation ioInternalRepresentation
-  ?let @lstring inFunctionName
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?let @effectiveArgumentListAST inArguments 
-  ?let @location inErrorLocation
-  ?!@instructionListIR ioInstructionGenerationList
-{
-#--- Cannot call a function in guard
-  if inGuard then
-    error inErrorLocation : "a routine cannot be called in guard"
-  end
-#--- Get function name and map containing the function definition
-  let routineMangledName = routineMangledNameFromCall (!"" !inFunctionName !inArguments)
-#--- Get called function signature
-  let signature = [inArguments routineSignature !inFunctionName.location]
-#--- Search function in map
-  [ioUniversalMap searchRoutine
-    !inFunctionName
-    !signature
-    ?let @lstring LLVMInvocationRoutineName
-    ?@routineDescriptor routineDescriptor
-  ]
+#private proc handleStandAloneFunctionCallInExpression
+#  ?!@internalRepresentation ioInternalRepresentation
+#  ?let @lstring inFunctionName
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?inGuard:let @bool inGuard
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?let @effectiveArgumentListAST inArguments 
+#  ?let @location inErrorLocation
+#  ?!@instructionListIR ioInstructionGenerationList
+#{
+##--- Cannot call a function in guard
+#  if inGuard then
+#    error inErrorLocation : "a routine cannot be called in guard"
+#  end
+##--- Get function name and map containing the function definition
+#  let routineMangledName = routineMangledNameFromCall (!"" !inFunctionName !inArguments)
+##--- Get called function signature
+#  let signature = [inArguments routineSignature !inFunctionName.location]
+##--- Search function in map
+#  [ioUniversalMap searchRoutine
+#    !inFunctionName
+#    !signature
+#    ?let @lstring LLVMInvocationRoutineName
+#    ?@routineDescriptor routineDescriptor
+#  ]
+##  let isPublic = routineDescriptor.mIsPublic
+#  let routineKind = routineDescriptor.mRoutineKind
+#  let calleeMode = [routineKind executionMode]
+#  let formalSignature = routineDescriptor.mSignature
+##--- Check routine is actually a function
+#  if routineDescriptor.mReturnType == .null then
+#    error inFunctionName : "not a function (returns no value)" : routineDescriptor
+#  end
+##--- Check modes
+#  let calleeKind = checkMode (
+#    !callerMode:inMode
+#    !calleeMode:calleeMode
+#    !kind:routineKind
+#    !error:inFunctionName.location
+#  )
+##--- Analyze effective parameters
+#  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+#  analyzeEffectiveParametersNew (
+#    !self:inSelfType
+#    !formal:formalSignature
+#    !effective:inArguments
+#    !errorLocation:inFunctionName.location
+#    !callerForInvocationGraph:inCallerNameForInvocationGraph
+#    !context:inContext
+#    !requiredMode:inMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    !?effectiveIR:effectiveParameterListIR
+#  )
+##--- New LLVM variable for function call result
+#  getNewTempVariable (!routineDescriptor.mReturnType !routineMangledName !?ioTemporaries ?let functionResult)
+##--- Code generation
+#  ioInstructionGenerationList += !@staticRoutineCallIR.new {
+#    !"" # globalVariableReceiverName
+#    !functionResult
+#    !routineMangledName
+#    !LLVMInvocationRoutineName
+#    !calleeKind
+#    !effectiveParameterListIR
+#  }
+##--- Enter in invocation graph
+#  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+##---
+#  ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:functionResult}
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#proc analyzeEffectiveParametersNew
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?formal:let @routineTypedSignature inFormalSignature
+#  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
+#  ?errorLocation:let @location inErrorLocation
+#  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?requiredMode:let @mode inRequiredMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#  ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
+#{
+##--- Analyze effective parameters
+#  @procEffectiveParameterList parameterList = {}
+#  for () formal_ in inFormalSignature, () effective_ in inEffectiveParameterList do
+#    switch effective_mEffectiveParameterKind 
+#    case inputWithType (@bool constant @lstring typeName @lstring name) :
+#      let type = if typeName.string == "" then
+#        formal_mType
+#      else
+#        @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName}
+#      end
+#      let varLLVMName = @lstring.new {!name.string + "." + ioTemporaries.mTemporaryIndex !name}
+#      ioTemporaries.mTemporaryIndex ++
+#      let objectIR = @objectIR.localVariableReference {!type:type !plmName:varLLVMName}
+#      if constant then
+#        [!?ioUniversalMap insertLocalConstant !name !objectIR]
+#      else
+#        [!?ioUniversalMap insertLocalVariable !name !objectIR !.hasUnreadValue !false]
+#      end
+#      ioAllocaList += !varLLVMName ![[type kind] llvmTypeName]
+#      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
+#      ioEffectiveParameterListIR +=
+#        !.input
+#        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!varLLVMName) !varLLVMName} !sliceMap:{}}
+#    case input (@lstring name) :
+#      [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
+#      parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
+#      ioEffectiveParameterListIR +=
+#        !.input
+#        !.llvmTemporaryValue {
+#          !type:[objectIR type]
+#          !llvmName:.new {!llvmNameForLocalVariable (![objectIR name])
+#          ![objectIR location]}
+#          !sliceMap:{}
+#        }
+#    case output (@expressionAST expression @location endOfExp) :
+#      [expression analyzeExpression
+#        !self:inSelfType
+#        !inGuard:false
+#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#        !optionalTargetType:formal_mType
+#        !context:inContext
+#        !mode:inRequiredMode
+#        !?temporary:ioTemporaries
+#        !?staticStringMap:ioGlobalLiteralStringMap
+#        !?variableMap:ioUniversalMap
+#        !?alloca:ioAllocaList
+#        !?instructionListIR:ioInstructionGenerationList
+#        ?result:let @objectIR expressionResult
+#      ]
+#      [!?ioInstructionGenerationList appendLoadFromReference
+#        !?ioTemporaries
+#        !expressionResult
+#        !endOfExp
+#        ?let expressionValue
+#      ]  
+#      let result = checkAssignmentCompatibility (
+#        !source:expressionValue
+#        !targetAnnotationType:formal_mType
+#        !errorLocation:endOfExp
+#        !staticTypeAllowed:false
+#      )
+#      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
+#      ioEffectiveParameterListIR += !.output !result
+#    case outputInput (@lstring name) :
+#      [!?ioUniversalMap searchValuedObjectForReadWriteAccess !name ?let objectIR]
+##      if not canBeUsedAsInputParameter then
+##        error name : "this variable cannot be used as output/input parameter"
+##      end
+##      if not accessIsAllowed then
+##        error name : "routine has no access right on the this variable"
+##      end
+#      parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
+#      let argumentIR = @objectIR.llvmTemporaryValue {
+#        !type:[objectIR type]
+#        !llvmName:.new {!llvmNameForLocalVariable (![objectIR llvmName]) ![objectIR location]}
+#        !sliceMap:{}
+#      }
+#      ioEffectiveParameterListIR += !.outputInput !argumentIR
+#    case outputInputSelfVariable (@lstring name) :
+#      if inSelfType == .null then
+#        error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
+##      elsif not inDirectAccessToPropertiesAllowed then
+##        error name : "the current function should be declared @" + userAccessAttribute ()
+##      elsif not inRoutineCanMutateProperties then
+##        error name : "the current routine should be declared @" + mutatingAttribute ()
+#      else
+#        switch [inSelfType kind]
+#        case opaque (* *) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case arrayType (* * * * *) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case boolean :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case staticInteger :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#         case literalString :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case enumeration (* *) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case function (*) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case pointer (*) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case integer (* * * *) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case structure (* * universalMap * *) :
+#          var m = universalMap
+#          [!?m searchValuedObjectForReadAccess !name ?let propertyObject]
+#          [propertyObject property ?2* ?index:let idx]
+#          getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
+#          [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
+#            !fieldObjectReference
+#            !inSelfType
+#            !name
+#            !idx
+#          ]        
+#          parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![propertyObject type]
+#          ioEffectiveParameterListIR +=
+#            !.outputInput
+#            !fieldObjectReference
+#        end    
+#      end
+#    end
+#  end
+##--- Check parameters
+#  if [inFormalSignature length] != [inEffectiveParameterList length] then
+#    error inErrorLocation: "this routine requires " + [inFormalSignature length] + " argument(s), this call names "
+#      + [inEffectiveParameterList length] + " argument(s)"
+#  else
+#    for () formal_ in inFormalSignature, () actual_ in parameterList do
+#      if [formal_mType key] != [actual_mParameterType key] then
+#        error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
+#           "', and is incompatible with the formal type '" + [formal_mType key] + "'"
+#      end
+#      let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
+#      let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]
+#      if requiredPassingMode != testedPassingMode then
+#        error actual_mSelector : "the required selector is '" + requiredPassingMode + "'"
+#      end
+#    end  
+#  end
+#}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#! OLD
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#proc handleFunctionCallInExpression
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?globalVariableReceiverName:let @string inGlobalVariableReceiverName
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?inGuard:let @bool inGuard
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?let @effectiveArgumentListAST inArguments 
+#  ?let @location inErrorLocation
+#  ?!@instructionListIR ioInstructionGenerationList
+#  ?!@objectIR ioObjectPtr
+#  !@unifiedTypeMap-proxy outReturnedType
+#{
+#  if not [ioObjectPtr isPossibleFunction] then ###
+#    error inErrorLocation : "object is not a function" : ioObjectPtr, outReturnedType
+#  elsif inGuard then
+#    [ioObjectPtr possibleFunction ?1* ?functionName:let functionName]
+#    error functionName : "a function cannot be called in guard expression" : ioObjectPtr, outReturnedType
+#  else
+#    [ioObjectPtr possibleFunction ?receiver:let receiver ?functionName:let functionName]
+#    analyzeFunctionCallInExpression (
+#      !self:inSelfType
+#      !propertiesAreMutable:inRoutineCanMutateProperties
+#      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#      !receiver:receiver
+#      !routineName:functionName
+#      !effective:inArguments
+#      !callerForInvocationGraph:inCallerNameForInvocationGraph
+#      !context:inContext
+#      !requiredMode:inMode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioVariableMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca:ioAllocaList
+#      !?instructionListIR:ioInstructionGenerationList
+#      ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
+#      ?routineKind:let @calleeKindIR routineKind
+#      ?routineMangledName:let @lstring functionMangledName
+#      ?routineNameForGeneration:let @lstring functionNameForGeneration
+#      ?returnType:outReturnedType
+#    )
+#  #--- New LLVM variable for function call result
+#    getNewTempVariable (!outReturnedType !functionMangledName !?ioTemporaries ?let functionResult)
+#  #--- Code generation
+#    ioInstructionGenerationList += !@staticRoutineCallIR.new {
+#      !inGlobalVariableReceiverName
+#      !functionResult
+#      !functionMangledName
+#      !functionNameForGeneration
+#      !routineKind
+#      !effectiveParameterListIR
+#    }
+#  #---
+#    ioObjectPtr = functionResult
+#  end
+#}
+
+#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#proc analyzeFunctionCallInExpression
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?receiver:let @objectIR inReceiver
+#  ?routineName:let @lstring inRoutineName
+#  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
+#  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?requiredMode:let @mode inRequiredMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#  !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
+#  !routineKind:@calleeKindIR outRoutineKindIR
+#  !routineMangledName:@lstring outRoutineMangledName
+#  !routineNameForGeneration:@lstring outRoutineNameForGeneration
+#  !returnType:@unifiedTypeMap-proxy outReturnedType
+#{
+##---
+#  outEffectiveParameterListIR = {}
+#  let receiverType = [inReceiver type]
+##--- Special case : call a function from a static array during enumeration
+#  var specialCase = (receiverType != .null) && [[receiverType kind] isStructure]
+#  if specialCase then
+#    [[receiverType kind] structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?universalMap:let unused universalMap ?2*]
+#    if [propertyMap hasKey !inRoutineName] then
+#      [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject]
+#      [propertyObject property ?type:let type ?plmName:let unused plmName ?index:let unused index]
+#      specialCase = [[type kind] isFunction]
+#      if specialCase then
+#        log inRoutineName
+#      end
+#    end
+#  end
+##--- Add receiver as first argument
+#  if receiverType != .null then
+#    outEffectiveParameterListIR += !.outputInput !inReceiver
+#  end
+##--- Build LLVM mangled name
+#  outRoutineMangledName = routineMangledNameFromCall (
+#    !if receiverType == .null then "" else "$" + [receiverType key] end
+#    !inRoutineName
+#    !inEffectiveParameterList
+#  )
+#  [inContext.mRoutineMapForContext searchKey
+#    !inRoutineName
+#    ![inEffectiveParameterList routineSignature !inRoutineName]
+#    ?outRoutineNameForGeneration
+#    ?let @routineDescriptor routineDescriptor
+#    ?let @location outRoutineLocation
+#  ]
 #  let isPublic = routineDescriptor.mIsPublic
-  let routineKind = routineDescriptor.mRoutineKind
-  let calleeMode = [routineKind executionMode]
-  let formalSignature = routineDescriptor.mSignature
-#--- Check routine is actually a function
-  if routineDescriptor.mReturnType == .null then
-    error inFunctionName : "not a function (returns no value)" : routineDescriptor
-  end
-#--- Check modes
-  let calleeKind = checkMode (
-    !callerMode:inMode
-    !calleeMode:calleeMode
-    !kind:routineKind
-    !error:inFunctionName.location
-  )
-#--- Analyze effective parameters
-  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-  analyzeEffectiveParametersNew (
-    !self:inSelfType
-    !formal:formalSignature
-    !effective:inArguments
-    !errorLocation:inFunctionName.location
-    !callerForInvocationGraph:inCallerNameForInvocationGraph
-    !context:inContext
-    !requiredMode:inMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    !?effectiveIR:effectiveParameterListIR
-  )
-#--- New LLVM variable for function call result
-  getNewTempVariable (!routineDescriptor.mReturnType !routineMangledName !?ioTemporaries ?let functionResult)
-#--- Code generation
-  ioInstructionGenerationList += !@staticRoutineCallIR.new {
-    !"" # globalVariableReceiverName
-    !functionResult
-    !routineMangledName
-    !LLVMInvocationRoutineName
-    !calleeKind
-    !effectiveParameterListIR
-  }
-#--- Enter in invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-#---
-  ioInternalRepresentation = .bitField {!sliceMap:{} !valueIR:functionResult}
-}
+#  let routineKind = routineDescriptor.mRoutineKind
+#  let calleeMode = [routineKind executionMode] # routineDescriptor.mExecutionMode
+#  let formalSignature = routineDescriptor.mSignature
+#  outReturnedType = routineDescriptor.mReturnType
+##--- Check accessibility
+#  if not isPublic then
+#    if receiverType == .null then # Standalone function
+#      let @string declarationFile = [outRoutineLocation file]
+#      let invocationFile = [inRoutineName.location file]
+#      if invocationFile != declarationFile then
+#        error inRoutineName : "this routine is not public"
+#      end
+#    elsif receiverType != inSelfType then
+#      error inRoutineName : "this routine is not public"
+#    end  
+#  end  
+##--- Enter in invocation graph
+#  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outRoutineMangledName]
+##--- Check modes
+#  outRoutineKindIR = checkMode (
+#    !callerMode:inRequiredMode
+#    !calleeMode:calleeMode
+#    !kind:routineKind
+#    !error:inRoutineName.location
+#  )
+##--- Analyze effective parameters
+#  analyzeEffectiveParameters (
+#    !self:inSelfType
+#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#    !propertiesAreMutable:inRoutineCanMutateProperties
+#    !formal:formalSignature
+#    !effective:inEffectiveParameterList
+#    !errorLocation:inRoutineName.location
+#    !callerForInvocationGraph:inCallerNameForInvocationGraph
+#    !context:inContext
+#    !requiredMode:inRequiredMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioVariableMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    !?effectiveIR:outEffectiveParameterListIR
+#  )
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc analyzeEffectiveParametersNew
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?formal:let @routineTypedSignature inFormalSignature
-  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
-  ?errorLocation:let @location inErrorLocation
-  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?requiredMode:let @mode inRequiredMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
-{
-#--- Analyze effective parameters
-  @procEffectiveParameterList parameterList = {}
-  for () formal_ in inFormalSignature, () effective_ in inEffectiveParameterList do
-    switch effective_mEffectiveParameterKind 
-    case inputWithType (@bool constant @lstring typeName @lstring name) :
-      let type = if typeName.string == "" then
-        formal_mType
-      else
-        @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName}
-      end
-      let varLLVMName = @lstring.new {!name.string + "." + ioTemporaries.mTemporaryIndex !name}
-      ioTemporaries.mTemporaryIndex ++
-      let objectIR = @objectIR.localVariableReference {!type:type !plmName:varLLVMName}
-      if constant then
-        [!?ioUniversalMap insertLocalConstant !name !objectIR]
-      else
-        [!?ioUniversalMap insertLocalVariable !name !objectIR !.hasUnreadValue !false]
-      end
-      ioAllocaList += !varLLVMName ![[type kind] llvmTypeName]
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
-      ioEffectiveParameterListIR +=
-        !.input
-        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!varLLVMName) !varLLVMName} !sliceMap:{}}
-    case input (@lstring name) :
-      [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
+#proc analyzeEffectiveParameters
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?formal:let @routineTypedSignature inFormalSignature
+#  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
+#  ?errorLocation:let @location inErrorLocation
+#  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?requiredMode:let @mode inRequiredMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#  ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
+#{
+##--- Analyze effective parameters
+#  @procEffectiveParameterList parameterList = {}
+#  for () formal_ in inFormalSignature, () effective_ in inEffectiveParameterList do
+#    switch effective_mEffectiveParameterKind 
+#    case inputWithType (@bool constant @lstring typeName @lstring name) :
+#      let type = if typeName.string == "" then
+#        formal_mType
+#      else
+#        @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName}
+#      end
+#      let varLLVMName = @lstring.new {!name.string + "." + ioTemporaries.mTemporaryIndex !name}
+#      ioTemporaries.mTemporaryIndex ++
+#      let objectIR = @objectIR.localVariableReference {!type:type !plmName:varLLVMName}
+#      if constant then
+#        [!?ioUniversalMap insertLocalConstant !name !objectIR]
+#        [!?ioVariableMap insertConstant
+#          !lkey:name
+#          !type:type
+#          !readAccessAllowed:true
+#          !objectIR:objectIR
+#          !copyable:true
+#          !canBeUsedAsInputParameter:true
+#        ]
+#      else
+#        [!?ioUniversalMap insertLocalVariable !name !objectIR !.hasUnreadValue !false]
+#        [!?ioVariableMap insertDefinedVariable
+#          !lkey:name
+#          !type:type
+#          !readAccessAllowed:true
+#          !objectIR:objectIR
+#          !copyable:true
+#          !canBeUsedAsInputParameter:true
+#        ]
+#      end
+#      ioAllocaList += !varLLVMName ![[type kind] llvmTypeName]
+#      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
+#      ioEffectiveParameterListIR +=
+#        !.input
+#        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!varLLVMName) !varLLVMName} !sliceMap:{}}
+#    case input (@lstring name) :
+#      [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
+#      [!?ioVariableMap searchForWriteAccess
+#        !lkey:name
+#        ?type:let type
+#        ?readAccessAllowed:let accessIsAllowed
+#        ?objectIR:* #let objectIR
+#        ?copyable:let isCopyable                                                 
+#        ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
+#      ]
 #      if not accessIsAllowed then
 #        error name : "routine has no access right on the this variable"
 #      end
@@ -873,493 +1233,124 @@ proc analyzeEffectiveParametersNew
 #      if not isCopyable then
 #        error name : "an $" + [type key] + " instance is not copyable"
 #      end
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
-      ioEffectiveParameterListIR +=
-        !.input
-        !.llvmTemporaryValue {
-          !type:[objectIR type]
-          !llvmName:.new {!llvmNameForLocalVariable (![objectIR name])
-          ![objectIR location]}
-          !sliceMap:{}
-        }
-    case output (@expressionAST expression @location endOfExp) :
-      [expression analyzeExpression
-        !self:inSelfType
-        !inGuard:false
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:formal_mType
-        !context:inContext
-        !mode:inRequiredMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
-        ?result:let @objectIR expressionResult
-      ]
-      [!?ioInstructionGenerationList appendLoadFromReference
-        !?ioTemporaries
-        !expressionResult
-        !endOfExp
-        ?let expressionValue
-      ]  
-      let result = checkAssignmentCompatibility (
-        !source:expressionValue
-        !targetAnnotationType:formal_mType
-        !errorLocation:endOfExp
-        !staticTypeAllowed:false
-      )
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
-      ioEffectiveParameterListIR += !.output !result
-    case outputInput (@lstring name) :
-      [!?ioUniversalMap searchValuedObjectForReadWriteAccess !name ?let objectIR]
+#      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
+#      ioEffectiveParameterListIR +=
+#        !.input
+#        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (![objectIR name]) ![objectIR location]} !sliceMap:{}}
+#    case output (@expressionAST expression @location endOfExp) :
+#      [expression analyzeExpression
+#        !self:inSelfType
+#        !inGuard:false
+#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#        !optionalTargetType:formal_mType
+#        !context:inContext
+#        !mode:inRequiredMode
+#        !?temporary:ioTemporaries
+#        !?staticStringMap:ioGlobalLiteralStringMap
+#        !?variableMap:ioUniversalMap
+#        !?alloca:ioAllocaList
+#        !?instructionListIR:ioInstructionGenerationList
+#        ?result:let @objectIR expressionResult
+#      ]
+#      [!?ioInstructionGenerationList appendLoadFromReference
+#        !?ioTemporaries
+#        !expressionResult
+#        !endOfExp
+#        ?let expressionValue
+#      ]  
+#      let result = checkAssignmentCompatibility (
+#        !source:expressionValue
+#        !targetAnnotationType:formal_mType
+#        !errorLocation:endOfExp
+#        !staticTypeAllowed:false
+#      )
+#      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
+#      ioEffectiveParameterListIR += !.output !result
+#    case outputInput (@lstring name) :
+#      [!?ioVariableMap searchForReadWriteAccess
+#        !lkey:name
+#        ?type:let type
+#        ?readAccessAllowed:let accessIsAllowed
+#        ?objectIR:let objectIR
+#        ?1*
+#        ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
+#      ]
 #      if not canBeUsedAsInputParameter then
 #        error name : "this variable cannot be used as output/input parameter"
 #      end
 #      if not accessIsAllowed then
 #        error name : "routine has no access right on the this variable"
 #      end
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
-      let argumentIR = @objectIR.llvmTemporaryValue {
-        !type:[objectIR type]
-        !llvmName:.new {!llvmNameForLocalVariable (![objectIR llvmName]) ![objectIR location]}
-        !sliceMap:{}
-      }
-      ioEffectiveParameterListIR += !.outputInput !argumentIR
-    case outputInputSelfVariable (@lstring name) :
-      if inSelfType == .null then
-        error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
+#      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
+#      let argumentIR = @objectIR.llvmTemporaryValue {
+#        !type:type
+#        !llvmName:.new {!llvmNameForLocalVariable (![objectIR llvmName]) ![objectIR location]}
+#        !sliceMap:{}
+#      }
+#      ioEffectiveParameterListIR += !.outputInput !argumentIR
+#    case outputInputSelfVariable (@lstring name) :
+#      if inSelfType == .null then
+#        error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
 #      elsif not inDirectAccessToPropertiesAllowed then
 #        error name : "the current function should be declared @" + userAccessAttribute ()
 #      elsif not inRoutineCanMutateProperties then
 #        error name : "the current routine should be declared @" + mutatingAttribute ()
-      else
-        switch [inSelfType kind]
-        case opaque (* *) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case arrayType (* * * * *) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case boolean :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case staticInteger :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-         case literalString :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case enumeration (* *) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case function (*) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case pointer (*) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case integer (* * * *) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case structure (* * universalMap * *) :
-          var m = universalMap
-          [!?m searchValuedObjectForReadAccess !name ?let propertyObject]
-          [propertyObject property ?2* ?index:let idx]
-          getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
-          [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
-            !fieldObjectReference
-            !inSelfType
-            !name
-            !idx
-          ]        
-          parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![propertyObject type]
-          ioEffectiveParameterListIR +=
-            !.outputInput
-            !fieldObjectReference
-        end    
-      end
-    end
-  end
-#--- Check parameters
-  if [inFormalSignature length] != [inEffectiveParameterList length] then
-    error inErrorLocation: "this routine requires " + [inFormalSignature length] + " argument(s), this call names "
-      + [inEffectiveParameterList length] + " argument(s)"
-  else
-    for () formal_ in inFormalSignature, () actual_ in parameterList do
-      if [formal_mType key] != [actual_mParameterType key] then
-        error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
-           "', and is incompatible with the formal type '" + [formal_mType key] + "'"
-      end
-      let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
-      let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]
-      if requiredPassingMode != testedPassingMode then
-        error actual_mSelector : "the required selector is '" + requiredPassingMode + "'"
-      end
-    end  
-  end
-}
-
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! OLD
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc handleFunctionCallInExpression
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?globalVariableReceiverName:let @string inGlobalVariableReceiverName
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?inGuard:let @bool inGuard
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?let @effectiveArgumentListAST inArguments 
-  ?let @location inErrorLocation
-  ?!@instructionListIR ioInstructionGenerationList
-  ?!@objectIR ioObjectPtr
-  !@unifiedTypeMap-proxy outReturnedType
-{
-  if not [ioObjectPtr isPossibleFunction] then ###
-    error inErrorLocation : "object is not a function" : ioObjectPtr, outReturnedType
-  elsif inGuard then
-    [ioObjectPtr possibleFunction ?1* ?functionName:let functionName]
-    error functionName : "a function cannot be called in guard expression" : ioObjectPtr, outReturnedType
-  else
-    [ioObjectPtr possibleFunction ?receiver:let receiver ?functionName:let functionName]
-    analyzeFunctionCallInExpression (
-      !self:inSelfType
-      !propertiesAreMutable:inRoutineCanMutateProperties
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-      !receiver:receiver
-      !routineName:functionName
-      !effective:inArguments
-      !callerForInvocationGraph:inCallerNameForInvocationGraph
-      !context:inContext
-      !requiredMode:inMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-      ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
-      ?routineKind:let @calleeKindIR routineKind
-      ?routineMangledName:let @lstring functionMangledName
-      ?routineNameForGeneration:let @lstring functionNameForGeneration
-      ?returnType:outReturnedType
-    )
-  #--- New LLVM variable for function call result
-    getNewTempVariable (!outReturnedType !functionMangledName !?ioTemporaries ?let functionResult)
-  #--- Code generation
-    ioInstructionGenerationList += !@staticRoutineCallIR.new {
-      !inGlobalVariableReceiverName
-      !functionResult
-      !functionMangledName
-      !functionNameForGeneration
-      !routineKind
-      !effectiveParameterListIR
-    }
-  #---
-    ioObjectPtr = functionResult
-  end
-}
-
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc analyzeFunctionCallInExpression
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?receiver:let @objectIR inReceiver
-  ?routineName:let @lstring inRoutineName
-  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
-  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?requiredMode:let @mode inRequiredMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
-  !routineKind:@calleeKindIR outRoutineKindIR
-  !routineMangledName:@lstring outRoutineMangledName
-  !routineNameForGeneration:@lstring outRoutineNameForGeneration
-  !returnType:@unifiedTypeMap-proxy outReturnedType
-{
-#---
-  outEffectiveParameterListIR = {}
-  let receiverType = [inReceiver type]
-#--- Special case : call a function from a static array during enumeration
-  var specialCase = (receiverType != .null) && [[receiverType kind] isStructure]
-  if specialCase then
-    [[receiverType kind] structure ?typeName:* ?propertyMap:let @propertyMap propertyMap ?universalMap:let unused universalMap ?2*]
-    if [propertyMap hasKey !inRoutineName] then
-      [propertyMap searchKey !inRoutineName ?* ?let @objectIR propertyObject]
-      [propertyObject property ?type:let type ?plmName:let unused plmName ?index:let unused index]
-      specialCase = [[type kind] isFunction]
-      if specialCase then
-        log inRoutineName
-      end
-    end
-  end
-#--- Add receiver as first argument
-  if receiverType != .null then
-    outEffectiveParameterListIR += !.outputInput !inReceiver
-  end
-#--- Build LLVM mangled name
-  outRoutineMangledName = routineMangledNameFromCall (
-    !if receiverType == .null then "" else "$" + [receiverType key] end
-    !inRoutineName
-    !inEffectiveParameterList
-  )
-  [inContext.mRoutineMapForContext searchKey
-    !inRoutineName
-    ![inEffectiveParameterList routineSignature !inRoutineName]
-    ?outRoutineNameForGeneration
-    ?let @routineDescriptor routineDescriptor
-    ?let @location outRoutineLocation
-  ]
-  let isPublic = routineDescriptor.mIsPublic
-  let routineKind = routineDescriptor.mRoutineKind
-  let calleeMode = [routineKind executionMode] # routineDescriptor.mExecutionMode
-  let formalSignature = routineDescriptor.mSignature
-  outReturnedType = routineDescriptor.mReturnType
-#--- Check accessibility
-  if not isPublic then
-    if receiverType == .null then # Standalone function
-      let @string declarationFile = [outRoutineLocation file]
-      let invocationFile = [inRoutineName.location file]
-      if invocationFile != declarationFile then
-        error inRoutineName : "this routine is not public"
-      end
-    elsif receiverType != inSelfType then
-      error inRoutineName : "this routine is not public"
-    end  
-  end  
-#--- Enter in invocation graph
-  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !outRoutineMangledName]
-#--- Check modes
-  outRoutineKindIR = checkMode (
-    !callerMode:inRequiredMode
-    !calleeMode:calleeMode
-    !kind:routineKind
-    !error:inRoutineName.location
-  )
-#--- Analyze effective parameters
-  analyzeEffectiveParameters (
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !propertiesAreMutable:inRoutineCanMutateProperties
-    !formal:formalSignature
-    !effective:inEffectiveParameterList
-    !errorLocation:inRoutineName.location
-    !callerForInvocationGraph:inCallerNameForInvocationGraph
-    !context:inContext
-    !requiredMode:inRequiredMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    !?effectiveIR:outEffectiveParameterListIR
-  )
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-proc analyzeEffectiveParameters
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?formal:let @routineTypedSignature inFormalSignature
-  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
-  ?errorLocation:let @location inErrorLocation
-  ?callerForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?requiredMode:let @mode inRequiredMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
-{
-#--- Analyze effective parameters
-  @procEffectiveParameterList parameterList = {}
-  for () formal_ in inFormalSignature, () effective_ in inEffectiveParameterList do
-    switch effective_mEffectiveParameterKind 
-    case inputWithType (@bool constant @lstring typeName @lstring name) :
-      let type = if typeName.string == "" then
-        formal_mType
-      else
-        @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName}
-      end
-      let varLLVMName = @lstring.new {!name.string + "." + ioTemporaries.mTemporaryIndex !name}
-      ioTemporaries.mTemporaryIndex ++
-      let objectIR = @objectIR.localVariableReference {!type:type !plmName:varLLVMName}
-      if constant then
-        [!?ioUniversalMap insertLocalConstant !name !objectIR]
-        [!?ioVariableMap insertConstant
-          !lkey:name
-          !type:type
-          !readAccessAllowed:true
-          !objectIR:objectIR
-          !copyable:true
-          !canBeUsedAsInputParameter:true
-        ]
-      else
-        [!?ioUniversalMap insertLocalVariable !name !objectIR !.hasUnreadValue !false]
-        [!?ioVariableMap insertDefinedVariable
-          !lkey:name
-          !type:type
-          !readAccessAllowed:true
-          !objectIR:objectIR
-          !copyable:true
-          !canBeUsedAsInputParameter:true
-        ]
-      end
-      ioAllocaList += !varLLVMName ![[type kind] llvmTypeName]
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
-      ioEffectiveParameterListIR +=
-        !.input
-        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (!varLLVMName) !varLLVMName} !sliceMap:{}}
-    case input (@lstring name) :
-      [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
-      [!?ioVariableMap searchForWriteAccess
-        !lkey:name
-        ?type:let type
-        ?readAccessAllowed:let accessIsAllowed
-        ?objectIR:* #let objectIR
-        ?copyable:let isCopyable                                                 
-        ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
-      ]
-      if not accessIsAllowed then
-        error name : "routine has no access right on the this variable"
-      end
-      if not canBeUsedAsInputParameter then
-        error name : "this variable cannot be used as input parameter"
-      end
-      if not isCopyable then
-        error name : "an $" + [type key] + " instance is not copyable"
-      end
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
-      ioEffectiveParameterListIR +=
-        !.input
-        !.llvmTemporaryValue {!type:type !llvmName:.new {!llvmNameForLocalVariable (![objectIR name]) ![objectIR location]} !sliceMap:{}}
-    case output (@expressionAST expression @location endOfExp) :
-      [expression analyzeExpression
-        !self:inSelfType
-        !inGuard:false
-        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:formal_mType
-        !context:inContext
-        !mode:inRequiredMode
-        !?temporary:ioTemporaries
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
-        ?result:let @objectIR expressionResult
-      ]
-      [!?ioInstructionGenerationList appendLoadFromReference
-        !?ioTemporaries
-        !expressionResult
-        !endOfExp
-        ?let expressionValue
-      ]  
-      let result = checkAssignmentCompatibility (
-        !source:expressionValue
-        !targetAnnotationType:formal_mType
-        !errorLocation:endOfExp
-        !staticTypeAllowed:false
-      )
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
-      ioEffectiveParameterListIR += !.output !result
-    case outputInput (@lstring name) :
-      [!?ioVariableMap searchForReadWriteAccess
-        !lkey:name
-        ?type:let type
-        ?readAccessAllowed:let accessIsAllowed
-        ?objectIR:let objectIR
-        ?1*
-        ?canBeUsedAsInputParameter:let canBeUsedAsInputParameter
-      ]
-      if not canBeUsedAsInputParameter then
-        error name : "this variable cannot be used as output/input parameter"
-      end
-      if not accessIsAllowed then
-        error name : "routine has no access right on the this variable"
-      end
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
-      let argumentIR = @objectIR.llvmTemporaryValue {
-        !type:type
-        !llvmName:.new {!llvmNameForLocalVariable (![objectIR llvmName]) ![objectIR location]}
-        !sliceMap:{}
-      }
-      ioEffectiveParameterListIR += !.outputInput !argumentIR
-    case outputInputSelfVariable (@lstring name) :
-      if inSelfType == .null then
-        error name : "'self' is not available in this context" :parameterList, ioEffectiveParameterListIR
-      elsif not inDirectAccessToPropertiesAllowed then
-        error name : "the current function should be declared @" + userAccessAttribute ()
-      elsif not inRoutineCanMutateProperties then
-        error name : "the current routine should be declared @" + mutatingAttribute ()
-      else
-        switch [inSelfType kind]
-        case opaque (* *) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case arrayType (* * * * *) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case boolean :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case staticInteger :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-         case literalString :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case enumeration (* *) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case function (*) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case pointer (*) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case integer (* * * *) :
-          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case structure (* * universalMap * *) :
-          var m = universalMap
-          [!?m searchValuedObjectForReadAccess !name ?let propertyObject]
-          [propertyObject property ?2* ?index:let idx]
-          getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
-          [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
-            !fieldObjectReference
-            !inSelfType
-            !name
-            !idx
-          ]        
-          parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![propertyObject type]
-          ioEffectiveParameterListIR +=
-            !.outputInput
-            !fieldObjectReference
-        end    
-      end
-    end
-  end
-#--- Check parameters
-  if [inFormalSignature length] != [inEffectiveParameterList length] then
-    error inErrorLocation: "this routine requires " + [inFormalSignature length] + " argument(s), this call names "
-      + [inEffectiveParameterList length] + " argument(s)"
-  else
-    for () formal_ in inFormalSignature, () actual_ in parameterList do
-      if [formal_mType key] != [actual_mParameterType key] then
-        error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
-           "', and is incompatible with the formal type '" + [formal_mType key] + "'"
-      end
-      let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
-      let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]
-      if requiredPassingMode != testedPassingMode then
-        error actual_mSelector : "the required selector is '" + requiredPassingMode + "'"
-      end
-    end  
-  end
-}
+#      else
+#        switch [inSelfType kind]
+#        case opaque (* *) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case arrayType (* * * * *) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case boolean :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case staticInteger :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#         case literalString :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case enumeration (* *) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case function (*) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case pointer (*) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case integer (* * * *) :
+#          error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
+#        case structure (* * universalMap * *) :
+#          var m = universalMap
+#          [!?m searchValuedObjectForReadAccess !name ?let propertyObject]
+#          [propertyObject property ?2* ?index:let idx]
+#          getNewTempVariable (![propertyObject type] !name !?ioTemporaries ?let fieldObjectReference)
+#          [!?ioInstructionGenerationList appendPropertyReferenceFromSelf
+#            !fieldObjectReference
+#            !inSelfType
+#            !name
+#            !idx
+#          ]        
+#          parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![propertyObject type]
+#          ioEffectiveParameterListIR +=
+#            !.outputInput
+#            !fieldObjectReference
+#        end    
+#      end
+#    end
+#  end
+##--- Check parameters
+#  if [inFormalSignature length] != [inEffectiveParameterList length] then
+#    error inErrorLocation: "this routine requires " + [inFormalSignature length] + " argument(s), this call names "
+#      + [inEffectiveParameterList length] + " argument(s)"
+#  else
+#    for () formal_ in inFormalSignature, () actual_ in parameterList do
+#      if [formal_mType key] != [actual_mParameterType key] then
+#        error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
+#           "', and is incompatible with the formal type '" + [formal_mType key] + "'"
+#      end
+#      let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
+#      let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]
+#      if requiredPassingMode != testedPassingMode then
+#        error actual_mSelector : "the required selector is '" + requiredPassingMode + "'"
+#      end
+#    end  
+#  end
+#}
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

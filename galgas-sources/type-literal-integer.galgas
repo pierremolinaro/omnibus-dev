@@ -44,161 +44,161 @@ override getter @literalIntegerDeclaration keyRepresentationForErrorSignaling ->
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
+#override method @literalIntegerDeclaration enterRoutinesInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext unused ioContext
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclaration enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-  let integerTypeName = [staticIntegerTypeName () nowhere]
- #---
-  [!?ioContext.mTypeMap insertType
-    !lkey:integerTypeName
-    !kind:.staticInteger
-  ]
-#--- Enter integer operators
-  enterLiteralIntegerOperators (
-    !integerTypeName:integerTypeName
-    !?context:ioContext
-  )
-}
+#override method @literalIntegerDeclaration enterInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext ioContext
+#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#  let integerTypeName = [staticIntegerTypeName () nowhere]
+# #---
+#  [!?ioContext.mTypeMap insertType
+#    !lkey:integerTypeName
+#    !kind:.staticInteger
+#  ]
+##--- Enter integer operators
+#  enterLiteralIntegerOperators (
+#    !integerTypeName:integerTypeName
+#    !?context:ioContext
+#  )
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc enterLiteralIntegerOperators
-  ?integerTypeName:let @lstring inIntegerTypeName
-  ?!context:@semanticContext ioContext
-{
-#--- Infix operators
-  let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
-  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName}
-  ioContext.mLiteralIntegerType = selfTypeProxy
-#--- Comparison infix operator
-  [!?ioContext.mEqualOperatorMap insertKey
-    !intIntOp
-    !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.icmp_eq}
-  ]
-  [!?ioContext.mNonEqualOperatorMap insertKey
-    !intIntOp
-    !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.icmp_ne}
-  ]
-  [!?ioContext.mStrictInfOperatorMap insertKey
-    !intIntOp
-    !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.icmp_slt}
-  ]
-  [!?ioContext.mInfEqualOperatorMap insertKey
-    !intIntOp
-    !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.icmp_sle}
-  ]
-  [!?ioContext.mStrictSupOperatorMap insertKey
-    !intIntOp
-    !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.icmp_sgt}
-  ]
-  [!?ioContext.mSupEqualOperatorMap insertKey
-    !intIntOp
-    !ioContext.mBooleanType
-    !@literal_literal_integerInfixOperation.new {!.icmp_sge}
-  ]
-#--- Bit Wise operators (for unsigned integers)
-  [!?ioContext.mAndOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.and}
-  ]
-  [!?ioContext.mOrOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.ior}
-  ]
-  [!?ioContext.mXorOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.xor}
-  ]
-  [!?ioContext.mUnsignedComplementOperatorMap insertKey
-    !inIntegerTypeName
-  ]
-#--- Negate operator
-  [!?ioContext.mUnaryMinusOperatorMap insertKey
-    !inIntegerTypeName
-  ]
-#--- Arithmetic operators
-  [!?ioContext.mAddOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.saddOVF}
-  ]
-  [!?ioContext.mAddNoOvfOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.addNoOVF}
-  ]
-  [!?ioContext.mSubOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.ssubOVF}
-  ]
-  [!?ioContext.mSubNoOvfOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.subNoOVF}
-  ]
-  [!?ioContext.mMulOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.smulOVF}
-  ]
-  [!?ioContext.mMulNoOvfOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.mulNoOVF}
-  ]
-  [!?ioContext.mDivOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.sdivOVF}
-  ]
-  [!?ioContext.mDivNoOvfOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.sdivNoOVF}
-  ]
-  [!?ioContext.mModOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.sremOVF}
-  ]
-  [!?ioContext.mModNoOvfOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.sremNoOVF}
-  ]
-#--- Shift operators
-  [!?ioContext.mLeftShiftOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.shl}
-  ]
-  [!?ioContext.mRightShiftOperatorMap insertKey
-    !intIntOp
-    !selfTypeProxy
-    !@literal_literal_integerInfixOperation.new {!.lshr}
-  ]
-}
+#private proc enterLiteralIntegerOperators
+#  ?integerTypeName:let @lstring inIntegerTypeName
+#  ?!context:@semanticContext ioContext
+#{
+##--- Infix operators
+#  let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
+#  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName}
+#  ioContext.mLiteralIntegerType = selfTypeProxy
+##--- Comparison infix operator
+#  [!?ioContext.mEqualOperatorMap insertKey
+#    !intIntOp
+#    !ioContext.mBooleanType
+#    !@literal_literal_integerInfixOperation.new {!.icmp_eq}
+#  ]
+#  [!?ioContext.mNonEqualOperatorMap insertKey
+#    !intIntOp
+#    !ioContext.mBooleanType
+#    !@literal_literal_integerInfixOperation.new {!.icmp_ne}
+#  ]
+#  [!?ioContext.mStrictInfOperatorMap insertKey
+#    !intIntOp
+#    !ioContext.mBooleanType
+#    !@literal_literal_integerInfixOperation.new {!.icmp_slt}
+#  ]
+#  [!?ioContext.mInfEqualOperatorMap insertKey
+#    !intIntOp
+#    !ioContext.mBooleanType
+#    !@literal_literal_integerInfixOperation.new {!.icmp_sle}
+#  ]
+#  [!?ioContext.mStrictSupOperatorMap insertKey
+#    !intIntOp
+#    !ioContext.mBooleanType
+#    !@literal_literal_integerInfixOperation.new {!.icmp_sgt}
+#  ]
+#  [!?ioContext.mSupEqualOperatorMap insertKey
+#    !intIntOp
+#    !ioContext.mBooleanType
+#    !@literal_literal_integerInfixOperation.new {!.icmp_sge}
+#  ]
+##--- Bit Wise operators (for unsigned integers)
+#  [!?ioContext.mAndOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.and}
+#  ]
+#  [!?ioContext.mOrOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.ior}
+#  ]
+#  [!?ioContext.mXorOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.xor}
+#  ]
+#  [!?ioContext.mUnsignedComplementOperatorMap insertKey
+#    !inIntegerTypeName
+#  ]
+##--- Negate operator
+#  [!?ioContext.mUnaryMinusOperatorMap insertKey
+#    !inIntegerTypeName
+#  ]
+##--- Arithmetic operators
+#  [!?ioContext.mAddOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.saddOVF}
+#  ]
+#  [!?ioContext.mAddNoOvfOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.addNoOVF}
+#  ]
+#  [!?ioContext.mSubOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.ssubOVF}
+#  ]
+#  [!?ioContext.mSubNoOvfOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.subNoOVF}
+#  ]
+#  [!?ioContext.mMulOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.smulOVF}
+#  ]
+#  [!?ioContext.mMulNoOvfOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.mulNoOVF}
+#  ]
+#  [!?ioContext.mDivOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.sdivOVF}
+#  ]
+#  [!?ioContext.mDivNoOvfOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.sdivNoOVF}
+#  ]
+#  [!?ioContext.mModOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.sremOVF}
+#  ]
+#  [!?ioContext.mModNoOvfOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.sremNoOVF}
+#  ]
+##--- Shift operators
+#  [!?ioContext.mLeftShiftOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.shl}
+#  ]
+#  [!?ioContext.mRightShiftOperatorMap insertKey
+#    !intIntOp
+#    !selfTypeProxy
+#    !@literal_literal_integerInfixOperation.new {!.lshr}
+#  ]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
@@ -215,26 +215,26 @@ private proc enterLiteralIntegerOperators
 #  INFIX OPERATIONS                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @literal_literal_integerInfixOperation : @infixOperatorDescription {
-}
+#class @literal_literal_integerInfixOperation : @infixOperatorDescription {
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literal_literal_integerInfixOperation generateInfixOperatorCode
-  ?!@semanticTemporariesStruct unused ioTemporaries
-  ?!@instructionListIR unused ioInstructionGenerationList
-  ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @unifiedTypeMap-proxy inResultType
-  !@objectIR outResult
-{
-  [inLeftOperand  literalInteger ?1* ?value:let @bigint leftValue]
-  [inRightOperand literalInteger ?1* ?value:let @bigint rightValue]
-  let result = [self performStaticOperation !leftValue !rightValue]
-  outResult = .literalInteger {!type: inResultType !value:result}
-#  message "LITERAL LITERAL " + leftValue + " " + rightValue + " -> " + result + "\n"
-}
+#override method @literal_literal_integerInfixOperation generateInfixOperatorCode
+#  ?!@semanticTemporariesStruct unused ioTemporaries
+#  ?!@instructionListIR unused ioInstructionGenerationList
+#  ?let @objectIR inLeftOperand
+#  ?let @location unused inOperatorLocation
+#  ?let @objectIR inRightOperand
+#  ?let @unifiedTypeMap-proxy inResultType
+#  !@objectIR outResult
+#{
+#  [inLeftOperand  literalInteger ?1* ?value:let @bigint leftValue]
+#  [inRightOperand literalInteger ?1* ?value:let @bigint rightValue]
+#  let result = [self performStaticOperation !leftValue !rightValue]
+#  outResult = .literalInteger {!type: inResultType !value:result}
+##  message "LITERAL LITERAL " + leftValue + " " + rightValue + " -> " + result + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

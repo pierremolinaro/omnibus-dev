@@ -69,32 +69,32 @@ method @panicClauseListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceG
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @panicClauseListAST-element enterInContext
-  ?!context:@semanticContext ioContext
-{
-  if mIsSetup then
-    [!?ioContext.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]
-  else
-    [!?ioContext.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mPriority.location}]
-  end
-}
+#method @panicClauseListAST-element enterInContext
+#  ?!context:@semanticContext ioContext
+#{
+#  if mIsSetup then
+#    [!?ioContext.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]
+#  else
+#    [!?ioContext.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mPriority.location}]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicModeName -> @string {
-  result = "panic"
-}
+#func %once panicModeName -> @string {
+#  result = "panic"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @panicRoutinePriorityMap {
-  insert insertSetupKey error message "a panic setup routine with priority %K has been already declared"
-  insert insertLoopKey error message "a panic loop routine with priority %K has been already declared"
-  search searchSetupKey error message "there is no panic setup routine with priority %K"
-  search searchLoopKey error message "there is no panic loop routine with priority %K"
-}
+#map @panicRoutinePriorityMap {
+#  insert insertSetupKey error message "a panic setup routine with priority %K has been already declared"
+#  insert insertLoopKey error message "a panic loop routine with priority %K has been already declared"
+#  search searchSetupKey error message "there is no panic setup routine with priority %K"
+#  search searchLoopKey error message "there is no panic loop routine with priority %K"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

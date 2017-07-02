@@ -1,22 +1,22 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendStoreTemporaryReference
-  ?let @unifiedTypeMap-proxy inTargetVarType
-  ?let @string inLLVMName
-  ?let @objectIR inSourceValue
-  ?volatile:let @bool inVolatile
-{
-  self += !@storeFromTemporaryReferenceIR.new {!inTargetVarType !inLLVMName !inSourceValue !inVolatile}
-}
+#setter @instructionListIR appendStoreTemporaryReference
+#  ?let @unifiedTypeMap-proxy inTargetVarType
+#  ?let @string inLLVMName
+#  ?let @objectIR inSourceValue
+#  ?volatile:let @bool inVolatile
+#{
+#  self += !@storeFromTemporaryReferenceIR.new {!inTargetVarType !inLLVMName !inSourceValue !inVolatile}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @storeFromTemporaryReferenceIR : @abstractInstructionIR {
-  @unifiedTypeMap-proxy mTargetVarType
-  @string mLLVMName
-  @objectIR mSourceValue
-  @bool mVolatile
-}
+#class @storeFromTemporaryReferenceIR : @abstractInstructionIR {
+#  @unifiedTypeMap-proxy mTargetVarType
+#  @string mLLVMName
+#  @objectIR mSourceValue
+#  @bool mVolatile
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

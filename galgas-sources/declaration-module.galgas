@@ -255,29 +255,29 @@ proc retainRequiredModules ?!@ast ioAST {
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @moduleMap {
-  insert insertKey error message "the '%K' module is already declared in %L"
-}
+#map @moduleMap {
+#  insert insertKey error message "the '%K' module is already declared in %L"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @requiredModuleAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-  [!?ioContext.mModuleMap insertKey !mModuleName]
-}
+#override method @requiredModuleAST enterInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext ioContext
+#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#  [!?ioContext.mModuleMap insertKey !mModuleName]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @requiredModuleAST enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
+#override method @requiredModuleAST enterRoutinesInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext unused ioContext
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   SEMANTICS                                                                                                           

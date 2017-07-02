@@ -51,11 +51,11 @@ syntax extension plm_syntax {
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @isrDeclarationListAST enterInContext ?!@semanticContext ioSemanticContext {
-  for isr in self do
-    ioSemanticContext.mDefinedInterruptSet += !isr.mISRName.string
-  end
-}
+#method @isrDeclarationListAST enterInContext ?!@semanticContext ioSemanticContext {
+#  for isr in self do
+#    ioSemanticContext.mDefinedInterruptSet += !isr.mISRName.string
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    

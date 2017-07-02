@@ -4,275 +4,275 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @typeKind {
-  case boolean
-  case literalString
-  case enumeration (@enumConstantMap constantMap @classConstantMap classConstantMap)
-  case structure (@lstring typeName
-                  @propertyMap propertyMap
-                  @universalPropertyAndRoutineMapForContext universalMap
-                  @propertyList propertyList
-                  @uint flags)
-  case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
-  case staticInteger
-  case opaque (@bigint bitCount @uint flags)
-  case arrayType (@lstring typeName
-                  @unifiedTypeMap-proxy elementType
-                  @bigint size
-                  @classConstantMap classConstantMap
-                  @uint flags)
-  case function (@routineDescriptor descriptor)
-  case pointer (@typeKind pointee)
-}
+#enum @typeKind {
+#  case boolean
+#  case literalString
+#  case enumeration (@enumConstantMap constantMap @classConstantMap classConstantMap)
+#  case structure (@lstring typeName
+#                  @propertyMap propertyMap
+#                  @universalPropertyAndRoutineMapForContext universalMap
+#                  @propertyList propertyList
+#                  @uint flags)
+#  case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
+#  case staticInteger
+#  case opaque (@bigint bitCount @uint flags)
+#  case arrayType (@lstring typeName
+#                  @unifiedTypeMap-proxy elementType
+#                  @bigint size
+#                  @classConstantMap classConstantMap
+#                  @uint flags)
+#  case function (@routineDescriptor descriptor)
+#  case pointer (@typeKind pointee)
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared map @unifiedTypeMap %selectors {
-  @typeKind kind
-
-  insert insertType error message "the '%K' type is already declared in %L"
-  search searchKey error message "there is no '%K' type"
-}
+#shared map @unifiedTypeMap %selectors {
+#  @typeKind kind
+#
+#  insert insertType error message "the '%K' type is already declared in %L"
+#  search searchKey error message "there is no '%K' type"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #func %once comparableFlag   -> @uint { result = 1 << 1 }
 
-getter @unifiedTypeMap-proxy equatable -> @bool {
-  result = [[self kind] equatable]
-}
+#getter @unifiedTypeMap-proxy equatable -> @bool {
+#  result = [[self kind] equatable]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @typeKind equatable -> @bool {
-  switch self
-  case boolean :
-    result = true
-  case literalString, staticInteger :
-    result = true
-  case enumeration (* *) :
-    result = true
-  case structure (* * * * @uint flags) :
-    result = (flags & equatableFlag ()) != 0
-  case integer (* * * *) :
-    result = true
-  case opaque (* @uint flags) :
-    result = (flags & equatableFlag ()) != 0
-  case arrayType (* * * * @uint flags) :
-    result = (flags & equatableFlag ()) != 0
-  case function (*) :
-    result = false
-  case pointer (*) :
-    result = false
-  end  
-}
+#getter @typeKind equatable -> @bool {
+#  switch self
+#  case boolean :
+#    result = true
+#  case literalString, staticInteger :
+#    result = true
+#  case enumeration (* *) :
+#    result = true
+#  case structure (* * * * @uint flags) :
+#    result = (flags & equatableFlag ()) != 0
+#  case integer (* * * *) :
+#    result = true
+#  case opaque (* @uint flags) :
+#    result = (flags & equatableFlag ()) != 0
+#  case arrayType (* * * * @uint flags) :
+#    result = (flags & equatableFlag ()) != 0
+#  case function (*) :
+#    result = false
+#  case pointer (*) :
+#    result = false
+#  end  
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @unifiedTypeMap-proxy instanciable -> @bool {
-  result = [[self kind] instanciable]
-}
+#getter @unifiedTypeMap-proxy instanciable -> @bool {
+#  result = [[self kind] instanciable]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @typeKind instanciable -> @bool {
-  switch self
-  case boolean :
-    result = true
-  case literalString, staticInteger :
-    result = true
-  case enumeration (* *) :
-    result = true
-  case structure (* * * * @uint flags) :
-    result = (flags & instanciableFlag ()) != 0
-  case integer (* * * *) :
-    result = true
-  case opaque (* @uint flags) :
-    result = (flags & instanciableFlag ()) != 0
-  case arrayType (* * * * @uint flags) :
-    result = (flags & instanciableFlag ()) != 0
-  case function (*) :
-    result = false
-  case pointer (*) :
-    result = false
-  end  
-}
+#getter @typeKind instanciable -> @bool {
+#  switch self
+#  case boolean :
+#    result = true
+#  case literalString, staticInteger :
+#    result = true
+#  case enumeration (* *) :
+#    result = true
+#  case structure (* * * * @uint flags) :
+#    result = (flags & instanciableFlag ()) != 0
+#  case integer (* * * *) :
+#    result = true
+#  case opaque (* @uint flags) :
+#    result = (flags & instanciableFlag ()) != 0
+#  case arrayType (* * * * @uint flags) :
+#    result = (flags & instanciableFlag ()) != 0
+#  case function (*) :
+#    result = false
+#  case pointer (*) :
+#    result = false
+#  end  
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @unifiedTypeMap-proxy copyable -> @bool {
-  result = [[self kind] copyable]
-}
+#getter @unifiedTypeMap-proxy copyable -> @bool {
+#  result = [[self kind] copyable]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @typeKind copyable -> @bool {
-  switch self
-  case boolean :
-    result = true
-  case literalString, staticInteger :
-    result = true
-  case enumeration (* *) :
-    result = true
-  case structure (* * * * @uint flags) :
-    result = (flags & copyableFlag ()) != 0
-  case integer (* * * *) :
-    result = true
-  case opaque (* @uint flags) :
-    result = (flags & copyableFlag ()) != 0
-  case arrayType (* * * * @uint flags) :
-    result = (flags & copyableFlag ()) != 0
-  case function (*) :
-    result = false
-  case pointer (*) :
-    result = false
-  end  
-}
+#getter @typeKind copyable -> @bool {
+#  switch self
+#  case boolean :
+#    result = true
+#  case literalString, staticInteger :
+#    result = true
+#  case enumeration (* *) :
+#    result = true
+#  case structure (* * * * @uint flags) :
+#    result = (flags & copyableFlag ()) != 0
+#  case integer (* * * *) :
+#    result = true
+#  case opaque (* @uint flags) :
+#    result = (flags & copyableFlag ()) != 0
+#  case arrayType (* * * * @uint flags) :
+#    result = (flags & copyableFlag ()) != 0
+#  case function (*) :
+#    result = false
+#  case pointer (*) :
+#    result = false
+#  end  
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @unifiedTypeMap-proxy classConstantMap -> @classConstantMap {
-  switch [self kind]
-  case boolean, literalString, staticInteger :
-    result = {}
-  case enumeration (* @classConstantMap classConstantMap) :
-    result = classConstantMap
-  case structure (* * * * *) :
-    result = {}
-  case integer (* * * *) :
-    result = {}
-  case opaque (* *) :
-    result = {}
-  case arrayType (* * * @classConstantMap classConstantMap *) :
-    result = classConstantMap
-  case function (*) :
-    result = {}
-  case pointer (*) :
-    result = {}
-  end  
-}
+#getter @unifiedTypeMap-proxy classConstantMap -> @classConstantMap {
+#  switch [self kind]
+#  case boolean, literalString, staticInteger :
+#    result = {}
+#  case enumeration (* @classConstantMap classConstantMap) :
+#    result = classConstantMap
+#  case structure (* * * * *) :
+#    result = {}
+#  case integer (* * * *) :
+#    result = {}
+#  case opaque (* *) :
+#    result = {}
+#  case arrayType (* * * @classConstantMap classConstantMap *) :
+#    result = classConstantMap
+#  case function (*) :
+#    result = {}
+#  case pointer (*) :
+#    result = {}
+#  end  
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @typeKind llvmTypeName -> @string {
-  switch self
-  case boolean :
-    result = "i1"
-  case literalString :
-    result = "i8*"
-  case enumeration (@enumConstantMap constantMap *) :
-    result = "i" + [[constantMap count] - 1 significantBitCount]
-  case structure (@lstring typeName * * * *) :
-    result = "%" + [llvmRegularTypeMangledNameFromName (!typeName) assemblerRepresentation]
-  case integer (@bigint unused min @bigint unused max @bool unused unsigned @uint bitCount) :
-    result = "i" + bitCount
-  case staticInteger :
-    result = "—"
-  case opaque (@bigint bitCount *) :
-    result = "i" + bitCount
-  case arrayType (@lstring typeName * * * *) :
-    result = "%" + [typeName assemblerRepresentation]
-  case function (descriptor) :
-    if descriptor.mReturnType == .null then
-      result = "void"
-    else
-      result = [[descriptor.mReturnType kind] llvmTypeName]
-    end
-    result += "("
-    for () in descriptor.mSignature 
-    do
-      result += [[mType kind] llvmTypeName]
-      switch mFormalArgumentPassingMode
-      case inputOutput, output : result += "*"
-      case input :
-      end
-    between result += ", "
-    end
-    result += ")*"
-  case pointer (pointee) :
-    result = [pointee llvmTypeName] + "*"
-  end
-}
+#getter @typeKind llvmTypeName -> @string {
+#  switch self
+#  case boolean :
+#    result = "i1"
+#  case literalString :
+#    result = "i8*"
+#  case enumeration (@enumConstantMap constantMap *) :
+#    result = "i" + [[constantMap count] - 1 significantBitCount]
+#  case structure (@lstring typeName * * * *) :
+#    result = "%" + [llvmRegularTypeMangledNameFromName (!typeName) assemblerRepresentation]
+#  case integer (@bigint unused min @bigint unused max @bool unused unsigned @uint bitCount) :
+#    result = "i" + bitCount
+#  case staticInteger :
+#    result = "—"
+#  case opaque (@bigint bitCount *) :
+#    result = "i" + bitCount
+#  case arrayType (@lstring typeName * * * *) :
+#    result = "%" + [typeName assemblerRepresentation]
+#  case function (descriptor) :
+#    if descriptor.mReturnType == .null then
+#      result = "void"
+#    else
+#      result = [[descriptor.mReturnType kind] llvmTypeName]
+#    end
+#    result += "("
+#    for () in descriptor.mSignature 
+#    do
+#      result += [[mType kind] llvmTypeName]
+#      switch mFormalArgumentPassingMode
+#      case inputOutput, output : result += "*"
+#      case input :
+#      end
+#    between result += ", "
+#    end
+#    result += ")*"
+#  case pointer (pointee) :
+#    result = [pointee llvmTypeName] + "*"
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @typeKind descriptionForHTMLFile -> @string {
-  switch self
-  case boolean :
-    result = "Boolean"
-  case literalString :
-    result = "Literal String"
-  case enumeration (* *) :
-    result = "Enumeration"
-  case structure (* * * * *) :
-    result = "Structure"
-  case integer (* * @bool unsigned @uint bitCount) :
-    result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end
-           + ", " + if unsigned then "unsigned" else "signed" end + ")"
-  case staticInteger :
-    result = "Static Integer"
-  case opaque (@bigint bitCount *) :
-    result = "Opaque (" + bitCount + " bits)"
-  case arrayType (* * * * *) :
-    result = "Array"
-  case function (*) :
-    result = "Function"
-  case pointer (pointee) :
-    result = "Pointer to " + [pointee llvmTypeName]
-  end
-}
+#getter @typeKind descriptionForHTMLFile -> @string {
+#  switch self
+#  case boolean :
+#    result = "Boolean"
+#  case literalString :
+#    result = "Literal String"
+#  case enumeration (* *) :
+#    result = "Enumeration"
+#  case structure (* * * * *) :
+#    result = "Structure"
+#  case integer (* * @bool unsigned @uint bitCount) :
+#    result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end
+#           + ", " + if unsigned then "unsigned" else "signed" end + ")"
+#  case staticInteger :
+#    result = "Static Integer"
+#  case opaque (@bigint bitCount *) :
+#    result = "Opaque (" + bitCount + " bits)"
+#  case arrayType (* * * * *) :
+#    result = "Array"
+#  case function (*) :
+#    result = "Function"
+#  case pointer (pointee) :
+#    result = "Pointer to " + [pointee llvmTypeName]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  BUILD TYPE MAP HTML FILE                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc buildTypeMapHTMLFile
-  ?@unifiedTypeMap inTypeMap
-  ?sourceFile:let @lstring inSourceFile
-{
-#------------------------------------ Build an HTML file that contains all types
-  let @string typeDumpFilePath = inSourceFile.string + ".types.html"
-  if [option plm_options.emitTypeMap value] then
-    @stringset firstLetterSet = {}
-    for () in inTypeMap do
-      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
-    end
-    @string tableOfTypeString = ""
-    @char currentFirstLetter = ' '
-    for () type_ in inTypeMap do
-      if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
-        currentFirstLetter = [type_lkey.string characterAtIndex !0]
-        tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
-      end
-      tableOfTypeString += linkForHTMLTypeMap (!type_lkey.string) + "<br>"
-    end
-    let @string typeDumpString = [filewrapper typeDumpGenerationTemplate.dump
-      ![inSourceFile lastPathComponent]
-      !inTypeMap
-      !firstLetterSet
-      !tableOfTypeString
-    ]
-    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
-  else
-    [@string deleteFileIfExists !typeDumpFilePath]
-  end
-}
+#proc buildTypeMapHTMLFile
+#  ?@unifiedTypeMap inTypeMap
+#  ?sourceFile:let @lstring inSourceFile
+#{
+##------------------------------------ Build an HTML file that contains all types
+#  let @string typeDumpFilePath = inSourceFile.string + ".types.html"
+#  if [option plm_options.emitTypeMap value] then
+#    @stringset firstLetterSet = {}
+#    for () in inTypeMap do
+#      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
+#    end
+#    @string tableOfTypeString = ""
+#    @char currentFirstLetter = ' '
+#    for () type_ in inTypeMap do
+#      if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
+#        currentFirstLetter = [type_lkey.string characterAtIndex !0]
+#        tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
+#      end
+#      tableOfTypeString += linkForHTMLTypeMap (!type_lkey.string) + "<br>"
+#    end
+#    let @string typeDumpString = [filewrapper typeDumpGenerationTemplate.dump
+#      ![inSourceFile lastPathComponent]
+#      !inTypeMap
+#      !firstLetterSet
+#      !tableOfTypeString
+#    ]
+#    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
+#  else
+#    [@string deleteFileIfExists !typeDumpFilePath]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-filewrapper typeDumpGenerationTemplate in "../generation-templates/" {
-}{
-}{
-  template dump "typeDump.html.galgasTemplate"
-    ?@string PROJECT_NAME
-    ?@unifiedTypeMap GLOBAL_TYPE_MAP
-    ?@stringset FIRST_LETTER_SET
-    ?@string TABLE_OF_TYPES_STRING
-}
+#filewrapper typeDumpGenerationTemplate in "../generation-templates/" {
+#}{
+#}{
+#  template dump "typeDump.html.galgasTemplate"
+#    ?@string PROJECT_NAME
+#    ?@unifiedTypeMap GLOBAL_TYPE_MAP
+#    ?@stringset FIRST_LETTER_SET
+#    ?@string TABLE_OF_TYPES_STRING
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func linkForHTMLTypeMap ?let @string inTypeName -> @string outResult {
-  outResult = "<a class=\"header_link\" href=\"#" + inTypeName + "\">" + inTypeName + "</a>"
-}
+#func linkForHTMLTypeMap ?let @string inTypeName -> @string outResult {
+#  outResult = "<a class=\"header_link\" href=\"#" + inTypeName + "\">" + inTypeName + "</a>"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

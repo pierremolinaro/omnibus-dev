@@ -1,19 +1,19 @@
 
-setter @instructionListIR appendLoadGlobalVariable
-  ?let @objectIR inTargetValue
-  ?let @string inRegisterName
-  ?volatile:@bool inIsVolatile
-{
-  self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName !inIsVolatile}
-}
+#setter @instructionListIR appendLoadGlobalVariable
+#  ?let @objectIR inTargetValue
+#  ?let @string inRegisterName
+#  ?volatile:@bool inIsVolatile
+#{
+#  self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName !inIsVolatile}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @loadGlobalVariableIR : @abstractInstructionIR {
-  @objectIR mTargetValue
-  @string mVariableName
-  @bool mIsVolatile
-}
+#class @loadGlobalVariableIR : @abstractInstructionIR {
+#  @objectIR mTargetValue
+#  @string mVariableName
+#  @bool mIsVolatile
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

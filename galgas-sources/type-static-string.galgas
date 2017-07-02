@@ -45,27 +45,27 @@ override getter @literalStringDeclaration keyRepresentationForErrorSignaling -> 
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
+#override method @literalStringDeclaration enterRoutinesInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext unused ioContext
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclaration enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-#--- Enter in type map
-  [!?ioContext.mTypeMap insertType
-    !lkey:mLiteralStringTypeName
-    !kind:.literalString
-  ]
-}
+#override method @literalStringDeclaration enterInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext ioContext
+#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+##--- Enter in type map
+#  [!?ioContext.mTypeMap insertType
+#    !lkey:mLiteralStringTypeName
+#    !kind:.literalString
+#  ]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    

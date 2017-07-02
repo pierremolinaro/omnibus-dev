@@ -14,9 +14,9 @@ func %once staticAttribute -> @string {
 #!   Type Indicators
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once equatableFlag    -> @uint { result = 1 << 0 }
-func %once instanciableFlag -> @uint { result = 1 << 1 }
-func %once copyableFlag     -> @uint { result = 1 << 2 }
+#func %once equatableFlag    -> @uint { result = 1 << 0 }
+#func %once instanciableFlag -> @uint { result = 1 << 1 }
+#func %once copyableFlag     -> @uint { result = 1 << 2 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Type
@@ -36,9 +36,9 @@ func moduleMangledNameFromModuleName ?let @lstring inModuleName -> @lstring {
 #!   Modes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once userModeName -> @string {
-  result = "user"
-}
+#func %once userModeName -> @string {
+#  result = "user"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! Names for invocation graph
@@ -64,15 +64,15 @@ func %once userModeName -> @string {
 #!  Literal Strings
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func literalStringName ?let @uint inIndex -> @string {
-  result = "@string." + inIndex
-}
+#func literalStringName ?let @uint inIndex -> @string {
+#  result = "@string." + inIndex
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func literalCharacterArrayName ?let @uint inIndex -> @string {
-  result = "@str.array." + inIndex
-}
+#func literalCharacterArrayName ?let @uint inIndex -> @string {
+#  result = "@str.array." + inIndex
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -96,15 +96,15 @@ func %once staticIntegerTypeName -> @string {
 #!   Functions
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once functionResultVariableName -> @string {
-  result = "result"
-}
+#func %once functionResultVariableName -> @string {
+#  result = "result"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForFunction ?let @string inName -> @string {
-  result = ["func." + inName assemblerRepresentation]
-}
+#func llvmNameForFunction ?let @string inName -> @string {
+#  result = ["func." + inName assemblerRepresentation]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Interrupt routine
@@ -249,35 +249,35 @@ func llvmNameForFunction ?let @string inName -> @string {
 #!  Variable names
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForLocalVariable ?let @string inName -> @string {
-  result = ["var." + inName assemblerRepresentation]
-}
+#func llvmNameForLocalVariable ?let @string inName -> @string {
+#  result = ["var." + inName assemblerRepresentation]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForGlobalVariable ?let @string inName -> @string {
-  result = ["gvar." + inName assemblerRepresentation]
-}
+#func llvmNameForGlobalVariable ?let @string inName -> @string {
+#  result = ["gvar." + inName assemblerRepresentation]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Attributes
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once mutatingAttribute -> @string {
-  result = "mutating"
-}
+#func %once mutatingAttribute -> @string {
+#  result = "mutating"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once userAccessAttribute -> @string {
-  result = "userAccess"
-}
+#func %once userAccessAttribute -> @string {
+#  result = "userAccess"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once accessAttribute -> @string {
-  result = "access"
-}
+#func %once accessAttribute -> @string {
+#  result = "access"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -339,27 +339,27 @@ func %once exportedAttribute -> @string {
 #! Static list
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func plmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
-  result = .new {!"staticlist." + inStaticListName !inStaticListName}
-}
+#func plmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
+#  result = .new {!"staticlist." + inStaticListName !inStaticListName}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func plmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
-  result = .new {!"staticlist.element." + inStaticListName !inStaticListName}
-}
+#func plmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
+#  result = .new {!"staticlist.element." + inStaticListName !inStaticListName}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForStaticListType ?let @string inStaticListName -> @string {
-  result = "static.list.type." + [inStaticListName assemblerRepresentation]
-}
+#func llvmNameForStaticListType ?let @string inStaticListName -> @string {
+#  result = "static.list.type." + [inStaticListName assemblerRepresentation]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
-  result = .new{!"static.list.element.type." + [inStaticListName assemblerRepresentation] !inStaticListName.location}
-}
+#func llvmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
+#  result = .new{!"static.list.element.type." + [inStaticListName assemblerRepresentation] !inStaticListName.location}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

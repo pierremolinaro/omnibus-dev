@@ -54,97 +54,97 @@ method @instructionListAST noteInstructionListTypesInPrecedenceGraph
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @instructionAST analyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#abstract method @instructionAST analyze
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @instructionListAST analyzeBranchInstructionList
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?endOfInstructionList:@location inEndOfInstructionList
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-#--- Begin branch
-  [!?ioUniversalMap openBranch]
-  [!?ioVariableMap openBranch]
-  for () in self do
-    [!?ioInstructionGenerationList appendSourceLineComment !mInstructionLocation]
-    [mInstruction analyze 
-      !self:inSelfType
-      !propertiesAreMutable:inRoutineCanMutateProperties
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !context:inContext
-      !mode:inCurrentMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-    ]
-  end
-#--- End branch
-#  [ioVariableMap deinitTopLevelVariables]
-  [!?ioUniversalMap closeBranch !inEndOfInstructionList]
-  [!?ioVariableMap closeBranch !inEndOfInstructionList]
-}
+#method @instructionListAST analyzeBranchInstructionList
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?endOfInstructionList:@location inEndOfInstructionList
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#{
+##--- Begin branch
+#  [!?ioUniversalMap openBranch]
+#  [!?ioVariableMap openBranch]
+#  for () in self do
+#    [!?ioInstructionGenerationList appendSourceLineComment !mInstructionLocation]
+#    [mInstruction analyze 
+#      !self:inSelfType
+#      !propertiesAreMutable:inRoutineCanMutateProperties
+#      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#      !context:inContext
+#      !mode:inCurrentMode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioVariableMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca:ioAllocaList
+#      !?instructionListIR:ioInstructionGenerationList
+#    ]
+#  end
+##--- End branch
+##  [ioVariableMap deinitTopLevelVariables]
+#  [!?ioUniversalMap closeBranch !inEndOfInstructionList]
+#  [!?ioVariableMap closeBranch !inEndOfInstructionList]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @instructionListAST analyzeRoutineInstructionList
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!generatedCode:@instructionListIR ioInstructionGenerationList
-{
-  for () in self do
-    [!?ioInstructionGenerationList appendSourceLineComment !mInstructionLocation]
-    [mInstruction analyze 
-      !self:inSelfType
-      !propertiesAreMutable:inRoutineCanMutateProperties
-      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-      !context:inContext
-      !mode:inCurrentMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
-    ]
-  end
-}
+#method @instructionListAST analyzeRoutineInstructionList
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!generatedCode:@instructionListIR ioInstructionGenerationList
+#{
+#  for () in self do
+#    [!?ioInstructionGenerationList appendSourceLineComment !mInstructionLocation]
+#    [mInstruction analyze 
+#      !self:inSelfType
+#      !propertiesAreMutable:inRoutineCanMutateProperties
+#      !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#      !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#      !context:inContext
+#      !mode:inCurrentMode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioVariableMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca:ioAllocaList
+#      !?instructionListIR:ioInstructionGenerationList
+#    ]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      

@@ -1,12 +1,12 @@
 
-setter @instructionListIR appendNOP {
-  self += !@nopIR.new
-}
+#setter @instructionListIR appendNOP {
+#  self += !@nopIR.new
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @nopIR : @abstractInstructionIR {
-}
+#class @nopIR : @abstractInstructionIR {
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

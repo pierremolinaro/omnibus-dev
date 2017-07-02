@@ -81,145 +81,145 @@ override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sema
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forInstructionAST analyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-#--- Analyze iterated expression
-  [!?ioUniversalMap searchValuedObjectForReadAccess !mIteratedObject ?let @objectIR iteratedObjectPointer]
-  [!?ioVariableMap searchForReadAccess
-    !lkey:mIteratedObject
-    ?2*
-    ?objectIR:* # let @objectIR iteratedObjectPointer
-    ?2*
-  ]
-#--- Type kind
-  let iteratedTypeKind = [[iteratedObjectPointer type] kind]
-#--- Get iterated element type
-#  let @unifiedTypeMap-proxy iteratedElementType = [[iteratedExpressionResult type] enumerationType]
-  @unifiedTypeMap-proxy iteratedElementType
-  if iteratedTypeKind == .literalString then
-    iteratedElementType = .searchKey {!inContext.mTypeMap !["uint8" nowhere]}
-  elsif [iteratedTypeKind isArrayType] then
-    [iteratedTypeKind arrayType ?typeName:* ?elementType:iteratedElementType ?3*]
-  else
-    error mIteratedObject : "this object is not enumerable" : iteratedElementType
-  end
-#---
-  let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
-  ioTemporaries.mTemporaryIndex ++
-  ioAllocaList += !enumeratedVarLLVMName ![[iteratedElementType kind] llvmTypeName]
-#--- Analyze instruction list
-  [!?ioUniversalMap openOverrideForRepeatBlock]
-  [!?ioVariableMap openOverrideForRepeatBlock]
-  let objectIR = @objectIR.localVariableReference {!type:iteratedElementType !plmName:enumeratedVarLLVMName}
-  [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
-  [!?ioVariableMap insertUsedConstant
-    !lkey:mVarName
-    !type:iteratedElementType
-    !readAccessAllowed:true # Read access ok
-    !objectIR:objectIR
-    !copyable:true
-    !canBeUsedAsInputParameter:false
-  ]
-#--- Analyze while expression
-  @instructionListIR whileExpression_GenerationList = {}
-  [mWhileExpression analyzeExpression
-    !self:inSelfType
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:.null
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:whileExpression_GenerationList
-    ?result:let @objectIR whileExpressionResult
-  ]
-#--- Check "while" expression type is boolean
-  if not [[whileExpressionResult kind] isBoolean] then
-    error mEndOf_whileExpression : "'while' expression should be boolean"
-  elsif mStaticWhileExpression && not [whileExpressionResult isStatic] then
-    error mEndOf_whileExpression : "'while' expression is not static"
-  elsif [whileExpressionResult isStatic] && not mStaticWhileExpression then
-    warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
-  end
-#---
-  @instructionListIR doInstructionList_GenerationList = {}
-  [mDoInstructionList analyzeBranchInstructionList
-    !self:inSelfType
-    !propertiesAreMutable:inRoutineCanMutateProperties
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !endOfInstructionList:mEndOf_do_instruction
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:doInstructionList_GenerationList
-  ]
-  [!?ioUniversalMap closeOverride !mEndOf_do_instruction]
-  [!?ioVariableMap closeOverride !mEndOf_do_instruction]
-#--- Code generation
-  if iteratedTypeKind == .literalString then
-    ioInstructionGenerationList += !@forInstructionOnStringIR.new {
-      !enumeratedVarLLVMName
-      !mIteratedObject.location
-      !iteratedObjectPointer
-      !whileExpression_GenerationList
-      !whileExpressionResult
-      !doInstructionList_GenerationList
-    }
-  elsif [iteratedTypeKind isArrayType] then
-    [iteratedTypeKind arrayType ?typeName:* ?elementType:let elementType ?size:let size ?2*]
-    @stringset invokedFunctionSet = {}
-    if [ioTemporaries.mStaticArrayMap hasKey !mIteratedObject] then
-      [ioTemporaries.mStaticArrayMap searchKey !mIteratedObject ?invokedFunctionSet]
-    end
-    ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
-      !enumeratedVarLLVMName
-      !mIteratedObject
-      !iteratedObjectPointer
-      !whileExpression_GenerationList
-      !whileExpressionResult
-      !doInstructionList_GenerationList
-      !elementType
-      !size
-      !invokedFunctionSet
-    }
-  end
-}
+#override method @forInstructionAST analyze
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#{
+##--- Analyze iterated expression
+#  [!?ioUniversalMap searchValuedObjectForReadAccess !mIteratedObject ?let @objectIR iteratedObjectPointer]
+#  [!?ioVariableMap searchForReadAccess
+#    !lkey:mIteratedObject
+#    ?2*
+#    ?objectIR:* # let @objectIR iteratedObjectPointer
+#    ?2*
+#  ]
+##--- Type kind
+#  let iteratedTypeKind = [[iteratedObjectPointer type] kind]
+##--- Get iterated element type
+##  let @unifiedTypeMap-proxy iteratedElementType = [[iteratedExpressionResult type] enumerationType]
+#  @unifiedTypeMap-proxy iteratedElementType
+#  if iteratedTypeKind == .literalString then
+#    iteratedElementType = .searchKey {!inContext.mTypeMap !["uint8" nowhere]}
+#  elsif [iteratedTypeKind isArrayType] then
+#    [iteratedTypeKind arrayType ?typeName:* ?elementType:iteratedElementType ?3*]
+#  else
+#    error mIteratedObject : "this object is not enumerable" : iteratedElementType
+#  end
+##---
+#  let enumeratedVarLLVMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+#  ioTemporaries.mTemporaryIndex ++
+#  ioAllocaList += !enumeratedVarLLVMName ![[iteratedElementType kind] llvmTypeName]
+##--- Analyze instruction list
+#  [!?ioUniversalMap openOverrideForRepeatBlock]
+#  [!?ioVariableMap openOverrideForRepeatBlock]
+#  let objectIR = @objectIR.localVariableReference {!type:iteratedElementType !plmName:enumeratedVarLLVMName}
+#  [!?ioUniversalMap insertLocalConstant !mVarName !objectIR]
+#  [!?ioVariableMap insertUsedConstant
+#    !lkey:mVarName
+#    !type:iteratedElementType
+#    !readAccessAllowed:true # Read access ok
+#    !objectIR:objectIR
+#    !copyable:true
+#    !canBeUsedAsInputParameter:false
+#  ]
+##--- Analyze while expression
+#  @instructionListIR whileExpression_GenerationList = {}
+#  [mWhileExpression analyzeExpression
+#    !self:inSelfType
+#    !inGuard:false
+#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#    !optionalTargetType:.null
+#    !context:inContext
+#    !mode:inCurrentMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:whileExpression_GenerationList
+#    ?result:let @objectIR whileExpressionResult
+#  ]
+##--- Check "while" expression type is boolean
+#  if not [[whileExpressionResult kind] isBoolean] then
+#    error mEndOf_whileExpression : "'while' expression should be boolean"
+#  elsif mStaticWhileExpression && not [whileExpressionResult isStatic] then
+#    error mEndOf_whileExpression : "'while' expression is not static"
+#  elsif [whileExpressionResult isStatic] && not mStaticWhileExpression then
+#    warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
+#  end
+##---
+#  @instructionListIR doInstructionList_GenerationList = {}
+#  [mDoInstructionList analyzeBranchInstructionList
+#    !self:inSelfType
+#    !propertiesAreMutable:inRoutineCanMutateProperties
+#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#    !endOfInstructionList:mEndOf_do_instruction
+#    !context:inContext
+#    !mode:inCurrentMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioVariableMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:doInstructionList_GenerationList
+#  ]
+#  [!?ioUniversalMap closeOverride !mEndOf_do_instruction]
+#  [!?ioVariableMap closeOverride !mEndOf_do_instruction]
+##--- Code generation
+#  if iteratedTypeKind == .literalString then
+#    ioInstructionGenerationList += !@forInstructionOnStringIR.new {
+#      !enumeratedVarLLVMName
+#      !mIteratedObject.location
+#      !iteratedObjectPointer
+#      !whileExpression_GenerationList
+#      !whileExpressionResult
+#      !doInstructionList_GenerationList
+#    }
+#  elsif [iteratedTypeKind isArrayType] then
+#    [iteratedTypeKind arrayType ?typeName:* ?elementType:let elementType ?size:let size ?2*]
+#    @stringset invokedFunctionSet = {}
+#    if [ioTemporaries.mStaticArrayMap hasKey !mIteratedObject] then
+#      [ioTemporaries.mStaticArrayMap searchKey !mIteratedObject ?invokedFunctionSet]
+#    end
+#    ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
+#      !enumeratedVarLLVMName
+#      !mIteratedObject
+#      !iteratedObjectPointer
+#      !whileExpression_GenerationList
+#      !whileExpressionResult
+#      !doInstructionList_GenerationList
+#      !elementType
+#      !size
+#      !invokedFunctionSet
+#    }
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION (ON ARRAY)
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @forInstructionOnArrayIR : @abstractInstructionIR {
-  @string mEnumeratedValueName
-  @lstring mIteratedObjectName
-  @objectIR mIteratedObject
-  @instructionListIR mWhileInstructionList
-  @objectIR mWhileExpressionResult
-  @instructionListIR mDoInstructionList
-  @unifiedTypeMap-proxy mElementType
-  @uint mArraySize
-  @stringset mInvokedFunctionSet
-}
+#class @forInstructionOnArrayIR : @abstractInstructionIR {
+#  @string mEnumeratedValueName
+#  @lstring mIteratedObjectName
+#  @objectIR mIteratedObject
+#  @instructionListIR mWhileInstructionList
+#  @objectIR mWhileExpressionResult
+#  @instructionListIR mDoInstructionList
+#  @unifiedTypeMap-proxy mElementType
+#  @uint mArraySize
+#  @stringset mInvokedFunctionSet
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #----------------- La boucle exprimée en C est :
@@ -343,14 +343,14 @@ class @forInstructionOnArrayIR : @abstractInstructionIR {
 #  CODE GENERATION (ON STRING)
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @forInstructionOnStringIR : @abstractInstructionIR {
-  @string mVarName
-  @location mLocation
-  @objectIR mIteratedObject
-  @instructionListIR mWhileInstructionList
-  @objectIR mWhileExpressionResult
-  @instructionListIR mDoInstructionList
-}
+#class @forInstructionOnStringIR : @abstractInstructionIR {
+#  @string mVarName
+#  @location mLocation
+#  @objectIR mIteratedObject
+#  @instructionListIR mWhileInstructionList
+#  @objectIR mWhileExpressionResult
+#  @instructionListIR mDoInstructionList
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

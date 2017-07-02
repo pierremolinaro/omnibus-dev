@@ -1,25 +1,25 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendPropertyReferenceFromSelf
-  ?let @objectIR inTarget
-  ?let @unifiedTypeMap-proxy inSelfType
-  ?let @string inPropertyName
-  ?let @uint inPropertyIndex
-{
-  if inSelfType == .null then
-    error .nowhere : "<<INTERNAL ERROR>>"
-  end
-  self += !@getPropertyReferenceFromSelfIR.new {!inTarget !inSelfType !inPropertyName !inPropertyIndex}
-}
+#setter @instructionListIR appendPropertyReferenceFromSelf
+#  ?let @objectIR inTarget
+#  ?let @unifiedTypeMap-proxy inSelfType
+#  ?let @string inPropertyName
+#  ?let @uint inPropertyIndex
+#{
+#  if inSelfType == .null then
+#    error .nowhere : "<<INTERNAL ERROR>>"
+#  end
+#  self += !@getPropertyReferenceFromSelfIR.new {!inTarget !inSelfType !inPropertyName !inPropertyIndex}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @getPropertyReferenceFromSelfIR : @abstractInstructionIR {
-  @objectIR mTarget
-  @unifiedTypeMap-proxy mSelfType
-  @string mPropertyName
-  @uint mPropertyIndex
-}
+#class @getPropertyReferenceFromSelfIR : @abstractInstructionIR {
+#  @objectIR mTarget
+#  @unifiedTypeMap-proxy mSelfType
+#  @string mPropertyName
+#  @uint mPropertyIndex
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

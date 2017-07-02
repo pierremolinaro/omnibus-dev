@@ -1,66 +1,66 @@
 
-enum @llvmBinaryOperation {
-  case addNoOVF
-  case subNoOVF
-  case mulNoOVF
-  case udivNoOVF
-  case sdivNoOVF
-  case uremNoOVF
-  case sremNoOVF
-
-  case uaddOVF
-  case saddOVF
-  case usubOVF
-  case ssubOVF
-  case umulOVF
-  case smulOVF
-  case udivOVF
-  case sdivOVF
-  case uremOVF
-  case sremOVF
-
-  case and
-  case ior
-  case xor
-  case shl
-  case ashr
-  case lshr
-  
-  case icmp_eq
-  case icmp_ne
-  case icmp_ult
-  case icmp_ule
-  case icmp_ugt
-  case icmp_uge
-  case icmp_slt
-  case icmp_sle
-  case icmp_sgt
-  case icmp_sge
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-setter @instructionListIR appendBinaryOperation
-  ?let @objectIR inTarget
-  ?let @unifiedTypeMap-proxy inOperandType
-  ?let @location inLocation
-  ?let @objectIR inLeft
-  ?let @llvmBinaryOperation inOperation
-  ?let @objectIR inRight
-{
-  self += !@binaryOperationIR.new {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
-}
+#enum @llvmBinaryOperation {
+#  case addNoOVF
+#  case subNoOVF
+#  case mulNoOVF
+#  case udivNoOVF
+#  case sdivNoOVF
+#  case uremNoOVF
+#  case sremNoOVF
+#
+#  case uaddOVF
+#  case saddOVF
+#  case usubOVF
+#  case ssubOVF
+#  case umulOVF
+#  case smulOVF
+#  case udivOVF
+#  case sdivOVF
+#  case uremOVF
+#  case sremOVF
+#
+#  case and
+#  case ior
+#  case xor
+#  case shl
+#  case ashr
+#  case lshr
+#  
+#  case icmp_eq
+#  case icmp_ne
+#  case icmp_ult
+#  case icmp_ule
+#  case icmp_ugt
+#  case icmp_uge
+#  case icmp_slt
+#  case icmp_sle
+#  case icmp_sgt
+#  case icmp_sge
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @binaryOperationIR : @abstractInstructionIR {
-  @objectIR mTarget
-  @unifiedTypeMap-proxy mOperandType
-  @objectIR mLeft
-  @llvmBinaryOperation mOperation
-  @objectIR mRight
-  @location mLocation
-}
+#setter @instructionListIR appendBinaryOperation
+#  ?let @objectIR inTarget
+#  ?let @unifiedTypeMap-proxy inOperandType
+#  ?let @location inLocation
+#  ?let @objectIR inLeft
+#  ?let @llvmBinaryOperation inOperation
+#  ?let @objectIR inRight
+#{
+#  self += !@binaryOperationIR.new {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
+#}
+#
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#class @binaryOperationIR : @abstractInstructionIR {
+#  @objectIR mTarget
+#  @unifiedTypeMap-proxy mOperandType
+#  @objectIR mLeft
+#  @llvmBinaryOperation mOperation
+#  @objectIR mRight
+#  @location mLocation
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

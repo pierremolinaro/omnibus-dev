@@ -10,9 +10,9 @@
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-graph @subprogramInvocationGraph (@lstringlist) {
-  insert addNode error message "the '%K' routine is already declared at %L"
-}
+#graph @subprogramInvocationGraph (@lstringlist) {
+#  insert addNode error message "the '%K' routine is already declared at %L"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -222,10 +222,10 @@ graph @subprogramInvocationGraph (@lstringlist) {
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @allocaList {
-  @string mVarName
-  @string mLLVMTypeName
-}
+#list @allocaList {
+#  @string mVarName
+#  @string mLLVMTypeName
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

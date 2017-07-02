@@ -1,21 +1,21 @@
 
-setter @instructionListIR appendComputeVolatileRegisterAddressWithSubscript
-  ?let @objectIR inTarget
-  ?let @objectIR inIndexResult
-  ?let @bigint inAddress
-  ?let @bigint inElementArraySize
-{
-  self += !@ComputeRegisterAddressWithSubscriptIR.new {!inTarget !inIndexResult !inAddress !inElementArraySize}
-}
+#setter @instructionListIR appendComputeVolatileRegisterAddressWithSubscript
+#  ?let @objectIR inTarget
+#  ?let @objectIR inIndexResult
+#  ?let @bigint inAddress
+#  ?let @bigint inElementArraySize
+#{
+#  self += !@ComputeRegisterAddressWithSubscriptIR.new {!inTarget !inIndexResult !inAddress !inElementArraySize}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @ComputeRegisterAddressWithSubscriptIR : @abstractInstructionIR {
-  @objectIR mTarget
-  @objectIR mIndexResult
-  @bigint mRegisterAddress
-  @bigint mElementArraySize
-}
+#class @ComputeRegisterAddressWithSubscriptIR : @abstractInstructionIR {
+#  @objectIR mTarget
+#  @objectIR mIndexResult
+#  @bigint mRegisterAddress
+#  @bigint mElementArraySize
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

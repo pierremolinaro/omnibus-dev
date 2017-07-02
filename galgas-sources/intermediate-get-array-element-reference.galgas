@@ -1,19 +1,19 @@
 
-setter @instructionListIR appendGetArrayElementReference
-  ?let @objectIR inTarget
-  ?let @objectIR inSource
-  ?let @string inElementIndex
-{
-  self += !@getArrayElementReferenceIR.new {!inTarget !inSource !inElementIndex}
-}
+#setter @instructionListIR appendGetArrayElementReference
+#  ?let @objectIR inTarget
+#  ?let @objectIR inSource
+#  ?let @string inElementIndex
+#{
+#  self += !@getArrayElementReferenceIR.new {!inTarget !inSource !inElementIndex}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @getArrayElementReferenceIR : @abstractInstructionIR {
-  @objectIR mTarget
-  @objectIR mSource
-  @string mElementIndex
-}
+#class @getArrayElementReferenceIR : @abstractInstructionIR {
+#  @objectIR mTarget
+#  @objectIR mSource
+#  @string mElementIndex
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

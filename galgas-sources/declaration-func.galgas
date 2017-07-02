@@ -215,50 +215,50 @@ method @functionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePre
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @functionDeclarationListAST enterFunctionInContext 
-  ?selfTypeName:let @string inSelfTypeName
-  ?!context:@semanticContext ioContext
-{
-  for function in self do
-  #--- Signature
-    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
-  #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
-  #--- Attributes
-    var globalFunction = false
-    var canMutateProperties = false
-    for (attribute) in function.mFunctionAttributeList do
-      if attribute.string == exportedAttribute () then
-        globalFunction = true
-      elsif attribute.string == mutatingAttribute () then
-        canMutateProperties = true
-      end
-    end
-    let canAccessProperties = function.mMode != .userMode
-  #--- Routine mangled name
-    let routineMangledName = routineMangledNameFromAST (
-      !inSelfTypeName 
-      !function.mFunctionName
-      !function.mFunctionFormalArgumentList
-    )
-  #--- Enter in context
-    [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
-      !function.mFunctionName
-      ![function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
-      !routineMangledName
-      !.new{
-        !function.mPublicFunction
-        !globalFunction
-        !.function {!executionMode:function.mMode}
-        !signature
-        !returnType
-        !canMutateProperties
-        !canAccessProperties
-        !.staticCall
-      }
-    ]
-  end
-}
+#method @functionDeclarationListAST enterFunctionInContext 
+#  ?selfTypeName:let @string inSelfTypeName
+#  ?!context:@semanticContext ioContext
+#{
+#  for function in self do
+#  #--- Signature
+#    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let signature)
+#  #--- Return type
+#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
+#  #--- Attributes
+#    var globalFunction = false
+#    var canMutateProperties = false
+#    for (attribute) in function.mFunctionAttributeList do
+#      if attribute.string == exportedAttribute () then
+#        globalFunction = true
+#      elsif attribute.string == mutatingAttribute () then
+#        canMutateProperties = true
+#      end
+#    end
+#    let canAccessProperties = function.mMode != .userMode
+#  #--- Routine mangled name
+#    let routineMangledName = routineMangledNameFromAST (
+#      !inSelfTypeName 
+#      !function.mFunctionName
+#      !function.mFunctionFormalArgumentList
+#    )
+#  #--- Enter in context
+#    [!?ioContext.mRoutineMapForContext insertKey # Raises a redefinition error
+#      !function.mFunctionName
+#      ![function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
+#      !routineMangledName
+#      !.new{
+#        !function.mPublicFunction
+#        !globalFunction
+#        !.function {!executionMode:function.mMode}
+#        !signature
+#        !returnType
+#        !canMutateProperties
+#        !canAccessProperties
+#        !.staticCall
+#      }
+#    ]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #   SEMANTICS                                                                                                           

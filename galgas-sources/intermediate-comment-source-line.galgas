@@ -1,13 +1,13 @@
 
-setter @instructionListIR appendSourceLineComment ?let @location inSourceLocation {
-  self += !@sourceLocationIR.new {!inSourceLocation}
-}
+#setter @instructionListIR appendSourceLineComment ?let @location inSourceLocation {
+#  self += !@sourceLocationIR.new {!inSourceLocation}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @sourceLocationIR : @abstractInstructionIR {
-  @location mSourceLocation
-}
+#class @sourceLocationIR : @abstractInstructionIR {
+#  @location mSourceLocation
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

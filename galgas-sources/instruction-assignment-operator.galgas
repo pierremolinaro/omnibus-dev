@@ -140,142 +140,142 @@ override method @varOperatorAssignInstructionAST noteInstructionTypesInPrecedenc
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varOperatorAssignInstructionAST analyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inCurrentMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-#---
-  [mAssignmentTargetAST analyzeAssignmentTarget
-    !self: inSelfType
-    !targetAccessKind:.readWrite
-    !propertiesAreMutable: inRoutineCanMutateProperties
-    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
-    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-    !context: inContext
-    !mode: inCurrentMode
-    !?temporary: ioTemporaries
-    !?staticStringMap: ioGlobalLiteralStringMap
-    !?variableMap:ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca: ioAllocaList
-    !?instructionListIR: ioInstructionGenerationList
-    ?@objectIR targetObject
-    ?globalVariableReceiverName:let unused globalVariableReceiverName
-  ]
-  if [targetObject isPossibleFunction] then
-    error [mAssignmentTargetAST mIdentifier] : "invalid assignment target" : targetObject
-  end
-#--- Analyze source expression
-  [mSourceExpression analyzeExpression
-    !self:inSelfType
-    !inGuard:false
-    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-    !optionalTargetType:[targetObject type]
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
-    ?result:let @objectIR sourcePossibleReference
-  ]
-  [!?ioInstructionGenerationList appendLoadFromReference
-    !?ioTemporaries
-    !sourcePossibleReference
-    !mEndOfSourceExpression
-    ?let sourceValue
-  ]  
-#--- Check operator is available for type
-  let noPanicGeneration = [option plm_options.noPanicGeneration value]
-  let panicMode = inCurrentMode == .panicMode
-  @infixOperatorMap operatorMap
-  switch mOperator
-  case bitWiseAndAssign :
-    operatorMap = inContext.mAndOperatorMap
-  case bitWiseOrAssign :
-    operatorMap = inContext.mOrOperatorMap
-  case bitWiseXorAssign :
-    operatorMap = inContext.mXorOperatorMap
-  case addAssign :
-    if panicMode then
-      error [mAssignmentTargetAST mIdentifier]
-       : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
-    end
-    operatorMap = if noPanicGeneration then inContext.mAddNoOvfOperatorMap else inContext.mAddOperatorMap end
-  case addModuloAssign :
-    operatorMap = inContext.mAddNoOvfOperatorMap
-  case subAssign :
-    if panicMode then
-      error [mAssignmentTargetAST mIdentifier]
-       : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
-    end
-    operatorMap = if noPanicGeneration then inContext.mSubNoOvfOperatorMap else inContext.mSubOperatorMap end
-  case subModuloAssign :
-    operatorMap = inContext.mSubNoOvfOperatorMap
-  case mulAssign :
-    if panicMode then
-      error [mAssignmentTargetAST mIdentifier]
-       : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
-    end
-    operatorMap = if noPanicGeneration then inContext.mMulNoOvfOperatorMap else inContext.mMulOperatorMap end
-  case mulModuloAssign :
-    operatorMap = inContext.mMulNoOvfOperatorMap
-  case divAssign :
-    if panicMode then
-      error [mAssignmentTargetAST mIdentifier]
-       : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
-    end
-    operatorMap = if noPanicGeneration then inContext.mDivNoOvfOperatorMap else inContext.mDivOperatorMap end
-  case divZeroAssign :
-    operatorMap = inContext.mDivNoOvfOperatorMap
-  case modAssign :
-    if panicMode then
-      error [mAssignmentTargetAST mIdentifier]
-       : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
-    end
-    operatorMap = if noPanicGeneration then inContext.mModNoOvfOperatorMap else inContext.mModOperatorMap end
-  case modZeroAssign :
-    operatorMap = inContext.mModNoOvfOperatorMap
-  end
-  [operatorMap checkBinaryOperationWith
-    !leftType:[targetObject type]
-    !rightType:[sourceValue type]
-    !operatorLocation:[mAssignmentTargetAST mIdentifier]
-    ?resultType:*
-    ?op:let @infixOperatorDescription binaryOperator
-  ]
-#--- Code generation
-  [!?ioInstructionGenerationList appendLoadFromReference
-    !?ioTemporaries
-    !targetObject
-    ![mAssignmentTargetAST mIdentifier]
-    ?let variableValue
-  ]
-  [binaryOperator generateInfixOperatorCode
-    !?ioTemporaries
-    !?ioInstructionGenerationList
-    !variableValue
-    ![mAssignmentTargetAST mIdentifier]
-    !sourceValue
-    ![targetObject type]
-    ?let newResultingValue
-  ]
-  [!?ioInstructionGenerationList appendStoreFromReference
-    !targetObject
-    ![mAssignmentTargetAST mIdentifier]
-    !newResultingValue
-  ]
-}
+#override method @varOperatorAssignInstructionAST analyze
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inCurrentMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!alloca:@allocaList ioAllocaList
+#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+#{
+##---
+#  [mAssignmentTargetAST analyzeAssignmentTarget
+#    !self: inSelfType
+#    !targetAccessKind:.readWrite
+#    !propertiesAreMutable: inRoutineCanMutateProperties
+#    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
+#    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+#    !context: inContext
+#    !mode: inCurrentMode
+#    !?temporary: ioTemporaries
+#    !?staticStringMap: ioGlobalLiteralStringMap
+#    !?variableMap:ioVariableMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca: ioAllocaList
+#    !?instructionListIR: ioInstructionGenerationList
+#    ?@objectIR targetObject
+#    ?globalVariableReceiverName:let unused globalVariableReceiverName
+#  ]
+#  if [targetObject isPossibleFunction] then
+#    error [mAssignmentTargetAST mIdentifier] : "invalid assignment target" : targetObject
+#  end
+##--- Analyze source expression
+#  [mSourceExpression analyzeExpression
+#    !self:inSelfType
+#    !inGuard:false
+#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+#    !optionalTargetType:[targetObject type]
+#    !context:inContext
+#    !mode:inCurrentMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca:ioAllocaList
+#    !?instructionListIR:ioInstructionGenerationList
+#    ?result:let @objectIR sourcePossibleReference
+#  ]
+#  [!?ioInstructionGenerationList appendLoadFromReference
+#    !?ioTemporaries
+#    !sourcePossibleReference
+#    !mEndOfSourceExpression
+#    ?let sourceValue
+#  ]  
+##--- Check operator is available for type
+#  let noPanicGeneration = [option plm_options.noPanicGeneration value]
+#  let panicMode = inCurrentMode == .panicMode
+#  @infixOperatorMap operatorMap
+#  switch mOperator
+#  case bitWiseAndAssign :
+#    operatorMap = inContext.mAndOperatorMap
+#  case bitWiseOrAssign :
+#    operatorMap = inContext.mOrOperatorMap
+#  case bitWiseXorAssign :
+#    operatorMap = inContext.mXorOperatorMap
+#  case addAssign :
+#    if panicMode then
+#      error [mAssignmentTargetAST mIdentifier]
+#       : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+#    end
+#    operatorMap = if noPanicGeneration then inContext.mAddNoOvfOperatorMap else inContext.mAddOperatorMap end
+#  case addModuloAssign :
+#    operatorMap = inContext.mAddNoOvfOperatorMap
+#  case subAssign :
+#    if panicMode then
+#      error [mAssignmentTargetAST mIdentifier]
+#       : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+#    end
+#    operatorMap = if noPanicGeneration then inContext.mSubNoOvfOperatorMap else inContext.mSubOperatorMap end
+#  case subModuloAssign :
+#    operatorMap = inContext.mSubNoOvfOperatorMap
+#  case mulAssign :
+#    if panicMode then
+#      error [mAssignmentTargetAST mIdentifier]
+#       : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+#    end
+#    operatorMap = if noPanicGeneration then inContext.mMulNoOvfOperatorMap else inContext.mMulOperatorMap end
+#  case mulModuloAssign :
+#    operatorMap = inContext.mMulNoOvfOperatorMap
+#  case divAssign :
+#    if panicMode then
+#      error [mAssignmentTargetAST mIdentifier]
+#       : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+#    end
+#    operatorMap = if noPanicGeneration then inContext.mDivNoOvfOperatorMap else inContext.mDivOperatorMap end
+#  case divZeroAssign :
+#    operatorMap = inContext.mDivNoOvfOperatorMap
+#  case modAssign :
+#    if panicMode then
+#      error [mAssignmentTargetAST mIdentifier]
+#       : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+#    end
+#    operatorMap = if noPanicGeneration then inContext.mModNoOvfOperatorMap else inContext.mModOperatorMap end
+#  case modZeroAssign :
+#    operatorMap = inContext.mModNoOvfOperatorMap
+#  end
+#  [operatorMap checkBinaryOperationWith
+#    !leftType:[targetObject type]
+#    !rightType:[sourceValue type]
+#    !operatorLocation:[mAssignmentTargetAST mIdentifier]
+#    ?resultType:*
+#    ?op:let @infixOperatorDescription binaryOperator
+#  ]
+##--- Code generation
+#  [!?ioInstructionGenerationList appendLoadFromReference
+#    !?ioTemporaries
+#    !targetObject
+#    ![mAssignmentTargetAST mIdentifier]
+#    ?let variableValue
+#  ]
+#  [binaryOperator generateInfixOperatorCode
+#    !?ioTemporaries
+#    !?ioInstructionGenerationList
+#    !variableValue
+#    ![mAssignmentTargetAST mIdentifier]
+#    !sourceValue
+#    ![targetObject type]
+#    ?let newResultingValue
+#  ]
+#  [!?ioInstructionGenerationList appendStoreFromReference
+#    !targetObject
+#    ![mAssignmentTargetAST mIdentifier]
+#    !newResultingValue
+#  ]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -61,26 +61,26 @@ method @initList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @initRoutineMap {
-  insert insertKey error message "the '%%%K' init routine is already declared"
-  search searchKey error message "there is no '%%%K' init routine"
-}
+#map @initRoutineMap {
+#  insert insertKey error message "the '%%%K' init routine is already declared"
+#  search searchKey error message "there is no '%%%K' init routine"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @initList-element enterInContext
-  ?!context:@semanticContext ioContext
-{
-  [!?ioContext.mInitRoutineMap insertKey !.new {![mPriority string] !mPriority.location}]
-}
+#method @initList-element enterInContext
+#  ?!context:@semanticContext ioContext
+#{
+#  [!?ioContext.mInitRoutineMap insertKey !.new {![mPriority string] !mPriority.location}]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @initRoutinePriorityMap {
-  insert insertKey error message "an init routine with priority %K has been already declared"
-}
+#map @initRoutinePriorityMap {
+#  insert insertKey error message "an init routine with priority %K has been already declared"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

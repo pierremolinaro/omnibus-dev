@@ -1,11 +1,11 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @indirectRoutineCallIR : @abstractInstructionIR {
-  @objectIR mFunctionPointer
-  @typeKind mFunctionType
-  @objectIR mResult
-  @procCallEffectiveParameterListIR mArgumentList
-}
+#class @indirectRoutineCallIR : @abstractInstructionIR {
+#  @objectIR mFunctionPointer
+#  @typeKind mFunctionType
+#  @objectIR mResult
+#  @procCallEffectiveParameterListIR mArgumentList
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

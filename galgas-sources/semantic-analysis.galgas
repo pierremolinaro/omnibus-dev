@@ -4,37 +4,37 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func checkAssignmentCompatibility
-  ?source:let @objectIR inSourceValue
-  ?targetAnnotationType:let @unifiedTypeMap-proxy inTargetAnnotationType
-  ?errorLocation:let @location inErrorLocation
-  ?staticTypeAllowed:let @bool inStaticTypeAllowed
-  -> @objectIR outResult
-{
-  if inTargetAnnotationType == .null then
-    outResult = inSourceValue
-  elsif inTargetAnnotationType == [inSourceValue type] then
-    outResult = inSourceValue
-  elsif [[[inSourceValue type] kind] isStaticInteger] && [[inTargetAnnotationType kind] isInteger] then
-    [inSourceValue literalInteger ?1* ?value:let value]
-    [[inTargetAnnotationType kind] integer ?min:let minTarget ?max:let maxTarget ?2*]
-    if (value < minTarget) || (maxTarget < value) then
-      error inErrorLocation : "literal integer too large" : outResult
-    else
-      outResult = [inSourceValue withType !inTargetAnnotationType]
-    end
-  else
-    error inErrorLocation
-    : "object of type $" + [inTargetAnnotationType key]
-      + " cannot be assigned from expression of type $" + [[inSourceValue type] key]
-    : outResult
-  end
-  if not inStaticTypeAllowed then
-    if [[outResult type] key] == staticIntegerTypeName () then
-      error inErrorLocation : "the $" + staticIntegerTypeName () + " static type is not allowed here"
-    end
-  end
-}
+#func checkAssignmentCompatibility
+#  ?source:let @objectIR inSourceValue
+#  ?targetAnnotationType:let @unifiedTypeMap-proxy inTargetAnnotationType
+#  ?errorLocation:let @location inErrorLocation
+#  ?staticTypeAllowed:let @bool inStaticTypeAllowed
+#  -> @objectIR outResult
+#{
+#  if inTargetAnnotationType == .null then
+#    outResult = inSourceValue
+#  elsif inTargetAnnotationType == [inSourceValue type] then
+#    outResult = inSourceValue
+#  elsif [[[inSourceValue type] kind] isStaticInteger] && [[inTargetAnnotationType kind] isInteger] then
+#    [inSourceValue literalInteger ?1* ?value:let value]
+#    [[inTargetAnnotationType kind] integer ?min:let minTarget ?max:let maxTarget ?2*]
+#    if (value < minTarget) || (maxTarget < value) then
+#      error inErrorLocation : "literal integer too large" : outResult
+#    else
+#      outResult = [inSourceValue withType !inTargetAnnotationType]
+#    end
+#  else
+#    error inErrorLocation
+#    : "object of type $" + [inTargetAnnotationType key]
+#      + " cannot be assigned from expression of type $" + [[inSourceValue type] key]
+#    : outResult
+#  end
+#  if not inStaticTypeAllowed then
+#    if [[outResult type] key] == staticIntegerTypeName () then
+#      error inErrorLocation : "the $" + staticIntegerTypeName () + " static type is not allowed here"
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -45,15 +45,15 @@ func checkAssignmentCompatibility
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct @semanticTemporariesStruct {
-  @uint mTemporaryIndex
-  @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
-  @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
-  @initRoutinePriorityMap mInitRoutinePriorityMap
-  @bootRoutinePriorityMap mBootRoutinePriorityMap
-  @subprogramInvocationGraph mSubprogramInvocationGraph
-  @staticArrayMap mStaticArrayMap
-}
+#struct @semanticTemporariesStruct {
+#  @uint mTemporaryIndex
+#  @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
+#  @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
+#  @initRoutinePriorityMap mInitRoutinePriorityMap
+#  @bootRoutinePriorityMap mBootRoutinePriorityMap
+#  @subprogramInvocationGraph mSubprogramInvocationGraph
+#  @staticArrayMap mStaticArrayMap
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -1,21 +1,21 @@
 
-setter @instructionListIR appendUpperBoundCheck
-  ?let @objectIR inSource
-  ?let @bigint inUpperBoundPlusOne
-  ?panicCode:let @uint inPanicCode
-  ?let @location inLocation
-{
-  self += !@upperBoundCheckIR.new {!inSource !inUpperBoundPlusOne !inPanicCode !inLocation}
-}
+#setter @instructionListIR appendUpperBoundCheck
+#  ?let @objectIR inSource
+#  ?let @bigint inUpperBoundPlusOne
+#  ?panicCode:let @uint inPanicCode
+#  ?let @location inLocation
+#{
+#  self += !@upperBoundCheckIR.new {!inSource !inUpperBoundPlusOne !inPanicCode !inLocation}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @upperBoundCheckIR : @abstractInstructionIR {
-  @objectIR mSource
-  @bigint mUpperBoundPlusOne
-  @uint mPanicCode
-  @location mLocation
-}
+#class @upperBoundCheckIR : @abstractInstructionIR {
+#  @objectIR mSource
+#  @bigint mUpperBoundPlusOne
+#  @uint mPanicCode
+#  @location mLocation
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

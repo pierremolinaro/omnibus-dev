@@ -87,122 +87,122 @@ override getter @globalConstantDeclaration keyRepresentationForErrorSignaling ->
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @globalConstantDeclaration enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-{
-  initialVariableMap (
-    !context:ioContext
-    !mode:.bootMode
-    !globalsAreConstant:true # Any value, there is no defined global variable at this stage
-    !returnTypeName:["" nowhere]
-    ?*
-    ?@universalPropertyAndRoutineMapForContext universalMap
-  )
-#--- Get destination type
-  @unifiedTypeMap-proxy annotationType
-  if mConstantTypeName.string == "" then
-    annotationType = .null
-  else
-    annotationType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mConstantTypeName}
-  end
-#--- Analyze source expression
-  @semanticTemporariesStruct temporaries = .default
-  @instructionListIR instructionGenerationList = {}
-  @allocaList allocaList = {}
-  [mSourceExpression analyzeExpression
-    !self:.null
-    !inGuard:false
-    !routineNameForInvocationGraph:["compiler" nowhere]
-    !optionalTargetType:annotationType
-    !context:ioContext
-    !mode:.bootMode
-    !?temporary:temporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:universalMap
-    !?alloca:allocaList
-    !?instructionListIR:instructionGenerationList
-    ?result:@objectIR expressionResult
-  ]
-#--- Check assignment compatibility
-  let result = checkAssignmentCompatibility (
-    !source:expressionResult
-    !targetAnnotationType:annotationType
-    !errorLocation:mConstantName.location
-    !staticTypeAllowed:true
-  )
-  drop annotationType, expressionResult
-  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
-    error mConstantName : "source expression cannot be statically computed"
-  end
-#--- Enter in context
-  [!?ioContext.mGlobalConstantMap insertKey !mConstantName !result]
-}
+#override method @globalConstantDeclaration enterInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext ioContext
+#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#{
+#  initialVariableMap (
+#    !context:ioContext
+#    !mode:.bootMode
+#    !globalsAreConstant:true # Any value, there is no defined global variable at this stage
+#    !returnTypeName:["" nowhere]
+#    ?*
+#    ?@universalPropertyAndRoutineMapForContext universalMap
+#  )
+##--- Get destination type
+#  @unifiedTypeMap-proxy annotationType
+#  if mConstantTypeName.string == "" then
+#    annotationType = .null
+#  else
+#    annotationType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mConstantTypeName}
+#  end
+##--- Analyze source expression
+#  @semanticTemporariesStruct temporaries = .default
+#  @instructionListIR instructionGenerationList = {}
+#  @allocaList allocaList = {}
+#  [mSourceExpression analyzeExpression
+#    !self:.null
+#    !inGuard:false
+#    !routineNameForInvocationGraph:["compiler" nowhere]
+#    !optionalTargetType:annotationType
+#    !context:ioContext
+#    !mode:.bootMode
+#    !?temporary:temporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:universalMap
+#    !?alloca:allocaList
+#    !?instructionListIR:instructionGenerationList
+#    ?result:@objectIR expressionResult
+#  ]
+##--- Check assignment compatibility
+#  let result = checkAssignmentCompatibility (
+#    !source:expressionResult
+#    !targetAnnotationType:annotationType
+#    !errorLocation:mConstantName.location
+#    !staticTypeAllowed:true
+#  )
+#  drop annotationType, expressionResult
+#  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
+#    error mConstantName : "source expression cannot be statically computed"
+#  end
+##--- Enter in context
+#  [!?ioContext.mGlobalConstantMap insertKey !mConstantName !result]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @globalConstantDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
+#override method @globalConstantDeclaration enterRoutinesInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext unused ioContext
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  BUILD CONSTANT MAP HTML FILE                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc buildGlobalConstantMapHTMLFile
-  ?@globalConstantMap inGlobalConstantMap
-  ?sourceFile:let @lstring inSourceFile
-{
-#------------------------------------ Build an HTML file that contains all declared constants
-  let @string typeDumpFilePath = inSourceFile.string + ".global-constants.html"
-  if [option plm_options.emitGlobalConstantHTMLDumpFile value] then
-    @stringset firstLetterSet = {}
-    for () in inGlobalConstantMap do
-      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
-    end
-    @string tableOfTypeString = ""
-    @char currentFirstLetter = ' '
-    for () type_ in inGlobalConstantMap do
-      if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
-        currentFirstLetter = [type_lkey.string characterAtIndex !0]
-        tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
-      end
-      tableOfTypeString += linkForGlobalConstant (!type_lkey.string) + "<br>"
-    end
-    let @string typeDumpString = [filewrapper constantDumpGenerationTemplate.dump
-      ![inSourceFile lastPathComponent]
-      !inGlobalConstantMap
-      !firstLetterSet
-      !tableOfTypeString
-    ]
-    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
-  else
-    [@string deleteFileIfExists !typeDumpFilePath]
-  end
-}
+#proc buildGlobalConstantMapHTMLFile
+#  ?@globalConstantMap inGlobalConstantMap
+#  ?sourceFile:let @lstring inSourceFile
+#{
+##------------------------------------ Build an HTML file that contains all declared constants
+#  let @string typeDumpFilePath = inSourceFile.string + ".global-constants.html"
+#  if [option plm_options.emitGlobalConstantHTMLDumpFile value] then
+#    @stringset firstLetterSet = {}
+#    for () in inGlobalConstantMap do
+#      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
+#    end
+#    @string tableOfTypeString = ""
+#    @char currentFirstLetter = ' '
+#    for () type_ in inGlobalConstantMap do
+#      if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
+#        currentFirstLetter = [type_lkey.string characterAtIndex !0]
+#        tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
+#      end
+#      tableOfTypeString += linkForGlobalConstant (!type_lkey.string) + "<br>"
+#    end
+#    let @string typeDumpString = [filewrapper constantDumpGenerationTemplate.dump
+#      ![inSourceFile lastPathComponent]
+#      !inGlobalConstantMap
+#      !firstLetterSet
+#      !tableOfTypeString
+#    ]
+#    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
+#  else
+#    [@string deleteFileIfExists !typeDumpFilePath]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-filewrapper constantDumpGenerationTemplate in "../generation-templates/" {
-}{
-}{
-  template dump "globalConstantDump.html.galgasTemplate"
-    ?@string PROJECT_NAME
-    ?@globalConstantMap GLOBAL_CONSTANT_MAP
-    ?@stringset FIRST_LETTER_SET
-    ?@string TABLE_OF_TYPES_STRING
-}
+#filewrapper constantDumpGenerationTemplate in "../generation-templates/" {
+#}{
+#}{
+#  template dump "globalConstantDump.html.galgasTemplate"
+#    ?@string PROJECT_NAME
+#    ?@globalConstantMap GLOBAL_CONSTANT_MAP
+#    ?@stringset FIRST_LETTER_SET
+#    ?@string TABLE_OF_TYPES_STRING
+#}
 
 #----------------------------------------------------------------------------------------------------------------------*
 
-func linkForGlobalConstant ?let @string inConstantName -> @string outResult {
-  outResult = "<a class=\"header_link\" href=\"#" + inConstantName + "\">" + inConstantName + "</a>"
-}
+#func linkForGlobalConstant ?let @string inConstantName -> @string outResult {
+#  outResult = "<a class=\"header_link\" href=\"#" + inConstantName + "\">" + inConstantName + "</a>"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
