@@ -59,42 +59,36 @@ method @externProcedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semantic
 #   ENTER IN CONTEXT                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST enterExternProcInContext
-  ?!context:@semanticContext ioContext
-{
-  for externProcedure in self do
-    [externProcedure enterExternProcInContext !?context:ioContext]
-  end
-}
+#method @externProcedureDeclarationListAST enterExternProcInContext
+#  ?!context:@semanticContext ioContext
+#{
+#  for externProcedure in self do
+#    [externProcedure enterExternProcInContext !?context:ioContext]
+#  end
+#}
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
-#--- Routine mangled name
-#  let routineMangledName = routineMangledNameFromAST (
-#    !"" 
+#method @externProcedureDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
+##--- Signature
+#  routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
+##--- Enter in context
+#  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnType]
+#  [!?ioContext.mRoutineMapForContext insertKey
 #    !mExternProcedureName
-#    !mProcFormalArgumentList
-#  )
-#--- Signature
-  routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
-#--- Enter in context
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnType]
-  [!?ioContext.mRoutineMapForContext insertKey
-    !mExternProcedureName
-    ![mProcFormalArgumentList routineSignature !mExternProcedureName]
-    !mRoutineNameForGeneration
-    !.new {
-      !true # isPublic
-      !false # Global
-      !.function {!executionMode:mMode}
-      !signature
-      !returnType
-      !false # canMutateProperties
-      !false # canAccessPropertiesInUserMode
-      !.staticCall
-    }
-  ]
-}
+#    ![mProcFormalArgumentList routineSignature !mExternProcedureName]
+#    !mRoutineNameForGeneration
+#    !.new {
+#      !true # isPublic
+#      !false # Global
+#      !.function {!executionMode:mMode}
+#      !signature
+#      !returnType
+#      !false # canMutateProperties
+#      !false # canAccessPropertiesInUserMode
+#      !.staticCall
+#    }
+#  ]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    

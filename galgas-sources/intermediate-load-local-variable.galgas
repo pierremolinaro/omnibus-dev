@@ -1,19 +1,19 @@
 
-setter @instructionListIR appendLoadLocalVariable
-  ?let @objectIR inTargetValue
-  ?let @string inVariableName
-  ?let @bool inVolatile
-{
-  self += !@loadLocalVariableIR.new {!inTargetValue !inVariableName !inVolatile}
-}
+#setter @instructionListIR appendLoadLocalVariable
+#  ?let @objectIR inTargetValue
+#  ?let @string inVariableName
+#  ?let @bool inVolatile
+#{
+#  self += !@loadLocalVariableIR.new {!inTargetValue !inVariableName !inVolatile}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @loadLocalVariableIR : @abstractInstructionIR {
-  @objectIR mTargetValue
-  @string mVariableName
-  @bool mVolatile
-}
+#class @loadLocalVariableIR : @abstractInstructionIR {
+#  @objectIR mTargetValue
+#  @string mVariableName
+#  @bool mVolatile
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

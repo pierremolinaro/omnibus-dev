@@ -91,27 +91,27 @@ method @guardDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePreced
 #    CONTEXT                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @guardDeclarationListAST enterInContext
-  ?receiverType:let @string inReceiverTypeName
-  ?!context:@semanticContext ioContext
-{
-  for guard in self do
-  #--- Guard mangled name
-    let guardMangledName = routineMangledNameFromAST (
-      !inReceiverTypeName 
-      !guard.mGuardName
-      !guard.mGuardFormalArgumentList
-    )
-  #--- Signature
-    routineSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
-  #--- Enter in context
-    [!?ioContext.mGuardMapForContext insertKey
-      !guardMangledName
-      !guard.mIsPublic
-      !signature
-    ]
-  end
-}
+#method @guardDeclarationListAST enterInContext
+#  ?receiverType:let @string inReceiverTypeName
+#  ?!context:@semanticContext ioContext
+#{
+#  for guard in self do
+#  #--- Guard mangled name
+#    let guardMangledName = routineMangledNameFromAST (
+#      !inReceiverTypeName 
+#      !guard.mGuardName
+#      !guard.mGuardFormalArgumentList
+#    )
+#  #--- Signature
+#    routineSignature (!?ioContext.mTypeMap !guard.mGuardFormalArgumentList ?let signature)
+#  #--- Enter in context
+#    [!?ioContext.mGuardMapForContext insertKey
+#      !guardMangledName
+#      !guard.mIsPublic
+#      !signature
+#    ]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
@@ -290,116 +290,116 @@ method @guardDeclarationListAST enterInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @callInstructionAST baseGuardAnalyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+#abstract method @callInstructionAST baseGuardAnalyze
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  !@guardKindGenerationIR outConvenienceGuardGenerationIR
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @simpleCallInstructionAST baseGuardAnalyze
-  ?self:let @unifiedTypeMap-proxy unused inSelfType
-  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-  ?context:let @semanticContext unused inContext
-  ?mode:let @mode unused inMode
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
-  !@guardKindGenerationIR outConvenienceGuardGenerationIR
-{
-  error mSandAloneRoutineName : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
-}
+#override method @simpleCallInstructionAST baseGuardAnalyze
+#  ?self:let @unifiedTypeMap-proxy unused inSelfType
+#  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+#  ?context:let @semanticContext unused inContext
+#  ?mode:let @mode unused inMode
+#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
+#  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+#{
+#  error mSandAloneRoutineName : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @complexCallInstructionAST baseGuardAnalyze
-  ?self:let @unifiedTypeMap-proxy inSelfType
-  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-  !@guardKindGenerationIR outConvenienceGuardGenerationIR
-{
-  @allocaList baseGuardAllocaList = {}
-  @instructionListIR baseGuardInstructionGenerationList = {}
-  [mAssignmentTargetAST analyzeAssignmentTarget
-    !self: inSelfType
-    !targetAccessKind:.readWrite
-    !propertiesAreMutable: false
-    !directAccessToPropertiesAllowed: false
-    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-    !context: inContext
-    !mode:.guardMode
-    !?temporary: ioTemporaries
-    !?staticStringMap: ioGlobalLiteralStringMap
-    !?variableMap: ioVariableMap
-    !?variableMap:ioUniversalMap
-    !?alloca: baseGuardAllocaList
-    !?instructionListIR: baseGuardInstructionGenerationList
-    ?@objectIR currentObject
-    ?globalVariableReceiverName: let unused globalVariableReceiverName
-  ]
-#--- Analyze arguments
-  if not [currentObject isPossibleFunction] then
-    error .nowhere : "object is not a function" : outConvenienceGuardGenerationIR
-  else
-    [currentObject possibleFunction ?receiver:let receiver ?functionName:let functionName]
-    analyzeFunctionCallInExpression (
-      !self:inSelfType
-      !propertiesAreMutable:false
-      !directAccessToPropertiesAllowed:true
-      !receiver:receiver
-      !routineName:functionName
-      !effective:mArguments
-      !callerForInvocationGraph:inCallerNameForInvocationGraph
-      !context:inContext
-      !requiredMode:inMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioGlobalLiteralStringMap
-      !?variableMap:ioVariableMap
-      !?variableMap:ioUniversalMap
-      !?alloca:baseGuardAllocaList
-      !?instructionListIR:baseGuardInstructionGenerationList
-      ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
-      ?routineKind:let @calleeKindIR unused routineKind
-      ?routineMangledName:let @lstring functionMangledName
-      ?routineNameForGeneration:let @lstring unused functionNameForGeneration
-      ?returnType:let @unifiedTypeMap-proxy returnedType
-    )
-    if returnedType != .null then
-      error functionName : "<< internal guard error >>"
-    end
-  #--- Code generation
-    outConvenienceGuardGenerationIR = .convenienceGuard {
-      !baseGuardAllocaList:baseGuardAllocaList
-      !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
-      !baseGuardMangledName:functionMangledName.string
-      !baseGuardEffectiveParameterList:effectiveParameterListIR
-    }
-  end
-}
+#override method @complexCallInstructionAST baseGuardAnalyze
+#  ?self:let @unifiedTypeMap-proxy inSelfType
+#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+#  ?context:let @semanticContext inContext
+#  ?mode:let @mode inMode
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  !@guardKindGenerationIR outConvenienceGuardGenerationIR
+#{
+#  @allocaList baseGuardAllocaList = {}
+#  @instructionListIR baseGuardInstructionGenerationList = {}
+#  [mAssignmentTargetAST analyzeAssignmentTarget
+#    !self: inSelfType
+#    !targetAccessKind:.readWrite
+#    !propertiesAreMutable: false
+#    !directAccessToPropertiesAllowed: false
+#    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+#    !context: inContext
+#    !mode:.guardMode
+#    !?temporary: ioTemporaries
+#    !?staticStringMap: ioGlobalLiteralStringMap
+#    !?variableMap: ioVariableMap
+#    !?variableMap:ioUniversalMap
+#    !?alloca: baseGuardAllocaList
+#    !?instructionListIR: baseGuardInstructionGenerationList
+#    ?@objectIR currentObject
+#    ?globalVariableReceiverName: let unused globalVariableReceiverName
+#  ]
+##--- Analyze arguments
+#  if not [currentObject isPossibleFunction] then
+#    error .nowhere : "object is not a function" : outConvenienceGuardGenerationIR
+#  else
+#    [currentObject possibleFunction ?receiver:let receiver ?functionName:let functionName]
+#    analyzeFunctionCallInExpression (
+#      !self:inSelfType
+#      !propertiesAreMutable:false
+#      !directAccessToPropertiesAllowed:true
+#      !receiver:receiver
+#      !routineName:functionName
+#      !effective:mArguments
+#      !callerForInvocationGraph:inCallerNameForInvocationGraph
+#      !context:inContext
+#      !requiredMode:inMode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioGlobalLiteralStringMap
+#      !?variableMap:ioVariableMap
+#      !?variableMap:ioUniversalMap
+#      !?alloca:baseGuardAllocaList
+#      !?instructionListIR:baseGuardInstructionGenerationList
+#      ?effectiveIR:let @procCallEffectiveParameterListIR effectiveParameterListIR
+#      ?routineKind:let @calleeKindIR unused routineKind
+#      ?routineMangledName:let @lstring functionMangledName
+#      ?routineNameForGeneration:let @lstring unused functionNameForGeneration
+#      ?returnType:let @unifiedTypeMap-proxy returnedType
+#    )
+#    if returnedType != .null then
+#      error functionName : "<< internal guard error >>"
+#    end
+#  #--- Code generation
+#    outConvenienceGuardGenerationIR = .convenienceGuard {
+#      !baseGuardAllocaList:baseGuardAllocaList
+#      !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
+#      !baseGuardMangledName:functionMangledName.string
+#      !baseGuardEffectiveParameterList:effectiveParameterListIR
+#    }
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @guardKindGenerationIR {
-  case baseGuard
-  case convenienceGuard (@allocaList baseGuardAllocaList
-                         @instructionListIR baseGuardInstructionGenerationList
-                         @string baseGuardMangledName
-                         @procCallEffectiveParameterListIR baseGuardEffectiveParameterList)
-}
+#enum @guardKindGenerationIR {
+#  case baseGuard
+#  case convenienceGuard (@allocaList baseGuardAllocaList
+#                         @instructionListIR baseGuardInstructionGenerationList
+#                         @string baseGuardMangledName
+#                         @procCallEffectiveParameterListIR baseGuardEffectiveParameterList)
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

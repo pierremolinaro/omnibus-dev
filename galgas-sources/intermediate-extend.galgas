@@ -1,17 +1,17 @@
 
-setter @instructionListIR appendExtend
-  ?let @objectIR inResult
-  ?let @objectIR inSource
-{
-  self += !@extendIR.new {!inResult !inSource}
-}
+#setter @instructionListIR appendExtend
+#  ?let @objectIR inResult
+#  ?let @objectIR inSource
+#{
+#  self += !@extendIR.new {!inResult !inSource}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @extendIR : @abstractInstructionIR {
-  @objectIR mResult
-  @objectIR mSource
-}
+#class @extendIR : @abstractInstructionIR {
+#  @objectIR mResult
+#  @objectIR mSource
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

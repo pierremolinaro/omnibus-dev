@@ -1,21 +1,21 @@
 
-setter @instructionListIR appendStoreGlobalVariable
-  ?let @string inGlobalVarName
-  ?let @unifiedTypeMap-proxy inTargetVarType
-  ?let @objectIR inSourceValue
-  ?volatile:let @bool inIsVolatile
-{
-  self += !@storeGlobalVariableIR.new {!inGlobalVarName !inTargetVarType !inSourceValue !inIsVolatile}
-}
+#setter @instructionListIR appendStoreGlobalVariable
+#  ?let @string inGlobalVarName
+#  ?let @unifiedTypeMap-proxy inTargetVarType
+#  ?let @objectIR inSourceValue
+#  ?volatile:let @bool inIsVolatile
+#{
+#  self += !@storeGlobalVariableIR.new {!inGlobalVarName !inTargetVarType !inSourceValue !inIsVolatile}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @storeGlobalVariableIR : @abstractInstructionIR {
-  @string mGlobalVarName
-  @unifiedTypeMap-proxy mTargetVarType
-  @objectIR mSourceValue
-  @bool mIsVolatile
-}
+#class @storeGlobalVariableIR : @abstractInstructionIR {
+#  @string mGlobalVarName
+#  @unifiedTypeMap-proxy mTargetVarType
+#  @objectIR mSourceValue
+#  @bool mIsVolatile
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

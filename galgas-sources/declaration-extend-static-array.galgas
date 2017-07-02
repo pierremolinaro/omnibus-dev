@@ -120,146 +120,146 @@ override method @extendStaticArrayDeclarationAST enterInPrecedenceGraph ?!@seman
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-listmap @staticlistValues_listMap (@stringlist)
+#listmap @staticlistValues_listMap (@stringlist)
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extendStaticArrayDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-{
-  [ioContext.mStaticlistMap searchKey !mStaticlistName ?let staticArrayPropertyList]
-  if [staticArrayPropertyList length] != [mExpressions length] then
-    error mStaticlistName
-    : [[staticArrayPropertyList length] string] + " expressions required, "
-    + [[mExpressions length] string] + " provided"
-  else
-    var staticValue = "{"
-    for (operand endOfExp) in mExpressions, (* type) in staticArrayPropertyList do
-      switch operand
-      case expression (@expressionAST exp) :
-        if [[type kind] isFunction] then
-          error endOfExp : "a function name is expected here"
-        else
-          initialVariableMap (
-            !context:ioContext
-            !mode:.bootMode
-            !globalsAreConstant:true # Any value, there is no defined global variable at this stage
-            !returnTypeName:["" nowhere]
-            ?*
-            ?@universalPropertyAndRoutineMapForContext universalMap
-          )
-          @semanticTemporariesStruct temporaries = .default
-          @instructionListIR instructionGenerationList = {}
-          @allocaList allocaList = {}
-          [exp analyzeExpression
-            !self:.null
-            !inGuard:false
-            !routineNameForInvocationGraph:["compiler" nowhere]
-            !optionalTargetType:type
-            !context:ioContext
-            !mode:.bootMode
-            !?temporary:temporaries
-            !?staticStringMap:ioGlobalLiteralStringMap
-            !?variableMap:universalMap
-            !?alloca:allocaList
-            !?instructionListIR:instructionGenerationList
-            ?result:let @objectIR expressionResult
-          ]
-        #--- Check assignment compatibility
-          let result = checkAssignmentCompatibility (
-            !source:expressionResult
-            !targetAnnotationType:type
-            !errorLocation:endOfExp
-            !staticTypeAllowed:false
-          )
-          if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
-            error endOfExp : "source expression cannot be statically computed"
-          end
-        #--- Enter in static value
-          staticValue += [[type kind] llvmTypeName] + " " + [expressionResult llvmName]
-        end      
-      case function (@lstring functionName @routineFormalArgumentList formalArgs) :
-        if not [[type kind] isFunction] then
-          error endOfExp : "a static expression is expected here"
-        else
-          [[type kind] function ?descriptor:let functionDescriptor]
-          let argumentSignature = [formalArgs routineSignature !functionName]
-          [ioContext.mRoutineMapForContext searchKey
-            !functionName
-            !argumentSignature
-            ?let @lstring candidateRoutineLLVMName
-            ?let @routineDescriptor routineDescriptor
-            ?let functionDefinitionLocation
-          ]
-          let candidateIsPublic = routineDescriptor.mIsPublic
-          let candidateRoutineKind = routineDescriptor.mRoutineKind
-          let candidateMode = [routineDescriptor.mRoutineKind executionMode] # routineDescriptor.mExecutionMode
-          let candidateSignature = routineDescriptor.mSignature
-          let candidateReturnType = routineDescriptor.mReturnType
-        #--- Check accessibility
-          if not candidateIsPublic then
-            let declarationFile = [functionDefinitionLocation file]
-            let invocationFile = [functionName.location file]
-            if invocationFile != declarationFile then
-              error functionName : "this function is not public"
-            end
-          end
-          if not [candidateRoutineKind isFunction] then
-            error functionName : "this routine is not a function"
-          end
-          let currentMode = [functionDescriptor.mRoutineKind executionMode]
-          if currentMode != candidateMode then
-            error functionName : "this function runs in " + candidateMode + " mode, but " + currentMode + " is required"
-          end
-          if (functionDescriptor.mReturnType == .null) && (candidateReturnType != .null) then
-            error functionName : "this function should return an $" + [candidateReturnType key] + " object"
-          elsif (functionDescriptor.mReturnType != .null) && (candidateReturnType == .null) then
-            error functionName : "this function should return no object"
-          end
-          if [functionDescriptor.mSignature length] != [candidateSignature length] then
-            error functionName
-            : "this function has " + [candidateSignature length] + " argument(s) ("
-            + [functionDescriptor.mSignature length] + " required)"
-          else
-            for required in functionDescriptor.mSignature, candidate in candidateSignature do
-              if required.mType != candidate.mType then
-                error candidate.mSelector : "argument type should be $" + [required.mType key]
-              end
-            end
-          end
-          staticValue += [[type kind] llvmTypeName] + " @" + llvmNameForFunction (!candidateRoutineLLVMName)
-        end
-      end
-    between
-      staticValue += ", "
-    end
-    staticValue += "}"
-    ioStaticListValueMap += !mStaticlistName !staticValue
-  end
-}
+#override method @extendStaticArrayDeclarationAST enterInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext ioContext
+#  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#{
+#  [ioContext.mStaticlistMap searchKey !mStaticlistName ?let staticArrayPropertyList]
+#  if [staticArrayPropertyList length] != [mExpressions length] then
+#    error mStaticlistName
+#    : [[staticArrayPropertyList length] string] + " expressions required, "
+#    + [[mExpressions length] string] + " provided"
+#  else
+#    var staticValue = "{"
+#    for (operand endOfExp) in mExpressions, (* type) in staticArrayPropertyList do
+#      switch operand
+#      case expression (@expressionAST exp) :
+#        if [[type kind] isFunction] then
+#          error endOfExp : "a function name is expected here"
+#        else
+#          initialVariableMap (
+#            !context:ioContext
+#            !mode:.bootMode
+#            !globalsAreConstant:true # Any value, there is no defined global variable at this stage
+#            !returnTypeName:["" nowhere]
+#            ?*
+#            ?@universalPropertyAndRoutineMapForContext universalMap
+#          )
+#          @semanticTemporariesStruct temporaries = .default
+#          @instructionListIR instructionGenerationList = {}
+#          @allocaList allocaList = {}
+#          [exp analyzeExpression
+#            !self:.null
+#            !inGuard:false
+#            !routineNameForInvocationGraph:["compiler" nowhere]
+#            !optionalTargetType:type
+#            !context:ioContext
+#            !mode:.bootMode
+#            !?temporary:temporaries
+#            !?staticStringMap:ioGlobalLiteralStringMap
+#            !?variableMap:universalMap
+#            !?alloca:allocaList
+#            !?instructionListIR:instructionGenerationList
+#            ?result:let @objectIR expressionResult
+#          ]
+#        #--- Check assignment compatibility
+#          let result = checkAssignmentCompatibility (
+#            !source:expressionResult
+#            !targetAnnotationType:type
+#            !errorLocation:endOfExp
+#            !staticTypeAllowed:false
+#          )
+#          if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [result isStatic] then
+#            error endOfExp : "source expression cannot be statically computed"
+#          end
+#        #--- Enter in static value
+#          staticValue += [[type kind] llvmTypeName] + " " + [expressionResult llvmName]
+#        end      
+#      case function (@lstring functionName @routineFormalArgumentList formalArgs) :
+#        if not [[type kind] isFunction] then
+#          error endOfExp : "a static expression is expected here"
+#        else
+#          [[type kind] function ?descriptor:let functionDescriptor]
+#          let argumentSignature = [formalArgs routineSignature !functionName]
+#          [ioContext.mRoutineMapForContext searchKey
+#            !functionName
+#            !argumentSignature
+#            ?let @lstring candidateRoutineLLVMName
+#            ?let @routineDescriptor routineDescriptor
+#            ?let functionDefinitionLocation
+#          ]
+#          let candidateIsPublic = routineDescriptor.mIsPublic
+#          let candidateRoutineKind = routineDescriptor.mRoutineKind
+#          let candidateMode = [routineDescriptor.mRoutineKind executionMode] # routineDescriptor.mExecutionMode
+#          let candidateSignature = routineDescriptor.mSignature
+#          let candidateReturnType = routineDescriptor.mReturnType
+#        #--- Check accessibility
+#          if not candidateIsPublic then
+#            let declarationFile = [functionDefinitionLocation file]
+#            let invocationFile = [functionName.location file]
+#            if invocationFile != declarationFile then
+#              error functionName : "this function is not public"
+#            end
+#          end
+#          if not [candidateRoutineKind isFunction] then
+#            error functionName : "this routine is not a function"
+#          end
+#          let currentMode = [functionDescriptor.mRoutineKind executionMode]
+#          if currentMode != candidateMode then
+#            error functionName : "this function runs in " + candidateMode + " mode, but " + currentMode + " is required"
+#          end
+#          if (functionDescriptor.mReturnType == .null) && (candidateReturnType != .null) then
+#            error functionName : "this function should return an $" + [candidateReturnType key] + " object"
+#          elsif (functionDescriptor.mReturnType != .null) && (candidateReturnType == .null) then
+#            error functionName : "this function should return no object"
+#          end
+#          if [functionDescriptor.mSignature length] != [candidateSignature length] then
+#            error functionName
+#            : "this function has " + [candidateSignature length] + " argument(s) ("
+#            + [functionDescriptor.mSignature length] + " required)"
+#          else
+#            for required in functionDescriptor.mSignature, candidate in candidateSignature do
+#              if required.mType != candidate.mType then
+#                error candidate.mSelector : "argument type should be $" + [required.mType key]
+#              end
+#            end
+#          end
+#          staticValue += [[type kind] llvmTypeName] + " @" + llvmNameForFunction (!candidateRoutineLLVMName)
+#        end
+#      end
+#    between
+#      staticValue += ", "
+#    end
+#    staticValue += "}"
+#    ioStaticListValueMap += !mStaticlistName !staticValue
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extendStaticArrayDeclarationAST enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
+#override method @extendStaticArrayDeclarationAST enterRoutinesInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext unused ioContext
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @staticArrayMap {
-  @stringset mInvokedFunctionSet
-  
-  insert insertKey error message "INTERNAL ERROR"
-  search searchKey error message "INTERNAL ERROR"
-}
+#map @staticArrayMap {
+#  @stringset mInvokedFunctionSet
+#  
+#  insert insertKey error message "INTERNAL ERROR"
+#  search searchKey error message "INTERNAL ERROR"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -298,26 +298,26 @@ map @staticArrayMap {
 #  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @staticlistValues_listMap generateLLVM ?let @staticArrayMap inUsefulStaticArrayMap ?!@string ioLLVMcode {
-  var first = true
-  for (key initList) in self do
-    if [inUsefulStaticArrayMap hasKey !key] then
-      if first then
-        first = false
-        ioLLVMcode += llvmTitleComment (!"Static Arraies")
-      end
-      ioLLVMcode += "@" + llvmNameForGlobalVariable (!key) + " = private unnamed_addr constant ["
-      ioLLVMcode += [[initList length] string] + " x %$" + llvmNameForStaticListElementType (![key nowhere]) + "] [\n"
-      for (value) in initList
-      do
-        ioLLVMcode += "  %$" + llvmNameForStaticListElementType (![key nowhere]) + " " + value
-      between
-        ioLLVMcode += ",\n"
-      end
-      ioLLVMcode += "\n]\n\n"
-    end
-  end
-}
+#method @staticlistValues_listMap generateLLVM ?let @staticArrayMap inUsefulStaticArrayMap ?!@string ioLLVMcode {
+#  var first = true
+#  for (key initList) in self do
+#    if [inUsefulStaticArrayMap hasKey !key] then
+#      if first then
+#        first = false
+#        ioLLVMcode += llvmTitleComment (!"Static Arraies")
+#      end
+#      ioLLVMcode += "@" + llvmNameForGlobalVariable (!key) + " = private unnamed_addr constant ["
+#      ioLLVMcode += [[initList length] string] + " x %$" + llvmNameForStaticListElementType (![key nowhere]) + "] [\n"
+#      for (value) in initList
+#      do
+#        ioLLVMcode += "  %$" + llvmNameForStaticListElementType (![key nowhere]) + " " + value
+#      between
+#        ioLLVMcode += ",\n"
+#      end
+#      ioLLVMcode += "\n]\n\n"
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

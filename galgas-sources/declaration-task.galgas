@@ -203,134 +203,134 @@ method @taskList noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGra
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @taskProcedureMap {
-  insert insertKey error message "the '%K' proc is already declared in %L"
-  search searchKey error message "there is no '%K' proc"
-}
+#map @taskProcedureMap {
+#  insert insertKey error message "the '%K' proc is already declared in %L"
+#  search searchKey error message "there is no '%K' proc"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @taskMap {
-  @taskProcedureMap mTaskProcedureMap
-  insert insertKey error message "the '%K' task is already declared in %L"
-  search searchKey error message "there is no '%K' task"
-}
+#map @taskMap {
+#  @taskProcedureMap mTaskProcedureMap
+#  insert insertKey error message "the '%K' task is already declared in %L"
+#  search searchKey error message "there is no '%K' task"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskList enterInContext
-  ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-{
-  for task in self do
-  #--- task variables
-    @propertyList propertyList = {}
-    @propertyMap propertyMap = {}
-    @universalPropertyAndRoutineMapForContext universalPropertyMap = .default
-    @operandIRList initialValueList = {}
-    for variable in task.mVarList do
-      [variable enterInContext
-        !?context:ioContext
-        !?staticStringMap:ioGlobalLiteralStringMap
-        !?propertyList
-        !?propertyMap
-        !?universalPropertyMap
-        !?initialValueList
-      ]
-    end
-  #--- Enter task variable map as structure type in type map
-    let taskTypeKind = @typeKind.structure {
-      !typeName:task.mTaskName
-      !propertyMap:propertyMap 
-      !universalMap:universalPropertyMap
-      !propertyList:propertyList
-      !flags:0
-    }
-    [!?ioContext.mTypeMap insertType
-      !lkey:task.mTaskName
-      !kind:taskTypeKind
-    ]
-    let taskType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !task.mTaskName}
-    ioContext.mGlobalTaskVariableList +=
-      !task.mTaskName.string 
-      !task.mTaskName.string
-      !.llvmStructureConstant{!type: taskType !values:initialValueList}
-  #--- Task procedures
-    [task.mTaskProcList enterFunctionInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
-  end
-}
+#method @taskList enterInContext
+#  ?!context:@semanticContext ioContext
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#{
+#  for task in self do
+#  #--- task variables
+#    @propertyList propertyList = {}
+#    @propertyMap propertyMap = {}
+#    @universalPropertyAndRoutineMapForContext universalPropertyMap = .default
+#    @operandIRList initialValueList = {}
+#    for variable in task.mVarList do
+#      [variable enterInContext
+#        !?context:ioContext
+#        !?staticStringMap:ioGlobalLiteralStringMap
+#        !?propertyList
+#        !?propertyMap
+#        !?universalPropertyMap
+#        !?initialValueList
+#      ]
+#    end
+#  #--- Enter task variable map as structure type in type map
+#    let taskTypeKind = @typeKind.structure {
+#      !typeName:task.mTaskName
+#      !propertyMap:propertyMap 
+#      !universalMap:universalPropertyMap
+#      !propertyList:propertyList
+#      !flags:0
+#    }
+#    [!?ioContext.mTypeMap insertType
+#      !lkey:task.mTaskName
+#      !kind:taskTypeKind
+#    ]
+#    let taskType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !task.mTaskName}
+#    ioContext.mGlobalTaskVariableList +=
+#      !task.mTaskName.string 
+#      !task.mTaskName.string
+#      !.llvmStructureConstant{!type: taskType !values:initialValueList}
+#  #--- Task procedures
+#    [task.mTaskProcList enterFunctionInContext !selfTypeName:"$" + task.mTaskName !?context:ioContext]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskVarListAST-element enterInContext
-  ?!context:@semanticContext ioContext
-  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-  ?!@propertyList ioPropertyList
-  ?!@propertyMap ioPropertyMap
-  ?!@universalPropertyAndRoutineMapForContext ioUniversalPropertyAndRoutineMapForContext
-  ?!@operandIRList ioInitialValueList
-{
-#--- Get destination type
-  @unifiedTypeMap-proxy variableAnnotationType
-  if mVarTypeName.string == "" then
-    variableAnnotationType = .null
-  else
-    variableAnnotationType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mVarTypeName}
-  end
-#--- Analyze source expression
-  @semanticTemporariesStruct temporaries = .default
-  @instructionListIR instructionGenerationList = {}
-  @allocaList allocaList = {}
-  variableMapWithConstants (
-    !context:ioContext
-    ?*
-    ?@universalPropertyAndRoutineMapForContext universalMap
-  )
-  [mVarInitExpression analyzeExpression
-    !self:.null
-    !inGuard:false
-    !routineNameForInvocationGraph:["compiler" nowhere]
-    !optionalTargetType:variableAnnotationType
-    !context:ioContext
-    !mode:.bootMode
-    !?temporary:temporaries
-    !?staticStringMap:ioGlobalLiteralStringMap
-    !?variableMap:universalMap
-    !?alloca:allocaList
-    !?instructionListIR:instructionGenerationList
-    ?result:@objectIR expressionResult
-  ]
-  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
-    error mVarName : "source expression cannot be statically computed"
-  end
-#--- Check variable type and expression type
-  if variableAnnotationType == .null && [[expressionResult kind] isStaticInteger] then
-    error mVarName : "cannot infer type"
-  end
-  let @objectIR result = checkAssignmentCompatibility (
-    !source:expressionResult
-    !targetAnnotationType:variableAnnotationType
-    !errorLocation:mVarName.location
-    !staticTypeAllowed:false
-  )
-  drop variableAnnotationType, expressionResult
-#--- Enter variable
-  if not [[[result type] kind] instanciable] then
-    error mVarName : "$" + [result key] + " type is not instanciable"
-  end
-  [!?ioPropertyMap insertKey
-    !mVarName
-    !false
-    !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
-  ]
-  [!?ioUniversalPropertyAndRoutineMapForContext insertProperty
-    !mVarName
-    !public:false
-    !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
-  ]
-  ioInitialValueList += !result
-  ioPropertyList += !mVarName.string ![result type]
-}
+#method @taskVarListAST-element enterInContext
+#  ?!context:@semanticContext ioContext
+#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+#  ?!@propertyList ioPropertyList
+#  ?!@propertyMap ioPropertyMap
+#  ?!@universalPropertyAndRoutineMapForContext ioUniversalPropertyAndRoutineMapForContext
+#  ?!@operandIRList ioInitialValueList
+#{
+##--- Get destination type
+#  @unifiedTypeMap-proxy variableAnnotationType
+#  if mVarTypeName.string == "" then
+#    variableAnnotationType = .null
+#  else
+#    variableAnnotationType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mVarTypeName}
+#  end
+##--- Analyze source expression
+#  @semanticTemporariesStruct temporaries = .default
+#  @instructionListIR instructionGenerationList = {}
+#  @allocaList allocaList = {}
+#  variableMapWithConstants (
+#    !context:ioContext
+#    ?*
+#    ?@universalPropertyAndRoutineMapForContext universalMap
+#  )
+#  [mVarInitExpression analyzeExpression
+#    !self:.null
+#    !inGuard:false
+#    !routineNameForInvocationGraph:["compiler" nowhere]
+#    !optionalTargetType:variableAnnotationType
+#    !context:ioContext
+#    !mode:.bootMode
+#    !?temporary:temporaries
+#    !?staticStringMap:ioGlobalLiteralStringMap
+#    !?variableMap:universalMap
+#    !?alloca:allocaList
+#    !?instructionListIR:instructionGenerationList
+#    ?result:@objectIR expressionResult
+#  ]
+#  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
+#    error mVarName : "source expression cannot be statically computed"
+#  end
+##--- Check variable type and expression type
+#  if variableAnnotationType == .null && [[expressionResult kind] isStaticInteger] then
+#    error mVarName : "cannot infer type"
+#  end
+#  let @objectIR result = checkAssignmentCompatibility (
+#    !source:expressionResult
+#    !targetAnnotationType:variableAnnotationType
+#    !errorLocation:mVarName.location
+#    !staticTypeAllowed:false
+#  )
+#  drop variableAnnotationType, expressionResult
+##--- Enter variable
+#  if not [[[result type] kind] instanciable] then
+#    error mVarName : "$" + [result key] + " type is not instanciable"
+#  end
+#  [!?ioPropertyMap insertKey
+#    !mVarName
+#    !false
+#    !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
+#  ]
+#  [!?ioUniversalPropertyAndRoutineMapForContext insertProperty
+#    !mVarName
+#    !public:false
+#    !.property {!type:[result type] !plmName:mVarName !index:[ioPropertyList length]}
+#  ]
+#  ioInitialValueList += !result
+#  ioPropertyList += !mVarName.string ![result type]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    

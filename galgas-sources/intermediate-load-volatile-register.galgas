@@ -1,17 +1,17 @@
 
-setter @instructionListIR appendLoadVolatileRegister
-  ?let @objectIR inTargetValue
-  ?let @bigint inAddress
-{
-  self += !@loadRegisterIR.new {!inTargetValue !inAddress}
-}
+#setter @instructionListIR appendLoadVolatileRegister
+#  ?let @objectIR inTargetValue
+#  ?let @bigint inAddress
+#{
+#  self += !@loadRegisterIR.new {!inTargetValue !inAddress}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @loadRegisterIR : @abstractInstructionIR {
-  @objectIR mTargetValue
-  @bigint mRegisterAddress
-}
+#class @loadRegisterIR : @abstractInstructionIR {
+#  @objectIR mTargetValue
+#  @bigint mRegisterAddress
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

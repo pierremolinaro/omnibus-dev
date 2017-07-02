@@ -1,17 +1,17 @@
 
-setter @instructionListIR appendTrunc
-  ?let @objectIR inResult
-  ?let @objectIR inSource
-{
-  self += !@truncIR.new {!inResult !inSource}
-}
+#setter @instructionListIR appendTrunc
+#  ?let @objectIR inResult
+#  ?let @objectIR inSource
+#{
+#  self += !@truncIR.new {!inResult !inSource}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @truncIR : @abstractInstructionIR {
-  @objectIR mResult
-  @objectIR mSource
-}
+#class @truncIR : @abstractInstructionIR {
+#  @objectIR mResult
+#  @objectIR mSource
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

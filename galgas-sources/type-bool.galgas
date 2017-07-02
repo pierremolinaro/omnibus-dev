@@ -44,93 +44,93 @@ override getter @booleanDeclaration keyRepresentationForErrorSignaling -> @strin
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanDeclaration enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-#--- Enter in type map
-  [!?ioContext.mTypeMap insertType !lkey:mBooleanTypeName !kind:.boolean]
-#--- Enter boolean type
-  if ioContext.mBooleanType != .null then
-    error mBooleanTypeName : "Boolean type already defined"
-  end
-  let boolType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mBooleanTypeName}
-  ioContext.mBooleanType = boolType
-#--- Enter boolean operators
-  enterBooleanOperators (
-    !boolTypeName:mBooleanTypeName
-    !?context:ioContext
-  )
-}
+#override method @booleanDeclaration enterInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext ioContext
+#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+##--- Enter in type map
+#  [!?ioContext.mTypeMap insertType !lkey:mBooleanTypeName !kind:.boolean]
+##--- Enter boolean type
+#  if ioContext.mBooleanType != .null then
+#    error mBooleanTypeName : "Boolean type already defined"
+#  end
+#  let boolType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mBooleanTypeName}
+#  ioContext.mBooleanType = boolType
+##--- Enter boolean operators
+#  enterBooleanOperators (
+#    !boolTypeName:mBooleanTypeName
+#    !?context:ioContext
+#  )
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
+#override method @booleanDeclaration enterRoutinesInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext unused ioContext
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc enterBooleanOperators
-  ?boolTypeName:@lstring inBooleanTypeName
-  ?!context:@semanticContext ioContext
-{
-  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inBooleanTypeName}
-  let boolBoolOp = combineTypeNamesForInfixOperator (!inBooleanTypeName.string !inBooleanTypeName.string)
-  [!?ioContext.mEqualOperatorMap insertKey
-    !boolBoolOp
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
-  ]
-  [!?ioContext.mNonEqualOperatorMap insertKey
-    !boolBoolOp
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
-  ]
-  [!?ioContext.mStrictInfOperatorMap insertKey
-    !boolBoolOp
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
-  ]
-  [!?ioContext.mInfEqualOperatorMap insertKey
-    !boolBoolOp
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
-  ]
-  [!?ioContext.mStrictSupOperatorMap insertKey
-    !boolBoolOp
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
-  ]
-  [!?ioContext.mSupEqualOperatorMap insertKey
-    !boolBoolOp
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
-  ]
-  [!?ioContext.mBooleanXorOperatorMap insertKey
-    !boolBoolOp
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.xor}
-  ]
-  [!?ioContext.mOrOperatorMap insertKey
-    !boolBoolOp
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.ior}
-  ]
-  [!?ioContext.mAndOperatorMap insertKey
-    !boolBoolOp
-    !selfTypeProxy
-    !@infixObjectObjectOperatorDescription.new {!.and}
-  ]
-  [!?ioContext.mNotOperatorMap insertKey
-    !inBooleanTypeName
-  ]
-}
+#private proc enterBooleanOperators
+#  ?boolTypeName:@lstring inBooleanTypeName
+#  ?!context:@semanticContext ioContext
+#{
+#  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inBooleanTypeName}
+#  let boolBoolOp = combineTypeNamesForInfixOperator (!inBooleanTypeName.string !inBooleanTypeName.string)
+#  [!?ioContext.mEqualOperatorMap insertKey
+#    !boolBoolOp
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+#  ]
+#  [!?ioContext.mNonEqualOperatorMap insertKey
+#    !boolBoolOp
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
+#  ]
+#  [!?ioContext.mStrictInfOperatorMap insertKey
+#    !boolBoolOp
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
+#  ]
+#  [!?ioContext.mInfEqualOperatorMap insertKey
+#    !boolBoolOp
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
+#  ]
+#  [!?ioContext.mStrictSupOperatorMap insertKey
+#    !boolBoolOp
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
+#  ]
+#  [!?ioContext.mSupEqualOperatorMap insertKey
+#    !boolBoolOp
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
+#  ]
+#  [!?ioContext.mBooleanXorOperatorMap insertKey
+#    !boolBoolOp
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.xor}
+#  ]
+#  [!?ioContext.mOrOperatorMap insertKey
+#    !boolBoolOp
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.ior}
+#  ]
+#  [!?ioContext.mAndOperatorMap insertKey
+#    !boolBoolOp
+#    !selfTypeProxy
+#    !@infixObjectObjectOperatorDescription.new {!.and}
+#  ]
+#  [!?ioContext.mNotOperatorMap insertKey
+#    !inBooleanTypeName
+#  ]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    

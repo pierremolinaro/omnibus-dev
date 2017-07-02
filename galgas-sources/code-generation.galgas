@@ -17,8 +17,8 @@
 #! @abstractInstructionIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @abstractInstructionIR {
-}
+#abstract class @abstractInstructionIR {
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -31,26 +31,26 @@ abstract class @abstractInstructionIR {
 #! @instructionListIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @instructionListIR {
-  @abstractInstructionIR mInstructionGeneration
-}
+#list @instructionListIR {
+#  @abstractInstructionIR mInstructionGeneration
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! codeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once llvmSeparatorLine -> @string outResult {
-  outResult  = ";-------------------------------------------------------------------------"
-  outResult += "---------------------------------------------*\n"
-}
+#func %once llvmSeparatorLine -> @string outResult {
+#  outResult  = ";-------------------------------------------------------------------------"
+#  outResult += "---------------------------------------------*\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmTitleComment ?let @string inTitle -> @string outTitle {
-  outTitle  = llvmSeparatorLine ()
-  outTitle += ";    " + [inTitle stringByRightPadding !114!' '] + "*\n"
-  outTitle += llvmSeparatorLine () + "\n"
-}
+#func llvmTitleComment ?let @string inTitle -> @string outTitle {
+#  outTitle  = llvmSeparatorLine ()
+#  outTitle += ";    " + [inTitle stringByRightPadding !114!' '] + "*\n"
+#  outTitle += llvmSeparatorLine () + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

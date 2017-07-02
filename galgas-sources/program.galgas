@@ -136,19 +136,19 @@ private proc compileProject
     end
   end
 #------------------------------------------------------------ Semantic context
-  @semanticContext semanticContext = .default
-  @staticStringMap globalLiteralStringMap = {}
-  @staticlistValues_listMap staticListValueMap = {}
-  if @uint.errorCount == 0 then
-    buildSemanticContext (
-      !orderedDeclarationList:orderedDeclarationListAST
-      !sourceFile:inSourceFile
-      !ast:ast
-      !?staticStringMap:globalLiteralStringMap
-      !?staticlistValues:staticListValueMap
-      ?context:semanticContext
-    )
-  end
+#  @semanticContext semanticContext = .default
+#  @staticStringMap globalLiteralStringMap = {}
+#  @staticlistValues_listMap staticListValueMap = {}
+#  if @uint.errorCount == 0 then
+#    buildSemanticContext (
+#      !orderedDeclarationList:orderedDeclarationListAST
+#      !sourceFile:inSourceFile
+#      !ast:ast
+#      !?staticStringMap:globalLiteralStringMap
+#      !?staticlistValues:staticListValueMap
+#      ?context:semanticContext
+#    )
+#  end
 #------------------------------------------------------------ Entity resolution
 #  if @uint.errorCount == 0 then
 #    resolveEntities (!ast:ast !context:semanticContext)

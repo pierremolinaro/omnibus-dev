@@ -1,21 +1,21 @@
 
-setter @instructionListIR appendGetPropertyReference
-  ?let @objectIR inTarget
-  ?let @objectIR inSource
-  ?let @string inPLMname
-  ?let @string inPropertyIndex
-{
-  self += !@getPropertyReferenceIR.new {!inTarget !inSource !inPLMname !inPropertyIndex}
-}
+#setter @instructionListIR appendGetPropertyReference
+#  ?let @objectIR inTarget
+#  ?let @objectIR inSource
+#  ?let @string inPLMname
+#  ?let @string inPropertyIndex
+#{
+#  self += !@getPropertyReferenceIR.new {!inTarget !inSource !inPLMname !inPropertyIndex}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @getPropertyReferenceIR : @abstractInstructionIR {
-  @objectIR mTarget
-  @objectIR mSource
-  @string mPLMname
-  @string mPropertyIndex
-}
+#class @getPropertyReferenceIR : @abstractInstructionIR {
+#  @objectIR mTarget
+#  @objectIR mSource
+#  @string mPLMname
+#  @string mPropertyIndex
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

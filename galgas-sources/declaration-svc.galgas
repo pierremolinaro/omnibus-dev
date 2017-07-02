@@ -95,50 +95,50 @@ method @systemRoutineDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTy
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @systemRoutineDeclarationListAST enterInContext
-  ?receiverType:let @string inReceiverTypeName
-  ?!context:@semanticContext ioContext
-{
-  for svc in self do
-  #--- Routine mangled name
-    let routineMangledName = routineMangledNameFromAST (
-      !inReceiverTypeName 
-      !svc.mName
-      !svc.mFormalArgumentList
-    )
-  #--- Signature
-    routineSignature (!?ioContext.mTypeMap !svc.mFormalArgumentList ?let signature)
-  #--- Return type
-    let returnType = if svc.mReturnTypeName.string == "" then
-      @unifiedTypeMap-proxy.null
-    else
-      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !svc.mReturnTypeName}
-    end
-  #--- Attributes
-    var mutating = false
-    for (attribute) in svc.mAttributeList do
-      if attribute.string == mutatingAttribute () then
-        mutating = true    
-      end
-    end
-  #--- Enter in context
-    [!?ioContext.mRoutineMapForContext insertKey
-      !svc.mName
-      ![svc.mFormalArgumentList routineSignature !svc.mName]
-      !routineMangledName
-      !.new {
-        !svc.mPublic
-        !false
-        !svc.mRoutineKind
-        !signature
-        !returnType
-        !mutating # canMutateProperties
-        !true # canAccessPropertiesInUserMode
-        !.staticCall
-      }
-    ]
-  end
-}
+#method @systemRoutineDeclarationListAST enterInContext
+#  ?receiverType:let @string inReceiverTypeName
+#  ?!context:@semanticContext ioContext
+#{
+#  for svc in self do
+#  #--- Routine mangled name
+#    let routineMangledName = routineMangledNameFromAST (
+#      !inReceiverTypeName 
+#      !svc.mName
+#      !svc.mFormalArgumentList
+#    )
+#  #--- Signature
+#    routineSignature (!?ioContext.mTypeMap !svc.mFormalArgumentList ?let signature)
+#  #--- Return type
+#    let returnType = if svc.mReturnTypeName.string == "" then
+#      @unifiedTypeMap-proxy.null
+#    else
+#      @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !svc.mReturnTypeName}
+#    end
+#  #--- Attributes
+#    var mutating = false
+#    for (attribute) in svc.mAttributeList do
+#      if attribute.string == mutatingAttribute () then
+#        mutating = true    
+#      end
+#    end
+#  #--- Enter in context
+#    [!?ioContext.mRoutineMapForContext insertKey
+#      !svc.mName
+#      ![svc.mFormalArgumentList routineSignature !svc.mName]
+#      !routineMangledName
+#      !.new {
+#        !svc.mPublic
+#        !false
+#        !svc.mRoutineKind
+#        !signature
+#        !returnType
+#        !mutating # canMutateProperties
+#        !true # canAccessPropertiesInUserMode
+#        !.staticCall
+#      }
+#    ]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    

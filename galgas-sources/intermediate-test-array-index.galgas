@@ -1,22 +1,22 @@
 
-setter @instructionListIR testArrayIndex
-  ?let @objectIR inIndex
-  ?let @location inErrorLocation
-  ?let @bigint inSize
-  !@bool outGeneratePanicInstruction
-{
-  [[inIndex kind] integer ?min:* ?max:let max ?unsigned:let isUnsigned ?1*]
-  outGeneratePanicInstruction = (not isUnsigned) || (max >= inSize)
-  self += !@testArrayIndexIR.new {!inIndex !inErrorLocation !inSize}
-}
+#setter @instructionListIR testArrayIndex
+#  ?let @objectIR inIndex
+#  ?let @location inErrorLocation
+#  ?let @bigint inSize
+#  !@bool outGeneratePanicInstruction
+#{
+#  [[inIndex kind] integer ?min:* ?max:let max ?unsigned:let isUnsigned ?1*]
+#  outGeneratePanicInstruction = (not isUnsigned) || (max >= inSize)
+#  self += !@testArrayIndexIR.new {!inIndex !inErrorLocation !inSize}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @testArrayIndexIR : @abstractInstructionIR {
-  @objectIR mIndex
-  @location mErrorLocation
-  @bigint mSize
-}
+#class @testArrayIndexIR : @abstractInstructionIR {
+#  @objectIR mIndex
+#  @location mErrorLocation
+#  @bigint mSize
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

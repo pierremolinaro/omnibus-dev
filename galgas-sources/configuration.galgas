@@ -312,67 +312,67 @@ override getter @configurationDeclarationAST keyRepresentationForErrorSignaling 
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @configurationDeclarationAST enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
+#override method @configurationDeclarationAST enterRoutinesInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext unused ioContext
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 # Duplicate configuration is detected in noteTypesInPrecedenceGraph
 
-override method @configurationDeclarationAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-  @stringset panicCodeSet = {}
-  if ioContext.mPointerSize != 0 then
-    error mTargetParameters.mPointerSize : "duplicate configuration"
-  elsif mTargetParameters.mPointerSize.bigint == 0G then
-    error mTargetParameters.mPointerSize : "zero size pointer not allowed"
-  else
-    ioContext.mPointerSize = [mTargetParameters.mPointerSize.bigint uint]
-  end
-  ioContext.mTargetParameters = mTargetParameters
-#--- Panic code type
-  ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicCodeTypeName}
-  if [[ioContext.mPanicCodeType kind] isInteger] then
-    [[ioContext.mPanicCodeType kind] integer ?2* ?unsigned:let unsigned ?1*]
-    if not unsigned then
-      error mPanicCodeTypeName : "this type should be an unsigned integer type"
-    end
-  else
-    error mPanicCodeTypeName : "this type should be an unsigned integer type"
-  end
-#--- Panic line type
-  ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicLineTypeName}
-  if [[ioContext.mPanicLineType kind] isInteger] then
-    [[ioContext.mPanicLineType kind] integer ?2* ?unsigned:let unsigned ?1*]
-    if not unsigned then
-      error mPanicLineTypeName : "this type should be an unsigned integer type"
-    end
-  else
-    error mPanicLineTypeName : "this type should be an unsigned integer type"
-  end
-#--- Interrupt panic codes
-  for (name panicCode) in mInterruptionConfigurationList do
-    [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
-    switch panicCode
-    case noPanicCode :
-    case panicCode (value) :
-      let s = [value.bigint string]
-      if [panicCodeSet hasKey !s] then
-        error value : "duplicate panic code"
-      end
-      panicCodeSet += !s
-    end
-  end
-}
+#override method @configurationDeclarationAST enterInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext ioContext
+#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#  @stringset panicCodeSet = {}
+#  if ioContext.mPointerSize != 0 then
+#    error mTargetParameters.mPointerSize : "duplicate configuration"
+#  elsif mTargetParameters.mPointerSize.bigint == 0G then
+#    error mTargetParameters.mPointerSize : "zero size pointer not allowed"
+#  else
+#    ioContext.mPointerSize = [mTargetParameters.mPointerSize.bigint uint]
+#  end
+#  ioContext.mTargetParameters = mTargetParameters
+##--- Panic code type
+#  ioContext.mPanicCodeType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicCodeTypeName}
+#  if [[ioContext.mPanicCodeType kind] isInteger] then
+#    [[ioContext.mPanicCodeType kind] integer ?2* ?unsigned:let unsigned ?1*]
+#    if not unsigned then
+#      error mPanicCodeTypeName : "this type should be an unsigned integer type"
+#    end
+#  else
+#    error mPanicCodeTypeName : "this type should be an unsigned integer type"
+#  end
+##--- Panic line type
+#  ioContext.mPanicLineType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPanicLineTypeName}
+#  if [[ioContext.mPanicLineType kind] isInteger] then
+#    [[ioContext.mPanicLineType kind] integer ?2* ?unsigned:let unsigned ?1*]
+#    if not unsigned then
+#      error mPanicLineTypeName : "this type should be an unsigned integer type"
+#    end
+#  else
+#    error mPanicLineTypeName : "this type should be an unsigned integer type"
+#  end
+##--- Interrupt panic codes
+#  for (name panicCode) in mInterruptionConfigurationList do
+#    [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
+#    switch panicCode
+#    case noPanicCode :
+#    case panicCode (value) :
+#      let s = [value.bigint string]
+#      if [panicCodeSet hasKey !s] then
+#        error value : "duplicate panic code"
+#      end
+#      panicCodeSet += !s
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

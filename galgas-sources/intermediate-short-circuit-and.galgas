@@ -1,33 +1,33 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendShortCircuitAndOperation
-  ?let @objectIR inTargetOperand
-  ?let @objectIR inLeftOperand
-  ?let @instructionListIR inLeftInstructionList
-  ?let @objectIR inRightOperand
-  ?let @instructionListIR inRightInstructionList
-  ?let @location inLocation
-{
-  self += !@shortCircuitAndOperationIR.new {
-    !inTargetOperand
-    !inLeftOperand
-    !inLeftInstructionList
-    !inRightOperand
-    !inRightInstructionList
-    !inLocation
-  }
-}
+#setter @instructionListIR appendShortCircuitAndOperation
+#  ?let @objectIR inTargetOperand
+#  ?let @objectIR inLeftOperand
+#  ?let @instructionListIR inLeftInstructionList
+#  ?let @objectIR inRightOperand
+#  ?let @instructionListIR inRightInstructionList
+#  ?let @location inLocation
+#{
+#  self += !@shortCircuitAndOperationIR.new {
+#    !inTargetOperand
+#    !inLeftOperand
+#    !inLeftInstructionList
+#    !inRightOperand
+#    !inRightInstructionList
+#    !inLocation
+#  }
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @shortCircuitAndOperationIR : @abstractInstructionIR {
-  @objectIR mTargetOperand
-  @objectIR mLeftOperand
-  @instructionListIR mLeftInstructionList
-  @objectIR mRightOperand
-  @instructionListIR mRightInstructionList
-  @location mLocation
-}
+#class @shortCircuitAndOperationIR : @abstractInstructionIR {
+#  @objectIR mTargetOperand
+#  @objectIR mLeftOperand
+#  @instructionListIR mLeftInstructionList
+#  @objectIR mRightOperand
+#  @instructionListIR mRightInstructionList
+#  @location mLocation
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -1,13 +1,13 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @staticRoutineCallIR : @abstractInstructionIR {
-  @string mGlobalVariableName
-  @objectIR mResult
-  @lstring mFunctionMangledName
-  @lstring mFunctionNameForGeneration
-  @calleeKindIR mKind
-  @procCallEffectiveParameterListIR mArgumentList
-}
+#class @staticRoutineCallIR : @abstractInstructionIR {
+#  @string mGlobalVariableName
+#  @objectIR mResult
+#  @lstring mFunctionMangledName
+#  @lstring mFunctionNameForGeneration
+#  @calleeKindIR mKind
+#  @procCallEffectiveParameterListIR mArgumentList
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

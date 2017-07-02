@@ -77,78 +77,78 @@ override getter @opaqueTypeDeclaration keyRepresentationForErrorSignaling -> @st
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @opaqueTypeDeclaration enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-#---
-  @uint flags = 0
-  for (attribute) in mAttributeList do
-    if attribute.string == "instantiable" then
-      if (flags & instanciableFlag ()) != 0 then
-        error attribute : "duplicated attribute"
-      else
-        flags = flags | instanciableFlag ()
-      end
-    elsif attribute.string == "copyable" then
-      if (flags & copyableFlag ()) != 0 then
-        error attribute : "duplicated attribute"
-      else
-        flags = flags | copyableFlag ()
-      end
-    else
-      error attribute : "only @copyable and @instantiable attributes are allowed here"
-    end
-  end
-#--- Compute array size
-  @instructionListIR initInstructionGenerationList = {}
-  @allocaList allocaList = {}
-  @semanticTemporariesStruct temporaries = .default
-  variableMapWithConstants (
-    !context:ioContext
-    ?@unifiedSymbolMapEx variableMap
-    ?@universalPropertyAndRoutineMapForContext universalMap
-  )
-  [mSizeExpression analyzeExpression
-    !self:.null
-    !inGuard:false
-    !routineNameForInvocationGraph:.new {!mOpaqueTypeName.string + " init" !mOpaqueTypeName.location}
-    !optionalTargetType:.null
-    !context:ioContext
-    !mode:.bootMode
-    !?temporary:temporaries
-    !?staticStringMap:*
-    !?variableMap:universalMap
-    !?alloca:allocaList
-    !?instructionListIR:initInstructionGenerationList
-    ?result:let @objectIR sizeExpressionIR
-  ]
-  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
-    error mSizeExpressionLocation : "array size expression is not static"
-  else
-    [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
-    [!?ioContext.mTypeMap insertType
-      !lkey:mOpaqueTypeName
-      !kind:.opaque {!bitCount:bitSize !flags:flags}
-    ]
-  #--- Constructor
-    [!?ioContext.mConstructorMap insertKey
-      !mOpaqueTypeName
-      !.simple {!value:0G}
-    ]
-  end
-}
+#override method @opaqueTypeDeclaration enterInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext ioContext
+#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+##---
+#  @uint flags = 0
+#  for (attribute) in mAttributeList do
+#    if attribute.string == "instantiable" then
+#      if (flags & instanciableFlag ()) != 0 then
+#        error attribute : "duplicated attribute"
+#      else
+#        flags = flags | instanciableFlag ()
+#      end
+#    elsif attribute.string == "copyable" then
+#      if (flags & copyableFlag ()) != 0 then
+#        error attribute : "duplicated attribute"
+#      else
+#        flags = flags | copyableFlag ()
+#      end
+#    else
+#      error attribute : "only @copyable and @instantiable attributes are allowed here"
+#    end
+#  end
+##--- Compute array size
+#  @instructionListIR initInstructionGenerationList = {}
+#  @allocaList allocaList = {}
+#  @semanticTemporariesStruct temporaries = .default
+#  variableMapWithConstants (
+#    !context:ioContext
+#    ?@unifiedSymbolMapEx variableMap
+#    ?@universalPropertyAndRoutineMapForContext universalMap
+#  )
+#  [mSizeExpression analyzeExpression
+#    !self:.null
+#    !inGuard:false
+#    !routineNameForInvocationGraph:.new {!mOpaqueTypeName.string + " init" !mOpaqueTypeName.location}
+#    !optionalTargetType:.null
+#    !context:ioContext
+#    !mode:.bootMode
+#    !?temporary:temporaries
+#    !?staticStringMap:*
+#    !?variableMap:universalMap
+#    !?alloca:allocaList
+#    !?instructionListIR:initInstructionGenerationList
+#    ?result:let @objectIR sizeExpressionIR
+#  ]
+#  if (([allocaList length] + [initInstructionGenerationList length]) > 0) || not [sizeExpressionIR isLiteralInteger] then
+#    error mSizeExpressionLocation : "array size expression is not static"
+#  else
+#    [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
+#    [!?ioContext.mTypeMap insertType
+#      !lkey:mOpaqueTypeName
+#      !kind:.opaque {!bitCount:bitSize !flags:flags}
+#    ]
+#  #--- Constructor
+#    [!?ioContext.mConstructorMap insertKey
+#      !mOpaqueTypeName
+#      !.simple {!value:0G}
+#    ]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @opaqueTypeDeclaration enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
+#override method @opaqueTypeDeclaration enterRoutinesInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext unused ioContext
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    

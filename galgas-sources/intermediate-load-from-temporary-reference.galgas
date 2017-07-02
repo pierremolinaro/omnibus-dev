@@ -1,19 +1,19 @@
 
-setter @instructionListIR appendLoadFromTemporaryReference
-  ?let @objectIR inTargetValue
-  ?let @string inLLVMName
-  ?let @bool inVolatile
-{
-  self += !@loadFromTemporaryReferenceIR.new {!inTargetValue !inLLVMName !inVolatile}
-}
+#setter @instructionListIR appendLoadFromTemporaryReference
+#  ?let @objectIR inTargetValue
+#  ?let @string inLLVMName
+#  ?let @bool inVolatile
+#{
+#  self += !@loadFromTemporaryReferenceIR.new {!inTargetValue !inLLVMName !inVolatile}
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @loadFromTemporaryReferenceIR : @abstractInstructionIR {
-  @objectIR mTargetValue
-  @string mLLVMName
-  @bool mVolatile
-}
+#class @loadFromTemporaryReferenceIR : @abstractInstructionIR {
+#  @objectIR mTargetValue
+#  @string mLLVMName
+#  @bool mVolatile
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

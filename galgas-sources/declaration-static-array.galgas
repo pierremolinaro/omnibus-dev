@@ -122,114 +122,114 @@ override method @staticArrayAST enterInPrecedenceGraph ?!@semanticTypePrecedence
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @staticlistMap {
-  @propertyList mStaticlistPropertyList
-
-  insert insertKey error message "static list '%K' is already defined"
-  search searchKey error message "static list '%K' is not defined"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-override method @staticArrayAST enterInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext ioContext
-  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-  @propertyList propertyList = {}
-  @propertyMap staticlistPropertyMap = {}
-  @universalPropertyAndRoutineMapForContext universalMap = .default
-  @stringset propertyNameSet = {}
-  let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
-  for (propertyName type) in mPropertyList do (propertyIndex)
-    switch type
-    case valueType (@lstring propertyTypeName) :
-      let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !propertyTypeName}
-      if [propertyNameSet hasKey !propertyName] then
-        error propertyName : "duplicated property name"
-      end
-      propertyNameSet += !propertyName
-      propertyList += !propertyName !propertyType
-      let objectIR = @objectIR.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
-      [!?universalMap insertProperty !propertyName !public:true !objectIR]
-      [!?staticlistPropertyMap insertKey
-        !propertyName
-        !true # Public
-        !objectIR
-      ]
-    case function (@mode mode @routineFormalArgumentList formalArgs @lstring returnTypeName) :
-    #--- Routine mangled name
-      let routineMangledName = routineMangledNameFromAST (
-        !"" 
-        !propertyName
-        !formalArgs
-      )
-    #--- Signature
-      routineSignature (!?ioContext.mTypeMap !formalArgs ?let signature)
-      let @unifiedTypeMap-proxy returnType = if returnTypeName.string == "" then
-        .null
-      else
-        .searchKey {!ioContext.mTypeMap !returnTypeName}
-      end
-      let descriptor = @routineDescriptor.new {
-        !true
-        !false
-        !.function {!executionMode:mode}
-        !signature
-        !returnType
-        !false
-        !false
-        !.propertyIndirectCall {!index:propertyIndex}
-      }
-      [!?universalMap insertRoutine
-        !propertyName
-        ![formalArgs routineSignature !propertyName]
-        !routineMangledName
-        !descriptor
-      ]
-      if not [ioContext.mTypeMap hasKey !routineMangledName] then
-        [!?ioContext.mTypeMap insertType
-          !lkey:routineMangledName
-          !kind:.function{!descriptor:descriptor}
-        ]
-      end
-      let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName}
-      propertyList += !propertyName !propertyType
-      let propertyIndex = [staticlistPropertyMap count]
-      [!?staticlistPropertyMap insertKey
-        !routineMangledName # propertyName
-        !true # Public
-        !.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
-      ]
-    end
-  end
-  [!?ioContext.mStaticlistMap insertKey
-    !mStaticListName
-    !propertyList
-  ]
-#--- Enter element type in type map
-  let kind = @typeKind.structure {
-    !typeName:llvmNameForStaticListElementType (!mStaticListName)
-    !propertyMap:staticlistPropertyMap
-    !universalMap:universalMap
-    !propertyList:propertyList
-    !flags:0
-  }
-  [!?ioContext.mTypeMap insertType
-    !lkey:plmTypeName
-    !kind:kind
-  ]
-}
+#map @staticlistMap {
+#  @propertyList mStaticlistPropertyList
+#
+#  insert insertKey error message "static list '%K' is already defined"
+#  search searchKey error message "static list '%K' is not defined"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticArrayAST enterRoutinesInContext
-  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-  ?!context:@semanticContext unused ioContext
-  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-{
-}
+#override method @staticArrayAST enterInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext ioContext
+#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#  @propertyList propertyList = {}
+#  @propertyMap staticlistPropertyMap = {}
+#  @universalPropertyAndRoutineMapForContext universalMap = .default
+#  @stringset propertyNameSet = {}
+#  let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
+#  for (propertyName type) in mPropertyList do (propertyIndex)
+#    switch type
+#    case valueType (@lstring propertyTypeName) :
+#      let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !propertyTypeName}
+#      if [propertyNameSet hasKey !propertyName] then
+#        error propertyName : "duplicated property name"
+#      end
+#      propertyNameSet += !propertyName
+#      propertyList += !propertyName !propertyType
+#      let objectIR = @objectIR.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
+#      [!?universalMap insertProperty !propertyName !public:true !objectIR]
+#      [!?staticlistPropertyMap insertKey
+#        !propertyName
+#        !true # Public
+#        !objectIR
+#      ]
+#    case function (@mode mode @routineFormalArgumentList formalArgs @lstring returnTypeName) :
+#    #--- Routine mangled name
+#      let routineMangledName = routineMangledNameFromAST (
+#        !"" 
+#        !propertyName
+#        !formalArgs
+#      )
+#    #--- Signature
+#      routineSignature (!?ioContext.mTypeMap !formalArgs ?let signature)
+#      let @unifiedTypeMap-proxy returnType = if returnTypeName.string == "" then
+#        .null
+#      else
+#        .searchKey {!ioContext.mTypeMap !returnTypeName}
+#      end
+#      let descriptor = @routineDescriptor.new {
+#        !true
+#        !false
+#        !.function {!executionMode:mode}
+#        !signature
+#        !returnType
+#        !false
+#        !false
+#        !.propertyIndirectCall {!index:propertyIndex}
+#      }
+#      [!?universalMap insertRoutine
+#        !propertyName
+#        ![formalArgs routineSignature !propertyName]
+#        !routineMangledName
+#        !descriptor
+#      ]
+#      if not [ioContext.mTypeMap hasKey !routineMangledName] then
+#        [!?ioContext.mTypeMap insertType
+#          !lkey:routineMangledName
+#          !kind:.function{!descriptor:descriptor}
+#        ]
+#      end
+#      let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName}
+#      propertyList += !propertyName !propertyType
+#      let propertyIndex = [staticlistPropertyMap count]
+#      [!?staticlistPropertyMap insertKey
+#        !routineMangledName # propertyName
+#        !true # Public
+#        !.property {!type:propertyType !plmName:propertyName !index:propertyIndex}
+#      ]
+#    end
+#  end
+#  [!?ioContext.mStaticlistMap insertKey
+#    !mStaticListName
+#    !propertyList
+#  ]
+##--- Enter element type in type map
+#  let kind = @typeKind.structure {
+#    !typeName:llvmNameForStaticListElementType (!mStaticListName)
+#    !propertyMap:staticlistPropertyMap
+#    !universalMap:universalMap
+#    !propertyList:propertyList
+#    !flags:0
+#  }
+#  [!?ioContext.mTypeMap insertType
+#    !lkey:plmTypeName
+#    !kind:kind
+#  ]
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#override method @staticArrayAST enterRoutinesInContext
+#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+#  ?!context:@semanticContext unused ioContext
+#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
