@@ -137,32 +137,32 @@ class @whileInstructionIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @whileInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  let labelTest = "while." + mLabelIndex + ".test"
-  let labelLoop = "while." + mLabelIndex + ".loop"
-  let labelEnd  = "while." + mLabelIndex + ".end"
-  ioLLVMcode += "  br label %" + labelTest + "\n\n"
-  ioLLVMcode += labelTest + ":\n"
-  [mTestInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + [mTestExpression llvmName] + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
-  ioLLVMcode += labelLoop + ":\n"
-  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br label %" + labelTest + "\n\n"
-  ioLLVMcode += labelEnd + ":\n"
-}
+#override method @whileInstructionIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  let labelTest = "while." + mLabelIndex + ".test"
+#  let labelLoop = "while." + mLabelIndex + ".loop"
+#  let labelEnd  = "while." + mLabelIndex + ".end"
+#  ioLLVMcode += "  br label %" + labelTest + "\n\n"
+#  ioLLVMcode += labelTest + ":\n"
+#  [mTestInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#  ioLLVMcode += "  br i1 " + [mTestExpression llvmName] + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
+#  ioLLVMcode += labelLoop + ":\n"
+#  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#  ioLLVMcode += "  br label %" + labelTest + "\n\n"
+#  ioLLVMcode += labelEnd + ":\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @whileInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@uint ioMaxBranchOfOnInstructions
-{
-  [mTestInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-}
+#override method @whileInstructionIR enterAccessibleEntities
+#  ?!@accessibleEntities ioAccessibleEntities
+#  ?!@uint ioMaxBranchOfOnInstructions
+#{
+#  [mTestInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

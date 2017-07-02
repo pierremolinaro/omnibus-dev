@@ -156,11 +156,11 @@ override method @typeArrayDeclaration enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeArrayDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
+#override method @typeArrayDeclaration semanticAnalysis
+#  ?context:let @semanticContext unused inContext
+#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

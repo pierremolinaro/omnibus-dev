@@ -59,71 +59,71 @@ map @bootRoutinePriorityMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @bootList-element bootSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
-#---
-  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority !mPriorityLocation}
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineNameForInvocationGraph
-      !routineNameForInvocationGraph
-    ]
-  end
-#--- Variable map
-  initialVariableMap (
-    !context:inContext
-    !mode:.bootMode
-    !globalsAreConstant:false
-    !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMapEx variableMap
-    ?@universalPropertyAndRoutineMapForContext universalMap
-  )
-#--- Analyze instruction list
-  @instructionListIR instructionGenerationList = {}
-  @allocaList bootAllocaList = {}
-  [mInstructionList analyzeRoutineInstructionList
-    !self:.null
-    !directAccessToPropertiesAllowed:false
-    !propertiesAreMutable:false
-    !routineNameForInvocationGraph:routineNameForInvocationGraph
-    !context:inContext
-    !mode:.bootMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
-    !?variableMap:universalMap
-    !?alloca:bootAllocaList
-    !?generatedCode:instructionGenerationList
-  ]
-#--- End of variableMap
-#  [variableMap deinitTopLevelVariables]
-  [universalMap checkLocalVariableFinalState]
-  [variableMap checkAutomatonStates !mEndOfBootLocation]
-  drop variableMap
-#--- Code generation
-  ioIntermediateCodeStruct.mBootList +=
-    !mPriority
-    !mBootLocation
-    !bootAllocaList
-    !instructionGenerationList
-    !mEndOfBootLocation
-}
+#method @bootList-element bootSemanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  [!?ioTemporaries.mBootRoutinePriorityMap insertKey !.new{![mPriority string] !mPriorityLocation}]
+##---
+#  let routineNameForInvocationGraph = @lstring.new  {!"boot " + mPriority !mPriorityLocation}
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+#      !routineNameForInvocationGraph
+#      !routineNameForInvocationGraph
+#    ]
+#  end
+##--- Variable map
+#  initialVariableMap (
+#    !context:inContext
+#    !mode:.bootMode
+#    !globalsAreConstant:false
+#    !returnTypeName:["" nowhere]
+#    ?@unifiedSymbolMapEx variableMap
+#    ?@universalPropertyAndRoutineMapForContext universalMap
+#  )
+##--- Analyze instruction list
+#  @instructionListIR instructionGenerationList = {}
+#  @allocaList bootAllocaList = {}
+#  [mInstructionList analyzeRoutineInstructionList
+#    !self:.null
+#    !directAccessToPropertiesAllowed:false
+#    !propertiesAreMutable:false
+#    !routineNameForInvocationGraph:routineNameForInvocationGraph
+#    !context:inContext
+#    !mode:.bootMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+#    !?variableMap:variableMap
+#    !?variableMap:universalMap
+#    !?alloca:bootAllocaList
+#    !?generatedCode:instructionGenerationList
+#  ]
+##--- End of variableMap
+##  [variableMap deinitTopLevelVariables]
+#  [universalMap checkLocalVariableFinalState]
+#  [variableMap checkAutomatonStates !mEndOfBootLocation]
+#  drop variableMap
+##--- Code generation
+#  ioIntermediateCodeStruct.mBootList +=
+#    !mPriority
+#    !mBootLocation
+#    !bootAllocaList
+#    !instructionGenerationList
+#    !mEndOfBootLocation
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @bootListIR {
-  @bigint mBootIndex
-  @location mInitLocation
-  @allocaList mAllocaList
-  @instructionListIR mInstructionListIR
-  @location mEndOfInitLocation
-}
+#list @bootListIR {
+#  @bigint mBootIndex
+#  @location mInitLocation
+#  @allocaList mAllocaList
+#  @instructionListIR mInstructionListIR
+#  @location mEndOfInitLocation
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

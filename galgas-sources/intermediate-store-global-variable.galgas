@@ -19,26 +19,26 @@ class @storeGlobalVariableIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeGlobalVariableIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  let llvmType = [[mTargetVarType kind] llvmTypeName]
-  ioLLVMcode += "  store "
-  if mIsVolatile then
-    ioLLVMcode += "volatile "
-  end
-  ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * @" + llvmNameForGlobalVariable (!mGlobalVarName) + "\n"
-}
+#override method @storeGlobalVariableIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+#  let llvmType = [[mTargetVarType kind] llvmTypeName]
+#  ioLLVMcode += "  store "
+#  if mIsVolatile then
+#    ioLLVMcode += "volatile "
+#  end
+#  ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * @" + llvmNameForGlobalVariable (!mGlobalVarName) + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeGlobalVariableIR enterAccessibleEntities 
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-  ioAccessibleEntities.mGlobalVariableSet += !mGlobalVarName
-}
+#override method @storeGlobalVariableIR enterAccessibleEntities 
+#  ?!@accessibleEntities ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+#{
+#  ioAccessibleEntities.mGlobalVariableSet += !mGlobalVarName
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

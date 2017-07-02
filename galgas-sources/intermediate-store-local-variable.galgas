@@ -17,22 +17,22 @@ class @storeLocalVariableIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeLocalVariableIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  let llvmType = [[mTargetVarType kind] llvmTypeName]
-  ioLLVMcode += "  store "
-  ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mLocalVarName) + "\n"
-}
+#override method @storeLocalVariableIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+#  let llvmType = [[mTargetVarType kind] llvmTypeName]
+#  ioLLVMcode += "  store "
+#  ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mLocalVarName) + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeLocalVariableIR enterAccessibleEntities 
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
+#override method @storeLocalVariableIR enterAccessibleEntities 
+#  ?!@accessibleEntities unused ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

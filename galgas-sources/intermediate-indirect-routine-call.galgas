@@ -9,46 +9,46 @@ class @indirectRoutineCallIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @indirectRoutineCallIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-#--- Load function from function pointer
-  ioLLVMcode += "  "
-  ioLLVMcode += [mFunctionPointer llvmName] + ".func = load "
-             + [mFunctionType llvmTypeName] + ", "
-             + [mFunctionType llvmTypeName] + "* "
-             + [mFunctionPointer llvmName] + "\n"
-#--- Call function
-  ioLLVMcode += "  "
-  if [mResult type] == .null then
-    ioLLVMcode += "call void"
-  else
-    ioLLVMcode += [mResult llvmName] + " = call " + [mResult llvmTypeName]
-  end
-  ioLLVMcode += " " + [mFunctionPointer llvmName] + ".func ("
-  for () in mArgumentList do
-    switch mEffectiveParameterPassingMode
-    case input:
-      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
-    case output:
-      ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
-    case outputInput:
-      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
-    end
-  between
-    ioLLVMcode += ", "
-  end
-  ioLLVMcode += ")\n"
-}
+#override method @indirectRoutineCallIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+##--- Load function from function pointer
+#  ioLLVMcode += "  "
+#  ioLLVMcode += [mFunctionPointer llvmName] + ".func = load "
+#             + [mFunctionType llvmTypeName] + ", "
+#             + [mFunctionType llvmTypeName] + "* "
+#             + [mFunctionPointer llvmName] + "\n"
+##--- Call function
+#  ioLLVMcode += "  "
+#  if [mResult type] == .null then
+#    ioLLVMcode += "call void"
+#  else
+#    ioLLVMcode += [mResult llvmName] + " = call " + [mResult llvmTypeName]
+#  end
+#  ioLLVMcode += " " + [mFunctionPointer llvmName] + ".func ("
+#  for () in mArgumentList do
+#    switch mEffectiveParameterPassingMode
+#    case input:
+#      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+#    case output:
+#      ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
+#    case outputInput:
+#      ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+#    end
+#  between
+#    ioLLVMcode += ", "
+#  end
+#  ioLLVMcode += ")\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @indirectRoutineCallIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
- {
-}
+#override method @indirectRoutineCallIR enterAccessibleEntities
+#  ?!@accessibleEntities unused ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+# {
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

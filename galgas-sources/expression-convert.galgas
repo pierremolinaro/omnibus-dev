@@ -145,50 +145,50 @@ class @convertInstructionIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @convertInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
+#override method @convertInstructionIR enterAccessibleEntities
+#  ?!@accessibleEntities unused ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @convertInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
-    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
-    ?let staticStringIndex
-  ]
-  let lbl = [[mLocation locationIndex] string]
-  let convertMinOkLabel = "min." + lbl + ".ok"
-  let convertMaxOkLabel = "max." + lbl + ".ok"
-  let convertFailLabel  = "fail." + lbl
-  let compareMinVar     = "cmp." + lbl + ".min"
-  let compareMaxVar     = "cmp." + lbl + ".max"
-  [[mTarget kind] integer ?min:let minTarget ?max:let maxTarget ?2*]
-  [[mOperand kind] integer ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?1*]
-  let operandType = [mOperand llvmTypeName]
-  if minTarget != minSource then
-    ioLLVMcode += "  %" + compareMinVar + " = icmp "
-    ioLLVMcode += if operandIsUnsigned then "uge" else "sge" end
-    ioLLVMcode += " " + operandType + " " + [mOperand llvmName] + ", " + minTarget + "\n"
-    ioLLVMcode += "  br i1 %" + compareMinVar + ", label %" + convertMinOkLabel + ", label %" + convertFailLabel + "\n\n"
-    ioLLVMcode += convertMinOkLabel + ":\n"
-  end
-  ioLLVMcode += "  %" + compareMaxVar + " = icmp "
-  ioLLVMcode += if operandIsUnsigned then "ule" else "sle" end
-  ioLLVMcode += " " + operandType + " " + [mOperand llvmName] + ", " + maxTarget + "\n"
-  ioLLVMcode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
-  ioLLVMcode += convertFailLabel + ":\n"
-  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
-  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForConvertOverflow () + ") ; File '" + [[mLocation file] lastPathComponent] + "'\n"
-  ioLLVMcode += "  unreachable\n\n"
-  ioLLVMcode += convertMaxOkLabel + ":\n"
-  ioLLVMcode += "  " + [mTarget llvmName] + " = trunc " + operandType + " " + [mOperand llvmName] + " to " + [mTarget llvmTypeName] + "\n"
-}
+#override method @convertInstructionIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+#    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
+#    ?let staticStringIndex
+#  ]
+#  let lbl = [[mLocation locationIndex] string]
+#  let convertMinOkLabel = "min." + lbl + ".ok"
+#  let convertMaxOkLabel = "max." + lbl + ".ok"
+#  let convertFailLabel  = "fail." + lbl
+#  let compareMinVar     = "cmp." + lbl + ".min"
+#  let compareMaxVar     = "cmp." + lbl + ".max"
+#  [[mTarget kind] integer ?min:let minTarget ?max:let maxTarget ?2*]
+#  [[mOperand kind] integer ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?1*]
+#  let operandType = [mOperand llvmTypeName]
+#  if minTarget != minSource then
+#    ioLLVMcode += "  %" + compareMinVar + " = icmp "
+#    ioLLVMcode += if operandIsUnsigned then "uge" else "sge" end
+#    ioLLVMcode += " " + operandType + " " + [mOperand llvmName] + ", " + minTarget + "\n"
+#    ioLLVMcode += "  br i1 %" + compareMinVar + ", label %" + convertMinOkLabel + ", label %" + convertFailLabel + "\n\n"
+#    ioLLVMcode += convertMinOkLabel + ":\n"
+#  end
+#  ioLLVMcode += "  %" + compareMaxVar + " = icmp "
+#  ioLLVMcode += if operandIsUnsigned then "ule" else "sle" end
+#  ioLLVMcode += " " + operandType + " " + [mOperand llvmName] + ", " + maxTarget + "\n"
+#  ioLLVMcode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
+#  ioLLVMcode += convertFailLabel + ":\n"
+#  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+#  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
+#  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForConvertOverflow () + ") ; File '" + [[mLocation file] lastPathComponent] + "'\n"
+#  ioLLVMcode += "  unreachable\n\n"
+#  ioLLVMcode += convertMaxOkLabel + ":\n"
+#  ioLLVMcode += "  " + [mTarget llvmName] + " = trunc " + operandType + " " + [mOperand llvmName] + " to " + [mTarget llvmTypeName] + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

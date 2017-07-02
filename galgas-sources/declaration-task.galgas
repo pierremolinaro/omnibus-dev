@@ -31,14 +31,14 @@ list @taskInitListAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @taskInitSortedListAST {
-  @lbigint mTaskInitPriority
-  @instructionListAST mTaskInitInstructionList
-  @location mEndOfTaskInitDeclaration
-  @bigint mPriority
-}{
-  mPriority <
-}
+#sortedlist @taskInitSortedListAST {
+#  @lbigint mTaskInitPriority
+#  @instructionListAST mTaskInitInstructionList
+#  @location mEndOfTaskInitDeclaration
+#  @bigint mPriority
+#}{
+#  mPriority <
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
@@ -336,223 +336,223 @@ method @taskVarListAST-element enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskList semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  @stringset prioritySet = {}
-  for task in self do
-    [task semanticAnalysis
-      !context:inContext
-      !?temporary:ioTemporaries
-      !?intermediateCode:ioIntermediateCodeStruct
-    ]
-    let priorityString = [task.mPriority.bigint string]
-    if [prioritySet hasKey !priorityString] then
-      error task.mPriority : "duplicate priority"
-    end
-    prioritySet += !priorityString
-  end
-}
+#method @taskList semanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  @stringset prioritySet = {}
+#  for task in self do
+#    [task semanticAnalysis
+#      !context:inContext
+#      !?temporary:ioTemporaries
+#      !?intermediateCode:ioIntermediateCodeStruct
+#    ]
+#    let priorityString = [task.mPriority.bigint string]
+#    if [prioritySet hasKey !priorityString] then
+#      error task.mPriority : "duplicate priority"
+#    end
+#    prioritySet += !priorityString
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskList-element semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#------------------------------------------- Check stack size is >= 64, and a multiple of 8
-  let stackSize = mStackSize.bigint
-  if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
-    error mStackSize : "stack size should be a multiple of 8, and >= 64"
-  end
-#------------------------------------------- Analyze task procedures
-  let taskType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName}
-  for procedure in mTaskProcList do
-    routineSemanticAnalysis (
-      !receiverType:taskType
-      !.function {!executionMode:.userMode}
-      !.userMode
-      !procedure.mFunctionName
-      !procedure.mFunctionFormalArgumentList
-      !returnTypeName:procedure.mFunctionReturnTypeName
-      !procedure.mFunctionInstructionList
-      !procedure.mEndOfFunctionDeclaration
-      !directAccessToPropertiesAllowed:true
-      !propertiesAreMutable:true
-      !warnIfUnused:true
-      !globalFunction:false
-      !context:inContext
-      !?temporary:ioTemporaries
-      !?intermediateCode:ioIntermediateCodeStruct
-    )
-  end
-#------------------------------------------- Analyze task init routines
-  @taskInitSortedListAST taskInitSortedListAST = {}
-  for (priority instructionList endOfDeclaration) in mTaskInitListAST do
-    taskInitSortedListAST += !priority !instructionList !endOfDeclaration !priority.bigint
-  end
-  @instructionListIR initInstructionListIR = {}
-  @allocaList initAllocaList = {}
-  for (taskInitPriority taskInitInstructionList endOfTaskInitDeclaration *) in taskInitSortedListAST do
-    initSemanticAnalysis (
-      !context:inContext
-      !?temporary:ioTemporaries
-      !?intermediateCode:ioIntermediateCodeStruct
-      !selfType:taskType
-      !priority:taskInitPriority
-      !mode:.userMode
-      !instructionList:taskInitInstructionList
-      !endOfDeclaration:endOfTaskInitDeclaration
-      ?let partialAllocaList
-      ?let @instructionListIR partialInstructionGenerationList
-    )
-    initInstructionListIR += partialInstructionGenerationList
-    initAllocaList += partialAllocaList
-  end
-#------------------------------------------- Analyze task guarded command
-#  Build a "task.loop" function that contains a sync instruction
-  @instructionListAST taskListInstructionList = {}
-  if [mGuardedCommandList length] > 0 then
-    let syncInstruction = @syncInstructionAST.new {!mTaskName.location !mGuardedCommandList !mTaskName.location}
-    taskListInstructionList += !.nowhere !syncInstruction
-  end
-  routineSemanticAnalysis (
-    !receiverType:taskType
-    !.function{!executionMode:.userMode}
-    !.userMode
-    !.new {!llvmNameForTaskLoopFunction () !mTaskName.location}
-    !{} # No argument
-    !returnTypeName:["" nowhere]
-    !taskListInstructionList
-    !mTaskName.location
-    !directAccessToPropertiesAllowed:true
-    !propertiesAreMutable:true
-    !warnIfUnused:true
-    !globalFunction:false
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  )
-#------------------------------------------- Generate task
-  [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
-    !mTaskName
-    !taskType
-    !mPriority.bigint
-    !mStackSize.bigint
-    !initAllocaList
-    !initInstructionListIR
-  ]
-#------------------------------------------- Generate task var access
-  generatePropertyAccess (!structureType:[taskType kind] !?intermediateCode:ioIntermediateCodeStruct)
-}
+#method @taskList-element semanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+##------------------------------------------- Check stack size is >= 64, and a multiple of 8
+#  let stackSize = mStackSize.bigint
+#  if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
+#    error mStackSize : "stack size should be a multiple of 8, and >= 64"
+#  end
+##------------------------------------------- Analyze task procedures
+#  let taskType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTaskName}
+#  for procedure in mTaskProcList do
+#    routineSemanticAnalysis (
+#      !receiverType:taskType
+#      !.function {!executionMode:.userMode}
+#      !.userMode
+#      !procedure.mFunctionName
+#      !procedure.mFunctionFormalArgumentList
+#      !returnTypeName:procedure.mFunctionReturnTypeName
+#      !procedure.mFunctionInstructionList
+#      !procedure.mEndOfFunctionDeclaration
+#      !directAccessToPropertiesAllowed:true
+#      !propertiesAreMutable:true
+#      !warnIfUnused:true
+#      !globalFunction:false
+#      !context:inContext
+#      !?temporary:ioTemporaries
+#      !?intermediateCode:ioIntermediateCodeStruct
+#    )
+#  end
+##------------------------------------------- Analyze task init routines
+#  @taskInitSortedListAST taskInitSortedListAST = {}
+#  for (priority instructionList endOfDeclaration) in mTaskInitListAST do
+#    taskInitSortedListAST += !priority !instructionList !endOfDeclaration !priority.bigint
+#  end
+#  @instructionListIR initInstructionListIR = {}
+#  @allocaList initAllocaList = {}
+#  for (taskInitPriority taskInitInstructionList endOfTaskInitDeclaration *) in taskInitSortedListAST do
+#    initSemanticAnalysis (
+#      !context:inContext
+#      !?temporary:ioTemporaries
+#      !?intermediateCode:ioIntermediateCodeStruct
+#      !selfType:taskType
+#      !priority:taskInitPriority
+#      !mode:.userMode
+#      !instructionList:taskInitInstructionList
+#      !endOfDeclaration:endOfTaskInitDeclaration
+#      ?let partialAllocaList
+#      ?let @instructionListIR partialInstructionGenerationList
+#    )
+#    initInstructionListIR += partialInstructionGenerationList
+#    initAllocaList += partialAllocaList
+#  end
+##------------------------------------------- Analyze task guarded command
+##  Build a "task.loop" function that contains a sync instruction
+#  @instructionListAST taskListInstructionList = {}
+#  if [mGuardedCommandList length] > 0 then
+#    let syncInstruction = @syncInstructionAST.new {!mTaskName.location !mGuardedCommandList !mTaskName.location}
+#    taskListInstructionList += !.nowhere !syncInstruction
+#  end
+#  routineSemanticAnalysis (
+#    !receiverType:taskType
+#    !.function{!executionMode:.userMode}
+#    !.userMode
+#    !.new {!llvmNameForTaskLoopFunction () !mTaskName.location}
+#    !{} # No argument
+#    !returnTypeName:["" nowhere]
+#    !taskListInstructionList
+#    !mTaskName.location
+#    !directAccessToPropertiesAllowed:true
+#    !propertiesAreMutable:true
+#    !warnIfUnused:true
+#    !globalFunction:false
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  )
+##------------------------------------------- Generate task
+#  [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
+#    !mTaskName
+#    !taskType
+#    !mPriority.bigint
+#    !mStackSize.bigint
+#    !initAllocaList
+#    !initInstructionListIR
+#  ]
+##------------------------------------------- Generate task var access
+#  generatePropertyAccess (!structureType:[taskType kind] !?intermediateCode:ioIntermediateCodeStruct)
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @taskMapIR {
-  @unifiedTypeMap-proxy mTaskType
-  @bigint mPriority
-  @bigint mStackSize
-  @allocaList mAllocaList
-  @instructionListIR mInitInstructionListIR
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
-  remove removeKey error message "** internal error **"
-}
+#map @taskMapIR {
+#  @unifiedTypeMap-proxy mTaskType
+#  @bigint mPriority
+#  @bigint mStackSize
+#  @allocaList mAllocaList
+#  @instructionListIR mInitInstructionListIR
+#  insert insertKey error message "** internal error **"
+#  search searchKey error message "** internal error **"
+#  remove removeKey error message "** internal error **"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-sortedlist @taskSortedListIR {
-  @string mTaskName
-  @bigint mPriority
-  @bigint mStackSize
-  @allocaList mAllocaList
-  @instructionListIR mInitInstructionListIR
-}{
-  mPriority <
-}
+#sortedlist @taskSortedListIR {
+#  @string mTaskName
+#  @bigint mPriority
+#  @bigint mStackSize
+#  @allocaList mAllocaList
+#  @instructionListIR mInitInstructionListIR
+#}{
+#  mPriority <
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskMapIR generateCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-  ?!@2stringlist ioServiceList
-{
-#--- Declare task self terminate service
-  ioLLVMcode += llvmTitleComment (!"Task self terminate service")
-  let selfTerminateImplementationName = llvmNameForServiceImplementation (!llvmNameForTaskSelfTerminateService ())
-  let selfTerminateCallName = llvmNameForServiceCall (!llvmNameForTaskSelfTerminateService ())
-  ioServiceList += !selfTerminateCallName !selfTerminateImplementationName
-  ioLLVMcode += "declare void @" + selfTerminateCallName + " () nounwind noreturn\n\n"
-#--- Declare task variables
-  ioLLVMcode += llvmTitleComment (!"Task variables")
-  for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
-    ioLLVMcode += "@" + llvmNameForTaskGlobalVar (!taskName)
-    ioLLVMcode += " = internal global %"
-    ioLLVMcode += ["$" + taskTypeName assemblerRepresentation] + " "
-    let initialString = [initValueList llvmName]
-    if initialString == "" then
-      ioLLVMcode += "zeroinitializer"
-    else
-      ioLLVMcode += initialString
-    end
-    ioLLVMcode += "\n"
-  end
-  ioLLVMcode += "\n"
-#--- Build ordered task list
-  @taskSortedListIR orderedTaskList = {}
-  for task in self do
-    orderedTaskList += !task.lkey.string !task.mPriority !task.mStackSize  !task.mAllocaList !task.mInitInstructionListIR
-  end
-#--- Declare task stacks and main routine
-  for task in orderedTaskList do
-    ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
-    let assemblerTaskName = ["$" + task.mTaskName assemblerRepresentation]
-    ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
-    ioLLVMcode += "\n"
-    let effectiveParameter = "(%" + assemblerTaskName + " * @" + llvmNameForTaskGlobalVar (!task.mTaskName) + ")"
-    let formalArgument = "(%" + assemblerTaskName + " * %self)"
-    ioLLVMcode += llvmSeparatorLine ()
-    ioLLVMcode += "\n"
-    ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
-    for (variable LLVMTypeName) in task.mAllocaList do
-      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + LLVMTypeName + "\n"
-    end
-    [task.mInitInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-    ioLLVMcode += "  ret void\n"
-    ioLLVMcode += "}\n\n"
-    ioLLVMcode += llvmSeparatorLine ()
-    ioLLVMcode += "\n"
-    ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " ()" + llvmAttributeFunction () + "noreturn {\n"
-    ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
-    ioLLVMcode += "  call void @" + llvmNameForFunction (!"$" + task.mTaskName + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
-    ioLLVMcode += "  call void @" + selfTerminateCallName + " ()\n"
-    ioLLVMcode += "  unreachable\n"
-    ioLLVMcode += "}\n\n"
-  end
-#--- Start tasks
-  ioLLVMcode += llvmTitleComment (!"Start tasks")
-  ioLLVMcode += "define internal void @start.tasks ()" + llvmAttributeFunction () + "{\n"
-  for task in orderedTaskList do (idx)
-    ioLLVMcode += "  " + stackAddressForTask (!task.mTaskName)
-    ioLLVMcode += " = getelementptr inbounds [" + (task.mStackSize / 4) + " x i32], "
-    ioLLVMcode += "[" + (task.mStackSize / 4) + " x i32]* " + stackNameForTask (!task.mTaskName)
-    ioLLVMcode += ", i32 0, i32 0\n"
-    ioLLVMcode += "  call void @kernel_create_task ("
-    ioLLVMcode += "i32 " + idx
-    ioLLVMcode += ", i32* " + stackAddressForTask (!task.mTaskName)
-    ioLLVMcode += ", i32 " + task.mStackSize
-    ioLLVMcode += ", void ()* " + mainRoutineNameForTask (!task.mTaskName) + ")\n"
-  end
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-}
+#method @taskMapIR generateCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#  ?!@2stringlist ioServiceList
+#{
+##--- Declare task self terminate service
+#  ioLLVMcode += llvmTitleComment (!"Task self terminate service")
+#  let selfTerminateImplementationName = llvmNameForServiceImplementation (!llvmNameForTaskSelfTerminateService ())
+#  let selfTerminateCallName = llvmNameForServiceCall (!llvmNameForTaskSelfTerminateService ())
+#  ioServiceList += !selfTerminateCallName !selfTerminateImplementationName
+#  ioLLVMcode += "declare void @" + selfTerminateCallName + " () nounwind noreturn\n\n"
+##--- Declare task variables
+#  ioLLVMcode += llvmTitleComment (!"Task variables")
+#  for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
+#    ioLLVMcode += "@" + llvmNameForTaskGlobalVar (!taskName)
+#    ioLLVMcode += " = internal global %"
+#    ioLLVMcode += ["$" + taskTypeName assemblerRepresentation] + " "
+#    let initialString = [initValueList llvmName]
+#    if initialString == "" then
+#      ioLLVMcode += "zeroinitializer"
+#    else
+#      ioLLVMcode += initialString
+#    end
+#    ioLLVMcode += "\n"
+#  end
+#  ioLLVMcode += "\n"
+##--- Build ordered task list
+#  @taskSortedListIR orderedTaskList = {}
+#  for task in self do
+#    orderedTaskList += !task.lkey.string !task.mPriority !task.mStackSize  !task.mAllocaList !task.mInitInstructionListIR
+#  end
+##--- Declare task stacks and main routine
+#  for task in orderedTaskList do
+#    ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
+#    let assemblerTaskName = ["$" + task.mTaskName assemblerRepresentation]
+#    ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
+#    ioLLVMcode += "\n"
+#    let effectiveParameter = "(%" + assemblerTaskName + " * @" + llvmNameForTaskGlobalVar (!task.mTaskName) + ")"
+#    let formalArgument = "(%" + assemblerTaskName + " * %self)"
+#    ioLLVMcode += llvmSeparatorLine ()
+#    ioLLVMcode += "\n"
+#    ioLLVMcode += "define internal void " + initNameForTaskType (!task.mTaskName) + " " + formalArgument + llvmAttributeFunction () + "{\n"
+#    for (variable LLVMTypeName) in task.mAllocaList do
+#      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + LLVMTypeName + "\n"
+#    end
+#    [task.mInitInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#    ioLLVMcode += "  ret void\n"
+#    ioLLVMcode += "}\n\n"
+#    ioLLVMcode += llvmSeparatorLine ()
+#    ioLLVMcode += "\n"
+#    ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " ()" + llvmAttributeFunction () + "noreturn {\n"
+#    ioLLVMcode += "  call void " + initNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
+#    ioLLVMcode += "  call void @" + llvmNameForFunction (!"$" + task.mTaskName + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
+#    ioLLVMcode += "  call void @" + selfTerminateCallName + " ()\n"
+#    ioLLVMcode += "  unreachable\n"
+#    ioLLVMcode += "}\n\n"
+#  end
+##--- Start tasks
+#  ioLLVMcode += llvmTitleComment (!"Start tasks")
+#  ioLLVMcode += "define internal void @start.tasks ()" + llvmAttributeFunction () + "{\n"
+#  for task in orderedTaskList do (idx)
+#    ioLLVMcode += "  " + stackAddressForTask (!task.mTaskName)
+#    ioLLVMcode += " = getelementptr inbounds [" + (task.mStackSize / 4) + " x i32], "
+#    ioLLVMcode += "[" + (task.mStackSize / 4) + " x i32]* " + stackNameForTask (!task.mTaskName)
+#    ioLLVMcode += ", i32 0, i32 0\n"
+#    ioLLVMcode += "  call void @kernel_create_task ("
+#    ioLLVMcode += "i32 " + idx
+#    ioLLVMcode += ", i32* " + stackAddressForTask (!task.mTaskName)
+#    ioLLVMcode += ", i32 " + task.mStackSize
+#    ioLLVMcode += ", void ()* " + mainRoutineNameForTask (!task.mTaskName) + ")\n"
+#  end
+#  ioLLVMcode += "  ret void\n"
+#  ioLLVMcode += "}\n\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

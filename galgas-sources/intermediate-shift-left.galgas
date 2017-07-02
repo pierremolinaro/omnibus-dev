@@ -17,24 +17,21 @@ class @leftShiftIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @leftShiftIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  ioLLVMcode += "  " + [mResult llvmName] + " = "
-#  [[mSource.mType kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?bitCount:*]
-#  ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
-  ioLLVMcode += "shl " + [mSource  llvmTypeName] + " " + [mSource llvmName] + ", " + mShiftAmount + "\n"
-}
+#override method @leftShiftIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+#  ioLLVMcode += "  " + [mResult llvmName] + " = "
+#  ioLLVMcode += "shl " + [mSource  llvmTypeName] + " " + [mSource llvmName] + ", " + mShiftAmount + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @leftShiftIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
-
+#override method @leftShiftIR enterAccessibleEntities
+#  ?!@accessibleEntities unused ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

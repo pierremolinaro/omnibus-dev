@@ -103,26 +103,26 @@ class @panicInstructionIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @panicInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
-    ![[[mThrowLocation file] lastPathComponent] stringByDeletingPathExtension]
-    ?let staticStringIndex
-  ]
-  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
-  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mThrowLocation line] + ", "
-  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mPanicCode + ")\n"
-}
+#override method @panicInstructionIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+#    ![[[mThrowLocation file] lastPathComponent] stringByDeletingPathExtension]
+#    ?let staticStringIndex
+#  ]
+#  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+#  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mThrowLocation line] + ", "
+#  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mPanicCode + ")\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @panicInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
+#override method @panicInstructionIR enterAccessibleEntities
+#  ?!@accessibleEntities unused ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

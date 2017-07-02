@@ -235,15 +235,15 @@ override method @staticArrayAST enterRoutinesInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticArrayAST semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#--- Generate property access
-  let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
-  [inContext.mTypeMap searchKey !lkey:plmTypeName ?kind:let kind]
-  generatePropertyAccess (!structureType:kind !?intermediateCode:ioIntermediateCodeStruct)
-}
+#override method @staticArrayAST semanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+##--- Generate property access
+#  let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
+#  [inContext.mTypeMap searchKey !lkey:plmTypeName ?kind:let kind]
+#  generatePropertyAccess (!structureType:kind !?intermediateCode:ioIntermediateCodeStruct)
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

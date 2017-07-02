@@ -204,12 +204,12 @@ private proc enterLiteralIntegerOperators
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerDeclaration semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-{
-}
+#override method @literalIntegerDeclaration semanticAnalysis
+#  ?context:let @semanticContext unused inContext
+#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  INFIX OPERATIONS                                                                                                     

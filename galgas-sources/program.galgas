@@ -154,38 +154,38 @@ private proc compileProject
 #    resolveEntities (!ast:ast !context:semanticContext)
 #  end
 #------------------------------------------------------------ Semantic analysis
-  @intermediateCodeStruct intermediateCodeStruct = .default
-  if @uint.errorCount == 0 then
-    semanticAnalysis (
-      !sourceFile:inSourceFile.string
-      !ast:ast
-      !context:semanticContext
-      !endOfSourceFile:inEndOfSourceFile
-      !staticStringMap:globalLiteralStringMap
-      ?intermediateCode:intermediateCodeStruct
-    )
-  end
+#  @intermediateCodeStruct intermediateCodeStruct = .default
+#  if @uint.errorCount == 0 then
+#    semanticAnalysis (
+#      !sourceFile:inSourceFile.string
+#      !ast:ast
+#      !context:semanticContext
+#      !endOfSourceFile:inEndOfSourceFile
+#      !staticStringMap:globalLiteralStringMap
+#      ?intermediateCode:intermediateCodeStruct
+#    )
+#  end
 #------------------------------------------------------------ Code optimisation
-  if @uint.errorCount == 0 then
-    codeOptimisation (!?intermediateCode:intermediateCodeStruct)
-  end
+#  if @uint.errorCount == 0 then
+#    codeOptimisation (!?intermediateCode:intermediateCodeStruct)
+#  end
 #------------------------------------------------------------ Code generation
-  if @uint.errorCount == 0 then
-    codeGeneration (
-      !currentDir:inCurrentDirectory
-      !outputFile:inSourceFile.string
-      !eof:inEndOfSourceFile
-      !intermediateCode:intermediateCodeStruct
-      !typeMap:semanticContext.mTypeMap
-      !target:inTargetName
-      !panicCodeType:semanticContext.mPanicCodeType
-      !panicLineType:semanticContext.mPanicLineType
-      !interrupts:semanticContext.mAvailableInterruptMap
-      !staticlistValues:staticListValueMap
-      !sourceFileSet:sourceFileAbsolutePathSet
-      !targetParameters:semanticContext.mTargetParameters
-    )
-  end
+#  if @uint.errorCount == 0 then
+#    codeGeneration (
+#      !currentDir:inCurrentDirectory
+#      !outputFile:inSourceFile.string
+#      !eof:inEndOfSourceFile
+#      !intermediateCode:intermediateCodeStruct
+#      !typeMap:semanticContext.mTypeMap
+#      !target:inTargetName
+#      !panicCodeType:semanticContext.mPanicCodeType
+#      !panicLineType:semanticContext.mPanicLineType
+#      !interrupts:semanticContext.mAvailableInterruptMap
+#      !staticlistValues:staticListValueMap
+#      !sourceFileSet:sourceFileAbsolutePathSet
+#      !targetParameters:semanticContext.mTargetParameters
+#    )
+#  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -234,48 +234,48 @@ class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
 #  is implemented as:
 #         x := LOW ; while x < UP do INST ; x := x + 1 end
 
-override method @forLowerUpperBoundInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  let llvmType = [[mType kind] llvmTypeName]
-  let llvmVarName = llvmNameForLocalVariable (!mVarName)
-  let testLabel = "for." + [mLocation locationIndex] + ".test"
-  let loopLabel = "for." + [mLocation locationIndex] + ".loop"
-  let endLabel  = "for." + [mLocation locationIndex] + ".end"
-  let testResult = "%for." + [mLocation locationIndex] + ".test.result"
-  let loadedVarName = "%" + llvmNameForLocalVariable (!mVarName + ".loaded")
-  let currentVarName = "%" + llvmNameForLocalVariable (!mVarName + ".current")
-  let nextVarName = "%" + llvmNameForLocalVariable (!mVarName + ".next")
-#--- Store LOW in x
-  ioLLVMcode += "  store " + llvmType + " " + [mLowerExpressionResult llvmName] + ", " + llvmType + " * %" + llvmVarName + "\n"
-  ioLLVMcode += "  br label %" + testLabel + "\n\n"
-#--- Test
-  ioLLVMcode += testLabel + ":\n"
-  ioLLVMcode += "  " + loadedVarName + " = load " + llvmType + ", " + llvmType + " * %" + llvmVarName + "\n"
-  ioLLVMcode += "  " + testResult + " = icmp "
-  ioLLVMcode += if mUnsigned then "ult" else "slt" end
-  ioLLVMcode += " " + llvmType + " " + loadedVarName + ", " + [mUpperExpressionResult llvmName] + "\n"
-  ioLLVMcode += "  br i1 " + testResult + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
-#--- Loop  
-  ioLLVMcode += loopLabel + ":\n"
-  [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  " + currentVarName + " = load " + llvmType + ", " + llvmType + " * %" + llvmVarName + "\n"
-  ioLLVMcode += "  " + nextVarName + " = add " + llvmType + " " + currentVarName + ", 1\n"
-  ioLLVMcode += "  store " + llvmType + " " + nextVarName + ", " + llvmType + " * %" + llvmVarName + "\n"
-  ioLLVMcode += "  br label %" + testLabel + "\n\n"
-#--- End
-  ioLLVMcode += endLabel + ":\n"
-}
+#override method @forLowerUpperBoundInstructionIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  let llvmType = [[mType kind] llvmTypeName]
+#  let llvmVarName = llvmNameForLocalVariable (!mVarName)
+#  let testLabel = "for." + [mLocation locationIndex] + ".test"
+#  let loopLabel = "for." + [mLocation locationIndex] + ".loop"
+#  let endLabel  = "for." + [mLocation locationIndex] + ".end"
+#  let testResult = "%for." + [mLocation locationIndex] + ".test.result"
+#  let loadedVarName = "%" + llvmNameForLocalVariable (!mVarName + ".loaded")
+#  let currentVarName = "%" + llvmNameForLocalVariable (!mVarName + ".current")
+#  let nextVarName = "%" + llvmNameForLocalVariable (!mVarName + ".next")
+##--- Store LOW in x
+#  ioLLVMcode += "  store " + llvmType + " " + [mLowerExpressionResult llvmName] + ", " + llvmType + " * %" + llvmVarName + "\n"
+#  ioLLVMcode += "  br label %" + testLabel + "\n\n"
+##--- Test
+#  ioLLVMcode += testLabel + ":\n"
+#  ioLLVMcode += "  " + loadedVarName + " = load " + llvmType + ", " + llvmType + " * %" + llvmVarName + "\n"
+#  ioLLVMcode += "  " + testResult + " = icmp "
+#  ioLLVMcode += if mUnsigned then "ult" else "slt" end
+#  ioLLVMcode += " " + llvmType + " " + loadedVarName + ", " + [mUpperExpressionResult llvmName] + "\n"
+#  ioLLVMcode += "  br i1 " + testResult + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
+##--- Loop  
+#  ioLLVMcode += loopLabel + ":\n"
+#  [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#  ioLLVMcode += "  " + currentVarName + " = load " + llvmType + ", " + llvmType + " * %" + llvmVarName + "\n"
+#  ioLLVMcode += "  " + nextVarName + " = add " + llvmType + " " + currentVarName + ", 1\n"
+#  ioLLVMcode += "  store " + llvmType + " " + nextVarName + ", " + llvmType + " * %" + llvmVarName + "\n"
+#  ioLLVMcode += "  br label %" + testLabel + "\n\n"
+##--- End
+#  ioLLVMcode += endLabel + ":\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forLowerUpperBoundInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@uint ioMaxBranchOfOnInstructions
-{
-  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-}
+#override method @forLowerUpperBoundInstructionIR enterAccessibleEntities
+#  ?!@accessibleEntities ioAccessibleEntities
+#  ?!@uint ioMaxBranchOfOnInstructions
+#{
+#  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

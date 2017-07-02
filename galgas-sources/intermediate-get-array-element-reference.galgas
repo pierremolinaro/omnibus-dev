@@ -17,23 +17,23 @@ class @getArrayElementReferenceIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @getArrayElementReferenceIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  let llvmType = [[[mSource type] kind] llvmTypeName]
-  ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mElementIndex
-  ioLLVMcode += " ; Element of index " + mElementIndex + "\n"
-}
+#override method @getArrayElementReferenceIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+#  let llvmType = [[[mSource type] kind] llvmTypeName]
+#  ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
+#  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mElementIndex
+#  ioLLVMcode += " ; Element of index " + mElementIndex + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @getArrayElementReferenceIR enterAccessibleEntities 
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
+#override method @getArrayElementReferenceIR enterAccessibleEntities 
+#  ?!@accessibleEntities unused ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
