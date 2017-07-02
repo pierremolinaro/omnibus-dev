@@ -386,45 +386,42 @@ method @globalVarDeclarationList-element enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @globalVarDeclarationList-element semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#--- Code generation
-  [inContext.mGlobalVariableMap searchKey
-    !lkey:mVarName
-    ?type:let inferredType
-    ?executionModeSet:let executionModeSet
-#    ?allowedRoutineMap:let unused allowedProcedureMap
-    ?allowedGuardMap:let unused allowedGuardMap
-#    ?allowedISRMap:let unused allowedISRMap
-#    ?allowedTaskMap:let unused allowedTaskMap 
-    ?initialValue:let expressionGeneratedCode
-    ?isConstant:let unused isConstant
-    ?allowedAccessToAll:*
-  ]
-  [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
-    !mVarName
-    !inferredType
-    ![executionModeSet count] > 1
-    !expressionGeneratedCode
-  ]
-}
+#method @globalVarDeclarationList-element semanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+##--- Code generation
+#  [inContext.mGlobalVariableMap searchKey
+#    !lkey:mVarName
+#    ?type:let inferredType
+#    ?executionModeSet:let executionModeSet
+#    ?allowedGuardMap:let unused allowedGuardMap
+#    ?initialValue:let expressionGeneratedCode
+#    ?isConstant:let unused isConstant
+#    ?allowedAccessToAll:*
+#  ]
+#  [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
+#    !mVarName
+#    !inferredType
+#    ![executionModeSet count] > 1
+#    !expressionGeneratedCode
+#  ]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @globalVariableMapIR-element generateLLVM ?!@string ioLLVMcode {
-  ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey.string) + " = internal global "
-  ioLLVMcode += [[mType kind] llvmTypeName] + " "
-  let initialString = [mInitialValue llvmName]
-  if initialString == "" then
-    ioLLVMcode += "zeroinitializer"
-  else
-    ioLLVMcode += initialString
-  end
-  ioLLVMcode += "\n"
-}
+#method @globalVariableMapIR-element generateLLVM ?!@string ioLLVMcode {
+#  ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey.string) + " = internal global "
+#  ioLLVMcode += [[mType kind] llvmTypeName] + " "
+#  let initialString = [mInitialValue llvmName]
+#  if initialString == "" then
+#    ioLLVMcode += "zeroinitializer"
+#  else
+#    ioLLVMcode += initialString
+#  end
+#  ioLLVMcode += "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

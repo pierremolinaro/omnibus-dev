@@ -4,79 +4,79 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-struct @intermediateCodeStruct {
-  @staticStringMap mStaticStringMap
-  @globalVariableMapIR mGlobalVariableMap
-  @globalConstantMapIR mGlobalConstantMap
-  @routineMapIR mRoutineMapIR
-  @guardMapIR mGuardMapIR
-  @interruptMapIR mInterruptMapIR
-  @externProcedureMapIR mExternProcedureMapIR
-  @stringset mRequiredProcedureSet
-  @bootListIR mBootList
-  @initListIR mInitList
-  @instructionListIR mPanicSetupInstructionListIR
-  @instructionListIR mPanicLoopInstructionListIR
-  @taskMapIR mTaskMapIR
-  @globalTaskVariableList mGlobalTaskVariableList
-  @uint mMaxBranchOfOnInstructions
-  @targetParameters mTargetParameters
-  @moduleListIR mModuleList
-  @staticArrayMap mStaticArrayMap
-  @propertyAccessRoutineList mPropertyAccessRoutineList
-}
+#struct @intermediateCodeStruct {
+#  @staticStringMap mStaticStringMap
+#  @globalVariableMapIR mGlobalVariableMap
+#  @globalConstantMapIR mGlobalConstantMap
+#  @routineMapIR mRoutineMapIR
+#  @guardMapIR mGuardMapIR
+#  @interruptMapIR mInterruptMapIR
+#  @externProcedureMapIR mExternProcedureMapIR
+#  @stringset mRequiredProcedureSet
+#  @bootListIR mBootList
+#  @initListIR mInitList
+#  @instructionListIR mPanicSetupInstructionListIR
+#  @instructionListIR mPanicLoopInstructionListIR
+#  @taskMapIR mTaskMapIR
+#  @globalTaskVariableList mGlobalTaskVariableList
+#  @uint mMaxBranchOfOnInstructions
+#  @targetParameters mTargetParameters
+#  @moduleListIR mModuleList
+#  @staticArrayMap mStaticArrayMap
+#  @propertyAccessRoutineList mPropertyAccessRoutineList
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @globalVariableMapIR {
-  @unifiedTypeMap-proxy mType
-  @bool mGenerateVolatile
-  @objectIR mInitialValue
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
-}
+#map @globalVariableMapIR {
+#  @unifiedTypeMap-proxy mType
+#  @bool mGenerateVolatile
+#  @objectIR mInitialValue
+#  insert insertKey error message "** internal error **"
+#  search searchKey error message "** internal error **"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @globalConstantMapIR {
-  @unifiedTypeMap-proxy mType
-  @objectIR mSourceExpression
-  insert insertKey error message "** internal error **"
-  search searchKey error message "** internal error **"
-}
+#map @globalConstantMapIR {
+#  @unifiedTypeMap-proxy mType
+#  @objectIR mSourceExpression
+#  insert insertKey error message "** internal error **"
+#  search searchKey error message "** internal error **"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @routineMapIR {
-  @unifiedTypeMap-proxy mReceiverType # .null if standalone function
-  @lstring mRoutineNameForGeneration
-  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @allocaList mAllocaList
-  @instructionListIR mInstructionGenerationList
-  @bool mIsRequired
-  @bool mWarnIfUnused
-  @bool mGlobal
-  @routineKind mKind
-  @unifiedTypeMap-proxy mReturnType # .null if no return value
-  @bool mAppendFileAndLineArgumentForPanicLocation
-
-  insert insertKey error message "routine '%K' is already defined"
-  search searchKey error message "** internal error **"
-  remove removeKey error message "** internal error **"
-}
+#map @routineMapIR {
+#  @unifiedTypeMap-proxy mReceiverType # .null if standalone function
+#  @lstring mRoutineNameForGeneration
+#  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
+#  @allocaList mAllocaList
+#  @instructionListIR mInstructionGenerationList
+#  @bool mIsRequired
+#  @bool mWarnIfUnused
+#  @bool mGlobal
+#  @routineKind mKind
+#  @unifiedTypeMap-proxy mReturnType # .null if no return value
+#  @bool mAppendFileAndLineArgumentForPanicLocation
+#
+#  insert insertKey error message "routine '%K' is already defined"
+#  search searchKey error message "** internal error **"
+#  remove removeKey error message "** internal error **"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @interruptMapIR {
-  @unifiedTypeMap-proxy mSelfType # null if standalone
-  @string mGlobalVariableName # "" if standalone
-  @allocaList mAllocaList
-  @instructionListIR mInstructionGenerationList
-  @mode mMode
-
-  insert insertKey error message "interrupt '%K' is already defined"
-  search searchKey error message "** internal error **"
-  remove removeKey error message "** internal error **"
-}
+#map @interruptMapIR {
+#  @unifiedTypeMap-proxy mSelfType # null if standalone
+#  @string mGlobalVariableName # "" if standalone
+#  @allocaList mAllocaList
+#  @instructionListIR mInstructionGenerationList
+#  @mode mMode
+#
+#  insert insertKey error message "interrupt '%K' is already defined"
+#  search searchKey error message "** internal error **"
+#  remove removeKey error message "** internal error **"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

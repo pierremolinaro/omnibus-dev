@@ -429,135 +429,135 @@ override method @structureDeclaration enterRoutinesInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @structureDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  let structureType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
-#--- Analyze functions
-  [self functionSemanticAnalysis
-    !structureType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
-#--- Analyze system routines
-  [mSystemRoutineListAST systemRoutineSemanticAnalysis
-    !receiverType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
-#--- Analyze guards
-  [mGuardListAST guardSemanticAnalysis
-    !receiverType:structureType
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-  ]
-#--- Generate property access
-  generatePropertyAccess (!structureType:[structureType kind] !?intermediateCode:ioIntermediateCodeStruct)
-}
+#override method @structureDeclaration semanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  let structureType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
+##--- Analyze functions
+#  [self functionSemanticAnalysis
+#    !structureType:structureType
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  ]
+##--- Analyze system routines
+#  [mSystemRoutineListAST systemRoutineSemanticAnalysis
+#    !receiverType:structureType
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  ]
+##--- Analyze guards
+#  [mGuardListAST guardSemanticAnalysis
+#    !receiverType:structureType
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#  ]
+##--- Generate property access
+#  generatePropertyAccess (!structureType:[structureType kind] !?intermediateCode:ioIntermediateCodeStruct)
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @structureDeclaration functionSemanticAnalysis
-  ?structureType:let @unifiedTypeMap-proxy inStructureType
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  for function in mFunctionDeclarationListAST do
-    var warnIfUnused = true
-    var mutating = false
-    var accessProperties = false
-    for (attribute) in function.mFunctionAttributeList do
-      if attribute.string == noUnusedWarningAttribute () then
-        if not warnIfUnused then
-          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
-        end
-        warnIfUnused = false    
-      elsif attribute.string == userAccessAttribute () then
-        if accessProperties then
-          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
-        end
-        accessProperties = true    
-      elsif attribute.string == mutatingAttribute () then
-        if mutating then
-          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
-        end
-        mutating = true    
-      else
-        error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
-          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
-      end
-    end
-    accessProperties = function.mMode != .userMode
-    routineSemanticAnalysis (
-      !receiverType:inStructureType
-      !.function {!executionMode:function.mMode}
-      !function.mMode
-      !function.mFunctionName
-      !function.mFunctionFormalArgumentList
-      !returnTypeName:function.mFunctionReturnTypeName
-      !function.mFunctionInstructionList
-      !function.mEndOfFunctionDeclaration
-      !directAccessToPropertiesAllowed:accessProperties
-      !propertiesAreMutable:mutating
-      !warnIfUnused:warnIfUnused
-      !globalFunction:false
-      !context:inContext
-      !?temporary:ioTemporaries
-      !?intermediateCode:ioIntermediateCodeStruct
-    )
-  end
-}
+#method @structureDeclaration functionSemanticAnalysis
+#  ?structureType:let @unifiedTypeMap-proxy inStructureType
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  for function in mFunctionDeclarationListAST do
+#    var warnIfUnused = true
+#    var mutating = false
+#    var accessProperties = false
+#    for (attribute) in function.mFunctionAttributeList do
+#      if attribute.string == noUnusedWarningAttribute () then
+#        if not warnIfUnused then
+#          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
+#        end
+#        warnIfUnused = false    
+#      elsif attribute.string == userAccessAttribute () then
+#        if accessProperties then
+#          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
+#        end
+#        accessProperties = true    
+#      elsif attribute.string == mutatingAttribute () then
+#        if mutating then
+#          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
+#        end
+#        mutating = true    
+#      else
+#        error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
+#          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
+#      end
+#    end
+#    accessProperties = function.mMode != .userMode
+#    routineSemanticAnalysis (
+#      !receiverType:inStructureType
+#      !.function {!executionMode:function.mMode}
+#      !function.mMode
+#      !function.mFunctionName
+#      !function.mFunctionFormalArgumentList
+#      !returnTypeName:function.mFunctionReturnTypeName
+#      !function.mFunctionInstructionList
+#      !function.mEndOfFunctionDeclaration
+#      !directAccessToPropertiesAllowed:accessProperties
+#      !propertiesAreMutable:mutating
+#      !warnIfUnused:warnIfUnused
+#      !globalFunction:false
+#      !context:inContext
+#      !?temporary:ioTemporaries
+#      !?intermediateCode:ioIntermediateCodeStruct
+#    )
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  GENERATE PROPERTY ACCESS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @propertyAccessRoutineList {
-  @typeKind mStructureKind
-  @unifiedTypeMap-proxy mPropertyType
-  @string mPropertyName
-  @uint mPropertyIndex
-}
+#list @propertyAccessRoutineList {
+#  @typeKind mStructureKind
+#  @unifiedTypeMap-proxy mPropertyType
+#  @string mPropertyName
+#  @uint mPropertyIndex
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc generatePropertyAccess
-  ?structureType:let @typeKind inTypeKind
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  [inTypeKind structure ?1* ?propertyMap:let @propertyMap propertyMap ?1* ?propertyList:@propertyList propertyList ?1*]
-  for (propertyName * objectIR) in propertyMap do
-    [objectIR property ?type:let propertyType ?plmName:* ?index:@uint index]
-    ioIntermediateCodeStruct.mPropertyAccessRoutineList += 
-      !inTypeKind
-      !propertyType
-      !propertyName.string
-      !index
-  end
-}
+#proc generatePropertyAccess
+#  ?structureType:let @typeKind inTypeKind
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  [inTypeKind structure ?1* ?propertyMap:let @propertyMap propertyMap ?1* ?propertyList:@propertyList propertyList ?1*]
+#  for (propertyName * objectIR) in propertyMap do
+#    [objectIR property ?type:let propertyType ?plmName:* ?index:@uint index]
+#    ioIntermediateCodeStruct.mPropertyAccessRoutineList += 
+#      !inTypeKind
+#      !propertyType
+#      !propertyName.string
+#      !index
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
-  for (structureKind propertyType propertyName propertyIndex) in self do
-    let structTypeName = [structureKind llvmTypeName]
-    let propTypeName = [[propertyType kind] llvmTypeName]
-    ioLLVMcode += llvmTitleComment (!"Access property '" + propertyName + "' of structure " + structTypeName)
-    ioLLVMcode += "define internal " + propTypeName
-    ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
-    ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"
-    ioLLVMcode += "  %result = getelementptr inbounds " + structTypeName + ", " + structTypeName + " * %self, "
-    ioLLVMcode += "i32 0, i32 " + propertyIndex + " ; " + propertyName + ", index " + propertyIndex + "\n"
-    ioLLVMcode += "  ret " + propTypeName + " * %result\n"
-    ioLLVMcode += "}\n\n"
-  end
-}
+#method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
+#  for (structureKind propertyType propertyName propertyIndex) in self do
+#    let structTypeName = [structureKind llvmTypeName]
+#    let propTypeName = [[propertyType kind] llvmTypeName]
+#    ioLLVMcode += llvmTitleComment (!"Access property '" + propertyName + "' of structure " + structTypeName)
+#    ioLLVMcode += "define internal " + propTypeName
+#    ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
+#    ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"
+#    ioLLVMcode += "  %result = getelementptr inbounds " + structTypeName + ", " + structTypeName + " * %self, "
+#    ioLLVMcode += "i32 0, i32 " + propertyIndex + " ; " + propertyName + ", index " + propertyIndex + "\n"
+#    ioLLVMcode += "  ret " + propTypeName + " * %result\n"
+#    ioLLVMcode += "}\n\n"
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -117,176 +117,176 @@ method @guardDeclarationListAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @guardDeclarationListAST guardSemanticAnalysis
-  ?receiverType:@unifiedTypeMap-proxy inReceiverType
-  ?context:let @semanticContext inSemanticContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  for guard in self do
-    var warnIfUnused = true
-    for (attribute) in guard.mGuardAttributeList do
-      if attribute.string == noUnusedWarningAttribute () then
-        if not warnIfUnused then
-          error attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute"
-        end
-        warnIfUnused = false    
-      else
-        error attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ()
-      end
-    end
-    guardSemanticAnalysis (
-      !receiverType:inReceiverType
-      !guard.mGuardName
-      !guard.mGuardFormalArgumentList
-      !guard.mGuardKind
-      !guard.mGuardInstructionList
-      !guard.mEndOfGuardDeclaration
-      !warnIfUnused:warnIfUnused
-      !context:inSemanticContext
-      !?temporary:ioTemporaries
-      !?intermediateCode:ioIntermediateCodeStruct
-    )
-  end
-}
+#method @guardDeclarationListAST guardSemanticAnalysis
+#  ?receiverType:@unifiedTypeMap-proxy inReceiverType
+#  ?context:let @semanticContext inSemanticContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  for guard in self do
+#    var warnIfUnused = true
+#    for (attribute) in guard.mGuardAttributeList do
+#      if attribute.string == noUnusedWarningAttribute () then
+#        if not warnIfUnused then
+#          error attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute"
+#        end
+#        warnIfUnused = false    
+#      else
+#        error attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ()
+#      end
+#    end
+#    guardSemanticAnalysis (
+#      !receiverType:inReceiverType
+#      !guard.mGuardName
+#      !guard.mGuardFormalArgumentList
+#      !guard.mGuardKind
+#      !guard.mGuardInstructionList
+#      !guard.mEndOfGuardDeclaration
+#      !warnIfUnused:warnIfUnused
+#      !context:inSemanticContext
+#      !?temporary:ioTemporaries
+#      !?intermediateCode:ioIntermediateCodeStruct
+#    )
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc guardSemanticAnalysis
-  ?receiverType:let @unifiedTypeMap-proxy inSelfType
-  ?let @lstring inRoutineName
-  ?let @routineFormalArgumentList inRoutineFormalArgumentList
-  ?let @guardKind inGuardKind
-  ?let @instructionListAST inRoutineInstructionList
-  ?let @location inEndOfRoutineDeclaration
-  ?warnIfUnused:let @bool inWarnIfUnused
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#--- Guard mangled name
-  let guardMangledName = routineMangledNameFromAST (
-    !if inSelfType == .null then "" else "$" + [inSelfType key] end
-    !inRoutineName
-    !inRoutineFormalArgumentList
-  )
-#--- Enter subprogram invocation graph
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !guardMangledName.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !guardMangledName
-      !inRoutineName
-    ]
-  end
-#--- Variable map
-  initialVariableMap (
-    !context:inContext
-    !mode:.guardMode
-    !globalsAreConstant:false
-    !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMapEx variableMap
-    ?@universalPropertyAndRoutineMapForContext universalMap
-  )
-  @routineFormalArgumentListForGeneration formalArguments = {}
-  @guardKindGenerationIR convenienceGuardGenerationIR
-  @allocaList allocaList = {}
-  @instructionListIR instructionGenerationList = {}
-  switch inGuardKind
-  case baseGuard :
-  #--- Add 'accept" output variable
-    let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
-    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
-    allocaList += !resultVarName.string ![[resultType kind] llvmTypeName]
-    [!?universalMap insertLocalVariable
-      !resultVarName
-      !.localVariableReference {!type:resultType !plmName:resultVarName}
-      !.noValue
-      !true
-    ]
-    [!?variableMap insertOutputFormalArgument
-      !lkey:resultVarName
-      !type:resultType
-      !readAccessAllowed:true
-      !objectIR:.localVariableReference {!type:resultType !plmName:resultVarName}
-      !copyable:true
-      !canBeUsedAsInputParameter:true
-    ]
-  #--- Analyse formal arguments
-    enterFormalArguments (
-      !context:inContext
-      !inRoutineFormalArgumentList
-      !?variableMap
-      !?universalMap
-      !?formalArguments
-    )
-    convenienceGuardGenerationIR = .baseGuard
-  #--- Analyze instruction list
-    [inRoutineInstructionList analyzeRoutineInstructionList
-      !self:inSelfType
-      !directAccessToPropertiesAllowed:true
-      !propertiesAreMutable:true
-      !routineNameForInvocationGraph:guardMangledName
-      !context:inContext
-      !mode:.guardMode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-      !?variableMap:variableMap
-      !?variableMap:universalMap
-      !?alloca:allocaList
-      !?generatedCode:instructionGenerationList
-    ]
-  case convenienceGuard (baseGuardInstruction):
-  #--- Analyse formal arguments
-    enterFormalArguments (
-      !context:inContext
-      !inRoutineFormalArgumentList
-      !?variableMap
-      !?universalMap
-      !?formalArguments
-    )
-  #--- Analyze base guard
-    [baseGuardInstruction baseGuardAnalyze 
-      !self:inSelfType
-      !routineNameForInvocationGraph:guardMangledName
-      !context:inContext
-      !mode:.userMode # Convenience guards instructions are executed in user mode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-      !?variableMap:variableMap
-      !?variableMap:universalMap
-      ?convenienceGuardGenerationIR
-    ]
-  #--- Analyze instruction list
-    [inRoutineInstructionList analyzeRoutineInstructionList
-      !self:inSelfType
-      !directAccessToPropertiesAllowed:true
-      !propertiesAreMutable:true
-      !routineNameForInvocationGraph:guardMangledName
-      !context:inContext
-      !mode:.userMode # Convenience guards instructions are executed in user mode
-      !?temporary:ioTemporaries
-      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-      !?variableMap:variableMap
-      !?variableMap:universalMap
-      !?alloca:allocaList
-      !?generatedCode:instructionGenerationList
-    ]
-  end 
-#--- End of variableMap
-#  [variableMap deinitTopLevelVariables]
-  [universalMap checkLocalVariableFinalState]
-  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
-  drop variableMap
-#--- Code generation
-  [!?ioIntermediateCodeStruct.mGuardMapIR insertKey
-    !guardMangledName
-    !formalArguments
-    !inSelfType
-    !convenienceGuardGenerationIR
-    !allocaList
-    !instructionGenerationList
-    !inWarnIfUnused
-  ]
-}
+#proc guardSemanticAnalysis
+#  ?receiverType:let @unifiedTypeMap-proxy inSelfType
+#  ?let @lstring inRoutineName
+#  ?let @routineFormalArgumentList inRoutineFormalArgumentList
+#  ?let @guardKind inGuardKind
+#  ?let @instructionListAST inRoutineInstructionList
+#  ?let @location inEndOfRoutineDeclaration
+#  ?warnIfUnused:let @bool inWarnIfUnused
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+##--- Guard mangled name
+#  let guardMangledName = routineMangledNameFromAST (
+#    !if inSelfType == .null then "" else "$" + [inSelfType key] end
+#    !inRoutineName
+#    !inRoutineFormalArgumentList
+#  )
+##--- Enter subprogram invocation graph
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !guardMangledName.string] then
+#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+#      !guardMangledName
+#      !inRoutineName
+#    ]
+#  end
+##--- Variable map
+#  initialVariableMap (
+#    !context:inContext
+#    !mode:.guardMode
+#    !globalsAreConstant:false
+#    !returnTypeName:["" nowhere]
+#    ?@unifiedSymbolMapEx variableMap
+#    ?@universalPropertyAndRoutineMapForContext universalMap
+#  )
+#  @routineFormalArgumentListForGeneration formalArguments = {}
+#  @guardKindGenerationIR convenienceGuardGenerationIR
+#  @allocaList allocaList = {}
+#  @instructionListIR instructionGenerationList = {}
+#  switch inGuardKind
+#  case baseGuard :
+#  #--- Add 'accept" output variable
+#    let resultVarName = @lstring.new {!acceptVariableName() !inRoutineName.location}
+#    let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![boolTypeName () nowhere]}
+#    allocaList += !resultVarName.string ![[resultType kind] llvmTypeName]
+#    [!?universalMap insertLocalVariable
+#      !resultVarName
+#      !.localVariableReference {!type:resultType !plmName:resultVarName}
+#      !.noValue
+#      !true
+#    ]
+#    [!?variableMap insertOutputFormalArgument
+#      !lkey:resultVarName
+#      !type:resultType
+#      !readAccessAllowed:true
+#      !objectIR:.localVariableReference {!type:resultType !plmName:resultVarName}
+#      !copyable:true
+#      !canBeUsedAsInputParameter:true
+#    ]
+#  #--- Analyse formal arguments
+#    enterFormalArguments (
+#      !context:inContext
+#      !inRoutineFormalArgumentList
+#      !?variableMap
+#      !?universalMap
+#      !?formalArguments
+#    )
+#    convenienceGuardGenerationIR = .baseGuard
+#  #--- Analyze instruction list
+#    [inRoutineInstructionList analyzeRoutineInstructionList
+#      !self:inSelfType
+#      !directAccessToPropertiesAllowed:true
+#      !propertiesAreMutable:true
+#      !routineNameForInvocationGraph:guardMangledName
+#      !context:inContext
+#      !mode:.guardMode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+#      !?variableMap:variableMap
+#      !?variableMap:universalMap
+#      !?alloca:allocaList
+#      !?generatedCode:instructionGenerationList
+#    ]
+#  case convenienceGuard (baseGuardInstruction):
+#  #--- Analyse formal arguments
+#    enterFormalArguments (
+#      !context:inContext
+#      !inRoutineFormalArgumentList
+#      !?variableMap
+#      !?universalMap
+#      !?formalArguments
+#    )
+#  #--- Analyze base guard
+#    [baseGuardInstruction baseGuardAnalyze 
+#      !self:inSelfType
+#      !routineNameForInvocationGraph:guardMangledName
+#      !context:inContext
+#      !mode:.userMode # Convenience guards instructions are executed in user mode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+#      !?variableMap:variableMap
+#      !?variableMap:universalMap
+#      ?convenienceGuardGenerationIR
+#    ]
+#  #--- Analyze instruction list
+#    [inRoutineInstructionList analyzeRoutineInstructionList
+#      !self:inSelfType
+#      !directAccessToPropertiesAllowed:true
+#      !propertiesAreMutable:true
+#      !routineNameForInvocationGraph:guardMangledName
+#      !context:inContext
+#      !mode:.userMode # Convenience guards instructions are executed in user mode
+#      !?temporary:ioTemporaries
+#      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+#      !?variableMap:variableMap
+#      !?variableMap:universalMap
+#      !?alloca:allocaList
+#      !?generatedCode:instructionGenerationList
+#    ]
+#  end 
+##--- End of variableMap
+##  [variableMap deinitTopLevelVariables]
+#  [universalMap checkLocalVariableFinalState]
+#  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
+#  drop variableMap
+##--- Code generation
+#  [!?ioIntermediateCodeStruct.mGuardMapIR insertKey
+#    !guardMangledName
+#    !formalArguments
+#    !inSelfType
+#    !convenienceGuardGenerationIR
+#    !allocaList
+#    !instructionGenerationList
+#    !inWarnIfUnused
+#  ]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -403,181 +403,181 @@ enum @guardKindGenerationIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @guardMapIR {
-  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
-  @unifiedTypeMap-proxy mReceiverType
-  @guardKindGenerationIR mGuardKindGenerationIR
-  @allocaList mAllocaList
-  @instructionListIR mInstructionGenerationList
-  @bool mWarnIfUnused
-
-  insert insertKey error message "guard '%K' is already defined"
-  search searchKey error message "** internal error **"
-  remove removeKey error message "** internal error **"
-}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-method @guardMapIR guardCodeGeneration
-  ?!@string ioLLVMcode
-  ?!@2stringlist ioServiceList
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  for guard in self do
-    switch guard.mGuardKindGenerationIR
-    case convenienceGuard (* * * *) :
-    case baseGuard :
-      let guardImplementationName = llvmNameForGuardImplementation (!guard.lkey.string)
-      let guardCallName = llvmNameForGuardCall (!guard.lkey.string)
-      ioServiceList += !guardCallName !guardImplementationName
-      ioLLVMcode += llvmTitleComment (!guardImplementationName)
-      ioLLVMcode += "declare i1 @" + guardCallName + " ("
-      let typeName = if guard.mReceiverType == .null then "" else "$" + [guard.mReceiverType key] end
-      var first = typeName == ""
-      if not first then
-        ioLLVMcode += "%" + [typeName assemblerRepresentation] + " * %self"  
-      end
-      for () in guard.mFormalArgumentListForGeneration do
-        if first then first = false else ioLLVMcode += ", " end
-        switch mFormalArgumentKind
-        case input :
-          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
-        case output :
-          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
-       case inputOutput :
-          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
-        end
-      end
-      ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
-    end
-    [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  end
-}
+#map @guardMapIR {
+#  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
+#  @unifiedTypeMap-proxy mReceiverType
+#  @guardKindGenerationIR mGuardKindGenerationIR
+#  @allocaList mAllocaList
+#  @instructionListIR mInstructionGenerationList
+#  @bool mWarnIfUnused
+#
+#  insert insertKey error message "guard '%K' is already defined"
+#  search searchKey error message "** internal error **"
+#  remove removeKey error message "** internal error **"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @guardMapIR-element llvmCodeGeneration 
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  @string guardRoutineName
-  switch mGuardKindGenerationIR
-  case convenienceGuard (* * * *) :
-    guardRoutineName = llvmNameForGuardCall (!lkey.string)
-  case baseGuard :
-    guardRoutineName = llvmNameForGuardImplementation (!lkey.string)
-  end
-  ioLLVMcode += llvmTitleComment (!guardRoutineName)
-  ioLLVMcode += "define i1 @" + guardRoutineName + " ("
-  let receiverTypeName = if mReceiverType == .null then "" else "$" + [mReceiverType key] end
-  var first = true
-  if receiverTypeName != "" then
-    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"
-    first = false
-  end
-  for () in mFormalArgumentListForGeneration do
-    if first then
-      first = false
-    else
-      ioLLVMcode += ", "
-    end
-    switch mFormalArgumentKind
-    case input :
-      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
-    case output :
-      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
-   case inputOutput :
-      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
-    end
-  end
-  ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-#--- Allocate local variables 
-  for (variable llvmTypeName) in mAllocaList do
-    ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
-  end
-#--- Store input arguments in memory
-  for () in mFormalArgumentListForGeneration do
-    switch mFormalArgumentKind
-    case input :
-      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
-      ioLLVMcode += "  %" + llvmNameForLocalVariable (!mFormalArgumentName) + " = alloca " + llvmType + "\n"
-    case output, inputOutput :
-    end
-  end
-  for () in mFormalArgumentListForGeneration do
-    switch mFormalArgumentKind
-    case input :
-      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
-      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", "
-         + llvmType + " * %" + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
-    case output, inputOutput :
-    end
-  end
-#--- Declare "accept" variable 
-  let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableName ())
-  let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariableName () + ".loaded")
-  let accepted_llvmName_true = llvmNameForLocalVariable (!acceptVariableName () + ".true")
-  let accepted_llvmName_false = llvmNameForLocalVariable (!acceptVariableName () + ".false")
-#--- Base guard or convenience guard ?
-  switch mGuardKindGenerationIR
-  case baseGuard :
-    ioLLVMcode += "  store i1 false, i1* %" + accepted_llvmName + "\n"
-    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-    ioLLVMcode += "  %" + accepted_llvmName_loaded + " = load i1, i1* %" + accepted_llvmName + "\n"
-    ioLLVMcode += "  br i1 %" + accepted_llvmName_loaded + ", label %" + accepted_llvmName_true + ", label %" + accepted_llvmName_false + "\n\n"
-    ioLLVMcode += accepted_llvmName_true + ":\n"
-    ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
-    ioLLVMcode += "  ret i1 true\n\n"
-    ioLLVMcode += accepted_llvmName_false + ":\n"
-    ioLLVMcode += "  ret i1 false\n"
-    ioLLVMcode += "}\n\n"
-  case convenienceGuard (baseGuardAllocaList baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
-    for (variable  llvmTypeName) in baseGuardAllocaList do
-      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
-    end
-    [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-    ioLLVMcode += "  %baseGuard.result = call i1 @" + llvmNameForGuardCall (!baseGuardMangledName)
-    ioLLVMcode += " ("
-    for () in baseGuardEffectiveParameterList do
-      switch mEffectiveParameterPassingMode
-      case input:
-        ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
-      case output:
-        ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
-      case outputInput:
-        ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
-      end
-    between
-      ioLLVMcode += ", "
-    end
-    ioLLVMcode += ")\n"
-    ioLLVMcode += "  br i1 %baseGuard.result, label %baseGuard.true, label %baseGuard.exit\n\n"
-    ioLLVMcode += "baseGuard.true:\n"
-    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-    ioLLVMcode += "  ret i1 true\n\n"
-    ioLLVMcode += "baseGuard.exit:\n"
-    ioLLVMcode += "  ret i1 false\n"
-    ioLLVMcode += "}\n\n"
-  end
-  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare void @noteGuardHasBeenAccepted ()\n"
-}
+#method @guardMapIR guardCodeGeneration
+#  ?!@string ioLLVMcode
+#  ?!@2stringlist ioServiceList
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  for guard in self do
+#    switch guard.mGuardKindGenerationIR
+#    case convenienceGuard (* * * *) :
+#    case baseGuard :
+#      let guardImplementationName = llvmNameForGuardImplementation (!guard.lkey.string)
+#      let guardCallName = llvmNameForGuardCall (!guard.lkey.string)
+#      ioServiceList += !guardCallName !guardImplementationName
+#      ioLLVMcode += llvmTitleComment (!guardImplementationName)
+#      ioLLVMcode += "declare i1 @" + guardCallName + " ("
+#      let typeName = if guard.mReceiverType == .null then "" else "$" + [guard.mReceiverType key] end
+#      var first = typeName == ""
+#      if not first then
+#        ioLLVMcode += "%" + [typeName assemblerRepresentation] + " * %self"  
+#      end
+#      for () in guard.mFormalArgumentListForGeneration do
+#        if first then first = false else ioLLVMcode += ", " end
+#        switch mFormalArgumentKind
+#        case input :
+#          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
+#        case output :
+#          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+#       case inputOutput :
+#          ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+#        end
+#      end
+#      ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
+#    end
+#    [guard llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @guardMapIR-element enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@uint ioMaxBranchOfOnInstructions
-{
-  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-  switch mGuardKindGenerationIR
-  case baseGuard :
-  case convenienceGuard (* baseGuardInstructionGenerationList baseGuardMangledName *) :
-    [baseGuardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-    ioAccessibleEntities.mGuardSet += !baseGuardMangledName
-  end
-}
+#method @guardMapIR-element llvmCodeGeneration 
+#  ?!@string ioLLVMcode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  @string guardRoutineName
+#  switch mGuardKindGenerationIR
+#  case convenienceGuard (* * * *) :
+#    guardRoutineName = llvmNameForGuardCall (!lkey.string)
+#  case baseGuard :
+#    guardRoutineName = llvmNameForGuardImplementation (!lkey.string)
+#  end
+#  ioLLVMcode += llvmTitleComment (!guardRoutineName)
+#  ioLLVMcode += "define i1 @" + guardRoutineName + " ("
+#  let receiverTypeName = if mReceiverType == .null then "" else "$" + [mReceiverType key] end
+#  var first = true
+#  if receiverTypeName != "" then
+#    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"
+#    first = false
+#  end
+#  for () in mFormalArgumentListForGeneration do
+#    if first then
+#      first = false
+#    else
+#      ioLLVMcode += ", "
+#    end
+#    switch mFormalArgumentKind
+#    case input :
+#      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
+#    case output :
+#      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+#   case inputOutput :
+#      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+#    end
+#  end
+#  ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
+##--- Allocate local variables 
+#  for (variable llvmTypeName) in mAllocaList do
+#    ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
+#  end
+##--- Store input arguments in memory
+#  for () in mFormalArgumentListForGeneration do
+#    switch mFormalArgumentKind
+#    case input :
+#      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
+#      ioLLVMcode += "  %" + llvmNameForLocalVariable (!mFormalArgumentName) + " = alloca " + llvmType + "\n"
+#    case output, inputOutput :
+#    end
+#  end
+#  for () in mFormalArgumentListForGeneration do
+#    switch mFormalArgumentKind
+#    case input :
+#      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
+#      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", "
+#         + llvmType + " * %" + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
+#    case output, inputOutput :
+#    end
+#  end
+##--- Declare "accept" variable 
+#  let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableName ())
+#  let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariableName () + ".loaded")
+#  let accepted_llvmName_true = llvmNameForLocalVariable (!acceptVariableName () + ".true")
+#  let accepted_llvmName_false = llvmNameForLocalVariable (!acceptVariableName () + ".false")
+##--- Base guard or convenience guard ?
+#  switch mGuardKindGenerationIR
+#  case baseGuard :
+#    ioLLVMcode += "  store i1 false, i1* %" + accepted_llvmName + "\n"
+#    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#    ioLLVMcode += "  %" + accepted_llvmName_loaded + " = load i1, i1* %" + accepted_llvmName + "\n"
+#    ioLLVMcode += "  br i1 %" + accepted_llvmName_loaded + ", label %" + accepted_llvmName_true + ", label %" + accepted_llvmName_false + "\n\n"
+#    ioLLVMcode += accepted_llvmName_true + ":\n"
+#    ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
+#    ioLLVMcode += "  ret i1 true\n\n"
+#    ioLLVMcode += accepted_llvmName_false + ":\n"
+#    ioLLVMcode += "  ret i1 false\n"
+#    ioLLVMcode += "}\n\n"
+#  case convenienceGuard (baseGuardAllocaList baseGuardInstructionGenerationList baseGuardMangledName baseGuardEffectiveParameterList) :
+#    for (variable  llvmTypeName) in baseGuardAllocaList do
+#      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
+#    end
+#    [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#    ioLLVMcode += "  %baseGuard.result = call i1 @" + llvmNameForGuardCall (!baseGuardMangledName)
+#    ioLLVMcode += " ("
+#    for () in baseGuardEffectiveParameterList do
+#      switch mEffectiveParameterPassingMode
+#      case input:
+#        ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+#      case output:
+#        ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
+#      case outputInput:
+#        ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+#      end
+#    between
+#      ioLLVMcode += ", "
+#    end
+#    ioLLVMcode += ")\n"
+#    ioLLVMcode += "  br i1 %baseGuard.result, label %baseGuard.true, label %baseGuard.exit\n\n"
+#    ioLLVMcode += "baseGuard.true:\n"
+#    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#    ioLLVMcode += "  ret i1 true\n\n"
+#    ioLLVMcode += "baseGuard.exit:\n"
+#    ioLLVMcode += "  ret i1 false\n"
+#    ioLLVMcode += "}\n\n"
+#  end
+#  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare void @noteGuardHasBeenAccepted ()\n"
+#}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+#method @guardMapIR-element enterAccessibleEntities
+#  ?!@accessibleEntities ioAccessibleEntities
+#  ?!@uint ioMaxBranchOfOnInstructions
+#{
+#  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#  switch mGuardKindGenerationIR
+#  case baseGuard :
+#  case convenienceGuard (* baseGuardInstructionGenerationList baseGuardMangledName *) :
+#    [baseGuardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#    ioAccessibleEntities.mGuardSet += !baseGuardMangledName
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

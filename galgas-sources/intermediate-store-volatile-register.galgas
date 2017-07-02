@@ -17,22 +17,22 @@ class @storeVolatileIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeVolatileIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  let llvmType = [[mTargetVarType kind] llvmTypeName]
-  ioLLVMcode += "  store volatile " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType
-             + " * inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
-}
+#override method @storeVolatileIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+#  let llvmType = [[mTargetVarType kind] llvmTypeName]
+#  ioLLVMcode += "  store volatile " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType
+#             + " * inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeVolatileIR enterAccessibleEntities 
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
+#override method @storeVolatileIR enterAccessibleEntities 
+#  ?!@accessibleEntities unused ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

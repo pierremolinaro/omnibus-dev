@@ -104,26 +104,26 @@ class @assertInstructionIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @assertInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
-  ioLLVMcode += "if (!" + [mExpressionValue llvmName] + ") {\n"
-  ioLLVMcode += "  raise_exception (" + panicCodeForAssertViolation ()
-     + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
-     + ", " + [mAssertInstructionLocation line] + ") ;\n"
-  ioLLVMcode += "}\n" 
-}
+#override method @assertInstructionIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
+#  ioLLVMcode += "if (!" + [mExpressionValue llvmName] + ") {\n"
+#  ioLLVMcode += "  raise_exception (" + panicCodeForAssertViolation ()
+#     + ", " + [[[mAssertInstructionLocation file] lastPathComponent] utf8Representation]
+#     + ", " + [mAssertInstructionLocation line] + ") ;\n"
+#  ioLLVMcode += "}\n" 
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @assertInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@uint ioMaxBranchOfOnInstructions
-{
-  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-}
+#override method @assertInstructionIR enterAccessibleEntities
+#  ?!@accessibleEntities ioAccessibleEntities
+#  ?!@uint ioMaxBranchOfOnInstructions
+#{
+#  [mInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

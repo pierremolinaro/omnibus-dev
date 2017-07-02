@@ -2,11 +2,11 @@
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @routineFormalArgumentListForGeneration {
-  @procFormalArgumentPassingMode mFormalArgumentKind
-  @unifiedTypeMap-proxy mFormalArgumentType
-  @string mFormalArgumentName
-}
+#list @routineFormalArgumentListForGeneration {
+#  @procFormalArgumentPassingMode mFormalArgumentKind
+#  @unifiedTypeMap-proxy mFormalArgumentType
+#  @string mFormalArgumentName
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -16,145 +16,145 @@ graph @subprogramInvocationGraph (@lstringlist) {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc enterFormalArguments
-  ?context:let @semanticContext inContext
-  ?let @routineFormalArgumentList inFormalArgumentPassingMode
-  ?!@unifiedSymbolMapEx ioVariableMap
-  ?!@universalPropertyAndRoutineMapForContext ioUniversalMap
-  ?!@routineFormalArgumentListForGeneration ioFormalArguments
-{
-  for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
-    let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
-    ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
-    let objectIR = @objectIR.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
-    switch argumentKind
-    case input :
-      [!?ioUniversalMap insertLocalConstant !formalArgumentName !objectIR]
-      [!?ioVariableMap insertConstantInputFormalArgument
-        !lkey:formalArgumentName
-        !type:typeProxy
-        !readAccessAllowed:true
-        !objectIR:objectIR
-        !copyable:[typeProxy copyable]
-        !canBeUsedAsInputParameter:true
-      ]
-    case inputOutput :
-      [!?ioUniversalMap insertLocalVariable !formalArgumentName !objectIR !.hasUnreadValue !true]
-      [!?ioVariableMap insertInputOutputFormalArgument
-        !lkey:formalArgumentName
-        !type:typeProxy
-        !readAccessAllowed:true
-        !objectIR:objectIR
-        !copyable:[typeProxy copyable]
-        !canBeUsedAsInputParameter:true
-      ]
-    case output :
-      [!?ioUniversalMap insertLocalVariable !formalArgumentName !objectIR !.noValue !true]
-      [!?ioVariableMap insertOutputFormalArgument
-        !lkey:formalArgumentName
-        !type:typeProxy
-        !readAccessAllowed:true
-        !objectIR:objectIR
-        !copyable:[typeProxy copyable]
-        !canBeUsedAsInputParameter:true
-      ]
-    end
-  end
-}
+#proc enterFormalArguments
+#  ?context:let @semanticContext inContext
+#  ?let @routineFormalArgumentList inFormalArgumentPassingMode
+#  ?!@unifiedSymbolMapEx ioVariableMap
+#  ?!@universalPropertyAndRoutineMapForContext ioUniversalMap
+#  ?!@routineFormalArgumentListForGeneration ioFormalArguments
+#{
+#  for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentPassingMode do
+#    let typeProxy = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !formalArgumentTypeName}
+#    ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
+#    let objectIR = @objectIR.localVariableReference {!type:typeProxy !plmName:formalArgumentName}
+#    switch argumentKind
+#    case input :
+#      [!?ioUniversalMap insertLocalConstant !formalArgumentName !objectIR]
+#      [!?ioVariableMap insertConstantInputFormalArgument
+#        !lkey:formalArgumentName
+#        !type:typeProxy
+#        !readAccessAllowed:true
+#        !objectIR:objectIR
+#        !copyable:[typeProxy copyable]
+#        !canBeUsedAsInputParameter:true
+#      ]
+#    case inputOutput :
+#      [!?ioUniversalMap insertLocalVariable !formalArgumentName !objectIR !.hasUnreadValue !true]
+#      [!?ioVariableMap insertInputOutputFormalArgument
+#        !lkey:formalArgumentName
+#        !type:typeProxy
+#        !readAccessAllowed:true
+#        !objectIR:objectIR
+#        !copyable:[typeProxy copyable]
+#        !canBeUsedAsInputParameter:true
+#      ]
+#    case output :
+#      [!?ioUniversalMap insertLocalVariable !formalArgumentName !objectIR !.noValue !true]
+#      [!?ioVariableMap insertOutputFormalArgument
+#        !lkey:formalArgumentName
+#        !type:typeProxy
+#        !readAccessAllowed:true
+#        !objectIR:objectIR
+#        !copyable:[typeProxy copyable]
+#        !canBeUsedAsInputParameter:true
+#      ]
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc routineSemanticAnalysis
-  ?receiverType:let @unifiedTypeMap-proxy inSelfType
-  ?let @routineKind inRoutineKind
-  ?let @mode inRoutineMode
-  ?let @lstring inRoutineName
-  ?let @routineFormalArgumentList inRoutineFormalArgumentList
-  ?returnTypeName:let @lstring inReturnTypeName
-  ?let @instructionListAST inRoutineInstructionList
-  ?let @location inEndOfRoutineDeclaration
-  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-  ?warnIfUnused:let @bool inWarnIfUnused
-  ?globalFunction:let @bool inGlobalFunction
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-#--- Mangled routine name
-  let routineMangledName = routineMangledNameFromAST (
-    !if inSelfType == .null then "" else "$" + [inSelfType key] end
-    !inRoutineName
-    !inRoutineFormalArgumentList
-  )
-#--- Variable map
-  initialVariableMap (
-    !context:inContext
-    !mode:inRoutineMode
-    !globalsAreConstant:false
-    !returnTypeName:inReturnTypeName
-    ?@unifiedSymbolMapEx variableMap
-    ?@universalPropertyAndRoutineMapForContext universalMap
-  )
-#--- Analyse formal arguments
-  @routineFormalArgumentListForGeneration formalArguments = {}
-  enterFormalArguments (
-    !context:inContext
-    !inRoutineFormalArgumentList
-    !?variableMap
-    !?universalMap
-    !?formalArguments
-  )
-#--- Enter subprogram invocation graph
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineMangledName
-      !routineMangledName
-    ]
-  end
-#--- Analyze instruction list
-  @allocaList allocaList = {}
-  @instructionListIR instructionGenerationList = {}
-  [inRoutineInstructionList analyzeRoutineInstructionList
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-    !propertiesAreMutable:inRoutineCanMutateProperties
-    !routineNameForInvocationGraph:routineMangledName
-    !context:inContext
-    !mode:inRoutineMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
-    !?variableMap:universalMap
-    !?alloca:allocaList
-    !?generatedCode:instructionGenerationList
-  ]
-#--- End of variableMap
-#  [variableMap deinitTopLevelVariables]
-  [universalMap checkLocalVariableFinalState]
-  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
-  drop variableMap
-#--- Code generation
-  let returnType = if inReturnTypeName.string == "" then
-    @unifiedTypeMap-proxy.null
-  else
-    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
-  end
-  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
-    !routineMangledName
-    !inSelfType
-    !routineMangledName
-    !formalArguments
-    !allocaList
-    !instructionGenerationList
-    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
-    !inWarnIfUnused
-    !inGlobalFunction
-    !inRoutineKind
-    !returnType
-    !false
-  ]
-}
+#proc routineSemanticAnalysis
+#  ?receiverType:let @unifiedTypeMap-proxy inSelfType
+#  ?let @routineKind inRoutineKind
+#  ?let @mode inRoutineMode
+#  ?let @lstring inRoutineName
+#  ?let @routineFormalArgumentList inRoutineFormalArgumentList
+#  ?returnTypeName:let @lstring inReturnTypeName
+#  ?let @instructionListAST inRoutineInstructionList
+#  ?let @location inEndOfRoutineDeclaration
+#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+#  ?warnIfUnused:let @bool inWarnIfUnused
+#  ?globalFunction:let @bool inGlobalFunction
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+##--- Mangled routine name
+#  let routineMangledName = routineMangledNameFromAST (
+#    !if inSelfType == .null then "" else "$" + [inSelfType key] end
+#    !inRoutineName
+#    !inRoutineFormalArgumentList
+#  )
+##--- Variable map
+#  initialVariableMap (
+#    !context:inContext
+#    !mode:inRoutineMode
+#    !globalsAreConstant:false
+#    !returnTypeName:inReturnTypeName
+#    ?@unifiedSymbolMapEx variableMap
+#    ?@universalPropertyAndRoutineMapForContext universalMap
+#  )
+##--- Analyse formal arguments
+#  @routineFormalArgumentListForGeneration formalArguments = {}
+#  enterFormalArguments (
+#    !context:inContext
+#    !inRoutineFormalArgumentList
+#    !?variableMap
+#    !?universalMap
+#    !?formalArguments
+#  )
+##--- Enter subprogram invocation graph
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
+#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+#      !routineMangledName
+#      !routineMangledName
+#    ]
+#  end
+##--- Analyze instruction list
+#  @allocaList allocaList = {}
+#  @instructionListIR instructionGenerationList = {}
+#  [inRoutineInstructionList analyzeRoutineInstructionList
+#    !self:inSelfType
+#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+#    !propertiesAreMutable:inRoutineCanMutateProperties
+#    !routineNameForInvocationGraph:routineMangledName
+#    !context:inContext
+#    !mode:inRoutineMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+#    !?variableMap:variableMap
+#    !?variableMap:universalMap
+#    !?alloca:allocaList
+#    !?generatedCode:instructionGenerationList
+#  ]
+##--- End of variableMap
+##  [variableMap deinitTopLevelVariables]
+#  [universalMap checkLocalVariableFinalState]
+#  [variableMap checkAutomatonStates !inEndOfRoutineDeclaration]
+#  drop variableMap
+##--- Code generation
+#  let returnType = if inReturnTypeName.string == "" then
+#    @unifiedTypeMap-proxy.null
+#  else
+#    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !inReturnTypeName}
+#  end
+#  [!?ioIntermediateCodeStruct.mRoutineMapIR insertKey # Raises a redefinition error
+#    !routineMangledName
+#    !inSelfType
+#    !routineMangledName
+#    !formalArguments
+#    !allocaList
+#    !instructionGenerationList
+#    ![ioIntermediateCodeStruct.mRequiredProcedureSet hasKey !routineMangledName.string]
+#    !inWarnIfUnused
+#    !inGlobalFunction
+#    !inRoutineKind
+#    !returnType
+#    !false
+#  ]
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -229,109 +229,109 @@ list @allocaList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR llvmCodeGeneration 
-  ?!@string ioLLVMcode
-  ?!@string ioAssemblerCode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  for procedure in self do
-    [procedure llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
-  end
-}
+#method @routineMapIR llvmCodeGeneration 
+#  ?!@string ioLLVMcode
+#  ?!@string ioAssemblerCode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  for procedure in self do
+#    [procedure llvmCodeGeneration !?ioLLVMcode !?ioAssemblerCode !inGenerationContext !?ioGenerationAdds]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineMapIR-element llvmCodeGeneration 
-  ?!@string ioLLVMcode
-  ?!@string unused ioAssemblerCode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  @string routineName
-  switch mKind
-  case function (*) : routineName = llvmNameForFunction (!mRoutineNameForGeneration.string)
-  case section : routineName = llvmNameForSectionImplementation (!mRoutineNameForGeneration.string)
-  case safe : routineName = llvmNameForSafeImplementation (!mRoutineNameForGeneration.string)
-  case service : routineName = llvmNameForServiceImplementation (!mRoutineNameForGeneration.string)
-  case primitive : routineName = llvmNameForPrimitiveImplementation (!mRoutineNameForGeneration.string)
-  end
-  ioLLVMcode += llvmTitleComment (!routineName)
-  ioLLVMcode += "define"
-  if not mGlobal then
-    ioLLVMcode += " internal"
-  end
-  if mReturnType == .null then
-    ioLLVMcode += " void"
-  else
-    ioLLVMcode += " " + [[mReturnType kind] llvmTypeName]
-  end
-  ioLLVMcode += " @" + routineName + " ("
-  let receiverTypeName = if mReceiverType == .null then "" else "$" + [mReceiverType key] end
-  var first = true
-  if receiverTypeName != "" then
-    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"
-    first = false
-  end
-  for () in mFormalArgumentListForGeneration do
-    if first then
-      first = false
-    else
-      ioLLVMcode += ", "
-    end
-    switch mFormalArgumentKind
-    case input :
-      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
-    case output :
-      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
-   case inputOutput :
-      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
-    end
-  end
-  if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
-    if not first then
-      ioLLVMcode += ", "
-    end
-    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " %LINE, i8* %FILE"
-  end
-  ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-#--- Add result variable ?
-  if mReturnType != .null then
-    ioLLVMcode += "  %" + llvmNameForLocalVariable (!functionResultVariableName ())
-                + " = alloca " + [[mReturnType kind] llvmTypeName] + "\n"
-  end
-  for (variable llvmTypeName) in mAllocaList do
-    ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
-  end
-#--- Store input arguments in memory
-  for () in mFormalArgumentListForGeneration do
-    switch mFormalArgumentKind
-    case input :
-      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
-      ioLLVMcode += "  %" + llvmNameForLocalVariable (!mFormalArgumentName) + " = alloca " + llvmType + "\n"
-    case output, inputOutput :
-    end
-  end
-  for () in mFormalArgumentListForGeneration do
-    switch mFormalArgumentKind
-    case input :
-      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
-      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + " * %"
-                 + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
-    case output, inputOutput :
-    end
-  end
-#--- Instruction list
-  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#--- Epilog
-  if mReturnType == .null then
-    ioLLVMcode += "  ret void\n"
-  else
-    let resultVarLLVMName = "%" + llvmNameForLocalVariable (!functionResultVariableName ())
-    ioLLVMcode += "  %result = load " + [[mReturnType kind] llvmTypeName] + ", " + [[mReturnType kind] llvmTypeName] + " * " + resultVarLLVMName + "\n"
-    ioLLVMcode += "  ret " + [[mReturnType kind] llvmTypeName] + " %result\n"
-  end
-  ioLLVMcode += "}\n\n"
-}
+#method @routineMapIR-element llvmCodeGeneration 
+#  ?!@string ioLLVMcode
+#  ?!@string unused ioAssemblerCode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  @string routineName
+#  switch mKind
+#  case function (*) : routineName = llvmNameForFunction (!mRoutineNameForGeneration.string)
+#  case section : routineName = llvmNameForSectionImplementation (!mRoutineNameForGeneration.string)
+#  case safe : routineName = llvmNameForSafeImplementation (!mRoutineNameForGeneration.string)
+#  case service : routineName = llvmNameForServiceImplementation (!mRoutineNameForGeneration.string)
+#  case primitive : routineName = llvmNameForPrimitiveImplementation (!mRoutineNameForGeneration.string)
+#  end
+#  ioLLVMcode += llvmTitleComment (!routineName)
+#  ioLLVMcode += "define"
+#  if not mGlobal then
+#    ioLLVMcode += " internal"
+#  end
+#  if mReturnType == .null then
+#    ioLLVMcode += " void"
+#  else
+#    ioLLVMcode += " " + [[mReturnType kind] llvmTypeName]
+#  end
+#  ioLLVMcode += " @" + routineName + " ("
+#  let receiverTypeName = if mReceiverType == .null then "" else "$" + [mReceiverType key] end
+#  var first = true
+#  if receiverTypeName != "" then
+#    ioLLVMcode += "%" + [receiverTypeName assemblerRepresentation] + " * %self"
+#    first = false
+#  end
+#  for () in mFormalArgumentListForGeneration do
+#    if first then
+#      first = false
+#    else
+#      ioLLVMcode += ", "
+#    end
+#    switch mFormalArgumentKind
+#    case input :
+#      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
+#    case output :
+#      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+#   case inputOutput :
+#      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+#    end
+#  end
+#  if not [option plm_options.noPanicGeneration value] && mAppendFileAndLineArgumentForPanicLocation then
+#    if not first then
+#      ioLLVMcode += ", "
+#    end
+#    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " %LINE, i8* %FILE"
+#  end
+#  ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
+##--- Add result variable ?
+#  if mReturnType != .null then
+#    ioLLVMcode += "  %" + llvmNameForLocalVariable (!functionResultVariableName ())
+#                + " = alloca " + [[mReturnType kind] llvmTypeName] + "\n"
+#  end
+#  for (variable llvmTypeName) in mAllocaList do
+#    ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
+#  end
+##--- Store input arguments in memory
+#  for () in mFormalArgumentListForGeneration do
+#    switch mFormalArgumentKind
+#    case input :
+#      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
+#      ioLLVMcode += "  %" + llvmNameForLocalVariable (!mFormalArgumentName) + " = alloca " + llvmType + "\n"
+#    case output, inputOutput :
+#    end
+#  end
+#  for () in mFormalArgumentListForGeneration do
+#    switch mFormalArgumentKind
+#    case input :
+#      let llvmType = [[mFormalArgumentType kind] llvmTypeName]
+#      ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + " * %"
+#                 + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
+#    case output, inputOutput :
+#    end
+#  end
+##--- Instruction list
+#  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+##--- Epilog
+#  if mReturnType == .null then
+#    ioLLVMcode += "  ret void\n"
+#  else
+#    let resultVarLLVMName = "%" + llvmNameForLocalVariable (!functionResultVariableName ())
+#    ioLLVMcode += "  %result = load " + [[mReturnType kind] llvmTypeName] + ", " + [[mReturnType kind] llvmTypeName] + " * " + resultVarLLVMName + "\n"
+#    ioLLVMcode += "  ret " + [[mReturnType kind] llvmTypeName] + " %result\n"
+#  end
+#  ioLLVMcode += "}\n\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

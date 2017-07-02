@@ -263,36 +263,36 @@ map @staticArrayMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @extendStaticArrayDeclarationAST semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  @stringset invokedFunctionSet = {}
-  for (operand endOfExp) in mExpressions do
-    switch operand
-    case expression (@expressionAST unused exp) :
-    case function (@lstring functionName @routineFormalArgumentList formalArgs) :
-    #--- Routine mangled name
-      let routineMangledName = routineMangledNameFromAST (
-        !"" 
-        !functionName
-        !formalArgs
-      )
-      invokedFunctionSet += !routineMangledName
-    end
-  end
-  with mStaticlistName.string in !?ioTemporaries.mStaticArrayMap do
-    mInvokedFunctionSet += invokedFunctionSet
-  else
-    [!?ioTemporaries.mStaticArrayMap insertKey !mStaticlistName !invokedFunctionSet]
-  end
-  with mStaticlistName.string in !?ioIntermediateCodeStruct.mStaticArrayMap do
-    mInvokedFunctionSet += invokedFunctionSet
-  else
-    [!?ioIntermediateCodeStruct.mStaticArrayMap insertKey !mStaticlistName !invokedFunctionSet]
-  end
-}
+#override method @extendStaticArrayDeclarationAST semanticAnalysis
+#  ?context:let @semanticContext unused inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  @stringset invokedFunctionSet = {}
+#  for (operand endOfExp) in mExpressions do
+#    switch operand
+#    case expression (@expressionAST unused exp) :
+#    case function (@lstring functionName @routineFormalArgumentList formalArgs) :
+#    #--- Routine mangled name
+#      let routineMangledName = routineMangledNameFromAST (
+#        !"" 
+#        !functionName
+#        !formalArgs
+#      )
+#      invokedFunctionSet += !routineMangledName
+#    end
+#  end
+#  with mStaticlistName.string in !?ioTemporaries.mStaticArrayMap do
+#    mInvokedFunctionSet += invokedFunctionSet
+#  else
+#    [!?ioTemporaries.mStaticArrayMap insertKey !mStaticlistName !invokedFunctionSet]
+#  end
+#  with mStaticlistName.string in !?ioIntermediateCodeStruct.mStaticArrayMap do
+#    mInvokedFunctionSet += invokedFunctionSet
+#  else
+#    [!?ioIntermediateCodeStruct.mStaticArrayMap insertKey !mStaticlistName !invokedFunctionSet]
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                    

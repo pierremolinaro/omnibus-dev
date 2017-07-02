@@ -283,45 +283,45 @@ override method @requiredModuleAST enterRoutinesInContext
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @moduleListIR {
-  @string mModuleName
-  @unifiedTypeMap-proxy mType
-  @operandIRList mInitialValueList
-}
+#list @moduleListIR {
+#  @string mModuleName
+#  @unifiedTypeMap-proxy mType
+#  @operandIRList mInitialValueList
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @requiredModuleAST semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  let moduleTypeName = moduleMangledNameFromModuleName (!mModuleName)
-  let moduleType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
-  [inContext.mConstructorMap searchKey !moduleTypeName ?let constructorValue]
-  [constructorValue structure ?constructorSignature:* ?sortedOperandList:let sortedOperandList]
-  @operandIRList initialValueList = {}
-  for (initialValue *) in sortedOperandList do
-    initialValueList += !initialValue
-  end
-  ioIntermediateCodeStruct.mModuleList += 
-    !mModuleName.string
-    !moduleType
-    !initialValueList
-}
+#override method @requiredModuleAST semanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  let moduleTypeName = moduleMangledNameFromModuleName (!mModuleName)
+#  let moduleType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !moduleTypeName}
+#  [inContext.mConstructorMap searchKey !moduleTypeName ?let constructorValue]
+#  [constructorValue structure ?constructorSignature:* ?sortedOperandList:let sortedOperandList]
+#  @operandIRList initialValueList = {}
+#  for (initialValue *) in sortedOperandList do
+#    initialValueList += !initialValue
+#  end
+#  ioIntermediateCodeStruct.mModuleList += 
+#    !mModuleName.string
+#    !moduleType
+#    !initialValueList
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @moduleListIR-element generateLLVM ?!@string ioLLVMcode {
-  ioLLVMcode += "@" + llvmNameForGlobalVariable (!mModuleName) + " = internal global "
-  ioLLVMcode += [[mType kind] llvmTypeName] + " {"
-  for (value) in mInitialValueList
-    do ioLLVMcode += [value llvmTypeName] + " " + [value llvmName]
-    between ioLLVMcode += ", "  
-  end
-  ioLLVMcode += "}\n"
-}
+#method @moduleListIR-element generateLLVM ?!@string ioLLVMcode {
+#  ioLLVMcode += "@" + llvmNameForGlobalVariable (!mModuleName) + " = internal global "
+#  ioLLVMcode += [[mType kind] llvmTypeName] + " {"
+#  for (value) in mInitialValueList
+#    do ioLLVMcode += [value llvmTypeName] + " " + [value llvmName]
+#    between ioLLVMcode += ", "  
+#  end
+#  ioLLVMcode += "}\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

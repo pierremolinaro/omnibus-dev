@@ -84,159 +84,137 @@ map @initRoutinePriorityMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @initList-element initSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  let selfType = if mSelfTypeName.string == "" then
-    @unifiedTypeMap-proxy.null
-  else
-    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mSelfTypeName}
-  end
-  initSemanticAnalysis (
-    !context:inContext
-    !?temporary:ioTemporaries
-    !?intermediateCode:ioIntermediateCodeStruct
-    !selfType:selfType
-    !priority:mPriority
-    !mode:.initMode
-    !instructionList:mInstructionList
-    !endOfDeclaration:mEndOfInitLocation
-    ?let @allocaList allocaList
-    ?let @instructionListIR instructionGenerationList
-  )
-#--- Code generation
-  ioIntermediateCodeStruct.mInitList +=
-    !selfType
-    !mGlobalVarName
-    !mPriority.bigint
-    !allocaList
-    !instructionGenerationList
-}
+#method @initList-element initSemanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  let selfType = if mSelfTypeName.string == "" then
+#    @unifiedTypeMap-proxy.null
+#  else
+#    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mSelfTypeName}
+#  end
+#  initSemanticAnalysis (
+#    !context:inContext
+#    !?temporary:ioTemporaries
+#    !?intermediateCode:ioIntermediateCodeStruct
+#    !selfType:selfType
+#    !priority:mPriority
+#    !mode:.initMode
+#    !instructionList:mInstructionList
+#    !endOfDeclaration:mEndOfInitLocation
+#    ?let @allocaList allocaList
+#    ?let @instructionListIR instructionGenerationList
+#  )
+##--- Code generation
+#  ioIntermediateCodeStruct.mInitList +=
+#    !selfType
+#    !mGlobalVarName
+#    !mPriority.bigint
+#    !allocaList
+#    !instructionGenerationList
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc initSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-  ?selfType:let @unifiedTypeMap-proxy inSelfType
-  ?priority:let @lbigint inPriority
-  ?mode:let @mode inCurrentMode
-  ?instructionList:let @instructionListAST inInstructionListAST
-  ?endOfDeclaration:let @location inEndOfInitDeclaration
-  !@allocaList outAllocaList
-  !@instructionListIR outInstructionGenerationList
-{
-#--- Check init routine is unique
-  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType !inPriority)
-  [!?ioTemporaries.mInitRoutinePriorityMap insertKey !routineNameForInvocationGraph]
-#---
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineNameForInvocationGraph
-      !routineNameForInvocationGraph
-    ]
-  end
-#--- Variable map
-  initialVariableMap (
-    !context:inContext
-    !mode:.initMode
-    !globalsAreConstant:false
-    !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMapEx variableMap
-    ?@universalPropertyAndRoutineMapForContext universalMap
-  )
-#--- Analyze instruction list
-  outInstructionGenerationList = {}
-  outAllocaList = {}
-  [inInstructionListAST analyzeRoutineInstructionList
-    !self:inSelfType
-    !directAccessToPropertiesAllowed:true
-    !propertiesAreMutable:true
-    !routineNameForInvocationGraph:routineNameForInvocationGraph
-    !context:inContext
-    !mode:inCurrentMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
-    !?variableMap:universalMap
-    !?alloca:outAllocaList
-    !?generatedCode:outInstructionGenerationList
-  ]
-#--- End of variableMap
-#  [variableMap deinitTopLevelVariables]
-  [universalMap checkLocalVariableFinalState]
-  [variableMap checkAutomatonStates !inEndOfInitDeclaration]
-  drop variableMap
-}
+#proc initSemanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#  ?selfType:let @unifiedTypeMap-proxy inSelfType
+#  ?priority:let @lbigint inPriority
+#  ?mode:let @mode inCurrentMode
+#  ?instructionList:let @instructionListAST inInstructionListAST
+#  ?endOfDeclaration:let @location inEndOfInitDeclaration
+#  !@allocaList outAllocaList
+#  !@instructionListIR outInstructionGenerationList
+#{
+##--- Check init routine is unique
+#  let routineNameForInvocationGraph = initNameForInvocationGraph (!inSelfType !inPriority)
+#  [!?ioTemporaries.mInitRoutinePriorityMap insertKey !routineNameForInvocationGraph]
+##---
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+#      !routineNameForInvocationGraph
+#      !routineNameForInvocationGraph
+#    ]
+#  end
+##--- Variable map
+#  initialVariableMap (
+#    !context:inContext
+#    !mode:.initMode
+#    !globalsAreConstant:false
+#    !returnTypeName:["" nowhere]
+#    ?@unifiedSymbolMapEx variableMap
+#    ?@universalPropertyAndRoutineMapForContext universalMap
+#  )
+##--- Analyze instruction list
+#  outInstructionGenerationList = {}
+#  outAllocaList = {}
+#  [inInstructionListAST analyzeRoutineInstructionList
+#    !self:inSelfType
+#    !directAccessToPropertiesAllowed:true
+#    !propertiesAreMutable:true
+#    !routineNameForInvocationGraph:routineNameForInvocationGraph
+#    !context:inContext
+#    !mode:inCurrentMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+#    !?variableMap:variableMap
+#    !?variableMap:universalMap
+#    !?alloca:outAllocaList
+#    !?generatedCode:outInstructionGenerationList
+#  ]
+##--- End of variableMap
+##  [variableMap deinitTopLevelVariables]
+#  [universalMap checkLocalVariableFinalState]
+#  [variableMap checkAutomatonStates !inEndOfInitDeclaration]
+#  drop variableMap
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @initListIR {
-  @unifiedTypeMap-proxy mSelfType
-  @string mGlobalVariable # "" if mSelfType is null
-  @bigint mPriority
-  @allocaList mAllocaList
-  @instructionListIR mInstructionListIR
-}
+#list @initListIR {
+#  @unifiedTypeMap-proxy mSelfType
+#  @string mGlobalVariable # "" if mSelfType is null
+#  @bigint mPriority
+#  @allocaList mAllocaList
+#  @instructionListIR mInstructionListIR
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @initListIR generateLLVMinitCode
-  ?!@string ioLLVMcode
-  ?let @routineMapIR unused inProcedureMapIR
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  ioLLVMcode += llvmTitleComment (!"Init")
-  for init in self do
-#    @bool generate 
-#    if [init.mInitRequiredByProcList length] == 0 then
-#      generate = true
-#    else
-#      generate = false
-#      for (routineMangledName) in init.mInitRequiredByProcList while not generate do
-#        generate = [inProcedureMapIR hasKey !routineMangledName.string]
-#      end
+#method @initListIR generateLLVMinitCode
+#  ?!@string ioLLVMcode
+#  ?let @routineMapIR unused inProcedureMapIR
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  ioLLVMcode += llvmTitleComment (!"Init")
+#  for init in self do
+#    ioLLVMcode += "define internal void @init." + init.mPriority + " ("
+#    if init.mSelfType != .null then
+#      ioLLVMcode += [[init.mSelfType kind] llvmTypeName] + " * %self"
 #    end
-#    if generate then
-      ioLLVMcode += "define internal void @init." + init.mPriority + " ("
-      if init.mSelfType != .null then
-        ioLLVMcode += [[init.mSelfType kind] llvmTypeName] + " * %self"
-      end
-      ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-      for (variable llvmTypeName) in init.mAllocaList do
-        ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
-      end
-      [init.mInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-      ioLLVMcode += "  ret void\n"
-      ioLLVMcode += "}\n\n"
-      ioLLVMcode += llvmSeparatorLine () + "\n"
+#    ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
+#    for (variable llvmTypeName) in init.mAllocaList do
+#      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
 #    end
-  end
-  ioLLVMcode += "define internal void @init ()" + llvmAttributeFunction () + "{\n"
-  for init in self do
-#    @bool generate 
-#    if [init.mInitRequiredByProcList length] == 0 then
-#      generate = true
-#    else
-#      generate = false
-#      for (routineMangledName) in init.mInitRequiredByProcList while not generate do
-#        generate = [inProcedureMapIR hasKey !routineMangledName.string]
-#      end
+#    [init.mInstructionListIR instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#    ioLLVMcode += "  ret void\n"
+#    ioLLVMcode += "}\n\n"
+#    ioLLVMcode += llvmSeparatorLine () + "\n"
+#  end
+#  ioLLVMcode += "define internal void @init ()" + llvmAttributeFunction () + "{\n"
+#  for init in self do
+#    ioLLVMcode += "  call void @init." + init.mPriority + " ("
+#    if init.mSelfType != .null then
+#      ioLLVMcode += [[init.mSelfType kind] llvmTypeName] + " * @" + llvmNameForGlobalVariable (!init.mGlobalVariable)
 #    end
-#    if generate then
-      ioLLVMcode += "  call void @init." + init.mPriority + " ("
-      if init.mSelfType != .null then
-        ioLLVMcode += [[init.mSelfType kind] llvmTypeName] + " * @" + llvmNameForGlobalVariable (!init.mGlobalVariable)
-      end
-      ioLLVMcode += ")\n"
-#    end
-  end
-  ioLLVMcode += "  ret void\n"
-  ioLLVMcode += "}\n\n"
-}
+#    ioLLVMcode += ")\n"
+#  end
+#  ioLLVMcode += "  ret void\n"
+#  ioLLVMcode += "}\n\n"
+#}

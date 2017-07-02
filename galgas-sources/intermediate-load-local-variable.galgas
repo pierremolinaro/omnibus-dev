@@ -17,25 +17,25 @@ class @loadLocalVariableIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadLocalVariableIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  let llvmType = [mTargetValue llvmTypeName]
-  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
-  if mVolatile then
-    ioLLVMcode += "volatile "
-  end
-  ioLLVMcode += llvmType + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mVariableName) + "\n"
-}
+#override method @loadLocalVariableIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+#  let llvmType = [mTargetValue llvmTypeName]
+#  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
+#  if mVolatile then
+#    ioLLVMcode += "volatile "
+#  end
+#  ioLLVMcode += llvmType + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mVariableName) + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadLocalVariableIR enterAccessibleEntities 
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
+#override method @loadLocalVariableIR enterAccessibleEntities 
+#  ?!@accessibleEntities unused ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

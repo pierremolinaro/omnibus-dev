@@ -23,27 +23,27 @@ class @getPropertyReferenceFromSelfIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @getPropertyReferenceFromSelfIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  let llvmType = [[mSelfType kind] llvmTypeName]
-  ioLLVMcode += "  " + [mTarget llvmName]
-  ioLLVMcode += " = call " + [mTarget llvmTypeName] + "* @\"" + llvmType + ".access." + mPropertyName
-  ioLLVMcode += "\" (" + llvmType + " * %self) ; " + mPropertyName + "\n"
-
-#  ioLLVMcode += ";  " + [mTarget llvmName] + " = getelementptr inbounds "
-#  ioLLVMcode += llvmType + ", " + llvmType + " * %self, i32 0, i32 " + mPropertyIndex
-#  ioLLVMcode += " ; " + mPropertyName + "\n"
-}
+#override method @getPropertyReferenceFromSelfIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+#  let llvmType = [[mSelfType kind] llvmTypeName]
+#  ioLLVMcode += "  " + [mTarget llvmName]
+#  ioLLVMcode += " = call " + [mTarget llvmTypeName] + "* @\"" + llvmType + ".access." + mPropertyName
+#  ioLLVMcode += "\" (" + llvmType + " * %self) ; " + mPropertyName + "\n"
+#
+##  ioLLVMcode += ";  " + [mTarget llvmName] + " = getelementptr inbounds "
+##  ioLLVMcode += llvmType + ", " + llvmType + " * %self, i32 0, i32 " + mPropertyIndex
+##  ioLLVMcode += " ; " + mPropertyName + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @getPropertyReferenceFromSelfIR enterAccessibleEntities
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
+#override method @getPropertyReferenceFromSelfIR enterAccessibleEntities
+#  ?!@accessibleEntities unused ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

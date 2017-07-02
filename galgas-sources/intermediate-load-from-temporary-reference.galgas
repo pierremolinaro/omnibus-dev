@@ -17,25 +17,25 @@ class @loadFromTemporaryReferenceIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadFromTemporaryReferenceIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
-{
-  let llvmType = [mTargetValue llvmTypeName]
-  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
-  if mVolatile then
-    ioLLVMcode += "volatile "
-  end
-  ioLLVMcode += llvmType + ", " + llvmType + " * %" + mLLVMName + "\n"
-}
+#override method @loadFromTemporaryReferenceIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext unused inGenerationContext
+#  ?!@generationAdds unused ioGenerationAdds
+#{
+#  let llvmType = [mTargetValue llvmTypeName]
+#  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
+#  if mVolatile then
+#    ioLLVMcode += "volatile "
+#  end
+#  ioLLVMcode += llvmType + ", " + llvmType + " * %" + mLLVMName + "\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadFromTemporaryReferenceIR enterAccessibleEntities 
-  ?!@accessibleEntities unused ioAccessibleEntities
-  ?!@uint unused ioMaxBranchOfOnInstructions
-{
-}
+#override method @loadFromTemporaryReferenceIR enterAccessibleEntities 
+#  ?!@accessibleEntities unused ioAccessibleEntities
+#  ?!@uint unused ioMaxBranchOfOnInstructions
+#{
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

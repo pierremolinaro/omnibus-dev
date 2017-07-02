@@ -421,142 +421,142 @@ class @syncInstructionIR : @abstractInstructionIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @syncInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
-{
-  ioGenerationAdds.mUsesGuards = true
-  let startLabel = "select." + ioGenerationAdds.mUniqueIndex
-  ioGenerationAdds.mUniqueIndex ++
-#---
-  ioLLVMcode += "  br label %" + startLabel + ".start\n\n"
-  let startLabelName = startLabel + ".start" 
-  ioLLVMcode += startLabelName + ":\n"
-  let exitLabelName = startLabel + ".exit"
-  let selectLabelName = startLabel + ".select"
-  let errorLabelName = startLabel + ".error"
-  var currentStartBranchLabel = startLabelName
-  for branch in mOnInstructionBranchListIR do (idx)
-    let acceptanceVarName = "%" + startLabel + ".accept." + idx
-    @bool isWhileGuardedCommand
-    switch branch.mGuardedCommand
-    case synchronization (isWhileCommand guardMangledName * guardInstructionGenerationList effectiveParameterListIR) :
-      isWhileGuardedCommand = isWhileCommand
-      [guardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-      ioLLVMcode += "  " + acceptanceVarName + " = call i1 @" + llvmNameForGuardCall (!guardMangledName)
-      ioLLVMcode += " ("
-      for () in effectiveParameterListIR do
-        switch mEffectiveParameterPassingMode
-        case input:
-          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
-        case output:
-          ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
-        case outputInput:
-          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
-        end
-      between
-        ioLLVMcode += ", "
-      end
-      ioLLVMcode += ")\n"
-    case booleanGuard (isWhileCommand instructionGenerationList @objectIR result) :
-      isWhileGuardedCommand = isWhileCommand
-      [instructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-      let acceptedLabelName = startLabel + "." + idx + ".true"
-      let rejectedLabelName = startLabel + "." + idx + ".false"
-      ioLLVMcode += "  br i1 " + [result llvmName] + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
-      ioLLVMcode += acceptedLabelName + ":\n"
-      ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
-      ioLLVMcode += "  br label %" + rejectedLabelName + "\n\n"
-      ioLLVMcode += rejectedLabelName + ":\n"
-      ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + [result llvmName] + ", 0 ; assignment\n"
-    case boolAndSync (isWhileCommand expInstructionList expResult guardMangledName * guardInstructionList effectiveParameterList) :
-      isWhileGuardedCommand = isWhileCommand
-      [expInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-      let testOkLabelName = startLabel + "." + idx + ".boolexp.true"
-      let testExitLabelName = startLabel + "." + idx + ".test.exit"
-      ioLLVMcode += "  br i1 " + [expResult llvmName] + ", label %" + testOkLabelName + ", label %" + testExitLabelName + "\n\n"
-      ioLLVMcode += testOkLabelName + ":\n"
-      [guardInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-      let guardAcceptationLabelName = startLabel + "." + idx + ".guard.acceptation"
-      ioLLVMcode += "  %" + guardAcceptationLabelName + " = call i1 @" + llvmNameForGuardCall (!guardMangledName)
-      ioLLVMcode += " ("
-      for () in effectiveParameterList do
-        switch mEffectiveParameterPassingMode
-        case input:
-          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
-        case output:
-          ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
-        case outputInput:
-          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
-        end
-      between
-        ioLLVMcode += ", "
-      end
-      ioLLVMcode += ")\n"
-      ioLLVMcode += "  br label %" + testExitLabelName + "\n\n"
-      ioLLVMcode += testExitLabelName + ":\n"
-      ioLLVMcode += "  " + acceptanceVarName + " = phi i1 "
-      ioLLVMcode += "[%" + guardAcceptationLabelName + ", %" + testOkLabelName + "], "
-      ioLLVMcode += "[false, %" + currentStartBranchLabel + "]\n"
-    end
-    let acceptedLabelName = startLabel + ".accepted." + idx
-    let rejectedLabelName = startLabel + ".rejected." + idx
-    ioLLVMcode += "  br i1 " + acceptanceVarName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
-    ioLLVMcode += acceptedLabelName + ":\n"
-    [branch.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-    ioLLVMcode += "  br label %" + if isWhileGuardedCommand then startLabelName else exitLabelName end + "\n\n"
-    ioLLVMcode += rejectedLabelName + ":\n"
-    currentStartBranchLabel = rejectedLabelName
-  end
-  ioLLVMcode += "  %" + selectLabelName + " = call i1 @" + llvmNameForServiceCall (!waitForGuardChangeFunctionName ()) + " ()\n"
-  ioLLVMcode += "  br i1 %" + selectLabelName + ", label %" + startLabelName + ", label %" + errorLabelName + "\n\n"
-  ioLLVMcode += errorLabelName + ":\n" # Error, all guards are closed
-  if [option plm_options.noPanicGeneration value] then
-    ioLLVMcode += "  br label %" + exitLabelName + "\n\n" # No panic generation, pass instruction
-  else
-    [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
-      ![[[mSelectInstructionLocation file] lastPathComponent] stringByDeletingPathExtension]
-      ?let staticStringIndex
-    ]
-    ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
-    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mSelectInstructionLocation line] + ", "
-    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForClosedSync () + ")\n"
-    ioLLVMcode += "  unreachable\n\n"
-  end
-  ioLLVMcode += exitLabelName + ":\n"
-}
+#override method @syncInstructionIR llvmInstructionCode
+#  ?!@string ioLLVMcode
+#  ?let @generationContext inGenerationContext
+#  ?!@generationAdds ioGenerationAdds
+#{
+#  ioGenerationAdds.mUsesGuards = true
+#  let startLabel = "select." + ioGenerationAdds.mUniqueIndex
+#  ioGenerationAdds.mUniqueIndex ++
+##---
+#  ioLLVMcode += "  br label %" + startLabel + ".start\n\n"
+#  let startLabelName = startLabel + ".start" 
+#  ioLLVMcode += startLabelName + ":\n"
+#  let exitLabelName = startLabel + ".exit"
+#  let selectLabelName = startLabel + ".select"
+#  let errorLabelName = startLabel + ".error"
+#  var currentStartBranchLabel = startLabelName
+#  for branch in mOnInstructionBranchListIR do (idx)
+#    let acceptanceVarName = "%" + startLabel + ".accept." + idx
+#    @bool isWhileGuardedCommand
+#    switch branch.mGuardedCommand
+#    case synchronization (isWhileCommand guardMangledName * guardInstructionGenerationList effectiveParameterListIR) :
+#      isWhileGuardedCommand = isWhileCommand
+#      [guardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#      ioLLVMcode += "  " + acceptanceVarName + " = call i1 @" + llvmNameForGuardCall (!guardMangledName)
+#      ioLLVMcode += " ("
+#      for () in effectiveParameterListIR do
+#        switch mEffectiveParameterPassingMode
+#        case input:
+#          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+#        case output:
+#          ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
+#        case outputInput:
+#          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+#        end
+#      between
+#        ioLLVMcode += ", "
+#      end
+#      ioLLVMcode += ")\n"
+#    case booleanGuard (isWhileCommand instructionGenerationList @objectIR result) :
+#      isWhileGuardedCommand = isWhileCommand
+#      [instructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#      let acceptedLabelName = startLabel + "." + idx + ".true"
+#      let rejectedLabelName = startLabel + "." + idx + ".false"
+#      ioLLVMcode += "  br i1 " + [result llvmName] + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
+#      ioLLVMcode += acceptedLabelName + ":\n"
+#      ioLLVMcode += "  call void @noteGuardHasBeenAccepted ()\n"
+#      ioLLVMcode += "  br label %" + rejectedLabelName + "\n\n"
+#      ioLLVMcode += rejectedLabelName + ":\n"
+#      ioLLVMcode += "  " + acceptanceVarName + " = or i1 " + [result llvmName] + ", 0 ; assignment\n"
+#    case boolAndSync (isWhileCommand expInstructionList expResult guardMangledName * guardInstructionList effectiveParameterList) :
+#      isWhileGuardedCommand = isWhileCommand
+#      [expInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#      let testOkLabelName = startLabel + "." + idx + ".boolexp.true"
+#      let testExitLabelName = startLabel + "." + idx + ".test.exit"
+#      ioLLVMcode += "  br i1 " + [expResult llvmName] + ", label %" + testOkLabelName + ", label %" + testExitLabelName + "\n\n"
+#      ioLLVMcode += testOkLabelName + ":\n"
+#      [guardInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#      let guardAcceptationLabelName = startLabel + "." + idx + ".guard.acceptation"
+#      ioLLVMcode += "  %" + guardAcceptationLabelName + " = call i1 @" + llvmNameForGuardCall (!guardMangledName)
+#      ioLLVMcode += " ("
+#      for () in effectiveParameterList do
+#        switch mEffectiveParameterPassingMode
+#        case input:
+#          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+#        case output:
+#          ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
+#        case outputInput:
+#          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+#        end
+#      between
+#        ioLLVMcode += ", "
+#      end
+#      ioLLVMcode += ")\n"
+#      ioLLVMcode += "  br label %" + testExitLabelName + "\n\n"
+#      ioLLVMcode += testExitLabelName + ":\n"
+#      ioLLVMcode += "  " + acceptanceVarName + " = phi i1 "
+#      ioLLVMcode += "[%" + guardAcceptationLabelName + ", %" + testOkLabelName + "], "
+#      ioLLVMcode += "[false, %" + currentStartBranchLabel + "]\n"
+#    end
+#    let acceptedLabelName = startLabel + ".accepted." + idx
+#    let rejectedLabelName = startLabel + ".rejected." + idx
+#    ioLLVMcode += "  br i1 " + acceptanceVarName + ", label %" + acceptedLabelName + ", label %" + rejectedLabelName + "\n\n"
+#    ioLLVMcode += acceptedLabelName + ":\n"
+#    [branch.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+#    ioLLVMcode += "  br label %" + if isWhileGuardedCommand then startLabelName else exitLabelName end + "\n\n"
+#    ioLLVMcode += rejectedLabelName + ":\n"
+#    currentStartBranchLabel = rejectedLabelName
+#  end
+#  ioLLVMcode += "  %" + selectLabelName + " = call i1 @" + llvmNameForServiceCall (!waitForGuardChangeFunctionName ()) + " ()\n"
+#  ioLLVMcode += "  br i1 %" + selectLabelName + ", label %" + startLabelName + ", label %" + errorLabelName + "\n\n"
+#  ioLLVMcode += errorLabelName + ":\n" # Error, all guards are closed
+#  if [option plm_options.noPanicGeneration value] then
+#    ioLLVMcode += "  br label %" + exitLabelName + "\n\n" # No panic generation, pass instruction
+#  else
+#    [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+#      ![[[mSelectInstructionLocation file] lastPathComponent] stringByDeletingPathExtension]
+#      ?let staticStringIndex
+#    ]
+#    ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+#    ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mSelectInstructionLocation line] + ", "
+#    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + panicCodeForClosedSync () + ")\n"
+#    ioLLVMcode += "  unreachable\n\n"
+#  end
+#  ioLLVMcode += exitLabelName + ":\n"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @syncInstructionIR enterAccessibleEntities
-  ?!@accessibleEntities ioAccessibleEntities
-  ?!@uint ioMaxBranchOfOnInstructions
-{
-  let branchCount = [mOnInstructionBranchListIR length]
-  if ioMaxBranchOfOnInstructions < branchCount then
-    ioMaxBranchOfOnInstructions = branchCount
-  end
-  for branch in mOnInstructionBranchListIR do
-    [branch.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-    switch branch.mGuardedCommand
-    case synchronization (* guardMangledName optionalReceiverName guardInstructionGenerationList *) :
-      [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-      ioAccessibleEntities.mGuardSet += !guardMangledName
-      if optionalReceiverName != "" then
-        ioAccessibleEntities.mGlobalVariableSet += !optionalReceiverName
-      end
-    case booleanGuard (* instructionGenerationList *) :
-      [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-    case boolAndSync (* instructionGenerationList * guardMangledName optionalReceiverName guardInstructionGenerationList *) :
-      [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-      [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-      ioAccessibleEntities.mGuardSet += !guardMangledName
-      if optionalReceiverName != "" then
-        ioAccessibleEntities.mGlobalVariableSet += !optionalReceiverName
-      end
-    end
-  end
-}
+#override method @syncInstructionIR enterAccessibleEntities
+#  ?!@accessibleEntities ioAccessibleEntities
+#  ?!@uint ioMaxBranchOfOnInstructions
+#{
+#  let branchCount = [mOnInstructionBranchListIR length]
+#  if ioMaxBranchOfOnInstructions < branchCount then
+#    ioMaxBranchOfOnInstructions = branchCount
+#  end
+#  for branch in mOnInstructionBranchListIR do
+#    [branch.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#    switch branch.mGuardedCommand
+#    case synchronization (* guardMangledName optionalReceiverName guardInstructionGenerationList *) :
+#      [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#      ioAccessibleEntities.mGuardSet += !guardMangledName
+#      if optionalReceiverName != "" then
+#        ioAccessibleEntities.mGlobalVariableSet += !optionalReceiverName
+#      end
+#    case booleanGuard (* instructionGenerationList *) :
+#      [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#    case boolAndSync (* instructionGenerationList * guardMangledName optionalReceiverName guardInstructionGenerationList *) :
+#      [instructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#      [guardInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+#      ioAccessibleEntities.mGuardSet += !guardMangledName
+#      if optionalReceiverName != "" then
+#        ioAccessibleEntities.mGlobalVariableSet += !optionalReceiverName
+#      end
+#    end
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

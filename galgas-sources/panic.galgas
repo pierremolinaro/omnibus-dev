@@ -98,91 +98,91 @@ map @panicRoutinePriorityMap {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @panicClauseListAST-element panicSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  let routineNameForInvocationGraph = panicNameForInvocationGraph (!if mIsSetup then "setup" else "loop" end !mPriority)
-#--- Variable map
-  initialVariableMap (
-    !context:inContext
-    !mode:.panicMode
-    !globalsAreConstant:false
-    !returnTypeName:["" nowhere]
-    ?@unifiedSymbolMapEx variableMap
-    ?@universalPropertyAndRoutineMapForContext universalMap
-  )
-#--- Insert predefined input arguments
-  let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
-  let codeArg = @lstring.new {!"CODE" !mPriority.location}
-  [!?universalMap insertUsedLocalConstant !codeArg !.localVariableReference {!type:inContext.mPanicCodeType !plmName:codeArg}]
-  [!?variableMap insertUsedConstantInputFormalArgument
-    !lkey:codeArg
-    !type:inContext.mPanicCodeType
-    !readAccessAllowed:true
-    !objectIR:.localVariableReference {!type:inContext.mPanicCodeType !plmName:codeArg}
-    !copyable:[inContext.mPanicCodeType copyable]
-    !canBeUsedAsInputParameter:false
-  ]
-  let fileArg = @lstring.new {!"FILE" !mPriority.location}
-  [!?universalMap insertUsedLocalConstant !fileArg !.localVariableReference {!type:StaticStringType !plmName:fileArg}]
-  [!?variableMap insertUsedConstantInputFormalArgument
-    !lkey:fileArg
-    !type:StaticStringType
-    !readAccessAllowed:true
-    !objectIR:.localVariableReference {!type:StaticStringType !plmName:fileArg}
-    !copyable:[StaticStringType copyable]
-    !canBeUsedAsInputParameter:false
-  ]
-  let lineArg = @lstring.new {!"LINE" !mPriority.location}
-  [!?universalMap insertUsedLocalConstant !lineArg !.localVariableReference {!type:inContext.mPanicLineType !plmName:lineArg}]
-  [!?variableMap insertUsedConstantInputFormalArgument
-    !lkey:lineArg
-    !type:inContext.mPanicLineType
-    !readAccessAllowed:true
-    !objectIR:.localVariableReference {!type:inContext.mPanicLineType !plmName:lineArg}
-    !copyable:[inContext.mPanicLineType copyable]
-    !canBeUsedAsInputParameter:false
-  ]
-#---
-  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-      !routineNameForInvocationGraph
-      !routineNameForInvocationGraph
-    ]
-  end
-#--- Analyze instruction list
-  @instructionListIR instructionGenerationList = {}
-  @allocaList initAllocaList = {}
-  [mPanicInstructionList analyzeRoutineInstructionList
-    !self:.null
-    !directAccessToPropertiesAllowed:false
-    !propertiesAreMutable:false
-    !routineNameForInvocationGraph:routineNameForInvocationGraph
-    !context:inContext
-    !mode:.panicMode
-    !?temporary:ioTemporaries
-    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-    !?variableMap:variableMap
-    !?variableMap:universalMap
-    !?alloca:initAllocaList
-    !?generatedCode:instructionGenerationList
-  ]
-#--- End of variableMap
-#  [variableMap deinitTopLevelVariables]
-  [universalMap checkLocalVariableFinalState]
-  [variableMap checkAutomatonStates !mEndOfPanicInstructions]
-  drop variableMap
-#--- Code generation
-  if mIsSetup then
-    [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]
-    ioIntermediateCodeStruct.mPanicSetupInstructionListIR += instructionGenerationList
-  else
-    [!?ioTemporaries.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mPriority.location}]
-    ioIntermediateCodeStruct.mPanicLoopInstructionListIR += instructionGenerationList
-  end
-}
+#method @panicClauseListAST-element panicSemanticAnalysis
+#  ?context:let @semanticContext inContext
+#  ?!temporary:@semanticTemporariesStruct ioTemporaries
+#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+#{
+#  let routineNameForInvocationGraph = panicNameForInvocationGraph (!if mIsSetup then "setup" else "loop" end !mPriority)
+##--- Variable map
+#  initialVariableMap (
+#    !context:inContext
+#    !mode:.panicMode
+#    !globalsAreConstant:false
+#    !returnTypeName:["" nowhere]
+#    ?@unifiedSymbolMapEx variableMap
+#    ?@universalPropertyAndRoutineMapForContext universalMap
+#  )
+##--- Insert predefined input arguments
+#  let StaticStringType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap ![staticStringTypeName () nowhere]}
+#  let codeArg = @lstring.new {!"CODE" !mPriority.location}
+#  [!?universalMap insertUsedLocalConstant !codeArg !.localVariableReference {!type:inContext.mPanicCodeType !plmName:codeArg}]
+#  [!?variableMap insertUsedConstantInputFormalArgument
+#    !lkey:codeArg
+#    !type:inContext.mPanicCodeType
+#    !readAccessAllowed:true
+#    !objectIR:.localVariableReference {!type:inContext.mPanicCodeType !plmName:codeArg}
+#    !copyable:[inContext.mPanicCodeType copyable]
+#    !canBeUsedAsInputParameter:false
+#  ]
+#  let fileArg = @lstring.new {!"FILE" !mPriority.location}
+#  [!?universalMap insertUsedLocalConstant !fileArg !.localVariableReference {!type:StaticStringType !plmName:fileArg}]
+#  [!?variableMap insertUsedConstantInputFormalArgument
+#    !lkey:fileArg
+#    !type:StaticStringType
+#    !readAccessAllowed:true
+#    !objectIR:.localVariableReference {!type:StaticStringType !plmName:fileArg}
+#    !copyable:[StaticStringType copyable]
+#    !canBeUsedAsInputParameter:false
+#  ]
+#  let lineArg = @lstring.new {!"LINE" !mPriority.location}
+#  [!?universalMap insertUsedLocalConstant !lineArg !.localVariableReference {!type:inContext.mPanicLineType !plmName:lineArg}]
+#  [!?variableMap insertUsedConstantInputFormalArgument
+#    !lkey:lineArg
+#    !type:inContext.mPanicLineType
+#    !readAccessAllowed:true
+#    !objectIR:.localVariableReference {!type:inContext.mPanicLineType !plmName:lineArg}
+#    !copyable:[inContext.mPanicLineType copyable]
+#    !canBeUsedAsInputParameter:false
+#  ]
+##---
+#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+#      !routineNameForInvocationGraph
+#      !routineNameForInvocationGraph
+#    ]
+#  end
+##--- Analyze instruction list
+#  @instructionListIR instructionGenerationList = {}
+#  @allocaList initAllocaList = {}
+#  [mPanicInstructionList analyzeRoutineInstructionList
+#    !self:.null
+#    !directAccessToPropertiesAllowed:false
+#    !propertiesAreMutable:false
+#    !routineNameForInvocationGraph:routineNameForInvocationGraph
+#    !context:inContext
+#    !mode:.panicMode
+#    !?temporary:ioTemporaries
+#    !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+#    !?variableMap:variableMap
+#    !?variableMap:universalMap
+#    !?alloca:initAllocaList
+#    !?generatedCode:instructionGenerationList
+#  ]
+##--- End of variableMap
+##  [variableMap deinitTopLevelVariables]
+#  [universalMap checkLocalVariableFinalState]
+#  [variableMap checkAutomatonStates !mEndOfPanicInstructions]
+#  drop variableMap
+##--- Code generation
+#  if mIsSetup then
+#    [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !.new{![mPriority string] !mPriority.location}]
+#    ioIntermediateCodeStruct.mPanicSetupInstructionListIR += instructionGenerationList
+#  else
+#    [!?ioTemporaries.mPanicLoopRoutinePriorityMap insertLoopKey !.new{![mPriority string] !mPriority.location}]
+#    ioIntermediateCodeStruct.mPanicLoopInstructionListIR += instructionGenerationList
+#  end
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
