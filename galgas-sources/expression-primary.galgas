@@ -717,8 +717,9 @@ proc handleMethodCallInExpressionNew
   #--- Enter in invocation graph
     [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
   case propertyIndirectCall (propertyIndex) :
+    log inCurrentPointerIR
     let propertyReference = @objectIR.temporaryReference {
-       !type:[inCurrentPointerIR type] # TYPE IS IRRELEVANT
+       !type:[inCurrentPointerIR type] #.function {!descriptor:routineDescriptor} #  TYPE IS IRRELEVANT
        !llvmName:.new {!"temp." + ioTemporaries.mTemporaryIndex !inMethodName}
        !sliceMap:{}
        !volatile:false

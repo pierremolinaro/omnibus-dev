@@ -11,6 +11,19 @@
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
+//                                           Function 'getInfixOperatorMap'                                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+class GALGAS_infixOperatorMap function_getInfixOperatorMap (const class GALGAS_infixOperator & constinArgument0,
+                                                            const class GALGAS_semanticContext & constinArgument1,
+                                                            const class GALGAS_mode & constinArgument2,
+                                                            const class GALGAS_location & constinArgument3,
+                                                            class C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
 //                                       Routine 'handleArrayAccessInExpression'                                       *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
@@ -480,20 +493,5 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class C_Compi
 class GALGAS_string function_linkForHTMLTypeMap (const class GALGAS_string & constinArgument0,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                             Routine 'semanticAnalysis'                                              *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
-                               const class GALGAS_ast constinArgument1,
-                               const class GALGAS_semanticContext constinArgument2,
-                               const class GALGAS_location constinArgument3,
-                               const class GALGAS_staticStringMap constinArgument4,
-                               class GALGAS_intermediateCodeStruct & outArgument5,
-                               class C_Compiler * inCompiler
-                               COMMA_LOCATION_ARGS) ;
 
 #endif

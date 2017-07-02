@@ -457,7 +457,7 @@ override method @structureDeclaration semanticAnalysis
     !?intermediateCode:ioIntermediateCodeStruct
   ]
 #--- Generate property access
-  generatePropertyAccess (!structureType:structureType !?intermediateCode:ioIntermediateCodeStruct)
+  generatePropertyAccess (!structureType:[structureType kind] !?intermediateCode:ioIntermediateCodeStruct)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -519,7 +519,7 @@ method @structureDeclaration functionSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @propertyAccessRoutineList {
-  @unifiedTypeMap-proxy mStructureType
+  @typeKind mStructureKind
   @unifiedTypeMap-proxy mPropertyType
   @string mPropertyName
   @uint mPropertyIndex
@@ -528,15 +528,14 @@ list @propertyAccessRoutineList {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc generatePropertyAccess
-  ?structureType:let @unifiedTypeMap-proxy inStructureType
+  ?structureType:let @typeKind inTypeKind
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [[inStructureType kind] structure ?1* ?propertyMap:let @propertyMap propertyMap ?1* ?propertyList:@propertyList propertyList ?1*]
+  [inTypeKind structure ?1* ?propertyMap:let @propertyMap propertyMap ?1* ?propertyList:@propertyList propertyList ?1*]
   for (propertyName * objectIR) in propertyMap do
- #   [propertyMap searchKey !propertyName ?* ?let @objectIR objectIR]
     [objectIR property ?type:let propertyType ?plmName:* ?index:@uint index]
     ioIntermediateCodeStruct.mPropertyAccessRoutineList += 
-      !inStructureType
+      !inTypeKind
       !propertyType
       !propertyName.string
       !index
@@ -546,8 +545,8 @@ proc generatePropertyAccess
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
-  for (structureType propertyType propertyName propertyIndex) in self do
-    let structTypeName = [[structureType kind] llvmTypeName]
+  for (structureKind propertyType propertyName propertyIndex) in self do
+    let structTypeName = [structureKind llvmTypeName]
     let propTypeName = [[propertyType kind] llvmTypeName]
     ioLLVMcode += llvmTitleComment (!"Access property '" + propertyName + "' of structure " + structTypeName)
     ioLLVMcode += "define internal " + propTypeName

@@ -24,12 +24,14 @@ override method @getPropertyReferenceIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += ";  " + [mTarget llvmName]
+#--- New code: call property access method
+  ioLLVMcode += "  " + [mTarget llvmName]
   ioLLVMcode += " = call " + [mTarget llvmTypeName] + "* @\"" + [mSource llvmTypeName] + ".access." + mPLMname
   ioLLVMcode += "\" (" + [mSource llvmTypeName] + " * " + [mSource llvmName] + ") ; " + mPLMname + "\n"
 
+#--- Old code: property direct access
   let llvmType = [[[mSource type] kind] llvmTypeName]
-  ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
+  ioLLVMcode += ";  " + [mTarget llvmName] + " = getelementptr inbounds "
   ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mPropertyIndex
   ioLLVMcode += " ; " + mPLMname + "\n"
 }
