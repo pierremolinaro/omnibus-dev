@@ -3385,7 +3385,7 @@ class cCollectionElement_propertyAccessRoutineList : public cCollectionElement {
   public : GALGAS_propertyAccessRoutineList_2D_element mObject ;
 
 //--- Constructor
-  public : cCollectionElement_propertyAccessRoutineList (const GALGAS_unifiedTypeMap_2D_proxy & in_mStructureType,
+  public : cCollectionElement_propertyAccessRoutineList (const GALGAS_typeKind & in_mStructureKind,
                                                          const GALGAS_unifiedTypeMap_2D_proxy & in_mPropertyType,
                                                          const GALGAS_string & in_mPropertyName,
                                                          const GALGAS_uint & in_mPropertyIndex
@@ -3406,13 +3406,13 @@ class cCollectionElement_propertyAccessRoutineList : public cCollectionElement {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-cCollectionElement_propertyAccessRoutineList::cCollectionElement_propertyAccessRoutineList (const GALGAS_unifiedTypeMap_2D_proxy & in_mStructureType,
+cCollectionElement_propertyAccessRoutineList::cCollectionElement_propertyAccessRoutineList (const GALGAS_typeKind & in_mStructureKind,
                                                                                             const GALGAS_unifiedTypeMap_2D_proxy & in_mPropertyType,
                                                                                             const GALGAS_string & in_mPropertyName,
                                                                                             const GALGAS_uint & in_mPropertyIndex
                                                                                             COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mStructureType, in_mPropertyType, in_mPropertyName, in_mPropertyIndex) {
+mObject (in_mStructureKind, in_mPropertyType, in_mPropertyName, in_mPropertyIndex) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3425,7 +3425,7 @@ bool cCollectionElement_propertyAccessRoutineList::isValid (void) const {
 
 cCollectionElement * cCollectionElement_propertyAccessRoutineList::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_propertyAccessRoutineList (mObject.mProperty_mStructureType, mObject.mProperty_mPropertyType, mObject.mProperty_mPropertyName, mObject.mProperty_mPropertyIndex COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_propertyAccessRoutineList (mObject.mProperty_mStructureKind, mObject.mProperty_mPropertyType, mObject.mProperty_mPropertyName, mObject.mProperty_mPropertyIndex COMMA_HERE)) ;
   return result ;
 }
 
@@ -3434,8 +3434,8 @@ cCollectionElement * cCollectionElement_propertyAccessRoutineList::copy (void) {
 void cCollectionElement_propertyAccessRoutineList::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mStructureType" ":" ;
-  mObject.mProperty_mStructureType.description (ioString, inIndentation) ;
+  ioString << "mStructureKind" ":" ;
+  mObject.mProperty_mStructureKind.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
   ioString << "mPropertyType" ":" ;
@@ -3478,7 +3478,7 @@ GALGAS_propertyAccessRoutineList GALGAS_propertyAccessRoutineList::constructor_e
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_propertyAccessRoutineList GALGAS_propertyAccessRoutineList::constructor_listWithValue (const GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+GALGAS_propertyAccessRoutineList GALGAS_propertyAccessRoutineList::constructor_listWithValue (const GALGAS_typeKind & inOperand0,
                                                                                               const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                                                               const GALGAS_string & inOperand2,
                                                                                               const GALGAS_uint & inOperand3
@@ -3496,13 +3496,13 @@ GALGAS_propertyAccessRoutineList GALGAS_propertyAccessRoutineList::constructor_l
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_propertyAccessRoutineList::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mStructureType,
+                                                                  const GALGAS_typeKind & in_mStructureKind,
                                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mPropertyType,
                                                                   const GALGAS_string & in_mPropertyName,
                                                                   const GALGAS_uint & in_mPropertyIndex
                                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement_propertyAccessRoutineList * p = NULL ;
-  macroMyNew (p, cCollectionElement_propertyAccessRoutineList (in_mStructureType,
+  macroMyNew (p, cCollectionElement_propertyAccessRoutineList (in_mStructureKind,
                                                                in_mPropertyType,
                                                                in_mPropertyName,
                                                                in_mPropertyIndex COMMA_THERE)) ;
@@ -3512,7 +3512,7 @@ void GALGAS_propertyAccessRoutineList::makeAttributesFromObjects (capCollectionE
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyAccessRoutineList::addAssign_operation (const GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+void GALGAS_propertyAccessRoutineList::addAssign_operation (const GALGAS_typeKind & inOperand0,
                                                             const GALGAS_unifiedTypeMap_2D_proxy & inOperand1,
                                                             const GALGAS_string & inOperand2,
                                                             const GALGAS_uint & inOperand3
@@ -3529,7 +3529,7 @@ void GALGAS_propertyAccessRoutineList::addAssign_operation (const GALGAS_unified
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyAccessRoutineList::setter_insertAtIndex (const GALGAS_unifiedTypeMap_2D_proxy inOperand0,
+void GALGAS_propertyAccessRoutineList::setter_insertAtIndex (const GALGAS_typeKind inOperand0,
                                                              const GALGAS_unifiedTypeMap_2D_proxy inOperand1,
                                                              const GALGAS_string inOperand2,
                                                              const GALGAS_uint inOperand3,
@@ -3548,7 +3548,7 @@ void GALGAS_propertyAccessRoutineList::setter_insertAtIndex (const GALGAS_unifie
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyAccessRoutineList::setter_removeAtIndex (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+void GALGAS_propertyAccessRoutineList::setter_removeAtIndex (GALGAS_typeKind & outOperand0,
                                                              GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
                                                              GALGAS_string & outOperand2,
                                                              GALGAS_uint & outOperand3,
@@ -3566,7 +3566,7 @@ void GALGAS_propertyAccessRoutineList::setter_removeAtIndex (GALGAS_unifiedTypeM
       outOperand3.drop () ;
     }else{
       macroValidSharedObject (p, cCollectionElement_propertyAccessRoutineList) ;
-      outOperand0 = p->mObject.mProperty_mStructureType ;
+      outOperand0 = p->mObject.mProperty_mStructureKind ;
       outOperand1 = p->mObject.mProperty_mPropertyType ;
       outOperand2 = p->mObject.mProperty_mPropertyName ;
       outOperand3 = p->mObject.mProperty_mPropertyIndex ;
@@ -3576,7 +3576,7 @@ void GALGAS_propertyAccessRoutineList::setter_removeAtIndex (GALGAS_unifiedTypeM
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyAccessRoutineList::setter_popFirst (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+void GALGAS_propertyAccessRoutineList::setter_popFirst (GALGAS_typeKind & outOperand0,
                                                         GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
                                                         GALGAS_string & outOperand2,
                                                         GALGAS_uint & outOperand3,
@@ -3592,7 +3592,7 @@ void GALGAS_propertyAccessRoutineList::setter_popFirst (GALGAS_unifiedTypeMap_2D
     outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_propertyAccessRoutineList) ;
-    outOperand0 = p->mObject.mProperty_mStructureType ;
+    outOperand0 = p->mObject.mProperty_mStructureKind ;
     outOperand1 = p->mObject.mProperty_mPropertyType ;
     outOperand2 = p->mObject.mProperty_mPropertyName ;
     outOperand3 = p->mObject.mProperty_mPropertyIndex ;
@@ -3601,7 +3601,7 @@ void GALGAS_propertyAccessRoutineList::setter_popFirst (GALGAS_unifiedTypeMap_2D
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyAccessRoutineList::setter_popLast (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+void GALGAS_propertyAccessRoutineList::setter_popLast (GALGAS_typeKind & outOperand0,
                                                        GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
                                                        GALGAS_string & outOperand2,
                                                        GALGAS_uint & outOperand3,
@@ -3617,7 +3617,7 @@ void GALGAS_propertyAccessRoutineList::setter_popLast (GALGAS_unifiedTypeMap_2D_
     outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_propertyAccessRoutineList) ;
-    outOperand0 = p->mObject.mProperty_mStructureType ;
+    outOperand0 = p->mObject.mProperty_mStructureKind ;
     outOperand1 = p->mObject.mProperty_mPropertyType ;
     outOperand2 = p->mObject.mProperty_mPropertyName ;
     outOperand3 = p->mObject.mProperty_mPropertyIndex ;
@@ -3626,7 +3626,7 @@ void GALGAS_propertyAccessRoutineList::setter_popLast (GALGAS_unifiedTypeMap_2D_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyAccessRoutineList::method_first (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+void GALGAS_propertyAccessRoutineList::method_first (GALGAS_typeKind & outOperand0,
                                                      GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
                                                      GALGAS_string & outOperand2,
                                                      GALGAS_uint & outOperand3,
@@ -3642,7 +3642,7 @@ void GALGAS_propertyAccessRoutineList::method_first (GALGAS_unifiedTypeMap_2D_pr
     outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_propertyAccessRoutineList) ;
-    outOperand0 = p->mObject.mProperty_mStructureType ;
+    outOperand0 = p->mObject.mProperty_mStructureKind ;
     outOperand1 = p->mObject.mProperty_mPropertyType ;
     outOperand2 = p->mObject.mProperty_mPropertyName ;
     outOperand3 = p->mObject.mProperty_mPropertyIndex ;
@@ -3651,7 +3651,7 @@ void GALGAS_propertyAccessRoutineList::method_first (GALGAS_unifiedTypeMap_2D_pr
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_propertyAccessRoutineList::method_last (GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+void GALGAS_propertyAccessRoutineList::method_last (GALGAS_typeKind & outOperand0,
                                                     GALGAS_unifiedTypeMap_2D_proxy & outOperand1,
                                                     GALGAS_string & outOperand2,
                                                     GALGAS_uint & outOperand3,
@@ -3667,7 +3667,7 @@ void GALGAS_propertyAccessRoutineList::method_last (GALGAS_unifiedTypeMap_2D_pro
     outOperand3.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_propertyAccessRoutineList) ;
-    outOperand0 = p->mObject.mProperty_mStructureType ;
+    outOperand0 = p->mObject.mProperty_mStructureKind ;
     outOperand1 = p->mObject.mProperty_mPropertyType ;
     outOperand2 = p->mObject.mProperty_mPropertyName ;
     outOperand3 = p->mObject.mProperty_mPropertyIndex ;
@@ -3727,15 +3727,15 @@ void GALGAS_propertyAccessRoutineList::plusAssign_operation (const GALGAS_proper
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_propertyAccessRoutineList::getter_mStructureTypeAtIndex (const GALGAS_uint & inIndex,
-                                                                                               C_Compiler * inCompiler
-                                                                                               COMMA_LOCATION_ARGS) const {
+GALGAS_typeKind GALGAS_propertyAccessRoutineList::getter_mStructureKindAtIndex (const GALGAS_uint & inIndex,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyAccessRoutineList * p = (cCollectionElement_propertyAccessRoutineList *) attributes.ptr () ;
-  GALGAS_unifiedTypeMap_2D_proxy result ;
+  GALGAS_typeKind result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_propertyAccessRoutineList) ;
-    result = p->mObject.mProperty_mStructureType ;
+    result = p->mObject.mProperty_mStructureKind ;
   }
   return result ;
 }
@@ -3806,10 +3806,10 @@ GALGAS_propertyAccessRoutineList_2D_element cEnumerator_propertyAccessRoutineLis
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_propertyAccessRoutineList::current_mStructureType (LOCATION_ARGS) const {
+GALGAS_typeKind cEnumerator_propertyAccessRoutineList::current_mStructureKind (LOCATION_ARGS) const {
   const cCollectionElement_propertyAccessRoutineList * p = (const cCollectionElement_propertyAccessRoutineList *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_propertyAccessRoutineList) ;
-  return p->mObject.mProperty_mStructureType ;
+  return p->mObject.mProperty_mStructureKind ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3893,20 +3893,20 @@ void extensionMethod_generateCode (const GALGAS_propertyAccessRoutineList inObje
                                    C_Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_propertyAccessRoutineList temp_0 = inObject ;
-  cEnumerator_propertyAccessRoutineList enumerator_21585 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_21585.hasCurrentObject ()) {
-    GALGAS_string var_structTypeName_21611 = extensionGetter_llvmTypeName (enumerator_21585.current_mStructureType (HERE).getter_kind (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 550)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 550)) ;
-    GALGAS_string var_propTypeName_21670 = extensionGetter_llvmTypeName (enumerator_21585.current_mPropertyType (HERE).getter_kind (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 551)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 551)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Access property '").add_operation (enumerator_21585.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 552)).add_operation (GALGAS_string ("' of structure "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 552)).add_operation (var_structTypeName_21611, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 552)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 552)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 552)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal ").add_operation (var_propTypeName_21670, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 553)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 553)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" * @\"").add_operation (var_structTypeName_21611, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 554)).add_operation (GALGAS_string (".access."), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 554)).add_operation (enumerator_21585.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 554)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 554)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 554)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (var_structTypeName_21611, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 555)).add_operation (GALGAS_string (" * %self) nounwind {\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 555)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 555)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %result = getelementptr inbounds ").add_operation (var_structTypeName_21611, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)).add_operation (var_structTypeName_21611, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)).add_operation (GALGAS_string (" * %self, "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("i32 0, i32 ").add_operation (enumerator_21585.current_mPropertyIndex (HERE).getter_string (SOURCE_FILE ("type-structure-declaration.galgas", 557)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 557)).add_operation (GALGAS_string (" ; "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 557)).add_operation (enumerator_21585.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 557)).add_operation (GALGAS_string (", index "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 557)).add_operation (enumerator_21585.current_mPropertyIndex (HERE).getter_string (SOURCE_FILE ("type-structure-declaration.galgas", 557)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 557)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 557)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 557)) ;
-    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret ").add_operation (var_propTypeName_21670, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 558)).add_operation (GALGAS_string (" * %result\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 558)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 558)) ;
+  cEnumerator_propertyAccessRoutineList enumerator_21476 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_21476.hasCurrentObject ()) {
+    GALGAS_string var_structTypeName_21502 = extensionGetter_llvmTypeName (enumerator_21476.current_mStructureKind (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 549)) ;
+    GALGAS_string var_propTypeName_21554 = extensionGetter_llvmTypeName (enumerator_21476.current_mPropertyType (HERE).getter_kind (inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 550)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 550)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GALGAS_string ("Access property '").add_operation (enumerator_21476.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 551)).add_operation (GALGAS_string ("' of structure "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 551)).add_operation (var_structTypeName_21502, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 551)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 551)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 551)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal ").add_operation (var_propTypeName_21554, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 552)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 552)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" * @\"").add_operation (var_structTypeName_21502, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 553)).add_operation (GALGAS_string (".access."), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 553)).add_operation (enumerator_21476.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 553)).add_operation (GALGAS_string ("\""), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 553)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 553)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (var_structTypeName_21502, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 554)).add_operation (GALGAS_string (" * %self) nounwind {\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 554)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 554)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %result = getelementptr inbounds ").add_operation (var_structTypeName_21502, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 555)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 555)).add_operation (var_structTypeName_21502, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 555)).add_operation (GALGAS_string (" * %self, "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 555)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 555)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("i32 0, i32 ").add_operation (enumerator_21476.current_mPropertyIndex (HERE).getter_string (SOURCE_FILE ("type-structure-declaration.galgas", 556)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)).add_operation (GALGAS_string (" ; "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)).add_operation (enumerator_21476.current_mPropertyName (HERE), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)).add_operation (GALGAS_string (", index "), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)).add_operation (enumerator_21476.current_mPropertyIndex (HERE).getter_string (SOURCE_FILE ("type-structure-declaration.galgas", 556)), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 556)) ;
+    ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret ").add_operation (var_propTypeName_21554, inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 557)).add_operation (GALGAS_string (" * %result\n"), inCompiler COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 557)), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 557)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-      "\n"), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 559)) ;
-    enumerator_21585.gotoNextObject () ;
+      "\n"), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 558)) ;
+    enumerator_21476.gotoNextObject () ;
   }
 }
 

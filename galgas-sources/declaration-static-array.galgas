@@ -48,24 +48,6 @@ syntax extension plm_syntax {
     @staticArrayPropertyListAST propertyList = {}
     repeat
       <staticArrayProperty> !?propertyList
-#      $let$
-#      $identifier$ ?let propertyName
-#      select
-#        $\$type$ ?let typeName
-#        propertyList += !propertyName !.valueType{!type:typeName}
-#      or
-#        $func$
-#        <mode> ?let mode
-#        <procedure_formal_arguments> ?formalArguments:let formalArgs
-#        @lstring returnType
-#        select
-#          returnType = ["" here]
-#        or
-#          $->$
-#          $\$type$ ?returnType
-#        end
-#        propertyList += !propertyName !.function{!mode:mode !formalArgs:formalArgs !returnType:returnType}
-#      end
     while
     end
     $}$
@@ -212,8 +194,6 @@ override method @staticArrayAST enterInContext
           !kind:.function{!descriptor:descriptor}
         ]
       end
-#      let functionTypeKind = @typeKind.function {!descriptor:descriptor}
-#      let functionPointerTypeKind = @typeKind.pointer {!pointee:functionTypeKind}
       let propertyType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !routineMangledName}
       propertyList += !propertyName !propertyType
       let propertyIndex = [staticlistPropertyMap count]
@@ -256,10 +236,14 @@ override method @staticArrayAST enterRoutinesInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @staticArrayAST semanticAnalysis
-  ?context:let @semanticContext unused inContext
+  ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
+#--- Generate property access
+  let plmTypeName = plmNameForStaticListElementType (!mStaticListName)
+  [inContext.mTypeMap searchKey !lkey:plmTypeName ?kind:let kind]
+  generatePropertyAccess (!structureType:kind !?intermediateCode:ioIntermediateCodeStruct)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

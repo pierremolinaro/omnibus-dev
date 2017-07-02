@@ -144,7 +144,7 @@ getter @objectIR type -> @unifiedTypeMap-proxy {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @objectIR llvmTypeName -> @string {
-  result = [[[self type] kind] llvmTypeName]
+  result = [[self kind] llvmTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -156,7 +156,23 @@ getter @objectIR key -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @objectIR kind -> @typeKind {
-  result = [[self type] kind]
+  switch self
+  case null :
+    error [self location] : "<<@objectIR kind null>>" : result
+  case possibleFunction (**) :
+    error [self location] : "<<@objectIR kind possibleFunction>>" : result
+  case temporaryReference (@unifiedTypeMap-proxy type * * *) : result = [type kind]
+  case property (type **) : result = [type kind]
+  case registerReference (type *******) : result = [type kind]
+  case globalVariableReference (type *) : result = [type kind]
+  case localVariableReference (type *) : result = [type kind]
+  case zero (type) : result = [type kind]
+  case selfObject (type) : result = [type kind]
+  case literalInteger (type *) : result = [type kind]
+  case llvmTemporaryValue (type * *) : result = [type kind]
+  case llvmStructureConstant (type *) : result = [type kind]
+  case literalString  (type * *) : result = [type kind]
+  end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
