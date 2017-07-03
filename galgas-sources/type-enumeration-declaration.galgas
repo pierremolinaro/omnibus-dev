@@ -85,7 +85,7 @@ override getter @enumerationDeclaration keyRepresentationForErrorSignaling -> @s
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @constantMap {
-  @uint mIndex
+  @bigint mIndex
   @lstring mClassTypeName
   insert insertKey error message "the '%K' constant is already declared"
   search searchKey error message "there is no '%K' constant"

@@ -130,7 +130,7 @@ override method @switchInstructionAST analyze
   for (caseIdentifiers instructionList) in mSwitchCaseList do
     @uintlist caseIdentifierIndexList = {}
     for (caseIdf) in caseIdentifiers do
-      [enumConstantMap searchKey !caseIdf ?let @uint constantIdx ?*]
+      [enumConstantMap searchKey !caseIdf ?let @bigint constantIdx ?*]
       caseIdentifierIndexList += !constantIdx
       if [usedEnumerationValues hasKey !caseIdf] then
         error caseIdf : "duplicated enumeration constant" fixit { remove }

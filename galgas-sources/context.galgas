@@ -79,11 +79,11 @@ list @operandList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @classConstantMap {
-  @objectIR mValue
-  insert insertKey error message "the '%K' class constant is already declared in %L"
-  search searchKey error message "there is no '%K' class constant"
-}
+#map @classConstantMap {
+#  @objectIR mValue
+#  insert insertKey error message "the '%K' class constant is already declared in %L"
+#  search searchKey error message "there is no '%K' class constant"
+#}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
