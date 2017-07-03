@@ -52,6 +52,10 @@ method @externProcedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semantic
       let typeName = llvmRegularTypeMangledNameFromName (!formalArgumentTypeName)
       [!?ioGraph noteNode !typeName]
     end
+    if mReturnTypeName.string != "" then
+      let typeName = llvmRegularTypeMangledNameFromName (!mReturnTypeName)
+      [!?ioGraph noteNode !typeName]
+    end
   end
 }
 
@@ -69,12 +73,6 @@ method @externProcedureDeclarationListAST enterExternProcInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
-#--- Routine mangled name
-#  let routineMangledName = routineMangledNameFromAST (
-#    !"" 
-#    !mExternProcedureName
-#    !mProcFormalArgumentList
-#  )
 #--- Signature
   routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
 #--- Enter in context
@@ -88,7 +86,7 @@ method @externProcedureDeclarationListAST-element enterExternProcInContext ?!con
       !false # Global
       !.function {!executionMode:mMode}
       !signature
-      ![returnTypeProxy type]
+      !returnTypeProxy
       !false # canMutateProperties
       !false # canAccessPropertiesInUserMode
       !.staticCall

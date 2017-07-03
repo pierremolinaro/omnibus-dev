@@ -58,7 +58,7 @@ override method @literalBooleanInExpressionAST analyzeExpression
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
+  ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -67,7 +67,7 @@ override method @literalBooleanInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  outResult = .literalInteger {!type:[inContext.mBooleanType type] !value:if mValue then 1G else 0G end}
+  outResult = .literalInteger {!type:.boolean !value:if mValue then 1G else 0G end}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

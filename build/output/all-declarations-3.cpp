@@ -11398,7 +11398,7 @@ class cCollectionElement_routineTypedSignature : public cCollectionElement {
 //--- Constructor
   public : cCollectionElement_routineTypedSignature (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
                                                      const GALGAS_lstring & in_mSelector,
-                                                     const GALGAS_PLMType & in_mType
+                                                     const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy
                                                      COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -11418,10 +11418,10 @@ class cCollectionElement_routineTypedSignature : public cCollectionElement {
 
 cCollectionElement_routineTypedSignature::cCollectionElement_routineTypedSignature (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
                                                                                     const GALGAS_lstring & in_mSelector,
-                                                                                    const GALGAS_PLMType & in_mType
+                                                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy
                                                                                     COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
-mObject (in_mFormalArgumentPassingMode, in_mSelector, in_mType) {
+mObject (in_mFormalArgumentPassingMode, in_mSelector, in_mTypeProxy) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11434,7 +11434,7 @@ bool cCollectionElement_routineTypedSignature::isValid (void) const {
 
 cCollectionElement * cCollectionElement_routineTypedSignature::copy (void) {
   cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_routineTypedSignature (mObject.mProperty_mFormalArgumentPassingMode, mObject.mProperty_mSelector, mObject.mProperty_mType COMMA_HERE)) ;
+  macroMyNew (result, cCollectionElement_routineTypedSignature (mObject.mProperty_mFormalArgumentPassingMode, mObject.mProperty_mSelector, mObject.mProperty_mTypeProxy COMMA_HERE)) ;
   return result ;
 }
 
@@ -11451,8 +11451,8 @@ void cCollectionElement_routineTypedSignature::description (C_String & ioString,
   mObject.mProperty_mSelector.description (ioString, inIndentation) ;
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mType" ":" ;
-  mObject.mProperty_mType.description (ioString, inIndentation) ;
+  ioString << "mTypeProxy" ":" ;
+  mObject.mProperty_mTypeProxy.description (ioString, inIndentation) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11485,7 +11485,7 @@ GALGAS_routineTypedSignature GALGAS_routineTypedSignature::constructor_emptyList
 
 GALGAS_routineTypedSignature GALGAS_routineTypedSignature::constructor_listWithValue (const GALGAS_procFormalArgumentPassingMode & inOperand0,
                                                                                       const GALGAS_lstring & inOperand1,
-                                                                                      const GALGAS_PLMType & inOperand2
+                                                                                      const GALGAS_unifiedTypeMap_2D_proxy & inOperand2
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_routineTypedSignature result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
@@ -11502,12 +11502,12 @@ GALGAS_routineTypedSignature GALGAS_routineTypedSignature::constructor_listWithV
 void GALGAS_routineTypedSignature::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                               const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
                                                               const GALGAS_lstring & in_mSelector,
-                                                              const GALGAS_PLMType & in_mType
+                                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy
                                                               COMMA_LOCATION_ARGS) {
   cCollectionElement_routineTypedSignature * p = NULL ;
   macroMyNew (p, cCollectionElement_routineTypedSignature (in_mFormalArgumentPassingMode,
                                                            in_mSelector,
-                                                           in_mType COMMA_THERE)) ;
+                                                           in_mTypeProxy COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
 }
@@ -11516,7 +11516,7 @@ void GALGAS_routineTypedSignature::makeAttributesFromObjects (capCollectionEleme
 
 void GALGAS_routineTypedSignature::addAssign_operation (const GALGAS_procFormalArgumentPassingMode & inOperand0,
                                                         const GALGAS_lstring & inOperand1,
-                                                        const GALGAS_PLMType & inOperand2
+                                                        const GALGAS_unifiedTypeMap_2D_proxy & inOperand2
                                                         COMMA_LOCATION_ARGS) {
   if (isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     cCollectionElement * p = NULL ;
@@ -11532,7 +11532,7 @@ void GALGAS_routineTypedSignature::addAssign_operation (const GALGAS_procFormalA
 
 void GALGAS_routineTypedSignature::setter_insertAtIndex (const GALGAS_procFormalArgumentPassingMode inOperand0,
                                                          const GALGAS_lstring inOperand1,
-                                                         const GALGAS_PLMType inOperand2,
+                                                         const GALGAS_unifiedTypeMap_2D_proxy inOperand2,
                                                          const GALGAS_uint inInsertionIndex,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
@@ -11550,7 +11550,7 @@ void GALGAS_routineTypedSignature::setter_insertAtIndex (const GALGAS_procFormal
 
 void GALGAS_routineTypedSignature::setter_removeAtIndex (GALGAS_procFormalArgumentPassingMode & outOperand0,
                                                          GALGAS_lstring & outOperand1,
-                                                         GALGAS_PLMType & outOperand2,
+                                                         GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
                                                          const GALGAS_uint inRemoveIndex,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
@@ -11566,7 +11566,7 @@ void GALGAS_routineTypedSignature::setter_removeAtIndex (GALGAS_procFormalArgume
       macroValidSharedObject (p, cCollectionElement_routineTypedSignature) ;
       outOperand0 = p->mObject.mProperty_mFormalArgumentPassingMode ;
       outOperand1 = p->mObject.mProperty_mSelector ;
-      outOperand2 = p->mObject.mProperty_mType ;
+      outOperand2 = p->mObject.mProperty_mTypeProxy ;
     }
   }
 }
@@ -11575,7 +11575,7 @@ void GALGAS_routineTypedSignature::setter_removeAtIndex (GALGAS_procFormalArgume
 
 void GALGAS_routineTypedSignature::setter_popFirst (GALGAS_procFormalArgumentPassingMode & outOperand0,
                                                     GALGAS_lstring & outOperand1,
-                                                    GALGAS_PLMType & outOperand2,
+                                                    GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -11589,7 +11589,7 @@ void GALGAS_routineTypedSignature::setter_popFirst (GALGAS_procFormalArgumentPas
     macroValidSharedObject (p, cCollectionElement_routineTypedSignature) ;
     outOperand0 = p->mObject.mProperty_mFormalArgumentPassingMode ;
     outOperand1 = p->mObject.mProperty_mSelector ;
-    outOperand2 = p->mObject.mProperty_mType ;
+    outOperand2 = p->mObject.mProperty_mTypeProxy ;
   }
 }
 
@@ -11597,7 +11597,7 @@ void GALGAS_routineTypedSignature::setter_popFirst (GALGAS_procFormalArgumentPas
 
 void GALGAS_routineTypedSignature::setter_popLast (GALGAS_procFormalArgumentPassingMode & outOperand0,
                                                    GALGAS_lstring & outOperand1,
-                                                   GALGAS_PLMType & outOperand2,
+                                                   GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
@@ -11611,7 +11611,7 @@ void GALGAS_routineTypedSignature::setter_popLast (GALGAS_procFormalArgumentPass
     macroValidSharedObject (p, cCollectionElement_routineTypedSignature) ;
     outOperand0 = p->mObject.mProperty_mFormalArgumentPassingMode ;
     outOperand1 = p->mObject.mProperty_mSelector ;
-    outOperand2 = p->mObject.mProperty_mType ;
+    outOperand2 = p->mObject.mProperty_mTypeProxy ;
   }
 }
 
@@ -11619,7 +11619,7 @@ void GALGAS_routineTypedSignature::setter_popLast (GALGAS_procFormalArgumentPass
 
 void GALGAS_routineTypedSignature::method_first (GALGAS_procFormalArgumentPassingMode & outOperand0,
                                                  GALGAS_lstring & outOperand1,
-                                                 GALGAS_PLMType & outOperand2,
+                                                 GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -11633,7 +11633,7 @@ void GALGAS_routineTypedSignature::method_first (GALGAS_procFormalArgumentPassin
     macroValidSharedObject (p, cCollectionElement_routineTypedSignature) ;
     outOperand0 = p->mObject.mProperty_mFormalArgumentPassingMode ;
     outOperand1 = p->mObject.mProperty_mSelector ;
-    outOperand2 = p->mObject.mProperty_mType ;
+    outOperand2 = p->mObject.mProperty_mTypeProxy ;
   }
 }
 
@@ -11641,7 +11641,7 @@ void GALGAS_routineTypedSignature::method_first (GALGAS_procFormalArgumentPassin
 
 void GALGAS_routineTypedSignature::method_last (GALGAS_procFormalArgumentPassingMode & outOperand0,
                                                 GALGAS_lstring & outOperand1,
-                                                GALGAS_PLMType & outOperand2,
+                                                GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
@@ -11655,7 +11655,7 @@ void GALGAS_routineTypedSignature::method_last (GALGAS_procFormalArgumentPassing
     macroValidSharedObject (p, cCollectionElement_routineTypedSignature) ;
     outOperand0 = p->mObject.mProperty_mFormalArgumentPassingMode ;
     outOperand1 = p->mObject.mProperty_mSelector ;
-    outOperand2 = p->mObject.mProperty_mType ;
+    outOperand2 = p->mObject.mProperty_mTypeProxy ;
   }
 }
 
@@ -11742,15 +11742,15 @@ GALGAS_lstring GALGAS_routineTypedSignature::getter_mSelectorAtIndex (const GALG
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_PLMType GALGAS_routineTypedSignature::getter_mTypeAtIndex (const GALGAS_uint & inIndex,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy GALGAS_routineTypedSignature::getter_mTypeProxyAtIndex (const GALGAS_uint & inIndex,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_routineTypedSignature * p = (cCollectionElement_routineTypedSignature *) attributes.ptr () ;
-  GALGAS_PLMType result ;
+  GALGAS_unifiedTypeMap_2D_proxy result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_routineTypedSignature) ;
-    result = p->mObject.mProperty_mType ;
+    result = p->mObject.mProperty_mTypeProxy ;
   }
   return result ;
 }
@@ -11792,10 +11792,10 @@ GALGAS_lstring cEnumerator_routineTypedSignature::current_mSelector (LOCATION_AR
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_PLMType cEnumerator_routineTypedSignature::current_mType (LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_proxy cEnumerator_routineTypedSignature::current_mTypeProxy (LOCATION_ARGS) const {
   const cCollectionElement_routineTypedSignature * p = (const cCollectionElement_routineTypedSignature *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_routineTypedSignature) ;
-  return p->mObject.mProperty_mType ;
+  return p->mObject.mProperty_mTypeProxy ;
 }
 
 
@@ -11855,16 +11855,16 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_routineFormalArgum
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_key_1538 = GALGAS_string::makeEmptyString () ;
-  var_key_1538.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 30)) ;
+  GALGAS_string var_key_1637 = GALGAS_string::makeEmptyString () ;
+  var_key_1637.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 30)) ;
   const GALGAS_routineFormalArgumentList temp_0 = inObject ;
-  cEnumerator_routineFormalArgumentList enumerator_1611 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_1611.hasCurrentObject ()) {
-    var_key_1538.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_1611.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 32)).add_operation (enumerator_1611.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 32)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 32)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 32)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 32)) ;
-    enumerator_1611.gotoNextObject () ;
+  cEnumerator_routineFormalArgumentList enumerator_1710 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_1710.hasCurrentObject ()) {
+    var_key_1637.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_1710.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 32)).add_operation (enumerator_1710.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 32)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 32)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 32)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 32)) ;
+    enumerator_1710.gotoNextObject () ;
   }
-  var_key_1538.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 34)) ;
-  result_result = GALGAS_lstring::constructor_new (var_key_1538, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("context-routines.galgas", 35)) ;
+  var_key_1637.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 34)) ;
+  result_result = GALGAS_lstring::constructor_new (var_key_1637, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("context-routines.galgas", 35)) ;
 //---
   return result_result ;
 }
@@ -11883,16 +11883,16 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_effectiveArgumentL
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_lstring result_result ; // Returned variable
-  GALGAS_string var_key_1995 = GALGAS_string::makeEmptyString () ;
-  var_key_1995.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 42)) ;
+  GALGAS_string var_key_2094 = GALGAS_string::makeEmptyString () ;
+  var_key_2094.plusAssign_operation(GALGAS_string ("("), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 42)) ;
   const GALGAS_effectiveArgumentListAST temp_0 = inObject ;
-  cEnumerator_effectiveArgumentListAST enumerator_2050 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_2050.hasCurrentObject ()) {
-    var_key_1995.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_2050.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 44)).add_operation (enumerator_2050.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 44)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 44)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 44)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 44)) ;
-    enumerator_2050.gotoNextObject () ;
+  cEnumerator_effectiveArgumentListAST enumerator_2149 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_2149.hasCurrentObject ()) {
+    var_key_2094.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_2149.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 44)).add_operation (enumerator_2149.current_mSelector (HERE).getter_string (SOURCE_FILE ("context-routines.galgas", 44)), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 44)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 44)), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 44)) ;
+    enumerator_2149.gotoNextObject () ;
   }
-  var_key_1995.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 46)) ;
-  result_result = GALGAS_lstring::constructor_new (var_key_1995, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("context-routines.galgas", 47)) ;
+  var_key_2094.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("context-routines.galgas", 46)) ;
+  result_result = GALGAS_lstring::constructor_new (var_key_2094, constinArgument_inRoutineNameLocation  COMMA_SOURCE_FILE ("context-routines.galgas", 47)) ;
 //---
   return result_result ;
 }
@@ -11916,8 +11916,8 @@ GALGAS_mode extensionGetter_executionMode (const GALGAS_routineKind & inObject,
     break ;
   case GALGAS_routineKind::kEnum_function:
     {
-      const cEnumAssociatedValues_routineKind_function * extractPtr_2648 = (const cEnumAssociatedValues_routineKind_function *) (temp_0.unsafePointer ()) ;
-      const GALGAS_mode extractedValue_mode = extractPtr_2648->mAssociatedValue0 ;
+      const cEnumAssociatedValues_routineKind_function * extractPtr_2747 = (const cEnumAssociatedValues_routineKind_function *) (temp_0.unsafePointer ()) ;
+      const GALGAS_mode extractedValue_mode = extractPtr_2747->mAssociatedValue0 ;
       result_result = extractedValue_mode ;
     }
     break ;
@@ -12107,232 +12107,6 @@ GALGAS_routineCallingSheme GALGAS_routineCallingSheme::extractObject (const GALG
       result = *p ;
     }else{
       inCompiler->castError ("routineCallingSheme", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineDescriptor::GALGAS_routineDescriptor (void) :
-mProperty_mIsPublic (),
-mProperty_mExported (),
-mProperty_mRoutineKind (),
-mProperty_mSignature (),
-mProperty_mReturnType (),
-mProperty_mCanAccessProperties (),
-mProperty_mCanMutateProperties (),
-mProperty_mRoutineCallingScheme () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineDescriptor::~ GALGAS_routineDescriptor (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineDescriptor::GALGAS_routineDescriptor (const GALGAS_bool & inOperand0,
-                                                    const GALGAS_bool & inOperand1,
-                                                    const GALGAS_routineKind & inOperand2,
-                                                    const GALGAS_routineTypedSignature & inOperand3,
-                                                    const GALGAS_PLMType & inOperand4,
-                                                    const GALGAS_bool & inOperand5,
-                                                    const GALGAS_bool & inOperand6,
-                                                    const GALGAS_routineCallingSheme & inOperand7) :
-mProperty_mIsPublic (inOperand0),
-mProperty_mExported (inOperand1),
-mProperty_mRoutineKind (inOperand2),
-mProperty_mSignature (inOperand3),
-mProperty_mReturnType (inOperand4),
-mProperty_mCanAccessProperties (inOperand5),
-mProperty_mCanMutateProperties (inOperand6),
-mProperty_mRoutineCallingScheme (inOperand7) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineDescriptor GALGAS_routineDescriptor::constructor_new (const GALGAS_bool & inOperand0,
-                                                                    const GALGAS_bool & inOperand1,
-                                                                    const GALGAS_routineKind & inOperand2,
-                                                                    const GALGAS_routineTypedSignature & inOperand3,
-                                                                    const GALGAS_PLMType & inOperand4,
-                                                                    const GALGAS_bool & inOperand5,
-                                                                    const GALGAS_bool & inOperand6,
-                                                                    const GALGAS_routineCallingSheme & inOperand7 
-                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineDescriptor result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid ()) {
-    result = GALGAS_routineDescriptor (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_routineDescriptor::objectCompare (const GALGAS_routineDescriptor & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_mIsPublic.objectCompare (inOperand.mProperty_mIsPublic) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mExported.objectCompare (inOperand.mProperty_mExported) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mRoutineKind.objectCompare (inOperand.mProperty_mRoutineKind) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mSignature.objectCompare (inOperand.mProperty_mSignature) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mReturnType.objectCompare (inOperand.mProperty_mReturnType) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mCanAccessProperties.objectCompare (inOperand.mProperty_mCanAccessProperties) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mCanMutateProperties.objectCompare (inOperand.mProperty_mCanMutateProperties) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mRoutineCallingScheme.objectCompare (inOperand.mProperty_mRoutineCallingScheme) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_routineDescriptor::isValid (void) const {
-  return mProperty_mIsPublic.isValid () && mProperty_mExported.isValid () && mProperty_mRoutineKind.isValid () && mProperty_mSignature.isValid () && mProperty_mReturnType.isValid () && mProperty_mCanAccessProperties.isValid () && mProperty_mCanMutateProperties.isValid () && mProperty_mRoutineCallingScheme.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineDescriptor::drop (void) {
-  mProperty_mIsPublic.drop () ;
-  mProperty_mExported.drop () ;
-  mProperty_mRoutineKind.drop () ;
-  mProperty_mSignature.drop () ;
-  mProperty_mReturnType.drop () ;
-  mProperty_mCanAccessProperties.drop () ;
-  mProperty_mCanMutateProperties.drop () ;
-  mProperty_mRoutineCallingScheme.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_routineDescriptor::description (C_String & ioString,
-                                            const int32_t inIndentation) const {
-  ioString << "<struct @routineDescriptor:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_mIsPublic.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mExported.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mRoutineKind.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mSignature.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mReturnType.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mCanAccessProperties.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mCanMutateProperties.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mRoutineCallingScheme.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineDescriptor::getter_mIsPublic (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mIsPublic ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineDescriptor::getter_mExported (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mExported ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineKind GALGAS_routineDescriptor::getter_mRoutineKind (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRoutineKind ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineTypedSignature GALGAS_routineDescriptor::getter_mSignature (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mSignature ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_PLMType GALGAS_routineDescriptor::getter_mReturnType (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mReturnType ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineDescriptor::getter_mCanAccessProperties (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mCanAccessProperties ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_bool GALGAS_routineDescriptor::getter_mCanMutateProperties (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mCanMutateProperties ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineCallingSheme GALGAS_routineDescriptor::getter_mRoutineCallingScheme (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mRoutineCallingScheme ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                               @routineDescriptor type                                               *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_routineDescriptor ("routineDescriptor",
-                                          NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_routineDescriptor::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_routineDescriptor ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_routineDescriptor::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_routineDescriptor (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_routineDescriptor GALGAS_routineDescriptor::extractObject (const GALGAS_object & inObject,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) {
-  GALGAS_routineDescriptor result ;
-  const GALGAS_routineDescriptor * p = (const GALGAS_routineDescriptor *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_routineDescriptor *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("routineDescriptor", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
@@ -13041,19 +12815,19 @@ void extensionSetter_insertKey (GALGAS_routineMapForContext & ioObject,
                                 const GALGAS_routineDescriptor constinArgument_inDescriptor,
                                 C_Compiler * inCompiler
                                 COMMA_UNUSED_LOCATION_ARGS) {
-  cMapElement_internalRoutineMapForContext * objectArray_7124 = (cMapElement_internalRoutineMapForContext *) ioObject.mProperty_mInternalRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inRoutineName.getter_string (HERE)  COMMA_SOURCE_FILE ("context-routines.galgas", 176)) ;
-  if (NULL != objectArray_7124) {
-      macroValidSharedObject (objectArray_7124, cMapElement_internalRoutineMapForContext) ;
+  cMapElement_internalRoutineMapForContext * objectArray_7287 = (cMapElement_internalRoutineMapForContext *) ioObject.mProperty_mInternalRoutineMapForContext.readWriteAccessForWithInstruction (inCompiler, constinArgument_inRoutineName.getter_string (HERE)  COMMA_SOURCE_FILE ("context-routines.galgas", 176)) ;
+  if (NULL != objectArray_7287) {
+      macroValidSharedObject (objectArray_7287, cMapElement_internalRoutineMapForContext) ;
     {
-    objectArray_7124->mProperty_mRoutineArgumentSignatureMapForContext.setter_insertKey (constinArgument_inArgumentSignature, constinArgument_inRoutineLLVMName, constinArgument_inDescriptor, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 177)) ;
+    objectArray_7287->mProperty_mRoutineArgumentSignatureMapForContext.setter_insertKey (constinArgument_inArgumentSignature, constinArgument_inRoutineLLVMName, constinArgument_inDescriptor, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 177)) ;
     }
   }else{
-    GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_7405 = GALGAS_routineArgumentSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("context-routines.galgas", 183)) ;
+    GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_7568 = GALGAS_routineArgumentSignatureMapForContext::constructor_emptyMap (SOURCE_FILE ("context-routines.galgas", 183)) ;
     {
-    var_routineArgumentSignatureMapForContext_7405.setter_insertKey (constinArgument_inArgumentSignature, constinArgument_inRoutineLLVMName, constinArgument_inDescriptor, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 184)) ;
+    var_routineArgumentSignatureMapForContext_7568.setter_insertKey (constinArgument_inArgumentSignature, constinArgument_inRoutineLLVMName, constinArgument_inDescriptor, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 184)) ;
     }
     {
-    ioObject.mProperty_mInternalRoutineMapForContext.setter_insertKey (constinArgument_inRoutineName, var_routineArgumentSignatureMapForContext_7405, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 189)) ;
+    ioObject.mProperty_mInternalRoutineMapForContext.setter_insertKey (constinArgument_inRoutineName, var_routineArgumentSignatureMapForContext_7568, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 189)) ;
     }
   }
 }
@@ -13076,9 +12850,9 @@ void extensionMethod_searchKey (const GALGAS_routineMapForContext inObject,
   outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
   outArgument_outDescriptor.drop () ; // Release 'out' argument
   outArgument_outKeyLocation.drop () ; // Release 'out' argument
-  GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_8079 ;
-  inObject.mProperty_mInternalRoutineMapForContext.method_searchKey (constinArgument_inRoutineName, var_routineArgumentSignatureMapForContext_8079, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 202)) ;
-  var_routineArgumentSignatureMapForContext_8079.method_searchKey (constinArgument_inArgumentSignature, outArgument_outRoutineLLVMName, outArgument_outDescriptor, outArgument_outKeyLocation, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 203)) ;
+  GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_8242 ;
+  inObject.mProperty_mInternalRoutineMapForContext.method_searchKey (constinArgument_inRoutineName, var_routineArgumentSignatureMapForContext_8242, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 202)) ;
+  var_routineArgumentSignatureMapForContext_8242.method_searchKey (constinArgument_inArgumentSignature, outArgument_outRoutineLLVMName, outArgument_outDescriptor, outArgument_outKeyLocation, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 203)) ;
 }
 
 
@@ -13097,9 +12871,9 @@ GALGAS_bool extensionGetter_hasKey (const GALGAS_routineMapForContext & inObject
   result_result = inObject.mProperty_mInternalRoutineMapForContext.getter_hasKey (constinArgument_inRoutineName.getter_string (SOURCE_FILE ("context-routines.galgas", 209)) COMMA_SOURCE_FILE ("context-routines.galgas", 209)) ;
   const enumGalgasBool test_0 = result_result.boolEnum () ;
   if (kBoolTrue == test_0) {
-    GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_8623 ;
-    inObject.mProperty_mInternalRoutineMapForContext.method_searchKey (constinArgument_inRoutineName, var_routineArgumentSignatureMapForContext_8623, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 211)) ;
-    result_result = var_routineArgumentSignatureMapForContext_8623.getter_hasKey (constinArgument_inArgumentSignature.getter_string (SOURCE_FILE ("context-routines.galgas", 212)) COMMA_SOURCE_FILE ("context-routines.galgas", 212)) ;
+    GALGAS_routineArgumentSignatureMapForContext var_routineArgumentSignatureMapForContext_8786 ;
+    inObject.mProperty_mInternalRoutineMapForContext.method_searchKey (constinArgument_inRoutineName, var_routineArgumentSignatureMapForContext_8786, inCompiler COMMA_SOURCE_FILE ("context-routines.galgas", 211)) ;
+    result_result = var_routineArgumentSignatureMapForContext_8786.getter_hasKey (constinArgument_inArgumentSignature.getter_string (SOURCE_FILE ("context-routines.galgas", 212)) COMMA_SOURCE_FILE ("context-routines.galgas", 212)) ;
   }
 //---
   return result_result ;

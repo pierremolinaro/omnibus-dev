@@ -158,10 +158,14 @@ override method @structureDeclaration enterInPrecedenceGraph ?!@semanticTypePrec
       [initExpression addDependenceEdgeForStaticExpression !structureTypeName !?ioGraph]
     end
   end
-#--- Add structure procedures
+#--- Add structure functions
   for () in mFunctionDeclarationListAST do
     for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
       let typeName = llvmRegularTypeMangledNameFromName (!formalArgumentTypeName)
+      [!?ioGraph noteNode !typeName]
+    end
+    if mFunctionReturnTypeName.string != "" then
+      let typeName = llvmRegularTypeMangledNameFromName (!mFunctionReturnTypeName)
       [!?ioGraph noteNode !typeName]
     end
     [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
@@ -329,7 +333,7 @@ override method @structureDeclaration enterInContext
     let signature = [function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
     routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let typedSignature)
   #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnTypeProxy]
   #--- Function invocation name
     let invocationName = routineMangledNameFromAST (
       !"$" + mStructureName 
@@ -342,7 +346,7 @@ override method @structureDeclaration enterInContext
       ![attributeSet hasKey !exportedAttribute ()]
       !.function {!executionMode:function.mMode}
       !typedSignature
-      ![returnType type]
+      !returnTypeProxy
       ![attributeSet hasKey !accessAttribute ()]
       ![attributeSet hasKey !mutatingAttribute ()]
       !.staticCall
@@ -365,7 +369,7 @@ override method @structureDeclaration enterInContext
     let signature = [system.mFormalArgumentList routineSignature !system.mName]
     routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature typedSignature)
   #--- Return type
-    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnType]
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnTypeProxy]
   #--- Function invocation name
     let invocationName = routineMangledNameFromAST (
       !"$" + mStructureName 
@@ -378,7 +382,7 @@ override method @structureDeclaration enterInContext
       ![attributeSet hasKey !exportedAttribute ()]
       !system.mRoutineKind
       !typedSignature
-      ![returnType type]
+      !returnTypeProxy
       ![attributeSet hasKey !accessAttribute ()]
       ![attributeSet hasKey !mutatingAttribute ()]
       !.staticCall

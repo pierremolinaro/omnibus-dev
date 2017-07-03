@@ -111,9 +111,9 @@ override method @switchInstructionAST analyze
     ?let switchValueIR
   ]  
 #--- Check inferred type
-  @enumConstantMap enumConstantMap
+  @constantMap enumConstantMap
   if [[switchValueIR type] isEnumeration] then
-    [[switchValueIR type] enumeration ?constantMap:enumConstantMap ?2*]
+    [[switchValueIR type] enumeration ?constantMap:enumConstantMap ?1*]
   else
     error mEndOf_test_expression
       : "test expression type is '" + [switchValueIR key] + "', it should be boolean"
@@ -130,7 +130,7 @@ override method @switchInstructionAST analyze
   for (caseIdentifiers instructionList) in mSwitchCaseList do
     @uintlist caseIdentifierIndexList = {}
     for (caseIdf) in caseIdentifiers do
-      [enumConstantMap searchKey !caseIdf ?let @uint constantIdx]
+      [enumConstantMap searchKey !caseIdf ?let @uint constantIdx ?*]
       caseIdentifierIndexList += !constantIdx
       if [usedEnumerationValues hasKey !caseIdf] then
         error caseIdf : "duplicated enumeration constant" fixit { remove }
@@ -158,7 +158,7 @@ override method @switchInstructionAST analyze
   [!?ioUniversalMap closeOverride !mEndOf_while_instruction]
   [!?ioVariableMap closeOverride !mEndOf_while_instruction]
 #--- Check all enumeration values are named in switch instructions
-  for (lkey *) in enumConstantMap do
+  for (lkey * *) in enumConstantMap do
     if not [usedEnumerationValues hasKey !lkey] then
       error mEndOf_test_expression : "missing '" + lkey + "' enumeration constant"
     end  

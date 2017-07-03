@@ -2798,7 +2798,7 @@ class GALGAS_routineTypedSignature_2D_element : public AC_GALGAS_root {
 
   public : GALGAS_lstring mProperty_mSelector ;
 
-  public : GALGAS_PLMType mProperty_mType ;
+  public : GALGAS_unifiedTypeMap_2D_proxy mProperty_mTypeProxy ;
 
 //--------------------------------- Accessors
   public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2813,7 +2813,7 @@ class GALGAS_routineTypedSignature_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public : GALGAS_routineTypedSignature_2D_element (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
                                                     const GALGAS_lstring & in_mSelector,
-                                                    const GALGAS_PLMType & in_mType) ;
+                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy) ;
 
 //-- Start of generic part --*
 
@@ -2828,7 +2828,7 @@ class GALGAS_routineTypedSignature_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public : static class GALGAS_routineTypedSignature_2D_element constructor_new (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
                                                                                  const class GALGAS_lstring & inOperand1,
-                                                                                 const class GALGAS_PLMType & inOperand2
+                                                                                 const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2
                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -2847,7 +2847,7 @@ class GALGAS_routineTypedSignature_2D_element : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSelector (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_PLMType getter_mType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mTypeProxy (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection

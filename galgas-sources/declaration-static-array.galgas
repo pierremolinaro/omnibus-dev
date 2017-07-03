@@ -167,17 +167,17 @@ override method @staticArrayAST enterInContext
       )
     #--- Signature
       routineSignature (!?ioContext.mTypeMap !formalArgs ?let signature)
-      let @PLMType returnType = if returnTypeName.string == "" then
-        .void
+      let @unifiedTypeMap-proxy returnTypeProxy = if returnTypeName.string == "" then
+        .null
       else
-        [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName} type]
+        @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
       let descriptor = @routineDescriptor.new {
         !true
         !false
         !.function {!executionMode:mode}
         !signature
-        !returnType
+        !returnTypeProxy
         !false
         !false
         !.propertyIndirectCall {!index:propertyIndex}

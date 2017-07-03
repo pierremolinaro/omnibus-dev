@@ -356,7 +356,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     outResult = .literalInteger {!type:[leftOperand type] !value:leftStaticValue & rightStaticValue}
   else
   #--- Result type : bool 
-    getNewTempVariable (![inContext.mBooleanType type] !mOperatorLocation !?ioTemporaries ?outResult)
+    getNewTempVariable (!.boolean !mOperatorLocation !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendShortCircuitAndOperation
       !outResult

@@ -198,7 +198,7 @@ override method @extendStaticArrayDeclarationAST enterInContext
           let candidateRoutineKind = routineDescriptor.mRoutineKind
           let candidateMode = [routineDescriptor.mRoutineKind executionMode] # routineDescriptor.mExecutionMode
           let candidateSignature = routineDescriptor.mSignature
-          let candidateReturnType = routineDescriptor.mReturnType
+          let candidateReturnTypeProxy = routineDescriptor.mReturnTypeProxy
         #--- Check accessibility
           if not candidateIsPublic then
             let declarationFile = [functionDefinitionLocation file]
@@ -214,9 +214,9 @@ override method @extendStaticArrayDeclarationAST enterInContext
           if currentMode != candidateMode then
             error functionName : "this function runs in " + candidateMode + " mode, but " + currentMode + " is required"
           end
-          if (functionDescriptor.mReturnType == .void) && (candidateReturnType != .void) then
-            error functionName : "this function should return an $" + [candidateReturnType key] + " object"
-          elsif (functionDescriptor.mReturnType != .void) && (candidateReturnType == .void) then
+          if (functionDescriptor.mReturnTypeProxy == .null) && (candidateReturnTypeProxy != .null) then
+            error functionName : "this function should return an $" + [candidateReturnTypeProxy key] + " object"
+          elsif (functionDescriptor.mReturnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then
             error functionName : "this function should return no object"
           end
           if [functionDescriptor.mSignature length] != [candidateSignature length] then
@@ -225,8 +225,8 @@ override method @extendStaticArrayDeclarationAST enterInContext
             + [functionDescriptor.mSignature length] + " required)"
           else
             for required in functionDescriptor.mSignature, candidate in candidateSignature do
-              if required.mType != candidate.mType then
-                error candidate.mSelector : "argument type should be $" + [required.mType key]
+              if required.mTypeProxy != candidate.mTypeProxy then
+                error candidate.mSelector : "argument type should be $" + [required.mTypeProxy key]
               end
             end
           end

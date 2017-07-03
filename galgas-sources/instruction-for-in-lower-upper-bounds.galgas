@@ -96,7 +96,7 @@ override method @forLowerUpperBoundInstructionAST analyze
     error mTypeName : "an integer type is required here"
   case arrayType (* * * * * *) :
     error mTypeName : "an integer type is required here"
-  case enumeration (* * *) :
+  case enumeration (* *) :
   case literalString :
     error mTypeName : "an integer type is required here"
   case opaque (* * *) :

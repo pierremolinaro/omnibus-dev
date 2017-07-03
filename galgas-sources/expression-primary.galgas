@@ -348,7 +348,7 @@ private proc handlePropertyAccessInExpression
   ?let @lstring inPropertyName
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
+  ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -409,7 +409,7 @@ private proc handlePropertyAccessInExpression
           !inPropertyName.location
           !registerIR
           !accessOperator
-          !.literalInteger {!type:[inContext.mLiteralIntegerType type] !value:accessRightOperand}
+          !.literalInteger {!type:.staticInteger !value:accessRightOperand}
         ]
         ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
       end
@@ -473,7 +473,7 @@ private proc handlePropertyAccessInExpression
       !inPropertyName.location
       !currentObject
       !accessOperator
-      !.literalInteger {!type:[inContext.mLiteralIntegerType type] !value:accessRightOperand}
+      !.literalInteger {!type:.staticInteger !value:accessRightOperand}
     ]
     ioInternalRepresentation = .bitField {!sliceMap:resultSliceMap !valueIR:resultObject}
   end
@@ -667,7 +667,7 @@ proc handleMethodCallInExpressionNew
     ?@routineDescriptor routineDescriptor
   ]
 #--- Check routine is actually a function
-  if routineDescriptor.mReturnType == .void then
+  if [routineDescriptor.mReturnTypeProxy type] == .void then
     error inMethodName : "not a function (returns no value)" : routineDescriptor, outCallReturnedResult
   else
   #--- Check modes
@@ -701,7 +701,7 @@ proc handleMethodCallInExpressionNew
       !?effectiveIR:effectiveParameterListIR
     )
   #--- New LLVM variable for function call result
-    getNewTempVariable (!routineDescriptor.mReturnType !routineMangledName !?ioTemporaries ?outCallReturnedResult)
+    getNewTempVariable (![routineDescriptor.mReturnTypeProxy type] !routineMangledName !?ioTemporaries ?outCallReturnedResult)
   #--- Generate call
     switch routineDescriptor.mRoutineCallingScheme
     case staticCall :
@@ -779,7 +779,7 @@ private proc handleStandAloneFunctionCallInExpression
   let calleeMode = [routineKind executionMode]
   let formalSignature = routineDescriptor.mSignature
 #--- Check routine is actually a function
-  if routineDescriptor.mReturnType == .void then
+  if [routineDescriptor.mReturnTypeProxy type] == .void then
     error inFunctionName : "not a function (returns no value)" : routineDescriptor
   else
   #--- Check modes
@@ -807,7 +807,7 @@ private proc handleStandAloneFunctionCallInExpression
       !?effectiveIR:effectiveParameterListIR
     )
   #--- New LLVM variable for function call result
-    getNewTempVariable (!routineDescriptor.mReturnType !routineMangledName !?ioTemporaries ?let functionResult)
+    getNewTempVariable (![routineDescriptor.mReturnTypeProxy type] !routineMangledName !?ioTemporaries ?let functionResult)
   #--- Code generation
     ioInstructionGenerationList += !@staticRoutineCallIR.new {
       !"" # globalVariableReceiverName
@@ -847,7 +847,7 @@ proc analyzeEffectiveParametersNew
     switch effective_mEffectiveParameterKind 
     case inputWithType (@bool constant @lstring typeName @lstring name) :
       let type = if typeName.string == "" then
-        formal_mType
+        [formal_mTypeProxy type]
       else
         [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName} type]
       end
@@ -889,7 +889,7 @@ proc analyzeEffectiveParametersNew
         !self:inSelfType
         !inGuard:false
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:formal_mType
+        !optionalTargetType:[formal_mTypeProxy type]
         !context:inContext
         !mode:inRequiredMode
         !?temporary:ioTemporaries
@@ -907,11 +907,11 @@ proc analyzeEffectiveParametersNew
       ]  
       let result = checkAssignmentCompatibility (
         !source:expressionValue
-        !targetAnnotationType:formal_mType
+        !targetAnnotationType:[formal_mTypeProxy type]
         !errorLocation:endOfExp
         !staticTypeAllowed:false
       )
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
+      parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![formal_mTypeProxy type]
       ioEffectiveParameterListIR += !.output !result
     case outputInput (@lstring name) :
       [!?ioUniversalMap searchValuedObjectForReadWriteAccess !name ?let objectIR]
@@ -942,7 +942,7 @@ proc analyzeEffectiveParametersNew
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
        case literalString :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-      case enumeration (* * *) :
+      case enumeration (* *) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
       case function (*) :
         error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
@@ -974,9 +974,9 @@ proc analyzeEffectiveParametersNew
       + [inEffectiveParameterList length] + " argument(s)"
   else
     for () formal_ in inFormalSignature, () actual_ in parameterList do
-      if [formal_mType key] != [actual_mParameterType key] then
+      if [formal_mTypeProxy key] != [actual_mParameterType key] then
         error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
-           "', and is incompatible with the formal type '" + [formal_mType key] + "'"
+           "', and is incompatible with the formal type '" + [formal_mTypeProxy key] + "'"
       end
       let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
       let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]
@@ -1117,10 +1117,11 @@ proc analyzeFunctionCallInExpression
   let routineKind = routineDescriptor.mRoutineKind
   let calleeMode = [routineKind executionMode] # routineDescriptor.mExecutionMode
   let formalSignature = routineDescriptor.mSignature
-  if routineDescriptor.mReturnType == .void then
-    error inRoutineName : "this function does not return any value"
+  if routineDescriptor.mReturnTypeProxy == .null then
+    outReturnedType = .void
+  else
+    outReturnedType = [routineDescriptor.mReturnTypeProxy type]
   end
-  outReturnedType = routineDescriptor.mReturnType
 #--- Check accessibility
   if not isPublic then
     if receiverType == .void then # Standalone function
@@ -1189,7 +1190,7 @@ proc analyzeEffectiveParameters
     switch effective_mEffectiveParameterKind 
     case inputWithType (@bool constant @lstring typeName @lstring name) :
       let type = if typeName.string == "" then
-        formal_mType
+        [formal_mTypeProxy type]
       else
         [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName} type]
       end
@@ -1250,7 +1251,7 @@ proc analyzeEffectiveParameters
         !self:inSelfType
         !inGuard:false
         !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-        !optionalTargetType:formal_mType
+        !optionalTargetType:[formal_mTypeProxy type]
         !context:inContext
         !mode:inRequiredMode
         !?temporary:ioTemporaries
@@ -1268,11 +1269,11 @@ proc analyzeEffectiveParameters
       ]  
       let result = checkAssignmentCompatibility (
         !source:expressionValue
-        !targetAnnotationType:formal_mType
+        !targetAnnotationType:[formal_mTypeProxy type]
         !errorLocation:endOfExp
         !staticTypeAllowed:false
       )
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mType
+      parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![formal_mTypeProxy type]
       ioEffectiveParameterListIR += !.output !result
     case outputInput (@lstring name) :
       [!?ioVariableMap searchForReadWriteAccess
@@ -1315,7 +1316,7 @@ proc analyzeEffectiveParameters
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
          case literalString :
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
-        case enumeration (* * *) :
+        case enumeration (* *) :
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
         case function (*) :
           error name : "a structure type is required here" : parameterList, ioEffectiveParameterListIR
@@ -1348,9 +1349,9 @@ proc analyzeEffectiveParameters
       + [inEffectiveParameterList length] + " argument(s)"
   else
     for () formal_ in inFormalSignature, () actual_ in parameterList do
-      if [formal_mType key] != [actual_mParameterType key] then
+      if [formal_mTypeProxy key] != [actual_mParameterType key] then
         error actual_mSelector : "the actual parameter type is '" + [actual_mParameterType key] +
-           "', and is incompatible with the formal type '" + [formal_mType key] + "'"
+           "', and is incompatible with the formal type '" + [formal_mTypeProxy key] + "'"
       end
       let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
       let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]

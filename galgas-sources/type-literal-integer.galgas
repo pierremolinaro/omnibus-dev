@@ -67,7 +67,6 @@ override method @literalIntegerDeclaration enterInContext
   ]
 #--- Enter integer operators
   enterLiteralIntegerOperators (
-    !integerTypeName:integerTypeName
     !?context:ioContext
   )
 }
@@ -75,13 +74,13 @@ override method @literalIntegerDeclaration enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc enterLiteralIntegerOperators
-  ?integerTypeName:let @lstring inIntegerTypeName
   ?!context:@semanticContext ioContext
 {
+  let literalIntegerTypeName = [staticIntegerTypeName () nowhere]
 #--- Infix operators
-  let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
-  let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
-  ioContext.mLiteralIntegerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName}
+  let intIntOp = combineTypeNamesForInfixOperator (!literalIntegerTypeName.string !literalIntegerTypeName.string)
+  let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !literalIntegerTypeName} type]
+#  ioContext.mLiteralIntegerType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !literalIntegerTypeName}
 #--- Comparison infix operator
   [!?ioContext.mEqualOperatorMap insertKey
     !intIntOp
@@ -130,11 +129,11 @@ private proc enterLiteralIntegerOperators
     !@literal_literal_integerInfixOperation.new {!.xor}
   ]
   [!?ioContext.mUnsignedComplementOperatorMap insertKey
-    !inIntegerTypeName
+    !literalIntegerTypeName
   ]
 #--- Negate operator
   [!?ioContext.mUnaryMinusOperatorMap insertKey
-    !inIntegerTypeName
+    !literalIntegerTypeName
   ]
 #--- Arithmetic operators
   [!?ioContext.mAddOperatorMap insertKey
