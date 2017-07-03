@@ -128,11 +128,9 @@ list @globalTaskVariableList {
 struct @semanticContext {
   @targetParameters mTargetParameters
   @uint mPointerSize # in bit count
-  @unifiedTypeMap-proxy mBooleanType
-  @unifiedTypeMap-proxy mLiteralIntegerType
+#  @unifiedTypeMap-proxy mLiteralIntegerType
   @unifiedTypeMap-proxy mPanicCodeType
   @unifiedTypeMap-proxy mPanicLineType
-  @unifiedTypeMap-proxy mUnsignedIntegerType
   @unifiedTypeMap mTypeMap
   @routineMapForContext mRoutineMapForContext
   @guardMapForContext mGuardMapForContext
@@ -269,7 +267,7 @@ proc buildSemanticContext
         !typeName:[llvmNameForStaticListType (!key) nowhere]
         !elementType:elementType
         !size:[stringValueList length]
-        !classConstantMap: {}
+        !constantMap: {}
         !flags:0
         !plmTypeName:plmNameForStaticListType (!lkey)
       }

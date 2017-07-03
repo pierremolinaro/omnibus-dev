@@ -82,7 +82,9 @@ override method @typedConstantCall analyzeExpression
     error mConstructorName : "cannot infer type" : outResult
   else
     let classConstantMap = [inferredResultType classConstantMap]
-    [classConstantMap searchKey !mConstructorName ?outResult]
+    [classConstantMap searchKey !mConstructorName ?let @uint value ?let classTypeName]
+    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !classTypeName} type]
+    outResult = .literalInteger {!type:resultType !value:[value bigint]}
   end
 }
 

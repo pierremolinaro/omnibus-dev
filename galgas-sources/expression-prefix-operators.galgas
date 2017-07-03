@@ -92,7 +92,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
       error mOperatorLocation : "internal error" : leftOperand
     case literalString :
       error mOperatorLocation : "internal error" : leftOperand
-    case enumeration (* * *) :
+    case enumeration (* *) :
       error mOperatorLocation : "internal error" : leftOperand
     case structure (* * * * * *) :
       error mOperatorLocation : "internal error" : leftOperand
@@ -106,22 +106,22 @@ override method @prefixOperatorExpressionAST analyzeExpression
         if minTarget < 0G then
           error mOperatorLocation : "the ~ operator cannot be applied to an inferred signed integer type" : leftOperand
         else
-          leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:maxTarget}
+          leftOperand = .literalInteger {!type:.staticInteger !value:maxTarget}
         end
       else
         error mOperatorLocation : "for the ~ operator, the inferred type should be an unsigned integer" : leftOperand
       end
     case integer (* * * @uint bitCount *) :
-      leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:(1G << bitCount) - 1G}
+      leftOperand = .literalInteger {!type:.staticInteger !value:(1G << bitCount) - 1G}
     end
   case notOperator :
     prefixOperatorMap = inContext.mNotOperatorMap
     binaryOperator = .xor
-    leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:1G}
+    leftOperand = .literalInteger {!type:.staticInteger !value:1G}
   case minusNoOvf :
     prefixOperatorMap = inContext.mUnaryMinusOperatorMap
     binaryOperator = .subNoOVF
-    leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:0G}
+    leftOperand = .literalInteger {!type:.staticInteger !value:0G}
   case minus :
     prefixOperatorMap = inContext.mUnaryMinusOperatorMap
     if inCurrentMode == .panicMode then
@@ -130,10 +130,10 @@ override method @prefixOperatorExpressionAST analyzeExpression
     end
     if [option plm_options.noPanicGeneration value] then
       binaryOperator = .subNoOVF
-      leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:0G}
+      leftOperand = .literalInteger {!type:.staticInteger !value:0G}
     else
       binaryOperator = .ssubOVF
-      leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:0G}
+      leftOperand = .literalInteger {!type:.staticInteger !value:0G}
     end
   end
 #--- Check operator

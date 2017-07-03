@@ -11,9 +11,12 @@ func checkAssignmentCompatibility
   ?staticTypeAllowed:let @bool inStaticTypeAllowed
   -> @objectIR outResult
 {
-    if inOptionalTargetAnnotationType == [inSourceValue type] then
+  let sourceType = [inSourceValue type]
+  if inOptionalTargetAnnotationType == sourceType then
     outResult = inSourceValue
-  elsif [[inSourceValue type] isStaticInteger] && [inOptionalTargetAnnotationType isInteger] then
+  elsif [inOptionalTargetAnnotationType isVoid] then
+    outResult = inSourceValue
+  elsif [sourceType isStaticInteger] && [inOptionalTargetAnnotationType isInteger] then
     [inSourceValue literalInteger ?1* ?value:let value]
     [inOptionalTargetAnnotationType integer ?min:let minTarget ?max:let maxTarget ?3*]
     if (value < minTarget) || (maxTarget < value) then

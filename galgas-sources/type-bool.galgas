@@ -52,12 +52,6 @@ override method @booleanDeclaration enterInContext
 {
 #--- Enter in type map
   [!?ioContext.mTypeMap insertType !lkey:mBooleanTypeName !type:.boolean]
-#--- Enter boolean type
-  if ioContext.mBooleanType != .null then
-    error mBooleanTypeName : "Boolean type already defined"
-  end
-  let boolType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mBooleanTypeName}
-  ioContext.mBooleanType = boolType
 #--- Enter boolean operators
   enterBooleanOperators (
     !boolTypeName:mBooleanTypeName

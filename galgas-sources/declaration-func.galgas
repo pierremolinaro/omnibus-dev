@@ -251,7 +251,7 @@ method @functionDeclarationListAST enterFunctionInContext
         !globalFunction
         !.function {!executionMode:function.mMode}
         !signature
-        ![returnTypeProxy type]
+        !returnTypeProxy
         !canMutateProperties
         !canAccessProperties
         !.staticCall

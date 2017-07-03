@@ -109,11 +109,7 @@ method @systemRoutineDeclarationListAST enterInContext
   #--- Signature
     routineSignature (!?ioContext.mTypeMap !svc.mFormalArgumentList ?let signature)
   #--- Return type
-    let @PLMType returnType = if svc.mReturnTypeName.string == "" then
-      .void
-    else
-      [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !svc.mReturnTypeName} type]
-    end
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !svc.mReturnTypeName ?let returnTypeProxy]
   #--- Attributes
     var mutating = false
     for (attribute) in svc.mAttributeList do
@@ -131,7 +127,7 @@ method @systemRoutineDeclarationListAST enterInContext
         !false
         !svc.mRoutineKind
         !signature
-        !returnType
+        !returnTypeProxy
         !mutating # canMutateProperties
         !true # canAccessPropertiesInUserMode
         !.staticCall

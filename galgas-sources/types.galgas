@@ -8,7 +8,7 @@ enum @PLMType {
   case void # No actual type, used for no annotation type, ...
   case boolean
   case literalString
-  case enumeration (@enumConstantMap constantMap @classConstantMap classConstantMap @string plmTypeName)
+  case enumeration (@constantMap constantMap @string plmTypeName)
   case structure (@lstring typeName
                   @propertyMap propertyMap
                   @universalPropertyAndRoutineMapForContext universalMap
@@ -21,7 +21,7 @@ enum @PLMType {
   case arrayType (@lstring typeName
                   @PLMType elementType
                   @bigint size
-                  @classConstantMap classConstantMap
+                  @constantMap constantMap
                   @uint flags
                   @string plmTypeName)
   case function (@routineDescriptor descriptor)
@@ -54,7 +54,7 @@ getter @PLMType equatable -> @bool {
     result = true
   case literalString, staticInteger :
     result = true
-  case enumeration (* * *) :
+  case enumeration (* *) :
     result = true
   case structure (* * * * @uint flags *) :
     result = (flags & equatableFlag ()) != 0
@@ -87,7 +87,7 @@ getter @PLMType instanciable -> @bool {
     result = true
   case literalString, staticInteger :
     result = true
-  case enumeration (* * *) :
+  case enumeration (* *) :
     result = true
   case structure (* * * * @uint flags *) :
     result = (flags & instanciableFlag ()) != 0
@@ -120,7 +120,7 @@ getter @PLMType copyable -> @bool {
     result = true
   case literalString, staticInteger :
     result = true
-  case enumeration (* * *) :
+  case enumeration (* *) :
     result = true
   case structure (* * * * @uint flags *) :
     result = (flags & copyableFlag ()) != 0
@@ -139,20 +139,20 @@ getter @PLMType copyable -> @bool {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @PLMType classConstantMap -> @classConstantMap {
+getter @PLMType classConstantMap -> @constantMap {
   switch self
   case boolean, literalString, staticInteger, void :
     result = {}
-  case enumeration (* @classConstantMap classConstantMap *) :
-    result = classConstantMap
+  case enumeration (constantMap *) :
+    result = constantMap
   case structure (* * * * * *) :
     result = {}
   case integer (* * * * *) :
     result = {}
   case opaque (* * *) :
     result = {}
-  case arrayType (* * * @classConstantMap classConstantMap * *) :
-    result = classConstantMap
+  case arrayType (* * * @constantMap constantMap * *) :
+    result = constantMap
   case function (*) :
     result = {}
   case pointer (*) :
@@ -170,7 +170,7 @@ getter @PLMType llvmTypeName -> @string {
     result = "i1"
   case literalString :
     result = "i8*"
-  case enumeration (@enumConstantMap constantMap * *) :
+  case enumeration (@constantMap constantMap *) :
     result = "i" + [[constantMap count] - 1 significantBitCount]
   case structure (@lstring typeName * * * * *) :
     result = "%" + [llvmRegularTypeMangledNameFromName (!typeName) assemblerRepresentation]
@@ -183,10 +183,15 @@ getter @PLMType llvmTypeName -> @string {
   case arrayType (@lstring typeName * * * * *) :
     result = "%" + [typeName assemblerRepresentation]
   case function (descriptor) :
-    result = [descriptor.mReturnType llvmTypeName] + "("
+    if descriptor.mReturnTypeProxy == .null then
+      result = "void"
+    else
+      result = [[descriptor.mReturnTypeProxy type] llvmTypeName]
+    end
+    result += "("
     for () in descriptor.mSignature 
     do
-      result += [mType llvmTypeName]
+      result += [[mTypeProxy type] llvmTypeName]
       switch mFormalArgumentPassingMode
       case inputOutput, output : result += "*"
       case input :
@@ -208,15 +213,15 @@ getter @PLMType key -> @string {
   case boolean :
     result = boolTypeName ()
   case literalString :
-    result = staticIntegerTypeName ()
-  case enumeration (* * plmTypeName) :
+    result = staticStringTypeName ()
+  case enumeration (* plmTypeName) :
     result = plmTypeName
   case structure (* * * * * plmTypeName) :
     result = plmTypeName
   case integer (* * * * plmTypeName) :
     result = plmTypeName
   case staticInteger :
-    result = staticStringTypeName ()
+    result = staticIntegerTypeName ()
   case opaque (* * plmTypeName) :
     result = plmTypeName
   case arrayType (* * * * * plmTypeName) :
@@ -238,7 +243,7 @@ getter @PLMType descriptionForHTMLFile -> @string {
     result = "Boolean"
   case literalString :
     result = "Literal String"
-  case enumeration (* * *) :
+  case enumeration (* *) :
     result = "Enumeration"
   case structure (* * * * * *) :
     result = "Structure"

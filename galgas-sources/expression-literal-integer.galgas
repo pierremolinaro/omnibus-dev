@@ -51,7 +51,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
   ?optionalTargetType:let @PLMType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
+  ?context:let @semanticContext unused inContext
   ?mode:let @mode unused inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
@@ -60,7 +60,7 @@ override method @literalIntegerInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  outResult = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:mLiteralInteger.bigint}
+  outResult = .literalInteger {!type:.staticInteger !value:mLiteralInteger.bigint}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

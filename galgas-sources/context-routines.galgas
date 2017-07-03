@@ -6,7 +6,7 @@
 list @routineTypedSignature {
   @procFormalArgumentPassingMode mFormalArgumentPassingMode
   @lstring mSelector
-  @PLMType mType
+  @unifiedTypeMap-proxy mTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -83,7 +83,7 @@ struct @routineDescriptor {
   @bool mExported # Routine is declared with @exported attribute
   @routineKind mRoutineKind
   @routineTypedSignature mSignature
-  @PLMType mReturnType # .void if no returned value
+  @unifiedTypeMap-proxy mReturnTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction 
   @bool mCanAccessProperties # Routine is declared with @access attribute
   @bool mCanMutateProperties # Routine is declared with @mutating attribute
   @routineCallingSheme mRoutineCallingScheme
@@ -134,7 +134,7 @@ proc routineSignature ?!@unifiedTypeMap ioTypeMap
   outResult = {}
   for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
     [@unifiedTypeMap-proxy makeProxy !?ioTypeMap !formalArgumentTypeName ?let typeProxy]
-    outResult += !formalArgumentPassingMode !selector ![typeProxy type]
+    outResult += !formalArgumentPassingMode !selector !typeProxy
   end
 }
 
