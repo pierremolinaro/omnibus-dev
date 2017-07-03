@@ -6,504 +6,505 @@
 #! @generationAdds
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#struct @generationAdds {
-#  @uint mUniqueIndex
-#  @stringset mExternFunctionDeclarationSet
-#  @staticStringMap mStaticStringMap
-#  @bool mUsesGuards
-#}
+struct @generationAdds {
+  @uint mUniqueIndex
+  @stringset mExternFunctionDeclarationSet
+  @staticStringMap mStaticStringMap
+  @bool mUsesGuards
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @abstractInstructionIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#abstract class @abstractInstructionIR {
-#}
+abstract class @abstractInstructionIR {
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#abstract method @abstractInstructionIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
+abstract method @abstractInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @instructionListIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @instructionListIR {
-#  @abstractInstructionIR mInstructionGeneration
-#}
+list @instructionListIR {
+  @abstractInstructionIR mInstructionGeneration
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! codeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func %once llvmSeparatorLine -> @string outResult {
-#  outResult  = ";-------------------------------------------------------------------------"
-#  outResult += "---------------------------------------------*\n"
-#}
+func %once llvmSeparatorLine -> @string outResult {
+  outResult  = ";-------------------------------------------------------------------------"
+  outResult += "---------------------------------------------*\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func llvmTitleComment ?let @string inTitle -> @string outTitle {
-#  outTitle  = llvmSeparatorLine ()
-#  outTitle += ";    " + [inTitle stringByRightPadding !114!' '] + "*\n"
-#  outTitle += llvmSeparatorLine () + "\n"
-#}
+func llvmTitleComment ?let @string inTitle -> @string outTitle {
+  outTitle  = llvmSeparatorLine ()
+  outTitle += ";    " + [inTitle stringByRightPadding !114!' '] + "*\n"
+  outTitle += llvmSeparatorLine () + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func %once asSeparatorLine -> @string outResult {
-#  outResult  = "@-------------------------------------------------------------------------"
-#  outResult += "---------------------------------------------*\n"
-#}
+func %once asSeparatorLine -> @string outResult {
+  outResult  = "@-------------------------------------------------------------------------"
+  outResult += "---------------------------------------------*\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func asTitleComment ?let @string inTitle -> @string outTitle {
-#  outTitle  = asSeparatorLine ()
-#  outTitle += "@    " + [inTitle stringByRightPadding !114!' '] + "*\n"
-#  outTitle += asSeparatorLine () + "\n"
-#}
+func asTitleComment ?let @string inTitle -> @string outTitle {
+  outTitle  = asSeparatorLine ()
+  outTitle += "@    " + [inTitle stringByRightPadding !114!' '] + "*\n"
+  outTitle += asSeparatorLine () + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc codeGeneration
-#  ?currentDir:let @string inCurrentDirectory
-#  ?outputFile:let @string inSourceFileName
-#  ?eof:let @location inEndOfSourceFileLocation
-#  ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
-#  ?typeMap:let @unifiedTypeMap inTypeMap
-#  ?target:let @lstring inTargetName
-#  ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
-#  ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
-#  ?interrupts:let @availableInterruptMap inAvailableInterruptMap
-#  ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
-#  ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
-#  ?targetParameters:let @targetParameters inTargetParameters
-#{
-#  let homeDir = @string.homeDirectory + "/plm-products/"
-##--- Create source directory (if does not exist)
-#  let productDirectory = homeDir
-#    + if [option plm_options.noPanicGeneration value] then "no-panic" else "" end
-#    + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
-#  let sourceDirectory = productDirectory + "/sources"
-#  [sourceDirectory makeDirectory] ;
-##--- Generate target files
-#  generateTarget (
-#    !currentDir:inCurrentDirectory
-#    !productDirectory:productDirectory
-#    !targetName:inTargetName
-#    !targetParameters:inIntermediateCodeStruct.mTargetParameters
-#  )
-##--- Generate code files (LLVM, assembly)
-#  generateCodeFiles (
-#    !currentDir:inCurrentDirectory
-#    !productDir:productDirectory
-#    !eof:inEndOfSourceFileLocation
-#    !intermediateCode:inIntermediateCodeStruct
-#    !typeMap:inTypeMap
-#    !target:inTargetName
-#    !panicCodeType:inPanicCodeType
-#    !panicLineType:inPanicLineType
-#    !interrupts:inAvailableInterruptMap
-#    !staticlistValues:inStaticListValueMap
-#    !sourceFileSet:inSourceFileAbsolutePathSet
-#    !targetParameters:inTargetParameters
-#  )
-#}
+proc codeGeneration
+  ?currentDir:let @string inCurrentDirectory
+  ?outputFile:let @string inSourceFileName
+  ?eof:let @location inEndOfSourceFileLocation
+  ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
+  ?typeMap:let @unifiedTypeMap inTypeMap
+  ?target:let @lstring inTargetName
+  ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
+  ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
+  ?interrupts:let @availableInterruptMap inAvailableInterruptMap
+  ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
+  ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
+  ?targetParameters:let @targetParameters inTargetParameters
+{
+  let homeDir = @string.homeDirectory + "/plm-products/"
+#--- Create source directory (if does not exist)
+  let productDirectory = homeDir
+    + if [option plm_options.noPanicGeneration value] then "no-panic" else "" end
+    + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
+  let sourceDirectory = productDirectory + "/sources"
+  [sourceDirectory makeDirectory] ;
+#--- Generate target files
+  generateTarget (
+    !currentDir:inCurrentDirectory
+    !productDirectory:productDirectory
+    !targetName:inTargetName
+    !targetParameters:inIntermediateCodeStruct.mTargetParameters
+  )
+#--- Generate code files (LLVM, assembly)
+  generateCodeFiles (
+    !currentDir:inCurrentDirectory
+    !productDir:productDirectory
+    !eof:inEndOfSourceFileLocation
+    !intermediateCode:inIntermediateCodeStruct
+    !typeMap:inTypeMap
+    !target:inTargetName
+    !panicCodeType:inPanicCodeType
+    !panicLineType:inPanicLineType
+    !interrupts:inAvailableInterruptMap
+    !staticlistValues:inStaticListValueMap
+    !sourceFileSet:inSourceFileAbsolutePathSet
+    !targetParameters:inTargetParameters
+  )
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#struct @generationContext {
-#  @string mPanicCodeLLVMType
-#  @string mPanicLineLLVMType
-#  @string mNopInstructionInLLVM
-#  @globalTaskVariableList mGlobalTaskVariableList
-#  @availableInterruptMap mAvailableInterruptMap
-#}
+struct @generationContext {
+  @string mPanicCodeLLVMType
+  @string mPanicLineLLVMType
+  @string mNopInstructionInLLVM
+  @globalTaskVariableList mGlobalTaskVariableList
+  @availableInterruptMap mAvailableInterruptMap
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#private proc generateCodeFiles
-#  ?currentDir:let @string inCurrentDirectory
-#  ?productDir:let @string inProductDirectory
-#  ?eof:let @location inEndOfSourceFileLocation
-#  ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
-#  ?typeMap:let @unifiedTypeMap inTypeMap
-#  ?target:let @lstring inTargetName
-#  ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
-#  ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
-#  ?interrupts:let @availableInterruptMap inAvailableInterruptMap
-#  ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
-#  ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
-#  ?targetParameters:let @targetParameters inTargetParameters
-#{
-#  @generationAdds generationAdds = .default
-#  generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
-#  let @generationContext generationContext = .new {
-#    ![[inPanicCodeType kind] llvmTypeName]
-#    ![[inPanicLineType kind] llvmTypeName]
-#    !inTargetParameters.mNopInstructionStringInLLVM.string
-#    !inIntermediateCodeStruct.mGlobalTaskVariableList
-#    !inAvailableInterruptMap
-#  }
-#  let sourceDirectory = inProductDirectory + "/sources"
-##----------------------------------------- Include assembler specific file
-#  var asCode = asTitleComment (!"Target specific code")
-#  var asFileContents = ""
-#  for (relativePath) in inTargetParameters.m_S_definitionFiles do
-#    asFileContents += getTargetTextFile (
-#      !currentDir:inCurrentDirectory
-#      !from:inTargetName.string + "/" + relativePath
-#    )
-#  end
-#  let x = [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
-#  asCode += [x stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!"")]
-#  asCode += "\n"
-##----------------------------------------- Include LLVM specific file
-#  var llvmCode = llvmTitleComment (!"Target specific code")
-#  var targetLLVMcode = ""
-#  for (relativePath) in inTargetParameters.m_LL_definitionFiles do
-#    targetLLVMcode += getTargetTextFile (
-#      !currentDir:inCurrentDirectory
-#      !from:inTargetName.string + "/" + relativePath
-#    )
-#  end
-#  llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
-#  llvmCode += "\n"
-##----------------------------------------- Structure types declaration
-#  declareLLVMTypes (!inTypeMap !?llvmCode)
-##----------------------------------------- Static array type declaration
-#  [inStaticListValueMap generateLLVM !inIntermediateCodeStruct.mStaticArrayMap !?llvmCode]
-##----------------------------------------- Global variables
-#  for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap
-#    before llvmCode += llvmTitleComment (!"Global variables")
-#    do [globalVariable generateLLVM !?llvmCode]
-#    after llvmCode += "\n"
-#  end
-##----------------------------------------- Modules
-#  for module in inIntermediateCodeStruct.mModuleList
-#    before llvmCode += llvmTitleComment (!"Modules")
-#    do [module generateLLVM !?llvmCode]
-#    after llvmCode += "\n"
-#  end
-##----------------------------------------- Boot
-#  llvmCode += llvmTitleComment (!"Boot routines")
-#  llvmCode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"
-#  for boot in inIntermediateCodeStruct.mBootList do
-#    llvmCode += "  call void @boot." + boot.mBootIndex + " ()\n"
-#  end
-#  llvmCode += "  ret void\n"
-#  llvmCode += "}\n\n"
-#  for boot in inIntermediateCodeStruct.mBootList do
-#    llvmCode += llvmSeparatorLine () + "\n"
-#    llvmCode += "define internal void @boot." + boot.mBootIndex + " ()" + llvmAttributeFunction () + "{\n"
-#    for (variable LLVMTypeName) in boot.mAllocaList do
-#      llvmCode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + LLVMTypeName + "\n"
-#    end
-#    [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
-#    llvmCode += "  ret void\n"
-#    llvmCode += "}\n\n"
-#  end
-##----------------------------------------- Init
-#  [inIntermediateCodeStruct.mInitList generateLLVMinitCode
-#    !?llvmCode
-#    !inIntermediateCodeStruct.mRoutineMapIR
-#    !generationContext
-#    !?generationAdds
-#  ]
-##----------------------------------------- Routines
-#  [inIntermediateCodeStruct.mRoutineMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
-##----------------------------------------- Interrupts
-#  let undefinedInterruptString = getTargetTextFile (
-#    !currentDir:inCurrentDirectory
-#    !from:inTargetName.string + "/" + inTargetParameters.mUndefinedInterruptHandler
-#  )
-#  let XTRInterruptHandlerString = getTargetTextFile (
-#    !currentDir:inCurrentDirectory
-#    !from:inTargetName.string + "/" + inTargetParameters.mXtrInterruptHandler
-#  )
-#  [inIntermediateCodeStruct.mInterruptMapIR interruptCodeGeneration
-#    !?llvmCode
-#    !?asCode
-#    !undefinedInterruptString
-#    !XTRInterruptHandlerString
-#    !generationContext
-#    !?generationAdds
-#  ]
-##----------------------------------------- Extern procedures
-#  [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
-#  @2stringlist primitiveAndServiceList = {}
-##----------------------------------------- Use guards ?
-#  if generationAdds.mUsesGuards then
-#    let waitForGuardChange = waitForGuardChangeFunctionName ()
-#    primitiveAndServiceList +=
-#      !llvmNameForServiceCall (!waitForGuardChange)
-#      !llvmNameForServiceImplementation (!waitForGuardChange)
-#    generationAdds.mExternFunctionDeclarationSet += !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
-#  end
-##----------------------------------------- SVC
-#  @sectionIRlist sectionIRlist = {}
-#  [inIntermediateCodeStruct.mRoutineMapIR svcCodeGeneration
-#    !?llvmCode
-#    !?primitiveAndServiceList
-#    !?sectionIRlist
-#  ]
-##----------------------------------------- Guards
-#  [inIntermediateCodeStruct.mGuardMapIR guardCodeGeneration
-#    !?llvmCode
-#    !?primitiveAndServiceList
-#    !generationContext
-#    !?generationAdds
-#  ]
-##----------------------------------------- tasks
-#  [inIntermediateCodeStruct.mTaskMapIR generateCode
-#    !?llvmCode
-#    !generationContext
-#    !?generationAdds
-#    !?primitiveAndServiceList
-#  ]
-##----------------------------------------- Primitive, service dispatcher
-#  generatePrimitiveAndServiceDispatcher (
-#    !inCurrentDirectory
-#    !inTargetName.string
-#    !?asCode
-#    !primitiveAndServiceList
-#    !targetParameters:inTargetParameters
-#  )
-##----------------------------------------- Section, safe dispatcher
-#  generateSectionAndSafeDispatcher (
-#    !inCurrentDirectory
-#    !inTargetName.string
-#    !targetParameters:inTargetParameters
-#    !?asCode
-#    !?llvmCode
-#    !sectionIRlist
-#  )
-##----------------------------------------- Panic
-#  if not [option plm_options.noPanicGeneration value] then
-#    let s = getTargetTextFile (
-#       !currentDir:inCurrentDirectory
-#       !from:inTargetName.string + "/" + inTargetParameters.mTargetPanic_LL_filePath
-#    )
-#    let s1 = [s stringByReplacingStringByString !"!PANICCODE!" !generationContext.mPanicCodeLLVMType]
-#    let s2 = [s1 stringByReplacingStringByString !"!PANICLINE!" !generationContext.mPanicLineLLVMType]
-#    llvmCode += s2
-#    llvmCode += llvmTitleComment (!"Raise Panic internal")
-#    llvmCode += "define internal void @raise.panic.internal ("
-#    llvmCode += generationContext.mPanicLineLLVMType + " %in.LINE, "
-#    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
-#    llvmCode += "i8* %in.FILE)" + llvmAttributeFunction () + "noreturn {\n"
-#  #--- First argument: line
-#    llvmCode += "  %" + llvmNameForLocalVariable (!"LINE") + " = alloca "
-#    llvmCode += generationContext.mPanicLineLLVMType + "\n"
-#    llvmCode += "  store " + generationContext.mPanicLineLLVMType + " %in.LINE, "
-#    llvmCode += generationContext.mPanicLineLLVMType + " * %" + llvmNameForLocalVariable (!"LINE") + "\n"
-#  #--- Second argument : code
-#    llvmCode += "  %" + llvmNameForLocalVariable (!"CODE")
-#    llvmCode += " = alloca " + generationContext.mPanicCodeLLVMType + "\n"
-#    llvmCode += "  store " + generationContext.mPanicCodeLLVMType + " %in.CODE, "
-#    llvmCode += generationContext.mPanicCodeLLVMType + " * %" + llvmNameForLocalVariable (!"CODE") + "\n"
-#  #--- Third argument : file    
-#    llvmCode += "  %" + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
-#    llvmCode += "  store i8* %in.FILE, i8** %" + llvmNameForLocalVariable (!"FILE") + "\n"
-#    [inIntermediateCodeStruct.mPanicSetupInstructionListIR instructionListLLVMCode
-#      !?llvmCode
-#      !generationContext
-#      !?generationAdds
-#    ]
-#    llvmCode += "  br label %panic.loop\n\n"
-#    llvmCode += "panic.loop:\n"
-#    [inIntermediateCodeStruct.mPanicLoopInstructionListIR instructionListLLVMCode
-#      !?llvmCode
-#      !generationContext
-#      !?generationAdds
-#    ]
-#    llvmCode += "  br label %panic.loop\n"
-#    llvmCode += "}\n\n"
-#  #--- Panic for isr
-#    [!?generationAdds.mStaticStringMap findOrAddStaticString !"" ?let emptyStringIndex]
-#    llvmCode += llvmTitleComment (!"Panic for ISR")
-#    llvmCode += "define internal void @panic.isr (" + generationContext.mPanicCodeLLVMType + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
-#    llvmCode += "  %str.FILE = load i8*, i8** @string." + emptyStringIndex + "\n"
-#    llvmCode += "  call void @raise.panic.internal ("    
-#    llvmCode += generationContext.mPanicLineLLVMType + " 0, "
-#    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
-#    llvmCode += "i8* %str.FILE"
-#    llvmCode += " )\n"    
-#    llvmCode += "  unreachable\n"    
-#    llvmCode += "}\n\n"    
-#  #--- File specific routines
-#    for (filePath) in inSourceFileAbsolutePathSet do
-#      [!?generationAdds.mStaticStringMap findOrAddStaticString
-#        ![[filePath lastPathComponent] stringByDeletingPathExtension]
-#        ?let staticStringIndex
-#      ]
-#      let routineName = "@raise.panic." + staticStringIndex
-#      llvmCode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
-#      llvmCode += "define internal void " + routineName + " ("
-#      llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
-#      llvmCode += generationContext.mPanicCodeLLVMType + " %inCode)" + llvmAttributeFunction () + "noreturn {\n"
-#      llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
-#      llvmCode += "  call void @raise.panic ("
-#      llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
-#      llvmCode += generationContext.mPanicCodeLLVMType + " %inCode, i8* %str.FILE)\n"
-#      llvmCode += "  unreachable\n"
-#      llvmCode += "}\n\n"
-#    end
-#  end
-##----------------------------------------- Intrinsics
-#  if [generationAdds.mExternFunctionDeclarationSet count] > 0 then
-#    llvmCode += llvmTitleComment (!"LLVM extern functions")
-#    for (s) in generationAdds.mExternFunctionDeclarationSet do
-#      llvmCode += s + "\n"
-#    end
-#    llvmCode += "\n"
-#  end
-##----------------------------------------- Static Strings
-#  if [generationAdds.mStaticStringMap count] > 0 then
-#    llvmCode += llvmTitleComment (!"Static strings")
-#    for () in generationAdds.mStaticStringMap do
-#      let lgStr = [[lkey.string length] + 1 string]
-#      llvmCode += literalCharacterArrayName (!mIndex) + " = private unnamed_addr constant ["
-#      llvmCode += lgStr + " x i8] c\""
-#      llvmCode += [lkey.string utf8RepresentationWithoutDelimiters]
-#      llvmCode += "\\00\", align 1\n"
-#      llvmCode += literalStringName (!mIndex) + " = private constant i8* getelementptr inbounds (["
-#      llvmCode += lgStr + " x i8], [" + lgStr + " x i8]* "
-#      llvmCode += literalCharacterArrayName (!mIndex) + ", i32 0, i32 0), align 4\n\n"
-#    end
-#  end
-##----------------------------------------- Property access
-#  [inIntermediateCodeStruct.mPropertyAccessRoutineList generateCode !?llvmCode]
-##----------------------------------------- Write LLVM file
-#  llvmCode += llvmSeparatorLine ()
-#  [llvmCode writeToFileWhenDifferentContents !sourceDirectory + "/src.ll" ?*]
-##----------------------------------------- Write assembler file
-#  asCode += asSeparatorLine ()
-#  [asCode writeToFileWhenDifferentContents !sourceDirectory + "/src.s" ?*]
-##----------------------------------------- Write C file
-#  var cCode = ""
-#  for (relativePath) in inTargetParameters.m_C_definitionFiles do
-#    cCode += getTargetTextFile (
-#      !currentDir:inCurrentDirectory
-#      !from:inTargetName.string + "/" + relativePath
-#    )
-#  end
-#  let s1 = [cCode stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskMapIR count] string]]
-#  let s2 = [s1 stringByReplacingStringByString !"!GUARDCOUNT!" ![inIntermediateCodeStruct.mMaxBranchOfOnInstructions string]]
-#  let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
-#  let s4 = [s3 stringByReplacingStringByString !"!SERVICEIMPLEMENTATION!" !llvmNameForServiceImplementation (!"")]
-#  let s5 = [s4 stringByReplacingStringByString !"!SERVICECALL!" !llvmNameForServiceCall (!"")]
-#  [s5 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
-##----------------------------------------- Write JSON file with stack features
-#  var json = "{\n"
-##--- System stack size
-#  json += "  \"system-stack-size\" : " + inIntermediateCodeStruct.mTargetParameters.mSystemStackSize.bigint + ",\n"
-#  json += "  \"stacked-register-size-on-user-stack\" : "
-#       + inIntermediateCodeStruct.mTargetParameters.mStackedUserRegisterOnInterruptByteSize.bigint + ",\n"
-#  json += "  \"service-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mServicePushedRegisterByteSize.bigint + ",\n"
-#  json += "  \"section-stack-needs\" : " + [inIntermediateCodeStruct.mTargetParameters.mSectionImplementation sectionStackByteSize] + ",\n"
-##--- Tasks
-#  json += "  \"tasks\" : {"
-#  for task in inIntermediateCodeStruct.mTaskMapIR
-#    do json += "\n    \"" + [task.lkey assemblerRepresentation] + "\" : " + task.mStackSize
-#    between json += ","
-#  end
-#  json += "\n"
-#  json += "  },\n"
-##--- Services
-#  json += "  \"services\" : ["
-#  for (* serviceImplementation) in primitiveAndServiceList
-#    do json += "\n    \"" + serviceImplementation + "\""
-#    between json += ","
-#    after json += "\n"
-#  end
-#  json += "  ],\n"
-##--- sections
-#  json += "  \"sections\" : ["
-#  for (* sectionImplementation * * *) in sectionIRlist
-#    do json += "\n    \"" + sectionImplementation + "\""
-#    between json += ","
-#    after json += "\n"
-#  end
-#  json += "  ],\n"
-##--- isr
-#  json += "  \"isr\" : ["
-#  var first = true
-#  for (interruptName 4* mMode) in inIntermediateCodeStruct.mInterruptMapIR do
-#    if first then
-#      first = false
-#    else
-#      json += ","
-#    end
-#    let interruptImplementationName = if mMode == .serviceMode then
-#      llvmNameForServiceInterrupt (!interruptName).string
-#    else
-#      llvmNameForSectionOrSafeInterrupt (!interruptName.string)
-#    end
-#    json += "\n    \"" + interruptImplementationName + "\""
-#  end
-#  if not [option plm_options.noPanicGeneration value] then
-#    for (lkey panicCode) in inAvailableInterruptMap do
-#      if not [inIntermediateCodeStruct.mInterruptMapIR hasKey !lkey.string] then
-#        switch panicCode
-#        case noPanicCode :
-#        case panicCode (*) :
-#          if first then
-#            first = false
-#          else
-#            json += ","
-#          end
-#          json += "\n    \"" + llvmNameForSectionOrSafeInterrupt (!lkey.string) + "\""
-#        end
-#      end
-#    end
-#  end
-#  json += "\n  ]\n"
-##--- Write file
-#  json += "}\n"
-#  [json writeToFileWhenDifferentContents !sourceDirectory + "/provided-stacks.json" ?*]
-##----------------------------------------- Run compilation script
-#  if (@uint.errorCount == 0) then
-#    let script = if [option plm_options.performFlashing value] then "run" else "build" end
-#    let fullScript = "python " + inProductDirectory + "/" + script + ".py"
-#    @sint result = [fullScript system]
-#    if result != 0S then
-#      error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
-#    end
-#  end
-#}
+private proc generateCodeFiles
+  ?currentDir:let @string inCurrentDirectory
+  ?productDir:let @string inProductDirectory
+  ?eof:let @location inEndOfSourceFileLocation
+  ?intermediateCode:let @intermediateCodeStruct inIntermediateCodeStruct
+  ?typeMap:let @unifiedTypeMap inTypeMap
+  ?target:let @lstring inTargetName
+  ?panicCodeType:let @unifiedTypeMap-proxy inPanicCodeType
+  ?panicLineType:let @unifiedTypeMap-proxy inPanicLineType
+  ?interrupts:let @availableInterruptMap inAvailableInterruptMap
+  ?staticlistValues:let @staticlistValues_listMap inStaticListValueMap
+  ?sourceFileSet:let @stringset inSourceFileAbsolutePathSet
+  ?targetParameters:let @targetParameters inTargetParameters
+{
+  @generationAdds generationAdds = .default
+  generationAdds.mStaticStringMap = inIntermediateCodeStruct.mStaticStringMap
+  let @generationContext generationContext = .new {
+    ![[inPanicCodeType type] llvmTypeName]
+    ![[inPanicLineType type] llvmTypeName]
+    !inTargetParameters.mNopInstructionStringInLLVM.string
+    !inIntermediateCodeStruct.mGlobalTaskVariableList
+    !inAvailableInterruptMap
+  }
+  let sourceDirectory = inProductDirectory + "/sources"
+#----------------------------------------- Include assembler specific file
+  var asCode = asTitleComment (!"Target specific code")
+  var asFileContents = ""
+  for (relativePath) in inTargetParameters.m_S_definitionFiles do
+    asFileContents += getTargetTextFile (
+      !currentDir:inCurrentDirectory
+      !from:inTargetName.string + "/" + relativePath
+    )
+  end
+  let x = [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
+  asCode += [x stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!"")]
+  asCode += "\n"
+#----------------------------------------- Include LLVM specific file
+  var llvmCode = llvmTitleComment (!"Target specific code")
+  var targetLLVMcode = ""
+  for (relativePath) in inTargetParameters.m_LL_definitionFiles do
+    targetLLVMcode += getTargetTextFile (
+      !currentDir:inCurrentDirectory
+      !from:inTargetName.string + "/" + relativePath
+    )
+  end
+  llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!".")]
+  llvmCode += "\n"
+#----------------------------------------- Structure types declaration
+  declareLLVMTypes (!inTypeMap !?llvmCode)
+#----------------------------------------- Static array type declaration
+  [inStaticListValueMap generateLLVM !inIntermediateCodeStruct.mStaticArrayMap !?llvmCode]
+#----------------------------------------- Global variables
+  for globalVariable in inIntermediateCodeStruct.mGlobalVariableMap
+    before llvmCode += llvmTitleComment (!"Global variables")
+    do [globalVariable generateLLVM !?llvmCode]
+    after llvmCode += "\n"
+  end
+#----------------------------------------- Modules
+  for module in inIntermediateCodeStruct.mModuleList
+    before llvmCode += llvmTitleComment (!"Modules")
+    do [module generateLLVM !?llvmCode]
+    after llvmCode += "\n"
+  end
+#----------------------------------------- Boot
+  llvmCode += llvmTitleComment (!"Boot routines")
+  llvmCode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"
+  for boot in inIntermediateCodeStruct.mBootList do
+    llvmCode += "  call void @boot." + boot.mBootIndex + " ()\n"
+  end
+  llvmCode += "  ret void\n"
+  llvmCode += "}\n\n"
+  for boot in inIntermediateCodeStruct.mBootList do
+    llvmCode += llvmSeparatorLine () + "\n"
+    llvmCode += "define internal void @boot." + boot.mBootIndex + " ()" + llvmAttributeFunction () + "{\n"
+    for (variable LLVMTypeName) in boot.mAllocaList do
+      llvmCode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + LLVMTypeName + "\n"
+    end
+    [boot.mInstructionListIR instructionListLLVMCode !?llvmCode !generationContext !?generationAdds]
+    llvmCode += "  ret void\n"
+    llvmCode += "}\n\n"
+  end
+#----------------------------------------- Init
+  [inIntermediateCodeStruct.mInitList generateLLVMinitCode
+    !?llvmCode
+    !inIntermediateCodeStruct.mRoutineMapIR
+    !generationContext
+    !?generationAdds
+  ]
+#----------------------------------------- Routines
+  [inIntermediateCodeStruct.mRoutineMapIR llvmCodeGeneration !?llvmCode !?asCode !generationContext !?generationAdds]
+#----------------------------------------- Interrupts
+  let undefinedInterruptString = getTargetTextFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/" + inTargetParameters.mUndefinedInterruptHandler
+  )
+  let XTRInterruptHandlerString = getTargetTextFile (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/" + inTargetParameters.mXtrInterruptHandler
+  )
+  [inIntermediateCodeStruct.mInterruptMapIR interruptCodeGeneration
+    !?llvmCode
+    !?asCode
+    !undefinedInterruptString
+    !XTRInterruptHandlerString
+    !generationContext
+    !?generationAdds
+  ]
+#----------------------------------------- Extern procedures
+  [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
+  @2stringlist primitiveAndServiceList = {}
+#----------------------------------------- Use guards ?
+  if generationAdds.mUsesGuards then
+    let waitForGuardChange = waitForGuardChangeFunctionName ()
+    primitiveAndServiceList +=
+      !llvmNameForServiceCall (!waitForGuardChange)
+      !llvmNameForServiceImplementation (!waitForGuardChange)
+    generationAdds.mExternFunctionDeclarationSet += !"declare i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()\n"
+  end
+#----------------------------------------- SVC
+  @sectionIRlist sectionIRlist = {}
+  [inIntermediateCodeStruct.mRoutineMapIR svcCodeGeneration
+    !?llvmCode
+    !?primitiveAndServiceList
+    !?sectionIRlist
+  ]
+#----------------------------------------- Guards
+  [inIntermediateCodeStruct.mGuardMapIR guardCodeGeneration
+    !?llvmCode
+    !?primitiveAndServiceList
+    !generationContext
+    !?generationAdds
+  ]
+#----------------------------------------- tasks
+  [inIntermediateCodeStruct.mTaskMapIR generateCode
+    !?llvmCode
+    !generationContext
+    !?generationAdds
+    !?primitiveAndServiceList
+  ]
+#----------------------------------------- Primitive, service dispatcher
+  generatePrimitiveAndServiceDispatcher (
+    !inCurrentDirectory
+    !inTargetName.string
+    !?asCode
+    !primitiveAndServiceList
+    !targetParameters:inTargetParameters
+  )
+#----------------------------------------- Section, safe dispatcher
+  generateSectionAndSafeDispatcher (
+    !inCurrentDirectory
+    !inTargetName.string
+    !targetParameters:inTargetParameters
+    !?asCode
+    !?llvmCode
+    !sectionIRlist
+  )
+#----------------------------------------- Panic
+  if not [option plm_options.noPanicGeneration value] then
+    let s = getTargetTextFile (
+       !currentDir:inCurrentDirectory
+       !from:inTargetName.string + "/" + inTargetParameters.mTargetPanic_LL_filePath
+    )
+    let s1 = [s stringByReplacingStringByString !"!PANICCODE!" !generationContext.mPanicCodeLLVMType]
+    let s2 = [s1 stringByReplacingStringByString !"!PANICLINE!" !generationContext.mPanicLineLLVMType]
+    llvmCode += s2
+    llvmCode += llvmTitleComment (!"Raise Panic internal")
+    llvmCode += "define internal void @raise.panic.internal ("
+    llvmCode += generationContext.mPanicLineLLVMType + " %in.LINE, "
+    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
+    llvmCode += "i8* %in.FILE)" + llvmAttributeFunction () + "noreturn {\n"
+  #--- First argument: line
+    llvmCode += "  %" + llvmNameForLocalVariable (!"LINE") + " = alloca "
+    llvmCode += generationContext.mPanicLineLLVMType + "\n"
+    llvmCode += "  store " + generationContext.mPanicLineLLVMType + " %in.LINE, "
+    llvmCode += generationContext.mPanicLineLLVMType + " * %" + llvmNameForLocalVariable (!"LINE") + "\n"
+  #--- Second argument : code
+    llvmCode += "  %" + llvmNameForLocalVariable (!"CODE")
+    llvmCode += " = alloca " + generationContext.mPanicCodeLLVMType + "\n"
+    llvmCode += "  store " + generationContext.mPanicCodeLLVMType + " %in.CODE, "
+    llvmCode += generationContext.mPanicCodeLLVMType + " * %" + llvmNameForLocalVariable (!"CODE") + "\n"
+  #--- Third argument : file    
+    llvmCode += "  %" + llvmNameForLocalVariable (!"FILE") + " = alloca i8*\n"
+    llvmCode += "  store i8* %in.FILE, i8** %" + llvmNameForLocalVariable (!"FILE") + "\n"
+    [inIntermediateCodeStruct.mPanicSetupInstructionListIR instructionListLLVMCode
+      !?llvmCode
+      !generationContext
+      !?generationAdds
+    ]
+    llvmCode += "  br label %panic.loop\n\n"
+    llvmCode += "panic.loop:\n"
+    [inIntermediateCodeStruct.mPanicLoopInstructionListIR instructionListLLVMCode
+      !?llvmCode
+      !generationContext
+      !?generationAdds
+    ]
+    llvmCode += "  br label %panic.loop\n"
+    llvmCode += "}\n\n"
+  #--- Panic for isr
+    [!?generationAdds.mStaticStringMap findOrAddStaticString !"" ?let emptyStringIndex]
+    llvmCode += llvmTitleComment (!"Panic for ISR")
+    llvmCode += "define internal void @panic.isr (" + generationContext.mPanicCodeLLVMType + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
+    llvmCode += "  %str.FILE = load i8*, i8** @string." + emptyStringIndex + "\n"
+    llvmCode += "  call void @raise.panic.internal ("    
+    llvmCode += generationContext.mPanicLineLLVMType + " 0, "
+    llvmCode += generationContext.mPanicCodeLLVMType + " %in.CODE, "
+    llvmCode += "i8* %str.FILE"
+    llvmCode += " )\n"    
+    llvmCode += "  unreachable\n"    
+    llvmCode += "}\n\n"    
+  #--- File specific routines
+    for (filePath) in inSourceFileAbsolutePathSet do
+      [!?generationAdds.mStaticStringMap findOrAddStaticString
+        ![[filePath lastPathComponent] stringByDeletingPathExtension]
+        ?let staticStringIndex
+      ]
+      let routineName = "@raise.panic." + staticStringIndex
+      llvmCode += llvmTitleComment (!routineName + " (" + [filePath lastPathComponent] + ")")
+      llvmCode += "define internal void " + routineName + " ("
+      llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
+      llvmCode += generationContext.mPanicCodeLLVMType + " %inCode)" + llvmAttributeFunction () + "noreturn {\n"
+      llvmCode += "  %str.FILE = load i8*, i8** @string." + staticStringIndex + "\n"
+      llvmCode += "  call void @raise.panic ("
+      llvmCode += generationContext.mPanicLineLLVMType + " %inSourceLine, "
+      llvmCode += generationContext.mPanicCodeLLVMType + " %inCode, i8* %str.FILE)\n"
+      llvmCode += "  unreachable\n"
+      llvmCode += "}\n\n"
+    end
+  end
+#----------------------------------------- Intrinsics
+  if [generationAdds.mExternFunctionDeclarationSet count] > 0 then
+    llvmCode += llvmTitleComment (!"LLVM extern functions")
+    for (s) in generationAdds.mExternFunctionDeclarationSet do
+      llvmCode += s + "\n"
+    end
+    llvmCode += "\n"
+  end
+#----------------------------------------- Static Strings
+  if [generationAdds.mStaticStringMap count] > 0 then
+    llvmCode += llvmTitleComment (!"Static strings")
+    for () in generationAdds.mStaticStringMap do
+      let lgStr = [[lkey.string length] + 1 string]
+      llvmCode += literalCharacterArrayName (!mIndex) + " = private unnamed_addr constant ["
+      llvmCode += lgStr + " x i8] c\""
+      llvmCode += [lkey.string utf8RepresentationWithoutDelimiters]
+      llvmCode += "\\00\", align 1\n"
+      llvmCode += literalStringName (!mIndex) + " = private constant i8* getelementptr inbounds (["
+      llvmCode += lgStr + " x i8], [" + lgStr + " x i8]* "
+      llvmCode += literalCharacterArrayName (!mIndex) + ", i32 0, i32 0), align 4\n\n"
+    end
+  end
+#----------------------------------------- Property access
+  [inIntermediateCodeStruct.mPropertyAccessRoutineList generateCode !?llvmCode]
+#----------------------------------------- Write LLVM file
+  llvmCode += llvmSeparatorLine ()
+  [llvmCode writeToFileWhenDifferentContents !sourceDirectory + "/src.ll" ?*]
+#----------------------------------------- Write assembler file
+  asCode += asSeparatorLine ()
+  [asCode writeToFileWhenDifferentContents !sourceDirectory + "/src.s" ?*]
+#----------------------------------------- Write C file
+  var cCode = ""
+  for (relativePath) in inTargetParameters.m_C_definitionFiles do
+    cCode += getTargetTextFile (
+      !currentDir:inCurrentDirectory
+      !from:inTargetName.string + "/" + relativePath
+    )
+  end
+  let s1 = [cCode stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskMapIR count] string]]
+  let s2 = [s1 stringByReplacingStringByString !"!GUARDCOUNT!" ![inIntermediateCodeStruct.mMaxBranchOfOnInstructions string]]
+  let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
+  let s4 = [s3 stringByReplacingStringByString !"!SERVICEIMPLEMENTATION!" !llvmNameForServiceImplementation (!"")]
+  let s5 = [s4 stringByReplacingStringByString !"!SERVICECALL!" !llvmNameForServiceCall (!"")]
+  [s5 writeToFileWhenDifferentContents !sourceDirectory + "/src.c" ?*]
+#----------------------------------------- Write JSON file with stack features
+  var json = "{\n"
+#--- System stack size
+  json += "  \"system-stack-size\" : " + inIntermediateCodeStruct.mTargetParameters.mSystemStackSize.bigint + ",\n"
+  json += "  \"stacked-register-size-on-user-stack\" : "
+       + inIntermediateCodeStruct.mTargetParameters.mStackedUserRegisterOnInterruptByteSize.bigint + ",\n"
+  json += "  \"service-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mServicePushedRegisterByteSize.bigint + ",\n"
+  json += "  \"section-stack-needs\" : " + [inIntermediateCodeStruct.mTargetParameters.mSectionImplementation sectionStackByteSize] + ",\n"
+#--- Tasks
+  json += "  \"tasks\" : {"
+  for task in inIntermediateCodeStruct.mTaskMapIR
+    do json += "\n    \"" + [task.lkey assemblerRepresentation] + "\" : " + task.mStackSize
+    between json += ","
+  end
+  json += "\n"
+  json += "  },\n"
+#--- Services
+  json += "  \"services\" : ["
+  for (* serviceImplementation) in primitiveAndServiceList
+    do json += "\n    \"" + serviceImplementation + "\""
+    between json += ","
+    after json += "\n"
+  end
+  json += "  ],\n"
+#--- sections
+  json += "  \"sections\" : ["
+  for (* sectionImplementation * * *) in sectionIRlist
+    do json += "\n    \"" + sectionImplementation + "\""
+    between json += ","
+    after json += "\n"
+  end
+  json += "  ],\n"
+#--- isr
+  json += "  \"isr\" : ["
+  var first = true
+  for (interruptName 4* mMode) in inIntermediateCodeStruct.mInterruptMapIR do
+    if first then
+      first = false
+    else
+      json += ","
+    end
+    let interruptImplementationName = if mMode == .serviceMode then
+      llvmNameForServiceInterrupt (!interruptName).string
+    else
+      llvmNameForSectionOrSafeInterrupt (!interruptName.string)
+    end
+    json += "\n    \"" + interruptImplementationName + "\""
+  end
+  if not [option plm_options.noPanicGeneration value] then
+    for (lkey panicCode) in inAvailableInterruptMap do
+      if not [inIntermediateCodeStruct.mInterruptMapIR hasKey !lkey.string] then
+        switch panicCode
+        case noPanicCode :
+        case panicCode (*) :
+          if first then
+            first = false
+          else
+            json += ","
+          end
+          json += "\n    \"" + llvmNameForSectionOrSafeInterrupt (!lkey.string) + "\""
+        end
+      end
+    end
+  end
+  json += "\n  ]\n"
+#--- Write file
+  json += "}\n"
+  [json writeToFileWhenDifferentContents !sourceDirectory + "/provided-stacks.json" ?*]
+#----------------------------------------- Run compilation script
+  if (@uint.errorCount == 0) then
+    let script = if [option plm_options.performFlashing value] then "run" else "build" end
+    let fullScript = "python " + inProductDirectory + "/" + script + ".py"
+    @sint result = [fullScript system]
+    if result != 0S then
+      error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
-#  ioLLVMcode += llvmTitleComment (!"Types")
-#  for () in inTypeMap do
-#    switch kind
-#    case boolean :
-#    case enumeration (* *) :
-#    case integer (* * * *) :
-#    case structure (* * * propertyList *) :
-#      ioLLVMcode += [kind llvmTypeName] + " = type {"
-#      for () in propertyList
-#        do ioLLVMcode += [[mType kind] llvmTypeName]
-#        between ioLLVMcode += ", "
-#      end
-#      ioLLVMcode += "}\n"
-#    case literalString : 
-#    case staticInteger : 
-#    case opaque (* *) :
-#    case arrayType (* elementType arraySize * *) :
-#      ioLLVMcode += [kind llvmTypeName] + " = type [" + arraySize + " x " + [[elementType kind] llvmTypeName] + "]\n"
-#    case function (*) :
-#    case pointer (unused pointee) :
-#    end
-#  end
-#  ioLLVMcode += "\n"
-#}
+proc declareLLVMTypes ?let @unifiedTypeMap inTypeMap ?!@string ioLLVMcode {
+  ioLLVMcode += llvmTitleComment (!"Types")
+  for () in inTypeMap do
+    switch type
+    case void :
+    case boolean :
+    case enumeration (* * *) :
+    case integer (* * * * *) :
+    case structure (* * * propertyList * *) :
+      ioLLVMcode += [type llvmTypeName] + " = type {"
+      for () in propertyList
+        do ioLLVMcode += [mType llvmTypeName]
+        between ioLLVMcode += ", "
+      end
+      ioLLVMcode += "}\n"
+    case literalString : 
+    case staticInteger : 
+    case opaque (* * *) :
+    case arrayType (* elementType arraySize * * *) :
+      ioLLVMcode += [type llvmTypeName] + " = type [" + arraySize + " x " + [elementType llvmTypeName] + "]\n"
+    case function (*) :
+    case pointer (unused pointee) :
+    end
+  end
+  ioLLVMcode += "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -59,153 +59,159 @@ method @externProcedureDeclarationListAST noteTypesInPrecedenceGraph ?!@semantic
 #   ENTER IN CONTEXT                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @externProcedureDeclarationListAST enterExternProcInContext
-#  ?!context:@semanticContext ioContext
-#{
-#  for externProcedure in self do
-#    [externProcedure enterExternProcInContext !?context:ioContext]
-#  end
-#}
+method @externProcedureDeclarationListAST enterExternProcInContext
+  ?!context:@semanticContext ioContext
+{
+  for externProcedure in self do
+    [externProcedure enterExternProcInContext !?context:ioContext]
+  end
+}
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @externProcedureDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
-##--- Signature
-#  routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
-##--- Enter in context
-#  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnType]
-#  [!?ioContext.mRoutineMapForContext insertKey
-#    !mExternProcedureName
-#    ![mProcFormalArgumentList routineSignature !mExternProcedureName]
-#    !mRoutineNameForGeneration
-#    !.new {
-#      !true # isPublic
-#      !false # Global
-#      !.function {!executionMode:mMode}
-#      !signature
-#      !returnType
-#      !false # canMutateProperties
-#      !false # canAccessPropertiesInUserMode
-#      !.staticCall
-#    }
-#  ]
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#method @externProcedureDeclarationListAST externProcedureSemanticAnalysis
-#  ?context:let @semanticContext inContext
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#{
-#  for externProc in self do
-#    [externProc externProcedureSemanticAnalysis
-#      !context:inContext
-#      !?temporary:ioTemporaries
-#      !?intermediateCode:ioIntermediateCodeStruct
-#    ]
-#  end
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysis
-#  ?context:let @semanticContext inContext
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#{
-##--- Routine mangled name
+method @externProcedureDeclarationListAST-element enterExternProcInContext ?!context:@semanticContext ioContext {
+#--- Routine mangled name
 #  let routineMangledName = routineMangledNameFromAST (
 #    !"" 
 #    !mExternProcedureName
 #    !mProcFormalArgumentList
 #  )
-##--- Variable map
-#  initialVariableMap (
-#    !context:inContext
-#    !mode:mMode
-#    !globalsAreConstant:false
-#    !returnTypeName:["" nowhere]
-#    ?@unifiedSymbolMapEx variableMap
-#    ?@universalPropertyAndRoutineMapForContext universalMap
-#  )
-##--- Analyse formal arguments
-#  @routineFormalArgumentListForGeneration formalArguments = {}
-#  enterFormalArguments (
-#    !context:inContext
-#    !mProcFormalArgumentList
-#    !?variableMap
-#    !?universalMap
-#    !?formalArguments
-#  )
-##--- End of variableMap
-#  drop variableMap
-##--- Enter subprogram invocation graph
-#  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
-#    [!?ioTemporaries.mSubprogramInvocationGraph addNode
-#      !routineMangledName
-#      !routineMangledName
-#    ]
-#  end
-##--- Return type
-#  let returnType = if mReturnTypeName.string == "" then
-#    @unifiedTypeMap-proxy.null
-#  else
-#    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName}
-#  end
-##--- Routine name for generation
-#  [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
-#    !mRoutineNameForGeneration
-#    !formalArguments
-#    !returnType
-#  ]  
-#}
+#--- Signature
+  routineSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
+#--- Enter in context
+  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnTypeProxy]
+  [!?ioContext.mRoutineMapForContext insertKey
+    !mExternProcedureName
+    ![mProcFormalArgumentList routineSignature !mExternProcedureName]
+    !mRoutineNameForGeneration
+    !.new {
+      !true # isPublic
+      !false # Global
+      !.function {!executionMode:mMode}
+      !signature
+      ![returnTypeProxy type]
+      !false # canMutateProperties
+      !false # canAccessPropertiesInUserMode
+      !.staticCall
+    }
+  ]
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#  SEMANTIC ANALYSIS                                                                                                    
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @externProcedureDeclarationListAST externProcedureSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  for externProc in self do
+    [externProc externProcedureSemanticAnalysis
+      !context:inContext
+      !?temporary:ioTemporaries
+      !?intermediateCode:ioIntermediateCodeStruct
+    ]
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+method @externProcedureDeclarationListAST-element externProcedureSemanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+#--- Routine mangled name
+  let routineMangledName = routineMangledNameFromAST (
+    !"" 
+    !mExternProcedureName
+    !mProcFormalArgumentList
+  )
+#--- Variable map
+  initialVariableMap (
+    !context:inContext
+    !mode:mMode
+    !globalsAreConstant:false
+    !returnTypeName:["" nowhere]
+    ?@unifiedSymbolMapEx variableMap
+    ?@universalPropertyAndRoutineMapForContext universalMap
+  )
+#--- Analyse formal arguments
+  @routineFormalArgumentListForGeneration formalArguments = {}
+  enterFormalArguments (
+    !context:inContext
+    !mProcFormalArgumentList
+    !?variableMap
+    !?universalMap
+    !?formalArguments
+  )
+#--- End of variableMap
+  drop variableMap
+#--- Enter subprogram invocation graph
+  if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineMangledName.string] then
+    [!?ioTemporaries.mSubprogramInvocationGraph addNode
+      !routineMangledName
+      !routineMangledName
+    ]
+  end
+#--- Return type
+  let returnType = if mReturnTypeName.string == "" then
+    @unifiedTypeMap-proxy.null
+  else
+    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName}
+  end
+#--- Routine name for generation
+  [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
+    !mRoutineNameForGeneration
+    !formalArguments
+    !returnType
+  ]  
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @externProcedureMapIR {
-#  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
-#  @unifiedTypeMap-proxy mReturnType
-#  insert insertKey error message "extern procedure %K is already declared"
-#}
+map @externProcedureMapIR {
+  @routineFormalArgumentListForGeneration mFormalArgumentListForGeneration
+  @unifiedTypeMap-proxy mReturnType
+  insert insertKey error message "extern procedure %K is already declared"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
-#  for externProc in self do
-#    [externProc llvmPrototypeGeneration !?ioLLVMcode]
-#  end
-#}
+method @externProcedureMapIR llvmPrototypeGeneration  ?!@string ioLLVMcode {
+  for externProc in self do
+    [externProc llvmPrototypeGeneration !?ioLLVMcode]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
-#  let procName = llvmNameForFunction (!lkey.string)
-#  ioLLVMcode += llvmTitleComment (!"extern procedure " + lkey)
-#  ioLLVMcode += "declare"
-#  if mReturnType == .null then
-#    ioLLVMcode += " void"
-#  else
-#      ioLLVMcode += " " + [[mReturnType kind] llvmTypeName]
-#  end
-#  ioLLVMcode += " @" + procName + " ("
-#  for () in mFormalArgumentListForGeneration
-#  do
-#    switch mFormalArgumentKind
-#    case input :
-#      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " %in." + mFormalArgumentName
-#    case output :
-#      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
-#   case inputOutput :
-#      ioLLVMcode += [[mFormalArgumentType kind] llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
-#    end
-#  between
-#    ioLLVMcode += ", "
-#  end
-#  ioLLVMcode += ")" + llvmAttributeFunction () + "; defined in C\n\n"
-#}
+method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
+  let procName = llvmNameForFunction (!lkey.string)
+  ioLLVMcode += llvmTitleComment (!"extern procedure " + lkey)
+  ioLLVMcode += "declare"
+  if mReturnType == .null then
+    ioLLVMcode += " void"
+  else
+      ioLLVMcode += " " + [[mReturnType type] llvmTypeName]
+  end
+  ioLLVMcode += " @" + procName + " ("
+  for () in mFormalArgumentListForGeneration
+  do
+    switch mFormalArgumentKind
+    case input :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+    case output :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+   case inputOutput :
+      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * %" + llvmNameForLocalVariable (!mFormalArgumentName)
+    end
+  between
+    ioLLVMcode += ", "
+  end
+  ioLLVMcode += ")" + llvmAttributeFunction () + "; defined in C\n\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

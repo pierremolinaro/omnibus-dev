@@ -1,36 +1,36 @@
 
-#setter @instructionListIR appendTrunc
-#  ?let @objectIR inResult
-#  ?let @objectIR inSource
-#{
-#  self += !@truncIR.new {!inResult !inSource}
-#}
+setter @instructionListIR appendTrunc
+  ?let @objectIR inResult
+  ?let @objectIR inSource
+{
+  self += !@truncIR.new {!inResult !inSource}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @truncIR : @abstractInstructionIR {
-#  @objectIR mResult
-#  @objectIR mSource
-#}
+class @truncIR : @abstractInstructionIR {
+  @objectIR mResult
+  @objectIR mSource
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @truncIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-#  ioLLVMcode += "  " + [mResult llvmName] + " = trunc "
-#  ioLLVMcode += [mSource  llvmTypeName] + " " + [mSource llvmName] + " to " + [mResult llvmTypeName] + "\n"
-#}
+override method @truncIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  " + [mResult llvmName] + " = trunc "
+  ioLLVMcode += [mSource  llvmTypeName] + " " + [mSource llvmName] + " to " + [mResult llvmTypeName] + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @truncIR enterAccessibleEntities
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
-#
+override method @truncIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

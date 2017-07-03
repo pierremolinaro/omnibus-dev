@@ -3,11 +3,11 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 # La signature typée d'une routine est la liste du mode de passage, du sélecteur, du type de ses arguments formels.
 
-#list @routineTypedSignature {
-#  @procFormalArgumentPassingMode mFormalArgumentPassingMode
-#  @lstring mSelector
-#  @unifiedTypeMap-proxy mType
-#}
+list @routineTypedSignature {
+  @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  @lstring mSelector
+  @PLMType mType
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! ROUTINE SIGNATURE
@@ -71,158 +71,158 @@ getter @routineKind executionMode -> @mode {
 
 #·······················································································································
 
-#enum @routineCallingSheme {
-#  case staticCall
-#  case propertyIndirectCall (@uint index)
-#}
+enum @routineCallingSheme {
+  case staticCall
+  case propertyIndirectCall (@uint index)
+}
 
 #·······················································································································
 
-#struct @routineDescriptor {
-#  @bool mIsPublic # Routine is declared with "public"
-#  @bool mExported # Routine is declared with @exported attribute
-#  @routineKind mRoutineKind
-#  @routineTypedSignature mSignature
-#  @unifiedTypeMap-proxy mReturnType # .null if no returned value
-#  @bool mCanAccessProperties # Routine is declared with @access attribute
-#  @bool mCanMutateProperties # Routine is declared with @mutating attribute
-#  @routineCallingSheme mRoutineCallingScheme
-#}
+struct @routineDescriptor {
+  @bool mIsPublic # Routine is declared with "public"
+  @bool mExported # Routine is declared with @exported attribute
+  @routineKind mRoutineKind
+  @routineTypedSignature mSignature
+  @PLMType mReturnType # .void if no returned value
+  @bool mCanAccessProperties # Routine is declared with @access attribute
+  @bool mCanMutateProperties # Routine is declared with @mutating attribute
+  @routineCallingSheme mRoutineCallingScheme
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func routineMangledNameFromAST ?let @string inReceiverTypeName
-#                               ?let @lstring inRoutineName
-#                               ?let @routineFormalArgumentList inFormalArgumentList -> @lstring
-#{
-#  result = if inReceiverTypeName == "" then
-#    inRoutineName
-#  else
-#    @lstring.new {!inReceiverTypeName + "." + inRoutineName !inRoutineName.location}
-#  end
-#  result.string += "("
-#  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
-#    result.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
-#  end
-#  result.string += ")"
-#}
+func routineMangledNameFromAST ?let @string inReceiverTypeName
+                               ?let @lstring inRoutineName
+                               ?let @routineFormalArgumentList inFormalArgumentList -> @lstring
+{
+  result = if inReceiverTypeName == "" then
+    inRoutineName
+  else
+    @lstring.new {!inReceiverTypeName + "." + inRoutineName !inRoutineName.location}
+  end
+  result.string += "("
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    result.string += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+  end
+  result.string += ")"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func routineMangledNameFromCall ?let @string inReceiverTypeName
-#                                ?let @lstring inRoutineName
-#                                ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
-#{
-#  result = if inReceiverTypeName == "" then
-#    inRoutineName
-#  else
-#    @lstring.new {!inReceiverTypeName + "." + inRoutineName !inRoutineName.location}
-#  end
-#  result.string += "("
-#  for (passingMode selector) in inEffectiveParameterList do
-#    result.string += [passingMode matchingFormalArgument] + selector + ":"
-#  end
-#  result.string += ")"
-#}
+func routineMangledNameFromCall ?let @string inReceiverTypeName
+                                ?let @lstring inRoutineName
+                                ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
+{
+  result = if inReceiverTypeName == "" then
+    inRoutineName
+  else
+    @lstring.new {!inReceiverTypeName + "." + inRoutineName !inRoutineName.location}
+  end
+  result.string += "("
+  for (passingMode selector) in inEffectiveParameterList do
+    result.string += [passingMode matchingFormalArgument] + selector + ":"
+  end
+  result.string += ")"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc routineSignature ?!@unifiedTypeMap ioTypeMap
-#                      ?let @routineFormalArgumentList inFormalArgumentList
-#                      !@routineTypedSignature outResult
-#{
-#  outResult = {}
-#  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
-#    [@unifiedTypeMap-proxy makeProxy !?ioTypeMap !formalArgumentTypeName ?let typeProxy]
-#    outResult += !formalArgumentPassingMode !selector !typeProxy
-#  end
-#}
+proc routineSignature ?!@unifiedTypeMap ioTypeMap
+                      ?let @routineFormalArgumentList inFormalArgumentList
+                      !@routineTypedSignature outResult
+{
+  outResult = {}
+  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+    [@unifiedTypeMap-proxy makeProxy !?ioTypeMap !formalArgumentTypeName ?let typeProxy]
+    outResult += !formalArgumentPassingMode !selector ![typeProxy type]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! OLD
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @routineArgumentSignatureMapForContext { # argument signature is the key
-#  @lstring mRoutineLLVMName
-#  @routineDescriptor mDescriptor
-#
-#  insert insertKey error message "the '%K' routine signature is already declared in %L"
-#  search searchKey %location error message "there is no '%K' routine signature"
-#}
+map @routineArgumentSignatureMapForContext { # argument signature is the key
+  @lstring mRoutineLLVMName
+  @routineDescriptor mDescriptor
+
+  insert insertKey error message "the '%K' routine signature is already declared in %L"
+  search searchKey %location error message "there is no '%K' routine signature"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @internalRoutineMapForContext { # Key is a mangled name
-#  @routineArgumentSignatureMapForContext mRoutineArgumentSignatureMapForContext
-#
-#  insert insertKey error message "the '%K' routine is already declared in %L"
-#  search searchKey error message "there is no '%K' routine"
-#}
+map @internalRoutineMapForContext { # Key is a mangled name
+  @routineArgumentSignatureMapForContext mRoutineArgumentSignatureMapForContext
+
+  insert insertKey error message "the '%K' routine is already declared in %L"
+  search searchKey error message "there is no '%K' routine"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#struct @routineMapForContext {
-#  @internalRoutineMapForContext mInternalRoutineMapForContext
-#}
+struct @routineMapForContext {
+  @internalRoutineMapForContext mInternalRoutineMapForContext
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#setter @routineMapForContext insertKey
-#  ?let @lstring inRoutineName
-#  ?let @lstring inArgumentSignature
-#  ?let @lstring inRoutineLLVMName
-#  ?let @routineDescriptor inDescriptor
-#{
-#  with inRoutineName.string in !?mInternalRoutineMapForContext do
-#    [!?mRoutineArgumentSignatureMapForContext insertKey
-#      !inArgumentSignature
-#      !inRoutineLLVMName
-#      !inDescriptor
-#    ]
-#  else
-#    @routineArgumentSignatureMapForContext routineArgumentSignatureMapForContext = {}
-#    [!?routineArgumentSignatureMapForContext insertKey
-#      !inArgumentSignature
-#      !inRoutineLLVMName
-#      !inDescriptor
-#    ]
-#    [!?mInternalRoutineMapForContext insertKey !inRoutineName !routineArgumentSignatureMapForContext]
-#  end
-#}
+setter @routineMapForContext insertKey
+  ?let @lstring inRoutineName
+  ?let @lstring inArgumentSignature
+  ?let @lstring inRoutineLLVMName
+  ?let @routineDescriptor inDescriptor
+{
+  with inRoutineName.string in !?mInternalRoutineMapForContext do
+    [!?mRoutineArgumentSignatureMapForContext insertKey
+      !inArgumentSignature
+      !inRoutineLLVMName
+      !inDescriptor
+    ]
+  else
+    @routineArgumentSignatureMapForContext routineArgumentSignatureMapForContext = {}
+    [!?routineArgumentSignatureMapForContext insertKey
+      !inArgumentSignature
+      !inRoutineLLVMName
+      !inDescriptor
+    ]
+    [!?mInternalRoutineMapForContext insertKey !inRoutineName !routineArgumentSignatureMapForContext]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @routineMapForContext searchKey
-#  ?let @lstring inRoutineName
-#  ?let @lstring inArgumentSignature
-#  !@lstring outRoutineLLVMName
-#  !@routineDescriptor outDescriptor
-#  !@location outKeyLocation
-#{
-#  [mInternalRoutineMapForContext searchKey !inRoutineName ?let routineArgumentSignatureMapForContext]
-#  [routineArgumentSignatureMapForContext searchKey !inArgumentSignature ?outRoutineLLVMName ?outDescriptor ?outKeyLocation]
-#}
+method @routineMapForContext searchKey
+  ?let @lstring inRoutineName
+  ?let @lstring inArgumentSignature
+  !@lstring outRoutineLLVMName
+  !@routineDescriptor outDescriptor
+  !@location outKeyLocation
+{
+  [mInternalRoutineMapForContext searchKey !inRoutineName ?let routineArgumentSignatureMapForContext]
+  [routineArgumentSignatureMapForContext searchKey !inArgumentSignature ?outRoutineLLVMName ?outDescriptor ?outKeyLocation]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#getter @routineMapForContext hasKey ?let @lstring inRoutineName ?let @lstring inArgumentSignature -> @bool {
-#  result = [mInternalRoutineMapForContext hasKey !inRoutineName]
-#  if result then
-#    [mInternalRoutineMapForContext searchKey !inRoutineName ?let routineArgumentSignatureMapForContext]
-#    result = [routineArgumentSignatureMapForContext hasKey !inArgumentSignature]
-#  end
-#}
+getter @routineMapForContext hasKey ?let @lstring inRoutineName ?let @lstring inArgumentSignature -> @bool {
+  result = [mInternalRoutineMapForContext hasKey !inRoutineName]
+  if result then
+    [mInternalRoutineMapForContext searchKey !inRoutineName ?let routineArgumentSignatureMapForContext]
+    result = [routineArgumentSignatureMapForContext hasKey !inArgumentSignature]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 # Key is a mangled name: "type.routineName"; for standalone routine, ".routineName"
-#map @guardMapForContext {
-#  @bool mIsPublic
-#  @routineTypedSignature mSignature
-#
-#  insert insertKey error message "the '%K' guard is already declared in %L"
-#  search searchKey error message "there is no '%K' guard"
-#  remove removeKey error message "there is no '%K' guard"
-#}
+map @guardMapForContext {
+  @bool mIsPublic
+  @routineTypedSignature mSignature
+
+  insert insertKey error message "the '%K' guard is already declared in %L"
+  search searchKey error message "there is no '%K' guard"
+  remove removeKey error message "there is no '%K' guard"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -63,82 +63,82 @@ override method @constructorCall noteExpressionTypesInPrecedenceGraph ?!@semanti
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @constructorCall analyzeExpression
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?inGuard:let @bool inGuard
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !result:@objectIR outResult
-#{
-##--- Analyze constructor source type
-#  @unifiedTypeMap-proxy resultType
-#  if mTypeName.string == "" then
-#    resultType = inOptionalTargetType
-#  else
-#    resultType = .searchKey {!inContext.mTypeMap !mTypeName}
-#  end
-#  if resultType == .null then
-#    error mErrorLocation : "cannot infer type" : outResult
-#  else
-#    [inContext.mConstructorMap searchKey ![[resultType key] nowhere] ?let initValue]
-#    switch initValue
-#    case zero :
-#      outResult = .zero {!type: resultType}
-#    case simple (value) :
-#      if [mParameterList length] != 0 then
-#        error mErrorLocation : "$" + [resultType key] + " constructor should have no parameter" : outResult
-#      else
-#        outResult = .literalInteger {!type: resultType !value:value}
-#      end
-#    case structure (constructorSignature sortedOperandList) :
-#      var sortedOperandIRList = sortedOperandList
-#      if [mParameterList length] != [constructorSignature length] then
-#        error mErrorLocation : "this constructor call should name " + [constructorSignature length] + " parameter"
-#          + if [constructorSignature length] > 1 then "s" else "" end
-#          + " instead of " + [mParameterList length]
-#        : outResult
-#      else
-#        for () formal_ in constructorSignature, () effective_ in mParameterList do
-#          if effective_mSelector.string != formal_mSelector  then
-#            error effective_mSelector : "the selector should be '!" + formal_mSelector + ":'"
-#          end
-#          [effective_mExpression analyzeExpression
-#            !self:inSelfType
-#            !inGuard:inGuard
-#            !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#            !optionalTargetType:formal_mType
-#            !context:inContext
-#            !mode:inCurrentMode
-#            !?temporary:ioTemporaries
-#            !?staticStringMap:ioGlobalLiteralStringMap
-#            !?variableMap:ioUniversalMap
-#            !?alloca:ioAllocaList
-#            !?instructionListIR:ioInstructionGenerationList
-#            ?result:let @objectIR expressionResult
-#          ]
-#          let result = checkAssignmentCompatibility (
-#            !source:expressionResult
-#            !targetAnnotationType:formal_mType
-#            !errorLocation:effective_mSelector.location
-#            !staticTypeAllowed:false
-#          )
-#          sortedOperandIRList += !result !formal_mFieldIndex
-#        end
-#        @operandIRList initialValueList = {}
-#        for (initialValue *) in sortedOperandIRList do
-#          initialValueList += !initialValue
-#        end
-#        outResult = .llvmStructureConstant {!type: resultType !values:initialValueList}
-#      end
-#    end
-#  end
-#}
+override method @constructorCall analyzeExpression
+  ?self:let @PLMType inSelfType
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Analyze constructor source type
+  @PLMType resultType
+  if mTypeName.string == "" then
+    resultType = inOptionalTargetType
+  else
+    resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  end
+  if resultType == .void then
+    error mErrorLocation : "cannot infer type" : outResult
+  else
+    [inContext.mConstructorMap searchKey ![[resultType key] nowhere] ?let initValue]
+    switch initValue
+    case zero :
+      outResult = .zero {!type: resultType}
+    case simple (value) :
+      if [mParameterList length] != 0 then
+        error mErrorLocation : "$" + [resultType key] + " constructor should have no parameter" : outResult
+      else
+        outResult = .literalInteger {!type: resultType !value:value}
+      end
+    case structure (constructorSignature sortedOperandList) :
+      var sortedOperandIRList = sortedOperandList
+      if [mParameterList length] != [constructorSignature length] then
+        error mErrorLocation : "this constructor call should name " + [constructorSignature length] + " parameter"
+          + if [constructorSignature length] > 1 then "s" else "" end
+          + " instead of " + [mParameterList length]
+        : outResult
+      else
+        for () formal_ in constructorSignature, () effective_ in mParameterList do
+          if effective_mSelector.string != formal_mSelector  then
+            error effective_mSelector : "the selector should be '!" + formal_mSelector + ":'"
+          end
+          [effective_mExpression analyzeExpression
+            !self:inSelfType
+            !inGuard:inGuard
+            !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+            !optionalTargetType:formal_mType
+            !context:inContext
+            !mode:inCurrentMode
+            !?temporary:ioTemporaries
+            !?staticStringMap:ioGlobalLiteralStringMap
+            !?variableMap:ioUniversalMap
+            !?alloca:ioAllocaList
+            !?instructionListIR:ioInstructionGenerationList
+            ?result:let @objectIR expressionResult
+          ]
+          let result = checkAssignmentCompatibility (
+            !source:expressionResult
+            !targetAnnotationType:formal_mType
+            !errorLocation:effective_mSelector.location
+            !staticTypeAllowed:false
+          )
+          sortedOperandIRList += !result !formal_mFieldIndex
+        end
+        @operandIRList initialValueList = {}
+        for (initialValue *) in sortedOperandIRList do
+          initialValueList += !initialValue
+        end
+        outResult = .llvmStructureConstant {!type: resultType !values:initialValueList}
+      end
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

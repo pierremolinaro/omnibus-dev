@@ -57,33 +57,33 @@ override method @typedConstantCall noteExpressionTypesInPrecedenceGraph ?!@seman
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @typedConstantCall analyzeExpression
-#  ?self:let @unifiedTypeMap-proxy unused inSelfType
-#  ?inGuard:let @bool unused inGuard
-#  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-#  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode unused inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
-#  ?!alloca:@allocaList unused ioAllocaList
-#  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-#  !result:@objectIR outResult
-#{
-##--- Analyze constructor source type
-#  @unifiedTypeMap-proxy inferredResultType
-#  if mOptionalTypeName.string == "" then
-#    inferredResultType = inOptionalTargetType
-#  else
-#    inferredResultType = .searchKey {!inContext.mTypeMap !mOptionalTypeName}
-#  end
-#  if inferredResultType == .null then
-#    error mConstructorName : "cannot infer type" : outResult
-#  else
-#    let classConstantMap = [inferredResultType classConstantMap]
-#    [classConstantMap searchKey !mConstructorName ?outResult]
-#  end
-#}
+override method @typedConstantCall analyzeExpression
+  ?self:let @PLMType unused inSelfType
+  ?inGuard:let @bool unused inGuard
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode unused inCurrentMode
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
+  ?!alloca:@allocaList unused ioAllocaList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Analyze constructor source type
+  @PLMType inferredResultType
+  if mOptionalTypeName.string == "" then
+    inferredResultType = inOptionalTargetType
+  else
+    inferredResultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mOptionalTypeName} type]
+  end
+  if inferredResultType == .void then
+    error mConstructorName : "cannot infer type" : outResult
+  else
+    let classConstantMap = [inferredResultType classConstantMap]
+    [classConstantMap searchKey !mConstructorName ?outResult]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

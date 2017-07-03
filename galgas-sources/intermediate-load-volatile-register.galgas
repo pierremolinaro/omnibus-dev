@@ -1,36 +1,36 @@
 
-#setter @instructionListIR appendLoadVolatileRegister
-#  ?let @objectIR inTargetValue
-#  ?let @bigint inAddress
-#{
-#  self += !@loadRegisterIR.new {!inTargetValue !inAddress}
-#}
+setter @instructionListIR appendLoadVolatileRegister
+  ?let @objectIR inTargetValue
+  ?let @bigint inAddress
+{
+  self += !@loadRegisterIR.new {!inTargetValue !inAddress}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @loadRegisterIR : @abstractInstructionIR {
-#  @objectIR mTargetValue
-#  @bigint mRegisterAddress
-#}
+class @loadRegisterIR : @abstractInstructionIR {
+  @objectIR mTargetValue
+  @bigint mRegisterAddress
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @loadRegisterIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-#  let llvmType = [mTargetValue llvmTypeName]
-#  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
-#         + " * inttoptr (i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
-#}
+override method @loadRegisterIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [mTargetValue llvmTypeName]
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
+         + " * inttoptr (i32 " + mRegisterAddress + " to " + llvmType + "*) ; " + [mRegisterAddress hexString] + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @loadRegisterIR enterAccessibleEntities 
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
+override method @loadRegisterIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

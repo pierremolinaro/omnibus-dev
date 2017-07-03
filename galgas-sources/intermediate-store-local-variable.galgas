@@ -1,38 +1,38 @@
 
-#setter @instructionListIR appendStoreLocalVariable
-#  ?let @string inLocalVarName
-#  ?let @unifiedTypeMap-proxy inTargetVarType
-#  ?let @objectIR inSourceValue
-#{
-#  self += !@storeLocalVariableIR.new {!inLocalVarName !inTargetVarType !inSourceValue}
-#}
+setter @instructionListIR appendStoreLocalVariable
+  ?let @string inLocalVarName
+  ?let @PLMType inTargetVarType
+  ?let @objectIR inSourceValue
+{
+  self += !@storeLocalVariableIR.new {!inLocalVarName !inTargetVarType !inSourceValue}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @storeLocalVariableIR : @abstractInstructionIR {
-#  @string mLocalVarName
-#  @unifiedTypeMap-proxy mTargetVarType
-#  @objectIR mSourceValue
-#}
+class @storeLocalVariableIR : @abstractInstructionIR {
+  @string mLocalVarName
+  @PLMType mTargetVarType
+  @objectIR mSourceValue
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @storeLocalVariableIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-#  let llvmType = [[mTargetVarType kind] llvmTypeName]
-#  ioLLVMcode += "  store "
-#  ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mLocalVarName) + "\n"
-#}
+override method @storeLocalVariableIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [mTargetVarType llvmTypeName]
+  ioLLVMcode += "  store "
+  ioLLVMcode += llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + " * %" + llvmNameForLocalVariable (!mLocalVarName) + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @storeLocalVariableIR enterAccessibleEntities 
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
+override method @storeLocalVariableIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

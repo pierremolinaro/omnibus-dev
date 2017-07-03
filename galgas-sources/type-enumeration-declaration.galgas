@@ -84,98 +84,98 @@ override getter @enumerationDeclaration keyRepresentationForErrorSignaling -> @s
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @enumConstantMap {
-#  @uint mIndex
-#  insert insertKey error message "the '%K' constant is already declared"
-#  search searchKey error message "there is no '%K' constant"
-#}
+map @enumConstantMap {
+  @uint mIndex
+  insert insertKey error message "the '%K' constant is already declared"
+  search searchKey error message "there is no '%K' constant"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @enumerationDeclaration enterInContext
-#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-#  ?!context:@semanticContext ioContext
-#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-#{
-##---
-#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mEnumerationName ?let selfType]
-#  @enumConstantMap enumConstantMap = {}
-#  @classConstantMap classConstantMap = {}
-#  for (cst) in mCaseNameList do
-#    let idx = [enumConstantMap count]
-#    [!?enumConstantMap insertKey !cst !idx]
-#    [!?classConstantMap insertKey !cst !.literalInteger {!type: selfType !value:[idx bigint]}]
-#  end
-#  [!?ioContext.mTypeMap insertType
-#    !lkey:mEnumerationName
-#    !kind:.enumeration {!constantMap:enumConstantMap !classConstantMap:classConstantMap}
-#  ]
-##--- Infix operators
-#  enterEnumerationOperators (
-#    !integerTypeName:mEnumerationName
-#    !?context:ioContext
-#  )
-#}
+override method @enumerationDeclaration enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+#---
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mEnumerationName ?let selfTypeProxy]
+  @enumConstantMap enumConstantMap = {}
+  @classConstantMap classConstantMap = {}
+  for (cst) in mCaseNameList do
+    let idx = [enumConstantMap count]
+    [!?enumConstantMap insertKey !cst !idx]
+    [!?classConstantMap insertKey !cst !.literalInteger {!type:[selfTypeProxy type] !value:[idx bigint]}]
+  end
+  [!?ioContext.mTypeMap insertType
+    !lkey:mEnumerationName
+    !type:.enumeration {!constantMap:enumConstantMap !classConstantMap:classConstantMap !plmTypeName:mEnumerationName}
+  ]
+#--- Infix operators
+  enterEnumerationOperators (
+    !integerTypeName:mEnumerationName
+    !?context:ioContext
+  )
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @enumerationDeclaration enterRoutinesInContext
-#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-#  ?!context:@semanticContext unused ioContext
-#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-#{
-#}
+override method @enumerationDeclaration enterRoutinesInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext unused ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc enterEnumerationOperators
-#  ?integerTypeName:@lstring inEnumerationTypeName
-#  ?!context:@semanticContext ioContext
-#{
-#  let key = combineTypeNamesForInfixOperator (!inEnumerationTypeName.string !inEnumerationTypeName.string)
-#  [!?ioContext.mEqualOperatorMap insertKey
-#    !key
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
-#  ]
-#  [!?ioContext.mNonEqualOperatorMap insertKey
-#    !key
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
-#  ]
-#  [!?ioContext.mStrictInfOperatorMap insertKey
-#    !key
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
-#  ]
-#  [!?ioContext.mInfEqualOperatorMap insertKey
-#    !key
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
-#  ]
-#  [!?ioContext.mStrictSupOperatorMap insertKey
-#    !key
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
-#  ]
-#  [!?ioContext.mSupEqualOperatorMap insertKey
-#    !key
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
-#  ]
-#}
+proc enterEnumerationOperators
+  ?integerTypeName:@lstring inEnumerationTypeName
+  ?!context:@semanticContext ioContext
+{
+  let key = combineTypeNamesForInfixOperator (!inEnumerationTypeName.string !inEnumerationTypeName.string)
+  [!?ioContext.mEqualOperatorMap insertKey
+    !key
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !key
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !key
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !key
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !key
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!.icmp_ugt}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !key
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!.icmp_uge}
+  ]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @enumerationDeclaration semanticAnalysis
-#  ?context:let @semanticContext unused inContext
-#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-#{
-#}
+override method @enumerationDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

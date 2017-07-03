@@ -53,21 +53,21 @@ override method @literalBooleanInExpressionAST noteExpressionTypesInPrecedenceGr
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @literalBooleanInExpressionAST analyzeExpression
-#  ?self:let @unifiedTypeMap-proxy unused inSelfType
-#  ?inGuard:let @bool unused inGuard
-#  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-#  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode unused inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
-#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
-#  ?!alloca:@allocaList unused ioAllocaList
-#  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-#  !result:@objectIR outResult
-#{
-#  outResult = .literalInteger {!type: inContext.mBooleanType !value:if mValue then 1G else 0G end}
-#}
+override method @literalBooleanInExpressionAST analyzeExpression
+  ?self:let @PLMType unused inSelfType
+  ?inGuard:let @bool unused inGuard
+  ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode unused inCurrentMode
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext unused ioUniversalMap
+  ?!alloca:@allocaList unused ioAllocaList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+  outResult = .literalInteger {!type:[inContext.mBooleanType type] !value:if mValue then 1G else 0G end}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -4,314 +4,314 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#struct @accessibleEntities {
-#  @stringset mRoutineSet
-#  @stringset mGuardSet
-#  @stringset mSectionSet
-#  @stringset mGlobalVariableSet
-#  @stringset mTaskVariableSet
-#}
+struct @accessibleEntities {
+  @stringset mRoutineSet
+  @stringset mGuardSet
+  @stringset mSectionSet
+  @stringset mGlobalVariableSet
+  @stringset mTaskVariableSet
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#abstract method @abstractInstructionIR enterAccessibleEntities
-#  ?!@accessibleEntities ioAccessibleEntities
-#  ?!@uint ioMaxBranchOfOnInstructions
+abstract method @abstractInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
-#  for (instruction) in self do
-#    [instruction enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-#  end
-#}
+method @instructionListIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
+  for (instruction) in self do
+    [instruction enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @routineMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
-#  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-#}
+method @routineMapIR-element enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
+  [mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct {
-#  let initialProcedureMap = ioIntermediateCodeStruct.mRoutineMapIR
-#  let initialGuardMap = ioIntermediateCodeStruct.mGuardMapIR
-#  @uint pass = 0
-#  @bool optimizing = true
-#  loop ([ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mGuardMapIR count] + 1)
-#  while optimizing do
-#    optimizing = false
-#    pass ++
-#  #--- Display
-#    if [option plm_options.optimization_displayDeadCodeElimination value] then
-#      var s = "Optimisation pass " + pass + "\n"
-#      s += "  " + [ioIntermediateCodeStruct.mStaticStringMap count] + " static strings\n"
-#      s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
-#      s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
-#      s += "  " + [ioIntermediateCodeStruct.mRoutineMapIR count] + " routine(s)\n"
-#      for routine in ioIntermediateCodeStruct.mRoutineMapIR do
-#        s += "   - " + routine.lkey + "\n"
-#      end
-#      s += "  " + [ioIntermediateCodeStruct.mGuardMapIR count] + " guards\n"
-#      message s
-#    end
-#  #------------------------------------------- loop through sub programs
-#    suppressInaccessibleSubprograms (
-#      !?intermediateCode:ioIntermediateCodeStruct
-#      ?@accessibleEntities accessibleEntities
-#      !?optimizing
-#    )
-#  #--- Suppress global constant
-#    @globalConstantMapIR globalConstantMap = {}
-#    for constant in ioIntermediateCodeStruct.mGlobalConstantMap do
-#      if [accessibleEntities.mGlobalVariableSet hasKey !constant.lkey.string] then
-#        [!?globalConstantMap insertKey !constant.lkey !constant.mType !constant.mSourceExpression]
-#      else
-#        optimizing = true
-#      end
-#    end
-#    ioIntermediateCodeStruct.mGlobalConstantMap = globalConstantMap
-#  #--- Suppress unused global variables
-#    @globalVariableMapIR globalVariableMap = {}
-#    for globalVariable in ioIntermediateCodeStruct.mGlobalVariableMap do
-#      if [accessibleEntities.mGlobalVariableSet hasKey !globalVariable.lkey.string] then
-#        [!?globalVariableMap insertKey
-#          !globalVariable.lkey
-#          !globalVariable.mType
-#          !globalVariable.mGenerateVolatile
-#          !globalVariable.mInitialValue
-#        ]
-#      else
-#        optimizing = true
-#      end
-#    end
-#    ioIntermediateCodeStruct.mGlobalVariableMap = globalVariableMap
-#  end
-##--- Warn on unused routines
-#  for () in initialProcedureMap do
-#    if (not [ioIntermediateCodeStruct.mRoutineMapIR hasKey !lkey.string]) && mWarnIfUnused then
-#      warning lkey: "unused procedure; use @" + noUnusedWarningAttribute () + " attribute for removing this warning"
-#    end
-#  end
-##--- Warn on unused guard
-#  for () in initialGuardMap do
-#    if (not [ioIntermediateCodeStruct.mGuardMapIR hasKey !lkey.string]) && mWarnIfUnused then
-#      warning lkey: "unused guard; use @" + noUnusedWarningAttribute () + " attribute for removing this warning"
-#    end
-#  end
-#}
+proc codeOptimisation ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct {
+  let initialProcedureMap = ioIntermediateCodeStruct.mRoutineMapIR
+  let initialGuardMap = ioIntermediateCodeStruct.mGuardMapIR
+  @uint pass = 0
+  @bool optimizing = true
+  loop ([ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mGuardMapIR count] + 1)
+  while optimizing do
+    optimizing = false
+    pass ++
+  #--- Display
+    if [option plm_options.optimization_displayDeadCodeElimination value] then
+      var s = "Optimisation pass " + pass + "\n"
+      s += "  " + [ioIntermediateCodeStruct.mStaticStringMap count] + " static strings\n"
+      s += "  " + [ioIntermediateCodeStruct.mGlobalConstantMap count] + " global constants\n"
+      s += "  " + [ioIntermediateCodeStruct.mGlobalVariableMap count] + " global variables\n"
+      s += "  " + [ioIntermediateCodeStruct.mRoutineMapIR count] + " routine(s)\n"
+      for routine in ioIntermediateCodeStruct.mRoutineMapIR do
+        s += "   - " + routine.lkey + "\n"
+      end
+      s += "  " + [ioIntermediateCodeStruct.mGuardMapIR count] + " guards\n"
+      message s
+    end
+  #------------------------------------------- loop through sub programs
+    suppressInaccessibleSubprograms (
+      !?intermediateCode:ioIntermediateCodeStruct
+      ?@accessibleEntities accessibleEntities
+      !?optimizing
+    )
+  #--- Suppress global constant
+    @globalConstantMapIR globalConstantMap = {}
+    for constant in ioIntermediateCodeStruct.mGlobalConstantMap do
+      if [accessibleEntities.mGlobalVariableSet hasKey !constant.lkey.string] then
+        [!?globalConstantMap insertKey !constant.lkey !constant.mType !constant.mSourceExpression]
+      else
+        optimizing = true
+      end
+    end
+    ioIntermediateCodeStruct.mGlobalConstantMap = globalConstantMap
+  #--- Suppress unused global variables
+    @globalVariableMapIR globalVariableMap = {}
+    for globalVariable in ioIntermediateCodeStruct.mGlobalVariableMap do
+      if [accessibleEntities.mGlobalVariableSet hasKey !globalVariable.lkey.string] then
+        [!?globalVariableMap insertKey
+          !globalVariable.lkey
+          !globalVariable.mType
+          !globalVariable.mGenerateVolatile
+          !globalVariable.mInitialValue
+        ]
+      else
+        optimizing = true
+      end
+    end
+    ioIntermediateCodeStruct.mGlobalVariableMap = globalVariableMap
+  end
+#--- Warn on unused routines
+  for () in initialProcedureMap do
+    if (not [ioIntermediateCodeStruct.mRoutineMapIR hasKey !lkey.string]) && mWarnIfUnused then
+      warning lkey: "unused procedure; use @" + noUnusedWarningAttribute () + " attribute for removing this warning"
+    end
+  end
+#--- Warn on unused guard
+  for () in initialGuardMap do
+    if (not [ioIntermediateCodeStruct.mGuardMapIR hasKey !lkey.string]) && mWarnIfUnused then
+      warning lkey: "unused guard; use @" + noUnusedWarningAttribute () + " attribute for removing this warning"
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#private proc suppressInaccessibleSubprograms
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#  !@accessibleEntities outAccessibleEntities
-#  ?!@bool ioOptimizing
-#{
-#  outAccessibleEntities = .default
-#  @routineMapIR accessibleProcedureMap = {}
-#  @routineMapIR nonExploredProcedureMap = {}
-#  @guardMapIR accessibleGuardMap = {}
-#  @guardMapIR nonExploredGuardMap = ioIntermediateCodeStruct.mGuardMapIR
-##--- First, required procedures
-#  for procedure in ioIntermediateCodeStruct.mRoutineMapIR do
-#    if procedure.mIsRequired then
-#      [!?accessibleProcedureMap insertKey
-#        !procedure.lkey
-#        !procedure.mReceiverType
-#        !procedure.mRoutineNameForGeneration
-#        !procedure.mFormalArgumentListForGeneration
-#        !procedure.mAllocaList
-#        !procedure.mInstructionGenerationList
-#        !procedure.mIsRequired
-#        !procedure.mWarnIfUnused
-#        !procedure.mGlobal
-#        !procedure.mKind
-#        !procedure.mReturnType
-#        !procedure.mAppendFileAndLineArgumentForPanicLocation
-#      ]        
-#      [procedure enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
-#      outAccessibleEntities.mRoutineSet += !procedure.mRoutineNameForGeneration.string
-#    else
-#      [!?nonExploredProcedureMap insertKey
-#        !procedure.lkey
-#        !procedure.mReceiverType
-#        !procedure.mRoutineNameForGeneration
-#        !procedure.mFormalArgumentListForGeneration
-#        !procedure.mAllocaList
-#        !procedure.mInstructionGenerationList
-#        !procedure.mIsRequired
-#        !procedure.mWarnIfUnused
-#        !procedure.mGlobal
-#        !procedure.mKind
-#        !procedure.mReturnType
-#        !procedure.mAppendFileAndLineArgumentForPanicLocation
-#      ]        
-#    end
-#  end
-##--- Then, boot and init clauses
-#  for boot in ioIntermediateCodeStruct.mBootList do
-#    [boot.mInstructionListIR enterAccessibleEntities
-#      !?outAccessibleEntities
-#      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-#    ]
-#  end
-#  for init in ioIntermediateCodeStruct.mInitList do
-#    [init.mInstructionListIR enterAccessibleEntities
-#      !?outAccessibleEntities
-#      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-#    ]
-#  end
-##--- Tasks (setup and loop)
-#  for task in ioIntermediateCodeStruct.mTaskMapIR do
-#    [task.mInitInstructionListIR enterAccessibleEntities
-#      !?outAccessibleEntities
-#      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-#    ]
-#    outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + "." + llvmNameForTaskLoopFunction () + "()"
-#  end
-##--- Panic clauses (if panic code is generated)
-#  if not [option plm_options.noPanicGeneration value] then
-#    [ioIntermediateCodeStruct.mPanicSetupInstructionListIR enterAccessibleEntities
-#      !?outAccessibleEntities
-#      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-#    ]
-#    [ioIntermediateCodeStruct.mPanicLoopInstructionListIR enterAccessibleEntities
-#      !?outAccessibleEntities
-#      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-#    ]
-#  end
-##--- interrupts
-#  [ioIntermediateCodeStruct.mInterruptMapIR enterAccessibleEntities
-#    !?outAccessibleEntities
-#    !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-#  ]
-##--- Explore routines
-#  var continues = true
-#  let bound = [ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mGuardMapIR count]
-#  loop (bound + 1) while continues do
-#    continues = false
-#    exploreProcs (
-#      !?accessibleProcedureMap
-#      !?outAccessibleEntities
-#      !?nonExploredProcedureMap
-#      !?continues
-#      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-#    )
-#    exploreGuards (
-#      !?accessibleGuardMap
-#      !?outAccessibleEntities
-#      !?nonExploredGuardMap
-#      !?continues
-#      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
-#    )
-#  end
-#  if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
-#    ioIntermediateCodeStruct.mRoutineMapIR = accessibleProcedureMap
-#    ioOptimizing = true
-#  end
-#  if ioIntermediateCodeStruct.mGuardMapIR != accessibleGuardMap then
-#    ioIntermediateCodeStruct.mGuardMapIR = accessibleGuardMap
-#    ioOptimizing = true
-#  end
-##--- Static arraies
-#  @staticArrayMap currentStaticArrayMap = {}
-#  for (staticArrayMame value) in ioIntermediateCodeStruct.mStaticArrayMap do
-#    if [outAccessibleEntities.mGlobalVariableSet hasKey !staticArrayMame] then
-#     [!?currentStaticArrayMap insertKey !staticArrayMame !value]
-#    end
-#  end
-#  if currentStaticArrayMap != ioIntermediateCodeStruct.mStaticArrayMap then
-#    ioIntermediateCodeStruct.mStaticArrayMap = currentStaticArrayMap
-#    ioOptimizing = true
-#  end
-#}
+private proc suppressInaccessibleSubprograms
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  !@accessibleEntities outAccessibleEntities
+  ?!@bool ioOptimizing
+{
+  outAccessibleEntities = .default
+  @routineMapIR accessibleProcedureMap = {}
+  @routineMapIR nonExploredProcedureMap = {}
+  @guardMapIR accessibleGuardMap = {}
+  @guardMapIR nonExploredGuardMap = ioIntermediateCodeStruct.mGuardMapIR
+#--- First, required procedures
+  for procedure in ioIntermediateCodeStruct.mRoutineMapIR do
+    if procedure.mIsRequired then
+      [!?accessibleProcedureMap insertKey
+        !procedure.lkey
+        !procedure.mReceiverType
+        !procedure.mRoutineNameForGeneration
+        !procedure.mFormalArgumentListForGeneration
+        !procedure.mAllocaList
+        !procedure.mInstructionGenerationList
+        !procedure.mIsRequired
+        !procedure.mWarnIfUnused
+        !procedure.mGlobal
+        !procedure.mKind
+        !procedure.mReturnType
+        !procedure.mAppendFileAndLineArgumentForPanicLocation
+      ]        
+      [procedure enterAccessibleEntities !?outAccessibleEntities !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
+      outAccessibleEntities.mRoutineSet += !procedure.mRoutineNameForGeneration.string
+    else
+      [!?nonExploredProcedureMap insertKey
+        !procedure.lkey
+        !procedure.mReceiverType
+        !procedure.mRoutineNameForGeneration
+        !procedure.mFormalArgumentListForGeneration
+        !procedure.mAllocaList
+        !procedure.mInstructionGenerationList
+        !procedure.mIsRequired
+        !procedure.mWarnIfUnused
+        !procedure.mGlobal
+        !procedure.mKind
+        !procedure.mReturnType
+        !procedure.mAppendFileAndLineArgumentForPanicLocation
+      ]        
+    end
+  end
+#--- Then, boot and init clauses
+  for boot in ioIntermediateCodeStruct.mBootList do
+    [boot.mInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
+  end
+  for init in ioIntermediateCodeStruct.mInitList do
+    [init.mInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
+  end
+#--- Tasks (setup and loop)
+  for task in ioIntermediateCodeStruct.mTaskMapIR do
+    [task.mInitInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
+    outAccessibleEntities.mRoutineSet += !"$" + task.lkey.string + "." + llvmNameForTaskLoopFunction () + "()"
+  end
+#--- Panic clauses (if panic code is generated)
+  if not [option plm_options.noPanicGeneration value] then
+    [ioIntermediateCodeStruct.mPanicSetupInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
+    [ioIntermediateCodeStruct.mPanicLoopInstructionListIR enterAccessibleEntities
+      !?outAccessibleEntities
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    ]
+  end
+#--- interrupts
+  [ioIntermediateCodeStruct.mInterruptMapIR enterAccessibleEntities
+    !?outAccessibleEntities
+    !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+  ]
+#--- Explore routines
+  var continues = true
+  let bound = [ioIntermediateCodeStruct.mRoutineMapIR count] + [ioIntermediateCodeStruct.mGuardMapIR count]
+  loop (bound + 1) while continues do
+    continues = false
+    exploreProcs (
+      !?accessibleProcedureMap
+      !?outAccessibleEntities
+      !?nonExploredProcedureMap
+      !?continues
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    )
+    exploreGuards (
+      !?accessibleGuardMap
+      !?outAccessibleEntities
+      !?nonExploredGuardMap
+      !?continues
+      !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions
+    )
+  end
+  if ioIntermediateCodeStruct.mRoutineMapIR != accessibleProcedureMap then
+    ioIntermediateCodeStruct.mRoutineMapIR = accessibleProcedureMap
+    ioOptimizing = true
+  end
+  if ioIntermediateCodeStruct.mGuardMapIR != accessibleGuardMap then
+    ioIntermediateCodeStruct.mGuardMapIR = accessibleGuardMap
+    ioOptimizing = true
+  end
+#--- Static arraies
+  @staticArrayMap currentStaticArrayMap = {}
+  for (staticArrayMame value) in ioIntermediateCodeStruct.mStaticArrayMap do
+    if [outAccessibleEntities.mGlobalVariableSet hasKey !staticArrayMame] then
+     [!?currentStaticArrayMap insertKey !staticArrayMame !value]
+    end
+  end
+  if currentStaticArrayMap != ioIntermediateCodeStruct.mStaticArrayMap then
+    ioIntermediateCodeStruct.mStaticArrayMap = currentStaticArrayMap
+    ioOptimizing = true
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#private proc exploreProcs
-#  ?!@routineMapIR ioAccessibleProcedureMap
-#  ?!@accessibleEntities ioAccessibleEntities
-#  ?!@routineMapIR ioNonExploredProcedureMap
-#  ?!@bool ioContinueExploreRoutines
-#  ?!@uint ioMaxBranchOfOnInstructions
-#{
-#  let @routineMapIR exNonExploredProcedureMap = ioNonExploredProcedureMap
-#  ioNonExploredProcedureMap = {}
-#  for procedure in exNonExploredProcedureMap do
-#    if [ioAccessibleEntities.mRoutineSet hasKey !procedure.mRoutineNameForGeneration.string] then
-#     [!?ioAccessibleProcedureMap insertKey
-#        !procedure.lkey
-#        !procedure.mReceiverType
-#        !procedure.mRoutineNameForGeneration
-#        !procedure.mFormalArgumentListForGeneration
-#        !procedure.mAllocaList
-#        !procedure.mInstructionGenerationList
-#        !procedure.mIsRequired
-#        !procedure.mWarnIfUnused
-#        !procedure.mGlobal
-#        !procedure.mKind
-#        !procedure.mReturnType
-#        !procedure.mAppendFileAndLineArgumentForPanicLocation
-#      ]        
-#      [procedure enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-#      ioContinueExploreRoutines = true
-#    else
-#      [!?ioNonExploredProcedureMap insertKey
-#        !procedure.lkey
-#        !procedure.mReceiverType
-#        !procedure.mRoutineNameForGeneration
-#        !procedure.mFormalArgumentListForGeneration
-#        !procedure.mAllocaList
-#        !procedure.mInstructionGenerationList
-#        !procedure.mIsRequired
-#        !procedure.mWarnIfUnused
-#        !procedure.mGlobal
-#        !procedure.mKind
-#        !procedure.mReturnType
-#        !procedure.mAppendFileAndLineArgumentForPanicLocation
-#    ]        
-#    end
-#  end
-#}
+private proc exploreProcs
+  ?!@routineMapIR ioAccessibleProcedureMap
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@routineMapIR ioNonExploredProcedureMap
+  ?!@bool ioContinueExploreRoutines
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  let @routineMapIR exNonExploredProcedureMap = ioNonExploredProcedureMap
+  ioNonExploredProcedureMap = {}
+  for procedure in exNonExploredProcedureMap do
+    if [ioAccessibleEntities.mRoutineSet hasKey !procedure.mRoutineNameForGeneration.string] then
+     [!?ioAccessibleProcedureMap insertKey
+        !procedure.lkey
+        !procedure.mReceiverType
+        !procedure.mRoutineNameForGeneration
+        !procedure.mFormalArgumentListForGeneration
+        !procedure.mAllocaList
+        !procedure.mInstructionGenerationList
+        !procedure.mIsRequired
+        !procedure.mWarnIfUnused
+        !procedure.mGlobal
+        !procedure.mKind
+        !procedure.mReturnType
+        !procedure.mAppendFileAndLineArgumentForPanicLocation
+      ]        
+      [procedure enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+      ioContinueExploreRoutines = true
+    else
+      [!?ioNonExploredProcedureMap insertKey
+        !procedure.lkey
+        !procedure.mReceiverType
+        !procedure.mRoutineNameForGeneration
+        !procedure.mFormalArgumentListForGeneration
+        !procedure.mAllocaList
+        !procedure.mInstructionGenerationList
+        !procedure.mIsRequired
+        !procedure.mWarnIfUnused
+        !procedure.mGlobal
+        !procedure.mKind
+        !procedure.mReturnType
+        !procedure.mAppendFileAndLineArgumentForPanicLocation
+    ]        
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#private proc exploreGuards
-#  ?!@guardMapIR ioAccessibleGuardMap
-#  ?!@accessibleEntities ioAccessibleEntities
-#  ?!@guardMapIR ioNonExploredGuardMap
-#  ?!@bool ioContinueExploreRoutines
-#  ?!@uint ioMaxBranchOfOnInstructions
-#{
-#  let @guardMapIR exNonExploredGuardMap = ioNonExploredGuardMap
-#  ioNonExploredGuardMap = {}
-#  for guard in exNonExploredGuardMap do
-#    if [ioAccessibleEntities.mGuardSet hasKey !guard.lkey.string] then
-#      [!?ioAccessibleGuardMap insertKey
-#        !guard.lkey
-#        !guard.mFormalArgumentListForGeneration
-#        !guard.mReceiverType
-#        !guard.mGuardKindGenerationIR
-#        !guard.mAllocaList
-#        !guard.mInstructionGenerationList
-#        !guard.mWarnIfUnused
-#      ]        
-#      [guard enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-#      ioContinueExploreRoutines = true
-#    else
-#      [!?ioNonExploredGuardMap insertKey
-#        !guard.lkey
-#        !guard.mFormalArgumentListForGeneration
-#        !guard.mReceiverType
-#        !guard.mGuardKindGenerationIR
-#        !guard.mAllocaList
-#        !guard.mInstructionGenerationList
-#        !guard.mWarnIfUnused
-#      ]        
-#    end
-#  end
-#}
+private proc exploreGuards
+  ?!@guardMapIR ioAccessibleGuardMap
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@guardMapIR ioNonExploredGuardMap
+  ?!@bool ioContinueExploreRoutines
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  let @guardMapIR exNonExploredGuardMap = ioNonExploredGuardMap
+  ioNonExploredGuardMap = {}
+  for guard in exNonExploredGuardMap do
+    if [ioAccessibleEntities.mGuardSet hasKey !guard.lkey.string] then
+      [!?ioAccessibleGuardMap insertKey
+        !guard.lkey
+        !guard.mFormalArgumentListForGeneration
+        !guard.mReceiverType
+        !guard.mGuardKindGenerationIR
+        !guard.mAllocaList
+        !guard.mInstructionGenerationList
+        !guard.mWarnIfUnused
+      ]        
+      [guard enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+      ioContinueExploreRoutines = true
+    else
+      [!?ioNonExploredGuardMap insertKey
+        !guard.lkey
+        !guard.mFormalArgumentListForGeneration
+        !guard.mReceiverType
+        !guard.mGuardKindGenerationIR
+        !guard.mAllocaList
+        !guard.mInstructionGenerationList
+        !guard.mWarnIfUnused
+      ]        
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

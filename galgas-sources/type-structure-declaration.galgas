@@ -181,383 +181,384 @@ override getter @structureDeclaration keyRepresentationForErrorSignaling -> @str
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @propertyList {
-#  @string mPropertyName
-#  @unifiedTypeMap-proxy mType
-#}
+list @propertyList {
+  @string mPropertyName
+  @PLMType mType
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @propertyMap {
-#  @bool mIsPublic
-#  @objectIR mPropertyObject
-#  insert insertKey error message "the '%K' property is already declared"
-#  search searchKey error message "there is no '%K' property"
-#}
+map @propertyMap {
+  @bool mIsPublic
+  @objectIR mPropertyObject
+  insert insertKey error message "the '%K' property is already declared"
+  search searchKey error message "there is no '%K' property"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @constructorSignature {
-#  @string mSelector
-#  @unifiedTypeMap-proxy mType
-#  @uint mFieldIndex
-#}
+list @constructorSignature {
+  @string mSelector
+  @PLMType mType
+  @uint mFieldIndex
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#sortedlist @sortedOperandIRList {
-#  @objectIR mOperand
-#  @uint mIndex
-#}{
-#  mIndex <
-#}
+sortedlist @sortedOperandIRList {
+  @objectIR mOperand
+  @uint mIndex
+}{
+  mIndex <
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @structureDeclaration enterInContext
-#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-#  ?!context:@semanticContext ioContext
-#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-#{
-##---------------------------------------- Properties
-#  @universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext = .default
-#  @propertyList propertyList = {}
-#  @propertyMap propertyMap = {}
-#  @sortedOperandIRList sortedOperandIRList = {}
-#  @constructorSignature constructorSignature = {}
-#  var canBeCopied = true
-#  for () in mStructurePropertyListAST do (propertyIndex)
-#  #--- Field type
-#    let @unifiedTypeMap-proxy optionalPropertyType = if mPropertyTypeName.string == ""
-#      then .null
-#      else .searchKey {!ioContext.mTypeMap !mPropertyTypeName}
-#    end
-#  #--- Init expression
-#    @instructionListIR initInstructionGenerationList = {}
-#    @allocaList allocaList = {}
-#    @semanticTemporariesStruct temporaries = .default
-#    switch mInitialisation
-#    case expression (initExpression) :
-#      [initExpression analyzeExpression
-#        !self:.null
-#        !inGuard:false
-#        !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
-#        !optionalTargetType:optionalPropertyType
-#        !context:ioContext
-#        !mode:.bootMode
-#        !?temporary:temporaries
-#        !?staticStringMap:*
-#        !?variableMap:*
-#        !?alloca:allocaList
-#        !?instructionListIR:initInstructionGenerationList
-#        ?result:let @objectIR expressionIR
-#      ]
-#      if (([initInstructionGenerationList length] + [allocaList length]) > 0) || not [expressionIR isStatic] then
-#        error mPropertyName : "initialization expression cannot be computed statically"
-#      end
-#      @unifiedTypeMap-proxy actualPropertyType
-#      if optionalPropertyType != .null then
-#        actualPropertyType = optionalPropertyType
-#      else
-#        actualPropertyType = [expressionIR type]
-#      end
-#      if not [[actualPropertyType kind] instanciable] then
-#        error mPropertyName : "$" + [actualPropertyType key] + " type is not instanciable"
-#      end
-#      if not [actualPropertyType copyable] then
-#        canBeCopied = false
-#      end
-#      propertyList += !mPropertyName.string !actualPropertyType
-#      [!?propertyMap insertKey
-#        !mPropertyName
-#        !mIsPublic
-#        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
-#      ]
-#      [!?universalPropertyAndRoutineMapForContext insertProperty
-#        !mPropertyName
-#        !public:mIsPublic
-#        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
-#      ]
-#      sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
-#    case noExpression :
-#      if not [[optionalPropertyType kind] instanciable] then
-#        error mPropertyName : "$" + [optionalPropertyType key] + " type is not instanciable"
-#      end
-#      propertyList += !mPropertyName.string !optionalPropertyType
-#      [!?propertyMap insertKey
-#        !mPropertyName
-#        !mIsPublic
-#        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
-#      ]
-#      [!?universalPropertyAndRoutineMapForContext insertProperty
-#        !mPropertyName
-#        !public:mIsPublic
-#        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
-#      ]
-#      constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
-#    end
-#  end
-##--- Enter in constructor map
-#  [!?ioContext.mConstructorMap insertKey
-#    !mStructureName
-#    !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
-#  ]
-##---------------------------------------- Attribute "copyable"
-#  var flags = instanciableFlag ()
-#  for (s) in mAttributeListAST do
-#    if s.string == "copyable" then
-#      if (flags & instanciableFlag ()) != 0 then
-#        error s : "duplicated attribute"
-#      elsif not canBeCopied then
-#        error mStructureName : "this structure cannot be copied, one field is not copyable"
-#      else
-#        flags = flags | instanciableFlag ()
-#      end
-#    else
-#      error s : "only @copyable attribute is allowed here"
-#    end
-#  end
-##---------------------------------------- Enter routines in property map
-#  for function in mFunctionDeclarationListAST do
-#  #--- Attribute set
-#    @stringset attributeSet = {}
-#    for attribute in function.mFunctionAttributeList do
-#      attributeSet += !attribute.mValue.string
-#    end
-#  #--- Signature
-#    let signature = [function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
-#    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let typedSignature)
-#  #--- Return type
-#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
-#  #--- Function invocation name
-#    let invocationName = routineMangledNameFromAST (
-#      !"$" + mStructureName 
-#      !function.mFunctionName
-#      !function.mFunctionFormalArgumentList
-#    )
-#  #--- Function descriptor
-#    let functionDescriptor = @routineDescriptor.new {
-#      !function.mPublicFunction
-#      ![attributeSet hasKey !exportedAttribute ()]
-#      !.function {!executionMode:function.mMode}
-#      !typedSignature
-#      !returnType
-#      ![attributeSet hasKey !accessAttribute ()]
-#      ![attributeSet hasKey !mutatingAttribute ()]
-#      !.staticCall
-#    }
-#  #---
-#    [!?universalPropertyAndRoutineMapForContext insertRoutine
-#      !function.mFunctionName
-#      !signature
-#      !invocationName
-#      !functionDescriptor
-#    ]
-#  end
-#  for system in mSystemRoutineListAST do
-#  #--- Attribute set
-#    @stringset attributeSet = {}
-#    for attribute in system.mAttributeList do
-#      attributeSet += !attribute.mValue.string
-#    end
-#  #--- Signature
-#    let signature = [system.mFormalArgumentList routineSignature !system.mName]
-#    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature typedSignature)
-#  #--- Return type
-#    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnType]
-#  #--- Function invocation name
-#    let invocationName = routineMangledNameFromAST (
-#      !"$" + mStructureName 
-#      !system.mName
-#      !system.mFormalArgumentList
-#    )
-#  #--- Function descriptor
-#    let descriptor = @routineDescriptor.new {
-#      !system.mPublic
-#      ![attributeSet hasKey !exportedAttribute ()]
-#      !system.mRoutineKind
-#      !typedSignature
-#      !returnType
-#      ![attributeSet hasKey !accessAttribute ()]
-#      ![attributeSet hasKey !mutatingAttribute ()]
-#      !.staticCall
-#    }
-#  #---
-#    [!?universalPropertyAndRoutineMapForContext insertRoutine
-#      !system.mName
-#      !signature
-#      !invocationName
-#      !descriptor
-#    ]
-#  end
-##---------------------------------------- Enter in type map
-#  [!?ioContext.mTypeMap insertType
-#    !lkey:mStructureName
-#    !kind:.structure {
-#      !typeName:mStructureName
-#      !propertyMap:propertyMap
-#      !universalMap:universalPropertyAndRoutineMapForContext
-#      !propertyList:propertyList
-#      !flags:flags
-#    }
-#  ]
-#}
+override method @structureDeclaration enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+#---------------------------------------- Properties
+  @universalPropertyAndRoutineMapForContext universalPropertyAndRoutineMapForContext = .default
+  @propertyList propertyList = {}
+  @propertyMap propertyMap = {}
+  @sortedOperandIRList sortedOperandIRList = {}
+  @constructorSignature constructorSignature = {}
+  var canBeCopied = true
+  for () in mStructurePropertyListAST do (propertyIndex)
+  #--- Field type
+    let @PLMType optionalPropertyType = if mPropertyTypeName.string == ""
+      then .void
+      else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
+    end
+  #--- Init expression
+    @instructionListIR initInstructionGenerationList = {}
+    @allocaList allocaList = {}
+    @semanticTemporariesStruct temporaries = .default
+    switch mInitialisation
+    case expression (initExpression) :
+      [initExpression analyzeExpression
+        !self:.void
+        !inGuard:false
+        !routineNameForInvocationGraph:.new {!mStructureName.string + " init" !mStructureName.location}
+        !optionalTargetType:optionalPropertyType
+        !context:ioContext
+        !mode:.bootMode
+        !?temporary:temporaries
+        !?staticStringMap:*
+        !?variableMap:*
+        !?alloca:allocaList
+        !?instructionListIR:initInstructionGenerationList
+        ?result:let @objectIR expressionIR
+      ]
+      if (([initInstructionGenerationList length] + [allocaList length]) > 0) || not [expressionIR isStatic] then
+        error mPropertyName : "initialization expression cannot be computed statically"
+      end
+      @PLMType actualPropertyType
+      if optionalPropertyType != .void then
+        actualPropertyType = optionalPropertyType
+      else
+        actualPropertyType = [expressionIR type]
+      end
+      if not [actualPropertyType instanciable] then
+        error mPropertyName : "$" + [actualPropertyType key] + " type is not instanciable"
+      end
+      if not [actualPropertyType copyable] then
+        canBeCopied = false
+      end
+      propertyList += !mPropertyName.string !actualPropertyType
+      [!?propertyMap insertKey
+        !mPropertyName
+        !mIsPublic
+        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
+      ]
+      [!?universalPropertyAndRoutineMapForContext insertProperty
+        !mPropertyName
+        !public:mIsPublic
+        !.property {!type:actualPropertyType !plmName:mPropertyName !index:propertyIndex}
+      ]
+      sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
+    case noExpression :
+      if not [optionalPropertyType instanciable] then
+        error mPropertyName : "$" + [optionalPropertyType key] + " type is not instanciable"
+      end
+      propertyList += !mPropertyName.string !optionalPropertyType
+      [!?propertyMap insertKey
+        !mPropertyName
+        !mIsPublic
+        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
+      ]
+      [!?universalPropertyAndRoutineMapForContext insertProperty
+        !mPropertyName
+        !public:mIsPublic
+        !.property {!type:optionalPropertyType !plmName:mPropertyName !index:propertyIndex}
+      ]
+      constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
+    end
+  end
+#--- Enter in constructor map
+  [!?ioContext.mConstructorMap insertKey
+    !mStructureName
+    !.structure{!constructorSignature:constructorSignature !sortedOperandList:sortedOperandIRList}
+  ]
+#---------------------------------------- Attribute "copyable"
+  var flags = instanciableFlag ()
+  for (s) in mAttributeListAST do
+    if s.string == "copyable" then
+      if (flags & instanciableFlag ()) != 0 then
+        error s : "duplicated attribute"
+      elsif not canBeCopied then
+        error mStructureName : "this structure cannot be copied, one field is not copyable"
+      else
+        flags = flags | instanciableFlag ()
+      end
+    else
+      error s : "only @copyable attribute is allowed here"
+    end
+  end
+#---------------------------------------- Enter routines in property map
+  for function in mFunctionDeclarationListAST do
+  #--- Attribute set
+    @stringset attributeSet = {}
+    for attribute in function.mFunctionAttributeList do
+      attributeSet += !attribute.mValue.string
+    end
+  #--- Signature
+    let signature = [function.mFunctionFormalArgumentList routineSignature !function.mFunctionName]
+    routineSignature (!?ioContext.mTypeMap !function.mFunctionFormalArgumentList ?let typedSignature)
+  #--- Return type
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !function.mFunctionReturnTypeName ?let returnType]
+  #--- Function invocation name
+    let invocationName = routineMangledNameFromAST (
+      !"$" + mStructureName 
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+    )
+  #--- Function descriptor
+    let functionDescriptor = @routineDescriptor.new {
+      !function.mPublicFunction
+      ![attributeSet hasKey !exportedAttribute ()]
+      !.function {!executionMode:function.mMode}
+      !typedSignature
+      ![returnType type]
+      ![attributeSet hasKey !accessAttribute ()]
+      ![attributeSet hasKey !mutatingAttribute ()]
+      !.staticCall
+    }
+  #---
+    [!?universalPropertyAndRoutineMapForContext insertRoutine
+      !function.mFunctionName
+      !signature
+      !invocationName
+      !functionDescriptor
+    ]
+  end
+  for system in mSystemRoutineListAST do
+  #--- Attribute set
+    @stringset attributeSet = {}
+    for attribute in system.mAttributeList do
+      attributeSet += !attribute.mValue.string
+    end
+  #--- Signature
+    let signature = [system.mFormalArgumentList routineSignature !system.mName]
+    routineSignature (!?ioContext.mTypeMap !system.mFormalArgumentList ?let @routineTypedSignature typedSignature)
+  #--- Return type
+    [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !system.mReturnTypeName ?let returnType]
+  #--- Function invocation name
+    let invocationName = routineMangledNameFromAST (
+      !"$" + mStructureName 
+      !system.mName
+      !system.mFormalArgumentList
+    )
+  #--- Function descriptor
+    let descriptor = @routineDescriptor.new {
+      !system.mPublic
+      ![attributeSet hasKey !exportedAttribute ()]
+      !system.mRoutineKind
+      !typedSignature
+      ![returnType type]
+      ![attributeSet hasKey !accessAttribute ()]
+      ![attributeSet hasKey !mutatingAttribute ()]
+      !.staticCall
+    }
+  #---
+    [!?universalPropertyAndRoutineMapForContext insertRoutine
+      !system.mName
+      !signature
+      !invocationName
+      !descriptor
+    ]
+  end
+#---------------------------------------- Enter in type map
+  [!?ioContext.mTypeMap insertType
+    !lkey:mStructureName
+    !type:.structure {
+      !typeName:mStructureName
+      !propertyMap:propertyMap
+      !universalMap:universalPropertyAndRoutineMapForContext
+      !propertyList:propertyList
+      !flags:flags
+      !plmTypeName:mStructureName
+    }
+  ]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @structureDeclaration enterRoutinesInContext
-#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-#  ?!context:@semanticContext ioContext
-#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-#{
-#  [mFunctionDeclarationListAST enterFunctionInContext
-#    !selfTypeName:llvmRegularTypeMangledNameFromName (!mStructureName).string
-#    !?context:ioContext
-#  ]
-#  [mSystemRoutineListAST enterInContext
-#    !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string
-#    !?context:ioContext
-#  ]
-#  [mGuardListAST enterInContext
-#    !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string
-#    !?context:ioContext
-#  ]
-#}
+override method @structureDeclaration enterRoutinesInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+  [mFunctionDeclarationListAST enterFunctionInContext
+    !selfTypeName:llvmRegularTypeMangledNameFromName (!mStructureName).string
+    !?context:ioContext
+  ]
+  [mSystemRoutineListAST enterInContext
+    !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string
+    !?context:ioContext
+  ]
+  [mGuardListAST enterInContext
+    !receiverType:llvmRegularTypeMangledNameFromName (!mStructureName).string
+    !?context:ioContext
+  ]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @structureDeclaration semanticAnalysis
-#  ?context:let @semanticContext inContext
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#{
-#  let structureType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName}
-##--- Analyze functions
-#  [self functionSemanticAnalysis
-#    !structureType:structureType
-#    !context:inContext
-#    !?temporary:ioTemporaries
-#    !?intermediateCode:ioIntermediateCodeStruct
-#  ]
-##--- Analyze system routines
-#  [mSystemRoutineListAST systemRoutineSemanticAnalysis
-#    !receiverType:structureType
-#    !context:inContext
-#    !?temporary:ioTemporaries
-#    !?intermediateCode:ioIntermediateCodeStruct
-#  ]
-##--- Analyze guards
-#  [mGuardListAST guardSemanticAnalysis
-#    !receiverType:structureType
-#    !context:inContext
-#    !?temporary:ioTemporaries
-#    !?intermediateCode:ioIntermediateCodeStruct
-#  ]
-##--- Generate property access
-#  generatePropertyAccess (!structureType:[structureType kind] !?intermediateCode:ioIntermediateCodeStruct)
-#}
+override method @structureDeclaration semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  let structureType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mStructureName} type]
+#--- Analyze functions
+  [self functionSemanticAnalysis
+    !structureType:structureType
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode:ioIntermediateCodeStruct
+  ]
+#--- Analyze system routines
+  [mSystemRoutineListAST systemRoutineSemanticAnalysis
+    !receiverType:structureType
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode:ioIntermediateCodeStruct
+  ]
+#--- Analyze guards
+  [mGuardListAST guardSemanticAnalysis
+    !receiverType:structureType
+    !context:inContext
+    !?temporary:ioTemporaries
+    !?intermediateCode:ioIntermediateCodeStruct
+  ]
+#--- Generate property access
+  generatePropertyAccess (!structureType:structureType !?intermediateCode:ioIntermediateCodeStruct)
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @structureDeclaration functionSemanticAnalysis
-#  ?structureType:let @unifiedTypeMap-proxy inStructureType
-#  ?context:let @semanticContext inContext
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#{
-#  for function in mFunctionDeclarationListAST do
-#    var warnIfUnused = true
-#    var mutating = false
-#    var accessProperties = false
-#    for (attribute) in function.mFunctionAttributeList do
-#      if attribute.string == noUnusedWarningAttribute () then
-#        if not warnIfUnused then
-#          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
-#        end
-#        warnIfUnused = false    
-#      elsif attribute.string == userAccessAttribute () then
-#        if accessProperties then
-#          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
-#        end
-#        accessProperties = true    
-#      elsif attribute.string == mutatingAttribute () then
-#        if mutating then
-#          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
-#        end
-#        mutating = true    
-#      else
-#        error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
-#          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
-#      end
-#    end
-#    accessProperties = function.mMode != .userMode
-#    routineSemanticAnalysis (
-#      !receiverType:inStructureType
-#      !.function {!executionMode:function.mMode}
-#      !function.mMode
-#      !function.mFunctionName
-#      !function.mFunctionFormalArgumentList
-#      !returnTypeName:function.mFunctionReturnTypeName
-#      !function.mFunctionInstructionList
-#      !function.mEndOfFunctionDeclaration
-#      !directAccessToPropertiesAllowed:accessProperties
-#      !propertiesAreMutable:mutating
-#      !warnIfUnused:warnIfUnused
-#      !globalFunction:false
-#      !context:inContext
-#      !?temporary:ioTemporaries
-#      !?intermediateCode:ioIntermediateCodeStruct
-#    )
-#  end
-#}
+method @structureDeclaration functionSemanticAnalysis
+  ?structureType:let @PLMType inStructureType
+  ?context:let @semanticContext inContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  for function in mFunctionDeclarationListAST do
+    var warnIfUnused = true
+    var mutating = false
+    var accessProperties = false
+    for (attribute) in function.mFunctionAttributeList do
+      if attribute.string == noUnusedWarningAttribute () then
+        if not warnIfUnused then
+          error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
+        end
+        warnIfUnused = false    
+      elsif attribute.string == userAccessAttribute () then
+        if accessProperties then
+          error attribute : "duplicated @" + userAccessAttribute () + " attribute"
+        end
+        accessProperties = true    
+      elsif attribute.string == mutatingAttribute () then
+        if mutating then
+          error attribute : "duplicated @" + mutatingAttribute () + " attribute"
+        end
+        mutating = true    
+      else
+        error attribute : "unknown attribute; available attributes are @" + noUnusedWarningAttribute ()
+          + ", @" + mutatingAttribute () + " and @" + userAccessAttribute ()
+      end
+    end
+    accessProperties = function.mMode != .userMode
+    routineSemanticAnalysis (
+      !receiverType:inStructureType
+      !.function {!executionMode:function.mMode}
+      !function.mMode
+      !function.mFunctionName
+      !function.mFunctionFormalArgumentList
+      !returnTypeName:function.mFunctionReturnTypeName
+      !function.mFunctionInstructionList
+      !function.mEndOfFunctionDeclaration
+      !directAccessToPropertiesAllowed:accessProperties
+      !propertiesAreMutable:mutating
+      !warnIfUnused:warnIfUnused
+      !globalFunction:false
+      !context:inContext
+      !?temporary:ioTemporaries
+      !?intermediateCode:ioIntermediateCodeStruct
+    )
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  GENERATE PROPERTY ACCESS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @propertyAccessRoutineList {
-#  @typeKind mStructureKind
-#  @unifiedTypeMap-proxy mPropertyType
-#  @string mPropertyName
-#  @uint mPropertyIndex
-#}
+list @propertyAccessRoutineList {
+  @PLMType mStructureKind
+  @PLMType mPropertyType
+  @string mPropertyName
+  @uint mPropertyIndex
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc generatePropertyAccess
-#  ?structureType:let @typeKind inTypeKind
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#{
-#  [inTypeKind structure ?1* ?propertyMap:let @propertyMap propertyMap ?1* ?propertyList:@propertyList propertyList ?1*]
-#  for (propertyName * objectIR) in propertyMap do
-#    [objectIR property ?type:let propertyType ?plmName:* ?index:@uint index]
-#    ioIntermediateCodeStruct.mPropertyAccessRoutineList += 
-#      !inTypeKind
-#      !propertyType
-#      !propertyName.string
-#      !index
-#  end
-#}
+proc generatePropertyAccess
+  ?structureType:let @PLMType inType
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  [inType structure ?1* ?propertyMap:let @propertyMap propertyMap ?1* ?propertyList:@propertyList propertyList ?2*]
+  for (propertyName * objectIR) in propertyMap do
+    [objectIR property ?type:let propertyType ?plmName:* ?index:@uint index]
+    ioIntermediateCodeStruct.mPropertyAccessRoutineList += 
+      !inType
+      !propertyType
+      !propertyName.string
+      !index
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
-#  for (structureKind propertyType propertyName propertyIndex) in self do
-#    let structTypeName = [structureKind llvmTypeName]
-#    let propTypeName = [[propertyType kind] llvmTypeName]
-#    ioLLVMcode += llvmTitleComment (!"Access property '" + propertyName + "' of structure " + structTypeName)
-#    ioLLVMcode += "define internal " + propTypeName
-#    ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
-#    ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"
-#    ioLLVMcode += "  %result = getelementptr inbounds " + structTypeName + ", " + structTypeName + " * %self, "
-#    ioLLVMcode += "i32 0, i32 " + propertyIndex + " ; " + propertyName + ", index " + propertyIndex + "\n"
-#    ioLLVMcode += "  ret " + propTypeName + " * %result\n"
-#    ioLLVMcode += "}\n\n"
-#  end
-#}
+method @propertyAccessRoutineList generateCode ?!@string ioLLVMcode {
+  for (structureKind propertyType propertyName propertyIndex) in self do
+    let structTypeName = [structureKind llvmTypeName]
+    let propTypeName = [propertyType llvmTypeName]
+    ioLLVMcode += llvmTitleComment (!"Access property '" + propertyName + "' of structure " + structTypeName)
+    ioLLVMcode += "define internal " + propTypeName
+    ioLLVMcode += " * @\"" + structTypeName + ".access." + propertyName + "\""
+    ioLLVMcode += " (" + structTypeName + " * %self) nounwind {\n"
+    ioLLVMcode += "  %result = getelementptr inbounds " + structTypeName + ", " + structTypeName + " * %self, "
+    ioLLVMcode += "i32 0, i32 " + propertyIndex + " ; " + propertyName + ", index " + propertyIndex + "\n"
+    ioLLVMcode += "  ret " + propTypeName + " * %result\n"
+    ioLLVMcode += "}\n\n"
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

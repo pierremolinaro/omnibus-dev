@@ -417,47 +417,47 @@ abstract method @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticT
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#abstract method @expressionAST analyzeExpression
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?inGuard:let @bool inGuard
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?optionalTargetType:let @unifiedTypeMap-proxy inTargetType
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !result:@objectIR outResult
+abstract method @expressionAST analyzeExpression
+  ?self:let @PLMType inSelfType
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType inTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @expressionAST analyzeStaticExpression
-#  ?errorLocation:let @location inErrorLocation
-#  ?context:let @semanticContext inContext
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  !result:@objectIR outResult
-#{
-#  @instructionListIR instructionGenerationList = {}
-#  @allocaList allocaList = {}
-#  [self analyzeExpression
-#    !self:.null
-#    !inGuard:false
-#    !routineNameForInvocationGraph:["compiler" nowhere]
-#    !optionalTargetType:.null
-#    !context:inContext
-#    !mode:.bootMode
-#    !?temporary:*
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:*
-#    !?alloca:allocaList
-#    !?instructionListIR:instructionGenerationList
-#    ?result:outResult
-#  ]
-#  if ([allocaList length] > 0) || ([instructionGenerationList length] > 0) || not [outResult isStatic] then
-#    error inErrorLocation : "this expression should be a static expression" : outResult
-#  end
-#}
+method @expressionAST analyzeStaticExpression
+  ?errorLocation:let @location inErrorLocation
+  ?context:let @semanticContext inContext
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  !result:@objectIR outResult
+{
+  @instructionListIR instructionGenerationList = {}
+  @allocaList allocaList = {}
+  [self analyzeExpression
+    !self:.void
+    !inGuard:false
+    !routineNameForInvocationGraph:["compiler" nowhere]
+    !optionalTargetType:.void
+    !context:inContext
+    !mode:.bootMode
+    !?temporary:*
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:*
+    !?alloca:allocaList
+    !?instructionListIR:instructionGenerationList
+    ?result:outResult
+  ]
+  if ([allocaList length] > 0) || ([instructionGenerationList length] > 0) || not [outResult isStatic] then
+    error inErrorLocation : "this expression should be a static expression" : outResult
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

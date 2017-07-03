@@ -40,146 +40,142 @@ override method @prefixOperatorExpressionAST noteExpressionTypesInPrecedenceGrap
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @prefixOperatorExpressionAST analyzeExpression
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?inGuard:let @bool inGuard
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?optionalTargetType:let @unifiedTypeMap-proxy inOptionalTargetType
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !result:@objectIR outResult
-#{
-##--- Analyze expression
-#  [mExpression analyzeExpression
-#    !self:inSelfType
-#    !inGuard:inGuard
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !optionalTargetType:inOptionalTargetType
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?result:let @objectIR expressionResultPossibleReference
-#  ]
-#  [!?ioInstructionGenerationList appendLoadFromReference
-#    !?ioTemporaries
-#    !expressionResultPossibleReference
-#    !mOperatorLocation
-#    ?let expressionResult
-#  ]  
-##--- Check expression type accepts prefix operator
-#  @prefixOperatorMap prefixOperatorMap
-#  @llvmBinaryOperation binaryOperator
-#  @objectIR leftOperand
-#  switch mOp 
-#  case unsignedComplement :
-#    prefixOperatorMap = inContext.mUnsignedComplementOperatorMap
-#    binaryOperator = .xor
-#    switch [expressionResult kind]
-#    case arrayType (* * * * *) :
-#      error mOperatorLocation : "internal error" : leftOperand
-#    case opaque (* *) :
-#      error mOperatorLocation : "internal error" : leftOperand
-#    case boolean :
-#      error mOperatorLocation : "internal error" : leftOperand
-#    case literalString :
-#      error mOperatorLocation : "internal error" : leftOperand
-#    case enumeration (* *) :
-#      error mOperatorLocation : "internal error" : leftOperand
-#    case structure (* * * * *) :
-#      error mOperatorLocation : "internal error" : leftOperand
-#    case function (*) :
-#      error mOperatorLocation : "internal error" : leftOperand
-#    case pointer (*) :
-#      error mOperatorLocation : "internal error" : leftOperand
-#    case staticInteger :
-#      if inOptionalTargetType == .null then
-#        error mOperatorLocation : "the ~ operator cannot be applied to static int, without inferred type" : leftOperand
-#      elsif [[inOptionalTargetType kind] isInteger] then
-#        [[inOptionalTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?2*]
-#        if minTarget < 0G then
-#          error mOperatorLocation : "the ~ operator cannot be applied to an inferred signed integer type" : leftOperand
-#        else
-#          leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:maxTarget}
-#        end
-#      else
-#        error mOperatorLocation : "for the ~ operator, the inferred type should be an unsigned integer" : leftOperand
-#      end
-#   case integer (* * * @uint bitCount) :
-#      leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:(1G << bitCount) - 1G}
-#    end
-#  case notOperator :
-#    prefixOperatorMap = inContext.mNotOperatorMap
-#    binaryOperator = .xor
-#    leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:1G}
-#  case minusNoOvf :
-#    prefixOperatorMap = inContext.mUnaryMinusOperatorMap
-#    binaryOperator = .subNoOVF
-#    leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:0G}
-#  case minus :
-#    prefixOperatorMap = inContext.mUnaryMinusOperatorMap
-#    if inCurrentMode == .panicMode then
-#      error mOperatorLocation
-#        : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
-#    end
-#    if [option plm_options.noPanicGeneration value] then
-#      binaryOperator = .subNoOVF
-#      leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:0G}
-#    else
-#      binaryOperator = .ssubOVF
-#      leftOperand = .literalInteger {!type: inContext.mLiteralIntegerType !value:0G}
-#    end
-#  end
-##--- Check operator
-#  [prefixOperatorMap searchKey !.new {![expressionResult key] !mOperatorLocation}]
-#  let resultType = [expressionResult type]
-##---
-#  if [expressionResult isLiteralInteger] then
-#    [expressionResult literalInteger ?1* ?value:let @bigint value]
-#    @bigint result
-#    switch mOp 
-#    case minusNoOvf :
-#      result = - value
-#    case unsignedComplement :
-#      if inOptionalTargetType == .null then
-#        error mOperatorLocation : "the ~ operator cannot be applied to static int, without inferred type" : result
-#      elsif [[inOptionalTargetType kind] isInteger] then
-#        [[inOptionalTargetType kind] integer ?min:let minTarget ?max:let maxTarget ?2*]
-#        if minTarget < 0G then
-#          error mOperatorLocation : "the ~ operator cannot be applied to an inferred signed integer type" : result
-#        else
-#          result = value ^ maxTarget
-#        end
-#      else
-#        error mOperatorLocation : "for the ~ operator, the inferred type should be an unsigned integer" : result
-#      end
-#    case minus :
-#      result = - value
-#    case notOperator :
-#      result = 1G ^ value
-#    end
-#    outResult = .literalInteger {!type:resultType !value:result}
-#  else
-#  #--- Temp var
-#    getNewTempVariable (!resultType !mOperatorLocation !?ioTemporaries ?outResult)
-#  #--- Generate code
-#    [!?ioInstructionGenerationList appendBinaryOperation
-#      !outResult
-#      ![outResult type]
-#      !mOperatorLocation
-#      !leftOperand
-#      !binaryOperator
-#      !expressionResult
-#    ]      
-#  end
-#}
+override method @prefixOperatorExpressionAST analyzeExpression
+  ?self:let @PLMType inSelfType
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Analyze expression
+  [mExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:inOptionalTargetType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @objectIR expressionResultPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !expressionResultPossibleReference
+    !mOperatorLocation
+    ?let expressionResult
+  ]  
+#--- Check expression type accepts prefix operator
+  @prefixOperatorMap prefixOperatorMap
+  @llvmBinaryOperation binaryOperator
+  @objectIR leftOperand
+  switch mOp 
+  case unsignedComplement :
+    prefixOperatorMap = inContext.mUnsignedComplementOperatorMap
+    binaryOperator = .xor
+    switch [expressionResult type]
+    case arrayType (* * * * * *) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case opaque (* * *) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case boolean, void :
+      error mOperatorLocation : "internal error" : leftOperand
+    case literalString :
+      error mOperatorLocation : "internal error" : leftOperand
+    case enumeration (* * *) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case structure (* * * * * *) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case function (*) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case pointer (*) :
+      error mOperatorLocation : "internal error" : leftOperand
+    case staticInteger :
+      if [inOptionalTargetType isInteger] then
+        [inOptionalTargetType integer ?min:let minTarget ?max:let maxTarget ?3*]
+        if minTarget < 0G then
+          error mOperatorLocation : "the ~ operator cannot be applied to an inferred signed integer type" : leftOperand
+        else
+          leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:maxTarget}
+        end
+      else
+        error mOperatorLocation : "for the ~ operator, the inferred type should be an unsigned integer" : leftOperand
+      end
+    case integer (* * * @uint bitCount *) :
+      leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:(1G << bitCount) - 1G}
+    end
+  case notOperator :
+    prefixOperatorMap = inContext.mNotOperatorMap
+    binaryOperator = .xor
+    leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:1G}
+  case minusNoOvf :
+    prefixOperatorMap = inContext.mUnaryMinusOperatorMap
+    binaryOperator = .subNoOVF
+    leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:0G}
+  case minus :
+    prefixOperatorMap = inContext.mUnaryMinusOperatorMap
+    if inCurrentMode == .panicMode then
+      error mOperatorLocation
+        : "operations that can generate panic are not allowed in `" + panicModeName () + " mode"
+    end
+    if [option plm_options.noPanicGeneration value] then
+      binaryOperator = .subNoOVF
+      leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:0G}
+    else
+      binaryOperator = .ssubOVF
+      leftOperand = .literalInteger {!type:[inContext.mLiteralIntegerType type] !value:0G}
+    end
+  end
+#--- Check operator
+  [prefixOperatorMap searchKey !.new {![expressionResult key] !mOperatorLocation}]
+  let resultType = [expressionResult type]
+#---
+  if [expressionResult isLiteralInteger] then
+    [expressionResult literalInteger ?1* ?value:let @bigint value]
+    @bigint result
+    switch mOp 
+    case minusNoOvf :
+      result = - value
+    case unsignedComplement :
+      if [inOptionalTargetType isInteger] then
+        [inOptionalTargetType integer ?min:let minTarget ?max:let maxTarget ?3*]
+        if minTarget < 0G then
+          error mOperatorLocation : "the ~ operator cannot be applied to an inferred signed integer type" : result
+        else
+          result = value ^ maxTarget
+        end
+      else
+        error mOperatorLocation : "for the ~ operator, the inferred type should be an unsigned integer" : result
+      end
+    case minus :
+      result = - value
+    case notOperator :
+      result = 1G ^ value
+    end
+    outResult = .literalInteger {!type:resultType !value:result}
+  else
+  #--- Temp var
+    getNewTempVariable (!resultType !mOperatorLocation !?ioTemporaries ?outResult)
+  #--- Generate code
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !outResult
+      ![outResult type]
+      !mOperatorLocation
+      !leftOperand
+      !binaryOperator
+      !expressionResult
+    ]      
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

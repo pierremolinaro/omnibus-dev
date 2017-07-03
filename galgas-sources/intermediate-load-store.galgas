@@ -1,115 +1,115 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#setter @instructionListIR appendStoreFromReference
-#  ?let @objectIR inTargetReference
-#  ?let @location inErrorLocation
-#  ?let @objectIR inValue
-#{
-#  switch inTargetReference
-##--- Temporary ?
-#  case selfObject (*) :
-#    error [inTargetReference location] : "<<@instructionListIR appendStoreFromReference selfObject>>"
-##--- References
-#  case globalVariableReference (@unifiedTypeMap-proxy type @lstring plmName) :
-#    [!?self appendStoreGlobalVariable !plmName !type !inValue !volatile:false]
-#  case localVariableReference (@unifiedTypeMap-proxy type plmName) :
-#    [!?self appendStoreLocalVariable !plmName !type !inValue]
-#  case temporaryReference (@unifiedTypeMap-proxy type llvmName * @bool volatile) :
-#    [!?self appendStoreTemporaryReference !type !llvmName !inValue !volatile:volatile]
-#  case registerReference (type * * * address * arraySize *) :
-#    if arraySize > 0 then
-#      error inErrorLocation : "register array requires subscripting"
-#    end
-#    [!?self appendStoreVolatileRegister !type !address !inValue]
-##--- Structure property
-#  case property (* * *) :
-#    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue property>>"
-##--- Values
-#  case llvmTemporaryValue (* llvmName *) :
-#    error llvmName : "<<@instructionListIR llvmGlobalObjectValue llvmTemporaryValue>>"
-#  case literalInteger  (* *) :
-#    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue literalInteger>>"
-#  case llvmStructureConstant (* *) :
-#    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue llvmStructureConstant>>"
-#  case literalString  (* * *) :
-#    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue literalString>>"
-#  case zero (*) :
-#    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue zero>>"
-#  case possibleFunction (* *) :
-#    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue possibleFunction>>"
-#  case null :
-#    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue null>>"
-#  end
-#}
+setter @instructionListIR appendStoreFromReference
+  ?let @objectIR inTargetReference
+  ?let @location inErrorLocation
+  ?let @objectIR inValue
+{
+  switch inTargetReference
+#--- Temporary ?
+  case selfObject (*) :
+    error [inTargetReference location] : "<<@instructionListIR appendStoreFromReference selfObject>>"
+#--- References
+  case globalVariableReference (@PLMType type @lstring plmName) :
+    [!?self appendStoreGlobalVariable !plmName !type !inValue !volatile:false]
+  case localVariableReference (@PLMType type plmName) :
+    [!?self appendStoreLocalVariable !plmName !type !inValue]
+  case temporaryReference (@PLMType type llvmName * @bool volatile) :
+    [!?self appendStoreTemporaryReference !type !llvmName !inValue !volatile:volatile]
+  case registerReference (type * * * address * arraySize *) :
+    if arraySize > 0 then
+      error inErrorLocation : "register array requires subscripting"
+    end
+    [!?self appendStoreVolatileRegister !type !address !inValue]
+#--- Structure property
+  case property (* * *) :
+    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue property>>"
+#--- Values
+  case llvmTemporaryValue (* llvmName *) :
+    error llvmName : "<<@instructionListIR llvmGlobalObjectValue llvmTemporaryValue>>"
+  case literalInteger  (* *) :
+    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue literalInteger>>"
+  case llvmStructureConstant (* *) :
+    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue llvmStructureConstant>>"
+  case literalString  (* * *) :
+    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue literalString>>"
+  case zero (*) :
+    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue zero>>"
+  case possibleFunction (* *) :
+    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue possibleFunction>>"
+  case null :
+    error [inTargetReference location] : "<<@instructionListIR llvmGlobalObjectValue null>>"
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#setter @instructionListIR appendLoadFromReference
-#  ?!@semanticTemporariesStruct ioTemporaries
-#  ?let @objectIR inSource
-#  ?let @location inErrorLocation
-#  !@objectIR outResultingValue
-#{
-#  switch inSource
-#  case null :
-#    error .nowhere : "<<@instructionListIR appendLoadFromReference null>>" : outResultingValue
-#  case possibleFunction (* functionName) :
-#    error functionName : "undeclared object" : outResultingValue
-#  case selfObject (*) :
-#    outResultingValue = inSource
-##--- References
-#  case globalVariableReference (@unifiedTypeMap-proxy type @lstring name) :
-#    getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
-#    [!?self appendLoadGlobalVariable
-#      !outResultingValue
-#      !name
-#      !volatile:false
-#    ]
-#  case localVariableReference (@unifiedTypeMap-proxy type name) :
-#    getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
-#    [!?self appendLoadLocalVariable
-#      !outResultingValue
-#      !name
-#      !false
-#    ]
-#  case temporaryReference (@unifiedTypeMap-proxy type llvmName * volatile) :
-#    getNewTempVariable (!type !llvmName !?ioTemporaries ?outResultingValue)
-#    [!?self appendLoadFromTemporaryReference
-#      !outResultingValue
-#      !llvmName
-#      !volatile
-#    ]
-#  case registerReference (type registerName * * address * arraySize *) :
-#    if arraySize > 0 then
-#      error inErrorLocation : "register array requires subscripting" : outResultingValue
-#    else
-#      getNewTempVariable (!type !registerName !?ioTemporaries ?outResultingValue)
-#      [!?self appendLoadVolatileRegister
-#        !outResultingValue
-#        !address
-#      ]
-#    end
-##--- Structure property
-#  case property (type plmName index) :
-#    getNewTempVariable (!type !plmName !?ioTemporaries ?outResultingValue)
-#    [!?self appendGetPropertyReference
-#      !outResultingValue
-#      !inSource
-#      !plmName
-#      !index
-#    ]
-##--- Values
-#  case literalInteger (**) :
-#    outResultingValue = inSource
-#  case llvmTemporaryValue (***) :
-#    outResultingValue = inSource
-#  case llvmStructureConstant (* *) :
-#    outResultingValue = inSource
-#  case literalString (***) :
-#    outResultingValue = inSource
-#  case zero (*) :
-#    outResultingValue = inSource
-#  end
-#}
+setter @instructionListIR appendLoadFromReference
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?let @objectIR inSource
+  ?let @location inErrorLocation
+  !@objectIR outResultingValue
+{
+  switch inSource
+  case null :
+    error .nowhere : "<<@instructionListIR appendLoadFromReference null>>" : outResultingValue
+  case possibleFunction (* functionName) :
+    error functionName : "undeclared object" : outResultingValue
+  case selfObject (*) :
+    outResultingValue = inSource
+#--- References
+  case globalVariableReference (@PLMType type @lstring name) :
+    getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
+    [!?self appendLoadGlobalVariable
+      !outResultingValue
+      !name
+      !volatile:false
+    ]
+  case localVariableReference (@PLMType type name) :
+    getNewTempVariable (!type !name !?ioTemporaries ?outResultingValue)
+    [!?self appendLoadLocalVariable
+      !outResultingValue
+      !name
+      !false
+    ]
+  case temporaryReference (@PLMType type llvmName * volatile) :
+    getNewTempVariable (!type !llvmName !?ioTemporaries ?outResultingValue)
+    [!?self appendLoadFromTemporaryReference
+      !outResultingValue
+      !llvmName
+      !volatile
+    ]
+  case registerReference (type registerName * * address * arraySize *) :
+    if arraySize > 0 then
+      error inErrorLocation : "register array requires subscripting" : outResultingValue
+    else
+      getNewTempVariable (!type !registerName !?ioTemporaries ?outResultingValue)
+      [!?self appendLoadVolatileRegister
+        !outResultingValue
+        !address
+      ]
+    end
+#--- Structure property
+  case property (type plmName index) :
+    getNewTempVariable (!type !plmName !?ioTemporaries ?outResultingValue)
+    [!?self appendGetPropertyReference
+      !outResultingValue
+      !inSource
+      !plmName
+      !index
+    ]
+#--- Values
+  case literalInteger (**) :
+    outResultingValue = inSource
+  case llvmTemporaryValue (***) :
+    outResultingValue = inSource
+  case llvmStructureConstant (* *) :
+    outResultingValue = inSource
+  case literalString (***) :
+    outResultingValue = inSource
+  case zero (*) :
+    outResultingValue = inSource
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
