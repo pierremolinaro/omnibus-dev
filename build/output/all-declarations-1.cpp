@@ -1463,7 +1463,7 @@ GALGAS_expressionAST GALGAS_expressionAST::extractObject (const GALGAS_object & 
 //---------------------------------------------------------------------------------------------------------------------*
 
 cMapElement_constantMap::cMapElement_constantMap (const GALGAS_lstring & inKey,
-                                                  const GALGAS_uint & in_mIndex,
+                                                  const GALGAS_bigint & in_mIndex,
                                                   const GALGAS_lstring & in_mClassTypeName
                                                   COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
@@ -1560,7 +1560,7 @@ GALGAS_constantMap GALGAS_constantMap::getter_overriddenMap (C_Compiler * inComp
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constantMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                              const GALGAS_uint & inArgument0,
+                                              const GALGAS_bigint & inArgument0,
                                               const GALGAS_lstring & inArgument1,
                                               C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
@@ -1577,7 +1577,7 @@ void GALGAS_constantMap::addAssign_operation (const GALGAS_lstring & inKey,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constantMap::setter_insertKey (GALGAS_lstring inKey,
-                                           GALGAS_uint inArgument0,
+                                           GALGAS_bigint inArgument0,
                                            GALGAS_lstring inArgument1,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
@@ -1598,7 +1598,7 @@ const char * kSearchErrorMessage_constantMap_searchKey = "there is no '%K' const
 //---------------------------------------------------------------------------------------------------------------------*
 
 void GALGAS_constantMap::method_searchKey (GALGAS_lstring inKey,
-                                           GALGAS_uint & outArgument0,
+                                           GALGAS_bigint & outArgument0,
                                            GALGAS_lstring & outArgument1,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) const {
@@ -1618,12 +1618,12 @@ void GALGAS_constantMap::method_searchKey (GALGAS_lstring inKey,
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_constantMap::getter_mIndexForKey (const GALGAS_string & inKey,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_constantMap::getter_mIndexForKey (const GALGAS_string & inKey,
+                                                       C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_constantMap * p = (const cMapElement_constantMap *) attributes ;
-  GALGAS_uint result ;
+  GALGAS_bigint result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_constantMap) ;
     result = p->mProperty_mIndex ;
@@ -1648,7 +1648,7 @@ GALGAS_lstring GALGAS_constantMap::getter_mClassTypeNameForKey (const GALGAS_str
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void GALGAS_constantMap::setter_setMIndexForKey (GALGAS_uint inAttributeValue,
+void GALGAS_constantMap::setter_setMIndexForKey (GALGAS_bigint inAttributeValue,
                                                  GALGAS_string inKey,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) {
@@ -1710,7 +1710,7 @@ GALGAS_lstring cEnumerator_constantMap::current_lkey (LOCATION_ARGS) const {
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint cEnumerator_constantMap::current_mIndex (LOCATION_ARGS) const {
+GALGAS_bigint cEnumerator_constantMap::current_mIndex (LOCATION_ARGS) const {
   const cMapElement_constantMap * p = (const cMapElement_constantMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_constantMap) ;
   return p->mProperty_mIndex ;

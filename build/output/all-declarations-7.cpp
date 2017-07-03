@@ -1679,7 +1679,7 @@ GALGAS_constantMap_2D_element::~ GALGAS_constantMap_2D_element (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constantMap_2D_element::GALGAS_constantMap_2D_element (const GALGAS_lstring & inOperand0,
-                                                              const GALGAS_uint & inOperand1,
+                                                              const GALGAS_bigint & inOperand1,
                                                               const GALGAS_lstring & inOperand2) :
 mProperty_lkey (inOperand0),
 mProperty_mIndex (inOperand1),
@@ -1690,14 +1690,14 @@ mProperty_mClassTypeName (inOperand2) {
 
 GALGAS_constantMap_2D_element GALGAS_constantMap_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_constantMap_2D_element (GALGAS_lstring::constructor_default (HERE),
-                                        GALGAS_uint::constructor_default (HERE),
+                                        GALGAS_bigint::constructor_zero (HERE),
                                         GALGAS_lstring::constructor_default (HERE)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 GALGAS_constantMap_2D_element GALGAS_constantMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                              const GALGAS_uint & inOperand1,
+                                                                              const GALGAS_bigint & inOperand1,
                                                                               const GALGAS_lstring & inOperand2 
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_constantMap_2D_element result ;
@@ -1762,7 +1762,7 @@ GALGAS_lstring GALGAS_constantMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS)
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_uint GALGAS_constantMap_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
+GALGAS_bigint GALGAS_constantMap_2D_element::getter_mIndex (UNUSED_LOCATION_ARGS) const {
   return mProperty_mIndex ;
 }
 
@@ -9311,136 +9311,6 @@ GALGAS_globalVariableMap_2D_element GALGAS_globalVariableMap_2D_element::extract
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-GALGAS_classConstantMap_2D_element::GALGAS_classConstantMap_2D_element (void) :
-mProperty_lkey (),
-mProperty_mValue () {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_classConstantMap_2D_element::~ GALGAS_classConstantMap_2D_element (void) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_classConstantMap_2D_element::GALGAS_classConstantMap_2D_element (const GALGAS_lstring & inOperand0,
-                                                                        const GALGAS_objectIR & inOperand1) :
-mProperty_lkey (inOperand0),
-mProperty_mValue (inOperand1) {
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_classConstantMap_2D_element GALGAS_classConstantMap_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                        const GALGAS_objectIR & inOperand1 
-                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_classConstantMap_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_classConstantMap_2D_element (inOperand0, inOperand1) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-typeComparisonResult GALGAS_classConstantMap_2D_element::objectCompare (const GALGAS_classConstantMap_2D_element & inOperand) const {
-   typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
-    result = mProperty_lkey.objectCompare (inOperand.mProperty_lkey) ;
-  }
-  if (result == kOperandEqual) {
-    result = mProperty_mValue.objectCompare (inOperand.mProperty_mValue) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-bool GALGAS_classConstantMap_2D_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mValue.isValid () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_classConstantMap_2D_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mValue.drop () ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-void GALGAS_classConstantMap_2D_element::description (C_String & ioString,
-                                                      const int32_t inIndentation) const {
-  ioString << "<struct @classConstantMap-element:" ;
-  if (! isValid ()) {
-    ioString << " not built" ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString << ", " ;
-    mProperty_mValue.description (ioString, inIndentation+1) ;
-  }
-  ioString << ">" ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_lstring GALGAS_classConstantMap_2D_element::getter_lkey (UNUSED_LOCATION_ARGS) const {
-  return mProperty_lkey ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_objectIR GALGAS_classConstantMap_2D_element::getter_mValue (UNUSED_LOCATION_ARGS) const {
-  return mProperty_mValue ;
-}
-
-
-
-//---------------------------------------------------------------------------------------------------------------------*
-//                                                                                                                     *
-//                                           @classConstantMap-element type                                            *
-//                                                                                                                     *
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_classConstantMap_2D_element ("classConstantMap-element",
-                                                    NULL) ;
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-const C_galgas_type_descriptor * GALGAS_classConstantMap_2D_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_classConstantMap_2D_element ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-AC_GALGAS_root * GALGAS_classConstantMap_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_classConstantMap_2D_element (*this)) ;
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
-GALGAS_classConstantMap_2D_element GALGAS_classConstantMap_2D_element::extractObject (const GALGAS_object & inObject,
-                                                                                      C_Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_classConstantMap_2D_element result ;
-  const GALGAS_classConstantMap_2D_element * p = (const GALGAS_classConstantMap_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_classConstantMap_2D_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("classConstantMap-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//---------------------------------------------------------------------------------------------------------------------*
-
 GALGAS_constructorMap_2D_element::GALGAS_constructorMap_2D_element (void) :
 mProperty_lkey (),
 mProperty_mInitValue () {
@@ -13825,7 +13695,7 @@ static void extensionMethod_typeArrayDeclaration_enterInContext (const cPtr_abst
     GALGAS_PLMType var_elementType_6003 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (ioArgument_ioContext.getter_mTypeMap (HERE), object->mProperty_mElementTypeName, inCompiler  COMMA_SOURCE_FILE ("type-array.galgas", 132)).getter_type (inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 132)) ;
     GALGAS_constantMap var_classConstantMap_6162 = GALGAS_constantMap::constructor_emptyMap (SOURCE_FILE ("type-array.galgas", 134)) ;
     {
-    var_classConstantMap_6162.setter_insertKey (GALGAS_string ("size").getter_nowhere (SOURCE_FILE ("type-array.galgas", 135)), var_arraySize_5982.getter_uint (inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 135)), function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 135)).getter_nowhere (SOURCE_FILE ("type-array.galgas", 135)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 135)) ;
+    var_classConstantMap_6162.setter_insertKey (GALGAS_string ("size").getter_nowhere (SOURCE_FILE ("type-array.galgas", 135)), var_arraySize_5982, function_staticIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 135)).getter_nowhere (SOURCE_FILE ("type-array.galgas", 135)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 135)) ;
     }
     {
     ioArgument_ioContext.mProperty_mTypeMap.setter_insertType (object->mProperty_mArrayTypeName, GALGAS_PLMType::constructor_arrayType (object->mProperty_mArrayTypeName, var_elementType_6003, var_arraySize_5982, var_classConstantMap_6162, function_instanciableFlag (inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 144)).operator_or (function_copyableFlag (inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 144)) COMMA_SOURCE_FILE ("type-array.galgas", 144)), object->mProperty_mArrayTypeName.getter_string (SOURCE_FILE ("type-array.galgas", 145))  COMMA_SOURCE_FILE ("type-array.galgas", 139)), inCompiler COMMA_SOURCE_FILE ("type-array.galgas", 137)) ;
@@ -13846,4 +13716,86 @@ static void defineExtensionMethod_typeArrayDeclaration_enterInContext (void) {
 //---------------------------------------------------------------------------------------------------------------------*
 
 C_PrologueEpilogue gMethod_typeArrayDeclaration_enterInContext (defineExtensionMethod_typeArrayDeclaration_enterInContext, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                        Overriding extension method '@typeArrayDeclaration semanticAnalysis'                         *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_typeArrayDeclaration_semanticAnalysis (const cPtr_abstractDeclaration * /* inObject */,
+                                                                   const GALGAS_semanticContext /* constinArgument_inContext */,
+                                                                   GALGAS_semanticTemporariesStruct & /* ioArgument_ioTemporaries */,
+                                                                   GALGAS_intermediateCodeStruct & /* ioArgument_ioIntermediateCodeStruct */,
+                                                                   C_Compiler * /* inCompiler */
+                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_typeArrayDeclaration_semanticAnalysis (void) {
+  enterExtensionMethod_semanticAnalysis (kTypeDescriptor_GALGAS_typeArrayDeclaration.mSlotID,
+                                         extensionMethod_typeArrayDeclaration_semanticAnalysis) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_typeArrayDeclaration_semanticAnalysis (defineExtensionMethod_typeArrayDeclaration_semanticAnalysis, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                             Overriding extension getter '@booleanDeclaration location'                              *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static GALGAS_location extensionGetter_booleanDeclaration_location (const cPtr_abstractDeclaration * inObject,
+                                                                    C_Compiler * /* inCompiler */
+                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_location result_outLocation ; // Returned variable
+  const cPtr_booleanDeclaration * object = (const cPtr_booleanDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_booleanDeclaration) ;
+  result_outLocation = object->mProperty_mBooleanTypeName.getter_location (HERE) ;
+//---
+  return result_outLocation ;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionGetter_booleanDeclaration_location (void) {
+  enterExtensionGetter_location (kTypeDescriptor_GALGAS_booleanDeclaration.mSlotID,
+                                 extensionGetter_booleanDeclaration_location) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gGetter_booleanDeclaration_location (defineExtensionGetter_booleanDeclaration_location, NULL) ;
+
+//---------------------------------------------------------------------------------------------------------------------*
+//                                                                                                                     *
+//                           Overriding extension method '@booleanDeclaration addExtension'                            *
+//                                                                                                                     *
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void extensionMethod_booleanDeclaration_addExtension (const cPtr_abstractDeclaration * inObject,
+                                                             GALGAS_extensionDeclarationListAST & /* ioArgument_ioExtensionDeclarationListAST */,
+                                                             GALGAS_abstractDeclaration & outArgument_outNewDeclaration,
+                                                             C_Compiler * /* inCompiler */
+                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  const cPtr_booleanDeclaration * object = (const cPtr_booleanDeclaration *) inObject ;
+  macroValidSharedObject (object, cPtr_booleanDeclaration) ;
+  const GALGAS_booleanDeclaration temp_0 = object ;
+  outArgument_outNewDeclaration = temp_0 ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+static void defineExtensionMethod_booleanDeclaration_addExtension (void) {
+  enterExtensionMethod_addExtension (kTypeDescriptor_GALGAS_booleanDeclaration.mSlotID,
+                                     extensionMethod_booleanDeclaration_addExtension) ;
+}
+
+//---------------------------------------------------------------------------------------------------------------------*
+
+C_PrologueEpilogue gMethod_booleanDeclaration_addExtension (defineExtensionMethod_booleanDeclaration_addExtension, NULL) ;
 
