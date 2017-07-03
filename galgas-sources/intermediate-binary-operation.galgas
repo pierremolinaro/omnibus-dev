@@ -1,267 +1,267 @@
 
-#enum @llvmBinaryOperation {
-#  case addNoOVF
-#  case subNoOVF
-#  case mulNoOVF
-#  case udivNoOVF
-#  case sdivNoOVF
-#  case uremNoOVF
-#  case sremNoOVF
-#
-#  case uaddOVF
-#  case saddOVF
-#  case usubOVF
-#  case ssubOVF
-#  case umulOVF
-#  case smulOVF
-#  case udivOVF
-#  case sdivOVF
-#  case uremOVF
-#  case sremOVF
-#
-#  case and
-#  case ior
-#  case xor
-#  case shl
-#  case ashr
-#  case lshr
-#  
-#  case icmp_eq
-#  case icmp_ne
-#  case icmp_ult
-#  case icmp_ule
-#  case icmp_ugt
-#  case icmp_uge
-#  case icmp_slt
-#  case icmp_sle
-#  case icmp_sgt
-#  case icmp_sge
-#}
+enum @llvmBinaryOperation {
+  case addNoOVF
+  case subNoOVF
+  case mulNoOVF
+  case udivNoOVF
+  case sdivNoOVF
+  case uremNoOVF
+  case sremNoOVF
+
+  case uaddOVF
+  case saddOVF
+  case usubOVF
+  case ssubOVF
+  case umulOVF
+  case smulOVF
+  case udivOVF
+  case sdivOVF
+  case uremOVF
+  case sremOVF
+
+  case and
+  case ior
+  case xor
+  case shl
+  case ashr
+  case lshr
+  
+  case icmp_eq
+  case icmp_ne
+  case icmp_ult
+  case icmp_ule
+  case icmp_ugt
+  case icmp_uge
+  case icmp_slt
+  case icmp_sle
+  case icmp_sgt
+  case icmp_sge
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#setter @instructionListIR appendBinaryOperation
-#  ?let @objectIR inTarget
-#  ?let @unifiedTypeMap-proxy inOperandType
-#  ?let @location inLocation
-#  ?let @objectIR inLeft
-#  ?let @llvmBinaryOperation inOperation
-#  ?let @objectIR inRight
-#{
-#  self += !@binaryOperationIR.new {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
-#}
-#
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#class @binaryOperationIR : @abstractInstructionIR {
-#  @objectIR mTarget
-#  @unifiedTypeMap-proxy mOperandType
-#  @objectIR mLeft
-#  @llvmBinaryOperation mOperation
-#  @objectIR mRight
-#  @location mLocation
-#}
+setter @instructionListIR appendBinaryOperation
+  ?let @objectIR inTarget
+  ?let @PLMType inOperandType
+  ?let @location inLocation
+  ?let @objectIR inLeft
+  ?let @llvmBinaryOperation inOperation
+  ?let @objectIR inRight
+{
+  self += !@binaryOperationIR.new {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @binaryOperationIR enterAccessibleEntities
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
+class @binaryOperationIR : @abstractInstructionIR {
+  @objectIR mTarget
+  @PLMType mOperandType
+  @objectIR mLeft
+  @llvmBinaryOperation mOperation
+  @objectIR mRight
+  @location mLocation
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @binaryOperationIR enterCodeForOverflowOperation 
-#  ?let @string inOperation
-#  ?let @bigint inPanicCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
-#{
-#  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString 
-#    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
-#    ?let staticStringIndex
-#  ]
-#  let llvmType = [[mOperandType kind] llvmTypeName]
-#  ioLLVMcode += "  " + [mTarget llvmName] + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
-#  ioLLVMcode += " (" + llvmType + " " + [mLeft llvmName] + ", " + llvmType + " " + [mRight llvmName] + ")\n"
-#  ioLLVMcode += "  " + [mTarget llvmName] + ".hasOvf = extractvalue {" + llvmType + ", i1} " + [mTarget llvmName] + ".r, 1\n"
-#  let labelName = [mTarget name]
-#  ioLLVMcode += "  br i1 " + [mTarget llvmName] + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
-#  ioLLVMcode += labelName + ".ovf:\n"
-#  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
-#  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
-#  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + inPanicCode + ")\n"
-#  ioLLVMcode += "  unreachable\n\n"
-#  ioLLVMcode += labelName + ".noovf:\n"
-#  ioLLVMcode += "  " + [mTarget llvmName] + " = extractvalue {" + llvmType + ", i1} " + [mTarget llvmName] + ".r, 0\n"
-#  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
-#     + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
-#}
+override method @binaryOperationIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic 
-#  ?let @string inOperation
-#  ?let @bigint inPanicCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
-#{
-#  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
-#    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
-#    ?let staticStringIndex
-#  ]
-#  let llvmType = [[mOperandType kind] llvmTypeName]
-#  ioLLVMcode += "  " + [mRight llvmName] + ".isZero = icmp eq " + llvmType + " " + [mRight llvmName] + ", 0\n"
-#  let labelName = [mTarget name]
-#  ioLLVMcode += "  br i1 " + [mRight llvmName] + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
-#  ioLLVMcode += labelName + ".divideByZero:\n"
-#  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
-#  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
-#  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + inPanicCode + ")\n"
-#  ioLLVMcode += "  unreachable\n\n"
-#  ioLLVMcode += labelName + ".ok:\n"
-#  ioLLVMcode += "  " + [mTarget llvmName] + " = " + inOperation + " " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#}
+method @binaryOperationIR enterCodeForOverflowOperation 
+  ?let @string inOperation
+  ?let @bigint inPanicCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString 
+    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
+    ?let staticStringIndex
+  ]
+  let llvmType = [mOperandType llvmTypeName]
+  ioLLVMcode += "  " + [mTarget llvmName] + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
+  ioLLVMcode += " (" + llvmType + " " + [mLeft llvmName] + ", " + llvmType + " " + [mRight llvmName] + ")\n"
+  ioLLVMcode += "  " + [mTarget llvmName] + ".hasOvf = extractvalue {" + llvmType + ", i1} " + [mTarget llvmName] + ".r, 1\n"
+  let labelName = [mTarget name]
+  ioLLVMcode += "  br i1 " + [mTarget llvmName] + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
+  ioLLVMcode += labelName + ".ovf:\n"
+  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + inPanicCode + ")\n"
+  ioLLVMcode += "  unreachable\n\n"
+  ioLLVMcode += labelName + ".noovf:\n"
+  ioLLVMcode += "  " + [mTarget llvmName] + " = extractvalue {" + llvmType + ", i1} " + [mTarget llvmName] + ".r, 0\n"
+  ioGenerationAdds.mExternFunctionDeclarationSet += !"declare {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
+     + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @binaryOperationIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
-#{
-#  let llvmType = [[mOperandType kind] llvmTypeName]
-#  switch mOperation
-#  case addNoOVF :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = add " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case subNoOVF :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = sub " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case mulNoOVF :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = mul " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case udivNoOVF :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = udiv " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case sdivNoOVF :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = sdiv " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case uremNoOVF :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = urem " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case sremNoOVF :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = srem " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case uaddOVF :
-#    [self enterCodeForOverflowOperation
-#      !"uadd"
-#      !panicCodeForUnsignedAdditionOverflow ()
-#      !?ioLLVMcode
-#      !inGenerationContext
-#      !?ioGenerationAdds
-#    ]
-#  case saddOVF :
-#    [self enterCodeForOverflowOperation
-#      !"sadd"
-#      !panicCodeForSignedAdditionOverflow ()
-#      !?ioLLVMcode
-#      !inGenerationContext
-#      !?ioGenerationAdds
-#    ]
-#  case usubOVF :
-#    [self enterCodeForOverflowOperation
-#      !"usub"
-#      !panicCodeForUnsignedSubtractOverflow ()
-#      !?ioLLVMcode
-#      !inGenerationContext
-#      !?ioGenerationAdds
-#    ]
-#  case ssubOVF :
-#    [self enterCodeForOverflowOperation
-#      !"ssub"
-#      !panicCodeForSignedSubtractOverflow ()
-#      !?ioLLVMcode
-#      !inGenerationContext
-#      !?ioGenerationAdds
-#    ]
-#  case umulOVF :
-#    [self enterCodeForOverflowOperation
-#      !"umul"
-#      !panicCodeForUnsignedMultiplicationOverflow ()
-#      !?ioLLVMcode
-#      !inGenerationContext
-#      !?ioGenerationAdds
-#    ]
-#  case smulOVF :
-#    [self enterCodeForOverflowOperation
-#      !"smul"
-#      !panicCodeForSignedMultiplicationOverflow ()
-#      !?ioLLVMcode
-#      !inGenerationContext
-#      !?ioGenerationAdds
-#    ]
-#  case udivOVF :
-#    [self enterCodeForDivisionWithZeroDivisorPanic
-#      !"udiv"
-#      !panicCodeForUnsignedDivisionByZero ()
-#      !?ioLLVMcode
-#      !inGenerationContext
-#      !?ioGenerationAdds
-#    ]
-#  case sdivOVF :
-#    [self enterCodeForDivisionWithZeroDivisorPanic
-#      !"sdiv"
-#      !panicCodeForSignedDivisionByZero ()
-#      !?ioLLVMcode
-#      !inGenerationContext
-#      !?ioGenerationAdds
-#    ]
-#  case uremOVF :
-#    [self enterCodeForDivisionWithZeroDivisorPanic
-#      !"urem"
-#      !panicCodeForUnsignedRemainderByZero ()
-#      !?ioLLVMcode
-#      !inGenerationContext
-#      !?ioGenerationAdds
-#    ]
-#  case sremOVF :
-#    [self enterCodeForDivisionWithZeroDivisorPanic
-#      !"srem"
-#      !panicCodeForSignedRemainderByZero ()
-#      !?ioLLVMcode
-#      !inGenerationContext
-#      !?ioGenerationAdds
-#    ]
-#  case and :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = and " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case ior :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = or " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case xor :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = xor " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case shl :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = shl " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case ashr :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = ashr " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case lshr :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = lshr " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_eq :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp eq " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_ne :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ne " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_ult :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ult " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_ule :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ule " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_ugt :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ugt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_uge :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp uge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_slt :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp slt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_sle :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sle " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_sgt :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sgt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_sge :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  end
-#}
+method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic 
+  ?let @string inOperation
+  ?let @bigint inPanicCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString
+    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
+    ?let staticStringIndex
+  ]
+  let llvmType = [mOperandType llvmTypeName]
+  ioLLVMcode += "  " + [mRight llvmName] + ".isZero = icmp eq " + llvmType + " " + [mRight llvmName] + ", 0\n"
+  let labelName = [mTarget name]
+  ioLLVMcode += "  br i1 " + [mRight llvmName] + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
+  ioLLVMcode += labelName + ".divideByZero:\n"
+  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + inPanicCode + ")\n"
+  ioLLVMcode += "  unreachable\n\n"
+  ioLLVMcode += labelName + ".ok:\n"
+  ioLLVMcode += "  " + [mTarget llvmName] + " = " + inOperation + " " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+override method @binaryOperationIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let llvmType = [mOperandType llvmTypeName]
+  switch mOperation
+  case addNoOVF :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = add " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case subNoOVF :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = sub " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case mulNoOVF :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = mul " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case udivNoOVF :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = udiv " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case sdivNoOVF :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = sdiv " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case uremNoOVF :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = urem " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case sremNoOVF :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = srem " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case uaddOVF :
+    [self enterCodeForOverflowOperation
+      !"uadd"
+      !panicCodeForUnsignedAdditionOverflow ()
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
+  case saddOVF :
+    [self enterCodeForOverflowOperation
+      !"sadd"
+      !panicCodeForSignedAdditionOverflow ()
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
+  case usubOVF :
+    [self enterCodeForOverflowOperation
+      !"usub"
+      !panicCodeForUnsignedSubtractOverflow ()
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
+  case ssubOVF :
+    [self enterCodeForOverflowOperation
+      !"ssub"
+      !panicCodeForSignedSubtractOverflow ()
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
+  case umulOVF :
+    [self enterCodeForOverflowOperation
+      !"umul"
+      !panicCodeForUnsignedMultiplicationOverflow ()
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
+  case smulOVF :
+    [self enterCodeForOverflowOperation
+      !"smul"
+      !panicCodeForSignedMultiplicationOverflow ()
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
+  case udivOVF :
+    [self enterCodeForDivisionWithZeroDivisorPanic
+      !"udiv"
+      !panicCodeForUnsignedDivisionByZero ()
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
+  case sdivOVF :
+    [self enterCodeForDivisionWithZeroDivisorPanic
+      !"sdiv"
+      !panicCodeForSignedDivisionByZero ()
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
+  case uremOVF :
+    [self enterCodeForDivisionWithZeroDivisorPanic
+      !"urem"
+      !panicCodeForUnsignedRemainderByZero ()
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
+  case sremOVF :
+    [self enterCodeForDivisionWithZeroDivisorPanic
+      !"srem"
+      !panicCodeForSignedRemainderByZero ()
+      !?ioLLVMcode
+      !inGenerationContext
+      !?ioGenerationAdds
+    ]
+  case and :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = and " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case ior :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = or " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case xor :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = xor " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case shl :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = shl " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case ashr :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = ashr " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case lshr :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = lshr " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case icmp_eq :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp eq " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case icmp_ne :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ne " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case icmp_ult :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ult " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case icmp_ule :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ule " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case icmp_ugt :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ugt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case icmp_uge :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp uge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case icmp_slt :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp slt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case icmp_sle :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sle " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case icmp_sgt :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sgt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  case icmp_sge :
+    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

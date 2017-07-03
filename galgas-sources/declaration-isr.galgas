@@ -51,158 +51,158 @@ syntax extension plm_syntax {
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @isrDeclarationListAST enterInContext ?!@semanticContext ioSemanticContext {
-#  for isr in self do
-#    ioSemanticContext.mDefinedInterruptSet += !isr.mISRName.string
-#  end
-#}
+method @isrDeclarationListAST enterInContext ?!@semanticContext ioSemanticContext {
+  for isr in self do
+    ioSemanticContext.mDefinedInterruptSet += !isr.mISRName.string
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @isrDeclarationListAST isrSemanticAnalysis
-#  ?context:let @semanticContext inSemanticContext
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#{
-#  for isr in self do
-#  #--- Invocation graph
-#    let routineNameForInvocationGraph = interruptNameForInvocationGraph (!isr.mISRName)
-#    if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
-#      [!?ioTemporaries.mSubprogramInvocationGraph addNode
-#        !routineNameForInvocationGraph
-#        !routineNameForInvocationGraph
-#      ]
-#    end
-#  #--- Variable map
-#    initialVariableMap (
-#      !context:inSemanticContext
-#      !mode:isr.mMode
-#      !globalsAreConstant:false
-#      !returnTypeName:["" nowhere]
-#      ?@unifiedSymbolMapEx variableMap
-#      ?@universalPropertyAndRoutineMapForContext universalMap
-#    )
-#  #--- Self type
-#    let selfType = if isr.mModuleName.string == "" then
-#      @unifiedTypeMap-proxy.null
-#    else
-#      @unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !moduleMangledNameFromModuleName (!isr.mModuleName)}
-#    end
-#  #--- Analyze instruction list
-#    @allocaList allocaList = {}
-#    @instructionListIR instructionGenerationList = {}
-#    [isr.mISRInstructionList analyzeRoutineInstructionList
-#      !self:selfType
-#      !directAccessToPropertiesAllowed:true
-#      !propertiesAreMutable:true
-#      !routineNameForInvocationGraph:routineNameForInvocationGraph
-#      !context:inSemanticContext
-#      !mode:isr.mMode
-#      !?temporary:ioTemporaries
-#      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
-#      !?variableMap:variableMap
-#      !?variableMap:universalMap
-#      !?alloca:allocaList
-#      !?generatedCode:instructionGenerationList
-#    ]
-#  #--- End of variableMap
-#    [universalMap checkLocalVariableFinalState]
-#    [variableMap checkAutomatonStates !isr.mEndOfISRDeclaration]
-#    drop variableMap
-#  #--- Code generation
-#    [inSemanticContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
-#    [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
-#      !isr.mISRName
-#      !selfType
-#      !isr.mModuleName
-#      !allocaList
-#      !instructionGenerationList
-#      !isr.mMode
-#    ]  
-#  end
-#}
+method @isrDeclarationListAST isrSemanticAnalysis
+  ?context:let @semanticContext inSemanticContext
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+  for isr in self do
+  #--- Invocation graph
+    let routineNameForInvocationGraph = interruptNameForInvocationGraph (!isr.mISRName)
+    if not [ioTemporaries.mSubprogramInvocationGraph isNodeDefined !routineNameForInvocationGraph.string] then
+      [!?ioTemporaries.mSubprogramInvocationGraph addNode
+        !routineNameForInvocationGraph
+        !routineNameForInvocationGraph
+      ]
+    end
+  #--- Variable map
+    initialVariableMap (
+      !context:inSemanticContext
+      !mode:isr.mMode
+      !globalsAreConstant:false
+      !returnTypeName:["" nowhere]
+      ?@unifiedSymbolMapEx variableMap
+      ?@universalPropertyAndRoutineMapForContext universalMap
+    )
+  #--- Self type
+    let @PLMType selfType = if isr.mModuleName.string == "" then
+      .void
+    else
+      [@unifiedTypeMap-proxy.searchKey {!inSemanticContext.mTypeMap !moduleMangledNameFromModuleName (!isr.mModuleName)} type]
+    end
+  #--- Analyze instruction list
+    @allocaList allocaList = {}
+    @instructionListIR instructionGenerationList = {}
+    [isr.mISRInstructionList analyzeRoutineInstructionList
+      !self:selfType
+      !directAccessToPropertiesAllowed:true
+      !propertiesAreMutable:true
+      !routineNameForInvocationGraph:routineNameForInvocationGraph
+      !context:inSemanticContext
+      !mode:isr.mMode
+      !?temporary:ioTemporaries
+      !?staticStringMap:ioIntermediateCodeStruct.mStaticStringMap
+      !?variableMap:variableMap
+      !?variableMap:universalMap
+      !?alloca:allocaList
+      !?generatedCode:instructionGenerationList
+    ]
+  #--- End of variableMap
+    [universalMap checkLocalVariableFinalState]
+    [variableMap checkAutomatonStates !isr.mEndOfISRDeclaration]
+    drop variableMap
+  #--- Code generation
+    [inSemanticContext.mAvailableInterruptMap searchKey !isr.mISRName ?*]
+    [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
+      !isr.mISRName
+      !selfType
+      !isr.mModuleName
+      !allocaList
+      !instructionGenerationList
+      !isr.mMode
+    ]  
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @interruptMapIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
-#  for interrupt in self do
-#    [interrupt.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-#  end
-#}
+method @interruptMapIR enterAccessibleEntities ?!@accessibleEntities ioAccessibleEntities ?!@uint ioMaxBranchOfOnInstructions {
+  for interrupt in self do
+    [interrupt.mInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @interruptMapIR interruptCodeGeneration
-#  ?!@string ioLLVMcode
-#  ?!@string ioAScode
-#  ?let @string inUndefinedInterruptString
-#  ?let @string inXTRInterruptHandlerString
-#  ?let @generationContext inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
-#{
-##--- Generate interrupt routines
-#  @stringset definedInterrupts = {}
-#  for interrupt in self do
-#    definedInterrupts += !interrupt.lkey.string
-#    let interruptImplementationName = if interrupt.mMode == .serviceMode then
-#      llvmNameForServiceInterrupt (!interrupt.lkey).string
-#    else
-#      llvmNameForSectionOrSafeInterrupt (!interrupt.lkey.string)
-#    end
-#    ioLLVMcode += llvmTitleComment (!interruptImplementationName)
-#    ioLLVMcode += "define void @" + interruptImplementationName + " ()" + llvmAttributeFunction () + " {\n"
-#  #--- Alloca
-#    for (variable llvmTypeName) in interrupt.mAllocaList do
-#      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
-#    end
-#  #--- Define self
-#    if interrupt.mSelfType != .null then
-#      let varName = llvmNameForGlobalVariable (!interrupt.mGlobalVariableName)
-#      let typeName = [[interrupt.mSelfType kind] llvmTypeName]
-#      ioLLVMcode += "  %self = getelementptr inbounds " + typeName + ", " + typeName + " * @" + varName 
-#      ioLLVMcode += ", i32 0 ; Perform %self = @" + varName + " \n"
-#    end
-#  #--- Instruction list
-#    [interrupt.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#  #--- Epilog
-#    ioLLVMcode += "  ret void\n"
-#    ioLLVMcode += "}\n\n"
-#  #---- Generate interrupt handler for XTR
-#    if interrupt.mMode == .serviceMode then
-#     let interruptHandlerName = llvmNameForServiceInterrupt (!interrupt.lkey).string
-#     let isrName = llvmNameForSectionOrSafeInterrupt (!interrupt.lkey.string)
-#     let s1 = [inXTRInterruptHandlerString stringByReplacingStringByString !"!ISR!" !isrName]
-#     let s2 = [s1 stringByReplacingStringByString !"!HANDLER!" !interruptHandlerName]
-#     ioAScode += s2
-#    end
-#  end
-##--- Generate stubs for undefined interrupt entries
-#  for (lkey panicCode) in inGenerationContext.mAvailableInterruptMap do
-#    if not [definedInterrupts hasKey !lkey.string] then
-#      switch panicCode
-#      case noPanicCode :
-#        let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!lkey.string)]
-#        ioAScode += s
-#      case panicCode (@lbigint value) :
-#        if [option plm_options.noPanicGeneration value] then
-#          let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!lkey.string)]
-#          ioAScode += s
-#        else
-#          let name = llvmNameForSectionOrSafeInterrupt (!lkey.string)
-#          ioLLVMcode += llvmTitleComment (!"Panic code for " + name)
-#          ioLLVMcode += "define void @" + name + " ()" + llvmAttributeFunction () + " noreturn {\n"
-#          ioLLVMcode += "  call void @panic.isr (" + inGenerationContext.mPanicCodeLLVMType + " " + value.bigint + ") noreturn \n"
-#          ioLLVMcode += "  unreachable\n"
-#          ioLLVMcode += "}\n\n"
-#        end
-#      end
-#    end
-#  end
-#}
+method @interruptMapIR interruptCodeGeneration
+  ?!@string ioLLVMcode
+  ?!@string ioAScode
+  ?let @string inUndefinedInterruptString
+  ?let @string inXTRInterruptHandlerString
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+#--- Generate interrupt routines
+  @stringset definedInterrupts = {}
+  for interrupt in self do
+    definedInterrupts += !interrupt.lkey.string
+    let interruptImplementationName = if interrupt.mMode == .serviceMode then
+      llvmNameForServiceInterrupt (!interrupt.lkey).string
+    else
+      llvmNameForSectionOrSafeInterrupt (!interrupt.lkey.string)
+    end
+    ioLLVMcode += llvmTitleComment (!interruptImplementationName)
+    ioLLVMcode += "define void @" + interruptImplementationName + " ()" + llvmAttributeFunction () + " {\n"
+  #--- Alloca
+    for (variable llvmTypeName) in interrupt.mAllocaList do
+      ioLLVMcode += "  %" + llvmNameForLocalVariable (!variable) + " = alloca " + llvmTypeName + "\n"
+    end
+  #--- Define self
+    if interrupt.mSelfType != .void then
+      let varName = llvmNameForGlobalVariable (!interrupt.mGlobalVariableName)
+      let typeName = [interrupt.mSelfType llvmTypeName]
+      ioLLVMcode += "  %self = getelementptr inbounds " + typeName + ", " + typeName + " * @" + varName 
+      ioLLVMcode += ", i32 0 ; Perform %self = @" + varName + " \n"
+    end
+  #--- Instruction list
+    [interrupt.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  #--- Epilog
+    ioLLVMcode += "  ret void\n"
+    ioLLVMcode += "}\n\n"
+  #---- Generate interrupt handler for XTR
+    if interrupt.mMode == .serviceMode then
+     let interruptHandlerName = llvmNameForServiceInterrupt (!interrupt.lkey).string
+     let isrName = llvmNameForSectionOrSafeInterrupt (!interrupt.lkey.string)
+     let s1 = [inXTRInterruptHandlerString stringByReplacingStringByString !"!ISR!" !isrName]
+     let s2 = [s1 stringByReplacingStringByString !"!HANDLER!" !interruptHandlerName]
+     ioAScode += s2
+    end
+  end
+#--- Generate stubs for undefined interrupt entries
+  for (lkey panicCode) in inGenerationContext.mAvailableInterruptMap do
+    if not [definedInterrupts hasKey !lkey.string] then
+      switch panicCode
+      case noPanicCode :
+        let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!lkey.string)]
+        ioAScode += s
+      case panicCode (@lbigint value) :
+        if [option plm_options.noPanicGeneration value] then
+          let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionOrSafeInterrupt (!lkey.string)]
+          ioAScode += s
+        else
+          let name = llvmNameForSectionOrSafeInterrupt (!lkey.string)
+          ioLLVMcode += llvmTitleComment (!"Panic code for " + name)
+          ioLLVMcode += "define void @" + name + " ()" + llvmAttributeFunction () + " noreturn {\n"
+          ioLLVMcode += "  call void @panic.isr (" + inGenerationContext.mPanicCodeLLVMType + " " + value.bigint + ") noreturn \n"
+          ioLLVMcode += "  unreachable\n"
+          ioLLVMcode += "}\n\n"
+        end
+      end
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

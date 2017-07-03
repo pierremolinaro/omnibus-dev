@@ -54,74 +54,74 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @letInstructionWithAssignmentAST analyze
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-#  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#{
-#  let @unifiedTypeMap-proxy targetType = if mOptionalTypeName.string == ""
-#    then .null
-#    else .searchKey {!inContext.mTypeMap !mOptionalTypeName}
-#  end
-##--- Analyze source expression
-#  [mSourceExpression analyzeExpression
-#    !self:inSelfType
-#    !inGuard:false
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !optionalTargetType:targetType
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?result:let @objectIR expressionResultPossibleReference
-#  ]
-#  [!?ioInstructionGenerationList appendLoadFromReference
-#    !?ioTemporaries
-#    !expressionResultPossibleReference
-#    !mVarName
-#    ?let expressionResult
-#  ]  
-##--- Declare local constant
-#  var result = checkAssignmentCompatibility (
-#    !source:expressionResult
-#    !targetAnnotationType:targetType
-#    !errorLocation:mVarName.location
-#    !staticTypeAllowed:true
-#  )
-#  drop targetType
-##---
-#  if not [[[result type] kind] instanciable] then
-#    error mVarName : "$" + [result key] + " type is not instanciable" : result
-#  end
-##--- Declare local constant
-#  let varPLMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
-#  ioTemporaries.mTemporaryIndex ++
-#  if [result key] != staticIntegerTypeName () then
-#    ioAllocaList += !varPLMName ![[[result type] kind] llvmTypeName]
-#    let localConstant = @objectIR.localVariableReference {!type:[result type] !plmName:varPLMName}
-#    [!?ioInstructionGenerationList appendStoreFromReference !localConstant !mVarName !result]
-#  end
-#  [!?ioUniversalMap insertLocalConstant !mVarName !expressionResult]
-#  [!?ioVariableMap insertConstant
-#    !lkey:mVarName
-#    !type:[result type]
-#    !readAccessAllowed:true
-#    !objectIR:expressionResult
-#    !copyable:[[result type] copyable]
-#    !canBeUsedAsInputParameter:true
-#  ]
-#}
+override method @letInstructionWithAssignmentAST analyze
+  ?self:let @PLMType inSelfType
+  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  let @PLMType targetType = if mOptionalTypeName.string == ""
+    then .void
+    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mOptionalTypeName} type]
+  end
+#--- Analyze source expression
+  [mSourceExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:targetType
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @objectIR expressionResultPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !expressionResultPossibleReference
+    !mVarName
+    ?let expressionResult
+  ]  
+#--- Declare local constant
+  var result = checkAssignmentCompatibility (
+    !source:expressionResult
+    !targetAnnotationType:targetType
+    !errorLocation:mVarName.location
+    !staticTypeAllowed:true
+  )
+  drop targetType
+#---
+  if not [[result type] instanciable] then
+    error mVarName : "$" + [result key] + " type is not instanciable" : result
+  end
+#--- Declare local constant
+  let varPLMName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  ioTemporaries.mTemporaryIndex ++
+  if [result key] != staticIntegerTypeName () then
+    ioAllocaList += !varPLMName ![[result type] llvmTypeName]
+    let localConstant = @objectIR.localVariableReference {!type:[result type] !plmName:varPLMName}
+    [!?ioInstructionGenerationList appendStoreFromReference !localConstant !mVarName !result]
+  end
+  [!?ioUniversalMap insertLocalConstant !mVarName !expressionResult]
+  [!?ioVariableMap insertConstant
+    !lkey:mVarName
+    !type:[result type]
+    !readAccessAllowed:true
+    !objectIR:expressionResult
+    !copyable:[[result type] copyable]
+    !canBeUsedAsInputParameter:true
+  ]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

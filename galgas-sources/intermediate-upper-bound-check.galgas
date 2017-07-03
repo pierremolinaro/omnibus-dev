@@ -1,53 +1,53 @@
 
-#setter @instructionListIR appendUpperBoundCheck
-#  ?let @objectIR inSource
-#  ?let @bigint inUpperBoundPlusOne
-#  ?panicCode:let @uint inPanicCode
-#  ?let @location inLocation
-#{
-#  self += !@upperBoundCheckIR.new {!inSource !inUpperBoundPlusOne !inPanicCode !inLocation}
-#}
+setter @instructionListIR appendUpperBoundCheck
+  ?let @objectIR inSource
+  ?let @bigint inUpperBoundPlusOne
+  ?panicCode:let @uint inPanicCode
+  ?let @location inLocation
+{
+  self += !@upperBoundCheckIR.new {!inSource !inUpperBoundPlusOne !inPanicCode !inLocation}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @upperBoundCheckIR : @abstractInstructionIR {
-#  @objectIR mSource
-#  @bigint mUpperBoundPlusOne
-#  @uint mPanicCode
-#  @location mLocation
-#}
+class @upperBoundCheckIR : @abstractInstructionIR {
+  @objectIR mSource
+  @bigint mUpperBoundPlusOne
+  @uint mPanicCode
+  @location mLocation
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @upperBoundCheckIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
-#{
-#  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString 
-#    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
-#    ?let staticStringIndex
-#  ]
-#  let llvmType = [[[mSource type] kind] llvmTypeName]
-#  let llvmSourceName = [mSource llvmName]
-#  let llvmLabelName = [mSource name]
-#  ioLLVMcode += "  " + llvmSourceName + ".isOk = icmp ult " + llvmType + " " + llvmSourceName + ", " + mUpperBoundPlusOne + "\n"
-#  ioLLVMcode += "  br i1 " + llvmSourceName + ".isOk, label %" + llvmLabelName + ".ovf, label %" + llvmLabelName + ".ok\n\n"
-#  ioLLVMcode += llvmLabelName + ".ovf:\n"
-#  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
-#  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
-#  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mPanicCode + ")\n"
-#  ioLLVMcode += "  unreachable\n\n"
-#  ioLLVMcode += llvmLabelName + ".ok:\n"
-#}
+override method @upperBoundCheckIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  [!?ioGenerationAdds.mStaticStringMap findOrAddStaticString 
+    ![[[mLocation file] lastPathComponent] stringByDeletingPathExtension]
+    ?let staticStringIndex
+  ]
+  let llvmType = [[mSource type] llvmTypeName]
+  let llvmSourceName = [mSource llvmName]
+  let llvmLabelName = [mSource name]
+  ioLLVMcode += "  " + llvmSourceName + ".isOk = icmp ult " + llvmType + " " + llvmSourceName + ", " + mUpperBoundPlusOne + "\n"
+  ioLLVMcode += "  br i1 " + llvmSourceName + ".isOk, label %" + llvmLabelName + ".ovf, label %" + llvmLabelName + ".ok\n\n"
+  ioLLVMcode += llvmLabelName + ".ovf:\n"
+  ioLLVMcode += "  call void @raise.panic." + staticStringIndex + " ("
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType + " " + [mLocation line] + ", "
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType + " " + mPanicCode + ")\n"
+  ioLLVMcode += "  unreachable\n\n"
+  ioLLVMcode += llvmLabelName + ".ok:\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @upperBoundCheckIR enterAccessibleEntities
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
+override method @upperBoundCheckIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
 
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

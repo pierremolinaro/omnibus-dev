@@ -41,49 +41,49 @@ override method @checkInstructionAST noteInstructionTypesInPrecedenceGraph ?!@se
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @checkInstructionAST analyze
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-#  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-#{
-##--- Analyze expression
-#  @instructionListIR instructionGenerationList = {}
-#  [mExpression analyzeExpression
-#    !self:inSelfType
-#    !inGuard:false
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !optionalTargetType:.null
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:instructionGenerationList
-#    ?result:@objectIR expressionResult
-#  ]
-##--- Check inferred type
-#  if not [[expressionResult kind] isBoolean] then
-#    error mCheckInstructionLocation : "expression is not boolean"
-#  end
-##--- Check expression is static, and true
-#  if not [expressionResult isStatic] then
-#    error mCheckInstructionLocation : "expression is not static: use assert instruction"
-#  else
-#    [expressionResult literalInteger ?1* ?value:@bigint value]
-#    if value != 1G then
-#      error mCheckInstructionLocation : "check expression value is false"
-#    end
-#  end
-#}
+override method @checkInstructionAST analyze
+  ?self:let @PLMType inSelfType
+  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool unused inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx unused ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+{
+#--- Analyze expression
+  @instructionListIR instructionGenerationList = {}
+  [mExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.void
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:instructionGenerationList
+    ?result:@objectIR expressionResult
+  ]
+#--- Check inferred type
+  if not [[expressionResult type] isBoolean] then
+    error mCheckInstructionLocation : "expression is not boolean"
+  end
+#--- Check expression is static, and true
+  if not [expressionResult isStatic] then
+    error mCheckInstructionLocation : "expression is not static: use assert instruction"
+  else
+    [expressionResult literalInteger ?1* ?value:@bigint value]
+    if value != 1G then
+      error mCheckInstructionLocation : "check expression value is false"
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

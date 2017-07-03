@@ -72,144 +72,144 @@ filewrapper targetTemplates in "../embedded-sources/targets" {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc generateTarget
-#  ?currentDir:let @string inCurrentDirectory
-#  ?productDirectory:let @string inProductDirectory
-#  ?targetName:let @lstring inTargetName
-#  ?targetParameters:let @targetParameters inTargetParameters
-#{
-##--- Copy python utility scripts
-#  for (relativePath destinationFile) in inTargetParameters.mPython_utilityToolList do
-#    copyExecutableFile (
-#      !currentDir:inCurrentDirectory
-#      !from:inTargetName.string + "/" + relativePath
-#      !to:inProductDirectory + "/" + destinationFile
-#    )
-#  end
-##--- Copy linker.ld
-#  copyFileWithSubstitutions (
-#    !currentDir:inCurrentDirectory
-#    !from:inTargetName.string + "/" + inTargetParameters.mLinkerScript
-#    !to:inProductDirectory + "/sources/linker.ld"
-#    !{!"!SYSTEMSTACKSIZE!" ![inTargetParameters.mSystemStackSize.bigint string]}
-#  )
-##--- Copy build.py
-#  var opt_optimizationOption = "disable-opt"
-#  var llc_optimizationOption = "O0"
-#  var optimizationOptionCount = 0
-#  if [option plm_options.optimization1 value] then
-#    opt_optimizationOption = "O1"
-#    llc_optimizationOption = "O1"
-#    optimizationOptionCount ++
-#  end
-#  if [option plm_options.optimization2 value] then
-#    opt_optimizationOption = "O2"
-#    llc_optimizationOption = "O2"
-#    optimizationOptionCount ++
-#  end
-#  if [option plm_options.optimizationS value] then
-#    opt_optimizationOption = "Os"
-#    llc_optimizationOption = "O2"
-#    optimizationOptionCount ++
-#  end
-#  if [option plm_options.optimizationZ value] then
-#    opt_optimizationOption = "Oz"
-#    llc_optimizationOption = "O2"
-#    optimizationOptionCount ++
-#  end
-#  if [option plm_options.optimizationZ3 value] then
-#    opt_optimizationOption = "O3"
-#    llc_optimizationOption = "O3"
-#    optimizationOptionCount ++
-#  end
-#  if optimizationOptionCount > 1 then
-#    warning .nowhere : "several optimization options: --" + opt_optimizationOption + " is used"
-#  end 
-#  copyExecutableFileWithSubstitutions (
-#    !currentDir:inCurrentDirectory
-#    !from:inTargetName.string + "/" + inTargetParameters.mPython_build
-#    !to:inProductDirectory + "/build.py"
-#    !{!"<<OPT_OPTIMIZATION_OPTION>>" !opt_optimizationOption, !"<<LLC_OPTIMIZATION_OPTION>>" !llc_optimizationOption}
-#  )
-#}
+proc generateTarget
+  ?currentDir:let @string inCurrentDirectory
+  ?productDirectory:let @string inProductDirectory
+  ?targetName:let @lstring inTargetName
+  ?targetParameters:let @targetParameters inTargetParameters
+{
+#--- Copy python utility scripts
+  for (relativePath destinationFile) in inTargetParameters.mPython_utilityToolList do
+    copyExecutableFile (
+      !currentDir:inCurrentDirectory
+      !from:inTargetName.string + "/" + relativePath
+      !to:inProductDirectory + "/" + destinationFile
+    )
+  end
+#--- Copy linker.ld
+  copyFileWithSubstitutions (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/" + inTargetParameters.mLinkerScript
+    !to:inProductDirectory + "/sources/linker.ld"
+    !{!"!SYSTEMSTACKSIZE!" ![inTargetParameters.mSystemStackSize.bigint string]}
+  )
+#--- Copy build.py
+  var opt_optimizationOption = "disable-opt"
+  var llc_optimizationOption = "O0"
+  var optimizationOptionCount = 0
+  if [option plm_options.optimization1 value] then
+    opt_optimizationOption = "O1"
+    llc_optimizationOption = "O1"
+    optimizationOptionCount ++
+  end
+  if [option plm_options.optimization2 value] then
+    opt_optimizationOption = "O2"
+    llc_optimizationOption = "O2"
+    optimizationOptionCount ++
+  end
+  if [option plm_options.optimizationS value] then
+    opt_optimizationOption = "Os"
+    llc_optimizationOption = "O2"
+    optimizationOptionCount ++
+  end
+  if [option plm_options.optimizationZ value] then
+    opt_optimizationOption = "Oz"
+    llc_optimizationOption = "O2"
+    optimizationOptionCount ++
+  end
+  if [option plm_options.optimizationZ3 value] then
+    opt_optimizationOption = "O3"
+    llc_optimizationOption = "O3"
+    optimizationOptionCount ++
+  end
+  if optimizationOptionCount > 1 then
+    warning .nowhere : "several optimization options: --" + opt_optimizationOption + " is used"
+  end 
+  copyExecutableFileWithSubstitutions (
+    !currentDir:inCurrentDirectory
+    !from:inTargetName.string + "/" + inTargetParameters.mPython_build
+    !to:inProductDirectory + "/build.py"
+    !{!"<<OPT_OPTIMIZATION_OPTION>>" !opt_optimizationOption, !"<<LLC_OPTIMIZATION_OPTION>>" !llc_optimizationOption}
+  )
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#private proc copyExecutableFile
-#  ?currentDir:let @string inCurrentDirectory
-#  ?from:let @string inSourceFileNamePath
-#  ?to:let @string inDestinationAbsoluteFilePath
-#{
-#  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
-#    let fw = [filewrapper targetTemplates]
-#    let s = [fw textFileContentsAtPath !inSourceFileNamePath]
-#    [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
-#  else
-#    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-#    let s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
-#    [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
-#  end
-#}
+private proc copyExecutableFile
+  ?currentDir:let @string inCurrentDirectory
+  ?from:let @string inSourceFileNamePath
+  ?to:let @string inDestinationAbsoluteFilePath
+{
+  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+    let fw = [filewrapper targetTemplates]
+    let s = [fw textFileContentsAtPath !inSourceFileNamePath]
+    [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+  else
+    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    let s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
+    [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#private proc copyExecutableFileWithSubstitutions
-#  ?currentDir:let @string inCurrentDirectory
-#  ?from:let @string inSourceFileNamePath
-#  ?to:let @string inDestinationAbsoluteFilePath
-#  ?let @2stringlist inSubstitutions
-#{
-#  @string s
-#  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
-#    let fw = [filewrapper targetTemplates]
-#    s = [fw textFileContentsAtPath !inSourceFileNamePath]
-#  else
-#    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-#    s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
-#  end
-#  for (templateString replacementString) in inSubstitutions do
-#    s = [s stringByReplacingStringByString !templateString !replacementString]
-#  end
-#  [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
-#}
+private proc copyExecutableFileWithSubstitutions
+  ?currentDir:let @string inCurrentDirectory
+  ?from:let @string inSourceFileNamePath
+  ?to:let @string inDestinationAbsoluteFilePath
+  ?let @2stringlist inSubstitutions
+{
+  @string s
+  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+    let fw = [filewrapper targetTemplates]
+    s = [fw textFileContentsAtPath !inSourceFileNamePath]
+  else
+    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
+  end
+  for (templateString replacementString) in inSubstitutions do
+    s = [s stringByReplacingStringByString !templateString !replacementString]
+  end
+  [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#private proc copyFileWithSubstitutions
-#  ?currentDir:let @string inCurrentDirectory
-#  ?from:let @string inSourceFileNamePath
-#  ?to:let @string inDestinationAbsoluteFilePath
-#  ?let @2stringlist inSubstitutions
-#{
-#  @string s
-#  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
-#    let fw = [filewrapper targetTemplates]
-#    s = [fw textFileContentsAtPath !inSourceFileNamePath]
-#  else
-#    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-#    s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
-#  end
-#  for (templateString replacementString) in inSubstitutions do
-#    s = [s stringByReplacingStringByString !templateString !replacementString]
-#  end
-#  [s writeToFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
-#}
+private proc copyFileWithSubstitutions
+  ?currentDir:let @string inCurrentDirectory
+  ?from:let @string inSourceFileNamePath
+  ?to:let @string inDestinationAbsoluteFilePath
+  ?let @2stringlist inSubstitutions
+{
+  @string s
+  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+    let fw = [filewrapper targetTemplates]
+    s = [fw textFileContentsAtPath !inSourceFileNamePath]
+  else
+    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
+  end
+  for (templateString replacementString) in inSubstitutions do
+    s = [s stringByReplacingStringByString !templateString !replacementString]
+  end
+  [s writeToFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func getTargetTextFile
-#  ?currentDir:let @string inCurrentDirectory
-#  ?from:let @string inTargetFile
-#  -> @string outContents
-#{
-#  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
-#    let fw = [filewrapper targetTemplates]
-#    outContents = [fw textFileContentsAtPath !inTargetFile]
-#  else
-#    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-#    outContents = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inTargetFile}
-#  end
-#}
+func getTargetTextFile
+  ?currentDir:let @string inCurrentDirectory
+  ?from:let @string inTargetFile
+  -> @string outContents
+{
+  if [option plm_options.useDirAsTargetDir value] == "" then # From embedded file
+    let fw = [filewrapper targetTemplates]
+    outContents = [fw textFileContentsAtPath !inTargetFile]
+  else
+    let targetDefinitionDir = [[option plm_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
+    outContents = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inTargetFile}
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

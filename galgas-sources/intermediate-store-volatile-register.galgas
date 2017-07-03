@@ -1,38 +1,38 @@
 
-#setter @instructionListIR appendStoreVolatileRegister
-#  ?let @unifiedTypeMap-proxy inTargetVarType
-#  ?let @bigint inAddress
-#  ?let @objectIR inSourceValue
-#{
-#  self += !@storeVolatileIR.new {!inTargetVarType !inAddress !inSourceValue}
-#}
+setter @instructionListIR appendStoreVolatileRegister
+  ?let @PLMType inTargetVarType
+  ?let @bigint inAddress
+  ?let @objectIR inSourceValue
+{
+  self += !@storeVolatileIR.new {!inTargetVarType !inAddress !inSourceValue}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @storeVolatileIR : @abstractInstructionIR {
-#  @unifiedTypeMap-proxy mTargetVarType
-#  @bigint mAddress
-#  @objectIR mSourceValue
-#}
+class @storeVolatileIR : @abstractInstructionIR {
+  @PLMType mTargetVarType
+  @bigint mAddress
+  @objectIR mSourceValue
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @storeVolatileIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-#  let llvmType = [[mTargetVarType kind] llvmTypeName]
-#  ioLLVMcode += "  store volatile " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType
-#             + " * inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
-#}
+override method @storeVolatileIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [mTargetVarType llvmTypeName]
+  ioLLVMcode += "  store volatile " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType
+             + " * inttoptr (i32 " + mAddress + " to " + llvmType + "*) ; " + [mAddress hexString] + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @storeVolatileIR enterAccessibleEntities 
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
+override method @storeVolatileIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

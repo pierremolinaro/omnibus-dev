@@ -4,296 +4,297 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @infixOperatorMap {
-#  @unifiedTypeMap-proxy mResultType
-#  @infixOperatorDescription mOperation
-#  insert insertKey error message "** internal error **"
-#  search searchKey error message "** internal error **"
-#}
+map @infixOperatorMap {
+  @PLMType mResultType
+  @infixOperatorDescription mOperation
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @prefixOperatorMap {
-#  insert insertKey error message "** internal error **"
-#  search searchKey error message "prefix operation is not defined for $%K type"
-#}
+map @prefixOperatorMap {
+  insert insertKey error message "** internal error **"
+  search searchKey error message "prefix operation is not defined for $%K type"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @staticStringMap
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @staticStringMap {
-#  @uint mIndex
-#  insert insertKey error message "-- internal error --"
-#  search searchKey error message "-- internal error --"
-#}
+map @staticStringMap {
+  @uint mIndex
+  insert insertKey error message "-- internal error --"
+  search searchKey error message "-- internal error --"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#setter @staticStringMap findOrAddStaticString ?@string inString !@uint outIndex {
-#  if [self hasKey !inString]  then
-#    [self searchKey ![inString nowhere] ?outIndex]
-#  else
-#    outIndex = [self count]
-#    [!?self insertKey ![inString nowhere] !outIndex]
-#  end
-#}
+setter @staticStringMap findOrAddStaticString ?@string inString !@uint outIndex {
+  if [self hasKey !inString]  then
+    [self searchKey ![inString nowhere] ?outIndex]
+  else
+    outIndex = [self count]
+    [!?self insertKey ![inString nowhere] !outIndex]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @globalConstantMap {
-#  @objectIR mValue
-#  insert insertKey error message "the '%K' constant is already declared in %L"
-#  search searchKey error message "there is no '%K' constant"
-#}
+map @globalConstantMap {
+  @objectIR mValue
+  insert insertKey error message "the '%K' constant is already declared in %L"
+  search searchKey error message "there is no '%K' constant"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @allowedGuardMap {
-#  insert insertKey error message "the '%K' guard is already declared in %L"
-#  search searchKey error message "there is no '%K' guard"
-#}
+map @allowedGuardMap {
+  insert insertKey error message "the '%K' guard is already declared in %L"
+  search searchKey error message "there is no '%K' guard"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @globalVariableMap %selectors {
-#  @unifiedTypeMap-proxy type
-#  @stringset executionModeSet
-##  @allowedRoutineMap allowedRoutineMap
-#  @allowedGuardMap allowedGuardMap
-##  @allowedISRMap allowedISRMap
-##  @allowedTaskMap allowedTaskMap
-#  @objectIR initialValue
-#  @bool isConstant
-#  @bool allowedAccessToAll
-#
-#  insert insertKey error message "the '%K' global variable is already declared in %L"
-#  search searchKey error message "there is no '%K' global variable"
-#}
+map @globalVariableMap %selectors {
+  @PLMType type
+  @stringset executionModeSet
+#  @allowedRoutineMap allowedRoutineMap
+  @allowedGuardMap allowedGuardMap
+#  @allowedISRMap allowedISRMap
+#  @allowedTaskMap allowedTaskMap
+  @objectIR initialValue
+  @bool isConstant
+  @bool allowedAccessToAll
+
+  insert insertKey error message "the '%K' global variable is already declared in %L"
+  search searchKey error message "there is no '%K' global variable"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @operandList {
-#  @objectIR mOperand
-#}
+list @operandList {
+  @objectIR mOperand
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @classConstantMap {
-#  @objectIR mValue
-#  insert insertKey error message "the '%K' class constant is already declared in %L"
-#  search searchKey error message "there is no '%K' class constant"
-#}
+map @classConstantMap {
+  @objectIR mValue
+  insert insertKey error message "the '%K' class constant is already declared in %L"
+  search searchKey error message "there is no '%K' class constant"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @operandIRList {
-#  @objectIR mOperand
-#}
+list @operandIRList {
+  @objectIR mOperand
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#enum @constructorValue {
-#  case zero
-#  case simple (@bigint value)
-#  case structure (@constructorSignature constructorSignature @sortedOperandIRList sortedOperandList)
-#}
+enum @constructorValue {
+  case zero
+  case simple (@bigint value)
+  case structure (@constructorSignature constructorSignature @sortedOperandIRList sortedOperandList)
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @constructorMap {
-#  @constructorValue mInitValue
-#  insert insertKey error message "-- internal error --"
-#  search searchKey error message "-- internal error --"
-#}
+map @constructorMap {
+  @constructorValue mInitValue
+  insert insertKey error message "-- internal error --"
+  search searchKey error message "-- internal error --"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#map @availableInterruptMap {
-#  @interruptionPanicCode mInterruptionPanicCode
-#  insert insertKey error message "interrupt '%K' is already defined"
-#  search searchKey error message "interrupt '%K' is not defined"
-#}
+map @availableInterruptMap {
+  @interruptionPanicCode mInterruptionPanicCode
+  insert insertKey error message "interrupt '%K' is already defined"
+  search searchKey error message "interrupt '%K' is not defined"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @globalTaskVariableList {
-#  @string mTaskName
-#  @string mTaskTypeName
-#  @objectIR mInitialValue
-#}
+list @globalTaskVariableList {
+  @string mTaskName
+  @string mTaskTypeName
+  @objectIR mInitialValue
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#struct @semanticContext {
-#  @targetParameters mTargetParameters
-#  @uint mPointerSize # in bit count
-#  @unifiedTypeMap-proxy mBooleanType
-#  @unifiedTypeMap-proxy mLiteralIntegerType
-#  @unifiedTypeMap-proxy mPanicCodeType
-#  @unifiedTypeMap-proxy mPanicLineType
-#  @unifiedTypeMap-proxy mUnsignedIntegerType
-#  @unifiedTypeMap mTypeMap
-#  @routineMapForContext mRoutineMapForContext
-#  @guardMapForContext mGuardMapForContext
-#  @initRoutineMap mInitRoutineMap
-#  @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
-#  @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
-#  @controlRegisterMap mControlRegisterMap
-#  @globalConstantMap mGlobalConstantMap
-#  @globalVariableMap mGlobalVariableMap
-#  @moduleMap mModuleMap
-#  @constructorMap mConstructorMap
-#  @staticlistMap mStaticlistMap
-##--- Interrupts
-#  @stringset mDefinedInterruptSet
-#  @availableInterruptMap mAvailableInterruptMap
-##--- Operators
-#  @infixOperatorMap mEqualOperatorMap           # ==
-#  @infixOperatorMap mNonEqualOperatorMap        # !=
-#  @infixOperatorMap mStrictInfOperatorMap       # <
-#  @infixOperatorMap mInfEqualOperatorMap        # <=
-#  @infixOperatorMap mStrictSupOperatorMap       # >
-#  @infixOperatorMap mSupEqualOperatorMap        # >=
-#  @infixOperatorMap mAndOperatorMap             # &
-#  @infixOperatorMap mOrOperatorMap              # |
-#  @infixOperatorMap mXorOperatorMap             # ^
-#  @infixOperatorMap mBooleanXorOperatorMap      # xor
-#  @infixOperatorMap mAddOperatorMap             # +
-#  @infixOperatorMap mAddNoOvfOperatorMap        # &+
-#  @infixOperatorMap mSubOperatorMap             # -
-#  @infixOperatorMap mSubNoOvfOperatorMap        # &-
-#  @infixOperatorMap mMulOperatorMap             # *
-#  @infixOperatorMap mMulNoOvfOperatorMap        # &*
-#  @infixOperatorMap mDivOperatorMap             # /
-#  @infixOperatorMap mDivNoOvfOperatorMap        # &/
-#  @infixOperatorMap mModOperatorMap             # %
-#  @infixOperatorMap mModNoOvfOperatorMap        # &%
-#  @infixOperatorMap mLeftShiftOperatorMap       # <<
-#  @infixOperatorMap mRightShiftOperatorMap      # >>
-#  @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
-#  @prefixOperatorMap mNotOperatorMap            # not
-#  @prefixOperatorMap mUnsignedComplementOperatorMap # ~
-##--- Tasks
-#  @taskMap mTaskMap
-#  @globalTaskVariableList mGlobalTaskVariableList
-#}
+struct @semanticContext {
+  @targetParameters mTargetParameters
+  @uint mPointerSize # in bit count
+  @unifiedTypeMap-proxy mBooleanType
+  @unifiedTypeMap-proxy mLiteralIntegerType
+  @unifiedTypeMap-proxy mPanicCodeType
+  @unifiedTypeMap-proxy mPanicLineType
+  @unifiedTypeMap-proxy mUnsignedIntegerType
+  @unifiedTypeMap mTypeMap
+  @routineMapForContext mRoutineMapForContext
+  @guardMapForContext mGuardMapForContext
+  @initRoutineMap mInitRoutineMap
+  @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
+  @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
+  @controlRegisterMap mControlRegisterMap
+  @globalConstantMap mGlobalConstantMap
+  @globalVariableMap mGlobalVariableMap
+  @moduleMap mModuleMap
+  @constructorMap mConstructorMap
+  @staticlistMap mStaticlistMap
+#--- Interrupts
+  @stringset mDefinedInterruptSet
+  @availableInterruptMap mAvailableInterruptMap
+#--- Operators
+  @infixOperatorMap mEqualOperatorMap           # ==
+  @infixOperatorMap mNonEqualOperatorMap        # !=
+  @infixOperatorMap mStrictInfOperatorMap       # <
+  @infixOperatorMap mInfEqualOperatorMap        # <=
+  @infixOperatorMap mStrictSupOperatorMap       # >
+  @infixOperatorMap mSupEqualOperatorMap        # >=
+  @infixOperatorMap mAndOperatorMap             # &
+  @infixOperatorMap mOrOperatorMap              # |
+  @infixOperatorMap mXorOperatorMap             # ^
+  @infixOperatorMap mBooleanXorOperatorMap      # xor
+  @infixOperatorMap mAddOperatorMap             # +
+  @infixOperatorMap mAddNoOvfOperatorMap        # &+
+  @infixOperatorMap mSubOperatorMap             # -
+  @infixOperatorMap mSubNoOvfOperatorMap        # &-
+  @infixOperatorMap mMulOperatorMap             # *
+  @infixOperatorMap mMulNoOvfOperatorMap        # &*
+  @infixOperatorMap mDivOperatorMap             # /
+  @infixOperatorMap mDivNoOvfOperatorMap        # &/
+  @infixOperatorMap mModOperatorMap             # %
+  @infixOperatorMap mModNoOvfOperatorMap        # &%
+  @infixOperatorMap mLeftShiftOperatorMap       # <<
+  @infixOperatorMap mRightShiftOperatorMap      # >>
+  @prefixOperatorMap mUnaryMinusOperatorMap     # - and &-
+  @prefixOperatorMap mNotOperatorMap            # not
+  @prefixOperatorMap mUnsignedComplementOperatorMap # ~
+#--- Tasks
+  @taskMap mTaskMap
+  @globalTaskVariableList mGlobalTaskVariableList
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#abstract method @abstractDeclaration enterInContext
-#  ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
-#  ?!context:@semanticContext ioContext
-#  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+abstract method @abstractDeclaration enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#abstract method @abstractDeclaration enterRoutinesInContext
-#  ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
-#  ?!context:@semanticContext ioContext
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-#proc buildSemanticContext
-#  ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
-#  ?sourceFile:let @lstring inSourceFile
-#  ?ast:let @ast inAST
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
-#  !context:@semanticContext outSemanticContext
-#{
-#  outSemanticContext = .default
-##--- Enter init routines
-#  for initRoutine in inAST.mInitListAST do
-#    [initRoutine enterInContext !?context:outSemanticContext]
-#  end
-##--- Enter panic routines
-#  for panicRoutine in inAST.mPanicClauseListAST do
-#    [panicRoutine enterInContext !?context:outSemanticContext]
-#  end
-##--- Enter standalone procedures, functions, sections, services, guards in context
-#  [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
-#  [inAST.mProcedureListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
-#  [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
-#  [inAST.mStandAloneSystemRoutineListAST enterInContext !receiverType:"" !?context: outSemanticContext]
-#  [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
-##---
-#  for (declaration) in inDeclarationListAST do
-#    [declaration enterInContext
-#      !procedureDeclarationList:inAST.mProcedureListAST
-#      !?context:outSemanticContext
-#      !?staticlistValues:ioStaticListValueMap
-#      !?staticStringMap:ioGlobalLiteralStringMap
-#    ]
-#  end
-##--- Build an HTML containing all global constants
-#  buildGlobalConstantMapHTMLFile (
-#    !outSemanticContext.mGlobalConstantMap
-#    !sourceFile:inSourceFile
-#  )
-##--- Build an HTML containing all types
-#  buildTypeMapHTMLFile (
-#    !outSemanticContext.mTypeMap
-#    !sourceFile:inSourceFile
-#  )
-##--- Enter control registers in context
-#  enterControlRegistersInContext (
-#    !inAST.mControlRegisterDeclarationListAST
-#    !?context: outSemanticContext
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#  )
-#  buildControlRegisterMapHTMLFile (
-#    !outSemanticContext.mControlRegisterMap
-#    !sourceFile:inSourceFile
-#  )
-##--- Enter tasks
-#  [inAST.mTaskListAST enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
-##---
-#  for (declaration) in inDeclarationListAST do
-#    [declaration enterRoutinesInContext
-#      !procedureDeclarationList:inAST.mProcedureListAST
-#      !?context:outSemanticContext
-#      !?staticStringMap:ioGlobalLiteralStringMap
-#    ]
-#  end
-##--- Enter static lists in constant map
-#  for (key stringValueList) in ioStaticListValueMap do
-#    let lkey = @lstring.new {!key !.nowhere}
-#    let elementTypePLMName = plmNameForStaticListElementType (!lkey)
-#    let elementType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !elementTypePLMName}
-#    [!?outSemanticContext.mTypeMap insertType
-#      !lkey:plmNameForStaticListType (!lkey)
-#      !kind:.arrayType {
-#        !typeName:[llvmNameForStaticListType (!key) nowhere]
-#        !elementType:elementType
-#        !size:[stringValueList length]
-#        !classConstantMap: {}
-#        !flags:0
-#      }
-#    ]
-#    let staticListType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !plmNameForStaticListType (!lkey)}
-#    [!?outSemanticContext.mGlobalConstantMap insertKey
-#      !lkey
-#      !.globalVariableReference {!type:staticListType !plmName:lkey}
-#    ]
-#  end
-##--- Check global var declaration
-#  if @uint.errorCount == 0 then
-#    for globalVar in inAST.mGlobalVarDeclarationListAST do
-#      [globalVar enterInContext
-#        !?context:outSemanticContext
-#        !?staticStringMap:ioGlobalLiteralStringMap
-#      ]
-#    end
-#  end
-#}
+abstract method @abstractDeclaration enterRoutinesInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#func combineTypeNamesForInfixOperator ?let @string inLeftTypeName ?let @string inRightTypeName -> @lstring outResult {
-#  outResult = ["{" + inLeftTypeName + ", " + inRightTypeName + "}" nowhere]
-#}
+proc buildSemanticContext
+  ?orderedDeclarationList:let @declarationListAST inDeclarationListAST
+  ?sourceFile:let @lstring inSourceFile
+  ?ast:let @ast inAST
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!staticlistValues:@staticlistValues_listMap ioStaticListValueMap
+  !context:@semanticContext outSemanticContext
+{
+  outSemanticContext = .default
+#--- Enter init routines
+  for initRoutine in inAST.mInitListAST do
+    [initRoutine enterInContext !?context:outSemanticContext]
+  end
+#--- Enter panic routines
+  for panicRoutine in inAST.mPanicClauseListAST do
+    [panicRoutine enterInContext !?context:outSemanticContext]
+  end
+#--- Enter standalone procedures, functions, sections, services, guards in context
+  [inAST.mISRDeclarationListAST enterInContext !?outSemanticContext]
+  [inAST.mProcedureListAST enterFunctionInContext !selfTypeName:"" !?context:outSemanticContext]
+  [inAST.mExternProcListAST enterExternProcInContext !?context: outSemanticContext]
+  [inAST.mStandAloneSystemRoutineListAST enterInContext !receiverType:"" !?context: outSemanticContext]
+  [inAST.mGuardListAST enterInContext !receiverType:"" !?context: outSemanticContext]
+#---
+  for (declaration) in inDeclarationListAST do
+    [declaration enterInContext
+      !procedureDeclarationList:inAST.mProcedureListAST
+      !?context:outSemanticContext
+      !?staticlistValues:ioStaticListValueMap
+      !?staticStringMap:ioGlobalLiteralStringMap
+    ]
+  end
+#--- Build an HTML containing all global constants
+  buildGlobalConstantMapHTMLFile (
+    !outSemanticContext.mGlobalConstantMap
+    !sourceFile:inSourceFile
+  )
+#--- Build an HTML containing all types
+  buildTypeMapHTMLFile (
+    !outSemanticContext.mTypeMap
+    !sourceFile:inSourceFile
+  )
+#--- Enter control registers in context
+  enterControlRegistersInContext (
+    !inAST.mControlRegisterDeclarationListAST
+    !?context: outSemanticContext
+    !?staticStringMap:ioGlobalLiteralStringMap
+  )
+  buildControlRegisterMapHTMLFile (
+    !outSemanticContext.mControlRegisterMap
+    !sourceFile:inSourceFile
+  )
+#--- Enter tasks
+  [inAST.mTaskListAST enterInContext !?context: outSemanticContext !?staticStringMap:ioGlobalLiteralStringMap]
+#---
+  for (declaration) in inDeclarationListAST do
+    [declaration enterRoutinesInContext
+      !procedureDeclarationList:inAST.mProcedureListAST
+      !?context:outSemanticContext
+      !?staticStringMap:ioGlobalLiteralStringMap
+    ]
+  end
+#--- Enter static lists in constant map
+  for (key stringValueList) in ioStaticListValueMap do
+    let lkey = @lstring.new {!key !.nowhere}
+    let elementTypePLMName = plmNameForStaticListElementType (!lkey)
+    let elementType = [@unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !elementTypePLMName} type]
+    [!?outSemanticContext.mTypeMap insertType
+      !lkey:plmNameForStaticListType (!lkey)
+      !type:.arrayType {
+        !typeName:[llvmNameForStaticListType (!key) nowhere]
+        !elementType:elementType
+        !size:[stringValueList length]
+        !classConstantMap: {}
+        !flags:0
+        !plmTypeName:plmNameForStaticListType (!lkey)
+      }
+    ]
+    let staticListType = @unifiedTypeMap-proxy.searchKey {!outSemanticContext.mTypeMap !plmNameForStaticListType (!lkey)}
+    [!?outSemanticContext.mGlobalConstantMap insertKey
+      !lkey
+      !.globalVariableReference {!type:[staticListType type] !plmName:lkey}
+    ]
+  end
+#--- Check global var declaration
+  if @uint.errorCount == 0 then
+    for globalVar in inAST.mGlobalVarDeclarationListAST do
+      [globalVar enterInContext
+        !?context:outSemanticContext
+        !?staticStringMap:ioGlobalLiteralStringMap
+      ]
+    end
+  end
+}
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func combineTypeNamesForInfixOperator ?let @string inLeftTypeName ?let @string inRightTypeName -> @lstring outResult {
+  outResult = ["{" + inLeftTypeName + ", " + inRightTypeName + "}" nowhere]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

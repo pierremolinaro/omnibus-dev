@@ -52,67 +52,67 @@ override getter @integerDeclaration keyRepresentationForErrorSignaling -> @strin
 #  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @integerDeclaration enterInContext
-#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-#  ?!context:@semanticContext ioContext
-#  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
-#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-#{
-#  let integerTypeName = [[self typeName] nowhere]
-##--- Get min and max
-#  @bigint min
-#  @bigint max
-#  if mIsSigned then
-#    min = - (1G << (mSize - 1))
-#    max = (1G << (mSize - 1)) - 1G
-#  else # Unsigned
-#    min = 0G
-#    max = (1G << mSize) - 1G
-#  end
-# #---
-#  [!?ioContext.mTypeMap insertType
-#    !lkey:integerTypeName
-#    !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
-#  ]
-##--- Enter integer <-> integer operators
-#  enter_integer_integer_operators (
-#    !integerTypeName:integerTypeName
-#    !signed:mIsSigned
-#    !?context:ioContext
-#  )
-##--- Enter integer <-> literal operators
-#  enter_integer_literal_operators (
-#    !integerTypeName:integerTypeName
-#    !signed:mIsSigned
-#    !?context:ioContext
-#  )
-##--- Enter literal <-> integer operators
-#  enter_literal_integer_operators (
-#    !integerTypeName:integerTypeName
-#    !signed:mIsSigned
-#    !?context:ioContext
-#  )
-#}
+override method @integerDeclaration enterInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext ioContext
+  ?!staticlistValues:@staticlistValues_listMap unused ioStaticListValueMap
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+  let integerTypeName = [[self typeName] nowhere]
+#--- Get min and max
+  @bigint min
+  @bigint max
+  if mIsSigned then
+    min = - (1G << (mSize - 1))
+    max = (1G << (mSize - 1)) - 1G
+  else # Unsigned
+    min = 0G
+    max = (1G << mSize) - 1G
+  end
+ #---
+  [!?ioContext.mTypeMap insertType
+    !lkey:integerTypeName
+    !type:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize !plmTypeName:integerTypeName}
+  ]
+#--- Enter integer <-> integer operators
+  enter_integer_integer_operators (
+    !integerTypeName:integerTypeName
+    !signed:mIsSigned
+    !?context:ioContext
+  )
+#--- Enter integer <-> literal operators
+  enter_integer_literal_operators (
+    !integerTypeName:integerTypeName
+    !signed:mIsSigned
+    !?context:ioContext
+  )
+#--- Enter literal <-> integer operators
+  enter_literal_integer_operators (
+    !integerTypeName:integerTypeName
+    !signed:mIsSigned
+    !?context:ioContext
+  )
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @integerDeclaration enterRoutinesInContext
-#  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
-#  ?!context:@semanticContext unused ioContext
-#  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
-#{
-#}
+override method @integerDeclaration enterRoutinesInContext
+  ?procedureDeclarationList:let @functionDeclarationListAST unused inProcedureListAST
+  ?!context:@semanticContext unused ioContext
+  ?!staticStringMap:@staticStringMap unused ioGlobalLiteralStringMap
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @integerDeclaration semanticAnalysis
-#  ?context:let @semanticContext unused inContext
-#  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-#  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
-#{
-#}
+override method @integerDeclaration semanticAnalysis
+  ?context:let @semanticContext unused inContext
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  ?!intermediateCode:@intermediateCodeStruct unused ioIntermediateCodeStruct
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  INFIX OPERATION BETWEEN INTEGERS                                                                                     
@@ -120,172 +120,172 @@ override getter @integerDeclaration keyRepresentationForErrorSignaling -> @strin
 #! object <-> object
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#private proc enter_integer_integer_operators
-#  ?integerTypeName:let @lstring inIntegerTypeName
-#  ?signed:let @bool inIsSigned
-#  ?!context:@semanticContext ioContext
-#{
-#  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName}
-##--- Comparison infix operator
-#  let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
-#  [!?ioContext.mEqualOperatorMap insertKey
-#    !intIntOp
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
-#  ]
-#  [!?ioContext.mNonEqualOperatorMap insertKey
-#    !intIntOp
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
-#  ]
-#  [!?ioContext.mStrictInfOperatorMap insertKey
-#    !intIntOp
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
-#  ]
-#  [!?ioContext.mInfEqualOperatorMap insertKey
-#    !intIntOp
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
-#  ]
-#  [!?ioContext.mStrictSupOperatorMap insertKey
-#    !intIntOp
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
-#  ]
-#  [!?ioContext.mSupEqualOperatorMap insertKey
-#    !intIntOp
-#    !ioContext.mBooleanType
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
-#  ]
-##--- Bit Wise operators (for unsigned integers)
-#  if not inIsSigned then
-#    [!?ioContext.mAndOperatorMap insertKey
-#      !intIntOp
-#      !selfTypeProxy
-#      !@infixObjectObjectOperatorDescription.new {!.and}
-#    ]
-#    [!?ioContext.mOrOperatorMap insertKey
-#      !intIntOp
-#      !selfTypeProxy
-#      !@infixObjectObjectOperatorDescription.new {!.ior}
-#    ]
-#    [!?ioContext.mXorOperatorMap insertKey
-#      !intIntOp
-#      !selfTypeProxy
-#      !@infixObjectObjectOperatorDescription.new {!.xor}
-#    ]
-#    [!?ioContext.mUnsignedComplementOperatorMap insertKey
-#      !inIntegerTypeName
-#    ]
-#  end
-##--- Negate operator (for signed integers)
-#  if inIsSigned then
-#    [!?ioContext.mUnaryMinusOperatorMap insertKey
-#      !inIntegerTypeName
-#    ]
-#  end
-##--- Arithmetic operators
-#  [!?ioContext.mAddOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .saddOVF else .uaddOVF end}
-#  ]
-#  [!?ioContext.mAddNoOvfOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!.addNoOVF}
-#  ]
-#  [!?ioContext.mSubOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ssubOVF else .usubOVF end}
-#  ]
-#  [!?ioContext.mSubNoOvfOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!.subNoOVF}
-#  ]
-#  [!?ioContext.mMulOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .smulOVF else .umulOVF end}
-#  ]
-#  [!?ioContext.mMulNoOvfOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!.mulNoOVF}
-#  ]
-#  [!?ioContext.mDivOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sdivOVF else .udivOVF end}
-#  ]
-#  [!?ioContext.mDivNoOvfOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
-#  ]
-#  [!?ioContext.mModOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sremOVF else .uremOVF end}
-#  ]
-#  [!?ioContext.mModNoOvfOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
-#  ]
-##--- Shift operators
-#  [!?ioContext.mLeftShiftOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!.shl}
-#  ]
-#  [!?ioContext.mRightShiftOperatorMap insertKey
-#    !intIntOp
-#    !selfTypeProxy
-#    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ashr else .lshr end}
-#  ]
-#}
+private proc enter_integer_integer_operators
+  ?integerTypeName:let @lstring inIntegerTypeName
+  ?signed:let @bool inIsSigned
+  ?!context:@semanticContext ioContext
+{
+  let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
+#--- Comparison infix operator
+  let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !inIntegerTypeName.string)
+  [!?ioContext.mEqualOperatorMap insertKey
+    !intIntOp
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !intIntOp
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!.icmp_ne}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !intIntOp
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !intIntOp
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !intIntOp
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !intIntOp
+    !.boolean
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
+  ]
+#--- Bit Wise operators (for unsigned integers)
+  if not inIsSigned then
+    [!?ioContext.mAndOperatorMap insertKey
+      !intIntOp
+      !selfType
+      !@infixObjectObjectOperatorDescription.new {!.and}
+    ]
+    [!?ioContext.mOrOperatorMap insertKey
+      !intIntOp
+      !selfType
+      !@infixObjectObjectOperatorDescription.new {!.ior}
+    ]
+    [!?ioContext.mXorOperatorMap insertKey
+      !intIntOp
+      !selfType
+      !@infixObjectObjectOperatorDescription.new {!.xor}
+    ]
+    [!?ioContext.mUnsignedComplementOperatorMap insertKey
+      !inIntegerTypeName
+    ]
+  end
+#--- Negate operator (for signed integers)
+  if inIsSigned then
+    [!?ioContext.mUnaryMinusOperatorMap insertKey
+      !inIntegerTypeName
+    ]
+  end
+#--- Arithmetic operators
+  [!?ioContext.mAddOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .saddOVF else .uaddOVF end}
+  ]
+  [!?ioContext.mAddNoOvfOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!.addNoOVF}
+  ]
+  [!?ioContext.mSubOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ssubOVF else .usubOVF end}
+  ]
+  [!?ioContext.mSubNoOvfOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!.subNoOVF}
+  ]
+  [!?ioContext.mMulOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .smulOVF else .umulOVF end}
+  ]
+  [!?ioContext.mMulNoOvfOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!.mulNoOVF}
+  ]
+  [!?ioContext.mDivOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sdivOVF else .udivOVF end}
+  ]
+  [!?ioContext.mDivNoOvfOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
+  ]
+  [!?ioContext.mModOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sremOVF else .uremOVF end}
+  ]
+  [!?ioContext.mModNoOvfOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
+  ]
+#--- Shift operators
+  [!?ioContext.mLeftShiftOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!.shl}
+  ]
+  [!?ioContext.mRightShiftOperatorMap insertKey
+    !intIntOp
+    !selfType
+    !@infixObjectObjectOperatorDescription.new {!if inIsSigned then .ashr else .lshr end}
+  ]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
-#}
+class @infixObjectObjectOperatorDescription : @infixOperatorDescription {
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
-#  ?!@semanticTemporariesStruct ioTemporaries
-#  ?!@instructionListIR ioInstructionGenerationList
-#  ?let @objectIR inLeftOperand
-#  ?let @location inOperatorLocation
-#  ?let @objectIR inRightOperand
-#  ?let @unifiedTypeMap-proxy inResultType
-#  !@objectIR outResult
-#{
-##  message "INFIX OP " + "\n"
-#  if [inLeftOperand isLiteralInteger] && [inRightOperand isLiteralInteger] then
-#    [inLeftOperand  literalInteger ?1* ?value:let @bigint left]
-#    [inRightOperand literalInteger ?1* ?value:let @bigint right]
-##    message "INFIX OP LITERAL LITERAL " + left + " " + right + "\n"
-#    let resultValue = [self performStaticOperation !left !right]
-#    outResult = .literalInteger {!type: inResultType !value:resultValue}
-#  else
-##    message "INFIX OP COMPUTE\n"
-#    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
-#  #--- Generate code
-#    [!?ioInstructionGenerationList appendBinaryOperation
-#      !outResult
-#      ![inLeftOperand type]
-#      !inOperatorLocation
-#      !inLeftOperand
-#      !mOperator
-#      !inRightOperand
-#    ]
-#  end
-#}
+override method @infixObjectObjectOperatorDescription generateInfixOperatorCode
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  ?let @objectIR inLeftOperand
+  ?let @location inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @PLMType inResultType
+  !@objectIR outResult
+{
+#  message "INFIX OP " + "\n"
+  if [inLeftOperand isLiteralInteger] && [inRightOperand isLiteralInteger] then
+    [inLeftOperand  literalInteger ?1* ?value:let @bigint left]
+    [inRightOperand literalInteger ?1* ?value:let @bigint right]
+#    message "INFIX OP LITERAL LITERAL " + left + " " + right + "\n"
+    let resultValue = [self performStaticOperation !left !right]
+    outResult = .literalInteger {!type: inResultType !value:resultValue}
+  else
+#    message "INFIX OP COMPUTE\n"
+    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
+  #--- Generate code
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !outResult
+      ![inLeftOperand type]
+      !inOperatorLocation
+      !inLeftOperand
+      !mOperator
+      !inRightOperand
+    ]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  INFIX OPERATION BETWEEN AN INTEGER AND A LITERAL INTEGER                                                             
@@ -293,163 +293,163 @@ override getter @integerDeclaration keyRepresentationForErrorSignaling -> @strin
 #! object <-> literal integer
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#private proc enter_integer_literal_operators
-#  ?integerTypeName:let @lstring inIntegerTypeName
-#  ?signed:let @bool inIsSigned
-#  ?!context:@semanticContext ioContext
-#{
-##--- Infix operators
-#  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName}
-##--- Comparison infix operator
-#  let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !staticIntegerTypeName ())
-#  [!?ioContext.mEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@integerObject_literal_infixOperator.new {!.icmp_eq}
-#  ]
-#  [!?ioContext.mNonEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@integerObject_literal_infixOperator.new {!.icmp_ne}
-#  ]
-#  [!?ioContext.mStrictInfOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
-#  ]
-#  [!?ioContext.mInfEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
-#  ]
-#  [!?ioContext.mStrictSupOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
-#  ]
-#  [!?ioContext.mSupEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
-#  ]
-##--- Bit Wise operators (for unsigned integers)
-#  if not inIsSigned then
-#    [!?ioContext.mAndOperatorMap insertKey
-#      !intLiteralOp
-#      !selfTypeProxy
-#      !@integerObject_literal_infixOperator.new {!.and}
-#    ]
-#    [!?ioContext.mOrOperatorMap insertKey
-#      !intLiteralOp
-#      !selfTypeProxy
-#      !@integerObject_literal_infixOperator.new {!.ior}
-#    ]
-#    [!?ioContext.mXorOperatorMap insertKey
-#      !intLiteralOp
-#      !selfTypeProxy
-#      !@integerObject_literal_infixOperator.new {!.xor}
-#    ]
-#  end
-##--- Arithmetic operators
-#  [!?ioContext.mAddOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .saddOVF else .uaddOVF end}
-#  ]
-#  [!?ioContext.mAddNoOvfOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!.addNoOVF}
-#  ]
-#  [!?ioContext.mSubOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .ssubOVF else .usubOVF end}
-#  ]
-#  [!?ioContext.mSubNoOvfOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!.subNoOVF}
-#  ]
-#  [!?ioContext.mMulOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .smulOVF else .umulOVF end}
-#  ]
-#  [!?ioContext.mMulNoOvfOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!.mulNoOVF}
-#  ]
-#  [!?ioContext.mDivOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
-#  ]
-#  [!?ioContext.mDivNoOvfOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
-#  ]
-#  [!?ioContext.mModOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
-#  ]
-#  [!?ioContext.mModNoOvfOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
-#  ]
-##--- Shift operators
-#  [!?ioContext.mLeftShiftOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!.shl}
-#  ]
-#  [!?ioContext.mRightShiftOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@integerObject_literal_infixOperator.new {!if inIsSigned then .ashr else .lshr end}
-#  ]
-#}
+private proc enter_integer_literal_operators
+  ?integerTypeName:let @lstring inIntegerTypeName
+  ?signed:let @bool inIsSigned
+  ?!context:@semanticContext ioContext
+{
+#--- Infix operators
+  let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
+#--- Comparison infix operator
+  let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !staticIntegerTypeName ())
+  [!?ioContext.mEqualOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@integerObject_literal_infixOperator.new {!.icmp_eq}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@integerObject_literal_infixOperator.new {!.icmp_ne}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
+  ]
+#--- Bit Wise operators (for unsigned integers)
+  if not inIsSigned then
+    [!?ioContext.mAndOperatorMap insertKey
+      !intLiteralOp
+      !selfType
+      !@integerObject_literal_infixOperator.new {!.and}
+    ]
+    [!?ioContext.mOrOperatorMap insertKey
+      !intLiteralOp
+      !selfType
+      !@integerObject_literal_infixOperator.new {!.ior}
+    ]
+    [!?ioContext.mXorOperatorMap insertKey
+      !intLiteralOp
+      !selfType
+      !@integerObject_literal_infixOperator.new {!.xor}
+    ]
+  end
+#--- Arithmetic operators
+  [!?ioContext.mAddOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .saddOVF else .uaddOVF end}
+  ]
+  [!?ioContext.mAddNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!.addNoOVF}
+  ]
+  [!?ioContext.mSubOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .ssubOVF else .usubOVF end}
+  ]
+  [!?ioContext.mSubNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!.subNoOVF}
+  ]
+  [!?ioContext.mMulOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .smulOVF else .umulOVF end}
+  ]
+  [!?ioContext.mMulNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!.mulNoOVF}
+  ]
+  [!?ioContext.mDivOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
+  ]
+  [!?ioContext.mDivNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
+  ]
+  [!?ioContext.mModOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
+  ]
+  [!?ioContext.mModNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
+  ]
+#--- Shift operators
+  [!?ioContext.mLeftShiftOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!.shl}
+  ]
+  [!?ioContext.mRightShiftOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@integerObject_literal_infixOperator.new {!if inIsSigned then .ashr else .lshr end}
+  ]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @integerObject_literal_infixOperator : @infixOperatorDescription {
-#}
+class @integerObject_literal_infixOperator : @infixOperatorDescription {
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @integerObject_literal_infixOperator generateInfixOperatorCode
-#  ?!@semanticTemporariesStruct ioTemporaries
-#  ?!@instructionListIR ioInstructionGenerationList
-#  ?let @objectIR inLeftOperand
-#  ?let @location inOperatorLocation
-#  ?let @objectIR inRightOperand
-#  ?let @unifiedTypeMap-proxy inResultType
-#  !@objectIR outResult
-#{
-##  message "INFIX OP2 " + "\n"
-##--- Check right literal integer can be extented to left integer type, ans is not zero
-#  [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
-#  [[inLeftOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?2*]
-#  if literalValue < min then
-#    error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
-#  elsif literalValue > max then
-#    error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResult
-#  else
-#    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
-#    [!?ioInstructionGenerationList appendBinaryOperation
-#      !outResult
-#      ![inLeftOperand type]
-#      !inOperatorLocation
-#      !inLeftOperand
-#      !mOperator
-#      !inRightOperand
-#    ]
-#  end
-#}
+override method @integerObject_literal_infixOperator generateInfixOperatorCode
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  ?let @objectIR inLeftOperand
+  ?let @location inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @PLMType inResultType
+  !@objectIR outResult
+{
+#  message "INFIX OP2 " + "\n"
+#--- Check right literal integer can be extented to left integer type, ans is not zero
+  [inRightOperand literalInteger ?1* ?value:let @bigint literalValue]
+  [[inLeftOperand type] integer ?min:let @bigint min ?max:let @bigint max ?3*]
+  if literalValue < min then
+    error inOperatorLocation : "literal right integer expression too small (should be >= " + min + ")" : outResult
+  elsif literalValue > max then
+    error inOperatorLocation : "literal right integer expression too large (should be <= " + max + ")" : outResult
+  else
+    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !outResult
+      ![inLeftOperand type]
+      !inOperatorLocation
+      !inLeftOperand
+      !mOperator
+      !inRightOperand
+    ]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  INFIX OPERATION BETWEEN A LITERAL INTEGER AND AN INTEGER                                                             
@@ -457,162 +457,162 @@ override getter @integerDeclaration keyRepresentationForErrorSignaling -> @strin
 #! literal integer <-> object
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#private proc enter_literal_integer_operators
-#  ?integerTypeName:let @lstring inIntegerTypeName
-#  ?signed:let @bool inIsSigned
-#  ?!context:@semanticContext ioContext
-#{
-##--- Infix operators
-#  let selfTypeProxy = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName}
-##--- Comparison infix operator
-#  let intLiteralOp = combineTypeNamesForInfixOperator (!staticIntegerTypeName () !inIntegerTypeName.string)
-#  [!?ioContext.mEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@literal_integerObject_infixOperator.new {!.icmp_eq}
-#  ]
-#  [!?ioContext.mNonEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@literal_integerObject_infixOperator.new {!.icmp_ne}
-#  ]
-#  [!?ioContext.mStrictInfOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
-#  ]
-#  [!?ioContext.mInfEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
-#  ]
-#  [!?ioContext.mStrictSupOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
-#  ]
-#  [!?ioContext.mSupEqualOperatorMap insertKey
-#    !intLiteralOp
-#    !ioContext.mBooleanType
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
-#  ]
-##--- Bit Wise operators (for unsigned integers)
-#  if not inIsSigned then
-#    [!?ioContext.mAndOperatorMap insertKey
-#      !intLiteralOp
-#      !selfTypeProxy
-#      !@literal_integerObject_infixOperator.new {!.and}
-#    ]
-#    [!?ioContext.mOrOperatorMap insertKey
-#      !intLiteralOp
-#      !selfTypeProxy
-#      !@literal_integerObject_infixOperator.new {!.ior}
-#    ]
-#    [!?ioContext.mXorOperatorMap insertKey
-#      !intLiteralOp
-#      !selfTypeProxy
-#      !@literal_integerObject_infixOperator.new {!.xor}
-#    ]
-#  end
-##--- Arithmetic operators
-#  [!?ioContext.mAddOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .saddOVF else .uaddOVF end}
-#  ]
-#  [!?ioContext.mAddNoOvfOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!.addNoOVF}
-#  ]
-#  [!?ioContext.mSubOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .ssubOVF else .usubOVF end}
-#  ]
-#  [!?ioContext.mSubNoOvfOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!.subNoOVF}
-#  ]
-#  [!?ioContext.mMulOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .smulOVF else .umulOVF end}
-#  ]
-#  [!?ioContext.mMulNoOvfOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!.mulNoOVF}
-#  ]
-#  [!?ioContext.mDivOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .sdivOVF else .udivOVF end}
-#  ]
-#  [!?ioContext.mDivNoOvfOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
-#  ]
-#  [!?ioContext.mModOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .sremOVF else .uremOVF end}
-#  ]
-#  [!?ioContext.mModNoOvfOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
-#  ]
-##--- Shift operators
-#  [!?ioContext.mLeftShiftOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!.shl}
-#  ]
-#  [!?ioContext.mRightShiftOperatorMap insertKey
-#    !intLiteralOp
-#    !selfTypeProxy
-#    !@literal_integerObject_infixOperator.new {!if inIsSigned then .ashr else .lshr end}
-#  ]
-#}
+private proc enter_literal_integer_operators
+  ?integerTypeName:let @lstring inIntegerTypeName
+  ?signed:let @bool inIsSigned
+  ?!context:@semanticContext ioContext
+{
+#--- Infix operators
+  let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
+#--- Comparison infix operator
+  let intLiteralOp = combineTypeNamesForInfixOperator (!staticIntegerTypeName () !inIntegerTypeName.string)
+  [!?ioContext.mEqualOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@literal_integerObject_infixOperator.new {!.icmp_eq}
+  ]
+  [!?ioContext.mNonEqualOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@literal_integerObject_infixOperator.new {!.icmp_ne}
+  ]
+  [!?ioContext.mStrictInfOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_slt else .icmp_ult end}
+  ]
+  [!?ioContext.mInfEqualOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sle else .icmp_ule end}
+  ]
+  [!?ioContext.mStrictSupOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sgt else .icmp_ugt end}
+  ]
+  [!?ioContext.mSupEqualOperatorMap insertKey
+    !intLiteralOp
+    !.boolean
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .icmp_sge else .icmp_uge end}
+  ]
+#--- Bit Wise operators (for unsigned integers)
+  if not inIsSigned then
+    [!?ioContext.mAndOperatorMap insertKey
+      !intLiteralOp
+      !selfType
+      !@literal_integerObject_infixOperator.new {!.and}
+    ]
+    [!?ioContext.mOrOperatorMap insertKey
+      !intLiteralOp
+      !selfType
+      !@literal_integerObject_infixOperator.new {!.ior}
+    ]
+    [!?ioContext.mXorOperatorMap insertKey
+      !intLiteralOp
+      !selfType
+      !@literal_integerObject_infixOperator.new {!.xor}
+    ]
+  end
+#--- Arithmetic operators
+  [!?ioContext.mAddOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .saddOVF else .uaddOVF end}
+  ]
+  [!?ioContext.mAddNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!.addNoOVF}
+  ]
+  [!?ioContext.mSubOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .ssubOVF else .usubOVF end}
+  ]
+  [!?ioContext.mSubNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!.subNoOVF}
+  ]
+  [!?ioContext.mMulOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .smulOVF else .umulOVF end}
+  ]
+  [!?ioContext.mMulNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!.mulNoOVF}
+  ]
+  [!?ioContext.mDivOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .sdivOVF else .udivOVF end}
+  ]
+  [!?ioContext.mDivNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .sdivNoOVF else .udivNoOVF end}
+  ]
+  [!?ioContext.mModOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .sremOVF else .uremOVF end}
+  ]
+  [!?ioContext.mModNoOvfOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .sremNoOVF else .uremNoOVF end}
+  ]
+#--- Shift operators
+  [!?ioContext.mLeftShiftOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!.shl}
+  ]
+  [!?ioContext.mRightShiftOperatorMap insertKey
+    !intLiteralOp
+    !selfType
+    !@literal_integerObject_infixOperator.new {!if inIsSigned then .ashr else .lshr end}
+  ]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @literal_integerObject_infixOperator : @infixOperatorDescription {
-#}
+class @literal_integerObject_infixOperator : @infixOperatorDescription {
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @literal_integerObject_infixOperator generateInfixOperatorCode
-#  ?!@semanticTemporariesStruct ioTemporaries
-#  ?!@instructionListIR ioInstructionGenerationList
-#  ?let @objectIR inLeftOperand
-#  ?let @location inOperatorLocation
-#  ?let @objectIR inRightOperand
-#  ?let @unifiedTypeMap-proxy inResultType
-#  !@objectIR outResult
-#{
-##  message "INFIX OP3 " + "\n"
-##--- Check left literal integer can be extented to right integer type
-#  [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]
-#  [[inRightOperand kind] integer ?min:let @bigint min ?max:let @bigint max ?2*]
-#  if literalValue < min then
-#    error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResult
-#  elsif literalValue > max then
-#    error inOperatorLocation : "literal left integer expression too large (should be <= " + max + ")" : outResult
-#  else
-#    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
-#    [!?ioInstructionGenerationList appendBinaryOperation
-#      !outResult
-#      ![inRightOperand type]
-#      !inOperatorLocation
-#      !inLeftOperand
-#      !mOperator
-#      !inRightOperand
-#    ]
-#  end
-#}
+override method @literal_integerObject_infixOperator generateInfixOperatorCode
+  ?!@semanticTemporariesStruct ioTemporaries
+  ?!@instructionListIR ioInstructionGenerationList
+  ?let @objectIR inLeftOperand
+  ?let @location inOperatorLocation
+  ?let @objectIR inRightOperand
+  ?let @PLMType inResultType
+  !@objectIR outResult
+{
+#  message "INFIX OP3 " + "\n"
+#--- Check left literal integer can be extented to right integer type
+  [inLeftOperand literalInteger ?1* ?value:let @bigint literalValue]
+  [[inRightOperand type] integer ?min:let @bigint min ?max:let @bigint max ?3*]
+  if literalValue < min then
+    error inOperatorLocation : "literal left integer expression too small (should be >= " + min + ")" : outResult
+  elsif literalValue > max then
+    error inOperatorLocation : "literal left integer expression too large (should be <= " + max + ")" : outResult
+  else
+    getNewTempVariable (!inResultType !inOperatorLocation !?ioTemporaries ?outResult)
+    [!?ioInstructionGenerationList appendBinaryOperation
+      !outResult
+      ![inRightOperand type]
+      !inOperatorLocation
+      !inLeftOperand
+      !mOperator
+      !inRightOperand
+    ]
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

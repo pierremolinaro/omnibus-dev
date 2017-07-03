@@ -231,197 +231,200 @@ method @globalVarDeclarationList noteTypesInPrecedenceGraph ?!@semanticTypePrece
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @globalVarDeclarationList-element enterInContext
-#  ?!context:@semanticContext ioContext
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#{
-##--- Get destination type
-#  @unifiedTypeMap-proxy variableAnnotationType
-#  if mTypeName.string == "" then
-#    variableAnnotationType = .null
-#  else
-#    variableAnnotationType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mTypeName}
+method @globalVarDeclarationList-element enterInContext
+  ?!context:@semanticContext ioContext
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+{
+#--- Get destination type
+  @PLMType variableAnnotationType
+  if mTypeName.string == "" then
+    variableAnnotationType = .void
+  else
+    variableAnnotationType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mTypeName} type]
+  end
+#--- Analyze source expression
+  @semanticTemporariesStruct temporaries = .default
+  @instructionListIR instructionGenerationList = {}
+  @allocaList allocaList = {}
+  variableMapWithConstants (
+    !context:ioContext
+    ?*
+    ?@universalPropertyAndRoutineMapForContext universalMap
+  )
+  [mSourceExpression analyzeExpression
+     !self:.void
+     !inGuard:false
+     !routineNameForInvocationGraph:["compiler" nowhere]
+     !optionalTargetType:variableAnnotationType
+     !context:ioContext
+     !mode:.bootMode
+     !?temporary:temporaries
+     !?staticStringMap:ioGlobalLiteralStringMap
+     !?variableMap:universalMap
+     !?alloca:allocaList
+     !?instructionListIR:instructionGenerationList
+     ?result:@objectIR expressionResult
+  ]
+  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
+    error mVarName : "source expression cannot be statically computed"
+  end
+#--- Check variable type and expression type
+  if variableAnnotationType == .void && [[expressionResult type] isStaticInteger] then
+    error mVarName : "cannot infer type"
+  end
+  let result = checkAssignmentCompatibility (
+    !source:expressionResult
+    !targetAnnotationType:variableAnnotationType
+    !errorLocation:mVarName.location
+    !staticTypeAllowed:false
+  )
+  @stringset executionModes = {}
+#--- Check allowed init routines are defined
+#  @allowedRoutineMap allowedRoutineMap = {}
+#  for () in mAllowedInitList do
+#    [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
+#    [!?allowedRoutineMap insertKey !initNameForInvocationGraph (!.null !mInitPriority) !mHasWriteAccess]
 #  end
-##--- Analyze source expression
-#  @semanticTemporariesStruct temporaries = .default
-#  @instructionListIR instructionGenerationList = {}
-#  @allocaList allocaList = {}
-#  variableMapWithConstants (
-#    !context:ioContext
-#    ?*
-#    ?@universalPropertyAndRoutineMapForContext universalMap
-#  )
-#  [mSourceExpression analyzeExpression
-#     !self:.null
-#     !inGuard:false
-#     !routineNameForInvocationGraph:["compiler" nowhere]
-#     !optionalTargetType:variableAnnotationType
-#     !context:ioContext
-#     !mode:.bootMode
-#     !?temporary:temporaries
-#     !?staticStringMap:ioGlobalLiteralStringMap
-#     !?variableMap:universalMap
-#     !?alloca:allocaList
-#     !?instructionListIR:instructionGenerationList
-#     ?result:@objectIR expressionResult
-#  ]
-#  if ([instructionGenerationList length] > 0) || ([allocaList length] > 0) || not [expressionResult isStatic] then
-#    error mVarName : "source expression cannot be statically computed"
+#--- Check allowed panic routines are defined
+#  for () in mAllowedPanicList do
+#    if mPanicName.string == "setup" then
+#      [ioContext.mPanicSetupRoutinePriorityMap searchSetupKey
+#        !.new{![mPanicPriority.bigint string]
+#        !mPanicPriority.location}
+#      ]
+#    elsif mPanicName.string == "loop" then
+#      [ioContext.mPanicLoopRoutinePriorityMap searchLoopKey
+#        !.new{![mPanicPriority.bigint string]
+#        !mPanicPriority.location}
+#      ]
+#    else
+#      error mPanicName : "panic routine name should be \"setup\" or \"loop\""
+#    end
+#    [!?allowedRoutineMap insertKey
+#      !panicNameForInvocationGraph (!mPanicName.string !mPanicPriority)
+#      !mHasWriteAccess
+#    ]
 #  end
-##--- Check variable type and expression type
-#  if variableAnnotationType == .null && [[expressionResult kind] isStaticInteger] then
-#    error mVarName : "cannot infer type"
+#--- Check allowed routines (procedures, sections, services) are defined
+#  for procedure in mAllowedProcList do
+#    @lstring routineMangledName
+#    @unifiedTypeMap-proxy receiverType
+#    if procedure.mReceiverTypeName.string == "" then
+##      routineMangledName = .new {!"." + procedure.mRoutineName !procedure.mRoutineName.location}
+#      routineMangledName = procedure.mRoutineName
+#      receiverType = .null
+#    else
+#      routineMangledName = .new {!"$" + procedure.mReceiverTypeName + "." + procedure.mRoutineName !procedure.mRoutineName.location}
+#      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mReceiverTypeName}
+#    end
+#    [ioContext.mRoutineMapForContext searchKey
+#      !routineMangledName
+#      ?*
+#      ?let unused isPublic
+#      ?*
+#      ?let procedureModeMap
+#      ?7*
+#    ]
+#    for () in procedureModeMap do
+#      executionModes += !lkey.string
+#    end
+#    [!?allowedRoutineMap insertKey !routineMangledName !procedure.mHasWriteAccess]
 #  end
-#  let result = checkAssignmentCompatibility (
-#    !source:expressionResult
-#    !targetAnnotationType:variableAnnotationType
-#    !errorLocation:mVarName.location
-#    !staticTypeAllowed:false
-#  )
-#  @stringset executionModes = {}
-##--- Check allowed init routines are defined
-##  @allowedRoutineMap allowedRoutineMap = {}
-##  for () in mAllowedInitList do
-##    [ioContext.mInitRoutineMap searchKey !.new {![mInitPriority.bigint string] !mInitPriority.location}]
-##    [!?allowedRoutineMap insertKey !initNameForInvocationGraph (!.null !mInitPriority) !mHasWriteAccess]
-##  end
-##--- Check allowed panic routines are defined
-##  for () in mAllowedPanicList do
-##    if mPanicName.string == "setup" then
-##      [ioContext.mPanicSetupRoutinePriorityMap searchSetupKey
-##        !.new{![mPanicPriority.bigint string]
-##        !mPanicPriority.location}
-##      ]
-##    elsif mPanicName.string == "loop" then
-##      [ioContext.mPanicLoopRoutinePriorityMap searchLoopKey
-##        !.new{![mPanicPriority.bigint string]
-##        !mPanicPriority.location}
-##      ]
-##    else
-##      error mPanicName : "panic routine name should be \"setup\" or \"loop\""
-##    end
-##    [!?allowedRoutineMap insertKey
-##      !panicNameForInvocationGraph (!mPanicName.string !mPanicPriority)
-##      !mHasWriteAccess
-##    ]
-##  end
-##--- Check allowed routines (procedures, sections, services) are defined
-##  for procedure in mAllowedProcList do
-##    @lstring routineMangledName
-##    @unifiedTypeMap-proxy receiverType
-##    if procedure.mReceiverTypeName.string == "" then
-###      routineMangledName = .new {!"." + procedure.mRoutineName !procedure.mRoutineName.location}
-##      routineMangledName = procedure.mRoutineName
-##      receiverType = .null
-##    else
-##      routineMangledName = .new {!"$" + procedure.mReceiverTypeName + "." + procedure.mRoutineName !procedure.mRoutineName.location}
-##      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !procedure.mReceiverTypeName}
-##    end
-##    [ioContext.mRoutineMapForContext searchKey
-##      !routineMangledName
-##      ?*
-##      ?let unused isPublic
-##      ?*
-##      ?let procedureModeMap
-##      ?7*
-##    ]
-##    for () in procedureModeMap do
-##      executionModes += !lkey.string
-##    end
-##    [!?allowedRoutineMap insertKey !routineMangledName !procedure.mHasWriteAccess]
-##  end
-###--- Check allowed guards are defined
-#  @allowedGuardMap allowedGuardMap = {}
-##  for guard in mAllowedGuardList do
-##    @lstring guardMangledName
-##    @unifiedTypeMap-proxy receiverType
-##    if guard.mOptionalTypeName.string == "" then
-##      guardMangledName = guard.mGuardName
-###      guardMangledName = .new {!"." + guard.mGuardName !guard.mGuardName.location}
-##      receiverType = .null
-##    else
-##      guardMangledName = .new {!"$" + guard.mOptionalTypeName + "." + guard.mGuardName !guard.mGuardName.location}
-##      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !guard.mOptionalTypeName}
-##    end
-##    [ioContext.mGuardMapForContext searchKey
-##      !guardMangledName
-##      ?let unused isPublic
-##      ?*
-##    ]
-##    executionModes += !serviceModeName ()
-###    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !guard.mGuardName)
-##    [!?allowedGuardMap insertKey !guardMangledName]
-##  end
-##--- Check allowed isr are defined
-##  @allowedISRMap allowedISRMap = {}
-##  for isr in mAllowedISRList do
-##    let name = interruptNameForInvocationGraph (!isr.mISRName)
-##    [!?allowedISRMap insertKey !name !isr.mHasWriteAccess]
-##    if not [ioContext.mDefinedInterruptSet hasKey !isr.mISRName.string] then
-##      error isr.mISRName : "this isr is not defined"
-##    end
-##  end
-##--- Check allowed tasks are defined
-##  @allowedTaskMap allowedTaskMap = {}
-##  for task in mAllowedTaskList do
-##    [ioContext.mTaskMap searchKey !task.mTaskName ?*]
-##    [!?allowedTaskMap insertKey !task.mTaskName !task.mHasWriteAccess]
-##  end
-##--- Enter variable in global variable map
-#  [!?ioContext.mGlobalVariableMap insertKey
-#    !lkey:mVarName
-#    !type:[result type]
-#    !executionModeSet:executionModes
-##    !allowedRoutineMap:allowedRoutineMap
-#    !allowedGuardMap:allowedGuardMap
-##    !allowedISRMap:allowedISRMap
-##    !allowedTaskMap:allowedTaskMap
-#    !initialValue:result
-#    !isConstant:false # Is not constant
-#    !allowedAccessToAll:mAllowedAccessToAll
-#  ]
-#}
+##--- Check allowed guards are defined
+  @allowedGuardMap allowedGuardMap = {}
+#  for guard in mAllowedGuardList do
+#    @lstring guardMangledName
+#    @unifiedTypeMap-proxy receiverType
+#    if guard.mOptionalTypeName.string == "" then
+#      guardMangledName = guard.mGuardName
+##      guardMangledName = .new {!"." + guard.mGuardName !guard.mGuardName.location}
+#      receiverType = .null
+#    else
+#      guardMangledName = .new {!"$" + guard.mOptionalTypeName + "." + guard.mGuardName !guard.mGuardName.location}
+#      receiverType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !guard.mOptionalTypeName}
+#    end
+#    [ioContext.mGuardMapForContext searchKey
+#      !guardMangledName
+#      ?let unused isPublic
+#      ?*
+#    ]
+#    executionModes += !serviceModeName ()
+##    let routineNameForInvocationGraph = guardNameForInvocationGraph (!receiverType !guard.mGuardName)
+#    [!?allowedGuardMap insertKey !guardMangledName]
+#  end
+#--- Check allowed isr are defined
+#  @allowedISRMap allowedISRMap = {}
+#  for isr in mAllowedISRList do
+#    let name = interruptNameForInvocationGraph (!isr.mISRName)
+#    [!?allowedISRMap insertKey !name !isr.mHasWriteAccess]
+#    if not [ioContext.mDefinedInterruptSet hasKey !isr.mISRName.string] then
+#      error isr.mISRName : "this isr is not defined"
+#    end
+#  end
+#--- Check allowed tasks are defined
+#  @allowedTaskMap allowedTaskMap = {}
+#  for task in mAllowedTaskList do
+#    [ioContext.mTaskMap searchKey !task.mTaskName ?*]
+#    [!?allowedTaskMap insertKey !task.mTaskName !task.mHasWriteAccess]
+#  end
+#--- Enter variable in global variable map
+  [!?ioContext.mGlobalVariableMap insertKey
+    !lkey:mVarName
+    !type:[result type]
+    !executionModeSet:executionModes
+#    !allowedRoutineMap:allowedRoutineMap
+    !allowedGuardMap:allowedGuardMap
+#    !allowedISRMap:allowedISRMap
+#    !allowedTaskMap:allowedTaskMap
+    !initialValue:result
+    !isConstant:false # Is not constant
+    !allowedAccessToAll:mAllowedAccessToAll
+  ]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @globalVarDeclarationList-element semanticAnalysis
-#  ?context:let @semanticContext inContext
-#  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-#{
-##--- Code generation
-#  [inContext.mGlobalVariableMap searchKey
-#    !lkey:mVarName
-#    ?type:let inferredType
-#    ?executionModeSet:let executionModeSet
-#    ?allowedGuardMap:let unused allowedGuardMap
-#    ?initialValue:let expressionGeneratedCode
-#    ?isConstant:let unused isConstant
-#    ?allowedAccessToAll:*
-#  ]
-#  [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
-#    !mVarName
-#    !inferredType
-#    ![executionModeSet count] > 1
-#    !expressionGeneratedCode
-#  ]
-#}
+method @globalVarDeclarationList-element semanticAnalysis
+  ?context:let @semanticContext inContext
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+{
+#--- Code generation
+  [inContext.mGlobalVariableMap searchKey
+    !lkey:mVarName
+    ?type:let inferredType
+    ?executionModeSet:let executionModeSet
+#    ?allowedRoutineMap:let unused allowedProcedureMap
+    ?allowedGuardMap:let unused allowedGuardMap
+#    ?allowedISRMap:let unused allowedISRMap
+#    ?allowedTaskMap:let unused allowedTaskMap 
+    ?initialValue:let expressionGeneratedCode
+    ?isConstant:let unused isConstant
+    ?allowedAccessToAll:*
+  ]
+  [!?ioIntermediateCodeStruct.mGlobalVariableMap insertKey
+    !mVarName
+    !inferredType
+    ![executionModeSet count] > 1
+    !expressionGeneratedCode
+  ]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @globalVariableMapIR-element generateLLVM ?!@string ioLLVMcode {
-#  ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey.string) + " = internal global "
-#  ioLLVMcode += [[mType kind] llvmTypeName] + " "
-#  let initialString = [mInitialValue llvmName]
-#  if initialString == "" then
-#    ioLLVMcode += "zeroinitializer"
-#  else
-#    ioLLVMcode += initialString
-#  end
-#  ioLLVMcode += "\n"
-#}
+method @globalVariableMapIR-element generateLLVM ?!@string ioLLVMcode {
+  ioLLVMcode += "@" + llvmNameForGlobalVariable (!lkey.string) + " = internal global "
+  ioLLVMcode += [mType llvmTypeName] + " "
+  let initialString = [mInitialValue llvmName]
+  if initialString == "" then
+    ioLLVMcode += "zeroinitializer"
+  else
+    ioLLVMcode += initialString
+  end
+  ioLLVMcode += "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

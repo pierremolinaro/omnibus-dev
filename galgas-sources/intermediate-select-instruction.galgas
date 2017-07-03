@@ -1,41 +1,41 @@
 
-#setter @instructionListIR appendSelectOperation
-#  ?let @objectIR inTargetValue
-#  ?let @objectIR in_if_variable
-#  ?let @objectIR in_then_variable
-#  ?let @objectIR in_else_variable
-#{
-#  self += !@selectInstructionIR.new {!inTargetValue !in_if_variable !in_then_variable !in_else_variable}
-#}
+setter @instructionListIR appendSelectOperation
+  ?let @objectIR inTargetValue
+  ?let @objectIR in_if_variable
+  ?let @objectIR in_then_variable
+  ?let @objectIR in_else_variable
+{
+  self += !@selectInstructionIR.new {!inTargetValue !in_if_variable !in_then_variable !in_else_variable}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @selectInstructionIR : @abstractInstructionIR {
-#  @objectIR mTargetValue
-#  @objectIR m_if_variable
-#  @objectIR m_then_variable
-#  @objectIR m_else_variable
-#}
+class @selectInstructionIR : @abstractInstructionIR {
+  @objectIR mTargetValue
+  @objectIR m_if_variable
+  @objectIR m_then_variable
+  @objectIR m_else_variable
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @selectInstructionIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-#  ioLLVMcode += "  " + [mTargetValue llvmName] + " = select "
-#  ioLLVMcode += [[[m_if_variable type] kind] llvmTypeName] + " " + [m_if_variable llvmName] + ", "
-#  ioLLVMcode += [[[m_then_variable type] kind] llvmTypeName] + " " + [m_then_variable llvmName] + ", "
-#  ioLLVMcode += [[[m_else_variable type] kind] llvmTypeName] + " " + [m_else_variable llvmName] + "\n"
-#}
+override method @selectInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = select "
+  ioLLVMcode += [[m_if_variable type] llvmTypeName] + " " + [m_if_variable llvmName] + ", "
+  ioLLVMcode += [[m_then_variable type] llvmTypeName] + " " + [m_then_variable llvmName] + ", "
+  ioLLVMcode += [[m_else_variable type] llvmTypeName] + " " + [m_else_variable llvmName] + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @selectInstructionIR enterAccessibleEntities 
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
+override method @selectInstructionIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

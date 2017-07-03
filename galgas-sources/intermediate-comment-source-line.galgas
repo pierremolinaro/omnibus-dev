@@ -1,34 +1,35 @@
 
-#setter @instructionListIR appendSourceLineComment ?let @location inSourceLocation {
-#  self += !@sourceLocationIR.new {!inSourceLocation}
-#}
+setter @instructionListIR appendSourceLineComment ?let @location inSourceLocation {
+  self += !@sourceLocationIR.new {!inSourceLocation}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @sourceLocationIR : @abstractInstructionIR {
-#  @location mSourceLocation
-#}
+class @sourceLocationIR : @abstractInstructionIR {
+  @location mSourceLocation
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @sourceLocationIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-#  if [mSourceLocation isNowhere] then
-#    ioLLVMcode += ";---------\n"
-#  else
-#    ioLLVMcode += ";--------- " + [mSourceLocation line] + ":" + [[mSourceLocation file] lastPathComponent] + "\n"
-#  end
-#}
+override method @sourceLocationIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  if [mSourceLocation isNowhere] then
+    ioLLVMcode += ";---------\n"
+  else
+    ioLLVMcode += ";--------- " + [mSourceLocation line] + ":" + [[mSourceLocation file] lastPathComponent] + "\n"
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @sourceLocationIR enterAccessibleEntities
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
+override method @sourceLocationIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
+
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1,63 +1,63 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#setter @instructionListIR appendShortCircuitAndOperation
-#  ?let @objectIR inTargetOperand
-#  ?let @objectIR inLeftOperand
-#  ?let @instructionListIR inLeftInstructionList
-#  ?let @objectIR inRightOperand
-#  ?let @instructionListIR inRightInstructionList
-#  ?let @location inLocation
-#{
-#  self += !@shortCircuitAndOperationIR.new {
-#    !inTargetOperand
-#    !inLeftOperand
-#    !inLeftInstructionList
-#    !inRightOperand
-#    !inRightInstructionList
-#    !inLocation
-#  }
-#}
+setter @instructionListIR appendShortCircuitAndOperation
+  ?let @objectIR inTargetOperand
+  ?let @objectIR inLeftOperand
+  ?let @instructionListIR inLeftInstructionList
+  ?let @objectIR inRightOperand
+  ?let @instructionListIR inRightInstructionList
+  ?let @location inLocation
+{
+  self += !@shortCircuitAndOperationIR.new {
+    !inTargetOperand
+    !inLeftOperand
+    !inLeftInstructionList
+    !inRightOperand
+    !inRightInstructionList
+    !inLocation
+  }
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @shortCircuitAndOperationIR : @abstractInstructionIR {
-#  @objectIR mTargetOperand
-#  @objectIR mLeftOperand
-#  @instructionListIR mLeftInstructionList
-#  @objectIR mRightOperand
-#  @instructionListIR mRightInstructionList
-#  @location mLocation
-#}
+class @shortCircuitAndOperationIR : @abstractInstructionIR {
+  @objectIR mTargetOperand
+  @objectIR mLeftOperand
+  @instructionListIR mLeftInstructionList
+  @objectIR mRightOperand
+  @instructionListIR mRightInstructionList
+  @location mLocation
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @shortCircuitAndOperationIR enterAccessibleEntities 
-#  ?!@accessibleEntities ioAccessibleEntities
-#  ?!@uint ioMaxBranchOfOnInstructions
-#{
-#  [mLeftInstructionList  enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-#  [mRightInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-#}
+override method @shortCircuitAndOperationIR enterAccessibleEntities 
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  [mLeftInstructionList  enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mRightInstructionList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @shortCircuitAndOperationIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
-#{
-#  let startLabel  = "and." + [mLocation locationIndex] + ".start"
-#  let trueLabel  = "and." + [mLocation locationIndex] + ".true"
-#  let falseLabel = "and." + [mLocation locationIndex] + ".false"
-#  ioLLVMcode += "  br label %" + startLabel + "\n\n"
-#  ioLLVMcode += startLabel + ":\n"
-#  [mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#  ioLLVMcode += "  br i1 " + [mLeftOperand llvmName] + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
-#  ioLLVMcode += trueLabel + ":\n"
-#  [mRightInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#  ioLLVMcode += "  br label %" + falseLabel + "\n\n"
-#  ioLLVMcode += falseLabel + ":\n"
-#  ioLLVMcode += "  " + [mTargetOperand llvmName] + " = phi i1 [" + [mRightOperand llvmName] + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
-#}
+override method @shortCircuitAndOperationIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let startLabel  = "and." + [mLocation locationIndex] + ".start"
+  let trueLabel  = "and." + [mLocation locationIndex] + ".true"
+  let falseLabel = "and." + [mLocation locationIndex] + ".false"
+  ioLLVMcode += "  br label %" + startLabel + "\n\n"
+  ioLLVMcode += startLabel + ":\n"
+  [mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br i1 " + [mLeftOperand llvmName] + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
+  ioLLVMcode += trueLabel + ":\n"
+  [mRightInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br label %" + falseLabel + "\n\n"
+  ioLLVMcode += falseLabel + ":\n"
+  ioLLVMcode += "  " + [mTargetOperand llvmName] + " = phi i1 [" + [mRightOperand llvmName] + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

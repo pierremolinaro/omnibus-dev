@@ -112,339 +112,337 @@ getter @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstri
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @procEffectiveParameterList {
-#  @effectiveArgumentPassingModeAST mEffectiveParameterPassingMode
-#  @lstring mSelector
-#  @unifiedTypeMap-proxy mParameterType
-#}
+list @procEffectiveParameterList {
+  @effectiveArgumentPassingModeAST mEffectiveParameterPassingMode
+  @lstring mSelector
+  @PLMType mParameterType
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#abstract method @assignmentTargetAST analyzeTargetForRoutineCall
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?targetAccessKind:let @targetAccessKind inSelfAccessKind
-#  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !@objectIR outCurrentObject
-#  !globalVariableReceiverName:@string outGlobalVariableReceiverName
+abstract method @assignmentTargetAST analyzeTargetForRoutineCall
+  ?self:let @PLMType inSelfType
+  ?targetAccessKind:let @targetAccessKind inSelfAccessKind
+  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !@objectIR outCurrentObject
+  !globalVariableReceiverName:@string outGlobalVariableReceiverName
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @assignmentTargetNoSelfAST analyzeTargetForRoutineCall
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?targetAccessKind:let @targetAccessKind inSelfAccessKind
-#  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !@objectIR outCurrentObject
-#  !globalVariableReceiverName:@string outGlobalVariableReceiverName
-#{
-##--- object access, with ou without self
-##    [!?ioUniversalMap searchValuedObjectForWriteAccess !mIdentifier ?let isPublic ?let currentObject]
-#  if [ioVariableMap hasKey !mIdentifier] then
-#    switch inSelfAccessKind
-#    case read :
-#      [!?ioVariableMap searchForReadAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
-#    case write :
-#      [!?ioVariableMap searchForWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
-#    case readWrite :
-#      [!?ioVariableMap searchForReadWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
-#    end
-#    outGlobalVariableReceiverName = if [outCurrentObject isGlobalVariableReference] then mIdentifier.string else "" end
-#  else # Stand alone function call ?
-#    outCurrentObject = .possibleFunction {!receiver:.null !functionName:mIdentifier}
-#    outGlobalVariableReceiverName = ""
-#  end
-##--- Analyze properties, subscripts
-#  if [mAccessList length] == 0 then # 
-#    [!?ioUniversalMap searchValuedObjectForWriteAccess !mIdentifier ?outCurrentObject]
-#  else
-#    for (access) in mAccessList do
-#      switch access
-#      case property (propertyName) :
-#        handlePropertyAccessInAssignment (
-#          !?outCurrentObject
-#          !propertyName
-#          !?ioTemporaries
-#          !?ioInstructionGenerationList
-#        )
-#      case arrayAccess (indexExpression endOfExpression) :
-#        handleSubscriptInAssignmentAndExpression (
-#          !self:inSelfType
-#          !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#          !inGuard:false
-#          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#          !context:inContext
-#          !mode:inCurrentMode
-#          !?temporary:ioTemporaries
-#          !?staticStringMap:ioGlobalLiteralStringMap
-#          !?variableMap:ioVariableMap
-#          !?variableMap:ioUniversalMap
-#          !?alloca:ioAllocaList
-#          !indexExpression
-#          !endOfExpression
-#          !?ioInstructionGenerationList
-#          !?outCurrentObject
-#        )
-#      end
-#    end
-#  end
-#}
+override method @assignmentTargetNoSelfAST analyzeTargetForRoutineCall
+  ?self:let @PLMType inSelfType
+  ?targetAccessKind:let @targetAccessKind inSelfAccessKind
+  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !@objectIR outCurrentObject
+  !globalVariableReceiverName:@string outGlobalVariableReceiverName
+{
+#--- object access, with ou without self
+#    [!?ioUniversalMap searchValuedObjectForWriteAccess !mIdentifier ?let isPublic ?let currentObject]
+  if [ioVariableMap hasKey !mIdentifier] then
+    switch inSelfAccessKind
+    case read :
+      [!?ioVariableMap searchForReadAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
+    case write :
+      [!?ioVariableMap searchForWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
+    case readWrite :
+      [!?ioVariableMap searchForReadWriteAccess !lkey:mIdentifier ?2* ?objectIR:outCurrentObject ?2*]
+    end
+    outGlobalVariableReceiverName = if [outCurrentObject isGlobalVariableReference] then mIdentifier.string else "" end
+  else # Stand alone function call ?
+    outCurrentObject = .possibleFunction {!receiver:.null !functionName:mIdentifier}
+    outGlobalVariableReceiverName = ""
+  end
+#--- Analyze properties, subscripts
+  if [mAccessList length] == 0 then # 
+    [!?ioUniversalMap searchValuedObjectForWriteAccess !mIdentifier ?outCurrentObject]
+  else
+    for (access) in mAccessList do
+      switch access
+      case property (propertyName) :
+        handlePropertyAccessInAssignment (
+          !?outCurrentObject
+          !propertyName
+          !?ioTemporaries
+          !?ioInstructionGenerationList
+        )
+      case arrayAccess (indexExpression endOfExpression) :
+        handleSubscriptInAssignmentAndExpression (
+          !self:inSelfType
+          !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+          !inGuard:false
+          !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+          !context:inContext
+          !mode:inCurrentMode
+          !?temporary:ioTemporaries
+          !?staticStringMap:ioGlobalLiteralStringMap
+          !?variableMap:ioVariableMap
+          !?variableMap:ioUniversalMap
+          !?alloca:ioAllocaList
+          !indexExpression
+          !endOfExpression
+          !?ioInstructionGenerationList
+          !?outCurrentObject
+        )
+      end
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @assignmentTargetSelfAST analyzeTargetForRoutineCall
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?targetAccessKind:let @targetAccessKind unused inSelfAccessKind
-#  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
-#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !@objectIR outCurrentObject
-#  !globalVariableReceiverName:@string outGlobalVariableReceiverName
-#{
-##--- object access, with ou without self
-#  outGlobalVariableReceiverName = "" # Receiver is not a global variable
-#  if inSelfType == .null then
-#    error mIdentifier : "'self' is not available in this context" : outCurrentObject
-#  elsif [[inSelfType kind] isStructure] then
-#    [[inSelfType kind] structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?2*]
-# ##     [universalMap searchProperty !mIdentifier ?* ?let object]
-#    if [structureObjectMap hasKey !mIdentifier] then
-#      [structureObjectMap searchKey
-#        !mIdentifier
-#        ?*
-#        ?let object
-#      ]
-#      handleSelfAccessInAssignment (
-#        !inSelfType
-#        !object
-#        !?ioTemporaries
-#        !?ioInstructionGenerationList
-#        ?outCurrentObject
-#      )
-#    else # Function call ?
-#      outCurrentObject = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mIdentifier}
-#    end
-#  else
-#    error mIdentifier : "'self' should be a structure instance" : outCurrentObject, outGlobalVariableReceiverName
-#  end
-##--- Analyze properties, subscripts
-#  for (access) in mAccessList do
-#    switch access
-#    case property (propertyName) :
-#      handlePropertyAccessInAssignment (
-#        !?outCurrentObject
-#        !propertyName
-#        !?ioTemporaries
-#        !?ioInstructionGenerationList
-#      )
-#    case arrayAccess (indexExpression endOfExpression) :
-#      handleSubscriptInAssignmentAndExpression (
-#        !self:inSelfType
-#        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#        !inGuard:false
-#        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#        !context:inContext
-#        !mode:inCurrentMode
-#        !?temporary:ioTemporaries
-#        !?staticStringMap:ioGlobalLiteralStringMap
-#        !?variableMap:ioVariableMap
-#        !?variableMap:ioUniversalMap
-#        !?alloca:ioAllocaList
-#        !indexExpression
-#        !endOfExpression
-#        !?ioInstructionGenerationList
-#        !?outCurrentObject
-#      )
-#    end
-#  end
-#}
+override method @assignmentTargetSelfAST analyzeTargetForRoutineCall
+  ?self:let @PLMType inSelfType
+  ?targetAccessKind:let @targetAccessKind unused inSelfAccessKind
+  ?propertiesAreMutable:let @bool unused inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !@objectIR outCurrentObject
+  !globalVariableReceiverName:@string outGlobalVariableReceiverName
+{
+#--- object access, with ou without self
+  outGlobalVariableReceiverName = "" # Receiver is not a global variable
+  if [inSelfType isStructure] then
+    [inSelfType structure ?typeName:* ?propertyMap:let structureObjectMap ?universalMap:let unused universalMap ?3*]
+ ##     [universalMap searchProperty !mIdentifier ?* ?let object]
+    if [structureObjectMap hasKey !mIdentifier] then
+      [structureObjectMap searchKey
+        !mIdentifier
+        ?*
+        ?let object
+      ]
+      handleSelfAccessInAssignment (
+        !inSelfType
+        !object
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+        ?outCurrentObject
+      )
+    else # Function call ?
+      outCurrentObject = .possibleFunction {!receiver:.selfObject {!type:inSelfType} !functionName:mIdentifier}
+    end
+  else
+    error mIdentifier : "'self' should be a structure instance" : outCurrentObject, outGlobalVariableReceiverName
+  end
+#--- Analyze properties, subscripts
+  for (access) in mAccessList do
+    switch access
+    case property (propertyName) :
+      handlePropertyAccessInAssignment (
+        !?outCurrentObject
+        !propertyName
+        !?ioTemporaries
+        !?ioInstructionGenerationList
+      )
+    case arrayAccess (indexExpression endOfExpression) :
+      handleSubscriptInAssignmentAndExpression (
+        !self:inSelfType
+        !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+        !inGuard:false
+        !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+        !context:inContext
+        !mode:inCurrentMode
+        !?temporary:ioTemporaries
+        !?staticStringMap:ioGlobalLiteralStringMap
+        !?variableMap:ioVariableMap
+        !?variableMap:ioUniversalMap
+        !?alloca:ioAllocaList
+        !indexExpression
+        !endOfExpression
+        !?ioInstructionGenerationList
+        !?outCurrentObject
+      )
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @simpleCallInstructionAST analyze
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#{
-##--- Called routine signature
-#  let calledRoutineSignature = [mArguments routineSignature !mSandAloneRoutineName.location]
-##--- Search routine in map
-#  [ioUniversalMap searchRoutine
-#    !mSandAloneRoutineName
-#    !calledRoutineSignature
-#    ?let @lstring LLVMInvocationRoutineName
-#    ?let @routineDescriptor routineDescriptor
-#  ]
-##--- Routine name for invocation graph
-#  let routineMangledName = routineMangledNameFromCall (
-#    !""
-#    !mSandAloneRoutineName
-#    !mArguments
-#  )
-##--- Enter in invocation graph
-#  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
-##--- Check modes
-#  let routineKindIR = checkMode (
-#    !callerMode:inCurrentMode
-#    !calleeMode:[routineDescriptor.mRoutineKind executionMode]
-#    !kind:routineDescriptor.mRoutineKind
-#    !error:mSandAloneRoutineName.location
-#  )
-##--- Analyze effective parameters
-#  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
-#  analyzeEffectiveParameters (
-#    !self:inSelfType
-#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#    !propertiesAreMutable:inRoutineCanMutateProperties
-#    !formal:routineDescriptor.mSignature
-#    !effective:mArguments
-#    !errorLocation:mSandAloneRoutineName.location
-#    !callerForInvocationGraph:inCallerNameForInvocationGraph
-#    !context:inContext
-#    !requiredMode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    !?effectiveIR:effectiveParameterListIR
-#  )
-##--- Code generation
-#  ioInstructionGenerationList += !@staticRoutineCallIR.new {
-#    !""
-#    !.null
-#    !routineMangledName
-#    !LLVMInvocationRoutineName
-#    !routineKindIR
-#    !effectiveParameterListIR
-#  }
-#}
+override method @simpleCallInstructionAST analyze
+  ?self:let @PLMType inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+#--- Called routine signature
+  let calledRoutineSignature = [mArguments routineSignature !mSandAloneRoutineName.location]
+#--- Search routine in map
+  [ioUniversalMap searchRoutine
+    !mSandAloneRoutineName
+    !calledRoutineSignature
+    ?let @lstring LLVMInvocationRoutineName
+    ?let @routineDescriptor routineDescriptor
+  ]
+#--- Routine name for invocation graph
+  let routineMangledName = routineMangledNameFromCall (
+    !""
+    !mSandAloneRoutineName
+    !mArguments
+  )
+#--- Enter in invocation graph
+  [!?ioTemporaries.mSubprogramInvocationGraph addEdge !inCallerNameForInvocationGraph !routineMangledName]
+#--- Check modes
+  let routineKindIR = checkMode (
+    !callerMode:inCurrentMode
+    !calleeMode:[routineDescriptor.mRoutineKind executionMode]
+    !kind:routineDescriptor.mRoutineKind
+    !error:mSandAloneRoutineName.location
+  )
+#--- Analyze effective parameters
+  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+  analyzeEffectiveParameters (
+    !self:inSelfType
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !propertiesAreMutable:inRoutineCanMutateProperties
+    !formal:routineDescriptor.mSignature
+    !effective:mArguments
+    !errorLocation:mSandAloneRoutineName.location
+    !callerForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !requiredMode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    !?effectiveIR:effectiveParameterListIR
+  )
+#--- Code generation
+  ioInstructionGenerationList += !@staticRoutineCallIR.new {
+    !""
+    !.null
+    !routineMangledName
+    !LLVMInvocationRoutineName
+    !routineKindIR
+    !effectiveParameterListIR
+  }
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @complexCallInstructionAST analyze
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#{
-#  [mAssignmentTargetAST analyzeAssignmentTarget
-#    !self: inSelfType
-#    !targetAccessKind:.read # § .readWrite
-#    !propertiesAreMutable: inRoutineCanMutateProperties
-#    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
-#    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
-#    !context: inContext
-#    !mode: inCurrentMode
-#    !?temporary: ioTemporaries
-#    !?staticStringMap: ioGlobalLiteralStringMap
-#    !?variableMap: ioVariableMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca: ioAllocaList
-#    !?instructionListIR: ioInstructionGenerationList
-#    ?@objectIR currentObject
-#    ?globalVariableReceiverName:let globalVariableReceiverName
-#  ]
-##--- Analyze procedure call arguments
-#  handleFunctionCallInExpression (
-#    !self:inSelfType
-#    !globalVariableReceiverName:globalVariableReceiverName
-#    !propertiesAreMutable:inRoutineCanMutateProperties
-#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#    !inGuard:false
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !mArguments
-#    !mEndOfArguments
-#    !?ioInstructionGenerationList
-#    !?currentObject
-#    ?let returnedType
-#  )
-#  if returnedType != .null then
-#    error mEndOfArguments : "the function cannot be called in instruction: lost return value"
-#  end
-#}
+override method @complexCallInstructionAST analyze
+  ?self:let @PLMType inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+  [mAssignmentTargetAST analyzeAssignmentTarget
+    !self: inSelfType
+    !targetAccessKind:.read # § .readWrite
+    !propertiesAreMutable: inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed: inDirectAccessToPropertiesAllowed
+    !routineNameForInvocationGraph: inCallerNameForInvocationGraph
+    !context: inContext
+    !mode: inCurrentMode
+    !?temporary: ioTemporaries
+    !?staticStringMap: ioGlobalLiteralStringMap
+    !?variableMap: ioVariableMap
+    !?variableMap:ioUniversalMap
+    !?alloca: ioAllocaList
+    !?instructionListIR: ioInstructionGenerationList
+    ?@objectIR currentObject
+    ?globalVariableReceiverName:let globalVariableReceiverName
+  ]
+#--- Analyze procedure call arguments
+  handleFunctionCallInExpression (
+    !self:inSelfType
+    !globalVariableReceiverName:globalVariableReceiverName
+    !propertiesAreMutable:inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !mArguments
+    !mEndOfArguments
+    !?ioInstructionGenerationList
+    !?currentObject
+    ?let returnedType
+  )
+  if returnedType != .void then
+    error mEndOfArguments : "the function cannot be called in instruction: lost return value"
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#enum @procEffectiveParameterPassingModeIR {
-#  case input
-#  case output
-#  case outputInput
-#}
+enum @procEffectiveParameterPassingModeIR {
+  case input
+  case output
+  case outputInput
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#list @procCallEffectiveParameterListIR {
-#  @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
-#  @objectIR mParameter
-#}
+list @procCallEffectiveParameterListIR {
+  @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
+  @objectIR mParameter
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#enum @calleeKindIR {
-#  case function
-#  case primitiveFromProcessorUserMode
-#  case safeFromProcessorUserMode
-#  case sectionFromProcessorUserMode
-#  case serviceFromProcessorUserMode
-#  case primitiveFromProcessorPrivilegedMode
-#  case sectionFromProcessorPrivilegedMode
-#  case safeFromProcessorPrivilegedMode
-#  case serviceFromProcessorPrivilegedMode
-#}
+enum @calleeKindIR {
+  case function
+  case primitiveFromProcessorUserMode
+  case safeFromProcessorUserMode
+  case sectionFromProcessorUserMode
+  case serviceFromProcessorUserMode
+  case primitiveFromProcessorPrivilegedMode
+  case sectionFromProcessorPrivilegedMode
+  case safeFromProcessorPrivilegedMode
+  case serviceFromProcessorPrivilegedMode
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

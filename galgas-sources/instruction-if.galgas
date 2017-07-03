@@ -95,138 +95,138 @@ override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@seman
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @ifInstructionAST analyze
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
-#  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#{
-##--- Analyze test expression
-#  [mTestExpression analyzeExpression
-#    !self:inSelfType
-#    !inGuard:false
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !optionalTargetType:.null
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?result:let @objectIR testResultPossibleReference
-#  ]
-#  [!?ioInstructionGenerationList appendLoadFromReference
-#    !?ioTemporaries
-#    !testResultPossibleReference
-#    !mTestExpressionEndLocation
-#    ?let testResult
-#  ]  
-##--- Check inferred type
-#  if [testResult kind] != .boolean then
-#    error mTestExpressionEndLocation : "test expression type is '" + [testResult key] + "', it should be boolean"
-#  elsif mStaticIfExpression && not [testResult isStatic] then
-#    error mTestExpressionEndLocation : "'if' expression is not static"
-#  elsif [testResult isStatic] && not mStaticIfExpression then
-#    warning mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
-#  end
-#  [!?ioUniversalMap openOverrideForSelectBlock]
-#  [!?ioVariableMap openOverrideForSelectBlock]
-##--- Analyze 'then' instruction list
-#  @instructionListIR thenInstructionGenerationList = {}
-#  [mThenInstructionList analyzeBranchInstructionList
-#    !self:inSelfType
-#    !propertiesAreMutable:inRoutineCanMutateProperties
-#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !endOfInstructionList:mEndOfThenInstructionList
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:thenInstructionGenerationList
-#  ]
-##--- Analyze 'else' instruction list
-#  @instructionListIR elseInstructionGenerationList = {}
-#  [mElseInstructionList analyzeBranchInstructionList
-#    !self:inSelfType
-#    !propertiesAreMutable:inRoutineCanMutateProperties
-#    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !endOfInstructionList:mEndOfElseInstructionList
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioVariableMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:elseInstructionGenerationList
-#  ]
-#  [!?ioUniversalMap closeOverride !mEndOf_if_instruction]
-#  [!?ioVariableMap closeOverride !mEndOf_if_instruction]
-##--- Code generation
-#  ioInstructionGenerationList += !@ifInstructionIR.new {
-#    !testResult
-#    !mTestExpressionEndLocation
-#    !thenInstructionGenerationList
-#    !elseInstructionGenerationList
-# }
-#}
+override method @ifInstructionAST analyze
+  ?self:let @PLMType inSelfType
+  ?propertiesAreMutable:let @bool inRoutineCanMutateProperties
+  ?directAccessToPropertiesAllowed:let @bool inDirectAccessToPropertiesAllowed
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@unifiedSymbolMapEx ioVariableMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+{
+#--- Analyze test expression
+  [mTestExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:false
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.void
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:let @objectIR testResultPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !testResultPossibleReference
+    !mTestExpressionEndLocation
+    ?let testResult
+  ]  
+#--- Check inferred type
+  if [testResult type] != .boolean then
+    error mTestExpressionEndLocation : "test expression type is '" + [testResult key] + "', it should be boolean"
+  elsif mStaticIfExpression && not [testResult isStatic] then
+    error mTestExpressionEndLocation : "'if' expression is not static"
+  elsif [testResult isStatic] && not mStaticIfExpression then
+    warning mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
+  end
+  [!?ioUniversalMap openOverrideForSelectBlock]
+  [!?ioVariableMap openOverrideForSelectBlock]
+#--- Analyze 'then' instruction list
+  @instructionListIR thenInstructionGenerationList = {}
+  [mThenInstructionList analyzeBranchInstructionList
+    !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !endOfInstructionList:mEndOfThenInstructionList
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:thenInstructionGenerationList
+  ]
+#--- Analyze 'else' instruction list
+  @instructionListIR elseInstructionGenerationList = {}
+  [mElseInstructionList analyzeBranchInstructionList
+    !self:inSelfType
+    !propertiesAreMutable:inRoutineCanMutateProperties
+    !directAccessToPropertiesAllowed:inDirectAccessToPropertiesAllowed
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !endOfInstructionList:mEndOfElseInstructionList
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioVariableMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:elseInstructionGenerationList
+  ]
+  [!?ioUniversalMap closeOverride !mEndOf_if_instruction]
+  [!?ioVariableMap closeOverride !mEndOf_if_instruction]
+#--- Code generation
+  ioInstructionGenerationList += !@ifInstructionIR.new {
+    !testResult
+    !mTestExpressionEndLocation
+    !thenInstructionGenerationList
+    !elseInstructionGenerationList
+ }
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @ifInstructionIR : @abstractInstructionIR {
-#  @objectIR mTestVariable
-#  @location mLocation
-#  @instructionListIR mThenInstructionGenerationList
-#  @instructionListIR mElseInstructionGenerationList
-#}
+class @ifInstructionIR : @abstractInstructionIR {
+  @objectIR mTestVariable
+  @location mLocation
+  @instructionListIR mThenInstructionGenerationList
+  @instructionListIR mElseInstructionGenerationList
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @ifInstructionIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext inGenerationContext
-#  ?!@generationAdds ioGenerationAdds
-#{
-#  let labelTrue = "if." + [mLocation locationIndex] + ".true"
-#  let labelFalse = "if." + [mLocation locationIndex] + ".false"
-#  let labelEnd = "if." + [mLocation locationIndex] + ".end"
-#  ioLLVMcode += "  br i1 " + [mTestVariable llvmName] + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
-##--- True branch
-#  ioLLVMcode += labelTrue + ":\n"
-#  [mThenInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#  ioLLVMcode += "  br label %" + labelEnd + "\n\n"
-##--- false branch
-#  ioLLVMcode += labelFalse + ":\n"
-#  [mElseInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#  ioLLVMcode += "  br label %" + labelEnd + "\n\n"
-##--- end
-#  ioLLVMcode += labelEnd + ":\n"
-#}
+override method @ifInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext inGenerationContext
+  ?!@generationAdds ioGenerationAdds
+{
+  let labelTrue = "if." + [mLocation locationIndex] + ".true"
+  let labelFalse = "if." + [mLocation locationIndex] + ".false"
+  let labelEnd = "if." + [mLocation locationIndex] + ".end"
+  ioLLVMcode += "  br i1 " + [mTestVariable llvmName] + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
+#--- True branch
+  ioLLVMcode += labelTrue + ":\n"
+  [mThenInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br label %" + labelEnd + "\n\n"
+#--- false branch
+  ioLLVMcode += labelFalse + ":\n"
+  [mElseInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br label %" + labelEnd + "\n\n"
+#--- end
+  ioLLVMcode += labelEnd + ":\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @ifInstructionIR enterAccessibleEntities
-#  ?!@accessibleEntities ioAccessibleEntities
-#  ?!@uint ioMaxBranchOfOnInstructions
-#{
-#  [mThenInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-#  [mElseInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
-#}
+override method @ifInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint ioMaxBranchOfOnInstructions
+{
+  [mThenInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+  [mElseInstructionGenerationList enterAccessibleEntities !?ioAccessibleEntities !?ioMaxBranchOfOnInstructions]
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

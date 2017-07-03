@@ -1,42 +1,43 @@
 
-#setter @instructionListIR appendLoadGlobalVariable
-#  ?let @objectIR inTargetValue
-#  ?let @string inRegisterName
-#  ?volatile:@bool inIsVolatile
-#{
-#  self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName !inIsVolatile}
-#}
+setter @instructionListIR appendLoadGlobalVariable
+  ?let @objectIR inTargetValue
+  ?let @string inRegisterName
+  ?volatile:@bool inIsVolatile
+{
+  self += !@loadGlobalVariableIR.new {!inTargetValue !inRegisterName !inIsVolatile}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @loadGlobalVariableIR : @abstractInstructionIR {
-#  @objectIR mTargetValue
-#  @string mVariableName
-#  @bool mIsVolatile
-#}
+class @loadGlobalVariableIR : @abstractInstructionIR {
+  @objectIR mTargetValue
+  @string mVariableName
+  @bool mIsVolatile
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @loadGlobalVariableIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-#  let llvmType = [mTargetValue llvmTypeName]
-#  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
-#  if mIsVolatile then
-#    ioLLVMcode += "volatile "
-#  end
-#  ioLLVMcode += llvmType + ", " + llvmType + " * @" + llvmNameForGlobalVariable (!mVariableName) + "\n"
-#}
+override method @loadGlobalVariableIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let llvmType = [mTargetValue llvmTypeName]
+  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load "
+  if mIsVolatile then
+    ioLLVMcode += "volatile "
+  end
+  ioLLVMcode += llvmType + ", " + llvmType + " * @" + llvmNameForGlobalVariable (!mVariableName) + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @loadGlobalVariableIR enterAccessibleEntities 
-#  ?!@accessibleEntities ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#  ioAccessibleEntities.mGlobalVariableSet += !mVariableName
-#}
+override method @loadGlobalVariableIR enterAccessibleEntities 
+  ?!@accessibleEntities ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+  ioAccessibleEntities.mGlobalVariableSet += !mVariableName
+}
+
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

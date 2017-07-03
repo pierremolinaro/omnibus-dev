@@ -40,9 +40,9 @@ override method @instanciationAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @instanciationAST analyzeExpression
-  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?self:let @PLMType inSelfType
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
@@ -62,10 +62,10 @@ override method @instanciationAST analyzeExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @instanciationAST analyzeExpression
-  ?self:let @unifiedTypeMap-proxy inSelfType
+  ?self:let @PLMType inSelfType
   ?inGuard:let @bool unused inGuard
   ?routineNameForInvocationGraph:let @lstring unused inCallerNameForInvocationGraph
-  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
+  ?optionalTargetType:let @PLMType unused inOptionalTargetType
   ?context:let @semanticContext inContext
   ?mode:let @mode inCurrentMode
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries

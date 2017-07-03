@@ -62,66 +62,66 @@ override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@s
 #! @truncateExpressionAST
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @truncateExpressionAST analyzeExpression
-#  ?self:let @unifiedTypeMap-proxy inSelfType
-#  ?inGuard:let @bool inGuard
-#  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
-#  ?optionalTargetType:let @unifiedTypeMap-proxy unused inOptionalTargetType
-#  ?context:let @semanticContext inContext
-#  ?mode:let @mode inCurrentMode
-#  ?!temporary:@semanticTemporariesStruct ioTemporaries
-#  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
-#  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
-#  ?!alloca:@allocaList ioAllocaList
-#  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-#  !result:@objectIR outResult
-#{
-##--- Analyze expression
-#  [mExpression analyzeExpression
-#    !self:inSelfType
-#    !inGuard:inGuard
-#    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
-#    !optionalTargetType:.null
-#    !context:inContext
-#    !mode:inCurrentMode
-#    !?temporary:ioTemporaries
-#    !?staticStringMap:ioGlobalLiteralStringMap
-#    !?variableMap:ioUniversalMap
-#    !?alloca:ioAllocaList
-#    !?instructionListIR:ioInstructionGenerationList
-#    ?result:@objectIR expressionResultPossibleReference
-#  ]
-#  [!?ioInstructionGenerationList appendLoadFromReference
-#    !?ioTemporaries
-#    !expressionResultPossibleReference
-#    !mTypeName
-#    ?let expressionResult
-#  ]  
-##--- Analyze type
-#  let resultType = @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName}
-##--- Check types
-#  if not [[resultType kind] isInteger] then
-#    error mTypeName : "this type is not an integer type" : outResult
-#  elsif not [[expressionResult kind] isInteger] then
-#    error mEndOfExpression : "expression type is not an integer type" : outResult
-#  else
-#    [[expressionResult kind] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:let expSize]
-#    [[resultType kind] integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize]
-#    let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
-#    if alwaysPossible then
-#      error mTypeName:"useless explicit conversion"
-#    end
-#    if resultSize < expSize then
-#      getNewTempVariable (!resultType !mEndOfExpression !?ioTemporaries ?outResult)
-#      ioInstructionGenerationList += !@truncateInstructionIR.new {
-#        !outResult
-#        !expressionResult
-#      }
-#    else
-#      outResult = [expressionResult withType !resultType]
-#    end
-#  end
-#}
+override method @truncateExpressionAST analyzeExpression
+  ?self:let @PLMType inSelfType
+  ?inGuard:let @bool inGuard
+  ?routineNameForInvocationGraph:let @lstring inCallerNameForInvocationGraph
+  ?optionalTargetType:let @PLMType unused inOptionalTargetType
+  ?context:let @semanticContext inContext
+  ?mode:let @mode inCurrentMode
+  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  ?!staticStringMap:@staticStringMap ioGlobalLiteralStringMap
+  ?!variableMap:@universalPropertyAndRoutineMapForContext ioUniversalMap
+  ?!alloca:@allocaList ioAllocaList
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  !result:@objectIR outResult
+{
+#--- Analyze expression
+  [mExpression analyzeExpression
+    !self:inSelfType
+    !inGuard:inGuard
+    !routineNameForInvocationGraph:inCallerNameForInvocationGraph
+    !optionalTargetType:.void
+    !context:inContext
+    !mode:inCurrentMode
+    !?temporary:ioTemporaries
+    !?staticStringMap:ioGlobalLiteralStringMap
+    !?variableMap:ioUniversalMap
+    !?alloca:ioAllocaList
+    !?instructionListIR:ioInstructionGenerationList
+    ?result:@objectIR expressionResultPossibleReference
+  ]
+  [!?ioInstructionGenerationList appendLoadFromReference
+    !?ioTemporaries
+    !expressionResultPossibleReference
+    !mTypeName
+    ?let expressionResult
+  ]  
+#--- Analyze type
+  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+#--- Check types
+  if not [resultType isInteger] then
+    error mTypeName : "this type is not an integer type" : outResult
+  elsif not [[expressionResult type] isInteger] then
+    error mEndOfExpression : "expression type is not an integer type" : outResult
+  else
+    [[expressionResult type] integer ?min:let minSource ?max:let maxSource ?unsigned:* ?bitCount:let expSize ?1*]
+    [resultType integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize ?1*]
+    let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
+    if alwaysPossible then
+      error mTypeName:"useless explicit conversion"
+    end
+    if resultSize < expSize then
+      getNewTempVariable (!resultType !mEndOfExpression !?ioTemporaries ?outResult)
+      ioInstructionGenerationList += !@truncateInstructionIR.new {
+        !outResult
+        !expressionResult
+      }
+    else
+      outResult = [expressionResult withType !resultType]
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #  CODE GENERATION                                                                                                      
@@ -129,29 +129,29 @@ override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@s
 #! @truncateInstructionIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @truncateInstructionIR : @abstractInstructionIR {
-#  @objectIR mTarget
-#  @objectIR mOperand
-#}
+class @truncateInstructionIR : @abstractInstructionIR {
+  @objectIR mTarget
+  @objectIR mOperand
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @truncateInstructionIR enterAccessibleEntities
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
+override method @truncateInstructionIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @truncateInstructionIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-#  let operandType = [mOperand llvmTypeName]
-#  ioLLVMcode += "  " + [mTarget llvmName] + " = trunc " + operandType + " " + [mOperand llvmName]
-#     + " to " + [mTarget llvmTypeName] + "\n"
-#}
+override method @truncateInstructionIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  let operandType = [mOperand llvmTypeName]
+  ioLLVMcode += "  " + [mTarget llvmName] + " = trunc " + operandType + " " + [mOperand llvmName]
+     + " to " + [mTarget llvmTypeName] + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1,47 +1,47 @@
 
-#setter @instructionListIR appendGetPropertyReference
-#  ?let @objectIR inTarget
-#  ?let @objectIR inSource
-#  ?let @string inPLMname
-#  ?let @string inPropertyIndex
-#{
-#  self += !@getPropertyReferenceIR.new {!inTarget !inSource !inPLMname !inPropertyIndex}
-#}
+setter @instructionListIR appendGetPropertyReference
+  ?let @objectIR inTarget
+  ?let @objectIR inSource
+  ?let @string inPLMname
+  ?let @string inPropertyIndex
+{
+  self += !@getPropertyReferenceIR.new {!inTarget !inSource !inPLMname !inPropertyIndex}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @getPropertyReferenceIR : @abstractInstructionIR {
-#  @objectIR mTarget
-#  @objectIR mSource
-#  @string mPLMname
-#  @string mPropertyIndex
-#}
+class @getPropertyReferenceIR : @abstractInstructionIR {
+  @objectIR mTarget
+  @objectIR mSource
+  @string mPLMname
+  @string mPropertyIndex
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @getPropertyReferenceIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-##--- New code: call property access method
-#  ioLLVMcode += ";  " + [mTarget llvmName]
-#  ioLLVMcode += " = call " + [mTarget llvmTypeName] + "* @\"" + [mSource llvmTypeName] + ".access." + mPLMname
-#  ioLLVMcode += "\" (" + [mSource llvmTypeName] + " * " + [mSource llvmName] + ") ; " + mPLMname + "\n"
-#
-##--- Old code: property direct access
-#  let llvmType = [[[mSource type] kind] llvmTypeName]
-#  ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
-#  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mPropertyIndex
-#  ioLLVMcode += " ; " + mPLMname + "\n"
-#}
+override method @getPropertyReferenceIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+#--- New code: call property access method
+  ioLLVMcode += ";  " + [mTarget llvmName]
+  ioLLVMcode += " = call " + [mTarget llvmTypeName] + "* @\"" + [mSource llvmTypeName] + ".access." + mPLMname
+  ioLLVMcode += "\" (" + [mSource llvmTypeName] + " * " + [mSource llvmName] + ") ; " + mPLMname + "\n"
+
+#--- Old code: property direct access
+  let llvmType = [[mSource type] llvmTypeName]
+  ioLLVMcode += "  " + [mTarget llvmName] + " = getelementptr inbounds "
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + [mSource llvmName] + ", i32 0, i32 " + mPropertyIndex
+  ioLLVMcode += " ; " + mPLMname + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @getPropertyReferenceIR enterAccessibleEntities 
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
+override method @getPropertyReferenceIR enterAccessibleEntities 
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -49,40 +49,40 @@ syntax extension plm_syntax {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#proc checkRequiredProcedures
-#  ?ast:let @ast inAST
-#  ?context:let @semanticContext inSemanticContext
-#  ?endOfSourceFile:let @location unused inEndOfSourceFile
-#{
-#  for requiredProc in inAST.mRequiredProcListAST do
-#    let argumentSignature = [requiredProc.mFormalArgumentList routineSignature !requiredProc.mName]
-#    if not [inSemanticContext.mRoutineMapForContext hasKey !requiredProc.mName !argumentSignature] then
-#      error requiredProc.mName : "required func is not implemented"
-#    else
-#      [inSemanticContext.mRoutineMapForContext searchKey
-#        !requiredProc.mName
-#        !argumentSignature
-#        ?*
-#        ?let @routineDescriptor routineDescriptor
-#        ?let @location routineLocation
-#      ]
-#      let isExported = routineDescriptor.mExported
-#      let mode = [routineDescriptor.mRoutineKind executionMode]
-#    #--- Check modes
-#      if mode != requiredProc.mExecutionMode then
-#        error routineLocation : "required mode should be '" + requiredProc.mExecutionMode + "'"    
-#      end
-#    #--- Check attributes
-#      if requiredProc.mIsExported && not isExported then
-#        error routineLocation
-#        : "missing @" + exportedAttribute () + " attribute (required function declaration names it)"
-#        fixit { after " @" + exportedAttribute () }
-#      elsif isExported && not requiredProc.mIsExported then
-#        error routineLocation
-#        : "incorrect @" + exportedAttribute () + " attribute (required function declaration does not name it)"
-#      end
-#    end
-#  end
-#}
+proc checkRequiredProcedures
+  ?ast:let @ast inAST
+  ?context:let @semanticContext inSemanticContext
+  ?endOfSourceFile:let @location unused inEndOfSourceFile
+{
+  for requiredProc in inAST.mRequiredProcListAST do
+    let argumentSignature = [requiredProc.mFormalArgumentList routineSignature !requiredProc.mName]
+    if not [inSemanticContext.mRoutineMapForContext hasKey !requiredProc.mName !argumentSignature] then
+      error requiredProc.mName : "required func is not implemented"
+    else
+      [inSemanticContext.mRoutineMapForContext searchKey
+        !requiredProc.mName
+        !argumentSignature
+        ?*
+        ?let @routineDescriptor routineDescriptor
+        ?let @location routineLocation
+      ]
+      let isExported = routineDescriptor.mExported
+      let mode = [routineDescriptor.mRoutineKind executionMode]
+    #--- Check modes
+      if mode != requiredProc.mExecutionMode then
+        error routineLocation : "required mode should be '" + requiredProc.mExecutionMode + "'"    
+      end
+    #--- Check attributes
+      if requiredProc.mIsExported && not isExported then
+        error routineLocation
+        : "missing @" + exportedAttribute () + " attribute (required function declaration names it)"
+        fixit { after " @" + exportedAttribute () }
+      elsif isExported && not requiredProc.mIsExported then
+        error routineLocation
+        : "incorrect @" + exportedAttribute () + " attribute (required function declaration does not name it)"
+      end
+    end
+  end
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

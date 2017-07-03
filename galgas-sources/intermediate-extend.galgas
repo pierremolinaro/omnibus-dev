@@ -1,38 +1,38 @@
 
-#setter @instructionListIR appendExtend
-#  ?let @objectIR inResult
-#  ?let @objectIR inSource
-#{
-#  self += !@extendIR.new {!inResult !inSource}
-#}
+setter @instructionListIR appendExtend
+  ?let @objectIR inResult
+  ?let @objectIR inSource
+{
+  self += !@extendIR.new {!inResult !inSource}
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @extendIR : @abstractInstructionIR {
-#  @objectIR mResult
-#  @objectIR mSource
-#}
+class @extendIR : @abstractInstructionIR {
+  @objectIR mResult
+  @objectIR mSource
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @extendIR llvmInstructionCode
-#  ?!@string ioLLVMcode
-#  ?let @generationContext unused inGenerationContext
-#  ?!@generationAdds unused ioGenerationAdds
-#{
-#  ioLLVMcode += "  " + [mResult llvmName] + " = "
-#  [[mSource kind] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?1*]
-#  ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
-#  ioLLVMcode += " " + [mSource  llvmTypeName] + " " + [mSource llvmName] + " to " + [mResult llvmTypeName] + "\n"
-#}
+override method @extendIR llvmInstructionCode
+  ?!@string ioLLVMcode
+  ?let @generationContext unused inGenerationContext
+  ?!@generationAdds unused ioGenerationAdds
+{
+  ioLLVMcode += "  " + [mResult llvmName] + " = "
+  [[mSource type] integer ?min:* ?max:* ?unsigned:let sourceIsUnsigned ?2*]
+  ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
+  ioLLVMcode += " " + [mSource  llvmTypeName] + " " + [mSource llvmName] + " to " + [mResult llvmTypeName] + "\n"
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#override method @extendIR enterAccessibleEntities
-#  ?!@accessibleEntities unused ioAccessibleEntities
-#  ?!@uint unused ioMaxBranchOfOnInstructions
-#{
-#}
+override method @extendIR enterAccessibleEntities
+  ?!@accessibleEntities unused ioAccessibleEntities
+  ?!@uint unused ioMaxBranchOfOnInstructions
+{
+}
 
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
